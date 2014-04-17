@@ -12,20 +12,20 @@ module.exports = function(grunt) {
         assets: grunt.file.readJSON('server/config/assets.json'),
         watch: {
             js: {
-                files: ['*.js', 'server/**/*.js', 'public/js/**', 'test/**/*.js'],
+                files: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
             },
             html: {
-                files: ['public/views/**', 'server/views/**'],
+                files: ['public/**/views/**', 'server/views/**'],
                 options: {
                     livereload: true
                 }
             },
             css: {
-                files: ['public/css/**'],
+                files: ['public/**/css/**'],
                 tasks: ['csslint'],
                 options: {
                     livereload: true
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: {
-                src: ['*.js', 'server/**/*.js', 'public/js/**', 'test/**/*.js', '!test/coverage/**/*.js'],
+                src: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js', '!test/coverage/**/*.js', '!public/system/lib/**'],
                 options: {
                     jshintrc: true
                 }
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                 csslintrc: '.csslintrc'
             },
             all: {
-                src: ['public/css/**/*.css']
+                src: ['public/**/css/**/*', '!public/system/lib/**']
             }
         },
         cssmin: {
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
                 reporter: 'spec',
                 require: 'server.js'
             },
-            src: ['test/mocha/**/*.js']
+            src: ['test/mocha/**/*.js','packages/**/test/mocha/**/*.js']
         },
         env: {
             test: {
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
         },
         karma: {
             unit: {
-                configFile: 'test/karma/karma.conf.js'
+                configFile: 'karma.conf.js'
             }
         }
     });
@@ -117,9 +117,9 @@ module.exports = function(grunt) {
 
     //Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-    
+
     // For Heroku users only.
     // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku
     grunt.registerTask('heroku:production', ['jshint', 'csslint', 'cssmin', 'uglify']);
-    
+
 };

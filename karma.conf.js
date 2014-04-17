@@ -7,7 +7,7 @@ module.exports = function(config) {
     config.set({
 
         // base path, that will be used to resolve files and exclude
-        basePath: '../../',
+        basePath: '.',
 
 
         // frameworks to use
@@ -24,10 +24,11 @@ module.exports = function(config) {
             'public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'public/system/lib/angular-bootstrap/ui-bootstrap.js',
             'public/*/*.js',
-            'public/{auth,articles}/*/*.js',
+            'public/*/*/*.js',
             'public/system/{controllers,routes,services}/*.js',
             'public/init.js',
-            'test/karma/unit/**/*.js'
+            'test/karma/**/*.js',
+            'packages/*/test/karma/**/*.js'
         ],
 
 
@@ -47,8 +48,10 @@ module.exports = function(config) {
             // source files, that you wanna generate coverage for
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
-            'public/js/controllers/*.js': ['coverage'],
-            'public/js/services/*.js': ['coverage']
+            'public/*/controllers/*.js': ['coverage'],
+            'public/*/services/*.js': ['coverage'],
+            'packages/*/public/*/controllers/*.js': ['coverage'],
+            'packages/*public/*/services/*.js': ['coverage']
         },
 
         coverageReporter: {
