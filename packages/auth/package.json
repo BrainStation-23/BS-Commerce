@@ -1,0 +1,22 @@
+{
+  "name": "auth",
+  "version": "0.0.1",
+  "description": "Allows users to sign up and login to the site.",
+  "author": "Linnovate <mean@linnovate.net>",
+  "contributors": [
+    {"name":"Lior Kesos", "mail": "lior@linnovate.net"},
+    {"name":"Yonatan Ellman", "mail": "yonatan@linnovate.net"},
+    {"name":"Ehud Shahak", "mail": "ehud@linnovate.net"},
+    {"name":"Amos Haviv", "mail": "mail@amoshaviv.com"},
+    {"name":"Drew Fyock", "mail": "drew@steelbisondev.com"},
+    {"name":"Adrian Edworthy", "mail": "hello@adrianedworthy.com"}
+  ],
+  "mean" : true,
+  "engines": {
+  "node": "0.10.x",
+  "npm": "1.4.x"
+  },
+  "dependencies": {
+  },
+  "license": "GPL"
+}
