@@ -1,8 +1,5 @@
 'use strict';
 
-// This needs to be replaced with proper package model handling.
-require('../../packages/auth/server/models/user.js');
-
 var mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,
@@ -11,7 +8,7 @@ var mongoose = require('mongoose'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     LinkedinStrategy = require('passport-linkedin').Strategy,
     User = mongoose.model('User'),
-    config = require('./config');
+    config = require('./auth-config');
 
 module.exports = function(passport) {
 

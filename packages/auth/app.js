@@ -1,11 +1,14 @@
-
 /*
  * Defining the Package
  */
 
-var Module = require("meanio").Module;
+var mean = require('meanio');
 
+var Module = mean.Module;
 var Auth = new Module("Auth");
+
+var passport = require('passport');
+require('./server/config/passport')(passport);
 
 /*
  * All MEAN packages require registration
@@ -24,6 +27,16 @@ Auth.register(function(app, auth, database) {
         roles: ["authenticated"],
         menu: "main"
     })
+
+    // Register passport dependency
+    mean.register('passport', {
+        passport: passport
+    });
+    // Register auth dependency
+    mean.register('authorization', function() {
+        // This needs to be replaced with proper package middleware handling.
+        return require('./server/routes/middlewares/authorization');
+    });
 
     /*
     //Uncomment to use. Requires meanio@0.3.7 or above
