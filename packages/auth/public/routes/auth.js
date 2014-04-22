@@ -35,6 +35,9 @@ angular.module('mean.auth').config(['$stateProvider',
 
         // states for my app
         $stateProvider
+            .state('auth', {
+                templateUrl: 'auth/views/index.html'
+            })
             .state('auth.login', {
                 url: '/login',
                 templateUrl: 'auth/views/login.html',
