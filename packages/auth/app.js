@@ -15,10 +15,10 @@ require('./server/config/passport')(passport);
  * Dependency injection is used to define required modules
  */
 
-Auth.register(function(app, auth, database) {
+Auth.register(function(app, database) {
 
     //We enable routing. By default the Package Object is passed to the routes
-    Auth.routes(app, auth, database);
+    Auth.routes(app, passport, database);
 
     //We are adding a link to the main menu for all authenticated users
     Auth.menus.add({
@@ -29,8 +29,8 @@ Auth.register(function(app, auth, database) {
     })
 
     // Register passport dependency
-    mean.register('passport', {
-        passport: passport
+    mean.register('passport', function() {
+        return passport;
     });
     // Register auth dependency
     mean.register('authorization', function() {

@@ -40,7 +40,6 @@ module.exports = function(app, db) {
         app.use(express.logger('dev'));
     }
 
-    console.log('config:', config.templateEngine);
     // assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);
 

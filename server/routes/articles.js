@@ -3,8 +3,11 @@
 // Articles routes use articles controller
 var articles = require('../controllers/articles');
 
-// This needs to be replaced with proper package middleware handling.
-var authorization = require('../../packages/auth/server/routes/middlewares/authorization');
+var auth;
+require('meanio').resolve(function(authorization) {
+    console.log('authorization:', authorization);
+    auth = authorization;
+});
 
 // Article authorization helpers
 var hasAuthorization = function(req, res, next) {
@@ -17,10 +20,10 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(app) {
 
     app.get('/articles', articles.all);
-    app.post('/articles', authorization.requiresLogin, articles.create);
+    app.post('/articles', auth.requiresLogin, articles.create);
     app.get('/articles/:articleId', articles.show);
-    app.put('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.update);
-    app.del('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.destroy);
+    app.put('/articles/:articleId', auth.requiresLogin, hasAuthorization, articles.update);
+    app.del('/articles/:articleId', auth.requiresLogin, hasAuthorization, articles.destroy);
 
     // Finish with setting up the articleId param
     app.param('articleId', articles.article);

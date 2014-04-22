@@ -3,10 +3,7 @@
 // User routes use users controller
 var users = require('../controllers/users');
 
-// Passport stuff needs to be moved into this package if possible.
-var passport = GLOBAL.passport;
-
-module.exports = function(Auth, app, auth, database) {
+module.exports = function(Auth, app, passport, database) {
 
     app.get('/logout', users.signout);
     app.get('/users/me', users.me);
