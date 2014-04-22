@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean', [])
+angular.module('mean')
     .controller('LoginCtrl', ['$scope','$rootScope','$http','$location', function($scope, $rootScope, $http, $location) {
         // This object will be filled by the form
         $scope.user = {};
