@@ -2,7 +2,9 @@
 
 // Articles routes use articles controller
 var articles = require('../controllers/articles');
-var authorization = require('./middlewares/authorization');
+
+// This needs to be replaced with proper package middleware handling.
+var authorization = require('../../packages/auth/server/routes/middlewares/authorization');
 
 // Article authorization helpers
 var hasAuthorization = function(req, res, next) {

@@ -1,5 +1,8 @@
 'use strict';
 
+// This needs to be replaced with proper package model handling.
+require('../../packages/auth/server/models/user.js');
+
 var mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
     TwitterStrategy = require('passport-twitter').Strategy,

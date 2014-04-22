@@ -28,7 +28,8 @@ module.exports = function(passport, db) {
 
         // Register auth dependency
         mean.register('auth', function() {
-            return require(appPath + '/server/routes/middlewares/authorization');
+            // This needs to be replaced with proper package middleware handling.
+            return require(appPath + '/packages/auth/server/routes/middlewares/authorization');
         });
 
         // Register database dependency

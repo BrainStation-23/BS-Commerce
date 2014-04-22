@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
     passport = require('passport'),
     logger = require('mean-logger');
 
+GLOBAL.passport = passport;
+
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
