@@ -4,7 +4,7 @@
 var users = require('../controllers/users');
 
 // Passport stuff needs to be moved into this package if possible.
-var passport;
+var passport = GLOBAL.passport;
 
 module.exports = function(Auth, app, auth, database) {
 
