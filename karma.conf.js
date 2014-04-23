@@ -16,19 +16,16 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'public/system/lib/angular/angular.js',
-            'public/system/lib/angular-mocks/angular-mocks.js',
-            'public/system/lib/angular-cookies/angular-cookies.js',
-            'public/system/lib/angular-resource/angular-resource.js',
-            'public/system/lib/angular-ui-router/release/angular-ui-router.js',
-            'public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-            'public/system/lib/angular-bootstrap/ui-bootstrap.js',
-            'public/*/*.js',
-            'public/*/*/*.js',
-            'public/system/{controllers,routes,services}/*.js',
-            'public/init.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-cookies/angular-cookies.js',
+            'bower_components/angular-resource/angular-resource.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'bower_components/angular-bootstrap/ui-bootstrap.js',
             'test/karma/**/*.js',
             'packages/*/public/**/*.js',
+            'packages/*/public/*/*/*.js',
             'packages/*/test/karma/**/*.js'
         ],
 
@@ -49,8 +46,6 @@ module.exports = function(config) {
             // source files, that you wanna generate coverage for
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
-            'public/*/controllers/*.js': ['coverage'],
-            'public/*/services/*.js': ['coverage'],
             'packages/*/public/*/controllers/*.js': ['coverage'],
             'packages/*/public/*/services/*.js': ['coverage']
         },

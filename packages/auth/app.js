@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * Defining the Package
  */
@@ -5,7 +7,7 @@
 var mean = require('meanio');
 
 var Module = mean.Module;
-var Auth = new Module("Auth");
+var Auth = new Module('Auth');
 
 var passport = require('passport');
 require('./server/config/passport')(passport);
@@ -14,7 +16,6 @@ require('./server/config/passport')(passport);
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-
 Auth.register(function(app, database) {
 
     //We enable routing. By default the Package Object is passed to the routes
@@ -22,11 +23,11 @@ Auth.register(function(app, database) {
 
     //We are adding a link to the main menu for all authenticated users
     Auth.menus.add({
-        title: "auth example page",
-        link: "auth example page",
-        roles: ["authenticated"],
-        menu: "main"
-    })
+        title: 'auth example page',
+        link: 'auth example page',
+        roles: ['authenticated'],
+        menu: 'main'
+    });
 
     // Register passport dependency
     mean.register('passport', function() {

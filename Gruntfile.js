@@ -9,23 +9,23 @@ module.exports = function(grunt) {
     // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('server/config/assets.json'),
+        assets: grunt.file.readJSON('assets.json'),
         watch: {
             js: {
-                files: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js'],
+                files: ['*.js', 'packages/**/*.js', 'test/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
             },
             html: {
-                files: ['public/**/views/**', 'server/views/**'],
+                files: ['**/views/**'],
                 options: {
                     livereload: true
                 }
             },
             css: {
-                files: ['public/**/css/**'],
+                files: ['**/css/**'],
                 tasks: ['csslint'],
                 options: {
                     livereload: true
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: {
-                src: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js', '!test/coverage/**/*.js', '!public/system/lib/**'],
+                src: ['*.js', 'packages/**/*.js', 'test/**/*.js', '!test/coverage/**/*.js'],
                 options: {
                     jshintrc: true
                 }
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                 csslintrc: '.csslintrc'
             },
             all: {
-                src: ['public/**/css/**/*', '!public/system/lib/**']
+                src: ['packages/**/css/**/*', '!bower_components/**']
             }
         },
         cssmin: {
@@ -63,16 +63,13 @@ module.exports = function(grunt) {
         },
         nodemon: {
             dev: {
-                script: 'server.js',
+                script: 'index.js',
                 options: {
                     args: [],
-                    ignore: ['public/**'],
+                    ignore: ['packages/*/public/**'],
                     ext: 'js,html',
                     nodeArgs: ['--debug'],
                     delayTime: 1,
-                    env: {
-                        PORT: require('./server/config/config').port
-                    },
                     cwd: __dirname
                 }
             }
@@ -86,7 +83,7 @@ module.exports = function(grunt) {
         mochaTest: {
             options: {
                 reporter: 'spec',
-                require: 'server.js'
+                require: 'index.js'
             },
             src: ['test/mocha/**/*.js', 'packages/**/test/mocha/**/*.js']
         },
