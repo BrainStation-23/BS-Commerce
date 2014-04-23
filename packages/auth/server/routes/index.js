@@ -3,7 +3,7 @@
 // User routes use users controller
 var users = require('../controllers/users');
 
-module.exports = function(app, passport) {
+module.exports = function(Auth, app, passport, database) {
 
     app.get('/logout', users.signout);
     app.get('/users/me', users.me);

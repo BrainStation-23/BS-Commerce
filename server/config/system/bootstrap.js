@@ -6,7 +6,7 @@ var express = require('express'),
 var mean = require('meanio');
 mean.app('Mean Demo App', {});
 
-module.exports = function(passport, db) {
+module.exports = function(db) {
 
     function bootstrapModels() {
         // Bootstrap models
@@ -17,19 +17,7 @@ module.exports = function(passport, db) {
 
     bootstrapModels();
 
-    // Bootstrap passport config
-    require(appPath + '/server/config/passport')(passport);
-
     function bootstrapDependencies() {
-        // Register passport dependency
-        mean.register('passport', function() {
-            return passport;
-        });
-
-        // Register auth dependency
-        mean.register('auth', function() {
-            return require(appPath + '/server/routes/middlewares/authorization');
-        });
 
         // Register database dependency
         mean.register('database', {
@@ -46,7 +34,7 @@ module.exports = function(passport, db) {
 
     // Express settings
     var app = express();
-    require(appPath + '/server/config/express')(app, passport, db);
+    require(appPath + '/server/config/express')(app, db);
 
     return app;
 };

@@ -15,7 +15,7 @@ var express = require('express'),
     util = require('./util'),
     assetmanager = require('assetmanager');
 
-module.exports = function(app, passport, db) {
+module.exports = function(app, db) {
     app.set('showStackError', true);
 
     // Prettify HTML
@@ -90,10 +90,6 @@ module.exports = function(app, passport, db) {
         // Dynamic helpers
         app.use(helpers(config.app.name));
 
-        // Use passport session
-        app.use(passport.initialize());
-        app.use(passport.session());
-
         //mean middleware from modules before routes
         app.use(mean.chainware.before);
 
@@ -128,11 +124,17 @@ module.exports = function(app, passport, db) {
                 // used and shared by routes as further middlewares and is not a
                 // route by itself
                 util.walk(appPath + '/server/routes', 'middlewares', function(path) {
-                    require(path)(app, passport);
+                    require(path)(app);
                 });
             }
 
             bootstrapRoutes();
+
+            mean.resolve(function(passport) {
+                // Use passport session
+                app.use(passport.initialize());
+                app.use(passport.session());
+            });
 
             //mean middlware from modules after routes
             app.use(mean.chainware.after);
