@@ -10,7 +10,6 @@ var Module = mean.Module;
 var Auth = new Module('Auth');
 
 var passport = require('passport');
-require('./server/config/passport')(passport);
 
 /*
  * All MEAN packages require registration
@@ -29,14 +28,22 @@ Auth.register(function(app, database) {
         menu: 'main'
     });
 
-    // Register passport dependency
-    mean.register('passport', function() {
-        return passport;
-    });
-    // Register auth dependency
-    mean.register('authorization', function() {
-        // This needs to be replaced with proper package middleware handling.
-        return require('./server/routes/middlewares/authorization');
+    mean.events.on('modulesFound', function() {
+        require('./server/config/passport')(passport);
+
+        // Register passport dependency
+        mean.register('passport', function() {
+            return passport;
+        });
+        // Register auth dependency
+        mean.register('authorization', function() {
+            // This needs to be replaced with proper package middleware handling.
+            return require('./server/routes/middlewares/authorization');
+        });
+
+        // Use passport session
+        app.use(passport.initialize());
+        app.use(passport.session());
     });
 
     /*

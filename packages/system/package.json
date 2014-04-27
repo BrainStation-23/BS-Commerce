@@ -1,0 +1,21 @@
+{
+  "name": "system",
+  "version": "0.0.1",
+  "description": "Allows users to use mean",
+  "author": "Linnovate <mean@linnovate.net>",
+  "contributors": [
+    {"name":"Lior Kesos", "mail": "lior@linnovate.net"},
+    {"name":"Yonatan Ellman", "mail": "yonatan@linnovate.net"},
+    {"name":"Ehud Shahak", "mail": "ehud@linnovate.net"},
+    {"name":"Amos Haviv", "mail": "mail@amoshaviv.com"},
+    {"name":"Drew Fyock", "mail": "drew@steelbisondev.com"}
+  ],
+  "mean" : true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "dependencies": {
+  },
+  "license": "MIT"
+}
