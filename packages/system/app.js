@@ -4,9 +4,8 @@
  * Defining the Package
  */
 
-var mean = require('meanio');
+var Module = require('meanio').Module;
 
-var Module = mean.Module;
 var System = new Module('System');
 
 /*
