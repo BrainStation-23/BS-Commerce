@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('assets.json'),
+        assets: grunt.file.readJSON('assets/assets.json'),
         watch: {
             js: {
                 files: ['*.js', 'packages/**/*.js', 'test/**/*.js'],
