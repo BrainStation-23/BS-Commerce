@@ -19,13 +19,13 @@ module.exports = function(grunt) {
                 }
             },
             html: {
-                files: ['**/views/**'],
+                files: ['packages/**/*.hmtl'],
                 options: {
                     livereload: true
                 }
             },
             css: {
-                files: ['**/css/**'],
+                files: ['packages/**/*.css'],
                 tasks: ['csslint'],
                 options: {
                     livereload: true
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                 csslintrc: '.csslintrc'
             },
             all: {
-                src: ['packages/**/css/**/*', '!bower_components/**']
+                src: ['packages/**/*.css', '!bower_components/**']
             }
         },
         cssmin: {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
                 script: 'index.js',
                 options: {
                     args: [],
-                    ignore: ['packages/*/public/**'],
+                    ignore: ['node_modules/**', 'bower_components/**'],
                     ext: 'js,html',
                     nodeArgs: ['--debug'],
                     delayTime: 1,
@@ -101,9 +101,6 @@ module.exports = function(grunt) {
 
     //Load NPM tasks
     require('load-grunt-tasks')(grunt);
-
-    //Making grunt default to force in order not to break the project.
-    grunt.option('force', true);
 
     //Default task(s).
     if (process.env.NODE_ENV === 'production') {
