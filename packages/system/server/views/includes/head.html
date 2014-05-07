@@ -18,14 +18,17 @@
     <meta property="og:image" content="APP_LOGO">
     <meta property="og:site_name" content="MEAN - A Modern Stack">
     <meta property="fb:admins" content="APP_ADMIN">
+    
 
     {% for file in assets.css %}
         <link rel="stylesheet" href="{{file}}">
-    {% endfor %}
+    {% endfor %} 
+
+    <link rel="stylesheet" href="/public/system/lib/bootstrap/dist/css/bootstrap.css">
 
     <link rel="stylesheet" href="/modules/aggregated.css">
 
-<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>

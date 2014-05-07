@@ -5,26 +5,11 @@
   "private": false,
   "author": "Linnovate <mean@linnovate.net>",
   "contributors": [
-    {
-      "name": "Lior Kesos",
-      "mail": "lior@linnovate.net"
-    },
-    {
-      "name": "Yonatan Ellman",
-      "mail": "yonatan@linnovate.net"
-    },
-    {
-      "name": "Ehud Shahak",
-      "mail": "ehud@linnovate.net"
-    },
-    {
-      "name": "Amos Haviv",
-      "mail": "mail@amoshaviv"
-    },
-    {
-      "name": "Drew Fyock",
-      "mail": "drew@steelbisondev.com"
-    }
+    { "name": "Lior Kesos", "mail": "lior@linnovate.net" },
+    { "name": "Yonatan Ellman", "mail": "yonatan@linnovate.net" },
+    { "name": "Ehud Shahak", "mail": "ehud@linnovate.net" },
+    { "name": "Amos Haviv", "mail": "mail@amoshaviv" },
+    { "name": "Drew Fyock", "mail": "drew@steelbisondev.com" }
   ],
   "repository": {
     "type": "git",

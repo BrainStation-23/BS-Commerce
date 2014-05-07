@@ -17,12 +17,15 @@ exports.render = function(req, res) {
 
     // Send some basic starting info to the view
     res.render('index', {
-        user: req.user ? JSON.stringify({
+        user: req.user ? {
             name: req.user.name,
             _id: req.user._id,
             username: req.user.username,
-            roles: (req.user ? req.user.roles : ['anonymous'])
-        }) : 'null',
-        modules: JSON.stringify(modules)
+            roles: req.user.roles
+        } : {},
+        modules: modules,
+        adminEnabled: function() {
+            return (req.user && (req.user.roles.indexOf('admin') !== -1) && mean.moduleEnabled('mean-admin'));
+        }
     });
 };
