@@ -20,14 +20,6 @@ Auth.register(function(app, database) {
     //We enable routing. By default the Package Object is passed to the routes
     Auth.routes(app, passport, database);
 
-    //We are adding a link to the main menu for all authenticated users
-    Auth.menus.add({
-        title: 'auth example page',
-        link: 'auth example page',
-        roles: ['authenticated'],
-        menu: 'main'
-    });
-
     mean.events.on('modulesFound', function() {
         require('./server/config/passport')(passport);
 
