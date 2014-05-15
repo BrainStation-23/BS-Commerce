@@ -4,7 +4,6 @@ var express = require('express'),
     appPath = process.cwd();
 
 var mean = require('meanio');
-mean.app('Mean Demo App', {});
 
 module.exports = function(passport, db) {
 
@@ -27,13 +26,8 @@ module.exports = function(passport, db) {
         });
 
         // Register auth dependency
-        mean.register('auth', function() {
+        mean.register('auth', function() {            
             return require(appPath + '/server/routes/middlewares/authorization');
-        });
-
-        // Register database dependency
-        mean.register('database', {
-            connection: db
         });
 
         // Register app dependency
