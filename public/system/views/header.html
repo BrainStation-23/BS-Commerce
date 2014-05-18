@@ -5,8 +5,14 @@
 
   <div class="left pull-left">
     <ul class="navbar-nav nav">
-      <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-          <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
+      <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" class="dropdown" ng-class="{active: $uiRoute}">
+        <a ng-hide="item.dropdown" mean-token="item.link" ui-sref="{{item.link}}">{{item.title}}</a>
+        <a ng-show="item.dropdown" mean-token="item.link" class="dropdown-toggle" href>{{item.title}}<b class="caret"></b></a>
+        <ul ng-show="item.dropdown" class="dropdown-menu">
+          <li ng-repeat="subitem in item.dropdown" ui-route="/{{subitem.link}}" ng-class="{active: $uiRoute, divider: subitem.divider}">
+            <a mean-token="subitem.link" ui-sref='{{subitem.link}}'>{{subitem.title}}</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -16,22 +22,22 @@
       <div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
     </div>
     <ul class="navbar-nav nav" data-ng-hide="global.authenticated">
-        <li><a ui-sref='auth.register'>Register</a>
-        </li>
-        <li class="divider-vertical"></li>
-        <li><a ui-sref='auth.login'>Login</a>
-        </li>
+      <li><a ui-sref='auth.register'>Register</a>
+      </li>
+      <li class="divider-vertical"></li>
+      <li><a ui-sref='auth.login'>Login</a>
+      </li>
     </ul>
     <ul class="navbar-nav nav" data-ng-show="global.authenticated">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{global.user.name}} <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="/logout">Signout</a>
-                </li>
-            </ul>
-        </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          {{global.user.name}} <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="/logout">Signout</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>
