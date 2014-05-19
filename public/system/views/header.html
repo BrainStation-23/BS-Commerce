@@ -1,43 +1,46 @@
-<div class="page-header" data-ng-controller="HeaderController">
-  <div class="logo pull-left">
-    <a class="navbar-brand" ui-sref="home" mean-token="'site-title'">MEAN</a>
+<div class="container" data-ng-controller="HeaderController">
+  <div class="navbar-header">
+    <div class="logo navbar-left">
+      <a class="navbar-brand" ui-sref="home" mean-token="'site-title'">MEAN</a>
+    </div>
+    <button class="navbar-toggle" type="button" ng-init="isCollapsed=true" data-toggle="collapse" ng-click="isCollapsed=!isCollapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
   </div>
-
-  <div class="left pull-left">
-    <ul class="navbar-nav nav">
+  <nav class="collapse navbar-collapse" collapse="isCollapsed">
+    <ul class="navbar-nav nav navbar-left">
       <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" class="dropdown" data-ng-class="{active: $uiRoute}">
-        <a data-ng-if="!item.dropdown" mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
+        <a data-ng-if="!item.dropdown" mean-token="item.link" ui-sref="{{item.link}}" ng-bind="item.title"></a>
         <a data-ng-if="item.dropdown" mean-token="item.link" class="dropdown-toggle" href>{{item.title}}<b class="caret"></b></a>
         <ul data-ng-if="item.dropdown" class="dropdown-menu">
           <li ng-repeat="subitem in item.dropdown" ui-route="/{{subitem.link}}" ng-class="{active: $uiRoute, divider: subitem.divider}">
-            <a mean-token="subitem.link" ui-sref='{{subitem.link}}'>{{subitem.title}}</a>
+            <a data-ng-if="subitem.link" mean-token="subitem.link" ui-sref="{{subitem.link}}" ng-bind="subitem.title"></a>
           </li>
         </ul>
       </li>
     </ul>
-  </div>
-
-  <div class="account">
-    <div class="text-edit">
-      <div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
-    </div>
-    <ul class="navbar-nav nav" data-ng-hide="global.authenticated">
-      <li><a ui-sref='auth.register'>Register</a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li><a ui-sref='auth.login'>Login</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav nav" data-ng-show="global.authenticated">
+    <ul class="navbar-nav nav navbar-right" data-ng-if="global.authenticated" mean-token-editable>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          {{global.user.name}} <b class="caret"></b>
-        </a>
+        <a href="#" role="button" class="dropdown-toggle">{{global.user.name}} <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="/logout">Signout</a>
+          <li>
+            <a href="/logout">Logout</a>
           </li>
         </ul>
       </li>
     </ul>
-  </div>
+    <ul class="navbar-nav nav navbar-right" data-ng-if="!global.authenticated">
+      <li>
+        <a ui-sref="auth.register">Register</a>
+      </li>
+      <li>
+        <a ui-sref="auth.login">Login</a>
+      </li>
+    </ul>
+  </nav>
 </div>
+
+
