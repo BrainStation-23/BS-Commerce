@@ -22,7 +22,6 @@ var db = mongoose.connect(defaultConfig.db);
 // Call this function when the settings have been loaded
 function ready(config) {
 
-console.log(mean.config.verbose().flat.diff);
 	// Bootstrap Models, Dependencies, Routes and the app as an express app
 	var app = require('./server/config/system/bootstrap')(passport, db);
 
