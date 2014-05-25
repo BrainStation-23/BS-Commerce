@@ -9,24 +9,16 @@ var mongoose = require('mongoose'),
 
 /**
  * Main application entry file.
- * Please note that the order of loading is important.
- */
+ **/
 
 // Initializing system variables
 
 var mean = require('meanio');
 
-var defaultConfig = require('./server/config/config');
-var db = mongoose.connect(defaultConfig.db);
+var options = {};
 
-// Call this function when the settings have been loaded
-function ready(config) {
-
-	// Bootstrap Models, Dependencies, Routes and the app as an express app
-	var app = require('./server/config/system/bootstrap')(passport, db);
-
-	// Start the app by listening on <port>, optional hostname
-	app.listen(config.port, config.hostname);
+mean.app(options, function(app, config) {
+	
 	console.log('Mean app started on port ' + config.port + ' (' + process.env.NODE_ENV + ')');
 
 	// Initializing logger
@@ -34,9 +26,4 @@ function ready(config) {
 
 	// Expose app
 	exports = module.exports = app;
-
-}
-
-mean.app(defaultConfig.app.name, {
-	database: db
-}, ready);
+});
