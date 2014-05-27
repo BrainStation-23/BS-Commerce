@@ -27,7 +27,7 @@ var express = require('express'),
 
 module.exports = function(app, passport, db) {
 
-    var gfs = new Grid(db.connections[0].db, db.mongo);
+    var gfs = new Grid(db.connection.db, db.mongo);
 
     app.set('showStackError', true);
 
@@ -69,10 +69,9 @@ module.exports = function(app, passport, db) {
     app.use(expressValidator());
     app.use(bodyParser());
     app.use(methodOverride());
-    app.use(cookieParser());
 
     // Import your asset file
-    var assets = require('./assets.json');
+    var assets = require(appPath + '/config/assets.json');
     assetmanager.init({
         js: assets.js,
         css: assets.css,
@@ -125,7 +124,7 @@ module.exports = function(app, passport, db) {
         }, function(err, file) {
 
             if (!file) {
-                fs.createReadStream(appPath + '/public/system/lib/bootstrap/dist/css/bootstrap.css').pipe(res);
+                fs.createReadStream(appPath + '/config/lib/bootstrap/dist/css/bootstrap.css').pipe(res);
             } else {
                 // streaming to gridfs
                 var readstream = gfs.createReadStream({
@@ -145,7 +144,7 @@ module.exports = function(app, passport, db) {
 
     // We override this file to allow us to swap themes
     // We keep the same public path so we can make use of the bootstrap assets
-    app.get('/public/system/lib/bootstrap/dist/css/bootstrap.css', themeHandler);
+    app.get('/config/lib/bootstrap/dist/css/bootstrap.css', themeHandler);
 
     app.get('/modules/aggregated.css', function(req, res) {
         res.setHeader('content-type', 'text/css');
@@ -153,6 +152,7 @@ module.exports = function(app, passport, db) {
     });
 
     app.use('/public', express.static(config.root + '/public'));
+    app.use('/config/lib', express.static(config.root + '/config/lib'));
 
     mean.events.on('modulesFound', function() {
 

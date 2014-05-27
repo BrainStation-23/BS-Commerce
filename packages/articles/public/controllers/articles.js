@@ -4,6 +4,11 @@ angular.module('mean').controller('ArticlesController', ['$scope', '$stateParams
     function($scope, $stateParams, $location, Global, Articles) {
         $scope.global = Global;
 
+        $scope.hasAuthorization = function(article) {
+            if (!article || !article.user) return false;
+            return $scope.global.isAdmin || article.user._id === $scope.global.user._id;
+        };
+
         $scope.create = function() {
             var article = new Articles({
                 title: this.title,
@@ -27,8 +32,9 @@ angular.module('mean').controller('ArticlesController', ['$scope', '$stateParams
                     }
                 }
             } else {
-                $scope.article.$remove();
-                $location.path('articles');
+                $scope.article.$remove(function(response) {
+                    $location.path('articles');
+                });
             }
         };
 
