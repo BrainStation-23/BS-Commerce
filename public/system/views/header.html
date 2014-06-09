@@ -4,9 +4,20 @@
   </div>
 
   <div class="left pull-left">
-    <ul class="navbar-nav nav">
-      <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-          <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
+    <ul ui-sortable="sortableOptions" class="navbar-nav nav menus-container" ng-model="menus.main">
+      <li data-ng-repeat="item in menus.main" ng-class="{dropdown: item}" class="dropdown">
+          <a mean-token="item.link" ui-sref='{{item.link}}' ng-class="{'dropdown-toggle': item[item.name]}" data-toggle="dropdown" class="dropdown-toggle">{{item.title}}
+          </a>
+          <ul ui-sortable="sortableOptions" ng-if="item[item.name]" class="dropdown-menu menus-container" ng-model="item[item.name]">
+              <li ng-repeat="submenu in item[item.name]" class="dropdown">
+                <a ui-sref="{{submenu.link}}" data-toggle="dropdown" class="dropdown-toggle">{{submenu.title}}</a>
+                 <ul ng-if="submenu[submenu.name]" class="dropdown-menu">
+                    <li ng-repeat="subsubmenu in submenu[submenu.name]">
+                      <a ui-sref="{{subsubmenu.link}}">{{subsubmenu.title}}</a>
+                    </li>
+                </ul>
+            </li>
+          </ul>
       </li>
     </ul>
   </div>
@@ -35,4 +46,13 @@
         </li>
     </ul>
   </div>
+  <!-- for example -->
+  <div class="" style="height: 100px; width:100%">
+      <ul ui-sortable="sortableOptions" class="navbar-nav nav menus-container" ng-model="menus.sec">
+        <li data-ng-repeat="item in menus.sec" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+            <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
+        </li>
+      </ul>
+  </div>
+
 </div>

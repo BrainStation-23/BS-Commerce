@@ -20,12 +20,14 @@ Articles.register(function(app, auth, database) {
     Articles.menus.add({
         'roles': ['authenticated'],
         'title': 'Articles',
-        'link': 'all articles'
+        'link': 'all articles',
+        'name': 'articles'
     });
     Articles.menus.add({
         'roles': ['authenticated'],
         'title': 'Create New Article',
-        'link': 'create article'
+        'link': 'create article',
+        'name':'createArticle'
     });
 
     /*

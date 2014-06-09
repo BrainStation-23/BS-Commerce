@@ -5,6 +5,10 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
         $scope.global = Global;
         $scope.menus = {};
 
+        $scope.sortableOptions = {
+            connectWith: '.menus-container'
+        };
+
         // Default hard coded menu items for main menu
         var defaultMainMenu = [];
 
@@ -34,5 +38,22 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
             };
         });
 
+        //----------sec--------------
+        var defaultSecMenu = [];
+
+        queryMenu('sec', defaultSecMenu);
+
+        $scope.isCollapsed = false;
+
+        $rootScope.$on('loggedin', function() {
+
+            queryMenu('sec', defaultSecMenu);
+
+            $scope.global = {
+                authenticated: !! $rootScope.user,
+                user: $rootScope.user
+            };
+        });
+        //----------end sec----------
     }
 ]);
