@@ -8,7 +8,6 @@ angular.element(document).ready(function() {
     angular.bootstrap(document, ['mean']);
 
 });
-
 // Dynamically add angular modules declared by packages
 var packageModules = [];
 for (var index in window.modules) {
