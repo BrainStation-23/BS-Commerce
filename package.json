@@ -5,11 +5,26 @@
   "private": false,
   "author": "Linnovate <mean@linnovate.net>",
   "contributors": [
-    { "name": "Lior Kesos", "mail": "lior@linnovate.net" },
-    { "name": "Yonatan Ellman", "mail": "yonatan@linnovate.net" },
-    { "name": "Ehud Shahak", "mail": "ehud@linnovate.net" },
-    { "name": "Amos Haviv", "mail": "mail@amoshaviv" },
-    { "name": "Drew Fyock", "mail": "drew@steelbisondev.com" }
+    {
+      "name": "Lior Kesos",
+      "mail": "lior@linnovate.net"
+    },
+    {
+      "name": "Yonatan Ellman",
+      "mail": "yonatan@linnovate.net"
+    },
+    {
+      "name": "Drew Fyock",
+      "mail": "drew@steelbisondev.com"
+    },
+    {
+      "name": "Ehud Shahak",
+      "mail": "ehud@linnovate.net"
+    },
+    {
+      "name": "Amos Haviv",
+      "mail": "mail@amoshaviv"
+    }
   ],
   "mean": "0.3.3",
   "repository": {
@@ -53,7 +68,6 @@
     "lodash": "^2.4.1",
     "mean-connect-mongo": "0.4.3",
     "gridfs-stream": "^0.5.1",
-    "mean-logger": "0.0.1",
     "meanio": "0.4.x",
     "method-override": "^1.0.0",
     "mongoose": "^3.8.8",
