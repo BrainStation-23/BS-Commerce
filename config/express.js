@@ -20,7 +20,7 @@ var express = require('express'),
     config = mean.config.clean,
     expressValidator = require('express-validator'),
     appPath = process.cwd(),
-    util = require('./util'),
+    util = require('meanio/lib/util'),
     assetmanager = require('assetmanager'),
     fs = require('fs'),
     Grid = require('gridfs-stream');
@@ -70,18 +70,16 @@ module.exports = function(app, passport, db) {
     app.use(bodyParser());
     app.use(methodOverride());
 
-    // Import your asset file
-    var assets = require(appPath + '/config/assets.json');
-    assetmanager.init({
-        js: assets.js,
-        css: assets.css,
+    // Import the assets file
+    var assets = assetmanager.process({
+        assets: require('./assets.json'),
         debug: (process.env.NODE_ENV !== 'production'),
         webroot: 'public/public'
     });
 
     // Add assets to local variables
     app.use(function(req, res, next) {
-        res.locals.assets = assetmanager.assets;
+        res.locals.assets = assets;
         next();
     });
 
@@ -164,7 +162,7 @@ module.exports = function(app, passport, db) {
             // Skip the app/routes/middlewares directory as it is meant to be
             // used and shared by routes as further middlewares and is not a
             // route by itself
-            util.walk(appPath + '/server/routes', 'middlewares', function(path) {
+            util.walk(appPath + '/server', 'route', 'middlewares', function(path) {
                 require(path)(app, passport);
             });
         }
