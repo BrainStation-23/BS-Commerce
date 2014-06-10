@@ -20,7 +20,6 @@ var express = require('express'),
     config = mean.config.clean,
     expressValidator = require('express-validator'),
     appPath = process.cwd(),
-    util = require('./util'),
     assetmanager = require('assetmanager'),
     fs = require('fs'),
     Grid = require('gridfs-stream');
@@ -124,7 +123,7 @@ module.exports = function(app, passport, db) {
         }, function(err, file) {
 
             if (!file) {
-                fs.createReadStream(appPath + '/config/lib/bootstrap/dist/css/bootstrap.css').pipe(res);
+                fs.createReadStream(appPath + '/public/assets/lib/bootstrap/dist/css/bootstrap.css').pipe(res);
             } else {
                 // streaming to gridfs
                 var readstream = gfs.createReadStream({
@@ -152,7 +151,7 @@ module.exports = function(app, passport, db) {
     });
 
     app.use('/public', express.static(config.root + '/public'));
-    app.use('/config/lib', express.static(config.root + '/config/lib'));
+    app.use('/public/assets/lib', express.static(config.root + '/public/assets/lib'));
 
     mean.events.on('modulesFound', function() {
 
@@ -164,7 +163,7 @@ module.exports = function(app, passport, db) {
             // Skip the app/routes/middlewares directory as it is meant to be
             // used and shared by routes as further middlewares and is not a
             // route by itself
-            util.walk(appPath + '/server/routes', 'middlewares', function(path) {
+            mean.walk(appPath + '/server/routes', 'middlewares', function(path) {
                 require(path)(app, passport);
             });
         }

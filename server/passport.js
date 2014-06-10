@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     LinkedinStrategy = require('passport-linkedin').Strategy,
     User = mongoose.model('User'),
-    config = require(process.cwd() + '/config/config');
+    config = require('meanio').config.clean;
 
 module.exports = function(passport) {
 
