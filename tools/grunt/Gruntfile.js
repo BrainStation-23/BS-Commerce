@@ -89,12 +89,7 @@ module.exports = function(grunt) {
     mochaTest: {
       options: {
         reporter: 'spec',
-        require: [
-          'server.js',
-          function() {
-            require('meanio/lib/util').preload(__dirname + '/packages/**/server', 'model');
-          }
-        ]
+        require: 'tools/test/mocha-req.js'
       },
       src: ['packages/**/server/tests/**/*.js']
     },
