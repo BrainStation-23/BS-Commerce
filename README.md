@@ -685,3 +685,12 @@ $ heroku config:set NODE_ENV=production
 ## License
 We believe that mean should be free and easy to integrate within your existing projects so we chose [The MIT License](http://opensource.org/licenses/MIT)
 
+### Pulling and merging changes from MEAN.IO
+
+```bash
+git remote add mean.io https://github.com/linnovate/mean.git
+git pull
+```
+
+Then merge MEAN.IO changes from master branch into required BS-Commerce branch in usual way
+
