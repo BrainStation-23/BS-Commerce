@@ -1,0 +1,11 @@
+{
+  "name": "shopThemes",
+  "version": "0.0.1",
+  "dependencies": {
+    "font-awesome": "~4.3.0",
+    "jquery-prettyPhoto": "*",
+    "seiyria-bootstrap-slider": "4.5.7",
+    "scrollup": "~2.4.0",
+    "animate.css": "~3.2.3"
+  }
+}

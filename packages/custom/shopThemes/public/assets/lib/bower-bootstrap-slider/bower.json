@@ -1,0 +1,16 @@
+{
+  "name": "bower-bootstrap-slider",
+  "version": "1.0.0",
+  "homepage": "https://github.com/rockabox/bower-bootstrap-slider",
+  "authors": [
+    "Rockabox"
+  ],
+  "description": "Eyecon Slider for Bootstrap v2",
+  "main": "bootstrap-slider.js",
+  "keywords": [
+    "bootstrap",
+    "slider",
+    "bootstrap-slider"
+  ],
+  "license": "MIT"
+}
