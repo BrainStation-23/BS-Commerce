@@ -1,8 +1,13 @@
 'use strict';
 
-/* jshint -W098 */
-// The Package is past automatically as first parameter
+var shopUser = require('../controllers/shopUser');
+
+require('meanio').loadConfig();
+
 module.exports = function(ShopUser, app, auth, database) {
+  // Setting up the users api
+  app.route('/auth/register')
+    .post(shopUser.create);
 
   app.get('/shopuser/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');

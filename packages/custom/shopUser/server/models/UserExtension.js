@@ -25,11 +25,6 @@ mongoose.model('Address', AddressSchema);
 var User = mongoose.model('User');
 
 User.schema.add({
-  gender:{
-    type: String,
-    required: true,
-    enum: ['male', 'female']
-  },
   phoneNumber:{
     type: String,
     match:[/^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/, 'Invalid phone number {VALUE}']
@@ -37,5 +32,13 @@ User.schema.add({
   addresses:{
     type: [AddressSchema],
     default: []
+  },
+  status:{
+    type: String,
+    enum:['active', 'inactive', 'email-not-verified']
+  },
+  registrationDate:{
+    type: Date,
+    default: new Date()
   }
 });

@@ -1,7 +1,11 @@
-/*body.login, body.register, body.forgot-password{*/
-  /*background: none !important;*/
-/*}*/
+body.login, body.register, body.forgot-password{
+  background: none !important;
+}
 
 .auth-container>div{
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+.auth-container .button-panel{
+  padding-top:15px;
 }
