@@ -16,14 +16,6 @@ ShopSlider.register(function(app, auth, database) {
   //We enable routing. By default the Package Object is passed to the routes
   ShopSlider.routes(app, auth, database);
 
-  //We are adding a link to the main menu for all authenticated users
- /* ShopSlider.menus.add({
-    title: 'shopSlider example page',
-    link: 'shopSlider example page',
-    roles: ['authenticated'],
-    menu: 'main'
-  })*/;
-  
   ShopSlider.aggregateAsset('css', 'shopSlider.css');
 
   /**

@@ -1,7 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
 var AddressSchema = mongoose.Schema({
   addressLine1: {

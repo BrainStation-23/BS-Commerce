@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   paths = {
     js: ['*.js', 'test/**/*.js', '!test/coverage/**', '!bower_components/**', 'packages/**/*.js', '!packages/**/node_modules/**', '!packages/contrib/**/*.js', '!packages/contrib/**/node_modules/**'],
     html: ['packages/**/public/**/views/**', 'packages/**/server/views/**'],
-    css: ['!bower_components/**', 'packages/**/public/**/css/*.css', '!packages/contrib/**/public/**/css/*.css'],
+    css: ['!bower_components/**', '!packages/custom/**/public/assets/lib/**/*.css', 'packages/**/public/**/css/*.css', '!packages/contrib/**/public/**/css/*.css'],
     less: ['**/public/**/css/*.less'],
     sass: ['**/public/**/css/*.scss']
   };

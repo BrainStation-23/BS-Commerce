@@ -18,7 +18,7 @@ ShopUser.register(function(app, auth, database, shopCore) {
 
   ShopUser.aggregateAsset('css', 'shopUser.css');
 
-  ShopUser.angularDependencies(['mean.system','user']);
+  ShopUser.angularDependencies(['mean.system', 'mean.users']);
 
   return ShopUser;
 });
