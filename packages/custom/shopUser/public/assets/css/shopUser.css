@@ -1,3 +1,7 @@
-.admin-settings-users ul.nav-tabs li{
-  cursor:pointer;
+/*body.login, body.register, body.forgot-password{*/
+  /*background: none !important;*/
+/*}*/
+
+.auth-container>div{
+  margin-bottom: 50px;
 }

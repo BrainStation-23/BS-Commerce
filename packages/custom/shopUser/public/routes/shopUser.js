@@ -2,6 +2,7 @@
 
 angular.module('mean.shopUser').config(['$viewPathProvider',
   function($viewPathProvider) {
-    //l$viewPathProvider.override('users/views/register.html', 'shopUser/views/register.html');
+    //$viewPathProvider.override('users/views/index.html', 'shopUser/views/index.html');
+    //$viewPathProvider.override('users/views/register.html', 'shopUser/views/register.html');
   }
 ]);

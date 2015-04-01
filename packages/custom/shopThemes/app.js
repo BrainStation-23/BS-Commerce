@@ -24,6 +24,7 @@ ShopThemes.register(function (system, app, auth, database) {
     ShopThemes.aggregateAsset('css', libDir + 'seiyria-bootstrap-slider/css/bootstrap-slider.css');
     ShopThemes.aggregateAsset('css', libDir + 'jquery-prettyPhoto/css/prettyPhoto.css');
     ShopThemes.aggregateAsset('css', libDir + 'animate.css/animate.css');
+    ShopThemes.aggregateAsset('css', 'shopThemes.css');
 
     ShopThemes.aggregateAsset('js', libDir + 'jquery-prettyPhoto/js/jquery.prettyPhoto.js');
     ShopThemes.aggregateAsset('js', libDir + 'bower-bootstrap-slider/js/bootstrap-slider.js');
