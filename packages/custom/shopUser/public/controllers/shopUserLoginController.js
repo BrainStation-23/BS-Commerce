@@ -14,16 +14,10 @@ angular.module('mean.shopUser').controller('ShopUserLoginController',['$scope', 
       }).success(function(response) {
           $scope.loginError = null;
           $rootScope.user = response.user;
+          Global.user = $rootScope.user;
+          Global.authenticated = !! $rootScope.user;
           $rootScope.$emit('loggedin');
-          if (response.redirect) {
-            if (window.location.href === response.redirect) {
-              window.location.reload();
-            } else {
-              window.location = response.redirect;
-            }
-          } else {
-            $location.url('/');
-          }
+          $location.url('/');
         })
         .error(function() {
           $scope.loginerror = 'Authentication failed.';

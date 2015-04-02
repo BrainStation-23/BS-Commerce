@@ -1,6 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
+var mean = require('meanio'),
+  mongoose = require('mongoose'),
   User = mongoose.model('User');
 
 
@@ -9,8 +10,8 @@ require('meanio').loadConfig();
 exports.create = function(req, res, next) {
   var user = new User({
     name: req.body.name,
-    username: req.body.email,
-    email: req.body.email,
+    username: req.body.email.toLowerCase(),
+    email: req.body.email.toLowerCase(),
     password: req.body.password,
     phoneNumber: req.body.phoneNumber,
     status: 'email-not-verified'
@@ -54,5 +55,12 @@ exports.create = function(req, res, next) {
       });
       res.status(200);
     }
+  });
+};
+
+exports.login = function(req, res) {
+  req.session.cookie.maxAge = req.body.rememberMe ? mean.config.clean.shop.sessionCookie.maxAgeWhenRemembered  : null;
+  res.send({
+    user: req.user
   });
 };

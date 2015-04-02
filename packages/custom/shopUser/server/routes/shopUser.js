@@ -10,13 +10,13 @@ module.exports = function(ShopUser, app, auth, database, passport) {
     .post(shopUser.create);
 
   app.route('/auth/login')
-    .post(passport.authenticate('local', {
-      failureFlash: true
-    }), function(req, res) {
-      req.session.cookie.maxAge = req.body.rememberMe ? app.config.clean.shop.sessionCookie.maxAgeWhenRemembered  : null;
-      res.send({
-        user: req.user,
-        redirect: (req.user.roles.indexOf('admin') !== -1) ? req.get('referer') : false
-      });
-    });
+    .post(
+      function(req,res,next){
+        req.body.email = req.body.email.toLowerCase();
+        next();
+      },
+      passport.authenticate('local', {
+        failureFlash: true
+      }),
+      shopUser.login);
 };
