@@ -1,6 +1,9 @@
 <div class="col-sm-6 col-sm-offset-3">
   <div class="signup-form" data-ng-controller="ShopUserRegistrationController">
     <h2>New User Signup!</h2>
+    <div data-ng-repeat="error in registrationErrors">
+      <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+    </div>
     <form name="registrationForm" data-ng-submit="register()">
       <div class="form-group">
         <label for="name">Full Name</label>

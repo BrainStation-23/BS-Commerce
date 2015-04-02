@@ -33,37 +33,26 @@ exports.create = function(req, res, next) {
   user.roles = ['authenticated'];
   user.save(function(err) {
     if (err) {
-      switch (err.code) {
-        case 11000:
-        case 11001:
-          res.status(400).json([{
-            msg: 'Username already taken',
-            param: 'username'
-          }]);
-          break;
-        default:
-          var modelErrors = [];
+      var modelErrors = [];
+      if (err.errors) {
 
-          if (err.errors) {
+        for (var x in err.errors) {
+          modelErrors.push({
+            param: x,
+            msg: err.errors[x].message,
+            value: err.errors[x].value
+          });
+        }
 
-            for (var x in err.errors) {
-              modelErrors.push({
-                param: x,
-                msg: err.errors[x].message,
-                value: err.errors[x].value
-              });
-            }
-
-            res.status(400).json(modelErrors);
-          }
+        res.status(400).json(modelErrors);
       }
-
       return res.status(400);
+    }else {
+      req.logIn(user, function (err) {
+        if (err) return next(err);
+        return res.redirect('/');
+      });
+      res.status(200);
     }
-    req.logIn(user, function(err) {
-      if (err) return next(err);
-      return res.redirect('/');
-    });
-    res.status(200);
   });
 };

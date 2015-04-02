@@ -8,8 +8,7 @@ angular.module('mean.shopUser').controller('ShopUserRegistrationController', ['$
     $scope.global.registerForm = true;
 
     $scope.register = function() {
-      $scope.usernameError = null;
-      $scope.registerError = null;
+      $scope.registrationErrors = [];
       $http.post('/auth/register', {
         email: $scope.user.email,
         password: $scope.user.password,
@@ -26,13 +25,8 @@ angular.module('mean.shopUser').controller('ShopUserRegistrationController', ['$
           $rootScope.$emit('loggedin');
           $location.url('/');
         })
-        .error(function(error) {
-          // Error: authentication failed
-          if (error === 'Username already taken') {
-            $scope.usernameError = error;
-          } else if (error === 'Email already taken') {
-            $scope.emailError = error;
-          } else $scope.registerError = error;
+        .error(function(errors) {
+          $scope.registrationErrors = errors;
         });
     };
   }
