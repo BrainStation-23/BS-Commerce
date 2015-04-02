@@ -43,5 +43,12 @@ module.exports = {
   },
 
   // The session cookie name
-  sessionName: 'connect.sid'
+  sessionName: 'connect.sid',
+
+  //Custom settings for shop
+  shop:{
+    sessionCookie:{
+      maxAgeWhenRemembered: 1000 * 60 * 60 * 24 * 365
+    }
+  }
 };

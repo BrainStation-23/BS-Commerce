@@ -1487,7 +1487,7 @@ h2.title {
 }
 
 .login-form form button {
-    margin-top: 23px;
+    margin-top: 0px;
 }
 
 .login-form form button, .signup-form form button {
@@ -1495,7 +1495,7 @@ h2.title {
     border: medium none;
     border-radius: 0;
     color: #FFFFFF;
-    display: block;
+    display: inline-block;
     font-family: 'Roboto', sans-serif;
     padding: 6px 25px;
 }

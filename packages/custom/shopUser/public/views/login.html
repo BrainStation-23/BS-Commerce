@@ -1,0 +1,29 @@
+<div class="col-sm-6 col-sm-offset-3">
+  <div class="login-form" data-ng-controller="ShopUserLoginController">
+    <h2>Login to your account</h2>
+    <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
+    <form name="loginForm" data-ng-submit="login()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" class="form-control" placeholder="Email Address" required data-ng-model="user.email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" class="form-control" placeholder="Password" required data-ng-model="user.password">
+      </div>
+      <div class="form-group">
+        <span>
+            <input type="checkbox" class="checkbox" data-ng-model="user.rememberMe">
+            Keep me signed in
+          </span>
+      </div>
+      <div class="form-group">
+        <div class="button_login">
+          <button type="submit" class="btn btn-default">Login</button>
+          <p>Don't have an account?</p>
+          <a data-ui-sref='auth.register'>Sign up</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -5,7 +5,6 @@ angular.module('mean.shopUser').controller('ShopUserRegistrationController', ['$
   function($scope, $rootScope, $http, $location, Global, ShopUser) {
     $scope.user = {};
     $scope.global = Global;
-    $scope.global.registerForm = true;
 
     $scope.register = function() {
       $scope.registrationErrors = [];
