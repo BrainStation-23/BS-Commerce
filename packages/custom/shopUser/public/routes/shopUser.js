@@ -8,8 +8,7 @@ angular.module('mean.shopUser').config(['$viewPathProvider', '$meanStateProvider
 
     $meanStateProvider.state('auth.logout',{
       url: '/logout',
-      controller: 'ShopUserLogoutController',
-      template:'<div></div>'
+      controller: 'ShopUserLogoutController'
     });
   }
 ]);
