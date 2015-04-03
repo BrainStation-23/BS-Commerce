@@ -22,4 +22,7 @@ module.exports = function(ShopUser, app, auth, database, passport) {
 
   app.route('/auth/logout')
     .get(shopUser.logout);
+
+  app.route('/auth/password')
+    .put(shopUser.changePassword);
 };

@@ -71,3 +71,33 @@ exports.logout = function(req, res){
     msg: 'user signed out'
   });
 };
+
+exports.changePassword = function(req, res) {
+  if (!req.user) {
+    return res.status(401).send([{msg: 'Access denied'}]);
+  }
+
+  User
+    .findOne({email: req.user.email}, function (error, user) {
+      if (req.body.password) {
+        req.body.password = user.hashPassword(req.body.password);
+      }
+
+      req.assert('password', 'Old password is required').notEmpty();
+      req.assert('password', 'Old password is invalid').equals(user.hashed_password);
+      req.assert('newPassword', 'Password must be between 6-20 characters long').len(6, 20);
+      req.assert('confirmNewPassword', 'New passwords do not match').equals(req.body.newPassword);
+
+      var errors = req.validationErrors();
+      if (errors) {
+        return res.status(400).send(errors);
+      }
+      user.password = req.body.newPassword;
+      user.save(function (error, doc) {
+        if (error) {
+          return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
+        }
+        return res.status(200).send({mgs: 'Password updated.'});
+      });
+    });
+};
