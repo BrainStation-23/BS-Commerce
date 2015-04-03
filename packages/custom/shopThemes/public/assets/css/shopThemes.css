@@ -7,6 +7,7 @@ header .header-bottom{
   padding-bottom:10px;
 }
 
+/* Style overwrites for top header actions*/
 .shop-menu > .navbar-nav > li > .dropdown-menu{
   margin-top: 10px;
 }
@@ -15,7 +16,10 @@ header .header-bottom{
   background-color: #FFFFFF;
   color:#fe980f;
 }
+/* Style overwrites for top header actions*/
 
+
+/* Styles for action action drop-down in top header*/
 .dropdown-menu:before {
   position: absolute;
   top: -7px;
@@ -38,3 +42,5 @@ header .header-bottom{
   border-left: 6px solid transparent;
   content: '';
 }
+
+/* Styles for action action drop-down*/

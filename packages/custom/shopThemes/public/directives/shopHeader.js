@@ -12,6 +12,13 @@ angular.module('mean.shopThemes').directive('shopHeader',['$rootScope', 'Global'
           user: $rootScope.user
         };
       });
+
+      $rootScope.$on('loggedout', function() {
+        scope.global = {
+          authenticated: !! $rootScope.user,
+          user: $rootScope.user
+        };
+      });
     }
   };
 }]);

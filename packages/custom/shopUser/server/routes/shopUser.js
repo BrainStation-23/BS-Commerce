@@ -19,4 +19,7 @@ module.exports = function(ShopUser, app, auth, database, passport) {
         failureFlash: true
       }),
       shopUser.login);
+
+  app.route('/auth/logout')
+    .get(shopUser.logout);
 };
