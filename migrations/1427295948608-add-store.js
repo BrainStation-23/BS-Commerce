@@ -88,7 +88,7 @@ var createLookupItem = function(item){
   return deferred.promise;
 };
 
-var createLookups = function(language){
+var createLookup = function(language){
   var deferred = Q.defer(),
     lookups = [],
     lookupPromises = [];
@@ -230,7 +230,11 @@ var createShop = function(language, settings){
     companyPhoneNumber: '(123) 456-78901',
     settings:{
       user:{
-        general: settings.general
+        general: [],
+        formFields:[],
+        addressFields:[],
+        dateTime:[],
+        externalAuthentication:[]
       }
     }
   });
@@ -251,8 +255,8 @@ exports.up = function(next){
     .then(clearSettings)
     .then(clearStore)
     .then(getDefaultLanguage)
-    .spread(createLookups)
-    .spread(createSettings)
+    //.spread(createLookup)
+    //.spread(createSettings)
     .spread(createShop)
     .catch(console.log)
     .finally(function(){
