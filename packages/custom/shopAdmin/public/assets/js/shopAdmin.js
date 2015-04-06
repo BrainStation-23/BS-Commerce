@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('mean.blog_admin').config(['$viewPathProvider','$meanStateProvider',
+angular.module('mean.shopAdmin').config(['$viewPathProvider','$meanStateProvider',
   function($viewPathProvider, $meanStateProvider) {
-    $viewPathProvider.override('system/views/index.html', '/blog_admin/views/index.html');
+    $viewPathProvider.override('system/views/index.html', '/shopAdmin/views/index.html');
 
     $meanStateProvider
       .state('auth', {
@@ -12,12 +12,12 @@ angular.module('mean.blog_admin').config(['$viewPathProvider','$meanStateProvide
       })
       .state('auth.login',{
         url: '/login',
-        templateUrl: 'blog_admin/views/anonymous.html',
+        templateUrl: 'shopAdmin/views/anonymous.html',
         controller: 'loginController'
       })
       .state('auth.register',{
         url: '/register',
-        templateUrl: 'blog_admin/views/anonymous.html',
+        templateUrl: 'shopAdmin/views/anonymous.html',
         controller: 'registrationController'
       });
   }

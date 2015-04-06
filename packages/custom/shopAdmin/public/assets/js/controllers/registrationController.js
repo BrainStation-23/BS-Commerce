@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('mean.blog_admin').controller('registrationController', ['$scope', '$modal', 'Global',
+angular.module('mean.shopAdmin').controller('registrationController', ['$scope', '$modal', 'Global',
   function($scope, $modal, Global) {
     $modal.open({
-      templateUrl: 'blog_admin/views/registration-modal.html',
+      templateUrl: 'shopAdmin/views/registration-modal.html',
       controller: 'registrationInstanceController',
       backdrop: 'static',
       keyboard: false
@@ -11,7 +11,7 @@ angular.module('mean.blog_admin').controller('registrationController', ['$scope'
   }
 ]);
 
-angular.module('mean.blog_admin').controller('registrationInstanceController', ['$http', '$scope', '$modalInstance', '$rootScope', '$state', '$timeout', 'Global',
+angular.module('mean.shopAdmin').controller('registrationInstanceController', ['$http', '$scope', '$modalInstance', '$rootScope', '$state', '$timeout', 'Global',
   function($http, $scope, $modalInstance, $rootScope, $state, $timeout, Global) {
     $scope.user = {};
 
