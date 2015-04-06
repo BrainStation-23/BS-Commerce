@@ -8,27 +8,17 @@ var CategorySchema = new Schema({
     type: String,
     required: true
   },
-  culture:{
+  slug:{
     type: String,
     required: true
   },
-  uniqueSEOCode: String,
-  flagImageFileName: String,
-  rtl: {
-    type: Boolean,
-    default: false
+  parent: {
+    type:Schema.Types.ObjectId,
+    default: null
   },
-  limitedToStores: {
-    type: Boolean,
-    default: false
-  },
-  published: {
-    type: Boolean,
-    default: false
-  },
-  displayOrder:{
-    type: Number,
-    default: 0
+  ancestors:{
+    type:[CategorySchema],
+    default: []
   }
 });
 
