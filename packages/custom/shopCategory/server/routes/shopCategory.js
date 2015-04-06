@@ -1,8 +1,10 @@
 'use strict';
 
-/* jshint -W098 */
-// The Package is past automatically as first parameter
+var controller = require('../controllers/shopCategory');
+
 module.exports = function(ShopCategory, app, auth, database) {
+  app.route('/categories')
+    .get(controller.list);
 
   app.get('/shopCategory/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
