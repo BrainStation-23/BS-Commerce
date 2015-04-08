@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+        <span data-ng-if="category.subCategories.length > 0" class="badge pull-right"><i class="fa fa-plus"></i></span>
+        {{category.name}}
+      </a>
+    </h4>
+  </div>
+  <div id="sportswear" class="panel-collapse collapse" data-ng-if="category.subCategories.length > 0">
+    <div class="panel-body">
+      <ul>
+        <shop-category-sub-item data-ng-repeat="category in category.subCategories" data-category="category"></shop-category-sub-item>
+      </ul>
+    </div>
+  </div>
+</div>

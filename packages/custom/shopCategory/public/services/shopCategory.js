@@ -2,7 +2,7 @@
 
 angular.module('mean.shopCategory').factory('ShopCategory', [ '$resource',
   function($resource) {
-    return $resource('categories/:id',{
+    return $resource('api/categories/:id',{
       id:'@_id'
     },{
       update: {

@@ -3,7 +3,7 @@
 var controller = require('../controllers/shopCategory');
 
 module.exports = function(ShopCategory, app, auth, database) {
-  app.route('/categories')
+  app.route('/api/categories')
     .get(controller.list);
 
   app.get('/shopCategory/example/anyone', function(req, res, next) {

@@ -4,13 +4,14 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
     function(Global, ShopCategory) {
         return{
             replace: true,
-            templateUrl: '/shopCategory/views/shop-category-accordion.html',
+            templateUrl: '/shopCategory/views/shop-category-widget/shop-category-accordion.html',
             link: function(scope, element, attrs){
+              scope.categories = [];
               ShopCategory
                 .query()
                 .$promise
                 .then(function(list){
-                  console.log(list);
+                  scope.categories = list;
                 })
                 .catch(console.log);
             }
