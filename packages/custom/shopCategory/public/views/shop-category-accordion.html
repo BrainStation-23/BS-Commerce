@@ -1,0 +1,21 @@
+<div>
+    <h2>Category</h2>
+
+    <div class="category-products">
+        <div class="categories-accordion">
+          <accordion close-others="true">
+            <accordion-group data-ng-repeat="category in categories">
+              <accordion-heading>
+                <span data-ng-if="category.subCategories.length > 0" class="pull-right">
+                  <i class="fa" data-ng-class="{'fa-minus': category.isOpen, 'fa-plus': !category.isOpen}" data-ng-click="toggleOpen(category)"></i>
+                </span>
+                <a data-ui-sref="products-in-category({slug:category.slug})">{{category.name}}</a>
+              </accordion-heading>
+              <ul data-ng-if="category.subCategories.length > 0">
+                <li data-ng-repeat="sub in category.subCategories"><a data-ui-sref="products-in-category({slug:sub.slug})">{{sub.name}}</a></li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </div>
+    </div>
+</div>

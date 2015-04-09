@@ -2,8 +2,8 @@
 
 angular.module('mean.shopCategory').config(['$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('shopCategory example page', {
-      url: '/shopCategory/example',
+    $stateProvider.state('products-in-category', {
+      url: '/category/:slug',
       templateUrl: 'shopCategory/views/index.html'
     });
   }

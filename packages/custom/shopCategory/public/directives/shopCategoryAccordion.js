@@ -4,7 +4,7 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
     function(Global, ShopCategory) {
         return{
             replace: true,
-            templateUrl: '/shopCategory/views/shop-category-widget/shop-category-accordion.html',
+            templateUrl: '/shopCategory/views/shop-category-accordion.html',
             link: function(scope, element, attrs){
               scope.categories = [];
               ShopCategory
@@ -14,6 +14,10 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
                   scope.categories = list;
                 })
                 .catch(console.log);
+
+              scope.toggleOpen = function(category){
+                category.isOpen = !category.isOpen;
+              };
             }
         };
     }
