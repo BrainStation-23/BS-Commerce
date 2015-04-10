@@ -48,6 +48,7 @@
     "q": "^1.2.0",
     "serve-favicon": "2.2.0",
     "swig": "1.4.2",
+    "validator": "^3.37.0",
     "view-helpers": "0.1.5"
   },
   "devDependencies": {

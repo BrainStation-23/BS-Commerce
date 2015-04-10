@@ -1,6 +1,8 @@
 'use strict';
 
 var mean = require('meanio'),
+  validator = require('validator'),
+  validation = require('../../../shopCore/server/framework/validation/validation'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
@@ -97,7 +99,39 @@ exports.changePassword = function(req, res) {
         if (error) {
           return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
         }
-        return res.status(200).send({mgs: 'Password updated.'});
+        return res.status(200).send([{msg: 'Password updated successfully.'}]);
       });
     });
+};
+
+exports.updateProfile = function(req, res){
+  if (!req.user) {
+    return res.status(401).send([{msg: 'Access denied'}]);
+  }
+
+  var errors = validation
+    .add(validator.matches(validator.trim(req.body.name), /(.)+/) , 'You must enter a name', {
+      param: 'name',
+      value: req.body.name
+    })
+    .add(validator.matches(req.body.phoneNumber, /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/), 'Invalid phone number {value}',{
+      param: 'phoneNumber',
+      value: req.body.phoneNumber
+    }).getErrors();
+
+  if (errors.length) {
+    return res.status(400).send(errors);
+  }
+
+  User.update({email:req.user.email}, {
+    $set: {
+      name: req.body.name,
+      phoneNumber: req.body.phoneNumber
+    }
+  }, function(error, count){
+    if(error || !count){
+      return res.status(500).send([{msg: 'An unhandled error occurred, please try again'}]);
+    }
+    return res.status(200).send([{msg: 'Profile updated successfully.'}]);
+  });
 };

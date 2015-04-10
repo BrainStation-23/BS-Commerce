@@ -3,7 +3,7 @@
 angular.module('mean.shopUser').controller('ShopUserLogoutController',['$scope', '$rootScope', '$http', '$state', '$timeout', 'Global',
   function($scope, $rootScope, $http, $state, $timeout, Global){
     $http.get('/auth/logout')
-      .success(function(err, response){
+      .success(function(response){
         $rootScope.user = null;
         Global.user = $rootScope.user;
         Global.authenticated = !! $rootScope.user;

@@ -4,10 +4,10 @@
     <div class="category-products">
         <div class="categories-accordion">
           <accordion close-others="true">
-            <accordion-group data-ng-repeat="category in categories">
+            <accordion-group data-ng-repeat="category in categories" is-open="category.isOpen">
               <accordion-heading>
                 <span data-ng-if="category.subCategories.length > 0" class="pull-right">
-                  <i class="fa" data-ng-class="{'fa-minus': category.isOpen, 'fa-plus': !category.isOpen}" data-ng-click="toggleOpen(category)"></i>
+                  <i class="fa" data-ng-class="{'fa-minus': category.isOpen, 'fa-plus': !category.isOpen}"></i>
                 </span>
                 <a data-ui-sref="products-in-category({slug:category.slug})">{{category.name}}</a>
               </accordion-heading>

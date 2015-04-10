@@ -15,6 +15,11 @@ angular.module('mean.shopUser').config(['$viewPathProvider', '$meanStateProvider
         url:'/auth/password',
         controller: 'ShopUserPasswordController',
         templateUrl: '/shopUser/views/password.html'
+      })
+      .state('manage-profile',{
+        url: '/auth/profile',
+        controller: 'ShopUserProfileController',
+        templateUrl: 'shopUser/views/profile.html'
       });
   }
 ]);

@@ -14,10 +14,6 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
                   scope.categories = list;
                 })
                 .catch(console.log);
-
-              scope.toggleOpen = function(category){
-                category.isOpen = !category.isOpen;
-              };
             }
         };
     }

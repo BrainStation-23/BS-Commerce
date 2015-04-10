@@ -25,4 +25,7 @@ module.exports = function(ShopUser, app, auth, database, passport) {
 
   app.route('/auth/password')
     .put(shopUser.changePassword);
+
+  app.route('/auth/profile')
+    .put(shopUser.updateProfile);
 };

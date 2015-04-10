@@ -7,4 +7,8 @@ angular.module('mean.shopCore').config(['$stateProvider',
       templateUrl: 'shopCore/views/index.html'
     });
   }
-]);
+]).run(['$rootScope', function($rootScope){
+  $rootScope.$on('$stateChangeSuccess', function() {
+    window.scrollTo(0,0);
+  });
+}]);
