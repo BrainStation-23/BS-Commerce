@@ -17,7 +17,7 @@ ShopAdmin.register(function(app, auth, database) {
     ShopAdmin.routes(app, auth, database);
     ShopAdmin.angularDependencies(['mean.system']);
   
-    ShopAdmin.aggregateAsset('css', 'shopAdmin.css');
+    //ShopAdmin.aggregateAsset('css', 'shopAdmin.css');
 
 
   return ShopAdmin;
