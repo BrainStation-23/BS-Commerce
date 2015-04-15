@@ -17,6 +17,10 @@ var AddressSchema = mongoose.Schema({
   country:{
     type: String,
     required: true
+  },
+  postCode:{
+    type: String,
+    required: true
   }
 });
 
