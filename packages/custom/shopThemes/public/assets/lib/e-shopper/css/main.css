@@ -1491,7 +1491,7 @@ h2.title {
     margin-top: 0px;
 }
 
-.login-form form button, .signup-form form button {
+.login-form form button, .signup-form form button, .login-form form button[disabled], .signup-form form button[disabled]{
     background: #FE980F;
     border: medium none;
     border-radius: 0;

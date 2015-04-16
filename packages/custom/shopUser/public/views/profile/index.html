@@ -1,0 +1,9 @@
+<div class="col-sm-8 col-sm-offset-2 category-tab">
+  <div data-ng-repeat="error in updateErrors">
+    <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+  </div>
+  <div data-ng-repeat="item in updateMessages">
+    <div class="alert alert-success animated fadeIn">{{item.msg}}</div>
+  </div>
+  <shop-user-profile></shop-user-profile>
+</div>

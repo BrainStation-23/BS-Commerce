@@ -1,0 +1,64 @@
+<div class="login-form">
+  <h4>Manage Address</h4>
+  <form name="addressList">
+    <div class="panel panel-info" data-ng-show="!user.addresses.length">
+      <div class="panel-body">
+        No address listed ...
+      </div>
+    </div>
+    <div class="panel panel-default" data-ng-repeat="address in user.addresses">
+      <ng-form name="addressForm">
+        <div class="panel-body">
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label for="addressLine1" class="col-sm-3 control-label">Address Line 1</label>
+              <div class="col-sm-6">
+                <p class="form-control-static" data-ng-hide="address.isEditing">{{address.addressLine1}}</p>
+                <input type="text" class="form-control" id="addressLine1" data-ng-model="inputModel.addressLine1" required data-ng-show="address.isEditing"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="addressLine2" class="col-sm-3 control-label">Address Line 2</label>
+              <div class="col-sm-6">
+                <p class="form-control-static" data-ng-hide="address.isEditing">{{address.addressLine2}}</p>
+                <input type="text" class="form-control" id="addressLine2" data-ng-model="inputModel.addressLine2" required data-ng-show="address.isEditing"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="city" class="col-sm-3 control-label">City</label>
+              <div class="col-sm-6">
+                <p class="form-control-static" data-ng-hide="address.isEditing">{{address.city}}</p>
+                <input type="text" class="form-control" id="city" data-ng-model="inputModel.city" required data-ng-show="address.isEditing"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="country" class="col-sm-3 control-label">Country</label>
+              <div class="col-sm-6">
+                <p class="form-control-static" data-ng-hide="address.isEditing">{{address.country}}</p>
+                <input type="text" class="form-control" id="country" data-ng-model="inputModel.country" required data-ng-show="address.isEditing"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="postCode" class="col-sm-3 control-label">Post Code</label>
+              <div class="col-sm-6">
+                <p class="form-control-static" data-ng-hide="address.isEditing">{{address.postCode}}</p>
+                <input type="text" class="form-control" id="postCode" data-ng-model="inputModel.postCode" required data-ng-show="address.isEditing"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-default" data-ng-click="edit(address)" data-ng-show="!address.isEditing" data-ng-disabled="currentEditIndex >= 0 && currentEditIndex !== $index">Edit</button>
+          <button type="submit" class="btn btn-default" data-ng-click="update(address)" data-ng-show="address.isEditing" data-ng-disabled="!addressForm.$valid">Update</button>
+          <button type="submit" class="btn btn-default" data-ng-click="cancel(address)" data-ng-show="address.isEditing">Cancel</button>
+          <button type="submit" class="btn btn-default" data-ng-click="delete(address)" data-ng-show="!address.isEditing" data-ng-disabled="currentEditIndex >= 0 && currentEditIndex !== $index">Delete</button>
+        </div>
+      </ng-form>
+    </div>
+    <div class="form-group">
+      <div class="button_register">
+        <button type="submit" class="btn btn-default" data-ng-click="addNew()" data-ng-disabled="currentEditIndex >= 0">Add New</button>
+      </div>
+    </div>
+  </form>
+</div>
