@@ -1011,10 +1011,10 @@ h2.title {
 }
 
 .category-tab ul {
-    background: #40403E;
+    background: #F0F0E9;
     border-bottom: 1px solid #FE980F;
     list-style: none outside none;
-    margin: 0 0 30px;
+    margin: 0 0 10px;
     padding: 0;
     width: 100%;
 }
@@ -1027,6 +1027,7 @@ h2.title {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     text-transform: uppercase;
+    cursor:pointer;
 }
 
 .category-tab ul  li  a:hover{

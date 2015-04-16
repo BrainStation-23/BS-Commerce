@@ -1,26 +1,3 @@
-<div class="col-sm-6 col-sm-offset-3">
-  <div class="login-form">
-    <h2>Update Profile!</h2>
-    <div data-ng-repeat="error in updateErrors">
-      <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
-    </div>
-    <div data-ng-repeat="item in updateMessages">
-      <div class="alert alert-success animated fadeIn">{{item.msg}}</div>
-    </div>
-    <form name="profileForm" data-ng-submit="update()">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input id="name" name="name" type="text" class="form-control" placeholder="Full Name" required data-ng-model="user.name">
-      </div>
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input id="phoneNumber" name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" data-ng-model="user.phoneNumber">
-      </div>
-      <div class="form-group">
-        <div class="button_register">
-          <button type="submit" class="btn btn-default">Update</button>
-        </div>
-      </div>
-    </form>
-  </div>
+<div class="col-sm-6 col-sm-offset-3 category-tab">
+  <shop-user-profile></shop-user-profile>
 </div>
