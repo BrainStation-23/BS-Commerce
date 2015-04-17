@@ -15,7 +15,7 @@ angular.module('mean.shopUser').directive('shopUserProfileAddress', ['Global', '
           scope.isNew = false;
           scope.currentEditIndex = -1;
 
-          _.forEach(user.addresses, function(address){
+          _.forEach(scope.user.addresses, function(address){
             address.isEditing = false;
           });
         };
@@ -30,9 +30,11 @@ angular.module('mean.shopUser').directive('shopUserProfileAddress', ['Global', '
 
         scope.update = function(address){
           _.assign(address, scope.inputModel);
-          cancelEdit();
 
-          scope.updateProfile();
+          scope.updateProfile()
+            .then(function(messages){
+              cancelEdit();
+            });
         };
 
         scope.delete = function(address){

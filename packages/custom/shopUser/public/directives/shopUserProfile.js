@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopUser').directive('shopUserProfile', ['$rootScope', '$http', '$state', '$timeout', 'Global', 'ShopUser',
-  function($rootScope, $http, $state, $timeout, Global, ShopCategory) {
+angular.module('mean.shopUser').directive('shopUserProfile', ['$rootScope', '$http', '$state', '$timeout', '$q', 'Global', 'ShopUser',
+  function($rootScope, $http, $state, $timeout, $q, Global, ShopCategory) {
     return{
       replace: true,
       templateUrl: '/shopUser/views/profile/tabs.html',
@@ -23,6 +23,7 @@ angular.module('mean.shopUser').directive('shopUserProfile', ['$rootScope', '$ht
             });
 
           scope.updateProfile = function() {
+            var deferred = $q.defer();
             scope.registrationErrors = [];
             scope.updateMessages = [];
             $http.put('/auth/profile', {
@@ -40,11 +41,17 @@ angular.module('mean.shopUser').directive('shopUserProfile', ['$rootScope', '$ht
                 $timeout(function(){
                   scope.updateMessages = [];
                 }, 2000);
+
+                deferred.resolve(messages);
               })
               .error(function(errors) {
                 scope.updateMessages = 0;
                 scope.updateErrors = errors;
+
+                deferred.reject(errors);
               });
+
+            return deferred.promise;
           };
         }
       }

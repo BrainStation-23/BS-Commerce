@@ -1,6 +1,7 @@
 'use strict';
 
 var mean = require('meanio'),
+  _ = require('lodash'),
   validator = require('validator'),
   validation = require('../../../shopCore/server/framework/validation/validation'),
   mongoose = require('mongoose'),
@@ -109,7 +110,7 @@ exports.updateProfile = function(req, res){
     return res.status(401).send([{msg: 'Access denied'}]);
   }
 
-  var errors = validation
+  var validationList = validation
     .add(validator.matches(validator.trim(req.body.name), /(.)+/) , 'You must enter a name', {
       param: 'name',
       value: req.body.name
@@ -117,7 +118,22 @@ exports.updateProfile = function(req, res){
     .add(validator.matches(req.body.phoneNumber, /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/), 'Invalid phone number {value}',{
       param: 'phoneNumber',
       value: req.body.phoneNumber
-    }).getErrors();
+    });
+
+  if(req.body.addresses && req.body.addresses.length){
+    var addressFieldsRequired = ['addressLine1', 'addressLine2', 'city', 'country', 'postCode'];
+
+    _.forEach(req.body.addresses, function(address){
+      _.forEach(addressFieldsRequired, function(field){
+        validationList.add(address[field] && validator.matches(validator.trim(address[field]), /(.)+/) , ('Invalid ' + field + ' {value}'), {
+          param: field,
+          value: address[field]
+        });
+      });
+    });
+  }
+
+  var errors = validationList.getErrors();
 
   if (errors.length) {
     return res.status(400).send(errors);
@@ -126,7 +142,8 @@ exports.updateProfile = function(req, res){
   User.update({email:req.user.email}, {
     $set: {
       name: req.body.name,
-      phoneNumber: req.body.phoneNumber
+      phoneNumber: req.body.phoneNumber,
+      addresses: req.body.addresses
     }
   }, function(error, count){
     if(error || !count){
