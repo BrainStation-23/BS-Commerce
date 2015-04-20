@@ -1,0 +1,33 @@
+<div ng-controller="categoryListController">
+    <br/>
+    <br/>
+    <h2>Manage Categories</h2> <a ui-sref="Category.Tree"> (switch to tree view)</a>
+    <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Published</th>
+            <th>Display Order</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Published</th>
+            <th>Display Order</th>
+            <th>Edit</th>
+        </tr>
+        </tfoot>
+
+        <tbody ng-repeat="item in categories">
+        <tr>
+            <td>{{item.name}}</td>
+            <td><i class="fa fa-check fa-fw" style="color: #009900"></i></td>
+            <td>{{item.displayOrder}}</td>
+            <td><a href="{{item._id}}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
