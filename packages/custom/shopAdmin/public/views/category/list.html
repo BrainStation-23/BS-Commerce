@@ -26,7 +26,7 @@
             <td>{{item.name}}</td>
             <td><i class="fa fa-check fa-fw" style="color: #009900"></i></td>
             <td>{{item.displayOrder}}</td>
-            <td><a href="{{item._id}}">Edit</a></td>
+            <td><a ui-sref="Category.Edit({catId: item._id})">Edit</a></td>
         </tr>
         </tbody>
     </table>

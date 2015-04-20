@@ -16,7 +16,20 @@
                 <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="/admin/catalog"><i class="fa fa-edit fa-fw"></i> Catalog</a>
+                <a href="#"><i class="fa fa-edit fa-fw"></i> Catalog<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#"><i class="fa fa-edit fa-fw"></i> Categories<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a ui-sref="Category.List"><i class="fa fa-table fa-fw"></i> List</a>
+                            </li>
+                            <li>
+                                <a ui-sref="Category.Tree"><i class="fa fa-tree fa-fw"></i> Tree View</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="/admin/sales"><i class="fa fa-comments fa-fw"></i> Sales</a>
@@ -32,6 +45,9 @@
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a ui-sref="test"><i class="fa fa-cog fa-fw"></i> Test</a>
             </li>
         </ul>
     </div>
