@@ -11,5 +11,5 @@ angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
     }]).directive('carousel', [function() {
         return {
 
-        }
+        };
     }]);

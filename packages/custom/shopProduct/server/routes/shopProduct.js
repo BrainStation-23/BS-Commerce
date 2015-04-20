@@ -2,26 +2,32 @@
 
 /* jshint -W098 */
 // The Package is past automatically as first parameter
-module.exports = function(ShopProduct, app, auth, database) {
-
-  app.get('/shopProduct/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
-
-  app.get('/shopProduct/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
-
-  app.get('/shopProduct/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
-
-  app.get('/shopProduct/example/render', function(req, res, next) {
-    ShopProduct.render('index', {
-      package: 'shopProduct'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
+module.exports = function(ShopProduct, app, auth, database, shopCore) {
+  app.route('/api/photos')
+    .post(function(req, res){
+      shopCore.media.create(req.files.upload)
+        .then(function(file){
+          return res.status(200).json(file);
+        })
+        .catch(function(error){
+          return res.status(500).json({error: error});
+        })
+        .done();
     });
-  });
+  app.route('/api/photos/:id')
+    .get(function(req, res){
+      var stream = shopCore.media.get(req.params.id);
+      stream.pipe(res);
+      return res.status(200);
+    })
+    .delete(function(req, res){
+      shopCore.media.delete(req.params.id)
+        .then(function(){
+          return res.status(200).json({msg: 'Deleted successfully!'});
+        })
+        .catch(function(error){
+          return res.status(500).json({error: error});
+        })
+        .done();
+    });
 };

@@ -8,7 +8,7 @@ var mean = require('meanio'),
   User = mongoose.model('User');
 
 
-require('meanio').loadConfig();
+mean.loadConfig();
 
 exports.create = function(req, res, next) {
   var user = new User({

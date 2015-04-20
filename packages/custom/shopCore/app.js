@@ -3,15 +3,20 @@
 /*
  * Defining the Package
  */
-var Module = require('meanio').Module;
-
-var ShopCore = new Module('shopCore');
+var Module = require('meanio').Module,
+    multer = require('multer'),
+    media  = require('./server/services/mediaService'),
+    ShopCore = new Module('shopCore');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
 ShopCore.register(function(app, auth, database) {
+  //Configure multer to keep uploaded contents in memory
+  app.use(multer({
+    inMemory: true
+  }));
 
   //We enable routing. By default the Package Object is passed to the routes
   ShopCore.routes(app, auth, database);
@@ -26,5 +31,7 @@ ShopCore.register(function(app, auth, database) {
 
   ShopCore.aggregateAsset('css', 'shopCore.css');
 
+  //Assign services to be used by other components
+  ShopCore.media = media;
   return ShopCore;
 });
