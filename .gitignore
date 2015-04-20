@@ -71,3 +71,4 @@ modules/views/
 # vim Files
 # --------------------
 *.swp
+/builderror.log

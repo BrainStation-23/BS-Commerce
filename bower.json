@@ -11,6 +11,7 @@
     "angular-bootstrap": "0.11.0",
     "angular-ui-router": "#master",
     "web-bootstrap": "./node_modules/meanio/resources/web-bootstrap.js",
-    "lodash": "~3.7.0"
+    "lodash": "~3.7.0",
+    "jstree": "~3.1.0"
   }
 }

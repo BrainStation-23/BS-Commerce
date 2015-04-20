@@ -2,7 +2,7 @@
 
 angular.module('mean.shopAdmin').controller('categoryListController', ['$scope', 'Global', '$http',
     function($scope, Global, $http) {
-        $scope.categories;
+        $scope.categories = [];
         $http.get('/api/categories').
             success(function(data, status, headers, config) {
                 $scope.categories = [];
