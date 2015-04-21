@@ -26,10 +26,10 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 },
                 templateUrl: 'shopAdmin/views/category/edit.html',
                 controller: 'categoryEditController'
-            }).state('Category.Add', {
-                url: '/Add',
-                templateUrl: 'shopAdmin/views/category/add.html',
-                controller: 'categoryAddController'
+            }).state('Category.Create', {
+                url: '/Create',
+                templateUrl: 'shopAdmin/views/category/create.html',
+                controller: 'categoryCreateController'
             });
 
     }
