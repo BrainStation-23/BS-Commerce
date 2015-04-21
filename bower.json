@@ -12,6 +12,7 @@
     "angular-ui-router": "#master",
     "web-bootstrap": "./node_modules/meanio/resources/web-bootstrap.js",
     "lodash": "~3.7.0",
-    "jstree": "~3.1.0"
+    "jstree": "~3.1.0",
+    "jquery-ui": "~1.11.4"
   }
 }
