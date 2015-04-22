@@ -266,6 +266,7 @@ var createProductsInCategory = function(category){
 
   getProducts(category)
     .spread(createProducts)
+    .then(deferred.resolve)
     .catch(deferred.reject);
 
   return deferred.promise;
@@ -293,7 +294,7 @@ exports.up = function(next){
     .then(createProductsInCategories)
     .catch(console.log)
     .finally(function(){
-      //next();
+      next();
     })
     .done();
 };
