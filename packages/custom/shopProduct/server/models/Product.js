@@ -61,7 +61,7 @@ var ProductSchema = new Schema({
     ref: 'fs.files'
   }],
   categories:[{
-    id:{
+    categoryId:{
       type: Schema.Types.ObjectId,
       required: true
     },

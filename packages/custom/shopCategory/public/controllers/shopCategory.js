@@ -1,11 +1,13 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scope', 'Global', 'ShopCategory',
-  function($scope, Global, ShopCategory) {
+angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scope', '$state', 'Global', 'ShopCategory', 'ShopProduct',
+  function($scope, $state, Global, ShopCategory, ShopProduct) {
     $scope.global = Global;
+
+    $scope.products = ShopProduct.query({slug: $state.params.slug});
     $scope.package = {
-      name: 'shopCategory'
+      name: $state.params.slug
     };
   }
 ]);

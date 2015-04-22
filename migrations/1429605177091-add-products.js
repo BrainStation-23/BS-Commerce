@@ -213,19 +213,23 @@ var createProduct = function(category, product){
           deferred.reject(error);
         }else{
           if(cat){
+            var price = Math.floor((Math.random() * 100) + 20);
             Product.create({
               info:{
                 name: product,
                 shortDescription: getShortDesctiption(),
                 fullDescription: getFullDescription(),
-                sku: productSlug
+                sku: productSlug,
+                price: price,
+                oldPrice: price + 10,
+                cost: price - 15
               },
               meta:{
                 friendlyPageName: productSlug
               },
               photos:photos,
               categories:[{
-                id: cat._id,
+                categoryId: cat._id,
                 isFeatured: true
               }]
             }, function(err, p){
@@ -256,7 +260,7 @@ var createProducts = function(category, products){
 
   Q.all(promises)
     .then(deferred.resolve)
-    .catch(deferred.reject)
+    .catch(deferred.reject);
 
   return deferred.promise;
 };
