@@ -35,7 +35,7 @@ var ProductSchema = new Schema({
     }
   },
   meta:{
-    keyword:{
+    keywords:{
       type: [String],
       default: []
     },
