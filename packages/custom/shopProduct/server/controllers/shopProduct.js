@@ -6,8 +6,9 @@ exports.list = function(req, res){
   var promise = req.query.slug ? service.search(req.query.slug, 3, 0) : service.all(3,0);
 
   promise
-    .then(function(products){
-      return res.status(200).json(products);
+    .then(function(data){
+      res.append('total', data.total);
+      return res.status(200).json(data.products);
     })
     .catch(function(error){
       return res.status(500).json([{msg: 'Unhandled Error!'}]);

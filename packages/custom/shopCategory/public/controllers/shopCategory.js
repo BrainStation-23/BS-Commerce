@@ -6,7 +6,18 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
     var slug = $state.params.slug;
     $scope.global = Global;
 
+    $scope.state={
+      totalRecords:0,
+      pageSize:3,
+      currentPage : 1
+    };
+
+    $scope.products = [];
     $scope.category = ShopCategory.get({id: slug});
-    $scope.products = ShopProduct.query({slug:slug});
+
+    ShopProduct.query({slug:slug},function(data, getHeader){
+      $scope.products = data;
+      $scope.state.totalRecords = getHeader().total;
+    });
   }
 ]);

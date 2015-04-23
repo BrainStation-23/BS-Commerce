@@ -19,12 +19,24 @@ exports.search = function(slug, pageNumber, pageSize){
         return category._id;
       });
 
-      Product.find({'categories.categoryId': {'$in': categoryIdList}})
+      var filter = {'categories.categoryId': {'$in': categoryIdList}};
+      Product.find(filter)
         .exec(function(error, products){
           if(error){
             return deferred.reject(error);
           }
-          return deferred.resolve(products);
+
+          Product.count(filter)
+            .exec(function(error, count){
+              if(error){
+                return deferred.reject(error);
+              }
+
+              return deferred.resolve({
+                products: products,
+                total: count
+              });
+            });
         });
     });
 
