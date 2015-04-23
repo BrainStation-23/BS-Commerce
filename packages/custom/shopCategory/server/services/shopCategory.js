@@ -56,3 +56,18 @@ exports.list = function(){
 
   return deferred.promise;
 };
+
+exports.get = function(id){
+  var deferred = Q.defer();
+
+  var option = (typeof id === 'string') ? {slug: id} : {_id: id};
+  Category.findOne(option)
+    .exec(function(err, category){
+      if(err) {
+        return deferred.reject(err);
+      }
+      return deferred.resolve(category);
+    });
+
+  return deferred.promise;
+};
