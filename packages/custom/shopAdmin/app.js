@@ -15,8 +15,8 @@ ShopAdmin.register(function(app, auth, database) {
 
   //We enable routing. By default the Package Object is passed to the routes
     ShopAdmin.routes(app, auth, database);
-    //ShopAdmin.angularDependencies(['mean.system', 'textAngular']);
-    ShopAdmin.angularDependencies(['mean.system']);
+    ShopAdmin.angularDependencies(['mean.system', 'textAngular']);
+    //ShopAdmin.angularDependencies(['mean.system']);
 
   
     //ShopAdmin.aggregateAsset('css', 'shopAdmin.css');
