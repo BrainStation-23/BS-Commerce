@@ -1,0 +1,32 @@
+<div class="panel-default login-modal">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sign In</h3>
+    </div>
+    <div class="panel-body">
+        <form name="form" role="form" data-ng-submit="login()">
+            <fieldset>
+                <div class="form-group">
+                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" required data-ng-model="user.email">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Password" name="password" type="password" value="" required data-ng-model="user.password">
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 pull-left">
+                        <div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <a class="pull-right" data-ui-sref="auth.register" data-ng-click="register($event)">Register</a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-success btn-block" data-ng-disabled="!form.$valid">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
