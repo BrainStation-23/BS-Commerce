@@ -1136,23 +1136,26 @@ h2.title {
 }
 
 .pagination  li  a, .pagination  li  span {
-    background-color: #f0f0e9;
-    border: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #FE980F;
     float: left;
     line-height: 1.42857;
     margin-left: -1px;
-    padding: 6px 12px;
+    padding: 6px 15px;
     position: relative;
     text-decoration: none;
-    margin-right: 5px;
     color:#000;
 }
 
 .pagination  li  a:hover{
-    background:#FE980F;
-    color:#fff;
+  background:#FE980F;
+  color:#fff;
+  border-color: #FE980F;
 }
 
+.pagination .disabled a{
+  border-color: #FE980F;
+}
 
 
 /*************************

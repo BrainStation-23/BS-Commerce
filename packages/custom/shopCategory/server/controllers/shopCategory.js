@@ -13,8 +13,19 @@ exports.list = function(req, res){
     .done();
 };
 
-exports.get = function(req, res){
-  service.get(req.params.id)
+exports.getById = function(req, res){
+  service.getById(req.params.id)
+    .then(function(category){
+      return res.status(200).send(category);
+    })
+    .catch(function(error){
+      return res.status(500).json([{msg: 'Internal server error!'}]);
+    })
+    .done();
+};
+
+exports.getBySlug = function(req, res){
+  service.getBySlug(req.params.slug)
     .then(function(category){
       return res.status(200).send(category);
     })

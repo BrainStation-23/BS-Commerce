@@ -1,10 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  Category = mongoose.model('Category'),
-  Product = mongoose.model('Product'),
-  controller = require('../controllers/shopProduct'),
-  _ = require('lodash');
+var controller = require('../controllers/shopProduct');
 
 module.exports = function(ShopProduct, app, auth, database, shopCore) {
   app.route('/api/products')

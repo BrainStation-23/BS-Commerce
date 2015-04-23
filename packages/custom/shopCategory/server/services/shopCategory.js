@@ -57,11 +57,24 @@ exports.list = function(){
   return deferred.promise;
 };
 
-exports.get = function(id){
+exports.getById = function(id){
   var deferred = Q.defer();
 
-  var option = (typeof id === 'string') ? {slug: id} : {_id: id};
-  Category.findOne(option)
+  Category.findOne({_id: id})
+    .exec(function(err, category){
+      if(err) {
+        return deferred.reject(err);
+      }
+      return deferred.resolve(category);
+    });
+
+  return deferred.promise;
+};
+
+exports.getBySlug = function(slug){
+  var deferred = Q.defer();
+
+  Category.findOne({slug: slug})
     .exec(function(err, category){
       if(err) {
         return deferred.reject(err);

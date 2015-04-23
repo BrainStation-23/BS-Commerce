@@ -1,16 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-  Category = mongoose.model('Category'),
-  Product = mongoose.model('Product'),
-  service = require('../services/shopProduct'),
-  _ = require('lodash'),
-  Q = require('q');
+var service = require('../services/shopProduct');
 
 exports.list = function(req, res){
-  var promise = req.query.slug
-              ? service.search(req.query.slug, 3, 0)
-              : service.all(3,0);
+  var promise = req.query.slug ? service.search(req.query.slug, 3, 0) : service.all(3,0);
 
   promise
     .then(function(products){
