@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
   _ = require('lodash'),
   Q = require('q');
 
-exports.search = function(slug, pageNumber, pageSize){
+exports.search = function(slug, currentPage, pageSize){
   var deferred = Q.defer();
 
   Category.find({'$or': [{'slug': slug}, { 'ancestors.slug' : slug}]})
@@ -21,6 +21,8 @@ exports.search = function(slug, pageNumber, pageSize){
 
       var filter = {'categories.categoryId': {'$in': categoryIdList}};
       Product.find(filter)
+        .skip((currentPage - 1) * pageSize)
+        .limit(pageSize)
         .exec(function(error, products){
           if(error){
             return deferred.reject(error);

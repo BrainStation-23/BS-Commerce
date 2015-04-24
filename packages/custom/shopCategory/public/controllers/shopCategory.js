@@ -8,16 +8,38 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
 
     $scope.state={
       totalRecords:0,
-      pageSize:3,
+      pageSize:6,
       currentPage : 1
     };
+
+    var updateProducts = function(){
+      ShopProduct.query({
+        slug:slug,
+        pageSize: $scope.state.pageSize,
+        currentPage: $scope.state.currentPage
+      },function(data, getHeader){
+        $scope.products = data;
+        $scope.state.totalRecords = getHeader().total;
+      });
+    };
+    updateProducts();
 
     $scope.products = [];
     $scope.category = ShopCategory.get({id: slug});
 
-    ShopProduct.query({slug:slug},function(data, getHeader){
-      $scope.products = data;
-      $scope.state.totalRecords = getHeader().total;
-    });
+    $scope.pageChanged = function(){
+      updateProducts();
+    };
+
+    $scope.pageSizeDropDownIsOpen = false;
+    $scope.setPageSize = function(pageSize, event){
+      event.preventDefault();
+
+      $scope.pageSizeDropDownIsOpen = false;
+
+      $scope.state.currentPage = 1;
+      $scope.state.pageSize = pageSize;
+      updateProducts();
+    };
   }
 ]);
