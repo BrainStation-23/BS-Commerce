@@ -19,6 +19,11 @@ angular.module('mean.shopAdmin').config(['$viewPathProvider', '$meanStateProvide
                 url: '/register',
                 templateUrl: 'shopAdmin/views/anonymous.html',
                 controller: 'registrationController'
+            })
+            .state('dashboard',{
+                url: '/',
+                templateUrl: 'shopAdmin/views/index.html',
+                controller: 'dashboardController'
             });
     }
 ]).run(['$rootScope', '$state', 'Global', function ($rootScope, $state, Global) {
