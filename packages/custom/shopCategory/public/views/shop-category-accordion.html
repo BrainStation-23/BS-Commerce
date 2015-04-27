@@ -9,10 +9,10 @@
                 <span data-ng-if="category.subCategories.length > 0" class="pull-right">
                   <i class="fa" data-ng-class="{'fa-minus': category.isOpen, 'fa-plus': !category.isOpen}"></i>
                 </span>
-                <a data-ng-class="{'selected-nav-category': category.isOpen}" data-ui-sref="products-in-category({slug:category.slug})">{{category.name}}</a>
+                <a data-ng-class="{'selected-nav-category': (category.isOpen && slug)}" data-ui-sref="products-in-category({slug:category.slug})">{{category.name}}</a>
               </accordion-heading>
               <ul data-ng-if="category.subCategories.length > 0">
-                <li data-ng-repeat="sub in category.subCategories"><a data-ui-sref="products-in-category({slug:sub.slug})" data-ng-class="{'selected-nav-category': sub.isOpen}">{{sub.name}}</a></li>
+                <li data-ng-repeat="sub in category.subCategories"><a data-ui-sref="products-in-category({slug:sub.slug})" data-ng-class="{'selected-nav-category': (sub.isOpen && slug)}">{{sub.name}}</a></li>
               </ul>
             </accordion-group>
           </accordion>

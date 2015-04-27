@@ -22,6 +22,7 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
           replace: true,
           templateUrl: '/shopCategory/views/shop-category-accordion.html',
           link: function(scope, element, attrs){
+            scope.slug = $state.params.slug;
             scope.categories = [];
             ShopCategory
               .query()
@@ -29,9 +30,9 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
               .then(function(list){
                 scope.categories = list;
 
-                if($state.params.slug){
+                if(scope.slug){
                   _.forEach(list,function(category){
-                    highlightIfSelected(category, $state.params.slug);
+                    highlightIfSelected(category, scope.slug);
                   })
                 }
               })
