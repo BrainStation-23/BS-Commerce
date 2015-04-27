@@ -2,33 +2,41 @@
 
 angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', '$state', 'ShopCategory',
     function(Global, $state, ShopCategory) {
-        return{
-            replace: true,
-            templateUrl: '/shopCategory/views/shop-category-accordion.html',
-            link: function(scope, element, attrs){
-              scope.categories = [];
-              ShopCategory
-                .query()
-                .$promise
-                .then(function(list){
-                  scope.categories = list;
+      var highlightIfSelected = function(category, slug){
+        if(category.slug === slug){
+          category.isOpen = true;
+          return true;
+        }else {
+          var subCategorySelected = _.any(category.subCategories, function (sub) {
+            return highlightIfSelected(sub, slug);
+          });
 
-                  if($state.params.slug){
-                    _.forEach(list, function(cat){
-                      var index = _.findIndex(cat.subCategories,function(subCategory){
-                        return (subCategory.slug === $state.params.slug);
-                      });
+          if(subCategorySelected){
+            category.isOpen = true;
+          }
+          return subCategorySelected
+        }
+      };
 
-                      if(index >=0){
-                        cat.isOpen = true;
-                        cat.isSelected = true;
-                        cat.subCategories[index].isSelected = true;
-                      }
-                    })
-                  }
-                })
-                .catch(console.log);
-            }
-        };
+      return{
+          replace: true,
+          templateUrl: '/shopCategory/views/shop-category-accordion.html',
+          link: function(scope, element, attrs){
+            scope.categories = [];
+            ShopCategory
+              .query()
+              .$promise
+              .then(function(list){
+                scope.categories = list;
+
+                if($state.params.slug){
+                  _.forEach(list,function(category){
+                    highlightIfSelected(category, $state.params.slug);
+                  })
+                }
+              })
+              .catch(console.log);
+          }
+      };
     }
 ]);

@@ -23,6 +23,7 @@ header .header-bottom{
   margin-right:5px;
 }
 
+.category-products .panel-default .panel-heading .panel-title a.selected-nav-category,
 .panel-body ul li a.selected-nav-category{
   color: #FE980F;
 }
