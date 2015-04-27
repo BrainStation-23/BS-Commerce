@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', 'ShopCategory',
-    function(Global, ShopCategory) {
+angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', '$state', 'ShopCategory',
+    function(Global, $state, ShopCategory) {
         return{
             replace: true,
             templateUrl: '/shopCategory/views/shop-category-accordion.html',

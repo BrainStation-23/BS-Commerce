@@ -29,7 +29,7 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
     var updateProducts = function(){
       ShopProduct.query({
         slug:slug,
-        oderBy: $scope.state.orderBy.value,
+        orderBy: $scope.state.orderBy.value,
         pageSize: $scope.state.pageSize,
         currentPage: $scope.state.currentPage
       },function(data, getHeader){

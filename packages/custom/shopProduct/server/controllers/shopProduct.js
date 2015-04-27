@@ -3,7 +3,7 @@
 var service = require('../services/shopProduct');
 
 exports.list = function(req, res){
-  var promise = req.query.slug ? service.search(req.query.slug, req.query.oderBy, req.query.currentPage, req.query.pageSize) : service.all(3,0);
+  var promise = req.query.slug ? service.search(req.query.slug, req.query.orderBy, req.query.currentPage, req.query.pageSize) : service.all(3,0);
 
   promise
     .then(function(data){
