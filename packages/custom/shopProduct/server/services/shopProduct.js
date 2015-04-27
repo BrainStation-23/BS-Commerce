@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
   _ = require('lodash'),
   Q = require('q');
 
-exports.search = function(slug, currentPage, pageSize){
+exports.search = function(slug, orderBy, currentPage, pageSize){
   var deferred = Q.defer();
 
   Category.find({'$or': [{'slug': slug}, { 'ancestors.slug' : slug}]})
@@ -21,6 +21,7 @@ exports.search = function(slug, currentPage, pageSize){
 
       var filter = {'categories.categoryId': {'$in': categoryIdList}};
       Product.find(filter)
+        .sort('info.' + orderBy)
         .skip((currentPage - 1) * pageSize)
         .limit(pageSize)
         .exec(function(error, products){
@@ -54,6 +55,34 @@ exports.all = function(pageNumber, pageSize){
         return deferred.reject(error);
       }
       return deferred.resolve(products);
+    });
+
+  return deferred.promise;
+};
+
+exports.getById = function(id){
+  var deferred = Q.defer();
+
+  Product.findOne({_id: id})
+    .exec(function(error, product){
+      if(error){
+        return deferred.reject(error);
+      }
+      return deferred.resolve(product);
+    });
+
+  return deferred.promise;
+};
+
+exports.getBySKU = function(sku){
+  var deferred = Q.defer();
+
+  Product.findOne({'info.sku': sku})
+    .exec(function(error, product){
+      if(error){
+        return deferred.reject(error);
+      }
+      return deferred.resolve(product);
     });
 
   return deferred.promise;

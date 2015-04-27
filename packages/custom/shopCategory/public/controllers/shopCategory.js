@@ -6,15 +6,30 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
     var slug = $state.params.slug;
     $scope.global = Global;
 
+    $scope.items = [
+      'The first choice!',
+      'And another choice for you.',
+      'but wait! A third!'
+    ];
+
+    $scope.status = {
+      isopen: false
+    };
+
     $scope.state={
       totalRecords:0,
       pageSize:6,
-      currentPage : 1
+      currentPage : 1,
+      orderBy:{
+        value: 'name',
+        text: 'Name'
+      }
     };
 
     var updateProducts = function(){
       ShopProduct.query({
         slug:slug,
+        oderBy: $scope.state.orderBy.value,
         pageSize: $scope.state.pageSize,
         currentPage: $scope.state.currentPage
       },function(data, getHeader){
@@ -31,14 +46,21 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       updateProducts();
     };
 
-    $scope.pageSizeDropDownIsOpen = false;
     $scope.setPageSize = function(pageSize, event){
       event.preventDefault();
 
-      $scope.pageSizeDropDownIsOpen = false;
-
       $scope.state.currentPage = 1;
       $scope.state.pageSize = pageSize;
+      updateProducts();
+    };
+
+    $scope.setOrderBy = function(text, value, event){
+      event.preventDefault();
+
+      $scope.state.currentPage = 1;
+      $scope.state.orderBy.text = text;
+      $scope.state.orderBy.value = value;
+
       updateProducts();
     };
   }

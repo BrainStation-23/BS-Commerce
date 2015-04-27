@@ -1197,7 +1197,7 @@ h2.title {
 
 .view-product img {
     border: 1px solid #F7F7F0;
-    height: 380px;
+    height: 330px;
     width: 100%;
 }
 
@@ -2414,7 +2414,7 @@ h2.title {
 
 .btn.btn-primary {
     background:#FE980F;
-    border: 0 none;
+    border-color: #E48300;
     border-radius: 0;
     margin-top: 16px;
 }
@@ -2435,6 +2435,10 @@ h2.title {
     left: 5px
 }
 
+.open.dropdown-toggle.btn-primary, .btn-primary:hover{
+  background-color: #FE980F !important;
+  border-color: #E48300 !important;
+}
 
 
 /*************************

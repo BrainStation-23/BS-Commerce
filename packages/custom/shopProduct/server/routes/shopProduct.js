@@ -6,6 +6,12 @@ module.exports = function(ShopProduct, app, auth, database, shopCore) {
   app.route('/api/products')
     .get(controller.list);
 
+  app.route('/api/products/:id([A-Za-z0-9]{24})')
+    .get(controller.getById);
+
+  app.route('/api/products/:sku')
+    .get(controller.getBySKU);
+
   app.route('/api/photos')
     .post(function(req, res){
       shopCore.media.create(req.files.upload)

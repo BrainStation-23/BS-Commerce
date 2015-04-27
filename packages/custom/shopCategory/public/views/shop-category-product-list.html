@@ -17,17 +17,34 @@
       <div class="col-sm-9 padding-right">
         <div class="row">
           <div class="col-sm-12">
-            <div class="btn-group pull-right" dropdown is-open="pageSizeDropDownIsOpen">
-              <button type="button" class="btn btn-primary">Page Size - {{state.pageSize}}</button>
-              <button type="button" class="btn btn-primary dropdown-toggle">
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#" data-ng-click="setPageSize(6, $event)">6</a></li>
-                <li><a href="#" data-ng-click="setPageSize(9, $event)">9</a></li>
-                <li><a href="#" data-ng-click="setPageSize(12, $event)">12</a></li>
-              </ul>
+            <div class="pull-right list-options">
+              <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-primary">Page Size {{state.pageSize}}</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href data-ng-click="setPageSize(6, $event)">6</a></li>
+                  <li><a href data-ng-click="setPageSize(9, $event)">9</a></li>
+                  <li><a href data-ng-click="setPageSize(12, $event)">12</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="pull-right list-options">
+              <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-primary">Order By {{state.orderBy.text}}</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href data-ng-click="setOrderBy('Name', 'name', $event)">Name</a></li>
+                  <li><a href data-ng-click="setOrderBy('Price', 'price', $event)">Price</a></li>
+                  <li><a href data-ng-click="setOrderBy('Date Published', 'publishDate', $event)">Date Published</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -38,9 +55,11 @@
               <div class="product-image-wrapper">
                 <div class="single-products">
                   <div class="productinfo text-center">
-                    <img data-ng-if="product.photos.length > 0" data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="{{product.info.name}}">
+                    <a data-ui-sref="products-details({sku:product.info.sku})">
+                      <img data-ng-if="product.photos.length > 0" data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="{{product.info.name}}">
+                    </a>
                     <h2>{{product.info.price | currency}}</h2>
-                    <p>{{product.info.name}}</p>
+                    <a data-ui-sref="products-details({sku:product.info.sku})"><p>{{product.info.name}}</p></a>
                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                   </div>
                   <div class="choose">

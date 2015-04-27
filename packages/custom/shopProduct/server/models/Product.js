@@ -32,6 +32,10 @@ var ProductSchema = new Schema({
     cost: {
       type: Number,
       default: 0
+    },
+    publishDate:{
+      type:Date,
+      default: new Date()
     }
   },
   meta:{

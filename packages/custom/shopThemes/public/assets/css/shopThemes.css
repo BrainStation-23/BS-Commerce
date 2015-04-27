@@ -17,3 +17,8 @@ header .header-bottom{
   color:#fe980f;
 }
 /* Style overwrites for top header actions*/
+
+
+.list-options{
+  margin-right:5px;
+}
