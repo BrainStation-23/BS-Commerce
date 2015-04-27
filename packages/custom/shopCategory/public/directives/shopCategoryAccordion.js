@@ -12,6 +12,20 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
                 .$promise
                 .then(function(list){
                   scope.categories = list;
+
+                  if($state.params.slug){
+                    _.forEach(list, function(cat){
+                      var index = _.findIndex(cat.subCategories,function(subCategory){
+                        return (subCategory.slug === $state.params.slug);
+                      });
+
+                      if(index >=0){
+                        cat.isOpen = true;
+                        cat.isSelected = true;
+                        cat.subCategories[index].isSelected = true;
+                      }
+                    })
+                  }
                 })
                 .catch(console.log);
             }

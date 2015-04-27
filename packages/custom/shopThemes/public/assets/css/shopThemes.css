@@ -22,3 +22,7 @@ header .header-bottom{
 .list-options{
   margin-right:5px;
 }
+
+.panel-body ul li a.selected-nav-category{
+  color: #FE980F;
+}
