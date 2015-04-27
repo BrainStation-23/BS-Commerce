@@ -4,7 +4,7 @@
             <question-mark ></question-mark> Name
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="catName"/>
         </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
             <question-mark></question-mark> Description
         </div>
         <div class="col-md-6">
-            <div text-angular ng-model="htmlVariable"></div>
+            <div text-angular  ng-model="catDescription"></div>
         </div>
     </div>
     <div class="row">
@@ -20,7 +20,7 @@
             <question-mark></question-mark> Picture
         </div>
         <div class="col-md-3">
-            <input type="file"/>
+            <input type="file" ng-model="catPicture"/>
         </div>
     </div>
     <div class="row">
@@ -28,7 +28,7 @@
             <question-mark></question-mark> Parent category
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="catParent"/>
         </div>
     </div>
     <div class="row">
@@ -36,7 +36,7 @@
             <question-mark></question-mark> Show on home page
         </div>
         <div class="col-md-9">
-            <input type="checkbox"/>
+            <input type="checkbox" ng-model="catShowOnHomePage"/>
         </div>
     </div>
     <div class="row">
@@ -44,7 +44,7 @@
             <question-mark></question-mark> Include in top menu
         </div>
         <div class="col-md-9">
-            <input type="checkbox"/>
+            <input type="checkbox" ng-model="catIncludeInTopMenu"/>
         </div>
     </div>
     <div class="row">
@@ -52,7 +52,7 @@
             <question-mark></question-mark> Allow customers to select page size
         </div>
         <div class="col-md-9">
-            <input type="checkbox"/>
+            <input type="checkbox" ng-model="catAllowToSelectPageSize"/>
         </div>
     </div>
     <div class="row">
@@ -60,7 +60,7 @@
             <question-mark></question-mark> Published
         </div>
         <div class="col-md-9">
-            <input type="checkbox"/>
+            <input type="checkbox" ng-model="catPublished"/>
         </div>
     </div>
     <div class="row">
@@ -68,7 +68,7 @@
             <question-mark></question-mark> Display order
         </div>
         <div class="col-md-1">
-            <input type="number" name="quantity" min="1" max="100" class="form-control"/>
+            <input type="number" name="quantity" min="1" max="100" class="form-control" ng-model="catDisplayOrder"/>
         </div>
     </div>
 
