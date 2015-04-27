@@ -10,3 +10,25 @@
 .form-container .row{
     margin: 10px;
 }
+
+
+.admin-title{
+    width: 100%;
+    overflow: hidden;
+}
+.admin-title h3{
+    float:left;
+}
+.admin-title a{
+    color: #308AD5;
+    font-size: 12px;
+
+}
+.admin-title a:hover{
+    text-decoration: none;
+}
+.admin-title button{
+    margin-top: 20px;
+    margin-left: 10px;
+    float: right;
+}
