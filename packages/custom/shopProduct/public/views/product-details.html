@@ -1,59 +1,40 @@
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="left-sidebar">
+<div class="row">
+  <div class="product-details"><!--product-details-->
+    <div class="col-sm-5">
+      <div class="view-product">
+        <img data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="">
 
-          <shop-category-accordion></shop-category-accordion>
-          <shop-category-brands></shop-category-brands>
-          <shop-product-price-range></shop-product-price-range>
-
-          <!--Slider area finished-->
-          <shop-free-shipping-worldwide-ad></shop-free-shipping-worldwide-ad>
-
-        </div>
       </div>
 
-      <div class="col-sm-9">
-        <div class="product-details"><!--product-details-->
-          <div class="col-sm-5">
-            <div class="view-product">
-              <img data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="">
 
-            </div>
-
-
-          </div>
-          <div class="col-sm-7">
-            <div class="product-information"><!--/product-information-->
-              <h2>{{product.info.name}}</h2>
-              <p>SKU: {{product.info.sku}}</p>
-								<span>
-									<span>{{product.info.price | currency}}</span>
-									<label>Quantity:</label>
-									<input type="text" value="3">
-									<button type="button" class="btn btn-fefault cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    Add to cart
-                  </button>
-								</span>
-              <p><b>Availability:</b> In Stock</p>
-              <p><b>Condition:</b> New</p>
-              <p><b>Brand:</b> E-SHOPPER</p>
-            </div><!--/product-information-->
-          </div>
-        </div>
-
-        <div class="category-tab">
-          <tabset>
-            <tab heading="Details">
-              {{product.info.fullDescription}}
-            </tab>
-            <tab heading="Reviews">
-
-            </tab>
-          </tabset>
-        </div>
-      </div>
     </div>
-</section>
+    <div class="col-sm-7">
+      <div class="product-information"><!--/product-information-->
+        <h2>{{product.info.name}}</h2>
+        <p>SKU: {{product.info.sku}}</p>
+          <span>
+            <span>{{product.info.price | currency}}</span>
+            <label>Quantity:</label>
+            <input type="text" value="3">
+            <button type="button" class="btn btn-fefault cart">
+              <i class="fa fa-shopping-cart"></i>
+              Add to cart
+            </button>
+          </span>
+        <p><b>Availability:</b> In Stock</p>
+        <p><b>Condition:</b> New</p>
+        <p><b>Brand:</b> E-SHOPPER</p>
+      </div><!--/product-information-->
+    </div>
+  </div>
+  <div class="category-tab">
+    <tabset>
+      <tab heading="Details">
+        {{product.info.fullDescription}}
+      </tab>
+      <tab heading="Reviews">
+
+      </tab>
+    </tabset>
+  </div>
+</div>

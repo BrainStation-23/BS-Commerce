@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', '$state', 'ShopCategory',
-    function(Global, $state, ShopCategory) {
+angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', '$rootScope', '$state', 'ShopCategory',
+    function(Global, $rootScope, $state, ShopCategory) {
       var highlightIfSelected = function(category, slug){
         if(category.slug === slug){
           category.isOpen = true;
@@ -13,9 +13,17 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
 
           if(subCategorySelected){
             category.isOpen = true;
+          }else{
+            category.isOpen = false;
           }
           return subCategorySelected;
         }
+      };
+
+      var processCategorySelection = function(categories, slug){
+        _.forEach(categories,function(category){
+          highlightIfSelected(category, slug);
+        });
       };
 
       return{
@@ -31,12 +39,15 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
                 scope.categories = list;
 
                 if(scope.slug){
-                  _.forEach(list,function(category){
-                    highlightIfSelected(category, scope.slug);
-                  });
+                  processCategorySelection(list,scope.slug);
                 }
               })
               .catch(console.log);
+
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+              scope.slug = (toState.name === 'products-in-category') ? toParams.slug : '';
+              processCategorySelection(scope.categories, scope.slug);
+            });
           }
       };
     }
