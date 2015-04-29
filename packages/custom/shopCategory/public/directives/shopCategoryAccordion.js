@@ -14,7 +14,7 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
           if(subCategorySelected){
             category.isOpen = true;
           }
-          return subCategorySelected
+          return subCategorySelected;
         }
       };
 
@@ -33,7 +33,7 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
                 if(scope.slug){
                   _.forEach(list,function(category){
                     highlightIfSelected(category, scope.slug);
-                  })
+                  });
                 }
               })
               .catch(console.log);

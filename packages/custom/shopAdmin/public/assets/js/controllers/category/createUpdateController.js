@@ -10,7 +10,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
 
         // Info tab Page
         $scope.catName = '';
-        $scope.catSlug = ''
+        $scope.catSlug = '';
         $scope.catDescription = '';
         $scope.catPicture = '';
         $scope.catParent = '';
