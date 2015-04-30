@@ -1,0 +1,14 @@
+body.login, body.register, body.forgot-password{
+  background: none !important;
+}
+
+.auth-container>div{
+  margin-bottom: 30px;
+}
+
+.auth-container .button_login{
+  margin-top: 20px;
+}
+.auth-container .button_login p, .auth-container .button_login a, .auth-container .button_register p, .auth-container .button_register a{
+  padding-top: 5px;
+}

@@ -1,0 +1,159 @@
+<!--<div class="" data-ng-controller="ShopwebController">
+  <h1>Example view from your new awesome package</h1>
+  <h2>Package: {{package.name}}</h2>
+  <ol>
+    <li>
+      <a href="shopWeb/example/anyone">Server route that anyone can access</a>
+    </li>
+    <li>
+      <a href="shopWeb/example/auth">Server route that requires authentication</a>
+    </li>
+    <li>
+      <a href="shopWeb/example/admin">Server route that requires admin user</a>
+    </li>
+    <li>
+      <a href="shopWeb/example/render">Raw Html rendering example from using swig</a>
+    </li>
+  </ol>
+  <h3><img src="/shopWeb/assets/img/logo.png" /></h3>
+  </br>
+  <p class="alert alert-info">You can find your package in /packages/shopWeb</p>
+  </br>
+  <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/shopWeb</p>
+  </br>
+  <h3><a href="http://www.mean.io/#!/docs">Documentation</a></h3>
+  </br>
+</div>-->
+
+
+
+<div class="" data-ng-controller="ShopWebController">
+
+    <shop-slider-container></shop-slider-container>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+
+                        <shop-category-accordion></shop-category-accordion>
+                        <shop-category-brands></shop-category-brands>
+                        <shop-product-price-range></shop-product-price-range>
+
+                        <!--Need to fix this slider in the directive area and remove this -->
+                        <div class="price-range">
+                            <h2>Price Range</h2>
+
+                            <div class="well text-center">
+                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
+                                       data-slider-step="5"
+                                       data-slider-value="[250,450]" id="sl2"><br/>
+                                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                            </div>
+                            <script>
+                                $('#sl2').slider();
+                            </script>
+                        </div>
+                        <!--Slider area finished-->
+                        <shop-free-shipping-worldwide-ad></shop-free-shipping-worldwide-ad>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items">
+                        <h2 class="title text-center">Features Items</h2>
+
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product1.jpg"></shop-product-featured-item>
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product2.jpg"></shop-product-featured-item>
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product3.jpg"></shop-product-featured-item>
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product4.jpg"></shop-product-featured-item>
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product5.jpg" corner-image="/shopThemes/assets/img/home/new.png"></shop-product-featured-item>
+                        <shop-product-featured-item featured-item-src="/shopThemes/assets/img/home/product6.jpg" corner-image="/shopThemes/assets/img/home/sale.png"></shop-product-featured-item>
+
+                    </div>
+
+                    <div class="category-tab">
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
+                                <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
+                                <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
+                                <li><a href="#kids" data-toggle="tab">Kids</a></li>
+                                <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="tshirt">
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery1.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery2.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery3.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery4.jpg"></shop-product-tabbed-item>
+                            </div>
+                            <div class="tab-pane fade" id="blazers">
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery4.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery3.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery2.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery1.jpg"></shop-product-tabbed-item>
+
+                            </div>
+
+                            <div class="tab-pane fade" id="sunglass">
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery3.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery4.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery1.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery2.jpg"></shop-product-tabbed-item>
+                            </div>
+
+                            <div class="tab-pane fade" id="kids">
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery1.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery2.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery3.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery4.jpg"></shop-product-tabbed-item>
+                            </div>
+
+                            <div class="tab-pane fade" id="poloshirt">
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery2.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery3.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery4.jpg"></shop-product-tabbed-item>
+                                <shop-product-tabbed-item tabbed-image-src="/shopThemes/assets/img/home/gallery1.jpg"></shop-product-tabbed-item>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recommended_items">
+                        <h2 class="title text-center">recommended items</h2>
+
+                        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend1.jpg"></shop-product-recommended-item>
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend2.jpg"></shop-product-recommended-item>
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend3.jpg"></shop-product-recommended-item>
+
+                                </div>
+                                <div class="item">
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend1.jpg"></shop-product-recommended-item>
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend2.jpg"></shop-product-recommended-item>
+                                    <shop-product-recommended-item image-src="/shopThemes/assets/img/home/recommend3.jpg"></shop-product-recommended-item>
+                                </div>
+                            </div>
+                            <a class="left recommended-item-control" href="#recommended-item-carousel"
+                               data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right recommended-item-control" href="#recommended-item-carousel"
+                               data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>

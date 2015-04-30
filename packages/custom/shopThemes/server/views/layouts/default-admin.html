@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
+{% include '../includes/head-admin.html' %}
+
+<body ng-cloak class="ng-cloak" ng-class="state" >
+    <div id="wrapper">
+        <div data-ng-include="'/shopThemes/views/header-admin.html'"></div>
+        <!-- Page Content -->
+        <div >
+
+        </div>
+        <div id="page-wrapper" >
+            <div class="container-fluid">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include '../includes/foot-admin.html' %}
+</body>
+
+</html>

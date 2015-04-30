@@ -2,7 +2,7 @@
 [![Dependencies Status](https://david-dm.org/linnovate/mean.svg)](https://david-dm.org/linnovate/mean)
 [![Gitter](https://badges.gitter.im/JoinChat.svg)](https://gitter.im/linnovate/mean?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-# [![MEAN Logo](http://mean.io/system/assets/img/logos/meanlogo.png)](http://mean.io/) MEAN Stack
+# [![MEAN Logo](http://mean.io/system/assets/img/logos/meanlogo.png)](http://mean.io/) BS Commerce - MEAN Stack E-Commerce Solution on MEAN.IO
 
 MEAN is a framework for an easy starting point with [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you a quick and organized way to start developing MEAN based web apps with useful modules like Mongoose and Passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.
 
@@ -24,7 +24,7 @@ $ sudo apt-get install nodejs
 ### Windows
 * *Node.js* - <a href="http://nodejs.org/download/">Download</a> and Install Node.js, nodeschool has free <a href=" http://nodeschool.io/#workshoppers">node tutorials</a> to get you started.
 * *MongoDB* - Follow the great tutorial from the mongodb site - <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows">"Install Mongodb On Windows"</a>
-* *Git* - The easiest way to install git and then run the rest of the commands through the *git bash* application is by downloading and installing <a href="http://git-scm.com/download/win">Git for Windows</a>
+* *Git* - The easiest way to install git and then run the rest of the commands through the *git bash* application (via command prompt) is by downloading and installing <a href="http://git-scm.com/download/win">Git for Windows</a>
 
 ### OSX
 * *Node.js* -  <a href="http://nodejs.org/download/">Download</a> and Install Node.js or use the packages within brew or macports.
@@ -684,4 +684,13 @@ $ heroku config:set NODE_ENV=production
 
 ## License
 We believe that mean should be free and easy to integrate within your existing projects so we chose [The MIT License](http://opensource.org/licenses/MIT)
+
+### Pulling and merging changes from MEAN.IO
+
+```bash
+git remote add mean.io https://github.com/linnovate/mean.git
+git pull
+```
+
+Then merge MEAN.IO changes from master branch into required BS-Commerce branch in usual way
 

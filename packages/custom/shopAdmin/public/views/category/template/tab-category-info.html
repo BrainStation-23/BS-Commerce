@@ -1,0 +1,75 @@
+<div class="form-container">
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark ></question-mark> Name
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="cat.name"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Description
+        </div>
+        <div class="col-md-6">
+            <div text-angular  ng-model="cat.description"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Picture
+        </div>
+        <div class="col-md-3">
+            <input type="file" ng-model="cat.picture" name="upload"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Parent category
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="cat.parent"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Show on home page
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="cat.showOnHomePage"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Include in top menu
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="cat.includeInTopMenu"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Allow customers to select page size
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="cat.allowToSelectPageSize"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Published
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="cat.published"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Display order
+        </div>
+        <div class="col-md-1">
+            <input type="number" name="quantity" min="1" max="100" class="form-control" ng-model="cat.displayOrder"/>
+        </div>
+    </div>
+
+</div>

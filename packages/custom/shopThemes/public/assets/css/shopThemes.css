@@ -1,0 +1,29 @@
+body section.content{
+  margin-top: 20px;
+}
+
+header .header-bottom{
+  padding-top: 10px;
+  padding-bottom:10px;
+}
+
+/* Style overwrites for top header actions*/
+.shop-menu > .navbar-nav > li > .dropdown-menu{
+  margin-top: 10px;
+}
+
+.shop-menu > .navbar-nav > li.open > a{
+  background-color: #FFFFFF;
+  color:#fe980f;
+}
+/* Style overwrites for top header actions*/
+
+
+.list-options{
+  margin-right:5px;
+}
+
+.category-products .panel-default .panel-heading .panel-title a.selected-nav-category,
+.panel-body ul li a.selected-nav-category{
+  color: #FE980F;
+}

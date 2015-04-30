@@ -1,0 +1,11 @@
+.categories-accordion .panel-group{
+  margin-bottom: 0;
+}
+
+.categories-accordion .panel-group .panel-body{
+  padding:5px 15px 0 15px;
+}
+
+.categories-accordion .panel-group .panel-heading .panel-title i.fa{
+  cursor:pointer;
+}
