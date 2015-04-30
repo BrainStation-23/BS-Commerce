@@ -1189,6 +1189,14 @@ h2.title {
     margin-top: 10px;
 }
 
+.product-details .carousel-inner img{
+  height: 325px;
+}
+
+.product-details .carousel-inner .item{
+  padding-left:0px;
+}
+
 
 
 .view-product {

@@ -6,6 +6,19 @@ angular.module('mean.shopProduct').controller('ShopProductController', ['$scope'
     $scope.global = Global;
     var sku = $state.params.sku;
 
-    $scope.product = ShopProduct.get({id: sku});
+    $scope.product = null;
+    $scope.slides = [];
+
+    ShopProduct.get({id: sku}, function(product){
+      $scope.product = product;
+
+      $scope.slides = _.map(product.photos, function(photo){
+        return {
+          image: '/api/products/photos/' + photo
+        };
+      });
+    });
+
+
   }
 ]);

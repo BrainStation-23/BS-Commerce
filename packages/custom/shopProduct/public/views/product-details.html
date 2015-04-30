@@ -2,11 +2,12 @@
   <div class="product-details"><!--product-details-->
     <div class="col-sm-5">
       <div class="view-product">
-        <img data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="">
-
+        <carousel interval="5000">
+          <slide data-ng-repeat="slide in slides" active="slide.active">
+            <img data-ng-src="{{slide.image}}" style="margin:auto;">
+          </slide>
+        </carousel>
       </div>
-
-
     </div>
     <div class="col-sm-7">
       <div class="product-information"><!--/product-information-->
@@ -16,7 +17,7 @@
             <span>{{product.info.price | currency}}</span>
             <label>Quantity:</label>
             <input type="text" value="3">
-            <button type="button" class="btn btn-fefault cart">
+            <button type="button" class="btn btn-default cart">
               <i class="fa fa-shopping-cart"></i>
               Add to cart
             </button>
