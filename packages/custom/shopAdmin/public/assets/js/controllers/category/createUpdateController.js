@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['$scope', 'Global', '$stateParams', '$http',
-    function($scope, Global, $stateParams, $http) {
+    function ($scope, Global, $stateParams, $http) {
         //$scope.catId = $stateParams.catId;
         console.log('categoryCreateUpdateController');
 
         // for update page there will be a catId
-        $scope.catId = $stateParams.catId;
+
 
         // Info tab Page
-        $scope.catName = '';
+        $scope.cat = {};
+        $scope.cat.id = $stateParams.catId;
+        /*$scope.cat.name = 'sampleName';
         $scope.catSlug = '';
         $scope.catDescription = '';
         $scope.catPicture = '';
@@ -24,32 +26,43 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.catMetaKeywords = '';
         $scope.catMetaDescription = '';
         $scope.catMetaTitle = '';
-        $scope.catSeoFriendlyPageName = '';
+        $scope.catSeoFriendlyPageName = '';*/
 
-        if($scope.catId){
-            $http.get('/api/categories/'+$scope.catId).
-                success(function(data, status, headers, config) {
+        if ($scope.catId) {
+            $http.get('/api/categories/' + $scope.cat.id).
+                success(function (data, status, headers, config) {
                     console.log(data);
-                    $scope.catName = data.name;
-                    $scope.catSlug = data.slug;
-                    $scope.catPublished = true;
+                    $scope.name = data.name;
+                    $scope.slug = data.slug;
+                    $scope.published = true;
                 }).
-                error(function(data, status, headers, config) {
+                error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
         }
 
-        $scope.add = function(){
-
+        $scope.add = function (cat) {
+            console.log('add function');
+            console.log(cat);
+            $http.post('/api/categories/add/',{
+                category: cat
+            }).
+                success(function (data, status, headers, config) {
+                    console.log(data);
+                }).
+                error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
         };
 
-        $scope.update = function(){
-
+        $scope.update = function () {
+            console.log('update function');
         };
 
-        $scope.delete = function(){
-
+        $scope.delete = function () {
+            console.log('delete function');
         };
     }
 ]);

@@ -84,3 +84,7 @@ exports.getBySlug = function(slug){
 
   return deferred.promise;
 };
+
+exports.addCategory = function(category){
+    console.log(category);
+};

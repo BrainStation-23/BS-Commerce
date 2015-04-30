@@ -1,7 +1,7 @@
 <div ng-controller="categoryEditController">
     <h1> {{catId}} </h1>
     <div class="admin-title"><h3>Edit Category Details <a ui-sref="Category.List">(back to Category list)</a></h3>
-        <button type="button" class="btn btn-danger" > Delete </button> <button class="btn btn-info" type="button" >Save All</button>
+        <button type="button" class="btn btn-danger" ng-click="delete();"> Delete </button> <button class="btn btn-info" type="button" ng-click="update();">Save All</button>
     </div>
 
     <tabset>
