@@ -9,7 +9,7 @@ module.exports = {
     format: 'common'
   },
   app: {
-    name: 'MEAN - A Modern Stack - Test'
+    name: 'BS Commerce - Test'
   },
   facebook: {
     clientID: 'APP_ID',
