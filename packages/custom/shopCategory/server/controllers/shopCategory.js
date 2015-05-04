@@ -34,12 +34,15 @@ exports.getBySlug = function(req, res){
     })
     .done();
 };
-exports.addCategory = function(req, res){
+
+exports.addCategory = function(req, res, shopCore){
     console.log('addCategory');
-    console.log(req.body.category);
+    console.log(req.body.cat);
     console.log(req.files);
 
-    res.status(200).send(req.body.category).end();
+
+
+    res.status(200).send(req.body.cat).end();
         /*service.addCategory(req.params)
         .then(function(category){
             return res.status(200).send(category);
