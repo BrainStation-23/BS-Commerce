@@ -1,6 +1,6 @@
 'use strict';
 
-var cartController = require('../controller/cartController');
+var cartController = require('../controllers/cartController');
 
 module.exports = function(Shopcatalog, app, auth, database, shopCore) {
   app.route('/api/cart')

@@ -3,7 +3,6 @@
 var mean = require('meanio'),
     mongoose = require('mongoose'),
     Category = mongoose.model('Category'),
-    Category2 = mongoose.model('Category2'),
     _ = require('lodash'),
     Q = require('q');
 

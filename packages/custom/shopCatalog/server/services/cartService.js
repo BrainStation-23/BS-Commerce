@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose'),
   Cart = mongoose.model('Cart'),
-  _ = require('lodash'),
   Q = require('q');
 
 exports.search = function(options){
@@ -17,7 +16,7 @@ exports.search = function(options){
         return deferred.resolve(cart);
       });
   }else{
-    deferred.reject({msg: "Invalid argument"});
+    deferred.reject({msg: 'Invalid argument'});
   }
 
   return deferred.promise;
@@ -65,7 +64,7 @@ exports.addItem = function(userId, product, quantity){
 
   exports.getCart(userId)
     .then(function(cart){
-      Cart.update({user: user},
+      Cart.update({user: userId},
         {
           $addToSet: {
             items: {

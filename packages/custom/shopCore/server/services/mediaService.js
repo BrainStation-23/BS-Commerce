@@ -38,7 +38,7 @@ exports.get = function(fileId){
 
   return stream;
 };
-http://localhost:3000/#!/
+
 exports.delete = function(fileId){
   var deferred = Q.defer();
 
