@@ -13,8 +13,8 @@ exports.getCart = function(req, res){
     .done();
 };
 
-exports.addItem = function(req, res){
-  cartService.addItem(req.user.id, req.body.productId, req.body.quantity)
+exports.update = function(req, res){
+  cartService.update(req.user.id, req.body.items)
     .then(function(cart){
       return res.status(200).send(cart);
     })

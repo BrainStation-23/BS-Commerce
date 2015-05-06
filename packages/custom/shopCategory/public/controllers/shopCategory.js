@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scope', '$state', 'Global', 'ShopCategory', 'ShopProduct',
-  function($scope, $state, Global, ShopCategory, ShopProduct) {
+angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scope', '$state', 'Global', 'ShopCategory', 'ShopProduct', 'cartService',
+  function($scope, $state, Global, ShopCategory, ShopProduct, cartService) {
     var slug = $state.params.slug;
     $scope.global = Global;
 
@@ -62,6 +62,11 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       $scope.state.orderBy.value = value;
 
       updateProducts();
+    };
+
+    $scope.addToCart = function(product){
+      cartService.addToCart(product);
+      product.addedToCart = true;
     };
   }
 ]);

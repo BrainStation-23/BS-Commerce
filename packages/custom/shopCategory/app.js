@@ -19,6 +19,7 @@ ShopCategory.register(function(app, auth, database, shopCore) {
 
   ShopCategory.aggregateAsset('css', 'shopCategory.css');
 
+  ShopCategory.angularDependencies(['mean.shopCatalog']);
 
 
   return ShopCategory;

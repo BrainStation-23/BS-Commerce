@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
   Cart = mongoose.model('Cart'),
+  _ = require('lodash'),
   Q = require('q');
 
 exports.search = function(options){
@@ -25,7 +26,7 @@ exports.search = function(options){
 var getCartIfExists = function(userId){
   var deferred = Q.defer();
 
-  Cart.find({user: userId})
+  Cart.findOne({user: userId})
     .exec(function(error,cart){
       if(error){
         return deferred.reject(error);
@@ -40,7 +41,7 @@ var getCartIfExists = function(userId){
 exports.getCart = function(userId){
   var deferred = Q.defer();
 
-  getCartIfExists()
+  getCartIfExists(userId)
     .then(function(cart){
       if(cart){
         return deferred.resolve(cart);
@@ -59,18 +60,22 @@ exports.getCart = function(userId){
   return deferred.promise;
 };
 
-exports.addItem = function(userId, product, quantity){
+exports.update = function(userId, items){
   var deferred = Q.defer();
 
   exports.getCart(userId)
     .then(function(cart){
+      var list = _.map(items, function(item){
+        return {
+          product: item.product._id,
+          quantity: item.quantity
+        };
+      });
       Cart.update({user: userId},
         {
-          $addToSet: {
-            items: {
-              product: product.id,
-              quantity: quantity
-            }
+          $set: {
+            items: list,
+            updatedOn: new Date()
           }
         },function(error,cart){
           if(error){
