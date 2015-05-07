@@ -2,6 +2,7 @@
 
 var mean = require('meanio'),
     mongoose = require('mongoose'),
+    //Category = mongoose.model('Category'),
     Category = mongoose.model('Category'),
     _ = require('lodash'),
     Q = require('q');
@@ -26,6 +27,11 @@ var includeSubCategories = function (category, list) {
     category.subCategories = category.subCategories.concat(subCategories);
 };
 
+var getSlug = function (name) {
+    var slug = name.replace(/\s+/g, '-');
+    return slug.toLowerCase();
+};
+
 exports.list = function () {
     var deferred = Q.defer();
 
@@ -40,6 +46,8 @@ exports.list = function () {
 
             var list = _.map(_.where(categories, {parent: null}), function (item) {
                 return {
+                    /*console.log(req.body.cat);
+                     console.log(req.files);*/
                     _id: item._id,
                     name: item.name,
                     slug: item.slug,
@@ -85,6 +93,34 @@ exports.getBySlug = function (slug) {
     return deferred.promise;
 };
 
-exports.addCategory = function (category) {
-    console.log(category);
+exports.addCategory = function (cat, imageId) {
+
+    var deferred = Q.defer();
+
+    var newCategory = new Category({
+        name: cat.name,
+        slug: getSlug(cat.name),
+        parent: cat.parent,
+        description: cat.description,
+        imageId: imageId,
+        showOnHomePage: cat.showOnHomePage,
+        includeInTopMenu: cat.includeInTopMenu,
+        allowToSelectPageSize: cat.allowToSelectPageSize,
+        published: cat.published,
+        displayOrder: cat.displayOrder,
+        ancestors: []
+    });
+
+    newCategory.save(function (error) {
+        if (error) {
+            deferred.reject();
+        } else {
+            deferred.resolve();
+        }
+    });
+
+    return deferred.promise;
+
 };
+
+

@@ -16,7 +16,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.cat.name = '';
         $scope.cat.slug = '';
         $scope.cat.description = '';
-        $scope.cat.parent = '#';
+        $scope.cat.parent = null;
         $scope.cat.showOnHomePage = true;
         $scope.cat.includeInTopMenu = false;
         $scope.cat.allowToSelectPageSize = true;

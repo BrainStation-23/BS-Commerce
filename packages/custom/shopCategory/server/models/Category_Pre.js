@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-var CategorySchema = new Schema({
+var Category_PreSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -17,9 +17,9 @@ var CategorySchema = new Schema({
     default: null
   },
   ancestors:{
-    type:[CategorySchema],
+    type:[Category_PreSchema],
     default: []
   }
 });
 
-mongoose.model('Category', CategorySchema);
+mongoose.model('Category_Pre', Category_PreSchema);

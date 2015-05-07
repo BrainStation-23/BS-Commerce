@@ -16,8 +16,9 @@ module.exports = function (ShopCategory, app, auth, database, shopCore) {
         .post(function (req, res) {
             shopCore.media.create(req.files.file)
                 .then(function (file) {
-                    console.log(file._id);
-                    controller.addCategory(req.body.cat, file._id);
+                    console.log(req.body.cat);
+                    controller.addCategory(JSON.parse(req.body.cat), file._id);
+
                     return res.status(200).json(file);
                 })
                 .catch(function (error) {
@@ -27,3 +28,5 @@ module.exports = function (ShopCategory, app, auth, database, shopCore) {
         });
 
 };
+
+

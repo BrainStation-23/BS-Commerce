@@ -35,20 +35,6 @@ exports.getBySlug = function(req, res){
     .done();
 };
 
-exports.addCategory = function(req, res, shopCore){
-    console.log('addCategory');
-    console.log(req.body.cat);
-    console.log(req.files);
-
-
-
-    res.status(200).send(req.body.cat).end();
-        /*service.addCategory(req.params)
-        .then(function(category){
-            return res.status(200).send(category);
-        })
-        .catch(function(error){
-            return res.status(500).json([{msg: 'Internal server error!'}]);
-        })
-        .done();*/
+exports.addCategory = function(cat, imageId){
+    service.addCategory(cat, imageId);
 };
