@@ -113,6 +113,7 @@ exports.addCategory = function (cat, imageId) {
 
     newCategory.save(function (error) {
         if (error) {
+            console.log(error);
             deferred.reject();
         } else {
             deferred.resolve();

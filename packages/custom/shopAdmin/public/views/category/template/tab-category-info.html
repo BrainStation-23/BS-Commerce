@@ -25,12 +25,18 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Parent category
+            <question-mark></question-mark> Parent Category
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" ng-model="cat.parent"/>
+            <select class="form-control" dataq-ng-model="cat.parent">
+                <option value="0" >No Parent</option>
+                <option ng-repeat="item in categories" value="{{item.id}}" selected="selected">{{item.text}}</option>
+            </select>
+
         </div>
+
     </div>
+
     <div class="row">
         <div class="col-md-3">
             <question-mark></question-mark> Show on home page

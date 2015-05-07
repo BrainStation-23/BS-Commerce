@@ -10,12 +10,18 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.$watch('cat.files', function () {
             console.log($scope.cat.files);
         });
+        $scope.$watch('cat.parent', function () {
+            if($scope.cat.parent === '0'){
+                $scope.cat.parent = null;
+            }
+        });
+
         // Info tab Page
         $scope.cat = {};
         $scope.cat.id = $stateParams.catId;
-        $scope.cat.name = '';
+        $scope.cat.name = 'Sample Category';
         $scope.cat.slug = '';
-        $scope.cat.description = '';
+        $scope.cat.description = 'Sample Category Description';
         $scope.cat.parent = null;
         $scope.cat.showOnHomePage = true;
         $scope.cat.includeInTopMenu = false;
@@ -29,13 +35,39 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.catMetaTitle = '';
         $scope.catSeoFriendlyPageName = '';
 
+        $scope.categories=[];
+        //$scope.categories=[null, 'SPORTSWEAR', 'MENS', 'WOMENS', 'KIDS'];
+        $http.get('/api/categories').
+            success(function (data, status, headers, config) {
+                //$scope.categories = [{'id': '0', 'parent': null, 'text': 'No Parent'}];
+                for (var i in data) {
+                    var item = {};
+                    item.id = data[i]._id;
+                    item.parent = null;
+                    item.text = data[i].name;
+                    $scope.categories.push(item);
+                    for (var j in data[i].subCategories) {
+                        var subItem = {};
+                        subItem.id = data[i].subCategories[j]._id;
+                        subItem.parent = data[i]._id;
+                        subItem.text = data[i].subCategories[j].name;
+                        $scope.categories.push(subItem);
+                    }
+                }
+            }).
+            error(function (data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
+
         if ($scope.catId) {
             $http.get('/api/categories/' + $scope.cat.id).
                 success(function (data, status, headers, config) {
                     console.log(data);
                     $scope.name = data.name;
                     $scope.slug = data.slug;
-                    $scope.published = true;
                 }).
                 error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
