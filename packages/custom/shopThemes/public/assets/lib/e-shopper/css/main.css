@@ -982,6 +982,11 @@ h2.title {
     color: #FFFFFF;
 }
 
+.product-information .add-to-cart{
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
 .btn.add-to-cart.added-to-cart{
   background: #E48300;
   color: #FFFFFF;

@@ -8,7 +8,7 @@
         getCart: function(){
           return cart;
         },
-        addToCart: function(product){
+        addToCart: function(product, qunatity){
           cart
             .$promise
             .then(function(cart){

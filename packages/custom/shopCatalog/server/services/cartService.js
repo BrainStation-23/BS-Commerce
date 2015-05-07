@@ -66,24 +66,26 @@ exports.update = function(userId, items){
 
   exports.getCart(userId)
     .then(function(cart){
-      var list = _.map(items, function(item){
+      var list = _.map(cart.items, function(item){
         return {
           product: item.product._id,
           quantity: item.quantity
         };
       });
-      Cart.update({user: userId},
+
+      cart.updatedOn = new Date();
+      Cart.update({user: cart.user},
         {
           $set: {
             items: list,
-            updatedOn: new Date()
+            updatedOn: cart.updatedOn
           }
-        },function(error,cart){
+        },function(error){
           if(error){
             return deferred.reject(error);
           }
 
-          return deferred.resolve(cart);
+          return deferred.resolve(_.assign(cart,{items: items}));
         });
     });
 

@@ -19,6 +19,7 @@ ShopProduct.register(function(app, auth, database, shopCore, shopCategory) {
 
   ShopProduct.aggregateAsset('css', 'shopProduct.css');
 
+  ShopProduct.angularDependencies(['mean.shopCatalog']);
 
   return ShopProduct;
 });

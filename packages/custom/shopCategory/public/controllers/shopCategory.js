@@ -83,7 +83,7 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       product.addedToCart = !(product.addedToCart);
 
       if(product.addedToCart) {
-        cartService.addToCart(product);
+        cartService.addToCart(product, 1);
       }else{
         cartService.removeFromCart(product);
       }

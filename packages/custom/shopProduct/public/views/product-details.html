@@ -16,10 +16,10 @@
           <span>
             <span>{{product.info.price | currency}}</span>
             <label>Quantity:</label>
-            <input type="text" value="3">
-            <button type="button" class="btn btn-default cart">
+            <input type="text" data-ng-model="quantity" />
+            <button type="button" class="btn btn-default add-to-cart" data-ng-click="toggleCartStatus(product, $event)" data-ng-class="{'added-to-cart': product.addedToCart}">
               <i class="fa fa-shopping-cart"></i>
-              Add to cart
+              {{product.addedToCart? 'Added to cart' : 'Add to cart'}}
             </button>
           </span>
         <p><b>Availability:</b> In Stock</p>
