@@ -12,10 +12,6 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       'but wait! A third!'
     ];
 
-    $scope.status = {
-      isopen: false
-    };
-
     $scope.state={
       totalRecords:0,
       pageSize:6,
@@ -24,6 +20,24 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
         value: 'name',
         text: 'Name'
       }
+    };
+
+    $scope.products = [];
+    $scope.category = ShopCategory.get({id: slug});
+
+    var updateCartStatus = function(){
+      cartService.getCart()
+        .$promise
+        .then(function(cart){
+          _.forEach($scope.products, function(product){
+            var indexInCart = _.findIndex(cart.items, function(item){
+              return item.product._id === product._id;
+            });
+
+            product.addedToCart = indexInCart >= 0;
+          });
+        });
+
     };
 
     var updateProducts = function(){
@@ -35,12 +49,11 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       },function(data, getHeader){
         $scope.products = data;
         $scope.state.totalRecords = getHeader().total;
+
+        updateCartStatus();
       });
     };
     updateProducts();
-
-    $scope.products = [];
-    $scope.category = ShopCategory.get({id: slug});
 
     $scope.pageChanged = function(){
       updateProducts();
@@ -64,9 +77,17 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
       updateProducts();
     };
 
-    $scope.addToCart = function(product){
-      cartService.addToCart(product);
-      product.addedToCart = true;
+    $scope.toggleCartStatus = function(product, event){
+      event.preventDefault();
+
+      product.addedToCart = !(product.addedToCart);
+
+      if(product.addedToCart) {
+        cartService.addToCart(product);
+      }else{
+        cartService.removeFromCart(product);
+      }
+
     };
   }
 ]);

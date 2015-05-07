@@ -13,6 +13,7 @@ var CartSchema = new Schema({
   items:[{
     product:{
       type: Schema.Types.ObjectId,
+      ref: 'Product',
       required: true
     },
     quantity:{

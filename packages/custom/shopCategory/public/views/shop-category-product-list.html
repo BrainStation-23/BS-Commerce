@@ -44,7 +44,7 @@
               </a>
               <h2>{{product.info.price | currency}}</h2>
               <a data-ui-sref="products-details({sku:product.info.sku})"><p>{{product.info.name}}</p></a>
-              <a href="#" class="btn btn-default add-to-cart" data-ng-click="addToCart(product)" data-ng-disabled="product.addedToCart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+              <a href="#" class="btn btn-default add-to-cart" data-ng-click="toggleCartStatus(product, $event)" data-ng-class="{'added-to-cart': product.addedToCart}"><i class="fa fa-shopping-cart"></i>{{product.addedToCart ? 'Added to cart' : 'Add to cart'}}</a>
             </div>
             <div class="choose">
               <ul class="nav nav-pills nav-justified">

@@ -27,6 +27,7 @@ var getCartIfExists = function(userId){
   var deferred = Q.defer();
 
   Cart.findOne({user: userId})
+    .populate('items.product')
     .exec(function(error,cart){
       if(error){
         return deferred.reject(error);
