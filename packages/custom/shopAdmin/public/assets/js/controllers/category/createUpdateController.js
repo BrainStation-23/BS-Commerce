@@ -100,9 +100,9 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
 
         $scope.add = function (cat) {
             console.log('add function');
-            console.log(cat.files);
-            if ($scope.cat.files && $scope.cat.files.length) {
-                var file = $scope.cat.files[0];
+            console.log($scope.cat.files);
+            //if ($scope.cat.files && $scope.cat.files.length) {
+                var file = $scope.cat.files ? $scope.cat.files[0] : null;
 
                 Upload.upload({
                     url: 'api/categories',
@@ -117,7 +117,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                 }).success(function (data, status, headers, config) {
                     //$scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
                 });
-            }
+            //}
         };
     }
 ]);
