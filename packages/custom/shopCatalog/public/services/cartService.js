@@ -1,8 +1,8 @@
 (function(_){
   'use strict';
 
-  angular.module('mean.shopCatalog').factory('cartService', ['Global', 'Cart',
-    function(Global, Cart) {
+  angular.module('mean.shopCatalog').factory('cartService', ['$rootScope','Global', 'Cart',
+    function($rootScope, Global, Cart) {
       var cart = Cart.get();
       return {
         getCart: function(){
@@ -21,7 +21,9 @@
                   product: product,
                   quantity: 1
                 });
-                cart.$update();
+                cart.$update(function(){
+                  $rootScope.$emit('cart:updated', cart);
+                });
               }
             });
         },
@@ -36,6 +38,10 @@
 
               if(indexInCart >= 0 ){
                 cart.items.splice(indexInCart, 1);
+
+                cart.$update(function(){
+                  $rootScope.$emit('cart:updated', cart);
+                });
               }
             });
         }

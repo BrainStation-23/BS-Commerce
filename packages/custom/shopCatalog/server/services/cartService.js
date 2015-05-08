@@ -66,7 +66,7 @@ exports.update = function(userId, items){
 
   exports.getCart(userId)
     .then(function(cart){
-      var list = _.map(cart.items, function(item){
+      var list = _.map(items, function(item){
         return {
           product: item.product._id,
           quantity: item.quantity

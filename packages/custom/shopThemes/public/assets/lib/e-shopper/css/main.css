@@ -2567,3 +2567,41 @@ h2.title {
     color: #FE980F;
 }
 
+/************************** Styles for mini-cart ***********************/
+
+.mini-cart-container{
+  width: 400px;
+  margin: 5px 10px;
+}
+
+.mini-cart-image{
+  width:43px;
+  height: 41px;
+}
+
+.header-middle .container .mini-cart-container .row{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.mini-cart-item-text{
+  font-size: 10px;
+}
+
+.mini-cart-header-text, .mini-cart-footer-text{
+  font-size: 12px;
+}
+
+.header-middle .container .mini-cart-container .mini-cart-footer{
+  border-bottom: none;
+  border-top: 10px;
+  border-bottom: 10px;
+}
+
+.header-middle .container .mini-cart-container .row.mini-cart-footer a{
+  font-size: 12px;
+  margin-top: 0px;
+}
+
+/************************** Styles for mini-cart ***********************/
+

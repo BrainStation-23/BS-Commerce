@@ -31,7 +31,7 @@ ShopThemes.register(function (system, app, auth, database) {
     ShopThemes.aggregateAsset('js', libDir + 'scrollup/src/jquery.scrollUp.js');
     ShopThemes.aggregateAsset('js', 'shopThemes.js');
 
-    ShopThemes.angularDependencies(['mean.system']);
+    ShopThemes.angularDependencies(['mean.system', 'mean.shopCatalog']);
 
     app.set('views', __dirname + '/server/views');
 
