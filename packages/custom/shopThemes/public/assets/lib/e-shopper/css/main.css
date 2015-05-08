@@ -1602,13 +1602,13 @@ h2.title {
     content: " ";
 }
 
-#cart_items .cart_info {
+.cart_items .cart_info {
     border: 1px solid #E6E4DF;
     margin-bottom: 50px
 }
 
 
-#cart_items .cart_info .cart_menu {
+.cart_items .cart_info .cart_menu {
     background: #FE980F;
     color: #fff;
     font-size: 16px;
@@ -1616,16 +1616,16 @@ h2.title {
     font-weight: normal;
 }
 
-#cart_items .cart_info .table.table-condensed thead tr {
+.cart_items .cart_info .table.table-condensed thead tr {
     height: 51px;
 }
 
 
-#cart_items .cart_info .table.table-condensed tr {
+.cart_items .cart_info .table.table-condensed tr {
     border-bottom: 1px solid#F7F7F0
 }
 
-#cart_items .cart_info .table.table-condensed tr:last-child {
+.cart_items .cart_info .table.table-condensed tr:last-child {
     border-bottom: 0
 }
 
@@ -1635,16 +1635,16 @@ h2.title {
 }
 
 
-#cart_items .cart_info .image {
+.cart_items .cart_info .image {
     padding-left: 30px;
 }
 
 
-#cart_items .cart_info .cart_description h4 {
+.cart_items .cart_info .cart_description h4 {
     margin-bottom: 0
 }
 
-#cart_items .cart_info .cart_description h4 a {
+.cart_items .cart_info .cart_description h4 a {
     color: #363432;
     font-family: 'Roboto',sans-serif;
     font-size: 20px;
@@ -1652,18 +1652,18 @@ h2.title {
 
 }
 
-#cart_items .cart_info .cart_description p {
+.cart_items .cart_info .cart_description p {
     color:#696763
 }
 
 
-#cart_items .cart_info .cart_price p {
+.cart_items .cart_info .cart_price p {
     color:#696763;
     font-size: 18px
 }
 
 
-#cart_items .cart_info .cart_total_price {
+.cart_items .cart_info .cart_total_price {
     color: #FE980F;
     font-size: 24px;
 }
@@ -1999,26 +1999,26 @@ h2.title {
     margin-right: 30px;
 }
 
-#cart_items .cart_info
+.cart_items .cart_info
 .table.table-condensed.total-result {
     margin-bottom: 10px;
     margin-top: 35px;
     color: #696763
 }
 
-#cart_items .cart_info
+.cart_items .cart_info
 .table.table-condensed.total-result tr {
     border-bottom: 0
 }
 
-#cart_items .cart_info
+.cart_items .cart_info
 .table.table-condensed.total-result span {
     color: #FE980F;
     font-weight: 700;
     font-size: 16px
 }
 
-#cart_items .cart_info
+.cart_items .cart_info
 .table.table-condensed.total-result
 .shipping-cost {
     border-bottom: 1px solid #F7F7F0;
@@ -2604,4 +2604,18 @@ h2.title {
 }
 
 /************************** Styles for mini-cart ***********************/
+
+/************************** Styles for checkout ***********************/
+
+.cart_items .container{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.cart_product a img{
+  width: 110px;
+  height: 110px;
+}
+
+/************************** Styles for checkout ***********************/
 
