@@ -5,7 +5,8 @@ var mean = require('meanio'),
   validator = require('validator'),
   validation = require('../../../shopCore/server/framework/validation/validation'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  nodemailer = require('nodemailer');
 
 
 mean.loadConfig();
@@ -163,6 +164,37 @@ var passwordGenerator =  function(){
   return newPassword;
 };
 
+var sendMail = function(recipientEmail, subject, htmlBody, callback){
+
+  var smtpTransport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'qa.aareas900@gmail.com',
+      pass: 'qa.aareas'
+    }
+  });
+
+// setup e-mail data with unicode symbols
+  var mailOptions = {
+    from: 'BS-Commerce ✔ <info@domain.com>', // sender address
+    to: recipientEmail, // list of receivers
+    subject: subject + ' ✔', // Subject line
+    html: htmlBody // html body
+  };
+
+// send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+      callback(false);
+    }else{
+      callback(true);
+    }
+
+    // if you don't want to use this transport object anymore, uncomment following line
+    //smtpTransport.close(); // shut down the connection pool, no more messages
+  });
+};
+
 exports.resetForgotPassword = function(req, res) {
 
   var randomPassword= passwordGenerator();
@@ -176,7 +208,13 @@ exports.resetForgotPassword = function(req, res) {
           if (error) {
             return res.status(500).send('Unhandled error! Please try again.');
           }
-          return res.status(200).send(randomPassword);//'New password sent to your email.'
+          sendMail(req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new passwoed : '+ randomPassword +'</h3>', function(response){
+            if(response) {
+              return res.status(200).send('New password sent to your email.');
+            }else{
+              return res.status(500).send('Email not sent!.');
+            }
+          });
         });
       });
 };

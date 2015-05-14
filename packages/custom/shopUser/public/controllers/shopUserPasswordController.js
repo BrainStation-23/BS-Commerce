@@ -29,13 +29,18 @@ angular.module('mean.shopUser').controller('ShopUserPasswordController',['$scope
     };
 
     $scope.resetForgotPassword = function(){
+      $scope.pleaseWait = true;
       $http.put('/auth/resetForgotPassword', {
         email: $scope.user.email
       }).success(function(message){
+
+        $scope.pleaseWait = false;
         $scope.resetSuccess = message;
         $scope.resetError = '';
       }).error(function(error){
-        $scope.resetError=error;//"Invalid credential!";
+
+        $scope.pleaseWait = false;
+        $scope.resetError=error;
         $scope.resetSuccess = '';
       });
     };
