@@ -30,6 +30,8 @@ angular.module('mean.shopUser').controller('ShopUserPasswordController',['$scope
 
     $scope.resetForgotPassword = function(){
       $scope.pleaseWait = true;
+        $scope.resetError = '';
+        $scope.resetSuccess = '';
       $http.put('/auth/resetForgotPassword', {
         email: $scope.user.email
       }).success(function(message){
