@@ -208,7 +208,7 @@ exports.resetForgotPassword = function(req, res) {
 		  if (error) {
 			return res.status(500).send('Unhandled error! Please try again.');
 		  }
-		  sendMail(req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new passwoed : '+ randomPassword +'</h3>', function(response){
+		  sendMail(req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new password : '+ randomPassword +'</h3>', function(response){
 			if(response) {
 			  return res.status(200).send('New password sent to your email.');
 			}else{
