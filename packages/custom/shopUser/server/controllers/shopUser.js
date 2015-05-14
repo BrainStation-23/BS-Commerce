@@ -81,28 +81,28 @@ exports.changePassword = function(req, res) {
   }
 
   User
-    .findOne({email: req.user.email}, function (error, user) {
-      if (req.body.password) {
-        req.body.password = user.hashPassword(req.body.password);
-      }
-
-      req.assert('password', 'Old password is required').notEmpty();
-      req.assert('password', 'Old password is invalid').equals(user.hashed_password);
-      req.assert('newPassword', 'Password must be between 6-20 characters long').len(6, 20);
-      req.assert('confirmNewPassword', 'New passwords do not match').equals(req.body.newPassword);
-
-      var errors = req.validationErrors();
-      if (errors) {
-        return res.status(400).send(errors);
-      }
-      user.password = req.body.newPassword;
-      user.save(function (error, doc) {
-        if (error) {
-          return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
+      .findOne({email: req.user.email}, function (error, user) {
+        if (req.body.password) {
+          req.body.password = user.hashPassword(req.body.password);
         }
-        return res.status(200).send([{msg: 'Password updated successfully.'}]);
+
+        req.assert('password', 'Old password is required').notEmpty();
+        req.assert('password', 'Old password is invalid').equals(user.hashed_password);
+        req.assert('newPassword', 'Password must be between 6-20 characters long').len(6, 20);
+        req.assert('confirmNewPassword', 'New passwords do not match').equals(req.body.newPassword);
+
+        var errors = req.validationErrors();
+        if (errors) {
+          return res.status(400).send(errors);
+        }
+        user.password = req.body.newPassword;
+        user.save(function (error, doc) {
+          if (error) {
+            return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
+          }
+          return res.status(200).send([{msg: 'Password updated successfully.'}]);
+        });
       });
-    });
 };
 
 exports.updateProfile = function(req, res){
@@ -152,3 +152,32 @@ exports.updateProfile = function(req, res){
     return res.status(200).send([{msg: 'Profile updated successfully.'}]);
   });
 };
+
+var passwordGenerator =  function(){
+  var newPassword = '';
+  var possibleCharacter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
+
+  for( var i=0; i < 8; i+=1 )
+    newPassword += possibleCharacter.charAt(Math.floor(Math.random() * possibleCharacter.length));
+
+  return newPassword;
+};
+
+exports.resetForgotPassword = function(req, res) {
+
+  var randomPassword= passwordGenerator();
+  User
+      .findOne({email: req.body.email}, function (error, user) {
+        if(error || user === null) {
+          return res.status(500).send('Invalid credential !.');
+        }
+        user.password = randomPassword;
+        user.save(function (error, doc) {
+          if (error) {
+            return res.status(500).send('Unhandled error! Please try again.');
+          }
+          return res.status(200).send(randomPassword);//'New password sent to your email.'
+        });
+      });
+};
+
