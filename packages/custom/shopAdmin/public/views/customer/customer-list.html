@@ -1,0 +1,60 @@
+<div class="row">
+    <form class="form form-container" method="post" action="#">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <span><i class="fa fa-user-md fa-fw"></i> Customers</span>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary pull-right">Add new</button>
+            </div>
+        </div>
+        <hr>
+        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="admin" name="SearchCustomerRoleIds"> Admin
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="registered" name="SearchCustomerRoleIds"> Rergistered
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                    <div class="col-md-4">
+                        <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label for="firstName"><i class="fa fa-question-circle fa-fw"></i> First name</label></div>
+                    <div class="col-md-4">
+                        <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="user.firstName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label for="lastName"><i class="fa fa-question-circle fa-fw"></i> Last name</label></div>
+                    <div class="col-md-4">
+                        <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label for="dateOfBirth"><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>
+                    <div class="col-md-4">
+                        <input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label for="company"><i class="glyphicon glyphicon-question-sign"></i> Company</label></div>
+                    <div class="col-md-4">
+                        <input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="user.company">
+                    </div>
+                </div>
+        </div>
+    </form>
+</div>
