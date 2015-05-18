@@ -1,60 +1,136 @@
 <div class="row">
-    <form class="form form-container" method="post" action="#">
-        <div class="col-md-12">
-            <div class="pull-left">
-                <span><i class="fa fa-user-md fa-fw"></i> Customers</span>
-            </div>
-            <div class="pull-right">
-                <button class="btn btn-primary pull-right">Add new</button>
-            </div>
-        </div>
-        <hr>
-        <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
-                    <div class="col-md-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="admin" name="SearchCustomerRoleIds"> Admin
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="registered" name="SearchCustomerRoleIds"> Rergistered
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"><label for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
-                    <div class="col-md-4">
-                        <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"><label for="firstName"><i class="fa fa-question-circle fa-fw"></i> First name</label></div>
-                    <div class="col-md-4">
-                        <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="user.firstName">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"><label for="lastName"><i class="fa fa-question-circle fa-fw"></i> Last name</label></div>
-                    <div class="col-md-4">
-                        <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"><label for="dateOfBirth"><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>
-                    <div class="col-md-4">
-                        <input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3"><label for="company"><i class="glyphicon glyphicon-question-sign"></i> Company</label></div>
-                    <div class="col-md-4">
-                        <input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="user.company">
-                    </div>
-                </div>
-        </div>
-    </form>
+    <div class="col-md-3"><span><i class="fa fa-user-md"></i> Customers </span></div>
+    <div class="col-md-9">
+        <button class="btn btn-primary pull-right">Add new</button>
+    </div>
 </div>
+<hr>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-3"><label class=""><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="admin" name="SearchCustomerRoleIds"> Admin
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="registered" name="SearchCustomerRoleIds"> Rergistered
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"><label for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+        <div class="col-md-4">
+            <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"><label for="firstName"><i class="fa fa-question-circle fa-fw"></i> First name</label></div>
+        <div class="col-md-4">
+            <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="user.firstName">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"><label for="lastName"><i class="fa fa-question-circle fa-fw"></i> Last name</label></div>
+        <div class="col-md-4">
+            <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>
+        <div class="col-md-4">
+            <!--<input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">-->
+            <p class="input-group">
+                <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"><label for="company"><i class="fa fa-question-circle fa-fw"></i> Company</label></div>
+        <div class="col-md-4">
+            <input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="user.company">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-default">Search</button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <table class="table table-responsive table-bordered table-hover" role="grid">
+            <thead style="background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%); background-color: #E3E3E3;">
+                <tr class="row">
+                    <th><input type="checkbox"></th>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>name</th>
+                    <th>Customer roles</th>
+                    <th>Company name</th>
+                    <th>Active</th>
+                    <th>Created on</th>
+                    <th>Last activity</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr class="row" data-ng-repeat="customer in customers">
+                <td><input type="checkbox"></td>
+                <td data-ng-bind="customer.id"></td>
+                <td data-ng-bind="customer.email"></td>
+                <td data-ng-bind="customer.name"></td>
+                <td data-ng-bind="customer.roles"></td>
+                <td data-ng-bind="customer.company"></td>
+                <td><span data-ng-show="customer.active"><i class="fa fa-check"></i></span><span data-ng-show="!customer.active"><i class="fa fa-close"></i></span></td>
+                <td data-ng-bind="customer.createdOn"></td>
+                <td data-ng-bind="customer.lastActivityOn"></td>
+                <td><a href="">Edit</a></td>
+            </tr>
+            <!--<tr class="row">-->
+                <!--<td><input type="checkbox"></td>-->
+                <!--<td>3</td>-->
+                <!--<td>shaishab.cse@gmail.com</td>-->
+                <!--<td>shaishab roy</td>-->
+                <!--<td>Administrator</td>-->
+                <!--<td>Bs-23</td>-->
+                <!--<td><span><i class="fa fa-check"></i></span></td>-->
+                <!--<td>12/3/2013 8:48:33 PM</td>-->
+                <!--<td>12/3/2013 8:48:33 PM</td>-->
+                <!--<td><a href="">Edit</a></td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5 col-sm-12">
+        <!--<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" style="margin: 0;"></pagination>-->
+        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" style="margin: 0;"></pagination>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <select class="form-control" style="width: 68px; float: left">
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+        </select>
+        <span style="float: left ;padding-left: 5px;">items per page</span>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
+        <div class="col-md-9 col-sm-9 col-xs-9">No items to display</div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default"><i class="fa fa-refresh"></i></button></div>
+    </div>
+</div>
+
+<div></div>
