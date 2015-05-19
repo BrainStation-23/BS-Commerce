@@ -5,19 +5,20 @@ var mean = require('meanio'),
   validator = require('validator'),
   validation = require('../../../shopCore/server/framework/validation/validation'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  nodemailer = require('nodemailer');
 
 
 mean.loadConfig();
 
 exports.create = function(req, res, next) {
   var user = new User({
-    name: req.body.name,
-    username: req.body.email.toLowerCase(),
-    email: req.body.email.toLowerCase(),
-    password: req.body.password,
-    phoneNumber: req.body.phoneNumber,
-    status: 'email-not-verified'
+	name: req.body.name,
+	username: req.body.email.toLowerCase(),
+	email: req.body.email.toLowerCase(),
+	password: req.body.password,
+	phoneNumber: req.body.phoneNumber,
+	status: 'email-not-verified'
   });
 
   user.provider = 'local';
@@ -30,125 +31,191 @@ exports.create = function(req, res, next) {
 
   var errors = req.validationErrors();
   if (errors) {
-    return res.status(400).send(errors);
+	return res.status(400).send(errors);
   }
 
   // Hard coded for now. Will address this with the user permissions system in v0.3.5
   user.roles = ['authenticated'];
   user.save(function(err) {
-    if (err) {
-      var modelErrors = [];
-      if (err.errors) {
+	if (err) {
+	  var modelErrors = [];
+	  if (err.errors) {
 
-        for (var x in err.errors) {
-          modelErrors.push({
-            param: x,
-            msg: err.errors[x].message,
-            value: err.errors[x].value
-          });
-        }
+		for (var x in err.errors) {
+		  modelErrors.push({
+			param: x,
+			msg: err.errors[x].message,
+			value: err.errors[x].value
+		  });
+		}
 
-        res.status(400).json(modelErrors);
-      }
-      return res.status(400);
-    }else {
-      req.logIn(user, function (err) {
-        if (err) return next(err);
-        return res.redirect('/');
-      });
-      res.status(200);
-    }
+		res.status(400).json(modelErrors);
+	  }
+	  return res.status(400);
+	}else {
+	  req.logIn(user, function (err) {
+		if (err) return next(err);
+		return res.redirect('/');
+	  });
+	  res.status(200);
+	}
   });
 };
 
 exports.login = function(req, res) {
   req.session.cookie.maxAge = req.body.rememberMe ? mean.config.clean.shop.sessionCookie.maxAgeWhenRemembered  : null;
   res.send({
-    user: req.user
+	user: req.user
   });
 };
 
 exports.logout = function(req, res){
   req.logout();
   res.status(200).json({
-    msg: 'user signed out'
+	msg: 'user signed out'
   });
 };
 
 exports.changePassword = function(req, res) {
   if (!req.user) {
-    return res.status(401).send([{msg: 'Access denied'}]);
+	return res.status(401).send([{msg: 'Access denied'}]);
   }
 
   User
-    .findOne({email: req.user.email}, function (error, user) {
-      if (req.body.password) {
-        req.body.password = user.hashPassword(req.body.password);
-      }
+	  .findOne({email: req.user.email}, function (error, user) {
+		if (req.body.password) {
+		  req.body.password = user.hashPassword(req.body.password);
+		}
 
-      req.assert('password', 'Old password is required').notEmpty();
-      req.assert('password', 'Old password is invalid').equals(user.hashed_password);
-      req.assert('newPassword', 'Password must be between 6-20 characters long').len(6, 20);
-      req.assert('confirmNewPassword', 'New passwords do not match').equals(req.body.newPassword);
+		req.assert('password', 'Old password is required').notEmpty();
+		req.assert('password', 'Old password is invalid').equals(user.hashed_password);
+		req.assert('newPassword', 'Password must be between 6-20 characters long').len(6, 20);
+		req.assert('confirmNewPassword', 'New passwords do not match').equals(req.body.newPassword);
 
-      var errors = req.validationErrors();
-      if (errors) {
-        return res.status(400).send(errors);
-      }
-      user.password = req.body.newPassword;
-      user.save(function (error, doc) {
-        if (error) {
-          return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
-        }
-        return res.status(200).send([{msg: 'Password updated successfully.'}]);
-      });
-    });
+		var errors = req.validationErrors();
+		if (errors) {
+		  return res.status(400).send(errors);
+		}
+		user.password = req.body.newPassword;
+		user.save(function (error, doc) {
+		  if (error) {
+			return res.status(500).send([{msg: 'Unhandled error! Please try again.'}]);
+		  }
+		  return res.status(200).send([{msg: 'Password updated successfully.'}]);
+		});
+	  });
 };
 
 exports.updateProfile = function(req, res){
   if (!req.user) {
-    return res.status(401).send([{msg: 'Access denied'}]);
+	return res.status(401).send([{msg: 'Access denied'}]);
   }
 
   var validationList = validation
-    .add(validator.matches(validator.trim(req.body.name), /(.)+/) , 'You must enter a name', {
-      param: 'name',
-      value: req.body.name
-    })
-    .add(validator.matches(req.body.phoneNumber, /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/), 'Invalid phone number {value}',{
-      param: 'phoneNumber',
-      value: req.body.phoneNumber
-    });
+	.add(validator.matches(validator.trim(req.body.name), /(.)+/) , 'You must enter a name', {
+	  param: 'name',
+	  value: req.body.name
+	})
+	.add(validator.matches(req.body.phoneNumber, /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/), 'Invalid phone number {value}',{
+	  param: 'phoneNumber',
+	  value: req.body.phoneNumber
+	});
 
   if(req.body.addresses && req.body.addresses.length){
-    var addressFieldsRequired = ['addressLine1', 'addressLine2', 'city', 'country', 'postCode'];
+	var addressFieldsRequired = ['addressLine1', 'addressLine2', 'city', 'country', 'postCode'];
 
-    _.forEach(req.body.addresses, function(address){
-      _.forEach(addressFieldsRequired, function(field){
-        validationList.add(address[field] && validator.matches(validator.trim(address[field]), /(.)+/) , ('Invalid ' + field + ' {value}'), {
-          param: field,
-          value: address[field]
-        });
-      });
-    });
+	_.forEach(req.body.addresses, function(address){
+	  _.forEach(addressFieldsRequired, function(field){
+		validationList.add(address[field] && validator.matches(validator.trim(address[field]), /(.)+/) , ('Invalid ' + field + ' {value}'), {
+		  param: field,
+		  value: address[field]
+		});
+	  });
+	});
   }
 
   var errors = validationList.getErrors();
 
   if (errors.length) {
-    return res.status(400).send(errors);
+	return res.status(400).send(errors);
   }
 
   User.update({email:req.user.email}, {
-    $set: {
-      name: req.body.name,
-      phoneNumber: req.body.phoneNumber,
-      addresses: req.body.addresses
-    }
+	$set: {
+	  name: req.body.name,
+	  phoneNumber: req.body.phoneNumber,
+	  addresses: req.body.addresses
+	}
   }, function(error, count){
-    if(error || !count){
-      return res.status(500).send([{msg: 'An unhandled error occurred, please try again'}]);
-    }
-    return res.status(200).send([{msg: 'Profile updated successfully.'}]);
+	if(error || !count){
+	  return res.status(500).send([{msg: 'An unhandled error occurred, please try again'}]);
+	}
+	return res.status(200).send([{msg: 'Profile updated successfully.'}]);
   });
 };
+
+var passwordGenerator =  function(){
+  var newPassword = '';
+  var possibleCharacter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
+
+  for( var i=0; i < 8; i+=1 )
+	newPassword += possibleCharacter.charAt(Math.floor(Math.random() * possibleCharacter.length));
+
+  return newPassword;
+};
+
+var sendMail = function(recipientEmail, subject, htmlBody, callback){
+
+  var smtpTransport = nodemailer.createTransport({
+	service: 'Gmail',
+	auth: {
+	  user: 'qa.aareas900@gmail.com',
+	  pass: 'qa.aareas'
+	}
+  });
+
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+	from: 'BS-Commerce ✔ <info@domain.com>', // sender address
+	to: recipientEmail, // list of receivers
+	subject: subject + ' ✔', // Subject line
+	html: htmlBody // html body
+  };
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+	if(error){
+	  callback(false);
+	}else{
+	  callback(true);
+	}
+
+	// if you don't want to use this transport object anymore, uncomment following line
+	//smtpTransport.close(); // shut down the connection pool, no more messages
+  });
+};
+
+exports.resetForgotPassword = function(req, res) {
+
+  var randomPassword= passwordGenerator();
+  User
+	  .findOne({email: req.body.email}, function (error, user) {
+		if(error || user === null) {
+		  return res.status(500).send('Invalid credential !.');
+		}
+		user.password = randomPassword;
+		user.save(function (error, doc) {
+		  if (error) {
+			return res.status(500).send('Unhandled error! Please try again.');
+		  }
+		  sendMail(req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new password : '+ randomPassword +'</h3>', function(response){
+			if(response) {
+			  return res.status(200).send('New password sent to your email.');
+			}else{
+			  return res.status(500).send('Email not sent!.');
+			}
+		  });
+		});
+	  });
+};
+

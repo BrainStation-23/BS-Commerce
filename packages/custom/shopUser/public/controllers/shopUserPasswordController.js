@@ -27,4 +27,23 @@ angular.module('mean.shopUser').controller('ShopUserPasswordController',['$scope
         $scope.errors = errors;
       });
     };
+
+    $scope.resetForgotPassword = function(){
+      $scope.pleaseWait = true;
+        $scope.resetError = '';
+        $scope.resetSuccess = '';
+      $http.put('/auth/resetForgotPassword', {
+        email: $scope.user.email
+      }).success(function(message){
+
+        $scope.pleaseWait = false;
+        $scope.resetSuccess = message;
+        $scope.resetError = '';
+      }).error(function(error){
+
+        $scope.pleaseWait = false;
+        $scope.resetError=error;
+        $scope.resetSuccess = '';
+      });
+    };
   }]);
