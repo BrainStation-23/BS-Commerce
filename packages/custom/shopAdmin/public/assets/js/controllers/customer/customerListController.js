@@ -8,16 +8,9 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
         //console.log('get customer list controller');
 
         /*--------------------------- start pegination functions ---------------------------------------- */
-        //$scope.totalItems = 150;
-        //$scope.currentPage = 4;
-
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
-
-        //$scope.pageChanged = function() {
-        //    $log.log('Page changed to: ' + $scope.currentPage);
-        //};
 
         $scope.maxSize = 4;
         $scope.bigTotalItems = 175;
@@ -80,7 +73,7 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
             if (mode === 'day') {
                 var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-                for (var i=0;i<$scope.events.length;i++){
+                for (var i=0;i<$scope.events.length; i+=1){
                     var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
                     if (dayToCheck === currentDay) {
@@ -98,26 +91,29 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
         //$scope.customers=[];
         $scope.customers=[
             {
-                "id":3,
-                "email": "shaishab.cse@gmail.com",
-                "name": "shaishab",
-                "roles": "admin",
-                "company": "own",
-                "active": false,
-                "createdOn": "12/3/2013 8:48:33 PM",
-                "lastActivityOn": "12/3/2013 8:48:33 PM"
+                'id':3,
+                'email': 'shaishab.cse@gmail.com',
+                'name': 'shaishab',
+                'roles': ['admin', 'registerd'],
+                'company': 'own',
+                'active': false,
+                'createdOn': '12/3/2013 8:48:33 PM',
+                'lastActivityOn': '12/3/2013 8:48:33 PM'
             },
             {
-                "id":15,
-                "email": "shaishab.roy@bs-23.com",
-                "name": "shaishab roy",
-                "roles": "registered",
-                "company": "bs-23",
-                "active": true,
-                "createdOn": "12/3/2013 8:48:33 PM",
-                "lastActivityOn": "12/3/2013 8:48:33 PM"
+                'id':15,
+                'email': 'shaishab.roy@bs-23.com',
+                'name': 'shaishab roy',
+                'roles': 'registered',
+                'company': 'bs-23',
+                'active': true,
+                'createdOn': '12/3/2013 8:48:33 PM',
+                'lastActivityOn': '12/3/2013 8:48:33 PM'
             }
         ];
 
+        $scope.getCustomer = function(){
+
+        };
     }
 ]);
