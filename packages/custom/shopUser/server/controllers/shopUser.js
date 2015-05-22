@@ -230,7 +230,7 @@ exports.getUser = function(req, res) {
 };
 
 var generateSearchQuery = function(req, callback) {
-	console.dir(req.query.roles +' '+ req.query.email + ' ' + req.query.name);
+	//console.dir(req.query.roles +' '+ req.query.email + ' ' + req.query.name);
 	var searchQuery={};
 	var roles = [];
 	if(req.query.roles !== '') {

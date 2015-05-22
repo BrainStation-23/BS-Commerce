@@ -90,7 +90,7 @@
                 </tr>
             </thead>
             <tbody>
-            <tr class="row" data-ng-repeat="customer in customers">
+            <tr class="row" data-ng-repeat="customer in dispalayCustomer">
                 <td><input type="checkbox"></td>
                 <td data-ng-bind="customer._id"></td>
                 <td data-ng-bind="customer.email"></td>
@@ -101,18 +101,6 @@
                 <!--<td data-ng-bind="customer.lastActivityOn"></td>-->
                 <td><a href="">Edit</a></td>
             </tr>
-            <!--<tr class="row">-->
-                <!--<td><input type="checkbox"></td>-->
-                <!--<td>3</td>-->
-                <!--<td>shaishab.cse@gmail.com</td>-->
-                <!--<td>shaishab roy</td>-->
-                <!--<td>Administrator</td>-->
-                <!--<td>Bs-23</td>-->
-                <!--<td><span><i class="fa fa-check"></i></span></td>-->
-                <!--<td>12/3/2013 8:48:33 PM</td>-->
-                <!--<td>12/3/2013 8:48:33 PM</td>-->
-                <!--<td><a href="">Edit</a></td>-->
-            <!--</tr>-->
             </tbody>
         </table>
     </div>
@@ -121,22 +109,17 @@
 <div class="row bs-fa-color">
     <div class="col-md-5 col-sm-12">
         <!--<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" style="margin: 0;"></pagination>-->
-        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" style="margin: 0;"></pagination>
+        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                    boundary-links="true" rotate="false" num-pages="numPages" items-per-page="numberOfDisplay" style="margin: 0;"></pagination>
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <select class="form-control" style="width: 68px; float: left">
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
-            <option>50</option>
-            <option>100</option>
-        </select>
-        <span style="float: left ;padding-left: 5px;">items per page</span>
+        <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
+        <span>items per page</span>
     </div>
     <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
-        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="!customers">No items to display</div>
-        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="customers">1 - 2 of {{customers.length}}</div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default"><i class="fa fa-refresh"></i></button></div>
+        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="customers.length<1">No items to display</div>
+        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="customers.length>0">{{displayFrom}} - {{displayTo}} of {{customers.length}}</div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchCustomers()"><i class="fa fa-refresh"></i></button></div>
     </div>
 </div>
 

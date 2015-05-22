@@ -5,20 +5,82 @@
 
 angular.module('mean.shopAdmin').controller('customerListController', ['$scope', 'Global', '$stateParams','shopAdminService',
     function($scope, Global, $stateParams, shopAdminService){
-        //console.log('get customer list controller');
 
-        /*--------------------------- start pegination functions ---------------------------------------- */
+        //<editor-fold desc=' variable declaration with initialization '>
+
+        $scope.numberOfDisplayOptions = [10, 15, 20, 50, 100];
+        $scope.numberOfDisplay = 10;
+        $scope.roles ='';
+
+        $scope.maxSize = 4;
+        $scope.bigTotalItems = 10;
+        $scope.bigCurrentPage = 1;
+        $scope.dispalayCustomer = [];
+            //fruits.slice(1, 3);
+
+        //</editor-flod>
+
+        //<editor-fold desc='start custom functions'>
+        $scope.updateRoles = function() {
+            $scope.roles = '';
+            if($scope.roleAdmin)
+                $scope.roles+= 'admin,';
+            if($scope.roleRegistered)
+                $scope.roles+= 'registered,';
+            if($scope.roleAuthenticated)
+                $scope.roles+= 'authenticated';
+        };
+
+        $scope.getDefaultSearchCustomers = function() {
+            $scope.roleAuthenticated = true;
+            $scope.updateRoles();
+            var getDefaultSearchCustomers = shopAdminService.searchCustomers($scope.roles, '', '');
+            getDefaultSearchCustomers.$promise.then(function (customers) {
+                $scope.customers = customers;
+                $scope.bigTotalItems = customers.length;
+                if(customers.length > $scope.numberOfDisplay) {
+                    $scope.dispalayCustomer = $scope.customers.slice(0, $scope.numberOfDisplay);
+                }
+                $scope.displayOptionChange();
+            });
+        };
+
+        $scope.getDefaultSearchCustomers();
+
+        $scope.searchCustomers = function(){
+            var searchCustomer = shopAdminService.searchCustomers($scope.roles, $scope.email, $scope.firstName);
+            searchCustomer.$promise.then(function (customers) {
+                $scope.customers = customers;
+                $scope.bigTotalItems = customers.length;
+                if(customers.length > $scope.numberOfDisplay) {
+                    $scope.dispalayCustomer = $scope.customers.slice(0, $scope.numberOfDisplay);
+                }
+                $scope.displayOptionChange();
+            });
+        };
+
+        $scope.displayOptionChange = function() {
+            if($scope.customers.length > 0) {
+                $scope.displayFrom = 1;
+                $scope.displayTo = $scope.numberOfDisplay;
+                //console.log($scope.customers.length);
+                if($scope.customers.length < $scope.numberOfDisplay) {
+                    $scope.displayTo = $scope.customers.length;
+                }
+            }
+        };
+        //</editor-fold>
+
+        //<editor-fold desc='start pagination functions'>
+
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
 
-        $scope.maxSize = 4;
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
+        //</editor-fold>
 
-        /*--------------------------- end pegination functions ---------------------------------------- */
+        //<editor-fold desc='start date time picker functions'>
 
-        /*--------------------------- start date time picker functions ---------------------------------------- */
         $scope.today = function() {
             $scope.dateOfBirth = new Date();
         };
@@ -85,38 +147,6 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
             return '';
         };
 
-        /*--------------------------- end date time picker functions ---------------------------------------- */
-
-        /*--------------------------- start custome functions ---------------------------------------- */
-        $scope.roles ='';
-
-        $scope.updateRoles = function() {
-            $scope.roles = '';
-            if($scope.roleAdmin)
-                $scope.roles+= 'admin,';
-            if($scope.roleRegistered)
-                $scope.roles+= 'registered,';
-            if($scope.roleAuthenticated)
-                $scope.roles+= 'authenticated';
-        };
-
-        $scope.getDefaultSearchCustomers = function() {
-            $scope.roleAuthenticated = true;
-            $scope.updateRoles();
-            var getDefaultSearchCustomers = shopAdminService.searchCustomers($scope.roles, '', '');
-            getDefaultSearchCustomers.$promise.then(function (customers) {
-                $scope.customers = customers;
-            });
-        };
-
-        $scope.getDefaultSearchCustomers();
-
-        $scope.searchCustomers = function(){
-            var searchCustomer = shopAdminService.searchCustomers($scope.roles, $scope.email, $scope.firstName);
-            searchCustomer.$promise.then(function (customers) {
-                $scope.customers = customers;
-            });
-        };
-
+        //</editor-fold>
     }
 ]);
