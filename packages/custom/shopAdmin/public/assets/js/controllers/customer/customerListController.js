@@ -3,8 +3,8 @@
  */
 'use strict';
 
-angular.module('mean.shopAdmin').controller('customerListController', ['$scope', 'Global', '$stateParams',
-    function($scope, Global, $stateParams){
+angular.module('mean.shopAdmin').controller('customerListController', ['$scope', 'Global', '$stateParams','shopAdminService',
+    function($scope, Global, $stateParams, shopAdminService){
         //console.log('get customer list controller');
 
         /*--------------------------- start pegination functions ---------------------------------------- */
@@ -20,12 +20,12 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
 
         /*--------------------------- start date time picker functions ---------------------------------------- */
         $scope.today = function() {
-            $scope.dt = null;
+            $scope.dateOfBirth = new Date();
         };
         $scope.today();
 
         $scope.clear = function () {
-            $scope.dt = null;
+            $scope.dateOfBirth = null;
         };
 
         // Disable weekend selection
@@ -88,32 +88,35 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
         /*--------------------------- end date time picker functions ---------------------------------------- */
 
         /*--------------------------- start custome functions ---------------------------------------- */
-        //$scope.customers=[];
-        $scope.customers=[
-            {
-                'id':3,
-                'email': 'shaishab.cse@gmail.com',
-                'name': 'shaishab',
-                'roles': ['admin', 'registerd'],
-                'company': 'own',
-                'active': false,
-                'createdOn': '12/3/2013 8:48:33 PM',
-                'lastActivityOn': '12/3/2013 8:48:33 PM'
-            },
-            {
-                'id':15,
-                'email': 'shaishab.roy@bs-23.com',
-                'name': 'shaishab roy',
-                'roles': 'registered',
-                'company': 'bs-23',
-                'active': true,
-                'createdOn': '12/3/2013 8:48:33 PM',
-                'lastActivityOn': '12/3/2013 8:48:33 PM'
-            }
-        ];
+        $scope.roles ='';
 
-        $scope.getCustomer = function(){
-
+        $scope.updateRoles = function() {
+            $scope.roles = '';
+            if($scope.roleAdmin)
+                $scope.roles+= 'admin,';
+            if($scope.roleRegistered)
+                $scope.roles+= 'registered,';
+            if($scope.roleAuthenticated)
+                $scope.roles+= 'authenticated';
         };
+
+        $scope.getDefaultSearchCustomers = function() {
+            $scope.roleAuthenticated = true;
+            $scope.updateRoles();
+            var getDefaultSearchCustomers = shopAdminService.searchCustomers($scope.roles, '', '');
+            getDefaultSearchCustomers.$promise.then(function (customers) {
+                $scope.customers = customers;
+            });
+        };
+
+        $scope.getDefaultSearchCustomers();
+
+        $scope.searchCustomers = function(){
+            var searchCustomer = shopAdminService.searchCustomers($scope.roles, $scope.email, $scope.firstName);
+            searchCustomer.$promise.then(function (customers) {
+                $scope.customers = customers;
+            });
+        };
+
     }
 ]);

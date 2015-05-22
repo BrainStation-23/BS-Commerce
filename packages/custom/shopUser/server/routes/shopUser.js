@@ -31,4 +31,12 @@ module.exports = function(ShopUser, app, auth, database, passport) {
 
   app.route('/auth/profile')
     .put(shopUser.updateProfile);
+
+  app.route('/auth/user')
+      .get(shopUser.getUser);
+
+  app.route('/auth/search/user')
+      .get(shopUser.searchUser);
+
+
 };

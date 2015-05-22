@@ -219,3 +219,57 @@ exports.resetForgotPassword = function(req, res) {
 	  });
 };
 
+exports.getUser = function(req, res) {
+	User
+		.find({},function(error, user) {
+			if(error || user === null) {
+				return res.status(500).send(error);
+			}
+			return res.status(200).send(user);
+		});
+};
+
+var generateSearchQuery = function(req, callback) {
+	console.dir(req.query.roles +' '+ req.query.email + ' ' + req.query.name);
+	var searchQuery={};
+	var roles = [];
+	if(req.query.roles !== '') {
+		roles = req.query.roles.split(',');
+	}
+	if(req.query.roles !== '' && req.query.email !== '' && req.query.name !== ''){
+		searchQuery = { $and: [{roles: { $in: roles} },{ email: req.query.email, name: req.query.name }]};
+	}
+	else if(req.query.roles !== '' && req.query.email !== '' && req.query.name === ''){
+		searchQuery = { $and: [{ roles: { $in: roles }},{ email: req.query.email }]};
+	}
+	else if(req.query.roles !== '' && req.query.email === '' && req.query.name !== ''){
+		searchQuery = { $and: [{ roles: { $in: roles }},{ name: req.query.name }]};
+	}
+	else if(req.query.roles !== '' && req.query.email === '' && req.query.name === ''){
+		searchQuery = {roles: {$in: roles }};
+	}
+	else if(req.query.email !== '' && req.query.name !== ''){
+		searchQuery = {email: req.query.email,name: req.query.name};
+	}
+	else if(req.query.email !== '' && req.query.name === '') {
+		searchQuery = {email: req.query.email};
+	}
+	else if(req.query.email === '' && req.query.name !== '') {
+		searchQuery = {name: req.query.name};
+	}
+
+	callback(searchQuery);
+};
+
+exports.searchUser = function(req, res) {
+	generateSearchQuery(req, function(searchQuery) {
+		User
+			.find(searchQuery, function(error, user) {
+				if(error || user === null) {
+					return res.status(500).send(error);
+				}
+				return res.status(200).send(user);
+			});
+	});
+};
+

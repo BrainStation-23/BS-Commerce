@@ -6,58 +6,66 @@
 </div>
 <hr>
 
-<form class="form-horizontal bs-fa-color">
+<form class="form-horizontal bs-fa-color" data-ng-submit="searchCustomers()">
     <div class="form-group">
-        <div class="col-md-3"><label class=""><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
+        <div class="col-md-3"  style="padding-top: 34px;"><label><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="admin" name="SearchCustomerRoleIds"> Admin
+                    <input type="checkbox" value="admin" data-ng-model="roleAdmin" ng-change="updateRoles()"> Admin
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="registered" name="SearchCustomerRoleIds"> Rergistered
+                    <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles()"> Rergistered
                 </label>
             </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" ng-change="updateRoles()"> authenticated
+                </label>
+            </div>
+            <!--<label ng-repeat="role in roles">-->
+                <!--<input type="checkbox" data-ng-model="role" checklist-value="role" ng-change="roles"> {{role}}-->
+            <!--</label>-->
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-3"><label for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
         <div class="col-md-4">
-            <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
+            <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="email">
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-3"><label for="firstName"><i class="fa fa-question-circle fa-fw"></i> First name</label></div>
         <div class="col-md-4">
-            <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="user.firstName">
+            <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="firstName">
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-3"><label for="lastName"><i class="fa fa-question-circle fa-fw"></i> Last name</label></div>
         <div class="col-md-4">
-            <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">
+            <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="lastName">
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>
-        <div class="col-md-4">
-            <!--<input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">-->
-            <p class="input-group">
-                <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3"><label for="company"><i class="fa fa-question-circle fa-fw"></i> Company</label></div>
-        <div class="col-md-4">
-            <input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="user.company">
-        </div>
-    </div>
+    <!--<div class="form-group">-->
+        <!--<div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>-->
+        <!--<div class="col-md-4">-->
+            <!--&lt;!&ndash;<input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">&ndash;&gt;-->
+            <!--<div class="input-group">-->
+                <!--<input type="date" class="form-control" datepicker-popup data-ng-model="dateOfBirth" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"   close-text="Close">-->
+              <!--<span class="input-group-btn">-->
+                <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+              <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<div class="col-md-3"><label for="company"><i class="fa fa-question-circle fa-fw"></i> Company</label></div>-->
+        <!--<div class="col-md-4">-->
+            <!--<input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="company">-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="form-group">
         <div class="col-sm-3">
             <button type="submit" class="btn btn-default">Search</button>
@@ -75,24 +83,22 @@
                     <th>Email</th>
                     <th>name</th>
                     <th>Customer roles</th>
-                    <th>Company name</th>
                     <th>Active</th>
                     <th>Created on</th>
-                    <th>Last activity</th>
+                    <!--<th>Last activity</th>-->
                     <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
             <tr class="row" data-ng-repeat="customer in customers">
                 <td><input type="checkbox"></td>
-                <td data-ng-bind="customer.id"></td>
+                <td data-ng-bind="customer._id"></td>
                 <td data-ng-bind="customer.email"></td>
                 <td data-ng-bind="customer.name"></td>
                 <td data-ng-bind="customer.roles"></td>
-                <td data-ng-bind="customer.company"></td>
-                <td><span data-ng-show="customer.active"><i class="fa fa-check"></i></span><span data-ng-show="!customer.active"><i class="fa fa-close"></i></span></td>
-                <td data-ng-bind="customer.createdOn"></td>
-                <td data-ng-bind="customer.lastActivityOn"></td>
+                <td class="text-center"><span data-ng-show="customer.status === 'active' "><i class="fa fa-check"></i></span><span data-ng-show="customer.status !== 'active' "><i class="fa fa-close"></i></span></td>
+                <td data-ng-bind="customer.registrationDate"></td>
+                <!--<td data-ng-bind="customer.lastActivityOn"></td>-->
                 <td><a href="">Edit</a></td>
             </tr>
             <!--<tr class="row">-->
