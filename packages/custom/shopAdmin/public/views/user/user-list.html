@@ -1,14 +1,14 @@
 <div class="row bs-fa-color">
-    <div class="col-md-3"><span><i class="fa fa-user-md"></i> Customers </span></div>
+    <div class="col-md-3"><span><i class="fa fa-user-md"></i> Users </span></div>
     <div class="col-md-9">
         <button class="btn btn-primary pull-right">Add new</button>
     </div>
 </div>
 <hr>
 
-<form class="form-horizontal bs-fa-color" data-ng-submit="searchCustomers()">
+<form class="form-horizontal bs-fa-color" data-ng-submit="searchUsers()">
     <div class="form-group">
-        <div class="col-md-3"  style="padding-top: 34px;"><label><i class="fa fa-question-circle fa-fw"></i> Customers roles</label></div>
+        <div class="col-md-3"  style="padding-top: 34px;"><label><i class="fa fa-question-circle fa-fw"></i> Users Roles</label></div>
         <div class="col-md-4">
             <div class="checkbox">
                 <label>
@@ -17,7 +17,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles()"> Rergistered
+                    <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles()"> Registered
                 </label>
             </div>
             <div class="checkbox">
@@ -55,22 +55,22 @@
                     <th>ID</th>
                     <th>Email</th>
                     <th>Name</th>
-                    <th>Customer roles</th>
+                    <th>Users roles</th>
                     <th>Active</th>
                     <th>Created on</th>
                     <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
-            <tr class="row" data-ng-repeat="customer in dispalayCustomer">
+            <tr class="row" data-ng-repeat="user in dispalayUsers">
                 <td><input type="checkbox"></td>
-                <td data-ng-bind="customer._id"></td>
-                <td data-ng-bind="customer.email"></td>
-                <td data-ng-bind="customer.name"></td>
-                <td data-ng-bind="customer.roles"></td>
-                <td class="text-center"><span data-ng-show="customer.status === 'active' "><i class="fa fa-check"></i></span><span data-ng-show="customer.status !== 'active' "><i class="fa fa-close"></i></span></td>
-                <td data-ng-bind="customer.registrationDate"></td>
-                <td><a href="">Edit</a></td>
+                <td data-ng-bind="user._id"></td>
+                <td data-ng-bind="user.email"></td>
+                <td data-ng-bind="user.name"></td>
+                <td data-ng-bind="user.roles"></td>
+                <td class="text-center"><span data-ng-show="user.status === 'active' "><i class="fa fa-check"></i></span><span data-ng-show="user.status !== 'active' "><i class="fa fa-close"></i></span></td>
+                <td data-ng-bind="user.registrationDate"></td>
+                <td><a ui-sref="User.Edit({userId: user._id})">Edit</a></td>
             </tr>
             </tbody>
         </table>
@@ -88,9 +88,9 @@
         <span>items per page</span>
     </div>
     <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
-        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="customers.length<1">No items to display</div>
-        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="customers.length>0">{{displayFrom}} - {{displayTo}} of {{customers.length}}</div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchCustomers()"><i class="fa fa-refresh"></i></button></div>
+        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="users.length<1">No items to display</div>
+        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="users.length>0">{{displayFrom}} - {{displayTo}} of {{users.length}}</div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchUsers()"><i class="fa fa-refresh"></i></button></div>
     </div>
 </div>
 

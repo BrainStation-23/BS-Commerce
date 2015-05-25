@@ -1,0 +1,99 @@
+<div class="bs-fa-color">
+    <div class="row">
+        <div class="col-md-5"><span><i class="fa fa-user-md"></i>   Edit User details - {{user.name}} </span></div>
+        <div class="col-md-7 pull-right text-right">
+            <button class="btn btn-default">Save</button>
+            <button class="btn btn-default">Save and Continue Edit</button>
+            <button class="btn btn-default">Delete</button>
+        </div>
+    </div>
+    <hr>
+    <tabset>
+        <tab heading="User Info">
+            <form class="form-horizontal" style="padding-top: 10px;">
+                <div class="form-group">
+                    <div class="col-md-3"><label for="userId"><i class="fa fa-question-circle fa-fw"></i> User ID</label></div>
+                    <div class="col-md-4">
+                        <!--<input id="userId" class="form-control"  type="text"  ng-model="user._id" readonly>-->
+                        <span id="userId">{{user._id}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                    <div class="col-md-4">
+                        <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')"
+                               onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label for="password"><i class="fa fa-question-circle fa-fw"></i> Password</label></div>
+                    <div class="col-md-4">
+                        <input id="password" placeholder="password" class="form-control" type="password" data-ng-model="password">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default">Change Password</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label for="fullName"><i class="fa fa-question-circle fa-fw"></i> Full name</label></div>
+                    <div class="col-md-4">
+                        <input id="fullName" placeholder="full name" class="form-control" type="text"  data-ng-model="user.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label for="male"><i class="fa fa-question-circle fa-fw"></i> Gender</label></div>
+                    <div class="col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="male" id="male" value="male"> Male
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="female" id="female" value="female"> Female
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label for="active"><i class="fa fa-question-circle fa-fw"></i> Active</label></div>
+                    <div class="col-md-4">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="active" value="active">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Created on </label></div>
+                    <div class="col-md-4">
+                        <span> {{user.registrationDate}} </span>
+                    </div>
+                </div>
+            </form>
+        </tab>
+        <tab heading="User Roles">
+            <div>
+                <div class="col-md-2"  style="padding-top: 34px;"><label><i class="fa fa-question-circle fa-fw"></i> Roles</label></div>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" ng-change="updateRoles()"> Admin
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles()"> Rergistered
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" ng-change="updateRoles()"> authenticated
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Addresses">
+            Long Labeled Justified content
+        </tab>
+        <tab heading="Reward Points">
+            Long Labeled Justified content
+        </tab>
+    </tabset>
+</div>

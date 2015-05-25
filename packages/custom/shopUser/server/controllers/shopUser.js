@@ -229,6 +229,16 @@ exports.getUser = function(req, res) {
 		});
 };
 
+exports.getUserById = function(req, res) {
+	User
+		.findOne({_id: req.params.userId},function(error, user) {
+			if(error || user === null) {
+				return res.status(400).send(error);
+			}
+			return res.status(200).send(user);
+		});
+};
+
 var generateSearchQuery = function(req, callback) {
 	//console.dir(req.query.roles +' '+ req.query.email + ' ' + req.query.name);
 	var searchQuery={};
