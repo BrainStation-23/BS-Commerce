@@ -35,9 +35,12 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
             $scope.roleAuthenticated = true;
             $scope.updateRoles();
             var getDefaultSearchCustomers = shopAdminService.searchCustomers($scope.roles, '', '');
+
             getDefaultSearchCustomers.$promise.then(function (customers) {
                 $scope.customers = customers;
                 $scope.bigTotalItems = customers.length;
+                $scope.dispalayCustomer = customers;
+
                 if(customers.length > $scope.numberOfDisplay) {
                     $scope.dispalayCustomer = $scope.customers.slice(0, $scope.numberOfDisplay);
                 }
@@ -48,10 +51,13 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
         $scope.getDefaultSearchCustomers();
 
         $scope.searchCustomers = function(){
-            var searchCustomer = shopAdminService.searchCustomers($scope.roles, $scope.email, $scope.firstName);
+            var searchCustomer = shopAdminService.searchCustomers($scope.roles, $scope.email, $scope.fullName);
+
             searchCustomer.$promise.then(function (customers) {
                 $scope.customers = customers;
                 $scope.bigTotalItems = customers.length;
+                $scope.dispalayCustomer = customers;
+
                 if(customers.length > $scope.numberOfDisplay) {
                     $scope.dispalayCustomer = $scope.customers.slice(0, $scope.numberOfDisplay);
                 }
@@ -60,12 +66,20 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
         };
 
         $scope.displayOptionChange = function() {
+
             if($scope.customers.length > 0) {
                 $scope.displayFrom = 1;
                 $scope.displayTo = $scope.numberOfDisplay;
-                //console.log($scope.customers.length);
-                if($scope.customers.length < $scope.numberOfDisplay) {
+
+                if($scope.customers.length <= $scope.numberOfDisplay) {
                     $scope.displayTo = $scope.customers.length;
+
+                    if($scope.dispalayCustomer.length !== $scope.customers.length)
+                        $scope.dispalayCustomer = $scope.customers;
+                }
+                else if($scope.customers.length > $scope.numberOfDisplay) {
+                    $scope.displayTo = $scope.numberOfDisplay;
+                    $scope.dispalayCustomer = $scope.customers.slice(0, $scope.numberOfDisplay);
                 }
             }
         };
@@ -73,78 +87,18 @@ angular.module('mean.shopAdmin').controller('customerListController', ['$scope',
 
         //<editor-fold desc='start pagination functions'>
 
+        $scope.changePagination =function(pageNo) {
+            $scope.displayFrom = (pageNo - 1) * 10 + 1;
+            $scope.displayTo = $scope.displayFrom + $scope.numberOfDisplay - 1;
+
+            if($scope.displayTo > $scope.customers.length)
+                $scope.displayTo = $scope.displayFrom + ($scope.customers.length - $scope.displayFrom);
+            $scope.dispalayCustomer = $scope.customers.slice($scope.displayFrom-1, $scope.displayTo);
+        };
+
         $scope.setPage = function (pageNo) {
-            $scope.currentPage = pageNo;
-        };
-
-        //</editor-fold>
-
-        //<editor-fold desc='start date time picker functions'>
-
-        $scope.today = function() {
-            $scope.dateOfBirth = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.dateOfBirth = null;
-        };
-
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
-
-        $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
-        };
-        $scope.toggleMin();
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 2);
-        $scope.events =
-            [
-                {
-                    date: tomorrow,
-                    status: 'full'
-                },
-                {
-                    date: afterTomorrow,
-                    status: 'partially'
-                }
-            ];
-
-        $scope.getDayClass = function(date, mode) {
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-                for (var i=0;i<$scope.events.length; i+=1){
-                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
+            $scope.bigCurrentPage = pageNo;
+            $scope.changePagination(pageNo);
         };
 
         //</editor-fold>

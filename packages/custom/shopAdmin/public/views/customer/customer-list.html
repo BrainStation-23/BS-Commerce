@@ -25,9 +25,6 @@
                     <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" ng-change="updateRoles()"> authenticated
                 </label>
             </div>
-            <!--<label ng-repeat="role in roles">-->
-                <!--<input type="checkbox" data-ng-model="role" checklist-value="role" ng-change="roles"> {{role}}-->
-            <!--</label>-->
         </div>
     </div>
     <div class="form-group">
@@ -37,35 +34,11 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-3"><label for="firstName"><i class="fa fa-question-circle fa-fw"></i> First name</label></div>
+        <div class="col-md-3"><label for="fullName"><i class="fa fa-question-circle fa-fw"></i> Full name</label></div>
         <div class="col-md-4">
-            <input id="firstName" placeholder="First Name" class="form-control" type="text" data-ng-model="firstName">
+            <input id="fullName" placeholder="full name" class="form-control" type="text" data-ng-model="fullName">
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-3"><label for="lastName"><i class="fa fa-question-circle fa-fw"></i> Last name</label></div>
-        <div class="col-md-4">
-            <input id="lastName" placeholder="last Name" class="form-control" type="text" data-ng-model="lastName">
-        </div>
-    </div>
-    <!--<div class="form-group">-->
-        <!--<div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Date of birth</label></div>-->
-        <!--<div class="col-md-4">-->
-            <!--&lt;!&ndash;<input id="dateOfBirth" placeholder="last Name" class="form-control" type="text" data-ng-model="user.lastName">&ndash;&gt;-->
-            <!--<div class="input-group">-->
-                <!--<input type="date" class="form-control" datepicker-popup data-ng-model="dateOfBirth" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"   close-text="Close">-->
-              <!--<span class="input-group-btn">-->
-                <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
-              <!--</span>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<div class="col-md-3"><label for="company"><i class="fa fa-question-circle fa-fw"></i> Company</label></div>-->
-        <!--<div class="col-md-4">-->
-            <!--<input id="company" placeholder="Company name" class="form-control" type="text" data-ng-model="company">-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="form-group">
         <div class="col-sm-3">
             <button type="submit" class="btn btn-default">Search</button>
@@ -81,11 +54,10 @@
                     <th><input type="checkbox"></th>
                     <th>ID</th>
                     <th>Email</th>
-                    <th>name</th>
+                    <th>Name</th>
                     <th>Customer roles</th>
                     <th>Active</th>
                     <th>Created on</th>
-                    <!--<th>Last activity</th>-->
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -98,7 +70,6 @@
                 <td data-ng-bind="customer.roles"></td>
                 <td class="text-center"><span data-ng-show="customer.status === 'active' "><i class="fa fa-check"></i></span><span data-ng-show="customer.status !== 'active' "><i class="fa fa-close"></i></span></td>
                 <td data-ng-bind="customer.registrationDate"></td>
-                <!--<td data-ng-bind="customer.lastActivityOn"></td>-->
                 <td><a href="">Edit</a></td>
             </tr>
             </tbody>
@@ -108,9 +79,9 @@
 
 <div class="row bs-fa-color">
     <div class="col-md-5 col-sm-12">
-        <!--<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" style="margin: 0;"></pagination>-->
         <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                    boundary-links="true" rotate="false" num-pages="numPages" items-per-page="numberOfDisplay" style="margin: 0;"></pagination>
+                    boundary-links="true" rotate="false" num-pages="numPages"
+                    items-per-page="numberOfDisplay"  ng-change="setPage(bigCurrentPage)" style="margin: 0;"></pagination>
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
         <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
