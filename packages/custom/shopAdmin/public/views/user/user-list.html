@@ -72,26 +72,26 @@
                 <td data-ng-bind="user.registrationDate"></td>
                 <td><a ui-sref="User.Edit({userId: user._id})">Edit</a></td>
             </tr>
+            <tr class="row" >
+                <td colspan="8" style="background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%); background-color: #E3E3E3;">
+                    <div class="col-md-5 col-sm-12">
+                        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                                    boundary-links="true" rotate="false" num-pages="numPages"
+                                    items-per-page="numberOfDisplay"  ng-change="setPage(bigCurrentPage)" style="margin: 0;"></pagination>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
+                        <span>items per page</span>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
+                        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="users.length<1">No items to display</div>
+                        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="users.length>0">{{displayFrom}} - {{displayTo}} of {{users.length}} items</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchUsers()"><i class="fa fa-refresh"></i></button></div>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-<div class="row bs-fa-color">
-    <div class="col-md-5 col-sm-12">
-        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
-                    boundary-links="true" rotate="false" num-pages="numPages"
-                    items-per-page="numberOfDisplay"  ng-change="setPage(bigCurrentPage)" style="margin: 0;"></pagination>
-    </div>
-    <div class="col-md-4 col-sm-12 col-xs-12">
-        <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
-        <span>items per page</span>
-    </div>
-    <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
-        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="users.length<1">No items to display</div>
-        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="users.length>0">{{displayFrom}} - {{displayTo}} of {{users.length}}</div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchUsers()"><i class="fa fa-refresh"></i></button></div>
-    </div>
-</div>
-
 <div></div>
