@@ -283,3 +283,18 @@ exports.searchUser = function(req, res) {
 	});
 };
 
+exports.changeUserPassword = function(req, res) {
+	User
+		.findOne({_id: req.body.userId}, function(error, user) {
+			if(error || user === null) {
+				return res.sendStatus(400);
+			}
+			user.password = req.body.password;
+			user.save(function(error, doc) {
+				if (error) {
+					return res.sendStatus(500);
+				}
+				return res.sendStatus(200);
+			});
+		});
+};

@@ -18,13 +18,16 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
             return searchResponse;
         },
         getUserById: function(userId) {
-            //var getUser = $resource('/auth/userById', {}, {
-            //    'get': {method: 'GET', isArray: true}
-            //});
-            //var getResponse = getUser.get({userId: userId});
-            //return getResponse;
             var userById = $resource('/auth/user/:userId', {userId:'@userId'});
             return userById.get({userId: userId});
+        },
+        changeUserPassword: function(userId, password) {
+            //var changePassword = $resource('/auth/user/:userId/:password', {userId: '@userId', password: '@password'});
+            //return changePassword.put({userId: userId, password: password});
+            var changePassword = $resource('/auth/user/changePassword', {userId: '@userId', password: '@password'}, {
+                'update': {method: 'PUT'}
+            });
+            return changePassword.update({userId: userId, password: password});
         }
     };
   }
