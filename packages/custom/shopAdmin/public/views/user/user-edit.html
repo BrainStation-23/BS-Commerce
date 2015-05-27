@@ -1,13 +1,23 @@
 <div class="bs-fa-color row">
     <div class="row">
-        <div class="col-md-5"><span><i class="fa fa-user-md"></i>   Edit User details - {{user.name}} </span></div>
-        <div class="col-md-7 pull-right text-right">
-            <button class="btn btn-default">Save</button>
-            <button class="btn btn-default">Save and Continue Edit</button>
-            <button class="btn btn-default">Delete</button>
+        <div class="col-md-6">
+            <span><i class="fa fa-user-md"></i>   Edit User details - {{user.name}} </span>
+            <span>(<a data-ui-sref="User.List">back to customer list</a>)</span>
+        </div>
+
+        <div class="col-md-6 pull-right text-right">
+            <button class="btn btn-default" data-ng-click="updateUserInfo()">Save</button>
+            <button class="btn btn-default" data-ng-click="updateUserInfo()">Save and Continue Edit</button>
+            <button class="btn btn-default" data-ng-click="deleteUserById()">Delete</button>
         </div>
     </div>
     <hr>
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4 alert-success text-center" data-ng-show="updateSuccessMsg"><label>{{updateSuccessMsg}}</label></div>
+        <div class="col-md-offset-4 col-md-4 alert-danger text-center" data-ng-show="updateErrorMsg"><label>{{updateErrorMsg}}</label></div>
+        <div class="col-md-offset-4 col-md-4 alert-success text-center" data-ng-show="deleteSuccessMsg"><label>{{deleteSuccessMsg}}</label></div>
+        <div class="col-md-offset-4 col-md-4 alert-danger text-center" data-ng-show="deleteErrorMsg"><label>{{deleteErrorMsg}}</label></div>
+    </div>
     <div class="row" style="border: 2px solid #C5C5C5;">
         <tabset>
             <tab heading="User Info">
@@ -25,6 +35,12 @@
                             <div class="col-md-4">
                                 <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')"
                                        onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="phoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
+                            <div class="col-md-4">
+                                <input id="phoneNumber" class="form-control"  type="text"  ng-model="user.phoneNumber">
                             </div>
                         </div>
                         <div class="form-group">
@@ -128,7 +144,7 @@
                             <div class="form-group">
                                 <div class="col-md-3"><label for="addressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
                                 <div class="col-md-4">
-                                    <input id="addressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="newAddress.addressLine1">
+                                    <input id="addressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="newAddress.addressLine1" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -140,19 +156,19 @@
                             <div class="form-group">
                                 <div class="col-md-3"><label for="city"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
                                 <div class="col-md-4">
-                                    <input id="city" placeholder="city" class="form-control" type="text"  data-ng-model="newAddress.city">
+                                    <input id="city" placeholder="city" class="form-control" type="text"  data-ng-model="newAddress.city" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-3"><label for="country"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
                                 <div class="col-md-4">
-                                    <input id="country" placeholder="country" class="form-control" type="text"  data-ng-model="newAddress.country">
+                                    <input id="country" placeholder="country" class="form-control" type="text"  data-ng-model="newAddress.country" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-3"><label for="postCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
                                 <div class="col-md-4">
-                                    <input id="postCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="newAddress.postCode">
+                                    <input id="postCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="newAddress.postCode" required>
                                 </div>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Save New Address">
@@ -206,8 +222,8 @@
                 </div>
             </tab>
             <tab heading="Reward Points">
-                <div>
-                    <table class="table table-responsive table-bordered table-striped" role="grid">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" role="grid">
                         <thead style="background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%); background-color: #E3E3E3;">
                         <tr class="row">
                             <th>Points</th>
@@ -219,7 +235,7 @@
                         <tbody>
                         <tr class="row">
                             <td></td>
-                            <td></td>
+                            <td>Reward Points options coming soon..</td>
                             <td></td>
                             <td></td>
                         </tr>

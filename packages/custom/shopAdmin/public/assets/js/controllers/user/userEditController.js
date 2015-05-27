@@ -53,9 +53,11 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
             $scope.newAddress = {};
             if(active) {
                 $scope.activeAddNewAddress = true;
+                $scope.addressTableBtnsDisable = true;
             }
             else if(!active) {
                 $scope.activeAddNewAddress = false;
+                $scope.addressTableBtnsDisable = false;
             }
         };
 
@@ -69,6 +71,7 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
             };
             $scope.user.addresses.push(address);
             $scope.activeAddNewAddress = false;
+            $scope.addressTableBtnsDisable = false;
         };
 
         $scope.deleteAddress = function(addressIndex) {
@@ -82,7 +85,6 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
             if(active) {
                 $scope.activeEditAddress =true;
                 Object.assign($scope.editAddress, $scope.user.addresses[addressIndex]);
-                //$scope.editAddress = $scope.user.addresses[addressIndex];
                 $scope.editAddress.index = addressIndex;
                 $scope.addressTableBtnsDisable = true;
             }
@@ -104,6 +106,41 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
             $scope.addressTableBtnsDisable = false;
             $scope.editAddress = {};
             $scope.activeEditAddress =false;
+        };
+
+        $scope.updateUserInfo = function() {
+            var updateResponse = userService.updateUserInfo($scope.user);
+            updateResponse.$promise.then(function(responseData) {
+                $scope.updateSuccessMsg = responseData.msg;
+                    $timeout(function() {
+                        $scope.updateSuccessMsg = '';
+                    },2000);
+            },
+            function(error) {
+                $scope.updateErrorMsg = error.msg;
+                $timeout(function() {
+                    $scope.updateErrorMsg = '';
+                },2000);
+            });
+        };
+
+        $scope.deleteUserById = function() {
+            if(confirm('Are you sure you want to delete this user ?')) {
+                var deleteUserResponse = userService.deleteUserById($scope.user._id);
+                deleteUserResponse.$promise.then(function(responseData) {
+                        $scope.deleteSuccessMsg = responseData.msg;
+                        $timeout(function() {
+                            $scope.deleteSuccessMsg = '';
+                            $location.path('/User/List');
+                        },3000);
+                    },
+                    function(error) {
+                        $scope.deleteErrorMsg = error.msg;
+                        $timeout(function() {
+                            $scope.deleteErrorMsg = '';
+                        },3000);
+                    });
+            }
         };
     }
 ]);

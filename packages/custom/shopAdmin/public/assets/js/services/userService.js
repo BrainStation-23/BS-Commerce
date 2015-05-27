@@ -22,12 +22,22 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
             return userById.get({userId: userId});
         },
         changeUserPassword: function(userId, password) {
-            //var changePassword = $resource('/auth/user/:userId/:password', {userId: '@userId', password: '@password'});
-            //return changePassword.put({userId: userId, password: password});
             var changePassword = $resource('/auth/user/changePassword', {userId: '@userId', password: '@password'}, {
                 'update': {method: 'PUT'}
             });
             return changePassword.update({userId: userId, password: password});
+        },
+        updateUserInfo: function(user) {
+            var updateUser = $resource('/auth/user/update', {}, {
+               'update': {method: 'PUT'}
+            });
+            return updateUser.update(user);
+        },
+        deleteUserById: function(userId) {
+            var deleteUser = $resource('/auth/user/delete', {userId: '@userId'}, {
+                'delete': {method: 'DELETE'}
+            });
+            return deleteUser.delete({userId: userId});
         }
     };
   }

@@ -37,8 +37,14 @@ module.exports = function(ShopUser, app, auth, database, passport) {
 
   app.route('/auth/search/user')
       .get(shopUser.searchUser);
+
   app.route('/auth/user/changePassword')
       .put(shopUser.changeUserPassword);
 
+  app.route('/auth/user/update')
+      .put(shopUser.updateUserInfo);
+
+  app.route('/auth/user/delete')
+      .delete(shopUser.removeUserById);
 
 };

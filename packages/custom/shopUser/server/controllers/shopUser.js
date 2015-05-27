@@ -298,3 +298,49 @@ exports.changeUserPassword = function(req, res) {
 			});
 		});
 };
+
+exports.updateUserInfo = function(req, res) {
+	if (!req.user) {
+		return res.status(401).send([{msg: 'Access denied'}]);
+	}
+	//if(req.body.addresses && req.body.addresses.length){
+	//	var addressFieldsRequired = ['addressLine1', 'addressLine2', 'city', 'country', 'postCode'];
+    //
+	//	_.forEach(req.body.addresses, function(address){
+	//		_.forEach(addressFieldsRequired, function(field){
+	//			validationList.add(address[field] && validator.matches(validator.trim(address[field]), /(.)+/) , ('Invalid ' + field + ' {value}'), {
+	//				param: field,
+	//				value: address[field]
+	//			});
+	//		});
+	//	});
+	//}
+
+	User.update({_id:req.body._id}, {
+		$set: {
+			email: req.body.email,
+			name: req.body.name,
+			phoneNumber: req.body.phoneNumber,
+			addresses: req.body.addresses,
+			roles: req.body.roles
+		}
+	}, function(error, count){
+		if(error || !count){
+			return res.status(500).send({msg: 'An unhandled error occurred, please try again'});
+		}
+		return res.status(200).send({msg: 'Profile updated successfully.'});
+	});
+
+};
+
+exports.removeUserById = function(req, res) {
+	if (!req.user) {
+		return res.status(401).send([{msg: 'Access denied'}]);
+	}
+	User.findByIdAndRemove(req.query.userId, function(err, doc) {
+		if(err) {
+			return res.status(500).send({msg: 'An unhandled error occurred, please try again'});
+		}
+		return res.status(200).send({msg: 'Profile delete successfully.'});
+	});
+};
