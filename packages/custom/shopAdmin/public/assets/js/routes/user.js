@@ -19,6 +19,10 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 url: '/Edit/:userId',
                 templateUrl: 'shopAdmin/views/user/user-edit.html',
                 controller: 'userEditController'
+            }).state('User.Create', {
+                url: '/Create',
+                templateUrl: 'shopAdmin/views/user/user-create.html',
+                controller: 'userCreateController'
             });
     }
 ]);

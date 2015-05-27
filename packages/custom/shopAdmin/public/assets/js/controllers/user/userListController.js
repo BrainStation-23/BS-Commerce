@@ -3,8 +3,8 @@
  */
 'use strict';
 
-angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Global', '$stateParams','userService',
-    function($scope, Global, $stateParams, userService){
+angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Global', '$stateParams','userService', '$location',
+    function($scope, Global, $stateParams, userService, $location){
 
         //<editor-fold desc=' variable declaration with initialization '>
 
@@ -82,6 +82,10 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
                     $scope.dispalayUsers = $scope.users.slice(0, $scope.numberOfDisplay);
                 }
             }
+        };
+
+        $scope.showAddUserForm = function() {
+            $location.path('/User/Create');
         };
         //</editor-fold>
 
