@@ -68,7 +68,7 @@
                 <td data-ng-bind="user.email"></td>
                 <td data-ng-bind="user.name"></td>
                 <td data-ng-bind="user.roles"></td>
-                <td class="text-center"><span data-ng-show="user.status === 'active' "><i class="fa fa-check"></i></span><span data-ng-show="user.status !== 'active' "><i class="fa fa-close"></i></span></td>
+                <td class="text-center"><span data-ng-show="user.active"><i class="fa fa-check"></i></span><span data-ng-show="!user.active"><i class="fa fa-close"></i></span></td>
                 <td data-ng-bind="user.registrationDate"></td>
                 <td><a ui-sref="User.Edit({userId: user._id})">Edit</a></td>
             </tr>

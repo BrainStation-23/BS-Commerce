@@ -64,10 +64,10 @@
                             <div class="col-md-3"><label for="male"><i class="fa fa-question-circle fa-fw"></i> Gender</label></div>
                             <div class="col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="male" value="male"> Male
+                                    <input type="radio" name="gender" id="male"  data-ng-model="user.gender"value="male"> Male
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="female" value="female"> Female
+                                    <input type="radio" name="gender" id="female" data-ng-model="user.gender" value="female"> Female
                                 </label>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <div class="col-md-3"><label for="active"><i class="fa fa-question-circle fa-fw"></i> Active</label></div>
                             <div class="col-md-4">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="active" value="active">
+                                    <input type="checkbox" id="active" data-ng-model="user.active" value="active">
                                 </label>
                             </div>
                         </div>

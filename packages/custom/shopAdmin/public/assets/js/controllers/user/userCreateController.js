@@ -15,14 +15,7 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
         $scope.updateRoles = function( roleName) {
             if($scope.user.roles.indexOf(roleName) === -1)
                 $scope.user.roles.push(roleName);
-            else if($scope.user.roles.indexOf(roleName) >= -1)
-                $scope.user.roles.pop(roleName);
-        };
-
-        $scope.updateRoles = function( roleName) {
-            if($scope.user.roles.indexOf(roleName) === -1)
-                $scope.user.roles.push(roleName);
-            else if($scope.user.roles.indexOf(roleName) >= -1)
+            else if($scope.user.roles.indexOf(roleName) > -1)
                 $scope.user.roles.pop(roleName);
         };
 
@@ -86,19 +79,21 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
         };
 
         $scope.createNewUser = function() {
+            $scope.user.active = $scope.user.active || false;
             var createUserResponse = userService.createUser($scope.user);
             createUserResponse.$promise.then(function(promiseData) {
                     $scope.createSuccessMsg = promiseData.msg;
                     $timeout(function() {
                         $scope.createSuccessMsg = '';
                         $location.path('/User/List');
-                    },3000);
+                    },2000);
                 },
                 function(error) {
-                    $scope.createErrorMsg = error.msg;
+                    //console.log(error);
+                    $scope.createErrorMsg = error.data.msg;
                     $timeout(function() {
                         $scope.createErrorMsg = '';
-                    },3000);
+                    },2000);
                 });
         };
     }

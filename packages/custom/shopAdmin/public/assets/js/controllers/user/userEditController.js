@@ -23,6 +23,7 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
                     $scope.roleRegistered = true;
                 if(user.roles.indexOf('authenticated') !== -1)
                     $scope.roleAuthenticated = true;
+                $scope.user.active = user.active || false;
             });
         };
         $scope.getUserById();
@@ -109,6 +110,7 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
         };
 
         $scope.updateUserInfo = function() {
+            $scope.user.active = $scope.user.active || false;
             var updateResponse = userService.updateUserInfo($scope.user);
             updateResponse.$promise.then(function(responseData) {
                 $scope.updateSuccessMsg = responseData.msg;

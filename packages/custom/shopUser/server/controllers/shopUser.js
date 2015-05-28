@@ -322,7 +322,9 @@ exports.updateUserInfo = function(req, res) {
 			name: req.body.name,
 			phoneNumber: req.body.phoneNumber,
 			addresses: req.body.addresses,
-			roles: req.body.roles
+			roles: req.body.roles,
+			active: req.body.active,
+			gender: req.body.gender
 		}
 	}, function(error, count){
 		if(error || !count){
@@ -353,7 +355,10 @@ exports.createUser = function(req, res) {
 		password: req.body.password,
 		phoneNumber: req.body.phoneNumber,
 		status: 'email-not-verified',
-		addresses: req.body.addresses
+		addresses: req.body.addresses,
+		gender: req.body.gender,
+		active: req.body.active,
+		roles: req.body.roles
 	});
 
 	user.provider = 'local';
@@ -366,10 +371,16 @@ exports.createUser = function(req, res) {
 	var errors = req.validationErrors();
 	if (errors) {
 		return res.status(400).send(errors);
+		//if(error.errors.password){
+		//	return res.status(416).send({msg: error.errors.password.message});
+		//}
 	}
 
 	user.save(function(error) {
 		if(error) {
+			if(error.errors.email){
+				return res.status(409).send({msg: error.errors.email.message});
+			}
 			return res.status(400).send({msg: 'An unhandled error occurred, please try again'});
 		}
 		return res.status(200).send({msg: 'User Create Success'});
