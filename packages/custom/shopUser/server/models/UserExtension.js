@@ -44,5 +44,12 @@ User.schema.add({
   registrationDate:{
     type: Date,
     default: new Date()
+  },
+  gender:{
+    type: String
+  },
+  active:{
+    type: Boolean,
+    default: true
   }
 });
