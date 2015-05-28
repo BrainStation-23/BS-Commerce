@@ -47,4 +47,7 @@ module.exports = function(ShopUser, app, auth, database, passport) {
   app.route('/auth/user/delete')
       .delete(shopUser.removeUserById);
 
+  app.route('/auth/user/create')
+      .post(shopUser.createUser);
+
 };

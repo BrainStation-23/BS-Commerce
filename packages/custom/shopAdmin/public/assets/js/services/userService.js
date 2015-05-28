@@ -38,6 +38,12 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
                 'delete': {method: 'DELETE'}
             });
             return deleteUser.delete({userId: userId});
+        },
+        createUser: function(user) {
+            var addUser = $resource('/auth/user/create', {}, {
+                'create': {method: 'POST'}
+            });
+            return addUser.create(user);
         }
     };
   }

@@ -268,3 +268,7 @@ table.dataTable thead .sorting::after {
 .bs-fa-color .fa{
     color: orange;
 }
+.form-group .required-label:after {
+    content:"*";
+    color:red;
+}

@@ -3,8 +3,9 @@
  */
 'use strict';
 
-angular.module('mean.shopAdmin').controller('userCreateController', ['$scope',
-    function($scope) {
+angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '$timeout', '$location', 'userService',
+    function($scope, $timeout, $location, userService) {
+
         //<editor-fold desc='Variable declaration'>
         $scope.user = {addresses: [],roles: []};
         $scope.newAddress = {};
@@ -85,7 +86,20 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope',
         };
 
         $scope.createNewUser = function() {
-            console.log($scope.user);
+            var createUserResponse = userService.createUser($scope.user);
+            createUserResponse.$promise.then(function(promiseData) {
+                    $scope.createSuccessMsg = promiseData.msg;
+                    $timeout(function() {
+                        $scope.createSuccessMsg = '';
+                        $location.path('/User/List');
+                    },3000);
+                },
+                function(error) {
+                    $scope.createErrorMsg = error.msg;
+                    $timeout(function() {
+                        $scope.createErrorMsg = '';
+                    },3000);
+                });
         };
     }
 ]);
