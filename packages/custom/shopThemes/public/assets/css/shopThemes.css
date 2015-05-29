@@ -27,3 +27,6 @@ header .header-bottom{
 .panel-body ul li a.selected-nav-category{
   color: #FE980F;
 }
+.product-overlay{
+  opacity: 0.2;
+}
