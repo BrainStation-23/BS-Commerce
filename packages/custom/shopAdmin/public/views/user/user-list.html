@@ -1,5 +1,5 @@
 <div class="row bs-fa-color">
-    <div class="col-md-3"><span><i class="fa fa-user-md"></i> Users </span></div>
+    <div class="col-md-3"><span><i class="fa fa-user-md"></i> <strong>Users</strong> </span></div>
     <div class="col-md-9">
         <button class="btn btn-primary pull-right" data-ng-click="showAddUserForm()">Add User</button>
     </div>
@@ -49,7 +49,7 @@
 <div class="row bs-fa-color">
     <div class="col-md-12 col-sm-12">
         <table class="table table-responsive table-bordered table-striped table-hover" role="grid">
-            <thead style="background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%); background-color: #E3E3E3;">
+            <thead class="tbl-header">
                 <tr class="row">
                     <th><input type="checkbox"></th>
                     <th>ID</th>
@@ -73,7 +73,7 @@
                 <td><a ui-sref="User.Edit({userId: user._id})">Edit</a></td>
             </tr>
             <tr class="row" >
-                <td colspan="8" style="background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%); background-color: #E3E3E3;">
+                <td colspan="8" class="tbl-footer">
                     <div class="col-md-5 col-sm-12">
                         <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
                                     boundary-links="true" rotate="false" num-pages="numPages"

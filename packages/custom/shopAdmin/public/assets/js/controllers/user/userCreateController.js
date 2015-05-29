@@ -54,7 +54,8 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
             $scope.editAddress = {};
             if(active) {
                 $scope.activeEditAddress =true;
-                Object.assign($scope.editAddress, $scope.user.addresses[addressIndex]);
+                //Object.assign($scope.editAddress, $scope.user.addresses[addressIndex]);
+                $scope.editAddress = jQuery.extend({}, $scope.user.addresses[addressIndex]);
                 $scope.editAddress.index = addressIndex;
                 $scope.addressTableBtnsDisable = true;
             }
@@ -64,7 +65,7 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
             }
         };
 
-        $scope.updateAddress = function() {
+        $scope.updateAddress = function(addressIndex) {
             var address = {
                 addressLine1:$scope.editAddress.addressLine1,
                 addressLine2:$scope.editAddress.addressLine2,
@@ -72,7 +73,7 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
                 country: $scope.editAddress.country,
                 postCode: $scope.editAddress.postCode
             };
-            $scope.user.addresses[$scope.editAddress.index] = address;
+            $scope.user.addresses[addressIndex] = address;
             $scope.addressTableBtnsDisable = false;
             $scope.editAddress = {};
             $scope.activeEditAddress =false;
@@ -89,7 +90,6 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
                     },2000);
                 },
                 function(error) {
-                    //console.log(error);
                     $scope.createErrorMsg = error.data.msg;
                     $timeout(function() {
                         $scope.createErrorMsg = '';
