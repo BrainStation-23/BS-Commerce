@@ -6,7 +6,7 @@ var mean = require('meanio'),
   async = require('async'),
   _ = require('lodash');
 
-require('../packages/custom/shopCategory/server/models/category');
+require('../packages/custom/shopCategory/server/models/Category');
 
 var Category = mongoose.model('Category');
 
