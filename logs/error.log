@@ -1,0 +1,80 @@
+
+2015-06-11T12:56:24.305Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:44:06.698Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:44:48.480Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:45:09.463Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:45:28.002Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:47:19.200Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:47:44.986Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-11T13:48:24.976Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-11T13:48:34.891Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-11T13:52:57.333Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-11T14:05:17.844Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-11T14:19:14.356Z [object Object] 
+2015-06-11T14:19:14.360Z  
+2015-06-11T14:19:14.378Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-11T14:19:45.327Z [object Object] 
+2015-06-11T14:19:45.333Z [object Object] 
+2015-06-11T14:19:45.385Z {"name":"Sample Category","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-12T13:25:08.110Z Mean app started on port 5000 (development) cluster.worker.id:  
+2015-06-12T13:25:28.572Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
