@@ -43,6 +43,7 @@ nb-configuration.xml
 # --------------------
 .nodemonignore
 npm-debug.log
+# node_modules/
 
 # --------------------
 # SASS Files
@@ -53,7 +54,7 @@ npm-debug.log
 # Bower Files
 # --------------------
 .bower-*/
-bower_components
+# bower_components
 
 # --------------------
 # App Files
