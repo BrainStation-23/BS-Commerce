@@ -75,26 +75,16 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                 });
         }
 
-        /*$scope.add = function (cat) {
-            console.log('add function');
-            console.log(cat);
-            $http.post('/api/categories/',{
-                category: cat
-            }).
-                success(function (data, status, headers, config) {
-                    console.log(data);
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                });
-        };*/
+
 
         $scope.update = function () {
             console.log('update function');
         };
 
         $scope.delete = function () {
+            if($scope.catId){
+
+            }
             console.log('delete function');
         };
 
