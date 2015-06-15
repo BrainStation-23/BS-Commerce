@@ -20,7 +20,11 @@
             <question-mark></question-mark> Picture
         </div>
         <div class="col-md-3">
-            <button class="btn btn-default" ngf-select ng-model="cat.files" ngf-multiple="multiple">Select File</button>
+            <input type="file" class="btn btn-default" ngf-select ng-model="cat.files" name="file" accept="image/*" />
+            <img ng-show="cat.files[0] != null" ngf-src="cat.files[0]"  class="thumb thumbnail" >
+            <img ng-show="cat.files[0] == null" ng-src={{cat.image}} class="thumb thumbnail" >
+
+
         </div>
     </div>
     <div class="row">
@@ -28,8 +32,8 @@
             <question-mark></question-mark> Parent Category
         </div>
         <div class="col-md-3">
-            <select class="form-control" dataq-ng-model="cat.parent">
-                <option value="0" >No Parent</option>
+            <select class="form-control" data-ng-model="cat.parent">
+                <option value="" >No Parent</option>
                 <option ng-repeat="item in categories" value="{{item.id}}" selected="selected">{{item.text}}</option>
             </select>
         </div>
@@ -72,7 +76,7 @@
             <question-mark></question-mark> Display order
         </div>
         <div class="col-md-1">
-            <input type="number" name="quantity" min="1" max="100" class="form-control" ng-model="cat.displayOrder"/>
+            <input type="number" name="quantity" min="1" max="100" class="form-control" data-ng-model="cat.displayOrder"/>
         </div>
     </div>
 

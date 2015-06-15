@@ -340,3 +340,108 @@
 2015-06-15T07:27:23.480Z going to delete category 557e7e4582f9d3ec4dda8268 
 2015-06-15T07:27:23.483Z removed successfully 
 2015-06-15T07:27:23.483Z success 
+2015-06-15T08:01:51.839Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:04:36.910Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:04:44.357Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:06:42.195Z Error: Error getting collection: sessions
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:160:19
+    at Db.collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/db.js:526:27)
+    at MongoStore._get_collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:158:17)
+    at MongoStore.get (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:222:10)
+    at session (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express-session/index.js:404:11)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:302:13)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:270:7
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T08:16:26.269Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:20:44.873Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:21:24.899Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:22:40.765Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:23:58.606Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:25:19.601Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:25:52.010Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:26:16.909Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T08:54:00.613Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:07:58.497Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:10:16.079Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:11:08.412Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:11:27.325Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:11:40.312Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:11:47.785Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:11:55.841Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:12:35.131Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:13:16.872Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:13:58.159Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:16:08.987Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:16:16.560Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:16:20.240Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:17:30.357Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:20:50.451Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:24:32.903Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T09:25:49.889Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T10:56:20.427Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T10:57:13.959Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T10:58:05.747Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T10:58:25.207Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:00:05.690Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:00:35.764Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:01:17.782Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:01:42.730Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:04:01.842Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:04:12.398Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:06:57.893Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:07:37.191Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:09:09.020Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:09:34.027Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:10:00.181Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:11:09.947Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:16:17.229Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:17:42.087Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T11:43:36.973Z [object Object] 
+2015-06-15T11:43:36.975Z [object Object] 
+2015-06-15T11:43:37.050Z {"name":"Sample Categorysdafsdf","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T12:42:25.584Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:43:03.956Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:44:24.192Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:46:12.848Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:47:09.848Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:48:06.050Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:51:59.116Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T12:59:31.286Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-15T13:00:01.516Z going to delete category 557eba6972135c8da3ae451b 
+2015-06-15T13:00:01.523Z removed successfully 
+2015-06-15T13:00:01.523Z success 
+2015-06-15T13:00:55.571Z [object Object] 
+2015-06-15T13:00:55.572Z [object Object] 
+2015-06-15T13:00:55.625Z {"name":"new category","slug":"","description":"Sample Category Description","parent":"557992ac24f4bdf02431f95c","showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":4,"files":[{}]} 
+2015-06-15T13:18:02.381Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:19:10.871Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:19:31.918Z [object Object] 
+2015-06-15T13:19:31.923Z [object Object] 
+2015-06-15T13:19:32.055Z {"name":"Sample Category s","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T13:23:35.966Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:27:09.212Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:27:54.298Z {"name":"Sample Category ss","slug":"","description":"Sample Category Description","parent":"557992ac24f4bdf02431f963","showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T13:29:20.093Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:31:50.986Z {"name":"Sample Categoryssssssssssss","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T13:31:50.987Z 557ed3c6a8d59357e0f18c09 
+2015-06-15T13:34:22.765Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:36:12.734Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:38:03.165Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:39:27.711Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:42:51.794Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:43:12.835Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:44:28.619Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:45:10.412Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T13:46:10.078Z Mean app started on port 3000 (development) cluster.worker.id:  

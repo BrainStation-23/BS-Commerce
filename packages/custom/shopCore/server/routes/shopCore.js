@@ -1,5 +1,6 @@
 'use strict';
 
+var media = require('../services/mediaService');
 /* jshint -W098 */
 // The Package is past automatically as first parameter
 module.exports = function(ShopCore, app, auth, database) {
@@ -15,6 +16,8 @@ module.exports = function(ShopCore, app, auth, database) {
   app.get('/shopCore/example/admin', auth.requiresAdmin, function(req, res, next) {
     res.send('Only users with Admin role can access this');
   });
+
+
 
   app.get('/shopCore/example/render', function(req, res, next) {
     ShopCore.render('index', {

@@ -32,3 +32,8 @@
     margin-left: 10px;
     float: right;
 }
+
+.thumb{
+    max-height: 100px;
+    max-width: 100px;
+}

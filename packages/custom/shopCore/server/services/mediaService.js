@@ -32,6 +32,7 @@ exports.create = function(file){
 };
 
 exports.get = function(fileId){
+  // NEED TO CHECK NON- EXIST FILE AS WELL
   var stream = gfs.createReadStream({
     _id: fileId
   });

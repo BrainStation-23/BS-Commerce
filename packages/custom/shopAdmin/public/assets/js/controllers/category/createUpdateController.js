@@ -1,4 +1,5 @@
 'use strict';
+//var apps = angular.module('mean.shopAdmin');
 
 angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['$scope', 'Global', '$stateParams', '$http','Upload','$state',
     function ($scope, Global, $stateParams, $http, Upload, $state) {
@@ -10,11 +11,15 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.$watch('cat.files', function () {
             console.log($scope.cat.files);
         });
+
+
         $scope.$watch('cat.parent', function () {
             if($scope.cat.parent === '0'){
                 $scope.cat.parent = null;
             }
         });
+
+
 
         // Info tab Page
         $scope.cat = {};
@@ -29,17 +34,22 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.cat.published = true;
         $scope.cat.displayOrder = 2;
 
+        $scope.cat.files = [];
+
         // seo tab page
         $scope.catMetaKeywords = '';
         $scope.catMetaDescription = '';
         $scope.catMetaTitle = '';
         $scope.catSeoFriendlyPageName = '';
 
+
+
         $scope.categories=[];
         //$scope.categories=[null, 'SPORTSWEAR', 'MENS', 'WOMENS', 'KIDS'];
         $http.get('/api/categories').
             success(function (data, status, headers, config) {
                 //$scope.categories = [{'id': '0', 'parent': null, 'text': 'No Parent'}];
+                //console.log(data);
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -54,6 +64,33 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                         $scope.categories.push(subItem);
                     }
                 }
+                if ($scope.cat.id) {
+                    $http.get('/api/categories/' + $scope.cat.id).
+                        success(function (data, status, headers, config) {
+                            console.log(data);
+
+                            if(data.parent === null){
+                                data.parent = '';
+                            }
+                            console.log(data.parent);
+                            $scope.cat.name = data.name;
+                            $scope.cat.description = data.description;
+                            $scope.cat.parent = data.parent;
+                            $scope.cat.slug = data.slug;
+                            $scope.cat.displayOrder = data.displayOrder;
+                            $scope.cat.showOnHomePage = data.showOnHomePage;
+                            $scope.cat.includeInTopMenu = data.includeInTopMenu;
+                            $scope.cat.allowToSelectPageSize = data.allowToSelectPageSize;
+                            $scope.cat.imageId = data.imageId;
+                            if(data.imageId){
+                                $scope.cat.image = '/api/categories/imageId/'+ data.imageId;
+                            }
+                        }).
+                        error(function (data, status, headers, config) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                        });
+                }
             }).
             error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -62,18 +99,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
 
 
 
-        if ($scope.cat.id) {
-            $http.get('/api/categories/' + $scope.cat.id).
-                success(function (data, status, headers, config) {
-                    console.log(data);
-                    $scope.name = data.name;
-                    $scope.slug = data.slug;
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                });
-        }
+
 
 
 
