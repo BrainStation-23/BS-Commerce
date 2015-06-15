@@ -62,7 +62,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
 
 
 
-        if ($scope.catId) {
+        if ($scope.cat.id) {
             $http.get('/api/categories/' + $scope.cat.id).
                 success(function (data, status, headers, config) {
                     console.log(data);
@@ -82,10 +82,18 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         };
 
         $scope.delete = function () {
-            if($scope.catId){
-
+            if($scope.cat.id){
+                $http.delete('/api/categories/' + $scope.cat.id)
+                    .success(function (data, status, headers, config) {
+                        console.log(data);
+                        console.log('successfully deleted');
+                    })
+                    .error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
             }
-            console.log('delete function');
+            console.log('delete function', $scope.cat.id);
         };
 
         $scope.add = function (cat) {

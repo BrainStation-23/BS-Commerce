@@ -124,4 +124,19 @@ exports.addCategory = function (cat, imageId) {
 
 };
 
+exports.deleteById = function(id){
+    var deferred = Q.defer();
+    Category.findOne({_id: id}).remove().exec(function(err) {
+        if (err) {
+            console.log(err);
+            return deferred.reject(err);
+        }
+        else {
+            console.log('removed successfully');
+            return deferred.resolve();
+        }
+    });
+    return deferred.promise;
+};
+
 

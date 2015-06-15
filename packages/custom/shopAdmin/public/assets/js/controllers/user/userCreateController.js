@@ -80,7 +80,7 @@ angular.module('mean.shopAdmin').controller('userCreateController', ['$scope', '
         };
 
         $scope.createNewUser = function() {
-            if($scope.user.email == undefined || $scope.user.phoneNumber == undefined || $scope.user.password == undefined || $scope.user.name == undefined || $scope.user.gender == undefined) {
+            if($scope.user.email === undefined || $scope.user.phoneNumber === undefined || $scope.user.password === undefined || $scope.user.name === undefined || $scope.user.gender === undefined) {
                 $scope.requiredErrorMsg = true;
                 return;
             }

@@ -102,3 +102,136 @@
     at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
     at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
     at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-15T05:49:36.246Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T05:52:46.017Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:02:27.884Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:03:30.423Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:05:23.556Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:06:20.767Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:09:55.979Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:10:36.302Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:11:29.652Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:11:39.088Z going to delete category 55799901d7562ef023564e50 
+2015-06-15T06:11:39.094Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:12:54.509Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:13:01.441Z going to delete category 55799901d7562ef023564e50 
+2015-06-15T06:15:01.449Z going to delete category 55799901d7562ef023564e50 
+2015-06-15T06:16:38.732Z [object Object] 
+2015-06-15T06:16:38.733Z  
+2015-06-15T06:16:38.736Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:22:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-15T06:17:42.201Z [object Object] 
+2015-06-15T06:17:42.203Z [object Object] 
+2015-06-15T06:17:42.247Z {"name":"Sample Categorydsf sdfsd f","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:18:04.443Z going to delete category 557e6e067792cfbf2866547f 
+2015-06-15T06:20:04.545Z going to delete category 557e6e067792cfbf2866547f 
+2015-06-15T06:20:54.824Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:21:29.582Z [object Object] 
+2015-06-15T06:21:29.585Z [object Object] 
+2015-06-15T06:21:29.653Z {"name":"Sample Categoryss","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:21:38.974Z going to delete category 557e6ee962750bd729253841 
+2015-06-15T06:21:38.979Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:22:10.241Z [object Object] 
+2015-06-15T06:22:10.241Z [object Object] 
+2015-06-15T06:22:10.255Z {"name":"Sample Categoryss","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:22:18.888Z going to delete category 557e6f1262750bd729253844 
+2015-06-15T06:22:18.890Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:23:56.904Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:24:23.917Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:24:41.187Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:25:05.658Z [object Object] 
+2015-06-15T06:25:05.660Z [object Object] 
+2015-06-15T06:25:05.693Z {"name":"Sample Categoryzz","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:25:30.963Z going to delete category 557e6fc196198b0d2ced2cf8 
+2015-06-15T06:25:30.980Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:27:49.675Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:27:56.919Z going to delete category 557e6fc196198b0d2ced2cf8 
+2015-06-15T06:27:56.937Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:27:56.943Z success 
+2015-06-15T06:28:29.316Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:28:42.536Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:45:43.643Z [object Object] 
+2015-06-15T06:45:43.656Z [object Object] 
+2015-06-15T06:45:43.739Z {"name":"Sample Categoryrrr","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:46:04.445Z going to delete category 557e74973fdccc852e979306 
+2015-06-15T06:46:04.455Z TypeError: Cannot call method 'then' of undefined
+    at exports.deleteById (/home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/controllers/shopCategory.js:45:8)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:340:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:356:14)
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:400:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-06-15T06:46:04.457Z remove successfully 
+2015-06-15T06:47:08.898Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:48:17.723Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:48:49.665Z [object Object] 
+2015-06-15T06:48:49.668Z [object Object] 
+2015-06-15T06:48:49.732Z {"name":"Sample Categorysdfsdf sd","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T06:49:10.564Z going to delete category 557e7551076eab273959ffaf 
+2015-06-15T06:49:10.567Z remove successfully 
+2015-06-15T06:49:10.568Z success 
+2015-06-15T06:49:32.423Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:49:36.858Z Mean app started on port 3000 (development) cluster.worker.id:  
