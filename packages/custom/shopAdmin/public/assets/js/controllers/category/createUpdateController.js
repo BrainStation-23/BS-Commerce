@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['$scope', 'Global', '$stateParams', '$http','Upload',
-    function ($scope, Global, $stateParams, $http, Upload) {
+angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['$scope', 'Global', '$stateParams', '$http','Upload','$state',
+    function ($scope, Global, $stateParams, $http, Upload, $state) {
         //$scope.catId = $stateParams.catId;
         console.log('categoryCreateUpdateController');
 
@@ -85,8 +85,9 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
             if($scope.cat.id){
                 $http.delete('/api/categories/' + $scope.cat.id)
                     .success(function (data, status, headers, config) {
-                        console.log(data);
                         console.log('successfully deleted');
+                        //console.log(angular.toJson($state.get()));
+                        $state.go('Category.List');
                     })
                     .error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs

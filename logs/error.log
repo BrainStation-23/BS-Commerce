@@ -235,3 +235,108 @@
 2015-06-15T06:49:10.568Z success 
 2015-06-15T06:49:32.423Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-15T06:49:36.858Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:52:28.247Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:52:59.303Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T06:59:52.942Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:01:43.116Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:02:07.873Z [object Object] 
+2015-06-15T07:02:07.875Z [object Object] 
+2015-06-15T07:02:07.939Z {"name":"Sample Categorysdfsd","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T07:02:36.918Z going to delete category 557e786f1121497c40479ca5 
+2015-06-15T07:02:36.922Z removed successfully 
+2015-06-15T07:02:36.923Z success 
+2015-06-15T07:03:04.209Z going to delete category 557e786f1121497c40479ca5 
+2015-06-15T07:03:04.217Z removed successfully 
+2015-06-15T07:03:04.217Z success 
+2015-06-15T07:03:12.043Z going to delete category 557e786f1121497c40479ca5 
+2015-06-15T07:03:12.051Z removed successfully 
+2015-06-15T07:03:12.051Z success 
+2015-06-15T07:03:13.020Z going to delete category 557e786f1121497c40479ca5 
+2015-06-15T07:03:13.022Z removed successfully 
+2015-06-15T07:03:13.023Z success 
+2015-06-15T07:08:35.111Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:08:43.373Z going to delete category 557e786f1121497c40479ca5 
+2015-06-15T07:08:43.382Z removed successfully 
+2015-06-15T07:08:43.383Z success 
+2015-06-15T07:14:38.804Z [object Object] 
+2015-06-15T07:14:38.805Z  
+2015-06-15T07:14:38.808Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:22:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-15T07:14:47.682Z [object Object] 
+2015-06-15T07:14:47.684Z [object Object] 
+2015-06-15T07:14:47.711Z {"name":"Sample Categorydf sdf s","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T07:15:10.480Z going to delete category 557e7b67ad620f2b4428445a 
+2015-06-15T07:15:10.485Z removed successfully 
+2015-06-15T07:15:10.486Z success 
+2015-06-15T07:22:32.509Z going to delete category 557e7b67ad620f2b4428445a 
+2015-06-15T07:22:32.518Z removed successfully 
+2015-06-15T07:22:32.519Z success 
+2015-06-15T07:23:59.335Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:24:36.874Z [object Object] 
+2015-06-15T07:24:36.876Z  
+2015-06-15T07:24:36.879Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:22:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-15T07:24:45.406Z [object Object] 
+2015-06-15T07:24:45.407Z [object Object] 
+2015-06-15T07:24:45.461Z {"name":"Sample Categoryss","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T07:25:07.369Z going to delete category 557e7dbd3b5aa48d4c2125d9 
+2015-06-15T07:25:07.371Z removed successfully 
+2015-06-15T07:25:07.371Z success 
+2015-06-15T07:25:34.057Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:25:45.637Z [object Object] 
+2015-06-15T07:25:45.638Z  
+2015-06-15T07:25:45.645Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:22:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-15T07:25:50.967Z [object Object] 
+2015-06-15T07:25:50.970Z [object Object] 
+2015-06-15T07:25:50.999Z {"name":"Sample Categoryss","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T07:26:00.430Z going to delete category 557e7dff3f373b714da91e0f 
+2015-06-15T07:26:00.432Z removed successfully 
+2015-06-15T07:26:00.432Z success 
+2015-06-15T07:26:20.394Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-15T07:26:55.325Z [object Object] 
+2015-06-15T07:26:55.325Z  
+2015-06-15T07:26:55.333Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopCategory/server/routes/shopCategory.js:22:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-06-15T07:27:01.800Z [object Object] 
+2015-06-15T07:27:01.801Z [object Object] 
+2015-06-15T07:27:01.822Z {"name":"Sample Categoryasa","slug":"","description":"Sample Category Description","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-15T07:27:23.480Z going to delete category 557e7e4582f9d3ec4dda8268 
+2015-06-15T07:27:23.483Z removed successfully 
+2015-06-15T07:27:23.483Z success 

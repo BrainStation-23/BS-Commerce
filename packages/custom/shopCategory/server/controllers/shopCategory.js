@@ -42,9 +42,9 @@ exports.addCategory = function(cat, imageId){
 exports.deleteById = function(req, res){
   console.log('going to delete category', req.params.id);
   service.deleteById(req.params.id)
-      .then(function(success){
+      .then(function(){
         console.log('success');
-        return res.status(200).json([{msg: success}]);
+        return res.status(200).json([{msg: 'success'}]);
       })
       .catch(function(error){
         console.log('error');
