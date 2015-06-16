@@ -445,3 +445,51 @@
 2015-06-15T13:44:28.619Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-15T13:45:10.412Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-15T13:46:10.078Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T13:20:39.881Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T13:21:22.842Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T13:21:48.766Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T13:22:01.763Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-16T13:23:47.693Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-16T13:49:12.811Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T13:58:34.204Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:00:08.609Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-16T14:12:00.632Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:13:22.417Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:18:27.794Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:18:44.201Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:18:53.401Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:21:28.822Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:25:17.179Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:25:25.451Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:28:45.815Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T14:32:35.583Z Mean app started on port 3000 (development) cluster.worker.id:  

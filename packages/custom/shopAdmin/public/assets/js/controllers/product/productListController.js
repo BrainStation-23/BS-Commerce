@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('categoryListController', ['$scope', 'Global', '$http',
+angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
     function($scope, Global, $http) {
         $scope.categories = [];
-        $http.get('/api/categories').
+        $http.get('/api/products').
             success(function(data, status, headers, config) {
                 $scope.categories = [];
                 for(var i in data){
