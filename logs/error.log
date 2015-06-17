@@ -445,6 +445,7 @@
 2015-06-15T13:44:28.619Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-15T13:45:10.412Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-15T13:46:10.078Z Mean app started on port 3000 (development) cluster.worker.id:  
+<<<<<<< Updated upstream
 2015-06-16T13:20:39.881Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-16T13:21:22.842Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-16T13:21:48.766Z Mean app started on port 3000 (development) cluster.worker.id:  
@@ -517,3 +518,31 @@
 2015-06-17T12:20:25.748Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-17T12:21:36.656Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-17T12:22:06.992Z Mean app started on port 3000 (development) cluster.worker.id:  
+=======
+2015-06-16T07:59:42.747Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-16T08:18:01.561Z going to delete category 557ed3c6a8d59357e0f18c0b 
+2015-06-16T08:18:01.569Z removed successfully 
+2015-06-16T08:18:01.569Z success 
+2015-06-16T08:18:07.104Z going to delete category 557ed0e40d469a62daea81df 
+2015-06-16T08:18:07.106Z removed successfully 
+2015-06-16T08:18:07.107Z success 
+2015-06-16T08:18:14.944Z going to delete category 557ed2dae2eed6fdde3874f1 
+2015-06-16T08:18:14.946Z removed successfully 
+2015-06-16T08:18:14.946Z success 
+2015-06-16T08:18:28.914Z going to delete category 557ecc8737ae45e7d60b50fd 
+2015-06-16T08:18:28.915Z removed successfully 
+2015-06-16T08:18:28.916Z success 
+2015-06-16T09:22:21.805Z {"name":"Sample Categoryssss","slug":"","description":"<p>Sample Category Description sdf sdfs dfsdf sdf sdf sdfsdfsdf<br/></p>","parent":null,"showOnHomePage":true,"includeInTopMenu":false,"allowToSelectPageSize":true,"published":true,"displayOrder":2,"files":[{}]} 
+2015-06-16T09:22:21.806Z 557feacd5703a3cb0e30d735 
+>>>>>>> Stashed changes
+
+2015-06-17T13:30:58.262Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T13:33:29.083Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T13:36:16.263Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T13:38:17.316Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T13:46:40.945Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T13:47:55.150Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T14:08:52.355Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T14:09:42.797Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T14:10:29.796Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-17T14:13:52.287Z Mean app started on port 3000 (development) cluster.worker.id:  

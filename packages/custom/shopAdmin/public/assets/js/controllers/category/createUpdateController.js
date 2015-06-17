@@ -13,11 +13,11 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         });
 
 
-        $scope.$watch('cat.parent', function () {
-            if($scope.cat.parent === '0'){
-                $scope.cat.parent = null;
+        /*$scope.$watch('cat.parent', function () {
+            if($scope.cat.parent === '' || $scope.cat.parent === null ){
+                $scope.cat.parent = 'noparent';
             }
-        });
+        });*/
 
 
 
@@ -27,7 +27,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         $scope.cat.name = 'Sample Category';
         $scope.cat.slug = '';
         $scope.cat.description = 'Sample Category Description';
-        $scope.cat.parent = null;
+        $scope.cat.parent = 'noparent';
         $scope.cat.showOnHomePage = true;
         $scope.cat.includeInTopMenu = false;
         $scope.cat.allowToSelectPageSize = true;
@@ -48,7 +48,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
         //$scope.categories=[null, 'SPORTSWEAR', 'MENS', 'WOMENS', 'KIDS'];
         $http.get('/api/categories').
             success(function (data, status, headers, config) {
-                //$scope.categories = [{'id': '0', 'parent': null, 'text': 'No Parent'}];
+                $scope.categories = [{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
                 //console.log(data);
                 for (var i in data) {
                     var item = {};
@@ -64,18 +64,22 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                         $scope.categories.push(subItem);
                     }
                 }
+
+
+                $scope.cat.parent = 'noparent';
+
                 if ($scope.cat.id) {
                     $http.get('/api/categories/' + $scope.cat.id).
                         success(function (data, status, headers, config) {
-                            console.log(data);
 
                             if(data.parent === null){
-                                data.parent = '';
+                                data.parent = 'noparent';
                             }
-                            console.log(data.parent);
+
                             $scope.cat.name = data.name;
                             $scope.cat.description = data.description;
                             $scope.cat.parent = data.parent;
+                            console.log($scope.cat.parent);
                             $scope.cat.slug = data.slug;
                             $scope.cat.displayOrder = data.displayOrder;
                             $scope.cat.showOnHomePage = data.showOnHomePage;
@@ -96,13 +100,6 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-
-
-
-
-
-
-
         $scope.update = function () {
             console.log('update function');
         };
