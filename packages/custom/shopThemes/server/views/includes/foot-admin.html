@@ -1,4 +1,5 @@
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/tinymce/tinymce.min.js"></script>
 <script src="/bower_components/angular/angular.min.js"></script>
 <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
@@ -9,10 +10,8 @@
 <script src="/bower_components/jstree/dist/jstree.min.js"></script>
 
 
-<!--textAngular-->
-<script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
+<!--tinymce-->
+<script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
 
 <!--angular file upload-->
 <script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
@@ -41,6 +40,7 @@
 <script src="/shopAdmin/assets/js/directives/questionMark.js"></script>
 <script src="/shopAdmin/assets/js/directives/paginatedTable.js"></script>
 
+
 <!--directive categories-->
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryAcl.js"></script>
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryDiscounts.js"></script>
@@ -49,11 +49,14 @@
 <script src="/shopAdmin/assets/js/directives/category/tabCategorySeo.js"></script>
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryStores.js"></script>
 
+<!--directive products-->
+<script src="/shopAdmin/assets/js/directives/product/tabProductInfo.js"></script>
 
 <!--controllers-->
 <script src="/shopAdmin/assets/js/controllers/loginController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/registrationController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/dashboardController.js"></script>
+
 
 <!--controller categories-->
 <script src="/shopAdmin/assets/js/controllers/category/createUpdateController.js"></script>
@@ -61,10 +64,12 @@
 <script src="/shopAdmin/assets/js/controllers/category/categoryTreeController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/category/editController.js"></script>
 
+
 <!--controller products-->
 <script src="/shopAdmin/assets/js/controllers/product/productCreateController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/product/productListController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/product/productUpdateController.js"></script>
+
 
 <!--controller users-->
 <script src="/shopAdmin/assets/js/controllers/user/userListController.js"></script>

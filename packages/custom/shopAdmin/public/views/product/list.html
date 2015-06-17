@@ -1,6 +1,6 @@
 <div>
-    <div class="admin-title"><h3>Manage Categories <a ui-sref="Category.Tree"> (switch to tree view)</a></h3>
-        <a ui-sref="Category.Create">
+    <div class="admin-title"><h3>Manage Products</h3>
+        <a ui-sref="Product.Create">
             <button type="button" class="btn btn-info"> Add New</button>
         </a>
     </div>
@@ -24,12 +24,12 @@
         </tr>
         </tfoot>
 
-        <tbody ng-repeat="item in categories">
+        <tbody ng-repeat="item in products">
         <tr>
             <td>{{item.name}}</td>
             <td><i class="fa fa-check fa-fw" style="color: #009900"></i></td>
             <td>{{item.displayOrder}}</td>
-            <td><a ui-sref="Category.Edit({catId: item._id})">Edit</a></td>
+            <td><a ui-sref="Product.Edit({productId: item._id})">Edit</a></td>
         </tr>
         </tbody>
     </table>
