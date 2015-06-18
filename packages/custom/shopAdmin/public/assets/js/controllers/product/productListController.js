@@ -2,10 +2,11 @@
 
 angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
     function($scope, Global, $http) {
-        $scope.categories = [];
+        $scope.products = [];
         $http.get('/api/products').
             success(function(data, status, headers, config) {
-                $scope.categories = [];
+                console.log(data);
+                $scope.products = [];
                 for(var i in data){
                     var item = data[i];
                     item.displayOrder = parseInt(i)+1;

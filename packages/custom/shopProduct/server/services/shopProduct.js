@@ -48,13 +48,17 @@ exports.search = function(slug, orderBy, currentPage, pageSize){
 
 exports.all = function(pageNumber, pageSize){
   var deferred = Q.defer();
+  var count = 0;
 
   Product.find({})
     .exec(function(error, products){
       if(error){
         return deferred.reject(error);
       }
-      return deferred.resolve(products);
+      return deferred.resolve({
+        products: products,
+        total: count
+      });
     });
 
   return deferred.promise;
