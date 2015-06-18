@@ -2,26 +2,46 @@
 
 angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
     function($scope, Global, $http) {
+        $scope.totalItems =15;
+        $scope.currentPage =1 ;
+        $scope.maxSize = 5;
+        $scope.numberOfDisplay =5;
+
         $scope.products = [];
-        $http.get('/api/products').
-            success(function(data, status, headers, config) {
-                console.log(data);
-                $scope.products = [];
-                for(var i in data){
-                    var item = data[i];
-                    item.displayOrder = parseInt(i)+1;
-                    $scope.categories.push(item);
-                    for(var j in data[i].subCategories){
-                        var subItem = data[i].subCategories[j];
-                        subItem.displayOrder = parseInt(j)+1;
-                        subItem.name = data[i].name + ' >> ' + subItem.name;
-                        $scope.categories.push(subItem);
+
+        $scope.getPage = function(pageNumber){
+            $http.get('/api/products?pageSize='+$scope.maxSize+'&currentPage='+pageNumber).
+                success(function(data, status, headers, config) {
+                    console.log(data);
+                    $scope.products = [];
+                    for(var i in data){
+                        var item = data[i];
+                        if(data[i].photos.length>0){
+                            item.picture = data[i].photos[0];
+                        }
+                        item.name = data[i].info.name;
+                        item.sku = data[i].info.sku;
+                        item.price = parseInt(data[i].info.price);
+                        item.id = data[i]._id;
+                        $scope.products.push(item);
                     }
-                }
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
+                    //angular.element('.pagination li').removeClass('active');
+                    //console.log(angular.element('.pagination li'));
+                }).
+                error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+        }
+        $scope.getPage(1);
+
+        $scope.changePagination =function(pageNo) {
+            $scope.getPage(pageNo);
+        };
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+            $scope.changePagination(pageNo);
+        };
     }
 ]);
