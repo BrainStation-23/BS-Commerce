@@ -51,6 +51,8 @@ exports.all = function(pageNumber, pageSize){
   var count = 0;
 
   Product.find({})
+    .skip(pageNumber*pageSize)
+    .limit(pageSize)
     .exec(function(error, products){
       if(error){
         return deferred.reject(error);
