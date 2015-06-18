@@ -3,7 +3,15 @@
 var service = require('../services/shopProduct');
 
 exports.list = function(req, res){
-  var promise = req.query.slug ? service.search(req.query.slug, req.query.orderBy, req.query.currentPage, req.query.pageSize) : service.all(1,1);
+  var promise;
+  if(req.query.slug){
+    promise = service.search(req.query.slug, req.query.orderBy, req.query.currentPage, req.query.pageSize);
+  }else if (req.query.currentPage && req.query.pageSize){
+    promise = service.all(req.query.currentPage, req.query.pageSize);
+  }else{
+    promise = service.all(1,9);
+  }
+  //var promise = req.query.slug ? service.search(req.query.slug, req.query.orderBy, req.query.currentPage, req.query.pageSize) : service.all( req.query.currentPage, req.query.pageSize);
 
   promise
     .then(function(data){
