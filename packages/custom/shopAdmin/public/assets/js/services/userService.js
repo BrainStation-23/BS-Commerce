@@ -22,7 +22,7 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
             return userById.get({userId: userId});
         },
         changeUserPassword: function(userId, password) {
-            var changePassword = $resource('/auth/user/changePassword', {userId: '@userId', password: '@password'}, {
+            var changePassword = $resource('/auth/user/changePassword', {}, {
                 'update': {method: 'PUT'}
             });
             return changePassword.update({userId: userId, password: password});
