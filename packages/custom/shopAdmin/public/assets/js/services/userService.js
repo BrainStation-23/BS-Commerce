@@ -44,6 +44,22 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
                 'create': {method: 'POST'}
             });
             return addUser.create(user);
+        },
+
+        userLogin: function(email, password, rememberMe) {
+            var loginUser = $resource('/auth/login', {}, {
+               'login': {method: 'POST'}
+            });
+
+            return loginUser.login({email: email, password: password, rememberMe: rememberMe});
+        },
+
+        userLogout: function() {
+            var logoutUser = $resource('/auth/logout', {}, {
+                'logout': {method: 'GET'}
+            });
+
+            return logoutUser.logout({});
         }
     };
   }

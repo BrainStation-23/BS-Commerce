@@ -11,25 +11,33 @@ angular.module('mean.shopAdmin').controller('loginController', ['$scope', '$moda
   }
 ]);
 
-angular.module('mean.shopAdmin').controller('loginInstanceController', ['$http', '$scope', '$modalInstance', '$rootScope', '$state', '$timeout', 'Global',
-  function($http, $scope, $modalInstance, $rootScope, $state, $timeout, Global) {
+angular.module('mean.shopAdmin').controller('loginInstanceController',
+    ['$http', '$scope', '$modalInstance', '$rootScope', '$state', '$timeout', 'Global', 'userService',
+  function($http, $scope, $modalInstance, $rootScope, $state, $timeout, Global, userService) {
     $scope.user = {};
 
     $scope.login = function() {
-      $http.post('/login', {
-        email: $scope.user.email.toLowerCase(),
-        password: $scope.user.password
-      }).success(function(response) {
-        $rootScope.$emit('loggedin', response.user);
 
-        $modalInstance.dismiss('User registered and signed up');
-        $timeout(function(){
-          $state.go('home');
-        });
-      })
-      .error(function() {
+      var userLoginInfo = userService.userLogin($scope.user.email.toLowerCase(), $scope.user.password, $scope.user.rememberMe);
+      userLoginInfo.$promise.then(function(response) {
+        if(response.user.roles.indexOf('admin') == -1) {
+            userService.userLogout().$promise.then(function(logoutResponse) {
+                $scope.loginerror = 'Authentication failed.';
+            });
+        }
+        else {
+            $rootScope.$emit('loggedin', response.user);
+            $modalInstance.dismiss('User registered and signed up');
+            $timeout(function(){
+                $state.go('home');
+            });
+        }
+      },
+      function(error) {
         $scope.loginerror = 'Authentication failed.';
       });
+
+
     };
 
     $scope.register = function($event){
