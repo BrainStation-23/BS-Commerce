@@ -330,7 +330,7 @@ exports.updateUserInfo = function(req, res) {
 		if(error || !count){
 			return res.status(500).send({msg: 'An unhandled error occurred, please try again'});
 		}
-		return res.status(200).send({msg: 'Profile updated successfully.'});
+		return res.status(200).send({msg: 'The customer has been updated successfully.'});
 	});
 
 };
