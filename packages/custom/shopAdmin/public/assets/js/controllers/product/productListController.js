@@ -32,7 +32,7 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
-        }
+        };
         $scope.getPage(1);
 
         $scope.changePagination =function(pageNo) {

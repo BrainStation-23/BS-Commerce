@@ -20,7 +20,7 @@ angular.module('mean.shopAdmin').controller('loginInstanceController',
 
       var userLoginInfo = userService.userLogin($scope.user.email.toLowerCase(), $scope.user.password, $scope.user.rememberMe);
       userLoginInfo.$promise.then(function(response) {
-        if(response.user.roles.indexOf('admin') == -1) {
+        if(response.user.roles.indexOf('admin') === -1) {
             userService.userLogout().$promise.then(function(logoutResponse) {
                 $scope.loginerror = 'Authentication failed.';
             });
