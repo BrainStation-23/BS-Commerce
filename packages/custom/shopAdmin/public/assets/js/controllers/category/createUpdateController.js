@@ -56,13 +56,13 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                     item.parent = null;
                     item.text = data[i].name;
                     $scope.categories.push(item);
-                    for (var j in data[i].subCategories) {
+                    /*for (var j in data[i].subCategories) {
                         var subItem = {};
                         subItem.id = data[i].subCategories[j]._id;
                         subItem.parent = data[i]._id;
                         subItem.text = data[i].subCategories[j].name;
                         $scope.categories.push(subItem);
-                    }
+                    }*/
                 }
 
 
@@ -125,6 +125,9 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
             console.log($scope.cat.files);
             //if ($scope.cat.files && $scope.cat.files.length) {
                 var file = $scope.cat.files ? $scope.cat.files[0] : null;
+                if($scope.cat.parent == 'noparent'){
+                    $scope.cat.parent = null;
+                }
 
                 Upload.upload({
                     url: 'api/categories',
@@ -137,8 +140,39 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
                     //$scope.log = 'progress: ' + progressPercentage + '% ' +
                     //evt.config.file.name + '\n' + $scope.log;
                 }).success(function (data, status, headers, config) {
+                    $state.go('Category.List');
                     //$scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                }).error(function(data, status, headers, config){
+                    console.log('error block' + data);
                 });
+            //}
+        };
+
+        $scope.update = function () {
+            console.log('update function');
+            console.log($scope.cat.files);
+            //if ($scope.cat.files && $scope.cat.files.length) {
+            var file = $scope.cat.files ? $scope.cat.files[0] : null;
+            if($scope.cat.parent == 'noparent'){
+                $scope.cat.parent = null;
+            }
+            console.log($scope.cat);
+            /*Upload.upload({
+                url: 'api/categories',
+                fields: {
+                    'cat': $scope.cat
+                },
+                file: file
+            }).progress(function (evt) {
+                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                //$scope.log = 'progress: ' + progressPercentage + '% ' +
+                //evt.config.file.name + '\n' + $scope.log;
+            }).success(function (data, status, headers, config) {
+                $state.go('Category.List');
+                //$scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+            }).error(function(data, status, headers, config){
+                console.log('error block' + data);
+            });*/
             //}
         };
     }

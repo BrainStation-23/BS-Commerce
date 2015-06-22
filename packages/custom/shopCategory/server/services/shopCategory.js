@@ -2,7 +2,6 @@
 
 var mean = require('meanio'),
     mongoose = require('mongoose'),
-    //Category = mongoose.model('Category'),
     Category = mongoose.model('Category'),
     _ = require('lodash'),
     Q = require('q');
@@ -44,6 +43,7 @@ exports.list = function () {
                 return deferred.reject(error);
             }
 
+
             var list = _.map(_.where(categories, {parent: null}), function (item) {
                 return {
                     /*console.log(req.body.cat);
@@ -54,7 +54,7 @@ exports.list = function () {
                     subCategories: []
                 };
             });
-
+            console.log('after map: '+ list.length);
             _.forEach(list, function (item) {
                 includeSubCategories(item, categories);
             });

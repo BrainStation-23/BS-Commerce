@@ -35,15 +35,16 @@ exports.getBySlug = function(req, res){
     .done();
 };
 
+
 exports.addCategory = function(cat, imageId){
     service.addCategory(cat, imageId);
 };
 
 exports.deleteById = function(req, res){
-  console.log('going to delete category', req.params.id);
+
   service.deleteById(req.params.id)
       .then(function(){
-        console.log('success');
+
         return res.status(200).json([{msg: 'success'}]);
       })
       .catch(function(error){

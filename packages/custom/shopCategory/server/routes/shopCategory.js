@@ -24,22 +24,28 @@ module.exports = function (ShopCategory, app, auth, database, shopCore) {
 
     app.route('/api/categories')
         .post(function (req, res) {
-            shopCore.media.create(req.files.file)
-                .then(function (file) {
-                    console.log(req.body.cat);
-                    console.log(file._id);
-                    controller.addCategory(JSON.parse(req.body.cat), file._id);
-                    return res.status(200).json(file);
-                },function () {
-                    console.log(req.body.cat);
-                    controller.addCategory(JSON.parse(req.body.cat));
-                    return res.status(200);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    return res.status(500).json({error: error});
-                })
-                .done();
+            if(req.files.file){
+                shopCore.media.create(req.files.file)
+                    .then(function (file) {
+                        controller.addCategory(JSON.parse(req.body.cat), file._id);
+                        return res.status(200).json(file);
+                    },function () {
+                        controller.addCategory(JSON.parse(req.body.cat));
+                        return res.status(200);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        return res.status(500).json({error: error});
+                    })
+                    .done();
+            }else{
+                controller.addCategory(JSON.parse(req.body.cat))
+                return res.status(200).json({});
+            }
+
+        })
+        .put(function(req, res){
+
         });
 
 };
