@@ -8,13 +8,26 @@
         getCart: function(){
           return cart;
         },
-        addToCart: function(product, qunatity){
+        addToCart: function(product, quantity){
           cart
             .$promise
             .then(function(cart){
               var existingProduct = _.find(cart.items, function(item){
                 return item.product._id === product._id;
               });
+
+              var updateProduct = function(callback) {
+                  var countLength = 0,itemLength = cart.items.length;
+                  _.find(cart.items, function(item){
+                      if(item.product._id === product._id) {
+                          item.quantity = quantity;
+                      }
+                      countLength += 1;
+                  });
+                  if(countLength === itemLength) {
+                      callback();
+                  }
+              };
 
               if(!existingProduct) {
                 cart.items.push({
@@ -24,6 +37,14 @@
                 cart.$update(function(){
                   $rootScope.$emit('cart:updated', cart);
                 });
+              }
+              else {
+                  updateProduct(function() {
+                      cart.$update(function(){
+                          $rootScope.$emit('cart:updated', cart);
+                      });
+                  });
+
               }
             });
         },

@@ -2,15 +2,32 @@
   'use strict';
 
   angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', 'Global', 'cartService',
-    function($scope, Global, cartService) {
-      $scope.global = Global;
-      $scope.items = [];
+	function($scope, Global, cartService) {
+	  $scope.global = Global;
+	  $scope.items = [];
 
-      cartService.getCart()
-        .$promise
-        .then(function(cart){
-          $scope.items = cart.items;
-        });
-    }
+	  cartService.getCart()
+		.$promise
+		.then(function(cart){
+		  $scope.items = cart.items;
+		});
+
+	  $scope.increaseQuantity = function(item) {
+          item.quantity+= 1;
+          cartService.addToCart(item.product, item.quantity);
+	  };
+
+	  $scope.decreaseQuantity = function(item) {
+		if(item.quantity <1) {
+		  return;
+		}
+		item.quantity -= 1;
+        cartService.addToCart(item.product, item.quantity);
+	  };
+
+	  $scope.removeFromCart = function(product) {
+		cartService.removeFromCart(product);
+	  };
+	}
   ]);
 })();
