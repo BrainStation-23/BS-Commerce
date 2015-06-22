@@ -40,6 +40,38 @@
             </tr>
           </tbody>
         </table>
+        <hr/>
+        <div class="col-sm-12 col-md-12" style="margin-top: 10px; padding: 10px;background-color: #f9f9f9;">
+            <!--class="col-sm-4 col-md-4 col-sm-offset-8 col-md-offset-8"-->
+
+            <table class="table table-responsive table-hover">
+                <tbody>
+                    <tr>
+                        <td>Sub Total:</td>
+                        <td class="text-right" data-ng-bind="subTotal | currency"></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping:</td>
+                        <td class="text-right" data-ng-bind="shipping | currency"></td>
+                    </tr>
+                    <tr>
+                        <td>Tax:</td>
+                        <td class="text-right" data-ng-bind="tax | currency"></td>
+                    </tr>
+                    <tr style="color: #4ab2f1; font-size: 24px;">
+                        <td>Total:</td>
+                        <td class="text-right" data-ng-bind="subTotal+shipping+tax | currency"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" data-ng-model="termsCondition"> I agree with the terms of service and I adhere to them unconditionally (<a href="#"> read</a>)
+                </label>
+            </div>
+            <button class="btn btn-primary pull-right" data-ng-disabled="!termsCondition">CHECKOUT</button>
+        </div>
       </div>
     </div>
   </section>
