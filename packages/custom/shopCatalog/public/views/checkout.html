@@ -1,79 +1,168 @@
-<div class="">
-  <section class="cart_items">
-    <div class="container">
-      <div class="table-responsive cart_info">
-        <table class="table table-condensed">
-          <thead>
-          <tr class="cart_menu">
-            <td class="image">Item</td>
-            <td class="description"></td>
-            <td class="price">Price</td>
-            <td class="quantity">Quantity</td>
-            <td class="total">Total</td>
-            <td></td>
-          </tr>
-          </thead>
-          <tbody>
-            <tr data-ng-repeat="item in items">
-              <td class="cart_product">
-                <a data-ui-sref="products-details({sku:item.product.info.sku})"><img data-ng-if="item.product.photos.length > 0" data-ng-src="/api/products/photos/{{item.product.photos[0]}}" alt=""></a>
-              </td>
-              <td class="cart_description">
-                <h4><a data-ui-sref="products-details({sku:item.product.info.sku})">{{item.product.info.name}}</a></h4>
-              </td>
-              <td class="cart_price">
-                <p>{{item.product.info.price | currency}}</p>
-              </td>
-              <td class="cart_quantity">
-                <div class="cart_quantity_button">
-                  <a class="cart_quantity_up" style="padding-top: 5px;" href="" data-ng-click="increaseQuantity(item)"> <i class="fa fa-plus"></i></a>
-                  <input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="2" data-ng-model="item.quantity">
-                  <a class="cart_quantity_down" style="padding-top: 5px;" href="" data-ng-click="decreaseQuantity(item)"><i class="fa fa-minus"></i> </a>
-                </div>
-              </td>
-              <td class="cart_total">
-                <p class="cart_total_price">{{(item.product.info.price * item.quantity) | currency}}</p>
-              </td>
-              <td class="cart_delete">
-                <a class="cart_quantity_delete" href="" data-ng-click="removeFromCart(item.product)"><i class="fa fa-times"></i></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <hr/>
-        <div class="col-sm-12 col-md-12" style="margin-top: 10px; padding: 10px;background-color: #f9f9f9;">
-            <!--class="col-sm-4 col-md-4 col-sm-offset-8 col-md-offset-8"-->
-
-            <table class="table table-responsive table-hover">
-                <tbody>
-                    <tr>
-                        <td>Sub Total:</td>
-                        <td class="text-right" data-ng-bind="subTotal | currency"></td>
-                    </tr>
-                    <tr>
-                        <td>Shipping:</td>
-                        <td class="text-right" data-ng-bind="shipping | currency"></td>
-                    </tr>
-                    <tr>
-                        <td>Tax:</td>
-                        <td class="text-right" data-ng-bind="tax | currency"></td>
-                    </tr>
-                    <tr style="color: #4ab2f1; font-size: 24px;">
-                        <td>Total:</td>
-                        <td class="text-right" data-ng-bind="subTotal+shipping+tax | currency"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr/>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" data-ng-model="termsCondition"> I agree with the terms of service and I adhere to them unconditionally (<a href="#"> read</a>)
-                </label>
-            </div>
-            <button class="btn btn-primary pull-right" data-ng-disabled="!termsCondition">CHECKOUT</button>
-        </div>
-      </div>
+<div ng-controller="checkoutController">
+    <div class="row text-center">
+        <h2>Checkout</h2>
     </div>
-  </section>
-</div>
+    <hr/>
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.isFirstOpen">
+            <accordion-heading>
+                <span class="checkout-step-number">1</span> Billing address
+            </accordion-heading>
+            <div class="col-md-offset-2">
+                <form class="form-horizontal" data-ng-submit="addBillingAddress()">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingFullName"><i class="fa fa-question-circle fa-fw"></i>Full Name</label></div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="billingFullName" placeholder="full name" data-ng-model="order.billingAddress.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                        <div class="col-md-4">
+                            <input id="billingEmail" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')"
+                                   onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="order.billingAddress.email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
+                        <div class="col-md-4">
+                            <input id="billingAddressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="order.billingAddress.addressLine1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
+                        <div class="col-md-4">
+                            <input id="billingAddressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="order.billingAddress.addressLine2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingCity"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
+                        <div class="col-md-4">
+                            <input id="billingCity" placeholder="city" class="form-control" type="text"  data-ng-model="order.billingAddress.city" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
+                        <div class="col-md-4">
+                            <input id="billingCountry" placeholder="country" class="form-control" type="text"  data-ng-model="order.billingAddress.country" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingPostCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
+                        <div class="col-md-4">
+                            <input id="billingPostCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="order.billingAddress.postCode" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="billingPhoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
+                        <div class="col-md-4">
+                            <input id="billingPhoneNumber" placeholder="phone number" class="form-control"  type="text"  ng-model="order.billingAddress.phoneNumber">
+                        </div>
+                    </div>
 
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </accordion-group>
+
+        <accordion-group>
+            <accordion-heading>
+                <span class="checkout-step-number">2</span> Shipping address
+            </accordion-heading>
+            <div class="col-md-offset-2">
+                <form class="form-horizontal" data-ng-submit="addShippingAddress()">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingFullName"><i class="fa fa-question-circle fa-fw"></i>Full Name</label></div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="shippingFullName" placeholder="full name" data-ng-model="order.shippingAddress.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingEmail" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')"
+                                   onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="order.shippingAddress.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingAddressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingAddressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingCity"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingCity" placeholder="city" class="form-control" type="text"  data-ng-model="order.shippingAddress.city" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingCountry" placeholder="country" class="form-control" type="text"  data-ng-model="order.shippingAddress.country" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingPostCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingPostCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="order.shippingAddress.postCode" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="shippingPhoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
+                        <div class="col-md-4">
+                            <input id="shippingPhoneNumber" placeholder="phone number" class="form-control"  type="text"  ng-model="order.shippingAddress.phoneNumber">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </accordion-group>
+
+        <accordion-group>
+            <accordion-heading>
+                <span class="checkout-step-number">3</span> Shipping method
+            </accordion-heading>
+            This is just some content to illustrate fancy headings.
+            
+        </accordion-group>
+
+        <accordion-group>
+            <accordion-heading>
+                <span class="checkout-step-number">4</span> Payment method
+            </accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </accordion-group>
+
+        <accordion-group>
+            <accordion-heading>
+                <span class="checkout-step-number">5</span> Payment information
+            </accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </accordion-group>
+
+        <accordion-group>
+            <accordion-heading>
+                <span class="checkout-step-number">6</span> Confirm order
+            </accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </accordion-group>
+    </accordion>
+</div>
