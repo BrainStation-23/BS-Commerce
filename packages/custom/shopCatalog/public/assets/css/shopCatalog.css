@@ -11,3 +11,18 @@
     font-weight: normal;
     margin: -10px 10px 0 -15px;
 }
+.shipping-method {
+    padding: 10px;
+    background-color: #f6f6f6
+}
+.payment-method {
+    padding: 10px;
+    background-color: #f6f6f6
+}
+.left-margin {
+    margin-left: 5px;
+}
+.checkout-page-thead {
+    font-size: 16px;
+    font-weight: bold;
+}
