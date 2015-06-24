@@ -1,41 +1,60 @@
 (function(){
-  'use strict';
+	'use strict';
+	angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', 'Global', 'cartService','checkoutService',
+		function($scope, Global, cartService, checkoutService) {
+			$scope.global = Global;
+			$scope.oneAtATime = true;
+			$scope.status = {
+				isFirstOpen: true,
+				isFirstDisabled: false
+			};
+			$scope.user = {'_id':''};
+			$scope.user= user || {};
+			$scope.order = {};
+			$scope.addresses =[];
 
-  angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', 'Global', 'cartService',
-	function($scope, Global, cartService) {
-	  $scope.global = Global;
-		$scope.oneAtATime = true;
-		$scope.status = {
-			isFirstOpen: true,
-			isFirstDisabled: false
-		};
-	  //$scope.items = [];
-       // $scope.shipping = 10;
-       // $scope.tax = 0;
-      //
-	  //cartService.getCart()
-		//.$promise
-		//.then(function(cart){
-		//  $scope.items = cart.items;
-		//});
-	  //$scope.increaseQuantity = function(item) {
-       //   item.quantity+= 1;
-       //   cartService.addToCart(item.product, item.quantity);
-	  //};
-      //
-	  //$scope.decreaseQuantity = function(item) {
-		//if(item.quantity <1) {
-		//  return;
-		//}
-		//item.quantity -= 1;
-       // cartService.addToCart(item.product, item.quantity);
-	  //};
-      //
-	  //$scope.removeFromCart = function(product) {
-       //   if(confirm('Are you sure you want to delete this item ?')) {
-       //       cartService.removeFromCart(product);
-       //   }
-	  //};
-	}
-  ]);
+
+			//console.log(user);
+
+			$scope.initializeAddress = function() {
+				cartService.getCart();
+				checkoutService.getUserById($scope.user._id)
+					.$promise
+					.then(function(user) {
+						$scope.user = user;
+						console.log(user);
+						if(user.addresses.length > 0) {
+							angular.forEach(user.addresses, function(address) {
+								$scope.addresses.push(user.name +', '+ user.email +', '+ user.addresses[0].addressLine1 +', '+ user.addresses[0].city +', '+ user.addresses[0].country +', '+ user.phoneNumber);
+							});
+						}
+					});
+			};
+
+			$scope.initializeAddress();
+
+			$scope.selectBillingAddress = function(indx) {
+				//console.log(typeof indx);
+				if(indx === 'null') {
+					$scope.order.billingAddress ={};
+					return;
+				}
+				$scope.order.billingAddress = {
+					name: $scope.user.name,
+					email: $scope.user.email,
+					addressLine1: $scope.user.addresses[indx].addressLine1,
+					addressLine2: $scope.user.addresses[indx].addressLine2,
+					city: $scope.user.addresses[indx].city,
+					country: $scope.user.addresses[indx].country,
+					postCode: $scope.user.addresses[indx].postCode,
+					phoneNumber: $scope.user.phoneNumber
+				};
+			};
+
+			$scope.addBillingAddress = function() {
+				console.log('add bill address');
+			};
+			//console.log(user.name);
+		}
+	]);
 })();
