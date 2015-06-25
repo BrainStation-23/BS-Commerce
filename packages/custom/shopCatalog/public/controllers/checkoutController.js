@@ -134,7 +134,7 @@
 				});
 				if(productCount === $scope.items.length) {
 					$scope.order.totalCost = $scope.order.productCost + $scope.order.shippingCost;
-					callback()
+					callback();
 				}
 			};
 

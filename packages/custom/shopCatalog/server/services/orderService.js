@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose'),
     Order = mongoose.model('Orders'),
-    _ = require('lodash'),
     Q = require('q');
 
 exports.createOrder = function(req, res) {
@@ -25,7 +24,7 @@ exports.getOrders = function(req, res) {
                 return deferred.reject(error);
             }
             return deferred.resolve(orders);
-        })
+        });
 };
 
 exports.getOrdersByCondition = function(condition, res) {
@@ -36,7 +35,7 @@ exports.getOrdersByCondition = function(condition, res) {
                 return deferred.reject(error);
             }
             return deferred.resolve(orders);
-        })
+        });
 };
 
 exports.getOrderById = function(req, res) {
@@ -47,14 +46,14 @@ exports.getOrderById = function(req, res) {
                 return deferred.reject(error);
             }
             return deferred.resolve(orders);
-        })
+        });
 };
 
 exports.deleteOrderById = function(req, res) {
     var deferred = Q.defer();
 
-    Order.findByIdAndRemove(req.query.orderId, function(err, doc) {
-        if(err) {
+    Order.findByIdAndRemove(req.query.orderId, function(error, doc) {
+        if(error) {
             return deferred.reject(error);
         }
         return deferred.promise;
