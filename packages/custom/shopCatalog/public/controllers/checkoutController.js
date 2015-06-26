@@ -9,15 +9,13 @@
 				isFirstDisabled: false
 			};
 			$scope.user = {'_id':''};
-			$scope.user= user || {};
+			$scope.user= Global.user || {};
 			$scope.order = {};
 			$scope.addresses =[];
-			$scope.order.products =[];
-			$scope.order.productCost = 0;
 			$scope.order.shippingCost = 10;
 
 
-			//console.log(user);
+			//console.log(Global.user);
 			$scope.items = [];
 			//$scope.shipping = 10;
 			$scope.tax = 0;
@@ -34,10 +32,11 @@
 					.$promise
 					.then(function(user) {
 						$scope.user = user;
+						$scope.order.user = user._id;
 						//console.log(user);
 						if(user.addresses.length > 0) {
 							angular.forEach(user.addresses, function(address) {
-								$scope.addresses.push(user.name +', '+ user.email +', '+ user.addresses[0].addressLine1 +', '+ user.addresses[0].city +', '+ user.addresses[0].country +', '+ user.phoneNumber);
+								$scope.addresses.push(user.name +', '+ user.email +', '+ address.addressLine1 +', '+ address.city +', '+ address.country +', '+ user.phoneNumber);
 							});
 						}
 					});
@@ -46,7 +45,6 @@
 			$scope.initializeAddress();
 
 			$scope.selectBillingAddress = function(indx) {
-				//console.log(typeof indx);
 				if(indx === 'null') {
 					$scope.order.billingAddress ={};
 					return;
@@ -68,6 +66,7 @@
 				//$timeout(function(){
 				//	$scope.pleaseWait = false;
 				//},2000);
+				//$scope.order.billingAddress.push($scope.billingAddress);
 				console.log('add billing address');
 				//var el =angular.element('#shippingAddress');
 				//el.attr('is-open', true);
@@ -97,6 +96,7 @@
 				//$timeout(function(){
 				//	$scope.pleaseWait = false;
 				//},2000);
+				//$scope.order.shippingAddress.push($scope.shippingAddress);
 				console.log('add shipping address');
 				//var el =angular.element('#shippingAddress');
 				//el.attr('is-open', true);
@@ -120,6 +120,8 @@
 
 			var addProductInfor = function(callback) {
 				var productCount = 0;
+				$scope.order.productCost = 0;
+				$scope.order.products = [];
 				angular.forEach($scope.items, function(item) {
 					var newProduct = {
 						productId: item.product._id,
@@ -142,6 +144,14 @@
 				//$scope.order.products = $scope.items;
 				addProductInfor(function() {
 					console.log($scope.order);
+					checkoutService.createOrder($scope.order)
+						.$promise
+						.then(function(response) {
+							console.log(response.orderId);
+						},
+						function(error) {
+							console.log(error);
+						});
 				});
 
 			};

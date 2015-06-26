@@ -4,16 +4,16 @@ var mongoose = require('mongoose'),
     Order = mongoose.model('Orders'),
     Q = require('q');
 
-exports.createOrder = function(req, res) {
+exports.createOrder = function(req) {
     var deferred = Q.defer();
-    var order = new Order(req.bodt.order);
-
-    order.save(function(error) {
+    var newOrder = new Order(req.body);
+    newOrder.save(function(error, order) {
        if(error) {
            return deferred.reject(error);
        }
-        return deferred.promise;
+        return deferred.resolve(order);
     });
+    return deferred.promise;
 };
 
 exports.getOrders = function(req, res) {

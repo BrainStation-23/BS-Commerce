@@ -4,9 +4,9 @@ var orderService = require('../services/orderService');
 
 
 exports.createOrder =function(req, res) {
-    orderService.createOrder(req, res)
+    orderService.createOrder(req)
         .then(function(order){
-            return res.status(200).json(order._id);
+            return res.status(200).json({orderId: order._id});
         })
         .catch(function(error){
             return res.status(500).json({msg: 'Error occurred while creating order', error: error});
