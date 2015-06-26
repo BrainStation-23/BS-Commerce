@@ -23,3 +23,14 @@ exports.update = function(req, res){
     })
     .done();
 };
+
+exports.deleteCartById = function(req, res){
+  cartService.deleteCartById(req.query.cartId)
+      .then(function(cart){
+        return res.status(200).json(cart);
+      })
+      .catch(function(error){
+        return res.status(500).json({msg: 'Error occurred while deleting cart', error: error});
+      })
+      .done();
+};
