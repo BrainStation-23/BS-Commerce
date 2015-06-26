@@ -91,3 +91,14 @@ exports.update = function(userId, items){
 
   return deferred.promise;
 };
+
+exports.deleteCartById = function(cartId) {
+  var deferred = Q.defer();
+  Cart.findByIdAndRemove(cartId, function(err, doc) {
+    if(err) {
+      return deferred.reject(err);
+    }
+    return deferred.resolve(doc);
+  });
+  return deferred.promise;
+};
