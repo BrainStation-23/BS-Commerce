@@ -1,6 +1,7 @@
 'use strict';
 
-var orderService = require('../services/orderService');
+var orderService = require('../services/orderService'),
+    cartService = require('../services/cartService');
 
 
 exports.createOrder =function(req, res) {

@@ -1,8 +1,8 @@
 (function(_){
   'use strict';
 
-  angular.module('mean.shopCatalog').factory('cartService', ['$rootScope','Global', 'Cart',
-    function($rootScope, Global, Cart) {
+  angular.module('mean.shopCatalog').factory('cartService', ['$rootScope','Global', 'Cart', '$resource',
+    function($rootScope, Global, Cart, $resource) {
       var cart = Cart.get();
       return {
         getCart: function(){
@@ -65,6 +65,13 @@
                 });
               }
             });
+        },
+
+        deleteCartById: function(cartId) {
+            var deleteCart = $resource('/api/cart', {}, {
+                'delete': {method: 'DELETE'}
+            });
+            return deleteCart.delete({cartId: cartId});
         }
       };
     }

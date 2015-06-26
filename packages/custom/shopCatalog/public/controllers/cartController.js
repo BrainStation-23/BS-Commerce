@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  angular.module('mean.shopCatalog').controller('cartController', ['$scope', 'Global', 'cartService',
-	function($scope, Global, cartService) {
+  angular.module('mean.shopCatalog').controller('cartController', ['$scope', '$location', 'Global', 'cartService',
+	function($scope, $location, Global, cartService) {
 	  $scope.global = Global;
 	  $scope.items = [];
         $scope.shipping = 10;
@@ -11,7 +11,13 @@
 	  cartService.getCart()
 		.$promise
 		.then(function(cart){
-		  $scope.items = cart.items;
+		  if(cart.items.length > 0){
+			  $scope.items = cart.items;
+		  }
+		  else {
+			  $location.path('/cart/empty');
+		  }
+
 		});
 	  $scope.increaseQuantity = function(item) {
           item.quantity+= 1;

@@ -1,8 +1,11 @@
 (function(){
 	'use strict';
-	angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', '$compile', 'Global', '$timeout', 'cartService','checkoutService',
-		function($scope, $compile, Global, $timeout, cartService, checkoutService) {
+	angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', '$location', 'Global', '$timeout', 'cartService','checkoutService',
+		function($scope, $location, Global, $timeout, cartService, checkoutService) {
 			//$scope.global = Global;
+
+			//$scope.checkoutPageShow = false;
+			$scope.cartEmpty = true;
 			$scope.oneAtATime = true;
 			$scope.status = {
 				isFirstOpen: true,
@@ -13,17 +16,27 @@
 			$scope.order = {};
 			$scope.addresses =[];
 			$scope.order.shippingCost = 10;
+			$scope.tax = 0;
 
 
 			//console.log(Global.user);
+			$scope.cartId = '';
 			$scope.items = [];
 			//$scope.shipping = 10;
-			$scope.tax = 0;
+
 
 			cartService.getCart()
 				.$promise
 				.then(function(cart){
-					$scope.items = cart.items;
+					if(cart.items.length > 0){
+						$scope.cartEmpty = false;
+						$scope.items = cart.items;
+						$scope.cartId = cart._id;
+					}
+					else {
+						$location.path('/cart/empty');
+					}
+
 				});
 
 			$scope.initializeAddress = function() {
@@ -143,14 +156,26 @@
 			$scope.confirmOrder = function() {
 				//$scope.order.products = $scope.items;
 				addProductInfor(function() {
-					console.log($scope.order);
+					//console.log($scope.order);
 					checkoutService.createOrder($scope.order)
 						.$promise
 						.then(function(response) {
-							console.log(response.orderId);
+							$scope.orderSuccess = true;
+							$scope.orderId = response.orderId;
+							cartService.deleteCartById($scope.cartId)
+								.$promise
+								.then(function(deleteResponse) {
+									//console.log(response.orderId);
+									$scope.cartDeleteSuccess = true;
+									$scope.cartEmpty = true;
+									//$location.path('/checkout/complete')
+								},
+								function(error) {
+									$scope.cartDeleteSuccess = false;
+								});
 						},
 						function(error) {
-							console.log(error);
+							$scope.orderSuccess = false;
 						});
 				});
 
