@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var AddressSchema = new Schema({
+var AddressSchema = {
     name: {
         type: String,
         required: true
@@ -37,7 +37,7 @@ var AddressSchema = new Schema({
         type: String,
         required: true
     }
-});
+};
 
 var ProductSchema = new Schema({
     productId: {
@@ -65,14 +65,8 @@ var OrderSchema = new Schema({
         ref: 'User',
         required: true
     },
-    billingAddress: {
-        type: [AddressSchema],
-        default: []
-    },
-    shippingAddress: {
-        type: [AddressSchema],
-        default: []
-    },
+    billingAddress: AddressSchema,
+    shippingAddress: AddressSchema,
     shippingMethod: {
         type: String,
         required: true
