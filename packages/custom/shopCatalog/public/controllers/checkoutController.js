@@ -17,6 +17,7 @@
 			$scope.addresses =[];
 			$scope.order.shippingCost = 10;
 			$scope.tax = 0;
+			$scope.tabStatus = true;
 
 
 			//console.log(Global.user);
@@ -38,6 +39,22 @@
 					}
 
 				});
+
+			var openTab = function(tabElement) {
+				tabElement.parent().attr('is-open', true);
+				tabElement.attr('is-open', true);
+				tabElement.removeAttr('collapse');
+				tabElement.attr('collapse',false);
+				tabElement.css('height','auto');
+				tabElement.addClass('in');
+			};
+
+			var closeTab = function(tabElement) {
+				tabElement.attr('is-open', false);
+				tabElement.removeAttr('collapse');
+				tabElement.attr('collapse',true);
+				tabElement.css('height',0);
+			};
 
 			$scope.initializeAddress = function() {
 				cartService.getCart();
@@ -79,11 +96,12 @@
 				//$timeout(function(){
 				//	$scope.pleaseWait = false;
 				//},2000);
-				//$scope.order.billingAddress.push($scope.billingAddress);
-				console.log('add billing address');
-				//var el =angular.element('#shippingAddress');
-				//el.attr('is-open', true);
-				//console.log(el);
+				$scope.activeShippingAddressTab = true;
+				var billingAddressElem = angular.element('#billingAddress > div').last();
+				var shippingAddressElem = angular.element('#shippingAddress > div').last();
+				closeTab(billingAddressElem);
+				openTab(shippingAddressElem);
+
 			};
 
 			$scope.selectShippingAddress = function(indx) {
@@ -105,33 +123,42 @@
 			};
 
 			$scope.addShippingAddress = function() {
-				//$scope.pleaseWait = true;
-				//$timeout(function(){
-				//	$scope.pleaseWait = false;
-				//},2000);
-				//$scope.order.shippingAddress.push($scope.shippingAddress);
-				console.log('add shipping address');
-				//var el =angular.element('#shippingAddress');
-				//el.attr('is-open', true);
-				//console.log(el);
+				$scope.activeShippingMethodTab = true;
+
+				var shippingAddressElem = angular.element('#shippingAddress > div').last();
+				var shippingMethodElem = angular.element('#shippingMethod > div').last();
+				closeTab(shippingAddressElem);
+				openTab(shippingMethodElem);
 			};
 
 			$scope.addShippingMethod = function() {
-				console.log('add shipping method');
-				console.log($scope.order.shippingMethod);
+				$scope.activePaymentMethodTab = true;
+
+				var shippingMethodElem = angular.element('#shippingMethod > div').last();
+				var paymentMethodElem = angular.element('#paymentMethod > div').last();
+				closeTab(shippingMethodElem);
+				openTab(paymentMethodElem);
 			};
 
 			$scope.addPaymentMethod = function() {
-				console.log('add payment method');
-				console.log($scope.order.paymentMethod);
+				$scope.activePaymentInformationTab = true;
+
+				var paymentMethodElem = angular.element('#paymentMethod > div').last();
+				var paymentInfoElem = angular.element('#paymentInformation > div').last();
+				closeTab(paymentMethodElem);
+				openTab(paymentInfoElem);
 			};
 
 			$scope.addPaymentInfo = function() {
-				console.log('add payment info');
-				console.log($scope.order.paymetnInfo.purchaseOrderNumber);
+				$scope.activeConfirmOrderTab = true;
+
+				var paymentInfoElem = angular.element('#paymentInformation > div').last();
+				var confirmOrderElem = angular.element('#confirmOrder > div').last();
+				closeTab(paymentInfoElem);
+				openTab(confirmOrderElem);
 			};
 
-			var addProductInfor = function(callback) {
+			var addProductInfo = function(callback) {
 				var productCount = 0;
 				$scope.order.productCost = 0;
 				$scope.order.products = [];
@@ -154,9 +181,7 @@
 			};
 
 			$scope.confirmOrder = function() {
-				//$scope.order.products = $scope.items;
-				addProductInfor(function() {
-					//console.log($scope.order);
+				addProductInfo(function() {
 					checkoutService.createOrder($scope.order)
 						.$promise
 						.then(function(response) {
@@ -165,10 +190,8 @@
 							cartService.deleteCartById($scope.cartId)
 								.$promise
 								.then(function(deleteResponse) {
-									//console.log(response.orderId);
 									$scope.cartDeleteSuccess = true;
 									$scope.cartEmpty = true;
-									//$location.path('/checkout/complete')
 								},
 								function(error) {
 									$scope.cartDeleteSuccess = false;

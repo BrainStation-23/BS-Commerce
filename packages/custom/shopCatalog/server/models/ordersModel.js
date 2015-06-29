@@ -81,7 +81,13 @@ var OrderSchema = new Schema({
     },
     orderStatus: {
         type: String,
-        enum:['ordered', 'delivered', 'cancel']
+        default: 'ordered',
+        enum:['ordered', 'completed', 'cancel']
+    },
+    shippingStatus: {
+        type: String,
+        default: 'pending',
+        enum:['pending', 'delivered', 'cancel']
     },
     products: {
         type: [ProductSchema]

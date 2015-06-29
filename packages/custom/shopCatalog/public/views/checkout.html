@@ -90,86 +90,88 @@
             <accordion-heading>
                 <span class="checkout-step-number">2</span> Shipping address
             </accordion-heading>
-            <div class="col-md-offset-2">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i>Select your billing address</label></div>
-                        <div class="col-md-4">
-                            <select class="form-control" ng-model="selectedIndx" ng-change="selectShippingAddress(selectedIndx)">
-                                <option  value="null" data-ng-selected="addresses">Create new address</option>
-                                <option  data-ng-repeat="address in addresses" value="{{$index}}" >{{address}}</option>
-                            </select>
+            <div data-ng-show="activeShippingAddressTab">
+                <div class="col-md-offset-2">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i>Select your billing address</label></div>
+                            <div class="col-md-4">
+                                <select class="form-control" ng-model="selectedIndx" ng-change="selectShippingAddress(selectedIndx)">
+                                    <option  value="null" data-ng-selected="addresses">Create new address</option>
+                                    <option  data-ng-repeat="address in addresses" value="{{$index}}" >{{address}}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <hr/>
-            <div class="col-md-offset-2">
-                <form class="form-horizontal" data-ng-submit="addShippingAddress()">
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingFullName"><i class="fa fa-question-circle fa-fw"></i>Full Name</label></div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="shippingFullName" placeholder="full name" data-ng-model="order.shippingAddress.name">
+                    </form>
+                </div>
+                <hr/>
+                <div class="col-md-offset-2">
+                    <form class="form-horizontal" data-ng-submit="addShippingAddress()">
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingFullName"><i class="fa fa-question-circle fa-fw"></i>Full Name</label></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="shippingFullName" placeholder="full name" data-ng-model="order.shippingAddress.name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
-                        <div class="col-md-4">
-                            <input type="email" class="form-control" id="shippingEmail" placeholder="email address" data-ng-model="order.shippingAddress.email" required>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                            <div class="col-md-4">
+                                <input type="email" class="form-control" id="shippingEmail" placeholder="email address" data-ng-model="order.shippingAddress.email" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingAddressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine1" required>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingAddressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine1" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingAddressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine2">
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingAddressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="order.shippingAddress.addressLine2">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingCity"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingCity" placeholder="city" class="form-control" type="text"  data-ng-model="order.shippingAddress.city" required>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingCity"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingCity" placeholder="city" class="form-control" type="text"  data-ng-model="order.shippingAddress.city" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingCountry" placeholder="country" class="form-control" type="text"  data-ng-model="order.shippingAddress.country" required>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingCountry" placeholder="country" class="form-control" type="text"  data-ng-model="order.shippingAddress.country" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingPostCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingPostCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="order.shippingAddress.postCode" required>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingPostCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingPostCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="order.shippingAddress.postCode" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="shippingPhoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
-                        <div class="col-md-4">
-                            <input id="shippingPhoneNumber" placeholder="phone number" class="form-control"  type="text"  ng-model="order.shippingAddress.phoneNumber">
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="shippingPhoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
+                            <div class="col-md-4">
+                                <input id="shippingPhoneNumber" placeholder="phone number" class="form-control"  type="text"  ng-model="order.shippingAddress.phoneNumber">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </accordion-group>
 
-        <accordion-group>
+        <accordion-group id="shippingMethod">
             <accordion-heading>
                 <span class="checkout-step-number">3</span> Shipping method
             </accordion-heading>
 
-            <div class="col-md-offset-2">
+            <div class="col-md-offset-2" data-ng-show="activeShippingMethodTab">
                 <form class="form-horizontal" data-ng-submit="addShippingMethod()">
                     <div class="col-md-3 shipping-method">
                         <label class="radio-inline">
@@ -196,11 +198,11 @@
             </div>
         </accordion-group>
 
-        <accordion-group>
+        <accordion-group id="paymentMethod">
             <accordion-heading>
                 <span class="checkout-step-number">4</span> Payment method
             </accordion-heading>
-            <div class="col-md-offset-2">
+            <div class="col-md-offset-2" data-ng-show="activePaymentMethodTab">
                 <form class="form-horizontal" data-ng-submit="addPaymentMethod()">
                     <div class="col-md-3 payment-method text-center">
                         <img src="/shopCatalog/assets/img/hand-cash.png" alt="hand cash"/><br>
@@ -230,34 +232,35 @@
             </div>
         </accordion-group>
 
-        <accordion-group>
+        <accordion-group id="paymentInformation">
             <accordion-heading>
                 <span class="checkout-step-number">5</span> Payment information
             </accordion-heading>
-
-            <div class="col-md-offset-2">
-                <form class="form-horizontal" data-ng-submit="addPaymentInfo()" data-ng-show="order.paymentMethod === 'purchaseOrder'">
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="purchaseOrder"><i class="fa fa-question-circle fa-fw"></i>Purchase order</label></div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="purchaseOrder" placeholder="purchase order number" data-ng-model="order.paymetnInfo.purchaseOrderNumber">
+            <div data-ng-show="activePaymentInformationTab">
+                <div class="col-md-offset-2">
+                    <form class="form-horizontal" data-ng-submit="addPaymentInfo()" data-ng-show="order.paymentMethod === 'purchaseOrder'">
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="purchaseOrder"><i class="fa fa-question-circle fa-fw"></i>Purchase order</label></div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="purchaseOrder" placeholder="purchase order number" data-ng-model="order.paymetnInfo.purchaseOrderNumber">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
 
         </accordion-group>
 
-        <accordion-group>
+        <accordion-group id="confirmOrder">
             <accordion-heading>
                 <span class="checkout-step-number">6</span> Confirm order
             </accordion-heading>
-            <div class="col-md-offset-1">
+            <div class="col-md-offset-1" data-ng-show="activeConfirmOrderTab">
                 <div class="row">
                     <div class="col-md-6 table-responsive">
                         <table class="table">
