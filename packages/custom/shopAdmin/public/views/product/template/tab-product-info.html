@@ -20,8 +20,7 @@
             <question-mark></question-mark> Description
         </div>
         <div class="col-md-6">
-            <textarea ui-tinymce ng-model="product.description" class=""></textarea>
-            <!--<div text-angular  ng-model="product.description"></div>-->
+            <textarea ui-tinymce ng-model="product.fullDescription" class=""></textarea>
         </div>
     </div>
     <div class="row">
@@ -62,10 +61,8 @@
             <question-mark></question-mark> Parent Category
         </div>
         <div class="col-md-3">
-            <select class="form-control" data-ng-model="cat.parent">
-                <option value="" >No Parent</option>
-                <option ng-repeat="item in categories" value="{{item.id}}" selected="selected">{{item.text}}</option>
-            </select>
+            <select class="form-control" data-ng-model="product.category"
+                    ng-options="item.id as item.text for item in categories"></select>
         </div>
     </div>
 

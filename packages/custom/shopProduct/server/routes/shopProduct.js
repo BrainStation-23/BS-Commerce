@@ -40,4 +40,9 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
                 })
                 .done();
         });
+
+    app.route('/api/products/')
+        .post(function(req, res){
+            controller.create(req, res);
+        })
 };

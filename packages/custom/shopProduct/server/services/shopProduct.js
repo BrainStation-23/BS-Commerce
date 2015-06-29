@@ -93,3 +93,20 @@ exports.getBySKU = function(sku){
 
   return deferred.promise;
 };
+
+exports.create = function(data){
+  var deferred = Q.defer();
+  var p = new Product({
+    info: data.info,
+    meta: data.meta,
+    tags: data.tags,
+    categories: data.categories
+  });
+  p.save(function(error, product){
+    if(error){
+      return deferred.reject(error);
+    }
+    return deferred.resolve(product.id);
+  });
+  return deferred.promise;
+}
