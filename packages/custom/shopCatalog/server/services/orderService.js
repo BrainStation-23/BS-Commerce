@@ -25,6 +25,7 @@ exports.getOrders = function(req, res) {
             }
             return deferred.resolve(orders);
         });
+    return deferred.promise;
 };
 
 exports.getOrdersByCondition = function(condition, res) {
@@ -36,17 +37,19 @@ exports.getOrdersByCondition = function(condition, res) {
             }
             return deferred.resolve(orders);
         });
+    return deferred.promise;
 };
 
 exports.getOrderById = function(req, res) {
     var deferred = Q.defer();
-    Order.findOne({_id: req.body.orderId})
-        .exec(function(error, orders) {
+    Order.findOne({_id: req.params.orderId})
+        .exec(function(error, order) {
             if(error) {
                 return deferred.reject(error);
             }
-            return deferred.resolve(orders);
+            return deferred.resolve(order);
         });
+    return deferred.promise;
 };
 
 exports.deleteOrderById = function(req, res) {
@@ -58,5 +61,6 @@ exports.deleteOrderById = function(req, res) {
         }
         return deferred.promise;
     });
+    return deferred.promise;
 };
 

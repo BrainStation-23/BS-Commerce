@@ -168,7 +168,8 @@
 						name: item.product.info.name,
 						price:item.product.info.price,
 						tax: $scope.tax,
-						quantity: item.quantity
+						quantity: item.quantity,
+						sku: item.product.info.sku
 					};
 					$scope.order.productCost += (newProduct.price * newProduct.quantity);
 					$scope.order.products.push(newProduct);

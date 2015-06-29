@@ -49,13 +49,17 @@ var ProductSchema = new Schema({
         type: String,
         required: true
     },
-    price:{
+    price: {
         type: Number,
         required:true
     },
-    quantity:{
+    quantity: {
         type: Number,
         required:true
+    },
+    sku: {
+        type: String,
+        required: true
     }
 });
 

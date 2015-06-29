@@ -28,7 +28,7 @@
 
 			$stateProvider.state('orderDetails/:orderId', {
 				url: '/orderDetails/:orderId',
-				//controller: 'orderController',
+				controller: 'orderController',
 				templateUrl: 'shopCatalog/views/orderDetails.html'
 			});
 		}
