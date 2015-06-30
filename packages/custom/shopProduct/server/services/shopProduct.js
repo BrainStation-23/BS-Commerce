@@ -96,12 +96,21 @@ exports.getBySKU = function(sku){
 
 exports.create = function(data){
   var deferred = Q.defer();
+  console.log('===================================================');
+  console.log(data);
   var p = new Product({
     info: data.info,
     meta: data.meta,
     tags: data.tags,
     categories: data.categories
   });
+
+  /*var p = new Product(data);*/
+  console.log(p);
+  /*var errors = req.validationErrors();
+  if (errors) {
+    return res.status(400).send(errors);
+  }*/
   p.save(function(error, product){
     if(error){
       return deferred.reject(error);
@@ -109,4 +118,4 @@ exports.create = function(data){
     return deferred.resolve(product.id);
   });
   return deferred.promise;
-}
+};

@@ -52,8 +52,8 @@ var ProductSchema = new Schema({
       default: ''
     },
     friendlyPageName:{
-      type: String,
-      required: true
+      type: String
+
     }
   },
   tags:[{

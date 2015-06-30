@@ -44,5 +44,5 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
     app.route('/api/products/')
         .post(function(req, res){
             controller.create(req, res);
-        })
+        });
 };

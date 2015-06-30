@@ -39,7 +39,7 @@ module.exports = function (ShopCategory, app, auth, database, shopCore) {
                     })
                     .done();
             }else{
-                controller.addCategory(JSON.parse(req.body.cat))
+                controller.addCategory(JSON.parse(req.body.cat));
                 return res.status(200).json({});
             }
 

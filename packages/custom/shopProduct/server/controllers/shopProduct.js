@@ -47,8 +47,8 @@ exports.getBySKU = function (req, res) {
 };
 
 exports.create = function (req, res) {
-    console.log(req.body);
-    service.create(req.body)
+    console.log(req.body.product);
+    service.create(req.body.product)
         .then(function (id) {
             return res.status(200).json(id);
         })
@@ -59,4 +59,4 @@ exports.create = function (req, res) {
         .done();
 
 
-}
+};

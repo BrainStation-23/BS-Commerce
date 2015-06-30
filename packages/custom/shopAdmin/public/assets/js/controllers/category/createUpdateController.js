@@ -125,7 +125,7 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
             console.log($scope.cat.files);
             //if ($scope.cat.files && $scope.cat.files.length) {
                 var file = $scope.cat.files ? $scope.cat.files[0] : null;
-                if($scope.cat.parent == 'noparent'){
+                if($scope.cat.parent === 'noparent'){
                     $scope.cat.parent = null;
                 }
 
@@ -152,8 +152,8 @@ angular.module('mean.shopAdmin').controller('categoryCreateUpdateController', ['
             console.log('update function');
             console.log($scope.cat.files);
             //if ($scope.cat.files && $scope.cat.files.length) {
-            var file = $scope.cat.files ? $scope.cat.files[0] : null;
-            if($scope.cat.parent == 'noparent'){
+            //var file = $scope.cat.files ? $scope.cat.files[0] : null;
+            if($scope.cat.parent === 'noparent'){
                 $scope.cat.parent = null;
             }
             console.log($scope.cat);

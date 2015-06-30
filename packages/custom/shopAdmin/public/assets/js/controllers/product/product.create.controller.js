@@ -30,15 +30,17 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
             });
 
 
-        $scope.add = function (p) {
-            $scope.product.categories = [];
-            $scope.product.categories[0] = {
+
+        $scope.add = function () {
+            var p = {};
+            p.categories = [];
+            p.categories[0] = {
                 categoryId: $scope.product.category,
                 isFeatured: false,
                 displayOrder: 0
             };
-            $scope.product.tags = [];
-            $scope.product.info = {
+            p.tags = [];
+            p.info = {
                 name: $scope.product.name,
                 shortDescription: $scope.product.shortDescription,
                 fullDescription: $scope.product.fullDescription,
@@ -48,25 +50,25 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                 cost: $scope.product.cost,
                 publishDate:Date.now()
             };
-            $scope.product.meta = {
+            p.meta = {
                 keywords:$scope.product.metaKeywords,
                 title:$scope.product.metaTitle,
                 description:$scope.product.metaDescription,
                 friendlyPageName:$scope.product.metaFriendlyPageName
             };
-            console.log($scope.product.info);
-            console.log($scope.product.meta);
-            console.log($scope.product.tags);
-            console.log($scope.product.categories);
-            $http.post('/api/products', {product: $scope.product})
+            console.log(p.info);
+            console.log(p.meta);
+            console.log(p.tags);
+            console.log(p.categories);
+            $http.post('/api/products', {product: p})
                 .success(function (data, status, headers, config) {
-                    console.log('success')
+                    console.log('success');
                 })
                 .error(function (data, status, headers, config) {
 
                 });
 
 
-        }
+        };
     }
 ]);
