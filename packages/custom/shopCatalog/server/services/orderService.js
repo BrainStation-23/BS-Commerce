@@ -16,9 +16,9 @@ exports.createOrder = function(req) {
     return deferred.promise;
 };
 
-exports.getOrders = function(req, res) {
+exports.getOrders = function(searchQuery) {
     var deferred = Q.defer();
-    Order.find({})
+    Order.find(searchQuery)
         .exec(function(error, orders) {
             if(error) {
                 return deferred.reject(error);

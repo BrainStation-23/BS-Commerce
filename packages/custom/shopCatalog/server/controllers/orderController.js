@@ -2,6 +2,8 @@
 
 var orderService = require('../services/orderService');
     //cartService = require('../services/cartService');
+var mongoose = require('mongoose'),
+    Order = mongoose.model('Orders');
 
 
 exports.createOrder =function(req, res) {
@@ -15,15 +17,22 @@ exports.createOrder =function(req, res) {
         .done();
 };
 
+var getSearchQuery = function(query, callback) {
+    var query = {};
+    callback(query);
+};
+
 exports.getOrders = function(req, res) {
-    orderService.getOrders(req, res)
-        .then(function(orders){
-            return res.status(200).json(orders);
-        })
-        .catch(function(error){
-            return res.status(500).json({msg: 'Error occurred while loading orders', error: error});
-        })
-        .done();
+    getSearchQuery(req, function(searchQuery) {
+        orderService.getOrders(searchQuery)
+            .then(function(orders){
+                return res.status(200).json(orders);
+            })
+            .catch(function(error){
+                return res.status(500).json({msg: 'Error occurred while loading orders', error: error});
+            })
+            .done();
+    });
 };
 
 exports.getOrdersByCondition = function(req, res) {
@@ -58,4 +67,11 @@ exports.deleteOrderById = function(req, res) {
             return res.status(500).send({msg: 'Error occurred while deleting orders', error: error});
         })
         .done();
+};
+
+exports.getOrderEnums = function(req, res) {
+    var orderStatus = Order.schema.path('orderStatus').enumValues;
+    var paymentStatus = Order.schema.path('paymentStatus').enumValues;
+    var shippingStatus = Order.schema.path('shippingStatus').enumValues;
+    return res.status(200).send({orderStatus:orderStatus, paymentStatus: paymentStatus, shippingStatus: shippingStatus});
 };
