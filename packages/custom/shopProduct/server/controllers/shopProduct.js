@@ -3,6 +3,7 @@
 var service = require('../services/shopProduct');
 
 exports.list = function (req, res) {
+    console.log('list   '+ req.params.id);
     var promise;
     if (req.query.slug) {
         promise = service.search(req.query.slug, req.query.orderBy, req.query.currentPage, req.query.pageSize);
@@ -25,6 +26,7 @@ exports.list = function (req, res) {
 };
 
 exports.getById = function (req, res) {
+    console.log('id      .....    '+ req.params.id);
     service.getById(req.params.id)
         .then(function (product) {
             return res.status(200).json(product);

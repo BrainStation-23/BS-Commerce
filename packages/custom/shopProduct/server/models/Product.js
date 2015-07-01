@@ -9,17 +9,12 @@ var ProductSchema = new Schema({
       type: String,
       required: true
     },
-    shortDescription: {
-      type: String,
-      required: true
-    },
-    fullDescription: {
-      type: String,
-      required: true
-    },
+    shortDescription: String,
+    fullDescription: String,
     sku: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     price: {
       type: Number,
@@ -52,8 +47,9 @@ var ProductSchema = new Schema({
       default: ''
     },
     friendlyPageName:{
-      type: String
-
+      type: String,
+      required:true,
+      unique: true
     }
   },
   tags:[{

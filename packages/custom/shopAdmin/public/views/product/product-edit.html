@@ -1,0 +1,29 @@
+<div>
+    <h1> {{catId}} </h1>
+    <div class="admin-title"><h3>Edit Product Details <a ui-sref="Product.List">(back to Product list)</a></h3>
+        <button type="button" class="btn btn-danger" ng-click="delete();"> Delete </button> <button class="btn btn-info" type="button" ng-click="update();">Save All</button>
+    </div>
+</div>
+<div>
+    <tabset>
+        <tab heading="Product Info">
+            <tab-product-info></tab-product-info>
+        </tab>
+        <tab heading="Pictures">
+            <tab-product-pictures></tab-product-pictures>
+        </tab>
+        <tab heading="SEO">
+            <tab-product-seo></tab-product-seo>
+        </tab>
+        <tab heading="Discounts">
+            <tab-product-discounts></tab-product-discounts>
+        </tab>
+        <tab heading="Access Control list">
+            <tab-product-acl></tab-product-acl>
+        </tab>
+        <tab heading="Stores">
+            <tab-product-stores></tab-product-stores>
+        </tab>
+    </tabset>
+</div>
+

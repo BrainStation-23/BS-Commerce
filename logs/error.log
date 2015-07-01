@@ -3824,3 +3824,646 @@
 2015-06-18T10:14:11.987Z [object Object] 
 2015-06-18T10:14:52.190Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-06-18T10:15:01.483Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T07:05:54.214Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T08:12:25.241Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T08:17:35.543Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-30T08:17:35.952Z after map: 10 
+2015-06-30T08:21:54.172Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-06-30T08:21:54.372Z after map: 10 
+2015-06-30T08:22:04.350Z after map: 10 
+2015-06-30T08:22:37.559Z after map: 10 
+2015-06-30T08:24:41.744Z after map: 10 
+2015-06-30T08:24:59.294Z after map: 10 
+2015-06-30T08:24:59.337Z after map: 10 
+2015-06-30T08:25:07.141Z after map: 10 
+2015-06-30T08:25:28.948Z after map: 10 
+2015-06-30T08:25:28.970Z after map: 10 
+2015-06-30T08:25:38.660Z after map: 10 
+2015-06-30T08:25:41.168Z after map: 10 
+2015-06-30T08:25:54.928Z after map: 10 
+2015-06-30T08:27:04.648Z [object Object] 
+2015-06-30T08:27:04.651Z =================================================== 
+2015-06-30T08:27:04.651Z [object Object] 
+2015-06-30T08:27:04.655Z { _id: 559252d8f7d1e3f20996ed0d,
+  categories: 
+   [ { categoryId: 55925278f7d1e3f20996ed0c,
+       _id: 559252d8f7d1e3f20996ed0e,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'new-saree-orange-color',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'New Saree',
+     shortDescription: 'New Saree Orange color',
+     fullDescription: '<p>New Saree Orange color hot <br data-mce-bogus="1"></p>',
+     sku: 'new-saree-orange-color',
+     publishDate: Tue Jun 30 2015 14:27:04 GMT+0600 (BDT),
+     cost: 123,
+     oldPrice: 130,
+     price: 150 } } 
+2015-06-30T08:27:28.032Z after map: 10 
+2015-06-30T08:27:52.718Z [object Object] 
+2015-06-30T08:27:52.719Z =================================================== 
+2015-06-30T08:27:52.719Z [object Object] 
+2015-06-30T08:27:52.721Z { _id: 55925308f7d1e3f20996ed0f,
+  categories: 
+   [ { categoryId: 55925278f7d1e3f20996ed0c,
+       _id: 55925308f7d1e3f20996ed10,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'dsfsdf',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'test product name',
+     fullDescription: '<p><br data-mce-bogus="1"></p>',
+     sku: 'sdf',
+     publishDate: Tue Jun 30 2015 14:27:52 GMT+0600 (BDT),
+     cost: 234,
+     oldPrice: 234,
+     price: 234 } } 
+2015-06-30T08:27:52.724Z ValidationError: Path `info.shortDescription` is required. 
+2015-06-30T08:28:14.514Z [object Object] 
+2015-06-30T08:28:14.515Z =================================================== 
+2015-06-30T08:28:14.515Z [object Object] 
+2015-06-30T08:28:14.517Z { _id: 5592531ef7d1e3f20996ed11,
+  categories: 
+   [ { categoryId: 55925278f7d1e3f20996ed0c,
+       _id: 5592531ef7d1e3f20996ed12,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'dsfsdf',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'test product name',
+     shortDescription: 'sdfsdfsd',
+     fullDescription: '<p>f sdfsd <br data-mce-bogus="1"></p>',
+     sku: 'sdf',
+     publishDate: Tue Jun 30 2015 14:28:14 GMT+0600 (BDT),
+     cost: 234,
+     oldPrice: 234,
+     price: 234 } } 
+2015-06-30T08:43:01.348Z after map: 10 
+2015-06-30T08:46:51.211Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T08:47:02.103Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T08:47:33.506Z after map: 10 
+2015-06-30T08:47:33.584Z after map: 10 
+2015-06-30T08:47:35.171Z after map: 10 
+2015-06-30T09:13:13.997Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:13:26.462Z after map: 10 
+2015-06-30T09:13:27.700Z after map: 10 
+2015-06-30T09:13:27.716Z after map: 10 
+2015-06-30T09:23:05.888Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:23:17.166Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:29:45.828Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:31:07.389Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:33:29.663Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T09:52:34.822Z after map: 10 
+2015-06-30T09:52:34.855Z after map: 10 
+2015-06-30T10:02:45.565Z after map: 10 
+2015-06-30T11:06:25.130Z after map: 10 
+2015-06-30T11:06:31.449Z after map: 10 
+2015-06-30T11:12:45.917Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-06-30T11:23:06.500Z after map: 10 
+2015-06-30T11:23:22.256Z [object Object] 
+2015-06-30T11:23:22.258Z =================================================== 
+2015-06-30T11:23:22.258Z [object Object] 
+2015-06-30T11:23:22.263Z { _id: 55927c2a584d103361fb5c2e,
+  categories: 
+   [ { categoryId: 55802350fb85fda0437a4166,
+       _id: 55927c2a584d103361fb5c2f,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: { description: '', title: '', keywords: [] },
+  info: 
+   { name: 'test product name',
+     fullDescription: '<p><br data-mce-bogus="1"></p>',
+     publishDate: Tue Jun 30 2015 17:23:22 GMT+0600 (BDT),
+     cost: 0,
+     oldPrice: 0,
+     price: 0 } } 
+2015-06-30T11:23:22.269Z ValidationError: Path `info.sku` is required., Path `info.shortDescription` is required. 
+2015-06-30T11:35:56.848Z after map: 10 
+2015-06-30T12:26:36.628Z after map: 10 
+2015-06-30T14:07:22.700Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T06:28:12.685Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T06:28:58.720Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-07-01T06:28:59.146Z after map: 10 
+2015-07-01T06:29:22.170Z after map: 10 
+2015-07-01T06:29:22.257Z after map: 10 
+2015-07-01T06:29:25.103Z after map: 10 
+2015-07-01T06:30:23.575Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T06:33:41.224Z after map: 10 
+2015-07-01T06:33:42.888Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-07-01T06:33:43.143Z after map: 10 
+2015-07-01T06:34:35.061Z after map: 10 
+2015-07-01T06:36:17.424Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T06:39:03.159Z [object Object] 
+2015-07-01T06:39:03.161Z =================================================== 
+2015-07-01T06:39:03.162Z [object Object] 
+2015-07-01T06:39:03.171Z { _id: 55938b078561e8ed139d9740,
+  categories: 
+   [ { categoryId: 55802351fb85fda0437a417b,
+       _id: 55938b078561e8ed139d9741,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'sdfsdfsd',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'test product name',
+     shortDescription: 'sdf sdf sdf',
+     fullDescription: '<p>sdf sdf sdf sdf sdfs dfsd fsf <br data-mce-bogus="1"></p>',
+     sku: 'sdfsdfsd',
+     publishDate: Wed Jul 01 2015 12:39:03 GMT+0600 (BDT),
+     cost: 23,
+     oldPrice: 243,
+     price: 23 } } 
+2015-07-01T06:56:24.138Z after map: 10 
+2015-07-01T06:56:24.171Z after map: 10 
+2015-07-01T06:56:25.129Z after map: 10 
+2015-07-01T06:57:30.937Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T06:57:34.053Z after map: 10 
+2015-07-01T07:00:57.829Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T07:11:10.420Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T07:14:35.056Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T07:19:35.982Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T07:26:47.055Z after map: 10 
+2015-07-01T07:32:48.666Z after map: 10 
+2015-07-01T07:32:48.742Z after map: 10 
+2015-07-01T07:32:50.262Z after map: 10 
+2015-07-01T08:17:20.026Z after map: 10 
+2015-07-01T08:20:25.701Z after map: 10 
+2015-07-01T08:22:22.240Z after map: 10 
+2015-07-01T08:25:50.766Z after map: 10 
+2015-07-01T08:47:23.873Z after map: 10 
+2015-07-01T08:48:41.318Z after map: 10 
+2015-07-01T08:51:15.993Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T08:51:21.829Z after map: 10 
+2015-07-01T08:51:24.798Z after map: 10 
+2015-07-01T08:53:02.987Z after map: 10 
+2015-07-01T08:53:50.626Z after map: 10 
+2015-07-01T08:54:44.034Z after map: 10 
+2015-07-01T08:55:32.718Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T08:55:36.890Z after map: 10 
+2015-07-01T08:55:37.103Z listundefined 
+2015-07-01T08:56:21.477Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T08:56:22.751Z after map: 10 
+2015-07-01T08:56:23.025Z listundefined 
+2015-07-01T09:09:09.418Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:09:19.846Z after map: 10 
+2015-07-01T09:09:20.046Z listundefined 
+2015-07-01T09:10:22.167Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:10:23.773Z after map: 10 
+2015-07-01T09:10:23.953Z listundefined 
+2015-07-01T09:11:09.783Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:11:12.463Z after map: 10 
+2015-07-01T09:11:12.634Z listundefined 
+2015-07-01T09:11:36.228Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:11:45.243Z after map: 10 
+2015-07-01T09:11:45.437Z listundefined 
+2015-07-01T09:12:25.878Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:12:49.455Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:13:12.073Z after map: 10 
+2015-07-01T09:13:12.265Z listundefined 
+2015-07-01T09:14:03.498Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:14:07.568Z after map: 10 
+2015-07-01T09:14:07.760Z listundefined 
+2015-07-01T09:15:01.081Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:15:03.000Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:15:14.634Z after map: 10 
+2015-07-01T09:15:14.833Z listundefined 
+2015-07-01T09:15:53.967Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:15:57.076Z after map: 10 
+2015-07-01T09:15:57.263Z listundefined 
+2015-07-01T09:16:09.838Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:17:46.979Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:17:52.204Z after map: 10 
+2015-07-01T09:17:52.407Z list   undefined 
+2015-07-01T09:18:49.392Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:19:00.092Z after map: 10 
+2015-07-01T09:19:00.283Z list   undefined 
+2015-07-01T09:21:08.627Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:21:10.679Z after map: 10 
+2015-07-01T09:21:10.870Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:38:10.474Z after map: 10 
+2015-07-01T09:38:10.746Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:39:45.393Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:39:58.449Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:40:30.589Z after map: 10 
+2015-07-01T09:40:30.751Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:43:27.418Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:43:29.745Z after map: 10 
+2015-07-01T09:43:29.932Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:43:59.793Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:44:02.775Z after map: 10 
+2015-07-01T09:44:02.954Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:44:13.242Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:44:15.086Z after map: 10 
+2015-07-01T09:44:15.272Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:46:25.846Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:46:27.165Z after map: 10 
+2015-07-01T09:46:27.361Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:46:48.850Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:46:52.581Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:47:45.979Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:47:47.558Z after map: 10 
+2015-07-01T09:47:47.758Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:48:44.384Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:49:08.981Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T09:49:20.072Z after map: 10 
+2015-07-01T09:50:42.722Z after map: 10 
+2015-07-01T09:50:58.830Z after map: 10 
+2015-07-01T09:50:59.019Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:53:51.100Z after map: 10 
+2015-07-01T09:53:51.267Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:55:03.084Z after map: 10 
+2015-07-01T09:55:03.295Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T09:56:24.597Z after map: 10 
+2015-07-01T09:56:24.797Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T10:41:17.385Z after map: 10 
+2015-07-01T10:41:17.507Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T10:46:15.840Z after map: 10 
+2015-07-01T10:46:15.975Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T10:49:12.063Z after map: 10 
+2015-07-01T10:49:12.230Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T10:49:19.438Z after map: 10 
+2015-07-01T10:49:19.633Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T10:49:22.690Z list   undefined 
+2015-07-01T10:49:25.688Z after map: 10 
+2015-07-01T10:49:25.959Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T10:49:45.999Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T10:49:49.961Z after map: 10 
+2015-07-01T10:49:50.247Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:07:17.520Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:07:21.201Z after map: 10 
+2015-07-01T11:07:21.540Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:07:32.972Z after map: 10 
+2015-07-01T11:07:33.194Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:08:10.367Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:08:16.339Z after map: 10 
+2015-07-01T11:08:16.600Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:11:06.681Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:11:11.887Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:11:43.094Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:11:56.032Z after map: 10 
+2015-07-01T11:11:56.191Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:13:24.464Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:13:33.188Z after map: 10 
+2015-07-01T11:13:33.414Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T11:13:55.519Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T11:13:58.446Z after map: 10 
+2015-07-01T11:13:58.671Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:29:33.344Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:29:41.311Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:29:47.994Z list   undefined 
+2015-07-01T12:29:50.371Z after map: 10 
+2015-07-01T12:29:50.727Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:30:20.118Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:30:26.332Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:30:30.131Z after map: 10 
+2015-07-01T12:30:30.411Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:35:13.261Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:35:20.524Z after map: 10 
+2015-07-01T12:35:20.789Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:35:43.267Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:35:44.952Z after map: 10 
+2015-07-01T12:35:45.203Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:36:27.497Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:36:29.346Z after map: 10 
+2015-07-01T12:36:29.627Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:36:41.963Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:37:02.265Z after map: 10 
+2015-07-01T12:37:02.564Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:37:45.458Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:37:46.760Z after map: 10 
+2015-07-01T12:37:47.021Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:37:59.721Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:38:07.036Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:38:25.974Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:38:27.776Z after map: 10 
+2015-07-01T12:38:28.025Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:38:33.365Z after map: 10 
+2015-07-01T12:38:33.752Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:39:08.357Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:39:35.965Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:39:43.518Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:39:50.070Z after map: 10 
+2015-07-01T12:39:50.324Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:40:29.029Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:40:43.207Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:41:00.699Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:41:18.531Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:41:19.912Z after map: 10 
+2015-07-01T12:41:20.166Z id      .....    55938b078561e8ed139d9740 
+2015-07-01T12:47:20.899Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:48:19.855Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:49:57.309Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:50:00.471Z after map: 10 
+2015-07-01T12:50:00.768Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:50:25.706Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:51:01.927Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:51:03.978Z after map: 10 
+2015-07-01T12:51:04.309Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:51:29.768Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:51:55.789Z after map: 10 
+2015-07-01T12:51:56.075Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:52:12.262Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:52:14.244Z after map: 10 
+2015-07-01T12:52:14.600Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:52:23.735Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:52:25.164Z after map: 10 
+2015-07-01T12:52:25.414Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:52:57.871Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:52:59.800Z after map: 10 
+2015-07-01T12:53:00.070Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T12:53:25.852Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T12:53:27.752Z after map: 10 
+2015-07-01T12:53:28.033Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:27:10.159Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:28:29.560Z after map: 10 
+2015-07-01T13:28:29.815Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:30:10.354Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:32:58.692Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:34:17.315Z after map: 10 
+2015-07-01T13:34:17.516Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:35:00.138Z after map: 10 
+2015-07-01T13:35:00.384Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:39:55.762Z after map: 10 
+2015-07-01T13:39:56.023Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:40:03.357Z [object Object] 
+2015-07-01T13:40:03.363Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/shopProduct.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:42:21.746Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:42:25.443Z after map: 10 
+2015-07-01T13:42:25.929Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:42:31.196Z [object Object] 
+2015-07-01T13:42:31.203Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:43:06.669Z after map: 10 
+2015-07-01T13:43:06.992Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:43:11.216Z [object Object] 
+2015-07-01T13:43:11.219Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:44:17.049Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:44:22.373Z after map: 10 
+2015-07-01T13:44:22.708Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:45:20.956Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:45:21.003Z Error: Error getting collection: sessions
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:160:19
+    at Db.collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/db.js:526:27)
+    at MongoStore._get_collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:158:17)
+    at MongoStore.get (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:222:10)
+    at session (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express-session/index.js:404:11)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:302:13)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:270:7
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10) 
+2015-07-01T13:45:21.007Z Error: Cannot determine state of server
+    at canCheckoutReader (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/connection/server.js:779:12)
+    at Server.checkoutReader (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/connection/server.js:793:16)
+    at Cursor.nextObject (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/cursor.js:748:48)
+    at Collection.findOne (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/collection/query.js:162:10)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:223:18
+    at MongoStore._get_collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:156:21)
+    at MongoStore.get (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:222:10)
+    at session (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express-session/index.js:404:11)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:302:13) 
+2015-07-01T13:45:21.065Z Error: Cannot determine state of server
+    at canCheckoutReader (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/connection/server.js:779:12)
+    at Server.checkoutReader (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/connection/server.js:793:16)
+    at Cursor.nextObject (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/cursor.js:748:48)
+    at Collection.findOne (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/node_modules/mongodb/lib/mongodb/collection/query.js:162:10)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:223:18
+    at MongoStore._get_collection (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:156:21)
+    at MongoStore.get (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/connect-mongo/lib/connect-mongo.js:222:10)
+    at session (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express-session/index.js:404:11)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at trim_prefix (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:302:13) 
+2015-07-01T13:45:22.775Z after map: 10 
+2015-07-01T13:45:23.140Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:45:28.738Z  
+2015-07-01T13:45:28.739Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:14:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:47:17.111Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:47:26.608Z after map: 10 
+2015-07-01T13:47:26.861Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:47:32.932Z  
+2015-07-01T13:47:32.933Z  
+2015-07-01T13:47:32.934Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:48:45.600Z after map: 10 
+2015-07-01T13:48:45.854Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:48:55.271Z  
+2015-07-01T13:48:55.271Z  
+2015-07-01T13:48:55.272Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:52:19.433Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:52:23.339Z after map: 10 
+2015-07-01T13:52:23.643Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:52:29.812Z [object Object] 
+2015-07-01T13:52:29.813Z  
+2015-07-01T13:52:29.814Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:54:28.698Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:54:38.529Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:54:44.867Z after map: 10 
+2015-07-01T13:54:45.125Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T13:54:52.480Z [object Object] 
+2015-07-01T13:54:52.481Z  
+2015-07-01T13:54:52.484Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:19:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T13:59:18.700Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:59:31.081Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T13:59:49.670Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:00:08.722Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:00:18.155Z after map: 10 
+2015-07-01T14:00:18.429Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T14:00:23.622Z  
+2015-07-01T14:00:23.625Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:29:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T14:01:31.125Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:01:35.213Z after map: 10 
+2015-07-01T14:01:35.634Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T14:01:40.937Z posted here 
+2015-07-01T14:01:40.938Z  
+2015-07-01T14:01:40.940Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:30:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T14:02:09.905Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:02:11.321Z after map: 10 
+2015-07-01T14:02:11.622Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T14:02:17.644Z posted here 
+2015-07-01T14:02:17.644Z [object Object] 
+2015-07-01T14:02:17.646Z  
+2015-07-01T14:02:17.648Z TypeError: Cannot read property 'name' of undefined
+    at Object.exports.create (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:15:19)
+    at /home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:31:28
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at onFinish (/home/saif/projects/BS-Commerce/node_modules/multer/index.js:211:16) 
+2015-07-01T14:02:53.951Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:03:14.363Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:03:16.194Z after map: 10 
+2015-07-01T14:03:16.595Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-01T14:03:20.973Z posted here 
+2015-07-01T14:03:20.973Z [object Object] 
+2015-07-01T14:03:20.975Z [object Object] 
+2015-07-01T14:03:45.427Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-01T14:04:28.944Z Mean app started on port 3000 (development) cluster.worker.id:  

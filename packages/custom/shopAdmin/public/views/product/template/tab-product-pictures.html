@@ -1,1 +1,63 @@
-<div>You need to save the category before you can add products for this category page.</div>
+<div class="form-container">
+    <div class="row">
+        <table st-table="rowCollection" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Display Order</th>
+                <th>Alt</th>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in product.images">
+                <td><img ng-src="{{'/api/products/media/'+item.id}}" class="thumb-preview"></td>
+                <td>{{item.displayOrder}}</td>
+                <td>{{item.alt}}</td>
+                <td>{{item.title}}</td>
+                <td><a href="#">Edit</a></td>
+                <!--ui-sref="Product.Edit({productId: item.id})"-->
+                <td>
+                    <div class="btn btn-danger" ng-click="deleteImage(item.id);"><i
+                            class="fa fa-remove fa-fw"></i>Delete
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <question-mark></question-mark> Picture
+        </div>
+        <div class="col-md-2">
+            <img ngf-src="picture.files[0]" class="img-thumbnail thumb-preview" style="cursor: pointer;"
+                 ng-hide="picture.files[0] === null"
+                 ngf-default-src="/shopAdmin/assets/img/upload-orange.png" width="100px" height="100px" ngf-select data-ng-model="picture.files">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <question-mark></question-mark>Picture alt Text
+        </div>
+        <div class="col-md-3"><input placeholder="image alt text" class="form-control" data-ng-model="picture.alt"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        <question-mark></question-mark>Picture Title
+        </div>
+        <div class="col-md-3">
+            <input placeholder="Picture Title" class="form-control" data-ng-model="picture.title">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-2">
+        <input class="btn btn-primary" type="button" ng-click="upload(picture.files)"
+               value="add Image to Product">
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
             })
             .state('Product.List', {
                 url: '/List',
-                templateUrl: 'shopAdmin/views/product/list.html',
+                templateUrl: 'shopAdmin/views/product/product-list.html',
                 controller: 'productListController'
             })
             .state('Product.Edit', {
@@ -19,11 +19,11 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 params: {
                     catId: null
                 },
-                templateUrl: 'shopAdmin/views/product/edit.html',
+                templateUrl: 'shopAdmin/views/product/product-edit.html',
                 controller: 'productUpdateController'
             }).state('Product.Create', {
                 url: '/Create',
-                templateUrl: 'shopAdmin/views/product/create.html',
+                templateUrl: 'shopAdmin/views/product/product-create.html',
                 controller: 'productCreateController'
             });
 

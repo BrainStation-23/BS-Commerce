@@ -56,10 +56,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                 description:$scope.product.metaDescription,
                 friendlyPageName:$scope.product.metaFriendlyPageName
             };
-            console.log(p.info);
-            console.log(p.meta);
-            console.log(p.tags);
-            console.log(p.categories);
+
             $http.post('/api/products', {product: p})
                 .success(function (data, status, headers, config) {
                     console.log('success');
