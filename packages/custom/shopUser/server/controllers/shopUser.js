@@ -240,32 +240,19 @@ exports.getUserById = function(req, res) {
 };
 
 var generateSearchQuery = function(req, callback) {
-	//console.dir(req.query.roles +' '+ req.query.email + ' ' + req.query.name);
 	var searchQuery={};
 	var roles = [];
 	if(req.query.roles !== '') {
 		roles = req.query.roles.split(',');
 	}
-	if(req.query.roles !== '' && req.query.email !== '' && req.query.name !== ''){
-		searchQuery = { $and: [{roles: { $in: roles} },{ email: req.query.email, name: req.query.name }]};
+	if(req.query.roles !== '') {
+		searchQuery = {roles: { $in: roles}};
 	}
-	else if(req.query.roles !== '' && req.query.email !== '' && req.query.name === ''){
-		searchQuery = { $and: [{ roles: { $in: roles }},{ email: req.query.email }]};
+	if( req.query.email !== '') {
+		searchQuery.email = req.query.email;
 	}
-	else if(req.query.roles !== '' && req.query.email === '' && req.query.name !== ''){
-		searchQuery = { $and: [{ roles: { $in: roles }},{ name: req.query.name }]};
-	}
-	else if(req.query.roles !== '' && req.query.email === '' && req.query.name === ''){
-		searchQuery = {roles: {$in: roles }};
-	}
-	else if(req.query.email !== '' && req.query.name !== ''){
-		searchQuery = {email: req.query.email,name: req.query.name};
-	}
-	else if(req.query.email !== '' && req.query.name === '') {
-		searchQuery = {email: req.query.email};
-	}
-	else if(req.query.email === '' && req.query.name !== '') {
-		searchQuery = {name: req.query.name};
+	if(req.query.name !== '') {
+		searchQuery. name = req.query.name;
 	}
 
 	callback(searchQuery);
