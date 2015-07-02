@@ -3,7 +3,7 @@
 angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
     function($scope, Global, $http) {
 
-        $scope.totalItems =15;
+        $scope.totalItems =20;
         $scope.currentPage =1 ;
         $scope.maxSize = 5;
         $scope.numberOfDisplay =5;

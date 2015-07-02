@@ -62,3 +62,20 @@ exports.create = function (req, res) {
 
 
 };
+
+exports.update = function (req, res) {
+    console.log(req.params.id);
+    console.log(req.body.product);
+
+    service.update(req.params.id, req.body.product)
+        .then(function (product) {
+            return res.status(200).json(product);
+        })
+        .catch(function (error) {
+            console.log(error);
+            return res.status(500).json([{msg: 'Unhandled Error!'}]);
+        })
+        .done();
+
+
+};

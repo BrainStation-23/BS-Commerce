@@ -119,3 +119,20 @@ exports.create = function(data){
   });
   return deferred.promise;
 };
+
+exports.update = function(id, product){
+  var deferred = Q.defer();
+  console.log('===================================================');
+  console.log('Product updating');
+
+  Product.update({_id: id}, product, {upsert: true}, function(error){
+    if (error) {
+      return deferred.reject(error);
+    } else {
+      return deferred.resolve(product);
+    }
+  });
+
+  return deferred.promise;
+
+};

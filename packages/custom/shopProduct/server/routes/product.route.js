@@ -52,8 +52,11 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
                 .done();
         });
 
-    app.route('/api/products/')
+    app.route('/api/products/:id')
         .post(function(req, res){
             controller.create(req, res);
+        })
+        .put(function(req, res){
+            controller.update(req, res);
         });
 };

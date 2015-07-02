@@ -4470,3 +4470,420 @@
 2015-07-02T05:20:45.519Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-07-02T06:49:51.665Z Mean app started on port 3000 (development) cluster.worker.id:  
 2015-07-02T06:52:47.437Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T06:53:50.784Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T06:55:52.084Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T07:23:25.243Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-07-02T07:23:25.929Z after map: 10 
+2015-07-02T07:24:00.547Z TypeError: Cannot read property 'id' of undefined
+    at exports.getCart (/home/saif/projects/BS-Commerce/packages/custom/shopCatalog/server/controllers/cartController.js:6:31)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:261:10)
+    at /home/saif/projects/BS-Commerce/node_modules/multer/index.js:218:19
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:82:5) 
+2015-07-02T07:24:00.773Z after map: 10 
+2015-07-02T07:24:06.375Z after map: 10 
+2015-07-02T07:32:27.780Z list   undefined 
+2015-07-02T07:32:31.150Z after map: 10 
+2015-07-02T08:05:04.306Z [object Object] 
+2015-07-02T08:05:04.307Z =================================================== 
+2015-07-02T08:05:04.308Z [object Object] 
+2015-07-02T08:05:04.320Z { _id: 5594f0b08ce7ad73171f611d,
+  categories: 
+   [ { categoryId: 55802350fb85fda0437a4167,
+       _id: 5594f0b08ce7ad73171f611e,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: { description: '', title: '', keywords: [] },
+  info: 
+   { name: 'White Printed Panjabi -TS211 By Top Style',
+     shortDescription: 'Product Info:\n\n    Fabrics: Cotton\n    Style: Applique design on button placket & collar',
+     fullDescription: '<p><strong><strong>Product Info:</strong></strong></p>\n<ul style="list-style-type: square;"><li><span style="font-size: small; font-family: verdana,geneva;">Fabrics: Cotton</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Style: <span style="color: black;">Applique design on button placket &amp; collar</span><br></span></li><li><span style="font-size: small; font-family: verdana,geneva;">Comfortable material</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Exclusive Rainbow design</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Color: As Given Picture</span></li><li><span style="font-size: small; font-family: verdana,geneva;"><span style="font-family: verdana,geneva; font-size: small;">Collection for Men</span></span></li><li><span style="font-size: small; font-family: verdana, geneva;">Size: S/M/L<br></span></li></ul>\n\n\n<table cellpadding="0" cellspacing="0"><tbody><tr>\n<td style="text-align: center;" rowspan="2"><strong><span style="font-size: small; font-family: verdana,geneva;">Size Chart: </span></strong></td>\n<td style="text-align: center;" colspan="3"><strong><span style="font-size: small; font-family: verdana,geneva;">Measurement (Inch.)</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Length</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Width</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Shoulder</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">S 20<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">35</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">M 20.5<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">36</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20.5</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17.5</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">L 22</span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">37</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">22</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">18</span></td></tr></tbody></table>',
+     sku: 'TS211',
+     publishDate: Thu Jul 02 2015 14:05:04 GMT+0600 (BDT),
+     cost: 1000,
+     oldPrice: 1050,
+     price: 1100 } } 
+2015-07-02T08:05:04.325Z ValidationError: Path `meta.friendlyPageName` is required. 
+2015-07-02T08:07:14.045Z [object Object] 
+2015-07-02T08:07:14.046Z =================================================== 
+2015-07-02T08:07:14.046Z [object Object] 
+2015-07-02T08:07:14.049Z { _id: 5594f1328ce7ad73171f611f,
+  categories: 
+   [ { categoryId: 55802350fb85fda0437a4167,
+       _id: 5594f1328ce7ad73171f6120,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: { description: '', title: '', keywords: [] },
+  info: 
+   { name: 'White Printed Panjabi -TS211 By Top Style',
+     shortDescription: 'Product Info:\n\n    Fabrics: Cotton\n    Style: Applique design on button placket & collar',
+     fullDescription: '<p><strong><strong>Product Info:</strong></strong></p>\n<ul style="list-style-type: square;"><li><span style="font-size: small; font-family: verdana,geneva;">Fabrics: Cotton</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Style: <span style="color: black;">Applique design on button placket &amp; collar</span><br></span></li><li><span style="font-size: small; font-family: verdana,geneva;">Comfortable material</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Exclusive Rainbow design</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Color: As Given Picture</span></li><li><span style="font-size: small; font-family: verdana,geneva;"><span style="font-family: verdana,geneva; font-size: small;">Collection for Men</span></span></li><li><span style="font-size: small; font-family: verdana, geneva;">Size: S/M/L<br></span></li></ul>\n\n\n<table cellpadding="0" cellspacing="0"><tbody><tr>\n<td style="text-align: center;" rowspan="2"><strong><span style="font-size: small; font-family: verdana,geneva;">Size Chart: </span></strong></td>\n<td style="text-align: center;" colspan="3"><strong><span style="font-size: small; font-family: verdana,geneva;">Measurement (Inch.)</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Length</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Width</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Shoulder</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">S 20<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">35</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">M 20.5<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">36</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20.5</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17.5</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">L 22</span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">37</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">22</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">18</span></td></tr></tbody></table>',
+     sku: 'TS211',
+     publishDate: Thu Jul 02 2015 14:07:14 GMT+0600 (BDT),
+     cost: 1000,
+     oldPrice: 1050,
+     price: 1100 } } 
+2015-07-02T08:07:14.052Z ValidationError: Path `meta.friendlyPageName` is required. 
+2015-07-02T08:07:55.515Z [object Object] 
+2015-07-02T08:07:55.516Z =================================================== 
+2015-07-02T08:07:55.516Z [object Object] 
+2015-07-02T08:07:55.519Z { _id: 5594f15b8ce7ad73171f6121,
+  categories: 
+   [ { categoryId: 55802350fb85fda0437a4167,
+       _id: 5594f15b8ce7ad73171f6122,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'White_Printed_Panjabi-TS211_By_Top_Style',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'White Printed Panjabi -TS211 By Top Style',
+     shortDescription: 'Product Info:\n\n    Fabrics: Cotton\n    Style: Applique design on button placket & collar',
+     fullDescription: '<p><strong><strong>Product Info:</strong></strong></p>\n<ul style="list-style-type: square;"><li><span style="font-size: small; font-family: verdana,geneva;">Fabrics: Cotton</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Style: <span style="color: black;">Applique design on button placket &amp; collar</span><br></span></li><li><span style="font-size: small; font-family: verdana,geneva;">Comfortable material</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Exclusive Rainbow design</span></li><li><span style="font-size: small; font-family: verdana,geneva;">Color: As Given Picture</span></li><li><span style="font-size: small; font-family: verdana,geneva;"><span style="font-family: verdana,geneva; font-size: small;">Collection for Men</span></span></li><li><span style="font-size: small; font-family: verdana, geneva;">Size: S/M/L<br></span></li></ul>\n\n\n<table cellpadding="0" cellspacing="0"><tbody><tr>\n<td style="text-align: center;" rowspan="2"><strong><span style="font-size: small; font-family: verdana,geneva;">Size Chart: </span></strong></td>\n<td style="text-align: center;" colspan="3"><strong><span style="font-size: small; font-family: verdana,geneva;">Measurement (Inch.)</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Length</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Width</span></strong></td>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">Shoulder</span></strong></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">S 20<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">35</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">M 20.5<br></span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">36</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">20.5</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">17.5</span></td>\n</tr>\n<tr>\n<td style="text-align: center;"><strong><span style="font-size: small; font-family: verdana,geneva;">L 22</span></strong></td>\n<td style="text-align: center;"><span face="verdana, geneva" size="2" style="font-family: verdana, geneva; font-size: small;">37</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">22</span></td>\n<td style="text-align: center;"><span style="font-size: small; font-family: verdana,geneva;">18</span></td></tr></tbody></table>',
+     sku: 'TS211',
+     publishDate: Thu Jul 02 2015 14:07:55 GMT+0600 (BDT),
+     cost: 1000,
+     oldPrice: 1050,
+     price: 1100 } } 
+2015-07-02T08:18:15.754Z after map: 10 
+2015-07-02T08:18:20.159Z list   undefined 
+2015-07-02T08:18:23.178Z list   undefined 
+2015-07-02T08:18:27.907Z list   undefined 
+2015-07-02T08:18:30.525Z list   undefined 
+2015-07-02T08:18:33.672Z list   undefined 
+2015-07-02T08:18:34.863Z list   undefined 
+2015-07-02T08:18:38.720Z list   undefined 
+2015-07-02T08:18:43.803Z list   undefined 
+2015-07-02T08:18:45.101Z list   undefined 
+2015-07-02T08:19:02.912Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T08:19:04.335Z list   undefined 
+2015-07-02T08:19:06.246Z list   undefined 
+2015-07-02T08:19:10.508Z after map: 10 
+2015-07-02T08:19:10.687Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T08:20:00.826Z [object Object] 
+2015-07-02T08:53:46.807Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T08:53:50.596Z after map: 10 
+2015-07-02T08:53:50.936Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T08:54:01.716Z [object Object] 
+2015-07-02T08:58:48.377Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T08:59:04.102Z [object Object] 
+2015-07-02T08:59:07.797Z after map: 10 
+2015-07-02T08:59:08.140Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T08:59:17.856Z [object Object] 
+2015-07-02T08:59:52.555Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T09:00:44.419Z after map: 10 
+2015-07-02T09:00:44.671Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T09:00:52.222Z [object Object] 
+2015-07-02T09:02:44.581Z [object Object] 
+2015-07-02T09:03:41.555Z after map: 10 
+2015-07-02T09:03:41.787Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T09:03:52.331Z [object Object] 
+2015-07-02T09:05:58.202Z after map: 10 
+2015-07-02T09:05:58.512Z id      .....    5594f15b8ce7ad73171f6121 
+2015-07-02T09:06:05.888Z [object Object] 
+2015-07-02T09:06:49.975Z list   undefined 
+2015-07-02T09:06:53.603Z after map: 10 
+2015-07-02T09:06:53.994Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:07:06.357Z [object Object] 
+2015-07-02T09:09:32.397Z after map: 10 
+2015-07-02T09:09:32.662Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:09:38.816Z [object Object] 
+2015-07-02T09:10:02.389Z after map: 10 
+2015-07-02T09:10:02.674Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:10:20.263Z after map: 10 
+2015-07-02T09:10:20.472Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:11:04.292Z after map: 10 
+2015-07-02T09:11:04.505Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:12:49.397Z after map: 10 
+2015-07-02T09:12:49.682Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:12:55.104Z [object Object] 
+2015-07-02T09:17:36.501Z after map: 10 
+2015-07-02T09:17:36.747Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T09:17:44.986Z [object Object] 
+2015-07-02T09:17:55.868Z [object Object] 
+2015-07-02T10:25:22.156Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T10:25:30.893Z after map: 10 
+2015-07-02T10:25:30.989Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T10:25:56.078Z [object Object] 
+2015-07-02T12:17:41.281Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T12:18:17.448Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T12:19:34.225Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T12:19:43.920Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T12:22:08.376Z after map: 10 
+2015-07-02T12:22:08.708Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T12:34:28.717Z [object Object] 
+2015-07-02T12:34:33.386Z after map: 10 
+2015-07-02T12:34:33.643Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T12:34:39.257Z [object Object] 
+2015-07-02T12:36:05.221Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T12:36:55.520Z id      .....    55952fdf6f8c3d325b32e9ed 
+2015-07-02T12:47:38.665Z id      .....    55952fdf6f8c3d325b32e9ed 
+2015-07-02T13:40:56.762Z after map: 10 
+2015-07-02T13:40:57.018Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:41:04.106Z [object Object] 
+2015-07-02T13:42:54.327Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:42:56.533Z after map: 10 
+2015-07-02T13:42:56.840Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:43:25.837Z [object Object] 
+2015-07-02T13:44:03.497Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:44:11.237Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:44:20.960Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:44:35.186Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:44:40.893Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:44:51.158Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:45:24.824Z after map: 10 
+2015-07-02T13:45:25.067Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:45:33.358Z [object Object] 
+2015-07-02T13:45:33.433Z [object Object] 
+2015-07-02T13:45:33.433Z =================================================== 
+2015-07-02T13:45:33.433Z [object Object] 
+2015-07-02T13:45:33.438Z { _id: 5595407d56908e4514098740,
+  categories: 
+   [ { categoryId: 55925278f7d1e3f20996ed0c,
+       _id: 5595407d56908e4514098741,
+       displayOrder: 0,
+       isFeatured: false } ],
+  photos: [],
+  tags: [],
+  meta: 
+   { friendlyPageName: 'new-saree-orange-color',
+     description: '',
+     title: '',
+     keywords: [] },
+  info: 
+   { name: 'New Saree',
+     shortDescription: 'New Saree Orange color',
+     fullDescription: '<p>New Saree Orange color hot</p>',
+     sku: 'new-saree-orange-color',
+     publishDate: Thu Jul 02 2015 19:45:33 GMT+0600 (BDT),
+     cost: 123,
+     oldPrice: 130,
+     price: 150 } } 
+2015-07-02T13:45:33.447Z MongoError: E11000 duplicate key error index: mean-dev.products.$info.sku_1 dup key: { : "new-saree-orange-color" } 
+2015-07-02T13:46:10.190Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:46:13.228Z after map: 10 
+2015-07-02T13:46:13.604Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:46:18.269Z [object Object] 
+2015-07-02T13:46:18.338Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T13:46:18.338Z [object Object] 
+2015-07-02T13:46:18.339Z =================================================== 
+2015-07-02T13:46:18.339Z Product updating 
+2015-07-02T13:46:18.341Z CastError: Cast to ObjectId failed for value "[object Object]" at path "_id" 
+2015-07-02T13:46:51.848Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:47:00.100Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:47:07.048Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:47:23.744Z after map: 10 
+2015-07-02T13:47:23.991Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:47:36.605Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:47:40.514Z after map: 10 
+2015-07-02T13:47:40.844Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:47:46.963Z [object Object] 
+2015-07-02T13:47:47.029Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T13:47:47.029Z [object Object] 
+2015-07-02T13:47:47.030Z =================================================== 
+2015-07-02T13:47:47.030Z Product updating 
+2015-07-02T13:47:47.032Z CastError: Cast to ObjectId failed for value "[object Object]" at path "_id" 
+2015-07-02T13:49:55.507Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:50:00.799Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:50:03.759Z after map: 10 
+2015-07-02T13:50:04.033Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:50:21.891Z [object Object] 
+2015-07-02T13:50:21.981Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T13:50:21.981Z [object Object] 
+2015-07-02T13:50:21.982Z =================================================== 
+2015-07-02T13:50:21.982Z Product updating 
+2015-07-02T13:50:21.986Z CastError: Cast to ObjectId failed for value "[object Object]" at path "_id" 
+2015-07-02T13:56:12.354Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:56:41.111Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T13:56:44.424Z after map: 10 
+2015-07-02T13:56:44.715Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T13:56:49.893Z [object Object] 
+2015-07-02T13:56:49.954Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T13:56:49.955Z [object Object] 
+2015-07-02T13:56:49.955Z =================================================== 
+2015-07-02T13:56:49.955Z Product updating 
+2015-07-02T14:06:34.059Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:07:43.003Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:09:10.709Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:12:23.613Z after map: 10 
+2015-07-02T14:12:23.817Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:12:29.521Z [object Object] 
+2015-07-02T14:12:29.607Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T14:12:29.607Z [object Object] 
+2015-07-02T14:12:29.617Z =================================================== 
+2015-07-02T14:12:29.617Z Product updating 
+2015-07-02T14:12:29.682Z id      .....    photos 
+2015-07-02T14:13:53.524Z after map: 10 
+2015-07-02T14:13:53.777Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:15:14.575Z after map: 10 
+2015-07-02T14:15:14.862Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:16:06.739Z after map: 10 
+2015-07-02T14:16:06.982Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:16:14.984Z [object Object] 
+2015-07-02T14:16:15.051Z 559252d8f7d1e3f20996ed0d 
+2015-07-02T14:16:15.051Z [object Object] 
+2015-07-02T14:16:15.052Z =================================================== 
+2015-07-02T14:16:15.053Z Product updating 
+2015-07-02T14:16:50.273Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:16:51.693Z after map: 10 
+2015-07-02T14:16:52.128Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:17:43.260Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:17:50.509Z after map: 10 
+2015-07-02T14:17:50.739Z id      .....    559252d8f7d1e3f20996ed0d 
+2015-07-02T14:18:40.061Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:18:41.024Z list   undefined 
+2015-07-02T14:18:41.131Z id      .....    photos 
+2015-07-02T14:18:43.179Z after map: 10 
+2015-07-02T14:18:43.583Z id      .....    55802351fb85fda0437a4211 
+2015-07-02T14:20:20.738Z list   undefined 
+2015-07-02T14:20:20.823Z id      .....    photos 
+2015-07-02T14:21:44.907Z list   undefined 
+2015-07-02T14:47:38.095Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:47:39.491Z after map: 10 
+2015-07-02T14:47:39.725Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:47:49.378Z [object Object] 
+2015-07-02T14:47:49.425Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:47:49.425Z [object Object] 
+2015-07-02T14:47:49.426Z =================================================== 
+2015-07-02T14:47:49.426Z Product updating 
+2015-07-02T14:48:25.419Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:48:27.664Z list   undefined 
+2015-07-02T14:48:29.815Z list   undefined 
+2015-07-02T14:48:33.033Z list   undefined 
+2015-07-02T14:48:34.360Z list   undefined 
+2015-07-02T14:48:35.677Z list   undefined 
+2015-07-02T14:48:46.159Z after map: 10 
+2015-07-02T14:48:46.354Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:48:58.065Z [object Object] 
+2015-07-02T14:48:58.113Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:48:58.113Z [object Object] 
+2015-07-02T14:48:58.114Z =================================================== 
+2015-07-02T14:48:58.114Z Product updating 
+2015-07-02T14:49:12.369Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:49:13.927Z after map: 10 
+2015-07-02T14:49:14.223Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:49:34.847Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:49:36.301Z after map: 10 
+2015-07-02T14:49:36.801Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:50:57.055Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:50:59.348Z after map: 10 
+2015-07-02T14:50:59.783Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:51:25.381Z [object Object] 
+2015-07-02T14:51:25.451Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:51:25.451Z [object Object] 
+2015-07-02T14:51:25.452Z =================================================== 
+2015-07-02T14:51:25.452Z Product updating 
+2015-07-02T14:52:01.369Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:52:13.278Z after map: 10 
+2015-07-02T14:52:13.518Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:52:28.461Z [object Object] 
+2015-07-02T14:52:28.546Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:52:28.546Z [object Object] 
+2015-07-02T14:52:28.547Z =================================================== 
+2015-07-02T14:52:28.547Z Product updating 
+2015-07-02T14:53:43.092Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:54:57.615Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:55:15.595Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:55:17.016Z after map: 10 
+2015-07-02T14:55:17.338Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:56:01.480Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:56:03.095Z after map: 10 
+2015-07-02T14:56:03.502Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:56:13.793Z [object Object] 
+2015-07-02T14:56:13.886Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:56:13.886Z [object Object] 
+2015-07-02T14:56:13.888Z =================================================== 
+2015-07-02T14:56:13.888Z Product updating 
+2015-07-02T14:57:32.734Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T14:57:34.119Z after map: 10 
+2015-07-02T14:57:34.535Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T14:57:40.161Z [object Object] 
+2015-07-02T14:57:40.277Z 5592531ef7d1e3f20996ed11 
+2015-07-02T14:57:40.278Z [object Object] 
+2015-07-02T14:57:40.279Z =================================================== 
+2015-07-02T14:57:40.279Z Product updating 
+2015-07-02T14:59:57.221Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T15:00:26.212Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T15:00:27.787Z after map: 10 
+2015-07-02T15:00:28.056Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T15:00:35.931Z [object Object] 
+2015-07-02T15:00:36.028Z 5592531ef7d1e3f20996ed11 
+2015-07-02T15:00:36.029Z [object Object] 
+2015-07-02T15:00:36.029Z =================================================== 
+2015-07-02T15:00:36.029Z Product updating 
+2015-07-02T15:01:09.170Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T15:01:16.006Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-02T15:01:53.121Z after map: 10 
+2015-07-02T15:01:53.363Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-02T15:01:57.590Z [object Object] 
+2015-07-02T15:01:57.679Z 5592531ef7d1e3f20996ed11 
+2015-07-02T15:01:57.679Z [object Object] 
+2015-07-02T15:01:57.680Z =================================================== 
+2015-07-02T15:01:57.680Z Product updating 
+2015-07-02T15:02:01.209Z [object Object] 
+2015-07-02T15:02:01.271Z 5592531ef7d1e3f20996ed11 
+2015-07-02T15:02:01.271Z [object Object] 
+2015-07-02T15:02:01.272Z =================================================== 
+2015-07-02T15:02:01.272Z Product updating 
+2015-07-02T15:02:08.024Z [object Object] 
+2015-07-02T15:02:08.107Z 5592531ef7d1e3f20996ed11 
+2015-07-02T15:02:08.107Z [object Object] 
+2015-07-02T15:02:08.108Z =================================================== 
+2015-07-02T15:02:08.108Z Product updating 
+2015-07-02T15:02:12.166Z [object Object] 
+2015-07-02T15:02:12.252Z 5592531ef7d1e3f20996ed11 
+2015-07-02T15:02:12.252Z [object Object] 
+2015-07-02T15:02:12.253Z =================================================== 
+2015-07-02T15:02:12.253Z Product updating 
+2015-07-02T15:02:28.362Z list   undefined 
+2015-07-02T15:02:31.365Z after map: 10 
+2015-07-02T15:02:31.597Z id      .....    55938b078561e8ed139d9740 
+2015-07-02T15:02:37.415Z [object Object] 
+2015-07-02T15:02:37.435Z 55938b078561e8ed139d9740 
+2015-07-02T15:02:37.435Z [object Object] 
+2015-07-02T15:02:37.436Z =================================================== 
+2015-07-02T15:02:37.437Z Product updating 
+2015-07-02T15:02:40.128Z [object Object] 
+2015-07-02T15:02:40.183Z 55938b078561e8ed139d9740 
+2015-07-02T15:02:40.183Z [object Object] 
+2015-07-02T15:02:40.183Z =================================================== 
+2015-07-02T15:02:40.184Z Product updating 
+2015-07-02T15:02:43.925Z [object Object] 
+2015-07-02T15:02:43.943Z 55938b078561e8ed139d9740 
+2015-07-02T15:02:43.944Z [object Object] 
+2015-07-02T15:02:43.944Z =================================================== 
+2015-07-02T15:02:43.944Z Product updating 
+2015-07-02T15:02:47.754Z [object Object] 
+2015-07-02T15:02:47.796Z 55938b078561e8ed139d9740 
+2015-07-02T15:02:47.796Z [object Object] 
+2015-07-02T15:02:47.797Z =================================================== 
+2015-07-02T15:02:47.797Z Product updating 
+2015-07-02T15:02:52.313Z 55938b078561e8ed139d9740 
+2015-07-02T15:02:52.313Z [object Object] 
+2015-07-02T15:02:52.314Z =================================================== 
+2015-07-02T15:02:52.314Z Product updating 
+2015-07-02T15:03:36.673Z list   undefined 
+2015-07-02T15:03:39.412Z list   undefined 

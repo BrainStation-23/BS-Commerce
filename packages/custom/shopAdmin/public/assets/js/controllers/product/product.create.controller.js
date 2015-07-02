@@ -60,6 +60,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
             $http.post('/api/products', {product: p})
                 .success(function (data, status, headers, config) {
                     console.log('success');
+                    $scope.product = data;
                 })
                 .error(function (data, status, headers, config) {
 
