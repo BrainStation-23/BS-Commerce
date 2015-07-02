@@ -19,6 +19,24 @@ exports.createOrder =function(req, res) {
 
 var getSearchQuery = function(req, callback) {
     var query = {};
+    var oStatus = req.query.selectedOrderStatus === undefined || req.query.selectedOrderStatus === '' ;
+    var pStatus = req.query.selectedPaymentStatus !== undefined || req.query.selectedPaymentStatus !== '';
+    var sStatus = req.query.selectedShippingStatus !== undefined || req.query.selectedShippingStatus !== '';
+
+    if(req.query.startDate !== null) {
+        query = {
+            orderedDate: {$gte: req.query.startDate, $lte: req.query.endDate}
+        };
+    }
+    if(!oStatus) {
+        query.orderStatus = req.query.selectedOrderStatus;
+    }
+    if(!pStatus) {
+        query.paymentStatus = req.query.selectedPaymentStatus;
+    }
+    if(!sStatus) {
+        query.shippingStatus = req.query.selectedShippingStatus;
+    }
     callback(query);
 };
 

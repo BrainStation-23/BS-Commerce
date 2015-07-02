@@ -8,8 +8,10 @@ angular.module('mean.shopAdmin').factory('orderService', ['$resource', '$http',
               return ordersEnums.get({});
           },
             searchOrders: function(query) {
-                var ordersEnums = $resource('/api/auth/order', {});
-                return ordersEnums.get(query);
+                var searchRequest = $resource('/api/auth/order', {}, {
+                    'get': {method: 'GET', isArray: true}
+                });
+                return searchRequest.get(query);
             }
         };
     }

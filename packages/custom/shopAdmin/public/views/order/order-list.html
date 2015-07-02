@@ -18,13 +18,14 @@
         <div class="col-md-4">
             <input id="endDate" placeholder="end date" class="form-control" type="date" data-ng-model="searchQuery.endDate">
         </div>
+        <span class="alert alert-danger" data-ng-show="dateError" data-ng-bind="dateError"></span>
     </div>
-    <div class="form-group">
-        <div class="col-md-3"><label for="billingEmail"><i class="fa fa-question-circle fa-fw"></i> Billing email address:</label></div>
-        <div class="col-md-4">
-            <input id="billingEmail" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="searchQuery.billingEmail">
-        </div>
-    </div>
+    <!--<div class="form-group">-->
+        <!--<div class="col-md-3"><label for="billingEmail"><i class="fa fa-question-circle fa-fw"></i> Billing email address:</label></div>-->
+        <!--<div class="col-md-4">-->
+            <!--<input id="billingEmail" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="searchQuery.billingEmail">-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="form-group">
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Order status:</label></div>
         <div class="col-md-4">
@@ -76,23 +77,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="row" data-ng-repeat="order in orders">
+            <tr class="row" data-ng-repeat="order in dispalayOrders">
                 <td><input type="checkbox"></td>
                 <td data-ng-bind="order._id"></td>
                 <td data-ng-bind="order.orderStatus"></td>
                 <td data-ng-bind="order.paymentStatus"></td>
                 <td data-ng-bind="order.shippingStatus"></td>
                 <td data-ng-bind="order.user"></td>
-                <td data-ng-bind="order.totalCost"></td>
-                <td data-ng-bind="user.orderedDate"></td>
-                <td><a ui-sref="User.Edit({orderId: order._id})">Edit</a></td>
+                <td data-ng-bind="order.orderedDate"></td>
+                <td data-ng-bind="order.totalCost | currency"></td>
+                <td><a ui-sref="Order.Edit({orderId: order._id})">Edit</a></td>
             </tr>
             <tr class="row" >
                 <td colspan="9" class="tbl-footer">
                     <div class="col-md-5 col-sm-12">
-                        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
                                     boundary-links="true" rotate="false" num-pages="numPages"
-                                    items-per-page="numberOfDisplay"  ng-change="setPage(bigCurrentPage)" style="margin: 0;"></pagination>
+                                    items-per-page="numberOfDisplay"  ng-change="setPage(currentPage)" style="margin: 0;"></pagination>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
@@ -109,4 +110,5 @@
         </table>
     </div>
 </div>
+
 <div></div>
