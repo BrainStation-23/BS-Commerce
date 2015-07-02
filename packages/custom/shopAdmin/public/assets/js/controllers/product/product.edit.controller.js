@@ -86,11 +86,11 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                 //    evt.config.file.name + '\n' + $scope.log;
             }).success(function (data, status, headers, config) {
                 console.log(data);
-                if(status == 500){
+                if(status === 500){
                     console.log('upload error');
-                }else if(status == 404){
+                }else if(status === 404){
                     window.location = '/admin/login';
-                }else if(status == 200){
+                }else if(status === 200){
                     var len = $scope.product.images.length;
                     $scope.product.images[len] = {};
                     $scope.product.images[len].id = data._id;
