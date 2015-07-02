@@ -17,7 +17,7 @@ exports.createOrder =function(req, res) {
         .done();
 };
 
-var getSearchQuery = function(query, callback) {
+var getSearchQuery = function(req, callback) {
     var query = {};
     callback(query);
 };
