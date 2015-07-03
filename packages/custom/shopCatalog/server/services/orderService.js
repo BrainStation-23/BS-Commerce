@@ -16,9 +16,9 @@ exports.createOrder = function(req) {
     return deferred.promise;
 };
 
-exports.getOrders = function(searchQuery) {
+exports.getOrders = function(searchQuery, skipSize, limitSize) {
     var deferred = Q.defer();
-    Order.find(searchQuery)
+    Order.find(searchQuery).skip(skipSize).limit(limitSize)
         .exec(function(error, orders) {
             if(error) {
                 return deferred.reject(error);
@@ -26,6 +26,16 @@ exports.getOrders = function(searchQuery) {
             return deferred.resolve(orders);
         });
     return deferred.promise;
+};
+
+exports.getOrdersNumber = function(searchQuery, callback) {
+    Order.find(searchQuery).count()
+        .exec(function(error, total) {
+            if(error) {
+                callback(0);
+            }
+            callback(total);
+        });
 };
 
 exports.getOrdersByCondition = function(condition, res) {

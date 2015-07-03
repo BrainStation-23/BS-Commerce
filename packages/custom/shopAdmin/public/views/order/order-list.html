@@ -6,7 +6,7 @@
 </div>
 <hr>
 
-<form class="form-horizontal bs-fa-color" data-ng-submit="searchOrders()">
+<form class="form-horizontal bs-fa-color" data-ng-submit="defaultSearchOrders()">
     <div class="form-group">
         <div class="col-md-3"><label for="startDate"><i class="fa fa-question-circle fa-fw"></i> Start date:</label></div>
         <div class="col-md-4">
@@ -101,8 +101,8 @@
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
                         <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="orders.length<1">No items to display</div>
-                        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="orders.length>0">{{displayFrom}} - {{displayTo}} of {{orders.length}} items</div>
-                        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchUsers()"><i class="fa fa-refresh"></i></button></div>
+                        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="orders.length>0">{{displayFrom}} - {{displayTo}} of {{totalItems}} items</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="defaultSearchOrders()"><i class="fa fa-refresh"></i></button></div>
                     </div>
                 </td>
             </tr>

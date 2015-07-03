@@ -41,10 +41,14 @@ var getSearchQuery = function(req, callback) {
 };
 
 exports.getOrders = function(req, res) {
+    var skipSize = req.query.numberOfSkip|| 0;
+    var limitSize = req.query.numberOfDisplay || 0;
     getSearchQuery(req, function(searchQuery) {
-        orderService.getOrders(searchQuery)
+        orderService.getOrders(searchQuery, skipSize, limitSize)
             .then(function(orders){
-                return res.status(200).json(orders);
+                orderService.getOrdersNumber(searchQuery, function(total) {
+                    return res.status(200).json({orders: orders, totalOrders: total});
+                });
             })
             .catch(function(error){
                 return res.status(500).json({msg: 'Error occurred while loading orders', error: error});

@@ -26,46 +26,65 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
             });
 
         $scope.displayOptionChange = function() {
-
-            if($scope.orders.length > 0) {
+            var ordersLength = $scope.orders.length;
+            if(ordersLength > 0) {
                 $scope.displayFrom = 1;
                 $scope.displayTo = $scope.numberOfDisplay;
 
-                if($scope.orders.length <= $scope.numberOfDisplay) {
-                    $scope.displayTo = $scope.orders.length;
-
-                    if($scope.dispalayOrders.length !== $scope.orders.length)
-                        $scope.dispalayOrders = $scope.orders;
+                if(ordersLength === $scope.numberOfDisplay) {
+                    $scope.displayTo = ordersLength;
+                    $scope.dispalayOrders = $scope.orders;
                 }
-                else if($scope.orders.length > $scope.numberOfDisplay) {
+                else if((ordersLength < $scope.numberOfDisplay) && (ordersLength < $scope.totalItems)) {
+                    $scope.searchOrders(ordersLength, ($scope.numberOfDisplay - ordersLength), function() {
+                        $scope.displayTo = $scope.orders.length;
+                        $scope.dispalayOrders = $scope.orders;
+                    });
+                }
+                else if((ordersLength < $scope.numberOfDisplay) && (ordersLength === $scope.totalItems)) {
+                    $scope.displayTo = ordersLength;
+                    $scope.dispalayOrders = $scope.orders;
+                }
+                else if(ordersLength > $scope.numberOfDisplay) {
                     $scope.displayTo = $scope.numberOfDisplay;
                     $scope.dispalayOrders = $scope.orders.slice(0, $scope.numberOfDisplay);
                 }
             }
         };
 
-        $scope.searchOrders = function() {
-            //console.log($scope.searchQuery);
+        $scope.defaultSearchOrders = function() {
             if($scope.searchQuery.startDate !== null && $scope.searchQuery.endDate === null) {
-                console.log('dfsd');
                 $scope.dateError = 'you should fill up end date';
                 return;
             }
+            $scope.searchQuery.page = $scope.currentPage;
+            $scope.searchQuery.numberOfDisplay = $scope.numberOfDisplay;
             orderService.searchOrders($scope.searchQuery)
                 .$promise
-                .then(function(orders) {
-                    $scope.orders = orders;
-                    $scope.totalItems = orders.length;
-                    $scope.dispalayOrders = orders;
-
-                    if(orders.length > $scope.numberOfDisplay) {
-                        $scope.dispalayOrders = $scope.orders.slice(0, $scope.numberOfDisplay);
-                    }
+                .then(function(response) {
+                    $scope.orders = response.orders;
+                    $scope.totalItems = response.totalOrders;
+                    $scope.dispalayOrders = response.orders;
                     $scope.displayOptionChange();
                 });
         };
 
-        $scope.searchOrders();
+        $scope.defaultSearchOrders();
+
+        $scope.searchOrders = function(numberOfSkip, numberOfDisplay, callback) {
+            if($scope.searchQuery.startDate !== null && $scope.searchQuery.endDate === null) {
+                $scope.dateError = 'you should fill up end date';
+                return;
+            }
+            $scope.searchQuery.numberOfSkip = numberOfSkip;
+            $scope.searchQuery.numberOfDisplay = numberOfDisplay;
+            orderService.searchOrders($scope.searchQuery)
+                .$promise
+                .then(function(response) {
+                    $scope.orders = $scope.orders.concat(response.orders);
+                    callback();
+                });
+        };
 
         $scope.changePagination =function(pageNo) {
             $scope.displayFrom = (pageNo - 1) * 10 + 1;
@@ -77,8 +96,16 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
         };
 
         $scope.setPage = function (pageNo) {
+
+            if($scope.totalItems > $scope.orders.length) {
+                var numberOfSkip = (pageNo -1) * $scope.numberOfDisplay;
+                $scope.searchOrders(numberOfSkip, $scope.numberOfDisplay, function() {
+                    $scope.changePagination(pageNo);
+                });
+            } else {
+                $scope.changePagination(pageNo);
+            }
             $scope.currentPage = pageNo;
-            $scope.changePagination(pageNo);
         };
 
     }

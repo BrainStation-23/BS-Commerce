@@ -9,7 +9,7 @@ angular.module('mean.shopAdmin').factory('orderService', ['$resource', '$http',
           },
             searchOrders: function(query) {
                 var searchRequest = $resource('/api/auth/order', {}, {
-                    'get': {method: 'GET', isArray: true}
+                    'get': {method: 'GET'}
                 });
                 return searchRequest.get(query);
             }
