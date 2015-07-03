@@ -180,5 +180,19 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
             console.log($scope.product.photos);
 
         };
+
+        $scope.deleteImage = function(id){
+            console.log(id);
+            $http.delete('/api/products/photos/'+id)
+                .success(function(data, status, headers, config){
+                    console.log(data);
+                    var index = $scope.product.photos.indexOf(id);
+                    $scope.product.photos.splice(index, 1);
+                    $scope.update();
+                })
+                .error(function(data, status, headers, config){
+                    console.log(data);
+                });
+        };
     }
 ]);

@@ -3,8 +3,8 @@
 var controller = require('../controllers/shopProduct');
 
 module.exports = function (ShopProduct, app, auth, database, shopCore) {
-    //([A-Za-z0-9]{24})
-    app.route('/api/products/:id')
+    //
+    app.route('/api/products/:id([A-Za-z0-9]{24})')
         .get(controller.getById);
 
     app.route('/api/products')
@@ -37,9 +37,20 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
         });
     app.route('/api/products/photos/:id')
         .get(function (req, res) {
-            var stream = shopCore.media.get(req.params.id);
+            /*var stream = shopCore.media.get(req.params.id);
             stream.pipe(res);
-            return res.status(200);
+            return res.status(200);*/
+
+            shopCore.media.get(req.params.id)
+                .then(function (stream) {
+                    stream.pipe(res);
+                    return res.status(200);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return res.status(500).json({error: error});
+                })
+                .done();
         })
         .delete(function (req, res) {
             shopCore.media.delete(req.params.id)

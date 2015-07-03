@@ -4887,3 +4887,242 @@
 2015-07-02T15:02:52.314Z Product updating 
 2015-07-02T15:03:36.673Z list   undefined 
 2015-07-02T15:03:39.412Z list   undefined 
+2015-07-03T04:07:38.770Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T04:08:08.597Z after map: 10 
+2015-07-03T04:08:43.807Z after map: 10 
+2015-07-03T04:08:43.871Z list   undefined 
+2015-07-03T04:08:51.193Z list   undefined 
+2015-07-03T04:08:53.604Z list   undefined 
+2015-07-03T04:08:55.778Z id      .....    new-saree-orange-color 
+2015-07-03T04:09:05.997Z list   undefined 
+2015-07-03T04:09:08.570Z list   undefined 
+2015-07-03T04:09:10.357Z list   undefined 
+2015-07-03T04:09:13.760Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T04:09:20.946Z list   undefined 
+2015-07-03T04:09:22.859Z list   undefined 
+2015-07-03T04:09:33.430Z list   undefined 
+2015-07-03T04:09:33.477Z after map: 10 
+2015-07-03T04:09:36.912Z list   undefined 
+2015-07-03T04:12:19.511Z after map: 10 
+2015-07-03T04:44:29.215Z list   undefined 
+2015-07-03T04:44:33.354Z after map: 10 
+2015-07-03T04:44:33.440Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T04:48:10.486Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T04:49:20.356Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T04:56:45.828Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T04:57:01.188Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T04:57:43.194Z TypeError: Object #<Grid> has no method 'findOne'
+    at Object.exports.get (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:38:7)
+    at app.route.get.delete.shopCore.media.delete.then.res.status.json.msg (/home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:40:41)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:277:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:349:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:365:14)
+    at Function.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:410:3) 
+2015-07-03T05:00:00.339Z TypeError: Object #<Grid> has no method 'findOne'
+    at Object.exports.get (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:38:7)
+    at app.route.get.delete.shopCore.media.delete.then.res.status.json.msg (/home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:40:41)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:277:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:349:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:365:14)
+    at Function.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:410:3) 
+2015-07-03T05:01:11.982Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:01:20.937Z TypeError: Object #<Grid> has no method 'find'
+    at Object.exports.get (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:38:7)
+    at app.route.get.delete.shopCore.media.delete.then.res.status.json.msg (/home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:40:41)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:277:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:349:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:365:14)
+    at Function.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:410:3) 
+2015-07-03T05:01:57.637Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:02:00.783Z TypeError: Object [object Promise] has no method 'pipe'
+    at app.route.get.delete.shopCore.media.delete.then.res.status.json.msg (/home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:41:20)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:277:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:349:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:365:14)
+    at Function.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:410:3)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:271:10) 
+2015-07-03T05:05:43.371Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:08:00.718Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:08:01.953Z  
+2015-07-03T05:08:04.613Z  
+2015-07-03T05:08:06.095Z  
+2015-07-03T05:08:30.241Z  
+2015-07-03T05:09:44.560Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:09:51.239Z 55802351fb85fda0437a41b0 
+2015-07-03T05:09:51.240Z  
+2015-07-03T05:10:04.299Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:10:22.009Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:10:25.335Z TypeError: Object #<Grid> has no method 'findOne'
+    at Object.exports.get (/home/saif/projects/BS-Commerce/packages/custom/shopCore/server/services/mediaService.js:38:7)
+    at app.route.get.delete.shopCore.media.delete.then.res.status.json.msg (/home/saif/projects/BS-Commerce/packages/custom/shopProduct/server/routes/product.route.js:44:28)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/layer.js:95:5)
+    at /home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:277:22
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:349:14)
+    at param (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:365:14)
+    at Function.process_params (/home/saif/projects/BS-Commerce/node_modules/meanio/lib/core_modules/server/node_modules/express/lib/router/index.js:410:3) 
+2015-07-03T05:10:33.714Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:12:56.574Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:12:58.930Z  
+2015-07-03T05:13:02.634Z  
+2015-07-03T05:13:13.952Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T05:13:49.047Z  
+2015-07-03T05:14:09.237Z list   undefined 
+2015-07-03T05:14:11.622Z after map: 10 
+2015-07-03T05:14:11.779Z id      .....    55802351fb85fda0437a4215 
+2015-07-03T05:14:24.678Z list   undefined 
+2015-07-03T05:14:28.803Z after map: 10 
+2015-07-03T05:14:29.051Z id      .....    55802351fb85fda0437a4215 
+2015-07-03T05:14:30.745Z list   undefined 
+2015-07-03T05:14:34.645Z list   undefined 
+2015-07-03T05:14:38.416Z after map: 10 
+2015-07-03T05:14:38.702Z id      .....    55802351fb85fda0437a421f 
+2015-07-03T05:14:49.017Z after map: 10 
+2015-07-03T05:14:52.272Z after map: 10 
+2015-07-03T05:14:52.351Z list   undefined 
+2015-07-03T05:14:53.794Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T05:15:06.172Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T05:15:06.654Z after map: 10 
+2015-07-03T05:21:50.127Z list   undefined 
+2015-07-03T05:21:51.305Z list   undefined 
+2015-07-03T05:21:51.873Z list   undefined 
+2015-07-03T05:21:52.348Z list   undefined 
+2015-07-03T05:21:52.890Z list   undefined 
+2015-07-03T05:23:57.577Z  
+2015-07-03T05:24:01.814Z  
+2015-07-03T05:24:06.197Z  
+2015-07-03T05:36:19.352Z list   undefined 
+2015-07-03T05:36:21.678Z list   undefined 
+2015-07-03T05:36:23.277Z list   undefined 
+2015-07-03T05:36:24.486Z list   undefined 
+2015-07-03T05:36:26.486Z list   undefined 
+2015-07-03T05:36:27.701Z list   undefined 
+2015-07-03T05:36:29.559Z list   undefined 
+2015-07-03T05:36:31.135Z list   undefined 
+2015-07-03T05:36:33.636Z list   undefined 
+2015-07-03T05:36:35.157Z list   undefined 
+2015-07-03T05:36:37.257Z id      .....    new-saree-orange-color 
+2015-07-03T05:36:38.885Z list   undefined 
+2015-07-03T05:36:40.094Z list   undefined 
+2015-07-03T05:36:41.328Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T05:36:55.873Z list   undefined 
+2015-07-03T05:36:57.730Z id      .....    ignite-top 
+2015-07-03T05:37:08.339Z id      .....    ignite-top 
+2015-07-03T05:37:08.571Z after map: 10 
+2015-07-03T06:08:01.363Z after map: 10 
+2015-07-03T06:08:01.519Z id      .....    55802351fb85fda0437a421f 
+2015-07-03T06:08:11.634Z list   undefined 
+2015-07-03T06:08:13.987Z after map: 10 
+2015-07-03T06:08:14.402Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:10:18.249Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:10:21.599Z after map: 10 
+2015-07-03T06:10:21.799Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:11:25.422Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:11:31.306Z after map: 10 
+2015-07-03T06:11:31.641Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:12:07.864Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:12:12.314Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:13:17.075Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:13:18.862Z after map: 10 
+2015-07-03T06:13:19.089Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:19:01.854Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:19:28.785Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:19:36.643Z after map: 10 
+2015-07-03T06:19:36.889Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:19:49.698Z after map: 10 
+2015-07-03T06:19:49.924Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:19:50.113Z  
+2015-07-03T06:20:42.644Z after map: 10 
+2015-07-03T06:20:42.883Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:30:35.057Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:33:47.576Z after map: 10 
+2015-07-03T06:33:47.845Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:33:54.591Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:36:26.178Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:41:36.911Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:41:54.369Z after map: 10 
+2015-07-03T06:41:54.614Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:43:36.058Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:43:44.192Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:43:48.235Z after map: 10 
+2015-07-03T06:43:48.474Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:43:54.113Z 5592531ef7d1e3f20996ed11 
+2015-07-03T06:43:54.114Z [object Object] 
+2015-07-03T06:43:54.115Z =================================================== 
+2015-07-03T06:43:54.115Z Product updating 
+2015-07-03T06:43:59.818Z after map: 10 
+2015-07-03T06:44:00.059Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:44:26.909Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:44:28.057Z after map: 10 
+2015-07-03T06:44:28.291Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:44:38.266Z after map: 10 
+2015-07-03T06:44:38.539Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:44:48.282Z [object Object] 
+2015-07-03T06:44:48.364Z 5592531ef7d1e3f20996ed11 
+2015-07-03T06:44:48.364Z [object Object] 
+2015-07-03T06:44:48.365Z =================================================== 
+2015-07-03T06:44:48.365Z Product updating 
+2015-07-03T06:45:07.527Z 5592531ef7d1e3f20996ed11 
+2015-07-03T06:45:07.527Z [object Object] 
+2015-07-03T06:45:07.527Z =================================================== 
+2015-07-03T06:45:07.528Z Product updating 
+2015-07-03T06:45:16.170Z [object Object] 
+2015-07-03T06:45:16.239Z 5592531ef7d1e3f20996ed11 
+2015-07-03T06:45:16.239Z =================================================== 
+2015-07-03T06:45:16.239Z [object Object] 
+2015-07-03T06:45:16.239Z Product updating 
+2015-07-03T06:46:01.306Z 5592531ef7d1e3f20996ed11 
+2015-07-03T06:46:01.307Z [object Object] 
+2015-07-03T06:46:01.307Z =================================================== 
+2015-07-03T06:46:01.307Z Product updating 
+2015-07-03T06:46:04.193Z  
+2015-07-03T06:49:38.624Z after map: 10 
+2015-07-03T06:49:38.853Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:52:34.107Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:53:03.760Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:53:14.135Z list   undefined 
+2015-07-03T06:53:15.318Z list   undefined 
+2015-07-03T06:53:55.136Z after map: 10 
+2015-07-03T06:53:55.328Z id      .....    5592531ef7d1e3f20996ed11 
+2015-07-03T06:54:24.829Z after map: 10 
+2015-07-03T06:54:50.127Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:54:57.166Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T06:54:57.293Z after map: 10 
+2015-07-03T06:55:25.608Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:56:20.020Z after map: 10 
+2015-07-03T06:58:23.456Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T06:58:30.326Z id      .....    gym-vintage-full-zip-hoodie 
+2015-07-03T06:58:30.462Z after map: 10 
+2015-07-03T07:01:14.686Z Mean app started on port 3000 (development) cluster.worker.id:  
+2015-07-03T07:03:01.383Z list   undefined 
+2015-07-03T07:03:01.429Z after map: 10 
+2015-07-03T07:12:41.902Z after map: 10 
+2015-07-03T07:12:41.937Z after map: 10 
+2015-07-03T07:12:43.778Z after map: 10 
+2015-07-03T07:12:51.621Z after map: 10 
+2015-07-03T07:12:51.654Z after map: 10 
+2015-07-03T07:12:55.544Z after map: 10 
+2015-07-03T09:50:38.253Z after map: 10 
+2015-07-03T09:50:38.277Z after map: 10 
+2015-07-03T09:50:41.970Z after map: 10 
+2015-07-03T09:50:50.210Z after map: 10 
+2015-07-03T09:50:50.226Z after map: 10 
+2015-07-03T09:50:50.710Z after map: 10 
