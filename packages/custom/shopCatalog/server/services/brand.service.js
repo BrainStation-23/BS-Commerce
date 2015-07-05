@@ -5,6 +5,20 @@ var mongoose = require('mongoose'),
     //_ = require('lodash'),
     Q = require('q');
 
+exports.createBrand = function(b){
+    var deferred = Q.defer();
+    var brand = new Brand(b);
+    console.log('from service');
+    console.log(brand);
+    brand.save(function(error, brand){
+        if(error){
+            return deferred.reject(error);
+        }
+        return deferred.resolve(brand);
+    });
+    return deferred.promise;
+};
+
 exports.getBrands = function(req, res){
     var deferred = Q.defer();
 

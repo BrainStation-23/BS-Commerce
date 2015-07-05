@@ -11,10 +11,6 @@ var BrandSchema = new Schema({
             type: String,
             required: true
         },
-        slug: {
-            type: String,
-            required: true
-        },
         description: {
             type: String,
             default: null
