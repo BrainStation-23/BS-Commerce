@@ -35,7 +35,7 @@
     "gridfs-stream": "^1.1.1",
     "lodash": "2.4.1",
     "meanio": "0.7",
-    "mongoose": "3.8.24",
+    "mongoose": "4.0.6",
     "morgan": "1.5.0",
     "ms": "0.6.2",
     "multer": "^0.1.8",
