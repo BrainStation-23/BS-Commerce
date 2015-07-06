@@ -29,7 +29,7 @@
 			$stateProvider.state('orderDetails/:orderId', {
 				url: '/orderDetails/:orderId',
 				controller: 'orderController',
-				templateUrl: 'shopOrder/views/orderDetails.html'
+				templateUrl: 'shopOrder/views/order-details.html'
 			});
 		}
 	]);

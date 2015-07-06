@@ -1,0 +1,55 @@
+<div>
+    <tabset>
+        <tab heading="Info">
+            <div class="table table-responsive">
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order Id</label></div>
+                    <div class="col-md-4 col-xs-8">45454545555444464646464</div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order status</label></div>
+                    <div class="col-md-4 col-xs-8">complete</div>
+                    <div class="col-md-3" data-ng-show="!editOrderStatus">
+                        <button class="btn btn-default"  data-ng-click="changeOrderStatus()">Change status</button>
+                    </div>
+                    <div class="col-md-7" data-ng-show="editOrderStatus">
+                        <div class="col-md-8">
+                            <select class="form-control">
+                                <option>ordered</option>
+                                <option>complete</option>
+                                <option>cancelled</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-default" data-ng-click="cancelUpdateOrderStatus()">cancel</button>
+                            <button class="btn btn-primary" data-ng-click="updateOrderStatus()">save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order subtotal</label></div>
+                    <div class="col-md-4 col-xs-8">$50</div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order shipping</label></div>
+                    <div class="col-md-4 col-xs-8">$10</div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order tax</label></div>
+                    <div class="col-md-4 col-xs-8">$0</div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order total</label></div>
+                    <div class="col-md-4 col-xs-8">$50</div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i>Profit</label></div>
+                    <div class="col-md-4 col-xs-8">$15</div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Billing info">Billing info</tab>
+        <tab heading="Shipping info">Shipping info</tab>
+        <tab heading="Product info">Product info</tab>
+    </tabset>
+</div>
