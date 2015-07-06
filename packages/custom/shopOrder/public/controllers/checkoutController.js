@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	angular.module('mean.shopCatalog').controller('checkoutController', ['$scope', '$location', 'Global', '$timeout', 'cartService','checkoutService',
+	angular.module('mean.shopOrder').controller('checkoutController', ['$scope', '$location', 'Global', '$timeout', 'cartService','checkoutService',
 		function($scope, $location, Global, $timeout, cartService, checkoutService) {
 			//$scope.global = Global;
 

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  angular.module('mean.shopCatalog').controller('cartController', ['$scope', '$location', 'Global', 'cartService',
+  angular.module('mean.shopOrder').controller('cartController', ['$scope', '$location', 'Global', 'cartService',
 	function($scope, $location, Global, cartService) {
 	  $scope.global = Global;
 	  $scope.items = [];

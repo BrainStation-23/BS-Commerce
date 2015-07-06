@@ -1,7 +1,7 @@
 (function(_){
   'use strict';
 
-  angular.module('mean.shopCatalog').factory('checkoutService', ['$rootScope','Global', 'Cart', '$resource',
+  angular.module('mean.shopOrder').factory('checkoutService', ['$rootScope','Global', 'Cart', '$resource',
     function($rootScope, Global, Cart, $resource) {
       var cart = Cart.get();
       return {

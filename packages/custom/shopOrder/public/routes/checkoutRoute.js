@@ -6,30 +6,30 @@
 			$stateProvider.state('cart', {
 			url: '/cart',
 			controller: 'cartController',
-			templateUrl: 'shopCatalog/views/cart.html'
+			templateUrl: 'shopOrder/views/cart.html'
 			});
 
 			$stateProvider.state('checkout', {
 			url: '/checkout',
 			controller: 'checkoutController',
-			templateUrl: 'shopCatalog/views/checkout.html'
+			templateUrl: 'shopOrder/views/checkout.html'
 			});
 
 			$stateProvider.state('checkout/complete', {
 				url: '/checkout/complete',
 				//controller: 'checkoutController',
-				templateUrl: 'shopCatalog/views/checkoutComplete.html'
+				templateUrl: 'shopOrder/views/checkoutComplete.html'
 			});
 
 			$stateProvider.state('cart/empty', {
 				url: '/cart/empty',
-				templateUrl: 'shopCatalog/views/emptyCart.html'
+				templateUrl: 'shopOrder/views/emptyCart.html'
 			});
 
 			$stateProvider.state('orderDetails/:orderId', {
 				url: '/orderDetails/:orderId',
 				controller: 'orderController',
-				templateUrl: 'shopCatalog/views/orderDetails.html'
+				templateUrl: 'shopOrder/views/orderDetails.html'
 			});
 		}
 	]);

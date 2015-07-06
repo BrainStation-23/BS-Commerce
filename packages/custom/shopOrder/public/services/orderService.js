@@ -1,7 +1,7 @@
 (function(_){
     'use strict';
 
-    angular.module('mean.shopCatalog').factory('orderService', ['$rootScope','Global', 'Cart', '$resource',
+    angular.module('mean.shopOrder').factory('orderService', ['$rootScope','Global', 'Cart', '$resource',
         function($rootScope, Global, Cart, $resource) {
             return {
                 getOrderById: function(orderId) {

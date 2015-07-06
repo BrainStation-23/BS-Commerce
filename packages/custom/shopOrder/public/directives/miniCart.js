@@ -1,11 +1,11 @@
 (function(_){
   'use strict';
 
-  angular.module('mean.shopCatalog').directive('miniCart', ['$rootScope', 'Global', 'cartService',
+  angular.module('mean.shopOrder').directive('miniCart', ['$rootScope', 'Global', 'cartService',
     function($rootScope, Global, cartService) {
       return{
         replace: true,
-        templateUrl: '/shopCatalog/views/mini-cart.html',
+        templateUrl: '/shopOrder/views/mini-cart.html',
         link: function(scope, element, attrs){
           scope.subTotal = 0;
           scope.items = [];

@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  angular.module('mean.shopCatalog').factory('Cart', [ '$resource',
+  angular.module('mean.shopOrder').factory('Cart', [ '$resource',
     function($resource) {
       return $resource('api/cart', null ,{
         update: {

@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('mean.shopCatalog').controller('orderController',['$scope', '$location', 'orderService',
+    angular.module('mean.shopOrder').controller('orderController',['$scope', '$location', 'orderService',
     function($scope, $location, orderService) {
         var orderId = $location.path().split('/')[2];
         //console.log(orderId);
