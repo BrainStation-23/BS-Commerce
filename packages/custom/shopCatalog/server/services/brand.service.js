@@ -63,7 +63,7 @@ exports.update = function(id, brand){
 
 exports.deleteBrandById = function(id){
     var deferred = Q.defer();
-    Brand.findByIdAndRemove(id, function(error, doc){
+    Brand.findOne({_id:id}).remove(function(error, doc){
         if(error) {
             return deferred.reject(error);
         }

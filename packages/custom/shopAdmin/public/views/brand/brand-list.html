@@ -13,6 +13,7 @@
             <th>Display Order</th>
             <th>Page Size</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -23,6 +24,7 @@
             <th>Display Order</th>
             <th>Page Size</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </tfoot>
 
@@ -34,6 +36,7 @@
             <td>{{item.info.displayOrder}}</td>
             <td>{{item.info.pageSizeOptions}}</td>
             <td><a ui-sref="Brand.Edit({id: item._id})">Edit</a></td>
+            <td><div class="btn btn-danger" ng-click="delete(item._id)">Delete</div></td>
         </tr>
         </tbody>
     </table>

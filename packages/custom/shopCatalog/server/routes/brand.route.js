@@ -8,12 +8,12 @@ module.exports = function(shopCatalog, app, auth, database, shopCore) {
         .get(brandController.getBrands)
         .post(brandController.createBrand);
 
-    app.route('api/brands/:id')
+    app.route('/api/brands/:id')
         .get(brandController.getBrandById)
         .put(brandController.update)
         .delete(brandController.deleteBrandById);
 
-    app.route('api/brands/count')
+    app.route('/api/brands/count')
         .get(brandController.getCount);
 
 };
