@@ -8,7 +8,10 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
         .get(controller.getById);
 
     app.route('/api/products')
-        .get(controller.list);
+        .get(controller.list)
+        .post(function(req, res){
+            controller.create(req, res);
+        });
 
     app.route('/api/products/:sku')
         .get(controller.getBySKU);
@@ -64,11 +67,11 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
         });
 
     app.route('/api/products/:id')
-        .post(function(req, res){
-            controller.create(req, res);
-        })
         .put(function(req, res){
             controller.update(req, res);
+        })
+        .delete(function(req, res){
+           controller.delete(req,res);
         });
 
 };

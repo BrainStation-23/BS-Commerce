@@ -5,7 +5,7 @@ angular.module('mean.shopAdmin').controller('brandEditController', ['$scope', 'G
         console.log($stateParams.id);
 
         $scope.brand = {};
-        
+
         $scope.getDataForPage = function(){
             $http.get('/api/brands/' + $stateParams.id)
                 .success(function (data, status, headers, config) {

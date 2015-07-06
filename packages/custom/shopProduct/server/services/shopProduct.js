@@ -136,3 +136,19 @@ exports.update = function(id, product){
   return deferred.promise;
 
 };
+
+exports.delete = function(id){
+  var deferred = Q.defer();
+  console.log('===================================================');
+  console.log('Product deleting');
+
+  Product.findOne({_id: id}).remove(function(error, doc){
+    if (error) {
+      return deferred.reject(error);
+    } else {
+      return deferred.resolve(doc);
+    }
+  });
+
+  return deferred.promise;
+};

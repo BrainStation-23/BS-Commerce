@@ -194,5 +194,37 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     console.log(data);
                 });
         };
+
+        $scope.deleteWholeProduct = function(){
+            $scope.deleteImageAndProduct($scope.product.photos[0]);
+        };
+
+        $scope.deleteImageAndProduct = function(id){
+            console.log(id);
+            $http.delete('/api/products/photos/'+id)
+                .success(function(data, status, headers, config){
+                    var index = $scope.product.photos.indexOf(id);
+                    $scope.product.photos.splice(index, 1);
+                    if($scope.product.photos.length === 0){
+                        $scope.deleteProduct();
+                    }else{
+                        $scope.deleteImageAndProduct($scope.product.photos[0]);
+                    }
+
+                })
+                .error(function(data, status, headers, config){
+                    console.log(data);
+                });
+        };
+
+        $scope.deleteProduct = function(){
+            $http.delete('/api/products/'+$scope.product.id )
+                .success(function(data, status, headers, config){
+                    $state.go('Product.List');
+                })
+                .error(function(data, status, headers, config){
+                    console.log(data);
+                });
+        };
     }
 ]);

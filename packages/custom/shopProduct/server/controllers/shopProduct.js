@@ -79,3 +79,16 @@ exports.update = function (req, res) {
 
 
 };
+
+exports.delete = function(req,res){
+    service.delete(req.params.id)
+        .then(function (product) {
+            return res.status(200).json(product);
+        })
+        .catch(function (error) {
+            console.log(error);
+            return res.status(500).json([{msg: 'Unhandled Error!'}]);
+        })
+        .done();
+
+};
