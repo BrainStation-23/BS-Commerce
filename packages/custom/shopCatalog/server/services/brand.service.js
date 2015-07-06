@@ -73,3 +73,16 @@ exports.deleteBrandById = function(id){
     return deferred.promise;
 
 };
+
+exports.getCount = function(){
+    var deferred = Q.defer();
+    Brand.count(function(error, count){
+        if(error) {
+            return deferred.reject(error);
+        }
+        return deferred.resolve(count);
+    });
+
+    return deferred.promise;
+
+};

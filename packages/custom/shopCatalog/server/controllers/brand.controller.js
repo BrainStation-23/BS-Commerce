@@ -59,3 +59,14 @@ exports.deleteBrandById = function(req, res){
         })
         .done();
 };
+
+exports.getCount = function(req, res){
+    brandService.getCount()
+        .then(function(count){
+            return res.status(200).json(count);
+        })
+        .catch(function(error){
+            return res.status(500).json({msg: 'Error occurred while counting brands', error: error});
+        })
+        .done();
+};

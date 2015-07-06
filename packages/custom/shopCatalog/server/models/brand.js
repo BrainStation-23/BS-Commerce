@@ -9,7 +9,8 @@ var BrandSchema = new Schema({
     info:{
         name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         description: {
             type: String,

@@ -11,6 +11,7 @@
             <th>Name</th>
             <th>Published</th>
             <th>Display Order</th>
+            <th>Page Size</th>
             <th>Edit</th>
         </tr>
         </thead>
@@ -20,15 +21,18 @@
             <th>Name</th>
             <th>Published</th>
             <th>Display Order</th>
+            <th>Page Size</th>
             <th>Edit</th>
         </tr>
         </tfoot>
 
         <tbody ng-repeat="item in brands">
         <tr>
-            <td>{{item.name}}</td>
-            <td><i class="fa fa-check fa-fw" style="color: #009900"></i></td>
-            <td>{{item.displayOrder}}</td>
+            <td>{{item.info.name}}</td>
+            <td><span class="" ng-if="item.info.published"><i class="fa fa-check fa-fw" style="color: #009900"></i></span>
+                <span class="" ng-if="!item.info.published"><i class="fa fa-remove fa-fw" style="color: #990000"></i></span></td>
+            <td>{{item.info.displayOrder}}</td>
+            <td>{{item.info.pageSizeOptions}}</td>
             <td><a ui-sref="Brand.Edit({id: item._id})">Edit</a></td>
         </tr>
         </tbody>

@@ -70,4 +70,5 @@ module.exports = function (ShopProduct, app, auth, database, shopCore) {
         .put(function(req, res){
             controller.update(req, res);
         });
+
 };

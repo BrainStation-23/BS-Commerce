@@ -24,7 +24,7 @@ angular.module('mean.shopAdmin').controller('brandCreateController', ['$scope', 
             console.log(brand.info.displayOrder);
 
 
-            $http.post('/api/brand/', {brand:brand})
+            $http.post('/api/brands/', {brand:brand})
                 .success(function(data, status, headers, config){
                     console.log(data);
                     $state.go('Brand.List');

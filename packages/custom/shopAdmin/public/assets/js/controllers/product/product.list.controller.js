@@ -25,8 +25,7 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
                         item.id = data[i]._id;
                         $scope.products.push(item);
                     }
-                    //angular.element('.pagination li').removeClass('active');
-                    //console.log(angular.element('.pagination li'));
+
                 }).
                 error(function(data, status, headers, config) {
                     // called asynchronously if an error occurs
