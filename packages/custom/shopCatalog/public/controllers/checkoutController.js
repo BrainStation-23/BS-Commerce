@@ -54,6 +54,7 @@
 				tabElement.removeAttr('collapse');
 				tabElement.attr('collapse',true);
 				tabElement.css('height',0);
+				tabElement.removeClass('in');
 			};
 
 			$scope.initializeAddress = function() {

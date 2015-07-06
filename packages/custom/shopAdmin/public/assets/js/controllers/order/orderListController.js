@@ -9,6 +9,7 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
         $scope.totalItems = 10;
         $scope.currentPage = 1;
         var yesterday = new Date();
+        yesterday.setHours(0,0,0,0);
         yesterday.setDate(yesterday.getDate()-1);
         $scope.searchQuery = {
             startDate: yesterday,
