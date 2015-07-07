@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global', '$rootScope', '$state', 'ShopCategory',
-    function(Global, $rootScope, $state, ShopCategory) {
+angular.module('mean.shopCatalog').directive('shopCategoryAccordion', ['Global', '$rootScope', '$state', 'ShopCatalog',
+    function(Global, $rootScope, $state, ShopCatalog) {
       var highlightIfSelected = function(category, slug){
         if(category.slug === slug){
           category.isOpen = true;
@@ -28,11 +28,12 @@ angular.module('mean.shopCategory').directive('shopCategoryAccordion', ['Global'
 
       return{
           replace: true,
-          templateUrl: '/shopCategory/views/shop-category-accordion.html',
+          templateUrl: '/shopCatalog/views/category/shop-category-accordion.html',
           link: function(scope, element, attrs){
             scope.slug = $state.params.slug;
             scope.categories = [];
-            ShopCategory
+
+            ShopCatalog
               .query()
               .$promise
               .then(function(list){

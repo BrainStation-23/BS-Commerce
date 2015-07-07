@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scope', '$state', 'Global', 'ShopCategory', 'ShopProduct', 'cartService',
-  function($scope, $state, Global, ShopCategory, ShopProduct, cartService) {
+angular.module('mean.shopCatalog').controller('ShopCategoryController', ['$scope', '$state', 'Global', 'ShopCatalog', 'ShopProduct', 'cartService',
+  function($scope, $state, Global, ShopCatalog, ShopProduct, cartService) {
     var slug = $state.params.slug;
     $scope.global = Global;
 
@@ -23,7 +23,7 @@ angular.module('mean.shopCategory').controller('ShopCategoryController', ['$scop
     };
 
     $scope.products = [];
-    $scope.category = ShopCategory.get({id: slug});
+    $scope.category = ShopCatalog.get({id: slug});
 
     var updateCartStatus = function(){
       cartService.getCart()

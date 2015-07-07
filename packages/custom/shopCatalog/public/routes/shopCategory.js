@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('mean.shopCategory').config(['$stateProvider',
+angular.module('mean.shopCatalog').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider.state('products-in-category', {
       url: '/category/:slug',
       parent: 'master',
       controller: 'ShopCategoryController',
-      templateUrl: 'shopCategory/views/shop-category-product-list.html'
+      templateUrl: 'shopCatalog/views/category/shop-category-product-list.html'
     });
   }
 ]);
