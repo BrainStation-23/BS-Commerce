@@ -2,7 +2,7 @@
 
 var controller = require('../controllers/shopProduct');
 
-module.exports = function (ShopProduct, app, auth, database, shopCore) {
+module.exports = function (shopCatalog, app, auth, database, shopCore) {
     //
     app.route('/api/products/:id([A-Za-z0-9]{24})')
         .get(controller.getById);
