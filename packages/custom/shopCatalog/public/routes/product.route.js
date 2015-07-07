@@ -6,7 +6,7 @@ angular.module('mean.shopProduct').config(['$stateProvider',
       url: '/products/:sku',
       parent:'master',
       controller: 'ShopProductController',
-      templateUrl: 'shopProduct/views/product-details.html'
+      templateUrl: 'shopCatalog/views/product/product-details.html'
     });
   }
 ]);

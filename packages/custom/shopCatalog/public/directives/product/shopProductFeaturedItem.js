@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('mean.shopProduct').directive('shopProductFeaturedItem', ['Global', 'ShopProduct',
-    function(Global, ShopProduct) {
+angular.module('mean.shopCatalog').directive('shopProductFeaturedItem', ['Global', 'ShopCatalog',
+    function(Global, ShopCatalog) {
         return{
             replace: true,
             scope:{
                 featuredItemSrc:'@',
                 cornerImage:'@'
             },
-            templateUrl: '/shopProduct/views/shop-product-featured-item.html',
+            templateUrl: '/shopCatalog/views/product/shop-product-featured-item.html',
             link: function(scope, element, attrs){
 
             }

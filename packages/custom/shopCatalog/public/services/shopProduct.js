@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.shopProduct').factory('ShopProduct', ['$resource',
+angular.module('mean.shopCatalog').factory('ShopProduct', ['$resource',
   function($resource) {
     return $resource('api/products/:id',{
       id:'@_id'

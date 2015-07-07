@@ -1,7 +1,7 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.shopProduct').controller('ShopProductController', ['$scope', '$state', 'Global', 'ShopProduct', 'cartService',
+angular.module('mean.shopCatalog').controller('ShopProductController', ['$scope', '$state', 'Global', 'ShopProduct', 'cartService',
   function($scope, $state, Global, ShopProduct, cartService) {
     $scope.global = Global;
     var sku = $state.params.sku;
