@@ -2,8 +2,7 @@
 
 angular.module('mean.shopAdmin').controller('orderEditController', ['$scope', '$location',
     function($scope, $location) {
-        var orderId = $location.path().split('/')[3];
-
+        //var orderId = $location.path().split('/')[3];
 
 
         $scope.changeOrderStatus = function() {
