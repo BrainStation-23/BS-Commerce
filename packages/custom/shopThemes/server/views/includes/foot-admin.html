@@ -28,22 +28,30 @@
 
 <script src="/shopThemes/assets/js/shopThemeAdmin.js"></script>
 
+
+
+{% for file in adminScripts %}
+<script type="text/javascript" src="{{file}}"></script>
+{% endfor %}
+<!--
+
 <script src="/shopAdmin/assets/js/shopAdmin.js"></script>
-<!--routes-->
+
+&lt;!&ndash;routes&ndash;&gt;
 <script src="/shopAdmin/assets/js/routes/category.route.js"></script>
 <script src="/shopAdmin/assets/js/routes/product.route.js"></script>
 <script src="/shopAdmin/assets/js/routes/user.route.js"></script>
 <script src="/shopAdmin/assets/js/routes/order.route.js"></script>
 <script src="/shopAdmin/assets/js/routes/brand.route.js"></script>
 
-<!--directives-->
+&lt;!&ndash;directives&ndash;&gt;
 <script src="/shopAdmin/assets/js/directives/shopAdminSideMenu.js"></script>
 <script src="/shopAdmin/assets/js/directives/shopAdminCategoryTree.js"></script>
 <script src="/shopAdmin/assets/js/directives/questionMark.js"></script>
 <script src="/shopAdmin/assets/js/directives/paginatedTable.js"></script>
 
 
-<!--directive categories-->
+&lt;!&ndash;directive categories&ndash;&gt;
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryAcl.js"></script>
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryDiscounts.js"></script>
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryInfo.js"></script>
@@ -52,7 +60,7 @@
 <script src="/shopAdmin/assets/js/directives/category/tabCategoryStores.js"></script>
 
 
-<!--directive brands-->
+&lt;!&ndash;directive brands&ndash;&gt;
 <script src="/shopAdmin/assets/js/directives/brand/tab.brand.info.js"></script>
 <script src="/shopAdmin/assets/js/directives/brand/tab.brand.seo.js"></script>
 <script src="/shopAdmin/assets/js/directives/brand/tab.brand.pictures.js"></script>
@@ -61,44 +69,46 @@
 <script src="/shopAdmin/assets/js/directives/brand/tab.brand.discounts.js"></script>
 
 
-<!--directive products-->
+&lt;!&ndash;directive products&ndash;&gt;
 <script src="/shopAdmin/assets/js/directives/product/tab.product.info.js"></script>
 <script src="/shopAdmin/assets/js/directives/product/tab.product.seo.js"></script>
 <script src="/shopAdmin/assets/js/directives/product/tab.product.pictures.js"></script>
 
-<!--controllers-->
+&lt;!&ndash;controllers&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/loginController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/registrationController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/dashboardController.js"></script>
 
 
-<!--controller categories-->
+&lt;!&ndash;controller categories&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/category/create.update.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/category/category.list.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/category/category.tree.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/category/category.edit.controller.js"></script>
 
-<!--controller brands-->
+&lt;!&ndash;controller brands&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/brand/brand.create.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/brand/brand.list.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/brand/brand.edit.controller.js"></script>
 
 
-<!--controller products-->
+&lt;!&ndash;controller products&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/product/product.create.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/product/product.list.controller.js"></script>
 <script src="/shopAdmin/assets/js/controllers/product/product.edit.controller.js"></script>
 
 
-<!--controller users-->
+&lt;!&ndash;controller users&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/user/userListController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/user/userEditController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/user/userCreateController.js"></script>
 
-<!--controller order-->
+&lt;!&ndash;controller order&ndash;&gt;
 <script src="/shopAdmin/assets/js/controllers/order/orderListController.js"></script>
 <script src="/shopAdmin/assets/js/controllers/order/orderEditController.js"></script>
 
-<!-- services -->
+
+&lt;!&ndash; services &ndash;&gt;
 <script src="/shopAdmin/assets/js/services/userService.js"></script>
 <script src="/shopAdmin/assets/js/services/orderService.js"></script>
+-->

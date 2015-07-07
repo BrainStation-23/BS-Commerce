@@ -13,7 +13,7 @@ var ShopCatalog = new Module('shopCatalog');
  */
 ShopCatalog.register(function(app, auth, database) {
   //We enable routing. By default the Package Object is passed to the routes
-  //ShopCatalog.routes(app, auth, database);
+  ShopCatalog.routes(app, auth, database);
   ShopCatalog.aggregateAsset('css', 'shopCatalog.css');
 
   return ShopCatalog;
