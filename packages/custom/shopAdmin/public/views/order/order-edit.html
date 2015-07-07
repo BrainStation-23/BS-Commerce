@@ -1,55 +1,411 @@
 <div>
     <tabset>
         <tab heading="Info">
-            <div class="table table-responsive">
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order Id</label></div>
-                    <div class="col-md-4 col-xs-8">45454545555444464646464</div>
-                </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order status</label></div>
-                    <div class="col-md-4 col-xs-8">complete</div>
-                    <div class="col-md-3" data-ng-show="!editOrderStatus">
-                        <button class="btn btn-default"  data-ng-click="changeOrderStatus()">Change status</button>
+            <form class="form-horizontal" style="margin-top: 20px;">
+                <h2>Order informations</h2>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order Id</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order._id"></p>
                     </div>
-                    <div class="col-md-7" data-ng-show="editOrderStatus">
-                        <div class="col-md-8">
-                            <select class="form-control">
-                                <option>ordered</option>
-                                <option>complete</option>
-                                <option>cancelled</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order status</label>
+                    <div class="col-sm-10" data-ng-show="!editOrderStatus">
+                        <p class="form-control-static pull-left" data-ng-bind="order.orderStatus"></p>
+                        <button class="btn btn-default" style="margin-left: 10px;"  data-ng-click="changeOrderStatus()">Change status</button>
+                    </div>
+                    <div class="col-sm-10" data-ng-show="editOrderStatus">
+                        <span style="float: left; margin-right: 10px;" data-ng-bind="order.orderStatus"></span>
+                        <select class="form-control" ng-model="selectedOrderStatus" style="width: auto; float: left">
+                            <option value="{{status}}" data-ng-selected="status == order.orderStatus"  data-ng-repeat="status in orderStatus" >{{status}}</option>
+                        </select>
+                        <div class="" style="float: left; margin-left: 10px;">
                             <button class="btn btn-default" data-ng-click="cancelUpdateOrderStatus()">cancel</button>
                             <button class="btn btn-primary" data-ng-click="updateOrderStatus()">save</button>
                         </div>
+
                     </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order subtotal</label></div>
-                    <div class="col-md-4 col-xs-8">$50</div>
+                <hr>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order subtotal</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.productCost | currency"></p>
+                    </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order shipping</label></div>
-                    <div class="col-md-4 col-xs-8">$10</div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order shipping</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingCost | currency"></p>
+                    </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order tax</label></div>
-                    <div class="col-md-4 col-xs-8">$0</div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order tax</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="(order.tax || 0) | currency"></p>
+                    </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i> Order total</label></div>
-                    <div class="col-md-4 col-xs-8">$50</div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Order total</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.totalCost | currency"></p>
+                    </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                    <div class="col-md-3 col-xs-4"><label><i class="fa fa-question-circle fa-fw"></i>Profit</label></div>
-                    <div class="col-md-4 col-xs-8">$15</div>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Profit</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="(order.profit || 0) | currency"></p>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Created on</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.orderedDate"></p>
+                    </div>
+                </div>
+            </form>
+        </tab>
+        <tab heading="Billing info">
+            <form class="form-horizontal" style="margin-top: 20px;" data-ng-show="!showEditBillingAddressForm" novalidate>
+                <h2>Billing address</h2>
+                <hr>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Payment method</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.paymentMethod"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Payment status</label>
+                    <div class="col-sm-10" data-ng-show="!editPaymentStatus">
+                        <p class="form-control-static pull-left" data-ng-bind="order.paymentStatus"></p>
+                        <button class="btn btn-default" style="margin-left: 10px;"  data-ng-click="changePaymentStatus()">Change status</button>
+                    </div>
+                    <div class="col-sm-10" data-ng-show="editPaymentStatus">
+                        <span style="float: left; margin-right: 10px;" data-ng-bind="order.paymentStatus"></span>
+                        <select class="form-control" ng-model="selectedPaymentStatus" style="width: auto; float: left">
+                            <option value="{{status}}" data-ng-selected="status == order.paymentStatus"  data-ng-repeat="status in paymentStatus" >{{status}}</option>
+                        </select>
+                        <div class="" style="float: left; margin-left: 10px;">
+                            <button class="btn btn-default" data-ng-click="cancelUpdatePaymentStatus()">cancel</button>
+                            <button class="btn btn-primary" data-ng-click="updatePaymentStatus()">save</button>
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Name</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.name"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Email</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.email"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.addressLine1"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.addressLine2"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> City</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.city"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Country</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.country"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Post code</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.postCode"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Phone number</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.billingAddress.phoneNumber"></p>
+                    </div>
+                </div>
+                <button class="btn btn-default" data-ng-click="editBillingAddress()">Edit</button>
+
+            </form>
+            <form class="form-horizontal" name="billingAddressForm" style="margin-top: 20px;" data-ng-show="showEditBillingAddressForm" data-ng-submit="updateBillingAddress()">
+                <h2>Billing address</h2>
+                <hr>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressName"><i class="fa fa-question-circle fa-fw"></i> Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressName" placeholder="name" data-ng-model="newBillingAddress.name" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label>
+                    <div class="col-sm-4">
+                        <input type="email" class="form-control" id="billAddressEmail" placeholder="email address" data-ng-model="newBillingAddress.email" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressLine1" placeholder="address line 1" data-ng-model="newBillingAddress.addressLine1" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressLine2" placeholder="address line 2" data-ng-model="newBillingAddress.addressLine2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressCity"><i class="fa fa-question-circle fa-fw"></i> City</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressCity" placeholder="city" data-ng-model="newBillingAddress.city" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressCountry" placeholder="country" data-ng-model="newBillingAddress.country" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressPostCode"><i class="fa fa-question-circle fa-fw"></i> Post code</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressPostCode" placeholder="Post code" data-ng-model="newBillingAddress.postCode" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="billAddressPhoneNo"><i class="fa fa-question-circle fa-fw"></i> Phone number</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="billAddressPhoneNo" placeholder="phone number" data-ng-model="newBillingAddress.phoneNumber" ng-required="billAddressFieldRequired">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" data-ng-click="cancelUpdateBillingAddress()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </tab>
+        <tab heading="Shipping info">
+            <form class="form-horizontal" style="margin-top: 20px;" data-ng-show="!showEditShippingAddressForm" novalidate>
+                <h2>Shipping address</h2>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Shipping method</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingMethod"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Shipping status</label>
+                    <div class="col-sm-10" data-ng-show="!editShippingStatus">
+                        <p class="form-control-static pull-left" data-ng-bind="order.shippingStatus"></p>
+                        <button class="btn btn-default" style="margin-left: 10px;"  data-ng-click="changeShippingStatus()">Change status</button>
+                    </div>
+                    <div class="col-sm-10" data-ng-show="editShippingStatus">
+                        <span style="float: left; margin-right: 10px;" data-ng-bind="order.shippingStatus"></span>
+                        <select class="form-control" ng-model="selectedShippingStatus" style="width: auto; float: left">
+                            <option value="{{status}}" data-ng-selected="status == order.shippingStatus"  data-ng-repeat="status in shippingStatus" >{{status}}</option>
+                        </select>
+                        <div class="" style="float: left; margin-left: 10px;">
+                            <button class="btn btn-default" data-ng-click="cancelUpdateShippingStatus()">cancel</button>
+                            <button class="btn btn-primary" data-ng-click="updateShippingStatus()">save</button>
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Name</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.name"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Email</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.email"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.addressLine1"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.addressLine2"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> City</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.city"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Country</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.country"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Post code</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.postCode"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Phone number</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-ng-bind="order.shippingAddress.phoneNumber"></p>
+                    </div>
+                </div>
+                <button class="btn btn-default" data-ng-click="editShippingAddress()">Edit</button>
+
+            </form>
+            <form class="form-horizontal" name="shippingAddressForm" style="margin-top: 20px;" data-ng-show="showEditShippingAddressForm" data-ng-submit="updateShippingAddress()">
+                <h2>Shipping address</h2>
+                <hr>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressName"><i class="fa fa-question-circle fa-fw"></i> Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressName" placeholder="name" data-ng-model="newShippingAddress.name" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressEmail"><i class="fa fa-question-circle fa-fw"></i> Email</label>
+                    <div class="col-sm-4">
+                        <input type="email" class="form-control" id="shippingAddressEmail" placeholder="email address" data-ng-model="newShippingAddress.email" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressLine1" placeholder="address line 1" data-ng-model="newShippingAddress.addressLine1" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressLine2" placeholder="address line 2" data-ng-model="newShippingAddress.addressLine2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressCity"><i class="fa fa-question-circle fa-fw"></i> City</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressCity" placeholder="city" data-ng-model="newShippingAddress.city" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressCountry" placeholder="country" data-ng-model="newShippingAddress.country" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressPostCode"><i class="fa fa-question-circle fa-fw"></i> Post code</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressPostCode" placeholder="Post code" data-ng-model="newShippingAddress.postCode" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="shippingAddressPhoneNo"><i class="fa fa-question-circle fa-fw"></i> Phone number</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="shippingAddressPhoneNo" placeholder="phone number" data-ng-model="newShippingAddress.phoneNumber" ng-required="shippingAddressFieldRequired">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" data-ng-click="cancelUpdateShippingAddress()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </tab>
+
+        <tab heading="Product info">
+            <div class="row">
+                <div class="table-responsive cart_info">
+                    <h2>Product(s) Information</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="cart_menu">
+                            <td class="description">Product(s)</td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in order.products">
+                            <td class="cart_description">
+                                <h4><a data-ui-sref="products-details({sku:item.sku})">{{item.name}}</a></h4>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{item.price | currency}}</p>
+                            </td>
+                            <td class="cart_quantity text-center">
+                                <span data-ng-bind="item.quantity"></span>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">{{(item.price * item.quantity) | currency}}</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <div class="col-sm-12 col-md-12" style="margin-top: 10px; padding: 10px;background-color: #f9f9f9;">
+
+                        <table class="table table-responsive table-hover">
+                            <tbody>
+                            <tr>
+                                <td>Sub Total:</td>
+                                <td class="text-right" data-ng-bind="order.productCost | currency"></td>
+                            </tr>
+                            <tr>
+                                <td>Shipping:</td>
+                                <td class="text-right" data-ng-bind="order.shippingCost | currency"></td>
+                            </tr>
+                            <tr>
+                                <td>Tax:</td>
+                                <td class="text-right" data-ng-bind="(order.tax || 0) | currency"></td>
+                            </tr>
+                            <tr style="color: #4ab2f1; font-size: 24px;">
+                                <td>Total:</td>
+                                <td class="text-right" data-ng-bind=" order.totalCost | currency"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr/>
+                    </div>
                 </div>
             </div>
         </tab>
-        <tab heading="Billing info">Billing info</tab>
-        <tab heading="Shipping info">Shipping info</tab>
-        <tab heading="Product info">Product info</tab>
     </tabset>
 </div>

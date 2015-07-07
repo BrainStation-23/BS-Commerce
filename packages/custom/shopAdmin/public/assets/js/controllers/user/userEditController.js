@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Global', '$stateParams','userService','$location', '$timeout',
-    function($scope, Global, $stateParms, userService, $location, $timeout) {
+    function($scope, Global, $stateParams, userService, $location, $timeout) {
 
         //<editor-fold desc='Variable declaration'>
         $scope.user = {};
@@ -13,9 +13,9 @@ angular.module('mean.shopAdmin').controller('userEditController', ['$scope', 'Gl
         //</editor-fold>
 
         $scope.getUserById = function() {
-            var customerId = $location.path().split('/')[3];
-            var getCustomer = userService.getUserById(customerId);
-            getCustomer.$promise.then(function (user){
+            var userId = $stateParams.userId;
+            var getUser = userService.getUserById(userId);
+            getUser.$promise.then(function (user){
                 $scope.user = user;
                 if(user.roles.indexOf('admin') !== -1)
                     $scope.roleAdmin = true;
