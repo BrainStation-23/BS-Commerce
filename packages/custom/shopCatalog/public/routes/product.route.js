@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.shopProduct').config(['$stateProvider',
+angular.module('mean.shopCatalog').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider.state('products-details', {
       url: '/products/:sku',
