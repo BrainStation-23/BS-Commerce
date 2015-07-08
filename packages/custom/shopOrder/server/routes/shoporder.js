@@ -11,7 +11,8 @@ module.exports = function(Shopcatalog, app, auth, database, shopCore) {
 
   app.route('/api/auth/order')
       .get(orderController.getOrders)
-      .post(orderController.createOrder);
+      .post(orderController.createOrder)
+      .put(orderController.updateOrder);
 
   app.route('/api/auth/order/:orderId')
       .get(orderController.getOrderById);

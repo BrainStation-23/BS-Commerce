@@ -20,12 +20,14 @@
                     <div class="col-sm-10" data-ng-show="editOrderStatus">
                         <span style="float: left; margin-right: 10px;" data-ng-bind="order.orderStatus"></span>
                         <select class="form-control" ng-model="selectedOrderStatus" style="width: auto; float: left">
-                            <option value="{{status}}" data-ng-selected="status == order.orderStatus"  data-ng-repeat="status in orderStatus" >{{status}}</option>
+                            <option value="">Select order status</option>
+                            <option value="{{status}}" data-ng-repeat="status in orderStatus" >{{status}}</option>
                         </select>
                         <div class="" style="float: left; margin-left: 10px;">
                             <button class="btn btn-default" data-ng-click="cancelUpdateOrderStatus()">cancel</button>
-                            <button class="btn btn-primary" data-ng-click="updateOrderStatus()">save</button>
+                            <button class="btn btn-primary" data-ng-click="updateOrderStatus(selectedOrderStatus)">save</button>
                         </div>
+                        <span class="alert alert-success" data-ng-show="successUpdateOrderStatus" data-ng-bind="successUpdateOrderStatus"></span>
 
                     </div>
                 </div>
@@ -54,7 +56,6 @@
                         <p class="form-control-static" data-ng-bind="order.totalCost | currency"></p>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Profit</label>
                     <div class="col-sm-10">
@@ -71,6 +72,7 @@
                 </div>
             </form>
         </tab>
+
         <tab heading="Billing info">
             <form class="form-horizontal" style="margin-top: 20px;" data-ng-show="!showEditBillingAddressForm" novalidate>
                 <h2>Billing address</h2>
@@ -90,13 +92,14 @@
                     <div class="col-sm-10" data-ng-show="editPaymentStatus">
                         <span style="float: left; margin-right: 10px;" data-ng-bind="order.paymentStatus"></span>
                         <select class="form-control" ng-model="selectedPaymentStatus" style="width: auto; float: left">
-                            <option value="{{status}}" data-ng-selected="status == order.paymentStatus"  data-ng-repeat="status in paymentStatus" >{{status}}</option>
+                            <option value="" data-ng-model="orderStatus">Select payment status</option>
+                            <option value="{{status}}" data-ng-repeat="status in paymentStatus" >{{status}}</option>
                         </select>
                         <div class="" style="float: left; margin-left: 10px;">
                             <button class="btn btn-default" data-ng-click="cancelUpdatePaymentStatus()">cancel</button>
-                            <button class="btn btn-primary" data-ng-click="updatePaymentStatus()">save</button>
+                            <button class="btn btn-primary" data-ng-click="updatePaymentStatus(selectedPaymentStatus)">save</button>
                         </div>
-
+                        <span class="alert alert-success" data-ng-show="successUpdatePaymentStatus" data-ng-bind="successUpdatePaymentStatus"></span>
                     </div>
                 </div>
                 <hr>
@@ -114,13 +117,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address line-1</label>
                     <div class="col-sm-10">
                         <p class="form-control-static" data-ng-bind="order.billingAddress.addressLine1"></p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address line-2</label>
                     <div class="col-sm-10">
                         <p class="form-control-static" data-ng-bind="order.billingAddress.addressLine2"></p>
                     </div>
@@ -156,6 +159,8 @@
             <form class="form-horizontal" name="billingAddressForm" style="margin-top: 20px;" data-ng-show="showEditBillingAddressForm" data-ng-submit="updateBillingAddress()">
                 <h2>Billing address</h2>
                 <hr>
+                <span class="col-sm-12 alert alert-success" data-ng-show="successUpdateBillingAddress" data-ng-bind="successUpdateBillingAddress"></span>
+
                 <div class="form-group">
                     <label class="col-sm-2" for="billAddressName"><i class="fa fa-question-circle fa-fw"></i> Name</label>
                     <div class="col-sm-4">
@@ -169,13 +174,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2" for="billAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <label class="col-sm-2" for="billAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line-1</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="billAddressLine1" placeholder="address line 1" data-ng-model="newBillingAddress.addressLine1" ng-required="billAddressFieldRequired">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2" for="billAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <label class="col-sm-2" for="billAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line-2</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="billAddressLine2" placeholder="address line 2" data-ng-model="newBillingAddress.addressLine2">
                     </div>
@@ -209,6 +214,7 @@
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </tab>
+
         <tab heading="Shipping info">
             <form class="form-horizontal" style="margin-top: 20px;" data-ng-show="!showEditShippingAddressForm" novalidate>
                 <h2>Shipping address</h2>
@@ -229,13 +235,14 @@
                     <div class="col-sm-10" data-ng-show="editShippingStatus">
                         <span style="float: left; margin-right: 10px;" data-ng-bind="order.shippingStatus"></span>
                         <select class="form-control" ng-model="selectedShippingStatus" style="width: auto; float: left">
-                            <option value="{{status}}" data-ng-selected="status == order.shippingStatus"  data-ng-repeat="status in shippingStatus" >{{status}}</option>
+                            <option value="" data-ng-model="orderStatus">Select shipping status</option>
+                            <option value="{{status}}" data-ng-repeat="status in shippingStatus" >{{status}}</option>
                         </select>
                         <div class="" style="float: left; margin-left: 10px;">
                             <button class="btn btn-default" data-ng-click="cancelUpdateShippingStatus()">cancel</button>
-                            <button class="btn btn-primary" data-ng-click="updateShippingStatus()">save</button>
+                            <button class="btn btn-primary" data-ng-click="updateShippingStatus(selectedShippingStatus)">save</button>
                         </div>
-
+                        <span class="alert alert-success" data-ng-show="successUpdateShippingStatus" data-ng-bind="successUpdateShippingStatus"></span>
                     </div>
                 </div>
                 <hr>
@@ -253,13 +260,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address line-1</label>
                     <div class="col-sm-10">
                         <p class="form-control-static" data-ng-bind="order.shippingAddress.addressLine1"></p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <label class="col-sm-2"><i class="fa fa-question-circle fa-fw"></i> Address line-2</label>
                     <div class="col-sm-10">
                         <p class="form-control-static" data-ng-bind="order.shippingAddress.addressLine2"></p>
                     </div>
@@ -295,6 +302,7 @@
             <form class="form-horizontal" name="shippingAddressForm" style="margin-top: 20px;" data-ng-show="showEditShippingAddressForm" data-ng-submit="updateShippingAddress()">
                 <h2>Shipping address</h2>
                 <hr>
+                <span class="col-sm-12 alert alert-success" data-ng-show="successUpdateShippingAddress" data-ng-bind="successUpdateShippingAddress"></span>
                 <div class="form-group">
                     <label class="col-sm-2" for="shippingAddressName"><i class="fa fa-question-circle fa-fw"></i> Name</label>
                     <div class="col-sm-4">
@@ -308,13 +316,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2" for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address lime-1</label>
+                    <label class="col-sm-2" for="shippingAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line-1</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="shippingAddressLine1" placeholder="address line 1" data-ng-model="newShippingAddress.addressLine1" ng-required="shippingAddressFieldRequired">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2" for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address lime-2</label>
+                    <label class="col-sm-2" for="shippingAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line-2</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="shippingAddressLine2" placeholder="address line 2" data-ng-model="newShippingAddress.addressLine2">
                     </div>
@@ -347,6 +355,7 @@
                 <button type="button" class="btn btn-default" data-ng-click="cancelUpdateShippingAddress()">Cancel</button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
+            <hr>
         </tab>
 
         <tab heading="Product info">

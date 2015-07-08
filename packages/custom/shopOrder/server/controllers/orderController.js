@@ -97,3 +97,14 @@ exports.getOrderEnums = function(req, res) {
     var shippingStatus = Order.schema.path('shippingStatus').enumValues;
     return res.status(200).send({orderStatus:orderStatus, paymentStatus: paymentStatus, shippingStatus: shippingStatus});
 };
+
+exports.updateOrder = function(req, res) {
+    orderService.updateOrder(req)
+        .then(function(){
+            return res.status(200).json({msg: 'Successfully update !'});
+        })
+        .catch(function(error){
+            return res.status(500).json({msg: 'Error occurred while creating order', error: error});
+        })
+        .done();
+};

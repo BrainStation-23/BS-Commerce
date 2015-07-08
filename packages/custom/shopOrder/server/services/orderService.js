@@ -74,3 +74,15 @@ exports.deleteOrderById = function(req, res) {
     return deferred.promise;
 };
 
+exports.updateOrder = function(req) {
+    var deferred = Q.defer();
+
+    Order.findByIdAndUpdate(req.body._id, req.body, function(error, order) {
+        if(error) {
+            return deferred.reject(error);
+        }
+        return deferred.resolve(order);
+    });
+    return deferred.promise;
+};
+
