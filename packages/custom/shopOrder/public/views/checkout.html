@@ -14,7 +14,7 @@
                         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i>Select your billing address</label></div>
                         <div class="col-md-4">
                             <select class="form-control" ng-model="selectedIndx" ng-change="selectBillingAddress(selectedIndx)">
-                                <option  value="null" data-ng-selected="addresses">Create new address</option>
+                                <option  value="" data-ng-selected="addresses">Create new address</option>
                                 <option  data-ng-repeat="address in addresses" value="{{$index}}" >{{address}}</option>
                             </select>
                         </div>
@@ -97,7 +97,7 @@
                             <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i>Select your billing address</label></div>
                             <div class="col-md-4">
                                 <select class="form-control" ng-model="selectedIndx" ng-change="selectShippingAddress(selectedIndx)">
-                                    <option  value="null" data-ng-selected="addresses">Create new address</option>
+                                    <option  value="" data-ng-selected="addresses">Create new address</option>
                                     <option  data-ng-repeat="address in addresses" value="{{$index}}" >{{address}}</option>
                                 </select>
                             </div>

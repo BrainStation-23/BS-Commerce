@@ -76,7 +76,7 @@
 			$scope.initializeAddress();
 
 			$scope.selectBillingAddress = function(indx) {
-				if(indx === 'null') {
+				if(indx === '') {
 					$scope.order.billingAddress ={};
 					return;
 				}
@@ -107,7 +107,7 @@
 
 			$scope.selectShippingAddress = function(indx) {
 				//console.log(typeof indx);
-				if(indx === 'null') {
+				if(indx === '') {
 					$scope.order.shippingAddress ={};
 					return;
 				}
