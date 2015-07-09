@@ -193,5 +193,70 @@ angular.module('mean.shopAdmin').controller('orderEditController', ['$scope', '$
                     });
             }
         };
+
+        $scope.editProductInfo = function(item) {
+            $scope.newItem = jQuery.extend({}, item);
+            $scope.editQuantity = true;
+            //console.log(item);
+        };
+
+        $scope.increaseQuantity = function(newItem) {
+            newItem.quantity+= 1;
+        };
+
+        $scope.decreaseQuantity = function(newItem) {
+            if(newItem.quantity < 1) {
+                return;
+            }
+            newItem.quantity-= 1;
+        };
+
+        $scope.cancelUpdateProductInfo = function() {
+            $scope.newItem = {};
+        };
+
+        $scope.saveProductInfo = function(newProductCost) {
+            var updateOrder = {
+                _id: $scope.order._id,
+                productCost: newProductCost,
+                totalCost: newProductCost + $scope.order.shippingCost,
+                products: $scope.order.products
+            };
+
+            orderService.updateOrder(updateOrder)
+                .$promise
+                .then(function(response) {
+                    $scope.successUpdateProductInfo = response.msg;
+                    $timeout(function() {
+                        $scope.order.productCost = newProductCost;
+                        $scope.order.totalCost = newProductCost + $scope.order.shippingCost;
+                        $scope.successUpdateProductInfo = '';
+                    },1000);
+                });
+        };
+
+        $scope.updateProductInfo = function(newItem) {
+            if(newItem === null) {
+                alert('new item is empty!');
+                return;
+            }
+            if(confirm('Are you sure want to update product information?')) {
+                var productIndex = -1;
+                var newProductCost =0;
+                angular.forEach($scope.order.products, function(product) {
+                    productIndex+=1;
+                    newProductCost+= product.price * product.quantity;
+                    if(product._id === newItem._id) {
+                        newProductCost-= product.price * product.quantity;
+                        newProductCost+= newItem.price * newItem.quantity;
+                        $scope.order.products[productIndex] = newItem;
+                    }
+                });
+                $scope.newItem = {};
+                if(productIndex+1 === $scope.order.products.length) {
+                    $scope.saveProductInfo(newProductCost);
+                }
+            }
+        };
     }
 ]);

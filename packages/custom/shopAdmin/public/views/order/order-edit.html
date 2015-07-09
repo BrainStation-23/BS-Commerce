@@ -362,6 +362,7 @@
             <div class="row">
                 <div class="table-responsive cart_info">
                     <h2>Product(s) Information</h2>
+                    <span class="col-sm-12 alert alert-success" data-ng-show="successUpdateProductInfo" data-ng-bind="successUpdateProductInfo"></span>
                     <table class="table table-bordered">
                         <thead>
                         <tr class="cart_menu">
@@ -369,21 +370,35 @@
                             <td class="price">Price</td>
                             <td class="quantity">Quantity</td>
                             <td class="total">Total</td>
+                            <td class="edit">Edit</td>
                         </tr>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="item in order.products">
                             <td class="cart_description">
-                                <h4><a data-ui-sref="products-details({sku:item.sku})">{{item.name}}</a></h4>
+                                <h4><a data-ui-sref="Product.Edit({productId: item.productId})" target="_blank">{{item.name}}</a></h4>
                             </td>
                             <td class="cart_price">
                                 <p>{{item.price | currency}}</p>
                             </td>
                             <td class="cart_quantity text-center">
-                                <span data-ng-bind="item.quantity"></span>
+                                <span data-ng-show="newItem._id !== item._id" data-ng-bind="item.quantity"></span>
+                                <div class="cart_quantity_button" data-ng-show="newItem._id === item._id">
+                                    <a class="cart_quantity_up" style="padding-top: 5px;" href="" data-ng-click="increaseQuantity(newItem)"> <i class="fa fa-plus"></i></a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="2" data-ng-model="newItem.quantity">
+                                    <a class="cart_quantity_down" style="padding-top: 5px;" href="" data-ng-click="decreaseQuantity(newItem)"><i class="fa fa-minus"></i> </a>
+                                </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">{{(item.price * item.quantity) | currency}}</p>
+                                <p class="cart_total_price" data-ng-show="newItem._id !== item._id">{{(item.price * item.quantity) | currency}}</p>
+                                <p class="cart_total_price" data-ng-show="newItem._id === item._id">{{(newItem.price * newItem.quantity) | currency}}</p>
+                            </td>
+                            <td class="text-center">
+                                <button data-ng-show="newItem._id !== item._id" type="button" class="btn btn-default" data-ng-click="editProductInfo(item)"><i class="fa fa-edit"></i></button>
+                                <div data-ng-show="newItem._id === item._id">
+                                    <button type="button" class="btn btn-default" data-ng-click="cancelUpdateProductInfo()">Cancel</button>
+                                    <button type="button" class="btn btn-primary" data-ng-click="updateProductInfo(newItem)">Save</button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
