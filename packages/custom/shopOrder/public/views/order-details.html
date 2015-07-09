@@ -151,6 +151,7 @@
             <table class="table table-bordered">
                 <thead>
                 <tr class="cart_menu">
+                    <td class="image">Picture</td>
                     <td class="description">Product(s)</td>
                     <td class="price">Price</td>
                     <td class="quantity">Quantity</td>
@@ -159,6 +160,9 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="item in order.products">
+                    <td class="cart_product" style="margin:0">
+                        <img data-ng-src="/api/products/photos/{{item.productId.photos[0]}}" alt="no image" style="max-height: 50px">
+                    </td>
                     <td class="cart_description">
                         <h4><a data-ui-sref="products-details({sku:item.sku})">{{item.name}}</a></h4>
                     </td>

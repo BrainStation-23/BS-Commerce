@@ -83,7 +83,7 @@
                 <td data-ng-bind="order.orderStatus"></td>
                 <td data-ng-bind="order.paymentStatus"></td>
                 <td data-ng-bind="order.shippingStatus"></td>
-                <td data-ng-bind="order.user"></td>
+                <td data-ng-bind="order.user.name +' (' +order.user.email +')'"></td>
                 <td data-ng-bind="order.orderedDate"></td>
                 <td data-ng-bind="order.totalCost | currency"></td>
                 <td><a ui-sref="Order.Edit({orderId: order._id})">Edit</a></td>
