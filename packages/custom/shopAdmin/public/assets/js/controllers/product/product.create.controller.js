@@ -38,8 +38,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
 
         $scope.getBrands = function(){
 
-            $http.ge
-            $http.get('/api/categories')
+           /* $http.get('/api/categories')
                 .success(function (data, status, headers, config) {
                     $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
                     //console.log(data);
@@ -63,7 +62,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                     $scope.product.categories[0].displayOrder = 0;
 
                     $scope.getBrands();
-                });
+                });*/
         };
 
 
