@@ -18,6 +18,38 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
         $scope.orders = [];
         $scope.dispalayOrders = [];
 
+        // -----------------start date picker functions ------------------------
+
+        $scope.startDatePickerOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.startDateOpened = true;
+        };
+
+        $scope.endDatePickerOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.endDateOpened = true;
+        };
+
+
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.resetStartDate = function() {
+            $scope.searchQuery.startDate = null;
+        };
+        $scope.resetEndDate = function() {
+            $scope.searchQuery.endDate = null;
+        };
+
+        // -----------------start date picker functions ------------------------
+
         orderService.getOrderEnums()
             .$promise
             .then(function(response) {
@@ -58,7 +90,8 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
                 $scope.dateError = 'you should fill up end date';
                 return;
             }
-            $scope.searchQuery.page = $scope.currentPage;
+            $scope.dateError = '';
+            $scope.searchQuery.numberOfSkip =0;
             $scope.searchQuery.numberOfDisplay = $scope.numberOfDisplay;
             orderService.searchOrders($scope.searchQuery)
                 .$promise

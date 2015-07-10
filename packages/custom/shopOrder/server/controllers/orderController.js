@@ -19,11 +19,12 @@ exports.createOrder =function(req, res) {
 
 var getSearchQuery = function(req, callback) {
     var query = {};
+    var oDate = req.query.startDate === undefined || req.query.startDate === null;
     var oStatus = req.query.selectedOrderStatus === undefined || req.query.selectedOrderStatus === '' ;
-    var pStatus = req.query.selectedPaymentStatus !== undefined || req.query.selectedPaymentStatus !== '';
-    var sStatus = req.query.selectedShippingStatus !== undefined || req.query.selectedShippingStatus !== '';
+    var pStatus = req.query.selectedPaymentStatus === undefined || req.query.selectedPaymentStatus === '';
+    var sStatus = req.query.selectedShippingStatus === undefined || req.query.selectedShippingStatus === '';
 
-    if(req.query.startDate !== null) {
+    if(!oDate) {
         query = {
             orderedDate: {$gte: req.query.startDate, $lte: req.query.endDate}
         };
