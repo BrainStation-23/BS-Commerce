@@ -6,10 +6,10 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
 
         $scope.product = {};
         $scope.product.name = 'test product name';
-        $scope.product.categories = {};
+        $scope.product.categories = [];
 
-        $http.get('/api/categories').
-            success(function (data, status, headers, config) {
+        $http.get('/api/categories')
+            .success(function (data, status, headers, config) {
                 $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
                 //console.log(data);
                 for (var i in data) {
@@ -26,19 +26,50 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                         $scope.categories.push(subItem);
                     }
                 }
-                $scope.product.category = $scope.categories[0].id;
+                $scope.product.categories[0] = {};
+                $scope.product.categories[0].categoryId = $scope.categories[0].id;
+                $scope.product.categories[0].isFeatured = false;
+                $scope.product.categories[0].displayOrder = 0;
+
+                $scope.getBrands();
             });
 
 
 
+        $scope.getBrands = function(){
+
+            $http.ge
+            $http.get('/api/categories')
+                .success(function (data, status, headers, config) {
+                    $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+                    //console.log(data);
+                    for (var i in data) {
+                        var item = {};
+                        item.id = data[i]._id;
+                        item.parent = null;
+                        item.text = data[i].name;
+                        $scope.categories.push(item);
+                        for (var j in data[i].subCategories) {
+                            var subItem = {};
+                            subItem.id = data[i].subCategories[j]._id;
+                            subItem.parent = data[i]._id;
+                            subItem.text = data[i].subCategories[j].name;
+                            $scope.categories.push(subItem);
+                        }
+                    }
+                    $scope.product.categories[0] = {};
+                    $scope.product.categories[0].categoryId = $scope.categories[0].id;
+                    $scope.product.categories[0].isFeatured = false;
+                    $scope.product.categories[0].displayOrder = 0;
+
+                    $scope.getBrands();
+                });
+        };
+
+
         $scope.add = function () {
             var p = {};
-            p.categories = [];
-            p.categories[0] = {
-                categoryId: $scope.product.category,
-                isFeatured: false,
-                displayOrder: 0
-            };
+            p.categories = $scope.product.categories;
             p.tags = [];
             p.info = {
                 name: $scope.product.name,

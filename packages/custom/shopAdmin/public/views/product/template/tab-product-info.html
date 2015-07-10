@@ -1,7 +1,8 @@
 <div class="form-container">
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Name
+            <question-mark></question-mark>
+            Name
         </div>
         <div class="col-md-3">
             <input type="text" class="form-control" ng-model="product.name"/>
@@ -9,7 +10,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Short Description
+            <question-mark></question-mark>
+            Short Description
         </div>
         <div class="col-md-3">
             <textarea ng-model="product.shortDescription" class="col-md-6 form-control" rows="2"></textarea>
@@ -17,7 +19,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Description
+            <question-mark></question-mark>
+            Description
         </div>
         <div class="col-md-6">
             <textarea ui-tinymce ng-model="product.fullDescription" class=""></textarea>
@@ -25,7 +28,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> SKU
+            <question-mark></question-mark>
+            SKU
         </div>
         <div class="col-md-3">
             <input type="text" class="form-control" ng-model="product.sku"/>
@@ -33,7 +37,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Cost
+            <question-mark></question-mark>
+            Cost
         </div>
         <div class="col-md-3">
             <input type="number" class="form-control" ng-model="product.cost"/>
@@ -41,7 +46,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Old Price
+            <question-mark></question-mark>
+            Old Price
         </div>
         <div class="col-md-3">
             <input type="number" class="form-control" ng-model="product.oldPrice"/>
@@ -49,7 +55,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Price
+            <question-mark></question-mark>
+            Price
         </div>
         <div class="col-md-3">
             <input type="number" class="form-control" ng-model="product.price"/>
@@ -58,17 +65,23 @@
 
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Parent Category
+            <question-mark></question-mark>
+            Parent Category
         </div>
-        <div class="col-md-3">
+        <!--<div class="col-md-3">
             <select class="form-control" data-ng-model="product.category"
                     ng-options="item.id as item.text for item in categories"></select>
+        </div>-->
+        <div class="col-md-9">
+            <div dynamic-multiple-categories placeholder="Categories" class="col-md-12"></div>
         </div>
+
     </div>
 
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Show on home page
+            <question-mark></question-mark>
+            Show on home page
         </div>
         <div class="col-md-9">
             <input type="checkbox" ng-model="product.showOnHomePage"/>
@@ -76,7 +89,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Include in top menu
+            <question-mark></question-mark>
+            Include in top menu
         </div>
         <div class="col-md-9">
             <input type="checkbox" ng-model="product.includeInTopMenu"/>
@@ -84,7 +98,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Allow customers to select page size
+            <question-mark></question-mark>
+            Allow customers to select page size
         </div>
         <div class="col-md-9">
             <input type="checkbox" ng-model="product.allowToSelectPageSize"/>
@@ -92,7 +107,8 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Published
+            <question-mark></question-mark>
+            Published
         </div>
         <div class="col-md-9">
             <input type="checkbox" ng-model="product.published"/>
@@ -100,10 +116,12 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <question-mark></question-mark> Display order
+            <question-mark></question-mark>
+            Display order
         </div>
         <div class="col-md-1">
-            <input type="number" name="quantity" min="1" max="100" class="form-control" data-ng-model="product.displayOrder"/>
+            <input type="number" name="quantity" min="1" max="100" class="form-control"
+                   data-ng-model="product.displayOrder"/>
         </div>
     </div>
 
