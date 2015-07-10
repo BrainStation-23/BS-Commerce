@@ -23,7 +23,7 @@
         <div class="col-md-3"><label for="endDate"><i class="fa fa-question-circle fa-fw"></i> End date:</label></div>
         <div class="col-md-4">
             <p class="input-group">
-                <input type="date" id="endDate" class="form-control" datepicker-popup data-ng-model="searchQuery.endDate" is-open="endDateOpened" datepicker-options="dateOptions" />
+                <input type="date" id="endDate" class="form-control" datepicker-popup data-ng-model="searchQuery.endDate" is-open="endDateOpened" datepicker-options="dateOptions" show-button-bar="false"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="endDatePickerOpen($event)"><i class="fa fa-calendar"></i></button>
                   <button type="button" class="btn btn-default" ng-click="resetEndDate()"><i class="fa fa-times"></i></button>
