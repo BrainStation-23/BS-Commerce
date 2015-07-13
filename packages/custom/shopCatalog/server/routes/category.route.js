@@ -1,6 +1,6 @@
 'use strict';
 
-var controller = require('../controllers/shopCategory');
+var controller = require('../controllers/category.controller');
 
 module.exports = function (shopCatalog, app, auth, database, shopCore) {
     app.route('/api/categories')

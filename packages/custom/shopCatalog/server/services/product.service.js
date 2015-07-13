@@ -101,7 +101,8 @@ exports.create = function(data){
     info: data.info,
     meta: data.meta,
     tags: data.tags,
-    categories: data.categories
+    categories: data.categories,
+    brands: data.brands
   });
   console.log(p);
 
@@ -140,6 +141,19 @@ exports.delete = function(id){
       return deferred.reject(error);
     } else {
       return deferred.resolve(doc);
+    }
+  });
+
+  return deferred.promise;
+};
+
+exports.getCount = function(){
+  var deferred = Q.defer();
+  Product.find({}).count(function(error, count){
+    if (error) {
+      return deferred.reject(error);
+    } else {
+      return deferred.resolve(count);
     }
   });
 

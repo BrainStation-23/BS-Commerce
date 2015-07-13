@@ -60,6 +60,11 @@ var ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'fs.files'
   }],
+  brands:[{
+    brandId:{
+      type: Schema.Types.ObjectId
+    }
+  }],
   categories:[{
     categoryId:{
       type: Schema.Types.ObjectId,

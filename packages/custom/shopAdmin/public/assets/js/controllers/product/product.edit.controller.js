@@ -7,6 +7,9 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         $scope.product = {};
         $scope.product.id = $stateParams.productId;
         $scope.picture = {};
+        $scope.product.categories = [];
+        $scope.product.brands = [];
+
 
         $http.get('/api/categories').
             success(function (data, status, headers, config) {
@@ -26,12 +29,27 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                         $scope.categories.push(subItem);
                     }
                 }
-                $scope.product.category = $scope.categories[0].id;
+                //$scope.product.category = $scope.categories[0].id;
                 $scope.setUpPage();
             })
             .error(function (data, status, headers, config) {
 
             });
+
+        $http.get('/api/brands')
+            .success(function (data, status, headers, config) {
+                $scope.brands = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+                console.log(data);
+                for (var i in data) {
+                    var item = {};
+                    item.id = data[i]._id;
+                    item.text = data[i].info.name;
+                    $scope.brands.push(item);
+                }
+                $scope.product.brands[0] = {};
+                $scope.product.brands[0].brandId = $scope.brands[0].id;
+            });
+
         $scope.setUpPage = function () {
 
             $http.get('/api/products/' + $scope.product.id)
@@ -44,6 +62,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     $scope.product.isFeatured = data.categories[0].isFeatured;
                     $scope.product.displayOrder = data.categories[0].displayOrder;*/
                     $scope.product.categories = data.categories;
+                    $scope.product.brands = data.brands;
 
                     // tags
                     $scope.product.tags = data.tags;
@@ -123,6 +142,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                 isFeatured: false,
                 displayOrder: 0
             };*/
+            p.brands = $scope.product.brands;
             p.categories = $scope.product.categories;
             p.tags = [];
             p.info = {
@@ -157,9 +177,12 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
 
         $scope.refreshProduct = function(data){
             // categories
-            $scope.product.category = data.categories[0].categoryId;
+            /*$scope.product.category = data.categories[0].categoryId;
             $scope.product.isFeatured = data.categories[0].isFeatured;
             $scope.product.displayOrder = data.categories[0].displayOrder;
+            */
+            $scope.product.categories = data.categories;
+            $scope.product.brands = data.brands;
 
             // tags
             $scope.product.tags = data.tags;

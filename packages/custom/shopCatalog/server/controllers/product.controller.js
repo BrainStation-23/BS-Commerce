@@ -1,6 +1,6 @@
 'use strict';
 
-var service = require('../services/shopProduct');
+var service = require('../services/product.service');
 
 exports.list = function (req, res) {
     console.log('list   '+ req.params.id);
@@ -91,4 +91,16 @@ exports.delete = function(req,res){
         })
         .done();
 
+};
+
+exports.getCount = function(req, res){
+    service.getCount()
+        .then(function(count){
+            return res.status(200).json(count);
+        })
+        .catch(function(error){
+            console.log(error);
+            return res.status(500).json([{msg: 'Unhandled Error!'}]);
+        })
+        .done();
 };

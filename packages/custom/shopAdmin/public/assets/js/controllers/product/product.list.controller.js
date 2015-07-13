@@ -1,22 +1,36 @@
 'use strict';
 
 angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
-    function($scope, Global, $http) {
+    function ($scope, Global, $http) {
 
-        $scope.totalItems =20;
-        $scope.currentPage =1 ;
-        $scope.maxSize = 5;
-        $scope.numberOfDisplay =5;
+        $scope.totalItems = 20;
+        $scope.currentPage = 1;
+        $scope.maxSize = 3;
+        $scope.numberOfDisplay = 5;
         $scope.products = [];
 
-        $scope.getPage = function(pageNumber){
-            $http.get('/api/products?pageSize='+$scope.maxSize+'&currentPage='+pageNumber).
-                success(function(data, status, headers, config) {
+        $http.get('/api/products/count')
+            .success(function (data, status, headers, config) {
+                console.log('Total Product: ' + data);
+                $scope.totalItems = data;
+                //$scope.totalItems = 300;
+                //$scope.maxSize = Math.ceil($scope.totalItems/$scope.numberOfDisplay);
+                //console.log('max size: ' + $scope.maxSize);
+                //$scope.maxSize = $scope.;
+                $scope.getPage(1);
+            })
+            .error(function (data, status, headers, config) {
+
+            });
+
+        $scope.getPage = function (pageNumber) {
+            $http.get('/api/products?pageSize=' + $scope.numberOfDisplay + '&currentPage=' + pageNumber).
+                success(function (data, status, headers, config) {
                     console.log(data);
                     $scope.products = [];
-                    for(var i in data){
+                    for (var i in data) {
                         var item = data[i];
-                        if(data[i].photos.length>0){
+                        if (data[i].photos.length > 0) {
                             item.picture = data[i].photos[0];
                         }
                         item.name = data[i].info.name;
@@ -27,14 +41,14 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
                     }
 
                 }).
-                error(function(data, status, headers, config) {
+                error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
         };
-        $scope.getPage(1);
 
-        $scope.changePagination =function(pageNo) {
+
+        $scope.changePagination = function (pageNo) {
             $scope.getPage(pageNo);
         };
 

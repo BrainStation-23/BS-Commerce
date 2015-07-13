@@ -1,0 +1,19 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-12">
+            <button class="btn btn-default" ng-click="addMoreBrand()">Add More Brand</button>
+            <button class="btn btn-default" ng-click="removeLastBrand()">Remove Last Brand</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div data-ng-repeat="item in product.brands" class="col-md-2">
+            <select class="col-md-12" data-ng-model="item.brandId"
+                    ng-options="itemBrand.id as itemBrand.text for itemBrand in brands"></select>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-default" ng-click="showData()">show choices</button>
+        </div>
+    </div>-->
+</form>

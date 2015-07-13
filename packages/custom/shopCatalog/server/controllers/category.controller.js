@@ -1,6 +1,6 @@
 'use strict';
 
-var service = require('../services/shopCategory');
+var service = require('../services/category.service');
 
 exports.list = function(req, res){
   service.list()

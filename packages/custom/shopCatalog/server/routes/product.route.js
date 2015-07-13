@@ -1,11 +1,14 @@
 'use strict';
 
-var controller = require('../controllers/shopProduct');
+var controller = require('../controllers/product.controller');
 
 module.exports = function (shopCatalog, app, auth, database, shopCore) {
     //
     app.route('/api/products/:id([A-Za-z0-9]{24})')
         .get(controller.getById);
+
+    app.route('/api/products/count')
+        .get(controller.getCount);
 
     app.route('/api/products')
         .get(controller.list)
