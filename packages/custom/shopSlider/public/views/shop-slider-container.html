@@ -1,116 +1,101 @@
-<section id="slider">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div ng-controller="CarouselDemoCtrl">
-                    <div>
-                        <carousel interval="myInterval">
-                            <!--<slide ng-repeat="slide in slides" active="slide.active" ng-bind-html-unsafe="slide.html">-->
+<div>
+    <section id="slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ng-controller="CarouselDemoCtrl">
+                        <div id="slider-carousel">
+                            <carousel interval="myInterval">
+                                <slide class="item active">
+                                    <div class="col-sm-6 text-left">
+                                        <h1><span>E</span>-SHOPPER</h1>
 
-                                <!--<img ng-src="{{slide.image}}" style="margin:auto;">
+                                        <h2>Free E-Commerce Template</h2>
 
-                                <div class="carousel-caption">
-                                    <h4>Slide {{$index}}</h4>
-
-                                    <p>{{slide.text}}</p>
-                                </div>-->
-                            <!--</slide>-->
-                            <slide ng-repeat="slide in slides" active="slide.active">
-                                    <div class="col-sm-6">
-                                        <h1 ng-bind-html-unsafe="slide.title1"></h1>
-
-                                        <h2>{{slide.title2}}</h2>
-
-                                        <p>{{slide.description}}</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. </p>
                                         <button type="button" class="btn btn-default get">Get it now</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <img ng-src="{{slide.image}}" class="girl img-responsive"
+                                        <img src="/shopThemes/assets/img/home/girl1.jpg" class="girl img-responsive"
                                              alt=""/>
-                                        <img ng-src="{{slide.pricing}}" class="pricing" alt=""/>
+                                        <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
                                     </div>
-                            </slide>
-                        </carousel>
-                    </div>
+                                </slide>
+                                <slide class="item">
+                                    <div class="col-sm-6 text-left">
+                                        <h1><span>E</span>-SHOPPER</h1>
 
+                                        <h2>100% Responsive Design</h2>
+
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. </p>
+                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="/shopThemes/assets/img/home/girl2.jpg" class="girl img-responsive"
+                                             alt=""/>
+                                        <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
+                                    </div>
+                                </slide>
+                                <slide class="item">
+                                    <div class="col-sm-6 text-left">
+                                        <h1><span>E</span>-SHOPPER</h1>
+
+                                        <h2>Free Ecommerce Template</h2>
+
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. </p>
+                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="/shopThemes/assets/img/home/girl3.jpg" class="girl img-responsive"
+                                             alt=""/>
+                                        <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
+                                    </div>
+                                </slide>
+                            </carousel>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
 
     <!--<section id="slider">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <div id="slider-carousel2" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
                             <li data-target="#slider-carousel" data-slide-to="1"></li>
                             <li data-target="#slider-carousel" data-slide-to="2"></li>
                         </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
 
-                                    <h2>Free E-Commerce Template</h2>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="/shopThemes/assets/img/home/girl1.jpg" class="girl img-responsive"
-                                         alt=""/>
-                                    <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-
-                                    <h2>100% Responsive Design</h2>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="/shopThemes/assets/img/home/girl2.jpg" class="girl img-responsive"
-                                         alt=""/>
-                                    <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-
-                                    <h2>Free Ecommerce Template</h2>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="/shopThemes/assets/img/home/girl3.jpg" class="girl img-responsive"
-                                         alt=""/>
-                                    <img src="/shopThemes/assets/img/home/pricing.png" class="pricing" alt=""/>
-                                </div>
-                            </div>
-                        </div>
                         <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                             <i class="fa fa-angle-left"></i>
                         </a>
                         <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
                             <i class="fa fa-angle-right"></i>
                         </a>
+
+                        <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel" ng-swipe-right="prev()" ng-swipe-left="next()">
+                            <ol class="carousel-indicators" ng-show="slides.length > 1">
+                                <li ng-repeat="slide in slides track by $index" ng-class="{active: isActive(slide)}" ng-click="select(slide)"></li>
+                            </ol>
+                            <div class="carousel-inner" ng-transclude></div>
+                            <a class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1"><span class="fa fa-chevron-left"></span></a>
+                            <a class="right carousel-control" ng-click="next()" ng-show="slides.length > 1"><span class="fa fa-chevron-right"></span></a>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
     </section>-->
-
-</section>
+</div>
 
 
