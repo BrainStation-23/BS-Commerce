@@ -11,10 +11,10 @@ angular.module('mean.shopSlider').controller('ShopSliderController', ['$scope', 
 ]);
 
 /*angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
- .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
- }]).directive('carousel', [function () {
- return {};
- }]);*/
+    .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
+    }]).directive('carousel', [function () {
+        return {};
+    }]);*/
 
 
 angular.module('mean.shopSlider').controller('CarouselDemoCtrl', ['$scope', 'Global', 'ShopSlider',
@@ -24,29 +24,28 @@ angular.module('mean.shopSlider').controller('CarouselDemoCtrl', ['$scope', 'Glo
         var slides = $scope.slides = [];
 
         slides.push({
-            title1:'<span>E</span>-SHOPPER',
-            title2:'Free E-Commerce Template',
-            description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+            title1: '<span>E</span>-SHOPPER',
+            title2: 'Free E-Commerce Template',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             image: "/shopThemes/assets/img/home/girl1.jpg",
             pricing: "/shopThemes/assets/img/home/pricing.png"
         });
 
         slides.push({
-            title1:'<span>E</span>-SHOPPER',
-            title2:'Free E-Commerce Template',
-            description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+            title1: '<span>E</span>-SHOPPER',
+            title2: 'Free E-Commerce Template',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             image: "/shopThemes/assets/img/home/girl2.jpg",
             pricing: "/shopThemes/assets/img/home/pricing.png"
         });
 
         slides.push({
-            title1:'<span>E</span>-SHOPPER',
-            title2:'Free E-Commerce Template',
-            description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+            title1: '<span>E</span>-SHOPPER',
+            title2: 'Free E-Commerce Template',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
             image: "/shopThemes/assets/img/home/girl3.jpg",
             pricing: "/shopThemes/assets/img/home/pricing.png"
         });
-
 
 
         /*$scope.addSlide = function () {
@@ -65,98 +64,98 @@ angular.module('mean.shopSlider').controller('CarouselDemoCtrl', ['$scope', 'Glo
 ]);
 
 /*
-<div class= "item" >
-    <div class= "col-sm-6" >
-    < h1 > < span > E < /span>-SHOPPER</
-h1 >
+ <div class= "item" >
+ <div class= "col-sm-6" >
+ < h1 > < span > E < /span>-SHOPPER</
+ h1 >
 
-< h2 > 100 % Responsive
-Design < / h2 >
+ < h2 > 100 % Responsive
+ Design < / h2 >
 
-< p > Lorem
-ipsum
-dolor
-sit
-amet, consectetur
-adipisicing
-elit, sed
-do eiusmod tempor
-incididunt
-ut
-labore
-et
-dolore
-magna
-aliqua. < / p >
-< button
-type = "button"
-class
-= "btn btn-default get" > Get
-it
-now < / button >
-< / div >
-< div
-class
-= "col-sm-6" >
-    < img
-src = "/shopThemes/assets/img/home/girl2.jpg"
-class
-= "girl img-responsive"
-alt = "" / >
-    < img
-src = "/shopThemes/assets/img/home/pricing.png"
-class
-= "pricing"
-alt = "" / >
-    < / div >
-    < / div >
-    < div
-class
-= "item" >
-    < div
-class
-= "col-sm-6" >
-    < h1 > < span > E < /span>-SHOPPER</
-h1 >
+ < p > Lorem
+ ipsum
+ dolor
+ sit
+ amet, consectetur
+ adipisicing
+ elit, sed
+ do eiusmod tempor
+ incididunt
+ ut
+ labore
+ et
+ dolore
+ magna
+ aliqua. < / p >
+ < button
+ type = "button"
+ class
+ = "btn btn-default get" > Get
+ it
+ now < / button >
+ < / div >
+ < div
+ class
+ = "col-sm-6" >
+ < img
+ src = "/shopThemes/assets/img/home/girl2.jpg"
+ class
+ = "girl img-responsive"
+ alt = "" / >
+ < img
+ src = "/shopThemes/assets/img/home/pricing.png"
+ class
+ = "pricing"
+ alt = "" / >
+ < / div >
+ < / div >
+ < div
+ class
+ = "item" >
+ < div
+ class
+ = "col-sm-6" >
+ < h1 > < span > E < /span>-SHOPPER</
+ h1 >
 
-< h2 > Free
-Ecommerce
-Template < / h2 >
+ < h2 > Free
+ Ecommerce
+ Template < / h2 >
 
-< p > Lorem
-ipsum
-dolor
-sit
-amet, consectetur
-adipisicing
-elit, sed
-do eiusmod tempor
-incididunt
-ut
-labore
-et
-dolore
-magna
-aliqua. < / p >
-< button
-type = "button"
-class
-= "btn btn-default get" > Get
-it
-now < / button >
-< / div >
-< div
-class
-= "col-sm-6" >
-    < img
-src = "/shopThemes/assets/img/home/girl3.jpg"
-class
-= "girl img-responsive"
-alt = "" / >
-    < img
-src = "/shopThemes/assets/img/home/pricing.png"
-class
-= "pricing"
-alt = "" / >
-    < / div >
-    < / div >*/
+ < p > Lorem
+ ipsum
+ dolor
+ sit
+ amet, consectetur
+ adipisicing
+ elit, sed
+ do eiusmod tempor
+ incididunt
+ ut
+ labore
+ et
+ dolore
+ magna
+ aliqua. < / p >
+ < button
+ type = "button"
+ class
+ = "btn btn-default get" > Get
+ it
+ now < / button >
+ < / div >
+ < div
+ class
+ = "col-sm-6" >
+ < img
+ src = "/shopThemes/assets/img/home/girl3.jpg"
+ class
+ = "girl img-responsive"
+ alt = "" / >
+ < img
+ src = "/shopThemes/assets/img/home/pricing.png"
+ class
+ = "pricing"
+ alt = "" / >
+ < / div >
+ < / div >*/
