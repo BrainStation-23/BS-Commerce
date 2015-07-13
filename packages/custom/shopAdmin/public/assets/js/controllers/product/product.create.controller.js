@@ -66,7 +66,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
         };
 
 
-        $scope.add = function () {
+        $scope.add = function (edit) {
             var p = {};
             p.categories = $scope.product.categories;
             p.tags = [];
@@ -90,7 +90,13 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
             $http.post('/api/products', {product: p})
                 .success(function (data, status, headers, config) {
                     console.log('success');
-                    $scope.product = data;
+                    console.log(data);
+                    //$scope.product = data;
+                    if(edit){
+                        $state.go('Product.Edit',{productId:data});
+                    }else{
+                        $state.go('Product.List');
+                    }
                 })
                 .error(function (data, status, headers, config) {
 

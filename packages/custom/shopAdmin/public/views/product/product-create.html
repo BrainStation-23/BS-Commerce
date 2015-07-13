@@ -1,6 +1,6 @@
 <div class="admin-title"><h3>Add a new Product <a ui-sref="Product.List">(back to Product list)</a></h3>
-    <button class="btn btn-info" ng-click="add(product);">Save All</button>
-    <button class="btn btn-info" ng-click="add(product, {stayOnPage: true});">Save And Continue</button>
+    <button class="btn btn-info" ng-click="add(false);">Save All</button>
+    <button class="btn btn-info" ng-click="add(true);">Save And Continue</button>
 </div>
 <div>
     <tabset>
@@ -8,7 +8,7 @@
             <tab-product-info></tab-product-info>
         </tab>
         <tab heading="Pictures">
-            <tab-product-pictures></tab-product-pictures>
+            You have to add the product first to add pictures
         </tab>
         <tab heading="SEO">
             <tab-product-seo></tab-product-seo>
