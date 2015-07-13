@@ -36,7 +36,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
 
         $http.get('/api/brands')
             .success(function (data, status, headers, config) {
-                $scope.brands = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+                $scope.brands = []; //{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
                 console.log(data);
                 for (var i in data) {
                     var item = {};

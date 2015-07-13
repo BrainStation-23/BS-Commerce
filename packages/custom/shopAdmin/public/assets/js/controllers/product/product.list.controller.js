@@ -13,7 +13,6 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
             .success(function (data, status, headers, config) {
                 console.log('Total Product: ' + data);
                 $scope.totalItems = data;
-                //$scope.totalItems = 300;
                 //$scope.maxSize = Math.ceil($scope.totalItems/$scope.numberOfDisplay);
                 //console.log('max size: ' + $scope.maxSize);
                 //$scope.maxSize = $scope.;
