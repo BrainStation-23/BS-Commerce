@@ -108,7 +108,7 @@
                 </div>
             </tab>
             <tab heading="Addresses">
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-top: 10px;">
                     <table class="table table-bordered table-hover" role="grid">
                         <thead class="tbl-header">
                             <tr class="row">
@@ -221,7 +221,7 @@
                 </div>
             </tab>
             <tab heading="Orders">
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-top: 10px;">
                     <table class="table table-bordered table-hover" role="grid">
                         <thead class="tbl-header">
                         <tr class="row">
@@ -230,21 +230,19 @@
                             <th>Order status</th>
                             <th>Payment status</th>
                             <th>Shipping status</th>
-                            <th>Store</th>
                             <th>Created on</th>
                             <th>view</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="row">
-                            <td></td>
-                            <td></td>
-                            <td>Order options coming soon..</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr class="row" data-ng-repeat="order in user.orders">
+                            <td data-ng-bind="order._id"></td>
+                            <td data-ng-bind="order.totalCost | currency"></td>
+                            <td data-ng-bind="order.orderStatus"></td>
+                            <td data-ng-bind="order.paymentStatus"></td>
+                            <td data-ng-bind="order.shippingStatus"></td>
+                            <td data-ng-bind="order.orderedDate"></td>
+                            <td><a ui-sref="Order.Edit({orderId: order._id})">View</a></td>
                         </tr>
                         <tr class="row" >
                             <td colspan="8" class="tbl-header"></td>

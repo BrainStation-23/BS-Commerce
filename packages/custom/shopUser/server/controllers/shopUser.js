@@ -1,12 +1,13 @@
 'use strict';
 
 var mean = require('meanio'),
-  _ = require('lodash'),
-  validator = require('validator'),
-  validation = require('../../../shopCore/server/framework/validation/validation'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  nodemailer = require('nodemailer');
+  	_ = require('lodash'),
+  	validator = require('validator'),
+  	validation = require('../../../shopCore/server/framework/validation/validation'),
+  	mongoose = require('mongoose'),
+  	User = mongoose.model('User'),
+  	nodemailer = require('nodemailer'),
+	Order = mongoose.model('Orders');
 
 
 mean.loadConfig();
@@ -231,11 +232,19 @@ exports.getUser = function(req, res) {
 
 exports.getUserById = function(req, res) {
 	User
-		.findOne({_id: req.params.userId},function(error, user) {
+		.findOne({_id: req.params.userId}, '-hashed_password -salt')
+		.lean()
+		.exec(function(error, user) {
 			if(error || user === null) {
 				return res.status(400).send(error);
 			}
-			return res.status(200).send(user);
+			Order.find({user: req.params.userId}, '-billingAddress -shippingAddress -products', function(err, orders) {
+				if(err) {
+					return res.status(400).send(error);
+				}
+				user.orders = orders;
+				return res.status(200).send(user);
+			});
 		});
 };
 
