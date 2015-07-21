@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> User ID</label></div>
                             <div class="col-md-4">
-                                <di class="like-readonly-text-box">{{user._id}}</di>
+                                <div class="like-readonly-text-box">{{user._id}}</div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,7 +63,7 @@
                             <div class="col-md-3"><label for="male"><i class="fa fa-question-circle fa-fw"></i> Gender</label></div>
                             <div class="col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="male"  data-ng-model="user.gender"value="male"> Male
+                                    <input type="radio" name="gender" id="male"  data-ng-model="user.gender" value="male"> Male
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="gender" id="female" data-ng-model="user.gender" value="female"> Female
@@ -92,17 +92,17 @@
                 <div class="col-md-4">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" ng-change="updateRoles('admin')"> Admin
+                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" data-ng-change="updateRoles('admin')"> Admin
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles('rergistered')"> Rergistered
+                            <input type="checkbox" value="registered" data-ng-model="roleRegistered" data-ng-change="updateRoles('rergistered')"> Rergistered
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" ng-change="updateRoles('authenticated')"> Authenticated
+                            <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" data-ng-change="updateRoles('authenticated')"> Authenticated
                         </label>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Save New Address">
-                            <btn class="btn btn-default" data-ng-click="showAddressForm(false)">Cancel</btn>
+                            <button class="btn btn-default" data-ng-click="showAddressForm(false)">Cancel</button>
                             <hr>
                         </form>
                     </div>
@@ -180,7 +180,7 @@
                             <div class="form-group">
                                 <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Index</label></div>
                                 <div class="col-md-4">
-                                    <di class="like-readonly-text-box">{{editAddress.index}}</di>
+                                    <div class="like-readonly-text-box">{{editAddress.index}}</div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Update Address">
-                            <btn class="btn btn-default" data-ng-click="showEditAddressForm(false)">Cancel</btn>
+                            <button class="btn btn-default" data-ng-click="showEditAddressForm(false)">Cancel</button>
                             <hr>
                         </form>
                     </div>
