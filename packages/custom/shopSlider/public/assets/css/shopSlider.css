@@ -5,7 +5,7 @@
 .carousel-control.left, .carousel-control.right{
     background: none !important;
     position: absolute;
-    top: 0%;
+    top: 0;
     /*filter: progid:none !important;*/
 }
 .carousel-control.left{
