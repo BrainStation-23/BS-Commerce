@@ -101,7 +101,7 @@ exports.getOrderTotalsInfo = function(req) {
     var thisWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
     var thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     var thisYear = new Date(today.getFullYear(), 0, 1);
-    
+
     Order.aggregate(
         [
             {
