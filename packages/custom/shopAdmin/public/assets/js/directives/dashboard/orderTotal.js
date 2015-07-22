@@ -7,10 +7,15 @@ angular.module('mean.shopAdmin').directive('orderTotal', ['Global', 'orderServic
             replace: true,
             templateUrl: 'shopAdmin/views/dashboard/order-totals.html',
             link: function(scope, element, attrs) {
-                console.log('get order total controller');
+
                 scope.getOrderTotal = function() {
-                    orderService.getOrderEnums();
+                    orderService.getOrderTotalsInfo()
+                        .$promise
+                        .then(function(orderInfos) {
+                            scope.orderInfos = orderInfos;
+                        });
                 };
+                scope.getOrderTotal();
             }
         };
     }

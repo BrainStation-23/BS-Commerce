@@ -24,6 +24,12 @@ angular.module('mean.shopAdmin').factory('orderService', ['$resource', '$http',
                     'put': {method: 'PUT'}
                 });
                 return searchRequest.put(order);
+            },
+            getOrderTotalsInfo: function() {
+                var getOrderTotals = $resource('/api/auth/orderTotals', {}, {
+                    'get': {method: 'GET', isArray: true}
+                });
+                return getOrderTotals.get({});
             }
         };
     }
