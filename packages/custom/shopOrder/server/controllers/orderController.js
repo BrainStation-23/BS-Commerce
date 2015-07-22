@@ -109,3 +109,14 @@ exports.updateOrder = function(req, res) {
         })
         .done();
 };
+
+exports.getOrderTotalsInfo = function(req, res) {
+    orderService.getOrderTotalsInfo(req)
+        .then(function(orders) {
+            return res.status(200).send(orders);
+        })
+        .catch(function(error) {
+            return res.status(500).json({msg: 'Error occurred while creating order'});
+        })
+        .done();
+};

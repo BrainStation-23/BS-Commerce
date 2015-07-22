@@ -93,3 +93,35 @@ exports.updateOrder = function(req) {
     return deferred.promise;
 };
 
+exports.getOrderTotalsInfo = function(req) {
+    var deferred = Q.defer();
+
+    var today = new Date();
+    today.setHours(0,0,0,0);
+    var thisWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+    var thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    var thisYear = new Date(today.getFullYear(), 0, 1);
+    
+    Order.aggregate(
+        [
+            {
+                $group : {
+                    _id : '$orderStatus',
+                    todayTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', today ] }, '$totalCost', 0 ] } },
+                    weekTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisWeek ] }, '$totalCost', 0 ] } },
+                    monthTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisMonth ] }, '$totalCost', 0 ] } },
+                    yearTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisYear ] }, '$totalCost', 0 ] } },
+                    allTimeTotal: { $sum: '$totalCost' }
+                }
+            }
+        ]
+    ).exec(function(error, order) {
+            if(error) {
+                return deferred.reject(error);
+            }
+            return deferred.resolve(order);
+        });
+
+    return deferred.promise;
+};
+
