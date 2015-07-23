@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'orderService',
-    function($scope, orderService) {
+angular.module('mean.shopAdmin').controller('orderListController', ['$scope', '$stateParams', 'orderService',
+    function($scope, $stateParams, orderService) {
 
         $scope.numberOfDisplayOptions = [10, 15, 20, 50, 100];
         $scope.numberOfDisplay = 10;
@@ -17,6 +17,22 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
         };
         $scope.orders = [];
         $scope.dispalayOrders = [];
+
+        if($stateParams.paymentStatus) {
+            $scope.searchQuery.selectedPaymentStatus = $stateParams.paymentStatus;
+            $scope.searchQuery.startDate = null;
+            $scope.searchQuery.endDate = null;
+
+        } else if($stateParams.orderStatus) {
+            $scope.searchQuery.selectedOrderStatus = $stateParams.orderStatus;
+            $scope.searchQuery.startDate = null;
+            $scope.searchQuery.endDate = null;
+
+        } else if($stateParams.shippingStatus) {
+            $scope.searchQuery.selectedShippingStatus = $stateParams.shippingStatus;
+            $scope.searchQuery.startDate = null;
+            $scope.searchQuery.endDate = null;
+        }
 
         // -----------------start date picker functions ------------------------
 
@@ -112,6 +128,7 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', 'o
             }
             $scope.searchQuery.numberOfSkip = numberOfSkip;
             $scope.searchQuery.numberOfDisplay = numberOfDisplay;
+
             orderService.searchOrders($scope.searchQuery)
                 .$promise
                 .then(function(response) {

@@ -13,17 +13,17 @@
             <tr class="row">
                 <td>Total unpaid orders (pending payment status)</td>
                 <td data-ng-bind="incompleteOrdersInfo[0].paymentPendingTotal | currency"></td>
-                <td>{{incompleteOrdersInfo[0].paymentPendingCount}} - <a>view all</a></td>
+                <td>{{incompleteOrdersInfo[0].paymentPendingCount}} - <a data-ui-sref="Order.List({paymentStatus: 'pending'})">view all</a></td>
             </tr>
             <tr class="row">
                 <td>Total not yet shipped orders</td>
                 <td data-ng-bind="incompleteOrdersInfo[0].shippingPendingTotal | currency"></td>
-                <td>{{incompleteOrdersInfo[0].shippingPendingCount}} - <a>view all</a></td>
+                <td>{{incompleteOrdersInfo[0].shippingPendingCount}} - <a data-ui-sref="Order.List({shippingStatus: 'pending'})">view all</a></td>
             </tr>
             <tr class="row">
                 <td>Total incomplete orders (ordered but not yet complete)</td>
                 <td data-ng-bind="incompleteOrdersInfo[0].orderPendingTotal | currency"></td>
-                <td>{{incompleteOrdersInfo[0].orderPendingCount}} - <a>view all</a></td>
+                <td>{{incompleteOrdersInfo[0].orderPendingCount}} - <a data-ui-sref="Order.List({orderStatus: 'ordered'})">view all</a></td>
             </tr>
             <tr class="row" >
                 <td colspan="2" class="tbl-header"></td>

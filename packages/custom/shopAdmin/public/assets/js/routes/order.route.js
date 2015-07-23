@@ -9,7 +9,7 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 template: '<ui-view/>'
             })
             .state('Order.List', {
-                url: '/List',
+                url: '/List?paymentStatus?orderStatus?shippingStatus',
                 templateUrl: 'shopAdmin/views/order/order-list.html',
                 controller: 'orderListController'
             })

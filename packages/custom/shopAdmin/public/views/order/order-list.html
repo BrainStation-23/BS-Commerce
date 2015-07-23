@@ -42,8 +42,8 @@
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Order status:</label></div>
         <div class="col-md-4">
             <select class="form-control" ng-model="searchQuery.selectedOrderStatus" ng-change="">
-                <option  value="" data-ng-selected="orderStatus">All</option>
                 <option  data-ng-repeat="status in orderStatus" value="{{status}}" >{{status}}</option>
+                <option  value="">All</option>
             </select>
         </div>
     </div>
@@ -51,8 +51,8 @@
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Payment status:</label></div>
         <div class="col-md-4">
             <select class="form-control" ng-model="searchQuery.selectedPaymentStatus" ng-change="">
-                <option  value="" data-ng-selected="paymentStatus">All</option>
                 <option  data-ng-repeat="status in paymentStatus" value="{{status}}" >{{status}}</option>
+                <option  value="" >All</option>
             </select>
         </div>
     </div>
@@ -60,8 +60,8 @@
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Shipping status:</label></div>
         <div class="col-md-4">
             <select class="form-control" ng-model="searchQuery.selectedShippingStatus" ng-change="">
-                <option  value="" data-ng-selected="shippingStatus">All</option>
                 <option  data-ng-repeat="status in shippingStatus" value="{{status}}" >{{status}}</option>
+                <option  value="">All</option>
             </select>
         </div>
     </div>
