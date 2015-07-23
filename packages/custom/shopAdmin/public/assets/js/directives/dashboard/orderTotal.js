@@ -11,8 +11,8 @@ angular.module('mean.shopAdmin').directive('orderTotal', ['Global', 'orderServic
                 scope.getOrderTotal = function() {
                     orderService.getOrderTotalsInfo()
                         .$promise
-                        .then(function(orderInfos) {
-                            scope.orderInfos = orderInfos;
+                        .then(function(orderInfo) {
+                            scope.ordersInfo = orderInfo;
                         });
                 };
                 scope.getOrderTotal();
