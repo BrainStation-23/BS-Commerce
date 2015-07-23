@@ -50,4 +50,7 @@ module.exports = function(ShopUser, app, auth, database, passport) {
   app.route('/auth/user/create')
       .post(shopUser.createUser);
 
+    app.route('/auth/users/statistics')
+        .get(shopUser.getUserStatistics);
+
 };

@@ -382,3 +382,31 @@ exports.createUser = function(req, res) {
 		return res.status(200).send({msg: 'User Create Success'});
 	});
 };
+
+exports.getUserStatistics = function(req, res) {
+	var today = new Date();
+	today.setHours(0,0,0,0);
+	var thisWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+	var thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+	var thisYear = new Date(today.getFullYear(), 0, 1);
+
+	User.aggregate(
+		[
+			{
+				$group : {
+					_id : null,
+					todayTotal: { $sum: {$cond: [ { $gte: [ '$registrationDate', today ] }, 1, 0 ] } },
+					weekTotal: { $sum: {$cond: [ { $gte: [ '$registrationDate', thisWeek ] }, 1, 0 ] } },
+					monthTotal: { $sum: {$cond: [ { $gte: [ '$registrationDate', thisMonth ] }, 1, 0 ] } },
+					yearTotal: { $sum: {$cond: [ { $gte: [ '$registrationDate', thisYear ] }, 1, 0 ] } },
+					allTimeTotal: { $sum: 1 }
+				}
+			}
+		]
+	).exec(function(error, users) {
+			if(error) {
+				return res.status(500).send(error);
+			}
+			return res.status(200).send(users);
+		});
+};
