@@ -32,16 +32,10 @@
         </div>
         <span class="alert alert-danger" data-ng-show="dateError" data-ng-bind="dateError"></span>
     </div>
-    <!--<div class="form-group">-->
-        <!--<div class="col-md-3"><label for="billingEmail"><i class="fa fa-question-circle fa-fw"></i> Billing email address:</label></div>-->
-        <!--<div class="col-md-4">-->
-            <!--<input id="billingEmail" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="searchQuery.billingEmail">-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="form-group">
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Order status:</label></div>
         <div class="col-md-4">
-            <select class="form-control" ng-model="searchQuery.selectedOrderStatus" ng-change="">
+            <select class="form-control" data-ng-model="searchQuery.selectedOrderStatus" ng-change="">
                 <option  data-ng-repeat="status in orderStatus" value="{{status}}" >{{status}}</option>
                 <option  value="">All</option>
             </select>
@@ -50,7 +44,7 @@
     <div class="form-group">
         <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Payment status:</label></div>
         <div class="col-md-4">
-            <select class="form-control" ng-model="searchQuery.selectedPaymentStatus" ng-change="">
+            <select class="form-control" ng-model="searchQuery.selectedPaymentStatus">
                 <option  data-ng-repeat="status in paymentStatus" value="{{status}}" >{{status}}</option>
                 <option  value="" >All</option>
             </select>
@@ -73,8 +67,8 @@
 </form>
 
 <div class="row bs-fa-color">
-    <div class="col-md-12 col-sm-12">
-        <table class="table table-responsive table-bordered table-striped table-hover" role="grid">
+    <div class="col-md-12 col-sm-12 table-responsive">
+        <table class="table table-bordered table-striped table-hover" role="grid">
             <thead class="tbl-header">
             <tr class="row">
                 <th><input type="checkbox"></th>
@@ -112,7 +106,7 @@
                         <span>items per page</span>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
-                        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="orders.length<1">No items to display</div>
+                        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="orders.length<1">No items to display</div>
                         <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="orders.length>0">{{displayFrom}} - {{displayTo}} of {{totalItems}} items</div>
                         <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="defaultSearchOrders()"><i class="fa fa-refresh"></i></button></div>
                     </div>

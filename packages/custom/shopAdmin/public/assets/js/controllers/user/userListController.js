@@ -13,8 +13,8 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         $scope.roles ='';
 
         $scope.maxSize = 4;
-        $scope.bigTotalItems = 10;
-        $scope.bigCurrentPage = 1;
+        $scope.totalItems = 10;
+        $scope.currentPage = 1;
         $scope.dispalayUsers = [];
             //fruits.slice(1, 3);
 
@@ -38,7 +38,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
 
             getDefaultSearchUsers.$promise.then(function (users) {
                 $scope.users = users;
-                $scope.bigTotalItems = users.length;
+                $scope.totalItems = users.length;
                 $scope.dispalayUsers = users;
 
                 if(users.length > $scope.numberOfDisplay) {
@@ -55,7 +55,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
 
             responseUsers.$promise.then(function (users) {
                 $scope.users = users;
-                $scope.bigTotalItems = users.length;
+                $scope.totalItems = users.length;
                 $scope.dispalayUsers = users;
 
                 if(users.length > $scope.numberOfDisplay) {
@@ -101,7 +101,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         };
 
         $scope.setPage = function (pageNo) {
-            $scope.bigCurrentPage = pageNo;
+            $scope.currentPage = pageNo;
             $scope.changePagination(pageNo);
         };
 

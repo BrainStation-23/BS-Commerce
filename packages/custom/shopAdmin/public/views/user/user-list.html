@@ -47,8 +47,8 @@
 </form>
 
 <div class="row bs-fa-color">
-    <div class="col-md-12 col-sm-12">
-        <table class="table table-responsive table-bordered table-striped table-hover" role="grid">
+    <div class="col-md-12 col-sm-12 table-responsive">
+        <table class="table table-bordered table-striped table-hover" role="grid">
             <thead class="tbl-header">
                 <tr class="row">
                     <th><input type="checkbox"></th>
@@ -75,16 +75,16 @@
             <tr class="row" >
                 <td colspan="8" class="tbl-footer">
                     <div class="col-md-5 col-sm-12">
-                        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+                        <pagination total-items="totalItems" data-ng-model="currentPage" max-size="maxSize" class="pagination-sm"
                                     boundary-links="true" rotate="false" num-pages="numPages"
-                                    items-per-page="numberOfDisplay"  ng-change="setPage(bigCurrentPage)" style="margin: 0;"></pagination>
+                                    items-per-page="numberOfDisplay"  ng-change="setPage(currentPage)" style="margin: 0;"></pagination>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <select data-ng-model="numberOfDisplay" data-ng-options="opt for opt in numberOfDisplayOptions" data-ng-change="displayOptionChange()"></select>
                         <span>items per page</span>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12 pull-right">
-                        <div class="col-md-9 col-sm-9 col-xs-9"data-ng-show="users.length<1">No items to display</div>
+                        <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="users.length<1">No items to display</div>
                         <div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="users.length>0">{{displayFrom}} - {{displayTo}} of {{users.length}} items</div>
                         <div class="col-md-3 col-sm-3 col-xs-3"><button class="btn btn-default" data-ng-click="searchUsers()"><i class="fa fa-refresh"></i></button></div>
                     </div>

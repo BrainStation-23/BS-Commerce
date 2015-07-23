@@ -6,7 +6,7 @@
         </div>
 
         <div class="col-md-6 pull-right text-right">
-            <button class="btn btn-default" ng-disabled="userForm.$invalid" data-ng-click="createNewUser()">Save</button>
+            <button class="btn btn-default" data-ng-disabled="userForm.$invalid" data-ng-click="createNewUser()">Save</button>
         </div>
     </div>
     <hr>
@@ -73,7 +73,7 @@
                 <div class="col-md-4">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" ng-change="updateRoles('admin')"> Admin
+                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" data-ng-change="updateRoles('admin')"> Admin
                         </label>
                     </div>
                     <div class="checkbox">
@@ -110,7 +110,7 @@
                             <td data-ng-bind="address.country"></td>
                             <td data-ng-bind="address.postCode"></td>
                             <td class="text-center"><button class="btn btn-default" data-ng-disabled="addressTableBtnsDisable" data-ng-click="showEditAddressForm(true, $index)"><i class="fa fa-edit"></i></button></td>
-                            <td class="text-center"><button class="btn btn-default" data-ng-disabled="addressTableBtnsDisable" data-ng-click="deleteAddress($index)"><i class="fa fa-remove"></i></button></a></td>
+                            <td class="text-center"><button class="btn btn-default" data-ng-disabled="addressTableBtnsDisable" data-ng-click="deleteAddress($index)"><i class="fa fa-remove"></i></button></td>
                         </tr>
                         <tr class="row" >
                             <td colspan="7" class="tbl-footer"></td>
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Save New Address">
-                            <btn class="btn btn-default" data-ng-click="showAddressForm(false)">Cancel</btn>
+                            <button class="btn btn-default" data-ng-click="showAddressForm(false)">Cancel</button>
                             <hr>
                         </form>
                     </div>
@@ -161,7 +161,7 @@
                             <div class="form-group">
                                 <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Index</label></div>
                                 <div class="col-md-4">
-                                    <di class="like-readonly-text-box">{{editAddress.index}}</di>
+                                    <div class="like-readonly-text-box">{{editAddress.index}}</div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                             <input class="btn btn-primary" type="submit" value="Update Address">
-                            <btn class="btn btn-default" data-ng-click="showEditAddressForm(false)">Cancel</btn>
+                            <button class="btn btn-default" data-ng-click="showEditAddressForm(false)">Cancel</button>
                             <hr>
                         </form>
                     </div>
