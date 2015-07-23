@@ -30,6 +30,12 @@ angular.module('mean.shopAdmin').factory('orderService', ['$resource', '$http',
                     'get': {method: 'GET', isArray: true}
                 });
                 return getOrderTotals.get({});
+            },
+            getIncompleteOrderInfo: function() {
+                var getIncompleteOrderInfo = $resource('/api/auth/orders/incomplete', {}, {
+                    'get': {method: 'GET', isArray: true}
+                });
+                return getIncompleteOrderInfo.get({});
             }
         };
     }
