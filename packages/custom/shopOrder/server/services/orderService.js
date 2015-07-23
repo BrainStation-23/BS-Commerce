@@ -125,3 +125,30 @@ exports.getOrderTotalsInfo = function(req) {
     return deferred.promise;
 };
 
+exports.getIncompleteOrderStatus = function(req) {
+    var deferred = Q.defer();
+
+    Order.aggregate(
+        [
+            {
+                $group : {
+                    _id : null,
+                    orderPendingTotal: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'ordered' ] }, '$totalCost', 0 ] } },
+                    orderPendingCount: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'ordered' ] }, 1, 0 ] } },
+                    paymentPendingTotal: { $sum: {$cond: [ { $eq: [ '$paymentStatus', 'pending' ] }, '$totalCost', 0 ] } },
+                    paymentPendingCount: { $sum: {$cond: [ { $eq: [ '$paymentStatus', 'pending' ] }, 1, 0 ] } },
+                    shippingPendingTotal: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'pending' ] }, '$totalCost', 0 ] } },
+                    shippingPendingCount: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'pending' ] }, 1, 0 ] } },
+                }
+            }
+        ]
+    ).exec(function(error, orderStatus) {
+            if(error) {
+                return deferred.reject(error);
+            }
+            return deferred.resolve(orderStatus);
+        });
+
+    return deferred.promise;
+};
+

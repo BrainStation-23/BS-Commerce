@@ -22,4 +22,7 @@ module.exports = function(Shopcatalog, app, auth, database, shopCore) {
 
     app.route('/api/auth/orderTotals')
         .get(orderController.getOrderTotalsInfo);
+
+    app.route('/api/auth/orders/incomplete')
+        .get(orderController.getIncompleteOrderStatus);
 };

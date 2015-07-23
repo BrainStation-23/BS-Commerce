@@ -116,7 +116,18 @@ exports.getOrderTotalsInfo = function(req, res) {
             return res.status(200).send(orders);
         })
         .catch(function(error) {
-            return res.status(500).json({msg: 'Error occurred while creating order'});
+            return res.status(500).json({msg: 'Error occurred while getting orders info'});
+        })
+        .done();
+};
+
+exports.getIncompleteOrderStatus = function(req, res) {
+    orderService.getIncompleteOrderStatus(req)
+        .then(function(orderStatus) {
+            return res.status(200).send(orderStatus);
+        })
+        .catch(function(error) {
+            return res.status(500).json({msg: 'Error occurred while getting orders info'});
         })
         .done();
 };
