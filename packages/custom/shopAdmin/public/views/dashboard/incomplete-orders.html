@@ -4,7 +4,7 @@
         <table class="table table-bordered table-hover" role="grid">
             <thead class="tbl-header">
             <tr class="row">
-                <th>Item</th>
+                <th style="width: 40%">Item</th>
                 <th>Total</th>
                 <th>count</th>
             </tr>
@@ -21,7 +21,7 @@
                 <td>{{incompleteOrdersInfo[0].shippingPendingCount}} - <a>view all</a></td>
             </tr>
             <tr class="row">
-                <td>Total incomplete orders (pending order status)</td>
+                <td>Total incomplete orders (ordered but not yet complete)</td>
                 <td data-ng-bind="incompleteOrdersInfo[0].orderPendingTotal | currency"></td>
                 <td>{{incompleteOrdersInfo[0].orderPendingCount}} - <a>view all</a></td>
             </tr>
