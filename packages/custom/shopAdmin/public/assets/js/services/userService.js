@@ -60,6 +60,13 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
             });
 
             return logoutUser.logout({});
+        },
+
+        getUserStatistics: function() {
+            var getUserStatistics = $resource('/auth/users/statistics', {}, {
+                'get': {method: 'GET', isArray: true}
+            });
+            return getUserStatistics.get({});
         }
     };
   }
