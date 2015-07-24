@@ -38,6 +38,9 @@
 						$location.path('/cart/empty');
 					}
 
+				},
+				function(error) {
+					$location.path('/cart/empty');
 				});
 
 			var openTab = function(tabElement) {
