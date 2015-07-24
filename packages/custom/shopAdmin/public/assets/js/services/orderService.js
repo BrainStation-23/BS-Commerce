@@ -25,17 +25,17 @@ angular.module('mean.shopAdmin').factory('orderService', ['$resource', '$http',
                 });
                 return searchRequest.put(order);
             },
-            getOrderTotalsInfo: function() {
-                var getOrderTotals = $resource('/api/auth/orderTotals', {}, {
+            getOrdersStatistics: function() {
+                var getOrdersStatistics = $resource('/api/auth/orders/statistics', {}, {
                     'get': {method: 'GET', isArray: true}
                 });
-                return getOrderTotals.get({});
+                return getOrdersStatistics.get({});
             },
-            getIncompleteOrderInfo: function() {
-                var getIncompleteOrderInfo = $resource('/api/auth/orders/incomplete', {}, {
+            getIncompleteOrdersStatistics: function() {
+                var getIncompleteOrdersStatistics = $resource('/api/auth/orders/incomplete/statistics', {}, {
                     'get': {method: 'GET', isArray: true}
                 });
-                return getIncompleteOrderInfo.get({});
+                return getIncompleteOrdersStatistics.get({});
             }
         };
     }

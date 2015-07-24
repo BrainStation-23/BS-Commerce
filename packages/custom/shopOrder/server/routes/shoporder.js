@@ -20,9 +20,9 @@ module.exports = function(Shopcatalog, app, auth, database, shopCore) {
     app.route('/api/auth/orders/enums')
         .get(orderController.getOrderEnums);
 
-    app.route('/api/auth/orderTotals')
-        .get(orderController.getOrderTotalsInfo);
+    app.route('/api/auth/orders/statistics')
+        .get(orderController.getOrdersStatistics);
 
-    app.route('/api/auth/orders/incomplete')
-        .get(orderController.getIncompleteOrderStatus);
+    app.route('/api/auth/orders/incomplete/statistics')
+        .get(orderController.getIncompleteOrdersStatistics);
 };

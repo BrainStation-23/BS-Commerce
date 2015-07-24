@@ -110,8 +110,8 @@ exports.updateOrder = function(req, res) {
         .done();
 };
 
-exports.getOrderTotalsInfo = function(req, res) {
-    orderService.getOrderTotalsInfo(req)
+exports.getOrdersStatistics = function(req, res) {
+    orderService.getOrdersStatistics(req)
         .then(function(orders) {
             return res.status(200).send(orders);
         })
@@ -121,8 +121,8 @@ exports.getOrderTotalsInfo = function(req, res) {
         .done();
 };
 
-exports.getIncompleteOrderStatus = function(req, res) {
-    orderService.getIncompleteOrderStatus(req)
+exports.getIncompleteOrdersStatistics = function(req, res) {
+    orderService.getIncompleteOrdersStatistics(req)
         .then(function(orderStatus) {
             return res.status(200).send(orderStatus);
         })

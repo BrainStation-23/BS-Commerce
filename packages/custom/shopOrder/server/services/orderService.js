@@ -93,7 +93,7 @@ exports.updateOrder = function(req) {
     return deferred.promise;
 };
 
-exports.getOrderTotalsInfo = function(req) {
+exports.getOrdersStatistics = function(req) {
     var deferred = Q.defer();
 
     var today = new Date();
@@ -125,7 +125,7 @@ exports.getOrderTotalsInfo = function(req) {
     return deferred.promise;
 };
 
-exports.getIncompleteOrderStatus = function(req) {
+exports.getIncompleteOrdersStatistics = function(req) {
     var deferred = Q.defer();
 
     Order.aggregate(

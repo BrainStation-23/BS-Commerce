@@ -8,7 +8,7 @@ exports.getCart = function(req, res){
     }
     cartService.getCart(req.user._id)
         .then(function(cart){
-          return res.status(200).json(cart);
+            return res.status(200).json(cart);
         })
     .catch(function(error){
         return res.status(500).json({msg: 'Error occurred while loading categories', error: error});
@@ -19,10 +19,10 @@ exports.getCart = function(req, res){
 exports.update = function(req, res){
   cartService.update(req.user.id, req.body.items)
     .then(function(cart){
-      return res.status(200).json(cart);
+          return res.status(200).json(cart);
     })
     .catch(function(error){
-      return res.status(500).json({msg: 'Error occurred while loading cart', error: error});
+          return res.status(500).json({msg: 'Error occurred while loading cart', error: error});
     })
     .done();
 };
@@ -30,10 +30,10 @@ exports.update = function(req, res){
 exports.deleteCartById = function(req, res){
   cartService.deleteCartById(req.query.cartId)
       .then(function(cart){
-        return res.status(200).json(cart);
+          return res.status(200).json(cart);
       })
       .catch(function(error){
-        return res.status(500).json({msg: 'Error occurred while deleting cart', error: error});
+          return res.status(500).json({msg: 'Error occurred while deleting cart', error: error});
       })
       .done();
 };
