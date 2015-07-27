@@ -1,0 +1,37 @@
+<div class="bs-fa-color row">
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-3"><span><i class="fa fa-envelope"></i> <strong>Email Accounts</strong> </span></div>
+        <div class="col-md-9">
+            <button class="btn btn-primary pull-right" data-ng-click="goToCreateEmailPage()">Add new email</button>
+            <a href="/admin#!/Settings/Email-Create">add</a>
+        </div>
+    </div>
+    <hr style="margin-top: 0;">
+    <h4> </h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" role="grid">
+            <thead class="tbl-header">
+            <tr class="row">
+                <th>Email address</th>
+                <th>Email display name</th>
+                <th>Is default email account</th>
+                <th>Mark as default email account</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="row">
+                <td>shaishab.cse@gmail.com</td>
+                <td> shaishab</td>
+                <td class="text-center"><span data-ng-show="settings.email.isDefault"><i class="fa fa-check"></i></span><span data-ng-show="!settings.email.isDefault"><i class="fa fa-close"></i></span></td>
+                <td><button class="btn btn-default">Mark as default email account</button> </td>
+                <td>Edit</td>
+            </tr>
+            <tr class="row" >
+                <td colspan="4" class="tbl-header"></td>
+                <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click=""><i class="fa fa-refresh"></i></button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
