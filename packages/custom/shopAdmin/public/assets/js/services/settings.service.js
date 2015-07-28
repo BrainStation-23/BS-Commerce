@@ -5,11 +5,23 @@ angular.module('mean.shopAdmin').factory('settingsService', ['$resource',
         return {
 
             getEmailSettings: function() {
-                console.log('get settings service');
                 var getEmailSettings = $resource('/api/settings/emails', {}, {
-                    'get': {method: 'GET', isArray: true}
+                    'get': {method: 'GET'}
                 });
                 return getEmailSettings.get({});
+            },
+            addNewEmailSettings: function(settings) {
+                var addNewEmailSettings = $resource('/api/settings', {}, {
+                    'put': {method: 'PUT'}
+                });
+                return addNewEmailSettings.put(settings);
+            },
+
+            editEmailSettings: function(settings) {
+                var editEmailSettings = $resource('/api/settings', {}, {
+                    'put': {method: 'PUT'}
+                });
+                return editEmailSettings.put(settings);
             }
         };
     }

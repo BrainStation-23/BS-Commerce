@@ -2,12 +2,10 @@
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3"><span><i class="fa fa-envelope"></i> <strong>Email Accounts</strong> </span></div>
         <div class="col-md-9">
-            <button class="btn btn-primary pull-right" data-ng-click="goToCreateEmailPage()">Add new email</button>
-            <a href="/admin#!/Settings/Email-Create">add</a>
+            <a class="btn btn-primary pull-right" data-ui-sref="Settings.Email.Create">Add new email</a>
         </div>
     </div>
     <hr style="margin-top: 0;">
-    <h4> </h4>
     <div class="table-responsive">
         <table class="table table-bordered table-hover" role="grid">
             <thead class="tbl-header">
@@ -20,12 +18,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="row">
-                <td>shaishab.cse@gmail.com</td>
-                <td> shaishab</td>
-                <td class="text-center"><span data-ng-show="settings.email.isDefault"><i class="fa fa-check"></i></span><span data-ng-show="!settings.email.isDefault"><i class="fa fa-close"></i></span></td>
+            <tr class="row" data-ng-repeat="email in settings.emails">
+                <td data-ng-bind="email.emailAddress"></td>
+                <td data-ng-bind="email.emailDisplayName"></td>
+                <td class="text-center"><span data-ng-show="email.isDefault"><i class="fa fa-check"></i></span><span data-ng-show="!email.isDefault"><i class="fa fa-close"></i></span></td>
                 <td><button class="btn btn-default">Mark as default email account</button> </td>
-                <td>Edit</td>
+                <td><a data-ui-sref="Settings.Email.Edit({emailIndex: $index})">Edit</a></td>
             </tr>
             <tr class="row" >
                 <td colspan="4" class="tbl-header"></td>

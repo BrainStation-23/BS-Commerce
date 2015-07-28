@@ -2,20 +2,15 @@
 
 angular.module('mean.shopAdmin').controller('settingsEmailListController', ['$scope', '$location', 'settingsService',
     function($scope, $location, settingsService) {
-        console.log('get email settings controller');
+        $scope.settings = {};
         $scope.getEmailSettings = function() {
             settingsService.getEmailSettings()
                 .$promise
-                .then(function(emails) {
-                    console.log(emails);
+                .then(function(settings) {
+                    $scope.settings = settings;
                 });
         };
 
         $scope.getEmailSettings();
-
-        $scope.goToCreateEmailPage = function() {
-            //console.log('call');
-            $location.path('/Settings/Email-Create');
-        };
     }
 ]);

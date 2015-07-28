@@ -20,7 +20,7 @@ exports.createSettings = function(req) {
 exports. getSettings = function(req) {
     var deferred = Q.defer();
 
-    Settings.find({})
+    Settings.findOne({})
         .exec(function(error, settings){
             if(error) {
                 return deferred.reject(error);
@@ -32,7 +32,6 @@ exports. getSettings = function(req) {
 
 exports.updateSettings = function(req) {
     var deferred = Q.defer();
-
     Settings.findByIdAndUpdate(req.body._id, req.body, function(error, settings) {
         if(error) {
             return deferred.reject(error);

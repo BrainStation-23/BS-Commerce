@@ -12,7 +12,7 @@ module.exports = function(Settings, app, auth, database) {
       .put(settingsController.updateSettings);
 
   app.route('/api/settings/emails')
-      .get(auth.requiresAdmin, settingsController.getSettings);
+      .get(auth.requiresAdmin, settingsController.getEmailSettings);
 
   //app.get('/api/settings/example/anyone', function(req, res, next) {
   //  res.send('Anyone can access this');
