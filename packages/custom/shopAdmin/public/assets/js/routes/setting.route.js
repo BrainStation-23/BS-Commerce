@@ -16,13 +16,21 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 templateUrl: 'shopAdmin/views/settings/store.html'
                 //controller: 'settingStoreController'
             }).state('Settings.Email', {
-                url: '/Email/List',
+                abstract: true,
+                url: '/Email',
+                template: '<ui-view/>'
+            }).state('Settings.Email.List', {
+                url: '/List',
                 templateUrl: 'shopAdmin/views/settings/email/email-list.html',
                 controller: 'settingsEmailListController'
             }).state('Settings.Email.Create', {
-                url: '/Email/Create',
-                templateUrl: 'shopAdmin/views/settings/email/email-create.html'
-                //controller: 'settingsEmailController'
+                url: '/Create',
+                templateUrl: 'shopAdmin/views/settings/email/email-create.html',
+                controller: 'settingsEmailCreateController'
+            }).state('Settings.Email.Edit', {
+                url: '/Edit/:emailIndex',
+                templateUrl: 'shopAdmin/views/settings/email/email-edit.html',
+                controller: 'settingsEmailEditController'
             });
     }
 ]);
