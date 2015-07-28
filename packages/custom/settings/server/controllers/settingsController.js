@@ -27,7 +27,7 @@ exports. getSettings = function(req, res) {
 exports.updateSettings = function(req, res) {
     settingsService.updateSettings(req)
         .then(function(settings) {
-            return res.status(200).send(settings);
+            return res.status(200).send({msg:'Successfully update'});
         })
         .catch(function(error) {
             return res.status(200).send(error);

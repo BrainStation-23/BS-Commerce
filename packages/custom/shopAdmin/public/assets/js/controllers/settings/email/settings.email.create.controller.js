@@ -3,7 +3,7 @@
 angular.module('mean.shopAdmin').controller('settingsEmailCreateController', ['$scope', '$location', 'settingsService',
     function($scope, $location, settingsService) {
         $scope.settings= {};
-        $scope.emails = {};
+        $scope.email = {};
         $scope.getEmailSettings = function() {
             settingsService.getEmailSettings()
                 .$promise
@@ -15,11 +15,16 @@ angular.module('mean.shopAdmin').controller('settingsEmailCreateController', ['$
         $scope.getEmailSettings();
 
         $scope.addNewEmailAddress = function() {
-            $scope.settings.emails.push($scope.emails);
+            if($scope.email.isDefault) {
+                angular.forEach($scope.settings.emails, function(email) {
+                    email.isDefault = false;
+                });
+            }
+            $scope.settings.emails.push($scope.email);
             settingsService.addNewEmailSettings($scope.settings)
                 .$promise
                 .then(function(emails) {
-                    $scope.settings.emails = emails;
+                    $location.path('/Settings/Email/List');
                 });
         };
     }

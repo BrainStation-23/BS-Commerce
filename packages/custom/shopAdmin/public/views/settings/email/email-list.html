@@ -6,6 +6,9 @@
         </div>
     </div>
     <hr style="margin-top: 0;">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4 alert-success text-center" data-ng-show="updateSuccessMsg"><label>{{updateSuccessMsg}}</label></div>
+    </div>
     <div class="table-responsive">
         <table class="table table-bordered table-hover" role="grid">
             <thead class="tbl-header">
@@ -22,12 +25,12 @@
                 <td data-ng-bind="email.emailAddress"></td>
                 <td data-ng-bind="email.emailDisplayName"></td>
                 <td class="text-center"><span data-ng-show="email.isDefault"><i class="fa fa-check"></i></span><span data-ng-show="!email.isDefault"><i class="fa fa-close"></i></span></td>
-                <td><button class="btn btn-default">Mark as default email account</button> </td>
+                <td><button class="btn btn-default" data-ng-click="markAsDefaultEmail($index)">Mark as default email account</button> </td>
                 <td><a data-ui-sref="Settings.Email.Edit({emailIndex: $index})">Edit</a></td>
             </tr>
             <tr class="row" >
                 <td colspan="4" class="tbl-header"></td>
-                <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click=""><i class="fa fa-refresh"></i></button></td>
+                <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click="getEmailSettings()"><i class="fa fa-refresh"></i></button></td>
             </tr>
             </tbody>
         </table>
