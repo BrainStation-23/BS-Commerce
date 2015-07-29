@@ -6,13 +6,16 @@ var settingsController = require('../controllers/settingsController');
 // The Package is past automatically as first parameter
 module.exports = function(Settings, app, auth, database) {
 
-  app.route('/api/settings')
+    app.route('/api/settings')
       .get(settingsController.getSettings)
       .post(settingsController.createSettings)
       .put(settingsController.updateSettings);
 
-  app.route('/api/settings/emails')
+    app.route('/api/settings/emails')
       .get(auth.requiresAdmin, settingsController.getEmailSettings);
+
+    app.route('/api/settings/emails/send')
+        .post(settingsController.testEmailSettingsBySendEmail);
 
   //app.get('/api/settings/example/anyone', function(req, res, next) {
   //  res.send('Anyone can access this');

@@ -4,7 +4,7 @@ var cartService = require('../services/cartService');
 
 exports.getCart = function(req, res){
     if(!req.user) {
-        return res.status(401).send('');
+        return res.status(200).send('');
     }
     cartService.getCart(req.user._id)
         .then(function(cart){
