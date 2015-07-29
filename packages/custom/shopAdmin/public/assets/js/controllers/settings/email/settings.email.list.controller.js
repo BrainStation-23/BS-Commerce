@@ -3,6 +3,7 @@
 angular.module('mean.shopAdmin').controller('settingsEmailListController', ['$scope', '$location', '$timeout', 'settingsService',
     function($scope, $location, $timeout, settingsService) {
         $scope.settings = {};
+        $scope.email = {};
         $scope.getEmailSettings = function() {
             settingsService.getEmailSettings()
                 .$promise
@@ -36,6 +37,19 @@ angular.module('mean.shopAdmin').controller('settingsEmailListController', ['$sc
                         },2000);
                     });
             });
+        };
+
+        $scope.testEmailSend = function() {
+            settingsService.testEmailSend($scope.email)
+              .$promise
+              .then(function(resposnse) {
+                    $scope.sendSuccess = resposnse.msg;
+                    $timeout(function() {
+                        $scope.sendSuccess = '';
+                    },2000);
+              },function(error) {
+                    $scope.sendFailed = error.data.msg;
+                });
         };
     }
 ]);

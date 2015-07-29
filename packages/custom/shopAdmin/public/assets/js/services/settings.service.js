@@ -22,6 +22,14 @@ angular.module('mean.shopAdmin').factory('settingsService', ['$resource',
                     'put': {method: 'PUT'}
                 });
                 return editEmailSettings.put(settings);
+            },
+
+            testEmailSend: function(sendTo) {
+                var testEmailSend = $resource('/api/settings/emails/send', {}, {
+                   'post': {method: 'POST'}
+                });
+
+                return testEmailSend.post(sendTo);
             }
         };
     }

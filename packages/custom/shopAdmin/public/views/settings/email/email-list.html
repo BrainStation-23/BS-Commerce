@@ -35,4 +35,17 @@
             </tbody>
         </table>
     </div>
+    <hr>
+    <div class="row">
+        <h4>Send Test Email to check email settings</h4>
+        <form class="form-inline" name="testEmail" style="padding-top: 10px;" data-ng-submit="testEmailSend()">
+            <div class="form-group">
+                <label class="required-label" for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email address</label>
+                <input id="emailInput" placeholder="email address" class="form-control" type="email" data-ng-model="email.sendTo" required>
+            </div>
+            <button class="btn btn-primary" type="submit" >Send</button>
+            <label class="alert alert-success" data-ng-show="sendSuccess" data-ng-bind="sendSuccess"></label>
+            <label class="alert alert-danger" data-ng-show="sendFailed" data-ng-bind="sendFailed"></label>
+        </form>
+    </div>
 </div>
