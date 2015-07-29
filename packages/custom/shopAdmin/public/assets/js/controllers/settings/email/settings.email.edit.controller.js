@@ -4,6 +4,7 @@ angular.module('mean.shopAdmin').controller('settingsEmailEditController', ['$sc
     function($scope, $location, $stateParams, $timeout, settingsService) {
         $scope.settings= {};
         $scope.email = {};
+        $scope.passwordFieldType = 'password';
         $scope.getEmailSettings = function() {
             settingsService.getEmailSettings()
                 .$promise
@@ -45,6 +46,14 @@ angular.module('mean.shopAdmin').controller('settingsEmailEditController', ['$sc
                         $location.path('/Settings/Email/List');
                     },2000);
                 });
+        };
+
+        $scope.showPassword = function() {
+          $scope.passwordFieldType = 'text';
+        };
+
+        $scope.hidePassword = function() {
+            $scope.passwordFieldType = 'password';
         };
     }
 ]);

@@ -44,7 +44,12 @@
             <div class="form-group">
                 <div class="col-md-3"><label class="required-label" for="password"><i class="fa fa-question-circle fa-fw"></i> Password</label></div>
                 <div class="col-md-4">
-                    <input id="password" placeholder="password" class="form-control" type="password" data-ng-model="email.password" required>
+                    <p class="input-group">
+                        <input id="password" placeholder="password" class="form-control" type="{{passwordFieldType}}" data-ng-model="email.password" required>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" data-ng-mousedown="showPassword()" data-ng-mouseup="hidePassword()"><i class="fa fa-eye"></i></button>
+                        </span>
+                    </p>
                 </div>
             </div>
             <div class="form-group">
