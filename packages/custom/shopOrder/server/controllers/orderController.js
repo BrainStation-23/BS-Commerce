@@ -23,6 +23,7 @@ var getSearchQuery = function(req, callback) {
     var oStatus = req.query.selectedOrderStatus === undefined || req.query.selectedOrderStatus === '' ;
     var pStatus = req.query.selectedPaymentStatus === undefined || req.query.selectedPaymentStatus === '';
     var sStatus = req.query.selectedShippingStatus === undefined || req.query.selectedShippingStatus === '';
+    var oId = req.query.orderId === undefined || req.query.orderId === '';
 
     if(!oDate) {
         query = {
@@ -37,6 +38,9 @@ var getSearchQuery = function(req, callback) {
     }
     if(!sStatus) {
         query.shippingStatus = req.query.selectedShippingStatus;
+    }
+    if(!oId) {
+        query._id = req.query.orderId;
     }
     callback(query);
 };
