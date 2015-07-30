@@ -51,7 +51,9 @@ exports. getEmailSettings = function(req, res) {
 var emailSend = function(emailSettings, recipientEmail, subject, htmlBody, callback){
 
     var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
+        host: emailSettings.host,
+        port: emailSettings.port,
+        secure: emailSettings.ssl,
         auth: {
             user: emailSettings.user,
             pass: emailSettings.password
@@ -110,7 +112,7 @@ exports.getDefaultEmailSettings = function(req, res) {
 exports. testEmailSettingsBySendEmail = function(req, res) {
     getDefaultEmailInfo(function(defaultEmailInfo) {
         if(defaultEmailInfo) {
-            emailSend(defaultEmailInfo, req.body.sendTo, 'Test email setting','<h2>BS-Commerce email settings if perfect </h2>', function(sent) {
+            emailSend(defaultEmailInfo, req.body.sendTo, 'Test email setting','<h2>BS-Commerce email settings is perfect </h2>', function(sent) {
                if(sent) {
                    return res.status(200).send({msg: 'Successfully send your mail'});
                }
