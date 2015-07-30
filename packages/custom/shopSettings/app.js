@@ -5,32 +5,32 @@
  */
 var Module = require('meanio').Module;
 
-var Settings = new Module('settings');
+var ShopSettings = new Module('shopSettings');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Settings.register(function(app, auth, database) {
+ShopSettings.register(function(app, auth, database) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  Settings.routes(app, auth, database);
+  ShopSettings.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  Settings.menus.add({
-    title: 'settings example page',
-    link: 'settings example page',
+  ShopSettings.menus.add({
+    title: 'shopSettings example page',
+    link: 'shopSettings example page',
     roles: ['authenticated'],
     menu: 'main'
   });
   
-  Settings.aggregateAsset('css', 'settings.css');
+  ShopSettings.aggregateAsset('css', 'shopSettings.css');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
-    Settings.settings({
+    ShopSettings.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
@@ -38,15 +38,15 @@ Settings.register(function(app, auth, database) {
 
     // Another save settings example this time with no callback
     // This writes over the last settings.
-    Settings.settings({
+    ShopSettings.settings({
         'anotherSettings': 'some value'
     });
 
-    // Get settings. Retrieves latest saved settigns
-    Settings.settings(function(err, settings) {
+    // Get Settings. Retrieves latest saved settigns
+    ShopSettings.settings(function(err, settings) {
         //you now have the settings object
     });
     */
 
-  return Settings;
+  return ShopSettings;
 });

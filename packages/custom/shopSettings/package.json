@@ -1,7 +1,7 @@
 {
-  "name": "settings",
+  "name": "shopSettings",
   "version": "0.0.1",
-  "description": "Some description of settings",
+  "description": "Some description of shopSettings",
   "author": {
     "name": "mean scaffold"
   },
