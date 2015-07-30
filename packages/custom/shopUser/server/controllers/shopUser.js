@@ -7,7 +7,8 @@ var mean = require('meanio'),
   	mongoose = require('mongoose'),
   	User = mongoose.model('User'),
   	nodemailer = require('nodemailer'),
-	Order = mongoose.model('Orders');
+	Order = mongoose.model('Orders'),
+	settingsController = require('../../../shopSettings/server/controllers/settingsController');
 
 
 mean.loadConfig();
@@ -165,59 +166,63 @@ var passwordGenerator =  function(){
   return newPassword;
 };
 
-var sendMail = function(recipientEmail, subject, htmlBody, callback){
+var sendMail = function(emailSettings, recipientEmail, subject, htmlBody, callback){
 
-  var smtpTransport = nodemailer.createTransport({
-	service: 'Gmail',
-	auth: {
-	  user: 'qa.aareas900@gmail.com',
-	  pass: 'qa.aareas'
-	}
-  });
+	var smtpTransport = nodemailer.createTransport({
+		host: emailSettings.host,
+		port: emailSettings.port,
+		secure: emailSettings.ssl,
+		auth: {
+			user: emailSettings.user,
+			pass: emailSettings.password
+		}
+	});
 
-  // setup e-mail data with unicode symbols
-  var mailOptions = {
-	from: 'BS-Commerce ✔ <info@domain.com>', // sender address
-	to: recipientEmail, // list of receivers
-	subject: subject + ' ✔', // Subject line
-	html: htmlBody // html body
-  };
+	var mailOptions = {
+		from: emailSettings.emailDisplayName +'-<'+ emailSettings.emailAddress +'>',
+		to: recipientEmail,
+		subject: subject + ' ✔',
+		html: htmlBody
+	};
 
-  // send mail with defined transport object
-  smtpTransport.sendMail(mailOptions, function(error, response){
-	if(error){
-	  callback(false);
-	}else{
-	  callback(true);
-	}
+	smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+			callback(false);
+		}else{
+			callback(true);
+		}
 
-	// if you don't want to use this transport object anymore, uncomment following line
-	//smtpTransport.close(); // shut down the connection pool, no more messages
-  });
+		// if you don't want to use this transport object anymore, uncomment following line
+		//smtpTransport.close(); // shut down the connection pool, no more messages
+	});
 };
 
 exports.resetForgotPassword = function(req, res) {
 
-  var randomPassword= passwordGenerator();
-  User
-	  .findOne({email: req.body.email}, function (error, user) {
-		if(error || user === null) {
-		  return res.status(500).send('Invalid credential !.');
+	var randomPassword= passwordGenerator();
+	settingsController.getDefaultEmailSettings(function(emailSettingsInfo) {
+		if(emailSettingsInfo) {
+			User
+				.findOne({email: req.body.email}, function (error, user) {
+					if(error || user === null) {
+						return res.status(500).send('Invalid credential !.');
+					}
+					user.password = randomPassword;
+					user.save(function (error, doc) {
+						if (error) {
+							return res.status(500).send('Unhandled error! Please try again.');
+						}
+						sendMail(emailSettingsInfo, req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new password : '+ randomPassword +'</h3>', function(response){
+							if(response) {
+								return res.status(200).send('New password sent to your email.');
+							}else{
+								return res.status(500).send('Email not sent please contact with admin.');
+							}
+						});
+					});
+				});
 		}
-		user.password = randomPassword;
-		user.save(function (error, doc) {
-		  if (error) {
-			return res.status(500).send('Unhandled error! Please try again.');
-		  }
-		  sendMail(req.body.email, 'BS-Commerce  password reset','<h2>Thanks for using BS-Commerce </h2><h3>your new password : '+ randomPassword +'</h3>', function(response){
-			if(response) {
-			  return res.status(200).send('New password sent to your email.');
-			}else{
-			  return res.status(500).send('Email not sent!.');
-			}
-		  });
-		});
-	  });
+	});
 };
 
 exports.getUser = function(req, res) {

@@ -13,11 +13,14 @@ body.login, body.register, body.forgot-password{
   padding-top: 5px;
 }
 
-.glyphicon-refresh-animate {
+.fa-refresh-animate {
   -animation: spin .7s infinite linear;
   -ms-animation: spin .7s infinite linear;
   -webkit-animation: spinw .7s infinite linear;
   -moz-animation: spinm .7s infinite linear;
+}
+.bs-fa-color .fa{
+  color: orange;
 }
 
 @keyframes spin {

@@ -270,6 +270,13 @@ table.dataTable thead .sorting::after {
 .bs-fa-color .fa{
     color: orange;
 }
+.fa-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
 .form-group .required-label:after {
     content:"*";
     color:red;

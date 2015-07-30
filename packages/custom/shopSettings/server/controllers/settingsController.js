@@ -100,12 +100,14 @@ var getDefaultEmailInfo = function(callback) {
         .done();
 };
 
-exports.getDefaultEmailSettings = function(req, res) {
+exports.getDefaultEmailSettings = function(callback) {
     getDefaultEmailInfo(function(defaultEmailInfo) {
        if(defaultEmailInfo) {
-           return res.status(200).send(defaultEmailInfo);
+           callback(defaultEmailInfo);
        }
-        return res.status(200).send(null);
+        else {
+           callback(null);
+       }
     });
 };
 
