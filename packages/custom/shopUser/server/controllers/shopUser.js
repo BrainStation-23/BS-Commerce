@@ -6,8 +6,8 @@ var mean = require('meanio'),
   	validation = require('../../../shopCore/server/framework/validation/validation'),
   	mongoose = require('mongoose'),
   	User = mongoose.model('User'),
-  	nodemailer = require('nodemailer'),
 	Order = mongoose.model('Orders'),
+  	nodemailer = require('nodemailer'),
 	settingsController = require('../../../shopSettings/server/controllers/settingsController');
 
 

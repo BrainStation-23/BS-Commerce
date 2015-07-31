@@ -103,3 +103,15 @@ exports.updateShipment = function(req, res) {
         })
         .done();
 };
+
+exports.getShipmentByOrderId = function(req, res) {
+    var condition = {orderId: req.params.orderId};
+    shipmentService.getShipmentsByCondition(condition)
+        .then(function(shipments) {
+            return res.status(200).send(shipments);
+        })
+        .catch(function(error) {
+            return res.status(500).send({msg: 'Error occurred while loading shipments', error: error});
+        })
+        .done();
+};
