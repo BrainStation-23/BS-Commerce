@@ -11,7 +11,6 @@ angular.module('mean.shopAdmin').controller('orderEditController', ['$scope', '$
 
         $scope.showEditShippingAddressForm = false;
         $scope.shippingAddressFieldRequired = true;
-        //$scope.selectedOrderStatus ='';
 
         orderService.getOrderEnums()
             .$promise
@@ -25,6 +24,11 @@ angular.module('mean.shopAdmin').controller('orderEditController', ['$scope', '$
             .$promise
             .then(function(order) {
                 $scope.order = order;
+                angular.forEach(order.products, function(orderProduct) {
+                    if(orderProduct.quantity > orderProduct.quantityShipped) {
+                        $scope.addShipmentAvailable = true;
+                    }
+                });
             });
 
         $scope.changeOrderStatus = function() {

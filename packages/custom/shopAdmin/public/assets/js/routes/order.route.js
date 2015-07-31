@@ -17,6 +17,11 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 url: '/Edit/:orderId',
                 controller: 'orderEditController',
                 templateUrl: 'shopAdmin/views/order/order-edit.html'
+            })
+            .state('Order.AddShipment', {
+                url: '/:orderId/AddShipment',
+                templateUrl: 'shopAdmin/views/shipment/shipment-add.html',
+                controller: 'shipmentCreateController'
             });
     }
 ]);

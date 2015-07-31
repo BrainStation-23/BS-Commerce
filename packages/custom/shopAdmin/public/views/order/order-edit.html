@@ -316,6 +316,10 @@
                         </div>
                         <button class="btn btn-default" data-ng-click="editShippingAddress()">Edit</button>
 
+                        <hr>
+                        <h3>Shipment</h3>
+                        <shipment-list-by-order-id></shipment-list-by-order-id>
+
                     </form>
                     <form class="form-horizontal" name="shippingAddressForm" style="margin-top: 20px;" data-ng-show="showEditShippingAddressForm" data-ng-submit="updateShippingAddress()">
                         <h2>Shipping address</h2>

@@ -57,6 +57,10 @@ var ProductSchema = new Schema({
         type: Number,
         required:true
     },
+    quantityShipped: {
+        type: Number,
+        default: 0
+    },
     sku: {
         type: String,
         required: true
