@@ -14,6 +14,18 @@ angular.module('mean.shopAdmin').factory('shipmentService', ['$resource', '$http
                     'get': {method: 'GET', isArray: true}
                 });
                 return getShipmentsByOrderId.get({orderId: orderId});
+            },
+            getShipmentById: function(shipmentId) {
+                var getShipmentById = $resource('/api/auth/shipment/:shipmentId', {shipmentId: '@shipmentId'}, {
+                    'get': {method: 'GET'}
+                });
+                return getShipmentById.get({shipmentId: shipmentId});
+            },
+            updateShipment: function(shipment) {
+                var updateShipment = $resource('/api/auth/shipment', {}, {
+                    'update': {method: 'PUT'}
+                });
+                return updateShipment.update(shipment);
             }
         };
     }

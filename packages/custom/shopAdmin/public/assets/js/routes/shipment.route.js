@@ -3,15 +3,20 @@
 angular.module('mean.shopAdmin').config(['$meanStateProvider',
     function($meanStateProvider) {
         $meanStateProvider
-            .state('Shipment', {
+            .state('Order.Shipment', {
                 abstract: true,
                 url: '/Shipment',
                 template: '<ui-view/>'
             })
-            .state('Shipment.List', {
+            .state('Order.Shipment.List', {
                 url: '/List',
                 templateUrl: 'shopAdmin/views/shipment/shipment-list.html',
                 controller: 'shipmentCreateController'
+            })
+            .state('Order.Shipment.Edit', {
+                url: '/Edit/:shipmentId',
+                templateUrl: 'shopAdmin/views/shipment/shipment-edit.html',
+                controller: 'shipmentEditController'
             });
     }
 ]);
