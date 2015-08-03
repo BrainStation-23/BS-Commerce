@@ -19,7 +19,7 @@ var ProductSchema = new Schema({
     },
     sku: {
         type: String,
-        required: true
+        default: ''
     }
 });
 
