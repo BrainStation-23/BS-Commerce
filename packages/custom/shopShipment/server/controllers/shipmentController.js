@@ -16,29 +16,26 @@ exports.createShipment =function(req, res) {
 
 var getSearchQuery = function(req, callback) {
     var query = {};
-    var oDate = req.query.startDate === undefined || req.query.startDate === null;
-    var oStatus = req.query.selectedShipmentStatus === undefined || req.query.selectedShipmentStatus === '' ;
-    var pStatus = req.query.selectedPaymentStatus === undefined || req.query.selectedPaymentStatus === '';
-    var sStatus = req.query.selectedShippingStatus === undefined || req.query.selectedShippingStatus === '';
-    var oId = req.query.shipmentId === undefined || req.query.shipmentId === '';
+    var shippedDate = req.query.startDate === undefined || req.query.startDate === null;
+    var shipmentId = req.query.shipmentId === undefined || req.query.shipmentId === '';
+    var orderId = req.query.orderId === undefined || req.query.orderId === '';
+    var trackingNumber = req.query.trackingNumber === undefined || req.query.trackingNumber === '' ;
 
-    if(!oDate) {
+    if(!shippedDate) {
         query = {
             shippedDate: {$gte: req.query.startDate, $lte: req.query.endDate}
         };
     }
-    if(!oStatus) {
-        query.shipmentStatus = req.query.selectedShipmentStatus;
-    }
-    if(!pStatus) {
-        query.paymentStatus = req.query.selectedPaymentStatus;
-    }
-    if(!sStatus) {
-        query.shippingStatus = req.query.selectedShippingStatus;
-    }
-    if(!oId) {
+    if(!shipmentId) {
         query._id = req.query.shipmentId;
     }
+    if(!orderId) {
+        query.orderId = req.query.orderId;
+    }
+    if(!trackingNumber) {
+        query.trackingNumber = req.query.trackingNumber;
+    }
+
     callback(query);
 };
 

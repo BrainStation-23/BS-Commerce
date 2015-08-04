@@ -11,7 +11,7 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
             .state('Order.Shipment.List', {
                 url: '/List',
                 templateUrl: 'shopAdmin/views/shipment/shipment-list.html',
-                controller: 'shipmentCreateController'
+                controller: 'shipmentListController'
             })
             .state('Order.Shipment.Edit', {
                 url: '/Edit/:shipmentId',

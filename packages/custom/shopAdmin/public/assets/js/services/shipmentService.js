@@ -26,6 +26,12 @@ angular.module('mean.shopAdmin').factory('shipmentService', ['$resource', '$http
                     'update': {method: 'PUT'}
                 });
                 return updateShipment.update(shipment);
+            },
+            searchShipments: function(query) {
+                var searchRequest = $resource('/api/auth/shipment', {}, {
+                    'get': {method: 'GET'}
+                });
+                return searchRequest.get(query);
             }
         };
     }
