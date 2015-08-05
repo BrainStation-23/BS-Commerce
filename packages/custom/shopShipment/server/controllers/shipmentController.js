@@ -30,7 +30,7 @@ var getSearchQuery = function(req, callback) {
         query._id = req.query.shipmentId;
     }
     if(!orderId) {
-        query.orderId = req.query.orderId;
+        query.order = req.query.orderId;
     }
     if(!trackingNumber) {
         query.trackingNumber = req.query.trackingNumber;
@@ -102,7 +102,7 @@ exports.updateShipment = function(req, res) {
 };
 
 exports.getShipmentByOrderId = function(req, res) {
-    var condition = {orderId: req.params.orderId};
+    var condition = {order: req.params.orderId};
     shipmentService.getShipmentsByCondition(condition)
         .then(function(shipments) {
             return res.status(200).send(shipments);

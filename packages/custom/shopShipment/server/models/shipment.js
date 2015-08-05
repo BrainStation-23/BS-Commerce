@@ -24,7 +24,7 @@ var ProductSchema = new Schema({
 });
 
 var ShipmentSchema = new Schema({
-    orderId: {
+    order: {
         type: Schema.Types.ObjectId,
         ref: 'Orders',
         required: true

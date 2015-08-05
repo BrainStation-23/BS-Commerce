@@ -115,5 +115,12 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
             $scope.showDeliveredInputBox = true;
             $scope.deliveredDate = new Date($scope.shipment.deliveredDate);
         };
+
+        $scope.printPackagingSlip = function() {
+            var doc = new window.jsPDF();
+            doc.text(20, 20, $scope.shipment._id);
+            doc.text(80,80,'another text');
+            doc.save('Test.pdf');
+        };
     }
 ]);

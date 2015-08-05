@@ -68,7 +68,7 @@ angular.module('mean.shopAdmin').controller('shipmentCreateController', ['$scope
 
             filterShipmentAbleProducts($scope.shipmentAbleProducts, function(ProductsToShip) {
                 var orderShipmentInfo = {
-                    orderId: $scope.orderId,
+                    order: $scope.orderId,
                     trackingNumber: $scope.trackingNumber,
                     adminComment: $scope.adminComment,
                     products: ProductsToShip
