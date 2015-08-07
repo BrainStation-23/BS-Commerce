@@ -52,7 +52,7 @@ exports.getShipmentsByCondition = function(condition, res) {
 
 exports.getShipmentById = function(req, res) {
     var deferred = Q.defer();
-    Shipment.findOne({_id: req.params.shipmentId}).populate('order', 'shippingAddress')
+    Shipment.findOne({_id: req.params.shipmentId}).populate('order', 'shippingMethod shippingAddress')
         .exec(function(error, shipment) {
             if(error) {
                 return deferred.reject(error);

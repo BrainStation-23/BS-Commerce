@@ -115,12 +115,64 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
             $scope.showDeliveredInputBox = true;
             $scope.deliveredDate = new Date($scope.shipment.deliveredDate);
         };
+        var productTableFromHTML = {
+            '#editor': function(element, renderer){
+                return true;
+            }
+        };
 
         $scope.printPackagingSlip = function() {
             var doc = new window.jsPDF();
-            doc.text(20, 20, $scope.shipment._id);
-            doc.text(80,80,'another text');
-            doc.save('Test.pdf');
+
+            doc.setFont('helvetica');
+            doc.setFontType('bold');
+            doc.setFontSize(24);
+            doc.setTextColor(46, 116, 181);
+            doc.text(55, 30,  'Thank you for shipping from');
+            doc.text(80, 40,  'BS-Commerce');
+
+            doc.setFont('courier');
+            doc.setFontSize(12);
+            doc.setTextColor(0,0,0);
+            doc.text(20, 50,  'Shipping ID:');
+            doc.setFontType('normal');
+            doc.text(45, 50,  $scope.shipment._id);
+            doc.setFontType('bold');
+            doc.text(110, 50,  'Order ID:');
+            doc.setFontType('normal');
+            doc.text(130, 50,  $scope.shipment.order._id);
+
+            doc.setFontType('bold');
+            doc.text(20, 60,  'Shipping Address:');
+            doc.setFontType('normal');
+            doc.text(30, 70,  'Name');
+            doc.text(70, 70,  ': '+$scope.shipment.order.shippingAddress.name);
+            doc.text(30, 76,  'Address Line 1');
+            doc.text(70, 76,  ': '+$scope.shipment.order.shippingAddress.addressLine1);
+            doc.text(30, 82,  'Address Line 2');
+            doc.text(70, 82,  ': '+$scope.shipment.order.shippingAddress.addressLine2);
+            doc.text(30, 88,  'Email');
+            doc.text(70, 88,  ': '+$scope.shipment.order.shippingAddress.email);
+            doc.text(30, 94,  'Phone Number');
+            doc.text(70, 94,  ': '+$scope.shipment.order.shippingAddress.phoneNumber);
+            doc.text(30, 100,  'Post code');
+            doc.text(70, 100,  ': '+$scope.shipment.order.shippingAddress.postCode);
+            doc.text(30, 106,  'City');
+            doc.text(70, 106,  ': '+$scope.shipment.order.shippingAddress.city);
+            doc.text(30, 112,  'Country');
+            doc.text(70, 112,  ': '+$scope.shipment.order.shippingAddress.country);
+
+            doc.setFontType('bold');
+            doc.text(20, 120,  'Shipping Method');
+            doc.text(60, 120,  ': '+$scope.shipment.order.shippingMethod);
+
+            doc.text(20, 130,  'Product Information:');
+            doc.fromHTML($('#productTable').get(0), 30, 130, {
+                'elementHandlers': productTableFromHTML
+            });
+            doc.autoPrint();
+            doc.output('dataurlnewwindow');
+            //doc.save('ShippingInfo.pdf');
         };
     }
 ]);
