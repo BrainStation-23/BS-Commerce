@@ -7,6 +7,57 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
         $scope.shippedDate = null;
         $scope.deliveredDate = null;
 
+        $scope.getOrderById = function(orderId) {
+            orderService.getOrderById(orderId)
+                .$promise
+                .then(function(order) {
+                    $scope.order = order;
+                    $scope.shippingStatus = order.shippingStatus;
+                    angular.forEach(order.products, function(orderProduct) {
+                        if(orderProduct.quantity > orderProduct.quantityShipped) {
+                            $scope.productAvailableToShipment = true;
+                        }
+                    });
+                });
+        };
+
+        $scope.updateShippingStatus = function() {
+            orderService.updateOrder($scope.order)
+                .$promise.then(function(response) {
+                    $scope.orderUpdateSuccessMsg = 'success';
+                });
+        };
+
+        $scope.getShipmentsByOrderId = function(orderId, callback) {
+            shipmentService.getShipmentsByOrderId(orderId)
+                .$promise
+                .then(function(shipmentsInfo) {
+                    $scope.shipments = shipmentsInfo;
+                    var shippedCount = 0;
+                    var deliveredCount = 0;
+                    var shipmentCount = 0;
+                    angular.forEach(shipmentsInfo, function(shipmentInfo) {
+                        shipmentCount+=1;
+                        if(shipmentInfo.shippedDate) {
+                            shippedCount+=1;
+                            $scope.partiallyShipped = true;
+                        }
+                        if(shipmentInfo.deliveredDate) {
+                            deliveredCount+=1;
+                        }
+                    });
+                    if(shipmentsInfo.length === shippedCount) {
+                        $scope.allProductShipped = true;
+                    }
+                    if(shipmentsInfo.length === deliveredCount) {
+                        $scope.allProductDelivered = true;
+                    }
+                    if(shipmentsInfo.length === shipmentCount) {
+                        callback();
+                    }
+                });
+        };
+
         $scope.getShipmentById = function() {
             shipmentService.getShipmentById($stateParams.shipmentId)
                 .$promise
@@ -14,6 +65,7 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
                     $scope.shipment = shipment;
                     $scope.trackingNumber = shipment.trackingNumber;
                     $scope.adminComment = shipment.adminComment;
+                    $scope.getOrderById(shipment.order._id);
                 });
         };
         $scope.getShipmentById();
@@ -73,7 +125,6 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
         };
 
         $scope.updateShippedDate = function() {
-            console.log($scope.shippedDate);
             $scope.shipment.shippedDate = $scope.shippedDate;
             $scope.updateShipment();
             $scope.showShippedInputBox = false;
@@ -98,17 +149,30 @@ angular.module('mean.shopAdmin').controller('shipmentEditController', ['$scope',
         $scope.setShippedDate = function() {
             $scope.shipment.shippedDate = new Date();
             $scope.updateShipment();
+            $scope.getShipmentsByOrderId($scope.shipment.order._id, function() {
+                if($scope.productAvailableToShipment || (!$scope.productAvailableToShipment && !$scope.allProductShipped)) {
+                    $scope.order.shippingStatus = 'partiallyShipped';
+                } else if(!$scope.productAvailableToShipment && $scope.allProductShipped) {
+                    $scope.order.shippingStatus = 'shipped';
+                }
+                $scope.updateShippingStatus();
+            });
         };
 
         $scope.setDeliveredDate = function() {
             $scope.shipment.deliveredDate = new Date();
             $scope.updateShipment();
+            $scope.getShipmentsByOrderId($scope.shipment.order._id, function() {
+                if(!$scope.productAvailableToShipment && $scope.allProductShipped && $scope.allProductDelivered) {
+                    $scope.order.shippingStatus = 'delivered';
+                    $scope.updateShippingStatus();
+                }
+            });
         };
 
         $scope.showEditableShippedDate = function() {
             $scope.showShippedInputBox = true;
             $scope.shippedDate = new Date($scope.shipment.shippedDate); //jQuery.extend({}, $scope.shipment.shippedDate);
-            console.log($scope.shippedDate);
         };
 
         $scope.showEditableDeliveredDate = function() {

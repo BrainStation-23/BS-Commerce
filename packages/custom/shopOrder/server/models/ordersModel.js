@@ -89,13 +89,13 @@ var OrderSchema = new Schema({
     },
     orderStatus: {
         type: String,
-        default: 'ordered',
-        enum:['ordered', 'completed', 'cancelled']
+        default: 'pending',
+        enum:['pending', 'Processing', 'completed', 'cancelled']
     },
     shippingStatus: {
         type: String,
-        default: 'pending',
-        enum:['pending', 'delivered', 'cancelled']
+        default: 'notYetShipped',
+        enum: ['notYetShipped', 'partiallyShipped', 'shipped', 'delivered']
     },
     paymentStatus: {
         type: String,
