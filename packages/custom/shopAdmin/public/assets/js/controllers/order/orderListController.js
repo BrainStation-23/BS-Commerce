@@ -77,6 +77,7 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', '$
         $scope.displayOptionChange = function() {
             var ordersLength = $scope.orders.length;
             if(ordersLength > 0) {
+                $scope.currentPage = 1;
                 $scope.displayFrom = 1;
                 $scope.displayTo = $scope.numberOfDisplay;
 
@@ -138,7 +139,7 @@ angular.module('mean.shopAdmin').controller('orderListController', ['$scope', '$
         };
 
         $scope.changePagination =function(pageNo) {
-            $scope.displayFrom = (pageNo - 1) * 10 + 1;
+            $scope.displayFrom = (pageNo - 1) * $scope.numberOfDisplay + 1;
             $scope.displayTo = $scope.displayFrom + $scope.numberOfDisplay - 1;
 
             if($scope.displayTo > $scope.orders.length)
