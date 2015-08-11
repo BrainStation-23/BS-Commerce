@@ -16,6 +16,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         $scope.totalItems = 10;
         $scope.currentPage = 1;
         $scope.dispalayUsers = [];
+        $scope.searchQuery = {};
             //fruits.slice(1, 3);
 
         //</editor-flod>
@@ -31,58 +32,67 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
                 $scope.roles+= 'authenticated';
         };
 
+
+
         $scope.getDefaultSearchUsers = function() {
             $scope.roleAuthenticated = true;
             $scope.updateRoles();
-            var getDefaultSearchUsers = userService.searchUsers($scope.roles, '', '');
-
-            getDefaultSearchUsers.$promise.then(function (users) {
-                $scope.users = users;
-                $scope.totalItems = users.length;
-                $scope.dispalayUsers = users;
-
-                if(users.length > $scope.numberOfDisplay) {
-                    $scope.dispalayUsers = $scope.users.slice(0, $scope.numberOfDisplay);
-                }
-                $scope.displayOptionChange();
-            });
+            $scope.searchQuery.numberOfSkip =0;
+            $scope.searchQuery.numberOfDisplay = $scope.numberOfDisplay;
+            $scope.searchQuery.roles = $scope.roles;
+            userService.searchUsers($scope.searchQuery)
+                .$promise.then(function (response) {
+                    $scope.users = response.users;
+                    $scope.totalItems = response.totalUser;
+                    $scope.dispalayUsers = response.users;
+                    $scope.displayOptionChange();
+                });
         };
 
         $scope.getDefaultSearchUsers();
 
-        $scope.searchUsers = function(){
-            var responseUsers = userService.searchUsers($scope.roles, $scope.email, $scope.fullName);
+        $scope.searchUsers = function(numberOfSkip, numberOfDisplay, callback){
+            $scope.updateRoles();
+            $scope.searchQuery.numberOfSkip = numberOfSkip;
+            $scope.searchQuery.numberOfDisplay = numberOfDisplay;
+            $scope.searchQuery.roles = $scope.roles;
 
-            responseUsers.$promise.then(function (users) {
-                $scope.users = users;
-                $scope.totalItems = users.length;
-                $scope.dispalayUsers = users;
-
-                if(users.length > $scope.numberOfDisplay) {
-                    $scope.dispalayUsers = $scope.users.slice(0, $scope.numberOfDisplay);
-                }
-                $scope.displayOptionChange();
-            });
+            userService.searchUsers($scope.searchQuery)
+                .$promise
+                .then(function(response) {
+                    $scope.users = $scope.users.concat(response.users);
+                    callback();
+                });
         };
 
         $scope.displayOptionChange = function() {
-
-            if($scope.users.length > 0) {
+            var usersLength = $scope.users.length;
+            if(usersLength > 0) {
+                $scope.currentPage = 1;
                 $scope.displayFrom = 1;
                 $scope.displayTo = $scope.numberOfDisplay;
 
-                if($scope.users.length <= $scope.numberOfDisplay) {
-                    $scope.displayTo = $scope.users.length;
-
-                    if($scope.dispalayUsers.length !== $scope.users.length)
-                        $scope.dispalayUsers = $scope.users;
+                if(usersLength === $scope.numberOfDisplay) {
+                    $scope.displayTo = usersLength;
+                    $scope.dispalayUsers = $scope.users;
                 }
-                else if($scope.users.length > $scope.numberOfDisplay) {
+                else if((usersLength < $scope.numberOfDisplay) && (usersLength < $scope.totalItems)) {
+                    $scope.searchUsers(usersLength, ($scope.numberOfDisplay - usersLength), function() {
+                        $scope.displayTo = $scope.users.length;
+                        $scope.dispalayUsers = $scope.users;
+                    });
+                }
+                else if((usersLength < $scope.numberOfDisplay) && (usersLength === $scope.totalItems)) {
+                    $scope.displayTo = usersLength;
+                    $scope.dispalayUsers = $scope.users;
+                }
+                else if(usersLength > $scope.numberOfDisplay) {
                     $scope.displayTo = $scope.numberOfDisplay;
                     $scope.dispalayUsers = $scope.users.slice(0, $scope.numberOfDisplay);
                 }
             }
         };
+
 
         $scope.showAddUserForm = function() {
             $location.path('/User/Create');
@@ -92,7 +102,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         //<editor-fold desc='start pagination functions'>
 
         $scope.changePagination =function(pageNo) {
-            $scope.displayFrom = (pageNo - 1) * 10 + 1;
+            $scope.displayFrom = (pageNo - 1) * $scope.numberOfDisplay + 1;
             $scope.displayTo = $scope.displayFrom + $scope.numberOfDisplay - 1;
 
             if($scope.displayTo > $scope.users.length)
@@ -101,8 +111,15 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         };
 
         $scope.setPage = function (pageNo) {
+            if($scope.totalItems > $scope.users.length) {
+                var numberOfSkip = (pageNo -1) * $scope.numberOfDisplay;
+                $scope.searchUsers(numberOfSkip, $scope.numberOfDisplay, function() {
+                    $scope.changePagination(pageNo);
+                });
+            } else {
+                $scope.changePagination(pageNo);
+            }
             $scope.currentPage = pageNo;
-            $scope.changePagination(pageNo);
         };
 
         //</editor-fold>

@@ -4,18 +4,11 @@ angular.module('mean.shopAdmin').factory('userService', ['$http', '$resource',
   function($http, $resource) {
 
     return {
-        searchUsers: function(roles, email, name){
-            if(email === undefined)
-                email='';
-            if(name === undefined)
-                name='';
-            if(roles === undefined)
-                roles='';
+        searchUsers: function(searchQuery){
             var searchRequest = $resource('/auth/search/user', {}, {
-                'get': {method: 'GET', isArray: true}
+                'get': {method: 'GET'}
             });
-            var searchResponse = searchRequest.get({roles: roles, email: email, name: name});
-            return searchResponse;
+            return searchRequest.get(searchQuery);
         },
         getUserById: function(userId) {
             var userById = $resource('/auth/user/:userId', {userId:'@userId'});
