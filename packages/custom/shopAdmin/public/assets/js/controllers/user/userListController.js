@@ -17,6 +17,7 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
         $scope.currentPage = 1;
         $scope.dispalayUsers = [];
         $scope.searchQuery = {};
+        $scope.roleAuthenticated = true;
             //fruits.slice(1, 3);
 
         //</editor-flod>
@@ -35,7 +36,6 @@ angular.module('mean.shopAdmin').controller('userListController', ['$scope', 'Gl
 
 
         $scope.getDefaultSearchUsers = function() {
-            $scope.roleAuthenticated = true;
             $scope.updateRoles();
             $scope.searchQuery.numberOfSkip =0;
             $scope.searchQuery.numberOfDisplay = $scope.numberOfDisplay;

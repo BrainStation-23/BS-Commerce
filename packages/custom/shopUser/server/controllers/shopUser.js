@@ -257,7 +257,7 @@ exports.getUserById = function(req, res) {
 var generateSearchQuery = function(req, callback) {
 	var searchQuery={};
 	var roles = [];
-	var userRoles = req.query.roles === undefined || req.query.roles === null;
+	var userRoles = req.query.roles === undefined || req.query.roles === '';
 	var userEmail = req.query.email === undefined || req.query.email === '';
 	var userName = req.query.name === undefined || req.query.name === '';
 	if(!userRoles) {
@@ -272,7 +272,6 @@ var generateSearchQuery = function(req, callback) {
 	if(!userName) {
 		searchQuery. name = {'$regex': req.query.name};
 	}
-	console.log(searchQuery);
 	callback(searchQuery);
 };
 
