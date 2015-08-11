@@ -1,29 +1,62 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" role="grid">
         <thead class="tbl-header">
-        <tr class="row">
-            <th>Shipment ID</th>
-            <th>Order ID</th>
-            <th>Tracking Number</th>
-            <th>Date shipped</th>
-            <th>Date delivered</th>
-            <th>View</th>
-        </tr>
+            <tr class="row">
+                <th></th>
+                <th>Shipment ID</th>
+                <th>Order ID</th>
+                <th>Tracking Number</th>
+                <th>Date shipped</th>
+                <th>Date delivered</th>
+                <th>View</th>
+            </tr>
         </thead>
-        <tbody>
-        <tr class="row" data-ng-repeat="shipment in shipments">
-            <td data-ng-bind="shipment._id"></td>
-            <td data-ng-bind="shipment.order"></td>
-            <td data-ng-bind="shipment.trackingNumber"></td>
-            <td data-ng-bind="shipment.shippedDate"></td>
-            <td data-ng-bind="shipment.deliveredDate"></td>
-            <td><a ui-sref="Order.Shipment.Edit({shipmentId: shipment._id})">View</a></td>
-        </tr>
-        <tr class="row" >
-            <td colspan="5" class="tbl-header"></td>
-            <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click=""><i class="fa fa-refresh"></i></button></td>
-        </tr>
+        <tbody data-ng-repeat="shipment in shipments">
+            <tr class="row" >
+                <td>
+                    <button type="button" data-ng-click="showProducts(shipment)">
+                        <i class="fa fa-caret-right" data-ng-if="!shipment.caretDown"></i>
+                        <i class="fa fa-caret-down" data-ng-if="shipment.caretDown"></i>
+                    </button>
+                </td>
+                <td data-ng-bind="shipment._id"></td>
+                <td data-ng-bind="shipment.order"></td>
+                <td data-ng-bind="shipment.trackingNumber"></td>
+                <td data-ng-bind="shipment.shippedDate"></td>
+                <td data-ng-bind="shipment.deliveredDate"></td>
+                <td><a ui-sref="Order.Shipment.Edit({shipmentId: shipment._id})">View</a></td>
+            </tr>
+            <tr class="row" ng-if="shipment._id === shipmentId && shipment.caretDown">
+                <td></td>
+                <td colspan="6">
+                    <div>
+                        <table class="table table-bordered table-hover" role="grid">
+                            <thead class="tbl-header">
+                            <tr class="row">
+                                <th>Product</th>
+                                <th>SKU</th>
+                                <th>Quantity shipped</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="row" data-ng-repeat="product in shipment.products">
+                                <td data-ng-bind="product.name"></td>
+                                <td data-ng-bind="product.sku"></td>
+                                <td data-ng-bind="product.quantityShipped"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+
         </tbody>
+        <!--<tbody>-->
+            <!--<tr class="row" >-->
+                <!--<td colspan="6" class="tbl-header"></td>-->
+                <!--<td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click=""><i class="fa fa-refresh"></i></button></td>-->
+            <!--</tr>-->
+        <!--</tbody>-->
     </table>
     <a data-ng-show="addShipmentAvailable" class="btn btn-default" data-ui-sref="Order.AddShipment({orderId: order._id})">Add shipment</a>
 </div>

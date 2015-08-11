@@ -13,9 +13,13 @@ angular.module('mean.shopAdmin').directive('shipmentListByOrderId', ['$statePara
                 shipmentService.getShipmentsByOrderId($stateParams.orderId)
                     .$promise
                     .then(function(shipmentInfo) {
-                        //console.log(shipmentInfo);
                         scope.shipments = shipmentInfo;
                     });
+
+                scope.showProducts = function(shipment) {
+                    scope.shipmentId = shipment._id;
+                    shipment.caretDown = !shipment.caretDown;
+                };
             }
         };
     }
