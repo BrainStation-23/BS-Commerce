@@ -8,7 +8,8 @@ var mean = require('meanio'),
   	User = mongoose.model('User'),
 	Order = mongoose.model('Orders'),
   	nodemailer = require('nodemailer'),
-	settingsController = require('../../../shopSettings/server/controllers/settingsController');
+	settingsController = require('../../../shopSettings/server/controllers/settingsController'),
+	userService = require('../services/userService');
 
 
 mean.loadConfig();
@@ -256,30 +257,39 @@ exports.getUserById = function(req, res) {
 var generateSearchQuery = function(req, callback) {
 	var searchQuery={};
 	var roles = [];
-	if(req.query.roles !== '') {
+	var userRoles = req.query.roles === undefined || req.query.roles === null;
+	var userEmail = req.query.email === undefined || req.query.email === '';
+	var userName = req.query.name === undefined || req.query.name === '';
+	if(!userRoles) {
 		roles = req.query.roles.split(',');
 	}
-	if(req.query.roles !== '') {
+	if(!userRoles) {
 		searchQuery = {roles: { $in: roles}};
 	}
-	if( req.query.email !== '') {
+	if(!userEmail) {
 		searchQuery.email = req.query.email;
 	}
-	if(req.query.name !== '') {
+	if(!userName) {
 		searchQuery. name = {'$regex': req.query.name};
 	}
+	console.log(searchQuery);
 	callback(searchQuery);
 };
 
 exports.searchUser = function(req, res) {
+	var skipSize = req.query.numberOfSkip|| 0;
+	var limitSize = req.query.numberOfDisplay || 0;
 	generateSearchQuery(req, function(searchQuery) {
-		User
-			.find(searchQuery, function(error, user) {
-				if(error || user === null) {
-					return res.status(500).send(error);
-				}
-				return res.status(200).send(user);
-			});
+		userService.searchUser(searchQuery, skipSize, limitSize)
+			.then(function(users){
+				userService.getNumberOfUser(searchQuery, function(total) {
+					return res.status(200).json({users: users, totalUser: total});
+				});
+			})
+			.catch(function(error){
+				return res.status(500).json({msg: 'Error occurred while getting users', error: error});
+			})
+			.done();
 	});
 };
 
