@@ -266,9 +266,8 @@ var generateSearchQuery = function(req, callback) {
 		searchQuery.email = req.query.email;
 	}
 	if(req.query.name !== '') {
-		searchQuery. name = req.query.name;
+		searchQuery. name = {'$regex': req.query.name};
 	}
-
 	callback(searchQuery);
 };
 
