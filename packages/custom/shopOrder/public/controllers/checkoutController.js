@@ -2,15 +2,9 @@
 	'use strict';
 	angular.module('mean.shopOrder').controller('checkoutController', ['$scope', '$location', 'Global', '$timeout', 'cartService','checkoutService',
 		function($scope, $location, Global, $timeout, cartService, checkoutService) {
-			//$scope.global = Global;
 
-			//$scope.checkoutPageShow = false;
 			$scope.cartEmpty = true;
 			$scope.oneAtATime = true;
-			$scope.status = {
-				isFirstOpen: true,
-				isFirstDisabled: false
-			};
 			$scope.user = {'_id':''};
 			$scope.user= Global.user || {};
 			$scope.order = {};
@@ -19,11 +13,10 @@
 			$scope.tax = 0;
 			$scope.tabStatus = true;
 
-
-			//console.log(Global.user);
 			$scope.cartId = '';
 			$scope.items = [];
-			//$scope.shipping = 10;
+
+			$scope.activeStep = 1;
 
 
 			cartService.getCart()
@@ -42,23 +35,6 @@
 				function(error) {
 					$location.path('/cart/empty');
 				});
-
-			var openTab = function(tabElement) {
-				tabElement.parent().attr('is-open', true);
-				tabElement.attr('is-open', true);
-				tabElement.removeAttr('collapse');
-				tabElement.attr('collapse',false);
-				tabElement.css('height','auto');
-				tabElement.addClass('in');
-			};
-
-			var closeTab = function(tabElement) {
-				tabElement.attr('is-open', false);
-				tabElement.removeAttr('collapse');
-				tabElement.attr('collapse',true);
-				tabElement.css('height',0);
-				tabElement.removeClass('in');
-			};
 
 			$scope.initializeAddress = function() {
 				cartService.getCart();
@@ -95,21 +71,7 @@
 				};
 			};
 
-			$scope.addBillingAddress = function() {
-				//$scope.pleaseWait = true;
-				//$timeout(function(){
-				//	$scope.pleaseWait = false;
-				//},2000);
-				$scope.activeShippingAddressTab = true;
-				var billingAddressElem = angular.element('#billingAddress > div').last();
-				var shippingAddressElem = angular.element('#shippingAddress > div').last();
-				closeTab(billingAddressElem);
-				openTab(shippingAddressElem);
-
-			};
-
 			$scope.selectShippingAddress = function(indx) {
-				//console.log(typeof indx);
 				if(indx === '') {
 					$scope.order.shippingAddress ={};
 					return;
@@ -124,42 +86,6 @@
 					postCode: $scope.user.addresses[indx].postCode,
 					phoneNumber: $scope.user.phoneNumber
 				};
-			};
-
-			$scope.addShippingAddress = function() {
-				$scope.activeShippingMethodTab = true;
-
-				var shippingAddressElem = angular.element('#shippingAddress > div').last();
-				var shippingMethodElem = angular.element('#shippingMethod > div').last();
-				closeTab(shippingAddressElem);
-				openTab(shippingMethodElem);
-			};
-
-			$scope.addShippingMethod = function() {
-				$scope.activePaymentMethodTab = true;
-
-				var shippingMethodElem = angular.element('#shippingMethod > div').last();
-				var paymentMethodElem = angular.element('#paymentMethod > div').last();
-				closeTab(shippingMethodElem);
-				openTab(paymentMethodElem);
-			};
-
-			$scope.addPaymentMethod = function() {
-				$scope.activePaymentInformationTab = true;
-
-				var paymentMethodElem = angular.element('#paymentMethod > div').last();
-				var paymentInfoElem = angular.element('#paymentInformation > div').last();
-				closeTab(paymentMethodElem);
-				openTab(paymentInfoElem);
-			};
-
-			$scope.addPaymentInfo = function() {
-				$scope.activeConfirmOrderTab = true;
-
-				var paymentInfoElem = angular.element('#paymentInformation > div').last();
-				var confirmOrderElem = angular.element('#confirmOrder > div').last();
-				closeTab(paymentInfoElem);
-				openTab(confirmOrderElem);
 			};
 
 			var addProductInfo = function(callback) {
@@ -208,7 +134,33 @@
 				});
 
 			};
-			//console.log(user.name);
+
+
+
+			$scope.isActiveAnchor = function(stepNo) {
+				if(stepNo <= $scope.activeStep) {
+					return 'step-enable';
+				}
+				return 'step-disable';
+			};
+
+			$scope.isActiveHeading = function(stepNo) {
+				if(stepNo <= $scope.activeStep) {
+					return 'enable-step-bg-color';
+				}
+				return 'disable-step-bg-color';
+			};
+
+			$scope.isCollapsed = function(stepNo) {
+				if(stepNo === $scope.activeStep) {
+					return 'tab-open';
+				}
+				return 'tab-collapsed';
+			};
+
+			$scope.setActiveStep = function(stepNo) {
+				$scope.activeStep = stepNo;
+			};
 		}
 	]);
 })();

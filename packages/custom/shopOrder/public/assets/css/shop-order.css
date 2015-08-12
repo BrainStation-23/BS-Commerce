@@ -26,3 +26,34 @@
   font-size: 16px;
   font-weight: bold;
 }
+.step-disable {
+  pointer-events: none;
+  cursor: default;
+}
+.step-enable {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.enable-step-bg-color {
+  background-color: #FE980F !important;
+  padding: 13px 15px !important;
+}
+.disable-step-bg-color {
+  background-color: #FAF2E7 !important;
+}
+.tab-open {
+  display: block;
+  height: auto;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+.tab-collapsed {
+  -webkit-transition: opacity .5s ease-out;
+  transition: opacity .5s ease-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.panel-body {
+  padding-left: 40px !important;
+}
