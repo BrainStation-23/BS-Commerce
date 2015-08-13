@@ -302,3 +302,7 @@ table.dataTable thead .sorting::after {
     background-image: none, linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
     background-color: #E3E3E3;
 }
+
+.navbar-brand {
+    height: 65px !important;
+}
