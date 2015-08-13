@@ -133,12 +133,12 @@ exports.getIncompleteOrdersStatistics = function(req) {
             {
                 $group : {
                     _id : null,
-                    orderPendingTotal: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'ordered' ] }, '$totalCost', 0 ] } },
-                    orderPendingCount: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'ordered' ] }, 1, 0 ] } },
+                    orderPendingTotal: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'pending' ] }, '$totalCost', 0 ] } },
+                    orderPendingCount: { $sum: {$cond: [ { $eq: [ '$orderStatus', 'pending' ] }, 1, 0 ] } },
                     paymentPendingTotal: { $sum: {$cond: [ { $eq: [ '$paymentStatus', 'pending' ] }, '$totalCost', 0 ] } },
                     paymentPendingCount: { $sum: {$cond: [ { $eq: [ '$paymentStatus', 'pending' ] }, 1, 0 ] } },
-                    shippingPendingTotal: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'pending' ] }, '$totalCost', 0 ] } },
-                    shippingPendingCount: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'pending' ] }, 1, 0 ] } }
+                    shippingPendingTotal: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'notYetShipped' ] }, '$totalCost', 0 ] } },
+                    shippingPendingCount: { $sum: {$cond: [ { $eq: [ '$shippingStatus', 'notYetShipped' ] }, 1, 0 ] } }
                 }
             }
         ]
