@@ -39,7 +39,7 @@ angular.module('mean.shopAdmin').controller('shipmentCreateController', ['$scope
             angular.forEach($scope.order.products, function(product) {
                 productCount += 1;
                 if(updateProduct.productId === product.productId._id) {
-                    product.quantityShipped = updateProduct.quantityShipped;
+                    product.quantityShipped += updateProduct.quantityShipped;
                 }
             });
 
