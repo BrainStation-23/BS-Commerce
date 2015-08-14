@@ -29,6 +29,16 @@ exports.getManufacturers = function(condition) {
     return deferred.promise;
 };
 
+exports.getManufacturersNumber = function(searchQuery, callback) {
+    Manufacturer.find(searchQuery).count()
+        .exec(function(error, total) {
+            if(error) {
+                callback(0);
+            }
+            callback(total);
+        });
+};
+
 exports.getManufacturerById = function(manufacturerId) {
     var deferred = Q.defer();
 
@@ -53,10 +63,10 @@ exports.updateManufacturer = function(req) {
     return deferred.promise;
 };
 
-exports.deleteManufacturerById = function(req) {
+exports.deleteManufacturerById = function(manufacturerId) {
     var deferred = Q.defer();
 
-    Manufacturer.findByIdAndRemove(req.query.manufacturerId, function(error) {
+    Manufacturer.findByIdAndRemove(manufacturerId, function(error) {
         if(error) {
             return deferred.reject(error);
         }
