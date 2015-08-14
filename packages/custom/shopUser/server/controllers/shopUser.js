@@ -4,11 +4,11 @@ var mean = require('meanio'),
   	_ = require('lodash'),
   	validator = require('validator'),
   	validation = require('../../../shopCore/server/framework/validation/validation'),
+	settingsController = require('../../../shopSettings/server/controllers/settingsController'),
   	mongoose = require('mongoose'),
   	User = mongoose.model('User'),
 	Order = mongoose.model('Orders'),
   	nodemailer = require('nodemailer'),
-	settingsController = require('../../../shopSettings/server/controllers/settingsController'),
 	userService = require('../services/userService');
 
 
