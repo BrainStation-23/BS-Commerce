@@ -2,15 +2,12 @@
 
 var mongoose = require('mongoose'),
     Brand = mongoose.model('Brand'),
-    //_ = require('lodash'),
     Q = require('q');
 
-exports.createBrand = function(b){
+exports.createBrand = function(req){
     var deferred = Q.defer();
-    var brand = new Brand(b);
-    console.log('from service');
-    console.log(brand);
-    brand.save(function(error, brand){
+    var newBrand = new Brand(req.body);
+    newBrand.save(function(error, brand){
         if(error){
             return deferred.reject(error);
         }
@@ -19,24 +16,34 @@ exports.createBrand = function(b){
     return deferred.promise;
 };
 
-exports.getBrands = function(req, res){
+exports.getBrands = function(searchQuery, skipSize, limitSize){
     var deferred = Q.defer();
 
-    Brand.find({})
-            .exec(function(error, brands){
-                if(error){
-                    return deferred.reject(error);
-                }
-                return deferred.resolve(brands);
-            });
+    Brand.find(searchQuery).skip(skipSize).limit(limitSize)
+        .exec(function(error, brands){
+            if(error){
+                return deferred.reject(error);
+            }
+            return deferred.resolve(brands);
+        });
 
     return deferred.promise;
 };
 
-exports.getBrandById = function(id){
+exports.getBrandsNumber = function(searchQuery, callback) {
+    Brand.find(searchQuery).count()
+        .exec(function(error, total) {
+            if(error) {
+                callback(0);
+            }
+            callback(total);
+        });
+};
+
+exports.getBrandById = function(brandId){
     var deferred = Q.defer();
 
-    Brand.findOne({_id: id})
+    Brand.findOne({_id: brandId})
         .exec(function(error, brand){
             if(error){
                 return deferred.reject(error);
@@ -47,42 +54,40 @@ exports.getBrandById = function(id){
     return deferred.promise;
 };
 
-exports.update = function(id, brand){
+exports.updateBrand = function(req){
     var deferred = Q.defer();
 
-    Brand.update({_id: id}, brand, {upsert: true}, function(error){
-        if (error) {
+    Brand.findByIdAndUpdate(req.body._id, req.body, function(error, brand) {
+        if(error) {
             return deferred.reject(error);
-        } else {
-            return deferred.resolve(brand);
         }
+        return deferred.resolve(brand);
     });
-
     return deferred.promise;
 };
 
-exports.deleteBrandById = function(id){
+exports.deleteBrandById = function(brandId){
     var deferred = Q.defer();
-    Brand.findOne({_id:id}).remove(function(error, doc){
+
+    Brand.findByIdAndRemove(brandId, function(error, doc) {
         if(error) {
             return deferred.reject(error);
         }
         return deferred.resolve(doc);
     });
-
     return deferred.promise;
 
 };
 
-exports.getCount = function(){
-    var deferred = Q.defer();
-    Brand.count(function(error, count){
-        if(error) {
-            return deferred.reject(error);
-        }
-        return deferred.resolve(count);
-    });
-
-    return deferred.promise;
-
-};
+//exports.getCount = function(){
+//    var deferred = Q.defer();
+//    Brand.count(function(error, count){
+//        if(error) {
+//            return deferred.reject(error);
+//        }
+//        return deferred.resolve(count);
+//    });
+//
+//    return deferred.promise;
+//
+//};
