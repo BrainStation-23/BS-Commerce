@@ -18,11 +18,11 @@ var BrandSchema = new Schema({
         },
         allowToSelectPageSize:{
             type: Boolean,
-            default: true
+            default: false
         },
         published:{
             type: Boolean,
-            default: true
+            default: false
         },
         displayOrder:{
             type: Number,

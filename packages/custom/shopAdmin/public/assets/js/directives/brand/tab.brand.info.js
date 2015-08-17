@@ -7,7 +7,6 @@ angular.module('mean.shopAdmin').directive('tabBrandInfo', ['Global', '$http',
             templateUrl: 'shopAdmin/views/brand/template/tab-brand-info.html',
             link: function (scope, element, attrs) {
 
-
             }
 
         };
