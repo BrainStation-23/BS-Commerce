@@ -29,6 +29,24 @@ var BrandSchema = new Schema({
             default: 0
         },
         pageSizeOptions: [ {type: Number} ]
+    },
+    seo: {
+        metaKeyword: {
+            type: String,
+            default: ''
+        },
+        metaDescription: {
+            type: String,
+            default: ''
+        },
+        metaTitle: {
+            type: String,
+            default: ''
+        },
+        SEFN: {
+            type: String,
+            default: ''
+        }
     }
 });
 
