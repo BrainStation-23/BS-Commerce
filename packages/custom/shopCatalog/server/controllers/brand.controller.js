@@ -3,10 +3,7 @@
 var brandService = require('../services/brand.service');
 
 exports.createBrand = function(req, res){
-    console.log('from controller');
-    console.log(req.body.brand);
-
-    brandService.createBrand(req.body.brand)
+    brandService.createBrand(req)
         .then(function(brand){
             return res.status(200).json(brand);
         })
@@ -16,19 +13,35 @@ exports.createBrand = function(req, res){
         .done();
 };
 
+var generateSearchQuery = function(req, callback) {
+    var searchQuery = {};
+
+    var brandName = req.query.name === undefined || req.query.name === '' ;
+    if(!brandName) {
+        searchQuery['info.name'] = new RegExp('^'+req.query.name, 'i');
+    }
+    callback(searchQuery);
+};
+
 exports.getBrands = function(req, res){
-    brandService.getBrands()
-        .then(function(brands){
-            return res.status(200).json(brands);
-        })
-        .catch(function(error){
-            return res.status(500).json({msg: 'Error occurred while loading brands', error: error});
-        })
-        .done();
+    var skipSize = req.query.numberOfSkip|| 0;
+    var limitSize = req.query.numberOfDisplay || 0;
+    generateSearchQuery(req, function(searchQuery) {
+        brandService.getBrands(searchQuery, skipSize, limitSize)
+            .then(function(brands){
+                brandService.getBrandsNumber(searchQuery, function(total) {
+                    return res.status(200).json({brands: brands, totalBrands: total});
+                });
+            })
+            .catch(function(error){
+                return res.status(500).json({msg: 'Error occurred while loading brands', error: error});
+            })
+            .done();
+    });
 };
 
 exports.getBrandById = function(req, res){
-    brandService.getBrandById(req.params.id)
+    brandService.getBrandById(req.params.brandId)
         .then(function(brand){
             return res.status(200).json(brand);
         })
@@ -38,8 +51,8 @@ exports.getBrandById = function(req, res){
         .done();
 };
 
-exports.update = function(req, res){
-    brandService.update(req.params.id, req.body.brand)
+exports.updateBrand = function(req, res){
+    brandService.updateBrand(req)
         .then(function(brand){
             return res.status(200).json(brand);
         })
@@ -50,23 +63,12 @@ exports.update = function(req, res){
 };
 
 exports.deleteBrandById = function(req, res){
-    brandService.deleteBrandById(req.params.id)
+    brandService.deleteBrandById(req.params.brandId)
         .then(function(brand){
             return res.status(200).json(brand);
         })
         .catch(function(error){
             return res.status(500).json({msg: 'Error occurred while deleting brand', error: error});
-        })
-        .done();
-};
-
-exports.getCount = function(req, res){
-    brandService.getCount()
-        .then(function(count){
-            return res.status(200).json(count);
-        })
-        .catch(function(error){
-            return res.status(500).json({msg: 'Error occurred while counting brands', error: error});
         })
         .done();
 };
