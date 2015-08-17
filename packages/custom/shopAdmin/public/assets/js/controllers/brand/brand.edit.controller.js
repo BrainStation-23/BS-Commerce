@@ -1,34 +1,35 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('brandEditController', ['$scope', 'Global', '$http', '$stateParams', '$state',
-    function ($scope, Global, $http, $stateParams, $state) {
-        console.log($stateParams.id);
+angular.module('mean.shopAdmin').controller('brandEditController', ['$scope', '$stateParams', '$state', 'brandService',
+    function ($scope, $stateParams, $state, brandService) {
 
         $scope.brand = {};
 
-        $scope.getDataForPage = function(){
-            $http.get('/api/brands/' + $stateParams.id)
-                .success(function (data, status, headers, config) {
-                    console.log(data);
-                    $scope.brand = data;
-                })
-                .error(function (data, status, headers, config) {
+        $scope.getBrandById = function(){
+            brandService.getBrandById($stateParams.brandId)
+                .$promise
+                .then(function(brand) {
+                    $scope.brand = brand;
+                });
+        };
+        $scope.getBrandById();
 
+        $scope.update = function () {
+            if(typeof $scope.brand.info.pageSizeOptions === 'string') {
+                $scope.brand.info.pageSizeOptions = $scope.brand.info.pageSizeOptions ? $scope.brand.info.pageSizeOptions.split(',') : [];
+            }
+            brandService.updateBrand($scope.brand)
+                .$promise
+                .then(function(response) {
+                    $state.go('Brand.List');
                 });
         };
 
-        $scope.getDataForPage();
-
-
-        $scope.update = function () {
-            $http.put('/api/brands/' + $stateParams.id, {brand: $scope.brand})
-                .success(function (data, status, headers, config) {
-                    console.log(data);
+        $scope.delete = function () {
+            brandService.deleteBrand($stateParams.brandId)
+                .$promise
+                .then(function(response) {
                     $state.go('Brand.List');
-
-                })
-                .error(function (data, status, headers, config) {
-                    console.log(data);
                 });
         };
     }

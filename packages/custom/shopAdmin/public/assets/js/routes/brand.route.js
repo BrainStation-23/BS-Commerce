@@ -15,7 +15,7 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 controller: 'brandListController'
             })
             .state('Brand.Edit', {
-                url: '/Edit/:id',
+                url: '/Edit/:brandId',
                 params: {
                     id: null
                 },
