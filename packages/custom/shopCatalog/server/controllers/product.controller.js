@@ -48,8 +48,8 @@ exports.getBySKU = function (req, res) {
 
 exports.create = function (req, res) {
     service.create(req.body.product)
-        .then(function (id) {
-            return res.status(200).json(id);
+        .then(function (productId) {
+            return res.status(200).json({_id: productId});
         })
         .catch(function (error) {
             return res.status(500).json([{msg: 'Unhandled Error!'}]);
@@ -60,7 +60,7 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-    service.update(req.params.id, req.body.product)
+    service.update(req)
         .then(function (product) {
             return res.status(200).json(product);
         })

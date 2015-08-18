@@ -109,25 +109,20 @@ exports.create = function(data){
     if(error){
       return deferred.reject(error);
     }
-    return deferred.resolve(product.id);
+    return deferred.resolve(product._id);
   });
   return deferred.promise;
 };
 
-exports.update = function(id, product){
+exports.update = function(req){
   var deferred = Q.defer();
-
-
-  Product.update({_id: id}, product, {upsert: true}, function(error){
-    if (error) {
+  Product.findByIdAndUpdate(req.body._id, req.body, function(error, product) {
+    if(error) {
       return deferred.reject(error);
-    } else {
-      return deferred.resolve(product);
     }
+    return deferred.resolve(product);
   });
-
   return deferred.promise;
-
 };
 
 exports.delete = function(id){

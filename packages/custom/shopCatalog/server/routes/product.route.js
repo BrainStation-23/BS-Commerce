@@ -5,16 +5,16 @@ var controller = require('../controllers/product.controller');
 module.exports = function (shopCatalog, app, auth, database, shopCore) {
     //
     app.route('/api/products/:id([A-Za-z0-9]{24})')
-        .get(controller.getById);
+        .get(controller.getById)
+        .delete(controller.delete);
 
     app.route('/api/products/count')
         .get(controller.getCount);
 
     app.route('/api/products')
         .get(controller.list)
-        .post(function(req, res){
-            controller.create(req, res);
-        });
+        .post(controller.create)
+        .put(controller.update);
 
     app.route('/api/products/:sku')
         .get(controller.getBySKU);
@@ -53,7 +53,6 @@ module.exports = function (shopCatalog, app, auth, database, shopCore) {
                     return res.status(200);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     return res.status(500).json({error: error});
                 })
                 .done();
@@ -67,14 +66,6 @@ module.exports = function (shopCatalog, app, auth, database, shopCore) {
                     return res.status(500).json({error: error});
                 })
                 .done();
-        });
-
-    app.route('/api/products/:id')
-        .put(function(req, res){
-            controller.update(req, res);
-        })
-        .delete(function(req, res){
-           controller.delete(req,res);
         });
 
 };
