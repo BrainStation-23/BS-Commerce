@@ -104,7 +104,6 @@ exports.create = function(data){
     categories: data.categories,
     brands: data.brands
   });
-  console.log(p);
 
   p.save(function(error, product){
     if(error){
@@ -133,8 +132,6 @@ exports.update = function(id, product){
 
 exports.delete = function(id){
   var deferred = Q.defer();
-  console.log('===================================================');
-  console.log('Product deleting');
 
   Product.findOne({_id: id}).remove(function(error, doc){
     if (error) {

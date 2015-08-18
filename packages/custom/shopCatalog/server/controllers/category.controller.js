@@ -48,7 +48,6 @@ exports.deleteById = function(req, res){
         return res.status(200).json([{msg: 'success'}]);
       })
       .catch(function(error){
-        console.log('error');
         return res.status(500).json([{msg: error}]);
       })
       .done();

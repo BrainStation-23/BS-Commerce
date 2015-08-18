@@ -3,7 +3,6 @@
 
 angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope', 'Global', '$stateParams', '$http', 'Upload', '$state',
     function ($scope, Global, $stateParams, $http, Upload, $state) {
-        console.log($stateParams.productId);
         $scope.product = {};
         $scope.product.id = $stateParams.productId;
         $scope.picture = {};
@@ -14,7 +13,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         $http.get('/api/categories').
             success(function (data, status, headers, config) {
                 $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
-                //console.log(data);
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -39,7 +37,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         $http.get('/api/brands')
             .success(function (data, status, headers, config) {
                 $scope.brands = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
-                console.log(data);
+                data = data.brands;
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -55,7 +53,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
             $http.get('/api/products/' + $scope.product.id)
                 .success(function (data, status, headers, config) {
 
-                    console.log(data.meta);
 
                     // categories
                     /*$scope.product.category = data.categories[0].categoryId;
@@ -92,10 +89,8 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         };
 
         $scope.upload = function (selectedFile) {
-            console.log('upload function');
 
             var file = selectedFile ? selectedFile[0] : null;
-            console.log(file);
             Upload.upload({
                 url: '/api/products/photos',
                 fields: {
@@ -103,15 +98,11 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                 },
                 file: file
             }).progress(function (evt) {
-                console.log('some progress');
                 //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 //$scope.log = 'progress: ' + progressPercentage + '% ' +
                 //    evt.config.file.name + '\n' + $scope.log;
             }).success(function (data, status, headers, config) {
-                console.log('success');
-                console.log(data);
                 if (status === 500) {
-                    console.log('upload error');
                 } else if (status === 404) {
                     window.location = '/admin/login';
                 } else if (status === 200) {
@@ -126,8 +117,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     $scope.product.photos[len].alt = $scope.picture.alt;
                     $scope.product.photos[len].title = $scope.picture.title;*/
                     $scope.picture.files[0] = undefined;
-
-                    console.log($scope.product);
                     $scope.update(true);
                 }
 
@@ -165,8 +154,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
 
             $http.put('/api/products/'+$scope.product.id, {product: p})
                 .success(function (data, status, headers, config) {
-                    console.log('success');
-                    console.log(data);
                     $scope.refreshProduct(data);
                     $state.go('Product.List');
                 })
@@ -203,21 +190,17 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
             $scope.product.metaTitle = data.meta.title;
 
             $scope.product.photos = data.photos;
-            console.log($scope.product.photos);
 
         };
 
         $scope.deleteImage = function(id){
-            console.log(id);
             $http.delete('/api/products/photos/'+id)
                 .success(function(data, status, headers, config){
-                    console.log(data);
                     var index = $scope.product.photos.indexOf(id);
                     $scope.product.photos.splice(index, 1);
                     $scope.update();
                 })
                 .error(function(data, status, headers, config){
-                    console.log(data);
                 });
         };
 
@@ -226,7 +209,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         };
 
         $scope.deleteImageAndProduct = function(id){
-            console.log(id);
             $http.delete('/api/products/photos/'+id)
                 .success(function(data, status, headers, config){
                     var index = $scope.product.photos.indexOf(id);
@@ -239,7 +221,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
 
                 })
                 .error(function(data, status, headers, config){
-                    console.log(data);
                 });
         };
 
@@ -249,7 +230,6 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     $state.go('Product.List');
                 })
                 .error(function(data, status, headers, config){
-                    console.log(data);
                 });
         };
     }

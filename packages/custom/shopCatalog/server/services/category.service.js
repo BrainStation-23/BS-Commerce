@@ -46,15 +46,12 @@ exports.list = function () {
 
             var list = _.map(_.where(categories, {parent: null}), function (item) {
                 return {
-                    /*console.log(req.body.cat);
-                     console.log(req.files);*/
                     _id: item._id,
                     name: item.name,
                     slug: item.slug,
                     subCategories: []
                 };
             });
-            console.log('after map: '+ list.length);
             _.forEach(list, function (item) {
                 includeSubCategories(item, categories);
             });
@@ -113,7 +110,6 @@ exports.addCategory = function (cat, imageId) {
 
     newCategory.save(function (error) {
         if (error) {
-            console.log(error);
             deferred.reject();
         } else {
             deferred.resolve();
@@ -128,11 +124,9 @@ exports.deleteById = function(id){
     var deferred = Q.defer();
     Category.findOne({_id: id}).remove().exec(function(err) {
         if (err) {
-            console.log(err);
             return deferred.reject(err);
         }
         else {
-            console.log('removed successfully');
             return deferred.resolve();
         }
     });

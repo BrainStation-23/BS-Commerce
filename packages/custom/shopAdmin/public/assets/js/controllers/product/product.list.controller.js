@@ -11,7 +11,6 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
 
         $http.get('/api/products/count')
             .success(function (data, status, headers, config) {
-                console.log('Total Product: ' + data);
                 $scope.totalItems = data;
                 //$scope.maxSize = Math.ceil($scope.totalItems/$scope.numberOfDisplay);
                 //console.log('max size: ' + $scope.maxSize);
@@ -25,7 +24,6 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
         $scope.getPage = function (pageNumber) {
             $http.get('/api/products?pageSize=' + $scope.numberOfDisplay + '&currentPage=' + pageNumber).
                 success(function (data, status, headers, config) {
-                    console.log(data);
                     $scope.products = [];
                     for (var i in data) {
                         var item = data[i];

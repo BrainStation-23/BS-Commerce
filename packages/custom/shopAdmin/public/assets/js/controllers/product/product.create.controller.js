@@ -12,7 +12,6 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
         $http.get('/api/categories')
             .success(function (data, status, headers, config) {
                 $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
-                //console.log(data);
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -37,7 +36,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
         $http.get('/api/brands')
             .success(function (data, status, headers, config) {
                 $scope.brands = []; //{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
-                console.log(data);
+                data = data.brands
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -73,9 +72,6 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
 
             $http.post('/api/products', {product: p})
                 .success(function (data, status, headers, config) {
-                    console.log('success');
-                    console.log(data);
-                    //$scope.product = data;
                     if (edit) {
                         $state.go('Product.Edit', {productId: data});
                     } else {
