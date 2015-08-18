@@ -11,42 +11,41 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
 
         categoryService.getCategories()
             .$promise
-            .then(function(data) {
+            .then(function(categories) {
                 $scope.categories = [];
-                for (var i in data) {
+                angular.forEach(categories, function(category) {
                     var item = {};
-                    item.id = data[i]._id;
+                    item.id = category._id;
                     item.parent = null;
-                    item.text = data[i].name;
+                    item.text = category.name;
                     $scope.categories.push(item);
-                    for (var j in data[i].subCategories) {
+                    angular.forEach(category.subCategories, function(subCategory) {
                         var subItem = {};
-                        subItem.id = data[i].subCategories[j]._id;
-                        subItem.parent = data[i]._id;
-                        subItem.text = data[i].subCategories[j].name;
+                        subItem.id = subCategory._id;
+                        subItem.parent = category._id;
+                        subItem.text = subCategory.name;
                         $scope.categories.push(subItem);
-                    }
-                }
+                    });
+                });
                 $scope.setUpPage();
             });
 
         brandService.searchBrand({})
             .$promise
-            .then(function(data) {
+            .then(function(response) {
                 $scope.brands = [];
-                data = data.brands;
-                for (var i in data) {
+                angular.forEach(response.brands, function(brand) {
                     var item = {};
-                    item.id = data[i]._id;
-                    item.text = data[i].info.name;
+                    item.id = brand._id;
+                    item.text = brand.info.name;
                     $scope.brands.push(item);
-                }
+                });
                 $scope.product.brands[0] = {};
                 $scope.product.brands[0].brandId = $scope.brands[0].id;
             });
 
         $scope.setUpPage = function () {
-            productService.getProductById($stateParams.productId)
+            productService.getProductById($stateParams.id)
                 .$promise
                 .then(function(data) {
                     $scope.product._id = data._id;

@@ -26,6 +26,7 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
                     $scope.products = [];
                     angular.forEach(products, function(product) {
                         var item = {};
+                        item._id =product._id;
                         if(product.photos.length) {
                             item.picture = product.photos[0];
                         }

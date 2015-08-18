@@ -15,7 +15,7 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 controller: 'productListController'
             })
             .state('Product.Edit', {
-                url: '/Edit/:productId',
+                url: '/Edit/:id',
                 params: {
                     catId: null
                 },
