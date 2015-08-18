@@ -9,11 +9,11 @@ angular.module('mean.shopAdmin').factory('productService', ['$resource',
                 });
                 return createProduct.create({product: product});
             },
-            getProduct: function(query) {
-                var getProduct = $resource('/api/products', {}, {
-                    'get': {method: 'GET'}
+            getProducts: function(query) {
+                var getProducts = $resource('/api/products', {}, {
+                    'get': {method: 'GET', isArray: true}
                 });
-                return getProduct.get(query);
+                return getProducts.get(query);
             },
             getProductById: function(id) {
                 var getProductById = $resource('/api/products/:id', {id: '@id'}, {
@@ -38,6 +38,12 @@ angular.module('mean.shopAdmin').factory('productService', ['$resource',
                     'delete': {method: 'DELETE'}
                 });
                 return deleteProductPhoto.delete({id: id});
+            },
+            getProductCount: function() {
+                var getProductCount = $resource('/api/products/count', {}, {
+                    'get': {method: 'GET'}
+                });
+                return getProductCount.get();
             }
         };
     }

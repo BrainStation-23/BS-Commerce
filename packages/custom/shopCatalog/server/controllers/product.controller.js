@@ -87,7 +87,7 @@ exports.delete = function(req,res){
 exports.getCount = function(req, res){
     service.getCount()
         .then(function(count){
-            return res.status(200).json(count);
+            return res.status(200).json({count: count});
         })
         .catch(function(error){
             return res.status(500).json([{msg: 'Unhandled Error!'}]);

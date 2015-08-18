@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http',
-    function ($scope, Global, $http) {
+angular.module('mean.shopAdmin').controller('productListController', ['$scope', 'Global', '$http', 'productService',
+    function ($scope, Global, $http, productService) {
 
         $scope.totalItems = 20;
         $scope.currentPage = 1;
@@ -9,38 +9,32 @@ angular.module('mean.shopAdmin').controller('productListController', ['$scope', 
         $scope.numberOfDisplay = 5;
         $scope.products = [];
 
-        $http.get('/api/products/count')
-            .success(function (data, status, headers, config) {
-                $scope.totalItems = data;
-                //$scope.maxSize = Math.ceil($scope.totalItems/$scope.numberOfDisplay);
-                //console.log('max size: ' + $scope.maxSize);
-                //$scope.maxSize = $scope.;
+        productService.getProductCount()
+            .$promise
+            .then(function(data) {
+                $scope.totalItems = data.count;
                 $scope.getPage(1);
-            })
-            .error(function (data, status, headers, config) {
-
             });
 
         $scope.getPage = function (pageNumber) {
-            $http.get('/api/products?pageSize=' + $scope.numberOfDisplay + '&currentPage=' + pageNumber).
-                success(function (data, status, headers, config) {
+            var searchQuery ={};
+            searchQuery.pageSize = $scope.numberOfDisplay;
+            searchQuery.currentPage = pageNumber;
+            productService.getProducts(searchQuery)
+                .$promise
+                .then(function(products) {
                     $scope.products = [];
-                    for (var i in data) {
-                        var item = data[i];
-                        if (data[i].photos.length > 0) {
-                            item.picture = data[i].photos[0];
+                    angular.forEach(products, function(product) {
+                        var item = {};
+                        if(product.photos.length) {
+                            item.picture = product.photos[0];
                         }
-                        item.name = data[i].info.name;
-                        item.sku = data[i].info.sku;
-                        item.price = parseInt(data[i].info.price);
-                        item.id = data[i]._id;
+                        item.name = product.info.name;
+                        item.sku = product.info.sku;
+                        item.price = parseInt(product.info.price);
+                        item.id = product._id;
                         $scope.products.push(item);
-                    }
-
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    });
                 });
         };
 
