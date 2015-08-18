@@ -1,17 +1,18 @@
 'use strict';
 //var apps = angular.module('mean.shopAdmin');
 
-angular.module('mean.shopAdmin').controller('productCreateController', ['$scope', 'Global', '$stateParams', '$http', 'Upload', '$state',
-    function ($scope, Global, $stateParams, $http, Upload, $state) {
+angular.module('mean.shopAdmin').controller('productCreateController', ['$scope', '$state', 'productService', 'brandService', 'categoryService',
+    function ($scope, $state, productService, brandService, categoryService) {
 
         $scope.product = {};
         $scope.product.name = 'test product name';
         $scope.product.categories = [];
         $scope.product.brands = [];
 
-        $http.get('/api/categories')
-            .success(function (data, status, headers, config) {
-                $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+        categoryService.getCategories()
+            .$promise
+            .then(function(data) {
+                $scope.categories = [];
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -30,13 +31,13 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                 $scope.product.categories[0].categoryId = $scope.categories[0].id;
                 $scope.product.categories[0].isFeatured = false;
                 $scope.product.categories[0].displayOrder = 0;
-
             });
 
-        $http.get('/api/brands')
-            .success(function (data, status, headers, config) {
-                $scope.brands = []; //{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
-                data = data.brands
+        brandService.searchBrand({})
+            .$promise
+            .then(function(response) {
+                $scope.brands = [];
+                var data = response.brands;
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -70,19 +71,15 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                 friendlyPageName: $scope.product.metaFriendlyPageName
             };
 
-            $http.post('/api/products', {product: p})
-                .success(function (data, status, headers, config) {
+            productService.createProduct(p)
+                .$promise
+                .then(function(response) {
                     if (edit) {
-                        $state.go('Product.Edit', {productId: data});
+                        $state.go('Product.Edit', {productId: response._id});
                     } else {
                         $state.go('Product.List');
                     }
-                })
-                .error(function (data, status, headers, config) {
-
                 });
-
-
         };
     }
 ]);

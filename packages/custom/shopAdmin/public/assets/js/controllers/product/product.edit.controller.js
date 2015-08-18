@@ -1,18 +1,18 @@
 'use strict';
 //var apps = angular.module('mean.shopAdmin');
 
-angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope', 'Global', '$stateParams', '$http', 'Upload', '$state',
-    function ($scope, Global, $stateParams, $http, Upload, $state) {
+angular.module('mean.shopAdmin').controller('productUpdateController',
+    ['$scope', '$stateParams', 'Upload', '$state', 'categoryService', 'brandService', 'productService', '$http',
+    function ($scope, $stateParams, Upload, $state, categoryService, brandService, productService, $http) {
         $scope.product = {};
-        $scope.product.id = $stateParams.productId;
         $scope.picture = {};
         $scope.product.categories = [];
         $scope.product.brands = [];
 
-
-        $http.get('/api/categories').
-            success(function (data, status, headers, config) {
-                $scope.categories = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+        categoryService.getCategories()
+            .$promise
+            .then(function(data) {
+                $scope.categories = [];
                 for (var i in data) {
                     var item = {};
                     item.id = data[i]._id;
@@ -27,16 +27,13 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                         $scope.categories.push(subItem);
                     }
                 }
-                //$scope.product.category = $scope.categories[0].id;
                 $scope.setUpPage();
-            })
-            .error(function (data, status, headers, config) {
-
             });
 
-        $http.get('/api/brands')
-            .success(function (data, status, headers, config) {
-                $scope.brands = [];//{'id': 'noparent', 'parent': null, 'text': 'No Parent'}];
+        brandService.searchBrand({})
+            .$promise
+            .then(function(data) {
+                $scope.brands = [];
                 data = data.brands;
                 for (var i in data) {
                     var item = {};
@@ -49,15 +46,10 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
             });
 
         $scope.setUpPage = function () {
-
-            $http.get('/api/products/' + $scope.product.id)
-                .success(function (data, status, headers, config) {
-
-
-                    // categories
-                    /*$scope.product.category = data.categories[0].categoryId;
-                    $scope.product.isFeatured = data.categories[0].isFeatured;
-                    $scope.product.displayOrder = data.categories[0].displayOrder;*/
+            productService.getProductById($stateParams.productId)
+                .$promise
+                .then(function(data) {
+                    $scope.product._id = data._id;
                     $scope.product.categories = data.categories;
                     $scope.product.brands = data.brands;
 
@@ -80,12 +72,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     $scope.product.metaTitle = data.meta.title;
 
                     $scope.product.photos = data.photos;
-
-                })
-                .error(function (data, status, headers, config) {
-
                 });
-
         };
 
         $scope.upload = function (selectedFile) {
@@ -102,8 +89,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                 //$scope.log = 'progress: ' + progressPercentage + '% ' +
                 //    evt.config.file.name + '\n' + $scope.log;
             }).success(function (data, status, headers, config) {
-                if (status === 500) {
-                } else if (status === 404) {
+                if (status === 404) {
                     window.location = '/admin/login';
                 } else if (status === 200) {
                     if ($scope.product.photos === undefined) {
@@ -125,12 +111,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
 
         $scope.update = function () {
             var p = {};
-            //p.categories = [];
-            /*p.categories[0] = {
-                categoryId: $scope.product.category,
-                isFeatured: false,
-                displayOrder: 0
-            };*/
+            p._id = $scope.product._id;
             p.brands = $scope.product.brands;
             p.categories = $scope.product.categories;
             p.tags = [];
@@ -152,55 +133,20 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
             };
             p.photos = $scope.product.photos;
 
-            $http.put('/api/products/'+$scope.product.id, {product: p})
-                .success(function (data, status, headers, config) {
-                    $scope.refreshProduct(data);
+            productService.updateProduct(p)
+                .$promise
+                .then(function(data) {
                     $state.go('Product.List');
-                })
-                .error(function (data, status, headers, config) {
-
                 });
         };
 
-        $scope.refreshProduct = function(data){
-            // categories
-            /*$scope.product.category = data.categories[0].categoryId;
-            $scope.product.isFeatured = data.categories[0].isFeatured;
-            $scope.product.displayOrder = data.categories[0].displayOrder;
-            */
-            $scope.product.categories = data.categories;
-            $scope.product.brands = data.brands;
-
-            // tags
-            $scope.product.tags = data.tags;
-
-            //infos
-            $scope.product.shortDescription = data.info.shortDescription;
-            $scope.product.fullDescription = data.info.fullDescription;
-            $scope.product.cost = data.info.cost;
-            $scope.product.price = data.info.price;
-            $scope.product.oldPrice = data.info.oldPrice;
-            $scope.product.publishDate = data.info.publishDate;
-            $scope.product.sku = data.info.sku;
-            $scope.product.name = data.info.name;
-
-            $scope.product.metaDescription = data.meta.description;
-            $scope.product.metaFriendlyPageName = data.meta.friendlyPageName;
-            $scope.product.metaKeywords = data.meta.keywords;
-            $scope.product.metaTitle = data.meta.title;
-
-            $scope.product.photos = data.photos;
-
-        };
-
         $scope.deleteImage = function(id){
-            $http.delete('/api/products/photos/'+id)
-                .success(function(data, status, headers, config){
+            productService.deleteProductPhoto(id)
+                .$promise
+                .then(function(promise) {
                     var index = $scope.product.photos.indexOf(id);
                     $scope.product.photos.splice(index, 1);
                     $scope.update();
-                })
-                .error(function(data, status, headers, config){
                 });
         };
 
@@ -209,8 +155,9 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
         };
 
         $scope.deleteImageAndProduct = function(id){
-            $http.delete('/api/products/photos/'+id)
-                .success(function(data, status, headers, config){
+            productService.deleteProductPhoto(id)
+                .$promise
+                .then(function(data) {
                     var index = $scope.product.photos.indexOf(id);
                     $scope.product.photos.splice(index, 1);
                     if($scope.product.photos.length === 0){
@@ -218,18 +165,14 @@ angular.module('mean.shopAdmin').controller('productUpdateController', ['$scope'
                     }else{
                         $scope.deleteImageAndProduct($scope.product.photos[0]);
                     }
-
-                })
-                .error(function(data, status, headers, config){
                 });
         };
 
         $scope.deleteProduct = function(){
-            $http.delete('/api/products/'+$scope.product.id )
-                .success(function(data, status, headers, config){
+            productService.deleteProduct($scope.product._id)
+                .$promise
+                .then(function(data) {
                     $state.go('Product.List');
-                })
-                .error(function(data, status, headers, config){
                 });
         };
     }
