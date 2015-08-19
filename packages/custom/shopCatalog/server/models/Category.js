@@ -47,6 +47,24 @@ var CategorySchema = new Schema({
     ancestors: {
         type: [CategorySchema],
         default: []
+    },
+    meta:{
+        keywords:{
+            type: [String],
+            default: []
+        },
+        description:{
+            type: String,
+            default: ''
+        },
+        title:{
+            type: String,
+            default: ''
+        },
+        SEFN:{
+            type: String,
+            default: ''
+        }
     }
 });
 
