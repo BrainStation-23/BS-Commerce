@@ -47,7 +47,7 @@ exports.getBySKU = function (req, res) {
 };
 
 exports.create = function (req, res) {
-    service.create(req.body.product)
+    service.create(req)
         .then(function (productId) {
             return res.status(200).json({_id: productId});
         })
