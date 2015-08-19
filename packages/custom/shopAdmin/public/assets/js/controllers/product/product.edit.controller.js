@@ -8,6 +8,7 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
         $scope.picture = {};
         $scope.product.categories = [];
         $scope.product.brands = [];
+        $scope.product.meta ={};
 
         categoryService.getCategories()
             .$promise
@@ -45,32 +46,13 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
             });
 
         $scope.setUpPage = function () {
+            if(!$stateParams.id) {
+                return;
+            }
             productService.getProductById($stateParams.id)
                 .$promise
-                .then(function(data) {
-                    $scope.product._id = data._id;
-                    $scope.product.categories = data.categories;
-                    $scope.product.brands = data.brands;
-
-                    // tags
-                    $scope.product.tags = data.tags;
-
-                    //infos
-                    $scope.product.shortDescription = data.info.shortDescription;
-                    $scope.product.fullDescription = data.info.fullDescription;
-                    $scope.product.cost = data.info.cost;
-                    $scope.product.price = data.info.price;
-                    $scope.product.oldPrice = data.info.oldPrice;
-                    $scope.product.publishDate = data.info.publishDate;
-                    $scope.product.sku = data.info.sku;
-                    $scope.product.name = data.info.name;
-
-                    $scope.product.metaDescription = data.meta.description;
-                    $scope.product.metaFriendlyPageName = data.meta.friendlyPageName;
-                    $scope.product.metaKeywords = data.meta.keywords;
-                    $scope.product.metaTitle = data.meta.title;
-
-                    $scope.product.photos = data.photos;
+                .then(function(product) {
+                    $scope.product = product;
                 });
         };
 
@@ -109,30 +91,10 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
         };
 
         $scope.update = function () {
-            var p = {};
-            p._id = $scope.product._id;
-            p.brands = $scope.product.brands;
-            p.categories = $scope.product.categories;
-            p.tags = [];
-            p.info = {
-                name: $scope.product.name,
-                shortDescription: $scope.product.shortDescription,
-                fullDescription: $scope.product.fullDescription,
-                sku: $scope.product.sku,
-                price: $scope.product.price,
-                oldPrice: $scope.product.oldPrice,
-                cost: $scope.product.cost,
-                publishDate:Date.now()
-            };
-            p.meta = {
-                keywords:$scope.product.metaKeywords,
-                title:$scope.product.metaTitle,
-                description:$scope.product.metaDescription,
-                friendlyPageName:$scope.product.metaFriendlyPageName
-            };
-            p.photos = $scope.product.photos;
-
-            productService.updateProduct(p)
+            if(typeof $scope.product.meta.keywords === 'string') {
+                $scope.product.meta.keywords = $scope.product.meta.keywords ? $scope.product.meta.keywords.split(',') : [];
+            }
+            productService.updateProduct($scope.product)
                 .$promise
                 .then(function(data) {
                     $state.go('Product.List');
