@@ -1,26 +1,28 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('categoryListController', ['$scope', 'Global', '$http',
-    function($scope, Global, $http) {
+angular.module('mean.shopAdmin').controller('categoryListController', ['$scope', 'categoryService',
+    function($scope, categoryService) {
         $scope.categories = [];
-        $http.get('/api/categories').
-            success(function(data, status, headers, config) {
+
+        categoryService.getCategories()
+            .$promise
+            .then(function(categories) {
                 $scope.categories = [];
-                for(var i in data){
-                    var item = data[i];
-                    item.displayOrder = parseInt(i)+1;
+                var i=0;
+                angular.forEach(categories, function(category) {
+                    var item = {};
+                    item._id = category._id;
+                    item.name = category.name;
+                    item.displayOrder = i+=1;
                     $scope.categories.push(item);
-                    for(var j in data[i].subCategories){
-                        var subItem = data[i].subCategories[j];
-                        subItem.displayOrder = parseInt(j)+1;
-                        subItem.name = data[i].name + ' >> ' + subItem.name;
+                    angular.forEach(category.subCategories, function(subCategory) {
+                        var subItem = {};
+                        subItem._id = subCategory._id;
+                        subItem.displayOrder = i+=1;
+                        subItem.name = category.name + ' >> ' + subCategory.name;
                         $scope.categories.push(subItem);
-                    }
-                }
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                    });
+                });
             });
     }
 ]);
