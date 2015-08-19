@@ -133,4 +133,15 @@ exports.deleteById = function(id){
     return deferred.promise;
 };
 
+exports.update = function(req){
+    var deferred = Q.defer();
+    Category.findByIdAndUpdate(req.body._id, req.body, function(error, category) {
+        if(error) {
+            return deferred.reject(error);
+        }
+        return deferred.resolve(category);
+    });
+    return deferred.promise;
+};
+
 
