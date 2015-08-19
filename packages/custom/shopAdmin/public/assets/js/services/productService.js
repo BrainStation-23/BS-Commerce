@@ -7,7 +7,7 @@ angular.module('mean.shopAdmin').factory('productService', ['$resource',
                 var createProduct = $resource('/api/products', {}, {
                     'create': {method: 'POST'}
                 });
-                return createProduct.create({product: product});
+                return createProduct.create(product);
             },
             getProducts: function(query) {
                 var getProducts = $resource('/api/products', {}, {
