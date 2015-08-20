@@ -48,6 +48,10 @@ var ProductSchema = new Schema({
             type: Number,
             default: 1
         },
+        isFeatured: {
+            type: Boolean,
+            default: false
+        },
         publishDate:{
             type:Date,
             default: new Date()

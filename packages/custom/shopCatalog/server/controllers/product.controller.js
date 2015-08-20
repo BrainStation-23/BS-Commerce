@@ -85,7 +85,7 @@ exports.delete = function(req,res){
 };
 
 exports.getCount = function(req, res){
-    service.getCount()
+    service.getCount({})
         .then(function(count){
             return res.status(200).json({count: count});
         })
@@ -105,13 +105,21 @@ var generateSearchQuery = function(req, callback) {
 };
 
 exports.getProductByCondition = function(req, res) {
+    var skipSize = req.query.numberOfSkip|| 0;
+    var limitSize = req.query.numberOfDisplay || 0;
     generateSearchQuery(req, function(searchQuery) {
-        service.getProductByCondition(searchQuery)
+        service.getProductByCondition(searchQuery, skipSize, limitSize)
             .then(function(products) {
-                return res.status(200).json(products);
+                service.getCount(searchQuery)
+                    .then(function(count){
+                        return res.status(200).json({products: products, totalProducts: count});
+                    })
+                    .catch(function(error){
+                        return res.status(500).json({msg: 'Unhandled Error!'});
+                    });
             })
             .catch(function (error) {
-                return res.status(500).json([{msg: 'Unhandled Error!'}]);
+                return res.status(500).json({msg: 'Unhandled Error!'});
             })
             .done();
     });

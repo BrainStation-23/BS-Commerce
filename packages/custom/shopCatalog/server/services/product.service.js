@@ -132,9 +132,9 @@ exports.delete = function(id){
     return deferred.promise;
 };
 
-exports.getCount = function(){
+exports.getCount = function(searchQuery){
     var deferred = Q.defer();
-    Product.find({}).count(function(error, count){
+    Product.find(searchQuery).count(function(error, count){
         if (error) {
             return deferred.reject(error);
         } else {
@@ -145,14 +145,15 @@ exports.getCount = function(){
     return deferred.promise;
 };
 
-exports.getProductByCondition = function(condition) {
+exports.getProductByCondition = function(searchQuery, skipSize, limitSize) {
     var deferred = Q.defer();
-    Product.find(condition, 'info brands', function(error, products){
-        if (error) {
-            return deferred.reject(error);
-        }
-        return deferred.resolve(products);
-    });
+    Product.find(searchQuery, 'info brands').skip(skipSize).limit(limitSize)
+        .exec(function(error, brands){
+            if(error){
+                return deferred.reject(error);
+            }
+            return deferred.resolve(brands);
+        });
 
     return deferred.promise;
 };
