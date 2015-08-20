@@ -45,9 +45,9 @@ angular.module('mean.shopAdmin').factory('productService', ['$resource',
                 });
                 return getProductCount.get();
             },
-            getProductsByCondition: function(query) {
+            getProductsByBrand: function(query) {
                 var getProducts = $resource('/api/productsByCondition', {}, {
-                    'get': {method: 'GET', isArray: true}
+                    'get': {method: 'GET'}
                 });
                 return getProducts.get(query);
             }
