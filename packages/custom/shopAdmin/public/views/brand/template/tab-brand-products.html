@@ -1,1 +1,38 @@
-<div>You need to save the category before you can add Products for this category page.</div>
+<div>
+    <div data-ng-if="!brandId">
+        You need to save the category before you can add Products for this category page.
+    </div>
+    <div data-ng-if="brandId">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" role="grid">
+                <thead class="tbl-header">
+                    <tr class="row">
+                        <th>Product</th>
+                        <th>Display order</th>
+                        <th style="width: 100px;">View</th>
+                        <th style="width: 165px;">Edit</th>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="product in products">
+                    <tr class="row" >
+                        <td data-ng-bind="product.info.name"></td>
+                        <td data-ng-bind="product.info.displayOrder"></td>
+                        <td><a ui-sref="Product.Edit({id: product._id})">View</a></td>
+                        <td>
+                            <div data-ng-show="!product.toEdit">
+                                <button type="button" class="btn btn-default" data-ng-click="showProductToEdit(product)">Edit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="deleteBrandFromProduct(product)">Delete</button>
+                            </div>
+                            <div data-ng-show="product.toEdit">
+                                <button type="button" class="btn btn-default" data-ng-click="updateProductInfo(product)">Update</button>
+                                <button type="button" class="btn btn-default" data-ng-click="product.toEdit=false">Cancel</button>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary">Add product</button>
+        </div>
+    </div>
+</div>
