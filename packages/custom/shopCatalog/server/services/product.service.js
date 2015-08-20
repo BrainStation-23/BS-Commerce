@@ -144,3 +144,15 @@ exports.getCount = function(){
 
     return deferred.promise;
 };
+
+exports.getProductByCondition = function(condition) {
+    var deferred = Q.defer();
+    Product.find(condition, 'info brands', function(error, products){
+        if (error) {
+            return deferred.reject(error);
+        }
+        return deferred.resolve(products);
+    });
+
+    return deferred.promise;
+};

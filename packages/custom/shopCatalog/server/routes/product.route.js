@@ -68,4 +68,7 @@ module.exports = function (shopCatalog, app, auth, database, shopCore) {
                 .done();
         });
 
+    app.route('/api/productsByCondition')
+        .get(controller.getProductByCondition);
+
 };

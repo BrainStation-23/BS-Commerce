@@ -94,3 +94,25 @@ exports.getCount = function(req, res){
         })
         .done();
 };
+
+var generateSearchQuery = function(req, callback) {
+    var searchQuery = {};
+    var brandId = req.query.brandId === undefined || req.query.brandId === '' ;
+    if(!brandId) {
+        searchQuery= {'brands.brandId' : req.query.brandId};
+    }
+    callback(searchQuery);
+};
+
+exports.getProductByCondition = function(req, res) {
+    generateSearchQuery(req, function(searchQuery) {
+        service.getProductByCondition(searchQuery)
+            .then(function(products) {
+                return res.status(200).json(products);
+            })
+            .catch(function (error) {
+                return res.status(500).json([{msg: 'Unhandled Error!'}]);
+            })
+            .done();
+    });
+};
