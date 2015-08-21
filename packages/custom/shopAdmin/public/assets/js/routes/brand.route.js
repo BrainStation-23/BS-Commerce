@@ -21,10 +21,16 @@ angular.module('mean.shopAdmin').config(['$meanStateProvider',
                 },
                 templateUrl: 'shopAdmin/views/brand/brand-edit.html',
                 controller: 'brandEditController'
-            }).state('Brand.Create', {
+            })
+            .state('Brand.Create', {
                 url: '/Create',
                 templateUrl: 'shopAdmin/views/brand/brand-create.html',
                 controller: 'brandCreateController'
+            })
+            .state('Brand.AddProduct', {
+                url: '/AddProduct/:brandId',
+                templateUrl: 'shopAdmin/views/brand/brand-add-product.html',
+                controller: 'brandProductAddController'
             });
 
     }
