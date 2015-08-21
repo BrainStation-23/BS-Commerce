@@ -51,7 +51,7 @@ angular.module('mean.shopAdmin').directive('tabBrandProducts', ['Global', '$http
                     scope.searchQuery.numberOfSkip =0;
                     scope.searchQuery.numberOfDisplay = scope.numberOfDisplay;
                     scope.searchQuery.brandId = scope.brandId;
-                    productService.getProductsByBrand(scope.searchQuery)
+                    productService.getProductsByCondition(scope.searchQuery)
                         .$promise.then(function(response) {
                             scope.products = response;
                             scope.products = response.products;
@@ -123,6 +123,13 @@ angular.module('mean.shopAdmin').directive('tabBrandProducts', ['Global', '$http
                         scope.changePagination(pageNo);
                     }
                     scope.currentPage = pageNo;
+                };
+
+                scope.addProduct = function() {
+                    var width = 1000, height=600;
+                    var left = (screen.width/2)-(width/2);
+                    var top = (screen.height/2)-(height/2);
+                    window.open('/admin#!/Brand/AddProduct/'+scope.brandId, 'addProductWindow', 'width='+width+', height='+height+', top='+top+', left='+left);
                 };
 
             }
