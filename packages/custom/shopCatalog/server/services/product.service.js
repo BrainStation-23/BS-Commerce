@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
     Category = mongoose.model('Category'),
     Product = mongoose.model('Product'),
     _ = require('lodash'),
+    async = require('async'),
     Q = require('q');
 
 exports.search = function(slug, orderBy, currentPage, pageSize){
@@ -155,5 +156,25 @@ exports.getProductByCondition = function(searchQuery, skipSize, limitSize) {
             return deferred.resolve(brands);
         });
 
+    return deferred.promise;
+};
+
+exports.updateProductsForBrand = function(req){
+    var deferred = Q.defer();
+    Product.find( { _id: { '$in': req.body.productIds }}, function(error, docs) {
+        if(error) {
+            return deferred.reject(error);
+        }
+        async.each(docs, function(doc, asyncCallback) {
+            doc.brands.addToSet(req.body.brandId);
+            doc.save();
+            asyncCallback();
+        }, function(error) {
+            if(error){
+                return deferred.reject(error);
+            }
+            return deferred.resolve(docs);
+        });
+    });
     return deferred.promise;
 };

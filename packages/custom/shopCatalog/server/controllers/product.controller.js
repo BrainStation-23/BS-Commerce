@@ -98,9 +98,19 @@ exports.getCount = function(req, res){
 var generateSearchQuery = function(req, callback) {
     var searchQuery = {};
     var brandId = req.query.brandId === undefined || req.query.brandId === '' ;
+    var categoryId = req.query.categoryId === undefined || req.query.categoryId === '' ;
+    var productName = req.query.name === undefined || req.query.name === '' ;
     if(!brandId) {
-        searchQuery= {'brands.brandId' : req.query.brandId};
+        searchQuery.brands = req.query.brandId;
     }
+    if(!categoryId) {
+        //searchQuery.categories= {$elemMatch: { categoryId: req.query.categoryId }};
+        searchQuery['categories.categoryId'] = req.query.categoryId;
+    }
+    if(!productName) {
+        searchQuery['info.name'] = new RegExp(req.query.name, 'i');
+    }
+    console.log(searchQuery);
     callback(searchQuery);
 };
 
@@ -123,4 +133,18 @@ exports.getProductByCondition = function(req, res) {
             })
             .done();
     });
+};
+
+exports.updateProductsForBrand = function (req, res) {
+    console.log(req.body);
+    service.updateProductsForBrand(req)
+        .then(function (product) {
+            return res.status(200).json({msg: 'Update success'});
+        })
+        .catch(function (error) {
+            console.log(error);
+
+            return res.status(500).json({msg: 'Unhandled Error!'});
+        })
+        .done();
 };

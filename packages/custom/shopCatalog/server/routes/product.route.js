@@ -71,4 +71,7 @@ module.exports = function (shopCatalog, app, auth, database, shopCore) {
     app.route('/api/productsByCondition')
         .get(controller.getProductByCondition);
 
+    app.route('/api/products/addBrandToProduct')
+        .put(controller.updateProductsForBrand);
+
 };

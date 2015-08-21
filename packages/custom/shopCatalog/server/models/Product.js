@@ -84,11 +84,10 @@ var ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'fs.files'
     }],
-    brands:[{
-        brandId:{
-            type: Schema.Types.ObjectId
-        }
-    }],
+    brands:{
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
     categories:[{
         categoryId:{
             type: Schema.Types.ObjectId,

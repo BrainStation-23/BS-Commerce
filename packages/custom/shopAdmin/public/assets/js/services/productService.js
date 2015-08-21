@@ -45,11 +45,17 @@ angular.module('mean.shopAdmin').factory('productService', ['$resource',
                 });
                 return getProductCount.get();
             },
-            getProductsByBrand: function(query) {
+            getProductsByCondition: function(query) {
                 var getProducts = $resource('/api/productsByCondition', {}, {
                     'get': {method: 'GET'}
                 });
                 return getProducts.get(query);
+            },
+            addBrandToProduct: function(brandId, productIds) {
+                var addBrandToProduct = $resource('/api/products/addBrandToProduct', {}, {
+                    'update': {method: 'PUT'}
+                });
+                return addBrandToProduct.update({brandId: brandId, productIds: productIds});
             }
         };
     }
