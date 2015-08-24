@@ -8,7 +8,7 @@
 
 <form class="form-horizontal bs-fa-color" data-ng-submit="defaultSearchOrders()">
     <div class="form-group">
-        <div class="col-md-3"><label for="startDate"><i class="fa fa-question-circle fa-fw"></i> Start date:</label></div>
+        <div class="col-md-3"><label for="startDate" title="The start date for the search"><i class="fa fa-question-circle fa-fw"></i> Start date:</label></div>
         <div class="col-md-4">
             <p class="input-group">
                 <input type="date" id="startDate" class="form-control" datepicker-popup data-ng-model="searchQuery.startDate" is-open="startDateOpened" datepicker-options="dateOptions" show-button-bar="false" />
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-3"><label for="endDate"><i class="fa fa-question-circle fa-fw"></i> End date:</label></div>
+        <div class="col-md-3"><label for="endDate" title="The end date forthe search"><i class="fa fa-question-circle fa-fw"></i> End date:</label></div>
         <div class="col-md-4">
             <p class="input-group">
                 <input type="date" id="endDate" class="form-control" datepicker-popup data-ng-model="searchQuery.endDate" is-open="endDateOpened" datepicker-options="dateOptions" show-button-bar="false"/>
