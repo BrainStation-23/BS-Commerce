@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').directive('tabBrandProducts', ['Global', '$http', '$stateParams', 'productService',
-    function (Global, $http, $stateParams, productService) {
+angular.module('mean.shopAdmin').directive('tabBrandProducts', ['$http', '$stateParams', '$state', 'productService',
+    function ($http, $stateParams, $state, productService) {
         return {
             restrict: 'AE',
             replace: true,
@@ -126,12 +126,12 @@ angular.module('mean.shopAdmin').directive('tabBrandProducts', ['Global', '$http
                 };
 
                 scope.addProduct = function() {
-                    var width = 1000, height=600;
-                    var left = (screen.width/2)-(width/2);
-                    var top = (screen.height/2)-(height/2);
-                    window.open('/admin#!/Brand/AddProduct/'+scope.brandId, 'addProductWindow', 'width='+width+', height='+height+', top='+top+', left='+left);
+                    $state.go('Brand.AddProduct', {brandId: $stateParams.brandId});
+                    //var width = 1000, height=600;
+                    //var left = (screen.width/2)-(width/2);
+                    //var top = (screen.height/2)-(height/2);
+                    //window.open('/admin#!/Brand/AddProduct/'+scope.brandId, 'addProductWindow', 'width='+width+', height='+height+', top='+top+', left='+left);
                 };
-
             }
         };
     }

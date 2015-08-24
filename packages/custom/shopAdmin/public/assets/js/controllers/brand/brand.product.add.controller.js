@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scope', '$stateParams', 'brandService', 'productService', 'categoryService',
-    function ($scope, $stateParams, brandService, productService, categoryService) {
+angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scope', '$stateParams', '$state', 'brandService', 'productService', 'categoryService',
+    function ($scope, $stateParams, $state, brandService, productService, categoryService) {
         $scope.numberOfDisplayOptions = [10, 15, 20, 50, 100];
         $scope.totalItems = 1;
         $scope.currentPage = 1;
@@ -10,6 +10,7 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
         $scope.products = [];
         $scope.displayProducts = [];
         $scope.searchQuery = {};
+        $scope.allChecked = false;
 
         categoryService.getCategories()
             .$promise
@@ -43,7 +44,7 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
 
 
         $scope.displayOptionChange = function() {
-            $scope.allProductChecked = false;
+
             var productsLength = $scope.products.length;
             if(productsLength > 0) {
                 $scope.currentPage = 1;
@@ -67,6 +68,11 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
                 else if(productsLength > $scope.numberOfDisplay) {
                     $scope.displayTo = $scope.numberOfDisplay;
                     $scope.displayProducts = $scope.products.slice(0, $scope.numberOfDisplay);
+                }
+                if($scope.displayProducts[0].checked) {
+                    $scope.allProductSelect = true;
+                } else{
+                    $scope.allProductSelect = false;
                 }
             }
         };
@@ -98,13 +104,18 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
         };
 
         $scope.changePagination = function (pageNo) {
-            $scope.allProductChecked = false;
             $scope.displayFrom = (pageNo - 1) * $scope.numberOfDisplay + 1;
             $scope.displayTo = $scope.displayFrom + $scope.numberOfDisplay - 1;
 
             if($scope.displayTo > $scope.products.length)
                 $scope.displayTo = $scope.displayFrom + ($scope.products.length - $scope.displayFrom);
             $scope.displayProducts = $scope.products.slice($scope.displayFrom-1, $scope.displayTo);
+
+            if($scope.displayProducts[0].checked) {
+                $scope.allProductSelect = true;
+            } else{
+                $scope.allProductSelect = false;
+            }
         };
 
         $scope.setPage = function (pageNo) {
@@ -121,7 +132,7 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
 
         var getEditableProductIds = function(callback) {
             var editableProductIds =[];
-            angular.forEach($scope.displayProducts, function(product) {
+            angular.forEach($scope.products, function(product) {
                 if(product.checked) {
                     editableProductIds.push(product._id);
                 }
@@ -131,15 +142,22 @@ angular.module('mean.shopAdmin').controller('brandProductAddController', ['$scop
 
         $scope.saveProductToBrand = function() {
             getEditableProductIds(function(editableProductIds) {
-                console.log(editableProductIds);
-                console.log($stateParams.brandId);
-
                 productService.addBrandToProduct($stateParams.brandId, editableProductIds)
                     .$promise
                     .then(function(response) {
-                        console.log(response);
-                        window.close();
+                        //window.close();
+                        $state.go('Brand.Edit', {brandId: $stateParams.brandId}, {reload: true});
                     });
+            });
+        };
+
+        $scope.cancel = function() {
+            $state.go('Brand.Edit', {brandId: $stateParams.brandId}, {reload: true});
+        };
+
+        $scope.isAllProductChecked = function() {
+            angular.forEach($scope.displayProducts, function(product) {
+                product.checked = $scope.allProductSelect;
             });
         };
     }
