@@ -44,8 +44,7 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
                     item.text = brand.info.name;
                     $scope.brands.push(item);
                 });
-                $scope.product.brands[0] = {};
-                $scope.product.brands[0].brandId = $scope.brands[0].id;
+                $scope.product.brands[0] = $scope.brands[0].id;
             });
 
 

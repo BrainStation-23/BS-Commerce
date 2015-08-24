@@ -12,9 +12,13 @@ angular.module('mean.shopAdmin').directive('dynamicMultipleBrands', ['Global', '
                 scope.placeholder = attrs.placeholder;
 
                 scope.addMoreBrand = function () {
-                    var newItemNo = scope.product.brands.length;
-                    scope.product.brands[newItemNo] = {};
-                    scope.product.brands[newItemNo].brandId = scope.brands[0].id;
+                    for(var i = 0; i< scope.brands.length; i++) {
+                        var index = scope.product.brands.indexOf(scope.brands[i].id);
+                        if(index === -1) {
+                            scope.product.brands.push(scope.brands[i].id);
+                            return;
+                        }
+                    }
                 };
 
                 scope.removeLastBrand = function () {
