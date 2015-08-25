@@ -10,19 +10,11 @@ angular.module('mean.shopCatalog').directive('shopBrandList', ['Global', 'ShopCa
                 $http.get('/api/brands')
                     .success(function (data, status, headers, config) {
                         //console.log(data);
-                        scope.brands = data;
+                        scope.brands = data.brands;
                     })
                     .error(function (data, status, headers, config) {
 
                     });
-
-                /*<li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                 <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                 <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                 <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                 <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                 <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                 <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>*/
             }
         };
     }
