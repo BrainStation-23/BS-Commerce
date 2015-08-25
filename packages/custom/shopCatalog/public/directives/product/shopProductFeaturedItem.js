@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCatalog').directive('shopProductFeaturedItem', ['Global', 'ShopCatalog', 'ShopProduct', 'cartService',
-    function(Global, ShopCatalog, ShopProduct, cartService) {
+angular.module('mean.shopCatalog').directive('shopProductFeaturedItem', ['$timeout', 'Global', 'ShopCatalog', 'ShopProduct', 'cartService',
+    function($timeout, Global, ShopCatalog, ShopProduct, cartService) {
         return{
             restrict: 'AE',
             replace: true,
@@ -38,6 +38,13 @@ angular.module('mean.shopCatalog').directive('shopProductFeaturedItem', ['Global
                 scope.getFeaturedProducts();
 
                 scope.toggleCartStatus = function(product, event){
+                    if(!Global.authenticated) {
+                        product.notAuthenticate = true;
+                        $timeout(function() {
+                            product.notAuthenticate = false;
+                        },1000);
+                        return;
+                    }
                     event.preventDefault();
                     product.addedToCart = !(product.addedToCart);
 
