@@ -1,23 +1,27 @@
 (function(){
 	'use strict';
 
-	angular.module('mean.shopOrder').controller('cartController', ['$scope', '$location', 'Global', 'cartService',
-		function($scope, $location, Global, cartService) {
+	angular.module('mean.shopOrder').controller('cartController', ['$scope', '$location', '$state', 'Global', 'cartService',
+		function($scope, $location, $state, Global, cartService) {
 	  		$scope.global = Global;
 	  		$scope.items = [];
 			$scope.shipping = 10;
 			$scope.tax = 0;
 
-	  		cartService.getCart()
-				.$promise
-				.then(function(cart){
-			  		if(cart.items.length > 0){
-						$scope.items = cart.items;
-				  	}
-				  	else {
-					  	$location.path('/cart/empty');
-				  	}
-				});
+			if(!$scope.global.authenticated) {
+				$state.go('auth.login');
+			} else {
+				cartService.getCart()
+					.$promise
+					.then(function(cart){
+						if(cart.items && cart.items.length > 0){
+							$scope.items = cart.items;
+						}
+						else {
+							$state.go('emptyCart');
+						}
+					});
+			}
 	  	$scope.increaseQuantity = function(item) {
 		  	item.quantity+= 1;
 		  	cartService.addToCart(item.product, item.quantity);

@@ -21,8 +21,8 @@
 				templateUrl: 'shopOrder/views/checkoutComplete.html'
 			});
 
-			$stateProvider.state('cart/empty', {
-				url: '/cart/empty',
+			$stateProvider.state('emptyCart', {
+				url: '/emptyCart',
 				templateUrl: 'shopOrder/views/emptyCart.html'
 			});
 
