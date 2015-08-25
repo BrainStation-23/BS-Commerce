@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
-	angular.module('mean.shopOrder').controller('checkoutController', ['$scope', '$location', 'Global', '$timeout', 'cartService','checkoutService',
-		function($scope, $location, Global, $timeout, cartService, checkoutService) {
+	angular.module('mean.shopOrder').controller('checkoutController', ['$scope', '$location', '$state', 'Global', '$timeout', 'cartService','checkoutService',
+		function($scope, $location, $state, Global, $timeout, cartService, checkoutService) {
 
 			$scope.cartEmpty = true;
 			$scope.oneAtATime = true;
@@ -18,23 +18,26 @@
 
 			$scope.activeStep = 1;
 
+			if(!Global.authenticated) {
+				$state.go('auth.login');
+			} else {
+				cartService.getCart()
+					.$promise
+					.then(function (cart) {
+						if (cart.items && cart.items.length > 0) {
+							$scope.cartEmpty = false;
+							$scope.items = cart.items;
+							$scope.cartId = cart._id;
+						}
+						else {
+							$state.go('emptyCart');
+						}
 
-			cartService.getCart()
-				.$promise
-				.then(function(cart){
-					if(cart.items.length > 0){
-						$scope.cartEmpty = false;
-						$scope.items = cart.items;
-						$scope.cartId = cart._id;
-					}
-					else {
-						$location.path('/cart/empty');
-					}
-
-				},
-				function(error) {
-					$location.path('/cart/empty');
-				});
+					},
+					function (error) {
+						$state.go('emptyCart');
+					});
+			}
 
 			$scope.initializeAddress = function() {
 				cartService.getCart();
