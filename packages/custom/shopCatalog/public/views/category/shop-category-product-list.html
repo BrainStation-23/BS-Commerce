@@ -40,7 +40,7 @@
           <div class="single-products">
             <div class="productinfo text-center">
               <a data-ui-sref="products-details({sku:product.info.sku})">
-                <img data-ng-if="product.photos.length > 0" data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="{{product.info.name}}">
+                <img class="img-responsive" data-ng-if="product.photos.length > 0" data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="{{product.info.name}}">
               </a>
               <h2>{{product.info.price | currency}}</h2>
               <a data-ui-sref="products-details({sku:product.info.sku})"><p>{{product.info.name}}</p></a>

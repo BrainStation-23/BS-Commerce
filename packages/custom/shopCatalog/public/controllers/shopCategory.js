@@ -41,7 +41,7 @@ angular.module('mean.shopCatalog').controller('ShopCategoryController', ['$scope
     };
 
     var updateProducts = function(){
-      ShopProduct.query({
+      ShopProduct.update().query({
         slug:slug,
         orderBy: $scope.state.orderBy.value,
         pageSize: $scope.state.pageSize,
