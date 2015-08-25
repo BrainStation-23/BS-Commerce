@@ -74,4 +74,8 @@ module.exports = function (shopCatalog, app, auth, database, shopCore) {
     app.route('/api/products/addBrandToProduct')
         .put(controller.updateProductsForBrand);
 
+    app.route('/api/products/brand/:brandId')
+        .get(controller.getProductsByBrand);
+
+
 };

@@ -144,8 +144,22 @@ exports.updateProductsForBrand = function (req, res) {
             return res.status(200).json({msg: 'Update success'});
         })
         .catch(function (error) {
-            console.log(error);
+            return res.status(500).json({msg: 'Unhandled Error!'});
+        })
+        .done();
+};
 
+exports.getProductsByBrand = function (req, res) {
+    console.log(req.params.brandId);
+    var searchQuery = {};
+    searchQuery.brands = req.params.brandId;
+    var skipSize =0;
+    var limitSize =0;
+    service.getProductByCondition(searchQuery, skipSize,limitSize)
+        .then(function (products) {
+            return res.status(200).json({products: products});
+        })
+        .catch(function (error) {
             return res.status(500).json({msg: 'Unhandled Error!'});
         })
         .done();
