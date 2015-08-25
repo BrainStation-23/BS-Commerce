@@ -148,7 +148,7 @@ exports.getCount = function(searchQuery){
 
 exports.getProductByCondition = function(searchQuery, skipSize, limitSize) {
     var deferred = Q.defer();
-    Product.find(searchQuery, 'info brands').skip(skipSize).limit(limitSize)
+    Product.find(searchQuery, 'info brands photos').skip(skipSize).limit(limitSize)
         .exec(function(error, brands){
             if(error){
                 return deferred.reject(error);

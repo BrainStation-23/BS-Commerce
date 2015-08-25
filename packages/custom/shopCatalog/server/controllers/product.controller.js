@@ -100,6 +100,7 @@ var generateSearchQuery = function(req, callback) {
     var brandId = req.query.brandId === undefined || req.query.brandId === '' ;
     var categoryId = req.query.categoryId === undefined || req.query.categoryId === '' ;
     var productName = req.query.name === undefined || req.query.name === '' ;
+    var isFeatured = req.query.isFeatured === undefined || req.query.isFeatured === '';
     if(!brandId) {
         searchQuery.brands = req.query.brandId;
     }
@@ -110,7 +111,9 @@ var generateSearchQuery = function(req, callback) {
     if(!productName) {
         searchQuery['info.name'] = new RegExp(req.query.name, 'i');
     }
-    console.log(searchQuery);
+    if(!isFeatured) {
+        searchQuery['info.isFeatured'] = true;
+    }
     callback(searchQuery);
 };
 
@@ -136,7 +139,6 @@ exports.getProductByCondition = function(req, res) {
 };
 
 exports.updateProductsForBrand = function (req, res) {
-    console.log(req.body);
     service.updateProductsForBrand(req)
         .then(function (product) {
             return res.status(200).json({msg: 'Update success'});
