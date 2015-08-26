@@ -17,6 +17,7 @@ angular.module('mean.shopAdmin').directive('tabBrandProducts', ['$http', '$state
                 scope.currentPage = 1;
                 scope.displayProducts = [];
                 scope.searchQuery = {};
+                scope.editButtonActive = false;
 
 
                 scope.displayOptionChange = function() {
@@ -88,20 +89,20 @@ angular.module('mean.shopAdmin').directive('tabBrandProducts', ['$http', '$state
 
                 scope.showProductToEdit = function(product) {
                     scope.editableProduct = {};
+                    scope.editButtonActive = true;
                     product.toEdit=true;
                     angular.copy(product, scope.editableProduct);
                 };
 
                 scope.updateProductInfo = function(product) {
-                    if(confirm('Are you sure want to update this product information ?')) {
-                        var index = scope.products.indexOf(product);
-                        productService.updateProduct(scope.editableProduct)
-                            .$promise
-                            .then(function(response) {
-                                scope.products[index] = scope.editableProduct;
-                                scope.products[index].toEdit = false;
-                            });
-                    }
+                    var index = scope.products.indexOf(product);
+                    productService.updateProduct(scope.editableProduct)
+                        .$promise
+                        .then(function(response) {
+                            scope.products[index] = scope.editableProduct;
+                            scope.products[index].toEdit = false;
+                            scope.editButtonActive = false;
+                        });
                 };
 
                 scope.changePagination = function (pageNo) {

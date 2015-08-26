@@ -31,7 +31,7 @@
                         <td class="text-center"><a ui-sref="Product.Edit({id: product._id})">View</a></td>
                         <td class="text-center">
                             <div data-ng-show="!product.toEdit">
-                                <button type="button" class="btn btn-default" data-ng-click="showProductToEdit(product)">Edit</button>
+                                <button type="button" data-ng-disabled="editButtonActive" class="btn btn-default" data-ng-click="showProductToEdit(product)">Edit</button>
                                 <button type="button" class="btn btn-default" data-ng-click="deleteBrandFromProduct(product)">Delete</button>
                             </div>
                             <div data-ng-show="product.toEdit">
