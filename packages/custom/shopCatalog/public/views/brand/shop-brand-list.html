@@ -1,0 +1,15 @@
+<div>
+    <div class="brands_products">
+        <h2>Brands</h2>
+
+        <div class="brands-name">
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-repeat="brand in brands">
+                    <a ui-sref="products-in-brands({id:brand._id})">
+                        <span class="pull-right"></span>{{brand.info.name}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+.checkout-step-number {
+  background-color: #FE980F; /* #248ece;*/
+  width: 42px;
+  border-right: 1px solid #fff;
+  text-align: center;
+  float: left;
+  min-height: 40px;
+  padding: 10px 15px;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: normal;
+  margin: -10px 10px 0 -15px;
+}
+.shipping-method {
+  padding: 10px;
+  background-color: #f6f6f6
+}
+.payment-method {
+  padding: 10px;
+  background-color: #f6f6f6
+}
+.left-margin {
+  margin-left: 5px;
+}
+.checkout-page-thead {
+  font-size: 16px;
+  font-weight: bold;
+}
+.step-disable {
+  pointer-events: none;
+  cursor: default;
+}
+.step-enable {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.enable-step-bg-color {
+  background-color: #FE980F !important;
+  padding: 13px 15px !important;
+}
+.disable-step-bg-color {
+  background-color: #FAF2E7 !important;
+}
+.tab-open {
+  display: block;
+  height: auto;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+.tab-collapsed {
+  -webkit-transition: opacity .5s ease-out;
+  transition: opacity .5s ease-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.panel-body {
+  padding-left: 40px !important;
+}

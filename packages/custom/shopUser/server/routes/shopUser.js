@@ -31,4 +31,26 @@ module.exports = function(ShopUser, app, auth, database, passport) {
 
   app.route('/auth/profile')
     .put(shopUser.updateProfile);
+
+  app.route('/auth/user/:userId')
+      .get(shopUser.getUserById);
+
+  app.route('/auth/search/user')
+      .get(shopUser.searchUser);
+
+  app.route('/auth/user/changePassword')
+      .put(shopUser.changeUserPassword);
+
+  app.route('/auth/user/update')
+      .put(shopUser.updateUserInfo);
+
+  app.route('/auth/user/delete')
+      .delete(shopUser.removeUserById);
+
+  app.route('/auth/user/create')
+      .post(shopUser.createUser);
+
+    app.route('/auth/users/statistics')
+        .get(shopUser.getUserStatistics);
+
 };

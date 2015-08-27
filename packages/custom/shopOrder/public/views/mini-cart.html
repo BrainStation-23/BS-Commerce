@@ -1,0 +1,28 @@
+<div class="mini-cart-container">
+  <div class="row">
+    <div class="pull-right mini-cart-header-text">There are total {{items.length}} item(s) in your cart</div>
+  </div>
+  <div class="row" data-ng-repeat="item in items">
+    <div>
+      <div class="col-sm-4">
+        <a data-ui-sref="products-details({sku:item.product.info.sku})">
+          <img class="mini-cart-image" data-ng-if="item.product.photos.length > 0" data-ng-src="/api/products/photos/{{item.product.photos[0]}}"/>
+        </a>
+      </div>
+      <div class="col-sm-8">
+        <a data-ui-sref="products-details({sku:item.product.info.sku})">
+          <div>{{item.product.info.name}}</div>
+        </a>
+        <div class="mini-cart-item-text">Unit Price: {{item.product.info.price | currency}}</div>
+        <div class="mini-cart-item-text">Quantity : {{item.quantity}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mini-cart-footer">
+    <div class="mini-cart-footer-text pull-left">
+      sub total: {{subTotal}}
+    </div>
+    <a class="pull-right" data-ui-sref="cart">Go TO CART</a>
+  </div>
+</div>

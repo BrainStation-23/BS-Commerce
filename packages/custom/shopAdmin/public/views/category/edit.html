@@ -1,7 +1,8 @@
-<div ng-controller="categoryEditController">
+<div>
     <h1> {{catId}} </h1>
     <div class="admin-title"><h3>Edit Category Details <a ui-sref="Category.List">(back to Category list)</a></h3>
-        <button type="button" class="btn btn-danger" ng-click="delete();"> Delete </button> <button class="btn btn-info" type="button" ng-click="update();">Save All</button>
+        <button type="button" class="btn btn-danger" ng-click="delete();"> Delete </button>
+        <button class="btn btn-info" type="button" data-ng-click="update();">Save All</button>
     </div>
 
     <tabset>
@@ -11,8 +12,8 @@
         <tab heading="SEO">
             <tab-category-seo></tab-category-seo>
         </tab>
-        <tab heading="Products">
-            <tab-category-products></tab-category-products>
+        <tab heading="Pictures">
+            <tab-category-pictures></tab-category-pictures>
         </tab>
         <tab heading="Discounts">
             <tab-category-discounts></tab-category-discounts>

@@ -5,7 +5,7 @@ angular.module('mean.shopAdmin').directive('questionMark', ['Global', '$http', '
     function (Global, $http, $state) {
         return {
             replace: true,
-            template: '<span class="glyphicon glyphicon-question-sign"></span>',
+            template: '<span class="bs-fa-color"><i class="fa fa-question-circle fa-fw"></i></span> ',
             link: function (scope, element, attrs) {
 
 

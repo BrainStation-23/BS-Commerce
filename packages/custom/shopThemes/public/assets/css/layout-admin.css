@@ -8,18 +8,18 @@ body {
   background-color: #f8f8f8 !important;
 }
 
-#wrapper {
+.admin-wrapper {
   width: 100%;
 }
 
-#page-wrapper {
+.admin-page-wrapper {
   padding: 0 15px;
   min-height: 568px;
   background-color: #fff;
 }
 
 @media(min-width:768px) {
-  #page-wrapper {
+  .admin-page-wrapper {
     position: inherit;
     margin: 0 0 0 250px;
     padding: 0 30px;
@@ -253,6 +253,7 @@ table.dataTable thead .sorting:after {
   content: "\f0dc";
   float: right;
   font-family: fontawesome;
+  color: #505050;
   color: rgba(50,50,50,.5);
 }
 

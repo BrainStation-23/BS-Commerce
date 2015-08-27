@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="/admin#!/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-edit fa-fw"></i> Catalog<span class="fa arrow"></span></a>
@@ -29,36 +29,56 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit fa-fw"></i> Brands<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a ui-sref="Brand.List"><i class="fa fa-table fa-fw"></i> List View</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit fa-fw"></i> Products<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a ui-sref="Product.List"><i class="fa fa-table fa-fw"></i> List View</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>
-                <a href="/admin/sales"><i class="fa fa-comments fa-fw"></i> Sales</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-list fa-fw"></i> Customers<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a data-ui-sref="Customer.List"><i class="fa fa-user-md fa-fw"></i> Customers</a>
+                        <a data-ui-sref="User.List"><i class="fa fa-user-md fa-fw"></i> Users</a>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-list fa-fw"></i> Orders<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
                     <li>
-                        <a ui-sref="#"><i class="fa fa fa-user-md fa-fw"></i> Customer Roles</a>
+                        <a data-ui-sref="Order.List"><i class="fa fa-list fa-fw"></i> Orders</a>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-car fa-fw"></i> Shipments<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
                     <li>
-                        <a ui-sref="#"><i class="fa fa-user-md  fa-fw"></i> Online Customers</a>
-                    </li>
-                    <li>
-                        <a ui-sref="#"><i class="fa fa-user-md  fa-fw"></i> Customer Reports</a>
-                    </li>
-                    <li>
-                        <a ui-sref="#"><i class="fa fa-user-md  fa-fw"></i> Vendors</a>
+                        <a data-ui-sref="Order.Shipment.List"><i class="fa fa-car fa-fw"></i> Shipments</a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-cog fa-fw"></i> Settings<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <!--<li>-->
+                        <!--<a data-ui-sref="Settings.Store"><i class="fa fa-user-md fa-fw"></i> Store</a>-->
+                    <!--</li>-->
                     <li>
-                        <a href="flot.html">Analytics</a>
+                        <a data-ui-sref="Settings.Email.List"><i class="fa fa-envelope fa-fw"></i> Email Account</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

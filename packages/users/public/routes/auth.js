@@ -33,6 +33,7 @@ angular.module('mean.users').config(['$meanStateProvider',
       .state('auth.login', {
         url: '/login',
         templateUrl: 'users/views/login.html',
+        controller: 'ShopUserLoginController',
         resolve: {
           loggedin: checkLoggedOut
         }

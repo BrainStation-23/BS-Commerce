@@ -1,0 +1,3 @@
+.add-product-alert {
+    position: absolute; z-index: 1000;top:50%;left:25%;
+}

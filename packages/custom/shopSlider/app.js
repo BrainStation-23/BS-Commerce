@@ -17,6 +17,7 @@ ShopSlider.register(function(app, auth, database) {
   ShopSlider.routes(app, auth, database);
 
   ShopSlider.aggregateAsset('css', 'shopSlider.css');
+  ShopSlider.angularDependencies(['ngAnimate']);
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

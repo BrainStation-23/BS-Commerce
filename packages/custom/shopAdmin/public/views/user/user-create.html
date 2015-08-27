@@ -1,0 +1,206 @@
+<div class="bs-fa-color row">
+    <div class="row">
+        <div class="col-md-6">
+            <span><i class="fa fa-user-md"></i> <strong> Add A New User </strong></span>
+            <span>(<a data-ui-sref="User.List">back to customer list</a>)</span>
+        </div>
+
+        <div class="col-md-6 pull-right text-right">
+            <button class="btn btn-default" data-ng-disabled="userForm.$invalid" data-ng-click="createNewUser()">Save</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4 alert-success text-center" data-ng-show="createSuccessMsg"><label>{{createSuccessMsg}}</label></div>
+        <div class="col-md-offset-4 col-md-4 alert-danger text-center" data-ng-show="createErrorMsg"><label>{{createErrorMsg}}</label></div>
+        <div class="col-md-offset-4 col-md-4 alert-danger text-center" data-ng-show="requiredErrorMsg"><label>You should fill all required fields.</label></div>
+    </div>
+    <div class="row" style="border: 2px solid #C5C5C5;">
+        <tabset>
+            <tab heading="User Info">
+                <div class="col-md-12">
+                    <form class="form-horizontal" name="userForm" novalidate style="padding-top: 10px;">
+                        <div class="form-group">
+                            <div class="col-md-3"><label class="required-label" for="emailInput"><i class="fa fa-question-circle fa-fw"></i> Email</label></div>
+                            <div class="col-md-4">
+                                <input id="emailInput" placeholder="email address" class="form-control" oninvalid="setCustomValidity('Please enter a valid email address!')"
+                                       onchange="try{setCustomValidity('')}catch(e){}" type="email" data-ng-model="user.email" required>
+                            </div>
+                        </div>
+                        <div class="form-group"> <!--ng-class="{ 'has-error' : userForm.phoneNumber.$invalid && !userForm.phoneNumber.$pristine}" -->
+                            <div class="col-md-3"><label class="required-label" for="phoneNumber"><i class="fa fa-question-circle fa-fw"></i> Phone Number</label></div>
+                            <div class="col-md-4">
+                                <input id="phoneNumber" name="phoneNumber" placeholder="phone number" class="form-control"  type="text"  ng-model="user.phoneNumber" required>
+                            </div>
+                            <!--<p ng-show="userForm.phoneNumber.$invalid && !userForm.phoneNumber.$pristine" class="help-block">Phone number is required.</p>-->
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"><label class="required-label" for="password"><i class="fa fa-question-circle fa-fw"></i> Password</label></div>
+                            <div class="col-md-4">
+                                <input id="password" placeholder="Minimum of 6 characters" class="form-control" data-minlength="6" type="password" data-ng-model="user.password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"><label class="required-label" for="fullName"><i class="fa fa-question-circle fa-fw"></i> Full name</label></div>
+                            <div class="col-md-4">
+                                <input id="fullName" placeholder="full name" class="form-control" type="text"  data-ng-model="user.name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"><label class="required-label" for="male"><i class="fa fa-question-circle fa-fw"></i> Gender</label></div>
+                            <div class="col-md-4">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="male" data-ng-model="user.gender" value="male"> Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="female" data-ng-model="user.gender" value="female"> Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"><label for="active"><i class="fa fa-question-circle fa-fw"></i> Active</label></div>
+                            <div class="col-md-4">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="active" data-ng-model="user.active" value="active">
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+            <tab heading="User Roles">
+                <div class="col-md-2"  style="padding-top: 34px;"><label><i class="fa fa-question-circle fa-fw"></i> Roles</label></div>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="admin" data-ng-model="roleAdmin" data-ng-change="updateRoles('admin')"> Admin
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="registered" data-ng-model="roleRegistered" ng-change="updateRoles('registered')"> Registered
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="authenticated" data-ng-model="roleAuthenticated" ng-change="updateRoles('authenticated')"> Authenticated
+                        </label>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Addresses">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" role="grid">
+                        <thead class="tbl-header">
+                        <tr class="row">
+                            <th class="col-md-3">Address Line 1</th>
+                            <th class="col-md-3">Address Line 2</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Post code</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="row" data-ng-repeat="address in user.addresses">
+                            <td class="col-md-3" data-ng-bind="address.addressLine1"></td>
+                            <td class="col-md-3" data-ng-bind="address.addressLine2"></td>
+                            <td data-ng-bind="address.city"></td>
+                            <td data-ng-bind="address.country"></td>
+                            <td data-ng-bind="address.postCode"></td>
+                            <td class="text-center"><button class="btn btn-default" data-ng-disabled="addressTableBtnsDisable" data-ng-click="showEditAddressForm(true, $index)"><i class="fa fa-edit"></i></button></td>
+                            <td class="text-center"><button class="btn btn-default" data-ng-disabled="addressTableBtnsDisable" data-ng-click="deleteAddress($index)"><i class="fa fa-remove"></i></button></td>
+                        </tr>
+                        <tr class="row" >
+                            <td colspan="7" class="tbl-footer"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-default" data-ng-click="showAddressForm(true)" data-ng-disabled="addressTableBtnsDisable" style="margin-left: 15px;">Add New Address</button>
+                    <hr>
+                    <div class="col-md-12" data-ng-show="activeAddNewAddress">
+                        <form class="form-horizontal" data-ng-submit="addNewAddress()">
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="addressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
+                                <div class="col-md-4">
+                                    <input id="addressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="newAddress.addressLine1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="addressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
+                                <div class="col-md-4">
+                                    <input id="addressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="newAddress.addressLine2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="city"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
+                                <div class="col-md-4">
+                                    <input id="city" placeholder="city" class="form-control" type="text"  data-ng-model="newAddress.city">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="country"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
+                                <div class="col-md-4">
+                                    <input id="country" placeholder="country" class="form-control" type="text"  data-ng-model="newAddress.country">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="postCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
+                                <div class="col-md-4">
+                                    <input id="postCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="newAddress.postCode">
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Save New Address">
+                            <button class="btn btn-default" data-ng-click="showAddressForm(false)">Cancel</button>
+                            <hr>
+                        </form>
+                    </div>
+                    <div class="col-md-12" data-ng-show="activeEditAddress">
+                        <form class="form-horizontal" data-ng-submit="updateAddress(editAddress.index)">
+                            <div class="form-group">
+                                <div class="col-md-3"><label><i class="fa fa-question-circle fa-fw"></i> Index</label></div>
+                                <div class="col-md-4">
+                                    <div class="like-readonly-text-box">{{editAddress.index}}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="editAddressLine1"><i class="fa fa-question-circle fa-fw"></i> Address line 1</label></div>
+                                <div class="col-md-4">
+                                    <input id="editAddressLine1" placeholder="address line 1" class="form-control" type="text"  data-ng-model="editAddress.addressLine1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="editAddressLine2"><i class="fa fa-question-circle fa-fw"></i> Address line 2</label></div>
+                                <div class="col-md-4">
+                                    <input id="editAddressLine2" placeholder="address line 2" class="form-control" type="text"  data-ng-model="editAddress.addressLine2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="editCity"><i class="fa fa-question-circle fa-fw"></i> City</label></div>
+                                <div class="col-md-4">
+                                    <input id="editCity" placeholder="city" class="form-control" type="text"  data-ng-model="editAddress.city">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="editCountry"><i class="fa fa-question-circle fa-fw"></i> Country</label></div>
+                                <div class="col-md-4">
+                                    <input id="editCountry" placeholder="country" class="form-control" type="text"  data-ng-model="editAddress.country">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3"><label for="editPostCode"><i class="fa fa-question-circle fa-fw"></i> Post Code</label></div>
+                                <div class="col-md-4">
+                                    <input id="editPostCode" placeholder="post Code" class="form-control" type="text"  data-ng-model="editAddress.postCode">
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Update Address">
+                            <button class="btn btn-default" data-ng-click="showEditAddressForm(false)">Cancel</button>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -29,7 +29,7 @@ angular.module('mean.shopAdmin').config(['$viewPathProvider', '$meanStateProvide
 ]).run(['$rootScope', '$state', 'Global', function ($rootScope, $state, Global) {
     $rootScope.$on('$stateChangeStart',
         function (event, toState, toParams, fromState, fromParams) {
-            if (!Global.authenticated && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.logout') {
+            if (!Global.isAdmin && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.logout') {
                 event.preventDefault();
                 $state.go('auth.login');
             }

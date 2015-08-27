@@ -17,7 +17,7 @@ ShopWeb.register(function (app, auth, database) {
     ShopWeb.routes(app, auth, database);
 
     ShopWeb.aggregateAsset('css', 'shopWeb.css');
-    ShopWeb.angularDependencies(['mean.system', 'mean.shopCategory', 'mean.shopSlider', 'mean.shopProduct']);
+    ShopWeb.angularDependencies(['mean.system', 'mean.shopCatalog', 'mean.shopSlider']);
 
     return ShopWeb;
 });

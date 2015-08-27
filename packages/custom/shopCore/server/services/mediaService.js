@@ -10,6 +10,7 @@ var gfs = new Grid(mongoose.connection.db);
 exports.create = function(file){
   var deferred = Q.defer();
 
+  console.log(file);
   var writeStream = gfs.createWriteStream({
     filename: file.name,
     mode: 'w',
@@ -32,11 +33,28 @@ exports.create = function(file){
 };
 
 exports.get = function(fileId){
-  var stream = gfs.createReadStream({
-    _id: fileId
-  });
+  // WITH RETURNING PROMISE
+  var deferred = Q.defer();
+  gfs.findOne({ _id: fileId}, function (error, file) {
+    if(!file){
+      deferred.reject(error);
+    }else{
+      var stream = gfs.createReadStream({
+        _id: fileId
+      });
+      return deferred.resolve(stream);
+    }
 
-  return stream;
+  });
+  return deferred.promise;
+
+  // WITHOUT RETURNING PROMISE
+
+  /*var stream = gfs.createReadStream({
+    _id: fileId
+  });*/
+
+  //return stream;
 };
 
 exports.delete = function(fileId){

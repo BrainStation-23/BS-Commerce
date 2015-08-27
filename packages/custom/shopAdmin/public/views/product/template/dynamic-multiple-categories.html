@@ -1,0 +1,19 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-12">
+            <button class="btn btn-default" ng-click="addMoreCategory()">Add More Category</button>
+            <button class="btn btn-default" ng-click="removeLastCategory()">Remove Last Category</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div data-ng-repeat="item in product.categories" class="col-md-2">
+            <select class="col-md-12" data-ng-model="item.categoryId"
+                    ng-options="itemCat.id as itemCat.text for itemCat in categories"></select>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-click="showData()">show choices</button>
+        </div>
+    </div>-->
+</form>

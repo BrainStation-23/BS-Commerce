@@ -3,6 +3,7 @@
         <h3 class="panel-title">Sign In</h3>
     </div>
     <div class="panel-body">
+        <div class="alert alert-danger text-center" data-ng-show="loginerror"><label>{{loginerror}}</label></div>
         <form name="form" role="form" data-ng-submit="login()">
             <fieldset>
                 <div class="form-group">
@@ -20,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-xs-3">
-                        <a class="pull-right" data-ui-sref="auth.register" data-ng-click="register($event)">Register</a>
+                        <a class="pull-right" href="/#!/auth/register">Register</a>
                     </div>
                     <div class="col-xs-3">
                         <button class="btn btn-success btn-block" data-ng-disabled="!form.$valid">Login</button>

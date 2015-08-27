@@ -1,0 +1,31 @@
+<div class="">
+    <h4>Order totals</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" role="grid">
+            <thead class="tbl-header">
+                <tr class="row">
+                    <th>Order status</th>
+                    <th>Today</th>
+                    <th>This week</th>
+                    <th>This month</th>
+                    <th>This Year</th>
+                    <th>All times</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row" data-ng-repeat="orderInfo in ordersInfo">
+                    <td data-ng-bind="orderInfo._id"></td>
+                    <td data-ng-bind="orderInfo.todayTotal | currency"></td>
+                    <td data-ng-bind="orderInfo.weekTotal | currency"></td>
+                    <td data-ng-bind="orderInfo.monthTotal | currency"></td>
+                    <td data-ng-bind="orderInfo.yearTotal | currency"></td>
+                    <td data-ng-bind="orderInfo.allTimeTotal | currency"></td>
+                </tr>
+                <tr class="row" >
+                    <td colspan="5" class="tbl-header"></td>
+                    <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click="getOrdersStatistics()"><i class="fa fa-refresh"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

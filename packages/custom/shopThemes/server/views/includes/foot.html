@@ -1,14 +1,14 @@
 {% for file in aggregatedassets.footer.js %}
 <script type="text/javascript" src="{{file}}"></script>
 {% endfor %}
-<!--textAngular-->
-<script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
-<script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
+
+<!--tinymce-->
+<script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
 
 <!--angular file upload-->
 <script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
 
 {% if (process.env.NODE_ENV == 'development') %}
 <!-- Livereload script rendered -->

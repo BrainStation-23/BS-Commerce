@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.shopUser').directive('shopUserProfile', ['$rootScope', '$http', '$state', '$timeout', '$q', 'Global', 'ShopUser',
-  function($rootScope, $http, $state, $timeout, $q, Global, ShopCategory) {
+  function($rootScope, $http, $state, $timeout, $q, Global) {
     return{
       replace: true,
       templateUrl: '/shopUser/views/profile/tabs.html',
