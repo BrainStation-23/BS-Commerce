@@ -11,8 +11,8 @@ var mean = require('meanio'),
   Grid.mongo  = mongoose.mongo;
   var gfs = new Grid(mongoose.connection.db);
 
-require('../packages/custom/shopCategory/server/models/Category');
-require('../packages/custom/shopProduct/server/models/Product');
+require('../packages/custom/shopCatalog/server/models/Category');
+require('../packages/custom/shopCatalog/server/models/Product');
 
 var Product = mongoose.model('Product');
 var Category = mongoose.model('Category');

@@ -1,12 +1,12 @@
 'use strict';
 
 var mean = require('meanio'),
-  mongoose = require('mongoose'),
-  Q = require('q'),
-  async = require('async'),
-  _ = require('lodash');
+    mongoose = require('mongoose'),
+    Q = require('q'),
+    async = require('async'),
+    _ = require('lodash');
 
-require('../packages/custom/shopCategory/server/models/Category');
+require('../packages/custom/shopCatalog/server/models/Category');
 
 var Category = mongoose.model('Category');
 
@@ -56,8 +56,8 @@ var createCategory = function(category, parent, ancestors){
       });
 
       Q.all(promises)
-        .then(deferred.resolve)
-        .catch(deferred.reject)
+          .then(deferred.resolve)
+          .catch(deferred.reject)
 
     }else{
       deferred.resolve(doc._id);
@@ -107,20 +107,20 @@ var createCategories = function(){
   });
 
   Q.all(createPromises)
-    .then(deferred.resolve)
-    .catch(deferred.reject);
+      .then(deferred.resolve)
+      .catch(deferred.reject);
 
   return deferred.promise;
 };
 
 exports.up = function(next){
   clearCategories()
-    .then(createCategories)
-    .catch(console.log)
-    .finally(function(){
-      next();
-    })
-    .done();
+      .then(createCategories)
+      .catch(console.log)
+      .finally(function(){
+        next();
+      })
+      .done();
 };
 
 exports.down = function(next){

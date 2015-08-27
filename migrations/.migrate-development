@@ -1,1 +1,1 @@
-{"migrations":[{"title":"migrations/1427290295940-add-languages.js"},{"title":"migrations/1427295948608-add-store.js"},{"title":"migrations/1428312836908-add-categories.js"},{"title":"migrations/1429605177091-add-products.js"}],"path":"migrations/.migrate-development","pos":4,"_events":{}}
+{"migrations":[{"title":"migrations/1427290295940-add-languages.js"},{"title":"migrations/1427295948608-add-store.js"},{"title":"migrations/1429605177091-add-products.js"}],"path":"migrations/.migrate-development","pos":0"_events":{}}
