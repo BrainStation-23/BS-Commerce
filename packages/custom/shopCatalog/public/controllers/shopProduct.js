@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCatalog').controller('ShopProductController', ['$scope', '$state', 'Global', 'ShopProduct', 'cartService',
-    function($scope, $state, Global, ShopProduct, cartService) {
+angular.module('mean.shopCatalog').controller('ShopProductController', ['$scope', '$timeout', '$state', 'Global', 'ShopProduct', 'cartService',
+    function($scope, $timeout, $state, Global, ShopProduct, cartService) {
         $scope.global = Global;
         var sku = $state.params.sku;
 
@@ -32,8 +32,15 @@ angular.module('mean.shopCatalog').controller('ShopProductController', ['$scope'
             });
 
         $scope.toggleCartStatus = function(product, event){
-            event.preventDefault();
 
+            if(!Global.authenticated) {
+                product.notAuthenticate = true;
+                $timeout(function() {
+                    product.notAuthenticate = false;
+                },1000);
+                return;
+            }
+            event.preventDefault();
             product.addedToCart = !(product.addedToCart);
 
             if(product.addedToCart) {
