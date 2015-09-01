@@ -222,7 +222,8 @@ var createProduct = function(category, product){
                 sku: productSlug,
                 price: price,
                 oldPrice: price + 10,
-                cost: price - 15
+                cost: price - 15,
+                isFeatured: true
               },
               meta:{
                 friendlyPageName: productSlug

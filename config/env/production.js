@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = {
-  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-prod',
+  //db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost/bs-commerce'),
+  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'bs-commerce:bs-commerce@ds035633.mongolab.com:35633/bs-commerce'),
+  //mongodb://<dbuser>:<dbpassword>@ds035633.mongolab.com:35633/bs-commerce
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.
@@ -32,6 +34,7 @@ module.exports = {
   logging: {
     format: 'combined'
   },
+  aggregate: false,
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',
