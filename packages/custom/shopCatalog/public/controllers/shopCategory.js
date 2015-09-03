@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('mean.shopCatalog').controller('ShopCategoryController', ['$scope', '$timeout', '$state', 'Global', 'ShopCatalog', 'ShopProduct', 'cartService',
+angular.module('mean.shopCatalog').controller('ShopCategoryController',
+    ['$scope', '$timeout', '$state', 'Global', 'ShopCatalog', 'ShopProduct', 'cartService',
     function($scope, $timeout, $state, Global, ShopCatalog, ShopProduct, cartService) {
         var slug = $state.params.slug;
         $scope.global = Global;

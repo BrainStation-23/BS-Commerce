@@ -12,25 +12,50 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 'but wait! A third!'
             ];
 
+            console.log($scope.state.currentPage);
+            console.log($state.params.page);
+
             $scope.state = {
                 totalRecords: 0,
                 pageSize: 6,
-                currentPage: 1,
+                currentPage: $state.params.page,
                 orderBy: {
                     value: 'name',
                     text: 'Name'
                 }
             };
 
+            console.log($scope.state.currentPage);
+            console.log($state.params.page);
+
             $scope.products = [];
 
             $scope.query = $state.params.q;
+            $scope.limit = $state.params.limit;
+            $scope.state.currentPage = $state.params.page;
 
-            $http.get('/api' + $location.url())
-                .then(function (response) {
-                    //console.log(response.data);
-                    $scope.products = response.data;
-                }, function (error) {
-                    console.log(error);
-                });
+            console.log($scope.state.currentPage);
+            console.log($state.params.page);
+
+            $scope.getProducts = function(){
+
+                var url = '/search' + '?q='+$scope.query+'&limit='+$scope.limit+'&page='+$scope.state.currentPage;
+                $http.get('/api'+url)
+                    .then(function (response) {
+                        $scope.products = response.data.products;
+                        $scope.state.totalRecords = response.data.total;
+                        console.log($scope.state.currentPage);
+                        console.log($state.params.page);
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+            };
+            $scope.getProducts();
+
+
+            $scope.pageChanged = function(){
+                //$location.url('/search' + '?q='+$scope.query+'&limit='+9+'&page='+$scope.state.currentPage);
+                $scope.getProducts();
+            };
         }]);
