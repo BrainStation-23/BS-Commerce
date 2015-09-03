@@ -48,7 +48,6 @@ angular.module('mean.shopCatalog').controller('ShopCategoryController', ['$scope
             },function(data, getHeader){
                 $scope.products = data;
                 $scope.state.totalRecords = getHeader().total;
-
                 updateCartStatus();
             });
         };

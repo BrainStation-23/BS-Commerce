@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
 exports.searchList = function (req) {
     var deferred = Q.defer();
     console.log(req.query);
-    var query = req.query;
-    //var newBrand = new Brand(req.body);
-    Product.find(query).exec(function (error, products) {
+    var q = req.query.q;
+    console.log(q);
+    Product.find({$text: {$search: q}}).exec(function (error, products) {
         if (error) {
             return deferred.reject(error);
         }

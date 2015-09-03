@@ -104,4 +104,9 @@ var ProductSchema = new Schema({
     }]
 });
 
+ProductSchema.index({
+    'info.name': 'text',
+    'info.fullDescription': 'text'
+}, {name: 'search'});
+
 mongoose.model('Product', ProductSchema);
