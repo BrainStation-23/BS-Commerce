@@ -14,7 +14,7 @@ exports.searchList = function (req) {
     console.log(q);
     Product.count({$text: {$search: q}}).exec(function(err, count){
         if(err){
-            return deferred.reject(error);
+            return deferred.reject(err);
         }
         Product.find({$text: {$search: q}}).limit(limit).skip(skip).exec(function (error, products) {
             if (error) {

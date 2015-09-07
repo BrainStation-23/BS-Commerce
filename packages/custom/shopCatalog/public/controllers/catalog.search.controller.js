@@ -12,7 +12,7 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 'but wait! A third!'
             ];
 
-            console.log($scope.state.currentPage);
+            //console.log($scope.state.currentPage);
             console.log($state.params.page);
 
             $scope.state = {
@@ -25,8 +25,8 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 }
             };
 
-            console.log($scope.state.currentPage);
-            console.log($state.params.page);
+            /*console.log($scope.state.currentPage);
+             console.log($state.params.page);*/
 
             $scope.products = [];
 
@@ -34,28 +34,35 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             $scope.limit = $state.params.limit;
             $scope.state.currentPage = $state.params.page;
 
-            console.log($scope.state.currentPage);
-            console.log($state.params.page);
+            /*console.log($scope.state.currentPage);
+             console.log($state.params.page);*/
 
-            $scope.getProducts = function(){
+            $scope.getProducts = function () {
 
-                var url = '/search' + '?q='+$scope.query+'&limit='+$scope.limit+'&page='+$scope.state.currentPage;
-                $http.get('/api'+url)
+                var url = '/search' + '?q=' + $scope.query + '&limit=' + $scope.limit + '&page=' + $scope.state.currentPage;
+                $http.get('/api' + url)
                     .then(function (response) {
                         $scope.products = response.data.products;
                         $scope.state.totalRecords = response.data.total;
-                        console.log($scope.state.currentPage);
-                        console.log($state.params.page);
+                        /*console.log($scope.state.currentPage);
+                         console.log($state.params.page);*/
 
                     }, function (error) {
-                        console.log(error);
+                        //console.log(error);
                     });
             };
             $scope.getProducts();
 
+            $scope.pageChangedFirstTime = false;
+            $scope.pageChanged = function (page) {
+                if (!$scope.pageChangedFirstTime) {
+                    $scope.pageChangedFirstTime = true;
+                    $scope.state.currentPage = $state.params.page;
+                }
 
-            $scope.pageChanged = function(){
-                //$location.url('/search' + '?q='+$scope.query+'&limit='+9+'&page='+$scope.state.currentPage);
-                $scope.getProducts();
+                console.log('current  product page: ', $scope.state.currentPage);
+                $location.url('/search' + '?q=' + $scope.query + '&limit=' + $scope.limit + '&page=' + $scope.state.currentPage);
+                //$scope.getProducts();
+                //$location.search('page', $scope.state.currentPage);
             };
         }]);
