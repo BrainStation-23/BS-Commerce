@@ -25,8 +25,20 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 }
             };
 
-            /*console.log($scope.state.currentPage);
-             console.log($state.params.page);*/
+            $http.get('/api/brands').then(function (response) {
+                console.log(response.data);
+                $scope.brands = response.data.brands;
+            }, function (error) {
+                console.log(error);
+            });
+
+            $http.get('/api/categories').then(function (response) {
+                console.log(response.data);
+                $scope.categories = response.data.categories;
+            }, function (error) {
+                console.log(error);
+            });
+
 
             $scope.products = [];
 
@@ -34,8 +46,6 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             $scope.limit = $state.params.limit;
             $scope.state.currentPage = $state.params.page;
 
-            /*console.log($scope.state.currentPage);
-             console.log($state.params.page);*/
 
             $scope.getProducts = function () {
 
@@ -44,8 +54,6 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                     .then(function (response) {
                         $scope.products = response.data.products;
                         $scope.state.totalRecords = response.data.total;
-                        /*console.log($scope.state.currentPage);
-                         console.log($state.params.page);*/
 
                     }, function (error) {
                         //console.log(error);
@@ -53,16 +61,13 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             };
             $scope.getProducts();
 
-            $scope.pageChangedFirstTime = false;
+            $scope.pageChangedFirstTime = true;
             $scope.pageChanged = function (page) {
-                if (!$scope.pageChangedFirstTime) {
+                if ($scope.pageChangedFirstTime) {
                     $scope.pageChangedFirstTime = true;
                     $scope.state.currentPage = $state.params.page;
                 }
-
-                console.log('current  product page: ', $scope.state.currentPage);
                 $location.url('/search' + '?q=' + $scope.query + '&limit=' + $scope.limit + '&page=' + $scope.state.currentPage);
-                //$scope.getProducts();
-                //$location.search('page', $scope.state.currentPage);
+
             };
         }]);

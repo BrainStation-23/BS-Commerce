@@ -1,6 +1,126 @@
 <div>
     <div class="row">
         <div class="col-sm-12">
+            <h3>SEARCH</h3>
+
+            <div class="search-input">
+                <form class="form-horizontal">
+                    <div class="fieldset">
+
+
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="q">Search keyword:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" data-ng-model="query" name="q" id="q"
+                                       class="search-text form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4"><label for="adv-search"><h4>Advanced Search</h4></label></div>
+                            <div class="col-md-4">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="active" data-ng-model="advSearch" id="adv-search"
+                                           id="active">
+                                </label>
+                            </div>
+                        </div>
+
+                        <span id="advanced-search-block" data-ng-show="advSearch">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="cid">Category:</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="cid" id="cid"
+                                            data-val-number="The field Category must be a number."
+                                            data-val="true"
+                                            class="form-control">
+                                        <option value="0" selected="selected">All</option>
+                                        <option value="1">Computers</option>
+                                        <option value="2">Computers &gt;&gt; Desktops</option>
+                                        <option value="3">Computers &gt;&gt; Notebooks</option>
+                                        <option value="4">Computers &gt;&gt; Software</option>
+                                        <option value="5">Electronics</option>
+                                        <option value="6">Electronics &gt;&gt; Camera &amp; photo</option>
+                                        <option value="7">Electronics &gt;&gt; Cell phones</option>
+                                        <option value="8">Electronics &gt;&gt; Others</option>
+                                        <option value="9">Apparel</option>
+                                        <option value="10">Apparel &gt;&gt; Shoes</option>
+                                        <option value="11">Apparel &gt;&gt; Clothing</option>
+                                        <option value="12">Apparel &gt;&gt; Accessories</option>
+                                        <option value="13">Digital downloads</option>
+                                        <option value="14">Books</option>
+                                        <option value="15">Jewelry</option>
+                                        <option value="16">Gift Cards</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="sub-cat">Automatically search sub categories</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="active" data-ng-model="subCat" id="sub-cat">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="mid">Manufacturer:</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control" name="mid" id="mid"
+                                            data-val-number="The field Manufacturer must be a number."
+                                            data-val="true">
+                                        <option value="0" selected="selected">All</option>
+                                        <option value="1">Apple</option>
+                                        <option value="2">HP</option>
+                                        <option value="3">Nike</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label>Price range:</label>
+                                </div>
+                                <div class="col-md-8 form-inline">
+                                    <div class="form-group col-md-6">
+                                        <label for="pf" class="">From</label>
+                                        <input class="form-control" type="text" name="pf" id="pf">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="pt" class="">to</label>
+                                        <input class="form-control" type="text" name="pt" id="pt">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="sid">Search In product descriptions</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="true" id="sid">
+                                    </label>
+                                </div>
+                            </div>
+                        </span>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-4">
+                                <input  class="btn btn-primary form-control" type="submit" value="Search">
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             <div class="pull-right list-options">
                 <div class="btn-group" dropdown>
                     <button type="button" class="btn btn-primary">Page Size {{state.pageSize}}</button>
@@ -26,7 +146,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href data-ng-click="setOrderBy('Name', 'name', $event)">Name</a></li>
                         <li><a href data-ng-click="setOrderBy('Price', 'price', $event)">Price</a></li>
-                        <li><a href data-ng-click="setOrderBy('Date Published', 'publishDate', $event)">Date Published</a></li>
+                        <li><a href data-ng-click="setOrderBy('Date Published', 'publishDate', $event)">Date
+                            Published</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -39,14 +161,23 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <a data-ui-sref="products-details({sku:product.info.sku})">
-                                <img class="img-responsive center-block" data-ng-if="product.photos.length > 0" data-ng-src="/api/products/photos/{{product.photos[0]}}" alt="{{product.info.name}}">
+                                <img class="img-responsive center-block" data-ng-if="product.photos.length > 0"
+                                     data-ng-src="/api/products/photos/{{product.photos[0]}}"
+                                     alt="{{product.info.name}}">
                             </a>
+
                             <h2 data-ng-bind="product.info.price | currency"></h2>
+
                             <p>
-                                <a data-ui-sref="products-details({sku:product.info.sku})" data-ng-bind="product.info.name"><p></p></a>
+                                <a data-ui-sref="products-details({sku:product.info.sku})"
+                                   data-ng-bind="product.info.name">
+                                    <p></p></a>
                             </p>
-                            <a class="btn btn-default add-to-cart" data-ng-click="toggleCartStatus(product, $event)" data-ng-class="{'added-to-cart': product.addedToCart}"><i class="fa fa-shopping-cart"></i>{{product.addedToCart ? 'Added to cart' : 'Add to cart'}}</a>
-                            <span class="alert alert-danger add-product-alert" data-ng-show="product.notAuthenticate" >You should login</span>
+                            <a class="btn btn-default add-to-cart" data-ng-click="toggleCartStatus(product, $event)"
+                               data-ng-class="{'added-to-cart': product.addedToCart}"><i
+                                    class="fa fa-shopping-cart"></i>{{product.addedToCart
+                                ? 'Added to cart' : 'Add to cart'}}</a>
+                            <span class="alert alert-danger add-product-alert" data-ng-show="product.notAuthenticate">You should login</span>
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
@@ -61,7 +192,10 @@
     </div>
     <div class="row">
         <row class="col-sm-12 col-centered">
-            <pagination data-total-items="state.totalRecords" data-ng-model="state.currentPage" data-items-per-page="state.pageSize" data-ng-change="pageChanged()" data-max-size="5" class="pagination-sm" data-boundary-links="true" data-rotate="false" data-previous-text="<" data-next-text=">" data-first-text="<<" data-last-text=">>"></pagination>
+            <pagination data-total-items="state.totalRecords" data-ng-model="state.currentPage"
+                        data-items-per-page="state.pageSize" data-ng-change="pageChanged()" data-max-size="5"
+                        class="pagination-sm" data-boundary-links="true" data-rotate="false" data-previous-text="<"
+                        data-next-text=">" data-first-text="<<" data-last-text=">>"></pagination>
         </row>
     </div>
 </div>

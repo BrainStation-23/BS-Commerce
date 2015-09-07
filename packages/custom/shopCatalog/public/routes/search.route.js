@@ -6,7 +6,7 @@ angular.module('mean.shopCatalog').config(['$stateProvider',
             url: '/search?q&limit&page',
             parent: 'master',
             controller: 'CatalogSearchController',
-            templateUrl: 'shopCatalog/views/category/shop-category-product-list.html'
+            templateUrl: 'shopCatalog/views/search.html'
             //templateUrl: 'shopCatalog/views/search.html'
         });
     }
