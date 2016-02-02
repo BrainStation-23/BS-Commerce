@@ -10,7 +10,7 @@ angular.module('mean.shopCatalog').directive('searchBox', ['Global', 'ShopCatalo
                 scope.simpleSearch = function () {
 
                     $state.go('search', {q: scope.searchInput, limit: 6, page: 1});
-
+                    scope.searchInput = '';
                 };
 
 

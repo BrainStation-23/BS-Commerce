@@ -1,124 +1,92 @@
 <div>
     <div class="row">
         <div class="col-sm-12">
-            <h3>SEARCH</h3>
+            <h2 class="title text-center">Search Items</h2>
 
             <div class="search-input">
                 <form class="form-horizontal">
-                    <div class="fieldset">
-
+                    <div class="mce-fieldset" style="background-color: #F9F9F9;padding: 20px;">
 
                         <div class="form-group">
-                            <div class="col-md-4">
-                                <label for="q">Search keyword:</label>
-                            </div>
-                            <div class="col-md-4">
+                            <label for="q" class="col-md-3 control-label">Search keyword:</label>
+                            <div class="col-md-5">
                                 <input type="text" data-ng-model="query" name="q" id="q"
                                        class="search-text form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4"><label for="adv-search"><h4>Advanced Search</h4></label></div>
-                            <div class="col-md-4">
+                            <div class="col-md-offset-4 col-md-5">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="active" data-ng-model="advSearch" id="adv-search"
-                                           id="active">
+                                    <input type="checkbox" value="active" data-ng-model="advSearch" id="advanced-search"> Advanced Search
                                 </label>
                             </div>
                         </div>
 
-                        <span id="advanced-search-block" data-ng-show="advSearch">
+                        <div id="advanced-search-block" data-ng-show="advSearch">
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="cid">Category:</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="cid" id="cid"
-                                            data-val-number="The field Category must be a number."
-                                            data-val="true"
-                                            class="form-control">
-                                        <option value="0" selected="selected">All</option>
-                                        <option value="1">Computers</option>
-                                        <option value="2">Computers &gt;&gt; Desktops</option>
-                                        <option value="3">Computers &gt;&gt; Notebooks</option>
-                                        <option value="4">Computers &gt;&gt; Software</option>
-                                        <option value="5">Electronics</option>
-                                        <option value="6">Electronics &gt;&gt; Camera &amp; photo</option>
-                                        <option value="7">Electronics &gt;&gt; Cell phones</option>
-                                        <option value="8">Electronics &gt;&gt; Others</option>
-                                        <option value="9">Apparel</option>
-                                        <option value="10">Apparel &gt;&gt; Shoes</option>
-                                        <option value="11">Apparel &gt;&gt; Clothing</option>
-                                        <option value="12">Apparel &gt;&gt; Accessories</option>
-                                        <option value="13">Digital downloads</option>
-                                        <option value="14">Books</option>
-                                        <option value="15">Jewelry</option>
-                                        <option value="16">Gift Cards</option>
+                                <label for="q" class="col-md-3 control-label">Category</label>
+                                <div class="col-md-5">
+                                    <select class="form-control" ng-options="category.slug as category.name for category in categories" data-ng-model="category">
+                                        <option value="">All</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="sub-cat">Automatically search sub categories</label>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-offset-4 col-md-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="active" data-ng-model="subCat" id="sub-cat">
+                                        <input type="checkbox" value="active" data-ng-model="subCat" id="sub-cat">Automatically search sub categories
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="mid">Manufacturer:</label>
-                                </div>
-                                <div class="col-md-4">
+                                <label for="mid" class="col-md-3 control-label">Manufacturer</label>
+                                <div class="col-md-5">
                                     <select class="form-control" name="mid" id="mid"
                                             data-val-number="The field Manufacturer must be a number."
                                             data-val="true">
                                         <option value="0" selected="selected">All</option>
-                                        <option value="1">Apple</option>
-                                        <option value="2">HP</option>
-                                        <option value="3">Nike</option>
+                                        <option data-ng-repeat="brand in brands" value="{{brand.info.name}}">{{brand.info.name}}</option>
+                                        <!--<option value="1">Apple</option>-->
+                                        <!--<option value="2">HP</option>-->
+                                        <!--<option value="3">Nike</option>-->
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Price range:</label>
-                                </div>
-                                <div class="col-md-8 form-inline">
-                                    <div class="form-group col-md-6">
-                                        <label for="pf" class="">From</label>
+                                <label for="pf" class="col-md-3 control-label">Price range</label>
+                                <div class="col-md-5 col-xs-12">
+                                    <div class="col-md-6 col-xs-6">
                                         <input class="form-control" type="text" name="pf" id="pf">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="pt" class="">to</label>
+                                    <div class="col-md-6 col-xs-6">
                                         <input class="form-control" type="text" name="pt" id="pt">
                                     </div>
-
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="sid">Search In product descriptions</label>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-offset-4 col-md-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="true" id="sid">
+                                        <input type="checkbox" value="true" id="sid">Search In product descriptions
                                     </label>
                                 </div>
                             </div>
-                        </span>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-4 col-md-4">
-                                <input  class="btn btn-primary form-control" type="submit" value="Search">
-                            </div>
                         </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-4">
+                            <input  class="btn btn-primary form-control" type="submit" value="Search">
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
+
+    <h2 class="title text-center">Search results</h2>
+
     <div class="row">
         <div class="col-sm-12">
             <div class="pull-right list-options">

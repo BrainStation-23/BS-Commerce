@@ -13,7 +13,7 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             ];
 
             //console.log($scope.state.currentPage);
-            console.log($state.params.page);
+            //console.log($state.params.page);
 
             $scope.state = {
                 totalRecords: 0,
@@ -26,15 +26,15 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             };
 
             $http.get('/api/brands').then(function (response) {
-                console.log(response.data);
+                console.log('brands',response.data);
                 $scope.brands = response.data.brands;
             }, function (error) {
                 console.log(error);
             });
 
             $http.get('/api/categories').then(function (response) {
-                console.log(response.data);
-                $scope.categories = response.data.categories;
+                console.log('categories',response.data);
+                $scope.categories = response.data;
             }, function (error) {
                 console.log(error);
             });
