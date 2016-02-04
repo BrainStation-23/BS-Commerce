@@ -12,9 +12,6 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 'but wait! A third!'
             ];
 
-            //console.log($scope.state.currentPage);
-            //console.log($state.params.page);
-
             $scope.state = {
                 totalRecords: 0,
                 pageSize: 6,
@@ -26,17 +23,39 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
             };
 
             $http.get('/api/brands').then(function (response) {
-                console.log('brands',response.data);
                 $scope.brands = response.data.brands;
             }, function (error) {
                 console.log(error);
+                $scope.brands = [];
             });
 
+            var generateCategoriesForDropDownList = function(getCategories, callback) {
+                var generatedCategories = [];
+
+                var generateCategoriesWithParent = function(categories, parentCategoryName) {
+                    angular.forEach(categories, function(category) {
+                        if(parentCategoryName) {
+                            category.name = parentCategoryName + ' >> ' + category.name;
+                        }
+
+                        generatedCategories.push(category);
+
+                        if(category.subCategories) {
+                            generateCategoriesWithParent(category.subCategories, category.name);
+                        }
+                    });
+                };
+                generateCategoriesWithParent(getCategories, null);
+                callback(generatedCategories);
+            };
+
             $http.get('/api/categories').then(function (response) {
-                console.log('categories',response.data);
-                $scope.categories = response.data;
+                generateCategoriesForDropDownList(response.data, function(categories) {
+                    $scope.categories = categories;
+                });
             }, function (error) {
                 console.log(error);
+                $scope.categories = [];
             });
 
 

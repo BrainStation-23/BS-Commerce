@@ -39,16 +39,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="mid" class="col-md-3 control-label">Manufacturer</label>
+                                <label class="col-md-3 control-label">Manufacturer</label>
                                 <div class="col-md-5">
-                                    <select class="form-control" name="mid" id="mid"
-                                            data-val-number="The field Manufacturer must be a number."
-                                            data-val="true">
-                                        <option value="0" selected="selected">All</option>
-                                        <option data-ng-repeat="brand in brands" value="{{brand.info.name}}">{{brand.info.name}}</option>
-                                        <!--<option value="1">Apple</option>-->
-                                        <!--<option value="2">HP</option>-->
-                                        <!--<option value="3">Nike</option>-->
+                                    <select class="form-control" ng-options="brand.info.name for brand in brands" data-ng-model="brand">
+                                        <option value="">All</option>
                                     </select>
                                 </div>
                             </div>
