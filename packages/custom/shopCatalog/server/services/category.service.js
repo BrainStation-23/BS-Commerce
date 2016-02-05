@@ -9,21 +9,18 @@ var mean = require('meanio'),
 
 mean.loadConfig();
 
-var includeSubCategories = function (category, list) {
-    var subCategories = _.where(list, function (item) {
-        return item.parent && (item.parent._id.equals(category._id));
-    });
+var generateParentSubCategories = function(originalParent, listItems) {
 
-    subCategories = _.map(subCategories, function (item) {
-        return {
-            _id: item._id,
-            name: item.name,
-            slug: item.slug,
-            subCategories: []
-        };
-    });
-
-    category.subCategories = category.subCategories.concat(subCategories);
+    var generateSubCategories = function(parent) {
+        _.forEach(listItems, function(item) {
+            if(parent && item.parent && parent._id.toString() === item.parent.toString()) {
+                parent.subCategories.push({_id: item._id, name: item.name, slug: item.slug, subCategories: []});
+                var lstIndex = parent.subCategories.length-1;
+                generateSubCategories(parent.subCategories[lstIndex]);
+            }
+        });
+    };
+    generateSubCategories(originalParent);
 };
 
 var getSlug = function (name) {
@@ -35,7 +32,6 @@ exports.list = function () {
     var deferred = Q.defer();
 
     Category.find({})
-        .populate('parent')
         .select('name slug parent ancestors')
         .lean()
         .exec(function (error, categories) {
@@ -43,17 +39,12 @@ exports.list = function () {
                 return deferred.reject(error);
             }
 
-
             var list = _.map(_.where(categories, {parent: null}), function (item) {
-                return {
-                    _id: item._id,
-                    name: item.name,
-                    slug: item.slug,
-                    subCategories: []
-                };
+                item.subCategories = [];
+                return item;
             });
             _.forEach(list, function (item) {
-                includeSubCategories(item, categories);
+                generateParentSubCategories(item, categories);
             });
 
             deferred.resolve(list);
