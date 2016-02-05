@@ -8,14 +8,31 @@ angular.module('mean.shopAdmin').controller('categoryCreateController', ['$scope
         $scope.categories = [];
         $scope.category.meta = {};
 
+        var generateCategoriesForDropDownList = function(getCategories, callback) {
+            var generatedCategories = [];
+
+            var generateCategoriesWithParent = function(categories, parentCategoryName) {
+                angular.forEach(categories, function(category) {
+                    if(parentCategoryName) {
+                        category.name = parentCategoryName + ' >> ' + category.name;
+                    }
+
+                    generatedCategories.push(category);
+
+                    if(category.subCategories) {
+                        generateCategoriesWithParent(category.subCategories, category.name);
+                    }
+                });
+            };
+            generateCategoriesWithParent(getCategories, null);
+            callback(generatedCategories);
+        };
+
         categoryService.getCategories()
             .$promise
-            .then(function(categories) {
-                angular.forEach(categories, function(category) {
-                    var item = {};
-                    item._id = category._id;
-                    item.text = category.name;
-                    $scope.categories.push(item);
+            .then(function(responseCategories) {
+                generateCategoriesForDropDownList(responseCategories, function(categories) {
+                    $scope.categories = categories;
                 });
             });
 
