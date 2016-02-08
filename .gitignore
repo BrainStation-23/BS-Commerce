@@ -67,6 +67,7 @@ modules/views/
 /public/build/
 # /packages/custom/
 /packages/contrib/
+logs/
 
 # --------------------
 # vim Files
