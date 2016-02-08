@@ -14,7 +14,8 @@ var generateParentSubCategories = function(originalParent, listItems) {
     var generateSubCategories = function(parent) {
         _.forEach(listItems, function(item) {
             if(parent && item.parent && parent._id.toString() === item.parent.toString()) {
-                parent.subCategories.push({_id: item._id, name: item.name, slug: item.slug, subCategories: []});
+                item.subCategories = [];
+                parent.subCategories.push(item);
                 var lstIndex = parent.subCategories.length-1;
                 generateSubCategories(parent.subCategories[lstIndex]);
             }
@@ -32,7 +33,7 @@ exports.list = function () {
     var deferred = Q.defer();
 
     Category.find({})
-        .select('name slug parent ancestors')
+        .select('name slug parent ancestors displayOrder')
         .lean()
         .exec(function (error, categories) {
             if (error) {
