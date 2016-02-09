@@ -14,7 +14,7 @@ angular.module('mean.shopAdmin').directive('dynamicMultipleCategories', ['Global
                 scope.addMoreCategory = function () {
                     var newItemNo = scope.product.categories.length;
                     scope.product.categories[newItemNo] = {};
-                    scope.product.categories[newItemNo].categoryId = scope.categories[0].id;
+                    scope.product.categories[newItemNo].categoryId = scope.categories[0]._id;
                     scope.product.categories[newItemNo].isFeatured = false;
                     scope.product.categories[newItemNo].displayOrder = newItemNo;
                 };

@@ -10,26 +10,36 @@ angular.module('mean.shopAdmin').controller('productCreateController', ['$scope'
         $scope.product.brands = [];
         $scope.product.meta ={};
 
+        var generateCategoriesForDropDownList = function(getCategories, callback) {
+            var generatedCategories = [];
+
+            var generateCategoriesWithParent = function(categories, parentCategoryName) {
+                angular.forEach(categories, function(category) {
+                    if(parentCategoryName) {
+                        category.name = parentCategoryName + ' >> ' + category.name;
+                    }
+
+                    generatedCategories.push(category);
+
+                    if(category.subCategories) {
+                        generateCategoriesWithParent(category.subCategories, category.name);
+                    }
+                });
+            };
+            generateCategoriesWithParent(getCategories, null);
+            callback(generatedCategories);
+        };
+
         categoryService.getCategories()
             .$promise
-            .then(function(categories) {
-                $scope.categories = [];
-                angular.forEach(categories, function(category) {
-                    var item = {};
-                    item.id = category._id;
-                    item.parent = null;
-                    item.text = category.name;
-                    $scope.categories.push(item);
-                    angular.forEach(category.subCategories, function(subCategory) {
-                        var subItem = {};
-                        subItem.id = subCategory._id;
-                        subItem.parent = category._id;
-                        subItem.text = subCategory.name;
-                        $scope.categories.push(subItem);
-                    });
+            .then(function(promiseCategories) {
+
+                generateCategoriesForDropDownList(promiseCategories, function(categories) {
+                    $scope.categories = categories;
                 });
+
                 $scope.product.categories[0] = {};
-                $scope.product.categories[0].categoryId = $scope.categories[0].id;
+                $scope.product.categories[0].categoryId = $scope.categories[0]._id;
                 $scope.product.categories[0].isFeatured = false;
                 $scope.product.categories[0].displayOrder = 0;
             });
