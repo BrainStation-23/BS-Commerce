@@ -8,3 +8,24 @@
     background-position: 50%;
     cursor: pointer;
 }
+
+.category-products a {
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.category-products  ul {
+    padding-left: 25px;
+}
+
+.category-products span {
+    cursor: pointer; color: #696763;
+}
+
+.category-products .selected-nav-category {
+    color: #FE980F;
+}
