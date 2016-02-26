@@ -4,29 +4,29 @@
             <h2 class="title text-center">Search Items</h2>
 
             <div class="search-input">
-                <form class="form-horizontal">
+                <form class="form-horizontal" data-ng-submit="advancedSearch()">
                     <div class="mce-fieldset" style="background-color: #F9F9F9;padding: 20px;">
 
                         <div class="form-group">
                             <label for="q" class="col-md-3 control-label">Search keyword:</label>
                             <div class="col-md-5">
-                                <input type="text" data-ng-model="query" name="q" id="q"
+                                <input type="text" data-ng-model="searchInfo.q" name="q" id="q"
                                        class="search-text form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-5">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="active" data-ng-model="advSearch" id="advanced-search"> Advanced Search
+                                    <input type="checkbox" value="active" data-ng-model="searchInfo.advS" id="advanced-search"> Advanced Search
                                 </label>
                             </div>
                         </div>
 
-                        <div id="advanced-search-block" data-ng-show="advSearch">
+                        <div id="advanced-search-block" data-ng-show="searchInfo.advS">
                             <div class="form-group">
                                 <label for="q" class="col-md-3 control-label">Category</label>
                                 <div class="col-md-5">
-                                    <select class="form-control" ng-options="category.slug as category.name for category in categories" data-ng-model="category">
+                                    <select class="form-control" ng-options="category.slug as category.name for category in categories" data-ng-model="searchInfo.sCat">
                                         <option value="">All</option>
                                     </select>
                                 </div>
@@ -34,14 +34,14 @@
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="active" data-ng-model="subCat" id="sub-cat">Automatically search sub categories
+                                        <input type="checkbox" value="active" data-ng-model="searchInfo.isInSubCat" id="sub-cat">Automatically search sub categories
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Manufacturer</label>
                                 <div class="col-md-5">
-                                    <select class="form-control" ng-options="brand.info.name for brand in brands" data-ng-model="brand">
+                                    <select class="form-control" data-ng-model="searchInfo.sBrand" ng-options="brand.info.name as brand.info.name for brand in brands" >
                                         <option value="">All</option>
                                     </select>
                                 </div>
@@ -50,17 +50,17 @@
                                 <label for="pf" class="col-md-3 control-label">Price range</label>
                                 <div class="col-md-5 col-xs-12">
                                     <div class="col-md-6 col-xs-6">
-                                        <input class="form-control" type="text" name="pf" id="pf">
+                                        <input class="form-control" type="number" placeholder="min" min="0" name="pf" id="pf" data-ng-model="searchInfo.priceMin">
                                     </div>
                                     <div class="col-md-6 col-xs-6">
-                                        <input class="form-control" type="text" name="pt" id="pt">
+                                        <input class="form-control" type="number" placeholder="max" min="0" name="pt" id="pt" data-ng-model="searchInfo.priceMax">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" value="true" id="sid">Search In product descriptions
+                                        <input type="checkbox" value="true" id="sid" data-ng-model="searchInfo.isInDes">Search In product descriptions
                                     </label>
                                 </div>
                             </div>
