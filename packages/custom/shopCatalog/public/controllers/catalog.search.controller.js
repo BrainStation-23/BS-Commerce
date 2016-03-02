@@ -63,7 +63,6 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 if($scope.searchInfo.isInSubCat) $scope.searchInfo.isInSubCat = JSON.parse($scope.searchInfo.isInSubCat);
                 if($scope.searchInfo.priceMin) $scope.searchInfo.priceMin = parseFloat($scope.searchInfo.priceMin);
                 if($scope.searchInfo.priceMax) $scope.searchInfo.priceMax = parseFloat($scope.searchInfo.priceMax);
-                if($scope.searchInfo.isInDes) $scope.searchInfo.isInDes = JSON.parse($scope.searchInfo.isInDes);
 
                 $scope.getProducts();
 
@@ -73,12 +72,11 @@ angular.module('mean.shopCatalog').controller('CatalogSearchController',
                 var searchString = $scope.searchInfo.q;
                 if($scope.searchInfo.advS) {
                     if($scope.searchInfo.advS) searchString = searchString + '&advS='+$scope.searchInfo.advS;
-                    if($scope.searchInfo.sCat) searchString = searchString + '&sCat='+$scope.searchInfo.sCat;
+                    if($scope.searchInfo.cat) searchString = searchString + '&cat='+$scope.searchInfo.cat;
                     if($scope.searchInfo.isInSubCat) searchString = searchString + '&isInSubCat='+$scope.searchInfo.isInSubCat;
-                    if($scope.searchInfo.sBrand) searchString = searchString + '&sBrand='+$scope.searchInfo.sBrand;
+                    if($scope.searchInfo.brand) searchString = searchString + '&brand='+$scope.searchInfo.brand;
                     if($scope.searchInfo.priceMin) searchString = searchString + '&priceMin='+$scope.searchInfo.priceMin;
                     if($scope.searchInfo.priceMax) searchString = searchString + '&priceMax='+$scope.searchInfo.priceMax;
-                    if($scope.searchInfo.isInDes) searchString = searchString + '&isInDes='+$scope.searchInfo.isInDes;
                 }
                 var url = '/search?q=' + searchString + '&limit=' + $scope.limit + '&page=' + $scope.state.currentPage;
                 return url;
