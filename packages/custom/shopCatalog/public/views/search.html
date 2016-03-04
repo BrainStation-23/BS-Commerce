@@ -4,14 +4,14 @@
             <h2 class="title text-center">Search Items</h2>
 
             <div class="search-input">
-                <form class="form-horizontal" data-ng-submit="advancedSearch()">
+                <form name="searchForm" class="form-horizontal" data-ng-submit="advancedSearch()">
                     <div class="mce-fieldset" style="background-color: #F9F9F9;padding: 20px;">
 
                         <div class="form-group">
                             <label for="q" class="col-md-3 control-label">Search keyword:</label>
                             <div class="col-md-5">
                                 <input type="text" data-ng-model="searchInfo.q" name="q" id="q"
-                                       class="search-text form-control">
+                                       class="search-text form-control" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,7 +63,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-4">
-                            <input  class="btn btn-primary form-control" type="submit" value="Search">
+                            <input  class="btn btn-primary form-control" type="submit" value="Search" data-ng-disabled="searchForm.$invalid">
                         </div>
                     </div>
 

@@ -50,7 +50,7 @@ var getCategories = function(cat, subCat, callback) {
     catalogService.getCategoryBySlug(cat, function(categoryId) {
         if(categoryId) {
             if(subCat) {
-                catalogService.getCategoriesByQuery({parent: categoryId}, function(categoryIds) {
+                catalogService.getChildCategories(categoryId, function(categoryIds) {
                     categories = categoryIds;
                     categories.push(categoryId);
                     return callback(categories);
@@ -63,7 +63,6 @@ var getCategories = function(cat, subCat, callback) {
         } else {
             return callback(categories);
         }
-
     });
 };
 

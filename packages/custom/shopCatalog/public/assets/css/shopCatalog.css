@@ -29,3 +29,7 @@
 .category-products .selected-nav-category {
     color: #FE980F;
 }
+
+.ng-invalid input{
+    border: 1px solid red;
+}

@@ -33,18 +33,36 @@ exports.getCategoryBySlug = function (slug, callback) {
     });
 };
 
-exports.getCategoriesByQuery = function (query, callback) {
-    var categories = [];
-    Category.find(query, "_id").exec(function(err, getCategories){
-        if(err || !getCategories){
-            return callback([]);
-        }
+var findChildCategories = function(parentId, callback) {
+    var categories = [],
+      findFor = [];
 
-        getCategories.forEach(function(category) {
-            categories.push(category._id);
+    function findChild(categoryIds) {
+        findFor = [];
+        Category.find({parent: {"$in": categoryIds}}, "_id").exec(function(err, getCategories){
+            if(err || !getCategories){
+                return callback(categories);
+            }
+
+            getCategories.forEach(function(category) {
+                findFor.push(category._id);
+            });
+
+            if(findFor.length) {
+                categories = categories.concat(findFor);
+                findChild(findFor);
+            }else {
+                return callback(categories);
+            }
         });
-        return callback(categories);
+    }
+    findChild([parentId]);
+};
 
+
+exports.getChildCategories = function (parentId, callback) {
+    findChildCategories(parentId, function(categories) {
+        return callback(categories);
     });
 };
 
