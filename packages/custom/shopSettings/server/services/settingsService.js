@@ -25,7 +25,12 @@ exports. getSettings = function(req) {
             if(error) {
                 return deferred.reject(error);
             }
-            return deferred.resolve(settings);
+            var newSettings ={};
+
+            if(settings) {
+                newSettings = {_id:settings._id, emails:settings.emails};
+            }
+            return deferred.resolve(newSettings);
         });
     return deferred.promise;
 };

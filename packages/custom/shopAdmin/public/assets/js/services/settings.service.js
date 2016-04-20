@@ -3,7 +3,12 @@
 angular.module('mean.shopAdmin').factory('settingsService', ['$resource',
     function($resource) {
         return {
-
+            addNewSettingsWithEmail: function(settings) {
+                var addNewSettingsWithEmail = $resource('/api/settings', {}, {
+                    'post': {method: 'POST'}
+                });
+                return addNewSettingsWithEmail.post(settings);
+            },
             getEmailSettings: function() {
                 var getEmailSettings = $resource('/api/settings/emails', {}, {
                     'get': {method: 'GET'}

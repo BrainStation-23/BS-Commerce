@@ -40,7 +40,7 @@ exports.updateSettings = function(req, res) {
 exports. getEmailSettings = function(req, res) {
     settingsService.getSettings(req)
         .then(function(settings) {
-            return res.status(200).send({_id: settings._id, emails: settings.emails});
+            return res.status(200).send(settings);
         })
         .catch(function(error) {
             return res.status(500).send(error);

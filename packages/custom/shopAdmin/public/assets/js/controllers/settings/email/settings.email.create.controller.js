@@ -22,13 +22,21 @@ angular.module('mean.shopAdmin').controller('settingsEmailCreateController', ['$
             }
             if(!$scope.settings.emails) {
                 $scope.settings.emails = [];
+                $scope.settings.emails.push($scope.email);
+                settingsService.addNewSettingsWithEmail($scope.settings)
+                    .$promise
+                    .then(function(emails) {
+                        $location.path('/Settings/Email/List');
+                    });
+            } else {
+                $scope.settings.emails.push($scope.email);
+                settingsService.addNewEmailSettings($scope.settings)
+                    .$promise
+                    .then(function(emails) {
+                        $location.path('/Settings/Email/List');
+                    });
             }
-            $scope.settings.emails.push($scope.email);
-            settingsService.addNewEmailSettings($scope.settings)
-                .$promise
-                .then(function(emails) {
-                    $location.path('/Settings/Email/List');
-                });
+
         };
     }
 ]);
