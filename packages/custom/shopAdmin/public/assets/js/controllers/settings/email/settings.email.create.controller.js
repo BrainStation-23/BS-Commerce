@@ -20,6 +20,9 @@ angular.module('mean.shopAdmin').controller('settingsEmailCreateController', ['$
                     email.isDefault = false;
                 });
             }
+            if(!$scope.settings.emails) {
+                $scope.settings.emails = [];
+            }
             $scope.settings.emails.push($scope.email);
             settingsService.addNewEmailSettings($scope.settings)
                 .$promise
