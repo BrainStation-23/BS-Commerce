@@ -30,8 +30,8 @@
         <div class="col-md-3">
             <question-mark></question-mark> Parent Category
         </div>
-        <div class="col-md-3">
-            <select class="form-control" data-ng-options="category._id as category.text for category in categories" data-ng-model="category.parent">
+        <div class="col-md-4">
+            <select class="form-control" data-ng-options="category._id as category.name for category in categories" data-ng-model="category.parent">
                 <option value="">no parent</option>
             </select>
         </div>

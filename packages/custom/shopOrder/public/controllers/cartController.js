@@ -28,7 +28,7 @@
 	  	};
 
 	  	$scope.decreaseQuantity = function(item) {
-			if(item.quantity <1) {
+			if(item.quantity <=1) {
 		  		return;
 			}
 			item.quantity -= 1;

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.shopAdmin').controller('shipmentListController', ['$scope', '$stateParams', 'shipmentService', '$element',
-    function($scope, $stateParams, shipmentService, $element) {
+angular.module('mean.shopAdmin').controller('shipmentListController', ['$scope', '$stateParams', 'shipmentService',
+    function($scope, $stateParams, shipmentService) {
 
         $scope.numberOfDisplayOptions = [10, 15, 20, 50, 100];
         $scope.numberOfDisplay = 10;

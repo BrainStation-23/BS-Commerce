@@ -10,36 +10,48 @@ angular.module('mean.shopAdmin').directive('shopAdminCategoryTree', ['Global', '
 
                 var catTree = [];
 
+                var generateCategoriesForTree = function(getCategories, callback) {
+                    var generatedCategories = [];
+
+                    var generateCategoriesWithParent = function(categories, parentCategory) {
+                        angular.forEach(categories, function(category) {
+
+                            var item = {};
+                            item.id = category._id;
+                            item.parent = '#';
+                            item.text = category.name;
+
+                            if(category.parent) {
+                                item.parent = category.parent;
+                            }
+
+                            generatedCategories.push(item);
+
+                            if(category.subCategories) {
+                                generateCategoriesWithParent(category.subCategories, category.name);
+                            }
+                        });
+                    };
+                    generateCategoriesWithParent(getCategories, null);
+
+                    callback(generatedCategories);
+                };
+
                 $http.get('/api/categories').
                     success(function (data, status, headers, config) {
-                        for (var i in data) {
-                            var item = {};
-                            item.id = data[i]._id;
-                            item.parent = '#';
-                            item.text = data[i].name;
-                            catTree.push(item);
-                            for (var j in data[i].subCategories) {
-                                var subItem = {};
-                                subItem.id = data[i].subCategories[j]._id;
-                                subItem.parent = data[i]._id;
-                                subItem.text = data[i].subCategories[j].name;
-                                catTree.push(subItem);
-                            }
-                        }
+
+                        generateCategoriesForTree(data, function(categories) {
+                            catTree = categories;
+                        });
 
                         element.jstree({
                             'core': {
                                 'data': catTree,
                                 'dblclick_toggle': false
                             }
-                        })
-                            .
-                            on('activate_node.jstree', function (e, data) {
-                                console.log(angular.toJson($state.get()));
-                                $state.go('Category.Edit', {catId: data.node.id});
-                                //window.location.href = '/admin#!/Category/Edit/'+data.node.id;
-                            });
-
+                        }).on('activate_node.jstree', function (e, data) {
+                            $state.go('Category.Edit', {categoryId: data.node.id});
+                        });
 
                     }).
                     error(function (data, status, headers, config) {

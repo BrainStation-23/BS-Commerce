@@ -10,23 +10,32 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
         $scope.product.brands = [];
         $scope.product.meta ={};
 
+        var generateCategoriesForDropDownList = function(getCategories, callback) {
+            var generatedCategories = [];
+
+            var generateCategoriesWithParent = function(categories, parentCategoryName) {
+                angular.forEach(categories, function(category) {
+                    if(parentCategoryName) {
+                        category.name = parentCategoryName + ' >> ' + category.name;
+                    }
+
+                    generatedCategories.push(category);
+
+                    if(category.subCategories) {
+                        generateCategoriesWithParent(category.subCategories, category.name);
+                    }
+                });
+            };
+            generateCategoriesWithParent(getCategories, null);
+            callback(generatedCategories);
+        };
+
         categoryService.getCategories()
             .$promise
-            .then(function(categories) {
-                $scope.categories = [];
-                angular.forEach(categories, function(category) {
-                    var item = {};
-                    item.id = category._id;
-                    item.parent = null;
-                    item.text = category.name;
-                    $scope.categories.push(item);
-                    angular.forEach(category.subCategories, function(subCategory) {
-                        var subItem = {};
-                        subItem.id = subCategory._id;
-                        subItem.parent = category._id;
-                        subItem.text = subCategory.name;
-                        $scope.categories.push(subItem);
-                    });
+            .then(function(promiseCategories) {
+
+                generateCategoriesForDropDownList(promiseCategories, function(categories) {
+                    $scope.categories = categories;
                 });
                 $scope.setUpPage();
             });
@@ -74,15 +83,10 @@ angular.module('mean.shopAdmin').controller('productUpdateController',
                     if ($scope.product.photos === undefined) {
                         $scope.product.photos = [];
                     }
-                    //var len = $scope.product.photos.length;
                     $scope.product.photos.push(data._id);
-                    /*$scope.product.photos[len] = {};
-                    $scope.product.photos[len].id = data._id;
-                    $scope.product.photos[len].displayOrder = len;
-                    $scope.product.photos[len].alt = $scope.picture.alt;
-                    $scope.product.photos[len].title = $scope.picture.title;*/
                     $scope.picture.files[0] = undefined;
-                    $scope.update(true);
+                    $scope.picture.title ='';
+                    //$scope.update(true);
                 }
 
             });
