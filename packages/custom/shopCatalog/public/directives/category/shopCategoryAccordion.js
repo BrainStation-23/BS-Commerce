@@ -27,7 +27,7 @@ angular.module('mean.shopCatalog').directive('shopCategoryAccordion', ['Global',
         };
 
         return{
-            restrict: "AE",
+            restrict: 'AE',
             templateUrl: '/shopCatalog/views/category/shop-category-accordion.html',
             link: function(scope, element, attrs){
                 scope.slug = $state.params.slug;
@@ -48,9 +48,9 @@ angular.module('mean.shopCatalog').directive('shopCategoryAccordion', ['Global',
                     category.isOpen = !category.isOpen;
 
                     if(category.isOpen) {
-                        angular.element("#"+ category.slug).show();
+                        angular.element('#'+ category.slug).show();
                     } else {
-                        angular.element("#"+ category.slug).hide();
+                        angular.element('#'+ category.slug).hide();
                     }
                 };
 

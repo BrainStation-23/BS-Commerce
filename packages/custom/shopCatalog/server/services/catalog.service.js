@@ -25,7 +25,7 @@ exports.searchList = function (query, page, limit) {
 };
 
 exports.getCategoryBySlug = function (slug, callback) {
-    Category.findOne({slug: slug}, "_id").exec(function(err, category){
+    Category.findOne({slug: slug}, '_id').exec(function(err, category){
         if(err){
             return callback(null);
         }
@@ -39,7 +39,7 @@ var findChildCategories = function(parentId, callback) {
 
     function findChild(categoryIds) {
         findFor = [];
-        Category.find({parent: {"$in": categoryIds}}, "_id").exec(function(err, getCategories){
+        Category.find({parent: {'$in': categoryIds}}, '_id').exec(function(err, getCategories){
             if(err || !getCategories){
                 return callback(categories);
             }
@@ -67,7 +67,7 @@ exports.getChildCategories = function (parentId, callback) {
 };
 
 exports.getBrandByName = function (name, callback) {
-    Brand.findOne({"info.name": name}, "_id").exec(function(err, brand){
+    Brand.findOne({'info.name': name}, '_id').exec(function(err, brand){
         if(err || !brand){
             return callback(null);
         }
