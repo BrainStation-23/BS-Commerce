@@ -36,7 +36,8 @@ var emailSchema = new Schema ({
 
 var settingsSchema = new Schema ({
     emails: {
-        type: [emailSchema]
+        type: [emailSchema],
+        default: []
     }
 });
 
