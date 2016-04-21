@@ -1,6 +1,9 @@
 'use strict';
+require('../models/themeModel');
 
-var mean = require('meanio');
+var mean = require('meanio'),
+    mongoose = require('mongoose'),
+    Theme = mongoose.model('Theme');
 
 exports.render = function(req, res) {
 
@@ -31,4 +34,46 @@ exports.render = function(req, res) {
         isAdmin: isAdmin,
         adminEnabled: isAdmin() && mean.moduleEnabled('mean-admin')
     });
+};
+
+exports.getThemes = function(req, res) {
+    Theme.find({}, function(error, themes) {
+        if(error) {
+            return res.status(400).send({msg: 'Error occurred during getting themes'});
+        }
+
+        return res.status(200).send(themes);
+    });
+};
+
+exports.createTheme = function(req, res) {
+    var newTheme = new Theme(req.body);
+
+    newTheme.save(function(error, theme) {
+        if(error) {
+            return res.status(400).send({msg: 'Error occurred during create theme due to invalid parameter'});
+        }
+
+        return res.status(200).send('Theme created successfully');
+    });
+};
+
+exports.getThemeById = function(req, res) {
+    console.log('them id=  ',req.params.themeId);
+
+    Theme.findOne({_id: req.params.themeId}, function(error, theme) {
+        if(error) {
+            return res.status(400).send({msg: 'Error occurred during getting themes'});
+        }
+
+        return res.status(200).send(theme);
+    });
+};
+
+exports.updateTheme = function(req, res) {
+    return res.status(200).send({msg: 'updated'});
+};
+
+exports.getDefaultTheme = function(req, res) {
+    return res.status(200).send({msg: 'default theme'});
 };
