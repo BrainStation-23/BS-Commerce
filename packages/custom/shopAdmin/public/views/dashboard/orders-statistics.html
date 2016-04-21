@@ -21,6 +21,9 @@
                     <td data-ng-bind="orderInfo.yearTotal | currency"></td>
                     <td data-ng-bind="orderInfo.allTimeTotal | currency"></td>
                 </tr>
+                <tr class="row">
+                    <td colspan="6" data-ng-if="!ordersInfo.length">No orders</td>
+                </tr>
                 <tr class="row" >
                     <td colspan="5" class="tbl-header"></td>
                     <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" data-ng-click="getOrdersStatistics()"><i class="fa fa-refresh"></i></button></td>
