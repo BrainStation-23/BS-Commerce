@@ -22,7 +22,7 @@ angular.module('mean.shopAdmin').factory('themeService', ['$resource', '$http',
                 return getThemeById.get({themeId: themeId});
             },
             updateTheme: function(theme) {
-                var updateTheme = $resource('/api/admin/theme', {}, {
+                var updateTheme = $resource('/api/admin/theme/', {}, {
                     'put': {method: 'PUT'}
                 });
                 return updateTheme.put(theme);

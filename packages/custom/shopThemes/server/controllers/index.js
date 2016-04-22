@@ -59,8 +59,6 @@ exports.createTheme = function(req, res) {
 };
 
 exports.getThemeById = function(req, res) {
-    console.log('them id=  ',req.params.themeId);
-
     Theme.findOne({_id: req.params.themeId}, function(error, theme) {
         if(error) {
             return res.status(400).send({msg: 'Error occurred during getting themes'});
@@ -71,9 +69,29 @@ exports.getThemeById = function(req, res) {
 };
 
 exports.updateTheme = function(req, res) {
-    return res.status(200).send({msg: 'updated'});
+    Theme.findOneAndUpdate({_id: req.body._id}, req.body, function(error, theme) {
+        if(error) {
+           return res.status(400).send({msg: 'Error occurred during updating theme due to invalid information'});
+        }
+        return res.status(200).send({msg: 'Successfully updated'});
+    });
+};
+
+exports.deleteTheme = function(req, res) {
+    Theme.findOneAndRemove({_id: req.params.themeId}, function(error, theme) {
+        if(error) {
+            return res.status(400).send({msg: 'Error occurred during deleting theme due to invalid information'});
+        }
+        return res.status(200).send({msg: 'Successfully deleted'});
+    });
 };
 
 exports.getDefaultTheme = function(req, res) {
-    return res.status(200).send({msg: 'default theme'});
+    Theme.findOne({isDefault: true}, function(error, theme) {
+        if(error) {
+            return res.status(400).send({msg: 'Error occurred during getting theme'});
+        }
+
+        return res.status(200).send({themeName: theme.name, displayName: theme.displayName});
+    });
 };

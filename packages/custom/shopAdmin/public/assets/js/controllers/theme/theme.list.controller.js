@@ -8,7 +8,6 @@ angular.module('mean.shopAdmin').controller('themeListController', ['$scope', 'G
             themeService.getThemes()
                 .$promise
                 .then(function(response) {
-                    console.log(response);
                     $scope.themes = response;
                 });
         };

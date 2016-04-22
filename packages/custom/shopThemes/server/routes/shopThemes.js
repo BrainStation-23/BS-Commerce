@@ -9,13 +9,14 @@ module.exports = function(ShopThemes, app, auth, database) {
 
     app.route('/api/admin/theme')
         .get(themeController.getThemes)
-        .post(themeController.createTheme);
-
-    app.route('/api/admin/theme/:themeId')
-        //.get(themeController.getThemeById)
+        .post(themeController.createTheme)
         .put(themeController.updateTheme);
 
-    app.route('/api/theme/default')
+    app.route('/api/admin/theme/:themeId')
+        .get(themeController.getThemeById)
+        .delete(themeController.deleteTheme);
+
+    app.route('/api/theme')
         .get(themeController.getDefaultTheme);
 
 
