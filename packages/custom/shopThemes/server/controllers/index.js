@@ -92,6 +92,6 @@ exports.getDefaultTheme = function(req, res) {
             return res.status(400).send({msg: 'Error occurred during getting theme'});
         }
 
-        return res.status(200).send({themeName: theme.name, displayName: theme.displayName});
+        return res.status(200).send({name: theme.name, displayName: theme.displayName});
     });
 };

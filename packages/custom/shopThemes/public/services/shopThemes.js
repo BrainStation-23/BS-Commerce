@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('mean.shopThemes').factory('ShopThemes', [
-  function() {
+angular.module('mean.shopThemes').factory('ShopThemes', ['$resource',
+  function($resource) {
     return {
-      name: 'shopThemes'
+      name: 'shopThemes',
+      getTheme: function() {
+        var getTheme = $resource('/api/theme', {}, {
+          'get': {method: 'GET'}
+        });
+        return getTheme.get();
+      }
     };
   }
 ]);
