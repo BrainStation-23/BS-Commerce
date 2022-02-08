@@ -1,0 +1,72 @@
+<div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="pull-right list-options">
+                <div class="btn-group toggle-btn" uib-dropdown>
+                    <button type="button" class="btn btn-primary">Page Size {{state.pageSize}}</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="pageSize in pageSizeOptions">
+                            <a href data-ng-click="setPageSize(pageSize, $event)">{{pageSize}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pull-right list-options">
+                <div class="btn-group toggle-btn" uib-dropdown>
+                    <button type="button" class="btn btn-primary">Order By {{state.orderBy.text}}</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="orderBy in orderByOptions">
+                            <a href data-ng-click="setOrderBy(orderBy.name, orderBy.value, $event)">{{orderBy.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 col-sm-6" data-ng-repeat="product in products">
+            <div class="single-product">
+                <div class=" product-info text-center">
+                    <a data-ui-sref="products-details({sku:product.info.sku})">
+                        <img class="img-responsive center-block" data-ng-if="product.photos.length > 0"
+                             data-ng-src="/api/products/photos/{{product.photos[0].id}}" alt="{{product.info.name}}">
+                    </a>
+                    <h2 data-ng-bind="product.info.price | currency"></h2>
+                    <p>
+                        <a data-ui-sref="Product({sku:product.info.sku})" data-ng-bind="product.info.name"></a>
+                    </p>
+                    <button class="btn btn-success" data-ng-click="addToCart(product, $event)">
+                        <i class="fa fa-shopping-cart"></i> Add to cart
+                    </button>
+                </div>
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="javascript:void(0)" data-ng-click="addToWishlist(product, $event)"><i class="fa fa-plus-square"></i> Add to wishlist</a></li>
+                        <li><a href="javascript:void(0)" data-ng-click="addToCompare(product, $event)"><i class="fa fa-plus-square"></i> Add to compare</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <row class="col-sm-12 col-centered">
+            <uib-pagination data-total-items="state.totalRecords" data-ng-model="state.currentPage"
+                        data-items-per-page="state.pageSize" data-ng-change="pageChanged(state.currentPage)"
+                        data-max-size="5" class="pagination-sm" data-boundary-links="true" data-rotate="false"
+                        data-previous-text="<" data-next-text=">" data-first-text="<<" data-last-text=">>">
+
+            </uib-pagination>
+        </row>
+    </div>
+</div>
+

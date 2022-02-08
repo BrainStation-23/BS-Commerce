@@ -1,0 +1,27 @@
+<div class=" row mini-cart-container">
+    <div class="mini-cart-body" style="max-height: 268px; overflow-y: auto">
+        <div class="pull-right mini-cart-header-text">There are total <b>{{items.length || 0}} item(s)</b> in your cart</div>
+        <hr>
+        <div data-ng-repeat="item in items">
+            <div class="col-sm-12" style="border-bottom: rgba(0, 0, 0, 0.08) solid 1px; padding: 10px 0;">
+                <div class="col-sm-2">
+                    <a data-ui-sref="Product({sku:item.product.info.sku})">
+                        <img class="mini-cart-image" data-ng-if="item.product.photos.length > 0"
+                             data-ng-src="/api/products/photos/{{item.product.photos[0].id}}"/>
+                    </a>
+                </div>
+                <div class="col-sm-10">
+                    <a data-ui-sref="Product({sku:item.product.info.sku})">
+                        <div>{{item.product.info.name}}</div>
+                    </a>
+                    <div class="mini-cart-item-text">Unit Price: {{item.product.info.price | currency}}</div>
+                    <div class="mini-cart-item-text">Quantity : {{item.quantity}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mini-cart-footer">
+        <label class="mini-cart-footer-text pull-left">sub total: {{subTotal}}</label>
+        <a class="btn btn-info pull-right" data-ui-sref="Cart">Go TO CART</a>
+    </div>
+</div>

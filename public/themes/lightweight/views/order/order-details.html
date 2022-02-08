@@ -1,0 +1,209 @@
+<div style="margin-bottom: 50px;">
+    <div class="row text-center">
+        <h2>Order information</h2>
+        <button class="btn btn-primary pull-right" type="button" data-ng-click="printOrderSlip()">Print order invoice</button>
+    </div>
+</div>
+<hr>
+<div id="orderInfo">
+    <div class="row text-center">
+        <div style="color: #4ab2f1">
+            <strong>Thank you for shipping from BS-Commerce</strong>
+        </div>
+        <div>
+            <strong>ORDER# {{order._id}}</strong>
+        </div>
+        <div>
+            <span>Order Date: {{order.orderedDate}}</span>
+        </div>
+        <div>
+            <span>Order Status: {{order.orderStatus}}</span>
+        </div>
+        <div>
+            <span>Order Total Amount: {{order.totalCost | currency}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 table-responsive">
+            <table class="table">
+                <thead class="checkout-page-thead">
+                <tr>
+                    <td>Billing address</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{order.billingAddress.firstName}} {{order.billingAddress.lastName}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td data-ng-bind="order.billingAddress.email"></td>
+                </tr>
+                <tr>
+                    <td>Address line-1</td>
+                    <td data-ng-bind="order.billingAddress.addressLine1"></td>
+                </tr>
+                <tr>
+                    <td>Address line-2</td>
+                    <td data-ng-bind="order.billingAddress.addressLine2"></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td data-ng-bind="order.billingAddress.city"></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td data-ng-bind="order.billingAddress.country"></td>
+                </tr>
+                <tr>
+                    <td>Post code</td>
+                    <td data-ng-bind="order.billingAddress.postCode"></td>
+                </tr>
+                <tr>
+                    <td>Phone number</td>
+                    <td data-ng-bind="order.billingAddress.phoneNumber"></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="checkout-page-thead">
+                <tr>
+                    <td>Shipping address</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{order.shippingAddress.firstName}} {{order.shippingAddress.lastName}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td data-ng-bind="order.shippingAddress.email"></td>
+                </tr>
+                <tr>
+                    <td>Address line-1</td>
+                    <td data-ng-bind="order.shippingAddress.addressLine1"></td>
+                </tr>
+                <tr>
+                    <td>Address line-2</td>
+                    <td data-ng-bind="order.shippingAddress.addressLine2"></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td data-ng-bind="order.shippingAddress.city"></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td data-ng-bind="order.shippingAddress.country"></td>
+                </tr>
+                <tr>
+                    <td>Post code</td>
+                    <td data-ng-bind="order.shippingAddress.postCode"></td>
+                </tr>
+                <tr>
+                    <td>Phone number</td>
+                    <td data-ng-bind="order.shippingAddress.phoneNumber"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="checkout-page-thead">
+                <tr>
+                    <td>Payment</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Payment method</td>
+                    <td data-ng-bind="order.paymentMethod"></td>
+                </tr>
+                <tr>
+                    <td>Payment status</td>
+                    <td data-ng-bind="order.paymentStatus"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="checkout-page-thead">
+                <tr>
+                    <td>Shipping</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Shipping method</td>
+                    <td data-ng-bind="order.shippingMethod"></td>
+                </tr>
+                <tr>
+                    <td>Shipping status</td>
+                    <td data-ng-bind="order.shippingStatus"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12" id="productInfo">
+            <div class="row table-responsive" style="margin-top: 10px; padding: 10px;">
+                <h4>Product(s) Information</h4>
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                    <tr class="text-center">
+                        <td>Product(s)</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Total</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in order.products" class="text-center">
+                        <td><a data-ui-sref="products-details({sku:item.sku})">{{item.name}}</a></td>
+                        <td>{{item.price | currency}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{(item.price * item.quantity) | currency}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-6 col-md-6 pull-right table-responsive" style="padding: 10px;background-color: #f9f9f9;">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td>Sub Total:</td>
+                        <td class="text-right" data-ng-bind="order.productCost | currency"></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping:</td>
+                        <td class="text-right" data-ng-bind="order.shippingCost | currency"></td>
+                    </tr>
+                    <tr style="color: #4ab2f1; font-size: 24px;">
+                        <td>Total:</td>
+                        <td class="text-right" data-ng-bind=" order.totalCost | currency"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-5 col-sm-10">
+        <a class="btn btn-primary" href="/#!/">Continue</a>
+    </div>
+</div>
