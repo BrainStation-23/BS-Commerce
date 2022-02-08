@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/bs-commerce',
+	port: 443,
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/bs-commerce',
 	assets: {
 		lib: {
 			css: [
@@ -10,11 +11,8 @@ module.exports = {
 			],
 			js: [
 				'public/lib/angular/angular.min.js',
-				'public/lib/angular-resource/angular-resource.js', 
-				'public/lib/angular-cookies/angular-cookies.js', 
-				'public/lib/angular-animate/angular-animate.js', 
-				'public/lib/angular-touch/angular-touch.js', 
-				'public/lib/angular-sanitize/angular-sanitize.js', 
+				'public/lib/angular-resource/angular-resource.min.js',
+				'public/lib/angular-animate/angular-animate.min.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js'
@@ -26,27 +24,27 @@ module.exports = {
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/facebook/callback'
+		callbackURL: 'https://localhost:443/auth/facebook/callback'
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
 		clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
-		callbackURL: '/auth/twitter/callback'
+		callbackURL: 'https://localhost:443/auth/twitter/callback'
 	},
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',
 		clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/google/callback'
+		callbackURL: 'https://localhost:443/auth/google/callback'
 	},
 	linkedin: {
 		clientID: process.env.LINKEDIN_ID || 'APP_ID',
 		clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/linkedin/callback'
+		callbackURL: 'https://localhost:443/auth/linkedin/callback'
 	},
 	github: {
 		clientID: process.env.GITHUB_ID || 'APP_ID',
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/github/callback'
+		callbackURL: 'https://localhost:443/auth/github/callback'
 	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
@@ -57,20 +55,5 @@ module.exports = {
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
-	},
-	stripe: {
-		publishableKey: 'pk_test_bvLQL8RHq2KUbEXCwKoYim0Q',
-		secretKey: 'sk_test_MZWnReGdw0E6Iw4Zybd0RPqI'
-	},
-	paypal: {
-		clientInfo: {
-			host : 'api.sandbox.paypal.com',
-			mode:'sandbox',
-			port : '',
-			client_id: 'AfHSUd0B4IKM7JCAsc5VzAHjvFQDBKqzF5w7fHu_eanyBsdYgXefKFrAYrtG7snFlhoVhvNOJUaleb74',
-			client_secret: 'EAXrTB_nYgVeRQIDvbza95Clc5_d9cLGHVXW9ZE2FnACD6JC8ceMxRqgwisV_HoCt09We2D9OtEO_v4M'
-		},
-		successUrl: 'http://localhost:3000/#!/payment/success',
-		cancelUrl: 'http://localhost:3000/#!/payment/cancel'
 	}
 };
