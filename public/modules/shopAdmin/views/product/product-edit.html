@@ -1,0 +1,33 @@
+<div>
+    <h1> {{catId}} </h1>
+
+    <div class="admin-title"><h3>Edit Product Details <a ui-sref="Product.List">(back to Product list)</a></h3>
+        <button type="button" class="btn btn-danger" ng-click="deleteProduct();"> Delete</button>
+        <button class="btn btn-info" type="button" ng-click="update();" data-ng-disabled="productEditForm.$invalid">Save All</button>
+    </div>
+</div>
+<div>
+    <form name="productEditForm">
+        <uib-tabset>
+            <uib-tab heading="Product Info">
+                <tab-product-info></tab-product-info>
+            </uib-tab>
+            <uib-tab heading="Pictures">
+                <tab-product-pictures></tab-product-pictures>
+            </uib-tab>
+            <uib-tab heading="SEO">
+                <tab-product-seo></tab-product-seo>
+            </uib-tab>
+            <!--<uib-tab heading="Discounts">-->
+                <!--<tab-product-discounts></tab-product-discounts>-->
+            <!--</uib-tab>-->
+            <!--<uib-tab heading="Access Control list">-->
+                <!--<tab-product-acl></tab-product-acl>-->
+            <!--</uib-tab>-->
+            <!--<uib-tab heading="Stores">-->
+                <!--<tab-product-stores></tab-product-stores>-->
+            <!--</uib-tab>-->
+        </uib-tabset>
+    </form>
+</div>
+

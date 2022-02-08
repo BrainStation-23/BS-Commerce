@@ -1,0 +1,35 @@
+<div class="">
+    <h4>Incomplete order status</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" role="grid">
+            <thead class="tbl-header">
+            <tr class="row">
+                <th style="width: 40%">Item</th>
+                <th>Total</th>
+                <th>count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="row">
+                <td>Total unpaid orders (pending payment status)</td>
+                <td data-ng-bind="incompleteOrdersInfo[0].paymentPendingTotal || 0 | currency"></td>
+                <td>{{incompleteOrdersInfo[0].paymentPendingCount || 0}} - <a data-ui-sref="Order.List({paymentStatus: 'pending'})">view all</a></td>
+            </tr>
+            <tr class="row">
+                <td>Total not yet shipped orders</td>
+                <td data-ng-bind="incompleteOrdersInfo[0].shippingPendingTotal || 0 | currency"></td>
+                <td>{{incompleteOrdersInfo[0].shippingPendingCount || 0}} - <a data-ui-sref="Order.List({shippingStatus: 'notYetShipped'})">view all</a></td>
+            </tr>
+            <tr class="row">
+                <td>Total incomplete orders (ordered but not yet complete)</td>
+                <td data-ng-bind="incompleteOrdersInfo[0].orderPendingTotal || 0 | currency"></td>
+                <td>{{incompleteOrdersInfo[0].orderPendingCount || 0}} - <a data-ui-sref="Order.List({orderStatus: 'pending'})">view all</a></td>
+            </tr>
+            <tr class="row" >
+                <td colspan="2" class="tbl-header"></td>
+                <td class="tbl-header text-right"><button class="btn btn-default" tooltip="Refresh" tooltip-trigger tooltip-placement="top" data-ng-click="getIncompleteOrdersStatistics()"><i class="fa fa-refresh"></i></button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

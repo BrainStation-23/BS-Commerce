@@ -1,0 +1,81 @@
+<div class="form-container">
+    <div class="row">
+        <div class="col-md-3">
+            <label class="required-label"><question-mark tooltip="The category name"></question-mark> Name</label>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="category.name" required/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label><question-mark tooltip="Category description"></question-mark> Description</label>
+        </div>
+        <div class="col-md-6">
+            <textarea ui-tinymce  ng-model="category.description"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark tooltip="Category picture"></question-mark> Picture
+        </div>
+        <div class="col-md-3">
+            <input type="file" class="btn btn-default" ngf-select ng-model="category.file" ngf-multiple="false" name="file" accept="image/*" />
+            <img ng-show="category.file" ngf-src="category.file"  class="thumb thumbnail" >
+            <img ng-show="category.image" ng-src={{category.image}} class="thumb thumbnail" >
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark tooltip="Select a parent category for this category. Leave this field empty to make this the root level category"></question-mark> Parent Category
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" data-ng-options="category._id as category.name for category in categories" data-ng-model="category.parent">
+                <option value="">no parent</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark tooltip="Check if you want to show a category on home page"></question-mark> Show on home page
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="category.showOnHomePage"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Include in top menu
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="category.includeInTopMenu"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Allow customers to select page size
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="category.allowToSelectPageSize"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark tooltip="Check to publish this category (visible in store). Uncheck to unpublish (category not available)."></question-mark> Published
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="category.published"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark tooltip="Set the category's display order. 1 represents the top of the list."></question-mark> Display order
+        </div>
+        <div class="col-md-1">
+            <input type="number" name="quantity" min="1" max="100" class="form-control" data-ng-model="category.displayOrder"/>
+        </div>
+    </div>
+
+</div>
