@@ -21,7 +21,8 @@
     "jspdf": "^1.2.61",
     "angular-ui-tinymce": "latest",
     "lodash": "^4.11.2",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "canvg": "https://github.com/canvg/canvg.git#v1.5.3"
   },
   "resolutions": {
     "angular": "~1.5.x"
