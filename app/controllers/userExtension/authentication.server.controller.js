@@ -24,8 +24,11 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 	user.username = user.email;
+
+	console.log(user)
 	// Then save the user 
 	user.save(function(err) {
+		console.log("err",{err})
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
