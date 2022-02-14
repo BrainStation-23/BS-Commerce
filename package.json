@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "grunt",
+    "debug": "grunt debug",
     "test": "grunt test",
     "postinstall": "bower install --config.interactive=false"
   },
@@ -43,6 +44,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.2",
     "paypal-rest-sdk": "^1.6.8",
+    "q": "^1.5.1",
     "stripe": "^4.6.0",
     "swig": "~1.4.1",
     "validator": "^5.2.0"
@@ -59,7 +61,6 @@
     "grunt-karma": "^1.0.0",
     "grunt-mocha-test": "^0.12.7",
     "grunt-ng-annotate": "^2.0.2",
-    "grunt-node-inspector": "^0.4.1",
     "grunt-nodemon": "^0.4.2",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",

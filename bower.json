@@ -16,6 +16,7 @@
     "angular-ui-router": "^0.2.18",
     "components-font-awesome": "^4.6.1",
     "metisMenu": "^2.5.0",
+    "canvg": "https://github.com/canvg/canvg.git#v1.5.3",
     "jstree": "^3.3.0",
     "ng-file-upload": "^12.0.4",
     "jspdf": "^1.2.61",
