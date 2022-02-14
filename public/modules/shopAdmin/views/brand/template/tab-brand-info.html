@@ -1,0 +1,52 @@
+<div class="form-container">
+    <div class="row">
+        <div class="col-md-3">
+            <label class="required-label"> <question-mark ></question-mark> Name</label>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="brand.info.name" required/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Description
+        </div>
+        <div class="col-md-6">
+            <textarea ui-tinymce  ng-model="brand.info.description"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Allow customers to select page size
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="brand.info.allowToSelectPageSize"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Published
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="brand.info.published"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Display order
+        </div>
+        <div class="col-md-1">
+            <input type="number" name="quantity" min="1" max="100" class="form-control" data-ng-model="brand.info.displayOrder"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Page Size options (comma separated):
+        </div>
+        <div class="col-md-2">
+            <input type="text" class="form-control" data-ng-model="brand.info.pageSizeOptions"/>
+        </div>
+    </div>
+
+
+</div>

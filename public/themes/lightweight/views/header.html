@@ -1,0 +1,67 @@
+<div class="header-middle" data-ng-controller="HeaderController"><!--header-middle-->
+	<div class="container">
+		<div class="row">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="/#!/" class="navbar-brand">BS-Commerce-Lightweight</a>
+				<!--<a href="/#!/"><img class="img-responsive" src="themes/lightweight/assets/img/bs-commerce-logo.png" data-ng-show="!isCollapsed"></a>-->
+			</div>
+			<div class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+				<div class="shop-menu pull-right">
+					<ul class="nav navbar-nav">
+						<li><a ui-sref="CompareList"><i class="fa fa-exchange" style="transform: rotate(90deg);font-size: 12px;"></i> Compare list</a></li>
+						<li><a ui-sref="Wishlist"><i class="fa fa-star"></i> Wishlist <span style="font-size: 12px">({{totalWishlistItems}})</span></a></li>
+						<li uib-dropdown>
+							<a href id="mini-cart-view" uib-dropdown-toggle><i class="fa fa-shopping-cart"></i> Cart <span style="font-size: 12px">({{totalCartItems}})</span></a>
+							<ul class="dropdown-menu dropdown-menu-right animated fadeIn" uib-dropdown-menu role="menu" aria-labelledby="mini-cart-view">
+								<li >
+									<mini-cart></mini-cart>
+								</li>
+							</ul>
+						</li>
+
+					</ul>
+					<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.isRegistered">
+						<li ui-route="/signup" ng-class="{active: $uiRoute}">
+							<a href="/#!/signup">Sign Up</a>
+						</li>
+						<li class="divider-vertical"></li>
+						<li ui-route="/signin" ng-class="{active: $uiRoute}">
+							<a href="/#!/signin">Sign In</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" data-ng-if="authentication.isRegistered">
+						<li class="dropdown" uib-dropdown>
+							<a href="#" id="profile-option" class="dropdown-toggle" uib-dropdown-toggle>
+								<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby=profile-option">
+								<li>
+									<a href="/#!/settings/profile">Edit Profile</a>
+								</li>
+								<!--<li>-->
+									<!--<a href="/#!/settings/accounts">Manage Social Accounts</a>-->
+								<!--</li>-->
+								<li data-ng-show="authentication.user.provider === 'local'">
+									<a href="/#!/settings/password">Change Password</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="/auth/signout">Signout</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="show-loading" ng-show="isBusy">
+		<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+	</div>
+</div>

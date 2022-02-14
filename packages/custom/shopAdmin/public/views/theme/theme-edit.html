@@ -1,0 +1,38 @@
+<div class="admin-title"><h3>Edit Theme ( <a ui-sref="Theme.List">back to Theme list </a>)</h3>
+    <button class="btn btn-danger" ng-click="delete();">Delete</button>
+</div>
+<hr>
+<div class="form-container">
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark ></question-mark> Name
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="theme.name"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Display name
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="theme.displayName"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <question-mark></question-mark> Set as default theme
+        </div>
+        <div class="col-md-9">
+            <input type="checkbox" ng-model="theme.isDefault"/>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" ng-click="update(theme)">Update</button>
+        </div>
+    </div>
+
+</div>
+

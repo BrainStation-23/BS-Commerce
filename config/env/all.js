@@ -1,54 +1,77 @@
 'use strict';
 
-var path = require('path'),
-  rootPath = path.normalize(__dirname + '/../..');
-
 module.exports = {
-  root: rootPath,
-  http: {
-    port: process.env.PORT || 3000
-  },
-  https: {
-    port: false,
-
-    // Paths to key and cert as string
-    ssl: {
-      key: '',
-      cert: ''
-    }
-  },
-  hostname: process.env.HOST || process.env.HOSTNAME,
-  db: process.env.MONGOHQ_URL,
-  templateEngine: 'swig',
-
-  // The secret should be set to a non-guessable string that
-  // is used to compute a session hash
-  sessionSecret: 'MEAN',
-
-  // The name of the MongoDB collection to store sessions in
-  sessionCollection: 'sessions',
-
-  // The session cookie settings
-  sessionCookie: {
-    path: '/',
-    httpOnly: true,
-    // If secure is set to true then it will cause the cookie to be set
-    // only when SSL-enabled (HTTPS) is used, and otherwise it won't
-    // set a cookie. 'true' is recommended yet it requires the above
-    // mentioned pre-requisite.
-    secure: false,
-    // Only set the maxAge to null if the cookie shouldn't be expired
-    // at all. The cookie will expunge when the browser is closed.
-    maxAge: null
-  },
-
-  // The session cookie name
-  sessionName: 'connect.sid',
-
-  //Custom settings for shop
-  shop:{
-    sessionCookie:{
-      maxAgeWhenRemembered: 1000 * 60 * 60 * 24 * 365
-    }
-  }
+	app: {
+		title: 'BS-Commerce',
+		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
+		keywords: 'MongoDB, Express, AngularJS, Node.js'
+	},
+	port: process.env.PORT || 3000,
+	templateEngine: 'swig',
+	sessionSecret: 'MEAN',
+	sessionCollection: 'sessions',
+	assets: {
+		lib: {
+			css: [
+				'public/lib/bootstrap/dist/css/bootstrap.css',
+				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/lib/components-font-awesome/css/font-awesome.css',
+				'public/lib/metisMenu/dist/metisMenu.css',
+				'public/lib/jstree/dist/themes/default/style.css',
+				'public/lib/toastr/toastr.css'
+			],
+			js: [
+				'public/lib/jquery/dist/jquery.js',
+				'public/lib/angular/angular.js',
+				'public/lib/angular-resource/angular-resource.js', 
+				'public/lib/angular-cookies/angular-cookies.js', 
+				'public/lib/angular-animate/angular-animate.js', 
+				'public/lib/angular-touch/angular-touch.js', 
+				'public/lib/angular-sanitize/angular-sanitize.js', 
+				'public/lib/angular-ui-router/release/angular-ui-router.js',
+				'public/lib/angular-ui-utils/ui-utils.js',
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/lib/metisMenu/dist/metisMenu.js',
+				'public/lib/jstree/dist/jstree.js',
+				'public/lib/ng-file-upload/ng-file-upload.js',
+				'public/lib/tinymce-dist/tinymce.js',
+				'public/lib/angular-ui-tinymce/src/tinymce.js',
+				'public/lib/lodash/dist/lodash.js',
+				'public/lib/toastr/toastr.js',
+				'public/lib/jspdf/dist/jspdf.debug.js'
+			]
+		},
+		css: [
+			'public/modules/*[!shopAdmin]*/css/*.css'
+		],
+		js: [
+			'public/config.js',
+			'public/application.js',
+			'public/modules/*[!shopAdmin, !users]*/*.js',
+			'public/modules/*[!shopAdmin, !users]*/*[!tests]*/*.js'
+		],
+		//================= start our custom variable=====================================
+		adminCss: [
+			'public/modules/**/css/*.css'
+		],
+		adminJs: [
+			'public/config.js',
+			'public/application.js',
+			'public/modules/*/*.js',
+			'public/modules/*/*[!tests]*/*.js',
+			'public/modules/*/*[!tests]*/**/*.js'
+		],
+		themeCss: [
+			'public/themes/**/css/*.css'
+		],
+		themeJs: [
+			'public/themes/*/*.js',
+			'public/themes/**/*.js'
+		],
+		//================= end our custom variable=====================================
+		tests: [
+			'public/lib/angular-mocks/angular-mocks.js',
+			'public/modules/*/tests/*.js'
+		]
+	}
 };

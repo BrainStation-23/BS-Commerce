@@ -1,81 +1,9 @@
-# --------------------
-# OSX Files
-# --------------------
 .DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.Spotlight-V100
-.Trashes
-
-# --------------------
-# Eclipse or Nodeclipse "Enide Studio" Files
-# --------------------
-# recommended to add to Git SCM
-# or generate with `nodeclipse -p` command
-.project
-.settings/
-.*.md.html
-
-
-# --------------------
-# IntelliJ Files
-# --------------------
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# --------------------
-# Netbeans Files
-# --------------------
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-
-# --------------------
-# Node Files
-# --------------------
 .nodemonignore
+.sass-cache/
 npm-debug.log
 node_modules/
-logs/
-
-# --------------------
-# SASS Files
-# --------------------
-.sass-cache/
-
-# --------------------
-# Bower Files
-# --------------------
+public/lib
+app/tests/coverage/
 .bower-*/
-bower_components
-
-# --------------------
-# App Files
-# --------------------
-data/
-test/coverage/
-modules/public/
-modules/views/
-/public/build/
-# /packages/custom/
-/packages/contrib/
-logs/
-
-# --------------------
-# vim Files
-# --------------------
-*.swp
-/builderror.log
-
-# --------------------
-# Exceptions
-# --------------------
-!/migrations/data
+.idea/

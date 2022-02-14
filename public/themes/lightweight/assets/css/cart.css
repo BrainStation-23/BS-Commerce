@@ -1,0 +1,113 @@
+/************************** Styles for mini-cart ***********************/
+
+.mini-cart-container{
+    width: 400px;
+    margin: 5px 10px;
+}
+
+.mini-cart-body {
+    padding: 10px 0;
+}
+
+.mini-cart-li {
+    padding-right: 15px;
+}
+
+.mini-cart-image{
+    width:43px;
+    height: 41px;
+}
+
+.header-middle .container .mini-cart-container .row{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.mini-cart-item-text{
+    font-size: 10px;
+}
+
+.mini-cart-header-text, .mini-cart-footer-text{
+    font-size: 12px;
+}
+
+.header-middle .container .mini-cart-container .mini-cart-footer{
+    border-bottom: none;
+    border-top: 10px;
+    border-bottom: 10px;
+}
+
+.header-middle .container .mini-cart-container .row.mini-cart-footer a{
+    font-size: 12px;
+    margin-top: 0px;
+}
+
+/************************** Styles for cart page ***********************/
+
+.cart-info {
+    margin-top: 20px;
+}
+
+.cart-info table {
+    border: 1px solid #E6E4DF;
+}
+
+.cart-info table tr td {
+    vertical-align: inherit;
+}
+
+.cart-info .table.table-condensed thead tr {
+    height: 51px;
+}
+
+.cart-info .cart-menu {
+    background: #5cb85c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.cart-info .item-img {
+    width: 110px;
+    height: 110px;
+    overflow: hidden;
+}
+
+.cart-quantity-btn a{
+    background: #F0F0E9;
+    font-size: 16px;
+    text-align: center;
+    width: 35px;
+    float: left;
+    padding-top: 5px;
+}
+.cart-quantity-btn a:hover{
+    background: #5cb85c;
+    color: #FFFFFF;
+}
+.cart-quantity-btn input {
+    color: #696763;
+    float: left;
+    font-size: 16px;
+    text-align: center;
+    width: 55px;
+    padding: 4px;
+    margin-right: 5px;
+}
+
+.cart-total-price {
+    color: #5cb85c;
+    font-size: 24px;
+}
+.cart-item-delete a {
+    background: #D3D3C9;
+    color: #FFFFFF;
+     padding: 5px 7px;
+    font-size: 16px;
+}
+.cart-item-delete a:hover {
+    background: #5cb85c;;
+    color: #FFFFFF;
+    padding: 5px 7px;
+    font-size: 16px;
+}

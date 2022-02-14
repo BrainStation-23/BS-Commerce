@@ -3,9 +3,21 @@
 var mean = require('meanio');
 module.exports = function(ShopThemes, app, auth, database) {
     // Home route
-    var index = require('../controllers/index');
+    var themeController = require('../controllers/index');
     app.route('/')
-        .get(index.render);
+        .get(themeController.render);
+
+    app.route('/api/admin/theme')
+        .get(themeController.getThemes)
+        .post(themeController.createTheme)
+        .put(themeController.updateTheme);
+
+    app.route('/api/admin/theme/:themeId')
+        .get(themeController.getThemeById)
+        .delete(themeController.deleteTheme);
+
+    app.route('/api/theme')
+        .get(themeController.getDefaultTheme);
 
 
     app.get('/*',function(req,res,next){
