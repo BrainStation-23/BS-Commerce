@@ -1,9 +1,27 @@
+# Build folders
+/build
+packages/*/build/
+packages/*/examples/*/build/
+es
+lib
+dist
+umd
+css
+
+
+# Cache folders
+.cache
+
+# Logs
+logs
+*.log
+
+
+# Editor
 .DS_Store
-.nodemonignore
-.sass-cache/
-npm-debug.log
-node_modules/
-public/lib
-app/tests/coverage/
-.bower-*/
-.idea/
+*.swp
+.idea
+.vscode
+
+# Dependency directory
+node_modules
