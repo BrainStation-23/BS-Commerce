@@ -1,5 +1,8 @@
 {
-  "name": "root",
+  "name": "bs-commerce",
+  "description": "This is a Monorepo strategy TypeScript based Full-Stack setup for BS commerce",
+  "version": "0.0.1",
+  "author": "Brain station, shaishab",
   "private": true,
   "devDependencies": {
     "lerna": "^4.0.0",
