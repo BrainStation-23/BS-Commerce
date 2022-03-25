@@ -3,7 +3,7 @@ import Image from "next/image";
 import productPic from "../public/product.jpeg";
 import { InferGetServerSidePropsType } from "next";
 
-const Home: NextPage = ({data}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <header className="bg-dark py-5">
@@ -61,7 +61,7 @@ const Home: NextPage = ({data}: InferGetServerSidePropsType<typeof getServerSide
                 </div>
               </div>
             </div> */}
-            { data.map((product : any) => (
+            { props.data.map((product : any) => (
               <div className="col mb-5" key={product.id}>
               <div className="card h-100">
                 <Image className="card-img-top" src={product.image} alt="..."  width="450" height="300"/>
@@ -114,7 +114,7 @@ const Home: NextPage = ({data}: InferGetServerSidePropsType<typeof getServerSide
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
   const res = await fetch(`http://localhost:3000/products`);
-  const data = await res.json()
+  const data : [] = await res.json()
   // console.log(data)
   return {
     props:{
