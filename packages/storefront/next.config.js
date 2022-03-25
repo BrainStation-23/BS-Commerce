@@ -7,9 +7,14 @@ const nextConfig = {
         destination: "/home",
         permanent: true,
       },
-    ];
+    ]
   },
-};
 
-const withTM = require("next-transpile-modules")(["marketplace"]);
-module.exports = withTM(nextConfig);
+  images: {
+    domains: ["fakestoreapi.com"],
+    formats: ["image/avif", "image/webp"],
+  },
+}
+
+const withTM = require("next-transpile-modules")(["marketplace"])
+module.exports = withTM(nextConfig)
