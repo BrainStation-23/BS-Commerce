@@ -1,9 +1,0 @@
-{% extends 'layouts/default-admin.html' %}
-{% block content %}
-<!--<span>{{adminScripts}}</span>-->
-  <section data-ui-view ></section>
-  <script type="text/javascript">
-    window.user = {{user|json|safe}};
-    window.modules = null;
-  </script>
-{% endblock %}
