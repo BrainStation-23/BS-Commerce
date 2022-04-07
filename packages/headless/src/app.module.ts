@@ -6,6 +6,7 @@ import { ProductModule } from "./modules/product/product.module";
 @Module({
   imports: [
     ProductModule,
+    
     HelperModule
   ]
 })

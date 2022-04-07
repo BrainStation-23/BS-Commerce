@@ -10,6 +10,7 @@ export class ProductController {
         private productService: ProductService,
         private helper: Helper
     ) { }
+
     @Post('/')
     async addProduct(@Body() product: Product) {
 
@@ -23,6 +24,7 @@ export class ProductController {
             return this.helper.apiResponse.errorResponse('CAN\'T_CREATE_PRODUCT');
         }
     }
+
     @Get('/:productId')
     async getSingleProduct(@Param('productId') productId: string) {
 
@@ -36,6 +38,7 @@ export class ProductController {
             return this.helper.apiResponse.errorResponse('PRODUCT_NOT_FOUND');
         }
     }
+    
     @Get('/')
     async getAllProducts() {
 
