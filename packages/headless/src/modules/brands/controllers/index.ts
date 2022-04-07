@@ -1,7 +1,7 @@
 import { Brand } from './../../../entity/brand';
 import { Brandservice } from './../services/index';
 import { Helper } from 'src/helper/helper.interface';
-import { Body, Controller, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 
 // app.route('/api/brands') Brand database schema (1 days)
 // .get(brandController.getBrands) Get List of brands (2 days)
@@ -43,8 +43,18 @@ export class BrandController {
     }
 
     @Put('/:id')
-    async editBrand(){
-        
+    async updateBrand(
+        @Param('id') brandId: string,
+        @Body() featuresToUpdate: Brand
+        ){
+        const response = await this.brandService.editBrand(brandId, featuresToUpdate);
+
+        if (response) {
+            return this.helper.apiResponse.successResponse(response);
+        }
+        else {
+            return this.helper.apiResponse.errorResponse('SERVER    _SIDE_ERROR');
+        }
     }
 
 }

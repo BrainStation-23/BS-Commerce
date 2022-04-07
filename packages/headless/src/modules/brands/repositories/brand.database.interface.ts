@@ -3,7 +3,8 @@ import { Brand } from "src/entity/brand";
 
 @Injectable()
 export abstract class IBrandDatabase{
-    abstract findById: (productId: string) => Promise<Brand | null>;
+    abstract findById: (brandId: string) => Promise<Brand | null>;
     abstract findAll: (skip?: number, limit?: number) => Promise<Brand[]>;
-    abstract save: (product: Brand) => Promise<Brand | null>;
+    abstract save: (brand: Brand) => Promise<Brand | null>;
+    abstract update: (brandId: string, brand: Brand) => Promise<Brand | null>;
 }

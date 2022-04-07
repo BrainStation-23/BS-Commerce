@@ -21,4 +21,9 @@ export class BrandRepository {
         const savedBrand = await this.db.save(brand);
         return savedBrand;
     }
+
+    async updateBrand(brandId: string, brandUpdates: Brand): Promise<Brand | null>{
+        const updatedBrand = await this.db.update(brandId, brandUpdates);
+        return updatedBrand;
+    }
 }

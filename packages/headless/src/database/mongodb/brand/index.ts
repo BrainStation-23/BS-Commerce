@@ -20,4 +20,12 @@ export class BrandDatabase implements IBrandDatabase {
         const brands = await BrandModel.find({}).skip(skip).limit(limit);
         return Promise.resolve(brands);
     }
+
+    async update(brandId: string, brand: Brand){
+        const updatedBrand = await BrandModel
+            .findByIdAndUpdate(brandId, brand)
+            .setOptions({ overwrite: true, new: true });
+        
+        return Promise.resolve(brand);
+    }
 }

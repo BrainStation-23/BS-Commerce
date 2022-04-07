@@ -20,7 +20,7 @@ export class Brandservice{
 
     }
 
-    async getbrands(){
+    async getbrands(): Promise<Brand[] | null>{
         const brands = await this.brandRepo.findAllBrand();
 
         if(brands){
@@ -31,8 +31,11 @@ export class Brandservice{
         }
 
     } 
-    async updateBrand(){
 
+    async editBrand(brandId: string, brandFeatures: Brand): Promise<Brand | null>{
+        
+        const response = await this.brandRepo.updateBrand(brandId, brandFeatures);
+        return response || null;
     }
 
     
