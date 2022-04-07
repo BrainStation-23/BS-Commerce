@@ -28,7 +28,7 @@ const Products: FC = () => {
               <div className="text-center">
                 <a
                   className="btn btn-outline-dark mt-auto"
-                  href={`/product/${product?.id}`}
+                  href={`/product/${product?._id}`}
                 >
                   View options
                 </a>
