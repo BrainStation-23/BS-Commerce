@@ -44,7 +44,7 @@ export class BrandController {
 
     @Put('/:id')
     async editBrand(){
-
+        
     }
 
 }
