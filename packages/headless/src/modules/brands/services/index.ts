@@ -7,8 +7,8 @@ import { Injectable } from "@nestjs/common";
 export class Brandservice{
     constructor( private brandRepo: BrandRepository ){}
 
-    async createBrand(brand: Brand) {
-        const doesBrandExist = await this.brandRepo.findBrand(brand.info.id);
+    async createBrand(brand: Brand): Promise<Brand | null> {
+        const doesBrandExist = await this.brandRepo.findBrand(brand.id);
 
         if(doesBrandExist){
             return null;
@@ -21,6 +21,14 @@ export class Brandservice{
     }
 
     async getbrands(){
+        const brands = await this.brandRepo.findAllBrand();
+
+        if(brands){
+            return null;
+        }
+        else{
+            return brands;
+        }
 
     } 
     async updateBrand(){

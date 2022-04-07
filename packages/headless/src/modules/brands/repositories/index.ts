@@ -13,8 +13,8 @@ export class BrandRepository {
     }
 
     async findAllBrand(skip?: number, limit?: number): Promise<Brand[]> {
-        const brand = await this.db.findAll(skip, limit);
-        return brand;
+        const brands = await this.db.findAll(skip, limit);
+        return brands;
     }
 
     async createBrand(brand: Brand): Promise<Brand | null> {

@@ -1,6 +1,6 @@
 export class Brand {
+    id: string;
     info:{
-        id: string,
         name: string
         description: string,
         allowToSelectPageSize: boolean,

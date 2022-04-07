@@ -2,10 +2,10 @@ import { model, Schema } from 'mongoose';
 import { Brand } from 'src/entity/brand';
 
 const BrandSchema = new Schema<Brand>({
+    id: {
+        type: String
+    },
     info:{
-        id: {
-            type: String,
-        },
         name: {
             type: String,
             required: true,

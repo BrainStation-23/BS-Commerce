@@ -18,21 +18,28 @@ export class BrandController {
     ){}
 
     @Get('/')
-    async getAllBrands(@Body() brand: Brand){
+    async getAllBrands(){
+        const response = await this.brandService.getbrands();
+
+        if (response) {
+            return this.helper.apiResponse.successResponse(response);
+        }
+        else {
+            return this.helper.apiResponse.errorResponse('CAN\'T_GET_ALL_BRANDs');
+        }
+
+    }
+
+    @Post('/create')
+    async addBrand(@Body() brand: Brand){
         const response = await this.brandService.createBrand(brand);
-        
+
         if (response) {
             return this.helper.apiResponse.successResponse(response);
         }
         else {
             return this.helper.apiResponse.errorResponse('CAN\'T_CREATE_BRAND');
         }
-
-    }
-
-    @Post('/')
-    async addBrand(){
-
     }
 
     @Put('/:id')
