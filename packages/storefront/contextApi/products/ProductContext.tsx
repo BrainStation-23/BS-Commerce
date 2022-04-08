@@ -3,7 +3,7 @@ import React, {
   useReducer,
 } from "react";
 import ProductsReducer from "./ProductReducer";
-import { Action, ProductsinitialState } from "../../types";
+import { Action, ProductsinitialState, Product } from "../../types";
 
 export const initialState:ProductsinitialState = {
   products: [],
@@ -17,7 +17,8 @@ interface GlobalProductsProps {
 
 type contextProps = {
   state:ProductsinitialState, 
-  dispatch:React.Dispatch<Action>
+  // dispatch:React.Dispatch<Action>,
+  storeProductInfo: (products:Product[]) => void,
 }
 
 export const ProductsApi = createContext<contextProps>({} as contextProps);
@@ -25,10 +26,25 @@ export const ProductsApi = createContext<contextProps>({} as contextProps);
 export const GlobalProducts = ({ children }: GlobalProductsProps) => {
   const [state, dispatch] = useReducer(ProductsReducer, initialState);
 
+ function storeProductInfo(products:Product[]) {
+    try {
+      dispatch({
+        type: "FETCH_PRODUCT",
+        payload: products,
+      });
+    } catch (error) {
+      dispatch({
+        type: "FETCH_PRODUCT_ERROR",
+        payload: {},
+      });
+    }
+  }
+
   return (
     <ProductsApi.Provider
       value={{
-        dispatch,
+        storeProductInfo,
+        // dispatch,
          state,
       }}
     >

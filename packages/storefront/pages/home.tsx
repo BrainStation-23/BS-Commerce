@@ -6,14 +6,11 @@ import { Product } from "../types";
 
 const Home: NextPage<{products:Product[]}> = ({ products }) => {
 
-  const { dispatch } = useContext(ProductsApi);
+  const { storeProductInfo } = useContext(ProductsApi);
 
   useEffect(()=>{
 
-    dispatch({
-      type: "FETCH_PRODUCT",
-      payload: products
-    })
+    storeProductInfo(products)
 
   },[])
 

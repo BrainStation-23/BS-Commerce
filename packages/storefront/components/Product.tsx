@@ -2,15 +2,15 @@ import React, { FC, useContext } from "react";
 import Image from "next/image";
 import { ProductsApi } from "../contextApi/products/ProductContext";
 import productPic from "../public/product.jpeg";
-// import { Products } from "../types";
 
 const Products: FC = () => {
-  const { state } = useContext(ProductsApi);
+  const { state:{ products } } = useContext(ProductsApi);
 
-  console.log(state?.products,"products")
+  console.log(products,"products")
+  
   return (
     <>
-      {state?.products?.map((product) => (
+      {products?.map((product) => (
         <div className="col mb-5" key={product?._id}>
           <div className="card h-100">
             <Image
