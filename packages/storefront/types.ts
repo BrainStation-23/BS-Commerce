@@ -8,10 +8,15 @@ export interface Product {
 export interface ProductsinitialState {
   products: Product[];
   loading: boolean;
-  error: boolean;
+  error: {};
 }
 
-export interface ProductAction {
-  type: string;
-  payload: Product[] | boolean;
+export type Action = 
+| {
+  type: "FETCH_PRODUCT";
+  payload: Product[];
+} 
+| {
+  type: "FETCH_PRODUCT_ERROR";
+  payload: {};
 }

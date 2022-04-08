@@ -1,23 +1,19 @@
-import { fetch_product, fetch_product_error} from "./ProductTypes"
-import { ProductAction } from "../../types"
+import { ProductsinitialState, Action } from "../../types";
 
-export default function ProductsReducer(state = initialState , action:ProductAction) {
-  const { type, payload } = action;
-
-  switch (type) {
- case fetch_product:
+export default function ProductsReducer(state: ProductsinitialState, action: Action) {
+  switch (action.type) {
+    case "FETCH_PRODUCT":
       return {
         ...state,
-        products:payload,
-        loading:false
-    };
-    case fetch_product_error:
+        products: action.payload,
+        loading: false,
+      };
+    case "FETCH_PRODUCT_ERROR":
       return {
         ...state,
-        products:[],
-        error:payload,
-        loading:false
-    };
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

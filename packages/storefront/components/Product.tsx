@@ -5,10 +5,12 @@ import productPic from "../public/product.jpeg";
 // import { Products } from "../types";
 
 const Products: FC = () => {
-  const { products, loading } = useContext(ProductsApi);
+  const { state } = useContext(ProductsApi);
+
+  console.log(state?.products,"products")
   return (
     <>
-      {products?.map((product) => (
+      {state?.products?.map((product) => (
         <div className="col mb-5" key={product?._id}>
           <div className="card h-100">
             <Image

@@ -6,13 +6,17 @@ import { Product } from "../types";
 
 const Home: NextPage<{products:Product[]}> = ({ products }) => {
 
-  const { fetchProductInfo } = useContext(ProductsApi);
+  const { dispatch } = useContext(ProductsApi);
 
   useEffect(()=>{
-    fetchProductInfo(products)
+
+    dispatch({
+      type: "FETCH_PRODUCT",
+      payload: products
+    })
+
   },[])
 
-  console.log(products,"products")
   return (
     <>
       <header className="bg-dark py-5">
