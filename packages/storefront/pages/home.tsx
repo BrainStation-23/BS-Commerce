@@ -1,17 +1,16 @@
-import React, { useContext,useEffect } from "react";
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
-import { ProductsApi } from "../contextApi/products/ProductContext";
 import Products from "../components/Product";
 import { Product } from "../types";
+import { storeProducts } from "../toolkit/ProductsSlice";
+import { useDispatch } from "react-redux";
 
 const Home: NextPage<{products:Product[]}> = ({ products }) => {
-
-  const { storeProductInfo } = useContext(ProductsApi);
-
+ 
+  const dispatch = useDispatch()
+  
   useEffect(()=>{
-
-    storeProductInfo(products)
-
+    dispatch(storeProducts(products))
   },[])
 
   return (

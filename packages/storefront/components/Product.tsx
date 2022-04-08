@@ -1,12 +1,14 @@
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import Image from "next/image";
-import { ProductsApi } from "../contextApi/products/ProductContext";
 import productPic from "../public/product.jpeg";
+import { useSelector } from "react-redux"
+import { RootState } from "../store";
 
 const Products: FC = () => {
-  const { state:{ products } } = useContext(ProductsApi);
 
-  console.log(products,"products")
+  const products = useSelector(
+    (state: RootState) => state.productsStore.products
+  );
   
   return (
     <>
