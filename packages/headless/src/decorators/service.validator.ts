@@ -4,7 +4,14 @@ import { ServiceErrorResponse } from 'src/helper/serviceResponse/service.respons
 
 /**
  * Factory decorator for validating service function arguments against a Joi Schema at run-time.
- * Only the first argument is validated
+ * 
+ * Only the first argument is validated.
+ * 
+ * If the validation fails then it throws ```HttpException``` error with ```BAD_REQUEST``` status.
+ * 
+ * Otherwise the execution passed to the actual function
+ * 
+ * The errors are formatted as the standard error response format used in our project ```ServiceErrorResponse```
  */
 
 export function validateParam(schema: Joi.Schema, options: Joi.ValidationOptions = { abortEarly: false, allowUnknown: false }) {
