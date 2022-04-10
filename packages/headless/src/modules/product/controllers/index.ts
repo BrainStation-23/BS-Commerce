@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { Product } from '../../../entity/product';
 import { ProductService } from '../services';
@@ -14,7 +14,7 @@ export class ProductController {
     @Post('/')
     async addProduct(@Body() product: Product, @Res({ passthrough: true }) res: Response) {
 
-        const { code, ...response } = await this.productService.createProduct(product);
+        const { code, ...response } = await this.productService.createProduct(product, 20);
         res.status(code);
         return response;
     }
@@ -29,9 +29,9 @@ export class ProductController {
     }
 
     @Get('/')
-    async getAllProducts(@Res({ passthrough: true }) res: Response) {
-
-        const { code, ...response } = await this.productService.getAllProducts();
+    async getAllProducts(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response) {
+        console.log(skip, limit);
+        const { code, ...response } = await this.productService.getAllProducts(skip, limit);
         res.status(code);
         return response;
     }
