@@ -25,7 +25,7 @@ export interface ServiceErrorResponse {
      * The code here is used as a standard for communicating with the
      * outer layer of service.
      */
-    code: number;
+    code?: number;
 }
 
 /**
