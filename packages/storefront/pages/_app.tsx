@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import { useEffect } from "react";
 
+import { AuthProvider } from "../context/auth.context";
+
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     typeof document !== undefined
@@ -10,9 +12,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       : null;
   }, []);
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthProvider>
   );
 }
 

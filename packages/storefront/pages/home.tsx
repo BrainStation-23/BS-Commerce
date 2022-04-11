@@ -113,7 +113,8 @@ const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideP
 };
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
-  const res = await fetch(`http://localhost:3000/products`);
+  // const res = await fetch(`http://localhost:3000/products`);
+  const res = await fetch('https://fakestoreapi.com/products')
   const data : [] = await res.json()
   // console.log(data)
   return {
