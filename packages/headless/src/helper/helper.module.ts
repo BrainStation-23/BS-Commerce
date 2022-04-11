@@ -1,13 +1,20 @@
 import { Global, Module } from "@nestjs/common";
-import { APIResponse } from "./apiResponse";
 import { Helper } from "./helper.interface";
 import { HelperService } from "./helper.service";
+import { ServiceResponse } from "./serviceResponse";
+import { IServiceResponse } from "./serviceResponse/service.response.interface";
 
 @Global()
 @Module({
     providers: [
-        { provide: Helper, useClass: HelperService },
-        APIResponse
+        {
+            provide: IServiceResponse,
+            useClass: ServiceResponse
+        },
+        {
+            provide: Helper,
+            useClass: HelperService
+        }
     ],
     exports: [Helper]
 })
