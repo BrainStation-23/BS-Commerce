@@ -20,5 +20,10 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+
+    indent: ['error', 'tab'],
+    'linebreak-style':['error','windows'],
+    quotes:['error','singleb'],
+    semi:['error','always']
   },
 };
