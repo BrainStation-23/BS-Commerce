@@ -8,7 +8,7 @@ export class ProductDatabase implements IProductDatabase {
     constructor() { }
 
     async findById(productId: string) {
-        const product = await ProductModel.findOne({ _id: productId });
+        const product = await ProductModel.findOne({ id: productId });
         return Promise.resolve(product);
     }
     async save(product: Product) {
