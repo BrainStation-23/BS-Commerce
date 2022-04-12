@@ -7,7 +7,7 @@ import { UserAuthService } from '../services/user.service';
 @ApiTags('User Authentication')
 export class UserRegisterController {
   constructor(private userAuthService: UserAuthService) {}
-  @Post('create')
+  @Post('register')
   async register(@Body() body: CreateUserDto): Promise<UserEntityResponse> {
     return this.userAuthService.handleRegister(body);
   }
