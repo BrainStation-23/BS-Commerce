@@ -1,7 +1,8 @@
 // Mongodb dependency implementations
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
+import { CartDatabase as CartDatabaseMongo } from './mongodb/cart/index';
 
-type CLASS_NAME = 'PRODUCT';
+type CLASS_NAME = 'PRODUCT' | 'CART';
 const db = process.env.DATABASE || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -11,6 +12,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'PRODUCT':
             return ProductDatabaseMongo;
+          case 'CART':
+            return CartDatabaseMongo;
 
           default:
             break;
