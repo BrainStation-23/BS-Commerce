@@ -21,20 +21,23 @@ export class CartController {
   @Post()
   async addToCart(
     @Body() item: Item,
-    @Req() req: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.addToCart(
       item,
-      req.user,
+      req.user.id,
     );
     res.status(code);
     return response;
   }
 
   @Get()
-  async getCart(@Req() req: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.cartService.getCart(req.user);
+  async getCart(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.cartService.getCart(req.user.id);
     res.status(code);
     return response;
   }
@@ -51,12 +54,12 @@ export class CartController {
 
   @Put('item')
   async updateCartItem(
-    @Req() req: string,
+    @Req() req: Request,
     @Body() item: Item,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.updateCartItem(
-      req.user,
+      req.user.id,
       item,
     );
     res.status(code);
@@ -65,13 +68,13 @@ export class CartController {
 
   @Delete('item')
   async deleteCartItem(
-    @Req() req: string,
+    @Req() req: Request,
     @Query('productId') productId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
     // const item = { product: productId, quantity: 0 };
     const { code, ...response } = await this.cartService.deleteCartItem(
-      req.user,
+      req.user.id,
       productId,
     );
     res.status(code);
@@ -80,22 +83,22 @@ export class CartController {
 
   @Get('allitems')
   async getItemsWithoutPopulate(
-    @Req() req: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } =
-      await this.cartService.getItemsWithoutPopulate(req.user);
+      await this.cartService.getItemsWithoutPopulate(req.user.id);
     res.status(code);
     return response;
   }
 
   @Delete('allitems')
   async deleteAllCartItems(
-    @Req() req: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.deleteAllCartItems(
-      req.user,
+      req.user.id,
     );
     res.status(code);
     return response;

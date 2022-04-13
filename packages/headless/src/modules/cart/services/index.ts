@@ -10,7 +10,6 @@ import {
 import { CartRepository } from '../repositories';
 import { ItemCreateSchema } from '../validators/cart.create.validator';
 import { stripeConfig } from 'config/stripe/stripe';
-import * as uniqid from 'uniqid';
 
 @Injectable()
 export class CartService {
@@ -26,8 +25,7 @@ export class CartService {
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const existCart = await this.cartRepo.isExistCart(userId);
     if (!existCart) {
-      const id = uniqid();
-      const createCart = await this.cartRepo.createCart(id, userId, [item]);
+      const createCart = await this.cartRepo.createCart(userId, [item]);
       if (!createCart) {
         return this.helper.serviceResponse.errorResponse(
           'Can not create cart',

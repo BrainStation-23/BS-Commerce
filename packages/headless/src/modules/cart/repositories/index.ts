@@ -30,12 +30,8 @@ export class CartRepository {
     return cart;
   }
 
-  async createCart(
-    id: string,
-    userId: string,
-    items: Item[],
-  ): Promise<Cart | null> {
-    const newCart = await this.db.createCart(id, userId, items);
+  async createCart(userId: string, items: Item[]): Promise<Cart | null> {
+    const newCart = await this.db.createCart(userId, items);
     if (!newCart) return null;
     return newCart;
   }

@@ -16,11 +16,7 @@ export abstract class ICartDatabase {
 
   abstract incrementItem: (userId: string, item: Item) => Promise<Cart | null>;
 
-  abstract createCart: (
-    id: string,
-    userId: string,
-    items: Item[],
-  ) => Promise<Cart | null>;
+  abstract createCart: (userId: string, items: Item[]) => Promise<Cart | null>;
 
   abstract getCart: (userId: string) => Promise<Cart | null>;
   abstract deleteCartById: (cartId: string) => Promise<Cart | null>;

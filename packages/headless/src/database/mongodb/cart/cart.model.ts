@@ -3,20 +3,14 @@ import { model, Schema } from 'mongoose';
 import { Cart } from 'src/entity/cart';
 
 const CartSchema = new Schema<Cart>({
-  id: {
-    type: String,
-    required: true,
-  },
   user: {
     type: String,
-    ref: 'User',
     required: true,
   },
   items: [
     {
       product: {
         type: String,
-        ref: 'Product',
         required: true,
       },
       quantity: {
