@@ -9,7 +9,7 @@ export function signin(data: any, router: any) {
       type: Types.USER_LOGIN,
       payload: axios({
         method: "post",
-        url: `${baseUrl}/auth/login`,
+        url: `${baseUrl}/user-auth/login`,
         data,
       }),
     }).then((response: any) => {
@@ -17,7 +17,7 @@ export function signin(data: any, router: any) {
         router.push('/home');
         //window.location.href = "/home"
     }).catch((error: any) => {
-        alert('invalid email or password');
+        alert('invalid phone number or password');
     })
   };
 }
@@ -28,7 +28,7 @@ export function signup(data: any, router: any) {
       type: Types.USER_REGISTER,
       payload: axios({
         method: "post",
-        url: `${baseUrl}/auth/register`,
+        url: `${baseUrl}user-auth/register`,
         data,
       }),
     }).then(() => {

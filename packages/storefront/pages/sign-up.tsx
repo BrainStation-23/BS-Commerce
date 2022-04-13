@@ -3,7 +3,7 @@ import type { NextComponentType } from "next";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
-import { loginSchema } from "../schemas/loginSchema";
+import { registerSchema } from "../schemas/loginSchema";
 import { signup } from "../store/actions/userActions";
 import Layout from "../components/layout";
 
@@ -23,35 +23,37 @@ const Signup: NextComponentType = (props) => {
             <h5 className="d-flex flex-wrap justify-content-center">Sign-Up</h5>
             <Formik
               initialValues={{
-                name: "",
-                email: "",
+                firstname: "",
+                lastname: "",
+                phone: "",
                 password: "",
                 confirm_password: ""
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                    name: values.name,
-                    email: values.email,
+                    firstname: values.firstname,
+                    lastname: values.lastname,
+                    phone: values.phone,
                     password: values.password
                 }
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={loginSchema}
+              validationSchema={registerSchema}
             >
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="form-group mb-3">
-                      <label htmlFor="email" className="form-label">
-                        Name
+                      <label htmlFor="firstname" className="form-label">
+                        First Name
                         <span className="text-danger"> * </span>
                       </label>
                       <Field
-                        type="name"
+                        type="text"
                         className="form-control"
-                        id="name"
-                        name="name"
+                        id="firstname"
+                        name="firstname"
                       />
                       <div className="invalid-feedback d-block">
                         <ErrorMessage name="name" />
@@ -59,18 +61,34 @@ const Signup: NextComponentType = (props) => {
                     </div>
 
                     <div className="form-group mb-3">
-                      <label htmlFor="email" className="form-label">
-                        Email Addresss
+                      <label htmlFor="lastname" className="form-label">
+                        Last Name
                         <span className="text-danger"> * </span>
                       </label>
                       <Field
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="email"
-                        name="email"
+                        id="lastname"
+                        name="lastname"
                       />
                       <div className="invalid-feedback d-block">
-                        <ErrorMessage name="email" />
+                        <ErrorMessage name="name" />
+                      </div>
+                    </div>
+
+                    <div className="form-group mb-3">
+                      <label htmlFor="phone" className="form-label">
+                        Phone
+                        <span className="text-danger"> * </span>
+                      </label>
+                      <Field
+                        type="phone"
+                        className="form-control"
+                        id="phone"
+                        name="phone"
+                      />
+                      <div className="invalid-feedback d-block">
+                        <ErrorMessage name="phone" />
                       </div>
                     </div>
 

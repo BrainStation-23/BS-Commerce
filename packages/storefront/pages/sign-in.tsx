@@ -24,7 +24,7 @@ const Signin: NextComponentType = (props) => {
             <h5 className="d-flex flex-wrap justify-content-center">Sign-In</h5>
             <Formik
               initialValues={{
-                email: "",
+                phone: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
@@ -37,18 +37,18 @@ const Signin: NextComponentType = (props) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="form-group mb-3">
-                      <label htmlFor="email" className="form-label">
-                        Email Addresss
+                      <label htmlFor="phone" className="form-label">
+                        Phone
                         <span className="text-danger"> * </span>
                       </label>
                       <Field
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="email"
-                        name="email"
+                        id="phone"
+                        name="phone"
                       />
                       <div className="invalid-feedback d-block">
-                        <ErrorMessage name="email" />
+                        <ErrorMessage name="phone" />
                       </div>
                     </div>
 
