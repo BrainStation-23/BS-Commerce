@@ -1,6 +1,15 @@
 import type { NextComponentType } from "next";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navbar: NextComponentType = () => {
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}').user.name : null;
+    setLoggedInUser(user);
+  }, [])
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -72,6 +81,22 @@ const Navbar: NextComponentType = () => {
                   0
                 </span>
               </button>
+              {loggedInUser ? (
+                <>
+                  <Link href="#">
+                    <button className="btn btn-outline-dark">
+                      {loggedInUser}
+                    </button>
+                  </Link>
+                  <Link href="/sign-out">
+                    <button className="btn btn-outline-dark">Sign-Out</button>
+                  </Link>
+                </>
+              ) : (
+                <Link href="/sign-in">
+                  <button className="btn btn-outline-dark">Sign-In</button>
+                </Link>
+              )}
             </form>
           </div>
         </div>

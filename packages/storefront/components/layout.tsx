@@ -3,7 +3,8 @@ import Footer from "./footer";
 import Navbar from "./navbar";
 import Viewport from "./viewport";
 
-const Layout: NextComponentType = ({ children }) => {
+const Layout: NextComponentType = (props) => {
+  const { children } = props;
   return (
     <>
       <Viewport />
