@@ -27,11 +27,6 @@ export class ProductController {
         res.status(code);
         return response;
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 6b0c7bad725d1737d6c36760428cdd2327894910
     @Get('/')
     async getAllProducts(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response) {
         console.log(skip, limit);
