@@ -9,6 +9,12 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('BS-Commerce Backend')
+    .addBearerAuth({
+      description: 'User JWT Token',
+      type: 'http',
+      name: 'Authorization',
+      bearerFormat: 'JWT',
+    })
     .setDescription('API description')
     .setVersion('1.0')
     .addTag('BS-Commerce')

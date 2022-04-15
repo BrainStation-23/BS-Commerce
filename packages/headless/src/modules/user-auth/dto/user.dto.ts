@@ -12,9 +12,9 @@ export class CreateUserDto {
 }
 
 export class LoginDto {
-  @ApiProperty()
+  @ApiProperty({ example: '01711223344' })
   phone: string;
-  @ApiProperty()
+  @ApiProperty({ example: '12345' })
   password: string;
 }
 

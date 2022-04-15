@@ -19,10 +19,18 @@ export class UserAuthService {
     return await this.userAuthRepo.save(body);
   }
 
-  async handleLogin(body: LoginDto): Promise<string> {
+  async handleLogin(body: LoginDto): Promise<any> {
     const user = await this.validateUser(body);
+    console.log({ user });
+    if (!user) {
+      return this.helperService.serviceResponse.errorResponse(
+        'Phone number not found.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const payload = {
-      userId: user.id,
+      userId: user._id,
       logInTime: Date.now(),
     };
     const token = this.jwtService.sign(payload, { expiresIn: '7d' });
@@ -31,21 +39,26 @@ export class UserAuthService {
 
   private async validateUser(body: LoginDto): Promise<any> {
     const user = await this.userAuthRepo.findOneForLogin({ phone: body.phone });
-    if (!user) {
-      return this.helperService.serviceResponse.errorResponse(
-        'Phone number not found.',
-        null,
-        HttpStatus.BAD_REQUEST,
-      );
+
+    if (!user._id) {
+      // return this.helperService.serviceResponse.errorResponse(
+      //   'Phone number not found.',
+      //   null,
+      //   HttpStatus.BAD_REQUEST,
+      // );
+      return null;
     }
     const isMatch = await bcrypt.compare(body.password, user.password);
+    console.log({ isMatch });
     if (!isMatch) {
-      return this.helperService.serviceResponse.errorResponse(
-        'Phone number not found.',
-        null,
-        HttpStatus.BAD_REQUEST,
-      );
+      // return this.helperService.serviceResponse.errorResponse(
+      //   'Invalid password.',
+      //   null,
+      //   HttpStatus.BAD_REQUEST,
+      // );
+      return null;
     }
+
     delete user.password;
     return user;
   }
