@@ -20,20 +20,19 @@ export class UserAuthDB implements IUserAuthDB {
   }
 
   async findOne(query: Record<string, string>): Promise<UserEntityResponse> {
-    const doc = await UserModel.findOne(query);
+    const doc = await UserModel.findOne(query).lean();
     if (!doc) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    const user = doc.toJSON();
-    delete user.password;
-    return user;
+    delete doc.password;
+    return doc;
   }
 
   async findOneForLogin(query: Record<string, string>): Promise<UserEntity> {
-    const doc = await UserModel.findOne(query);
+    const doc = await UserModel.findOne(query).lean();
     if (!doc) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    return doc.toJSON();
+    return doc;
   }
 }

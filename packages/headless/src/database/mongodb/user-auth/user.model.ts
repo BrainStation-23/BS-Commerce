@@ -32,15 +32,15 @@ const UserSchema = new Schema<UserEntity>(
       default: '',
     },
   },
-  {
-    toJSON: {
-      transform: function (_, ret) {
-        ret.id = ret._id;
-        delete ret._id;
-        delete ret.__v;
-      },
-    },
-  },
+  // {
+  //   toJSON: {
+  //     transform: function (_, ret) {
+  //       ret.id = ret._id;
+  //       delete ret._id;
+  //       delete ret.__v;
+  //     },
+  //   },
+  // },
 );
 
 const UserModel = model<UserEntity>('user-auth', UserSchema);

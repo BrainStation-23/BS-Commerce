@@ -3,11 +3,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { UserRegisterController } from './controllers/register.controller';
+import { HelperService } from 'src/helper/helper.service';
+import { UserAuthController } from './controllers/auth.controller';
+import { UserProfileController } from './controllers/profile.controller';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { UserAuthRepository } from './repository';
 import { IUserAuthDB } from './repository/user.db.interface';
-import { UserAuthService } from './services/user.service';
+import { UserAuthService } from './services/user-auth.service';
+import { UserProfileService } from './services/user-profile.service';
 
 @Module({
   imports: [
@@ -21,10 +24,12 @@ import { UserAuthService } from './services/user.service';
     }),
   ],
 
-  controllers: [UserRegisterController],
+  controllers: [UserAuthController, UserProfileController],
   providers: [
     UserAuthService,
     UserAuthRepository,
+    UserProfileService,
+    HelperService,
     JwtStrategy,
     { provide: IUserAuthDB, useClass: ResolveDatabaseDependency('USER_AUTH') },
   ],

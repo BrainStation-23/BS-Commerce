@@ -1,11 +1,7 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { HelperService } from 'src/helper/helper.service';
 import { CreateUserDto, LoginDto, UserEntityResponse } from '../dto/user.dto';
 import { UserAuthRepository } from '../repository';
 
@@ -13,6 +9,7 @@ import { UserAuthRepository } from '../repository';
 export class UserAuthService {
   constructor(
     private userAuthRepo: UserAuthRepository,
+    private helperService: HelperService,
     private jwtService: JwtService,
   ) {}
 
@@ -35,14 +32,19 @@ export class UserAuthService {
   private async validateUser(body: LoginDto): Promise<any> {
     const user = await this.userAuthRepo.findOneForLogin({ phone: body.phone });
     if (!user) {
-      throw new HttpException(
+      return this.helperService.serviceResponse.errorResponse(
         'Phone number not found.',
+        null,
         HttpStatus.BAD_REQUEST,
       );
     }
     const isMatch = await bcrypt.compare(body.password, user.password);
     if (!isMatch) {
-      throw new HttpException('Invalid password.', HttpStatus.BAD_REQUEST);
+      return this.helperService.serviceResponse.errorResponse(
+        'Phone number not found.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
     }
     delete user.password;
     return user;
