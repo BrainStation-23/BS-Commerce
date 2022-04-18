@@ -29,10 +29,9 @@ export class Brandservice{
         }
 
     }
-
-    
-    @validateParams({ schema: Joi.number().required().label('Skip') }, { schema: Joi.number().required().label('Limit') })
-    async getbrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+   
+    @validateParams({ schema: Joi.number().label('Skip') }, { schema: Joi.number().label('Limit') })
+    async getBrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
         const foundBrands = await this.brandRepo.findAllBrand(skip, limit);
         
         return this.helper.serviceResponse.successResponse(foundBrands);
@@ -44,6 +43,24 @@ export class Brandservice{
 
         return this.helper.serviceResponse.successResponse(updatedBrand);
     }
+
+    //getBrandById
+    @validateParams({ schema: Joi.string().required().label('id') })
+    async getBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+        const foundBrand = await this.brandRepo.findBrand(brandId);
+
+        return this.helper.serviceResponse.successResponse(foundBrand);
+    }
+
+    @validateParams({ schema: Joi.string().required().label('id') })
+    async deleteBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+        const deletedBrand = await this.brandRepo.deleteBrand(brandId);
+
+        return this.helper.serviceResponse.successResponse(deletedBrand);
+    }
+
+
+    //delete brand
 
     
 }

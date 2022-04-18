@@ -26,4 +26,10 @@ export class BrandRepository {
         const updatedBrand = await this.db.update(brandId, brandUpdates);
         return updatedBrand;
     }
+
+    async deleteBrand(brandId: string): Promise<Brand | null>{
+        const deletedBrand = await this.db.delete(brandId);
+
+        return deletedBrand;
+    }
 }

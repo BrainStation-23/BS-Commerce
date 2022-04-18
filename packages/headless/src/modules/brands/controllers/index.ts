@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { Brand } from './../../../entity/brand';
 import { Brandservice } from './../services/index';
@@ -16,11 +16,19 @@ export class BrandController {
 
     @Get('/')
     async getAllBrands(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response){
-        const {code, ...response} = await this.brandService.getbrands();
-        console.log(code);
+        const {code, ...response} = await this.brandService.getBrands();
         res.status(code);
         return response ;
         
+    }
+
+    @Get('/:id')
+    async getBrandById(@Param('id') brandId: string, @Res({ passthrough: true }) res: Response){
+        const {code, ...response } = await this.brandService.getBrandById(brandId);
+        
+        res.status(code);
+        return response;
+
     }
 
     @Post('/create')
@@ -44,6 +52,16 @@ export class BrandController {
         res.status(code);
         return response;
             
+    }
+
+    @Delete('/:id')
+    async deleteBrandById(@Param('id') brandId: string, @Res({ passthrough: true }) res: Response){
+        const { code, ...response } = await this.brandService.deleteBrandById(brandId);
+
+        res.status(code);
+        return response;
+        
+        
     }
 
 }

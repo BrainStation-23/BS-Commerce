@@ -15,6 +15,11 @@ export class BrandDatabase implements IBrandDatabase {
         await BrandModel.create(brand);
         return Promise.resolve(brand);
     }
+    async delete (brandId: string){
+        const deletedBrand = await BrandModel.findOneAndRemove({_id: brandId}).lean();
+        
+        return Promise.resolve(deletedBrand);
+    }
 
     async findAll(skip?: number, limit?: number) {
         const brands = await BrandModel.find({}).skip(skip).limit(limit).lean();
