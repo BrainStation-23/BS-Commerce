@@ -8,4 +8,7 @@ export abstract class IBrandDatabase{
     abstract save: (brand: Brand) => Promise<Brand | null>;
     abstract update: (brandId: string, brand: Brand) => Promise<Brand | null>;
     abstract delete: (brandId: string) => Promise<Brand | null>;
+    
+
+    
 }
