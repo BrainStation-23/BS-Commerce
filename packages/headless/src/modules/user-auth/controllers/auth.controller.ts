@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto, LoginDto, UserEntityResponse } from '../dto/user.dto';
+import { CreateUserDto, LoginDto } from '../dto/user.dto';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Controller('user-auth')
@@ -8,12 +8,12 @@ import { UserAuthService } from '../services/user-auth.service';
 export class UserAuthController {
   constructor(private userAuthService: UserAuthService) {}
   @Post('register')
-  async register(@Body() body: CreateUserDto): Promise<UserEntityResponse> {
-    return this.userAuthService.handleRegister(body);
+  async register(@Body() body: CreateUserDto) {
+    return await this.userAuthService.handleRegister(body);
   }
 
   @Post('login')
-  async login(@Body() body: LoginDto): Promise<string> {
-    return this.userAuthService.handleLogin(body);
+  async login(@Body() body: LoginDto) {
+    return await this.userAuthService.handleLogin(body);
   }
 }

@@ -10,9 +10,9 @@ import { UserModel } from './user.model';
 @Injectable()
 export class UserAuthDB implements IUserAuthDB {
   async save(body: CreateUserDto): Promise<UserEntityResponse> {
-    const isExist = await UserModel.findOne({ phone: body.phone });
+    const isExist = await UserModel.findOne({ phone: body.phone }).lean();
     if (isExist) {
-      throw new HttpException('User already exist.', HttpStatus.BAD_REQUEST);
+      return null;
     }
     const user = (await UserModel.create(body)).toJSON();
     delete user.password;
@@ -22,7 +22,7 @@ export class UserAuthDB implements IUserAuthDB {
   async findOne(query: Record<string, string>): Promise<UserEntityResponse> {
     const doc = await UserModel.findOne(query).lean();
     if (!doc) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      return null;
     }
     delete doc.password;
     return doc;
