@@ -1,19 +1,16 @@
-import { Module, MiddlewareConsumer } from "@nestjs/common";
-import { HelperModule } from "./helper/helper.module";
-import { LoggerMiddleware } from "./middleware/logger.middleware";
-import { ProductModule } from "./modules/product/product.module";
+import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { HelperModule } from './helper/helper.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
+import { WishListModule } from './modules/wishlist/wishlist.module';
 
 @Module({
   imports: [
-    ProductModule,
-    HelperModule
-  ]
+    WishListModule,
+    HelperModule,
+  ],
 })
-
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('*') // for all route path
+    consumer.apply(LoggerMiddleware).forRoutes('*'); // for all route path
   }
-};
+}
