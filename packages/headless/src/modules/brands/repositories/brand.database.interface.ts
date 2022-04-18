@@ -7,8 +7,8 @@ export abstract class IBrandDatabase{
     abstract findAll: (skip?: number, limit?: number) => Promise<Brand[]>;
     abstract save: (brand: Brand) => Promise<Brand | null>;
     abstract update: (brandId: string, brand: Brand) => Promise<Brand | null>;
-    abstract delete: (brandId: string) => Promise<Brand | null>;
+    // abstract delete: (brandId: string) => Promise<Brand | null>;
     
 
-    
+
 }
