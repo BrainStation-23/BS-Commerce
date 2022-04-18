@@ -1,10 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { validateParams } from 'src/decorators/service.validator';
 import { HelperService } from 'src/helper/helper.service';
 import { TypeServiceResponse } from 'src/helper/serviceResponse/service.response.interface';
 import { CreateUserDto, LoginDto } from '../dto/user.dto';
 import { UserAuthRepository } from '../repository';
+import { UserCreateSchema } from '../validators/user.create.validator';
 
 @Injectable()
 export class UserAuthService {
@@ -14,6 +16,7 @@ export class UserAuthService {
     private jwtService: JwtService,
   ) {}
 
+  @validateParams({ schema: UserCreateSchema })
   async handleRegister(body: CreateUserDto): Promise<TypeServiceResponse> {
     const salt = 10;
     body.password = await bcrypt.hash(body.password, salt);
