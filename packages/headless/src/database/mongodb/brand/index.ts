@@ -8,7 +8,7 @@ export class BrandDatabase implements IBrandDatabase {
     constructor() { }
 
     async findById(brandId: string) {
-        const brand = await BrandModel.findOne({ _id: brandId });
+        const brand = await BrandModel.findOne({ _id: brandId }).lean();
         return Promise.resolve(brand);
     }
     async save(brand: Brand) {
@@ -17,7 +17,7 @@ export class BrandDatabase implements IBrandDatabase {
     }
 
     async findAll(skip?: number, limit?: number) {
-        const brands = await BrandModel.find({}).skip(skip).limit(limit);
+        const brands = await BrandModel.find({}).skip(skip).limit(limit).lean();
         return Promise.resolve(brands);
     }
 
