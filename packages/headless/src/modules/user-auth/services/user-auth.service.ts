@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { validateParams } from 'src/decorators/service.validator';
 import { HelperService } from 'src/helper/helper.service';
 import { TypeServiceResponse } from 'src/helper/serviceResponse/service.response.interface';
-import { CreateUserDto, LoginDto } from '../dto/user.dto';
+import { CreateUserDto, IJwtPayload, LoginDto } from '../dto/user.dto';
 import { UserAuthRepository } from '../repository';
 import { UserCreateSchema } from '../validators/user.create.validator';
 
@@ -45,11 +45,13 @@ export class UserAuthService {
       );
     }
 
-    const payload = {
+    const payload: IJwtPayload = {
       userId: user._id,
+      phone: user.phone,
+      username: `${user.firstName} ${user.lastName}`,
       logInTime: Date.now(),
     };
-    const token = this.jwtService.sign(payload, { expiresIn: '7d' });
+    const token = this.jwtService.sign(payload);
     return this.helperService.serviceResponse.successResponse({ token }, 200);
   }
 }

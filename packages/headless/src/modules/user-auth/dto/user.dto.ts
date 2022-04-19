@@ -23,3 +23,10 @@ export class UserEntityResponse {
   lastName: string;
   phone: string;
 }
+
+export interface IJwtPayload {
+  userId: string;
+  username: string;
+  phone: string;
+  logInTime: number;
+}
