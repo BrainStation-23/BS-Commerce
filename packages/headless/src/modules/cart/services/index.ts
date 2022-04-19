@@ -1,4 +1,4 @@
-import { Cart, Item } from '../../../entity/cart';
+import { Item } from '../../../entity/cart';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as Joi from 'joi';
 import { validateParams } from 'src/decorators/service.validator';

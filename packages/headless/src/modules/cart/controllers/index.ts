@@ -3,14 +3,13 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
   Query,
   Req,
   Res,
 } from '@nestjs/common';
-import { Cart, Item } from '../../../entity/cart';
+import { Item } from '../../../entity/cart';
 import { CartService } from '../services';
 import { Request, Response } from 'express';
 
