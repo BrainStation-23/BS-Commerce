@@ -11,7 +11,7 @@ export class CartDatabase implements ICartDatabase {
     const cart = await CartModel.findOneAndUpdate(
       { user: userId },
       { $push: { items: item } },
-    );
+    ).lean();
     return Promise.resolve(cart);
   }
 
@@ -42,23 +42,23 @@ export class CartDatabase implements ICartDatabase {
         'items.product': item.product,
       },
       { $inc: { 'items.$.quantity': item.quantity } },
-    );
+    ).lean();
     return Promise.resolve(cart);
   }
 
   async createCart(userId: string, items: Item[]): Promise<Cart | null> {
-    const newCart = new CartModel({ user: userId, items: items });
+    const newCart = new CartModel({ user: userId, items: items }).lean();
     await newCart.save();
     return Promise.resolve(newCart);
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({ user: userId });
+    const cart = await CartModel.findOne({ user: userId }).lean();
     return Promise.resolve(cart);
   }
 
   async deleteCartById(cartId: string): Promise<Cart | null> {
-    const cart = CartModel.findByIdAndRemove({ _id: cartId });
+    const cart = CartModel.findByIdAndRemove({ _id: cartId }).lean();
     return Promise.resolve(cart);
   }
 
@@ -72,6 +72,7 @@ export class CartDatabase implements ICartDatabase {
       { new: true },
     )
       .populate('items.product', 'info photos')
+      .lean()
       .exec();
     return Promise.resolve(updatedCart);
   }
@@ -83,6 +84,7 @@ export class CartDatabase implements ICartDatabase {
       { new: true },
     )
       .populate('items.product', 'info photos')
+      .lean()
       .exec();
     return Promise.resolve(cart);
   }
@@ -95,12 +97,14 @@ export class CartDatabase implements ICartDatabase {
       { user: userId },
       { $pull: { items: { product: productId } } },
       { new: true },
-    ).exec();
+    )
+      .lean()
+      .exec();
     return Promise.resolve(cart);
   }
 
   async getItemsWithoutPopulate(userId: string): Promise<Cart | null> {
-    const cart = CartModel.findOne({ user: userId }).exec();
+    const cart = CartModel.findOne({ user: userId }).lean().exec();
     return Promise.resolve(cart);
   }
 
@@ -109,7 +113,9 @@ export class CartDatabase implements ICartDatabase {
       { user: userId },
       { $set: { items: [] } },
       { new: true },
-    ).exec();
+    )
+      .lean()
+      .exec();
     return Promise.resolve(cart);
   }
 }
