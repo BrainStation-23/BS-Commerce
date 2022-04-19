@@ -1,14 +1,17 @@
 import type { NextComponentType } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar: NextComponentType = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const loggedInUser = useSelector((state: any) => state.userReducer.loggedInUser);
 
-  useEffect(() => {
-    const user = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}').user.name : null;
-    setLoggedInUser(user);
-  }, [])
+  //const [loggedInUser, setLoggedInUser] = useState(null);
+
+  // useEffect(() => {
+  //   const user = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}') : null;
+  //   setLoggedInUser(user);
+  // }, [])
 
   return (
     <>
@@ -83,11 +86,6 @@ const Navbar: NextComponentType = () => {
               </button>
               {loggedInUser ? (
                 <>
-                  <Link href="#">
-                    <button className="btn btn-outline-dark">
-                      {loggedInUser}
-                    </button>
-                  </Link>
                   <Link href="/sign-out">
                     <button className="btn btn-outline-dark">Sign-Out</button>
                   </Link>

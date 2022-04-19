@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { Response } from 'express';
 import { CreateUserDto, LoginDto, UserEntityResponse } from '../dto/user.dto';
 import { UserAuthRepository } from '../repository';
 
@@ -29,7 +30,7 @@ export class UserAuthService {
       logInTime: Date.now(),
     };
     const token = this.jwtService.sign(payload, { expiresIn: '7d' });
-    return `Bearer ${token}`;
+    return `${token}`;
   }
 
   private async validateUser(body: LoginDto): Promise<any> {
@@ -46,5 +47,13 @@ export class UserAuthService {
     }
     delete user.password;
     return user;
+  }
+
+  async logout(response: Response) {
+    response.clearCookie('jwt');
+
+    return {
+      message: 'success',
+    };
   }
 }

@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case Types.USER_LOGIN_FULFILLED:
     {
-      const loggedInUser = action.payload.data.user;
+      const loggedInUser = action.payload.data;
       return {
         ...state,
         loggedInUser,

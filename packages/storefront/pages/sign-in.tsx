@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { loginSchema } from "../schemas/loginSchema";
 import { signin } from "../store/actions/userActions";
-import Layout from "../components/layout";
+
 
 const Signin: NextComponentType = (props) => {
   const dispatch = useDispatch();
@@ -17,7 +17,6 @@ const Signin: NextComponentType = (props) => {
   }
 
   return (
-    <Layout>
       <div className="d-flex flex-wrap justify-content-center mt-5">
         <div className="card m-5" style={{ width: " 25rem ", height: "auto" }}>
           <div className="card-body">
@@ -89,8 +88,10 @@ const Signin: NextComponentType = (props) => {
           </div>
         </div>
       </div>
-    </Layout>
   );
 };
 
 export default Signin;
+
+// phone no: 01715969546
+// Pass: P@ssword123

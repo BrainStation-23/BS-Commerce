@@ -31,8 +31,8 @@ const Signup: NextComponentType = (props) => {
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                    firstname: values.firstname,
-                    lastname: values.lastname,
+                    firstName: values.firstname,
+                    lastName: values.lastname,
                     phone: values.phone,
                     password: values.password
                 }
