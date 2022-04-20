@@ -19,7 +19,7 @@ import { UserProfileService } from './services/user-profile.service';
       imports: [ConfigModule],
       useFactory: async () => ({
         secret: '#bs23',
-        signOptions: { expiresIn: '60s' },
+        signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
     }),

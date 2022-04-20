@@ -4,7 +4,11 @@ import * as bcrypt from 'bcrypt';
 import { validateParams } from 'src/decorators/service.validator';
 import { HelperService } from 'src/helper/helper.service';
 import { TypeServiceResponse } from 'src/helper/serviceResponse/service.response.interface';
-import { CreateUserDto, IJwtPayload, LoginDto } from '../dto/user.dto';
+import {
+  CreateUserDto,
+  IJwtPayload,
+  LoginDto,
+} from '../interface/user.interface';
 import { UserAuthRepository } from '../repository';
 import { UserCreateSchema } from '../validators/user.create.validator';
 
@@ -21,6 +25,13 @@ export class UserAuthService {
     const salt = 10;
     body.password = await bcrypt.hash(body.password, salt);
     const doc = await this.userAuthRepo.save(body);
+    if (!doc) {
+      return this.helperService.serviceResponse.errorResponse(
+        'User already exist',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     return this.helperService.serviceResponse.successResponse(
       doc,
       HttpStatus.CREATED,

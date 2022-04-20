@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IUserAuthDB } from './user.db.interface';
-import { CreateUserDto, UserEntityResponse } from '../dto/user.dto';
 import { UserEntity } from 'src/entity/user';
+import { CreateUserDto, UserEntityResponse } from '../interface/user.interface';
+import { IUserAuthDB } from './user.db.interface';
 
 @Injectable()
 export class UserAuthRepository {

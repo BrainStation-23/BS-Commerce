@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from 'src/entity/user';
-import { CreateUserDto, UserEntityResponse } from '../dto/user.dto';
+import { CreateUserDto, UserEntityResponse } from '../interface/user.interface';
 
 @Injectable()
 export abstract class IUserAuthDB {

@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { IJwtPayload } from '../dto/user.dto';
+import { IJwtPayload } from '../interface/user.interface';
 
 /**
  * @return only the userId from jwt payload

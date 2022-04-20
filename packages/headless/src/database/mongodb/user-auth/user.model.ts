@@ -17,6 +17,24 @@ const UserSchema = new Schema<UserEntity>({
     default: '',
     required: true,
   },
+  displayName: {
+    type: String,
+    trim: true,
+    default: '',
+    required: false,
+  },
+  username: {
+    type: String,
+    trim: true,
+    default: '',
+    required: false,
+  },
+  email: {
+    type: String,
+    trim: true,
+    unique: true,
+    required: false,
+  },
   phone: {
     type: String,
     trim: true,
@@ -30,6 +48,13 @@ const UserSchema = new Schema<UserEntity>({
     type: String,
     default: '',
   },
+  provider: {
+    type: String,
+    default: '',
+    required: false,
+  },
+  providerData: {},
+  additionalProviderData: {},
 });
 
 const UserModel = model<UserEntity>('user-auth', UserSchema);

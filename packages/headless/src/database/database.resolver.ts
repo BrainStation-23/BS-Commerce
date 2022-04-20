@@ -1,5 +1,4 @@
 // Mongodb dependency implementations
-import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { UserAuthDB as UserAuthDBMongo } from './mongodb/user-auth';
 
@@ -15,8 +14,6 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return ProductDatabaseMongo;
           case 'USER_AUTH':
             return UserAuthDBMongo;
-          case 'BRAND':
-            return BrandDatabaseMongo;
 
           default:
             break;

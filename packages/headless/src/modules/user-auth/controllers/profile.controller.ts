@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserId, UserInfo } from '../decorator/user.decorator';
-import { IJwtPayload } from '../dto/user.dto';
+import { IJwtPayload } from '../interface/user.interface';
 import { JwtAuthGuard } from '../passport/jwt-auth.guard';
 import { UserProfileService } from '../services/user-profile.service';
 

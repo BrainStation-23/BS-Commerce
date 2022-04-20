@@ -1,9 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UserEntity } from 'src/entity/user';
 import {
   CreateUserDto,
   UserEntityResponse,
-} from 'src/modules/user-auth/dto/user.dto';
+} from '@modules/user-auth/interface/user.interface';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { UserEntity } from 'src/entity/user';
 import { IUserAuthDB } from 'src/modules/user-auth/repository/user.db.interface';
 import { UserModel } from './user.model';
 

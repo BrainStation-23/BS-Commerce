@@ -3,7 +3,6 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HelperModule } from './helper/helper.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { BrandModule } from './modules/brands/brand.module';
 import { ProductModule } from './modules/product/product.module';
 
 @Module({
@@ -14,7 +13,6 @@ import { ProductModule } from './modules/product/product.module';
     ProductModule,
     UserAuthModule,
     HelperModule,
-    BrandModule,
     HelperModule,
   ],
 })
