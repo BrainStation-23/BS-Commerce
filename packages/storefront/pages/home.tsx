@@ -5,13 +5,12 @@ import { Product } from "../types";
 import { storeProducts } from "../toolkit/ProductsSlice";
 import { useDispatch } from "react-redux";
 
-const Home: NextPage<{products:Product[]}> = ({ products }) => {
- 
-  const dispatch = useDispatch()
-  
-  useEffect(()=>{
-    dispatch(storeProducts(products))
-  },[])
+const Home: NextPage<{ products: Product[] }> = ({ products }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(storeProducts(products));
+  }, []);
 
   return (
     <>
@@ -39,7 +38,7 @@ const Home: NextPage<{products:Product[]}> = ({ products }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/products");
+  const res = await fetch("http://localhost:3000/products?skip=0&limit=10");
   const { data } = await res.json();
 
   return {
