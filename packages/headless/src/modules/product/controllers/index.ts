@@ -1,52 +1,39 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
+import { Body, Controller, Get, Param, Post, Query, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { Product } from '../../../entity/product';
 import { ProductService } from '../services';
 
 @Controller('products')
 
 export class ProductController {
+
     constructor(
-        private productService: ProductService,
-        private helper: Helper
+        private productService: ProductService
     ) { }
+
     @Post('/')
-    async addProduct(@Body() product: Product) {
+    async addProduct(@Body() product: Product, @Res({ passthrough: true }) res: Response) {
 
-        console.log(product);
-        const response = await this.productService.createProduct(product);
-
-        if (response) {
-            return this.helper.apiResponse.successResponse(response);
-        }
-        else {
-            return this.helper.apiResponse.errorResponse('CAN\'T_CREATE_PRODUCT');
-        }
+        const { code, ...response } = await this.productService.createProduct(product, 20);
+        res.status(code);
+        return response;
     }
+
     @Get('/:productId')
-    async getSingleProduct(@Param('productId') productId: string) {
+    async getSingleProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
 
         console.log(productId);
-        const response = await this.productService.getProduct(productId);
-
-        if (response) {
-            return this.helper.apiResponse.successResponse(response);
-        }
-        else {
-            return this.helper.apiResponse.errorResponse('PRODUCT_NOT_FOUND');
-        }
+        const { code, ...response } = await this.productService.getProduct(productId);
+        res.status(code);
+        return response;
     }
+
     @Get('/')
-    async getAllProducts() {
-
-        const response = await this.productService.getAllProducts();
-
-        if (response) {
-            return this.helper.apiResponse.successResponse(response);
-        }
-        else {
-            return this.helper.apiResponse.errorResponse('PRODUCT_NOT_FOUND');
-        }
+    async getAllProducts(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response) {
+        console.log(skip, limit);
+        const { code, ...response } = await this.productService.getAllProducts(skip, limit);
+        res.status(code);
+        return response;
     }
 }
 
