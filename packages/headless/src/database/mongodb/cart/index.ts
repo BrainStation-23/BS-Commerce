@@ -47,7 +47,7 @@ export class CartDatabase implements ICartDatabase {
   }
 
   async createCart(userId: string, items: Item[]): Promise<Cart | null> {
-    const newCart = new CartModel({ user: userId, items: items }).lean();
+    const newCart = new CartModel({ user: userId, items: items });
     await newCart.save();
     return Promise.resolve(newCart);
   }
