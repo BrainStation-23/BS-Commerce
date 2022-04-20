@@ -13,7 +13,7 @@ export class WishListRepository {
   }
 
   async isExistItem(userId: string, productId: string): Promise<WishList | null> {
-    return await this.db.findItemByUserIdAndProductId(userId, productId,   );
+    return await this.db.findItemByUserIdAndProductId(userId, productId);
   }
 
   async incrementItem(userId: string, item: Item): Promise<WishList | null> {

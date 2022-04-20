@@ -25,7 +25,7 @@ export class WishListDatabase implements IWishListDatabase {
       },
       { $inc: { 'items.$.quantity': item.quantity } },
       { new: true },
-    );
+    ).lean();
     return Promise.resolve(wishList);
   }
 
@@ -34,7 +34,7 @@ export class WishListDatabase implements IWishListDatabase {
       { user: userId },
       { $push: { items: item } },
       { new: true },
-    );
+    ).lean();
     return Promise.resolve(wishList);
   }
 
@@ -46,16 +46,16 @@ export class WishListDatabase implements IWishListDatabase {
 
   async getWishListByUserId(userId: string): Promise<WishList | null> {
     const wishList = await WishListModel.findOne({ user: userId })
-      .populate('items.product', 'info photos')
       .lean()
+      .populate('items.product', 'info photos')
       .exec();
     return Promise.resolve(wishList);
   }
 
   async getWishListByWishlistId(wishlistId: string,): Promise<WishList | null> {
     const wishList = await WishListModel.findOne({ _id: wishlistId })
-      .populate('items.product', 'info photos')
       .lean()
+      .populate('items.product', 'info photos')
       .exec();
     return Promise.resolve(wishList);
   }
@@ -63,7 +63,7 @@ export class WishListDatabase implements IWishListDatabase {
   async deleteWishListByWishlistId(
     wishlistId: string,
   ): Promise<WishList | null> {
-    const wishList = await WishListModel.findByIdAndRemove(wishlistId);
+    const wishList = await WishListModel.findByIdAndRemove(wishlistId).lean();
     return Promise.resolve(wishList);
   }
 
@@ -76,6 +76,7 @@ export class WishListDatabase implements IWishListDatabase {
       { $set: { 'items.$.quantity': item.quantity } },
       { new: true },
     )
+      .lean()
       .populate('items.product', 'info photos')
       .exec();
     return Promise.resolve(wishList);
@@ -87,6 +88,7 @@ export class WishListDatabase implements IWishListDatabase {
       { $pull: { items: { product: item.product } } },
       { new: true },
     )
+      .lean()
       .populate('items.product', 'info photos')
       .exec();
     return Promise.resolve(wishList);
@@ -104,7 +106,7 @@ export class WishListDatabase implements IWishListDatabase {
       { user: userId },
       { $set: { items: [] } },
       { new: true },
-    ).exec();
+    ).lean().exec();
     return Promise.resolve(wishList);
   }
   async deleteWishlistItemByProductId(userId: string, productId: string): Promise<WishList | null> {
@@ -113,6 +115,7 @@ export class WishListDatabase implements IWishListDatabase {
       { $pull: { items: { product: productId } } },
       { new: true },
     )
+      .lean()
       .populate('items.product', 'info photos')
       .exec();
     return Promise.resolve(wishList);

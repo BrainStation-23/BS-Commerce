@@ -2,6 +2,11 @@ import { model, Schema } from 'mongoose';
 import { WishList } from 'src/entity/wishList';
 
 const WishListSchema = new Schema<WishList>({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   user: {
     type: String,
     required: true,

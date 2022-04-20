@@ -7,7 +7,7 @@ export abstract class IWishListDatabase {
   abstract findItemByUserIdAndProductId: (userId: string, productId: string) => Promise<WishList | null>;
   abstract findWishListAndIncrementItem: (userId: string, item: Item,) => Promise<WishList | null>;
   abstract findWishListAndAddItem: (userId: string, item: Item,) => Promise<WishList | null>;
-  abstract NewWishListCreate: (userId: string, items: Item[],) => Promise<WishList | null>;
+  abstract NewWishListCreate: (userId: string, items: Item[]) => Promise<WishList | null>;
   abstract getWishListByUserId: (userId: string) => Promise<WishList | null>;
   abstract getWishListByWishlistId: (wishlistId: string,) => Promise<WishList | null>;
   abstract deleteWishListByWishlistId: (wishlistId: string,) => Promise<WishList | null>;
