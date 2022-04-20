@@ -2,7 +2,7 @@ import {
   CreateUserDto,
   UserEntityResponse,
 } from '@modules/user-auth/interface/user.interface';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserEntity } from 'src/entity/user';
 import { IUserAuthDB } from 'src/modules/user-auth/repository/user.db.interface';
 import { UserModel } from './user.model';
@@ -31,7 +31,7 @@ export class UserAuthDB implements IUserAuthDB {
   async findOneForLogin(query: Record<string, string>): Promise<UserEntity> {
     const doc = await UserModel.findOne(query).lean();
     if (!doc) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      return null;
     }
     return doc;
   }
