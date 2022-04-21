@@ -1,16 +1,9 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
-import { HelperModule } from './helper/helper.module';
-import { LoggerMiddleware } from './middleware/logger.middleware';
-import { WishListModule } from './modules/wishlist/wishlist.module';
+import { Module } from '@nestjs/common';
+import { ResolveGraphqlModule } from './graphql.module.dependency';
+import { ResolveRestModule } from './rest.module.dependency';
+type API = 'GRAPHQL' | 'REST';
 
 @Module({
-  imports: [
-    WishListModule,
-    HelperModule,
-  ],
+  imports: ('GRAPHQL' as API) ? ResolveGraphqlModule() : ResolveRestModule()
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*'); // for all route path
-  }
-}
+export class AppModule {}

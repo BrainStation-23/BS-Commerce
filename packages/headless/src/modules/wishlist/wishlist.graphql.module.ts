@@ -1,13 +1,14 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { WishListController } from './controllers';
-import { WishListMiddleware } from './middleware/wishList.middleware';
+import { WishListResolver } from './graphql/wishlist.resolver';
 import { WishListRepository } from './repositories';
 import { IWishListDatabase } from './repositories/wishList.database.interface';
+import { WishListController as WishListGraphqlController } from './graphql/wishlist.controller';
 import { WishListService } from './services';
 @Module({
-  controllers: [WishListController],
+  controllers: [WishListGraphqlController],
   providers: [
+    WishListResolver,
     WishListService,
     WishListRepository,
     {
@@ -16,8 +17,4 @@ import { WishListService } from './services';
     },
   ],
 })
-export class WishListModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(WishListMiddleware).forRoutes(WishListController);
-  }
-}
+export class WishListModule {}

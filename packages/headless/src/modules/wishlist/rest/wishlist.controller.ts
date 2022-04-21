@@ -1,21 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res } from '@nestjs/common';
 import { Item } from 'src/entity/wishList';
 import { Response } from 'express';
 import { Helper } from 'src/helper/helper.interface';
 import { WishListService } from '../services';
 
-@Controller('api/wishlist')
+@Controller('wishlist')
 export class WishListController {
   constructor(
     private wishListService: WishListService,
@@ -25,7 +14,6 @@ export class WishListController {
   /* @Post()
   async addWishList(@Body() item: Item, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.wishListService.addToWishList(req.user?._id, item,);
-
     res.status(code);
     return response;
   } */
@@ -46,7 +34,6 @@ export class WishListController {
   /* @Get('user')
   async getWishList(@Req() req: any, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.wishListService.getWishList(req.user?._id);
-
     res.status(code);
     return response;
   } */
@@ -58,7 +45,7 @@ export class WishListController {
    */
   @Get('user/:userId')
   async getWishList(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getWishList(userId,);
+    const { code, ...response } = await this.wishListService.getWishList(userId);
     res.status(code);
     return response;
   }
@@ -72,7 +59,7 @@ export class WishListController {
 
   @Delete('/:wishlistId')
   async deleteWishListById(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistById(wishlistId,);
+    const { code, ...response } = await this.wishListService.deleteWishlistById(wishlistId);
     res.status(code);
     return response;
   }
@@ -86,14 +73,14 @@ export class WishListController {
 
   @Patch('/item/:userId')
   async updateWishlistItem(@Body() item: Item, @Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, userId,);
+    const { code, ...response } = await this.wishListService.updateWishlistItem(item, userId);
     res.status(code);
     return response;
   }
 
   @Delete('/item')
   async deleteWishlistItem(@Query('product') product: string, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, req.user?._id,);
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, req.user?._id);
     res.status(code);
     return response;
   }
@@ -106,7 +93,7 @@ export class WishListController {
   } */
 
   @Get('/allitems/:userId')
-  async getItemsWithoutPopulate(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
+  async getItemsWithoutPopulate(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.getWishlistWithoutPopulate(userId);
     res.status(code);
     return response;
@@ -120,7 +107,7 @@ export class WishListController {
   } */
 
   @Delete('/allitems/:userId')
-  async deleteAllWishlistItems(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
+  async deleteAllWishlistItems(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.deleteAllWishlistItems(userId);
     res.status(code);
     return response;
