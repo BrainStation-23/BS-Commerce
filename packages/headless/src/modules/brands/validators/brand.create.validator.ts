@@ -5,7 +5,7 @@ import { Brand } from './../../../entity/brand';
 export const BrandCreateSchema = Joi.object<Brand>({
     id: Joi.string(),
     info:{
-        name: Joi.string(),
+        name: Joi.string().required(),
         description: Joi.string(),
         allowToSelectPageSize: Joi.boolean(),
         published: Joi.boolean(),

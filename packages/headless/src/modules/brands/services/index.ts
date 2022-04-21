@@ -18,7 +18,7 @@ export class Brandservice{
 
     @validateParams({ schema: BrandCreateSchema})
     async createBrand(brand: Brand): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
-        const doesBrandExist = await this.brandRepo.findBrand(brand.id);
+        const doesBrandExist = await this.brandRepo.findBrandById(brand.id);
 
         if(doesBrandExist){
             return this.helper.serviceResponse.errorResponse('Brand already exists', null, HttpStatus.BAD_REQUEST);
@@ -32,29 +32,28 @@ export class Brandservice{
    
     @validateParams({ schema: Joi.number().label('Skip') }, { schema: Joi.number().label('Limit') })
     async getBrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
-        const foundBrands = await this.brandRepo.findAllBrand(skip, limit);
+        const foundBrands = await this.brandRepo.findAllBrands(skip, limit);
         
         return this.helper.serviceResponse.successResponse(foundBrands);
     } 
 
     @validateParams({ schema: Joi.string().required().label('id') })
     async editBrand(brandId: string, brandFeatures: Brand): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
-        const updatedBrand= await this.brandRepo.updateBrand(brandId, brandFeatures);
+        const updatedBrand= await this.brandRepo.updateBrandById(brandId, brandFeatures);
 
         return this.helper.serviceResponse.successResponse(updatedBrand);
     }
 
-    //getBrandById
     @validateParams({ schema: Joi.string().required().label('id') })
     async getBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
-        const foundBrand = await this.brandRepo.findBrand(brandId);
+        const foundBrand = await this.brandRepo.findBrandById(brandId);
 
         return this.helper.serviceResponse.successResponse(foundBrand);
     }
 
     @validateParams({ schema: Joi.string().required().label('id') })
     async deleteBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
-        const deletedBrand = await this.brandRepo.deleteBrand(brandId);
+        const deletedBrand = await this.brandRepo.deleteBrandById(brandId);
 
         return this.helper.serviceResponse.successResponse(deletedBrand);
     }

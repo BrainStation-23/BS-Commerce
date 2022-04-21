@@ -7,28 +7,28 @@ import { Brand } from 'src/entity/brand';
 export class BrandRepository {
     constructor(private readonly db: IBrandDatabase) { }
 
-    async findBrand(brandId: string): Promise<Brand | null> {
-        const brand = await this.db.findById(brandId);
+    async findBrandById(brandId: string): Promise<Brand | null> {
+        const brand = await this.db.getBrandById(brandId);
         return brand;
     }
 
-    async findAllBrand(skip?: number, limit?: number): Promise<Brand[]> {
-        const brands = await this.db.findAll(skip, limit);
+    async findAllBrands(skip?: number, limit?: number): Promise<Brand[]> {
+        const brands = await this.db.getAllBrands(skip, limit);
         return brands;
     }
 
     async createBrand(brand: Brand): Promise<Brand | null> {
-        const savedBrand = await this.db.save(brand);
+        const savedBrand = await this.db.addNewBrand(brand);
         return savedBrand;
     }
 
-    async updateBrand(brandId: string, brandUpdates: Brand): Promise<Brand | null>{
-        const updatedBrand = await this.db.update(brandId, brandUpdates);
+    async updateBrandById(brandId: string, brandUpdates: Brand): Promise<Brand | null>{
+        const updatedBrand = await this.db.updateBrandById(brandId, brandUpdates);
         return updatedBrand;
     }
 
-    async deleteBrand(brandId: string): Promise<Brand | null>{
-        const deletedBrand = await this.db.delete(brandId);
+    async deleteBrandById(brandId: string): Promise<Brand | null>{
+        const deletedBrand = await this.db.deleteBrandById(brandId);
 
         return deletedBrand;
     }
