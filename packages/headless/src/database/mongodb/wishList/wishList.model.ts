@@ -26,15 +26,8 @@ const WishListSchema = new Schema<WishList>({
       _id: false,
     },
   ],
-
-  createdOn: {
-    type: Date,
-    default: new Date(),
-  },
-  updatedOn: {
-    type: Date,
-    default: new Date(),
-  },
+},{
+  timestamps: true
 });
 
 const WishListModel = model<WishList>('wishList', WishListSchema);

@@ -4,37 +4,29 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class WishListResolver {
-  constructor(private wishListService: WishListService) {}
+  constructor(private wishListService: WishListService) { }
 
-  //Graphql Query
+  /**
+   * Query Start
+   */
 
   @Query()
   async getWishlist(@Args('wishlistId') wishlistId: string) {
-    return await this.wishListService.getWishlistById(wishlistId);
+    return await this.wishListService.getWishlist(wishlistId);
   }
 
   @Query()
   async getUserWishlist(@Args('userId') userId: string) {
-    return await this.wishListService.getWishList(userId);
+    return await this.wishListService.getUserWishlist(userId);
   }
 
-  @Query()
-  async getItemsWithoutPopulate(@Args('userId') userId: string) {
-    return await this.wishListService.getWishlistWithoutPopulate(userId);
-  }
+  /**
+  * Query End
+  */
 
-  /* @Query()
-  async hello() {
-    return {
-      message: async () => {
-        const wishlist: any = await this.wishListService.getWishlistById('625d312f4fb9625b8052b135');
-        return wishlist.data;
-      },
-      name: () => { console.log('Name called'); return 'Md Ismail Hosen'; }
-    }
-  } */
-
-  //Graphql Mutation
+  /**
+  * Mutation Start
+  */
 
   @Mutation()
   async addToWishlist(
@@ -45,8 +37,16 @@ export class WishListResolver {
   }
 
   @Mutation()
-  async deleteWishListById(@Args('wishlistId') wishlistId: string) {
-    return await this.wishListService.deleteWishlistById(wishlistId);
+  async deleteWishList(@Args('wishlistId') wishlistId: string) {
+    return await this.wishListService.deleteWishlist(wishlistId);
+  }
+
+  @Mutation()
+  async updateWishlistItem(
+    @Args('item') item: Item,
+    @Args('userId') userId: string,
+  ) {
+    return await this.wishListService.updateWishlistItem(item, userId);
   }
 
   @Mutation()
@@ -61,4 +61,8 @@ export class WishListResolver {
   async deleteAllWishlistItems(@Args('userId') userId: string) {
     return await this.wishListService.deleteAllWishlistItems(userId);
   }
+
+  /**
+   * Mutation End
+   */
 }

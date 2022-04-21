@@ -4,71 +4,60 @@ import { IWishListDatabase } from 'src/modules/wishlist/repositories/wishList.da
 import { WishListModel } from './wishList.model';
 @Injectable()
 export class WishListDatabase implements IWishListDatabase {
-  async findWishListByUserId(userId: string): Promise<WishList | null> {
-    const wishList = await WishListModel.findOne({ user: userId }).lean();
-    return Promise.resolve(wishList);
+
+  async getUserWishList(userId: string): Promise<WishList | null> {
+    return await WishListModel.findOne({ user: userId }).lean().exec();;
   }
 
-  async findItemByUserIdAndProductId(userId: string, productId: string,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOne({
+  async getItem(userId: string, productId: string,): Promise<WishList | null> {
+    return await WishListModel.findOne({
       user: userId,
       'items.product': productId,
-    }).lean();
-    return Promise.resolve(wishList);
+    })
+      .lean()
+      .exec();
   }
 
-  async findWishListAndIncrementItem(userId: string, item: Item,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOneAndUpdate(
+  async incrementWishListItem(userId: string, item: Item,): Promise<WishList | null> {
+    return await WishListModel.findOneAndUpdate(
       {
         user: userId,
         'items.product': item.product,
       },
       { $inc: { 'items.$.quantity': item.quantity } },
       { new: true },
-    ).lean();
-    return Promise.resolve(wishList);
+    )
+      .lean()
+      .exec();
   }
 
-  async findWishListAndAddItem(userId: string, item: Item,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOneAndUpdate(
+  async addWishListItem(userId: string, item: Item,): Promise<WishList | null> {
+    return await WishListModel.findOneAndUpdate(
       { user: userId },
       { $push: { items: item } },
       { new: true },
-    ).lean();
-    return Promise.resolve(wishList);
-  }
-
-  async NewWishListCreate(userId: string, items: Item[]): Promise<WishList | null> {
-    const newWishlist = new WishListModel({ user: userId, items: items });
-    await newWishlist.save();
-    return Promise.resolve(newWishlist);
-  }
-
-  async getWishListByUserId(userId: string): Promise<WishList | null> {
-    const wishList = await WishListModel.findOne({ user: userId })
+    )
       .lean()
-      .populate('items.product', 'info photos')
       .exec();
-    return Promise.resolve(wishList);
   }
 
-  async getWishListByWishlistId(wishlistId: string,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOne({ _id: wishlistId })
-      .lean()
-      .populate('items.product', 'info photos')
-      .exec();
-    return Promise.resolve(wishList);
+  async createWishList(userId: string, items: Item[]): Promise<WishList | null> {
+    const wishlist = new WishListModel({ user: userId, items: items });
+    return await wishlist.save();
   }
 
-  async deleteWishListByWishlistId(
+  async getWishList(wishlistId: string,): Promise<WishList | null> {
+    return await WishListModel.findOne({ _id: wishlistId }).lean().exec();
+  }
+
+  async deleteWishList(
     wishlistId: string,
   ): Promise<WishList | null> {
-    const wishList = await WishListModel.findByIdAndRemove(wishlistId).lean();
-    return Promise.resolve(wishList);
+    return await WishListModel.findByIdAndRemove(wishlistId).lean().exec();;
   }
 
   async updateWishlistItem(userId: string, item: Item,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOneAndUpdate(
+    return await WishListModel.findOneAndUpdate(
       {
         user: userId,
         'items.product': item.product,
@@ -77,47 +66,26 @@ export class WishListDatabase implements IWishListDatabase {
       { new: true },
     )
       .lean()
-      .populate('items.product', 'info photos')
       .exec();
-    return Promise.resolve(wishList);
   }
 
-  async deleteWishlistItem(userId: string, item: Item,): Promise<WishList | null> {
-    const wishList = WishListModel.findOneAndUpdate(
-      { user: userId },
-      { $pull: { items: { product: item.product } } },
-      { new: true },
-    )
-      .lean()
-      .populate('items.product', 'info photos')
-      .exec();
-    return Promise.resolve(wishList);
-  }
-
-  async getWishListWithoutPopulateByUserId(userId: string,): Promise<WishList | null> {
-    const wishList = await WishListModel.findOne({ user: userId })
-      .lean()
-      .exec();
-    return Promise.resolve(wishList);
-  }
-
-  async deleteAllWishlistItemsByUserId(userId: string,): Promise<WishList | null> {
-    const wishList = WishListModel.findOneAndUpdate(
-      { user: userId },
-      { $set: { items: [] } },
-      { new: true },
-    ).lean().exec();
-    return Promise.resolve(wishList);
-  }
-  async deleteWishlistItemByProductId(userId: string, productId: string): Promise<WishList | null> {
-    const wishList = WishListModel.findOneAndUpdate(
+  async deleteWishlistItem(userId: string, productId: string): Promise<WishList | null> {
+    return WishListModel.findOneAndUpdate(
       { user: userId },
       { $pull: { items: { product: productId } } },
       { new: true },
     )
       .lean()
-      .populate('items.product', 'info photos')
       .exec();
-    return Promise.resolve(wishList);
+  }
+
+  async deleteAllWishlistItems(userId: string,): Promise<WishList | null> {
+    return WishListModel.findOneAndUpdate(
+      { user: userId },
+      { $set: { items: [] } },
+      { new: true },
+    )
+      .lean()
+      .exec();
   }
 }

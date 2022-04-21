@@ -8,8 +8,8 @@ export const ResolveGraphqlModule = () => {
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['src/**/*.graphql'],
-      path: '/v1/graphql',
-      playground: true,
+      path: '/graphql',
+      playground: true, // if env is development
     }),
   ];
 };

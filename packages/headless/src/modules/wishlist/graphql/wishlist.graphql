@@ -1,5 +1,3 @@
-scalar DateTime
-
 type Item {
   product: String!
   quantity: Int!
@@ -8,11 +6,6 @@ type Item {
 input ItemInput {
   product: String!
   quantity: Int!
-}
-
-type HelloResponse {
-  message: WishList!
-  name: String
 }
 
 type WishListResponse {
@@ -25,20 +18,17 @@ type WishList {
   id: String!
   user: String!
   items: [Item!]!
-  createdOn: DateTime
-  updatedOn: DateTime
 }
 
 type Query {
-  hello: HelloResponse
   getWishlist(wishlistId: String!): WishListResponse!
   getUserWishlist(userId: String!): WishListResponse!
-  getItemsWithoutPopulate(userId: String!): WishListResponse!
 }
 
 type Mutation {
   addToWishlist(item: ItemInput!, userId: String!): WishListResponse!
-  deleteWishListById(wishlistId: String!): WishListResponse!
-  deleteWishlistItem(product: String!, userId: String): WishListResponse!
+  deleteWishList(wishlistId: String!): WishListResponse!
+  updateWishlistItem(item: ItemInput!, userId: String!): WishListResponse!
+  deleteWishlistItem(product: String!, userId: String!): WishListResponse!
   deleteAllWishlistItems(userId: String!): WishListResponse!
 }

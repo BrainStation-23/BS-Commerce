@@ -1,114 +1,59 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res } from '@nestjs/common';
 import { Item } from 'src/entity/wishList';
 import { Response } from 'express';
-import { Helper } from 'src/helper/helper.interface';
 import { WishListService } from '../services';
 
 @Controller('wishlist')
 export class WishListController {
   constructor(
     private wishListService: WishListService,
-    private helper: Helper,
   ) { }
 
-  /* @Post()
+  @Post()
   async addWishList(@Body() item: Item, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.addToWishList(req.user?._id, item,);
-    res.status(code);
-    return response;
-  } */
-
-  /**
-   *
-   * @param item : Item
-   * @param userId : string
-   * @returns WishList or null
-   */
-  @Post('/:userId')
-  async addWishList(@Body() item: Item, @Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.addToWishList(userId, item,);
+    const { code, ...response } = await this.wishListService.addToWishList(req?.userId, item,);
     res.status(code);
     return response;
   }
 
-  /* @Get('user')
-  async getWishList(@Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getWishList(req.user?._id);
-    res.status(code);
-    return response;
-  } */
-
-  /**
-   *
-   * @param userId string
-   * @returns WishList or null
-   */
-  @Get('user/:userId')
-  async getWishList(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getWishList(userId);
+  @Get('user')
+  async getUserWishlist(@Req() req: any, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.getUserWishlist(req?.userId);
     res.status(code);
     return response;
   }
 
   @Get(':wishlistId')
-  async getWishListById(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getWishlistById(wishlistId,);
+  async getWishList(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.getWishlist(wishlistId,);
     res.status(code);
     return response;
   }
 
   @Delete('/:wishlistId')
-  async deleteWishListById(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistById(wishlistId);
+  async deleteWishlist(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlist(wishlistId);
     res.status(code);
     return response;
   }
 
-  /* @Patch('/item')
+  @Patch('/item')
   async updateWishlistItem(@Body() item: Item, @Req() req: any, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, req.user?._id,);
-    res.status(code);
-    return response;
-  } */
-
-  @Patch('/item/:userId')
-  async updateWishlistItem(@Body() item: Item, @Param('userId') userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, userId);
+    const { code, ...response } = await this.wishListService.updateWishlistItem(item, req?.userId);
     res.status(code);
     return response;
   }
 
   @Delete('/item')
   async deleteWishlistItem(@Query('product') product: string, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, req.user?._id);
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, req?.userId);
     res.status(code);
     return response;
   }
 
-  /* @Get('/allitems')
-  async getItemsWithoutPopulate(@Req() req: any, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.getWishlistWithoutPopulate(req.user?._id,);
-    res.status(code);
-    return response;
-  } */
-
-  @Get('/allitems/:userId')
-  async getItemsWithoutPopulate(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.getWishlistWithoutPopulate(userId);
-    res.status(code);
-    return response;
-  }
-
-  /* @Delete('/allitems')
+  @Delete('/allitems')
   async deleteAllWishlistItems(@Req() req: any, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(req.user?._id,);
-    res.status(code);
-    return response;
-  } */
-
-  @Delete('/allitems/:userId')
-  async deleteAllWishlistItems(@Param('userId') userId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(userId);
+    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(req?.userId,);
     res.status(code);
     return response;
   }
