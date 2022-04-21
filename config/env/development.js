@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/bs-commerce-dev',
+	db: 'mongodb://database/bs-commerce-dev',
 	app: {
 		title: 'BS-Commerce - Development Environment'
 	},
@@ -46,9 +46,9 @@ module.exports = {
 	},
 	paypal: {
 		clientInfo: {
-			host : 'api.sandbox.paypal.com',
-			mode:'sandbox',
-			port : '',
+			host: 'api.sandbox.paypal.com',
+			mode: 'sandbox',
+			port: '',
 			client_id: 'AbQzi5PqXs38yaCZ4M_bCP7KVGx6xa_jdF9czFTWMROL2GENwwrK7ChsdFD-OTwDJ24wDcBO7hwM4SRj',
 			client_secret: 'EFiMq09cVKB2Dq95B2b9eykTm-p0aRQr-vocCGRzKY5Rj1JT0JsW-wbcaRapmGw633gl4cTn3iXSNXQw'
 		},

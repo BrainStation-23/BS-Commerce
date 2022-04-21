@@ -1,15 +1,18 @@
-FROM dockerfile/nodejs
-
-MAINTAINER Matthias Luebken, matthias@catalyst-zero.com
+FROM node:10.24.1-alpine3.11
 
 WORKDIR /home/mean
+
+# Install git for bower install
+RUN apk update
+RUN apk add git
+
+# Install Mean.JS packages
+ADD package.json /home/mean/package.json
+ADD package-lock.json /home/mean/package-lock.json
 
 # Install Mean.JS Prerequisites
 RUN npm install -g grunt-cli
 RUN npm install -g bower
-
-# Install Mean.JS packages
-ADD package.json /home/mean/package.json
 RUN npm install
 
 # Manually trigger bower. Why doesnt this work via npm install?
@@ -25,5 +28,5 @@ ENV NODE_ENV development
 
 # Port 3000 for server
 # Port 35729 for livereload
-EXPOSE 3000 35729
-CMD ["grunt"]
+EXPOSE 3000
+CMD ./node_modules/.bin/forever -m 3 server.js -l ./logs/access.log
