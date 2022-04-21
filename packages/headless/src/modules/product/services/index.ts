@@ -56,12 +56,4 @@ export class ProductService {
     const foundProduct = await this.productRepo.findAllProduct(skip, limit);
     return this.helper.serviceResponse.successResponse(foundProduct);
   }
-
-  private test() {
-    ////
-    ///if err
-    return this.helper.serviceResponse.errorResponse('Product not found', {
-      product: ['Not found'],
-    });
-  }
 }

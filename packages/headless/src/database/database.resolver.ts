@@ -1,8 +1,8 @@
 // Mongodb dependency implementations
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
-import { UserAuthDB as UserAuthDBMongo } from './mongodb/user-auth';
+import { UserAuthDB as UserAuthDBMongo } from './mongodb/user';
 
-type CLASS_NAME = 'PRODUCT' | 'USER_AUTH' | 'BRAND';
+type CLASS_NAME = 'PRODUCT' | 'USER';
 const db = process.env.DATABASE || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -12,7 +12,7 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'PRODUCT':
             return ProductDatabaseMongo;
-          case 'USER_AUTH':
+          case 'USER':
             return UserAuthDBMongo;
 
           default:

@@ -1,13 +1,12 @@
+import { Injectable } from '@nestjs/common';
 import { Product } from '../../../entity/product';
 import { IProductDatabase } from '../../../modules/product/repositories/product.database.interface';
 import { ProductModel } from './product.model';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
   async findById(productId: string) {
-    const product = await ProductModel.findOne({ id: productId });
-    return Promise.resolve(product);
+    return await ProductModel.findOne({ id: productId }).lean();
   }
   async save(product: Product) {
     await ProductModel.create(product);

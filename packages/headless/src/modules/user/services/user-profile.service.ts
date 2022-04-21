@@ -1,17 +1,17 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { HelperService } from 'src/helper/helper.service';
-import { UserAuthRepository } from '../repository';
+import { UserRepository } from '../repository';
 
 @Injectable()
 export class UserProfileService {
   constructor(
-    private userAuthRepo: UserAuthRepository,
+    private userRepo: UserRepository,
     private helperService: HelperService,
   ) {}
 
   async getProfile(userId: string) {
-    const doc = await this.userAuthRepo.findOne({ _id: userId });
-    if (!doc) {
+    const user = await this.userRepo.findOne({ _id: userId });
+    if (!user) {
       return this.helperService.serviceResponse.errorResponse(
         'User not found.',
         null,
@@ -19,7 +19,7 @@ export class UserProfileService {
       );
     }
     return this.helperService.serviceResponse.successResponse(
-      doc,
+      user,
       HttpStatus.FOUND,
     );
   }

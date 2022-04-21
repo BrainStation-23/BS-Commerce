@@ -1,9 +1,9 @@
-import { UserAuthModule } from '@modules/user-auth/user-auth.module';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HelperModule } from './helper/helper.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { ProductModule } from './modules/product/product.module';
+import { UserModule } from './modules/user/user-auth.module';
 
 @Module({
   imports: [
@@ -11,8 +11,7 @@ import { ProductModule } from './modules/product/product.module';
       isGlobal: true,
     }),
     ProductModule,
-    UserAuthModule,
-    HelperModule,
+    UserModule,
     HelperModule,
   ],
 })

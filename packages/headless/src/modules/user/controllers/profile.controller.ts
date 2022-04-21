@@ -12,12 +12,12 @@ import { UserProfileService } from '../services/user-profile.service';
 export class UserProfileController {
   constructor(private userProfileService: UserProfileService) {}
 
-  @Get()
+  @Get('users')
   async getInfo(@UserId() userId: string) {
     return await this.userProfileService.getProfile(userId);
   }
 
-  @Get('user-by-id')
+  @Get('me')
   async getuser(@UserInfo() userData: IJwtPayload) {
     return await this.userProfileService.getProfile(userData.userId);
   }

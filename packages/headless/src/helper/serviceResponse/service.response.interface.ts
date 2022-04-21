@@ -27,8 +27,6 @@ export interface ServiceErrorResponse {
   code?: number;
 }
 
-export type TypeServiceResponse = ServiceSuccessResponse | ServiceErrorResponse;
-
 /**
  * Service layer response structure
  */

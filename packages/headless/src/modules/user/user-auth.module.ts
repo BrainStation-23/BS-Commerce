@@ -7,19 +7,19 @@ import { HelperService } from 'src/helper/helper.service';
 import { UserAuthController } from './controllers/auth.controller';
 import { UserProfileController } from './controllers/profile.controller';
 import { JwtStrategy } from './passport/jwt.strategy';
-import { UserAuthRepository } from './repository';
-import { IUserAuthDB } from './repository/user.db.interface';
+import { UserRepository } from './repository';
+import { IUserDB } from './repository/user.db.interface';
 import { UserAuthService } from './services/user-auth.service';
 import { UserProfileService } from './services/user-profile.service';
 
 @Module({
   imports: [
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async () => ({
-        secret: '#bs23',
-        signOptions: { expiresIn: '1h' },
+        secret: process.env.JWT_SECRET,
+        signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
       }),
       inject: [ConfigService],
     }),
@@ -28,11 +28,11 @@ import { UserProfileService } from './services/user-profile.service';
   controllers: [UserAuthController, UserProfileController],
   providers: [
     UserAuthService,
-    UserAuthRepository,
+    UserRepository,
     UserProfileService,
     HelperService,
     JwtStrategy,
-    { provide: IUserAuthDB, useClass: ResolveDatabaseDependency('USER_AUTH') },
+    { provide: IUserDB, useClass: ResolveDatabaseDependency('USER') },
   ],
 })
-export class UserAuthModule {}
+export class UserModule {}
