@@ -16,11 +16,7 @@ export class CartDatabase implements ICartDatabase {
   }
 
   async findCartByUserId(userId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({ user: userId })
-      .lean()
-      .populate('items.product', 'info photos')
-      .lean()
-      .exec();
+    const cart = await CartModel.findOne({ user: userId }).lean().lean().exec();
     return Promise.resolve(cart);
   }
 
@@ -53,7 +49,7 @@ export class CartDatabase implements ICartDatabase {
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({ user: userId }).lean();
+    const cart = await CartModel.findOne({ user: userId }).lean().exec();
     return Promise.resolve(cart);
   }
 
@@ -71,7 +67,6 @@ export class CartDatabase implements ICartDatabase {
       { $set: { 'items.$.quantity': item.quantity } },
       { new: true },
     )
-      .populate('items.product', 'info photos')
       .lean()
       .exec();
     return Promise.resolve(updatedCart);
@@ -83,7 +78,6 @@ export class CartDatabase implements ICartDatabase {
       { $pull: { items: { product: item.product } } },
       { new: true },
     )
-      .populate('items.product', 'info photos')
       .lean()
       .exec();
     return Promise.resolve(cart);

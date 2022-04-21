@@ -30,7 +30,7 @@ export class CartService {
         return this.helper.serviceResponse.errorResponse(
           'Can not create cart',
           null,
-          HttpStatus.BAD_REQUEST,
+          HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
       return this.helper.serviceResponse.successResponse(createCart);
