@@ -6,23 +6,21 @@ import { WishListModel } from './wishList.model';
 export class WishListDatabase implements IWishListDatabase {
 
   async getUserWishList(userId: string): Promise<WishList | null> {
-    return await WishListModel.findOne({ user: userId }).lean().exec();;
+    return await WishListModel.findOne({ userId }).lean();
   }
 
   async getItem(userId: string, productId: string,): Promise<WishList | null> {
     return await WishListModel.findOne({
-      user: userId,
-      'items.product': productId,
-    })
-      .lean()
-      .exec();
+      userId,
+      'items.productId': productId,
+    }).lean()
   }
 
-  async incrementWishListItem(userId: string, item: Item,): Promise<WishList | null> {
+  async incrementItemQuantity(userId: string, item: Item,): Promise<WishList | null> {
     return await WishListModel.findOneAndUpdate(
       {
-        user: userId,
-        'items.product': item.product,
+        userId,
+        'items.productId': item.productId,
       },
       { $inc: { 'items.$.quantity': item.quantity } },
       { new: true },
@@ -33,7 +31,7 @@ export class WishListDatabase implements IWishListDatabase {
 
   async addWishListItem(userId: string, item: Item,): Promise<WishList | null> {
     return await WishListModel.findOneAndUpdate(
-      { user: userId },
+      { userId },
       { $push: { items: item } },
       { new: true },
     )
@@ -42,25 +40,25 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async createWishList(userId: string, items: Item[]): Promise<WishList | null> {
-    const wishlist = new WishListModel({ user: userId, items: items });
+    const wishlist = new WishListModel({ userId, items });
     return await wishlist.save();
   }
 
   async getWishList(wishlistId: string,): Promise<WishList | null> {
-    return await WishListModel.findOne({ _id: wishlistId }).lean().exec();
+    return await WishListModel.findOne({ id: wishlistId }).lean();
   }
 
   async deleteWishList(
     wishlistId: string,
   ): Promise<WishList | null> {
-    return await WishListModel.findByIdAndRemove(wishlistId).lean().exec();;
+    return await WishListModel.findOneAndRemove({ id: wishlistId }).lean();
   }
 
   async updateWishlistItem(userId: string, item: Item,): Promise<WishList | null> {
     return await WishListModel.findOneAndUpdate(
       {
-        user: userId,
-        'items.product': item.product,
+        userId,
+        'items.productId': item.productId,
       },
       { $set: { 'items.$.quantity': item.quantity } },
       { new: true },
@@ -71,8 +69,8 @@ export class WishListDatabase implements IWishListDatabase {
 
   async deleteWishlistItem(userId: string, productId: string): Promise<WishList | null> {
     return WishListModel.findOneAndUpdate(
-      { user: userId },
-      { $pull: { items: { product: productId } } },
+      { userId },
+      { $pull: { items: { productId } } },
       { new: true },
     )
       .lean()
@@ -81,9 +79,9 @@ export class WishListDatabase implements IWishListDatabase {
 
   async deleteAllWishlistItems(userId: string,): Promise<WishList | null> {
     return WishListModel.findOneAndUpdate(
-      { user: userId },
+      { userId },
       { $set: { items: [] } },
-      { new: true },
+      { new: true }
     )
       .lean()
       .exec();

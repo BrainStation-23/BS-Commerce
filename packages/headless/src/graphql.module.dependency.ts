@@ -9,7 +9,7 @@ export const ResolveGraphqlModule = () => {
       driver: ApolloDriver,
       typePaths: ['src/**/*.graphql'],
       path: '/graphql',
-      playground: true, // if env is development
+      playground: true, // if env is development then playground is true
     }),
   ];
 };

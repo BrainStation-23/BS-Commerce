@@ -6,7 +6,7 @@ import { ResolveRestModule } from './rest.module.dependency';
 @Module({
   imports: [
     HelperModule,
-    ...((process.env.API === 'GRAPHQL') ? ResolveGraphqlModule() : ResolveRestModule())
+    ...((process.env.API !== 'REST') ? ResolveGraphqlModule() : ResolveRestModule())
   ]
 })
 export class AppModule {}

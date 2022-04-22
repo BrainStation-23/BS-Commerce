@@ -16,7 +16,7 @@ export class WishListController {
     return response;
   }
 
-  @Get('user')
+  @Get()
   async getUserWishlist(@Req() req: any, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.wishListService.getUserWishlist(req?.userId);
     res.status(code);

@@ -1,10 +1,10 @@
 type Item {
-  product: String!
+  productId: String!
   quantity: Int!
 }
 
 input ItemInput {
-  product: String!
+  productId: String!
   quantity: Int!
 }
 
@@ -16,7 +16,7 @@ type WishListResponse {
 
 type WishList {
   id: String!
-  user: String!
+  userId: String!
   items: [Item!]!
 }
 
@@ -29,6 +29,6 @@ type Mutation {
   addToWishlist(item: ItemInput!, userId: String!): WishListResponse!
   deleteWishList(wishlistId: String!): WishListResponse!
   updateWishlistItem(item: ItemInput!, userId: String!): WishListResponse!
-  deleteWishlistItem(product: String!, userId: String!): WishListResponse!
+  deleteWishlistItem(productId: String!, userId: String!): WishListResponse!
   deleteAllWishlistItems(userId: String!): WishListResponse!
 }

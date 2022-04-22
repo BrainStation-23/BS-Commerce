@@ -10,8 +10,8 @@ export class WishListRepository {
     return await this.db.getItem(userId, productId);
   }
 
-  async incrementItem(userId: string, item: Item): Promise<WishList | null> {
-    return await this.db.incrementWishListItem(userId, item);
+  async incrementItemQuantity(userId: string, item: Item): Promise<WishList | null> {
+    return await this.db.incrementItemQuantity(userId, item);
   }
 
   async addItem(userId: string, item: Item): Promise<WishList | null> {
@@ -38,8 +38,8 @@ export class WishListRepository {
     return await this.db.updateWishlistItem(userId, item);
   }
 
-  async deleteWishlistItem(userId: string, product: string,): Promise<WishList | null> {
-    return await this.db.deleteWishlistItem(userId, product);
+  async deleteWishlistItem(userId: string, productId: string,): Promise<WishList | null> {
+    return await this.db.deleteWishlistItem(userId, productId);
   }
 
   async deleteAllWishlistItems(userId: string): Promise<WishList | null> {

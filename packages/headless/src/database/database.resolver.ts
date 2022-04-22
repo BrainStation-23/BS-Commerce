@@ -1,7 +1,7 @@
 // Mongodb dependency implementations
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 
-type CLASS_NAME = 'PRODUCT' | 'WISHLIST';
+type CLASS_NAME = 'WISHLIST';
 const db = process.env.DATABASE || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {

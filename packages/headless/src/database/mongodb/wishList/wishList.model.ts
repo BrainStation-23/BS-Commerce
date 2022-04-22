@@ -7,14 +7,14 @@ const WishListSchema = new Schema<WishList>({
     required: true,
     unique: true
   },
-  user: {
+  userId: {
     type: String,
     required: true,
   },
 
   items: [
     {
-      product: {
+      productId: {
         type: String,
         required: true,
       },

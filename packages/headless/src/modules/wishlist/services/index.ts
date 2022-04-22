@@ -19,14 +19,14 @@ export class WishListService {
       return this.helper.serviceResponse.successResponse(createdWishList, HttpStatus.CREATED);
     }
 
-    const isItemExist = await this.wishListRepo.isExistItem(userId, item.product);
+    const isItemExist = await this.wishListRepo.isExistItem(userId, item.productId);
     if (!isItemExist) {
       const addedItem = await this.wishListRepo.addItem(userId, item);
       if (!addedItem) return this.helper.serviceResponse.errorResponse("Cant't add item in Wishlist", null, HttpStatus.BAD_REQUEST);
       return this.helper.serviceResponse.successResponse(addedItem, HttpStatus.OK);
     }
 
-    const incrementalItem = await this.wishListRepo.incrementItem(userId, item);
+    const incrementalItem = await this.wishListRepo.incrementItemQuantity(userId, item);
     if (!incrementalItem) return this.helper.serviceResponse.errorResponse("Cant't increment item in Wishlist", null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(incrementalItem, HttpStatus.OK);
   }
@@ -60,7 +60,7 @@ export class WishListService {
       return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
     }
 
-    const wishList = await this.wishListRepo.deleteWishlistItem(userId, item.product);
+    const wishList = await this.wishListRepo.deleteWishlistItem(userId, item.productId);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't delete Wishlist Item", null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
   }
