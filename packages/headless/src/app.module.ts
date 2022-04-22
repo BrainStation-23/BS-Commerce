@@ -5,7 +5,10 @@ import { CartModule } from './modules/cart/cart.module';
 import { ProductModule } from './modules/product/product.module';
 
 @Module({
-  imports: [ProductModule, CartModule, HelperModule],
+  imports: [
+    ProductModule, 
+    CartModule, 
+    HelperModule],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
