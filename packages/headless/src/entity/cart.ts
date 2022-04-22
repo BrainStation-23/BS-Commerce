@@ -1,14 +1,10 @@
-import { ObjectId } from 'mongoose';
-
 export class Cart {
   id: string;
-  user: string;
+  userId: string;
   items: [Item];
-  createdOn: Date;
-  updatedOn: Date;
 }
 
 export class Item {
-  product: string;
+  productId: string;
   quantity: number;
 }

@@ -3,15 +3,16 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
   Req,
   Res,
 } from '@nestjs/common';
-import { Item } from '../../../entity/cart';
 import { CartService } from '../services';
 import { Request, Response } from 'express';
+import { Item } from 'src/entity/cart';
 
 @Controller('cart')
 export class CartController {
@@ -46,7 +47,7 @@ export class CartController {
     @Query('cartId') cartId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.cartService.deleteCartById(cartId);
+    const { code, ...response } = await this.cartService.deleteCart(cartId);
     res.status(code);
     return response;
   }
@@ -71,22 +72,10 @@ export class CartController {
     @Query('productId') productId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    // const item = { product: productId, quantity: 0 };
     const { code, ...response } = await this.cartService.deleteCartItem(
       req.user.id,
       productId,
     );
-    res.status(code);
-    return response;
-  }
-
-  @Get('allitems')
-  async getItemsWithoutPopulate(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const { code, ...response } =
-      await this.cartService.getItemsWithoutPopulate(req.user.id);
     res.status(code);
     return response;
   }
@@ -99,14 +88,6 @@ export class CartController {
     const { code, ...response } = await this.cartService.deleteAllCartItems(
       req.user.id,
     );
-    res.status(code);
-    return response;
-  }
-
-  @Get('stripePublishableKey')
-  async getStripePublishableKey(@Res({ passthrough: true }) res: Response) {
-    const { code, ...response } =
-      await this.cartService.getStripePublishableKey();
     res.status(code);
     return response;
   }

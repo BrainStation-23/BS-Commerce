@@ -1,36 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { Cart, Item } from '../../../entity/cart';
+import { Cart, Item } from 'src/entity/cart';
 
 @Injectable()
 export abstract class ICartDatabase {
-  abstract findCartByUserId: (userId: string) => Promise<Cart | null>;
-  abstract findItemByUserIdAndProductId: (
+  abstract findCart: (userId: string) => Promise<Cart | null>;
+  abstract findItem: (
     userId: string,
     productId: string,
   ) => Promise<Cart | null>;
 
-  abstract addItemByUserId: (
+  abstract addItem: (userId: string, item: Item) => Promise<Cart | null>;
+  abstract incrementItemQuantity: (
     userId: string,
     item: Item,
   ) => Promise<Cart | null>;
-
-  abstract incrementItem: (userId: string, item: Item) => Promise<Cart | null>;
-
   abstract createCart: (userId: string, items: Item[]) => Promise<Cart | null>;
-
   abstract getCart: (userId: string) => Promise<Cart | null>;
-  abstract deleteCartById: (cartId: string) => Promise<Cart | null>;
+  abstract deleteCart: (cartId: string) => Promise<Cart | null>;
   abstract updateCartItem: (userId: string, item: Item) => Promise<Cart | null>;
-
-  abstract deleteCartItem: (userId: string, item: Item) => Promise<Cart | null>;
-
-  abstract deleteCartItemByProductId: (
+  abstract deleteCartItem: (
     userId: string,
     productId: string,
   ) => Promise<Cart | null>;
-
-  abstract getItemsWithoutPopulate: (userId: string) => Promise<Cart | null>;
   abstract deleteAllCartItems: (userId: string) => Promise<Cart | null>;
-  // abstract findAll: (skip?: number, limit?: number) => Promise<Cart[]>;
-  // abstract save: (cart: Cart) => Promise<Cart | null>;
 }

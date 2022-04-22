@@ -1,7 +1,7 @@
-import { Item } from '../../../entity/cart';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as Joi from 'joi';
 import { validateParams } from 'src/decorators/service.validator';
+import { Item } from 'src/entity/cart';
 import { Helper } from 'src/helper/helper.interface';
 import {
   ServiceErrorResponse,
@@ -9,7 +9,6 @@ import {
 } from 'src/helper/serviceResponse/service.response.interface';
 import { CartRepository } from '../repositories';
 import { ItemCreateSchema } from '../validators/cart.create.validator';
-import { stripeConfig } from 'config/stripe/stripe';
 
 @Injectable()
 export class CartService {
@@ -23,7 +22,7 @@ export class CartService {
     item: Item,
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const existCart = await this.cartRepo.isExistCart(userId);
+    const existCart = await this.cartRepo.isCartExist(userId);
     if (!existCart) {
       const createCart = await this.cartRepo.createCart(userId, [item]);
       if (!createCart) {
@@ -36,8 +35,8 @@ export class CartService {
       return this.helper.serviceResponse.successResponse(createCart);
     }
 
-    const isExistItem = await this.cartRepo.isExistItem(userId, item.product);
-    if (!isExistItem) {
+    const isItemExist = await this.cartRepo.isItemExist(userId, item.productId);
+    if (!isItemExist) {
       const addItem = this.cartRepo.addItem(userId, item);
       if (!addItem) {
         return this.helper.serviceResponse.errorResponse(
@@ -49,7 +48,10 @@ export class CartService {
       return this.helper.serviceResponse.successResponse(addItem);
     }
 
-    const incrementItem = await this.cartRepo.incrementItem(userId, item);
+    const incrementItem = await this.cartRepo.incrementItemQuantity(
+      userId,
+      item,
+    );
     if (!incrementItem) {
       return this.helper.serviceResponse.errorResponse(
         'Can not increment cart item',
@@ -77,10 +79,10 @@ export class CartService {
   }
 
   @validateParams({ schema: Joi.string().required() })
-  async deleteCartById(
+  async deleteCart(
     cartId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const cart = await this.cartRepo.deleteCartById(cartId);
+    const cart = await this.cartRepo.deleteCart(cartId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
         'Error occurred while deleting cart',
@@ -110,7 +112,10 @@ export class CartService {
       }
       return this.helper.serviceResponse.successResponse(cart);
     }
-    const deletedCart = await this.cartRepo.deleteCartItem(userId, item);
+    const deletedCart = await this.cartRepo.deleteCartItem(
+      userId,
+      item.productId,
+    );
     if (!deletedCart) {
       return this.helper.serviceResponse.errorResponse(
         'Error occurred while deleting cart item',
@@ -129,10 +134,7 @@ export class CartService {
     userId: string,
     productId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const deletedCart = await this.cartRepo.deleteCartItemByProductId(
-      userId,
-      productId,
-    );
+    const deletedCart = await this.cartRepo.deleteCartItem(userId, productId);
     if (!deletedCart) {
       return this.helper.serviceResponse.errorResponse(
         'Error occurred while deleting cart item',
@@ -141,21 +143,6 @@ export class CartService {
       );
     }
     return this.helper.serviceResponse.successResponse(deletedCart);
-  }
-
-  @validateParams({ schema: Joi.string().required() })
-  async getItemsWithoutPopulate(
-    userId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const cart = await this.cartRepo.getItemsWithoutPopulate(userId);
-    if (!cart) {
-      return this.helper.serviceResponse.errorResponse(
-        'Error occurred while getting cart with all items',
-        null,
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-    return this.helper.serviceResponse.successResponse(cart);
   }
 
   @validateParams({ schema: Joi.string().required() })
@@ -171,17 +158,5 @@ export class CartService {
       );
     }
     return this.helper.serviceResponse.successResponse(cart);
-  }
-
-  getStripePublishableKey(): ServiceSuccessResponse | ServiceErrorResponse {
-    const key = { publishableKey: stripeConfig.stripe.publishableKey };
-    if (!key) {
-      return this.helper.serviceResponse.errorResponse(
-        ' ',
-        null,
-        HttpStatus.UNAUTHORIZED,
-      );
-    }
-    return this.helper.serviceResponse.successResponse(key);
   }
 }
