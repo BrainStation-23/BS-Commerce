@@ -9,8 +9,8 @@ export class UserProfileService {
     private helperService: HelperService,
   ) {}
 
-  async getProfile(userId: string) {
-    const user = await this.userRepo.findOne({ _id: userId });
+  async getProfile(id: string) {
+    const user = await this.userRepo.findById(id);
     if (!user) {
       return this.helperService.serviceResponse.errorResponse(
         'User not found.',

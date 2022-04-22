@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { connectToDatabase } from './database/database.init';
-import { SwaggerConfig } from './swagger.config';
+import { SwaggerConfig } from './global.config';
 
 async function bootstrap() {
   await connectToDatabase('MONGO');

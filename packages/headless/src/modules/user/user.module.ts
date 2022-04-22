@@ -14,12 +14,12 @@ import { UserProfileService } from './services/user-profile.service';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async () => ({
-        secret: process.env.JWT_SECRET,
-        signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
+        secret: '#bscom@BS23',
+        signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
     }),

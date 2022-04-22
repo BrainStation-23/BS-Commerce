@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UserEntity } from 'src/entity/user';
-import { ILoginData } from '../interface/user.interface';
+import { Response } from 'express';
+import { ICreateUser, ILoginData } from '../interface/user.interface';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Controller('auth')
@@ -9,12 +9,22 @@ import { UserAuthService } from '../services/user-auth.service';
 export class UserAuthController {
   constructor(private userService: UserAuthService) {}
   @Post('signup')
-  async register(@Body() body: UserEntity) {
-    return await this.userService.handleRegister(body);
+  async register(
+    @Body() body: ICreateUser,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.userService.handleRegister(body);
+    res.status(code);
+    return response;
   }
 
   @Post('signin')
-  async login(@Body() body: ILoginData) {
-    return await this.userService.handleLogin(body);
+  async login(
+    @Body() body: ILoginData,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.userService.handleLogin(body);
+    res.status(code);
+    return response;
   }
 }
