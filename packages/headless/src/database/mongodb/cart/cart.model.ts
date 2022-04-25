@@ -1,8 +1,14 @@
 import { model, Schema } from 'mongoose';
 import { Cart } from 'src/entity/cart';
+import { randomUUID } from 'crypto';
 
 const CartSchema = new Schema<Cart>(
   {
+    id: {
+      type: String,
+      unique: true,
+      default: () => randomUUID(),
+    },
     userId: {
       type: String,
       required: true,
