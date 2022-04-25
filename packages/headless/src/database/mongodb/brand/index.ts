@@ -5,36 +5,29 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {
-    constructor() { }
+    constructor() {}
 
-    async getBrandById(brandId: string): Promise<Brand | null>{
-        const foundBrand = await BrandModel.findOne({ _id: brandId }).lean();
-        return Promise.resolve(foundBrand);
+    async getBrandByName(brandName: string): Promise<Brand | null> {
+        return await BrandModel.findOne({ "info.name": brandName }).lean();
+    }
+
+    async getBrandById(brandId: string): Promise<Brand | null> {
+        return await BrandModel.findOne({ "info.brandId": brandId }).lean();
     }
 
     async addNewBrand(brand: Brand): Promise<Brand | null> {
-        const createdBrand = await BrandModel.create(brand);
-        console.log(createdBrand);
-        return Promise.resolve(createdBrand);
+        return await BrandModel.create(brand);
     }
 
     async deleteBrandById (brandId: string): Promise<Brand | null>{
-        const deletedBrand = await BrandModel.findOneAndRemove({_id: brandId}).lean();
-        
-        return Promise.resolve(deletedBrand);
+        return await BrandModel.findOneAndRemove({ "info.brandId" : brandId }).lean();
     }
 
     async getAllBrands(skip?: number, limit?: number): Promise<Brand[] | null> {
-        const allBrands = await BrandModel.find({}).skip(skip).limit(limit).lean();
-        return Promise.resolve(allBrands);
+        return await BrandModel.find({}).skip(skip).limit(limit).lean();
     }
 
     async updateBrandById(brandId: string, brand: Brand): Promise<Brand | null> {
-        const updatedBrand = await BrandModel
-            .findByIdAndUpdate(brandId, brand)
-            .setOptions({ overwrite: true, new: true })
-            .lean();
-        
-        return Promise.resolve(updatedBrand);
+        return await BrandModel.findOneAndUpdate({"info.brandId" : brandId}, brand, { new: true }).lean();
     }
 }

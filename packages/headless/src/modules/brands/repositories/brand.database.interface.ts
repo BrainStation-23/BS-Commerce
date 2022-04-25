@@ -3,11 +3,12 @@ import { Brand } from "src/entity/brand";
 
 @Injectable()
 export abstract class IBrandDatabase{
-    abstract getBrandById: (brandId: string) => Promise<Brand | null>;
-    abstract getAllBrands: (skip?: number, limit?: number) => Promise<Brand[]>;
-    abstract addNewBrand: (brand: Brand) => Promise<Brand | null>;
-    abstract updateBrandById: (brandId: string, brand: Brand) => Promise<Brand | null>;
-    abstract deleteBrandById: (brandId: string) => Promise<Brand | null>;
+    abstract getBrandByName:(brandName: string) => Promise<Brand | null>;
+    abstract getBrandById:(brandId: string) => Promise<Brand | null>;
+    abstract addNewBrand:(brand: Brand) => Promise<Brand | null>;
+    abstract getAllBrands:(skip?: number, limit?: number) => Promise<Brand[]>;
+    abstract updateBrandById:(brandId: string, brand: Brand) => Promise<Brand | null>;
+    abstract deleteBrandById:(brandId: string) => Promise<Brand | null>;
     
 
 

@@ -2,66 +2,71 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@ne
 import { Response } from "express";
 import { Brand } from './../../../entity/brand';
 import { Brandservice } from './../services/index';
-import { Helper } from 'src/helper/helper.interface';
 
-
-@Controller('api/brands')
+@Controller('brands')
 
 export class BrandController {
 
     constructor(
-        private helper : Helper,
         private brandService: Brandservice
     ){}
 
     @Get('/')
-    async getAllBrands(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response){
-        const {code, ...response} = await this.brandService.getBrands();
+    async getAllBrands(
+        @Query('skip') skip: number, 
+        @Query('limit') limit: number, 
+        @Res({ passthrough: true }) res: Response){
+
+        const {code, ...response} = await this.brandService.getAllBrands();
         res.status(code);
         return response ;
-        
     }
 
-    @Get('/:id')
-    async getBrandById(@Param('id') brandId: string, @Res({ passthrough: true }) res: Response){
+    @Get('/:brandId')
+    async getBrand(
+        @Param('brandId') brandId: string, 
+        @Res({ passthrough: true }) res: Response){
+
         const {code, ...response } = await this.brandService.getBrandById(brandId);
         
         res.status(code);
         return response;
-
     }
 
     @Post('/create')
-    async addBrand(@Body() brand: Brand, @Res({ passthrough: true }) res: Response){
+    async createBrand(
+        @Body() brand: Brand, 
+        @Res({ passthrough: true }) res: Response){
+
         const { code, ...response } = await this.brandService.createBrand(brand);
 
         res.status(code);
         return response;
-
     }
 
-    @Put('/:id')
+    @Put('/:brandId')
     async updateBrand(
-        @Param('id') brandId: string,
+        @Param('brandId') brandId: string,
         @Body() featuresToUpdate: Brand,
         @Res({ passthrough: true })
         res: Response
         ){
-        const { code, ...response }  = await this.brandService.editBrand(brandId, featuresToUpdate);
+
+        const { code, ...response }  = await this.brandService.updateBrandById(brandId, featuresToUpdate);
         
         res.status(code);
         return response;
-            
     }
 
-    @Delete('/:id')
-    async deleteBrandById(@Param('id') brandId: string, @Res({ passthrough: true }) res: Response){
+    @Delete('/:brandId')
+    async deleteBrandById(
+        @Param('brandId') brandId: string, 
+        @Res({ passthrough: true }) res: Response){
+            
         const { code, ...response } = await this.brandService.deleteBrandById(brandId);
 
         res.status(code);
-        return response;
-        
-        
+        return response;  
     }
 
 }

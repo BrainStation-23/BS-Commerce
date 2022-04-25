@@ -2,6 +2,7 @@ export class Brand {
     id: string;
     info:{
         name: string,
+        brandId: string,
         description: string,
         allowToSelectPageSize: boolean,
         published: boolean,

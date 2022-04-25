@@ -6,6 +6,7 @@ export const BrandCreateSchema = Joi.object<Brand>({
     id: Joi.string(),
     info:{
         name: Joi.string().required(),
+        brandId: Joi.string(),
         description: Joi.string(),
         allowToSelectPageSize: Joi.boolean(),
         published: Joi.boolean(),
