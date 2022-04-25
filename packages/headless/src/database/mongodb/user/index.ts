@@ -6,7 +6,7 @@ import { UserModel } from './user.model';
 @Injectable()
 export class UserAuthDB implements IUserDB {
   async save(body: UserEntity): Promise<UserEntity | null> {
-    const user = (await UserModel.create(body)).toJSON();
+    const user = await UserModel.create(body);
     delete user?.password;
     return user;
   }
