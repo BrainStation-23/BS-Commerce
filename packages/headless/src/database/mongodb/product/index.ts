@@ -5,19 +5,19 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
-    constructor() { }
+  constructor() {}
 
-    async findById(productId: string) {
-        const product = await ProductModel.findOne({ id: productId });
-        return Promise.resolve(product);
-    }
-    async save(product: Product) {
-        await ProductModel.create(product);
-        return Promise.resolve(product);
-    }
+  async findById(productId: string) {
+    const product = await ProductModel.findOne({ id: productId });
+    return Promise.resolve(product);
+  }
+  async save(product: Product) {
+    await ProductModel.create(product);
+    return Promise.resolve(product);
+  }
 
-    async findAll(skip?: number, limit?: number) {
-        const products = await ProductModel.find({}).skip(skip).limit(limit);
-        return Promise.resolve(products);
-    }
+  async findAll(skip?: number, limit?: number) {
+    const products = await ProductModel.find({}).skip(skip).limit(limit);
+    return Promise.resolve(products);
+  }
 }

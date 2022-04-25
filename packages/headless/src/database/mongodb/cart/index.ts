@@ -2,6 +2,7 @@ import { CartModel } from './cart.model';
 import { Injectable } from '@nestjs/common';
 import { Cart, Item } from 'src/entity/cart';
 import { ICartDatabase } from 'src/modules/cart/repositories/cart.database.interface';
+import { ProductModel } from '../product/product.model';
 @Injectable()
 export class CartDatabase implements ICartDatabase {
   //   constructor() {}

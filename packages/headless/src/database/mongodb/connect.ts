@@ -1,5 +1,5 @@
+import { config } from 'config/database/mongodb';
 import * as Mongoose from 'mongoose';
-import { config } from '../../../config/database/mongodb';
 
 export function connect() {
   Mongoose.connect(config.URI);
