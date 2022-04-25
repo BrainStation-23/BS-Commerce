@@ -51,10 +51,10 @@ export class WishListResolver {
 
   @Mutation()
   async deleteWishlistItem(
-    @Args('productId') product: string,
+    @Args('productId') productId: string,
     @Args('userId') userId: string,
   ) {
-    return await this.wishListService.deleteWishlistItem(product, userId);
+    return await this.wishListService.deleteWishlistItem(productId, userId);
   }
 
   @Mutation()

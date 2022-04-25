@@ -2,6 +2,6 @@ import { WishListModule as WishListRestModule } from './modules/wishlist/wishlis
 
 export const ResolveRestModule = () => {
   return [
-    WishListRestModule
+    WishListRestModule,
   ];
 };

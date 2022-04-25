@@ -40,8 +40,7 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async createWishList(userId: string, items: Item[]): Promise<WishList | null> {
-    const wishlist = new WishListModel({ userId, items });
-    return await wishlist.save();
+    return await new WishListModel({ userId, items }).save();
   }
 
   async getWishList(wishlistId: string,): Promise<WishList | null> {

@@ -6,7 +6,7 @@ import { Item, WishList } from 'src/entity/wishList';
 export class WishListRepository {
   constructor(private readonly db: IWishListDatabase) { }
 
-  async isExistItem(userId: string, productId: string): Promise<WishList | null> {
+  async doesItemExist(userId: string, productId: string): Promise<WishList | null> {
     return await this.db.getItem(userId, productId);
   }
 

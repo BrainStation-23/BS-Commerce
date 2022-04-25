@@ -12,15 +12,15 @@ export class WishListService {
 
   @validateParams({ schema: Joi.string().required() }, { schema: ItemSchema })
   async addToWishList(userId: string, item: Item,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const isWishListExist = await this.wishListRepo.getUserWishlist(userId);
-    if (!isWishListExist) {
+    const doesWishListExist = await this.wishListRepo.getUserWishlist(userId);
+    if (!doesWishListExist) {
       const createdWishList = await this.wishListRepo.createWishlist(userId, [item]);
       if (!createdWishList) return this.helper.serviceResponse.errorResponse("Cant't add to Wishlist", null, HttpStatus.INTERNAL_SERVER_ERROR,);
       return this.helper.serviceResponse.successResponse(createdWishList, HttpStatus.CREATED);
     }
 
-    const isItemExist = await this.wishListRepo.isExistItem(userId, item.productId);
-    if (!isItemExist) {
+    const doesItemExist = await this.wishListRepo.doesItemExist(userId, item.productId);
+    if (!doesItemExist) {
       const addedItem = await this.wishListRepo.addItem(userId, item);
       if (!addedItem) return this.helper.serviceResponse.errorResponse("Cant't add item in Wishlist", null, HttpStatus.BAD_REQUEST);
       return this.helper.serviceResponse.successResponse(addedItem, HttpStatus.OK);
