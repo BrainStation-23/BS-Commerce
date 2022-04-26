@@ -28,7 +28,8 @@ const WishListSchema = new Schema<WishList>({
     },
   ],
 },{
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 const WishListModel = model<WishList>('wishList', WishListSchema);

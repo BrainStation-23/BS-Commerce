@@ -1,5 +1,13 @@
+
+type Product {
+  name: String!
+  price: Int!
+  id: String!
+}
+
 type Item {
   productId: String!
+  product: Product!
   quantity: Int!
 }
 
@@ -8,16 +16,16 @@ input ItemInput {
   quantity: Int!
 }
 
-type WishListResponse {
-  error: String
-  code: Int!
-  data: WishList
-}
-
 type WishList {
   id: String!
   userId: String!
   items: [Item!]!
+}
+
+type WishListResponse {
+  error: String
+  code: Int!
+  data: WishList!
 }
 
 type Query {

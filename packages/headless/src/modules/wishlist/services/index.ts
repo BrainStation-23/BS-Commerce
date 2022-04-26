@@ -14,42 +14,43 @@ export class WishListService {
   async addToWishList(userId: string, item: Item,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const doesWishListExist = await this.wishListRepo.getUserWishlist(userId);
     if (!doesWishListExist) {
-      const createdWishList = await this.wishListRepo.createWishlist(userId, [item]);
-      if (!createdWishList) return this.helper.serviceResponse.errorResponse("Cant't add to Wishlist", null, HttpStatus.INTERNAL_SERVER_ERROR,);
-      return this.helper.serviceResponse.successResponse(createdWishList, HttpStatus.CREATED);
+      const wishList = await this.wishListRepo.createWishlist(userId, [item]);
+      if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't add to Wishlist", null, HttpStatus.INTERNAL_SERVER_ERROR,);
+      return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.CREATED);
     }
 
     const doesItemExist = await this.wishListRepo.doesItemExist(userId, item.productId);
     if (!doesItemExist) {
-      const addedItem = await this.wishListRepo.addItem(userId, item);
-      if (!addedItem) return this.helper.serviceResponse.errorResponse("Cant't add item in Wishlist", null, HttpStatus.BAD_REQUEST);
-      return this.helper.serviceResponse.successResponse(addedItem, HttpStatus.OK);
+      const wishlist = await this.wishListRepo.addItem(userId, item);
+      if (!wishlist) return this.helper.serviceResponse.errorResponse("Cant't add item in Wishlist", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishlist), HttpStatus.OK);
     }
 
-    const incrementalItem = await this.wishListRepo.incrementItemQuantity(userId, item);
-    if (!incrementalItem) return this.helper.serviceResponse.errorResponse("Cant't increment item in Wishlist", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(incrementalItem, HttpStatus.OK);
+    const wishList = await this.wishListRepo.incrementItemQuantity(userId, item);
+    if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't increment item in Wishlist", null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
   @validateParams({ schema: Joi.string().required() })
   async getUserWishlist(userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const wishList = await this.wishListRepo.getUserWishlist(userId);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't get Wishlist", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
+
 
   @validateParams({ schema: Joi.string().required() })
   async getWishlist(wishlistId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const wishList = await this.wishListRepo.getWishlist(wishlistId);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't get single Wishlist", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
   @validateParams({ schema: Joi.string().required() })
   async deleteWishlist(wishlistId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const wishList = await this.wishListRepo.deleteWishlist(wishlistId);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't delete Wishlist", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
   @validateParams({ schema: ItemSchema }, { schema: Joi.string().required() })
@@ -57,19 +58,19 @@ export class WishListService {
     if (item.quantity && item.quantity > 0) {
       const wishList = await this.wishListRepo.updateWishlistItem(userId, item);
       if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't update Wishlist Item", null, HttpStatus.BAD_REQUEST);
-      return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+      return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
     }
 
     const wishList = await this.wishListRepo.deleteWishlistItem(userId, item.productId);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't delete Wishlist Item", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
   @validateParams({ schema: Joi.string().required() }, { schema: Joi.string().required() },)
   async deleteWishlistItem(product: string, userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const wishList = await this.wishListRepo.deleteWishlistItem(userId, product);
     if (!wishList) return this.helper.serviceResponse.errorResponse("Cant't delete Wishlist Item", null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(wishList, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
   @validateParams({ schema: Joi.string().required() })
