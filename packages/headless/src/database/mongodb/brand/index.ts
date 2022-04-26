@@ -5,7 +5,6 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {
-    constructor() {}
 
     async getBrandByName(brandName: string): Promise<Brand | null> {
         return await BrandModel.findOne({ "info.name": brandName }).lean();
