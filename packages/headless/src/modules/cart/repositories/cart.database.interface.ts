@@ -10,6 +10,7 @@ export abstract class ICartDatabase {
   ) => Promise<Cart | null>;
 
   abstract addItem: (userId: string, item: Item) => Promise<Cart | null>;
+  abstract getCartProduct: (cart: Cart) => Promise<Cart | null>;
   abstract incrementItemQuantity: (
     userId: string,
     item: Item,

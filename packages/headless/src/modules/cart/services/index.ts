@@ -32,7 +32,10 @@ export class CartService {
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
-      return this.helper.serviceResponse.successResponse(createCart);
+      return this.helper.serviceResponse.successResponse(
+        createCart,
+        HttpStatus.CREATED,
+      );
     }
 
     const isItemExist = await this.cartRepo.isItemExist(userId, item.productId);
@@ -45,7 +48,10 @@ export class CartService {
           HttpStatus.BAD_REQUEST,
         );
       }
-      return this.helper.serviceResponse.successResponse(addItem);
+      return this.helper.serviceResponse.successResponse(
+        addItem,
+        HttpStatus.OK,
+      );
     }
 
     const incrementItem = await this.cartRepo.incrementItemQuantity(
@@ -59,7 +65,10 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     } else {
-      return this.helper.serviceResponse.successResponse(incrementItem);
+      return this.helper.serviceResponse.successResponse(
+        incrementItem,
+        HttpStatus.OK,
+      );
     }
   }
 
@@ -75,7 +84,10 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(cart);
+    return this.helper.serviceResponse.successResponse(
+      await this.cartRepo.getCartProduct(cart),
+      HttpStatus.OK,
+    );
   }
 
   @validateParams({ schema: Joi.string().required() })
@@ -90,7 +102,7 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(cart);
+    return this.helper.serviceResponse.successResponse(cart, HttpStatus.OK);
   }
 
   @validateParams(
@@ -110,7 +122,10 @@ export class CartService {
           HttpStatus.BAD_REQUEST,
         );
       }
-      return this.helper.serviceResponse.successResponse(cart);
+      return this.helper.serviceResponse.successResponse(
+        await this.cartRepo.getCartProduct(cart),
+        HttpStatus.OK,
+      );
     }
     const deletedCart = await this.cartRepo.deleteCartItem(
       userId,
@@ -123,7 +138,10 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(deletedCart);
+    return this.helper.serviceResponse.successResponse(
+      deletedCart,
+      HttpStatus.OK,
+    );
   }
 
   @validateParams(
@@ -134,15 +152,18 @@ export class CartService {
     userId: string,
     productId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const deletedCart = await this.cartRepo.deleteCartItem(userId, productId);
-    if (!deletedCart) {
+    const cart = await this.cartRepo.deleteCartItem(userId, productId);
+    if (!cart) {
       return this.helper.serviceResponse.errorResponse(
         'Error occurred while deleting cart item',
         null,
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(deletedCart);
+    return this.helper.serviceResponse.successResponse(
+      await this.cartRepo.getCartProduct(cart),
+      HttpStatus.OK,
+    );
   }
 
   @validateParams({ schema: Joi.string().required() })
@@ -157,6 +178,6 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(cart);
+    return this.helper.serviceResponse.successResponse(cart, HttpStatus.OK);
   }
 }

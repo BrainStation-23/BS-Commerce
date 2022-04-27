@@ -30,6 +30,7 @@ const CartSchema = new Schema<Cart>(
   },
   {
     timestamps: true,
+    versionKey: false,
   },
 );
 

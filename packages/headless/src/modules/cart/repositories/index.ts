@@ -18,6 +18,10 @@ export class CartRepository {
     return await this.db.addItem(userId, item);
   }
 
+  async getCartProduct(cart: Cart): Promise<Cart | null> {
+    return await this.db.getCartProduct(cart);
+  }
+
   async incrementItemQuantity(
     userId: string,
     item: Item,

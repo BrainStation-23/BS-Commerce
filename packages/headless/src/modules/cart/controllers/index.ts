@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
   Query,
@@ -11,7 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { CartService } from '../services';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { Item } from 'src/entity/cart';
 
 @Controller('cart')
@@ -21,7 +20,7 @@ export class CartController {
   @Post()
   async addToCart(
     @Body() item: Item,
-    @Req() req: Request,
+    @Req() req: any,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.addToCart(
@@ -33,10 +32,7 @@ export class CartController {
   }
 
   @Get()
-  async getCart(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async getCart(@Req() req: any, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.cartService.getCart(req.user.id);
     res.status(code);
     return response;
@@ -54,7 +50,7 @@ export class CartController {
 
   @Put('item')
   async updateCartItem(
-    @Req() req: Request,
+    @Req() req: any,
     @Body() item: Item,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -68,7 +64,7 @@ export class CartController {
 
   @Delete('item')
   async deleteCartItem(
-    @Req() req: Request,
+    @Req() req: any,
     @Query('productId') productId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -82,7 +78,7 @@ export class CartController {
 
   @Delete('allitems')
   async deleteAllCartItems(
-    @Req() req: Request,
+    @Req() req: any,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.deleteAllCartItems(

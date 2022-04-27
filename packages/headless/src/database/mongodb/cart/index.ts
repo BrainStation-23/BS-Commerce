@@ -8,60 +8,67 @@ export class CartDatabase implements ICartDatabase {
   //   constructor() {}
 
   async addItem(userId: string, item: Item): Promise<Cart | null> {
-    const cart = await CartModel.findOneAndUpdate(
+    return await CartModel.findOneAndUpdate(
       { userId },
       { $push: { items: item } },
     )
       .lean()
       .exec();
-    return Promise.resolve(cart);
   }
 
   async findCart(userId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({ userId }).lean().exec();
-    return Promise.resolve(cart);
+    return await CartModel.findOne({ userId }).lean().exec();
+  }
+
+  async getCartProduct(cart: Cart): Promise<Cart | null> {
+    const products = await ProductModel.find({
+      id: { $in: cart.items.map((item) => item.productId) },
+    }).select('info photos');
+    return {
+      ...cart,
+      items: cart.items.map((item, index) => {
+        return { ...item, product: products[index] };
+      }),
+    };
   }
 
   async findItem(userId: string, productId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({
+    return await CartModel.findOne({
       userId,
       'items.productId': productId,
     }).lean();
-    return Promise.resolve(cart);
   }
 
   async incrementItemQuantity(
     userId: string,
     item: Item,
   ): Promise<Cart | null> {
-    const cart = await CartModel.findOneAndUpdate(
+    return await CartModel.findOneAndUpdate(
       {
         userId,
         'items.productId': item.productId,
       },
       { $inc: { 'items.$.quantity': item.quantity } },
-    ).lean();
-    return Promise.resolve(cart);
+      { new: true },
+    )
+      .lean()
+      .exec();
   }
 
   async createCart(userId: string, items: Item[]): Promise<Cart | null> {
-    const newCart = new CartModel({ userId, items: items });
-    await newCart.save();
-    return Promise.resolve(newCart);
+    return await new CartModel({ userId, items: items }).save();
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    const cart = await CartModel.findOne({ userId }).lean();
-    return Promise.resolve(cart);
+    return await CartModel.findOne({ userId: userId }).lean();
   }
 
   async deleteCart(cartId: string): Promise<Cart | null> {
-    const cart = CartModel.findOneAndRemove({ id: cartId }).lean();
-    return Promise.resolve(cart);
+    return CartModel.findOneAndRemove({ id: cartId }).lean();
   }
 
   async updateCartItem(userId: string, item: Item): Promise<Cart | null> {
-    const updatedCart = await CartModel.findOneAndUpdate(
+    return await CartModel.findOneAndUpdate(
       {
         userId,
         'items.productId': item.productId,
@@ -71,31 +78,27 @@ export class CartDatabase implements ICartDatabase {
     )
       .lean()
       .exec();
-    return Promise.resolve(updatedCart);
   }
 
   async deleteCartItem(
     userId: string,
     productId: string,
   ): Promise<Cart | null> {
-    const cart = await CartModel.findOneAndUpdate(
+    return await CartModel.findOneAndUpdate(
       { userId: userId },
       { $pull: { items: { productId: productId } } },
       { new: true },
     )
       .lean()
       .exec();
-    console.log(cart);
-    return Promise.resolve(cart);
   }
   async deleteAllCartItems(userId: string): Promise<Cart | null> {
-    const cart = CartModel.findOneAndUpdate(
+    return CartModel.findOneAndUpdate(
       { userId },
       { $set: { items: [] } },
       { new: true },
     )
       .lean()
       .exec();
-    return Promise.resolve(cart);
   }
 }
