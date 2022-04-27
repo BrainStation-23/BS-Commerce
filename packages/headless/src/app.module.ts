@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ResolveGraphqlModule } from './graphql.module.dependency';
 import { HelperModule } from './helper/helper.module';
-import { ResolveRestModule } from './rest.module.dependency';
 import * as dotenv from 'dotenv';
+import { ResolveGraphqlModule } from './internal/graphql/graphql.module.resolver';
+import { ResolveRestModule } from './internal/rest/rest.module.resolver';
 dotenv.config();
 @Module({
   imports: [
