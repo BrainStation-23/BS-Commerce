@@ -1,6 +1,7 @@
+import { Injectable } from '@nestjs/common';
+
 import { Product } from '../../../entity/product';
 import { IBrandDatabase } from './brand.database.interface';
-import { Injectable } from '@nestjs/common';
 import { Brand } from 'src/entity/brand';
 
 @Injectable()

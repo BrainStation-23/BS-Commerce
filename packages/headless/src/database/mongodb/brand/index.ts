@@ -1,7 +1,8 @@
+import { Injectable } from '@nestjs/common';
+
 import { Brand } from 'src/entity/brand';
 import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
 import { BrandModel } from './brand.model';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {
@@ -15,10 +16,7 @@ export class BrandDatabase implements IBrandDatabase {
     }
 
     async addNewBrand(brand: Brand): Promise<Brand | null> {
-        const brands = await BrandModel.create(brand);
-        console.log(brands);
-        return Promise.resolve(brands);
-
+        return await BrandModel.create(brand);
     }
 
     async deleteBrandById (brandId: string): Promise<Brand | null>{
