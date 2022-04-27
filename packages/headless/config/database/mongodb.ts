@@ -1,3 +1,3 @@
 export const config = {
-    URI: 'mongodb://localhost:27017/bs-commerce'
+    URI: process.env.MONGODB_URI
 }

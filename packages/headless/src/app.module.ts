@@ -1,19 +1,13 @@
-import { Module, MiddlewareConsumer } from "@nestjs/common";
-import { HelperModule } from "./helper/helper.module";
-import { LoggerMiddleware } from "./middleware/logger.middleware";
-import { ProductModule } from "./modules/product/product.module";
-
+import { Module } from '@nestjs/common';
+import { ResolveGraphqlModule } from './graphql.module.dependency';
+import { HelperModule } from './helper/helper.module';
+import { ResolveRestModule } from './rest.module.dependency';
+import * as dotenv from 'dotenv';
+dotenv.config();
 @Module({
   imports: [
-    ProductModule,
-    HelperModule
+    HelperModule,
+    ...((process.env.API === 'GRAPHQL') ? ResolveGraphqlModule() : ResolveRestModule())
   ]
 })
-
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('*') // for all route path
-  }
-};
+export class AppModule {}
