@@ -11,15 +11,18 @@ export class BrandDatabase implements IBrandDatabase {
     }
 
     async getBrandById(brandId: string): Promise<Brand | null> {
-        return await BrandModel.findOne({ "info.brandId": brandId }).lean();
+        return await BrandModel.findOne({ id: brandId }).lean();
     }
 
     async addNewBrand(brand: Brand): Promise<Brand | null> {
-        return await BrandModel.create(brand);
+        const brands = await BrandModel.create(brand);
+        console.log(brands);
+        return Promise.resolve(brands);
+
     }
 
     async deleteBrandById (brandId: string): Promise<Brand | null>{
-        return await BrandModel.findOneAndRemove({ "info.brandId" : brandId }).lean();
+        return await BrandModel.findOneAndRemove({ id : brandId }).lean();
     }
 
     async getAllBrands(skip?: number, limit?: number): Promise<Brand[] | null> {
@@ -27,6 +30,6 @@ export class BrandDatabase implements IBrandDatabase {
     }
 
     async updateBrandById(brandId: string, brand: Brand): Promise<Brand | null> {
-        return await BrandModel.findOneAndUpdate({"info.brandId" : brandId}, brand, { new: true }).lean();
+        return await BrandModel.findOneAndUpdate({ id : brandId}, brand, { new: true }).lean();
     }
 }

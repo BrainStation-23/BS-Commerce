@@ -22,9 +22,9 @@ export class BrandController {
         return response ;
     }
 
-    @Get('/:brandId')
+    @Get('/:id')
     async getBrand(
-        @Param('brandId') brandId: string, 
+        @Param('id') brandId: string, 
         @Res({ passthrough: true }) res: Response){
 
         const {code, ...response } = await this.brandService.getBrandById(brandId);
@@ -44,7 +44,7 @@ export class BrandController {
         return response;
     }
 
-    @Put('/:brandId')
+    @Put('/:id')
     async updateBrand(
         @Param('brandId') brandId: string,
         @Body() featuresToUpdate: Brand,
@@ -58,7 +58,7 @@ export class BrandController {
         return response;
     }
 
-    @Delete('/:brandId')
+    @Delete('/:id')
     async deleteBrandById(
         @Param('brandId') brandId: string, 
         @Res({ passthrough: true }) res: Response){
