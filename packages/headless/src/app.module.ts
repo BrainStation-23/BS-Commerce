@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ResolveGraphqlModule } from './graphql.module.dependency';
+import { ResolveGraphqlModule } from './internal/graphql/graphql.module.resolver';
 import { HelperModule } from './helper/helper.module';
-import { ResolveRestModule } from './rest.module.dependency';
+import { ResolveRestModule } from './internal/rest/rest.module.resolver';
 import * as dotenv from 'dotenv';
 dotenv.config();
 @Module({
@@ -10,4 +10,4 @@ dotenv.config();
     ...((process.env.API === 'GRAPHQL') ? ResolveGraphqlModule() : ResolveRestModule())
   ]
 })
-export class AppModule {}
+export class AppModule { }
