@@ -1,7 +1,10 @@
-import { Item } from 'src/entity/wishList';
+import { Item, WishList } from 'src/entity/wishList';
 import { WishListService } from '../services';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/modules/auth/guards/gql-auth.guard';
+import { UserId } from 'src/modules/auth/decorator/auth.decorator';
+@UseGuards(GqlAuthGuard)
 @Resolver()
 export class WishListResolver {
   constructor(private wishListService: WishListService) { }
@@ -9,14 +12,14 @@ export class WishListResolver {
   /**
    * Query Start
    */
-  
+
   @Query()
   async getWishlist(@Args('wishlistId') wishlistId: string) {
     return await this.wishListService.getWishlist(wishlistId);
   }
 
   @Query()
-  async getUserWishlist(@Args('userId') userId: string) {
+  async getUserWishlist(@UserId() userId: string) {
     return await this.wishListService.getUserWishlist(userId);
   }
 
@@ -29,10 +32,7 @@ export class WishListResolver {
   */
 
   @Mutation()
-  async addToWishlist(
-    @Args('item') item: Item,
-    @Args('userId') userId: string,
-  ) {
+  async addToWishlist(@Args('item') item: Item, @UserId() userId: string) {
     return await this.wishListService.addToWishList(userId, item);
   }
 
@@ -42,23 +42,17 @@ export class WishListResolver {
   }
 
   @Mutation()
-  async updateWishlistItem(
-    @Args('item') item: Item,
-    @Args('userId') userId: string,
-  ) {
+  async updateWishlistItem(@Args('item') item: Item, @UserId() userId: string) {
     return await this.wishListService.updateWishlistItem(item, userId);
   }
 
   @Mutation()
-  async deleteWishlistItem(
-    @Args('productId') productId: string,
-    @Args('userId') userId: string,
-  ) {
+  async deleteWishlistItem(@Args('productId') productId: string, @UserId() userId: string) {
     return await this.wishListService.deleteWishlistItem(productId, userId);
   }
 
   @Mutation()
-  async deleteAllWishlistItems(@Args('userId') userId: string) {
+  async deleteAllWishlistItems(@UserId() userId: string) {
     return await this.wishListService.deleteAllWishlistItems(userId);
   }
 

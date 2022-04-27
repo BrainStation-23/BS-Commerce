@@ -7,7 +7,7 @@ export const GraphqlInitModule = () => {
       driver: ApolloDriver,
       typePaths: ['src/**/*.graphql'],
       path: '/graphql',
-      playground: (process.env.NODE_ENV === 'DEVELOPMENT') ? true : false,
+      playground: (process.env.NODE_ENV === 'DEVELOPMENT') ? true : false
     }),
   ];
 };

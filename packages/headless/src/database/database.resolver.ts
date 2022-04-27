@@ -1,7 +1,8 @@
 // Mongodb dependency implementations
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
+import {AuthDatabase as AuthDatabaseMongo} from './mongodb/user/auth' 
 
-type CLASS_NAME = 'WISHLIST';
+type CLASS_NAME = 'WISHLIST' | 'AUTH';
 const db = process.env.DATABASE || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -11,6 +12,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'WISHLIST':
             return WishListDatabaseMongo;
+          case 'AUTH':
+            return AuthDatabaseMongo;
 
           default:
             break;

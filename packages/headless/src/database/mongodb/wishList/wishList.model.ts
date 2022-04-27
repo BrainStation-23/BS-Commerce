@@ -12,7 +12,6 @@ const WishListSchema = new Schema<WishList>({
     type: String,
     required: true,
   },
-
   items: [
     {
       productId: {
