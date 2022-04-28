@@ -1,9 +1,9 @@
-import { config } from 'config/database/mongodb';
+import { dbConfig } from 'config/database';
 import * as Mongoose from 'mongoose';
 
-export function connect() {
-  Mongoose.connect(config.URI);
-  const { connection } = Mongoose;
+export async function connect() {
+    await Mongoose.connect(dbConfig.mongodb.URI!);
+    const { connection } = Mongoose;
 
   connection.on('connected', () => {
     console.info('Success! Connected to MongoDB.');

@@ -1,7 +1,11 @@
 import { Item } from 'src/entity/wishList';
 import { WishListService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-
+import { UseGuards } from '@nestjs/common';
+import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User } from 'src/entity/user';
+import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+@UseGuards(JwtAuthGuard)
 @Resolver()
 export class WishListResolver {
   constructor(private wishListService: WishListService) { }
@@ -9,15 +13,15 @@ export class WishListResolver {
   /**
    * Query Start
    */
-  
+
   @Query()
   async getWishlist(@Args('wishlistId') wishlistId: string) {
     return await this.wishListService.getWishlist(wishlistId);
   }
 
   @Query()
-  async getUserWishlist(@Args('userId') userId: string) {
-    return await this.wishListService.getUserWishlist(userId);
+  async getUserWishlist(@UserInfo() user: User) {
+    return await this.wishListService.getUserWishlist(user.id);
   }
 
   /**
@@ -29,11 +33,8 @@ export class WishListResolver {
   */
 
   @Mutation()
-  async addToWishlist(
-    @Args('item') item: Item,
-    @Args('userId') userId: string,
-  ) {
-    return await this.wishListService.addToWishList(userId, item);
+  async addToWishlist(@Args('item') item: Item, @UserInfo() user: User) {
+    return await this.wishListService.addToWishList(user.id, item);
   }
 
   @Mutation()
@@ -42,24 +43,18 @@ export class WishListResolver {
   }
 
   @Mutation()
-  async updateWishlistItem(
-    @Args('item') item: Item,
-    @Args('userId') userId: string,
-  ) {
-    return await this.wishListService.updateWishlistItem(item, userId);
+  async updateWishlistItem(@Args('item') item: Item, @UserInfo() user: User) {
+    return await this.wishListService.updateWishlistItem(item, user.id);
   }
 
   @Mutation()
-  async deleteWishlistItem(
-    @Args('productId') productId: string,
-    @Args('userId') userId: string,
-  ) {
-    return await this.wishListService.deleteWishlistItem(productId, userId);
+  async deleteWishlistItem(@Args('productId') productId: string, @UserInfo() user: User) {
+    return await this.wishListService.deleteWishlistItem(productId, user.id);
   }
 
   @Mutation()
-  async deleteAllWishlistItems(@Args('userId') userId: string) {
-    return await this.wishListService.deleteAllWishlistItems(userId);
+  async deleteAllWishlistItems(@UserInfo() user: User) {
+    return await this.wishListService.deleteAllWishlistItems(user.id);
   }
 
   /**
