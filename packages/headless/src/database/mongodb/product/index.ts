@@ -5,16 +5,16 @@ import { ProductModel } from './product.model';
 
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
-  async findById(productId: string) {
+
+  async findProduct(productId: string) {
     return await ProductModel.findOne({ id: productId }).lean();
   }
-  async save(product: Product) {
-    await ProductModel.create(product);
-    return Promise.resolve(product);
+
+  async createProduct(product: Product) {
+    return await ProductModel.create(product);
   }
 
-  async findAll(skip?: number, limit?: number) {
-    const products = await ProductModel.find({}).skip(skip).limit(limit);
-    return Promise.resolve(products);
+  async findAllProducts(skip?: number, limit?: number) {
+    return await ProductModel.find({}).skip(skip).limit(limit).lean();
   }
 }

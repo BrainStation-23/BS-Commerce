@@ -14,14 +14,14 @@ export class WishListController {
   ) { }
 
   @Post()
-  async addWishList(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+  async addWishList(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;
   }
 
   @Get()
-  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.getUserWishlist(user.id);
     res.status(code);
     return response;

@@ -14,6 +14,7 @@ export class WishListResolver {
    * Query Start
    */
 
+
   @Query()
   async getWishlist(@Args('wishlistId') wishlistId: string) {
     return await this.wishListService.getWishlist(wishlistId);

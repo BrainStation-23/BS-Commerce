@@ -1,9 +1,4 @@
-input ProductInput {
-  firstName: String!
-  lastName: String!
-  email: String!
-  password: String!
-}
+scalar DateTime
 
 type Info {
   name: String!
@@ -19,10 +14,34 @@ type Info {
   published: Boolean
   displayOrder: Int
   isFeatured: Boolean
-  publishDate: Date
+  publishDate: DateTime
+}
+
+input InfoInput {
+  name: String!
+  shortDescription: String
+  fullDescription: String
+  sku: String!
+  price: Int!
+  oldPrice: Int!
+  cost: Int!
+  showOnHomePage: Boolean
+  includeInTopMenu: Boolean
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  isFeatured: Boolean
+  publishDate: DateTime
 }
 
 type Meta {
+  keywords: [String]
+  title: String
+  description: String
+  friendlyPageName: String!
+}
+
+input MetaInput {
   keywords: [String]
   title: String
   description: String
@@ -36,7 +55,20 @@ type Photo {
   displayOrder: Int
 }
 
+input PhotoInput {
+  id: String
+  title: String
+  alt: String
+  displayOrder: Int
+}
+
 type Categories {
+  categoryId: String!
+  isFeatured: Boolean
+  displayOrder: Int
+}
+
+input CategoriesInput {
   categoryId: String!
   isFeatured: Boolean
   displayOrder: Int
@@ -52,10 +84,30 @@ type Product {
   categories: [Categories!]!
 }
 
+input ProductInput {
+  info: InfoInput!
+  meta: MetaInput!
+  tags: [String]
+  photos: [PhotoInput]
+  brands: [String]
+  categories: [CategoriesInput!]!
+}
+
 type ProductResponse {
   error: String
   code: Int!
   data: Product!
+}
+
+type ProductArrayResponse {
+  error: String
+  code: Int!
+  data: [Product!]!
+}
+
+type Query {
+  getProduct(productId: String!): ProductResponse!
+  getAllProducts: ProductArrayResponse!
 }
 
 type Mutation {

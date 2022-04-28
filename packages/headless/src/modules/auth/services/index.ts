@@ -19,7 +19,7 @@ export class AuthService {
 
     const doesUserExist = await this.userRepo.findUser(user.email);
     if (doesUserExist) {
-      return this.helper.serviceResponse.errorResponse('The user already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
+      return this.helper.serviceResponse.errorResponse('The User already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
     }
 
     user.provider = 'local';
@@ -29,8 +29,7 @@ export class AuthService {
 
     const registeredUser = await this.userRepo.createUser(user);
     if (!registeredUser) { return this.helper.serviceResponse.errorResponse('Can\'t Create User.', null, HttpStatus.BAD_REQUEST); }
-    return this.helper.serviceResponse.successResponse(registeredUser, HttpStatus.CREATED,
-    );
+    return this.helper.serviceResponse.successResponse(registeredUser, HttpStatus.CREATED);
   }
 
   @validateParams({ schema: SigninSchema })

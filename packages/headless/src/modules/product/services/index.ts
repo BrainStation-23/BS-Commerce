@@ -31,7 +31,7 @@ export class ProductService {
 
   @validateParams({ schema: Joi.number() }, { schema: Joi.number() },)
   async getAllProducts(skip?: number, limit?: number,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const products = await this.productRepo.findAllProduct(skip, limit);
+    const products = await this.productRepo.findAllProducts(skip, limit);
     if (!products) {
       return this.helper.serviceResponse.errorResponse("Can't get All Products.", null, HttpStatus.BAD_REQUEST);
     }
