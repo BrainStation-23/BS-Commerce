@@ -1,11 +1,13 @@
-import { GraphqlModule } from './graphql.init';
+import { AuthModule } from 'src/modules/auth/auth.graphql.module';
+import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
+import { GraphqlInitModule } from "./graphql.init";
 import { CartModule as CartGraphqlModule } from 'src/modules/cart/cart.graphql.module';
-import { WishListModule as WishListGraphqlModule } from 'src/modules/wishlist/wishlist.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
-    WishListGraphqlModule,
+    ...GraphqlInitModule(),
+    WishListModule,
+    AuthModule,
     CartGraphqlModule,
-    ...GraphqlModule()
   ];
 };

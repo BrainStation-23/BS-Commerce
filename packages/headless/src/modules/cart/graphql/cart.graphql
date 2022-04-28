@@ -28,13 +28,13 @@ type CartResponse {
 }
 
 type Query {
-  getCart(userId: String!): CartResponse!
+  getCart: CartResponse!
 }
 
 type Mutation {
-  addToCart(item: ItemInput!, userId: String!): CartResponse!
-  deleteCart(CartId: String!): CartResponse!
-  updateCartItem(userId: String!, item: ItemInput!): CartResponse!
-  deleteCartItem(userId: String!, productId: String!): CartResponse!
-  deleteAllCartItems(userId: String!): CartResponse!
+  addToCart(item: ItemInput!): CartResponse!
+  deleteCart(cartId: String!): CartResponse!
+  updateCartItem(item: ItemInput!): CartResponse!
+  deleteCartItem(productId: String!): CartResponse!
+  deleteAllCartItems: CartResponse!
 }

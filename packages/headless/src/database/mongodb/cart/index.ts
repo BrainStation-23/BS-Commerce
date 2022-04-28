@@ -85,7 +85,7 @@ export class CartDatabase implements ICartDatabase {
     productId: string,
   ): Promise<Cart | null> {
     return await CartModel.findOneAndUpdate(
-      { userId: userId },
+      { userId: userId, 'items.productId': productId  },
       { $pull: { items: { productId: productId } } },
       { new: true },
     )

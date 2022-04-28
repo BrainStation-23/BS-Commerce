@@ -1,11 +1,12 @@
+import { AuthModule } from 'src/modules/auth/auth.rest.module';
+import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
 import { CartModule as CartRestModule } from '../../modules/cart/cart.rest.module';
-import { WishListModule as WishListRestModule} from 'src/modules/wishlist/wishlist.rest.module'
-import { CategoryModule } from 'src/modules/category/category.rest.module';
 
 export const ResolveRestModule = () => {
   return [
     CartRestModule,
-    WishListRestModule,
-    CategoryModule,
+    WishListModule,
+    AuthModule,
   ];
 };
+

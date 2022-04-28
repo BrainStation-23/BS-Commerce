@@ -12,7 +12,7 @@ import { ItemCreateSchema } from '../validators/cart.create.validator';
 
 @Injectable()
 export class CartService {
-  constructor(private cartRepo: CartRepository, private helper: Helper) {}
+  constructor(private cartRepo: CartRepository, private helper: Helper) { }
 
   @validateParams(
     { schema: ItemCreateSchema },
@@ -33,15 +33,15 @@ export class CartService {
         );
       }
       return this.helper.serviceResponse.successResponse(
-        createCart,
+        await this.cartRepo.getCartProduct(createCart),
         HttpStatus.CREATED,
       );
     }
 
     const isItemExist = await this.cartRepo.isItemExist(userId, item.productId);
     if (!isItemExist) {
-      const addItem = this.cartRepo.addItem(userId, item);
-      if (!addItem) {
+      const cart = await this.cartRepo.addItem(userId, item);
+      if (!cart) {
         return this.helper.serviceResponse.errorResponse(
           'Can not add item to the cart',
           null,
@@ -49,16 +49,16 @@ export class CartService {
         );
       }
       return this.helper.serviceResponse.successResponse(
-        addItem,
+        await this.cartRepo.getCartProduct( cart),
         HttpStatus.OK,
       );
     }
 
-    const incrementItem = await this.cartRepo.incrementItemQuantity(
+    const cart = await this.cartRepo.incrementItemQuantity(
       userId,
       item,
     );
-    if (!incrementItem) {
+    if (!cart) {
       return this.helper.serviceResponse.errorResponse(
         'Can not increment cart item',
         null,
@@ -66,7 +66,7 @@ export class CartService {
       );
     } else {
       return this.helper.serviceResponse.successResponse(
-        incrementItem,
+        await this.cartRepo.getCartProduct(cart,),
         HttpStatus.OK,
       );
     }
@@ -102,7 +102,10 @@ export class CartService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.helper.serviceResponse.successResponse(cart, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(
+      cart,
+      HttpStatus.OK,
+    );
   }
 
   @validateParams(
@@ -139,7 +142,7 @@ export class CartService {
       );
     }
     return this.helper.serviceResponse.successResponse(
-      deletedCart,
+      await this.cartRepo.getCartProduct(deletedCart),
       HttpStatus.OK,
     );
   }
