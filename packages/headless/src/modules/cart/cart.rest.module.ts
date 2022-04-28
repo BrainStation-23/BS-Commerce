@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { CartController } from './controllers';
 import { CartRepository } from './repositories';
 import { ICartDatabase } from './repositories/cart.database.interface';
+import { CartController } from './rest/cart.controller';
 import { CartService } from './services';
 
 @Module({
@@ -14,3 +14,4 @@ import { CartService } from './services';
   ],
 })
 export class CartModule {}
+
