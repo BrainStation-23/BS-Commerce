@@ -73,8 +73,8 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async deleteWishlistItem(userId: string, productId: string): Promise<WishList | null> {
-    return WishListModel.findOneAndUpdate(
-      { userId },
+    return await WishListModel.findOneAndUpdate(
+      { userId, 'items.productId': productId },
       { $pull: { items: { productId } } },
       { new: true },
     )

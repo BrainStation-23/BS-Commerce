@@ -15,4 +15,4 @@ import { WishListService } from './services';
     },
   ],
 })
-export class WishListModule {}
+export class WishListModule { }

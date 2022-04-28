@@ -12,7 +12,6 @@ const WishListSchema = new Schema<WishList>({
     type: String,
     required: true,
   },
-
   items: [
     {
       productId: {
@@ -27,7 +26,7 @@ const WishListSchema = new Schema<WishList>({
       _id: false,
     },
   ],
-},{
+}, {
   timestamps: true,
   versionKey: false
 });
