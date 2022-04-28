@@ -11,4 +11,4 @@ import { coreConfig } from 'config/core';
     ...((coreConfig.api === 'GRAPHQL') ? ResolveGraphqlModule() : ResolveRestModule())
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -21,7 +21,7 @@ export const UserSchema = Joi.object<User, true>({
       "string.email": `Please enter Correct Email ["com", "net", "in", "co"].`,
       'any.required': 'Email is Required.'
     }),
-  password: Joi.string().min(8).required().messages({
+  password: Joi.string().min(6).required().messages({
     'string.base': 'Password should be type of String.',
     'string.min': 'Password must be minimum 6 Characters.',
     'any.required': 'Password is Required.'

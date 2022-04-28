@@ -2,8 +2,9 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res, Use
 import { Item } from 'src/entity/wishList';
 import { Response } from 'express';
 import { WishListService } from '../services';
-import { UserId } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
+import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { User } from 'src/entity/user';
 
 @UseGuards(JwtAuthGuard)
 @Controller('wishlist')
@@ -13,15 +14,15 @@ export class WishListController {
   ) { }
 
   @Post()
-  async addWishList(@Body() item: Item, @UserId() userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.addToWishList(userId, item,);
+  async addWishList(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;
   }
 
   @Get()
-  async getUserWishlist(@UserId() userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getUserWishlist(userId);
+  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.getUserWishlist(user.id);
     res.status(code);
     return response;
   }
@@ -41,22 +42,22 @@ export class WishListController {
   }
 
   @Patch('/item')
-  async updateWishlistItem(@Body() item: Item, @UserId() userId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, userId);
+  async updateWishlistItem(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
     res.status(code);
     return response;
   }
 
   @Delete('/item')
-  async deleteWishlistItem(@Query('product') product: string, @UserId() userId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, userId);
+  async deleteWishlistItem(@Query('product') product: string, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, user.id);
     res.status(code);
     return response;
   }
 
   @Delete('/allitems')
-  async deleteAllWishlistItems(@UserId() userId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(userId,);
+  async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id,);
     res.status(code);
     return response;
   }

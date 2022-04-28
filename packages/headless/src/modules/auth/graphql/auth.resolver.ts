@@ -10,7 +10,7 @@ export class AuthResolver {
   /**
   * Mutation Start
   */
- 
+
   @Mutation()
   async signUp(@Args('user') user: User) {
     return await this.authService.signUp(user);

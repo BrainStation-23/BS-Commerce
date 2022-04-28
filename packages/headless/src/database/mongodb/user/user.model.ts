@@ -23,8 +23,8 @@ const UserSchema = new Schema<User>({
   provider: String,
   providerData: {},
   additionalProviderData: {},
-	resetPasswordToken: String,
-	resetPasswordExpires: Date
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 }, {
   timestamps: true,
   versionKey: false

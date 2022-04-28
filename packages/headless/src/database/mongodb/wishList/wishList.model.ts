@@ -26,7 +26,7 @@ const WishListSchema = new Schema<WishList>({
       _id: false,
     },
   ],
-},{
+}, {
   timestamps: true,
   versionKey: false
 });

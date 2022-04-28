@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/entity/user';
-import { IAuthDatabase } from 'src/modules/auth/repositories/auth.database.interface';
+import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { UserModel } from './user.model';
 @Injectable()
-export class AuthDatabase implements IAuthDatabase {
+export class UserDatabase implements IUserDatabase {
   async createUser(user: User): Promise<User | null> {
     const newUser = await UserModel.create(user);
     delete newUser?.password;

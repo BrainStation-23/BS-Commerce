@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { AuthRepository } from './repositories';
-import { IAuthDatabase } from './repositories/auth.database.interface';
 import { AuthService } from './services';
 import { authConfig } from 'config/auth';
 import { AuthResolver } from './graphql/auth.resolver';
 import { JwtStrategy } from './guards/jwt-strategy';
+import { UserRepository } from 'src/modules/user/repositories';
+import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 
 @Module({
   imports: [
@@ -21,12 +21,12 @@ import { JwtStrategy } from './guards/jwt-strategy';
   providers: [
     AuthResolver,
     AuthService,
-    AuthRepository,
+    UserRepository,
     {
-      provide: IAuthDatabase,
-      useClass: ResolveDatabaseDependency('AUTH'),
+      provide: IUserDatabase,
+      useClass: ResolveDatabaseDependency('USER'),
     },
     JwtStrategy
   ],
 })
-export class AuthModule {}
+export class AuthModule { }

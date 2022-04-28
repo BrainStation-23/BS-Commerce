@@ -7,6 +7,7 @@ import { AuthService } from '../services';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) { }
+
   @Post('signup')
   async register(@Body() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.signUp(user);

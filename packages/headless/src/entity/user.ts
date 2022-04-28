@@ -10,5 +10,5 @@ export class User {
   providerData?: object;
   additionalProviderData?: object;
   resetPasswordToken?: string;
-	resetPasswordExpires?: Date
+  resetPasswordExpires?: Date
 }
