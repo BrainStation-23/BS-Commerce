@@ -5,6 +5,7 @@
   "author": "Brain station, shaishab",
   "private": true,
   "devDependencies": {
+    "commitizen": "^4.2.4",
     "lerna": "^4.0.0",
     "npm-run-all": "^4.1.5"
   },
@@ -18,6 +19,7 @@
     "package:storefront": "lerna run --scope storefront --stream dev",
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
     "dev": "run-p --print-label package:*",
-    "build": "lerna run --parallel build"
+    "build": "lerna run --parallel build",
+    "commit": "cz"
   }
 }
