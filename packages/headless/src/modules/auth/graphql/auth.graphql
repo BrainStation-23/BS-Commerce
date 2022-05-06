@@ -20,18 +20,21 @@ type User {
   provider: String
 }
 
-type AuthResponse {
-  error: String
-  code: Int!
-  data: User!
-}
 type Token {
   token: String!
 }
 
-type SignInResponse {
+interface BaseResponse {
   error: String
   code: Int!
+  # data
+}
+
+type AuthResponse implements BaseResponse {
+  data: User!
+}
+
+type SignInResponse implements BaseResponse {
   data: Token!
 }
 

@@ -36,3 +36,12 @@ export class Product {
     displayOrder?: number
   }]
 }
+
+export class SearchCondition {
+  skip?: number;
+  limit?: number;
+  brandId?: string;
+  categoryId?: string;
+  productName?: string;
+  isFeatured?: boolean;
+}

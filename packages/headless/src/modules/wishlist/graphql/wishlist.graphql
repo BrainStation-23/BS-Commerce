@@ -22,9 +22,13 @@ type WishList {
   items: [Item!]!
 }
 
-type WishListResponse {
+interface BaseResponse {
   error: String
   code: Int!
+  # data
+}
+
+type WishListResponse implements BaseResponse {
   data: WishList!
 }
 

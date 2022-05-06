@@ -1,4 +1,4 @@
-import { Product } from '../../../entity/product';
+import { Product } from 'src/entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
 
@@ -16,5 +16,25 @@ export class ProductRepository {
 
     async createProduct(product: Product): Promise<Product | null> {
         return await this.db.createProduct(product);
+    }
+
+    async getProductCount(query: any): Promise<number> {
+        return await this.db.getProductCount(query);
+    }
+
+    async findProductBySKU(sku: string): Promise<Product | null> {
+        return await this.db.findProductBySKU(sku);
+    }
+
+    async deleteProduct(productId: string): Promise<Product | null> {
+        return await this.db.deleteProduct(productId);
+    }
+
+    async updateProduct(product: Product, productId: string): Promise<Product | null> {
+        return await this.db.updateProduct(product, productId);
+    }
+
+    async findProductsByCondition(query: any, skip?: number, limit?: number): Promise<Product[]> {
+        return await this.db.findProductsByCondition(query, skip, limit);
     }
 }

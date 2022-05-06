@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import { min } from 'rxjs';
 import { Product } from 'src/entity/product';
 
-export const ProductCreateSchema = Joi.object<Product, true>({
+export const ProductSchema = Joi.object<Product, true>({
     id: Joi.string(),
     info: Joi.object().keys({
         name: Joi.string().required(),
@@ -39,4 +39,13 @@ export const ProductCreateSchema = Joi.object<Product, true>({
         isFeatured: Joi.boolean(),
         displayOrder: Joi.number()
     })).min(1).required()
+})
+
+export const ProductSearchSchema = Joi.object({
+    skip: Joi.number(),
+    limit: Joi.number(),
+    brandId: Joi.string(),
+    categoryId: Joi.string(),
+    productName: Joi.string(),
+    isFeatured: Joi.boolean()
 })

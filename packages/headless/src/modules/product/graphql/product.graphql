@@ -93,23 +93,53 @@ input ProductInput {
   categories: [CategoriesInput!]!
 }
 
-type ProductResponse {
+input ProductSearch {
+  skip: Int
+  limit: Int
+  brandId: String
+  categoryId: String
+  productName: String
+  isFeatured: Boolean
+}
+
+input PaginationInput {
+    limit: Int = 10
+    skip: Int = 0
+}
+
+interface BaseResponse {
   error: String
   code: Int!
+  # data
+}
+
+type ProductResponse implements BaseResponse {
   data: Product!
 }
 
 type ProductArrayResponse {
-  error: String
-  code: Int!
   data: [Product!]!
+}
+
+type ProductArrayWithCount {
+  products: [Product!]!
+  count: Int!
+}
+
+type ProductArrayWithCountResponse {
+  data: ProductArrayWithCount!
 }
 
 type Query {
   getProduct(productId: String!): ProductResponse!
-  getAllProducts: ProductArrayResponse!
+  getAllProducts(pagination: PaginationInput): ProductArrayResponse!
+  getProductCount: Int!
+  getProductBySKU(sku: String!): ProductResponse!
+  getProductsByCondition(search: ProductSearch): ProductArrayWithCountResponse!
 }
 
 type Mutation {
   createProduct(product: ProductInput!): ProductResponse!
+  deleteProduct(productId: String!): ProductResponse!
+  updateProduct(product: ProductInput!, productId: String!): ProductResponse!
 }

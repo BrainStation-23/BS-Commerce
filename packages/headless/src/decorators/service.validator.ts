@@ -38,7 +38,7 @@ export function validateParams(...validators: Array<Validators>) {
                 const { error } = schema.validate(args[i], options);
                 if (error) {
                     error.details.forEach((err) => {
-                        response.error += err.message + '.';
+                        response.error += err.message + '. ';
                         err.path[0] && (response.errors[err.path[0]] = [err.message]);
                     })
                     throw new HttpException(response, HttpStatus.BAD_REQUEST);

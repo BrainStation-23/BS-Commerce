@@ -48,9 +48,9 @@ export class WishListController {
     return response;
   }
 
-  @Delete('/item')
-  async deleteWishlistItem(@Query('product') product: string, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, user.id);
+  @Delete('/item/:productId')
+  async deleteWishlistItem(@Param('productId') productId: string, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(productId, user.id);
     res.status(code);
     return response;
   }
