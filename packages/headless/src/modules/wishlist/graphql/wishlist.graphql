@@ -1,0 +1,42 @@
+
+type Product {
+  name: String!
+  price: Int!
+  id: String!
+}
+
+type Item {
+  productId: String!
+  product: Product!
+  quantity: Int!
+}
+
+input ItemInput {
+  productId: String!
+  quantity: Int!
+}
+
+type WishList {
+  id: String!
+  userId: String!
+  items: [Item!]!
+}
+
+type WishListResponse {
+  error: String
+  code: Int!
+  data: WishList!
+}
+
+type Query {
+  getWishlist(wishlistId: String!): WishListResponse!
+  getUserWishlist: WishListResponse!
+}
+
+type Mutation {
+  addToWishlist(item: ItemInput!): WishListResponse!
+  deleteWishList(wishlistId: String!): WishListResponse!
+  updateWishlistItem(item: ItemInput!): WishListResponse!
+  deleteWishlistItem(productId: String!): WishListResponse!
+  deleteAllWishlistItems: WishListResponse!
+}

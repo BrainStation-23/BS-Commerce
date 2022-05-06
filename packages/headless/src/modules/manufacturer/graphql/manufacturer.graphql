@@ -1,0 +1,17 @@
+type SEO {
+  metaKeyword: String!
+  metaDescription: String!
+  metaTitle: String!
+  SEFN: String!
+}
+
+type Manufacturer {
+  id: String!
+  name: String!
+  description: String!
+  picture: String!
+  isPublished: Boolean!
+  displayOrder: Int!
+  seo: SEO!
+}
+

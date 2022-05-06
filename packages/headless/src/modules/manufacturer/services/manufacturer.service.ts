@@ -30,7 +30,7 @@ export class ManufacturerService {
         return this.helper.serviceResponse.successResponse(newManufacturer);
     }
 
-    @validateParams({ schema: Joi.number().required().label('Skip') }, { schema: Joi.number().required().label('Limit') })
+    @validateParams({ schema: Joi.number().label('Skip') }, { schema: Joi.number().label('Limit') })
     async getAllManufacturers(skip?: number, limit?: number): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const foundManufacturers = await this.manufacturerRepo.getAllManufacturers(skip, limit);
 
