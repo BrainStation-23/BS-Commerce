@@ -3,9 +3,10 @@ import Image from "next/image";
 
 import Accordion from "../components/accordion";
 import PageTitle from "../components/pageTitle";
+import ThreeStoriesCard from "../components/threeStoriesCard";
 
 import styles from "../styles/About.module.css";
-import { accordionBody } from "../utils/types";
+import { accordionBody, StoriesBody } from "../utils/types";
 
 const accordionList: accordionBody[] = [
   {
@@ -19,6 +20,30 @@ const accordionList: accordionBody[] = [
   {
     title: "100% Organic Foods",
     body: " Nam liber tempor cum soluta nobis eleifend option. Congue nihilimperdiet doming id quod mazim placerat facer possim assum. Typi nonhabent claritatem insitam est usus legentis in iis qui facit eorumclaritatem. Investigationes demonstraverunt lectores legere me.Claritas est etiam processus dynamicus, qui sequitur mutationemconsuetudium lectorum.",
+  },
+];
+
+const threeStoriesList: StoriesBody[] = [
+  {
+    title: "Our Mission",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about2_large.jpg?v=1588135255",
+    description:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto",
+  },
+  {
+    title: "History Of Us",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about3_large.jpg?v=1588135320",
+    description:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto",
+  },
+  {
+    title: "What Do We Do?",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about4_large.jpg?v=1588135356",
+    description:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto",
   },
 ];
 
@@ -119,66 +144,7 @@ const About: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className={styles.about_gallery_section}>
-        <div className={`${styles.about_gallery_container} container`}>
-          <div className="row">
-            <div className="col-lg-4 col-md-4 col-sm-6">
-              <div className="gallery_thumb">
-                <Image
-                  alt=""
-                  src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about2_large.jpg?v=1588135255"
-                  height={227}
-                  width={416}
-                />
-              </div>
-              <div className={styles.about_gallery_content}>
-                <h3>What Do We Do?</h3>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-4 col-sm-6">
-              <div className="gallery_thumb">
-                <Image
-                  alt=""
-                  src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about3_large.jpg?v=1588135320"
-                  height={227}
-                  width={416}
-                />
-              </div>
-              <div className={styles.about_gallery_content}>
-                <h3>Our Mission</h3>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-4 col-sm-6">
-              <div className="gallery_thumb">
-                <Image
-                  alt=""
-                  src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about4_large.jpg?v=1588135356"
-                  height={227}
-                  width={416}
-                />
-              </div>
-              <div className={styles.about_gallery_content}>
-                <h3>History Of Us</h3>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ThreeStoriesCard leftStory={false} threeStoriesList={threeStoriesList} />
       <div className={styles.faq_client_say_area}>
         <div className="container">
           <div className="row">

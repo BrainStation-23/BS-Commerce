@@ -8,8 +8,8 @@ interface Props {
 const Accordion: FC<Props> = ({ accordionList }) => {
   return (
     <div className="accordion" id="accordionExample">
-      {accordionList.map((item, index) => (
-        <div className="accordion-item mt-3">
+      {accordionList?.map((item, index) => (
+        <div className="accordion-item mt-3" key={index}>
           <h2 className="accordion-header" id={`headingOne${index}`}>
             <button
               className="accordion-button"
