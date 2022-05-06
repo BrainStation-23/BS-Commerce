@@ -6,7 +6,7 @@ import PageTitle from "../components/pageTitle";
 import ThreeStoriesCard from "../components/threeStoriesCard";
 
 import styles from "../styles/About.module.css";
-import { accordionBody, StoriesBody } from "../utils/types";
+import { accordionBody, storiesBody } from "../utils/types";
 
 const accordionList: accordionBody[] = [
   {
@@ -23,7 +23,7 @@ const accordionList: accordionBody[] = [
   },
 ];
 
-const threeStoriesList: StoriesBody[] = [
+const threeStoriesList: storiesBody[] = [
   {
     title: "Our Mission",
     image:

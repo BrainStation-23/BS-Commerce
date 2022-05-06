@@ -3,7 +3,7 @@ export interface accordionBody {
     body:string
   }
 
-  export interface StoriesBody {
+  export interface storiesBody {
     image: string;
     title: string;
     description:string

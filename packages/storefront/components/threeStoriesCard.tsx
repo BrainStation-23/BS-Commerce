@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 
 import Image from "next/image";
+import { storiesBody } from "../utils/types";
 
 import styles from "../styles/ThreeStoriesCard.module.css";
-import { StoriesBody } from "../utils/types";
 
 interface Props {
   leftStory: boolean;
-  threeStoriesList: StoriesBody[];
+  threeStoriesList: storiesBody[];
 }
 
 const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {

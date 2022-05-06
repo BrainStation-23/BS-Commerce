@@ -3,11 +3,11 @@ import Image from "next/image";
 
 import PageTitle from "../components/pageTitle";
 import ThreeStoriesCard from "../components/threeStoriesCard";
-import { StoriesBody } from "../utils/types";
+import { storiesBody } from "../utils/types";
 
 import styles from "../styles/Service.module.css";
 
-const threeStoriesList: StoriesBody[] = [
+const threeStoriesList: storiesBody[] = [
   {
     title: "Our Mission",
     image:
@@ -167,7 +167,7 @@ const Service: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="unlimited_services">
+      <div className={styles.unlimited_services}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-12">
