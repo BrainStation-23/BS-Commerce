@@ -38,6 +38,21 @@ type ManufacturerResponse {
   data: Manufacturer!
 }
 
+type ManufacturerArrayResponse {
+  manufacturers: [Manufacturer!]!
+  total: Int!
+}
+
+type AllManufacturersResponse {
+  error: String
+  code: Int!
+  data: ManufacturerArrayResponse!
+}
+
+type Query {
+  getAllManufacturers(skip: Int, limit: Int): AllManufacturersResponse!
+}
+
 type Mutation {
   addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
 }

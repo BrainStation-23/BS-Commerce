@@ -10,6 +10,19 @@ export class ManufacturerResolver {
   constructor(private manufacturerService: ManufacturerService) { }
 
   /**
+   * Query Start
+   */
+
+  @Query()
+  async getAllManufacturers(@Args('skip') skip: number, @Args('limit') limit: number) {
+    return await this.manufacturerService.getAllManufacturers(skip, limit);
+  }
+
+  /**
+  * Query End
+  */
+
+  /**
   * Mutation Start
   */
 
