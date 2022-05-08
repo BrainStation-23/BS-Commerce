@@ -18,6 +18,11 @@ export class ManufacturerResolver {
     return await this.manufacturerService.getAllManufacturers(skip, limit);
   }
 
+  @Query()
+  async getSingleManufacturer(@Args('manufacturerId') manufacturerId: string) {
+    return await this.manufacturerService.getManufacturer(manufacturerId);
+  }
+
   /**
   * Query End
   */

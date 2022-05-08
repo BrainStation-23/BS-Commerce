@@ -51,6 +51,7 @@ type AllManufacturersResponse {
 
 type Query {
   getAllManufacturers(skip: Int, limit: Int): AllManufacturersResponse!
+  getSingleManufacturer(manufacturerId: String!): ManufacturerResponse!
 }
 
 type Mutation {
