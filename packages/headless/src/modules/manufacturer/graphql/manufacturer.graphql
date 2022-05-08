@@ -15,3 +15,29 @@ type Manufacturer {
   seo: SEO!
 }
 
+input SEOInput {
+  metaKeyword: String!
+  metaDescription: String!
+  metaTitle: String!
+  SEFN: String!
+}
+
+input ManufacturerInput {
+  id: String!
+  name: String!
+  description: String!
+  picture: String!
+  isPublished: Boolean!
+  displayOrder: Int!
+  seo: SEOInput!
+}
+
+type ManufacturerResponse {
+  error: String
+  code: Int!
+  data: Manufacturer!
+}
+
+type Mutation {
+  addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
+}

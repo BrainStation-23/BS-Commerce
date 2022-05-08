@@ -9,5 +9,16 @@ import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 export class ManufacturerResolver {
   constructor(private manufacturerService: ManufacturerService) { }
 
-  
+  /**
+  * Mutation Start
+  */
+
+  @Mutation()
+  async addManufacturer(@Args('manufacturer') manufacturer: Manufacturer) {
+    return await this.manufacturerService.createManufacturer(manufacturer);
+  }
+
+  /**
+   * Mutation End
+   */
 }
