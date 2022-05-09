@@ -55,7 +55,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-sliders" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>Free Shipping</h3>
@@ -69,7 +69,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-umbrella" aria-hidden="true"></i>
+                  <i className="bi bi-arrow-clockwise" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>WEB DESIGN</h3>
@@ -83,7 +83,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-camera" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>PHOTOGRAPHY</h3>
@@ -97,7 +97,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  <i className="bi bi-arrow-clockwise" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>WEB DEVELOPMENT</h3>
@@ -111,7 +111,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>CODING</h3>
@@ -125,7 +125,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-bar-chart" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>MARKETING</h3>
@@ -139,7 +139,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-headphones" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>SUPPORT</h3>
@@ -153,7 +153,7 @@ const Service: NextPage = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className={styles.services_item}>
                 <div className={styles.services_icone}>
-                  <i className="fa fa-leaf" aria-hidden="true"></i>
+                  <i className="bi bi-app-indicator" aria-hidden="true"></i>
                 </div>
                 <div className={styles.services_desc}>
                   <h3>GRAPHIC DESIGN</h3>
