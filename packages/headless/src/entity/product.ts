@@ -44,4 +44,6 @@ export class SearchCondition {
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;
+  slug?: string;
+  orderBy?: string;
 }

@@ -34,7 +34,15 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.findOneAndUpdate({ id: productId }, { $set: product }, { new: true }).lean().exec();
   }
 
+  async updateProductsForBands(productIds: string[]) {
+    return await ProductModel.find({ id:{ '$in': productIds }}).lean();
+  }
+
   async findProductsByCondition(query: any, skip?: number, limit?: number) {
     return await ProductModel.find(query, 'info brands photos').skip(skip).limit(limit).lean();
+  }
+
+  async getProductsList(skip: number, limit: number, query?: any, sortCondition?: string) {
+    return await ProductModel.find(query).sort(sortCondition).skip((skip - 1) * limit).limit(limit).lean();
   }
 }

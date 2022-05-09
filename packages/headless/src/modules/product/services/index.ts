@@ -28,8 +28,9 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(product);
   }
 
-  @validateParams({ schema: Joi.number() }, { schema: Joi.number() })
-  async getAllProducts(skip?: number, limit?: number): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  @validateParams({ schema: ProductSearchSchema })
+  async getAllProducts(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const { skip, limit } = condition;
     const products = await this.productRepo.findAllProducts(skip, limit);
     if (!products) {
       return this.helper.serviceResponse.errorResponse("Can't get All Products.", null, HttpStatus.BAD_REQUEST);
@@ -64,12 +65,21 @@ export class ProductService {
   }
 
   @validateParams({ schema: ProductSchema }, { schema: Joi.string().required() })
-  async updateProduct(product: Product, productId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async updateProduct(product: Product, productId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const updatedProduct = await this.productRepo.updateProduct(product, productId);
     if (!updatedProduct) {
       return this.helper.serviceResponse.errorResponse("Can't update this Product.", null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(updatedProduct);
+  }
+
+  @validateParams({ schema: Joi.array().required() })
+  async updateProductsForBands(productIds: string[]): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const products = await this.productRepo.findProductsByCondition({ id: { '$in': productIds } });
+    if (products.length <= 0) {
+      return this.helper.serviceResponse.errorResponse("Can't Get Products.", null, HttpStatus.BAD_REQUEST);
+    }
+    return this.helper.serviceResponse.successResponse(products);
   }
 
   @validateParams({ schema: ProductSearchSchema })
@@ -78,9 +88,18 @@ export class ProductService {
     const query = this.generateSearchQuery({ brandId, categoryId, productName, isFeatured });
     const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) {
-      return this.helper.serviceResponse.errorResponse("Can't get Products", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse("Can't get Products.", null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse({ products, count });
+  }
+
+  @validateParams({ schema: Joi.string().required() })
+  async getProductsByBrand(brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const products = await this.productRepo.findProductsByCondition({ brands: brandId });
+    if (products.length <= 0) {
+      return this.helper.serviceResponse.errorResponse("Can't get Products.", null, HttpStatus.BAD_REQUEST);
+    }
+    return this.helper.serviceResponse.successResponse(products);
   }
 
   @validateParams({ schema: ProductSearchSchema })
@@ -101,4 +120,20 @@ export class ProductService {
     }
     return query;
   }
+
+  @validateParams({ schema: ProductSearchSchema })
+  async getProductsList(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const { slug, orderBy, skip, limit } = condition;
+    let products: Product[] = [];
+    if (slug) {
+      //dependent on category module
+    }
+    else if (skip && limit) {
+      products = await this.productRepo.getProductsList(skip, limit, {}, '',);
+    } else {
+      products = await this.productRepo.getProductsList(1, 9, {}, '',);
+    }
+    return this.helper.serviceResponse.successResponse(products);
+  }
+
 }

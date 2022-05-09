@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Product } from 'src/entity/product';
+import { Product, SearchCondition } from 'src/entity/product';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
 
@@ -15,9 +15,8 @@ export class ProductResolver {
   }
 
   @Query()
-  async getAllProducts(@Args('pagination') pagination: { limit?: number, skip?: number }) {
-    const { limit, skip } = pagination;
-    return await this.productService.getAllProducts(limit, skip);
+  async getAllProducts(@Args('condition') condition: SearchCondition) {
+    return await this.productService.getAllProducts(condition);
   }
 
   @Query()
@@ -28,6 +27,21 @@ export class ProductResolver {
   @Query()
   async getProductBySKU(@Args('sku') sku: string) {
     return await this.productService.getProductBySKU(sku)
+  }
+
+  @Query()
+  async getProductsByCondition(@Args('condition') condition: SearchCondition) {
+    return await this.productService.getProductsByCondition(condition);
+  }
+
+  @Query()
+  async getProductsByBrand(@Args('brandId') brandId: string) {
+    return await this.productService.getProductsByBrand(brandId);
+  }
+
+  @Query()
+  async getProductsList(@Args('condition') condition: SearchCondition) {
+    return await this.productService.getProductsList(condition);
   }
 
   @Mutation()
