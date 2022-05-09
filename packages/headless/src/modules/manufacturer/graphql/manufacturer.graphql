@@ -23,7 +23,6 @@ input SEOInput {
 }
 
 input ManufacturerInput {
-  id: String!
   name: String!
   description: String!
   picture: String!
