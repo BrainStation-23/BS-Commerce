@@ -1,4 +1,3 @@
-
 type Product {
   name: String!
   price: Int!
@@ -22,13 +21,9 @@ type WishList {
   items: [Item!]!
 }
 
-interface BaseResponse {
+type WishListResponse {
   error: String
   code: Int!
-  # data
-}
-
-type WishListResponse implements BaseResponse {
   data: WishList!
 }
 

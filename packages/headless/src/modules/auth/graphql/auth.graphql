@@ -24,17 +24,15 @@ type Token {
   token: String!
 }
 
-interface BaseResponse {
+type AuthResponse {
   error: String
   code: Int!
-  # data
-}
-
-type AuthResponse implements BaseResponse {
   data: User!
 }
 
-type SignInResponse implements BaseResponse {
+type SignInResponse {
+  error: String
+  code: Int!
   data: Token!
 }
 

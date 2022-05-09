@@ -10,11 +10,6 @@ import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 export class WishListResolver {
   constructor(private wishListService: WishListService) { }
 
-  /**
-   * Query Start
-   */
-
-
   @Query()
   async getWishlist(@Args('wishlistId') wishlistId: string) {
     return await this.wishListService.getWishlist(wishlistId);
@@ -24,14 +19,6 @@ export class WishListResolver {
   async getUserWishlist(@UserInfo() user: User) {
     return await this.wishListService.getUserWishlist(user.id);
   }
-
-  /**
-  * Query End
-  */
-
-  /**
-  * Mutation Start
-  */
 
   @Mutation()
   async addToWishlist(@Args('item') item: Item, @UserInfo() user: User) {
@@ -57,8 +44,4 @@ export class WishListResolver {
   async deleteAllWishlistItems(@UserInfo() user: User) {
     return await this.wishListService.deleteAllWishlistItems(user.id);
   }
-
-  /**
-   * Mutation End
-   */
 }
