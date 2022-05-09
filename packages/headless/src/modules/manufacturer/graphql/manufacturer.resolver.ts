@@ -36,6 +36,11 @@ export class ManufacturerResolver {
     return await this.manufacturerService.createManufacturer(manufacturer);
   }
 
+  @Mutation()
+  async updateManufacturer(@Args('manufacturerId') manufacturerId: string, @Args('manufacturer') manufacturer: Manufacturer) {
+    return await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer)
+  }
+
   /**
    * Mutation End
    */

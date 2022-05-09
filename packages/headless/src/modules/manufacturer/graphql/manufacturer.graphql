@@ -35,7 +35,7 @@ input ManufacturerInput {
 type ManufacturerResponse {
   error: String
   code: Int!
-  data: Manufacturer!
+  data: Manufacturer
 }
 
 type ManufacturerArrayResponse {
@@ -46,7 +46,7 @@ type ManufacturerArrayResponse {
 type AllManufacturersResponse {
   error: String
   code: Int!
-  data: ManufacturerArrayResponse!
+  data: ManufacturerArrayResponse
 }
 
 type Query {
@@ -56,4 +56,5 @@ type Query {
 
 type Mutation {
   addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
+  updateManufacturer(manufacturerId: String!, manufacturer: ManufacturerInput!): ManufacturerResponse!
 }
