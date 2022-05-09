@@ -2,8 +2,9 @@
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user'
 import { dbConfig } from 'config/database';
+import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 
-type CLASS_NAME = 'WISHLIST' | 'USER';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'CART';
 const db = dbConfig.db || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -15,6 +16,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return WishListDatabaseMongo;
           case 'USER':
             return UserDatabaseMongo;
+          case 'CART':
+            return CartDatabaseMongo;  
 
           default:
             break;
