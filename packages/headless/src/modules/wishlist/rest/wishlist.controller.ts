@@ -1,8 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { Item } from 'src/entity/wishList';
 import { Response } from 'express';
 import { WishListService } from '../services';
+import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { User } from 'src/entity/user';
 
+@UseGuards(JwtAuthGuard)
 @Controller('wishlist')
 export class WishListController {
   constructor(
@@ -10,15 +14,15 @@ export class WishListController {
   ) { }
 
   @Post()
-  async addWishList(@Body() item: Item, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.addToWishList(req?.userId, item,);
+  async addWishList(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;
   }
 
   @Get()
-  async getUserWishlist(@Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.getUserWishlist(req?.userId);
+  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.getUserWishlist(user.id);
     res.status(code);
     return response;
   }
@@ -38,22 +42,22 @@ export class WishListController {
   }
 
   @Patch('/item')
-  async updateWishlistItem(@Body() item: Item, @Req() req: any, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, req?.userId);
+  async updateWishlistItem(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
     res.status(code);
     return response;
   }
 
   @Delete('/item')
-  async deleteWishlistItem(@Query('product') product: string, @Req() req: any, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, req?.userId);
+  async deleteWishlistItem(@Query('product') product: string, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(product, user.id);
     res.status(code);
     return response;
   }
 
   @Delete('/allitems')
-  async deleteAllWishlistItems(@Req() req: any, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(req?.userId,);
+  async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id,);
     res.status(code);
     return response;
   }

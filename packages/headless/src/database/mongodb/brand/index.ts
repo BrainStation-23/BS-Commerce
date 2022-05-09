@@ -12,6 +12,7 @@ export class BrandDatabase implements IBrandDatabase {
     }
 
     async getBrandById(brandId: string): Promise<Brand | null> {
+        console.log(brandId);
         return await BrandModel.findOne({ id: brandId }).lean();
     }
 

@@ -30,13 +30,13 @@ type WishListResponse {
 
 type Query {
   getWishlist(wishlistId: String!): WishListResponse!
-  getUserWishlist(userId: String!): WishListResponse!
+  getUserWishlist: WishListResponse!
 }
 
 type Mutation {
-  addToWishlist(item: ItemInput!, userId: String!): WishListResponse!
+  addToWishlist(item: ItemInput!): WishListResponse!
   deleteWishList(wishlistId: String!): WishListResponse!
-  updateWishlistItem(item: ItemInput!, userId: String!): WishListResponse!
-  deleteWishlistItem(productId: String!, userId: String!): WishListResponse!
-  deleteAllWishlistItems(userId: String!): WishListResponse!
+  updateWishlistItem(item: ItemInput!): WishListResponse!
+  deleteWishlistItem(productId: String!): WishListResponse!
+  deleteAllWishlistItems: WishListResponse!
 }

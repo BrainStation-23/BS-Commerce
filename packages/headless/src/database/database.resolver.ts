@@ -2,10 +2,11 @@
 // import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user'
+import { dbConfig } from 'config/database';
 
-
-type CLASS_NAME = 'BRAND' | 'WISHLIST';
-const db = process.env.DATABASE || 'MONGO';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'BRAND' ;
+const db = dbConfig.db || 'MONGO';
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
   try {
@@ -18,6 +19,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
               return BrandDatabaseMongo;
           case 'WISHLIST':
             return WishListDatabaseMongo;
+          case 'USER':
+            return UserDatabaseMongo;
 
           default:
             break;

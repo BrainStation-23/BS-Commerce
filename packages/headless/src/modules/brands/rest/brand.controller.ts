@@ -47,7 +47,7 @@ export class BrandController {
 
     @Put('/:id')
     async updateBrand(
-        @Param('brandId') brandId: string,
+        @Param('id') brandId: string,
         @Body() featuresToUpdate: Brand,
         @Res({ passthrough: true })
         res: Response
@@ -61,7 +61,7 @@ export class BrandController {
 
     @Delete('/:id')
     async deleteBrandById(
-        @Param('brandId') brandId: string, 
+        @Param('id') brandId: string, 
         @Res({ passthrough: true }) res: Response){
             
         const { code, ...response } = await this.brandService.deleteBrandById(brandId);

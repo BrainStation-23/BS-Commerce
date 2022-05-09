@@ -5,7 +5,7 @@ import { Brand } from 'src/entity/brand';
 
 const BrandSchema = new Schema<Brand>({
     id: {
-        default: crypto.randomUUID(),
+        default: () => crypto.randomUUID(),
         type: String,
         unique: true
     },
