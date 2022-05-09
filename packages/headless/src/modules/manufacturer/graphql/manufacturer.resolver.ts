@@ -41,6 +41,11 @@ export class ManufacturerResolver {
     return await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer)
   }
 
+  @Mutation()
+  async deleteManufacturer(@Args('manufacturerId') manufacturerId: string) {
+    return await this.manufacturerService.deleteManufacturer(manufacturerId)
+  }
+
   /**
    * Mutation End
    */

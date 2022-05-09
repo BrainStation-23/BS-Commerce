@@ -57,4 +57,5 @@ type Query {
 type Mutation {
   addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
   updateManufacturer(manufacturerId: String!, manufacturer: ManufacturerInput!): ManufacturerResponse!
+  deleteManufacturer(manufacturerId: String!): ManufacturerResponse!
 }
