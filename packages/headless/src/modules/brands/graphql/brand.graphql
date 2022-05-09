@@ -1,0 +1,38 @@
+
+type Brand{
+    id: String
+    info:{
+        name: String!
+        description: String
+        allowToSelectPageSize: Boolean
+        published: Boolean
+        displayOrder: Number
+        pageSizeOptions: [Number]
+    }
+    meta: {
+        keywords: String
+        description: String
+        title: String
+        SEFN: String
+    }
+}
+
+type BrandResponse {
+  error: String
+  code: Int!
+  data: Brand!
+}
+
+type Query {
+ getBrand(brandId: String!): BrandResponse!
+ getAllBrands(skip?: number, limit?: number): BrandResponse!
+
+}
+
+type Mutation {
+     addNewBrand(brand: Brand!): BrandResponse!
+     updateBrandById(brandId: String!, brand: Brand!): BrandResponse!
+     deleteBrandById(brandId: String!): BrandResponse!
+}
+
+    

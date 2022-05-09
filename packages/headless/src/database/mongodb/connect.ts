@@ -1,8 +1,8 @@
 import * as Mongoose from 'mongoose';
 import { config } from '../../../config/database/mongodb';
 
-export function connect() {
-    Mongoose.connect(config.URI);
+export async function connect() {
+    await Mongoose.connect(config.URI);
     const { connection } = Mongoose;
 
     connection.on('connected', () => {

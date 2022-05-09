@@ -1,14 +1,15 @@
-import { BrandController } from './controllers/index';
+import { Module } from "@nestjs/common";
+
+import { BrandController } from './rest/brand.controller';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
-import { Brandservice } from './services/index';
+import { BrandService } from './services/index';
 import { BrandRepository } from './repositories/index';
-import { Module } from "@nestjs/common";
 
 @Module({
     controllers: [BrandController],
     providers: [
-        Brandservice,
+        BrandService,
         BrandRepository,
         { provide: IBrandDatabase, useClass: ResolveDatabaseDependency('BRAND') }
     ]

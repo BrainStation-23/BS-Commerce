@@ -12,7 +12,7 @@ import { validateParams } from 'src/decorators/service.validator';
 
 @Injectable()
 
-export class Brandservice{
+export class BrandService{
     constructor( 
         private brandRepo: BrandRepository,
         private helper: Helper     

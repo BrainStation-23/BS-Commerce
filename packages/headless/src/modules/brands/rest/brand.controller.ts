@@ -1,15 +1,15 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 
-import { Brand } from './../../../entity/brand';
-import { Brandservice } from './../services/index';
+import { Brand } from '../../../entity/brand';
+import { BrandService } from '../services/index';
 
 @Controller('brands')
 
 export class BrandController {
 
     constructor(
-        private brandService: Brandservice
+        private brandService: BrandService
     ){}
 
     @Get('/')

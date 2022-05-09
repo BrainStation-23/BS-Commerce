@@ -19,5 +19,9 @@
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
     "dev": "run-p --print-label package:*",
     "build": "lerna run --parallel build"
+  },
+  "dependencies": {
+    "@nestjs/apollo": "^10.0.9",
+    "@nestjs/graphql": "^10.0.10"
   }
 }
