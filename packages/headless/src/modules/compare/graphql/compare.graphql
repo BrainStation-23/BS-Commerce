@@ -1,9 +1,10 @@
 type Comapre {
+  id: String!
   userId: String!
   items: [String!]!
 }
 
-input CompareInput {
+input ProductIdInput {
   productId: String!
 }
 
@@ -14,9 +15,13 @@ type ComapreResponse {
 }
 
 type Query {
-  getCompareByUserId(userId: String!): ComapreResponse!
+  getCompareByUserId: ComapreResponse!
+  getCompareById(compareId: String!): ComapreResponse!
 }
 
 type Mutation {
-  addItemToCompare(body: CompareInput!): ComapreResponse!
+  addItemToCompare(body: ProductIdInput!): ComapreResponse!
+  deleteCompareById(compareId: String!): ComapreResponse!
+  deleteItemByProductId(productId: String!): ComapreResponse!
+  deleteAllItemByUserId: ComapreResponse!
 }

@@ -65,7 +65,7 @@ export class CompareController {
   }
 
   @Delete()
-  async deleteCompareByUserId(
+  async deleteCompareById(
     @UserInfo() user: User,
     @Query('compareId') compareId: string,
     @Res({ passthrough: true }) res: Response,
