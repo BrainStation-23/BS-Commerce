@@ -5,8 +5,9 @@ import Accordion from "../components/accordion";
 import PageTitle from "../components/pageTitle";
 import ThreeStoriesCard from "../components/threeStoriesCard";
 
-import styles from "../styles/About.module.css";
 import { accordionBody, storiesBody } from "../utils/types";
+
+import styles from "../styles/About.module.css";
 
 const accordionList: accordionBody[] = [
   {

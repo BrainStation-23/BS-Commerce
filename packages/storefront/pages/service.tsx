@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import PageTitle from "../components/pageTitle";
 import ThreeStoriesCard from "../components/threeStoriesCard";
+
 import { storiesBody } from "../utils/types";
 
 import styles from "../styles/Service.module.css";
@@ -194,7 +195,7 @@ const Service: NextPage = () => {
                 </p>
                 <div className={styles.view__work}>
                   <a href="/policies/terms-of-service">
-                    More Info <i className="fa fa-angle-right"></i>
+                    More Info <i className="bi bi-caret-right"></i>
                   </a>
                 </div>
               </div>

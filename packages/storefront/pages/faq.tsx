@@ -4,8 +4,9 @@ import Image from "next/image";
 import Accordion from "../components/accordion";
 import PageTitle from "../components/pageTitle";
 
-import styles from "../styles/Faq.module.css";
 import { accordionBody } from "../utils/types";
+
+import styles from "../styles/Faq.module.css";
 
 const accordionList: accordionBody[] = [
   {
