@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { Input, Textarea } from "marketplace";
 
 import PageTitle from "../components/pageTitle";
 
@@ -42,45 +43,10 @@ const Contact: NextPage = () => {
               <div className={styles.contact_message}>
                 <h3>Tell Us Your Project</h3>
                 <form method="post" action="/">
-                  <input type="hidden" name="form_type" value="contact" />
-                  <input type="hidden" name="utf8" value="✓" />
-                  <p>
-                    <label> Name *</label>
-                    <input
-                      type="text"
-                      placeholder="Name *"
-                      className=""
-                      name="contact[name]"
-                      value=""
-                    />
-                  </p>
-                  <p>
-                    <label> Email *</label>
-                    <input
-                      type="email"
-                      placeholder="Email *"
-                      className=""
-                      name="contact[email]"
-                      value=""
-                    />
-                  </p>
-                  <p>
-                    <label> Subject</label>
-                    <input
-                      type="text"
-                      name="contact[subject]"
-                      placeholder="Subject"
-                      value=""
-                    />
-                  </p>
-                  <div className="contact_textarea">
-                    <label> Message</label>
-                    <textarea
-                      placeholder="Message"
-                      className="custom-textarea"
-                      name="contact[body]"
-                    ></textarea>
-                  </div>
+                  <Input label="Name" value="" type="text" name="name" />
+                  <Input label="Email" value="" type="email" name="email" />
+                  <Input label="Subject" value="" type="text" name="subject" />
+                  <Textarea label="Message" value="" name="message" />
                   <button type="submit"> Send</button>
                 </form>
               </div>

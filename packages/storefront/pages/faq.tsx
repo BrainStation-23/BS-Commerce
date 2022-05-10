@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Image from "next/image";
 
 import Accordion from "../components/accordion";
 import PageTitle from "../components/pageTitle";

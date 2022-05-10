@@ -32,26 +32,6 @@
   border-top: 1px solid #ededed;
 }
 
-.contact_message input {
-  border: 1px solid #ededed;
-  height: 45px;
-  background: #ffffff;
-  width: 100%;
-  padding: 0 20px;
-  color: #757575;
-}
-
-.contact_message textarea {
-  height: 170px;
-  border: 1px solid #ededed;
-  background: #ffffff;
-  resize: none;
-  margin-bottom: 20px;
-  width: 100%;
-  padding: 10px 20px;
-  color: #222;
-}
-
 .contact_message button {
   font-weight: 400;
   height: 42px;
