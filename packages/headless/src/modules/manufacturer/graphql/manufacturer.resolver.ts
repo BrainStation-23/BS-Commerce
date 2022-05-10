@@ -19,7 +19,7 @@ export class ManufacturerResolver {
   }
 
   @Query()
-  async getSingleManufacturer(@Args('manufacturerId') manufacturerId: string) {
+  async getManufacturer(@Args('manufacturerId') manufacturerId: string) {
     return await this.manufacturerService.getManufacturer(manufacturerId);
   }
 
@@ -33,7 +33,7 @@ export class ManufacturerResolver {
 
   @Mutation()
   async addManufacturer(@Args('manufacturer') manufacturer: Manufacturer) {
-    return await this.manufacturerService.createManufacturer(manufacturer);
+    return await this.manufacturerService.addManufacturer(manufacturer);
   }
 
   @Mutation()

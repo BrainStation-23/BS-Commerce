@@ -26,13 +26,13 @@ export class ManufacturerController {
 
     @Post('/create')
     async addManufacturer(@Body() manufacturer: Manufacturer, @Res({ passthrough: true }) res: Response) {
-        const { code, ...response } = await this.manufacturerService.createManufacturer(manufacturer);
+        const { code, ...response } = await this.manufacturerService.addManufacturer(manufacturer);
         res.status(code);
         return response;
     }
 
     @Get('/:manufacturerId')
-    async getSingleManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
+    async getManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.getManufacturer(manufacturerId);
         res.status(code);
         return response;

@@ -11,19 +11,19 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
         return await ManufacturerModel.create(manufacturer);
     }
 
-    async findAllManufacturers(skip?: number, limit?: number): Promise<Manufacturer[] | null> {
+    async getAllManufacturers(skip?: number, limit?: number): Promise<Manufacturer[] | null> {
         return await ManufacturerModel.find({}).skip(skip).limit(limit).lean();
     }
 
-    async findManufacturersNumber(searchQuery?: string): Promise<Number | null> {
+    async findManufacturersCount(searchQuery?: string): Promise<Number | null> {
         return await ManufacturerModel.find({ searchQuery }).count().lean();
     }
 
-    async findManufacturerById(manufacturerId: string): Promise<Manufacturer | null> {
+    async getManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
         return await ManufacturerModel.findOne({ id: manufacturerId }).lean();
     }
 
-    async updateManufacturerById(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
+    async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
         return await ManufacturerModel.findOneAndUpdate(
             { id: manufacturerId },
             { $set: manufacturer },
@@ -33,7 +33,7 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
             .exec();
     }
 
-    async deleteManufacturerById(manufacturerId: string): Promise<Manufacturer | null> {
+    async deleteManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
         return await ManufacturerModel.findOneAndRemove({ id: manufacturerId }).lean();
     }
 }
