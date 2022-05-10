@@ -8,13 +8,6 @@ import { ProductService } from '../services';
 export class ProductController {
   constructor(private productService: ProductService) { }
 
-  @Post()
-  async addProduct(@Body() product: Product, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.createProduct(product);
-    res.status(code);
-    return response;
-  }
-
   @Get()
   async getAllProducts(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.productService.getAllProducts({ skip, limit });
@@ -32,20 +25,6 @@ export class ProductController {
   @Get('sku/:sku')
   async getProductBySKU(@Param('sku') sku: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getProductBySKU(sku);
-    res.status(code);
-    return response;
-  }
-
-  @Delete(':productId')
-  async deleteProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.deleteProduct(productId);
-    res.status(code);
-    return response;
-  }
-
-  @Patch(':productId')
-  async updateProduct(@Body() product: Product, @Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.updateProduct(product, productId);
     res.status(code);
     return response;
   }
@@ -78,16 +57,6 @@ export class ProductController {
     return response;
   }
 
-  @Patch('brand')
-  async updateProductsForBands(
-    @Body('productIds') productIds: string[],
-    @Res({ passthrough: true }) res: Response
-  ) {
-    const { code, ...response } = await this.productService.updateProductsForBands(productIds);
-    res.status(code);
-    return response;
-  }
-
   @Get('brand/:brandId')
   async getProductsByBrand(@Param('brandId') brandId: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getProductsByBrand(brandId);
@@ -98,6 +67,38 @@ export class ProductController {
   @Get(':productId')
   async getProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getProduct(productId);
+    res.status(code);
+    return response;
+  }
+
+  @Post()
+  async addProduct(@Body() product: Product, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.createProduct(product);
+    res.status(code);
+    return response;
+  }
+
+  @Delete(':productId')
+  async deleteProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.deleteProduct(productId);
+    res.status(code);
+    return response;
+  }
+
+  @Patch('brand')
+  async updateProductsForBands(
+    @Body('productIds') productIds: string[],
+    @Body('brandId') brandId: string,
+    @Res({ passthrough: true }) res: Response
+  ) {
+    const { code, ...response } = await this.productService.updateProductsForBands(productIds, brandId);
+    res.status(code);
+    return response;
+  }
+
+  @Patch(':productId')
+  async updateProduct(@Body() product: Product, @Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.updateProduct(product, productId);
     res.status(code);
     return response;
   }

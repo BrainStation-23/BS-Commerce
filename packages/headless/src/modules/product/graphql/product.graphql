@@ -117,19 +117,19 @@ input ConditionInput {
 type ProductResponse {
   error: String
   code: Int!
-  data: Product!
+  data: Product
 }
 
 type ProductArrayResponse {
   error: String
   code: Int!
-  data: [Product!]!
+  data: [Product]
 }
 
 type ProductArrayWithCountResponse {
   error: String
   code: Int!
-  data: ProductArrayWithCount!
+  data: ProductArrayWithCount
 }
 
 type Query {
@@ -141,11 +141,15 @@ type Query {
     condition: SearchCondition
   ): ProductArrayWithCountResponse!
   getProductsList(condition: SearchCondition): ProductArrayResponse!
-  getProductsByBrand(condition: SearchCondition): ProductArrayResponse!
+  getProductsByBrand(brandId: String!): ProductArrayResponse!
 }
 
 type Mutation {
   createProduct(product: ProductInput!): ProductResponse!
   deleteProduct(productId: String!): ProductResponse!
   updateProduct(product: ProductInput!, productId: String!): ProductResponse!
+  updateProductsForBands(
+    productIds: [String!]!
+    brandId: String!
+  ): ProductArrayResponse!
 }

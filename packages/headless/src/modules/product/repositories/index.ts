@@ -34,8 +34,8 @@ export class ProductRepository {
         return await this.db.updateProduct(product, productId);
     }
 
-    async updateProductsForBands(productIds: string[]): Promise<Product[] | []> {
-        return await this.db.updateProductsForBands(productIds);
+    async updateProductsForBands(productIds: string[], brandId: string): Promise<Product[] | null> {
+        return await this.db.updateProductsForBands(productIds, brandId);
     }
 
     async findProductsByCondition(query: any, skip?: number, limit?: number): Promise<Product[] | []> {
