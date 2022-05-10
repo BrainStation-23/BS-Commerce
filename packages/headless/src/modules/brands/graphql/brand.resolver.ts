@@ -1,40 +1,41 @@
 import { Brand } from 'src/entity/brand';
-import { Item } from 'src/entity/wishList';
 import { BrandService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class BrandResolver {
-  constructor(private BrandService: BrandService) { }
+  constructor(private brandService: BrandService) { }
   
   @Query()
-  async getBrand(@Args('id') BrandId: string) {
-    return await this.BrandService.getBrandById(BrandId);
-  }
+  async getBrand(@Args('brandId') BrandId: string) {
+    return await this.brandService.getBrandById(BrandId);
+  }//done
+
 
   @Query()
-  async getAllBrands() {
-    return await this.BrandService.getAllBrands();
+  async getAllBrands(
+    @Args('skip') skip: number,
+    @Args('limit') limit: number
+    ) {
+    return await this.brandService.getAllBrands();
   }
 
   @Mutation()
-  async addNewBrand(
-    @Args() brand: Brand,
-  ) {
-    return await this.BrandService.createBrand(brand);
-  }
+  async addNewBrand(@Args('brand') brand: Brand){
+    return await this.brandService.createBrand(brand);
+  }//done
 
   @Mutation()
-  async deleteBrandById(@Args('id') brandId: string) {
-    return await this.BrandService.deleteBrandById(brandId);
-  }
+  async deleteBrandById(@Args('brandId') brandId: string) {
+    return await this.brandService.deleteBrandById(brandId);
+  }//done
 
   @Mutation()
   async updateBrandById(
-    @Args('id') brandId: string,
-    @Args() brand: Brand
+    @Args('brandId') brandId: string,
+    @Args('brand') brand: Brand
   ) {
-    return await this.BrandService.updateBrandById(brandId, brand);
-  }
+    return await this.brandService.updateBrandById(brandId, brand);
+  }//done
 
 }

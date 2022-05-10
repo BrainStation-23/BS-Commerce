@@ -1,37 +1,63 @@
+type Info {
+    name: String!
+    description: String
+    allowToSelectPageSize: Boolean
+    published: Boolean
+    displayOrder: Int
+    pageSizeOptions: [Int]
+}
+input InfoInput {
+    name: String!
+    description: String
+    allowToSelectPageSize: Boolean
+    published: Boolean
+    displayOrder: Int
+    pageSizeOptions: [Int]
+}
 
-type Brand{
+type Meta {
+    keywords: String
+    description: String
+    title: String
+    SEFN: String
+}
+input MetaInput {
+    keywords: String
+    description: String
+    title: String
+    SEFN: String
+}
+type Brand {
     id: String
-    info:{
-        name: String!
-        description: String
-        allowToSelectPageSize: Boolean
-        published: Boolean
-        displayOrder: Number
-        pageSizeOptions: [Number]
-    }
-    meta: {
-        keywords: String
-        description: String
-        title: String
-        SEFN: String
-    }
+    info: Info
+    meta: Meta
+}
+
+input BrandInput {
+    info: InfoInput
+    meta: MetaInput
+}
+
+type SingleBrandResponse{
+    error: String
+    code: Int!
+    data: Brand!
 }
 
 type BrandResponse {
   error: String
   code: Int!
-  data: Brand!
+  data: [Brand!]!
 }
 
 type Query {
- getBrand(brandId: String!): BrandResponse!
- getAllBrands(skip?: number, limit?: number): BrandResponse!
-
+    getBrand(brandId: String!): SingleBrandResponse!
+    getAllBrands(skip: Int, limit: Int): BrandResponse!
 }
 
 type Mutation {
-     addNewBrand(brand: Brand!): BrandResponse!
-     updateBrandById(brandId: String!, brand: Brand!): BrandResponse!
+     addNewBrand(brand: BrandInput!): BrandResponse!
+     updateBrandById(brandId: String!, brand: BrandInput!): BrandResponse!
      deleteBrandById(brandId: String!): BrandResponse!
 }
 

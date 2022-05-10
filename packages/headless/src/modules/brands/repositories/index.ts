@@ -16,9 +16,10 @@ export class BrandRepository {
         return await this.db.getBrandById(brandId);   
      }
 
-    async getAllBrands(skip?: number, limit?: number): Promise<Brand[]> {
+    async getAllBrands(skip?: number, limit?: number): Promise<Brand[] | null> {
         return await this.db.getAllBrands(skip, limit);
     }
+    
 
     async createBrand(brand: Brand): Promise<Brand | null> {
        return await this.db.addNewBrand(brand);  

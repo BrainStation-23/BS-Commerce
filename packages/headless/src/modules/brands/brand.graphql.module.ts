@@ -5,11 +5,12 @@ import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
 import { BrandService } from './services/index';
 import { BrandRepository } from './repositories/index';
+import { BrandResolver } from "./graphql/brand.resolver";
 
 @Module({
     controllers: [],
     providers: [
-        //resolver
+        BrandResolver,
         BrandService,
         BrandRepository,
         { 

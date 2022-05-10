@@ -35,7 +35,6 @@ export class BrandService{
     @validateParams({ schema: Joi.number().label('Skip') }, { schema: Joi.number().label('Limit') })
     async getAllBrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
         const allBrands = await this.brandRepo.getAllBrands(skip, limit);
-        
         return this.helper.serviceResponse.successResponse(allBrands);
     } 
 
