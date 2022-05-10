@@ -1,5 +1,5 @@
 export class Compare {
-  user: string;
+  userId: string;
   items: string[];
 }
 

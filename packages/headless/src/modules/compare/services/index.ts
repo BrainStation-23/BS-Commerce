@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Compare, CompareData } from 'src/entity/compare';
+import mongoose from 'mongoose';
+import { Compare } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
 import {
   ServiceErrorResponse,
@@ -14,16 +15,30 @@ export class CompareService {
     private helper: Helper,
   ) {}
 
-  addItemToCompare = async (
+  async addItemToCompare(
     userId: string,
-    body: CompareData,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> => {
+    productId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    if (!mongoose.isValidObjectId(productId)) {
+      return this.helper.serviceResponse.errorResponse(
+        'Invalid product id.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
     if (!isExist) {
-      saveData = await this.compareRepository.createCompare(userId, body);
+      saveData = await this.compareRepository.createCompare(userId, productId);
     } else {
-      saveData = await this.compareRepository.addItemToCompare(userId, body);
+      const find = isExist.items.find((e) => e === productId);
+      if (!find)
+        saveData = await this.compareRepository.addItemToCompare(
+          userId,
+          productId,
+        );
+      else saveData = isExist;
     }
 
     if (saveData) {
@@ -38,5 +53,107 @@ export class CompareService {
         HttpStatus.BAD_REQUEST,
       );
     }
-  };
+  }
+
+  async getCompareByUserId(
+    userId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const isExist = await this.compareRepository.getCompareByUserId(userId);
+    if (isExist) {
+      return this.helper.serviceResponse.successResponse(
+        isExist,
+        HttpStatus.OK,
+      );
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        'Comparison list is empty.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async getCompareById(
+    userId: string,
+    compareId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const isExist = await this.compareRepository.getCompareById(
+      userId,
+      compareId,
+    );
+    if (isExist) {
+      return this.helper.serviceResponse.successResponse(
+        isExist,
+        HttpStatus.OK,
+      );
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        'Comparison not found.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async deleteCompareById(
+    userId: string,
+    compareId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const isExist = await this.compareRepository.deleteCompareById(
+      userId,
+      compareId,
+    );
+    if (isExist) {
+      return this.helper.serviceResponse.successResponse(
+        { success: true },
+        HttpStatus.OK,
+      );
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        'Comparison can not be deleted.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async deleteItemByProductId(
+    userId: string,
+    productId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const isExist = await this.compareRepository.deleteItemByProductId(
+      userId,
+      productId,
+    );
+    if (isExist) {
+      return this.helper.serviceResponse.successResponse(
+        isExist,
+        HttpStatus.OK,
+      );
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        'Item can not be deleted.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async deleteAllItemByUserId(
+    userId: string,
+  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const isExist = await this.compareRepository.deleteAllItemByUserId(userId);
+    if (isExist) {
+      return this.helper.serviceResponse.successResponse(
+        { success: true },
+        HttpStatus.OK,
+      );
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        'Item can not be deleted.',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
 }

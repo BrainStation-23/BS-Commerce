@@ -1,0 +1,22 @@
+type Comapre {
+  userId: String!
+  items: [String!]!
+}
+
+input CompareInput {
+  productId: String!
+}
+
+type ComapreResponse {
+  error: String
+  code: Int!
+  data: Comapre
+}
+
+type Query {
+  getCompareByUserId(userId: String!): ComapreResponse!
+}
+
+type Mutation {
+  addItemToCompare(body: CompareInput!): ComapreResponse!
+}

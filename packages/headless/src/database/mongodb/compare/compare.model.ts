@@ -3,8 +3,8 @@ import { Compare } from 'src/entity/compare';
 
 const CompareSchema = new Schema<Compare>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
+    userId: {
+      type: String,
       ref: 'user',
       required: true,
       unique: true,
@@ -12,7 +12,7 @@ const CompareSchema = new Schema<Compare>(
 
     items: [
       {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'product',
         required: true,
       },
