@@ -16,19 +16,19 @@ type Manufacturer {
 }
 
 input SEOInput {
-  metaKeyword: String!
-  metaDescription: String!
-  metaTitle: String!
-  SEFN: String!
+  metaKeyword: String
+  metaDescription: String
+  metaTitle: String
+  SEFN: String
 }
 
 input ManufacturerInput {
   name: String!
-  description: String!
-  picture: String!
-  isPublished: Boolean!
-  displayOrder: Int!
-  seo: SEOInput!
+  description: String
+  picture: String
+  isPublished: Boolean
+  displayOrder: Int
+  seo: SEOInput
 }
 
 type ManufacturerResponse {

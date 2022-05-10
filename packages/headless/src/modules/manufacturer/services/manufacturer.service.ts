@@ -18,6 +18,7 @@ export class ManufacturerService {
     @validateParams({ schema: ManufacturerCreateSchema })
     async addManufacturer(manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const isManufacturerExist = await this.manufacturerRepo.getManufacturer(manufacturer.id);
+
         if (isManufacturerExist) {
             return this.helper.serviceResponse.errorResponse('Manufacturer already exists', { manufacturer: [`This manufacturer id ${manufacturer.id} already exists. Try with different Id`] }, HttpStatus.BAD_REQUEST);
         }
@@ -38,10 +39,10 @@ export class ManufacturerService {
             return this.helper.serviceResponse.errorResponse('Manufacturers not found', { manufacturers: ["Not found"] }, HttpStatus.BAD_REQUEST);
         }
 
-        const manufacturerNumbers = await this.manufacturerRepo.getManufacturersNumber();
+        const manufacturersCount = await this.manufacturerRepo.getManufacturersNumber();
         const allManufacturers = {
             manufacturers: foundManufacturers,
-            total: manufacturerNumbers
+            total: manufacturersCount
         }
 
         return this.helper.serviceResponse.successResponse(allManufacturers);
