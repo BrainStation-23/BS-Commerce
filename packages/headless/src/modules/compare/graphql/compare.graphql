@@ -4,6 +4,10 @@ type Comapre {
   items: [String!]!
 }
 
+type DeleteResponse {
+  success: Boolean
+}
+
 input ProductIdInput {
   productId: String!
 }
@@ -14,6 +18,12 @@ type ComapreResponse {
   data: Comapre
 }
 
+type DeleteCompareByIdResponse {
+  error: String
+  code: Int!
+  data: DeleteResponse
+}
+
 type Query {
   getCompareByUserId: ComapreResponse!
   getCompareById(compareId: String!): ComapreResponse!
@@ -21,7 +31,7 @@ type Query {
 
 type Mutation {
   addItemToCompare(body: ProductIdInput!): ComapreResponse!
-  deleteCompareById(compareId: String!): ComapreResponse!
+  deleteCompareById(compareId: String!): DeleteCompareByIdResponse
   deleteItemByProductId(productId: String!): ComapreResponse!
   deleteAllItemByUserId: ComapreResponse!
 }

@@ -145,7 +145,7 @@ export class CompareService {
     const isExist = await this.compareRepository.deleteAllItemByUserId(userId);
     if (isExist) {
       return this.helper.serviceResponse.successResponse(
-        { success: true },
+        isExist,
         HttpStatus.OK,
       );
     } else {
