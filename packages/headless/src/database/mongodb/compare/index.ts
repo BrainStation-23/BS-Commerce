@@ -12,7 +12,7 @@ export class CompareDatabase implements ICompareDatabase {
     userId: string,
     compareId: string,
   ): Promise<Compare | null> {
-    return await CompareModel.findOne({ _id: compareId, userId }).lean();
+    return await CompareModel.findOne({ id: compareId, userId }).lean();
   }
 
   async addItemToCompare(userId: string, productId: string): Promise<Compare> {
@@ -31,7 +31,7 @@ export class CompareDatabase implements ICompareDatabase {
   }
   async deleteCompareById(userId: string, compareId: string): Promise<boolean> {
     return await CompareModel.findOneAndRemove({
-      _id: compareId,
+      id: compareId,
       userId,
     }).lean();
   }
