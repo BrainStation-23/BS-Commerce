@@ -24,7 +24,7 @@ type WishList {
 type WishListResponse {
   error: String
   code: Int!
-  data: WishList!
+  data: WishList
 }
 
 type Query {

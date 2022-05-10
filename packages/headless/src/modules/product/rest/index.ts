@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { Product } from 'src/entity/product';
+import { Product, SearchCondition } from 'src/entity/product';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
 @UseGuards(JwtAuthGuard)
@@ -31,28 +31,20 @@ export class ProductController {
 
   @Get('condition')
   async getProductsByCondition(
-    @Query('skip') skip: number,
-    @Query('limit') limit: number,
-    @Query('brandId') brandId: string,
-    @Query('categoryId') categoryId: string,
-    @Query('productName') productName: string,
-    @Query('isFeatured') isFeatured: boolean,
+    @Query() condition: SearchCondition,
     @Res({ passthrough: true }) res: Response
   ) {
-    const { code, ...response } = await this.productService.getProductsByCondition({ skip, limit, brandId, categoryId, productName, isFeatured });
+    const { code, ...response } = await this.productService.getProductsByCondition(condition);
     res.status(code);
     return response;
   }
 
   @Get('list')
   async getProductsList(
-    @Query('slug') slug: string,
-    @Query('orderBy') orderBy: string,
-    @Query('skip') skip: number,
-    @Query('limit') limit: number,
+    @Query() condition: SearchCondition,
     @Res({ passthrough: true }) res: Response
   ) {
-    const { code, ...response } = await this.productService.getProductsList({ slug, orderBy, skip, limit });
+    const { code, ...response } = await this.productService.getProductsList(condition);
     res.status(code);
     return response;
   }

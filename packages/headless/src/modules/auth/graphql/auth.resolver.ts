@@ -7,10 +7,6 @@ import { SignInData } from 'src/entity/auth';
 export class AuthResolver {
   constructor(private authService: AuthService) { }
 
-  /**
-  * Mutation Start
-  */
-
   @Mutation()
   async signUp(@Args('user') user: User) {
     return await this.authService.signUp(user);
@@ -20,8 +16,4 @@ export class AuthResolver {
   async signIn(@Args('data') data: SignInData) {
     return await this.authService.signIn(data);
   }
-
-  /**
-   * Mutation End
-   */
 }

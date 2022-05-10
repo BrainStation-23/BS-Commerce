@@ -84,8 +84,8 @@ export class ProductService {
 
   @validateParams({ schema: ProductSearchSchema })
   async getProductsByCondition(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const { skip, limit, brandId, categoryId, productName, isFeatured } = condition;
-    const query = this.generateSearchQuery({ brandId, categoryId, productName, isFeatured });
+    const { skip, limit } = condition;
+    const query = this.generateSearchQuery(condition);
     const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) {
       return this.helper.serviceResponse.errorResponse("Can't get Products.", null, HttpStatus.BAD_REQUEST);
@@ -120,7 +120,7 @@ export class ProductService {
     }
     return query;
   }
-  
+
   @validateParams({ schema: ProductSearchSchema })
   async getProductsList(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const { slug, orderBy, skip, limit } = condition;
