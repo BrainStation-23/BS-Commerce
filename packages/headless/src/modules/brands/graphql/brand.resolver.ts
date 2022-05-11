@@ -9,7 +9,7 @@ export class BrandResolver {
   @Query()
   async getBrand(@Args('brandId') BrandId: string) {
     return await this.brandService.getBrandById(BrandId);
-  }//done
+  }
 
 
   @Query()
@@ -23,19 +23,19 @@ export class BrandResolver {
   @Mutation()
   async addNewBrand(@Args('brand') brand: Brand){
     return await this.brandService.createBrand(brand);
-  }//done
+  }
 
   @Mutation()
-  async deleteBrandById(@Args('brandId') brandId: string) {
+  async deleteBrand(@Args('brandId') brandId: string) {
     return await this.brandService.deleteBrandById(brandId);
-  }//done
+  }
 
   @Mutation()
-  async updateBrandById(
+  async updateBrand(
     @Args('brandId') brandId: string,
     @Args('brand') brand: Brand
   ) {
     return await this.brandService.updateBrandById(brandId, brand);
-  }//done
+  }
 
 }
