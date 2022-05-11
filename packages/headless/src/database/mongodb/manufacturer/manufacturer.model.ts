@@ -11,6 +11,7 @@ const ManufacturerSchema = new Schema<Manufacturer>(
         },
         name: {
             type: String,
+            unique: true,
             required: true
         },
         description: {
