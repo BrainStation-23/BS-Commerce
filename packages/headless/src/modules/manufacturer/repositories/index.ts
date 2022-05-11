@@ -21,17 +21,17 @@ export class ManufacturerRepository {
         return manufacturers;
     }
 
-    async getManufacturersNumber(searchQuery?: string): Promise<Number | null> {
+    async getManufacturersCount(searchQuery?: string): Promise<Number | null> {
         const manufacturerNumber = await this.db.findManufacturersCount(searchQuery);
         return manufacturerNumber;
     }
 
-    async updateManufacturerById(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
+    async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
         const savedManufacturer = await this.db.updateManufacturer(manufacturerId, manufacturer);
         return savedManufacturer;
     }
 
-    async deleteManufacturerById(manufacturerId: string): Promise<Manufacturer | null> {
+    async deleteManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
         const manufacturer = await this.db.deleteManufacturer(manufacturerId);
         return manufacturer;
     }
