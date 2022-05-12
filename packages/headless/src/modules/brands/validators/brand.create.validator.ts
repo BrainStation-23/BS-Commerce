@@ -4,14 +4,16 @@ import { Brand } from './../../../entity/brand';
 
 export const BrandCreateSchema = Joi.object<Brand>({
     id: Joi.string(),
-    info:{
-        name: Joi.string().required(),
-        description: Joi.string(),
-        allowToSelectPageSize: Joi.boolean(),
-        published: Joi.boolean(),
-        displayOrder: Joi.number(),
-        pageSizeOptions: Joi.array().items(Joi.number())
-    },
+    info: Joi.object().keys(
+        {
+            name: Joi.string().required(),
+            description: Joi.string(),
+            allowToSelectPageSize: Joi.boolean(),
+            published: Joi.boolean(),
+            displayOrder: Joi.number(),
+            pageSizeOptions: Joi.array().items(Joi.number())
+        }
+    ).required(),
     meta: {
         keywords: Joi.string(),
         description: Joi.string(),
