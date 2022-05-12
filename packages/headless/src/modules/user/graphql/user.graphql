@@ -1,0 +1,61 @@
+scalar DateTime
+
+type Address {
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  country: String!
+  postCode: String!
+}
+
+input AddressInput {
+  addressLine1: String
+  addressLine2: String
+  city: String
+  country: String
+  postCode: String
+}
+
+type User {
+  id: String!
+  firstName: String!
+  lastName: String!
+  displayName: String!
+  username: String!
+  email: String!
+  provider: String
+  resetPasswordToken: String
+  resetPasswordExpires: DateTime
+  phone: String
+  gender: String
+  addresses: [Address]
+  status: String
+  active: Boolean
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  provider: String
+  resetPasswordToken: String
+  resetPasswordExpires: DateTime
+  phone: String
+  gender: String
+  addresses: [AddressInput]
+  status: String
+  active: Boolean
+}
+
+type UserResponse {
+  error: String
+  code: Int!
+  data: User
+}
+
+type Query {
+  getUser: UserResponse!
+}
+
+type Mutation {
+  updateUser(data: UpdateUserInput): UserResponse!
+}

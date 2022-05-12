@@ -26,13 +26,14 @@ export class User {
 }
 
 export class UpdatedUser {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   provider?: string;
   providerData?: object;
   additionalProviderData?: object;
   phone?: string;
   addresses?: [Address];
-  active: boolean;
-  gender: string
+  active?: boolean;
+  gender?: string;
+  status?: string;
 }
