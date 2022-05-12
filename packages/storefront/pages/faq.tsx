@@ -49,7 +49,7 @@ const Faq: NextPage = () => {
     <>
       <PageTitle title="FAQ" />
       <div className="faq_container_area">
-        <div className="container">
+        <div className="container px-4 px-lg-5">
           <div className="row">
             <div className="col-12">
               <div>

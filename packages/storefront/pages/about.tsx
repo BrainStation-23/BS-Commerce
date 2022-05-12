@@ -53,7 +53,7 @@ const About: NextPage = () => {
     <>
       <PageTitle title="About" />
       <div className={styles.aboutInfo_section}>
-        <div className="container">
+        <div className="container px-4 px-lg-5">
           <div className="row">
             <div className={`${styles.aboutInfo} col-12`}>
               <div className={styles.image_container}>
@@ -86,7 +86,7 @@ const About: NextPage = () => {
         </div>
       </div>
       <div className={styles.service_area}>
-        <div className="container">
+        <div className="container px-4 px-lg-5">
           <div className="row">
             <div className="col-lg-4 col-md-4 col-sm-6">
               <div className={styles.single_box}>
@@ -147,7 +147,7 @@ const About: NextPage = () => {
       </div>
       <ThreeStoriesCard leftStory={false} threeStoriesList={threeStoriesList} />
       <div className={styles.faq_client_say_area}>
-        <div className="container">
+        <div className="container px-4 px-lg-5">
           <div className="row">
             <div className={`col-lg-6 col-md-6 ${styles.client_say}`}>
               <h2>What Can We Do For You?</h2>

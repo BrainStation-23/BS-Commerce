@@ -19,7 +19,7 @@ const Contact: NextPage = () => {
         ></iframe>
       </div>
       <div className={styles.contact_area}>
-        <div className="container">
+        <div className="container px-4 px-lg-5">
           <div className="row">
             <div className="col-lg-6 col-md-6">
               <div className={styles.contact_message}>
@@ -27,14 +27,15 @@ const Contact: NextPage = () => {
                 <p>Your content here</p>
                 <ul>
                   <li>
-                    <i className="fa fa-fax"></i> Address : No 40 Baria Sreet
-                    133/2 NewYork City
+                    <i className="bi bi-house-door-fill"></i> Address : No 40
+                    Baria Sreet 133/2 NewYork City
                   </li>
                   <li>
-                    <i className="fa fa-phone"></i> E-mail: info@yourdomain.com
+                    <i className="bi bi-envelope"></i> E-mail:
+                    info@yourdomain.com
                   </li>
                   <li>
-                    <i className="fa fa-envelope-o"></i> +88013245657
+                    <i className="bi bi-telephone"></i> +88013245657
                   </li>
                 </ul>
               </div>
@@ -47,7 +48,7 @@ const Contact: NextPage = () => {
                   <Input label="Email" value="" type="email" name="email" />
                   <Input label="Subject" value="" type="text" name="subject" />
                   <Textarea label="Message" value="" name="message" />
-                  <button type="submit"> Send</button>
+                  <button type="submit">Send</button>
                 </form>
               </div>
             </div>

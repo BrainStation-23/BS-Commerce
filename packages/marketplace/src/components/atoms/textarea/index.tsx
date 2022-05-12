@@ -24,7 +24,7 @@ export const Textarea: React.FC<TextareaProps> = ({
       <div className="textareaWrapper">
         <label>{label} *</label>
         <textarea
-          placeholder={`${label} *`}
+          placeholder={label}
           className={`${className} ${"textarea"}`}
           name={name}
           value={value}

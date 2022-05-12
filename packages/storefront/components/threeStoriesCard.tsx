@@ -13,7 +13,9 @@ interface Props {
 const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
   return (
     <div className={styles.about_gallery_section}>
-      <div className={`${styles.about_gallery_container} container`}>
+      <div
+        className={`${styles.about_gallery_container} container px-4 px-lg-5`}
+      >
         <div className="row">
           {threeStoriesList.map((item, index) => (
             <div className="col-lg-4 col-md-4 col-sm-6" key={index}>

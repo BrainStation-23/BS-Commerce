@@ -27,7 +27,7 @@ export const Input: React.FC<InputProps> = ({
         <label>{label} *</label>
         <input
           type={type}
-          placeholder={`${label} *`}
+          placeholder={label}
           className={`${className} ${"input"}`}
           name={name}
           value={value}
