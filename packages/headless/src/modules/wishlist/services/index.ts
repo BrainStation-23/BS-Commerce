@@ -14,7 +14,7 @@ export class WishListService {
   async addToWishList(userId: string, item: Item,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const doesWishListExist = await this.wishListRepo.getUserWishlist(userId);
     if (!doesWishListExist) {
-      const wishList = await this.wishListRepo.createWishlist(userId, [item]);
+      const wishList = await this.wishListRepo.createWishlist({ userId, items: [item] });
       if (!wishList) return this.helper.serviceResponse.errorResponse("Can't add to your Wishlist.", null, HttpStatus.INTERNAL_SERVER_ERROR,);
       return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.CREATED);
     }

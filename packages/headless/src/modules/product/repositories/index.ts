@@ -1,6 +1,7 @@
 import { Product } from 'src/entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class ProductRepository {
@@ -15,6 +16,7 @@ export class ProductRepository {
     }
 
     async createProduct(product: Product): Promise<Product | null> {
+        product.id = randomUUID();
         return await this.db.createProduct(product);
     }
 

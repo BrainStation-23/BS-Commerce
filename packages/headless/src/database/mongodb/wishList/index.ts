@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Product } from 'src/entity/product';
 import { Item, WishList } from 'src/entity/wishList';
 import { IWishListDatabase } from 'src/modules/wishlist/repositories/wishList.database.interface';
 import { ProductModel } from '../product/product.model';
@@ -11,9 +12,15 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async getWishlistProduct(wishlist: WishList): Promise<WishList | null> {
-    const products = await ProductModel.find({ id: { $in: wishlist.items.map(item => item.productId) } }).select('info photos');
+    const products: Product[] = await ProductModel.find({ id: { $in: wishlist.items.map(item => item.productId) } }).select('info photos id -_id');
+
+    let map = new Map<string, Product>();
+    for (let i = 0, len = products.length; i < len; i++) {
+      map.set(products[i].id, products[i]);
+    }
+
     return {
-      ...wishlist, items: wishlist.items.map((item, index) => { return { ...item, product: products[index] } })
+      ...wishlist, items: wishlist.items.map(item => { return { ...item, product: map.get(item.productId) } })
     }
   }
 
@@ -47,8 +54,8 @@ export class WishListDatabase implements IWishListDatabase {
       .exec();
   }
 
-  async createWishList(userId: string, items: Item[]): Promise<WishList | null> {
-    return await new WishListModel({ userId, items }).save();
+  async createWishList(wishlist: WishList): Promise<WishList | null> {
+    return await new WishListModel(wishlist).save();
   }
 
   async getWishList(wishlistId: string,): Promise<WishList | null> {

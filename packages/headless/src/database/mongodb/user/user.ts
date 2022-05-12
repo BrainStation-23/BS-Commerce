@@ -14,9 +14,15 @@ export class UserDatabase implements IUserDatabase {
     return await UserModel.findOne({ username }).lean();
   }
 
-  async findUser(username: string): Promise<User | null> {
-    const user = await UserModel.findOne({ username }).lean();
+  async findUser(query: Record<string, string>): Promise<User | null> {
+    const user = await UserModel.findOne(query).lean();
     delete user?.password;
     return user;
+  }
+
+  async updateUser(userId: string, user: User): Promise<User | null> {
+    const updateUser = await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().exec();
+    delete updateUser?.password;
+    return updateUser;
   }
 }

@@ -13,6 +13,7 @@ export const UserSchema = Joi.object<User, true>({
   }),
   displayName: Joi.string(),
   username: Joi.string(),
+  phone: Joi.string(),
   email: Joi.string().lowercase()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in", "co"], }, }).required()
     .messages({
@@ -30,7 +31,11 @@ export const UserSchema = Joi.object<User, true>({
   providerData: Joi.object(),
   additionalProviderData: Joi.object(),
   resetPasswordToken: Joi.string(),
-  resetPasswordExpires: Joi.date()
+  resetPasswordExpires: Joi.date(),
+  gender: Joi.string(),
+  addresses: Joi.array(),
+  status: Joi.string(),
+  active: Joi.boolean()
 });
 
 export const SigninSchema = Joi.object({

@@ -17,7 +17,7 @@ export class AuthService {
   @validateParams({ schema: UserSchema })
   async signUp(user: User): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
 
-    const doesUserExist = await this.userRepo.findUser(user.email);
+    const doesUserExist = await this.userRepo.findUser({ username: user.email });
     if (doesUserExist) {
       return this.helper.serviceResponse.errorResponse('The User already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
     }

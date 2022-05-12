@@ -8,7 +8,7 @@ export abstract class IWishListDatabase {
   abstract getItem: (userId: string, productId: string) => Promise<WishList | null>;
   abstract incrementItemQuantity: (userId: string, item: Item,) => Promise<WishList | null>;
   abstract addWishListItem: (userId: string, item: Item,) => Promise<WishList | null>;
-  abstract createWishList: (userId: string, items: Item[],) => Promise<WishList | null>;
+  abstract createWishList: (wishList: WishList) => Promise<WishList | null>;
   abstract getWishList: (wishlistId: string,) => Promise<WishList | null>;
   abstract deleteWishList: (wishlistId: string,) => Promise<WishList | null>;
   abstract updateWishlistItem: (userId: string, item: Item,) => Promise<WishList | null>;

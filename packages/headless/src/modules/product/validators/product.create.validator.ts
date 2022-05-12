@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-import { min } from 'rxjs';
 import { Product, SearchCondition } from 'src/entity/product';
 
 export const ProductSchema = Joi.object<Product, true>({
