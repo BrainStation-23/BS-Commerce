@@ -13,8 +13,6 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
     switch (db) {
       case 'MONGO':
         switch (className) {
-          // case 'PRODUCT':
-          //   return ProductDatabaseMongo;
           case 'BRAND':
               return BrandDatabaseMongo;
           case 'WISHLIST':
@@ -25,13 +23,6 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
           default:
             break;
         }
-      // case 'MYSQL':
-      //   switch (className) {
-
-      //     default:
-      //       break;
-      //   }
-
       default:
         throw new Error('No dependency implementation found');
     }

@@ -1,18 +1,15 @@
 import { model, Schema } from 'mongoose';
-import * as crypto from 'crypto';
 
 import { Brand } from 'src/entity/brand';
 
 const BrandSchema = new Schema<Brand>({
     id: {
-        default: () => crypto.randomUUID(),
         type: String,
         unique: true
     },
     info:{
         name: {
             type: String,
-            required: true,
             unique: true
         },
         description: {

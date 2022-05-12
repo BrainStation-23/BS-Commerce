@@ -1,5 +1,5 @@
 type Info {
-    name: String!
+    name: String
     description: String
     allowToSelectPageSize: Boolean
     published: Boolean
@@ -7,7 +7,7 @@ type Info {
     pageSizeOptions: [Int]
 }
 input InfoInput {
-    name: String!
+    name: String
     description: String
     allowToSelectPageSize: Boolean
     published: Boolean
@@ -56,9 +56,9 @@ type Query {
 }
 
 type Mutation {
-     addNewBrand(brand: BrandInput!): BrandResponse!
-     updateBrand(brandId: String!, brand: BrandInput!): BrandResponse!
-     deleteBrand(brandId: String!): BrandResponse!
+     addNewBrand(brand: BrandInput!): SingleBrandResponse!
+     updateBrandById(brandId: String!, brand: BrandInput!): SingleBrandResponse!
+     deleteBrandById(brandId: String!): SingleBrandResponse!
 }
 
     

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import * as crypto from 'crypto';
 
 import { Product } from '../../../entity/product';
 import { IBrandDatabase } from './brand.database.interface';
@@ -20,9 +21,10 @@ export class BrandRepository {
         return await this.db.getAllBrands(skip, limit);
     }
     
-
     async createBrand(brand: Brand): Promise<Brand | null> {
-       return await this.db.addNewBrand(brand);  
+        const id = crypto.randomUUID();
+        const newBrand = {...brand, id};
+        return await this.db.addNewBrand(newBrand);  
     }
 
     async updateBrandById(brandId: string, brandUpdates: Brand): Promise<Brand | null>{

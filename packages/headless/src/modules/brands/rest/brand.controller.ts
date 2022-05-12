@@ -8,9 +8,7 @@ import { BrandService } from '../services/index';
 
 export class BrandController {
 
-    constructor(
-        private brandService: BrandService
-    ){}
+    constructor( private brandService: BrandService ) {}
 
     @Get('/')
     async getAllBrands(

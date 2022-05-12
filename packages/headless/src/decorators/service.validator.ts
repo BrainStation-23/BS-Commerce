@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import * as Joi from 'joi'
+import * as Joi from 'joi';
 import { ServiceErrorResponse } from 'src/helper/serviceResponse/service.response.interface';
 
 interface Validators {
