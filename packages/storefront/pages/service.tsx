@@ -7,6 +7,7 @@ import ThreeStoriesCard from "../components/threeStoriesCard";
 import { storiesBody } from "../utils/types";
 
 import styles from "../styles/Service.module.css";
+import Container from "../components/container";
 
 const threeStoriesList: storiesBody[] = [
   {
@@ -38,7 +39,7 @@ const Service: NextPage = () => {
       <PageTitle title="Service" />
       <ThreeStoriesCard leftStory={true} threeStoriesList={threeStoriesList} />
       <div className={styles.our_services}>
-        <div className="container px-4 px-lg-5">
+        <Container>
           <div className="row">
             <div className="col-12">
               <div className={styles.services_title}>
@@ -166,10 +167,10 @@ const Service: NextPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
       <div className={styles.unlimited_services}>
-        <div className="container px-4 px-lg-5">
+        <Container>
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-12">
               <Image
@@ -201,7 +202,7 @@ const Service: NextPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );

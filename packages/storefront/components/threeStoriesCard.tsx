@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 
 import Image from "next/image";
+import Container from "./container";
+
 import { storiesBody } from "../utils/types";
 
 import styles from "../styles/ThreeStoriesCard.module.css";
@@ -13,9 +15,7 @@ interface Props {
 const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
   return (
     <div className={styles.about_gallery_section}>
-      <div
-        className={`${styles.about_gallery_container} container px-4 px-lg-5`}
-      >
+      <Container className={styles.about_gallery_container}>
         <div className="row">
           {threeStoriesList.map((item, index) => (
             <div className="col-lg-4 col-md-4 col-sm-6" key={index}>
@@ -35,7 +35,7 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

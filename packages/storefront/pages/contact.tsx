@@ -4,6 +4,7 @@ import { Input, Textarea } from "marketplace";
 import PageTitle from "../components/pageTitle";
 
 import styles from "../styles/Contact.module.css";
+import Container from "../components/container";
 
 const Contact: NextPage = () => {
   return (
@@ -19,7 +20,7 @@ const Contact: NextPage = () => {
         ></iframe>
       </div>
       <div className={styles.contact_area}>
-        <div className="container px-4 px-lg-5">
+        <Container>
           <div className="row">
             <div className="col-lg-6 col-md-6">
               <div className={styles.contact_message}>
@@ -53,7 +54,7 @@ const Contact: NextPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );

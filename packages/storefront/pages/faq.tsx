@@ -6,6 +6,7 @@ import PageTitle from "../components/pageTitle";
 import { accordionBody } from "../utils/types";
 
 import styles from "../styles/Faq.module.css";
+import Container from "../components/container";
 
 const accordionList: accordionBody[] = [
   {
@@ -49,7 +50,7 @@ const Faq: NextPage = () => {
     <>
       <PageTitle title="FAQ" />
       <div className="faq_container_area">
-        <div className="container px-4 px-lg-5">
+        <Container>
           <div className="row">
             <div className="col-12">
               <div>
@@ -72,7 +73,7 @@ const Faq: NextPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );
