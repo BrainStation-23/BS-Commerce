@@ -5,7 +5,7 @@ interface Props {
   className?: string;
 }
 
-const Container: FC<Props> = ({ children, className }) => {
+const Container: FC<Props> = ({ children, className = "" }) => {
   return (
     <div className={`${className} container px-4 px-lg-5`}>{children}</div>
   );
