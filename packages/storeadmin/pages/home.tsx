@@ -1,6 +1,26 @@
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "marketplace";
+import { storeProducts } from "marketplace";
 
-const Home: NextPage = () => {
+export interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+}
+
+const Home: NextPage<{ products: Product[] }> = ({ products }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(storeProducts(products));
+  }, []);
+
+  const product = useSelector(
+    (state: RootState) => state.productsStore.products
+  );
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -30,7 +50,7 @@ const Home: NextPage = () => {
             </button>
           </div>
         </div>
-
+        <p>{JSON.stringify(product)}</p>
         <h2>Section title</h2>
         <div className="table-responsive">
           <table className="table table-striped table-sm">
@@ -163,5 +183,16 @@ const Home: NextPage = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/products?skip=0&limit=10");
+  const { data } = await res.json();
+
+  return {
+    props: {
+      products: data,
+    },
+  };
+}
 
 export default Home;

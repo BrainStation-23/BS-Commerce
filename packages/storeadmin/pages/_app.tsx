@@ -2,6 +2,7 @@ import "../styles/App.scss";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import { useEffect } from "react";
+import { ReduxWrapper } from "marketplace";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -10,9 +11,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       : null;
   }, []);
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ReduxWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ReduxWrapper>
   );
 }
 

@@ -1,4 +1,5 @@
 import type { NextComponentType } from "next";
+import Link from "next/link";
 
 const Navbar: NextComponentType = () => {
   return (
@@ -27,9 +28,9 @@ const Navbar: NextComponentType = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/about">
-                  About
-                </a>
+                <Link href="/about">
+                  <a className="nav-link">About</a>
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a

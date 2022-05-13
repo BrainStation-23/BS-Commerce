@@ -1,15 +1,14 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import productPic from "../public/product.jpeg";
-import { useSelector } from "react-redux"
-import { RootState } from "../store";
+import { useSelector } from "react-redux";
+import { RootState } from "marketplace";
 
 const Products: FC = () => {
-
   const products = useSelector(
     (state: RootState) => state.productsStore.products
   );
-  
+
   return (
     <>
       {products?.map((product) => (
