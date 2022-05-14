@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Cart, Item } from 'src/entity/cart';
 import { ICartDatabase } from 'src/modules/cart/repositories/cart.database.interface';
 import { ProductModel } from '../product/product.model';
+import { Product } from 'src/entity/product';
 @Injectable()
 export class CartDatabase implements ICartDatabase {
   //   constructor() {}
@@ -23,11 +24,15 @@ export class CartDatabase implements ICartDatabase {
   async getCartProduct(cart: Cart): Promise<Cart | null> {
     const products = await ProductModel.find({
       id: { $in: cart.items.map((item) => item.productId) },
-    }).select('info photos');
+    }).select('info photos id -_id');
+    let map = new Map<string, Product>();
+    for (let i = 0, len = products.length; i < len; i++) {
+      map.set(products[i].id, products[i]);
+    }
     return {
       ...cart,
-      items: cart.items.map((item, index) => {
-        return { ...item, product: products[index] };
+      items: cart.items.map((item) => {
+        return { ...item, product: map.get(item.productId) };
       }),
     };
   }
@@ -85,7 +90,7 @@ export class CartDatabase implements ICartDatabase {
     productId: string,
   ): Promise<Cart | null> {
     return await CartModel.findOneAndUpdate(
-      { userId: userId, 'items.productId': productId  },
+      { userId: userId, 'items.productId': productId },
       { $pull: { items: { productId: productId } } },
       { new: true },
     )
