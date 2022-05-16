@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import mongoose from 'mongoose';
+import * as Joi from 'joi';
+import { validateParams } from 'src/decorators/service.validator';
 import { Compare } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
 import {
@@ -15,11 +16,15 @@ export class CompareService {
     private helper: Helper,
   ) {}
 
+  @validateParams(
+    { schema: Joi.string().required().label('userId') },
+    { schema: Joi.string().required().label('productId') },
+  )
   async addItemToCompare(
     userId: string,
     productId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    if (!mongoose.isValidObjectId(productId)) {
+    if (!productId.trim()) {
       return this.helper.serviceResponse.errorResponse(
         'Invalid product id.',
         null,
@@ -27,12 +32,22 @@ export class CompareService {
       );
     }
 
+    /*
+    check user compare list
+    */
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
+
+    /**
+     * if not exist create new else add product id into items
+     */
     if (!isExist) {
       saveData = await this.compareRepository.createCompare(userId, productId);
     } else {
       const find = isExist.items.find((e) => e === productId);
+      /**
+       * if new product does't exists in list then add it else keep the same
+       */
       if (!find)
         saveData = await this.compareRepository.addItemToCompare(
           userId,
@@ -55,6 +70,7 @@ export class CompareService {
     }
   }
 
+  @validateParams({ schema: Joi.string().required().label('userId') })
   async getCompareByUserId(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -73,6 +89,10 @@ export class CompareService {
     }
   }
 
+  @validateParams(
+    { schema: Joi.string().required().label('userId') },
+    { schema: Joi.string().required().label('compareId') },
+  )
   async getCompareById(
     userId: string,
     compareId: string,
@@ -95,6 +115,10 @@ export class CompareService {
     }
   }
 
+  @validateParams(
+    { schema: Joi.string().required().label('userId') },
+    { schema: Joi.string().required().label('compareId') },
+  )
   async deleteCompareById(
     userId: string,
     compareId: string,
@@ -117,6 +141,10 @@ export class CompareService {
     }
   }
 
+  @validateParams(
+    { schema: Joi.string().required().label('userId') },
+    { schema: Joi.string().required().label('productId') },
+  )
   async deleteItemByProductId(
     userId: string,
     productId: string,
@@ -139,6 +167,7 @@ export class CompareService {
     }
   }
 
+  @validateParams({ schema: Joi.string().required().label('userId') })
   async deleteAllItemByUserId(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
