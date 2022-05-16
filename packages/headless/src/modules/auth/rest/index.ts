@@ -21,4 +21,11 @@ export class AuthController {
     res.status(code);
     return response;
   }
+
+  @Post('forgot')
+  async forgotPassword(@Body() username: string, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.authService.forgotPassword(username);
+    res.status(code);
+    return response;
+  }
 }

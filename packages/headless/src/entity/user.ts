@@ -18,7 +18,7 @@ export class User {
   providerData?: object;
   additionalProviderData?: object;
   resetPasswordToken?: string;
-  resetPasswordExpires?: Date;
+  resetPasswordExpires?: number;
   gender?: string;
   addresses?: [Address];
   status: string;

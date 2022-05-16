@@ -9,6 +9,8 @@ import { SigninSchema, UserSchema } from '../validators/auth.validator';
 import { authConfig } from 'config/auth';
 import { JwtPayload, SignInData } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
+import * as Joi from 'joi';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -49,5 +51,25 @@ export class AuthService {
 
     const token = this.jwtService.sign(payload);
     return this.helper.serviceResponse.successResponse({ token }, HttpStatus.OK,);
+  }
+
+  @validateParams({ schema: Joi.string().required().label('username') })
+  async forgotPassword(username: string): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
+
+    const user = await this.userRepo.findUser({ username });
+    if (!user) return this.helper.serviceResponse.errorResponse('Can\'t Get User.', null, HttpStatus.BAD_REQUEST,);
+
+    if (user.provider !== 'local') return this.helper.serviceResponse.errorResponse('It seems like you signed up using your ' + user.provider + ' account', null, HttpStatus.BAD_REQUEST,);
+
+    const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
+    const token = crypto.randomBytes(20).toString("hex");
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + ONE_HOUR;
+
+    const updatedUser = await this.userRepo.updateUser(user.id, user);
+    if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update User.', null, HttpStatus.BAD_REQUEST);
+
+    
+    return this.helper.serviceResponse.successResponse({ message: 'An email has been sent to ' + user.email + ' with further instructions.' }, HttpStatus.OK,);
   }
 }

@@ -14,7 +14,7 @@ export const UserSchema = Joi.object<User, true>({
   providerData: Joi.object(),
   additionalProviderData: Joi.object(),
   resetPasswordToken: Joi.string(),
-  resetPasswordExpires: Joi.date(),
+  resetPasswordExpires: Joi.number(),
   gender: Joi.string(),
   addresses: Joi.array(),
   status: Joi.string(),

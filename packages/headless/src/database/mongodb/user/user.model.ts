@@ -50,7 +50,7 @@ const UserSchema = new Schema<User>({
   providerData: {},
   additionalProviderData: {},
   resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  resetPasswordExpires: Number,
   gender: String,
   addresses: [AddressSchema],
   status: {
