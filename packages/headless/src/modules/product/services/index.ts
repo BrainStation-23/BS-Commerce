@@ -74,8 +74,8 @@ export class ProductService {
   }
 
   @validateParams({ schema: Joi.array().required().label('productIds') }, { schema: Joi.string().required().label('brandId') })
-  async updateProductsForBands(productIds: string[], brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const products = await this.productRepo.updateProductsForBands(productIds, brandId);
+  async updateProductsForBand(productIds: string[], brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const products = await this.productRepo.updateProductsForBand(productIds, brandId);
     if (products.length <= 0) {
       return this.helper.serviceResponse.errorResponse('Can\'t Get Products.', null, HttpStatus.BAD_REQUEST);
     }

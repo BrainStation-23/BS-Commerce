@@ -10,7 +10,7 @@ type DB = 'MONGO' | 'MYSQL';
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix(coreConfig.appPrefix);
+  app.setGlobalPrefix(coreConfig.restApiPrefix);
   await app.listen(coreConfig.port);
   console.log(`http://${coreConfig.host}:${coreConfig.port}`);
 }

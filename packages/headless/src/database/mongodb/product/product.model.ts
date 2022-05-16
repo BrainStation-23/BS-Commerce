@@ -7,15 +7,11 @@ const ProductSchema = new Schema<Product>({
         unique: true
     },
     info: {
-        name: {
-            type: String,
-            required: true
-        },
+        name: String,
         shortDescription: String,
         fullDescription: String,
         sku: {
             type: String,
-            required: true,
             unique: true
         },
         price: {
@@ -74,7 +70,6 @@ const ProductSchema = new Schema<Product>({
         },
         friendlyPageName: {
             type: String,
-            required: true,
             unique: true
         }
     },
@@ -97,10 +92,7 @@ const ProductSchema = new Schema<Product>({
     }],
     brands: [String],
     categories: [{
-        categoryId: {
-            type: String,
-            required: true
-        },
+        categoryId: String,
         isFeatured: {
             type: Boolean,
             default: false

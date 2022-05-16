@@ -78,12 +78,12 @@ export class ProductController {
   }
 
   @Patch('brand')
-  async updateProductsForBands(
+  async updateProductsForBand(
     @Body('productIds') productIds: string[],
     @Body('brandId') brandId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.productService.updateProductsForBands(productIds, brandId);
+    const { code, ...response } = await this.productService.updateProductsForBand(productIds, brandId);
     res.status(code);
     return response;
   }

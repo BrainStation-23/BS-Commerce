@@ -148,7 +148,7 @@ type Mutation {
   createProduct(product: ProductInput): ProductResponse!
   deleteProduct(productId: String): ProductResponse!
   updateProduct(product: ProductInput, productId: String!): ProductResponse!
-  updateProductsForBands(
+  updateProductsForBand(
     productIds: [String!]!
     brandId: String!
   ): ProductArrayResponse!

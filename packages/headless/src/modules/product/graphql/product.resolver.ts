@@ -60,7 +60,7 @@ export class ProductResolver {
   }
 
   @Mutation()
-  async updateProductsForBands(@Args('productIds') productIds: string[], @Args('brandId') brandId: string) {
-    return await this.productService.updateProductsForBands(productIds, brandId);
+  async updateProductsForBand(@Args('productIds') productIds: string[], @Args('brandId') brandId: string) {
+    return await this.productService.updateProductsForBand(productIds, brandId);
   }
 }
