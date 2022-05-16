@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';
 
@@ -7,6 +8,7 @@ export class ManufacturerRepository {
     constructor(private readonly db: IManufacturerDatabase) { }
 
     async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
+        manufacturer.id = randomUUID();
         const savedManufacturer = await this.db.createManufacturer(manufacturer);
         return savedManufacturer;
     }
