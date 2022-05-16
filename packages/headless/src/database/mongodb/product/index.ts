@@ -6,8 +6,8 @@ import { ProductModel } from './product.model';
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
 
-  async findProduct(productId: string) {
-    return await ProductModel.findOne({ id: productId }).lean();
+  async findProduct(query: Record<string, string>) {
+    return await ProductModel.findOne(query).lean();
   }
 
   async createProduct(product: Product) {
@@ -34,7 +34,7 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.findOneAndUpdate({ id: productId }, { $set: product }, { new: true }).lean().exec();
   }
   
-  async updateProductsForBand(productIds: string[], brandId: string) {
+  async updateProductsForBrand(productIds: string[], brandId: string) {
     await ProductModel.updateMany(
       { id: { '$in': productIds } },
       { $addToSet: { brands: brandId } },
@@ -48,6 +48,6 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async getProductsList(skip: number, limit: number, query?: any, sortCondition?: string) {
-    return await ProductModel.find(query).sort(sortCondition).skip((skip - 1) * limit).limit(limit).lean();
+    return await ProductModel.find(query).sort(sortCondition).skip(skip).limit(limit).lean();
   }
 }

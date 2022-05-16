@@ -34,7 +34,7 @@ export class WishListService {
   @validateParams({ schema: Joi.string().required().label('userId') })
   async getUserWishlist(userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const wishList = await this.wishListRepo.getUserWishlist(userId);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t get the Wishlist.', null, HttpStatus.BAD_REQUEST);
+    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t get User Wishlist.', null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 

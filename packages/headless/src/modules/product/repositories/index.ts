@@ -7,8 +7,8 @@ import { randomUUID } from 'crypto';
 export class ProductRepository {
     constructor(private readonly db: IProductDatabase) { }
 
-    async findProduct(productId: string): Promise<Product | null> {
-        return await this.db.findProduct(productId);
+    async findProduct(query: Record<string, string>): Promise<Product | null> {
+        return await this.db.findProduct(query);
     }
 
     async findAllProducts(skip?: number, limit?: number): Promise<Product[]> {
@@ -36,8 +36,8 @@ export class ProductRepository {
         return await this.db.updateProduct(product, productId);
     }
 
-    async updateProductsForBand(productIds: string[], brandId: string): Promise<Product[] | null> {
-        return await this.db.updateProductsForBand(productIds, brandId);
+    async updateProductsForBrand(productIds: string[], brandId: string): Promise<Product[] | null> {
+        return await this.db.updateProductsForBrand(productIds, brandId);
     }
 
     async findProductsByCondition(query: any, skip?: number, limit?: number): Promise<Product[] | []> {

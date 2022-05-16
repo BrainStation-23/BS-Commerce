@@ -20,7 +20,6 @@ export class WishListRepository {
   }
 
   async createWishlist(wishList: WishList): Promise<WishList | null> {
-    wishList.id = randomUUID();
     return await this.db.createWishList(wishList);
   }
 
