@@ -1,6 +1,5 @@
 import React from "react";
 import type { NextPage } from "next";
-import Products from "../components/Product";
 import { useSelector } from "react-redux";
 import { RootState } from "marketplace";
 

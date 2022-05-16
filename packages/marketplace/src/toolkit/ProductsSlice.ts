@@ -13,7 +13,7 @@ export const reservationsSlice = createSlice({
   name: "productsSlice",
   initialState,
   reducers: {
-    storeProducts: (state, action: PayloadAction<Product[]>) => {
+    storeProducts: (state:productsState , action: PayloadAction<Product[]>) => {
       state.products = action.payload;
     },
   },
