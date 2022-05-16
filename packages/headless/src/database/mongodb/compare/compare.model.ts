@@ -11,7 +11,6 @@ const CompareSchema = new Schema<Compare>(
     },
     userId: {
       type: String,
-      ref: 'user',
       required: true,
       unique: true,
     },
@@ -19,7 +18,6 @@ const CompareSchema = new Schema<Compare>(
     items: [
       {
         type: String,
-        ref: 'product',
         required: true,
       },
     ],
