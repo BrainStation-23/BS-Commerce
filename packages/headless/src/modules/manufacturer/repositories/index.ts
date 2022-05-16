@@ -7,6 +7,11 @@ import { IManufacturerDatabase } from './manufacturer.database.interface';
 export class ManufacturerRepository {
     constructor(private readonly db: IManufacturerDatabase) { }
 
+    /**
+     * randomUUID() is used to generate random id and it is added to the body manufacturer before passing to the db function
+     * @param manufacturer manufacturer comes through JSON body
+     * @returns {Object} Object of Manufacturer | null
+     */
     async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
         manufacturer.id = randomUUID();
         return await this.db.createManufacturer(manufacturer);
