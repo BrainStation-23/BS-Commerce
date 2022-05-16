@@ -23,7 +23,7 @@ export class ProductService {
   async getProduct(productId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const product = await this.productRepo.findProduct(productId);
     if (!product) {
-      return this.helper.serviceResponse.errorResponse("Can't get the Product.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get the Product.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(product);
   }
@@ -33,7 +33,7 @@ export class ProductService {
     const { skip, limit } = condition;
     const products = await this.productRepo.findAllProducts(skip, limit);
     if (!products) {
-      return this.helper.serviceResponse.errorResponse("Can't get All Products.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get All Products.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(products);
   }
@@ -41,7 +41,7 @@ export class ProductService {
   async getProductCount(): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const count = await this.productRepo.getProductCount({});
     if (!count) {
-      return this.helper.serviceResponse.errorResponse("Can't get Product Count.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get Product Count.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse({ count });
   }
@@ -50,7 +50,7 @@ export class ProductService {
   async getProductBySKU(sku: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const product = await this.productRepo.findProductBySKU(sku);
     if (!product) {
-      return this.helper.serviceResponse.errorResponse("Can't get the Product.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get the Product.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(product);
   }
@@ -59,7 +59,7 @@ export class ProductService {
   async deleteProduct(productId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const product = await this.productRepo.deleteProduct(productId);
     if (!product) {
-      return this.helper.serviceResponse.errorResponse("Can't delete this Product.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t delete this Product.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(product);
   }
@@ -68,7 +68,7 @@ export class ProductService {
   async updateProduct(product: Product, productId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const updatedProduct = await this.productRepo.updateProduct(product, productId);
     if (!updatedProduct) {
-      return this.helper.serviceResponse.errorResponse("Can't update this Product.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t update this Product.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(updatedProduct);
   }
@@ -77,7 +77,7 @@ export class ProductService {
   async updateProductsForBands(productIds: string[], brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const products = await this.productRepo.updateProductsForBands(productIds, brandId);
     if (products.length <= 0) {
-      return this.helper.serviceResponse.errorResponse("Can't Get Products.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t Get Products.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(products);
   }
@@ -88,7 +88,7 @@ export class ProductService {
     const query = this.generateSearchQuery(condition);
     const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) {
-      return this.helper.serviceResponse.errorResponse("Can't get Products.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get Products.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse({ products, count });
   }
@@ -97,7 +97,7 @@ export class ProductService {
   async getProductsByBrand(brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const products = await this.productRepo.findProductsByCondition({ brands: brandId });
     if (products.length <= 0) {
-      return this.helper.serviceResponse.errorResponse("Can't get Products.", null, HttpStatus.BAD_REQUEST);
+      return this.helper.serviceResponse.errorResponse('Can\'t get Products.', null, HttpStatus.BAD_REQUEST);
     }
     return this.helper.serviceResponse.successResponse(products);
   }

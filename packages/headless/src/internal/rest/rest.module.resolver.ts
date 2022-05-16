@@ -6,6 +6,6 @@ export const ResolveRestModule = () => {
   return [
     WishListModule,
     AuthModule,
-    ProductModule
+    ProductModule,
   ];
 };

@@ -13,7 +13,7 @@ import { ProductService } from "./services";
         {
             provide: IProductDatabase,
             useClass: ResolveDatabaseDependency('PRODUCT')
-        }
+        },
     ]
 })
 

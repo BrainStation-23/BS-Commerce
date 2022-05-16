@@ -19,7 +19,7 @@ export class AuthService {
 
     const doesUserExist = await this.userRepo.findUser({ username: user.email });
     if (doesUserExist) {
-      return this.helper.serviceResponse.errorResponse('The User already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
+      return this.helper.serviceResponse.errorResponse('The user already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
     }
 
     user.provider = 'local';

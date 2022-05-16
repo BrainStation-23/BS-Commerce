@@ -9,9 +9,7 @@ import { User } from 'src/entity/user';
 @UseGuards(JwtAuthGuard)
 @Controller('wishlist')
 export class WishListController {
-  constructor(
-    private wishListService: WishListService,
-  ) { }
+  constructor(private wishListService: WishListService,) { }
 
   @Post()
   async addWishList(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
