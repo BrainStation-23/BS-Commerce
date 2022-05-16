@@ -24,7 +24,7 @@ export class WishListDatabase implements IWishListDatabase {
     }
   }
 
-  async getItem(userId: string, productId: string,): Promise<WishList | null> {
+  async doesItemExist(userId: string, productId: string,): Promise<WishList | null> {
     return await WishListModel.findOne({
       userId,
       'items.productId': productId,
