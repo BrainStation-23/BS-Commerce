@@ -46,6 +46,12 @@ input UpdateUserInput {
   active: Boolean
 }
 
+input ChangePasswordInput {
+  currentPassword: String
+  newPassword: String
+  verifyPassword: String
+}
+
 type UserResponse {
   error: String
   code: Int!
@@ -58,4 +64,5 @@ type Query {
 
 type Mutation {
   updateUser(data: UpdateUserInput): UserResponse!
+  changePassword(passwordDetails: ChangePasswordInput): UserResponse!
 }

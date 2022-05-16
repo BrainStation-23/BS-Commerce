@@ -10,8 +10,8 @@ export class UserDatabase implements IUserDatabase {
     return newUser;
   }
 
-  async findSigninUser(username: string): Promise<User | null> {
-    return await UserModel.findOne({ username }).lean();
+  async getUserPassword(query: Record<string, string>): Promise<User | null> {
+    return await UserModel.findOne(query).lean();
   }
 
   async findUser(query: Record<string, string>): Promise<User | null> {

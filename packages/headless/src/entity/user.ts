@@ -37,3 +37,9 @@ export class UpdatedUser {
   gender?: string;
   status?: string;
 }
+
+export class ChangePassword {
+  currentPassword: string;
+  newPassword: string;
+  verifyPassword: string;
+}

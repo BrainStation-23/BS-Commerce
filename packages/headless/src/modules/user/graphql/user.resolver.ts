@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UpdatedUser, User } from 'src/entity/user';
+import { ChangePassword, UpdatedUser, User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
@@ -18,5 +18,10 @@ export class UserResolver {
   @Mutation()
   async updateUser(@Args('data') data: UpdatedUser, @UserInfo() user: User) {
     return await this.userService.updateUser(user.id, data);
+  }
+
+  @Mutation()
+  async changePassword(@Args('passwordDetails') passwordDetails: ChangePassword, @UserInfo() user: User) {
+    return await this.userService.changePassword(user.id, passwordDetails);
   }
 }
