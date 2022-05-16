@@ -9,32 +9,26 @@ export class ManufacturerRepository {
 
     async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
         manufacturer.id = randomUUID();
-        const savedManufacturer = await this.db.createManufacturer(manufacturer);
-        return savedManufacturer;
+        return await this.db.createManufacturer(manufacturer);
     }
 
     async getManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
-        const manufacturer = await this.db.getManufacturer(manufacturerId);
-        return manufacturer;
+        return await this.db.getManufacturer(manufacturerId);
     }
 
     async getAllManufacturers(skip?: number, limit?: number): Promise<Manufacturer[]> {
-        const manufacturers = await this.db.getAllManufacturers(skip, limit);
-        return manufacturers;
+        return await this.db.getAllManufacturers(skip, limit);
     }
 
     async getManufacturersCount(searchQuery?: string): Promise<Number | null> {
-        const manufacturerNumber = await this.db.findManufacturersCount(searchQuery);
-        return manufacturerNumber;
+        return await this.db.findManufacturersCount(searchQuery);
     }
 
     async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
-        const savedManufacturer = await this.db.updateManufacturer(manufacturerId, manufacturer);
-        return savedManufacturer;
+        return await this.db.updateManufacturer(manufacturerId, manufacturer);
     }
 
     async deleteManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
-        const manufacturer = await this.db.deleteManufacturer(manufacturerId);
-        return manufacturer;
+        return await this.db.deleteManufacturer(manufacturerId);
     }
 }
