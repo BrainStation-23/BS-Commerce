@@ -1,5 +1,6 @@
 import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services';
+
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
