@@ -1,17 +1,18 @@
 import { ICartDatabase } from './cart.database.interface';
 import { Injectable } from '@nestjs/common';
 import { Cart, Item } from 'src/entity/cart';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class CartRepository {
   constructor(private readonly db: ICartDatabase) {}
 
   async isCartExist(userId: string): Promise<Cart | null> {
-    return await this.db.findCart(userId);
+    return await this.db.isCartExist(userId);
   }
 
   async isItemExist(userId: string, productId: string): Promise<Cart | null> {
-    return await this.db.findItem(userId, productId);
+    return await this.db.isItemExist(userId, productId);
   }
 
   async addItem(userId: string, item: Item): Promise<Cart | null> {
@@ -29,8 +30,9 @@ export class CartRepository {
     return await this.db.incrementItemQuantity(userId, item);
   }
 
-  async createCart(userId: string, items: Item[]): Promise<Cart | null> {
-    return await this.db.createCart(userId, items);
+  async createCart(cart:Cart): Promise<Cart | null> {
+    cart.id = randomUUID();
+    return await this.db.createCart(cart);
   }
 
   async getCart(userId: string): Promise<Cart | null> {

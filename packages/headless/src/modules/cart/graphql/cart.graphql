@@ -1,9 +1,3 @@
-type Product {
-  name: String!
-  price: Int!
-  id: String!
-}
-
 type Item {
   productId: String!
   product: Product!
@@ -11,8 +5,8 @@ type Item {
 }
 
 input ItemInput {
-  productId: String!
-  quantity: Int!
+  productId: String
+  quantity: Int
 }
 
 type Cart {
@@ -24,7 +18,7 @@ type Cart {
 type CartResponse {
   error: String
   code: Int!
-  data: Cart!
+  data: Cart
 }
 
 type Query {
@@ -32,9 +26,9 @@ type Query {
 }
 
 type Mutation {
-  addToCart(item: ItemInput!): CartResponse!
-  deleteCart(cartId: String!): CartResponse!
-  updateCartItem(item: ItemInput!): CartResponse!
-  deleteCartItem(productId: String!): CartResponse!
+  addToCart(item: ItemInput): CartResponse!
+  deleteCart(cartId: String): CartResponse!
+  updateCartItem(item: ItemInput): CartResponse!
+  deleteCartItem(productId: String): CartResponse!
   deleteAllCartItems: CartResponse!
 }

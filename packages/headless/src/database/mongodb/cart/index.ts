@@ -6,7 +6,6 @@ import { ProductModel } from '../product/product.model';
 import { Product } from 'src/entity/product';
 @Injectable()
 export class CartDatabase implements ICartDatabase {
-  //   constructor() {}
 
   async addItem(userId: string, item: Item): Promise<Cart | null> {
     return await CartModel.findOneAndUpdate(
@@ -17,7 +16,7 @@ export class CartDatabase implements ICartDatabase {
       .exec();
   }
 
-  async findCart(userId: string): Promise<Cart | null> {
+  async isCartExist(userId: string): Promise<Cart | null> {
     return await CartModel.findOne({ userId }).lean().exec();
   }
 
@@ -37,7 +36,7 @@ export class CartDatabase implements ICartDatabase {
     };
   }
 
-  async findItem(userId: string, productId: string): Promise<Cart | null> {
+  async isItemExist(userId: string, productId: string): Promise<Cart | null> {
     return await CartModel.findOne({
       userId,
       'items.productId': productId,
@@ -60,8 +59,8 @@ export class CartDatabase implements ICartDatabase {
       .exec();
   }
 
-  async createCart(userId: string, items: Item[]): Promise<Cart | null> {
-    return await new CartModel({ userId, items: items }).save();
+  async createCart(cart:Cart): Promise<Cart | null> {
+    return await CartModel.create(cart);
   }
 
   async getCart(userId: string): Promise<Cart | null> {

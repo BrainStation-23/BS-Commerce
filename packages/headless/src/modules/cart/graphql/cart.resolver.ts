@@ -11,21 +11,10 @@ import { User } from 'src/entity/user';
 export class CartResolver {
   constructor(private cartService: CartService) { }
 
-  /**
-   * Query Start
-   */
   @Query()
   async getCart(@UserInfo() user: User) {
     return await this.cartService.getCart(user.id);
   }
-
-  /**
-  * Query End
-  */
-
-  /**
-  * Mutation Start
-  */
 
   @Mutation()
   async addToCart(
@@ -61,8 +50,4 @@ export class CartResolver {
   async deleteAllCartItems(@UserInfo() user: User) {
     return await this.cartService.deleteAllCartItems(user.id);
   }
-
-  /**
-   * Mutation End
-   */
 }

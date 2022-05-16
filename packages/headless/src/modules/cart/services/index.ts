@@ -16,7 +16,7 @@ export class CartService {
 
   @validateParams(
     { schema: ItemCreateSchema },
-    { schema: Joi.string().required() },
+    { schema: Joi.string().required().label('userId') },
   )
   async addToCart(
     item: Item,
@@ -24,10 +24,10 @@ export class CartService {
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
     if (!existCart) {
-      const createCart = await this.cartRepo.createCart(userId, [item]);
+      const createCart = await this.cartRepo.createCart({userId, items:[item]});
       if (!createCart) {
         return this.helper.serviceResponse.errorResponse(
-          'Can not create cart',
+          'Can\'t create cart',
           null,
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
@@ -43,7 +43,7 @@ export class CartService {
       const cart = await this.cartRepo.addItem(userId, item);
       if (!cart) {
         return this.helper.serviceResponse.errorResponse(
-          'Can not add item to the cart',
+          'Can\'t add item to the cart',
           null,
           HttpStatus.BAD_REQUEST,
         );
@@ -60,7 +60,7 @@ export class CartService {
     );
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can not increment cart item',
+        'Can\'t increment cart item',
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -72,7 +72,7 @@ export class CartService {
     }
   }
 
-  @validateParams({ schema: Joi.string().required() })
+  @validateParams({ schema: Joi.string().required().label('userId') })
   async getCart(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -90,14 +90,14 @@ export class CartService {
     );
   }
 
-  @validateParams({ schema: Joi.string().required() })
+  @validateParams({ schema: Joi.string().required().label('cartId') })
   async deleteCart(
     cartId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const cart = await this.cartRepo.deleteCart(cartId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Error occurred while deleting cart',
+        'Can\'t delete cart',
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -109,7 +109,7 @@ export class CartService {
   }
 
   @validateParams(
-    { schema: Joi.string().required() },
+    { schema: Joi.string().required().label('userId') },
     { schema: ItemCreateSchema },
   )
   async updateCartItem(
@@ -120,7 +120,7 @@ export class CartService {
       const cart = await this.cartRepo.updateCartItem(userId, item);
       if (!cart) {
         return this.helper.serviceResponse.errorResponse(
-          'Error occurred while updating cart item',
+          'Can\'t update cart item',
           null,
           HttpStatus.BAD_REQUEST,
         );
@@ -136,7 +136,7 @@ export class CartService {
     );
     if (!deletedCart) {
       return this.helper.serviceResponse.errorResponse(
-        'Error occurred while deleting cart item',
+        'Can\'t delete cart item',
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -148,8 +148,8 @@ export class CartService {
   }
 
   @validateParams(
-    { schema: Joi.string().required() },
-    { schema: Joi.string().required() },
+    { schema: Joi.string().required().label('userId') },
+    { schema: Joi.string().required().label('productId') },
   )
   async deleteCartItem(
     userId: string,
@@ -158,7 +158,7 @@ export class CartService {
     const cart = await this.cartRepo.deleteCartItem(userId, productId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Error occurred while deleting cart item',
+        'Can\'t delete cart item',
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -169,14 +169,14 @@ export class CartService {
     );
   }
 
-  @validateParams({ schema: Joi.string().required() })
+  @validateParams({ schema: Joi.string().required().label('userId') })
   async deleteAllCartItems(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const cart = await this.cartRepo.deleteAllCartItems(userId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Error occurred while deleting all cart item',
+        'Can\'t delete all cart item',
         null,
         HttpStatus.BAD_REQUEST,
       );
