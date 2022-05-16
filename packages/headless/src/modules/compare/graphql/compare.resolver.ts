@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CompareData } from 'src/entity/compare';
+import { CompareItems } from 'src/entity/compare';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
@@ -38,7 +38,7 @@ export class GqlCompareResolver {
   @Mutation()
   async addItemToCompare(
     @UserInfo() user: User,
-    @Args('body') body: CompareData,
+    @Args('body') body: CompareItems,
   ) {
     return await this.compareService.addItemToCompare(user.id, body.productId);
   }

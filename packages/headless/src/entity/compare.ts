@@ -1,9 +1,11 @@
+import { Product } from './product';
+
 export class Compare {
   id: string;
   userId: string;
-  items: string[];
+  items: CompareItems[];
 }
-
-export class CompareData {
+export class CompareItems {
   productId: string;
+  product?: Product;
 }

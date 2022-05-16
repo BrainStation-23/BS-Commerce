@@ -44,9 +44,9 @@ export class CompareService {
     if (!isExist) {
       saveData = await this.compareRepository.createCompare(userId, productId);
     } else {
-      const find = isExist.items.find((e) => e === productId);
+      const find = isExist.items.find((e) => e.productId === productId);
       /**
-       * if new product does't exists in list then add it else keep the same
+       * if new product doesn't exists in list then add it, else keep the same
        */
       if (!find)
         saveData = await this.compareRepository.addItemToCompare(
@@ -57,6 +57,7 @@ export class CompareService {
     }
 
     if (saveData) {
+      saveData = await this.compareRepository.getCompareByUserId(userId);
       return this.helper.serviceResponse.successResponse(
         saveData,
         HttpStatus.OK,

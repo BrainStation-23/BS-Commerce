@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { CompareData } from 'src/entity/compare';
+import { CompareItems } from 'src/entity/compare';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
@@ -27,7 +27,7 @@ export class CompareController {
   @Post()
   async addItemToComapre(
     @UserInfo() user: User,
-    @Body() body: CompareData,
+    @Body() body: CompareItems,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.compareService.addItemToCompare(
