@@ -9,7 +9,7 @@ const initialState: productsState = {
     products: [],
 };
 
-export const reservationsSlice = createSlice({
+export const productsSlice = createSlice({
   name: "productsSlice",
   initialState,
   reducers: {
@@ -19,6 +19,6 @@ export const reservationsSlice = createSlice({
   },
 });
 
-export const { storeProducts } = reservationsSlice.actions;
+export const { storeProducts } = productsSlice.actions;
 
-export default reservationsSlice.reducer;
+export default productsSlice.reducer;
