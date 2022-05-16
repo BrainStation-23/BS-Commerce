@@ -2,23 +2,11 @@ import { model, Schema } from 'mongoose';
 import { Address, User } from 'src/entity/user';
 
 const AddressSchema = new Schema<Address>({
-  addressLine1: {
-    type: String,
-    required: true
-  },
+  addressLine1: String,
   addressLine2: String,
-  city: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  postCode: {
-    type: String,
-    required: true
-  }
+  city: String,
+  country: String,
+  postCode: String
 }, {
   _id: false,
   timestamps: false,
@@ -39,7 +27,7 @@ const UserSchema = new Schema<User>({
   },
   phone: {
     type: String,
-    unique: true
+    index: true
   },
   email: {
     type: String,

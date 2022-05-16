@@ -1,5 +1,5 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Response, Request } from 'express';
 import { SignInData } from 'src/entity/auth';
 import { User } from 'src/entity/user';
 import { AuthService } from '../services';
@@ -23,8 +23,8 @@ export class AuthController {
   }
 
   @Post('forgot')
-  async forgotPassword(@Body() username: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.authService.forgotPassword(username);
+  async forgotPassword(@Body('username') username: string, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
+    const { code, ...response } = await this.authService.forgotPassword(username, req.headers.host);
     res.status(code);
     return response;
   }

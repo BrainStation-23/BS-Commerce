@@ -1,9 +1,25 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { EmailServiceSuccessResponse, IEmailService } from "./email.service.interface";
+import { Injectable } from "@nestjs/common";
+import { IMailService } from "./mail.service.interface";
+import * as nodemailer from 'nodemailer';
+import { mailConfig } from 'config/mail';
 
 @Injectable()
-export class ServiceResponse implements IEmailService {
-    senEmail(data: object, code: number = HttpStatus.OK): EmailServiceSuccessResponse {
-        return ({ data, code });
+export class MailService implements IMailService {
+    async senEmail(email: string, urlWithToken?: string): Promise<Boolean | null> {
+        const mailOptions = {
+            from: mailConfig.user,
+            to: email,
+            subject: 'Reset Password Link',
+            html: urlWithToken
+        }
+        const transporter = nodemailer.createTransport(mailConfig.options);
+        try {
+            const res = await transporter.sendMail(mailOptions);
+            console.log(res)
+            if (!res) return false
+            return true;
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

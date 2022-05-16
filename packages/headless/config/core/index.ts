@@ -4,5 +4,5 @@ export const coreConfig = {
     api: API || 'REST',
     env: ENV || 'DEVELOPMENT',
     host: HOST || 'localhost',
-    appPrefix: REST_API_PREFIX || 'api'
+    restApiPrefix: REST_API_PREFIX || 'api'
 }

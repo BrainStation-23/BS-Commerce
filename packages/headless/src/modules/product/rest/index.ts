@@ -32,7 +32,7 @@ export class ProductController {
   @Get('condition')
   async getProductsByCondition(
     @Query() condition: SearchCondition,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.getProductsByCondition(condition);
     res.status(code);
@@ -42,7 +42,7 @@ export class ProductController {
   @Get('list')
   async getProductsList(
     @Query() condition: SearchCondition,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.getProductsList(condition);
     res.status(code);
@@ -78,12 +78,12 @@ export class ProductController {
   }
 
   @Patch('brand')
-  async updateProductsForBands(
+  async updateProductsForBand(
     @Body('productIds') productIds: string[],
     @Body('brandId') brandId: string,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.productService.updateProductsForBands(productIds, brandId);
+    const { code, ...response } = await this.productService.updateProductsForBand(productIds, brandId);
     res.status(code);
     return response;
   }

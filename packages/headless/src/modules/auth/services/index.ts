@@ -21,7 +21,7 @@ export class AuthService {
 
     const doesUserExist = await this.userRepo.findUser({ username: user.email });
     if (doesUserExist) {
-      return this.helper.serviceResponse.errorResponse('The User already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
+      return this.helper.serviceResponse.errorResponse('The user already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
     }
 
     user.provider = 'local';
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   @validateParams({ schema: Joi.string().required().label('username') })
-  async forgotPassword(username: string): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
+  async forgotPassword(username: string, host: string): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
 
     const user = await this.userRepo.findUser({ username });
     if (!user) return this.helper.serviceResponse.errorResponse('Can\'t Get User.', null, HttpStatus.BAD_REQUEST,);
@@ -69,7 +69,10 @@ export class AuthService {
     const updatedUser = await this.userRepo.updateUser(user.id, user);
     if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update User.', null, HttpStatus.BAD_REQUEST);
 
-    
+    const urlWithToken = 'http://' + host + '/auth/reset/' + token;
+
+    const emailResponse = await this.helper.mailService.senEmail(user.email, urlWithToken);
+    if (!emailResponse) return this.helper.serviceResponse.errorResponse('Can\'t Send Email.', null, HttpStatus.INTERNAL_SERVER_ERROR);
     return this.helper.serviceResponse.successResponse({ message: 'An email has been sent to ' + user.email + ' with further instructions.' }, HttpStatus.OK,);
   }
 }

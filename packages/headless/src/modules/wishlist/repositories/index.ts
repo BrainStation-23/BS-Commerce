@@ -8,7 +8,7 @@ export class WishListRepository {
   constructor(private readonly db: IWishListDatabase) { }
 
   async doesItemExist(userId: string, productId: string): Promise<WishList | null> {
-    return await this.db.getItem(userId, productId);
+    return await this.db.doesItemExist(userId, productId);
   }
 
   async incrementItemQuantity(userId: string, item: Item): Promise<WishList | null> {

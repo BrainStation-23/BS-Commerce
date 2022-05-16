@@ -6,19 +6,12 @@ const WishListSchema = new Schema<WishList>({
     type: String,
     unique: true
   },
-  userId: {
-    type: String,
-    required: true,
-  },
+  userId: String,
   items: [
     {
-      productId: {
-        type: String,
-        required: true,
-      },
+      productId: String,
       quantity: {
         type: Number,
-        required: true,
         default: 1,
       },
       _id: false,

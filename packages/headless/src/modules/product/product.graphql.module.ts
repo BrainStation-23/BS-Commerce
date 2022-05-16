@@ -14,7 +14,7 @@ import { ProductResolver } from "./graphql/product.resolver";
         {
             provide: IProductDatabase,
             useClass: ResolveDatabaseDependency('PRODUCT')
-        }
+        },
     ]
 })
 

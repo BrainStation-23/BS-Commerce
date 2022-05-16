@@ -24,7 +24,7 @@ export class WishListDatabase implements IWishListDatabase {
     }
   }
 
-  async getItem(userId: string, productId: string,): Promise<WishList | null> {
+  async doesItemExist(userId: string, productId: string,): Promise<WishList | null> {
     return await WishListModel.findOne({
       userId,
       'items.productId': productId,
@@ -55,7 +55,7 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async createWishList(wishlist: WishList): Promise<WishList | null> {
-    return await new WishListModel(wishlist).save();
+    return await WishListModel.create(wishlist);
   }
 
   async getWishList(wishlistId: string,): Promise<WishList | null> {

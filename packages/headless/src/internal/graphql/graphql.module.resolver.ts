@@ -7,9 +7,8 @@ import { GraphqlInitModule } from "./graphql.init";
 export const ResolveGraphqlModule = () => {
   return [
     ...GraphqlInitModule(),
+    ProductModule,
     WishListModule,
     AuthModule,
-    ProductModule,
-    UserModule,
   ];
 };
