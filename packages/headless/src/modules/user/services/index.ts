@@ -24,6 +24,7 @@ export class UserService {
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: UserUpdateSchema })
     async updateUser(userId: string, data: UpdatedUser): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
         let user = await this.userRepo.findUser({ id: userId });
+        if (!user) return this.helper.serviceResponse.errorResponse('Can\'t Get User.', null, HttpStatus.BAD_REQUEST);
 
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;

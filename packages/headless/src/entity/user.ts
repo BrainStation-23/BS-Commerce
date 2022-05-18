@@ -1,4 +1,5 @@
 export class Address {
+  id: string;
   addressLine1: string;
   addressLine2?: string;
   city: string;
@@ -19,7 +20,7 @@ export class User {
   resetPasswordToken?: string;
   resetPasswordExpires?: number;
   gender?: string;
-  addresses?: [Address];
+  addresses?: Address;
   status: string;
 }
 
@@ -30,7 +31,7 @@ export class UpdatedUser {
   providerData?: object;
   additionalProviderData?: object;
   phone?: string;
-  addresses?: [Address];
+  addresses?: Address;
   active?: boolean;
   gender?: string;
   status?: string;
