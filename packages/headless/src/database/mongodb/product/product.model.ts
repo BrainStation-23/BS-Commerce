@@ -1,31 +1,21 @@
 import { model, Schema } from 'mongoose';
 import { Product } from 'src/entity/product';
+import { randomUUID } from 'crypto';
 
 const ProductSchema = new Schema<Product>({
     id: {
         type: String,
-        unique: true
+        unique: true,
+        default: () => randomUUID()
     },
     info: {
         name: String,
         shortDescription: String,
         fullDescription: String,
-        sku: {
-            type: String,
-            unique: true
-        },
-        price: {
-            type: Number,
-            default: 0
-        },
-        oldPrice: {
-            type: Number,
-            default: 0
-        },
-        cost: {
-            type: Number,
-            default: 0
-        },
+        sku: String,
+        price: Number,
+        oldPrice: Number,
+        cost: Number,
         showOnHomePage: {
             type: Boolean,
             default: false
@@ -68,14 +58,11 @@ const ProductSchema = new Schema<Product>({
             type: String,
             default: ''
         },
-        friendlyPageName: {
-            type: String,
-            unique: true
-        }
+        friendlyPageName: String
     },
     tags: [String],
     photos: [{
-        id: String,
+        url: String,
         title: {
             type: String,
             default: ''
@@ -92,7 +79,7 @@ const ProductSchema = new Schema<Product>({
     }],
     brands: [String],
     categories: [{
-        categoryId: String,
+        id: String,
         isFeatured: {
             type: Boolean,
             default: false

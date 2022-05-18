@@ -14,7 +14,7 @@ export class UserDatabase implements IUserDatabase {
     return await UserModel.findOne(query).lean();
   }
 
-  async findUser(query: Record<string, string>): Promise<User | null> {
+  async findUser(query: Record<string, any>): Promise<User | null> {
     const user = await UserModel.findOne(query).lean();
     delete user?.password;
     return user;

@@ -32,13 +32,6 @@ export class WishListController {
     return response;
   }
 
-  @Delete('/:wishlistId')
-  async deleteWishlist(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlist(wishlistId);
-    res.status(code);
-    return response;
-  }
-
   @Patch('/item')
   async updateWishlistItem(@Body() item: Item, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
@@ -56,6 +49,13 @@ export class WishListController {
   @Delete('/allitems')
   async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id,);
+    res.status(code);
+    return response;
+  }
+
+  @Delete(':wishlistId')
+  async deleteWishlist(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlist(wishlistId);
     res.status(code);
     return response;
   }

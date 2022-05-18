@@ -1,19 +1,18 @@
 import { model, Schema } from 'mongoose';
 import { WishList } from 'src/entity/wishList';
+import { randomUUID } from 'crypto';
 
 const WishListSchema = new Schema<WishList>({
   id: {
     type: String,
-    unique: true
+    unique: true,
+    default: () => randomUUID()
   },
   userId: String,
   items: [
     {
       productId: String,
-      quantity: {
-        type: Number,
-        default: 1,
-      },
+      quantity: Number,
       _id: false,
     },
   ],
@@ -23,5 +22,4 @@ const WishListSchema = new Schema<WishList>({
 });
 
 const WishListModel = model<WishList>('wishList', WishListSchema);
-
 export { WishListModel };

@@ -10,7 +10,6 @@ export class User {
   firstName: string;
   lastName: string;
   displayName?: string;
-  username?: string;
   phone?: string;
   email: string;
   password: string;
@@ -22,7 +21,6 @@ export class User {
   gender?: string;
   addresses?: [Address];
   status: string;
-  active: boolean;
 }
 
 export class UpdatedUser {

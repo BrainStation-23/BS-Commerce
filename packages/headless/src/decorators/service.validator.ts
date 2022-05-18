@@ -41,7 +41,7 @@ export function validateParams(...validators: Array<Validators>) {
                         response.error += err.message + '.';
                         err.path[0] && (response.errors[err.path[0]] = [err.message]);
                     })
-                    throw new HttpException(response, HttpStatus.BAD_REQUEST);
+                    throw new HttpException(response, HttpStatus.UNPROCESSABLE_ENTITY);
                 }
             }
             return method.apply(this, args);

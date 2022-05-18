@@ -7,8 +7,8 @@ import { randomUUID } from 'crypto';
 export class ProductRepository {
     constructor(private readonly db: IProductDatabase) { }
 
-    async findProduct(productId: string): Promise<Product | null> {
-        return await this.db.findProduct(productId);
+    async findProduct(query: Record<string, any>): Promise<Product | null> {
+        return await this.db.findProduct(query);
     }
 
     async findAllProducts(skip?: number, limit?: number): Promise<Product[]> {
@@ -16,16 +16,11 @@ export class ProductRepository {
     }
 
     async createProduct(product: Product): Promise<Product | null> {
-        product.id = randomUUID();
         return await this.db.createProduct(product);
     }
 
-    async getProductCount(query: any): Promise<number> {
+    async getProductCount(query: Record<string, any>): Promise<number> {
         return await this.db.getProductCount(query);
-    }
-
-    async findProductBySKU(sku: string): Promise<Product | null> {
-        return await this.db.findProductBySKU(sku);
     }
 
     async deleteProduct(productId: string): Promise<Product | null> {
@@ -36,15 +31,15 @@ export class ProductRepository {
         return await this.db.updateProduct(product, productId);
     }
 
-    async updateProductsForBand(productIds: string[], brandId: string): Promise<Product[] | null> {
-        return await this.db.updateProductsForBand(productIds, brandId);
+    async updateProductsForBrand(productIds: string[], brandId: string): Promise<Product[] | null> {
+        return await this.db.updateProductsForBrand(productIds, brandId);
     }
 
-    async findProductsByCondition(query: any, skip?: number, limit?: number): Promise<Product[] | []> {
+    async findProductsByCondition(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
         return await this.db.findProductsByCondition(query, skip, limit);
     }
 
-    async getProductsList(skip: number, limit: number, query?: any, sortCondition?: string): Promise<Product[] | []> {
+    async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
         return await this.db.getProductsList(skip, limit, query, sortCondition);
     }
 }

@@ -6,8 +6,8 @@ import { ProductModel } from './product.model';
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
 
-  async findProduct(productId: string) {
-    return await ProductModel.findOne({ id: productId }).lean();
+  async findProduct(query: Record<string, any>) {
+    return await ProductModel.findOne(query).lean();
   }
 
   async createProduct(product: Product) {
@@ -18,12 +18,8 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find({}).skip(skip).limit(limit).lean();
   }
 
-  async getProductCount(query: any): Promise<number> {
+  async getProductCount(query: Record<string, any>): Promise<number> {
     return await ProductModel.find(query).lean().count();
-  }
-
-  async findProductBySKU(sku: string) {
-    return await ProductModel.findOne({ 'info.sku': sku }).lean();
   }
 
   async deleteProduct(productId: string) {
@@ -33,8 +29,8 @@ export class ProductDatabase implements IProductDatabase {
   async updateProduct(product: Product, productId: string) {
     return await ProductModel.findOneAndUpdate({ id: productId }, { $set: product }, { new: true }).lean().exec();
   }
-  
-  async updateProductsForBand(productIds: string[], brandId: string) {
+
+  async updateProductsForBrand(productIds: string[], brandId: string) {
     await ProductModel.updateMany(
       { id: { '$in': productIds } },
       { $addToSet: { brands: brandId } },
@@ -43,11 +39,11 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find({ id: { '$in': productIds } }).lean();
   }
 
-  async findProductsByCondition(query: any, skip?: number, limit?: number) {
+  async findProductsByCondition(query: Record<string, any>, skip?: number, limit?: number) {
     return await ProductModel.find(query, 'info brands photos').skip(skip).limit(limit).lean();
   }
 
-  async getProductsList(skip: number, limit: number, query?: any, sortCondition?: string) {
-    return await ProductModel.find(query).sort(sortCondition).skip((skip - 1) * limit).limit(limit).lean();
+  async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string) {
+    return await ProductModel.find(query).sort(sortCondition).skip(skip).limit(limit).lean();
   }
 }

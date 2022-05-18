@@ -18,13 +18,13 @@ type Info {
 }
 
 input InfoInput {
-  name: String
+  name: String!
   shortDescription: String
   fullDescription: String
-  sku: String
-  price: Int
-  oldPrice: Int
-  cost: Int
+  sku: String!
+  price: Int!
+  oldPrice: Int!
+  cost: Int!
   showOnHomePage: Boolean
   includeInTopMenu: Boolean
   allowToSelectPageSize: Boolean
@@ -45,31 +45,31 @@ input MetaInput {
   keywords: [String]
   title: String
   description: String
-  friendlyPageName: String
+  friendlyPageName: String!
 }
 
 type Photo {
-  id: String
+  url: String
   title: String
   alt: String
   displayOrder: Int
 }
 
 input PhotoInput {
-  id: String
+  url: String
   title: String
   alt: String
   displayOrder: Int
 }
 
 type Categories {
-  categoryId: String!
+  id: String!
   isFeatured: Boolean
   displayOrder: Int
 }
 
 input CategoriesInput {
-  categoryId: String
+  id: String!
   isFeatured: Boolean
   displayOrder: Int
 }
@@ -85,12 +85,12 @@ type Product {
 }
 
 input ProductInput {
-  info: InfoInput
-  meta: MetaInput
+  info: InfoInput!
+  meta: MetaInput!
   tags: [String]
   photos: [PhotoInput]
-  brands: [String]
-  categories: [CategoriesInput]
+  brands: [String!]!
+  categories: [CategoriesInput!]!
 }
 
 input SearchCondition {
@@ -148,7 +148,7 @@ type Mutation {
   createProduct(product: ProductInput): ProductResponse!
   deleteProduct(productId: String): ProductResponse!
   updateProduct(product: ProductInput, productId: String!): ProductResponse!
-  updateProductsForBand(
+  updateProductsForBrand(
     productIds: [String!]!
     brandId: String!
   ): ProductArrayResponse!

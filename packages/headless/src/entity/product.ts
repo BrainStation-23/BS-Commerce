@@ -1,5 +1,5 @@
 export class Product {
-  id?: string;
+  id: string;
   info: {
     name: string,
     shortDescription?: string,
@@ -24,14 +24,14 @@ export class Product {
   };
   tags?: [string];
   photos: [{
-    id?: string,
+    url?: string,
     title?: string,
     alt?: string,
     displayOrder?: number
   }];
   brands?: [string];
   categories: [{
-    categoryId: string,
+    id: string,
     isFeatured?: boolean,
     displayOrder?: number
   }]

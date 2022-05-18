@@ -1,13 +1,13 @@
 input UserInput {
-  firstName: String
-  lastName: String
-  email: String
-  password: String
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
 }
 
 input SignInInput {
-  username: String
-  password: String
+  email: String!
+  password: String!
 }
 
 type User {
@@ -15,7 +15,6 @@ type User {
   firstName: String!
   lastName: String!
   displayName: String!
-  username: String!
   email: String!
   provider: String
 }
@@ -37,6 +36,6 @@ type SignInResponse {
 }
 
 type Mutation {
-  signUp(user: UserInput): AuthResponse!
-  signIn(data: SignInInput): SignInResponse!
+  signUp(user: UserInput!): AuthResponse!
+  signIn(data: SignInInput!): SignInResponse!
 }

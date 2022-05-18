@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { Address, User } from 'src/entity/user';
+import { randomUUID } from 'crypto';
 
 const AddressSchema = new Schema<Address>({
   addressLine1: String,
@@ -17,21 +18,18 @@ const UserSchema = new Schema<User>({
   id: {
     type: String,
     unique: true,
+    default: () => randomUUID()
   },
   firstName: String,
   lastName: String,
   displayName: String,
-  username: {
-    type: String,
-    unique: true
-  },
   phone: {
     type: String,
     index: true
   },
   email: {
     type: String,
-    lowercase: true
+    index: true,
   },
   password: String,
   provider: String,
@@ -45,10 +43,6 @@ const UserSchema = new Schema<User>({
     type: String,
     enum: ['active', 'inactive', 'email-not-verified']
   },
-  active: {
-    type: Boolean,
-    default: true
-  }
 }, {
   timestamps: true,
   versionKey: false
