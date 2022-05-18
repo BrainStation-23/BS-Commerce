@@ -12,10 +12,7 @@ const WishListSchema = new Schema<WishList>({
   items: [
     {
       productId: String,
-      quantity: {
-        type: Number,
-        default: 1,
-      },
+      quantity: Number,
       _id: false,
     },
   ],
@@ -25,5 +22,4 @@ const WishListSchema = new Schema<WishList>({
 });
 
 const WishListModel = model<WishList>('wishList', WishListSchema);
-
 export { WishListModel };

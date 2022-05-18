@@ -16,7 +16,6 @@ export class ProductRepository {
     }
 
     async createProduct(product: Product): Promise<Product | null> {
-        product.id = randomUUID();
         return await this.db.createProduct(product);
     }
 
