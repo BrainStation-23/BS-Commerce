@@ -35,7 +35,7 @@ export class AuthService {
   @validateParams({ schema: SigninSchema })
   async signIn(data: SignInData): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
 
-    const user = await this.userRepo.getUserPassword({ username: data.email });
+    const user = await this.userRepo.getUserPassword({ email: data.email });
     if (!user) return this.helper.serviceResponse.errorResponse('Invalid Credentials.', null, HttpStatus.BAD_REQUEST,);
 
     const doesPasswordMatch = await bcrypt.compare(data.password, user.password);

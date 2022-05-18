@@ -5,9 +5,7 @@ import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
 
 export const ResolveRestModule = () => {
   return [
-    WishListModule,
     AuthModule,
-    ProductModule,
     UserModule
   ];
 };

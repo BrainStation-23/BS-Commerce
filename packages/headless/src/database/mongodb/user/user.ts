@@ -21,8 +21,8 @@ export class UserDatabase implements IUserDatabase {
   }
 
   async updateUser(userId: string, user: User): Promise<User | null> {
-    const updateUser = await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().exec();
-    delete updateUser?.password;
-    return updateUser;
+    const updatedUser = await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().exec();
+    delete updatedUser?.password;
+    return updatedUser;
   }
 }

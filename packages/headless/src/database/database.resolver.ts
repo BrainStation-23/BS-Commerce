@@ -1,6 +1,7 @@
 // Mongodb dependency implementations
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
+import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { dbConfig } from 'config/database';
 
@@ -22,12 +23,13 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
           default:
             break;
         }
-      // case 'MYSQL':
-      //   switch (className) {
-
-      //     default:
-      //       break;
-      //   }
+      case 'MYSQL':
+        switch (className) {
+          case 'USER':
+            return UserDatabaseMysql;
+          default:
+            break;
+        }
 
       default:
         throw new Error('No dependency implementation found');
