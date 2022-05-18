@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 
-import PageTitle from "../components/pageTitle";
-import ThreeStoriesCard from "../components/threeStoriesCard";
+import PageTitle from "@/components/pageTitle";
+import ThreeStoriesCard from "@/components/threeStoriesCard";
+import Container from "@/components/container";
 
 import { storiesBody } from "../utils/types";
 
-import styles from "../styles/Service.module.css";
-import Container from "../components/container";
+import styles from "@/styles/Service.module.css";
 
 const threeStoriesList: storiesBody[] = [
   {

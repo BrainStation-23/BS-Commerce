@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 
-import Accordion from "../components/accordion";
-import PageTitle from "../components/pageTitle";
+import Accordion from "@/components/accordion";
+import PageTitle from "@/components/pageTitle";
+import Container from "@/components/container";
 
 import { accordionBody } from "../utils/types";
 
-import styles from "../styles/Faq.module.css";
-import Container from "../components/container";
+import styles from "@/styles/Faq.module.css";
 
 const accordionList: accordionBody[] = [
   {

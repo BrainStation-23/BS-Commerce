@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 
-import Accordion from "../components/accordion";
-import PageTitle from "../components/pageTitle";
-import ThreeStoriesCard from "../components/threeStoriesCard";
-import Container from "../components/container";
+import Accordion from "@/components/accordion";
+import PageTitle from "@/components/pageTitle";
+import ThreeStoriesCard from "@/components/threeStoriesCard";
+import Container from "@/components/container";
 
 import { accordionBody, storiesBody } from "../utils/types";
 
-import styles from "../styles/About.module.css";
+import styles from "@/styles/About.module.css";
 
 const accordionList: accordionBody[] = [
   {
