@@ -47,7 +47,7 @@ export class ProductService {
 
   @validateParams({ schema: Joi.string().required().label('SKU') })
   async getProductBySKU(sku: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const product = await this.productRepo.findProductBySKU(sku);
+    const product = await this.productRepo.findProduct({ 'info.sku': sku });
     if (!product) return this.helper.serviceResponse.errorResponse('Can\'t get the Product.', null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product);
   }

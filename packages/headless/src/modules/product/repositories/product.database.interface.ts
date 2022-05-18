@@ -7,7 +7,6 @@ export abstract class IProductDatabase {
     abstract findAllProducts: (skip?: number, limit?: number) => Promise<Product[] | []>;
     abstract createProduct: (product: Product) => Promise<Product | null>;
     abstract getProductCount: (query: any) => Promise<number | null>;
-    abstract findProductBySKU: (sku: string) => Promise<Product | null>;
     abstract deleteProduct: (productId: string) => Promise<Product | null>;
     abstract updateProduct: (product: Product, productId: string) => Promise<Product | null>;
     abstract updateProductsForBrand: (productIds: string[], brandId: string) => Promise<Product[] | null>;

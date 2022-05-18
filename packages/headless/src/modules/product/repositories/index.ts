@@ -23,10 +23,6 @@ export class ProductRepository {
         return await this.db.getProductCount(query);
     }
 
-    async findProductBySKU(sku: string): Promise<Product | null> {
-        return await this.db.findProductBySKU(sku);
-    }
-
     async deleteProduct(productId: string): Promise<Product | null> {
         return await this.db.deleteProduct(productId);
     }

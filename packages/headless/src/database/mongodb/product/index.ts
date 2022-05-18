@@ -22,10 +22,6 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query).lean().count();
   }
 
-  async findProductBySKU(sku: string) {
-    return await ProductModel.findOne({ 'info.sku': sku }).lean();
-  }
-
   async deleteProduct(productId: string) {
     return await ProductModel.findOneAndRemove({ id: productId }).lean();
   }
