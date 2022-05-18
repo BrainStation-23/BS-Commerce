@@ -7,10 +7,6 @@ import { WishListModel } from './wishList.model';
 @Injectable()
 export class WishListDatabase implements IWishListDatabase {
 
-  async getUserWishList(userId: string): Promise<WishList | null> {
-    return await WishListModel.findOne({ userId }).lean();
-  }
-
   async getWishlistProduct(wishlist: WishList): Promise<WishList | null> {
     const products: Product[] = await ProductModel.find({ id: { $in: wishlist.items.map(item => item.productId) } }).select('info photos id -_id');
 
@@ -22,13 +18,6 @@ export class WishListDatabase implements IWishListDatabase {
     return {
       ...wishlist, items: wishlist.items.map(item => { return { ...item, product: map.get(item.productId) } })
     }
-  }
-
-  async doesItemExist(userId: string, productId: string,): Promise<WishList | null> {
-    return await WishListModel.findOne({
-      userId,
-      'items.productId': productId,
-    }).lean();
   }
 
   async incrementItemQuantity(userId: string, item: Item,): Promise<WishList | null> {
@@ -58,8 +47,8 @@ export class WishListDatabase implements IWishListDatabase {
     return await WishListModel.create(wishlist);
   }
 
-  async getWishList(wishlistId: string,): Promise<WishList | null> {
-    return await WishListModel.findOne({ id: wishlistId }).lean();
+  async getWishList(query: Record<string, any>): Promise<WishList | null> {
+    return await WishListModel.findOne(query).lean();
   }
 
   async deleteWishList(wishlistId: string): Promise<WishList | null> {

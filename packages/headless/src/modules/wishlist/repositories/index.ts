@@ -8,7 +8,10 @@ export class WishListRepository {
   constructor(private readonly db: IWishListDatabase) { }
 
   async doesItemExist(userId: string, productId: string): Promise<WishList | null> {
-    return await this.db.doesItemExist(userId, productId);
+    return await this.db.getWishList({
+      userId,
+      'items.productId': productId,
+    });
   }
 
   async incrementItemQuantity(userId: string, item: Item): Promise<WishList | null> {
@@ -24,7 +27,7 @@ export class WishListRepository {
   }
 
   async getUserWishlist(userId: string): Promise<WishList | null> {
-    return await this.db.getUserWishList(userId);
+    return await this.db.getWishList({ userId });
   }
 
   async getWishlistProduct(wishlist: WishList): Promise<WishList | null> {
@@ -32,7 +35,7 @@ export class WishListRepository {
   }
 
   async getWishlist(wishlistId: string): Promise<WishList | null> {
-    return await this.db.getWishList(wishlistId);
+    return await this.db.getWishList({ id: wishlistId });
   }
 
   async deleteWishlist(wishlistId: string): Promise<WishList | null> {

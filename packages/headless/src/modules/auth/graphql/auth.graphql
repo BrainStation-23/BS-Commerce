@@ -36,6 +36,6 @@ type SignInResponse {
 }
 
 type Mutation {
-  signUp(user: UserInput): AuthResponse!
-  signIn(data: SignInInput): SignInResponse!
+  signUp(user: UserInput!): AuthResponse!
+  signIn(data: SignInInput!): SignInResponse!
 }

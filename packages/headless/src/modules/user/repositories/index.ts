@@ -10,7 +10,7 @@ export class UserRepository {
     return await this.db.createUser(user);
   }
 
-  async findUser(query: Record<string, string>): Promise<User | null> {
+  async findUser(query: Record<string, any>): Promise<User | null> {
     return await this.db.findUser(query);
   }
 
