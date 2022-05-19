@@ -17,9 +17,7 @@ export class UserDatabase implements IUserDatabase {
   }
 
   async findUser(query: Record<string, any>): Promise<any | null> {
-    const user = (await UserModel.findOne({ where: query }));
-    delete user?.password;
-    return user;
+    return await UserModel.findOne({ where: query, attributes: { exclude: ['password'] }});
   }
 
   async updateUser(userId: string, user: User): Promise<any | null> {

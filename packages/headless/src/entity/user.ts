@@ -13,7 +13,7 @@ export class User {
   displayName?: string;
   phone?: string;
   email: string;
-  password: string;
+  password?: string;
   provider?: string;
   providerData?: object;
   additionalProviderData?: object;
