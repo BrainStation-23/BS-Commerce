@@ -30,10 +30,12 @@ const UserSchema = new Schema<User>({
   displayName: String,
   phone: {
     type: String,
+    unique: true,
     index: true
   },
   username: {
     type: String,
+    unique: true,
     index: true
   },
   email: {

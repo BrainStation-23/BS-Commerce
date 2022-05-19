@@ -1,9 +1,10 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ChangePassword, UpdatedUser, User } from 'src/entity/user';
+import { ChangePassword, User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { UpdatedUser } from '../validations/user.validator';
 
 @UseGuards(JwtAuthGuard)
 @Resolver()

@@ -2,8 +2,9 @@ import { Body, Controller, Get, Patch, Res, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { UserService } from '../services';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { ChangePassword, UpdatedUser, User } from 'src/entity/user';
+import { ChangePassword, User } from 'src/entity/user';
 import { Response } from 'express';
+import { UpdatedUser } from '../validations/user.validator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('user')

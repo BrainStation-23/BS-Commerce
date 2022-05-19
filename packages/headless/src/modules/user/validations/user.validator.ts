@@ -1,6 +1,20 @@
 import { regexConfig } from 'config/regex';
 import * as Joi from 'joi';
-import { UpdatedUser } from 'src/entity/user';
+import { Address } from 'src/entity/user';
+
+export class UpdatedUser {
+  firstName?: string;
+  lastName?: string;
+  provider?: string;
+  providerData?: object;
+  additionalProviderData?: object;
+  phone?: string;
+  address?: Address;
+  active?: boolean;
+  gender?: string;
+  status?: string;
+}
+
 
 export const UserUpdateSchema = Joi.object<UpdatedUser, true>({
   firstName: Joi.string(),

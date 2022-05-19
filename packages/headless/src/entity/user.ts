@@ -25,21 +25,7 @@ export class User {
   status: string;
 }
 
-export class UpdatedUser {
-  firstName?: string;
-  lastName?: string;
-  provider?: string;
-  providerData?: object;
-  additionalProviderData?: object;
-  phone?: string;
-  address?: Address;
-  active?: boolean;
-  gender?: string;
-  status?: string;
-}
-
 export class ChangePassword {
   currentPassword: string;
   newPassword: string;
-  verifyPassword: string;
 }

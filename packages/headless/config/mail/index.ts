@@ -1,10 +1,10 @@
 const { MAIL_HOST, MAIL_USER, MAIL_PASSWORD, MAIL_PORT, MAIL_SERVICE, MAIL_SECURE } = process.env;
 
-export const mailConfig = {
+export const nodemailerConfig = {
     user: MAIL_USER!,
     options: {
         host: MAIL_HOST || 'smtp.example.com',
-        port: parseInt(MAIL_PORT) || 465,
+        port: Number(MAIL_PORT) || 465,
         secure: Boolean(MAIL_SECURE) || true,
         service: MAIL_SERVICE || 'gmail',
         auth: {

@@ -11,6 +11,8 @@ import { JwtPayload, SignInData } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
 import * as Joi from 'joi';
 import * as crypto from 'crypto';
+const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
+const token = crypto.randomBytes(20).toString("hex");
 
 @Injectable()
 export class AuthService {
@@ -60,8 +62,6 @@ export class AuthService {
 
     if (user.provider !== 'local') return this.helper.serviceResponse.errorResponse('It seems like you signed up using your ' + user.provider + ' account', null, HttpStatus.BAD_REQUEST,);
 
-    const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
-    const token = crypto.randomBytes(20).toString("hex");
     user.resetPasswordToken = token;
     user.resetPasswordExpires = Date.now() + ONE_HOUR;
 
@@ -70,8 +70,7 @@ export class AuthService {
 
     const mailBody = 'http://' + host + '/auth/reset/' + token;
 
-    const emailResponse = await this.helper.mailService.sendMail(user.email, 'Password Reset Link', mailBody);
-    if (!emailResponse) return this.helper.serviceResponse.errorResponse('Can\'t Send Email.', null, HttpStatus.INTERNAL_SERVER_ERROR);
+    await this.helper.mailService.sendMail(user.email, 'Password Reset Link', mailBody);
     return this.helper.serviceResponse.successResponse({ message: 'An email has been sent to ' + user.email + ' with further instructions.' }, HttpStatus.OK,);
   }
 }

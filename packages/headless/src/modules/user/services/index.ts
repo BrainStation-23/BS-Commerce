@@ -2,12 +2,12 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import * as Joi from "joi";
 import * as bcrypt from 'bcrypt';
 import { validateParams } from "src/decorators/service.validator";
-import { ChangePassword, UpdatedUser } from "src/entity/user";
+import { ChangePassword } from "src/entity/user";
 import { Helper } from "src/helper/helper.interface";
 import { ServiceErrorResponse, ServiceSuccessResponse } from "src/helper/serviceResponse/service.response.interface";
 import { UserRepository } from "../repositories";
 import { ChangePasswordSchema } from "../validations/password.validator";
-import { UserUpdateSchema } from "../validations/user.validator";
+import { UpdatedUser, UserUpdateSchema } from "../validations/user.validator";
 import { authConfig } from "config/auth";
 
 @Injectable()
@@ -28,16 +28,6 @@ export class UserService {
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;
 
-        if (data.address && data.address.id) {
-            const updatedUser = await this.userRepo.updateUserAndAddress(userId, user, data.address);
-            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User Address.', null, HttpStatus.BAD_REQUEST);
-            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
-        }
-        if (data.address && !data.address.id) {
-            const updatedUser = await this.userRepo.updateUserWithNewAddress(userId, user, data.address);
-            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Add new Address.', null, HttpStatus.BAD_REQUEST);
-            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
-        }
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User.', null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
@@ -46,7 +36,6 @@ export class UserService {
 
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: ChangePasswordSchema })
     async changePassword(userId: string, passwordDetails: ChangePassword): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
-        if (passwordDetails.newPassword !== passwordDetails.verifyPassword) return this.helper.serviceResponse.errorResponse('Passwords do not match.', null, HttpStatus.BAD_REQUEST);
 
         const user = await this.userRepo.getUserPassword({ id: userId });
         if (!user) return this.helper.serviceResponse.errorResponse('User is not found.', null, HttpStatus.BAD_REQUEST);
@@ -54,7 +43,7 @@ export class UserService {
         const doesPasswordMatch = await bcrypt.compare(passwordDetails.currentPassword, user.password);
         if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse('Current Password is incorrect.', null, HttpStatus.BAD_REQUEST,);
 
-        user.password = await bcrypt.hash(user.password, authConfig.salt!);
+        user.password = await bcrypt.hash(passwordDetails.newPassword, authConfig.salt!);
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Change Password.', null, HttpStatus.BAD_REQUEST);
