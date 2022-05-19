@@ -22,4 +22,12 @@ export class UserRepository {
     return await this.db.updateUser(userId, user);
   }
 
+  async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await this.db.updateUserWithNewAddress(userId, user, address);
+  }
+
+  async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await this.db.updateUserAndAddress(userId, user, address);
+  }
+
 }

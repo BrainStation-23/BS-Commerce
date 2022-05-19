@@ -28,6 +28,16 @@ export class UserService {
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;
 
+        if (data.address && data.address.id) {
+            const updatedUser = await this.userRepo.updateUserAndAddress(userId, user, data.address);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User Address.', null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
+        }
+        if (data.address && !data.address.id) {
+            const updatedUser = await this.userRepo.updateUserWithNewAddress(userId, user, data.address);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Add new Address.', null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
+        }
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User.', null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
