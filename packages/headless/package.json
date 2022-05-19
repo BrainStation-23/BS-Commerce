@@ -29,6 +29,7 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@types/nodemailer": "^6.4.4",
     "@types/passport-jwt": "^3.0.6",
     "apollo-server": "^3.6.7",
     "bcrypt": "^5.0.1",

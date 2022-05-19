@@ -1,15 +1,15 @@
-const { MAIL_HOST, MAIL_USER, MAIL_PASSWORD, MAIL_PORT, MAIL_SERVICE, MAIL_SECURE } = process.env;
+const { NODEMAILER_HOST, NODEMAILER_USER, NODEMAILER_PASS, NODEMAILER_PORT, NODEMAILER_SERVICE, NODEMAILER_SECURE } = process.env;
 
 export const nodemailerConfig = {
-    user: MAIL_USER!,
+    user: NODEMAILER_USER!,
     options: {
-        host: MAIL_HOST || 'smtp.example.com',
-        port: Number(MAIL_PORT) || 465,
-        secure: Boolean(MAIL_SECURE) || true,
-        service: MAIL_SERVICE || 'gmail',
+        host: NODEMAILER_HOST! || 'smtp.example.com',
+        port: Number(NODEMAILER_PORT!) || 465,
+        secure: Boolean(NODEMAILER_SECURE!) || true,
+        service: NODEMAILER_SERVICE! || 'gmail',
         auth: {
-            user: MAIL_USER!,
-            pass: MAIL_PASSWORD!
+            user: NODEMAILER_USER!,
+            pass: NODEMAILER_PASS!
         }
     }
 }

@@ -21,5 +21,4 @@ export class UserRepository {
   async updateUser(userId: string, user: User): Promise<User | null> {
     return await this.db.updateUser(userId, user);
   }
-
 }

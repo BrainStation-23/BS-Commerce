@@ -24,7 +24,7 @@ export class UserService {
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: UserUpdateSchema })
     async updateUser(userId: string, data: UpdatedUser): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
         let user = await this.userRepo.findUser({ id: userId });
-        if (!user) return this.helper.serviceResponse.errorResponse('User is not found.', null, HttpStatus.BAD_REQUEST);
+        if (!user) return this.helper.serviceResponse.errorResponse('Can\'t Get User.', null, HttpStatus.BAD_REQUEST);
 
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;
@@ -37,7 +37,6 @@ export class UserService {
 
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: ChangePasswordSchema })
     async changePassword(userId: string, passwordDetails: ChangePassword): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
-
         const user = await this.userRepo.getUserPassword({ id: userId });
         if (!user) return this.helper.serviceResponse.errorResponse('User is not found.', null, HttpStatus.BAD_REQUEST);
 
