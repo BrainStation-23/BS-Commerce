@@ -68,9 +68,9 @@ export class AuthService {
     const updatedUser = await this.userRepo.updateUser(user.id, user);
     if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update User.', null, HttpStatus.BAD_REQUEST);
 
-    const urlWithToken = 'http://' + host + '/auth/reset/' + token;
+    const mailBody = 'http://' + host + '/auth/reset/' + token;
 
-    const emailResponse = await this.helper.mailService.senEmail(user.email, urlWithToken);
+    const emailResponse = await this.helper.mailService.sendMail(user.email, 'Password Reset Link', mailBody);
     if (!emailResponse) return this.helper.serviceResponse.errorResponse('Can\'t Send Email.', null, HttpStatus.INTERNAL_SERVER_ERROR);
     return this.helper.serviceResponse.successResponse({ message: 'An email has been sent to ' + user.email + ' with further instructions.' }, HttpStatus.OK,);
   }

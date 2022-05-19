@@ -5,21 +5,20 @@ import { mailConfig } from 'config/mail';
 
 @Injectable()
 export class MailService implements IMailService {
-    async senEmail(email: string, urlWithToken?: string): Promise<Boolean | null> {
+    async sendMail(email: string, subject: string, mailBody: string): Promise<Boolean | null> {
         const mailOptions = {
             from: mailConfig.user,
             to: email,
-            subject: 'Reset Password Link',
-            html: urlWithToken
+            subject,
+            html: mailBody
         }
         const transporter = nodemailer.createTransport(mailConfig.options);
         try {
             const res = await transporter.sendMail(mailOptions);
-            console.log(res)
-            if (!res) return false
+            if (!res) return false;
             return true;
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 }

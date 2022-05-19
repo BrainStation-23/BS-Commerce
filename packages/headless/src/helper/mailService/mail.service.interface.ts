@@ -1,4 +1,4 @@
 
 export abstract class IMailService {
-    abstract senEmail: (email: string, urlWithToken?: string) => Promise<Boolean | null>;
+    abstract sendMail: (email: string, subject: string, mailBody: string) => Promise<Boolean | null>;
 }
