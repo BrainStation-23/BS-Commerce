@@ -25,6 +25,7 @@ export class AuthService {
     user.provider = 'local';
     user.displayName = user.firstName + ' ' + user.lastName;
     user.email = user.email.toLowerCase();
+    user.username = user.email;
     user.password = await bcrypt.hash(user.password, authConfig.salt!);
 
     const registeredUser = await this.userRepo.createUser(user);
@@ -35,7 +36,7 @@ export class AuthService {
   @validateParams({ schema: SigninSchema })
   async signIn(data: SignInData): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
 
-    const user = await this.userRepo.getUserPassword({ username: data.email });
+    const user = await this.userRepo.getUserPassword({ username: data.username });
     if (!user) return this.helper.serviceResponse.errorResponse('Invalid Credentials.', null, HttpStatus.BAD_REQUEST,);
 
     const doesPasswordMatch = await bcrypt.compare(data.password, user.password);
@@ -43,7 +44,7 @@ export class AuthService {
 
     const payload: JwtPayload = {
       id: user.id,
-      email: user.email,
+      username: user.username,
       logInTime: Date.now(),
     };
 

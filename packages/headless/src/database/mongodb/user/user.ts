@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/entity/user';
+import { Address, User } from 'src/entity/user';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { UserModel } from './user.model';
 @Injectable()
 export class UserDatabase implements IUserDatabase {
-  async createUser(user: User): Promise<User | null> {
-    const newUser = await UserModel.create(user);
+  async createUser(user: User): Promise<any | null> {
+    const createdUser = await UserModel.create(user);
+    const newUser = createdUser?.toJSON();
     delete newUser?.password;
     return newUser;
   }
@@ -15,14 +16,10 @@ export class UserDatabase implements IUserDatabase {
   }
 
   async findUser(query: Record<string, any>): Promise<User | null> {
-    const user = await UserModel.findOne(query).lean();
-    delete user?.password;
-    return user;
+    return await UserModel.findOne(query).lean().select('-password -_id');
   }
 
   async updateUser(userId: string, user: User): Promise<User | null> {
-    const updateUser = await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().exec();
-    delete updateUser?.password;
-    return updateUser;
+    return await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().select('-password -_id').exec();
   }
 }

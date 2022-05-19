@@ -1,9 +1,9 @@
 export class SignInData {
-    email: string;
+    username: string;
     password: string;
 }
 export class JwtPayload {
     id: string;
-    email: string;
+    username: string;
     logInTime: number;
 }

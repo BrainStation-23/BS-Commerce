@@ -3,6 +3,11 @@ import { Address, User } from 'src/entity/user';
 import { randomUUID } from 'crypto';
 
 const AddressSchema = new Schema<Address>({
+  id: {
+    type: String,
+    unique: true,
+    default: () => randomUUID()
+  },
   addressLine1: String,
   addressLine2: String,
   city: String,
@@ -24,6 +29,10 @@ const UserSchema = new Schema<User>({
   lastName: String,
   displayName: String,
   phone: {
+    type: String,
+    index: true
+  },
+  username: {
     type: String,
     index: true
   },

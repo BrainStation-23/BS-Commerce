@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+import { SignInData } from 'src/entity/auth';
 import { User } from 'src/entity/user';
 
 export const UserSchema = Joi.object<User, false>({
@@ -25,12 +26,11 @@ export const UserSchema = Joi.object<User, false>({
   }),
 });
 
-export const SigninSchema = Joi.object({
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in", "co"], }, }).required()
+export const SigninSchema = Joi.object<SignInData, false>({
+  username: Joi.string().required()
     .messages({
       'string.base': 'Invalid Credentials',
-      "string.email": `Please enter Correct Email Address`,
-      'any.required': 'Email is Required'
+      'any.required': 'Username is Required'
     }),
   password: Joi.string().required().messages({
     'string.base': 'Invalid Credentials',

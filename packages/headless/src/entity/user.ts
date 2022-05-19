@@ -1,4 +1,5 @@
 export class Address {
+  id?: string;
   addressLine1: string;
   addressLine2?: string;
   city: string;
@@ -11,6 +12,7 @@ export class User {
   lastName: string;
   displayName?: string;
   phone?: string;
+  username: string;
   email: string;
   password: string;
   provider?: string;
@@ -30,7 +32,7 @@ export class UpdatedUser {
   providerData?: object;
   additionalProviderData?: object;
   phone?: string;
-  addresses?: [Address];
+  address?: Address;
   active?: boolean;
   gender?: string;
   status?: string;

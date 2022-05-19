@@ -7,7 +7,7 @@ import { Helper } from "src/helper/helper.interface";
 import { ServiceErrorResponse, ServiceSuccessResponse } from "src/helper/serviceResponse/service.response.interface";
 import { UserRepository } from "../repositories";
 import { ChangePasswordSchema } from "../validations/password.validator";
-import { UserUpdateSchema } from "../validations/user.update.validator";
+import { UserUpdateSchema } from "../validations/user.validator";
 import { authConfig } from "config/auth";
 
 @Injectable()
@@ -31,6 +31,7 @@ export class UserService {
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User.', null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
+
     }
 
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: ChangePasswordSchema })

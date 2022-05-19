@@ -6,7 +6,7 @@ input UserInput {
 }
 
 input SignInInput {
-  email: String!
+  username: String!
   password: String!
 }
 
@@ -15,6 +15,7 @@ type User {
   firstName: String!
   lastName: String!
   displayName: String!
+  username: String!
   email: String!
   provider: String
 }
