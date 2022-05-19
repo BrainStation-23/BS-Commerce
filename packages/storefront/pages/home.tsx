@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import productPic from "../public/product.jpeg";
 import { InferGetServerSidePropsType } from "next";
 
-const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage = () => {
   return (
     <Layout>
       <header className="bg-dark py-5">
@@ -93,14 +93,3 @@ const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideP
   );
 };
 export default Home;
-
-export const getServerSideProps: GetServerSideProps = async(context) => {
-  const res = await fetch(`http://localhost:3000/products`);
-  const data : [] = await res.json()
-  // console.log(data)
-  return {
-    props:{
-      data
-    } // will be passed to the page component as props
-  }
-}
