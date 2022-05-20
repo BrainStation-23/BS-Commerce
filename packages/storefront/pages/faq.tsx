@@ -69,7 +69,9 @@ const Faq: NextPage = () => {
                 </p>
               </div>
               <div className={styles.accordianArea}>
-                <Accordion accordionList={accordionList} />
+                {accordionList?.map((item, index) => (
+                  <Accordion title={item.title} body={item.body} key={index} />
+                ))}
               </div>
             </div>
           </div>

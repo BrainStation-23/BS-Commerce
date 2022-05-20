@@ -1,37 +1,27 @@
-import React, { FC } from "react";
-import { accordionBody } from "../utils/types";
+import React, { FC, useState } from "react";
 
 interface Props {
-  accordionList: accordionBody[];
+  title: string;
+  body: string;
 }
 
-const Accordion: FC<Props> = ({ accordionList }) => {
+const Accordion: FC<Props> = ({ title, body }) => {
+  const [isActive, setIsActive] = useState(false);
+
   return (
-    <div className="accordion" id="accordionExample">
-      {accordionList?.map((item, index) => (
-        <div className="accordion-item mt-3" key={index}>
-          <h2 className="accordion-header" id={`headingOne${index}`}>
-            <button
-              className="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target={`#collapseOne${index}`}
-              aria-expanded="true"
-              aria-controls={`collapseOne${index}`}
-            >
-              {item.title}
-            </button>
-          </h2>
-          <div
-            id={`collapseOne${index}`}
-            className="accordion-collapse collapse"
-            aria-labelledby={`headingOne${index}`}
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">{item.body}</div>
-          </div>
-        </div>
-      ))}
+    <div className="mb-3">
+      <div
+        className={`${
+          isActive ? "bg-green-500 rounded-t-lg text-white" : ""
+        } flex justify-between p-3`}
+        onClick={() => setIsActive(!isActive)}
+      >
+        <div>{title}</div>
+        <div>{isActive ? "-" : "+"}</div>
+      </div>
+      {isActive && (
+        <div className="p-4 border border-slate-300 border-solid">{body}</div>
+      )}
     </div>
   );
 };

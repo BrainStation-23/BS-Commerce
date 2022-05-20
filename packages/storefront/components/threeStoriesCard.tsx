@@ -5,8 +5,6 @@ import Container from "./container";
 
 import { storiesBody } from "../utils/types";
 
-import styles from "../styles/ThreeStoriesCard.module.css";
-
 interface Props {
   leftStory: boolean;
   threeStoriesList: storiesBody[];
@@ -14,21 +12,18 @@ interface Props {
 
 const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
   return (
-    <div className={styles.about_gallery_section}>
-      <Container className={styles.about_gallery_container}>
-        <div className="row">
+    <div className="mb-10">
+      <Container>
+        <div className="flex flex-wrap">
           {threeStoriesList.map((item, index) => (
-            <div className="col-lg-4 col-md-4 col-sm-6" key={index}>
-              <div className="gallery_thumb">
+            <div
+              className="basis-full p-1 md:basis-1/3 md:p-4 text-center"
+              key={index}
+            >
+              <div className="w-full">
                 <Image alt="" src={item.image} height={227} width={416} />
               </div>
-              <div
-                className={
-                  leftStory
-                    ? styles.about_gallery_left_content
-                    : styles.about_gallery_content
-                }
-              >
+              <div className={leftStory ? "pt-5" : "pt-5 text-center"}>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </div>
