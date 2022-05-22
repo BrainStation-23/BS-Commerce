@@ -4,3 +4,7 @@
   display: flex !important;
   flex-direction: inherit;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
