@@ -1,10 +1,15 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
 @import "~bootstrap/scss/bootstrap";
 #__next {
   height: 100%;
   display: flex !important;
   flex-direction: inherit;
+  font-family: Work Sans;
+  letter-spacing: .02em;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
