@@ -6,8 +6,6 @@ import Container from "@/components/container";
 
 import { accordionBody } from "../utils/types";
 
-import styles from "@/styles/Faq.module.css";
-
 const accordionList: accordionBody[] = [
   {
     title:
@@ -49,31 +47,27 @@ const Faq: NextPage = () => {
   return (
     <>
       <PageTitle title="FAQ" />
-      <div className="faq_container_area">
+      <div className="mt-10">
         <Container>
-          <div className="row">
-            <div className="col-12">
-              <div>
-                <h4>
-                  Below are frequently asked questions, you may find the answer
-                  for yourself
-                </h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                  id erat sagittis, faucibus metus malesuada, eleifend turpis.
-                  Mauris semper augue id nisl aliquet, a porta lectus mattis.
-                  Nulla at tortor augue. In eget enim diam. Donec gravida tortor
-                  sem, ac fermentum nibh rutrum sit amet. Nulla convallis mauris
-                  vitae congue consequat. Donec interdum nunc purus, vitae
-                  vulputate arcu fringilla quis. Vivamus iaculis euismod dui.
-                </p>
-              </div>
-              <div className={styles.accordianArea}>
-                {accordionList?.map((item, index) => (
-                  <Accordion title={item.title} body={item.body} key={index} />
-                ))}
-              </div>
-            </div>
+          <div className="pb-5">
+            <h4 className="text-lg mb-4 font-semibold">
+              Below are frequently asked questions, you may find the answer for
+              yourself
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id
+              erat sagittis, faucibus metus malesuada, eleifend turpis. Mauris
+              semper augue id nisl aliquet, a porta lectus mattis. Nulla at
+              tortor augue. In eget enim diam. Donec gravida tortor sem, ac
+              fermentum nibh rutrum sit amet. Nulla convallis mauris vitae
+              congue consequat. Donec interdum nunc purus, vitae vulputate arcu
+              fringilla quis. Vivamus iaculis euismod dui.
+            </p>
+          </div>
+          <div className="py-5">
+            {accordionList?.map((item, index) => (
+              <Accordion title={item.title} body={item.body} key={index} />
+            ))}
           </div>
         </Container>
       </div>

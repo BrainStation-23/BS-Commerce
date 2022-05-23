@@ -21,7 +21,6 @@ const CarouselSlider: FC<Props> = ({ CarouselList }) => {
       }}
       pagination={{
         clickable: true,
-        el: ".swiper-pagination",
       }}
       modules={[Autoplay]}
     >
