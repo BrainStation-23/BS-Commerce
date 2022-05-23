@@ -17,7 +17,7 @@ const CarouselSlider: FC<Props> = ({ CarouselList }) => {
     <Swiper
       slidesPerView={1}
       autoplay={{
-        delay: 2000,
+        delay: 3000,
       }}
       pagination={{
         clickable: true,
