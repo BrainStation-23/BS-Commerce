@@ -1,0 +1,31 @@
+.carousel-caption {
+    top:25%;
+    bottom:20%;
+    text-align: left;
+}
+.carousel-item h1, h2, p{
+    max-width: 50%;
+    color: black;
+}
+.carousel-item img{
+    height: 600px;
+    text-decoration: none;
+}
+
+.carousel-caption a{
+    text-decoration: none;
+    padding: 30%;
+}
+.carousel-caption p{
+    text-decoration: none;
+    padding-bottom: 30px;
+}
+/* .carousel-control-prev{
+    color: black;
+    background-color: black;
+    border-color: red;
+} */
+
+.carousel-indicators [data-bs-target]{
+    background-color: black;
+}
