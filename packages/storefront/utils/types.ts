@@ -8,3 +8,9 @@ export interface accordionBody {
     title: string;
     description:string
   }
+
+  export interface CarouselBody {
+    title: string;
+    body:string;
+    image: string;
+  }

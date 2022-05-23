@@ -13,7 +13,7 @@ const Accordion: FC<Props> = ({ title, body }) => {
       <div
         className={`${
           isActive ? "bg-green-500 rounded-t-lg text-white" : ""
-        } flex justify-between p-3`}
+        } flex justify-between p-3 cursor-pointer`}
         onClick={() => setIsActive(!isActive)}
       >
         <div>{title}</div>

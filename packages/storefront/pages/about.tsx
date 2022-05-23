@@ -5,10 +5,9 @@ import Accordion from "@/components/accordion";
 import PageTitle from "@/components/pageTitle";
 import ThreeStoriesCard from "@/components/threeStoriesCard";
 import Container from "@/components/container";
+import CarouselSlider from "@/components/CarouselSlider";
 
-import { accordionBody, storiesBody } from "../utils/types";
-
-import styles from "@/styles/About.module.css";
+import { accordionBody, storiesBody, CarouselBody } from "../utils/types";
 
 const accordionList: accordionBody[] = [
   {
@@ -46,6 +45,27 @@ const threeStoriesList: storiesBody[] = [
       "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about4_large.jpg?v=1588135356",
     description:
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto",
+  },
+];
+
+const CarouselList: CarouselBody[] = [
+  {
+    title: "Rebecka Filso",
+    body: "I'm so happy with all of the themes, great support, could not wish for more. These people are geniuses! Kudo's from the Netherlands!..",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial2_100x100.png?v=1588138748",
+  },
+  {
+    title: "Rebecka Filso",
+    body: "I'm so happy with all of the themes, great support, could not wish for more. These people are geniuses! Kudo's from the Netherlands!..",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial1_100x100.png?v=1588138630",
+  },
+  {
+    title: "Rebecka Filso",
+    body: "I'm so happy with all of the themes, great support, could not wish for more. These people are geniuses! Kudo's from the Netherlands!..",
+    image:
+      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial2_100x100.png?v=1588138748",
   },
 ];
 
@@ -144,7 +164,7 @@ const About: NextPage = () => {
       <div className="pb-16">
         <Container>
           <div className="flex flex-wrap">
-            <div className="basis-full p-1 md:p-4 md:basis-1/2">
+            <div className="p-1 w-full md:p-4 md:w-2/4">
               <h2 className="text-2xl text-center mb-5">
                 What Can We Do For You?
               </h2>
@@ -152,69 +172,10 @@ const About: NextPage = () => {
                 <Accordion title={item.title} body={item.body} key={index} />
               ))}
             </div>
-            <div className="basis-full p-1 md:p-4 md:basis-1/2">
-              <h2>What Our Customers Say?</h2>
-              <div
-                id="carouselExampleInterval"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-inner">
-                  <div
-                    className={`carousel-item active ${styles.single_testimonial}`}
-                    data-bs-interval="10000"
-                  >
-                    <Image
-                      src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial2_100x100.png?v=1588138748"
-                      alt="files/testimonial2.png"
-                      width={100}
-                      height={100}
-                    />
-                    <div>
-                      <div>Rebecka Filso</div>
-                      <p>
-                        I'm so happy with all of the themes, great support,
-                        could not wish for more. These people are geniuses!
-                        Kudo's from the Netherlands!..
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={`carousel-item ${styles.single_testimonial}`}
-                    data-bs-interval="2000"
-                  >
-                    <Image
-                      src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial1_100x100.png?v=1588138630"
-                      alt="files/testimonial1.png"
-                      width={100}
-                      height={100}
-                    />
-                    <div>
-                      <div>Rebecka Filso</div>
-                      <p>
-                        I'm so happy with all of the themes, great support,
-                        could not wish for more. These people are geniuses!
-                        Kudo's from the Netherlands!..
-                      </p>
-                    </div>
-                  </div>
-                  <div className={`carousel-item ${styles.single_testimonial}`}>
-                    <Image
-                      src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/testimonial2_100x100.png?v=1588138748"
-                      alt="files/testimonial2.png"
-                      width={100}
-                      height={100}
-                    />
-                    <div>
-                      <div>Rebecka Filso</div>
-                      <p>
-                        I'm so happy with all of the themes, great support,
-                        could not wish for more. These people are geniuses!
-                        Kudo's from the Netherlands!..
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <div className="p-1 w-full md:p-4 md:w-2/4 text-center">
+              <h2 className="text-2xl">What Our Customers Say?</h2>
+              <div className="mt-5">
+                <CarouselSlider CarouselList={CarouselList} />
               </div>
             </div>
           </div>
