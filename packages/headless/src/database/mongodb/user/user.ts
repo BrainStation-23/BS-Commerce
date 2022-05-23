@@ -1,22 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/entity/user';
+import { Address, User } from 'src/entity/user';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { UserModel } from './user.model';
 @Injectable()
 export class UserDatabase implements IUserDatabase {
-  async createUser(user: User): Promise<User | null> {
-    const newUser = await UserModel.create(user);
+  async createUser(user: User): Promise<any | null> {
+    const createdUser = await UserModel.create(user);
+    const newUser = createdUser?.toJSON();
     delete newUser?.password;
     return newUser;
   }
 
-  async findSigninUser(username: string): Promise<User | null> {
-    return await UserModel.findOne({ username }).lean();
+  async getUserPassword(query: Record<string, string>): Promise<User | null> {
+    return await UserModel.findOne(query).lean();
   }
 
-  async findUser(username: string): Promise<User | null> {
-    const user = await UserModel.findOne({ username }).lean();
-    delete user?.password;
-    return user;
+  async findUser(query: Record<string, any>): Promise<User | null> {
+    return await UserModel.findOne(query).lean().select('-password -_id');
+  }
+
+  async updateUser(userId: string, user: User): Promise<User | null> {
+    return await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().select('-password -_id').exec();
+  }
+
+  async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await UserModel.findOneAndUpdate({ id: userId }, { $set: user, $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
+  }
+
+  async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await UserModel.findOneAndUpdate({ id: userId, 'addresses.id': address.id }, { $set: { ...user, 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
   }
 }

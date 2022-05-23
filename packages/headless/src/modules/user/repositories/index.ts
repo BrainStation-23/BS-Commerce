@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/entity/user';
+import { Address, User } from 'src/entity/user';
 import { IUserDatabase } from './user.database.interface';
+
 @Injectable()
 export class UserRepository {
   constructor(private readonly db: IUserDatabase) { }
@@ -9,11 +10,24 @@ export class UserRepository {
     return await this.db.createUser(user);
   }
 
-  async findUser(username: string): Promise<User | null> {
-    return await this.db.findUser(username);
+  async findUser(query: Record<string, any>): Promise<User | null> {
+    return await this.db.findUser(query);
   }
 
-  async findSigninUser(username: string): Promise<User | null> {
-    return await this.db.findSigninUser(username);
+  async getUserPassword(query: Record<string, string>): Promise<User | null> {
+    return await this.db.getUserPassword(query);
   }
+
+  async updateUser(userId: string, user: User): Promise<User | null> {
+    return await this.db.updateUser(userId, user);
+  }
+
+  async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await this.db.updateUserWithNewAddress(userId, user, address);
+  }
+
+  async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
+    return await this.db.updateUserAndAddress(userId, user, address);
+  }
+
 }

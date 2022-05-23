@@ -1,18 +1,15 @@
 // Mongodb dependency implementations
-import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user'
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { dbConfig } from 'config/database';
 
-type CLASS_NAME = 'WISHLIST' | 'USER';
-const db = dbConfig.db || 'MONGO';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT';
+const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
   try {
     switch (db) {
       case 'MONGO':
         switch (className) {
-          case 'WISHLIST':
-            return WishListDatabaseMongo;
           case 'USER':
             return UserDatabaseMongo;
 

@@ -30,18 +30,18 @@ export function validateParams(...validators: Array<Validators>) {
         descriptor: TypedPropertyDescriptor<any>
     ) {
         const method = descriptor.value;
-        descriptor.value = function (...args) {
+        descriptor.value = function (...args: any[]) {
             const response: ServiceErrorResponse = { error: '', errors: {} };
 
             for (let i = 0; i < validators.length; i++) {
-                const { schema, options = { abortEarly: false } } = validators[i];
+                const { schema, options = { abortEarly: false, errors: { wrap: { label: '' } } } } = validators[i];
                 const { error } = schema.validate(args[i], options);
                 if (error) {
                     error.details.forEach((err) => {
-                        response.error += err.message;
+                        response.error += err.message + '.';
                         err.path[0] && (response.errors[err.path[0]] = [err.message]);
                     })
-                    throw new HttpException(response, HttpStatus.BAD_REQUEST);
+                    throw new HttpException(response, HttpStatus.UNPROCESSABLE_ENTITY);
                 }
             }
             return method.apply(this, args);
