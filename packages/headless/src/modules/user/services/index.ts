@@ -28,6 +28,21 @@ export class UserService {
 
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;
+        const { addresses, ...rest } = user;
+
+        // user update his/her old address
+        if (data.address && data.address.id) {
+            const updatedUser = await this.userRepo.updateUserAndAddress(userId, rest, data.address);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User Address.', null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
+        }
+
+        // user add his/her new address
+        if (data.address && !data.address.id) {
+            const updatedUser = await this.userRepo.updateUserWithNewAddress(userId, rest, data.address);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Add new Address.', null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
+        }
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Update This User.', null, HttpStatus.BAD_REQUEST);
@@ -37,6 +52,7 @@ export class UserService {
 
     @validateParams({ schema: Joi.string().required().label('userId') }, { schema: ChangePasswordSchema })
     async changePassword(userId: string, passwordDetails: ChangePassword): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
+
         const user = await this.userRepo.getUserPassword({ id: userId });
         if (!user) return this.helper.serviceResponse.errorResponse('User is not found.', null, HttpStatus.BAD_REQUEST);
 
