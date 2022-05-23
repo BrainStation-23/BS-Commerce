@@ -1,5 +1,5 @@
 import "../styles/App.scss";
-import "./Slider/style.css"
+import "../components/global/style/style.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import { useEffect } from "react";

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import productPic from "../public/product.jpeg";
-import SliderComponent from "./Slider/slider.component";
+import SliderComponent from "../components/global/slider.component";
 
 const Home: NextPage = () => {
   return (
