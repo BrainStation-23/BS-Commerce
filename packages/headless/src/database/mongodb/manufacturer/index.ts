@@ -1,7 +1,7 @@
 import { IManufacturerDatabase } from './../../../modules/manufacturer/repositories/manufacturer.database.interface';
 import { Manufacturer } from '../../../entity/manufacturer';
 import { ManufacturerModel } from './manufacturer.model';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Query } from '@nestjs/common';
 
 @Injectable()
 export class ManufacturerDatabase implements IManufacturerDatabase {
@@ -39,12 +39,12 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
 
     /**
      * The getManufacturer function calls findOne() method through ManufacturerModel
-     * matching database id with manufacturerId 
+     * matching database with query as manufacturer ID or name or anything else 
      * @param manufacturerId 
      * @returns {Promise<Object>} manufacturer | null
      */
-    async getManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
-        return await ManufacturerModel.findOne({ id: manufacturerId }).lean();
+    async getManufacturer(query: Record<string, string>): Promise<Manufacturer | null> {
+        return await ManufacturerModel.findOne(query).lean();
     }
 
     /**

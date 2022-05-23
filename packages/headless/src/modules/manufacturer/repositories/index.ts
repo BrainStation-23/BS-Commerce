@@ -7,18 +7,12 @@ import { IManufacturerDatabase } from './manufacturer.database.interface';
 export class ManufacturerRepository {
     constructor(private readonly db: IManufacturerDatabase) { }
 
-    /**
-     * randomUUID() is used to generate random id and it is added to the body manufacturer before passing to the db function
-     * @param manufacturer manufacturer comes through JSON body
-     * @returns {Object} Object of Manufacturer | null
-     */
     async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
-        manufacturer.id = randomUUID();
         return await this.db.createManufacturer(manufacturer);
     }
 
-    async getManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
-        return await this.db.getManufacturer(manufacturerId);
+    async getManufacturer(query: Record<string,string>): Promise<Manufacturer | null> {
+        return await this.db.getManufacturer(query);
     }
 
     async getAllManufacturers(skip?: number, limit?: number): Promise<Manufacturer[]> {

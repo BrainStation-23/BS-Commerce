@@ -17,18 +17,18 @@ export class ManufacturerService {
 
     /**
      * The addManufacturer function checks firstly if it already exists or not
+     * by searching in db with manufacturer name 
      * then calls the createManufacturer from manufacturerRepo
-     * TODO: Validation on Input ID
      * @param manufacturer 
      * @returns { Promise<Object> } Object of Success or Error
      * 
      */
     @validateParams({ schema: ManufacturerCreateSchema })
     async addManufacturer(manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-        const isManufacturerExist = await this.manufacturerRepo.getManufacturer(manufacturer.id);
+        const isManufacturerExist = await this.manufacturerRepo.getManufacturer({name: manufacturer.name});
 
         if (isManufacturerExist) {
-            return this.helper.serviceResponse.errorResponse('Manufacturer already exists', { manufacturer: [`This manufacturer id ${manufacturer.id} already exists. Try with different Id`] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse('Manufacturer already exists', { manufacturer: [`This manufacturer "${manufacturer.name}" already exists. Try with different name`] }, HttpStatus.BAD_REQUEST);
         }
 
         const newManufacturer = await this.manufacturerRepo.createManufacturer(manufacturer);
@@ -71,7 +71,7 @@ export class ManufacturerService {
      */
     @validateParams({ schema: Joi.string().required().label('Id') })
     async getManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-        const foundManufacturer = await this.manufacturerRepo.getManufacturer(manufacturerId);
+        const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 
         if (!foundManufacturer) {
             return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Not found"] }, HttpStatus.BAD_REQUEST);
@@ -90,7 +90,7 @@ export class ManufacturerService {
      */
     @validateParams({ schema: Joi.string().required().label('Id') }, { schema: ManufacturerCreateSchema })
     async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-        const foundManufacturer = await this.manufacturerRepo.getManufacturer(manufacturerId);
+        const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 
         if (!foundManufacturer) {
             return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Manufacturer not found. Try with different id"] }, HttpStatus.BAD_REQUEST);
@@ -113,7 +113,7 @@ export class ManufacturerService {
      */
     @validateParams({ schema: Joi.string().required().label('id') })
     async deleteManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-        const foundManufacturer = await this.manufacturerRepo.getManufacturer(manufacturerId);
+        const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 
         if (!foundManufacturer) {
             return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Manufacturer not found. Try with different id"] }, HttpStatus.BAD_REQUEST);
