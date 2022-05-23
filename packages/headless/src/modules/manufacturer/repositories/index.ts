@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';
 
