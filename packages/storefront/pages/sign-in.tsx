@@ -61,7 +61,7 @@ const Signin: NextComponentType = (props) => {
                     <div className="mb-4">
                       <Field
                         type="password"
-                        className="w-full p-2 placeholder-gray-800"
+                        className="w-full p-2 placeholder-gray-800 outline-0"
                         id="password"
                         name="password"
                         placeholder="Password"
