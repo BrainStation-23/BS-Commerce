@@ -6,18 +6,21 @@ import store from "../store/store";
 import { Provider, useSelector } from "react-redux";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
+
   useEffect(() => {
     typeof document !== undefined
       ? require("bootstrap/dist/js/bootstrap")
       : null;
   }, []);
+
   return (
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps}/>
-      </Layout>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </>
   );
 }
 

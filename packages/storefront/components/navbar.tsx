@@ -5,14 +5,6 @@ import { useSelector } from "react-redux";
 
 const Navbar: NextComponentType = () => {
   const loggedInUser = useSelector((state: any) => state.userReducer.loggedInUser);
-
-  //const [loggedInUser, setLoggedInUser] = useState(null);
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}') : null;
-  //   setLoggedInUser(user);
-  // }, [])
-
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">

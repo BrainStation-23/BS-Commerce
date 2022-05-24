@@ -16,17 +16,17 @@ const Signin: NextComponentType = (props) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center mt-5">
-      <div
-        className="relative flex flex-col min-w-0 rounded break-words border border-1 border-gray-300 m-12"
-        style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
-      >
-        <div className="flex-auto">
-          <h2 className="flex flex-wrap justify-center mt-4">Login</h2>
-          <p className="flex flex-wrap justify-center mb-4 text-gray-600">
+    <>
+      <div className="flex flex-wrap justify-center">
+        <div
+          className="flex flex-col my-20 py-7 sm:mx-3 md:mx-5"
+          style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
+        >
+          <h2 className="text-center text-gray-800">Login</h2>
+          <p className="text-center text-gray-500 mx-5">
             Please login using account detail below.
           </p>
-          <div className="m-6">
+          <div className="sm:m-5 my-3 md:mx-10">
             <Formik
               initialValues={{
                 phone: "",
@@ -45,10 +45,10 @@ const Signin: NextComponentType = (props) => {
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    <div className="mb-4 m-6">
+                    <div className="mb-4">
                       <Field
                         type="phone"
-                        className="block appearance-none w-full p-2 mb-1 text-base leading-normal bg-white outline-0"
+                        className="w-full p-2 placeholder-gray-800"
                         id="phone"
                         name="phone"
                         placeholder="Phone"
@@ -58,10 +58,10 @@ const Signin: NextComponentType = (props) => {
                       </div>
                     </div>
 
-                    <div className="mb-4 m-6">
+                    <div className="mb-4">
                       <Field
                         type="password"
-                        className="block appearance-none w-full p-2 mb-1 text-base leading-normal bg-white outline-0"
+                        className="w-full p-2 placeholder-gray-800"
                         id="password"
                         name="password"
                         placeholder="Password"
@@ -70,17 +70,16 @@ const Signin: NextComponentType = (props) => {
                         <ErrorMessage name="password" />
                       </div>
                     </div>
-                    <div className="flex flex-wrap justify-between">
+                    <div className="flex flex-wrap sm:justify-end md:justify-between">
                       <button
                         type="submit"
-                        className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-2 px-3 leading-normal no-underline text-white my-3 mx-4 px-4"
-                        style={{ background: "#40a944" }}
+                        className="text-white bg-green-600/100 hover:bg-black rounded text-center py-2 my-2 sm:w-full md:w-1/4"
                       >
                         Sign In
                       </button>
-                      <div className="mx-4 my-3 text-decoration-none">
+                      <div className=" sm:my-0 md:my-3 text-decoration-none">
                         <Link href="/forgot-password">
-                          <a className="text-decoration-none text-black font-weight-light">
+                          <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
                             Forgot your password?
                           </a>
                         </Link>
@@ -90,9 +89,9 @@ const Signin: NextComponentType = (props) => {
                 );
               }}
             </Formik>
-            <div className="mx-4 mt-2 mb-3 text-decoration-none">
+            <div className="text-decoration-none mt-3">
               <Link href="/sign-up">
-                <a className="text-decoration-none text-black font-weight-light">
+                <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
                   Create account
                 </a>
               </Link>
@@ -100,89 +99,7 @@ const Signin: NextComponentType = (props) => {
           </div>
         </div>
       </div>
-    </div>
-    // <div className="d-flex flex-wrap justify-content-center mt-5">
-    //     <div className="card m-5" style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}>
-    //       <div className="card-body">
-    //       <h3 className="d-flex flex-wrap justify-content-center m-3">Login</h3>
-    //       <p className="d-flex flex-wrap justify-content-center mb-4 text-secondary">
-    //         Please login using account detail below.
-    //       </p>
-    //       <div className="m-3">
-    //         <Formik
-    //           initialValues={{
-    //             phone: "",
-    //             password: "",
-    //           }}
-    //           onSubmit={(values, actions) => {
-    //             const data = {
-    //               phone: values.phone,
-    //               password: values.password,
-    //             };
-    //             handleSignin(data);
-    //             actions.setSubmitting(false);
-    //           }}
-    //           validationSchema={loginSchema}
-    //         >
-    //           {(formikprops) => {
-    //             return (
-    //               <Form onSubmit={formikprops.handleSubmit}>
-    //                 <div className="form-group m-3">
-    //                   <Field
-    //                     type="phone"
-    //                     className="form-control"
-    //                     id="phone"
-    //                     name="phone"
-    //                     placeholder="Phone"
-    //                   />
-    //                   <div className="invalid-feedback d-block">
-    //                     <ErrorMessage name="phone" />
-    //                   </div>
-    //                 </div>
-
-    //                 <div className="form-group m-3">
-    //                   <Field
-    //                     type="password"
-    //                     className="form-control"
-    //                     id="password"
-    //                     name="password"
-    //                     placeholder="Password"
-    //                   />
-    //                   <div className="invalid-feedback d-block">
-    //                     <ErrorMessage name="password" />
-    //                   </div>
-    //                 </div>
-    //                 <div className="d-flex flex-wrap justify-content-between">
-    //                   <button
-    //                     type="submit"
-    //                     className="btn text-white my-3 mx-3 px-4"
-    //                     style={{ background: "#40a944" }}
-    //                   >
-    //                     Sign In
-    //                   </button>
-    //                   <div className="mx-3 my-3 text-decoration-none">
-    //                     <Link href="/forgot-password">
-    //                       <a className="text-decoration-none text-black font-weight-light">
-    //                         Forgot your password?
-    //                       </a>
-    //                     </Link>
-    //                   </div>
-    //                 </div>
-    //               </Form>
-    //             );
-    //           }}
-    //         </Formik>
-    //         <div className="mx-3 my-2 text-decoration-none">
-    //           <Link href="/sign-up">
-    //             <a className="text-decoration-none text-black font-weight-light">
-    //               Create account
-    //             </a>
-    //           </Link>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    </>
   );
 };
 
