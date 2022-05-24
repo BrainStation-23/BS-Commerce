@@ -48,12 +48,12 @@ const Signin: NextComponentType = (props) => {
                     <div className="mb-4">
                       <Field
                         type="phone"
-                        className="w-full p-2 placeholder-gray-800"
+                        className="w-full p-2 placeholder-gray-800 outline-0"
                         id="phone"
                         name="phone"
                         placeholder="Phone"
                       />
-                      <div className="errMsg text-red-600">
+                      <div className="errMsg text-red-600 outline-0">
                         <ErrorMessage name="phone" />
                       </div>
                     </div>
