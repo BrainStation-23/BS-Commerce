@@ -7,7 +7,7 @@ export class Address {
   postCode: string;
 }
 export class User {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   displayName?: string;
@@ -21,7 +21,7 @@ export class User {
   resetPasswordToken?: string;
   resetPasswordExpires?: number;
   gender?: string;
-  addresses?: [Address];
+  addresses?: Address[];
   status: string;
 }
 
