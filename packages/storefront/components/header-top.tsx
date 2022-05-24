@@ -1,10 +1,10 @@
 import type { NextComponentType } from "next";
 
-const Header: NextComponentType = () => {
+const HeaderTop: NextComponentType = () => {
   return (
     <>
-      <header className="flex justify-center py-2">
-        <div className="flex justify-between w-3/5">
+      <header className="flex justify-center py-2 border-b-2">
+        <div className="flex justify-between w-3/5 text-sm">
           <div className="space-x-2">
             <div className="group inline-block relative">
               <button className="inline-flex items-center">
@@ -43,13 +43,13 @@ const Header: NextComponentType = () => {
               </button>
               <ul className="absolute hidden text-gray-700 pt-1 group-hover:block">
                 <li className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
-                  English
+                  USD
                 </li>
                 <li className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
-                  Arabic
+                  EUR
                 </li>
                 <li className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
-                  French
+                  GBP
                 </li>
               </ul>
             </div>
@@ -61,4 +61,4 @@ const Header: NextComponentType = () => {
   );
 };
 
-export default Header;
+export default HeaderTop;
