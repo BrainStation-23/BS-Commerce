@@ -7,7 +7,7 @@ const UnlimitedService: FC = () => {
   return (
     <Container>
       <div className="flex flex-wrap items-center">
-        <div className="w-full md:w-1/2 pb-2">
+        <div className="w-full md:w-1/2 pb-2 pr-2">
           <Image
             src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/services4.jpg?v=1590916919"
             alt=""
