@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
 import Image from "next/image";
-import Container from "../common/components/container";
+import Container from "./container";
 
-import { storiesBody } from "../../utils/types";
+import { storiesBody } from "../../../utils/types";
 
 interface Props {
   leftStory: boolean;

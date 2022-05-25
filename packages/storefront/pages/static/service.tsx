@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import PageTitle from "@/components/common/components/pageTitle";
-import ThreeStoriesCard from "@/components/static/threeStoriesCard";
+import ThreeStoriesCard from "@/components/common/components/threeStoriesCard";
 import Container from "@/components/common/components/container";
 
 import { storiesBody } from "../../utils/types";

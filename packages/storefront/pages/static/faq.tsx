@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 
-import Accordion from "@/components/common/components/accordion";
 import PageTitle from "@/components/common/components/pageTitle";
-import Container from "@/components/common/components/container";
+import FaqContentArea from "@/components/static/faq/contentArea";
 
 import { accordionBody } from "../../utils/types";
 
@@ -56,28 +55,7 @@ const Faq: NextPage = () => {
     <>
       <PageTitle title="FAQ" />
       <div className="mt-10">
-        <Container>
-          <div className="pb-5">
-            <h4 className="text-lg mb-4 font-semibold">
-              Below are frequently asked questions, you may find the answer for
-              yourself
-            </h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id
-              erat sagittis, faucibus metus malesuada, eleifend turpis. Mauris
-              semper augue id nisl aliquet, a porta lectus mattis. Nulla at
-              tortor augue. In eget enim diam. Donec gravida tortor sem, ac
-              fermentum nibh rutrum sit amet. Nulla convallis mauris vitae
-              congue consequat. Donec interdum nunc purus, vitae vulputate arcu
-              fringilla quis. Vivamus iaculis euismod dui.
-            </p>
-          </div>
-          <div className="py-5">
-            {accordionList?.map((item, index) => (
-              <Accordion title={item.title} body={item.body} key={index} />
-            ))}
-          </div>
-        </Container>
+        <FaqContentArea accordionList={accordionList} />
       </div>
     </>
   );
