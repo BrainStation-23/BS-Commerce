@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import Image from "next/image";
-import Container from "../../common/components/container";
+import Container from "../../global/components/container";
 
 const ImageWithDescription: FC = () => {
   return (

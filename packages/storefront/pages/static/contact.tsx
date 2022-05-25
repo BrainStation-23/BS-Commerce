@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import PageTitle from "@/components/common/components/pageTitle";
+import PageTitle from "@/components/global/components/pageTitle";
 import MapArea from "@/components/static/contact/mapArea";
 import ContactArea from "@/components/static/contact/contactArea";
 

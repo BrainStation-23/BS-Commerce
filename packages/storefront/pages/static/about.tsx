@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
-import PageTitle from "@/components/common/components/pageTitle";
-import ThreeStoriesCard from "@/components/common/components/threeStoriesCard";
+import PageTitle from "@/components/global/components/pageTitle";
+import ThreeStoriesCard from "@/components/global/components/threeStoriesCard";
 import ImageWithDescription from "@/components/static/about/imageWithDescription";
 import ServiceArea from "@/components/static/about/serviceArea";
 import ClientSayArea from "@/components/static/about/clientSayArea";

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { Input } from "../../common/components/input";
-import { Textarea } from "../../common/components/textarea";
-import Container from "../../common/components/container";
+import { Input } from "../../global/components/input";
+import { Textarea } from "../../global/components/textarea";
+import Container from "../../global/components/container";
 
 const ContactArea: FC = () => {
   return (

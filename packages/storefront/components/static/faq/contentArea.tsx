@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 
-import Image from "next/image";
-import Container from "../../common/components/container";
+import Container from "../../global/components/container";
+import Accordion from "@/components/global/components/accordion";
 
 import { accordionBody } from "../../../utils/types";
-import Accordion from "@/components/common/components/accordion";
 
 interface Props {
   accordionList: accordionBody[];

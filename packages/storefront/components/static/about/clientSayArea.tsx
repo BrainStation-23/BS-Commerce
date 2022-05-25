@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 
-import Accordion from "@/components/common/components/accordion";
-import CarouselSlider from "@/components/common/components/CarouselSlider";
+import Accordion from "@/components/global/components/accordion";
+import CarouselSlider from "@/components/global/components/CarouselSlider";
 
 import { accordionBody, CarouselBody } from "utils/types";
 
-import Container from "../../common/components/container";
+import Container from "../../global/components/container";
 
 interface Props {
   CarouselList: CarouselBody[];
