@@ -5,7 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // display: ["group-hover"],
+ 
     },
   },
   plugins: [],

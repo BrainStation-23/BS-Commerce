@@ -1,5 +1,8 @@
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['dummyjson.com'],
+  },
   async redirects() {
     return [
       {
@@ -13,3 +16,10 @@ const nextConfig = {
 
 const withTM = require("next-transpile-modules")(["marketplace"]);
 module.exports = withTM(nextConfig);
+
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ['dummyjson.com'],
+  },
+}
