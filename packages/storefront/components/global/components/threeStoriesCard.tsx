@@ -16,10 +16,7 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
       <Container>
         <div className="flex flex-wrap">
           {threeStoriesList.map((item) => (
-            <div
-              className="basis-full p-1 md:basis-1/3 md:p-4 text-center"
-              key={item.id}
-            >
+            <div className="basis-full p-1 md:basis-1/3 md:p-4" key={item.id}>
               <div className="w-full">
                 <Image alt="" src={item.image} height={227} width={416} />
               </div>

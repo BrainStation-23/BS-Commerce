@@ -18,8 +18,8 @@ const ClientSayArea: FC<Props> = ({ accordionList, CarouselList }) => {
       <div className="flex flex-wrap">
         <div className="p-1 w-full md:p-4 md:w-2/4">
           <h2 className="text-2xl text-center mb-5">What Can We Do For You?</h2>
-          {accordionList?.map((item, index) => (
-            <Accordion title={item.title} body={item.body} key={index} />
+          {accordionList?.map((item) => (
+            <Accordion title={item.title} body={item.body} key={item.id} />
           ))}
         </div>
         <div className="p-1 w-full md:p-4 md:w-2/4 text-center">

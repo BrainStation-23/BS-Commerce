@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
