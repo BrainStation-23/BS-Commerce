@@ -1,6 +1,6 @@
 import type { NextComponentType } from "next";
-import Table from "./table";
-import DeliveryDetails from "./deliveryDetails/main";
+import DataTable from "./subcomponents/dataTable";
+import DeliveryDetails from "./subcomponents/deliveryDetails/main";
 const CartComponent: NextComponentType = () => {
   return (
     <>
@@ -8,7 +8,7 @@ const CartComponent: NextComponentType = () => {
         <h1 className="text-5xl font-bold">Your Shopping Cart</h1>
       </div>
       <div className="flex justify-center">
-        <Table />
+        <DataTable />
       </div>
       <div className="flex justify-center lg:px-8 sm:ml-4">
         <DeliveryDetails />

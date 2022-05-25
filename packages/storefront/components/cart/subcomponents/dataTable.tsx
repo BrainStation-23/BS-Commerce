@@ -1,8 +1,8 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
-import Buttons from "../global/buttons/button";
+import Buttons from "../../global/components/buttons/button";
 import Image from "next/image";
-const Table: NextComponentType = () => {
+const DataTable: NextComponentType = () => {
   const [allCartList, setAllCartList] = useState([
     {
       id: Math.floor(Math.random() * 10),
@@ -144,4 +144,4 @@ const Table: NextComponentType = () => {
   );
 };
 
-export default Table;
+export default DataTable;
