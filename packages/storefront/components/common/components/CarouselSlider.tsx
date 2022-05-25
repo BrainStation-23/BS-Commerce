@@ -24,8 +24,8 @@ const CarouselSlider: FC<Props> = ({ CarouselList }) => {
       }}
       modules={[Autoplay]}
     >
-      {CarouselList?.map((data, index) => (
-        <SwiperSlide key={index}>
+      {CarouselList?.map((data) => (
+        <SwiperSlide key={data?.id}>
           <div className="py-16 px-5 bg-neutral-100 relative">
             <Image src={data?.image} alt="" width={100} height={100} />
             <div className="pt-1">

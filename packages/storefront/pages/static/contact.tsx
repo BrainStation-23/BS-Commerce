@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { Input, Textarea } from "marketplace";
 
-import PageTitle from "@/components/pageTitle";
-import Container from "@/components/container";
+import PageTitle from "@/components/common/components/pageTitle";
+import Container from "@/components/common/components/container";
 
 const Contact: NextPage = () => {
   return (

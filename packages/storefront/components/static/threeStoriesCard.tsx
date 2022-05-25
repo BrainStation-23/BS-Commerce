@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
 import Image from "next/image";
-import Container from "./container";
+import Container from "../common/components/container";
 
-import { storiesBody } from "../utils/types";
+import { storiesBody } from "../../utils/types";
 
 interface Props {
   leftStory: boolean;
@@ -15,10 +15,10 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
     <div className="mb-10">
       <Container>
         <div className="flex flex-wrap">
-          {threeStoriesList.map((item, index) => (
+          {threeStoriesList.map((item) => (
             <div
               className="basis-full p-1 md:basis-1/3 md:p-4 text-center"
-              key={index}
+              key={item.id}
             >
               <div className="w-full">
                 <Image alt="" src={item.image} height={227} width={416} />
