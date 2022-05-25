@@ -10,7 +10,7 @@ const CartComponent: NextComponentType = () => {
       <div className="flex justify-center">
         <Table />
       </div>
-      <div className="flex justify-center lg:px-8">
+      <div className="flex justify-center lg:px-8 sm:ml-4">
         <DeliveryDetails />
       </div>
     </>

@@ -8,7 +8,6 @@ interface Properties {
   text: string;
 }
 const Buttons: React.FC<Properties> = (props) => {
-  console.log(props);
   const getButtonClass = () => {
     if (props.bgColor == "black") {
       return `bg-black text-white px-5 py-2 text-sm w-${props.width} h-${props.height} hover:bg-green-500`;
