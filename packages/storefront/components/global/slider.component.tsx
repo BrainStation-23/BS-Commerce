@@ -80,31 +80,6 @@ const SliderComponent: NextPage = () => {
                             </>
                         );
                     })}
-
-                    {/* <div className="carousel-item active relative float-left w-full">
-                        <SingleSlide
-                             Img={slideDetails[0]?.Img}
-                             Title={slideDetails[0]?.Title}
-                             Description={slideDetails[0]?.Description}
-                             Deatils={slideDetails[0]?.Deatils}
-                        />
-                    </div>
-                    <div className="carousel-item relative float-left w-full">
-                        
-                        <SingleSlide
-                            Img={slideDetails[1]?.Img}
-                            Title={slideDetails[1]?.Title}
-                            Description={slideDetails[1]?.Description}
-                            Deatils={slideDetails[1]?.Deatils}
-                        />
-                    </div>
-                    <div className="carousel-item relative float-left w-full">
-                        <SingleSlide
-                             Img={slideDetails[2]?.Img}
-                             Title={slideDetails[2]?.Title}
-                             Description={slideDetails[2]?.Description}
-                             Deatils={slideDetails[2]?.Deatils}/>
-                    </div> */}
                 </div>
                 <button
                     className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
