@@ -7,3 +7,13 @@
   display: flex !important;
   flex-direction: inherit;
 }
+
+@layer base {
+  .link {
+    @apply hover:text-green-500 text-gray-900 cursor-pointer no-underline transition-all duration-100 ease-linear #{!important};
+  }
+
+  .container {
+    @apply xl:w-3/5 w-11/12;
+  }
+}

@@ -1,12 +1,12 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
-import magnifier from "../public/magnifier.svg";
+import magnifier from "../../public/magnifier.svg";
 
 const FooterTop: NextComponentType = () => {
   return (
     <div>
       <div className="flex justify-center py-4 mb-3">
-        <div className="grid gap-x-4 grid-cols-4 content-start w-3/5">
+        <div className="grid gap-x-4 grid-cols-4 content-start container">
           <div className="flex flex-col">
             <span className="font-bold text-xl mb-2">BS-Commerce</span>
             <span className="text-sm mb-1">
@@ -33,23 +33,23 @@ const FooterTop: NextComponentType = () => {
           <div className="flex flex-col">
             <span className="font-medium text-lg mb-3">Information</span>
             <div className="flex flex-col text-sm gap-1">
-              <a>About Us</a>
-              <a>Delivery Information</a>
-              <a>Privacy Policy</a>
-              <a>Terms &amp; Condition</a>
-              <a>Contact Us</a>
-              <a>Site Map</a>
+              <a className="link">About Us</a>
+              <a className="link">Delivery Information</a>
+              <a className="link">Privacy Policy</a>
+              <a className="link">Terms &amp; Condition</a>
+              <a className="link">Contact Us</a>
+              <a className="link">Site Map</a>
             </div>
           </div>
           <div className="flex flex-col">
             <span className="font-medium text-lg mb-3">Extras</span>
             <div className="flex flex-col text-sm gap-1">
-              <a>Brands</a>
-              <a>Gifts Certificates</a>
-              <a>Affiliate</a>
-              <a>Specials</a>
-              <a>Returns</a>
-              <a>Order History</a>
+              <a className="link">Brands</a>
+              <a className="link">Gifts Certificates</a>
+              <a className="link">Affiliate</a>
+              <a className="link">Specials</a>
+              <a className="link">Returns</a>
+              <a className="link">Order History</a>
             </div>
           </div>
           <div className="flex flex-col">
