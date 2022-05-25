@@ -3,8 +3,8 @@ import type { NextComponentType } from "next";
 const HeaderTop: NextComponentType = () => {
   return (
     <>
-      <header className="flex justify-center py-2 border-b-2">
-        <div className="flex justify-between w-3/5 text-sm">
+      <header className="flex justify-center py-2 border border-slate-900">
+        <div className="flex justify-between container text-sm">
           <div className="space-x-2">
             <div className="group inline-block relative">
               <button className="inline-flex items-center">

@@ -1,11 +1,11 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
-import magnifier from "../public/magnifier.svg";
+import magnifier from "../../public/magnifier.svg";
 
 const HeaderMiddle: NextComponentType = () => {
   return (
-    <div className="flex justify-center py-4">
-      <div className="flex justify-between items-center w-3/5">
+    <div className="flex justify-center py-4 mb-2">
+      <div className="flex justify-between items-center container">
         <h2>BS-Commerce</h2>
         <div className="flex flex-row items-center justify-between h-full border-1 border-slate-200 rounded-full text-sm w-2/5">
           <input
