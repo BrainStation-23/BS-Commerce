@@ -1,4 +1,4 @@
-const { PHONE_REGEX } = process.env;
+const { PHONE_NUMBER_REGION } = process.env;
 export const regexConfig = {
-    phone: new RegExp(String(PHONE_REGEX!) || String(/^(?:\+88|88)?(01[3-9]\d{8})$/))
+    phone: String(PHONE_NUMBER_REGION!) || 'BD'
 }
