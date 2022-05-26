@@ -23,6 +23,7 @@ const CarouselSlider: FC<Props> = ({ CarouselList }) => {
       pagination={{
         clickable: true,
       }}
+      loop={true}
       modules={[Autoplay]}
     >
       {CarouselList?.map((data) => (
