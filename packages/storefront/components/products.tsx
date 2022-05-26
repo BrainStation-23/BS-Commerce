@@ -1,12 +1,11 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSelector, useDispatch } from "react-redux";
-import productData from "../../allData/product-data.json";
-import Product from "./product"
+import productData from "../allData/product-data.json";
+import Product from "./global/components/product";
 
 const Products: NextPage = (props) => {
     return (
         <>
-            <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center">
+            <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-5 lg:gap-5 justify-items-center">
                 {productData["products"] &&
                     productData["products"].length > 0 &&
                     productData.products.map((product: any) => (

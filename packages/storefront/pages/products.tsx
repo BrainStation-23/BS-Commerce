@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Product from "../components/products/products"
+import Product from "../components/products"
 
 const Products: NextPage = (props) => {
 

@@ -20,6 +20,6 @@ module.exports = withTM(nextConfig);
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['dummyjson.com'],
+    domains: ['dummyjson.com', 'cdn.shopify.com'],
   },
 }
