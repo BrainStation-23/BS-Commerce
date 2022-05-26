@@ -16,8 +16,11 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
       <Container>
         <div className="flex flex-wrap">
           {threeStoriesList.map((item) => (
-            <div className="basis-full p-1 md:basis-1/3 md:p-4" key={item.id}>
-              <div className="w-full">
+            <div
+              className="basis-full p-1 md:basis-1/2 lg:basis-1/3 md:p-4"
+              key={item.id}
+            >
+              <div className="w-full text-center">
                 <Image alt="" src={item.image} height={227} width={416} />
               </div>
               {/* if story description need to show left align then leftStory props must be true */}
