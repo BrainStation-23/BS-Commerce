@@ -1,16 +1,16 @@
 import type { NextComponentType } from "next";
-import DataTable from "./subcomponents/dataTable";
 import DeliveryDetails from "./subcomponents/deliveryDetails/main";
+import CartDetails from "./subcomponents/cartTable/main";
 const CartComponent: NextComponentType = () => {
   return (
     <>
       <div className="flex justify-center">
         <h1 className="text-5xl font-bold">Your Shopping Cart</h1>
       </div>
-      <div className="flex justify-center">
-        <DataTable />
+      <div>
+        <CartDetails />
       </div>
-      <div className="flex justify-center lg:px-8 sm:ml-4">
+      <div className="flex justify-center lg:px-8 sm:px-8 sm:overflow-hidden">
         <DeliveryDetails />
       </div>
     </>
