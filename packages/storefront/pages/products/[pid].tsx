@@ -164,7 +164,7 @@ const ProductDetails: NextPage = () => {
 									<button className="border-2 border-gray-300 ml-3 bg-red-500 w-6 h-6 hover:outline"></button>
 								</div>
 							</div>
-							<div className="flex">
+							<div className="lg:w-fit flex flex-wrap">
 								<div className="flex ml-1 mr-3 mt-4 title-text items-center">
 									Quantity
 									<div className="m-1 border-2 border-gray-300 rounded px-auto ">
@@ -177,8 +177,8 @@ const ProductDetails: NextPage = () => {
 									Add to cart
 								</button>
 							</div>
-							<div className="flex">
-								<button className="rounded mt-5 ml-1 bg-gray-600 px-52 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	">
+							<div className="lg:w-fit flex flex-wrap">
+								<button className="rounded mt-5 ml-1 bg-gray-600 lg:px-48 md:px-32 px-20 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	">
 									Buy Now
 								</button>
 							</div>
@@ -242,23 +242,22 @@ const ProductDetails: NextPage = () => {
 						</div>
 					</div>
 					<div className="lg:w-4/5 mx-auto flex flex-wrap mt-5 border-2 border-g-300 text-slate-600">
-						<div className="border-b-2">
+						<div className="lg:w-fit flex flex-wrap border-b-2">
 							<ul>
 								<button
-									value={"#description"}
-									className="text-xl font-semibold p-3 pl-4 mr-10"
+									className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20"
 								>
 									<a href="#description">Description</a>
 								</button>
-								<button className="text-xl font-semibold mx-20">
+								<button className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20">
 									<a href="#review">Review</a>
 								</button>
-								<button className="text-xl font-semibold mx-20">
+								<button className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20">
 									<a href="#shipping_policy">
 										Shipping Policy
 									</a>
 								</button>
-								<button className="text-xl font-semibold mx-20">
+								<button className="text-xl font-semibold mx-10 sm:mx-16 md:mx-10">
 									<a href="#size_chart">Size Chart</a>
 								</button>
 							</ul>
