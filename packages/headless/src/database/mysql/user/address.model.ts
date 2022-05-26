@@ -13,7 +13,6 @@ import UserModel from './user.model';
 
 @Table({
     tableName: 'Address',
-    timestamps: false,
     version: false,
 })
 export default class AddressModel extends Model {

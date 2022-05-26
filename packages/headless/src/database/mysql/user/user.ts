@@ -18,23 +18,21 @@ export class UserDatabase implements IUserDatabase {
   }
 
   async findUser(query: Record<string, any>): Promise<any | null> {
-    return await UserModel.findOne({ where: query, attributes: { exclude: ['password'] } });
+    return await UserModel.findOne({ where: query, attributes: { exclude: ['password'], } });
   }
 
   async updateUser(userId: string, user: User): Promise<any | null> {
-    await UserModel.update(user, {
-      where: { id: userId }
-    });
+    await UserModel.update(user, { where: { id: userId } });
     return await this.findUser({ id: userId });
   }
 
   async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
-    await AddressModel.update(address, { where: { id: address.id, userId } });
+    await AddressModel.create({ ...address, userId });
     return await this.updateUser(userId, user);
   }
 
   async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
-    (await AddressModel.create({ ...address, userId })).get({ plain: true });
+    await AddressModel.update(address, { where: { id: address.id, userId } });
     return await this.updateUser(userId, user);
   }
 }

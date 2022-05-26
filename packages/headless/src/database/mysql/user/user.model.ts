@@ -22,6 +22,10 @@ export default class UserModel extends Model<User> {
   @Column
   displayName: string;
 
+  @Unique(true)
+  @Column
+  username: string;
+
   @Column
   @Index
   phone: string;
