@@ -14,7 +14,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   label,
   value,
   name,
-  className,
+  className = "",
   id,
   onChangeHandler,
   ...props

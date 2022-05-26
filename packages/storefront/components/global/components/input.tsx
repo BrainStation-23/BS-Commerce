@@ -16,7 +16,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   type,
   name,
-  className,
+  className = "",
   id,
   onChangeHandler,
   ...props
