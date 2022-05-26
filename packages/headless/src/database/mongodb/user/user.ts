@@ -4,7 +4,8 @@ import { IUserDatabase } from 'src/modules/user/repositories/user.database.inter
 import { UserModel } from './user.model';
 @Injectable()
 export class UserDatabase implements IUserDatabase {
-  async createUser(user: User): Promise<any | null> {
+  
+  async createUser(user: User): Promise<User | null> {
     const createdUser = await UserModel.create(user);
     const newUser = createdUser?.toJSON();
     delete newUser?.password;
