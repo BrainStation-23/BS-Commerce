@@ -20,6 +20,7 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
               <div className="w-full">
                 <Image alt="" src={item.image} height={227} width={416} />
               </div>
+              {/* if story description need to show left align then leftStory props must be true */}
               <div className={leftStory ? "pt-5" : "pt-5 text-center"}>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>

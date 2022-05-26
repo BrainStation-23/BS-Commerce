@@ -29,10 +29,33 @@ const ContactArea: FC = () => {
             Tell Us Your Project
           </h3>
           <form method="post" action="/">
-            <Input label="Name" value="" type="text" name="name" />
-            <Input label="Email" value="" type="email" name="email" />
-            <Input label="Subject" value="" type="text" name="subject" />
-            <Textarea label="Message" value="" name="message" />
+            <Input
+              label="Name"
+              value=""
+              type="text"
+              name="name"
+              onChangeHandler={() => {}}
+            />
+            <Input
+              label="Email"
+              value=""
+              type="email"
+              name="email"
+              onChangeHandler={() => {}}
+            />
+            <Input
+              label="Subject"
+              value=""
+              type="text"
+              name="subject"
+              onChangeHandler={() => {}}
+            />
+            <Textarea
+              label="Message"
+              value=""
+              name="message"
+              onChangeHandler={() => {}}
+            />
             <button
               className="font-normal h-10 px-10 p capitalize bg-black text-white rounded"
               type="submit"

@@ -5,6 +5,7 @@ interface Props {
   body: string;
 }
 
+//Need to pass the Accordion object props to the Accordion component
 const Accordion: FC<Props> = ({ title, body }) => {
   const [isActive, setIsActive] = useState(false);
 

@@ -12,6 +12,7 @@ interface Props {
   CarouselList: CarouselBody[];
 }
 
+//Need to pass the CarouselList props to the CarouselSlider component
 const CarouselSlider: FC<Props> = ({ CarouselList }) => {
   return (
     <Swiper
