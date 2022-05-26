@@ -14,14 +14,18 @@ const Accordion: FC<Props> = ({ title, body }) => {
       <div
         className={`${
           isActive ? "bg-green-500 rounded-t-lg text-white" : ""
-        } flex justify-between p-3 cursor-pointer`}
+        } flex justify-between p-3 cursor-pointer z-10`}
         onClick={() => setIsActive(!isActive)}
       >
         <div>{title}</div>
         <div>{isActive ? "-" : "+"}</div>
       </div>
       {isActive && (
-        <div className="p-4 border border-slate-300 border-solid">{body}</div>
+        <div
+          className={`p-4 border border-slate-300 border-solid animate-fade-in-down`}
+        >
+          {body}
+        </div>
       )}
     </div>
   );
