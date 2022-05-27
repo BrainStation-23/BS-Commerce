@@ -1,5 +1,3 @@
-import { Product } from './product';
-
 export class Compare {
   id: string;
   userId: string;
@@ -7,5 +5,5 @@ export class Compare {
 }
 export class CompareItems {
   productId: string;
-  product?: Product;
+  product?: any;
 }

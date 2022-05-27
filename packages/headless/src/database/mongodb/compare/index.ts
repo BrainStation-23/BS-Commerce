@@ -1,7 +1,5 @@
 import { Compare } from 'src/entity/compare';
-import { Product } from 'src/entity/product';
 import { ICompareDatabase } from 'src/modules/compare/repositories/compare.db.interface';
-import { ProductModel } from '../product/product.model';
 import { CompareModel } from './compare.model';
 
 export class CompareDatabase implements ICompareDatabase {
@@ -9,17 +7,6 @@ export class CompareDatabase implements ICompareDatabase {
     const compareList = await CompareModel.findOne({
       userId: userId,
     }).lean();
-
-    const products: Product[] = await ProductModel.find({
-      id: { $in: compareList.items },
-    }).select('info photos id -_id');
-
-    compareList.items = products.map((e) => {
-      return {
-        productId: e.id,
-        product: e,
-      };
-    });
 
     return compareList;
   }
@@ -31,17 +18,6 @@ export class CompareDatabase implements ICompareDatabase {
       id: compareId,
       userId,
     }).lean();
-
-    const products: Product[] = await ProductModel.find({
-      id: { $in: compareList.items },
-    }).select('info photos id -_id');
-
-    compareList.items = products.map((e) => {
-      return {
-        productId: e.id,
-        product: e,
-      };
-    });
 
     return compareList;
   }

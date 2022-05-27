@@ -1,6 +1,4 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import * as Joi from 'joi';
-import { validateParams } from 'src/decorators/service.validator';
 import { Compare } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
 import {
@@ -16,10 +14,6 @@ export class CompareService {
     private helper: Helper,
   ) {}
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: Joi.string().required().label('productId') },
-  )
   async addItemToCompare(
     userId: string,
     productId: string,
@@ -71,7 +65,6 @@ export class CompareService {
     }
   }
 
-  @validateParams({ schema: Joi.string().required().label('userId') })
   async getCompareByUserId(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -90,10 +83,6 @@ export class CompareService {
     }
   }
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: Joi.string().required().label('compareId') },
-  )
   async getCompareById(
     userId: string,
     compareId: string,
@@ -116,10 +105,6 @@ export class CompareService {
     }
   }
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: Joi.string().required().label('compareId') },
-  )
   async deleteCompareById(
     userId: string,
     compareId: string,
@@ -142,10 +127,6 @@ export class CompareService {
     }
   }
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: Joi.string().required().label('productId') },
-  )
   async deleteItemByProductId(
     userId: string,
     productId: string,
@@ -168,7 +149,6 @@ export class CompareService {
     }
   }
 
-  @validateParams({ schema: Joi.string().required().label('userId') })
   async deleteAllItemByUserId(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {

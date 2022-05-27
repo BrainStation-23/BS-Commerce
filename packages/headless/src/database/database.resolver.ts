@@ -2,6 +2,7 @@
 import { dbConfig } from 'config/database';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
+import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 
 type CLASS_NAME = 'WISHLIST' | 'USER' | 'COMPARE';
 const db = dbConfig.db;
