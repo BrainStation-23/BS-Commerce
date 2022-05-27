@@ -2,18 +2,15 @@
 import { dbConfig } from 'config/database';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
-import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 
 type CLASS_NAME = 'WISHLIST' | 'USER' | 'COMPARE';
-const db = dbConfig.db || 'MONGO';
+const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
   try {
     switch (db) {
       case 'MONGO':
         switch (className) {
-          case 'WISHLIST':
-            return WishListDatabaseMongo;
           case 'USER':
             return UserDatabaseMongo;
           case 'COMPARE':
@@ -22,12 +19,13 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
           default:
             break;
         }
-      // case 'MYSQL':
-      //   switch (className) {
-
-      //     default:
-      //       break;
-      //   }
+      case 'MYSQL':
+        switch (className) {
+          case 'USER':
+            return UserDatabaseMysql;
+          default:
+            break;
+        }
 
       default:
         throw new Error('No dependency implementation found');
