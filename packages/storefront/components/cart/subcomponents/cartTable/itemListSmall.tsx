@@ -14,8 +14,8 @@ const ItemsLists: React.FC<Properties> = (props) => {
           <div className="mr-4">
             <img
               className="object-cover w-full h-48 rounded-t-lg w-30 rounded-none"
-              src="https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig6_1f6dc9c9-08a8-4008-b39a-478d0046362d_compact.jpg?v=1587983036"
-              alt=""
+              src={props.image}
+              alt="Product Image"
             />
           </div>
           <div className="col-span-2 justify-between px-4 leading-normal">
@@ -23,7 +23,7 @@ const ItemsLists: React.FC<Properties> = (props) => {
               {props.title}
             </h5>
             <div>
-              <div className="box-content h-2 w-32 py-4 border-2 mb-2">
+              <div className="box-content h-4 w-32 py-4 border-2 mb-2">
                 <div className="flex justify-between">
                   <button className="ml-2">+</button>
                   <div className="px-2">{props.quantity}</div>

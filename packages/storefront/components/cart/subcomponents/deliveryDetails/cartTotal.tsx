@@ -15,19 +15,25 @@ const CartTotal: NextComponentType = () => {
             <table className="border-collapse border border-slate-400">
               <tbody>
                 <tr>
-                  <td className="border border-slate-300 px-8 ml-20 py-10">
-                    <span className="mr-24 font-semibold">Subtotal</span>
+                  <td className="border border-slate-300 px-4 md:px-6 xl:px-8 ml-20 py-10">
+                    <span className="mr-8 md:mr-24 xl:mr-24 font-semibold">
+                      Subtotal
+                    </span>
                   </td>
-                  <td className="border border-slate-300 px-8 py-10">
-                    <span className="mr-24">$105.00</span>
+                  <td className="border border-slate-300 px-4 md:px-6 xl:px-8 ml-20 py-10">
+                    <span className="mr-12 md:mr-24 xl:mr-24 font-semibold">
+                      $105.00
+                    </span>
                   </td>
                 </tr>
                 <tr>
                   <td className="border border-slate-300 px-8 ml-20 py-10">
-                    <span className="mr-24 font-semibold">Total</span>
+                    <span className="md:mr-24 xl:mr-24 font-semibold">
+                      Total
+                    </span>
                   </td>
                   <td className="border border-slate-300 px-8 py-10">
-                    <span className="mr-24 font-semibold">$105.00</span>
+                    <span className="md:mr-24 xl:mr-24">$105.00</span>
                   </td>
                 </tr>
               </tbody>

@@ -1,5 +1,6 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
+import Buttons from "../../../global/components/buttons/button";
 import DataTable from "./dataTable";
 import ItemsLists from "./itemListSmall";
 const CartDetails: NextComponentType = () => {
@@ -57,6 +58,22 @@ const CartDetails: NextComponentType = () => {
               quantity={item.quantity}
             />
           ))}
+        </div>
+        <div className="md:hidden flex justify-center p-4">
+          <Buttons
+            bgColor="black"
+            height={40}
+            width={80}
+            text={"PROCEED TO CHECKOUT"}
+          />
+        </div>
+        <div className="md:hidden flex justify-center px-4 mb-6">
+          <Buttons
+            bgColor="black"
+            height={40}
+            width={80}
+            text={"UPDATE CART"}
+          />
         </div>
       </div>
     </>
