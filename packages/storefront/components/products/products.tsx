@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSelector, useDispatch } from "react-redux";
 import productData from "../../allData/product-data.json";
 import Product from "./product"
 
