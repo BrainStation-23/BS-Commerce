@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 import DataTable from "./dataTable";
 import ItemsLists from "./itemListSmall";
+import CartDropdown from "../../cartDropdown/dropdownCart";
 const CartDetails: NextComponentType = () => {
   const [allCartList, setAllCartList] = useState([
     {
@@ -45,6 +46,9 @@ const CartDetails: NextComponentType = () => {
   return (
     <>
       <div>
+        <div>
+          <CartDropdown cartDatas={allCartList} />
+        </div>
         <div className="flex justify-center hidden md:flex">
           <DataTable cartDatas={allCartList} />
         </div>
