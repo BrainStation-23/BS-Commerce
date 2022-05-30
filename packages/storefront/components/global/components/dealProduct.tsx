@@ -3,8 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import Icon from "./product/icon";
 import ProductInfo from "./product/productInfo";
 import Picture from "./product/picture";
+import Counter from "./product/counter";
 
-const Product = (props: any) => {
+const time = {
+    day: "00",
+    hour: "00",
+    min: "00",
+    sec: "00",
+};
+
+const DealProduct = (props: any) => {
     const { product }: any = props;
 
     return (
@@ -24,8 +32,11 @@ const Product = (props: any) => {
                                     ></Picture>{" "}
                                 </div>
                             </div>
-                            <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-6xl text-black font-semibold">
-                                <Icon></Icon>
+                            <div className="hover:-translate-y-20 opacity-70 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-6xl text-black font-semibold">
+                                <Counter time={time}></Counter>
+                                <div className="hover:translate-y-20 opacity-0 hover:opacity-90 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
+                                    <Icon></Icon>
+                                </div>
                             </div>
                             <ProductInfo product={product}></ProductInfo>
                         </div>
@@ -36,4 +47,4 @@ const Product = (props: any) => {
     );
 };
 
-export default Product;
+export default DealProduct;

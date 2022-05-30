@@ -2,15 +2,15 @@ import React from "react";
 import Image from "next/image";
 
 const Picture = (props: any) => {
-    const { product }: any = props;
+    const { product, height, width, src, alt }: any = props;
 
     return (
         <div>
             <Image
-                src={product.images[0]}
-                alt={product.category}
-                width={280}
-                height={280}
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
             />
         </div>
     );
