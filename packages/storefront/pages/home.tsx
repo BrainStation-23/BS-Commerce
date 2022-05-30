@@ -8,7 +8,9 @@ const Home: NextPage = () => {
       <header className="bg-dark py-5">
         <div className="container px-4 px-lg-5 my-5">
           <div className="text-center text-white">
-            <h1 className="display-4 fw-bolder">Storefront</h1>
+            <h1 className="display-4 fw-bolder" data-testid="heading">
+              Storefront
+            </h1>
             <p className="lead fw-normal text-white-50 mb-0">
               With this shop hompeage template
             </p>
@@ -20,7 +22,12 @@ const Home: NextPage = () => {
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div className="col mb-5">
               <div className="card h-100">
-                <Image className="card-img-top" src={productPic} alt="..." />
+                <Image
+                  className="card-img-top"
+                  src={productPic}
+                  alt="..."
+                  layout="fill"
+                />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
@@ -41,7 +48,12 @@ const Home: NextPage = () => {
             </div>
             <div className="col mb-5">
               <div className="card h-100">
-                <Image className="card-img-top" src={productPic} alt="..." />
+                <Image
+                  className="card-img-top"
+                  src={productPic}
+                  alt="..."
+                  layout="fill"
+                />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
@@ -62,7 +74,12 @@ const Home: NextPage = () => {
             </div>
             <div className="col mb-5">
               <div className="card h-100">
-                <Image className="card-img-top" src={productPic} alt="..." />
+                <Image
+                  className="card-img-top"
+                  src={productPic}
+                  alt="..."
+                  layout="fill"
+                />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
