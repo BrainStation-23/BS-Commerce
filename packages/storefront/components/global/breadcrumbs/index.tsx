@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "./breadcrumb";
 import BreadcrumbItem from "./breadcrumbItem";
 
@@ -44,12 +44,13 @@ const BreadcrumbLabel = (props: any) => {
           {breadcrumbs &&
             breadcrumbs.map((breadcrumb: any, index: number) => {
               return (
-                <>
+                <React.Fragment key={index}>
                   {index === breadcrumbs.length - 1 && (
                     <>
                       <BreadcrumbItem
                         key={index}
-                        href="javascript: void(0)"
+                        href="/account/sign-in"
+                        style={{ pointerEvents: "none" }}
                       >
                         {breadcrumb.label}
                       </BreadcrumbItem>
@@ -63,7 +64,7 @@ const BreadcrumbLabel = (props: any) => {
                       {breadcrumb.label}
                     </BreadcrumbItem>
                   )}
-                </>
+                </React.Fragment>
               );
             })}
         </Breadcrumb>

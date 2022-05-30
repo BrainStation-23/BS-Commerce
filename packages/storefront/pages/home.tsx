@@ -1,8 +1,4 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Layout from "../components/layout";
-import productPic from "../public/product.jpeg";
-import { InferGetServerSidePropsType } from "next";
+import type { NextPage } from "next";
 import Banner from "../components/global/banners/banner";
 import BannerHeading from "../components/global/banners/bannerHeading";
 import BannerBodyText from "../components/global/banners/bannerBodyText";
@@ -17,7 +13,7 @@ const Home: NextPage = () => {
             width="w-full"
             height="sm:h-48 lg:h-56"
             buttonText="Shop Now"
-            href="/home"
+            linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
             buttonPosition="absolute sm:bottom-4 md:bottom-7 lg:bottom-16 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"
@@ -43,7 +39,7 @@ const Home: NextPage = () => {
             width="w-full"
             height="sm:h-48 lg:h-56"
             buttonText="Shop Now"
-            href="/home"
+            linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
             buttonPosition="absolute sm:bottom-4 md:bottom-7 lg:bottom-16 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"
@@ -76,7 +72,7 @@ const Home: NextPage = () => {
             height="sm:h-52 lg:h-64"
             hasButton="true"
             buttonText="Discover Now"
-            href="/home"
+            linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
             buttonPosition="absolute sm:bottom-3 lg:bottom-7 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"

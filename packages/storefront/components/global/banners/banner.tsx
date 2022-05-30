@@ -8,7 +8,7 @@ const Banner = (props: any) => {
     height,
     buttonText,
     position,
-    href,
+    linkhref,
     buttonPosition,
     buttonEdge,
     hasButton,
@@ -20,7 +20,7 @@ const Banner = (props: any) => {
     buttonMargin,
     buttonBg,
     onHover,
-    buttonTextColor
+    buttonTextColor,
   } = props;
   return (
     <div className={`${position} ${bg} ${width} ${height}`}>
@@ -28,17 +28,19 @@ const Banner = (props: any) => {
       {hasHeading && <>{heading}</>}
 
       {hasButton && (
-        <Link href={href} passHref>
-          <Button
-            position={buttonPosition}
-            padding={buttonPadding}
-            margin={buttonMargin}
-            bg={buttonBg}
-            buttonText={buttonText}
-            onHover={onHover}
-            textColor={buttonTextColor}
-            edge={buttonEdge}
-          />
+        <Link href={linkhref} passHref>
+          <a>
+            <Button
+              position={buttonPosition}
+              padding={buttonPadding}
+              margin={buttonMargin}
+              bg={buttonBg}
+              buttonText={buttonText}
+              onHover={onHover}
+              textColor={buttonTextColor}
+              edge={buttonEdge}
+            />
+          </a>
         </Link>
       )}
     </div>
