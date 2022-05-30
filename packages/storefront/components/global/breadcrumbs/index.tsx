@@ -34,7 +34,7 @@ const BreadcrumbLabel = (props: any) => {
     // console.log(title);
 
     setBreadcrumbs(breadcrumbs);
-  }, [router.asPath]);
+  }, [router, router.asPath]);
 
   return (
     <>

@@ -41,7 +41,7 @@ const Signin: NextComponentType = (props) => {
                 phone: "",
                 password: "",
               }}
-              onSubmit={(values, actions) => {
+              onSubmit={(values: { phone: any; password: any; }, actions: any) => {
                 const data = {
                   phone: values.phone,
                   password: values.password,
@@ -51,7 +51,7 @@ const Signin: NextComponentType = (props) => {
               }}
               validationSchema={loginSchema}
             >
-              {(formikprops) => {
+              {(formikprops: any) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">

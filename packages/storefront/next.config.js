@@ -11,7 +11,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["fakestoreapi.com"],
+    domains: ["fakestoreapi.com", "pixabay.com"],
     formats: ["image/avif", "image/webp"],
   },
 }
