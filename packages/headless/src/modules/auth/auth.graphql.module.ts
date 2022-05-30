@@ -26,7 +26,7 @@ import { IUserDatabase } from 'src/modules/user/repositories/user.database.inter
       provide: IUserDatabase,
       useClass: ResolveDatabaseDependency('USER'),
     },
-    JwtStrategy
+    JwtStrategy,
   ],
 })
 export class AuthModule { }
