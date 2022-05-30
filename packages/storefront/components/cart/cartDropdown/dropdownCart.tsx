@@ -119,7 +119,7 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
                 <Buttons
                   bgColor="black"
                   height={10}
-                  width={72}
+                  width={120}
                   text={"CHECKOUT"}
                 />
               </div>

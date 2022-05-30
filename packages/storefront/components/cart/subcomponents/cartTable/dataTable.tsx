@@ -126,7 +126,7 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
               <th className="p-4">
                 <Buttons
                   bgColor="black"
-                  height={40}
+                  height={12}
                   width={120}
                   text={"UPDATE CART"}
                 />
@@ -134,7 +134,7 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
               <th className="p-4">
                 <Buttons
                   bgColor="black"
-                  height={40}
+                  height={12}
                   width={150}
                   text={"CONTINUE SHOPPING"}
                 />
@@ -142,7 +142,7 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
               <th className="p-4">
                 <Buttons
                   bgColor="black"
-                  height={40}
+                  height={12}
                   width={120}
                   text={"CLEAR CART"}
                 />

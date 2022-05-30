@@ -42,7 +42,7 @@ const CartTotal: NextComponentType = () => {
           <div className="flex justify-end py-4 px-2">
             <Buttons
               bgColor="black"
-              height={40}
+              height={12}
               width={150}
               text={"PROCEED TO CHECKOUT"}
             />
