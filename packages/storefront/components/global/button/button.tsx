@@ -10,12 +10,13 @@ const Button = (props: any) => {
     padding,
     margin,
     responsiveProps,
+    position
   } = props;
 
   return (
     <button
       type={type}
-      className={`${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
+      className={`${position} ${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
     >
       {buttonText}
     </button>
