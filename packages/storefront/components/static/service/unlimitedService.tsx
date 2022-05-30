@@ -32,7 +32,21 @@ const UnlimitedService: FC = () => {
               className="py-2 px-5 inline-block rounded-2xl border border-solid border-gray-200 no-underline hover:bg-green-600 hover:text-white"
               href="/policies/terms-of-service"
             >
-              More Info <i className="bi bi-caret-right"></i>
+              More Info
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-3 w-3 inline"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </a>
           </div>
         </div>
