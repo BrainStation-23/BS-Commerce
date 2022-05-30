@@ -69,14 +69,14 @@ const Home: NextPage = () => {
           <Banner
             position="relative"
             width="w-full"
-            height="sm:h-52 lg:h-64"
+            height="sm:h-52 lg:h-80"
             hasButton="true"
             buttonText="Discover Now"
             linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
-            buttonPosition="absolute sm:bottom-3 lg:bottom-7 sm:left-0 lg:left-10"
+            buttonPosition="absolute sm:bottom-3 lg:bottom-9 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"
-            buttonPadding="sm:px-3 md:px-9 lg:px-9 py-2"
+            buttonPadding="sm:px-3 md:px-9 lg:px-9 py-3"
             buttonMargin="m-5"
             buttonBg="bg-green-600/100"
             onHover="bg-black"
