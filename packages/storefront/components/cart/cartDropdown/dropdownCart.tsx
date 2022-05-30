@@ -18,17 +18,21 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
         <div key="data.id">
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
             <div className="flex flex-col-4 items-center bg-white">
-              <a href="#" className="">
-                <img
-                  className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                  src={data.meta.img}
-                  alt="Product Image"
-                />
-              </a>
-              <div className="col-span-2 justify-between px-4 leading-normal">
-                <a href="#" className="text-sm font-bold text-gray-900">
-                  {data.meta.title}
+              <div className="col-span-2 ">
+                <a href="#" className="">
+                  <img
+                    className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
+                    src={data.meta.img}
+                    alt="Product Image"
+                  />
                 </a>
+              </div>
+              <div className="col-span-2 justify-between px-4 leading-normal">
+                <div>
+                  <a href="#" className="text-sm font-bold text-gray-900 mr-2">
+                    {data.meta.title}
+                  </a>
+                </div>
                 <div>
                   <div className="py-2">
                     <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
@@ -41,8 +45,23 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
                   </div>
                 </div>
               </div>
-              <div className="inline-block align-top">
-                <button>X</button>
+              <div className="ml-2">
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -79,19 +98,19 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
               </Menu.Button>
             </span>
           </div>
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-80 width: 30rem rounded-md shadow-lg">
+          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg">
             <div className="rounded-md bg-white shadow-xs">
               {/* new div starts here */}
-              <div className="py-1">{dropdownData()}</div>
+              <div className="py-1 overflow-y-auto h-60">{dropdownData()}</div>
               {/* new div ends here */}
               <div className="flex justify-between p-4">
                 <span className="text-base font-semibold">Total</span>
                 <span className="text-base font-semibold">$175.00</span>
               </div>
-              <div className="px-6 py-4 flex justify-center">
+              <div className="px-6 py-2 flex justify-center">
                 <Buttons
                   bgColor="black"
-                  height={40}
+                  height={10}
                   width={68}
                   text={"VIEW CART"}
                 />
@@ -99,8 +118,8 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
               <div className="px-6 mb-4 flex justify-center">
                 <Buttons
                   bgColor="black"
-                  height={40}
-                  width={68}
+                  height={10}
+                  width={72}
                   text={"CHECKOUT"}
                 />
               </div>
