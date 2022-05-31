@@ -1,8 +1,7 @@
-export interface IResponse {
-    successResponse: (data: object | string) => ({ data: object });
-    errorResponse: (errors: object | null | string) => ({ errors?: object, error?: string });
-}
+import { IMailService } from "./mailService/mail.service.interface";
+import { IServiceResponse } from "./serviceResponse/service.response.interface";
 
 export abstract class Helper {
-    apiResponse: IResponse
+    serviceResponse: IServiceResponse;
+    mailService: IMailService;
 }
