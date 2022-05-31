@@ -7,21 +7,26 @@ import UserModel from './user.model';
 
 @Injectable()
 export class UserDatabase implements IUserDatabase {
-  async createUser(user: CreateUserDto): Promise<any | null> {
+  async createUser(user: CreateUserDto): Promise<User | null> {
     const newUser = (await UserModel.create(user)).get({ plain: true });
     delete newUser?.password;
     return newUser;
   }
 
-  async getUserPassword(query: Record<string, string>): Promise<any | null> {
+  async getUserPassword(query: Record<string, string>): Promise<User | null> {
     return await UserModel.findOne({ where: query });
   }
 
-  async findUser(query: Record<string, any>): Promise<any | null> {
-    return await UserModel.findOne({ where: query, attributes: { exclude: ['password'], } });
+  async findUser(query: Record<string, any>): Promise<User | null> {
+    return await UserModel.findOne({
+      include: [AddressModel],
+      where: query,
+      raw: false,
+      attributes: { exclude: ['password'] }
+    })
   }
 
-  async updateUser(userId: string, user: User): Promise<any | null> {
+  async updateUser(userId: string, user: User): Promise<User | null> {
     await UserModel.update(user, { where: { id: userId } });
     return await this.findUser({ id: userId });
   }
