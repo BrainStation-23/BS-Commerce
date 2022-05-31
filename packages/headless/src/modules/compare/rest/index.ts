@@ -9,15 +9,15 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { CompareItems } from 'src/entity/compare';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { AddToCompareDto } from '../dto/compare.dto';
 import { CompareService } from '../services';
 
-@ApiTags('User Profile API')
+@ApiTags('Comparison API')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('compare')
@@ -27,7 +27,7 @@ export class CompareController {
   @Post()
   async addItemToComapre(
     @UserInfo() user: User,
-    @Body() body: CompareItems,
+    @Body() body: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.compareService.addItemToCompare(
@@ -50,6 +50,7 @@ export class CompareController {
     return response;
   }
 
+  @ApiParam({ name: 'compareId', example: '' })
   @Get(':compareId')
   async getCompareById(
     @UserInfo() user: User,
@@ -64,6 +65,7 @@ export class CompareController {
     return response;
   }
 
+  @ApiQuery({ name: 'compareId', example: '' })
   @Delete()
   async deleteCompareById(
     @UserInfo() user: User,
@@ -78,6 +80,7 @@ export class CompareController {
     return response;
   }
 
+  @ApiQuery({ name: 'productId', example: '' })
   @Delete('item')
   async deleteItemByProductId(
     @UserInfo() user: User,
