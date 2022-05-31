@@ -1,14 +1,14 @@
 import React from "react";
 import { checkoutProducts } from "../../checkout-products";
 
-const ProductList = (props: any) => {
+const CartProductList = (props: any) => {
   return (
     <>
       {checkoutProducts.map((checkoutProduct, index) => {
         return (
           <React.Fragment key={index}>
             <div className="row text-sm mt-5 mr-3">
-              <div className="grid grid-cols-2 items-center">
+              <div className="flex flex-wrap justify-between items-center">
                 <div className="flex flex-wrap items-center">
                   <div className="relative">
                     <img
@@ -27,8 +27,8 @@ const ProductList = (props: any) => {
                       {checkoutProduct.quantity}
                     </span>
                   </div>
-                  <div className="ml-5">
-                    <p className="font-semibold">{checkoutProduct.title}</p>
+                  <div className="sm:ml-3 md:ml-5 lg:ml-5">
+                    <p className="sm:text-xs md:text-sm lg:text-normal font-semibold">{checkoutProduct.title}</p>
                     {checkoutProduct.additionalInfo && (
                       <div className="text-xs text-gray-500">
                         {checkoutProduct.additionalInfo}
@@ -48,4 +48,4 @@ const ProductList = (props: any) => {
   );
 };
 
-export default ProductList;
+export default CartProductList;

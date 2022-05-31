@@ -1,10 +1,10 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Signup from "../../components/account/sign-up";
+import Signin from "../../../components/account/sign-in";
 
 const SignIn: NextPage = () => {
   return (
     <>
-       <Signup/>
+       <Signin/>
     </>
   );
 };

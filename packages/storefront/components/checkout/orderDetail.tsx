@@ -1,14 +1,14 @@
 import { NextComponentType } from "next";
 import React from "react";
-import ProductList from "./productList";
+import CartProductList from "./cartProductList";
 
 const OrderedProducts = (props: any) => {
   return (
     <>
-      <div className="row mx-12 my-7 overflow-hidden">
+      <div className="row sm:mx-0 lg:mx-12 my-7 overflow-hidden">
         <div className="flex flex-col divide-y-2 h-full overflow-hidden">
           <div className="overflow-y-scroll h-60">
-            <ProductList />
+            <CartProductList />
           </div>
           <div className="mt-5">
             <div className="row text-sm">

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import CheckoutComponent from "../components/checkout";
+import CheckoutComponent from "../../components/checkout";
 
 const Checkout: NextPage = () => {
   return (
