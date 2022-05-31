@@ -15,7 +15,8 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swiper": "^8.1.5"
+    "swiper": "^8.1.5",
+    "models": "*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
