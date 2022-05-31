@@ -13,7 +13,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/styles/*": ["styles/*"],
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/sign-up.jsx", "components/global/breadcrumbs/breadcrumb.jsx", "components/global/breadcrumbs/breadcrumbItem.jsx"],
   "exclude": ["node_modules"]

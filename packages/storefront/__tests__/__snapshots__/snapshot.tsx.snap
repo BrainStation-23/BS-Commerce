@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <header
+    class="bg-dark py-5"
+  >
+    <div
+      class="container px-4 px-lg-5 my-5"
+    >
+      <div
+        class="text-center text-white"
+      >
+        <h1
+          class="display-4 fw-bolder"
+          data-testid="heading"
+        >
+          Storefront
+        </h1>
+        <p
+          class="lead fw-normal text-white-50 mb-0"
+        >
+          With this shop hompeage template
+        </p>
+      </div>
+    </div>
+  </header>
+  <section
+    class="py-5"
+  >
+    <div
+      class="container px-4 px-lg-5 mt-5"
+    >
+      <div
+        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+      >
+        <div
+          class="col mb-5"
+        >
+          <div
+            class="card h-100"
+          >
+            <span
+              style="box-sizing: border-box; display: block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+            >
+              <img
+                alt="..."
+                class="card-img-top"
+                data-nimg="fill"
+                decoding="async"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </span>
+            <div
+              class="card-body p-4"
+            >
+              <div
+                class="text-center"
+              >
+                <h5
+                  class="fw-bolder"
+                >
+                  Fancy Product
+                </h5>
+                $40.00 - $80.00
+              </div>
+            </div>
+            <div
+              class="card-footer p-4 pt-0 border-top-0 bg-transparent"
+            >
+              <div
+                class="text-center"
+              >
+                <a
+                  class="btn btn-outline-dark mt-auto"
+                  href="/product/10"
+                >
+                  View options
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col mb-5"
+        >
+          <div
+            class="card h-100"
+          >
+            <span
+              style="box-sizing: border-box; display: block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+            >
+              <img
+                alt="..."
+                class="card-img-top"
+                data-nimg="fill"
+                decoding="async"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </span>
+            <div
+              class="card-body p-4"
+            >
+              <div
+                class="text-center"
+              >
+                <h5
+                  class="fw-bolder"
+                >
+                  Fancy Product
+                </h5>
+                $40.00 - $80.00
+              </div>
+            </div>
+            <div
+              class="card-footer p-4 pt-0 border-top-0 bg-transparent"
+            >
+              <div
+                class="text-center"
+              >
+                <a
+                  class="btn btn-outline-dark mt-auto"
+                  href="/product/10"
+                >
+                  View options
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col mb-5"
+        >
+          <div
+            class="card h-100"
+          >
+            <span
+              style="box-sizing: border-box; display: block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+            >
+              <img
+                alt="..."
+                class="card-img-top"
+                data-nimg="fill"
+                decoding="async"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </span>
+            <div
+              class="card-body p-4"
+            >
+              <div
+                class="text-center"
+              >
+                <h5
+                  class="fw-bolder"
+                >
+                  Fancy Product
+                </h5>
+                $40.00 - $80.00
+              </div>
+            </div>
+            <div
+              class="card-footer p-4 pt-0 border-top-0 bg-transparent"
+            >
+              <div
+                class="text-center"
+              >
+                <a
+                  class="btn btn-outline-dark mt-auto"
+                  href="/product/10"
+                >
+                  View options
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
