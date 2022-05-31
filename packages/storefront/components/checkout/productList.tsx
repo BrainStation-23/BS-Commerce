@@ -7,7 +7,7 @@ const ProductList = (props: any) => {
       {checkoutProducts.map((checkoutProduct, index) => {
         return (
           <React.Fragment key={index}>
-            <div className="row text-sm mt-5">
+            <div className="row text-sm mt-5 mr-3">
               <div className="grid grid-cols-2 items-center">
                 <div className="flex flex-wrap items-center">
                   <div className="relative">

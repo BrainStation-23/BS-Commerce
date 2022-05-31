@@ -19,4 +19,25 @@ export const checkoutProducts = [
     price: 3.11,
     quantity: 10,
   },
+  {
+    title: "Green Chili",
+    image:
+      "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+    price: 3.11,
+    quantity: 10,
+  },
+  {
+    title: "Green Chili",
+    image:
+      "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+    price: 3.11,
+    quantity: 10,
+  },
+  {
+    title: "Green Chili",
+    image:
+      "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+    price: 3.11,
+    quantity: 10,
+  },
 ];
