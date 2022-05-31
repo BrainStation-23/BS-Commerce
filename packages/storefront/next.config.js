@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: ['cdn.shopify.com'],
+}
 };
 
 const withTM = require("next-transpile-modules")(["marketplace"]);

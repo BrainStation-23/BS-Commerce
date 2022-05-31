@@ -7,7 +7,7 @@ import CartDropdown from "../../cartDropdown/dropdownCart";
 const CartDetails: NextComponentType = () => {
   const [allCartList, setAllCartList] = useState([
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 10 * Date.now() * 1),
       meta: {
         title: "Red Spinach/500gm",
         price: "53",
@@ -16,7 +16,7 @@ const CartDetails: NextComponentType = () => {
       quantity: "3",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 10 * Date.now() * 3),
       meta: {
         title: "Cauliflower/1kg",
         price: "44",
@@ -25,7 +25,7 @@ const CartDetails: NextComponentType = () => {
       quantity: "2",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 10 * Date.now()),
       meta: {
         title: "White Carrot/500gm",
         price: "24",
@@ -34,7 +34,7 @@ const CartDetails: NextComponentType = () => {
       quantity: "1",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 10 * Date.now() * 8),
       meta: {
         title: "Poatat0/500gm",
         price: "5",
