@@ -24,7 +24,7 @@ const Signup: NextComponentType = (props) => {
 
   return (
     <>
-      <Breadcrumbs route={router.asPath} />
+      {/* <Breadcrumbs route={router.asPath} /> */}
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 sm:mx-4 md:mx-5"

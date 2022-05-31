@@ -104,8 +104,8 @@ const Signin: NextComponentType = (props) => {
               }}
             </Formik>
             <div className="text-decoration-none mt-3">
-              <Link href="/account/sign-up">
-                <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
+              <Link data-testid="create-account-link" href="/account/sign-up">
+                <a data-testid="create-account-page" className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
                   Create account
                 </a>
               </Link>
