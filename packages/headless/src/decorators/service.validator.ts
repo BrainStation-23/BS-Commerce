@@ -1,50 +1,68 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
-import * as Joi from 'joi';
-import { ServiceErrorResponse } from 'src/helper/serviceResponse/service.response.interface';
+import { Injectable, HttpStatus, HttpException, Type } from '@nestjs/common'
+import { validate } from 'class-validator'
+import { plainToClass } from 'class-transformer'
+import { ServiceErrorResponse } from 'src/helper/serviceResponse/service.response.interface'
 
-interface Validators {
-    schema: Joi.Schema,
-    options?: Joi.ValidationOptions
+export interface PipeTransform<T = any, R = any> {
+    /**
+     * Method to implement a custom pipe.  Called with two parameters
+     *
+     * @param value argument before it is received by route handler method
+     * @param metadata contains metadata about the value
+     */
+    transform(value: T, metadata: ArgumentMetadata): R;
 }
 
-/**
- * Factory decorator for validating service function arguments against a Joi Schema at run-time.
- * 
- * The function expects the validation schema and options to be passed as the same sequence of the actual
- * function arguments to be validated.
- * 
- * Example: ``` @validateParams({ schema: ProductCreateSchema })
- *   async createProduct(product: Product, extraParam: number) ```
- * 
- * The extraParam here will not be validated as no validator is passed for that.
- * 
- * If the validation fails then it throws ```HttpException``` error with ```BAD_REQUEST``` status.
- * 
- * The errors are formatted as the standard error response format used in our project ```ServiceErrorResponse```
- */
+export interface ArgumentMetadata {
+    /**
+     * Underlying base type (e.g., `String`) of the parameter, based on the type
+     * definition in the route handler.
+     */
+    metatype?: Type<any> | undefined;
+}
 
-export function validateParams(...validators: Array<Validators>) {
-    return function validateSchemas(
-        target: any,
-        propertyName: string,
-        descriptor: TypedPropertyDescriptor<any>
-    ) {
-        const method = descriptor.value;
-        descriptor.value = function (...args: any[]) {
-            const response: ServiceErrorResponse = { error: '', errors: {} };
+export declare class ValidationError {
+    /**
+     * Object's property that haven't pass validation.
+     */
+    property: string;
+    /**
+     * Constraints that failed validation with error messages.
+     */
+    constraints?: {
+        [type: string]: string;
+    };
+}
 
-            for (let i = 0; i < validators.length; i++) {
-                const { schema, options = { abortEarly: false, errors: { wrap: { label: '' } } } } = validators[i];
-                const { error } = schema.validate(args[i], options);
-                if (error) {
-                    error.details.forEach((err) => {
-                        response.error += err.message + '.';
-                        err.path[0] && (response.errors[err.path[0]] = [err.message]);
-                    })
-                    throw new HttpException(response, HttpStatus.UNPROCESSABLE_ENTITY);
-                }
-            }
-            return method.apply(this, args);
-        };
+
+@Injectable()
+export class ValidationPipe implements PipeTransform<any> {
+    async transform(value: any, { metatype }: ArgumentMetadata) {
+        if (!metatype || !this.toValidate(metatype)) {
+            return value;
+        }
+
+        // Converts plain (literal) object to class (constructor) object.
+        const object = plainToClass(metatype, value)
+        const errors: ValidationError[] = await validate(object, { validationError: { target: false, value: false } });
+        const errorsResponse: ServiceErrorResponse = { error: '', errors: {} };
+
+        if (errors.length > 0) {
+            errors.map((err: ValidationError) => {
+                let errorArray = [];
+                Object.values(err.constraints).forEach(constraint => {
+                    errorsResponse.error += constraint as string + '.';
+                    err.property && (errorArray.push(constraint as string));
+                })
+                err.property && (errorsResponse.errors[err.property] = errorArray as any);
+            })
+            throw new HttpException(errorsResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return value;
+    }
+
+    private toValidate(metatype: Function): boolean {
+        const types: Function[] = [String, Boolean, Number, Array, Object];
+        return !types.includes(metatype);
     }
 }

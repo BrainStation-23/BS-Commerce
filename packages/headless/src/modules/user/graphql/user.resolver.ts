@@ -4,10 +4,9 @@ import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
-import { UpdatedUser } from '../validations/user.validator';
+import { UpdatedUserDto } from '../dto/user.dto';
 
 @UseGuards(JwtAuthGuard)
-@Resolver()
 export class UserResolver {
   constructor(private userService: UserService) { }
 
@@ -17,7 +16,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  async updateUser(@Args('data') data: UpdatedUser, @UserInfo() user: User) {
+  async updateUser(@Args('data') data: UpdatedUserDto, @UserInfo() user: User) {
     return await this.userService.updateUser(user.id, data);
   }
 

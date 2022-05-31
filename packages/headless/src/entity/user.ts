@@ -7,21 +7,21 @@ export class Address {
   postCode: string;
 }
 export class User {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   displayName?: string;
   phone?: string;
   username: string;
   email: string;
-  password: string;
+  password?: string;
   provider?: string;
   providerData?: object;
   additionalProviderData?: object;
   resetPasswordToken?: string;
   resetPasswordExpires?: number;
   gender?: string;
-  addresses?: [Address];
+  addresses?: Address[];
   status: string;
 }
 

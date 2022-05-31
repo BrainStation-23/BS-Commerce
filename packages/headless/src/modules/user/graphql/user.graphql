@@ -41,7 +41,7 @@ input UpdateUserInput {
   resetPasswordExpires: DateTime
   phone: String
   gender: String
-  addresses: AddressInput
+  address: AddressInput
   status: String
   active: Boolean
 }
