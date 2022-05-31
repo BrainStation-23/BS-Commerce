@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsMongoId } from 'class-validator';
-
-export class AddToCompareDto {
+import type { AddCompareItem } from 'models';
+export class AddToCompareDto implements AddCompareItem {
   @ApiProperty()
   @IsMongoId()
   productId: string;

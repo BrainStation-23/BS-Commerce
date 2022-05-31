@@ -1,2 +1,2 @@
-export * from "./compare/index";
+export * from "./compare";
 export * from "./user";
