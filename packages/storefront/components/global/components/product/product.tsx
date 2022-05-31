@@ -1,18 +1,10 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
-import Icon from "./product/icon";
-import ProductInfo from "./product/productInfo";
-import Picture from "./product/picture";
-import Counter from "./product/counter";
+import Icon from "./common/icon";
+import ProductInfo from "./common/productInfo";
+import Picture from "./common/picture";
 
-const time = {
-    day: "00",
-    hour: "00",
-    min: "00",
-    sec: "00",
-};
-
-const DealProduct = (props: any) => {
+const Product = (props: any) => {
     const { product }: any = props;
 
     return (
@@ -29,14 +21,11 @@ const DealProduct = (props: any) => {
                                         width={280}
                                         src={product.images[0]}
                                         alt={product.category}
-                                    ></Picture>{" "}
+                                    ></Picture>
                                 </div>
                             </div>
-                            <div className="hover:-translate-y-20 opacity-70 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-6xl text-black font-semibold">
-                                <Counter time={time}></Counter>
-                                <div className="hover:translate-y-20 opacity-0 hover:opacity-90 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
-                                    <Icon></Icon>
-                                </div>
+                            <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
+                                <Icon></Icon>
                             </div>
                             <ProductInfo product={product}></ProductInfo>
                         </div>
@@ -47,4 +36,4 @@ const DealProduct = (props: any) => {
     );
 };
 
-export default DealProduct;
+export default Product;

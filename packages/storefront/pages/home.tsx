@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
-import Counter from "../components/global/components/product/counter";
-import Icon from "../components/global/components/product/icon";
-import Products from "./products";
+import Icon from "../components/global/components/product/common/icon";
+import Products from "./trendProducts";
 
 const Home: NextPage = () => {
     return (
         <>
-            <Products></Products>   
+            <Products></Products>  
+            <Icon></Icon> 
          </>
     );
 };

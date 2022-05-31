@@ -2,10 +2,10 @@ import React from "react";
 
 const Icon = () => {
     return (
-        <div className="bg-white rounded-full text-center ">
+        <div className="bg-white rounded-full text-center drop-shadow-md">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mx-2.5 w-10 mb-2 p-2 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
+                className="mx-1.5 w-12 m-1 p-3 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -20,7 +20,7 @@ const Icon = () => {
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mx-2.5 w-10 mb-2 p-2 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
+                className="mx-1.5 w-12 m-1 p-3 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -34,7 +34,7 @@ const Icon = () => {
             </svg>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mx-2.5 w-10 mb-2 p-2 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
+                className="mx-1.5 w-12 m-1 p-3 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -48,7 +48,7 @@ const Icon = () => {
             </svg>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mx-2.5 w-10 mb-2 p-2 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
+                className="mx-1.5 w-12 m-1 p-3 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-1000"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

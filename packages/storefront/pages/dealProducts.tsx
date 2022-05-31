@@ -1,5 +1,5 @@
 import React from 'react';
-import DealProducts from '../components/dealProducts'
+import DealProducts from '../components/deal/products'
 
 const dealProducts = () => {
     return (
