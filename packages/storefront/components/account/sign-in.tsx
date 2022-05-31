@@ -80,17 +80,8 @@ const Signin: NextComponentType = (props) => {
                       </div>
                     </div>
                     <div className="flex flex-wrap sm:justify-end md:justify-between">
-                    <Button type="submit"
-                      padding="py-2"
-                      margin="my-2"
-                      responsiveProps="sm:w-full md:w-1/4"
-                      bg="bg-green-600/100"
-                      buttonText="Sign In"
-                      onHover="bg-black"
-                      textColor="text-white"
-                      edge="rounded"
-                      />
-                      
+                    <button type="submit" className="rounded py-2 my-2 sm:w-full md:w-1/4 bg-green-600/100 hover:bg-black text-white">Sign In</button>
+          
                       <div className=" sm:my-0 md:my-3 text-decoration-none">
                         <Link href="/account/forgot-password">
                           <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">

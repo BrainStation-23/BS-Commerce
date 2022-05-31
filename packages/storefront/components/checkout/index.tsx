@@ -1,8 +1,8 @@
 import { NextComponentType } from "next";
 import { useState } from "react";
-import ChevronDown from "../global/icons/chevron-down";
-import ChevronUp from "../global/icons/chevron-up";
-import ShoppingCart from "../global/icons/shopping-cart";
+import ChevronDown from "../global/icons-for-checkout-page/chevron-down";
+import ChevronUp from "../global/icons-for-checkout-page/chevron-up";
+import ShoppingCart from "../global/icons-for-checkout-page/shopping-cart";
 import OrderedProducts from "./orderDetail";
 
 const CheckoutComponent: NextComponentType = (props) => {

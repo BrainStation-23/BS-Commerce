@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import { registerSchema } from "../../schemas/loginSchema";
 import Breadcrumbs from "../global/breadcrumbs";
-import Button from "../global/button/button";
 
 const Signup: NextComponentType = (props) => {
   const router = useRouter();
@@ -24,7 +23,7 @@ const Signup: NextComponentType = (props) => {
 
   return (
     <>
-      {/* <Breadcrumbs route={router.asPath} /> */}
+      <Breadcrumbs route={router.asPath} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 sm:mx-4 md:mx-5"
@@ -123,17 +122,7 @@ const Signup: NextComponentType = (props) => {
                       </div>
                     </div>
 
-                    <Button
-                      type="submit"
-                      padding="py-2"
-                      margin="my-2"
-                      responsiveProps="sm:w-full md:w-1/4"
-                      bg="bg-green-600/100"
-                      buttonText="Sign Up"
-                      onHover="bg-black"
-                      textColor="text-white"
-                      edge="rounded"
-                    />
+                    <button type="submit" className="rounded py-2 my-2 sm:w-full md:w-1/4 bg-green-600/100 hover:bg-black text-white">Sign Up</button>
                   </Form>
                 );
               }}
