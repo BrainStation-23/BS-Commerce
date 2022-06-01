@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Breadcrumbs from "../global/breadcrumbs";
 import Button from "../global/button/button";
 
-import { loginSchema } from "../../schemas/loginSchema";
+import { loginSchema } from "../global/schemas/loginSchema";
 
 const Signin: NextComponentType = (props) => {
   const router = useRouter();
