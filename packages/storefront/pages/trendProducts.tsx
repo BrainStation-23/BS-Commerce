@@ -1,13 +1,12 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Product from "../components/trend/products"
+import { FC } from "react";
+import Product from "../components/trend/products";
 
-const Products: NextPage = (props) => {
-
-    return (
-        <>
-            <Product></Product>
-        </>
-    );
+const Products: FC = () => {
+  return (
+    <>
+      <Product />
+    </>
+  );
 };
 
 export default Products;

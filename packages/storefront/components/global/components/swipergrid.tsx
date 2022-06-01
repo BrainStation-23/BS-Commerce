@@ -14,12 +14,25 @@ interface Props {
 const SwiperGrid: FC<Props> = ({ children }) => {
   return (
     <Swiper
-      slidesPerView={3}
+      slidesPerView={2}
+      loop={true}
       grid={{
         fill: "row",
         rows: 2,
       }}
-      loop={true}
+      breakpoints={{
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 2,
+        },
+        // when window width is >= 768px
+        768: {
+          slidesPerView: 3,
+        },
+        980: {
+          slidesPerView: 5,
+        },
+      }}
       navigation={true}
       spaceBetween={30}
       pagination={{
