@@ -1,5 +1,3 @@
-import type { GetServerSideProps, NextPage } from "next";
-import { useSelector, useDispatch } from "react-redux";
 import Icon from "../global/components/product/common/icon";
 import ProductInfo from "../global/components/product/common/productInfo";
 import Picture from "../global/components/product/common/picture";

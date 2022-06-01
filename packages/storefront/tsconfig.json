@@ -20,6 +20,6 @@
       "@/styles/*": ["styles/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/trendProducts.tsx", "components/product.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/trendProducts.tsx", "components/product.js", "pages/swaper.js"],
   "exclude": ["node_modules"]
 }
