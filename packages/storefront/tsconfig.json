@@ -20,6 +20,6 @@
       "@/styles/*": ["styles/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/trendProducts.tsx", "components/product.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/sign-up.jsx", "components/global/breadcrumbs/breadcrumb.jsx", "components/global/breadcrumbs/breadcrumbItem.jsx"],
   "exclude": ["node_modules"]
 }

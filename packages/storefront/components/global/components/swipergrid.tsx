@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import { Swiper } from "swiper/react";
-import { Grid, Pagination, Navigation } from "swiper";
+import { Grid, Navigation } from "swiper";
 
 import "swiper/css";
 import "swiper/css/grid";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 interface Props {
@@ -20,12 +19,13 @@ const SwiperGrid: FC<Props> = ({ children }) => {
         fill: "row",
         rows: 2,
       }}
+      loop={true}
       navigation={true}
       spaceBetween={30}
       pagination={{
         clickable: true,
       }}
-      modules={[Grid, Pagination, Navigation]}
+      modules={[Grid, Navigation]}
       className="mySwiper"
     >
       {children}
