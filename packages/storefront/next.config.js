@@ -9,9 +9,8 @@ const nextConfig = {
       },
     ]
   },
-
   images: {
-    domains: ["fakestoreapi.com", "pixabay.com", "cdn.shopify.com"],
+    domains: ["fakestoreapi.com", "pixabay.com", "cdn.shopify.com", 'dummyjson.com'],
     formats: ["image/avif", "image/webp"],
   },
 }
