@@ -7,10 +7,10 @@ const Product = (props: any) => {
 
   return (
     <>
-      <div className="mb-0 overflow-hidden flex " key={product.id}>
-        <div className="transition duration-0 hover:duration-700 group py-3 hover:bg-white cursor-pointer">
+      <div className="mb-0 overflow-hidden" key={product.id}>
+        <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer">
           <div className="rounded overflow-hidden max-w-sm">
-            <div className="relative">
+            <div className="relative flex items-center justify-center flex-col">
               <div className="relative text-white overflow-hidden transition-all duration-700">
                 <div className="relative inset-0 bg-cover bg-center z-0">
                   <Picture

@@ -15,7 +15,12 @@ const Products: FC = () => {
           <br />
         </div>
         {/* <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4 xl:grid-cols-5 xl:gap-0 justify-items-center"> */}
-        <SwiperGrid>
+        <SwiperGrid
+          slidesPerViewmobile={2}
+          slidesPerView768={3}
+          slidesPerView980={5}
+          rows={2}
+        >
           {productData["products"] &&
             productData["products"].length > 0 &&
             productData.products.map((product: any) => (

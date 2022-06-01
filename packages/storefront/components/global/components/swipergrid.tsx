@@ -8,33 +8,38 @@ import "swiper/css/navigation";
 
 interface Props {
   children: any;
+  slidesPerViewmobile: number;
+  slidesPerView768: number;
+  slidesPerView980: number;
+  rows: number;
 }
 
 //Need to pass the CarouselList props to the CarouselSlider component
-const SwiperGrid: FC<Props> = ({ children }) => {
+const SwiperGrid: FC<Props> = ({
+  children,
+  slidesPerViewmobile,
+  slidesPerView768,
+  slidesPerView980,
+  rows,
+}) => {
   return (
     <Swiper
-      slidesPerView={2}
+      slidesPerView={slidesPerViewmobile}
       loop={true}
       grid={{
         fill: "row",
-        rows: 2,
+        rows: rows,
       }}
       breakpoints={{
-        // when window width is >= 640px
-        640: {
-          slidesPerView: 2,
-        },
-        // when window width is >= 768px
         768: {
-          slidesPerView: 3,
+          slidesPerView: slidesPerView768,
         },
         980: {
-          slidesPerView: 5,
+          slidesPerView: slidesPerView980,
         },
       }}
       navigation={true}
-      spaceBetween={30}
+      spaceBetween={20}
       pagination={{
         clickable: true,
       }}
