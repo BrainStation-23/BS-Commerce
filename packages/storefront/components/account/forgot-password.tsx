@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { loginSchema } from "../../schemas/loginSchema";
+import { loginSchema } from "../global/schemas/loginSchema";
 import Breadcrumbs from "../global/breadcrumbs";
 import Button from "../global/button/button";
 
