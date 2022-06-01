@@ -12,5 +12,5 @@ export interface CompareResponse {
 
 export interface CompareItems {
     productId: string;
-    products: any;
+    products?: any;
 }

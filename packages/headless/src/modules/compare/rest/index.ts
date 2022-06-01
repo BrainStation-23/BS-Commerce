@@ -9,12 +9,18 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Response } from 'express';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
-import { AddToCompareDto } from '../dto/compare.dto';
+import { AddToCompareDto, CompareResponseDto } from '../dto/compare.dto';
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')
@@ -24,6 +30,7 @@ import { CompareService } from '../services';
 export class CompareController {
   constructor(private compareService: CompareService) {}
 
+  @ApiResponse({ type: CompareResponseDto })
   @Post()
   async addItemToComapre(
     @UserInfo() user: User,
