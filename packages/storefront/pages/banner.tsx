@@ -18,13 +18,13 @@ const BannerTest: NextPage = () => {
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
             buttonPosition="absolute sm:bottom-4 md:bottom-7 lg:bottom-16 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"
-            hasButton="true"
+            hasButton={true}
             buttonPadding="sm:px-3 md:px-3 lg:px-5 py-2"
             buttonMargin="m-5"
             buttonBg="bg-green-600/100"
             onHover="bg-black"
             buttonTextColor="text-white"
-            hasBodyText="true"
+            hasBodyText={true}
             bodyText={
               <BannerBodyText
                 text="Fresh Vegetables"
