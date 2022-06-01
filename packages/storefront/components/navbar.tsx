@@ -1,6 +1,15 @@
 import type { NextComponentType } from "next";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import signout from "./account/sign-out";
 
 const Navbar: NextComponentType = () => {
+  const [loggedInUser, setLoggedInUser] = useState('');
+
+  useEffect(() => {
+    setLoggedInUser(localStorage.getItem('userData') || '');
+  }, [])
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -72,6 +81,19 @@ const Navbar: NextComponentType = () => {
                   0
                 </span>
               </button>
+              {loggedInUser ? (
+                <>
+                  <Link href="/account/sign-in">
+                    <button onClick={() => {
+                      signout();
+                    }} className="btn btn-outline-dark">Sign-Out</button>
+                  </Link>
+                </>
+              ) : (
+                <Link href="/account/sign-in">
+                  <button className="btn btn-outline-dark">Sign-In</button>
+                </Link>
+              )}
             </form>
           </div>
         </div>
