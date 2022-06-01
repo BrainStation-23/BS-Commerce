@@ -8,7 +8,7 @@ const Products: NextPage = (props) => {
   return (
     <>
       {/* <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4 xl:grid-cols-5 xl:gap-0 justify-items-center"> */}
-      <div className="" style={{ height: "690px" }}>
+      <div className="" style={{ height: "500px" }}>
         <SwiperGrid>
           {productData["products"] &&
             productData["products"].length > 0 &&

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Products></Products>
-      <Icon></Icon>
+      {/* <Icon></Icon> */}
     </>
   );
 };
