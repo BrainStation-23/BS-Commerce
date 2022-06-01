@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
 
-import { registerSchema } from "../global/schemas/loginSchema";
 import Breadcrumbs from "../global/breadcrumbs";
+import { registerSchema } from "../global/schemas/loginSchema";
 
 const Signup: NextComponentType = (props) => {
   const router = useRouter();

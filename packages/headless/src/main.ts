@@ -10,6 +10,8 @@ import { SwaggerConfig } from './internal/swagger/swagger.init';
 import { ValidationPipe } from './decorators/service.validator';
 type DB = 'MONGO' | 'MYSQL';
 
+const cors = require('cors');
+
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
   const app = await NestFactory.create(AppModule);
