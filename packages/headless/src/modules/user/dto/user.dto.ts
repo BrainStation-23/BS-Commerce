@@ -1,22 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNotEmpty, IsObject, IsOptional, IsPhoneNumber, IsString, MinLength, ValidateNested } from "class-validator";
 import { regexConfig } from "config/regex";
-import { Address, ChangePassword } from "src/entity/user";
+import type { Address, ChangePassword, UpdatedUser } from "models"
 
-export class UpdatedUser {
-    firstName?: string;
-    lastName?: string;
-    provider?: string;
-    providerData?: object;
-    additionalProviderData?: object;
-    phone?: string;
-    address?: Address;
-    active?: boolean;
-    gender?: string;
-    status?: string;
-}
 
-export class AddressDto extends Address {
+export class AddressDto implements Address {
     @ApiProperty()
     @IsOptional()
     @IsString()
@@ -45,7 +33,7 @@ export class AddressDto extends Address {
 
 
 
-export class UpdatedUserDto extends UpdatedUser {
+export class UpdatedUserDto implements UpdatedUser {
     @ApiProperty()
     @IsOptional()
     @IsString()
@@ -99,7 +87,7 @@ export class UpdatedUserDto extends UpdatedUser {
     status?: string;
 }
 
-export class ChangePasswordDto extends ChangePassword {
+export class ChangePasswordDto implements ChangePassword {
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
