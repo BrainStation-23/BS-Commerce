@@ -1,7 +1,7 @@
 export class Compare {
   id: string;
   userId: string;
-  items: CompareItems[];
+  items: string[];
 }
 export class CompareItems {
   productId: string;
