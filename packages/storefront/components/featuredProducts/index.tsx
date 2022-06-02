@@ -1,13 +1,13 @@
+import {SwiperSlide } from "swiper/react";
+
 import Product from "./product";
 import productData from "../../allData/product-data.json";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid, Navigation, Pagination } from "swiper";
+import SwiperGrid from "../global/components/swipergrid";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import SwiperGrid from "../global/components/swipergrid";
 
 const FeaturedProducts = () => {
   return (
@@ -20,7 +20,6 @@ const FeaturedProducts = () => {
           Featured Products
         </h1>
       </div>
-
       <SwiperGrid
         slidesPerViewmobile={1}
         slidesPerView768={2}

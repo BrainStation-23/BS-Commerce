@@ -47,7 +47,7 @@ const Product = (props: { product: productInterface }) => {
                     alt={product.category}
                   />
                 </div>
-                <div className="scale-0 group-hover:scale-100 transition-transform origin-left duration-300 absolute bottom-0.5 left-28 md:left-20 md:bottom-0 lg:bottom-1 lg:left-20 xl:left-32 xl:bottom-5 ">
+                <div className="scale-0 group-hover:scale-100 transition-transform origin-left duration-300 absolute bottom-0.5 left-28 md:left-10 md:bottom-0 lg:bottom-1 lg:left-16 xl:left-32 xl:bottom-5 ">
                   <Icon />
                 </div>
                 <div className="col-span-2 text-left">
