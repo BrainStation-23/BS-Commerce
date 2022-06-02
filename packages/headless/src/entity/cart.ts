@@ -1,4 +1,4 @@
-import { Product } from './product';
+// import { Product } from './product';
 
 export class Cart {
   id?: string;
@@ -7,7 +7,7 @@ export class Cart {
 }
 
 export class Item {
-  product?: Product;
+  // product?: Product;
   productId: string;
   quantity: number;
 }

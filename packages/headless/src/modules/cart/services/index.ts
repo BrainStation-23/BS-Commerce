@@ -1,25 +1,19 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import * as Joi from 'joi';
-import { validateParams } from 'src/decorators/service.validator';
 import { Item } from 'src/entity/cart';
 import { Helper } from 'src/helper/helper.interface';
 import {
   ServiceErrorResponse,
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
+import { ItemDto } from '../dto/cart.dto';
 import { CartRepository } from '../repositories';
-import { ItemCreateSchema } from '../validators/cart.create.validator';
 
 @Injectable()
 export class CartService {
   constructor(private cartRepo: CartRepository, private helper: Helper) { }
 
-  @validateParams(
-    { schema: ItemCreateSchema },
-    { schema: Joi.string().required().label('userId') },
-  )
   async addToCart(
-    item: Item,
+    item: ItemDto,
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
@@ -72,7 +66,6 @@ export class CartService {
     }
   }
 
-  @validateParams({ schema: Joi.string().required().label('userId') })
   async getCart(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -90,7 +83,6 @@ export class CartService {
     );
   }
 
-  @validateParams({ schema: Joi.string().required().label('cartId') })
   async deleteCart(
     cartId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -108,13 +100,9 @@ export class CartService {
     );
   }
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: ItemCreateSchema },
-  )
   async updateCartItem(
     userId: string,
-    item: Item,
+    item: ItemDto,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     if (item.quantity && item.quantity > 0) {
       const cart = await this.cartRepo.updateCartItem(userId, item);
@@ -147,10 +135,6 @@ export class CartService {
     );
   }
 
-  @validateParams(
-    { schema: Joi.string().required().label('userId') },
-    { schema: Joi.string().required().label('productId') },
-  )
   async deleteCartItem(
     userId: string,
     productId: string,
@@ -169,7 +153,6 @@ export class CartService {
     );
   }
 
-  @validateParams({ schema: Joi.string().required().label('userId') })
   async deleteAllCartItems(
     userId: string,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
