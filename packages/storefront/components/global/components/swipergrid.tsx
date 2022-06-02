@@ -79,19 +79,17 @@ export default SwiperGrid;
 // </SwiperGrid>
 
 //example 2:
-{
-  /* <SwiperGrid
-          slidesPerViewmobile={2}
-          slidesPerView768={3}
-          slidesPerView980={5}
-          rows={2}
-        >
-          {productData["products"] &&
-            productData["products"].length > 0 &&
-            productData.products.map((product: any) => (
-              <SwiperSlide key={product.id}>
-                <Product product={product} />
-              </SwiperSlide>
-            ))}
-        </SwiperGrid> */
-}
+//  <SwiperGrid
+//           slidesPerViewmobile={2}
+//           slidesPerView768={3}
+//           slidesPerView980={5}
+//           rows={2}
+//         >
+//           {productData["products"] &&
+//             productData["products"].length > 0 &&
+//             productData.products.map((product: any) => (
+//               <SwiperSlide key={product.id}>
+//                 <Product product={product} />
+//               </SwiperSlide>
+//             ))}
+//         </SwiperGrid>
