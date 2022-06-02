@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -6,7 +6,7 @@ const BreadcrumbTest: NextPage = () => {
     const router = useRouter();
   return (
     <>
-        <Breadcrumb router={router.asPath} />
+        <Breadcrumbs route={router.asPath} />
     </>
   );
 };
