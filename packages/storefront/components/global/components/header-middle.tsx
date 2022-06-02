@@ -1,6 +1,4 @@
 import type { NextComponentType } from "next";
-import Image from "next/image";
-import magnifier from "../../public/magnifier.svg";
 
 const HeaderMiddle: NextComponentType = () => {
   return (
@@ -16,7 +14,20 @@ const HeaderMiddle: NextComponentType = () => {
           />
           <div className="bg-green-600 h-full w-14 rounded-r-full relative hover:bg-stone-900 transition-all duration-200 ease-linear cursor-pointer">
             <button type="submit" className="absolute top-1/4 left-1/4">
-              <Image src={magnifier} height={20} width={20} alt="" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
             </button>
           </div>
         </div>

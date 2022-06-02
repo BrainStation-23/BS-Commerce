@@ -1,8 +1,5 @@
 import type { NextComponentType } from "next";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import threeBar from "../../public/three-horizontal-lines.svg";
-import caretSign from "../../public/caret-sign.svg";
 
 const Navbar: NextComponentType = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,9 +34,33 @@ const Navbar: NextComponentType = () => {
             className="flex flex-row items-center relative rounded-t-2xl bg-green-600 text-white px-4 py-3 font-medium w-72 cursor-pointer"
             onClick={toggleOpen}
           >
-            <Image src={threeBar} height={20} width={20} alt="" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
             <span className="ml-4 mr-auto">All Categories</span>
-            <Image src={caretSign} alt="" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
           </div>
           <ul className="list-none flex flex-row gap-x-12 my-0">
             <li>

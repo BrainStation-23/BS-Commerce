@@ -1,6 +1,4 @@
 import type { NextComponentType } from "next";
-import Image from "next/image";
-import magnifier from "../../public/magnifier.svg";
 
 const FooterTop: NextComponentType = () => {
   return (
