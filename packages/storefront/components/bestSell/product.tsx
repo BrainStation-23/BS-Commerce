@@ -14,6 +14,7 @@ interface productInterface {
 
 const Product = (props: { product: productInterface }) => {
   const [pictureWidth, setPictureWidth] = useState<number>(92);
+  // const { product }: any = props;
   const product = props.product;
 
   function getResolution() {
