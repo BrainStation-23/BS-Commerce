@@ -1,13 +1,13 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { coreConfig } from 'config/core';
+import { coreConfig } from 'src/config/core';
 /**
  * @return only the user from jwt payload
  */
 export const User = createParamDecorator(
   async (data: unknown, context: ExecutionContext) => {
-    return (coreConfig.api === 'GRAPHQL') ?
-      await GqlExecutionContext.create(context).getContext().req.user :
-      await context.switchToHttp().getRequest().user;
+    return coreConfig.api === 'GRAPHQL'
+      ? await GqlExecutionContext.create(context).getContext().req.user
+      : await context.switchToHttp().getRequest().user;
   },
 );

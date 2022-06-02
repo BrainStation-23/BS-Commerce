@@ -1,8 +1,9 @@
 // Mongodb dependency implementations
-import { dbConfig } from 'config/database';
+import { dbConfig } from 'src/config/database';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { CompareDatabase as CompareDatabaseMysql } from './mysql/compare';
 
 type CLASS_NAME = 'WISHLIST' | 'USER' | 'COMPARE';
 const db = dbConfig.db;
@@ -24,6 +25,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMysql;
+          case 'COMPARE':
+            return CompareDatabaseMysql;
           default:
             break;
         }

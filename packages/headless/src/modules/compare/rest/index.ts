@@ -17,9 +17,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
+import { Compare } from 'src/entity/compare';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import {
+  IServiceSuccessResponse,
+  IServiceErrorResponse,
+} from 'src/utils/response/service.response.interface';
 import { AddToCompareDto, CompareResponseDto } from '../dto/compare.dto';
 import { CompareService } from '../services';
 
@@ -49,7 +54,7 @@ export class CompareController {
   async getCompareByUserId(
     @UserInfo() user: User,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ): Promise<IServiceSuccessResponse<Compare> | IServiceErrorResponse> {
     const { code, ...response } = await this.compareService.getCompareByUserId(
       user.id,
     );
