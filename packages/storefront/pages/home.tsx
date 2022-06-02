@@ -27,12 +27,7 @@ const Home: NextPage = () => {
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div className="col mb-5">
               <div className="card h-100">
-                <Image
-                  className="card-img-top"
-                  src={productPic}
-                  alt="..."
-                  layout="fill"
-                />
+                <Image className="card-img-top" src={productPic} alt="..." />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
@@ -53,12 +48,7 @@ const Home: NextPage = () => {
             </div>
             <div className="col mb-5">
               <div className="card h-100">
-                <Image
-                  className="card-img-top"
-                  src={productPic}
-                  alt="..."
-                  layout="fill"
-                />
+                <Image className="card-img-top" src={productPic} alt="..." />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
@@ -79,12 +69,7 @@ const Home: NextPage = () => {
             </div>
             <div className="col mb-5">
               <div className="card h-100">
-                <Image
-                  className="card-img-top"
-                  src={productPic}
-                  alt="..."
-                  layout="fill"
-                />
+                <Image className="card-img-top" src={productPic} alt="..." />
                 <div className="card-body p-4">
                   <div className="text-center">
                     <h5 className="fw-bolder">Fancy Product</h5>
