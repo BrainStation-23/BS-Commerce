@@ -4,15 +4,9 @@ const CheckoutFooter = () => {
   return (
     <>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Link href="/" passHref>
-          <a className="text-decoration-none text-xs mt-2">Refund policy</a>
-        </Link>
-        <Link href="/" passHref>
-          <a className="text-decoration-none text-xs mt-2">Privacy policy</a>
-        </Link>
-        <Link href="/" passHref>
-          <a className="text-decoration-none text-xs mt-2">Terms of service</a>
-        </Link>
+          <button className="text-xs mt-4">Refund policy</button>
+          <button className="text-xs mt-4">Privacy policy</button>
+          <button className="text-xs mt-4">Terms of service</button>
       </div>
     </>
   );
