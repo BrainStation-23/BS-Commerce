@@ -21,6 +21,5 @@
     "build": "lerna run --parallel build"
   },
   "dependencies": {
-    "formik": "^2.2.9"
   }
 }
