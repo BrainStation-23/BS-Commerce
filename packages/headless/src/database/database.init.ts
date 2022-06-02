@@ -1,3 +1,4 @@
+import { dbConfig } from "config/database";
 import { connect as connectToMongoDB } from "./mongodb/connect";
 import { connect as connectToMySql } from "./mysql/connect";
 
@@ -17,6 +18,7 @@ export async function connectToDatabase(db: DB) {
         }
     }
     catch (err) {
+        console.log(err)
         console.error('Error connecting to database');
     }
 }
