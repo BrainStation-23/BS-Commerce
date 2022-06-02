@@ -5,7 +5,7 @@ import ThreeStoriesCard from "@/components/global/components/threeStoriesCard";
 import OurService from "@/components/static/service/ourService";
 import UnlimitedService from "@/components/static/service/unlimitedService";
 
-import { storiesBody } from "../../utils/types";
+import { storiesBody } from "../utils/types";
 
 const threeStoriesList: storiesBody[] = [
   {
