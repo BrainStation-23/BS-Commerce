@@ -25,7 +25,7 @@ export default class ManufacturerModel extends Model<Manufacturer> {
   picture: string;
 
   @Column
-  isPublished: string;
+  isPublished: boolean;
 
   @Column
   displayOrder: string;

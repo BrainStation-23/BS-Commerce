@@ -1,3 +1,4 @@
+import { CreateManufacturerDto } from './../dto/manufacturer.dto';
 import { Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';
@@ -6,7 +7,7 @@ import { IManufacturerDatabase } from './manufacturer.database.interface';
 export class ManufacturerRepository {
     constructor(private readonly db: IManufacturerDatabase) { }
 
-    async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
+    async createManufacturer(manufacturer: CreateManufacturerDto): Promise<Manufacturer | null> {
         return await this.db.createManufacturer(manufacturer);
     }
 

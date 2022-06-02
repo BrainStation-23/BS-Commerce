@@ -1,3 +1,4 @@
+import { CreateManufacturerDto } from './../dto/manufacturer.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
@@ -33,7 +34,7 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Post('/create')
-    async addManufacturer(@Body() manufacturer: Manufacturer, @Res({ passthrough: true }) res: Response) {
+    async addManufacturer(@Body() manufacturer: CreateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.addManufacturer(manufacturer);
         res.status(code);
         return response;

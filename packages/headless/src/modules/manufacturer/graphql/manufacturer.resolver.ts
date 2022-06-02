@@ -1,3 +1,4 @@
+import { CreateManufacturerDto } from './../dto/manufacturer.dto';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
@@ -39,7 +40,7 @@ export class ManufacturerResolver {
    * @returns {Object} Object { error code data}
    */
   @Mutation()
-  async addManufacturer(@Args('manufacturer') manufacturer: Manufacturer) {
+  async addManufacturer(@Args('manufacturer') manufacturer: CreateManufacturerDto) {
     return await this.manufacturerService.addManufacturer(manufacturer);
   }
 

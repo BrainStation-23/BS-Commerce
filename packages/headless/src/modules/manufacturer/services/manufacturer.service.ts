@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
+import { CreateManufacturerDto } from '../dto/manufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
 
 @Injectable()
@@ -20,7 +21,7 @@ export class ManufacturerService {
      * @returns { Promise<Object> } Object of Success or Error
      * 
      */
-    async addManufacturer(manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async addManufacturer(manufacturer: CreateManufacturerDto): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const isManufacturerExist = await this.manufacturerRepo.getManufacturer({name: manufacturer.name});
 
         if (isManufacturerExist) {
