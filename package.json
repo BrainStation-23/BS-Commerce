@@ -19,5 +19,10 @@
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
     "dev": "run-p --print-label package:*",
     "build": "lerna run --parallel build"
+  },
+  "dependencies": {
+    "formik": "^2.2.9",
+    "xregexp": "^5.1.0",
+    "yup": "^0.32.11"
   }
 }

@@ -2,12 +2,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Breadcrumbs from "../global/breadcrumbs";
-import Button from "../global/button/button";
 import { loginSchema } from "../global/schemas/loginSchema";
 
 const ForgotPassword = (props: any) => {
-  const router = useRouter();
 
   const handleForgotPassword = (values: any) => {
     console.log(values);
@@ -15,7 +12,6 @@ const ForgotPassword = (props: any) => {
 
   return (
     <>
-      <Breadcrumbs route={router.asPath} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 sm:mx-4 md:mx-5"

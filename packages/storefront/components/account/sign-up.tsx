@@ -1,9 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Link from "next/link";
 
-import Breadcrumbs from "../global/breadcrumbs";
 import { registerSchema } from "../global/schemas/loginSchema";
 
 const Signup = (props: any) => {
@@ -11,18 +9,11 @@ const Signup = (props: any) => {
   const baseUrl = "http://localhost:3000";
 
   async function handleSignin(data: any) {
-    try {
-      const response = await axios.post(`${baseUrl}/user-auth/login`, data);
-      localStorage.setItem("userData", JSON.stringify(response.data));
-      router.push("/account/sign-in");
-    } catch (error: any) {
-      alert(error.response.data.message);
-    }
+   console.log(data);
   }
 
   return (
     <>
-      <Breadcrumbs route={router.asPath} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 sm:mx-4 md:mx-5"
@@ -41,7 +32,7 @@ const Signup = (props: any) => {
                 password: "",
                 confirm_password: "",
               }}
-              onSubmit={(values, actions) => {
+              onSubmit={(values: any, actions: any) => {
                 const data = {
                   firstName: values.firstname,
                   lastName: values.lastname,

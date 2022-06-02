@@ -1,31 +1,19 @@
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import type { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import Breadcrumbs from "../global/breadcrumbs";
-import Button from "../global/button/button";
-
 import { loginSchema } from "../global/schemas/loginSchema";
 
 const Signin = (props: any) => {
-  const router = useRouter();
   const baseUrl = "http://localhost:3000";
 
   async function handleSignin(data: any) {
-    try {
-      const response = await axios.post(`${baseUrl}/user-auth/login`, data);
-      localStorage.setItem("userData", JSON.stringify(response.data));
-      window.location.href = "/home";
-    } catch(error: any) {
-      alert(error.response.data.message);
-    }
+    console.log(data);
   }
 
   return (
     <>
-      <Breadcrumbs route={router.asPath} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 sm:mx-3 md:mx-5"
