@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import SwiperGrid from "../global/components/swipergrid";
 
 const FeaturedProducts = () => {
   return (
@@ -19,39 +20,12 @@ const FeaturedProducts = () => {
           Featured Products
         </h1>
       </div>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={3}
-        modules={[Grid, Pagination, Navigation]}
-        loop={true}
-        grid={{
-          fill: "row",
-          rows: 3,
-        }}
-        breakpoints={{
-          // when window width is >= 320px
-          320: {
-            slidesPerView: 1,
-            //   spaceBetween: 20
-          },
-          // when window width is >= 480px
-          480: {
-            slidesPerView: 2,
-            //   spaceBetween: 30
-          },
-          // when window width is >= 1024px
-          1024: {
-            slidesPerView: 3,
-            //   spaceBetween: 30
-          },
-          // when window width is >= 2560px
-          2560: {
-            slidesPerView: 4,
-            //   spaceBetween: 30
-          },
-        }}
-        navigation={true}
-        className="mySwiper m-5"
+
+      <SwiperGrid
+        slidesPerViewmobile={1}
+        slidesPerView768={2}
+        slidesPerView980={3}
+        rows={3}
       >
         {productData["products"] &&
           productData["products"].length > 0 &&
@@ -60,8 +34,7 @@ const FeaturedProducts = () => {
               <Product product={product} />
             </SwiperSlide>
           ))}
-        ...
-      </Swiper>
+      </SwiperGrid>
     </>
   );
 };
