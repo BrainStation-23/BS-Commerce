@@ -1,11 +1,11 @@
-import Banner from "./banner"
-import BannerBodyText from "./bannerBodyText"
-import BannerHeading from "./bannerHeading"
+import Banner from "./banner";
+import BannerBodyText from "./bannerBodyText";
+import BannerHeading from "./bannerHeading";
 
 const BannerPage = () => {
-    return (
-        <>
-             <div className="row">
+  return (
+    <>
+      <div className="row">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 sm:m-3 md:m-3 lg:m-16 sm:gap-5 md:gap-7 lg:gap-12">
           <Banner
             position="relative"
@@ -73,9 +73,9 @@ const BannerPage = () => {
             buttonText="Discover Now"
             linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
-            buttonPosition="absolute sm:bottom-3 lg:bottom-9 sm:left-0 lg:left-10"
+            buttonPosition="absolute sm:bottom-3 lg:bottom-16 sm:left-0 lg:left-10"
             buttonEdge="rounded-lg"
-            buttonPadding="sm:px-3 md:px-9 lg:px-9 py-3"
+            buttonPadding="sm:px-3 md:px-9 lg:px-9 sm:py-2 lg:py-2.5"
             buttonMargin="m-5"
             buttonBg="bg-green-600/100"
             onHover="bg-black"
@@ -95,8 +95,8 @@ const BannerPage = () => {
           />
         </div>
       </div>
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default BannerPage;
