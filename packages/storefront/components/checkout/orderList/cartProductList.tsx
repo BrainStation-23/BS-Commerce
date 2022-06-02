@@ -1,5 +1,5 @@
 import React from "react";
-import { checkoutProducts } from "../../checkout-products";
+import { checkoutProducts } from "../../../checkout-products";
 
 const CartProductList = (props: any) => {
   return (

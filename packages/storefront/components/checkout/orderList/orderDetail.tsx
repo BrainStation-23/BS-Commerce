@@ -1,4 +1,3 @@
-import { NextComponentType } from "next";
 import React from "react";
 import CartProductList from "./cartProductList";
 
