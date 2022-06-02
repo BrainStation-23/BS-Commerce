@@ -1,3 +1,31 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+/* Swiper components */
+
+.swiper-button-prev {
+  display: none !important;
+}
+
+.swiper-button-next {
+  display: none !important;
+}
+
+.swiper:hover .swiper-button-prev {
+  display: block !important;
+}
+
+.swiper:hover .swiper-button-next {
+  display: block !important;
+}
+
+.swiper-button-prev::after {
+  font-size: 30px !important;
+  color: #777;
+}
+
+.swiper-button-next::after {
+  font-size: 30px !important;
+  color: #777;
+}
