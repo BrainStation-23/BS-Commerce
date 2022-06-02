@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import Blog from "../components/blog/blog"
 
 const Home: NextPage = () => {
   return (
     <>
-    <Link href="/search">
-    <div className="hover:cursor-pointer text-blue-600">
-      Search Products
+    <div>
+      <Blog></Blog>
     </div>
-    </Link>
     </>
   );
 };
