@@ -1,8 +1,8 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional } from 'class-validator';
-import type { SignInData, CreateUser } from "models"
+import type { SignInRequest, CreateUserRequest, ForgotPasswordRequest } from 'models'
 
-export class SignInDataDto implements SignInData {
+export class SignInDataDto implements SignInRequest {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -16,7 +16,7 @@ export class SignInDataDto implements SignInData {
   password: string;
 }
 
-export class CreateUserDto implements CreateUser {
+export class CreateUserDto implements CreateUserRequest {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -57,7 +57,7 @@ export class CreateUserDto implements CreateUser {
   provider?: string;
 }
 
-export class ForgotPasswordDto {
+export class ForgotPasswordDto implements ForgotPasswordRequest {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

@@ -1,14 +1,13 @@
-import { Address } from "./address";
+import { Address } from './address';
 
 export interface User {
     id: string;
     firstName: string;
     lastName: string;
-    displayName?: string;
+    displayName: string;
     phone?: string;
     username: string;
     email: string;
-    password?: string;
     provider?: string;
     providerData?: object;
     additionalProviderData?: object;
@@ -16,5 +15,5 @@ export interface User {
     resetPasswordExpires?: number;
     gender?: string;
     addresses?: Address[];
-    status: string;
+    status?: string;
 }

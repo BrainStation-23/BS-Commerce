@@ -1,4 +1,5 @@
-export * from './user';
+export * from './getUser';
 export * from './address';
-export * from './password';
+export * from './changePassword';
 export * from './updateUser';
+export * from './user';
