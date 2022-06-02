@@ -1,7 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { NextComponentType } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { loginSchema } from "../global/schemas/loginSchema";
 
 const ForgotPassword = (props: any) => {
@@ -26,19 +24,18 @@ const ForgotPassword = (props: any) => {
           <div className="sm:m-5 my-3 md:mx-10">
             <Formik
               initialValues={{
-                email: "",
-                password: "",
+                phone: "",
               }}
-              onSubmit={(values, actions) => {
+              onSubmit={(values: any, actions: any) => {
                 const data = {
-                  email: values.email,
+                  phone: values.phone,
                 };
                 handleForgotPassword(data);
                 actions.setSubmitting(false);
               }}
               validationSchema={loginSchema}
             >
-              {(formikprops) => {
+              {(formikprops: any) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">

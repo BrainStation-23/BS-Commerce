@@ -6,9 +6,8 @@ import { useRouter } from "next/router";
 import { loginSchema } from "../global/schemas/loginSchema";
 
 const Signin = (props: any) => {
-  const baseUrl = "http://localhost:3000";
 
-  async function handleSignin(data: any) {
+  function handleSignin(data: any) {
     console.log(data);
   }
 
@@ -44,7 +43,7 @@ const Signin = (props: any) => {
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">
                       <Field
-                        type="phone"
+                        type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="phone"
                         name="phone"
