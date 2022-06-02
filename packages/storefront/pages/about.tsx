@@ -6,7 +6,7 @@ import ImageWithDescription from "@/components/static/about/imageWithDescription
 import ServiceArea from "@/components/static/about/serviceArea";
 import ClientSayArea from "@/components/static/about/clientSayArea";
 
-import { accordionBody, storiesBody, CarouselBody } from "../../utils/types";
+import { accordionBody, storiesBody, CarouselBody } from "../utils/types";
 
 const accordionList: accordionBody[] = [
   {
