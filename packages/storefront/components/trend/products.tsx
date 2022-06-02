@@ -23,7 +23,7 @@ const Products: FC = () => {
           {productData["products"] &&
             productData["products"].length > 0 &&
             productData.products.map((product: any) => (
-              <SwiperSlide>
+              <SwiperSlide key={product.id}>
                 <Product product={product} />
               </SwiperSlide>
             ))}
