@@ -9,15 +9,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     canActivate(context: ExecutionContext) {
         const ctx = GqlExecutionContext.create(context);
         const { req } = ctx.getContext();
-        return (coreConfig.api === 'GRAPHQL') ? super.canActivate(new ExecutionContextHost([req]),) : super.canActivate(context);
-
+        return (coreConfig.api === 'GRAPHQL') ? super.canActivate(new ExecutionContextHost([req])) : super.canActivate(context);
     }
     handleRequest(err: any, user: any, info: string) {
         if (err || !user) {
             if (!user) {
                 throw new HttpException('Sorry! You are not a valid User.', HttpStatus.FORBIDDEN);
             }
-            throw err || new UnauthorizedException('Unauthorized');
+            throw err;
         }
         return user;
     }

@@ -1,7 +1,4 @@
-import { ManufacturerCreateSchema } from './../validators/manufacturer.create.validator';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import * as Joi from 'joi';
-import { validateParams } from 'src/decorators/service.validator';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
@@ -23,7 +20,6 @@ export class ManufacturerService {
      * @returns { Promise<Object> } Object of Success or Error
      * 
      */
-    @validateParams({ schema: ManufacturerCreateSchema })
     async addManufacturer(manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const isManufacturerExist = await this.manufacturerRepo.getManufacturer({name: manufacturer.name});
 
@@ -46,7 +42,6 @@ export class ManufacturerService {
      * @param limit Optional
      * @returns { Promise<Object> } Object of Success or Error
      */
-    @validateParams({ schema: Joi.number().label('Skip') }, { schema: Joi.number().label('Limit') })
     async getAllManufacturers(skip?: number, limit?: number): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const foundManufacturers = await this.manufacturerRepo.getAllManufacturers(skip, limit);
 
@@ -69,7 +64,6 @@ export class ManufacturerService {
      * @param manufacturerId 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    @validateParams({ schema: Joi.string().required().label('Id') })
     async getManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 
@@ -88,7 +82,6 @@ export class ManufacturerService {
      * @param manufacturer 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    @validateParams({ schema: Joi.string().required().label('Id') }, { schema: ManufacturerCreateSchema })
     async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 
@@ -111,7 +104,6 @@ export class ManufacturerService {
      * @param manufacturerId 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    @validateParams({ schema: Joi.string().required().label('id') })
     async deleteManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({id: manufacturerId});
 

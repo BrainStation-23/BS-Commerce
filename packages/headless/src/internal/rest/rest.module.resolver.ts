@@ -1,11 +1,11 @@
 import { ManufacturerModule } from 'src/modules/manufacturer/manufacturer.rest.module';
 import { AuthModule } from 'src/modules/auth/auth.rest.module';
-import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
+import { UserModule } from 'src/modules/user/user.rest.module';
 
 export const ResolveRestModule = () => {
   return [
-    ManufacturerModule,
-    WishListModule,
-    AuthModule
+    AuthModule,
+    UserModule,
+    ManufacturerModule
   ];
 };
