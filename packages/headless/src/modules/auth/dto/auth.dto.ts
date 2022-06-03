@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional } from 'class-validator';
-import type { SignInRequest, CreateUserRequest, ForgotPasswordRequest } from 'models'
+import type { SignInRequest, CreateUserRequest, ForgotPasswordRequest, CreateUserErrorResponse, ErrorMessages } from 'models'
 
 export class SignInDataDto implements SignInRequest {
   @ApiProperty()
@@ -28,20 +28,10 @@ export class CreateUserDto implements CreateUserRequest {
   lastName: string;
 
   @ApiProperty()
-  @IsOptional()
-  @IsString()
-  displayName?: string;
-
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @IsEmail()
   email: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  username?: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -50,11 +40,6 @@ export class CreateUserDto implements CreateUserRequest {
     message: 'Password is too short. Minimal length is $constraint1 characters',
   })
   password: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  provider?: string;
 }
 
 export class ForgotPasswordDto implements ForgotPasswordRequest {
@@ -62,6 +47,43 @@ export class ForgotPasswordDto implements ForgotPasswordRequest {
   @IsNotEmpty()
   @IsString()
   username: string;
+}
+
+export class UserDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  firstName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @IsEmail()
+  email: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(6, {
+    message: 'Password is too short. Minimal length is $constraint1 characters',
+  })
+  password: string;
+}
+
+export class ErrorResponseDto implements CreateUserErrorResponse {
+  @ApiProperty()
+  code: number;
+
+  @ApiProperty()
+  error: ErrorMessages;
+
+  @ApiProperty()
+  errors: string[];
 }
 
 

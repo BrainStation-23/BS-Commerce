@@ -19,3 +19,6 @@ export interface SignInErrorResponse extends ErrorResponse {
     error: string;
     errors: DescriptiveError;
 }
+
+
+export type SignInResponse = SignInSuccessResponse | SignInErrorResponse;

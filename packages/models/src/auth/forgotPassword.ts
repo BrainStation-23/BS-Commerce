@@ -17,3 +17,5 @@ export interface ForgotPasswordErrorResponse extends ErrorResponse {
     error: string;
     errors: DescriptiveError;
 }
+
+export type ForgotPasswordResponse = ForgotPasswordSuccessResponse | ForgotPasswordErrorResponse;

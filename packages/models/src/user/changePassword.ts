@@ -15,3 +15,5 @@ export interface ChangePasswordErrorResponse extends ErrorResponse {
     error: string;
     errors: DescriptiveError;
 }
+
+export type ChangePasswordResponse = ChangePasswordErrorResponse | ChangePasswordSuccessResponse;

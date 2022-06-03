@@ -24,3 +24,5 @@ export interface UpdateUserErrorResponse extends ErrorResponse {
     error: string;
     errors: DescriptiveError;
 }
+
+export type UpdateUserResponse = UpdateUserSuccessResponse | UpdateUserErrorResponse;

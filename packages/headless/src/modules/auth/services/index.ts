@@ -10,25 +10,27 @@ import * as crypto from 'crypto';
 import { CreateUserDto, SignInDataDto } from '../dto/auth.dto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');
-import type { CreateUserErrorResponse, CreateUserSuccessResponse, SignInSuccessResponse, SignInErrorResponse, ForgotPasswordSuccessResponse, ForgotPasswordErrorResponse } from 'models'
+import type { SignInSuccessResponse, CreateUserResponse, SignInErrorResponse, ForgotPasswordSuccessResponse, ForgotPasswordErrorResponse } from 'models'
+import { User } from 'src/entity/user';
 
 @Injectable()
 export class AuthService {
   constructor(private userRepo: UserRepository, private helper: Helper, private jwtService: JwtService) { }
 
-  async signUp(user: CreateUserDto): Promise<ServiceErrorResponse | ServiceSuccessResponse> {
-    const doesUserExist = await this.userRepo.findUser({ email: user.email });
-    if (doesUserExist) return this.helper.serviceResponse.errorResponse('The user already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,) as CreateUserErrorResponse;
+  async signUp(data: CreateUserDto): Promise<CreateUserResponse> {
+    const doesUserExist = await this.userRepo.findUser({ email: data.email });
+    if (doesUserExist) return this.helper.serviceResponse.errorResponse('The user already exists. Please choose a different Email Address.', null, HttpStatus.BAD_REQUEST,);
 
+    let user: User;
     user.provider = 'local';
-    user.displayName = user.firstName + ' ' + user.lastName;
-    user.email = user.email.toLowerCase();
-    user.username = user.email;
-    user.password = await bcrypt.hash(user.password, authConfig.salt!);
+    user.displayName = data.firstName + ' ' + data.lastName;
+    user.email = data.email.toLowerCase();
+    user.username = data.email;
+    user.password = await bcrypt.hash(data.password, authConfig.salt!);
 
     const registeredUser = await this.userRepo.createUser(user);
-    if (!registeredUser) return this.helper.serviceResponse.errorResponse('Can\'t Create User.', null, HttpStatus.INTERNAL_SERVER_ERROR) as CreateUserErrorResponse;
-    return this.helper.serviceResponse.successResponse(registeredUser, HttpStatus.CREATED) as CreateUserSuccessResponse;
+    if (!registeredUser) return this.helper.serviceResponse.errorResponse('Can\'t Create User.', null, HttpStatus.INTERNAL_SERVER_ERROR);
+    return this.helper.serviceResponse.successResponse(registeredUser, HttpStatus.CREATED);
   }
 
   async signIn(data: SignInDataDto): Promise<ServiceErrorResponse | ServiceSuccessResponse> {

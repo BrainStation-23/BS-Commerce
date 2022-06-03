@@ -10,3 +10,6 @@ export interface GetUserErrorResponse extends ErrorResponse {
     error: string;
     errors: DescriptiveError;
 }
+
+
+export type GetUserResponse = GetUserSuccessResponse | GetUserErrorResponse;

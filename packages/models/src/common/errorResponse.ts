@@ -1,5 +1,5 @@
 export interface ErrorResponse {
-    code: number;
+    code?: number;
     error: string;
     errors: DescriptiveError;
 }

@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Address, User } from 'src/entity/user';
-import { CreateUserDto } from 'src/modules/auth/dto/auth.dto';
 import { IUserDatabase } from './user.database.interface';
 
 @Injectable()
 export class UserRepository {
   constructor(private readonly db: IUserDatabase) { }
 
-  async createUser(user: CreateUserDto): Promise<User | null> {
+  async createUser(user: User): Promise<User | null> {
     return await this.db.createUser(user);
   }
 
