@@ -1,25 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId, IsOptional } from 'class-validator';
-import type { AddCompareItem, CompareResponse, CompareItems } from 'models';
+import { IsMongoId } from 'class-validator';
+import type { AddCompareItem } from 'models';
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty()
   @IsMongoId()
   productId: string;
 }
 
-export class CompareResponseDto implements CompareResponse {
-  @ApiProperty()
+export interface CompareResponseDto {
   id: string;
-  @ApiProperty()
   userId: string;
-  @ApiProperty()
-  items: CompareItem[];
+  items: CompareItems[];
 }
 
-export class CompareItem implements CompareItems {
-  @ApiProperty()
+export interface CompareItems {
   productId: string;
-  @ApiProperty()
-  @IsOptional()
-  products?: any;
+  products: any;
 }

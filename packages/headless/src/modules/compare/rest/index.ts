@@ -9,13 +9,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Compare } from 'src/entity/compare';
 import { User } from 'src/entity/user';
@@ -35,7 +29,6 @@ import { CompareService } from '../services';
 export class CompareController {
   constructor(private compareService: CompareService) {}
 
-  @ApiResponse({ type: CompareResponseDto })
   @Post()
   async addItemToComapre(
     @UserInfo() user: User,
