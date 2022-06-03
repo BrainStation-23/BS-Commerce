@@ -113,7 +113,7 @@ const Information = () => {
                     </div>
 
                     <div className="row">
-                      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 sm:gap-0 md:gap-4 lg:gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
                         <div className="relative">
                           <Field
                             type="text"
@@ -185,7 +185,7 @@ const Information = () => {
                     </div>
 
                     <div className="row mb-3">
-                      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 sm:gap-0 md:gap-4 lg:gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
                         <div className="relative">
                           <Field
                             type="text"
@@ -248,7 +248,7 @@ const Information = () => {
                     Continue to shipping
                   </button>
                   <div className="flex flex-wrap items-center">
-                    <div className="items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+                    <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                     <Link href="/cart" passHref>
                       <a className="text-decoration-none">{<ChevronLeft />}</a>
                     </Link> 

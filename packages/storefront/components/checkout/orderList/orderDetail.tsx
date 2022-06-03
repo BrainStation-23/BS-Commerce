@@ -6,7 +6,7 @@ const OrderedProducts = (props: any) => {
     <div className="w-full">
       <div className="row mx-0 sm:mx-0 lg:mx-12 xl:mx-12 my-7 overflow-hidden">
         <div className="flex flex-col divide-y-2 h-full overflow-hidden">
-          <div className="overflow-y-scroll h-60 p-0 sm:px-2 md:px-10 lg:px-0">
+          <div className="overflow-y-scroll h-60 px-0 sm:px-2 md:px-10 lg:px-0 xl:px-0">
             <CartProductList />
           </div>
           <div className="mt-5">
