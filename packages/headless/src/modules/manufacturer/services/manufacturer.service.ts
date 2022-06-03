@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
-import { CreateManufacturerDto } from '../dto/manufacturer.dto';
+import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
 
 @Injectable()

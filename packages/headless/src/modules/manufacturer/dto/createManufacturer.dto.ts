@@ -1,9 +1,8 @@
-import { createManufacturerRequest } from './../../../../../models/src/manufacturer/createManufacturer';
-import { manufacturerSeo } from './../../../../../models/src/manufacturer/manufacturerSeo';
+import { CreateManufacturerRequest } from './../../../../../models/src/manufacturer/createManufacturer';
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength, ValidateNested } from "class-validator";
-import { regexConfig } from "config/regex";
-// import { Manufacturer, SEO } from "src/entity/manufacturer";
+import { ManufacturerSeo } from '../../../../../models/src/manufacturer/manufacturerSeo';
+
 
 export class UpdatedManufacturer {
     name?: string;
@@ -19,7 +18,7 @@ export class UpdatedManufacturer {
     }
 }
 
-export class ManufacturerSeoDto implements manufacturerSeo {
+export class ManufacturerSeoDto implements ManufacturerSeo {
     @ApiProperty()
     @IsString()
     @IsOptional()
@@ -41,7 +40,7 @@ export class ManufacturerSeoDto implements manufacturerSeo {
     SEFN?: string;
 }
 
-export class CreateManufacturerDto implements createManufacturerRequest {
+export class CreateManufacturerDto implements CreateManufacturerRequest {
     @ApiProperty()
     @IsString()
     @IsNotEmpty()

@@ -1,6 +1,6 @@
- import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
-import { Manufacturer } from 'src/index';
-import { manufacturerSeo } from './manufacturerSeo';
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { Manufacturer } from './manufacturer';
+import { ManufacturerSeo } from './manufacturerSeo';
 
  /**
  * API Path: /manufacturer/create
@@ -9,25 +9,25 @@ import { manufacturerSeo } from './manufacturerSeo';
  * response: CreateManufacturerResponse
  */
 
-export interface createManufacturerRequest {
+export interface CreateManufacturerRequest {
     name: string;
     description?: string;
     picture?: string;
     isPublished?: boolean;
     displayOrder?: number;
-    seo?: manufacturerSeo
+    seo?: ManufacturerSeo
 }
 
-export interface createManufacturerSuccessResponse extends SuccessResponse {
+export interface CreateManufacturerSuccessResponse extends SuccessResponse {
     code: number;
     data: Manufacturer;
 }
 
-export interface createManufacturerErrorResponse extends ErrorResponse {
+export interface CreateManufacturerErrorResponse extends ErrorResponse {
     code: number;
     error: string;
     errors: DescriptiveError;
 }
 
 
-export type CreateManufacturerResponse = createManufacturerSuccessResponse | createManufacturerErrorResponse;
+export type CreateManufacturerResponse = CreateManufacturerSuccessResponse | CreateManufacturerErrorResponse;

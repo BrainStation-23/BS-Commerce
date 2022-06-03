@@ -1,4 +1,4 @@
-import { manufacturerSeo } from "./manufacturerSeo";
+import { ManufacturerSeo } from "./manufacturerSeo";
 
 export interface Manufacturer {
     name: string;
@@ -6,5 +6,5 @@ export interface Manufacturer {
     picture?: string;
     isPublished?: boolean;
     displayOrder?: number;
-    seo?: manufacturerSeo
+    seo?: ManufacturerSeo
 }

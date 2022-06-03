@@ -2,7 +2,7 @@ import { IManufacturerDatabase } from 'src/modules/manufacturer/repositories/man
 import { Manufacturer } from 'src/entity/manufacturer';
 import { Injectable } from '@nestjs/common';
 import ManufacturerModel from './manufacturer.model';
-import { CreateManufacturerDto } from 'src/modules/manufacturer/dto/manufacturer.dto';
+import { CreateManufacturerDto } from 'src/modules/manufacturer/dto/createManufacturer.dto';
 
 @Injectable()
 export class ManufacturerDatabase implements IManufacturerDatabase {

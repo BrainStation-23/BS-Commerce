@@ -1,4 +1,4 @@
-export interface manufacturerSeo {
+export interface ManufacturerSeo {
     metaKeyword?: string;
     metaDescription?: string;
     metaTitle?: string;

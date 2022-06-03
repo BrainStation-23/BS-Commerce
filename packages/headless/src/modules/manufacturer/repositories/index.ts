@@ -1,4 +1,4 @@
-import { CreateManufacturerDto } from './../dto/manufacturer.dto';
+import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';

@@ -1,4 +1,4 @@
-import { CreateManufacturerDto } from './../dto/manufacturer.dto';
+import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
