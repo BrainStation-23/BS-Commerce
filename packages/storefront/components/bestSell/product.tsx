@@ -1,7 +1,7 @@
-import Icon from "../global/components/product/icon";
 import Picture from "../global/components/product/picture";
 import ProductInfo from "../global/components/product/productInfo";
 import { useEffect, useState } from "react";
+import Icon from "../global/components/icon";
 
 interface productInterface {
   id: number;
