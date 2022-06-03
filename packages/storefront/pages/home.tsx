@@ -1,11 +1,10 @@
-import Product from "@/components/global/components/product/product";
 import type { NextPage } from "next";
-import Products from "./trendProducts";
+import Product from "@/components/trend/products";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Products/>
+      <Product />
     </>
   );
 };
