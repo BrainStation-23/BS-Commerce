@@ -1,8 +1,9 @@
-import {SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 
 import Product from "./product";
 import productData from "../../allData/product-data.json";
 import SwiperGrid from "../global/components/swipergrid";
+import Container from "../global/components/container";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,9 +12,9 @@ import "swiper/css/pagination";
 
 const FeaturedProducts = () => {
   return (
-    <>
+    <Container>
       <div className="text-center mb-5  ">
-        <p className="text-sm font-light italic pt-5 md:text-sm lg:text-base ">
+        <p className="text-sm font-light italic md:text-sm lg:text-base ">
           Recently added our store
         </p>
         <h1 className="font-bold mb-10 text-xl md:text-3xl lg:text-4xl ">
@@ -28,13 +29,13 @@ const FeaturedProducts = () => {
       >
         {productData["products"] &&
           productData["products"].length > 0 &&
-          productData.products.map((product: any, index) => (
-            <SwiperSlide key={product.id} className="p-4">
+          productData.products.map((product: any) => (
+            <SwiperSlide key={product.id}>
               <Product product={product} />
             </SwiperSlide>
           ))}
       </SwiperGrid>
-    </>
+    </Container>
   );
 };
 

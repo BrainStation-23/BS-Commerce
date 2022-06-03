@@ -1,6 +1,6 @@
-import Icon from "./common/icon";
 import ProductInfo from "./common/productInfo";
 import Picture from "./common/picture";
+import Icon from "../icon";
 
 const Product = (props: any) => {
   const { product }: any = props;
