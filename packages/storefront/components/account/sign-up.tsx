@@ -23,7 +23,7 @@ const Signup = (props: any) => {
           <p className="text-center mt-2 mb-6 text-gray-500 mx-5">
             Please Register using account detail below.
           </p>
-          <div className="sm:m-5 my-3 md:mx-10">
+          <div className="sm:m-5 my-3 sm:mx-5 md:mx-10">
             <Formik
               initialValues={{
                 firstname: "",
