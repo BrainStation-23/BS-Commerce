@@ -9,7 +9,6 @@ interface Props {
 
 const Breadcrumb: React.FC<Props> = (props) => {
   const { title, pathArray, linkArray } = props;
-  console.log(title);
 
   return (
     <div className="sm:p-5 md:p-8 lg:p-14 bg-[url('https://cdn.pixabay.com/photo/2018/05/15/21/00/tomatoes-3404263_1280.jpg')] bg-cover bg-no-repeat bg-center">
