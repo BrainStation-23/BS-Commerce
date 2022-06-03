@@ -1,3 +1,4 @@
+import { CreateManufacturerResponse, CreateManufacturerErrorResponse, CreateManufacturerSuccessResponse } from './../../../../../models/src/manufacturer/createManufacturer';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { Helper } from 'src/helper/helper.interface';
@@ -21,19 +22,19 @@ export class ManufacturerService {
      * @returns { Promise<Object> } Object of Success or Error
      * 
      */
-    async addManufacturer(manufacturer: CreateManufacturerDto): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async addManufacturer(manufacturer: CreateManufacturerDto): Promise<CreateManufacturerResponse> {
         const isManufacturerExist = await this.manufacturerRepo.getManufacturer({name: manufacturer.name});
 
         if (isManufacturerExist) {
-            return this.helper.serviceResponse.errorResponse('Manufacturer already exists', { manufacturer: [`This manufacturer "${manufacturer.name}" already exists. Try with different name`] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse('Manufacturer already exists', { manufacturer: [`This manufacturer "${manufacturer.name}" already exists. Try with different name`] }, HttpStatus.BAD_REQUEST) as CreateManufacturerErrorResponse;
         }
 
         const newManufacturer = await this.manufacturerRepo.createManufacturer(manufacturer);
         if (!newManufacturer) {
-            return this.helper.serviceResponse.errorResponse('Manufacturer not created successfully', null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse('Manufacturer not created successfully', null, HttpStatus.BAD_REQUEST) as CreateManufacturerErrorResponse;
         }
 
-        return this.helper.serviceResponse.successResponse(newManufacturer);
+        return this.helper.serviceResponse.successResponse(newManufacturer, HttpStatus.OK) as CreateManufacturerSuccessResponse;
     }
 
     /**

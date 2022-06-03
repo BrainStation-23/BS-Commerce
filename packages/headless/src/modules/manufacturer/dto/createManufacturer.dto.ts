@@ -1,44 +1,8 @@
-import { CreateManufacturerRequest } from './../../../../../models/src/manufacturer/createManufacturer';
+import { CreateManufacturerRequest, CreateManufacturerErrorResponse, CreateManufacturerSuccessResponse } from './../../../../../models/src/manufacturer/createManufacturer';
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength, ValidateNested } from "class-validator";
-import { ManufacturerSeo } from '../../../../../models/src/manufacturer/manufacturerSeo';
-
-
-export class UpdatedManufacturer {
-    name?: string;
-    description?: string;
-    picture?: string;
-    isPublished?: boolean;
-    displayOrder?: number;
-    seo?: {
-        metaKeyword?: string;
-        metaDescription?: string;
-        metaTitle?: string;
-        SEFN?: string;
-    }
-}
-
-export class ManufacturerSeoDto implements ManufacturerSeo {
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
-    metaKeyword?: string;
-
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
-    metaDescription?: string;
-
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
-    metaTitle?: string;
-
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
-    SEFN?: string;
-}
+import { ManufacturerDto } from './manufacturer.dto';
+import { ManufacturerSeoDto } from './manufacturerSeo.dto';
 
 export class CreateManufacturerDto implements CreateManufacturerRequest {
     @ApiProperty()
@@ -74,3 +38,21 @@ export class CreateManufacturerDto implements CreateManufacturerRequest {
     seo?: ManufacturerSeoDto
 }
 
+export class CreateManufacturerErrorResponseDto implements CreateManufacturerErrorResponse {
+    @ApiProperty()
+    code: number;
+
+    @ApiProperty()
+    error: 'CANT\'T_CREATE_MANUFACTURER';
+
+    @ApiProperty()
+    errors: string[];
+}
+
+export class CreateManufacturerSuccessResponseDto implements CreateManufacturerSuccessResponse {
+    @ApiProperty()
+    code: number;
+
+    @ApiProperty()
+    data: ManufacturerDto;
+}

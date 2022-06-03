@@ -1,7 +1,9 @@
+import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
     Body,
     Controller,
@@ -15,11 +17,13 @@ import {
     Req,
     Res,
     UseGuards,
+    HttpStatus
 } from '@nestjs/common';
 import { Response } from 'express';
-
-@UseGuards(JwtAuthGuard)
 @Controller('manufacturers')
+@ApiTags('User Profile API')
+@ApiBearerAuth('BearerAuth')
+@UseGuards(JwtAuthGuard)
 export class ManufacturerController {
     constructor(
         private manufacturerService: ManufacturerService
@@ -34,6 +38,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Post('/create')
+    @ApiResponse({
+        description: 'Create Manufacturer Success Response',
+        type: CreateManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+      })
+      @ApiResponse({
+        description: 'Update User Error Response',
+        type: CreateManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+      })
     async addManufacturer(@Body() manufacturer: CreateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.addManufacturer(manufacturer);
         res.status(code);
