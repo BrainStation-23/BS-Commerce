@@ -1,9 +1,9 @@
-import type { NextComponentType } from "next";
+import { FC } from "react";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import Viewport from "./viewport";
 
-const Layout: NextComponentType = ({ children }) => {
+const Layout: FC = ({ children }) => {
   return (
     <>
       <Viewport />
