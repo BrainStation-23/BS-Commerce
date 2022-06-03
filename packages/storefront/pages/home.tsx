@@ -1,13 +1,14 @@
+import Product from "@/components/global/components/product/product";
 import type { NextPage } from "next";
 import Link from "next/link";
 import Blog from "../components/blog/blog"
+import Products from "./trendProducts";
 
 const Home: NextPage = () => {
   return (
     <>
-    <div>
       <Blog></Blog>
-    </div>
+      <Products/>
     </>
   );
 };

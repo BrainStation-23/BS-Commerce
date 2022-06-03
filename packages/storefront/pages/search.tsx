@@ -7,7 +7,7 @@ const Search: NextPage = () => {
 			<div className="container w-max px-15 m-auto tracking-wider items-center justify-center">
 				<div className="flex flex-wrap mx-15">
 					<div className=" pr-4 pl-4 lg:mx-1/5 md:w-full pr-4 pl-4">
-						<h4 className="text-gray-900 text-xl title-font font-normal mb-1 text-center">
+						<h4 className="text-gray-900 text-sm title-font font-normal mt-16 mb-1 text-center">
 							Your search for <strong className="highlight">Demo</strong> revealed the following:
 						</h4>
 

@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "yarn install; lerna bootstrap;",
+    "bootstrap": "yarn install && lerna bootstrap",
     "package:headless": "lerna run --scope headless --stream start:dev",
     "package:superadmin": "lerna run --scope superadmin --stream dev",
     "package:storefront": "lerna run --scope storefront --stream dev",
