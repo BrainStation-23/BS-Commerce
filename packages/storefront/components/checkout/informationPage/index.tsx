@@ -1,5 +1,5 @@
 import CheckoutFooter from "../checkoutFooter";
-import Information from "./information";
+import Information from "./informationForm";
 
 const InformationPage = () => {
   return (
