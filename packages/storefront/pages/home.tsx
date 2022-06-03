@@ -1,10 +1,24 @@
 import type { NextPage } from "next";
-import Product from "@/components/trend/products";
+import TrendingProducts from "@/components/trend/index";
+import WeekDeals from "@/components/weekDeals";
+import HomeShipping from "@/components/homeShipping";
+import HomeBanner from "@/components/homeBanner";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Product />
+      <div>
+        <HomeShipping />
+      </div>
+      <div className="mb-10">
+        <TrendingProducts />
+      </div>
+      <div className="mb-10">
+        <HomeBanner />
+      </div>
+      <div className="mb-10">
+        <WeekDeals />
+      </div>
     </>
   );
 };

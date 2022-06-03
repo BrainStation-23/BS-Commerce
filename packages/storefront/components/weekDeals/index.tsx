@@ -5,19 +5,19 @@ import SwiperGrid from "../global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
 import Container from "../global/components/container";
 
-const Products: FC = () => {
+const WeekDeals: FC = () => {
   return (
     <>
       <Container>
-        <div className="text-center mb-3">
+        <div className="text-center mb-6">
           <p className="text-lg font-serif italic">Recently added our store</p>
-          <h1 className="text-4xl text-bold ">Trending Products</h1>
+          <h1 className="text-4xl text-bold ">Deals Of The Weeks</h1>
         </div>
         <SwiperGrid
           slidesPerViewmobile={2}
           slidesPerView768={3}
           slidesPerView980={5}
-          rows={2}
+          rows={1}
         >
           {productData["products"] &&
             productData["products"].length > 0 &&
@@ -32,4 +32,4 @@ const Products: FC = () => {
   );
 };
 
-export default Products;
+export default WeekDeals;
