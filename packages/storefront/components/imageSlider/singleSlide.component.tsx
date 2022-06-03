@@ -15,7 +15,7 @@ const SinglePic = (props: { product: productInterface }) => {
         <Image src={image} alt="..." layout="fill" />
       </div>
         <div className="text-center md:text-left pl-10 md:pl-16 lg:pl-20 xl:pl-32 z-10 2xl:top-40 md:top-0 lg:top-5 xl:top-30  left-0 md:block w-4/5 md:w-2/5 sm:w-full lg:w-1/2 xl:w-5/12">
-          <h1 className="lg:text-left font-bold text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl  2xl:text-5xl ">
+          <h1 className="lg:text-left font-bold text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl  2xl:text-5xl ">
             {title}
           </h1>
           <h2 className="lg:mt-3 font-light text-xl md:text-2xl lg:text-3xl xl:text-4xl  2xl:text-5xl">
