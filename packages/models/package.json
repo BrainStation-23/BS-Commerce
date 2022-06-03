@@ -1,0 +1,21 @@
+{
+  "name": "models",
+  "version": "0.0.0",
+  "homepage": "https://github.com/BrainStation-23/BS-Commerce#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrainStation-23/BS-Commerce.git"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/BrainStation-23/BS-Commerce/issues"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}

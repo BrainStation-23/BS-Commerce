@@ -25,3 +25,7 @@ logs
 
 # Dependency directory
 node_modules
+
+#lock file
+yarn.lock
+package-lock.json

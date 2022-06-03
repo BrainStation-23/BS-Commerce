@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { UserRepository } from 'src/modules/user/repositories';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
-import { AuthController } from './rest/auth.controller';
+import { AuthController } from './rest';
 import { AuthService } from './services';
 import { authConfig } from 'config/auth';
 import { JwtStrategy } from './guards/jwt-strategy';
