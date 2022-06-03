@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import Banner from "./banner";
 
 const BestSell = () => {
   return (
@@ -20,25 +21,25 @@ const BestSell = () => {
           Best Sell
         </h1>
       </div>
-      <div  className="grid grid-cols-3">
-          <div>
-
-          </div>
-        <div className="col-span-2">
-        <SwiperGrid
-        slidesPerViewmobile={1}
-        slidesPerView768={2}
-        slidesPerView980={2}
-        rows={3}
-      >
-        {productData["products"] &&
-          productData["products"].length > 0 &&
-          productData.products.map((product: any, index) => (
-            <SwiperSlide key={product.id} className="p-4">
-              <Product product={product} />
-            </SwiperSlide>
-          ))}
-      </SwiperGrid>
+      <div className="md:grid md:grid-cols-3 md:gap-4">
+        <div className=" md:col-span-1 ">
+          <Banner />
+        </div>
+        <div className=" md:col-span-2  ml-10">
+          <SwiperGrid
+            slidesPerViewmobile={1}
+            slidesPerView768={1}
+            slidesPerView980={2}
+            rows={3}
+          >
+            {productData["products"] &&
+              productData["products"].length > 0 &&
+              productData.products.map((product: any, index) => (
+                <SwiperSlide key={product.id} className="p-4">
+                  <Product product={product} />
+                </SwiperSlide>
+              ))}
+          </SwiperGrid>
         </div>
       </div>
     </>
