@@ -16,14 +16,14 @@ const Signup = (props: any) => {
     <>
       <div className="flex flex-wrap justify-center">
         <div
-          className="flex flex-col my-20 py-7 sm:mx-4 md:mx-5"
+          className="flex flex-col my-20 py-7 mx-3"
           style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
         >
           <h2 className="text-3xl mx-3 text-center text-gray-800">Create Account</h2>
           <p className="text-center mt-2 mb-6 text-gray-500 mx-5">
             Please Register using account detail below.
           </p>
-          <div className="sm:m-5 my-3 sm:mx-5 md:mx-10">
+          <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
                 firstname: "",
@@ -112,7 +112,7 @@ const Signup = (props: any) => {
                       </div>
                     </div>
 
-                    <button type="submit" className="rounded py-2 my-2 sm:w-full md:w-1/4 bg-green-600/100 hover:bg-black text-white">Sign Up</button>
+                    <button type="submit" className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white">Sign Up</button>
                   </Form>
                 );
               }}
