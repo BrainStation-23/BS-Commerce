@@ -1,6 +1,6 @@
 import React, { Children, FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import Image from "next/image";
 
 import { CarouselBody } from "utils/types";
@@ -24,7 +24,7 @@ const CarouselSlider: FC<Props> = ({ children }) => {
         clickable: true,
       }}
       loop={true}
-      modules={[Autoplay]}
+      modules={[Autoplay,Pagination]}
     >
       {children}
     </Swiper>
