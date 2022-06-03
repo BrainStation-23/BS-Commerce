@@ -5,14 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      screens: {
-        'sm': '320px',
-        'md': '495px',
-        'tab': '720px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px'
-      },
       keyframes: {
         'fade-in-down': {
             '0%': {
