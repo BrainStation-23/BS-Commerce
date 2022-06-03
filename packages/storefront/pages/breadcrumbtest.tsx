@@ -1,12 +1,10 @@
-import Breadcrumbs from "@/components/global/breadcrumbs";
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
 
 const BreadcrumbTest: NextPage = () => {
-    const router = useRouter();
   return (
     <>
-        <Breadcrumbs route={router.asPath} />
+        <Breadcrumb title="Breadcrumb" pathArray={["Home", "Breadcrumb"]} linkArray={["/home", "/breadcrumbtest"]} />
     </>
   );
 };
