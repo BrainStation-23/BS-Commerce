@@ -9,10 +9,13 @@ import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import Banner from "./banner";
+import Container from "../global/components/container";
+import Link from "next/link";
 
 const BestSell = () => {
   return (
     <>
+    <Container> 
       <div className="text-center mb-5">
         <p className="text-sm font-light italic pt-5 md:text-sm lg:text-base">
           Recently added our store
@@ -21,11 +24,14 @@ const BestSell = () => {
           Best Sell
         </h1>
       </div>
-      <div className="md:grid md:grid-cols-3 md:gap-4">
-        <div className=" md:col-span-1 ">
-          <Banner />
+      <div className="md:grid md:grid-cols-12 md:gap-5 ">
+        <div className=" md:col-span-4 xl:scale-125 ">
+        <Link href="/">
+          <a><Banner /></a>
+        </Link>
+          
         </div>
-        <div className=" md:col-span-2  ml-10">
+        <div className=" md:col-span-7 md:col-start-6 lg:col-start-5 lg:col-span-8 ml-10">
           <SwiperGrid
             slidesPerViewmobile={1}
             slidesPerView768={1}
@@ -35,13 +41,14 @@ const BestSell = () => {
             {productData["products"] &&
               productData["products"].length > 0 &&
               productData.products.map((product: any, index) => (
-                <SwiperSlide key={product.id} className="p-4">
+                <SwiperSlide key={product.id} className="pl-14">
                   <Product product={product} />
                 </SwiperSlide>
               ))}
           </SwiperGrid>
         </div>
       </div>
+    </Container>
     </>
   );
 };
