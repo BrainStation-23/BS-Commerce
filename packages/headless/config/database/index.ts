@@ -1,4 +1,4 @@
-import { Dialect } from "sequelize/types";
+import { Dialect } from 'sequelize/types';
 
 const { DB, MONGODB_URI, MYSQL_DB_HOST, MYSQL_DB_PORT, MYSQL_DB_USER, MYSQL_DB_PASSWORD, MYSQL_DB_DIALECT, MYSQL_DB_NAME } = process.env;
 export const dbConfig = {
