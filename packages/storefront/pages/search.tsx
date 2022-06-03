@@ -12,7 +12,7 @@ const Search: NextPage = () => {
 						</h4>
 
 						<div className="flex justify-center mt-5">
-							<div className="mb-3 w-4/5 lg:w-2/5">
+							<div className="mb-3 w-4/5 lg:w-2/4">
 								<div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
 									<input
 										type="search"
