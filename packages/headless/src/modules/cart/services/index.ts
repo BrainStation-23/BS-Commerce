@@ -1,12 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Item } from 'src/entity/cart';
 import { Helper } from 'src/helper/helper.interface';
 import {
   ServiceErrorResponse,
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
-import { ItemDto } from '../dto/cart.dto';
+import { ItemDto } from '../dto/addToCart.dto';
 import { CartRepository } from '../repositories';
+import type { addToCartErrorResponse, AddToCartResponse, addToCartSuccessResponse } from 'models';
 
 @Injectable()
 export class CartService {
@@ -15,10 +15,10 @@ export class CartService {
   async addToCart(
     item: ItemDto,
     userId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  ): Promise<AddToCartResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
     if (!existCart) {
-      const createCart = await this.cartRepo.createCart({userId, items:[item]});
+      const createCart = await this.cartRepo.createCart({ userId, items: [item] });
       if (!createCart) {
         return this.helper.serviceResponse.errorResponse(
           'Can\'t create cart',
@@ -43,7 +43,7 @@ export class CartService {
         );
       }
       return this.helper.serviceResponse.successResponse(
-        await this.cartRepo.getCartProduct( cart),
+        await this.cartRepo.getCartProduct(cart),
         HttpStatus.OK,
       );
     }
@@ -60,7 +60,7 @@ export class CartService {
       );
     } else {
       return this.helper.serviceResponse.successResponse(
-        await this.cartRepo.getCartProduct(cart,),
+        await this.cartRepo.getCartProduct(cart),
         HttpStatus.OK,
       );
     }
