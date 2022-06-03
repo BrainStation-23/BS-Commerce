@@ -240,15 +240,15 @@ const Information = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center sm:flex-col md:flex-row lg:flex-row gap-5">
+                <div className="flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
                   <button
                     type="submit"
-                    className="rounded text-sm p-5 my-2 sm:w-full md:w-44 lg:w-44 bg-black text-white"
+                    className="rounded text-sm p-5 my-2 w-full sm:w-full md:w-44 lg:w-44 xl:w-44 bg-black text-white"
                   >
                     Continue to shipping
                   </button>
                   <div className="flex flex-wrap items-center">
-                    <div className="sm:block sm:items-center md:hidden lg:hidden">
+                    <div className="items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                     <Link href="/cart" passHref>
                       <a className="text-decoration-none">{<ChevronLeft />}</a>
                     </Link> 

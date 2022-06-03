@@ -27,8 +27,8 @@ const CartProductList = (props: any) => {
                       {checkoutProduct.quantity}
                     </span>
                   </div>
-                  <div className="sm:ml-3 md:ml-5 lg:ml-5">
-                    <p className="sm:text-xs md:text-sm lg:text-normal font-semibold">{checkoutProduct.title}</p>
+                  <div className="ml-3 sm:ml-3 md:ml-5 lg:ml-5 xl:ml-2">
+                    <p className="text-xs sm:text-xs md:text-sm lg:text-normal xl:text-normal font-semibold">{checkoutProduct.title}</p>
                     {checkoutProduct.additionalInfo && (
                       <div className="text-xs text-gray-500">
                         {checkoutProduct.additionalInfo}

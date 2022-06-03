@@ -10,18 +10,18 @@ const OrderList = () => {
   return (
     <>
       <div
-        className="flex-initial lg:w-2/5 sm:hidden md:hidden lg:block"
+        className="flex-initial lg:w-2/5 hidden sm:hidden md:hidden lg:block xl:block"
         style={{ background: "#fafafa" }}
       >
         <OrderedProducts />
       </div>
 
       <div
-        className="flex flex-wrap justify-between sm:block md:block lg:hidden my-7 p-5 text-xs"
+        className=" border-gray-500 flex flex-wrap justify-between sm:block md:block lg:hidden xl:hidden my-7 py-5 px-3 sm:px-10 md:px-10 lg:px-5 xl:px-5 text-xs"
         style={{ background: "#fafafa" }}
       >
         <div
-          className="flex flex-wrap justify-between"
+          className="w-full px-4 flex flex-wrap justify-between"
           style={{ background: "#fafafa" }}
         >
           <div className="flex flex-wrap">
@@ -51,7 +51,7 @@ const OrderList = () => {
         </div>
 
         {dropdown && (
-          <div style={{ background: "#fafafa" }}>
+          <div className="w-full" style={{ background: "#fafafa" }}>
             <OrderedProducts />
           </div>
         )}
