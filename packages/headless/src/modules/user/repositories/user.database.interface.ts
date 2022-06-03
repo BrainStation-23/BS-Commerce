@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Address, User } from 'src/entity/user';
-import { CreateUserDto } from 'src/modules/auth/dto/auth.dto';
 
 @Injectable()
 export abstract class IUserDatabase {

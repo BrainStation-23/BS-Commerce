@@ -4,7 +4,7 @@ import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
-import { UpdatedUserDto } from '../dto/user.dto';
+import { UpdatedUserDto } from '../dto';
 
 @UseGuards(JwtAuthGuard)
 export class UserResolver {

@@ -1,11 +1,7 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
 
-export enum ErrorMessages {
-    USER_ALREADY_EXITS = 'USER_ALREADY_EXITS'
-}
-
 /**
- * API Path: /auth/sign-up
+ * API Path: /auth/signup
  * method: POST
  * body: CreateUserRequest
  * response: CreateUserResponse
@@ -25,7 +21,7 @@ export interface CreateUserSuccessResponse extends SuccessResponse {
 
 export interface CreateUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: ErrorMessages.USER_ALREADY_EXITS;
+    error: 'USER_ALREADY_EXITS' | 'CAN\'T_CREATE_USER';
     errors: DescriptiveError;
 }
 
