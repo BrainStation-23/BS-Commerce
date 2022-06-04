@@ -44,7 +44,7 @@ export class ManufacturerController {
         status: HttpStatus.OK
       })
       @ApiResponse({
-        description: 'Update User Error Response',
+        description: 'Create Manufacturer Error Response',
         type: CreateManufacturerErrorResponseDto,
         status: HttpStatus.BAD_REQUEST
       })

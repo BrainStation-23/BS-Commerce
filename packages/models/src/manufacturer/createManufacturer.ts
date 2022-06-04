@@ -2,12 +2,21 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 import { Manufacturer } from './manufacturer';
 import { ManufacturerSeo } from './manufacturerSeo';
 
- /**
- * API Path: /manufacturer/create
- * method: POST
- * body: createManufacturerRequest
- * response: CreateManufacturerResponse
- */
+export enum CreateManufacturerErrorMessages {
+    MANUFACTURER_ALREADY_EXISTS = 'Manufacturer already exists.',
+    MANUFACTURER_NOT_CREATED_SUCCESSFULLY = 'Manufacturer not created successfully'
+}
+
+export enum CreateManufacturerSuccessMessages {
+    MANUFACTURER_CREATED_SUCCESSFULLY = 'Manufacturer created successfully.'
+}
+
+/**
+* API Path: /manufacturer/create
+* method: POST
+* body: createManufacturerRequest
+* response: CreateManufacturerResponse
+*/
 
 export interface CreateManufacturerRequest {
     name: string;
@@ -25,7 +34,7 @@ export interface CreateManufacturerSuccessResponse extends SuccessResponse {
 
 export interface CreateManufacturerErrorResponse extends ErrorResponse {
     code: number;
-    error: string;
+    error: CreateManufacturerErrorMessages.MANUFACTURER_ALREADY_EXISTS | CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY;
     errors: DescriptiveError;
 }
 
