@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
 
-import { Product } from '../../../entity/product';
 import { IBrandDatabase } from './brand.database.interface';
 import { Brand } from 'src/entity/brand';
 

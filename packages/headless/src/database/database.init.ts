@@ -4,6 +4,8 @@ import { connect as connectToMySql } from "./mysql/connect";
 
 type DB = 'MONGO' | 'MYSQL';
 export async function connectToDatabase(db: DB) {
+    console.log(db);
+    console.log('------------------');
     try {
         switch (db) {
             

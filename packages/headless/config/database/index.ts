@@ -13,5 +13,5 @@ export const dbConfig = {
         port: parseInt(MYSQL_DB_PORT!) || 3306,
         dialect: MYSQL_DB_DIALECT as Dialect || 'mysql',
     },
-    db: DB || 'MYSQL'
+    db: DB || 'MONGO'
 }
