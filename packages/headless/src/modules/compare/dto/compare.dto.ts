@@ -28,7 +28,7 @@ export class CompareDataDto implements CompareData {
   id: string;
   @ApiProperty()
   userId: string;
-  @ApiProperty()
+  @ApiProperty({ type: () => [CompareItemsDto] })
   items: CompareItems[];
 }
 
