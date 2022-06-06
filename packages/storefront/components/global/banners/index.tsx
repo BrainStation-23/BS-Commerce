@@ -69,7 +69,7 @@ const BannerPage = () => {
             position="relative"
             width="w-full"
             height="h-52 sm:h-52 md:h-52 lg:h-80 xl-80"
-            hasButton="true"
+            hasButton={true}
             buttonText="Discover Now"
             linkhref="/home" //need to modify href later
             bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
@@ -80,7 +80,7 @@ const BannerPage = () => {
             buttonBg="bg-green-600/100"
             onHover="bg-black"
             buttonTextColor="text-white"
-            hasHeading="true"
+            hasHeading={true}
             heading={
               <BannerHeading
                 largeHeading="true"
