@@ -1,11 +1,12 @@
 import type { NextComponentType } from "next";
 import DeliveryDetails from "./subcomponents/deliveryDetails/main";
 import CartDetails from "./subcomponents/cartTable/main";
+import PageTitle from "../global/components/pageTitle";
 const CartComponent: NextComponentType = () => {
   return (
     <>
-      <div className="flex justify-center">
-        <h1 className="text-5xl font-bold">Your Shopping Cart</h1>
+      <div>
+        <PageTitle title={"Your Shopping Cart"} />
       </div>
       <div>
         <CartDetails />

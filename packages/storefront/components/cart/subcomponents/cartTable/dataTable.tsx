@@ -20,30 +20,34 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
             <Image
               src={cartData.meta.img}
               alt="product Image"
-              width={130}
-              height={120}
+              width={100}
+              height={90}
             />
           </td>
-          <td className="border border-slate-300 md:px-4 xl:px-10 py-10">
+          <td className="border border-slate-300 md:px-2 xl:px-10 py-10">
             {cartData.meta.title}
           </td>
           <td className="border border-slate-300 px-6 py-14 ">
-            <span className="flex justify-center"> {cartData.meta.price}</span>
+            <span className="flex justify-center"> ${cartData.meta.price}</span>
           </td>
-          <td className="border border-slate-300 md:px-4 xl:px-10 py-4">
-            <div className="box-content h-4 w-20 p-4 border-4">
-              <div className="flex justify-between">
-                <button>+</button>
-                <div>{cartData.quantity}</div>
-                <button>-</button>
+          <td className="border border-slate-150 md:px-2 xl:px-10 py-4">
+            <div className="flex justify-center">
+              <div className="box-content h-4 w-12 p-4 border-4">
+                <div className="flex justify-between">
+                  <button>+</button>
+                  <div>{cartData.quantity}</div>
+                  <button>-</button>
+                </div>
               </div>
             </div>
           </td>
-          <td className="border border-slate-300 md:px-4 xl:px-8 py-14">
-            $55.00
+          <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
+            <div className="flex justify-center">$ 55</div>
           </td>
-          <td className="border border-slate-300 md:px-6 xl:px-12 py-14">
-            <button className="flex justify-center">X</button>
+          <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
+            <div className="flex justify-center">
+              <button>X</button>
+            </div>
           </td>
         </tr>
       );
@@ -55,7 +59,7 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
         <table className="border-collapse border border-slate-400">
           <thead className="">
             <tr>
-              <th className="border-0 border-slate-300 border-b border-green-600 px-16 py-4 md:px-12 text-base bg-slate-200">
+              <th className="border-0 border-slate-300 border-b border-green-600 px-16 py-4 md:px-8 text-base bg-slate-200">
                 Image
               </th>
               <th className="border border-slate-300 md:px-2 xl:px-10 py-4 text-base bg-slate-200">
@@ -64,13 +68,13 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
               <th className="border border-slate-300 px-10 py-4 text-base bg-slate-200">
                 Price
               </th>
-              <th className="border border-slate-300 md:px-4 xl:px-10 py-4 text-base bg-slate-200">
+              <th className="border border-slate-300 md:px-2 xl:px-10 py-4 text-base bg-slate-200">
                 Quantity
               </th>
-              <th className="border border-slate-300 md:px-4 xl:px-6 py-4 text-base bg-slate-200">
+              <th className="border border-slate-300 md:px-2 xl:px-6 py-4 text-base bg-slate-200">
                 Total
               </th>
-              <th className="border border-slate-300 md:px-6 xl:px-10 py-4 text-base bg-slate-200">
+              <th className="border border-slate-300 md:px-2 xl:px-10 py-4 text-base bg-slate-200">
                 Remove
               </th>
             </tr>

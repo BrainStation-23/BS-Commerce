@@ -11,12 +11,26 @@ const ItemsLists: React.FC<Properties> = (props) => {
     <>
       <div className="p-4">
         <div className="flex flex-col-3 items-center bg-white rounded-lg border">
-          <div className="mr-4">
+          <div className="mr-4 relative">
             <img
               className="object-cover w-full h-48 rounded-t-lg w-30 rounded-none"
               src={props.image}
               alt="Product Image"
             />
+            <span
+              className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
+              style={{ background: "#808080" }}
+            >
+              <svg
+                className="w-4 h-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path fillRule="evenodd" clipRule="evenodd"></path>
+              </svg>
+              X
+            </span>
           </div>
           <div className="col-span-2 justify-between px-4 leading-normal">
             <h5 className="mb-2 text-lg font-bold text-gray-900 mb-3">
