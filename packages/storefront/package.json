@@ -10,13 +10,17 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.4",
     "@popperjs/core": "^2.11.4",
     "marketplace": "^1.0.0",
+    "models": "*",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "swiper": "^8.1.5",
-    "models": "*"
+    "formik": "^2.2.9",
+    "xregexp": "^5.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
