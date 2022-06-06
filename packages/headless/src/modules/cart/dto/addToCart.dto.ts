@@ -1,7 +1,7 @@
+import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import type { Cart, Item, CartProduct, addToCartErrorResponse, addToCartRequest } from 'models';
-
+import { Cart, ResItem, Item, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage } from 'models';
 export class AddToCartResponseDto implements Cart {
     @ApiProperty()
     @IsString()
@@ -11,12 +11,11 @@ export class AddToCartResponseDto implements Cart {
     @IsString()
     userId: string;
 
-    @ApiProperty()
+    @ApiProperty({ type: () => [ResItemDto] })
     @IsArray()
-    items: Item[];
+    items: ResItemDto[];
 }
-
-export class ItemDto implements Item {
+class ResItemDto implements ResItem {
     @ApiProperty()
     @IsOptional()
     @IsObject()
@@ -31,25 +30,36 @@ export class ItemDto implements Item {
     quantity: number;
 }
 
-export class AddToCartErrorResponseDto implements addToCartErrorResponse {
+
+export class ItemDto implements Item {
     @ApiProperty()
-    code: number;
+    @IsString()
+    productId: string;
 
     @ApiProperty()
-    error: 'Can\'t create cart' | 'Can\'t add item to the cart' | 'Can\'t increment cart item';;
+    @IsNumber()
+    quantity: number;
+}
+
+export class AddToCartErrorResponseDto implements addToCartErrorResponse {
+    @ApiProperty({
+        default: HttpStatus.BAD_REQUEST,
+    })
+    code: number;
+
+    @ApiProperty({
+        example: ErrorMessage.CANNOT_CREATE_CART,
+        examples: [ErrorMessage.CANNOT_CREATE_CART, ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, ErrorMessage.CANNOT_INCREMENT_CART_ITEM],
+    })
+    error: ErrorMessage.CANNOT_CREATE_CART | ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART | ErrorMessage.CANNOT_INCREMENT_CART_ITEM;
 
     @ApiProperty()
     errors: string[];
 }
 
-export class AddToCartRequestDto implements addToCartRequest{
+export class AddToCartRequestDto implements addToCartRequest {
     @ApiProperty()
     @IsNotEmpty()
     @IsObject()
     item: Item;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    userId: string;
 }

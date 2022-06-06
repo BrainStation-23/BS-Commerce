@@ -4,9 +4,9 @@ import {
   ServiceErrorResponse,
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
-import { ItemDto } from '../dto/addToCart.dto';
+import {ItemDto } from '../dto/addToCart.dto';
 import { CartRepository } from '../repositories';
-import type { addToCartErrorResponse, AddToCartResponse, addToCartSuccessResponse } from 'models';
+import { AddToCartResponse, ErrorMessage } from 'models';
 
 @Injectable()
 export class CartService {
@@ -21,7 +21,7 @@ export class CartService {
       const createCart = await this.cartRepo.createCart({ userId, items: [item] });
       if (!createCart) {
         return this.helper.serviceResponse.errorResponse(
-          'Can\'t create cart',
+          ErrorMessage.CANNOT_CREATE_CART,
           null,
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
@@ -37,7 +37,7 @@ export class CartService {
       const cart = await this.cartRepo.addItem(userId, item);
       if (!cart) {
         return this.helper.serviceResponse.errorResponse(
-          'Can\'t add item to the cart',
+          ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART,
           null,
           HttpStatus.BAD_REQUEST,
         );
@@ -54,7 +54,7 @@ export class CartService {
     );
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can\'t increment cart item',
+        ErrorMessage.CANNOT_INCREMENT_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
