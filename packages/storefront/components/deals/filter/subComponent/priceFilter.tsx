@@ -19,10 +19,14 @@ const PriceFilter: NextComponentType = () => {
                 placeholder="0"
               />
             </span>
+            <span className="flex justify-center grid content-center">
+              From
+            </span>
           </div>
-          <div className="text-sm ml-4 text-center flex justify-center grid content-center lg:py-2 xl:px-2">
+          {/* <div className="text-sm ml-4 text-center flex justify-center grid content-center lg:py-2 xl:px-2">
             From
-          </div>
+          </div> */}
+          <div></div>
           <div>
             <div className="flex flex-row">
               <span className="text-sm mr-2 flex justify-center grid content-center">

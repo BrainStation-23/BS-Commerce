@@ -12,7 +12,7 @@ const Deals: NextComponentType = () => {
           <DealsFilter />
         </div>
         <div className="grid col-span-4">
-          <div className="py-14 px-8 md:px-12 lg:px-12 xl:px-14">
+          <div className="py-14 px-4 md:px-12 lg:px-12 xl:px-14">
             <ProductSort />
           </div>
           <DealProductSegment />
