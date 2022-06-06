@@ -21,7 +21,7 @@ const OrderList = () => {
         style={{ background: "#fafafa" }}
       >
         <div
-          className="w-full px-4 flex flex-wrap justify-between"
+          className="w-full sm:px-4 md:px-16 flex flex-wrap justify-between"
           style={{ background: "#fafafa" }}
         >
           <div className="flex flex-wrap">
@@ -51,7 +51,7 @@ const OrderList = () => {
         </div>
 
         {dropdown && (
-          <div className="w-full" style={{ background: "#fafafa" }}>
+          <div className="w-full md:px-14" style={{ background: "#fafafa" }}>
             <OrderedProducts />
           </div>
         )}

@@ -3,7 +3,6 @@ import CreditCard from "@/components/global/icons-for-checkout-page/credit-card"
 import { Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { useState } from "react";
-import { string } from "yup";
 
 interface FormData {
   cardNumber: string;

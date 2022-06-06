@@ -9,7 +9,7 @@ const ContactDetails = () => {
             <p className="text-gray-500">Contact</p>
             <p>shatabdi@gmail.com</p>
           </div>
-          <Link href="/checkoutInformation" passHref>
+          <Link href="/information" passHref>
             <a className="text-decoration-none text-xs">Change</a>
           </Link>
         </div>
@@ -19,7 +19,7 @@ const ContactDetails = () => {
             <p className="text-gray-500">Ship to</p>
             <p>Dhaka, Bangladesh</p>
           </div>
-          <Link href="/checkoutInformation" passHref>
+          <Link href="/information" passHref>
             <a className="text-decoration-none text-xs">Change</a>
           </Link>
         </div>
