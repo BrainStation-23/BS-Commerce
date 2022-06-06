@@ -3,7 +3,7 @@ import Link from "next/link";
 const CheckoutFooter = () => {
   return (
     <>
-      <div className="mt-5 flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4">
         <Link href="/" passHref>
           <a className="text-decoration-none text-xs mt-2">Refund policy</a>
         </Link>
