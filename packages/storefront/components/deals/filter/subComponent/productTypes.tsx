@@ -1,5 +1,6 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
+import CounterElement from "./counterElement";
 import radiott from "../../../../styles/radioButton.module.css";
 const ProductTypeOptions: NextComponentType = () => {
   const availableProductTypeOptions = [
@@ -16,6 +17,9 @@ const ProductTypeOptions: NextComponentType = () => {
     useState("");
   return (
     <>
+      <div className="py-2">
+        <CounterElement />
+      </div>
       <div className={radiott.custom}>
         {availableProductTypeOptions.map((availableOption) => {
           return (

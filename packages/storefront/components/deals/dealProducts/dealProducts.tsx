@@ -5,7 +5,7 @@ const DealProductSegment: NextComponentType = () => {
   return (
     <>
       <div>
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4 xl:grid-cols-5 xl:gap-4 justify-items-center">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-3 xl:grid-cols-3 xl:gap-3 justify-items-center">
           {productData["products"] &&
             productData["products"].length > 0 &&
             productData.products.map((product: any) => (

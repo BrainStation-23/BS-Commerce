@@ -7,12 +7,12 @@ const Deals: NextComponentType = () => {
   return (
     <div className="mt-20">
       <PageTitle title={"Deals"} />
-      <div className="px-10 lg:px-16 xl:px-40 grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">
+      <div className="px-14 lg:px-24 xl:px-60 grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">
         <div>
           <DealsFilter />
         </div>
         <div className="grid col-span-4">
-          <div className="py-14 px-8">
+          <div className="py-14 px-8 md:px-12 lg:px-12 xl:px-14">
             <ProductSort />
           </div>
           <DealProductSegment />

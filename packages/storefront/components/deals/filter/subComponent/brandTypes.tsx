@@ -1,5 +1,6 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
+import CounterElement from "./counterElement";
 import radio from "../../../../styles/radioButton.module.css";
 const BrandTypeOptions: NextComponentType = () => {
   const availableOptions = [
@@ -15,6 +16,9 @@ const BrandTypeOptions: NextComponentType = () => {
   const [brandTypesOptionVal, setBrandTypesOptionVal] = useState("");
   return (
     <>
+      <div className="py-2">
+        <CounterElement />
+      </div>
       <div className={radio.custom}>
         {availableOptions.map((option) => {
           return (

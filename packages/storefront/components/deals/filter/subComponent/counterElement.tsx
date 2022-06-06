@@ -1,12 +1,12 @@
 import type { NextComponentType } from "next";
-const counterElement = () => {
+const CounterElement: NextComponentType = () => {
   return (
     <>
-      <div className="border border-gray-300 w-28 rounded-xl">
-        <span className="p-4">0 selected</span>
+      <div className="border border-gray-300  w-24 rounded-xl">
+        <span className="p-2 text-sm">0 selected</span>
       </div>
     </>
   );
 };
 
-export default counterElement;
+export default CounterElement;
