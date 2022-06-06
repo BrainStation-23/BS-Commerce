@@ -1,4 +1,4 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, User } from "src/index";
+import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
 
 /**
  * API Path: /user

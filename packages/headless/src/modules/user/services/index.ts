@@ -1,15 +1,15 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Helper } from "src/helper/helper.interface";
-import { UserRepository } from "../repositories";
-import { authConfig } from "config/auth";
-import { ChangePasswordDto, UpdatedUserDto } from "../dto";
-import type {
+import { Helper } from 'src/helper/helper.interface';
+import { UserRepository } from '../repositories';
+import { authConfig } from 'config/auth';
+import { ChangePasswordDto, UpdatedUserDto } from '../dto';
+import {
     GetUserResponse,
     UpdateUserSuccessResponse,
     ChangePasswordSuccessResponse,
     UpdateUserResponse,
-    ChangePasswordResponse
+    ChangePasswordResponse,
 } from 'models'
 
 @Injectable()

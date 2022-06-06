@@ -1,7 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
-import { CreateUserErrorResponse, CreateUserRequest, CreateUserSuccessResponse } from "models";
-import { UserDto } from "src/modules/user/dto/user.dto";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+    CreateUserErrorResponse,
+    CreateUserRequest,
+    CreateUserSuccessResponse,
+    SignUpErrorMessages
+} from 'models';
+import { UserDto } from 'src/modules/user/dto/user.dto';
 
 export class CreateUserDto implements CreateUserRequest {
     @ApiProperty()
@@ -30,18 +36,21 @@ export class CreateUserDto implements CreateUserRequest {
 }
 
 export class CreateUserErrorResponseDto implements CreateUserErrorResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
-    @ApiProperty()
-    error: 'USER_ALREADY_EXITS' | 'CAN\'T_CREATE_USER';
+    @ApiProperty({
+        example: SignUpErrorMessages.CAN_NOT_CREATE_USER,
+        examples: [SignUpErrorMessages.USER_ALREADY_EXITS, SignUpErrorMessages.CAN_NOT_CREATE_USER]
+    })
+    error: SignUpErrorMessages.USER_ALREADY_EXITS | SignUpErrorMessages.CAN_NOT_CREATE_USER;
 
     @ApiProperty()
     errors: string[];
 }
 
 export class CreateUserSuccessResponseDto implements CreateUserSuccessResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()

@@ -21,14 +21,14 @@ export class AuthController {
 
   @Post('signup')
   @ApiResponse({
-    description: 'Create User Success Response',
+    description: 'Sign Up Success Response',
     type: CreateUserSuccessResponseDto,
     status: HttpStatus.CREATED
   })
   @ApiResponse({
-    description: 'Create User Error Response',
+    description: 'Sign Up Error Response',
     type: CreateUserErrorResponseDto,
-    status: HttpStatus.INTERNAL_SERVER_ERROR
+    status: HttpStatus.BAD_REQUEST
   })
   async register(@Body() user: CreateUserDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.signUp(user);

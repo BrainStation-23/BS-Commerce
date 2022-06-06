@@ -1,6 +1,7 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
-import { SignInErrorResponse, SignInRequest, SignInSuccessResponse, Token } from "models";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { SignInErrorResponse, SignInRequest, SignInSuccessResponse, Token, SignInErrorMessages } from 'models';
 
 export class SignInDataDto implements SignInRequest {
     @ApiProperty()
@@ -11,7 +12,7 @@ export class SignInDataDto implements SignInRequest {
     @ApiProperty()
     @IsString()
     @MinLength(6, {
-        message: 'INVALID_CREDENTIALS',
+        message: SignInErrorMessages.INVALID_CREDENTIALS,
     })
     password: string;
 }
@@ -22,18 +23,20 @@ export class TokenDto implements Token {
 }
 
 export class SignInErrorResponseDto implements SignInErrorResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
-    @ApiProperty()
-    error: 'INVALID_CREDENTIALS';
+    @ApiProperty({
+        example: SignInErrorMessages.INVALID_CREDENTIALS
+    })
+    error: SignInErrorMessages.INVALID_CREDENTIALS;
 
     @ApiProperty()
     errors: string[];
 }
 
 export class SignInSuccessResponseDto implements SignInSuccessResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()

@@ -19,9 +19,14 @@ export interface CreateUserSuccessResponse extends SuccessResponse {
     data: User;
 }
 
+export const enum SignUpErrorMessages {
+    USER_ALREADY_EXITS = 'User already exits',
+    CAN_NOT_CREATE_USER = 'Can\'t create user'
+}
+
 export interface CreateUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'USER_ALREADY_EXITS' | 'CAN\'T_CREATE_USER';
+    error: SignUpErrorMessages.USER_ALREADY_EXITS | SignUpErrorMessages.CAN_NOT_CREATE_USER;
     errors: DescriptiveError;
 }
 

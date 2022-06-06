@@ -21,9 +21,15 @@ export interface ForgotPasswordSuccessResponse extends SuccessResponse {
     data: ForgotMessageResponse
 }
 
+export const enum ForgotPasswordErrorMessages {
+    CAN_NOT_GET_USER = 'Can\'t get user',
+    CAN_NOT_UPDATE_USER_PASSWORD = 'Can\'t update user password',
+    SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT = 'It seems like you signed up using your local account'
+}
+
 export interface ForgotPasswordErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'CANT\'T_GET_USER' | 'CANT\'T_UPDATE_USER_PASSWORD' | 'SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT';
+    error: ForgotPasswordErrorMessages.CAN_NOT_GET_USER | ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD | ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT;
     errors: DescriptiveError;
 }
 

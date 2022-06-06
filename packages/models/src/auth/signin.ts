@@ -21,9 +21,12 @@ export interface SignInSuccessResponse extends SuccessResponse {
     data: Token;
 }
 
+export const enum SignInErrorMessages {
+    INVALID_CREDENTIALS = 'Invalid Credentials'
+}
 export interface SignInErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'INVALID_CREDENTIALS';
+    error: SignInErrorMessages.INVALID_CREDENTIALS;
     errors: DescriptiveError;
 }
 

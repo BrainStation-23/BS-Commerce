@@ -1,6 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from "class-validator";
-import type { Address, User } from "models"
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
+import type { Address, User } from 'models'
 
 export class AddressDto implements Address {
     @ApiProperty()

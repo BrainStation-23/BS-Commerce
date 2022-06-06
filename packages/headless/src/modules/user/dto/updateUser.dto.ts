@@ -1,8 +1,9 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from "class-validator";
-import { regexConfig } from "config/regex";
-import { UpdatedUserRequest, UpdateUserErrorResponse, UpdateUserSuccessResponse } from "models";
-import { AddressDto, UserDto } from "./user.dto";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsBoolean, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
+import { regexConfig } from 'config/regex';
+import type { UpdatedUserRequest, UpdateUserErrorResponse, UpdateUserSuccessResponse } from 'models';
+import { AddressDto, UserDto } from './user.dto';
 
 export class UpdatedUserDto implements UpdatedUserRequest {
     @ApiProperty()
@@ -59,7 +60,7 @@ export class UpdatedUserDto implements UpdatedUserRequest {
 }
 
 export class UpdateUserErrorResponseDto implements UpdateUserErrorResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
     @ApiProperty()
@@ -70,7 +71,7 @@ export class UpdateUserErrorResponseDto implements UpdateUserErrorResponse {
 }
 
 export class UpdateUserSuccessResponseDto implements UpdateUserSuccessResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()

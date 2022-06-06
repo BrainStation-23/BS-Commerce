@@ -1,9 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { GetUserErrorResponse, GetUserSuccessResponse } from "models";
-import { UserDto } from "./user.dto";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import type { GetUserErrorResponse, GetUserSuccessResponse } from 'models';
+import { UserDto } from './user.dto';
 
 export class GetUserErrorResponseDto implements GetUserErrorResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
     @ApiProperty()
@@ -14,7 +15,7 @@ export class GetUserErrorResponseDto implements GetUserErrorResponse {
 }
 
 export class GetUserSuccessResponseDto implements GetUserSuccessResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()

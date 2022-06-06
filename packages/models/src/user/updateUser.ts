@@ -1,5 +1,5 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, User } from "src/index";
-import { Address } from "./address";
+import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
+import { Address } from './address';
 
 /**
  * API Path: /user

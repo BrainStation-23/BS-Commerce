@@ -1,7 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
-import { ChangePasswordErrorResponse, ChangePasswordRequest, ChangePasswordSuccessResponse } from "models";
-import { UserDto } from "./user.dto";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import type { ChangePasswordErrorResponse, ChangePasswordRequest, ChangePasswordSuccessResponse } from 'models';
+import { UserDto } from './user.dto';
 
 export class ChangePasswordDto implements ChangePasswordRequest {
     @ApiProperty()
@@ -18,7 +19,7 @@ export class ChangePasswordDto implements ChangePasswordRequest {
 }
 
 export class ChangePasswordErrorResponseDto implements ChangePasswordErrorResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
     @ApiProperty()
@@ -29,7 +30,7 @@ export class ChangePasswordErrorResponseDto implements ChangePasswordErrorRespon
 }
 
 export class ChangePasswordSuccessResponseDto implements ChangePasswordSuccessResponse {
-    @ApiProperty()
+    @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()
