@@ -17,7 +17,6 @@ import {
   ForgotPasswordErrorMessages,
   SignUpSuccessMessages
 } from 'models';
-import { User } from 'src/entity/user';
 import { CreateUserDto, SignInDataDto } from '../dto';
 
 @Injectable()

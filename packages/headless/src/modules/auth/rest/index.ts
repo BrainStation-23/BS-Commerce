@@ -65,7 +65,7 @@ export class AuthController {
     status: HttpStatus.BAD_REQUEST
   })
   async forgotPassword(@Body() data: ForgotPasswordDto, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
-    const url = req.protocol + "://" + req.headers.host;
+    const url = req.protocol + '://' + req.headers.host;
     const { code, ...response } = await this.authService.forgotPassword(data.username, url);
     res.status(code);
     return response;
