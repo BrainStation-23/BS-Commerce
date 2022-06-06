@@ -30,7 +30,7 @@ export class CompareDatabase implements ICompareDatabase {
       { userId: userId },
       { $push: { items: productId } },
       { new: true },
-    ).lean();
+    );
   }
 
   async createCompare(
