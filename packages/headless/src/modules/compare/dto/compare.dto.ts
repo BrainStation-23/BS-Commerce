@@ -10,7 +10,7 @@ import type {
 } from 'models';
 
 export class AddToCompareDto implements AddCompareItem {
-  @ApiProperty()
+  @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })
   @MaxLength(36)
   @MinLength(36)
   productId: string;
@@ -40,7 +40,7 @@ export class CompareItemsDto implements CompareItems {
 
 export class CompareSuccessResponseDto implements CompareSuccessResponse {
   @ApiProperty({ default: HttpStatus.OK })
-  code?: number;
+  code: number;
   @ApiProperty()
   data: CompareDataDto;
 }
