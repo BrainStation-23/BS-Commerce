@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId } from 'class-validator';
+import { MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,
@@ -11,7 +11,8 @@ import type {
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty()
-  @IsMongoId()
+  @MaxLength(36)
+  @MinLength(36)
   productId: string;
 }
 

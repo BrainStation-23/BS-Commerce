@@ -104,7 +104,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Comparison can not be deleted.',
+        'Comparison can not be deleted or not exist.',
         null,
         HttpStatus.BAD_REQUEST,
       );

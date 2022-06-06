@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { model, Schema } from 'mongoose';
 import { Compare } from 'src/entity/compare';
+import { modelOptionsFactory } from '../common';
 
 const CompareItems = new Schema(
   {
@@ -31,10 +32,7 @@ const CompareSchema = new Schema<Compare>(
 
     items: [CompareItems],
   },
-  {
-    timestamps: true,
-    versionKey: false,
-  },
+  modelOptionsFactory(),
 );
 
 const CompareModel = model<Compare>('compare', CompareSchema);
