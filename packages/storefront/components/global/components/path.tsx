@@ -22,7 +22,7 @@ const Path = (props: Path) => {
             </div>
             {" > "}
             <div className={shipping ? "font-bold" : "font-normal"}>
-                <Link href="/shippingTest">Shipping</Link>
+                <Link href="/shipping">Shipping</Link>
             </div>
             {" > "}
             <div className={payment ? "font-bold" : "font-normal"}>
