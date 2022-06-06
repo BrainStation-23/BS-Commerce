@@ -2,8 +2,13 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { regexConfig } from 'config/regex';
-import type { UpdatedUserRequest, UpdateUserErrorResponse, UpdateUserSuccessResponse } from 'models';
 import { AddressDto, UserDto } from './user.dto';
+import {
+    UpdatedUserRequest,
+    UpdateUserErrorResponse,
+    UpdateUserSuccessResponse,
+    UpdateUserErrorMessages
+} from 'models';
 
 export class UpdatedUserDto implements UpdatedUserRequest {
     @ApiProperty()
@@ -63,8 +68,10 @@ export class UpdateUserErrorResponseDto implements UpdateUserErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
-    @ApiProperty()
-    error: 'CANT\'T_GET_USER' | 'CANT\'T_UPDATE_USER_ADDRESS' | 'CANT\'T_ADD_USER_NEW_ADDRESS' | 'CANT\'T_UPDATE_USER';
+    @ApiProperty({
+        example: UpdateUserErrorMessages.CAN_NOT_UPDATE_USER
+    })
+    error: UpdateUserErrorMessages.CAN_NOT_GET_USER | UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER;
 
     @ApiProperty()
     errors: string[];

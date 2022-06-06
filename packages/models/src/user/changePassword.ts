@@ -12,14 +12,26 @@ export interface ChangePasswordRequest {
     newPassword: string;
 }
 
+export const enum ChangePasswordSuccessMessage {
+    CHANGE_PASSWORD_SUCCESSFUL = 'CHANGE_PASSWORD_SUCCESSFUL',
+}
+
 export interface ChangePasswordSuccessResponse extends SuccessResponse {
     code: number;
-    data: User;
+    data: {
+        message: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL
+    };
+}
+
+export const enum ChangePasswordErrorMessages {
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+    CURRENT_PASSWORD_IS_INCORRECT = 'CURRENT_PASSWORD_IS_INCORRECT',
+    CAN_NOT_CHANGE_PASSWORD = 'CAN_NOT_CHANGE_PASSWORD',
 }
 
 export interface ChangePasswordErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'CANT\'T_GET_USER' | 'CURRENT_PASSWORD_IS_INCORRECT' | 'CAN\'T_CHANGE_PASSWORD';
+    error: ChangePasswordErrorMessages.CAN_NOT_GET_USER | ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT | ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD;
     errors: DescriptiveError;
 }
 

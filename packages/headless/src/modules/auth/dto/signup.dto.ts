@@ -5,9 +5,9 @@ import {
     CreateUserErrorResponse,
     CreateUserRequest,
     CreateUserSuccessResponse,
-    SignUpErrorMessages
+    SignUpErrorMessages,
+    SignUpSuccessMessages,
 } from 'models';
-import { UserDto } from 'src/modules/user/dto/user.dto';
 
 export class CreateUserDto implements CreateUserRequest {
     @ApiProperty()
@@ -49,10 +49,15 @@ export class CreateUserErrorResponseDto implements CreateUserErrorResponse {
     errors: string[];
 }
 
+export class CreateUserMessage {
+    @ApiProperty({ example: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL })
+    message: string | any;
+}
+
 export class CreateUserSuccessResponseDto implements CreateUserSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()
-    data: UserDto;
+    data: CreateUserMessage;
 }

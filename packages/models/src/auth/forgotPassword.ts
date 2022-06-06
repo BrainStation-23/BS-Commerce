@@ -22,9 +22,9 @@ export interface ForgotPasswordSuccessResponse extends SuccessResponse {
 }
 
 export const enum ForgotPasswordErrorMessages {
-    CAN_NOT_GET_USER = 'Can\'t get user',
-    CAN_NOT_UPDATE_USER_PASSWORD = 'Can\'t update user password',
-    SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT = 'It seems like you signed up using your local account'
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+    CAN_NOT_UPDATE_USER_PASSWORD = 'CAN_NOT_UPDATE_USER_PASSWORD',
+    SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT = 'SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT'
 }
 
 export interface ForgotPasswordErrorResponse extends ErrorResponse {

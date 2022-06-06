@@ -10,6 +10,10 @@ import {
     ChangePasswordSuccessResponse,
     UpdateUserResponse,
     ChangePasswordResponse,
+    GetUserErrorMessages,
+    UpdateUserErrorMessages,
+    ChangePasswordErrorMessages,
+    ChangePasswordSuccessMessage
 } from 'models'
 
 @Injectable()
@@ -18,13 +22,13 @@ export class UserService {
 
     async getUser(userId: string): Promise<GetUserResponse> {
         const user = await this.userRepo.findUser({ id: userId });
-        if (!user) return this.helper.serviceResponse.errorResponse('CANT\'T_GET_USER', null, HttpStatus.BAD_REQUEST);
+        if (!user) return this.helper.serviceResponse.errorResponse(GetUserErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(user, HttpStatus.OK);
     }
 
     async updateUser(userId: string, data: UpdatedUserDto): Promise<UpdateUserResponse> {
         let user = await this.userRepo.findUser({ id: userId });
-        if (!user) return this.helper.serviceResponse.errorResponse('CANT\'T_GET_USER', null, HttpStatus.BAD_REQUEST);
+        if (!user) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST);
 
         user = Object.assign(user, data);
         user.displayName = user.firstName + ' ' + user.lastName;
@@ -33,34 +37,33 @@ export class UserService {
         // user update his/her old address
         if (data.address && data.address.id) {
             const updatedUser = await this.userRepo.updateUserAndAddress(userId, rest, data.address);
-            if (!updatedUser) return this.helper.serviceResponse.errorResponse('CANT\'T_UPDATE_USER_ADDRESS', null, HttpStatus.BAD_REQUEST);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS, null, HttpStatus.BAD_REQUEST);
             return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
         }
 
         // user add his/her new address
         if (data.address && !data.address.id) {
             const updatedUser = await this.userRepo.updateUserWithNewAddress(userId, rest, data.address);
-            if (!updatedUser) return this.helper.serviceResponse.errorResponse('CANT\'T_ADD_USER_NEW_ADDRESS.', null, HttpStatus.BAD_REQUEST);
+            if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS, null, HttpStatus.BAD_REQUEST);
             return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
         }
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
-        if (!updatedUser) return this.helper.serviceResponse.errorResponse('CANT\'T_UPDATE_USER', null, HttpStatus.BAD_REQUEST);
+        if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_UPDATE_USER, null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
-
     }
 
     async changePassword(userId: string, passwordDetails: ChangePasswordDto): Promise<ChangePasswordResponse> {
         const user = await this.userRepo.getUserPassword({ id: userId });
-        if (!user) return this.helper.serviceResponse.errorResponse('User is not found.', null, HttpStatus.BAD_REQUEST);
+        if (!user) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST);
 
         const doesPasswordMatch = await bcrypt.compare(passwordDetails.currentPassword, user.password);
-        if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse('Current Password is incorrect.', null, HttpStatus.BAD_REQUEST,);
+        if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, null, HttpStatus.BAD_REQUEST,);
 
         user.password = await bcrypt.hash(passwordDetails.newPassword, authConfig.salt!);
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
-        if (!updatedUser) return this.helper.serviceResponse.errorResponse('Can\'t Change Password.', null, HttpStatus.BAD_REQUEST);
-        return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as ChangePasswordSuccessResponse;
+        if (!updatedUser) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD, null, HttpStatus.BAD_REQUEST);
+        return this.helper.serviceResponse.successResponse({ message: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL }, HttpStatus.OK) as ChangePasswordSuccessResponse;
     }
 }

@@ -8,14 +8,15 @@ import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');
-import { 
+import {
   CreateUserResponse,
   ForgotPasswordResponse,
   SignInResponse,
   SignInErrorMessages,
   SignUpErrorMessages,
-  ForgotPasswordErrorMessages
- } from 'models';
+  ForgotPasswordErrorMessages,
+  SignUpSuccessMessages
+} from 'models';
 import { User } from 'src/entity/user';
 import { CreateUserDto, SignInDataDto } from '../dto';
 
@@ -27,7 +28,7 @@ export class AuthService {
     const doesUserExist = await this.userRepo.findUser({ email: data.email });
     if (doesUserExist) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.USER_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
-    let user: User;
+    let user: any = { ...data };
     user.provider = 'local';
     user.displayName = data.firstName + ' ' + data.lastName;
     user.email = data.email.toLowerCase();
@@ -36,7 +37,7 @@ export class AuthService {
 
     const registeredUser = await this.userRepo.createUser(user);
     if (!registeredUser) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.CAN_NOT_CREATE_USER, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(registeredUser, HttpStatus.CREATED);
+    return this.helper.serviceResponse.successResponse({ message: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL }, HttpStatus.CREATED);
   }
 
   async signIn(data: SignInDataDto): Promise<SignInResponse> {

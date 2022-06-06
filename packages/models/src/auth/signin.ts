@@ -22,7 +22,7 @@ export interface SignInSuccessResponse extends SuccessResponse {
 }
 
 export const enum SignInErrorMessages {
-    INVALID_CREDENTIALS = 'Invalid Credentials'
+    INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'
 }
 export interface SignInErrorResponse extends ErrorResponse {
     code?: number;

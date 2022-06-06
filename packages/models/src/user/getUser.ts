@@ -11,9 +11,13 @@ export interface GetUserSuccessResponse extends SuccessResponse {
     data: User;
 }
 
+export const enum GetUserErrorMessages {
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+}
+
 export interface GetUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'CANT\'T_GET_USER';
+    error: GetUserErrorMessages.CAN_NOT_GET_USER;
     errors: DescriptiveError;
 }
 

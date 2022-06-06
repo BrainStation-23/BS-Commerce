@@ -1,14 +1,20 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import type { GetUserErrorResponse, GetUserSuccessResponse } from 'models';
 import { UserDto } from './user.dto';
+import { 
+    GetUserErrorResponse,
+    GetUserSuccessResponse,
+    GetUserErrorMessages
+ } from 'models';
 
 export class GetUserErrorResponseDto implements GetUserErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
-    @ApiProperty()
-    error: 'CANT\'T_GET_USER';
+    @ApiProperty({
+        example: GetUserErrorMessages.CAN_NOT_GET_USER
+    })
+    error: GetUserErrorMessages.CAN_NOT_GET_USER;
 
     @ApiProperty()
     errors: string[];

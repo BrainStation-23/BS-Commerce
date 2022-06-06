@@ -1,8 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, MinLength } from 'class-validator';
-import type { ChangePasswordErrorResponse, ChangePasswordRequest, ChangePasswordSuccessResponse } from 'models';
-import { UserDto } from './user.dto';
+import {
+    ChangePasswordErrorResponse,
+    ChangePasswordRequest,
+    ChangePasswordSuccessResponse,
+    ChangePasswordErrorMessages,
+    ChangePasswordSuccessMessage
+} from 'models';
 
 export class ChangePasswordDto implements ChangePasswordRequest {
     @ApiProperty()
@@ -22,17 +27,24 @@ export class ChangePasswordErrorResponseDto implements ChangePasswordErrorRespon
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code: number;
 
-    @ApiProperty()
-    error: 'CANT\'T_GET_USER' | 'CURRENT_PASSWORD_IS_INCORRECT' | 'CAN\'T_CHANGE_PASSWORD';
+    @ApiProperty({
+        example: ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD,
+        examples: [ChangePasswordErrorMessages.CAN_NOT_GET_USER, ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD]
+    })
+    error: ChangePasswordErrorMessages.CAN_NOT_GET_USER | ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT | ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD;
 
     @ApiProperty()
     errors: string[];
 }
 
+class Message {
+    @ApiProperty({ example: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL })
+    message: string | any;
+}
 export class ChangePasswordSuccessResponseDto implements ChangePasswordSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
     @ApiProperty()
-    data: UserDto;
+    data: Message;
 }

@@ -26,9 +26,16 @@ export interface UpdateUserSuccessResponse extends SuccessResponse {
     data: User;
 }
 
+export const enum UpdateUserErrorMessages {
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+    CAN_NOT_UPDATE_USER_ADDRESS = 'CAN_NOT_UPDATE_USER_ADDRESS',
+    CAN_NOT_ADD_USER_NEW_ADDRESS = 'CAN_NOT_ADD_USER_NEW_ADDRESS',
+    CAN_NOT_UPDATE_USER = 'CAN_NOT_UPDATE_USER'
+}
+
 export interface UpdateUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: 'CANT\'T_GET_USER' | 'CANT\'T_UPDATE_USER_ADDRESS' | 'CANT\'T_ADD_USER_NEW_ADDRESS' | 'CANT\'T_UPDATE_USER';
+    error: UpdateUserErrorMessages.CAN_NOT_GET_USER | UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER;
     errors: DescriptiveError;
 }
 
