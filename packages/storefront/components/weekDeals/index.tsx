@@ -8,7 +8,7 @@ import Container from "../global/components/container";
 const WeekDeals: FC = () => {
   return (
     <>
-      <Container>
+      <Container className="max-w-7xl">
         <div className="text-center mb-6">
           <p className="text-lg font-serif italic">Recently added our store</p>
           <h1 className="text-4xl text-bold ">Deals Of The Weeks</h1>
