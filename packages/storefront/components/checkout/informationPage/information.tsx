@@ -1,7 +1,7 @@
 import InformationPage from ".";
 import OrderList from "../orderList";
 
-const CheckoutInformationComponent = (props: any) => {
+const CheckoutInformationComponent = () => {
   return (
     <>
       <div className="row">

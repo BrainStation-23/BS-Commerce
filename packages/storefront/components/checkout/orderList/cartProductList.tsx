@@ -1,7 +1,7 @@
 import React from "react";
 import { checkoutProducts } from "../../../checkout-products";
 
-const CartProductList = (props: any) => {
+const CartProductList = () => {
   return (
     <>
       {checkoutProducts.map((checkoutProduct, index) => {

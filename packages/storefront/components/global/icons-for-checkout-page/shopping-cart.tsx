@@ -1,4 +1,4 @@
-const ShoppingCart = (props: any) => {
+const ShoppingCart = () => {
   return (
     <>
       <svg

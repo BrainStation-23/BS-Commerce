@@ -1,7 +1,7 @@
 import React from "react";
 import CartProductList from "./cartProductList";
 
-const OrderedProducts = (props: any) => {
+const OrderedProducts = () => {
   return (
     <div className="w-full">
       <div className="row mx-0 sm:mx-0 lg:mx-12 xl:mx-12 my-7 px-0 sm:px-2 md:px-5 lg:px-0 xl:px-0 overflow-hidden">

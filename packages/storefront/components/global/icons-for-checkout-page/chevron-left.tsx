@@ -1,4 +1,4 @@
-const ChevronLeft = (props: any) => {
+const ChevronLeft = () => {
   return (
     <>
       <svg

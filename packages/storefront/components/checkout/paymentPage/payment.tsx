@@ -1,7 +1,7 @@
 import PaymentPage from ".";
 import OrderList from "../orderList";
 
-const CheckoutPaymentComponent = (props: any) => {
+const CheckoutPaymentComponent = () => {
   return (
     <>
        <div className="row">

@@ -3,6 +3,22 @@ import CreditCard from "@/components/global/icons-for-checkout-page/credit-card"
 import { Field, Form, Formik } from "formik";
 import Link from "next/link";
 import { useState } from "react";
+import { string } from "yup";
+
+interface FormData {
+  cardNumber: string;
+  nameOnCard: string;
+  expirationDate: string;
+  securityCode: string;
+  shippingAddressPicked: string;
+  firstName: string;
+  lastName: string;
+  country: string;
+  address: string;
+  addressOptional: string;
+  city: string;
+  postalCode: string;
+}
 
 const PaymentDetails = () => {
   const initialValues = {
@@ -22,7 +38,7 @@ const PaymentDetails = () => {
 
   const [showShippingForm, setShowShippingForm] = useState(false);
 
-  const handlePaymentSubmit = (data: any) => {
+  const handlePaymentSubmit = (data: FormData) => {
     console.log(data);
   };
 
@@ -35,7 +51,7 @@ const PaymentDetails = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(values: any, actions: any) => {
+        onSubmit={(values, actions) => {
           const data = {
             cardNumber: values.cardNumber,
             nameOnCard: values.nameOnCard,
@@ -55,7 +71,7 @@ const PaymentDetails = () => {
           actions.setSubmitting(false);
         }}
       >
-        {(formikprops: any) => {
+        {(formikprops) => {
           return (
             <>
               <Form onSubmit={formikprops.handleSubmit}>
@@ -329,7 +345,9 @@ const PaymentDetails = () => {
                       </Link>
                     </div>
                     <Link href="/cart" passHref>
-                      <a className="text-decoration-none mb-2">Return to cart</a>
+                      <a className="text-decoration-none mb-2">
+                        Return to cart
+                      </a>
                     </Link>
                   </div>
                 </div>

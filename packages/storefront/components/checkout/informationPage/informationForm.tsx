@@ -2,6 +2,19 @@ import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-lef
 import { Field, Form, Formik } from "formik";
 import Link from "next/link";
 
+interface FormData {
+  contact: string
+    sendNotificationCheckbox: string
+    firstName: string
+    lastName: string
+    country: string
+    address: string
+    addressOptional: string
+    city: string
+    postalCode: string
+    saveInformationCheckbox: string
+}
+
 const Information = () => {
   const initialValues = {
     contact: "",
@@ -16,7 +29,7 @@ const Information = () => {
     saveInformationCheckbox: "",
   };
 
-  const handleCheckoutSubmit = (data: any) => {
+  const handleCheckoutSubmit = (data: FormData) => {
     console.log(data);
   };
 
@@ -24,7 +37,7 @@ const Information = () => {
     <div className="">
       <Formik
         initialValues={initialValues}
-        onSubmit={(values: any, actions: any) => {
+        onSubmit={(values, actions) => {
           const data = {
             contact: values.contact,
             sendNotificationCheckbox: values.sendNotificationCheckbox,
@@ -41,7 +54,7 @@ const Information = () => {
           actions.setSubmitting(false);
         }}
       >
-        {(formikprops: any) => {
+        {(formikprops) => {
           return (
             <>
               <Form onSubmit={formikprops.handleSubmit}>
