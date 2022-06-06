@@ -8,7 +8,7 @@ import Container from "../global/components/container";
 const TrendingProducts: FC = () => {
   return (
     <>
-      <Container>
+      <Container className="max-w-6xl">
         <div className="text-center mb-6">
           <p className="text-lg font-serif italic">Recently added our store</p>
           <h1 className="text-4xl text-bold ">Trending Products</h1>

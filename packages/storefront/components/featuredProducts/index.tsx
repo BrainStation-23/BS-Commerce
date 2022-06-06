@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 const FeaturedProducts = () => {
   return (
-    <Container>
+    <Container className="max-w-6xl">
       <div className="text-center mb-5  ">
         <p className="text-sm font-light italic md:text-sm lg:text-base ">
           Recently added our store
