@@ -64,6 +64,6 @@ export class UserService {
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD, null, HttpStatus.BAD_REQUEST);
-        return this.helper.serviceResponse.successResponse({ message: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL }, HttpStatus.OK) as ChangePasswordSuccessResponse;
+        return this.helper.serviceResponse.successResponse({ message: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL }, HttpStatus.OK);
     }
 }

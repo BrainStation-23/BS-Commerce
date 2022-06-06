@@ -19,7 +19,7 @@ export const enum ChangePasswordSuccessMessage {
 export interface ChangePasswordSuccessResponse extends SuccessResponse {
     code: number;
     data: {
-        message: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL
+        message?: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL
     };
 }
 
