@@ -1,13 +1,18 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import type { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { loginSchema } from "../global/schemas/loginSchema";
 
-const Signin = (props: any) => {
+interface Values {
+  phone: string,
+  password: string,
+}
 
-  function handleSignin(data: any) {
+const Signin = () => {
+
+  function handleSignin(data: FormikValues) {
     console.log(data);
   }
 
@@ -28,7 +33,7 @@ const Signin = (props: any) => {
                 phone: "",
                 password: "",
               }}
-              onSubmit={(values: { phone: any; password: any; }, actions: any) => {
+              onSubmit={(values, actions) => {
                 const data = {
                   phone: values.phone,
                   password: values.password,
@@ -38,7 +43,7 @@ const Signin = (props: any) => {
               }}
               validationSchema={loginSchema}
             >
-              {(formikprops: any) => {
+              {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">

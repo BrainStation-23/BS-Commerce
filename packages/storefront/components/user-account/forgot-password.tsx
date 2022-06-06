@@ -2,9 +2,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import { loginSchema } from "../global/schemas/loginSchema";
 
-const ForgotPassword = (props: any) => {
+interface Values {
+  phone: string;
+}
 
-  const handleForgotPassword = (values: any) => {
+const ForgotPassword = () => {
+
+  const handleForgotPassword = (values: Values) => {
     console.log(values);
   };
 
@@ -26,7 +30,7 @@ const ForgotPassword = (props: any) => {
               initialValues={{
                 phone: "",
               }}
-              onSubmit={(values: any, actions: any) => {
+              onSubmit={(values, actions) => {
                 const data = {
                   phone: values.phone,
                 };
@@ -35,7 +39,7 @@ const ForgotPassword = (props: any) => {
               }}
               validationSchema={loginSchema}
             >
-              {(formikprops: any) => {
+              {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">
