@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Blog></Blog>
-      {/* <Products/> */}
+      <Products/>
     </>
   );
 };

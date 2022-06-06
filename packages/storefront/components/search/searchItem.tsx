@@ -1,6 +1,7 @@
 import Link from "next/link";
+import type { NextComponentType } from "next";
 
-const SearchItem = () => {
+const SearchItem: NextComponentType = () => {
 	return (
 		<>
 			<div className="lg:w-2/4 mx-auto my-10 flex flex-wrap items-center justify-center">
