@@ -7,7 +7,7 @@ const Deals: NextComponentType = () => {
   return (
     <div className="mt-20">
       <PageTitle title={"Deals"} />
-      <div className="px-14 lg:px-24 xl:px-60 grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">
+      <div className="px-4 lg:px-24 xl:px-60 grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">
         <div>
           <DealsFilter />
         </div>

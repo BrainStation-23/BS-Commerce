@@ -44,8 +44,8 @@ const ProductSort: NextComponentType = () => {
             <div className="flex grid content-center justify-center sm:justify-center lg:justify-start md:justify-start xl:justify-start">
               {gridIcon}
             </div>
-            <div className="flex justify-start">
-              <label className="px-2 sm:mx-2 flex grid content-center ">
+            <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start py-2">
+              <label className="px-2 sm:mx-2 flex grid content-center">
                 Sort By:
               </label>
               <select

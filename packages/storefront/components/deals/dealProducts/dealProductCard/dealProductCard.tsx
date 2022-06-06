@@ -30,13 +30,15 @@ const DealProductCard = (props: any) => {
                   ></Picture>{" "}
                 </div>
               </div>
-              <div className="hover:-translate-y-20 opacity-70 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
+              <div className="md:flex md:flex-wrap lg:flex flex-wrap hover:-translate-y-20 opacity-70 hover:opacity-70 duration-300 absolute inset-0 z-10 sm:justify-center items-center text-black font-semibold">
                 <Counter time={time}></Counter>
-                <div className="hover:translate-y-20 opacity-0 hover:opacity-90 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
-                  <Icon></Icon>
+                <div className="md:hover:hover:translate-y-28 hover:translate-y-20 opacity-0 hover:opacity-90 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
+                  <Icon />
                 </div>
               </div>
-              <ProductInfo product={product}></ProductInfo>
+              <div className="text-center">
+                <ProductInfo product={product}></ProductInfo>
+              </div>
             </div>
           </div>
         </div>
