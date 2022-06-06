@@ -312,10 +312,10 @@ const PaymentDetails = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
+                <div className="mt-5 mb-10 flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
                   <button
                     type="submit"
-                    className="rounded text-sm p-5 mt-4 w-full sm:w-full md:w-44 lg:w-44 xl:w-44 bg-black text-white"
+                    className="rounded text-sm p-5 w-full sm:w-full md:w-24 lg:w-24 xl:w-24 bg-black text-white"
                   >
                     Pay now
                   </button>
