@@ -28,7 +28,7 @@ export class CompareDatabase implements ICompareDatabase {
   ): Promise<Compare> {
     return await CompareModel.findOneAndUpdate(
       { userId: userId },
-      { $push: { items: productId } },
+      { $addToSet: { items: productId } },
       { new: true },
     );
   }

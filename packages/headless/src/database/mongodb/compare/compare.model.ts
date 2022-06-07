@@ -7,7 +7,6 @@ const CompareItems = new Schema(
   {
     productId: {
       type: String,
-      unique: true,
     },
   },
   {
@@ -21,7 +20,7 @@ const CompareSchema = new Schema<Compare>(
   {
     id: {
       type: String,
-      default: randomUUID(),
+      default: () => randomUUID(),
       unique: true,
     },
     userId: {
