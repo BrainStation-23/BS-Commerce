@@ -5,7 +5,6 @@ import { randomUUID } from 'crypto';
 const AddressSchema = new Schema<Address>({
   id: {
     type: String,
-    unique: true,
     default: () => randomUUID()
   },
   addressLine1: String,
