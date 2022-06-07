@@ -21,7 +21,7 @@ export const enum SignUpSuccessMessages {
 export interface CreateUserSuccessResponse extends SuccessResponse {
     code: number;
     data: {
-        message?: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL
+        message?: SignUpSuccessMessages
     };
 }
 
@@ -32,7 +32,7 @@ export const enum SignUpErrorMessages {
 
 export interface CreateUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: SignUpErrorMessages.USER_ALREADY_EXITS | SignUpErrorMessages.CAN_NOT_CREATE_USER;
+    error: SignUpErrorMessages;
     errors: DescriptiveError;
 }
 

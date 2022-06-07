@@ -26,7 +26,7 @@ export const enum SignInErrorMessages {
 }
 export interface SignInErrorResponse extends ErrorResponse {
     code?: number;
-    error: SignInErrorMessages.INVALID_CREDENTIALS;
+    error: SignInErrorMessages;
     errors: DescriptiveError;
 }
 

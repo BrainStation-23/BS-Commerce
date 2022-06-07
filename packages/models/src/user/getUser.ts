@@ -17,7 +17,7 @@ export const enum GetUserErrorMessages {
 
 export interface GetUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: GetUserErrorMessages.CAN_NOT_GET_USER;
+    error: GetUserErrorMessages;
     errors: DescriptiveError;
 }
 

@@ -8,6 +8,7 @@ import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');
+import { CreateUserDto, SignInDataDto } from '../dto';
 import {
   CreateUserResponse,
   ForgotPasswordResponse,
@@ -17,7 +18,6 @@ import {
   ForgotPasswordErrorMessages,
   SignUpSuccessMessages
 } from 'models';
-import { CreateUserDto, SignInDataDto } from '../dto';
 
 @Injectable()
 export class AuthService {
