@@ -7,7 +7,6 @@ import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 import {
     GetUserResponse,
     UpdateUserSuccessResponse,
-    ChangePasswordSuccessResponse,
     UpdateUserResponse,
     ChangePasswordResponse,
     GetUserErrorMessages,

@@ -19,7 +19,7 @@ export const enum ChangePasswordSuccessMessage {
 export interface ChangePasswordSuccessResponse extends SuccessResponse {
     code: number;
     data: {
-        message?: ChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL
+        message?: ChangePasswordSuccessMessage;
     };
 }
 
@@ -31,7 +31,7 @@ export const enum ChangePasswordErrorMessages {
 
 export interface ChangePasswordErrorResponse extends ErrorResponse {
     code?: number;
-    error: ChangePasswordErrorMessages.CAN_NOT_GET_USER | ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT | ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD;
+    error: ChangePasswordErrorMessages;
     errors: DescriptiveError;
 }
 
