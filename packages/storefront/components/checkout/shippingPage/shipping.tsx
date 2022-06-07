@@ -11,15 +11,15 @@ const path = {
 
 const  Shipping = () => {
     return (
-        <div className="w-3/5">
-            <div className="px-3.5 m-0 lg:mx-20 lg:my-12">
+        <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
+            <div className="px-3.5 m-0 md:mx-20 lg:mx-20 xl:mx-20 lg:my-12">
                 {/* <Path
                     cart={path.cart}
                     info={path.info}
                     shipping={path.shipping}
                     payment={path.payment}
                 ></Path> */}
-                <div className="box-border p-4 border-2 mt-10 divide-y-2 rounded-md text-center mx-auto">
+                <div className="box-border p-4 border-2 mt-5 divide-y-2 rounded-md text-center mx-auto">
                     <div className="flex justify-between items-center p-4">
                         <div className="flex flex-wrap gap-4">
                             <p className="text-xs text-[#333333]">Contact</p>
