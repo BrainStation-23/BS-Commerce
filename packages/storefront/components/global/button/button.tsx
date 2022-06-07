@@ -1,5 +1,4 @@
 const Button = (props: any) => {
-    
   const {
     buttonText,
     textColor,
@@ -10,7 +9,7 @@ const Button = (props: any) => {
     padding,
     margin,
     responsiveProps,
-    position
+    position,
   } = props;
 
   return (
