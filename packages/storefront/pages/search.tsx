@@ -31,10 +31,7 @@ const Search: NextPage = () => {
 							</div>
 						</div>
 
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
+						<SearchItem/>
 					</div>
 				</div>
 			</div>
