@@ -114,9 +114,16 @@ const ProductDetails: NextPage = () => {
 											<button className="m-2">+</button>
 										</div>
 									</div>
-									<button className="mt-4 ml-10 text-white bg-green-600 py-1 px-10 rounded focus:outline-none hover:bg-green-600">
+									{isAvailable ? (
+										<button className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600">
 										Add to cart
+										</button>
+									) : (
+										<button className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600">
+										Soldout
 									</button>
+									)}
+									
 								</div>
 								<div className="lg:w-fit flex flex-wrap">
 									<button className="rounded mt-5 ml-1 bg-gray-600 lg:px-48 md:px-32 px-20 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	">
