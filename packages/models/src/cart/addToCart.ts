@@ -14,7 +14,7 @@ export interface addToCartSuccessResponse extends SuccessResponse {
 
 export interface addToCartErrorResponse extends ErrorResponse { 
     code?: number;
-    error: ErrorMessage.CANNOT_CREATE_CART | ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART | ErrorMessage.CANNOT_INCREMENT_CART_ITEM;
+    error: ErrorMessage;
     errors: DescriptiveError;
 }
 
