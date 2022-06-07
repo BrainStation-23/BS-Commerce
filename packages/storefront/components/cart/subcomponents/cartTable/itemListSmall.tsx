@@ -1,12 +1,26 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
 interface Properties {
+  index: number;
+  id: number;
   title: string;
   price: string;
   image: string;
-  quantity: string;
+  quantity: number;
+  handleRemoveProductFromCart: () => number;
+  handleProductAddition: () => number;
+  handleProductDeletion: () => number;
 }
 const ItemsLists: React.FC<Properties> = (props) => {
+  const removeProductFromCart = (id: number) => {
+    props.handleRemoveProductFromCart(id);
+  };
+  const addProductQuantity = (index: number) => {
+    props.handleProductAddition(index);
+  };
+  const subtractProductQuantity = (index: number, id: number) => {
+    props.handleProductDeletion(index, props.id);
+  };
   return (
     <>
       <div className="p-4">
@@ -20,6 +34,7 @@ const ItemsLists: React.FC<Properties> = (props) => {
             <span
               className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
               style={{ background: "#808080" }}
+              onClick={(e) => removeProductFromCart(props.id)}
             >
               <svg
                 className="w-4 h-0"
@@ -39,9 +54,21 @@ const ItemsLists: React.FC<Properties> = (props) => {
             <div>
               <div className="box-content h-4 w-32 py-4 border-2 mb-2">
                 <div className="flex justify-between">
-                  <button className="ml-2">+</button>
+                  <button
+                    className="ml-2"
+                    onClick={(e) => addProductQuantity(props.index)}
+                  >
+                    +
+                  </button>
                   <div className="px-2">{props.quantity}</div>
-                  <button className="mr-2">-</button>
+                  <button
+                    className="mr-2"
+                    onClick={(e) =>
+                      subtractProductQuantity(props.index, props.id)
+                    }
+                  >
+                    -
+                  </button>
                 </div>
                 <span></span>
               </div>

@@ -9,19 +9,33 @@ interface IICardData {
     price: string;
     img: string;
   };
-  quantity: string;
+  quantity: number;
   handleRemoveProductFromCart: () => number;
+  handleProductAddition: () => number;
+  handleProductDeletion: () => number;
 }
 
 const DataTable = (
-  props: { cartDatas: IICardData[]; handleRemoveProductFromCart(): IICardData },
+  props: {
+    cartDatas: IICardData[];
+    handleRemoveProductFromCart(): IICardData;
+    handleProductAddition(): IICardData;
+    handleProductDeletion(): IICardData;
+  },
   {}
 ) => {
   const removeProductFromCart = (id: number) => {
     props.handleRemoveProductFromCart(id);
   };
+  const addProductQuantity = (index: number) => {
+    props.handleProductAddition(index);
+  };
+  const subtractProductQuantity = (index: number, id: number) => {
+    props.handleProductDeletion(index, id);
+  };
+
   const tableData = () => {
-    return props.cartDatas.map((cartData) => {
+    return props.cartDatas.map((cartData, index) => {
       return (
         <tr key={cartData.id}>
           <td className="border border-slate-300 px-8 md:px-4 py-4">
@@ -42,15 +56,21 @@ const DataTable = (
             <div className="flex justify-center">
               <div className="box-content h-4 w-12 p-4 border-4">
                 <div className="flex justify-between">
-                  <button>+</button>
+                  <button onClick={(e) => addProductQuantity(index)}>+</button>
                   <div>{cartData.quantity}</div>
-                  <button>-</button>
+                  <button
+                    onClick={(e) => subtractProductQuantity(index, cartData.id)}
+                  >
+                    -
+                  </button>
                 </div>
               </div>
             </div>
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-            <div className="flex justify-center">$ 55</div>
+            <div className="flex justify-center">
+              ${cartData.quantity * Number(cartData.meta.price)}
+            </div>
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
             <div className="flex justify-center">

@@ -1,10 +1,11 @@
 import type { NextComponentType } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buttons from "../../../global/components/buttons/button";
 import DataTable from "./dataTable";
 import ItemsLists from "./itemListSmall";
 // import CartDropdown from "../../cartDropdown/dropdownCart";
 const CartDetails: NextComponentType = () => {
+  const [cartTotal, setCartTotal] = useState(0);
   const [allCartList, setAllCartList] = useState([
     {
       id: Math.floor(Math.random() * 10 * Date.now() * 1),
@@ -13,7 +14,7 @@ const CartDetails: NextComponentType = () => {
         price: "53",
         img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig14_9d050031-6a02-4a0c-ad56-c2dda1cce5d0_compact.jpg?v=1587984073",
       },
-      quantity: "3",
+      quantity: 3,
     },
     {
       id: Math.floor(Math.random() * 10 * Date.now() * 3),
@@ -22,7 +23,7 @@ const CartDetails: NextComponentType = () => {
         price: "44",
         img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig9_ef67d26b-f717-4bf3-82ec-5eae9aad5a11_compact.jpg?v=1587984831",
       },
-      quantity: "2",
+      quantity: 2,
     },
     {
       id: Math.floor(Math.random() * 10 * Date.now()),
@@ -31,7 +32,7 @@ const CartDetails: NextComponentType = () => {
         price: "24",
         img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig6_1f6dc9c9-08a8-4008-b39a-478d0046362d_compact.jpg?v=1587983036",
       },
-      quantity: "1",
+      quantity: 1,
     },
     {
       id: Math.floor(Math.random() * 10 * Date.now() * 8),
@@ -40,13 +41,43 @@ const CartDetails: NextComponentType = () => {
         price: "5",
         img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig4_cbb159dd-d3ba-4e07-9b56-5d54eb32aa81_compact.jpg?v=1587985338",
       },
-      quantity: "4",
+      quantity: 4,
     },
   ]);
-  const removeFromCart = (id) => {
+  const removeFromCart = (id: number) => {
     let newAllCartList = allCartList.filter((item) => item.id != id);
     setAllCartList(newAllCartList);
   };
+  const handleProductAddition = (index: number) => {
+    let newAllCartList = [...allCartList];
+    newAllCartList[index].quantity++;
+    setAllCartList(newAllCartList);
+  };
+  const handleProductDeletion = (index: number, id: number) => {
+    let newAllCartList = [...allCartList];
+    if (allCartList[index].quantity > 1) {
+      console.log(allCartList.length);
+      newAllCartList[index].quantity--;
+      setAllCartList(newAllCartList);
+    } else {
+      removeFromCart(id);
+    }
+    cartTotalCalculation();
+  };
+  const cartTotalCalculation = () => {
+    let newAllCartList = [...allCartList];
+    let primaryCartTotal = 0;
+    newAllCartList.forEach((item) => {
+      primaryCartTotal =
+        item.quantity * Number(item.meta.price) + primaryCartTotal;
+      console.log(primaryCartTotal);
+      return primaryCartTotal;
+    });
+    console.log(primaryCartTotal);
+
+    setCartTotal(primaryCartTotal);
+  };
+  useEffect(() => {}, [allCartList]);
   return (
     <>
       <div>
@@ -57,16 +88,23 @@ const CartDetails: NextComponentType = () => {
           <DataTable
             cartDatas={allCartList}
             handleRemoveProductFromCart={removeFromCart}
+            handleProductAddition={handleProductAddition}
+            handleProductDeletion={handleProductDeletion}
           />
         </div>
         <div className="md:hidden">
-          {allCartList.map((item) => (
+          {allCartList?.map((item, index) => (
             <ItemsLists
               key={item.id}
+              index={index}
+              id={item.id}
               title={item.meta.title}
               price={item.meta.price}
               image={item.meta.img}
               quantity={item.quantity}
+              handleRemoveProductFromCart={removeFromCart}
+              handleProductAddition={handleProductAddition}
+              handleProductDeletion={handleProductDeletion}
             />
           ))}
         </div>
