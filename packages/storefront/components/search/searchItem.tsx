@@ -16,7 +16,7 @@ const SearchItem: NextComponentType = () => {
 				</div>
 				<div className="md:w-3/4 pl-6">
 					<Link href="/product/1">
-						<h2 className="text-gray-900 text-base title-font font-normal mb-1 hover:cursor-pointer">
+						<h2 className="text-gray-900 text-base title-font font-normal my-1 hover:cursor-pointer">
 							<strong className="highlight">Demo</strong> product
 							title{" "}
 						</h2>
