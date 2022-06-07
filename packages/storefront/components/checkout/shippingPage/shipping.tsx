@@ -1,6 +1,7 @@
 import React from "react";
 import Path from "@/components/global/components/path";
 import OrderList from "@/components/checkout/orderList";
+import CheckoutFooter from "../checkoutFooter";
 
 const path = {
     cart: false,
@@ -9,7 +10,7 @@ const path = {
     payment: false,
 };
 
-const  Shipping = () => {
+const Shipping = () => {
     return (
         <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
             <div className="px-3.5 m-0 md:mx-20 lg:mx-20 xl:mx-20 lg:my-12">
@@ -66,9 +67,10 @@ const  Shipping = () => {
                         </a>
                     </div>
                 </div>
-                {/* <div>
-                    <OrderList></OrderList>
-                </div> */}
+            </div>
+            <div className="mx-6 sm:mx-10 md:mx-10 lg:mx-24">
+                <hr className="mt-2" />
+                <CheckoutFooter />
             </div>
         </div>
     );
