@@ -10,9 +10,12 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
     "@headlessui/react": "^1.6.4",
     "@popperjs/core": "^2.11.4",
+    "axios": "^0.27.2",
     "formik": "^2.2.9",
+    "graphql": "^16.5.0",
     "marketplace": "^1.0.0",
     "models": "*",
     "next": "12.1.0",
