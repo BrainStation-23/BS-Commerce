@@ -16,13 +16,9 @@ const BestSell = () => {
   return (
     <>
       <Container className="max-w-md md:max-w-4xl lg:max-w-6xl">
-        <div className="text-center">
-          <p className="text-sm font-light italic pt-5 md:text-sm lg:text-base">
-            Recently added our store
-          </p>
-          <h1 className="font-bold mb-10 text-xl md:text-3xl lg:text-4xl ">
-            Best Sell
-          </h1>
+      <div className="text-center mb-6">
+          <p className="text-lg font-serif italic">Recently added our store</p>
+          <h1 className="text-4xl text-bold ">Best Sell</h1>
         </div>
         <div className="flex flex-wrap w-full">
           <div className="w-full md:w-2/6 px-3">
