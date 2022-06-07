@@ -9,6 +9,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import { productInterface } from "./models";
+const productList : productInterface = productData; 
 
 const FeaturedProducts = () => {
   return (
@@ -29,7 +31,7 @@ const FeaturedProducts = () => {
       >
         {productData["products"] &&
           productData["products"].length > 0 &&
-          productData.products.map((product: any) => (
+          productList.products.map((product: any) => (
             <SwiperSlide key={product.id}>
               <Product product={product} />
             </SwiperSlide>

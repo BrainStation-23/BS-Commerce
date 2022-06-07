@@ -1,21 +1,15 @@
 import Image from "next/image";
+import {productInterface} from "./models/index";
 
-interface productInterface {
-  title: string;
-  description: string;
-  deatils: string;
-  image: string;
-}
-
-const SinglePic = (props: { product: productInterface }) => {
+const SinglSlide = (props: { product: productInterface }) => {
   const { title, description, deatils, image } = props.product;
   return (
     <div className="flex flex-row items-center h-72 sm:h-72 md:h-72 lg:h-80 xl:h-96 2xl:h-96">
       <div className="absolute inset-0 scale-125 md:inset-0 md:scale-125 lg:scale-100 ">
         <Image src={image} alt="..." layout="fill" />
       </div>
-        <div className="text-center md:text-left pl-10 md:pl-16 lg:pl-20 xl:pl-32 z-10 2xl:top-40 md:top-0 lg:top-5 xl:top-30  left-0 md:block w-4/5 md:w-2/5 sm:w-full lg:w-1/2 xl:w-5/12">
-          <h1 className="lg:text-left font-bold text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl  2xl:text-5xl ">
+        <div className=" text-center md:text-left pl-10 md:pl-16 lg:pl-20 xl:pl-32 z-10 2xl:top-40 md:top-0 lg:top-5 xl:top-30  left-0 md:block w-4/5 md:w-2/5 sm:w-full lg:w-1/2 xl:w-5/12">
+          <h1 className=" lg:text-left font-bold text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl  2xl:text-5xl ">
             {title}
           </h1>
           <h2 className="lg:mt-3 font-light text-xl md:text-2xl lg:text-3xl xl:text-4xl  2xl:text-5xl">
@@ -34,4 +28,4 @@ const SinglePic = (props: { product: productInterface }) => {
   );
 };
 
-export default SinglePic;
+export default SinglSlide;
