@@ -12,7 +12,7 @@ interface Props {
   mediumHeadingColor?: string;
 }
 
-const BannerHeading: React.FC<Props> = (props: any) => {
+const BannerHeading: FC<Props> = (props: any) => {
   const {
     largeHeading,
     largeHeadingText,
