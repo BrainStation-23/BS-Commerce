@@ -1,7 +1,9 @@
 import React from "react";
+import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
 import Path from "@/components/global/components/path";
 import OrderList from "@/components/checkout/orderList";
 import CheckoutFooter from "../checkoutFooter";
+import Link from "next/link";
 
 const path = {
     cart: false,
@@ -17,54 +19,56 @@ const Shipping = () => {
                 <div className="box-border p-4 border-2 mt-5 divide-y-2 rounded-md text-center mx-auto">
                     <div className="flex justify-between items-center p-4">
                         <div className="flex flex-wrap gap-4">
-                            <p className="text-xs text-[#333333]">Contact</p>
-                            <p className="text-xs">+880 151-5209334</p>
+                            <p className="text-sm text-[#333333]">Contact</p>
+                            <p className="text-sm">+880 151-5209334</p>
                         </div>
 
-                        <a
-                            href="https://seinfeldquotes.com"
-                            className="ml-10 text-xs"
-                        >
-                            Change
-                        </a>
+                        <Link href="/information">
+                            <a className="ml-10 text-sm">Change</a>
+                        </Link>
                     </div>
 
                     <div className="flex justify-between items-center p-4">
                         <div className="flex flex-wrap gap-4">
-                            <p className="text-xs text-[#333333]">Ship to</p>
-                            <p className="text-xs">
+                            <p className="text-sm text-[#333333]">Ship to</p>
+                            <p className="text-sm">
                                 Kalachandpur Gulshan Dhaka-1212
                             </p>
                         </div>
-                        <a
-                            href="https://seinfeldquotes.com"
-                            className="ml-10 text-xs"
-                        >
-                            Change
-                        </a>
+                        <Link href="/information">
+                            <a className="ml-10 text-sm">Change</a>
+                        </Link>
                     </div>
                 </div>
 
                 <p className="pt-7 font-normal text-lg">Shipping method</p>
 
                 <div className="my-3 rounded-md flex flex-wrap justify-between box-border p-5 border-2 text-sm text-[#333333] hover:bg-white cursor-pointer">
-                    <p className="text-lg">Standard</p>
-                    <p className="ml-5 text-lg font-medium">Free</p>
+                    <p>Standard</p>
+                    <p className="ml-5 font-medium">Free</p>
                 </div>
 
                 <div className="mt-5 lg:flex">
                     <div>
-                        <button className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-lg">
-                            Continue to payment
-                        </button>
+                        <Link href="/payment" passHref>
+                            <button className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-sm">
+                                Continue to payment
+                            </button>
+                        </Link>
                     </div>
-                    <div className="mt-5 text-center">
-                        <a
-                            href="https://seinfeldquotes.com"
-                            className="py-5 px-6 w-full text-lg"
-                        >
-                            Return to information
-                        </a>
+                    <div className="flex flex-wrap justify-center lg:ml-6 mt-5 mb-5">
+                        <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+                            <Link href="/information" passHref>
+                                <a className="text-decoration-none">
+                                    {<ChevronLeft />}
+                                </a>
+                            </Link>
+                        </div>
+                        <Link href="/information" passHref>
+                            <a className="text-decoration-none">
+                                Return to information
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>
