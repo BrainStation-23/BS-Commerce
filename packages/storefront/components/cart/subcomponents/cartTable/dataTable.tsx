@@ -10,8 +10,16 @@ interface IICardData {
     img: string;
   };
   quantity: string;
+  handleRemoveProductFromCart: () => number;
 }
-const DataTable = (props: { cartDatas: IICardData[] }) => {
+
+const DataTable = (
+  props: { cartDatas: IICardData[]; handleRemoveProductFromCart(): IICardData },
+  {}
+) => {
+  const removeProductFromCart = (id: number) => {
+    props.handleRemoveProductFromCart(id);
+  };
   const tableData = () => {
     return props.cartDatas.map((cartData) => {
       return (
@@ -46,7 +54,9 @@ const DataTable = (props: { cartDatas: IICardData[] }) => {
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
             <div className="flex justify-center">
-              <button>X</button>
+              <button onClick={(e) => removeProductFromCart(cartData.id)}>
+                X
+              </button>
             </div>
           </td>
         </tr>

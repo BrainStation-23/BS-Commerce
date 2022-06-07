@@ -43,6 +43,10 @@ const CartDetails: NextComponentType = () => {
       quantity: "4",
     },
   ]);
+  const removeFromCart = (id) => {
+    let newAllCartList = allCartList.filter((item) => item.id != id);
+    setAllCartList(newAllCartList);
+  };
   return (
     <>
       <div>
@@ -50,7 +54,10 @@ const CartDetails: NextComponentType = () => {
           <CartDropdown cartDatas={allCartList} />
         </div> */}
         <div className="flex justify-center hidden md:flex">
-          <DataTable cartDatas={allCartList} />
+          <DataTable
+            cartDatas={allCartList}
+            handleRemoveProductFromCart={removeFromCart}
+          />
         </div>
         <div className="md:hidden">
           {allCartList.map((item) => (
