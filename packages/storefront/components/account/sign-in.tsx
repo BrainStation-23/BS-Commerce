@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import type { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 
 import { loginSchema } from "../global/schemas/loginSchema";
 
@@ -18,6 +19,7 @@ const Signin = () => {
 
   return (
     <>
+    <Breadcrumb title="Account" pathArray={["Home", "Account"]} linkArray={["/home", "/account/sign-in"]} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"

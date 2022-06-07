@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
+import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 import { loginSchema } from "../global/schemas/loginSchema";
 
 interface Values {
@@ -14,6 +15,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+      <Breadcrumb title="Account" pathArray={["Home", "Account"]} linkArray={["/home", "/account/forgot-password"]} />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
