@@ -1,7 +1,29 @@
 import Link from "next/link";
+import { ReactChild } from "react";
 import Button from "../button/button";
 
-const Banner = (props: any) => {
+interface BannerProps {
+    bg?: string;
+    width?: string;
+    height?: string;
+    buttonText?: string;
+    position?: string;
+    linkhref: string;
+    buttonPosition?: string;
+    buttonEdge?: string;
+    hasButton?: boolean;
+    hasHeading?: boolean;
+    heading?: ReactChild;
+    hasBodyText?: boolean;
+    bodyText?: ReactChild;
+    buttonPadding?: string;
+    buttonMargin?: string;
+    buttonBg?: string;
+    onHover?: string;
+    buttonTextColor?: string;
+}
+
+const Banner: React.FC<BannerProps> = (props) => {
   const {
     bg,
     width,
