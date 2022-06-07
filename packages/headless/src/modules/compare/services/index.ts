@@ -1,9 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
+import {
+  AddProductToCompareErrorEnum,
+  DeleteCompareErrorEnum,
+  GetCompareErrorEnum,
+} from 'models';
 import { Compare } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
 import { CompareResponse } from '../dto/compare.dto';
 import { CompareRepository } from '../repositories';
-
 @Injectable()
 export class CompareService {
   constructor(
@@ -15,23 +19,8 @@ export class CompareService {
     userId: string,
     productId: string,
   ): Promise<CompareResponse> {
-    if (!productId.trim()) {
-      return this.helper.serviceResponse.errorResponse(
-        'Invalid product id.',
-        null,
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    /*
-    check user compare list
-    */
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
-
-    /**
-     * if not exist create new else add product id into items
-     */
     if (!isExist) {
       saveData = await this.compareRepository.createCompare(userId, {
         productId,
@@ -49,7 +38,7 @@ export class CompareService {
       };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Can not add item for comparing.',
+        AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -62,7 +51,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Comparison list is empty.',
+        GetCompareErrorEnum.COMPARISON_LIST_IS_EMPTY,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -78,7 +67,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Comparison not found.',
+        GetCompareErrorEnum.COMPARISON_NOT_FOUND,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -97,7 +86,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Comparison can not be deleted or not exist.',
+        DeleteCompareErrorEnum.COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -116,7 +105,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Item can not be deleted.',
+        DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
         null,
         HttpStatus.BAD_REQUEST,
       );

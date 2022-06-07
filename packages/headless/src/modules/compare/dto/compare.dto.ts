@@ -1,16 +1,21 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { MaxLength, MinLength } from 'class-validator';
+import { IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
+  AddProductToCompareErrorEnum,
   CompareData,
+  CompareErrorResponse,
   CompareItems,
   CompareSuccessResponse,
-  ErrorResponse,
+  DeleteCompareErrorEnum,
+  DescriptiveError,
+  GetCompareErrorEnum,
 } from 'models';
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })
+  @IsString()
   @MaxLength(36)
   @MinLength(36)
   productId: string;
@@ -45,7 +50,14 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
   data: CompareDataDto;
 }
 
-export type CompareErrorResponseDto = ErrorResponse;
+export class CompareErrorResponseDto implements CompareErrorResponse {
+  code?: number;
+  error:
+    | AddProductToCompareErrorEnum
+    | GetCompareErrorEnum
+    | DeleteCompareErrorEnum;
+  errors: DescriptiveError;
+}
 
 export type CompareResponse =
   | CompareSuccessResponseDto

@@ -1,4 +1,9 @@
-import { ErrorResponse, SuccessResponse } from "src/index";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
+import {
+    AddProductToCompareErrorEnum,
+    DeleteCompareErrorEnum,
+    GetCompareErrorEnum,
+} from "./compareErrorEnum";
 
 export interface AddCompareItem {
     productId: string;
@@ -20,6 +25,13 @@ export interface CompareSuccessResponse extends SuccessResponse {
     data: CompareData;
 }
 
-export interface CompareErrorResponse extends ErrorResponse {}
+export interface CompareErrorResponse extends ErrorResponse {
+    code?: number;
+    error:
+        | AddProductToCompareErrorEnum
+        | DeleteCompareErrorEnum
+        | GetCompareErrorEnum;
+    errors: DescriptiveError;
+}
 
 export type CompareResponse = CompareSuccessResponse | CompareErrorResponse;
