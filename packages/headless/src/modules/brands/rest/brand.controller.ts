@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { Response } from "express";
+import { ApiResponse } from "@nestjs/swagger";
 
 import { Brand } from '../../../entity/brand';
 import { BrandService } from '../services/index';
+import { CreateBrandRequestDto } from "../dto/createBrandDto";
 
 @Controller('brands')
 
@@ -33,6 +35,16 @@ export class BrandController {
     }
 
     @Post('/create')
+    // @ApiResponse({
+    //     description: 'Brand was added successfully',
+    //     type: CreateBrandResponseDto,
+    //     status: HttpStatus.CREATED
+    //   })
+    //   @ApiResponse({
+    //     description: 'Error Response',
+    //     type: AddToCartErrorResponseDto,
+    //     status: HttpStatus.BAD_REQUEST
+    //   })
     async createBrand(
         @Body() brand: Brand, 
         @Res({ passthrough: true }) res: Response){

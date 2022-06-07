@@ -4,7 +4,7 @@ import { SuccessResponse } from "src/common/successResponse";
 export interface CreateBrandRequest{
     id?: string,
     info: Info,
-    meta?: Meta
+    meta: Meta
 }
 
 export interface Info{
@@ -22,15 +22,16 @@ export interface Meta {
     SEFN?: string
 }
 
-export interface createBrandSuccessResponse extends SuccessResponse {
-    status: string;
-    code: number;
+export interface CreateBrandSuccessResponse extends SuccessResponse {
+    status?: string;
+    code?: number;
     data: CreateBrandRequest
 }
 
-export interface createBrandErrorResponse extends ErrorResponse {
+export interface CreateBrandErrorResponse extends ErrorResponse {
     code?: number;
     error: 'Can\'t create brand' | 'Brand name already exists' | 'Info is required' | 'Name is required';
+    errors: DescriptiveError;
 }
 
-export type CreateBrandResponse = createBrandSuccessResponse | createBrandErrorResponse;
+export type CreateBrandResponse = CreateBrandSuccessResponse | CreateBrandErrorResponse;

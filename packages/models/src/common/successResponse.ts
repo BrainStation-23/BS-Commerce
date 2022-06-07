@@ -1,4 +1,4 @@
 export interface SuccessResponse {
-    status: string;
+    status?: string;
     code?: number;
 }
