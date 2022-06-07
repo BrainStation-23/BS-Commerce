@@ -1,9 +1,11 @@
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import type { NextPage } from "next";
 import SearchItem from "../components/search/searchItem";
 
 const Search: NextPage = () => {
 	return (
 		<>
+		<Breadcrumb title="Search: 4 results foun..." pathArray={["Home", "Search: 4 results foun..."]} linkArray={["/home", "/search"]} />
 			<div className="container w-fit px-15 m-auto tracking-wider items-center justify-center">
 				<div className="flex flex-wrap mx-15">
 					<div className="lg:mx-1/5 md:w-full pr-4 pl-4">
@@ -14,7 +16,7 @@ const Search: NextPage = () => {
 						</h4>
 
 						<div className="flex justify-center mt-5">
-							<div className="mb-3 w-4/5 lg:w-2/4">
+							<div className="mb-3 w-full sm:w-full md:w-full lg:w-2/4 xl:w-2/4">
 								<div className="w-full input-group relative flex flex-wrap items-stretch mb-4">
 									<input
 										type="search"
@@ -31,10 +33,7 @@ const Search: NextPage = () => {
 							</div>
 						</div>
 
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
-						<SearchItem></SearchItem>
+						<SearchItem/>
 					</div>
 				</div>
 			</div>
