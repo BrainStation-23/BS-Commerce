@@ -1,8 +1,13 @@
+import { ErrorMessage } from "src/index";
+
 export interface ErrorResponse {
     code?: number;
     error: string;
-    errors: DescriptiveError;
+    errors: DescriptiveError | null;
 }
+
 export interface DescriptiveError {
     [key: string]: [string];
 }
+
+

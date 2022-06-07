@@ -1,3 +1,4 @@
+import { CreateBrandRequestDto } from './../dto/createBrandDto';
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
 
@@ -20,7 +21,7 @@ export class BrandRepository {
         return await this.db.getAllBrands(skip, limit);
     }
     
-    async createBrand(brand: Brand): Promise<Brand | null> {
+    async createBrand(brand: CreateBrandRequestDto): Promise<Brand | null> {
         const id = crypto.randomUUID();
         const newBrand = {...brand, id};
         return await this.db.addNewBrand(newBrand);  

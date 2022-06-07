@@ -1,3 +1,4 @@
+import { CreateBrandRequestDto } from './../../../modules/brands/dto/createBrandDto';
 import { Injectable } from '@nestjs/common';
 
 import { Brand } from 'src/entity/brand';
@@ -19,7 +20,7 @@ export class BrandDatabase implements IBrandDatabase {
         return await BrandModel.findOne({ id: brandId }).lean();
     }
 
-    async addNewBrand(brand: Brand): Promise<Brand | null> {
+    async addNewBrand(brand: CreateBrandRequestDto): Promise<Brand | null> {
         return await BrandModel.create(brand);
     }
     

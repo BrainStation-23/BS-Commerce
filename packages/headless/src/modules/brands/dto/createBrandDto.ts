@@ -1,7 +1,8 @@
+import { HttpStatus } from '@nestjs/common';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber } from 'class-validator';
 
-import type { CreateBrandRequest, Info, Meta, CreateBrandSuccessResponse, CreateBrandErrorResponse  } from 'models';
+import { CreateBrandRequest, Info, Meta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
 
 export class CreateBrandRequestDto implements CreateBrandRequest{
     @ApiProperty()
@@ -21,30 +22,26 @@ export class CreateBrandRequestDto implements CreateBrandRequest{
 }
 
 export class CreateBrandSuccessResponseDto implements CreateBrandSuccessResponse {
-    @ApiProperty()
-    @IsString()
-    status: string;
-
-    @ApiProperty()
-    @IsNumber()
+    @ApiProperty({ default: HttpStatus.CREATED })
     code: number;
 
     @ApiProperty()
-    @IsNotEmpty()
-    @IsObject()
     data: CreateBrandRequest;
 }
 
 export class CreateBrandErrorResponseDto implements CreateBrandErrorResponse{
-    @ApiProperty()
-    code: number;
+    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+    code?: number;
 
     @ApiProperty()
-    error: 'Can\'t create brand' | 'Brand name already exists' | 'Info is required' | 'Name is required';
+    error: ErrorMessage.CANNOT_CREATE_BRAND | ErrorMessage.BRAND_ALREADY_EXISTS | ErrorMessage.NAME_REQUIRED | ErrorMessage.NAME_BE_VALID;
 
     @ApiProperty()
     errors: string[];
 }
+
+
+export type CreateBrandResponseDto = CreateBrandErrorResponseDto | CreateBrandSuccessResponseDto;
 
 
 
