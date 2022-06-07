@@ -1,4 +1,18 @@
-const BannerHeading = (props: any) => {
+import { FC } from "react";
+
+interface Props {
+  largeHeading: string;
+  largeHeadingText: string;
+  largeHeadingColor?: string;
+  smallHeading: string;
+  smallHeadingText: string;
+  smallHeadingColor?: string;
+  mediumHeading: string;
+  mediumHeadingText: string;
+  mediumHeadingColor?: string;
+}
+
+const BannerHeading: React.FC<Props> = (props: any) => {
   const {
     largeHeading,
     largeHeadingText,
