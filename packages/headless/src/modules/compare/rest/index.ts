@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Param,
   Post,
   Query,
@@ -20,7 +21,11 @@ import { Response } from 'express';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
-import { AddToCompareDto, CompareSuccessResponseDto } from '../dto/compare.dto';
+import {
+  AddToCompareDto,
+  CompareErrorResponseDto,
+  CompareSuccessResponseDto,
+} from '../dto/compare.dto';
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')
@@ -30,11 +35,17 @@ import { CompareService } from '../services';
 export class CompareController {
   constructor(private compareService: CompareService) {}
 
-  @ApiResponse({
-    description: 'Add product to compare',
-    type: CompareSuccessResponseDto,
-  })
   @Post()
+  @ApiResponse({
+    description: 'Add product to compare Success Response',
+    type: CompareSuccessResponseDto,
+    status: HttpStatus.CREATED,
+  })
+  @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
   async addItemToComapre(
     @UserInfo() user: User,
     @Body() body: AddToCompareDto,
@@ -49,8 +60,14 @@ export class CompareController {
   }
 
   @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @ApiResponse({
     description: 'Get compare by user',
     type: CompareSuccessResponseDto,
+    status: HttpStatus.OK,
   })
   @Get()
   async getCompareByUserId(
@@ -65,8 +82,14 @@ export class CompareController {
   }
 
   @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @ApiResponse({
     description: 'Get compare by compare id',
     type: CompareSuccessResponseDto,
+    status: HttpStatus.OK,
   })
   @ApiParam({ name: 'compareId', example: '' })
   @Get(':compareId')
@@ -84,8 +107,14 @@ export class CompareController {
   }
 
   @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @ApiResponse({
     description: 'Delete compare by compare id',
     type: CompareSuccessResponseDto,
+    status: HttpStatus.OK,
   })
   @ApiQuery({ name: 'compareId', example: '' })
   @Delete()
@@ -103,8 +132,14 @@ export class CompareController {
   }
 
   @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @ApiResponse({
     description: 'Delete compare item by product id',
     type: CompareSuccessResponseDto,
+    status: HttpStatus.OK,
   })
   @ApiQuery({ name: 'productId', example: '' })
   @Delete('item')
@@ -120,8 +155,14 @@ export class CompareController {
   }
 
   @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @ApiResponse({
     description: 'Delete all compare items of user',
     type: CompareSuccessResponseDto,
+    status: HttpStatus.OK,
   })
   @Delete('allitems')
   async deleteAllItemByUserId(

@@ -3,13 +3,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
-  AddProductToCompareErrorEnum,
   CompareData,
   CompareErrorResponse,
   CompareItems,
   CompareSuccessResponse,
-  DeleteCompareErrorEnum,
   DescriptiveError,
+} from 'models';
+import {
+  AddProductToCompareErrorEnum,
+  DeleteCompareErrorEnum,
   GetCompareErrorEnum,
 } from 'models';
 
@@ -51,11 +53,22 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
 }
 
 export class CompareErrorResponseDto implements CompareErrorResponse {
+  @ApiProperty()
   code?: number;
+  @ApiProperty({
+    examples: [
+      AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING,
+      GetCompareErrorEnum.COMPARISON_LIST_IS_EMPTY,
+      GetCompareErrorEnum.COMPARISON_NOT_FOUND,
+      DeleteCompareErrorEnum.COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST,
+      DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
+    ],
+  })
   error:
     | AddProductToCompareErrorEnum
     | GetCompareErrorEnum
     | DeleteCompareErrorEnum;
+  @ApiProperty()
   errors: DescriptiveError;
 }
 
