@@ -31,37 +31,37 @@ const TrendingProducts: FC = () => {
           <h1 className="text-4xl text-bold ">Trending Products</h1>
         </div>
         <ul className="flex justify-center text-base m-5 font-semibold ">
-          <li className="mr-3">
+          <li className="mr-1 md:mr-3">
             <button
               onClick={() => handleClick("smartphones")}
               className={
                 filterKey === "smartphones"
                   ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-4 py-1"
+                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
               }
             >
               SMARTPHONES
             </button>
           </li>
-          <li className="mr-3">
+          <li className="mr-1 md:mr-3">
             <button
               onClick={() => handleClick("laptops")}
               className={
                 filterKey === "laptops"
                   ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-4 py-1"
+                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
               }
             >
               LAPTOPS
             </button>
           </li>
-          <li className="mr-3">
+          <li className="mr-1 md:mr-3">
             <button
               onClick={() => handleClick("fragrances")}
               className={
                 filterKey === "fragrances"
                   ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-4 py-1"
+                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
               }
             >
               FRAGRANCES

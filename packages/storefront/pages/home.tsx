@@ -14,25 +14,25 @@ const Home: NextPage = () => {
     <>
       <ImageSlider />
       <HomeShipping />
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <TrendingProducts />
       </div>
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <BannerPage />
       </div>
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <WeekDeals />
       </div>
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <HomefullBanner />
       </div>
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <BestSell />
       </div>
-      <div className="mb-10">
+      <div className="mb-5 md:mb-10">
         <Blog />
       </div>
-      <div className="mb-10">
+      <div className="mb-4 md:mb-10">
         <FeaturedProducts />
       </div>
     </>
