@@ -1,7 +1,7 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, ResItem, Item, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage } from 'models';
+import { Cart, ResponseItem, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage } from 'models';
 export class AddToCartResponseDto implements Cart {
     @ApiProperty()
     @IsString()
@@ -15,7 +15,7 @@ export class AddToCartResponseDto implements Cart {
     @IsArray()
     items: ResItemDto[];
 }
-class ResItemDto implements ResItem {
+class ResItemDto implements ResponseItem {
     @ApiProperty()
     @IsOptional()
     @IsObject()
@@ -31,7 +31,7 @@ class ResItemDto implements ResItem {
 }
 
 
-export class ItemDto implements Item {
+export class AddToCartRequestDto implements addToCartRequest {
     @ApiProperty()
     @IsString()
     productId: string;
@@ -55,11 +55,4 @@ export class AddToCartErrorResponseDto implements addToCartErrorResponse {
 
     @ApiProperty()
     errors: string[];
-}
-
-export class AddToCartRequestDto implements addToCartRequest {
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsObject()
-    item: Item;
 }

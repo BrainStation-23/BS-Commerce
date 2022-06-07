@@ -4,16 +4,17 @@ import {
   ServiceErrorResponse,
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
-import {ItemDto } from '../dto/addToCart.dto';
 import { CartRepository } from '../repositories';
 import { AddToCartResponse, ErrorMessage } from 'models';
+import { AddToCartRequestDto } from '../dto/addToCart.dto';
+import { Item } from 'src/entity/cart';
 
 @Injectable()
 export class CartService {
   constructor(private cartRepo: CartRepository, private helper: Helper) { }
 
   async addToCart(
-    item: ItemDto,
+    item: AddToCartRequestDto,
     userId: string,
   ): Promise<AddToCartResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
@@ -102,7 +103,7 @@ export class CartService {
 
   async updateCartItem(
     userId: string,
-    item: ItemDto,
+    item: Item,
   ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
     if (item.quantity && item.quantity > 0) {
       const cart = await this.cartRepo.updateCartItem(userId, item);

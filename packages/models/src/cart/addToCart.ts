@@ -1,10 +1,10 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 import { Cart } from "./cart";
-import { Item } from "./item";
 
 export interface addToCartRequest {
-    item: Item;
+    productId: string;
+    quantity: number;
 }
 
 export interface addToCartSuccessResponse extends SuccessResponse {

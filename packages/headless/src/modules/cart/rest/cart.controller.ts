@@ -15,8 +15,9 @@ import { Response } from 'express';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { AddToCartResponseDto, AddToCartErrorResponseDto, ItemDto } from '../dto/addToCart.dto';
+import { AddToCartResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
 import { ApiResponse } from '@nestjs/swagger';
+import { Item } from 'src/entity/cart';
 
 @UseGuards(JwtAuthGuard)
 @Controller('cart')
@@ -35,7 +36,7 @@ export class CartController {
     status: HttpStatus.BAD_REQUEST
   })
   async addToCart(
-    @Body() item: ItemDto,
+    @Body() item: AddToCartRequestDto,
     @UserInfo() user: User,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -67,7 +68,7 @@ export class CartController {
   @Put('item')
   async updateCartItem(
     @UserInfo() user: User,
-    @Body() item: ItemDto,
+    @Body() item: Item,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.updateCartItem(

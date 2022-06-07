@@ -1,10 +1,5 @@
 import { CartProduct } from "./product";
-
-export interface Item {
-    productId: string;
-    quantity: number;
-}
-export interface ResItem {
+export interface ResponseItem {
         product?: CartProduct;
         productId: string;
         quantity: number;
