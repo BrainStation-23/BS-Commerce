@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { products } from "../../allData/product-data.json";
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 
 const ProductDetails: NextPage = () => {
 	const product = products.find((product) => product.id === 1);
@@ -9,6 +10,7 @@ const ProductDetails: NextPage = () => {
 	if (product) {
 		return (
 			<>
+				<Breadcrumb title={product.title} pathArray={["Home", product.title]} linkArray={["/home", "/product"+product.id]} />
 				<section className="text-gray-700 body-font overflow-hidden bg-white">
 					<div className="container px-5 py-24 mx-auto">
 						<div className="lg:w-4/5 mx-auto flex flex-wrap">
