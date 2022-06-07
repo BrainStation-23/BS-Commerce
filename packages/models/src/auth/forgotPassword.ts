@@ -1,5 +1,4 @@
-import { DescriptiveError, ErrorResponse } from 'src/common/index';
-import { SuccessResponse } from 'src/common/index';
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 
 /**
  * API Path: /auth/forgot
