@@ -1,39 +1,80 @@
 import React from "react";
 import Path from "@/components/global/components/path";
-import ShippingPage from ".";
-import OrderList from "../orderList";
+import OrderList from "@/components/checkout/orderList";
 
 const path = {
     cart: false,
     info: false,
-    shipping: false,
-    payment: true,
+    shipping: true,
+    payment: false,
 };
 
-const Shipping = () => {
+const  Shipping = () => {
     return (
-        <div>
-            <div className="row">
-                <div className="lg:mt-10 xl:mt-10 lg:mb-5 xl:mb-5 lg:mx-28 xl:mx-28 hidden sm:hidden md:hidden lg:block xl:block">
-                    <Path
-                        cart={path.cart}
-                        info={path.info}
-                        shipping={path.shipping}
-                        payment={path.payment}
-                    />
-                </div>
-                <div className="divide-x-0 sm:divide-x-0 md:divide-x-0 lg:divide-x-2 xl:divide-x-2 flex flex-wrap flex-col-reverse sm:flex-col-reverse md:flex-col-reverse lg:flex-row xl:flex-row justify-between">
-                    <ShippingPage />
-                    <div className="mx-5 sm:mx-5 md:mx-28 mb-5 block sm:block md:block lg:hidden xl:hidden">
-                        <Path
-                            cart={path.cart}
-                            info={path.info}
-                            shipping={path.shipping}
-                            payment={path.payment}
-                        />
+        <div className="w-3/5">
+            <div className="px-3.5 m-0 lg:mx-20 lg:my-12">
+                {/* <Path
+                    cart={path.cart}
+                    info={path.info}
+                    shipping={path.shipping}
+                    payment={path.payment}
+                ></Path> */}
+                <div className="box-border p-4 border-2 mt-10 divide-y-2 rounded-md text-center mx-auto">
+                    <div className="flex justify-between items-center p-4">
+                        <div className="flex flex-wrap gap-4">
+                            <p className="text-xs text-[#333333]">Contact</p>
+                            <p className="text-xs">+880 151-5209334</p>
+                        </div>
+
+                        <a
+                            href="https://seinfeldquotes.com"
+                            className="ml-10 text-xs"
+                        >
+                            Change
+                        </a>
                     </div>
-                    <OrderList />
+
+                    <div className="flex justify-between items-center p-4">
+                        <div className="flex flex-wrap gap-4">
+                            <p className="text-xs text-[#333333]">Ship to</p>
+                            <p className="text-xs">
+                                Kalachandpur Gulshan Dhaka-1212
+                            </p>
+                        </div>
+                        <a
+                            href="https://seinfeldquotes.com"
+                            className="ml-10 text-xs"
+                        >
+                            Change
+                        </a>
+                    </div>
                 </div>
+
+                <p className="pt-7 font-normal text-lg">Shipping method</p>
+
+                <div className="my-3 rounded-md flex flex-wrap justify-between box-border p-5 border-2 text-sm text-[#333333] hover:bg-white cursor-pointer">
+                    <p className="text-lg">Standard</p>
+                    <p className="ml-5 text-lg font-medium">Free</p>
+                </div>
+
+                <div className="mt-5 lg:flex">
+                    <div>
+                        <button className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-lg">
+                            Continue to payment
+                        </button>
+                    </div>
+                    <div className="mt-5 text-center">
+                        <a
+                            href="https://seinfeldquotes.com"
+                            className="py-5 px-6 w-full text-lg"
+                        >
+                            Return to information
+                        </a>
+                    </div>
+                </div>
+                {/* <div>
+                    <OrderList></OrderList>
+                </div> */}
             </div>
         </div>
     );
