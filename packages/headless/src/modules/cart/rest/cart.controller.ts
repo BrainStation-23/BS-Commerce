@@ -16,10 +16,11 @@ import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { AddToCartResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { Item } from 'src/entity/cart';
 
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @Controller('cart')
 export class CartController {
   constructor(private cartService: CartService) { }
