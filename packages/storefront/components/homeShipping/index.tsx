@@ -5,7 +5,7 @@ import { ImageCom } from "../global/components/image";
 const HomeShipping: FC = () => {
   return (
     <>
-      <Container>
+      <Container className="max-w-6xl">
         <div className="flex py-16 flex-wrap">
           <div className="w-full md:w-1/2 lg:w-1/4 flex px-3 pb-2 lg:pb-0">
             <div className="mr-3">
