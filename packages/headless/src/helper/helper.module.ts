@@ -1,8 +1,8 @@
-import { Global, Module } from "@nestjs/common";
-import { Helper } from "./helper.interface";
-import { HelperService } from "./helper.service";
-import { MailService } from "./mailService";
-import { IMailService } from "./mailService/mail.service.interface";
+import { Global, Module } from '@nestjs/common';
+import { Helper } from './helper.interface';
+import { HelperService } from './helper.service';
+import { MailService } from './mailService';
+import { IMailService } from './mailService/mail.service.interface';
 
 @Global()
 @Module({
