@@ -1,4 +1,5 @@
-import { CreateManufacturerRequest, CreateManufacturerErrorResponse, CreateManufacturerSuccessResponse, CreateManufacturerErrorMessages } from './../../../../../models/src/manufacturer/createManufacturer';
+import type { CreateManufacturerRequest, CreateManufacturerErrorResponse, CreateManufacturerSuccessResponse, DescriptiveError } from 'models';
+import {CreateManufacturerErrorMessages} from 'models'
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength, ValidateNested } from "class-validator";
 import { ManufacturerDto } from './manufacturer.dto';
@@ -46,7 +47,7 @@ export class CreateManufacturerErrorResponseDto implements CreateManufacturerErr
     error: CreateManufacturerErrorMessages.MANUFACTURER_ALREADY_EXISTS | CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY;
 
     @ApiProperty()
-    errors: string[];
+    errors: DescriptiveError;
 }
 
 export class CreateManufacturerSuccessResponseDto implements CreateManufacturerSuccessResponse {
@@ -56,3 +57,5 @@ export class CreateManufacturerSuccessResponseDto implements CreateManufacturerS
     @ApiProperty()
     data: ManufacturerDto;
 }
+
+export type CreateManufacturerResponseDto = CreateManufacturerErrorResponseDto | CreateManufacturerSuccessResponseDto

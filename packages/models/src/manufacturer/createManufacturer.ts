@@ -1,13 +1,13 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { DescriptiveError, ErrorResponse, SuccessResponse } from '../common/index';
 import { Manufacturer } from './manufacturer';
 import { ManufacturerSeo } from './manufacturerSeo';
 
-export enum CreateManufacturerErrorMessages {
+export const enum CreateManufacturerErrorMessages {
     MANUFACTURER_ALREADY_EXISTS = 'Manufacturer already exists.',
     MANUFACTURER_NOT_CREATED_SUCCESSFULLY = 'Manufacturer not created successfully'
 }
 
-export enum CreateManufacturerSuccessMessages {
+export const enum CreateManufacturerSuccessMessages {
     MANUFACTURER_CREATED_SUCCESSFULLY = 'Manufacturer created successfully.'
 }
 
@@ -33,7 +33,7 @@ export interface CreateManufacturerSuccessResponse extends SuccessResponse {
 }
 
 export interface CreateManufacturerErrorResponse extends ErrorResponse {
-    code: number;
+    code?: number;
     error: CreateManufacturerErrorMessages.MANUFACTURER_ALREADY_EXISTS | CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY;
     errors: DescriptiveError;
 }

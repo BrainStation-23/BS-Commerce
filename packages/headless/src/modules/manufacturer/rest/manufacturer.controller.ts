@@ -21,7 +21,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 @Controller('manufacturers')
-@ApiTags('User Profile API')
+@ApiTags('Manufacturer API')
 @ApiBearerAuth('BearerAuth')
 @UseGuards(JwtAuthGuard)
 export class ManufacturerController {
@@ -37,7 +37,7 @@ export class ManufacturerController {
      * @param res res is used for sending status code
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
-    @Post('/create')
+    @Post('create')
     @ApiResponse({
         description: 'Create Manufacturer Success Response',
         type: CreateManufacturerSuccessResponseDto,

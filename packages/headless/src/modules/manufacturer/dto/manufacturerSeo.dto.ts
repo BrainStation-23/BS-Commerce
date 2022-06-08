@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
-import { ManufacturerSeo } from "../../../../../models/src/manufacturer/manufacturerSeo";
+import type { ManufacturerSeo } from "models";
 
 export class ManufacturerSeoDto implements ManufacturerSeo {
     @ApiProperty()
