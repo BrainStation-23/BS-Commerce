@@ -4,8 +4,8 @@ import CounterElement from "./counterElement";
 import radiot from "../../../../styles/radioButton.module.css";
 const AvaialabilityOptions: NextComponentType = () => {
   const availableOptions = [
-    { id: 1234, meta: { name: "in Stock" } },
-    { id: 4567, meta: { name: "in Stock" } },
+    { id: 1234, meta: { name: "In Stock" } },
+    { id: 4567, meta: { name: "Out of Stock" } },
   ];
   const [availibityOptionVal, setavailibityOptionVal] = useState("");
   return (

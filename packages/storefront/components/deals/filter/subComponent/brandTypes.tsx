@@ -4,14 +4,14 @@ import CounterElement from "./counterElement";
 import radio from "../../../../styles/radioButton.module.css";
 const BrandTypeOptions: NextComponentType = () => {
   const availableOptions = [
-    { id: 4343, meta: { name: "A Type Vegetable" } },
-    { id: 4534, meta: { name: "B Type Vegetable" } },
-    { id: 4633, meta: { name: "C Type Vegetable" } },
-    { id: 45643, meta: { name: "D Type Vegetable" } },
-    { id: 34564, meta: { name: "E Type Vegetable" } },
-    { id: 45332, meta: { name: "F Type Vegetable" } },
-    { id: 45430, meta: { name: "G Type Vegetable" } },
-    { id: 343490, meta: { name: "H Type Vegetable" } },
+    { id: 4343, meta: { name: "Boho Decor" } },
+    { id: 4534, meta: { name: "Flying Wooden" } },
+    { id: 4633, meta: { name: "LED Lights" } },
+    { id: 45643, meta: { name: "Luxury Palace" } },
+    { id: 34564, meta: { name: "Golden" } },
+    { id: 45332, meta: { name: "Apple" } },
+    { id: 45430, meta: { name: "Samsung" } },
+    { id: 343490, meta: { name: "Hp" } },
   ];
   const [brandTypesOptionVal, setBrandTypesOptionVal] = useState("");
   return (

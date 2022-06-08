@@ -5,13 +5,12 @@ import radio from "../../../../styles/radioButton.module.css";
 const ColourTypeOptions: NextComponentType = () => {
   const availableOptions = [
     { id: 32320, meta: { name: "Red" } },
-    { id: 435, meta: { name: "Red" } },
-    { id: 6787, meta: { name: "Red" } },
-    { id: 45458, meta: { name: "Red" } },
-    { id: 4545670, meta: { name: "Red" } },
-    { id: 5467, meta: { name: "Red" } },
-    { id: 556009, meta: { name: "Red" } },
-    { id: 44435, meta: { name: "Red" } },
+    { id: 435, meta: { name: "Yellow" } },
+    { id: 6787, meta: { name: "Violet" } },
+    { id: 45458, meta: { name: "Green" } },
+    { id: 4545670, meta: { name: "Pink" } },
+    { id: 5467, meta: { name: "Maroon" } },
+    { id: 556009, meta: { name: "White" } },
   ];
   const [availibityColorOptionVal, setavailibityColorOptionVal] = useState("");
   return (
