@@ -18,7 +18,7 @@ const WishlistComponent = () => {
         linkArray={["/home", "/wishlist"]}
       />
       <div className="flex flex-wrap gap-5 mt-10 mx-5 sm:mx-5 md:mx-7 lg:mx-10 xl:mx-10 justify-center">
-        {productData["products"].map((product, index) => {
+        {productData["products"].slice(0,8).map((product, index) => {
           return (
             <React.Fragment key={index}>
               <div className="flex flex-wrap flex-col items-center">
