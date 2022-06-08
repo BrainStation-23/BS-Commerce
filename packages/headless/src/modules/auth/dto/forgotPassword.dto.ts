@@ -29,7 +29,7 @@ export class ForgotPasswordErrorResponseDto implements ForgotPasswordErrorRespon
     example: ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD,
     examples: [ForgotPasswordErrorMessages.CAN_NOT_GET_USER, ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD, ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT]
   })
-  error: ForgotPasswordErrorMessages.CAN_NOT_GET_USER | ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD | ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT;
+  error: ForgotPasswordErrorMessages;
 
   @ApiProperty()
   errors: string[];

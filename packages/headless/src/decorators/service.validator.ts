@@ -1,7 +1,7 @@
 import { Injectable, HttpStatus, HttpException, Type } from '@nestjs/common'
 import { validate } from 'class-validator'
 import { plainToClass } from 'class-transformer'
-import { ServiceErrorResponse } from 'src/helper/serviceResponse/service.response.interface'
+import { ErrorResponse } from 'models'
 
 export interface PipeTransform<T = any, R = any> {
     /**
@@ -45,7 +45,7 @@ export class ValidationPipe implements PipeTransform<any> {
         // Converts plain (literal) object to class (constructor) object.
         const object = plainToClass(metatype, value)
         const errors: ValidationError[] = await validate(object, { validationError: { target: false, value: false } });
-        const errorsResponse: ServiceErrorResponse = { error: '', errors: {} };
+        const errorsResponse: ErrorResponse = { error: '', errors: {} };
 
         if (errors.length > 0) {
             errors.map((err: ValidationError) => {

@@ -14,7 +14,7 @@ export class GetUserErrorResponseDto implements GetUserErrorResponse {
     @ApiProperty({
         example: GetUserErrorMessages.CAN_NOT_GET_USER
     })
-    error: GetUserErrorMessages.CAN_NOT_GET_USER;
+    error: GetUserErrorMessages;
 
     @ApiProperty()
     errors: string[];

@@ -8,7 +8,7 @@ export const dbConfig = {
     mysql: {
         username: MYSQL_DB_USER! || 'root',
         password: MYSQL_DB_PASSWORD! || '',
-        database: MYSQL_DB_NAME! || 'bs-commerce-dev ',
+        database: MYSQL_DB_NAME! || 'bs-commerce-dev',
         host: MYSQL_DB_HOST! || 'localhost',
         port: parseInt(MYSQL_DB_PORT!) || 3306,
         dialect: MYSQL_DB_DIALECT as Dialect || 'mysql',
