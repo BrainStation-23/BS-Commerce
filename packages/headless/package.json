@@ -41,6 +41,7 @@
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
+    "joi": "^17.6.0",
     "models": "*",
     "mongoose": "^6.2.2",
     "mysql2": "^2.3.3",

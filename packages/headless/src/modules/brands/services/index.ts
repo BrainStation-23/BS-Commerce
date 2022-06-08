@@ -1,5 +1,4 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
-import * as Joi from 'joi';
 import { Response } from "express";
 import * as crypto from 'crypto';
 
@@ -22,9 +21,9 @@ export class BrandService{
 
     async createBrand( brand: CreateBrandRequestDto ): Promise<CreateBrandResponseDto>{
         
-        if( brand.info.name == undefined ) return { error: ErrorMessage.NAME_REQUIRED, errors: null, code: HttpStatus.BAD_REQUEST}
-        else if( brand.info.name == "" ) return { error: ErrorMessage.NAME_BE_VALID, errors: null, code: HttpStatus.BAD_REQUEST}
-        else{
+        // if( brand.info.name == undefined ) return { error: ErrorMessage.NAME_REQUIRED, errors: null, code: HttpStatus.BAD_REQUEST}
+        // if( brand.info.name == "" ) return { error: ErrorMessage.NAME_BE_VALID, errors: null, code: HttpStatus.BAD_REQUEST}
+        // else{
             const doesBrandExist = await this.brandRepo.getBrandByName(brand.info.name);
             if(doesBrandExist) return { error: ErrorMessage.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
             else {
@@ -33,7 +32,7 @@ export class BrandService{
                  
                 return { code: HttpStatus.CREATED, data: newBrand }; 
             }    
-        }
+        // }
     }
    
     async getAllBrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
