@@ -13,7 +13,18 @@ const ProductInfo = (props: any) => {
           {product.category}
         </p>
         <p className="text-base font-semibold text-green-600">
-          {product.price}
+          {(
+            product.price -
+            (product.price * product.discountPercentage) / 100.0
+          ).toFixed(0)}
+          {product.price ? (
+            <span className="text-xs font-semibold text-black ml-2">
+              <s>$</s>
+              {product.price ? <s>{product.price}</s> : null}
+            </span>
+          ) : (
+            <div></div>
+          )}
         </p>
       </div>
     </div>
