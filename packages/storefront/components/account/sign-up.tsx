@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { registerSchema } from "../global/schemas/loginSchema";
+import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 
 interface Values {
   firstname: string;
@@ -22,6 +23,11 @@ const Signup = () => {
 
   return (
     <>
+      <Breadcrumb
+        title="Create Account"
+        pathArray={["Home", "Create Account"]}
+        linkArray={["/home", "/account/sign-up"]}
+      />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"

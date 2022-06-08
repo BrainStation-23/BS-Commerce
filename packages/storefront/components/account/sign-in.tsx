@@ -2,22 +2,27 @@ import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import type { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 
 import { loginSchema } from "../global/schemas/loginSchema";
 
 interface Values {
-  phone: string,
-  password: string,
+  phone: string;
+  password: string;
 }
 
 const Signin = () => {
-
   function handleSignin(data: FormikValues) {
     console.log(data);
   }
 
   return (
     <>
+      <Breadcrumb
+        title="Account"
+        pathArray={["Home", "Account"]}
+        linkArray={["/home", "/account/sign-in"]}
+      />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
@@ -72,8 +77,13 @@ const Signin = () => {
                       </div>
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
-                    <button type="submit" className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white">Sign In</button>
-          
+                      <button
+                        type="submit"
+                        className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white"
+                      >
+                        Sign In
+                      </button>
+
                       <div className="my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3 text-decoration-none">
                         <Link href="/account/forgot-password">
                           <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
@@ -88,7 +98,10 @@ const Signin = () => {
             </Formik>
             <div className="text-decoration-none mt-3">
               <Link data-testid="create-account-link" href="/account/sign-up">
-                <a data-testid="create-account-page" className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
+                <a
+                  data-testid="create-account-page"
+                  className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light"
+                >
                   Create account
                 </a>
               </Link>
