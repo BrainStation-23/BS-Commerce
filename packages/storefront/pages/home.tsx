@@ -1,14 +1,40 @@
-import Product from "@/components/global/components/product/product";
 import type { NextPage } from "next";
-import Link from "next/link";
-import Blog from "../components/blog/blog"
-import Products from "./trendProducts";
+import TrendingProducts from "@/components/trend/index";
+import WeekDeals from "@/components/weekDeals";
+import HomeShipping from "@/components/homeShipping";
+import ImageSlider from "@/components/imageSlider";
+import FeaturedProducts from "@/components/featuredProducts";
+import BannerPage from "@/components/global/bannerComponent";
+import BestSell from "@/components/bestSell";
+import Blog from "@/components/blog/blog";
+import HomefullBanner from "@/components/global/bannerComponent/homeFullBanner";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Blog></Blog>
-      {/* <Products/> */}
+      <ImageSlider />
+      <HomeShipping />
+      <div className="mb-4 md:mb-10">
+        <TrendingProducts />
+      </div>
+      <div className="mb-4 md:mb-10">
+        <BannerPage />
+      </div>
+      <div className="mb-4 md:mb-10">
+        <WeekDeals />
+      </div>
+      <div className="mb-4 md:mb-10">
+        <HomefullBanner />
+      </div>
+      <div className="mb-4 md:mb-10">
+        <BestSell />
+      </div>
+      <div className="mb-5 md:mb-10">
+        <Blog />
+      </div>
+      <div className="mb-4 md:mb-10">
+        <FeaturedProducts />
+      </div>
     </>
   );
 };
