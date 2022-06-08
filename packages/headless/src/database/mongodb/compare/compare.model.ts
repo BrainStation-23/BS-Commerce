@@ -29,4 +29,4 @@ const CompareSchema = new Schema<Compare>(
 );
 
 const CompareModel = model<Compare>('compare', CompareSchema);
-export { CompareModel };
+export { CompareModel, CompareSchema };

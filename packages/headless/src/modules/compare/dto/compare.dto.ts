@@ -1,9 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId } from 'class-validator';
+import { IsMongoId, IsNotEmpty, ValidateNested } from 'class-validator';
 import type { AddCompareItem } from 'models';
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty()
   @IsMongoId()
+  @ValidateNested({ each: true })
+  @IsNotEmpty({ always: true })
   productId: string;
 }
 
@@ -15,5 +17,5 @@ export interface CompareResponseDto {
 
 export interface CompareItems {
   productId: string;
-  products: any;
+  products?: any;
 }

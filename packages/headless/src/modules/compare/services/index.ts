@@ -1,11 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Compare } from 'src/entity/compare';
-import { CompareRepository } from '../repositories';
 import { errorResponse, successResponse } from 'src/utils/response';
 import {
-  IServiceSuccessResponse,
   IServiceErrorResponse,
+  IServiceSuccessResponse,
 } from 'src/utils/response/service.response.interface';
+import { CompareRepository } from '../repositories';
 
 @Injectable()
 export class CompareService {
@@ -24,7 +24,6 @@ export class CompareService {
     */
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
-
     /**
      * if not exist create new else add product id into items
      */
@@ -43,8 +42,10 @@ export class CompareService {
       else saveData = isExist;
     }
 
+    console.log({ saveData });
+
     if (saveData) {
-      saveData = await this.compareRepository.getCompareByUserId(userId);
+      // saveData = await this.compareRepository.getCompareByUserId(userId);
       return successResponse(saveData, HttpStatus.OK);
     } else {
       return errorResponse(
