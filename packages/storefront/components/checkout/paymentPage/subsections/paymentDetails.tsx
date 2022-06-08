@@ -90,6 +90,7 @@ const PaymentDetails = () => {
                             name="cardNumber"
                             className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                             placeholder=" "
+                            required
                           />
                           <label
                             htmlFor={`cardNumber`}
@@ -108,6 +109,7 @@ const PaymentDetails = () => {
                             name="nameOnCard"
                             className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                             placeholder=" "
+                            required
                           />
                           <label
                             htmlFor={`nameOnCard`}
@@ -127,6 +129,7 @@ const PaymentDetails = () => {
                               name="expirationDate"
                               className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                               placeholder=" "
+                              required
                             />
                             <label
                               htmlFor={`expirationDate`}
@@ -143,6 +146,7 @@ const PaymentDetails = () => {
                               name="securityCode"
                               className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                               placeholder=" "
+                              required
                             />
                             <label
                               htmlFor={`securityCode`}
@@ -206,6 +210,7 @@ const PaymentDetails = () => {
                               as="select"
                               id="country"
                               name="country"
+                              required
                               className="required block rounded p-4 w-full text-sm text-gray-500  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer"
                             >
                               <option>Click here to select your country</option>
@@ -238,8 +243,9 @@ const PaymentDetails = () => {
                                   type="text"
                                   id="lastName"
                                   name="lastName"
-                                  className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`lastName`}
@@ -259,6 +265,7 @@ const PaymentDetails = () => {
                                 name="address"
                                 className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                                 placeholder=" "
+                                required
                               />
                               <label
                                 htmlFor={`address`}
@@ -296,6 +303,7 @@ const PaymentDetails = () => {
                                   name="city"
                                   className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`city`}
@@ -312,6 +320,7 @@ const PaymentDetails = () => {
                                   name="postalCode"
                                   className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`postalCode`}
