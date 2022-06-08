@@ -8,8 +8,6 @@ const ProductSort: NextComponentType = () => {
     { id: Math.random() * 100, meta: { name: "Price Low" } },
     { id: Math.random() * 100, meta: { name: "Date New to Old" } },
     { id: Math.random() * 100, meta: { name: "Date Old to new" } },
-    { id: Math.random() * 100, meta: { name: "Alphabetically" } },
-    { id: Math.random() * 100, meta: { name: "Alphabetically" } },
   ];
   const gridIcon = (
     <svg
