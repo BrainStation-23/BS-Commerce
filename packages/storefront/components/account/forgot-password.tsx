@@ -8,14 +8,17 @@ interface Values {
 }
 
 const ForgotPassword = () => {
-
   const handleForgotPassword = (values: Values) => {
     console.log(values);
   };
 
   return (
     <>
-      <Breadcrumb title="Account" pathArray={["Home", "Account"]} linkArray={["/home", "/account/forgot-password"]} />
+      <Breadcrumb
+        title="Account"
+        pathArray={["Home", "Account"]}
+        linkArray={["/home", "/account/forgot-password"]}
+      />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
@@ -58,10 +61,14 @@ const ForgotPassword = () => {
                     </div>
 
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
-                      
-                    <button type="submit" className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white">Submit</button>
+                      <button
+                        type="submit"
+                        className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white"
+                      >
+                        Submit
+                      </button>
 
-                    <div className="my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3 text-decoration-none">
+                      <div className="my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3 text-decoration-none">
                         <Link href="/account/sign-in">
                           <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
                             Cancel
