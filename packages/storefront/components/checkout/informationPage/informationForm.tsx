@@ -1,6 +1,7 @@
 import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
 import { Field, Form, Formik } from "formik";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface FormData {
   contact: string
@@ -29,8 +30,11 @@ const Information = () => {
     saveInformationCheckbox: "",
   };
 
+  const router = useRouter();
+
   const handleCheckoutSubmit = (data: FormData) => {
     console.log(data);
+    router.push('/shipping')
   };
 
   return (
@@ -78,6 +82,7 @@ const Information = () => {
                         name="contact"
                         className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                         placeholder=" "
+                        required
                       />
                       <label
                         htmlFor={`contact`}
@@ -116,6 +121,7 @@ const Information = () => {
                         as="select"
                         id="country"
                         name="country"
+                        required
                         className="required block rounded p-4 w-full text-sm text-gray-500  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer"
                       >
                         <option>Click here to select your country</option>
@@ -149,6 +155,7 @@ const Information = () => {
                             id="lastName"
                             name="lastName"
                             className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            required
                             placeholder=" "
                           />
                           <label
@@ -168,6 +175,7 @@ const Information = () => {
                           id="address"
                           name="address"
                           className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                          required
                           placeholder=" "
                         />
                         <label
@@ -205,6 +213,7 @@ const Information = () => {
                             id="city"
                             name="city"
                             className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            required
                             placeholder=" "
                           />
                           <label
@@ -220,6 +229,7 @@ const Information = () => {
                             type="text"
                             id="postalCode"
                             name="postalCode"
+                            required
                             className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
                             placeholder=" "
                           />

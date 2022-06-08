@@ -2,6 +2,7 @@ import React from "react";
 import Path from "@/components/global/components/path";
 import OrderList from "@/components/checkout/orderList";
 import CheckoutFooter from "../checkoutFooter";
+import { useRouter } from "next/router";
 
 const path = {
     cart: false,
@@ -11,6 +12,10 @@ const path = {
 };
 
 const Shipping = () => {
+    const router = useRouter();
+    function handleClick () {
+        router.push('/payment')
+    }
     return (
         <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
             <div className="px-3.5 m-0 md:mx-20 lg:mx-20 xl:mx-20 lg:my-12">
@@ -54,7 +59,9 @@ const Shipping = () => {
 
                 <div className="mt-5 lg:flex">
                     <div>
-                        <button className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-lg">
+                        <button onClick={() => {
+                            handleClick();
+                        }} className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-lg">
                             Continue to payment
                         </button>
                     </div>
