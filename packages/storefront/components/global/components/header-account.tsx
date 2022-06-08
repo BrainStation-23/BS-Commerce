@@ -1,4 +1,5 @@
 import React from "react";
+import CartDropdown from "../../cart/cartDropdown/dropdownCart";
 
 interface Properties {}
 
@@ -20,7 +21,7 @@ const HeaderAccount: React.FC<Properties> = (props) => {
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>
-      <span className="bg-slate-300 rounded-full ml-2 px-1 text-sm">0</span>
+      <span className="z-50">{/* <CartDropdown /> */}</span>
     </div>
   );
 };
