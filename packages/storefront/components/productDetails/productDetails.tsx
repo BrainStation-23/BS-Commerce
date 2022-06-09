@@ -19,6 +19,7 @@ const ProductDetailsComponent: NextComponentType = () => {
 	const [amount, setAmount] = useState(1);
 	const [cart, setCart] = useState([{}]);
 	const [wishlist, setWishlist] = useState([]);
+	const [clicked, setClicked] = useState(false);
 
 	const toCart = () => {
 		setCart([...cart, { ...`${product.id}`, amount }]);
@@ -26,7 +27,10 @@ const ProductDetailsComponent: NextComponentType = () => {
 
 	const toWishlist = () => {
 		setWishlist([...wishlist, `${product.id}`]);
+		setClicked(!clicked);
 	};
+
+
 
 	if (product) {
 		return (
@@ -252,7 +256,10 @@ const ProductDetailsComponent: NextComponentType = () => {
 												onClick={toWishlist}
 												className="hover:text-green-600 mt-10"
 											>
-												+ Add to wishlist
+												{
+													clicked? "Added to wishlist" : "+ Add to wishlist"
+											 	}
+												
 											</button>
 										</div>
 										<div>
