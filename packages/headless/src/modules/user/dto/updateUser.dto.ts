@@ -71,7 +71,7 @@ export class UpdateUserErrorResponseDto implements UpdateUserErrorResponse {
     @ApiProperty({
         example: UpdateUserErrorMessages.CAN_NOT_UPDATE_USER
     })
-    error: UpdateUserErrorMessages.CAN_NOT_GET_USER | UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER;
+    error: UpdateUserErrorMessages;
 
     @ApiProperty()
     errors: string[];

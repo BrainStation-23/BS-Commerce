@@ -43,7 +43,7 @@ export class CreateUserErrorResponseDto implements CreateUserErrorResponse {
         example: SignUpErrorMessages.CAN_NOT_CREATE_USER,
         examples: [SignUpErrorMessages.USER_ALREADY_EXITS, SignUpErrorMessages.CAN_NOT_CREATE_USER]
     })
-    error: SignUpErrorMessages.USER_ALREADY_EXITS | SignUpErrorMessages.CAN_NOT_CREATE_USER;
+    error: SignUpErrorMessages;
 
     @ApiProperty()
     errors: string[];

@@ -31,7 +31,7 @@ export class ChangePasswordErrorResponseDto implements ChangePasswordErrorRespon
         example: ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD,
         examples: [ChangePasswordErrorMessages.CAN_NOT_GET_USER, ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD]
     })
-    error: ChangePasswordErrorMessages.CAN_NOT_GET_USER | ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT | ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD;
+    error: ChangePasswordErrorMessages;
 
     @ApiProperty()
     errors: string[];

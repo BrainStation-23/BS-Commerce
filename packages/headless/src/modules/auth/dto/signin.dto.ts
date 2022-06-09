@@ -1,7 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
-import { SignInErrorResponse, SignInRequest, SignInSuccessResponse, Token, SignInErrorMessages } from 'models';
+import { IsJWT, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+    SignInErrorResponse,
+    SignInRequest,
+    SignInSuccessResponse,
+    Token,
+    SignInErrorMessages
+} from 'models';
 
 export class SignInDataDto implements SignInRequest {
     @ApiProperty()
@@ -19,6 +25,7 @@ export class SignInDataDto implements SignInRequest {
 
 export class TokenDto implements Token {
     @ApiProperty()
+    @IsJWT()
     token: string;
 }
 
@@ -29,7 +36,7 @@ export class SignInErrorResponseDto implements SignInErrorResponse {
     @ApiProperty({
         example: SignInErrorMessages.INVALID_CREDENTIALS
     })
-    error: SignInErrorMessages.INVALID_CREDENTIALS;
+    error: SignInErrorMessages;
 
     @ApiProperty()
     errors: string[];

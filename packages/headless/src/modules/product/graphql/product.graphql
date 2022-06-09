@@ -1,0 +1,155 @@
+scalar DateTime
+
+type Info {
+  name: String!
+  shortDescription: String
+  fullDescription: String
+  sku: String!
+  price: Int!
+  oldPrice: Int!
+  cost: Int!
+  showOnHomePage: Boolean
+  includeInTopMenu: Boolean
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  isFeatured: Boolean
+  publishDate: DateTime
+}
+
+input InfoInput {
+  name: String!
+  shortDescription: String
+  fullDescription: String
+  sku: String!
+  price: Int!
+  oldPrice: Int!
+  cost: Int!
+  showOnHomePage: Boolean
+  includeInTopMenu: Boolean
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  isFeatured: Boolean
+  publishDate: DateTime
+}
+
+type Meta {
+  keywords: [String]
+  title: String
+  description: String
+  friendlyPageName: String!
+}
+
+input MetaInput {
+  keywords: [String]
+  title: String
+  description: String
+  friendlyPageName: String!
+}
+
+type Photo {
+  url: String
+  title: String
+  alt: String
+  displayOrder: Int
+}
+
+input PhotoInput {
+  url: String
+  title: String
+  alt: String
+  displayOrder: Int
+}
+
+type Categories {
+  id: String!
+  isFeatured: Boolean
+  displayOrder: Int
+}
+
+input CategoriesInput {
+  id: String!
+  isFeatured: Boolean
+  displayOrder: Int
+}
+
+type Product {
+  id: String!
+  info: Info!
+  meta: Meta!
+  tags: [String]
+  photos: [Photo]
+  brands: [String]
+  categories: [Categories!]!
+}
+
+input ProductInput {
+  info: InfoInput!
+  meta: MetaInput!
+  tags: [String]
+  photos: [PhotoInput]
+  brands: [String!]!
+  categories: [CategoriesInput!]!
+}
+
+input SearchCondition {
+  skip: Int
+  limit: Int
+  brandId: String
+  categoryId: String
+  productName: String
+  isFeatured: Boolean
+  slug: String
+  orderBy: String
+}
+
+type ProductArrayWithCount {
+  products: [Product!]!
+  count: Int!
+}
+
+input ConditionInput {
+  limit: Int
+  skip: Int
+}
+
+type ProductResponse {
+  error: String
+  code: Int!
+  data: Product
+}
+
+type ProductArrayResponse {
+  error: String
+  code: Int!
+  data: [Product]
+}
+
+type ProductArrayWithCountResponse {
+  error: String
+  code: Int!
+  data: ProductArrayWithCount
+}
+
+type Query {
+  getProduct(productId: String!): ProductResponse!
+  getAllProducts(condition: ConditionInput): ProductArrayResponse!
+  getProductCount: Int!
+  getProductBySKU(sku: String!): ProductResponse!
+  getProductsByCondition(
+    condition: SearchCondition
+  ): ProductArrayWithCountResponse!
+  getProductsList(condition: SearchCondition): ProductArrayResponse!
+  getProductsByBrand(brandId: String!): ProductArrayResponse!
+}
+
+type Mutation {
+  createProduct(product: ProductInput): ProductResponse!
+  deleteProduct(productId: String): ProductResponse!
+  updateProduct(product: ProductInput, productId: String!): ProductResponse!
+  updateProductsForBrand(
+    productIds: [String!]!
+    brandId: String!
+  ): ProductArrayResponse!
+}
