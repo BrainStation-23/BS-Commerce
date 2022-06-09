@@ -1,3 +1,4 @@
+import { GetAllBrandsDto } from './../../../modules/brands/dto/getAllBrandsDto';
 import { CreateBrandRequestDto } from './../../../modules/brands/dto/createBrandDto';
 import { Injectable } from '@nestjs/common';
 
@@ -8,7 +9,7 @@ import { BrandModel } from './brand.model';
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {
 
-    async getAllBrands(skip?: number, limit?: number): Promise<Brand[] | null> {
+    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsDto | null> {
         return await BrandModel.find({}).skip(skip).limit(limit).lean();
     }
 

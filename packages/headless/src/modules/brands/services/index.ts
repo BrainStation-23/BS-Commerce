@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as crypto from 'crypto';
+import { ErrorMessage } from "models";
 
 import { BrandCreateSchema } from './../validators/brand.create.validator';
 import { Helper } from 'src/helper/helper.interface';
@@ -8,7 +9,7 @@ import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/service
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
 import { CreateBrandRequestDto, CreateBrandResponseDto } from './../dto/createBrandDto';
-import { ErrorMessage } from "models";
+import { GetAllBrandsResponseDto } from "../dto/getAllBrandsDto";
 
 @Injectable()
 
@@ -34,11 +35,11 @@ export class BrandService{
         // }
     }
    
-    async getAllBrands(skip?: number, limit?: number): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsResponseDto>{
         const allBrands = await this.brandRepo.getAllBrands(skip, limit);
-        if(!allBrands) return this.helper.serviceResponse.errorResponse('Could not get brands', null, HttpStatus.INTERNAL_SERVER_ERROR);
+        if(!allBrands) return { error: 'Could not get brands due to server error', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
         
-        return this.helper.serviceResponse.successResponse(allBrands, HttpStatus.OK);
+        return { data: allBrands, code: HttpStatus.OK };
     } 
 
     async updateBrandById(brandId: string, brandFeatures: Brand): Promise<ServiceErrorResponse | ServiceSuccessResponse>{

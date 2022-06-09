@@ -15,11 +15,8 @@ import { ApiResponse } from '@nestjs/swagger';
 
 import { Brand } from '../../../entity/brand';
 import { BrandService } from '../services/index';
-import {
-  CreateBrandRequestDto,
-  CreateBrandSuccessResponseDto,
-  CreateBrandErrorResponseDto,
-} from '../dto/createBrandDto';
+import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto } from '../dto/createBrandDto';
+import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from '../dto/getAllBrandsDto';
 
 @Controller('brands')
 export class BrandController {
@@ -27,8 +24,16 @@ export class BrandController {
 
   @Get('/')
   @ApiResponse({
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
+    description: 'All the brands were fetched successfully',
+    type: GetAllBrandsSuccessResponseDto
   })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Brands could not be fetched ',
+    type: GetAllBrandsErrorResponseDto
+  })
+
   async getAllBrands(
     @Query('skip') skip: number,
     @Query('limit') limit: number,
@@ -53,13 +58,13 @@ export class BrandController {
   @Post('/create')
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'Brand was createdsuccessfully',
-    type: CreateBrandSuccessResponseDto,
+    description: 'Brand was created successfully',
+    type: CreateBrandSuccessResponseDto
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
     description: 'Error creating new brand',
-    type: CreateBrandErrorResponseDto,
+    type: CreateBrandErrorResponseDto
   })
   async createBrand(
     @Body() brand: CreateBrandRequestDto,
