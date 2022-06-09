@@ -27,7 +27,7 @@ const ProductDetailsComponent: NextComponentType = () => {
 
 	const toWishlist = () => {
 		setWishlist([...wishlist, `${product.id}`]);
-		setClicked(!clicked);
+		setClicked(true);
 	};
 
 
