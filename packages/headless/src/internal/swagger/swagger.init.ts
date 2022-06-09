@@ -16,7 +16,7 @@ export const SwaggerConfig = (app: INestApplication) => {
       scheme: swaggerConfig.auth.schema,
       name: swaggerConfig.auth.name,
       bearerFormat: swaggerConfig.auth.bearer_format,
-    }, 'BearerAuth')
+    })
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

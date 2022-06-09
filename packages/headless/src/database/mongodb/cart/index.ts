@@ -1,6 +1,6 @@
 import { CartModel } from './cart.model';
 import { Injectable } from '@nestjs/common';
-import { Cart, Item } from 'src/entity/cart';
+import { Cart, Item, UpdateItem } from 'src/entity/cart';
 import { ICartDatabase } from 'src/modules/cart/repositories/cart.database.interface';
 import { ProductModel } from '../product/product.model';
 import { Product } from 'src/entity/product';
@@ -71,7 +71,7 @@ export class CartDatabase implements ICartDatabase {
     return CartModel.findOneAndRemove({ id: cartId }).lean();
   }
 
-  async updateCartItem(userId: string, item: Item): Promise<Cart | null> {
+  async updateCartItem(userId: string, item: UpdateItem): Promise<Cart | null> {
     return await CartModel.findOneAndUpdate(
       {
         userId,

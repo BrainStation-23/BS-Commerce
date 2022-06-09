@@ -1,7 +1,20 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, ResponseItem, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage, addToCartSuccessResponse } from 'models';
+import { Cart, CartProduct, updateCartItemErrorMessage, updateCartItemErrorResponse, ResponseItem, updateCartItemRequest, updateCartItemSuccessResponse } from "models";
+
+export class updateCartItemRequestDto implements updateCartItemRequest {
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    productId?: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsNumber()
+    quantity?: number;
+}
+
 class ResponseItemDto implements ResponseItem{
     @ApiProperty()
     @IsOptional()
@@ -16,6 +29,7 @@ class ResponseItemDto implements ResponseItem{
     @IsNumber()
     quantity: number;
 }
+
 class CartDto implements Cart {
     @ApiProperty()
     @IsString()
@@ -30,7 +44,8 @@ class CartDto implements Cart {
     @IsArray()
     items?:ResponseItemDto[];
 }
-export class AddToCartSuccessResponseDto implements addToCartSuccessResponse {
+
+export class updateCartItemSuccessResponseDto implements updateCartItemSuccessResponse {
     @ApiProperty()
     @IsNumber()
     code: number;
@@ -39,26 +54,18 @@ export class AddToCartSuccessResponseDto implements addToCartSuccessResponse {
     @IsObject()
     data: CartDto;
 }
-export class AddToCartRequestDto implements addToCartRequest {
-    @ApiProperty()
-    @IsString()
-    productId: string;
 
-    @ApiProperty()
-    @IsNumber()
-    quantity: number;
-}
-export class AddToCartErrorResponseDto implements addToCartErrorResponse {
+export class updateCartItemErrorResponseDto implements updateCartItemErrorResponse {
     @ApiProperty({
-        default: HttpStatus.INTERNAL_SERVER_ERROR,
+        default: HttpStatus.BAD_REQUEST,
     })
     code: number;
 
     @ApiProperty({
-        example: ErrorMessage.CANNOT_CREATE_CART,
-        examples: [ErrorMessage.CANNOT_CREATE_CART, ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, ErrorMessage.CANNOT_INCREMENT_CART_ITEM],
+        example: updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
+        examples: [updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM, updateCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM],
     })
-    error: ErrorMessage;
+    error: updateCartItemErrorMessage;
 
     @ApiProperty()
     errors: string[];

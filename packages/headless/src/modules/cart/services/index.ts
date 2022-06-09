@@ -1,20 +1,15 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import {
-  ServiceErrorResponse,
-  ServiceSuccessResponse,
-} from 'src/helper/serviceResponse/service.response.interface';
 import { CartRepository } from '../repositories';
-import { AddToCartResponse, ErrorMessage } from 'models';
-import { AddToCartRequestDto } from '../dto/addToCart.dto';
-import { Item } from 'src/entity/cart';
+import { AddToCartResponse, getCartResponse, ErrorMessage, getCartErrorMessage, deleteCartErrorMessage, updateCartItemErrorMessage, deleteCartItemErrorMessage, deleteAllCartItemsErrorMessage, deleteCartResponse, updateCartItemResponse, deleteCartItemResponse, deleteAllCartItemsResponse } from 'models';
+import { Item, UpdateItem } from 'src/entity/cart';
 
 @Injectable()
 export class CartService {
   constructor(private cartRepo: CartRepository, private helper: Helper) { }
 
   async addToCart(
-    item: AddToCartRequestDto,
+    item: Item,
     userId: string,
   ): Promise<AddToCartResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
@@ -69,11 +64,11 @@ export class CartService {
 
   async getCart(
     userId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  ): Promise<getCartResponse> {
     const cart = await this.cartRepo.getCart(userId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'No cart found with this id',
+        getCartErrorMessage.NO_CART_FOUND,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -86,11 +81,11 @@ export class CartService {
 
   async deleteCart(
     cartId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  ): Promise<deleteCartResponse> {
     const cart = await this.cartRepo.deleteCart(cartId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can\'t delete cart',
+        deleteCartErrorMessage.CAN_NOT_DELETE_CART,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -103,13 +98,13 @@ export class CartService {
 
   async updateCartItem(
     userId: string,
-    item: Item,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    item: UpdateItem,
+  ): Promise<updateCartItemResponse> {
     if (item.quantity && item.quantity > 0) {
       const cart = await this.cartRepo.updateCartItem(userId, item);
       if (!cart) {
         return this.helper.serviceResponse.errorResponse(
-          'Can\'t update cart item',
+          updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
           null,
           HttpStatus.BAD_REQUEST,
         );
@@ -125,7 +120,7 @@ export class CartService {
     );
     if (!deletedCart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can\'t delete cart item',
+        updateCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -139,11 +134,11 @@ export class CartService {
   async deleteCartItem(
     userId: string,
     productId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  ): Promise<deleteCartItemResponse> {
     const cart = await this.cartRepo.deleteCartItem(userId, productId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can\'t delete cart item',
+        deleteCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -156,11 +151,11 @@ export class CartService {
 
   async deleteAllCartItems(
     userId: string,
-  ): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  ): Promise<deleteAllCartItemsResponse> {
     const cart = await this.cartRepo.deleteAllCartItems(userId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        'Can\'t delete all cart item',
+        deleteAllCartItemsErrorMessage.CAN_NOT_DELETE_ALL_CART_ITEMS,
         null,
         HttpStatus.BAD_REQUEST,
       );

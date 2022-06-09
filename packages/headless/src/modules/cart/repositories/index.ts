@@ -1,6 +1,6 @@
 import { ICartDatabase } from './cart.database.interface';
 import { Injectable } from '@nestjs/common';
-import { Cart, Item } from 'src/entity/cart';
+import { Cart, Item, UpdateItem } from 'src/entity/cart';
 import { randomUUID } from 'crypto';
 
 @Injectable()
@@ -43,7 +43,7 @@ export class CartRepository {
     return await this.db.deleteCart(cartId);
   }
 
-  async updateCartItem(userId: string, item: Item): Promise<Cart | null> {
+  async updateCartItem(userId: string, item: UpdateItem): Promise<Cart | null> {
     return await this.db.updateCartItem(userId, item);
   }
 

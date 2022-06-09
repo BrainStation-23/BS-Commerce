@@ -1,7 +1,14 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, ResponseItem, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage, addToCartSuccessResponse } from 'models';
+import { Cart, CartProduct, deleteCartItemErrorMessage, deleteCartItemErrorResponse, deleteCartItemRequest, deleteCartItemSuccessResponse, ResponseItem } from "models";
+
+
+export class deleteCartItemRequestDto implements deleteCartItemRequest{
+    @ApiProperty()
+    @IsString()
+    productId: string;
+}
 class ResponseItemDto implements ResponseItem{
     @ApiProperty()
     @IsOptional()
@@ -16,6 +23,7 @@ class ResponseItemDto implements ResponseItem{
     @IsNumber()
     quantity: number;
 }
+
 class CartDto implements Cart {
     @ApiProperty()
     @IsString()
@@ -30,7 +38,8 @@ class CartDto implements Cart {
     @IsArray()
     items?:ResponseItemDto[];
 }
-export class AddToCartSuccessResponseDto implements addToCartSuccessResponse {
+
+export class deleteCartItemSuccessResponseDto implements deleteCartItemSuccessResponse {
     @ApiProperty()
     @IsNumber()
     code: number;
@@ -39,26 +48,17 @@ export class AddToCartSuccessResponseDto implements addToCartSuccessResponse {
     @IsObject()
     data: CartDto;
 }
-export class AddToCartRequestDto implements addToCartRequest {
-    @ApiProperty()
-    @IsString()
-    productId: string;
 
-    @ApiProperty()
-    @IsNumber()
-    quantity: number;
-}
-export class AddToCartErrorResponseDto implements addToCartErrorResponse {
+export class deleteCartItemErrorResponseDto implements deleteCartItemErrorResponse {
     @ApiProperty({
-        default: HttpStatus.INTERNAL_SERVER_ERROR,
+        default: HttpStatus.BAD_REQUEST,
     })
     code: number;
 
     @ApiProperty({
-        example: ErrorMessage.CANNOT_CREATE_CART,
-        examples: [ErrorMessage.CANNOT_CREATE_CART, ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, ErrorMessage.CANNOT_INCREMENT_CART_ITEM],
+        example: deleteCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM,
     })
-    error: ErrorMessage;
+    error: deleteCartItemErrorMessage;
 
     @ApiProperty()
     errors: string[];

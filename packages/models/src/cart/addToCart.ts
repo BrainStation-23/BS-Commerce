@@ -1,6 +1,6 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Cart } from "./cart";
+import { Cart } from "./cartCommon/cart";
 
 export interface addToCartRequest {
     productId: string;

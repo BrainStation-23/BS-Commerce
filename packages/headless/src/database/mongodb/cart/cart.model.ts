@@ -13,7 +13,6 @@ const CartSchema = new Schema<Cart>(
         productId: String,
         quantity: {
           type: Number,
-          default: 1,
         },
         _id: false,
       },

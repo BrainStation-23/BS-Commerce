@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Cart, Item } from 'src/entity/cart';
+import { Cart, Item, UpdateItem } from 'src/entity/cart';
 
 @Injectable()
 export abstract class ICartDatabase {
@@ -18,7 +18,7 @@ export abstract class ICartDatabase {
   abstract createCart: (cart:Cart) => Promise<Cart | null>;
   abstract getCart: (userId: string) => Promise<Cart | null>;
   abstract deleteCart: (cartId: string) => Promise<Cart | null>;
-  abstract updateCartItem: (userId: string, item: Item) => Promise<Cart | null>;
+  abstract updateCartItem: (userId: string, item: UpdateItem) => Promise<Cart | null>;
   abstract deleteCartItem: (
     userId: string,
     productId: string,

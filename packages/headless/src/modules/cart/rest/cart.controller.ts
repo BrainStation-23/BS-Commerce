@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   HttpStatus,
+  Patch,
   Post,
-  Put,
   Query,
   Res,
   UseGuards,
@@ -15,9 +15,13 @@ import { Response } from 'express';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { AddToCartResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
-import { Item } from 'src/entity/cart';
+import { AddToCartSuccessResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
+import { getCartErrorResponseDto, getCartSuccessResponseDto } from '../dto/getCart.dto';
+import { deleteCartErrorResponseDto, deleteCartRequestDto, deleteCartSuccessResponseDto } from '../dto/deleteCart.dto';
+import { updateCartItemErrorResponseDto, updateCartItemRequestDto, updateCartItemSuccessResponseDto } from '../dto/updateCartItem.dto';
+import { deleteCartItemErrorResponseDto, deleteCartItemRequestDto, deleteCartItemSuccessResponseDto } from '../dto/deleteCartItem.dto';
+import { deleteAllCartItemsErrorResponseDto, deleteAllCartItemsSuccessResponseDto } from '../dto/deleteAllCartItems.dto';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -27,8 +31,8 @@ export class CartController {
 
   @Post()
   @ApiResponse({
-    description: 'Add to cart API',
-    type: AddToCartResponseDto,
+    description: 'Add to Cart API',
+    type: AddToCartSuccessResponseDto,
     status: HttpStatus.CREATED
   })
   @ApiResponse({
@@ -50,26 +54,56 @@ export class CartController {
   }
 
   @Get()
+  @ApiResponse({
+    description: 'Get cart API',
+    type: getCartSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: getCartErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   async getCart(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.cartService.getCart(user.id);
     res.status(code);
     return response;
   }
 
+  @ApiResponse({
+    description: 'Delete cart API',
+    type: deleteCartSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: deleteCartErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   @Delete()
-  async deleteCartById(
-    @Query('cartId') cartId: string,
+  async deleteCart(
+    @Query() data: deleteCartRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.cartService.deleteCart(cartId);
+    const { code, ...response } = await this.cartService.deleteCart(data.cartId);
     res.status(code);
     return response;
   }
 
-  @Put('item')
+  @ApiResponse({
+    description: 'Update Cart Item Api',
+    type: updateCartItemSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: updateCartItemErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  @Patch('item')
   async updateCartItem(
     @UserInfo() user: User,
-    @Body() item: Item,
+    @Body() item: updateCartItemRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.updateCartItem(
@@ -80,20 +114,40 @@ export class CartController {
     return response;
   }
 
+  @ApiResponse({
+    description: 'Delete Cart Item Api',
+    type: deleteCartItemSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: deleteCartItemErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   @Delete('item')
   async deleteCartItem(
     @UserInfo() user: User,
-    @Query('productId') productId: string,
+    @Query() data: deleteCartItemRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.deleteCartItem(
       user.id,
-      productId,
+      data.productId,
     );
     res.status(code);
     return response;
   }
 
+  @ApiResponse({
+    description: 'Delete All Cart Items Api',
+    type: deleteAllCartItemsSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: deleteAllCartItemsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   @Delete('allitems')
   async deleteAllCartItems(
     @UserInfo() user: User,
