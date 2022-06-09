@@ -1,5 +1,12 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, User } from "src/index";
-import { Address } from "./address";
+import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
+import { Address } from './address';
+
+/**
+ * API Path: /user
+ * method: PATCH
+ * body: UpdatedUserRequest
+ * response: UpdateUserResponse
+ */
 
 export interface UpdatedUserRequest {
     firstName?: string;
@@ -19,9 +26,16 @@ export interface UpdateUserSuccessResponse extends SuccessResponse {
     data: User;
 }
 
+export const enum UpdateUserErrorMessages {
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+    CAN_NOT_UPDATE_USER_ADDRESS = 'CAN_NOT_UPDATE_USER_ADDRESS',
+    CAN_NOT_ADD_USER_NEW_ADDRESS = 'CAN_NOT_ADD_USER_NEW_ADDRESS',
+    CAN_NOT_UPDATE_USER = 'CAN_NOT_UPDATE_USER'
+}
+
 export interface UpdateUserErrorResponse extends ErrorResponse {
-    code: number;
-    error: string;
+    code?: number;
+    error: UpdateUserErrorMessages;
     errors: DescriptiveError;
 }
 

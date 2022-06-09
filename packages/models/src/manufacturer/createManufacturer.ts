@@ -3,12 +3,12 @@ import { Manufacturer } from './manufacturer';
 import { ManufacturerSeo } from './manufacturerSeo';
 
 export const enum CreateManufacturerErrorMessages {
-    MANUFACTURER_ALREADY_EXISTS = 'Manufacturer already exists.',
-    MANUFACTURER_NOT_CREATED_SUCCESSFULLY = 'Manufacturer not created successfully'
+    MANUFACTURER_ALREADY_EXISTS = 'MANUFACTURER_ALREADY_EXISTS',
+    MANUFACTURER_NOT_CREATED_SUCCESSFULLY = 'MANUFACTURER_NOT_CREATED_SUCCESSFULLY'
 }
 
 export const enum CreateManufacturerSuccessMessages {
-    MANUFACTURER_CREATED_SUCCESSFULLY = 'Manufacturer created successfully.'
+    MANUFACTURER_CREATED_SUCCESSFULLY = 'MANUFACTURER_CREATED_SUCCESSFULLY'
 }
 
 /**
@@ -29,7 +29,10 @@ export interface CreateManufacturerRequest {
 
 export interface CreateManufacturerSuccessResponse extends SuccessResponse {
     code: number;
-    data: Manufacturer;
+    data: {
+        manufacturer: Manufacturer,
+        message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY
+    };
 }
 
 export interface CreateManufacturerErrorResponse extends ErrorResponse {

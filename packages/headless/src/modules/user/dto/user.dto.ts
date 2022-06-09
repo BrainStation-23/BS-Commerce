@@ -1,8 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsNotEmpty, IsObject, IsOptional, IsPhoneNumber, IsString, MinLength, ValidateNested } from "class-validator";
-import { regexConfig } from "config/regex";
-import type { Address, ChangePasswordRequest, UpdatedUserRequest } from "models"
-
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
+import type { Address, User } from 'models'
 
 export class AddressDto implements Address {
     @ApiProperty()
@@ -31,72 +29,51 @@ export class AddressDto implements Address {
     postCode: string;
 }
 
-
-
-export class UpdatedUserDto implements UpdatedUserRequest {
+export class UserDto implements User {
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    firstName?: string;
+    id: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    lastName?: string;
+    firstName: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    provider?: string;
+    lastName: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsObject()
-    providerData?: object;
+    displayName: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsObject()
-    additionalProviderData?: object;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    @IsPhoneNumber(regexConfig.phone as any, { message: 'Please Enter the Valid Phone Number!' })
     phone?: string;
 
     @ApiProperty()
-    @IsOptional()
-    @ValidateNested({ each: true })
-    @IsObject()
-    address?: AddressDto;
+    username: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsBoolean()
-    active?: boolean;
+    email: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsString()
+    provider?: string;
+
+    @ApiProperty()
+    providerData?: object;
+
+    @ApiProperty()
+    additionalProviderData?: object;
+
+    @ApiProperty()
+    resetPasswordToken?: string;
+
+    @ApiProperty()
+    resetPasswordExpires?: number;
+
+    @ApiProperty()
     gender?: string;
 
+    @ApiProperty({
+        type: [AddressDto]
+    })
+    addresses?: AddressDto[];
+
     @ApiProperty()
-    @IsOptional()
-    @IsString()
     status?: string;
-}
-
-export class ChangePasswordDto implements ChangePasswordRequest {
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    @MinLength(6)
-    currentPassword: string;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    @MinLength(6)
-    newPassword: string;
 }

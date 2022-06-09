@@ -1,4 +1,4 @@
-import type { CreateManufacturerResponse, CreateManufacturerSuccessResponse } from 'models';
+import { CreateManufacturerResponse, CreateManufacturerSuccessMessages, CreateManufacturerSuccessResponse } from 'models';
 import {CreateManufacturerErrorMessages} from 'models'
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
@@ -35,7 +35,7 @@ export class ManufacturerService {
             return this.helper.serviceResponse.errorResponse(CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY, null, HttpStatus.BAD_REQUEST);
         }
 
-        return this.helper.serviceResponse.successResponse(newManufacturer, HttpStatus.OK) as CreateManufacturerSuccessResponse;
+        return this.helper.serviceResponse.successResponse({newManufacturer, message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY}, HttpStatus.OK) as CreateManufacturerSuccessResponse;
     }
 
     /**

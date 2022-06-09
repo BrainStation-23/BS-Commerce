@@ -1,11 +1,7 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
-
-export enum ErrorMessages {
-    USER_ALREADY_EXITS = 'USER_ALREADY_EXITS'
-}
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 
 /**
- * API Path: /auth/sign-up
+ * API Path: /auth/signup
  * method: POST
  * body: CreateUserRequest
  * response: CreateUserResponse
@@ -18,14 +14,25 @@ export interface CreateUserRequest {
     password: string;
 }
 
+export const enum SignUpSuccessMessages {
+    USER_CREATED_SUCCESSFUL = 'USER_CREATED_SUCCESSFUL',
+}
+
 export interface CreateUserSuccessResponse extends SuccessResponse {
     code: number;
-    data: User;
+    data: {
+        message?: SignUpSuccessMessages
+    };
+}
+
+export const enum SignUpErrorMessages {
+    USER_ALREADY_EXITS = 'USER_ALREADY_EXITS',
+    CAN_NOT_CREATE_USER = 'CAN_NOT_CREATE_USER'
 }
 
 export interface CreateUserErrorResponse extends ErrorResponse {
     code?: number;
-    error: ErrorMessages.USER_ALREADY_EXITS;
+    error: SignUpErrorMessages;
     errors: DescriptiveError;
 }
 
