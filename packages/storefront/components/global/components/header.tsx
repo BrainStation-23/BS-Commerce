@@ -1,16 +1,31 @@
-import type { NextComponentType } from "next";
 import { useState, useEffect } from "react";
+import type { NextComponentType } from "next";
+import Link from "next/link";
+
 import Currency from "./currency";
 import HeaderAccount from "./header-account";
 import Language from "./languages";
 import Search from "./search";
 
+interface menuLink {
+  name: string;
+  link: string;
+  hasSubmenu: boolean;
+  submenu?: subLink[];
+}
+
+interface subLink {
+  name: string;
+  link: string;
+}
+
 const Header: NextComponentType = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const [stickyClass, setStickyClass] = useState("relative");
+  const customerNumber = "+880 1674314359";
 
-  const allCategories = [
+  const allCategories: menuLink[] = [
     { name: "vegetable", link: "/", hasSubmenu: true },
     { name: "fruits", link: "/", hasSubmenu: true },
     { name: "salads", link: "/", hasSubmenu: true },
@@ -22,15 +37,15 @@ const Header: NextComponentType = () => {
     { name: "bread", link: "/", hasSubmenu: false },
   ];
 
-  const menus = [
+  const menus: menuLink[] = [
     {
       name: "home",
       link: "/",
       hasSubmenu: true,
       submenu: [
-        { name: "Home - 1" },
-        { name: "Home - 2" },
-        { name: "Home - 3" },
+        { name: "Home - 1", link: "/" },
+        { name: "Home - 2", link: "/" },
+        { name: "Home - 3", link: "/" },
       ],
     },
     {
@@ -98,7 +113,7 @@ const Header: NextComponentType = () => {
           <div className="space-x-2">
             <Language />
             <span>|</span>
-            <Currency left={0} />
+            <Currency />
           </div>
           <div className="space-x-3"></div>
         </div>
@@ -106,7 +121,11 @@ const Header: NextComponentType = () => {
       {/* Middle portion */}
       <div className="flex justify-center py-4 mb-2 lg:pt-8 lg:pb-6">
         <div className="flex justify-between items-center container px-4">
-          <span className="text-3xl font-bold">BS Commerce</span>
+          <span className="text-3xl font-bold">
+            <Link href="/">
+              <a>BS Commerce</a>
+            </Link>
+          </span>
           <span className="hidden lg:inline-block w-2/5 lg:w-[479px]">
             <Search placeholder="Search our store" />
           </span>
@@ -223,7 +242,6 @@ const Header: NextComponentType = () => {
                   d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              {/* <Currency left={-67} /> */}
               <div className="lg:hidden w-full">
                 <Search placeholder="Search our store" />
               </div>
@@ -275,7 +293,7 @@ const Header: NextComponentType = () => {
 
                     {menu.hasSubmenu && (
                       <div
-                        className={`hidden lg:inline-block overflow-hidden absolute opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in bg-white shadow-lg px-6 py-6`}
+                        className={`hidden overflow-hidden absolute group-hover:inline-block transition-all duration-300 ease-in bg-white shadow-lg px-6 py-6`}
                       >
                         <ul className="">
                           {menu.submenu?.map((menu) => (
@@ -310,7 +328,7 @@ const Header: NextComponentType = () => {
                 />
               </svg>
               <div className="flex flex-col">
-                <span>+880 1674314359</span>
+                <span>{customerNumber}</span>
                 <span className="flex flex-row items-center gap-x-1">
                   Customer Support
                 </span>
