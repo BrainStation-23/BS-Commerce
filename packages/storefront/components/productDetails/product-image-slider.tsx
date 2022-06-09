@@ -74,8 +74,5 @@ const ProductImagesSlider = () => {
 	);
 };
 
-ProductImagesSlider.propTypes = {
-	images: PropTypes.array.isRequired,
-};
 
 export default ProductImagesSlider;
