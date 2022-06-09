@@ -12,7 +12,7 @@ import {
     UpdateUserErrorMessages,
     ChangePasswordErrorMessages,
     ChangePasswordSuccessMessage
-} from 'models'
+} from 'models';
 
 @Injectable()
 export class UserService {

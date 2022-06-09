@@ -24,6 +24,7 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMysql;
+            
           default:
             break;
         }

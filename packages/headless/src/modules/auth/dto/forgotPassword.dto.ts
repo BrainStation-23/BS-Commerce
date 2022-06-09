@@ -7,7 +7,7 @@ import {
   ForgotPasswordSuccessResponse,
   ForgotMessageResponse,
   ForgotPasswordErrorMessages,
-} from 'models'
+} from 'models';
 
 export class ForgotPasswordDto implements ForgotPasswordRequest {
   @ApiProperty()
