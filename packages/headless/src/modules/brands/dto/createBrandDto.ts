@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
+import { Type } from 'class-transformer';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray } from 'class-validator';
-
+import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested } from 'class-validator';
 import { CreateBrandRequest, Info, Meta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
 
 export class InfoDto implements Info{
@@ -9,6 +9,7 @@ export class InfoDto implements Info{
     @IsNotEmpty()
     name: string;
 
+    
     @ApiProperty()
     @IsOptional()
     description?: string;
@@ -52,12 +53,9 @@ export class MetaDto implements Meta{
 
 export class CreateBrandRequestDto implements CreateBrandRequest{
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    id: string;
-
-    @ApiProperty()
     @IsNotEmpty()
+    // @Type(() => InfoDto)
+    // @ValidateNested()
     @IsObject()
     info: InfoDto;
 
@@ -65,6 +63,7 @@ export class CreateBrandRequestDto implements CreateBrandRequest{
     @IsOptional()
     @IsObject()
     meta: MetaDto;
+
 }
 
 export class CreateBrandSuccessResponseDto implements CreateBrandSuccessResponse {

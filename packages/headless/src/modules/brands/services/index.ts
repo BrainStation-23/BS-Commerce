@@ -9,7 +9,6 @@ import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
 import { CreateBrandRequestDto, CreateBrandResponseDto } from './../dto/createBrandDto';
 import { ErrorMessage } from "models";
-// import { validateParams } from 'src/decorators/service.validator';
 
 @Injectable()
 

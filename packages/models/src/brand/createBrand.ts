@@ -2,7 +2,7 @@ import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 
 export interface CreateBrandRequest{
-    id?: string,
+    // id?: string,
     info: Info,
     meta: Meta
 }
