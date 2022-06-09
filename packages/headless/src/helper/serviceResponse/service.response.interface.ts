@@ -20,7 +20,7 @@ export interface ServiceErrorResponse {
     /** Descriptive error from a service layer */
     errors: DescriptiveError;
     /**Single string as summary of descriptive errors */
-    error: string;
+    error: string | any;
     /** Http code, but has no relation or dependency with http requests.
      * The code here is used as a standard for communicating with the
      * outer layer of service.
