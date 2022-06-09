@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsJWT, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsArray, IsJWT, IsNotEmpty, IsNumber, IsObject, IsString, MinLength } from 'class-validator';
 import {
     SignInErrorResponse,
     SignInRequest,
@@ -31,21 +31,26 @@ export class TokenDto implements Token {
 
 export class SignInErrorResponseDto implements SignInErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+    @IsNumber()
     code: number;
 
     @ApiProperty({
         example: SignInErrorMessages.INVALID_CREDENTIALS
     })
+    @IsString()
     error: SignInErrorMessages;
 
     @ApiProperty()
+    @IsArray()
     errors: string[];
 }
 
 export class SignInSuccessResponseDto implements SignInSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
+    @IsNumber()
     code: number;
 
     @ApiProperty()
+    @IsObject()
     data: TokenDto;
 }

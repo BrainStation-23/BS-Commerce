@@ -33,6 +33,8 @@ export class DeleteProductErrorResponseDto implements DeleteProductErrorResponse
 }
 
 class Message {
+    @ApiProperty({ example: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL })
+    @IsString()
     message: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL
 }
 

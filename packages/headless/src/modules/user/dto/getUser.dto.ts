@@ -21,7 +21,6 @@ export class GetUserErrorResponseDto implements GetUserErrorResponse {
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

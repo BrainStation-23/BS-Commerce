@@ -22,19 +22,19 @@ export class CreateProductDto implements CreateProductRequest {
     @IsObject()
     meta: ProductMetaDto;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
     tags?: [string];
 
-    @ApiProperty({ type: ProductPhotoDto })
+    @ApiProperty({ type: ProductPhotoDto, required: false })
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => ProductPhotoDto)
     photos?: ProductPhotoDto[];
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
     brands?: [string];

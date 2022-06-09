@@ -23,7 +23,6 @@ export class ProductService {
   constructor(private productRepo: ProductRepository, private helper: Helper) { }
 
   async createProduct(product: CreateProductDto): Promise<CreateProductResponse> {
-
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
@@ -67,7 +66,6 @@ export class ProductService {
   }
 
   async updateProduct(product: Product, productId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse('Product sku Match. Please choose a different sku.', null, HttpStatus.BAD_REQUEST);
 

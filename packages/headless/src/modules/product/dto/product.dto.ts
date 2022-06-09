@@ -10,139 +10,139 @@ import {
 } from 'models';
 
 export class ProductInfoDto implements ProductInfo {
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsString()
     @IsNotEmpty()
     name: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     shortDescription?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     fullDescription?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsString()
     sku: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsNumber()
     price: number;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsNumber()
     oldPrice: number;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsNumber()
     cost: number;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     showOnHomePage?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     includeInTopMenu?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     allowToSelectPageSize?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     published?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsNumber()
     displayOrder?: number;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     isFeatured?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsDate()
     publishDate?: Date;
 }
 
 export class ProductMetaDto implements ProductMeta {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
     @IsString()
     keywords?: string[];
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     title?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     description?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsString()
     friendlyPageName: string;
 }
 
 export class ProductPhotoDto implements ProductPhoto {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     url?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     id?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     title?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     alt?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     displayOrder?: number;
 }
 
 export class ProductCategoryDto implements ProductCategory {
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsString()
     id: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     isFeatured?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsNumber()
     displayOrder?: number

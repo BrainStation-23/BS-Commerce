@@ -3,28 +3,28 @@ import { IsOptional, IsString } from 'class-validator';
 import type { Address, User } from 'models'
 
 export class AddressDto implements Address {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     id?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsString()
     addressLine1: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsString()
     addressLine2?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsString()
     city: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsString()
     country: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: true })
     @IsString()
     postCode: string;
 }
