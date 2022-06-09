@@ -64,7 +64,7 @@ export class CartDatabase implements ICartDatabase {
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    return await CartModel.findOne({ userId: userId }).lean();
+    return await CartModel.findOne({userId }).lean();
   }
 
   async deleteCart(cartId: string): Promise<Cart | null> {
@@ -89,8 +89,8 @@ export class CartDatabase implements ICartDatabase {
     productId: string,
   ): Promise<Cart | null> {
     return await CartModel.findOneAndUpdate(
-      { userId: userId, 'items.productId': productId },
-      { $pull: { items: { productId: productId } } },
+      { userId, 'items.productId': productId },
+      { $pull: { items: { productId } } },
       { new: true },
     )
       .lean()
