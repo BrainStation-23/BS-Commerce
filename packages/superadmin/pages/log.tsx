@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-
 import LogPage from "../components/log";
+
 
 const Log: NextPage = () => {
   return (
