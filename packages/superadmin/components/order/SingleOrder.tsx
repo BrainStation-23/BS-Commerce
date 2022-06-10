@@ -4,7 +4,7 @@ const SingleOrder = ({ order }: any) => {
     return (
         <>
             <tr style={{ fontSize: "20px", paddingTop: "20px" }}>
-                <td style={{ textAlign: "center" }}>
+                <td style={{ textAlign: "center", border: "1px solid #dddddd"}}>
                     <input
                         type="checkbox"
                         id="vehicle1"
@@ -12,33 +12,33 @@ const SingleOrder = ({ order }: any) => {
                         value="Bike"
                     />
                 </td>
-                <td>{order.id}</td>
+                <td style={{border: "1px solid #dddddd"}}>{order.id}</td>
                 {order.order_status === "Complete" ? (
-                    <td>
-                        <button type="button" className="btn btn-success">
+                    <td style={{border: "1px solid #dddddd"}}>
+                        <button type="button" className="btn btn-success" style={{margin: "15px"}}>
                             {order.order_status}
                         </button>
                     </td>
                 ) : order.order_status === "Processing" ? (
-                    <td>
-                        <button type="button" className="btn btn-primary">
+                    <td style={{border: "1px solid #dddddd"}}>
+                        <button type="button" className="btn btn-primary" style={{margin: "15px"}}>
                             {order.order_status}
                         </button>
                     </td>
                 ) : (
-                    <td>
-                        <button type="button" className="btn btn-warning">
+                    <td style={{border: "1px solid #dddddd"}}>
+                        <button type="button" className="btn btn-warning" style={{margin: "15px"}}>
                             {order.order_status}
                         </button>
                     </td>
                 )}
-                <td>{order.payment_status}</td>
-                <td>{order.shipping_status}</td>
+                <td style={{border: "1px solid #dddddd"}}>{order.payment_status}</td>
+                <td style={{border: "1px solid #dddddd"}}>{order.shipping_status}</td>
                 <td style={{ color: "#3c8dbc" }}>{order.customer}</td>
-                <td>{order.store}</td>
-                <td>{order.created}</td>
-                <td>{order.order_total}</td>
-                <td>
+                <td style={{border: "1px solid #dddddd"}}>{order.store}</td>
+                <td style={{border: "1px solid #dddddd"}}>{order.created}</td>
+                <td style={{border: "1px solid #dddddd"}}>{order.order_total}</td>
+                <td style={{border: "1px solid #dddddd"}}>
                     <button type="button" className="btn btn-light btn-lg">
                         <i className="bi bi-eye"> {order.view}</i>
                     </button>

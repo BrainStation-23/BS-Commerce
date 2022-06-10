@@ -34,15 +34,16 @@ const Orders = () => {
                         <div className="btn-group me-2">
                             <button
                                 type="button"
-                                className="btn btn-sm btn-outline-secondary"
+                                className="btn btn-success btn-lg"
+                                style={{marginRight: '10px'}}
                             >
-                                Export
+                                <i className="bi bi-download">{" "}</i>Export
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-sm btn-outline-secondary"
+                                className="btn btn-info btn-lg"
                             >
-                                Print PDF invoices
+                                <i className="bi bi-file-earmark-pdf">{" "}</i>Print PDF invoices
                             </button>
                         </div>
                     </div>
@@ -111,7 +112,7 @@ const Orders = () => {
                                 }}
                                 className="btn btn-primary"
                             >
-                                Enter
+                                <i className="bi bi-search"></i>{" "}Search
                             </button>
                         </div>
                     </form>
@@ -125,7 +126,7 @@ const Orders = () => {
                         margin: "10px",
                     }}
                 >
-                    <thead style={{ backgroundColor: "LightGray" }}>
+                    <thead style={{ backgroundColor: "#dddddd"}}>
                         <tr style={{ fontSize: "20px" }}>
                             <th style={{textAlign: "center"}}>
                                 <input
@@ -180,7 +181,7 @@ const Orders = () => {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td style={{textAlign: 'left'}}>
+                        <td style={{textAlign: 'left', border: "1px solid #dddddd"}}>
                             <h5>
                                 <b>Summary</b>
                             </h5>
@@ -253,7 +254,7 @@ const Orders = () => {
                         </button>
                         <span style={{ margin: "10px" }}>items</span>
                     </span>
-                    {((activePage-1)*pageCount)+1}-{((activePage-1)*pageCount)+5} of {pageCount} items
+                    {((activePage-1)*pageCount)+1}-{((activePage-1)*pageCount)+pageCount} of {pageCount} items
                     <button
                         style={{
                             height: "100%",
