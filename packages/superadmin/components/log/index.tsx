@@ -1,7 +1,6 @@
 import LogHeading from "./heading-card";
 import LogSearch from "./log-search";
 import LogIndex from "./logTable";
-import LogTable from "./logTable/log-table";
 
 const LogPage = () => {
   return (

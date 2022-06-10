@@ -1,0 +1,58 @@
+{
+    "scheduledTask": [
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": true,
+            "stopOnError": false,
+            "startDate": "6/10/2022 6:47:40 AM",
+            "endDate": "6/10/2022 6:47:41 AM",
+            "successDate": "6/10/2022 6:47:41 AM"
+        },
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "6/10/2022 6:47:40 AM",
+            "endDate": "6/10/2022 6:47:41 AM",
+            "successDate": "6/10/2022 6:47:41 AM"
+        },
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "6/10/2022 6:47:40 AM",
+            "endDate": "6/10/2022 6:47:41 AM",
+            "successDate": "6/10/2022 6:47:41 AM"
+        },
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "6/10/2022 6:47:40 AM",
+            "endDate": "6/10/2022 6:47:41 AM",
+            "successDate": "6/10/2022 6:47:41 AM"
+        },
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "6/10/2022 6:47:40 AM",
+            "endDate": "6/10/2022 6:47:41 AM",
+            "successDate": "6/10/2022 6:47:41 AM"
+        },
+        {
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "",
+            "endDate": "",
+            "successDate": ""
+        }
+    ]
+}

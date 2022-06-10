@@ -1,7 +1,7 @@
-import Table from "./log-table";
-import logData from "../../../data/log.json";
+import Table from "../global/table/table";
+import logData from "../../data/log.json";
 import { useState } from "react";
-import Pagination from "../pagination";
+import Pagination from "../global/pagination";
 
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
@@ -59,7 +59,6 @@ const LogIndex = () => {
   };
 
   const paginatedData = paginateData(logData["logData"]);
-  const length = paginatedData.length;
 
   return (
     <>
