@@ -2,7 +2,9 @@ import { Dialect } from 'sequelize/types';
 
 const {
   DB,
-  MONGODB_URI,
+  MONGODB_URI_DEV,
+  MONGODB_URI_PROD,
+  MONGODB_URI_TEST,
   MYSQL_DB_HOST,
   MYSQL_DB_PORT,
   MYSQL_DB_USER,
@@ -12,7 +14,9 @@ const {
 } = process.env;
 export const dbConfig = {
   mongodb: {
-    URI: MONGODB_URI! || 'mongodb://localhost:27017/bs-commerce-dev',
+    PROD_URI: MONGODB_URI_PROD! || 'mongodb://localhost:27017/bs-commerce-prod',
+    DEV_URI: MONGODB_URI_DEV! || 'mongodb://localhost:27017/bs-commerce-dev',
+    TEST_URI: MONGODB_URI_TEST! || 'mongodb://localhost:27017/bs-commerce-test',
   },
   mysql: {
     username: MYSQL_DB_USER! || 'root',

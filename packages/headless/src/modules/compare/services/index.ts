@@ -18,6 +18,9 @@ export class CompareService {
     if (!productId.trim()) {
       return errorResponse('Invalid product id.', null, HttpStatus.BAD_REQUEST);
     }
+    if (!userId.trim()) {
+      return errorResponse('Invalid user id.', null, HttpStatus.BAD_REQUEST);
+    }
 
     /*
     check user compare list

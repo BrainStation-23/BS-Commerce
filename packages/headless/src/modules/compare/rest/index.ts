@@ -16,10 +16,10 @@ import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import {
-  IServiceSuccessResponse,
   IServiceErrorResponse,
+  IServiceSuccessResponse,
 } from 'src/utils/response/service.response.interface';
-import { AddToCompareDto, CompareResponseDto } from '../dto/compare.dto';
+import { AddToCompareDto } from '../dto/compare.dto';
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')

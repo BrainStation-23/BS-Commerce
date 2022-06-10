@@ -18,7 +18,7 @@ describe('Initializing... (e2e)', () => {
 
   beforeAll(async () => {
     type DB = 'MONGO' | 'MYSQL';
-    await connectToDatabase(dbConfig.db as DB);
+    await connectToDatabase(dbConfig.db as DB, 'TEST');
 
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],

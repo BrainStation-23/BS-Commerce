@@ -1,13 +1,13 @@
-import { dbConfig } from 'src/config/database';
 import { connect as connectToMongoDB } from './mongodb/connect';
 import { connect as connectToMySql } from './mysql/connect';
 
+export type EnvType = 'DEV' | 'TEST' | 'PROD';
 type DB = 'MONGO' | 'MYSQL';
-export async function connectToDatabase(db: DB) {
+export async function connectToDatabase(db: DB, env: EnvType) {
   try {
     switch (db) {
       case 'MONGO':
-        await connectToMongoDB();
+        await connectToMongoDB(env);
         break;
       case 'MYSQL':
         await connectToMySql();
