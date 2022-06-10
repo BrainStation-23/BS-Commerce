@@ -50,7 +50,7 @@ export class deleteAllCartItemsErrorResponseDto implements deleteAllCartItemsErr
     code: number;
 
     @ApiProperty({
-        example: deleteAllCartItemsErrorMessage.CAN_NOT_DELETE_ALL_CART_ITEMS,
+        example: deleteAllCartItemsErrorMessage.CAN_NOT_REMOVE_ALL_CART_ITEMS,
     })
     error: deleteAllCartItemsErrorMessage;
 

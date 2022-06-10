@@ -12,15 +12,15 @@ export interface updateCartItemSuccessResponse extends SuccessResponse {
     data: Cart;
 }
 
-export interface updateCartItemErrorResponse extends ErrorResponse { 
+export interface updateCartItemErrorResponse extends ErrorResponse {
     code?: number;
     error: updateCartItemErrorMessage;
     errors: DescriptiveError;
 }
 
-export const enum updateCartItemErrorMessage{
+export const enum updateCartItemErrorMessage {
     CAN_NOT_UPDATE_CART_ITEM = 'CAN_NOT_UPDATE_CART_ITEM',
-    CAN_NOT_DELETE_CART_ITEM = 'CAN_NOT_DELETE_CART_ITEM',
+    CAN_NOT_REMOVE_CART_ITEM = 'CAN_NOT_REMOVE_CART_ITEM',
 }
 
 export type updateCartItemResponse = updateCartItemSuccessResponse | updateCartItemErrorResponse;

@@ -57,7 +57,7 @@ export class deleteCartErrorResponseDto implements deleteCartErrorResponse {
     code: number;
 
     @ApiProperty({
-        example: deleteCartErrorMessage.CAN_NOT_DELETE_CART,
+        example: deleteCartErrorMessage.CAN_NOT_REMOVE_CART,
     })
     error: deleteCartErrorMessage;
 

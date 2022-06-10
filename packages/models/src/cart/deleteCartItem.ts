@@ -17,7 +17,7 @@ export interface deleteCartItemErrorResponse extends ErrorResponse {
     errors: DescriptiveError;
 }
 export const enum deleteCartItemErrorMessage{
-    CAN_NOT_DELETE_CART_ITEM = 'CAN_NOT_DELETE_CART_ITEM',
+    CAN_NOT_REMOVE_CART_ITEM = 'CAN_NOT_REMOVE_CART_ITEM',
 }
 
 export type deleteCartItemResponse = deleteCartItemSuccessResponse | deleteCartItemErrorResponse;

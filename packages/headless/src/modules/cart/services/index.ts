@@ -13,15 +13,15 @@ export class CartService {
     userId: string,
   ): Promise<AddToCartResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
+    const createCart = !existCart && await this.cartRepo.createCart({ userId, items: [item] });
+    if (!createCart && !existCart) {
+      return this.helper.serviceResponse.errorResponse(
+        ErrorMessage.CANNOT_CREATE_CART,
+        null,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
     if (!existCart) {
-      const createCart = await this.cartRepo.createCart({ userId, items: [item] });
-      if (!createCart) {
-        return this.helper.serviceResponse.errorResponse(
-          ErrorMessage.CANNOT_CREATE_CART,
-          null,
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
       return this.helper.serviceResponse.successResponse(
         await this.cartRepo.getCartProduct(createCart),
         HttpStatus.CREATED,
@@ -29,17 +29,17 @@ export class CartService {
     }
 
     const isItemExist = await this.cartRepo.isItemExist(userId, item.productId);
+    const addItemCart = !isItemExist && await this.cartRepo.addItem(userId, item);
+    if (!addItemCart && !isItemExist) {
+      return this.helper.serviceResponse.errorResponse(
+        ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     if (!isItemExist) {
-      const cart = await this.cartRepo.addItem(userId, item);
-      if (!cart) {
-        return this.helper.serviceResponse.errorResponse(
-          ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART,
-          null,
-          HttpStatus.BAD_REQUEST,
-        );
-      }
       return this.helper.serviceResponse.successResponse(
-        await this.cartRepo.getCartProduct(cart),
+        await this.cartRepo.getCartProduct(addItemCart),
         HttpStatus.OK,
       );
     }
@@ -85,7 +85,7 @@ export class CartService {
     const cart = await this.cartRepo.deleteCart(cartId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        deleteCartErrorMessage.CAN_NOT_DELETE_CART,
+        deleteCartErrorMessage.CAN_NOT_REMOVE_CART,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -100,15 +100,15 @@ export class CartService {
     userId: string,
     item: UpdateItem,
   ): Promise<updateCartItemResponse> {
+    const cart = (item.quantity && item.quantity > 0) && await this.cartRepo.updateCartItem(userId, item);
+    if (!cart && (item.quantity && item.quantity > 0)) {
+      return this.helper.serviceResponse.errorResponse(
+        updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     if (item.quantity && item.quantity > 0) {
-      const cart = await this.cartRepo.updateCartItem(userId, item);
-      if (!cart) {
-        return this.helper.serviceResponse.errorResponse(
-          updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
-          null,
-          HttpStatus.BAD_REQUEST,
-        );
-      }
       return this.helper.serviceResponse.successResponse(
         await this.cartRepo.getCartProduct(cart),
         HttpStatus.OK,
@@ -120,7 +120,7 @@ export class CartService {
     );
     if (!deletedCart) {
       return this.helper.serviceResponse.errorResponse(
-        updateCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM,
+        updateCartItemErrorMessage.CAN_NOT_REMOVE_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -138,7 +138,7 @@ export class CartService {
     const cart = await this.cartRepo.deleteCartItem(userId, productId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        deleteCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM,
+        deleteCartItemErrorMessage.CAN_NOT_REMOVE_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -155,7 +155,7 @@ export class CartService {
     const cart = await this.cartRepo.deleteAllCartItems(userId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        deleteAllCartItemsErrorMessage.CAN_NOT_DELETE_ALL_CART_ITEMS,
+        deleteAllCartItemsErrorMessage.CAN_NOT_REMOVE_ALL_CART_ITEMS,
         null,
         HttpStatus.BAD_REQUEST,
       );

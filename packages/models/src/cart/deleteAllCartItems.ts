@@ -7,13 +7,13 @@ export interface deleteAllCartItemsSuccessResponse extends SuccessResponse {
     data: Cart;
 }
 
-export interface deleteAllCartItemsErrorResponse extends ErrorResponse { 
+export interface deleteAllCartItemsErrorResponse extends ErrorResponse {
     code?: number;
     error: deleteAllCartItemsErrorMessage;
     errors: DescriptiveError;
 }
-export const enum deleteAllCartItemsErrorMessage{
-    CAN_NOT_DELETE_ALL_CART_ITEMS = 'CAN_NOT_DELETE_ALL_CART_ITEMS',
+export const enum deleteAllCartItemsErrorMessage {
+    CAN_NOT_REMOVE_ALL_CART_ITEMS = 'CAN_NOT_REMOVE_ALL_CART_ITEMS',
 }
 
 export type deleteAllCartItemsResponse = deleteAllCartItemsSuccessResponse | deleteAllCartItemsErrorResponse;

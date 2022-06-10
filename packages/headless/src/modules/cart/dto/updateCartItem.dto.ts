@@ -63,7 +63,7 @@ export class updateCartItemErrorResponseDto implements updateCartItemErrorRespon
 
     @ApiProperty({
         example: updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
-        examples: [updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM, updateCartItemErrorMessage.CAN_NOT_DELETE_CART_ITEM],
+        examples: [updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM, updateCartItemErrorMessage.CAN_NOT_REMOVE_CART_ITEM],
     })
     error: updateCartItemErrorMessage;
 
