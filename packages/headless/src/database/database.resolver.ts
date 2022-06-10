@@ -1,9 +1,11 @@
 // Mongodb dependency implementations
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
+import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { dbConfig } from 'config/database';
 
-type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER';
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -13,6 +15,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMongo;
+          case 'MANUFACTURER':
+            return ManufacturerDatabaseMongo;
 
           default:
             break;
@@ -21,6 +25,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMysql;
+          case 'MANUFACTURER':
+            return ManufacturerDatabaseMysql;
           default:
             break;
         }
