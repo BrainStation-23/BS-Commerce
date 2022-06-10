@@ -37,7 +37,7 @@ export interface CreateManufacturerSuccessResponse extends SuccessResponse {
 
 export interface CreateManufacturerErrorResponse extends ErrorResponse {
     code?: number;
-    error: CreateManufacturerErrorMessages.MANUFACTURER_ALREADY_EXISTS | CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY;
+    error: CreateManufacturerErrorMessages;
     errors: DescriptiveError;
 }
 
