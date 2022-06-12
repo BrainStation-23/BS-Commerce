@@ -1,10 +1,10 @@
 import _ from "lodash";
 import Pagination from "../components/order/pagination";
 import React, { useEffect, useState } from "react";
-import getData from "../components/order/service/get-data.service";
-import SingleOrder from "../components/order/SingleOrder";
+import getData from "../components/order/service/get-shipping-data.service";
+import SingleShipping from "../components/order/singleShipment";
 
-const Orders = () => {
+const Shipments = () => {
     const [data, setData] = useState([]);
     const [activePage, setActivePage] = useState(1);
     const [pageCount, setPageCount] = useState(5);
@@ -35,13 +35,12 @@ const Orders = () => {
                             <button
                                 type="button"
                                 className="btn btn-success btn-lg"
-                                style={{marginRight: '10px', backgroundColor: '#28a745', border: "1px solid #28a745"}}
+                                style={{marginRight: '10px'}}
                             >
                                 <i className="bi bi-download">{" "}</i>Export
                             </button>
                             <button
                                 type="button"
-                                style={{backgroundColor: '#00c0ef', border: "1px solid #00c0ef", color:"white"}}
                                 className="btn btn-info btn-lg"
                             >
                                 <i className="bi bi-file-earmark-pdf">{" "}</i>Print PDF invoices
@@ -169,10 +168,10 @@ const Orders = () => {
                     <tbody>
                         {paginateData.length > 0 &&
                             paginateData.map((order: any) => (
-                                <SingleOrder
+                                <SingleShipping
                                     key={order.id}
                                     order={order}
-                                ></SingleOrder>
+                                ></SingleShipping>
                             ))}
                         <td></td>
                         <td></td>
@@ -272,4 +271,4 @@ const Orders = () => {
     );
 };
 
-export default Orders;
+export default Shipments;

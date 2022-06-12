@@ -1,0 +1,37 @@
+{
+    "shipping": [
+      {
+        "id": 1,
+        "shipment": "Complete",
+        "order": "Paid",
+        "shipping_status": "Delivered",
+        "tracking_number": "anik.barua@brainstation-23.com",
+        "total_weight": "Store name",
+        "date_shipped": "03/13/2022",
+        "date_delivered": "$40.00",
+        "view": "View"
+      },
+      {
+        "id": 2,
+        "shipment": "Complete",
+        "order": "Paid",
+        "shipping_status": "Delivered",
+        "tracking_number": "anik.barua@brainstation-23.com",
+        "total_weight": "Store name",
+        "date_shipped": "03/13/2022",
+        "date_delivered": "$40.00",
+        "view": "View"
+      },
+      {
+        "id": 3,
+        "shipment": "Complete",
+        "order": "Paid",
+        "shipping_status": "Delivered",
+        "tracking_number": "anik.barua@brainstation-23.com",
+        "total_weight": "Store name",
+        "date_shipped": "03/13/2022",
+        "date_delivered": "$40.00",
+        "view": "View"
+      }
+    ]
+}

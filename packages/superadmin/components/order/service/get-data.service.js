@@ -1,4 +1,5 @@
-import orderData from '../../../orderData/order-data.json';
+import orderData from '../../../allData/order-data.json';
+import shippingData from '../../../allData/shipping-data.json';
 
 function getData() {
     return orderData.orders;
