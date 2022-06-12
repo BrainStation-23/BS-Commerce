@@ -1,0 +1,150 @@
+.side_menu {
+  position: fixed;
+  background-color: #32374a;
+  width: 300px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px 20px;
+  transition: width 0.3s ease-in;
+}
+
+.side_menu_inactive {
+  width: 100px;
+}
+
+.side_menu .logo {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.side_menu .top_section {
+  position: relative;
+}
+.side_menu .logo Image {
+  max-width: 100%;
+  max-height: 100%;
+}
+.side_menu .top_section .toggle_menu_btn {
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  right: -70px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.side_menu .search_controller {
+  color: black;
+  position: relative;
+}
+.side_menu .search_controller .search_btn {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  color: #666;
+}
+.side_menu .search_controller input[type="text"] {
+  border: 0;
+  outline: none;
+  height: 35px;
+  background-color: white;
+  border-radius: 5px;
+  display: block;
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 60px;
+  color: #666;
+}
+
+.side_menu .main_menu {
+  margin: 5px 0;
+}
+.side_menu .main_menu .menu_item {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  font-weight: 600;
+  cursor: pointer;
+}
+.side_menu .main_menu .menu_item span {
+  position: absolute;
+  display: inline-block;
+  line-height: 40px;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.side_menu_inactive .main_menu .menu_item span {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.side_menu .main_menu .menu_item .menu_icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.side_menu .main_menu .sub_menu {
+  color: white;
+  margin-left: 20px;
+  border-left: 1px solid #666;
+  box-sizing: border-box;
+  padding-left: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in;
+  display: none;
+}
+
+.side_menu .main_menu .sub_menu_active {
+  max-height: 200px;
+  color: white;
+  margin-left: 20px;
+  border-left: 1px solid #666;
+  box-sizing: border-box;
+  padding-left: 15px;
+  max-height: 0;
+}
+
+.side_menu .main_menu .sub_menu a {
+  display: block;
+  margin: 5px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.side_menu_inactive .main_menu .sub_menu_active {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* .side_menu_inactive .main_menu .sub_menu_active .submenu_icon {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+} */
+
+.side_menu .main_menu .sub_menu_active .submenu_icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  line-height: 40px;
+  text-align: center;
+}
