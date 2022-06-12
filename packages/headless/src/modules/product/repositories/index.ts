@@ -1,4 +1,4 @@
-import { Product } from 'src/entity/product';
+import { Product, UpdateProduct } from 'src/entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
@@ -28,7 +28,7 @@ export class ProductRepository {
         return await this.db.deleteProduct(productId);
     }
 
-    async updateProduct(product: Product, productId: string): Promise<Product | null> {
+    async updateProduct(product: UpdateProduct, productId: string): Promise<Product | null> {
         return await this.db.updateProduct(product, productId);
     }
 

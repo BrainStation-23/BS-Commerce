@@ -40,7 +40,6 @@ export declare class ValidationError {
     };
 }
 
-
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
     async transform(value: any, { metatype }: ArgumentMetadata) {
@@ -55,6 +54,7 @@ export class ValidationPipe implements PipeTransform<any> {
                 target: false, value: false,
             }
         });
+
         const errorsResponse: ServiceErrorResponse = { error: '', errors: {} };
 
         if (errors.length > 0) {
@@ -99,25 +99,29 @@ export function ValidateNested(
                     args.value;
                     if (Array.isArray(value)) {
                         for (let i = 0; i < (<Array<any>>value).length; i++) {
-                            if (validateSync(plainToClass(schema, value[i])).length) {
+                            if (value && validateSync(plainToClass(schema, value[i])).length) {
                                 return false;
                             }
                         }
                         return true;
-                    } else { return validateSync(plainToClass(schema, value)).length ? false : true; }
+                    } else {
+                        if (value && validateSync(plainToClass(schema, value))?.length) {
+                            return false;
+                        } else return true;
+                    }
                 },
                 defaultMessage(args) {
                     if (Array.isArray(args.value)) {
                         for (let i = 0; i < (<Array<any>>args.value).length; i++) {
                             return (
-                                validateSync(plainToClass(schema, args.value[i]))
+                                args.value && validateSync(plainToClass(schema, args.value[i]))
                                     .map((e) => e.constraints)
                                     .reduce((acc, next) => acc.concat(Object.values(next)), [])
                             ).toString();
                         }
                     } else {
                         return (
-                            validateSync(plainToClass(schema, args.value))
+                            args.value && validateSync(plainToClass(schema, args.value))
                                 .map((e) => e.constraints)
                                 .reduce((acc, next) => acc.concat(Object.values(next)), [])
                         ).toString();

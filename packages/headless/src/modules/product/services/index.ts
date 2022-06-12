@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse, } from 'src/helper/serviceResponse/service.response.interface';
-import { Product, SearchCondition } from 'src/entity/product';
+import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
 import { CreateProductDto } from '../dto/createProduct.dto';
 import {
@@ -17,6 +17,9 @@ import {
   GetProductBySKUErrorMessages,
   DeleteProductResponse,
   DeleteProductSuccessMessage,
+  UpdateProductResponse,
+  UpdateProductErrorMessages,
+  DeleteProductErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -61,20 +64,47 @@ export class ProductService {
 
   async deleteProduct(productId: string,): Promise<DeleteProductResponse> {
     const product = await this.productRepo.deleteProduct(productId);
-    if (!product) return this.helper.serviceResponse.errorResponse('Can\'t delete this Product.', null, HttpStatus.BAD_REQUEST);
+    if (!product) return this.helper.serviceResponse.errorResponse(DeleteProductErrorMessages.CAN_NOT_DELETE_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ message: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL }, HttpStatus.OK);
   }
 
-  async updateProduct(product: Product, productId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
-    if (skuMatch) return this.helper.serviceResponse.errorResponse('Product sku Match. Please choose a different sku.', null, HttpStatus.BAD_REQUEST);
+  async updateProduct(product: UpdateProduct, productId: string): Promise<UpdateProductResponse> {
+    const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
+    if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
-    const friendlyPageNameMatch = await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName });
-    if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse('Product friendlyPageName Match. Please choose a different friendlyPageName.', null, HttpStatus.BAD_REQUEST);
+    const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
+    if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
 
-    const updatedProduct = await this.productRepo.updateProduct(product, productId);
-    if (!updatedProduct) return this.helper.serviceResponse.errorResponse('Can\'t update this Product.', null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(updatedProduct);
+    let getProduct: any = await this.productRepo.findProduct({ id: productId });
+    if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+
+    getProduct = {
+      ...getProduct,
+      info: {
+        ...getProduct.info,
+        ...product?.info
+      },
+      meta: {
+        ...getProduct.meta,
+        ...product?.meta
+      },
+      brands: [
+        ...getProduct.brands || [],
+        ...product?.brands || []
+      ],
+      tags: [
+        ...getProduct.tags || [],
+        ...product?.tags || []
+      ],
+      categories: [
+        ...getProduct.categories || [],
+        ...product?.categories || []
+      ]
+    }
+
+    const updatedProduct = await this.productRepo.updateProduct(getProduct, productId);
+    if (!updatedProduct) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.CAN_NOT_UPDATE_PRODUCT, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(updatedProduct, HttpStatus.OK);
   }
 
   async updateProductsForBrand(productIds: string[], brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {

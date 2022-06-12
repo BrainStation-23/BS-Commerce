@@ -1,25 +1,32 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { Product, SearchCondition } from 'src/entity/product';
+import { SearchCondition } from 'src/entity/product';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { ProductService } from '../services';
 import {
   CreateProductDto,
   CreateProductErrorResponseDto,
   CreateProductSuccessResponseDto,
   DeleteProductErrorResponseDto,
+  DeleteProductParamsDto,
   DeleteProductSuccessResponseDto,
   GetAllProductsErrorResponseDto,
   GetAllProductsQueryDto,
   GetAllProductsSuccessResponseDto,
   GetProductBySKUErrorResponseDto,
+  GetProductBySKUParamsDto,
   GetProductBySKUSuccessResponseDto,
   GetProductCountErrorResponseDto,
   GetProductCountSuccessResponseDto,
   GetProductErrorResponseDto,
+  GetProductParamsDto,
   GetProductSuccessResponseDto,
+  UpdateProductDto,
+  UpdateProductErrorResponseDto,
+  UpdateProductParamsDto,
+  UpdateProductSuccessResponseDto,
 } from '../dto';
-import { ProductService } from '../services';
 
 @ApiTags('Product API')
 @UseGuards(JwtAuthGuard)
@@ -29,7 +36,6 @@ export class ProductController {
   constructor(private productService: ProductService) { }
 
   @Get()
-  @ApiQuery({ type: GetAllProductsQueryDto })
   @ApiResponse({
     description: 'Get All Product Success Response',
     type: GetAllProductsSuccessResponseDto,
@@ -40,11 +46,11 @@ export class ProductController {
     type: GetAllProductsErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getAllProducts(@Query() data: SearchCondition, @Res({ passthrough: true }) res: Response) {
-    const { skip, limit } = data;
+  async getAllProducts(@Query() query: GetAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
+    const { skip, limit } = query;
     const { code, ...response } = await this.productService.getAllProducts({ skip, limit });
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('count')
@@ -61,7 +67,7 @@ export class ProductController {
   async getProductCount(@Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getProductCount();
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('sku/:sku')
@@ -76,10 +82,10 @@ export class ProductController {
     type: GetProductBySKUErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getProductBySKU(@Param('sku') sku: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.getProductBySKU(sku);
+  async getProductBySKU(@Param() params: GetProductBySKUParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getProductBySKU(params.sku);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('condition')
@@ -89,7 +95,7 @@ export class ProductController {
   ) {
     const { code, ...response } = await this.productService.getProductsByCondition(condition);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('list')
@@ -99,14 +105,14 @@ export class ProductController {
   ) {
     const { code, ...response } = await this.productService.getProductsList(condition);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('brand/:brandId')
   async getProductsByBrand(@Param('brandId') brandId: string, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getProductsByBrand(brandId);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get(':productId')
@@ -121,10 +127,10 @@ export class ProductController {
     type: GetProductErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.getProduct(productId);
+  async getProduct(@Param() params: GetProductParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getProduct(params.productId);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Post()
@@ -141,10 +147,11 @@ export class ProductController {
   async addProduct(@Body() product: CreateProductDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.createProduct(product);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Delete(':productId')
+  @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Delete Product Success Response',
     type: DeleteProductSuccessResponseDto,
@@ -155,10 +162,10 @@ export class ProductController {
     type: DeleteProductErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async deleteProduct(@Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.deleteProduct(productId);
+  async deleteProduct(@Param() params: DeleteProductParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.deleteProduct(params.productId);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Patch('brand')
@@ -169,13 +176,24 @@ export class ProductController {
   ) {
     const { code, ...response } = await this.productService.updateProductsForBrand(productIds, brandId);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Patch(':productId')
-  async updateProduct(@Body() product: Product, @Param('productId') productId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.updateProduct(product, productId);
+  @ApiParam({ name: 'productId' })
+  @ApiResponse({
+    description: 'Update Product Success Response',
+    type: UpdateProductSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Update Product Error Response',
+    type: UpdateProductErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async updateProduct(@Body() product: UpdateProductDto, @Param() params: UpdateProductParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.updateProduct(product, params.productId);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 }
