@@ -1,9 +1,10 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import HeaderBar from "./headerBar";
 import bsLogo from "../../assests/bs23.png";
 import sidebar from "./styles/sidebar.module.css";
-const Sidebar: NextComponentType = () => {
+const Sidebar: NextComponentType = (props: any) => {
   const menuItems = [
     { name: "Dashboard", to: "/", icon: <i className="bi bi-tv"></i> },
     {
@@ -53,8 +54,13 @@ const Sidebar: NextComponentType = () => {
     // setShowSubMenu(!showSubMenu);
     setShowSubMenu(toggleState);
   };
+  const handleTogglebarStatus = () => {
+    setInactive(!inactive);
+    props.adjustContainer();
+  };
   return (
     <>
+      <HeaderBar handleTogglebarStatus={handleTogglebarStatus} />
       <div
         className={
           inactive
@@ -67,12 +73,12 @@ const Sidebar: NextComponentType = () => {
             <Image src={bsLogo} alt="bs-logo" />
           </div>
           <div className={sidebar.title}>bs Commerce</div>
-          <div
+          {/* <div
             onClick={() => setInactive(!inactive)}
             className={sidebar.toggle_menu_btn}
           >
             <i className="bi bi-list"></i>
-          </div>
+          </div> */}
         </div>
         <div className={sidebar.search_controller}>
           <button className={sidebar.search_btn}>
@@ -116,8 +122,8 @@ const Sidebar: NextComponentType = () => {
                             <div className={sidebar.submenu_icon}>
                               {subMenu.icon}
                             </div>
-                            {/* <span>{subMenu.name}</span> */}
-                            {subMenu.name}
+                            <span>{subMenu.name}</span>
+                            {/* {subMenu.name} */}
                           </a>
                         </li>
                       ))}
