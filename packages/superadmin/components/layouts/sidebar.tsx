@@ -23,10 +23,36 @@ const Sidebar: NextComponentType = () => {
         },
       ],
     },
-    { name: "Sales", to: "/", icon: <i className="bi bi-cart"></i> },
+    {
+      name: "Sales",
+      to: "/",
+      icon: <i className="bi bi-cart"></i>,
+      subMenus: [
+        {
+          name: "Categories",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Manufacturers",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
   ];
+  const chevronUp = <i className="bi bi-chevron-up"></i>;
+  const chevronDown = <i className="bi bi-chevron-down"></i>;
   const [inactive, setInactive] = useState(false);
-  const [showSubMenu, setShowSubMenu] = useState(false);
+  // const [showSubMenu, setShowSubMenu] = useState(false);
+  const [showSubMenu, setShowSubMenu] = useState([false, false, false]);
+
+  const manageToggleSubmenu = (index: number) => {
+    let toggleState = [...showSubMenu];
+    toggleState[index] = !toggleState[index];
+    // setShowSubMenu(!showSubMenu);
+    setShowSubMenu(toggleState);
+  };
   return (
     <>
       <div
@@ -40,6 +66,7 @@ const Sidebar: NextComponentType = () => {
           <div className={sidebar.logo}>
             <Image src={bsLogo} alt="bs-logo" />
           </div>
+          <div className={sidebar.title}>bs Commerce</div>
           <div
             onClick={() => setInactive(!inactive)}
             className={sidebar.toggle_menu_btn}
@@ -59,15 +86,28 @@ const Sidebar: NextComponentType = () => {
             {menuItems.map((menuItem, index) => (
               <li key={index}>
                 <a
-                  onClick={() => setShowSubMenu(!showSubMenu)}
+                  onClick={(e) => manageToggleSubmenu(index)}
                   className={sidebar.menu_item}
                 >
                   <div className={sidebar.menu_icon}>{menuItem.icon}</div>
-                  <span>{menuItem.name}</span>
-                  {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
+                  <div className={sidebar.menu_item_text}>
+                    {menuItem.name}
+                    <span className={sidebar.menu_chevron}>
+                      {menuItem.subMenus && menuItem.subMenus.length > 0
+                        ? showSubMenu[index]
+                          ? chevronUp
+                          : chevronDown
+                        : ""}
+                    </span>
+                  </div>
+                </a>
+                {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
+                  <>
                     <ul
                       className={
-                        showSubMenu ? sidebar.sub_menu_active : sidebar.sub_menu
+                        showSubMenu[index]
+                          ? sidebar.sub_menu_active
+                          : sidebar.sub_menu
                       }
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
@@ -82,8 +122,8 @@ const Sidebar: NextComponentType = () => {
                         </li>
                       ))}
                     </ul>
-                  ) : null}
-                </a>
+                  </>
+                ) : null}
               </li>
             ))}
           </ul>

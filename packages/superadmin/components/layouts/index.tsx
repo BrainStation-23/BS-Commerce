@@ -1,5 +1,4 @@
 import type { NextComponentType } from "next";
-import HeaderBar from "./headerBar";
 import Sidebar from "./sidebar";
 import { useEffect } from "react";
 const Layout: NextComponentType = ({ children }) => {
@@ -10,7 +9,6 @@ const Layout: NextComponentType = ({ children }) => {
   }, []);
   return (
     <>
-      <HeaderBar />
       <div className="container-fluid">
         <div className="row">
           <Sidebar />

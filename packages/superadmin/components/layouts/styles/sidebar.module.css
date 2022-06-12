@@ -1,25 +1,43 @@
 .side_menu {
   position: fixed;
   background-color: #32374a;
-  width: 300px;
+  width: 250px;
   height: 100%;
   box-sizing: border-box;
-  padding: 30px 20px;
+  padding: 25px 10px;
   transition: width 0.3s ease-in;
 }
 
 .side_menu_inactive {
-  width: 100px;
+  width: 90px;
 }
 
 .side_menu .logo {
-  width: 60px;
+  width: 85px;
   height: 60px;
+  overflow: hidden;
+}
+
+.side_menu .title {
+  opacity: 1;
+  position: relative;
+  padding-left: 20px;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  top: 50%;
+}
+
+.side_menu_inactive .title {
+  opacity: 0;
+  width: 0;
+  height: 0;
   overflow: hidden;
 }
 
 .side_menu .top_section {
   position: relative;
+  display: flex;
 }
 .side_menu .logo Image {
   max-width: 100%;
@@ -47,33 +65,49 @@
   border: 0;
   font-size: 20px;
   color: #666;
+  padding-bottom: 15px;
+  opacity: 1;
 }
+
+.side_menu_inactive .search_controller .search_btn {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .side_menu .search_controller input[type="text"] {
   border: 0;
   outline: none;
-  height: 35px;
+  height: 30px;
   background-color: white;
   border-radius: 5px;
   display: block;
   margin: 20px 0;
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   padding-left: 60px;
   color: #666;
+  opacity: 1;
 }
-
+.side_menu_inactive .search_controller input[type="text"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 .side_menu .main_menu {
   margin: 5px 0;
 }
 .side_menu .main_menu .menu_item {
   color: white;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 17px;
   display: block;
   font-weight: 600;
   cursor: pointer;
 }
-.side_menu .main_menu .menu_item span {
+.side_menu .main_menu .menu_item .menu_item_text {
   position: absolute;
   display: inline-block;
   line-height: 40px;
@@ -81,19 +115,26 @@
   transition: opacity 0.3s ease-in;
 }
 
-.side_menu_inactive .main_menu .menu_item span {
+.side_menu_inactive .main_menu .menu_item .menu_item_text {
   opacity: 0;
   width: 0;
   height: 0;
   overflow: hidden;
 }
 
+.side_menu .main_menu .menu_item .menu_item_text .menu_chevron {
+  font-size: 15px;
+  flex: 1;
+  justify-content: end;
+}
 .side_menu .main_menu .menu_item .menu_icon {
   display: inline-block;
   width: 40px;
   height: 40px;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 40px;
+  margin-left: 10px;
+  padding-right: 15px;
   text-align: center;
 }
 
@@ -105,8 +146,7 @@
   padding-left: 15px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-in;
-  display: none;
+  transition: max-height 0.2s ease-in;
 }
 
 .side_menu .main_menu .sub_menu_active {
@@ -116,7 +156,7 @@
   border-left: 1px solid #666;
   box-sizing: border-box;
   padding-left: 15px;
-  max-height: 0;
+  max-height: 200px;
 }
 
 .side_menu .main_menu .sub_menu a {
