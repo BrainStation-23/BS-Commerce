@@ -20,6 +20,9 @@ import {
   UpdateProductResponse,
   UpdateProductErrorMessages,
   DeleteProductErrorMessages,
+  GetProductsByConditionErrorMessages,
+  GetProductsByConditionResponse,
+
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -113,11 +116,14 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(products);
   }
 
-  async getProductsByCondition(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const { skip, limit } = condition;
+  async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
+    const { skip, limit , slug} = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
+    if (slug) {
+      //dependent on category module
+    }
     const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
-    if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse('Can\'t get Products.', null, HttpStatus.BAD_REQUEST);
+    if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ products, count });
   }
 
@@ -144,19 +150,4 @@ export class ProductService {
     }
     return query;
   }
-
-  async getProductsList(condition: SearchCondition): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const { slug, orderBy, skip, limit } = condition;
-    let products: Product[] = [];
-    if (slug) {
-      //dependent on category module
-    }
-    else if (skip && limit) {
-      products = await this.productRepo.getProductsList(skip, limit, {}, '',);
-    } else {
-      products = await this.productRepo.getProductsList(1, 9, {}, '',);
-    }
-    return this.helper.serviceResponse.successResponse(products);
-  }
-
 }

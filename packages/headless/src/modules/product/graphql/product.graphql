@@ -140,7 +140,6 @@ type Query {
   getProductsByCondition(
     condition: SearchCondition
   ): ProductArrayWithCountResponse!
-  getProductsList(condition: SearchCondition): ProductArrayResponse!
   getProductsByBrand(brandId: String!): ProductArrayResponse!
 }
 

@@ -6,4 +6,4 @@ export * from './getProductCount.dto';
 export * from './getProductBySKU.dto';
 export * from './deleteProduct.dto';
 export * from './updateProduct.dto';
-export * from './searchCondition.dto';
+export * from './getProductsByCondition.dto';

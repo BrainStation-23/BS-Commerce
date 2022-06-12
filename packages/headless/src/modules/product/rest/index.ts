@@ -21,6 +21,9 @@ import {
   GetProductCountSuccessResponseDto,
   GetProductErrorResponseDto,
   GetProductParamsDto,
+  GetProductsByConditionErrorResponseDto,
+  GetProductsByConditionQueryDto,
+  GetProductsByConditionSuccessResponseDto,
   GetProductSuccessResponseDto,
   UpdateProductDto,
   UpdateProductErrorResponseDto,
@@ -89,21 +92,21 @@ export class ProductController {
   }
 
   @Get('condition')
+  @ApiResponse({
+    description: 'Get Products By Condition Success Response',
+    type: GetProductsByConditionSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Products By Condition Error Response',
+    type: GetProductsByConditionErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   async getProductsByCondition(
-    @Query() condition: SearchCondition,
+    @Query() condition: GetProductsByConditionQueryDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.getProductsByCondition(condition);
-    res.status(code);
-    return { code, ...response };
-  }
-
-  @Get('list')
-  async getProductsList(
-    @Query() condition: SearchCondition,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const { code, ...response } = await this.productService.getProductsList(condition);
     res.status(code);
     return { code, ...response };
   }
