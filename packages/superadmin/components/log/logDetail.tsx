@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import logData from "../../data/log.json";
 import LogHeading from "./heading-card";
 import LogDetailCard from "./logDetailCard";
+import Modal from "./modal";
 
 interface Log {
   id: number;
@@ -41,7 +42,7 @@ const LogDetail = (props: any) => {
 
   return (
     <>
-      <div className="d-flex flex-wrap justify-content-between mt-3">
+      <div className="d-flex flex-wrap flex-column flex-sm-column flex-md-row flex-lg-row flex-xl-row justify-content-between mt-3">
         <div className="d-flex flex-wrap">
           <h3>View log entry details</h3>
           <Link href="/log" passHref>
@@ -55,16 +56,18 @@ const LogDetail = (props: any) => {
             </a>
           </Link>
         </div>
-        <button className="btn btn-danger">
+        <button className="btn btn-danger float-end" data-bs-toggle="modal"
+            data-bs-target="#myModal">
           <span className="me-2">
             <i className="bi bi-trash3"></i>
           </span>
           Delete
         </button>
+        <Modal />
       </div>
       <LogHeading />
       <div className="card mt-3 p-3 rounded border-1 font-lg">
-        <div className="card-body ms-5">
+        <div className="card-body">
          <LogDetailCard label="Log level" data={log.logLevel} tooltipText="The level of log entry" />
          <LogDetailCard label="Short Message" data={log.shortMsg} tooltipText="The log entry message" />
          <LogDetailCard label="Full Message" data={log.fullMsg} tooltipText="The details for the log entry" />

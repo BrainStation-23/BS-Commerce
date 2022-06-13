@@ -3,8 +3,8 @@ const LogDetailCard = (props: any) => {
   return (
     <>
       <div className="row mt-1">
-        <div className="col-3">
-          <p>
+        <div className="col-12 col-sm-12 col-md-12 col-lg-3">
+          <p className="float-lg-end float-xl-end">
             <strong className="fs-6 me-1">{label}</strong>
             <span>
               <i className="bi bi-question-circle-fill" data-toggle="tooltip" data-placement="bottom" title={tooltipText} style={{ color: "#3c8dbc" }}></i>
@@ -12,7 +12,7 @@ const LogDetailCard = (props: any) => {
           </p>
         </div>
         <div className="col">
-          <p className="ms-3 fs-6">{data}</p>
+          <p className="ms-lg-3 ms-xl-3 fs-6">{data}</p>
         </div>
       </div>
     </>
