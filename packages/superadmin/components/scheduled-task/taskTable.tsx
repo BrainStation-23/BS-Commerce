@@ -1,89 +1,11 @@
 import { useState } from "react";
 import scheduledTaskData from "../../data/scheduledTask.json";
 import Pagination from "../global/pagination";
-import Table from "../global/table/table";
+import Table from "./table";
 
 const TaskTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
-
-  function handleEditClick() {
-  }
-
-  const columns = [
-    {
-      label: "Name",
-      path: "name",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: "Seconds (run period)",
-      path: "seconds",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: "Enabled",
-      path: "enabled",
-      content: (data: any, key: any) => (
-        <td className="text-center">
-          {data[key] ? (
-            <>
-              <i className="bi bi-check-lg"></i>
-            </>
-          ) : (
-            ""
-          )}
-        </td>
-      ),
-    },
-    {
-      label: "Stop on error",
-      path: "stopOnError",
-      content: (data: any, key: any) => (
-        <td className="text-center">
-          {!data[key] ? <i className="bi bi-x"></i> : ""}
-        </td>
-      ),
-    },
-    {
-      label: "Last start date",
-      path: "startDate",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: "Last end date",
-      path: "endDate",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: "Last success date",
-      path: "successDate",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: "Run Now",
-      path: "run",
-      content: (data: any, key: any) => (
-        <td>
-          <button className="btn btn-success">Run</button>
-        </td>
-      ),
-    },
-    {
-      label: "Edit",
-      path: "edit",
-      content: (data: any, key: any) => (
-        <td id="edit">
-          <button onClick={() => {handleEditClick()}} style={{ border: "none" }}>
-            <span>
-              <i className="bi bi-pencil"></i>
-            </span>
-            Edit
-          </button>
-        </td>
-      ),
-    },
-  ];
 
   const paginateData = (data: any) => {
     const start = (activePage - 1) * pageCount;
@@ -99,7 +21,7 @@ const TaskTable = () => {
 
   return (
     <>
-      <Table items={paginatedData} columns={columns} />
+      <Table items={paginatedData} />
 
       <div className="d-flex flex-wrap justify-content-between">
         <Pagination
