@@ -45,7 +45,7 @@ const LogDetail = (props: any) => {
       <div className="d-flex flex-wrap flex-column flex-sm-column flex-md-row flex-lg-row flex-xl-row justify-content-between mt-3">
         <div className="d-flex flex-wrap">
           <h3>View log entry details</h3>
-          <Link href="/log" passHref>
+          <Link href="/system/log" passHref>
             <a style={{ textDecoration: "none" }}>
               <h5 className="ms-3 align-items-center">
                 <span>
