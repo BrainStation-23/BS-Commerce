@@ -19,8 +19,10 @@ const InventoryForm = () => {
       >
         <div className="card-header with-border clearfix">
           <div className="card-title float-start">
-            <i className="bi bi-info-lg" />
-            Inventory
+            <i className="bi bi-diagram-3-fill float-start" />
+             <p className="float-start px-1">
+             Inventory
+            </p>
           </div>
           <div className="card-tools float-end">
             <div>

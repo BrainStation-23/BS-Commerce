@@ -19,8 +19,12 @@ const PricesForm = () => {
       >
         <div className="card-header with-border clearfix">
           <div className="card-title float-start">
-            <i className="bi bi-info-lg" />
+            <i className="bi bi-currency-dollar float-start" />
+            
+            <p className="float-start px-1">
             Prices
+
+            </p>
           </div>
           <div className="card-tools float-end">
             <div>

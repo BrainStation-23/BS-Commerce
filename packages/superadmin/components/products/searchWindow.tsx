@@ -73,7 +73,7 @@ const SearchWindow = () => {
                     id="SearchCategoryId"
                     name="SearchCategoryId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Computers</option>
@@ -155,7 +155,7 @@ const SearchWindow = () => {
                     id="SearchManufacturerId"
                     name="SearchManufacturerId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Apple</option>
@@ -188,7 +188,7 @@ const SearchWindow = () => {
                     id="SearchVendorId"
                     name="SearchVendorId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Vendor 1</option>
@@ -222,7 +222,7 @@ const SearchWindow = () => {
                     id="SearchStoreId"
                     name="SearchStoreId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Your store name</option>
@@ -257,7 +257,7 @@ const SearchWindow = () => {
                     id="SearchWarehouseId"
                     name="SearchWarehouseId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Warehouse 1 (New York)</option>
@@ -292,7 +292,7 @@ const SearchWindow = () => {
                     id="SearchProductTypeId"
                     name="SearchProductTypeId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="5">Simple</option>
@@ -327,7 +327,7 @@ const SearchWindow = () => {
                     id="SearchPublishedId"
                     name="SearchPublishedId"
                   >
-                    <option selected={true} value="0">
+                    <option defaultValue="0">
                       All
                     </option>
                     <option value="1">Published only</option>

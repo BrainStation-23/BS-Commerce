@@ -36,8 +36,11 @@ const ShippingForm = () => {
       >
         <div className="card-header with-border clearfix">
           <div className="card-title float-start">
-            <i className="bi bi-info-lg" />
-            Shipping
+            <i className="bi bi-truck float-start" />
+            <p className="float-start px-1">
+            Shipping 
+
+            </p>
           </div>
           <div className="card-tools float-end">
             <div>

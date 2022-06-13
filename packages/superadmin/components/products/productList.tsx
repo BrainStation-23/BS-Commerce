@@ -10,16 +10,11 @@ const ProductList = () => {
             </a>
           </span>
         </div>
-        <div
-          id="products-grid_wrapper"
-          className="dataTables_wrapper dt-bootstrap5 no-footer mt-10"
-        >
+        <div id="products-grid_wrapper" className="">
           <div className="row">
             <div className="col-md-12">
-              <div className="dataTables_scroll ">
-                
+              <div className="">
                 <div
-                  className="dataTables_scrollBody"
                   style={{
                     position: "relative",
                     overflow: "auto",
@@ -37,29 +32,19 @@ const ProductList = () => {
                     <thead>
                       <tr role="row" style={{ height: "60px" }}>
                         <th
-                          className="sorting_disabled text-center"
-                          rowSpan={1}
-                          colSpan={1}
+                          className="text-center"
                           style={{
                             width: "18.5625px",
-                            paddingTop: "0px",
-                            paddingBottom: "0px",
-                            borderTopWidth: "0px",
-                            borderBottomWidth: "0px",
                             height: "0px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             <input className="mastercheckbox" type="checkbox" />
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th  
                           style={{
                             width: "78.875px",
                             paddingTop: "0px",
@@ -76,10 +61,7 @@ const ProductList = () => {
                             Picture
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "85.8875px",
                             paddingTop: "0px",
@@ -89,17 +71,13 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             Product name
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "86.3625px",
                             paddingTop: "0px",
@@ -109,17 +87,13 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             SKU
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "35.825px",
                             paddingTop: "0px",
@@ -129,17 +103,13 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             Price
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "60.8625px",
                             paddingTop: "0px",
@@ -149,17 +119,13 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             Stock quantity
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled text-center"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "71.95px",
                             paddingTop: "0px",
@@ -169,17 +135,13 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             Published
                           </div>
                         </th>
-                        <th
-                          className="sorting_disabled button-column"
-                          rowSpan={1}
-                          colSpan={1}
+                        <th 
                           style={{
                             width: "59.675px",
                             paddingTop: "0px",
@@ -189,8 +151,7 @@ const ProductList = () => {
                             height: "60px",
                           }}
                         >
-                          <div
-                            className="dataTables_sizing"
+                          <div 
                             style={{ height: "60px", overflow: "hidden" }}
                           >
                             Edit
