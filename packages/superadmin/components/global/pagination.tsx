@@ -1,4 +1,5 @@
 import _ from "lodash";
+import React from "react";
 
 const Pagination = (props: any) => {
   const { totalItems, pageCount, activePage, onClickPage } = props;
@@ -19,9 +20,9 @@ const Pagination = (props: any) => {
             >
             <a className="page-link"><span aria-hidden="true">&laquo;</span></a>
             </li>
-            {pages.map((page) => {
+            {pages.map((page, index) => {
             return (
-                <>
+                <React.Fragment key={index}>
                 <li
                     onClick={() => onClickPage(page)}
                     className={
@@ -30,7 +31,7 @@ const Pagination = (props: any) => {
                 >
                     <a className="page-link">{page}</a>
                 </li>
-                </>
+                </React.Fragment>
             );
             })}
 
