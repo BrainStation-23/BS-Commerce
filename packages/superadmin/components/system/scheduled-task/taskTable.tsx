@@ -1,6 +1,6 @@
 import { useState } from "react";
-import scheduledTaskData from "../../data/scheduledTask.json";
-import Pagination from "../global/pagination";
+import scheduledTaskData from "../../../data/scheduledTask.json";
+import Pagination from "../../global/pagination";
 import Table from "./table";
 
 const TaskTable = () => {
