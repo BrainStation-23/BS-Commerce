@@ -7,6 +7,9 @@ const TaskTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
 
+  function handleEditClick() {
+  }
+
   const columns = [
     {
       label: "Name",
@@ -21,12 +24,26 @@ const TaskTable = () => {
     {
       label: "Enabled",
       path: "enabled",
-      content: (data: any, key: any) => <td className="text-center">{data[key] ? <><i className="bi bi-check-lg"></i></> : ""}</td>,
+      content: (data: any, key: any) => (
+        <td className="text-center">
+          {data[key] ? (
+            <>
+              <i className="bi bi-check-lg"></i>
+            </>
+          ) : (
+            ""
+          )}
+        </td>
+      ),
     },
     {
       label: "Stop on error",
       path: "stopOnError",
-      content: (data: any, key: any) => <td className="text-center">{!data[key] ? <i className="bi bi-x"></i> : ""}</td>,
+      content: (data: any, key: any) => (
+        <td className="text-center">
+          {!data[key] ? <i className="bi bi-x"></i> : ""}
+        </td>
+      ),
     },
     {
       label: "Last start date",
@@ -56,10 +73,8 @@ const TaskTable = () => {
       label: "Edit",
       path: "edit",
       content: (data: any, key: any) => (
-        <td>
-          <button onClick={() => {
-              
-          }} style={{ border: "none" }}>
+        <td id="edit">
+          <button onClick={() => {handleEditClick()}} style={{ border: "none" }}>
             <span>
               <i className="bi bi-pencil"></i>
             </span>
@@ -158,10 +173,15 @@ const TaskTable = () => {
           </span>
         </div>
 
-        <p>{` ${(activePage - 1) * pageCount + 1} - ${
-          (activePage - 1) * pageCount + pageCount
-        } of 6 items`}
-        <span className="ms-2"><button style={{border: "none"}}><i className="bi bi-arrow-clockwise align-items-center"></i></button></span>
+        <p>
+          {` ${(activePage - 1) * pageCount + 1} - ${
+            (activePage - 1) * pageCount + pageCount
+          } of 6 items`}
+          <span className="ms-2">
+            <button style={{ border: "none" }}>
+              <i className="bi bi-arrow-clockwise align-items-center"></i>
+            </button>
+          </span>
         </p>
       </div>
     </>
