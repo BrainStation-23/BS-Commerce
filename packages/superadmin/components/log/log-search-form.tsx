@@ -28,11 +28,11 @@ const LogSearchForm = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="d-flex flex-wrap justify-content-between mb-3">
+              <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between">
                 <div>
                   <label
                     htmlFor="createdForm"
-                    className="me-0 me-sm-2 me-md-2 me-xl-2 me-lg-2 mb-2"
+                    className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
                     Created from{" "}
                     <span>
@@ -44,7 +44,7 @@ const LogSearchForm = () => {
                   </label>
                   <Field
                     type="date"
-                    className="p-2"
+                    className="p-2 w-100 mb-2"
                     id="createdFrom"
                     name="createdFrom"
                   />
@@ -53,7 +53,7 @@ const LogSearchForm = () => {
                 <div>
                   <label
                     htmlFor="msg"
-                    className="me-0 me-sm-2 me-md-2 me-xl-2 me-lg-2"
+                    className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
                     Message{" "}
                     <span>
@@ -63,14 +63,14 @@ const LogSearchForm = () => {
                       ></i>
                     </span>
                   </label>
-                  <Field type="text" className="p-2" id="msg" name="msg" />
+                  <Field type="text" className="p-2 w-100 mb-2" id="msg" name="msg" />
                 </div>
               </div>
-              <div className="d-flex flex-row flex-wrap justify-content-between mb-4">
+              <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mb-3">
                 <div>
                   <label
                     htmlFor="createdTo"
-                    className="me-0 me-sm-2 me-md-2 me-xl-2 me-lg-2"
+                    className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
                     Created to{" "}
                     <span>
@@ -82,7 +82,7 @@ const LogSearchForm = () => {
                   </label>
                   <Field
                     type="date"
-                    className="p-2"
+                    className="p-2 w-100 mb-2"
                     id="createdTo"
                     name="createdTo"
                   />
@@ -91,7 +91,7 @@ const LogSearchForm = () => {
                 <div className="">
                   <label
                     htmlFor="logLevel"
-                    className="me-0 me-sm-2 me-md-2 me-xl-2 me-lg-2"
+                    className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2 mb-2"
                   >
                     Log Level{" "}
                     <span>
@@ -104,7 +104,7 @@ const LogSearchForm = () => {
 
                   <Field
                     as="select"
-                    className="p-2"
+                    className="p-2 w-100"
                     id="logLevel"
                     name="logLevel"
                   >

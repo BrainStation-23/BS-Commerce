@@ -76,7 +76,7 @@ const LogIndex = () => {
           </p>
           <Table items={paginatedData} columns={columns} />
 
-          <div className="d-flex flex-col flex-wrap justify-content-center flex-xs-column flex-sm-column flex-md-column flex-lg-row justify-content-xs-center justify-content-sm-center justify-content-md-center justify-content-lg-between justify-content-xl-between">
+          <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
             <Pagination
               totalItems={40}
               pageCount={pageCount}

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import LogHeading from "./heading-card";
 import LogSearch from "./log-search";
 import LogIndex from "./logTable";
@@ -7,9 +6,9 @@ import Modal from "./modal";
 const LogPage = () => {
   return (
     <div>
-      <div className="d-flex flex-wrap justify-content-between mt-3">
+      <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mt-3">
         <h4>Log</h4>
-        <div className="d-flex flex-wrap justify-content-end float-xs-right">
+        <div className="d-flex flex-wrap justify-content-end">
           <button
             type="button"
             className="btn btn-danger me-1"
