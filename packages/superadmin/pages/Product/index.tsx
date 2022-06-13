@@ -1,11 +1,4 @@
 import type { NextPage } from "next";
-import ProductUpdate from "../../components/products/editProductDetails";
-import InventoryForm from "../../components/products/forms/inventoryForm";
-import PicturesForm from "../../components/products/forms/picturesForm";
-import PricesForm from "../../components/products/forms/pricesForm";
-import ProductAttributes from "../../components/products/forms/productAttributes";
-import ShippingForm from "../../components/products/forms/shippingForm";
-import Test from "../../components/products/forms/test";
 import ProductList from "../../components/products/productList";
 import SearchWindow from "../../components/products/searchWindow";
 
