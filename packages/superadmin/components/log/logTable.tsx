@@ -2,6 +2,7 @@ import Table from "../global/table/table";
 import logData from "../../data/log.json";
 import { useState } from "react";
 import Pagination from "../global/pagination";
+import Link from "next/link";
 
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
@@ -11,38 +12,40 @@ const LogIndex = () => {
     {
       label: <input type="checkbox" defaultValue="all"></input>,
       path: "select",
-      content: (data: any, key: any) => (
+      content: (data: any, key: any, index: any) => (
         <td>
-          <input type="checkbox" defaultValue={key}></input>
+          <input id="checkAll" type="checkbox" defaultValue={index}></input>
         </td>
       ),
     },
     {
       label: "Log level",
       path: "logLevel",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
       label: "Short message",
       path: "shortMsg",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
       label: "Created On",
       path: "createdOn",
-      content: (data: any, key: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
       label: "view",
       path: "view",
-      content: (data: any, key: any) => (
+      content: (data: any, key: any, index: any) => (
         <td>
-          <button style={{ border: "none" }}>
-            <span>
-              <i className="bi bi-eye"></i>
-            </span>
-            View
-          </button>
+          <Link href={`/${data["id"]}`} passHref>
+            <button style={{ border: "none" }}>
+              <span>
+                <i className="bi bi-eye"></i>
+              </span>
+              View
+            </button>
+          </Link>
         </td>
       ),
     },
@@ -145,10 +148,15 @@ const LogIndex = () => {
               </span>
             </div>
 
-            <p>{` ${(activePage - 1) * pageCount + 1} - ${
-              (activePage - 1) * pageCount + pageCount
-            } of 41 items`}
-            <span className="ms-2"><button style={{border: "none"}}><i className="bi bi-arrow-clockwise align-items-center"></i></button></span>
+            <p>
+              {` ${(activePage - 1) * pageCount + 1} - ${
+                (activePage - 1) * pageCount + pageCount
+              } of 41 items`}
+              <span className="ms-2">
+                <button style={{ border: "none" }}>
+                  <i className="bi bi-arrow-clockwise align-items-center"></i>
+                </button>
+              </span>
             </p>
           </div>
         </div>

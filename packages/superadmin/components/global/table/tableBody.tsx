@@ -12,7 +12,7 @@ const TableBody = (props: any) => {
                 {columns.map((col: any, index: any) => {
                   return (
                     <React.Fragment key={index}>
-                      {col.content(row, col.path)}
+                      {col.content(row, col.path, index)}
                     </React.Fragment>
                   );
                 })}
