@@ -60,5 +60,25 @@
             "endDate": "",
             "successDate": ""
         }
+        {
+            "id": 7,
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "",
+            "endDate": "",
+            "successDate": ""
+        },
+        {
+            "id": 8,
+            "name": "Download tax rates (Tax.Avalara)",
+            "seconds": "604800",
+            "enabled": false,
+            "stopOnError": false,
+            "startDate": "",
+            "endDate": "",
+            "successDate": ""
+        }
     ]
 }

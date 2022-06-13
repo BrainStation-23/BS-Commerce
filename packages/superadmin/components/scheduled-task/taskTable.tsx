@@ -5,7 +5,7 @@ import Table from "./table";
 
 const TaskTable = () => {
   const [activePage, setActivePage] = useState(1);
-  const [pageCount, setPageCount] = useState(5);
+  const [pageCount, setPageCount] = useState(7);
 
   const paginateData = (data: any) => {
     const start = (activePage - 1) * pageCount;
@@ -23,7 +23,7 @@ const TaskTable = () => {
     <>
       <Table items={paginatedData} />
 
-      <div className="d-flex flex-wrap justify-content-between">
+      <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
         <Pagination
           totalItems={6}
           pageCount={pageCount}
