@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { SubscriptionLog } from "rxjs/internal/testing/SubscriptionLog";
 import { Category, RequestCategory } from "src/entity/category";
 import { ICategoryDatabase } from "src/modules/category/repositories/category.database.interface";
 import { CategoryModel } from "./category.model";
@@ -25,12 +24,12 @@ export class CategoryDatabase implements ICategoryDatabase {
                 slug: parentCategory.slug,
                 level: parentCategory.ancestors.length + 1,
             }];
-            const newCurrentRootPath = currentRootPath;
+            const newCurrentRootPath = parentCategory.rootPath;
             const newCurrentAncestors = [...parentCategory.ancestors];
             if (newCurrentAncestors.length && currentRootPath.length) {
                 Array.prototype.push.apply(newCurrentAncestors, currentAncestors);
                 newCategory.ancestors = newCurrentAncestors;
-                newCategory.rootPath = parentCategory.rootPath + '/' + newCurrentRootPath;
+                newCategory.rootPath = newCurrentRootPath + '/' + currentRootPath;
             } else {
                 newCategory.ancestors = currentAncestors;
                 newCategory.rootPath = currentRootPath;
