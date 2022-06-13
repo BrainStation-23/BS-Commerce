@@ -5,7 +5,11 @@
   height: 80px;
   box-sizing: border-box;
   margin-left: 250px;
+  padding-top: 10px;
   transition: 0.3s ease-in;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .container_inactive {
@@ -15,7 +19,11 @@
   height: 80px;
   box-sizing: border-box;
   margin-left: 80px;
+  padding-top: 10px;
   transition: 0.3s ease-in;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .toggle_menu_btn {
@@ -26,5 +34,19 @@
   /* top: 50%; */
   /* right: -70px; */
   /* transform: translateY(-50%); */
+  display: flex;
   cursor: pointer;
+}
+
+.nav_content {
+  display: flex;
+  flex-direction: row;
+  margin-right: 100px;
+}
+
+.nav_username {
+  color: white;
+}
+.nav_settings {
+  color: white;
 }
