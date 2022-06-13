@@ -158,7 +158,9 @@ const TaskTable = () => {
 
         <p>{` ${(activePage - 1) * pageCount + 1} - ${
           (activePage - 1) * pageCount + pageCount
-        } of 6 items`}</p>
+        } of 6 items`}
+        <span className="ms-2"><button style={{border: "none"}}><i className="bi bi-arrow-clockwise align-items-center"></i></button></span>
+        </p>
       </div>
     </>
   );
