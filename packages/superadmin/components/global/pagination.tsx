@@ -17,7 +17,7 @@ const Pagination = (props: any) => {
             }
             className="page-item"
             >
-            <a className="page-link">Previous</a>
+            <a className="page-link"><span aria-hidden="true">&laquo;</span></a>
             </li>
             {pages.map((page) => {
             return (
@@ -40,7 +40,7 @@ const Pagination = (props: any) => {
             }
             className="page-item"
             >
-            <a className="page-link">Next</a>
+            <a className="page-link"><span aria-hidden="true">&raquo;</span></a>
             </li>
         </ul>
         </nav>
