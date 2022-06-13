@@ -57,7 +57,9 @@ const TaskTable = () => {
       path: "edit",
       content: (data: any, key: any) => (
         <td>
-          <button style={{ border: "none" }}>
+          <button onClick={() => {
+              
+          }} style={{ border: "none" }}>
             <span>
               <i className="bi bi-pencil"></i>
             </span>
