@@ -42,7 +42,7 @@ const Products: NextPage = () => {
 
         <h2>Products</h2>
         <div className="float-end">
-          <a className="btn btn-primary" href="/Admin/Product/Create">
+          <a className="btn btn-primary" href="/Product/Create">
             {/* <i className="fas fa-plus-square"></i> */}
             Add new
           </a>
@@ -175,14 +175,14 @@ const Products: NextPage = () => {
           </div>
         </div>
             <SearchWindow />
-            <Test />
+            {/* <Test /> */}
             <ProductList />
-            <ProductUpdate />
-            <PricesForm />
-            <ShippingForm />
-            <InventoryForm />
-            <PicturesForm />
-            <ProductAttributes />
+            {/* <ProductUpdate /> */}
+            {/* <PricesForm /> */}
+            {/* <ShippingForm /> */}
+            {/* <InventoryForm /> */}
+            {/* <PicturesForm />
+            <ProductAttributes /> */}
       </main>
     </>
   );
