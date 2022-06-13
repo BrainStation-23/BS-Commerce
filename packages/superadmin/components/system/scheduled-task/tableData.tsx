@@ -9,41 +9,43 @@ const TableData = (props: any) => {
       <tr>
         <td>{data.name}</td>
         <td>
-          {
-            !showUpdate && <p>{data.seconds}</p>
-          }
-          {
-            showUpdate && <input type="text" defaultValue={data.seconds}></input>
-          }
+          {!showUpdate && <p>{data.seconds}</p>}
+          {showUpdate && (
+            <input type="text" defaultValue={data.seconds}></input>
+          )}
         </td>
         <td className="text-center">
           {data.enabled ? (
             <>
-              <>
-              {
-                !showUpdate && <i className="bi bi-check-lg"></i>
-              }
-              {
-                showUpdate && <input type="checkbox" defaultValue="false"></input>
-              }
-            </>
+              {!showUpdate && <i className="bi bi-check-lg"></i>}
+              {showUpdate && (
+                <input type="checkbox" defaultValue="false"></input>
+              )}
             </>
           ) : (
-            ""
+            <>
+              {!showUpdate && ""}
+              {showUpdate && (
+                <input type="checkbox" defaultValue="false"></input>
+              )}
+            </>
           )}
         </td>
         <td className="text-center">
           {data.stopOnError ? (
             <>
-              {
-                !showUpdate && <i className="bi bi-x"></i>
-              }
-              {
-                showUpdate && <input type="checkbox" defaultValue="false"></input>
-              }
+              {!showUpdate && <i className="bi bi-x"></i>}
+              {showUpdate && (
+                <input type="checkbox" defaultValue="false"></input>
+              )}
             </>
           ) : (
-            ""
+            <>
+              {!showUpdate && ""}
+              {showUpdate && (
+                <input type="checkbox" defaultValue="false"></input>
+              )}
+            </>
           )}
         </td>
         <td>{data.startDate}</td>
