@@ -5,7 +5,7 @@ import Pagination from "../global/pagination";
 
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
-  const [pageCount, setPageCount] = useState(5);
+  const [pageCount, setPageCount] = useState(7);
 
   const columns = [
     {
