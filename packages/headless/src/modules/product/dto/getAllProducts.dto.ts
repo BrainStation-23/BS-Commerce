@@ -26,9 +26,7 @@ export class GetAllProductsErrorResponseDto implements GetAllProductsErrorRespon
     @IsNumber()
     code: number;
 
-    @ApiProperty({
-        example: GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS,
-    })
+    @ApiProperty({ example: GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, })
     @IsString()
     error: GetAllProductsErrorMessages;
 

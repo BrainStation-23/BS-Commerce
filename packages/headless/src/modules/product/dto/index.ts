@@ -7,3 +7,4 @@ export * from './getProductBySKU.dto';
 export * from './deleteProduct.dto';
 export * from './updateProduct.dto';
 export * from './getProductsByCondition.dto';
+export * from './updateProductsForBrand.dto';

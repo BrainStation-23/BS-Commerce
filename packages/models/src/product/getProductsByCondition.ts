@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 /**
- * API Path: /product
+ * API Path: /product/condition
  * method: GET
  * query: GetProductsByConditionQuery
  * response: GetProductsByConditionResponse

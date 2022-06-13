@@ -56,9 +56,7 @@ export class GetProductsByConditionErrorResponseDto implements GetProductsByCond
     @IsNumber()
     code: number;
 
-    @ApiProperty({
-        example: GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS,
-    })
+    @ApiProperty({ example: GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, })
     @IsString()
     error: GetProductsByConditionErrorMessages;
 

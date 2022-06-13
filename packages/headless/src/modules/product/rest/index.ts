@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { SearchCondition } from 'src/entity/product';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
 import {
@@ -28,6 +27,9 @@ import {
   UpdateProductDto,
   UpdateProductErrorResponseDto,
   UpdateProductParamsDto,
+  UpdateProductsForBrandErrorResponseDto,
+  updateProductsForBrandRequestDto,
+  UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
 } from '../dto';
 
@@ -111,13 +113,6 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @Get('brand/:brandId')
-  async getProductsByBrand(@Param('brandId') brandId: string, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.getProductsByBrand(brandId);
-    res.status(code);
-    return { code, ...response };
-  }
-
   @Get(':productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
@@ -172,11 +167,18 @@ export class ProductController {
   }
 
   @Patch('brand')
-  async updateProductsForBrand(
-    @Body('productIds') productIds: string[],
-    @Body('brandId') brandId: string,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  @ApiResponse({
+    description: 'Update Products For Brand Success Response',
+    type: UpdateProductsForBrandSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Update Products For Brand Error Response',
+    type: UpdateProductsForBrandErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async updateProductsForBrand(@Body() data: updateProductsForBrandRequestDto, @Res({ passthrough: true }) res: Response,) {
+    const { productIds, brandId } = data;
     const { code, ...response } = await this.productService.updateProductsForBrand(productIds, brandId);
     res.status(code);
     return { code, ...response };

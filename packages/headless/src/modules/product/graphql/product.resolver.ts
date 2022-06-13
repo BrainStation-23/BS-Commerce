@@ -35,11 +35,6 @@ export class ProductResolver {
     return await this.productService.getProductsByCondition(condition);
   }
 
-  @Query()
-  async getProductsByBrand(@Args('brandId') brandId: string) {
-    return await this.productService.getProductsByBrand(brandId);
-  }
-
   @Mutation()
   async createProduct(@Args('product') product: CreateProductDto) {
     return await this.productService.createProduct(product);

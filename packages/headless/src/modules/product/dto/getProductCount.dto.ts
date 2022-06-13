@@ -12,9 +12,7 @@ export class GetProductCountErrorResponseDto implements GetProductCountErrorResp
     @IsNumber()
     code: number;
 
-    @ApiProperty({
-        example: GetProductCountErrorMessages.CAN_NOT_GET_PRODUCT_COUNT,
-    })
+    @ApiProperty({ example: GetProductCountErrorMessages.CAN_NOT_GET_PRODUCT_COUNT, })
     @IsString()
     error: GetProductCountErrorMessages;
 

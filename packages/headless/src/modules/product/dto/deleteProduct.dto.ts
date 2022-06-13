@@ -20,9 +20,7 @@ export class DeleteProductErrorResponseDto implements DeleteProductErrorResponse
     @IsNumber()
     code: number;
 
-    @ApiProperty({
-        example: DeleteProductErrorMessages.CAN_NOT_DELETE_PRODUCT,
-    })
+    @ApiProperty({ example: DeleteProductErrorMessages.CAN_NOT_DELETE_PRODUCT, })
     @IsString()
     error: DeleteProductErrorMessages;
 
@@ -35,7 +33,7 @@ export class DeleteProductErrorResponseDto implements DeleteProductErrorResponse
 class Message {
     @ApiProperty({ example: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL })
     @IsString()
-    message: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL
+    message: DeleteProductSuccessMessage.PRODUCT_DELETED_SUCCESSFUL;
 }
 
 export class DeleteProductSuccessResponseDto implements DeleteProductSuccessResponse {

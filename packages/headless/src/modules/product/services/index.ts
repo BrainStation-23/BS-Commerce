@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { ServiceErrorResponse, ServiceSuccessResponse, } from 'src/helper/serviceResponse/service.response.interface';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import { SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
 import { CreateProductDto } from '../dto/createProduct.dto';
 import {
@@ -22,6 +21,8 @@ import {
   DeleteProductErrorMessages,
   GetProductsByConditionErrorMessages,
   GetProductsByConditionResponse,
+  UpdateProductsForBrandResponse,
+  UpdateProductsForBrandErrorMessages,
 
 } from 'models';
 @Injectable()
@@ -110,14 +111,14 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(updatedProduct, HttpStatus.OK);
   }
 
-  async updateProductsForBrand(productIds: string[], brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async updateProductsForBrand(productIds: string[], brandId: string): Promise<UpdateProductsForBrandResponse> {
     const products = await this.productRepo.updateProductsForBrand(productIds, brandId);
-    if (products.length <= 0) return this.helper.serviceResponse.errorResponse('Can\'t Get Products.', null, HttpStatus.BAD_REQUEST);
+    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(UpdateProductsForBrandErrorMessages.CAN_NOT_UPDATE_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products);
   }
 
   async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
-    const { skip, limit , slug} = condition;
+    const { skip, limit, slug } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
     if (slug) {
       //dependent on category module
@@ -125,12 +126,6 @@ export class ProductService {
     const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ products, count });
-  }
-
-  async getProductsByBrand(brandId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const products = await this.productRepo.findProductsByCondition({ brands: brandId });
-    if (products.length <= 0) return this.helper.serviceResponse.errorResponse('Can\'t get Products.', null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(products);
   }
 
   generateSearchQuery(condition: SearchCondition): object {

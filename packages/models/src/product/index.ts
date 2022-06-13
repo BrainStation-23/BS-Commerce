@@ -7,3 +7,4 @@ export * from './getProductBySKU';
 export * from './deleteProduct';
 export * from './updateProduct';
 export * from './getProductsByCondition';
+export * from './updateProductsForBrand';

@@ -20,9 +20,7 @@ export class GetProductErrorResponseDto implements GetProductErrorResponse {
     @IsNumber()
     code: number;
 
-    @ApiProperty({
-        example: GetProductErrorMessages.CAN_NOT_GET_PRODUCT,
-    })
+    @ApiProperty({ example: GetProductErrorMessages.CAN_NOT_GET_PRODUCT, })
     @IsString()
     error: GetProductErrorMessages;
 
