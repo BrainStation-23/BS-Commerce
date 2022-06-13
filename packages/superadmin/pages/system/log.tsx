@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import LogPage from "../components/log";
+import LogPage from "../../components/system/log";
 
 
 const Log: NextPage = () => {

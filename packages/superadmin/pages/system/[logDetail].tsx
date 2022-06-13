@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import LogDetail from "../components/log/logDetail";
+import LogDetail from "../../components/system/log/logDetail";
 
 const LogDetailPage: NextPage = () => {
     const router = useRouter()

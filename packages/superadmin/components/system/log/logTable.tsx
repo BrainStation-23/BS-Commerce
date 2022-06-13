@@ -1,7 +1,7 @@
-import Table from "../global/table/table";
-import logData from "../../data/log.json";
+import Table from "../../global/table/table";
+import logData from "../../../data/log.json";
 import { useState } from "react";
-import Pagination from "../global/pagination";
+import Pagination from "../../global/pagination";
 import Link from "next/link";
 
 const LogIndex = () => {
@@ -38,7 +38,7 @@ const LogIndex = () => {
       path: "view",
       content: (data: any, key: any, index: any) => (
         <td>
-          <Link href={`/${data["id"]}`} passHref>
+          <Link href={`/system/${data["id"]}`} passHref>
             <button style={{ border: "none" }}>
               <span>
                 <i className="bi bi-eye"></i>
