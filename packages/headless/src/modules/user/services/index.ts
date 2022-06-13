@@ -6,12 +6,12 @@ import {
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
 import { UserRepository } from '../repositories';
-import { authConfig } from 'src/config/auth';
+import { authConfig } from 'config/auth';
 import { ChangePasswordDto, UpdatedUser } from '../dto/user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepo: UserRepository, private helper: Helper) {}
+  constructor(private userRepo: UserRepository, private helper: Helper) { }
 
   async getUser(
     userId: string,

@@ -6,7 +6,7 @@ import {
   ServiceErrorResponse,
   ServiceSuccessResponse,
 } from 'src/helper/serviceResponse/service.response.interface';
-import { authConfig } from 'src/config/auth';
+import { authConfig } from 'config/auth';
 import { JwtPayload } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
@@ -20,7 +20,7 @@ export class AuthService {
     private userRepo: UserRepository,
     private helper: Helper,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async signUp(
     user: CreateUserDto,

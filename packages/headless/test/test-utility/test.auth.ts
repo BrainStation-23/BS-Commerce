@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { authConfig } from 'src/config/auth';
+import { authConfig } from 'config/auth';
 
 export interface JwtPayload {
   id: string;

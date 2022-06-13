@@ -9,7 +9,7 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
-import { regexConfig } from 'src/config/regex';
+import { regexConfig } from 'config/regex';
 import { Address, ChangePassword } from 'src/entity/user';
 
 export class UpdatedUser {

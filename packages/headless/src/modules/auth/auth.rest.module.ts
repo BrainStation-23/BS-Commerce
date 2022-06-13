@@ -5,7 +5,7 @@ import { UserRepository } from 'src/modules/user/repositories';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
-import { authConfig } from 'src/config/auth';
+import { authConfig } from 'config/auth';
 import { JwtStrategy } from './guards/jwt-strategy';
 
 @Module({
@@ -28,4 +28,4 @@ import { JwtStrategy } from './guards/jwt-strategy';
     JwtStrategy,
   ],
 })
-export class AuthModule {}
+export class AuthModule { }

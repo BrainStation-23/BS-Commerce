@@ -1,4 +1,4 @@
-import { dbConfig } from 'src/config/database';
+import { dbConfig } from 'config/database';
 import { Sequelize } from 'sequelize-typescript';
 
 export const connect = async () => {

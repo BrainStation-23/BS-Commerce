@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import * as dotenv from 'dotenv';
-import { coreConfig } from 'src/config/core';
-import { dbConfig } from 'src/config/database';
+import { coreConfig } from 'config/core';
+import { dbConfig } from 'config/database';
 import { AppModule } from './app.module';
 import { connectToDatabase } from './database/database.init';
 import { ValidationPipe } from './decorators/service.validator';

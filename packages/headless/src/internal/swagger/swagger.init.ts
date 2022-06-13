@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { swaggerConfig } from 'src/config/swagger';
+import { swaggerConfig } from 'config/swagger';
 
 type SecuritySchemeType = 'apiKey' | 'http' | 'oauth2' | 'openIdConnect';
 

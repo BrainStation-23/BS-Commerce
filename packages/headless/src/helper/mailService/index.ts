@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IMailService, MailOptions, Options } from './mail.service.interface';
 import nodemailer, { Transporter } from 'nodemailer';
-import { nodemailerConfig } from 'src/config/mail';
+import { nodemailerConfig } from 'config/mail';
 
 @Injectable()
 export class MailService implements IMailService {

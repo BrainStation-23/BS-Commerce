@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { coreConfig } from 'src/config/core';
+import { coreConfig } from 'config/core';
 /**
  * @return only the user from jwt payload
  */

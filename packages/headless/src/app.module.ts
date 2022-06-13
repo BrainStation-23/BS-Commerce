@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { HelperModule } from './helper/helper.module';
 import { ResolveGraphqlModule } from './internal/graphql/graphql.module.resolver';
 import { ResolveRestModule } from './internal/rest/rest.module.resolver';
-import { coreConfig } from 'src/config/core';
+import { coreConfig } from 'config/core';
 @Module({
   imports: [
     HelperModule,
@@ -11,4 +11,4 @@ import { coreConfig } from 'src/config/core';
       : ResolveRestModule()),
   ],
 })
-export class AppModule {}
+export class AppModule { }

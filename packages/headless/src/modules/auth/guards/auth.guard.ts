@@ -8,7 +8,7 @@ import {
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { coreConfig } from 'src/config/core';
+import { coreConfig } from 'config/core';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

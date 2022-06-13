@@ -1,6 +1,6 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-import { coreConfig } from 'src/config/core';
+import { coreConfig } from 'config/core';
 
 export const GraphqlInitModule = () => {
   return [

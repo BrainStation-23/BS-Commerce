@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { dbConfig } from 'src/config/database';
+import { dbConfig } from 'config/database';
 import { connectToDatabase } from 'src/database/database.init';
 import { AddToCompareDto } from 'src/modules/compare/dto/compare.dto';
 import * as request from 'supertest';

@@ -1,5 +1,5 @@
 import * as Mongoose from 'mongoose';
-import { dbConfig } from 'src/config/database';
+import { dbConfig } from 'config/database';
 import { EnvType } from '../database.init';
 
 const resolveMongoURI = (env: EnvType): string => {
