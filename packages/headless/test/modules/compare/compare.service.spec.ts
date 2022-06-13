@@ -16,7 +16,7 @@ const userId = testUserId;
 const productId = testProductId;
 const compareDto: AddToCompareDto = { productId };
 
-describe('Initializing... (e2e)', () => {
+describe('Initializing... compare service testing', () => {
   let app: INestApplication;
   let service: CompareService;
   beforeAll(async () => {
@@ -40,7 +40,15 @@ describe('Initializing... (e2e)', () => {
   describe('testing POST /compare', () => {
     it('should return compare object', async () => {
       const response = await service.addItemToCompare(userId, productId);
-      console.log({ response });
+      // console.log({ response });
+      expect(response.code).toBe(200);
+    });
+  });
+
+  describe('GET /compare', () => {
+    it('should return compare object', async () => {
+      const response = await service.getCompareByUserId(userId);
+      expect(response.code).toBe(200);
     });
   });
 });

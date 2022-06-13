@@ -30,7 +30,6 @@ export class CompareService {
     /**
      * if not exist create new else add product id into items
      */
-    console.log({ isExist });
     if (!isExist) {
       saveData = await this.compareRepository.createCompare(userId, productId);
     } else {
