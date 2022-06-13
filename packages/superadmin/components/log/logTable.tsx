@@ -147,7 +147,9 @@ const LogIndex = () => {
 
             <p>{` ${(activePage - 1) * pageCount + 1} - ${
               (activePage - 1) * pageCount + pageCount
-            } of 41 items`}</p>
+            } of 41 items`}
+            <span className="ms-2"><button style={{border: "none"}}><i className="bi bi-arrow-clockwise align-items-center"></i></button></span>
+            </p>
           </div>
         </div>
       </div>
