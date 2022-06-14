@@ -28,7 +28,7 @@ export interface CreateBrandSuccessResponse extends SuccessResponse {
 }
 
 export interface CreateBrandErrorResponse extends ErrorResponse{
-    error: ErrorMessage.CANNOT_CREATE_BRAND | ErrorMessage.BRAND_ALREADY_EXISTS | ErrorMessage.NAME_REQUIRED | ErrorMessage.NAME_BE_VALID;
+    error: ErrorMessage;
 }
 
 export const enum ErrorMessage{

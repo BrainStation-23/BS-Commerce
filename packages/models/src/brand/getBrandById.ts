@@ -9,7 +9,7 @@ export interface GetBrandByIdSuccessResponse extends SuccessResponse {
 }
 
 export interface GetBrandByIdErrorResponse extends ErrorResponse{
-    error: ErrorMessageGetBrandById.INVALID_BRAND_ID | ErrorMessageGetBrandById.CANNOT_FIND_BRAND;
+    error: ErrorMessageGetBrandById;
 }
 
 export const enum ErrorMessageGetBrandById{
