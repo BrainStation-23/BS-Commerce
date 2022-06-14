@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
 import logData from "../../../data/log.json";
 import LogHeading from "./heading-card";
 import LogDetailCard from "./logDetailCard";

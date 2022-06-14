@@ -1,8 +1,9 @@
+import { useState } from "react";
+import Link from "next/link";
+
 import Table from "../../global/table/table";
 import logData from "../../../data/log.json";
-import { useState } from "react";
 import Pagination from "../../global/pagination";
-import Link from "next/link";
 
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
@@ -11,18 +12,19 @@ const LogIndex = () => {
 
   const columns = [
     {
-      label: <input type="checkbox" onClick={() => {
-        setCheckAll(!checkAll);
-      }}></input>,
+      label: (
+        <input
+          type="checkbox"
+          onClick={() => {
+            setCheckAll(!checkAll);
+          }}
+        ></input>
+      ),
       path: "select",
       content: (data: any, key: any, index: any) => (
         <td>
-          {
-            checkAll && <input type="checkbox" value="" checked></input>
-          }
-          {
-            !checkAll && <input type="checkbox" value=""></input>
-          }
+          {checkAll && <input type="checkbox" value="" checked></input>}
+          {!checkAll && <input type="checkbox" value=""></input>}
         </td>
       ),
     },
