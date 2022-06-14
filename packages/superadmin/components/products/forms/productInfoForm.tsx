@@ -1,5 +1,6 @@
 import { Field, ErrorMessage } from "formik";
 import { useState } from "react";
+import Tooltips from "../../global/tooltip";
 
 const ProductInfoForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -20,11 +21,8 @@ const ProductInfoForm = () => {
         <div className="card-header with-border clearfix">
           <div className="card-title float-start">
             <i className="bi bi-info-lg float-start" />
-            
-            <p className="float-start px-1">
-            Product info
 
-            </p>
+            <p className="float-start px-1">Product info</p>
           </div>
           <div className="card-tools float-end">
             <div>
@@ -54,12 +52,7 @@ const ProductInfoForm = () => {
                       <label className="col-form-label col px-1" htmlFor="Name">
                         Product name
                       </label>
-                      <div
-                        data-toggle="tooltip"
-                        className="bi bi-question-circle-fill p-0 mt-2"
-                        data-placement="bottom"
-                        title="The name of the product."
-                      />
+                      <Tooltips title="The name of the product." />
                     </div>
                   </div>
                   <div className="col-md-9">
@@ -89,13 +82,7 @@ const ProductInfoForm = () => {
                       >
                         Short description
                       </label>
-
-                      <div
-                        data-toggle="tooltip"
-                        className="bi bi-question-circle-fill p-0 mt-2"
-                        data-placement="bottom"
-                        title="Short description is the text that is displayed in product list i.e. category / manufacturer pages."
-                      ></div>
+                      <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                     </div>
                   </div>
                   <div className="col-md-9">
@@ -106,7 +93,6 @@ const ProductInfoForm = () => {
                         id="ShortDescription"
                         name="ShortDescription"
                         placeholder={"Build it"}
-                        
                       />
                       <div className="pt-2" style={{ height: "10px" }}>
                         <h2 className="required text-danger ">*</h2>
@@ -124,13 +110,7 @@ const ProductInfoForm = () => {
                     <label className="col-form-label col px-1" htmlFor="Sku">
                       SKU
                     </label>
-                    <div
-                      // title
-                      data-toggle="tooltip"
-                      className="bi bi-question-circle-fill p-0 mt-2"
-                      data-placement="bottom"
-                      title="Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product."
-                    ></div>
+                    <Tooltips title="Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -164,12 +144,7 @@ const ProductInfoForm = () => {
                   >
                     Categories
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Choose categories. You can manage product categories by selecting Catalog > Categories."
-                  ></div>
+                  <Tooltips title="Choose categories. You can manage product categories by selecting Catalog > Categories." />
                 </div>
               </div>
               <div className="col-md-9">

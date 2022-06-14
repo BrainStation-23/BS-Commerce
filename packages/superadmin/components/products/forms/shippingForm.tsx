@@ -1,5 +1,6 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
+import Tooltips from "../../global/tooltip";
 
 const ShippingForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -11,16 +12,6 @@ const ShippingForm = () => {
   };
 
   const isCheckboxChecked = () =>{
-    // const checkbox =  document.getElementById(
-    //   'IsShipEnabled',
-    // ) as HTMLInputElement | null;
-    
-    // // 👇️ optional chaining
-    // if (checkbox?.checked) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
     setCheckboxToggler(!checkboxToggler);
     console.log(checkboxToggler);
     
@@ -68,13 +59,8 @@ const ShippingForm = () => {
                     <label className="col-form-label col px-1" htmlFor="IsShipEnabled">
                     Shipping Enabled
                     </label>
-                    <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Check if the product can be shipped. You can manage shipping settings by selecting Configuration > Shipping."
-                  >
-                    </div>
+                    <Tooltips title="Check if the product can be shipped. You can manage shipping settings by selecting Configuration > Shipping." />
+                    
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -104,13 +90,7 @@ const ShippingForm = () => {
                   <label className="col-form-label col px-1" htmlFor="Weight">
                   Weight
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="The Product Weight"
-                  >
-                  </div>
+                  <Tooltips title="The Product Weight" /> 
                 </div>
               </div>
               <div className="col-md-9">
@@ -135,13 +115,7 @@ const ShippingForm = () => {
                   <label className="col-form-label col px-1" htmlFor="Length">
                   Length
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="The Product Length"
-                  >
-                  </div>
+                  <Tooltips title="The Product Height" /> 
                 </div>
               </div>
               <div className="col-md-9">
@@ -167,13 +141,8 @@ const ShippingForm = () => {
                   <label className="col-form-label col px-1" htmlFor="Width">
                   Width
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="The Product Width"
-                  >
-                  </div>
+                  <Tooltips title="The Product Width" />
+                   
                 </div>
               </div>
               <div className="col-md-9">
@@ -198,13 +167,8 @@ const ShippingForm = () => {
                   <label className="col-form-label col px-1" htmlFor="Height">
                   Height
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="The Product Height"
-                  >
-                  </div>
+                  <Tooltips title="The Product Height" />
+                  
                 </div>
               </div>
               <div className="col-md-9">

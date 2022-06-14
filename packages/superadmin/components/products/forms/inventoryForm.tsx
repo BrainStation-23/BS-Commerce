@@ -1,5 +1,6 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
+import Tooltips from "../../global/tooltip";
 
 const InventoryForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -20,9 +21,7 @@ const InventoryForm = () => {
         <div className="card-header with-border clearfix">
           <div className="card-title float-start">
             <i className="bi bi-diagram-3-fill float-start" />
-             <p className="float-start px-1">
-             Inventory
-            </p>
+            <p className="float-start px-1">Inventory</p>
           </div>
           <div className="card-tools float-end">
             <div>
@@ -53,13 +52,7 @@ const InventoryForm = () => {
                   >
                     Inventory method
                   </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Select inventory method. There are three methods: Don’t track inventory, Track inventory and Track inventory by attributes. You should use Track inventory by attributes when the product has different combinations of these attributes and then manage inventory for these combinations."
-                  >
-                  </div>
+                  <Tooltips title="Select inventory method. There are three methods: Don’t track inventory, Track inventory and Track inventory by attributes. You should use Track inventory by attributes when the product has different combinations of these attributes and then manage inventory for these combinations." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -84,16 +77,13 @@ const InventoryForm = () => {
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
                 <div className="label-wrapper text-end row">
-                  <label className="col-form-label col px-1" htmlFor="OrderMinimumQuantity">
-                  Minimum cart qty
-                  </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Set the minimum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product."
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="OrderMinimumQuantity"
                   >
-                  </div>
+                    Minimum cart qty
+                  </label>
+                  <Tooltips title="Set the minimum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -114,20 +104,16 @@ const InventoryForm = () => {
               </div>
             </div>
 
-
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
                 <div className="label-wrapper text-end row">
-                  <label className="col-form-label col px-1" htmlFor="OrderMaximumQuantity">
-                  Maximum cart qty
-                  </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Set the maximum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product."
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="OrderMaximumQuantity"
                   >
-                  </div>
+                    Maximum cart qty
+                  </label>
+                  <Tooltips title="Set the maximum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -151,16 +137,13 @@ const InventoryForm = () => {
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
                 <div className="label-wrapper text-end row">
-                  <label className="col-form-label col px-1" htmlFor="AllowedQuantities">
-                  Allowed quantities
-                  </label>
-                  <div
-                    data-toggle="tooltip"
-                    className="bi bi-question-circle-fill p-0 mt-2"
-                    data-placement="bottom"
-                    title="Enter a comma separated list of quantities you want this product to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here."
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="AllowedQuantities"
                   >
-                  </div>
+                    Allowed quantities
+                  </label>
+                  <Tooltips title="Enter a comma separated list of quantities you want this product to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -181,34 +164,30 @@ const InventoryForm = () => {
               </div>
             </div>
 
-
             <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper text-end row">
-                    <label className="col-form-label col px-1" htmlFor="NotReturnable">
+              <div className="col-md-3">
+                <div className="label-wrapper text-end row">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="NotReturnable"
+                  >
                     Not returnable
-                    </label>
-                    <div
-                      data-toggle="tooltip"
-                      className="ico-help"
-                      title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)."
-                    >
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <Field
-                    className="check-box"
-                    id="NotReturnable"
-                    name="NotReturnable"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="NotReturnable" />
-                </div>
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
-
+              <div className="col-md-9">
+                <Field
+                  className="check-box mt-2 "
+                  id="NotReturnable"
+                  name="NotReturnable"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="NotReturnable" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

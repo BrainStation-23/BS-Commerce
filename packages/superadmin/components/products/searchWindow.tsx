@@ -1,4 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import Tooltips from "../global/tooltip";
 import { searchProductSchema } from "./schema/productFormSchema";
 
 const SearchWindow = () => {
@@ -40,12 +41,15 @@ const SearchWindow = () => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
               <div className="card-body m-auto py-5">
-                <div
-                  className="row search-row opened"
-                >
-                    
-                  <div className="search-text"><i className="bi bi-search float-start mx-2" aria-hidden="true"/> <p className="float mx-2">Search</p> </div>
-                  
+                <div className="row search-row opened">
+                  <div className="search-text">
+                    <i
+                      className="bi bi-search float-start mx-2"
+                      aria-hidden="true"
+                    />{" "}
+                    <p className="float mx-2">Search</p>{" "}
+                  </div>
+
                   <div className="icon-collapse">
                     <i className="far fa-angle-up" aria-hidden="true"></i>
                   </div>
@@ -62,12 +66,7 @@ const SearchWindow = () => {
                             >
                               Product name
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="A product name."
-                            ></div>
+                            <Tooltips title="A product name." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -91,12 +90,7 @@ const SearchWindow = () => {
                             >
                               Category
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Search by a specific category."
-                            ></div>
+                            <Tooltips title="Search by a specific category." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -153,12 +147,7 @@ const SearchWindow = () => {
                             >
                               Search subcategories
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Check to search in subcategories."
-                            ></div>
+                            <Tooltips title="Check to search in subcategories." />
                           </div>
                         </div>
                         <div className="col-md-8 my-2">
@@ -182,12 +171,7 @@ const SearchWindow = () => {
                             >
                               Manufacturer
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Search by a specific manufacturer."
-                            ></div>
+                            <Tooltips title="Search by a specific manufacturer." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -216,12 +200,7 @@ const SearchWindow = () => {
                             >
                               Vendor
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Search by a specific vendor."
-                            ></div>
+                            <Tooltips title="Search by a specific vendor." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -248,12 +227,7 @@ const SearchWindow = () => {
                             >
                               Warehouse
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Search by a specific warehouse."
-                            ></div>
+                            <Tooltips title="Search by a specific warehouse." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -281,12 +255,7 @@ const SearchWindow = () => {
                             >
                               Product type
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Search by a product type."
-                            ></div>
+                            <Tooltips title="Search by a product type." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -316,12 +285,7 @@ const SearchWindow = () => {
                             >
                               Published
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title='Search by a "Published" property.'
-                            ></div>
+                            <Tooltips title='Search by a "Published" property.' />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -349,12 +313,7 @@ const SearchWindow = () => {
                             >
                               Go directly to product SKU
                             </label>
-                            <div
-                              data-toggle="tooltip"
-                              className="bi bi-question-circle-fill p-0 mt-2"
-                              data-placement="bottom"
-                              title="Enter product SKU and click Go."
-                            ></div>
+                            <Tooltips title="Enter product SKU and click Go." />
                           </div>
                         </div>
                         <div className="col-md-8">
@@ -389,7 +348,7 @@ const SearchWindow = () => {
                         type="submit"
                         id="search-products"
                         className="btn btn-primary px-4 p my-1"
-                        style={{borderRadius:"10px"}}
+                        style={{ borderRadius: "10px" }}
                       >
                         <i className="bi bi-search float-start "></i>
                         <p className="float-end px-2 m-0 ">Search</p>
