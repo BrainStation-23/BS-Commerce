@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ChevronDown from "./icons/chevron-down";
-import ChevronUp from "./icons/chevron-up";
-import LogSearchForm from "./log-search-form";
+import ChevronDown from "../../global/icons/chevron-down";
+import ChevronUp from "../../global/icons/chevron-up";
+import SearchForm from "./sales-summary-search-form";
 
-const LogSearch = () => {
+const SalesSummarySearch = () => {
   const [dropdown, setDropdown] = useState(true);
 
   return (
@@ -45,15 +45,15 @@ const LogSearch = () => {
               )}
             </div>
           </div>
-          {
-              dropdown && <>
-                <LogSearchForm />
-              </>
-          }
+          {dropdown && (
+            <>
+              <SearchForm />
+            </>
+          )}
         </div>
       </div>
     </>
   );
 };
 
-export default LogSearch;
+export default SalesSummarySearch;

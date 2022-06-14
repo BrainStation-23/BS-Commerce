@@ -6,8 +6,6 @@ const Pagination = (props: any) => {
   const totalPages = Math.ceil(totalItems / pageCount);
   const pages = _.range(1, totalPages + 1, 1);
 
-  if (totalItems <= pageCount) return null;
-
   return (
     <>
         <nav aria-label="Page navigation example">

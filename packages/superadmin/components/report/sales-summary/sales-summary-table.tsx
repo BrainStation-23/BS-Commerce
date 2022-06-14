@@ -1,63 +1,43 @@
 import { useState } from "react";
-import Link from "next/link";
 
 import Table from "../../global/table/table";
-import logData from "../../../data/log.json";
+import salesSummaryData from "../../../data/sales-summary.json";
 import Pagination from "../../global/pagination";
 
-const LogIndex = () => {
+const SalesTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
-  const [checkAll, setCheckAll] = useState(false);
 
   const columns = [
     {
-      label: (
-        <input
-          type="checkbox"
-          onClick={() => {
-            setCheckAll(!checkAll);
-          }}
-        ></input>
-      ),
-      path: "select",
-      content: (data: any, key: any, index: any) => (
-        <td>
-          {checkAll && <input type="checkbox" value="" checked></input>}
-          {!checkAll && <input type="checkbox" value=""></input>}
-        </td>
-      ),
-    },
-    {
-      label: "Log level",
-      path: "logLevel",
+      label: "Summary",
+      path: "summary",
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Short message",
-      path: "shortMsg",
+      label: "Number Of Orders",
+      path: "noOfOrders",
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Created On",
-      path: "createdOn",
+      label: "Profit",
+      path: "profit",
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "view",
-      path: "view",
-      content: (data: any, key: any, index: any) => (
-        <td>
-          <Link href={`/system/${data["id"]}`} passHref>
-            <button style={{ border: "none" }}>
-              <span>
-                <i className="bi bi-eye"></i>
-              </span>
-              View
-            </button>
-          </Link>
-        </td>
-      ),
+      label: "Shipping",
+      path: "shipping",
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
+    },
+    {
+      label: "Tax",
+      path: "tax",
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
+    },
+    {
+      label: "Order Total",
+      path: "orderTotal",
+      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
   ];
 
@@ -71,7 +51,7 @@ const LogIndex = () => {
     setActivePage(activePage);
   };
 
-  const paginatedData = paginateData(logData["logData"]);
+  const paginatedData = paginateData(salesSummaryData["salesSummary"]);
 
   return (
     <>
@@ -81,14 +61,14 @@ const LogIndex = () => {
             Learn more about{" "}
             <a href="#" style={{ textDecoration: "none" }}>
               {" "}
-              log
+              reports
             </a>
           </p>
           <Table items={paginatedData} columns={columns} />
 
           <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
             <Pagination
-              totalItems={40}
+              totalItems={paginateData.length}
               pageCount={pageCount}
               activePage={activePage}
               onClickPage={handleClickPage}
@@ -161,7 +141,7 @@ const LogIndex = () => {
             <p>
               {` ${(activePage - 1) * pageCount + 1} - ${
                 (activePage - 1) * pageCount + pageCount
-              } of 41 items`}
+              } of ${paginateData.length} items`}
               <span className="ms-2">
                 <button style={{ border: "none" }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
@@ -175,4 +155,4 @@ const LogIndex = () => {
   );
 };
 
-export default LogIndex;
+export default SalesTable;
