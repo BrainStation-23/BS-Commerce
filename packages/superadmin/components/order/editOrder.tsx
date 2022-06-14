@@ -4,6 +4,7 @@ import Shipping from "./service/shipping";
 import Products from "./service/products";
 import Notes from "./service/notes";
 import { useState } from "react";
+import Link from "next/link";
 
 const EditOrder = () => {
     const [info, setInfo] = useState(false);
@@ -11,11 +12,27 @@ const EditOrder = () => {
     const [products, setProducts] = useState(false);
     const [notes, setNotes] = useState(false);
 
+    const [modal, setModal] = useState({
+        delete: false,
+    });
+
+    const handleDelete = () => {
+        setModal({ ...modal, delete: true });
+    };
+
     return (
         <>
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div>
                     <h1 className="h2">Edit order details</h1>
+                    <span>
+                        <Link href="/orders" passHref>
+                            <a>back to order list</a>
+                        </Link>
+                    </span>
+                    </div>
+            
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group me-2">
                             <button
@@ -30,12 +47,100 @@ const EditOrder = () => {
                                 type="button"
                                 className="btn btn-danger btn-lg"
                                 style={{ backgroundColor: "#dd4b39" }}
+                                onClick={() => handleDelete()}
                             >
                                 <i className="bi bi-trash"> </i>Delete
                             </button>
                         </div>
                     </div>
                 </div>
+
+                {modal.delete ? (
+                    <div
+                        className="modal"
+                        style={{ display: modal.delete ? "block" : "none" }}
+                    >
+                        <div
+                            className="modal-backdrop"
+                            style={{
+                                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                            }}
+                            onClick={() => {
+                                // close modal when outside of modal is clicked
+                                setModal({ ...modal, delete: false });
+                            }}
+                        >
+                            <div
+                                className="modal-content"
+                                onClick={(e) => {
+                                    // do not close modal if anything inside modal content is clicked
+                                    e.stopPropagation();
+                                }}
+                                style={{
+                                    textAlign: "left",
+                                    width: "30%",
+                                    marginLeft: "40%",
+                                    marginTop: "5%",
+                                    border: "1px solid gray",
+                                    boxShadow: "1px 1px 10px gray",
+                                    borderRadius: "10px",
+                                    padding: "20px",
+                                }}
+                            >
+                                <div className="container">
+                                    {/* <button
+                                        type="button"
+                                        className="btn-close"
+                                        onClick={() =>
+                                            setModal({
+                                                ...modal,
+                                                delete: false,
+                                            })
+                                        }
+                                        aria-label="Close"
+                                    ></button> */}
+                                    <h1>Are you sure?</h1>
+                                    <hr />
+                                    <p>
+                                        Are you sure you want to delete this
+                                        item?
+                                    </p>
+                                    <br />
+
+                                    <div className="clearfix">
+                                        <button
+                                            type="button"
+                                            className="btn btn-light"
+                                            style={{
+                                                border: "1px solid gray",
+                                                backgroundColor: "gray",
+                                                color: "white",
+                                                marginRight: "10px",
+                                            }}
+                                            onClick={() =>
+                                                setModal({
+                                                    ...modal,
+                                                    delete: false,
+                                                })
+                                            }
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-danger"
+                                            // onClick={deleteProfileList}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div />
+                )}
 
                 <button
                     onClick={() => setInfo(!info)}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const billing = () => {
@@ -34,16 +35,30 @@ const billing = () => {
                             margin: "20px",
                         }}
                     >
-                        <table style={{ fontSize: "20px", textAlign: "left" }}>
+                        <table
+                            style={{
+                                fontSize: "20px",
+                                textAlign: "left",
+                                width: "100%",
+                            }}
+                        >
                             <tr>
                                 <th
                                     style={{
-                                        border: "1px solid #dddddd",
+                                        borderLeft: "1px solid #dddddd",
+                                        borderTop: "1px solid #dddddd",
                                         padding: "20px",
                                     }}
                                 >
                                     Billing Address
                                 </th>
+                                <th
+                                    style={{
+                                        borderTop: "1px solid #dddddd",
+                                        borderRight: "1px solid #dddddd",
+                                        padding: "20px",
+                                    }}
+                                ></th>
                             </tr>
                             <tr>
                                 <td
@@ -155,16 +170,18 @@ const billing = () => {
                             </tr>
                         </table>
                         <div style={{ textAlign: "left", marginTop: "20px" }}>
-                            <button
-                                type="button"
-                                className="btn btn-danger btn-lg"
-                                style={{
-                                    backgroundColor: "#3c8dbc",
-                                    border: "1px solid #3c8dbc",
-                                }}
-                            >
-                                Edit
-                            </button>
+                            <Link href="/editAddress" passHref>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-lg"
+                                    style={{
+                                        backgroundColor: "#3c8dbc",
+                                        border: "1px solid #3c8dbc",
+                                    }}
+                                >
+                                    Edit
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -187,16 +204,30 @@ const billing = () => {
                             margin: "20px",
                         }}
                     >
-                        <table style={{ fontSize: "20px", textAlign: "left" }}>
+                        <table
+                            style={{
+                                fontSize: "20px",
+                                textAlign: "left",
+                                width: "100%",
+                            }}
+                        >
                             <tr>
                                 <th
                                     style={{
-                                        border: "1px solid #dddddd",
+                                        borderLeft: "1px solid #dddddd",
+                                        borderTop: "1px solid #dddddd",
                                         padding: "20px",
                                     }}
                                 >
-                                    Billing Address
+                                    Shipping Address
                                 </th>
+                                <th
+                                    style={{
+                                        borderTop: "1px solid #dddddd",
+                                        borderRight: "1px solid #dddddd",
+                                        padding: "20px",
+                                    }}
+                                ></th>
                             </tr>
                             <tr>
                                 <td
@@ -308,16 +339,18 @@ const billing = () => {
                             </tr>
                         </table>
                         <div style={{ textAlign: "left", marginTop: "20px" }}>
-                            <button
-                                type="button"
-                                className="btn btn-danger btn-lg"
-                                style={{
-                                    backgroundColor: "#3c8dbc",
-                                    border: "1px solid #3c8dbc",
-                                }}
-                            >
-                                Edit
-                            </button>
+                            <Link href="/editAddress" passHref>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-lg"
+                                    style={{
+                                        backgroundColor: "#3c8dbc",
+                                        border: "1px solid #3c8dbc",
+                                    }}
+                                >
+                                    Edit
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

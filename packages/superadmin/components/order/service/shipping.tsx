@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Pagination from "../pagination";
 import getData from "../service/get-shipping-data.service";
 
-const shipping = () => {
+const Shipping = () => {
     // const [data, setData] = useState([]);
     // const [activePage, setActivePage] = useState(1);
     // const [pageCount, setPageCount] = useState(5);
@@ -23,6 +23,17 @@ const shipping = () => {
     // const handleClickPage = (activePage: any) => {
     //     setActivePage(activePage);
     // };
+    const [editMethod, setEditMethod] = useState(false);
+    const [saveMethod, setSaveMethod] = useState(false);
+
+    const handleEditShippingMethod = () => {
+        setEditMethod(true);
+    };
+
+    const handleSaveShippingMethod = () => {
+        setSaveMethod(true);
+    };
+
     return (
         <div>
             <div
@@ -34,24 +45,153 @@ const shipping = () => {
                     marginBottom: "20px",
                 }}
             >
-                <p>
-                    <b>Shipping method</b> Ground
-                </p>
+                <b>Shipping method</b> Ground
+                {editMethod ? (
+                    <div>
+                        <div></div>
+                        <form style={{ padding: "5px", margin: "5px" }}>
+                            <div
+                                style={{
+                                    // display: "flex",
+                                    padding: "5px",
+                                    margin: "5px",
+                                }}
+                                className="form-col"
+                            >
+                                <div
+                                    style={{
+                                        padding: "5px",
+                                        marginRight: "100px",
+                                    }}
+                                    className="col"
+                                >
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder=""
+                                    />
+                                </div>
+
+                                <button
+                                    type="button"
+                                    className="btn btn-primary btn-lg"
+                                    onClick={() => handleSaveShippingMethod()}
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary btn-lg"
+                                    onClick={() => setEditMethod(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                        {saveMethod ? (
+                            <div
+                                className="modal"
+                                style={{
+                                    display: saveMethod ? "block" : "none",
+                                }}
+                            >
+                                <div
+                                    className="modal-backdrop"
+                                    style={{
+                                        backgroundColor: "rgba(0, 0, 0, 0.1)",
+                                    }}
+                                    onClick={() => {
+                                        // close modal when outside of modal is clicked
+                                        setSaveMethod(false);
+                                    }}
+                                >
+                                    <div
+                                        className="modal-content"
+                                        onClick={(e) => {
+                                            // do not close modal if anything inside modal content is clicked
+                                            e.stopPropagation();
+                                        }}
+                                        style={{
+                                            textAlign: "left",
+                                            width: "30%",
+                                            marginLeft: "40%",
+                                            marginTop: "5%",
+                                            border: "1px solid gray",
+                                            boxShadow: "1px 1px 10px gray",
+                                            borderRadius: "10px",
+                                            padding: "20px",
+                                        }}
+                                    >
+                                        <div className="container">
+                                            {/* <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={() =>
+                                        setModal({
+                                            ...modal,
+                                            cancel: false,
+                                        })
+                                    }
+                                    aria-label="Close"
+                                ></button> */}
+                                            <h1>Are you sure?</h1>
+                                            <hr />
+                                            <p>
+                                                Are you sure you want to perform
+                                                this action?
+                                            </p>
+                                            <br />
+
+                                            <div className="clearfix">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-light"
+                                                    style={{
+                                                        border: "1px solid gray",
+                                                        backgroundColor: "gray",
+                                                        color: "white",
+                                                        marginRight: "10px",
+                                                    }}
+                                                    onClick={() =>
+                                                        setSaveMethod(false)
+                                                    }
+                                                >
+                                                    Cancel
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary"
+                                                    // onClick={deleteProfileList}
+                                                >
+                                                    Yes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div />
+                        )}
+                    </div>
+                ) : (
+                    <div style={{ textAlign: "center", marginTop: "20px" }}>
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-lg"
+                            style={{
+                                backgroundColor: "#3c8dbc",
+                                border: "1px solid #3c8dbc",
+                            }}
+                            onClick={() => handleEditShippingMethod()}
+                        >
+                            Edit
+                        </button>
+                    </div>
+                )}
                 <p>
                     <b>Shipping status</b> Delivered
                 </p>
-                <div style={{ textAlign: "center", marginTop: "20px" }}>
-                    <button
-                        type="button"
-                        className="btn btn-danger btn-lg"
-                        style={{
-                            backgroundColor: "#3c8dbc",
-                            border: "1px solid #3c8dbc",
-                        }}
-                    >
-                        Edit
-                    </button>
-                </div>
             </div>
 
             <div
@@ -216,4 +356,4 @@ const shipping = () => {
     );
 };
 
-export default shipping;
+export default Shipping;
