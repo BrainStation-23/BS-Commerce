@@ -3,9 +3,10 @@ import * as crypto from 'crypto';
 
 import { IBrandDatabase } from './brand.database.interface';
 import { Brand } from 'src/entity/brand';
-import { BrandDto } from './../dto/brandDto';
-import { CreateBrandRequestDto } from './../dto/createBrandDto';
-import { GetAllBrandsDto } from '../dto/getAllBrandsDto';
+import { BrandDto } from 'src/modules/brands/dto/brandDto';
+import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
+import { GetAllBrandsDto } from 'src/modules/brands/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto, UpdateBrandResponseDto } from 'src/modules/brands/dto/updateBrandDto';
 
 @Injectable()
 export class BrandRepository {
@@ -15,7 +16,8 @@ export class BrandRepository {
        return await this.db.getBrandByName(brandName);   
     }
     
-    async getBrandById(brandId: string): Promise<Brand | null> {
+    
+    async getBrandById(brandId: string): Promise<BrandDto | null> {
         return await this.db.getBrandById(brandId);   
      }
 
@@ -29,11 +31,11 @@ export class BrandRepository {
         return await this.db.addNewBrand(newBrand);  
     }
 
-    async updateBrandById(brandId: string, brandUpdates: Brand): Promise<Brand | null>{
+    async updateBrandById(brandId: string, brandUpdates: UpdateBrandRequestdto): Promise<BrandDto | null>{
         return await this.db.updateBrandById(brandId, brandUpdates);
     }
 
-    async deleteBrandById(brandId: string): Promise<Brand | null>{
+    async deleteBrandById(brandId: string): Promise<BrandDto | null>{
         return await this.db.deleteBrandById(brandId);
     }
 }

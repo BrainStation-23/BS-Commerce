@@ -2,6 +2,7 @@ import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 
 export interface CreateBrandRequest{
+    id?: string,
     info: Info,
     meta: Meta
 }
@@ -37,4 +38,3 @@ export const enum ErrorMessage{
     NAME_BE_VALID = 'NAME MUST BE VALID'
 }
 
-export type CreateBrandResponse = CreateBrandSuccessResponse | CreateBrandErrorResponse;
