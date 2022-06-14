@@ -17,7 +17,8 @@ const HeaderBar: NextComponentType = (props: any) => {
           <i className="bi bi-list"></i>
         </div>
         <div className={nav.nav_content}>
-          <div className={nav.nav_usernname}>John Smith</div>
+          <div className={nav.nav_username}>John Smith</div>
+          <div className={nav.nav_username}>Logout</div>
           <div className={nav.nav_settings}>
             <i className="bi bi-gear"></i>
           </div>

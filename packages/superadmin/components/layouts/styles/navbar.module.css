@@ -38,15 +38,29 @@
   cursor: pointer;
 }
 
-.nav_content {
+.container .nav_content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-right: -200px;
+  align-items: center;
+  font-size: 20px;
+}
+
+.container_inactive .nav_content {
   display: flex;
   flex-direction: row;
   margin-right: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
 }
 
 .nav_username {
   color: white;
+  padding-right: 40px;
 }
+
 .nav_settings {
   color: white;
 }
