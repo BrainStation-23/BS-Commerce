@@ -66,7 +66,7 @@ const Sidebar: NextComponentType = () => {
           <div className={sidebar.logo}>
             <Image src={bsLogo} alt="bs-logo" />
           </div>
-          <div className={sidebar.title}>bs Commerce</div>
+          <div className={sidebar.title}>BS Commerce</div>
           <div
             onClick={() => setInactive(!inactive)}
             className={sidebar.toggle_menu_btn}
@@ -91,7 +91,7 @@ const Sidebar: NextComponentType = () => {
                 >
                   <div className={sidebar.menu_icon}>{menuItem.icon}</div>
                   <div className={sidebar.menu_item_text}>
-                    {menuItem.name}
+                    <span>{menuItem.name}</span>
                     <span className={sidebar.menu_chevron}>
                       {menuItem.subMenus && menuItem.subMenus.length > 0
                         ? showSubMenu[index]
