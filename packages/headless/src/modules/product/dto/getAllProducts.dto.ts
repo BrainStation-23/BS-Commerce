@@ -8,14 +8,17 @@ import {
     GetAllProductsErrorResponse,
     GetAllProductsSuccessResponse,
 } from 'models';
+import { Type } from 'class-transformer';
 
 export class GetAllProductsQueryDto implements GetAllProductsQuery {
     @ApiProperty({ required: false, type: Number, })
+    @Type(() => Number)
     @IsOptional()
     @IsNumber()
     skip?: number;
 
     @ApiProperty({ required: false, type: Number })
+    @Type(() => Number)
     @IsOptional()
     @IsNumber()
     limit?: number;

@@ -8,15 +8,18 @@ import {
     GetProductsByConditionErrorResponse,
     GetProductsByConditionSuccessResponse,
 } from 'models';
+import { Type } from 'class-transformer';
 
 export class GetProductsByConditionQueryDto implements GetProductsByConditionQuery {
     @ApiProperty({ required: false, type: Number, })
+    @Type(() => Number)
     @IsOptional()
     @IsNumber()
     skip?: number;
 
     @ApiProperty({ required: false, type: Number })
     @IsOptional()
+    @Type(() => Number)
     @IsNumber()
     limit?: number;
 
@@ -38,6 +41,7 @@ export class GetProductsByConditionQueryDto implements GetProductsByConditionQue
     @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
+    @Type(() => Boolean)
     isFeatured?: boolean;
 
     @ApiProperty({ required: false })
