@@ -1,45 +1,89 @@
 import type { NextComponentType } from "next";
 import card from "./styles/widgets.module.css";
 const StatWidgets: NextComponentType = () => {
+  const widgets = [
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "Orders",
+      type: "stat",
+      statVal: 15,
+      icon: <i className={`bi bi-bag`}></i>,
+      bgColor: "#17a2b8",
+      link: "/",
+    },
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "Pending User Requests",
+      type: "stat",
+      statVal: 15,
+      icon: <i className="bi bi-arrow-clockwise"></i>,
+      bgColor: "#ffc107",
+      link: "/",
+    },
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "New Registered users",
+      type: "stat",
+      statVal: 15,
+      icon: <i className="bi bi-person-plus-fill"></i>,
+      bgColor: "#28a745",
+      link: "/",
+    },
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "Low Stock Products",
+      type: "stat",
+      statVal: 15,
+      icon: <i className="bi bi-pie-chart-fill"></i>,
+      bgColor: "#dc3545",
+      link: "/",
+    },
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "Pending user requests",
+      type: "stat",
+      statVal: 15,
+      icon: <i className="bi bi-clock-history"></i>,
+      bgColor: " #8F00FF",
+      link: "/",
+    },
+    {
+      id: Math.floor(Math.random() * 10),
+      name: "Orders",
+      type: "stat",
+      statVal: 15,
+      icon: <i className={`bi bi-bag`}></i>,
+      bgColor: "#654321",
+      link: "/",
+    },
+  ];
   return (
     <>
-      {/* <div className={card.widgets_card}>
-          <div className={card.widgets_info}>
-            <h3>
-              <span className={card.widgets_currency}>$</span>
-              <span className={card.widgets_count}>4200</span>
-            </h3>
-            <p>Revenue</p>
-          </div>
-          <div className={card.widgets_icon}>
-            <h3>
-              <span></span>
-              <span></span>
-            </h3>
-          </div>
-        </div> */}
       <div className={`row ${card.widget_container}`}>
-        <div className={`col-lg-3 col-3 ${card.widgets_card}`}>
-          <div className={`${card.small_box} ${card.bg_info}`}>
-            <div className={card.inner}>
-              <h3>5</h3>
-              <p>Orders</p>
+        {widgets.map((widget) => {
+          return (
+            <div
+              key={widget.id}
+              className={`col-3 col-md-6 col-lg-4 col-xl-4  ${card.widgets_card}`}
+            >
+              <div
+                className={`${card.small_box} ${card.bg_info}`}
+                style={{ ["background-color" as any]: widget.bgColor }}
+              >
+                <div className={card.inner}>
+                  <h3>{widget.statVal}</h3>
+                  <p>{widget.name}</p>
+                </div>
+                <div className={card.icon}>{widget.icon}</div>
+                <a className={card.small_box_footer} href={widget.link}>
+                  More info
+                  <i className="bi bi-arrow-right-circle"></i>
+                </a>
+              </div>
             </div>
-            <div className={card.icon}>
-              <i className={`bi bi-bag ${card.ion}`}></i>
-            </div>
-            <a className={card.small_box_footer} href="/">
-              More info
-              <i className="bi bi-arrow-right-circle"></i>
-            </a>
-          </div>
-        </div>
-        <div className="col-3">A</div>
-        <div className="col-3">B</div>
+          );
+        })}
       </div>
-      {/* <div className={card.widgets_card}>
-          <div className={card.widgets_info}>test</div>
-        </div> */}
     </>
   );
 };

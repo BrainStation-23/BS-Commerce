@@ -2,15 +2,6 @@
   padding-top: 40px;
 }
 
-.widgets_card {
-  /* position: relative;
-  width: 100%;
-  padding-right: 7.5px;
-  padding-left: 7.5px; */
-  flex: 0 0 25%;
-  max-width: 25%;
-}
-
 .small_box {
   border-radius: 0.25rem;
   box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
@@ -20,8 +11,7 @@
 }
 
 .bg_info {
-  background-color: #17a2b8 !important;
-  color: #fff !important;
+  color: #fff;
 }
 
 .small_box .inner {
@@ -41,9 +31,6 @@
   font-size: 70px;
   transition: all 0.3s linear;
 }
-/* .small_box .icon .ion {
-  top: 20px;
-} */
 
 .small_box .small_box_footer {
   background: rgba(0, 0, 0, 0.1);
