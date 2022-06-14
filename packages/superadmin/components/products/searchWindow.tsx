@@ -43,10 +43,9 @@ const SearchWindow = () => {
                 <div
                   className="row search-row opened"
                 >
-                  <div className="search-text">Search</div>
-                  <div className="icon-search">
-                    <i className="fas fa-search" aria-hidden="true"></i>
-                  </div>
+                    
+                  <div className="search-text"><i className="bi bi-search float-start mx-2" aria-hidden="true"/> <p className="float mx-2">Search</p> </div>
+                  
                   <div className="icon-collapse">
                     <i className="far fa-angle-up" aria-hidden="true"></i>
                   </div>
@@ -389,10 +388,11 @@ const SearchWindow = () => {
                       <button
                         type="submit"
                         id="search-products"
-                        className="btn btn-primary btn-search py-0 my-1"
+                        className="btn btn-primary px-4 p my-1"
+                        style={{borderRadius:"10px"}}
                       >
                         <i className="bi bi-search float-start "></i>
-                        <p className="float-end px-2 ">Search</p>
+                        <p className="float-end px-2 m-0 ">Search</p>
                       </button>
                     </div>
                   </div>
