@@ -1,6 +1,7 @@
+import { NextPage } from "next";
 import SalesSummaryComponent from "../../components/report/sales-summary";
 
-const SalesSummary = () => {
+const SalesSummary: NextPage = () => {
   return (
     <>
       <div className="bg-light">
