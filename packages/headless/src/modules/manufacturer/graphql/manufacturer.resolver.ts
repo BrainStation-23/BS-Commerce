@@ -1,3 +1,4 @@
+import { GetManufacturersQueryDto } from './../dto/getManufacturers.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
@@ -18,8 +19,8 @@ export class ManufacturerResolver {
    * @returns {Object} Object { error code data}
    */
   @Query()
-  async getAllManufacturers(@Args('skip') skip: number, @Args('limit') limit: number) {
-    return await this.manufacturerService.getAllManufacturers(skip, limit);
+  async getAllManufacturers(@Args() query: GetManufacturersQueryDto) {
+    return await this.manufacturerService.getAllManufacturers(query);
   }
 
   /**

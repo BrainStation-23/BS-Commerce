@@ -31,7 +31,7 @@ export interface CreateManufacturerSuccessResponse extends SuccessResponse {
     code: number;
     data: {
         manufacturer: Manufacturer,
-        message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY
+        message: CreateManufacturerSuccessMessages
     };
 }
 
