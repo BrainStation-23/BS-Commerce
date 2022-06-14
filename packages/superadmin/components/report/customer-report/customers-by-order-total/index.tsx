@@ -1,4 +1,4 @@
-import CustomerByOrderTotalSearch from "./customer-by-order-total-search";
+import CustomerByOrderTotalSearch from "../common/customer-search";
 import CustomerByOrderTotalTable from "./customer-by-order-total-table";
 
 const CustomersByOrderTotalComponent = () => {

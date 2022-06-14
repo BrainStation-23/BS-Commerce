@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ChevronDown from "../../../global/icons/chevron-down";
 import ChevronUp from "../../../global/icons/chevron-up";
-import SearchForm from "./customer-by-order-total-search-form";
+import SearchForm from "./customer-search-form";
 
 
-const CustomerByOrderTotalSearch = () => {
+const CustomerSearch = () => {
   const [dropdown, setDropdown] = useState(true);
 
   return (
@@ -57,4 +57,4 @@ const CustomerByOrderTotalSearch = () => {
   );
 };
 
-export default CustomerByOrderTotalSearch;
+export default CustomerSearch;
