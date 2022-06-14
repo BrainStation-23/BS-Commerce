@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../pagination";
 import getData from "../service/get-shipping-data.service";
+import Tooltip from "./tooltip";
 
 const Shipping = () => {
     // const [data, setData] = useState([]);
@@ -39,13 +40,17 @@ const Shipping = () => {
             <div
                 style={{
                     border: "1px solid #dddddd",
-                    textAlign: "center",
+                    textAlign: "left",
                     fontSize: "20px",
                     padding: "20px",
                     marginBottom: "20px",
                 }}
             >
-                <b>Shipping method</b> Ground
+                <Tooltip
+                    label={"Shipping method"}
+                    tooltipText={"The unique number of this order"}
+                    data={"Ground"}
+                />
                 {editMethod ? (
                     <div>
                         <div></div>
@@ -123,17 +128,6 @@ const Shipping = () => {
                                         }}
                                     >
                                         <div className="container">
-                                            {/* <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() =>
-                                        setModal({
-                                            ...modal,
-                                            cancel: false,
-                                        })
-                                    }
-                                    aria-label="Close"
-                                ></button> */}
                                             <h1>Are you sure?</h1>
                                             <hr />
                                             <p>
@@ -189,9 +183,11 @@ const Shipping = () => {
                         </button>
                     </div>
                 )}
-                <p>
-                    <b>Shipping status</b> Delivered
-                </p>
+                <Tooltip
+                    label={"Shipping status"}
+                    tooltipText={"The unique number of this order"}
+                    data={"Delivered"}
+                />
             </div>
 
             <div

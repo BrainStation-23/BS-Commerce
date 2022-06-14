@@ -2,7 +2,7 @@ import _ from "lodash";
 import Pagination from "../components/order/pagination";
 import React, { useEffect, useState } from "react";
 import getData from "../components/order/service/get-shipping-data.service";
-import SingleShipping from "../components/order/singleShipment";
+import SingleShipment from "../components/order/singleShipment";
 
 const Shipments = () => {
     const [data, setData] = useState([]);
@@ -29,21 +29,37 @@ const Shipments = () => {
         <>
             <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 className="h2">Orders</h1>
+                    <h1 className="h2">Shipments</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group me-2">
+                            
                             <button
                                 type="button"
-                                className="btn btn-success btn-lg"
-                                style={{marginRight: '10px'}}
+                                style={{backgroundColor: '#00c0ef', border: "1px solid #00c0ef", color:"white", marginLeft: "10px"}}
+                                className="btn btn-info btn-lg"
                             >
-                                <i className="bi bi-download">{" "}</i>Export
+                                <i className="bi bi-file-earmark-pdf">{" "}</i>Print packaging slips
                             </button>
                             <button
                                 type="button"
+                                style={{backgroundColor: '#3c8dbc', border: "1px solid #00c0ef", color:"white", marginLeft: "10px"}}
                                 className="btn btn-info btn-lg"
                             >
-                                <i className="bi bi-file-earmark-pdf">{" "}</i>Print PDF invoices
+                                <i className="bi bi-file-earmark-pdf">{" "}</i>Set as shipped (selected)
+                            </button>
+                            <button
+                                type="button"
+                                style={{backgroundColor: '#3c8dbc', border: "1px solid #00c0ef", color:"white", marginLeft: "10px"}}
+                                className="btn btn-info btn-lg"
+                            >
+                                <i className="bi bi-file-earmark-pdf">{" "}</i>Set as ready for pickup (selected)
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-success btn-lg"
+                                style={{marginRight: '10px', backgroundColor: '#28a745', border: "1px solid #28a745", marginLeft: "10px"}}
+                            >
+                                <i className="bi bi-download">{" "}</i>Set as delivered (selected)
                             </button>
                         </div>
                     </div>
@@ -137,28 +153,28 @@ const Shipments = () => {
                                 />
                             </th>
                             <th>
+                                <span>Shipment #</span>
+                            </th>
+                            <th>
                                 <span>Order #</span>
                             </th>
                             <th>
-                                <span>Order status</span>
+                                <span>Pickup from store</span>
                             </th>
                             <th>
-                                <span>Payment status</span>
+                                <span>Tracking number</span>
                             </th>
                             <th>
-                                <span>Shipping status</span>
+                                <span>Total weight</span>
                             </th>
                             <th>
-                                <span>Customer</span>
+                                <span>Date shipped</span>
                             </th>
                             <th>
-                                <span>Store</span>
+                                <span>Date ready for pickup</span>
                             </th>
                             <th>
-                                <span>Created on</span>
-                            </th>
-                            <th>
-                                <span>Order total</span>
+                                <span>Date delivered</span>
                             </th>
                             <th>
                                 <span>View</span>
@@ -167,31 +183,12 @@ const Shipments = () => {
                     </thead>
                     <tbody>
                         {paginateData.length > 0 &&
-                            paginateData.map((order: any) => (
-                                <SingleShipping
-                                    key={order.id}
-                                    order={order}
-                                ></SingleShipping>
+                            paginateData.map((shipment: any) => (
+                                <SingleShipment
+                                    key={shipment.id}
+                                    shipment={shipment}
+                                ></SingleShipment>
                             ))}
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td style={{textAlign: 'left', border: "1px solid #dddddd"}}>
-                            <h5>
-                                <b>Summary</b>
-                            </h5>
-                            <h5 style={{margin: "0px"}}>Profit</h5>
-                            <h5 style={{margin: "0px"}}>$4,469.30</h5>
-                            <h5 style={{margin: "0px"}}>Shipping $0.00</h5>
-                            <h5 style={{margin: "0px"}}>Tax $0.00</h5>
-                            <h5 style={{margin: "0px"}}>Total $4,469.30</h5>
-                        </td>
-                        <td></td>
                     </tbody>
                 </table>
                 <div
