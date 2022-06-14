@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsObject, IsString, } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsObject, IsString, } from 'class-validator';
 import {
     GetProductBySKUParams,
     GetProductBySKUErrorMessages,
@@ -11,6 +11,7 @@ import { ProductDto } from '.';
 
 export class GetProductBySKUParamsDto implements GetProductBySKUParams {
     @ApiProperty()
+    @IsNotEmpty()
     @IsString()
     sku: string;
 }

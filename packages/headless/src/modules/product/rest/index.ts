@@ -108,7 +108,6 @@ export class ProductController {
     @Query() condition: GetProductsByConditionQueryDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    console.log(condition)
     const { code, ...response } = await this.productService.getProductsByCondition(condition);
     res.status(code);
     return { code, ...response };
