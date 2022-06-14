@@ -53,7 +53,7 @@ const Info = () => {
                 }}
             >
                 <Tooltip
-                    label={"Order"}
+                    label="Order"
                     tooltipText={"The unique number of this order"}
                     data={"# 5"}
                 />

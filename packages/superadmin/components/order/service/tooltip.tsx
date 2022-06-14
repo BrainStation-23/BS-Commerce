@@ -1,8 +1,13 @@
 import React from 'react';
+import  { FC } from "react";
 
-const Tooltip = (props: any) => {
-    
-    const { label, data, tooltipText } = props;
+interface TOOL  {
+    label: string,
+    data: string,
+    tooltipText: string
+}
+
+const Tooltip:FC<TOOL>= ({label, data, tooltipText}) => {
 
     return (
         <div>
