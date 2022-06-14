@@ -7,14 +7,22 @@ import Link from "next/link";
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [checkAll, setCheckAll] = useState(false);
 
   const columns = [
     {
-      label: <input type="checkbox" defaultValue="all"></input>,
+      label: <input type="checkbox" onClick={() => {
+        setCheckAll(!checkAll);
+      }}></input>,
       path: "select",
       content: (data: any, key: any, index: any) => (
         <td>
-          <input id="checkAll" type="checkbox" defaultValue={index}></input>
+          {
+            checkAll && <input type="checkbox" value="" checked></input>
+          }
+          {
+            !checkAll && <input type="checkbox" value=""></input>
+          }
         </td>
       ),
     },
