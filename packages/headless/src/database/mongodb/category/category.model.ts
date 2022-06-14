@@ -15,7 +15,7 @@ const CategorySchema = new Schema<Category>({
   slug: {
     type: String,
     unique: true,
-    // required: true,
+    required: true,
   },
   description: {
     type: String,
@@ -53,15 +53,15 @@ const CategorySchema = new Schema<Category>({
     {
       name: {
         type: String,
-        // required: true,
+        required: true,
       },
       slug: {
         type: String,
-        // required: true,
+        required: true,
       },
       level:{
         type:Number,
-        // required:true,
+        required:true,
         default:0,
 
       },

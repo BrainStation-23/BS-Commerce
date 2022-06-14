@@ -7,7 +7,6 @@ import { CategoryModel } from "./category.model";
 export class CategoryDatabase implements ICategoryDatabase {
 
     async generateCategoryTree(listItems) {
-        // console.log(listItems)
         let rootItems = [];
         let parentSubCategories = {};
         listItems.forEach(item => {
