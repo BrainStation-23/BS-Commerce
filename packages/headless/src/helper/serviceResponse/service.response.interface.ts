@@ -1,7 +1,7 @@
 
 export interface ServiceSuccessResponse {
     /** Response object from service layer */
-    data: object;
+    data: object | any;
     /** Http code, but has no relation or dependency with http requests.
      * The code here is used as a standard for communicating with the
      * outer layer of service.

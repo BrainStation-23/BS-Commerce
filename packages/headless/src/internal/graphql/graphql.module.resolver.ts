@@ -2,12 +2,14 @@ import { ManufacturerModule } from 'src/modules/manufacturer/manufacturer.graphq
 import { AuthModule } from 'src/modules/auth/auth.graphql.module';
 import { UserModule } from 'src/modules/user/user.graphql.module';
 import { GraphqlInitModule } from './graphql.init';
+import { CategoryModule } from 'src/modules/category/category.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
     ...GraphqlInitModule(),
     AuthModule,
     UserModule,
-    ManufacturerModule
+    ManufacturerModule,
+    CategoryModule,
   ];
 };
