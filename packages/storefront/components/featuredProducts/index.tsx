@@ -9,17 +9,15 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import { productInterface } from "./models";
+const productList : productInterface = productData; 
 
 const FeaturedProducts = () => {
   return (
     <Container className="max-w-6xl">
-      <div className="text-center mb-5  ">
-        <p className="text-sm font-light italic md:text-sm lg:text-base ">
-          Recently added our store
-        </p>
-        <h1 className="font-bold mb-10 text-xl md:text-3xl lg:text-4xl ">
-          Featured Products
-        </h1>
+      <div className="text-center mb-6">
+          <p className="text-lg font-serif italic">Recently added our store</p>
+          <h1 className="text-4xl text-bold ">Featured Products</h1>
       </div>
       <SwiperGrid
         slidesPerViewmobile={1}
@@ -29,7 +27,7 @@ const FeaturedProducts = () => {
       >
         {productData["products"] &&
           productData["products"].length > 0 &&
-          productData.products.map((product: any) => (
+          productList.products.map((product: any) => (
             <SwiperSlide key={product.id}>
               <Product product={product} />
             </SwiperSlide>

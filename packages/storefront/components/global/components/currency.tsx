@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-interface Properties {
-  left: number;
+interface currency {
+  abbv: string;
+  name: string;
 }
 
-const Currency: React.FC<Properties> = (props) => {
+const Currency: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const currencyList = [
+  const currencyList: currency[] = [
     { abbv: "USD", name: "US Dollar" },
     { abbv: "EUR", name: "Euro" },
     { abbv: "GBP", name: "British Pound" },
@@ -34,9 +35,9 @@ const Currency: React.FC<Properties> = (props) => {
         </svg>
       </button>
       <ul
-        className={`overflow-hidden top-7 absolute text-gray-700 whitespace-nowrap bg-white border p-4 z-50 transition-all duration-500 ease-linear ${
-          "left-[" + props.left + "px]"
-        } ${open ? "h-[190px] opacity-100" : "h-0 opacity-0"}`}
+        className={`overflow-hidden top-7 absolute text-gray-700 whitespace-nowrap bg-white border p-4 z-50 transition-all duration-500 ease-linear ${"left-0"} ${
+          open ? "h-[190px] opacity-100" : "h-0 opacity-0"
+        }`}
       >
         {currencyList.map((currency) => (
           <li key={currency.abbv} className="py-1">

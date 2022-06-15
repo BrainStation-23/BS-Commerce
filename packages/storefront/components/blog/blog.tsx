@@ -1,9 +1,8 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import type { NextComponentType } from "next";
 import BlogPost from "./blogPost";
 
-const Blog = () => {
+
+const Blog: NextComponentType = () => {
 	return (
 		<>
 			<div className="container mx-auto bg-zinc-100">
