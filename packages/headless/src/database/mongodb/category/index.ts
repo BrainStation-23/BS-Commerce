@@ -45,4 +45,8 @@ export class CategoryDatabase implements ICategoryDatabase {
     async getCategory(categoryId: string): Promise<Category | null> {
         return await CategoryModel.findOne({categoryId })
     }
+
+    async getCategoryBySlug(slug: string): Promise<Category | null> {
+        return await CategoryModel.findOne({ slug: slug })
+    }
 }
