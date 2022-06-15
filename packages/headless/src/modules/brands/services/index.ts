@@ -38,7 +38,7 @@ export class BrandService{
 
     async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequestdto): Promise<UpdateBrandResponseDto>{
         const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
-        if(!updatedBrand) return {error: ErrorMessageUpdate.CANNOT_UPDATE_BRAND, errors: null, code: HttpStatus.BAD_REQUEST};
+        if(!updatedBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST};
         
         return { code: HttpStatus.OK, data: updatedBrand};
     }
