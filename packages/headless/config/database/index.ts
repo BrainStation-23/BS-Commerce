@@ -3,7 +3,6 @@ import { Dialect } from 'sequelize/types';
 const {
 	DB,
 	MONGODB_URI,
-	MONGODB_URI_TEST,
 	MYSQL_DB_HOST,
 	MYSQL_DB_PORT,
 	MYSQL_DB_USER,
