@@ -14,8 +14,8 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.create(product);
   }
 
-  async findAllProducts(skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find({}).skip(skip).limit(limit).lean();
+  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
+    return await ProductModel.find(query).skip(skip).limit(limit).lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

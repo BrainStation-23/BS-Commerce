@@ -23,7 +23,8 @@ import {
   GetProductsByConditionResponse,
   UpdateProductsForBrandResponse,
   UpdateProductsForBrandErrorMessages,
-
+  GetCustomerAllProductsResponse,
+  GetCustomerProductResponse,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -49,7 +50,7 @@ export class ProductService {
 
   async getAllProducts(condition: SearchCondition): Promise<GetAllProductsResponse> {
     const { skip, limit } = condition;
-    const products = await this.productRepo.findAllProducts(skip, limit);
+    const products = await this.productRepo.findAllProducts({}, skip, limit);
     if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
@@ -144,5 +145,19 @@ export class ProductService {
       query['info.isFeatured'] = true;
     }
     return query;
+  }
+
+  //Customer
+  async getCustomerProduct(productId: string,): Promise<GetCustomerProductResponse> {
+    const product = await this.productRepo.findProduct({ id: productId, published: true });
+    if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
+    const { skip, limit, ...rest } = condition;
+    const products = await this.productRepo.findAllProducts({ ...rest, published: true }, skip, limit);
+    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 }

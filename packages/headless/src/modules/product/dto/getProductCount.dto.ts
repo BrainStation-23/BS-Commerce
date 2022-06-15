@@ -23,7 +23,7 @@ export class GetProductCountErrorResponseDto implements GetProductCountErrorResp
 }
 
 export class Count {
-    @ApiProperty({ default: HttpStatus.OK })
+    @ApiProperty()
     @IsNumber()
     count: number;
 }

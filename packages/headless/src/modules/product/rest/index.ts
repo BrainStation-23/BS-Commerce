@@ -13,6 +13,12 @@ import {
   GetAllProductsErrorResponseDto,
   GetAllProductsQueryDto,
   GetAllProductsSuccessResponseDto,
+  GetCustomerAllProductsErrorResponseDto,
+  GetCustomerAllProductsQueryDto,
+  GetCustomerAllProductsSuccessResponseDto,
+  GetCustomerProductErrorResponseDto,
+  GetCustomerProductParamsDto,
+  GetCustomerProductSuccessResponseDto,
   GetProductBySKUErrorResponseDto,
   GetProductBySKUParamsDto,
   GetProductBySKUSuccessResponseDto,
@@ -34,13 +40,49 @@ import {
 } from '../dto';
 
 @ApiTags('Product API')
-@ApiBearerAuth()
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) { }
 
+  // Customer
+  @Get('customer')
+  @ApiResponse({
+    description: 'Get All Products Success Response',
+    type: GetCustomerAllProductsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get All Products Error Response',
+    type: GetCustomerAllProductsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerAllProducts(@Query() query: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
+    const { skip, limit } = query;
+    const { code, ...response } = await this.productService.getCustomerAllProducts({ skip, limit });
+    res.status(code);
+    return { code, ...response };
+  }
 
+  @Get('customer/:productId')
+  @ApiResponse({
+    description: 'Get Product Success Response',
+    type: GetCustomerProductSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Product Error Response',
+    type: GetCustomerProductErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerProduct(@Param() params: GetCustomerProductParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerProduct(params.productId);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  // Admin
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get()
   @ApiResponse({
     description: 'Get All Product Success Response',
@@ -61,6 +103,7 @@ export class ProductController {
 
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('count')
   @ApiResponse({
     description: 'Get All Product Count Success Response',
@@ -79,6 +122,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('sku/:sku')
   @ApiParam({ name: 'sku' })
   @ApiResponse({
@@ -99,6 +143,7 @@ export class ProductController {
 
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('condition')
   @ApiResponse({
     description: 'Get Products By Condition Success Response',
@@ -120,6 +165,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get(':productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
@@ -139,6 +185,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Post()
   @ApiResponse({
     description: 'Create Product Success Response',
@@ -157,6 +204,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Delete(':productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
@@ -176,6 +224,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Patch('brand')
   @ApiResponse({
     description: 'Update Products For Brand Success Response',
@@ -195,6 +244,7 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Patch(':productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
@@ -209,25 +259,6 @@ export class ProductController {
   })
   async updateProduct(@Body() product: UpdateProductDto, @Param() params: UpdateProductParamsDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.updateProduct(product, params.productId);
-    res.status(code);
-    return { code, ...response };
-  }
-
-  //Customer
-  @Get('customer')
-  @ApiResponse({
-    description: 'Get All Product Success Response',
-    type: GetAllProductsSuccessResponseDto,
-    status: HttpStatus.OK
-  })
-  @ApiResponse({
-    description: 'Get All Product Error Response',
-    type: GetAllProductsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
-  })
-  async getCustomerAllProducts(@Query() query: GetAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
-    const { skip, limit } = query;
-    const { code, ...response } = await this.productService.getAllProducts({ skip, limit });
     res.status(code);
     return { code, ...response };
   }

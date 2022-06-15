@@ -158,6 +158,8 @@ type ProductArrayWithCountResponse {
 type Query {
   getProduct(params: getProductParams!): ProductResponse!
   getAllProducts(query: queryConditionInput): ProductArrayResponse!
+  getCustomerProduct(params: getProductParams!): ProductResponse!
+  getCustomerAllProducts(query: SearchCondition): ProductArrayResponse!
   getProductCount: Int!
   getProductBySKU(params: getProductBySKUParams!): ProductResponse!
   getProductsByCondition(

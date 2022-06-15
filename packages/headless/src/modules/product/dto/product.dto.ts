@@ -184,5 +184,3 @@ export class ProductDto implements Product {
     @IsArray()
     categories: ProductCategoryDto[];
 }
-
-
