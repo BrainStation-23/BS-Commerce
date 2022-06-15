@@ -6,7 +6,7 @@ import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/man
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { dbConfig } from 'config/database';
 
-type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER' | 'MEDIA';
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
