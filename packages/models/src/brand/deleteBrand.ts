@@ -14,5 +14,5 @@ export interface DeleteBrandErrorResponse extends ErrorResponse{
 
 export const enum ErrorMessageDeleteBrand{
     INVALID_BRAND_ID = 'NO BRAND WITH SUCH ID',
-    CANNOT_DELETE_BRAND = 'Cannot delete the brand'
+    CANNOT_DELETE_BRAND = 'CANNOT DELETE THE BRAND'
 }
