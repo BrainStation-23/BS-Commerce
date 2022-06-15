@@ -6,7 +6,7 @@ const Payment = (props: any) => {
   const {setModal} = props;
   return (
     <>
-      <ContactDetails />
+      <ContactDetails setModal={setModal} />
       <PaymentDetails  setModal={setModal} />
     </>
   );
