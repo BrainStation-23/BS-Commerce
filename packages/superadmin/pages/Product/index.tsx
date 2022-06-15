@@ -7,9 +7,8 @@ const Products: NextPage = () => {
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        
         <h2>Products</h2>
-        <div className="float-end">
+        <div className="float-end pb-2">
           <a className="btn btn-primary" href="/Product/Create">
             {/* <i className="fas fa-plus-square"></i> */}
             Add new
@@ -142,8 +141,10 @@ const Products: NextPage = () => {
             {/* <script>$(document).ready(function () {$('#delete-selected').attr("data-toggle", "modal").attr("data-target", "#delete-selected-action-confirmation");$('#delete-selected-action-confirmation-submit-button').attr("name", $("#delete-selected").attr("name"));$("#delete-selected").attr("name", "");if($("#delete-selected").attr("type") == "submit")$("#delete-selected").attr("type", "button");});</script> */}
           </div>
         </div>
-            <SearchWindow />
-            <ProductsList />
+        <div className="mt-2 pt-1">
+          <SearchWindow />
+          <ProductsList />
+        </div>
       </main>
     </>
   );

@@ -75,7 +75,7 @@ const ProductInfoForm = () => {
                 </div>
                 <div className="form-group row my-2">
                   <div className="col-md-3">
-                    <div className="llabel-wrapper row row-cols-auto float-md-end">
+                    <div className="label-wrapper row row-cols-auto float-md-end">
                       <label
                         className="col-form-label col px-1"
                         htmlFor="ShortDescription"
@@ -135,7 +135,7 @@ const ProductInfoForm = () => {
             </div>
             <div className="form-group row my-2 ">
               <div className="col-md-3">
-                <div className="llabel-wrapper row row-cols-auto float-md-end">
+                <div className="label-wrapper row row-cols-auto float-md-end">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="SelectedCategoryIds"

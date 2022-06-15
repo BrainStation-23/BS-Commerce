@@ -56,7 +56,7 @@ const SearchWindow = () => {
                       <div className="col-md-5">
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchProductName"
@@ -80,7 +80,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchCategoryId"
@@ -137,7 +137,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchIncludeSubCategories"
@@ -161,7 +161,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchManufacturerId"
@@ -190,7 +190,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchVendorId"
@@ -217,7 +217,7 @@ const SearchWindow = () => {
                       <div className="col-md-7">
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchWarehouseId"
@@ -247,7 +247,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchProductTypeId"
@@ -277,7 +277,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="SearchPublishedId"
@@ -305,7 +305,7 @@ const SearchWindow = () => {
                         </div>
                         <div className="form-group row py-1">
                           <div className="col-md-4">
-                            <div className="label-wrapper text-lg-end row">
+                            <div className="label-wrapper row row-cols-auto float-md-end">
                               <label
                                 className="col-form-label col px-1"
                                 htmlFor="GoDirectlyToSku"
@@ -315,27 +315,31 @@ const SearchWindow = () => {
                               <Tooltips title="Enter product SKU and click Go." />
                             </div>
                           </div>
-                          <div className="col-md-8">
-                            <div className="Field-group Field-group-short">
-                              <Field
-                                className="form-control text-box single-line"
+                          <div className="col-md-8 ps-4 ">
+                            <div className="Field-group Field-group-short ">
+                              <div className="row">
+                                <Field
+                                className="form-control col my-3 mt-2 rounded-start rounded-0 "
                                 id="GoDirectlyToSku"
                                 name="GoDirectlyToSku"
                                 type="text"
                               />
-                              <div className="errMsg text-red-600 text-danger">
-                                <ErrorMessage name="GoDirectlyToSku" />
-                              </div>
-                              <span className="Field-group-append">
+                              <span className="Field-group-append float-end col-auto ps-0">
                                 <button
                                   type="button"
                                   id="goToProductBySku"
                                   name="goToProductBySku"
-                                  className="btn btn-info btn-flat"
+                                  className="btn btn-info btn-flat my-2  rounded-end rounded-0 "
                                 >
                                   Go
                                 </button>
                               </span>
+                              </div>
+                              
+                              <div className="errMsg text-red-600 text-danger">
+                                <ErrorMessage name="GoDirectlyToSku" />
+                              </div>
+                              
                             </div>
                           </div>
                         </div>
