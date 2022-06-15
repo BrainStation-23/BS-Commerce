@@ -14,9 +14,6 @@ const CheckoutPage = () => {
 
   return (
     <>
-    {
-      console.log(modal.info, modal.ship, modal.pay)
-    }
       {modal.info ? <CheckoutInformationComponent setModal={setModal} /> : "" }
       {modal.ship ? <ShippingPage setModal={setModal} /> : "" }
       {modal.pay ? <CheckoutPaymentComponent setModal={setModal} /> : ""}
