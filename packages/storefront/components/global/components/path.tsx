@@ -18,7 +18,7 @@ const Path = (props: Path) => {
         <Link href="/cart">Cart</Link>
       </div>
       {" > "}
-      <div className={info ? "font-bold" : "font-normal"}>
+      <div>
         <button
           onClick={() => {
             const obj = {
@@ -29,12 +29,13 @@ const Path = (props: Path) => {
             setModal(obj);
           }}
           style={{ border: "none" }}
+          className={info ? "font-bold" : "font-normal"}
         >
           Information
         </button>
       </div>
       {" > "}
-      <div className={shipping ? "font-bold" : "font-normal"}>
+      <div>
       <button
           onClick={() => {
             const obj = {
@@ -44,13 +45,14 @@ const Path = (props: Path) => {
             };
             setModal(obj);
           }}
+          className={shipping ? "font-bold" : "font-normal"}
           style={{ border: "none" }}
         >
           Shipping
         </button>
       </div>
       {" > "}
-      <div className={payment ? "font-bold" : "font-normal"}>
+      <div>
       <button
           onClick={() => {
             const obj = {
@@ -61,6 +63,7 @@ const Path = (props: Path) => {
             setModal(obj);
           }}
           style={{ border: "none" }}
+          className={payment ? "font-bold" : "font-normal"}
         >
           Payment
         </button>
