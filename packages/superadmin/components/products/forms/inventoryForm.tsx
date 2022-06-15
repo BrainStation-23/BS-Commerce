@@ -45,7 +45,7 @@ const InventoryForm = () => {
           <div className="card-body">
             <div className="form-group row" id="pnlTaxCategory">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="ManageInventoryMethodId"
@@ -55,7 +55,7 @@ const InventoryForm = () => {
                   <Tooltips title="Select inventory method. There are three methods: Don’t track inventory, Track inventory and Track inventory by attributes. You should use Track inventory by attributes when the product has different combinations of these attributes and then manage inventory for these combinations." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <Field
                   as="select"
                   className="form-control"
@@ -76,7 +76,7 @@ const InventoryForm = () => {
 
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="OrderMinimumQuantity"
@@ -86,7 +86,7 @@ const InventoryForm = () => {
                   <Tooltips title="Set the minimum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field
                     type="number"
@@ -106,7 +106,7 @@ const InventoryForm = () => {
 
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="OrderMaximumQuantity"
@@ -116,7 +116,7 @@ const InventoryForm = () => {
                   <Tooltips title="Set the maximum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field
                     type="number"
@@ -136,7 +136,7 @@ const InventoryForm = () => {
 
             <div className="form-group row" id="inventory-area">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="AllowedQuantities"
@@ -146,7 +146,7 @@ const InventoryForm = () => {
                   <Tooltips title="Enter a comma separated list of quantities you want this product to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field
                     type="text"
@@ -166,7 +166,7 @@ const InventoryForm = () => {
 
             <div className="form-group row">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="NotReturnable"
@@ -176,7 +176,7 @@ const InventoryForm = () => {
                   <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <Field
                   className="check-box mt-2 "
                   id="NotReturnable"

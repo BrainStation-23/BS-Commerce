@@ -9,7 +9,7 @@ const Tooltips = (props: tooltipInterface) => {
     <>
       <div
         data-toggle="tooltip"
-        className="bi bi-question-circle-fill p-0 mt-2"
+        className="bi bi-question-circle-fill p-0 mt-2 "
         data-placement="bottom"
         title={title}/>
     </>

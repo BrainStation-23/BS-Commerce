@@ -46,14 +46,14 @@ const PricesForm = () => {
           <div className="card-body">
             <div className="form-group row" id="product-price-area">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label className="col-form-label col px-1" htmlFor="Price">
                     Price
                   </label>
                   <Tooltips title="The price of the product. You can manage currency by selecting Configuration > Currencies." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field type="number" id="Price" name="Price" />
 
@@ -68,14 +68,14 @@ const PricesForm = () => {
             </div>
             <div className="form-group row advanced-setting">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label className="col-form-label col px-1" htmlFor="OldPrice">
                     Old price
                   </label>
                   <Tooltips title="The old price of the product. If you set an old price, this will display alongside the current price on the product page to show the difference in price." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field
                     type="number"
@@ -95,7 +95,7 @@ const PricesForm = () => {
             </div>
             <div className="form-group row advanced-setting">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="ProductCost"
@@ -105,7 +105,7 @@ const PricesForm = () => {
                   <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
                   <Field
                     type="number"
@@ -126,7 +126,7 @@ const PricesForm = () => {
 
             <div className="form-group row advanced-setting">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="SelectedDiscountIds"
@@ -137,7 +137,7 @@ const PricesForm = () => {
                   <Tooltips title="Select discounts to apply to this product. You can manage discounts by selecting Discounts from the Promotions menu." />
                 </div>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <Field
                   as="select"
                   id="SelectedDiscountIds"
@@ -158,7 +158,7 @@ const PricesForm = () => {
             <div id="product-tax-area">
               <div className="form-group row">
                 <div className="col-md-3">
-                  <div className="label-wrapper text-end row">
+                  <div className="label-wrapper row row-cols-auto float-md-end p-2">
                     <label
                       className="col-form-label col px-1"
                       htmlFor="IsTaxExempt"
@@ -168,7 +168,7 @@ const PricesForm = () => {
                     <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                   </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                   <Field
                     className="check-box mt-2"
                     id="IsTaxExempt"
@@ -182,7 +182,7 @@ const PricesForm = () => {
               </div>
               <div className="form-group row" id="pnlTaxCategory">
                 <div className="col-md-3">
-                  <div className="label-wrapper text-end row">
+                  <div className="label-wrapper row row-cols-auto float-md-end p-2">
                     <label
                       className="col-form-label col px-1"
                       htmlFor="TaxCategoryId"
@@ -192,7 +192,7 @@ const PricesForm = () => {
                     <Tooltips title="The tax classification for the product. You can manage tax categories by selecting Configuration > Tax > Tax Categories." />
                   </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                   <Field
                     as="select"
                     className="form-control"

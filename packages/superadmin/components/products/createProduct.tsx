@@ -1,16 +1,10 @@
-import ProductInfoForm from "./forms/productInfoForm";
-import {
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-} from "formik";
-import PricesForm from "./forms/pricesForm";
+import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productFormSchema";
-import InventoryForm from "./forms/inventoryForm";
+
+import PricesForm from "./forms/pricesForm";
 import ShippingForm from "./forms/shippingForm";
+import InventoryForm from "./forms/inventoryForm";
+import ProductInfoForm from "./forms/productInfoForm";
 
 const CreateProduct = () => {
   return (
@@ -37,11 +31,6 @@ const CreateProduct = () => {
           Length: 0,
           Width: 0,
           Height: 0,
-          // ProductCost: "",
-          // ProductCost: "",
-          // ProductCost: "",
-          // ProductCost: "",
-          // ProductCost: "",
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -64,8 +53,6 @@ const CreateProduct = () => {
             Length: values.Length,
             Width: values.Width,
             Height: values.Height,
-            // SelectedCategoryIds: values.SelectedCategoryIds,
-            // SelectedCategoryIds: values.SelectedCategoryIds,
           };
           console.log(data);
           // handleSearchSubmit(data);
@@ -79,68 +66,45 @@ const CreateProduct = () => {
               <div className="content-header clearfix">
                 <h1 className="float-start">
                   Add a new product
-                  <span className="fs-3 p-3">
-                    <a
-                      href="/Product"
-                      className="text-decoration-none"
-                    >
-                    <i className="bi bi-arrow-left-circle-fill p-2"  />
-                       back to product list
+                  <span className="fs-5 p-3">
+                    <a href="/Product" className="text-decoration-none">
+                      <i className="bi bi-arrow-left-circle-fill p-2" />
+                      back to product list
                     </a>
                   </span>
                 </h1>
                 <div className="float-end">
-                  <button type="submit" name="save" className="btn btn-primary">
-                    <i className="far fa-save" />
-                    Save
+                  <button
+                    type="submit"
+                    name="save"
+                    className="btn btn-primary m-1"
+                  >
+                    <i className="bi bi-save" />
+                    <p className="float-end mx-1 my-0">Save</p>
                   </button>
                   <button
                     type="submit"
                     name="save-continue"
                     className="btn btn-primary m-1"
                   >
-                    <i className="far fa-save" />
-                    Save and Continue Edit
+                    <i className="bi bi-save" />
+                    <p className="float-end mx-1 my-0">
+                      Save and Continue Edit
+                    </p>
                   </button>
                 </div>
               </div>
 
               <div className="col-md-12 clearfix">
-                <div className="float-start">
-                  <div className="form-group row">
-                    <div className="col-md-12">
-                      <div className="onoffswitch">
-                        <input
-                          type="checkbox"
-                          name="onoffswitch"
-                          className="onoffswitch-checkbox"
-                          id="advanced-settings-mode"
-                          defaultChecked={true}
-                        />
-                        <label
-                          className="onoffswitch-label"
-                          htmlFor="advanced-settings-mode"
-                        >
-                          <span
-                            className="onoffswitch-inner"
-                            data-locale-basic="Basic"
-                            data-locale-advanced="Advanced"
-                          />
-                          <span className="onoffswitch-switch" />
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <button
                   type="button"
-                  className="btn btn-info float-left mx-2"
+                  className="btn btn-info float-left mx-2 my-auto "
                   id="product-editor-settings"
                   data-toggle="modal"
                   data-target="#productsettings-window"
                 >
-                  <i className="bi bi-gear-fill" />
-                  Settings
+                  <i className="bi bi-gear-fill pt-1" />
+                  <p className="float-end mx-1 my-0">Settings</p>
                 </button>
               </div>
 

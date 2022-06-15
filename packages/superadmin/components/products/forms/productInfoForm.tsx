@@ -1,5 +1,6 @@
-import { Field, ErrorMessage } from "formik";
 import { useState } from "react";
+import { Field, ErrorMessage } from "formik";
+
 import Tooltips from "../../global/tooltip";
 
 const ProductInfoForm = () => {
@@ -44,11 +45,10 @@ const ProductInfoForm = () => {
         </div>
         <div className="collapse " id="collapseExample">
           <div className="card-body">
-            <div id="product-details-area">
-              <div>
+            <div id="product-details-area"> 
                 <div className="form-group row my-2">
                   <div className="col-md-3">
-                    <div className="label-wrapper text-end row">
+                    <div className="label-wrapper row row-cols-auto float-md-end">
                       <label className="col-form-label col px-1" htmlFor="Name">
                         Product name
                       </label>
@@ -75,7 +75,7 @@ const ProductInfoForm = () => {
                 </div>
                 <div className="form-group row my-2">
                   <div className="col-md-3">
-                    <div className="label-wrapper text-end row">
+                    <div className="llabel-wrapper row row-cols-auto float-md-end">
                       <label
                         className="col-form-label col px-1"
                         htmlFor="ShortDescription"
@@ -102,11 +102,10 @@ const ProductInfoForm = () => {
                       <ErrorMessage name="productName" />
                     </div>
                   </div>
-                </div>
-              </div>
+                </div> 
               <div className="form-group row my-2">
                 <div className="col-md-3">
-                  <div className="label-wrapper text-end row">
+                  <div className="label-wrapper text-start text-md-end row">
                     <label className="col-form-label col px-1" htmlFor="Sku">
                       SKU
                     </label>
@@ -136,7 +135,7 @@ const ProductInfoForm = () => {
             </div>
             <div className="form-group row my-2 ">
               <div className="col-md-3">
-                <div className="label-wrapper text-end row">
+                <div className="llabel-wrapper row row-cols-auto float-md-end">
                   <label
                     className="col-form-label col px-1"
                     htmlFor="SelectedCategoryIds"

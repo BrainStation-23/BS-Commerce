@@ -40,319 +40,319 @@ const SearchWindow = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card-body m-auto py-5">
-                <div className="row search-row opened">
-                  <div className="search-text">
-                    <i
-                      className="bi bi-search float-start mx-2"
-                      aria-hidden="true"
-                    />{" "}
-                    <p className="float mx-2">Search</p>{" "}
-                  </div>
-
-                  <div className="icon-collapse">
-                    <i className="far fa-angle-up" aria-hidden="true"></i>
-                  </div>
-                </div>
-                <div className="search-body ">
-                  <div className="row">
-                    <div className="col-md-5">
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchProductName"
-                            >
-                              Product name
-                            </label>
-                            <Tooltips title="A product name." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            className="form-control text-box single-line"
-                            id="SearchProductName"
-                            name="SearchProductName"
-                            type="text"
-                          />
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchProductName" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchCategoryId"
-                            >
-                              Category
-                            </label>
-                            <Tooltips title="Search by a specific category." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            data-val="true"
-                            data-val-required="The Category field is required."
-                            id="SearchCategoryId"
-                            name="SearchCategoryId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="1">Computers</option>
-                            <option value="2">
-                              Computers &gt;&gt; Desktops
-                            </option>
-                            <option value="3">
-                              Computers &gt;&gt; Notebooks
-                            </option>
-                            <option value="4">
-                              Computers &gt;&gt; Software
-                            </option>
-                            <option value="5">Electronics</option>
-                            <option value="6">
-                              Electronics &gt;&gt; Camera &amp; photo
-                            </option>
-                            <option value="7">
-                              Electronics &gt;&gt; Cell phones
-                            </option>
-                            <option value="8">
-                              Electronics &gt;&gt; Others
-                            </option>
-                            <option value="9">Apparel</option>
-                            <option value="10">Apparel &gt;&gt; Shoes</option>
-                            <option value="11">
-                              Apparel &gt;&gt; Clothing
-                            </option>
-                            <option value="12">
-                              Apparel &gt;&gt; Accessories
-                            </option>
-                            <option value="13">Digital downloads</option>
-                            <option value="14">Books</option>
-                            <option value="15">Jewelry</option>
-                            <option value="16">Gift Cards</option>
-                          </Field>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchIncludeSubCategories"
-                            >
-                              Search subcategories
-                            </label>
-                            <Tooltips title="Check to search in subcategories." />
-                          </div>
-                        </div>
-                        <div className="col-md-8 my-2">
-                          <Field
-                            className="check-box"
-                            id="SearchIncludeSubCategories"
-                            name="SearchIncludeSubCategories"
-                            type="checkbox"
-                          />
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchIncludeSubCategories" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchManufacturerId"
-                            >
-                              Manufacturer
-                            </label>
-                            <Tooltips title="Search by a specific manufacturer." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            id="SearchManufacturerId"
-                            name="SearchManufacturerId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="1">Apple</option>
-                            <option value="2">HP</option>
-                            <option value="3">Nike</option>
-                          </Field>
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchManufacturerId" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchVendorId"
-                            >
-                              Vendor
-                            </label>
-                            <Tooltips title="Search by a specific vendor." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            id="SearchVendorId"
-                            name="SearchVendorId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="1">Vendor 1</option>
-                            <option value="2">Vendor 2</option>
-                          </Field>
-                        </div>
-                      </div>
+              <div className="card rounded border-1 px-2 mt-5">
+                <div className="card-body">
+                  <div className="row search-row opened">
+                    <div className="search-text">
+                      <i
+                        className="bi bi-search float-start mx-2"
+                        aria-hidden="true"
+                      />
+                      <p className="float mx-2">Search</p>{" "}
                     </div>
-                    <div className="col-md-7">
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchWarehouseId"
-                            >
-                              Warehouse
-                            </label>
-                            <Tooltips title="Search by a specific warehouse." />
+                  </div>
+                  <div className="search-body ">
+                    <div className="row">
+                      <div className="col-md-5">
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchProductName"
+                              >
+                                Product name
+                              </label>
+                              <Tooltips title="A product name." />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            id="SearchWarehouseId"
-                            name="SearchWarehouseId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="1">Warehouse 1 (New York)</option>
-                            <option value="2">Warehouse 2 (Los Angeles)</option>
-                          </Field>
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchWarehouseId" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchProductTypeId"
-                            >
-                              Product type
-                            </label>
-                            <Tooltips title="Search by a product type." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            id="SearchProductTypeId"
-                            name="SearchProductTypeId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="5">Simple</option>
-                            <option value="10">
-                              Grouped (product with variants)
-                            </option>
-                          </Field>
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchProductTypeId" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="SearchPublishedId"
-                            >
-                              Published
-                            </label>
-                            <Tooltips title='Search by a "Published" property.' />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <Field
-                            as="select"
-                            className="form-control"
-                            id="SearchPublishedId"
-                            name="SearchPublishedId"
-                          >
-                            <option defaultValue="0">All</option>
-                            <option value="1">Published only</option>
-                            <option value="2">Unpublished only</option>
-                          </Field>
-                          <div className="errMsg text-red-600 text-danger">
-                            <ErrorMessage name="SearchPublishedId" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group row py-1">
-                        <div className="col-md-4">
-                          <div className="label-wrapper text-end row">
-                            <label
-                              className="col-form-label col px-1"
-                              htmlFor="GoDirectlyToSku"
-                            >
-                              Go directly to product SKU
-                            </label>
-                            <Tooltips title="Enter product SKU and click Go." />
-                          </div>
-                        </div>
-                        <div className="col-md-8">
-                          <div className="Field-group Field-group-short">
+                          <div className="col-md-8">
                             <Field
                               className="form-control text-box single-line"
-                              id="GoDirectlyToSku"
-                              name="GoDirectlyToSku"
+                              id="SearchProductName"
+                              name="SearchProductName"
                               type="text"
                             />
                             <div className="errMsg text-red-600 text-danger">
-                              <ErrorMessage name="GoDirectlyToSku" />
+                              <ErrorMessage name="SearchProductName" />
                             </div>
-                            <span className="Field-group-append">
-                              <button
-                                type="button"
-                                id="goToProductBySku"
-                                name="goToProductBySku"
-                                className="btn btn-info btn-flat"
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchCategoryId"
                               >
-                                Go
-                              </button>
-                            </span>
+                                Category
+                              </label>
+                              <Tooltips title="Search by a specific category." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              data-val="true"
+                              data-val-required="The Category field is required."
+                              id="SearchCategoryId"
+                              name="SearchCategoryId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="1">Computers</option>
+                              <option value="2">
+                                Computers &gt;&gt; Desktops
+                              </option>
+                              <option value="3">
+                                Computers &gt;&gt; Notebooks
+                              </option>
+                              <option value="4">
+                                Computers &gt;&gt; Software
+                              </option>
+                              <option value="5">Electronics</option>
+                              <option value="6">
+                                Electronics &gt;&gt; Camera &amp; photo
+                              </option>
+                              <option value="7">
+                                Electronics &gt;&gt; Cell phones
+                              </option>
+                              <option value="8">
+                                Electronics &gt;&gt; Others
+                              </option>
+                              <option value="9">Apparel</option>
+                              <option value="10">Apparel &gt;&gt; Shoes</option>
+                              <option value="11">
+                                Apparel &gt;&gt; Clothing
+                              </option>
+                              <option value="12">
+                                Apparel &gt;&gt; Accessories
+                              </option>
+                              <option value="13">Digital downloads</option>
+                              <option value="14">Books</option>
+                              <option value="15">Jewelry</option>
+                              <option value="16">Gift Cards</option>
+                            </Field>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchIncludeSubCategories"
+                              >
+                                Search subcategories
+                              </label>
+                              <Tooltips title="Check to search in subcategories." />
+                            </div>
+                          </div>
+                          <div className="col-md-8 my-2">
+                            <Field
+                              className="check-box"
+                              id="SearchIncludeSubCategories"
+                              name="SearchIncludeSubCategories"
+                              type="checkbox"
+                            />
+                            <div className="errMsg text-red-600 text-danger">
+                              <ErrorMessage name="SearchIncludeSubCategories" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchManufacturerId"
+                              >
+                                Manufacturer
+                              </label>
+                              <Tooltips title="Search by a specific manufacturer." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              id="SearchManufacturerId"
+                              name="SearchManufacturerId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="1">Apple</option>
+                              <option value="2">HP</option>
+                              <option value="3">Nike</option>
+                            </Field>
+                            <div className="errMsg text-red-600 text-danger">
+                              <ErrorMessage name="SearchManufacturerId" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchVendorId"
+                              >
+                                Vendor
+                              </label>
+                              <Tooltips title="Search by a specific vendor." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              id="SearchVendorId"
+                              name="SearchVendorId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="1">Vendor 1</option>
+                              <option value="2">Vendor 2</option>
+                            </Field>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-7">
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchWarehouseId"
+                              >
+                                Warehouse
+                              </label>
+                              <Tooltips title="Search by a specific warehouse." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              id="SearchWarehouseId"
+                              name="SearchWarehouseId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="1">Warehouse 1 (New York)</option>
+                              <option value="2">
+                                Warehouse 2 (Los Angeles)
+                              </option>
+                            </Field>
+                            <div className="errMsg text-red-600 text-danger">
+                              <ErrorMessage name="SearchWarehouseId" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchProductTypeId"
+                              >
+                                Product type
+                              </label>
+                              <Tooltips title="Search by a product type." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              id="SearchProductTypeId"
+                              name="SearchProductTypeId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="5">Simple</option>
+                              <option value="10">
+                                Grouped (product with variants)
+                              </option>
+                            </Field>
+                            <div className="errMsg text-red-600 text-danger">
+                              <ErrorMessage name="SearchProductTypeId" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="SearchPublishedId"
+                              >
+                                Published
+                              </label>
+                              <Tooltips title='Search by a "Published" property.' />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <Field
+                              as="select"
+                              className="form-control"
+                              id="SearchPublishedId"
+                              name="SearchPublishedId"
+                            >
+                              <option defaultValue="0">All</option>
+                              <option value="1">Published only</option>
+                              <option value="2">Unpublished only</option>
+                            </Field>
+                            <div className="errMsg text-red-600 text-danger">
+                              <ErrorMessage name="SearchPublishedId" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-group row py-1">
+                          <div className="col-md-4">
+                            <div className="label-wrapper text-lg-end row">
+                              <label
+                                className="col-form-label col px-1"
+                                htmlFor="GoDirectlyToSku"
+                              >
+                                Go directly to product SKU
+                              </label>
+                              <Tooltips title="Enter product SKU and click Go." />
+                            </div>
+                          </div>
+                          <div className="col-md-8">
+                            <div className="Field-group Field-group-short">
+                              <Field
+                                className="form-control text-box single-line"
+                                id="GoDirectlyToSku"
+                                name="GoDirectlyToSku"
+                                type="text"
+                              />
+                              <div className="errMsg text-red-600 text-danger">
+                                <ErrorMessage name="GoDirectlyToSku" />
+                              </div>
+                              <span className="Field-group-append">
+                                <button
+                                  type="button"
+                                  id="goToProductBySku"
+                                  name="goToProductBySku"
+                                  className="btn btn-info btn-flat"
+                                >
+                                  Go
+                                </button>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="text-center col-12 ">
-                      <button
-                        type="submit"
-                        id="search-products"
-                        className="btn btn-primary px-4 p my-1"
-                        style={{ borderRadius: "10px" }}
-                      >
-                        <i className="bi bi-search float-start "></i>
-                        <p className="float-end px-2 m-0 ">Search</p>
-                      </button>
+                    <div className="row">
+                      <div className="text-center col-12 ">
+                        <button
+                          type="submit"
+                          id="search-products"
+                          className="btn btn-primary px-4 p my-1"
+                          style={{ borderRadius: "10px" }}
+                        >
+                          <i className="bi bi-search float-start "></i>
+                          <p className="float-end px-2 m-0 ">Search</p>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
