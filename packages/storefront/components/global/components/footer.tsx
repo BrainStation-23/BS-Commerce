@@ -1,4 +1,5 @@
 import type { NextComponentType } from "next";
+import { useRouter } from "next/router";
 
 interface footerLink {
   name: string;
@@ -6,6 +7,7 @@ interface footerLink {
 }
 
 const Footer: NextComponentType = () => {
+  const { pathname } = useRouter();
   const informationList: footerLink[] = [
     { name: "About Us", link: "/" },
     { name: "Delivery Information", link: "/" },
@@ -29,6 +31,13 @@ const Footer: NextComponentType = () => {
     email: "sales@brainstation-23.com",
     mobile: "+8801674314359",
   };
+
+  // put the pathname in 'includes' where footer needs to be hidden
+  /*
+  if (pathname.includes("/contact")) {
+    return null;
+  }
+  */
 
   return (
     <>
