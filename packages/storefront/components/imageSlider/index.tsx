@@ -4,12 +4,13 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import CarouselSlider from "../global/components/CarouselSlider";
 import { SwiperSlide } from "swiper/react";
-import SinglePic from "./singleSlide.component";
+import { slideDetailsInterface } from "./models";
+import SinglSlide from "./singleSlide.component";
 
 const ImageSlider = () => {
-  const slideDetails = [
+  const slideDetails : slideDetailsInterface[] = [
     {
-      id: Math.floor(Math.random() * 10),
+      id: 1,
       image:
         "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider1.jpg?v=1588047077",
       description: "Fresh Farm Products",
@@ -18,7 +19,7 @@ const ImageSlider = () => {
       title: "Vegetables Big Sale",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: 2,
       image:
         "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider2.jpg?v=1588047180",
       title: "Fresh Vegetables",
@@ -27,7 +28,7 @@ const ImageSlider = () => {
         "Widest range of farm-fresh Vegetables, Fruits & seasonal produce",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: 3,
       image:
         "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider3.jpg?v=1588047393",
       title: "Fresh Tomatoes",
@@ -36,21 +37,12 @@ const ImageSlider = () => {
         "Natural organic tomatoes make your health stronger. Put your information here",
     },
   ];
-  const sss = {
-    id: Math.floor(Math.random() * 10),
-    image:
-      "https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider3.jpg?v=1588047393",
-    title: "Fresh Tomatoes",
-    description: "Natural Farm Products",
-    deatils:
-      "Natural organic tomatoes make your health stronger. Put your information here",
-  };
   return (
     <>
       <CarouselSlider>
-        {slideDetails?.map((data) => (
+        {slideDetails?.map((data ) => (
           <SwiperSlide key={data?.id}>
-            <SinglePic product={data} />
+            <SinglSlide product={data} />
           </SwiperSlide>
         ))}
       </CarouselSlider>

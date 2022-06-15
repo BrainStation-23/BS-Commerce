@@ -1,8 +1,7 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import type { NextComponentType } from "next";
 
-const BlogPost = () => {
+
+const BlogPost: NextComponentType = () => {
 	return (
 		<>
 			<div className="flex-wrap bg-white my-10 mx-2 w-max ">

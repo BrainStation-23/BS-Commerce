@@ -1,11 +1,11 @@
 const ShopNowIcon = () => {
   return (
     <>
-      <p className="uppercase flex flex row sm:text-normal lg:text-2xl">
+      <p className="uppercase flex flex row text-extrabold text-1xl">
         Shop now
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
+          className="h-6 w-6"
           viewBox="0 0 20 20"
           fill="green"
         >
