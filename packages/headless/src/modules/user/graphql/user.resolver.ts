@@ -1,12 +1,13 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ChangePassword, User } from 'src/entity/user';
+import {  User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
-import { UpdatedUserDto } from '../dto';
+import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 
 @UseGuards(JwtAuthGuard)
+@Resolver()
 export class UserResolver {
   constructor(private userService: UserService) { }
 
@@ -21,7 +22,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  async changePassword(@Args('passwordDetails') passwordDetails: ChangePassword, @UserInfo() user: User) {
+  async changePassword(@Args('passwordDetails') passwordDetails: ChangePasswordDto, @UserInfo() user: User) {
     return await this.userService.changePassword(user.id, passwordDetails);
   }
 }
