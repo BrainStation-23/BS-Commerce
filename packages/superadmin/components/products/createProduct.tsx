@@ -1,5 +1,5 @@
 import { Formik, Form } from "formik";
-import { productSchema } from "./schema/productFormSchema";
+import { productSchema } from "./schema/productSchema";
 
 import PricesForm from "./forms/pricesForm";
 import ShippingForm from "./forms/shippingForm";

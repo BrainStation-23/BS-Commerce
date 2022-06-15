@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Tooltips from "../global/tooltip";
-import { searchProductSchema } from "./schema/productFormSchema";
+import { searchProductSchema } from "./schema/productSchema";
 
 const SearchWindow = () => {
   return (

@@ -1,7 +1,8 @@
-import ProductInfoForm from "./forms/productInfoForm";
 import { Formik, Form } from "formik";
+import { productSchema } from "./schema/productSchema";
+
+import ProductInfoForm from "./forms/productInfoForm";
 import PricesForm from "./forms/pricesForm";
-import { productSchema } from "./schema/productFormSchema";
 import InventoryForm from "./forms/inventoryForm";
 import ShippingForm from "./forms/shippingForm";
 
