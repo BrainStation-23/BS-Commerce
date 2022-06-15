@@ -3,13 +3,13 @@ import { coreConfig } from 'config/core';
 import { dbConfig } from 'config/database';
 import * as dotenv from 'dotenv';
 import { AppModule } from './app.module';
-import { connectToDatabase, DB, EnvType } from './database/database.init';
+import { connectToDatabase, DB } from './database/database.init';
 import { ValidationPipe } from './decorators/service.validator';
 import { SwaggerConfig } from './internal/swagger/swagger.init';
 dotenv.config();
 
 async function bootstrap() {
-	await connectToDatabase(dbConfig.db as DB, coreConfig.env as EnvType);
+	await connectToDatabase(dbConfig.db as DB);
 	const app = await NestFactory.create(AppModule);
 	app.setGlobalPrefix(coreConfig.restApiPrefix);
 	app.useGlobalPipes(new ValidationPipe());

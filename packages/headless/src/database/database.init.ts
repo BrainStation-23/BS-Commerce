@@ -1,14 +1,13 @@
 import { connect as connectToMongoDB } from './mongodb/connect';
 import { connect as connectToMySql } from './mysql/connect';
 
-export type EnvType = 'DEVELOPMENT' | 'TEST' | 'PRODUCTION';
 export type DB = 'MONGO' | 'MYSQL';
 
-export async function connectToDatabase(db: DB, env: EnvType) {
+export async function connectToDatabase(db: DB) {
 	try {
 		switch (db) {
 			case 'MONGO':
-				await connectToMongoDB(env);
+				await connectToMongoDB();
 				break;
 			case 'MYSQL':
 				await connectToMySql();

@@ -1,20 +1,8 @@
 import { dbConfig } from 'config/database';
 import * as Mongoose from 'mongoose';
-import { EnvType } from '../database.init';
 
-const resolveMongoURI = (env: EnvType): string => {
-	switch (env) {
-		case 'DEVELOPMENT':
-			return dbConfig.mongodb.DEV_URI;
-		case 'TEST':
-			return dbConfig.mongodb.TEST_URI;
-		case 'PRODUCTION':
-			return dbConfig.mongodb.PROD_URI;
-	}
-};
-
-export async function connect(env: EnvType) {
-	await Mongoose.connect(resolveMongoURI(env));
+export async function connect() {
+	await Mongoose.connect(dbConfig.mongodb.URI!);
 	const { connection } = Mongoose;
 
 	connection.on('connected', () => {
