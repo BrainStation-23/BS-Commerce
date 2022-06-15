@@ -1,3 +1,4 @@
+import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages } from 'models';
 import { CreateManufacturerResponse, CreateManufacturerSuccessMessages, CreateManufacturerSuccessResponse } from 'models';
 import {CreateManufacturerErrorMessages} from 'models'
 import { HttpStatus, Injectable } from '@nestjs/common';
@@ -6,6 +7,7 @@ import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
+import { GetManufacturersQueryDto } from '../dto/getManufacturers.dto';
 
 @Injectable()
 export class ManufacturerService {
@@ -45,11 +47,12 @@ export class ManufacturerService {
      * @param limit Optional
      * @returns { Promise<Object> } Object of Success or Error
      */
-    async getAllManufacturers(skip?: number, limit?: number): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async getAllManufacturers(query: GetManufacturersQueryDto): Promise<GetManufacturersResponse> {
+        const {skip, limit } = query;
         const foundManufacturers = await this.manufacturerRepo.getAllManufacturers(skip, limit);
 
         if (!foundManufacturers) {
-            return this.helper.serviceResponse.errorResponse('Manufacturers not found', { manufacturers: ["Not found"] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(GetManufacturersErrorMessages.MANUFACTURERS_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         }
 
         const manufacturersCount = await this.manufacturerRepo.getManufacturersCount();
@@ -58,7 +61,7 @@ export class ManufacturerService {
             total: manufacturersCount
         }
 
-        return this.helper.serviceResponse.successResponse(allManufacturers);
+        return this.helper.serviceResponse.successResponse({...allManufacturers, message: GetManufacturersSuccessMessages.MANUFACTURERS_LOADED_SUCCESSFULLY}, HttpStatus.OK) as GetManufacturersSuccessResponse;
 
     }
 
