@@ -14,4 +14,10 @@ export class CategoryResolver {
     @Args() data: getCategoryRequestDto) {
       return await this.categoryService.getCategory(data.categoryId);
   }
+
+  @Query()
+  async getCategoryList() {
+    const item:any = await this.categoryService.getCategoryList();
+      return item;
+  }
 }

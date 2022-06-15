@@ -5,6 +5,7 @@ import { CategoryService } from '../services';
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessResponseDto } from '../dto/getCategory.dto';
+import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from '../dto/getCategoryList.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('category')
@@ -30,6 +31,25 @@ export class CategoryController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.categoryService.getCategory(data.categoryId);
+    res.status(code);
+    return response;
+  }
+
+  @Get()
+  @ApiResponse({
+    description: 'Get Category List API',
+    type: getCategoryListSuccessResponseDto,
+    status: HttpStatus.FOUND,
+  })
+  @ApiResponse({
+    description: 'Error Response',
+    type: getCategoryListErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCategoryList(
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.categoryService.getCategoryList();
     res.status(code);
     return response;
   }
