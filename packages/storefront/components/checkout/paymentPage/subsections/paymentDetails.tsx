@@ -38,7 +38,6 @@ const PaymentDetails = () => {
   const [showShippingForm, setShowShippingForm] = useState(false);
 
   const handlePaymentSubmit = (data: FormData) => {
-    console.log(data);
   };
 
   return (

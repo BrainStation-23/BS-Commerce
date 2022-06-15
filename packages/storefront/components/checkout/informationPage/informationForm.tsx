@@ -33,7 +33,6 @@ const Information = () => {
   const router = useRouter();
 
   const handleCheckoutSubmit = (data: FormData) => {
-    console.log(data);
     router.push('/checkout?step=shipping')
   };
 

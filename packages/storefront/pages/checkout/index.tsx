@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 const CheckoutPage = () => {
   const router = useRouter();
-  console.log(router.query);
   
   return (
     <>
