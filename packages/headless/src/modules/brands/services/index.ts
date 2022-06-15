@@ -4,7 +4,6 @@ import { Response } from "express";
 import * as crypto from 'crypto';
 import { ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate } from "models";
 
-import { BrandCreateSchema } from './../validators/brand.create.validator';
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
 import { CreateBrandRequestDto, CreateBrandResponseDto } from 'src/modules/brands/dto/createBrandDto';
@@ -32,7 +31,7 @@ export class BrandService{
     
     async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsResponseDto>{
         const allBrands = await this.brandRepo.getAllBrands(skip, limit);
-        if(!allBrands) return { error: 'Could not get brands due to server error', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
+        if(!allBrands) return { error: 'COULD NOT GET THE BRANDS DUE TO SERVER ERROR', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
     
         return { data: allBrands, code: HttpStatus.OK };
     } 
@@ -41,7 +40,6 @@ export class BrandService{
         const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
         if(!updatedBrand) return {error: ErrorMessageUpdate.CANNOT_UPDATE_BRAND, errors: null, code: HttpStatus.BAD_REQUEST};
         
-        console.log(updatedBrand);
         return { code: HttpStatus.OK, data: updatedBrand};
     }
 

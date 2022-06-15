@@ -25,5 +25,5 @@ export interface UpdateBrandErrorResponse extends ErrorResponse{
 
 export const enum ErrorMessageUpdate{
     INVALID_BRAND_ID = 'NO BRAND WITH SUCH ID',
-    CANNOT_UPDATE_BRAND = 'Cannot update the brand'
+    CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND'
 }
