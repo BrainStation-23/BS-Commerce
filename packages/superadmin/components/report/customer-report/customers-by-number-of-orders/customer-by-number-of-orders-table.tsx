@@ -62,7 +62,7 @@ const CustomerByNumberOfOrdersTable = () => {
             Learn more about{" "}
             <a href="#" style={{ textDecoration: "none" }}>
               {" "}
-              log
+              reports
             </a>
           </p>
           <Table items={paginatedData} columns={columns} />
