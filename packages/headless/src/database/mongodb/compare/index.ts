@@ -6,7 +6,7 @@ export class CompareDatabase implements ICompareDatabase {
 	async getCompareListByUserId(userId: string): Promise<Compare | null> {
 		const compareList = await CompareModel.findOne({
 			userId,
-		});
+		}).lean();
 		return compareList;
 	}
 
@@ -14,7 +14,7 @@ export class CompareDatabase implements ICompareDatabase {
 		const compareList = await CompareModel.findOne({
 			id: compareId,
 			userId,
-		});
+		}).lean();
 
 		return compareList;
 	}
@@ -24,7 +24,7 @@ export class CompareDatabase implements ICompareDatabase {
 			{ userId: userId },
 			{ $addToSet: { items: productId } },
 			{ new: true },
-		);
+		).lean();
 	}
 
 	async createCompare(userId: string, productId: CompareItems): Promise<Compare> {
@@ -37,7 +37,7 @@ export class CompareDatabase implements ICompareDatabase {
 		return await CompareModel.findOneAndRemove({
 			id: compareId,
 			userId,
-		});
+		}).lean();
 	}
 
 	async deleteItemByProductId(userId: string, productId: string): Promise<Compare> {
@@ -47,7 +47,7 @@ export class CompareDatabase implements ICompareDatabase {
 			},
 			{ $pull: { items: { productId } } },
 			{ new: true },
-		);
+		).lean();
 	}
 
 	async deleteAllItemByUserId(userId: string): Promise<Compare> {
@@ -57,6 +57,6 @@ export class CompareDatabase implements ICompareDatabase {
 			},
 			{ $set: { items: [] } },
 			{ new: true },
-		);
+		).lean();
 	}
 }

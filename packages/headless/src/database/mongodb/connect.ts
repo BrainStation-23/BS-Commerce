@@ -4,11 +4,11 @@ import { EnvType } from '../database.init';
 
 const resolveMongoURI = (env: EnvType): string => {
 	switch (env) {
-		case 'DEV':
+		case 'DEVELOPMENT':
 			return dbConfig.mongodb.DEV_URI;
 		case 'TEST':
 			return dbConfig.mongodb.TEST_URI;
-		case 'PROD':
+		case 'PRODUCTION':
 			return dbConfig.mongodb.PROD_URI;
 	}
 };
