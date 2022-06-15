@@ -1,23 +1,28 @@
 import React, { FC, useEffect, useState } from "react";
-import productData from "../../allData/product-data.json";
 import Product from "../global/components/product/product";
 import SwiperGrid from "../global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
 import Container from "../global/components/container";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const TrendingProducts: FC = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
   let [filteredProduct, setProducts]: any = useState([]);
 
+  const products = useSelector(
+    (state: RootState) => state?.productsStore?.products
+  );
+
   useEffect(() => {
-    const newProduct = productData.products.filter(
+    const newProduct = products?.filter(
       (product: any) => product.category === "smartphones"
     );
     setProducts(newProduct);
-  }, []);
+  }, [products]);
 
   const handleClick = (text: any) => {
-    const newProduct = productData.products.filter(
+    const newProduct = products?.filter(
       (product: any) => product.category === text
     );
     setProducts(newProduct);

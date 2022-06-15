@@ -8,8 +8,18 @@ import BannerPage from "@/components/global/bannerComponent";
 import BestSell from "@/components/bestSell";
 import Blog from "@/components/blog/blog";
 import HomefullBanner from "@/components/global/bannerComponent/homeFullBanner";
+import { useDispatch } from "react-redux";
+import { storeProducts } from "toolkit/ProductsSlice";
+import { useEffect } from "react";
+import productData from "../allData/product-data.json";
 
 const Home: NextPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(storeProducts(productData.products));
+  }, []);
+
   return (
     <>
       <ImageSlider />
