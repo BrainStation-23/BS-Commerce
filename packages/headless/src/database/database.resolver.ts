@@ -20,7 +20,6 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return ManufacturerDatabaseMongo;
           case 'CATEGORY':
             return CategoryDatabaseMongo;
-
           default:
             break;
         }

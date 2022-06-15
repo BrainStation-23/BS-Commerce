@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { responseCategory } from "src/entity/category";
+import { Category } from "src/entity/category";
 import { ICategoryDatabase } from "src/modules/category/repositories/category.database.interface";
 import { CategoryModel } from "./category.model";
 
@@ -40,5 +41,8 @@ export class CategoryDatabase implements ICategoryDatabase {
         let category: any = this.generateCategoryTree(categories);
         return category;
     }
-}
 
+    async getCategory(categoryId: string): Promise<Category | null> {
+        return await CategoryModel.findOne({categoryId })
+    }
+}
