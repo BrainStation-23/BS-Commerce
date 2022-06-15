@@ -23,24 +23,6 @@ export class UpdateBrandRequestdto implements UpdateBrandRequest{
 
 }
 
-// export class UpdatedBrandDto implements UpdatedBrand{
-
-//     @ApiProperty()
-//     @IsNotEmpty()
-//     @IsString()
-//     id: string;
-
-//     @ApiProperty()
-//     @IsNotEmpty()
-//     @IsObject()
-//     info: InfoDto;
-
-//     @ApiProperty()
-//     @IsNotEmpty()
-//     @IsObject()
-//     meta: MetaDto;
-// }
-
 export class UpdateBrandErrorResponseDto implements UpdateBrandErrorResponse{
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     code?: number;
