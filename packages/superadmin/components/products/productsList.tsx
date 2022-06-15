@@ -32,7 +32,8 @@ const ProductsList = () => {
       label: "Picture",
       path: "thumbnail",
       content: (data: any, key: any, index: any) => (
-        <img src={`${data[key]}`} height="75px" width={"75px"} alt="..."></img>
+        <td><img src={`${data[key]}`} height="75px" width={"75px"} alt="..."></img></td>
+        
       ),
     },
     {
