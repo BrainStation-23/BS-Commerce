@@ -18,15 +18,15 @@ const Path = (props: Path) => {
             </div>
             {" > "}
             <div className={info ? "font-bold" : "font-normal"}>
-                <Link href="/information">Information</Link>
+                <Link href="/checkout?step=information">Information</Link>
             </div>
             {" > "}
             <div className={shipping ? "font-bold" : "font-normal"}>
-                <Link href="/shipping">Shipping</Link>
+                <Link href="/checkout?step=shipping">Shipping</Link>
             </div>
             {" > "}
             <div className={payment ? "font-bold" : "font-normal"}>
-                <Link href="/payment">Payment</Link>
+                <Link href="/checkout?step=payment">Payment</Link>
             </div>
         </div>
     );

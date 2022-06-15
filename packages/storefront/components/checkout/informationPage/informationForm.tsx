@@ -34,7 +34,7 @@ const Information = () => {
 
   const handleCheckoutSubmit = (data: FormData) => {
     console.log(data);
-    router.push('/shipping')
+    router.push('/checkout?step=shipping')
   };
 
   return (

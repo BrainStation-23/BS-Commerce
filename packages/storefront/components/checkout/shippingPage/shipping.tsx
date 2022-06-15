@@ -50,7 +50,7 @@ const Shipping = () => {
 
                 <div className="mt-5 lg:flex">
                     <div>
-                        <Link href="/payment" passHref>
+                        <Link href="/checkout?step=payment" passHref>
                             <button className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-sm">
                                 Continue to payment
                             </button>
@@ -64,7 +64,7 @@ const Shipping = () => {
                                 </a>
                             </Link>
                         </div>
-                        <Link href="/information" passHref>
+                        <Link href="/checkout?step=information" passHref>
                             <a className="text-decoration-none">
                                 Return to information
                             </a>
