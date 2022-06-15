@@ -38,21 +38,21 @@ export class BrandService{
 
     async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequestdto): Promise<UpdateBrandResponseDto>{
         const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
-        if(!updatedBrand) return {error: ErrorMessageUpdate.CANNOT_UPDATE_BRAND, errors: null, code: HttpStatus.BAD_REQUEST};
+        if(!updatedBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST};
         
         return { code: HttpStatus.OK, data: updatedBrand};
     }
 
     async getBrandById(brandId: string): Promise<GetBrandByIdResponseDto>{
         const foundBrand = await this.brandRepo.getBrandById(brandId);
-        if(!foundBrand) return {error: ErrorMessageGetBrandById.CANNOT_FIND_BRAND, errors: null, code: HttpStatus.BAD_REQUEST };
+        if(!foundBrand) return {error: ErrorMessageGetBrandById.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return { data: foundBrand, code: HttpStatus.OK };
     }
 
     async deleteBrandById(brandId: string): Promise<DeleteBrandResponseDto>{
         const deletedBrand = await this.brandRepo.deleteBrandById(brandId);
-        if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.CANNOT_DELETE_BRAND, errors: null, code: HttpStatus.BAD_REQUEST };
+        if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return {data: deletedBrand, code: HttpStatus.OK};
     }  
