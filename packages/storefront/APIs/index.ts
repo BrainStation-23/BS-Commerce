@@ -11,4 +11,4 @@ const restApi:apiFunction = {
     getUser: getUserRest
 }
 
-export const userAPI:apiFunction = config.apiService === 'GRAPHQL' ? graphqlApi : restApi
+export const userAPI:apiFunction = config?.apiService === 'GRAPHQL' ? graphqlApi : restApi
