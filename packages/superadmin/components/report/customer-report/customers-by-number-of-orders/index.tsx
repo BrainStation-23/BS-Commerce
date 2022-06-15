@@ -1,5 +1,5 @@
 import CustomerSearch from "../common/customer-search";
-import CustomerByNumberOfOrdersTable from "./customer-by-number-of-orders";
+import CustomerByNumberOfOrdersTable from "./customer-by-number-of-orders-table";
 
 const CustomersByNumberOfOrdersComponent = () => {
   return (

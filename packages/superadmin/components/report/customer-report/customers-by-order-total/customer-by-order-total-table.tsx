@@ -28,7 +28,7 @@ const CustomerByOrderTotalTable = () => {
       label: "View",
       path: "view",
       content: (data: any, key: any, index: any) => (
-        <td>
+        <td className="text-center">
           <Link href="#" passHref> 
             <button style={{ border: "none" }}>
               <span>

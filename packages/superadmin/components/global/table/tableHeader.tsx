@@ -9,7 +9,9 @@ const TableHead = (props: any) => {
           {columns.map((col: any, index: any) => {
             return (
               <React.Fragment key={index}>
-                <th>{col.label}</th>
+                {
+                  col.label === "View" ? <th className="text-center">{col.label}</th> : <th>{col.label}</th>
+                }
               </React.Fragment>
             );
           })}
