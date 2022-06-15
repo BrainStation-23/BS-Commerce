@@ -69,7 +69,7 @@ const CustomerByNumberOfOrdersTable = () => {
 
           <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
             <Pagination
-              totalItems={40}
+              totalItems={paginatedData.length}
               pageCount={pageCount}
               activePage={activePage}
               onClickPage={handleClickPage}
@@ -142,7 +142,7 @@ const CustomerByNumberOfOrdersTable = () => {
             <p>
               {` ${(activePage - 1) * pageCount + 1} - ${
                 (activePage - 1) * pageCount + pageCount
-              } of 41 items`}
+              } of ${paginatedData.length} items`}
               <span className="ms-2">
                 <button style={{ border: "none" }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
