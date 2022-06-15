@@ -5,7 +5,7 @@ import { User } from "utils/types";
 export async function getUserRest():Promise<User[] | undefined> {
     try {
       const response = await axios.get(`${config.restPrefix}/user`);
-      return response.data;
+      return response.data as User[];
     } catch (error) {
       console.error(error);
     }

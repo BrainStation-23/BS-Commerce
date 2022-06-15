@@ -45,3 +45,7 @@ export interface accordionBody {
     country: string;
     postCode: string;
   }
+
+  export interface apiFunction {
+    getUser:() => Promise<User[] | undefined>
+  }
