@@ -1,3 +1,4 @@
+import { UpdateManufacturerDto, UpdateManufacturerErrorResponseDto, UpdateManufacturerSuccessResponseDto } from './../dto/updateManufacturer.dto';
 import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
@@ -107,7 +108,17 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Patch('/:manufacturerId')
-    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: Manufacturer, @Res({ passthrough: true }) res: Response) {
+    @ApiResponse({
+        description: 'Update Manufacturer Success Response',
+        type: UpdateManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Update Manufacturer Error Response',
+        type: UpdateManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
+    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: UpdateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer);
         res.status(code);
         return response;
