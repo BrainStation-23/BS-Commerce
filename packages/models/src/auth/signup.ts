@@ -1,39 +1,35 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 
 /**
- * API Path: /auth/signup
+ * API Path: /auth/forgot
  * method: POST
- * body: CreateUserRequest
- * response: CreateUserResponse
+ * body: ForgotPasswordRequest
+ * response: ForgotPasswordResponse
  */
 
-export interface CreateUserRequest {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+export interface ForgotPasswordRequest {
+    username: string;
 }
 
-export const enum SignUpSuccessMessages {
-    USER_CREATED_SUCCESSFUL = 'USER_CREATED_SUCCESSFUL',
+export interface ForgotMessageResponse {
+    message?: string;
 }
 
-export interface CreateUserSuccessResponse extends SuccessResponse {
+export interface ForgotPasswordSuccessResponse extends SuccessResponse {
     code: number;
-    data: {
-        message?: SignUpSuccessMessages
-    };
+    data: ForgotMessageResponse
 }
 
-export const enum SignUpErrorMessages {
-    USER_ALREADY_EXITS = 'USER_ALREADY_EXITS',
-    CAN_NOT_CREATE_USER = 'CAN_NOT_CREATE_USER'
+export const enum ForgotPasswordErrorMessages {
+    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+    CAN_NOT_UPDATE_USER_PASSWORD = 'CAN_NOT_UPDATE_USER_PASSWORD',
+    SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT = 'SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT'
 }
 
-export interface CreateUserErrorResponse extends ErrorResponse {
+export interface ForgotPasswordErrorResponse extends ErrorResponse {
     code?: number;
-    error: SignUpErrorMessages;
+    error: ForgotPasswordErrorMessages;
     errors: DescriptiveError;
 }
 
-export type CreateUserResponse = CreateUserSuccessResponse | CreateUserErrorResponse;
+export type ForgotPasswordResponse = ForgotPasswordSuccessResponse | ForgotPasswordErrorResponse;

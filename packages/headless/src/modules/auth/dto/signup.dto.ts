@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsObject, IsString, MinLength } from 'class-validator';
 import {
     CreateUserErrorResponse,
     CreateUserRequest,
@@ -37,6 +37,7 @@ export class CreateUserDto implements CreateUserRequest {
 
 export class CreateUserErrorResponseDto implements CreateUserErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+    @IsNumber()
     code: number;
 
     @ApiProperty({
@@ -46,18 +47,22 @@ export class CreateUserErrorResponseDto implements CreateUserErrorResponse {
     error: SignUpErrorMessages;
 
     @ApiProperty()
+    @IsArray()
     errors: string[];
 }
 
 export class CreateUserMessage {
     @ApiProperty({ example: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL })
-    message: string | any;
+    @IsString()
+    message: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL;
 }
 
 export class CreateUserSuccessResponseDto implements CreateUserSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
+    @IsNumber()
     code: number;
 
     @ApiProperty()
+    @IsObject()
     data: CreateUserMessage;
 }

@@ -14,7 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.useGlobalPipes(new ValidationPipe());
-  (coreConfig.api === 'REST') ? SwaggerConfig(app) : null;
+  coreConfig.api === 'REST' ? SwaggerConfig(app) : null;
   await app.listen(coreConfig.port);
   console.log(`http://${coreConfig.host}:${coreConfig.port}`);
 }

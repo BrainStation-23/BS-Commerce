@@ -1,6 +1,5 @@
-scalar DateTime
-
 type Address {
+  id: String!
   addressLine1: String!
   addressLine2: String
   city: String!
@@ -9,6 +8,7 @@ type Address {
 }
 
 input AddressInput {
+  id: String
   addressLine1: String
   addressLine2: String
   city: String
@@ -24,8 +24,6 @@ type User {
   username: String!
   email: String!
   provider: String
-  resetPasswordToken: String
-  resetPasswordExpires: DateTime
   phone: String
   gender: String
   addresses: [Address]
@@ -37,8 +35,6 @@ input UpdateUserInput {
   firstName: String
   lastName: String
   provider: String
-  resetPasswordToken: String
-  resetPasswordExpires: DateTime
   phone: String
   gender: String
   address: AddressInput
@@ -49,7 +45,6 @@ input UpdateUserInput {
 input ChangePasswordInput {
   currentPassword: String
   newPassword: String
-  verifyPassword: String
 }
 
 type UserResponse {
@@ -58,11 +53,17 @@ type UserResponse {
   data: User
 }
 
+type ChangePasswordResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
 type Query {
   getUser: UserResponse!
 }
 
 type Mutation {
   updateUser(data: UpdateUserInput): UserResponse!
-  changePassword(passwordDetails: ChangePasswordInput): UserResponse!
+  changePassword(passwordDetails: ChangePasswordInput): ChangePasswordResponse!
 }

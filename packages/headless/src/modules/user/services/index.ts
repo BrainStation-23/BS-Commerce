@@ -6,14 +6,13 @@ import { authConfig } from 'config/auth';
 import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 import {
     GetUserResponse,
-    UpdateUserSuccessResponse,
     UpdateUserResponse,
     ChangePasswordResponse,
     GetUserErrorMessages,
     UpdateUserErrorMessages,
     ChangePasswordErrorMessages,
     ChangePasswordSuccessMessage
-} from 'models'
+} from 'models';
 
 @Injectable()
 export class UserService {
