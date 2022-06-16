@@ -31,13 +31,13 @@ export interface CreateManufacturerSuccessResponse extends SuccessResponse {
     code: number;
     data: {
         manufacturer: Manufacturer,
-        message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY
+        message: CreateManufacturerSuccessMessages
     };
 }
 
 export interface CreateManufacturerErrorResponse extends ErrorResponse {
     code?: number;
-    error: CreateManufacturerErrorMessages.MANUFACTURER_ALREADY_EXISTS | CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY;
+    error: CreateManufacturerErrorMessages;
     errors: DescriptiveError;
 }
 
