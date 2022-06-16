@@ -35,7 +35,6 @@ export class GetAllProductsErrorResponseDto implements GetAllProductsErrorRespon
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

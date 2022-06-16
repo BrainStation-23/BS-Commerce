@@ -93,7 +93,6 @@ export class UpdateProductMetaDto implements UpdateProductMeta {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
-    @IsString()
     keywords?: string[];
 
     @ApiProperty({ required: false })

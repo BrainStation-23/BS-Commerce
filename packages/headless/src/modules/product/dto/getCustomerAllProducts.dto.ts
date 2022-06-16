@@ -66,7 +66,6 @@ export class GetCustomerAllProductsErrorResponseDto implements GetCustomerAllPro
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

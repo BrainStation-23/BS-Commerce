@@ -26,7 +26,6 @@ export class DeleteProductErrorResponseDto implements DeleteProductErrorResponse
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

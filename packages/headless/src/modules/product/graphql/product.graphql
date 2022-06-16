@@ -86,6 +86,12 @@ type Product {
   categories: [Categories!]!
 }
 
+type ConditionalProduct {
+  info: Info!
+  photos: [Photo]
+  brands: [String]
+}
+
 input ProductInput {
   info: InfoInput!
   meta: MetaInput!
@@ -107,7 +113,7 @@ input SearchCondition {
 }
 
 type ProductArrayWithCount {
-  products: [Product!]!
+  products: [ConditionalProduct!]!
   count: Int!
 }
 
@@ -155,12 +161,22 @@ type ProductArrayWithCountResponse {
   data: ProductArrayWithCount
 }
 
+type Count {
+  count: Int!
+}
+
+type ProductCount {
+  error: String
+  code: Int!
+  data: Count!
+}
+
 type Query {
   getProduct(params: getProductParams!): ProductResponse!
   getAllProducts(query: queryConditionInput): ProductArrayResponse!
   getCustomerProduct(params: getProductParams!): ProductResponse!
   getCustomerAllProducts(query: SearchCondition): ProductArrayResponse!
-  getProductCount: Int!
+  getProductCount: ProductCount!
   getProductBySKU(params: getProductBySKUParams!): ProductResponse!
   getProductsByCondition(
     condition: SearchCondition

@@ -13,7 +13,6 @@ export class updateProductsForBrandRequestDto implements UpdateProductsForBrandR
     @ApiProperty({ required: false, type: [String], })
     @IsNotEmpty()
     @IsArray()
-    @IsString()
     productIds: string[];
 
     @ApiProperty({ required: false, type: String })
@@ -33,7 +32,6 @@ export class UpdateProductsForBrandErrorResponseDto implements UpdateProductsFor
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

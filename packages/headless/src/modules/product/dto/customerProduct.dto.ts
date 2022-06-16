@@ -79,7 +79,6 @@ export class CustomerProductMetaDto implements CustomerProductMeta {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
-    @IsString()
     keywords?: string[];
 
     @ApiProperty({ required: false })
@@ -173,7 +172,6 @@ export class CustomerProductDto implements CustomerProduct {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     tags?: string[];
 
     @ApiProperty({ type: [CustomerProductPhotoDto] })
@@ -183,7 +181,6 @@ export class CustomerProductDto implements CustomerProduct {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     brands?: string[];
 
     @ApiProperty({ type: [CustomerProductCategoryDto] })
@@ -211,7 +208,6 @@ export class CustomerSingleProductDto implements CustomerSingleProduct {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     tags?: string[];
 
     @ApiProperty({ type: [CustomerSingleProductPhotoDto] })
@@ -221,7 +217,6 @@ export class CustomerSingleProductDto implements CustomerSingleProduct {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     brands?: string[];
 
     @ApiProperty({ type: [CustomerProductCategoryDto] })

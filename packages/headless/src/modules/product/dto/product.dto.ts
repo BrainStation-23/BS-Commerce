@@ -84,7 +84,6 @@ export class ProductMetaDto implements ProductMeta {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
-    @IsString()
     keywords?: string[];
 
     @ApiProperty({ required: false })
@@ -166,7 +165,6 @@ export class ProductDto implements Product {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     tags?: string[];
 
     @ApiProperty({ type: [ProductPhotoDto] })
@@ -176,7 +174,6 @@ export class ProductDto implements Product {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     brands?: string[];
 
     @ApiProperty({ type: [ProductCategoryDto] })

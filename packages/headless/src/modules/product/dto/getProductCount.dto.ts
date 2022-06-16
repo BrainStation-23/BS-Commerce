@@ -18,7 +18,6 @@ export class GetProductCountErrorResponseDto implements GetProductCountErrorResp
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 
