@@ -3,7 +3,7 @@ import card from "./styles/widgets.module.css";
 const StatWidgets: NextComponentType = () => {
   const widgets = [
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "Orders",
       type: "stat",
       statVal: 15,
@@ -12,7 +12,7 @@ const StatWidgets: NextComponentType = () => {
       link: "/",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "Pending User Requests",
       type: "stat",
       statVal: 15,
@@ -21,7 +21,7 @@ const StatWidgets: NextComponentType = () => {
       link: "/",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "New Registered users",
       type: "stat",
       statVal: 15,
@@ -30,7 +30,7 @@ const StatWidgets: NextComponentType = () => {
       link: "/",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "Low Stock Products",
       type: "stat",
       statVal: 15,
@@ -39,7 +39,7 @@ const StatWidgets: NextComponentType = () => {
       link: "/",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "Pending user requests",
       type: "stat",
       statVal: 15,
@@ -48,7 +48,7 @@ const StatWidgets: NextComponentType = () => {
       link: "/",
     },
     {
-      id: Math.floor(Math.random() * 10),
+      id: Math.floor(Math.random() * 100),
       name: "Orders",
       type: "stat",
       statVal: 15,
@@ -68,7 +68,7 @@ const StatWidgets: NextComponentType = () => {
             >
               <div
                 className={`${card.small_box} ${card.bg_info}`}
-                style={{ ["background-color" as any]: widget.bgColor }}
+                style={{ ["backgroundColor" as any]: widget.bgColor }}
               >
                 <div className={card.inner}>
                   <h3>{widget.statVal}</h3>
