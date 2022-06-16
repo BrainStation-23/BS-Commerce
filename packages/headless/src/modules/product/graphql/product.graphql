@@ -34,6 +34,22 @@ input InfoInput {
   publishDate: DateTime
 }
 
+input UpdateInfoInput {
+  name: String
+  shortDescription: String
+  fullDescription: String
+  sku: String
+  price: Int
+  oldPrice: Int
+  cost: Int
+  showOnHomePage: Boolean
+  includeInTopMenu: Boolean
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  isFeatured: Boolean
+}
+
 type Meta {
   keywords: [String]
   title: String
@@ -46,6 +62,13 @@ input MetaInput {
   title: String
   description: String
   friendlyPageName: String!
+}
+
+input UpdateMetaInput {
+  keywords: [String]
+  title: String
+  description: String
+  friendlyPageName: String
 }
 
 type Photo {
@@ -76,6 +99,12 @@ input CategoriesInput {
   displayOrder: Int
 }
 
+input UpdateCategoriesInput {
+  id: String
+  isFeatured: Boolean
+  displayOrder: Int
+}
+
 type Product {
   id: String!
   info: Info!
@@ -100,6 +129,16 @@ input ProductInput {
   brands: [String!]!
   categories: [CategoriesInput!]!
 }
+
+input UpdateProductInput {
+  info: UpdateInfoInput
+  meta: UpdateMetaInput
+  tags: [String]
+  photos: [PhotoInput]
+  brands: [String]
+  categories: [UpdateCategoriesInput]
+}
+
 
 input SearchCondition {
   skip: Int
@@ -149,6 +188,16 @@ type ProductResponse {
   data: Product
 }
 
+type Message {
+  message: String!
+}
+
+type ProductDeletedResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
 type ProductArrayResponse {
   error: String
   code: Int!
@@ -185,9 +234,9 @@ type Query {
 
 type Mutation {
   addProduct(product: ProductInput): ProductResponse!
-  deleteProduct(params: deleteProductParams!): ProductResponse!
+  deleteProduct(params: deleteProductParams!): ProductDeletedResponse!
   updateProduct(
-    product: ProductInput
+    product: UpdateProductInput
     params: updateProductParams!
   ): ProductResponse!
   updateProductsForBrand(

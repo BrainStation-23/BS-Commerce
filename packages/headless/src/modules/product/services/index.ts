@@ -83,7 +83,7 @@ export class ProductService {
     let getProduct: any = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
-    const updatedProduct = await this.productRepo.updateProduct(getProduct, productId);
+    const updatedProduct = await this.productRepo.updateProduct(product, productId);
     if (!updatedProduct) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.CAN_NOT_UPDATE_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(updatedProduct, HttpStatus.OK);
   }
