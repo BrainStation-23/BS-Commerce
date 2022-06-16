@@ -17,7 +17,7 @@ import {
 @Controller('user')
 @ApiTags('User Profile API')
 @UseGuards(JwtAuthGuard)
-@ApiBearerAuth('BearerAuth')
+@ApiBearerAuth()
 export class UserController {
   constructor(private userService: UserService) { }
 
@@ -35,7 +35,7 @@ export class UserController {
   async getUser(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.getUser(user.id);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Patch()
@@ -52,7 +52,7 @@ export class UserController {
   async updateUser(@Body() data: UpdatedUserDto, @UserInfo() userInfo: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.updateUser(userInfo.id, data);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Patch('password')
@@ -69,6 +69,6 @@ export class UserController {
   async changePassword(@Body() passwordDetails: ChangePasswordDto, @UserInfo() userInfo: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.changePassword(userInfo.id, passwordDetails);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 }

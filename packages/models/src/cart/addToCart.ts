@@ -12,15 +12,16 @@ export interface addToCartSuccessResponse extends SuccessResponse {
     data: Cart
 }
 
-export interface addToCartErrorResponse extends ErrorResponse { 
+export interface addToCartErrorResponse extends ErrorResponse {
     code?: number;
-    error: ErrorMessage;
+    error: addToCartErrorMessage;
     errors: DescriptiveError;
 }
 
-export const enum ErrorMessage{
+export const enum addToCartErrorMessage {
     CANNOT_CREATE_CART = 'CANNOT_CREATE_CART',
-    CANNOT_ADD_ITEM_TO_THE_CART='CANNOT_ADD_ITEM_TO_THE_CART',
-    CANNOT_INCREMENT_CART_ITEM='CANNOT_INCREMENT_CART_ITEM',
+    CANNOT_ADD_ITEM_TO_THE_CART = 'CANNOT_ADD_ITEM_TO_THE_CART',
+    CANNOT_INCREMENT_CART_ITEM = 'CANNOT_INCREMENT_CART_ITEM',
 }
+
 export type AddToCartResponse = addToCartSuccessResponse | addToCartErrorResponse;

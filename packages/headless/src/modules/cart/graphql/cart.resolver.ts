@@ -5,6 +5,10 @@ import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
+import { AddToCartRequestDto } from '../dto/addToCart.dto';
+import { deleteCartRequestDto } from '../dto/deleteCart.dto';
+import { updateCartItemRequestDto } from '../dto/updateCartItem.dto';
+import { deleteCartItemRequestDto } from '../dto/deleteCartItem.dto';
 
 @UseGuards(JwtAuthGuard)
 @Resolver()
@@ -18,22 +22,21 @@ export class CartResolver {
 
   @Mutation()
   async addToCart(
-    @Args('item') item: Item,
+    @Args('item') item: AddToCartRequestDto,
     @UserInfo() user: User,
   ) {
     return await this.cartService.addToCart(item, user.id);
   }
 
   @Mutation()
-  async deleteCart(@Args('cartId') cartId: string) {
-    console.log(cartId);
-    return await this.cartService.deleteCart(cartId);
+  async deleteCart(@Args() data: deleteCartRequestDto) {
+    return await this.cartService.deleteCart(data.cartId);
   }
 
   @Mutation()
   async updateCartItem(
     @UserInfo() user: User,
-    @Args('item') item: Item,
+    @Args('item') item: updateCartItemRequestDto,
   ) {
     return await this.cartService.updateCartItem(user.id, item);
   }
@@ -41,9 +44,9 @@ export class CartResolver {
   @Mutation()
   async deleteCartItem(
     @UserInfo() user: User,
-    @Args('productId') productId: string,
+    @Args() data: deleteCartItemRequestDto,
   ) {
-    return await this.cartService.deleteCartItem(user.id, productId);
+    return await this.cartService.deleteCartItem(user.id, data.productId);
   }
 
   @Mutation()

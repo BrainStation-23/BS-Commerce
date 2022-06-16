@@ -1,5 +1,4 @@
-import { DescriptiveError, ErrorResponse } from 'src/common/index';
-import { SuccessResponse } from 'src/common/index';
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 
 /**
  * API Path: /auth/forgot
@@ -29,7 +28,7 @@ export const enum ForgotPasswordErrorMessages {
 
 export interface ForgotPasswordErrorResponse extends ErrorResponse {
     code?: number;
-    error: ForgotPasswordErrorMessages.CAN_NOT_GET_USER | ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD | ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT;
+    error: ForgotPasswordErrorMessages;
     errors: DescriptiveError;
 }
 

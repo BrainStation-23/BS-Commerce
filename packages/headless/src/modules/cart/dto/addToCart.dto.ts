@@ -1,7 +1,7 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, ResponseItem, CartProduct, addToCartErrorResponse, addToCartRequest, ErrorMessage, addToCartSuccessResponse } from 'models';
+import { Cart, ResponseItem, CartProduct, addToCartErrorResponse, addToCartRequest, addToCartSuccessResponse, addToCartErrorMessage } from 'models';
 class ResponseItemDto implements ResponseItem{
     @ApiProperty()
     @IsOptional()
@@ -55,10 +55,10 @@ export class AddToCartErrorResponseDto implements addToCartErrorResponse {
     code: number;
 
     @ApiProperty({
-        example: ErrorMessage.CANNOT_CREATE_CART,
-        examples: [ErrorMessage.CANNOT_CREATE_CART, ErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, ErrorMessage.CANNOT_INCREMENT_CART_ITEM],
+        example: addToCartErrorMessage.CANNOT_CREATE_CART,
+        examples: [addToCartErrorMessage.CANNOT_CREATE_CART, addToCartErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, addToCartErrorMessage.CANNOT_INCREMENT_CART_ITEM],
     })
-    error: ErrorMessage;
+    error: addToCartErrorMessage;
 
     @ApiProperty()
     errors: string[];
