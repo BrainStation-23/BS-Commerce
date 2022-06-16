@@ -2,11 +2,12 @@ import Link from "next/link";
 import ContactDetails from "./subsections/contactDetails";
 import PaymentDetails from "./subsections/paymentDetails";
 
-const Payment = () => {
+const Payment = (props: any) => {
+  const {setModal} = props;
   return (
     <>
-      <ContactDetails />
-      <PaymentDetails />
+      <ContactDetails setModal={setModal} />
+      <PaymentDetails  setModal={setModal} />
     </>
   );
 };
