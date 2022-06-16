@@ -4,9 +4,10 @@ import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
+import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { dbConfig } from 'config/database';
 
-type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER';
+type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER' | 'CATEGORY';
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -20,7 +21,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return ProductDatabaseMongo;
           case 'MANUFACTURER':
             return ManufacturerDatabaseMongo;
-
+          case 'CATEGORY':
+            return CategoryDatabaseMongo;
           default:
             break;
         }
