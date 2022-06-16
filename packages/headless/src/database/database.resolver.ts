@@ -1,5 +1,5 @@
 // Mongodb dependency implementations
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
