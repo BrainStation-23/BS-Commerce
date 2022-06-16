@@ -73,12 +73,12 @@ const Sidebar: NextComponentType = (props: any) => {
             <Image src={bsLogo} alt="bs-logo" />
           </div>
           <div className={sidebar.title}>BS Commerce</div>
-          <div
+          {/* <div
             onClick={() => setInactive(!inactive)}
             className={sidebar.toggle_menu_btn}
           >
             <i className="bi bi-list"></i>
-          </div> */}
+          </div>  */}
         </div>
         <div className={sidebar.search_controller}>
           <button className={sidebar.search_btn}>
