@@ -1,69 +1,29 @@
 import type { NextComponentType } from "next";
-
-const HeaderBar: NextComponentType = () => {
+import { useState } from "react";
+import nav from "./styles/navbar.module.css";
+const HeaderBar: NextComponentType = (props: any) => {
+  const [toggleSidebar, setTogglesidebar] = useState(false);
+  const changeTogglebarStatus = () => {
+    setTogglesidebar(!toggleSidebar);
+    props.handleTogglebarStatus();
+  };
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+      <div className={toggleSidebar ? nav.container : nav.container_inactive}>
+        <div
+          onClick={() => changeTogglebarStatus()}
+          className={nav.toggle_menu_btn}
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdownMenuLink"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown link
-              </a>
-              <div
-                className="dropdown-menu"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
-            </li>
-          </ul>
+          <i className="bi bi-list"></i>
         </div>
-      </nav>
+        <div className={nav.nav_content}>
+          <div className={nav.nav_username}>John Smith</div>
+          <div className={nav.nav_username}>Logout</div>
+          <div className={nav.nav_settings}>
+            <i className="bi bi-gear"></i>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
