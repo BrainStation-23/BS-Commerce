@@ -6,14 +6,13 @@ import { authConfig } from 'config/auth';
 import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 import {
     GetUserResponse,
-    UpdateUserSuccessResponse,
     UpdateUserResponse,
     ChangePasswordResponse,
     GetUserErrorMessages,
     UpdateUserErrorMessages,
     ChangePasswordErrorMessages,
     ChangePasswordSuccessMessage
-} from 'models'
+} from 'models';
 
 @Injectable()
 export class UserService {
@@ -37,19 +36,19 @@ export class UserService {
         if (data.address && data.address.id) {
             const updatedUser = await this.userRepo.updateUserAndAddress(userId, rest, data.address);
             if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS, null, HttpStatus.BAD_REQUEST);
-            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
         }
 
         // user add his/her new address
         if (data.address && !data.address.id) {
             const updatedUser = await this.userRepo.updateUserWithNewAddress(userId, rest, data.address);
             if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS, null, HttpStatus.BAD_REQUEST);
-            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
+            return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
         }
 
         const updatedUser = await this.userRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_UPDATE_USER, null, HttpStatus.BAD_REQUEST);
-        return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK) as UpdateUserSuccessResponse;
+        return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
     }
 
     async changePassword(userId: string, passwordDetails: ChangePasswordDto): Promise<ChangePasswordResponse> {

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { Address, User } from 'src/entity/user';
 import { IUserDatabase } from './user.database.interface';
 
@@ -7,6 +8,7 @@ export class UserRepository {
   constructor(private readonly db: IUserDatabase) { }
 
   async createUser(user: User): Promise<User | null> {
+    user.id = randomUUID()
     return await this.db.createUser(user);
   }
 
