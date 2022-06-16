@@ -27,11 +27,7 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async updateProduct(product: UpdateProduct, productId: string): Promise<Product | null> {
-    return await ProductModel.findOneAndUpdate({ id: productId }, {
-      info: product.info,
-      meta: product.meta,
-      $push: { categories: product.categories, tags: product.tags, photos: product.photos, brands: product.brands },
-    }, { new: true }).lean().exec();
+    return await ProductModel.findOneAndUpdate({ id: productId }, { $set: product }, { new: true }).lean().exec();
   }
 
   async updateProductsForBrand(productIds: string[], brandId: string): Promise<Product[] | []> {
