@@ -63,6 +63,11 @@ const ProductSchema = new Schema<Product>({
     tags: [String],
     photos: [{
         url: String,
+        id: {
+            type: String,
+            index: true,
+            default: () => randomUUID()
+        },
         title: {
             type: String,
             default: ''

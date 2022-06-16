@@ -105,10 +105,11 @@ export class ProductService {
         ...product?.categories || []
       ]
     }
+    console.log(getProduct)
 
-    const updatedProduct = await this.productRepo.updateProduct(getProduct, productId);
+    /* const updatedProduct = await this.productRepo.updateProduct(getProduct, productId);
     if (!updatedProduct) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.CAN_NOT_UPDATE_PRODUCT, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(updatedProduct, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(updatedProduct, HttpStatus.OK); */
   }
 
   async updateProductsForBrand(productIds: string[], brandId: string): Promise<UpdateProductsForBrandResponse> {
