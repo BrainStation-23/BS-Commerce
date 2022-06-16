@@ -55,8 +55,8 @@ export class AddToCartErrorResponseDto implements addToCartErrorResponse {
     code: number;
 
     @ApiProperty({
-        example: addToCartErrorMessage.CANNOT_CREATE_CART,
-        examples: [addToCartErrorMessage.CANNOT_CREATE_CART, addToCartErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART, addToCartErrorMessage.CANNOT_INCREMENT_CART_ITEM],
+        example: addToCartErrorMessage.CAN_NOT_CREATE_CART,
+        examples: [addToCartErrorMessage.CAN_NOT_CREATE_CART, addToCartErrorMessage.CAN_NOT_ADD_ITEM_TO_THE_CART, addToCartErrorMessage.CAN_NOT_INCREMENT_CART_ITEM],
     })
     error: addToCartErrorMessage;
 

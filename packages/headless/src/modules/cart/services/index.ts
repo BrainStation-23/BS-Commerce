@@ -16,7 +16,7 @@ export class CartService {
     const createCart = !existCart && await this.cartRepo.createCart({ userId, items: [item] });
     if (!createCart && !existCart) {
       return this.helper.serviceResponse.errorResponse(
-        addToCartErrorMessage.CANNOT_CREATE_CART,
+        addToCartErrorMessage.CAN_NOT_CREATE_CART,
         null,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
@@ -32,7 +32,7 @@ export class CartService {
     const addItemCart = !isItemExist && await this.cartRepo.addItem(userId, item);
     if (!addItemCart && !isItemExist) {
       return this.helper.serviceResponse.errorResponse(
-        addToCartErrorMessage.CANNOT_ADD_ITEM_TO_THE_CART,
+        addToCartErrorMessage.CAN_NOT_ADD_ITEM_TO_THE_CART,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -50,7 +50,7 @@ export class CartService {
     );
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
-        addToCartErrorMessage.CANNOT_INCREMENT_CART_ITEM,
+        addToCartErrorMessage.CAN_NOT_INCREMENT_CART_ITEM,
         null,
         HttpStatus.BAD_REQUEST,
       );
