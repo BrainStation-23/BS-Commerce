@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Container from "../global/components/container";
-import { ImageCom } from "../global/components/image";
+import Container from "../../global/components/container";
+import { ImageCom } from "../../global/components/image";
 
 const HomeShipping: FC = () => {
   return (

@@ -33,11 +33,10 @@ const Footer: NextComponentType = () => {
   };
 
   // put the pathname in 'includes' where footer needs to be hidden
-  /*
-  if (pathname.includes("/contact")) {
+
+  if (pathname.includes("/checkout")) {
     return null;
   }
-  */
 
   return (
     <>

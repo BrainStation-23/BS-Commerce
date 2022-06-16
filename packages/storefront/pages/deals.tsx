@@ -1,13 +1,14 @@
 import type { NextPage } from "next";
-import Deals from "../components/deals/index";
-const dealsOfTheWeek: NextPage = () => {
+import DealsComponent from "../components/deals/index";
+
+const Deals: NextPage = () => {
   return (
     <>
       <div>
-        <Deals />
+        <DealsComponent />
       </div>
     </>
   );
 };
 
-export default dealsOfTheWeek;
+export default Deals;

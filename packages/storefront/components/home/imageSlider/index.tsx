@@ -2,13 +2,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import CarouselSlider from "../global/components/CarouselSlider";
+import CarouselSlider from "@/components/global/components/CarouselSlider";
 import { SwiperSlide } from "swiper/react";
 import { slideDetailsInterface } from "./models";
 import SinglSlide from "./singleSlide.component";
 
 const ImageSlider = () => {
-  const slideDetails : slideDetailsInterface[] = [
+  const slideDetails: slideDetailsInterface[] = [
     {
       id: 1,
       image:
@@ -40,7 +40,7 @@ const ImageSlider = () => {
   return (
     <>
       <CarouselSlider>
-        {slideDetails?.map((data ) => (
+        {slideDetails?.map((data) => (
           <SwiperSlide key={data?.id}>
             <SinglSlide product={data} />
           </SwiperSlide>
