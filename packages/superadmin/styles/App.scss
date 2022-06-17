@@ -21,3 +21,12 @@ body {
 //     top: 5rem;
 //   }
 // }
+
+
+.row {
+ --bs-gutter-x: 0;
+}
+
+.row > * {
+   flex-shrink: 1;
+}

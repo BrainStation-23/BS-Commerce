@@ -3,6 +3,7 @@ import type { NextComponentType } from "next";
 import Sidebar from "./sidebar";
 import { useState, useEffect } from "react";
 import global from "./styles/global.module.css";
+import Viewport from "./viewport";
 const Layout: NextComponentType = ({ children }) => {
   useEffect(() => {
     typeof document !== undefined
@@ -15,7 +16,8 @@ const Layout: NextComponentType = ({ children }) => {
   };
   return (
     <>
-      <div className="container-fluid">
+      <Viewport />
+      <div className="">
         <div className="row">
           <Sidebar adjustContainer={adjustContainer} />
           <div
