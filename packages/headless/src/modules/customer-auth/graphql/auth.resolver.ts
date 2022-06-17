@@ -3,7 +3,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { CreateCustomerRequest } from 'models';
 
 @Resolver()
-export class AuthResolver {
+export class CustomerAuthResolver {
   constructor(private authService: CustomerAuthService) { }
 
   @Mutation()

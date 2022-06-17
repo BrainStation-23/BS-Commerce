@@ -4,6 +4,7 @@ import { ProductModule } from 'src/modules/product/product.graphql.module';
 import { UserModule } from 'src/modules/user/user.graphql.module';
 import { GraphqlInitModule } from './graphql.init';
 import { CategoryModule } from 'src/modules/category/category.graphql.module';
+import { CustomerAuthModule } from 'src/modules/customer-auth/auth.rest.module';
 
 export const ResolveGraphqlModule = () => {
   return [
@@ -13,5 +14,6 @@ export const ResolveGraphqlModule = () => {
     ProductModule,
     ManufacturerModule,
     CategoryModule,
+    CustomerAuthModule,
   ];
 };

@@ -3,10 +3,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { CustomerAuthService } from './services';
 import { customerAuthConfig } from 'config/auth';
-import { AuthResolver } from './graphql/auth.resolver';
+import { CustomerAuthResolver } from './graphql/auth.resolver';
 import { JwtStrategy } from './guards/jwt-strategy';
-import { UserRepository } from 'src/modules/user/repositories';
-import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
+import { ICustomerDatabase } from '../customer/repositories/customer.database.interface';
+import { CustomerRepository } from '../customer/repositories';
 
 @Module({
   imports: [
@@ -19,12 +19,12 @@ import { IUserDatabase } from 'src/modules/user/repositories/user.database.inter
   ],
   controllers: [],
   providers: [
-    AuthResolver,
+    CustomerAuthResolver,
     CustomerAuthService,
-    UserRepository,
+    CustomerRepository,
     {
-      provide: IUserDatabase,
-      useClass: ResolveDatabaseDependency('USER'),
+      provide: ICustomerDatabase,
+      useClass: ResolveDatabaseDependency('CUSTOMER_AUTH'),
     },
     JwtStrategy,
   ],
