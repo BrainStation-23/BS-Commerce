@@ -2,6 +2,22 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Custom container class */
+
+.container {
+  max-width: 1170px;
+}
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 464px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .container {
+    width: 100%;
+  }
+}
+
 /* Swiper components */
 
 .swiper-button-prev {
