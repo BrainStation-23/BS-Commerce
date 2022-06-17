@@ -23,6 +23,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { GetManufacturersErrorResponseDto, GetManufacturersQueryDto, GetManufacturersSuccessResponseDto } from '../dto/getManufacturers.dto';
+import { GetManufacturerErrorResponseDto, GetManufacturerSuccessResponseDto } from '../dto/getManufacturer.dto';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
 @ApiBearerAuth()
@@ -93,6 +94,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Get('/:manufacturerId')
+    @ApiResponse({
+        description: 'Get Manufacturer Success Response',
+        type: GetManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Get Manufacturer Error Response',
+        type: GetManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async getManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.getManufacturer(manufacturerId);
         res.status(code);

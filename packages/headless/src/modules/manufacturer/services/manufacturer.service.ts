@@ -1,10 +1,9 @@
 import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
-import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages, UpdateManufacturerResponse, UpdateManufacturerErrorMessages, UpdateManufacturerSuccessMessages, UpdateManufacturerSuccessResponse, DeleteManufacturerResponse, DeleteManufacturerErrorMessages, DeleteManufacturerSuccessMessages } from 'models';
+import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages, UpdateManufacturerResponse, UpdateManufacturerErrorMessages, UpdateManufacturerSuccessMessages, UpdateManufacturerSuccessResponse, DeleteManufacturerResponse, DeleteManufacturerErrorMessages, DeleteManufacturerSuccessMessages, GetManufacturerResponse, GetManufacturerSuccessMessages, GetManufacturerSuccessResponse } from 'models';
 import { CreateManufacturerResponse, CreateManufacturerSuccessMessages, CreateManufacturerSuccessResponse } from 'models';
 import { CreateManufacturerErrorMessages } from 'models'
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
 import { GetManufacturersQueryDto } from '../dto/getManufacturers.dto';
@@ -70,14 +69,14 @@ export class ManufacturerService {
      * @param manufacturerId 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    async getManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async getManufacturer(manufacturerId: string): Promise<GetManufacturerResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({ id: manufacturerId });
 
         if (!foundManufacturer) {
-            return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Not found"] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(GetManufacturersErrorMessages.MANUFACTURERS_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         }
 
-        return this.helper.serviceResponse.successResponse(foundManufacturer);
+        return this.helper.serviceResponse.successResponse({manufacturer: foundManufacturer, message: GetManufacturerSuccessMessages.MANUFACTURER_LOADED_SUCCESSFULLY}, HttpStatus.OK) as GetManufacturerSuccessResponse;
 
     }
 
