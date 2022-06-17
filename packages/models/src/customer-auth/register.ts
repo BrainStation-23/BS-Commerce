@@ -26,7 +26,8 @@ export interface CreateCustomerSuccessResponse extends SuccessResponse {
 }
 
 export const enum CreateCustomerErrorMessages {
-    CUSTOMER_ALREADY_EXITS = 'CUSTOMER_ALREADY_EXITS',
+    CUSTOMER_PHONE_ALREADY_EXITS = 'CUSTOMER_PHONE_ALREADY_EXITS',
+    CUSTOMER_EMAIL_ALREADY_EXITS = 'CUSTOMER_EMAIL_ALREADY_EXITS',
     CAN_NOT_CREATE_CUSTOMER = 'CAN_NOT_CREATE_CUSTOMER'
 }
 

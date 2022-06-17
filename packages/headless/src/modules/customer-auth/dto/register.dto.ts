@@ -42,7 +42,7 @@ export class CreateCustomerErrorResponseDto implements CreateCustomerErrorRespon
 
     @ApiProperty({
         example: CreateCustomerErrorMessages.CAN_NOT_CREATE_CUSTOMER,
-        examples: [CreateCustomerErrorMessages.CUSTOMER_ALREADY_EXITS, CreateCustomerErrorMessages.CAN_NOT_CREATE_CUSTOMER]
+        examples: [CreateCustomerErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, CreateCustomerErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, , CreateCustomerErrorMessages.CAN_NOT_CREATE_CUSTOMER]
     })
     error: CreateCustomerErrorMessages;
 

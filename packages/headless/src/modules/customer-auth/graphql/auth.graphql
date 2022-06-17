@@ -1,36 +1,20 @@
-input UserInput {
-  firstName: String!
-  lastName: String!
-  email: String!
+input RegistrationInput {
+  phone: String
+  email: String
+  otp: String!
   password: String!
-}
-
-input SignInInput {
-  username: String!
-  password: String!
-}
-
-type Token {
-  token: String!
 }
 
 type Message {
   message: String!
 }
 
-type AuthResponse {
+type RegistrationAuthResponse {
   error: String
   code: Int!
   data: Message
 }
 
-type SignInResponse {
-  error: String
-  code: Int!
-  data: Token
-}
-
 type Mutation {
-  signUp(user: UserInput!): AuthResponse!
-  signIn(data: SignInInput!): SignInResponse!
+  register(customer: RegistrationInput!): RegistrationAuthResponse
 }
