@@ -1,9 +1,9 @@
 import { FC } from "react";
-import productData from "../../allData/product-data.json";
-import Product from "../global/components/product/product";
-import SwiperGrid from "../global/components/swipergrid";
+import productData from "../../../allData/product-data.json";
+import Product from "@/components/global/components/product/product";
+import SwiperGrid from "@/components/global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
-import Container from "../global/components/container";
+import Container from "@/components/global/components/container";
 
 const WeekDeals: FC = () => {
   return (

@@ -112,11 +112,10 @@ const Header: NextComponentType = () => {
   }, []);
 
   // put the pathname in 'includes' where header needs to be hidden
-  /*
-  if (pathname.includes("/contact")) {
+
+  if (pathname.includes("/checkout")) {
     return null;
   }
-  */
 
   return (
     <>

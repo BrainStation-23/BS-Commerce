@@ -1,23 +1,23 @@
 import { SwiperSlide } from "swiper/react";
 
 import Product from "./product";
-import productData from "../../allData/product-data.json";
-import SwiperGrid from "../global/components/swipergrid";
-import Container from "../global/components/container";
+import productData from "../../../allData/product-data.json";
+import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from "@/components/global/components/container";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import { productInterface } from "./models";
-const productList : productInterface = productData; 
+const productList: productInterface = productData;
 
 const FeaturedProducts = () => {
   return (
     <Container className="max-w-6xl">
       <div className="text-center mb-6">
-          <p className="text-lg font-serif italic">Recently added our store</p>
-          <h1 className="text-4xl text-bold ">Featured Products</h1>
+        <p className="text-lg font-serif italic">Recently added our store</p>
+        <h1 className="text-4xl text-bold ">Featured Products</h1>
       </div>
       <SwiperGrid
         slidesPerViewmobile={1}

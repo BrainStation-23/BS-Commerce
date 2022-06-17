@@ -1,6 +1,6 @@
-import Icon from "../global/components/icon";
-import Picture from "../global/components/product/picture";
-import ProductInfo from "../global/components/product/productInfo";
+import Icon from "@/components/global/components/icon";
+import Picture from "@/components/global/components/product/picture";
+import ProductInfo from "@/components/global/components/product/productInfo";
 
 interface productInterface {
   id: number;
