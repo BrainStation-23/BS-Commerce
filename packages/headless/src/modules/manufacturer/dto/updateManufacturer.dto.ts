@@ -4,7 +4,6 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLen
 import { ManufacturerDto } from './manufacturer.dto';
 import { ManufacturerSeoDto } from './manufacturerSeo.dto';
 import { HttpStatus } from '@nestjs/common';
-// import { DescriptiveError } from 'models';
 
 export class UpdateManufacturerDto implements UpdateManufacturerRequest {
     @ApiProperty()

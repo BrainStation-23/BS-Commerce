@@ -1,3 +1,4 @@
+import { DeleteManufacturerSuccessResponseDto, DeleteManufacturerErrorResponseDto } from './../dto/deleteManufacturer.dto';
 import { UpdateManufacturerDto, UpdateManufacturerErrorResponseDto, UpdateManufacturerSuccessResponseDto } from './../dto/updateManufacturer.dto';
 import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
@@ -133,6 +134,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Delete('/:manufacturerId')
+    @ApiResponse({
+        description: 'Delete Manufacturer Success Response',
+        type: DeleteManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Delete Manufacturer Error Response',
+        type: DeleteManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async deleteManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.deleteManufacturer(manufacturerId);
         res.status(code);
