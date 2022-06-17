@@ -1,0 +1,60 @@
+type SEO {
+  metaKeyword: String!
+  metaDescription: String!
+  metaTitle: String!
+  SEFN: String!
+}
+
+type Manufacturer {
+  id: String!
+  name: String!
+  description: String!
+  picture: String!
+  isPublished: Boolean!
+  displayOrder: Int!
+  seo: SEO!
+}
+
+input SEOInput {
+  metaKeyword: String
+  metaDescription: String
+  metaTitle: String
+  SEFN: String
+}
+
+input ManufacturerInput {
+  name: String!
+  description: String
+  picture: String
+  isPublished: Boolean
+  displayOrder: Int
+  seo: SEOInput
+}
+
+type ManufacturerResponse {
+  error: String
+  code: Int!
+  data: Manufacturer
+}
+
+type ManufacturerArrayResponse {
+  manufacturers: [Manufacturer!]!
+  total: Int!
+}
+
+type AllManufacturersResponse {
+  error: String
+  code: Int!
+  data: ManufacturerArrayResponse
+}
+
+type Query {
+  getAllManufacturers(skip: Int, limit: Int): AllManufacturersResponse!
+  getManufacturer(manufacturerId: String!): ManufacturerResponse!
+}
+
+type Mutation {
+  addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
+  updateManufacturer(manufacturerId: String!, manufacturer: ManufacturerInput!): ManufacturerResponse!
+  deleteManufacturer(manufacturerId: String!): ManufacturerResponse!
+}
