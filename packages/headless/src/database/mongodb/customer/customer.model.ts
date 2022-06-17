@@ -24,6 +24,10 @@ const CustomerSchema = new Schema<Customer>({
   otp: {
     type: String,
     index: true
+  },
+  otpVerified: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true,
