@@ -33,7 +33,7 @@ export class AuthController {
   async register(@Body() user: CreateUserDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.signUp(user);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Post('signin')
@@ -50,7 +50,7 @@ export class AuthController {
   async signin(@Body() data: SignInDataDto, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.authService.signIn(data);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Post('forgot')
@@ -68,6 +68,6 @@ export class AuthController {
     const url = req.protocol + '://' + req.headers.host;
     const { code, ...response } = await this.authService.forgotPassword(data.username, url);
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 }

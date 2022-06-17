@@ -7,8 +7,8 @@ export class AuthResolver {
   constructor(private authService: AuthService) { }
 
   @Mutation()
-  async signUp(@Args('user') data: CreateUserDto) {
-    return await this.authService.signUp(data);
+  async signUp(@Args('user') user: CreateUserDto) {
+    return await this.authService.signUp(user);
   }
 
   @Mutation()
