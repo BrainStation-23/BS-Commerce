@@ -5,10 +5,10 @@ import StatChart from "./charts/index";
 const Dashboard: NextComponentType = () => {
   return (
     <>
-      <div className="main-container">
+      <div className="main-container" style={{ maxWidth: "1480px" }}>
         <DateTimeFilter />
-        <StatWidgets />
-        <StatChart />
+        {/* <StatWidgets /> */}
+        {/* <StatChart /> */}
       </div>
     </>
   );
