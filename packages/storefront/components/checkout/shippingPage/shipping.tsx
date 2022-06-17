@@ -19,7 +19,7 @@ const Shipping = () => {
                 <div className="box-border p-4 border-2 mt-5 divide-y-2 rounded-md text-center mx-auto">
                     <div className="flex justify-between items-center p-4">
                         <div className="flex flex-wrap gap-4">
-                            <p className="text-sm text-[#333333]">Contact</p>
+                            <p className="text-sm text-[#333333]" data-testid="nnn">Contact</p>
                             <p className="text-sm">+880 151-5209334</p>
                         </div>
 

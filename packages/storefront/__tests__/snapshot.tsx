@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import Home from "../pages/home";
+import Index from "../pages/shipping";
 
 it("renders homepage unchanged", () => {
-  const { container } = render(<Home />);
+  const { container } = render(<Index />);
   expect(container).toMatchSnapshot();
 });
