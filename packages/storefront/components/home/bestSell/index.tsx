@@ -1,22 +1,22 @@
 import { SwiperSlide } from "swiper/react";
 
 import Product from "./product";
-import productData from "../../allData/product-data.json";
-import SwiperGrid from "../global/components/swipergrid";
+import productData from "../../../allData/product-data.json";
+import SwiperGrid from "../../global/components/swipergrid";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import Banner from "./banner";
-import Container from "../global/components/container";
+import Container from "../../global/components/container";
 import Link from "next/link";
 
 const BestSell = () => {
   return (
     <>
       <Container className="max-w-md md:max-w-4xl lg:max-w-6xl">
-      <div className="text-center mb-6">
+        <div className="text-center mb-6">
           <p className="text-lg font-serif italic">Recently added our store</p>
           <h1 className="text-4xl text-bold ">Best Sell</h1>
         </div>

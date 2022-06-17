@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
-import Product from "../global/components/product/product";
-import SwiperGrid from "../global/components/swipergrid";
+import Product from "@/components/global/components/product/product";
+import SwiperGrid from "@/components/global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
-import Container from "../global/components/container";
+import Container from "@/components/global/components/container";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../../../store";
 
 const TrendingProducts: FC = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
