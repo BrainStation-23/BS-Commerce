@@ -1,7 +1,10 @@
 .widget_container {
-  padding-top: 40px;
+  margin-top: 40px;
+  padding: 10px;
 }
-
+.widgets_card {
+  padding: 10px;
+}
 .small_box {
   border-radius: 0.25rem;
   box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);

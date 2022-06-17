@@ -16,7 +16,7 @@ const Layout: NextComponentType = ({ children }) => {
   };
   return (
     <>
-      <Viewport />
+      {/* <Viewport /> */}
       <div className="">
         <div className="row">
           <Sidebar adjustContainer={adjustContainer} />

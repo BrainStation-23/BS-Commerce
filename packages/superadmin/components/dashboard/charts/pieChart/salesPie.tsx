@@ -1,4 +1,4 @@
-import type { NextComponentType } from "next";
+import type { FC } from "react";
 import { useState, useEffect } from "react";
 import {
   Chart as chartjs,
@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 chartjs.register(Tooltip, Title, ArcElement, Legend, PieController);
-const SellesPieChart: NextComponentType = () => {
+const SellesPieChart: FC = () => {
   const [data, setData] = useState({
     labels: [
       "Electronics",
@@ -119,7 +119,7 @@ const SellesPieChart: NextComponentType = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ width: "60%" }}>
+          <div style={{ width: "60%", padding: "30px" }}>
             <Doughnut data={data} plugins={plugins} options={options} />
           </div>
         </div>

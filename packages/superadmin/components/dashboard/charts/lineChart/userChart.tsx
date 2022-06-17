@@ -1,4 +1,4 @@
-import type { NextComponentType } from "next";
+import type { FC } from "react";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -22,7 +22,7 @@ chartjs.register(
   PointElement,
   Filler
 );
-const UserTypeChart: NextComponentType = () => {
+const UserTypeChart: FC = () => {
   const [data, setData] = useState({
     labels: [
       "Jan",

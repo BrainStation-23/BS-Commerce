@@ -66,3 +66,9 @@
 .nav_settings {
   color: white;
 }
+
+/* @media (max-width: 600px) {
+  .container {
+    width: 760px;
+  }
+} */

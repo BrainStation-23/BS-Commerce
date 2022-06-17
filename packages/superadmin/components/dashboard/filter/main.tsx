@@ -1,6 +1,6 @@
-import type { NextComponentType } from "next";
+import { FC } from "react";
 import filter from "./styles/filterStyle.module.css";
-const DateTimeFilter: NextComponentType = () => {
+const DateTimeFilter: FC = () => {
   return (
     <>
       <div className="row">

@@ -1,6 +1,6 @@
-import type { NextComponentType } from "next";
+import { FC } from "react";
 import card from "./styles/widgets.module.css";
-const StatWidgets: NextComponentType = () => {
+const StatWidgets: FC = () => {
   const widgets = [
     {
       id: Math.floor(Math.random() * 100),

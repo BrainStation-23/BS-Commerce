@@ -1,7 +1,7 @@
-import type { NextComponentType } from "next";
+import type { FC } from "react";
 import LineCharts from "./lineChart/main";
 import PieChart from "./pieChart/main";
-const StatChart: NextComponentType = () => {
+const StatChart: FC = () => {
   return (
     <>
       <LineCharts />
