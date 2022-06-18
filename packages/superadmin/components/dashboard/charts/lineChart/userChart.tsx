@@ -72,7 +72,7 @@ const UserTypeChart: FC = () => {
           >
             <span
               style={{
-                ["padding-right" as any]: "5px",
+                ["paddingRight" as any]: "5px",
                 ["color" as any]: "white",
                 ["fontSize" as any]: "25px",
               }}
@@ -83,17 +83,32 @@ const UserTypeChart: FC = () => {
           </h3>
           <div style={{ ["padding" as any]: "15px" }}>
             <span style={{ ["padding" as any]: "5px" }}>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Day
               </button>
             </span>
             <span style={{ ["padding" as any]: "15px" }}>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Month
               </button>
             </span>
             <span>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Year
               </button>
             </span>

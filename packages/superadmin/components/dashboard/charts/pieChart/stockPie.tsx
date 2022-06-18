@@ -66,7 +66,7 @@ const StockPieChart: FC = () => {
       <div
         style={{
           ["width" as any]: "100%",
-          ["height" as any]: "500px",
+          ["height" as any]: "510px",
           ["backgroundColor" as any]: "#f5f5f5",
           ["border" as any]: "2px solid",
         }}
@@ -96,17 +96,32 @@ const StockPieChart: FC = () => {
           </h3>
           <div style={{ ["padding" as any]: "15px" }}>
             <span style={{ ["padding" as any]: "5px" }}>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Day
               </button>
             </span>
             <span style={{ ["padding" as any]: "15px" }}>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Month
               </button>
             </span>
             <span>
-              <button style={{ ["backgroundColor" as any]: "	#87CEFA" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["padding" as any]: "0px 7px",
+                }}
+              >
                 Year
               </button>
             </span>
@@ -119,7 +134,7 @@ const StockPieChart: FC = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ width: "60%", padding: "30px" }}>
+          <div style={{ width: "60%", padding: "40px" }}>
             <Doughnut data={data} plugins={plugins} options={options} />
           </div>
         </div>

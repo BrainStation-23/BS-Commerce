@@ -1,48 +1,79 @@
 import { FC } from "react";
-import filter from "./styles/filterStyle.module.css";
 const DateTimeFilter: FC = () => {
   return (
     <>
       <div className="row">
-        <div className={`col-3 ${filter.filter_input}`}>
-          <label>Start Date:</label>
+        <div className="col-md-6 col-lg-3 col-xl-3">
+          <label
+            style={{
+              ["fontSize" as any]: "17px",
+              ["marginRight" as any]: "5px",
+            }}
+          >
+            Start Date:
+          </label>
           <input
             type="date"
             id="start"
             name="trip-start"
             min="2018-01-01"
             max="2018-12-31"
-          ></input>
+            style={{ ["width" as any]: "70%", ["padding" as any]: "10px" }}
+          />
         </div>
-        <div className={`col-3 ${filter.filter_input}`}>
-          <label>Start Date:</label>
+        <div className="col-md-6 col-lg-3 col-xl-3">
+          <label
+            style={{
+              ["fontSize" as any]: "17px",
+              ["marginRight" as any]: "5px",
+            }}
+          >
+            Start Date:
+          </label>
           <input
             type="time"
             id="start"
             name="trip-start"
             min="2018-01-01"
             max="2018-12-31"
-          ></input>
+            style={{ ["width" as any]: "70%", ["padding" as any]: "10px" }}
+          />
         </div>
-        <div className={`col-3 ${filter.filter_input}`}>
-          <label>End Date:</label>
+        <div className="col-md-6 col-lg-3 col-xl-3">
+          <label
+            style={{
+              ["fontSize" as any]: "17px",
+              ["marginRight" as any]: "5px",
+            }}
+          >
+            End Date:
+          </label>
           <input
             type="date"
             id="start"
             name="trip-start"
             min="2018-01-01"
             max="2018-12-31"
-          ></input>
+            style={{ ["width" as any]: "70%", ["padding" as any]: "10px" }}
+          />
         </div>
-        <div className={`col-3 ${filter.filter_input}`}>
-          <label>End Date:</label>
+        <div className="col-md-6 col-lg-3 col-xl-3">
+          <label
+            style={{
+              ["fontSize" as any]: "17px",
+              ["marginRight" as any]: "5px",
+            }}
+          >
+            End Date:
+          </label>
           <input
-            type="date"
+            type="time"
             id="start"
             name="trip-start"
             min="2018-01-01"
             max="2018-12-31"
-          ></input>
+            style={{ ["width" as any]: "70%", ["padding" as any]: "10px" }}
+          />
         </div>
       </div>
     </>

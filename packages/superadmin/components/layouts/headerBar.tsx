@@ -1,7 +1,7 @@
-import type { NextComponentType } from "next";
+import type { FC } from "react";
 import { useState } from "react";
 import nav from "./styles/navbar.module.css";
-const HeaderBar: NextComponentType = (props: any) => {
+const HeaderBar: FC = (props: any) => {
   const [toggleSidebar, setTogglesidebar] = useState(false);
   const changeTogglebarStatus = () => {
     setTogglesidebar(!toggleSidebar);
