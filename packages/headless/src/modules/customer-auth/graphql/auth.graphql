@@ -1,0 +1,48 @@
+type AuthCustomer {
+  id: String!
+  phone: String
+  email: String
+  otp: String
+}
+
+input RegistrationInput {
+  phone: String
+  email: String
+  otp: String!
+  password: String!
+}
+
+input GetCustomerAuthInput {
+  phone: String
+  email: String
+}
+
+type Message {
+  message: String!
+}
+
+type AuthResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
+type RegistrationAuthResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
+type GetCustomerAuthResponse {
+  error: String
+  code: Int!
+  data: AuthCustomer
+}
+
+type Query {
+  getCustomer(query: GetCustomerAuthInput!): GetCustomerAuthResponse
+}
+
+type Mutation {
+  register(customer: RegistrationInput!): RegistrationAuthResponse
+}
