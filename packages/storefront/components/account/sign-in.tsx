@@ -1,3 +1,4 @@
+import axios from "axios";
 import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import type { NextComponentType } from "next";
 import Link from "next/link";
@@ -7,13 +8,19 @@ import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 import { loginSchema } from "../global/schemas/loginSchema";
 
 interface Values {
-  phone: string;
+  username: string;
   password: string;
 }
 
 const Signin = () => {
-  function handleSignin(data: FormikValues) {
-    console.log(data);
+  async function handleSignin(data: Values) {
+    try {
+      const res = await axios.post('http://localhost:3000/api/auth/signin', data);
+      console.log(res);
+
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -35,12 +42,12 @@ const Signin = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                phone: "",
+                username: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: values.phone,
+                  username: values.username,
                   password: values.password,
                 };
                 handleSignin(data);
@@ -55,13 +62,13 @@ const Signin = () => {
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
                       />
-                      <div className="errMsg text-red-600 outline-0">
-                        <ErrorMessage name="phone" />
-                      </div>
+                      {/* <div className="errMsg text-red-600 outline-0">
+                        <ErrorMessage name="username" />
+                      </div> */}
                     </div>
 
                     <div className="mb-4">
@@ -72,9 +79,9 @@ const Signin = () => {
                         name="password"
                         placeholder="Password"
                       />
-                      <div className="errMsg text-red-600">
+                      {/* <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
-                      </div>
+                      </div> */}
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button

@@ -49,4 +49,6 @@ const HomeComponent: NextComponentType = () => {
   );
 };
 
+
+
 export default HomeComponent;

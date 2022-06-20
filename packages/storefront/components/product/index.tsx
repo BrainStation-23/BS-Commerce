@@ -1,17 +1,18 @@
 import { NextComponentType } from "next";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { products } from "../../allData/product-data.json";
 import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import ProductDescription from "./productDescription";
 import ProductImagesSlider from "./product-image-slider";
 import { useRouter } from "next/router";
+import { Product } from "models";
 
-const ProductDetailsComponent: NextComponentType = () => {
+const ProductDetailsComponent = ({product}: Product) => {
   const { query } = useRouter();
   console.log(query.pid);
 
-  const product = products.find((product) => product.id === Number(query.pid));
+  //const product = products.find((product) => product.id === Number(query.pid));
   var isAvailable = false;
   if (product.stock > 0) isAvailable = true;
   var disableDecrement = false;
@@ -34,12 +35,25 @@ const ProductDetailsComponent: NextComponentType = () => {
     setClicked(true);
   };
 
+  // async function getProductById() {
+  //   try {
+  //     const res = await axios.get(`http://localhost:3000/api/product/19d9fc6e-8135-42fd-a8b6-fb9df1439d8d`)
+  //     console.log(res);
+  //   } catch(error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getProductById();
+  // }, [])
+
   if (product) {
     return (
       <>
         <Breadcrumb
-          title={product.title}
-          pathArray={["Home", product.title]}
+          title={product.info.name}
+          pathArray={["Home", product.info.name]}
           linkArray={["/home", "/product" + product.id]}
         />
         <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -53,7 +67,7 @@ const ProductDetailsComponent: NextComponentType = () => {
                 </div>
                 <div className="lg:w-1/2 w-full lg:pl-5 ">
                   <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
-                    {product.title}
+                    {product.info.name}
                   </h2>
                   <div className="flex">
                     <svg
@@ -102,13 +116,13 @@ const ProductDetailsComponent: NextComponentType = () => {
 
                   <div className="flex mb-1 mt-2"></div>
                   <div className="text-gray-900 ml-1 mb-1 mt-2">
-                    <span className="text-sm">Vendor: {product.vendor}</span>
+                    <span className="text-sm">Vendor: {product.brands}</span>
                     <span className="text-sm ml-2 mr-2">|</span>
-                    <span className="text-sm">SKU: {product.sku}</span>
+                    <span className="text-sm">SKU: {product.info.sku}</span>
                   </div>
                   <div className="flex">
                     <span className="title-font font-medium text-2xl text-green-600 mt-2 mb-2 ml-1">
-                      ${product.price}
+                      ${product.info.price}
                     </span>
                   </div>
                   <div className="flex">
@@ -127,7 +141,7 @@ const ProductDetailsComponent: NextComponentType = () => {
                   </div>
 
                   <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
-                    {product.description}
+                    {product.info.shortDescription}
                   </p>
                   <div className="flex mt-2 items-center mb-2">
                     <div className="flex ml-1 items-center">

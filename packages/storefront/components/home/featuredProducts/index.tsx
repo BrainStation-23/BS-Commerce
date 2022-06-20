@@ -10,9 +10,10 @@ import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import { productInterface } from "./models";
-const productList: productInterface = productData;
 
 const FeaturedProducts = () => {
+  const productList: productInterface = productData;
+  
   return (
     <Container className="max-w-6xl">
       <div className="text-center mb-6">
