@@ -8,3 +8,7 @@ export async function getUserGraphQl(): Promise<User[] | undefined> {
   });
   return data as User[];
 }
+export async function createProductGraphQl()   {
+  
+  
+}

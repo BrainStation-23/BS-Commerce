@@ -2,9 +2,9 @@ import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 
 import ProductInfoForm from "./forms/productInfoForm";
-import PricesForm from "./forms/pricesForm";
-import InventoryForm from "./forms/inventoryForm";
-import ShippingForm from "./forms/shippingForm";
+import PricesForm from "./forms/metaForm";
+import InventoryForm from "./forms/categoryForm";
+import ShippingForm from "./forms/photosForm";
 
 interface productInterface {
   productName: string;
