@@ -121,7 +121,7 @@ const Header: NextComponentType = () => {
     <>
       {/* Top portion */}
       <header className="hidden lg:flex justify-center py-2 border-b border-slate-200">
-        <div className="flex justify-between container text-sm px-3">
+        <div className="flex justify-between container text-sm px-4">
           <div className="space-x-2">
             <Language />
             <span>|</span>
@@ -165,9 +165,9 @@ const Header: NextComponentType = () => {
         </div>
       </div>
       {/* Navbar */}
-      <nav className={`flex justify-center lg:px-4 ${stickyClass}`}>
-        <div className="container">
-          <div className="flex flex-row items-center px-4">
+      <nav className={`flex justify-center ${stickyClass}`}>
+        <div className="container px-4">
+          <div className="flex flex-row items-center">
             <div
               className="flex flex-row items-center relative rounded-lg mb-3 lg:mb-0 lg:rounded-t-xl lg:rounded-b-none bg-green-600 text-white px-4 py-2 lg:py-3 font-medium w-full lg:w-56 cursor-pointer mr-0 lg:mr-2"
               onClick={toggleOpen}

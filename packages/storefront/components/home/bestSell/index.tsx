@@ -15,13 +15,13 @@ import Link from "next/link";
 const BestSell = () => {
   return (
     <>
-      <Container className="max-w-md md:max-w-4xl lg:max-w-6xl">
+      <Container className="">
         <div className="text-center mb-6">
           <p className="text-lg font-serif italic">Recently added our store</p>
           <h1 className="text-4xl text-bold ">Best Sell</h1>
         </div>
         <div className="flex flex-wrap w-full">
-          <div className="w-full md:w-2/6 px-3">
+          <div className="w-full md:w-2/6 px-3 lg:px-0">
             <Link href="/">
               <a>
                 <Banner />
