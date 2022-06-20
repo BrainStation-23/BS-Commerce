@@ -171,7 +171,7 @@ const Header: NextComponentType = () => {
             </div>
 
             <div
-              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-11/12 md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
+              className={`z-40 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-11/12 md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
                 isOpen ? "h-[350px]" : "h-0 opacity-0"
               }`}
             >
@@ -204,7 +204,7 @@ const Header: NextComponentType = () => {
             </div>
             {/* Menu */}
             <div
-              className={`shadow-2xl fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-all duration-300 ease-linear ${
+              className={`shadow-2xl fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-40 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-all duration-300 ease-linear ${
                 menu ? "left-0" : "-left-72"
               }`}
             >
