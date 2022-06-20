@@ -1,5 +1,6 @@
+import { GetProductParams } from './../../models/src/product/getProduct';
 import { CreateProductRequest } from './../../models/src/product/createProduct';
-import { CreateProductDto } from './../../headless/src/modules/product/dto/createProduct.dto';
+
 export interface User {
   id?: string;
   firstName: string;
@@ -29,6 +30,7 @@ export interface Address {
 }
 
 export interface apiFunction {
-  getUser: () => Promise<User[] | undefined>;
-  CreateProduct: () => Promise<CreateProductRequest | undefined>;
+  getUser: () => Promise<User | undefined>;
+  createProduct: () => Promise<CreateProductRequest | undefined>;
+  getProduct: () => Promise<GetProductParams | undefined>;
 }

@@ -99,7 +99,7 @@ const CategoryForm = () => {
                 <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
-                    htmlFor="isFeaturedCatagory"
+                    htmlFor="isFeaturedCategory"
                   >
                     Featured
                   </label>
@@ -109,12 +109,12 @@ const CategoryForm = () => {
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <Field
                   className="check-box mt-2"
-                  id="isFeaturedCatagory"
-                  name="isFeaturedCatagory"
+                  id="isFeaturedCategory"
+                  name="isFeaturedCategory"
                   type="checkbox"
                 />
                 <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="isFeaturedCatagory" />
+                  <ErrorMessage name="isFeaturedCategory" />
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ const CategoryForm = () => {
                 <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
-                    htmlFor="displayOrderCatagory"
+                    htmlFor="displayOrderCategory"
                   >
                     Display Order
                   </label>
@@ -135,13 +135,13 @@ const CategoryForm = () => {
                 <div className="input-group ">
                   <Field
                     type="number"
-                    id="displayOrderCatagory"
-                    name="displayOrderCatagory"
+                    id="displayOrderCategory"
+                    name="displayOrderCategory"
                     aria-disabled="false"
                   /> 
                 </div>
                 <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="displayOrderCatagory" />
+                  <ErrorMessage name="displayOrderCategory" />
                 </div>
               </div>
             </div>

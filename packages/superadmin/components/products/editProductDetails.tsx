@@ -1,84 +1,141 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 
-import ProductInfoForm from "./forms/productInfoForm";
-import PricesForm from "./forms/metaForm";
+import ProductInfoForm from "./forms/productInfoForm"; 
 import InventoryForm from "./forms/categoryForm";
-import ShippingForm from "./forms/photosForm";
+import PhotosForm from "./forms/photosForm";
+import MetaForm from "./forms/metaForm";
+import { CreateProductRequest } from "../../../models/src/product";
+import { useEffect } from "react";
 
-interface productInterface {
-  productName: string;
-  ShortDescription: string;
-  Sku: string;
-  SelectedCategoryIds: number;
-  OldPrice: number;
-  Price: number;
-  ProductCost: number;
-  IsTaxExempt: true;
-  SelectedDiscountIds: number;
-  TaxCategoryId: number;
-  ManageInventoryMethodId: string;
-  OrderMinimumQuantity: number;
-  OrderMaximumQuantity: number;
-  AllowedQuantities: string;
-  NotReturnable: boolean;
-  IsShipEnabled: boolean;
-  Weight: number;
-  Length: number;
-  Width: number;
-  Height: number;
-}
 
-const EditProduct = (props : productInterface) => {
+const EditProduct = (props : any) => {
     const {product} = props;
+    const handleSubmit = (data: any) => {
+
+      const info = {
+        name: data.productName,
+        shortDescription: data.ShortDescription,
+        fullDescription: data.FullDescription,
+        sku: data.Sku,
+        price: data.Price,
+        oldPrice: data.OldPrice,
+        cost: data.ProductCost,
+        showOnHomePage: data.showOnHomePage,
+        includeInTopMenu: data.includeInTopMenu,
+        allowToSelectPageSize: data.allowToSelectPageSize,
+        published: data.published,
+        displayOrder: data.displayOrder,
+        isFeatured: data.isFeatured,
+        // publishDate: "2022-06-20T09:06:25.239Z",
+        publishDate: data.publishDate,
+      }
+      const meta = {
+        keywords: [data.keywords],
+        title: data.metaTitle,
+        description: data.metaDescription,
+        friendlyPageName: data.metaFriendlyPageName,
+  
+      }
+  
+      const photos = {
+        url: data.photosUrl,
+        id: data.photosID,
+        title: data.photosTitle,
+        displayOrder: `${data.displayOrderPhotos}`,
+        alt:"image"
+      }
+      const categories = {
+        id: data.SelectedCategoryIds,
+        isFeatured: data.isFeaturedCategory,
+        displayOrder: data.displayOrderCategory
+      }
+  
+      console.log(info);
+      console.log(meta);
+      console.log(photos);
+      console.log(categories);
+  
+      const newData = {
+        info: info,
+        meta: meta,
+        tags: [data.tags],
+        photos: [photos],
+        brands: [data.brands],
+        categories:[categories]
+      }
+  
+      console.log(newData);
+      createProductRest(newData);
+    };
+    useEffect(() => {
+     
+  },[])
+
   return (
     <>
       <Formik
         initialValues={{
-          productName: product.productName,
-          ShortDescription: product.ShortDescription,
-          Sku: product.Sku,
-          SelectedCategoryIds: product.SelectedCategoryIds,
-          OldPrice: product.OldPrice,
-          Price: product.Price,
-          ProductCost: product.ProductCost,
-          IsTaxExempt: product.IsTaxExempt,
-          SelectedDiscountIds: product.SelectedDiscountIds,
-          TaxCategoryId: product.TaxCategoryId,
-          ManageInventoryMethodId: product.ManageInventoryMethodId,
-          OrderMinimumQuantity: product.OrderMinimumQuantity,
-          OrderMaximumQuantity: product.OrderMaximumQuantity,
-          AllowedQuantities: product.AllowedQuantities,
-          NotReturnable: product.NotReturnable,
-          IsShipEnabled: product.IsShipEnabled,
-          Weight: product.Weight,
-          Length: product.Length,
-          Width: product.Width,
-          Height: product.Height,
+          productName: "",
+          ShortDescription: "",
+          FullDescription: "",
+          Sku: "",
+          OldPrice: 0,
+          Price: 0,
+          ProductCost: 0,
+          showOnHomePage: false,
+          includeInTopMenu: false,
+          allowToSelectPageSize: false,
+          published: false,
+          displayOrder: 0,
+          isFeatured: false,
+          publishDate: "",
+          tags: "",
+          brands: "",
+          keywords: "",
+          metaTitle: "",
+          metaDescription: "",
+          metaFriendlyPageName: "",
+          photosUrl: "",
+          photosID: "",
+          photosTitle: "",
+          displayOrderPhotos: "",
+          SelectedCategoryIds: "--Select--",
+          isFeaturedCategory: false,
+          displayOrderCategory: 0,
         }}
         onSubmit={(values, actions) => {
           const data = {
             productName: values.productName,
             ShortDescription: values.ShortDescription,
+            FullDescription: values.FullDescription,
             Sku: values.Sku,
-            SelectedCategoryIds: values.SelectedCategoryIds,
             OldPrice: values.OldPrice,
             Price: values.Price,
-            IsTaxExempt: values.IsTaxExempt,
-            SelectedDiscountIds: values.SelectedDiscountIds,
-            TaxCategoryId: values.TaxCategoryId,
             ProductCost: values.ProductCost,
-            ManageInventoryMethodId: values.ManageInventoryMethodId,
-            OrderMinimumQuantity: values.OrderMinimumQuantity,
-            OrderMaximumQuantity: values.OrderMaximumQuantity,
-            AllowedQuantities: values.AllowedQuantities,
-            NotReturnable: values.NotReturnable,
-            Weight: values.Weight,
-            Length: values.Length,
-            Width: values.Width,
-            Height: values.Height,
+            showOnHomePage: values.showOnHomePage,
+            includeInTopMenu: values.includeInTopMenu,
+            allowToSelectPageSize: values.allowToSelectPageSize,
+            published: values.published,
+            displayOrder: values.displayOrder,
+            isFeatured: values.isFeatured,
+            publishDate: values.publishDate,
+            tags: values.tags,
+            brands: values.brands,
+            keywords: values.keywords,
+            metaTitle: values.metaTitle,
+            metaDescription: values.metaDescription,
+            metaFriendlyPageName: values.metaFriendlyPageName,
+            photosUrl: values.photosUrl,
+            photosID: values.photosID,
+            photosTitle: values.photosTitle,
+            displayOrderPhotos: values.displayOrderPhotos,
+            SelectedCategoryIds: values.SelectedCategoryIds,
+            isFeaturedCategory: values.isFeaturedCategory,
+            displayOrderCategory: values.displayOrderCategory,
           };
           console.log(data);
+          handleSubmit(data);
           actions.setSubmitting(false);
         }}
         validationSchema={productSchema}
@@ -129,8 +186,8 @@ const EditProduct = (props : productInterface) => {
 
               <div className="mt-4">
                 <ProductInfoForm />
-                <PricesForm />
-                <ShippingForm />
+                <MetaForm />
+                <PhotosForm />
                 <InventoryForm />
               </div>
             </Form>

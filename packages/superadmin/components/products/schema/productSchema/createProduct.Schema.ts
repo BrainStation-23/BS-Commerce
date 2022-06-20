@@ -45,6 +45,6 @@ export const productSchema = object().shape({
   SelectedCategoryIds: number()
     .typeError("You must Select a Category")
     .required("This field must not be empty"),
-  isFeaturedCatagory: Yup.boolean(),
-  displayOrderCatagory: number(),
+  isFeaturedCategory: Yup.boolean(),
+  displayOrderCategory: number(),
 });

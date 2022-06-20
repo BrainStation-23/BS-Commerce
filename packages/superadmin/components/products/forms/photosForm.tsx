@@ -2,7 +2,7 @@ import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import Tooltips from "../../global/tooltip";
 
-const photosForm = () => {
+const PhotosForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
   const [checkboxToggler, setCheckboxToggler] = useState(false);
 
@@ -158,4 +158,4 @@ const photosForm = () => {
   );
 };
 
-export default photosForm;
+export default PhotosForm;

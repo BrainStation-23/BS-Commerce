@@ -1,12 +1,12 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 import { CreateProductRequest } from "../../../models/src/product";
-
-import PricesForm from "./forms/metaForm";
-import ShippingForm from "./forms/photosForm";
+ 
 import InventoryForm from "./forms/categoryForm";
 import ProductInfoForm from "./forms/productInfoForm";
 import { createProductRest } from "../../APIs/restApi";
+import PhotosForm from "./forms/photosForm";
+import MetaForm from "./forms/metaForm";
 
 
 
@@ -28,7 +28,7 @@ const CreateProduct = () => {
       displayOrder: data.displayOrder,
       isFeatured: data.isFeatured,
       // publishDate: "2022-06-20T09:06:25.239Z",
-      // publishDate: data.publishDate,
+      publishDate: data.publishDate,
     }
     const meta = {
       keywords: [data.keywords],
@@ -42,19 +42,19 @@ const CreateProduct = () => {
       url: data.photosUrl,
       id: data.photosID,
       title: data.photosTitle,
-      displayOrder: data.displayOrderPhotos
-      alt:"..."
+      displayOrder: `${data.displayOrderPhotos}`,
+      alt:"image"
     }
-    const catagories = {
+    const categories = {
       id: data.SelectedCategoryIds,
-      isFeatured: data.isFeaturedCatagory,
-      displayOrder: data.displayOrderCatagory
+      isFeatured: data.isFeaturedCategory,
+      displayOrder: data.displayOrderCategory
     }
 
     console.log(info);
     console.log(meta);
     console.log(photos);
-    console.log(catagories);
+    console.log(categories);
 
     const newData = {
       info: info,
@@ -62,7 +62,7 @@ const CreateProduct = () => {
       tags: [data.tags],
       photos: [photos],
       brands: [data.brands],
-      catagories:[catagories]
+      categories:[categories]
     }
 
     console.log(newData);
@@ -97,8 +97,8 @@ const CreateProduct = () => {
           photosTitle: "",
           displayOrderPhotos: "",
           SelectedCategoryIds: "--Select--",
-          isFeaturedCatagory: false,
-          displayOrderCatagory: 0,
+          isFeaturedCategory: false,
+          displayOrderCategory: 0,
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -127,8 +127,8 @@ const CreateProduct = () => {
             photosTitle: values.photosTitle,
             displayOrderPhotos: values.displayOrderPhotos,
             SelectedCategoryIds: values.SelectedCategoryIds,
-            isFeaturedCatagory: values.isFeaturedCatagory,
-            displayOrderCatagory: values.displayOrderCatagory,
+            isFeaturedCategory: values.isFeaturedCategory,
+            displayOrderCategory: values.displayOrderCategory,
           };
           console.log(data);
           handleSubmit(data);
@@ -186,8 +186,8 @@ const CreateProduct = () => {
 
               <div className="mt-4">
                 <ProductInfoForm />
-                <PricesForm />
-                <ShippingForm />
+                <MetaForm />
+                <PhotosForm />
                 <InventoryForm />
               </div>
             </Form>
