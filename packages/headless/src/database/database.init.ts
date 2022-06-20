@@ -1,8 +1,8 @@
-import { dbConfig } from "config/database";
-import { connect as connectToMongoDB } from "./mongodb/connect";
-import { connect as connectToMySql } from "./mysql/connect";
+import { connect as connectToMongoDB } from './mongodb/connect';
+import { connect as connectToMySql } from './mysql/connect';
 
-type DB = 'MONGO' | 'MYSQL';
+export type DB = 'MONGO' | 'MYSQL';
+
 export async function connectToDatabase(db: DB) {
     try {
         switch (db) {
