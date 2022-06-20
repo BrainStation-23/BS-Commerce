@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { userAPI } from "../APIs";
+// import { userAPI } from "../APIs";
 
 const Home: NextPage = () => {
   return (
@@ -165,12 +165,14 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps() {
-  const userAPi = await userAPI.getUser();
-  console.log(userAPi, "ddd");
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
+//example for API request
+
+// export async function getServerSideProps() {
+//   const userAPi = await userAPI.getUser();
+//   console.log(userAPi, "ddd");
+//   return {
+//     props: {}, // will be passed to the page component as props
+//   };
+// }
 
 export default Home;
