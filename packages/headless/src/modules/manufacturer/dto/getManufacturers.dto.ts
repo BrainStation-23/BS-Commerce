@@ -35,7 +35,7 @@ export class GetManufacturersErrorResponseDto implements GetManufacturersErrorRe
 }
 
 class ManufacturersDataDto {
-    @ApiProperty()
+    @ApiProperty({type: [ManufacturerDto]})
     @ValidateNested({ each: true })
     manufacturers: ManufacturerDto[];
 

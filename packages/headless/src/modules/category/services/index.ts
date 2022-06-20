@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
-import { getCategoryErrorMessage, getCategoryListErrorMessage, getCategoryListResponse, getCategoryResponse } from "models";
+import { getCategoryBySlugErrorMessage, getCategoryBySlugResponse, getCategoryErrorMessage, getCategoryListErrorMessage, getCategoryListResponse, getCategoryResponse } from "models";
 import { Helper } from "src/helper/helper.interface";
 import { CategoryRepository } from "../repositories";
 
@@ -23,6 +23,19 @@ export class CategoryService {
     if(!category) {
       return this.helper.serviceResponse.errorResponse(
         getCategoryListErrorMessage.CAN_NOT_GET_CATEGORY_LIST,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return this.helper.serviceResponse.successResponse(category, HttpStatus.OK,);
+  }
+
+  async getCategoryBySlug(slug: string): Promise<getCategoryBySlugResponse> {
+    const category = await this.categoryRepo.getCategoryBySlug(slug);
+    
+    if (!category) {
+      return this.helper.serviceResponse.errorResponse(
+        getCategoryBySlugErrorMessage.CAN_NOT_GET_CATEGORY_BY_SLUG,
         null,
         HttpStatus.BAD_REQUEST,
       );

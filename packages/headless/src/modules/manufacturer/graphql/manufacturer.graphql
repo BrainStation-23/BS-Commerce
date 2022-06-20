@@ -31,15 +31,21 @@ input ManufacturerInput {
   seo: SEOInput
 }
 
+type ManufacturerWithMessage {
+  manufacturer: Manufacturer!
+  message: String!
+}
+
 type ManufacturerResponse {
   error: String
   code: Int!
-  data: Manufacturer
+  data: ManufacturerWithMessage
 }
 
 type ManufacturerArrayResponse {
   manufacturers: [Manufacturer!]!
   total: Int!
+  message: String!
 }
 
 type AllManufacturersResponse {

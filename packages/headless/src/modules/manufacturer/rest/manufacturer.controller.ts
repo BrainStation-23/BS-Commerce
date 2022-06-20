@@ -1,3 +1,5 @@
+import { DeleteManufacturerSuccessResponseDto, DeleteManufacturerErrorResponseDto } from './../dto/deleteManufacturer.dto';
+import { UpdateManufacturerDto, UpdateManufacturerErrorResponseDto, UpdateManufacturerSuccessResponseDto } from './../dto/updateManufacturer.dto';
 import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
@@ -21,6 +23,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { GetManufacturersErrorResponseDto, GetManufacturersQueryDto, GetManufacturersSuccessResponseDto } from '../dto/getManufacturers.dto';
+import { GetManufacturerErrorResponseDto, GetManufacturerSuccessResponseDto } from '../dto/getManufacturer.dto';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
 @ApiBearerAuth()
@@ -91,6 +94,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Get('/:manufacturerId')
+    @ApiResponse({
+        description: 'Get Manufacturer Success Response',
+        type: GetManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Get Manufacturer Error Response',
+        type: GetManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async getManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.getManufacturer(manufacturerId);
         res.status(code);
@@ -107,7 +120,17 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Patch('/:manufacturerId')
-    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: Manufacturer, @Res({ passthrough: true }) res: Response) {
+    @ApiResponse({
+        description: 'Update Manufacturer Success Response',
+        type: UpdateManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Update Manufacturer Error Response',
+        type: UpdateManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
+    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: UpdateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer);
         res.status(code);
         return response;
@@ -122,6 +145,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Delete('/:manufacturerId')
+    @ApiResponse({
+        description: 'Delete Manufacturer Success Response',
+        type: DeleteManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Delete Manufacturer Error Response',
+        type: DeleteManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async deleteManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.deleteManufacturer(manufacturerId);
         res.status(code);
