@@ -12,6 +12,7 @@ type DB = 'MONGO' | 'MYSQL';
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.useGlobalPipes(new ValidationPipe());
   coreConfig.api === 'REST' ? SwaggerConfig(app) : null;

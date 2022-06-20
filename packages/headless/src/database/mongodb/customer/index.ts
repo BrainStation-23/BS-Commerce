@@ -13,11 +13,6 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {
-    return CustomerModel.findOne(query).lean();
-  }
-
-  async insertOtp(data: Customer): Promise<Boolean> {
-    const customer = await CustomerModel.create(data);
-    return customer ? true : false
+    return CustomerModel.findOne(query).lean().select('-password -_id');
   }
 }

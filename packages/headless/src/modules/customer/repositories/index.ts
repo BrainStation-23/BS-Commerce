@@ -8,12 +8,8 @@ export class CustomerRepository {
   constructor(private readonly db: ICustomerDatabase) { }
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
-    return await this.db.createCustomer(customer);
-  }
-
-  async insertOtp(customer: Customer): Promise<Boolean> {
     customer.id = randomUUID()
-    return await this.db.insertOtp(customer);
+    return await this.db.createCustomer(customer);
   }
 
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {
