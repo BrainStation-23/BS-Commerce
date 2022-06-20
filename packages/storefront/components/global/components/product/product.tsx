@@ -17,8 +17,8 @@ const Product = (props: any) => {
                   <div className="relative inset-0 bg-cover bg-center z-0">
                     <Picture
                       product={product}
-                      height={200}
-                      width={200}
+                      height={212}
+                      width={212}
                       src={product.images[0]}
                       alt={product.category}
                     />
