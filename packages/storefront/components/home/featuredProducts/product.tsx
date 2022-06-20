@@ -14,7 +14,7 @@ interface productInterface {
 const Product = (props: { product: productInterface }) => {
   const product = props.product;
   return (
-    <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer lg:pl-3">
+    <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer lg:pl-0">
       <div className="group flex relative pl-10 md:pl-0 lg:pl-0">
         <Picture
           product={product}
