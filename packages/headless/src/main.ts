@@ -15,9 +15,8 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.useGlobalPipes(new ValidationPipe());
-  coreConfig.api === 'REST' ? SwaggerConfig(app) : null;
+  coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);
   console.log(`http://${coreConfig.host}:${coreConfig.port}`);
 }
-
 bootstrap();

@@ -172,7 +172,7 @@ export class UpdateProductDto implements UpdateProductRequest {
     @ValidateNested({ each: true })
     tags?: [string];
 
-    @ApiProperty({ type: UpdateProductPhotoDto, required: false })
+    @ApiProperty({ type: [UpdateProductPhotoDto], required: false })
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
@@ -185,7 +185,7 @@ export class UpdateProductDto implements UpdateProductRequest {
     @IsArray()
     brands?: [string];
 
-    @ApiProperty({ type: UpdateProductCategoryDto, required: false })
+    @ApiProperty({ type: [UpdateProductCategoryDto], required: false })
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
