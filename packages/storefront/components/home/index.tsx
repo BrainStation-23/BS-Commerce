@@ -1,16 +1,18 @@
-import type { NextComponentType } from "next";
-import TrendingProducts from "@/components/home/trend/index";
-import WeekDeals from "@/components/home/weekDeals";
-import HomeShipping from "@/components/home/homeShipping";
-import ImageSlider from "@/components/home/imageSlider";
-import FeaturedProducts from "@/components/home/featuredProducts";
-import BannerPage from "@/components/global/bannerComponent";
-import BestSell from "@/components/home/bestSell";
-import Blog from "@/components/home/blog/blog";
-import HomefullBanner from "@/components/global/bannerComponent/homeFullBanner";
-import { useDispatch } from "react-redux";
-import { storeProducts } from "toolkit/ProductsSlice";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import type { NextComponentType } from "next";
+
+import ImageSlider from "@/components/home/imageSlider";
+import HomeShipping from "@/components/home/homeShipping";
+import TrendingProducts from "@/components/home/trend/index";
+import BannerPage from "@/components/global/bannerComponent";
+import WeekDeals from "@/components/home/weekDeals";
+import HomefullBanner from "@/components/global/bannerComponent/homeFullBanner";
+import BestSell from "@/components/home/bestSell";
+import FeaturedProducts from "@/components/home/featuredProducts";
+import Blog from "@/components/home/blog/blog";
+
+import { storeProducts } from "toolkit/ProductsSlice";
 import productData from "../../allData/product-data.json";
 
 const HomeComponent: NextComponentType = () => {
