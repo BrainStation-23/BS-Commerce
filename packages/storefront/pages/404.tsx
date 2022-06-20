@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 
@@ -27,7 +28,7 @@ const PageNotFOund: NextPage = () => {
             Sorry, But the page you are looking for doesn&apos;t exist!
           </span>
           <button className="bg-green-600 py-2 px-6 rounded-md text-white font-light hover:bg-stone-900 transition-all duration-200 ease-linear">
-            Go to home page
+            <Link href="/">Go to home page</Link>
           </button>
         </div>
       </section>
