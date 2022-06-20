@@ -19,9 +19,9 @@ export interface addToCartErrorResponse extends ErrorResponse {
 }
 
 export const enum addToCartErrorMessage {
-    CANNOT_CREATE_CART = 'CANNOT_CREATE_CART',
-    CANNOT_ADD_ITEM_TO_THE_CART = 'CANNOT_ADD_ITEM_TO_THE_CART',
-    CANNOT_INCREMENT_CART_ITEM = 'CANNOT_INCREMENT_CART_ITEM',
+    CAN_NOT_CREATE_CART = 'CAN_NOT_CREATE_CART',
+    CAN_NOT_ADD_ITEM_TO_THE_CART = 'CAN_NOT_ADD_ITEM_TO_THE_CART',
+    CAN_NOT_INCREMENT_CART_ITEM = 'CAN_NOT_INCREMENT_CART_ITEM',
 }
 
 export type AddToCartResponse = addToCartSuccessResponse | addToCartErrorResponse;
