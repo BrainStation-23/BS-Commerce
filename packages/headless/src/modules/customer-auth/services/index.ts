@@ -17,7 +17,11 @@ import {
   CreateCustomerSendOtpRequest,
   CreateCustomerSendOtpErrorMessages,
   CreateCustomerSendOtpResponse,
+  CreateCustomerVerifyOtpResponse,
+  CreateCustomerVerifyOtpErrorMessages,
+  CreateCustomerVerifyOtpSuccessMessages,
 } from 'models';
+import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
 
 @Injectable()
 export class CustomerAuthService {
@@ -39,9 +43,18 @@ export class CustomerAuthService {
     return this.helper.serviceResponse.successResponse({ message: CreateCustomerSuccessMessages.CUSTOMER_CREATED_SUCCESSFUL }, HttpStatus.CREATED);
   }
 
+  async getCustomer(data: CreateCustomerSendOtpRequest): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
+    console.log(doesCustomerEmailExist)
+    if (!doesCustomerEmailExist || !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CreateCustomerSendOtpErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    return this.helper.serviceResponse.successResponse(doesCustomerEmailExist || doesCustomerPhoneExist, HttpStatus.OK);
+  }
+
   async sendOtp(data: CreateCustomerSendOtpRequest): Promise<CreateCustomerSendOtpResponse> {
     const doesCustomerExist = await this.customerRepo.findCustomer({ $or: [{ email: data.email }, { phone: data.phone }] });
-    if (doesCustomerExist && doesCustomerExist.otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerSendOtpErrorMessages.OTP_ALREADY_VERIFIED_SUCCEED, null, HttpStatus.BAD_REQUEST,);
+    if (!doesCustomerExist) return this.helper.serviceResponse.errorResponse(CreateCustomerSendOtpErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    if (doesCustomerExist && doesCustomerExist.otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerSendOtpErrorMessages.OTP_ALREADY_VERIFIED, null, HttpStatus.BAD_REQUEST,);
 
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
@@ -50,6 +63,13 @@ export class CustomerAuthService {
 
     const registeredCustomer = await this.customerRepo.insertOtp(customer);
     if (!registeredCustomer) return this.helper.serviceResponse.errorResponse(CreateCustomerSendOtpErrorMessages.CAN_NOT_SEND_OTP, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ message: `Your OTP is ${customer.otp}` }, HttpStatus.CREATED);
+    return this.helper.serviceResponse.successResponse({ message: `Your OTP is ${customer.otp}` }, HttpStatus.OK);
+  }
+
+  async verifyOtp(data: CreateCustomerSendOtpRequest): Promise<CreateCustomerVerifyOtpResponse> {
+    const doesCustomerExist = await this.customerRepo.findCustomer({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { otp: { $gt: Date.now() } }] });
+    if (!doesCustomerExist) return this.helper.serviceResponse.errorResponse(CreateCustomerVerifyOtpErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    if (doesCustomerExist && doesCustomerExist.otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerVerifyOtpErrorMessages.OTP_ALREADY_VERIFIED, null, HttpStatus.BAD_REQUEST,);
+    return this.helper.serviceResponse.successResponse({ message: CreateCustomerVerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL }, HttpStatus.OK);
   }
 }

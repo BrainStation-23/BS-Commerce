@@ -20,7 +20,8 @@ export interface CreateCustomerSendOtpSuccessResponse extends SuccessResponse {
 }
 
 export const enum CreateCustomerSendOtpErrorMessages {
-    OTP_ALREADY_VERIFIED_SUCCEED = 'OTP_ALREADY_VERIFIED_SUCCEED',
+    OTP_ALREADY_VERIFIED = 'OTP_ALREADY_VERIFIED',
+    CAN_NOT_GET_CUSTOMER = 'CAN_NOT_GET_CUSTOMER',
     CAN_NOT_SEND_OTP = 'CAN_NOT_SEND_OTP'
 }
 

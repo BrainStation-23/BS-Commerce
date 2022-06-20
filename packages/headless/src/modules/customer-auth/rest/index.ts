@@ -1,6 +1,6 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
 import {
   CreateCustomerDto,
@@ -9,6 +9,9 @@ import {
   CreateCustomerSendOtpErrorResponseDto,
   CreateCustomerSendOtpSuccessResponseDto,
   CreateCustomerSuccessResponseDto,
+  CreateCustomerVerifyOtpDto,
+  CreateCustomerVerifyOtpErrorResponseDto,
+  CreateCustomerVerifyOtpSuccessResponseDto,
 } from '../dto';
 
 @Controller('customer/auth')
@@ -33,6 +36,19 @@ export class CustomerAuthController {
     return { code, ...response };
   }
 
+  @Get()
+  @ApiParam({name: 'params'})
+  @ApiResponse({
+    description: 'Get Customer Success Response',
+    status: HttpStatus.CREATED
+  })
+  async getCustomer(@Param() params: CreateCustomerSendOtpDto, @Res({ passthrough: true }) res: Response) {
+    console.log(params)
+    const { code, ...response } = await this.authService.getCustomer(params);
+    res.status(code);
+    return { code, ...response };
+  }
+
   @Post('send-otp')
   @ApiResponse({
     description: 'Customer Register Send OTP Success Response',
@@ -46,6 +62,23 @@ export class CustomerAuthController {
   })
   async sendOtp(@Body() data: CreateCustomerSendOtpDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.sendOtp(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('verify-otp')
+  @ApiResponse({
+    description: 'Customer Register Verify OTP Success Response',
+    type: CreateCustomerVerifyOtpSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Customer Register Verify OTP Error Response',
+    type: CreateCustomerVerifyOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async verifyOtp(@Body() data: CreateCustomerVerifyOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.verifyOtp(data);
     res.status(code);
     return { code, ...response };
   }

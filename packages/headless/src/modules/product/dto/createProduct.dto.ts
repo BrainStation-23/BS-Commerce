@@ -18,8 +18,8 @@ export class CreateProductDto implements CreateProductRequest {
     info: ProductInfoDto;
 
     @ApiProperty({ type: ProductMetaDto })
-    @IsOptional()
     @IsObject()
+    @CustomValidator(ProductMetaDto)
     meta: ProductMetaDto;
 
     @ApiProperty({ required: false })
@@ -27,10 +27,11 @@ export class CreateProductDto implements CreateProductRequest {
     @IsArray()
     tags?: [string];
 
-    @ApiProperty({ type: ProductPhotoDto, required: false })
+    @ApiProperty({ type: [ProductPhotoDto], required: false })
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
+    @CustomValidator(ProductPhotoDto)
     @Type(() => ProductPhotoDto)
     photos?: ProductPhotoDto[];
 
@@ -39,7 +40,7 @@ export class CreateProductDto implements CreateProductRequest {
     @IsArray()
     brands?: [string];
 
-    @ApiProperty({ type: ProductCategoryDto })
+    @ApiProperty({ type: [ProductCategoryDto] })
     @IsArray()
     @ValidateNested({ each: true })
     @CustomValidator(ProductCategoryDto)

@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEmail, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsArray, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import {
     CreateCustomerSendOtpErrorResponse,
     CreateCustomerSendOtpRequest,
@@ -9,15 +9,15 @@ import {
 } from 'models';
 
 export class CreateCustomerSendOtpDto implements CreateCustomerSendOtpRequest {
-    @ApiProperty()
+    @ApiProperty({required: false})
     @IsOptional()
     @IsString()
     phone: string;
 
-    @ApiProperty()
-    @IsNotEmpty()
+    @ApiProperty({required: false})
+    @IsOptional()
     @IsString()
-    otp: string;
+    email: string;
 }
 
 export class CreateCustomerSendOtpErrorResponseDto implements CreateCustomerSendOtpErrorResponse {
@@ -27,7 +27,7 @@ export class CreateCustomerSendOtpErrorResponseDto implements CreateCustomerSend
 
     @ApiProperty({
         example: CreateCustomerSendOtpErrorMessages.CAN_NOT_SEND_OTP,
-        examples: [CreateCustomerSendOtpErrorMessages.OTP_ALREADY_VERIFIED_SUCCEED, CreateCustomerSendOtpErrorMessages.CAN_NOT_SEND_OTP]
+        examples: [CreateCustomerSendOtpErrorMessages.OTP_ALREADY_VERIFIED, CreateCustomerSendOtpErrorMessages.CAN_NOT_GET_CUSTOMER, CreateCustomerSendOtpErrorMessages.CAN_NOT_SEND_OTP]
     })
     error: CreateCustomerSendOtpErrorMessages;
 
