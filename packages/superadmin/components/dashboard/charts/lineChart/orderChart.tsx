@@ -114,7 +114,7 @@ const OrderTypeChart: FC = () => {
             </span>
           </div>
         </div>
-        <div style={{ ["padding" as any]: "25px" }}>
+        <div style={{ ["padding" as any]: "35px" }}>
           <Line data={data}></Line>
         </div>
       </div>

@@ -87,10 +87,10 @@ const Sidebar: NextComponentType = (props: any) => {
           <input type="text" placeholder="search" />
         </div>
         <div className={sidebar.main_menu}>
-          <ul>
+          <div>
             {/* Menus */}
             {menuItems.map((menuItem, index) => (
-              <li key={index}>
+              <div key={index}>
                 <a
                   onClick={(e) => manageToggleSubmenu(index)}
                   className={sidebar.menu_item}
@@ -109,7 +109,7 @@ const Sidebar: NextComponentType = (props: any) => {
                 </a>
                 {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
                   <>
-                    <ul
+                    <div
                       className={
                         showSubMenu[index]
                           ? sidebar.sub_menu_active
@@ -117,7 +117,7 @@ const Sidebar: NextComponentType = (props: any) => {
                       }
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
-                        <li key={index}>
+                        <div key={index}>
                           <a>
                             <div className={sidebar.submenu_icon}>
                               {subMenu.icon}
@@ -125,14 +125,14 @@ const Sidebar: NextComponentType = (props: any) => {
                             <span>{subMenu.name}</span>
                             {/* {subMenu.name} */}
                           </a>
-                        </li>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </>
                 ) : null}
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </>

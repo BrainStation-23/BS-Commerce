@@ -161,7 +161,7 @@
 }
 
 .side_menu .main_menu .sub_menu_active {
-  max-height: 200px;
+  min-height: auto;
   color: white;
   /* margin-left: 20px; */
   background-color: #6666;
@@ -170,7 +170,6 @@
   /* padding-left: 15px; */
   display: block;
   cursor: pointer;
-  width: 100%;
   /* max-height: 200px; */
 }
 
