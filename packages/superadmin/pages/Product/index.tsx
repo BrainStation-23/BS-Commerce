@@ -2,8 +2,12 @@ import type { NextPage } from "next";
 import ProductsList from "../../components/products/productsList";
 import SearchWindow from "../../components/products/searchWindow";
 import ProductIndex from "../../components/products/productsList";
+import { userAPI } from "../../APIs";
+import { Product } from "models";
+import { useState } from "react";
 
-const Products: NextPage = () => {
+const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
+  const [products, setProducts] = useState(productsList);
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -142,12 +146,21 @@ const Products: NextPage = () => {
           </div>
         </div>
         <div className="mt-2 pt-1">
-          <SearchWindow />
-          <ProductsList />
+          <SearchWindow setProducts={setProducts} />
+          <ProductsList productsList={products} />
         </div>
       </main>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const productsList = await userAPI.getProducts();
+  return {
+    props: {
+      productsList: productsList,
+    },
+  };
+}
 
 export default Products;

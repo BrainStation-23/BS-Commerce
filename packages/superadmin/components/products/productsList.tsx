@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import Link from "next/link";
 
 import Table from "../global/table/table";
 import productData from "../../data/products.json";
 import Pagination from "../global/pagination";
+import { Product } from "models";
 
-const ProductsList = () => {
+interface Props {
+  productsList: Product[];
+}
+
+const ProductsList: FC<Props> = ({ productsList }) => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
   const [checkAll, setCheckAll] = useState(false);
@@ -22,7 +27,7 @@ const ProductsList = () => {
       ),
       path: "select",
       content: (data: any, key: any, index: any) => (
-        <td>
+        <td className="text-center">
           {checkAll && <input type="checkbox" value="" checked></input>}
           {!checkAll && <input type="checkbox" value=""></input>}
         </td>
@@ -32,8 +37,14 @@ const ProductsList = () => {
       label: "Picture",
       path: "thumbnail",
       content: (data: any, key: any, index: any) => (
-        <td><img src={`${data[key]}`} height="75px" width={"75px"} alt="..."></img></td>
-        
+        <td>
+          <img
+            src={`${data[key]}`}
+            height="75px"
+            width={"75px"}
+            alt="..."
+          ></img>
+        </td>
       ),
     },
     {
@@ -60,7 +71,9 @@ const ProductsList = () => {
       label: "Published",
       path: "published",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center m-auto p-auto">{data[key] ? <i className="bi bi-check-lg"></i> : "-"}</td>
+        <td className="text-center m-auto p-auto">
+          {data[key] ? <i className="bi bi-check-lg"></i> : "-"}
+        </td>
       ),
     },
     {
@@ -101,7 +114,7 @@ const ProductsList = () => {
       <div className="card rounded border-1 px-2 mt-3">
         <div className="card-body">
           <p>
-            Learn more about {" "}
+            Learn more about{" "}
             <a href="#" style={{ textDecoration: "none" }}>
               Product
             </a>

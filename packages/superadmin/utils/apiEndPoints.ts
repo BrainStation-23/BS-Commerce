@@ -1,3 +1,4 @@
 export const apiEndPoints = {
-    getUser: `/todos`,
-}
+  getUser: `/todos`,
+  product: "/product",
+};

@@ -1,3 +1,5 @@
+import { Product } from "models";
+
 export interface User {
   id?: string;
   firstName: string;
@@ -28,4 +30,6 @@ export interface Address {
 
 export interface apiFunction {
   getUser: () => Promise<User[] | undefined>;
+  getProducts: () => Promise<Product[] | undefined>;
+  searchProduct: (data: string) => Promise<Product | undefined>;
 }
