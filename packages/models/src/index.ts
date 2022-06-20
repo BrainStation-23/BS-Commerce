@@ -6,3 +6,4 @@ export * from './product/index';
 export * from './category/index';
 export * from './customer-auth/index';
 export * from './customer/index';
+export * from "./cart/index";
