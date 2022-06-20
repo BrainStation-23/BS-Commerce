@@ -12,4 +12,8 @@ export class CategoryRepository {
   async getCategoryList(): Promise<responseCategory[] | null> {
     return await this.db.getCategoryList();
   }
+
+  async getCategoryBySlug(slug: string): Promise<Category | null> {
+    return await this.db.getCategoryBySlug(slug);
+  }
 }

@@ -1,10 +1,9 @@
-import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages } from 'models';
+import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
+import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages, UpdateManufacturerResponse, UpdateManufacturerErrorMessages, UpdateManufacturerSuccessMessages, UpdateManufacturerSuccessResponse, DeleteManufacturerResponse, DeleteManufacturerErrorMessages, DeleteManufacturerSuccessMessages, GetManufacturerResponse, GetManufacturerSuccessMessages, GetManufacturerSuccessResponse } from 'models';
 import { CreateManufacturerResponse, CreateManufacturerSuccessMessages, CreateManufacturerSuccessResponse } from 'models';
-import {CreateManufacturerErrorMessages} from 'models'
+import { CreateManufacturerErrorMessages } from 'models'
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Manufacturer } from 'src/entity/manufacturer';
 import { Helper } from 'src/helper/helper.interface';
-import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
 import { GetManufacturersQueryDto } from '../dto/getManufacturers.dto';
@@ -37,7 +36,7 @@ export class ManufacturerService {
             return this.helper.serviceResponse.errorResponse(CreateManufacturerErrorMessages.MANUFACTURER_NOT_CREATED_SUCCESSFULLY, null, HttpStatus.BAD_REQUEST);
         }
 
-        return this.helper.serviceResponse.successResponse({newManufacturer, message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY}, HttpStatus.OK) as CreateManufacturerSuccessResponse;
+        return this.helper.serviceResponse.successResponse({ manufacturer: newManufacturer, message: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY }, HttpStatus.OK) as CreateManufacturerSuccessResponse;
     }
 
     /**
@@ -48,7 +47,7 @@ export class ManufacturerService {
      * @returns { Promise<Object> } Object of Success or Error
      */
     async getAllManufacturers(query: GetManufacturersQueryDto): Promise<GetManufacturersResponse> {
-        const {skip, limit } = query;
+        const { skip, limit } = query;
         const foundManufacturers = await this.manufacturerRepo.getAllManufacturers(skip, limit);
 
         if (!foundManufacturers) {
@@ -61,7 +60,7 @@ export class ManufacturerService {
             total: manufacturersCount
         }
 
-        return this.helper.serviceResponse.successResponse({...allManufacturers, message: GetManufacturersSuccessMessages.MANUFACTURERS_LOADED_SUCCESSFULLY}, HttpStatus.OK) as GetManufacturersSuccessResponse;
+        return this.helper.serviceResponse.successResponse({ ...allManufacturers, message: GetManufacturersSuccessMessages.MANUFACTURERS_LOADED_SUCCESSFULLY }, HttpStatus.OK) as GetManufacturersSuccessResponse;
 
     }
 
@@ -70,14 +69,14 @@ export class ManufacturerService {
      * @param manufacturerId 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    async getManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async getManufacturer(manufacturerId: string): Promise<GetManufacturerResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({ id: manufacturerId });
 
         if (!foundManufacturer) {
-            return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Not found"] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(GetManufacturersErrorMessages.MANUFACTURERS_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         }
 
-        return this.helper.serviceResponse.successResponse(foundManufacturer);
+        return this.helper.serviceResponse.successResponse({manufacturer: foundManufacturer, message: GetManufacturerSuccessMessages.MANUFACTURER_LOADED_SUCCESSFULLY}, HttpStatus.OK) as GetManufacturerSuccessResponse;
 
     }
 
@@ -88,19 +87,19 @@ export class ManufacturerService {
      * @param manufacturer 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async updateManufacturer(manufacturerId: string, manufacturer: UpdateManufacturerDto): Promise<UpdateManufacturerResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({ id: manufacturerId });
 
         if (!foundManufacturer) {
-            return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Manufacturer not found. Try with different id"] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(UpdateManufacturerErrorMessages.MANUFACTURER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         } else {
             const savedManufacturer = await this.manufacturerRepo.updateManufacturer(manufacturerId, manufacturer);
 
             if (!savedManufacturer) {
-                return this.helper.serviceResponse.errorResponse('Can not update manufacturer', { manufacture: ["Not updated"] }, HttpStatus.BAD_REQUEST);
+                return this.helper.serviceResponse.errorResponse(UpdateManufacturerErrorMessages.MANUFACTURER_NOT_UPDATED, null, HttpStatus.BAD_REQUEST);
             }
 
-            return this.helper.serviceResponse.successResponse(savedManufacturer);
+            return this.helper.serviceResponse.successResponse({ manufacturer: savedManufacturer, message: UpdateManufacturerSuccessMessages.MANUFACTURER_UPDATED_SUCCESSFULLY }, HttpStatus.OK) as UpdateManufacturerSuccessResponse;
         }
     }
 
@@ -110,19 +109,19 @@ export class ManufacturerService {
      * @param manufacturerId 
      * @returns { Promise<Object> } Object of Success or Error
      */
-    async deleteManufacturer(manufacturerId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+    async deleteManufacturer(manufacturerId: string): Promise<DeleteManufacturerResponse> {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({ id: manufacturerId });
 
         if (!foundManufacturer) {
-            return this.helper.serviceResponse.errorResponse('Manufacture not found', { manufacturer: ["Manufacturer not found. Try with different id"] }, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(DeleteManufacturerErrorMessages.MANUFACTURER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         } else {
             const manufacturer = await this.manufacturerRepo.deleteManufacturer(manufacturerId);
 
             if (!manufacturer) {
-                return this.helper.serviceResponse.errorResponse('Can not delete manufacturer', { manufacture: ["Not deleted"] }, HttpStatus.BAD_REQUEST);
+                return this.helper.serviceResponse.errorResponse(DeleteManufacturerErrorMessages.MANUFACTURER_NOT_DELETED, null, HttpStatus.BAD_REQUEST);
             }
 
-            return this.helper.serviceResponse.successResponse(manufacturer);
+            return this.helper.serviceResponse.successResponse({ manufacturer, message: DeleteManufacturerSuccessMessages.MANUFACTURER_DELETED_SUCCESSFULLY }, HttpStatus.OK) as DeleteManufacturerResponse;
         }
     }
 }
