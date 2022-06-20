@@ -1,6 +1,6 @@
 import { CustomerAuthService } from '../services';
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { CreateCustomerDto, GetCustomerQueryDto } from '../dto';
+import { CreateCustomerDto, CustomerSignInDto, GetCustomerQueryDto } from '../dto';
 
 @Resolver()
 export class CustomerAuthResolver {
@@ -14,5 +14,10 @@ export class CustomerAuthResolver {
   @Mutation()
   async register(@Args('customer') customer: CreateCustomerDto) {
     return await this.authService.register(customer);
+  }
+
+  @Mutation()
+  async customerSignin(@Args('data') data: CustomerSignInDto) {
+    return await this.authService.signIn(data);
   }
 }

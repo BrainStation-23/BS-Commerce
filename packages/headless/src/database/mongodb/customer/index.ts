@@ -15,4 +15,8 @@ export class CustomerDatabase implements ICustomerDatabase {
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {
     return CustomerModel.findOne(query).lean().select('-password -_id');
   }
+
+  async getCustomerPassword(query: Record<string, string>): Promise<Customer | null> {
+    return await CustomerModel.findOne(query).lean();
+  }
 }
