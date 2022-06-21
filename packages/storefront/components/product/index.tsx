@@ -1,15 +1,13 @@
 import { NextComponentType } from "next";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { products } from "../../allData/product-data.json";
 import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import ProductDescription from "./productDescription";
 import ProductImagesSlider from "./product-image-slider";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { Product } from "models";
 
-const ProductDetailsComponent = () => {
+const ProductDetailsComponent: NextComponentType = () => {
   const { query } = useRouter();
 
   const product = products.find((product) => product.id === Number(query.pid));
@@ -34,21 +32,6 @@ const ProductDetailsComponent = () => {
     setWishlist([...wishlist, `${product.id}`]);
     setClicked(true);
   };
-
-  async function getProductById() {
-    try {
-      const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
-      console.log(headers);
-      const res = await axios.get(`http://localhost:3000/api/product/19d9fc6e-8135-42fd-a8b6-fb9df1439d8d`, { headers })
-      console.log(res);
-    } catch(error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getProductById();
-  }, [])
 
   if (product) {
     return (

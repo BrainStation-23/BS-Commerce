@@ -53,7 +53,7 @@ const Signin = () => {
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={loginSchema}
+              //validationSchema={loginSchema}
             >
               {(formikprops) => {
                 return (
