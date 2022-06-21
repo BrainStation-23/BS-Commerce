@@ -4,15 +4,20 @@ import Link from "next/link";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 import { Product } from "models";
+import { userAPI } from "../../APIs";
 
 interface Props {
   productsList: Product[];
+  setProducts: any;
 }
 
-const ProductsList: FC<Props> = ({ productsList }) => {
-  const [pageSize, setPageSize] = useState(7);
-  const [currentPage, onPageChange] = useState(1);
+const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   const [checkAll, setCheckAll] = useState(false);
+
+  const onChangeForList = async (pageSize: number) => {
+    const productsList = await userAPI.getProducts(pageSize);
+    setProducts(productsList);
+  };
 
   const columns = [
     {
@@ -112,10 +117,7 @@ const ProductsList: FC<Props> = ({ productsList }) => {
             {productsList.length > 1 ? (
               <Pagination
                 list={productsList}
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-                currentPage={currentPage}
-                onPageChange={onPageChange}
+                onChangeForList={onChangeForList}
               />
             ) : null}
           </div>

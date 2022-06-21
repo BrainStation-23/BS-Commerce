@@ -30,6 +30,6 @@ export interface Address {
 
 export interface apiFunction {
   getUser: () => Promise<User[] | undefined>;
-  getProducts: () => Promise<Product[] | undefined>;
+  getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
 }

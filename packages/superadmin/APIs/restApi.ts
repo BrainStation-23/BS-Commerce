@@ -12,9 +12,13 @@ export async function getUserRest(): Promise<User[] | undefined> {
   }
 }
 
-export async function getProductsRest(): Promise<Product[] | undefined> {
+export async function getProductsRest(
+  pageSize: number
+): Promise<Product[] | undefined> {
   try {
-    const { data } = await axios.get(`${apiEndPoints.product}?skip=1&limit=10`);
+    const { data } = await axios.get(
+      `${apiEndPoints.product}?skip=1&limit=${pageSize}`
+    );
     return data?.data as Product[];
   } catch (error) {
     console.error(error);

@@ -3,19 +3,12 @@ import { usePagination } from "./usePagination";
 
 interface Props {
   list: any;
-  pageSize: any;
-  currentPage: any;
-  setPageSize: any;
-  onPageChange: any;
+  onChangeForList: (pageSize: number) => void;
 }
 
-const Pagination: FC<Props> = ({
-  list,
-  pageSize,
-  currentPage,
-  setPageSize,
-  onPageChange,
-}) => {
+const Pagination: FC<Props> = ({ list, onChangeForList }) => {
+  const [pageSize, setPageSize] = useState(7);
+  const [currentPage, onPageChange] = useState(1);
   const totalCount = list?.length;
 
   const paginationRange = usePagination({
@@ -75,7 +68,10 @@ const Pagination: FC<Props> = ({
         <select
           className="form-select"
           aria-label="Default select example"
-          onChange={(e) => setPageSize(+e.target.value)}
+          onChange={(e) => {
+            onChangeForList(+e.target.value);
+            setPageSize(+e.target.value);
+          }}
         >
           <option value="7">7</option>
           <option value="15">15</option>
