@@ -16,7 +16,7 @@ import {
 
 @Controller('user')
 @ApiTags('User Profile API')
-@UseGuards(new JwtAuthGuard('admin'))
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class UserController {
   constructor(private userService: UserService) { }
