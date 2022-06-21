@@ -5,6 +5,7 @@ import { SwiperSlide } from "swiper/react";
 import Container from "@/components/global/components/container";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import axios from "axios";
 
 const TrendingProducts: FC = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
@@ -28,6 +29,7 @@ const TrendingProducts: FC = () => {
     setProducts(newProduct);
     setFilterKey(text);
   };
+
   return (
     <>
       <Container className="max-w-6xl">

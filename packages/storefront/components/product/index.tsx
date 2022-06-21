@@ -6,13 +6,13 @@ import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import ProductDescription from "./productDescription";
 import ProductImagesSlider from "./product-image-slider";
 import { useRouter } from "next/router";
+import axios from "axios";
 import { Product } from "models";
 
-const ProductDetailsComponent = ({product}: Product) => {
+const ProductDetailsComponent = () => {
   const { query } = useRouter();
-  console.log(query.pid);
 
-  //const product = products.find((product) => product.id === Number(query.pid));
+  const product = products.find((product) => product.id === Number(query.pid));
   var isAvailable = false;
   if (product.stock > 0) isAvailable = true;
   var disableDecrement = false;
@@ -35,25 +35,27 @@ const ProductDetailsComponent = ({product}: Product) => {
     setClicked(true);
   };
 
-  // async function getProductById() {
-  //   try {
-  //     const res = await axios.get(`http://localhost:3000/api/product/19d9fc6e-8135-42fd-a8b6-fb9df1439d8d`)
-  //     console.log(res);
-  //   } catch(error) {
-  //     console.log(error);
-  //   }
-  // }
+  async function getProductById() {
+    try {
+      const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+      console.log(headers);
+      const res = await axios.get(`http://localhost:3000/api/product/19d9fc6e-8135-42fd-a8b6-fb9df1439d8d`, { headers })
+      console.log(res);
+    } catch(error) {
+      console.log(error);
+    }
+  }
 
-  // useEffect(() => {
-  //   getProductById();
-  // }, [])
+  useEffect(() => {
+    getProductById();
+  }, [])
 
   if (product) {
     return (
       <>
         <Breadcrumb
-          title={product.info.name}
-          pathArray={["Home", product.info.name]}
+          title={product.title}
+          pathArray={["Home", product.title]}
           linkArray={["/home", "/product" + product.id]}
         />
         <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -67,7 +69,7 @@ const ProductDetailsComponent = ({product}: Product) => {
                 </div>
                 <div className="lg:w-1/2 w-full lg:pl-5 ">
                   <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
-                    {product.info.name}
+                    {product.title}
                   </h2>
                   <div className="flex">
                     <svg
@@ -116,13 +118,13 @@ const ProductDetailsComponent = ({product}: Product) => {
 
                   <div className="flex mb-1 mt-2"></div>
                   <div className="text-gray-900 ml-1 mb-1 mt-2">
-                    <span className="text-sm">Vendor: {product.brands}</span>
+                    <span className="text-sm">Vendor: {product.vendor}</span>
                     <span className="text-sm ml-2 mr-2">|</span>
-                    <span className="text-sm">SKU: {product.info.sku}</span>
+                    <span className="text-sm">SKU: {product.sku}</span>
                   </div>
                   <div className="flex">
                     <span className="title-font font-medium text-2xl text-green-600 mt-2 mb-2 ml-1">
-                      ${product.info.price}
+                      ${product.price}
                     </span>
                   </div>
                   <div className="flex">
@@ -141,7 +143,7 @@ const ProductDetailsComponent = ({product}: Product) => {
                   </div>
 
                   <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
-                    {product.info.shortDescription}
+                    {product.description}
                   </p>
                   <div className="flex mt-2 items-center mb-2">
                     <div className="flex ml-1 items-center">

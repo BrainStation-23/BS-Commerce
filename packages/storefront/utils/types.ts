@@ -1,3 +1,5 @@
+import { CreateUserRequest, CreateUserResponse, ForgotPasswordRequest, ForgotPasswordResponse, SignInRequest, SignInResponse } from "models";
+
 export interface accordionBody {
   id: string;
   title: string;
@@ -48,6 +50,9 @@ export interface Address {
 
 export interface apiFunction {
   getUser: () => Promise<User[] | undefined>;
+  signIn: (data: SignInRequest) => Promise<SignInResponse | undefined>;
+  signUp: (data: CreateUserRequest) => Promise<CreateUserResponse | undefined>;
+  forgotPassword: (data: ForgotPasswordRequest) => Promise<ForgotPasswordResponse | undefined>;
 }
 
 export interface ProductStore {

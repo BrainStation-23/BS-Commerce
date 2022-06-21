@@ -1,25 +1,25 @@
-import axios from "axios";
-import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
-import type { NextComponentType } from "next";
+import { userAPI } from "APIs";
+import { Field, Form, Formik, FormikValues } from "formik";
+import { SignInRequest } from "models";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 
-import { loginSchema } from "../global/schemas/loginSchema";
-
-interface Values {
-  username: string;
-  password: string;
-}
-
 const Signin = () => {
-  async function handleSignin(data: Values) {
+  const router = useRouter();
+  async function handleSignin(data: SignInRequest) {
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/signin', data);
-      console.log(res);
-
+      userAPI.signIn(data).then((response) => {
+        if(response?.code === 400) {
+          alert(response.error);
+        }
+        else {
+          localStorage.setItem("token", response?.data.token);
+          router.push('/home')
+        }
+      });
     } catch(error) {
-      console.log(error);
+      alert(error);
     }
   }
 

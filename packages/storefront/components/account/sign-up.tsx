@@ -4,21 +4,27 @@ import Link from "next/link";
 
 import { registerSchema } from "../global/schemas/loginSchema";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-
-interface Values {
-  firstname: string;
-  lastname: string;
-  phone: string;
-  password: string;
-  confirm_password: string;
-}
+import axios from "axios";
+import { CreateUserRequest } from "models";
+import { userAPI } from "APIs";
 
 const Signup = () => {
   const router = useRouter();
-  const baseUrl = "http://localhost:3000";
 
-  async function handleSignin(data: Values) {
-    console.log(data);
+  async function handleSignUp(data: CreateUserRequest) {
+    try {
+      userAPI.signUp(data).then((response) => {
+        if(response?.code === 400) {
+          alert(response.error);
+        }
+        else {
+          localStorage.setItem("token", response?.data.token);
+          router.push('/home')
+        }
+      });
+    } catch(error) {
+      alert(error);
+    }
   }
 
   return (
@@ -44,21 +50,19 @@ const Signup = () => {
               initialValues={{
                 firstname: "",
                 lastname: "",
-                phone: "",
+                email: "",
                 password: "",
-                confirm_password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
                   firstName: values.firstname,
                   lastName: values.lastname,
-                  phone: values.phone,
+                  email: values.email,
                   password: values.password,
                 };
-                handleSignin(data);
+                handleSignUp(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={registerSchema}
             >
               {(formikprops) => {
                 return (
@@ -71,9 +75,6 @@ const Signup = () => {
                         name="firstname"
                         placeholder="First Name"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="name" />
-                      </div>
                     </div>
 
                     <div className="mb-4">
@@ -84,22 +85,16 @@ const Signup = () => {
                         name="lastname"
                         placeholder="Last Name"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="name" />
-                      </div>
                     </div>
 
                     <div className="mb-4">
                       <Field
-                        type="phone"
+                        type="email"
                         className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
+                        id="email"
+                        name="email"
+                        placeholder="username"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="phone" />
-                      </div>
                     </div>
 
                     <div className="mb-4">
@@ -110,22 +105,6 @@ const Signup = () => {
                         name="password"
                         placeholder="Password"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="password" />
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <Field
-                        type="password"
-                        className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="confirm_password"
-                        name="confirm_password"
-                        placeholder="Confirm Password"
-                      />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="confirm_password" />
-                      </div>
                     </div>
 
                     <button
