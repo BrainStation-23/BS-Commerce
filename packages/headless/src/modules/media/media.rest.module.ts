@@ -10,10 +10,10 @@ import { MediaService } from './services';
   providers: [
     MediaService,
     MediaRepository,
-    {
-      provide: IMediaDatabase,
-      useClass: ResolveDatabaseDependency('MEDIA'),
-    },
+    // {
+    //   provide: IMediaDatabase,
+    //   useClass: ResolveDatabaseDependency('MEDIA'),
+    // },
   ],
 })
 export class MediaModule { }

@@ -2,6 +2,7 @@ import { ExecutionContext, HttpException, HttpStatus, Injectable, UnauthorizedEx
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
+import { adminAuthConfig } from 'config/auth';
 import { coreConfig } from 'config/core';
 
 @Injectable()

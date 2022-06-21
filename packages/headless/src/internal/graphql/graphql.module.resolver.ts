@@ -6,6 +6,7 @@ import { GraphqlInitModule } from './graphql.init';
 import { CategoryModule } from 'src/modules/category/category.graphql.module';
 import { CustomerAuthModule } from 'src/modules/customer-auth/auth.graphql.module';
 import { CartModule } from 'src/modules/cart/cart.graphql.module';
+import { MediaModule } from 'src/modules/media/media.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
@@ -17,5 +18,6 @@ export const ResolveGraphqlModule = () => {
     ManufacturerModule,
     CategoryModule,
     CustomerAuthModule,
+    MediaModule,
   ];
 };

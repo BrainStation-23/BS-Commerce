@@ -5,6 +5,7 @@ import { UserModule } from 'src/modules/user/user.rest.module';
 import { CategoryModule } from 'src/modules/category/category.rest.module';
 import { CustomerAuthModule } from 'src/modules/customer-auth/auth.rest.module';
 import { CartModule } from 'src/modules/cart/cart.rest.module';
+import { MediaModule } from 'src/modules/media/media.rest.module';
 
 export const ResolveRestModule = () => {
   return [
@@ -15,5 +16,6 @@ export const ResolveRestModule = () => {
     CategoryModule,
     CustomerAuthModule,
     CartModule,
+    MediaModule,
   ];
 };

@@ -11,10 +11,10 @@ import { MediaService } from './services';
     MediaResolver,
     MediaService,
     MediaRepository,
-    {
-      provide: IMediaDatabase,
-      useClass: ResolveDatabaseDependency('MEDIA'),
-    },
+    // {
+    //   provide: IMediaDatabase,
+    //   useClass: ResolveDatabaseDependency('MEDIA'),
+    // },
   ],
 })
-export class AuthModule { }
+export class MediaModule { }

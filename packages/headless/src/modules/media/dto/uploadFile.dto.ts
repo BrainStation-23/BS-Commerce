@@ -1,6 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsObject } from 'class-validator';
+import { UploadFileErrorMessages, UploadFileErrorResponse, UploadFileSuccessResponse } from 'models';
 
 
 export class UploadFileErrorResponseDto implements UploadFileErrorResponse {
@@ -18,10 +19,12 @@ export class UploadFileErrorResponseDto implements UploadFileErrorResponse {
     errors: string[];
 }
 
-export class UploadFileMessage {
-    @ApiProperty({ example: UploadFileSuccessMessages.FILE_UPLOADED_SUCCESSFUL })
-    @IsString()
-    message: UploadFileSuccessMessages.FILE_UPLOADED_SUCCESSFUL;
+export class UploadFileDto {
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
+    url: string;
 }
 
 export class UploadFileSuccessResponseDto implements UploadFileSuccessResponse {
@@ -31,5 +34,5 @@ export class UploadFileSuccessResponseDto implements UploadFileSuccessResponse {
 
     @ApiProperty()
     @IsObject()
-    data: UploadFileMessage;
+    data: UploadFileDto;
 }
