@@ -28,7 +28,7 @@ const CreateProduct = () => {
       displayOrder: data.displayOrder,
       isFeatured: data.isFeatured,
       // publishDate: "2022-06-20T09:06:25.239Z",
-      publishDate: data.publishDate,
+      // publishDate: data.publishDate,
     }
     const meta = {
       keywords: [data.keywords],

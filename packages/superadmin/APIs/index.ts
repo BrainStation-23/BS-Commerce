@@ -2,6 +2,7 @@ import {
   getProductsRest,
   getProductSearchRest,
   createProductRest,
+  getProductRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -14,13 +15,15 @@ import { apiFunction } from "../utils/types";
 const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
-  createProduct: createProductGraphQl,
+  createProduct: createProductRest,
+  getProduct: getProductRest,
 };
 
 const restApi: apiFunction = {
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
   createProduct: createProductRest,
+  getProduct: getProductRest,
 };
 
 export const userAPI: apiFunction =

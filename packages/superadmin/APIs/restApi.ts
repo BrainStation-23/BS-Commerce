@@ -1,3 +1,4 @@
+import { GetProductParams } from "./../../models/src/product/getProduct";
 import axios from "axios";
 import { apiEndPoints } from "../utils/apiEndPoints";
 import { CreateProductRequest } from "../../models/src/product";
@@ -13,7 +14,7 @@ export async function getUserRest(): Promise<User[] | undefined> {
   }
 }
 export async function createProductRest(
-  data: any
+  data: CreateProductRequest
 ): Promise<CreateProductRequest | undefined> {
   console.log(data);
 
@@ -50,6 +51,18 @@ export async function getProductSearchRest(
   try {
     const { data } = await axios.get(`${apiEndPoints?.product}/sku/${search}`);
     return data?.data as Product;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getProductRest(
+  data: GetProductParams
+): Promise<GetProductParams | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.product}${data.productId}`);
+
+    return res?.data as Product;
   } catch (error) {
     console.error(error);
   }

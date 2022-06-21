@@ -31,9 +31,8 @@ export interface Address {
 }
 
 export interface apiFunction {
-  getUser: () => Promise<User | undefined>;
   createProduct: (data: any) => Promise<CreateProductRequest | undefined>;
-  getProduct: () => Promise<GetProductParams | undefined>;
+  getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
 }

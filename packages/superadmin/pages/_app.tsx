@@ -7,7 +7,7 @@ import { config } from "../config";
 
 Axios.defaults.baseURL = config?.restPrefix;
 Axios.defaults.headers.common = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNiMzFiNzUxLWZjYjEtNDc0MS1iMmY0LWIzMDFjZDNiY2RhYSIsInVzZXJuYW1lIjoic2hhZmlAZ21haWwuY29tIiwibG9nSW5UaW1lIjoxNjU1ODAxOTIxNDExLCJpYXQiOjE2NTU4MDE5MjEsImV4cCI6MTY1NTg4ODMyMX0.KrAPOGPH3J7l90JrH9CdVejRMgDRiY14Xw-uEi13cN8`,
+  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYjNlOGFkLWQ5YjktNDc2Mi1iMDhmLTExMDNlYTk1OTc1NyIsInVzZXJuYW1lIjoic2VlZmF0aGltZWwxQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NTgwMDkxMDY0NSwiaWF0IjoxNjU1ODAwOTEwLCJleHAiOjE2NTU4ODczMTB9.DWKGNO0_wEnFmPqqyZ6XDgxevcII_LSn5kC4pJChM60`,
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
