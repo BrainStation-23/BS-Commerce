@@ -1,5 +1,5 @@
 export const apiEndPoints = {
     getUser: `/todos`,
     createProduct: `/product`,
-    getProduct: `/product/{productId}`,
+    getProduct: `/product/`,
 }

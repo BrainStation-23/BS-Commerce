@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { getProductRest } from "../../../APIs/restApi";
 import EditProduct from "../../../components/products/editProductDetails";
 
 const sampleData ={
@@ -25,21 +26,33 @@ const sampleData ={
   Height: 50,
 }
 
-const LogDetailPage: NextPage = () => {
+const LogDetailPage: NextPage = ({product}) => {
     const router = useRouter()
     const { id } = router.query;
     const { isReady  } = router.query;
+    console.log(product);
 
+    
     return (
         <div className="bg-light">
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <h1>{id}</h1>
 
-          <EditProduct product={sampleData} />
+          <EditProduct product={product} />
           
         </main>
       </div>
     )
+}
+export async function getServerSideProps(context) {
+  const res = await getProductRest({productId : "21152b38-831c-49a9-b33e-4ff0bed0adc7"});
+  // const res = await getProductRest({productId : context.params.id});
+  console.log(res);
+  console.log(context.params);
+  
+  return {
+    props: {product : res?.data }, // will be passed to the page component as props
+  }
 }
 
 export default LogDetailPage;

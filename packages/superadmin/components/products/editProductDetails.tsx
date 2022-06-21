@@ -6,11 +6,13 @@ import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { CreateProductRequest } from "../../../models/src/product";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createProductRest, getProductRest } from "../../APIs/restApi";
 
 
 const EditProduct = (props : any) => {
     const {product} = props;
+    const [productDetails, setProduct]=useState();
     const handleSubmit = (data: any) => {
 
       const info = {
@@ -66,43 +68,47 @@ const EditProduct = (props : any) => {
       }
   
       console.log(newData);
-      createProductRest(newData);
+      // createProductRest(newData);
     };
-    useEffect(() => {
-     
-  },[])
+  //   useEffect(() => {
+  //    const res = getProductRest({productId : "aaddf804-b06f-4094-be19-71a8ff087b6b"});
+  //     console.log(res);
+  //     if(res)
+  //     setProduct(res);
+      
+  // },[])
 
   return (
     <>
-      <Formik
+    {product? <Formik
         initialValues={{
-          productName: "",
-          ShortDescription: "",
-          FullDescription: "",
-          Sku: "",
-          OldPrice: 0,
-          Price: 0,
-          ProductCost: 0,
-          showOnHomePage: false,
-          includeInTopMenu: false,
-          allowToSelectPageSize: false,
-          published: false,
-          displayOrder: 0,
-          isFeatured: false,
-          publishDate: "",
-          tags: "",
-          brands: "",
-          keywords: "",
-          metaTitle: "",
-          metaDescription: "",
-          metaFriendlyPageName: "",
-          photosUrl: "",
-          photosID: "",
-          photosTitle: "",
-          displayOrderPhotos: "",
-          SelectedCategoryIds: "--Select--",
-          isFeaturedCategory: false,
-          displayOrderCategory: 0,
+          productName:product?.info?.name ,
+          ShortDescription:product?.info?.shortDescription ,
+          FullDescription:product?.info?.fullDescription ,
+          Sku:product?.info?.sku ,
+          OldPrice:product?.info?.oldPrice ,
+          Price:product?.info?.price ,
+          ProductCost:product?.info?.cost ,
+          showOnHomePage:product?.info?.showOnHomePage ,
+          includeInTopMenu:product?.info?.includeInTopMenu ,
+          allowToSelectPageSize:product?.info?.allowToSelectPageSize ,
+          published:product?.info?.published ,
+          displayOrder:product?.info?.displayOrder ,
+          isFeatured:product?.info?.isFeatured ,
+          publishDate:product?.info?.publishDate ,
+          tags:product?.tags ,
+          brands:product?.brands ,
+          keywords:product?.meta?.keywords ,
+          metaTitle:product?.meta?.title ,
+          metaDescription:product?.meta?.description ,
+          metaFriendlyPageName:product?.meta?.friendlyPageName ,
+          photosUrl:product?.photos[0]?.url ,
+          photosID:product?.photos[0]?.id ,
+          photosTitle:product?.photos[0]?.title ,
+          displayOrderPhotos:product?.photos[0]?.displayOrderPhotos ,
+          SelectedCategoryIds: product?.categories[0]?.SelectedCategoryIds,
+          isFeaturedCategory:product?.categories[0]?.isFeaturedCategory ,
+          displayOrderCategory:product?.categories[0]?.displayOrderCategory ,
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -193,7 +199,8 @@ const EditProduct = (props : any) => {
             </Form>
           );
         }}
-      </Formik>
+      </Formik>:""}
+      
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { GetProductParams } from './../../models/src/product/getProduct';
 import { CreateProductRequest } from './../../models/src/product/createProduct';
+import { Product } from '../../models/src/product';
 
 export interface User {
   id?: string;
@@ -32,5 +33,5 @@ export interface Address {
 export interface apiFunction {
   getUser: () => Promise<User | undefined>;
   createProduct: () => Promise<CreateProductRequest | undefined>;
-  getProduct: () => Promise<GetProductParams | undefined>;
+  getProduct: () => Promise<Product | undefined>;
 }
