@@ -27,7 +27,6 @@ export class GetProductBySKUErrorResponseDto implements GetProductBySKUErrorResp
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 

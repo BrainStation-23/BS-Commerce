@@ -4,7 +4,7 @@ import { Product, UpdateProduct } from 'src/entity/product';
 @Injectable()
 export abstract class IProductDatabase {
     abstract findProduct: (query: Record<string, any>) => Promise<Product | null>;
-    abstract findAllProducts: (skip?: number, limit?: number) => Promise<Product[] | []>;
+    abstract findAllProducts: (query: Record<string, any>, skip?: number, limit?: number) => Promise<Product[] | []>;
     abstract createProduct: (product: Product) => Promise<Product | null>;
     abstract getProductCount: (query: Record<string, any>) => Promise<number | null>;
     abstract deleteProduct: (productId: string) => Promise<Product | null>;

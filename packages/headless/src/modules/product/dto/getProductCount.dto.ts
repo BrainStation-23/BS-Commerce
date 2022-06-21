@@ -18,12 +18,11 @@ export class GetProductCountErrorResponseDto implements GetProductCountErrorResp
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 
 export class Count {
-    @ApiProperty({ default: HttpStatus.OK })
+    @ApiProperty()
     @IsNumber()
     count: number;
 }

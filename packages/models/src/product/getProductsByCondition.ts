@@ -1,6 +1,5 @@
 
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { Product } from "./product";
+import { DescriptiveError, ErrorResponse, ProductInfo, ProductPhoto, SuccessResponse } from "src/index";
 
 /**
  * API Path: /product/condition
@@ -20,8 +19,14 @@ export interface GetProductsByConditionQuery {
     orderBy?: string;
 }
 
+export interface ConditionalProduct {
+    info: ProductInfo;
+    photos?: ProductPhoto[];
+    brands?: string[],
+}
+
 export interface GetProductsObject {
-    products: Product[]
+    products: ConditionalProduct[]
     count: number;
 }
 

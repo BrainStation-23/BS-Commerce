@@ -8,3 +8,6 @@ export * from './deleteProduct';
 export * from './updateProduct';
 export * from './getProductsByCondition';
 export * from './updateProductsForBrand';
+export * from './getCustomerAllProducts';
+export * from './customerProduct';
+export * from './getCustomerProduct';

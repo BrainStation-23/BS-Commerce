@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsBoolean, IsDate, IsNotEmpty, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsNotEmpty, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
 import {
     ProductInfo,
     ProductMeta,
@@ -73,18 +73,12 @@ export class ProductInfoDto implements ProductInfo {
     @IsOptional()
     @IsBoolean()
     isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsDate()
-    publishDate?: Date;
 }
 
 export class ProductMetaDto implements ProductMeta {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsArray()
-    @IsString()
     keywords?: string[];
 
     @ApiProperty({ required: false })
@@ -126,7 +120,7 @@ export class ProductPhotoDto implements ProductPhoto {
 
     @ApiProperty({ required: false })
     @IsOptional()
-    @IsString()
+    @IsNumber()
     displayOrder?: number;
 }
 
@@ -166,7 +160,6 @@ export class ProductDto implements Product {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     tags?: string[];
 
     @ApiProperty({ type: [ProductPhotoDto] })
@@ -176,7 +169,6 @@ export class ProductDto implements Product {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    @IsString()
     brands?: string[];
 
     @ApiProperty({ type: [ProductCategoryDto] })
@@ -184,5 +176,3 @@ export class ProductDto implements Product {
     @IsArray()
     categories: ProductCategoryDto[];
 }
-
-

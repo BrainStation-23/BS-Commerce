@@ -1,14 +1,15 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, } from 'class-validator';
-import { ProductDto } from '.';
+import { IsArray, IsBoolean, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString, } from 'class-validator';
 import {
     GetProductsByConditionQuery,
     GetProductsByConditionErrorMessages,
     GetProductsByConditionErrorResponse,
     GetProductsByConditionSuccessResponse,
+    ConditionalProduct
 } from 'models';
 import { Type } from 'class-transformer';
+import { ProductInfoDto, ProductPhotoDto } from './product.dto';
 
 export class GetProductsByConditionQueryDto implements GetProductsByConditionQuery {
     @ApiProperty({ required: false, type: Number, })
@@ -66,14 +67,29 @@ export class GetProductsByConditionErrorResponseDto implements GetProductsByCond
 
     @ApiProperty()
     @IsArray()
-    @IsString()
     errors: string[];
 }
 
-export class GetProductsObject {
-    @ApiProperty({ type: () => [ProductDto] })
+export class ConditionalProductProductDto implements ConditionalProduct {
+    @ApiProperty({ type: ProductInfoDto })
+    @IsNotEmptyObject()
     @IsObject()
-    products: ProductDto[]
+    info: ProductInfoDto;
+
+    @ApiProperty({ type: [ProductPhotoDto] })
+    @IsArray()
+    photos?: ProductPhotoDto[];
+
+    @ApiProperty()
+    @IsOptional()
+    @IsArray()
+    brands?: string[];
+}
+
+export class GetProductsObject {
+    @ApiProperty({ type: () => [ConditionalProductProductDto] })
+    @IsObject()
+    products: ConditionalProductProductDto[]
 
     @ApiProperty()
     @IsNumber()

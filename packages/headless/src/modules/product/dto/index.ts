@@ -8,3 +8,6 @@ export * from './deleteProduct.dto';
 export * from './updateProduct.dto';
 export * from './getProductsByCondition.dto';
 export * from './updateProductsForBrand.dto';
+export * from './getCustomerAllProducts.dto';
+export * from './customerProduct.dto';
+export * from './getCustomerProduct.dto';
