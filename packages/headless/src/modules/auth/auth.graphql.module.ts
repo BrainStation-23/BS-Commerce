@@ -4,7 +4,7 @@ import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
 import { AuthResolver } from './graphql/auth.resolver';
-import { JwtStrategy } from './guards/jwt-strategy';
+import { AdminJwtStrategy } from './guards/jwt-strategy';
 import { UserRepository } from 'src/modules/user/repositories';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 
@@ -26,7 +26,7 @@ import { IUserDatabase } from 'src/modules/user/repositories/user.database.inter
       provide: IUserDatabase,
       useClass: ResolveDatabaseDependency('USER'),
     },
-    JwtStrategy,
+    AdminJwtStrategy,
   ],
 })
 export class AuthModule { }

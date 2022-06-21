@@ -12,6 +12,12 @@ input RegistrationInput {
   password: String!
 }
 
+input CustomerSignInDataInput {
+  phone: String
+  email: String
+  password: String!
+}
+
 input GetCustomerAuthInput {
   phone: String
   email: String
@@ -21,16 +27,20 @@ type Message {
   message: String!
 }
 
-type AuthResponse {
+type RegistrationAuthResponse {
   error: String
   code: Int!
   data: Message
 }
 
-type RegistrationAuthResponse {
+type CustomerToken {
+  token: String!
+}
+
+type SignInAuthResponse {
   error: String
   code: Int!
-  data: Message
+  data: CustomerToken
 }
 
 type GetCustomerAuthResponse {
@@ -45,4 +55,5 @@ type Query {
 
 type Mutation {
   register(customer: RegistrationInput!): RegistrationAuthResponse
+  customerSignin(data: CustomerSignInDataInput!): SignInAuthResponse
 }

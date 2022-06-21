@@ -5,4 +5,5 @@ import { Customer } from 'src/entity/customer';
 export abstract class ICustomerDatabase {
   abstract createCustomer: (customer: Customer) => Promise<Customer | null>;
   abstract findCustomer: (query: Record<string, any>) => Promise<Customer | null>;
+  abstract getCustomerPassword: (query: Record<string, any>) => Promise<Customer | null>;
 }

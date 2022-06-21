@@ -4,7 +4,7 @@ import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { CustomerAuthService } from './services';
 import { customerAuthConfig } from 'config/auth';
 import { CustomerAuthResolver } from './graphql/auth.resolver';
-import { JwtStrategy } from './guards/jwt-strategy';
+import { CustomerJwtStrategy } from './guards/jwt-strategy';
 import { ICustomerDatabase } from '../customer/repositories/customer.database.interface';
 import { CustomerRepository } from '../customer/repositories';
 
@@ -26,7 +26,7 @@ import { CustomerRepository } from '../customer/repositories';
       provide: ICustomerDatabase,
       useClass: ResolveDatabaseDependency('CUSTOMER_AUTH'),
     },
-    JwtStrategy,
+    CustomerJwtStrategy,
   ],
 })
 export class CustomerAuthModule { }
