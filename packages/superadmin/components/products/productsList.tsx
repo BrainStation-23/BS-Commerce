@@ -64,12 +64,16 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
     {
       label: "Price",
       path: "price",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data?.info[key]}</td>
+      ),
     },
     {
-      label: "Stock quantity",
+      label: "Display Order",
       path: "displayOrder",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data?.info[key]}</td>
+      ),
     },
     {
       label: "Published",
