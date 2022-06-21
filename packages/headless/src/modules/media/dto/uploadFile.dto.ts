@@ -21,9 +21,6 @@ export class UploadFileErrorResponseDto implements UploadFileErrorResponse {
 
 export class UploadFileDto {
     @ApiProperty()
-    id: string;
-
-    @ApiProperty()
     url: string;
 }
 

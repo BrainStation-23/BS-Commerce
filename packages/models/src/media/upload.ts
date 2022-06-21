@@ -8,7 +8,6 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  */
 
 export interface File {
-    id: string;
     url: string;
 }
 
@@ -19,6 +18,8 @@ export interface UploadFileSuccessResponse extends SuccessResponse {
 
 export const enum UploadFileErrorMessages {
     CAN_NOT_UPLOAD_FILE = 'CAN_NOT_UPLOAD_FILE',
+    PROVIDE_FILE = 'PROVIDE_FILE',
+    UNSUPPORTED_MIMETYPE = 'UNSUPPORTED_MIMETYPE'
 }
 
 export interface UploadFileErrorResponse extends ErrorResponse {
