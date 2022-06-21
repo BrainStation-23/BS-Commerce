@@ -41,17 +41,22 @@ const EditProduct = (props: any) => {
         alt: "image",
         displayOrder: 0,
       },
-      brands: [data.brands],
-      categories: {
-        id: product.id,
-        isFeatured: true,
-        displayOrder: 0,
-      },
+      brands: data.brands,
+      categories: [
+        {
+          id: product.id,
+          isFeatured: true,
+          displayOrder: 0,
+        },
+      ],
     };
     const id = product.id;
+    console.log(newData);
+    
     const response = await userAPI.updateProduct(newData, id);
   };
-
+  console.log(product);
+  
   return (
     <>
       {product ? (
@@ -71,9 +76,9 @@ const EditProduct = (props: any) => {
             displayOrder: product?.info?.displayOrder,
             isFeatured: product?.info?.isFeatured,
             // publishDate:product?.info?.publishDate ,
-            tags: product?.tags[0],
-            brands: product?.brands[0],
-            keywords: product?.meta?.keywords[0],
+            tags: product?.tags,
+            brands: product?.brands,
+            keywords: product?.meta?.keywords,
             metaTitle: product?.meta?.title,
             metaDescription: product?.meta?.description,
             metaFriendlyPageName: product?.meta?.friendlyPageName,
@@ -115,10 +120,10 @@ const EditProduct = (props: any) => {
               isFeaturedCategory: values.isFeaturedCategory,
               displayOrderCategory: values.displayOrderCategory,
             };
-            console.log(values.keywords);
-            console.log(data);
+            // console.log(values.keywords);
+            // console.log(data);
             
-            // handleSubmit(data);
+            handleSubmit(data);
             actions.setSubmitting(false);
           }}
           validationSchema={productSchema}

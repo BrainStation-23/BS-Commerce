@@ -459,7 +459,7 @@ const ProductInfoForm = () => {
                     name="tags"
                   /> */}
                   <Field
-                    className="custom-select"
+                    className="custom-select w-100"
                     id="tags"
                     name="tags"
                     options={tagsOptions}
@@ -486,7 +486,7 @@ const ProductInfoForm = () => {
               <div className="col-md-9">
                 <div className="input-group ">
                   <Field
-                    className="custom-select"
+                    className="custom-select w-100"
                     id="brands"
                     name="brands"
                     options={tagsOptions}

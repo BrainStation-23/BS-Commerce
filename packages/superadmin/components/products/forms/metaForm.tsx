@@ -76,7 +76,7 @@ const MetaForm = () => {
               <div className="col-md-9">
                 <div className="input-group pe-3">
                   <Field
-                    className="custom-select"
+                    className="custom-select w-100"
                     id="keywords"
                     name="keywords"
                     options={keywordOptions}

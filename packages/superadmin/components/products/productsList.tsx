@@ -118,7 +118,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
           <Table items={productsList} columns={columns} />
 
           <div className="">
-            {productsList.length > 1 ? (
+            {productsList?.length > 1 ? (
               <Pagination
                 list={productsList}
                 onChangeForList={onChangeForList}
