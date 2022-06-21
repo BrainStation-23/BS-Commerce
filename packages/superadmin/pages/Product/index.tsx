@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import ProductsList from "../../components/products/productsList";
 import SearchWindow from "../../components/products/searchWindow";
-import ProductIndex from "../../components/products/productsList";
 import { userAPI } from "../../APIs";
 import { Product } from "models";
 import { useState } from "react";
 
 const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
   const [products, setProducts] = useState(productsList);
+  console.log(products);
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">

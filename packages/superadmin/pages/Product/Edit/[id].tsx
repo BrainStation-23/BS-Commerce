@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import EditProduct from "../../../components/products/editProductDetails";
 
-const sampleData ={
+const sampleData = {
   productName: "name",
   ShortDescription: "ShortDescription",
   Sku: "Sku",
@@ -23,23 +23,22 @@ const sampleData ={
   Length: 40,
   Width: 30,
   Height: 50,
-}
+};
 
 const LogDetailPage: NextPage = () => {
-    const router = useRouter()
-    const { id } = router.query;
-    const { isReady  } = router.query;
+  const router = useRouter();
+  const { id } = router.query;
+  const { isReady } = router.query;
 
-    return (
-        <div className="bg-light">
-        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <h1>{id}</h1>
+  return (
+    <div className="bg-light">
+      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <h1>{id}</h1>
 
-          <EditProduct product={sampleData} />
-          
-        </main>
-      </div>
-    )
-}
+        <EditProduct product={sampleData} />
+      </main>
+    </div>
+  );
+};
 
 export default LogDetailPage;
