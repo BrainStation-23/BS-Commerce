@@ -40,7 +40,7 @@ export class CustomerAuthController {
   @ApiResponse({
     description: 'Customer Sign In Success Response',
     type: CustomerSignInSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Customer Sign In Error Response',
