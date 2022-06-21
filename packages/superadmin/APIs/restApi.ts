@@ -1,7 +1,8 @@
 import axios from "axios";
 import { apiEndPoints } from "../utils/apiEndPoints";
-import {CreateProductRequest} from "../../models/src/product"
+import { CreateProductRequest } from "../../models/src/product";
 import { User } from "../utils/types";
+import { Product } from "models";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -11,16 +12,45 @@ export async function getUserRest(): Promise<User[] | undefined> {
     console.error(error);
   }
 }
-export async function createProductRest(data): Promise<CreateProductRequest | undefined> {
+export async function createProductRest(
+  data: any
+): Promise<CreateProductRequest | undefined> {
   console.log(data);
-  
+
   try {
-    const response = await axios.post<CreateProductRequest>(`${apiEndPoints.createProduct}`, data);
+    const response = await axios.post<CreateProductRequest>(
+      `${apiEndPoints.product}`,
+      data
+    );
     console.log(response);
-    
+
     return response.data as CreateProductRequest;
   } catch (error) {
     console.log(error);
+    console.error(error);
+  }
+}
+
+export async function getProductsRest(
+  pageSize: number
+): Promise<Product[] | undefined> {
+  try {
+    const { data } = await axios?.get(
+      `${apiEndPoints?.product}?skip=1&limit=${pageSize}`
+    );
+    return data?.data as Product[];
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getProductSearchRest(
+  search: string
+): Promise<Product | undefined> {
+  try {
+    const { data } = await axios.get(`${apiEndPoints?.product}/sku/${search}`);
+    return data?.data as Product;
+  } catch (error) {
     console.error(error);
   }
 }

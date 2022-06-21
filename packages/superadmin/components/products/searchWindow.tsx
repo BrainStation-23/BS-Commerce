@@ -1,46 +1,101 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { userAPI } from "../../APIs";
 import Tooltips from "../global/tooltip";
-import { searchProductSchema } from "./schema/productSchema";
+// import { searchProductSchema } from "./schema/productSchema";
+import { Product } from "models";
 
-const SearchWindow = () => {
+const SearchWindow = ({ setProducts }: any) => {
+  const handleSearchSubmit = async (data: string) => {
+    const searchProduct: any = await userAPI.searchProduct(data);
+    setProducts([searchProduct]);
+  };
   return (
     <>
       <Formik
         initialValues={{
-          SearchProductName: "",
-          SearchCategoryId: "",
-          SearchIncludeSubCategories: false,
-          SearchManufacturerId: 0,
-          SearchVendorId: 0,
-          SearchWarehouseId: 0,
-          SearchProductTypeId: 0,
-          SearchPublishedId: 0,
+          // SearchProductName: "",
+          // SearchCategoryId: "",
+          // SearchIncludeSubCategories: false,
+          // SearchManufacturerId: 0,
+          // SearchVendorId: 0,
+          // SearchWarehouseId: 0,
+          // SearchProductTypeId: 0,
+          // SearchPublishedId: 0,
           GoDirectlyToSku: "",
         }}
         onSubmit={(values, actions) => {
-          const data = {
-            SearchProductName: values.SearchProductName,
-            SearchCategoryId: values.SearchCategoryId,
-            SearchIncludeSubCategories: values.SearchIncludeSubCategories,
-            SearchManufacturerId: values.SearchManufacturerId,
-            SearchVendorId: values.SearchVendorId,
-            SearchWarehouseId: values.SearchWarehouseId,
-            SearchProductTypeId: values.SearchProductTypeId,
-            SearchPublishedId: values.SearchPublishedId,
-            GoDirectlyToSku: values.GoDirectlyToSku,
-          };
-          console.log(data);
-          console.log("h");
-
-          // handleSearchSubmit(data);
+          // const data = {
+          //   SearchProductName: values.SearchProductName,
+          //   SearchCategoryId: values.SearchCategoryId,
+          //   SearchIncludeSubCategories: values.SearchIncludeSubCategories,
+          //   SearchManufacturerId: values.SearchManufacturerId,
+          //   SearchVendorId: values.SearchVendorId,
+          //   SearchWarehouseId: values.SearchWarehouseId,
+          //   SearchProductTypeId: values.SearchProductTypeId,
+          //   SearchPublishedId: values.SearchPublishedId,
+          //   GoDirectlyToSku: values.GoDirectlyToSku,
+          // };
+          handleSearchSubmit(values.GoDirectlyToSku);
           actions.setSubmitting(false);
         }}
-        validationSchema={searchProductSchema}
+        //validationSchema={searchProductSchema}
       >
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 px-2 mt-5">
+              <div className="card rounded border-1 mt-5">
+                <div className="card-header">
+                  <i
+                    className="bi bi-search float-start mx-2"
+                    aria-hidden="true"
+                  />
+                  <p className="float mx-2">Search</p>
+                </div>
+                <div className="card-body">
+                  <div className="form-group row py-1">
+                    <div className="col-md-3">
+                      <div className="label-wrapper row row-cols-auto float-md-end px-2">
+                        <label
+                          className="col-form-label"
+                          htmlFor="GoDirectlyToSku"
+                        >
+                          Go directly to product SKU
+                        </label>
+                        <Tooltips title="Enter product SKU and click Go." />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="Field-group Field-group-short ">
+                        <div className="row">
+                          <Field
+                            className="form-control col my-3 mt-2 rounded-start rounded-0 "
+                            id="GoDirectlyToSku"
+                            name="GoDirectlyToSku"
+                            type="text"
+                          />
+                        </div>
+
+                        <div className="errMsg text-red-600 text-danger">
+                          <ErrorMessage name="GoDirectlyToSku" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-3">
+                      <span className="Field-group-append">
+                        <button
+                          type="submit"
+                          id="goToProductBySku"
+                          name="goToProductBySku"
+                          className="btn btn-info btn-flat my-2  rounded-end rounded-0 "
+                        >
+                          Go
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <div className="card rounded border-1 px-2 mt-5">
                 <div className="card-body">
                   <div className="row search-row opened">
                     <div className="search-text">
@@ -360,7 +415,7 @@ const SearchWindow = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </Form>
           );
         }}
