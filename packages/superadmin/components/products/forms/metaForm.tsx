@@ -18,13 +18,16 @@ const MetaForm = () => {
         data-hideattribute="ProductPage.HideInfoBlock"
         id="meta"
       >
-        <div className="card-header with-border clearfix">
-          <div className="card-title float-start">
-            <i className="bi bi-currency-dollar float-start" />
+        <div className="card-header with-border d-flex justify-content-between align-items-center">
+          <div className="card-title d-flex align-items-center">
+            <i
+              className="bi bi-currency-dollar "
+              style={{ fontSize: "25px", marginTop: "-20px" }}
+            />
 
-            <p className="float-start px-1">Meta</p>
+            <div className="px-3 fs-5">Meta</div>
           </div>
-          <div className="card-tools float-end">
+          <div className="card-tools">
             <div>
               <p>
                 <button
@@ -70,7 +73,10 @@ const MetaForm = () => {
             <div className="form-group row my-2">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
-                  <label className="col-form-label col px-1" htmlFor="metaTitle">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="metaTitle"
+                  >
                     Title
                   </label>
                   <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
@@ -93,7 +99,10 @@ const MetaForm = () => {
             <div className="form-group row my-2">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
-                  <label className="col-form-label col px-1" htmlFor="metaDescription">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="metaDescription"
+                  >
                     Description
                   </label>
                   <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
@@ -113,11 +122,14 @@ const MetaForm = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="form-group row my-2">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
-                  <label className="col-form-label col px-1" htmlFor="metaFriendlyPageName">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="metaFriendlyPageName"
+                  >
                     Friendly Page Name
                   </label>
                   <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />

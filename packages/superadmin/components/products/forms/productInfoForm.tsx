@@ -19,11 +19,14 @@ const ProductInfoForm = () => {
         data-hideattribute="ProductPage.HideInfoBlock"
         id="product-info"
       >
-        <div className="card-header with-border clearfix">
-          <div className="card-title float-start">
-            <i className="bi bi-info-lg float-start" />
+        <div className="card-header with-border d-flex justify-content-between align-items-center">
+          <div className="card-title d-flex align-items-center">
+            <i
+              className="bi bi-info-lg align-text-top"
+              style={{ fontSize: "25px", marginTop: "-20px" }}
+            />
 
-            <p className="float-start px-1">Product info</p>
+            <div className="px-1 fs-5">Product info</div>
           </div>
           <div className="card-tools float-end">
             <div>
@@ -45,85 +48,85 @@ const ProductInfoForm = () => {
         </div>
         <div className="collapse " id="collapseExample">
           <div className="card-body">
-            <div id="product-details-area"> 
-                <div className="form-group row my-2">
-                  <div className="col-md-3">
-                    <div className="label-wrapper row row-cols-auto float-md-end">
-                      <label className="col-form-label col px-1" htmlFor="Name">
-                        Product name
-                      </label>
-                      <Tooltips title="The name of the product." />
-                    </div>
-                  </div>
-                  <div className="col-md-9">
-                    <div className="input-group input-group-required">
-                      <Field
-                        className="form-control text-box single-line"
-                        id="productName"
-                        name="productName"
-                        type="text"
-                      />
-                      <div className="pt-2" style={{ height: "10px" }}>
-                        <h2 className="required text-danger ">*</h2>
-                      </div>
-                    </div>
-                    <div className="errMsg text-red-600 text-danger">
-                      <ErrorMessage name="productName" />
-                    </div>
+            <div id="product-details-area">
+              <div className="form-group row my-2">
+                <div className="col-md-3">
+                  <div className="label-wrapper row row-cols-auto float-md-end">
+                    <label className="col-form-label col px-1" htmlFor="Name">
+                      Product name
+                    </label>
+                    <Tooltips title="The name of the product." />
                   </div>
                 </div>
-                <div className="form-group row my-2">
-                  <div className="col-md-3">
-                    <div className="label-wrapper row row-cols-auto float-md-end">
-                      <label
-                        className="col-form-label col px-1"
-                        htmlFor="ShortDescription"
-                      >
-                        Short description
-                      </label>
-                      <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                <div className="col-md-9">
+                  <div className="input-group input-group-required">
+                    <Field
+                      className="form-control text-box single-line"
+                      id="productName"
+                      name="productName"
+                      type="text"
+                    />
+                    <div className="pt-2" style={{ height: "10px" }}>
+                      <h2 className="required text-danger ">*</h2>
                     </div>
                   </div>
-                  <div className="col-md-9">
-                    <div className="input-group pe-3 ">
-                      <Field
-                        as="textarea"
-                        className="form-control"
-                        id="ShortDescription"
-                        name="ShortDescription"
-                      />
-                    </div>
-                    <div className="errMsg text-red-600 text-danger">
-                      <ErrorMessage name="ShortDescription" />
-                    </div>
+                  <div className="errMsg text-red-600 text-danger">
+                    <ErrorMessage name="productName" />
                   </div>
                 </div>
-                <div className="form-group row my-2">
-                  <div className="col-md-3">
-                    <div className="label-wrapper row row-cols-auto float-md-end">
-                      <label
-                        className="col-form-label col px-1"
-                        htmlFor="FullDescription"
-                      >
-                        Full description
-                      </label>
-                      <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-                    </div>
+              </div>
+              <div className="form-group row my-2">
+                <div className="col-md-3">
+                  <div className="label-wrapper row row-cols-auto float-md-end">
+                    <label
+                      className="col-form-label col px-1"
+                      htmlFor="ShortDescription"
+                    >
+                      Short description
+                    </label>
+                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                   </div>
-                  <div className="col-md-9">
-                    <div className="input-group pe-3 ">
-                      <Field
-                        as="textarea"
-                        className="form-control"
-                        id="FullDescription"
-                        name="FullDescription"
-                      />
-                    </div>
-                    <div className="errMsg text-red-600 text-danger">
-                      <ErrorMessage name="FullDescription" />
-                    </div>
+                </div>
+                <div className="col-md-9">
+                  <div className="input-group pe-3 ">
+                    <Field
+                      as="textarea"
+                      className="form-control"
+                      id="ShortDescription"
+                      name="ShortDescription"
+                    />
                   </div>
-                </div> 
+                  <div className="errMsg text-red-600 text-danger">
+                    <ErrorMessage name="ShortDescription" />
+                  </div>
+                </div>
+              </div>
+              <div className="form-group row my-2">
+                <div className="col-md-3">
+                  <div className="label-wrapper row row-cols-auto float-md-end">
+                    <label
+                      className="col-form-label col px-1"
+                      htmlFor="FullDescription"
+                    >
+                      Full description
+                    </label>
+                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                  </div>
+                </div>
+                <div className="col-md-9">
+                  <div className="input-group pe-3 ">
+                    <Field
+                      as="textarea"
+                      className="form-control"
+                      id="FullDescription"
+                      name="FullDescription"
+                    />
+                  </div>
+                  <div className="errMsg text-red-600 text-danger">
+                    <ErrorMessage name="FullDescription" />
+                  </div>
+                </div>
+              </div>
               <div className="form-group row my-2">
                 <div className="col-md-3">
                   <div className="label-wrapper text-start text-md-end row">
@@ -164,7 +167,12 @@ const ProductInfoForm = () => {
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
                 <div className="input-group ">
-                  <Field type="number" id="Price" name="Price" />
+                  <Field
+                    type="number"
+                    id="Price"
+                    name="Price"
+                    className="form-control"
+                  />
 
                   <div className="" style={{ height: "10px" }}>
                     <h2 className="required text-danger ">*</h2>
@@ -191,6 +199,7 @@ const ProductInfoForm = () => {
                     id="OldPrice"
                     name="OldPrice"
                     aria-disabled="false"
+                    className="form-control"
                   />
 
                   <div className="" style={{ height: "10px" }}>
@@ -221,6 +230,7 @@ const ProductInfoForm = () => {
                     id="ProductCost"
                     name="ProductCost"
                     aria-disabled="false"
+                    className="form-control"
                   />
 
                   <div className="" style={{ height: "10px" }}>
@@ -234,105 +244,104 @@ const ProductInfoForm = () => {
             </div>
 
             <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="showOnHomePage"
-                    >
-                      Show on HomePage
-                    </label>
-                    <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                  </div>
-                </div>
-                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                  <Field
-                    className="check-box mt-2"
-                    id="showOnHomePage"
-                    name="showOnHomePage"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="showOnHomePage" />
-                  </div>
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end py-2">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="showOnHomePage"
+                  >
+                    Show on HomePage
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <Field
+                  className="check-box mt-2"
+                  id="showOnHomePage"
+                  name="showOnHomePage"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="showOnHomePage" />
+                </div>
+              </div>
+            </div>
 
-              <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="includeInTopMenu"
-                    >
-                      Include on top menu 
-                    </label>
-                    <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                  </div>
-                </div>
-                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                  <Field
-                    className="check-box mt-2"
-                    id="includeInTopMenu"
-                    name="includeInTopMenu"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="includeInTopMenu" />
-                  </div>
+            <div className="form-group row">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end py-2">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="includeInTopMenu"
+                  >
+                    Include on top menu
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <Field
+                  className="check-box mt-2"
+                  id="includeInTopMenu"
+                  name="includeInTopMenu"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="includeInTopMenu" />
+                </div>
+              </div>
+            </div>
 
-              <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="allowToSelectPageSize"
-                    >
-                      Allow to select page size 
-                    </label>
-                    <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                  </div>
-                </div>
-                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                  <Field
-                    className="check-box mt-2"
-                    id="allowToSelectPageSize"
-                    name="allowToSelectPageSize"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="allowToSelectPageSize" />
-                  </div>
+            <div className="form-group row">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end py-2">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="allowToSelectPageSize"
+                  >
+                    Allow to select page size
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
-              <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="published"
-                    >
-                      Published
-                    </label>
-                    <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                  </div>
-                </div>
-                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                  <Field
-                    className="check-box mt-2"
-                    id="published"
-                    name="published"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="published" />
-                  </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <Field
+                  className="check-box mt-2"
+                  id="allowToSelectPageSize"
+                  name="allowToSelectPageSize"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="allowToSelectPageSize" />
                 </div>
               </div>
+            </div>
+            <div className="form-group row">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end py-2">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="published"
+                  >
+                    Published
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
+                </div>
+              </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <Field
+                  className="check-box mt-2"
+                  id="published"
+                  name="published"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="published" />
+                </div>
+              </div>
+            </div>
 
-              
             <div className="form-group row">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end p-2">
@@ -352,41 +361,40 @@ const ProductInfoForm = () => {
                     id="displayOrder"
                     name="displayOrder"
                     aria-disabled="false"
-                  /> 
+                    className="form-control"
+                  />
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="displayOrder" />
                 </div>
               </div>
             </div>
-            
 
             <div className="form-group row">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="isFeatured"
-                    >
-                      Featured
-                    </label>
-                    <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                  </div>
-                </div>
-                <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                  <Field
-                    className="check-box mt-2"
-                    id="isFeatured"
-                    name="isFeatured"
-                    type="checkbox"
-                  />
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="isFeatured" />
-                  </div>
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end py-2">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="isFeatured"
+                  >
+                    Featured
+                  </label>
+                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <Field
+                  className="check-box mt-2"
+                  id="isFeatured"
+                  name="isFeatured"
+                  type="checkbox"
+                />
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="isFeatured" />
+                </div>
+              </div>
+            </div>
 
-              
             <div className="form-group row">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end py-2">
@@ -406,7 +414,8 @@ const ProductInfoForm = () => {
                     id="publishDate"
                     name="publishDate"
                     aria-disabled="false"
-                  /> 
+                    className="form-control"
+                  />
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="publishDate" />
@@ -414,65 +423,53 @@ const ProductInfoForm = () => {
               </div>
             </div>
 
-<div className="form-group row my-2">
-      <div className="col-md-3">
-        <div className="label-wrapper row row-cols-auto float-md-end">
-          <label
-            className="col-form-label col px-1"
-            htmlFor="tags"
-          >
-            Tags
-          </label>
-          <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-        </div>
-      </div>
-      <div className="col-md-9">
-        <div className="input-group ">
-          <Field
-            type="text"
-            className="form-control"
-            id="tags"
-            name="tags"
-          />
-        </div>
-        <div className="errMsg text-red-600 text-danger">
-          <ErrorMessage name="tags" />
-        </div>
-      </div>
-    </div>
+            <div className="form-group row my-2">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label className="col-form-label col px-1" htmlFor="tags">
+                    Tags
+                  </label>
+                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                </div>
+              </div>
+              <div className="col-md-9">
+                <div className="input-group ">
+                  <Field
+                    type="text"
+                    className="form-control"
+                    id="tags"
+                    name="tags"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="tags" />
+                </div>
+              </div>
+            </div>
 
-<div className="form-group row my-2">
-      <div className="col-md-3">
-        <div className="label-wrapper row row-cols-auto float-md-end">
-          <label
-            className="col-form-label col px-1"
-            htmlFor="brands"
-          >
-            Brands
-          </label>
-          <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-        </div>
-      </div>
-      <div className="col-md-9">
-        <div className="input-group ">
-          <Field
-            type="text"
-            className="form-control"
-            id="brands"
-            name="brands"
-          />
-        </div>
-        <div className="errMsg text-red-600 text-danger">
-          <ErrorMessage name="brands" />
-        </div>
-      </div>
-    </div>
-
-             
-
-
-
-
+            <div className="form-group row my-2">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label className="col-form-label col px-1" htmlFor="brands">
+                    Brands
+                  </label>
+                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                </div>
+              </div>
+              <div className="col-md-9">
+                <div className="input-group ">
+                  <Field
+                    type="text"
+                    className="form-control"
+                    id="brands"
+                    name="brands"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="brands" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

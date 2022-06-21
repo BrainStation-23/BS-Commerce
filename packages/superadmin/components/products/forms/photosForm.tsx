@@ -23,10 +23,13 @@ const PhotosForm = () => {
         data-card-name="photos"
         id="photos"
       >
-        <div className="card-header with-border clearfix">
-          <div className="card-title float-start">
-            <i className="bi bi-truck float-start" />
-            <p className="float-start px-1">photos</p>
+        <div className="card-header with-border d-flex justify-content-between align-items-center">
+          <div className="card-title d-flex align-items-center">
+            <i
+              className="bi bi-truck align-text-top"
+              style={{ fontSize: "25px", marginTop: "-20px" }}
+            />
+            <div className="px-3 fs-5">photos</div>
           </div>
           <div className="card-tools float-end">
             <div>
@@ -47,111 +50,113 @@ const PhotosForm = () => {
           </div>
         </div>
         <div className="collapse " id="photosTab">
-        <div className="card-body">
-  <div className="form-group row my-2">
-            <div className="col-md-3">
-              <div className="label-wrapper row row-cols-auto float-md-end">
-                <label className="col-form-label col px-1" htmlFor="photosUrl">
-                  URL
-                </label>
-                <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+          <div className="card-body">
+            <div className="form-group row my-2">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="photosUrl"
+                  >
+                    URL
+                  </label>
+                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                </div>
+              </div>
+              <div className="col-md-9">
+                <div className="input-group pe-3 ">
+                  <Field
+                    type="text"
+                    className="form-control"
+                    id="photosUrl"
+                    name="photosUrl"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="photosUrl" />
+                </div>
               </div>
             </div>
-            <div className="col-md-9">
-              <div className="input-group pe-3 ">
-                <Field
-                  type="text"
-                  className="form-control"
-                  id="photosUrl"
-                  name="photosUrl"
-                />
+
+            <div className="form-group row my-2">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label className="col-form-label col px-1" htmlFor="photosID">
+                    ID
+                  </label>
+                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                </div>
               </div>
-              <div className="errMsg text-red-600 text-danger">
-                <ErrorMessage name="photosUrl" />
+              <div className="col-md-9">
+                <div className="input-group pe-3">
+                  <Field
+                    type="text"
+                    className="form-control"
+                    id="photosID"
+                    name="photosID"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="photosID" />
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group row my-2">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="photosTitle"
+                  >
+                    Title
+                  </label>
+                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
+                </div>
+              </div>
+              <div className="col-md-9">
+                <div className="input-group pe-3 ">
+                  <Field
+                    type="text"
+                    className="form-control"
+                    id="photosTitle"
+                    name="photosTitle"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="photosTitle" />
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <div className="col-md-3">
+                <div className="label-wrapper row row-cols-auto float-md-end">
+                  <label
+                    className="col-form-label col px-1"
+                    htmlFor="displayOrderPhotos"
+                  >
+                    Display Order
+                  </label>
+                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
+                </div>
+              </div>
+              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+                <div className="input-group pe-3 ">
+                  <Field
+                    type="number"
+                    id="displayOrderPhotos"
+                    name="displayOrderPhotos"
+                    aria-disabled="false"
+                    className="form-control"
+                  />
+                </div>
+                <div className="errMsg text-red-600 text-danger">
+                  <ErrorMessage name="displayOrderPhotos" />
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="form-group row my-2">
-            <div className="col-md-3">
-              <div className="label-wrapper row row-cols-auto float-md-end">
-                <label className="col-form-label col px-1" htmlFor="photosID">
-                  ID
-                </label>
-                <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-              </div>
-            </div>
-            <div className="col-md-9">
-              <div className="input-group pe-3">
-                <Field
-                  type="text"
-                  className="form-control"
-                  id="photosID"
-                  name="photosID"
-                />
-              </div>
-              <div className="errMsg text-red-600 text-danger">
-                <ErrorMessage name="photosID" />
-              </div>
-            </div>
-          </div>
-
-          <div className="form-group row my-2">
-            <div className="col-md-3">
-              <div className="label-wrapper row row-cols-auto float-md-end">
-                <label
-                  className="col-form-label col px-1"
-                  htmlFor="photosTitle"
-                >
-                  Title
-                </label>
-                <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-              </div>
-            </div>
-            <div className="col-md-9">
-              <div className="input-group pe-3 ">
-                <Field
-                  type="text"
-                  className="form-control"
-                  id="photosTitle"
-                  name="photosTitle"
-                />
-              </div>
-              <div className="errMsg text-red-600 text-danger">
-                <ErrorMessage name="photosTitle" />
-              </div>
-            </div>
-          </div>
-
-          <div className="form-group row">
-            <div className="col-md-3">
-              <div className="label-wrapper row row-cols-auto float-md-end">
-                <label
-                  className="col-form-label col px-1"
-                  htmlFor="displayOrderPhotos"
-                >
-                  Display Order
-                </label>
-                <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
-              </div>
-            </div>
-            <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-              <div className="input-group pe-3 ">
-                <Field
-                  type="number"
-                  id="displayOrderPhotos"
-                  name="displayOrderPhotos"
-                  aria-disabled="false"
-                />
-              </div>
-              <div className="errMsg text-red-600 text-danger">
-                <ErrorMessage name="displayOrderPhotos" />
-              </div>
-            </div>
-          </div>
-</div>
-
-        
         </div>
       </div>
     </>

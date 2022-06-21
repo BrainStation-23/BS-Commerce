@@ -18,12 +18,15 @@ const CategoryForm = () => {
         data-hideattribute="ProductPage.HideInfoBlock"
         id="category"
       >
-        <div className="card-header with-border clearfix">
-          <div className="card-title float-start">
-            <i className="bi bi-diagram-3-fill float-start" />
-            <p className="float-start px-1">Category</p>
+        <div className="card-header with-border d-flex justify-content-between align-items-center">
+          <div className="card-title d-flex align-items-center">
+            <i
+              className="bi bi-diagram-3-fill "
+              style={{ fontSize: "25px", marginTop: "-20px" }}
+            />
+            <div className="px-3 fs-5">Category</div>
           </div>
-          <div className="card-tools float-end">
+          <div className="card-tools">
             <div>
               <p>
                 <button
@@ -63,6 +66,7 @@ const CategoryForm = () => {
                     id="SelectedCategoryIds"
                     name="SelectedCategoryIds"
                     data-role="multiselect"
+                    className="form-control"
                     aria-disabled="false"
                   >
                     <option defaultValue={0} disabled={true}>
@@ -138,7 +142,8 @@ const CategoryForm = () => {
                     id="displayOrderCategory"
                     name="displayOrderCategory"
                     aria-disabled="false"
-                  /> 
+                    className="form-control"
+                  />
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="displayOrderCategory" />
