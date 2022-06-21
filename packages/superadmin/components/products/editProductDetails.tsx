@@ -5,13 +5,14 @@ import ProductInfoForm from "./forms/productInfoForm";
 import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
-import { useState } from "react";
 import { userAPI } from "../../APIs";
+import { useRouter } from "next/router";
 
 
 const EditProduct = (props : any) => {
     const {product} = props;
-    const [productDetails, setProduct]=useState();
+    const router = useRouter();
+
     const handleSubmit = (data: any) => {
 
       const info = {
@@ -113,7 +114,7 @@ const EditProduct = (props : any) => {
       const id = product.id
   
       console.log({newData, id});
-      userAPI.updateProduct({newData, id});
+      userAPI.updateProduct({newData, id} , router);
     };
   //   useEffect(() => {
   //    const res = getProductRest({productId : "aaddf804-b06f-4094-be19-71a8ff087b6b"});

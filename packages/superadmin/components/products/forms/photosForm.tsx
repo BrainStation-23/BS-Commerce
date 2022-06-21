@@ -78,7 +78,7 @@ const PhotosForm = () => {
               </div>
             </div>
 
-            <div className="form-group row my-2">
+            {/* <div className="form-group row my-2">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="photosID">
@@ -100,7 +100,7 @@ const PhotosForm = () => {
                   <ErrorMessage name="photosID" />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="form-group row my-2">
               <div className="col-md-3">

@@ -14,7 +14,8 @@ export async function getUserRest(): Promise<User[] | undefined> {
   }
 }
 export async function createProductRest(
-  data: CreateProductRequest
+  data: CreateProductRequest,
+  router
 ): Promise<CreateProductRequest | undefined> {
   console.log(data);
 
@@ -24,7 +25,7 @@ export async function createProductRest(
       data
     );
     console.log(response);
-
+    router.push("/Product");
     return response.data as CreateProductRequest;
   } catch (error) {
     console.log(error);
@@ -68,14 +69,15 @@ export async function getProductRest(
   }
 }
 
-export async function updateProductRest(data : UpdateProductRequest): Promise<UpdateProductRequest | undefined> {
-  console.log("api",data);
-  console.log("api",data.newData);
-  
+export async function updateProductRest(data: UpdateProductRequest, router): Promise<UpdateProductRequest | undefined> {
+  console.log("api", data);
+  console.log("api", data.newData);
+
   try {
     const response = await axios.patch<UpdateProductRequest>(`${apiEndPoints.product}/${data.id}`, data.newData);
     console.log(response);
-    
+
+    router.push("/Product");
     return response.data as UpdateProductRequest;
   } catch (error) {
     console.log(error);
