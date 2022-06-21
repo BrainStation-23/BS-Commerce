@@ -14,7 +14,8 @@ export async function getUserRest(): Promise<User[] | undefined> {
   }
 }
 export async function createProductRest(
-  data: CreateProductRequest
+  data: CreateProductRequest,
+  router
 ): Promise<CreateProductRequest | undefined> {
   console.log(data);
 
@@ -24,7 +25,7 @@ export async function createProductRest(
       data
     );
     console.log(response);
-
+    router.push("/Product");
     return response.data as CreateProductRequest;
   } catch (error) {
     console.log(error);

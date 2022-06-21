@@ -1,18 +1,18 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 import { CreateProductRequest } from "../../../models/src/product";
- 
+
 import InventoryForm from "./forms/categoryForm";
 import ProductInfoForm from "./forms/productInfoForm";
 import { createProductRest } from "../../APIs/restApi";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
-
-
+import { useRouter } from "next/router";
 
 const CreateProduct = () => {
-  const handleSubmit = (data: any) => {
+  const router = useRouter();
 
+  const handleSubmit = (data: any) => {
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -29,27 +29,26 @@ const CreateProduct = () => {
       isFeatured: data.isFeatured,
       // publishDate: "2022-06-20T09:06:25.239Z",
       // publishDate: data.publishDate,
-    }
+    };
     const meta = {
       keywords: [data.keywords],
       title: data.metaTitle,
       description: data.metaDescription,
       friendlyPageName: data.metaFriendlyPageName,
-
-    }
+    };
 
     const photos = {
       url: data.photosUrl,
       id: data.photosID,
       title: data.photosTitle,
       displayOrder: `${data.displayOrderPhotos}`,
-      alt:"image"
-    }
+      alt: "image",
+    };
     const categories = {
       id: data.SelectedCategoryIds,
       isFeatured: data.isFeaturedCategory,
-      displayOrder: data.displayOrderCategory
-    }
+      displayOrder: data.displayOrderCategory,
+    };
 
     console.log(info);
     console.log(meta);
@@ -62,12 +61,13 @@ const CreateProduct = () => {
       tags: [data.tags],
       photos: [photos],
       brands: [data.brands],
-      categories:[categories]
-    }
+      categories: [categories],
+    };
 
     console.log(newData);
-    createProductRest(newData);
+    createProductRest(newData, router);
   };
+
   return (
     <>
       <Formik
