@@ -14,6 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);
