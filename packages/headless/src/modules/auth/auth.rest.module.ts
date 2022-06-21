@@ -6,7 +6,7 @@ import { IUserDatabase } from 'src/modules/user/repositories/user.database.inter
 import { AuthController } from './rest';
 import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
-import { JwtStrategy } from './guards/jwt-strategy';
+import { AdminJwtStrategy } from './guards/jwt-strategy';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { JwtStrategy } from './guards/jwt-strategy';
       provide: IUserDatabase,
       useClass: ResolveDatabaseDependency('USER'),
     },
-    JwtStrategy,
+    AdminJwtStrategy,
   ],
 })
 export class AuthModule { }

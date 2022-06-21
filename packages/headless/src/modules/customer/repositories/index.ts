@@ -15,4 +15,8 @@ export class CustomerRepository {
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {
     return await this.db.findCustomer(query);
   }
+
+  async getCustomerPassword(query: Record<string, any>): Promise<Customer | null> {
+    return await this.db.getCustomerPassword(query);
+  }
 }

@@ -6,6 +6,9 @@ import {
   CreateCustomerDto,
   CreateCustomerErrorResponseDto,
   CreateCustomerSuccessResponseDto,
+  CustomerSignInDto,
+  CustomerSignInErrorResponseDto,
+  CustomerSignInSuccessResponseDto,
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
@@ -33,6 +36,23 @@ export class CustomerAuthController {
     return { code, ...response };
   }
 
+  @Post('sign-in')
+  @ApiResponse({
+    description: 'Customer Sign In Success Response',
+    type: CustomerSignInSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Customer Sign In Error Response',
+    type: CustomerSignInErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async signIn(@Body() data: CustomerSignInDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.signIn(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
   @Get()
   @ApiResponse({
     description: 'Get Customer Success Response',
@@ -45,7 +65,6 @@ export class CustomerAuthController {
     status: HttpStatus.BAD_REQUEST
   })
   async getCustomer(@Query() query: GetCustomerQueryDto, @Res({ passthrough: true }) res: Response) {
-    console.log(query)
     const { code, ...response } = await this.authService.getCustomer(query);
     res.status(code);
     return { code, ...response };
