@@ -1,10 +1,11 @@
-import { Body, Controller, HttpStatus, Post, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, HttpStatus, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Response } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MediaService } from '../services';
 import { ApiFile } from '../decorators/file.decorator';
 import { fileMimetypeFilter } from '../config/mimetype.filter';
 import { UploadFileErrorResponseDto, UploadFileSuccessResponseDto } from '../dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('media')
 @ApiTags('Media API')
@@ -13,7 +14,9 @@ export class MediaController {
 
   @Post('upload')
   @ApiFile('file', true, { fileFilter: fileMimetypeFilter('image') })
-  @UseInterceptors()
+  @UseInterceptors(
+    FileInterceptor('file',{ dest: 'src/public' })
+  )
   @ApiResponse({
     description: 'Upload File Success Response',
     type: UploadFileSuccessResponseDto,
