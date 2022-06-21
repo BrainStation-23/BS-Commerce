@@ -1,7 +1,8 @@
 import type { NextComponentType } from "next";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import { Menu } from "@headlessui/react";
 import Buttons from "../../global/components/buttons/button";
+import Link from "next/link";
 // interface IICardData {
 //   id: number;
 //   meta: {
@@ -14,6 +15,7 @@ import Buttons from "../../global/components/buttons/button";
 // const CartDropdown = (props: { allCartList: IICardData[] }) => {
 const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
+  const componentRef = useRef();
   const [allCartList, setAllCartList] = useState([
     {
       id: Math.floor(Math.random() * 10 * Date.now() * 1),
@@ -86,6 +88,18 @@ const CartDropdown = () => {
       />
     </svg>
   );
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e: any) {
+      if (componentRef && componentRef.current) {
+        const ref: any = componentRef.current;
+        if (!ref.contains(e.target)) {
+          setCartTotal(false);
+        }
+      }
+    }
+  }, []);
   const dropdownData = () => {
     return allCartList.map((data) => {
       return (
@@ -131,7 +145,10 @@ const CartDropdown = () => {
   };
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div
+        ref={componentRef as any}
+        className="flex items-center justify-center"
+      >
         <div className="relative inline-block text-left">
           <div>
             <span className="rounded-md shadow-sm">
@@ -157,20 +174,24 @@ const CartDropdown = () => {
                   <span className="text-base font-semibold">$175.00</span>
                 </div>
                 <div className="px-6 py-2 flex justify-center">
-                  <Buttons
-                    bgColor="black"
-                    height={10}
-                    width={68}
-                    text={"VIEW CART"}
-                  />
+                  <a href="/cart">
+                    <Buttons
+                      bgColor="black"
+                      height={10}
+                      width={68}
+                      text={"VIEW CART"}
+                    />
+                  </a>
                 </div>
                 <div className="px-6 mb-4 flex justify-center">
-                  <Buttons
-                    bgColor="black"
-                    height={10}
-                    width={120}
-                    text={"CHECKOUT"}
-                  />
+                  <a href="/checkout">
+                    <Buttons
+                      bgColor="black"
+                      height={10}
+                      width={120}
+                      text={"CHECKOUT"}
+                    />
+                  </a>
                 </div>
               </div>
             </div>

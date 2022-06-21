@@ -11,7 +11,7 @@ const HomefullBanner: FC = () => {
         height="h-52 sm:h-52 md:h-52 lg:h-80 xl-80"
         hasButton={true}
         buttonText="Discover Now"
-        linkhref="/home" //need to modify href later
+        linkhref="/deals" //need to modify href later
         bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
         buttonPosition="absolute bottom-3 sm:bottom-3 md:bottom-3 lg:bottom-16 xl:bottom-12 left-16 md:left-24 lg:left-56"
         buttonEdge="rounded-lg"

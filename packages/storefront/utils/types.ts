@@ -1,19 +1,69 @@
 export interface accordionBody {
-    id:string,
-    title: string;
-    body:string
-  }
+  id: string;
+  title: string;
+  body: string;
+}
 
-  export interface storiesBody {
-    id:string,
-    image: string;
-    title: string;
-    description:string
-  }
+export interface storiesBody {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+}
 
-  export interface CarouselBody {
-    id:string;
-    title: string;
-    body:string;
-    image: string;
-  }
+export interface CarouselBody {
+  id: string;
+  title: string;
+  body: string;
+  image: string;
+}
+
+export interface User {
+  id?: string;
+  firstName: string;
+  lastName: string;
+  displayName?: string;
+  phone?: string;
+  username: string;
+  email: string;
+  password?: string;
+  provider?: string;
+  providerData?: object;
+  additionalProviderData?: object;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: number;
+  gender?: string;
+  addresses?: Address[];
+  status: string;
+}
+
+export interface Address {
+  id?: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  country: string;
+  postCode: string;
+}
+
+export interface apiFunction {
+  getUser: () => Promise<User[] | undefined>;
+}
+
+export interface ProductStore {
+  id?: number;
+  title?: string;
+  description?: string;
+  price?: number;
+  discountPercentage?: number;
+  rating?: number;
+  review?: string | undefined;
+  stock?: number;
+  vendor?: number;
+  sku?: number;
+  brand?: string;
+  category?: string;
+  thumbnail?: string;
+  images?: string[];
+  color?: undefined | string;
+}

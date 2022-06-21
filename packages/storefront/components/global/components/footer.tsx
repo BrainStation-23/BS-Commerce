@@ -1,28 +1,47 @@
 import type { NextComponentType } from "next";
+import { useRouter } from "next/router";
+
+interface footerLink {
+  name: string;
+  link: string;
+}
 
 const Footer: NextComponentType = () => {
-  const informationList = [
-    { name: "About Us" },
-    { name: "Delivery Information" },
-    { name: "Privacy Policy" },
-    { name: "Terms & Condition" },
-    { name: "Contact Us" },
-    { name: "Site Map" },
+  const { pathname } = useRouter();
+  const informationList: footerLink[] = [
+    { name: "About Us", link: "/" },
+    { name: "Delivery Information", link: "/" },
+    { name: "Privacy Policy", link: "/" },
+    { name: "Terms & Condition", link: "/" },
+    { name: "Contact Us", link: "/" },
+    { name: "Site Map", link: "/" },
   ];
 
-  const extraList = [
-    { name: "Brands" },
-    { name: "Gifts Certificates" },
-    { name: "Affiliate" },
-    { name: "Specials" },
-    { name: "Returns" },
-    { name: "Order History" },
+  const extraList: footerLink[] = [
+    { name: "Brands", link: "/" },
+    { name: "Gifts Certificates", link: "/" },
+    { name: "Affiliate", link: "/" },
+    { name: "Specials", link: "/" },
+    { name: "Returns", link: "/" },
+    { name: "Order History", link: "/" },
   ];
+
+  const address = {
+    location: "8th Floor, 2 Bir Uttam AK Khandakar Road, Dhaka 1212",
+    email: "sales@brainstation-23.com",
+    mobile: "+8801674314359",
+  };
+
+  // put the pathname in 'includes' where footer needs to be hidden
+
+  if (pathname.includes("/checkout")) {
+    return null;
+  }
 
   return (
     <>
       <div className="flex justify-center py-4 mb-3 lg:py-16 container mx-auto">
-        <div className="flex flex-col items-center gap-y-10 px-4 md:flex-row md:flex-wrap md:items-start">
+        <div className="flex flex-col items-center gap-y-10 px-4 lg:px-0 md:flex-row md:flex-wrap md:items-start lg:w-full">
           {/* 1st portion */}
           <div className="flex flex-col items-center text-center md:w-full md:text-left md:items-start lg:w-1/3 lg:pr-4">
             <span className="font-black text-xl mb-2">BS Commerce</span>
@@ -33,17 +52,15 @@ const Footer: NextComponentType = () => {
             <div className="text-sm">
               <div className="mb-1">
                 <span className="font-medium mr-1">Address:</span>
-                <span>
-                  8th Floor, 2 Bir Uttam AK Khandakar Road, Dhaka 1212
-                </span>
+                <span>{address.location}</span>
               </div>
               <div className="mb-1">
                 <span className="font-medium mr-1">Email:</span>
-                <span>sales@brainstation-23.com</span>
+                <span>{address.email}</span>
               </div>
               <div className="mb-1">
                 <span className="font-medium mr-1">Call us:</span>
-                <span>+8801674314359</span>
+                <span>{address.mobile}</span>
               </div>
             </div>
           </div>

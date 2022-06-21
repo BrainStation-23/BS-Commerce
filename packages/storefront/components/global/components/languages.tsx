@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-interface Properties {}
+interface language {
+  name: string;
+}
 
-const Language: React.FC<Properties> = (props) => {
+const Language: React.FC = (props) => {
   const [open, setOpen] = useState(false);
-  const languageList = [
+  const languageList: language[] = [
     { name: "English" },
     { name: "German" },
     { name: "French" },
