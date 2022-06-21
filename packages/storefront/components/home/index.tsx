@@ -10,14 +10,12 @@ import WeekDeals from "@/components/home/weekDeals";
 import HomefullBanner from "@/components/global/bannerComponent/homeFullBanner";
 import BestSell from "@/components/home/bestSell";
 import FeaturedProducts from "@/components/home/featuredProducts";
-import Blog from "@/components/home/blog/blog";
 
 import { storeProducts } from "toolkit/ProductsSlice";
 import productData from "../../allData/product-data.json";
 
-const HomeComponent: NextComponentType = () => {
+const HomeComponent = ({products}: any) => { //edited type. was const HomeComponent: NextComponentType = () => {}
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(storeProducts(productData.products));
   }, []);
@@ -33,24 +31,22 @@ const HomeComponent: NextComponentType = () => {
         <BannerPage />
       </div>
       <div className="mb-4 md:mb-10">
-        <WeekDeals />
+        <WeekDeals products={products} />
       </div>
       <div className="mb-4 md:mb-10">
         <HomefullBanner />
       </div>
       <div className="mb-4 md:mb-10">
-        <BestSell />
+        <BestSell products={products} />
       </div>
       {/* <div className="mb-5 md:mb-10">
         <Blog />
       </div> */}
       <div className="mb-4 md:mb-10">
-        <FeaturedProducts />
+        <FeaturedProducts products={products} />
       </div>
     </>
   );
 };
-
-
 
 export default HomeComponent;

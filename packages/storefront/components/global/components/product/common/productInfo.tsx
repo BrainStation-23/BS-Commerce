@@ -5,7 +5,7 @@ const ProductInfo = (props: any) => {
   const { product }: any = props;
   return (
     <div className="text-center py-4">
-      <Link href="/product/1">
+      <Link href="/product/1" passHref>
       <div className="text-inherit text-xl font-medium text-gray-600">
         {product.title}
       </div>

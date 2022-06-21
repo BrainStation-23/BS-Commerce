@@ -11,16 +11,16 @@ const ProductDetails: NextPage = () => {
 };
 
 export async function getServerSideProps(context: any) {
-  console.log(`Context: ${context}`);
   try {
-    const { productid } = context.query;
-    const res = await axios.get(`http://localhost:3000/api/product/${productid}`, {headers: context.req.headers})
+    const { pid: productid } = context.params;
+    const headers = context.req.headers;
+    const res = await axios.get(`http://localhost:3000/api/product/${productid}`, {headers})
     const product = await res.data;
     console.log(product);
     return { props: { product } };
   }
-  catch(err) {
-    console.log(err);
+  catch(err: any) {
+    console.log(err.response.data);
     return { props: { }}
   }
 }

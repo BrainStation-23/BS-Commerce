@@ -1,11 +1,15 @@
 import { userAPI } from "APIs";
+import axios from "axios";
 import { Field, Form, Formik, FormikValues } from "formik";
 import { SignInRequest } from "models";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
+import {useCookies} from 'react-cookie';
 
 const Signin = () => {
+  const [cookies, setCookie] = useCookies(['access_token', 'refresh_token']);
+
   const router = useRouter();
   async function handleSignin(data: SignInRequest) {
     try {
@@ -15,6 +19,9 @@ const Signin = () => {
         }
         else {
           localStorage.setItem("token", response?.data.token);
+          let expires = new Date();
+          expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
+          setCookie('access_token', response?.data.token, {path: '/', expires});
           router.push('/home')
         }
       });

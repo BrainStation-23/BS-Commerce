@@ -12,7 +12,7 @@ import Banner from "./banner";
 import Container from "../../global/components/container";
 import Link from "next/link";
 
-const BestSell = () => {
+const BestSell = ({products} : any) => {
   return (
     <>
       <Container className="">
@@ -35,9 +35,9 @@ const BestSell = () => {
               slidesPerView980={2}
               rows={3}
             >
-              {productData["products"] &&
-                productData["products"].length > 0 &&
-                productData.products.map((product: any, index) => (
+              {products &&
+                products.length > 0 &&
+                products.map((product: any, index: number) => (
                   <SwiperSlide key={product.id} className="">
                     <Product product={product} />
                   </SwiperSlide>

@@ -11,8 +11,7 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { productInterface } from "./models";
 
-const FeaturedProducts = () => {
-  const productList: productInterface = productData;
+const FeaturedProducts = ({products}: any) => {
   
   return (
     <Container className="max-w-6xl">
@@ -26,9 +25,9 @@ const FeaturedProducts = () => {
         slidesPerView980={3}
         rows={3}
       >
-        {productData["products"] &&
-          productData["products"].length > 0 &&
-          productList.products.map((product: any) => (
+        {products &&
+          products.length > 0 &&
+          products.map((product: any) => (
             <SwiperSlide key={product.id}>
               <Product product={product} />
             </SwiperSlide>

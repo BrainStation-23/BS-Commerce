@@ -2,8 +2,6 @@ import Link from "next/link";
 import ProductInfo from "./common/productInfo";
 import Picture from "./common/picture";
 import Icon from "../icon";
-import axios from "axios";
-import { useEffect } from "react";
 
 const Product = (props: any) => {
   const { product }: any = props;

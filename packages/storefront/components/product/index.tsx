@@ -1,6 +1,6 @@
 import { NextComponentType } from "next";
 import Link from "next/link";
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import { products } from "../../allData/product-data.json";
 import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import ProductDescription from "./productDescription";
