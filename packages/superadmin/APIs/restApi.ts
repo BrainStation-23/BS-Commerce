@@ -1,7 +1,7 @@
 import axios from "axios";
 import { apiEndPoints } from "../utils/apiEndPoints";
 import { User } from "../utils/types";
-import { Product } from "models";
+import { Product, Category } from "models";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -27,6 +27,15 @@ export async function getProductSearchRest(
   try {
     const { data } = await axios.get(`${apiEndPoints.product}/sku/${search}`);
     return data?.data as Product;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getCategoryRest(): Promise<Category[] | undefined> {
+  try {
+    const { data } = await axios.get(`${apiEndPoints.category}`);
+    return data?.data as Category[];
   } catch (error) {
     console.error(error);
   }

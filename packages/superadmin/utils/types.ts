@@ -1,4 +1,5 @@
 import { Product } from "models";
+import { Category } from "models";
 
 export interface User {
   id?: string;
@@ -32,4 +33,5 @@ export interface apiFunction {
   getUser: () => Promise<User[] | undefined>;
   getProducts: () => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
+  getCategory: () => Promise<Category[] | undefined>;
 }
