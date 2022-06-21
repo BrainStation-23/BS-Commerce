@@ -1,4 +1,3 @@
-import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { Injectable } from '@nestjs/common';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';
@@ -19,7 +18,7 @@ export class ManufacturerRepository {
         return await this.db.getAllManufacturers(skip, limit);
     }
 
-    async getManufacturersCount(searchQuery?: string): Promise<Number | null> {
+    async getManufacturersCount(searchQuery?: string): Promise<number | null> {
         return await this.db.findManufacturersCount(searchQuery);
     }
 

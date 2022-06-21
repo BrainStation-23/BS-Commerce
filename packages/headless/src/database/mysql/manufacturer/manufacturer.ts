@@ -6,7 +6,6 @@ import { CreateManufacturerDto } from 'src/modules/manufacturer/dto/createManufa
 
 @Injectable()
 export class ManufacturerDatabase implements IManufacturerDatabase {
-    constructor() { }
 
     /**
      * The createManufacturer function calls the create() method through ManufacturerModel

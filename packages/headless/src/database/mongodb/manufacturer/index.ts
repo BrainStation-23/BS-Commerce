@@ -6,8 +6,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ManufacturerDatabase implements IManufacturerDatabase {
-    constructor() { }
-
+    
     /**
      * The createManufacturer function calls the create() method through ManufacturerModel
      * * The name property sets as unique within id
@@ -34,7 +33,7 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
      * @param searchQuery Optional
      * @returns {Promise<Number>} number | null
      */
-    async findManufacturersCount(searchQuery?: string): Promise<Number | null> {
+    async findManufacturersCount(searchQuery?: string): Promise<number | null> {
         return await ManufacturerModel.find({ searchQuery }).count().lean();
     }
 
