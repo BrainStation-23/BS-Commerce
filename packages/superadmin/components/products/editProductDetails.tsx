@@ -5,9 +5,8 @@ import ProductInfoForm from "./forms/productInfoForm";
 import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
-import { CreateProductRequest } from "../../../models/src/product";
-import { useEffect, useState } from "react";
-import { createProductRest, getProductRest } from "../../APIs/restApi";
+import { useState } from "react";
+import { userAPI } from "../../APIs";
 
 
 const EditProduct = (props : any) => {
@@ -30,7 +29,7 @@ const EditProduct = (props : any) => {
         displayOrder: data.displayOrder,
         isFeatured: data.isFeatured,
         // publishDate: "2022-06-20T09:06:25.239Z",
-        publishDate: data.publishDate,
+        // publishDate: data.publishDate,
       }
       const meta = {
         keywords: [data.keywords],
@@ -58,17 +57,63 @@ const EditProduct = (props : any) => {
       console.log(photos);
       console.log(categories);
   
+      // const newData = {
+      //   info: info,
+      //   meta: meta,
+      //   tags: [data.tags],
+      //   photos: [photos],
+      //   brands: [data.brands],
+      //   categories:[categories]
+      // }
+
       const newData = {
-        info: info,
-        meta: meta,
-        tags: [data.tags],
-        photos: [photos],
-        brands: [data.brands],
-        categories:[categories]
+        "info": {
+          name: data.productName,
+          shortDescription: data.ShortDescription,
+          fullDescription: data.FullDescription,
+          sku: data.Sku,
+          price: data.Price,
+          oldPrice: data.OldPrice,
+          cost: data.ProductCost,
+          showOnHomePage: data.showOnHomePage,
+          includeInTopMenu: data.includeInTopMenu,
+          allowToSelectPageSize: data.allowToSelectPageSize,
+          published: data.published,
+          displayOrder: data.displayOrder,
+          isFeatured: data.isFeatured
+        },
+        meta: {
+          keywords: [
+            data.keywords
+          ],
+          title: data.metaTitle,
+          description: data.metaDescription,
+          friendlyPageName: data.metaFriendlyPageName
+        },
+        tags: [
+          data.tags
+        ],
+        photos: {
+          url: data.photosUrl,
+          id: product.id,
+          title: data.photosTitle,
+          alt: "image",
+          displayOrder: 0
+        },
+        brands: [
+          data.brands
+        ],
+        categories: {
+          id: product.id,
+          isFeatured: true,
+          displayOrder: 0
+        }
       }
+
+      const id = product.id
   
-      console.log(newData);
-      // createProductRest(newData);
+      console.log({newData, id});
+      userAPI.updateProduct({newData, id});
     };
   //   useEffect(() => {
   //    const res = getProductRest({productId : "aaddf804-b06f-4094-be19-71a8ff087b6b"});
@@ -95,20 +140,20 @@ const EditProduct = (props : any) => {
           published:product?.info?.published ,
           displayOrder:product?.info?.displayOrder ,
           isFeatured:product?.info?.isFeatured ,
-          publishDate:product?.info?.publishDate ,
-          tags:product?.tags ,
-          brands:product?.brands ,
-          keywords:product?.meta?.keywords ,
+          // publishDate:product?.info?.publishDate ,
+          tags:product?.tags[0] ,
+          brands:product?.brands[0] ,
+          keywords:product?.meta?.keywords[0] ,
           metaTitle:product?.meta?.title ,
           metaDescription:product?.meta?.description ,
           metaFriendlyPageName:product?.meta?.friendlyPageName ,
           photosUrl:product?.photos[0]?.url ,
           photosID:product?.photos[0]?.id ,
           photosTitle:product?.photos[0]?.title ,
-          displayOrderPhotos:product?.photos[0]?.displayOrderPhotos ,
-          SelectedCategoryIds: product?.categories[0]?.SelectedCategoryIds,
-          isFeaturedCategory:product?.categories[0]?.isFeaturedCategory ,
-          displayOrderCategory:product?.categories[0]?.displayOrderCategory ,
+          displayOrderPhotos:product?.photos[0]?.displayOrder ,
+          SelectedCategoryIds: product?.categories[0]?.id,
+          isFeaturedCategory:product?.categories[0]?.isFeatured ,
+          displayOrderCategory:product?.categories[0]?.displayOrder ,
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -125,7 +170,7 @@ const EditProduct = (props : any) => {
             published: values.published,
             displayOrder: values.displayOrder,
             isFeatured: values.isFeatured,
-            publishDate: values.publishDate,
+            // publishDate: values.publishDate,
             tags: values.tags,
             brands: values.brands,
             keywords: values.keywords,

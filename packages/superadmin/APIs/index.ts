@@ -3,6 +3,7 @@ import {
   getProductSearchRest,
   createProductRest,
   getProductRest,
+  updateProductRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -16,6 +17,7 @@ const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
   createProduct: createProductRest,
+  updateProduct: updateProductRest,
   getProduct: getProductRest,
 };
 
@@ -23,6 +25,7 @@ const restApi: apiFunction = {
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
   createProduct: createProductRest,
+  updateProduct: updateProductRest,
   getProduct: getProductRest,
 };
 

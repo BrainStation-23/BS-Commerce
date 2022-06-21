@@ -1,12 +1,11 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
-import { CreateProductRequest } from "../../../models/src/product";
  
 import InventoryForm from "./forms/categoryForm";
 import ProductInfoForm from "./forms/productInfoForm";
-import { createProductRest } from "../../APIs/restApi";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
+import { userAPI } from "../../APIs";
 
 
 
@@ -66,7 +65,7 @@ const CreateProduct = () => {
     }
 
     console.log(newData);
-    createProductRest(newData);
+    userAPI.createProduct(newData);
   };
   return (
     <>

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { getProductRest } from "../../../APIs/restApi";
+import { userAPI } from "../../../APIs";
 import EditProduct from "../../../components/products/editProductDetails";
 
 const sampleData = {
@@ -43,12 +43,12 @@ const LogDetailPage: NextPage = ({ product }) => {
   );
 };
 export async function getServerSideProps(context) {
-  const res = await getProductRest({
-    productId: "21152b38-831c-49a9-b33e-4ff0bed0adc7",
-  });
-  // const res = await getProductRest({productId : context.params.id});
-  console.log(res);
+  // const res = await getProductRest({
+  //   productId: "21152b38-831c-49a9-b33e-4ff0bed0adc7",
+  // });
   console.log(context.params);
+  const res = await userAPI.getProduct({productId : context.params.id});
+  console.log(res);
 
   return {
     props: { product: res?.data }, // will be passed to the page component as props

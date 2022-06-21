@@ -1,7 +1,7 @@
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import axios from "axios";
 import { apiEndPoints } from "../utils/apiEndPoints";
-import { CreateProductRequest } from "../../models/src/product";
+import { CreateProductRequest, UpdateProductRequest } from "../../models/src/product";
 import { User } from "../utils/types";
 import { Product } from "models";
 
@@ -60,10 +60,25 @@ export async function getProductRest(
   data: GetProductParams
 ): Promise<GetProductParams | undefined> {
   try {
-    const res = await axios.get(`${apiEndPoints.product}${data.productId}`);
+    const res = await axios.get(`${apiEndPoints.product}/${data.productId}`);
 
     return res?.data as Product;
   } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateProductRest(data : UpdateProductRequest): Promise<UpdateProductRequest | undefined> {
+  console.log("api",data);
+  console.log("api",data.newData);
+  
+  try {
+    const response = await axios.patch<UpdateProductRequest>(`${apiEndPoints.product}/${data.id}`, data.newData);
+    console.log(response);
+    
+    return response.data as UpdateProductRequest;
+  } catch (error) {
+    console.log(error);
     console.error(error);
   }
 }

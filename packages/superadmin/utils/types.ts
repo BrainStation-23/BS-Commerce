@@ -1,4 +1,4 @@
-import { Product } from "models";
+import { Product, UpdateProductRequest } from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
 
@@ -32,6 +32,7 @@ export interface Address {
 
 export interface apiFunction {
   createProduct: (data: any) => Promise<CreateProductRequest | undefined>;
+  updateProduct: (data: any) => Promise<UpdateProductRequest | undefined>;
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
