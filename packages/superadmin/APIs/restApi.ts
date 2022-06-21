@@ -1,35 +1,38 @@
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import axios from "axios";
 import { apiEndPoints } from "../utils/apiEndPoints";
-import { CreateProductRequest, UpdateProductRequest } from "../../models/src/product";
+import {
+  CreateProductRequest,
+  UpdateProductRequest,
+} from "../../models/src/product";
 import { User } from "../utils/types";
 import { Product } from "models";
+import { toast } from "react-toastify";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 export async function createProductRest(
   data: CreateProductRequest,
   router
 ): Promise<CreateProductRequest | undefined> {
-  console.log(data);
-
   try {
     const response = await axios.post<CreateProductRequest>(
       `${apiEndPoints.product}`,
       data
     );
-    console.log(response);
     router.push("/Product");
+    toast.success("Create Successful");
     return response.data as CreateProductRequest;
   } catch (error) {
     console.log(error);
-    console.error(error);
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
@@ -42,7 +45,7 @@ export async function getProductsRest(
     );
     return data?.data as Product[];
   } catch (error) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
@@ -53,7 +56,7 @@ export async function getProductSearchRest(
     const { data } = await axios.get(`${apiEndPoints?.product}/sku/${search}`);
     return data?.data as Product;
   } catch (error) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
@@ -65,22 +68,23 @@ export async function getProductRest(
 
     return res?.data as Product;
   } catch (error) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
-export async function updateProductRest(data: UpdateProductRequest, router): Promise<UpdateProductRequest | undefined> {
-  console.log("api", data);
-  console.log("api", data.newData);
-
+export async function updateProductRest(
+  data: UpdateProductRequest,
+  id: string
+): Promise<UpdateProductRequest | undefined> {
   try {
-    const response = await axios.patch<UpdateProductRequest>(`${apiEndPoints.product}/${data.id}`, data.newData);
-    console.log(response);
-
-    router.push("/Product");
+    const response = await axios.patch<UpdateProductRequest>(
+      `${apiEndPoints.product}/${id}`,
+      data
+    );
+    toast.success("Edit Successful");
     return response.data as UpdateProductRequest;
   } catch (error) {
-    console.log(error);
-    console.error(error);
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
   }
 }

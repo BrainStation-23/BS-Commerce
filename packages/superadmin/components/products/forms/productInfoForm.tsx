@@ -395,7 +395,7 @@ const ProductInfoForm = () => {
               </div>
             </div>
 
-            <div className="form-group row">
+            {/* <div className="form-group row">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end py-2">
                   <label
@@ -421,7 +421,7 @@ const ProductInfoForm = () => {
                   <ErrorMessage name="publishDate" />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="form-group row my-2">
               <div className="col-md-3">
