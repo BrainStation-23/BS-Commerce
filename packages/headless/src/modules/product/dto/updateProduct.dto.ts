@@ -134,7 +134,7 @@ export class UpdateProductPhotoDto implements UpdateProductPhoto {
 
     @ApiProperty({ required: false })
     @IsOptional()
-    @IsString()
+    @IsNumber()
     displayOrder?: number;
 }
 
@@ -189,6 +189,7 @@ export class UpdateProductDto implements UpdateProductRequest {
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
+    @CustomValidator(UpdateProductCategoryDto)
     @Type(() => UpdateProductCategoryDto)
     categories?: UpdateProductCategoryDto[];
 }
