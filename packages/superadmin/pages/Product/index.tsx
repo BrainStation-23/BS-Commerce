@@ -157,7 +157,7 @@ export async function getServerSideProps() {
   const productsList = await userAPI.getProducts(7);
   return {
     props: {
-      productsList: productsList,
+      productsList: productsList || [],
     },
   };
 }

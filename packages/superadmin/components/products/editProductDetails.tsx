@@ -34,19 +34,23 @@ const EditProduct = (props: any) => {
         friendlyPageName: data.metaFriendlyPageName,
       },
       tags: [data.tags],
-      photos: {
-        url: data.photosUrl,
-        id: product.id,
-        title: data.photosTitle,
-        alt: "image",
-        displayOrder: 0,
-      },
+      photos: [
+        {
+          url: data.photosUrl,
+          id: product.id,
+          title: data.photosTitle,
+          alt: "image",
+          displayOrder: 0,
+        },
+      ],
       brands: [data.brands],
-      categories: {
-        id: product.id,
-        isFeatured: true,
-        displayOrder: 0,
-      },
+      categories: [
+        {
+          id: product.id,
+          isFeatured: true,
+          displayOrder: 0,
+        },
+      ],
     };
     const id = product.id;
     const response = await userAPI.updateProduct(newData, id);
