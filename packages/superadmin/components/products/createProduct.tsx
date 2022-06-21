@@ -32,7 +32,7 @@ const CreateProduct = () => {
       // publishDate: data.publishDate,
     };
     const meta = {
-      keywords: [data.keywords],
+      keywords: data.keywords,
       title: data.metaTitle,
       description: data.metaDescription,
       friendlyPageName: data.metaFriendlyPageName,
@@ -59,9 +59,9 @@ const CreateProduct = () => {
     const newData = {
       info: info,
       meta: meta,
-      tags: [data.tags],
+      tags: data.tags,
       photos: [photos],
-      brands: [data.brands],
+      brands: data.brands,
       categories: [categories],
     };
 

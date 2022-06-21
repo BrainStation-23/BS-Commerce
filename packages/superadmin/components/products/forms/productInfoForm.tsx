@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 
 import Tooltips from "../../global/tooltip";
+import CustomSelect from "./CustomSelect";
 
 const ProductInfoForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -11,6 +12,28 @@ const ProductInfoForm = () => {
     else setBtnToggler("bi-plus-lg");
   };
 
+  const tagsOptions = [
+    {
+      label: "mobile",
+      value: "mobile",
+    },
+    {
+      label: "car",
+      value: "car",
+    },
+    {
+      label: "video",
+      value: "video",
+    },
+    {
+      label: "Fruit",
+      value: "Fruit",
+    },
+    {
+      label: "color",
+      value: "color",
+    },
+  ];
   return (
     <>
       <div
@@ -429,11 +452,20 @@ const ProductInfoForm = () => {
               </div>
               <div className="col-md-9">
                 <div className="input-group ">
-                  <Field
+                  {/* <Field
                     type="text"
                     className="form-control"
                     id="tags"
                     name="tags"
+                  /> */}
+                  <Field
+                    className="custom-select"
+                    id="tags"
+                    name="tags"
+                    options={tagsOptions}
+                    component={CustomSelect}
+                    placeholder="Select tags..."
+                    isMulti={true}
                   />
                 </div>
                 <div className="errMsg text-red-600 text-danger">
@@ -454,10 +486,13 @@ const ProductInfoForm = () => {
               <div className="col-md-9">
                 <div className="input-group ">
                   <Field
-                    type="text"
-                    className="form-control"
+                    className="custom-select"
                     id="brands"
                     name="brands"
+                    options={tagsOptions}
+                    component={CustomSelect}
+                    placeholder="Select brands..."
+                    isMulti={true}
                   />
                 </div>
                 <div className="errMsg text-red-600 text-danger">

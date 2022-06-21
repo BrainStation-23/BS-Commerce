@@ -1,6 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import Tooltips from "../../global/tooltip";
+import CustomSelect from "./CustomSelect";
 
 const MetaForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -9,7 +10,28 @@ const MetaForm = () => {
     if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
     else setBtnToggler("bi-plus-lg");
   };
-
+  const keywordOptions = [
+    {
+      label: "mobile",
+      value: "mobile",
+    },
+    {
+      label: "car",
+      value: "car",
+    },
+    {
+      label: "video",
+      value: "video",
+    },
+    {
+      label: "Fruit",
+      value: "Fruit",
+    },
+    {
+      label: "color",
+      value: "color",
+    },
+  ];
   return (
     <>
       <div
@@ -54,11 +76,34 @@ const MetaForm = () => {
               <div className="col-md-9">
                 <div className="input-group pe-3">
                   <Field
-                    type="text"
+                    className="custom-select"
+                    id="keywords"
+                    name="keywords"
+                    options={keywordOptions}
+                    component={CustomSelect}
+                    placeholder="Select keywords..."
+                    isMulti={true}
+                  />
+                  {/* <Field
+                    as="select"
                     className="form-control"
                     id="keywords"
                     name="keywords"
-                  />
+                    data-role="multiselect"
+                    aria-disabled="false"
+                  >
+                    <option defaultValue={0} disabled={true}>
+                      --Select--
+                    </option>
+                    <option value="Keywords 1">Keywords 1</option>
+                    <option value="Keywords 2">Keywords 2</option>
+                    <option value="Keywords 3">Keywords 3</option>
+                    <option value="Keywords 4">Keywords 4</option>
+                    <option value="Keywords 5">Keywords 5</option>
+                    <option value="Keywords 6">Keywords 6</option>
+                    
+                    
+                  </Field> */}
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="keywords" />

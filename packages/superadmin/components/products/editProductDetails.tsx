@@ -28,12 +28,12 @@ const EditProduct = (props: any) => {
         isFeatured: data.isFeatured,
       },
       meta: {
-        keywords: [data.keywords],
+        keywords: data.keywords,
         title: data.metaTitle,
         description: data.metaDescription,
         friendlyPageName: data.metaFriendlyPageName,
       },
-      tags: [data.tags],
+      tags: data.tags,
       photos: {
         url: data.photosUrl,
         id: product.id,
@@ -115,7 +115,10 @@ const EditProduct = (props: any) => {
               isFeaturedCategory: values.isFeaturedCategory,
               displayOrderCategory: values.displayOrderCategory,
             };
-            handleSubmit(data);
+            console.log(values.keywords);
+            console.log(data);
+            
+            // handleSubmit(data);
             actions.setSubmitting(false);
           }}
           validationSchema={productSchema}

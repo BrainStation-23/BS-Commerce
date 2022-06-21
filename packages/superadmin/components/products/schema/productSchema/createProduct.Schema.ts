@@ -29,10 +29,10 @@ export const productSchema = object().shape({
   isFeatured: Yup.boolean(),
   publishDate: string(),
 
-  tags: string(),
-  brands: string(),
+  // tags: string(),
+  // brands: string(),
 
-  keywords: string(),
+  // keywords: string(),
   metaTitle: string(),
   metaDescription: string(),
   metaFriendlyPageName: string(),
