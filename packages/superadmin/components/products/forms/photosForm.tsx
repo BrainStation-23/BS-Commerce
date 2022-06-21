@@ -24,30 +24,27 @@ const PhotosForm = () => {
         id="photos"
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
-          <div className="card-title d-flex align-items-center">
-            <i
-              className="bi bi-truck align-text-top"
-              style={{ fontSize: "25px", marginTop: "-20px" }}
-            />
-            <div className="px-3 fs-5">photos</div>
-          </div>
-          <div className="card-tools float-end">
-            <div>
-              <p>
-                <button
-                  className="btn btn-tool"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#photosTab"
-                  aria-expanded="true"
-                  aria-controls="photosTab"
-                  onClick={() => toggleButton()}
-                >
-                  <i className={`bi ${btnToggler}`} />
-                </button>
-              </p>
+        <button
+            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#photosTab"
+            aria-expanded="true"
+            aria-controls="photosTab"
+            onClick={() => toggleButton()}
+          >
+            <div className="card-title row align-items-center visible">
+              <i
+                className="bi bi-image-fill col-1"
+                style={{ fontSize: "25px", marginTop: "-20px" }}
+              />
+              <div className="px-3 fs-5 col text-start">Photos</div>
+              <div className="col-1">
+                <i className={`bi ${btnToggler}`} />
+              </div>
             </div>
-          </div>
+          </button>
+          
         </div>
         <div className="collapse " id="photosTab">
           <div className="card-body">

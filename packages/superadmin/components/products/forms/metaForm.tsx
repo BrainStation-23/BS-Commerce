@@ -19,31 +19,26 @@ const MetaForm = () => {
         id="meta"
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
-          <div className="card-title d-flex align-items-center">
-            <i
-              className="bi bi-currency-dollar "
-              style={{ fontSize: "25px", marginTop: "-20px" }}
-            />
-
-            <div className="px-3 fs-5">Meta</div>
-          </div>
-          <div className="card-tools">
-            <div>
-              <p>
-                <button
-                  className="btn btn-tool"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#metaTab"
-                  aria-expanded="true"
-                  aria-controls="metaTab"
-                  onClick={() => toggleButton()}
-                >
-                  <i className={`bi ${btnToggler}`} />
-                </button>
-              </p>
+          <button
+            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#metaTab"
+            aria-expanded="true"
+            aria-controls="metaTab"
+            onClick={() => toggleButton()}
+          >
+            <div className="card-title row align-items-center visible">
+              <i
+                className="bi bi-meta col-1"
+                style={{ fontSize: "25px", marginTop: "-20px" }}
+              />
+              <div className="px-3 fs-5 col text-start">Meta</div>
+              <div className="col-1">
+                <i className={`bi ${btnToggler}`} />
+              </div>
             </div>
-          </div>
+          </button>
         </div>
         <div className="collapse " id="metaTab">
           <div className="card-body">

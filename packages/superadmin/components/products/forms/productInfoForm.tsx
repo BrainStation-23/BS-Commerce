@@ -20,33 +20,28 @@ const ProductInfoForm = () => {
         id="product-info"
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
-          <div className="card-title d-flex align-items-center">
-            <i
-              className="bi bi-info-lg align-text-top"
-              style={{ fontSize: "25px", marginTop: "-20px" }}
-            />
-
-            <div className="px-1 fs-5">Product info</div>
-          </div>
-          <div className="card-tools float-end">
-            <div>
-              <p>
-                <button
-                  className="btn btn-tool"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseExample"
-                  aria-expanded="true"
-                  aria-controls="collapseExample"
-                  onClick={() => toggleButton()}
-                >
-                  <i className={`bi ${btnToggler}`} />
-                </button>
-              </p>
+        <button
+            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#prouctInfoTab"
+            aria-expanded="true"
+            aria-controls="prouctInfoTab"
+            onClick={() => toggleButton()}
+          >
+            <div className="card-title row align-items-center visible">
+              <i
+                className="bi bi-info-lg align-text-top col-1"
+                style={{ fontSize: "25px", marginTop: "-20px" }}
+              />
+              <div className="px-3 fs-5 col text-start">Product info</div>
+              <div className="col-1">
+                <i className={`bi ${btnToggler}`} />
+              </div>
             </div>
-          </div>
+          </button>
         </div>
-        <div className="collapse " id="collapseExample">
+        <div className="collapse " id="prouctInfoTab">
           <div className="card-body">
             <div id="product-details-area">
               <div className="form-group row my-2">

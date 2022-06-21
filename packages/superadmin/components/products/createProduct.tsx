@@ -1,7 +1,6 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
  
-import InventoryForm from "./forms/categoryForm";
 import ProductInfoForm from "./forms/productInfoForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
@@ -9,6 +8,7 @@ import { userAPI } from "../../APIs";
 
 
 import { useRouter } from "next/router";
+import CategoryForm from "./forms/categoryForm";
 
 const CreateProduct = () => {
   const router = useRouter();
@@ -189,7 +189,7 @@ const CreateProduct = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
-                <InventoryForm />
+                <CategoryForm />
               </div>
             </Form>
           );
