@@ -9,13 +9,13 @@ import { SwaggerConfig } from './internal/swagger/swagger.init';
 dotenv.config();
 
 async function bootstrap() {
-	await connectToDatabase(dbConfig.db as DB);
-	const app = await NestFactory.create(AppModule);
-	app.setGlobalPrefix(coreConfig.restApiPrefix);
-	app.useGlobalPipes(new ValidationPipe());
-	coreConfig.api === 'REST' ? SwaggerConfig(app) : null;
-	await app.listen(coreConfig.port);
-	console.log(`http://${coreConfig.host}:${coreConfig.port}`);
+  await connectToDatabase(dbConfig.db as DB);
+  const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix(coreConfig.restApiPrefix);
+  app.useGlobalPipes(new ValidationPipe());
+  coreConfig.api === 'REST' ? SwaggerConfig(app) : null;
+  await app.listen(coreConfig.port);
+  console.log(`http://${coreConfig.host}:${coreConfig.port}`);
 }
 
 bootstrap();
