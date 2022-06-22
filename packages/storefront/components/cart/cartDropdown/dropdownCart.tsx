@@ -5,7 +5,6 @@ import cartData from "../../../allData/cart-data.json";
 const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
-  const [allCartList, setAllCartList] = useState();
 
   const cartIcon = (
     <svg
