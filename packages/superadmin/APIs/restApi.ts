@@ -93,7 +93,7 @@ export async function deleteProductRest(
   productId: string
 ): Promise<boolean | undefined> {
   try {
-    const res = await axios.delete(`${apiEndPoints.product}/${productId}`);
+    await axios.delete(`${apiEndPoints.product}/${productId}`);
     toast.success("Delete Successful");
     return true;
   } catch (error) {
