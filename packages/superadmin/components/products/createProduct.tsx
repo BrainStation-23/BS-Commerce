@@ -12,7 +12,7 @@ import CategoryForm from "./forms/categoryForm";
 const CreateProduct = () => {
   const router = useRouter();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = async (data: any) => {
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -50,11 +50,6 @@ const CreateProduct = () => {
       displayOrder: +data.displayOrderCategory,
     };
 
-    console.log(info);
-    console.log(meta);
-    console.log(photos);
-    console.log(categories);
-
     const newData = {
       info: info,
       meta: meta,
@@ -63,9 +58,7 @@ const CreateProduct = () => {
       brands: data.brands,
       categories: [categories],
     };
-
-    console.log(newData);
-    userAPI.createProduct(newData, router);
+    await userAPI.createProduct(newData, router);
   };
 
   return (
