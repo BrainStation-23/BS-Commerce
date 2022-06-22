@@ -3,15 +3,17 @@ import HomeComponent from "@/components/home";
 import axios from "axios";
 import { userAPI } from "APIs";
 
-const Home: NextPage = ({ products }: any) => {
-  return <HomeComponent products={products} />;
+const Home: NextPage = ({ products, featuredProducts }: any) => {
+  return <HomeComponent products={products} featuredProducts={featuredProducts} />;
 };
 
 export async function getServerSideProps(context: any) {
-  const res = await userAPI.getPublicProducts();
+  const allProducts = await userAPI.getPublicProducts();
+  const featuredProducts = await userAPI.getFeaturedProducts();
   return {
     props: {
-      products: res,
+      products: allProducts,
+      featuredProducts: featuredProducts,
     }
   }
 }

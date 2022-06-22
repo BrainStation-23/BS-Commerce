@@ -3,10 +3,10 @@ import ProductDetailsComponent from "@/components/product";
 import axios from "axios";
 import { userAPI } from "APIs";
 
-const ProductDetails: NextPage = () => {
+const ProductDetails: NextPage = ({product}: any) => {
   return (
     <>
-      <ProductDetailsComponent></ProductDetailsComponent>
+      <ProductDetailsComponent product={product}></ProductDetailsComponent>
     </>
   );
 };
@@ -16,7 +16,7 @@ export async function getServerSideProps(context: any) {
   const res = await userAPI.getPublicProductsById(pid);
   return {
     props: {
-      products: res,
+      product: res,
     },
   };
 }

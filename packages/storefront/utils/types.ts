@@ -58,6 +58,7 @@ export interface apiFunction {
   signUp: (data: CreateCustomerRequest) => Promise<CreateCustomerResponse | undefined>;
   forgotPassword: (data: ForgotPasswordRequest) => Promise<ForgotPasswordResponse | undefined>;
   getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
+  getFeaturedProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
   getPublicProductsById: (productId: GetCustomerProductParams) => Promise< GetCustomerProductResponse | undefined>;
 }
 

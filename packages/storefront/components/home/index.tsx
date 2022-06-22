@@ -14,7 +14,7 @@ import FeaturedProducts from "@/components/home/featuredProducts";
 import { storeProducts } from "toolkit/ProductsSlice";
 import productData from "../../allData/product-data.json";
 
-const HomeComponent = ({products}: any) => { //edited type. was const HomeComponent: NextComponentType = () => {}
+const HomeComponent = ({products, featuredProducts}: any) => { //edited type. was const HomeComponent: NextComponentType = () => {}
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(storeProducts(productData.products));
@@ -43,7 +43,7 @@ const HomeComponent = ({products}: any) => { //edited type. was const HomeCompon
         <Blog />
       </div> */}
       <div className="mb-4 md:mb-10">
-        <FeaturedProducts products={products} />
+        <FeaturedProducts products={featuredProducts} />
       </div>
     </>
   );

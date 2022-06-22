@@ -65,6 +65,19 @@ export async function getPublicProductsRest(): Promise<
 > {
   try {
     const res = await axios.get(
+      `${apiEndPoints.getPublicProducts}`
+    );
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getFeaturedProductsRest(): Promise<
+  GetCustomerAllProductsResponse | undefined
+> {
+  try {
+    const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?isFeatured=true`
     );
     return res.data.data;
