@@ -1,11 +1,11 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserDto } from './user.dto';
-import { 
+import {
     GetUserErrorResponse,
     GetUserSuccessResponse,
     GetUserErrorMessages
- } from 'models';
+} from 'models';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class GetUserErrorResponseDto implements GetUserErrorResponse {

@@ -40,12 +40,12 @@ import {
 } from '../dto';
 
 @ApiTags('Product API')
-@Controller('product')
+@Controller()
 export class ProductController {
   constructor(private productService: ProductService) { }
 
   // Customer
-  @Get('customer')
+  @Get('customer/products')
   @ApiResponse({
     description: 'Get All Products Success Response',
     type: GetCustomerAllProductsSuccessResponseDto,
@@ -63,7 +63,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @Get('customer/:productId')
+  @Get('customer/products/:productId')
   @ApiResponse({
     description: 'Get Product Success Response',
     type: GetCustomerProductSuccessResponseDto,
@@ -83,7 +83,7 @@ export class ProductController {
   // Admin
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get()
+  @Get('products')
   @ApiResponse({
     description: 'Get All Product Success Response',
     type: GetAllProductsSuccessResponseDto,
@@ -104,7 +104,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get('count')
+  @Get('products/count')
   @ApiResponse({
     description: 'Get All Product Count Success Response',
     type: GetProductCountSuccessResponseDto,
@@ -123,7 +123,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get('sku/:sku')
+  @Get('products/sku/:sku')
   @ApiParam({ name: 'sku' })
   @ApiResponse({
     description: 'Get Product by SKU Success Response',
@@ -144,7 +144,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get('condition')
+  @Get('products/condition')
   @ApiResponse({
     description: 'Get Products By Condition Success Response',
     type: GetProductsByConditionSuccessResponseDto,
@@ -166,7 +166,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Get(':productId')
+  @Get('products/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Get Product Success Response',
@@ -184,9 +184,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
-  @Post()
+  @Post('product')
   @ApiResponse({
     description: 'Create Product Success Response',
     type: CreateProductSuccessResponseDto,
@@ -205,7 +203,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Delete(':productId')
+  @Delete('products/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Delete Product Success Response',
@@ -225,7 +223,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Patch('brand')
+  @Patch('products/brand')
   @ApiResponse({
     description: 'Update Products For Brand Success Response',
     type: UpdateProductsForBrandSuccessResponseDto,
@@ -245,7 +243,7 @@ export class ProductController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Patch(':productId')
+  @Patch('products/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Update Product Success Response',

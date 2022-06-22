@@ -12,12 +12,12 @@ type DB = 'MONGO' | 'MYSQL';
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  coreConfig.api === 'REST' ? SwaggerConfig(app) : null;
+  coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);
   console.log(`http://${coreConfig.host}:${coreConfig.port}`);
 }
-
 bootstrap();
