@@ -272,7 +272,7 @@ const ProductDetailsComponent = ({ product }: any) => {
               </div>
             </div>
           </div>
-          <ProductDescription></ProductDescription>
+          <ProductDescription product={product}></ProductDescription>
         </div>
       </section>
     </>

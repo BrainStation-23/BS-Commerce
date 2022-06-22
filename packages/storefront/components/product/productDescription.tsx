@@ -6,8 +6,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-const ProductDescription: NextComponentType = () => {
-	const product = products.find((product) => product.id === 1);
+const ProductDescription: NextComponentType = ({product}: any) => {
+	//const product = products.find((product) => product.id === 1);
 	const vendor = vendors.find((vendor) => vendor.id === 1);
 	const [description, setDescription] = useState("block");
 	const [review, setReview] = useState("hidden");
@@ -74,9 +74,9 @@ const ProductDescription: NextComponentType = () => {
 					</ul>
 				</div>
 				<div className="mx-5">
-					<p className={description}>{product.description}</p>
-					<p className={review}>{product.review}</p>
-					<p className={shipping}>{vendor.shipping_policy}</p>
+					<p className={description}>{product.info.shortDescription}</p>
+					<p className={review}>{product.review ? product.review : ''}</p>
+					<p className={shipping}>{vendor?.shipping_policy}</p>
 					<div className={size_chart}>
 						<h4 className="font-semibold">Size Chart</h4>
 						<img alt="size" className="" src={vendor.size} />
