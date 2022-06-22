@@ -22,10 +22,7 @@ export async function createProductRest(
   router
 ): Promise<CreateProductRequest | undefined> {
   try {
-    const response = await axios.post<CreateProductRequest>(
-      `${apiEndPoints.product}`,
-      data
-    );
+    const response = await axios.post<CreateProductRequest>(`/product`, data);
     router.push("/Product");
     toast.success("Create Successful");
     return response.data as CreateProductRequest;
@@ -57,6 +54,7 @@ export async function getProductSearchRest(
     return data?.data as Product;
   } catch (error) {
     toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
   }
 }
 

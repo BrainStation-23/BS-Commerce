@@ -97,7 +97,10 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           <Link
-            href={{ pathname: `/Product/Edit/[id]`, query: { id: data[key] } }}
+            href={{
+              pathname: `/Product/Edit/[id]`,
+              query: { id: data?.[key] },
+            }}
             passHref
           >
             <button className="btn btn-default">

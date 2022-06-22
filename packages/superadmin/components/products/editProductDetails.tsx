@@ -34,13 +34,15 @@ const EditProduct = (props: any) => {
         friendlyPageName: data.metaFriendlyPageName,
       },
       tags: data.tags,
-      photos: {
-        url: data.photosUrl,
-        id: product.id,
-        title: data.photosTitle,
-        alt: "image",
-        displayOrder: 0,
-      },
+      photos: [
+        {
+          url: data.photosUrl,
+          id: product.id,
+          title: data.photosTitle,
+          alt: "image",
+          displayOrder: 0,
+        },
+      ],
       brands: data.brands,
       categories: [
         {
@@ -51,12 +53,10 @@ const EditProduct = (props: any) => {
       ],
     };
     const id = product.id;
-    console.log(newData);
-    
+
     const response = await userAPI.updateProduct(newData, id);
   };
-  console.log(product);
-  
+
   return (
     <>
       {product ? (
@@ -122,7 +122,7 @@ const EditProduct = (props: any) => {
             };
             // console.log(values.keywords);
             // console.log(data);
-            
+
             handleSubmit(data);
             actions.setSubmitting(false);
           }}

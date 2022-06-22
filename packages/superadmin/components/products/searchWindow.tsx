@@ -7,7 +7,9 @@ import { Product } from "models";
 const SearchWindow = ({ setProducts }: any) => {
   const handleSearchSubmit = async (data: string) => {
     const searchProduct: any = await userAPI.searchProduct(data);
-    setProducts([searchProduct]);
+    if (searchProduct) {
+      setProducts([searchProduct]);
+    }
   };
   return (
     <>

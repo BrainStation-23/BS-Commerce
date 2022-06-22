@@ -25,7 +25,7 @@ const CreateProduct = () => {
       includeInTopMenu: data.includeInTopMenu,
       allowToSelectPageSize: data.allowToSelectPageSize,
       published: data.published,
-      displayOrder: data.displayOrder,
+      displayOrder: +data.displayOrder,
       isFeatured: data.isFeatured,
       // publishDate: "2022-06-20T09:06:25.239Z",
       // publishDate: data.publishDate,
@@ -41,13 +41,13 @@ const CreateProduct = () => {
       url: data.photosUrl,
       id: data.photosID,
       title: data.photosTitle,
-      displayOrder: `${data.displayOrderPhotos}`,
+      displayOrder: +`${data.displayOrderPhotos}`,
       alt: "image",
     };
     const categories = {
       id: data.SelectedCategoryIds,
       isFeatured: data.isFeaturedCategory,
-      displayOrder: data.displayOrderCategory,
+      displayOrder: +data.displayOrderCategory,
     };
 
     console.log(info);
