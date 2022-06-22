@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, FC } from "react";
 import Link from "next/link";
 import CartDropdown from "../../cart/cartDropdown/dropdownCart";
-
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = (props) => {
@@ -10,8 +9,12 @@ const HeaderAccount: React.FC<Properties> = (props) => {
     { name: "Login", link: "/account/sign-in" },
     { name: "Wishlist", link: "/wishlist" },
   ];
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
+  const showCartDropDown = () => {
+    setShowCartDropdown(!showCartDropdown);
+  };
   return (
-    <div className="flex flex-row gap-x-3">
+    <div className="flex flex-row gap-x-3 items-center">
       <span className="uppercase my-0">
         <Link href={links[0].link}>
           <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
@@ -43,7 +46,9 @@ const HeaderAccount: React.FC<Properties> = (props) => {
           </svg>
         </a>
       </Link>
-      <span className="z-50">{/* <CartDropdown /> */}</span>
+      <span className="z-50 text-sm" onClick={(e) => showCartDropDown()}>
+        <CartDropdown />
+      </span>
     </div>
   );
 };
