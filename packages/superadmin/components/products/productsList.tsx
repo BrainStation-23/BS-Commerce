@@ -32,7 +32,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return productsList.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, PageSize]);
+  }, [currentPage, PageSize, productsList]);
 
   const columns = [
     // {
