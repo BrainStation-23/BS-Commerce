@@ -4,6 +4,7 @@ import { SuccessResponse } from "src/common/successResponse";
 export interface getCategoryListCategory {
     slug: string;
     ancestors: getCategoryListAncestor[];
+    subCategories?:getCategoryListCategory[];
 }
 
 export interface getCategoryListAncestor {
