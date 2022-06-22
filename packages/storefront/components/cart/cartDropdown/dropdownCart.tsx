@@ -1,60 +1,11 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
-// import { Menu } from "@headlessui/react";
 import Buttons from "../../global/components/buttons/button";
-import Link from "next/link";
-// interface IICardData {
-//   id: number;
-//   meta: {
-//     title: string;
-//     price: string;
-//     img: string;
-//   };
-//   quantity: string;
-// }
-// const CartDropdown = (props: { allCartList: IICardData[] }) => {
+import cartData from "../../../allData/cart-data.json";
 const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
-  const [allCartList, setAllCartList] = useState([
-    {
-      id: Math.floor(Math.random() * 10 * Date.now() * 1),
-      meta: {
-        title: "Red Spinach/500gm",
-        price: "53",
-        img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig14_9d050031-6a02-4a0c-ad56-c2dda1cce5d0_compact.jpg?v=1587984073",
-      },
-      quantity: 3,
-    },
-    {
-      id: Math.floor(Math.random() * 10 * Date.now() * 3),
-      meta: {
-        title: "Cauliflower/1kg",
-        price: "44",
-        img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig9_ef67d26b-f717-4bf3-82ec-5eae9aad5a11_compact.jpg?v=1587984831",
-      },
-      quantity: 2,
-    },
-    {
-      id: Math.floor(Math.random() * 10 * Date.now()),
-      meta: {
-        title: "White Carrot/500gm",
-        price: "24",
-        img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig6_1f6dc9c9-08a8-4008-b39a-478d0046362d_compact.jpg?v=1587983036",
-      },
-      quantity: 1,
-    },
-    {
-      id: Math.floor(Math.random() * 10 * Date.now() * 8),
-      meta: {
-        title: "Poatat0/500gm",
-        price: "5",
-        img: "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig4_cbb159dd-d3ba-4e07-9b56-5d54eb32aa81_compact.jpg?v=1587985338",
-      },
-      quantity: 4,
-    },
-  ]);
-  // const CartDropdown = (props: any) => {
+  const [allCartList, setAllCartList] = useState();
 
   const cartIcon = (
     <svg
@@ -101,7 +52,7 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
-    return allCartList.map((data) => {
+    return cartData.allCartList.map((data) => {
       return (
         <div key={data.id}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
@@ -110,7 +61,7 @@ const CartDropdown = () => {
                 <a href="#" className="">
                   <img
                     className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                    src={data.meta.img}
+                    src={data.meta?.img}
                     alt="Product Image"
                   />
                 </a>
@@ -118,7 +69,7 @@ const CartDropdown = () => {
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
                   <a href="#" className="text-sm font-bold text-gray-900 mr-2">
-                    {data.meta.title}
+                    {data.meta?.title}
                   </a>
                 </div>
                 <div>
@@ -128,7 +79,7 @@ const CartDropdown = () => {
                     </span>
                     X &nbsp;
                     <span className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {data.meta.price}
+                      $ {data.meta?.price}
                     </span>
                   </div>
                 </div>
