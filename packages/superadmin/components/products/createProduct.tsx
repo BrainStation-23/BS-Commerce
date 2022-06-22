@@ -8,11 +8,72 @@ import { userAPI } from "../../APIs";
 
 import { useRouter } from "next/router";
 import CategoryForm from "./forms/categoryForm";
+import { useState } from "react";
 
 const CreateProduct = () => {
   const router = useRouter();
+  const [categogiesData, setCategoryData] = useState([
+    {
+      id: 1,
+      value: "Category 1",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 2,
+      value: "Category 2",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 1,
+    },
+    {
+      id: 3,
+      value: "Category 3",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 3,
+    },
+    {
+      id: 4,
+      value: "Category 4",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 5,
+    },
+    {
+      id: 5,
+      value: "Category 5",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 6,
+      value: "Category 6",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 0,
+    },
+    {
+      id: 7,
+      value: "Category 7",
+      isSelected: true,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 8,
+      value: "Category 8",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+  ]);
 
   const handleSubmit = (data: any) => {
+    console.log(categogiesData);
+
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -27,8 +88,6 @@ const CreateProduct = () => {
       published: data.published,
       displayOrder: +data.displayOrder,
       isFeatured: data.isFeatured,
-      // publishDate: "2022-06-20T09:06:25.239Z",
-      // publishDate: data.publishDate,
     };
     const meta = {
       keywords: data.keywords,
@@ -44,16 +103,18 @@ const CreateProduct = () => {
       displayOrder: +`${data.displayOrderPhotos}`,
       alt: "image",
     };
-    const categories = {
-      id: data.SelectedCategoryIds,
-      isFeatured: data.isFeaturedCategory,
-      displayOrder: +data.displayOrderCategory,
-    };
 
-    console.log(info);
-    console.log(meta);
-    console.log(photos);
-    console.log(categories);
+    const categories: any = [];
+
+    categogiesData?.map((category: any, index: any) => {
+      category.isSelected == true
+        ? categories.push({
+            id: `${category.id}`,
+            isFeatured: category.isFeatured,
+            displayOrder: +category.displayOrder,
+          })
+        : "";
+    });
 
     const newData = {
       info: info,
@@ -61,10 +122,8 @@ const CreateProduct = () => {
       tags: data.tags,
       photos: [photos],
       brands: data.brands,
-      categories: [categories],
+      categories: categories,
     };
-
-    console.log(newData);
     userAPI.createProduct(newData, router);
   };
 
@@ -83,7 +142,7 @@ const CreateProduct = () => {
           includeInTopMenu: false,
           allowToSelectPageSize: false,
           published: false,
-          displayOrder: 0,
+          displayOrder: 1,
           isFeatured: false,
           publishDate: "",
           tags: "",
@@ -98,7 +157,8 @@ const CreateProduct = () => {
           displayOrderPhotos: "",
           SelectedCategoryIds: "--Select--",
           isFeaturedCategory: false,
-          displayOrderCategory: 0,
+          displayOrderCategory: 1,
+          categoriesData: "",
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -130,7 +190,7 @@ const CreateProduct = () => {
             isFeaturedCategory: values.isFeaturedCategory,
             displayOrderCategory: values.displayOrderCategory,
           };
-          console.log(data);
+          // console.log(data);
           handleSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -188,7 +248,7 @@ const CreateProduct = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
-                <CategoryForm />
+                <CategoryForm setCate={setCategoryData} categoryData={categogiesData}/>
               </div>
             </Form>
           );

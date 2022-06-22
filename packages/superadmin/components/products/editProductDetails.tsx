@@ -6,11 +6,82 @@ import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
+import { useEffect, useState } from "react";
+import CategoryForm from "./forms/categoryForm";
 
 const EditProduct = (props: any) => {
   const { product } = props;
 
+  const [categogiesData, setCategoryData] = useState([
+    {
+      id: 1,
+      value: "Category 1",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 2,
+      value: "Category 2",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 1,
+    },
+    {
+      id: 3,
+      value: "Category 3",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 3,
+    },
+    {
+      id: 4,
+      value: "Category 4",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 5,
+    },
+    {
+      id: 5,
+      value: "Category 5",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 6,
+      value: "Category 6",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 0,
+    },
+    {
+      id: 7,
+      value: "Category 7",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 8,
+      value: "Category 8",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+  ]);
   const handleSubmit = async (data: any) => {
+    const categories: any = [];
+
+    categogiesData?.map((category: any, index: any) => {
+      category.isSelected == true
+        ? categories.push({
+            id: `${category.id}`,
+            isFeatured: category.isFeatured,
+            displayOrder: +category.displayOrder,
+          })
+        : "";
+    });
     const newData = {
       info: {
         name: data.productName,
@@ -44,18 +115,30 @@ const EditProduct = (props: any) => {
         },
       ],
       brands: data.brands,
-      categories: [
-        {
-          id: product.id,
-          isFeatured: true,
-          displayOrder: 0,
-        },
-      ],
+      categories: categories,
     };
     const id = product.id;
+    console.log(newData);
 
     const response = await userAPI.updateProduct(newData, id);
   };
+
+  const getCate = () => {
+    categogiesData.map((category: any, index) => {
+      const pCat = product?.categories?.filter((pCategory: any) => {
+        return pCategory.id == category.id ? pCategory : null;
+      });
+      if (pCat[0]) {
+        category.isFeatured = pCat[0].isFeatured;
+        category.isSelected = true;
+        category.displayOrder = pCat[0].displayOrder;
+      }
+    });
+    console.log(categogiesData);
+  };
+  useEffect(() => {
+    getCate();
+  }, []);
 
   return (
     <>
@@ -75,7 +158,6 @@ const EditProduct = (props: any) => {
             published: product?.info?.published,
             displayOrder: product?.info?.displayOrder,
             isFeatured: product?.info?.isFeatured,
-            // publishDate:product?.info?.publishDate ,
             tags: product?.tags,
             brands: product?.brands,
             keywords: product?.meta?.keywords,
@@ -105,7 +187,6 @@ const EditProduct = (props: any) => {
               published: values.published,
               displayOrder: values.displayOrder,
               isFeatured: values.isFeatured,
-              // publishDate: values.publishDate,
               tags: values.tags,
               brands: values.brands,
               keywords: values.keywords,
@@ -120,9 +201,6 @@ const EditProduct = (props: any) => {
               isFeaturedCategory: values.isFeaturedCategory,
               displayOrderCategory: values.displayOrderCategory,
             };
-            // console.log(values.keywords);
-            // console.log(data);
-
             handleSubmit(data);
             actions.setSubmitting(false);
           }}
@@ -170,7 +248,10 @@ const EditProduct = (props: any) => {
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <InventoryForm />
+                  <CategoryForm
+                    setCate={setCategoryData}
+                    categoryData={categogiesData}
+                  />
                 </div>
               </Form>
             );
