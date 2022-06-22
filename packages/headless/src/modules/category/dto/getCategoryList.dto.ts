@@ -2,7 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { getCategoryListAncestor, getCategoryListCategory, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse } from "models";
+import { getCategoryListAncestor, NestedCategoryList, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse } from "models";
 
 export class AncestorDto implements getCategoryListAncestor {
     @ApiProperty()
@@ -18,37 +18,43 @@ export class AncestorDto implements getCategoryListAncestor {
     level: number;
 }
 
-export class subCategoryListDto{
+export class subCategoryListDto {
     @ApiProperty()
     @IsOptional()
     @IsString()
     slug: string;
 
-    @ApiProperty({ type : [AncestorDto] })
+    @ApiProperty({ type: [AncestorDto] })
     @IsOptional()
     @IsArray()
     ancestors: AncestorDto[];
 
-    @ApiProperty({type : [Object]})
+    @ApiProperty({ type: [Object] })
     @IsOptional()
     @IsArray()
-    subCategories?:any[];
+    subCategories?: any[];
 }
 
-export class CategoryListDto implements getCategoryListCategory {
+export class NestedCategoryListDto implements NestedCategoryList {
     @ApiProperty()
     @IsString()
     slug: string;
 
-    @ApiProperty({ type : [AncestorDto] })
+    @ApiProperty({ type: [AncestorDto] })
     @IsArray()
     ancestors: AncestorDto[];
 
-    @ApiProperty({ type : [subCategoryListDto] })
+    @ApiProperty({ type: [subCategoryListDto] })
     @IsOptional()
-    @Type(()=>subCategoryListDto)
+    @Type(() => subCategoryListDto)
     @IsArray()
     subCategories?: subCategoryListDto[];
+}
+export class CategoryListDto {
+    @ApiProperty({ type: [NestedCategoryListDto] })
+    @Type(() => NestedCategoryListDto)
+    @IsArray()
+    categories: NestedCategoryListDto[];
 }
 
 export class getCategoryListSuccessResponseDto implements getCategoryListSuccessResponse {
@@ -56,9 +62,9 @@ export class getCategoryListSuccessResponseDto implements getCategoryListSuccess
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: [CategoryListDto] })
+    @ApiProperty({ type: CategoryListDto })
     @IsObject()
-    data: CategoryListDto[];
+    data: CategoryListDto;
 }
 
 export class getCategoryListErrorResponseDto implements getCategoryListErrorResponse {
