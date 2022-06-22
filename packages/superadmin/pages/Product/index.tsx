@@ -154,7 +154,7 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
 };
 
 export async function getServerSideProps() {
-  const productsList = await userAPI.getProducts(7);
+  const productsList = await userAPI.getProducts(1000);
   return {
     props: {
       productsList: productsList || [],
