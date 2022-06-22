@@ -32,3 +32,8 @@ export class RequestCategory {
   parentSlug: string;
 
 }
+
+export class responseCategory{
+  slug: string;
+  ancestors: Ancestor[];
+}

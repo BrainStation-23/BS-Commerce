@@ -1,7 +1,7 @@
 
 export interface ServiceSuccessResponse {
     /** Response object from service layer */
-    data: object | any;
+    data: any;
     /** Http code, but has no relation or dependency with http requests.
      * The code here is used as a standard for communicating with the
      * outer layer of service.
@@ -20,7 +20,7 @@ export interface ServiceErrorResponse {
     /** Descriptive error from a service layer */
     errors: DescriptiveError;
     /**Single string as summary of descriptive errors */
-    error: string | any;
+    error: any;
     /** Http code, but has no relation or dependency with http requests.
      * The code here is used as a standard for communicating with the
      * outer layer of service.

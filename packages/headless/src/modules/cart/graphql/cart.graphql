@@ -1,0 +1,34 @@
+type Item {
+  productId: String!
+  product: Product!
+  quantity: Int!
+}
+
+input ItemInput {
+  productId: String
+  quantity: Int
+}
+
+type Cart {
+  id: String!
+  userId: String!
+  items: [Item!]!
+}
+
+type CartResponse {
+  error: String
+  code: Int!
+  data: Cart
+}
+
+type Query {
+  getCart: CartResponse!
+}
+
+type Mutation {
+  addToCart(item: ItemInput): CartResponse!
+  deleteCart(cartId: String): CartResponse!
+  updateCartItem(item: ItemInput): CartResponse!
+  deleteCartItem(productId: String): CartResponse!
+  deleteAllCartItems: CartResponse!
+}

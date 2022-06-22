@@ -53,10 +53,6 @@ export class CreateManufacturerErrorResponseDto implements CreateManufacturerErr
     @ApiProperty()
     errors: DescriptiveError;
 }
-class Message {
-    @ApiProperty({ example: CreateManufacturerSuccessMessages.MANUFACTURER_CREATED_SUCCESSFULLY })
-    message: string | any;
-}
 
 class ManufacturerDataDto {
     @ApiProperty()
