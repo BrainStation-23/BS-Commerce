@@ -88,3 +88,12 @@ export async function updateProductRest(
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function deleteProductRest(productId: string): Promise<void> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.product}/${productId}`);
+    return res?.data as Product;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+}

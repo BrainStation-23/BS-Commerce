@@ -1,11 +1,10 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
- 
+
 import ProductInfoForm from "./forms/productInfoForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
-
 
 import { useRouter } from "next/router";
 import CategoryForm from "./forms/categoryForm";
@@ -66,7 +65,7 @@ const CreateProduct = () => {
     };
 
     console.log(newData);
-    userAPI.createProduct(newData);
+    userAPI.createProduct(newData, router);
   };
 
   return (
@@ -159,7 +158,7 @@ const CreateProduct = () => {
                     <i className="bi bi-save" />
                     <p className="float-end mx-1 my-0">Save</p>
                   </button>
-                  <button
+                  {/* <button
                     type="submit"
                     name="save-continue"
                     className="btn btn-primary m-1"
@@ -168,7 +167,7 @@ const CreateProduct = () => {
                     <p className="float-end mx-1 my-0">
                       Save and Continue Edit
                     </p>
-                  </button>
+                  </button> */}
                 </div>
               </div>
 

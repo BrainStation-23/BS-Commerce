@@ -4,6 +4,7 @@ import {
   createProductRest,
   getProductRest,
   updateProductRest,
+  deleteProductRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -19,6 +20,7 @@ const graphqlApi: apiFunction = {
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
+  deleteProduct: deleteProductRest,
 };
 
 const restApi: apiFunction = {
@@ -27,6 +29,7 @@ const restApi: apiFunction = {
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
+  deleteProduct: deleteProductRest,
 };
 
 export const userAPI: apiFunction =
