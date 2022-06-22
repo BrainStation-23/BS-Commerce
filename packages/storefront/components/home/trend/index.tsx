@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import axios from "axios";
 
-const TrendingProducts: FC = () => {
+const TrendingProducts = ({products}: any) => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
   let [filteredProduct, setProducts]: any = useState([]);
 
-  const products = useSelector(
-    (state: RootState) => state?.productsStore?.products
-  );
+  // const products = useSelector(
+  //   (state: RootState) => state?.productsStore?.products
+  // );
 
   useEffect(() => {
     const newProduct = products?.filter(
@@ -75,14 +75,14 @@ const TrendingProducts: FC = () => {
             </button>
           </li>
         </ul>
-        {filteredProduct?.length > 1 && (
+        {products?.length > 1 && (
           <SwiperGrid
             slidesPerViewmobile={2}
             slidesPerView768={3}
             slidesPerView980={5}
             rows={2}
           >
-            {filteredProduct?.map((product: any) => (
+            {products?.map((product: any) => (
               <SwiperSlide key={product.id}>
                 <Product product={product} />
               </SwiperSlide>

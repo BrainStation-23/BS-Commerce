@@ -7,14 +7,14 @@ const ProductInfo = (props: any) => {
     <div className="text-center py-4">
       <Link href="/product/1" passHref>
       <div className="text-inherit text-xl font-medium text-gray-600">
-        {product.title}
+        {product.info.name}
       </div>
       </Link>
       <p className="text-lg font-['arial'] text-gray-600 m-1">
-        {product.category}
+        {product.tags[0]}
       </p>
       <div className="text-lg font-semibold text-green-600">
-        {product.price}
+        {product.info.price}
       </div>
     </div>
   );

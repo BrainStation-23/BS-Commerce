@@ -25,7 +25,7 @@ const HomeComponent = ({products, featuredProducts}: any) => { //edited type. wa
       <ImageSlider />
       <HomeShipping />
       <div className="mb-4 md:mb-10">
-        <TrendingProducts />
+        <TrendingProducts products={products} />
       </div>
       <div className="mb-4 md:mb-10">
         <BannerPage />
