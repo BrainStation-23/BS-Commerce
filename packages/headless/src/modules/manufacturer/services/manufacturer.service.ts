@@ -1,5 +1,5 @@
 import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
-import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages, UpdateManufacturerResponse, UpdateManufacturerErrorMessages, UpdateManufacturerSuccessMessages, UpdateManufacturerSuccessResponse, DeleteManufacturerResponse, DeleteManufacturerErrorMessages, DeleteManufacturerSuccessMessages, GetManufacturerResponse, GetManufacturerSuccessMessages, GetManufacturerSuccessResponse } from 'models';
+import { GetManufacturersResponse, GetManufacturersSuccessMessages, GetManufacturersSuccessResponse, GetManufacturersErrorMessages, UpdateManufacturerResponse, UpdateManufacturerErrorMessages, UpdateManufacturerSuccessMessages, UpdateManufacturerSuccessResponse, DeleteManufacturerResponse, DeleteManufacturerErrorMessages, DeleteManufacturerSuccessMessages, GetManufacturerResponse, GetManufacturerSuccessMessages, GetManufacturerSuccessResponse, GetManufacturerErrorMessages } from 'models';
 import { CreateManufacturerResponse, CreateManufacturerSuccessMessages, CreateManufacturerSuccessResponse } from 'models';
 import { CreateManufacturerErrorMessages } from 'models'
 import { HttpStatus, Injectable } from '@nestjs/common';
@@ -73,7 +73,7 @@ export class ManufacturerService {
         const foundManufacturer = await this.manufacturerRepo.getManufacturer({ id: manufacturerId });
 
         if (!foundManufacturer) {
-            return this.helper.serviceResponse.errorResponse(GetManufacturersErrorMessages.MANUFACTURERS_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.errorResponse(GetManufacturerErrorMessages.MANUFACTURER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         }
 
         return this.helper.serviceResponse.successResponse({manufacturer: foundManufacturer, message: GetManufacturerSuccessMessages.MANUFACTURER_LOADED_SUCCESSFULLY}, HttpStatus.OK) as GetManufacturerSuccessResponse;
