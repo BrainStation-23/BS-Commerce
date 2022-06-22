@@ -16,7 +16,6 @@ export async function connectToDatabase(db: DB) {
         throw new Error('No database found to connect');
     }
   } catch (err) {
-    console.log(err);
     console.error('Error connecting to database');
   }
 }

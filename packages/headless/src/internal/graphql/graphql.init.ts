@@ -9,6 +9,10 @@ export const GraphqlInitModule = () => {
       typePaths: ['src/**/*.graphql'],
       path: '/graphql',
       playground: coreConfig.env === 'DEVELOPMENT' ? true : false,
+      cors: {
+        origin: '*',
+        credentials: true,
+      },
     }),
   ];
 };
