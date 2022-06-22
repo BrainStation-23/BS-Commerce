@@ -10,8 +10,8 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <h2>Products</h2>
-        <div className="float-end pb-2">
+        <div className="d-flex justify-content-between align-items-center mt-3">
+          <div className="fs-2">Products</div>
           <a className="btn btn-primary" href="/Product/Create">
             {/* <i className="fas fa-plus-square"></i> */}
             Add new
@@ -144,7 +144,7 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
           {/* <script>$(document).ready(function () {$('#delete-selected').attr("data-toggle", "modal").attr("data-target", "#delete-selected-action-confirmation");$('#delete-selected-action-confirmation-submit-button').attr("name", $("#delete-selected").attr("name"));$("#delete-selected").attr("name", "");if($("#delete-selected").attr("type") == "submit")$("#delete-selected").attr("type", "button");});</script> */}
           {/* </div> */}
         </div>
-        <div className="mt-2 pt-1">
+        <div>
           <SearchWindow setProducts={setProducts} />
           <ProductsList productsList={products} setProducts={setProducts} />
         </div>
@@ -154,7 +154,7 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
 };
 
 export async function getServerSideProps() {
-  const productsList = await userAPI.getProducts(7);
+  const productsList = await userAPI.getProducts(1000);
   return {
     props: {
       productsList: productsList || [],

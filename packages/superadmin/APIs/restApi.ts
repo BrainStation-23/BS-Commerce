@@ -13,21 +13,20 @@ export async function getUserRest(): Promise<User[] | undefined> {
   try {
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
 export async function createProductRest(
   data: CreateProductRequest,
-  router
+  router: any
 ): Promise<CreateProductRequest | undefined> {
   try {
     const response = await axios.post<CreateProductRequest>(`/product`, data);
     router.push("/Product");
     toast.success("Create Successful");
     return response.data as CreateProductRequest;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -41,8 +40,9 @@ export async function getProductsRest(
       `${apiEndPoints?.product}?skip=1&limit=${pageSize}`
     );
     return data?.data as Product[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
   }
 }
 
@@ -52,7 +52,7 @@ export async function getProductSearchRest(
   try {
     const { data } = await axios.get(`${apiEndPoints?.product}/sku/${search}`);
     return data?.data as Product;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
     toast.error(error?.response?.data?.error);
   }
@@ -63,9 +63,8 @@ export async function getProductRest(
 ): Promise<GetProductParams | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.product}/${data.productId}`);
-
-    return res?.data as Product;
-  } catch (error) {
+    return res?.data;
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -81,7 +80,7 @@ export async function updateProductRest(
     );
     toast.success("Edit Successful");
     return response.data as UpdateProductRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -94,7 +93,7 @@ export async function deleteProductRest(
     await axios.delete(`${apiEndPoints.product}/${productId}`);
     toast.success("Delete Successful");
     return true;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }

@@ -124,7 +124,7 @@ const CreateProduct = () => {
       brands: data.brands,
       categories: categories,
     };
-    userAPI.createProduct(newData, router);
+     userAPI.createProduct(newData, router);
   };
 
   return (

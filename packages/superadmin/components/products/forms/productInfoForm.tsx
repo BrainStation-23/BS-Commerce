@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Field, ErrorMessage } from "formik";
 
 import Tooltips from "../../global/tooltip";
 import CustomSelect from "./CustomSelect";
 
-const ProductInfoForm = () => {
+const ProductInfoForm: FC = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
@@ -14,24 +14,51 @@ const ProductInfoForm = () => {
 
   const tagsOptions = [
     {
-      label: "mobile",
-      value: "mobile",
+      label: "Tag1",
+      value: "Tag1",
     },
     {
-      label: "car",
-      value: "car",
+      label: "Tag2",
+      value: "Tag2",
     },
     {
-      label: "video",
-      value: "video",
+      label: "Tag3",
+      value: "Tag3",
     },
     {
-      label: "Fruit",
-      value: "Fruit",
+      label: "Tag4",
+      value: "Tag4",
     },
     {
-      label: "color",
-      value: "color",
+      label: "Tag5",
+      value: "Tag5",
+    },
+  ];
+
+  const brandOptions = [
+    {
+      label: "Daraz",
+      value: "Daraz",
+    },
+    {
+      label: "Pickaboo",
+      value: "Pickaboo",
+    },
+    {
+      label: "Chaldal",
+      value: "Chaldal",
+    },
+    {
+      label: "Bagdoom",
+      value: "Bagdoom",
+    },
+    {
+      label: "Othoba",
+      value: "Othoba",
+    },
+    {
+      label: "Ajkerdeal",
+      value: "Ajkerdeal",
     },
   ];
   return (
@@ -43,7 +70,7 @@ const ProductInfoForm = () => {
         id="product-info"
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
-        <button
+          <button
             className="btn invisible w-100 h-auto text-top m-0 p-0"
             type="button"
             data-bs-toggle="collapse"
@@ -489,7 +516,7 @@ const ProductInfoForm = () => {
                     className="custom-select w-100"
                     id="brands"
                     name="brands"
-                    options={tagsOptions}
+                    options={brandOptions}
                     component={CustomSelect}
                     placeholder="Select brands..."
                     isMulti={true}

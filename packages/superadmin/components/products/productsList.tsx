@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import Link from "next/link";
 
 import Table from "../global/table/table";
@@ -13,6 +13,8 @@ interface Props {
 
 const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   // const [checkAll, setCheckAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const onChangeForList = async (pageSize: number) => {
     const productsList = await userAPI.getProducts(pageSize);
@@ -22,9 +24,15 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   const onClickForDelete = async (id: string) => {
     const res = await userAPI.deleteProduct(id);
     if (res) {
-      onChangeForList(7);
+      onChangeForList(1000);
     }
   };
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return productsList.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, PageSize, productsList]);
 
   const columns = [
     // {
@@ -136,17 +144,20 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
         <div className="card-body">
           <p>
             Learn more about
-            <a href="#" style={{ textDecoration: "none" }}>
+            <a href="#" style={{ textDecoration: "none", marginLeft: "5px" }}>
               Product
             </a>
           </p>
-          <Table items={productsList} columns={columns} />
+          <Table items={currentTableData} columns={columns} />
 
           <div className="">
             {productsList?.length > 1 ? (
               <Pagination
-                list={productsList}
-                onChangeForList={onChangeForList}
+                currentPage={currentPage}
+                totalCount={productsList.length}
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
               />
             ) : null}
           </div>
