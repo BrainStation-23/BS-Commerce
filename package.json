@@ -20,7 +20,5 @@
     "dev": "run-p --print-label package:*",
     "build": "lerna run --parallel build"
   },
-  "dependencies": {
-    "react-redux": "^8.0.2"
-  }
+  "dependencies": {}
 }
