@@ -1,6 +1,4 @@
-import { extname } from "path";
 import { diskStorage } from 'multer';
-import { HttpException, HttpStatus } from "@nestjs/common";
 import { existsSync, mkdirSync } from "fs";
 import { multerConfig } from "config/multer";
 
@@ -13,7 +11,7 @@ export const multerOptions = {
     // Check the mimetypes of the file
     fileFilter: (req: any, file: any, cb: any) => {
         req.fileExtensionValidationError = false;
-        if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+        if (file.mimetype.match(multerConfig.fileExtensionRegex)) {
             cb(null, true, req.fileExtensionValidationError);
         } else {
             req.fileExtensionValidationError = true
@@ -24,7 +22,7 @@ export const multerOptions = {
     storage: diskStorage({
         // Destination path details
         destination: (req: any, file: Express.Multer.File, cb: any) => {
-            const uploadPath = `${multerConfig.dest}/${new Date().getFullYear()}/${new Date().getMonth()}//${new Date().getDate()}`;
+            const uploadPath = `${multerConfig.dest}/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`;
             // Create folder if doesn't exist
             if (!existsSync(uploadPath)) {
                 mkdirSync(uploadPath, { recursive: true });

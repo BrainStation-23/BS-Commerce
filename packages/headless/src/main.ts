@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import { NestFactory } from '@nestjs/core';
+import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js'
 import { AppModule } from './app.module';
 import { connectToDatabase } from './database/database.init';
 import { dbConfig } from 'config/database';
@@ -18,6 +19,7 @@ async function bootstrap() {
     allowedHeaders: "*",
     origin: "*"
   });
+  app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }))
   app.useGlobalPipes(new ValidationPipe());
   coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);

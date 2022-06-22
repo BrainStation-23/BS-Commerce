@@ -1,5 +1,4 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { UploadFileErrorMessages, UploadFileResponse } from 'models';
 import { Helper } from 'src/helper/helper.interface';
 

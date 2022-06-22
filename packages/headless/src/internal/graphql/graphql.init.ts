@@ -12,7 +12,7 @@ export const GraphqlInitModule = () => {
       cors: {
         origin: '*',
         credentials: true,
-      }
+      },
     }),
   ];
 };
