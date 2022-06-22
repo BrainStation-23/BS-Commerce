@@ -1,29 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartDropdown from "../../cart/cartDropdown/dropdownCart";
+import signout from "@/components/account/sign-out";
 
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = (props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState('null');
+
+  useEffect(() => {
+    setIsLoggedIn(JSON.stringify(localStorage.getItem('token')));
+  }, [])
+
   const links = [
     { name: "Register", link: "/account/sign-up" },
     { name: "Login", link: "/account/sign-in" },
     { name: "Wishlist", link: "/wishlist" },
+    { name: "Logout", link: "/home" },
   ];
   return (
     <div className="flex flex-row gap-x-3">
       <span className="uppercase my-0">
-        <Link href={links[0].link}>
-          <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
-            {links[0].name}
-          </a>
-        </Link>
-        <span className="mx-1">/</span>
-        <Link href={links[1].link}>
-          <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
-            {links[1].name}
-          </a>
-        </Link>
+        {isLoggedIn !== 'null' ? (
+          <Link href={links[0].link}>
+            <a
+              onClick={() => signout()}
+              className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+            >
+              {links[3].name}
+            </a>
+          </Link>
+        ) : (
+          <>
+            <Link href={links[0].link}>
+              <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
+                {links[0].name}
+              </a>
+            </Link>
+            <span className="mx-1">/</span>
+            <Link href={links[1].link}>
+              <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
+                {links[1].name}
+              </a>
+            </Link>
+          </>
+        )}
       </span>
       <Link href={links[2].link}>
         <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">

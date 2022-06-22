@@ -1,33 +1,27 @@
 import { userAPI } from "APIs";
-import axios from "axios";
-import { Field, Form, Formik, FormikValues } from "formik";
-import { SignInRequest } from "models";
+import { Field, Form, Formik } from "formik";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import {useCookies} from 'react-cookie';
+import { useCookies } from "react-cookie";
+import { CustomerSignInRequest } from "models";
+import { toast } from "react-toastify";
 
 const Signin = () => {
-  const [cookies, setCookie] = useCookies(['access_token', 'refresh_token']);
+  const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
 
-  const router = useRouter();
-  async function handleSignin(data: SignInRequest) {
-    try {
-      userAPI.signIn(data).then((response) => {
-        if(response?.code === 400) {
-          alert(response.error);
-        }
-        else {
-          localStorage.setItem("token", response?.data.token);
-          let expires = new Date();
-          expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
-          setCookie('access_token', response?.data.token, {path: '/', expires});
-          router.push('/home')
-        }
-      });
-    } catch(error) {
-      alert(error);
-    }
+  async function handleSignin(data: CustomerSignInRequest) {
+    userAPI.signIn(data).then((response) => {
+      if (response?.code != 200) {
+        //console.log(response.response.data.error);
+        alert(response.response.data.error);
+      } else {
+        localStorage.setItem("token", response?.data.token);
+        let expires = new Date();
+        expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
+        setCookie("access_token", response?.data.token, { path: "/", expires });
+        window.location.href = "/home";
+      }
+    });
   }
 
   return (
@@ -49,12 +43,14 @@ const Signin = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                username: "",
+                phone: "",
+                email: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  username: values.username,
+                  phone: values.phone,
+                  email: values.email,
                   password: values.password,
                 };
                 handleSignin(data);
@@ -69,9 +65,22 @@ const Signin = () => {
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="username"
-                        name="username"
-                        placeholder="Username"
+                        id="phone"
+                        name="phone"
+                        placeholder="Phone"
+                      />
+                      {/* <div className="errMsg text-red-600 outline-0">
+                        <ErrorMessage name="username" />
+                      </div> */}
+                    </div>
+
+                    <div className="mb-4">
+                      <Field
+                        type="text"
+                        className="w-full p-2 placeholder-gray-600 outline-0"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
                       />
                       {/* <div className="errMsg text-red-600 outline-0">
                         <ErrorMessage name="username" />
@@ -129,5 +138,6 @@ const Signin = () => {
 
 export default Signin;
 
-// phone no: 01715969546
-// Pass: P@ssword123
+// phone no: 012345673139
+//email: sbs@gmail.com
+// Pass: 123456

@@ -5,21 +5,20 @@ import Link from "next/link";
 import { registerSchema } from "../global/schemas/loginSchema";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 import axios from "axios";
-import { CreateUserRequest } from "models";
 import { userAPI } from "APIs";
+import { CreateCustomerRequest } from "models";
 
 const Signup = () => {
   const router = useRouter();
 
-  async function handleSignUp(data: CreateUserRequest) {
+  async function handleSignUp(data: CreateCustomerRequest) {
     try {
       userAPI.signUp(data).then((response) => {
         if(response?.code === 400) {
           alert(response.error);
         }
         else {
-          localStorage.setItem("token", response?.data.token);
-          router.push('/home')
+          router.push('/account/sign-in')
         }
       });
     } catch(error) {
@@ -48,15 +47,15 @@ const Signup = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                firstname: "",
-                lastname: "",
+                phone: "",
+                otp: "",
                 email: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  firstName: values.firstname,
-                  lastName: values.lastname,
+                  phone: values.phone,
+                  otp: values.otp,
                   email: values.email,
                   password: values.password,
                 };
@@ -71,9 +70,9 @@ const Signup = () => {
                       <Field
                         type="text"
                         className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="firstname"
-                        name="firstname"
-                        placeholder="First Name"
+                        id="phone"
+                        name="phone"
+                        placeholder="Phone"
                       />
                     </div>
 
@@ -81,9 +80,9 @@ const Signup = () => {
                       <Field
                         type="text"
                         className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="lastname"
-                        name="lastname"
-                        placeholder="Last Name"
+                        id="otp"
+                        name="otp"
+                        placeholder="Otp"
                       />
                     </div>
 
@@ -93,7 +92,7 @@ const Signup = () => {
                         className="w-full p-2 outline-0 placeholder-gray-600"
                         id="email"
                         name="email"
-                        placeholder="username"
+                        placeholder="Email"
                       />
                     </div>
 
