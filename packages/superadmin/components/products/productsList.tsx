@@ -20,28 +20,28 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   };
 
   const columns = [
-    {
-      label: (
-        <input
-          type="checkbox"
-          onClick={() => {
-            setCheckAll(!checkAll);
-          }}
-        ></input>
-      ),
-      path: "select",
-      content: (data: any, key: any, index: any) => (
-        <td className="text-center">
-          {checkAll && <input type="checkbox" value="" checked></input>}
-          {!checkAll && <input type="checkbox" value=""></input>}
-        </td>
-      ),
-    },
+    // {
+    //   label: (
+    //     <input
+    //       type="checkbox"
+    //       onClick={() => {
+    //         setCheckAll(!checkAll);
+    //       }}
+    //     ></input>
+    //   ),
+    //   path: "select",
+    //   content: (data: any, key: any, index: any) => (
+    //     <td className="text-center">
+    //       {checkAll && <input type="checkbox" value="" checked></input>}
+    //       {!checkAll && <input type="checkbox" value=""></input>}
+    //     </td>
+    //   ),
+    // },
     {
       label: "Picture",
       path: "url",
       content: (data: any, key: any, index: any) => (
-        <td>
+        <td className="text-center">
           <img
             src={`${data?.photos[0][key]}`}
             height="75px"
