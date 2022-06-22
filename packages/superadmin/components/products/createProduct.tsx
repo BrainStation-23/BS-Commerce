@@ -9,6 +9,7 @@ import { userAPI } from "../../APIs";
 import { useRouter } from "next/router";
 import CategoryForm from "./forms/categoryForm";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const router = useRouter();
@@ -58,7 +59,7 @@ const CreateProduct = () => {
     {
       id: 7,
       value: "Category 7",
-      isSelected: true,
+      isSelected: false,
       isFeatured: false,
       displayOrder: 0,
     },
@@ -73,7 +74,7 @@ const CreateProduct = () => {
 
   const handleSubmit = (data: any) => {
     console.log(categogiesData);
-
+    
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -124,7 +125,12 @@ const CreateProduct = () => {
       brands: data.brands,
       categories: categories,
     };
-     userAPI.createProduct(newData, router);
+    if(categories[0])
+    {
+      userAPI.createProduct(newData, router);
+    }
+    else
+      toast.error("You must select atleast one category");
   };
 
   return (
@@ -155,7 +161,7 @@ const CreateProduct = () => {
           photosID: "",
           photosTitle: "",
           displayOrderPhotos: "",
-          SelectedCategoryIds: "--Select--",
+          SelectedCategoryIds: 0,
           isFeaturedCategory: false,
           displayOrderCategory: 1,
           categoriesData: "",
@@ -248,7 +254,7 @@ const CreateProduct = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
-                <CategoryForm setCate={setCategoryData} categoryData={categogiesData}/>
+                <CategoryForm setCate={setCategoryData} categoryData={categogiesData} setFieldValue={formikprops.setFieldValue}/>
               </div>
             </Form>
           );

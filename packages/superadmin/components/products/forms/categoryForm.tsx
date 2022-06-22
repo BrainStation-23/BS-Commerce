@@ -2,9 +2,18 @@ import { ErrorMessage, Field } from "formik";
 import React from "react";
 import { useEffect, useState } from "react";
 import Tooltips from "../../global/tooltip";
+import { toast } from "react-toastify";
 
 const CategoryForm = (props: any) => {
-  const { setCate, categoryData } = props;
+  const { setCate, categoryData, setFieldValue } = props;
+  const [showTable, setShowTable] = useState(false);
+
+  const checkTable = () => {
+    const tmp = categoryData.filter((data) => (data.isSelected ? data : null));
+    // console.log("temp ", tmp);
+    const vv = tmp[0] ? true : false;
+    vv == showTable ? "" : setShowTable(vv);
+  };
 
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
@@ -25,10 +34,18 @@ const CategoryForm = (props: any) => {
     setCate(categoryData);
     setReload(!reload);
   };
+  // const formikProps = useFormikContext();
 
   const handleAddCategory = () => {
-    const isFeatured = document.getElementById("isFeaturedCategory").value;
     const categoryID = document.getElementById("SelectedCategoryIds").value;
+
+    if (categoryID == 0) {
+      toast.error("Please Select a Category");
+      return;
+    }
+    const isFeatured = document.getElementById("isFeaturedCategory").value;
+    console.log(isFeatured);
+
     const displayOrder = document.getElementById("displayOrderCategory").value;
     const newcat = categoryData.map((data, index) => {
       data.id == categoryID ? (
@@ -42,14 +59,14 @@ const CategoryForm = (props: any) => {
           {(data.displayOrder = displayOrder)}
         </>
       ) : (
-        console.log("mile nai", data.id)
+        ""
+        // console.log("mile nai", data.id)
       );
     });
-
     setCate(categoryData);
-    document.getElementById("isFeaturedCategory").value = false;
-    document.getElementById("SelectedCategoryIds").value = "--Select--";
-
+    setFieldValue("isFeaturedCategory", false);
+    setFieldValue("displayOrderCategory", 1);
+    setFieldValue("SelectedCategoryIds", 0);
     setReload(!reload);
     console.log(categoryData);
   };
@@ -100,13 +117,13 @@ const CategoryForm = (props: any) => {
                 </div>
               </div>
               <div className="col-md-9">
-                <div className="py-2">
+                <div className="input-group  py-1">
                   <Field
                     as="select"
                     id="SelectedCategoryIds"
                     name="SelectedCategoryIds"
                     data-role="multiselect"
-                    className="form-control"
+                    className="form-control single-line"
                     aria-disabled="false"
                   >
                     <option defaultValue={0} value={0} disabled={true}>
@@ -124,6 +141,9 @@ const CategoryForm = (props: any) => {
                       );
                     })}
                   </Field>
+                  <div className="pt-2" style={{ height: "10px" }}>
+                    <h2 className="required text-danger ">*</h2>
+                  </div>
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="SelectedCategoryIds" />
@@ -191,46 +211,52 @@ const CategoryForm = (props: any) => {
                 Add
               </button>
             </div>
-
-            <div className="my-3 py-3">
-              <table className="table table-bordered ">
-                <thead>
-                  <th className="text-center py-3">Category</th>
-                  <th className="text-center py-3">Feaured</th>
-                  <th className="text-center py-3">Display order</th>
-                  <th className="text-center py-3">Remove</th>
-                </thead>
-                <tbody>
-                  {categoryData?.map((data, index) => {
-                    if (data.isSelected)
-                      return (
-                        <React.Fragment key={index}>
-                          <tr>
-                            <td className="text-center">{data.value}</td>
-                            <td className="text-center">
-                              {data.isFeatured ? (
-                                <i className="bi bi-check-lg"></i>
-                              ) : (
-                                ""
-                              )}
-                            </td>
-                            <td className="text-center">{data.displayOrder}</td>
-                            <td className="text-center">
-                              <button
-                                className="mx-auto btn btn-primary"
-                                type="button"
-                                onClick={() => handleRemoveCategory(data.id)}
-                              >
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </React.Fragment>
-                      );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            {checkTable()}
+            {showTable ? (
+              <div className="my-3 py-3">
+                <table className="table table-bordered ">
+                  <thead>
+                    <th className="text-center py-3">Category</th>
+                    <th className="text-center py-3">Feaured</th>
+                    <th className="text-center py-3">Display order</th>
+                    <th className="text-center py-3">Remove</th>
+                  </thead>
+                  <tbody>
+                    {categoryData?.map((data, index) => {
+                      if (data.isSelected)
+                        return (
+                          <React.Fragment key={index}>
+                            <tr>
+                              <td className="text-center">{data.value}</td>
+                              <td className="text-center">
+                                {data.isFeatured ? (
+                                  <i className="bi bi-check-lg"></i>
+                                ) : (
+                                  ""
+                                )}
+                              </td>
+                              <td className="text-center">
+                                {data.displayOrder}
+                              </td>
+                              <td className="text-center">
+                                <button
+                                  className="mx-auto btn btn-primary"
+                                  type="button"
+                                  onClick={() => handleRemoveCategory(data.id)}
+                                >
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </React.Fragment>
+                        );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

@@ -2,12 +2,12 @@ import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 
 import ProductInfoForm from "./forms/productInfoForm";
-import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
 import { useEffect, useState } from "react";
 import CategoryForm from "./forms/categoryForm";
+import { toast } from "react-toastify";
 
 const EditProduct = (props: any) => {
   const { product } = props;
@@ -120,7 +120,12 @@ const EditProduct = (props: any) => {
     const id = product.id;
     console.log(newData);
 
-    const response = await userAPI.updateProduct(newData, id);
+    if(categories[0])
+    {
+      const response = await userAPI.updateProduct(newData, id);
+    }
+    else
+      toast.error("You must select a cateory");
   };
 
   const getCate = () => {
@@ -173,35 +178,35 @@ const EditProduct = (props: any) => {
             displayOrderCategory: product?.categories[0]?.displayOrder,
           }}
           onSubmit={(values, actions) => {
-            const data = {
-              productName: values.productName,
-              ShortDescription: values.ShortDescription,
-              FullDescription: values.FullDescription,
-              Sku: values.Sku,
-              OldPrice: values.OldPrice,
-              Price: values.Price,
-              ProductCost: values.ProductCost,
-              showOnHomePage: values.showOnHomePage,
-              includeInTopMenu: values.includeInTopMenu,
-              allowToSelectPageSize: values.allowToSelectPageSize,
-              published: values.published,
-              displayOrder: values.displayOrder,
-              isFeatured: values.isFeatured,
-              tags: values.tags,
-              brands: values.brands,
-              keywords: values.keywords,
-              metaTitle: values.metaTitle,
-              metaDescription: values.metaDescription,
-              metaFriendlyPageName: values.metaFriendlyPageName,
-              photosUrl: values.photosUrl,
-              photosID: values.photosID,
-              photosTitle: values.photosTitle,
-              displayOrderPhotos: values.displayOrderPhotos,
-              SelectedCategoryIds: values.SelectedCategoryIds,
-              isFeaturedCategory: values.isFeaturedCategory,
-              displayOrderCategory: values.displayOrderCategory,
-            };
-            handleSubmit(data);
+            // const data = {
+            //   productName: values.productName,
+            //   ShortDescription: values.ShortDescription,
+            //   FullDescription: values.FullDescription,
+            //   Sku: values.Sku,
+            //   OldPrice: values.OldPrice,
+            //   Price: values.Price,
+            //   ProductCost: values.ProductCost,
+            //   showOnHomePage: values.showOnHomePage,
+            //   includeInTopMenu: values.includeInTopMenu,
+            //   allowToSelectPageSize: values.allowToSelectPageSize,
+            //   published: values.published,
+            //   displayOrder: values.displayOrder,
+            //   isFeatured: values.isFeatured,
+            //   tags: values.tags,
+            //   brands: values.brands,
+            //   keywords: values.keywords,
+            //   metaTitle: values.metaTitle,
+            //   metaDescription: values.metaDescription,
+            //   metaFriendlyPageName: values.metaFriendlyPageName,
+            //   photosUrl: values.photosUrl,
+            //   photosID: values.photosID,
+            //   photosTitle: values.photosTitle,
+            //   displayOrderPhotos: values.displayOrderPhotos,
+            //   SelectedCategoryIds: values.SelectedCategoryIds,
+            //   isFeaturedCategory: values.isFeaturedCategory,
+            //   displayOrderCategory: values.displayOrderCategory,
+            // };
+            handleSubmit(values);
             actions.setSubmitting(false);
           }}
           validationSchema={productSchema}
@@ -248,11 +253,8 @@ const EditProduct = (props: any) => {
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <CategoryForm
-                    setCate={setCategoryData}
-                    categoryData={categogiesData}
-                  />
-                </div>
+                  <CategoryForm setCate={setCategoryData} categoryData={categogiesData} setFieldValue={formikprops.setFieldValue}/>
+              </div>
               </Form>
             );
           }}
