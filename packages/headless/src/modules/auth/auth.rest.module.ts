@@ -5,15 +5,15 @@ import { UserRepository } from 'src/modules/user/repositories';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
-import { authConfig } from 'config/auth';
-import { JwtStrategy } from './guards/jwt-strategy';
+import { adminAuthConfig } from 'config/auth';
+import { AdminJwtStrategy } from './guards/jwt-strategy';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: authConfig.jwt_key!,
+      secret: adminAuthConfig.jwt_key!,
       signOptions: {
-        expiresIn: authConfig.expiration_time!,
+        expiresIn: adminAuthConfig.expiration_time!,
       },
     }),
   ],
@@ -25,7 +25,7 @@ import { JwtStrategy } from './guards/jwt-strategy';
       provide: IUserDatabase,
       useClass: ResolveDatabaseDependency('USER'),
     },
-    JwtStrategy,
+    AdminJwtStrategy,
   ],
 })
 export class AuthModule { }
