@@ -12,11 +12,18 @@ interface Props {
 }
 
 const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
-  const [checkAll, setCheckAll] = useState(false);
+  // const [checkAll, setCheckAll] = useState(false);
 
   const onChangeForList = async (pageSize: number) => {
     const productsList = await userAPI.getProducts(pageSize);
     setProducts(productsList);
+  };
+
+  const onClickForDelete = async (id: string) => {
+    const res = await userAPI.deleteProduct(id);
+    if (res) {
+      onChangeForList(7);
+    }
   };
 
   const columns = [
@@ -95,11 +102,26 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
           >
             <button className="btn btn-default">
               <span>
-                <i className="bi bi-pencil p-1 align-middle"></i>
+                <i className="bi bi-pencil me-2 align-middle"></i>
               </span>
               Edit
             </button>
           </Link>
+        </td>
+      ),
+    },
+    {
+      label: "Delete",
+      path: "id",
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">
+          <button
+            className="btn btn-default"
+            onClick={() => onClickForDelete(data.id)}
+          >
+            <i className="bi bi-pencil align-middle me-2"></i>
+            Delete
+          </button>
         </td>
       ),
     },

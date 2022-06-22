@@ -89,10 +89,13 @@ export async function updateProductRest(
   }
 }
 
-export async function deleteProductRest(productId: string): Promise<void> {
+export async function deleteProductRest(
+  productId: string
+): Promise<boolean | undefined> {
   try {
     const res = await axios.delete(`${apiEndPoints.product}/${productId}`);
-    return res?.data as Product;
+    toast.success("Delete Successful");
+    return true;
   } catch (error) {
     toast.error(error?.response?.data?.message);
   }

@@ -42,5 +42,5 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
-  deleteProduct: (productId: string) => Promise<void>;
+  deleteProduct: (productId: string) => Promise<boolean | undefined>;
 }
