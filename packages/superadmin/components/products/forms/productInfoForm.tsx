@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Field, ErrorMessage } from "formik";
 
 import Tooltips from "../../global/tooltip";
 import CustomSelect from "./CustomSelect";
 
-const ProductInfoForm = () => {
+const ProductInfoForm: FC = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {

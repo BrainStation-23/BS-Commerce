@@ -144,7 +144,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
         <div className="card-body">
           <p>
             Learn more about
-            <a href="#" style={{ textDecoration: "none" }}>
+            <a href="#" style={{ textDecoration: "none", marginLeft: "5px" }}>
               Product
             </a>
           </p>

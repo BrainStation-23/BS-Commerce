@@ -45,13 +45,9 @@ const SearchWindow = ({ setProducts }: any) => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 mt-5">
+              <div className="card rounded border-1 mt-3">
                 <div className="card-header">
-                  <i
-                    className="bi bi-search float-start mx-2"
-                    aria-hidden="true"
-                  />
-                  <p className="float mx-2">Search</p>
+                  <span className="ms-2 fs-4">Search</span>
                 </div>
                 <div className="card-body">
                   <div className="form-group row py-1">
