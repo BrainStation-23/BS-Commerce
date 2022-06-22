@@ -120,29 +120,27 @@ const EditProduct = (props: any) => {
     const id = product.id;
     console.log(newData);
 
-    if(categories[0])
-    {
+    if (categories[0]) {
       const response = await userAPI.updateProduct(newData, id);
-    }
-    else
-      toast.error("You must select a cateory");
+    } else toast.error("You must select a cateory");
   };
 
-  const getCate = () => {
+  const getCategoryData = () => {
     categogiesData.map((category: any, index) => {
-      const pCat = product?.categories?.filter((pCategory: any) => {
-        return pCategory.id == category.id ? pCategory : null;
-      });
-      if (pCat[0]) {
-        category.isFeatured = pCat[0].isFeatured;
+      const productCategories = product?.categories?.filter(
+        (productCategory: any) => {
+          return productCategory.id == category.id ? productCategory : null;
+        }
+      );
+      if (productCategories[0]) {
+        category.isFeatured = productCategories[0].isFeatured;
         category.isSelected = true;
-        category.displayOrder = pCat[0].displayOrder;
+        category.displayOrder = productCategories[0].displayOrder;
       }
     });
-    console.log(categogiesData);
   };
   useEffect(() => {
-    getCate();
+    getCategoryData();
   }, []);
 
   return (
@@ -178,34 +176,6 @@ const EditProduct = (props: any) => {
             displayOrderCategory: product?.categories[0]?.displayOrder,
           }}
           onSubmit={(values, actions) => {
-            // const data = {
-            //   productName: values.productName,
-            //   ShortDescription: values.ShortDescription,
-            //   FullDescription: values.FullDescription,
-            //   Sku: values.Sku,
-            //   OldPrice: values.OldPrice,
-            //   Price: values.Price,
-            //   ProductCost: values.ProductCost,
-            //   showOnHomePage: values.showOnHomePage,
-            //   includeInTopMenu: values.includeInTopMenu,
-            //   allowToSelectPageSize: values.allowToSelectPageSize,
-            //   published: values.published,
-            //   displayOrder: values.displayOrder,
-            //   isFeatured: values.isFeatured,
-            //   tags: values.tags,
-            //   brands: values.brands,
-            //   keywords: values.keywords,
-            //   metaTitle: values.metaTitle,
-            //   metaDescription: values.metaDescription,
-            //   metaFriendlyPageName: values.metaFriendlyPageName,
-            //   photosUrl: values.photosUrl,
-            //   photosID: values.photosID,
-            //   photosTitle: values.photosTitle,
-            //   displayOrderPhotos: values.displayOrderPhotos,
-            //   SelectedCategoryIds: values.SelectedCategoryIds,
-            //   isFeaturedCategory: values.isFeaturedCategory,
-            //   displayOrderCategory: values.displayOrderCategory,
-            // };
             handleSubmit(values);
             actions.setSubmitting(false);
           }}
@@ -253,8 +223,12 @@ const EditProduct = (props: any) => {
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <CategoryForm setCate={setCategoryData} categoryData={categogiesData} setFieldValue={formikprops.setFieldValue}/>
-              </div>
+                  <CategoryForm
+                    setCategoryData={setCategoryData}
+                    categoryData={categogiesData}
+                    setFieldValue={formikprops.setFieldValue}
+                  />
+                </div>
               </Form>
             );
           }}

@@ -1,57 +1,48 @@
-import { ErrorMessage, Field } from "formik";
 import React from "react";
-import { useEffect, useState } from "react";
-import Tooltips from "../../global/tooltip";
+import { useState } from "react";
+import { ErrorMessage, Field } from "formik";
 import { toast } from "react-toastify";
 
+import Tooltips from "../../global/tooltip";
+
 const CategoryForm = (props: any) => {
-  const { setCate, categoryData, setFieldValue } = props;
+  const { setCategoryData, categoryData, setFieldValue } = props;
   const [showTable, setShowTable] = useState(false);
+  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [reload, setReload] = useState(false);
 
   const checkTable = () => {
-    const tmp = categoryData.filter((data) => (data.isSelected ? data : null));
-    // console.log("temp ", tmp);
-    const vv = tmp[0] ? true : false;
-    vv == showTable ? "" : setShowTable(vv);
+    const totalSelectedCategory = categoryData.filter((data: any) =>
+      data.isSelected ? data : null
+    );
+    const isSelectedZero = totalSelectedCategory[0] ? true : false;
+    isSelectedZero == showTable ? "" : setShowTable(isSelectedZero);
   };
-
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
     if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
     else setBtnToggler("bi-plus-lg");
   };
-  const [reload, setReload] = useState(false);
-  const handleRemoveCategory = (id) => {
-    const categoryID = document.getElementById("SelectedCategoryIds").value;
-    categoryData.map((data, index) => {
-      data.id == id ? (
-        <>{(data.isSelected = false)}</>
-      ) : (
-        console.log("mile nai !! ", data.id)
-      );
+  const handleRemoveCategory = (id: any) => {
+    categoryData.map((data: any, index: any) => {
+      data.id == id ? <>{(data.isSelected = false)}</> : "";
     });
-    setCate(categoryData);
+    setCategoryData(categoryData);
     setReload(!reload);
   };
-  // const formikProps = useFormikContext();
 
   const handleAddCategory = () => {
     const categoryID = document.getElementById("SelectedCategoryIds").value;
-
     if (categoryID == 0) {
       toast.error("Please Select a Category");
       return;
     }
     const isFeatured = document.getElementById("isFeaturedCategory").value;
-    console.log(isFeatured);
-
     const displayOrder = document.getElementById("displayOrderCategory").value;
-    const newcat = categoryData.map((data, index) => {
+    const newcat = categoryData.map((data: any, index: any) => {
       data.id == categoryID ? (
         <>
           {(data.isSelected = true)}
-          {console.log(isFeatured)}
           {
             (data.isFeatured =
               isFeatured == "false" || isFeatured == false ? false : true)
@@ -60,17 +51,14 @@ const CategoryForm = (props: any) => {
         </>
       ) : (
         ""
-        // console.log("mile nai", data.id)
       );
     });
-    setCate(categoryData);
+    setCategoryData(categoryData);
     setFieldValue("isFeaturedCategory", false);
     setFieldValue("displayOrderCategory", 1);
     setFieldValue("SelectedCategoryIds", 0);
     setReload(!reload);
-    console.log(categoryData);
   };
-  useEffect(() => {});
   return (
     <>
       <div
@@ -129,7 +117,7 @@ const CategoryForm = (props: any) => {
                     <option defaultValue={0} value={0} disabled={true}>
                       --Select--
                     </option>
-                    {categoryData?.map((data, index) => {
+                    {categoryData?.map((data: any, index: any) => {
                       return (
                         <option
                           key={index}
@@ -222,7 +210,7 @@ const CategoryForm = (props: any) => {
                     <th className="text-center py-3">Remove</th>
                   </thead>
                   <tbody>
-                    {categoryData?.map((data, index) => {
+                    {categoryData?.map((data: any, index: any) => {
                       if (data.isSelected)
                         return (
                           <React.Fragment key={index}>

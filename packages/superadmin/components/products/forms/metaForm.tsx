@@ -1,7 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import Tooltips from "../../global/tooltip";
-import CustomSelect from "./CustomSelect";
+import CustomSelect from "../CustomSelect.component";
 
 const MetaForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");

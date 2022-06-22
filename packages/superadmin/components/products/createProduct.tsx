@@ -73,8 +73,6 @@ const CreateProduct = () => {
   ]);
 
   const handleSubmit = (data: any) => {
-    console.log(categogiesData);
-    
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -96,7 +94,6 @@ const CreateProduct = () => {
       description: data.metaDescription,
       friendlyPageName: data.metaFriendlyPageName,
     };
-
     const photos = {
       url: data.photosUrl,
       id: data.photosID,
@@ -125,12 +122,9 @@ const CreateProduct = () => {
       brands: data.brands,
       categories: categories,
     };
-    if(categories[0])
-    {
+    if (categories[0]) {
       userAPI.createProduct(newData, router);
-    }
-    else
-      toast.error("You must select atleast one category");
+    } else toast.error("You must select atleast one category");
   };
 
   return (
@@ -167,37 +161,7 @@ const CreateProduct = () => {
           categoriesData: "",
         }}
         onSubmit={(values, actions) => {
-          const data = {
-            productName: values.productName,
-            ShortDescription: values.ShortDescription,
-            FullDescription: values.FullDescription,
-            Sku: values.Sku,
-            OldPrice: values.OldPrice,
-            Price: values.Price,
-            ProductCost: values.ProductCost,
-            showOnHomePage: values.showOnHomePage,
-            includeInTopMenu: values.includeInTopMenu,
-            allowToSelectPageSize: values.allowToSelectPageSize,
-            published: values.published,
-            displayOrder: values.displayOrder,
-            isFeatured: values.isFeatured,
-            publishDate: values.publishDate,
-            tags: values.tags,
-            brands: values.brands,
-            keywords: values.keywords,
-            metaTitle: values.metaTitle,
-            metaDescription: values.metaDescription,
-            metaFriendlyPageName: values.metaFriendlyPageName,
-            photosUrl: values.photosUrl,
-            photosID: values.photosID,
-            photosTitle: values.photosTitle,
-            displayOrderPhotos: values.displayOrderPhotos,
-            SelectedCategoryIds: values.SelectedCategoryIds,
-            isFeaturedCategory: values.isFeaturedCategory,
-            displayOrderCategory: values.displayOrderCategory,
-          };
-          // console.log(data);
-          handleSubmit(data);
+          handleSubmit(values);
           actions.setSubmitting(false);
         }}
         validationSchema={productSchema}
@@ -254,7 +218,11 @@ const CreateProduct = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
-                <CategoryForm setCate={setCategoryData} categoryData={categogiesData} setFieldValue={formikprops.setFieldValue}/>
+                <CategoryForm
+                  setCategoryData={setCategoryData}
+                  categoryData={categogiesData}
+                  setFieldValue={formikprops.setFieldValue}
+                />
               </div>
             </Form>
           );
