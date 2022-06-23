@@ -4,21 +4,25 @@ import Link from "next/link";
 
 import { registerSchema } from "../global/schemas/loginSchema";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-
-interface Values {
-  firstname: string;
-  lastname: string;
-  phone: string;
-  password: string;
-  confirm_password: string;
-}
+import { userAPI } from "APIs";
+import { CreateCustomerRequest } from "models";
 
 const Signup = () => {
   const router = useRouter();
-  const baseUrl = "http://localhost:3000";
 
-  async function handleSignin(data: Values) {
-    console.log(data);
+  async function handleSignUp(data: CreateCustomerRequest) {
+    try {
+      userAPI.signUp(data).then((response: any) => {
+        if(response?.code !== 200) {
+          alert(response.response.data.error);
+        }
+        else {
+          router.push('/account/sign-in')
+        }
+      });
+    } catch(error) {
+      alert(error);
+    }
   }
 
   return (
@@ -42,64 +46,53 @@ const Signup = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                firstname: "",
-                lastname: "",
                 phone: "",
+                otp: "",
+                email: "",
                 password: "",
-                confirm_password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  firstName: values.firstname,
-                  lastName: values.lastname,
-                  phone: values.phone,
+                  phone: "01717584939",
+                  otp: "1234",
+                  email: values.email,
                   password: values.password,
                 };
-                handleSignin(data);
+                handleSignUp(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={registerSchema}
             >
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <Field
                         type="text"
-                        className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="firstname"
-                        name="firstname"
-                        placeholder="First Name"
-                      />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="name" />
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <Field
-                        type="text"
-                        className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="lastname"
-                        name="lastname"
-                        placeholder="Last Name"
-                      />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="name" />
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <Field
-                        type="phone"
                         className="w-full p-2 outline-0 placeholder-gray-600"
                         id="phone"
                         name="phone"
                         placeholder="Phone"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="phone" />
-                      </div>
+                    </div> */}
+
+                    {/* <div className="mb-4">
+                      <Field
+                        type="text"
+                        className="w-full p-2 outline-0 placeholder-gray-600"
+                        id="otp"
+                        name="otp"
+                        placeholder="Otp"
+                      />
+                    </div> */}
+
+                    <div className="mb-4">
+                      <Field
+                        type="email"
+                        className="w-full p-2 outline-0 placeholder-gray-600"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                      />
                     </div>
 
                     <div className="mb-4">
@@ -110,22 +103,6 @@ const Signup = () => {
                         name="password"
                         placeholder="Password"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="password" />
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <Field
-                        type="password"
-                        className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="confirm_password"
-                        name="confirm_password"
-                        placeholder="Confirm Password"
-                      />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="confirm_password" />
-                      </div>
                     </div>
 
                     <button

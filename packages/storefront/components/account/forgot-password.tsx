@@ -1,15 +1,24 @@
+import { userAPI } from "APIs";
+import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { ForgotPasswordRequest } from "models";
 import Link from "next/link";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import { loginSchema } from "../global/schemas/loginSchema";
 
-interface Values {
-  phone: string;
-}
-
-const ForgotPassword = () => {
-  const handleForgotPassword = (values: Values) => {
-    console.log(values);
+const ForgotPassword = (data: ForgotPasswordRequest) => {
+  async function handleForgotPassword(values: ForgotPasswordRequest) {
+    try {
+      userAPI.forgotPassword(data).then((response) => {
+        if(response?.code === 400) {
+          alert(response.error);
+        }
+        else {
+         console.log(response)
+        }
+      });
+    } catch(error) {
+      alert(error);
+    }
   };
 
   return (
@@ -33,16 +42,15 @@ const ForgotPassword = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                phone: "",
+                username: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: values.phone,
+                  username: values.username,
                 };
                 handleForgotPassword(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={loginSchema}
             >
               {(formikprops) => {
                 return (
@@ -51,13 +59,10 @@ const ForgotPassword = () => {
                       <Field
                         type="text"
                         className="w-full p-2 outline-0 placeholder-gray-600"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
                       />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="phone" />
-                      </div>
                     </div>
 
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
