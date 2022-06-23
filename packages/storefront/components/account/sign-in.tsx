@@ -12,7 +12,6 @@ const Signin = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     userAPI.signIn(data).then((response: any) => {
       if (response?.code != 200) {
-        //console.log(response.response.data.error);
         alert(response.response.data.error);
       } else {
         localStorage.setItem("token", response?.data.token);

@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { registerSchema } from "../global/schemas/loginSchema";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import axios from "axios";
 import { userAPI } from "APIs";
 import { CreateCustomerRequest } from "models";
 
@@ -13,9 +12,9 @@ const Signup = () => {
 
   async function handleSignUp(data: CreateCustomerRequest) {
     try {
-      userAPI.signUp(data).then((response) => {
-        if(response?.code === 400) {
-          alert(response.error);
+      userAPI.signUp(data).then((response: any) => {
+        if(response?.code !== 200) {
+          alert(response.response.data.error);
         }
         else {
           router.push('/account/sign-in')
