@@ -25,8 +25,6 @@ function validatePassword(password: any) {
   return true;
 }
 
-
-
 function isEmailLengthValid(email: any) {
   if (!email) return false;
   const parts = email.split("@");
@@ -35,8 +33,8 @@ function isEmailLengthValid(email: any) {
 }
 
 export const loginSchema = object().shape({
-    email: string()
-    .email("This field should be a valid email address")
+  username: string()
+    .email("This field should be a valid username")
     .max(100, "This field must be at most 100 characters long")
     .required("This field must not be empty")
     .test(
@@ -44,6 +42,7 @@ export const loginSchema = object().shape({
       "The part before @ of the email can be maximum 64 characters ",
       (email) => isEmailLengthValid(email)
     ),
-  password: string().required("This field must not be empty"),
+  password: string()
+    .required("This field must not be empty")
+    .min(6, "Password must be at least 6 character long"),
 });
-

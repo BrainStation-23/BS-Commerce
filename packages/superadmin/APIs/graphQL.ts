@@ -1,7 +1,12 @@
 import { GET_PRODUCTS } from "../graphqlSchema/queries/productQueries";
 import { User } from "../utils/types";
 import client from "../graphqlSchema/apollo-client";
-import { CreateProductRequest, Product } from "models";
+import {
+  CreateProductRequest,
+  Product,
+  SignInRequest,
+  SignInSuccessResponse,
+} from "models";
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
   const { data } = await client.query({
@@ -18,5 +23,11 @@ export async function getProductsGraphQL(): Promise<Product[] | undefined> {
 }
 
 export async function getProductSearchGraphQL(): Promise<Product | undefined> {
+  return;
+}
+
+export async function signinGraphQL(
+  data: SignInRequest
+): Promise<SignInSuccessResponse | undefined> {
   return;
 }

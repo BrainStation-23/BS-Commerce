@@ -3,15 +3,19 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import { loginSchema } from "../../components/global/schemas/loginSchema";
+import { SignInRequest } from "models";
+import { userAPI } from "../../APIs";
 
-interface Values {
-  email: string;
-  password: string;
-}
+// interface Values {
+//   email: string;
+//   password: string;
+// }
 
 const Login = () => {
-  function handleLogin(data: FormikValues) {
-    console.log(data);
+  async function handleLogin(data: SignInRequest) {
+    const user = await userAPI.signin(data);
+
+    console.log(user);
   }
 
   return (
@@ -25,12 +29,12 @@ const Login = () => {
       {/* input form */}
       <Formik
         initialValues={{
-          email: "admin@yourstore.com",
-          password: "Admin123#",
+          username: "nafi@test.com",
+          password: "123456",
         }}
         onSubmit={(values, actions) => {
           const data = {
-            email: values.email,
+            username: values.username,
             password: values.password,
           };
           handleLogin(data);
@@ -60,7 +64,7 @@ const Login = () => {
                       type="email"
                       className="form-control "
                       id="email"
-                      name="email"
+                      name="username"
                       placeholder=""
                     />
                     <div className="text-danger">
@@ -105,9 +109,9 @@ const Login = () => {
                 type="submit"
                 className="btn btn-primary mt-4 mb-4 px-5 py-1"
               >
-                <Link href="/">
-                  <a className="text-decoration-none text-white">LOG IN</a>
-                </Link>
+                {/* <Link href={""}> */}
+                <a className="text-decoration-none text-white">LOG IN</a>
+                {/* </Link> */}
               </button>
             </Form>
           );

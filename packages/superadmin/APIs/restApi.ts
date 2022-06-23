@@ -5,9 +5,11 @@ import {
   CreateProductRequest,
   UpdateProductRequest,
 } from "../../models/src/product";
+import { SignInRequest, SignInSuccessResponse } from "models";
 import { User } from "../utils/types";
 import { Product } from "models";
 import { toast } from "react-toastify";
+import { NextRouter } from "next/router";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -84,6 +86,24 @@ export async function updateProductRest(
     toast.success("Edit Successful");
     return response.data as UpdateProductRequest;
   } catch (error) {
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function signinRest(
+  data: SignInRequest,
+  router: NextRouter
+): Promise<SignInSuccessResponse | undefined> {
+  try {
+    const response = await axios.post<UpdateProductRequest>(
+      `${apiEndPoints.signin}`,
+      data
+    );
+    // router.push("/");
+    toast.success("Successfully signed in!");
+    return response.data as SignInSuccessResponse;
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
