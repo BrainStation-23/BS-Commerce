@@ -118,18 +118,42 @@ const Signin = () => {
                 );
               }}
             </Formik>
-            <div>
+            <div className="flex flex-wrap">
               <div className="text-decoration-none mt-3">
                 <Link data-testid="create-account-link" href="/account/sign-up">
                   <a
                     data-testid="create-account-page"
-                    className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light"
+                    className="text-decoration-none text-gray-600 hover:text-green-600/100 font-weight-light"
                   >
                     Create account
                   </a>
                 </Link>
               </div>
-              
+              <div className="mt-3">
+                <p className="text-gray-600 ml-1">or sign in with</p>
+              </div>
+              <div className="flex flex-wrap">
+                <button className="mt-3 flex flex-wrap">
+                  <img
+                    className="md:ml-2 lg:ml-2 xl:ml-2 mt-1"
+                    src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg"
+                    height={15}
+                    width={15}
+                  />
+                  <p className="ml-2 mt-1 text-xs">Google</p>
+                </button>
+                <div className="mt-3">
+                  <p className="text-gray-600 ml-1">or</p>
+                </div>
+                <button className="mt-3 flex flex-wrap">
+                  <img
+                    src="https://cdn.cdnlogo.com/logos/f/9/facebook.svg"
+                    height={38}
+                    width={35}
+                  />
+                  <p className="mt-1 text-xs">Facebook</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
