@@ -1,10 +1,12 @@
-import { useState } from "react";
-import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
-import { loginSchema } from "../../components/global/schemas/loginSchema";
 import { SignInRequest } from "models";
+import { useAppDispatch } from "../../redux-hooks";
+
 import { userAPI } from "../../APIs";
+import { saveToken } from "../../toolkit/AuthSlice";
+import { loginSchema } from "../../components/global/schemas/loginSchema";
 
 // interface Values {
 //   email: string;
@@ -12,10 +14,14 @@ import { userAPI } from "../../APIs";
 // }
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   async function handleLogin(data: SignInRequest) {
-    const user = await userAPI.signin(data);
-
-    console.log(user);
+    const response = await userAPI.signin(data, router);
+    if (response?.data.token) {
+      dispatch(saveToken(response?.data.token!));
+    }
+    console.log(response);
   }
 
   return (

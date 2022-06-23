@@ -1,3 +1,4 @@
+import { NextRouter } from "next/router";
 import { GET_PRODUCTS } from "../graphqlSchema/queries/productQueries";
 import { User } from "../utils/types";
 import client from "../graphqlSchema/apollo-client";
@@ -27,7 +28,8 @@ export async function getProductSearchGraphQL(): Promise<Product | undefined> {
 }
 
 export async function signinGraphQL(
-  data: SignInRequest
+  data: SignInRequest,
+  router: NextRouter
 ): Promise<SignInSuccessResponse | undefined> {
   return;
 }

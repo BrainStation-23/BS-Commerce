@@ -1,11 +1,13 @@
+import { NextRouter } from "next/router";
 import {
   Product,
   UpdateProductRequest,
   SignInRequest,
-  SignInResponse,
+  SignInSuccessResponse,
 } from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
+
 export interface User {
   id?: string;
   firstName: string;
@@ -46,5 +48,8 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
-  signin: (data: SignInRequest) => Promise<SignInResponse | undefined>;
+  signin: (
+    data: SignInRequest,
+    router: NextRouter
+  ) => Promise<SignInSuccessResponse | undefined>;
 }
