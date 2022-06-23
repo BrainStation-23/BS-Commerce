@@ -5,8 +5,9 @@ import CreateNewManufacturer from "./add-new/forms/manufacturerInfo";
 import DisplayOrders from "./add-new/forms/displayOrder";
 import SEO from "./add-new/forms/seo";
 import { userAPI } from "../../APIs";
-
+import { useRouter } from "next/router";
 const EditManufacturer = (props: any) => {
+  const router = useRouter();
   const { manufacturer } = props;
 
   const handleSubmit = async (data: any) => {
@@ -26,16 +27,16 @@ const EditManufacturer = (props: any) => {
     const id = manufacturer.manufacturer.id;
     // console.log(id);
     // console.log(newData);
-    
-    const response = await userAPI.updateManufacturer(newData, id);
+
+    const response = await userAPI.updateManufacturer(newData, id, router);
   };
   console.log(manufacturer);
-  
+
   return (
     <>
       {manufacturer ? (
         <Formik
-            initialValues={{
+          initialValues={{
             name: manufacturer?.manufacturer?.name,
             description: manufacturer?.manufacturer?.description,
             picture: manufacturer?.manufacturer?.picture,
@@ -49,22 +50,21 @@ const EditManufacturer = (props: any) => {
           onSubmit={(values, actions) => {
             // console.log(values,"**")
             const data = {
-                name: values.name,
-                description: values.description,
-                picture: values.picture,
-                isPublished: values.isPublished,
-                displayOrder: values.displayOrder,
-                metaKeyword: values.metaKeyword,
-                metaDescription: values.metaDescription,
-                metaTitle: values.metaTitle,
-                seftn: values.seftn,
-                
-              };
-              // console.log(data,"##")
-              handleSubmit(data);
-              actions.setSubmitting(false);
-            }}
-            validationSchema={manufactureSchema}
+              name: values.name,
+              description: values.description,
+              picture: values.picture,
+              isPublished: values.isPublished,
+              displayOrder: values.displayOrder,
+              metaKeyword: values.metaKeyword,
+              metaDescription: values.metaDescription,
+              metaTitle: values.metaTitle,
+              seftn: values.seftn,
+            };
+            // console.log(data,"##")
+            handleSubmit(data);
+            actions.setSubmitting(false);
+          }}
+          validationSchema={manufactureSchema}
         >
           {(formikprops) => {
             return (
@@ -73,7 +73,10 @@ const EditManufacturer = (props: any) => {
                   <h1 className="float-start">
                     Edit Manufacturer details
                     <span className="fs-5 p-3">
-                      <a href="/Admin/Manufacturer/list" className="text-decoration-none ">
+                      <a
+                        href="/Admin/Manufacturer/list"
+                        className="text-decoration-none "
+                      >
                         <i className="bi bi-arrow-left-circle-fill p-2" />
                         Back to Manufacturer list
                       </a>
@@ -106,9 +109,9 @@ const EditManufacturer = (props: any) => {
                 </div>
 
                 <div className="mt-4">
-                    <CreateNewManufacturer />
-                    <DisplayOrders />
-                    <SEO />
+                  <CreateNewManufacturer />
+                  <DisplayOrders />
+                  <SEO />
                 </div>
               </Form>
             );
@@ -116,7 +119,7 @@ const EditManufacturer = (props: any) => {
         </Formik>
       ) : (
         ""
-      )} 
+      )}
     </>
   );
 };

@@ -158,11 +158,11 @@ export async function getSingleManufacturerRest(
   manufacturerId: any
 ): Promise<any | undefined> {
   try {
-    console.log("*",data)
+    console.log("*", data);
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
-    const res = await axios.get(`manufacturers/${data}`,{
+    const res = await axios.get(`manufacturers/${data}`, {
       headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
       },
     });
     console.log(res.data);
@@ -176,17 +176,19 @@ export async function getSingleManufacturerRest(
 export async function updateManufacturerRest(
   data: UpdateManufacturerRequest,
   id: string,
+  router
 ): Promise<UpdateManufacturerRequest | undefined> {
   try {
-    const response = await axios.patch<UpdateManufacturerRequest>(`manufacturers/${id}`,
-    data,
-    {
-      headers: {
+    const response = await axios.patch<UpdateManufacturerRequest>(
+      `manufacturers/${id}`,
+      data,
+      {
+        headers: {
           Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
-      },
-      
-    });
-    console.log(response.data);
+        },
+      }
+    );
+    router.push("/Admin/Manufacturer/list");
     toast.success("Edit Successful");
     return response.data as UpdateManufacturerRequest;
   } catch (error) {
