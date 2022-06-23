@@ -2,15 +2,20 @@ import { FC, useState } from "react";
 import { usePagination } from "./usePagination";
 
 interface Props {
-  list: any;
-  onChangeForList: (pageSize: number) => void;
+  setCurrentPage: any;
+  totalCount: any;
+  currentPage: any;
+  pageSize: any;
+  setPageSize: any;
 }
 
-const Pagination: FC<Props> = ({ list, onChangeForList }) => {
-  const [pageSize, setPageSize] = useState(7);
-  const [currentPage, onPageChange] = useState(1);
-  const totalCount = list?.length;
-
+const Pagination: FC<Props> = ({
+  setCurrentPage,
+  totalCount,
+  currentPage,
+  pageSize,
+  setPageSize,
+}) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -18,11 +23,11 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
   });
 
   const onNext = () => {
-    onPageChange(currentPage + 1);
+    setCurrentPage(currentPage + 1);
   };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1);
+    setCurrentPage(currentPage - 1);
   };
 
   let lastPage = paginationRange?.[paginationRange.length - 1];
@@ -33,7 +38,7 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
         <ul className="pagination">
           <li
             className={`page-item ${currentPage === 1 ? "disabled" : null} `}
-            onClick={onPrevious}
+            onClick={currentPage === 1 ? () => {} : onPrevious}
           >
             <span className="page-link">
               <i className="bi bi-caret-left-fill align-middle"></i>
@@ -45,6 +50,7 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
                 currentPage === pageNumber ? "active" : null
               } `}
               key={pageNumber}
+              onClick={() => setCurrentPage(pageNumber)}
             >
               <a className="page-link" href="#">
                 {pageNumber}
@@ -55,7 +61,7 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
             className={`page-item ${
               lastPage === currentPage ? "disabled" : null
             }`}
-            onClick={onNext}
+            onClick={lastPage === currentPage ? () => {} : onNext}
           >
             <span className="page-link">
               <i className="bi bi-caret-right-fill align-middle"></i>
@@ -69,7 +75,7 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => {
-            onChangeForList(+e.target.value);
+            setCurrentPage(1);
             setPageSize(+e.target.value);
           }}
         >
@@ -82,9 +88,9 @@ const Pagination: FC<Props> = ({ list, onChangeForList }) => {
         <div className="ms-2">Items</div>
       </div>
       <div className="d-flex align-items-center justify-content-center">
-        {list.length && (
+        {totalCount && (
           <div className="me-3">
-            1-{list.length} of {list.length} items
+            1-{totalCount} of {totalCount} items
           </div>
         )}
         <div>

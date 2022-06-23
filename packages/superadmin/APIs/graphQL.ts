@@ -20,3 +20,11 @@ export async function getProductsGraphQL(): Promise<Product[] | undefined> {
 export async function getProductSearchGraphQL(): Promise<Product | undefined> {
   return;
 }
+
+export async function createAdminGraphql(): Promise<User | undefined> {
+  return;
+}
+
+export async function getAdminsGraphql(): Promise<User[] | undefined> {
+  return;
+}

@@ -42,4 +42,25 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
+  createAdmin: (data: User, cb: any) => Promise<User | undefined>;
+  getAdmins: () => Promise<User[] | undefined>;
+}
+
+export interface adminCreate {
+  id?: string;
+  firstName: string;
+  lastName: string;
+  displayName?: string;
+  phone?: string;
+  username?: string;
+  email: string;
+  provider?: string;
+  providerData?: object;
+  additionalProviderData?: object;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: number;
+  gender?: string;
+  addresses?: Address[];
+  status?: string;
+  password?: string;
 }

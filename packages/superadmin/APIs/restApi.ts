@@ -88,3 +88,27 @@ export async function updateProductRest(
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function createAdminRest(
+  data: User,
+  cb: any
+): Promise<User | undefined> {
+  try {
+    await axios.post(`${apiEndPoints.auth}/signup`, data);
+    toast.success("Create Successful");
+    cb();
+    return;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getAdminsRest(): Promise<User[] | undefined> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.user}`);
+    return data?.data as User[];
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
