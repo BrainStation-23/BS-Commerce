@@ -1,19 +1,22 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 export interface subCategoryList {
+    name: string;
     slug: string;
+    imageId: string;
     ancestors: getCategoryListAncestor[];
     subCategories?: any[];
 }
 export interface NestedCategoryList {
+    name: string;
     slug: string;
+    imageId: string;
     ancestors: getCategoryListAncestor[];
     subCategories?: subCategoryList[];
 }
 export interface getCategoryList {
     categories: NestedCategoryList[];
 }
-
 export interface getCategoryListAncestor {
     name: string;
     slug: string;

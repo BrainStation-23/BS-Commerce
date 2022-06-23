@@ -20,9 +20,16 @@ export class AncestorDto implements getCategoryListAncestor {
 
 export class subCategoryListDto {
     @ApiProperty()
-    @IsOptional()
+    @IsString()
+    name: string;
+    
+    @ApiProperty()
     @IsString()
     slug: string;
+
+    @ApiProperty()
+    @IsString()
+    imageId: string;
 
     @ApiProperty({ type: [AncestorDto] })
     @IsOptional()
@@ -36,9 +43,18 @@ export class subCategoryListDto {
 }
 
 export class NestedCategoryListDto implements NestedCategoryList {
+
+    @ApiProperty()
+    @IsString()
+    name: string;
+
     @ApiProperty()
     @IsString()
     slug: string;
+
+    @ApiProperty()
+    @IsString()
+    imageId: string;
 
     @ApiProperty({ type: [AncestorDto] })
     @IsArray()

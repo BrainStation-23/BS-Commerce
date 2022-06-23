@@ -37,7 +37,7 @@ export class CategoryDatabase implements ICategoryDatabase {
     }
 
     async getCategoryList(): Promise<responseCategory[] | null> {
-        let categories = await CategoryModel.find({}).select('slug ancestors -_id').lean();
+        let categories = await CategoryModel.find({}).select('name imageId slug ancestors -_id').lean();
         let category: any = this.generateCategoryTree(categories);
         return category;
     }
