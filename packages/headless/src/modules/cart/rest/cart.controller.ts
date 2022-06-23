@@ -15,7 +15,7 @@ import { Response } from 'express';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddToCartSuccessResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
 import { getCartErrorResponseDto, getCartSuccessResponseDto } from '../dto/getCart.dto';
 import { deleteCartErrorResponseDto, deleteCartRequestDto, deleteCartSuccessResponseDto } from '../dto/deleteCart.dto';
@@ -23,9 +23,10 @@ import { updateCartItemErrorResponseDto, updateCartItemRequestDto, updateCartIte
 import { deleteCartItemErrorResponseDto, deleteCartItemRequestDto, deleteCartItemSuccessResponseDto } from '../dto/deleteCartItem.dto';
 import { deleteAllCartItemsErrorResponseDto, deleteAllCartItemsSuccessResponseDto } from '../dto/deleteAllCartItems.dto';
 
+@Controller('cart')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
-@Controller('cart')
+@ApiTags('Cart API')
 export class CartController {
   constructor(private cartService: CartService) { }
 
