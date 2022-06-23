@@ -220,7 +220,7 @@ const CategoryForm = (props: any) => {
                                 {data.isFeatured ? (
                                   <i className="bi bi-check-lg"></i>
                                 ) : (
-                                  ""
+                                  "X"
                                 )}
                               </td>
                               <td className="text-center">

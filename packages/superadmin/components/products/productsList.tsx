@@ -122,6 +122,28 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       ),
     },
     {
+      label: "View",
+      path: "id",
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">
+          <Link
+            href={{
+              pathname: `/Product/View/[id]`,
+              query: { id: data?.[key] },
+            }}
+            passHref
+          >
+            <button className="btn btn-default">
+              <span>
+                <i className="bi bi-eye me-2 align-middle"></i>
+              </span>
+              View
+            </button>
+          </Link>
+        </td>
+      ),
+    },
+    {
       label: "Delete",
       path: "id",
       content: (data: any, key: any, index: any) => (
