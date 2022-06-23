@@ -112,17 +112,16 @@ const Header: NextComponentType = () => {
   }, []);
 
   // put the pathname in 'includes' where header needs to be hidden
-  /*
-  if (pathname.includes("/contact")) {
+
+  if (pathname.includes("/checkout")) {
     return null;
   }
-  */
 
   return (
     <>
       {/* Top portion */}
       <header className="hidden lg:flex justify-center py-2 border-b border-slate-200">
-        <div className="flex justify-between container text-sm px-3">
+        <div className="flex justify-between container text-sm px-4">
           <div className="space-x-2">
             <Language />
             <span>|</span>
@@ -166,9 +165,9 @@ const Header: NextComponentType = () => {
         </div>
       </div>
       {/* Navbar */}
-      <nav className={`flex justify-center lg:px-4 ${stickyClass}`}>
-        <div className="container">
-          <div className="flex flex-row items-center px-4 lg:px-0">
+      <nav className={`flex justify-center ${stickyClass}`}>
+        <div className="container px-4">
+          <div className="flex flex-row items-center">
             <div
               className="flex flex-row items-center relative rounded-lg mb-3 lg:mb-0 lg:rounded-t-xl lg:rounded-b-none bg-green-600 text-white px-4 py-2 lg:py-3 font-medium w-full lg:w-56 cursor-pointer mr-0 lg:mr-2"
               onClick={toggleOpen}
@@ -203,7 +202,7 @@ const Header: NextComponentType = () => {
             </div>
 
             <div
-              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-11/12 md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
+              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-[calc(464px-2rem)] w-dnd md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
                 isOpen ? "h-[350px]" : "h-0 opacity-0"
               }`}
             >
@@ -236,8 +235,8 @@ const Header: NextComponentType = () => {
             </div>
             {/* Menu */}
             <div
-              className={`shadow-2xl fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-all duration-300 ease-linear ${
-                menu ? "left-0" : "-left-72"
+              className={`fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-[left] duration-300 ease-linear ${
+                menu ? "left-0 dnd-shadow" : "-left-72"
               }`}
             >
               <svg

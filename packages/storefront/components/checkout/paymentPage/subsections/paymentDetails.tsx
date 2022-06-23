@@ -19,7 +19,8 @@ interface FormData {
   postalCode: string;
 }
 
-const PaymentDetails = () => {
+const PaymentDetails = (props: any) => {
+  const { setModal } = props;
   const initialValues = {
     cardNumber: "",
     nameOnCard: "",
@@ -38,7 +39,6 @@ const PaymentDetails = () => {
   const [showShippingForm, setShowShippingForm] = useState(false);
 
   const handlePaymentSubmit = (data: FormData) => {
-    console.log(data);
   };
 
   return (

@@ -33,16 +33,15 @@ const Footer: NextComponentType = () => {
   };
 
   // put the pathname in 'includes' where footer needs to be hidden
-  /*
-  if (pathname.includes("/contact")) {
+
+  if (pathname.includes("/checkout")) {
     return null;
   }
-  */
 
   return (
     <>
       <div className="flex justify-center py-4 mb-3 lg:py-16 container mx-auto">
-        <div className="flex flex-col items-center gap-y-10 px-4 md:flex-row md:flex-wrap md:items-start">
+        <div className="flex flex-col items-center gap-y-10 px-4 lg:px-0 md:flex-row md:flex-wrap md:items-start lg:w-full">
           {/* 1st portion */}
           <div className="flex flex-col items-center text-center md:w-full md:text-left md:items-start lg:w-1/3 lg:pr-4">
             <span className="font-black text-xl mb-2">BS Commerce</span>

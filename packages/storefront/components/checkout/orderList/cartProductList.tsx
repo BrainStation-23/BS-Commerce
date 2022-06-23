@@ -1,10 +1,10 @@
 import React from "react";
-import { checkoutProducts } from "../../../allData/checkout-products.json"
+import checkoutProducts  from "../../../allData/checkout-products.json"
 
 const CartProductList = () => {
   return (
     <>
-      {checkoutProducts.map((checkoutProduct, index) => {
+      {checkoutProducts["checkoutProducts"].map((checkoutProduct, index) => {
         return (
           <React.Fragment key={index}>
             <div className="row text-sm mt-5 mr-3">

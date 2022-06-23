@@ -1,13 +1,14 @@
 import { getUserRest } from "./restApi";
 import { getUserGraphQl } from "./graphQL";
 import { config } from "config";
+import { apiFunction } from "utils/types";
 
-const graphqlApi = {
+const graphqlApi:apiFunction = {
     getUser: getUserGraphQl,
 }
 
-const restApi = {
+const restApi:apiFunction = {
     getUser: getUserRest
 }
 
-export const userAPI = config.apiService === 'GRAPHQL' ? graphqlApi : restApi
+export const userAPI:apiFunction = config?.apiService === 'GRAPHQL' ? graphqlApi : restApi
