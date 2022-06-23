@@ -6,7 +6,7 @@ import { multerConfig } from "config/multer";
 export const multerOptions = {
     // File size limits
     limits: {
-        fileSize: +multerConfig.maxSize,
+        fileSize: +multerConfig.maxFileSize,
     },
     // Check the mimetypes of the file
     fileFilter: (req: any, file: any, cb: any) => {

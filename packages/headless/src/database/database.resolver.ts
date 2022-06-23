@@ -10,7 +10,17 @@ import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 
-type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'MANUFACTURER' | 'CATEGORY' | 'CART' | 'CUSTOMER_AUTH' | 'COMPARE' | 'MEDIA';
+type CLASS_NAME =
+  'WISHLIST'
+  | 'USER'
+  | 'PRODUCT'
+  | 'MANUFACTURER'
+  | 'CATEGORY'
+  | 'CART'
+  | 'CUSTOMER_AUTH'
+  | 'COMPARE'
+  | 'MEDIA';
+
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
