@@ -1,43 +1,38 @@
-import { MediaService } from '../services';
-import { Args, Context, GqlExecutionContext, Mutation, Resolver } from '@nestjs/graphql';
-import { UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from '../config/storage.config';
+
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import * as GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { createWriteStream, existsSync, mkdirSync, unlink } from 'fs';
 import { FileUpload } from 'graphql-upload';
-import path from 'path';
-import os from 'os'
 import { multerConfig } from 'config/multer';
-import { URL } from 'url';
+import { coreConfig } from 'config/core';
 
 @Resolver()
 export class MediaResolver {
-  constructor(private mediaService: MediaService) { }
 
   @Mutation()
-  async uploadFile(@Args({ name: 'file', type: () => GraphQLUpload }) fileUpload: any,@Context() context: any) {
+  async uploadFile(@Args({ name: 'file', type: () => GraphQLUpload }) fileUpload: any,) {
     const file = (await fileUpload.promise) as FileUpload;
     const { createReadStream, filename } = file;
     const uploadPath = `${multerConfig.dest}/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`;
+
     // Create folder if doesn't exist
     if (!existsSync(uploadPath)) {
       mkdirSync(uploadPath, { recursive: true });
     }
 
-    const url = await new Promise((res, rej) =>
+    const url = await new Promise((resolve, reject) =>
       createReadStream()
         .pipe(createWriteStream(`${uploadPath}/${filename}`))
-        .on('error', rej)
+        .on('error', reject)
         .on('finish', () => {
-          // Delete the tmp file uploaded
           unlink(uploadPath, () => {
-            res(`${uploadPath}/${filename}`)
+            resolve(`${uploadPath}/${filename}`);
           })
         })
-    )
+    );
+
     return {
-      url
+      url: `${coreConfig.baseUrl}/${coreConfig.graphqlPathPrefix}/${url}`
     }
   }
 }

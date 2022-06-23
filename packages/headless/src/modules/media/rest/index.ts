@@ -23,8 +23,7 @@ export class MediaController {
     status: HttpStatus.BAD_REQUEST
   })
   async upload(@Res({ passthrough: true }) res: Response, @Req() req: Request) {
-    const url = req.protocol + '://' + req.headers.host;
-    const { code, ...response } = await this.mediaService.upload(req, url);
+    const { code, ...response } = await this.mediaService.upload(req);
     res.status(code);
     return { code, ...response };
   }
