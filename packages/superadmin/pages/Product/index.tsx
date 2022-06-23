@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
   const [products, setProducts] = useState(productsList);
-  console.log(products);
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -147,7 +146,7 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
         </div>
         <div className="mt-2 pt-1">
           <SearchWindow setProducts={setProducts} />
-          <ProductsList productsList={products} />
+          <ProductsList productsList={products} setProducts={setProducts} />
         </div>
       </main>
     </>
@@ -155,10 +154,10 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
 };
 
 export async function getServerSideProps() {
-  const productsList = await userAPI.getProducts();
+  const productsList = await userAPI.getProducts(7);
   return {
     props: {
-      productsList: productsList,
+      productsList: productsList || [],
     },
   };
 }

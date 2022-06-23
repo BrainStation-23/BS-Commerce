@@ -1,25 +1,37 @@
-import { getUserRest, getProductsRest, getProductSearchRest, getCategoryRest } from "./restApi";
 import {
-  getUserGraphQl,
+  getUserRest,
+  getProductsRest,
+  getProductSearchRest,
+  createProductRest,
+  getProductRest,
+  updateProductRest,
+  getCategoryRest,
+} from "./restApi";
+import {
   getProductsGraphQL,
   getProductSearchGraphQL,
   getCategoryGraphQL,
+  createProductGraphQl,
 } from "./graphQL";
 import { config } from "../config/index";
 import { apiFunction } from "../utils/types";
 
 const graphqlApi: apiFunction = {
-  getUser: getUserGraphQl,
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
   getCategory: getCategoryGraphQL,
+  createProduct: createProductRest,
+  updateProduct: updateProductRest,
+  getProduct: getProductRest,
 };
 
 const restApi: apiFunction = {
-  getUser: getUserRest,
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
-  getCategory: getCategoryRest
+  getCategory: getCategoryRest,
+  createProduct: createProductRest,
+  updateProduct: updateProductRest,
+  getProduct: getProductRest,
 };
 
 export const userAPI: apiFunction =

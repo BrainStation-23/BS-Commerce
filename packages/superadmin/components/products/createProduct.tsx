@@ -1,61 +1,138 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
-
-import PricesForm from "./forms/pricesForm";
-import ShippingForm from "./forms/shippingForm";
-import InventoryForm from "./forms/inventoryForm";
+ 
 import ProductInfoForm from "./forms/productInfoForm";
+import PhotosForm from "./forms/photosForm";
+import MetaForm from "./forms/metaForm";
+import { userAPI } from "../../APIs";
+
+
+import { useRouter } from "next/router";
+import CategoryForm from "./forms/categoryForm";
 
 const CreateProduct = () => {
+  const router = useRouter();
+
+  const handleSubmit = (data: any) => {
+    const info = {
+      name: data.productName,
+      shortDescription: data.ShortDescription,
+      fullDescription: data.FullDescription,
+      sku: data.Sku,
+      price: data.Price,
+      oldPrice: data.OldPrice,
+      cost: data.ProductCost,
+      showOnHomePage: data.showOnHomePage,
+      includeInTopMenu: data.includeInTopMenu,
+      allowToSelectPageSize: data.allowToSelectPageSize,
+      published: data.published,
+      displayOrder: data.displayOrder,
+      isFeatured: data.isFeatured,
+      // publishDate: "2022-06-20T09:06:25.239Z",
+      // publishDate: data.publishDate,
+    };
+    const meta = {
+      keywords: data.keywords,
+      title: data.metaTitle,
+      description: data.metaDescription,
+      friendlyPageName: data.metaFriendlyPageName,
+    };
+
+    const photos = {
+      url: data.photosUrl,
+      id: data.photosID,
+      title: data.photosTitle,
+      displayOrder: `${data.displayOrderPhotos}`,
+      alt: "image",
+    };
+    const categories = {
+      id: data.SelectedCategoryIds,
+      isFeatured: data.isFeaturedCategory,
+      displayOrder: data.displayOrderCategory,
+    };
+
+    console.log(info);
+    console.log(meta);
+    console.log(photos);
+    console.log(categories);
+
+    const newData = {
+      info: info,
+      meta: meta,
+      tags: data.tags,
+      photos: [photos],
+      brands: data.brands,
+      categories: [categories],
+    };
+
+    console.log(newData);
+    userAPI.createProduct(newData);
+  };
+
   return (
     <>
       <Formik
         initialValues={{
           productName: "",
           ShortDescription: "",
+          FullDescription: "",
           Sku: "",
-          SelectedCategoryIds: "--Select--",
           OldPrice: 0,
           Price: 0,
           ProductCost: 0,
-          IsTaxExempt: true,
-          SelectedDiscountIds: "--Select--",
-          TaxCategoryId: "--Select--",
-          ManageInventoryMethodId: "Don't track inventory",
-          OrderMinimumQuantity: 0,
-          OrderMaximumQuantity: 10000,
-          AllowedQuantities: "",
-          NotReturnable: false,
-          IsShipEnabled: false,
-          Weight: 0,
-          Length: 0,
-          Width: 0,
-          Height: 0,
+          showOnHomePage: false,
+          includeInTopMenu: false,
+          allowToSelectPageSize: false,
+          published: false,
+          displayOrder: 0,
+          isFeatured: false,
+          publishDate: "",
+          tags: "",
+          brands: "",
+          keywords: "",
+          metaTitle: "",
+          metaDescription: "",
+          metaFriendlyPageName: "",
+          photosUrl: "",
+          photosID: "",
+          photosTitle: "",
+          displayOrderPhotos: "",
+          SelectedCategoryIds: "--Select--",
+          isFeaturedCategory: false,
+          displayOrderCategory: 0,
         }}
         onSubmit={(values, actions) => {
           const data = {
             productName: values.productName,
             ShortDescription: values.ShortDescription,
+            FullDescription: values.FullDescription,
             Sku: values.Sku,
-            SelectedCategoryIds: values.SelectedCategoryIds,
             OldPrice: values.OldPrice,
             Price: values.Price,
-            IsTaxExempt: values.IsTaxExempt,
-            SelectedDiscountIds: values.SelectedDiscountIds,
-            TaxCategoryId: values.TaxCategoryId,
             ProductCost: values.ProductCost,
-            ManageInventoryMethodId: values.ManageInventoryMethodId,
-            OrderMinimumQuantity: values.OrderMinimumQuantity,
-            OrderMaximumQuantity: values.OrderMaximumQuantity,
-            AllowedQuantities: values.AllowedQuantities,
-            NotReturnable: values.NotReturnable,
-            Weight: values.Weight,
-            Length: values.Length,
-            Width: values.Width,
-            Height: values.Height,
+            showOnHomePage: values.showOnHomePage,
+            includeInTopMenu: values.includeInTopMenu,
+            allowToSelectPageSize: values.allowToSelectPageSize,
+            published: values.published,
+            displayOrder: values.displayOrder,
+            isFeatured: values.isFeatured,
+            publishDate: values.publishDate,
+            tags: values.tags,
+            brands: values.brands,
+            keywords: values.keywords,
+            metaTitle: values.metaTitle,
+            metaDescription: values.metaDescription,
+            metaFriendlyPageName: values.metaFriendlyPageName,
+            photosUrl: values.photosUrl,
+            photosID: values.photosID,
+            photosTitle: values.photosTitle,
+            displayOrderPhotos: values.displayOrderPhotos,
+            SelectedCategoryIds: values.SelectedCategoryIds,
+            isFeaturedCategory: values.isFeaturedCategory,
+            displayOrderCategory: values.displayOrderCategory,
           };
           console.log(data);
-          // handleSearchSubmit(data);
+          handleSubmit(data);
           actions.setSubmitting(false);
         }}
         validationSchema={productSchema}
@@ -110,9 +187,9 @@ const CreateProduct = () => {
 
               <div className="mt-4">
                 <ProductInfoForm />
-                <PricesForm />
-                <ShippingForm />
-                <InventoryForm />
+                <MetaForm />
+                <PhotosForm />
+                <CategoryForm />
               </div>
             </Form>
           );

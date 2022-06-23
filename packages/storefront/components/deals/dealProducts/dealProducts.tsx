@@ -1,7 +1,10 @@
+import axios from "axios";
 import type { NextComponentType } from "next";
+import { useEffect, useState } from "react";
 import productData from "../../../allData/product-data.json";
 import DealProductCard from "./dealProductCard/dealProductCard";
 const DealProductSegment: NextComponentType = () => {
+
   return (
     <>
       <div>

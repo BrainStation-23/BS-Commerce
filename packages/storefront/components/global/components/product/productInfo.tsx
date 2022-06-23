@@ -1,26 +1,29 @@
 import React from "react";
 import Icon from "../icon";
 
-const ProductInfo = (props: any) => {
-  const { product }: any = props;
+import { Product } from "models";
+
+interface SingleProduct {
+  product: Product
+}
+
+const ProductInfo = (props: SingleProduct) => {
+  const { product } = props;
   return (
     <div>
       <div className="px-6">
         <div className="text-base font-medium text-gray-600">
-          {product.title}
+          {product.info.name}
         </div>
         <p className="text-xs font-['arial'] text-gray-600 py-2">
-          {product.category}
+          {product.tags[0]}
         </p>
         <p className="text-base font-semibold text-green-600">
-          {(
-            product.price -
-            (product.price * product.discountPercentage) / 100.0
-          ).toFixed(0)}
-          {product.price ? (
+          {product.info.price}
+          {product.info.oldPrice ? (
             <span className="text-xs font-semibold text-black ml-2">
               <s>$</s>
-              {product.price ? <s>{product.price}</s> : null}
+              {product.info.oldPrice ? <s>{product.info.oldPrice}</s> : null}
             </span>
           ) : (
             <div></div>

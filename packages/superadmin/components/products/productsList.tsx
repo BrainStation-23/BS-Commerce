@@ -4,15 +4,20 @@ import Link from "next/link";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 import { Product } from "models";
+import { userAPI } from "../../APIs";
 
 interface Props {
   productsList: Product[];
+  setProducts: any;
 }
 
-const ProductsList: FC<Props> = ({ productsList }) => {
-  const [pageSize, setPageSize] = useState(7);
-  const [currentPage, onPageChange] = useState(1);
+const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   const [checkAll, setCheckAll] = useState(false);
+
+  const onChangeForList = async (pageSize: number) => {
+    const productsList = await userAPI.getProducts(pageSize);
+    setProducts(productsList);
+  };
 
   const columns = [
     {
@@ -59,12 +64,16 @@ const ProductsList: FC<Props> = ({ productsList }) => {
     {
       label: "Price",
       path: "price",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data?.info[key]}</td>
+      ),
     },
     {
-      label: "Stock quantity",
+      label: "Display Order",
       path: "displayOrder",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data?.info[key]}</td>
+      ),
     },
     {
       label: "Published",
@@ -109,13 +118,10 @@ const ProductsList: FC<Props> = ({ productsList }) => {
           <Table items={productsList} columns={columns} />
 
           <div className="">
-            {productsList.length > 1 ? (
+            {productsList?.length > 1 ? (
               <Pagination
                 list={productsList}
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-                currentPage={currentPage}
-                onPageChange={onPageChange}
+                onChangeForList={onChangeForList}
               />
             ) : null}
           </div>
