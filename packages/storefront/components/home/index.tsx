@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import type { NextComponentType } from "next";
 
 import ImageSlider from "@/components/home/imageSlider";
@@ -16,8 +16,11 @@ import productData from "../../allData/product-data.json";
 
 const HomeComponent = ({products, featuredProducts}: any) => { //edited type. was const HomeComponent: NextComponentType = () => {}
   const dispatch = useDispatch();
+  //const productsData = useSelector((state: any) => state.products)
+  console.log(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).products));
+
   useEffect(() => {
-    dispatch(storeProducts(productData.products));
+    dispatch(storeProducts(products));
   }, []);
 
   return (
