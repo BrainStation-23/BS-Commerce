@@ -1,14 +1,32 @@
+import { userAPI } from "APIs";
 import type { NextPage } from "next";
 
 import CartComponent from "../components/cart/index";
-const Cart: NextPage = () => {
-  return (
-    <>
-      <div className="">
-        <CartComponent />
-      </div>
-    </>
-  );
+const newData = {
+    productId: "101",
+    quantity: 2,
 };
+userAPI.addToCart(newData);
+const Cart: NextPage = ({ cartData }: any) => {
+    // console.log("From Cart", cartData);
+    return (
+
+        <>
+            <div className="">
+                <CartComponent />
+            </div>
+        </>
+    );
+};
+
+export async function getServerSideProps(context: any) {
+    const res = await userAPI.getCart();
+
+    return {
+        props: {
+            cartData: res,
+        },
+    };
+}
 
 export default Cart;

@@ -1,4 +1,4 @@
-import { forgotPasswordRest, getFeaturedProductsRest, getPublicProductByIdRest, getPublicProductsRest, getUserRest, signinRest, signUpRest } from "./restApi";
+import { addToCartRest, forgotPasswordRest, getCartRest, getFeaturedProductsRest, getPublicProductByIdRest, getPublicProductsRest, getUserRest, signinRest, signUpRest } from "./restApi";
 import { forgotPasswordGraphql, getFeaturedProductsGraphql, getPublicProductByIdGraphql, getPublicProductsGraphql, getUserGraphQl, signInGraphql, signUpGraphql } from "./graphQL";
 import { config } from "config";
 import { apiFunction } from "utils/types";
@@ -21,6 +21,8 @@ const restApi:apiFunction = {
     getPublicProducts: getPublicProductsRest,
     getPublicProductsById: getPublicProductByIdRest,
     getFeaturedProducts: getFeaturedProductsRest,
+    getCart: getCartRest,
+    addToCart: addToCartRest,
 }
 
 export const userAPI:apiFunction = config?.apiService === 'GRAPHQL' ? graphqlApi : restApi
