@@ -1,8 +1,8 @@
-import { dbConfig } from 'config/database';
 import * as Mongoose from 'mongoose';
 
-export async function connect() {
-  await Mongoose.connect(dbConfig.mongodb.URI!);
+export const connectTestDatabase = async (): Promise<void> => {
+  const mongoTestUri = 'mongodb://localhost:27017/bs-commerce-test';
+  await Mongoose.connect(mongoTestUri);
   const { connection } = Mongoose;
 
   connection.on('connected', () => {
@@ -20,4 +20,8 @@ export async function connect() {
   connection.on('error', (error) => {
     console.error('Failed! MongoDB connection failed. \n', error);
   });
-}
+};
+
+export const removeTestCollection = async (collection: string): Promise<void> => {
+  await Mongoose.connection.dropCollection(collection);
+};
