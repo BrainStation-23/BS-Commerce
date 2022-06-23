@@ -1,9 +1,17 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-
-export interface getCategoryListCategory {
+export interface subCategoryList {
     slug: string;
     ancestors: getCategoryListAncestor[];
+    subCategories?: any[];
+}
+export interface NestedCategoryList {
+    slug: string;
+    ancestors: getCategoryListAncestor[];
+    subCategories?: subCategoryList[];
+}
+export interface getCategoryList {
+    categories: NestedCategoryList[];
 }
 
 export interface getCategoryListAncestor {
@@ -13,7 +21,7 @@ export interface getCategoryListAncestor {
 }
 export interface getCategoryListSuccessResponse extends SuccessResponse {
     code: number;
-    data: getCategoryListCategory[];
+    data: getCategoryList;
 }
 
 export interface getCategoryListErrorResponse extends ErrorResponse {
