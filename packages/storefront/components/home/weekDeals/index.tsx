@@ -1,6 +1,5 @@
 import { FC } from "react";
 import productData from "../../../allData/product-data.json";
-import Product from "@/components/global/components/product/product";
 import SwiperGrid from "@/components/global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
 import Container from "@/components/global/components/container";
@@ -8,8 +7,13 @@ import Link from "next/link";
 import Picture from "@/components/global/components/product/common/picture";
 import Icon from "@/components/global/components/icon";
 import ProductInfo from "@/components/global/components/product/common/productInfo";
+import { Product } from "models";
 
-const WeekDeals = ({ products }: any) => {
+interface Products {
+  products: Product[];
+}
+
+const WeekDeals = ({ products }: Products) => {
   //edited type. was const WeekDeals: FC = () => {}
   console.log(products);
   return (

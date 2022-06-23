@@ -2,9 +2,14 @@ import Link from "next/link";
 import ProductInfo from "./common/productInfo";
 import Picture from "./common/picture";
 import Icon from "../icon";
+import { Product } from "models";
 
-const Product = (props: any) => {
-  const { product }: any = props;
+interface SingleProduct {
+  product: Product
+}
+
+const Product = (props: SingleProduct) => {
+  const { product } = props;
 
   return (
     <>

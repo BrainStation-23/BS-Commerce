@@ -3,8 +3,11 @@ import Picture from "@/components/global/components/product/picture";
 import ProductInfo from "@/components/global/components/product/productInfo";
 import { Product } from "models";
 import Link from "next/link";
+interface SingleProduct {
+  product: Product;
+}
 
-const Product = ({ product }: any) => {
+const Product = ({ product }: SingleProduct) => {
   return (
     <Link href={`/product/${product.id}`} passHref>
       <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer lg:pl-3">

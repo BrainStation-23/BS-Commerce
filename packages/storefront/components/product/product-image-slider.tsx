@@ -4,7 +4,12 @@ import { Navigation, Thumbs } from "swiper";
 import { useState } from "react";
 import { products } from "../../allData/product-data.json";
 
-const ProductImagesSlider = ({ product }: any) => {
+import { Product } from "models";
+interface SingleProduct {
+  product: Product;
+}
+
+const ProductImagesSlider = ({ product }: SingleProduct) => {
   //const product = products.find((product) => product.id === 1);
   var isAvailable = true;
   //if (product.stock > 0) isAvailable = true;

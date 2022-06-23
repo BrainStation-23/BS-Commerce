@@ -1,8 +1,14 @@
 import React from "react";
 import Icon from "../icon";
 
-const ProductInfo = (props: any) => {
-  const { product }: any = props;
+import { Product } from "models";
+
+interface SingleProduct {
+  product: Product
+}
+
+const ProductInfo = (props: SingleProduct) => {
+  const { product } = props;
   return (
     <div>
       <div className="px-6">

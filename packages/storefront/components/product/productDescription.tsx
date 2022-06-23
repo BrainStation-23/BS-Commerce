@@ -6,7 +6,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-const ProductDescription: NextComponentType = ({product}: any) => {
+import { Product } from "models";
+interface SingleProduct {
+  product: Product;
+}
+
+const ProductDescription = ({product}: SingleProduct) => {
 	//const product = products.find((product) => product.id === 1);
 	const vendor = vendors.find((vendor) => vendor.id === 1);
 	const [description, setDescription] = useState("block");

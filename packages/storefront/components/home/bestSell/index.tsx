@@ -1,6 +1,6 @@
 import { SwiperSlide } from "swiper/react";
 
-import Product from "./product";
+import ProductShow from "./product";
 import productData from "../../../allData/product-data.json";
 import SwiperGrid from "../../global/components/swipergrid";
 
@@ -11,8 +11,13 @@ import "swiper/css/pagination";
 import Banner from "./banner";
 import Container from "../../global/components/container";
 import Link from "next/link";
+import { Product } from "models";
 
-const BestSell = ({products} : any) => {
+interface Products {
+  products: Product[]
+}
+
+const BestSell = ({products} : Products) => {
   return (
     <>
       <Container className="">
@@ -39,7 +44,7 @@ const BestSell = ({products} : any) => {
                 products.length > 0 &&
                 products.map((product: any, index: number) => (
                   <SwiperSlide key={product.id} className="">
-                    <Product product={product} />
+                    <ProductShow product={product} />
                   </SwiperSlide>
                 ))}
             </SwiperGrid>

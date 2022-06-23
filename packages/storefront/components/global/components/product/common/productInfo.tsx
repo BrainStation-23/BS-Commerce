@@ -1,8 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import { Product } from "models";
 
-const ProductInfo = (props: any) => {
-  const { product }: any = props;
+interface SingleProduct {
+  product: Product
+}
+
+const ProductInfo = (props: SingleProduct) => {
+  const { product } = props;
+
   return (
     <div className="text-center py-4">
       <Link href="/product/1" passHref>

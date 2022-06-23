@@ -7,7 +7,12 @@ import ProductDescription from "./productDescription";
 import ProductImagesSlider from "./product-image-slider";
 import { useRouter } from "next/router";
 
-const ProductDetailsComponent = ({ product }: any) => {
+import { Product } from "models";
+interface SingleProduct {
+  product: Product;
+}
+
+const ProductDetailsComponent = ({ product }: SingleProduct) => {
   //const { query } = useRouter();
 
   //const product = products.find((product) => product.id === Number(query.pid));
