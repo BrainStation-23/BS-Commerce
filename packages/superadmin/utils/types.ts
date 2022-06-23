@@ -1,3 +1,7 @@
+import { Product, UpdateProductRequest } from "models";
+import { GetProductParams } from "./../../models/src/product/getProduct";
+import { CreateProductRequest } from "./../../models/src/product/createProduct";
+
 export interface User {
   id?: string;
   firstName: string;
@@ -27,5 +31,15 @@ export interface Address {
 }
 
 export interface apiFunction {
-  getUser: () => Promise<User[] | undefined>;
+  updateProduct: (
+    data: any,
+    router: any
+  ) => Promise<UpdateProductRequest | undefined>;
+  createProduct: (
+    data: any,
+    router: any
+  ) => Promise<CreateProductRequest | undefined>;
+  getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
+  getProducts: (pageSize: number) => Promise<Product[] | undefined>;
+  searchProduct: (data: string) => Promise<Product | undefined>;
 }
