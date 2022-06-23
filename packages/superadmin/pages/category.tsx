@@ -1,12 +1,14 @@
-import { Category } from "models";
 import type { NextPage } from "next";
 import { useState } from "react";
 import { userAPI } from "../APIs";
 import CategoryTable from "../components/category/category-table";
 import data from "../components/category/category-dummy.json";
+import { CategoryInterface } from "../components/category/catergory-model";
 
-const Category: NextPage<{ categoryList: Category[] }> = ({ categoryList }) => {
-  const [categories, setCategories] = useState(categoryList);
+const Category: NextPage<{ categories: CategoryInterface[] }> = ({
+  categories,
+}) => {
+  // const [categoyList, setCategories] = useState(categories);
   // console.log(categories);
 
   return (
@@ -103,19 +105,20 @@ const Category: NextPage<{ categoryList: Category[] }> = ({ categoryList }) => {
       {/* Category table */}
       <div className="border rounded p-3">
         <div className="mb-3">Learn more about categories</div>
-        <CategoryTable categoryList={categories} />
+        <CategoryTable categories={categories} />
       </div>
     </main>
   );
 };
 
 export async function getServerSideProps() {
-  // const categoryList = await userAPI.getCategory();
-  const categoryList = data.data;
-  // console.log("inside serverside props");
+  const categories = await userAPI.getCategories();
+  // console.log("soasfj");
+
+  console.log(categories);
   return {
     props: {
-      categoryList: categoryList,
+      categories: categories,
     },
   };
 }

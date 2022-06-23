@@ -21,6 +21,6 @@ export async function getProductSearchGraphQL(): Promise<Product | undefined> {
   return;
 }
 
-export async function getCategoryGraphQL(): Promise<Category[] | undefined> {
+export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
   return;
 }

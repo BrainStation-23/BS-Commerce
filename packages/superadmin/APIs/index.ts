@@ -5,12 +5,12 @@ import {
   createProductRest,
   getProductRest,
   updateProductRest,
-  getCategoryRest,
+  getCategoriesRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
   getProductSearchGraphQL,
-  getCategoryGraphQL,
+  getCategoriesGraphQL,
   createProductGraphQl,
 } from "./graphQL";
 import { config } from "../config/index";
@@ -19,7 +19,7 @@ import { apiFunction } from "../utils/types";
 const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
-  getCategory: getCategoryGraphQL,
+  getCategories: getCategoriesGraphQL,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
@@ -28,7 +28,7 @@ const graphqlApi: apiFunction = {
 const restApi: apiFunction = {
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
-  getCategory: getCategoryRest,
+  getCategories: getCategoriesRest,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,

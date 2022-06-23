@@ -6,8 +6,9 @@ import {
   UpdateProductRequest,
 } from "../../models/src/product";
 import { User } from "../utils/types";
-import { Product, Category } from "models";
+import { Product } from "models";
 import { toast } from "react-toastify";
+import { CategoryInterface } from "../components/category/catergory-model";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -89,11 +90,14 @@ export async function updateProductRest(
   }
 }
 
-export async function getCategoryRest(): Promise<Category[] | undefined> {
+export async function getCategoriesRest(): Promise<
+  CategoryInterface[] | undefined
+> {
   try {
-    const { data } = await axios.get(`${apiEndPoints.category}`);
-    return data?.data as Category[];
-  } catch (error) {
+    const response = await axios.get(`${apiEndPoints.category}`);
+
+    return response?.data.data.categories as CategoryInterface[];
+  } catch (error: any) {
     console.error(error);
   }
 }
