@@ -1,16 +1,21 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
+
+export interface Photo{
+    url:string;
+    alt?:string;
+}
 export interface subCategoryList {
     name: string;
     slug: string;
-    imageId: string;
+    photo: Photo;
     ancestors: getCategoryListAncestor[];
     subCategories?: any[];
 }
 export interface NestedCategoryList {
     name: string;
     slug: string;
-    imageId: string;
+    photo: Photo;
     ancestors: getCategoryListAncestor[];
     subCategories?: subCategoryList[];
 }

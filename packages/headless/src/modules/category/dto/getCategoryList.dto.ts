@@ -2,7 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { getCategoryListAncestor, NestedCategoryList, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse } from "models";
+import { getCategoryListAncestor, NestedCategoryList, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse, Photo } from "models";
 
 export class AncestorDto implements getCategoryListAncestor {
     @ApiProperty()
@@ -18,6 +18,17 @@ export class AncestorDto implements getCategoryListAncestor {
     level: number;
 }
 
+export class PhotoDto implements Photo{
+    @ApiProperty()
+    @IsString()
+    url: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    alt?: string;
+}
+
 export class subCategoryListDto {
     @ApiProperty()
     @IsString()
@@ -28,8 +39,8 @@ export class subCategoryListDto {
     slug: string;
 
     @ApiProperty()
-    @IsString()
-    imageId: string;
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty({ type: [AncestorDto] })
     @IsOptional()
@@ -53,8 +64,8 @@ export class NestedCategoryListDto implements NestedCategoryList {
     slug: string;
 
     @ApiProperty()
-    @IsString()
-    imageId: string;
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty({ type: [AncestorDto] })
     @IsArray()
