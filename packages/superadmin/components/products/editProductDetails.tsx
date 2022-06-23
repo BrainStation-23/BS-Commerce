@@ -8,9 +8,11 @@ import { userAPI } from "../../APIs";
 import { useEffect, useState } from "react";
 import CategoryForm from "./forms/categoryForm";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const EditProduct = (props: any) => {
   const { product } = props;
+  const router = useRouter();
 
   const [categogiesData, setCategoryData] = useState([
     {
@@ -118,10 +120,8 @@ const EditProduct = (props: any) => {
       categories: categories,
     };
     const id = product.id;
-    console.log(newData);
-
     if (categories[0]) {
-      const response = await userAPI.updateProduct(newData, id);
+      const response = await userAPI.updateProduct(newData, id , router);
     } else toast.error("You must select a cateory");
   };
 

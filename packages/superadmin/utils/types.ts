@@ -33,6 +33,7 @@ export interface Address {
 export interface apiFunction {
   updateProduct: (
     data: any,
+    id: any,
     router: any
   ) => Promise<UpdateProductRequest | undefined>;
   createProduct: (

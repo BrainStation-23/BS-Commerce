@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import SingleView from "../singleView";
 
@@ -8,16 +8,19 @@ const CaegoryCard = (props: any) => {
   const [showTable, setShowTable] = useState(false);
 
   const checkTable = () => {
-    const totalSelectedCategory = categoryData.filter((data: any) =>
-      data.isSelected ? data : null
+    const totalSelectedCategory = categoryData.filter(
+      (data: any) => data.isSelected
     );
     const isSelectedZero = totalSelectedCategory[0] ? true : false;
-    isSelectedZero == showTable ? "" : setShowTable(isSelectedZero);
+    isSelectedZero ? "" : setShowTable(!isSelectedZero);
+    return !isSelectedZero;
   };
 
+  useEffect(() => {
+    checkTable();
+  }, [showTable]);
   return (
     <>
-      {checkTable()}
       {showTable ? (
         <div
           className="card card-secondary card-outline my-4"
@@ -35,7 +38,7 @@ const CaegoryCard = (props: any) => {
           </div>
           <div className="" id="metaTab">
             <div className="card-body">
-              <div className="my-3 py-3">
+              <div className="py-3">
                 <table className="table table-bordered table-striped  ">
                   <thead>
                     <th className="text-center py-3">Category</th>

@@ -71,13 +71,15 @@ export async function getProductRest(
 
 export async function updateProductRest(
   data: UpdateProductRequest,
-  id: string
+  id: string,
+  router: any
 ): Promise<UpdateProductRequest | undefined> {
   try {
     const response = await axios.patch<UpdateProductRequest>(
       `${apiEndPoints.product}/${id}`,
       data
     );
+    router.push("/Product");
     toast.success("Edit Successful");
     return response.data as UpdateProductRequest;
   } catch (error: any) {

@@ -3,12 +3,22 @@ import { userAPI } from "../../APIs";
 import Tooltips from "../global/tooltip";
 // import { searchProductSchema } from "./schema/productSchema";
 import { Product } from "models";
+import { toast } from "react-toastify";
+import { searchProductSchema } from "./schema/productSchema";
 
 const SearchWindow = ({ setProducts }: any) => {
   const handleSearchSubmit = async (data: string) => {
-    const searchProduct: any = await userAPI.searchProduct(data);
-    if (searchProduct) {
-      setProducts([searchProduct]);
+    if (data == "") {
+      toast.error("Empty");
+      const searchProduct: any = await userAPI.getProducts(data);
+      if (searchProduct) {
+        setProducts([searchProduct]);
+      }
+    } else {
+      const searchProduct: any = await userAPI.searchProduct(data);
+      if (searchProduct) {
+        setProducts([searchProduct]);
+      }
     }
   };
   return (
@@ -40,7 +50,7 @@ const SearchWindow = ({ setProducts }: any) => {
           handleSearchSubmit(values.GoDirectlyToSku);
           actions.setSubmitting(false);
         }}
-        //validationSchema={searchProductSchema}
+        validationSchema={searchProductSchema}
       >
         {(formikprops) => {
           return (
