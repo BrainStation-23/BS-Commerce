@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { regexConfig } from 'config/regex';
 import { AddressDto, UserDto } from './user.dto';
 import {
@@ -11,54 +11,54 @@ import {
 } from 'models';
 
 export class UpdatedUserDto implements UpdatedUserRequest {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     firstName?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     lastName?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     provider?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsObject()
     providerData?: object;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsObject()
     additionalProviderData?: object;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     @IsPhoneNumber(regexConfig.phone as any, { message: 'Please Enter the Valid Phone Number!' })
     phone?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @ValidateNested({ each: true })
     @IsObject()
     address?: AddressDto;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsBoolean()
     active?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     gender?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     status?: string;
@@ -66,21 +66,26 @@ export class UpdatedUserDto implements UpdatedUserRequest {
 
 export class UpdateUserErrorResponseDto implements UpdateUserErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+    @IsNumber()
     code: number;
 
     @ApiProperty({
         example: UpdateUserErrorMessages.CAN_NOT_UPDATE_USER
     })
-    error: UpdateUserErrorMessages.CAN_NOT_GET_USER | UpdateUserErrorMessages.CAN_NOT_ADD_USER_NEW_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER_ADDRESS | UpdateUserErrorMessages.CAN_NOT_UPDATE_USER;
+    @IsString()
+    error: UpdateUserErrorMessages;
 
     @ApiProperty()
+    @IsArray()
     errors: string[];
 }
 
 export class UpdateUserSuccessResponseDto implements UpdateUserSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
+    @IsNumber()
     code: number;
 
     @ApiProperty()
+    @IsObject()
     data: UserDto;
 }
