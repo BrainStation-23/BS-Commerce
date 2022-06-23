@@ -10,7 +10,7 @@ const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
 
   async function handleSignin(data: CustomerSignInRequest) {
-    userAPI.signIn(data).then((response) => {
+    userAPI.signIn(data).then((response: any) => {
       if (response?.code != 200) {
         //console.log(response.response.data.error);
         alert(response.response.data.error);
@@ -49,7 +49,7 @@ const Signin = () => {
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: values.phone,
+                  phone: "01717584939",
                   email: values.email,
                   password: values.password,
                 };
@@ -61,7 +61,7 @@ const Signin = () => {
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
@@ -69,10 +69,10 @@ const Signin = () => {
                         name="phone"
                         placeholder="Phone"
                       />
-                      {/* <div className="errMsg text-red-600 outline-0">
+                      <div className="errMsg text-red-600 outline-0">
                         <ErrorMessage name="username" />
-                      </div> */}
-                    </div>
+                      </div>
+                    </div> */}
 
                     <div className="mb-4">
                       <Field

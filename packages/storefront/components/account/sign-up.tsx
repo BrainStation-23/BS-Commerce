@@ -54,8 +54,8 @@ const Signup = () => {
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: values.phone,
-                  otp: values.otp,
+                  phone: "01717584939",
+                  otp: "1234",
                   email: values.email,
                   password: values.password,
                 };
@@ -66,7 +66,7 @@ const Signup = () => {
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <Field
                         type="text"
                         className="w-full p-2 outline-0 placeholder-gray-600"
@@ -74,9 +74,9 @@ const Signup = () => {
                         name="phone"
                         placeholder="Phone"
                       />
-                    </div>
+                    </div> */}
 
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <Field
                         type="text"
                         className="w-full p-2 outline-0 placeholder-gray-600"
@@ -84,7 +84,7 @@ const Signup = () => {
                         name="otp"
                         placeholder="Otp"
                       />
-                    </div>
+                    </div> */}
 
                     <div className="mb-4">
                       <Field
