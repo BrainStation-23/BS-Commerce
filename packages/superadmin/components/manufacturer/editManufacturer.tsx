@@ -27,7 +27,7 @@ const EditManufacturer = (props: any) => {
     // console.log(id);
     // console.log(newData);
     
-    //const response = await userAPI.updateManufacturer(newData, id);
+    const response = await userAPI.updateManufacturer(newData, id);
   };
   console.log(manufacturer);
   
@@ -44,10 +44,10 @@ const EditManufacturer = (props: any) => {
             metaKeyword: manufacturer?.manufacturer?.seo?.metaKeyword,
             metaDescription: manufacturer?.manufacturer?.seo?.metaDescription,
             metaTitle: manufacturer?.manufacturer?.seo?.metaTitle,
-            seftn: manufacturer?.manufacturer?.seo?.seftn,
+            seftn: manufacturer?.manufacturer?.seo?.SEFN,
           }}
           onSubmit={(values, actions) => {
-            console.log(values,"**")
+            // console.log(values,"**")
             const data = {
                 name: values.name,
                 description: values.description,
@@ -60,7 +60,7 @@ const EditManufacturer = (props: any) => {
                 seftn: values.seftn,
                 
               };
-              console.log(data,"##")
+              // console.log(data,"##")
               handleSubmit(data);
               actions.setSubmitting(false);
             }}
@@ -84,6 +84,7 @@ const EditManufacturer = (props: any) => {
                       type="submit"
                       name="save"
                       className="btn btn-primary m-1"
+                      onClick={handleSubmit}
                     >
                       <i className="bi bi-save" />
                       <p className="float-end mx-1 my-0">Save </p>

@@ -175,16 +175,18 @@ export async function getSingleManufacturerRest(
 
 export async function updateManufacturerRest(
   data: UpdateManufacturerRequest,
-  id: string
+  id: string,
 ): Promise<UpdateManufacturerRequest | undefined> {
   try {
-    const response = await axios.patch<UpdateManufacturerRequest>(`manufacturers/${data}`,
+    const response = await axios.patch<UpdateManufacturerRequest>(`manufacturers/${id}`,
     data,
     {
       headers: {
           Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
       },
+      
     });
+    console.log(response.data);
     toast.success("Edit Successful");
     return response.data as UpdateManufacturerRequest;
   } catch (error) {
