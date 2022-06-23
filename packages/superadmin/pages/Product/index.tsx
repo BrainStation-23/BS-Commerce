@@ -145,8 +145,8 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
           {/* </div> */}
         </div>
         <div>
-          <SearchWindow setProducts={setProducts} />
-          <ProductsList productsList={products} setProducts={setProducts} />
+          <SearchWindow setProducts={setProducts}  allProducts={productsList}/>
+          <ProductsList productsList={products} setProducts={setProducts}/>
         </div>
       </main>
     </>

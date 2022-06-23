@@ -6,14 +6,10 @@ import { Product } from "models";
 import { toast } from "react-toastify";
 import { searchProductSchema } from "./schema/productSchema";
 
-const SearchWindow = ({ setProducts }: any) => {
+const SearchWindow = ({ setProducts ,allProducts }: any) => {
   const handleSearchSubmit = async (data: string) => {
     if (data == "") {
-      toast.error("Empty");
-      const searchProduct: any = await userAPI.getProducts(data);
-      if (searchProduct) {
-        setProducts([searchProduct]);
-      }
+        setProducts(allProducts);
     } else {
       const searchProduct: any = await userAPI.searchProduct(data);
       if (searchProduct) {
