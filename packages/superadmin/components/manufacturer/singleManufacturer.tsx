@@ -65,7 +65,7 @@ const SingleManufacturer = ({ manufacturer, handleCheckbox }: any) => {
                 <td
                     style={{ border: "1px solid #dddddd", textAlign: "center" }}
                 >
-                    <Link href="/Admin/Manufacturer/list" passHref>
+                    <Link href={"/Admin/Manufacturer/Edit/"+manufacturer.id} passHref>
                         <button
                             style={{ border: "1px solid #dddddd" }}
                             type="button"

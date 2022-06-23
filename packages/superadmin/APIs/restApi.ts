@@ -8,10 +8,9 @@ import {
 import {
   CreateManufacturerRequest,
   UpdateManufacturerRequest,
-  UpdateManufacturerRequest,
 } from "../../models/src/manufacturer";
 import { User } from "../utils/types";
-import { Manufacturer, Product } from "models";
+import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
 import { toast } from "react-toastify";
 
 export async function getUserRest(): Promise<User[] | undefined> {
@@ -150,6 +149,46 @@ export async function deleteManufacturerRest(
     toast.success("Successfully deleted");
     return data?.data as Manufacturer[];
   } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getSingleManufacturerRest(
+  data: any,
+  manufacturerId: any
+): Promise<any | undefined> {
+  try {
+    console.log("*",data)
+    // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
+    const res = await axios.get(`manufacturers/${data}`,{
+      headers: {
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
+      },
+    });
+    console.log(res.data);
+
+    return res?.data as Manufacturer;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function updateManufacturerRest(
+  data: UpdateManufacturerRequest,
+  id: string
+): Promise<UpdateManufacturerRequest | undefined> {
+  try {
+    const response = await axios.patch<UpdateManufacturerRequest>(`manufacturers/${data}`,
+    data,
+    {
+      headers: {
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
+      },
+    });
+    toast.success("Edit Successful");
+    return response.data as UpdateManufacturerRequest;
+  } catch (error) {
+    toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
 }

@@ -7,6 +7,8 @@ import {
   createManufacturerRest,
   getManufacturerRest,
   deleteManufacturerRest,
+  getSingleManufacturerRest,
+  updateManufacturerRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -39,6 +41,8 @@ const restApi: apiFunction = {
   createManufacturer: createManufacturerRest,
   getManufacturer: getManufacturerRest,
   deleteManufacturer: deleteManufacturerRest,
+  getSingleManufacturer: getSingleManufacturerRest,
+  updateManufacturer: updateManufacturerRest,
 };
 
 export const userAPI: apiFunction =
