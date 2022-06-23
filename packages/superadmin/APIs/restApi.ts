@@ -44,7 +44,7 @@ export async function createProductRest(
 //  Create Manufacturer Rest API Post
 export async function createManufacturerRest(
   data: CreateManufacturerRequest,
-  router
+  router: any
 ): Promise<CreateManufacturerRequest | undefined> {
   try {
     const response = await axios.post<CreateManufacturerRequest>(
@@ -56,7 +56,7 @@ export async function createManufacturerRest(
         },
       }
     );
-    router.push("/Product");
+    router.push("/Admin/Manufacturer/list");
     toast.success("Create Successful");
     return response.data as CreateManufacturerRequest;
   } catch (error) {
@@ -124,7 +124,7 @@ export async function getManufacturerRest(
   try {
     const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlYWZhNWE1LTRkMmQtNDg4MS05MjdjLTc5NWUzMzE3YjVjYiIsInVzZXJuYW1lIjoic3RyaW5nQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NTkzMDU0OTQ0MiwiaWF0IjoxNjU1OTMwNTQ5LCJleHAiOjE2NTYwMTY5NDl9.yrFbvBFXwUj5w47CsRoaDGVsAgqXMIUJqpYtBh63nsE"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NjUwNzM1MzQsImlhdCI6MTY1NTk2NTA3MywiZXhwIjoxNjU2MDUxNDczfQ.qU6tm04pOVLVAfJFbrpDwf9AlLh_WYDc0wXwg7t6cgQ"}`,
       },
     });
     return data?.data as Manufacturer[];
@@ -134,17 +134,20 @@ export async function getManufacturerRest(
 }
 
 export async function deleteManufacturerRest(
-  id: string
+  id: string,
+  router: any
 ): Promise<Manufacturer[] | undefined> {
   try {
     const { data } = await axios?.delete(
       `${apiEndPoints?.manufacturerList}/${id}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4ZDdjZWVhLTMwYjAtNGZhYi1hNzhkLTZkN2ZlMjYyYTBmOCIsInVzZXJuYW1lIjoiYWJjeHl6QGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NTg5MDg4MzgxOCwiaWF0IjoxNjU1ODkwODgzLCJleHAiOjE2NTU5NzcyODN9.pKEg5uhpYN3GVXwbEZBzFRl1nCpytvqy2AunLigfBZo"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NjUwNzM1MzQsImlhdCI6MTY1NTk2NTA3MywiZXhwIjoxNjU2MDUxNDczfQ.qU6tm04pOVLVAfJFbrpDwf9AlLh_WYDc0wXwg7t6cgQ"}`,
         },
       }
     );
+    router.push("/Admin/Manufacturer/list");
+    toast.success("Successfully deleted");
     return data?.data as Manufacturer[];
   } catch (error) {
     toast.error(error?.response?.data?.message);

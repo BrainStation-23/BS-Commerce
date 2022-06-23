@@ -24,7 +24,7 @@ const CreateManufacturer: FC = () => {
       },
     };
     console.log(data);
-    userAPI.createManufacturer(newData);
+    userAPI.createManufacturer(newData, router);
   };
   return (
     <>
