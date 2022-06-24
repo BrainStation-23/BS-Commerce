@@ -5,11 +5,13 @@ import {
   getProductRest,
   updateProductRest,
   deleteProductRest,
+  signinRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
   getProductSearchGraphQL,
   createProductGraphQl,
+  signinGraphQL,
 } from "./graphQL";
 import { config } from "../config/index";
 import { apiFunction } from "../utils/types";
@@ -21,6 +23,7 @@ const graphqlApi: apiFunction = {
   updateProduct: updateProductRest,
   getProduct: getProductRest,
   deleteProduct: deleteProductRest,
+  signin: signinGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -30,6 +33,7 @@ const restApi: apiFunction = {
   updateProduct: updateProductRest,
   getProduct: getProductRest,
   deleteProduct: deleteProductRest,
+  signin: signinRest,
 };
 
 export const userAPI: apiFunction =

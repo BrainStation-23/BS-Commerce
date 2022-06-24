@@ -1,4 +1,10 @@
-import { Product, UpdateProductRequest } from "models";
+import { NextRouter } from "next/router";
+import {
+  Product,
+  UpdateProductRequest,
+  SignInRequest,
+  SignInSuccessResponse,
+} from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
 
@@ -44,4 +50,8 @@ export interface apiFunction {
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   deleteProduct: (productId: string) => Promise<boolean | undefined>;
+  signin: (
+    data: SignInRequest,
+    router: NextRouter
+  ) => Promise<SignInSuccessResponse | undefined>;
 }
