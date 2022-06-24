@@ -5,8 +5,8 @@ import EditProduct from "../../../components/products/editProductDetails";
 
 const EditProductPage: NextPage = ({ product }) => {
   return (
-    <div className="bg-light">
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div className="bg-light px-5">
+      <main className="">
         <EditProduct product={product} />
       </main>
     </div>

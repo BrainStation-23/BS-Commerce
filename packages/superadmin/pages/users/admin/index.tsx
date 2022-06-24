@@ -26,7 +26,7 @@ const Admin: NextPage = ({ adminsList }: any) => {
   const router = useRouter();
 
   return (
-    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div className="px-5">
       <div className="px-2 py-3 d-flex justify-content-between">
         <div className="fs-3">Admin</div>
         <div className="">
