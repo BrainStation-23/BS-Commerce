@@ -125,7 +125,7 @@ export async function addToCartRest(
                 },
             }
         );
-        console.log("**************125*******************", data);
+        //console.log("**************125*******************", data);
         return data?.data as AddToCartResponse[];
     } catch (error) {
         toast.error(error?.response?.data?.message);

@@ -1,14 +1,12 @@
 import { userAPI } from "APIs";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import type { NextPage } from "next";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import CartComponent from "../components/cart/index";
-const newData = {
-    productId: "1035465768",
-    quantity: 2,
-};
-userAPI.addToCart(newData);
-const Cart: NextPage = ({ cartData }: any) => {
-    // console.log("From Cart", cartData);
+
+const Cart: NextPage = () => {
     return (
 
         <>
@@ -19,14 +17,14 @@ const Cart: NextPage = ({ cartData }: any) => {
     );
 };
 
-export async function getServerSideProps(context: any) {
-    const res = await userAPI.getCart();
+// export async function getServerSideProps(context: any) {
+//     const res = await userAPI.getCart();
 
-    return {
-        props: {
-            cartData: res,
-        },
-    };
-}
+//     return {
+//         props: {
+//             cartData: res,
+//         },
+//     };
+// }
 
 export default Cart;

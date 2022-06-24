@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 import Image from "next/image";
 import cartDatas from "../../../../allData/cart-data.json";
+import { useAppSelector } from "customHooks/hooks";
 
 const DataTable = () => {
+  const cartData = useAppSelector((state) => state.getAllCartItemsStore.allCartItems);
+  console.log(cartData);
   const tableData = () => {
     return cartDatas.data.items.map((cartData, index) => {
       return (

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartDropdown from "../../cart/cartDropdown/dropdownCart";
-import signout from "@/components/account/sign-out";
-import Signout from "@/components/account/sign-out";
 import { removeUserToken } from "toolkit/userAuth/signinSlice";
 import { useDispatch } from "react-redux";
 

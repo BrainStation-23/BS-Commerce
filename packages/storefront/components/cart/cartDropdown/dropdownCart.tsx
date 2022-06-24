@@ -2,13 +2,14 @@ import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
 import Buttons from "../../global/components/buttons/button";
 import cartDatas from "../../../allData/cart-data.json";
+import { useAppSelector } from "customHooks/hooks";
 
 const CartDropdown = () => {
 
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
 
-  let totalCartItems = JSON.parse(localStorage.getItem("persist:root")).totalCatItems;
+  let totalCartItems = useAppSelector((state) => state.addToCartStore.totalCatItems)
 
   const cartIcon = (
     <svg
