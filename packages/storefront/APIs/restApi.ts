@@ -6,6 +6,8 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
+  updateCartItemRequest,
+  updateCartItemResponse,
 } from "models";
 import { GetCustomerProductResponse } from "models";
 import { CustomerSignInRequest } from "models";
@@ -147,6 +149,44 @@ export async function deleteFromCartRest(
     );
     //console.log("**************125*******************", data);
     return data?.data as deleteCartItemResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+
+export async function deleteAllFromCartRest(
+): Promise<deleteCartItemResponse | undefined> {
+  try {
+    const { data } = await axios?.delete(
+      `${apiEndPoints?.deleteAllCartItem}`,
+      {
+        headers: {
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
+        },
+      }
+    );
+    //console.log("**************125*******************", data);
+    return data?.data as deleteCartItemResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function updateCartRest(
+  productId: updateCartItemRequest
+): Promise<updateCartItemResponse | undefined> {
+  try {
+    const { data } = await axios?.patch(
+      `${apiEndPoints?.updateCartItem}/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
+        },
+      }
+    );
+    //console.log("**************125*******************", data);
+    return data?.data as updateCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }

@@ -5,4 +5,6 @@ export const apiEndPoints = {
     login: '/customer/auth/sign-in',
     getCart: `/cart`,
     deleteCartItem: '/api/cart/',
+    deleteAllCartItem: '/cart/items',
+    updateCartItem: `/cart/item`
 }
