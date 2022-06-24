@@ -33,3 +33,11 @@ export async function signinGraphQL(
 ): Promise<SignInSuccessResponse | undefined> {
   return;
 }
+
+export async function createAdminGraphql(): Promise<User | undefined> {
+  return;
+}
+
+export async function getAdminsGraphql(): Promise<User[] | undefined> {
+  return;
+}

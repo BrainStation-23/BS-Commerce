@@ -13,7 +13,7 @@ import "../styles/App.scss";
 
 Axios.defaults.baseURL = config?.restPrefix;
 Axios.defaults.headers.common = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYjNlOGFkLWQ5YjktNDc2Mi1iMDhmLTExMDNlYTk1OTc1NyIsInVzZXJuYW1lIjoic2VlZmF0aGltZWwxQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjA0NTAwOTUzMSwiaWF0IjoxNjU2MDQ1MDA5LCJleHAiOjE2NTYxMzE0MDl9.NcgwMdkXnytJ83osJzIZ2H_--mrX2Z_mn2Pz5FlaZF4`,
+  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNiMzFiNzUxLWZjYjEtNDc0MS1iMmY0LWIzMDFjZDNiY2RhYSIsInVzZXJuYW1lIjoic2hhZmlAZ21haWwuY29tIiwibG9nSW5UaW1lIjoxNjU2MDQ5NDMxMTE0LCJpYXQiOjE2NTYwNDk0MzEsImV4cCI6MTY1NjEzNTgzMX0.MHg7WMx2-gUukkKZ8SR-r4ldQ9nZiHToADSbLKj7vn8`,
 };
 
 let persistor = persistStore(store);
