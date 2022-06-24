@@ -4,4 +4,6 @@ export const apiEndPoints = {
   signin: "/auth/signin",
   auth: "/auth",
   user: "/user",
+  manufacturer: "/manufacturers/create",
+  manufacturerList: "/manufacturers",
 };

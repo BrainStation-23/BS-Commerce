@@ -14,10 +14,11 @@ import FeaturedProducts from "@/components/home/featuredProducts";
 import { storeProducts } from "toolkit/ProductsSlice";
 import productData from "../../allData/product-data.json";
 
-const HomeComponent = ({products, featuredProducts}: any) => { //edited type. was const HomeComponent: NextComponentType = () => {}
+const HomeComponent = ({ products, featuredProducts }: any) => {
+  //edited type. was const HomeComponent: NextComponentType = () => {}
   const dispatch = useDispatch();
   //const productsData = useSelector((state: any) => state.products)
-  console.log(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).products));
+  //console.log(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).products));
 
   useEffect(() => {
     dispatch(storeProducts(products));

@@ -9,7 +9,7 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
   const [products, setProducts] = useState(productsList);
   return (
     <>
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="px-5">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Products</div>
           <a className="btn btn-primary" href="/Product/Create">
@@ -145,8 +145,8 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
           {/* </div> */}
         </div>
         <div>
-          <SearchWindow setProducts={setProducts}  allProducts={productsList}/>
-          <ProductsList productsList={products} setProducts={setProducts}/>
+          <SearchWindow setProducts={setProducts} allProducts={productsList} />
+          <ProductsList productsList={products} setProducts={setProducts} />
         </div>
       </main>
     </>

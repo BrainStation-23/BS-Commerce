@@ -24,7 +24,7 @@ const EditCustomer: NextPage<{ adminData: User; id: string }> = ({
   const q = router.query.name;
 
   return (
-    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div className="px-5">
       <SubmitForm
         isDisabled={false}
         title="Admin"

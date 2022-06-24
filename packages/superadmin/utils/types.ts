@@ -5,6 +5,11 @@ import {
   SignInRequest,
   SignInSuccessResponse,
 } from "models";
+import {
+  CreateManufacturerRequest,
+  Manufacturer,
+  UpdateManufacturerRequest,
+} from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
 
@@ -56,6 +61,20 @@ export interface apiFunction {
   ) => Promise<SignInSuccessResponse | undefined>;
   createAdmin: (data: User, cb: any) => Promise<User | undefined>;
   getAdmins: () => Promise<User[] | undefined>;
+  createManufacturer: (
+    data: CreateManufacturerRequest,
+    router: any
+  ) => Promise<CreateManufacturerRequest | undefined>;
+  getManufacturer: () => Promise<Manufacturer[] | undefined>;
+  deleteManufacturer: (
+    id: any,
+    router: any
+  ) => Promise<Manufacturer[] | undefined>;
+  getSingleManufacturer: (data: any) => Promise<any | undefined>;
+  updateManufacturer: (
+    data: UpdateManufacturerRequest,
+    router: any
+  ) => Promise<UpdateManufacturerRequest | undefined>;
 }
 
 export interface adminCreate {

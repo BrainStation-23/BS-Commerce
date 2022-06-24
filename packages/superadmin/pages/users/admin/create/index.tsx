@@ -27,10 +27,7 @@ const CreateCustomer: NextPage = () => {
   };
 
   return (
-    <div
-      className="col-md-9 ms-sm-auto col-lg-10 px-md-4"
-      data-testid="heading"
-    >
+    <div className="px-5" data-testid="heading">
       <SubmitForm
         isDisabled={false}
         title="Admin"

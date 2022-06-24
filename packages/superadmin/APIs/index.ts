@@ -8,6 +8,11 @@ import {
   signinRest,
   createAdminRest,
   getAdminsRest,
+  createManufacturerRest,
+  getManufacturerRest,
+  deleteManufacturerRest,
+  getSingleManufacturerRest,
+  updateManufacturerRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -16,6 +21,9 @@ import {
   signinGraphQL,
   createAdminGraphql,
   getAdminsGraphql,
+  // getManufacturerGraphQl,
+  // deleteManufacturerGraphQl,
+  // createManufacturerGraphQl,
 } from "./graphQL";
 import { config } from "../config/index";
 import { apiFunction } from "../utils/types";
@@ -30,6 +38,9 @@ const graphqlApi: apiFunction = {
   signin: signinGraphQL,
   createAdmin: createAdminGraphql,
   getAdmins: getAdminsGraphql,
+  // getManufacturer: getManufacturerGraphQl,
+  // deleteManufacturer: deleteManufacturerGraphQl,
+  // createManufacturer: createManufacturerGraphQl
 };
 
 const restApi: apiFunction = {
@@ -42,6 +53,11 @@ const restApi: apiFunction = {
   signin: signinRest,
   createAdmin: createAdminRest,
   getAdmins: getAdminsRest,
+  createManufacturer: createManufacturerRest,
+  getManufacturer: getManufacturerRest,
+  deleteManufacturer: deleteManufacturerRest,
+  getSingleManufacturer: getSingleManufacturerRest,
+  updateManufacturer: updateManufacturerRest,
 };
 
 export const userAPI: apiFunction =
