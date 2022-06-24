@@ -15,7 +15,7 @@ const PhotosCard = (props: any) => {
             <div className="card-title row align-items-center  pt-2 ps-2">
               <i
                 className="bi bi-image-fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Photos</div> 
             </div>

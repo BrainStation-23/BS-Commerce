@@ -81,8 +81,8 @@ const ProductInfoForm: FC = () => {
           >
             <div className="card-title row align-items-center visible">
               <i
-                className="bi bi-info-lg align-text-top col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                className="bi bi-info-lg col-1 "
+                style={{ fontSize: "25px"}}
               />
               <div className="px-3 fs-5 col text-start">Product info</div>
               <div className="col-1">
