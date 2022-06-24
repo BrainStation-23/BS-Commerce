@@ -1,4 +1,4 @@
-import { Product, UpdateProductRequest } from "models";
+import { CreateManufacturerRequest, Manufacturer, UpdateManufacturerRequest, Product, UpdateProductRequest } from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
 
@@ -42,4 +42,17 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
+  createManufacturer: (
+    data: CreateManufacturerRequest,
+    router: any
+) => Promise<CreateManufacturerRequest | undefined>;
+  getManufacturer: () => Promise<Manufacturer[] | undefined>;
+  deleteManufacturer: (id: any, router: any) => Promise<Manufacturer[] | undefined>
+  getSingleManufacturer: (
+      data: any
+  ) => Promise<any | undefined>;
+  updateManufacturer: (
+      data: UpdateManufacturerRequest,
+      router: any
+  ) => Promise<UpdateManufacturerRequest | undefined>;
 }
