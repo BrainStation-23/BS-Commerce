@@ -5,16 +5,19 @@ import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 import { useCookies } from "react-cookie";
 import { CustomerSignInRequest } from "models";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { storeUserToken } from "toolkit/userAuth/signinSlice";
 
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
+  const dispatch = useDispatch();
 
   async function handleSignin(data: CustomerSignInRequest) {
     userAPI.signIn(data).then((response: any) => {
       if (response?.code != 200) {
         alert(response.response.data.error);
       } else {
-        localStorage.setItem("token", response?.data.token);
+        dispatch(storeUserToken(response?.data.token));
         let expires = new Date();
         expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
         setCookie("access_token", response?.data.token, { path: "/", expires });

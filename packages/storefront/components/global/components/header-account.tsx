@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartDropdown from "../../cart/cartDropdown/dropdownCart";
 import signout from "@/components/account/sign-out";
+import Signout from "@/components/account/sign-out";
+import { removeUserToken } from "toolkit/userAuth/signinSlice";
+import { useDispatch } from "react-redux";
 
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState("null");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLoggedIn(JSON.stringify(localStorage.getItem("token")));
+    setIsLoggedIn(JSON.parse(localStorage.getItem("persist:root")).access_token);
   }, []);
+  console.log(JSON.parse(localStorage.getItem("persist:root")).access_token);
   const [showCartDropdown, setShowCartDropdown] = useState(false);
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
@@ -27,7 +32,10 @@ const HeaderAccount: React.FC<Properties> = (props) => {
         {isLoggedIn !== "null" ? (
           <Link href={links[0].link}>
             <a
-              onClick={() => signout()}
+              onClick={() => {
+                dispatch(removeUserToken(null));
+                window.location.href = "/account/sign-in";
+              }}
               className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
             >
               {links[3].name}
