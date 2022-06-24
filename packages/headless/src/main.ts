@@ -9,14 +9,22 @@ import { connectToDatabase, DB } from './database/database.init';
 import { multerConfig } from 'config/multer';
 import { dbConfig } from 'config/database';
 import { coreConfig } from 'config/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useStaticAssets(join(__dirname, 'public'), {
+    prefix: '/dist/src/public',
+  });
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
-  app.enableCors({ allowedHeaders: "*", origin: "*" });
-  app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
+  app.enableCors({
+    allowedHeaders: "*",
+    origin: "*"
+  });
+  coreConfig.api === 'GRAPHQL' && app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
   app.useGlobalPipes(new ValidationPipe());
   coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);
