@@ -29,7 +29,7 @@ const EditCustomer: NextPage<{ adminData: User; id: string }> = ({
       lastName: values.lastName,
      
     };
-    await userAPI.updateAdmin(adminUpdate);
+    await userAPI.updateAdmin(adminUpdate, router);
   };
   const saveHandlerPassword = async (values: any, isPass: boolean) => {
     const adminUpdate: any = {
@@ -38,7 +38,7 @@ const EditCustomer: NextPage<{ adminData: User; id: string }> = ({
      
     };
     ;
-    await userAPI.changePassword(adminUpdate);
+    await userAPI.changePassword(adminUpdate, router);
   };
 
   return (
