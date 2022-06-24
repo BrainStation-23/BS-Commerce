@@ -4,6 +4,7 @@ import { useState } from "react";
 import HeaderBar from "./headerBar";
 import bsLogo from "../../assests/bs23.png";
 import sidebar from "./styles/sidebar.module.css";
+import Link from "next/link";
 const Sidebar: NextComponentType = (props: any) => {
   const menuItems = [
     { name: "Dashboard", to: "/", icon: <i className="bi bi-tv"></i> },
@@ -19,6 +20,11 @@ const Sidebar: NextComponentType = (props: any) => {
         },
         {
           name: "Categories",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Categories",
           to: "",
           icon: <i className="bi bi-bullseye"></i>,
         },
@@ -30,13 +36,136 @@ const Sidebar: NextComponentType = (props: any) => {
       icon: <i className="bi bi-cart"></i>,
       subMenus: [
         {
-          name: "Categories",
-          to: "",
+          name: "Orders",
+          to: "/",
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
-          name: "Manufacturers",
-          to: "/Admin/Manufacturer/list",
+          name: "Shipments",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Return requests",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Recurring payments",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Gift cards",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "Customers",
+      to: "/",
+      icon: <i className="bi bi-person" />,
+      subMenus: [
+        {
+          name: "Customers",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Customers role",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Online customers",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Vendors",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "Promotions",
+      to: "/",
+      icon: <i className="bi bi-tags" />,
+      subMenus: [
+        {
+          name: "Discounts",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Affiliates",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Newsletter subscribers",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Campaigns",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "System",
+      to: "/",
+      icon: <i className="bi bi-box" />,
+      subMenus: [
+        {
+          name: "System information",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Log",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Warnings",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Maintenance",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "Reports",
+      to: "/",
+      icon: <i className="bi bi-graph-up-arrow" />,
+      subMenus: [
+        {
+          name: "Sales summary",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Low stock",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Bestsellers",
+          to: "/",
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Products never purchased",
+          to: "/",
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
@@ -97,7 +226,9 @@ const Sidebar: NextComponentType = (props: any) => {
                 >
                   <div className={sidebar.menu_icon}>{menuItem.icon}</div>
                   <div className={sidebar.menu_item_text}>
-                    <span>{menuItem.name}</span>
+                    <Link href={`${menuItem.to}`} passHref>
+                      <span>{menuItem.name}</span>
+                    </Link>
                     <span className={sidebar.menu_chevron}>
                       {menuItem.subMenus && menuItem.subMenus.length > 0
                         ? showSubMenu[index]
@@ -118,13 +249,15 @@ const Sidebar: NextComponentType = (props: any) => {
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
                         <div key={index}>
-                          <a href={subMenu.to} className="text-decoration-none text-white">
-                            <div className={sidebar.submenu_icon}>
-                              {subMenu.icon}
-                            </div>
-                            <span>{subMenu.name}</span>
-                            {/* {subMenu.name} */}
-                          </a>
+                          <Link href={`${subMenu.to}`}>
+                            <a className="text-white">
+                              <div className={sidebar.submenu_icon}>
+                                {subMenu.icon}
+                              </div>
+                              <span>{subMenu.name}</span>
+                              {/* {subMenu.name} */}
+                            </a>
+                          </Link>
                         </div>
                       ))}
                     </div>
