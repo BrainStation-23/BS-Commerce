@@ -1,4 +1,4 @@
-import { addToCartRequest, Cart, CustomerSignInResponse } from "models";
+import { addToCartRequest, AddToCartResponse, Cart, CustomerSignInResponse, deleteCartItemRequest, deleteCartItemResponse } from "models";
 import { CreateCustomerResponse } from "models";
 import { CreateCustomerRequest } from "models";
 import { CustomerSignInRequest } from "models";
@@ -61,7 +61,8 @@ export interface apiFunction {
   getFeaturedProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
   getPublicProductsById: (productId: GetCustomerProductParams) => Promise< GetCustomerProductResponse | undefined>;
   getCart: () => Promise<Cart[] | undefined>;
-  addToCart: (data: addToCartRequest) => Promise<addToCartRequest[] | undefined>
+  addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>
+  deleteCartItem: (data: deleteCartItemRequest) => Promise<deleteCartItemResponse | undefined>
 }
 
 export interface ProductStore {

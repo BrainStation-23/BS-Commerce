@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import HomeComponent from "@/components/home";
 import axios from "axios";
 import { userAPI } from "APIs";
-import { useDispatch } from "react-redux";
 import { storeAllCartItems } from "toolkit/cart/getAllCartItems";
 import { useAppDispatch } from "customHooks/hooks";
 
