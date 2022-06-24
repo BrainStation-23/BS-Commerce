@@ -12,7 +12,7 @@ const CaegoryCard = (props: any) => {
       (data: any) => data.isSelected
     );
     const isSelectedZero = totalSelectedCategory[0] ? true : false;
-    isSelectedZero ? "" : setShowTable(!isSelectedZero);
+    isSelectedZero ? setShowTable(isSelectedZero) : setShowTable(!isSelectedZero);
     return !isSelectedZero;
   };
 
@@ -21,7 +21,7 @@ const CaegoryCard = (props: any) => {
   }, [showTable]);
   return (
     <>
-      {showTable ? (
+      {product?.categories?.length >0 ? (
         <div
           className="card card-secondary card-outline my-4"
           data-card-name="meta"
