@@ -9,7 +9,6 @@ const LogDetailPage: NextPage = ({ product }) => {
     <div className="bg-light px-5">
       <main>
         <ViewProduct product={product} />
-        {console.log(product)}
       </main>
     </div>
   );

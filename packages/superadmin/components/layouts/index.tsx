@@ -4,6 +4,9 @@ import Sidebar from "./sidebar";
 import { useState, useEffect } from "react";
 import global from "./styles/global.module.css";
 import Viewport from "./viewport";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Layout: NextComponentType = ({ children }) => {
   useEffect(() => {
     typeof document !== undefined
@@ -18,6 +21,7 @@ const Layout: NextComponentType = ({ children }) => {
     <>
       {/* <Viewport /> */}
       <div className="">
+          <ToastContainer />
         <div className="row container-fluid">
           <Sidebar adjustContainer={adjustContainer} />
           <div
@@ -29,6 +33,7 @@ const Layout: NextComponentType = ({ children }) => {
           >
             {children}
           </div>
+
         </div>
       </div>
     </>

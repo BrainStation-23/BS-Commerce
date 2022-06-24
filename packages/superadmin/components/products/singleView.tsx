@@ -2,7 +2,6 @@ import Tooltips from "../global/tooltip";
 
 const SingleView = (props: any) => {
   const { label, value, toolkitMessage } = props;
-  console.log(label, value, toolkitMessage);
 
   return (
     <>

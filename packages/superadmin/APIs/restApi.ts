@@ -47,12 +47,7 @@ export async function createManufacturerRest(
   try {
     const response = await axios.post<CreateManufacturerRequest>(
       `${apiEndPoints.manufacturer}`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlYWZhNWE1LTRkMmQtNDg4MS05MjdjLTc5NWUzMzE3YjVjYiIsInVzZXJuYW1lIjoic3RyaW5nQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NTkzMDU0OTQ0MiwiaWF0IjoxNjU1OTMwNTQ5LCJleHAiOjE2NTYwMTY5NDl9.yrFbvBFXwUj5w47CsRoaDGVsAgqXMIUJqpYtBh63nsE"}`,
-        },
-      }
+      data
     );
     router.push("/Admin/Manufacturer/list");
     toast.success("Create Successful");
@@ -176,11 +171,7 @@ export async function getManufacturerRest(
   pageSize: number
 ): Promise<Manufacturer[] | undefined> {
   try {
-    const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`, {
-      headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NjUwNzM1MzQsImlhdCI6MTY1NTk2NTA3MywiZXhwIjoxNjU2MDUxNDczfQ.qU6tm04pOVLVAfJFbrpDwf9AlLh_WYDc0wXwg7t6cgQ"}`,
-      },
-    });
+    const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`);
     return data?.data as Manufacturer[];
   } catch (error) {
     toast.error(error?.response?.data?.message);
@@ -193,12 +184,7 @@ export async function deleteManufacturerRest(
 ): Promise<Manufacturer[] | undefined> {
   try {
     const { data } = await axios?.delete(
-      `${apiEndPoints?.manufacturerList}/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NjUwNzM1MzQsImlhdCI6MTY1NTk2NTA3MywiZXhwIjoxNjU2MDUxNDczfQ.qU6tm04pOVLVAfJFbrpDwf9AlLh_WYDc0wXwg7t6cgQ"}`,
-        },
-      }
+      `${apiEndPoints?.manufacturerList}/${id}`
     );
     router.push("/Admin/Manufacturer/list");
     toast.success("Successfully deleted");
@@ -215,11 +201,7 @@ export async function getSingleManufacturerRest(
   try {
     console.log("*", data);
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
-    const res = await axios.get(`manufacturers/${data}`, {
-      headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
-      },
-    });
+    const res = await axios.get(`manufacturers/${data}`);
     console.log(res.data);
 
     return res?.data as Manufacturer;
@@ -236,12 +218,7 @@ export async function updateManufacturerRest(
   try {
     const response = await axios.patch<UpdateManufacturerRequest>(
       `manufacturers/${id}`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3NTc0YmEyLWQ1MjctNDgwYi1iZTAzLWIyMjZlMGY2M2ZkNCIsInVzZXJuYW1lIjoiYUBiLmNvbSIsImxvZ0luVGltZSI6MTY1NTk1ODY1NTkxNSwiaWF0IjoxNjU1OTU4NjU1LCJleHAiOjE2NTYwNDUwNTV9.pVu4Pm0EjUdg3sfEd4l2gvBazLO_BMzsTSq_vykVGuc"}`,
-        },
-      }
+      data
     );
     router.push("/Admin/Manufacturer/list");
     toast.success("Edit Successful");

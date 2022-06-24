@@ -2,7 +2,6 @@ import SingleView from "../singleView";
 
 const ProductInfoCard = (props: any) => {
   const { product } = props;
-  console.log(product);
 
   return (
     <>

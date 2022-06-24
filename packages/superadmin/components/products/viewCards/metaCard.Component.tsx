@@ -2,7 +2,6 @@ import SingleView from "../singleView";
 
 const MetaCard = (props: any) => {
   const {product} = props;
-  console.log(product);
   
   return <>
       

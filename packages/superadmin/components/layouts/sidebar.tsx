@@ -9,34 +9,34 @@ const Sidebar: NextComponentType = (props: any) => {
     { name: "Dashboard", to: "/", icon: <i className="bi bi-tv"></i> },
     {
       name: "Catalog",
-      to: "/",
+      // to: "/",
       icon: <i className="bi bi-card-list"></i>,
       subMenus: [
         {
-          name: "Categories",
-          to: "/",
+          name: "Products",
+          to: "/Product",
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
-          name: "Manufacturers",
-          to: "/",
+          name: "Categories",
+          to: "",
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
     },
     {
       name: "Sales",
-      to: "/",
+      // to: "/",
       icon: <i className="bi bi-cart"></i>,
       subMenus: [
         {
           name: "Categories",
-          to: "/",
+          to: "",
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
           name: "Manufacturers",
-          to: "/",
+          to: "/Admin/Manufacturer/list",
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
@@ -118,7 +118,7 @@ const Sidebar: NextComponentType = (props: any) => {
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
                         <div key={index}>
-                          <a>
+                          <a href={subMenu.to} className="text-decoration-none text-white">
                             <div className={sidebar.submenu_icon}>
                               {subMenu.icon}
                             </div>
