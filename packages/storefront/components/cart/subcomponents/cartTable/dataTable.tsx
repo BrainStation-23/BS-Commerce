@@ -2,81 +2,47 @@ import type { NextComponentType } from "next";
 import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 import Image from "next/image";
-interface IICardData {
-  id: number;
-  meta: {
-    title: string;
-    price: string;
-    img: string;
-  };
-  quantity: number;
-  handleRemoveProductFromCart: () => number;
-  handleProductAddition: () => number;
-  handleProductDeletion: () => number;
-}
+import cartDatas from "../../../../allData/cart-data.json";
 
-const DataTable = (
-  props: {
-    cartDatas: IICardData[];
-    handleRemoveProductFromCart(): IICardData;
-    handleProductAddition(): IICardData;
-    handleProductDeletion(): IICardData;
-  },
-  {}
-) => {
-  const removeProductFromCart = (id: number) => {
-    props.handleRemoveProductFromCart(id);
-  };
-  const addProductQuantity = (index: number) => {
-    props.handleProductAddition(index);
-  };
-  const subtractProductQuantity = (index: number, id: number) => {
-    props.handleProductDeletion(index, id);
-  };
-
+const DataTable = () => {
   const tableData = () => {
-    return props.cartDatas.map((cartData, index) => {
+    return cartDatas.data.items.map((cartData, index) => {
       return (
-        <tr key={cartData.id}>
+        <tr key={cartData.productId}>
           <td className="border border-slate-300 px-8 md:px-4 py-4">
             <Image
-              src={cartData.meta.img}
+              src={cartData?.product.photos[0].url}
               alt="product Image"
               width={100}
               height={90}
             />
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-10 py-10">
-            {cartData.meta.title}
+            {cartData.product.info.name}
           </td>
           <td className="border border-slate-300 px-6 py-14 ">
-            <span className="flex justify-center"> ${cartData.meta.price}</span>
+            <span className="flex justify-center">
+              {" "}
+              ${cartData.product.info.price}
+            </span>
           </td>
           <td className="border border-slate-150 md:px-2 xl:px-10 py-4">
             <div className="flex justify-center">
               <div className="box-content h-4 w-12 p-4 border-4">
                 <div className="flex justify-between">
-                  <button onClick={(e) => addProductQuantity(index)}>+</button>
+                  <button>+</button>
                   <div>{cartData.quantity}</div>
-                  <button
-                    onClick={(e) => subtractProductQuantity(index, cartData.id)}
-                  >
-                    -
-                  </button>
+                  <button>-</button>
                 </div>
               </div>
             </div>
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-            <div className="flex justify-center">
-              ${cartData.quantity * Number(cartData.meta.price)}
-            </div>
+            <div className="flex justify-center">${30}</div>
           </td>
           <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
             <div className="flex justify-center">
-              <button onClick={(e) => removeProductFromCart(cartData.id)}>
-                X
-              </button>
+              <button>X</button>
             </div>
           </td>
         </tr>

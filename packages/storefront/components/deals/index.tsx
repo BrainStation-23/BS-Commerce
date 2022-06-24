@@ -3,7 +3,8 @@ import DealsFilter from "./filter/main";
 import PageTitle from "../global/components/pageTitle";
 import DealProductSegment from "./dealProducts/main";
 import ProductSort from "./sort/index";
-const Deals: NextComponentType = () => {
+
+const DealsComponent: NextComponentType = () => {
   return (
     <div className="mt-20">
       <PageTitle title={"Deals"} />
@@ -22,4 +23,4 @@ const Deals: NextComponentType = () => {
   );
 };
 
-export default Deals;
+export default DealsComponent;

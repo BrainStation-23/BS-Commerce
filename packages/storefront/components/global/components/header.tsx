@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { NextComponentType } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Currency from "./currency";
 import HeaderAccount from "./header-account";
@@ -24,6 +25,7 @@ const Header: NextComponentType = () => {
   const [menu, setMenu] = useState(false);
   const [stickyClass, setStickyClass] = useState("relative");
   const customerNumber = "+880 1674314359";
+  const { pathname } = useRouter();
 
   const allCategories: menuLink[] = [
     { name: "vegetable", link: "/", hasSubmenu: true },
@@ -74,16 +76,20 @@ const Header: NextComponentType = () => {
       link: "/",
       hasSubmenu: true,
       submenu: [
-        { name: "About Us", link: "/" },
-        { name: "Service", link: "/" },
-        { name: "FAQ", link: "/" },
+        { name: "About Us", link: "/about" },
+        { name: "Service", link: "/service" },
+        { name: "FAQ", link: "/faq" },
       ],
     },
-    { name: "contact", link: "/", hasSubmenu: false },
+    { name: "contact", link: "/contact", hasSubmenu: false },
   ];
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setMenu(!menu);
   };
 
   const setStickyNavbar = () => {
@@ -105,11 +111,17 @@ const Header: NextComponentType = () => {
     };
   }, []);
 
+  // put the pathname in 'includes' where header needs to be hidden
+
+  if (pathname.includes("/checkout")) {
+    return null;
+  }
+
   return (
     <>
       {/* Top portion */}
       <header className="hidden lg:flex justify-center py-2 border-b border-slate-200">
-        <div className="flex justify-between container text-sm px-3">
+        <div className="flex justify-between container text-sm px-4">
           <div className="space-x-2">
             <Language />
             <span>|</span>
@@ -153,9 +165,9 @@ const Header: NextComponentType = () => {
         </div>
       </div>
       {/* Navbar */}
-      <nav className={`flex justify-center lg:px-4 ${stickyClass}`}>
-        <div className="container">
-          <div className="flex flex-row items-center px-4 lg:px-0">
+      <nav className={`flex justify-center ${stickyClass}`}>
+        <div className="container px-4">
+          <div className="flex flex-row items-center">
             <div
               className="flex flex-row items-center relative rounded-lg mb-3 lg:mb-0 lg:rounded-t-xl lg:rounded-b-none bg-green-600 text-white px-4 py-2 lg:py-3 font-medium w-full lg:w-56 cursor-pointer mr-0 lg:mr-2"
               onClick={toggleOpen}
@@ -190,7 +202,7 @@ const Header: NextComponentType = () => {
             </div>
 
             <div
-              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-11/12 md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
+              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-[calc(464px-2rem)] w-dnd md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
                 isOpen ? "h-[350px]" : "h-0 opacity-0"
               }`}
             >
@@ -223,8 +235,8 @@ const Header: NextComponentType = () => {
             </div>
             {/* Menu */}
             <div
-              className={`shadow-2xl fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-all duration-300 ease-linear ${
-                menu ? "left-0" : "-left-72"
+              className={`fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-[left] duration-300 ease-linear ${
+                menu ? "left-0 dnd-shadow" : "-left-72"
               }`}
             >
               <svg
@@ -245,7 +257,7 @@ const Header: NextComponentType = () => {
               <div className="lg:hidden w-full">
                 <Search placeholder="Search our store" />
               </div>
-              <div className="lg:hidden">
+              <div className="lg:hidden" onClick={closeMenu}>
                 <HeaderAccount />
               </div>
               <div className="lg:hidden flex flex-row text-sm items-center text-gray-900 text-right">
@@ -272,28 +284,33 @@ const Header: NextComponentType = () => {
               </div>
               <ul className="w-full list-none flex lg:flex-row flex-col lg:gap-x-6 my-0">
                 {menus.map((menu) => (
-                  <li key={menu.name} className="group ">
-                    <a className="relative lg:font-medium flex flex-row capitalize justify-between items-center border-b border-slate-200 py-4 lg:border-none lg:py-0 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
-                      {menu.name}
-                      {menu.hasSubmenu && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </a>
+                  <li key={menu.name} className="group">
+                    <Link href={menu.link}>
+                      <a
+                        className="relative lg:font-medium flex flex-row capitalize justify-between items-center border-b border-slate-200 py-4 lg:border-none lg:py-0 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+                        onClick={closeMenu}
+                      >
+                        {menu.name}
+                        {menu.hasSubmenu && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
+                      </a>
+                    </Link>
 
                     {menu.hasSubmenu && (
                       <div
-                        className={`hidden overflow-hidden absolute group-hover:inline-block transition-all duration-300 ease-in bg-white shadow-lg px-6 py-6`}
+                        className={`hidden overflow-hidden absolute lg:group-hover:inline-block transition-all duration-300 ease-in bg-white shadow-lg px-6 py-6`}
                       >
                         <ul className="">
                           {menu.submenu?.map((menu) => (
@@ -301,7 +318,9 @@ const Header: NextComponentType = () => {
                               key={menu.name}
                               className="py-2 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer text-sm"
                             >
-                              {menu.name}
+                              <Link href={menu.link}>
+                                <a>{menu.name}</a>
+                              </Link>
                             </li>
                           ))}
                         </ul>

@@ -1,17 +1,11 @@
 import type { NextComponentType } from "next";
-import React from "react";
-import { Menu } from "@headlessui/react";
+import React, { useState, useRef, useEffect } from "react";
 import Buttons from "../../global/components/buttons/button";
-interface IICardData {
-  id: number;
-  meta: {
-    title: string;
-    price: string;
-    img: string;
-  };
-  quantity: string;
-}
-const CartDropdown = (props: { cartDatas: IICardData[] }) => {
+import cartDatas from "../../../allData/cart-data.json";
+const CartDropdown = () => {
+  const [cartTotal, setCartTotal] = useState(false);
+  const componentRef = useRef();
+
   const cartIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -44,17 +38,29 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
       />
     </svg>
   );
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e: any) {
+      if (componentRef && componentRef.current) {
+        const ref: any = componentRef.current;
+        if (!ref.contains(e.target)) {
+          setCartTotal(false);
+        }
+      }
+    }
+  }, []);
   const dropdownData = () => {
-    return props.cartDatas.map((data) => {
+    return cartDatas.data.items.map((cartData, index) => {
       return (
-        <div key={data.id}>
+        <div key={cartData.productId}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
             <div className="flex flex-col-4 items-center bg-white">
               <div className="col-span-2 ">
                 <a href="#" className="">
                   <img
                     className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                    src={data.meta.img}
+                    src={cartData?.product.photos[0].url}
                     alt="Product Image"
                   />
                 </a>
@@ -62,17 +68,17 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
                   <a href="#" className="text-sm font-bold text-gray-900 mr-2">
-                    {data.meta.title}
+                    {cartData.product.info.name}
                   </a>
                 </div>
                 <div>
                   <div className="py-2">
                     <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                      {data.quantity} &nbsp;
+                      {cartData.quantity} &nbsp;
                     </span>
                     X &nbsp;
                     <span className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {data.meta.price}
+                      $ {cartData.product.info.price}
                     </span>
                   </div>
                 </div>
@@ -89,46 +95,58 @@ const CartDropdown = (props: { cartDatas: IICardData[] }) => {
   };
   return (
     <>
-      <div className="flex items-center justify-center mt-24">
-        <Menu as="div" className="relative inline-block text-left">
+      <div
+        ref={componentRef as any}
+        className="flex items-center justify-center"
+      >
+        <div className="relative inline-block text-left">
           <div>
             <span className="rounded-md shadow-sm">
-              <Menu.Button
+              <button
                 type="button"
                 className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
-              </Menu.Button>
+              </button>
             </span>
           </div>
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg">
-            <div className="rounded-md bg-white shadow-xs">
-              {/* new div starts here */}
-              <div className="py-1 overflow-y-auto h-60">{dropdownData()}</div>
-              {/* new div ends here */}
-              <div className="flex justify-between p-4">
-                <span className="text-base font-semibold">Total</span>
-                <span className="text-base font-semibold">$175.00</span>
-              </div>
-              <div className="px-6 py-2 flex justify-center">
-                <Buttons
-                  bgColor="black"
-                  height={10}
-                  width={68}
-                  text={"VIEW CART"}
-                />
-              </div>
-              <div className="px-6 mb-4 flex justify-center">
-                <Buttons
-                  bgColor="black"
-                  height={10}
-                  width={120}
-                  text={"CHECKOUT"}
-                />
+          {cartTotal && (
+            <div className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg">
+              <div className="rounded-md bg-white shadow-xs">
+                {/* new div starts here */}
+                <div className="py-1 overflow-y-auto h-60">
+                  {dropdownData()}
+                </div>
+                {/* new div ends here */}
+                <div className="flex justify-between p-4">
+                  <span className="text-base font-semibold">Total</span>
+                  <span className="text-base font-semibold">$175.00</span>
+                </div>
+                <div className="px-6 py-2 flex justify-center">
+                  <a href="/cart">
+                    <Buttons
+                      bgColor="black"
+                      height={10}
+                      width={68}
+                      text={"VIEW CART"}
+                    />
+                  </a>
+                </div>
+                <div className="px-6 mb-4 flex justify-center">
+                  <a href="/checkout">
+                    <Buttons
+                      bgColor="black"
+                      height={10}
+                      width={120}
+                      text={"CHECKOUT"}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
-          </Menu.Items>
-        </Menu>
+          )}
+        </div>
       </div>
     </>
   );
