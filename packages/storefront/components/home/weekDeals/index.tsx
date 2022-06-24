@@ -15,7 +15,7 @@ interface Products {
 
 const WeekDeals = ({ products }: Products) => {
   //edited type. was const WeekDeals: FC = () => {}
-  console.log(products);
+  // console.log(products);
   return (
     <>
       <Container className="max-w-7xl">

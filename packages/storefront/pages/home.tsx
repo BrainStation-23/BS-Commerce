@@ -3,11 +3,13 @@ import HomeComponent from "@/components/home";
 import axios from "axios";
 import { userAPI } from "APIs";
 import { storeAllCartItems } from "toolkit/cart/getAllCartItems";
-import { useAppDispatch } from "customHooks/hooks";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 
 const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
   const dispatch = useAppDispatch()
   dispatch(storeAllCartItems(cartData));
+  const store = useAppSelector((state)=> state.getAllCartItemsStore.allCartItems);
+  console.log("Store---------------------", store)
   return <HomeComponent products={products} featuredProducts={featuredProducts} />;
 };
 
