@@ -1,19 +1,29 @@
-import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
-import type { NextComponentType } from "next";
+import { userAPI } from "APIs";
+import { Field, Form, Formik } from "formik";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-
-import { loginSchema } from "../global/schemas/loginSchema";
-
-interface Values {
-  phone: string;
-  password: string;
-}
+import { useCookies } from "react-cookie";
+import { CustomerSignInRequest } from "models";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { storeUserToken } from "toolkit/userAuth/signinSlice";
 
 const Signin = () => {
-  function handleSignin(data: FormikValues) {
-    console.log(data);
+  const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
+  const dispatch = useDispatch();
+
+  async function handleSignin(data: CustomerSignInRequest) {
+    userAPI.signIn(data).then((response: any) => {
+      if (response?.code != 200) {
+        alert(response.response.data.error);
+      } else {
+        dispatch(storeUserToken(response?.data.token));
+        let expires = new Date();
+        expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
+        setCookie("access_token", response?.data.token, { path: "/", expires });
+        window.location.href = "/home";
+      }
+    });
   }
 
   return (
@@ -36,22 +46,24 @@ const Signin = () => {
             <Formik
               initialValues={{
                 phone: "",
+                email: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: values.phone,
+                  phone: "01717584939",
+                  email: values.email,
                   password: values.password,
                 };
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
-              validationSchema={loginSchema}
+              //validationSchema={loginSchema}
             >
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
@@ -60,8 +72,21 @@ const Signin = () => {
                         placeholder="Phone"
                       />
                       <div className="errMsg text-red-600 outline-0">
-                        <ErrorMessage name="phone" />
+                        <ErrorMessage name="username" />
                       </div>
+                    </div> */}
+
+                    <div className="mb-4">
+                      <Field
+                        type="text"
+                        className="w-full p-2 placeholder-gray-600 outline-0"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                      />
+                      {/* <div className="errMsg text-red-600 outline-0">
+                        <ErrorMessage name="username" />
+                      </div> */}
                     </div>
 
                     <div className="mb-4">
@@ -72,9 +97,9 @@ const Signin = () => {
                         name="password"
                         placeholder="Password"
                       />
-                      <div className="errMsg text-red-600">
+                      {/* <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
-                      </div>
+                      </div> */}
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
@@ -96,15 +121,42 @@ const Signin = () => {
                 );
               }}
             </Formik>
-            <div className="text-decoration-none mt-3">
-              <Link data-testid="create-account-link" href="/account/sign-up">
-                <a
-                  data-testid="create-account-page"
-                  className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light"
-                >
-                  Create account
-                </a>
-              </Link>
+            <div className="flex flex-wrap">
+              <div className="text-decoration-none mt-3">
+                <Link data-testid="create-account-link" href="/account/sign-up">
+                  <a
+                    data-testid="create-account-page"
+                    className="text-decoration-none text-gray-600 hover:text-green-600/100 font-weight-light"
+                  >
+                    Create account
+                  </a>
+                </Link>
+              </div>
+              <div className="mt-3">
+                <p className="text-gray-600 ml-1">or sign in with</p>
+              </div>
+              <div className="flex flex-wrap">
+                <button className="mt-3 flex flex-wrap">
+                  <img
+                    className="md:ml-2 lg:ml-2 xl:ml-2 mt-1"
+                    src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg"
+                    height={15}
+                    width={15}
+                  />
+                  <p className="ml-2 mt-1 text-xs">Google</p>
+                </button>
+                <div className="mt-3">
+                  <p className="text-gray-600 ml-1">or</p>
+                </div>
+                <button className="mt-3 flex flex-wrap">
+                  <img
+                    src="https://cdn.cdnlogo.com/logos/f/9/facebook.svg"
+                    height={38}
+                    width={35}
+                  />
+                  <p className="mt-1 text-xs">Facebook</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -115,5 +167,6 @@ const Signin = () => {
 
 export default Signin;
 
-// phone no: 01715969546
-// Pass: P@ssword123
+// phone no: 012345673139
+//email: sbs@gmail.com
+// Pass: 123456

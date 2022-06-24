@@ -29,9 +29,9 @@ export class CategoryDatabase implements ICategoryDatabase {
             });
             return parent;
         };
-        let categoryTree = { 'data': [] }
+        let categoryTree = { 'categories': [] }
         rootItems.forEach(u => {
-            categoryTree['data'].push(generateParentSubcategories(u));
+            categoryTree['categories'].push(generateParentSubcategories(u));
         });
         return categoryTree;
     }
