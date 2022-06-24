@@ -13,6 +13,8 @@ import {
   deleteManufacturerRest,
   getSingleManufacturerRest,
   updateManufacturerRest,
+  updateAdminRest,
+  changePasswordRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
@@ -58,6 +60,8 @@ const restApi: apiFunction = {
   deleteManufacturer: deleteManufacturerRest,
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
+  updateAdmin: updateAdminRest,
+  changePassword: changePasswordRest
 };
 
 export const userAPI: apiFunction =

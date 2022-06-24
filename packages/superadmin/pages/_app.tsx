@@ -14,6 +14,9 @@ import { useAppSelector } from "../redux-hooks";
 Axios.defaults.baseURL = config?.restPrefix;
 
 let persistor = persistStore(store);
+Axios.defaults.headers.common = {
+  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRiOWU0ODQ0LWE2NzMtNDc3ZS1hMDNlLTQ1MTE0ZTk5MzdiMCIsInVzZXJuYW1lIjoicUB3LmNvbSIsImxvZ0luVGltZSI6MTY1NjA4NTU5ODcwMSwiaWF0IjoxNjU2MDg1NTk4LCJleHAiOjE2NTYxNzE5OTh9.rJN4hzyfFFm4r6tPzmFjhoeQiEpT1Hiunev7cHILKaU`,
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
