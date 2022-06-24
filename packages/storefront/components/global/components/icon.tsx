@@ -1,10 +1,21 @@
+import { userAPI } from "APIs";
+import { Product } from "models";
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { storeTotalCartItems } from "toolkit/cart/addToCartSlice";
 
-const Icon = () => {
+interface SingleProduct {
+  product: Product
+}
+
+const Icon = (props: SingleProduct) => {
+  const { product } = props;
+  const dispatch = useDispatch();
+
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
-      <Link href="/cart" passHref>
+      <Link href="#" passHref>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +24,13 @@ const Icon = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
+             onClick={() => {
+              userAPI.addToCart({
+                productId: product.id,
+                quantity: 1,
+              })
+              dispatch(storeTotalCartItems(1));
+             }}
           >
             <path
               strokeLinecap="round"

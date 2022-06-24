@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import productsReducer from "./toolkit/ProductsSlice";
 import tokenReducer from "./toolkit/userAuth/signinSlice";
+import addToCartReducer from "./toolkit/cart/addToCartSlice";
 
 const persistConfig = {
   key: 'root',
@@ -11,13 +12,14 @@ const persistConfig = {
 }
 
 const persistedProductReducer = persistReducer(persistConfig, productsReducer); 
-const persistedTokenReducer = persistReducer(persistConfig, tokenReducer); 
-
+const persistedTokenReducer = persistReducer(persistConfig, tokenReducer);
+const persistedTotalCartItemsReducer = persistReducer(persistConfig, addToCartReducer); 
 
 export const store = configureStore({
   reducer: {
     productsStore: persistedProductReducer,
     tokenStore: persistedTokenReducer,
+    totalCartItemsStore: persistedTotalCartItemsReducer,
   },
 });
 

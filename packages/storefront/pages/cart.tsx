@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 
 import CartComponent from "../components/cart/index";
 const newData = {
-    productId: "101",
+    productId: "1035465768",
     quantity: 2,
 };
 userAPI.addToCart(newData);

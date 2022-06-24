@@ -45,7 +45,7 @@ const Product = (props: SingleProduct) => {
                   </div>
                 </div>
                 <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
-                  <Icon />
+                  <Icon product={product} />
                 </div>
                 <ProductInfo product={product} />
               </div>

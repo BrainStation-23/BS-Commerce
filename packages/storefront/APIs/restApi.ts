@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addToCartRequest, Cart, GetCustomerAllProductsResponse } from "models";
+import { addToCartRequest, AddToCartResponse, Cart, GetCustomerAllProductsResponse } from "models";
 import { GetCustomerProductResponse } from "models";
 import { CustomerSignInRequest } from "models";
 import { CreateCustomerResponse } from "models";
@@ -104,7 +104,7 @@ export async function getCartRest(): Promise<Cart[] | undefined> {
     try {
         const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
             headers: {
-                Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NjUwNzM1MzQsImlhdCI6MTY1NTk2NTA3MywiZXhwIjoxNjU2MDUxNDczfQ.qU6tm04pOVLVAfJFbrpDwf9AlLh_WYDc0wXwg7t6cgQ"}`,
+                Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
             },
         });
         return data?.data as Cart[];
@@ -115,18 +115,18 @@ export async function getCartRest(): Promise<Cart[] | undefined> {
 
 export async function addToCartRest(
     cartData: addToCartRequest
-): Promise<addToCartRequest[] | undefined> {
+): Promise<AddToCartResponse[] | undefined> {
     try {
         const { data } = await axios?.post(
             `${apiEndPoints?.getCart}`, cartData,
             {
                 headers: {
-                    Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM5ODZhNThiLWQ2ZjctNGE2Zi04YzczLTQ2YTI4ZDM2OTNhYiIsInVzZXJuYW1lIjoiYmJiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTU5NzUzNjgxMzEsImlhdCI6MTY1NTk3NTM2OCwiZXhwIjoxNjU2MDYxNzY4fQ.80yx8OG8hJd6VrJmMeEtFlw2CtnY6mHOuCUadAClXPM"}`,
+                    Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
                 },
             }
         );
         console.log("**************125*******************", data);
-        return data?.data as addToCartRequest[];
+        return data?.data as AddToCartResponse[];
     } catch (error) {
         toast.error(error?.response?.data?.message);
     }

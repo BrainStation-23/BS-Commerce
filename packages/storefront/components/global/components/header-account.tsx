@@ -9,17 +9,19 @@ import { useDispatch } from "react-redux";
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState("null");
   const dispatch = useDispatch();
+  const [isLoggedIn, setIsLoggedIn] = useState("null");
+  const [showCartDropdown, setShowCartDropdown] = useState(false);
+
+  const showCartDropDown = () => {
+    setShowCartDropdown(!showCartDropdown);
+  };
 
   useEffect(() => {
     setIsLoggedIn(JSON.parse(localStorage.getItem("persist:root")).access_token);
   }, []);
-  console.log(JSON.parse(localStorage.getItem("persist:root")).access_token);
-  const [showCartDropdown, setShowCartDropdown] = useState(false);
-  const showCartDropDown = () => {
-    setShowCartDropdown(!showCartDropdown);
-  };
+
+  //console.log(totalCartItems);
   const links = [
     { name: "Register", link: "/account/sign-up" },
     { name: "Login", link: "/account/sign-in" },
