@@ -1,0 +1,13 @@
+.cotaniner_narrow {
+  margin-top: 80px;
+  margin-left: 260px;
+  transition: 0.3s ease-in;
+  width: 90% !important;
+}
+
+.container_broad {
+  margin-top: 80px;
+  margin-left: 90px;
+  transition: 0.3s ease-in;
+  width: 100% !important;
+}
