@@ -18,7 +18,8 @@ const Login = () => {
   const router = useRouter();
   async function handleLogin(data: SignInRequest) {
     const response = await userAPI.signin(data, router);
-    if (response?.data.token) {
+    console.log(response?.data.token);
+    if (response?.data.token !== null) {
       dispatch(saveToken(response?.data.token!));
     }
     console.log(response);
