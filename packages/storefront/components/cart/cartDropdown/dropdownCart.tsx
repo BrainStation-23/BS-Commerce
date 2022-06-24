@@ -1,7 +1,7 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
 import Buttons from "../../global/components/buttons/button";
-import cartData from "../../../allData/cart-data.json";
+import cartDatas from "../../../allData/cart-data.json";
 const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
@@ -51,16 +51,16 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
-    return cartData.allCartList.map((data) => {
+    return cartDatas.data.items.map((cartData, index) => {
       return (
-        <div key={data.id}>
+        <div key={cartData.productId}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
             <div className="flex flex-col-4 items-center bg-white">
               <div className="col-span-2 ">
                 <a href="#" className="">
                   <img
                     className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                    src={data.meta?.img}
+                    src={cartData?.product.photos[0].url}
                     alt="Product Image"
                   />
                 </a>
@@ -68,17 +68,17 @@ const CartDropdown = () => {
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
                   <a href="#" className="text-sm font-bold text-gray-900 mr-2">
-                    {data.meta?.title}
+                    {cartData.product.info.name}
                   </a>
                 </div>
                 <div>
                   <div className="py-2">
                     <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                      {data.quantity} &nbsp;
+                      {cartData.quantity} &nbsp;
                     </span>
                     X &nbsp;
                     <span className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {data.meta?.price}
+                      $ {cartData.product.info.price}
                     </span>
                   </div>
                 </div>
