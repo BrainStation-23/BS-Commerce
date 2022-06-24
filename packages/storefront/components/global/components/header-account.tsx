@@ -13,9 +13,9 @@ const HeaderAccount: React.FC<Properties> = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLoggedIn(JSON.parse(localStorage.getItem("persist:root")).access_token);
+    setIsLoggedIn(JSON.parse(localStorage?.getItem("persist:root"))?.access_token);
   }, []);
-  console.log(JSON.parse(localStorage.getItem("persist:root")).access_token);
+  console.log(JSON.parse(localStorage?.getItem("persist:root"))?.access_token);
   const [showCartDropdown, setShowCartDropdown] = useState(false);
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
