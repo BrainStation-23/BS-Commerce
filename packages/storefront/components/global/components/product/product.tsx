@@ -24,7 +24,7 @@ const Product = (props: SingleProduct) => {
                       product={product}
                       height={212}
                       width={212}
-                      src={product.photos[0].url}
+                      src={product?.photos[0]?.url}
                       alt={product.info.name}
                     />
 

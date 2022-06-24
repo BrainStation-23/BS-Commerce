@@ -15,7 +15,7 @@ const Icon = (props: SingleProduct) => {
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
-      <Link href="#" passHref>
+      <Link href="/" passHref>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

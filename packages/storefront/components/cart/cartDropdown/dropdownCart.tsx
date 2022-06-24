@@ -59,9 +59,8 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
+    console.log("))))))))))))))))))))))))))))))", cartData.items.length)
     return cartData.items.map((cartData, index) => {
-      console.log("))))))))))))))))))))))))))))))", cartData)
-
       return (
         <div key={cartData.productId}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
@@ -118,7 +117,7 @@ const CartDropdown = () => {
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
-                <span className="badge badge-light">{totalCartItems}</span>
+                <p className="badge badge-light">{cartData.items.length}</p>
               </button>
             </span>
           </div>
