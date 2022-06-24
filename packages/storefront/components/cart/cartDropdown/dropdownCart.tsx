@@ -9,7 +9,10 @@ const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
 
+  const cartData = useAppSelector((state) => state.getAllCartItemsStore.allCartItems);
+
   let totalCartItems = useAppSelector((state) => state.addToCartStore.totalCatItems)
+
 
   const cartIcon = (
     <svg
@@ -56,7 +59,9 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
-    return cartDatas.data.items.map((cartData, index) => {
+    return cartData.items.map((cartData, index) => {
+      console.log("))))))))))))))))))))))))))))))", cartData)
+
       return (
         <div key={cartData.productId}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
@@ -65,7 +70,7 @@ const CartDropdown = () => {
                 <a href="#" className="">
                   <img
                     className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                    src={cartData?.product.photos[0].url}
+                    src={cartData?.product?.photos[0]?.url}
                     alt="Product Image"
                   />
                 </a>
@@ -73,7 +78,7 @@ const CartDropdown = () => {
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
                   <a href="#" className="text-sm font-bold text-gray-900 mr-2">
-                    {cartData.product.info.name}
+                    {cartData?.product?.info?.name}
                   </a>
                 </div>
                 <div>
@@ -82,9 +87,9 @@ const CartDropdown = () => {
                       {cartData.quantity} &nbsp;
                     </span>
                     X &nbsp;
-                    <span className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {cartData.product.info.price}
-                    </span>
+                    <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
+                      $ {cartData?.product?.info?.price}
+                    </p>
                   </div>
                 </div>
               </div>

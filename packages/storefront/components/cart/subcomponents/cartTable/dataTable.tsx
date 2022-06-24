@@ -7,7 +7,7 @@ import { useAppSelector } from "customHooks/hooks";
 
 const DataTable = () => {
   const cartData = useAppSelector((state) => state.getAllCartItemsStore.allCartItems);
-  console.log(cartData);
+  console.log("From Data Table", cartData);
   const tableData = () => {
     return cartDatas.data.items.map((cartData, index) => {
       return (
