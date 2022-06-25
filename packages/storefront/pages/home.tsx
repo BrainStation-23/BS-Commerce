@@ -10,8 +10,7 @@ const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
   const dispatch = useAppDispatch()
   dispatch(storeAllCartItems(cartData));
   const store = useAppSelector((state)=> state.getAllCartItemsStore.allCartItems);
-  // console.log("Products---------------------", products)
-  // console.log("Carts---------------------", cartData)
+
   return <HomeComponent products={products} featuredProducts={featuredProducts} />;
 };
 

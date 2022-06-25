@@ -135,7 +135,7 @@ const CartDropdown = () => {
                             >
                                 {cartIcon}
                                 <p className="badge badge-light">
-                                    {cartData?.items?.length ? cartData?.items?.length : 0}
+                                    {cartData?.items?.length}
                                 </p>
                             </button>
                         </span>
