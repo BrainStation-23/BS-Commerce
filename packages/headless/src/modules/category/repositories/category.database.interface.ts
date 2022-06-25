@@ -5,4 +5,5 @@ import { Category, responseCategory } from 'src/entity/category';
 export abstract class ICategoryDatabase {
     abstract getCategory:(categoryId: string) => Promise< Category | null>;
     abstract getCategoryList:() => Promise< responseCategory[] | null>;
+    abstract getCategoryBySlug:(slug: string) => Promise< Category | null>;
 }

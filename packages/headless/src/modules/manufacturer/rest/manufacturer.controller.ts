@@ -1,9 +1,11 @@
+import { DeleteManufacturerSuccessResponseDto, DeleteManufacturerErrorResponseDto } from './../dto/deleteManufacturer.dto';
+import { UpdateManufacturerDto, UpdateManufacturerErrorResponseDto, UpdateManufacturerSuccessResponseDto } from './../dto/updateManufacturer.dto';
 import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
     Body,
     Controller,
@@ -20,15 +22,44 @@ import {
     HttpStatus
 } from '@nestjs/common';
 import { Response } from 'express';
+import { GetManufacturersErrorResponseDto, GetManufacturersQueryDto, GetManufacturersSuccessResponseDto } from '../dto/getManufacturers.dto';
+import { GetManufacturerErrorResponseDto, GetManufacturerSuccessResponseDto } from '../dto/getManufacturer.dto';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
-@ApiBearerAuth('BearerAuth')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 export class ManufacturerController {
     constructor(
         private manufacturerService: ManufacturerService
     ) { }
 
+    /**
+     * @GET
+     * The getAllManufacturers function executes when manufacturers/ api is called
+     * for getting all manufacturers
+     * @param skip Optional
+     * @param limit Optional
+     * @param res res is used for sending status code
+     * @returns {Object} Object of {data} | Object of {errors, error}
+     */
+     @Get('/')
+     @ApiResponse({
+         description: 'Get Manufacturers Success Response',
+         type: GetManufacturersSuccessResponseDto,
+         status: HttpStatus.OK
+     })
+     @ApiResponse({
+         description: 'Get Manufacturers Error Response',
+         type: GetManufacturersErrorResponseDto,
+         status: HttpStatus.BAD_REQUEST,
+         
+     })
+     async getAllManufacturers(@Query() query: GetManufacturersQueryDto, @Res({ passthrough: true }) res: Response) {
+         const { code, ...response } = await this.manufacturerService.getAllManufacturers(query);
+         res.status(code);
+         return response;
+     }
+    
     /**
      * @POST
      * The addManufacturer function executes when manufacturers/create api is called
@@ -42,12 +73,12 @@ export class ManufacturerController {
         description: 'Create Manufacturer Success Response',
         type: CreateManufacturerSuccessResponseDto,
         status: HttpStatus.OK
-      })
-      @ApiResponse({
+    })
+    @ApiResponse({
         description: 'Create Manufacturer Error Response',
         type: CreateManufacturerErrorResponseDto,
         status: HttpStatus.BAD_REQUEST
-      })
+    })
     async addManufacturer(@Body() manufacturer: CreateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.addManufacturer(manufacturer);
         res.status(code);
@@ -63,24 +94,18 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Get('/:manufacturerId')
+    @ApiResponse({
+        description: 'Get Manufacturer Success Response',
+        type: GetManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Get Manufacturer Error Response',
+        type: GetManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async getManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.getManufacturer(manufacturerId);
-        res.status(code);
-        return response;
-    }
-
-    /**
-     * @GET
-     * The getAllManufacturers function executes when manufacturers/ api is called
-     * for getting all manufacturers
-     * @param skip Optional
-     * @param limit Optional
-     * @param res res is used for sending status code
-     * @returns {Object} Object of {data} | Object of {errors, error}
-     */
-    @Get('/')
-    async getAllManufacturers(@Query('skip') skip: number, @Query('limit') limit: number, @Res({ passthrough: true }) res: Response) {
-        const { code, ...response } = await this.manufacturerService.getAllManufacturers(skip, limit);
         res.status(code);
         return response;
     }
@@ -95,7 +120,17 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Patch('/:manufacturerId')
-    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: Manufacturer, @Res({ passthrough: true }) res: Response) {
+    @ApiResponse({
+        description: 'Update Manufacturer Success Response',
+        type: UpdateManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Update Manufacturer Error Response',
+        type: UpdateManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
+    async updateManufacturer(@Param('manufacturerId') manufacturerId: string, @Body() manufacturer: UpdateManufacturerDto, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer);
         res.status(code);
         return response;
@@ -110,6 +145,16 @@ export class ManufacturerController {
      * @returns {Object} Object of {data} | Object of {errors, error}
      */
     @Delete('/:manufacturerId')
+    @ApiResponse({
+        description: 'Delete Manufacturer Success Response',
+        type: DeleteManufacturerSuccessResponseDto,
+        status: HttpStatus.OK
+    })
+    @ApiResponse({
+        description: 'Delete Manufacturer Error Response',
+        type: DeleteManufacturerErrorResponseDto,
+        status: HttpStatus.BAD_REQUEST
+    })
     async deleteManufacturer(@Param('manufacturerId') manufacturerId: string, @Res({ passthrough: true }) res: Response) {
         const { code, ...response } = await this.manufacturerService.deleteManufacturer(manufacturerId);
         res.status(code);
