@@ -6,8 +6,10 @@ import Image from "next/image";
 import { useAppSelector } from "customHooks/hooks";
 import { userAPI } from "APIs";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const DataTable = () => {
+    const router = useRouter();
     const cartData = useAppSelector(
         (state) => state.getAllCartItemsStore.allCartItems
     );
@@ -50,17 +52,18 @@ const DataTable = () => {
                     </td>
                     <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
                         <div className="flex justify-center">
-                            <Link href="/cart" passHref>
-                                <button
-                                    onClick={() => {
-                                        userAPI.deleteCartItem({
-                                            productId: cartData.productId,
-                                        });
-                                    }}
-                                >
-                                    X
-                                </button>
-                            </Link>
+                            <button
+                                onClick={() => {
+                                    userAPI.deleteCartItem({
+                                        productId: cartData.productId,
+                                    });
+                                    location.href =
+                                        "http://localhost:3002/home";
+                                    // router.push('/cart');
+                                }}
+                            >
+                                X
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -116,12 +119,21 @@ const DataTable = () => {
                                 />
                             </th>
                             <th className="p-4">
-                                <Buttons
-                                    bgColor="black"
-                                    height={12}
-                                    width={120}
-                                    text={"CLEAR CART"}
-                                />
+                                <button
+                                    style={{ background: "black", color: "white", height: "50px", width: "120px"}}
+                                    // bgColor="black"
+                                    // height={12}
+                                    // width={120}
+                                    // text={"CLEAR CART"}
+                                    onClick={() => {
+                                        userAPI.deleteAllCartItem();
+                                        location.href =
+                                            "http://localhost:3002/home";
+                                        // router.push('/cart');
+                                    }}
+                                >
+                                    CLEAR CART
+                                </button>
                             </th>
                         </tr>
                     </tbody>

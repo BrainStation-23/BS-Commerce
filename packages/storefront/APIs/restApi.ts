@@ -143,19 +143,19 @@ export async function addToCartRest(
 }
 
 export async function deleteFromCartRest(
-  productId: deleteCartItemRequest
+  data: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
   try {
-    console.log("from delete apis", productId)
+    // console.log("from delete apis", data)
     const res = await axios?.delete(
-      `${apiEndPoints?.deleteCartItem}/${productId}`,
+      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
       {
         headers: {
           Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
         },
       }
     );
-    console.log("**************125*******************", res);
+    // console.log("**************125*******************", res);
     return res?.data as deleteCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -170,11 +170,11 @@ export async function deleteAllFromCartRest(
       `${apiEndPoints?.deleteAllCartItem}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
         },
       }
     );
-    //console.log("**************125*******************", data);
+    // console.log("**************125*******************", data);
     return data?.data as deleteCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

@@ -4,7 +4,7 @@ export const apiEndPoints = {
     register: '/customer/auth/register',
     login: '/customer/auth/sign-in',
     getCart: `/cart`,
-    deleteCartItem: `/cart/item?productId=`,
-    deleteAllCartItem: '/cart/items',
+    deleteCartItem: `/cart/item`,
+    deleteAllCartItem: '/cart/allitems',
     updateCartItem: `/cart/item`
 }
