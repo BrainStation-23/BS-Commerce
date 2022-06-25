@@ -35,7 +35,7 @@ export class CategoryController {
     return response;
   }
 
-  @Get('list')
+  @Get()
   @ApiResponse({
     description: 'Get Category List API',
     type: getCategoryListSuccessResponseDto,

@@ -37,12 +37,12 @@ export class CategoryDatabase implements ICategoryDatabase {
     }
 
     async getCategoryList(): Promise<responseCategory[] | null> {
-        let categories = await CategoryModel.find({}).select('name imageId slug ancestors -_id').lean();
+        let categories = await CategoryModel.find({}).select('name slug ancestors -_id').lean();
         let category: any = this.generateCategoryTree(categories);
         return category;
     }
 
     async getCategory(categoryId: string): Promise<Category | null> {
-        return await CategoryModel.findOne({categoryId })
+        return await CategoryModel.findOne({id: categoryId }).select('-_id').lean();
     }
 }
