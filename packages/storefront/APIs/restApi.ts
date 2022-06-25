@@ -1,3 +1,4 @@
+import { getCartResponse } from './../../models/src/cart/getCart';
 import axios from "axios";
 import {
   addToCartRequest,
@@ -109,15 +110,15 @@ export async function getPublicProductByIdRest(
   }
 }
 
-export async function getCartRest(): Promise<Cart[] | undefined> {
+export async function getCartRest(): Promise<getCartResponse | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
       },
     });
     // console.log("Cart from apis-------------------",data)
-    return data?.data as Cart[];
+    return data?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
@@ -129,7 +130,7 @@ export async function addToCartRest(
   try {
     const res = await axios?.post(`${apiEndPoints?.getCart}`, cartData, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
       },
     });
     console.log("cart data from ==================", res.data)
@@ -151,7 +152,7 @@ export async function deleteFromCartRest(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
         },
       }
     );
@@ -170,7 +171,7 @@ export async function deleteAllFromCartRest(
       `${apiEndPoints?.deleteAllCartItem}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
         },
       }
     );
@@ -189,7 +190,7 @@ export async function updateCartRest(
       `${apiEndPoints?.updateCartItem}/${productId}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNmQyYTkwLWM5ZjAtNDA4YS04MjliLWEyYWM3NWNiYWRmZSIsImVtYWlsIjoic2Jzd2FybmFAZ21haWwuY29tIiwicGhvbmUiOiIwMTcyNjk0Mzk0OCIsImxvZ0luVGltZSI6MTY1NjA0NzIzMjAwOSwiaWF0IjoxNjU2MDQ3MjMyLCJleHAiOjE2NTY5MTEyMzJ9.7Ab_5MtqbLXHkt6V2NAogNKMX0tk2i2lBbUYMcfmklQ"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
         },
       }
     );

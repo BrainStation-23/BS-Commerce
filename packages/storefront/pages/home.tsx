@@ -19,11 +19,12 @@ export async function getServerSideProps(context: any) {
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
   const cartData = await userAPI.getCart();
+  console.log("22================", allProducts);
   return {
     props: {
       products: allProducts,
       featuredProducts: featuredProducts,
-      cartData: cartData,
+      cartData: cartData || [],
     }
   }
 }
