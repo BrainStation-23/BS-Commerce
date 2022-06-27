@@ -443,8 +443,9 @@ const ManufactureList = ({ manufactureData }: any) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {paginateData.length > 0 &&
-                                paginateData.map((manufacturer: any) => (
+                            {console.log(paginateData) }
+                            {paginateData?.length > 0 &&
+                                paginateData?.map((manufacturer: any) => (
                                     <SingleManufacturer
                                         key={manufacturer.id}
                                         manufacturer={manufacturer}

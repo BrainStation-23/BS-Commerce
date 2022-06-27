@@ -28,7 +28,7 @@ const Sidebar: NextComponentType = (props: any) => {
         {
           name: "Manufacturers",
 
-          to: "/Admin/Manufacturer/add-new",
+          to: "/Admin/Manufacturer/list",
 
           icon: <i className="bi bi-bullseye"></i>,
         },
