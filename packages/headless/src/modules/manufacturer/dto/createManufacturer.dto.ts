@@ -5,38 +5,42 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLen
 import { ManufacturerDto } from './manufacturer.dto';
 import { ManufacturerSeoDto } from './manufacturerSeo.dto';
 import { HttpStatus } from '@nestjs/common';
+import { Type } from 'class-transformer';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 
 export class CreateManufacturerDto implements CreateManufacturerRequest {
-    @ApiProperty()
+    @ApiProperty({required: true})
     @IsString()
     @IsNotEmpty()
     @MinLength(3)
     name: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false})
     @IsString()
     @IsOptional()
     description?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false})
     @IsString()
     @IsOptional()
     picture?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false})
     @IsBoolean()
     @IsOptional()
     isPublished?: boolean;
 
-    @ApiProperty()
+    @ApiProperty({ required: false})
     @IsNumber()
     @IsOptional()
     displayOrder?: number;
 
-    @ApiProperty()
+    @ApiProperty({ type: ManufacturerSeoDto, required: false})
     @IsOptional()
     @ValidateNested({ each: true })
     @IsObject()
+    // @Type(() => ManufacturerSeoDto)
+    @CustomValidator(ManufacturerSeoDto)
     seo?: ManufacturerSeoDto
 }
 
