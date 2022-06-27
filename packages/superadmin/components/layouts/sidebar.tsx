@@ -189,7 +189,10 @@ const Sidebar: NextComponentType = (props: any) => {
   };
   return (
     <>
-      <HeaderBar handleTogglebarStatus={handleTogglebarStatus} />
+      <HeaderBar
+        handleTogglebarStatus={handleTogglebarStatus}
+        displayName={props.displayName}
+      />
       <div
         className={
           inactive

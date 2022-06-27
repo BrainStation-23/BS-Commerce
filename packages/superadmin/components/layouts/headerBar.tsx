@@ -32,7 +32,7 @@ const HeaderBar: FC = (props: any) => {
           <i className="bi bi-list"></i>
         </div>
         <div className={nav.nav_content}>
-          <div className={nav.nav_username}>John Smith</div>
+          <div className={nav.nav_username}>{props.displayName}</div>
           <div
             className={nav.nav_username}
             style={{ cursor: "pointer" }}

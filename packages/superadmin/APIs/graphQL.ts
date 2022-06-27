@@ -4,6 +4,7 @@ import { User } from "../utils/types";
 import client from "../graphqlSchema/apollo-client";
 import {
   CreateProductRequest,
+  GetUserSuccessResponse,
   Product,
   SignInRequest,
   SignInSuccessResponse,
@@ -39,5 +40,11 @@ export async function createAdminGraphql(): Promise<User | undefined> {
 }
 
 export async function getAdminsGraphql(): Promise<User[] | undefined> {
+  return;
+}
+
+export async function getUserProfileGraphql(): Promise<
+  GetUserSuccessResponse | undefined
+> {
   return;
 }

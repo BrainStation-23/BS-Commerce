@@ -11,8 +11,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import global from "./styles/global.module.css";
+import axios from "axios";
+import { getUserProfileGraphql } from "../../APIs/graphQL";
+import { userAPI } from "../../APIs";
+import { User } from "models";
 
 const Layout: NextComponentType = ({ children }) => {
+  const [userData, setUserData] = useState<User>();
   const { pathname } = useRouter();
   const router = useRouter();
   const token = useAppSelector((state) => state.persistedReducer.auth.token);
@@ -29,7 +34,12 @@ const Layout: NextComponentType = ({ children }) => {
     typeof document !== undefined
       ? require("bootstrap/dist/js/bootstrap")
       : null;
-    // redirect to login if no token found
+
+    async function getProfile() {
+      const response = await userAPI.getUserProfile();
+      setUserData(response?.data);
+    }
+    getProfile();
   }, []);
 
   const [adjustFullContainer, setAdjustFullContainer] = useState(false);
@@ -47,7 +57,10 @@ const Layout: NextComponentType = ({ children }) => {
       <div className="">
         <ToastContainer />
         <div className="row container-fluid">
-          <Sidebar adjustContainer={adjustContainer} />
+          <Sidebar
+            displayName={userData?.displayName}
+            adjustContainer={adjustContainer}
+          />
           <div
             className={
               adjustFullContainer

@@ -128,8 +128,8 @@ const Login = () => {
       <span className="w-100 mb-3 pb-3 border-bottom border-1 flex-grow-1 text-center h2">
         Defaults for admin area
       </span>
-      <span className="text-muted">Admin email: admin@yourstore.com</span>
-      <span className="text-muted">Admin password: Admin123#</span>
+      <span className="text-muted">Admin email: </span>
+      <span className="text-muted">Admin password: </span>
     </div>
   );
 };

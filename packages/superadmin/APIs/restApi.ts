@@ -10,6 +10,8 @@ import {
   SignInSuccessResponse,
   CreateManufacturerRequest,
   UpdateManufacturerRequest,
+  GetUserResponse,
+  GetUserSuccessResponse,
 } from "models";
 import { User } from "../utils/types";
 import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
@@ -224,6 +226,18 @@ export async function updateManufacturerRest(
     toast.success("Edit Successful");
     return response.data as UpdateManufacturerRequest;
   } catch (error) {
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getUserProfileRest(): Promise<
+  GetUserSuccessResponse | undefined
+> {
+  try {
+    const { data } = await axios.get(`${apiEndPoints.user}`);
+    return data as GetUserSuccessResponse;
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }

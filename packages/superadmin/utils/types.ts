@@ -4,6 +4,8 @@ import {
   UpdateProductRequest,
   SignInRequest,
   SignInSuccessResponse,
+  GetUserResponse,
+  GetUserSuccessResponse,
 } from "models";
 import {
   CreateManufacturerRequest,
@@ -75,6 +77,7 @@ export interface apiFunction {
     data: UpdateManufacturerRequest,
     router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
+  getUserProfile: () => Promise<GetUserSuccessResponse | undefined>;
 }
 
 export interface adminCreate {
