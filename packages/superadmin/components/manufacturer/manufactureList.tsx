@@ -9,9 +9,16 @@ import { userAPI } from "../../APIs/index";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+<<<<<<< HEAD
 const ManufactureList = ({ manufactureData }: any) => {
   const router = useRouter();
   const [search, setSearch] = useState(false);
+=======
+const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
+  const router = useRouter();
+  const [search, setSearch] = useState(false);
+  const [reloadPage, setReloadPage] = useState(false);
+>>>>>>> ef7f42838225188644d20586e985a85504ef94b3
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
   const [checkbox, setCheckbox] = useState([]);
@@ -54,17 +61,19 @@ const ManufactureList = ({ manufactureData }: any) => {
     checkbox.length === 1
       ? userAPI.deleteManufacturer(checkbox[0], router)
       : setReq(true);
-
-    setModal({ ...modal, delete: false });
+      
+      setModal({ ...modal, delete: false });
+      checkbox.length === 1 ? getAllManufacturers() : "";
   };
 
   const handleClickPage = (activePage: any) => {
     setActivePage(activePage);
   };
+  useEffect(()=>{},[reloadPage]);
 
   return (
     <>
-      <main className="px-5">
+      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 className="h2">Manufacturers</h1>
           <div className="btn-toolbar mb-2 mb-md-0">
@@ -258,6 +267,7 @@ const ManufactureList = ({ manufactureData }: any) => {
                   <hr />
                   <p>Please select only one record.</p>
                   <br />
+<<<<<<< HEAD
 
                   <div className="clearfix">
                     <button
@@ -282,6 +292,32 @@ const ManufactureList = ({ manufactureData }: any) => {
           <></>
         )}
 
+=======
+
+                  <div className="clearfix">
+                    <button
+                      type="button"
+                      className="btn btn-light"
+                      style={{
+                        border: "1px solid gray",
+                        backgroundColor: "gray",
+                        color: "white",
+                        marginRight: "10px",
+                      }}
+                      onClick={() => handleReq()}
+                    >
+                      Ok
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+
+>>>>>>> ef7f42838225188644d20586e985a85504ef94b3
         {search ? (
           <div style={{ marginLeft: "20px" }}>
             <Formik
@@ -429,7 +465,11 @@ const ManufactureList = ({ manufactureData }: any) => {
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {console.log(paginateData)}
+=======
+              {/* {console.log(paginateData)} */}
+>>>>>>> ef7f42838225188644d20586e985a85504ef94b3
               {paginateData?.length > 0 &&
                 paginateData?.map((manufacturer: any) => (
                   <SingleManufacturer
