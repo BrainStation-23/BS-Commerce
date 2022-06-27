@@ -4,6 +4,7 @@ import axios from "axios";
 import { userAPI } from "APIs";
 import { storeAllCartItems } from "toolkit/cart/getAllCartItems";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+var cookie = require('cookie');
 
 const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
 
@@ -15,14 +16,16 @@ const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
   return <HomeComponent products={products} featuredProducts={featuredProducts} />;
 };
 
-export async function getServerSideProps(context: any) {
-  const allProducts = await userAPI.getPublicProducts();
-  const featuredProducts = await userAPI.getFeaturedProducts();
-  const cartData = await userAPI.getCart();
+export async function getServerSideProps({ req }) {
+  let { token } = cookie.parse(req.headers?.cookie);
+  const allProducts = await userAPI.getPublicProducts(token);
+  console.log(allProducts)
+  const featuredProducts = await userAPI.getFeaturedProducts(token);
+  const cartData = await userAPI.getCart(token);
   return {
     props: {
       products: allProducts || [],
-      featuredProducts: featuredProducts || [],
+      featuredProducts:  featuredProducts ||[],
       cartData: cartData || [],
     }
   }

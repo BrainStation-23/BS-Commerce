@@ -12,6 +12,9 @@ interface SingleProduct {
 const Icon = (props: SingleProduct) => {
   const { product } = props;
   const dispatch = useDispatch();
+  // const token = useAppSelector((state) => { })
+  // const token = document.cookie("token");
+  // console.log(token)
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">

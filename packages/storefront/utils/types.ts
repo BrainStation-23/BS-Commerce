@@ -57,13 +57,13 @@ export interface apiFunction {
   signIn: (data: CustomerSignInRequest) => Promise<CustomerSignInResponse | undefined>;
   signUp: (data: CreateCustomerRequest) => Promise<CreateCustomerResponse | undefined>;
   forgotPassword: (data: ForgotPasswordRequest) => Promise<ForgotPasswordResponse | undefined>;
-  getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
-  getFeaturedProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
+  getPublicProducts: (token) => Promise<GetCustomerAllProductsResponse | undefined>;
+  getFeaturedProducts: (token) => Promise<GetCustomerAllProductsResponse | undefined>;
   getPublicProductsById: (productId: GetCustomerProductParams) => Promise< GetCustomerProductResponse | undefined>;
-  getCart: () => Promise<Cart[] | undefined>;
+  getCart: (token: string) => Promise<Cart[] | undefined>;
   addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>
-  deleteCartItem: (data: deleteCartItemRequest) => Promise<deleteCartItemResponse | undefined>
-  deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>
+  deleteCartItem: (data: deleteCartItemRequest, token) => Promise<deleteCartItemResponse | undefined>
+  deleteAllCartItem: (token) => Promise<deleteAllCartItemsResponse | undefined>
 }
 
 export interface ProductStore {

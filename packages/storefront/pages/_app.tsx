@@ -7,7 +7,7 @@ import { persistor, store } from "../store";
 import Axios from "axios";
 import { config } from "config";
 
-Axios.defaults.baseURL = config?.restPrefix;
+ Axios.defaults.baseURL = config?.restPrefix;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

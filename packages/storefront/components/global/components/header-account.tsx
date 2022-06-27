@@ -15,9 +15,9 @@ const HeaderAccount: React.FC<Properties> = (props) => {
     setShowCartDropdown(!showCartDropdown);
   };
 
-  useEffect(() => {
-    setIsLoggedIn(JSON.parse(localStorage.getItem("persist:root")).access_token);
-  }, []);
+  // useEffect(() => {
+  //   setIsLoggedIn(JSON.parse(localStorage.getItem("persist:root")).access_token);
+  // }, []);
 
   //console.log(totalCartItems);
   const links = [
