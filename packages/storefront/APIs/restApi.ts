@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   addToCartRequest,
   AddToCartResponse,
+  addToCartSuccessResponse,
   Cart,
   deleteCartItemRequest,
   deleteCartItemResponse,
@@ -26,12 +27,17 @@ import {
 import { apiEndPoints } from "utils/apiEndPoints";
 import { User } from "utils/types";
 import { toast } from "react-toastify";
+var cookie = require("cookie");
 
-  // console.log(localStorage.getItem("persist:root").access_token);
-
+function getToken() {
+  console.log("Token ====>");
+  console.log(localStorage.getItem("persist:root"));
+  console.log("Hey In GetToken ====>");
+}
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
+    getToken();
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
@@ -72,10 +78,11 @@ export async function forgotPasswordRest(
   }
 }
 
-export async function getPublicProductsRest(): Promise<
-  GetCustomerAllProductsResponse | undefined
-> {
+export async function getPublicProductsRest(
+  token: any
+): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
+    console.log("***********************", token);
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
     return res.data.data;
   } catch (error: any) {
@@ -83,9 +90,9 @@ export async function getPublicProductsRest(): Promise<
   }
 }
 
-export async function getFeaturedProductsRest(): Promise<
-  GetCustomerAllProductsResponse | undefined
-> {
+export async function getFeaturedProductsRest(
+  token: any
+): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?isFeatured=true`
@@ -109,13 +116,11 @@ export async function getPublicProductByIdRest(
   }
 }
 
-export async function getCartRest(): Promise<Cart[] | undefined> {
+export async function getCartRest(token: string): Promise<Cart[] | undefined> {
   try {
-    const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
-      headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
-      },
-    });
+    console.log("token ======>", token);
+    const { data } = await axios?.get(`${apiEndPoints?.getCart}`);
+    console.log("data ======>", data);
     // console.log("Cart from apis-------------------",data)
     return data?.data as Cart[];
   } catch (error: any) {
@@ -127,17 +132,17 @@ export async function addToCartRest(
   cartData: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
   try {
-    const res = await axios?.post(`${apiEndPoints?.getCart}`, cartData, {
-      headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
-      },
-    });
-    console.log("cart data from ==================", res.data)
-    // window.location.href ="http://localhost/home"
-    //console.log("**************125*******************", data);
-    return ;
+    console.log("**************129*******************");
+
+    const res = await axios?.post<AddToCartResponse>(
+      `${apiEndPoints?.getCart}`,
+      cartData
+    );
+    console.log("cart data from ==================", res.data);
+
+    return res.data as addToCartSuccessResponse;
   } catch (error: any) {
-    console.log("cart data from ==================", error)
+    console.log("cart data from ==================", error);
     toast.error(error?.response?.data?.message);
   }
 }
@@ -151,7 +156,7 @@ export async function deleteFromCartRest(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
         },
       }
     );
@@ -162,18 +167,15 @@ export async function deleteFromCartRest(
   }
 }
 
-
-export async function deleteAllFromCartRest(
-): Promise<deleteCartItemResponse | undefined> {
+export async function deleteAllFromCartRest(): Promise<
+  deleteCartItemResponse | undefined
+> {
   try {
-    const { data } = await axios?.delete(
-      `${apiEndPoints?.deleteAllCartItem}`,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
-        },
-      }
-    );
+    const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`, {
+      headers: {
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
+      },
+    });
     // console.log("**************125*******************", data);
     return data?.data as deleteCartItemResponse;
   } catch (error: any) {
@@ -190,7 +192,7 @@ export async function updateCartRest(
       item,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
         },
       },
     );
