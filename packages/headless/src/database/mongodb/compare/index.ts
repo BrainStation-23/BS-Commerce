@@ -20,19 +20,22 @@ export class CompareDatabase implements ICompareDatabase {
   }
 
   async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare> {
-    return await CompareModel.findOneAndUpdate(
+    const compareList = await CompareModel.findOneAndUpdate(
       { userId: userId },
       { $addToSet: { items: productId } },
       { new: true },
     ).lean();
+    return await this.mappedProductDetails(compareList);
   }
 
   async createCompare(userId: string, productId: CompareItems): Promise<Compare> {
-    return await CompareModel.create({
+    const compareList = await CompareModel.create({
       userId: userId,
       items: [productId],
     });
+    return await this.mappedProductDetails(compareList);
   }
+
   async deleteCompareById(userId: string, compareId: string): Promise<Compare> {
     return await CompareModel.findOneAndRemove({
       id: compareId,
