@@ -1,24 +1,26 @@
 // Mongodb dependency implementations
 import { dbConfig } from 'config/database';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
+import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
-import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
+import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 
 type CLASS_NAME =
-  | 'WISHLIST'
+  'WISHLIST'
   | 'USER'
   | 'PRODUCT'
   | 'MANUFACTURER'
   | 'CATEGORY'
   | 'CART'
   | 'CUSTOMER_AUTH'
-  | 'COMPARE';
+  | 'COMPARE'
+  | 'MEDIA';
+
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -30,7 +32,6 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return UserDatabaseMongo;
           case 'COMPARE':
             return CompareDatabaseMongo;
-
           case 'PRODUCT':
             return ProductDatabaseMongo;
           case 'MANUFACTURER':
