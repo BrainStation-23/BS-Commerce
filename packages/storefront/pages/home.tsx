@@ -21,9 +21,9 @@ export async function getServerSideProps(context: any) {
   const cartData = await userAPI.getCart();
   return {
     props: {
-      products: allProducts,
-      featuredProducts: featuredProducts,
-      cartData: cartData,
+      products: allProducts || [],
+      featuredProducts: featuredProducts || [],
+      cartData: cartData || [],
     }
   }
 }

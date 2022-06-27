@@ -113,7 +113,7 @@ export async function getCartRest(): Promise<Cart[] | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYzMDMxNzg4MzIsImlhdCI6MTY1NjMwMzE3OCwiZXhwIjoxNjU2Mzg5NTc4fQ.7mqWKxuNv0pk-5ebTbg79rIqe1bidY_hjii-qgfgvSg"}`,
       },
     });
     // console.log("Cart from apis-------------------",data)
@@ -129,7 +129,7 @@ export async function addToCartRest(
   try {
     const res = await axios?.post(`${apiEndPoints?.getCart}`, cartData, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYzMDMxNzg4MzIsImlhdCI6MTY1NjMwMzE3OCwiZXhwIjoxNjU2Mzg5NTc4fQ.7mqWKxuNv0pk-5ebTbg79rIqe1bidY_hjii-qgfgvSg"}`,
       },
     });
     console.log("cart data from ==================", res.data)
@@ -151,7 +151,7 @@ export async function deleteFromCartRest(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYwODU0MDEwMjcsImlhdCI6MTY1NjA4NTQwMSwiZXhwIjoxNjU2MTcxODAxfQ.kbLdPjEZn2espNynpJondifO2XXVkyTD3z-yMZ6fhZA"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyMGQ5NGMzLWUwOGQtNDlkZS04ZDE4LTAwYmZiNzMwYTFiOCIsInVzZXJuYW1lIjoiYWFiYkBnbWFpbC5jb20iLCJsb2dJblRpbWUiOjE2NTYzMDMxNzg4MzIsImlhdCI6MTY1NjMwMzE3OCwiZXhwIjoxNjU2Mzg5NTc4fQ.7mqWKxuNv0pk-5ebTbg79rIqe1bidY_hjii-qgfgvSg"}`,
         },
       }
     );
