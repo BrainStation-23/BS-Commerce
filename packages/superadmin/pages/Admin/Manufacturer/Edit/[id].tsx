@@ -6,7 +6,7 @@ import EditManufacturer from "../../../../components/manufacturer/editManufactur
 const EditManufacturerPage: NextPage = ({ manufacturer }: any) => {
   return (
     <div className="bg-light">
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="px-5">
         <EditManufacturer manufacturer={manufacturer} />
       </main>
     </div>

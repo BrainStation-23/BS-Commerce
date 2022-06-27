@@ -96,7 +96,7 @@ const Sidebar: NextComponentType = (props: any) => {
       subMenus: [
         {
           name: "Discounts",
-          to: "/",
+          to: "/promotion/discount",
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
@@ -111,7 +111,7 @@ const Sidebar: NextComponentType = (props: any) => {
         },
         {
           name: "Campaigns",
-          to: "/",
+          to: "/promotion/campaign",
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
@@ -249,7 +249,7 @@ const Sidebar: NextComponentType = (props: any) => {
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
                         <div key={index}>
-                          <Link href={`${subMenu.to}`}>
+                       <Link href={`${subMenu.to}`} passHref>
                             <a className="text-white">
                               <div className={sidebar.submenu_icon}>
                                 {subMenu.icon}
