@@ -19,7 +19,7 @@ const List = () => {
   return (
     <div>
       {manufactureData ? (
-        <ManufactureList manufactureData={manufactureData} />
+        <ManufactureList manufactureData={manufactureData} getAllManufacturers={getAllManufacturers}  />
       ) : (
         "No data found"
       )}
