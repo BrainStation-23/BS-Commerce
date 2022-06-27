@@ -1,5 +1,6 @@
 import { Compare, CompareItems } from 'src/entity/compare';
 import { ICompareDatabase } from 'src/modules/compare/repositories/compare.db.interface';
+import { ProductModel } from '../product/product.model';
 import { CompareModel } from './compare.model';
 
 export class CompareDatabase implements ICompareDatabase {
@@ -7,7 +8,7 @@ export class CompareDatabase implements ICompareDatabase {
     const compareList = await CompareModel.findOne({
       userId,
     }).lean();
-    return compareList;
+    return await this.mappedProductDetails(compareList);
   }
 
   async getCompareListById(userId: string, compareId: string): Promise<Compare | null> {
@@ -15,8 +16,7 @@ export class CompareDatabase implements ICompareDatabase {
       id: compareId,
       userId,
     }).lean();
-
-    return compareList;
+    return await this.mappedProductDetails(compareList);
   }
 
   async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare> {
@@ -58,5 +58,27 @@ export class CompareDatabase implements ICompareDatabase {
       { $set: { items: [] } },
       { new: true },
     ).lean();
+  }
+
+  // private functions
+
+  private async mappedProductDetails(compareList: Compare): Promise<Compare> {
+    const productIds = compareList.items.map((item) => item.productId);
+    const productDetails = await ProductModel.find({
+      id: { $in: productIds },
+    }).select('info photos id -_id');
+
+    const mappedItems = productDetails.map((e) => {
+      const { name, price, shortDescription, fullDescription } = e.info;
+      return {
+        productId: e.id,
+        productDetails: {
+          info: { name, price, shortDescription, fullDescription },
+          photos: e.photos.map((e) => e.url),
+        },
+      };
+    });
+    compareList.items = mappedItems;
+    return compareList;
   }
 }

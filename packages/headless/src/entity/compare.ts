@@ -5,4 +5,5 @@ export class Compare {
 }
 export class CompareItems {
   productId: string;
+  productDetails?: any;
 }
