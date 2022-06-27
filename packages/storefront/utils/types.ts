@@ -1,5 +1,7 @@
 import { addToCartRequest, AddToCartResponse, Cart, CustomerSignInResponse, deleteAllCartItemsResponse, deleteCartItemRequest, deleteCartItemResponse } from "models";
 import { CreateCustomerResponse } from "models";
+import { updateCartItemResponse } from "models";
+import { updateCartItemRequest } from "models";
 import { CreateCustomerRequest } from "models";
 import { CustomerSignInRequest } from "models";
 import { GetCustomerProductParams, GetCustomerProductResponse, GetCustomerAllProductsResponse, CreateUserRequest, CreateUserResponse, ForgotPasswordRequest, ForgotPasswordResponse, SignInRequest, SignInResponse } from "models";
@@ -64,6 +66,7 @@ export interface apiFunction {
   addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>
   deleteCartItem: (data: deleteCartItemRequest) => Promise<deleteCartItemResponse | undefined>
   deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>
+  updateCartItem: (data: updateCartItemRequest) => Promise<updateCartItemResponse | undefined >
 }
 
 export interface ProductStore {

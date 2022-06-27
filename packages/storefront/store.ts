@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -11,7 +10,7 @@ import getAllCartItemsReducer  from "toolkit/cart/getAllCartItems";
 const persistConfig = {
   key: 'root',
   storage,
-  whiteList: ["addToCartReducer", "tokenReducer", "getAllCartItemsReducer" ],
+  whiteList: ["addToCartReducer", "tokenReducer", ],
 }
 
 const persistedProductReducer = persistReducer(persistConfig, productsReducer); 
@@ -27,10 +26,9 @@ export const store = configureStore({
     addToCartStore: persistedAddToCartReducer,
     getAllCartItemsStore: persistedgetAllCartItemsReducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+  middleware: getDefaultMiddleware =>getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export const persistor = persistStore(store);

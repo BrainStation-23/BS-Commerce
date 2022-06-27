@@ -1,4 +1,3 @@
-import { getCartResponse } from './../../models/src/cart/getCart';
 import axios from "axios";
 import {
   addToCartRequest,
@@ -110,15 +109,15 @@ export async function getPublicProductByIdRest(
   }
 }
 
-export async function getCartRest(): Promise<getCartResponse | undefined> {
+export async function getCartRest(): Promise<Cart[] | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
       },
     });
     // console.log("Cart from apis-------------------",data)
-    return data?.data;
+    return data?.data as Cart[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
@@ -130,7 +129,7 @@ export async function addToCartRest(
   try {
     const res = await axios?.post(`${apiEndPoints?.getCart}`, cartData, {
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
       },
     });
     console.log("cart data from ==================", res.data)
@@ -152,7 +151,7 @@ export async function deleteFromCartRest(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
         },
       }
     );
@@ -171,7 +170,7 @@ export async function deleteAllFromCartRest(
       `${apiEndPoints?.deleteAllCartItem}`,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
         },
       }
     );
@@ -183,16 +182,17 @@ export async function deleteAllFromCartRest(
 }
 
 export async function updateCartRest(
-  productId: updateCartItemRequest
+  item: updateCartItemRequest
 ): Promise<updateCartItemResponse | undefined> {
   try {
     const { data } = await axios?.patch(
-      `${apiEndPoints?.updateCartItem}/${productId}`,
+      `${apiEndPoints?.updateCartItem}`, 
+      item,
       {
         headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjE2NDc3MDcxNywiaWF0IjoxNjU2MTY0NzcwLCJleHAiOjE2NTYyNTExNzB9.BpWlHlr93ugpUhVjNlq7ZCMiq7852VcB9Y0Wwz1SDk8"}`,
+          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiMDEwNTdhLTI4MjEtNDE2MC04ZWU0LTA3MmZiNTQzNDdlNCIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjMxNzA2MzE0NywiaWF0IjoxNjU2MzE3MDYzLCJleHAiOjE2NTY0MDM0NjN9.qqOP-fXs9tO8z94H95WNEuajza-d8Kv3-hCT4W8fj6A"}`,
         },
-      }
+      },
     );
     //console.log("**************125*******************", data);
     return data?.data as updateCartItemResponse;

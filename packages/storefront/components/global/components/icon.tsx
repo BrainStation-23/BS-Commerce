@@ -26,10 +26,9 @@ const Icon = (props: SingleProduct) => {
             strokeWidth={1.5}
              onClick={() => {
               userAPI.addToCart({
-                productId: product?.id,
+                productId: product.id,
                 quantity: 1,
               })
-              dispatch(storeTotalCartItems(1));
              }}
           >
             <path

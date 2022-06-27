@@ -1,21 +1,21 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
 import Buttons from "../../global/components/buttons/button";
-import cartDatas from "../../../allData/cart-data.json";
+// import cartDatas from "../../../allData/cart-data.json";
 import { useAppSelector } from "customHooks/hooks";
 import { userAPI } from "APIs";
 
 const CartDropdown = () => {
-    const [cartTotal, setCartTotal] = useState(false);
+    const [cartTotal, setCartTotal] = useState(false)
     const componentRef = useRef();
 
     const cartData = useAppSelector(
         (state) => state.getAllCartItemsStore.allCartItems
     );
 
-    let totalCartItems = useAppSelector(
-        (state) => state.addToCartStore.totalCatItems
-    );
+    const totalCartPrice = cartData?.items?.reduce((total, data) => {
+        return total + (data?.product?.info?.price * data.quantity);
+    }, 0)
 
     const cartIcon = (
         <svg
@@ -89,7 +89,7 @@ const CartDropdown = () => {
                                 <div>
                                     <div className="py-2">
                                         <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                                            {cartData.quantity} &nbsp;
+                                            {cartData?.quantity} &nbsp;
                                         </span>
                                         X &nbsp;
                                         <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
@@ -153,7 +153,7 @@ const CartDropdown = () => {
                                         Total
                                     </span>
                                     <span className="text-base font-semibold">
-                                        $175.00
+                                       ${totalCartPrice}
                                     </span>
                                 </div>
                                 <div className="px-6 py-2 flex justify-center">

@@ -10,7 +10,8 @@ const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
   const dispatch = useAppDispatch()
   dispatch(storeAllCartItems(cartData));
   const store = useAppSelector((state)=> state.getAllCartItemsStore.allCartItems);
-
+  // console.log("Products---------------------", products)
+  // console.log("Carts---------------------", cartData)
   return <HomeComponent products={products} featuredProducts={featuredProducts} />;
 };
 
@@ -18,11 +19,10 @@ export async function getServerSideProps(context: any) {
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
   const cartData = await userAPI.getCart();
-  console.log("22================", allProducts);
   return {
     props: {
-      products: allProducts,
-      featuredProducts: featuredProducts,
+      products: allProducts || [],
+      featuredProducts: featuredProducts || [],
       cartData: cartData || [],
     }
   }

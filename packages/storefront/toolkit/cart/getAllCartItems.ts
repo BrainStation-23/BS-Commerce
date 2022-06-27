@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Cart } from "models";
 
 export interface AllCartItemsState {
-    allCartItems: Cart[];
+    allCartItems: [];
 }
 
 const initialState: AllCartItemsState = {
@@ -15,13 +15,19 @@ export const allCartItems = createSlice({
   reducers: {
     storeAllCartItems: (
       state: AllCartItemsState,
-      action: PayloadAction<Cart[]>
+      action: PayloadAction<[]>
     ) => {
       state.allCartItems = action.payload;
     },
+    deleteSingCartItem: (
+      state: AllCartItemsState,
+      action: PayloadAction<[]>
+      ) => {
+      state.allCartItems = action.payload;
+    }
   },
 });
 
-export const { storeAllCartItems } = allCartItems.actions;
+export const { storeAllCartItems, deleteSingCartItem } = allCartItems.actions;
 
 export default allCartItems.reducer;

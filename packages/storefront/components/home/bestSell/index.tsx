@@ -41,9 +41,9 @@ const BestSell = ({products} : Products) => {
               rows={3}
             >
               {products &&
-                products?.length > 0 &&
-                products?.map((product: any, index: number) => (
-                  <SwiperSlide key={product?.id} className="">
+                products.length > 0 &&
+                products.map((product: any, index: number) => (
+                  <SwiperSlide key={product.id} className="">
                     <ProductShow product={product} />
                   </SwiperSlide>
                 ))}

@@ -1,7 +1,16 @@
+import { useAppSelector } from "customHooks/hooks";
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 const CartTotal: NextComponentType = () => {
+  const cartData = useAppSelector(
+    (state) => state.getAllCartItemsStore.allCartItems
+  );
+
+  const totalCartPrice = cartData?.items?.reduce((total, data) => {
+    return total + data?.product?.info?.price * data.quantity;
+  }, 0);
+
   return (
     <>
       <div className="grid lg:row-span-2 xl:row-span-2">
@@ -22,7 +31,7 @@ const CartTotal: NextComponentType = () => {
                   </td>
                   <td className="border border-slate-300 px-4 md:px-6 xl:px-8 ml-20 py-10">
                     <span className="mr-12 md:mr-24 xl:mr-24 font-semibold">
-                      $105.00
+                      ${totalCartPrice}
                     </span>
                   </td>
                 </tr>
@@ -33,7 +42,7 @@ const CartTotal: NextComponentType = () => {
                     </span>
                   </td>
                   <td className="border border-slate-300 px-8 py-10">
-                    <span className="md:mr-24 xl:mr-24">$105.00</span>
+                    <span className="md:mr-24 xl:mr-24">${totalCartPrice}</span>
                   </td>
                 </tr>
               </tbody>

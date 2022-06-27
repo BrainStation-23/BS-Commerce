@@ -7,6 +7,7 @@ import { useAppSelector } from "customHooks/hooks";
 import { userAPI } from "APIs";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import TableData from "./tableData";
 
 const DataTable = () => {
     const router = useRouter();
@@ -14,62 +15,7 @@ const DataTable = () => {
         (state) => state.getAllCartItemsStore.allCartItems
     );
     // console.log("From Data Table", cartData);
-    const tableData = () => {
-        return cartData.items.map((cartData, index) => {
-            // console.log("^^^^^^^^^^^^^^^^^^^^^^^^", cartData);
-            return (
-                <tr key={cartData.productId}>
-                    <td className="border border-slate-300 px-8 md:px-4 py-4">
-                        <img
-                            src={cartData?.product?.photos[0]?.url}
-                            alt="product Image"
-                            width={100}
-                            height={90}
-                        />
-                    </td>
-                    <td className="border border-slate-300 md:px-2 xl:px-10 py-10">
-                        {cartData?.product?.info?.name}
-                    </td>
-                    <td className="border border-slate-300 px-6 py-14 ">
-                        <span className="flex justify-center">
-                            {" "}
-                            ${cartData?.product?.info?.price}
-                        </span>
-                    </td>
-                    <td className="border border-slate-150 md:px-2 xl:px-10 py-4">
-                        <div className="flex justify-center">
-                            <div className="box-content h-4 w-12 p-4 border-4">
-                                <div className="flex justify-between">
-                                    <button>+</button>
-                                    <div>{cartData?.quantity}</div>
-                                    <button>-</button>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-                        <div className="flex justify-center">${30}</div>
-                    </td>
-                    <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
-                        <div className="flex justify-center">
-                            <button
-                                onClick={() => {
-                                    userAPI.deleteCartItem({
-                                        productId: cartData.productId,
-                                    });
-                                    location.href =
-                                        "http://localhost:3002/home";
-                                    // router.push('/cart');
-                                }}
-                            >
-                                X
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            );
-        });
-    };
+   
     return (
         <>
             <div className="md:px-2 lg:px-20 xl:px-30 2xl:40 py-20">
@@ -97,7 +43,7 @@ const DataTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {tableData()}
+                        <TableData />
                         <tr>
                             <th></th>
                             <th></th>
@@ -105,7 +51,7 @@ const DataTable = () => {
                             <th className="p-4">
                                 <Buttons
                                     bgColor="black"
-                                    height={12}
+                                    height={10}
                                     width={120}
                                     text={"UPDATE CART"}
                                 />
@@ -113,18 +59,19 @@ const DataTable = () => {
                             <th className="p-4">
                                 <Buttons
                                     bgColor="black"
-                                    height={12}
+                                    height={10}
                                     width={150}
                                     text={"CONTINUE SHOPPING"}
                                 />
                             </th>
                             <th className="p-4">
                                 <button
-                                    style={{ background: "black", color: "white", height: "50px", width: "120px"}}
+                                    style={{ background: "black", color: "white", height: "39px", width: "120px"}}
                                     // bgColor="black"
                                     // height={12}
                                     // width={120}
                                     // text={"CLEAR CART"}
+                                    className="text-xs"
                                     onClick={() => {
                                         userAPI.deleteAllCartItem();
                                         location.href =
