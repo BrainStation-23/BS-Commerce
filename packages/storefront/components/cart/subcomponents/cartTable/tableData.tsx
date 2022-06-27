@@ -6,15 +6,17 @@ import ShowData from "./showData";
 
 const TableData = () => {
   const cartData = useAppSelector(
-    (state) => state.getAllCartItemsStore.allCartItems
+    (state) => state.persistedReducer.cart.allCartItems
   );
   return (
     <>
-      {cartData ? cartData?.items?.map((data, index) => {
-        return (
-         <ShowData key={index} data={data} />
-        );
-      }) : <></>}
+      {cartData ? (
+        cartData?.map((data, index) => {
+          return <ShowData key={index} data={data} />;
+        })
+      ) : (
+        <></>
+      )}
     </>
   );
 };

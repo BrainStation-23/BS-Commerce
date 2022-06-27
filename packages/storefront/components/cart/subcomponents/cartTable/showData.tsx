@@ -1,15 +1,17 @@
 import { userAPI } from "APIs";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
-import { deleteSingCartItem } from "toolkit/cart/getAllCartItems";
+import { deleteSingCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
     quantity: data.quantity,
-  })
+  });
   const dispatch = useAppDispatch();
-  const cartData = useAppSelector(state => state.getAllCartItemsStore.allCartItems)
+  const cartData = useAppSelector(
+    (state) => state.getAllCartItemsStore.allCartItems
+  );
   return (
     <>
       <tr key={data.id}>
@@ -34,16 +36,23 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <div className="box-content w-12 p-2 border-2">
               <div className="flex justify-between">
-                <button onClick={() => {
+                <button
+                  onClick={() => {
                     setItemToUpdate({
                       productId: data?.productId,
-                      quantity: itemToUpdate.quantity - 1 > 0 ? itemToUpdate.quantity - 1 : 0,
+                      quantity:
+                        itemToUpdate.quantity - 1 > 0
+                          ? itemToUpdate.quantity - 1
+                          : 0,
                     });
                     userAPI.updateCartItem(itemToUpdate);
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
-                   window.location.href = "/home";
-                  }}>-</button>
+                    window.location.href = "/home";
+                  }}
+                >
+                  -
+                </button>
                 <div>{itemToUpdate.quantity}</div>
                 <button
                   onClick={() => {
@@ -68,13 +77,17 @@ const ShowData = ({ data }: any) => {
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
           <div className="flex justify-center">
-            <button onClick={() => {
-              userAPI.deleteCartItem(data);
-              window.location.href = '/home';
-              // const list = cartData.items.filter(item => item.productId != data.productId)
-              // console.log(list);
-              // dispatch(deleteSingCartItem(list));
-            }}>X</button>
+            <button
+              onClick={() => {
+                userAPI.deleteCartItem(data);
+                window.location.href = "/home";
+                // const list = cartData.items.filter(item => item.productId != data.productId)
+                // console.log(list);
+                // dispatch(deleteSingCartItem(list));
+              }}
+            >
+              X
+            </button>
           </div>
         </td>
       </tr>

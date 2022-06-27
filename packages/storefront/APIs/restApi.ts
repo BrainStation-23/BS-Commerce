@@ -132,13 +132,14 @@ export async function addToCartRest(
   cartData: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
   try {
-    console.log("**************129*******************");
+    // console.log("**************129*******************");
 
     const res = await axios?.post<AddToCartResponse>(
       `${apiEndPoints?.getCart}`,
       cartData
     );
-    console.log("cart data from ==================", res.data);
+    // console.log("cart data from ==================", res.data);
+    // console.log(res.data);
 
     return res.data as addToCartSuccessResponse;
   } catch (error: any) {
@@ -153,12 +154,7 @@ export async function deleteFromCartRest(
   try {
     // console.log("from delete apis", data)
     const res = await axios?.delete(
-      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
-        },
-      }
+      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`
     );
     // console.log("**************125*******************", res);
     return res?.data as deleteCartItemResponse;
@@ -171,11 +167,7 @@ export async function deleteAllFromCartRest(): Promise<
   deleteCartItemResponse | undefined
 > {
   try {
-    const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`, {
-      headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
-      },
-    });
+    const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`);
     // console.log("**************125*******************", data);
     return data?.data as deleteCartItemResponse;
   } catch (error: any) {
@@ -188,13 +180,8 @@ export async function updateCartRest(
 ): Promise<updateCartItemResponse | undefined> {
   try {
     const { data } = await axios?.patch(
-      `${apiEndPoints?.updateCartItem}`, 
-      item,
-      {
-        headers: {
-          Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5YWJlYWYzLWI1MmEtNDlkNS1hMTVlLTIzNzM2NWY4NmQ2NyIsInVzZXJuYW1lIjoic2JzQGdtYWlsLmNvbSIsImxvZ0luVGltZSI6MTY1NjM0MzI4MjgzMSwiaWF0IjoxNjU2MzQzMjgyLCJleHAiOjE2NTY0Mjk2ODJ9.RPfuXIjYpwOCijkiW3aNF1xkwC_7D24XO5LdN78rzaw"}`,
-        },
-      },
+      `${apiEndPoints?.updateCartItem}`,
+      item
     );
     //console.log("**************125*******************", data);
     return data?.data as updateCartItemResponse;

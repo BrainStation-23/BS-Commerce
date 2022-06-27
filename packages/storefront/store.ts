@@ -1,34 +1,31 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import productsReducer from "./toolkit/ProductsSlice";
-import tokenReducer from "./toolkit/userAuth/signinSlice";
-import addToCartReducer from "./toolkit/cart/addToCartSlice";
-import getAllCartItemsReducer  from "toolkit/cart/getAllCartItems";
+import authReducer from "./toolkit/authSlice";
+import cartReducer from "toolkit/cartSlice";
+
+const reducers = combineReducers({
+  product: productsReducer,
+  auth: authReducer,
+  cart: cartReducer,
+});
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whiteList: ["addToCartReducer", "tokenReducer", ],
-}
+  whiteList: ["cart", "auth"],
+};
 
-const persistedProductReducer = persistReducer(persistConfig, productsReducer); 
-const persistedTokenReducer = persistReducer(persistConfig, tokenReducer);
-const persistedAddToCartReducer = persistReducer(persistConfig, addToCartReducer);
-const persistedgetAllCartItemsReducer = persistReducer(persistConfig, getAllCartItemsReducer); 
-
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
-  reducer: {
-    productsStore: persistedProductReducer,
-    tokenStore: persistedTokenReducer,
-    addToCartStore: persistedAddToCartReducer,
-    getAllCartItemsStore: persistedgetAllCartItemsReducer,
-  },
-  middleware: getDefaultMiddleware =>getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  reducer: { persistedReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);

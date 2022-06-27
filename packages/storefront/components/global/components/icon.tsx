@@ -3,7 +3,6 @@ import { Product } from "models";
 import Link from "next/link";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { storeTotalCartItems } from "toolkit/cart/addToCartSlice";
 
 interface SingleProduct {
   product: Product;
@@ -28,12 +27,10 @@ const Icon = (props: SingleProduct) => {
           stroke="currentColor"
           strokeWidth={1.5}
           onClick={async () => {
-            const response = await userAPI.addToCart({
-              productId: product.id,
+            await userAPI.addToCart({
+              productId: product.id!,
               quantity: 1,
             });
-            // console.log(response);
-            dispatch(storeTotalCartItems(response?.data.items));
           }}
         >
           <path
