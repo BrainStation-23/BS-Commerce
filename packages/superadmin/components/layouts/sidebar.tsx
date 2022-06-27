@@ -1,12 +1,14 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/Link";
 import HeaderBar from "./headerBar";
 import bsLogo from "../../assests/bs23.png";
 import sidebar from "./styles/sidebar.module.css";
 const Sidebar: NextComponentType = (props: any) => {
   const menuItems = [
     { name: "Dashboard", to: "/", icon: <i className="bi bi-tv"></i> },
+    { name: "User", to: "/users/admin", icon: <i className="bi bi-person"></i> },
     {
       name: "Catalog",
       to: "/",
@@ -97,7 +99,9 @@ const Sidebar: NextComponentType = (props: any) => {
                 >
                   <div className={sidebar.menu_icon}>{menuItem.icon}</div>
                   <div className={sidebar.menu_item_text}>
+                    <Link href={`${menuItem.to}`} passHref>
                     <span>{menuItem.name}</span>
+                    </Link>
                     <span className={sidebar.menu_chevron}>
                       {menuItem.subMenus && menuItem.subMenus.length > 0
                         ? showSubMenu[index]
