@@ -80,7 +80,7 @@ const CategoryForm = (props: any) => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px"}}
               />
               <div className="px-3 fs-5 col text-start">Category</div>
               <div className="col-1">

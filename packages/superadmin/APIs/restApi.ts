@@ -49,7 +49,8 @@ export async function createManufacturerRest(
 ): Promise<CreateManufacturerRequest | undefined> {
   try {
     const response = await axios.post<CreateManufacturerRequest>(
-      `${apiEndPoints.manufacturer}`
+      `${apiEndPoints.manufacturer}`,
+      data
     );
     router.push("/Admin/Manufacturer/list");
     toast.success("Create Successful");

@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import SingleView from "../singleView";
 
 const CaegoryCard = (props: any) => {
   const { product, categoryData } = props;
-  console.log(product);
   const [showTable, setShowTable] = useState(false);
 
   const checkTable = () => {
@@ -31,7 +29,7 @@ const CaegoryCard = (props: any) => {
             <div className="card-title row align-items-center  pt-2 ps-2">
               <i
                 className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px"}}
               />
               <div className="px-3 fs-5 col text-start">Caegories</div>
             </div>
@@ -41,9 +39,12 @@ const CaegoryCard = (props: any) => {
               <div className="py-3">
                 <table className="table table-bordered table-striped  ">
                   <thead>
+                    <tr>
+
                     <th className="text-center py-3">Category</th>
                     <th className="text-center py-3">Feaured</th>
                     <th className="text-center py-3">Display order</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {categoryData?.map((data: any, index: any) => {
