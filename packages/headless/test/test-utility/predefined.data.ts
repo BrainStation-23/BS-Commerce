@@ -1,15 +1,16 @@
 // setup user testing data
-export const testUserId = '0ace6388-bce8-4417-86b1-15240b8a381c';
-export const testUsername = 'mostafa@bs.com';
+export const testUserId = '3abd43bd-a85e-4e9f-96be-0fc56530e3a8';
+export const testUsername = 'test1@mail.com';
 
 //
 export const testTimeout = 30 * 1000;
+export const testProductId = '76e9c15f-6816-439c-9a4f-e2fc902ffbf5';
 
 // create user data
-export const testFirstName = 'Mostafa';
-export const testLastName = 'Mahmud';
-export const testEmail = 'mostafa@bs.com';
-export const testPassword = 'mostafa-bs@23';
+export const testFirstName = 'fname';
+export const testLastName = 'lname';
+export const testEmail = 'test1@mail.com';
+export const testPassword = '12345678';
 
 export const signUpDemoUser = () => {
   return {

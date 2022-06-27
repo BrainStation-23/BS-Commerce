@@ -74,14 +74,14 @@ export class ProductService {
   }
 
   async updateProduct(product: UpdateProduct, productId: string): Promise<UpdateProductResponse> {
+    let getProduct = await this.productRepo.findProduct({ id: productId });
+    if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
-
-    let getProduct: any = await this.productRepo.findProduct({ id: productId });
-    if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
     const updatedProduct = await this.productRepo.updateProduct(product, productId);
     if (!updatedProduct) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.CAN_NOT_UPDATE_PRODUCT, null, HttpStatus.BAD_REQUEST);
@@ -125,14 +125,14 @@ export class ProductService {
 
   //Customer
   async getCustomerProduct(productId: string,): Promise<GetCustomerProductResponse> {
-    const product = await this.productRepo.findProduct({ id: productId, published: true });
+    const product = await this.productRepo.findProduct({ id: productId, 'info.published': true });
     if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
   async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, ...rest } = condition;
-    const products = await this.productRepo.findAllProducts({ ...rest, published: true }, skip, limit);
+    const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
     if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }

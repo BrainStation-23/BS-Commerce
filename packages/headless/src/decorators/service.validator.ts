@@ -48,7 +48,7 @@ export class ValidationPipe implements PipeTransform<any> {
         }
 
         // Converts plain (literal) object to class (constructor) object.
-        const object = plainToClass(metatype, value);
+        const object = value && plainToClass(metatype, value);
         const errors: ValidationError[] = await validate(object, {
             validationError: {
                 target: false, value: false,
@@ -60,13 +60,15 @@ export class ValidationPipe implements PipeTransform<any> {
         if (errors.length > 0) {
             errors.map((err: ValidationError) => {
                 let errorArray = [];
-                Object.values(err.constraints).forEach(constraint => {
+                err && err.constraints && Object.values(err.constraints).forEach(constraint => {
                     errorsResponse.error += constraint as string + ',';
                     err.property && (errorArray.push(constraint as string));
                 })
                 err.property && (errorsResponse.errors[err.property] = errorArray as any);
             })
-            throw new HttpException(errorsResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+            if (errorsResponse?.error || errorsResponse?.errors?.length) {
+                throw new HttpException(errorsResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+            }
         }
         return value;
     }
@@ -76,7 +78,6 @@ export class ValidationPipe implements PipeTransform<any> {
         return !types.includes(metatype);
     }
 }
-
 
 /**
  * @decorator
@@ -99,13 +100,13 @@ export function ValidateNested(
                     args.value;
                     if (Array.isArray(value)) {
                         for (let i = 0; i < (<Array<any>>value).length; i++) {
-                            if (value && validateSync(plainToClass(schema, value[i])).length) {
+                            if (value && schema && value[i] && validateSync(plainToClass(schema, value[i])).length) {
                                 return false;
                             }
                         }
                         return true;
                     } else {
-                        if (value && validateSync(plainToClass(schema, value))?.length) {
+                        if (value && schema && validateSync(plainToClass(schema, value))?.length) {
                             return false;
                         } else return true;
                     }
@@ -114,7 +115,7 @@ export function ValidateNested(
                     if (Array.isArray(args.value)) {
                         for (let i = 0; i < (<Array<any>>args.value).length; i++) {
                             return (
-                                args.value && validateSync(plainToClass(schema, args.value[i]))
+                                args.value && args.value[i] && validateSync(plainToClass(schema, args.value[i]))
                                     .map((e) => e.constraints)
                                     .reduce((acc, next) => acc.concat(Object.values(next)), [])
                             ).toString();
