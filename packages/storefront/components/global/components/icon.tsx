@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { storeTotalCartItems } from "toolkit/cart/addToCartSlice";
 
 interface SingleProduct {
-  product: Product
+  product: Product;
 }
 
 const Icon = (props: SingleProduct) => {
@@ -18,38 +18,39 @@ const Icon = (props: SingleProduct) => {
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
-      <Link href="/" passHref>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="peer h-7 w-7 p-1 mr-1 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-             onClick={() => {
-              userAPI.addToCart({
-                productId: product.id,
-                quantity: 1,
-              })
-              dispatch(storeTotalCartItems(1));
-             }}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
+      {/* <Link href="/" passHref> */}
+      <span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="peer h-7 w-7 p-1 mr-1 inline-block hover:bg-[#40A944] rounded-[50px] text-5xl text-black hover:text-white transition-all duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          onClick={async () => {
+            const response = await userAPI.addToCart({
+              productId: product.id,
+              quantity: 1,
+            });
+            // console.log(response);
+            dispatch(storeTotalCartItems(response?.data.items));
+          }}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          />
+        </svg>
 
-          <div className="absolute flex-col items-center hidden mb-6 peer-hover:flex -left-5 -top-7">
-            <span className="z-10 p-2 text-sm leading-none text-white whitespace-no-wrap bg-zinc-900 shadow-lg rounded-md">
-              Add to cart
-            </span>
-            <div className="w-3 h-3 -mt-2 rotate-45 bg-zinc-900"></div>
-          </div>
-        </span>
-      </Link>
+        <div className="absolute flex-col items-center hidden mb-6 peer-hover:flex -left-5 -top-7">
+          <span className="z-10 p-2 text-sm leading-none text-white whitespace-no-wrap bg-zinc-900 shadow-lg rounded-md">
+            Add to cart
+          </span>
+          <div className="w-3 h-3 -mt-2 rotate-45 bg-zinc-900"></div>
+        </div>
+      </span>
+      {/* </Link> */}
 
       <span>
         <svg
