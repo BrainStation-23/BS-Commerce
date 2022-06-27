@@ -434,14 +434,15 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
             <tbody>
               {/* {console.log(paginateData)} */}
               {paginateData?.length > 0 &&
-                paginateData?.map((manufacturer: any) => (
+                paginateData?.map((manufacturer: any , index:any) => (
                   <SingleManufacturer
-                    key={manufacturer.id}
+                    key={index}
+                    // key={manufacturer.id}
                     manufacturer={manufacturer}
                     setCheckbox={setCheckbox}
                     checkbox={checkbox}
                     handleCheckbox={handleCheckbox}
-                  ></SingleManufacturer>
+                  />
                 ))}
             </tbody>
           </table>
