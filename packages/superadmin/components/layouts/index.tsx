@@ -17,18 +17,19 @@ const Layout: NextComponentType = ({ children }) => {
   const router = useRouter();
   const token = useAppSelector((state) => state.persistedReducer.auth.token);
 
+  if (!token && !pathname.includes("/account")) {
+    router.push("/account/login");
+  } else {
+    Axios.defaults.headers.common = {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
   useEffect(() => {
     typeof document !== undefined
       ? require("bootstrap/dist/js/bootstrap")
       : null;
     // redirect to login if no token found
-    if (!token && !pathname.includes("/account")) {
-      router.push("/account/login");
-    } else {
-      Axios.defaults.headers.common = {
-        Authorization: `Bearer ${token}`,
-      };
-    }
   }, []);
 
   const [adjustFullContainer, setAdjustFullContainer] = useState(false);
@@ -44,7 +45,7 @@ const Layout: NextComponentType = ({ children }) => {
     <>
       {/* <Viewport /> */}
       <div className="">
-          <ToastContainer />
+        <ToastContainer />
         <div className="row container-fluid">
           <Sidebar adjustContainer={adjustContainer} />
           <div
@@ -56,7 +57,6 @@ const Layout: NextComponentType = ({ children }) => {
           >
             {children}
           </div>
-
         </div>
       </div>
     </>
