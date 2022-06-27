@@ -40,7 +40,6 @@ const CreateForm: FC<Props> = ({
           isValid,
         }) => (
           <>
-            {console.log(errors)}
             <Form className="">
               <div className="row">
                 <div className="col-lg-12">
