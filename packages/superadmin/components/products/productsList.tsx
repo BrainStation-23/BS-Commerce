@@ -7,7 +7,7 @@ import { Product } from "models";
 import { userAPI } from "../../APIs";
 
 interface Props {
-  productsList: Product[];
+  productsList: Product[] ;
   setProducts: any;
 }
 
@@ -43,7 +43,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return productsList.slice(firstPageIndex, lastPageIndex);
+    return productsList?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, PageSize, productsList]);
 
   const columns = [

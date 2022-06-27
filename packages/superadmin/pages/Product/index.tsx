@@ -3,10 +3,21 @@ import ProductsList from "../../components/products/productsList";
 import SearchWindow from "../../components/products/searchWindow";
 import { userAPI } from "../../APIs";
 import { Product } from "models";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
-  const [products, setProducts] = useState(productsList);
+// const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
+  // const [products, setProducts] = useState(productsList);
+const Products: NextPage = () => {
+  const [products, setProducts] = useState<Product[] | undefined>();
+  const getAllProducts = async () => {
+    const productsList = await userAPI.getProducts(1000);
+    console.log(productsList);
+
+    if (productsList) setProducts(productsList);
+  };
+  useEffect(() => {
+    getAllProducts();
+  }, []);
   return (
     <>
       <main className="px-5">
@@ -144,22 +155,27 @@ const Products: NextPage<{ productsList: Product[] }> = ({ productsList }) => {
           {/* <script>$(document).ready(function () {$('#delete-selected').attr("data-toggle", "modal").attr("data-target", "#delete-selected-action-confirmation");$('#delete-selected-action-confirmation-submit-button').attr("name", $("#delete-selected").attr("name"));$("#delete-selected").attr("name", "");if($("#delete-selected").attr("type") == "submit")$("#delete-selected").attr("type", "button");});</script> */}
           {/* </div> */}
         </div>
+
         <div>
-          <SearchWindow setProducts={setProducts} allProducts={productsList} />
-          <ProductsList productsList={products} setProducts={setProducts} />
+          <SearchWindow setProducts={setProducts} allProducts={products} />
+          {products ? (
+            <ProductsList productsList={products} setProducts={setProducts} />
+          ) : (
+            "There is no product"
+          )}
         </div>
       </main>
     </>
   );
 };
 
-export async function getServerSideProps() {
-  const productsList = await userAPI.getProducts(1000);
-  return {
-    props: {
-      productsList: productsList || [],
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const productsList = await userAPI.getProducts(1000);
+//   return {
+//     props: {
+//       productsList: productsList || [],
+//     },
+//   };
+// }
 
 export default Products;
