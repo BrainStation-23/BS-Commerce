@@ -20,8 +20,6 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   const onChangeForList = async (pageSize: number) => {
     const productsList = await userAPI.getProducts(pageSize);
     setProducts(productsList);
-    console.log(productsList);
-    
   };
 
   const deleteProductFunction = async () => {

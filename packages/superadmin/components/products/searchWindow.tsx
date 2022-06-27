@@ -9,7 +9,10 @@ import { searchProductSchema } from "./schema/productSchema";
 const SearchWindow = ({ setProducts ,allProducts }: any) => {
   const handleSearchSubmit = async (data: string) => {
     if (data == "") {
-        setProducts(allProducts);
+        const productsList = await userAPI.getProducts(1000);
+        console.log(productsList);
+    
+        if (productsList) setProducts(productsList);
     } else {
       const searchProduct: any = await userAPI.searchProduct(data);
       if (searchProduct) {

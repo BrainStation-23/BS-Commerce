@@ -12,9 +12,9 @@ import "../styles/App.scss";
 import { useAppSelector } from "../redux-hooks";
 
 Axios.defaults.baseURL = config?.restPrefix;
-Axios.defaults.headers.common = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBlZWMyMzJhLTZlMjktNDNmMi1hMGE4LTYyOTE3NmVhMTAyYyIsInVzZXJuYW1lIjoibmFmaUB0ZXN0LmNvbSIsImxvZ0luVGltZSI6MTY1NjI2MDc2MzkwNCwiaWF0IjoxNjU2MjYwNzYzLCJleHAiOjE2NTYzNDcxNjN9.NDdBTaaCqfPtaCQ7vm6mH0CWjzHuL6-IzXWr9Sw8kvI`,
-};
+// Axios.defaults.headers.common = {
+//   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBlZWMyMzJhLTZlMjktNDNmMi1hMGE4LTYyOTE3NmVhMTAyYyIsInVzZXJuYW1lIjoibmFmaUB0ZXN0LmNvbSIsImxvZ0luVGltZSI6MTY1NjI2MDc2MzkwNCwiaWF0IjoxNjU2MjYwNzYzLCJleHAiOjE2NTYzNDcxNjN9.NDdBTaaCqfPtaCQ7vm6mH0CWjzHuL6-IzXWr9Sw8kvI`,
+// };
 
 let persistor = persistStore(store);
 
