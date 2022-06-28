@@ -20,10 +20,11 @@ export interface UpdateBrandSuccessResponse extends SuccessResponse {
 }
 
 export interface UpdateBrandErrorResponse extends ErrorResponse{
-    error: ErrorMessageUpdate.INVALID_BRAND_ID | ErrorMessageUpdate.CANNOT_UPDATE_BRAND;
+    error: ErrorMessageUpdate.INVALID_BRAND_ID | ErrorMessageUpdate.CANNOT_UPDATE_BRAND | ErrorMessageUpdate.BRAND_ALREADY_EXISTS;
 }
 
 export const enum ErrorMessageUpdate{
     INVALID_BRAND_ID = 'NO BRAND WITH SUCH ID',
-    CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND'
+    CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND',
+    BRAND_ALREADY_EXISTS = 'BRAND ALREADY EXISTS'
 }
