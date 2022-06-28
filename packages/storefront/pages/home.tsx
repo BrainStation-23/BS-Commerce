@@ -6,8 +6,10 @@ import { storeAllCartItems } from "toolkit/cartSlice";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useEffect } from "react";
 var cookie = require("cookie");
+import Axios from "axios";
 
-const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
+
+const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) => {
   const dispatch = useAppDispatch();
 
   const store = useAppSelector(
@@ -16,25 +18,27 @@ const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
 
   useEffect(() => {
     dispatch(storeAllCartItems(cartData.items));
+    Axios.defaults.headers.common = {
+      Authorization: `Bearer ${token.token}`,
+  };
   }, []);
-  // console.log("Products---------------------", products)
-  // console.log("Carts---------------------", cartData)
+
   return (
     <HomeComponent products={products} featuredProducts={featuredProducts} />
   );
 };
 
-export async function getServerSideProps({ req }) {
-  // let { token } = cookie.parse(req.headers?.cookie);
+export async function getServerSideProps({ req }: any) {
+  let token = cookie?.parse(req.headers?.cookie);
   const allProducts = await userAPI.getPublicProducts();
-  // console.log(allProducts);
   const featuredProducts = await userAPI.getFeaturedProducts();
-  const cartData = await userAPI.getCart();
+  const cartData = await userAPI.getCart(token.token);
   return {
     props: {
       products: allProducts || [],
       featuredProducts: featuredProducts || [],
       cartData: cartData || [],
+      token: token,
     },
   };
 }
