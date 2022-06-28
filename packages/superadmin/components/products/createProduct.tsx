@@ -8,69 +8,70 @@ import { userAPI } from "../../APIs";
 
 import { useRouter } from "next/router";
 import CategoryForm from "./forms/categoryForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const router = useRouter();
-  const [categogiesData, setCategoryData] = useState([
-    {
-      id: 1,
-      value: "Category 1",
-      isSelected: false,
-      isFeatured: false,
-      displayOrder: 0,
-    },
-    {
-      id: 2,
-      value: "Category 2",
-      isSelected: false,
-      isFeatured: true,
-      displayOrder: 1,
-    },
-    {
-      id: 3,
-      value: "Category 3",
-      isSelected: false,
-      isFeatured: false,
-      displayOrder: 3,
-    },
-    {
-      id: 4,
-      value: "Category 4",
-      isSelected: false,
-      isFeatured: true,
-      displayOrder: 5,
-    },
-    {
-      id: 5,
-      value: "Category 5",
-      isSelected: false,
-      isFeatured: false,
-      displayOrder: 0,
-    },
-    {
-      id: 6,
-      value: "Category 6",
-      isSelected: false,
-      isFeatured: true,
-      displayOrder: 0,
-    },
-    {
-      id: 7,
-      value: "Category 7",
-      isSelected: false,
-      isFeatured: false,
-      displayOrder: 0,
-    },
-    {
-      id: 8,
-      value: "Category 8",
-      isSelected: false,
-      isFeatured: false,
-      displayOrder: 0,
-    },
-  ]);
+  const [categogiesData, setCategoryData] = useState([]);
+  // const [categogiesData, setCategoryData] = useState([
+  //   {
+  //     id: 1,
+  //     value: "Category 1",
+  //     isSelected: false,
+  //     isFeatured: false,
+  //     displayOrder: 0,
+  //   },
+  //   {
+  //     id: 2,
+  //     value: "Category 2",
+  //     isSelected: false,
+  //     isFeatured: true,
+  //     displayOrder: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     value: "Category 3",
+  //     isSelected: false,
+  //     isFeatured: false,
+  //     displayOrder: 3,
+  //   },
+  //   {
+  //     id: 4,
+  //     value: "Category 4",
+  //     isSelected: false,
+  //     isFeatured: true,
+  //     displayOrder: 5,
+  //   },
+  //   {
+  //     id: 5,
+  //     value: "Category 5",
+  //     isSelected: false,
+  //     isFeatured: false,
+  //     displayOrder: 0,
+  //   },
+  //   {
+  //     id: 6,
+  //     value: "Category 6",
+  //     isSelected: false,
+  //     isFeatured: true,
+  //     displayOrder: 0,
+  //   },
+  //   {
+  //     id: 7,
+  //     value: "Category 7",
+  //     isSelected: false,
+  //     isFeatured: false,
+  //     displayOrder: 0,
+  //   },
+  //   {
+  //     id: 8,
+  //     value: "Category 8",
+  //     isSelected: false,
+  //     isFeatured: false,
+  //     displayOrder: 0,
+  //   },
+  // ]);
 
   const handleSubmit = (data: any) => {
     const info = {
@@ -126,6 +127,27 @@ const CreateProduct = () => {
       userAPI.createProduct(newData, router);
     } else toast.error("You must select atleast one category");
   };
+
+  useEffect(() => {
+    async function loadCategories() {
+      const response = await userAPI.getCategories();
+      // console.log(response);
+      if (response?.length! > 0) {
+        const categories: any = [];
+        response?.forEach((category, index) => {
+          categories.push({
+            id: index + 1,
+            value: category.name,
+            isSelected: false,
+            isFeatured: false,
+            displayOrder: 0,
+          });
+        });
+        setCategoryData(categories);
+      }
+    }
+    loadCategories();
+  }, []);
 
   return (
     <>
