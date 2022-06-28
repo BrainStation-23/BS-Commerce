@@ -4,6 +4,8 @@ import { useState } from "react";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
+
+
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
     quantity: data.quantity,
@@ -12,6 +14,11 @@ const ShowData = ({ data }: any) => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price * data.quantity;
+  }, 0);
+
   return (
     <>
       <tr key={data.id}>
@@ -45,8 +52,14 @@ const ShowData = ({ data }: any) => {
                           ? itemToUpdate.quantity - 1
                           : 0,
                     });
-                    userAPI.updateCartItem(itemToUpdate);
-                    dispatch(updateCartItem(itemToUpdate));
+                    userAPI.updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity - 1,
+                    });
+                    dispatch(updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity - 1,
+                    }));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     // window.location.href = "/home";
@@ -61,8 +74,14 @@ const ShowData = ({ data }: any) => {
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
-                    userAPI.updateCartItem(itemToUpdate);
-                    dispatch(updateCartItem(itemToUpdate));
+                    userAPI.updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity + 1,
+                    });
+                    dispatch(updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity + 1,
+                    }));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     //window.location.href = "/home";
@@ -75,7 +94,7 @@ const ShowData = ({ data }: any) => {
           </div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-          <div className="flex justify-center">${data?.product?.info?.price}</div>
+          <div className="flex justify-center">${totalCartPrice}</div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
           <div className="flex justify-center">

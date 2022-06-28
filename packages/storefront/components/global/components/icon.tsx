@@ -31,6 +31,7 @@ const Icon = (props: SingleProduct) => {
               productId: product.id!,
               quantity: 1,
             });
+            location.href = "/home"
           }}
         >
           <path

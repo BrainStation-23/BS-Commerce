@@ -25,11 +25,11 @@ const Home: NextPage = ({ products, featuredProducts, cartData }: any) => {
 };
 
 export async function getServerSideProps({ req }) {
-  let { token } = cookie.parse(req.headers?.cookie);
-  const allProducts = await userAPI.getPublicProducts(token);
+  // let { token } = cookie.parse(req.headers?.cookie);
+  const allProducts = await userAPI.getPublicProducts();
   // console.log(allProducts);
-  const featuredProducts = await userAPI.getFeaturedProducts(token);
-  const cartData = await userAPI.getCart(token);
+  const featuredProducts = await userAPI.getFeaturedProducts();
+  const cartData = await userAPI.getCart();
   return {
     props: {
       products: allProducts || [],
