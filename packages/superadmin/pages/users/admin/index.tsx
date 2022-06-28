@@ -13,9 +13,11 @@ const initData = {
   name: "",
 };
 
-const Admin: NextPage = ({ adminsList }: any) => {
+const Admin: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
+
+  const [adminsList, setAdminsList] = useState([]);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -24,6 +26,18 @@ const Admin: NextPage = ({ adminsList }: any) => {
   }, [currentPage, PageSize, adminsList]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    async function loadAdmins() {
+      const response = await userAPI.getAdmins();
+      let admins: any = [];
+      if (response) {
+        admins = [response];
+      }
+      setAdminsList(admins);
+    }
+    loadAdmins();
+  }, []);
 
   return (
     <div className="px-5">
@@ -109,17 +123,17 @@ const Admin: NextPage = ({ adminsList }: any) => {
   );
 };
 
-export async function getServerSideProps() {
-  const adminsList = await userAPI.getAdmins();
-  let admins: any = [];
-  if (adminsList) {
-    admins = [adminsList];
-  }
-  return {
-    props: {
-      adminsList: admins || [],
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const adminsList = await userAPI.getAdmins();
+//   let admins: any = [];
+//   if (adminsList) {
+//     admins = [adminsList];
+//   }
+//   return {
+//     props: {
+//       adminsList: admins || [],
+//     },
+//   };
+// }
 
 export default Admin;

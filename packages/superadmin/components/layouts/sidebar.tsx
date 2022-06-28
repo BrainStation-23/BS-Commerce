@@ -1,255 +1,220 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
-import { useState } from "react";
 import Link from "next/link";
-import HeaderBar from "./headerBar";
-import bsLogo from "../../assests/bs23.png";
-import sidebar from "./styles/sidebar.module.css";
-const Sidebar: NextComponentType = (props: any) => {
-  const menuItems = [
-    { name: "Dashboard", to: "/home", icon: <i className="bi bi-tv"></i> },
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
+import SidebarLink from "./sidebarLink";
+
+import bsOnlyLogo from "../../assests/bs-icon.svg";
+import bsFullLogo from "../../assests/BS-Logo-Blue_Hr.svg";
+
+import layout from "./styles/layout.module.css";
+
+const Sidebar: NextComponentType = (props: any) => {
+  const [expandedMenuId, setExpandedMenuId] = useState<number>(-1);
+
+  const subMenuIcon = <i className="bi bi-record-circle" />;
+
+  const menuItems = [
+    {
+      name: "Dashboard",
+      to: "/home",
+      icon: <i className="bi bi-tv" />,
+      id: 0,
+      subMenus: [],
+    },
     {
       name: "Catalog",
-
-      to: "/home",
-
+      to: "",
       icon: <i className="bi bi-card-list"></i>,
-
+      id: 1,
       subMenus: [
         {
           name: "Products",
-
           to: "/Product",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
-
         {
           name: "Manufacturers",
-
           to: "/Admin/Manufacturer/list",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Categories",
-
           to: "/category",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
       ],
     },
     {
       name: "Promotion",
-
-      to: "/home",
-
+      to: "",
       icon: <i className="bi bi-tags"></i>,
-
+      id: 2,
       subMenus: [
         {
           name: "Discount",
-
           to: "/promotion/discount",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Campaign",
-
           to: "/promotion/campaign",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
       ],
     },
     {
       name: "Users",
-
-      to: "/home",
-
+      to: "",
+      id: 3,
       icon: <i className="bi bi-people-fill"></i>,
-
       subMenus: [
         {
           name: "Admins",
-
           to: "/users/admin",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
       ],
     },
     {
       name: "System",
-
-      to: "/home",
-
+      to: "",
+      id: 4,
       icon: <i className="bi bi-box"></i>,
-
       subMenus: [
         {
           name: "Log",
-
           to: "/system/log",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Scheduled Task",
-
           to: "/system/scheduled-task",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
       ],
     },
     {
       name: "Reports",
-
-      to: "/home",
-
+      to: "",
+      id: 5,
       icon: <i className="bi bi-graph-up-arrow"></i>,
-
       subMenus: [
         {
           name: "Sales Summary",
-
           to: "/report/sales-summary",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Registered Customers",
-
           to: "/report/registered-customers",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Customer by Order Numbers",
-
           to: "/report/customers-by-number-of-orders",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
         {
           name: "Best Customers on Total Order",
-
           to: "/report/best-customers-by-order-total",
-
-          icon: <i className="bi bi-bullseye"></i>,
+          icon: subMenuIcon,
         },
       ],
     },
   ];
-  const chevronUp = <i className="bi bi-chevron-up"></i>;
-  const chevronDown = <i className="bi bi-chevron-down"></i>;
-  const [inactive, setInactive] = useState(false);
-  // const [showSubMenu, setShowSubMenu] = useState(false);
-  const [showSubMenu, setShowSubMenu] = useState([false, false, false]);
 
-  const manageToggleSubmenu = (index: number) => {
-    let toggleState = [...showSubMenu];
-    toggleState[index] = !toggleState[index];
-    // setShowSubMenu(!showSubMenu);
-    setShowSubMenu(toggleState);
+  const handleShowSubMenu = (id: number) => {
+    if (id === expandedMenuId) setExpandedMenuId(-1);
+    else setExpandedMenuId(id);
   };
-  const handleTogglebarStatus = () => {
-    setInactive(!inactive);
-    props.adjustContainer();
-  };
+
   return (
-    <>
-      <HeaderBar
-        handleTogglebarStatus={handleTogglebarStatus}
-        displayName={props.displayName}
-      />
+    <div
+      style={{
+        height: "100%",
+        minHeight: "100vh",
+        width: props.showSidebar ? "250px" : "74px",
+        backgroundColor: "#343a40",
+        position: "relative",
+        transition: "width 0.3s ease-in",
+        boxShadow: "0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)",
+      }}
+      onClick={() => props.toggleSidebar(true)}
+      // onMouseEnter={() => props.toggleSidebar(true)}
+    >
       <div
-        className={
-          inactive
-            ? sidebar.side_menu
-            : `${sidebar.side_menu} $ ${sidebar.side_menu_inactive}`
-        }
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "56px", borderBottom: "1px solid #4b545c" }}
       >
-        <div className={sidebar.top_section}>
-          <div className={sidebar.logo}>
-            <Image src={bsLogo} alt="bs-logo" />
-          </div>
-          <div className={sidebar.title}>BS Commerce</div>
-          {/* <div
-            onClick={() => setInactive(!inactive)}
-            className={sidebar.toggle_menu_btn}
-          >
-            <i className="bi bi-list"></i>
-          </div>  */}
-        </div>
-        <div className={sidebar.search_controller}>
-          <button className={sidebar.search_btn}>
-            <i className="bi bi-search"></i>
-          </button>
-          <input type="text" placeholder="search" />
-        </div>
-        <div className={sidebar.main_menu}>
-          <div>
-            {/* Menus */}
-            {menuItems.map((menuItem, index) => (
-              <div key={index}>
-                <a
-                  onClick={(e) => manageToggleSubmenu(index)}
-                  className={sidebar.menu_item}
-                >
-                  <div className={sidebar.menu_icon}>{menuItem.icon}</div>
-                  <div className={sidebar.menu_item_text}>
-                    {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
-                      <span>{menuItem.name}</span>
-                    ) : (
-                      <Link href={`${menuItem.to}`} passHref>
-                        <span>{menuItem.name}</span>
-                      </Link>
-                    )}
-                    <span className={sidebar.menu_chevron}>
-                      {menuItem.subMenus && menuItem.subMenus.length > 0
-                        ? showSubMenu[index]
-                          ? chevronUp
-                          : chevronDown
-                        : ""}
-                    </span>
-                  </div>
-                </a>
-                {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
-                  <>
-                    <div
-                      className={
-                        showSubMenu[index]
-                          ? sidebar.sub_menu_active
-                          : sidebar.sub_menu
-                      }
-                    >
-                      {menuItem.subMenus.map((subMenu, index) => (
-                        <div key={index}>
-                          <Link href={`${subMenu.to}`} passHref>
-                            <a className="text-white">
-                              <div className={sidebar.submenu_icon}>
-                                {subMenu.icon}
-                              </div>
-                              <span>{subMenu.name}</span>
-                              {/* {subMenu.name} */}
-                            </a>
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </div>
+        {props.showSidebar ? (
+          <Image src={bsFullLogo} alt="Brain Station 23 Logo" />
+        ) : (
+          <Image src={bsOnlyLogo} alt="Brain Station 23 Logo" />
+        )}
       </div>
-    </>
+
+      {menuItems.map((menu) => (
+        <div
+          key={menu.id}
+          className={`d-flex flex-column justify-content-start ${layout.link}`}
+          // style={{ color: "#C2C7D0" }}
+        >
+          {menu.to !== "" ? (
+            <Link href={menu.to} passHref>
+              <div onClick={() => handleShowSubMenu(-1)}>
+                <SidebarLink
+                  menu={menu}
+                  expandedMenuId={expandedMenuId}
+                  handleShowSubMenu={handleShowSubMenu}
+                  showSidebar={props.showSidebar}
+                />
+              </div>
+            </Link>
+          ) : (
+            <SidebarLink
+              menu={menu}
+              expandedMenuId={expandedMenuId}
+              handleShowSubMenu={handleShowSubMenu}
+              showSidebar={props.showSidebar}
+            />
+          )}
+
+          {/* Submenu part ↓ */}
+          <div hidden={!props.showSidebar}>
+            {menu.subMenus.length > 0 ? (
+              <div
+                className="d-flex flex-column justify-content-start"
+                style={{
+                  color: "#C2C7D0",
+                  backgroundColor: "rgba(255,255,255,.05)",
+                  overflow: "hidden",
+                  maxHeight:
+                    expandedMenuId === menu.id
+                      ? menu.subMenus.length * 50 + "px"
+                      : "0px",
+                  height: "auto",
+                  transition: "max-height .3s ease-in",
+                }}
+              >
+                {menu.subMenus.map((subMenu) => (
+                  <Link key={subMenu.name} href={subMenu.to} passHref>
+                    <span style={{ padding: "5px 15px", cursor: "pointer" }}>
+                      <span className="me-2">{subMenu.icon}</span>
+                      {subMenu.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

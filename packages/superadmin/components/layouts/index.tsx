@@ -2,22 +2,21 @@ import type { NextComponentType } from "next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-
-import { useAppSelector } from "../../redux-hooks";
-
-import Sidebar from "./sidebar";
-import Viewport from "./viewport";
 import { ToastContainer } from "react-toastify";
+import { User } from "models";
+
 import "react-toastify/dist/ReactToastify.css";
 
-import global from "./styles/global.module.css";
-import axios from "axios";
-import { getUserProfileGraphql } from "../../APIs/graphQL";
+import { useAppSelector } from "../../redux-hooks";
 import { userAPI } from "../../APIs";
-import { User } from "models";
+
+import HeaderBar from "./headerBar";
+import Sidebar from "./sidebar";
 
 const Layout: NextComponentType = ({ children }) => {
   const [userData, setUserData] = useState<User>();
+  const [showSidebar, setShowSidebar] = useState(false);
+
   const { pathname } = useRouter();
   const router = useRouter();
   const token = useAppSelector((state) => state.persistedReducer.auth.token);
@@ -42,9 +41,8 @@ const Layout: NextComponentType = ({ children }) => {
     getProfile();
   }, []);
 
-  const [adjustFullContainer, setAdjustFullContainer] = useState(false);
-  const adjustContainer = () => {
-    setAdjustFullContainer(!adjustFullContainer);
+  const toggleSidebar = (sideBarStatus: boolean) => {
+    setShowSidebar(sideBarStatus);
   };
 
   if (pathname.includes("/account")) {
@@ -53,23 +51,18 @@ const Layout: NextComponentType = ({ children }) => {
 
   return (
     <>
-      {/* <Viewport /> */}
-      <div className="">
-        <ToastContainer />
-        <div className="row container-fluid">
-          <Sidebar
-            displayName={userData?.displayName}
-            adjustContainer={adjustContainer}
-          />
-          <div
-            className={
-              adjustFullContainer
-                ? global.cotaniner_narrow
-                : global.container_broad
-            }
-          >
-            {children}
+      <ToastContainer />
+      <div className="d-flex">
+        <Sidebar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
+        <div className="d-flex flex-column" style={{ width: "100%" }}>
+          <div style={{ height: "56px", width: "100%" }}>
+            <HeaderBar
+              toggleSidebar={toggleSidebar}
+              showSidebar={showSidebar}
+              displayName={userData?.displayName}
+            />
           </div>
+          <div>{children}</div>
         </div>
       </div>
     </>
