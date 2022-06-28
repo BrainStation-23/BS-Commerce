@@ -14,6 +14,7 @@ import {
 } from "models";
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
+import { UpdatedUserRequest } from "./../../models/src/user/updateUser";
 
 export interface User {
   id?: string;

@@ -1,10 +1,10 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 import HeaderBar from "./headerBar";
 import bsLogo from "../../assests/bs23.png";
 import sidebar from "./styles/sidebar.module.css";
-import Link from "next/link";
 const Sidebar: NextComponentType = (props: any) => {
   const menuItems = [
     { name: "Dashboard", to: "/home", icon: <i className="bi bi-tv"></i> },
@@ -34,7 +34,30 @@ const Sidebar: NextComponentType = (props: any) => {
         },
       ],
     },
+    {
+      name: "Promotion",
 
+      to: "/home",
+
+      icon: <i className="bi bi-tags"></i>,
+
+      subMenus: [
+        {
+          name: "Discount",
+
+          to: "/promotion/discount",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Campaign",
+
+          to: "/promotion/campaign",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
     {
       name: "Users",
 
@@ -138,7 +161,7 @@ const Sidebar: NextComponentType = (props: any) => {
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
                         <div key={index}>
-                          <Link href={`${subMenu.to}`}>
+                          <Link href={`${subMenu.to}`} passHref>
                             <a className="text-white">
                               <div className={sidebar.submenu_icon}>
                                 {subMenu.icon}

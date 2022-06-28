@@ -8,10 +8,10 @@ import SubmitForm from "../../../../components/global/submitForm";
 import { adminCreate } from "../../../../utils/types";
 
 const EditCustomer: NextPage = () => {
-//   const EditCustomer: NextPage<{ adminData: User; id: string }> = ({
-//   adminData,
-//   id,
-// }) => {
+  //   const EditCustomer: NextPage<{ adminData: User; id: string }> = ({
+  //   adminData,
+  //   id,
+  // }) => {
   const [objProps, setObjprops] = useState({});
   const [adminData, setAdminData] = useState<any>();
 
@@ -27,10 +27,9 @@ const EditCustomer: NextPage = () => {
   const id = `${router.query.id}`;
 
   const getAdmins = async () => {
-  const adminData = await userAPI.getAdmins();
-  
+    const adminData = await userAPI.getAdmins();
 
-  adminData ? setAdminData( adminData) : "";
+    adminData ? setAdminData(adminData) : "";
   };
   useEffect(() => {
     getAdmins();
@@ -49,14 +48,18 @@ const EditCustomer: NextPage = () => {
         link={"/users/admin"}
         isEdit={true}
       >
-        {id? <EditForm
-          {...objProps}
-          initData={id ? adminData : initData}
-          saveHandler={() => {}}
-          id={id}
-          isPass={q === "pass"}
-        /> : ""}
-        
+        {id ? (
+          <EditForm
+            {...objProps}
+            initData={id ? adminData : initData}
+            saveHandlerAdmin={saveHandlerAdmin}
+            saveHandlerPassword={saveHandlerPassword}
+            id={id}
+            isPass={q === "pass"}
+          />
+        ) : (
+          ""
+        )}
       </SubmitForm>
     </div>
   );
@@ -70,6 +73,5 @@ const EditCustomer: NextPage = () => {
 //       id: context.params.id,
 //     },
 //   };
-
 
 export default EditCustomer;

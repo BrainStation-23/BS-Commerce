@@ -12,7 +12,10 @@ import {
   UpdateManufacturerRequest,
   GetUserResponse,
   GetUserSuccessResponse,
+  UpdatedUserRequest,
+  ChangePasswordRequest,
 } from "models";
+
 import { User } from "../utils/types";
 import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
 import { toast } from "react-toastify";
@@ -165,6 +168,44 @@ export async function getAdminsRest(): Promise<User[] | undefined> {
     const { data } = await axios?.get(`${apiEndPoints?.user}`);
     return data?.data as User[];
   } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function updateAdminRest(
+  data: UpdatedUserRequest,
+  //id: string
+  router
+): Promise<UpdatedUserRequest | undefined> {
+  try {
+    const response = await axios.patch<UpdatedUserRequest>(
+      `${apiEndPoints.user}`,
+      data
+    );
+    router.push("/users/admin");
+    toast.success("Edit Successful");
+    return response.data as UpdatedUserRequest;
+  } catch (error) {
+    toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function changePasswordRest(
+  data: ChangePasswordRequest,
+  //id: string
+  router
+): Promise<ChangePasswordRequest | undefined> {
+  try {
+    const response = await axios.patch<ChangePasswordRequest>(
+      `${apiEndPoints.user}`,
+      data
+    );
+    router.push("/users/admin");
+    toast.success("Edit Successful");
+    return response.data as ChangePasswordRequest;
+  } catch (error) {
+    toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
 }

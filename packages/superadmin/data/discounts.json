@@ -1,0 +1,267 @@
+{
+    "discountData": [
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 1,
+        "title": "'20% order total' discount",
+        "type": "Assigned to order total",
+        "discountPercentage": 20,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 2,
+        "title": "15% shipping discount",
+        "type": "Assigned to shipping",
+        "discountPercentage": 15,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      },
+      {
+        "id": 3,
+        "title": "10% discount",
+        "type": "Assigned to order subtotal",
+        "discountPercentage": 10,
+        "startDate": "2012-04-23T18:25:43.511Z",
+        "endDate": "2012-05-23T18:25:43.511Z",
+        "used": 0
+      }
+    ],
+    "campaignData": [
+      {
+        "id": 1,
+        "title": "10% cashback offer",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 2,
+        "title": "$15 shipping discount",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 3,
+        "title": "10% off",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 4,
+        "title": "$10 voucher",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 1,
+        "title": "10% cashback offer",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 2,
+        "title": "$15 shipping discount",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 3,
+        "title": "10% off",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 4,
+        "title": "$10 voucher",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 1,
+        "title": "10% cashback offer",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 2,
+        "title": "$15 shipping discount",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 3,
+        "title": "10% off",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      },
+      {
+        "id": 4,
+        "title": "$10 voucher",
+        "creationDate": "2012-04-23T18:25:43.511Z",
+        "sendingDate": "2012-05-23T18:25:43.511Z"
+      }
+    ]
+  }
