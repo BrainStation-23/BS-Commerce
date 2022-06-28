@@ -3,7 +3,8 @@ import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
-const ShowItemSmall = ({ data }: any) => {
+const ShowItemSmall = ({ data, setTotal, total }: any) => {
+  
   const dispatch = useAppDispatch();
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
@@ -63,6 +64,8 @@ const ShowItemSmall = ({ data }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity - 1,
                     }));
+                    console.log(total + data.product.info.price)
+                    setTotal(total - data.product.info.price)
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     //window.location.href = "/home";
@@ -86,6 +89,7 @@ const ShowItemSmall = ({ data }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     }));
+                    setTotal(total + data.product.info.price)
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     //window.location.href = "/home";
