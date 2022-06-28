@@ -1,16 +1,92 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { addCategoryErrorMessage, addCategoryErrorResponse, addCategoryRequest, addCategorySuccessResponse, Ancestor, Category, Meta } from "models";
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
+import { addCategoryErrorMessage, addCategoryErrorResponse, addCategoryRequest, addCategorySuccessResponse, Ancestor, Category, Meta, Photo } from "models";
 
+export class MetaDto implements Meta {
+    @ApiProperty()
+    @ValidateNested()
+    @IsArray()
+    keywords?: [string];
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    description?: string;
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    title?: string;
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    SEFN?: string;
+}
+
+export class PhotoDto implements Photo{
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    url: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    alt: string;
+}
 export class addCategoryRequestDto implements addCategoryRequest {
+
     @ApiProperty()
     @IsString()
     name: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    parentSlug: string;
+    parentSlug?: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsObject()
+    photo: PhotoDto;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    description?: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    showOnHomePage?: boolean;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    includeInTopMenu?: boolean;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    allowToSelectPageSize?: boolean;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    published?: boolean;
+
+
+    @ApiProperty()
+    @IsOptional()
+    @IsNumber()
+    displayOrder?: number;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsObject()
+    meta?: MetaDto;
 }
 
 export class AncestorDto implements Ancestor {
@@ -25,24 +101,6 @@ export class AncestorDto implements Ancestor {
     @ApiProperty()
     @IsNumber()
     level: number;
-}
-
-export class MetaDto implements Meta {
-    @ApiProperty()
-    @IsArray()
-    keywords?: [string];
-
-    @ApiProperty()
-    @IsArray()
-    description: string;
-
-    @ApiProperty()
-    @IsArray()
-    title: string;
-
-    @ApiProperty()
-    @IsArray()
-    SEFN: string;
 }
 
 export class CategoryDto implements Category {

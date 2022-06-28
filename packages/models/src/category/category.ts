@@ -22,7 +22,7 @@ export interface Category {
 
   export interface Meta {
     keywords?: [string];
-    description: string;
-    title: string;
-    SEFN: string;
+    description?: string;
+    title?: string;
+    SEFN?: string;
   }

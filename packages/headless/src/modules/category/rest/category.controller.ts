@@ -33,7 +33,6 @@ export class CategoryController {
     })
   async addCategory(
       @Body() category: addCategoryRequestDto,
-      @UserInfo() user: User,
       @Res({ passthrough: true }) res: Response,
   ) {
       const { code, ...response } = await this.categoryService.addCategory(category);
