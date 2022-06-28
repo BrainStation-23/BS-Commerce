@@ -6,7 +6,7 @@ const Picture = (props: any) => {
 
     return (
         <div>
-            <Image
+            <img
                 src={src}
                 alt={alt}
                 width="100%"

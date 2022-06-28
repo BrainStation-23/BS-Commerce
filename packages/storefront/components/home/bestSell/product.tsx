@@ -20,7 +20,7 @@ const Product = ({ product }: SingleProduct) => {
             alt={product.tags[0]}
           />
           <div className="scale-0 group-hover:scale-100 transition-transform origin-left duration-300 absolute bottom-5 left-40 md:left-28 ">
-            <Icon />
+            <Icon product={product} />
           </div>
           <ProductInfo product={product} />
         </div>
