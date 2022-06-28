@@ -1,10 +1,38 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
 import Buttons from "../../global/components/buttons/button";
-import cartDatas from "../../../allData/cart-data.json";
+// import cartDatas from "../../../allData/cart-data.json";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+import { userAPI } from "APIs";
+import { useRouter } from "next/router";
+import { deleteCartItem } from "toolkit/cartSlice";
+import { ResponseItem } from "models";
+
 const CartDropdown = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price! * data.quantity;
+  }, 0);
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
+  const handleCartItemDelete = async (product: ResponseItem) => {
+    await userAPI.deleteCartItem({
+      productId: product.productId,
+    });
+
+    dispatch(deleteCartItem(product));
+  };
 
   const cartIcon = (
     <svg
@@ -51,7 +79,8 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
-    return cartDatas.data.items.map((cartData, index) => {
+    // console.log("))))))))))))))))))))))))))))))", cartData.items.length)
+    return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>
           <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
@@ -60,7 +89,7 @@ const CartDropdown = () => {
                 <a href="#" className="">
                   <img
                     className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
-                    src={cartData?.product.photos[0].url}
+                    src={cartData?.product?.photos[0]?.url}
                     alt="Product Image"
                   />
                 </a>
@@ -68,23 +97,25 @@ const CartDropdown = () => {
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
                   <a href="#" className="text-sm font-bold text-gray-900 mr-2">
-                    {cartData.product.info.name}
+                    {cartData?.product?.info?.name}
                   </a>
                 </div>
                 <div>
                   <div className="py-2">
                     <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                      {cartData.quantity} &nbsp;
+                      {cartData?.quantity} &nbsp;
                     </span>
                     X &nbsp;
-                    <span className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {cartData.product.info.price}
-                    </span>
+                    <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
+                      $ {cartData?.product?.info?.price}
+                    </p>
                   </div>
                 </div>
               </div>
               <div className="ml-2">
-                <button>{cross}</button>
+                <button onClick={() => handleCartItemDelete(cartData)}>
+                  {cross}
+                </button>
               </div>
             </div>
           </div>
@@ -108,6 +139,7 @@ const CartDropdown = () => {
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
+                <p className="badge badge-light">{cartData?.length}</p>
               </button>
             </span>
           </div>
@@ -121,7 +153,9 @@ const CartDropdown = () => {
                 {/* new div ends here */}
                 <div className="flex justify-between p-4">
                   <span className="text-base font-semibold">Total</span>
-                  <span className="text-base font-semibold">$175.00</span>
+                  <span className="text-base font-semibold">
+                    ${totalCartPrice}
+                  </span>
                 </div>
                 <div className="px-6 py-2 flex justify-center">
                   <a href="/cart">

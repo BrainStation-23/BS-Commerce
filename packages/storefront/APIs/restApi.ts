@@ -1,5 +1,15 @@
 import axios from "axios";
-import { GetCustomerAllProductsResponse } from "models";
+import {
+  addToCartRequest,
+  AddToCartResponse,
+  addToCartSuccessResponse,
+  Cart,
+  deleteCartItemRequest,
+  deleteCartItemResponse,
+  GetCustomerAllProductsResponse,
+  updateCartItemRequest,
+  updateCartItemResponse,
+} from "models";
 import { GetCustomerProductResponse } from "models";
 import { CustomerSignInRequest } from "models";
 import { CreateCustomerResponse } from "models";
@@ -17,9 +27,17 @@ import {
 import { apiEndPoints } from "utils/apiEndPoints";
 import { User } from "utils/types";
 import { toast } from "react-toastify";
+var cookie = require("cookie");
+
+function getToken() {
+  console.log("Token ====>");
+  console.log(localStorage.getItem("persist:root"));
+  console.log("Hey In GetToken ====>");
+}
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
+    getToken();
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
@@ -60,22 +78,21 @@ export async function forgotPasswordRest(
   }
 }
 
-export async function getPublicProductsRest(): Promise<
-  GetCustomerAllProductsResponse | undefined
-> {
+export async function getPublicProductsRest(
+  token: any
+): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
-    const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}`
-    );
+    console.log("***********************", token);
+    const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
     return res.data.data;
   } catch (error: any) {
     return error;
   }
 }
 
-export async function getFeaturedProductsRest(): Promise<
-  GetCustomerAllProductsResponse | undefined
-> {
+export async function getFeaturedProductsRest(
+  token: any
+): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?isFeatured=true`
@@ -96,5 +113,79 @@ export async function getPublicProductByIdRest(
     return res.data.data;
   } catch (error: any) {
     return error;
+  }
+}
+
+export async function getCartRest(token: string): Promise<Cart[] | undefined> {
+  try {
+    console.log("token ======>", token);
+    const { data } = await axios?.get(`${apiEndPoints?.getCart}`);
+    console.log("data ======>", data);
+    // console.log("Cart from apis-------------------",data)
+    return data?.data as Cart[];
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function addToCartRest(
+  cartData: addToCartRequest
+): Promise<AddToCartResponse | undefined> {
+  try {
+    // console.log("**************129*******************");
+
+    const res = await axios?.post<AddToCartResponse>(
+      `${apiEndPoints?.getCart}`,
+      cartData
+    );
+    // console.log("cart data from ==================", res.data);
+    // console.log(res.data);
+
+    return res.data as addToCartSuccessResponse;
+  } catch (error: any) {
+    console.log("cart data from ==================", error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function deleteFromCartRest(
+  data: deleteCartItemRequest
+): Promise<deleteCartItemResponse | undefined> {
+  try {
+    // console.log("from delete apis", data)
+    const res = await axios?.delete(
+      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`
+    );
+    // console.log("**************125*******************", res);
+    return res?.data as deleteCartItemResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function deleteAllFromCartRest(): Promise<
+  deleteCartItemResponse | undefined
+> {
+  try {
+    const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`);
+    // console.log("**************125*******************", data);
+    return data?.data as deleteCartItemResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function updateCartRest(
+  item: updateCartItemRequest
+): Promise<updateCartItemResponse | undefined> {
+  try {
+    const { data } = await axios?.patch(
+      `${apiEndPoints?.updateCartItem}`,
+      item
+    );
+    //console.log("**************125*******************", data);
+    return data?.data as updateCartItemResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
   }
 }

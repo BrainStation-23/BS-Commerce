@@ -13,14 +13,13 @@ const Signup = () => {
   async function handleSignUp(data: CreateCustomerRequest) {
     try {
       userAPI.signUp(data).then((response: any) => {
-        if(response?.code !== 200) {
-          alert(response.response.data.error);
-        }
-        else {
-          router.push('/account/sign-in')
+        if (response?.code !== 200) {
+          console.log("**********************", response);
+        } else {
+          router.push("/account/sign-in");
         }
       });
-    } catch(error) {
+    } catch (error) {
       alert(error);
     }
   }
@@ -53,8 +52,8 @@ const Signup = () => {
               }}
               onSubmit={(values, actions) => {
                 const data = {
-                  phone: "01717584939",
-                  otp: "1234",
+                  phone: "01793110268",
+                  otp: "1111",
                   email: values.email,
                   password: values.password,
                 };

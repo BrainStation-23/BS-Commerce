@@ -10,9 +10,9 @@ interface Properties {
 const Buttons: React.FC<Properties> = (props) => {
   const getButtonClass = () => {
     if (props.bgColor == "black") {
-      return `bg-black text-white px-5 py-2 text-sm w-${props.width} h-${props.height} hover:bg-green-500`;
+      return `text-xs bg-black text-white px-5 py-2 w-${props.width} h-${props.height} hover:bg-green-500`;
     } else {
-      return `bg-green-400 text-white px-5 py-2 text-sm w-${props.width} h-${props.height} hover:bg-black`;
+      return `text-xs bg-green-400 text-white px-5 py-2 w-${props.width} h-${props.height} hover:bg-black`;
     }
   };
   return (

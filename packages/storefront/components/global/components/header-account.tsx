@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartDropdown from "../../cart/cartDropdown/dropdownCart";
-import signout from "@/components/account/sign-out";
-import Signout from "@/components/account/sign-out";
-import { removeUserToken } from "toolkit/userAuth/signinSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+import { useRouter } from "next/router";
+import { storeUserToken } from "toolkit/authSlice";
 
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState("null");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setIsLoggedIn(JSON.parse(localStorage?.getItem("persist:root"))?.access_token);
-  }, []);
-  console.log(JSON.parse(localStorage?.getItem("persist:root"))?.access_token);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [showCartDropdown, setShowCartDropdown] = useState(false);
+
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
   };
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(storeUserToken(""));
+    router.push("/account/sign-in");
+  };
+
   const links = [
     { name: "Register", link: "/account/sign-up" },
     { name: "Login", link: "/account/sign-in" },
@@ -27,15 +32,12 @@ const HeaderAccount: React.FC<Properties> = (props) => {
     { name: "Logout", link: "/home" },
   ];
   return (
-    <div className="flex flex-row gap-x-3">
+    <div className="flex flex-row items-center gap-x-3">
       <span className="uppercase my-0">
-        {isLoggedIn !== "null" ? (
+        {token !== "" ? (
           <Link href={links[0].link}>
             <a
-              onClick={() => {
-                dispatch(removeUserToken(null));
-                window.location.href = "/account/sign-in";
-              }}
+              onClick={() => handleLogout()}
               className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
             >
               {links[3].name}
@@ -57,20 +59,22 @@ const HeaderAccount: React.FC<Properties> = (props) => {
           </>
         )}
       </span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        />
-      </svg>
+      <Link href="/wishlist" passHref>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+          />
+        </svg>
+      </Link>
       <span className="z-50 text-sm" onClick={(e) => showCartDropDown()}>
         <CartDropdown />
       </span>

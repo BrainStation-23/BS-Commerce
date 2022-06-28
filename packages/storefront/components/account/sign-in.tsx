@@ -6,24 +6,50 @@ import { useCookies } from "react-cookie";
 import { CustomerSignInRequest } from "models";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { storeUserToken } from "toolkit/userAuth/signinSlice";
+import { storeUserToken } from "toolkit/authSlice";
+import axios from "axios";
+
+var cookie = require("cookie");
+var escapeHtml = require("escape-html");
+var http = require("http");
+var url = require("url");
 
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
   const dispatch = useDispatch();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    userAPI.signIn(data).then((response: any) => {
-      if (response?.code != 200) {
-        alert(response.response.data.error);
-      } else {
-        dispatch(storeUserToken(response?.data.token));
-        let expires = new Date();
-        expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
-        setCookie("access_token", response?.data.token, { path: "/", expires });
-        window.location.href = "/home";
-      }
+    const token = await fetch("http://localhost:3002/api/signin", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+    const datass = await token.json();
+    console.log("999999999999999999999999999999", datass);
+    dispatch(storeUserToken(datass?.data?.token));
+    // localStorage.setItem("token", datass?.data?.token);
+    setCookie("access_token", datass?.data?.token);
+    // axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
+    // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
+
+    window.location.href = "/home";
+    // userAPI.signIn(data).then((response: any) => {
+    //   if (response?.code != 200) {
+    //     alert(response.response.data.error);
+    //   } else {
+    //     // dispatch(storeUserToken(response?.data.token));
+    //     // // let expires = new Date();
+    //     // // expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
+    //     // // setCookie("access_token", response?.data.token, { path: "/", expires });
+    //     // res.setHeader('Set-Cookie', cookie.serialize('name', String(query.name), {
+    //     //   httpOnly: true,
+    //     //   maxAge: 60 * 60 * 24 * 7 // 1 week
+    //     // }));
+
+    //     window.location.href = "/home";
+    //   }
   }
 
   return (
@@ -36,7 +62,11 @@ const Signin = () => {
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
-          style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
+          style={{
+            width: " 35rem ",
+            height: "auto",
+            background: "#f3f3f3",
+          }}
         >
           <h2 className="text-3xl mx-3 text-center text-gray-800">Login</h2>
           <p className="text-center mt-2 mb-6 text-gray-500 mx-5">

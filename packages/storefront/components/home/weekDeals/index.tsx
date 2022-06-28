@@ -15,7 +15,7 @@ interface Products {
 
 const WeekDeals = ({ products }: Products) => {
   //edited type. was const WeekDeals: FC = () => {}
-  console.log(products);
+  // console.log(products);
   return (
     <>
       <Container className="max-w-7xl">
@@ -63,7 +63,7 @@ const WeekDeals = ({ products }: Products) => {
                             </div>
                           </div>
                           <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
-                            <Icon />
+                            <Icon product={product} />
                           </div>
                           {/* <ProductInfo product={product} /> */}
 
