@@ -1,0 +1,28 @@
+{
+    "salesSummary": [
+        {
+            "summary": "May 13, 2017",
+            "noOfOrders": 5,
+            "profit": 4469.30,
+            "shipping": 0.00,
+            "tax": 0.00,
+            "orderTotal": 4469.30
+        },
+        {
+            "summary": "Apr 20, 2017",
+            "noOfOrders": 5,
+            "profit": 1000.30,
+            "shipping": 0.00,
+            "tax": 0.00,
+            "orderTotal": 1000.30
+        },
+        {
+            "summary": "Mar 13, 2017",
+            "noOfOrders": 5,
+            "profit": 5400.30,
+            "shipping": 0.00,
+            "tax": 0.00,
+            "orderTotal": 5400.30
+        }
+    ]
+}

@@ -75,6 +75,44 @@ const Sidebar: NextComponentType = (props: any) => {
         },
       ],
     },
+    {
+      name: "Reports",
+
+      to: "/home",
+
+      icon: <i className="bi bi-graph-up-arrow"></i>,
+
+      subMenus: [
+        {
+          name: "Sales Summary",
+
+          to: "/report/sales-summary",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Registered Customers",
+
+          to: "/report/registered-customers",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Customer by Order Numbers",
+
+          to: "/report/customers-by-number-of-orders",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Best Customers on Total Order",
+
+          to: "/report/best-customers-by-order-total",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
   ];
   const chevronUp = <i className="bi bi-chevron-up"></i>;
   const chevronDown = <i className="bi bi-chevron-down"></i>;
