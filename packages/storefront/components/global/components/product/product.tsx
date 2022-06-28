@@ -13,8 +13,8 @@ const Product = (props: SingleProduct) => {
 
   return (
     <>
-      <Link href={`product/${product.id}`} passHref>
-        <div className="mb-0 overflow-hidden" key={product.id}>
+      <Link href={`product/${product?.id}`} passHref>
+        <div className="mb-0 overflow-hidden" key={product?.id}>
           <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer">
             <div className="rounded overflow-hidden max-w-sm">
               <div className="relative flex items-center justify-center flex-col">
@@ -25,22 +25,22 @@ const Product = (props: SingleProduct) => {
                       height={212}
                       width={212}
                       src={product?.photos[0]?.url}
-                      alt={product.info.name}
+                      alt={product?.info?.name}
                     />
 
                     <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-                      {product.info.oldPrice ? "Sale" : ""}
+                      {product?.info?.oldPrice ? "Sale" : ""}
                     </div>
 
-                    {product?.discountPercentage && product.stock > 0 ? (
+                    {product?.discountPercentage && product?.stock > 0 ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                        <p>{`-${product.discountPercentage}%`}</p>
+                        <p>{`-${product?.discountPercentage}%`}</p>
                       </div>
                     ) : null}
-                    {product.info.oldPrice ? (
+                    {product?.info?.oldPrice ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                         <p>{`-$${Math.abs(
-                          product.info.oldPrice - product.info.price
+                          product?.info?.oldPrice - product?.info?.price
                         )}`}</p>
                       </div>
                     ) : (
