@@ -3,16 +3,18 @@ import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 import Image from "next/image";
 // import cartDatas from "../../../../allData/cart-data.json";
-import { useAppSelector } from "customHooks/hooks";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { userAPI } from "APIs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import TableData from "./tableData";
+import { deleteCart } from "toolkit/cartSlice";
 
 const DataTable = () => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
     const cartData = useAppSelector(
-        (state) => state.getAllCartItemsStore.allCartItems
+        (state) => state.persistedReducer.cart.allCartItems
     );
     // console.log("From Data Table", cartData);
    
@@ -74,8 +76,9 @@ const DataTable = () => {
                                     className="text-xs"
                                     onClick={() => {
                                         userAPI.deleteAllCartItem();
-                                        location.href =
-                                            "http://localhost:3002/home";
+                                        dispatch(deleteCart());
+                                        // location.href =
+                                        //     "http://localhost:3002/home";
                                         // router.push('/cart');
                                     }}
                                 >

@@ -65,7 +65,7 @@ export interface apiFunction {
   getCart: (token: string) => Promise<Cart[] | undefined>;
   addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>
   deleteCartItem: (data: deleteCartItemRequest) => Promise<deleteCartItemResponse | undefined>
-  deleteAllCartItem: (token) => Promise<deleteAllCartItemsResponse | undefined>
+  deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>
   updateCartItem: (data: updateCartItemRequest) => Promise<updateCartItemResponse | undefined >
 }
 

@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import Buttons from "../../../global/components/buttons/button";
 const CartTotal: NextComponentType = () => {
   const cartData = useAppSelector(
-    (state) => state.getAllCartItemsStore.allCartItems
+    (state) => state.persistedReducer.cart.allCartItems
   );
 
-  const totalCartPrice = cartData?.items?.reduce((total, data) => {
+  const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price * data.quantity;
   }, 0);
 

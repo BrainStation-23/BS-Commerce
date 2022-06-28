@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { updateCartItemRequest } from "models";
 import { Cart, CartProduct, ResponseItem } from "models";
 
 export interface AllCartItemsState {
@@ -27,9 +28,26 @@ export const cartSlice = createSlice({
         (item) => item.productId !== action.payload.productId
       );
     },
+    deleteCart: (
+      state: AllCartItemsState,
+    ) => {
+      state.allCartItems = [];
+    },
+    updateCartItem: (
+      state: AllCartItemsState,
+      action: PayloadAction<updateCartItemRequest>
+    ) => {
+      const list = state.allCartItems;
+      list.forEach(item => {
+        if(item.productId === action.payload.productId) {
+          item.quantity = action.payload.quantity;
+        }
+      })
+      state.allCartItems = list;
+    }
   },
 });
 
-export const { storeAllCartItems, deleteCartItem } = cartSlice.actions;
+export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

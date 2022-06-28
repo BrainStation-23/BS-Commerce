@@ -1,7 +1,7 @@
 import { userAPI } from "APIs";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
-import { deleteSingCartItem } from "toolkit/cartSlice";
+import { updateCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
   const [itemToUpdate, setItemToUpdate] = useState({
@@ -10,7 +10,7 @@ const ShowData = ({ data }: any) => {
   });
   const dispatch = useAppDispatch();
   const cartData = useAppSelector(
-    (state) => state.getAllCartItemsStore.allCartItems
+    (state) => state.persistedReducer.cart.allCartItems
   );
   return (
     <>
@@ -46,9 +46,10 @@ const ShowData = ({ data }: any) => {
                           : 0,
                     });
                     userAPI.updateCartItem(itemToUpdate);
+                    dispatch(updateCartItem(itemToUpdate));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
-                    window.location.href = "/home";
+                    // window.location.href = "/home";
                   }}
                 >
                   -
@@ -61,9 +62,10 @@ const ShowData = ({ data }: any) => {
                       quantity: itemToUpdate.quantity + 1,
                     });
                     userAPI.updateCartItem(itemToUpdate);
+                    dispatch(updateCartItem(itemToUpdate));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
-                    window.location.href = "/home";
+                    //window.location.href = "/home";
                   }}
                 >
                   +

@@ -6,16 +6,16 @@ import ShowItemSmall from "./showItemSmall";
 
 const ItemsLists: FC = (props) => {
   const cartData = useAppSelector(
-    (state) => state.getAllCartItemsStore.allCartItems
+    (state) => state.persistedReducer.cart.allCartItems
   );
-  const totalCartPrice = cartData?.items?.reduce((total, data) => {
+  const totalCartPrice = cartData?.reduce((total, data) => {
     return total + (data?.product?.info?.price * data.quantity);
   }, 0);
   return (
     <>
       <div>
         {cartData ? (
-          cartData?.items?.map((data, index) => {
+          cartData?.map((data, index) => {
             return <ShowItemSmall key={index} data={data} />;
           })
         ) : (
