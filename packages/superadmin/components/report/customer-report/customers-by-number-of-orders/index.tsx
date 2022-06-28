@@ -5,7 +5,7 @@ const CustomersByNumberOfOrdersComponent = () => {
   return (
     <>
       <div>
-        <h4 className="py-3">Customers by order total</h4>
+        <h4 className="py-3">Customers by number of orders</h4>
         <CustomerSearch />
         <CustomerByNumberOfOrdersTable />
       </div>
