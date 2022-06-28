@@ -21,20 +21,20 @@ const CategoryComponent: NextComponentType = ({}) => {
       <div className="d-flex flex-row justify-content-between align-items-center">
         <h1>Categories</h1>
         <div className="">
-          <button className="btn btn-info text-white mx-1">
-            <i className="bi bi-plus-square pl-2" />
+          <button className="btn btn-info text-white mx-1 disabled">
+            <i className="bi bi-plus-square pl-2 me-1" />
             Add
           </button>
-          <button className="btn btn-success mx-1">
-            <i className="bi bi-download" />
+          <button className="btn btn-success mx-1 disabled">
+            <i className="bi bi-download me-1" />
             Export
           </button>
-          <button className="btn btn-secondary mx-1">
-            <i className="bi bi-upload" />
+          <button className="btn btn-secondary mx-1 disabled">
+            <i className="bi bi-upload me-1" />
             Import
           </button>
-          <button className="btn btn-danger mx-1">
-            <i className="bi bi-trash3" />
+          <button className="btn btn-danger mx-1 disabled">
+            <i className="bi bi-trash3 me-1" />
             Delete(selected)
           </button>
         </div>

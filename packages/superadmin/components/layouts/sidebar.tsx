@@ -201,7 +201,10 @@ const Sidebar: NextComponentType = (props: any) => {
               >
                 {menu.subMenus.map((subMenu) => (
                   <Link key={subMenu.name} href={subMenu.to} passHref>
-                    <span style={{ padding: "5px 15px", cursor: "pointer" }}>
+                    <span
+                      className={layout.link}
+                      style={{ padding: "5px 15px", cursor: "pointer" }}
+                    >
                       <span className="me-2">{subMenu.icon}</span>
                       {subMenu.name}
                     </span>

@@ -6,6 +6,8 @@ import {
   SignInSuccessResponse,
   GetUserResponse,
   GetUserSuccessResponse,
+  getCategoryBySlugResponse,
+  getCategoryBySlugRequest,
 } from "models";
 import {
   CreateManufacturerRequest,
@@ -81,6 +83,9 @@ export interface apiFunction {
     router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
   getUserProfile: () => Promise<GetUserSuccessResponse | undefined>;
+  getCategoryBySlug: (
+    slug: getCategoryBySlugRequest
+  ) => Promise<getCategoryBySlugResponse | undefined>;
 }
 
 export interface adminCreate {
