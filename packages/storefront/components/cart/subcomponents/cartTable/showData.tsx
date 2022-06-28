@@ -81,7 +81,8 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <button
               onClick={() => {
-                userAPI.deleteCartItem(data.productId);
+                //console.log(data.productId);
+                userAPI.deleteCartItem(data);
                 dispatch(deleteCartItem(data));
                 //window.location.href = "/home";
                 // const list = cartData.items.filter(item => item.productId != data.productId)
