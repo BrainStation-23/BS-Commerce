@@ -6,7 +6,7 @@ export class Address {
   country: string;
   postCode: string;
 }
-export class User {
+export class Admin {
   id?: string;
   firstName: string;
   lastName: string;

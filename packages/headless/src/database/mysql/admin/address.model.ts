@@ -9,7 +9,7 @@ import {
     ForeignKey,
     BelongsTo,
 } from 'sequelize-typescript';
-import UserModel from './user.model';
+import UserModel from './admin.model';
 
 @Table({
     tableName: 'Address'

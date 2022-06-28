@@ -1,6 +1,6 @@
 import { UseGuards } from "@nestjs/common";
 import { Query, Args, Resolver } from "@nestjs/graphql";
-import { JwtAuthGuard } from "src/modules/auth/guards/auth.guard";
+import { JwtAuthGuard } from "src/modules/admin-auth/guards/auth.guard";
 import { getCategoryRequestDto } from "../dto/getCategory.dto";
 import { getCategoryBySlugRequestDto } from "../dto/getCategoryBySlug.dto";
 import { CategoryService } from "../services";

@@ -1,9 +1,9 @@
 import { Body, Controller, Get, HttpStatus, Patch, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { UserService } from '../services';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { User } from 'src/entity/user';
+import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin } from 'src/entity/admin';
 import { Response } from 'express';
 import {
   ChangePasswordDto,
@@ -15,7 +15,7 @@ import {
 } from '../dto';
 
 @Controller('user')
-@ApiTags('User Profile API')
+@ApiTags('Admin Profile API')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class UserController {
@@ -23,16 +23,16 @@ export class UserController {
 
   @Get()
   @ApiResponse({
-    description: 'Get User Success Response',
+    description: 'Get Admin Success Response',
     type: GetUserSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
-    description: 'Get User Error Response',
+    description: 'Get Admin Error Response',
     type: GetUserErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getUser(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async getUser(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.getUser(user.id);
     res.status(code);
     return { code, ...response };
@@ -40,16 +40,16 @@ export class UserController {
 
   @Patch()
   @ApiResponse({
-    description: 'Update User Success Response',
+    description: 'Update Admin Success Response',
     type: GetUserSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
-    description: 'Update User Error Response',
+    description: 'Update Admin Error Response',
     type: GetUserErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async updateUser(@Body() data: UpdatedUserDto, @UserInfo() userInfo: User, @Res({ passthrough: true }) res: Response) {
+  async updateUser(@Body() data: UpdatedUserDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.updateUser(userInfo.id, data);
     res.status(code);
     return { code, ...response };
@@ -57,16 +57,16 @@ export class UserController {
 
   @Patch('password')
   @ApiResponse({
-    description: 'Change Password Success Response',
+    description: 'Admin Change Password Success Response',
     type: ChangePasswordSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
-    description: 'Change Password Error Response',
+    description: 'Admin Change Password Error Response',
     type: ChangePasswordErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async changePassword(@Body() passwordDetails: ChangePasswordDto, @UserInfo() userInfo: User, @Res({ passthrough: true }) res: Response) {
+  async changePassword(@Body() passwordDetails: ChangePasswordDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.userService.changePassword(userInfo.id, passwordDetails);
     res.status(code);
     return { code, ...response };

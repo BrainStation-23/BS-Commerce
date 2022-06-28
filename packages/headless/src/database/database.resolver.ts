@@ -1,6 +1,6 @@
 // Mongodb dependency implementations
 import { dbConfig } from 'config/database';
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/admin';
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
@@ -8,7 +8,7 @@ import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
-import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { UserDatabase as UserDatabaseMysql } from './mysql/admin/admin';
 
 type CLASS_NAME =
   'WISHLIST'

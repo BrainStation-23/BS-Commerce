@@ -5,8 +5,8 @@ import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
 import { AuthResolver } from './graphql/auth.resolver';
 import { AdminJwtStrategy } from './guards/jwt-strategy';
-import { UserRepository } from 'src/modules/user/repositories';
-import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
+import { UserRepository } from 'src/modules/admin/repositories';
+import { IUserDatabase } from 'src/modules/admin/repositories/user.database.interface';
 
 @Module({
   imports: [

@@ -1,12 +1,12 @@
 import { randomUUID } from 'crypto';
 import { Column, Model, Table, Unique, Default,HasMany, Index, PrimaryKey } from 'sequelize-typescript';
-import { User } from 'src/entity/user';
+import { Admin } from 'src/entity/admin';
 import AddressModel from './address.model';
 
 @Table({
-  tableName: 'Users',
+  tableName: 'Admins',
 })
-export default class UserModel extends Model<User> {
+export default class AdminModel extends Model<Admin> {
   @PrimaryKey
   @Unique(true)
   @Default(() => randomUUID())

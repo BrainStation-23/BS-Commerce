@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Product } from 'src/entity/product';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import {
   DeleteProductParamsDto,
   GetAllProductsQueryDto,

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Address, User } from 'src/entity/user';
+import { Address, Admin } from 'src/entity/admin';
 import { randomUUID } from 'crypto';
 
 const AddressSchema = new Schema<Address>({
@@ -19,7 +19,7 @@ const AddressSchema = new Schema<Address>({
   versionKey: false
 });
 
-const UserSchema = new Schema<User>({
+const AdminSchema = new Schema<Admin>({
   id: {
     type: String,
     unique: true,
@@ -58,5 +58,5 @@ const UserSchema = new Schema<User>({
   versionKey: false
 });
 
-const UserModel = model<User>('user', UserSchema);
-export { UserModel };
+const AdminModel = model<Admin>('admin', AdminSchema);
+export { AdminModel };

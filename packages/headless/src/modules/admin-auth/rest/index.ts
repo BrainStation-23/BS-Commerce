@@ -15,18 +15,18 @@ import {
 } from '../dto';
 
 @Controller('auth')
-@ApiTags('User Authentication API')
+@ApiTags('Admin Authentication API')
 export class AuthController {
   constructor(private authService: AuthService) { }
 
   @Post('signup')
   @ApiResponse({
-    description: 'Sign Up Success Response',
+    description: 'Admin Sign Up Success Response',
     type: CreateUserSuccessResponseDto,
     status: HttpStatus.CREATED
   })
   @ApiResponse({
-    description: 'Sign Up Error Response',
+    description: 'Admin Sign Up Error Response',
     type: CreateUserErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
@@ -38,12 +38,12 @@ export class AuthController {
 
   @Post('signin')
   @ApiResponse({
-    description: 'Sign In Success Response',
+    description: 'Admin Sign In Success Response',
     type: SignInSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
-    description: 'Sign In Error Response',
+    description: 'Admin Sign In Error Response',
     type: SignInErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
@@ -55,12 +55,12 @@ export class AuthController {
 
   @Post('forgot')
   @ApiResponse({
-    description: 'Forgot Password Success Response',
+    description: 'Admin Forgot Password Success Response',
     type: ForgotPasswordSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
-    description: 'Forgot Password Error Response',
+    description: 'Admin Forgot Password Error Response',
     type: ForgotPasswordErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })

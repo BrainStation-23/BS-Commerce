@@ -3,7 +3,7 @@ import {
 } from '@nestjs/common';
 import { CategoryService } from '../services';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessResponseDto } from '../dto/getCategory.dto';
 import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from '../dto/getCategoryList.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';

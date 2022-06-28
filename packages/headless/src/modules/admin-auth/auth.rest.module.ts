@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { UserRepository } from 'src/modules/user/repositories';
-import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
+import { UserRepository } from 'src/modules/admin/repositories';
+import { IUserDatabase } from 'src/modules/admin/repositories/user.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
