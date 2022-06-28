@@ -28,6 +28,7 @@ const WeekDeals = ({ products }: Products) => {
           slidesPerView768={3}
           slidesPerView980={5}
           rows={1}
+          loop={products.length>5 ? true : false}
         >
           {products &&
             products.length > 0 &&

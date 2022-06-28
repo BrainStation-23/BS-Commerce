@@ -12,6 +12,7 @@ interface Props {
   slidesPerView768: number;
   slidesPerView980: number;
   rows: number;
+  loop: boolean;
 }
 
 const SwiperGrid: FC<Props> = ({
@@ -20,11 +21,13 @@ const SwiperGrid: FC<Props> = ({
   slidesPerView768,
   slidesPerView980,
   rows,
+  loop
 }) => {
   return (
     <Swiper
       slidesPerView={slidesPerViewmobile}
-      loop={true}
+      loop={loop}
+      // loop={false}
       grid={{
         fill: "row",
         rows: rows,
@@ -45,6 +48,8 @@ const SwiperGrid: FC<Props> = ({
       modules={[Grid, Navigation]}
       className="mySwiper"
     >
+      {console.log("loop ",loop)
+      }
       {children}
     </Swiper>
   );
