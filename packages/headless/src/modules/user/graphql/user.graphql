@@ -1,0 +1,69 @@
+type Address {
+  id: String!
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  country: String!
+  postCode: String!
+}
+
+input AddressInput {
+  id: String
+  addressLine1: String
+  addressLine2: String
+  city: String
+  country: String
+  postCode: String
+}
+
+type User {
+  id: String!
+  firstName: String!
+  lastName: String!
+  displayName: String!
+  username: String!
+  email: String!
+  provider: String
+  phone: String
+  gender: String
+  addresses: [Address]
+  status: String
+  active: Boolean
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  provider: String
+  phone: String
+  gender: String
+  address: AddressInput
+  status: String
+  active: Boolean
+}
+
+input ChangePasswordInput {
+  currentPassword: String
+  newPassword: String
+}
+
+type UserResponse {
+  error: String
+  code: Int!
+  data: User
+}
+
+type ChangePasswordResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
+type Query {
+  getUser: UserResponse!
+}
+
+type Mutation {
+  updateUser(data: UpdateUserInput): UserResponse!
+  changePassword(passwordDetails: ChangePasswordInput): ChangePasswordResponse!
+}

@@ -1,0 +1,41 @@
+{
+  "checkoutProducts": [
+    {
+      "title": "Broccoli",
+      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/appetite-1238251_1280.jpg",
+      "price": 2.99,
+      "quantity": 2
+    },
+    {
+      "title": "Tomato",
+      "additionalInfo": "Ripe",
+      "image": "https://cdn.pixabay.com/photo/2015/08/05/20/20/tomato-877019_1280.jpg",
+      "price": 5.29,
+      "quantity": 20
+    },
+    {
+      "title": "Green Chili",
+      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+      "price": 3.11,
+      "quantity": 10
+    },
+    {
+      "title": "Green Chili",
+      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+      "price": 3.11,
+      "quantity": 10
+    },
+    {
+      "title": "Green Chili",
+      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+      "price": 3.11,
+      "quantity": 10
+    },
+    {
+      "title": "Green Chili",
+      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/01/appetite-1238240_1280.jpg",
+      "price": 3.11,
+      "quantity": 10
+    }
+  ]
+}

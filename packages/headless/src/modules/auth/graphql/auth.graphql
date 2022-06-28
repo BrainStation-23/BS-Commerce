@@ -1,0 +1,36 @@
+input UserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input SignInInput {
+  username: String!
+  password: String!
+}
+
+type Token {
+  token: String!
+}
+
+type Message {
+  message: String!
+}
+
+type AuthResponse {
+  error: String
+  code: Int!
+  data: Message
+}
+
+type SignInResponse {
+  error: String
+  code: Int!
+  data: Token
+}
+
+type Mutation {
+  signUp(user: UserInput!): AuthResponse!
+  signIn(data: SignInInput!): SignInResponse!
+}

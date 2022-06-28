@@ -1,0 +1,53 @@
+.widget_container {
+  margin-top: 40px;
+  padding: 10px;
+}
+.widgets_card {
+  padding: 10px;
+}
+.small_box {
+  border-radius: 0.25rem;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+  display: block;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.bg_info {
+  color: #fff;
+}
+
+.small_box .inner {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.small_box .icon {
+  color: rgba(0, 0, 0, 0.15);
+  z-index: 0;
+}
+
+.small_box .icon i {
+  position: absolute;
+  right: 70px;
+  top: 6px;
+  font-size: 70px;
+  transition: all 0.3s linear;
+}
+
+.small_box .small_box_footer {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  padding: 3px 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.small_box .small_box_footer i {
+  padding: 5px;
+  color: white;
+  font-size: 15px;
+}

@@ -1,0 +1,52 @@
+{
+  "name": "storefront",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next -p 3002",
+    "build": "next build",
+    "start": "next start -p 3002",
+    "lint": "next lint",
+    "test": "jest --watch"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.6",
+    "@headlessui/react": "^1.6.4",
+    "@popperjs/core": "^2.11.4",
+    "@reduxjs/toolkit": "^1.8.2",
+    "@types/react-redux": "^7.1.24",
+    "axios": "^0.27.2",
+    "font-awesome": "^4.7.0",
+    "formik": "^2.2.9",
+    "graphql": "^16.5.0",
+    "marketplace": "^1.0.0",
+    "models": "*",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-cookie": "^4.1.1",
+    "react-dom": "17.0.2",
+    "react-redux": "^8.0.2",
+    "react-toastify": "^9.0.5",
+    "redux-persist": "^6.0.0",
+    "swiper": "^8.1.5",
+    "xregexp": "^5.1.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@types/jest": "^27.5.1",
+    "@types/node": "17.0.22",
+    "@types/react": "17.0.41",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^28.1.0",
+    "eslint": "8.11.0",
+    "eslint-config-next": "12.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^28.1.0",
+    "react-test-renderer": "^18.1.0",
+    "sass": "^1.49.9",
+    "tailwindcss": "^3.0.24",
+    "typescript": "4.6.2"
+  }
+}
