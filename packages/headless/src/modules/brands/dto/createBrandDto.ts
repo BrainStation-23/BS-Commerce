@@ -14,8 +14,7 @@ export class CreateBrandRequestDto implements CreateBrandRequest{
     
     @ApiProperty()
     @IsNotEmpty()
-    @ValidateNested()
-    @Type(()=> InfoDto)
+    @ValidateNested({ each: true })
     @IsObject()
     info: InfoDto;
 

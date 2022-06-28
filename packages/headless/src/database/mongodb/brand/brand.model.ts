@@ -10,6 +10,7 @@ const BrandSchema = new Schema<Brand>({
     info:{
         name: {
             type: String,
+            required: true,
             unique: true
         },
         description: {
@@ -30,6 +31,7 @@ const BrandSchema = new Schema<Brand>({
         },
         pageSizeOptions: [ {type: Number} ]
     },
+    
     meta: {
         keywords: {
             type: String,
