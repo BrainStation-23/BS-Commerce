@@ -90,6 +90,13 @@ const Sidebar: NextComponentType = (props: any) => {
 
           icon: <i className="bi bi-bullseye"></i>,
         },
+        {
+          name: "Scheduled Task",
+
+          to: "/system/scheduled-task",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
       ],
     },
     {
