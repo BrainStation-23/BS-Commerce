@@ -15,6 +15,12 @@ const TrendingProducts = ({products}: any) => {
   //   (state: RootState) => state?.productsStore?.products
   // );
 
+const getMinimumProduct =()=>{
+    const w = window.innerWidth;
+    if(w>=980) return 10;
+    if(w>=768) return 6;
+    return 4;
+  }
   useEffect(() => {
     const newProduct = products?.filter(
       (product: any) => product.category === "smartphones"
@@ -81,7 +87,7 @@ const TrendingProducts = ({products}: any) => {
             slidesPerView768={3}
             slidesPerView980={5}
             rows={2}
-            loop={products.length>10 ? true : false}
+            loop={products.length>getMinimumProduct() ? true : false}
 
           >
             {products?.map((product: any) => (
