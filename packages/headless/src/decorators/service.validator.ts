@@ -60,13 +60,13 @@ export class ValidationPipe implements PipeTransform<any> {
         if (errors.length > 0) {
             errors.map((err: ValidationError) => {
                 let errorArray = [];
-                err.constraints && Object.values(err.constraints).forEach(constraint => {
+                err && err.constraints && Object.values(err.constraints).forEach(constraint => {
                     errorsResponse.error += constraint as string + ',';
                     err.property && (errorArray.push(constraint as string));
                 })
                 err.property && (errorsResponse.errors[err.property] = errorArray as any);
             })
-            if (errorsResponse?.error || errorsResponse.errors?.length) {
+            if (errorsResponse?.error || errorsResponse?.errors?.length) {
                 throw new HttpException(errorsResponse, HttpStatus.UNPROCESSABLE_ENTITY);
             }
         }
@@ -78,7 +78,6 @@ export class ValidationPipe implements PipeTransform<any> {
         return !types.includes(metatype);
     }
 }
-
 
 /**
  * @decorator

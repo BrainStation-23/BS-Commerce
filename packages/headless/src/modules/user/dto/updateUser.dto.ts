@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
-import { regexConfig } from 'config/regex';
+import { regexConfig } from 'config/phone';
 import { AddressDto, UserDto } from './user.dto';
 import {
     UpdatedUserRequest,

@@ -7,12 +7,9 @@ export const GraphqlInitModule = () => {
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['src/**/*.graphql'],
-      path: '/graphql',
-      playground: coreConfig.env === 'DEVELOPMENT' ? true : false,
-      cors: {
-        origin: '*',
-        credentials: true,
-      },
+      path: `/${coreConfig.graphqlPathPrefix}`,
+      playground: (coreConfig.env === 'DEVELOPMENT') ? true : false,
+      cors: { origin: '*', credentials: true, },
     }),
   ];
 };
