@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
       const list = state.allCartItems;
       list.forEach(item => {
         if(item.productId === action.payload.productId) {
-          item.quantity = action.payload.quantity;
+          item.quantity = action.payload.quantity!;
         }
       })
       state.allCartItems = list;

@@ -7,7 +7,7 @@ const ShowItemSmall = ({ data }: any) => {
   const dispatch = useAppDispatch();
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
-    quantity: data.quantity + 1,
+    quantity: data.quantity,
   });
 
   return (
@@ -55,8 +55,14 @@ const ShowItemSmall = ({ data }: any) => {
                           ? itemToUpdate.quantity - 1
                           : 0,
                     });
-                    userAPI.updateCartItem(itemToUpdate);
-                    dispatch(updateCartItem(itemToUpdate));
+                    userAPI.updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity - 1,
+                    });
+                    dispatch(updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity - 1,
+                    }));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     //window.location.href = "/home";
@@ -72,8 +78,14 @@ const ShowItemSmall = ({ data }: any) => {
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
-                    userAPI.updateCartItem(itemToUpdate);
-                    dispatch(updateCartItem(itemToUpdate));
+                    userAPI.updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity + 1,
+                    });
+                    dispatch(updateCartItem({
+                      productId: itemToUpdate?.productId,
+                      quantity: itemToUpdate.quantity + 1,
+                    }));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
                     //window.location.href = "/home";
