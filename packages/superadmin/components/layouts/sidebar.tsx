@@ -76,6 +76,23 @@ const Sidebar: NextComponentType = (props: any) => {
       ],
     },
     {
+      name: "System",
+
+      to: "/home",
+
+      icon: <i className="bi bi-box"></i>,
+
+      subMenus: [
+        {
+          name: "Log",
+
+          to: "/system/log",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
       name: "Reports",
 
       to: "/home",
