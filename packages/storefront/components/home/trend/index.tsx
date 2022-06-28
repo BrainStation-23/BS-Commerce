@@ -81,6 +81,8 @@ const TrendingProducts = ({products}: any) => {
             slidesPerView768={3}
             slidesPerView980={5}
             rows={2}
+            loop={products.length>10 ? true : false}
+
           >
             {products?.map((product: any) => (
               <SwiperSlide key={product.id}>
