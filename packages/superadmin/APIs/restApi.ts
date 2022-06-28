@@ -19,6 +19,7 @@ import {
 import { User } from "../utils/types";
 import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
 import { toast } from "react-toastify";
+import { CategoryInterface } from "../components/category/catergory-model";
 import { NextRouter } from "next/router";
 
 export async function getUserRest(): Promise<User[] | undefined> {
@@ -269,6 +270,18 @@ export async function updateManufacturerRest(
   } catch (error) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getCategoriesRest(): Promise<
+  CategoryInterface[] | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints.category}`);
+
+    return response?.data.data.categories as CategoryInterface[];
+  } catch (error: any) {
+    console.error(error);
   }
 }
 

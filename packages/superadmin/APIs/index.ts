@@ -1,4 +1,5 @@
 import {
+  getUserRest,
   getProductsRest,
   getProductSearchRest,
   createProductRest,
@@ -14,10 +15,12 @@ import {
   getSingleManufacturerRest,
   updateManufacturerRest,
   getUserProfileRest,
+  getCategoriesRest,
 } from "./restApi";
 import {
   getProductsGraphQL,
   getProductSearchGraphQL,
+  getCategoriesGraphQL,
   createProductGraphQl,
   signinGraphQL,
   createAdminGraphql,
@@ -33,6 +36,7 @@ import { apiFunction } from "../utils/types";
 const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
+  getCategories: getCategoriesGraphQL,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
@@ -49,6 +53,7 @@ const graphqlApi: apiFunction = {
 const restApi: apiFunction = {
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
+  getCategories: getCategoriesRest,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,

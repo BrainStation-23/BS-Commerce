@@ -8,6 +8,7 @@ import {
   Product,
   SignInRequest,
   SignInSuccessResponse,
+  Category,
 } from "models";
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -46,5 +47,9 @@ export async function getAdminsGraphql(): Promise<User[] | undefined> {
 export async function getUserProfileGraphql(): Promise<
   GetUserSuccessResponse | undefined
 > {
+  return;
+}
+
+export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
   return;
 }

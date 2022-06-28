@@ -15,6 +15,7 @@ import {
 import { GetProductParams } from "./../../models/src/product/getProduct";
 import { CreateProductRequest } from "./../../models/src/product/createProduct";
 import { UpdatedUserRequest } from "./../../models/src/user/updateUser";
+import { CategoryInterface } from "../components/category/catergory-model";
 
 export interface User {
   id?: string;
@@ -57,6 +58,7 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
+  getCategories: () => Promise<CategoryInterface[] | undefined>;
   deleteProduct: (productId: string) => Promise<boolean | undefined>;
   signin: (
     data: SignInRequest,

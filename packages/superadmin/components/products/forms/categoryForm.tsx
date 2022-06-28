@@ -80,7 +80,7 @@ const CategoryForm = (props: any) => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px"}}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Category</div>
               <div className="col-1">
@@ -204,10 +204,12 @@ const CategoryForm = (props: any) => {
               <div className="my-3 py-3">
                 <table className="table table-bordered ">
                   <thead>
-                    <th className="text-center py-3">Category</th>
-                    <th className="text-center py-3">Feaured</th>
-                    <th className="text-center py-3">Display order</th>
-                    <th className="text-center py-3">Remove</th>
+                    <tr>
+                      <th className="text-center py-3">Category</th>
+                      <th className="text-center py-3">Feaured</th>
+                      <th className="text-center py-3">Display order</th>
+                      <th className="text-center py-3">Remove</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {categoryData?.map((data: any, index: any) => {

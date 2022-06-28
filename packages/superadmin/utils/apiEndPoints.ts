@@ -6,4 +6,5 @@ export const apiEndPoints = {
   user: "/user",
   manufacturer: "/manufacturers/create",
   manufacturerList: "/manufacturers",
+  category: "/category",
 };

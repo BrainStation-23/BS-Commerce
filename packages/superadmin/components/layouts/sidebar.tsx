@@ -32,6 +32,13 @@ const Sidebar: NextComponentType = (props: any) => {
 
           icon: <i className="bi bi-bullseye"></i>,
         },
+        {
+          name: "Categories",
+
+          to: "/category",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
       ],
     },
     {
