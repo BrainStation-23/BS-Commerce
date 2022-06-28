@@ -8,7 +8,7 @@
     "url": "git+https://github.com/BrainStation-23/BS-Commerce.git"
   },
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build ./tsconfig.json --watch"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

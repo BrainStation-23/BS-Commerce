@@ -15,8 +15,8 @@ import { join } from 'path';
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets(join(__dirname, 'public'), {
-    prefix: '/dist/src/public',
+  app.useStaticAssets(join(__dirname, '../../src/public'), {
+    prefix: '/src/public',
   });
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
