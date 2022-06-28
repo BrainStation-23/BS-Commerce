@@ -9,16 +9,10 @@ import { userAPI } from "../../APIs/index";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-<<<<<<< HEAD
-const ManufactureList = ({ manufactureData }: any) => {
-  const router = useRouter();
-  const [search, setSearch] = useState(false);
-=======
-const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
+const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
   const router = useRouter();
   const [search, setSearch] = useState(false);
   const [reloadPage, setReloadPage] = useState(false);
->>>>>>> ef7f42838225188644d20586e985a85504ef94b3
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
   const [checkbox, setCheckbox] = useState([]);
@@ -61,19 +55,19 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
     checkbox.length === 1
       ? userAPI.deleteManufacturer(checkbox[0], router)
       : setReq(true);
-      
-      setModal({ ...modal, delete: false });
-      checkbox.length === 1 ? getAllManufacturers() : "";
+
+    setModal({ ...modal, delete: false });
+    checkbox.length === 1 ? getAllManufacturers() : "";
   };
 
   const handleClickPage = (activePage: any) => {
     setActivePage(activePage);
   };
-  useEffect(()=>{},[reloadPage]);
+  useEffect(() => {}, [reloadPage]);
 
   return (
     <>
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="px-4">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 className="h2">Manufacturers</h1>
           <div className="btn-toolbar mb-2 mb-md-0">
@@ -93,7 +87,7 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
                   <i className="bi bi-plus-square"></i> Add new
                 </button>
               </Link>
-              <button
+              {/* <button
                 type="button"
                 style={{
                   borderRadius: "5px",
@@ -106,8 +100,8 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
               >
                 <i className="bi bi-box-arrow-in-down"> </i>
                 Export
-              </button>
-              <button
+              </button> */}
+              {/* <button
                 type="button"
                 style={{
                   borderRadius: "5px",
@@ -120,7 +114,7 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
               >
                 <i className="bi bi-file-earmark-pdf"> </i>
                 Import
-              </button>
+              </button> */}
               <button
                 type="button"
                 className="btn btn-danger btn-lg"
@@ -267,7 +261,6 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
                   <hr />
                   <p>Please select only one record.</p>
                   <br />
-<<<<<<< HEAD
 
                   <div className="clearfix">
                     <button
@@ -292,62 +285,63 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
           <></>
         )}
 
-=======
+        <div style={{ marginLeft: "20px" }}>
+          <Formik
+            initialValues={{
+              name: "",
+              published: "",
+            }}
+            onSubmit={(values, actions) => {
+              const data = {
+                name: values.name,
+                published: values.published,
+              };
+              // handleSearchSubmit(data);
+              actions.setSubmitting(false);
+            }}
+          >
+            {(formikprops) => {
+              return (
+                <Form onSubmit={formikprops.handleSubmit}>
+                  <div
+                    style={{
+                      textAlign: "left",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <div className="row">
+                      <div className="col-2">
+                        <strong className="fs-6 me-1">Manufacturer name</strong>
+                        <span>
+                          <i
+                            className="bi bi-question-circle-fill"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="A manufacturer name"
+                            style={{
+                              color: "#3c8dbc",
+                            }}
+                          ></i>
+                        </span>
+                      </div>
+                      <div className="col-3">
+                        <Field
+                          type="text"
+                          className="p-2 w-100 mb-2"
+                          id="name"
+                          name="name"
+                        />
+                      </div>
 
-                  <div className="clearfix">
-                    <button
-                      type="button"
-                      className="btn btn-light"
-                      style={{
-                        border: "1px solid gray",
-                        backgroundColor: "gray",
-                        color: "white",
-                        marginRight: "10px",
-                      }}
-                      onClick={() => handleReq()}
-                    >
-                      Ok
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
+                      <div className="invalid-feedback d-block">
+                        {/* <ErrorMessage name="firstName" /> */}
+                      </div>
+                    </div>
 
->>>>>>> ef7f42838225188644d20586e985a85504ef94b3
-        {search ? (
-          <div style={{ marginLeft: "20px" }}>
-            <Formik
-              initialValues={{
-                name: "",
-                published: "",
-              }}
-              onSubmit={(values, actions) => {
-                const data = {
-                  name: values.name,
-                  published: values.published,
-                };
-                // handleSearchSubmit(data);
-                actions.setSubmitting(false);
-              }}
-            >
-              {(formikprops) => {
-                return (
-                  <Form onSubmit={formikprops.handleSubmit}>
-                    <div
-                      style={{
-                        textAlign: "left",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <div className="row">
+                    <div>
+                      <div className="row mt-1">
                         <div className="col-2">
-                          <strong className="fs-6 me-1">
-                            Manufacturer name
-                          </strong>
+                          <strong className="fs-6 me-1">Published</strong>
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
@@ -362,74 +356,41 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
                         </div>
                         <div className="col-3">
                           <Field
-                            type="text"
-                            className="p-2 w-100 mb-2"
-                            id="name"
-                            name="name"
-                          />
-                        </div>
-
-                        <div className="invalid-feedback d-block">
-                          {/* <ErrorMessage name="firstName" /> */}
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="row mt-1">
-                          <div className="col-2">
-                            <strong className="fs-6 me-1">Published</strong>
-                            <span>
-                              <i
-                                className="bi bi-question-circle-fill"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title="A manufacturer name"
-                                style={{
-                                  color: "#3c8dbc",
-                                }}
-                              ></i>
-                            </span>
-                          </div>
-                          <div className="col-3">
-                            <Field
-                              as="select"
-                              className="p-2 w-100"
-                              id="published"
-                              name="published"
-                            >
-                              <option>All</option>
-                              <option>Published only</option>
-                              <option>Unpublished only</option>
-                            </Field>
-                          </div>
+                            as="select"
+                            className="p-2 w-100"
+                            id="published"
+                            name="published"
+                          >
+                            <option>All</option>
+                            <option>Published only</option>
+                            <option>Unpublished only</option>
+                          </Field>
                         </div>
                       </div>
                     </div>
-                    <br />
-                    <div className="d-flex flex-wrap justify-content-center">
-                      <button
-                        type="submit"
-                        className="btn btn-primary px-5"
-                        style={{
-                          background: "#3c8dbc",
-                          border: "none",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        <span>
-                          <i className="bi bi-search me-2"></i>
-                        </span>
-                        Search
-                      </button>
-                    </div>
-                  </Form>
-                );
-              }}
-            </Formik>
-          </div>
-        ) : (
-          <></>
-        )}
+                  </div>
+                  <br />
+                  <div className="d-flex flex-wrap justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn btn-primary px-5"
+                      style={{
+                        background: "#3c8dbc",
+                        border: "none",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <span>
+                        <i className="bi bi-search me-2"></i>
+                      </span>
+                      Search
+                    </button>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
 
         <div>
           <table
@@ -465,11 +426,7 @@ const ManufactureList = ({ manufactureData , getAllManufacturers}: any) => {
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-              {console.log(paginateData)}
-=======
               {/* {console.log(paginateData)} */}
->>>>>>> ef7f42838225188644d20586e985a85504ef94b3
               {paginateData?.length > 0 &&
                 paginateData?.map((manufacturer: any) => (
                   <SingleManufacturer
