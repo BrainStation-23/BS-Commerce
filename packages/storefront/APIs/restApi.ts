@@ -119,9 +119,11 @@ export async function getPublicProductByIdRest(
 export async function getCartRest(token: string): Promise<Cart[] | undefined> {
   try {
     console.log("token ======>", token);
-    const { data } = await axios?.get(`${apiEndPoints?.getCart}`);
-    console.log("data ======>", data);
-    // console.log("Cart from apis-------------------",data)
+    const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+      }
+  });
     return data?.data as Cart[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -132,14 +134,11 @@ export async function addToCartRest(
   cartData: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
   try {
-    // console.log("**************129*******************");
 
     const res = await axios?.post<AddToCartResponse>(
       `${apiEndPoints?.getCart}`,
       cartData
     );
-    // console.log("cart data from ==================", res.data);
-    // console.log(res.data);
 
     return res.data as addToCartSuccessResponse;
   } catch (error: any) {
@@ -152,11 +151,8 @@ export async function deleteFromCartRest(
   data: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
   try {
-    // console.log("from delete apis", data)
     const res = await axios?.delete(
-      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`
-    );
-    // console.log("**************125*******************", res);
+      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`);
     return res?.data as deleteCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -168,7 +164,6 @@ export async function deleteAllFromCartRest(): Promise<
 > {
   try {
     const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`);
-    // console.log("**************125*******************", data);
     return data?.data as deleteCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -183,7 +178,6 @@ export async function updateCartRest(
       `${apiEndPoints?.updateCartItem}`,
       item
     );
-    //console.log("**************125*******************", data);
     return data?.data as updateCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

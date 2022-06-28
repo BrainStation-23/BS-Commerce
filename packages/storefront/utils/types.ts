@@ -62,9 +62,9 @@ export interface apiFunction {
   getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
   getFeaturedProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
   getPublicProductsById: (productId: GetCustomerProductParams) => Promise< GetCustomerProductResponse | undefined>;
-  getCart: () => Promise<Cart[] | undefined>;
+  getCart: (token: string) => Promise<Cart[] | undefined>;
   addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>
-  deleteCartItem: (data: deleteCartItemRequest) => Promise<deleteCartItemResponse | undefined>
+  deleteCartItem: (data: deleteCartItemRequest, token: string) => Promise<deleteCartItemResponse | undefined>
   deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>
   updateCartItem: (data: updateCartItemRequest) => Promise<updateCartItemResponse | undefined >
 }

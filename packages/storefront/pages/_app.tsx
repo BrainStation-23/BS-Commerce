@@ -8,9 +8,6 @@ import Axios from "axios";
 import { config } from "config";
 
 Axios.defaults.baseURL = config?.restPrefix;
-Axios.defaults.headers.common = {
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBlZWMyMzJhLTZlMjktNDNmMi1hMGE4LTYyOTE3NmVhMTAyYyIsInVzZXJuYW1lIjoibmFmaUB0ZXN0LmNvbSIsImxvZ0luVGltZSI6MTY1NjMzNDA2NDIzOCwiaWF0IjoxNjU2MzM0MDY0LCJleHAiOjE2NTY0MjA0NjR9.tCLcKWJqb2meLvfvt9mmvyEJJ_CyZ_2MsRKlbv9qQRw`,
-};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
