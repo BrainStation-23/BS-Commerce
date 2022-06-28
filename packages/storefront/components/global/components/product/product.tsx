@@ -5,7 +5,7 @@ import Icon from "../icon";
 import { Product } from "models";
 
 interface SingleProduct {
-  product: Product
+  product: Product;
 }
 
 const Product = (props: SingleProduct) => {
@@ -29,19 +29,25 @@ const Product = (props: SingleProduct) => {
                     />
 
                     <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-                      {product.stock > 0 ? "Sale" : "Soldout"}
+                      {product.info.oldPrice ? "Sale" : ""}
                     </div>
 
-                    {product.discountPercentage && product.stock > 0 ? (
+                    {product?.discountPercentage && product.stock > 0 ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                         <p>{`-${product.discountPercentage}%`}</p>
                       </div>
                     ) : null}
                     {product.info.oldPrice ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                        <p>{`-$${Math.abs(product.info.oldPrice - product.info.price)}`}</p>
+                        <p>{`-$${Math.abs(
+                          product.info.oldPrice - product.info.price
+                        )}`}</p>
                       </div>
-                    ) : null}
+                    ) : (
+                      <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
+                        <p>{`-$0`}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
