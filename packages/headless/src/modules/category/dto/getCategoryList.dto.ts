@@ -20,7 +20,10 @@ export class AncestorDto implements getCategoryListAncestor {
 
 export class subCategoryListDto {
     @ApiProperty()
-    @IsOptional()
+    @IsString()
+    name: string;
+    
+    @ApiProperty()
     @IsString()
     slug: string;
 
@@ -36,6 +39,11 @@ export class subCategoryListDto {
 }
 
 export class NestedCategoryListDto implements NestedCategoryList {
+
+    @ApiProperty()
+    @IsString()
+    name: string;
+
     @ApiProperty()
     @IsString()
     slug: string;
