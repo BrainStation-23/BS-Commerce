@@ -19,33 +19,33 @@ const Signin = () => {
   const dispatch = useDispatch();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    const token = await fetch("http://localhost:3002/api/signin", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+    userAPI.signIn(data).then((response: any) => {
+      if (response?.code != 200) {
+        alert(response.response.data.error);
+      } else {
+        dispatch(storeUserToken(response?.data.token));
+        setCookie("access_token", response?.data.token);
+        window.location.href = "/home";
+      }
     });
-    const datass = await token.json();
-    console.log("999999999999999999999999999999", datass);
-    dispatch(storeUserToken(datass?.data?.token));
-    // localStorage.setItem("token", datass?.data?.token);
-    setCookie("access_token", datass?.data?.token);
-    // axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
-    // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
+    // const token = await fetch("http://localhost:3002/api/signin", {
+    //   method: "POST", // or 'PUT'
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // });
+    // const datass = await token.json();
+    // dispatch(storeUserToken(datass?.data?.token));
+    // setCookie("access_token", datass?.data?.token);
+    // window.location.href = "/home";
 
-    window.location.href = "/home";
+    
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {
     //     alert(response.response.data.error);
     //   } else {
     //     // dispatch(storeUserToken(response?.data.token));
-    //     // // let expires = new Date();
-    //     // // expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
-    //     // // setCookie("access_token", response?.data.token, { path: "/", expires });
-    //     // res.setHeader('Set-Cookie', cookie.serialize('name', String(query.name), {
-    //     //   httpOnly: true,
-    //     //   maxAge: 60 * 60 * 24 * 7 // 1 week
     //     // }));
 
     //     window.location.href = "/home";

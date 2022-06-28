@@ -49,7 +49,12 @@ export async function signinRest(
   data: CustomerSignInRequest
 ): Promise<CustomerSignInResponse | undefined> {
   try {
-    const res = await axios.post(`${apiEndPoints.login}`, data);
+    const res = await axios.post(`${apiEndPoints.login}`, data, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   } catch (error: any) {
     return error;
