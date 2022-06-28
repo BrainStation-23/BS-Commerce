@@ -75,7 +75,7 @@ const ShowData = ({ data }: any) => {
           </div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-          <div className="flex justify-center">${30}</div>
+          <div className="flex justify-center">${data?.product?.info?.price}</div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
           <div className="flex justify-center">
