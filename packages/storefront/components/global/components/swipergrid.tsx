@@ -48,8 +48,6 @@ const SwiperGrid: FC<Props> = ({
       modules={[Grid, Navigation]}
       className="mySwiper"
     >
-      {console.log("loop ",loop)
-      }
       {children}
     </Swiper>
   );
