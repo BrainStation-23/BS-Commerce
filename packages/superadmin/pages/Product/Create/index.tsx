@@ -5,8 +5,8 @@ import ProductInfoForm from "../../../components/products/forms/productInfoForm"
 const CreateProductPage: NextPage = () => {
   return (
     <>
-      <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-3">
-      <CreateProduct />  
+      <div className="px-5 mt-2">
+        <CreateProduct />
       </div>
     </>
   );

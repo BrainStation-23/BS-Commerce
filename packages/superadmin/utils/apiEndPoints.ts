@@ -1,5 +1,10 @@
 export const apiEndPoints = {
   getUser: `/todos`,
-  product: "/product",
-  category: "/category"
+  product: "/products",
+  signin: "/auth/signin",
+  auth: "/auth",
+  user: "/user",
+  manufacturer: "/manufacturers/create",
+  manufacturerList: "/manufacturers",
+  category: "/category",
 };

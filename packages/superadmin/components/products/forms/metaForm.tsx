@@ -1,7 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import Tooltips from "../../global/tooltip";
-import CustomSelect from "./CustomSelect";
+import CustomSelect from "../CustomSelect.component";
 
 const MetaForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -53,7 +53,7 @@ const MetaForm = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-meta col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Meta</div>
               <div className="col-1">

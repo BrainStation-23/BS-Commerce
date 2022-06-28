@@ -113,7 +113,7 @@ const Category: NextPage<{ categories: CategoryInterface[] }> = ({
 
 export async function getServerSideProps() {
   const categories = await userAPI.getCategories();
-  // console.log("soasfj");
+  console.log(categories);
 
   console.log(categories);
   return {

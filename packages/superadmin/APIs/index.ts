@@ -5,6 +5,16 @@ import {
   createProductRest,
   getProductRest,
   updateProductRest,
+  deleteProductRest,
+  signinRest,
+  createAdminRest,
+  getAdminsRest,
+  createManufacturerRest,
+  getManufacturerRest,
+  deleteManufacturerRest,
+  getSingleManufacturerRest,
+  updateManufacturerRest,
+  getUserProfileRest,
   getCategoriesRest,
 } from "./restApi";
 import {
@@ -12,6 +22,13 @@ import {
   getProductSearchGraphQL,
   getCategoriesGraphQL,
   createProductGraphQl,
+  signinGraphQL,
+  createAdminGraphql,
+  getAdminsGraphql,
+  getUserProfileGraphql,
+  // getManufacturerGraphQl,
+  // deleteManufacturerGraphQl,
+  // createManufacturerGraphQl,
 } from "./graphQL";
 import { config } from "../config/index";
 import { apiFunction } from "../utils/types";
@@ -23,6 +40,14 @@ const graphqlApi: apiFunction = {
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
+  deleteProduct: deleteProductRest,
+  signin: signinGraphQL,
+  createAdmin: createAdminGraphql,
+  getAdmins: getAdminsGraphql,
+  getUserProfile: getUserProfileGraphql,
+  // getManufacturer: getManufacturerGraphQl,
+  // deleteManufacturer: deleteManufacturerGraphQl,
+  // createManufacturer: createManufacturerGraphQl
 };
 
 const restApi: apiFunction = {
@@ -32,6 +57,16 @@ const restApi: apiFunction = {
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
+  deleteProduct: deleteProductRest,
+  signin: signinRest,
+  createAdmin: createAdminRest,
+  getAdmins: getAdminsRest,
+  createManufacturer: createManufacturerRest,
+  getManufacturer: getManufacturerRest,
+  deleteManufacturer: deleteManufacturerRest,
+  getSingleManufacturer: getSingleManufacturerRest,
+  updateManufacturer: updateManufacturerRest,
+  getUserProfile: getUserProfileRest,
 };
 
 export const userAPI: apiFunction =

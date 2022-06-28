@@ -1,17 +1,76 @@
 import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
- 
+
 import ProductInfoForm from "./forms/productInfoForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
 
-
 import { useRouter } from "next/router";
 import CategoryForm from "./forms/categoryForm";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CreateProduct = () => {
   const router = useRouter();
+  const [categogiesData, setCategoryData] = useState([
+    {
+      id: 1,
+      value: "Category 1",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 2,
+      value: "Category 2",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 1,
+    },
+    {
+      id: 3,
+      value: "Category 3",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 3,
+    },
+    {
+      id: 4,
+      value: "Category 4",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 5,
+    },
+    {
+      id: 5,
+      value: "Category 5",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 6,
+      value: "Category 6",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 0,
+    },
+    {
+      id: 7,
+      value: "Category 7",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 8,
+      value: "Category 8",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+  ]);
 
   const handleSubmit = (data: any) => {
     const info = {
@@ -26,10 +85,8 @@ const CreateProduct = () => {
       includeInTopMenu: data.includeInTopMenu,
       allowToSelectPageSize: data.allowToSelectPageSize,
       published: data.published,
-      displayOrder: data.displayOrder,
+      displayOrder: +data.displayOrder,
       isFeatured: data.isFeatured,
-      // publishDate: "2022-06-20T09:06:25.239Z",
-      // publishDate: data.publishDate,
     };
     const meta = {
       keywords: data.keywords,
@@ -37,24 +94,25 @@ const CreateProduct = () => {
       description: data.metaDescription,
       friendlyPageName: data.metaFriendlyPageName,
     };
-
     const photos = {
       url: data.photosUrl,
       id: data.photosID,
       title: data.photosTitle,
-      displayOrder: `${data.displayOrderPhotos}`,
+      displayOrder: +`${data.displayOrderPhotos}`,
       alt: "image",
     };
-    const categories = {
-      id: data.SelectedCategoryIds,
-      isFeatured: data.isFeaturedCategory,
-      displayOrder: data.displayOrderCategory,
-    };
 
-    console.log(info);
-    console.log(meta);
-    console.log(photos);
-    console.log(categories);
+    const categories: any = [];
+
+    categogiesData?.map((category: any, index: any) => {
+      category.isSelected == true
+        ? categories.push({
+            id: `${category.id}`,
+            isFeatured: category.isFeatured,
+            displayOrder: +category.displayOrder,
+          })
+        : "";
+    });
 
     const newData = {
       info: info,
@@ -62,11 +120,11 @@ const CreateProduct = () => {
       tags: data.tags,
       photos: [photos],
       brands: data.brands,
-      categories: [categories],
+      categories: categories,
     };
-
-    console.log(newData);
-    userAPI.createProduct(newData);
+    if (categories[0]) {
+      userAPI.createProduct(newData, router);
+    } else toast.error("You must select atleast one category");
   };
 
   return (
@@ -84,7 +142,7 @@ const CreateProduct = () => {
           includeInTopMenu: false,
           allowToSelectPageSize: false,
           published: false,
-          displayOrder: 0,
+          displayOrder: 1,
           isFeatured: false,
           publishDate: "",
           tags: "",
@@ -97,42 +155,13 @@ const CreateProduct = () => {
           photosID: "",
           photosTitle: "",
           displayOrderPhotos: "",
-          SelectedCategoryIds: "--Select--",
+          SelectedCategoryIds: 0,
           isFeaturedCategory: false,
-          displayOrderCategory: 0,
+          displayOrderCategory: 1,
+          categoriesData: "",
         }}
         onSubmit={(values, actions) => {
-          const data = {
-            productName: values.productName,
-            ShortDescription: values.ShortDescription,
-            FullDescription: values.FullDescription,
-            Sku: values.Sku,
-            OldPrice: values.OldPrice,
-            Price: values.Price,
-            ProductCost: values.ProductCost,
-            showOnHomePage: values.showOnHomePage,
-            includeInTopMenu: values.includeInTopMenu,
-            allowToSelectPageSize: values.allowToSelectPageSize,
-            published: values.published,
-            displayOrder: values.displayOrder,
-            isFeatured: values.isFeatured,
-            publishDate: values.publishDate,
-            tags: values.tags,
-            brands: values.brands,
-            keywords: values.keywords,
-            metaTitle: values.metaTitle,
-            metaDescription: values.metaDescription,
-            metaFriendlyPageName: values.metaFriendlyPageName,
-            photosUrl: values.photosUrl,
-            photosID: values.photosID,
-            photosTitle: values.photosTitle,
-            displayOrderPhotos: values.displayOrderPhotos,
-            SelectedCategoryIds: values.SelectedCategoryIds,
-            isFeaturedCategory: values.isFeaturedCategory,
-            displayOrderCategory: values.displayOrderCategory,
-          };
-          console.log(data);
-          handleSubmit(data);
+          handleSubmit(values);
           actions.setSubmitting(false);
         }}
         validationSchema={productSchema}
@@ -159,7 +188,7 @@ const CreateProduct = () => {
                     <i className="bi bi-save" />
                     <p className="float-end mx-1 my-0">Save</p>
                   </button>
-                  <button
+                  {/* <button
                     type="submit"
                     name="save-continue"
                     className="btn btn-primary m-1"
@@ -168,7 +197,7 @@ const CreateProduct = () => {
                     <p className="float-end mx-1 my-0">
                       Save and Continue Edit
                     </p>
-                  </button>
+                  </button> */}
                 </div>
               </div>
 
@@ -189,7 +218,11 @@ const CreateProduct = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
-                <CategoryForm />
+                <CategoryForm
+                  setCategoryData={setCategoryData}
+                  categoryData={categogiesData}
+                  setFieldValue={formikprops.setFieldValue}
+                />
               </div>
             </Form>
           );
