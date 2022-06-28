@@ -11,7 +11,8 @@ export class CartDatabase implements ICartDatabase {
     return await CartModel.findOneAndUpdate(
       { userId },
       { $push: { items: item } },
-    )
+      { new: true },
+    ).select('-_id')
       .lean()
       .exec();
   }
