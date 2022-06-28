@@ -2,6 +2,7 @@ import type { NextComponentType } from "next";
 import Link from "next/link";
 
 const SingleManufacturer = ({ manufacturer, handleCheckbox }: any) => {
+    
     return (
         <>
             <tr style={{ fontSize: "20px", paddingTop: "20px" }}>

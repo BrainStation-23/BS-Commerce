@@ -1,7 +1,7 @@
 .side_menu {
   position: fixed;
   background-color: #32374a;
-  width: 250px;
+  width: 250px !important;
   height: 100%;
   box-sizing: border-box;
   padding: 25px 17px;
@@ -9,7 +9,7 @@
 }
 
 .side_menu_inactive {
-  width: 90px;
+  width: 90px !important;
 }
 
 .side_menu .logo {

@@ -1,42 +1,145 @@
 import type { NextComponentType } from "next";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 import HeaderBar from "./headerBar";
 import bsLogo from "../../assests/bs23.png";
 import sidebar from "./styles/sidebar.module.css";
 const Sidebar: NextComponentType = (props: any) => {
   const menuItems = [
-    { name: "Dashboard", to: "/", icon: <i className="bi bi-tv"></i> },
+    { name: "Dashboard", to: "/home", icon: <i className="bi bi-tv"></i> },
+
     {
       name: "Catalog",
-      to: "/",
+
+      to: "/home",
+
       icon: <i className="bi bi-card-list"></i>,
+
       subMenus: [
         {
-          name: "Categories",
-          to: "/",
+          name: "Products",
+
+          to: "/Product",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+
+        {
+          name: "Manufacturers",
+
+          to: "/Admin/Manufacturer/list",
+
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
-          name: "Manufacturers",
-          to: "/",
+          name: "Categories",
+
+          to: "/category",
+
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
     },
     {
-      name: "Sales",
-      to: "/",
-      icon: <i className="bi bi-cart"></i>,
+      name: "Promotion",
+
+      to: "/home",
+
+      icon: <i className="bi bi-tags"></i>,
+
       subMenus: [
         {
-          name: "Categories",
-          to: "/",
+          name: "Discount",
+
+          to: "/promotion/discount",
+
           icon: <i className="bi bi-bullseye"></i>,
         },
         {
-          name: "Manufacturers",
-          to: "/",
+          name: "Campaign",
+
+          to: "/promotion/campaign",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "Users",
+
+      to: "/home",
+
+      icon: <i className="bi bi-people-fill"></i>,
+
+      subMenus: [
+        {
+          name: "Admins",
+
+          to: "/users/admin",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "System",
+
+      to: "/home",
+
+      icon: <i className="bi bi-box"></i>,
+
+      subMenus: [
+        {
+          name: "Log",
+
+          to: "/system/log",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Scheduled Task",
+
+          to: "/system/scheduled-task",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+      ],
+    },
+    {
+      name: "Reports",
+
+      to: "/home",
+
+      icon: <i className="bi bi-graph-up-arrow"></i>,
+
+      subMenus: [
+        {
+          name: "Sales Summary",
+
+          to: "/report/sales-summary",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Registered Customers",
+
+          to: "/report/registered-customers",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Customer by Order Numbers",
+
+          to: "/report/customers-by-number-of-orders",
+
+          icon: <i className="bi bi-bullseye"></i>,
+        },
+        {
+          name: "Best Customers on Total Order",
+
+          to: "/report/best-customers-by-order-total",
+
           icon: <i className="bi bi-bullseye"></i>,
         },
       ],
@@ -60,7 +163,10 @@ const Sidebar: NextComponentType = (props: any) => {
   };
   return (
     <>
-      <HeaderBar handleTogglebarStatus={handleTogglebarStatus} />
+      <HeaderBar
+        handleTogglebarStatus={handleTogglebarStatus}
+        displayName={props.displayName}
+      />
       <div
         className={
           inactive
@@ -97,7 +203,13 @@ const Sidebar: NextComponentType = (props: any) => {
                 >
                   <div className={sidebar.menu_icon}>{menuItem.icon}</div>
                   <div className={sidebar.menu_item_text}>
-                    <span>{menuItem.name}</span>
+                    {menuItem.subMenus && menuItem.subMenus.length > 0 ? (
+                      <span>{menuItem.name}</span>
+                    ) : (
+                      <Link href={`${menuItem.to}`} passHref>
+                        <span>{menuItem.name}</span>
+                      </Link>
+                    )}
                     <span className={sidebar.menu_chevron}>
                       {menuItem.subMenus && menuItem.subMenus.length > 0
                         ? showSubMenu[index]
@@ -118,13 +230,15 @@ const Sidebar: NextComponentType = (props: any) => {
                     >
                       {menuItem.subMenus.map((subMenu, index) => (
                         <div key={index}>
-                          <a>
-                            <div className={sidebar.submenu_icon}>
-                              {subMenu.icon}
-                            </div>
-                            <span>{subMenu.name}</span>
-                            {/* {subMenu.name} */}
-                          </a>
+                          <Link href={`${subMenu.to}`} passHref>
+                            <a className="text-white">
+                              <div className={sidebar.submenu_icon}>
+                                {subMenu.icon}
+                              </div>
+                              <span>{subMenu.name}</span>
+                              {/* {subMenu.name} */}
+                            </a>
+                          </Link>
                         </div>
                       ))}
                     </div>

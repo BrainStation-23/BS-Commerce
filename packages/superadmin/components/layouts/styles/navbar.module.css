@@ -16,7 +16,7 @@
 .container_inactive {
   position: fixed;
   background-color: #32374a;
-  /* width: 100%; */
+  width: 100% !important;
   height: 80px;
   box-sizing: border-box;
   margin-left: 80px;

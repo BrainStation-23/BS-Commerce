@@ -3,6 +3,7 @@
   margin-left: 260px;
   transition: 0.3s ease-in;
   width: 90% !important;
+  padding-top: 80px;
 }
 
 .container_broad {
@@ -10,4 +11,5 @@
   margin-left: 90px;
   transition: 0.3s ease-in;
   width: 100% !important;
+  padding-top: 80px;
 }

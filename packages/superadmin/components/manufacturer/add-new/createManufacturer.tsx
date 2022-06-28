@@ -60,8 +60,11 @@ const CreateManufacturer: FC = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="content-header clearfix">
-                <h1 className="float-start">
+              <div
+                className="content-header clearfix"
+                style={{ paddingTop: "10px" }}
+              >
+                <h3 className="float-start">
                   Add a Manufacturer
                   <span className="fs-5 p-3">
                     <Link href="/Admin/Manufacturer/list">
@@ -71,7 +74,7 @@ const CreateManufacturer: FC = () => {
                       </a>
                     </Link>
                   </span>
-                </h1>
+                </h3>
                 <div className="float-end">
                   <button
                     type="submit"

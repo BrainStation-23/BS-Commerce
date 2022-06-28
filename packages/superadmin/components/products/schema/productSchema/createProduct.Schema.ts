@@ -1,5 +1,4 @@
 import { string, object, number } from "yup";
-import XRegExp from "xregexp";
 import * as Yup from "yup";
 
 export const productSchema = object().shape({
@@ -9,8 +8,7 @@ export const productSchema = object().shape({
     .required("This field must not be empty"),
   ShortDescription: string()
     .min(2, "This field must be at least 2 characters long")
-    .max(50, "This field must be at most 50 characters long")
-    .required("This field must not be empty"),
+    .max(50, "This field must be at most 50 characters long"),
   FullDescription: string(),
   Sku: string()
     .required("This field must not be empty")
@@ -29,20 +27,26 @@ export const productSchema = object().shape({
   isFeatured: Yup.boolean(),
   publishDate: string(),
 
-  // tags: string(),
-  // brands: string(),
+  tags: Yup.array()
+    .min(1, "You must select one")
+    .required("This field is required"),
+  brands: Yup.array()
+    .min(1, "You must select one")
+    .required("This field is required"),
 
-  // keywords: string(),
+  keywords: Yup.array()
+    .min(1, "You must select one")
+    .required("This field is required"),
   metaTitle: string(),
   metaDescription: string(),
-  metaFriendlyPageName: string(),
+  metaFriendlyPageName: string().required("This field must not be empty"),
 
   photosUrl: string(),
   photosID: string(),
   photosTitle: string(),
   displayOrderPhotos: string(),
 
-  SelectedCategoryIds: string()
+  SelectedCategoryIds: number()
     .typeError("You must Select a Category")
     .required("This field must not be empty"),
   isFeaturedCategory: Yup.boolean(),
