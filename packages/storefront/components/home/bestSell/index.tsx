@@ -39,6 +39,7 @@ const BestSell = ({products} : Products) => {
               slidesPerView768={1}
               slidesPerView980={2}
               rows={3}
+              loop={products.length>6 ? true : false}
             >
               {products &&
                 products.length > 0 &&

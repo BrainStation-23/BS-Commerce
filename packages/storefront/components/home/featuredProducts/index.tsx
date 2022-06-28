@@ -29,6 +29,7 @@ const FeaturedProducts = ({products}: Products) => {
         slidesPerView768={2}
         slidesPerView980={3}
         rows={3}
+        loop={products.length>9 ? true : false}
       >
         {products &&
           products.length > 0 &&
