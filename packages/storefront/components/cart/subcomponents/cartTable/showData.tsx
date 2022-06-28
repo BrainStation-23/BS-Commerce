@@ -1,7 +1,7 @@
 import { userAPI } from "APIs";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
-import { updateCartItem } from "toolkit/cartSlice";
+import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
   const [itemToUpdate, setItemToUpdate] = useState({
@@ -81,8 +81,9 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <button
               onClick={() => {
-                userAPI.deleteCartItem(data);
-                window.location.href = "/home";
+                userAPI.deleteCartItem(data.productId);
+                dispatch(deleteCartItem(data));
+                //window.location.href = "/home";
                 // const list = cartData.items.filter(item => item.productId != data.productId)
                 // console.log(list);
                 // dispatch(deleteSingCartItem(list));

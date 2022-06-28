@@ -1,8 +1,10 @@
 import { userAPI } from "APIs";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
+import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
 const ShowItemSmall = ({ data }: any) => {
+  const dispatch = useAppDispatch();
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
     quantity: data.quantity + 1,
@@ -20,6 +22,10 @@ const ShowItemSmall = ({ data }: any) => {
           <span
             className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
             style={{ background: "#808080" }}
+            onClick={() => {
+              userAPI.deleteCartItem(data);
+              dispatch(deleteCartItem(data));
+            }}
           >
             <svg
               className="w-4 h-0"
@@ -39,7 +45,8 @@ const ShowItemSmall = ({ data }: any) => {
           <div>
             <div className="box-content w-25 py-2 border-2 mb-2">
               <div className="flex justify-between">
-                <button className="mx-4"
+                <button
+                  className="mx-4"
                   onClick={() => {
                     setItemToUpdate({
                       productId: data?.productId,
@@ -49,24 +56,27 @@ const ShowItemSmall = ({ data }: any) => {
                           : 0,
                     });
                     userAPI.updateCartItem(itemToUpdate);
+                    dispatch(updateCartItem(itemToUpdate));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
-                    window.location.href = "/home";
+                    //window.location.href = "/home";
                   }}
                 >
                   -
                 </button>
                 <div className="px-2">{itemToUpdate.quantity}</div>
-                <button className="mx-4"
+                <button
+                  className="mx-4"
                   onClick={() => {
                     setItemToUpdate({
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
                     userAPI.updateCartItem(itemToUpdate);
+                    dispatch(updateCartItem(itemToUpdate));
                     //console.log("ProductId = ",data?.productId);
                     //console.log("ItemToUpdate = ", itemToUpdate);
-                    window.location.href = "/home";
+                    //window.location.href = "/home";
                   }}
                 >
                   +
