@@ -71,7 +71,7 @@ export async function getProductsRest(
 ): Promise<Product[] | undefined> {
   try {
     const { data } = await axios?.get(
-      `${apiEndPoints?.product}?skip=1&limit=${pageSize}`
+      `${apiEndPoints?.product}?skip=0&limit=${pageSize}`
     );
     return data?.data as Product[];
   } catch (error: any) {
