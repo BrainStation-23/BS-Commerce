@@ -14,7 +14,7 @@ import {
   SignInErrorResponseDto
 } from '../dto';
 
-@Controller('auth')
+@Controller('admin/auth')
 @ApiTags('Admin Authentication API')
 export class AuthController {
   constructor(private authService: AuthService) { }

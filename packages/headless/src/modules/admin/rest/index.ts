@@ -14,7 +14,7 @@ import {
   ChangePasswordErrorResponseDto
 } from '../dto';
 
-@Controller('user')
+@Controller('admin')
 @ApiTags('Admin Profile API')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
