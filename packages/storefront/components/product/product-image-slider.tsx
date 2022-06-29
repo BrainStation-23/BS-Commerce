@@ -39,15 +39,17 @@ const ProductImagesSlider = ({ product }: SingleProduct) => {
                 height="600"
               />
             </div>
-            <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-              {isAvailable ? "Sale" : "Soldout"}
-            </div>
+            {product?.info?.oldPrice > 0 ? (
+              <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+                <p>Sale</p>
+              </div>
+            ) : null}
             {product.discountPercentage && isAvailable ? (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-${product.discountPercentage}%`}</p>
               </div>
             ) : null}
-            {isAvailable && product.info.oldPrice && (
+            {isAvailable && product.info.oldPrice > 0 && (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-$${Math.abs(
                   product.info.oldPrice - product.info.price
