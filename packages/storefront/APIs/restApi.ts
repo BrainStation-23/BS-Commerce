@@ -79,10 +79,8 @@ export async function forgotPasswordRest(
 }
 
 export async function getPublicProductsRest(
-  token: any
 ): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
-    console.log("***********************", token);
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
     return res.data.data;
   } catch (error: any) {
@@ -91,7 +89,6 @@ export async function getPublicProductsRest(
 }
 
 export async function getFeaturedProductsRest(
-  token: any
 ): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
     const res = await axios.get(
@@ -151,6 +148,7 @@ export async function deleteFromCartRest(
   data: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
   try {
+    console.log("=======================>", data)
     const res = await axios?.delete(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`);
     return res?.data as deleteCartItemResponse;

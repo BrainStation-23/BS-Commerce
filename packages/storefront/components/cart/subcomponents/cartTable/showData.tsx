@@ -4,7 +4,8 @@ import { useState } from "react";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
-
+  let token = document.cookie.split("=")[1]
+  console.log("from show data", token.split("=")[1]);
 
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
@@ -100,9 +101,10 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <button
               onClick={() => {
-                //console.log(data.productId);
+                console.log(data);
                 userAPI.deleteCartItem(data);
                 dispatch(deleteCartItem(data));
+  
                 //window.location.href = "/home";
                 // const list = cartData.items.filter(item => item.productId != data.productId)
                 // console.log(list);

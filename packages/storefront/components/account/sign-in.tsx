@@ -22,25 +22,25 @@ const Signin = () => {
   const router = useRouter();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    const token = await fetch(
-      "http://localhost:3000/api/customer/auth/sign-in",
-      {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    const datass = await token.json();
-    console.log("999999999999999999999999999999", datass);
-    dispatch(storeUserToken(datass?.data?.token));
-    // localStorage.setItem("token", datass?.data?.token);
-    setCookie("access_token", datass?.data?.token);
-    // axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
-    // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
-
-    window.location.href = "/home";
+    try{
+      const token = await fetch(
+        "http://localhost:3002/api/signin",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const datass = await token.json();
+      dispatch(storeUserToken(datass?.data?.token));
+      window.location.href = "/home";
+    }
+    catch (err) {
+      alert("Invalid User");
+    }
+  
     
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {

@@ -18,9 +18,6 @@ const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) =>
 
   useEffect(() => {
     dispatch(storeAllCartItems(cartData.items));
-    Axios.defaults.headers.common = {
-      Authorization: `Bearer ${token.token}`,
-  };
   }, []);
 
   return (
