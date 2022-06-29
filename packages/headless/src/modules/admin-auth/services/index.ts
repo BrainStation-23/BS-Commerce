@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
 import { adminAuthConfig } from 'config/auth';
 import { JwtPayload } from 'src/entity/auth';
-import { UserRepository } from 'src/modules/admin/repositories';
+import { AdminRepository } from 'src/modules/admin/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');
@@ -21,10 +21,10 @@ import {
 
 @Injectable()
 export class AuthService {
-  constructor(private userRepo: UserRepository, private helper: Helper, private jwtService: JwtService) { }
+  constructor(private adminRepo: AdminRepository, private helper: Helper, private jwtService: JwtService) { }
 
   async signUp(data: CreateUserDto): Promise<CreateUserResponse> {
-    const doesUserExist = await this.userRepo.findUser({ email: data.email });
+    const doesUserExist = await this.adminRepo.findUser({ email: data.email });
     if (doesUserExist) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.USER_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
     let user: any = { ...data };
@@ -34,13 +34,13 @@ export class AuthService {
     user.username = data.email;
     user.password = await bcrypt.hash(data.password, adminAuthConfig.salt!);
 
-    const registeredUser = await this.userRepo.createUser(user);
+    const registeredUser = await this.adminRepo.createUser(user);
     if (!registeredUser) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.CAN_NOT_CREATE_USER, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ message: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL }, HttpStatus.CREATED);
   }
 
   async signIn(data: SignInDataDto): Promise<SignInResponse> {
-    const user = await this.userRepo.getUserPassword({ username: data.username });
+    const user = await this.adminRepo.getUserPassword({ username: data.username });
     if (!user) return this.helper.serviceResponse.errorResponse(SignInErrorMessages.INVALID_CREDENTIALS, null, HttpStatus.BAD_REQUEST,);
 
     const doesPasswordMatch = await bcrypt.compare(data.password, user.password);
@@ -58,7 +58,7 @@ export class AuthService {
 
   async forgotPassword(username: string, baseUrl: string): Promise<ForgotPasswordResponse> {
 
-    const user = await this.userRepo.findUser({ username });
+    const user = await this.adminRepo.findUser({ username });
     if (!user) return this.helper.serviceResponse.errorResponse(ForgotPasswordErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST,);
 
     if (user.provider !== 'local') return this.helper.serviceResponse.errorResponse(ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT, null, HttpStatus.BAD_REQUEST,);
@@ -66,7 +66,7 @@ export class AuthService {
     user.resetPasswordToken = token;
     user.resetPasswordExpires = Date.now() + ONE_HOUR;
 
-    const updatedUser = await this.userRepo.updateUser(user.id, user);
+    const updatedUser = await this.adminRepo.updateUser(user.id, user);
     if (!updatedUser) return this.helper.serviceResponse.errorResponse(ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD, null, HttpStatus.BAD_REQUEST);
 
     const resetUrl = baseUrl + process.env.AUTH_RESET_ORIGINAL_URL || '/auth/reset/' + token;

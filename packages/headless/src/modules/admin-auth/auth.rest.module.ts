@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { UserRepository } from 'src/modules/admin/repositories';
-import { IUserDatabase } from 'src/modules/admin/repositories/user.database.interface';
+import { AdminRepository } from 'src/modules/admin/repositories';
+import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
@@ -20,10 +20,10 @@ import { AdminJwtStrategy } from './guards/jwt-strategy';
   controllers: [AuthController],
   providers: [
     AuthService,
-    UserRepository,
+    AdminRepository,
     {
-      provide: IUserDatabase,
-      useClass: ResolveDatabaseDependency('USER'),
+      provide: IAdminDatabase,
+      useClass: ResolveDatabaseDependency('ADMIN'),
     },
     AdminJwtStrategy,
   ],

@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ResolveDatabaseDependency } from "src/database/database.resolver";
-import { UserRepository } from "./repositories";
-import { IUserDatabase } from "./repositories/user.database.interface";
+import { AdminRepository } from "./repositories";
+import { IAdminDatabase } from "./repositories/admin.database.interface";
 import { UserController } from "./rest";
 import { UserService } from "./services";
 
@@ -9,10 +9,10 @@ import { UserService } from "./services";
   controllers: [UserController],
   providers: [
     UserService,
-    UserRepository,
+    AdminRepository,
     {
-      provide: IUserDatabase,
-      useClass: ResolveDatabaseDependency('USER'),
+      provide: IAdminDatabase,
+      useClass: ResolveDatabaseDependency('ADMIN'),
     },
   ],
 })

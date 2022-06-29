@@ -16,7 +16,7 @@ export class CreateCustomerDto implements CreateCustomerRequest {
     phone: string;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     otp: string;
 

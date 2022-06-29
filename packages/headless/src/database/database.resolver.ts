@@ -12,7 +12,7 @@ import { UserDatabase as UserDatabaseMysql } from './mysql/admin/admin';
 
 type CLASS_NAME =
   'WISHLIST'
-  | 'USER'
+  | 'ADMIN'
   | 'PRODUCT'
   | 'MANUFACTURER'
   | 'CATEGORY'
@@ -28,7 +28,7 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
     switch (db) {
       case 'MONGO':
         switch (className) {
-          case 'USER':
+          case 'ADMIN':
             return UserDatabaseMongo;
           case 'COMPARE':
             return CompareDatabaseMongo;
@@ -48,7 +48,7 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         }
       case 'MYSQL':
         switch (className) {
-          case 'USER':
+          case 'ADMIN':
             return UserDatabaseMysql;
           case 'MANUFACTURER':
             return ManufacturerDatabaseMysql;

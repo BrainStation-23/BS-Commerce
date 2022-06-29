@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Address, Admin } from 'src/entity/admin';
-import { IUserDatabase } from 'src/modules/admin/repositories/user.database.interface';
+import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
 import AddressModel from './address.model';
 import AdminModel from './admin.model';
 
 @Injectable()
-export class UserDatabase implements IUserDatabase {
+export class UserDatabase implements IAdminDatabase {
   async createUser(user: Admin): Promise<Admin | null> {
     const newUser = (await AdminModel.create(user)).get({ plain: true });
     delete newUser?.password;

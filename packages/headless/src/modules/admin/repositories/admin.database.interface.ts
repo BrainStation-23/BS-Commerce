@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Address, Admin } from 'src/entity/admin';
 
 @Injectable()
-export abstract class IUserDatabase {
+export abstract class IAdminDatabase {
   abstract createUser: (user: Admin) => Promise<Admin | null>;
   abstract findUser: (query: Record<string, string>) => Promise<Admin | null>;
   abstract getUserPassword(query: Record<string, string>): Promise<Admin | null>;

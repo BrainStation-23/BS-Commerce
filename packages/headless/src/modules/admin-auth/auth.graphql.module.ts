@@ -5,8 +5,8 @@ import { AuthService } from './services';
 import { adminAuthConfig } from 'config/auth';
 import { AuthResolver } from './graphql/auth.resolver';
 import { AdminJwtStrategy } from './guards/jwt-strategy';
-import { UserRepository } from 'src/modules/admin/repositories';
-import { IUserDatabase } from 'src/modules/admin/repositories/user.database.interface';
+import { AdminRepository } from 'src/modules/admin/repositories';
+import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
 
 @Module({
   imports: [
@@ -21,10 +21,10 @@ import { IUserDatabase } from 'src/modules/admin/repositories/user.database.inte
   providers: [
     AuthResolver,
     AuthService,
-    UserRepository,
+    AdminRepository,
     {
-      provide: IUserDatabase,
-      useClass: ResolveDatabaseDependency('USER'),
+      provide: IAdminDatabase,
+      useClass: ResolveDatabaseDependency('ADMIN'),
     },
     AdminJwtStrategy,
   ],
