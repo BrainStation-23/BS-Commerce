@@ -76,7 +76,7 @@ const EditForm: FC<Props> = ({
                   </div>
                   <div className="col-lg-12">
                     <InputField
-                      value={values.email}
+                      value={values?.email}
                       label="Email"
                       placeholder="Email"
                       required
