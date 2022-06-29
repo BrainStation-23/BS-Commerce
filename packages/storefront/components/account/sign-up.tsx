@@ -16,7 +16,7 @@ const Signup = () => {
   async function handleSignUp(data: CreateCustomerRequest) {
     try {
       userAPI.signUp(data).then((response: any) => {
-        if (response?.code !== 200) {
+        if (response?.code !== 201) {
           if (response.response.data.error === "CUSTOMER_EMAIL_ALREADY_EXITS") {
             alert("User with this email already exists");
           } else if (
