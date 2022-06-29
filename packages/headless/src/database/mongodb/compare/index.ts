@@ -26,6 +26,8 @@ export class CompareDatabase implements ICompareDatabase {
       { $addToSet: { items: productId } },
       { new: true },
     ).lean();
+
+    // return await this.getCompareListByUserId(userId);
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
@@ -34,7 +36,8 @@ export class CompareDatabase implements ICompareDatabase {
       userId: userId,
       items: [productId],
     });
-    return compareList ? await this.mappedProductDetails(compareList) : null;
+    return await this.getCompareListByUserId(userId);
+    // return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
   async deleteCompareById(userId: string, compareId: string): Promise<Compare> {
