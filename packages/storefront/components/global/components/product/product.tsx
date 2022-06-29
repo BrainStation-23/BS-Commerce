@@ -28,25 +28,25 @@ const Product = (props: SingleProduct) => {
                       alt={product?.info?.name}
                     />
 
-                    <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-                      {product?.info?.oldPrice ? "Sale" : ""}
-                    </div>
+                    {product?.info?.oldPrice !== 0 ? (
+                      <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+                        <p>Sale</p>
+                      </div>
+                    ) : null}
 
                     {product?.discountPercentage && product?.stock > 0 ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                         <p>{`-${product?.discountPercentage}%`}</p>
                       </div>
                     ) : null}
-                    {product?.info?.oldPrice ? (
+                    {product?.info?.oldPrice !== 0 ? (
                       <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                         <p>{`-$${Math.abs(
                           product?.info?.oldPrice - product?.info?.price
                         )}`}</p>
                       </div>
                     ) : (
-                      <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                        <p>{`-$0`}</p>
-                      </div>
+                      null
                     )}
                   </div>
                 </div>
