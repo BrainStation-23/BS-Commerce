@@ -9,6 +9,8 @@ import {
   SignInRequest,
   SignInSuccessResponse,
   Category,
+  getCategoryBySlugRequest,
+  getCategoryBySlugSuccessResponse,
 } from "models";
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -51,5 +53,11 @@ export async function getUserProfileGraphql(): Promise<
 }
 
 export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
+  return;
+}
+
+export async function getCategoryBySlugGraphQL(
+  slug: getCategoryBySlugRequest
+): Promise<getCategoryBySlugSuccessResponse | undefined> {
   return;
 }

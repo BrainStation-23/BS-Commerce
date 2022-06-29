@@ -14,6 +14,8 @@ import {
   GetUserSuccessResponse,
   UpdatedUserRequest,
   ChangePasswordRequest,
+  getCategoryBySlugRequest,
+  getCategoryBySlugSuccessResponse,
 } from "models";
 
 import { User } from "../utils/types";
@@ -293,6 +295,19 @@ export async function getUserProfileRest(): Promise<
     return data as GetUserSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getCategoryBySlugRest(
+  slug: getCategoryBySlugRequest
+): Promise<getCategoryBySlugSuccessResponse | undefined> {
+  try {
+    const { data } = await axios.get(
+      `${apiEndPoints.category}/slug/${slug.slug}`
+    );
+    return data as getCategoryBySlugSuccessResponse;
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
