@@ -6,7 +6,7 @@ import { adminAuthConfig } from 'config/auth';
 import { coreConfig } from 'config/core';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard(['customer', 'user']) {
+export class JwtAuthGuard extends AuthGuard(['customer', 'admin']) {
     canActivate(context: ExecutionContext) {
         const ctx = GqlExecutionContext.create(context);
         const { req } = ctx.getContext();
@@ -15,7 +15,7 @@ export class JwtAuthGuard extends AuthGuard(['customer', 'user']) {
     handleRequest(err: any, user: any, info: string) {
         if (err || !user) {
             if (!user) {
-                throw new HttpException('Sorry! You are not a valid User.', HttpStatus.FORBIDDEN);
+                throw new HttpException('Sorry! You are not a valid Admin.', HttpStatus.FORBIDDEN);
             }
             throw err;
         }

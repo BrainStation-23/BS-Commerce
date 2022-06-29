@@ -2,7 +2,7 @@ import { Item } from 'src/entity/cart';
 import { CartService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { Admin } from 'src/entity/admin';
 import { AddToCartRequestDto } from '../dto/addToCart.dto';
@@ -16,14 +16,14 @@ export class CartResolver {
   constructor(private cartService: CartService) { }
 
   @Query()
-  async getCart(@UserInfo() user: Admin) {
+  async getCart(@AdminInfo() user: Admin) {
     return await this.cartService.getCart(user.id);
   }
 
   @Mutation()
   async addToCart(
     @Args('item') item: AddToCartRequestDto,
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
   ) {
     return await this.cartService.addToCart(item, user.id);
   }
@@ -35,7 +35,7 @@ export class CartResolver {
 
   @Mutation()
   async updateCartItem(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Args('item') item: updateCartItemRequestDto,
   ) {
     return await this.cartService.updateCartItem(user.id, item);
@@ -43,14 +43,14 @@ export class CartResolver {
 
   @Mutation()
   async deleteCartItem(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Args() data: deleteCartItemRequestDto,
   ) {
     return await this.cartService.deleteCartItem(user.id, data.productId);
   }
 
   @Mutation()
-  async deleteAllCartItems(@UserInfo() user: Admin) {
+  async deleteAllCartItems(@AdminInfo() user: Admin) {
     return await this.cartService.deleteAllCartItems(user.id);
   }
 }

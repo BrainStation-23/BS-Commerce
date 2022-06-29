@@ -14,7 +14,7 @@ import { CartService } from '../services';
 import { Response } from 'express';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { Admin } from 'src/entity/admin';
-import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddToCartSuccessResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
 import { getCartErrorResponseDto, getCartSuccessResponseDto } from '../dto/getCart.dto';
@@ -43,7 +43,7 @@ export class CartController {
   })
   async addToCart(
     @Body() item: AddToCartRequestDto,
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.addToCart(
@@ -65,7 +65,7 @@ export class CartController {
     type: getCartErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getCart(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
+  async getCart(@AdminInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.cartService.getCart(user.id);
     res.status(code);
     return response;
@@ -103,7 +103,7 @@ export class CartController {
   })
   @Patch('item')
   async updateCartItem(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Body() item: updateCartItemRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -127,7 +127,7 @@ export class CartController {
   })
   @Delete('item')
   async deleteCartItem(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Query() data: deleteCartItemRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -151,7 +151,7 @@ export class CartController {
   })
   @Delete('allitems')
   async deleteAllCartItems(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.cartService.deleteAllCartItems(

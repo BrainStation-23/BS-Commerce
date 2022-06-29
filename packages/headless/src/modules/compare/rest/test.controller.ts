@@ -9,7 +9,7 @@ import {
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Admin } from 'src/entity/admin';
-import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { CompareDataDto, CompareResponse } from '../dto/test.dto';
 import { CompareTestService } from '../services/test.service';
@@ -28,7 +28,7 @@ export class CompareTestController {
   })
   @Get()
   async getCompareByUserId(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Res({ passthrough: true }) res: Response,
   ): Promise<CompareResponse<CompareDataDto>> {
     const { code, ...response } = await this.compareService.getCompareByUserId(user.id);
@@ -42,7 +42,7 @@ export class CompareTestController {
   })
   @Get('boolean')
   async getCompare(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Res({ passthrough: true }) res: Response,
   ): Promise<CompareResponse<boolean>> {
     const { code, ...response } = await this.compareService.getCompare(user.id);

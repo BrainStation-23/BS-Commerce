@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpStatus, Patch, Res, UseGuards } from '@nestj
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { AdminService } from '../services';
-import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { Admin } from 'src/entity/admin';
 import { Response } from 'express';
 import {
@@ -32,7 +32,7 @@ export class AdminController {
     type: GetUserErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getUser(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
+  async getUser(@AdminInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.adminService.getUser(user.id);
     res.status(code);
     return { code, ...response };
@@ -49,8 +49,8 @@ export class AdminController {
     type: GetUserErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async updateUser(@Body() data: UpdatedUserDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.adminService.updateUser(userInfo.id, data);
+  async updateUser(@Body() data: UpdatedUserDto, @AdminInfo() AdminInfo: Admin, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.adminService.updateUser(AdminInfo.id, data);
     res.status(code);
     return { code, ...response };
   }
@@ -66,8 +66,8 @@ export class AdminController {
     type: ChangePasswordErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async changePassword(@Body() passwordDetails: ChangePasswordDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.adminService.changePassword(userInfo.id, passwordDetails);
+  async changePassword(@Body() passwordDetails: ChangePasswordDto, @AdminInfo() AdminInfo: Admin, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.adminService.changePassword(AdminInfo.id, passwordDetails);
     res.status(code);
     return { code, ...response };
   }

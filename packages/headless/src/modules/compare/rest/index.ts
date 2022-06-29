@@ -13,7 +13,7 @@ import {
 import { ApiBearerAuth, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Admin } from 'src/entity/admin';
-import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import {
   AddToCompareDto,
@@ -41,7 +41,7 @@ export class CompareController {
     status: HttpStatus.BAD_REQUEST,
   })
   async addItemToComapre(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Body() body: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -64,7 +64,7 @@ export class CompareController {
     status: HttpStatus.OK,
   })
   @Get()
-  async getCompareByUserId(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
+  async getCompareByUserId(@AdminInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.compareService.getCompareByUserId(user.id);
     res.status(code);
     return response;
@@ -83,7 +83,7 @@ export class CompareController {
   @ApiParam({ name: 'compareId', example: '' })
   @Get(':compareId')
   async getCompareById(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Param('compareId') compareId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -105,7 +105,7 @@ export class CompareController {
   @ApiQuery({ name: 'compareId', example: '' })
   @Delete()
   async deleteCompareById(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Query('compareId') compareId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -127,7 +127,7 @@ export class CompareController {
   @ApiQuery({ name: 'productId', example: '' })
   @Delete('item')
   async deleteItemByProductId(
-    @UserInfo() user: Admin,
+    @AdminInfo() user: Admin,
     @Query('productId') productId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -150,7 +150,7 @@ export class CompareController {
     status: HttpStatus.OK,
   })
   @Delete('allitems')
-  async deleteAllItemByUserId(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
+  async deleteAllItemByUserId(@AdminInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.compareService.deleteAllItemByUserId(user.id);
     res.status(code);
     return response;
