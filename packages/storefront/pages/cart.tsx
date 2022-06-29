@@ -28,4 +28,4 @@ const Cart: NextPage = () => {
 //     };
 // }
 
-export default withAuth(Cart);
+export default Cart;
