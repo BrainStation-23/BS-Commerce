@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { CartRepository } from '../repositories';
-import { AddToCartResponse, getCartResponse, getCartErrorMessage, deleteCartErrorMessage, updateCartItemErrorMessage, deleteCartItemErrorMessage, deleteAllCartItemsErrorMessage, deleteCartResponse, updateCartItemResponse, deleteCartItemResponse, deleteAllCartItemsResponse, addToCartErrorMessage } from 'models';
+import { AddToCartResponse, getCartResponse, getCartErrorMessage, deleteCartErrorMessage, updateCartItemErrorMessage, deleteCartItemErrorMessage, deleteAllCartItemsErrorMessage, deleteCartResponse, updateCartItemResponse, deleteCartItemResponse, deleteAllCartItemsResponse, addToCartErrorMessage, Message } from 'models';
 import { Item, UpdateItem } from 'src/entity/cart';
 
 @Injectable()
@@ -91,7 +91,7 @@ export class CartService {
       );
     }
     return this.helper.serviceResponse.successResponse(
-      cart,
+      { message: Message.REMOVE_CART_SUCCESSFULLY },
       HttpStatus.OK,
     );
   }

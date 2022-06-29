@@ -1,10 +1,10 @@
 export interface CartProduct {
-    id: string;
-    info: Info;
-    photos: Photo[];
+    id?: string;
+    info: CartProductInfo;
+    photos?: CartProductPhoto[];
 }
 
-interface Info {
+export interface CartProductInfo {
     name: string;
     shortDescription?: string;
     fullDescription?: string;
@@ -21,7 +21,7 @@ interface Info {
     publishDate?: Date;
 }
 
-interface Photo {
+export interface CartProductPhoto {
     url?: string;
     title?: string;
     alt?: string;
