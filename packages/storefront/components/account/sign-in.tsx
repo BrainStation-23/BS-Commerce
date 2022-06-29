@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { storeUserToken } from "toolkit/authSlice";
 import axios from "axios";
+import { useRouter } from "next/router";
+import withAuth from "../auth/withAuth";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -17,6 +19,7 @@ var url = require("url");
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   async function handleSignin(data: CustomerSignInRequest) {
     const token = await fetch(
@@ -38,6 +41,7 @@ const Signin = () => {
     // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
 
     window.location.href = "/home";
+    
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {
     //     alert(response.response.data.error);
