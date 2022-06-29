@@ -30,7 +30,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  const toCart = async (id) => {
+  const toCart = async (id: string) => {
     await userAPI.addToCart({
       productId: id,
       quantity: amount,

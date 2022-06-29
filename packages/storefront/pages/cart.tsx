@@ -1,3 +1,4 @@
+import withAuth from "@/components/auth/withAuth";
 import { userAPI } from "APIs";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import type { NextPage } from "next";

@@ -22,7 +22,7 @@ const HeaderAccount: React.FC<Properties> = (props) => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(""));
-    router.push("/account/sign-in");
+    window.location.href = "/account/sign-in"
   };
 
   const links = [
