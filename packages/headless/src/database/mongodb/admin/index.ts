@@ -3,7 +3,7 @@ import { Address, Admin } from 'src/entity/admin';
 import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
 import { AdminModel } from './admin.model';
 @Injectable()
-export class UserDatabase implements IAdminDatabase {
+export class AdminDatabase implements IAdminDatabase {
   async createUser(user: Admin): Promise<Admin | null> {
     const createdUser = await AdminModel.create(user);
     const newUser = createdUser?.toJSON();

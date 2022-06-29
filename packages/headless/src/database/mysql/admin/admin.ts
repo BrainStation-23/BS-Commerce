@@ -5,7 +5,7 @@ import AddressModel from './address.model';
 import AdminModel from './admin.model';
 
 @Injectable()
-export class UserDatabase implements IAdminDatabase {
+export class AdminDatabase implements IAdminDatabase {
   async createUser(user: Admin): Promise<Admin | null> {
     const newUser = (await AdminModel.create(user)).get({ plain: true });
     delete newUser?.password;

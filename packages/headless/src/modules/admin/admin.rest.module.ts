@@ -2,13 +2,13 @@ import { Module } from "@nestjs/common";
 import { ResolveDatabaseDependency } from "src/database/database.resolver";
 import { AdminRepository } from "./repositories";
 import { IAdminDatabase } from "./repositories/admin.database.interface";
-import { UserController } from "./rest";
-import { UserService } from "./services";
+import { AdminController } from "./rest";
+import { AdminService } from "./services";
 
 @Module({
-  controllers: [UserController],
+  controllers: [AdminController],
   providers: [
-    UserService,
+    AdminService,
     AdminRepository,
     {
       provide: IAdminDatabase,

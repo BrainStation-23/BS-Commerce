@@ -57,7 +57,6 @@ export class AuthService {
   }
 
   async forgotPassword(username: string, baseUrl: string): Promise<ForgotPasswordResponse> {
-
     const user = await this.adminRepo.findUser({ username });
     if (!user) return this.helper.serviceResponse.errorResponse(ForgotPasswordErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST,);
 

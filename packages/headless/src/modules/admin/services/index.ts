@@ -15,7 +15,7 @@ import {
 } from 'models';
 
 @Injectable()
-export class UserService {
+export class AdminService {
     constructor(private adminRepo: AdminRepository, private helper: Helper) { }
 
     async getUser(userId: string): Promise<GetUserResponse> {

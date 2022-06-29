@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpStatus, Patch, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
-import { UserService } from '../services';
+import { AdminService } from '../services';
 import { User as UserInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
 import { Admin } from 'src/entity/admin';
 import { Response } from 'express';
@@ -18,8 +18,8 @@ import {
 @ApiTags('Admin Profile API')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
-export class UserController {
-  constructor(private userService: UserService) { }
+export class AdminController {
+  constructor(private adminService: AdminService) { }
 
   @Get()
   @ApiResponse({
@@ -33,7 +33,7 @@ export class UserController {
     status: HttpStatus.BAD_REQUEST
   })
   async getUser(@UserInfo() user: Admin, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.userService.getUser(user.id);
+    const { code, ...response } = await this.adminService.getUser(user.id);
     res.status(code);
     return { code, ...response };
   }
@@ -50,7 +50,7 @@ export class UserController {
     status: HttpStatus.BAD_REQUEST
   })
   async updateUser(@Body() data: UpdatedUserDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.userService.updateUser(userInfo.id, data);
+    const { code, ...response } = await this.adminService.updateUser(userInfo.id, data);
     res.status(code);
     return { code, ...response };
   }
@@ -67,7 +67,7 @@ export class UserController {
     status: HttpStatus.BAD_REQUEST
   })
   async changePassword(@Body() passwordDetails: ChangePasswordDto, @UserInfo() userInfo: Admin, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.userService.changePassword(userInfo.id, passwordDetails);
+    const { code, ...response } = await this.adminService.changePassword(userInfo.id, passwordDetails);
     res.status(code);
     return { code, ...response };
   }
