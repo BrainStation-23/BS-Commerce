@@ -16,6 +16,12 @@ interface Products {
 const WeekDeals = ({ products }: Products) => {
   //edited type. was const WeekDeals: FC = () => {}
   // console.log(products);
+  const getMinimumProduct =()=>{
+    const w = window.innerWidth;
+    if(w>=980) return 6;
+    if(w>=768) return 3;
+    return 2;
+  }
   return (
     <>
       <Container className="max-w-7xl">
@@ -28,7 +34,7 @@ const WeekDeals = ({ products }: Products) => {
           slidesPerView768={3}
           slidesPerView980={5}
           rows={1}
-          loop={products.length>5 ? true : false}
+          loop={products.length>getMinimumProduct() ? true : false}
         >
           {products &&
             products.length > 0 &&
@@ -51,22 +57,20 @@ const WeekDeals = ({ products }: Products) => {
                                 alt={product.tags[0]}
                               />
 
-                              <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-                                {product?.info?.oldPrice ? "Sale" : ""}
-                              </div>
+                              {product?.info?.oldPrice !== 0 ? (
+                                <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+                                  <p>Sale</p>
+                                </div>
+                              ) : null}
 
-                              {product?.info?.oldPrice ? (
+                              {product?.info?.oldPrice !== 0 ? (
                                 <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                                   <p>{`-$${Math.abs(
                                     product?.info?.oldPrice -
-                                      product?.info?.price
+                                    product?.info?.price
                                   )}`}</p>
                                 </div>
-                              ) : (
-                                <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                                  <p>{`-$0`}</p>
-                                </div>
-                              )}
+                              ) : null}
                             </div>
                           </div>
                           <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">

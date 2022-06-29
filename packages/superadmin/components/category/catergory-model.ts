@@ -6,6 +6,7 @@ export interface Ancestor {
 
 export interface SubCategory {
   slug?: string;
+  name: string;
   ancestors: Ancestor[];
   subCategories?: SubCategory[];
 }
@@ -13,5 +14,6 @@ export interface SubCategory {
 export interface CategoryInterface {
   ancestors?: Ancestor[];
   slug: string;
+  name: string;
   subCategories?: SubCategory[];
 }

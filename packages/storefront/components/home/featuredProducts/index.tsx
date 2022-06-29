@@ -17,7 +17,11 @@ interface Products {
 }
 
 const FeaturedProducts = ({products}: Products) => {
-  
+  const getMinimumProduct =()=>{
+    const w = window.innerWidth;
+    if(w>=980) return 9;
+    return 6;
+  }
   return (
     <Container className="max-w-6xl">
       <div className="text-center mb-6">
@@ -29,12 +33,12 @@ const FeaturedProducts = ({products}: Products) => {
         slidesPerView768={2}
         slidesPerView980={3}
         rows={3}
-        loop={products.length>9 ? true : false}
+        loop={products.length>getMinimumProduct() ? true : false}
       >
         {products &&
           products.length > 0 &&
           products.map((product: any) => (
-            <SwiperSlide key={product.id}>
+            <SwiperSlide key={product.id} className="justify-items-center">
               <ProductShow product={product} />
             </SwiperSlide>
           ))}

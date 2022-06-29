@@ -18,6 +18,11 @@ interface Products {
 }
 
 const BestSell = ({products} : Products) => {
+  const getMinimumProduct =()=>{
+    const w = window.innerWidth;
+    if(w>=980) return 6;
+    return 3;
+  }
   return (
     <>
       <Container className="">
@@ -39,7 +44,7 @@ const BestSell = ({products} : Products) => {
               slidesPerView768={1}
               slidesPerView980={2}
               rows={3}
-              loop={products.length>6 ? true : false}
+              loop={products.length>getMinimumProduct() ? true : false}
             >
               {products &&
                 products.length > 0 &&
