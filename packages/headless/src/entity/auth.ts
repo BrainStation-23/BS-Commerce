@@ -9,4 +9,3 @@ export class JwtPayload {
     username: string;
     logInTime: number;
 }
-

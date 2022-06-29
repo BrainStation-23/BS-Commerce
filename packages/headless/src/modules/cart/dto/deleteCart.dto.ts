@@ -1,53 +1,31 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, CartProduct, deleteCartErrorMessage, deleteCartErrorResponse, deleteCartRequest, deleteCartSuccessResponse, ResponseItem } from "models";
+import { Type } from "class-transformer";
+import { IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
+import { deleteCartErrorMessage, deleteCartErrorResponse, deleteCartRequest, deleteCartSuccessResponse, DeleteMessage, Message } from "models";
 
-export class deleteCartRequestDto implements deleteCartRequest{
+export class deleteCartRequestDto implements deleteCartRequest {
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
-    cartId: string;  
+    cartId: string;
 }
 
-class ResponseItemDto implements ResponseItem{
-    @ApiProperty()
-    @IsOptional()
-    @IsObject()
-    product?: CartProduct;
-
-    @ApiProperty()
-    @IsString()
-    productId: string;
-
-    @ApiProperty()
-    @IsNumber()
-    quantity: number;
+export class DeleteMessageDto implements  DeleteMessage{
+    @ApiProperty({
+        example:Message.REMOVE_CART_SUCCESSFULLY,
+    })
+    message: Message;
 }
-
-class CartDto implements Cart {
-    @ApiProperty()
-    @IsString()
-    id?: string;
-
-    @ApiProperty()
-    @IsString()
-    userId?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsArray()
-    items?:ResponseItemDto[];
-}
-
 export class deleteCartSuccessResponseDto implements deleteCartSuccessResponse {
     @ApiProperty()
     @IsNumber()
     code: number;
 
-    @ApiProperty()
+    @ApiProperty({type: DeleteMessageDto })
+    @Type(()=> DeleteMessageDto)
     @IsObject()
-    data: CartDto;
+    data: DeleteMessageDto;
 }
 
 export class deleteCartErrorResponseDto implements deleteCartErrorResponse {
