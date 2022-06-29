@@ -16,6 +16,12 @@ interface Products {
 const WeekDeals = ({ products }: Products) => {
   //edited type. was const WeekDeals: FC = () => {}
   // console.log(products);
+  const getMinimumProduct =()=>{
+    const w = window.innerWidth;
+    if(w>=980) return 6;
+    if(w>=768) return 3;
+    return 2;
+  }
   return (
     <>
       <Container className="max-w-7xl">
@@ -28,7 +34,7 @@ const WeekDeals = ({ products }: Products) => {
           slidesPerView768={3}
           slidesPerView980={5}
           rows={1}
-          loop={products.length>5 ? true : false}
+          loop={products.length>getMinimumProduct() ? true : false}
         >
           {products &&
             products.length > 0 &&
