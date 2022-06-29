@@ -131,7 +131,6 @@ export async function addToCartRest(
   cartData: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
   try {
-
     const res = await axios?.post<AddToCartResponse>(
       `${apiEndPoints?.getCart}`,
       cartData

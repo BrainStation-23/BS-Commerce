@@ -5,7 +5,6 @@ import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
 const ShowData = ({ data }: any) => {
   let token = document.cookie.split("=")[1]
-  console.log("from show data", token.split("=")[1]);
 
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
