@@ -10,11 +10,11 @@ import {
   DeleteProductErrorResponseDto,
   DeleteProductParamsDto,
   DeleteProductSuccessResponseDto,
-  GetAllHomePageProductsErrorResponseDto,
-  GetAllHomePageProductsSuccessResponseDto,
   GetAllProductsErrorResponseDto,
   GetAllProductsQueryDto,
   GetAllProductsSuccessResponseDto,
+  GetCustomerAllHomePageProductsErrorResponseDto,
+  GetCustomerAllHomePageProductsSuccessResponseDto,
   GetCustomerAllProductsErrorResponseDto,
   GetCustomerAllProductsQueryDto,
   GetCustomerAllProductsSuccessResponseDto,
@@ -85,12 +85,12 @@ export class ProductController {
   @Get('customer/home-page-products')
   @ApiResponse({
     description: 'Get All Home Page Products Success Response',
-    type: GetAllHomePageProductsSuccessResponseDto,
+    type: GetCustomerAllHomePageProductsSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Get All Home Page Products Error Response',
-    type: GetAllHomePageProductsErrorResponseDto,
+    type: GetCustomerAllHomePageProductsErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
   async getCustomerHomePageProducts(@Res({ passthrough: true }) res: Response) {
