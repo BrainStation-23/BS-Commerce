@@ -10,10 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../redux-hooks";
 import { userAPI } from "../../APIs";
 
-import HeaderBar from "./headerBar";
-import Sidebar from "./sidebar";
+import HeaderBar from "./components/headerBar";
+import Sidebar from "./components/sidebar";
 
-const Layout: NextComponentType = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<Props> = ({ children }) => {
   const [userData, setUserData] = useState<User>();
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -38,7 +42,7 @@ const Layout: NextComponentType = ({ children }) => {
       const response = await userAPI.getUserProfile();
       setUserData(response?.data);
     }
-    getProfile();
+    if (token && !pathname.includes("/account")) getProfile();
   }, []);
 
   const toggleSidebar = (sideBarStatus: boolean) => {
@@ -46,7 +50,12 @@ const Layout: NextComponentType = ({ children }) => {
   };
 
   if (pathname.includes("/account")) {
-    return <>{children}</>;
+    return (
+      <>
+        <ToastContainer />
+        {children}
+      </>
+    );
   }
 
   return (
@@ -54,12 +63,19 @@ const Layout: NextComponentType = ({ children }) => {
       <ToastContainer />
       <div className="d-flex">
         <Sidebar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
-        <div className="d-flex flex-column" style={{ width: "100%" }}>
+        <div
+          className="d-flex flex-column"
+          style={{
+            width: "100%",
+            marginLeft: showSidebar ? "250px" : "60px",
+            transition: "all 0.3s linear",
+          }}
+        >
           <div style={{ height: "56px", width: "100%" }}>
             <HeaderBar
               toggleSidebar={toggleSidebar}
               showSidebar={showSidebar}
-              displayName={userData?.displayName}
+              displayName={userData?.displayName!}
             />
           </div>
           <div>{children}</div>

@@ -1,11 +1,21 @@
 import { useRouter } from "next/router";
 import type { FC } from "react";
-import { useAppDispatch } from "../../redux-hooks";
-import { removeToken } from "../../toolkit/AuthSlice";
+import { useAppDispatch } from "../../../redux-hooks";
+import { removeToken } from "../../../toolkit/AuthSlice";
 
-import layout from "./styles/layout.module.css";
+import layout from "../styles/layout.module.css";
 
-const HeaderBar: FC = (props: any) => {
+interface Props {
+  toggleSidebar: (sideBarStatus: boolean) => void;
+  showSidebar: boolean;
+  displayName: string;
+}
+
+const HeaderBar: FC<Props> = ({
+  toggleSidebar,
+  showSidebar,
+  displayName,
+}: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -21,18 +31,18 @@ const HeaderBar: FC = (props: any) => {
       style={{
         padding: "8px",
         backgroundColor: "#343a40",
-        transition: "all 0.3s ease-in",
+        transition: "all 0.3s linear",
       }}
     >
       <i
         className={`bi bi-list ${layout.link}`}
-        onClick={() => props.toggleSidebar(!props.showSidebar)}
+        onClick={() => toggleSidebar(!showSidebar)}
         style={{
           padding: "8px 16px",
         }}
       />
-      <div style={{ color: "rgba(255,255,255,.75)" }}>
-        <span style={{ padding: "8px 16px" }}>{props.displayName}</span>
+      <div style={{ color: "#656159" }}>
+        <span style={{ padding: "8px 16px" }}>{displayName}</span>
         <span
           className={layout.link}
           style={{ padding: "8px 16px" }}

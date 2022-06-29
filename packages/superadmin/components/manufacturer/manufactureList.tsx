@@ -15,22 +15,6 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
   const [reloadPage, setReloadPage] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(5);
-  const [checkbox, setCheckbox] = useState([]);
-  const [req, setReq] = useState(false);
-
-  const handleCheckbox = (e: any) => {
-    let isChecked = e.target.checked;
-    let val = e.target.value;
-    let newCheckbox: any = [...checkbox, val];
-    isChecked
-      ? setCheckbox(newCheckbox)
-      : setCheckbox(checkbox.filter((v) => v !== val));
-  };
-
-  const handleReq = () => {
-    setModal({ ...modal, delete: false });
-    setReq(false);
-  };
 
   const [modal, setModal] = useState({
     delete: false,
@@ -51,13 +35,11 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
     setModal({ ...modal, delete: true });
   };
 
-  const handleDeleteManufacture = () => {
-    checkbox.length === 1
-      ? userAPI.deleteManufacturer(checkbox[0], router)
-      : setReq(true);
-
+  const handleDeleteManufacture = (id: any, name: any) => {
+    console.log("Deleted id from list", id, name);
+    userAPI.deleteManufacturer(id, router);
     setModal({ ...modal, delete: false });
-    checkbox.length === 1 ? getAllManufacturers() : "";
+    getAllManufacturers();
   };
 
   const handleClickPage = (activePage: any) => {
@@ -87,46 +69,6 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
                   <i className="bi bi-plus-square"></i> Add new
                 </button>
               </Link>
-              {/* <button
-                type="button"
-                style={{
-                  borderRadius: "5px",
-                  backgroundColor: "#28a745",
-                  border: "1px solid #28a745",
-                  color: "white",
-                  marginLeft: "10px",
-                }}
-                className="btn btn-info btn-lg"
-              >
-                <i className="bi bi-box-arrow-in-down"> </i>
-                Export
-              </button> */}
-              {/* <button
-                type="button"
-                style={{
-                  borderRadius: "5px",
-                  backgroundColor: "#3d9970",
-                  border: "1px solid #3d9970",
-                  color: "white",
-                  marginLeft: "10px",
-                }}
-                className="btn btn-info btn-lg"
-              >
-                <i className="bi bi-file-earmark-pdf"> </i>
-                Import
-              </button> */}
-              <button
-                type="button"
-                className="btn btn-danger btn-lg"
-                style={{
-                  borderRadius: "5px",
-                  backgroundColor: "#dd4b39",
-                  marginLeft: "10px",
-                }}
-                onClick={() => handleDelete()}
-              >
-                <i className="bi bi-trash"> </i>Delete (selected)
-              </button>
             </div>
           </div>
         </div>
@@ -150,140 +92,6 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
         >
           <i className="bi bi-search"></i> Search
         </button>
-
-        {modal.delete ? (
-          <div
-            className="modal"
-            style={{ display: modal.delete ? "block" : "none" }}
-          >
-            <div
-              className="modal-backdrop"
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-              }}
-              onClick={() => {
-                // close modal when outside of modal is clicked
-                setModal({ ...modal, delete: false });
-              }}
-            >
-              <div
-                className="modal-content"
-                onClick={(e) => {
-                  // do not close modal if anything inside modal content is clicked
-                  e.stopPropagation();
-                }}
-                style={{
-                  textAlign: "left",
-                  width: "30%",
-                  marginLeft: "40%",
-                  marginTop: "5%",
-                  border: "1px solid gray",
-                  boxShadow: "1px 1px 10px gray",
-                  borderRadius: "10px",
-                  padding: "20px",
-                }}
-              >
-                <div className="container">
-                  <h1>Are you sure?</h1>
-                  <hr />
-                  <p>Are you sure you want to delete this item?</p>
-                  <br />
-
-                  <div className="clearfix">
-                    <button
-                      type="button"
-                      className="btn btn-light"
-                      style={{
-                        border: "1px solid gray",
-                        backgroundColor: "gray",
-                        color: "white",
-                        marginRight: "10px",
-                      }}
-                      onClick={() =>
-                        setModal({
-                          ...modal,
-                          delete: false,
-                        })
-                      }
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDeleteManufacture()}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div />
-        )}
-
-        {req ? (
-          <div
-            className="modal"
-            style={{ display: `{modal.req` ? "block" : "none" }}
-          >
-            <div
-              className="modal-backdrop"
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-              }}
-              onClick={() =>
-                // close modal when outside of modal is clicked
-                handleReq()
-              }
-            >
-              <div
-                className="modal-content"
-                onClick={(e) => {
-                  // do not close modal if anything inside modal content is clicked
-                  e.stopPropagation();
-                }}
-                style={{
-                  textAlign: "left",
-                  width: "30%",
-                  marginLeft: "40%",
-                  marginTop: "5%",
-                  border: "1px solid gray",
-                  boxShadow: "1px 1px 10px gray",
-                  borderRadius: "10px",
-                  padding: "20px",
-                }}
-              >
-                <div className="container">
-                  <h1>Information</h1>
-                  <hr />
-                  <p>Please select only one record.</p>
-                  <br />
-
-                  <div className="clearfix">
-                    <button
-                      type="button"
-                      className="btn btn-light"
-                      style={{
-                        border: "1px solid gray",
-                        backgroundColor: "gray",
-                        color: "white",
-                        marginRight: "10px",
-                      }}
-                      onClick={() => handleReq()}
-                    >
-                      Ok
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
 
         <div style={{ marginLeft: "20px" }}>
           <Formik
@@ -404,14 +212,6 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
             <thead style={{ backgroundColor: "#dddddd" }}>
               <tr style={{ fontSize: "20px" }}>
                 <th style={{ textAlign: "center" }}>
-                  {/* <input
-                                    type="checkbox"
-                                    id="vehicle1"
-                                    name="vehicle1"
-                                    value="Bike"
-                                /> */}
-                </th>
-                <th>
                   <span>Name</span>
                 </th>
                 <th style={{ textAlign: "center" }}>
@@ -423,6 +223,9 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
                 <th style={{ textAlign: "center" }}>
                   <span>Edit</span>
                 </th>
+                <th style={{ textAlign: "center" }}>
+                  <span>Delete</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -430,12 +233,13 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
               {paginateData?.length > 0 &&
                 paginateData?.map((manufacturer: any, index: any) => (
                   <SingleManufacturer
-                    key={index}
-                    // key={manufacturer.id}
+                    // key={index}
+                    key={manufacturer.id}
                     manufacturer={manufacturer}
-                    setCheckbox={setCheckbox}
-                    checkbox={checkbox}
-                    handleCheckbox={handleCheckbox}
+                    handleDeleteManufacture={handleDeleteManufacture}
+                    handleDelete={handleDelete}
+                    modal={modal}
+                    setModal={setModal}
                   />
                 ))}
             </tbody>
