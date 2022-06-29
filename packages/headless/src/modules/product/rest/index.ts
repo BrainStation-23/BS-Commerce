@@ -10,6 +10,8 @@ import {
   DeleteProductErrorResponseDto,
   DeleteProductParamsDto,
   DeleteProductSuccessResponseDto,
+  GetAllHomePageProductsErrorResponseDto,
+  GetAllHomePageProductsSuccessResponseDto,
   GetAllProductsErrorResponseDto,
   GetAllProductsQueryDto,
   GetAllProductsSuccessResponseDto,
@@ -76,6 +78,23 @@ export class ProductController {
   })
   async getCustomerProduct(@Param() params: GetCustomerProductParamsDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getCustomerProduct(params.productId);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('customer/home-page-products')
+  @ApiResponse({
+    description: 'Get All Home Page Products Success Response',
+    type: GetAllHomePageProductsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get All Home Page Products Error Response',
+    type: GetAllHomePageProductsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerHomePageProducts(@Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerAllHomePageProducts();
     res.status(code);
     return { code, ...response };
   }
