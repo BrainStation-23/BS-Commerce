@@ -1,7 +1,9 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, CartProduct, updateCartItemErrorMessage, updateCartItemErrorResponse, ResponseItem, updateCartItemRequest, updateCartItemSuccessResponse } from "models";
+import { Cart, updateCartItemErrorMessage, updateCartItemErrorResponse, ResponseItem, updateCartItemRequest, updateCartItemSuccessResponse } from "models";
+import { CartProductDto } from "./cartProductDto";
 
 export class updateCartItemRequestDto implements updateCartItemRequest {
     @ApiProperty()
@@ -16,10 +18,11 @@ export class updateCartItemRequestDto implements updateCartItemRequest {
 }
 
 class ResponseItemDto implements ResponseItem{
-    @ApiProperty()
+    @ApiProperty({ type: CartProductDto })
+    @Type(() => CartProductDto)
     @IsOptional()
     @IsObject()
-    product?: CartProduct;
+    product?: CartProductDto;
 
     @ApiProperty()
     @IsString()

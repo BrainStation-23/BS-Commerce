@@ -11,7 +11,8 @@ export class CartDatabase implements ICartDatabase {
     return await CartModel.findOneAndUpdate(
       { userId },
       { $push: { items: item } },
-    )
+      { new: true },
+    ).select('-_id')
       .lean()
       .exec();
   }
@@ -54,21 +55,22 @@ export class CartDatabase implements ICartDatabase {
       },
       { $inc: { 'items.$.quantity': item.quantity } },
       { new: true },
-    )
+    ).select('-_id')
       .lean()
       .exec();
   }
 
   async createCart(cart:Cart): Promise<Cart | null> {
-    return await CartModel.create(cart);
+    let newCart = await CartModel.create(cart);
+    return await newCart.toJSON();
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    return await CartModel.findOne({userId }).lean();
+    return await CartModel.findOne({userId }).select('-_id').lean();
   }
 
   async deleteCart(cartId: string): Promise<Cart | null> {
-    return CartModel.findOneAndRemove({ id: cartId }).lean();
+    return CartModel.findOneAndRemove({ id: cartId }).select('-_id').lean();
   }
 
   async updateCartItem(userId: string, item: UpdateItem): Promise<Cart | null> {
@@ -79,7 +81,7 @@ export class CartDatabase implements ICartDatabase {
       },
       { $set: { 'items.$.quantity': item.quantity } },
       { new: true },
-    )
+    ).select('-_id')
       .lean()
       .exec();
   }
@@ -92,7 +94,7 @@ export class CartDatabase implements ICartDatabase {
       { userId, 'items.productId': productId },
       { $pull: { items: { productId } } },
       { new: true },
-    )
+    ).select('-_id')
       .lean()
       .exec();
   }
@@ -101,7 +103,7 @@ export class CartDatabase implements ICartDatabase {
       { userId },
       { $set: { items: [] } },
       { new: true },
-    )
+    ).select('-_id')
       .lean()
       .exec();
   }
