@@ -18,14 +18,6 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class CompareResponseDto implements CompareSuccessResponse {
-  @ApiProperty()
-  code: number;
-
-  @ApiProperty()
-  data: CompareData;
-}
-
 export class ProductInfo {
   @ApiProperty()
   name: string;
@@ -39,11 +31,15 @@ export class ProductInfo {
 export class ProductDetails {
   @ApiProperty({ type: () => [ProductInfo] })
   info: ProductInfo;
+
+  @ApiProperty()
   photos: string[];
 }
 
 export class CompareItemsDetails {
+  @ApiProperty()
   productId: string;
+
   @ApiProperty({ type: () => [ProductDetails] })
   @IsOptional()
   productDetails?: ProductDetails;

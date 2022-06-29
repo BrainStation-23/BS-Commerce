@@ -20,24 +20,22 @@ export class CompareDatabase implements ICompareDatabase {
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
-  async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare> {
+  async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
     const compareList = await CompareModel.findOneAndUpdate(
       { userId: userId },
       { $addToSet: { items: productId } },
       { new: true },
     ).lean();
 
-    // return await this.getCompareListByUserId(userId);
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
-  async createCompare(userId: string, productId: CompareItems): Promise<Compare> {
+  async createCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
     const compareList = await CompareModel.create({
       userId: userId,
       items: [productId],
     });
-    return await this.getCompareListByUserId(userId);
-    // return compareList ? await this.mappedProductDetails(compareList) : null;
+    return compareList ? await this.getCompareListByUserId(userId) : null;
   }
 
   async deleteCompareById(userId: string, compareId: string): Promise<Compare> {
@@ -47,14 +45,16 @@ export class CompareDatabase implements ICompareDatabase {
     }).lean();
   }
 
-  async deleteItemByProductId(userId: string, productId: string): Promise<Compare> {
-    return await CompareModel.findOneAndUpdate(
+  async deleteItemByProductId(userId: string, productId: string): Promise<Compare | null> {
+    const compareList = await CompareModel.findOneAndUpdate(
       {
         userId: userId,
       },
       { $pull: { items: { productId } } },
       { new: true },
     ).lean();
+
+    return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
   async deleteAllItemByUserId(userId: string): Promise<Compare> {
