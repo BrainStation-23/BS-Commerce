@@ -26,7 +26,7 @@ const ProductInfo = (props: SingleProduct) => {
               {product?.info?.oldPrice ? <s>{product?.info?.oldPrice}</s> : null}
             </span>
           ) : (
-            <div></div>
+            <></>
           )}
         </p>
       </div>
