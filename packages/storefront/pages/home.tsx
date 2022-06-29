@@ -12,10 +12,6 @@ import Axios from "axios";
 const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) => {
   const dispatch = useAppDispatch();
 
-  const store = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
-  );
-
   useEffect(() => {
     dispatch(storeAllCartItems(cartData.items));
     Axios.defaults.headers.common = {
@@ -29,7 +25,8 @@ const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) =>
 };
 
 export async function getServerSideProps({ req }: any) {
-  let token = cookie?.parse(req.headers?.cookie);
+  let token = cookie?.parse(req?.headers?.cookie);
+  //console.log("33=================", token.token)
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
   const cartData = await userAPI.getCart(token.token);

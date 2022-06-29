@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { storeUserToken } from "toolkit/authSlice";
 import axios from "axios";
+import withAuth from "../auth/withAuth";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -19,7 +20,7 @@ const Signin = () => {
   const dispatch = useDispatch();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    const token = await fetch("http://localhost:3002/api/signin", {
+    const token = await fetch("http://localhost:3000/api/customer/auth/sign-in", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +32,7 @@ const Signin = () => {
     dispatch(storeUserToken(datass?.data?.token));
     // localStorage.setItem("token", datass?.data?.token);
     setCookie("access_token", datass?.data?.token);
-    // axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
+    axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
     // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
 
     window.location.href = "/home";
