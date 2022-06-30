@@ -23,6 +23,9 @@ chartjs.register(
   Filler
 );
 const UserTypeChart: FC = () => {
+  const show = <i className="bi bi-plus"></i>;
+  const hide = <i className="bi bi-dash-lg"></i>;
+  const [accordion, setAccordion] = useState(true);
   const [data, setData] = useState({
     labels: [
       "Jan",
@@ -53,26 +56,26 @@ const UserTypeChart: FC = () => {
       <div
         style={{
           ["width" as any]: "100%",
-          ["height" as any]: "430px",
-          ["backgroundColor" as any]: "#f5f5f5",
-          ["border" as any]: "2px solid",
         }}
       >
         <div
           style={{
             ["borderTop" as any]: "3px solid blue",
-            ["borderBottom" as any]: "3px solid #808080",
+            ["borderBottom" as any]: "1px solid #808080",
+            ["borderLeft" as any]: "1px solid",
+            ["borderRight" as any]: "1px solid",
+            ["borderRadius" as any]: "3px",
             ["color" as any]: "white",
             ["backgroundColor" as any]: "#f8f9fa",
             ["display" as any]: "flex",
             ["justifyContent" as any]: "space-between",
           }}
         >
-          <h3
+          <div
             style={{
-              ["fontSize" as any]: "20px",
-              ["padding" as any]: "6px",
+              ["fontSize" as any]: "15px",
               ["color" as any]: "black",
+              paddingLeft: "15px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -80,22 +83,25 @@ const UserTypeChart: FC = () => {
           >
             <span
               style={{
-                ["paddingRight" as any]: "5px",
+                ["paddingRight" as any]: "10px",
                 ["color" as any]: "black",
-                ["fontSize" as any]: "18px",
+                ["fontSize" as any]: "15x",
               }}
             >
-              <i className="bi bi-person-plus-fill"></i>
+              <i className="bi bi-people-fill"></i>
             </span>
-            New Users Added
-          </h3>
+            New Customer Data
+          </div>
           <div style={{ ["padding" as any]: "15px" }}>
             <span style={{ ["padding" as any]: "5px" }}>
               <button
                 style={{
                   ["backgroundColor" as any]: "#00c0ef",
+                  ["color" as any]: "white",
                   ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Day
@@ -105,8 +111,11 @@ const UserTypeChart: FC = () => {
               <button
                 style={{
                   ["backgroundColor" as any]: "#00c0ef",
+                  ["color" as any]: "white",
                   ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Month
@@ -117,17 +126,46 @@ const UserTypeChart: FC = () => {
                 style={{
                   ["backgroundColor" as any]: "#00c0ef",
                   ["borderColor" as any]: "#00acd6",
+                  ["color" as any]: "white",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Year
               </button>
             </span>
+            <span style={{ ["padding-left" as any]: "25px" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "#f5f5f5",
+                  ["color" as any]: "black",
+                  ["padding" as any]: "0px 7px",
+                  ["border" as any]: "none",
+                }}
+                onClick={(e) => setAccordion(!accordion)}
+              >
+                {accordion ? hide : show}
+              </button>
+            </span>
           </div>
         </div>
-        <div style={{ ["padding" as any]: "10px" }}>
-          <Line data={data}></Line>
-        </div>
+        {accordion && (
+          <div
+            style={{
+              ["minHeight" as any]: "350px",
+              ["backgroundColor" as any]: "#f5f5f5",
+              ["border" as any]: "2px",
+              ["borderRadius" as any]: "5px",
+              transition: "all 0.3s ease",
+              // transition: "height 0.3s ease",
+            }}
+          >
+            <div style={{ ["padding" as any]: "10px" }}>
+              <Line data={data}></Line>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
