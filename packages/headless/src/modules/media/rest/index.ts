@@ -5,7 +5,7 @@ import { MediaService } from '../services';
 import { ApiFile } from '../decorators/file.decorator';
 import { UploadFileErrorResponseDto, UploadFileSuccessResponseDto } from '../dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from '../config/storage.config';
+import { multerOptions } from '../utils/storage.config';
 
 @Controller('media')
 @ApiTags('Media API')
