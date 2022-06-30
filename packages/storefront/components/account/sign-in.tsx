@@ -10,6 +10,7 @@ import { storeUserToken } from "toolkit/authSlice";
 import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "../auth/withAuth";
+import Loader from "../global/loader";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -35,7 +36,7 @@ const Signin = () => {
       );
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
-      window.location.href = "/home";
+      router.push("/home");
     }
     catch (err) {
       alert("Invalid User");

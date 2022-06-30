@@ -8,31 +8,43 @@ import { userAPI } from "APIs";
 import { CreateCustomerRequest } from "models";
 import { useState } from "react";
 import withAuth from "../auth/withAuth";
+import Loading from "../global/loader";
 
 const Signup = () => {
   const router = useRouter();
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleSignUp(data: CreateCustomerRequest) {
     try {
+      setLoading(true);
       userAPI.signUp(data).then((response: any) => {
         if (response?.code !== 201) {
           if (response.response.data.error === "CUSTOMER_EMAIL_ALREADY_EXITS") {
+            setLoading(false);
             alert("User with this email already exists");
           } else if (
             response.response.data.error === "CUSTOMER_PHONE_ALREADY_EXITS"
           ) {
+            setLoading(false);
             alert("User with this phone number already exists");
           }
         } else {
-          router.push("/account/sign-in");
+          setTimeout(() => {
+            setLoading(false)
+            router.push("/account/sign-in");
+          }, 1000)
         }
       });
     } catch (error) {
+      setLoading(false);
       alert(error);
     }
   }
 
+  if(loading) {
+    return <Loading />
+  }
   return (
     <>
       <Breadcrumb
