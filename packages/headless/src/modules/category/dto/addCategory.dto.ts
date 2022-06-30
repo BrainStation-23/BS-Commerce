@@ -1,43 +1,11 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
-import { addCategoryErrorMessage, addCategoryErrorResponse, addCategoryRequest, addCategorySuccessResponse, Ancestor, Category, Meta, Photo } from "models";
-
-export class MetaDto implements Meta {
-    @ApiProperty()
-    @ValidateNested()
-    @IsArray()
-    keywords?: [string];
-
-    @ApiProperty()
-    @ValidateNested()
-    @IsString()
-    description?: string;
-
-    @ApiProperty()
-    @ValidateNested()
-    @IsString()
-    title?: string;
-
-    @ApiProperty()
-    @ValidateNested()
-    @IsString()
-    SEFN?: string;
-}
-
-export class PhotoDto implements Photo{
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    url: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    alt: string;
-}
+import { IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
+import { addCategoryErrorMessage, addCategoryErrorResponse, addCategoryRequest, addCategorySuccessResponse } from "models";
+import { CategoryDto, MetaDto, PhotoDto } from "./category.dto";
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { Type } from "class-transformer";
 export class addCategoryRequestDto implements addCategoryRequest {
-
     @ApiProperty()
     @IsString()
     name: string;
@@ -47,7 +15,9 @@ export class addCategoryRequestDto implements addCategoryRequest {
     @IsString()
     parentSlug?: string;
 
-    @ApiProperty()
+    @ApiProperty({ type: PhotoDto })
+    @Type(() => PhotoDto)
+    @CustomValidator(PhotoDto)
     @IsOptional()
     @IsObject()
     photo: PhotoDto;
@@ -83,78 +53,12 @@ export class addCategoryRequestDto implements addCategoryRequest {
     @IsNumber()
     displayOrder?: number;
 
-    @ApiProperty()
+    @ApiProperty({ type: MetaDto })
+    @Type(() => MetaDto)
+    @CustomValidator(MetaDto)
     @IsOptional()
     @IsObject()
     meta?: MetaDto;
-}
-
-export class AncestorDto implements Ancestor {
-    @ApiProperty()
-    @IsNumber()
-    name: string;
-
-    @ApiProperty()
-    @IsArray()
-    slug: string;
-
-    @ApiProperty()
-    @IsNumber()
-    level: number;
-}
-
-export class CategoryDto implements Category {
-    @ApiProperty()
-    @IsString()
-    id: string;
-
-    @ApiProperty()
-    @IsString()
-    name: string;
-
-    @ApiProperty()
-    @IsString()
-    slug: string;
-
-    @ApiProperty()
-    @IsString()
-    description: string;
-
-    @ApiProperty()
-    @IsString()
-    imageId: string;
-
-    @ApiProperty()
-    @IsBoolean()
-    showOnHomePage: boolean;
-
-    @ApiProperty()
-    @IsBoolean()
-    includeInTopMenu: boolean;
-
-    @ApiProperty()
-    @IsBoolean()
-    allowToSelectPageSize: boolean;
-
-    @ApiProperty()
-    @IsBoolean()
-    published: boolean;
-
-    @ApiProperty()
-    @IsNumber()
-    displayOrder: number;
-
-    @ApiProperty()
-    @IsString()
-    rootPath: string;
-
-    @ApiProperty()
-    @IsArray()
-    ancestors: AncestorDto[];
-
-    @ApiProperty()
-    @IsObject()
-    meta: MetaDto;
 }
 
 export class addCategorySuccessResponseDto implements addCategorySuccessResponse {
@@ -162,7 +66,9 @@ export class addCategorySuccessResponseDto implements addCategorySuccessResponse
     @IsNumber()
     code: number;
 
-    @ApiProperty()
+    @ApiProperty({ type: CategoryDto })
+    @Type(() => CategoryDto)
+    @ValidateNested()
     @IsObject()
     data: CategoryDto;
 }

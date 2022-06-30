@@ -1,11 +1,46 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNumber, IsObject, IsString } from "class-validator";
-import { Ancestor, Category, Meta } from "models";
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
+import { Ancestor, Category, Meta, Photo } from "models";
+
+
+export class MetaDto implements Meta {
+    @ApiProperty()
+    @ValidateNested()
+    @IsArray()
+    keywords?: [string];
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    description?: string;
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    title?: string;
+
+    @ApiProperty()
+    @ValidateNested()
+    @IsString()
+    SEFN?: string;
+}
+
+export class PhotoDto implements Photo{
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    url: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    alt: string;
+}
 
 export class AncestorDto implements Ancestor {
     @ApiProperty()
-    @IsString()
+    @IsNumber()
     name: string;
 
     @ApiProperty()
@@ -15,24 +50,6 @@ export class AncestorDto implements Ancestor {
     @ApiProperty()
     @IsNumber()
     level: number;
-}
-
-export class MetaDto implements Meta {
-    @ApiProperty()
-    @IsArray()
-    keywords?: [string];
-
-    @ApiProperty()
-    @IsArray()
-    description: string;
-
-    @ApiProperty()
-    @IsArray()
-    title: string;
-
-    @ApiProperty()
-    @IsArray()
-    SEFN: string;
 }
 
 export class CategoryDto implements Category {
@@ -52,9 +69,11 @@ export class CategoryDto implements Category {
     @IsString()
     description: string;
 
-    @ApiProperty()
-    @IsString()
-    imageId: string;
+    @ApiProperty({ type: PhotoDto })
+    @Type(() => PhotoDto)
+    @IsOptional()
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty()
     @IsBoolean()
@@ -86,6 +105,7 @@ export class CategoryDto implements Category {
     ancestors: AncestorDto[];
 
     @ApiProperty({ type: MetaDto })
+    @Type(()=>MetaDto)
     @IsObject()
     meta: MetaDto;
 }

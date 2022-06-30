@@ -1,12 +1,7 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 import { ProductPhoto } from "src/index";
-import { Category, Meta } from "./category";
-
-export interface Photo{
-    url:string,
-    alt:string,
-}
+import { Category, Meta, Photo } from "./category";
 export interface addCategoryRequest {
     name: string,
     parentSlug?:string,
@@ -19,7 +14,6 @@ export interface addCategoryRequest {
     displayOrder?: number,
     meta?: Meta
 }
-
 export interface addCategorySuccessResponse extends SuccessResponse {
     code: number;
     data: Category;
