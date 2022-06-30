@@ -2,7 +2,12 @@ import { FC } from "react";
 const DateTimeFilter: FC = () => {
   return (
     <>
-      <div className="row">
+      <div
+        className="row"
+        style={{
+          ["padding" as any]: "14px",
+        }}
+      >
         <div className="col-md-6 col-lg-3 col-xl-3">
           <label
             style={{

@@ -53,28 +53,36 @@ const OrderTypeChart: FC = () => {
       <div
         style={{
           ["width" as any]: "100%",
-          ["height" as any]: "500px",
+          ["height" as any]: "430px",
           ["backgroundColor" as any]: "#f5f5f5",
           ["border" as any]: "2px solid",
         }}
       >
         <div
           style={{
-            ["borderBottom" as any]: "3px solid blue",
+            ["borderTop" as any]: "3px solid blue",
+            ["borderBottom" as any]: "3px solid #808080",
             ["color" as any]: "white",
-            ["backgroundColor" as any]: "black",
+            ["backgroundColor" as any]: "#f8f9fa",
             ["display" as any]: "flex",
             ["justifyContent" as any]: "space-between",
           }}
         >
           <h3
-            style={{ ["fontSize" as any]: "20px", ["padding" as any]: "10px" }}
+            style={{
+              ["fontSize" as any]: "20px",
+              ["padding" as any]: "6px",
+              ["color" as any]: "black",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <span
               style={{
                 ["paddingRight" as any]: "5px",
-                ["color" as any]: "white",
-                ["fontSize" as any]: "25px",
+                ["color" as any]: "black",
+                ["fontSize" as any]: "18x",
               }}
             >
               <i className="bi bi-cart"></i>
@@ -85,7 +93,8 @@ const OrderTypeChart: FC = () => {
             <span style={{ ["padding" as any]: "5px" }}>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
                 }}
               >
@@ -95,7 +104,8 @@ const OrderTypeChart: FC = () => {
             <span style={{ ["padding" as any]: "15px" }}>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
                 }}
               >
@@ -105,7 +115,8 @@ const OrderTypeChart: FC = () => {
             <span>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
                 }}
               >
@@ -114,7 +125,7 @@ const OrderTypeChart: FC = () => {
             </span>
           </div>
         </div>
-        <div style={{ ["padding" as any]: "35px" }}>
+        <div style={{ ["padding" as any]: "10px" }}>
           <Line data={data}></Line>
         </div>
       </div>
