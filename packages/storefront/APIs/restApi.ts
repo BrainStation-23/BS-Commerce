@@ -52,6 +52,7 @@ export async function signinRest(
     const res = await axios.post(`${apiEndPoints.login}`, data);
     return res.data;
   } catch (error: any) {
+    toast.error("Some error happend. Try again.")
     return error;
   }
 }

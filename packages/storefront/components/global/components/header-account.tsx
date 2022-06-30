@@ -4,6 +4,7 @@ import CartDropdown from "../../cart/cartDropdown/dropdownCart";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useRouter } from "next/router";
 import { storeUserToken } from "toolkit/authSlice";
+import { toast } from "react-toastify";
 
 interface Properties {}
 
@@ -23,6 +24,7 @@ const HeaderAccount: React.FC<Properties> = (props) => {
     localStorage.clear();
     dispatch(storeUserToken(""));
     window.location.href = "/account/sign-in"
+    toast.success("Logged out successfully!")
   };
 
   const links = [

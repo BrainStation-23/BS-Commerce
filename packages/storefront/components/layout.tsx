@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useAppSelector } from "customHooks/hooks";
 import { useSelector } from "react-redux";
 import Axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout: NextComponentType = ({ children }: any) => {
     let token = useSelector((state: any) => state.persistedReducer.auth.access_token);
@@ -21,6 +23,7 @@ const Layout: NextComponentType = ({ children }: any) => {
             <Header />
             <main>{children}</main>
             <Footer />
+            <ToastContainer position="bottom-right" />
         </>
     );
 };
