@@ -7,7 +7,7 @@ import Breadcrumb from "../global/breadcrumbs/breadcrumb";
 import { userAPI } from "APIs";
 import { CreateCustomerRequest } from "models";
 import { useState } from "react";
-import withAuth from "../auth/withAuth";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const router = useRouter();
@@ -18,18 +18,19 @@ const Signup = () => {
       userAPI.signUp(data).then((response: any) => {
         if (response?.code !== 201) {
           if (response.response.data.error === "CUSTOMER_EMAIL_ALREADY_EXITS") {
-            alert("User with this email already exists");
+            toast.warning("User with this email already exists");
           } else if (
             response.response.data.error === "CUSTOMER_PHONE_ALREADY_EXITS"
           ) {
-            alert("User with this phone number already exists");
+            toast.warning("User with this phone number already exists");
           }
         } else {
+          toast.success("User created successfully!")
           router.push("/account/sign-in");
         }
       });
     } catch (error) {
-      alert(error);
+      toast.error("User creation failed. Try again.");
     }
   }
 

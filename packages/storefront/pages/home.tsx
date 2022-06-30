@@ -6,8 +6,6 @@ import { storeAllCartItems } from "toolkit/cartSlice";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useEffect } from "react";
 var cookie = require("cookie");
-import Axios from "axios";
-
 
 const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) => {
   const dispatch = useAppDispatch();
@@ -21,7 +19,9 @@ const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) =>
   }, []);
 
   return (
-    <HomeComponent products={products} featuredProducts={featuredProducts} />
+    <>
+      <HomeComponent products={products} featuredProducts={featuredProducts} />
+    </>
   );
 };
 

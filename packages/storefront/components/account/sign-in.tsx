@@ -35,28 +35,12 @@ const Signin = () => {
       );
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
-      window.location.href = "/home";
+      router.push("/home");
+      toast.success("Logged in successfully!")
     }
     catch (err) {
-      alert("Invalid User");
+      toast.error("Invalid username or password.");
     }
-  
-    
-    // userAPI.signIn(data).then((response: any) => {
-    //   if (response?.code != 200) {
-    //     alert(response.response.data.error);
-    //   } else {
-    //     // dispatch(storeUserToken(response?.data.token));
-    //     // // let expires = new Date();
-    //     // // expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
-    //     // // setCookie("access_token", response?.data.token, { path: "/", expires });
-    //     // res.setHeader('Set-Cookie', cookie.serialize('name', String(query.name), {
-    //     //   httpOnly: true,
-    //     //   maxAge: 60 * 60 * 24 * 7 // 1 week
-    //     // }));
-
-    //     window.location.href = "/home";
-    //   }
   }
 
   return (
@@ -108,18 +92,6 @@ const Signin = () => {
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    {/* <div className="mb-4">
-                      <Field
-                        type="text"
-                        className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
-                      />
-                      <div className="errMsg text-red-600 outline-0">
-                        <ErrorMessage name="username" />
-                      </div>
-                    </div> */}
 
                     <div className="mb-4">
                       <Field
