@@ -138,5 +138,8 @@ export class BrandController {
 
     res.status(code);
     return response;
+  
+  
   }
+
 }

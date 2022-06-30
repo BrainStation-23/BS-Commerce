@@ -162,7 +162,6 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .get('/brands')
         .expect(res => {
-            console.log(res.body.data)
             expect(res.statusCode).toBe(200);
             expect(res.body.data).toEqual(
                 expect.arrayContaining([
@@ -328,7 +327,7 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .put(`/brands/${brandId}`)
         .send(invalidBrandRequestWithoutName)
-        .expect(500)
+        .expect(400)
     });
 
 
