@@ -19,30 +19,40 @@ const HeaderAccount: React.FC<Properties> = (props) => {
     (state) => state.persistedReducer.auth.access_token
   );
 
+  const user = useAppSelector((state) => state.persistedReducer.user.user);
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(""));
-    window.location.href = "/account/sign-in"
   };
 
   const links = [
     { name: "Register", link: "/account/sign-up" },
     { name: "Login", link: "/account/sign-in" },
     { name: "Wishlist", link: "/wishlist" },
-    { name: "Logout", link: "/home" },
+    { name: "Logout", link: "/account/sign-in" },
+    { name: `${user}`, link: "/home"},
   ];
   return (
     <div className="flex flex-row items-center gap-x-3">
       <span className="uppercase my-0">
         {token !== "" ? (
-          <Link href={links[0].link}>
-            <a
-              onClick={() => handleLogout()}
-              className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
-            >
-              {links[3].name}
-            </a>
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link href={links[4].link}>
+              <a
+                className="hover:text-green-600 normal-case transition-all duration-100 ease-linear cursor-pointer"
+              >
+                {links[4].name}
+              </a>
+            </Link>
+            <Link href={links[3].link}>
+              <a
+                onClick={() => handleLogout()}
+                className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+              >
+                {links[3].name}
+              </a>
+            </Link>
+          </div>
         ) : (
           <>
             <Link href={links[0].link}>

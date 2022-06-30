@@ -7,6 +7,9 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
+  GetCustomerErrorResponse,
+  GetCustomerQuery,
+  GetCustomerResponse,
   updateCartItemRequest,
   updateCartItemResponse,
 } from "models";
@@ -41,6 +44,17 @@ export async function getUserRest(): Promise<User[] | undefined> {
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getSignedInUserRest(
+  isEmail: boolean, data: GetCustomerQuery
+): Promise< GetCustomerResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getSignedInUser}${ isEmail ? `?email=${data.email}` : `?phone=${data.phone}`}`)
+    return res.data;
+  } catch(error: any) {
     return error;
   }
 }

@@ -10,6 +10,8 @@ import { storeUserToken } from "toolkit/authSlice";
 import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "../auth/withAuth";
+import { useState } from "react";
+import { storeUserDetails } from "toolkit/userSlice";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -18,30 +20,46 @@ var url = require("url");
 
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
+
   const dispatch = useDispatch();
   const router = useRouter();
 
+  let username = "";
+  let loggedInUsingEmail = false;
+
+  function getUser() {
+    let data = {};
+    loggedInUsingEmail
+      ? (data = {
+          email: username,
+          phone: "",
+        })
+      : (data = {
+          email: "",
+          phone: username,
+        });
+    userAPI
+      .getSignedInUser(loggedInUsingEmail, data)
+      .then((response) => {dispatch(storeUserDetails(loggedInUsingEmail ? response?.data?.email : response?.data?.phone))});
+  }
+
   async function handleSignin(data: CustomerSignInRequest) {
-    try{
-      const token = await fetch(
-        "http://localhost:3002/api/signin",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+    try {
+      const token = await fetch("http://localhost:3002/api/signin", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
+      getUser();
       window.location.href = "/home";
-    }
-    catch (err) {
+    } catch (err) {
       alert("Invalid User");
     }
-  
-    
+
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {
     //     alert(response.response.data.error);
@@ -91,15 +109,19 @@ const Signin = () => {
                 let data = {};
                 let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
                 const isEmail = regex.test(values.username);
+                username = values.username;
+                isEmail
+                  ? (loggedInUsingEmail = true)
+                  : (loggedInUsingEmail = false);
                 isEmail
                   ? (data = {
                       email: values.username,
                       password: values.password,
                     })
-                  : data = {
+                  : (data = {
                       phone: values.username,
                       password: values.password,
-                    };
+                    });
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
