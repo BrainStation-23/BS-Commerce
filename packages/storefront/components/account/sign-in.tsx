@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { storeUserToken } from "toolkit/authSlice";
 import { useRouter } from "next/router";
 import { storeUserDetails } from "toolkit/userSlice";
+import { useState } from "react";
+import Loading from "../global/loader";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -17,6 +19,7 @@ var url = require("url");
 
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
+  const [loader, setLoader] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,6 +45,7 @@ const Signin = () => {
 
   async function handleSignin(data: CustomerSignInRequest) {
     try {
+      setLoader(true);
       const token = await fetch("http://localhost:3002/api/signin", {
         method: "POST", // or 'PUT'
         headers: {
@@ -52,14 +56,18 @@ const Signin = () => {
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
-      router.push("/home");
-      toast.success("Logged in successfully!")
+      setTimeout(() => {
+        setLoader(false);
+        router.push("/home");
+        toast.success("Logged in successfully!")
+      }, 1000)
     }
     catch (err) {
+      setLoader(false);
       toast.error("Invalid username or password.");
     }
   }
-
+  if(loader) return <Loading />
   return (
     <>
       <Breadcrumb
