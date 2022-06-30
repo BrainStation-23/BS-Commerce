@@ -1,5 +1,5 @@
 import { GET_PRODUCTS } from "graphqlSchema/queries/productQueries";
-import { addToCartRequest, AddToCartResponse, Cart, deleteCartItemRequest, deleteCartItemResponse, GetCustomerAllProductsResponse } from "models";
+import { addToCartRequest, AddToCartResponse, Cart, deleteCartItemRequest, deleteCartItemResponse, GetCustomerAllProductsResponse, GetCustomerQuery, GetCustomerResponse } from "models";
 import { GetCustomerProductResponse } from "models";
 import { CustomerSignInResponse } from "models";
 import { CreateCustomerRequest } from "models";
@@ -49,5 +49,9 @@ export async function addToCartGraphql(productId: addToCartRequest): Promise<Add
   return undefined;
 }
 export async function deleteCartItemGraphql(productId:deleteCartItemRequest): Promise<deleteCartItemResponse | undefined> {
+  return undefined;
+}
+
+export async function getSignedInUserGraphql(isEmail: boolean, data: GetCustomerQuery): Promise<GetCustomerResponse | undefined> {
   return undefined;
 }
