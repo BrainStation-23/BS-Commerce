@@ -1,7 +1,7 @@
+import { NextComponentType } from "next";
 import React from "react";
 import Link from "next/link";
 import { SwiperSlide } from "swiper/react";
-import { Product } from "models";
 
 import "swiper/css";
 import "swiper/css/grid";
@@ -10,14 +10,14 @@ import "swiper/css/pagination";
 
 import Banner from "./banner";
 import ProductRow from "./productRow.component";
-import SwiperGrid from "../../global/components/swipergrid";
-import Container from "../../global/components/container";
+import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from "@/components/global/components/container";
+import { useAppSelector } from "customHooks/hooks";
 
-interface Products {
-  products: Product[];
-}
-
-const BestSell = ({ products }: Products) => {
+const BestSell: NextComponentType = () => {
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -44,7 +44,7 @@ const BestSell = ({ products }: Products) => {
               slidesPerView768={1}
               slidesPerView980={2}
               rows={1}
-              loop={products.length > getMinimumProduct() ? true : false}
+              loop={products?.length > getMinimumProduct() ? true : false}
             >
               {products &&
                 products.length > 0 &&
@@ -68,11 +68,11 @@ const BestSell = ({ products }: Products) => {
                           products={[
                             products[index],
                             index % 3 === 1 &&
-                              products.length > getMinimumProduct()
+                            products.length > getMinimumProduct()
                               ? products[0]
                               : null,
                             (index % 3 === 0 || index % 3 === 1) &&
-                              products.length > getMinimumProduct()
+                            products.length > getMinimumProduct()
                               ? products[1]
                               : null,
                           ]}
