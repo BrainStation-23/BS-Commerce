@@ -10,11 +10,9 @@ export class CategoryDatabase implements ICategoryDatabase {
         return name.replace(/\s+/g, '-').toLowerCase();
     };
 
-    // need to receive another parameter named imageId
     async addCategory(requestCategory: RequestCategory): Promise<Category | null> {
         let newCategory = new CategoryModel(requestCategory);
         newCategory.slug = this.getSlug(requestCategory.name);
-        // newCategory.imageId = imageId;
         
         if (requestCategory.parentSlug) {
             const parentCategory = await CategoryModel.findOne({ slug: requestCategory.parentSlug }).lean();
