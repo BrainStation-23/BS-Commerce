@@ -6,22 +6,22 @@ import { Ancestor, Category, Meta, Photo } from "models";
 
 export class MetaDto implements Meta {
     @ApiProperty()
-    @ValidateNested()
+    @IsOptional()
     @IsArray()
     keywords?: [string];
 
     @ApiProperty()
-    @ValidateNested()
+    @IsOptional()
     @IsString()
     description?: string;
 
     @ApiProperty()
-    @ValidateNested()
+    @IsOptional()
     @IsString()
     title?: string;
 
     @ApiProperty()
-    @ValidateNested()
+    @IsOptional()
     @IsString()
     SEFN?: string;
 }
