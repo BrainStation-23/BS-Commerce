@@ -1,24 +1,9 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, CartProduct, deleteAllCartItemsErrorMessage, ResponseItem, deleteAllCartItemsErrorResponse, deleteAllCartItemsSuccessResponse } from "models";
+import { deleteAllCartItems, deleteAllCartItemsErrorMessage, deleteAllCartItemsErrorResponse, deleteAllCartItemsSuccessResponse } from "models";
 
-class ResponseItemDto implements ResponseItem{
-    @ApiProperty()
-    @IsOptional()
-    @IsObject()
-    product?: CartProduct;
-
-    @ApiProperty()
-    @IsString()
-    productId: string;
-
-    @ApiProperty()
-    @IsNumber()
-    quantity: number;
-}
-
-class CartDto implements Cart {
+class deleteAllCartItemsDto implements deleteAllCartItems {
     @ApiProperty()
     @IsString()
     id?: string;
@@ -30,7 +15,7 @@ class CartDto implements Cart {
     @ApiProperty()
     @IsOptional()
     @IsArray()
-    items?:ResponseItemDto[];
+    items?: [];
 }
 
 export class deleteAllCartItemsSuccessResponseDto implements deleteAllCartItemsSuccessResponse {
@@ -40,7 +25,7 @@ export class deleteAllCartItemsSuccessResponseDto implements deleteAllCartItemsS
 
     @ApiProperty()
     @IsObject()
-    data: CartDto;
+    data: deleteAllCartItemsDto;
 }
 
 export class deleteAllCartItemsErrorResponseDto implements deleteAllCartItemsErrorResponse {
