@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { userAPI } from "../../APIs";
-import Tooltips from "../global/tooltip";
 // import { searchProductSchema } from "./schema/productSchema";
 import { Product } from "models";
 import { toast } from "react-toastify";
@@ -68,7 +67,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                         >
                           Go directly to product SKU
                         </label>
-                        <Tooltips title="Enter product SKU and click Go." />
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -93,7 +91,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                           type="submit"
                           id="goToProductBySku"
                           name="goToProductBySku"
-                          className="btn btn-info btn-flat my-2  rounded-end rounded-0 "
+                          className="btn btn-primary btn-flat my-2  rounded-end rounded-0 "
                         >
                           Go
                         </button>
@@ -125,7 +123,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Product name
                               </label>
-                              <Tooltips title="A product name." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -149,7 +146,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Category
                               </label>
-                              <Tooltips title="Search by a specific category." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -206,7 +202,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Search subcategories
                               </label>
-                              <Tooltips title="Check to search in subcategories." />
                             </div>
                           </div>
                           <div className="col-md-8 my-2">
@@ -230,7 +225,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Manufacturer
                               </label>
-                              <Tooltips title="Search by a specific manufacturer." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -259,7 +253,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Vendor
                               </label>
-                              <Tooltips title="Search by a specific vendor." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -286,7 +279,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Warehouse
                               </label>
-                              <Tooltips title="Search by a specific warehouse." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -316,7 +308,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Product type
                               </label>
-                              <Tooltips title="Search by a product type." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -346,7 +337,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Published
                               </label>
-                              <Tooltips title='Search by a "Published" property.' />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -374,7 +364,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Go directly to product SKU
                               </label>
-                              <Tooltips title="Enter product SKU and click Go." />
                             </div>
                           </div>
                           <div className="col-md-8 ps-4 ">

@@ -1,6 +1,5 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
-import Tooltips from "../../global/tooltip";
 
 const PhotosForm = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -57,7 +56,6 @@ const PhotosForm = () => {
                   >
                     URL
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -81,7 +79,6 @@ const PhotosForm = () => {
                   <label className="col-form-label col px-1" htmlFor="photosID">
                     ID
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -108,7 +105,6 @@ const PhotosForm = () => {
                   >
                     Title
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -135,7 +131,6 @@ const PhotosForm = () => {
                   >
                     Display Order
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">

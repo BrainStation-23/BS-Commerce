@@ -1,7 +1,5 @@
-import Tooltips from "../global/tooltip";
-
 const SingleView = (props: any) => {
-  const { label, value, toolkitMessage } = props;
+  const { label, value } = props;
 
   return (
     <>
@@ -11,7 +9,6 @@ const SingleView = (props: any) => {
             <label className="col-form-label col pe-2 fw-bold" htmlFor="brands">
               {label}
             </label>
-            <Tooltips title={toolkitMessage} />
           </div>
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">

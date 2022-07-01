@@ -1,6 +1,5 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
-import Tooltips from "../../global/tooltip";
 import CustomSelect from "../CustomSelect.component";
 
 const MetaForm = () => {
@@ -70,7 +69,6 @@ const MetaForm = () => {
                   <label className="col-form-label col px-1" htmlFor="keywords">
                     Keywords
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -119,7 +117,6 @@ const MetaForm = () => {
                   >
                     Title
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -145,7 +142,6 @@ const MetaForm = () => {
                   >
                     Description
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -170,9 +166,8 @@ const MetaForm = () => {
                     className="col-form-label col px-1"
                     htmlFor="metaFriendlyPageName"
                   >
-                    Friendly Page Name
+                    Friendly Page Name<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -183,9 +178,6 @@ const MetaForm = () => {
                     id="metaFriendlyPageName"
                     name="metaFriendlyPageName"
                   />
-                  <div className="pt-2" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="metaFriendlyPageName" />

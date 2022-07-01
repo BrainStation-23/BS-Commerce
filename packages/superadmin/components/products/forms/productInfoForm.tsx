@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { Field, ErrorMessage } from "formik";
 
-import Tooltips from "../../global/tooltip";
 import CustomSelect from "../CustomSelect.component";
 
 const ProductInfoForm: FC = () => {
@@ -98,21 +97,20 @@ const ProductInfoForm: FC = () => {
                 <div className="col-md-3">
                   <div className="label-wrapper row row-cols-auto float-md-end">
                     <label className="col-form-label col px-1" htmlFor="Name">
-                      Product name
+                      Product name<span className="required text-danger ">*</span>
                     </label>
-                    <Tooltips title="The name of the product." />
                   </div>
                 </div>
                 <div className="col-md-9">
                   <div className="input-group input-group-required">
                     <Field
-                      className="form-control text-box single-line"
+                      className="w-50 form-control border border-primary border-0 border-bottom active:border-0 shadow  "
                       id="productName"
                       name="productName"
-                      type="text"
+                      as=""
                     />
                     <div className="pt-2" style={{ height: "10px" }}>
-                      <h2 className="required text-danger ">*</h2>
+                      
                     </div>
                   </div>
                   <div className="errMsg text-red-600 text-danger">
@@ -129,7 +127,6 @@ const ProductInfoForm: FC = () => {
                     >
                       Short description
                     </label>
-                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -155,7 +152,6 @@ const ProductInfoForm: FC = () => {
                     >
                       Full description
                     </label>
-                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -176,9 +172,8 @@ const ProductInfoForm: FC = () => {
                 <div className="col-md-3">
                   <div className="label-wrapper text-start text-md-end row">
                     <label className="col-form-label col px-1" htmlFor="Sku">
-                      SKU
+                      SKU<span className="required text-danger ">*</span>
                     </label>
-                    <Tooltips title="Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -190,9 +185,7 @@ const ProductInfoForm: FC = () => {
                       type="text"
                     />
 
-                    <div className="pt-2" style={{ height: "10px" }}>
-                      <h2 className="required text-danger ">*</h2>
-                    </div>
+                    
                   </div>
                   <div className="errMsg text-red-600 text-danger">
                     <ErrorMessage name="Sku" />
@@ -205,9 +198,8 @@ const ProductInfoForm: FC = () => {
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end py-2">
                   <label className="col-form-label col px-1" htmlFor="Price">
-                    Price
+                    Price<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="The price of the product. You can manage currency by selecting Configuration > Currencies." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -219,9 +211,7 @@ const ProductInfoForm: FC = () => {
                     className="form-control"
                   />
 
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
+                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="OldPrice" />
@@ -232,9 +222,8 @@ const ProductInfoForm: FC = () => {
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end py-2">
                   <label className="col-form-label col px-1" htmlFor="OldPrice">
-                    Old price
+                    Old price<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="The old price of the product. If you set an old price, this will display alongside the current price on the product page to show the difference in price." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -247,9 +236,7 @@ const ProductInfoForm: FC = () => {
                     className="form-control"
                   />
 
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
+                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="OldPrice" />
@@ -263,9 +250,8 @@ const ProductInfoForm: FC = () => {
                     className="col-form-label col px-1"
                     htmlFor="ProductCost"
                   >
-                    Product cost
+                    Product cost<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -278,9 +264,7 @@ const ProductInfoForm: FC = () => {
                     className="form-control"
                   />
 
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
+                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="ProductCost" />
@@ -297,7 +281,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Show on HomePage
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -322,7 +305,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Include on top menu
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -347,7 +329,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Allow to select page size
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -371,7 +352,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Published
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -396,7 +376,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Display Order
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -424,7 +403,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Featured
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -449,7 +427,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Publlish Date
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -472,9 +449,8 @@ const ProductInfoForm: FC = () => {
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="tags">
-                    Tags
+                    Tags<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -505,9 +481,8 @@ const ProductInfoForm: FC = () => {
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="brands">
-                    Brands
+                    Brands<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">

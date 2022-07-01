@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ErrorMessage, Field } from "formik";
 import { toast } from "react-toastify";
 
-import Tooltips from "../../global/tooltip";
 
 const CategoryForm = (props: any) => {
   const { setCategoryData, categoryData, setFieldValue } = props;
@@ -99,9 +98,8 @@ const CategoryForm = (props: any) => {
                     htmlFor="SelectedCategoryIds"
                     id="SelectedCategoryIds_label"
                   >
-                    Categories
+                    Categories<span className="required text-danger ">*</span>
                   </label>
-                  <Tooltips title="Choose categories. You can manage product categories by selecting Catalog > Categories." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -129,9 +127,6 @@ const CategoryForm = (props: any) => {
                       );
                     })}
                   </Field>
-                  <div className="pt-2" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="SelectedCategoryIds" />
@@ -147,7 +142,6 @@ const CategoryForm = (props: any) => {
                   >
                     Featured
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -172,7 +166,6 @@ const CategoryForm = (props: any) => {
                   >
                     Display Order
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
