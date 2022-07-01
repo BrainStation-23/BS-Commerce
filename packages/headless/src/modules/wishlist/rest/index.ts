@@ -12,6 +12,9 @@ import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
   AddToWishlistSuccessResponseDto,
+  deleteWishlistErrorResponseDto,
+  deleteWishlistPramsDto,
+  deleteWishlistSuccessResponseDto,
   getUserWishlistErrorResponseDto,
   getUserWishlistSuccessResponseDto,
 } from '../dto';
@@ -79,9 +82,19 @@ export class WishListController {
     return response;
   }
 
-  @Delete(':wishlistId')
-  async deleteWishlist(@Param('wishlistId') wishlistId: string, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlist(wishlistId);
+  @Delete('wishlist/:wishlistId')
+  @ApiResponse({
+    description: 'Delete Wishlist Success Response',
+    type: deleteWishlistSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Delete Wishlist Error Response',
+    type: deleteWishlistErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async deleteWishlist(@Param() params: deleteWishlistPramsDto, @Res({ passthrough: true }) res: Response,) {
+    const { code, ...response } = await this.wishListService.deleteWishlist(params.wishlistId);
     res.status(code);
     return response;
   }

@@ -8,6 +8,9 @@ import {
   AddToWishlistResponse,
   getUserWishlistErrorMessage,
   getUserWishlistResponse,
+  deleteWishlistErrorMessage,
+  deleteWishlistSuccessMessage,
+  deleteWishlistResponse,
 } from 'models';
 
 @Injectable()
@@ -40,10 +43,10 @@ export class WishListService {
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
-  async deleteWishlist(wishlistId: string): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async deleteWishlist(wishlistId: string): Promise<deleteWishlistResponse> {
     const wishList = await this.wishListRepo.deleteWishlist(wishlistId);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t delete Wishlist.', null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
+    if (!wishList) return this.helper.serviceResponse.errorResponse(deleteWishlistErrorMessage.CAN_NOT_DELETE_WISHLIST, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({message: deleteWishlistSuccessMessage.WISHLIST_DELETED_SUCCESSFUL}, HttpStatus.OK);
   }
 
   async updateWishlistItem(item: WishlistItem, userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {

@@ -17,7 +17,7 @@ import {
 } from '../dto';
 
 @Controller('user')
-@ApiTags('User Profile API')
+@ApiTags('Admin Profile API')
 @Roles('admin')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiBearerAuth()
