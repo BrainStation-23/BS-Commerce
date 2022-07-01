@@ -1,23 +1,26 @@
 import { ErrorMessage, Field } from "formik";
-import { useState } from "react";
-import CustomSelect from "../CustomSelect.component";
 
-const FieldTemplate = () => {
+const FieldTemplate = (props: any) => {
+  const { label, isRequired, fieldName, fieldType, fieldClass, extraClass } =
+    props;
+
   return (
     <>
       <div className="form-group row my-2">
         <div className="col-md-3">
           <div className="label-wrapper row row-cols-auto float-md-end">
-            <label className="col-form-label col px-1" htmlFor="Name">
+            <label className="col-form-label col px-1" htmlFor={fieldName}>
               {label}
-              <span className="required text-danger ">*</span>
+              {isRequired ? (
+                <span className="required text-danger ">*</span>
+              ) : null}
             </label>
           </div>
         </div>
         <div className="col-md-9">
-          <div className="input-group input-group-required">
+          <div className="input-group">
             <Field
-              className="w-50 form-control border border-primary border-0 border-bottom active:border-0 shadow  "
+              className={`${fieldClass}`}
               id={fieldName}
               name={fieldName}
               as={fieldType}

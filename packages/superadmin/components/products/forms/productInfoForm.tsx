@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Field, ErrorMessage } from "formik";
 
 import CustomSelect from "../CustomSelect.component";
+import FieldTemplate from "./fieldTemplate";
 
 const ProductInfoForm: FC = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -81,7 +82,7 @@ const ProductInfoForm: FC = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-info-lg col-1 "
-                style={{ fontSize: "25px"}}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Product info</div>
               <div className="col-1">
@@ -93,32 +94,23 @@ const ProductInfoForm: FC = () => {
         <div className="collapse " id="prouctInfoTab">
           <div className="card-body">
             <div id="product-details-area">
-              <div className="form-group row my-2">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end">
-                    <label className="col-form-label col px-1" htmlFor="Name">
-                      Product name<span className="required text-danger ">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <div className="input-group input-group-required">
-                    <Field
-                      className="w-50 form-control border border-primary border-0 border-bottom active:border-0 shadow  "
-                      id="productName"
-                      name="productName"
-                      as=""
-                    />
-                    <div className="pt-2" style={{ height: "10px" }}>
-                      
-                    </div>
-                  </div>
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="productName" />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group row my-2">
+              <FieldTemplate
+                label="Product name"
+                isRequired={true}
+                fieldName="productName"
+                fieldType=""
+                extraClass=""
+                fieldClass="w-50 form-control border border-primary border-0 border-bottom active:border-0 shadow "
+              />
+              <FieldTemplate
+                label="Short description"
+                isRequired={false}
+                fieldName="ShortDescription"
+                fieldType="textarea"
+                extraClass=""
+                fieldClass="w-50 form-control border border-primary border-0 border-bottom active:border-0 shadow "
+              />
+              {/* <div className="form-group row my-2">
                 <div className="col-md-3">
                   <div className="label-wrapper row row-cols-auto float-md-end">
                     <label
@@ -142,7 +134,7 @@ const ProductInfoForm: FC = () => {
                     <ErrorMessage name="ShortDescription" />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="form-group row my-2">
                 <div className="col-md-3">
                   <div className="label-wrapper row row-cols-auto float-md-end">
@@ -184,8 +176,6 @@ const ProductInfoForm: FC = () => {
                       name="Sku"
                       type="text"
                     />
-
-                    
                   </div>
                   <div className="errMsg text-red-600 text-danger">
                     <ErrorMessage name="Sku" />
@@ -210,8 +200,6 @@ const ProductInfoForm: FC = () => {
                     name="Price"
                     className="form-control"
                   />
-
-                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="OldPrice" />
@@ -235,8 +223,6 @@ const ProductInfoForm: FC = () => {
                     aria-disabled="false"
                     className="form-control"
                   />
-
-                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="OldPrice" />
@@ -263,8 +249,6 @@ const ProductInfoForm: FC = () => {
                     aria-disabled="false"
                     className="form-control"
                   />
-
-                  
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="ProductCost" />
