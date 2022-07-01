@@ -4,6 +4,9 @@ import { UserService } from '../services';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
 import { Response } from 'express';
+import { Roles } from 'src/decorators/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/guards/auth.guard';
 import {
   ChangePasswordDto,
   UpdatedUserDto,
@@ -12,13 +15,10 @@ import {
   ChangePasswordSuccessResponseDto,
   ChangePasswordErrorResponseDto
 } from '../dto';
-import { Roles } from 'src/decorators/roles.decorator';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('user')
 @ApiTags('User Profile API')
-@Roles('user')
+@Roles('admin')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiBearerAuth()
 export class UserController {

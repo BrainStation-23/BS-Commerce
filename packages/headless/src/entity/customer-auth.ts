@@ -9,4 +9,5 @@ export class CustomerJwtPayload {
     email: string;
     phone: string;
     logInTime: number;
+    userType: string;
 }

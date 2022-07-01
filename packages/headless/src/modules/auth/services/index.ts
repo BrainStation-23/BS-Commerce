@@ -50,7 +50,7 @@ export class AuthService {
       id: user.id,
       username: user.username,
       logInTime: Date.now(),
-      userType: 'user'
+      userType: 'admin'
     };
 
     const token = this.jwtService.sign(payload);

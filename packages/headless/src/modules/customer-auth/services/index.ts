@@ -60,6 +60,7 @@ export class CustomerAuthService {
       email: customer.email,
       phone: customer.phone,
       logInTime: Date.now(),
+      userType: 'customer'
     };
 
     const token = this.jwtService.sign(payload);

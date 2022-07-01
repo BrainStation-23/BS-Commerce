@@ -3,18 +3,20 @@ import { WishlistItem } from 'src/entity/wishList';
 import { Response } from 'express';
 import { WishListService } from '../services';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
   AddToWishlistSuccessResponseDto
 } from '../dto';
-import { CustomerJwtAuthGuard } from 'src/modules/customer-auth/guards/auth.guard';
 
 @Controller('wishlist')
-@UseGuards(new CustomerJwtAuthGuard('customer'))
+@Roles('customer')
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiBearerAuth()
 @ApiTags('Customer Wishlist API')
 export class WishListController {
