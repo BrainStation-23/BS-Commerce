@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import type { AddCompareItem, CompareData, CompareItems } from 'models';
+import type { AddCompareItem, CompareData, ICompareItems } from 'models';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 
 export class AddToCompareDto implements AddCompareItem {
@@ -12,7 +12,7 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class CompareItemsDto implements CompareItems {
+export class CompareItemsDto implements ICompareItems {
   @ApiProperty()
   productId: string;
 }
@@ -26,6 +26,6 @@ export class CompareDataDto implements CompareData {
   userId: string;
   @ApiProperty({ type: () => [CompareItemsDto] })
   @Expose()
-  items: CompareItems[];
+  items: ICompareItems[];
 }
 export type CompareResponse<T> = IServiceResponse<T>;

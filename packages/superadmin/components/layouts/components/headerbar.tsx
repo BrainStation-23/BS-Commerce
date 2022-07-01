@@ -11,7 +11,7 @@ interface Props {
   displayName: string;
 }
 
-const HeaderBar: FC<Props> = ({
+const Headerbar: FC<Props> = ({
   toggleSidebar,
   showSidebar,
   displayName,
@@ -55,4 +55,4 @@ const HeaderBar: FC<Props> = ({
   );
 };
 
-export default HeaderBar;
+export default Headerbar;

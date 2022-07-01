@@ -1,28 +1,28 @@
+import { NextComponentType } from "next";
+import React from "react";
+import Link from "next/link";
 import { SwiperSlide } from "swiper/react";
 
-import ProductShow from "./product";
-import productData from "../../../allData/product-data.json";
-import SwiperGrid from "../../global/components/swipergrid";
-
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/grid";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 import Banner from "./banner";
-import Container from "../../global/components/container";
-import Link from "next/link";
-import { Product } from "models";
+import ProductRow from "./productRow.component";
+import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from "@/components/global/components/container";
+import { useAppSelector } from "customHooks/hooks";
 
-interface Products {
-  products: Product[]
-}
-
-const BestSell = ({products} : Products) => {
-  const getMinimumProduct =()=>{
+const BestSell: NextComponentType = () => {
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
+  const getMinimumProduct = () => {
     const w = window.innerWidth;
-    if(w>=980) return 6;
+    if (w >= 980) return 6;
     return 3;
-  }
+  };
   return (
     <>
       <Container className="">
@@ -43,16 +43,44 @@ const BestSell = ({products} : Products) => {
               slidesPerViewmobile={1}
               slidesPerView768={1}
               slidesPerView980={2}
-              rows={3}
-              loop={products.length>getMinimumProduct() ? true : false}
+              rows={1}
+              loop={products?.length > getMinimumProduct() ? true : false}
             >
               {products &&
                 products.length > 0 &&
-                products.map((product: any, index: number) => (
-                  <SwiperSlide key={product.id} className="">
-                    <ProductShow product={product} />
-                  </SwiperSlide>
-                ))}
+                products.map((product: any, index: number) =>
+                  index % 3 === 2 ? (
+                    <React.Fragment key={product?.id + products[index - 1]?.id}>
+                      <SwiperSlide>
+                        <ProductRow
+                          products={[
+                            products[index - 2],
+                            products[index - 1],
+                            products[index],
+                          ]}
+                        />
+                      </SwiperSlide>
+                    </React.Fragment>
+                  ) : index + 1 === products.length ? (
+                    <React.Fragment key={product?.id + products[index - 1]?.id}>
+                      <SwiperSlide>
+                        <ProductRow
+                          products={[
+                            products[index],
+                            index % 3 === 1 &&
+                            products.length > getMinimumProduct()
+                              ? products[0]
+                              : null,
+                            (index % 3 === 0 || index % 3 === 1) &&
+                            products.length > getMinimumProduct()
+                              ? products[1]
+                              : null,
+                          ]}
+                        />
+                      </SwiperSlide>
+                    </React.Fragment>
+                  ) : null
+                )}
             </SwiperGrid>
           </div>
         </div>

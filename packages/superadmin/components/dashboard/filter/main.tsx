@@ -10,7 +10,6 @@ const DateTimeFilter: FC = () => {
   const currentTime = `${new Date().getHours}: ${
     new Date().getMinutes
   }: ${"00"}`;
-  console.log(currentTime);
   const [startDate, setStartDate] = useState(previousDay);
   const [startTime, setStartTime] = useState(previousTime);
   const [endDate, setEndDate] = useState(new Date());
