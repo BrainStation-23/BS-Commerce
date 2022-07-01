@@ -359,7 +359,7 @@ describe('Initializing Brand controller testing', () => {
 
     it('DELETE BRAND [INVALID ID]', async () => {
             return await request(app.getHttpServer())
-            .delete(`/brands/${brandId}`)
+            .delete(`/brands/${invalidBrandId}`)
             .expect(400)
     });
 
