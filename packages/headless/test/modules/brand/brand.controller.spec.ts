@@ -139,10 +139,11 @@ describe('Initializing Brand controller testing', () => {
         await connectTestDatabase();
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
-            providers: [{ 
-                provide: BrandController, 
-                useValue: createMock<BrandController>()
-            }],
+            
+            // providers: [{ 
+            //     provide: BrandController, 
+            //     useValue: createMock<BrandController>()
+            // }],
         })
         .compile();
 
@@ -219,7 +220,7 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
         .send(invalidBrandRequestTypes)
-        .expect(500)
+        .expect(400)
     });
     
     it('/POST CREATE NEW BRAND [INVALID DATA INFO OBJ MISSING]',async () => {
@@ -247,7 +248,6 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .get(`/brands/${brandId}`)
         .expect(res => {
-            console.log(res.body.data);
             expect(res.statusCode).toBe(200)
             expect(res.body.data).toMatchObject({
                 id: expect.any(String),
@@ -278,7 +278,6 @@ describe('Initializing Brand controller testing', () => {
     it('/PUT UPDATE BRAND WITH ID [VALID ID]', async () => {
             return await request(app.getHttpServer())
             .put(`/brands/${brandId}`)
-            // .put(`/brands/830c3e19-4210-4465-9d4c-167ce18099b0`)
             .send(updateBrandRequest)
             .expect(res => {
                 expect(res.statusCode).toBe(200)
@@ -335,7 +334,6 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .delete(`/brands/${brandId}`)
         .expect(res => {
-            console.log(res.body.data);
             expect(res.statusCode).toBe(200)
             expect(res.body.data).toMatchObject({
                 id: expect.any(String),
