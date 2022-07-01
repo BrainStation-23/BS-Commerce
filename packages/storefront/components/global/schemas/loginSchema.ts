@@ -43,7 +43,7 @@ function isEmailLengthValid(email: any) {
 }
 
 export const loginSchema = object().shape({
-  phone: string().matches(/^[0-9\+]*$/, "This field only contains digits"),
+  username: string().required("This field must not be empty"),
   password: string().required("This field must not be empty"),
 });
 
@@ -79,15 +79,20 @@ export const registerSchema = object().shape({
   firstname: userSchema.firstname,
   lastname: userSchema.lastname,
   phone: string().matches(/^[0-9\+]*$/, "This field only contains digits"),
-  password: string()
-    .min(3, "This field must be at least 8 characters long")
-    .max(50, "This field must be at most 50 characters long")
+  otp: string().matches(/^[0-9\+]*$/, "This field only contains digits"),
+  email: string()
+    .email("This field should be a valid email address")
+    .max(100, "This field must be at most 100 characters long")
     .required("This field must not be empty")
     .test(
-      "is-valid-password",
-      "Password must contain at least an uppercase, a lowercase, a digit and a special character i.e. !”#$%&’()*+,-./:;<=>?@[]^_{|}~",
-      (password) => validatePassword(password)
-    )
+      "is-valid-email-length",
+      "The part before @ of the email can be maximum 64 characters ",
+      (email) => isEmailLengthValid(email)
+    ),
+  password: string()
+    .min(3, "This field must be at least 3 characters long")
+    .max(50, "This field must be at most 50 characters long")
+    .required("This field must not be empty")
     .test(
       "is-valid-characters",
       "Password has one or more invalid character. Click info icon for hints",

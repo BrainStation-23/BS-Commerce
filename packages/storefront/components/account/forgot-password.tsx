@@ -1,37 +1,26 @@
-import { userAPI } from "APIs";
-import axios from "axios";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { ForgotPasswordRequest } from "models";
-import Link from "next/link";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
+import Link from 'next/link';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-const ForgotPassword = (data: ForgotPasswordRequest) => {
-  async function handleForgotPassword(values: ForgotPasswordRequest) {
-    try {
-      userAPI.forgotPassword(data).then((response) => {
-        if(response?.code === 400) {
-          alert(response.error);
-        }
-        else {
-         console.log(response)
-        }
-      });
-    } catch(error) {
-      alert(error);
-    }
-  };
+import { userAPI } from 'APIs';
+import { loginSchema } from '@/components/global/schemas/loginSchema';
+import { ForgotPasswordRequest } from 'models';
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import { NextComponentType } from 'next';
+
+const ForgotPassword: NextComponentType = () => {
+  async function handleForgotPassword(values: ForgotPasswordRequest) {}
 
   return (
     <>
       <Breadcrumb
         title="Account"
-        pathArray={["Home", "Account"]}
-        linkArray={["/home", "/account/forgot-password"]}
+        pathArray={['Home', 'Account']}
+        linkArray={['/home', '/account/forgot-password']}
       />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
-          style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
+          style={{ width: ' 35rem ', height: 'auto', background: '#f3f3f3' }}
         >
           <h2 className="text-center mx-3 text-3xl text-gray-800">
             Reset Your Password
@@ -42,7 +31,7 @@ const ForgotPassword = (data: ForgotPasswordRequest) => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                username: "",
+                username: '',
               }}
               onSubmit={(values, actions) => {
                 const data = {
@@ -51,6 +40,7 @@ const ForgotPassword = (data: ForgotPasswordRequest) => {
                 handleForgotPassword(data);
                 actions.setSubmitting(false);
               }}
+              validationSchema={loginSchema}
             >
               {(formikprops) => {
                 return (
@@ -63,6 +53,9 @@ const ForgotPassword = (data: ForgotPasswordRequest) => {
                         name="username"
                         placeholder="Username"
                       />
+                      <div className="errMsg text-red-600 outline-0">
+                        <ErrorMessage name="username" />
+                      </div>
                     </div>
 
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">

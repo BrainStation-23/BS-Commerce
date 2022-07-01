@@ -1,24 +1,22 @@
-import { userAPI } from "APIs";
-import { Field, Form, Formik } from "formik";
 import Link from "next/link";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import { useCookies } from "react-cookie";
-import { CustomerSignInRequest } from "models";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { storeUserToken } from "toolkit/authSlice";
-import axios from "axios";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import withAuth from "../auth/withAuth";
+import { NextComponentType } from "next";
+
+import { CustomerSignInRequest } from "models";
+import { storeUserToken } from "toolkit/authSlice";
+import { useAppDispatch } from "customHooks/hooks";
+import { loginSchema } from "@/components/global/schemas/loginSchema";
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
+
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
 var http = require("http");
 var url = require("url");
 
-const Signin = () => {
-  const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
-  const dispatch = useDispatch();
+const Signin: NextComponentType = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   async function handleSignin(data: CustomerSignInRequest) {
@@ -36,22 +34,6 @@ const Signin = () => {
     } catch (err) {
       alert("Invalid User");
     }
-
-    // userAPI.signIn(data).then((response: any) => {
-    //   if (response?.code != 200) {
-    //     alert(response.response.data.error);
-    //   } else {
-    //     // dispatch(storeUserToken(response?.data.token));
-    //     // // let expires = new Date();
-    //     // // expires.setTime(expires.getTime() + response?.data.expires_in * 1000);
-    //     // // setCookie("access_token", response?.data.token, { path: "/", expires });
-    //     // res.setHeader('Set-Cookie', cookie.serialize('name', String(query.name), {
-    //     //   httpOnly: true,
-    //     //   maxAge: 60 * 60 * 24 * 7 // 1 week
-    //     // }));
-
-    //     window.location.href = "/home";
-    //   }
   }
 
   return (
@@ -83,7 +65,7 @@ const Signin = () => {
                 password: "",
               }}
               onSubmit={(values, actions) => {
-                let data = {};
+                let data;
                 let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
                 const isEmail = regex.test(values.username);
                 isEmail
@@ -98,24 +80,11 @@ const Signin = () => {
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
-              //validationSchema={loginSchema}
+              validationSchema={loginSchema}
             >
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-                    {/* <div className="mb-4">
-                      <Field
-                        type="text"
-                        className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
-                      />
-                      <div className="errMsg text-red-600 outline-0">
-                        <ErrorMessage name="username" />
-                      </div>
-                    </div> */}
-
                     <div className="mb-4">
                       <Field
                         type="text"
@@ -123,11 +92,10 @@ const Signin = () => {
                         id="username"
                         name="username"
                         placeholder="Enter email or phone number"
-                        required
                       />
-                      {/* <div className="errMsg text-red-600 outline-0">
+                      <div className="errMsg text-red-600 outline-0">
                         <ErrorMessage name="username" />
-                      </div> */}
+                      </div>
                     </div>
 
                     <div className="mb-4">
@@ -137,11 +105,10 @@ const Signin = () => {
                         id="password"
                         name="password"
                         placeholder="Password"
-                        required
                       />
-                      {/* <div className="errMsg text-red-600">
+                      <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
-                      </div> */}
+                      </div>
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
@@ -208,7 +175,3 @@ const Signin = () => {
 };
 
 export default Signin;
-
-// phone no: 012345673139
-//email: sbs@gmail.com
-// Pass: 123456

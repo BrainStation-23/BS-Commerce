@@ -63,12 +63,13 @@ export async function signUpRest(
 export async function forgotPasswordRest(
   data: ForgotPasswordRequest
 ): Promise<ForgotPasswordResponse | undefined> {
-  try {
-    const res = await axios.post("http://localhost:3000/api/auth/forgot", data);
-    return res.data;
-  } catch (error: any) {
-    return error;
-  }
+  // try {
+  //   const res = await axios.post("http://localhost:3000/api/auth/forgot", data);
+  //   return res.data;
+  // } catch (error: any) {
+  //   return error;
+  // }
+  return
 }
 
 export async function getPublicProductsRest(): Promise<

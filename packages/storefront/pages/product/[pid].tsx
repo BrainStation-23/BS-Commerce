@@ -8,7 +8,7 @@ interface SingleProduct {
   product: Product;
 }
 
-const ProductDetails: NextPage = ({product}: SingleProduct) => {
+const ProductDetails: NextPage<SingleProduct> = ({product}: SingleProduct) => {
   return (
     <>
       <ProductDetailsComponent product={product}></ProductDetailsComponent>

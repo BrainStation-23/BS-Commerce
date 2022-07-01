@@ -1,15 +1,15 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { NextComponentType } from 'next';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-import { registerSchema } from "../global/schemas/loginSchema";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import { userAPI } from "APIs";
-import { CreateCustomerRequest } from "models";
-import { useState } from "react";
-import withAuth from "../auth/withAuth";
+import { userAPI } from 'APIs';
+import { CreateCustomerRequest } from 'models';
+import { registerSchema } from '@/components/global/schemas/loginSchema';
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 
-const Signup = () => {
+const Signup: NextComponentType = () => {
   const router = useRouter();
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
 
@@ -17,15 +17,15 @@ const Signup = () => {
     try {
       userAPI.signUp(data).then((response: any) => {
         if (response?.code !== 201) {
-          if (response.response.data.error === "CUSTOMER_EMAIL_ALREADY_EXITS") {
-            alert("User with this email already exists");
+          if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+            alert('User with this email already exists');
           } else if (
-            response.response.data.error === "CUSTOMER_PHONE_ALREADY_EXITS"
+            response.response.data.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
           ) {
-            alert("User with this phone number already exists");
+            alert('User with this phone number already exists');
           }
         } else {
-          router.push("/account/sign-in");
+          router.push('/account/sign-in');
         }
       });
     } catch (error) {
@@ -37,13 +37,13 @@ const Signup = () => {
     <>
       <Breadcrumb
         title="Create Account"
-        pathArray={["Home", "Create Account"]}
-        linkArray={["/home", "/account/sign-up"]}
+        pathArray={['Home', 'Create Account']}
+        linkArray={['/home', '/account/sign-up']}
       />
       <div className="flex flex-wrap justify-center">
         <div
           className="flex flex-col my-20 py-7 mx-3"
-          style={{ width: " 35rem ", height: "auto", background: "#f3f3f3" }}
+          style={{ width: ' 35rem ', height: 'auto', background: '#f3f3f3' }}
         >
           <h2 className="text-3xl mx-3 text-center text-gray-800">
             Create Account
@@ -54,10 +54,10 @@ const Signup = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                phone: "",
-                otp: "",
-                email: "",
-                password: "",
+                phone: '',
+                otp: '',
+                email: '',
+                password: '',
               }}
               onSubmit={(values, actions) => {
                 const data = isPhoneSignUp
@@ -68,12 +68,13 @@ const Signup = () => {
                     }
                   : {
                       email: values.email,
-                      otp: "123",
+                      otp: '123',
                       password: values.password,
                     };
                 handleSignUp(data);
                 actions.setSubmitting(false);
               }}
+              validationSchema={registerSchema}
             >
               {(formikprops) => {
                 return (
@@ -87,8 +88,10 @@ const Signup = () => {
                             id="phone"
                             name="phone"
                             placeholder="Phone"
-                            required
                           />
+                          <div className="errMsg text-red-600 outline-0">
+                            <ErrorMessage name="phone" />
+                          </div>
                         </div>
 
                         <div className="mb-4">
@@ -98,8 +101,10 @@ const Signup = () => {
                             id="otp"
                             name="otp"
                             placeholder="Otp"
-                            required
                           />
+                          <div className="errMsg text-red-600 outline-0">
+                            <ErrorMessage name="otp" />
+                          </div>
                         </div>
                       </>
                     )}
@@ -112,8 +117,10 @@ const Signup = () => {
                           id="email"
                           name="email"
                           placeholder="Email"
-                          required
                         />
+                        <div className="errMsg text-red-600 outline-0">
+                          <ErrorMessage name="email" />
+                        </div>
                       </div>
                     )}
 
@@ -124,8 +131,10 @@ const Signup = () => {
                         id="password"
                         name="password"
                         placeholder="Password"
-                        required
                       />
+                      <div className="errMsg text-red-600 outline-0">
+                        <ErrorMessage name="password" />
+                      </div>
                     </div>
                     <button
                       type="submit"
@@ -142,8 +151,8 @@ const Signup = () => {
               className="rounded py-2 my-2 w-full bg-green-600/100 hover:bg-black text-white"
             >
               {!isPhoneSignUp
-                ? "Sign Up With Mobile Number"
-                : "Sign Up With Email"}
+                ? 'Sign Up With Mobile Number'
+                : 'Sign Up With Email'}
             </button>
             <div className="my-2 text-decoration-none">
               <Link href="/home">
