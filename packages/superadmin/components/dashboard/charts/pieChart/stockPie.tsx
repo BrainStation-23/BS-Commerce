@@ -11,6 +11,9 @@ import {
 import { Doughnut } from "react-chartjs-2";
 chartjs.register(Tooltip, Title, ArcElement, Legend, PieController);
 const StockPieChart: FC = () => {
+  const show = <i className="bi bi-plus"></i>;
+  const hide = <i className="bi bi-dash-lg"></i>;
+  const [accordion, setAccordion] = useState(false);
   const [data, setData] = useState({
     labels: [
       "Electronics",
@@ -66,28 +69,36 @@ const StockPieChart: FC = () => {
       <div
         style={{
           ["width" as any]: "100%",
-          ["height" as any]: "510px",
-          ["backgroundColor" as any]: "#f5f5f5",
-          ["border" as any]: "2px solid",
         }}
       >
         <div
           style={{
-            ["borderBottom" as any]: "3px solid blue",
+            ["borderTop" as any]: "3px solid blue",
+            ["borderBottom" as any]: "1px solid #808080",
+            ["borderLeft" as any]: "1px solid",
+            ["borderRight" as any]: "1px solid",
+            ["borderRadius" as any]: "3px",
             ["color" as any]: "white",
-            ["backgroundColor" as any]: "black",
+            ["backgroundColor" as any]: "#f8f9fa",
             ["display" as any]: "flex",
             ["justifyContent" as any]: "space-between",
           }}
         >
           <h3
-            style={{ ["fontSize" as any]: "20px", ["padding" as any]: "10px" }}
+            style={{
+              ["fontSize" as any]: "15px",
+              paddingLeft: "10px",
+              ["color" as any]: "black",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <span
               style={{
                 ["paddingRight" as any]: "5px",
-                ["color" as any]: "white",
-                ["fontSize" as any]: "25px",
+                ["color" as any]: "black",
+                ["fontSize" as any]: "15px",
               }}
             >
               <i className="bi bi-basket3-fill"></i>
@@ -98,8 +109,12 @@ const StockPieChart: FC = () => {
             <span style={{ ["padding" as any]: "5px" }}>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["color" as any]: "white",
+                  ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Day
@@ -108,8 +123,12 @@ const StockPieChart: FC = () => {
             <span style={{ ["padding" as any]: "15px" }}>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["color" as any]: "white",
+                  ["borderColor" as any]: "#00acd6",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Month
@@ -118,25 +137,56 @@ const StockPieChart: FC = () => {
             <span>
               <button
                 style={{
-                  ["backgroundColor" as any]: "	#87CEFA",
+                  ["backgroundColor" as any]: "#00c0ef",
+                  ["borderColor" as any]: "#00acd6",
+                  ["color" as any]: "white",
                   ["padding" as any]: "0px 7px",
+                  ["fontSize" as any]: "12px",
+                  ["border" as any]: "none",
                 }}
               >
                 Year
               </button>
             </span>
+            <span style={{ ["padding-left" as any]: "25px" }}>
+              <button
+                style={{
+                  ["backgroundColor" as any]: "#f5f5f5",
+                  ["color" as any]: "black",
+                  ["padding" as any]: "0px 7px",
+                  ["border" as any]: "none",
+                }}
+                onClick={(e) => setAccordion(!accordion)}
+              >
+                {accordion ? hide : show}
+              </button>
+            </span>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div style={{ width: "60%", padding: "40px" }}>
-            <Doughnut data={data} plugins={plugins} options={options} />
-          </div>
+        <div>
+          {accordion && (
+            <div
+              style={{
+                ["minHeight" as any]: "370px",
+                ["backgroundColor" as any]: "#f5f5f5",
+                ["border" as any]: "2px",
+                ["borderRadius" as any]: "5px",
+                transition: "min-height 1s ease-in-out",
+                // transition: "height 0.3s ease",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <div style={{ width: "65%", padding: "17px" }}>
+                  <Doughnut data={data} plugins={plugins} options={options} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

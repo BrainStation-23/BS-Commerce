@@ -1,0 +1,11 @@
+.datePicker {
+  border: none !important ;
+  border-bottom: 2px solid grey !important;
+  width: 85% !important ;
+  height: 50px !important;
+  background-color: white !important;
+  padding: 10px !important;
+}
+.datePicker:focus {
+  outline: none;
+}
