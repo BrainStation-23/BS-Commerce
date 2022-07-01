@@ -2,7 +2,6 @@ import { BadRequestException } from '@nestjs/common';
 import { Scalar } from '@nestjs/graphql';
 import { multerConfig } from 'config/multer';
 import { ValueNode } from 'graphql';
-const mimeTypes = ['image/png', 'image/jpeg', 'image/svg+xml',  'image/jpg', 'image/gif'];
 
 @Scalar('Upload')
 export class Upload {
@@ -24,7 +23,7 @@ export class Upload {
         const upload = await value;
 
         if (!upload.file.mimetype) throw new BadRequestException('Mime type is unknown.');
-        if (!mimeTypes.includes(upload.file.mimetype)) throw new BadRequestException(`Unsupported file format. Supports: ${multerConfig.fileExtensionRegex}.`);
+        if (!multerConfig.mimeTypes.includes(upload.file.mimetype)) throw new BadRequestException(`Unsupported file format. Supports: ${multerConfig.mimeTypes}.`);
 
         return upload;
     }

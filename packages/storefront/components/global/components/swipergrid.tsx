@@ -27,7 +27,6 @@ const SwiperGrid: FC<Props> = ({
     <Swiper
       slidesPerView={slidesPerViewmobile}
       loop={loop}
-      // loop={false}
       grid={{
         fill: "row",
         rows: rows,
@@ -42,6 +41,7 @@ const SwiperGrid: FC<Props> = ({
       }}
       navigation={true}
       spaceBetween={20}
+      centerInsufficientSlides={true}
       pagination={{
         clickable: true,
       }}
@@ -54,44 +54,3 @@ const SwiperGrid: FC<Props> = ({
 };
 
 export default SwiperGrid;
-
-// import this component and pass your children to it
-//example 1:
-// <SwiperGrid
-//   slidesPerViewmobile={2}
-//   slidesPerView768={3}
-//   slidesPerView980={5}
-//   rows={2}
-// >
-//   <SwiperSlide>Slide 1</SwiperSlide>
-//   <SwiperSlide>Slide 2</SwiperSlide>
-//   <SwiperSlide>Slide 3</SwiperSlide>
-//   <SwiperSlide>Slide 4</SwiperSlide>
-//   <SwiperSlide>Slide 5</SwiperSlide>
-//   <SwiperSlide>Slide 6</SwiperSlide>
-//   <SwiperSlide>Slide 7</SwiperSlide>
-//   <SwiperSlide>Slide 8</SwiperSlide>
-//   <SwiperSlide>Slide 9</SwiperSlide>
-//   <SwiperSlide>Slide 8</SwiperSlide>
-//   <SwiperSlide>Slide 9</SwiperSlide>
-//   <SwiperSlide>Slide 8</SwiperSlide>
-//   <SwiperSlide>Slide 9</SwiperSlide>
-//   <SwiperSlide>Slide 8</SwiperSlide>
-//   <SwiperSlide>Slide 12</SwiperSlide>
-// </SwiperGrid>
-
-//example 2:
-//  <SwiperGrid
-//           slidesPerViewmobile={2}
-//           slidesPerView768={3}
-//           slidesPerView980={5}
-//           rows={2}
-//         >
-//           {productData["products"] &&
-//             productData["products"].length > 0 &&
-//             productData.products.map((product: any) => (
-//               <SwiperSlide key={product.id}>
-//                 <Product product={product} />
-//               </SwiperSlide>
-//             ))}
-//         </SwiperGrid>

@@ -1,10 +1,28 @@
-import { addToCartRequest, AddToCartResponse, Cart, CustomerSignInResponse, deleteAllCartItemsResponse, deleteCartItemRequest, deleteCartItemResponse } from "models";
-import { CreateCustomerResponse } from "models";
-import { updateCartItemResponse } from "models";
-import { updateCartItemRequest } from "models";
-import { CreateCustomerRequest } from "models";
-import { CustomerSignInRequest } from "models";
-import { GetCustomerProductParams, GetCustomerProductResponse, GetCustomerAllProductsResponse, CreateUserRequest, CreateUserResponse, ForgotPasswordRequest, ForgotPasswordResponse, SignInRequest, SignInResponse } from "models";
+import {
+  addToCartRequest,
+  AddToCartResponse,
+  Cart,
+  CustomerSignInResponse,
+  deleteAllCartItemsResponse,
+  deleteCartItemRequest,
+  deleteCartItemResponse,
+} from 'models';
+import { CreateCustomerResponse } from 'models';
+import { updateCartItemResponse } from 'models';
+import { updateCartItemRequest } from 'models';
+import { CreateCustomerRequest } from 'models';
+import { CustomerSignInRequest } from 'models';
+import {
+  GetCustomerProductParams,
+  GetCustomerProductResponse,
+  GetCustomerAllProductsResponse,
+  CreateUserRequest,
+  CreateUserResponse,
+  ForgotPasswordRequest,
+  ForgotPasswordResponse,
+  SignInRequest,
+  SignInResponse,
+} from 'models';
 
 export interface accordionBody {
   id: string;
@@ -56,12 +74,22 @@ export interface Address {
 
 export interface apiFunction {
   getUser: () => Promise<User[] | undefined>;
-  signIn: (data: CustomerSignInRequest) => Promise<CustomerSignInResponse | undefined>;
-  signUp: (data: CreateCustomerRequest) => Promise<CreateCustomerResponse | undefined>;
-  forgotPassword: (data: ForgotPasswordRequest) => Promise<ForgotPasswordResponse | undefined>;
+  signIn: (
+    data: CustomerSignInRequest
+  ) => Promise<CustomerSignInResponse | undefined>;
+  signUp: (
+    data: CreateCustomerRequest
+  ) => Promise<CreateCustomerResponse | undefined>;
+  forgotPassword: (
+    data: ForgotPasswordRequest
+  ) => Promise<ForgotPasswordResponse | undefined>;
   getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
-  getFeaturedProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
-  getPublicProductsById: (productId: GetCustomerProductParams) => Promise< GetCustomerProductResponse | undefined>;
+  getFeaturedProducts: () => Promise<
+    GetCustomerAllProductsResponse | undefined
+  >;
+  getPublicProductsById: (
+    productId: GetCustomerProductParams
+  ) => Promise<GetCustomerProductResponse | undefined>;
 }
 
 export interface ProductStore {
