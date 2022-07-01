@@ -49,12 +49,14 @@ const CartTotal: NextComponentType = () => {
             </table>
           </div>
           <div className="flex justify-end py-4 px-2">
-            <Buttons
-              bgColor="black"
-              height={12}
-              width={150}
-              text={"PROCEED TO CHECKOUT"}
-            />
+            <a href="/checkout">
+              <Buttons
+                bgColor="black"
+                height={12}
+                width={150}
+                text={"PROCEED TO CHECKOUT"}
+              />
+            </a>
           </div>
         </div>
       </div>
