@@ -171,10 +171,15 @@ const ProductInfoForm: FC = () => {
                 <div className="col-md-9">
                   <div className="input-group ">
                     <Field
-                      className="form-control text-box single-line"
+                      className="form-control text-box single-line shadow-none rounded-0"
                       id="Sku"
                       name="Sku"
                       type="text"
+                      style={{
+                        borderWidth: "0 0 1px",
+                        outline: "0",
+                        borderColor: "gray",
+                      }}
                     />
                   </div>
                   <div className="errMsg text-red-600 text-danger">
