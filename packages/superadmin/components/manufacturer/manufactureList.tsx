@@ -49,31 +49,8 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
 
   return (
     <>
-      <main className="px-4">
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 className="h2">Manufacturers</h1>
-          <div className="btn-toolbar mb-2 mb-md-0">
-            <div className="btn-group me-2">
-              <Link href="/Admin/Manufacturer/add-new" passHref>
-                <button
-                  type="button"
-                  style={{
-                    borderRadius: "5px",
-                    backgroundColor: "#007bff",
-                    border: "1px solid #007bff",
-                    color: "white",
-                    marginLeft: "10px",
-                  }}
-                  className="btn btn-info btn-lg"
-                >
-                  <i className="bi bi-plus-square"></i> Add new
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <button
+      <main className="">
+        {/* <button
           onClick={() => setSearch(!search)}
           aria-controls="prouctInfoTab"
           data-bs-toggle="collapse"
@@ -91,9 +68,9 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
           }}
         >
           <i className="bi bi-search"></i> Search
-        </button>
+        </button> */}
 
-        <div style={{ marginLeft: "20px" }}>
+        {/* <div style={{ marginLeft: "20px" }}>
           <Formik
             initialValues={{
               name: "",
@@ -111,12 +88,7 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
             {(formikprops) => {
               return (
                 <Form onSubmit={formikprops.handleSubmit}>
-                  <div
-                    style={{
-                      textAlign: "left",
-                      marginTop: "20px",
-                    }}
-                  >
+                  <div className="card rounded border-1 mt-3">
                     <div className="row">
                       <div className="col-2">
                         <strong className="fs-6 me-1">Manufacturer name</strong>
@@ -142,7 +114,6 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
                       </div>
 
                       <div className="invalid-feedback d-block">
-                        {/* <ErrorMessage name="firstName" /> */}
                       </div>
                     </div>
 
@@ -198,126 +169,146 @@ const ManufactureList = ({ manufactureData, getAllManufacturers }: any) => {
               );
             }}
           </Formik>
-        </div>
+        </div> */}
 
-        <div>
-          <table
-            className="table"
-            style={{
-              border: "1px solid #dddddd",
-              textAlign: "left",
-              margin: "10px",
-            }}
-          >
-            <thead style={{ backgroundColor: "#dddddd" }}>
-              <tr style={{ fontSize: "20px" }}>
-                <th style={{ textAlign: "center" }}>
-                  <span>Name</span>
-                </th>
-                <th style={{ textAlign: "center" }}>
-                  <span>Published</span>
-                </th>
-                <th style={{ textAlign: "center" }}>
-                  <span>Display order</span>
-                </th>
-                <th style={{ textAlign: "center" }}>
-                  <span>Edit</span>
-                </th>
-                <th style={{ textAlign: "center" }}>
-                  <span>Delete</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {console.log(paginateData)} */}
-              {paginateData?.length > 0 &&
-                paginateData?.map((manufacturer: any, index: any) => (
-                  <SingleManufacturer
-                    // key={index}
-                    key={manufacturer.id}
-                    manufacturer={manufacturer}
-                    handleDeleteManufacture={handleDeleteManufacture}
-                    handleDelete={handleDelete}
-                    modal={modal}
-                    setModal={setModal}
-                  />
-                ))}
-            </tbody>
-          </table>
-          <div
-            className="d-flex justify-content-between"
-            style={{ fontSize: "18px" }}
-          >
-            <span>
-              <Pagination
-                totalItems={manufactureData.manufacturers.length}
-                pageCount={pageCount}
-                activePage={activePage}
-                onClickPage={handleClickPage}
-              ></Pagination>
-            </span>
-            <span>
-              <span style={{ margin: "10px" }}>Show</span>
-              <button
-                className="dropdown"
-                style={{
-                  padding: "10px",
-                  border: "1px solid gray",
-                }}
-              >
-                <a
-                  href="#"
-                  className="dropdown-toggle"
-                  data-bs-toggle="dropdown"
+        <div className="card rounded border-1 px-2 mt-3">
+          <div className="card-body">
+            <table
+              className="table"
+              style={{
+                border: "1px solid #dddddd",
+                textAlign: "left",
+              }}
+            >
+              <thead>
+                <tr style={{ fontSize: "20px" }}>
+                  <th
+                    style={{
+                      textAlign: "center",
+                      borderRight: "1px solid gray",
+                    }}
+                  >
+                    <span>Name</span>
+                  </th>
+                  <th
+                    style={{
+                      textAlign: "center",
+                      borderRight: "1px solid gray",
+                    }}
+                  >
+                    <span>Published</span>
+                  </th>
+                  <th
+                    style={{
+                      textAlign: "center",
+                      borderRight: "1px solid gray",
+                    }}
+                  >
+                    <span>Display order</span>
+                  </th>
+                  <th
+                    style={{
+                      textAlign: "center",
+                      borderRight: "1px solid gray",
+                    }}
+                  >
+                    <span>Edit</span>
+                  </th>
+                  <th style={{ textAlign: "center" }}>
+                    <span>Delete</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* {console.log(paginateData)} */}
+                {paginateData?.length > 0 &&
+                  paginateData?.map((manufacturer: any, index: any) => (
+                    <SingleManufacturer
+                      key={manufacturer.id}
+                      manufacturer={manufacturer}
+                      handleDeleteManufacture={handleDeleteManufacture}
+                      handleDelete={handleDelete}
+                      modal={modal}
+                      setModal={setModal}
+                    />
+                  ))}
+              </tbody>
+            </table>
+            <div
+              className="d-flex justify-content-between"
+              style={{ fontSize: "18px" }}
+            >
+              <span>
+                <Pagination
+                  totalItems={manufactureData.manufacturers.length}
+                  pageCount={pageCount}
+                  activePage={activePage}
+                  onClickPage={handleClickPage}
+                ></Pagination>
+              </span>
+              <span>
+                <span style={{ margin: "10px" }}>Show</span>
+                <button
+                  className="dropdown"
                   style={{
-                    textDecoration: "none",
-                    color: "black",
                     padding: "10px",
+                    border: "1px solid gray",
                   }}
                 >
-                  {pageCount}
-                </a>
-                <div className="dropdown-menu">
                   <a
                     href="#"
-                    className="dropdown-item"
-                    onClick={() => setPageCount(2)}
+                    className="dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      padding: "10px",
+                    }}
                   >
-                    2
+                    {pageCount}
                   </a>
-                  <a
-                    href="#"
-                    className="dropdown-item"
-                    onClick={() => setPageCount(5)}
-                  >
-                    5
-                  </a>
-                  <a
-                    href="#"
-                    className="dropdown-item"
-                    onClick={() => setPageCount(10)}
-                  >
-                    10
-                  </a>
-                </div>
+                  <div className="dropdown-menu">
+                    <a
+                      href="#"
+                      className="dropdown-item"
+                      onClick={() => setPageCount(2)}
+                    >
+                      2
+                    </a>
+                    <a
+                      href="#"
+                      className="dropdown-item"
+                      onClick={() => setPageCount(5)}
+                    >
+                      5
+                    </a>
+                    <a
+                      href="#"
+                      className="dropdown-item"
+                      onClick={() => setPageCount(10)}
+                    >
+                      10
+                    </a>
+                  </div>
+                </button>
+                <span style={{ margin: "10px" }}>items</span>
+              </span>
+              {(activePage - 1) * pageCount + 1}-
+              {(activePage - 1) * pageCount + pageCount} of {pageCount} items
+              <button
+                style={{
+                  height: "100%",
+                  padding: "10px",
+                  width: "5%",
+                  border: "1px solid white",
+                }}
+                onClick={() =>
+                  (window.location.href = `http://localhost:3001/Admin/Manufacturer/list`)
+                }
+              >
+                <i className="bi bi-arrow-repeat"></i>
               </button>
-              <span style={{ margin: "10px" }}>items</span>
-            </span>
-            {(activePage - 1) * pageCount + 1}-
-            {(activePage - 1) * pageCount + pageCount} of {pageCount} items
-            <button
-              style={{
-                height: "100%",
-                padding: "10px",
-                width: "5%",
-                border: "1px solid white",
-              }}
-              onClick={() =>
-                (window.location.href = `http://localhost:3001/Admin/Manufacturer/list`)
-              }
-            >
-              <i className="bi bi-arrow-repeat"></i>
-            </button>
+            </div>
           </div>
         </div>
       </main>

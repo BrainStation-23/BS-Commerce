@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { userAPI } from "../../../../APIs";
-import EditManufacturer from "../../../../components/manufacturer/editManufacturer";
+import { userAPI } from "../../../APIs";
+import EditManufacturer from "../../../components/manufacturer/editManufacturer";
 
 const EditManufacturerPage: NextPage = () => {
   const router = useRouter();

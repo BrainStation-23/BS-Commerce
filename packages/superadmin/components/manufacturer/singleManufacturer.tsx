@@ -62,7 +62,7 @@ const SingleManufacturer = ({ manufacturer, handleDeleteManufacture }: any) => {
           {manufacturer.displayOrder}
         </td>
         <td style={{ border: "1px solid #dddddd", textAlign: "center" }}>
-          <Link href={"/Admin/Manufacturer/Edit/" + manufacturer.id} passHref>
+          <Link href={"Manufacturer/Edit/" + manufacturer.id} passHref>
             <button
               style={{ border: "1px solid #dddddd" }}
               type="button"
@@ -88,79 +88,79 @@ const SingleManufacturer = ({ manufacturer, handleDeleteManufacture }: any) => {
             {"  "}
           </button>
         </td>
-        {modal.delete ? (
+      </tr>
+      {modal.delete ? (
+        <div
+          className="modal"
+          style={{ display: modal.delete ? "block" : "none" }}
+        >
           <div
-            className="modal"
-            style={{ display: modal.delete ? "block" : "none" }}
+            className="modal-backdrop"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
+            }}
+            onClick={() => {
+              // close modal when outside of modal is clicked
+              setModal({ ...modal, delete: false });
+            }}
           >
             <div
-              className="modal-backdrop"
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
+              className="modal-content"
+              onClick={(e) => {
+                // do not close modal if anything inside modal content is clicked
+                e.stopPropagation();
               }}
-              onClick={() => {
-                // close modal when outside of modal is clicked
-                setModal({ ...modal, delete: false });
+              style={{
+                textAlign: "left",
+                width: "30%",
+                marginLeft: "40%",
+                marginTop: "5%",
+                border: "1px solid gray",
+                boxShadow: "1px 1px 10px gray",
+                borderRadius: "10px",
+                padding: "20px",
               }}
             >
-              <div
-                className="modal-content"
-                onClick={(e) => {
-                  // do not close modal if anything inside modal content is clicked
-                  e.stopPropagation();
-                }}
-                style={{
-                  textAlign: "left",
-                  width: "30%",
-                  marginLeft: "40%",
-                  marginTop: "5%",
-                  border: "1px solid gray",
-                  boxShadow: "1px 1px 10px gray",
-                  borderRadius: "10px",
-                  padding: "20px",
-                }}
-              >
-                <div className="container">
-                  <h1>Are you sure?</h1>
-                  <hr />
-                  <p>Are you sure you want to delete this item?</p>
-                  <br />
+              <div className="container">
+                <h1>Are you sure?</h1>
+                <hr />
+                <p>Are you sure you want to delete this item?</p>
+                <br />
 
-                  <div className="clearfix">
-                    <button
-                      type="button"
-                      className="btn btn-light"
-                      style={{
-                        border: "1px solid gray",
-                        backgroundColor: "gray",
-                        color: "white",
-                        marginRight: "10px",
-                      }}
-                      onClick={() =>
-                        setModal({
-                          ...modal,
-                          delete: false,
-                        })
-                      }
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDeleteOff()}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                <div className="clearfix">
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    style={{
+                      border: "1px solid gray",
+                      backgroundColor: "gray",
+                      color: "white",
+                      marginRight: "10px",
+                    }}
+                    onClick={() =>
+                      setModal({
+                        ...modal,
+                        delete: false,
+                      })
+                    }
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteOff()}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        ) : (
-          <div />
-        )}
-      </tr>
+        </div>
+      ) : (
+        <div />
+      )}
     </>
   );
 };

@@ -57,7 +57,7 @@ export async function createManufacturerRest(
       `${apiEndPoints.manufacturer}`,
       data
     );
-    router.push("/Admin/Manufacturer/list");
+    router.push("/Manufacturer/");
     toast.success("Create Successful");
     return response.data as CreateManufacturerRequest;
   } catch (error) {
@@ -232,7 +232,7 @@ export async function deleteManufacturerRest(
     const { data } = await axios?.delete(
       `${apiEndPoints?.manufacturerList}/${id}`
     );
-    router.push("/Admin/Manufacturer/list");
+    router.push("/Manufacturer/");
     toast.success("Successfully deleted");
     return data?.data as Manufacturer[];
   } catch (error) {
@@ -248,7 +248,6 @@ export async function getSingleManufacturerRest(
     console.log("*", data);
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
     const res = await axios.get(`manufacturers/${data}`);
-    console.log(res.data);
 
     return res?.data as Manufacturer;
   } catch (error) {
@@ -259,18 +258,17 @@ export async function getSingleManufacturerRest(
 export async function updateManufacturerRest(
   data: UpdateManufacturerRequest,
   id: string,
-  router
+  router: any
 ): Promise<UpdateManufacturerRequest | undefined> {
   try {
     const response = await axios.patch<UpdateManufacturerRequest>(
       `manufacturers/${id}`,
       data
     );
-    router.push("/Admin/Manufacturer/list");
+    router.push("/Manufacturer/");
     toast.success("Edit Successful");
     return response.data as UpdateManufacturerRequest;
   } catch (error) {
-    toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
 }

@@ -27,10 +27,7 @@ const DisplayOrders: FC = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <i
-                className="bi bi-tv fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
-              />
+              <i className="bi bi-tv fill col-1" style={{ fontSize: "25px" }} />
               <div className="px-3 fs-5 col text-start">Display Order</div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
@@ -41,7 +38,7 @@ const DisplayOrders: FC = () => {
         <div className="collapse " id="categoryTab">
           <div className="card-body">
             <div className="form-group row">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end p-2">
                   <label
                     className="col-form-label col px-1"
@@ -49,7 +46,6 @@ const DisplayOrders: FC = () => {
                   >
                     Display Order
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-8 mt-md-3 mx-2 mx-md-0">

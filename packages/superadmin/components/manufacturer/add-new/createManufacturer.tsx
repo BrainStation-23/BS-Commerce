@@ -67,7 +67,7 @@ const CreateManufacturer: FC = () => {
                 <h3 className="float-start">
                   Add a Manufacturer
                   <span className="fs-5 p-3">
-                    <Link href="/Admin/Manufacturer/list">
+                    <Link href="/Manufacturer/">
                       <a href="/Product" className="text-decoration-none">
                         <i className="bi bi-arrow-left-circle-fill p-2" />
                         back to Manufacturer list

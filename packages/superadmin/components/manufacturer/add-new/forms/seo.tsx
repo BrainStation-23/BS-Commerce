@@ -58,7 +58,7 @@ const SEO: FC = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-search fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">SEO</div>
               <div className="col-1">
@@ -70,12 +70,11 @@ const SEO: FC = () => {
         <div className="collapse " id="photosTab">
           <div className="card-body">
             <div className="form-group row my-2">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="keywords">
                     Keywords
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -99,7 +98,7 @@ const SEO: FC = () => {
               </div>
             </div>
             <div className="form-group row my-2">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label
                     className="col-form-label col px-1"
@@ -107,7 +106,6 @@ const SEO: FC = () => {
                   >
                     Meta Description
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -131,7 +129,7 @@ const SEO: FC = () => {
               </div>
             </div>
             <div className="form-group row my-2">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label
                     className="col-form-label col px-1"
@@ -139,7 +137,6 @@ const SEO: FC = () => {
                   >
                     Meta Title
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -163,7 +160,7 @@ const SEO: FC = () => {
               </div>
             </div>
             <div className="form-group row my-2">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label
                     className="col-form-label col px-1"
@@ -171,7 +168,6 @@ const SEO: FC = () => {
                   >
                     SEFN
                   </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                 </div>
               </div>
               <div className="col-md-9">

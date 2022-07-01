@@ -30,7 +30,7 @@ const CreateNewManufacturer: FC = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-info-lg align-text-top col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Manufacturer Info</div>
               <div className="col-1">
@@ -43,12 +43,11 @@ const CreateNewManufacturer: FC = () => {
           <div className="card-body">
             <div id="product-details-area">
               <div className="form-group row my-2">
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <div className="label-wrapper row row-cols-auto float-md-end">
                     <label className="col-form-label col px-1" htmlFor="Name">
                       Manufacturer Name
                     </label>
-                    <Tooltips title="The name of the Manufacturer." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -72,7 +71,7 @@ const CreateNewManufacturer: FC = () => {
                 </div>
               </div>
               <div className="form-group row my-2">
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <div className="label-wrapper row row-cols-auto float-md-end">
                     <label
                       className="col-form-label col px-1"
@@ -80,7 +79,6 @@ const CreateNewManufacturer: FC = () => {
                     >
                       Full description
                     </label>
-                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
                   </div>
                 </div>
                 <div className="col-md-9">
@@ -99,12 +97,11 @@ const CreateNewManufacturer: FC = () => {
               </div>
             </div>
             <div className="form-group row my-2">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="Name">
                     Picture
                   </label>
-                  <Tooltips title="The name of the product." />
                 </div>
               </div>
               <div className="col-md-9">
@@ -128,7 +125,7 @@ const CreateNewManufacturer: FC = () => {
               </div>
             </div>
             <div className="form-group row">
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end py-2">
                   <label
                     className="col-form-label col px-1"
@@ -136,7 +133,6 @@ const CreateNewManufacturer: FC = () => {
                   >
                     Published?
                   </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
