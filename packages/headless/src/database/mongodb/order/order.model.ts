@@ -84,7 +84,7 @@ const ProductSchema = new Schema({
 });
 
 const OrderSchema = new Schema<OrderEntity>({
-  user: {
+  userId: {
     type: String,
     trim: true,
     required: true,

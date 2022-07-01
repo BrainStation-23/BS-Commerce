@@ -18,7 +18,7 @@ export enum PaymentStatusEnum {
   Cancelled = 'Cancelled',
 }
 
-export class AddressInOrder {
+export class OrderAddress {
   firstName: string;
   lastName: string;
   email: string;
@@ -30,7 +30,7 @@ export class AddressInOrder {
   phoneNumber: string;
 }
 
-export class ProductInOrder {
+export class ProductOrder {
   productId: string;
   name: string;
   price: string;
@@ -40,16 +40,16 @@ export class ProductInOrder {
 }
 
 export class OrderEntity {
-  user: string;
-  billingAddress: AddressInOrder;
-  shippingAddress: AddressInOrder;
+  userId: string;
+  billingAddress: OrderAddress;
+  shippingAddress: OrderAddress;
   shippingMethod: string;
   paymentMethod: string;
   orderedDate: Date;
   orderStatus: OrderStatusEnum;
   shippingStatus: ShippingStatusEnum;
   paymentStatus: PaymentStatusEnum;
-  products: [ProductInOrder];
+  products: [ProductOrder];
   productCost: number;
   shippingCost: number;
   totalCost: number;
