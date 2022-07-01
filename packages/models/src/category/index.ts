@@ -1,4 +1,4 @@
-export * from "./addCategory";
+export * from "./createCategory";
 export * from "./category";
 export * from './getCategory';
 export * from './category';

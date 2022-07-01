@@ -16,7 +16,7 @@ export class CategoryRepository {
   async getCategoryBySlug(slug: string): Promise<Category | null> {
     return await this.db.getCategoryBySlug(slug);
   }
-  async addCategory(category: RequestCategory): Promise<Category | null> {
-        return await this.db.addCategory(category);
+  async createCategory(category: RequestCategory): Promise<Category | null> {
+        return await this.db.createCategory(category);
     }
 }

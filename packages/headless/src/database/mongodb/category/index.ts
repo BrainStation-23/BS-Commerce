@@ -10,7 +10,7 @@ export class CategoryDatabase implements ICategoryDatabase {
         return name.replace(/\s+/g, '-').toLowerCase();
     };
 
-    async addCategory(requestCategory: RequestCategory): Promise<Category | null> {
+    async createCategory(requestCategory: RequestCategory): Promise<Category | null> {
         let newCategory = new CategoryModel(requestCategory);
         newCategory.slug = this.getSlug(requestCategory.name);
         

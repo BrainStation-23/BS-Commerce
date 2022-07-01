@@ -1,11 +1,11 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
-import { addCategoryErrorMessage, addCategoryErrorResponse, addCategoryRequest, addCategorySuccessResponse } from "models";
+import { createCategoryErrorMessage, createCategoryErrorResponse, createCategoryRequest, createCategorySuccessResponse } from "models";
 import { CategoryDto, MetaDto, PhotoDto } from "./category.dto";
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { Type } from "class-transformer";
-export class addCategoryRequestDto implements addCategoryRequest {
+export class createCategoryRequestDto implements createCategoryRequest {
     @ApiProperty()
     @IsString()
     name: string;
@@ -61,7 +61,7 @@ export class addCategoryRequestDto implements addCategoryRequest {
     meta?: MetaDto;
 }
 
-export class addCategorySuccessResponseDto implements addCategorySuccessResponse {
+export class createCategorySuccessResponseDto implements createCategorySuccessResponse {
     @ApiProperty()
     @IsNumber()
     code: number;
@@ -73,17 +73,17 @@ export class addCategorySuccessResponseDto implements addCategorySuccessResponse
     data: CategoryDto;
 }
 
-export class addCategoryErrorResponseDto implements addCategoryErrorResponse {
+export class createCategoryErrorResponseDto implements createCategoryErrorResponse {
     @ApiProperty({
         default: HttpStatus.INTERNAL_SERVER_ERROR,
     })
     code: number;
 
     @ApiProperty({
-        example: addCategoryErrorMessage.CAN_NOT_ADD_CATEGORY,
-        examples: [addCategoryErrorMessage.CAN_NOT_ADD_CATEGORY],
+        example: createCategoryErrorMessage.CAN_NOT_CREATE_CATEGORY,
+        examples: [createCategoryErrorMessage.CAN_NOT_CREATE_CATEGORY],
     })
-    error: addCategoryErrorMessage;
+    error: createCategoryErrorMessage;
 
     @ApiProperty()
     errors: string[];

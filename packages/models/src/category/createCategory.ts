@@ -1,8 +1,7 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { ProductPhoto } from "src/index";
 import { Category, Meta, Photo } from "./category";
-export interface addCategoryRequest {
+export interface createCategoryRequest {
     name: string,
     parentSlug?:string,
     photo?: Photo;
@@ -14,18 +13,18 @@ export interface addCategoryRequest {
     displayOrder?: number,
     meta?: Meta
 }
-export interface addCategorySuccessResponse extends SuccessResponse {
+export interface createCategorySuccessResponse extends SuccessResponse {
     code: number;
     data: Category;
 }
 
-export interface addCategoryErrorResponse extends ErrorResponse {
+export interface createCategoryErrorResponse extends ErrorResponse {
     code?: number;
-    error: addCategoryErrorMessage;
+    error: createCategoryErrorMessage;
     errors: DescriptiveError;
 }
 
-export const enum addCategoryErrorMessage {
-    CAN_NOT_ADD_CATEGORY = 'CAN_NOT_ADD_CATEGORY',
+export const enum createCategoryErrorMessage {
+    CAN_NOT_CREATE_CATEGORY = 'CAN_NOT_CREATE_CATEGORY',
 }
-export type addCategoryResponse = addCategorySuccessResponse | addCategoryErrorResponse;
+export type createCategoryResponse = createCategorySuccessResponse | createCategoryErrorResponse;

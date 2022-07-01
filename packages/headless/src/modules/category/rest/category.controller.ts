@@ -9,9 +9,7 @@ import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessR
 import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from '../dto/getCategoryList.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { getCategoryBySlugErrorResponseDto, getCategoryBySlugRequestDto, getCategoryBySlugSuccessResponseDto } from '../dto/getCategoryBySlug.dto';
-import { addCategoryErrorResponseDto, addCategoryRequestDto, addCategorySuccessResponseDto } from '../dto/addCategory.dto';
-import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { createCategoryErrorResponseDto, createCategoryRequestDto, createCategorySuccessResponseDto } from '../dto/createCategory.dto';
 
 @Controller('category')
 @UseGuards(JwtAuthGuard)
@@ -22,20 +20,20 @@ export class CategoryController {
 
   @Post()
   @ApiResponse({
-      description: 'Add Category Api',
-      type: addCategorySuccessResponseDto,
+      description: 'Create Category Api',
+      type: createCategorySuccessResponseDto,
       status: HttpStatus.CREATED
     })
     @ApiResponse({
       description: 'Error Response',
-      type: addCategoryErrorResponseDto,
+      type: createCategoryErrorResponseDto,
       status: HttpStatus.BAD_REQUEST
     })
-  async addCategory(
-      @Body() category: addCategoryRequestDto,
+  async createCategory(
+      @Body() category: createCategoryRequestDto,
       @Res({ passthrough: true }) res: Response,
   ) {
-      const { code, ...response } = await this.categoryService.addCategory(category);
+      const { code, ...response } = await this.categoryService.createCategory(category);
       res.status(code);
       return response;
   }

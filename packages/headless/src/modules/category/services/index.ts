@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
-import { addCategoryErrorMessage, addCategoryResponse, getCategoryBySlugErrorMessage, getCategoryBySlugResponse, getCategoryErrorMessage, getCategoryListErrorMessage, getCategoryListResponse, getCategoryResponse } from "models";
+import { createCategoryErrorMessage, createCategoryResponse, getCategoryBySlugErrorMessage, getCategoryBySlugResponse, getCategoryErrorMessage, getCategoryListErrorMessage, getCategoryListResponse, getCategoryResponse } from "models";
 import { RequestCategory } from "src/entity/category";
 import { Helper } from "src/helper/helper.interface";
 import { CategoryRepository } from "../repositories";
@@ -8,11 +8,11 @@ import { CategoryRepository } from "../repositories";
 export class CategoryService {
   constructor(private categoryRepo: CategoryRepository, private helper: Helper) { }
 
-  async addCategory(category: RequestCategory): Promise<addCategoryResponse> {
-    const newCategory = await this.categoryRepo.addCategory(category);
+  async createCategory(category: RequestCategory): Promise<createCategoryResponse> {
+    const newCategory = await this.categoryRepo.createCategory(category);
     if (!newCategory) {
       return this.helper.serviceResponse.errorResponse(
-        addCategoryErrorMessage.CAN_NOT_ADD_CATEGORY,
+        createCategoryErrorMessage.CAN_NOT_CREATE_CATEGORY,
         null,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
