@@ -53,13 +53,13 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
       <section className="text-gray-700 body-font overflow-hidden bg-white">
         <div className="container px-5 py-24 mx-auto">
           <div>
-            <div className="lg:w-4/5 mx-auto flex flex-wrap">
-              <div className="lg:w-1/2 w-full">
+            <div className="mx-auto flex flex-wrap">
+              <div className="md:w-1/2 w-full">
                 <div className="relative inset-0 bg-cover bg-center z-0">
                   <ProductImagesSlider product={product}></ProductImagesSlider>
                 </div>
               </div>
-              <div className="lg:w-1/2 w-full lg:pl-5 ">
+              <div className="md:w-1/2 w-full md:pl-5 mt-10 md:mt-0 ">
                 <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
                   {product.info.name}
                 </h2>
@@ -191,26 +191,26 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                 )}
 
-                <div className="lg:w-fit flex flex-wrap">
-                  <div className="flex ml-1 mr-3 mt-4 title-text items-center">
+                <div className="flex text-black">
+                  <div className="flex lg:mx-2 title-text items-center">
                     Quantity
-                    <div className="m-1 border-2 border-gray-300 rounded px-auto ">
+                    <div className="m-1 lg:ml-4 border-2 border-gray-200 rounded">
                       <button
                         onClick={() => setAmount(amount - 1)}
                         {...(amount <= 1 ? (disableDecrement = true) : null)}
                         disabled={disableDecrement}
-                        className="m-2"
+                        className="p-2"
                       >
                         -
                       </button>
-                      <span className="m-2">{amount}</span>
+                      <span className="p-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
                         {...(amount >= product.stock
                           ? (disableIncrement = true)
                           : null)}
                         disabled={disableIncrement}
-                        className="m-2"
+                        className="p-2"
                       >
                         +
                       </button>
@@ -219,7 +219,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   {isAvailable ? (
                     <button
                       onClick={() => toCart(product.id)}
-                      className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="mt-1 ml-2 text-white bg-green-600 px-2 lg:px-10 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -228,7 +228,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   ) : (
                     <button
                       disabled={true}
-                      className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="mt-4 ml-2 text-white bg-green-600 px-2 lg:px-10 rounded focus:outline-none hover:bg-gray-600"
                     >
                       Soldout
                     </button>
@@ -238,7 +238,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="rounded mt-5 ml-1 bg-gray-600 lg:px-48 md:px-32 px-20 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
+                      className="rounded mt-5 ml-1 bg-black lg:px-56 md:px-32 px-24 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
                     >
                       Buy Now
                     </button>

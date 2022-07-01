@@ -49,37 +49,38 @@ const ProductDescription = ({product}: SingleProduct) => {
 
 	return (
 		<>
-			<div className="lg:w-4/5 mx-auto flex flex-wrap mt-5 border-2 border-g-300 text-slate-600">
-				<div className="lg:w-fit flex flex-wrap border-b-2">
-					<ul>
+			<div className="lg:w-full mx-auto mt-16 border-2 border-g-300 text-slate-600">
+				<div className="flex flex-wrap block border-b-2">
+					<ul className="my-3">
 						<button
 							onClick={handleDescription}
-							className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20"
+							className="font-semibold mx-5"
 						>
 							Description
 						</button>
 						<button
 							onClick={handleReview}
-							className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20"
+							className="font-semibold mx-5"
 						>
 							Review
 						</button>
 						<button
 							onClick={handleShipping}
-							className="text-xl font-semibold mx-10 sm:mx-16 md:mx-20"
+							className="font-semibold mx-5"
 						>
 							Shipping Policy
 						</button>
 						<button
 							onClick={handleSize}
-							className="text-xl font-semibold mx-10 sm:mx-16 md:mx-10"
+							className="font-semibold mx-5 "
 						>
 							Size Chart
 						</button>
 					</ul>
 				</div>
-				<div className="mx-5">
-					<p className={description}>{product.info.shortDescription}</p>
+				
+				<div className="m-5 flex ">
+					<div className={description}>{product.info.shortDescription}</div>
 					<p className={review}>{product.review ? product.review : ''}</p>
 					<p className={shipping}>{vendor?.shipping_policy}</p>
 					<div className={size_chart}>

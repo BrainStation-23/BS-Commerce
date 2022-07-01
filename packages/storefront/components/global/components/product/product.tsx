@@ -13,8 +13,17 @@ const Product = (props: SingleProduct) => {
 
   return (
     <>
-      <Link href={`product/${product?.id}`} passHref>
-        <div className="mb-0 overflow-hidden" key={product?.id}>
+      <Link
+        href={{
+          pathname: `product/${product.info.name}`,
+          query: {
+            id: product.id,
+            name: product.info.name,
+          },
+        }}
+        as={`product/${product.info.name}`}
+      >
+        <div className="mb-0 overflow-hidden" key={product?.info?.name}>
           <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer">
             <div className="rounded overflow-hidden max-w-sm">
               <div className="relative flex items-center justify-center flex-col">
@@ -45,9 +54,7 @@ const Product = (props: SingleProduct) => {
                           product?.info?.oldPrice - product?.info?.price
                         )}`}</p>
                       </div>
-                    ) : (
-                      null
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">

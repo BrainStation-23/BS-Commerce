@@ -10,7 +10,17 @@ interface SingleProduct {
 
 const Product = ({ product }: SingleProduct) => {
   return (
-    <Link href={`/product/${product.id}`} passHref>
+    <Link
+      href={{
+        pathname: `product/${product.info.name}`,
+        query: {
+          id: product.id,
+          name: product.info.name,
+        },
+      }}
+      as={`product/${product.info.name}`}
+      passHref
+    >
       <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer grid justify-items-center">
         <div className="group flex relative pl-10 md:pl-0 lg:pl-0">
           <Image
