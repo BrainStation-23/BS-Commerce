@@ -8,43 +8,45 @@ import { useEffect } from "react";
 var cookie = require("cookie");
 import Axios from "axios";
 
-const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) => {
-    const dispatch = useAppDispatch();
+const Home: NextPage = ({
+  products,
+  featuredProducts,
+  cartData,
+  token,
+}: any) => {
+  //const dispatch = useAppDispatch();
 
-    const getCart = async () => {
-        const cartData = await userAPI.getCart(token?.token);
-        return cartData;
-    };
+  // const getCart = async () => {
+  //     const cartData = await userAPI.getCart(token?.token);
+  //     return cartData;
+  // };
 
-    const store = useAppSelector(
-        (state) => state.persistedReducer.cart.allCartItems
-    );
+  //   const store = useAppSelector(
+  //     (state) => state.persistedReducer.cart.allCartItems
+  //   );
 
-    useEffect(() => {
-        getCart().then(result => dispatch(storeAllCartItems(result?.items)));
-    }, []);
+  // useEffect(() => {
+  //     getCart().then(result => dispatch(storeAllCartItems(result?.items)));
+  // }, []);
 
-    return (
-        <HomeComponent
-            products={products}
-            featuredProducts={featuredProducts}
-        />
-    );
+  return (
+    <HomeComponent products={products} featuredProducts={featuredProducts} />
+  );
 };
 
 export async function getServerSideProps({ req }: any) {
-    let token = cookie?.parse(req.headers?.cookie);
-    const allProducts = await userAPI.getPublicProducts();
-    const featuredProducts = await userAPI.getFeaturedProducts();
-    // const cartData = await userAPI.getCart(token.token);
-    return {
-        props: {
-            products: allProducts || [],
-            featuredProducts: featuredProducts || [],
-            // cartData: cartData || [],
-            token: token,
-        },
-    };
+  let token = cookie?.parse(req.headers?.cookie);
+  const allProducts = await userAPI.getPublicProducts();
+  const featuredProducts = await userAPI.getFeaturedProducts();
+  // const cartData = await userAPI.getCart(token.token);
+  return {
+    props: {
+      products: allProducts || [],
+      featuredProducts: featuredProducts || [],
+      // cartData: cartData || [],
+      token: token,
+    },
+  };
 }
 
 export default Home;

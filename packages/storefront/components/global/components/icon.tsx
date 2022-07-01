@@ -1,8 +1,10 @@
 import { userAPI } from "APIs";
+import { useAppDispatch } from "customHooks/hooks";
 import { Product } from "models";
 import Link from "next/link";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { addToCart } from "toolkit/cartSlice";
 
 interface SingleProduct {
   product: Product;
@@ -10,7 +12,26 @@ interface SingleProduct {
 
 const Icon = (props: SingleProduct) => {
   const { product } = props;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    // await userAPI.addToCart({
+    //   productId: product.id!,
+    //   quantity: 1,
+    // });
+    // location.href = "/home"
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
+      quantity: 1,
+    };
+    dispatch(addToCart(cartItem));
+  };
   // const token = useAppSelector((state) => { })
   // const token = document.cookie("token");
   // console.log(token)
@@ -26,13 +47,7 @@ const Icon = (props: SingleProduct) => {
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={1.5}
-          onClick={async () => {
-            await userAPI.addToCart({
-              productId: product.id!,
-              quantity: 1,
-            });
-            location.href = "/home"
-          }}
+          onClick={handleAddToCart}
         >
           <path
             strokeLinecap="round"

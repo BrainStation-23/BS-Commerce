@@ -9,7 +9,7 @@ const ItemsLists: FC = (props) => {
     (state) => state.persistedReducer.cart.allCartItems
   );
   const totalCartPrice = cartData?.reduce((total, data) => {
-    return total + (data?.product?.info?.price * data.quantity);
+    return total + (data?.product?.info?.price! * data.quantity);
   }, 0);
   const [total, setTotal] = useState(totalCartPrice);
 

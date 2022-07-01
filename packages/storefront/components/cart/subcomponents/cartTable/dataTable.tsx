@@ -72,8 +72,7 @@ const DataTable = () => {
                   // text={"CLEAR CART"}
                   className="text-xs"
                   onClick={() => {
-                    location.href = "http://localhost:3002/home";
-                    // router.push('/cart');
+                    router.push('/home');
                   }}
                 >
                   CONTINUE SHOPPING
@@ -93,7 +92,7 @@ const DataTable = () => {
                   // text={"CLEAR CART"}
                   className="text-xs"
                   onClick={() => {
-                    userAPI.deleteAllCartItem();
+                    //userAPI.deleteAllCartItem();
                     dispatch(deleteCart());
                     // location.href =
                     //     "http://localhost:3002/home";

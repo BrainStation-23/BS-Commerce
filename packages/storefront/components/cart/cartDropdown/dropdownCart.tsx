@@ -18,7 +18,7 @@ const CartDropdown = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
-
+  
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
@@ -28,10 +28,9 @@ const CartDropdown = () => {
   // );
 
   const handleCartItemDelete = async (product: ResponseItem) => {
-    await userAPI.deleteCartItem({
-      productId: product.productId,
-    });
-
+    // await userAPI.deleteCartItem({
+    //   productId: product.productId,
+    // });
     dispatch(deleteCartItem(product));
   };
 

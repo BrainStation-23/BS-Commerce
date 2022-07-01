@@ -9,13 +9,15 @@ import { useRouter } from "next/router";
 
 import { Product } from "models";
 import { userAPI } from "APIs";
+import { useAppDispatch } from "customHooks/hooks";
+import { addToCart } from "toolkit/cartSlice";
 interface SingleProduct {
   product: Product;
 }
 
 const ProductDetailsComponent = ({ product }: SingleProduct) => {
   //const { query } = useRouter();
-
+  const dispatch = useAppDispatch();
   //const product = products.find((product) => product.id === Number(query.pid));
   var isAvailable = true;
   //if (product.stock > 0) isAvailable = true;
@@ -30,12 +32,24 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  const toCart = async (id: string) => {
-    await userAPI.addToCart({
-      productId: id,
-      quantity: amount,
-    });
+  const toCart = async (product: Product) => {
+    // await userAPI.addToCart({
+    //   productId: id,
+    //   quantity: amount,
+    // });
     //setCart([...cart, { ...`${product.info.id}`, amount }]);
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
+      quantity: amount,
+    };
+    setAmount(0);
+    dispatch(addToCart(cartItem));
   };
 
   const toWishlist = () => {
@@ -137,7 +151,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                 <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
                   {product.info.fullDescription}
                 </p>
-                {product.info.size && (
+                {product?.info?.size && (
                   <div className="flex mt-2 items-center mb-2">
                     <div className="flex ml-1 items-center">
                       <span className="mr-3">Size:</span>
@@ -196,9 +210,9 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                     Quantity
                     <div className="m-1 border-2 border-gray-300 rounded px-auto ">
                       <button
-                        onClick={() => setAmount(amount - 1)}
-                        {...(amount <= 1 ? (disableDecrement = true) : null)}
-                        disabled={disableDecrement}
+                        onClick={() => setAmount(amount - 1 >= 0 ? amount - 1 : 0)}
+                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
+                        // disabled={disableDecrement}
                         className="m-2"
                       >
                         -
@@ -206,9 +220,9 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                       <span className="m-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
-                        {...(amount >= product.stock
-                          ? (disableIncrement = true)
-                          : null)}
+                        // {...(amount >= product.stock
+                        //   ? (disableIncrement = true)
+                        //   : null)}
                         disabled={disableIncrement}
                         className="m-2"
                       >
@@ -218,7 +232,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={() => toCart(product.id)}
+                      onClick={() => toCart(product)}
                       className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"
