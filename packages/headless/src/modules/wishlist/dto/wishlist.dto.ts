@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsDate, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
 import { 
     Wishlist,
     WishlistItem,
@@ -37,6 +37,34 @@ export class WishlistProductInfoDto implements WishlistProductInfo {
     @ApiProperty()
     @IsNumber()
     cost: number;
+
+    @ApiProperty()
+    @IsBoolean()
+    showOnHomePage?: boolean;
+
+    @ApiProperty()
+    @IsBoolean()
+    includeInTopMenu?: boolean;
+
+    @ApiProperty()
+    @IsBoolean()
+    allowToSelectPageSize?: boolean;
+
+    @ApiProperty()
+    @IsBoolean()
+    published?: boolean;
+
+    @ApiProperty()
+    @IsNumber()
+    displayOrder?: number;
+
+    @ApiProperty()
+    @IsBoolean()
+    isFeatured?: boolean;
+
+    @ApiProperty()
+    @IsDate()
+    publishDate?: Date;
 }
 
 export class WishlistProductPhotoDto implements WishlistProductPhoto {

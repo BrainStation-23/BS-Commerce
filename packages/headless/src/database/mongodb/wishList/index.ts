@@ -44,7 +44,8 @@ export class WishListDatabase implements IWishListDatabase {
   }
 
   async createWishList(wishlist: WishList): Promise<WishList | null> {
-    return await WishListModel.create(wishlist);
+    const createdWishlist = await WishListModel.create(wishlist);
+    return createdWishlist.toJSON()
   }
 
   async getWishList(query: Record<string, any>): Promise<WishList | null> {

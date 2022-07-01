@@ -6,6 +6,13 @@ export interface WishlistProductInfo {
     price: number;
     oldPrice: number;
     cost: number;
+    showOnHomePage?: boolean;
+    includeInTopMenu?: boolean;
+    allowToSelectPageSize?: boolean;
+    published?: boolean;
+    displayOrder?: number;
+    isFeatured?: boolean;
+    publishDate?: Date;
 }
 
 export interface WishlistProductPhoto {
