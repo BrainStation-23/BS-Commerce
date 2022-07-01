@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IWishListDatabase } from './wishList.database.interface';
-import { Item, WishList } from 'src/entity/wishList';
+import { WishlistItem, WishList } from 'src/entity/wishList';
 import { randomUUID } from 'crypto';
 
 @Injectable()
@@ -14,15 +14,16 @@ export class WishListRepository {
     });
   }
 
-  async incrementItemQuantity(userId: string, item: Item): Promise<WishList | null> {
+  async incrementItemQuantity(userId: string, item: WishlistItem): Promise<WishList | null> {
     return await this.db.incrementItemQuantity(userId, item);
   }
 
-  async addItem(userId: string, item: Item): Promise<WishList | null> {
+  async addItem(userId: string, item: WishlistItem): Promise<WishList | null> {
     return await this.db.addWishListItem(userId, item);
   }
 
   async createWishlist(wishList: WishList): Promise<WishList | null> {
+    wishList.id = randomUUID();
     return await this.db.createWishList(wishList);
   }
 
@@ -42,7 +43,7 @@ export class WishListRepository {
     return await this.db.deleteWishList(wishlistId);
   }
 
-  async updateWishlistItem(userId: string, item: Item,): Promise<WishList | null> {
+  async updateWishlistItem(userId: string, item: WishlistItem,): Promise<WishList | null> {
     return await this.db.updateWishlistItem(userId, item);
   }
 

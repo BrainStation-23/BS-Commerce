@@ -5,7 +5,7 @@ import { authConfig } from 'config/auth';
 import { JwtPayload } from 'src/entity/auth';
 
 @Injectable()
-export class CustomerJwtStrategy extends PassportStrategy(Strategy, 'customer') {
+export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

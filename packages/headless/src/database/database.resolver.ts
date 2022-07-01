@@ -9,6 +9,7 @@ import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/man
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 
 type CLASS_NAME =
   'WISHLIST'
@@ -42,6 +43,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return CustomerDatabaseMongo;
           case 'CART':
             return CartDatabaseMongo;
+          case 'WISHLIST':
+            return WishListDatabaseMongo;
 
           default:
             break;

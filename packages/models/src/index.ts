@@ -9,3 +9,4 @@ export * from './customer/index';
 export * from './cart/index';
 export * from './media/index';
 export * from "./compare/index";
+export * from './wishlist/index';

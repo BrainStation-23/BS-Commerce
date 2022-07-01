@@ -1,18 +1,37 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { WishlistItem } from 'src/entity/wishList';
 import { Response } from 'express';
 import { WishListService } from '../services';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  AddToWishlistErrorResponseDto,
+  AddToWishlistRequestDto,
+  AddToWishlistSuccessResponseDto
+} from '../dto';
+import { CustomerJwtAuthGuard } from 'src/modules/customer-auth/guards/auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @Controller('wishlist')
+@UseGuards(new CustomerJwtAuthGuard('customer'))
+@ApiBearerAuth()
+@ApiTags('Customer Wishlist API')
 export class WishListController {
   constructor(private wishListService: WishListService,) { }
 
   @Post()
-  async addWishList(@Body() item: WishlistItem, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  @ApiResponse({
+    description: 'Add to Wishlist Success Response',
+    type: AddToWishlistSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Add to Wishlist Error Response',
+    type: AddToWishlistErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async addWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;

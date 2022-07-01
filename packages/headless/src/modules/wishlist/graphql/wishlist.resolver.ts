@@ -1,10 +1,10 @@
-import { Item } from 'src/entity/wishList';
 import { WishListService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { WishlistItem } from 'src/entity/wishList';
 @UseGuards(JwtAuthGuard)
 @Resolver()
 export class WishListResolver {
@@ -21,7 +21,7 @@ export class WishListResolver {
   }
 
   @Mutation()
-  async addToWishlist(@Args('item') item: Item, @UserInfo() user: User) {
+  async addToWishlist(@Args('item') item: WishlistItem, @UserInfo() user: User) {
     return await this.wishListService.addToWishList(user.id, item);
   }
 
@@ -31,7 +31,7 @@ export class WishListResolver {
   }
 
   @Mutation()
-  async updateWishlistItem(@Args('item') item: Item, @UserInfo() user: User) {
+  async updateWishlistItem(@Args('item') item: WishlistItem, @UserInfo() user: User) {
     return await this.wishListService.updateWishlistItem(item, user.id);
   }
 

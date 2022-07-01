@@ -5,7 +5,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { coreConfig } from 'config/core';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard(['customer', 'user']) {
+export class CustomerJwtAuthGuard extends AuthGuard(['customer', 'user']) {
     canActivate(context: ExecutionContext) {
         const ctx = GqlExecutionContext.create(context);
         const { req } = ctx.getContext();
@@ -14,7 +14,7 @@ export class JwtAuthGuard extends AuthGuard(['customer', 'user']) {
     handleRequest(err: any, user: any, info: string) {
         if (err || !user) {
             if (!user) {
-                throw new HttpException('Sorry! You are not a valid User for this action.', HttpStatus.FORBIDDEN);
+                throw new HttpException('Sorry! You are not a valid Customer.', HttpStatus.FORBIDDEN);
             }
             throw err;
         }

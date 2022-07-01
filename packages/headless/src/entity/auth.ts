@@ -8,4 +8,5 @@ export class JwtPayload {
     id: string;
     username: string;
     logInTime: number;
+    userType: string;
 }

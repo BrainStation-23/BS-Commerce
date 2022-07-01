@@ -2,7 +2,6 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
-import { adminAuthConfig } from 'config/auth';
 import { JwtPayload } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
@@ -18,6 +17,7 @@ import {
   ForgotPasswordErrorMessages,
   SignUpSuccessMessages
 } from 'models';
+import { authConfig } from 'config/auth';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +32,7 @@ export class AuthService {
     user.displayName = data.firstName + ' ' + data.lastName;
     user.email = data.email.toLowerCase();
     user.username = data.email;
-    user.password = await bcrypt.hash(data.password, adminAuthConfig.salt!);
+    user.password = await bcrypt.hash(data.password, authConfig.salt!);
 
     const registeredUser = await this.userRepo.createUser(user);
     if (!registeredUser) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.CAN_NOT_CREATE_USER, null, HttpStatus.BAD_REQUEST);
@@ -50,6 +50,7 @@ export class AuthService {
       id: user.id,
       username: user.username,
       logInTime: Date.now(),
+      userType: 'user'
     };
 
     const token = this.jwtService.sign(payload);
