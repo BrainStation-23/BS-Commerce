@@ -3,40 +3,40 @@ import { WishlistItem } from 'src/entity/wishList';
 import { Helper } from 'src/helper/helper.interface';
 import { ServiceErrorResponse, ServiceSuccessResponse, } from 'src/helper/serviceResponse/service.response.interface';
 import { WishListRepository } from '../repositories';
+import {
+  addToWishlistErrorMessage,
+  AddToWishlistResponse,
+  getUserWishlistErrorMessage,
+  getUserWishlistResponse,
+} from 'models';
+
 @Injectable()
 export class WishListService {
   constructor(private wishListRepo: WishListRepository, private helper: Helper,) { }
 
-  async addToWishList(userId: string, item: WishlistItem,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async addToWishList(userId: string, item: WishlistItem,): Promise<AddToWishlistResponse> {
     const doesWishListExist = await this.wishListRepo.getUserWishlist(userId);
     if (!doesWishListExist) {
       const wishList = await this.wishListRepo.createWishlist({ userId, items: [item] });
-      if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t add to your Wishlist.', null, HttpStatus.INTERNAL_SERVER_ERROR,);
+      if (!wishList) return this.helper.serviceResponse.errorResponse(addToWishlistErrorMessage.CAN_NOT_CREATE_WISHLIST, null, HttpStatus.INTERNAL_SERVER_ERROR,);
       return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.CREATED);
     }
 
     const doesItemExist = await this.wishListRepo.doesItemExist(userId, item.productId);
     if (!doesItemExist) {
       const wishlist = await this.wishListRepo.addItem(userId, item);
-      if (!wishlist) return this.helper.serviceResponse.errorResponse('Can\'t add an item to your Wishlist.', null, HttpStatus.BAD_REQUEST);
+      if (!wishlist) return this.helper.serviceResponse.errorResponse(addToWishlistErrorMessage.CAN_NOT_ADD_ITEM_TO_THE_WISHLIST, null, HttpStatus.BAD_REQUEST);
       return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishlist), HttpStatus.OK);
     }
 
     const wishList = await this.wishListRepo.incrementItemQuantity(userId, item);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t increment item in Wishlist.', null, HttpStatus.BAD_REQUEST);
+    if (!wishList) return this.helper.serviceResponse.errorResponse(addToWishlistErrorMessage.CAN_NOT_INCREMENT_WISHLIST_ITEM, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
-  async getUserWishlist(userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async getUserWishlist(userId: string,): Promise<getUserWishlistResponse> {
     const wishList = await this.wishListRepo.getUserWishlist(userId);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t get User Wishlist.', null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
-  }
-
-
-  async getWishlist(wishlistId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
-    const wishList = await this.wishListRepo.getWishlist(wishlistId);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t get the single Wishlist.', null, HttpStatus.BAD_REQUEST);
+    if (!wishList) return this.helper.serviceResponse.errorResponse(getUserWishlistErrorMessage.NO_WISHLIST_FOUND, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 

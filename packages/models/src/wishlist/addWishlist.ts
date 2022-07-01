@@ -1,5 +1,12 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { Wishlist } from "./wishlist";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { Wishlist } from './wishlist';
+
+/**
+ * API Path: /wishlist
+ * method: POST
+ * body: addToWishlistRequest
+ * response: AddToWishlistResponse
+ */
 
 export interface addToWishlistRequest {
     productId: string;

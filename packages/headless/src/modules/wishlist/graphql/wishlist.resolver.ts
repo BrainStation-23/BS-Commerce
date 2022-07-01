@@ -11,11 +11,6 @@ export class WishListResolver {
   constructor(private wishListService: WishListService) { }
 
   @Query()
-  async getWishlist(@Args('wishlistId') wishlistId: string) {
-    return await this.wishListService.getWishlist(wishlistId);
-  }
-
-  @Query()
   async getUserWishlist(@UserInfo() user: User) {
     return await this.wishListService.getUserWishlist(user.id);
   }

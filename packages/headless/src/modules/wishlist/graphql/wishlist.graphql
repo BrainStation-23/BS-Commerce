@@ -22,7 +22,6 @@ type WishListResponse {
 }
 
 type Query {
-  getWishlist(wishlistId: String!): WishListResponse!
   getUserWishlist: WishListResponse!
 }
 

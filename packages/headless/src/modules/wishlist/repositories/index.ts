@@ -35,10 +35,6 @@ export class WishListRepository {
     return await this.db.getWishlistProduct(wishlist);
   }
 
-  async getWishlist(wishlistId: string): Promise<WishList | null> {
-    return await this.db.getWishList({ id: wishlistId });
-  }
-
   async deleteWishlist(wishlistId: string): Promise<WishList | null> {
     return await this.db.deleteWishList(wishlistId);
   }
