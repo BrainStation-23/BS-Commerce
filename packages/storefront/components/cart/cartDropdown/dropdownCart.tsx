@@ -28,7 +28,6 @@ const CartDropdown = () => {
   // );
 
   const handleCartItemDelete = async (product: ResponseItem) => {
-    console.log("============================", product)
     await userAPI.deleteCartItem({
       productId: product.productId,
     });

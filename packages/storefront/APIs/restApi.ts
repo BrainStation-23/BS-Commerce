@@ -29,15 +29,8 @@ import { User } from "utils/types";
 import { toast } from "react-toastify";
 var cookie = require("cookie");
 
-function getToken() {
-  console.log("Token ====>");
-  console.log(localStorage.getItem("persist:root"));
-  console.log("Hey In GetToken ====>");
-}
-
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
-    getToken();
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
@@ -115,7 +108,6 @@ export async function getPublicProductByIdRest(
 
 export async function getCartRest(token: string): Promise<Cart[] | undefined> {
   try {
-    console.log("token ======>", token);
     const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
       headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +130,6 @@ export async function addToCartRest(
 
     return res.data as addToCartSuccessResponse;
   } catch (error: any) {
-    console.log("cart data from ==================", error);
     toast.error(error?.response?.data?.message);
   }
 }
@@ -147,7 +138,6 @@ export async function deleteFromCartRest(
   data: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
   try {
-    console.log("=======================>", data)
     const res = await axios?.delete(
       `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`);
     return res?.data as deleteCartItemResponse;

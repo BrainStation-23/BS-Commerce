@@ -9,7 +9,6 @@ import Axios from "axios";
 
 const Layout: NextComponentType = ({ children }: any) => {
     let token = useSelector((state: any) => state.persistedReducer.auth.access_token);
-    console.log("==============from layout", token);
     useEffect(() => {
         Axios.defaults.headers.common = {
             Authorization: `Bearer ${token}`,
