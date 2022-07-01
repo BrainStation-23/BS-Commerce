@@ -6,12 +6,12 @@ import {
   deleteAllCartItemsResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
-} from "models";
-import { CreateCustomerResponse } from "models";
-import { updateCartItemResponse } from "models";
-import { updateCartItemRequest } from "models";
-import { CreateCustomerRequest } from "models";
-import { CustomerSignInRequest } from "models";
+} from 'models';
+import { CreateCustomerResponse } from 'models';
+import { updateCartItemResponse } from 'models';
+import { updateCartItemRequest } from 'models';
+import { CreateCustomerRequest } from 'models';
+import { CustomerSignInRequest } from 'models';
 import {
   GetCustomerProductParams,
   GetCustomerProductResponse,
@@ -22,7 +22,7 @@ import {
   ForgotPasswordResponse,
   SignInRequest,
   SignInResponse,
-} from "models";
+} from 'models';
 
 export interface accordionBody {
   id: string;

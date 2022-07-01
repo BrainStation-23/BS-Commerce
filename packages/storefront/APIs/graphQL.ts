@@ -1,4 +1,4 @@
-import { GET_PRODUCTS } from "graphqlSchema/queries/productQueries";
+import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
   addToCartRequest,
   AddToCartResponse,
@@ -6,13 +6,15 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
-} from "models";
-import { GetCustomerProductResponse } from "models";
-import { CustomerSignInResponse } from "models";
-import { CreateCustomerRequest } from "models";
-import { CreateCustomerResponse } from "models";
-import { CustomerSignInRequest } from "models";
-import { GetCustomerProductParams } from "models";
+  updateCartItemRequest,
+  updateCartItemResponse,
+} from 'models';
+import { GetCustomerProductResponse } from 'models';
+import { CustomerSignInResponse } from 'models';
+import { CreateCustomerRequest } from 'models';
+import { CreateCustomerResponse } from 'models';
+import { CustomerSignInRequest } from 'models';
+import { GetCustomerProductParams } from 'models';
 import {
   CreateUserRequest,
   CreateUserResponse,
@@ -20,9 +22,9 @@ import {
   ForgotPasswordResponse,
   SignInRequest,
   SignInResponse,
-} from "models";
-import { User } from "utils/types";
-import client from "../graphqlSchema/apollo-client";
+} from 'models';
+import { User } from 'utils/types';
+import client from '../graphqlSchema/apollo-client';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
   const { data } = await client.query({
@@ -79,5 +81,17 @@ export async function addToCartGraphql(
 export async function deleteCartItemGraphql(
   productId: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
+  return undefined;
+}
+
+export async function updateCartGraphql(
+  item: updateCartItemRequest
+): Promise<updateCartItemResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteAllFromCartGraphql(): Promise<
+  deleteCartItemResponse | undefined
+> {
   return undefined;
 }

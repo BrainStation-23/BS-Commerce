@@ -1,13 +1,14 @@
-import { GetServerSideProps, NextPage } from "next";
-var cookie = require("cookie");
+import { GetServerSideProps, NextPage } from 'next';
+var cookie = require('cookie');
 
-import { Cart, CustomerProduct } from "models";
-import { userAPI } from "APIs";
-import { useAppDispatch } from "customHooks/hooks";
-import { storeAllCartItems } from "toolkit/cartSlice";
-import { storeFeaturedProducts, storeProducts } from "toolkit/ProductsSlice";
+import { Cart, CustomerProduct } from 'models';
+import { userAPI } from 'APIs';
+import { useAppDispatch } from 'customHooks/hooks';
+import { storeAllCartItems } from 'toolkit/cartSlice';
+import { storeFeaturedProducts, storeProducts } from 'toolkit/ProductsSlice';
 
-import HomeComponent from "@/components/home";
+import HomeComponent from '@/components/home';
+import { renderToStringWithData } from '@apollo/client/react/ssr';
 
 interface Props {
   products: CustomerProduct[];

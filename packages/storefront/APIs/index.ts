@@ -11,7 +11,7 @@ import {
   signinRest,
   signUpRest,
   updateCartRest,
-} from "./restApi";
+} from './restApi';
 import {
   addToCartGraphql,
   deleteCartItemGraphql,
@@ -23,9 +23,10 @@ import {
   getUserGraphQl,
   signInGraphql,
   signUpGraphql,
-} from "./graphQL";
-import { config } from "config";
-import { apiFunction } from "utils/types";
+  updateCartGraphql,
+} from './graphQL';
+import { config } from 'config';
+import { apiFunction } from 'utils/types';
 
 const graphqlApi: apiFunction = {
   getUser: getUserGraphQl,
@@ -38,6 +39,8 @@ const graphqlApi: apiFunction = {
   getCart: getCartGraphql,
   addToCart: addToCartGraphql,
   deleteCartItem: deleteCartItemGraphql,
+  updateCartItem: updateCartGraphql,
+  deleteAllCartItem: deleteCartItemGraphql,
 };
 
 const restApi: apiFunction = {
@@ -56,4 +59,4 @@ const restApi: apiFunction = {
 };
 
 export const userAPI: apiFunction =
-  config?.apiService === "GRAPHQL" ? graphqlApi : restApi;
+  config?.apiService === 'GRAPHQL' ? graphqlApi : restApi;
