@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { userAPI } from "APIs";
 import { useAppDispatch } from "customHooks/hooks";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
@@ -45,10 +44,6 @@ const ShowData = ({ data }: any) => {
                           ? itemToUpdate.quantity - 1
                           : 0,
                     });
-                    // userAPI.updateCartItem({
-                    //   productId: itemToUpdate?.productId,
-                    //   quantity: itemToUpdate.quantity - 1,
-                    // });
                     dispatch(updateCartItem({
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity - 1,
@@ -64,10 +59,6 @@ const ShowData = ({ data }: any) => {
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
-                    // userAPI.updateCartItem({
-                    //   productId: itemToUpdate?.productId,
-                    //   quantity: itemToUpdate.quantity + 1,
-                    // });
                     dispatch(updateCartItem({
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity + 1,
@@ -87,7 +78,6 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <button
               onClick={() => {
-                //userAPI.deleteCartItem(data);
                 dispatch(deleteCartItem(data));
               }}
             >

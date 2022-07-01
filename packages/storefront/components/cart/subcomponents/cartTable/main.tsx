@@ -4,7 +4,6 @@ import Buttons from "../../../global/components/buttons/button";
 import DataTable from "./dataTable";
 import ItemsLists from "./itemListSmall";
 const CartDetails: NextComponentType = () => {
-  const [cartTotal, setCartTotal] = useState(0);
 
   return (
     <>

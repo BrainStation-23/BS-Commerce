@@ -1,5 +1,4 @@
-import { userAPI } from "APIs";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+import { useAppDispatch } from "customHooks/hooks";
 import { useState } from "react";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
@@ -23,7 +22,6 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
             className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
             style={{ background: "#808080" }}
             onClick={() => {
-              //userAPI.deleteCartItem(data);
               setTotal(total - ((itemToUpdate.quantity) * data.product.info.price))
               dispatch(deleteCartItem(data));
             }}
@@ -56,10 +54,6 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
                           ? itemToUpdate.quantity - 1
                           : 0,
                     });
-                    // userAPI.updateCartItem({
-                    //   productId: itemToUpdate?.productId,
-                    //   quantity: itemToUpdate.quantity - 1,
-                    // });
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,
@@ -79,10 +73,6 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
-                    // userAPI.updateCartItem({
-                    //   productId: itemToUpdate?.productId,
-                    //   quantity: itemToUpdate.quantity + 1,
-                    // });
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,

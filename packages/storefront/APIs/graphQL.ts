@@ -40,14 +40,3 @@ export async function getPublicProductByIdGraphql(productId: GetCustomerProductP
 export async function getFeaturedProductsGraphql(): Promise<GetCustomerAllProductsResponse | undefined> {
   return undefined;
 }
-
-export async function getCartGraphql(): Promise<Cart[] | undefined> {
-  return undefined
-}
-
-export async function addToCartGraphql(productId: addToCartRequest): Promise<AddToCartResponse | undefined> {
-  return undefined;
-}
-export async function deleteCartItemGraphql(productId:deleteCartItemRequest): Promise<deleteCartItemResponse | undefined> {
-  return undefined;
-}

@@ -13,10 +13,6 @@ import { deleteCart } from "toolkit/cartSlice";
 const DataTable = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const cartData = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
-  );
-  // console.log("From Data Table", cartData);
 
   return (
     <>
@@ -51,12 +47,6 @@ const DataTable = () => {
               <th></th>
               <th></th>
               <th className="p-4">
-                {/* <Buttons
-                  bgColor="black"
-                  height={10}
-                  width={120}
-                  text={"UPDATE CART"}
-                /> */}
               </th>
               <th className="p-4">
                 <button
@@ -66,10 +56,6 @@ const DataTable = () => {
                     height: "39px",
                     width: "150px",
                   }}
-                  // bgColor="black"
-                  // height={12}
-                  // width={120}
-                  // text={"CLEAR CART"}
                   className="text-xs"
                   onClick={() => {
                     router.push('/home');
@@ -86,17 +72,10 @@ const DataTable = () => {
                     height: "39px",
                     width: "120px",
                   }}
-                  // bgColor="black"
-                  // height={12}
-                  // width={120}
-                  // text={"CLEAR CART"}
+                  
                   className="text-xs"
                   onClick={() => {
-                    //userAPI.deleteAllCartItem();
                     dispatch(deleteCart());
-                    // location.href =
-                    //     "http://localhost:3002/home";
-                    // router.push('/cart');
                   }}
                 >
                   CLEAR CART

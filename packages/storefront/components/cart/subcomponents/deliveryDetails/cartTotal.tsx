@@ -8,7 +8,7 @@ const CartTotal: NextComponentType = () => {
   );
 
   const totalCartPrice = cartData?.reduce((total, data) => {
-    return total + data?.product?.info?.price * data.quantity;
+    return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
   return (
