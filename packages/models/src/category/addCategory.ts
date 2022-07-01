@@ -5,7 +5,7 @@ import { Category, Meta, Photo } from "./category";
 export interface addCategoryRequest {
     name: string,
     parentSlug?:string,
-    photo: Photo;
+    photo?: Photo;
     description?: string,
     showOnHomePage?: boolean,
     includeInTopMenu?: boolean,

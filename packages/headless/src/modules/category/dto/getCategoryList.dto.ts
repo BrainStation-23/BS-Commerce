@@ -3,23 +3,12 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
 import { getCategoryListAncestor, NestedCategoryList, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse } from "models";
+import { PhotoDto } from "./category.dto";
 
 export class AncestorDto implements getCategoryListAncestor {
     @ApiProperty()
     @IsString()
-    id:string;
-
-    @ApiProperty()
-    @IsString()
     name: string;
-
-    @ApiProperty()
-    @IsBoolean()
-    published:boolean;
-
-    @ApiProperty()
-    @IsNumber()
-    displayOrder:number;
 
     @ApiProperty()
     @IsArray()
@@ -38,6 +27,12 @@ export class subCategoryListDto {
     @ApiProperty()
     @IsString()
     name: string;
+
+    @ApiProperty({ type: PhotoDto })
+    @Type(() => PhotoDto)
+    @IsOptional()
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty()
     @IsBoolean()
@@ -70,6 +65,12 @@ export class NestedCategoryListDto implements NestedCategoryList {
     @ApiProperty()
     @IsString()
     name: string;
+
+    @ApiProperty({ type: PhotoDto })
+    @Type(() => PhotoDto)
+    @IsOptional()
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty()
     @IsBoolean()

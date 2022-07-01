@@ -20,7 +20,7 @@ export class addCategoryRequestDto implements addCategoryRequest {
     @CustomValidator(PhotoDto)
     @IsOptional()
     @IsObject()
-    photo: PhotoDto;
+    photo?: PhotoDto;
 
     @ApiProperty()
     @IsOptional()
