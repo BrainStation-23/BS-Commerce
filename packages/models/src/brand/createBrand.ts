@@ -3,11 +3,11 @@ import { SuccessResponse } from "src/common/successResponse";
 
 export interface CreateBrandRequest{
     id?: string,
-    info: Info,
-    meta: Meta
+    info: BrandInfo,
+    meta: BrandMeta
 }
 
-export interface Info{
+export interface BrandInfo{
     name: string,
     description?: string,
     allowToSelectPageSize?: boolean,
@@ -15,7 +15,7 @@ export interface Info{
     displayOrder?: number,
     pageSizeOptions?: number[] 
 }
-export interface Meta {
+export interface BrandMeta {
     keywords?: string,
     description?: string,
     title?: string,

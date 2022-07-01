@@ -1,17 +1,17 @@
 import { Brand } from './brand';
 import { ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Info, Meta } from "./createBrand";
+import { BrandInfo, BrandMeta } from "./createBrand";
 
 export interface UpdateBrandRequest{
-    info: Info,
-    meta: Meta
+    info: BrandInfo,
+    meta: BrandMeta
 }
 
 export interface UpdatedBrand{
     id:string,
-    info: Info,
-    meta: Meta
+    info: BrandInfo,
+    meta: BrandMeta
 }
 
 export interface UpdateBrandSuccessResponse extends SuccessResponse {

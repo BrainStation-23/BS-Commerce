@@ -1,9 +1,9 @@
-import { Info } from "./createBrand";
-import { Meta } from "./createBrand";
+import { BrandInfo } from "./createBrand";
+import { BrandMeta } from "./createBrand";
 
 
 export interface Brand{
      id: string,
-     info: Info,
-     meta: Meta
+     info: BrandInfo,
+     meta: BrandMeta
 }
