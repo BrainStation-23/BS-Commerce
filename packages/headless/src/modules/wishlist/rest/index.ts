@@ -12,6 +12,8 @@ import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
   AddToWishlistSuccessResponseDto,
+  deleteAllWishlistItemsErrorResponseDto,
+  deleteAllWishlistItemsSuccessResponseDto,
   deleteWishlistErrorResponseDto,
   deleteWishlistPramsDto,
   deleteWishlistSuccessResponseDto,
@@ -76,8 +78,18 @@ export class WishListController {
   }
 
   @Delete('wishlist/allitems')
+  @ApiResponse({
+    description: 'Delete All Wishlist Items Success Response',
+    type: deleteAllWishlistItemsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Delete All Wishlist Items Error Response',
+    type: deleteAllWishlistItemsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id,);
+    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id);
     res.status(code);
     return response;
   }

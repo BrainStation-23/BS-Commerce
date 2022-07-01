@@ -1,5 +1,4 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
-import { Wishlist } from './wishlist';
 
 /**
  * API Path: /wishlist/:wishlistId
