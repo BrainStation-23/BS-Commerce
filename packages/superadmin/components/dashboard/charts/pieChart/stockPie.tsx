@@ -13,7 +13,7 @@ chartjs.register(Tooltip, Title, ArcElement, Legend, PieController);
 const StockPieChart: FC = () => {
   const show = <i className="bi bi-plus"></i>;
   const hide = <i className="bi bi-dash-lg"></i>;
-  const [accordion, setAccordion] = useState(true);
+  const [accordion, setAccordion] = useState(false);
   const [data, setData] = useState({
     labels: [
       "Electronics",

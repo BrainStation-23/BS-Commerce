@@ -21,6 +21,7 @@
     "build": "lerna run --parallel build"
   },
   "dependencies": {
-    "cookie": "^0.5.0"
+    "cookie": "^0.5.0",
+    "react-datepicker": "^4.8.0"
   }
 }
