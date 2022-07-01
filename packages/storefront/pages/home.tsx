@@ -5,14 +5,11 @@ import { userAPI } from "APIs";
 import { storeAllCartItems } from "toolkit/cartSlice";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useEffect } from "react";
+import Loading from "@/components/global/loader";
 var cookie = require("cookie");
 
 const Home: NextPage = ({ products, featuredProducts, cartData, token }: any) => {
   const dispatch = useAppDispatch();
-
-  const store = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
-  );
 
   useEffect(() => {
     dispatch(storeAllCartItems(cartData.items));
@@ -32,9 +29,9 @@ export async function getServerSideProps({ req }: any) {
   const cartData = await userAPI.getCart(token.token);
   return {
     props: {
-      products: allProducts || [],
-      featuredProducts: featuredProducts || [],
-      cartData: cartData || [],
+      products: allProducts ? JSON.parse(JSON.stringify(allProducts)) : [],
+      featuredProducts: featuredProducts ? JSON.parse(JSON.stringify(featuredProducts)) : [],
+      cartData: cartData ? JSON.parse(JSON.stringify(cartData)) : [],
       token: token,
     },
   };
