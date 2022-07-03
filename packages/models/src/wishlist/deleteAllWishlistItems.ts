@@ -7,14 +7,11 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  * response: deleteAllWishlistItemsResponse
  */
 
-
-interface Message {
-    message: string
-}
-
 export interface deleteAllWishlistItemsSuccessResponse extends SuccessResponse {
     code: number;
-    data: Message;
+    data: {
+        message?: string
+    };
 }
 
 export const enum deleteAllWishlistItemsSuccessMessage {

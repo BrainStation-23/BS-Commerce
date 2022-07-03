@@ -11,13 +11,11 @@ export interface DeleteWishlistParams {
     wishlistId: string
 }
 
-interface Message {
-    message: string
-}
-
 export interface deleteWishlistSuccessResponse extends SuccessResponse {
     code: number;
-    data: Message;
+    data: {
+        message?: string
+    };
 }
 
 export const enum deleteWishlistSuccessMessage {

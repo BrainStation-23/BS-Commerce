@@ -10,7 +10,7 @@ export class RolesGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const roles = this.reflector.getAllAndMerge('roles', [context.getHandler(), context.getClass()]);
     if (!roles.length) {
-      return true;
+      throw new HttpException('Role is Unknown.', HttpStatus.FORBIDDEN);
     }
 
     const user = (coreConfig.api === 'GRAPHQL') ? await GqlExecutionContext.create(context).getContext().req.user : await context.switchToHttp().getRequest().user;

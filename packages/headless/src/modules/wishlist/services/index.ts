@@ -13,6 +13,9 @@ import {
   deleteWishlistResponse,
   deleteAllWishlistItemsSuccessMessage,
   deleteAllWishlistItemsErrorMessage,
+  deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
+  deleteWishlistItemErrorMessage,
 } from 'models';
 
 @Injectable()
@@ -48,7 +51,7 @@ export class WishListService {
   async deleteWishlist(wishlistId: string): Promise<deleteWishlistResponse> {
     const wishList = await this.wishListRepo.deleteWishlist(wishlistId);
     if (!wishList) return this.helper.serviceResponse.errorResponse(deleteWishlistErrorMessage.CAN_NOT_DELETE_WISHLIST, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({message: deleteWishlistSuccessMessage.WISHLIST_DELETED_SUCCESSFUL}, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse({ message: deleteWishlistSuccessMessage.WISHLIST_DELETED_SUCCESSFUL }, HttpStatus.OK);
   }
 
   async updateWishlistItem(item: WishlistItem, userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
@@ -63,15 +66,15 @@ export class WishListService {
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
-  async deleteWishlistItem(productId: string, userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async deleteWishlistItem(productId: string, userId: string,): Promise<deleteWishlistItemResponse> {
     const wishList = await this.wishListRepo.deleteWishlistItem(userId, productId);
-    if (!wishList) return this.helper.serviceResponse.errorResponse('Can\'t delete Wishlist Item.', null, HttpStatus.BAD_REQUEST);
+    if (!wishList) return this.helper.serviceResponse.errorResponse(deleteWishlistItemErrorMessage.CAN_NOT_DELETE_WISHLIST_ITEM, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(await this.wishListRepo.getWishlistProduct(wishList), HttpStatus.OK);
   }
 
-  async deleteAllWishlistItems(userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async deleteAllWishlistItems(userId: string,): Promise<deleteAllWishlistItemsResponse> {
     const wishList = await this.wishListRepo.deleteAllWishlistItems(userId);
     if (!wishList) return this.helper.serviceResponse.errorResponse(deleteAllWishlistItemsErrorMessage.CAN_NOT_DELETE_ALL_WISHLIST_ITEMS, null, HttpStatus.BAD_REQUEST,);
-    return this.helper.serviceResponse.successResponse({message: deleteAllWishlistItemsSuccessMessage.WISHLIST_ITEMS_DELETED_SUCCESSFUL}, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse({ message: deleteAllWishlistItemsSuccessMessage.WISHLIST_ITEMS_DELETED_SUCCESSFUL }, HttpStatus.OK);
   }
 }
