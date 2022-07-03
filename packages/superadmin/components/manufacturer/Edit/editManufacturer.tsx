@@ -74,11 +74,23 @@ const EditManufacturer = (props: any) => {
                         className="text-decoration-none "
                       >
                         <i className="bi bi-arrow-left-circle-fill p-2" />
-                        Back to Manufacturer list
+                        <span style={{ fontSize: "14px" }}>
+                          Back to Manufacturer list
+                        </span>
                       </a>
                     </span>
                   </h1>
                   <div className="float-end">
+                    <button
+                      type="button"
+                      className="btn btn-info float-left mx-2 my-auto "
+                      id="product-editor-settings"
+                      data-toggle="modal"
+                      data-target="#productsettings-window"
+                    >
+                      <i className="bi bi-gear-fill pt-1" />
+                      <p className="float-end mx-1 my-0">Settings</p>
+                    </button>
                     <button
                       type="submit"
                       name="save"
@@ -90,20 +102,6 @@ const EditManufacturer = (props: any) => {
                     </button>
                   </div>
                 </div>
-
-                <div className="col-md-12 clearfix">
-                  <button
-                    type="button"
-                    className="btn btn-info float-left mx-2 my-auto "
-                    id="product-editor-settings"
-                    data-toggle="modal"
-                    data-target="#productsettings-window"
-                  >
-                    <i className="bi bi-gear-fill pt-1" />
-                    <p className="float-end mx-1 my-0">Settings</p>
-                  </button>
-                </div>
-
                 <div className="mt-4">
                   <CreateNewManufacturer />
                   <DisplayOrders />

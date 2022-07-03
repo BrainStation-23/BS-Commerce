@@ -18,7 +18,7 @@ const EditManufacturerPage: NextPage = () => {
   }, []);
   return (
     <div className="bg-light">
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="bg-light px-5">
         {manufacturer ? (
           <EditManufacturer manufacturer={manufacturer} />
         ) : (

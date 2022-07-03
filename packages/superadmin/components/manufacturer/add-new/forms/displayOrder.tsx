@@ -18,7 +18,7 @@ const DisplayOrders: FC = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#categoryTab"
@@ -28,7 +28,7 @@ const DisplayOrders: FC = () => {
           >
             <div className="card-title row align-items-center visible">
               <i className="bi bi-tv fill col-1" style={{ fontSize: "25px" }} />
-              <div className="px-3 fs-5 col text-start">Display Order</div>
+              <div className="fs-5 col px-3 text-start">Display Order</div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
               </div>
@@ -48,7 +48,7 @@ const DisplayOrders: FC = () => {
                   </label>
                 </div>
               </div>
-              <div className="col-md-8 mt-md-3 mx-2 mx-md-0">
+              <div className="col-md-8 mt-md-3 mx-md-0 mx-2">
                 <div className="input-group ">
                   <Field
                     type="number"
@@ -56,16 +56,20 @@ const DisplayOrders: FC = () => {
                     name="displayOrder"
                     aria-disabled="false"
                     className="form-control"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                 </div>
                 <div
-                  className="pt-2 col-1"
+                  className="col-1 pt-2"
                   style={{ height: "4px", padding: "15px" }}
                 >
                   <h2 className="required text-danger ">*</h2>
                 </div>
               </div>
-              <div className="errMsg text-red-600 text-danger">
+              <div className="errMsg text-danger text-red-600">
                 <ErrorMessage name="displayOrder" />
               </div>
             </div>

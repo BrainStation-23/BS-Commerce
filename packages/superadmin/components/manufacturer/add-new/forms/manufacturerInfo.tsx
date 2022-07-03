@@ -19,7 +19,7 @@ const CreateNewManufacturer: FC = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#prouctInfoTab"
@@ -29,10 +29,10 @@ const CreateNewManufacturer: FC = () => {
           >
             <div className="card-title row align-items-center visible">
               <i
-                className="bi bi-info-lg align-text-top col-1"
+                className="bi bi-info-lg col-1 align-text-top"
                 style={{ fontSize: "25px" }}
               />
-              <div className="px-3 fs-5 col text-start">Manufacturer Info</div>
+              <div className="fs-5 col px-3 text-start">Manufacturer Info</div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
               </div>
@@ -57,6 +57,11 @@ const CreateNewManufacturer: FC = () => {
                       id="name"
                       name="name"
                       type="text"
+                      style={{
+                        border: "none",
+                        borderBottom: "2px grey solid",
+                        padding: "2px",
+                      }}
                     />
                     <div
                       className="pt-2"
@@ -65,7 +70,7 @@ const CreateNewManufacturer: FC = () => {
                       <h2 className="required text-danger ">*</h2>
                     </div>
                   </div>
-                  <div className="errMsg text-red-600 text-danger">
+                  <div className="errMsg text-danger text-red-600">
                     <ErrorMessage name="name" />
                   </div>
                 </div>
@@ -90,7 +95,7 @@ const CreateNewManufacturer: FC = () => {
                       name="description"
                     />
                   </div>
-                  <div className="errMsg text-red-600 text-danger">
+                  <div className="errMsg text-danger text-red-600">
                     <ErrorMessage name="description" />
                   </div>
                 </div>
@@ -111,6 +116,10 @@ const CreateNewManufacturer: FC = () => {
                     id="picture"
                     name="picture"
                     type="text"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                   <div
                     className="pt-2"
@@ -119,7 +128,7 @@ const CreateNewManufacturer: FC = () => {
                     <h2 className="required text-danger ">*</h2>
                   </div>
                 </div>
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="picture" />
                 </div>
               </div>
@@ -135,14 +144,14 @@ const CreateNewManufacturer: FC = () => {
                   </label>
                 </div>
               </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
+              <div className="col-md-9 mt-md-3 mx-md-0 mx-2">
                 <Field
                   className="check-box mt-2"
                   id="isPublished"
                   name="isPublished"
                   type="checkbox"
                 />
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="isPublished" />
                 </div>
               </div>

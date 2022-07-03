@@ -121,7 +121,7 @@ const ManufactureList: FC<Props> = ({
         <td className="text-center">
           <Link
             href={{
-              pathname: `/Product/View/[id]`,
+              pathname: `/Manufacturer/View/[id]`,
               query: { id: data?.[key] },
             }}
             passHref

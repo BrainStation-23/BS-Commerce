@@ -47,7 +47,7 @@ const SEO: FC = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#photosTab"
@@ -60,7 +60,7 @@ const SEO: FC = () => {
                 className="bi bi-search fill col-1"
                 style={{ fontSize: "25px" }}
               />
-              <div className="px-3 fs-5 col text-start">SEO</div>
+              <div className="fs-5 col px-3 text-start">SEO</div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
               </div>
@@ -84,6 +84,10 @@ const SEO: FC = () => {
                     id="metaKeyword"
                     name="metaKeyword"
                     type="text"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                   <div
                     className="pt-2"
@@ -92,7 +96,7 @@ const SEO: FC = () => {
                     <h2 className="required text-danger ">*</h2>
                   </div>
                 </div>
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaKeyword" />
                 </div>
               </div>
@@ -115,6 +119,10 @@ const SEO: FC = () => {
                     className="form-control"
                     id="metaDescription"
                     name="metaDescription"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                   <div
                     className="pt-2"
@@ -123,7 +131,7 @@ const SEO: FC = () => {
                     <h2 className="required text-danger ">*</h2>
                   </div>
                 </div>
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaDescription" />
                 </div>
               </div>
@@ -146,6 +154,10 @@ const SEO: FC = () => {
                     className="form-control"
                     id="metaTitle"
                     name="metaTitle"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                   <div
                     className="pt-2"
@@ -154,7 +166,7 @@ const SEO: FC = () => {
                     <h2 className="required text-danger ">*</h2>
                   </div>
                 </div>
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaTitle" />
                 </div>
               </div>
@@ -177,6 +189,10 @@ const SEO: FC = () => {
                     className="form-control"
                     id="seftn"
                     name="seftn"
+                    style={{
+                      border: "none",
+                      borderBottom: "2px grey solid",
+                    }}
                   />
                   <div
                     className="pt-2"
@@ -185,7 +201,7 @@ const SEO: FC = () => {
                     <h2 className="required text-danger ">*</h2>
                   </div>
                 </div>
-                <div className="errMsg text-red-600 text-danger">
+                <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="seftn" />
                 </div>
               </div>
