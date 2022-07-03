@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import Tooltips from "../global/tooltip";
+import Tooltips from "../../global/tooltip";
 import { toast } from "react-toastify";
 
 const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
@@ -21,7 +21,7 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 mt-3">
+              <div className="card border-1 mt-3 rounded">
                 <div className="card-header">
                   <span className="ms-2 fs-4">Search</span>
                 </div>
@@ -42,14 +42,14 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
                       <div className="Field-group Field-group-short ">
                         <div className="row">
                           <Field
-                            className="form-control col my-3 mt-2 rounded-start rounded-0 "
+                            className="form-control col rounded-start rounded-0 my-3 mt-2 "
                             id="GoDirectlyToSku"
                             name="GoDirectlyToSku"
                             type="text"
                           />
                         </div>
 
-                        <div className="errMsg text-red-600 text-danger">
+                        <div className="errMsg text-danger text-red-600">
                           <ErrorMessage name="GoDirectlyToSku" />
                         </div>
                       </div>
@@ -75,7 +75,7 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
                     <div className="col-6">
                       <Field
                         as="select"
-                        className="p-2 w-100"
+                        className="w-100 p-2"
                         id="published"
                         name="published"
                       >
@@ -86,7 +86,7 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
                     </div>
                   </div>
                 </div>
-                <div className="d-flex flex-wrap justify-content-center">
+                <div className="d-flex justify-content-center flex-wrap">
                   <button
                     type="submit"
                     className="btn btn-primary px-5"

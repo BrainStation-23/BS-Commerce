@@ -1,10 +1,10 @@
 import { Formik, Form } from "formik";
-import { manufactureSchema } from "./schema/index";
+import { manufactureSchema } from "../schema/index";
 
-import CreateNewManufacturer from "./add-new/forms/manufacturerInfo";
-import DisplayOrders from "./add-new/forms/displayOrder";
-import SEO from "./add-new/forms/seo";
-import { userAPI } from "../../APIs";
+import CreateNewManufacturer from "../add-new/forms/manufacturerInfo";
+import DisplayOrders from "../add-new/forms/displayOrder";
+import SEO from "../add-new/forms/seo";
+import { userAPI } from "../../../APIs";
 import { useRouter } from "next/router";
 const EditManufacturer = (props: any) => {
   const router = useRouter();
@@ -70,7 +70,7 @@ const EditManufacturer = (props: any) => {
                     Edit Manufacturer details
                     <span className="fs-5 p-3">
                       <a
-                        href="/Admin/Manufacturer/list"
+                        href="/Manufacturer/"
                         className="text-decoration-none "
                       >
                         <i className="bi bi-arrow-left-circle-fill p-2" />

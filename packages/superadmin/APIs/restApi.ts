@@ -227,14 +227,15 @@ export async function getManufacturerRest(
 export async function deleteManufacturerRest(
   id: string,
   router: any
-): Promise<Manufacturer[] | undefined> {
+): Promise<boolean | undefined> {
   try {
     const { data } = await axios?.delete(
       `${apiEndPoints?.manufacturerList}/${id}`
     );
-    router.push("/Manufacturer/");
+    // router.push("/Manufacturer/");
     toast.success("Successfully deleted");
-    return data?.data as Manufacturer[];
+    // return data?.data as Manufacturer[];
+    return true;
   } catch (error) {
     toast.error(error?.response?.data?.message);
   }
