@@ -1,13 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { WishlistDto } from './wishlist.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
 import {
     deleteWishlistItemErrorResponse,
     deleteWishlistItemSuccessResponse,
     deleteWishlistItemErrorMessage,
     DeleteWishlistItemParams,
 } from 'models';
-import { IsNotEmpty, IsString } from 'class-validator';
 
 export class deleteWishlistItemPramsDto implements DeleteWishlistItemParams {
     @ApiProperty()

@@ -22,6 +22,9 @@ import {
   deleteWishlistSuccessResponseDto,
   getUserWishlistErrorResponseDto,
   getUserWishlistSuccessResponseDto,
+  updateWishlistItemErrorResponseDto,
+  updateWishlistItemRequestBodyDto,
+  updateWishlistItemSuccessResponseDto,
 } from '../dto';
 
 @Controller()
@@ -67,7 +70,17 @@ export class WishListController {
   }
 
   @Patch('wishlist/item')
-  async updateWishlistItem(@Body() item: WishlistItem, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  @ApiResponse({
+    description: 'Update Wishlist Item Success Response',
+    type: updateWishlistItemSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Update Wishlist Item Error Response',
+    type: updateWishlistItemErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async updateWishlistItem(@Body() item: updateWishlistItemRequestBodyDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
     res.status(code);
     return response;
