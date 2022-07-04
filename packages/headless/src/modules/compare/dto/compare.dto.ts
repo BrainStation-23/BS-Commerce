@@ -1,19 +1,14 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,
   CompareErrorResponse,
-  CompareItems,
   CompareSuccessResponse,
   DescriptiveError,
 } from 'models';
-import {
-  AddProductToCompareErrorEnum,
-  DeleteCompareErrorEnum,
-  GetCompareErrorEnum,
-} from 'models';
+import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })
@@ -23,12 +18,31 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class CompareResponseDto implements CompareSuccessResponse {
+export class ProductInfo {
   @ApiProperty()
-  code: number;
+  name: string;
+  @ApiProperty()
+  price: number;
+  @ApiProperty()
+  shortDescription: string;
+  @ApiProperty()
+  fullDescription: string;
+}
+export class ProductDetails {
+  @ApiProperty({ type: () => [ProductInfo] })
+  info: ProductInfo;
 
   @ApiProperty()
-  data: CompareData;
+  photos: string[];
+}
+
+export class CompareItemsDetails {
+  @ApiProperty()
+  productId: string;
+
+  @ApiProperty({ type: () => [ProductDetails] })
+  @IsOptional()
+  productDetails?: ProductDetails;
 }
 
 export class CompareDataDto implements CompareData {
@@ -36,13 +50,8 @@ export class CompareDataDto implements CompareData {
   id: string;
   @ApiProperty()
   userId: string;
-  @ApiProperty({ type: () => [CompareItemsDto] })
-  items: CompareItems[];
-}
-
-export class CompareItemsDto implements CompareItems {
-  @ApiProperty()
-  productId: string;
+  @ApiProperty({ type: () => [CompareItemsDetails] })
+  items: CompareItemsDetails[];
 }
 
 export class CompareSuccessResponseDto implements CompareSuccessResponse {
@@ -64,14 +73,9 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
       DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
     ],
   })
-  error:
-    | AddProductToCompareErrorEnum
-    | GetCompareErrorEnum
-    | DeleteCompareErrorEnum;
+  error: AddProductToCompareErrorEnum | GetCompareErrorEnum | DeleteCompareErrorEnum;
   @ApiProperty()
   errors: DescriptiveError;
 }
 
-export type CompareResponse =
-  | CompareSuccessResponseDto
-  | CompareErrorResponseDto;
+export type CompareResponse = CompareSuccessResponseDto | CompareErrorResponseDto;

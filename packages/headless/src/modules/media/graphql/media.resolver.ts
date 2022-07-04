@@ -32,7 +32,7 @@ export class MediaResolver {
     );
 
     return {
-      url: `${coreConfig.baseUrl}/${coreConfig.graphqlPathPrefix}/${url}`
+      url: `${coreConfig.baseUrl}/${url}`
     }
   }
 }

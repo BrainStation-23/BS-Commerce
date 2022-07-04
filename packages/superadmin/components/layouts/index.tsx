@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "../../redux-hooks";
 import { userAPI } from "../../APIs";
 
-import HeaderBar from "./components/headerBar";
+import Headerbar from "./components/headerbar";
 import Sidebar from "./components/sidebar";
 
 interface Props {
@@ -72,7 +72,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           }}
         >
           <div style={{ height: "56px", width: "100%" }}>
-            <HeaderBar
+            <Headerbar
               toggleSidebar={toggleSidebar}
               showSidebar={showSidebar}
               displayName={userData?.displayName!}

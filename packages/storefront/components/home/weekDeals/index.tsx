@@ -8,14 +8,14 @@ import Picture from "@/components/global/components/product/common/picture";
 import Icon from "@/components/global/components/icon";
 import ProductInfo from "@/components/global/components/product/common/productInfo";
 import { Product } from "models";
+import { useAppSelector } from "customHooks/hooks";
 
-interface Products {
-  products: Product[];
-}
-
-const WeekDeals = ({ products }: Products) => {
+const WeekDeals = () => {
   //edited type. was const WeekDeals: FC = () => {}
   // console.log(products);
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -34,7 +34,7 @@ const WeekDeals = ({ products }: Products) => {
           slidesPerView768={3}
           slidesPerView980={5}
           rows={1}
-          loop={products.length > getMinimumProduct() ? true : false}
+          loop={products?.length > getMinimumProduct() ? true : false}
         >
           {products &&
             products.length > 0 &&
