@@ -1,4 +1,4 @@
-import { NextRouter } from "next/router";
+import { NextRouter } from 'next/router';
 import {
   Product,
   UpdateProductRequest,
@@ -14,7 +14,7 @@ import {
   GetProductParams,
   CreateProductRequest,
   UpdatedUserRequest,
-} from "models";
+} from 'models';
 
 export interface User {
   id?: string;

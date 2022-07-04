@@ -17,7 +17,7 @@ import {
   getUserProfileRest,
   getCategoryListRest,
   getCategoryRest,
-} from "./restApi";
+} from './restApi';
 import {
   getProductsGraphQL,
   getProductSearchGraphQL,
@@ -31,9 +31,9 @@ import {
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
-} from "./graphQL";
-import { config } from "../config/index";
-import { apiFunction } from "../utils/types";
+} from './graphQL';
+import { config } from '../config/index';
+import { apiFunction } from '../utils/types';
 
 const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
@@ -74,4 +74,4 @@ const restApi: apiFunction = {
 };
 
 export const userAPI: apiFunction =
-  config?.apiService === "GRAPHQL" ? graphqlApi : restApi;
+  config?.apiService === 'GRAPHQL' ? graphqlApi : restApi;
