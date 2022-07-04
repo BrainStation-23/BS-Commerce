@@ -1,13 +1,13 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper";
-import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Thumbs } from 'swiper';
+import { useState, FC } from 'react';
 
-import { Product } from "models";
+import { Product } from 'models';
 interface SingleProduct {
   product: Product;
 }
 
-const ProductImagesSlider = ({ product }: SingleProduct) => {
+const ProductImagesSlider: FC<SingleProduct> = ({ product }) => {
   var isAvailable = true;
 
   const [activeThumb, setActiveThumb] = useState();

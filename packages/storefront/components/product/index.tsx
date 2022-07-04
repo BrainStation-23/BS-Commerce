@@ -1,25 +1,23 @@
-import { NextComponentType } from "next";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
-import ProductDescription from "./productDescription";
-import ProductImagesSlider from "./product-image-slider";
+import Link from 'next/link';
+import React, { useState, FC } from 'react';
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import ProductDescription from './productDescription';
+import ProductImagesSlider from './product-image-slider';
 
-import { Product } from "models";
-import { userAPI } from "APIs";
+import { Product } from 'models';
+import { userAPI } from 'APIs';
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetailsComponent = ({ product }: SingleProduct) => {
-
+const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
   let i = 0;
 
-  const [size, setSize] = useState("s");
-  const [color, setColor] = useState("white");
+  const [size, setSize] = useState('s');
+  const [color, setColor] = useState('white');
   const [amount, setAmount] = useState(1);
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
@@ -41,8 +39,8 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
     <>
       <Breadcrumb
         title={product.info.name}
-        pathArray={["Home", product.info.name]}
-        linkArray={["/home", "/product" + product.id]}
+        pathArray={['Home', product.info.name]}
+        linkArray={['/home', '/product' + product.id]}
       />
       <section className="text-gray-700 body-font overflow-hidden bg-white">
         <div className="container px-5 py-24 mx-auto">
@@ -137,25 +135,25 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                       <span className="mr-3">Size:</span>
                       <div className="flex">
                         <button
-                          onClick={() => setSize("s")}
+                          onClick={() => setSize('s')}
                           className="hover:text-green-600 m-2"
                         >
                           s
                         </button>
                         <button
-                          onClick={() => setSize("m")}
+                          onClick={() => setSize('m')}
                           className="hover:text-green-600 m-2"
                         >
                           m
                         </button>
                         <button
-                          onClick={() => setSize("l")}
+                          onClick={() => setSize('l')}
                           className="hover:text-green-600 m-2"
                         >
                           l
                         </button>
                         <button
-                          onClick={() => setSize("xl")}
+                          onClick={() => setSize('xl')}
                           className="hover:text-green-600 m-2"
                         >
                           xl
@@ -170,15 +168,15 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                     <div className="flex">
                       <span className="mr-3">Color:</span>
                       <button
-                        onClick={() => setColor("white")}
+                        onClick={() => setColor('white')}
                         className="border-2 border-gray-300 w-6 h-6 active:outline"
                       ></button>
                       <button
-                        onClick={() => setColor("black")}
+                        onClick={() => setColor('black')}
                         className="border-2 border-gray-300 ml-3 bg-gray-700 w-6 h-6 active:outline"
                       ></button>
                       <button
-                        onClick={() => setColor("red")}
+                        onClick={() => setColor('red')}
                         className="border-2 border-gray-300 ml-3 bg-red-500 w-6 h-6 active:outline"
                       ></button>
                     </div>
@@ -234,9 +232,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                       disabled={!isAvailable}
                       className="rounded mt-5 ml-1 bg-black flex w-full  md:px-32 items-center justify-center py-2 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
                     >
-                      <span className="mx-auto">
-                      Buy Now
-                      </span>
+                      <span className="mx-auto">Buy Now</span>
                     </button>
                   </Link>
                 </div>
@@ -246,7 +242,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                       onClick={toWishlist}
                       className="hover:text-green-600 mt-10"
                     >
-                      {clicked ? "Added to wishlist" : "+ Add to wishlist"}
+                      {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
                     </button>
                   </div>
                   <div>
