@@ -4,7 +4,7 @@ var escapeHtml = require("escape-html");
 var http = require("http");
 var url = require("url");
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
     const token = await fetch("http://localhost:3000/api/customer/auth/sign-in", {
       method: 'POST', // or 'PUT'
       headers: {

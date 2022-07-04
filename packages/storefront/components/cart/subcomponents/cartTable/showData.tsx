@@ -1,27 +1,25 @@
-import { userAPI } from "APIs";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
-import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
-const ShowData = ({ data }: any) => {
-  let token = document.cookie.split("=")[1]
+import { userAPI } from "APIs";
+import { ResponseItem } from "models";
+import { useAppDispatch } from "customHooks/hooks";
+import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
+interface Props {
+  data: ResponseItem,
+}
+
+const ShowData: React.FC<Props> = ({ data }: Props) => {
 
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
     quantity: data.quantity,
   });
-  const dispatch = useAppDispatch();
-  const cartData = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
-  );
 
-  const totalCartPrice = cartData?.reduce((total, data) => {
-    return total + data?.product?.info?.price * data.quantity;
-  }, 0);
+  const dispatch = useAppDispatch();
 
   return (
     <>
-      <tr key={data.id}>
+      <tr key={data.productId}>
         <td className="border border-slate-300 px-8 md:px-4 py-4">
           <img
             src={data?.product?.photos[0].url}
@@ -60,9 +58,6 @@ const ShowData = ({ data }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity - 1,
                     }));
-                    //console.log("ProductId = ",data?.productId);
-                    //console.log("ItemToUpdate = ", itemToUpdate);
-                    // window.location.href = "/home";
                   }}
                 >
                   -
@@ -82,9 +77,6 @@ const ShowData = ({ data }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     }));
-                    //console.log("ProductId = ",data?.productId);
-                    //console.log("ItemToUpdate = ", itemToUpdate);
-                    //window.location.href = "/home";
                   }}
                 >
                   +
@@ -94,20 +86,14 @@ const ShowData = ({ data }: any) => {
           </div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-8 py-14">
-          <div className="flex justify-center">${data.product.info.price * itemToUpdate.quantity}</div>
+          <div className="flex justify-center">${data?.product?.info?.price! * itemToUpdate.quantity}</div>
         </td>
         <td className="border border-slate-300 md:px-2 xl:px-12 py-14 ">
           <div className="flex justify-center">
             <button
               onClick={() => {
-                console.log(data);
                 userAPI.deleteCartItem(data);
                 dispatch(deleteCartItem(data));
-  
-                //window.location.href = "/home";
-                // const list = cartData.items.filter(item => item.productId != data.productId)
-                // console.log(list);
-                // dispatch(deleteSingCartItem(list));
               }}
             >
               X

@@ -1,6 +1,7 @@
 import type { NextComponentType } from "next";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import SearchItem from "./searchItem";
+
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
+import SearchItem from "@/components/search/searchItem";
 
 const SearchComponent: NextComponentType = () => {
   return (

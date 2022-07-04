@@ -1,15 +1,16 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
-import Buttons from "../../global/components/buttons/button";
-// import cartDatas from "../../../allData/cart-data.json";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
-import { userAPI } from "APIs";
 import { useRouter } from "next/router";
-import { deleteCartItem } from "toolkit/cartSlice";
-import { ResponseItem } from "models";
 
-const CartDropdown = () => {
-  let token = document.cookie.split("=")[1]
+import { userAPI } from "APIs";
+import { ResponseItem } from "models";
+import { deleteCartItem } from "toolkit/cartSlice";
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+
+import Buttons from "@/components/global/components/buttons/button";
+
+const CartDropdown: NextComponentType = () => {
+
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
 
@@ -23,12 +24,7 @@ const CartDropdown = () => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
-  // const token = useAppSelector(
-  //   (state) => state.persistedReducer.auth.access_token
-  // );
-
   const handleCartItemDelete = async (product: ResponseItem) => {
-    console.log("============================", product)
     await userAPI.deleteCartItem({
       productId: product.productId,
     });
@@ -81,7 +77,6 @@ const CartDropdown = () => {
     }
   }, []);
   const dropdownData = () => {
-    // console.log("))))))))))))))))))))))))))))))", cartData.items.length)
     return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>

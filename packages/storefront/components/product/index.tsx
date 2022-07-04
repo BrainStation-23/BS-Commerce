@@ -1,24 +1,20 @@
-import { NextComponentType } from "next";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { products } from "../../allData/product-data.json";
-import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
-import ProductDescription from "./productDescription";
-import ProductImagesSlider from "./product-image-slider";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
+
 
 import { Product } from "models";
 import { userAPI } from "APIs";
+
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
+import ProductDescription from "@/components/product/productDescription";
+import ProductImagesSlider from "@/components/product/product-image-slider";
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetailsComponent = ({ product }: SingleProduct) => {
-  //const { query } = useRouter();
+const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SingleProduct) => {
 
-  //const product = products.find((product) => product.id === Number(query.pid));
   var isAvailable = true;
-  //if (product.stock > 0) isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
   let i = 0;
@@ -35,19 +31,18 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
       productId: id,
       quantity: amount,
     });
-    //setCart([...cart, { ...`${product.info.id}`, amount }]);
   };
 
   const toWishlist = () => {
-    setWishlist([...wishlist, `${product.info.id}`]);
+    setWishlist([...wishlist, `${product?.info?.id}`]);
     setClicked(true);
   };
 
   return (
     <>
       <Breadcrumb
-        title={product.info.name}
-        pathArray={["Home", product.info.name]}
+        title={product?.info?.name}
+        pathArray={["Home", product.info?.name]}
         linkArray={["/home", "/product" + product.id]}
       />
       <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -61,7 +56,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
               </div>
               <div className="lg:w-1/2 w-full lg:pl-5 ">
                 <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
-                  {product.info.name}
+                  {product.info?.name}
                 </h2>
                 <div className="flex">
                   <svg
@@ -110,13 +105,13 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
 
                 <div className="flex mb-1 mt-2"></div>
                 <div className="text-gray-900 ml-1 mb-1 mt-2">
-                  <span className="text-sm">Vendor: {product.vendor}</span>
+                  <span className="text-sm">Vendor: {product?.vendor}</span>
                   <span className="text-sm ml-2 mr-2">|</span>
-                  <span className="text-sm">SKU: {product.info.sku}</span>
+                  <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-green-600 mt-2 mb-2 ml-1">
-                    ${product.info.price}
+                    ${product?.info?.price}
                   </span>
                 </div>
                 <div className="flex">
@@ -125,7 +120,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </span>
                   {isAvailable ? (
                     <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
-                      {product.stock} left in stock
+                      {product?.stock} left in stock
                     </span>
                   ) : (
                     <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
@@ -135,9 +130,9 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                 </div>
 
                 <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
-                  {product.info.fullDescription}
+                  {product?.info?.fullDescription}
                 </p>
-                {product.info.size && (
+                {product?.info?.size && (
                   <div className="flex mt-2 items-center mb-2">
                     <div className="flex ml-1 items-center">
                       <span className="mr-3">Size:</span>
@@ -171,7 +166,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                 )}
 
-                {product.info.color && (
+                {product?.info?.color && (
                   <div className="flex mt-2 items-center mb-2">
                     <div className="flex">
                       <span className="mr-3">Color:</span>
@@ -206,7 +201,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                       <span className="m-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
-                        {...(amount >= product.stock
+                        {...(amount >= product?.stock
                           ? (disableIncrement = true)
                           : null)}
                         disabled={disableIncrement}
@@ -218,7 +213,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={() => toCart(product.id)}
+                      onClick={() => toCart(product?.id)}
                       className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"

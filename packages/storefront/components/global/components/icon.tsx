@@ -1,23 +1,18 @@
-import { userAPI } from "APIs";
-import { Product } from "models";
 import Link from "next/link";
 import React from "react";
-import { useDispatch } from "react-redux";
+
+import { userAPI } from "APIs";
+import { CustomerProduct } from "models";
 
 interface SingleProduct {
-  product: Product;
+  product: CustomerProduct;
 }
 
-const Icon = (props: SingleProduct) => {
+const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
-  const dispatch = useDispatch();
-  // const token = useAppSelector((state) => { })
-  // const token = document.cookie("token");
-  // console.log(token)
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
-      {/* <Link href="/" passHref> */}
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +26,7 @@ const Icon = (props: SingleProduct) => {
               productId: product.id!,
               quantity: 1,
             });
-            location.href = "/home"
+            location.href = "/"
           }}
         >
           <path
@@ -48,7 +43,6 @@ const Icon = (props: SingleProduct) => {
           <div className="w-3 h-3 -mt-2 rotate-45 bg-zinc-900"></div>
         </div>
       </span>
-      {/* </Link> */}
 
       <span>
         <svg

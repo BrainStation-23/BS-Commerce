@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import type { NextComponentType } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-import Currency from "./currency";
-import HeaderAccount from "./header-account";
-import Language from "./languages";
-import Search from "./search";
+import { useRouter } from "next/router";
+import type { NextComponentType } from "next";
+import { useState, useEffect } from "react";
+
+import Currency from "@/components/global/components/currency";
+import HeaderAccount from "@/components/global/components/header-account";
+import Language from "@/components/global/components/languages";
+import Search from "@/components/global/components/search";
 
 interface menuLink {
   name: string;

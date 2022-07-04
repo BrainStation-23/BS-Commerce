@@ -1,14 +1,15 @@
 import type { GetServerSideProps, NextPage } from "next";
-import ProductDetailsComponent from "@/components/product";
-import axios from "axios";
+
 import { userAPI } from "APIs";
 import { Product } from "models";
+
+import ProductDetailsComponent from "@/components/product";
 
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetails: NextPage<SingleProduct> = ({product}: SingleProduct) => {
+const ProductDetails: NextPage<SingleProduct> = ({product}) => {
   return (
     <>
       <ProductDetailsComponent product={product}></ProductDetailsComponent>
@@ -16,8 +17,8 @@ const ProductDetails: NextPage<SingleProduct> = ({product}: SingleProduct) => {
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const { pid } = context.params;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const pid = context?.params?.pid!;
   const res = await userAPI.getPublicProductsById(pid);
   return {
     props: {

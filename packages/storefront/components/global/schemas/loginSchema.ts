@@ -1,6 +1,5 @@
-import { string, object, ref, number } from "yup";
 import XRegExp from "xregexp";
-import * as Yup from "yup";
+import { string, object, ref, number } from "yup";
 
 function validatePassword(password: any) {
   const minLength = 8;

@@ -9,8 +9,7 @@ interface Path {
   setModal: Function;
 }
 
-// const Path: React.FC<Path> = ({cart, info, shipping, payment}) => {
-const Path = (props: Path) => {
+const Path: React.FC<Path> = (props: Path) => {
   const { cart, info, shipping, payment, setModal } = props;
   return (
     <div className="flex flex-wrap text-xs gap-2">

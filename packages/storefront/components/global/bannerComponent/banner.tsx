@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ReactChild } from "react";
-import Button from "../button/button";
+
+import Button from "@/components/global/button/button";
 
 interface BannerProps {
     bg?: string;

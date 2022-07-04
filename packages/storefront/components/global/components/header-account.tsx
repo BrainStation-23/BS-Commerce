@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import CartDropdown from "../../cart/cartDropdown/dropdownCart";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
+
+import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { storeUserToken } from "toolkit/authSlice";
+import CartDropdown from "@/components/cart/cartDropdown/dropdownCart";
 
 interface Properties {}
 
-const HeaderAccount: React.FC<Properties> = (props) => {
+const HeaderAccount: React.FC<Properties> = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   const showCartDropDown = () => {

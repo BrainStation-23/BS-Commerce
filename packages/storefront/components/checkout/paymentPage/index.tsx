@@ -1,7 +1,10 @@
-import CheckoutFooter from "../checkoutFooter";
-import Payment from "./paymentForm";
+import CheckoutFooter from "@/components/checkout/checkoutFooter";
+import Payment from "@/components/checkout/paymentPage/paymentForm";
+interface Props {
+  setModal: Function
+}
 
-const PaymentPage = (props: any) => {
+const PaymentPage: React.FC<Props> = (props) => {
   const {setModal} = props;
   return (
     <>

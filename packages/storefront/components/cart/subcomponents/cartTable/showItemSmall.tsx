@@ -1,11 +1,20 @@
-import { userAPI } from "APIs";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 import { useState } from "react";
+
+import { userAPI } from "APIs";
+import { ResponseItem } from "models";
+import { useAppDispatch } from "customHooks/hooks";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
 
-const ShowItemSmall = ({ data, setTotal, total }: any) => {
+interface Props {
+  data: ResponseItem,
+  setTotal: Function,
+  total: number
+}
+
+const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
   
   const dispatch = useAppDispatch();
+  
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data.productId,
     quantity: data.quantity,
@@ -17,7 +26,7 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
         <div className="mr-4 relative">
           <img
             className="object-cover w-full h-48 rounded-t-lg w-30 rounded-none"
-            src={data?.product?.photos[0].url}
+            src={data?.product?.photos[0]?.url}
             alt="Product Image"
           />
           <span
@@ -64,11 +73,7 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity - 1,
                     }));
-                    console.log(total + data.product.info.price)
-                    setTotal(total - data.product.info.price)
-                    //console.log("ProductId = ",data?.productId);
-                    //console.log("ItemToUpdate = ", itemToUpdate);
-                    //window.location.href = "/home";
+                    setTotal(total - data?.product?.info?.price!)
                   }}
                 >
                   -
@@ -89,10 +94,7 @@ const ShowItemSmall = ({ data, setTotal, total }: any) => {
                       productId: itemToUpdate?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     }));
-                    setTotal(total + data.product.info.price)
-                    //console.log("ProductId = ",data?.productId);
-                    //console.log("ItemToUpdate = ", itemToUpdate);
-                    //window.location.href = "/home";
+                    setTotal(total + data?.product?.info?.price!)
                   }}
                 >
                   +

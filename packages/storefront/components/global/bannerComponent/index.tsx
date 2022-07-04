@@ -1,6 +1,6 @@
-import Container from "../components/container";
-import Banner from "./banner";
-import BannerBodyText from "./bannerBodyText";
+import Container from "@/components/global/components/container";
+import Banner from "@/components/global/bannerComponent/banner";
+import BannerBodyText from "@/components/global/bannerComponent/bannerBodyText";
 
 const BannerPage = () => {
   return (

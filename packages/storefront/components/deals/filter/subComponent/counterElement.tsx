@@ -1,4 +1,5 @@
 import type { NextComponentType } from "next";
+
 const CounterElement: NextComponentType = () => {
   return (
     <>

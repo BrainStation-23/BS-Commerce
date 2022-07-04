@@ -1,21 +1,28 @@
-import type { NextComponentType } from "next";
-import Footer from "./global/components/footer";
-import Header from "./global/components/header";
-import Viewport from "./viewport";
-import { useEffect } from "react";
-import { useAppSelector } from "customHooks/hooks";
-import { useSelector } from "react-redux";
 import Axios from "axios";
 
-const Layout: NextComponentType = ({ children }: any) => {
-  let token = useSelector(
-    (state: any) => state.persistedReducer.auth.access_token
+import { useEffect } from "react";
+import { useAppSelector } from "customHooks/hooks";
+
+import Footer from "@/components/global/components/footer";
+import Header from "@/components/global/components/header";
+import Viewport from "@/components/viewport";
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
+
+  let token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
   );
+  
   useEffect(() => {
     Axios.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
     };
   }, [token]);
+
   return (
     <>
       <Viewport />
