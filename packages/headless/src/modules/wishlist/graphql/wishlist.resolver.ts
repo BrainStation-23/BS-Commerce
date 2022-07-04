@@ -4,13 +4,10 @@ import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
 import { WishlistItem } from 'src/entity/wishList';
-import { Roles } from 'src/decorators/roles.decorator';
-import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/auth.guard';
 
 @Resolver()
-@Roles('customer')
-@UseGuards(RolesGuard)
+@UseGuards(new RolesGuard(['customer']))
 export class WishListResolver {
   constructor(private wishListService: WishListService) { }
 

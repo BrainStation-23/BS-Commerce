@@ -1,16 +1,24 @@
-import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { ExecutionContextHost } from "@nestjs/core/helpers/execution-context-host";
 import { GqlExecutionContext } from "@nestjs/graphql";
+import { AuthGuard } from "@nestjs/passport";
 import { coreConfig } from "config/core";
 
 @Injectable()
-export class RolesGuard implements CanActivate {
-  constructor(private roles: string[] | null) { }
+export class RolesGuard extends AuthGuard('jwt') {
+  constructor(private roles: string[] | null) {
+    super();
+  }
 
-  async canActivate(context: ExecutionContext) {
-    const user = (coreConfig.api === 'GRAPHQL') ? await GqlExecutionContext.create(context).getContext().req.user : await context.switchToHttp().getRequest().user;
+  canActivate(context: ExecutionContext) {
+    const ctx = GqlExecutionContext.create(context);
+    const { req } = ctx.getContext();
+    return (coreConfig.api === 'GRAPHQL') ? super.canActivate(new ExecutionContextHost([req])) : super.canActivate(context);
+  }
 
+  handleRequest(err: any, user: any, info: string) {
     if (!this.roles) {
-      return user;
+      return user || null;
     }
 
     if (!user) {

@@ -26,7 +26,7 @@ import {
 } from '../dto';
 
 @Controller()
-@UseGuards(AuthGuard('jwt'), new RolesGuard(['customer']))
+@UseGuards(new RolesGuard(['customer']))
 @ApiBearerAuth()
 @ApiTags('Customer Wishlist API')
 export class WishListController {
