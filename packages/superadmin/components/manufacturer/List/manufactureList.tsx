@@ -74,20 +74,24 @@ const ManufactureList: FC<Props> = ({
     {
       label: "Manufacturer name",
       path: "name",
-      content: (data: any, key: any, index: any) => <td>{data.name}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="p-auto m-auto text-center align-middle">{data.name}</td>
+      ),
     },
     {
       label: "Display Order",
       path: "displayOrder",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">{data?.displayOrder}</td>
+        <td className="p-auto m-auto text-center align-middle">
+          {data?.displayOrder}
+        </td>
       ),
     },
     {
       label: "Published",
       path: "published",
       content: (data: any, key: any, index: any) => (
-        <td className="p-auto m-auto text-center">
+        <td className="p-auto m-auto text-center align-middle">
           {data?.isPublished ? <i className="bi bi-check-lg"></i> : "-"}
         </td>
       ),
@@ -96,7 +100,7 @@ const ManufactureList: FC<Props> = ({
       label: "Edit",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="p-auto m-auto text-center align-middle">
           <Link
             href={{
               pathname: `/Manufacturer/Edit/[id]`,
@@ -104,7 +108,7 @@ const ManufactureList: FC<Props> = ({
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-outline-info">
               <span>
                 <i className="bi bi-pencil me-2 align-middle"></i>
               </span>
@@ -118,7 +122,7 @@ const ManufactureList: FC<Props> = ({
       label: "View",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="p-auto m-auto text-center align-middle">
           <Link
             href={{
               pathname: `/Manufacturer/View/[id]`,
@@ -126,7 +130,7 @@ const ManufactureList: FC<Props> = ({
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-outline-success">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>
               </span>
@@ -140,9 +144,9 @@ const ManufactureList: FC<Props> = ({
       label: "Delete",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="p-auto m-auto text-center align-middle">
           <button
-            className="btn btn-default"
+            className="btn btn-outline-danger"
             onClick={() => onClickForDelete(data.id)}
           >
             <i className="bi bi-pencil me-2 align-middle"></i>

@@ -16,17 +16,19 @@ const SingleView = (props: any) => {
             </label>
           </div>
         </div>
-        <div className="col-md-8">
-          {Array.isArray(value) ? (
-            <>
-              {value[0] ? value[0] : "---"}
-              {value.map((data, index) => (index > 0 ? ` , ${data}` : ""))}
-            </>
-          ) : typeof value === "string" && value.length <= 0 ? (
-            "- - -"
-          ) : (
-            value
-          )}
+        <div className="col-md-8 ps-4 py-auto my-auto">
+          <div className="row">
+            {Array.isArray(value) ? (
+              <>
+                {value[0] ? value[0] : "---"}
+                {value.map((data, index) => (index > 0 ? ` , ${data}` : ""))}
+              </>
+            ) : typeof value === "string" && value.length <= 0 ? (
+              "- - -"
+            ) : (
+              value
+            )}
+          </div>
         </div>
       </div>
     </>

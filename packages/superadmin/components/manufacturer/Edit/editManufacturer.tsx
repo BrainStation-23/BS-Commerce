@@ -94,7 +94,7 @@ const EditManufacturer = (props: any) => {
                       type="submit"
                       name="save"
                       className="btn btn-primary m-1"
-                      onClick={handleSubmit}
+                      // onClick={handleSubmit}
                     >
                       <i className="bi bi-save" />
                       <p className="float-end mx-1 my-0">Save </p>

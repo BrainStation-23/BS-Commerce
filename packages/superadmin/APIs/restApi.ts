@@ -265,6 +265,7 @@ export async function updateManufacturerRest(
       `manufacturers/${id}`,
       data
     );
+    // alert("Hi");
     router.push("/Manufacturer/");
     toast.success("Edit Successful");
     return response.data as UpdateManufacturerRequest;

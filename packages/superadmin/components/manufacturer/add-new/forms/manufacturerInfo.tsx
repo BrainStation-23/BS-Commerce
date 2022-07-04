@@ -54,17 +54,11 @@ const CreateNewManufacturer: FC = () => {
                 <div className="col-md-9">
                   <div className="input-group input-group-required">
                     <Field
-                      className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                      className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                       id="name"
                       name="name"
                       type="text"
                     />
-                    <div
-                      className="pt-2"
-                      style={{ height: "4px", padding: "15px" }}
-                    >
-                      <h2 className="required text-danger ">*</h2>
-                    </div>
                   </div>
                   <div className="errMsg text-danger text-red-600">
                     <ErrorMessage name="name" />
@@ -80,13 +74,14 @@ const CreateNewManufacturer: FC = () => {
                     >
                       Full description
                     </label>
+                    <span className="required text-danger ">*</span>
                   </div>
                 </div>
                 <div className="col-md-9">
                   <div className="input-group pe-3 ">
                     <Field
                       as="textarea"
-                      className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                      className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                       id="description"
                       name="description"
                     />
@@ -102,23 +97,18 @@ const CreateNewManufacturer: FC = () => {
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="Name">
                     Picture
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
               <div className="col-md-9">
                 <div className="input-group input-group-required">
                   <Field
-                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                    className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                     id="picture"
                     name="picture"
                     type="text"
                   />
-                  <div
-                    className="pt-2"
-                    style={{ height: "4px", padding: "15px" }}
-                  >
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="picture" />
@@ -133,6 +123,7 @@ const CreateNewManufacturer: FC = () => {
                     htmlFor="showOnHomePage"
                   >
                     Published?
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>

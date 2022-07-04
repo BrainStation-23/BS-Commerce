@@ -45,6 +45,7 @@ const DisplayOrders: FC = () => {
                     htmlFor="displayOrderCategory"
                   >
                     Display Order
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
@@ -57,12 +58,6 @@ const DisplayOrders: FC = () => {
                     aria-disabled="false"
                     className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                   />
-                </div>
-                <div
-                  className="col-1 pt-2"
-                  style={{ height: "4px", padding: "15px" }}
-                >
-                  <h2 className="required text-danger ">*</h2>
                 </div>
               </div>
               <div className="errMsg text-danger text-red-600">

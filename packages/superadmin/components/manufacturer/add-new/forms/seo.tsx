@@ -74,6 +74,7 @@ const SEO: FC = () => {
                 <div className="label-wrapper row row-cols-auto float-md-end">
                   <label className="col-form-label col px-1" htmlFor="keywords">
                     Keywords
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
@@ -85,12 +86,6 @@ const SEO: FC = () => {
                     name="metaKeyword"
                     type="text"
                   />
-                  <div
-                    className="pt-2"
-                    style={{ height: "4px", padding: "15px" }}
-                  >
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaKeyword" />
@@ -105,6 +100,7 @@ const SEO: FC = () => {
                     htmlFor="photosTitle"
                   >
                     Meta Description
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
@@ -116,12 +112,6 @@ const SEO: FC = () => {
                     id="metaDescription"
                     name="metaDescription"
                   />
-                  <div
-                    className="pt-2"
-                    style={{ height: "4px", padding: "15px" }}
-                  >
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaDescription" />
@@ -136,6 +126,7 @@ const SEO: FC = () => {
                     htmlFor="photosTitle"
                   >
                     Meta Title
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
@@ -147,12 +138,6 @@ const SEO: FC = () => {
                     id="metaTitle"
                     name="metaTitle"
                   />
-                  <div
-                    className="pt-2"
-                    style={{ height: "4px", padding: "15px" }}
-                  >
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="metaTitle" />
@@ -167,6 +152,7 @@ const SEO: FC = () => {
                     htmlFor="photosTitle"
                   >
                     SEFN
+                    <span className="required text-danger ">*</span>
                   </label>
                 </div>
               </div>
@@ -178,12 +164,6 @@ const SEO: FC = () => {
                     id="seftn"
                     name="seftn"
                   />
-                  <div
-                    className="pt-2"
-                    style={{ height: "4px", padding: "15px" }}
-                  >
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
                 </div>
                 <div className="errMsg text-danger text-red-600">
                   <ErrorMessage name="seftn" />
