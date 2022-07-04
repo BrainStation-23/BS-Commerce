@@ -1,0 +1,124 @@
+{
+    "shipping": [
+      {
+        "id": 1,
+        "shipment": 3,
+        "order": 5,
+        "pickup": true,
+        "tracking_number": "123456",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 2,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 3,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 4,
+        "shipment": 3,
+        "order": 5,
+        "pickup": true,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 5,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 6,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 7,
+        "shipment": 3,
+        "order": 5,
+        "pickup": true,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 8,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 9,
+        "shipment": 3,
+        "order": 5,
+        "pickup": true,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      },
+      {
+        "id": 10,
+        "shipment": 3,
+        "order": 5,
+        "pickup": false,
+        "tracking_number": "",
+        "total_weight": "2.00 [lb(s)]",
+        "date_shipped": "3/13/2017 6:20:10 AM",
+        "date_ready": "Not yet",
+        "date_delivered": "3/13/2017 6:20:10 AM",
+        "view": "View"
+      }
+    ]
+}
