@@ -287,14 +287,15 @@ export async function getCategoriesRest(): Promise<
   }
 }
 
-export async function getUserProfileRest(): Promise<
-  GetUserSuccessResponse | undefined
-> {
+export async function getUserProfileRest(
+  router: NextRouter
+): Promise<GetUserSuccessResponse | undefined> {
   try {
     const { data } = await axios.get(`${apiEndPoints.user}`);
     return data as GetUserSuccessResponse;
   } catch (error: any) {
-    toast.error(error?.response?.data?.error);
+    router.push("/account/login");
+    // toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
 }

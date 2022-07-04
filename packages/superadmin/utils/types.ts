@@ -82,7 +82,9 @@ export interface apiFunction {
     data: UpdateManufacturerRequest,
     router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
-  getUserProfile: () => Promise<GetUserSuccessResponse | undefined>;
+  getUserProfile: (
+    router: NextRouter
+  ) => Promise<GetUserSuccessResponse | undefined>;
   getCategoryBySlug: (
     slug: getCategoryBySlugRequest
   ) => Promise<getCategoryBySlugResponse | undefined>;
