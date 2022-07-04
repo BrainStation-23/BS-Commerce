@@ -188,7 +188,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                 <div className="flex text-black">
                   <div className="flex lg:mx-2 title-text items-center">
                     Quantity
-                    <div className="m-1 lg:ml-4 border-2 border-gray-200 rounded">
+                    <div className="m-1 md:ml-4 border-2 border-gray-200 rounded">
                       <button
                         onClick={() => setAmount(amount - 1)}
                         {...(amount <= 1 ? (disableDecrement = true) : null)}
@@ -213,7 +213,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   {isAvailable ? (
                     <button
                       onClick={() => toCart(product.id)}
-                      className="mt-1 ml-2 text-white bg-green-600 px-2 lg:px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -222,19 +222,21 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   ) : (
                     <button
                       disabled={true}
-                      className="mt-4 ml-2 text-white bg-green-600 px-2 lg:px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                     >
                       Soldout
                     </button>
                   )}
                 </div>
-                <div className="lg:w-fit flex flex-wrap">
+                <div className=" flex flex-wrap">
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="rounded mt-5 ml-1 bg-black lg:px-56 md:px-32 px-24 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
+                      className="rounded mt-5 ml-1 bg-black flex w-full  md:px-32 items-center justify-center py-2 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
                     >
+                      <span className="mx-auto">
                       Buy Now
+                      </span>
                     </button>
                   </Link>
                 </div>
