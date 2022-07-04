@@ -1,14 +1,6 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
-  deleteAllCartItemsResponse,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
   GetCustomerAllProductsResponse,
-  updateCartItemRequest,
-  updateCartItemResponse,
 } from 'models';
 import { GetCustomerProductResponse } from 'models';
 import { CustomerSignInResponse } from 'models';
@@ -62,33 +54,6 @@ export async function getPublicProductByIdGraphql(
 
 export async function getFeaturedProductsGraphql(): Promise<
   GetCustomerAllProductsResponse | undefined
-> {
-  return undefined;
-}
-
-export async function getCartGraphql(): Promise<Cart | undefined> {
-  return undefined;
-}
-
-export async function addToCartGraphql(
-  productId: addToCartRequest
-): Promise<AddToCartResponse | undefined> {
-  return undefined;
-}
-export async function deleteCartItemGraphql(
-  productId: deleteCartItemRequest
-): Promise<deleteCartItemResponse | undefined> {
-  return undefined;
-}
-
-export async function updateCartGraphql(
-  item: updateCartItemRequest
-): Promise<updateCartItemResponse | undefined> {
-  return undefined;
-}
-
-export async function deleteAllFromCartGraphql(): Promise<
-  deleteAllCartItemsResponse | undefined
 > {
   return undefined;
 }

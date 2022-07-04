@@ -1,34 +1,27 @@
 import type { NextComponentType } from "next";
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/router";
 
-import { userAPI } from "APIs";
 import { ResponseItem } from "models";
 import { deleteCartItem } from "toolkit/cartSlice";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
 
-import Buttons from "@/components/global/components/buttons/button";
-
 const CartDropdown: NextComponentType = () => {
+  const componentRef = useRef();
+  const dispatch = useAppDispatch();
 
   const [cartTotal, setCartTotal] = useState(false);
-  const componentRef = useRef();
 
-  const router = useRouter();
-  const dispatch = useAppDispatch();
+  let token = document.cookie.split("=")[1]
+
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
-
+  
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
   const handleCartItemDelete = async (product: ResponseItem) => {
-    await userAPI.deleteCartItem({
-      productId: product.productId,
-    });
-
     dispatch(deleteCartItem(product));
   };
 

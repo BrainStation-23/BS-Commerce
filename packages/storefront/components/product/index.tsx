@@ -3,11 +3,7 @@ import React, { useState } from "react";
 
 
 import { Product } from "models";
-import { userAPI } from "APIs";
-
-import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
-import ProductDescription from "@/components/product/productDescription";
-import ProductImagesSlider from "@/components/product/product-image-slider";
+import { addToCart } from "toolkit/cartSlice";
 interface SingleProduct {
   product: Product;
 }
@@ -26,11 +22,19 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SinglePro
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  const toCart = async (id: string) => {
-    await userAPI.addToCart({
-      productId: id,
+  const toCart = async (product: Product) => {
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
       quantity: amount,
-    });
+    };
+    setAmount(0);
+    dispatch(addToCart(cartItem));
   };
 
   const toWishlist = () => {
@@ -191,9 +195,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SinglePro
                     Quantity
                     <div className="m-1 border-2 border-gray-300 rounded px-auto ">
                       <button
-                        onClick={() => setAmount(amount - 1)}
-                        {...(amount <= 1 ? (disableDecrement = true) : null)}
-                        disabled={disableDecrement}
+                        onClick={() => setAmount(amount - 1 >= 0 ? amount - 1 : 0)}
+                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
+                        // disabled={disableDecrement}
                         className="m-2"
                       >
                         -
@@ -201,9 +205,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SinglePro
                       <span className="m-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
-                        {...(amount >= product?.stock
-                          ? (disableIncrement = true)
-                          : null)}
+                     
                         disabled={disableIncrement}
                         className="m-2"
                       >
@@ -213,7 +215,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SinglePro
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={() => toCart(product?.id)}
+                      onClick={() => toCart(product)}
                       className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"

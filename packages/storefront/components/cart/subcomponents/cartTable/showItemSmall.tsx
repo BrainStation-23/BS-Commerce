@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { userAPI } from "APIs";
 import { ResponseItem } from "models";
 import { useAppDispatch } from "customHooks/hooks";
 import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
@@ -16,8 +15,8 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
   const dispatch = useAppDispatch();
   
   const [itemToUpdate, setItemToUpdate] = useState({
-    productId: data.productId,
-    quantity: data.quantity,
+    productId: data?.productId,
+    quantity: data?.quantity,
   });
 
   return (
@@ -33,7 +32,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
             className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
             style={{ background: "#808080" }}
             onClick={() => {
-              userAPI.deleteCartItem(data);
+              setTotal(total - ((itemToUpdate.quantity) * data?.product?.info?.price!))
               dispatch(deleteCartItem(data));
             }}
           >
@@ -65,15 +64,13 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                           ? itemToUpdate.quantity - 1
                           : 0,
                     });
-                    userAPI.updateCartItem({
-                      productId: itemToUpdate?.productId,
-                      quantity: itemToUpdate.quantity - 1,
-                    });
-                    dispatch(updateCartItem({
-                      productId: itemToUpdate?.productId,
-                      quantity: itemToUpdate.quantity - 1,
-                    }));
-                    setTotal(total - data?.product?.info?.price!)
+                    dispatch(
+                      updateCartItem({
+                        productId: itemToUpdate?.productId,
+                        quantity: itemToUpdate.quantity - 1,
+                      })
+                    );
+                    setTotal(total - data?.product?.info?.price!);
                   }}
                 >
                   -
@@ -86,15 +83,13 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                       productId: data?.productId,
                       quantity: itemToUpdate.quantity + 1,
                     });
-                    userAPI.updateCartItem({
-                      productId: itemToUpdate?.productId,
-                      quantity: itemToUpdate.quantity + 1,
-                    });
-                    dispatch(updateCartItem({
-                      productId: itemToUpdate?.productId,
-                      quantity: itemToUpdate.quantity + 1,
-                    }));
-                    setTotal(total + data?.product?.info?.price!)
+                    dispatch(
+                      updateCartItem({
+                        productId: itemToUpdate?.productId,
+                        quantity: itemToUpdate.quantity + 1,
+                      })
+                    );
+                    setTotal(total + data?.product?.info?.price!);
                   }}
                 >
                   +

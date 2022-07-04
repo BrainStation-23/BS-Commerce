@@ -14,6 +14,14 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    addToCart: (
+      state: AllCartItemsState,
+      action: PayloadAction<ResponseItem>
+    ) => {
+      console.log(action.payload)
+      const existingCartProduct = state.allCartItems.find(item => item.productId === action.payload.productId)
+      existingCartProduct ? existingCartProduct.quantity += action.payload.quantity : state.allCartItems.push(action.payload);
+    },
     storeAllCartItems: (
       state: AllCartItemsState,
       action: PayloadAction<ResponseItem[]>
@@ -48,6 +56,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem } = cartSlice.actions;
+export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem, addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

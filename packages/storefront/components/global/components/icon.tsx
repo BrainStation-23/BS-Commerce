@@ -1,15 +1,30 @@
 import Link from "next/link";
 import React from "react";
-
-import { userAPI } from "APIs";
-import { CustomerProduct } from "models";
+import { useAppDispatch } from "customHooks/hooks";
+import { Product } from "models";
+import { addToCart } from "toolkit/cartSlice";
 
 interface SingleProduct {
-  product: CustomerProduct;
+  product: Product;
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
+      quantity: 1,
+    };
+    dispatch(addToCart(cartItem));
+  };
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
@@ -21,13 +36,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={1.5}
-          onClick={async () => {
-            await userAPI.addToCart({
-              productId: product.id!,
-              quantity: 1,
-            });
-            location.href = "/"
-          }}
+          onClick={handleAddToCart}
         >
           <path
             strokeLinecap="round"

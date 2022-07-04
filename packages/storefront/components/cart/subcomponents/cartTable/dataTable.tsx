@@ -17,7 +17,7 @@ const DataTable: NextComponentType = () => {
         <table className="border-collapse border border-slate-400">
           <thead className="">
             <tr>
-              <th className="border-0 border-slate-300 border-b border-green-600 px-16 py-4 md:px-8 text-base bg-slate-200">
+              <th className="border border-slate-300 px-16 py-4 md:px-8 text-base bg-slate-200">
                 Image
               </th>
               <th className="border border-slate-300 md:px-2 xl:px-10 py-4 text-base bg-slate-200">
@@ -55,7 +55,7 @@ const DataTable: NextComponentType = () => {
                   }}
                   className="text-xs"
                   onClick={() => {
-                    location.href = "http://localhost:3002/home";
+                    router.push('/home');
                   }}
                 >
                   CONTINUE SHOPPING
@@ -69,9 +69,9 @@ const DataTable: NextComponentType = () => {
                     height: "39px",
                     width: "120px",
                   }}
+                  
                   className="text-xs"
                   onClick={() => {
-                    userAPI.deleteAllCartItem();
                     dispatch(deleteCart());
                   }}
                 >
