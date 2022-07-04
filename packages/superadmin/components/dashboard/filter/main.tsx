@@ -16,9 +16,10 @@ const DateTimeFilter: FC = () => {
   const [endTime, setEndTime] = useState(new Date());
   return (
     <>
-      <div className="row">
-        <div className="col-md-6 col-lg-3 col-xl-3">
-          <div style={{ paddingLeft: "20px" }}>
+      <div style={{ marginLeft: "20px" }}>
+        <div className="row gx-5">
+          <div className="col-md-6 col-lg-3 col-xl-3">
+            {/* <div style={{ paddingLeft: "20px" }}> */}
             <div>Start Date:</div>
             <div>
               <DatePicker
@@ -28,11 +29,10 @@ const DateTimeFilter: FC = () => {
                 maxDate={new Date()}
               />
             </div>
+            {/* </div> */}
           </div>
-        </div>
-
-        <div className="col-md-6 col-lg-3 col-xl-3">
-          <div style={{ paddingLeft: "20px" }}>
+          <div className="col-md-6 col-lg-3 col-xl-3">
+            {/* <div style={{ paddingLeft: "20px" }}> */}
             <div>Start Time:</div>
             <div>
               <DatePicker
@@ -46,10 +46,10 @@ const DateTimeFilter: FC = () => {
                 dateFormat="h:mm aa"
               />
             </div>
+            {/* </div> */}
           </div>
-        </div>
-        <div className="col-md-6 col-lg-3 col-xl-3">
-          <div style={{ paddingLeft: "20px" }}>
+          <div className="col-md-6 col-lg-3 col-xl-3">
+            {/* <div style={{ paddingLeft: "20px" }}> */}
             <div>End Date:</div>
             <div>
               <DatePicker
@@ -59,10 +59,10 @@ const DateTimeFilter: FC = () => {
                 maxDate={new Date()}
               />
             </div>
+            {/* </div> */}
           </div>
-        </div>
-        <div className="col-md-6 col-lg-3 col-xl-3">
-          <div style={{ paddingLeft: "20px" }}>
+          <div className="col-md-6 col-lg-3 col-xl-3">
+            {/* <div style={{ paddingLeft: "20px" }}> */}
             <span>End Time:</span>
             <span>
               <DatePicker
@@ -77,6 +77,7 @@ const DateTimeFilter: FC = () => {
               />
             </span>
           </div>
+          {/* </div> */}
         </div>
       </div>
     </>

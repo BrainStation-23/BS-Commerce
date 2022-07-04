@@ -5,7 +5,7 @@ import StatChart from "./charts/index";
 const Dashboard: FC = () => {
   return (
     <>
-      <div style={{ padding: "50px" }}>
+      <div style={{ padding: "45px" }}>
         <DateTimeFilter />
         <StatWidgets />
         <StatChart />
