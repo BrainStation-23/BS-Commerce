@@ -1,8 +1,8 @@
 import React from "react";
 
+import { useRouter } from "next/router";
 import type { NextComponentType } from "next";
 
-import { userAPI } from "APIs";
 import { deleteCart } from "toolkit/cartSlice";
 import { useAppDispatch } from "customHooks/hooks";
 
@@ -10,6 +10,7 @@ import TableData from "@/components/cart/subcomponents/cartTable/tableData";
 
 const DataTable: NextComponentType = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   return (
     <>
@@ -55,7 +56,7 @@ const DataTable: NextComponentType = () => {
                   }}
                   className="text-xs"
                   onClick={() => {
-                    router.push('/home');
+                    router.push('/');
                   }}
                 >
                   CONTINUE SHOPPING
