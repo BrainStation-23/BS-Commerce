@@ -191,7 +191,7 @@ const CreateProduct = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="content-header clearfix">
+              <div className="content-header clearfix pt-4">
                 <h1 className="float-start">
                   Add a new product
                   <span className="fs-5 p-3">
@@ -223,7 +223,7 @@ const CreateProduct = () => {
                 </div>
               </div>
 
-              <div className="col-md-12 clearfix">
+              {/* <div className="col-md-12 clearfix">
                 <button
                   type="button"
                   className="btn btn-info float-left mx-2 my-auto "
@@ -234,7 +234,7 @@ const CreateProduct = () => {
                   <i className="bi bi-gear-fill pt-1" />
                   <p className="float-end mx-1 my-0">Settings</p>
                 </button>
-              </div>
+              </div> */}
 
               <div className="mt-4">
                 <ProductInfoForm />

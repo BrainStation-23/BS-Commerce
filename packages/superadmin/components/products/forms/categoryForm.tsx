@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { ErrorMessage, Field } from "formik";
 import { toast } from "react-toastify";
-
+import FieldTemplate from "./fieldTemplate";
 
 const CategoryForm = (props: any) => {
   const { setCategoryData, categoryData, setFieldValue } = props;
@@ -77,11 +77,13 @@ const CategoryForm = (props: any) => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <i
-                className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px" }}
-              />
-              <div className="px-3 fs-5 col text-start">Category</div>
+              <div className="px-3 fs-5 col text-start">
+                <i
+                  className="bi bi-diagram-3-fill col-1 px-1"
+                  style={{ fontSize: "25px" }}
+                />
+                Category
+              </div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
               </div>
@@ -90,11 +92,11 @@ const CategoryForm = (props: any) => {
         </div>
         <div className="collapse " id="categoryTab">
           <div className="card-body">
-            <div className="form-group row my-2 ">
+            <div className="form-group row my-2 mb-3">
               <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end pe-2">
+                <div className="label-wrapper row row-cols-auto float-md-end pe-3">
                   <label
-                    className="col-form-label col px-1"
+                    className="col-form-label col px-1 fs-5  "
                     htmlFor="SelectedCategoryIds"
                     id="SelectedCategoryIds_label"
                   >
@@ -103,13 +105,13 @@ const CategoryForm = (props: any) => {
                 </div>
               </div>
               <div className="col-md-9">
-                <div className="input-group  py-1">
+                <div className="input-group">
                   <Field
                     as="select"
                     id="SelectedCategoryIds"
                     name="SelectedCategoryIds"
                     data-role="multiselect"
-                    className="form-control single-line"
+                    className="form-control single-line border border-0 border-bottom rounded-0 shadow-none border-2"
                     aria-disabled="false"
                   >
                     <option defaultValue={0} value={0} disabled={true}>
@@ -133,56 +135,25 @@ const CategoryForm = (props: any) => {
                 </div>
               </div>
             </div>
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end p-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="isFeaturedCategory"
-                  >
-                    Featured
-                  </label>
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="isFeaturedCategory"
-                  name="isFeaturedCategory"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="isFeaturedCategory" />
-                </div>
-              </div>
-            </div>
 
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end p-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="displayOrderCategory"
-                  >
-                    Display Order
-                  </label>
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <div className="input-group ">
-                  <Field
-                    type="number"
-                    id="displayOrderCategory"
-                    name="displayOrderCategory"
-                    aria-disabled="false"
-                    className="form-control"
-                  />
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="displayOrderCategory" />
-                </div>
-              </div>
-            </div>
+            <FieldTemplate
+              label="Featured"
+              isRequired={false}
+              fieldID="isFeaturedCategory"
+              fieldType="checkbox"
+              fieldAs=""
+              extraClass=""
+              fieldClass="check-box mt-2  "
+            />
+            <FieldTemplate
+              label="Display Order"
+              isRequired={false}
+              fieldID="displayOrderCategory"
+              fieldType="number"
+              fieldAs=""
+              extraClass=""
+              fieldClass=""
+            />
             <div className="text-center mt-4">
               <button
                 className="mx-auto btn btn-primary"

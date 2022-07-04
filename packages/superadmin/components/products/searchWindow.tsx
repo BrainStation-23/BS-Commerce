@@ -58,7 +58,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                   <span className="ms-2 fs-4">Search</span>
                 </div>
                 <div className="card-body">
-                  <div className="form-group row py-1">
+                  <div className="form-group row py-2">
                     <div className="col-md-3">
                       <div className="label-wrapper row row-cols-auto float-md-end px-2">
                         <label
@@ -73,7 +73,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                       <div className="Field-group Field-group-short ">
                         <div className="row">
                           <Field
-                            className="form-control col my-3 mt-2 rounded-start rounded-0 "
+                            className="form-control col my-3 mt-0 rounded-start rounded-0 "
                             id="GoDirectlyToSku"
                             name="GoDirectlyToSku"
                             type="text"
@@ -91,7 +91,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                           type="submit"
                           id="goToProductBySku"
                           name="goToProductBySku"
-                          className="btn btn-primary btn-flat my-2  rounded-end rounded-0 "
+                          className="btn btn-primary btn-flat my-0  rounded-end rounded-0 "
                         >
                           Go
                         </button>

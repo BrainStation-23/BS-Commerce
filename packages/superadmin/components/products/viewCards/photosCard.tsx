@@ -22,6 +22,19 @@ const PhotosCard = (props: any) => {
         </div>
         <div className="" id="metaTab">
           <div className="card-body">
+          <div className="row justify-content-center">
+              {product?.photos[0]?.url ? (
+                <img
+                  className="col-2"
+                  src={product?.photos[0]?.url}
+                  alt="No Image"
+                  maxWidth="130px"
+                  height="160px"
+                />
+              ) : (
+                "No preview"
+              )}
+            </div>
             <SingleView label="URL" value={product?.photos[0]?.url} toolkitMessage="toolkitMessage"/>
             <SingleView label="ID" value={product?.photos[0]?.id} toolkitMessage="toolkitMessage"/>
             <SingleView label="Title" value={product?.photos[0]?.title} toolkitMessage="toolkitMessage"/>

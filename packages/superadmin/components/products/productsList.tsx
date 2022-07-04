@@ -37,6 +37,11 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
     setProductID(id);
     setModal({ ...modal, delete: true });
   };
+
+  const onClickForSort = (name: string) => {
+    // console.log(name);
+  };
+
   const [modal, setModal] = useState({
     delete: false,
   });
@@ -47,23 +52,6 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   }, [currentPage, PageSize, productsList]);
 
   const columns = [
-    // {
-    //   label: (
-    //     <input
-    //       type="checkbox"
-    //       onClick={() => {
-    //         setCheckAll(!checkAll);
-    //       }}
-    //     ></input>
-    //   ),
-    //   path: "select",
-    //   content: (data: any, key: any, index: any) => (
-    //     <td className="text-center align-middle">
-    //       {checkAll && <input type="checkbox" value="" checked></input>}
-    //       {!checkAll && <input type="checkbox" value=""></input>}
-    //     </td>
-    //   ),
-    // },
     {
       label: "Picture",
       path: "url",
@@ -113,7 +101,9 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
         <td className="text-center align-middle">
           {data?.info[key]}
           {data?.categories[0] ? data?.categories[0].id : "---"}
-          {data?.categories?.map((category : any, index : any) => (index > 0 ? ` , ${category?.id}` : ""))}
+          {data?.categories?.map((category: any, index: any) =>
+            index > 0 ? ` , ${category?.id}` : ""
+          )}
         </td>
       ),
     },
@@ -138,7 +128,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-default btn-outline-info">
               <span>
                 <i className="bi bi-pencil me-2 align-middle"></i>
               </span>
@@ -160,7 +150,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-default btn-outline-primary">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>
               </span>
@@ -176,7 +166,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           <button
-            className="btn btn-default"
+            className="btn btn-default btn-outline-danger"
             onClick={() => onClickForDelete(data.id)}
           >
             <i className="bi bi-trash3-fill align-middle me-2"></i>
@@ -197,7 +187,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
               Product
             </a>
           </p>
-          <Table items={currentTableData} columns={columns} />
+          <Table items={currentTableData} columns={columns} onClickForSort={onClickForSort}/>
 
           <div className="">
             {productsList?.length > 1 ? (
