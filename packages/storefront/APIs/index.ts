@@ -14,6 +14,7 @@ import {
 } from './restApi';
 import {
   addToCartGraphql,
+  deleteAllFromCartGraphql,
   deleteCartItemGraphql,
   forgotPasswordGraphql,
   getCartGraphql,
@@ -40,7 +41,7 @@ const graphqlApi: apiFunction = {
   addToCart: addToCartGraphql,
   deleteCartItem: deleteCartItemGraphql,
   updateCartItem: updateCartGraphql,
-  deleteAllCartItem: deleteCartItemGraphql,
+  deleteAllCartItem: deleteAllFromCartGraphql,
 };
 
 const restApi: apiFunction = {

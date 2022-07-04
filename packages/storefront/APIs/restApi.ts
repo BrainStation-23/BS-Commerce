@@ -4,6 +4,7 @@ import {
   AddToCartResponse,
   addToCartSuccessResponse,
   Cart,
+  deleteAllCartItemsResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
@@ -154,11 +155,11 @@ export async function deleteFromCartRest(
 }
 
 export async function deleteAllFromCartRest(): Promise<
-  deleteCartItemResponse | undefined
+  deleteAllCartItemsResponse | undefined
 > {
   try {
     const { data } = await axios?.delete(`${apiEndPoints?.deleteAllCartItem}`);
-    return data?.data as deleteCartItemResponse;
+    return data?.data as deleteAllCartItemsResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }

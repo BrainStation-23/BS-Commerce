@@ -3,6 +3,7 @@ import {
   addToCartRequest,
   AddToCartResponse,
   Cart,
+  deleteAllCartItemsResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
@@ -16,12 +17,8 @@ import { CreateCustomerResponse } from 'models';
 import { CustomerSignInRequest } from 'models';
 import { GetCustomerProductParams } from 'models';
 import {
-  CreateUserRequest,
-  CreateUserResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
 } from 'models';
 import { User } from 'utils/types';
 import client from '../graphqlSchema/apollo-client';
@@ -91,7 +88,7 @@ export async function updateCartGraphql(
 }
 
 export async function deleteAllFromCartGraphql(): Promise<
-  deleteCartItemResponse | undefined
+  deleteAllCartItemsResponse | undefined
 > {
   return undefined;
 }
