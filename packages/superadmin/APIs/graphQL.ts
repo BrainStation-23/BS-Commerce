@@ -8,9 +8,9 @@ import {
   Product,
   SignInRequest,
   SignInSuccessResponse,
-  Category,
-  getCategoryBySlugRequest,
-  getCategoryBySlugSuccessResponse,
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  getCategorySuccessResponse,
 } from "models";
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -52,12 +52,14 @@ export async function getUserProfileGraphql(): Promise<
   return;
 }
 
-export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
-  return;
+export async function getCategoryListGraphQL(): Promise<
+  getCategoryListSuccessResponse | undefined
+> {
+  return undefined;
 }
 
-export async function getCategoryBySlugGraphQL(
-  slug: getCategoryBySlugRequest
-): Promise<getCategoryBySlugSuccessResponse | undefined> {
-  return;
+export async function getCategoryGraphQL(
+  id: getCategoryRequest
+): Promise<getCategorySuccessResponse | undefined> {
+  return undefined;
 }

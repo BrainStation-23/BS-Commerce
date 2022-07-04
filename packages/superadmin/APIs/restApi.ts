@@ -1,28 +1,26 @@
-import { GetProductParams } from "./../../models/src/product/getProduct";
+import { NextRouter } from "next/router";
 import axios from "axios";
-import { apiEndPoints } from "../utils/apiEndPoints";
-import {
-  CreateProductRequest,
-  UpdateProductRequest,
-} from "../../models/src/product";
+import { toast } from "react-toastify";
 import {
   SignInRequest,
   SignInSuccessResponse,
   CreateManufacturerRequest,
   UpdateManufacturerRequest,
-  GetUserResponse,
   GetUserSuccessResponse,
   UpdatedUserRequest,
   ChangePasswordRequest,
-  getCategoryBySlugRequest,
-  getCategoryBySlugSuccessResponse,
+  getCategorySuccessResponse,
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  CreateProductRequest,
+  UpdateProductRequest,
+  GetProductParams,
+  Manufacturer,
+  Product,
 } from "models";
 
 import { User } from "../utils/types";
-import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
-import { toast } from "react-toastify";
-import { CategoryInterface } from "../components/category/catergory-model";
-import { NextRouter } from "next/router";
+import { apiEndPoints } from "../utils/apiEndPoints";
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -178,7 +176,7 @@ export async function getAdminsRest(): Promise<User[] | undefined> {
 export async function updateAdminRest(
   data: UpdatedUserRequest,
   //id: string
-  router
+  router: NextRouter
 ): Promise<UpdatedUserRequest | undefined> {
   try {
     const response = await axios.patch<UpdatedUserRequest>(
@@ -188,7 +186,7 @@ export async function updateAdminRest(
     router.push("/users/admin");
     toast.success("Edit Successful");
     return response.data as UpdatedUserRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -197,7 +195,7 @@ export async function updateAdminRest(
 export async function changePasswordRest(
   data: ChangePasswordRequest,
   //id: string
-  router
+  router: NextRouter
 ): Promise<ChangePasswordRequest | undefined> {
   try {
     const response = await axios.patch<ChangePasswordRequest>(
@@ -207,7 +205,7 @@ export async function changePasswordRest(
     router.push("/users/admin");
     toast.success("Edit Successful");
     return response.data as ChangePasswordRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -275,15 +273,15 @@ export async function updateManufacturerRest(
   }
 }
 
-export async function getCategoriesRest(): Promise<
-  CategoryInterface[] | undefined
+export async function getCategoryListRest(): Promise<
+  getCategoryListSuccessResponse | undefined
 > {
   try {
     const response = await axios.get(`${apiEndPoints.category}`);
-
-    return response?.data.data.categories as CategoryInterface[];
+    return response.data as getCategoryListSuccessResponse;
   } catch (error: any) {
-    console.error(error);
+    toast.error(error.response.data.message);
+    // return error.response as getCategoryListErrorResponse;
   }
 }
 
@@ -300,14 +298,14 @@ export async function getUserProfileRest(
   }
 }
 
-export async function getCategoryBySlugRest(
-  slug: getCategoryBySlugRequest
-): Promise<getCategoryBySlugSuccessResponse | undefined> {
+export async function getCategoryRest(
+  id: getCategoryRequest
+): Promise<getCategorySuccessResponse | undefined> {
   try {
     const { data } = await axios.get(
-      `${apiEndPoints.category}/slug/${slug.slug}`
+      `${apiEndPoints.category}/${id.categoryId}`
     );
-    return data as getCategoryBySlugSuccessResponse;
+    return data as getCategorySuccessResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }

@@ -4,20 +4,17 @@ import {
   UpdateProductRequest,
   SignInRequest,
   SignInSuccessResponse,
-  GetUserResponse,
   GetUserSuccessResponse,
-  getCategoryBySlugResponse,
-  getCategoryBySlugRequest,
-} from "models";
-import {
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  getCategorySuccessResponse,
   CreateManufacturerRequest,
   Manufacturer,
   UpdateManufacturerRequest,
+  GetProductParams,
+  CreateProductRequest,
+  UpdatedUserRequest,
 } from "models";
-import { GetProductParams } from "./../../models/src/product/getProduct";
-import { CreateProductRequest } from "./../../models/src/product/createProduct";
-import { UpdatedUserRequest } from "./../../models/src/user/updateUser";
-import { CategoryInterface } from "../components/category/catergory-model";
 
 export interface User {
   id?: string;
@@ -60,7 +57,10 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
-  getCategories: () => Promise<CategoryInterface[] | undefined>;
+  getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  getCategory: (
+    id: getCategoryRequest
+  ) => Promise<getCategorySuccessResponse | undefined>;
   deleteProduct: (productId: string) => Promise<boolean | undefined>;
   signin: (
     data: SignInRequest,
@@ -85,9 +85,6 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
-  getCategoryBySlug: (
-    slug: getCategoryBySlugRequest
-  ) => Promise<getCategoryBySlugResponse | undefined>;
 }
 
 export interface adminCreate {
