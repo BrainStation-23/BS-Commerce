@@ -1,11 +1,9 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
-import { WishlistItem } from 'src/entity/wishList';
 import { Response } from 'express';
 import { WishListService } from '../services';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/decorators/roles.decorator';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -28,8 +26,7 @@ import {
 } from '../dto';
 
 @Controller()
-@Roles('customer')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
+@UseGuards(AuthGuard('jwt'), new RolesGuard(['customer']))
 @ApiBearerAuth()
 @ApiTags('Customer Wishlist API')
 export class WishListController {
@@ -46,7 +43,7 @@ export class WishListController {
     type: AddToWishlistErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async addWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async addToWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;

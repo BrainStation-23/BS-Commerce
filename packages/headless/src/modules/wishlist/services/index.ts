@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { WishlistItem } from 'src/entity/wishList';
 import { Helper } from 'src/helper/helper.interface';
-import { ServiceErrorResponse, ServiceSuccessResponse, } from 'src/helper/serviceResponse/service.response.interface';
 import { WishListRepository } from '../repositories';
 import {
   addToWishlistErrorMessage,
@@ -17,6 +16,7 @@ import {
   deleteAllWishlistItemsResponse,
   deleteWishlistItemErrorMessage,
   updateWishlistItemErrorMessage,
+  updateWishlistItemResponse,
 } from 'models';
 
 @Injectable()
@@ -55,7 +55,7 @@ export class WishListService {
     return this.helper.serviceResponse.successResponse({ message: deleteWishlistSuccessMessage.WISHLIST_DELETED_SUCCESSFUL }, HttpStatus.OK);
   }
 
-  async updateWishlistItem(item: WishlistItem, userId: string,): Promise<ServiceSuccessResponse | ServiceErrorResponse> {
+  async updateWishlistItem(item: WishlistItem, userId: string,): Promise<updateWishlistItemResponse> {
     if (item.quantity && item.quantity > 0) {
       const wishList = await this.wishListRepo.updateWishlistItem(userId, item);
       if (!wishList) return this.helper.serviceResponse.errorResponse(updateWishlistItemErrorMessage.CAN_NOT_UPDATE_WISHLIST_ITEM, null, HttpStatus.BAD_REQUEST);

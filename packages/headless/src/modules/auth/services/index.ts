@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
-import { JwtPayload } from 'src/entity/auth';
+import { AdminJwtPayload } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
@@ -46,11 +46,11 @@ export class AuthService {
     const doesPasswordMatch = await bcrypt.compare(data.password, user.password);
     if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse(SignInErrorMessages.INVALID_CREDENTIALS, null, HttpStatus.BAD_REQUEST,);
 
-    const payload: JwtPayload = {
+    const payload: AdminJwtPayload = {
       id: user.id,
       username: user.username,
       logInTime: Date.now(),
-      userType: 'admin'
+      role: 'admin'
     };
 
     const token = this.jwtService.sign(payload);

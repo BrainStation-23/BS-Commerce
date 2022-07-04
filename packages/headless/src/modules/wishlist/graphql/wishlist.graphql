@@ -1,10 +1,39 @@
-type Item {
+type WishlistProductPhoto {
+  url: String
+  title: String
+  alt: String
+}
+
+type WishlistProductInfo {
+  name: String!
+  shortDescription: String
+  fullDescription: String
+  sku: String!
+  price: Int!
+  oldPrice: Int!
+  cost: Int!
+  showOnHomePage: Boolean
+  includeInTopMenu: Boolean
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  isFeatured: Boolean
+  publishDate: DateTime
+}
+
+type WishlistProduct {
+  id: String!
+  info: WishlistProductInfo!
+  photos: WishlistProductPhoto!
+}
+
+type WishlistItem {
   productId: String!
-  product: Product!
+  product: WishlistProduct!
   quantity: Int!
 }
 
-input ItemInput {
+input WishlistItemInput {
   productId: String!
   quantity: Int!
 }
@@ -12,7 +41,7 @@ input ItemInput {
 type WishList {
   id: String!
   userId: String!
-  items: [Item!]!
+  items: [WishlistItem]
 }
 
 type WishListResponse {
@@ -21,14 +50,24 @@ type WishListResponse {
   data: WishList
 }
 
+type CommonWishListResponseMessage {
+  message: String!
+}
+
+type WishListResponseWithMessage {
+  error: String
+  code: Int!
+  data: CommonWishListResponseMessage
+}
+
 type Query {
   getUserWishlist: WishListResponse!
 }
 
 type Mutation {
-  addToWishlist(item: ItemInput!): WishListResponse!
-  deleteWishList(wishlistId: String!): WishListResponse!
-  updateWishlistItem(item: ItemInput!): WishListResponse!
+  addToWishlist(item: WishlistItemInput!): WishListResponse!
+  deleteWishList(wishlistId: String!): WishListResponseWithMessage!
+  updateWishlistItem(item: WishlistItemInput!): WishListResponse!
   deleteWishlistItem(productId: String!): WishListResponse!
-  deleteAllWishlistItems: WishListResponse!
+  deleteAllWishlistItems: WishListResponseWithMessage!
 }
