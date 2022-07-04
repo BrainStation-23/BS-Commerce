@@ -3,14 +3,15 @@ import SwiperGrid from "@/components/global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
 import Container from "@/components/global/components/container";
 import ProductRow from "./productRow.component";
+import { useAppSelector } from "customHooks/hooks";
 
-const TrendingProducts = ({ products }: any) => {
+const TrendingProducts = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
   let [filteredProduct, setProducts]: any = useState([]);
 
-  // const products = useSelector(
-  //   (state: RootState) => state?.productsStore?.products
-  // );
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
 
   const getMinimumProduct = () => {
     const w = window.innerWidth;

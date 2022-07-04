@@ -1,10 +1,15 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Cart } from "./cartCommon/cart";
+
+export interface deleteAllCartItems{
+    id?: string;
+    userId?: string;
+    items?: [];
+}
 
 export interface deleteAllCartItemsSuccessResponse extends SuccessResponse {
     code: number;
-    data: Cart;
+    data: deleteAllCartItems;
 }
 
 export interface deleteAllCartItemsErrorResponse extends ErrorResponse {

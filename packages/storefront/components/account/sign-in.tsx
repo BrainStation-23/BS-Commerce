@@ -22,26 +22,21 @@ const Signin = () => {
   const router = useRouter();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    try{
-      const token = await fetch(
-        "http://localhost:3002/api/signin",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+    try {
+      const token = await fetch("http://localhost:3002/api/signin", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
-      window.location.href = "/home";
-    }
-    catch (err) {
+      router.push("/");
+    } catch (err) {
       alert("Invalid User");
     }
-  
-    
+
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {
     //     alert(response.response.data.error);
@@ -96,10 +91,10 @@ const Signin = () => {
                       email: values.username,
                       password: values.password,
                     })
-                  : data = {
+                  : (data = {
                       phone: values.username,
                       password: values.password,
-                    };
+                    });
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}

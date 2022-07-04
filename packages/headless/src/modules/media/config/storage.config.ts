@@ -11,7 +11,7 @@ export const multerOptions = {
     // Check the mimetypes of the file
     fileFilter: (req: any, file: any, cb: any) => {
         req.fileExtensionValidationError = false;
-        if (file.mimetype.match(multerConfig.fileExtensionRegex)) {
+        if (multerConfig.mimeTypes.includes(file.mimetype)) {
             cb(null, true, req.fileExtensionValidationError);
         } else {
             req.fileExtensionValidationError = true
