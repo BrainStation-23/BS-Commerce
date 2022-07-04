@@ -177,7 +177,6 @@ export async function getAdminsRest(): Promise<User[] | undefined> {
 
 export async function updateAdminRest(
   data: UpdatedUserRequest,
-  //id: string
   router
 ): Promise<UpdatedUserRequest | undefined> {
   try {
@@ -196,7 +195,6 @@ export async function updateAdminRest(
 
 export async function changePasswordRest(
   data: ChangePasswordRequest,
-  //id: string
   router
 ): Promise<ChangePasswordRequest | undefined> {
   try {
