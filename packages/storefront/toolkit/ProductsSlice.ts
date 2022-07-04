@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "models";
+import { CustomerProduct, Product } from "models";
 import { ProductStore } from "../utils/types";
 
 export interface productsState {
-  products: Product[];
+  publicProducts: CustomerProduct[];
+  featuredProducts: CustomerProduct[];
 }
 
 const initialState: productsState = {
-  products: [],
+  publicProducts: [],
+  featuredProducts: [],
 };
 
 export const productsSlice = createSlice({
@@ -16,13 +18,19 @@ export const productsSlice = createSlice({
   reducers: {
     storeProducts: (
       state: productsState,
-      action: PayloadAction<Product[]>
+      action: PayloadAction<CustomerProduct[]>
     ) => {
-      state.products = action.payload;
+      state.publicProducts = action.payload;
+    },
+    storeFeaturedProducts: (
+      state: productsState,
+      action: PayloadAction<CustomerProduct[]>
+    ) => {
+      state.featuredProducts = action.payload;
     },
   },
 });
 
-export const { storeProducts } = productsSlice.actions;
+export const { storeProducts, storeFeaturedProducts } = productsSlice.actions;
 
 export default productsSlice.reducer;

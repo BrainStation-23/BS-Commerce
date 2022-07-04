@@ -1,5 +1,4 @@
 import React from "react";
-import Icon from "../icon";
 
 import { Product } from "models";
 
@@ -26,7 +25,7 @@ const ProductInfo = (props: SingleProduct) => {
               {product?.info?.oldPrice ? <s>{product?.info?.oldPrice}</s> : null}
             </span>
           ) : (
-            <div></div>
+            null
           )}
         </p>
       </div>

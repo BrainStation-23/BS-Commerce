@@ -3,11 +3,22 @@ import { userAPI } from "../../APIs";
 import Tooltips from "../global/tooltip";
 // import { searchProductSchema } from "./schema/productSchema";
 import { Product } from "models";
+import { toast } from "react-toastify";
+import { searchProductSchema } from "./schema/productSchema";
 
-const SearchWindow = ({ setProducts }: any) => {
+const SearchWindow = ({ setProducts ,allProducts }: any) => {
   const handleSearchSubmit = async (data: string) => {
-    const searchProduct: any = await userAPI.searchProduct(data);
-    setProducts([searchProduct]);
+    if (data == "") {
+        const productsList = await userAPI.getProducts(1000);
+        console.log(productsList);
+    
+        if (productsList) setProducts(productsList);
+    } else {
+      const searchProduct: any = await userAPI.searchProduct(data);
+      if (searchProduct) {
+        setProducts([searchProduct]);
+      }
+    }
   };
   return (
     <>
@@ -38,18 +49,14 @@ const SearchWindow = ({ setProducts }: any) => {
           handleSearchSubmit(values.GoDirectlyToSku);
           actions.setSubmitting(false);
         }}
-        //validationSchema={searchProductSchema}
+        validationSchema={searchProductSchema}
       >
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 mt-5">
+              <div className="card rounded border-1 mt-3">
                 <div className="card-header">
-                  <i
-                    className="bi bi-search float-start mx-2"
-                    aria-hidden="true"
-                  />
-                  <p className="float mx-2">Search</p>
+                  <span className="ms-2 fs-4">Search</span>
                 </div>
                 <div className="card-body">
                   <div className="form-group row py-1">

@@ -25,8 +25,6 @@ const EditManufacturer = (props: any) => {
       },
     };
     const id = manufacturer.manufacturer.id;
-    // console.log(id);
-    // console.log(newData);
 
     const response = await userAPI.updateManufacturer(newData, id, router);
   };
@@ -48,7 +46,6 @@ const EditManufacturer = (props: any) => {
             seftn: manufacturer?.manufacturer?.seo?.SEFN,
           }}
           onSubmit={(values, actions) => {
-            // console.log(values,"**")
             const data = {
               name: values.name,
               description: values.description,
@@ -60,7 +57,6 @@ const EditManufacturer = (props: any) => {
               metaTitle: values.metaTitle,
               seftn: values.seftn,
             };
-            // console.log(data,"##")
             handleSubmit(data);
             actions.setSubmitting(false);
           }}

@@ -8,14 +8,20 @@ import Picture from "@/components/global/components/product/common/picture";
 import Icon from "@/components/global/components/icon";
 import ProductInfo from "@/components/global/components/product/common/productInfo";
 import { Product } from "models";
+import { useAppSelector } from "customHooks/hooks";
 
-interface Products {
-  products: Product[];
-}
-
-const WeekDeals = ({ products }: Products) => {
+const WeekDeals = () => {
   //edited type. was const WeekDeals: FC = () => {}
   // console.log(products);
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
+  const getMinimumProduct = () => {
+    const w = window.innerWidth;
+    if (w >= 980) return 6;
+    if (w >= 768) return 3;
+    return 2;
+  };
   return (
     <>
       <Container className="max-w-7xl">
@@ -28,6 +34,7 @@ const WeekDeals = ({ products }: Products) => {
           slidesPerView768={3}
           slidesPerView980={5}
           rows={1}
+          loop={products?.length > getMinimumProduct() ? true : false}
         >
           {products &&
             products.length > 0 &&
@@ -50,14 +57,18 @@ const WeekDeals = ({ products }: Products) => {
                                 alt={product.tags[0]}
                               />
 
-                              <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
-                                {product.stock > 0 ? "Sale" : "Soldout"}
-                              </div>
+                              {product?.info?.oldPrice !== 0 ? (
+                                <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+                                  <p>Sale</p>
+                                </div>
+                              ) : null}
 
-                              {product.discountPercentage &&
-                              product.stock > 0 ? (
+                              {product?.info?.oldPrice !== 0 ? (
                                 <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                                  <p>{`-${product.discountPercentage}%`}</p>
+                                  <p>{`-$${Math.abs(
+                                    product?.info?.oldPrice -
+                                      product?.info?.price
+                                  )}`}</p>
                                 </div>
                               ) : null}
                             </div>

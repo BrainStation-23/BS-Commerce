@@ -1,0 +1,29 @@
+{
+    "customerByOrderTotalReport": [
+        {
+            "customer": "arthur_holmes@nopCommerce.com",
+            "orderTotal": 2460.00,
+            "noOfOrder": 1
+        },
+        {
+            "customer": "arthur_holmes@nopCommerce.com",
+            "orderTotal": 2460.00,
+            "noOfOrder": 1
+        },
+        {
+            "customer": "arthur_holmes@nopCommerce.com",
+            "orderTotal": 2460.00,
+            "noOfOrder": 1
+        },
+        {
+            "customer": "arthur_holmes@nopCommerce.com",
+            "orderTotal": 2460.00,
+            "noOfOrder": 1
+        },
+        {
+            "customer": "arthur_holmes@nopCommerce.com",
+            "orderTotal": 2460.00,
+            "noOfOrder": 1
+        }
+    ]
+}

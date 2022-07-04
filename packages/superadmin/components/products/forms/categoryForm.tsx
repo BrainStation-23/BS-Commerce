@@ -1,15 +1,64 @@
-import { ErrorMessage, Field } from "formik";
+import React from "react";
 import { useState } from "react";
+import { ErrorMessage, Field } from "formik";
+import { toast } from "react-toastify";
+
 import Tooltips from "../../global/tooltip";
 
-const CategoryForm = () => {
+const CategoryForm = (props: any) => {
+  const { setCategoryData, categoryData, setFieldValue } = props;
+  const [showTable, setShowTable] = useState(false);
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [reload, setReload] = useState(false);
+
+  const checkTable = () => {
+    const totalSelectedCategory = categoryData.filter((data: any) =>
+      data.isSelected ? data : null
+    );
+    const isSelectedZero = totalSelectedCategory[0] ? true : false;
+    isSelectedZero == showTable ? "" : setShowTable(isSelectedZero);
+  };
 
   const toggleButton = () => {
     if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
     else setBtnToggler("bi-plus-lg");
   };
+  const handleRemoveCategory = (id: any) => {
+    categoryData.map((data: any, index: any) => {
+      data.id == id ? <>{(data.isSelected = false)}</> : "";
+    });
+    setCategoryData(categoryData);
+    setReload(!reload);
+  };
 
+  const handleAddCategory = () => {
+    const categoryID = document.getElementById("SelectedCategoryIds").value;
+    if (categoryID == 0) {
+      toast.error("Please Select a Category");
+      return;
+    }
+    const isFeatured = document.getElementById("isFeaturedCategory").value;
+    const displayOrder = document.getElementById("displayOrderCategory").value;
+    const newcat = categoryData.map((data: any, index: any) => {
+      data.id == categoryID ? (
+        <>
+          {(data.isSelected = true)}
+          {
+            (data.isFeatured =
+              isFeatured == "false" || isFeatured == false ? false : true)
+          }
+          {(data.displayOrder = displayOrder)}
+        </>
+      ) : (
+        ""
+      );
+    });
+    setCategoryData(categoryData);
+    setFieldValue("isFeaturedCategory", false);
+    setFieldValue("displayOrderCategory", 1);
+    setFieldValue("SelectedCategoryIds", 0);
+    setReload(!reload);
+  };
   return (
     <>
       <div
@@ -31,7 +80,7 @@ const CategoryForm = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px", marginTop: "-20px" }}
+                style={{ fontSize: "25px" }}
               />
               <div className="px-3 fs-5 col text-start">Category</div>
               <div className="col-1">
@@ -56,44 +105,39 @@ const CategoryForm = () => {
                 </div>
               </div>
               <div className="col-md-9">
-                <div className="py-2">
+                <div className="input-group  py-1">
                   <Field
                     as="select"
                     id="SelectedCategoryIds"
                     name="SelectedCategoryIds"
                     data-role="multiselect"
-                    className="form-control"
+                    className="form-control single-line"
                     aria-disabled="false"
                   >
-                    <option defaultValue={0} disabled={true}>
+                    <option defaultValue={0} value={0} disabled={true}>
                       --Select--
                     </option>
-                    <option value={5}>Electronics</option>
-                    <option value={6}>
-                      Electronics &gt;&gt; Camera &amp; photo
-                    </option>
-                    <option value={7}>Electronics &gt;&gt; Cell phones</option>
-                    <option value={8}>Electronics &gt;&gt; Others</option>
-                    <option value={9}>Apparel</option>
-                    <option value={10}>Apparel &gt;&gt; Shoes</option>
-                    <option value={11}>Apparel &gt;&gt; Clothing</option>
-                    <option value={12}>Apparel &gt;&gt; Accessories</option>
-                    <option value={13}>Digital downloads</option>
-                    <option value={1}>Computers</option>
-                    <option value={2}>Computers &gt;&gt; Desktops</option>
-                    <option value={3}>Computers &gt;&gt; Notebooks</option>
-                    <option value={4}>Computers &gt;&gt; Software</option>
-                    <option value={14}>Books</option>
-                    <option value={15}>Jewelry</option>
-                    <option value={16}>Gift Cards</option>
+                    {categoryData?.map((data: any, index: any) => {
+                      return (
+                        <option
+                          key={index}
+                          value={data.id}
+                          disabled={data.isSelected}
+                        >
+                          {data.value}
+                        </option>
+                      );
+                    })}
                   </Field>
+                  <div className="pt-2" style={{ height: "10px" }}>
+                    <h2 className="required text-danger ">*</h2>
+                  </div>
                 </div>
                 <div className="errMsg text-red-600 text-danger">
                   <ErrorMessage name="SelectedCategoryIds" />
                 </div>
               </div>
             </div>
-
             <div className="form-group row">
               <div className="col-md-3">
                 <div className="label-wrapper row row-cols-auto float-md-end p-2">
@@ -146,6 +190,63 @@ const CategoryForm = () => {
                 </div>
               </div>
             </div>
+            <div className="text-center mt-4">
+              <button
+                className="mx-auto btn btn-primary"
+                type="button"
+                onClick={() => handleAddCategory()}
+              >
+                Add
+              </button>
+            </div>
+            {checkTable()}
+            {showTable ? (
+              <div className="my-3 py-3">
+                <table className="table table-bordered ">
+                  <thead>
+                    <tr>
+                      <th className="text-center py-3">Category</th>
+                      <th className="text-center py-3">Feaured</th>
+                      <th className="text-center py-3">Display order</th>
+                      <th className="text-center py-3">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categoryData?.map((data: any, index: any) => {
+                      if (data.isSelected)
+                        return (
+                          <React.Fragment key={index}>
+                            <tr>
+                              <td className="text-center">{data.value}</td>
+                              <td className="text-center">
+                                {data.isFeatured ? (
+                                  <i className="bi bi-check-lg"></i>
+                                ) : (
+                                  "X"
+                                )}
+                              </td>
+                              <td className="text-center">
+                                {data.displayOrder}
+                              </td>
+                              <td className="text-center">
+                                <button
+                                  className="mx-auto btn btn-primary"
+                                  type="button"
+                                  onClick={() => handleRemoveCategory(data.id)}
+                                >
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </React.Fragment>
+                        );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

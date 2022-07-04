@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { storeUserToken } from "toolkit/authSlice";
 import axios from "axios";
+import { useRouter } from "next/router";
+import withAuth from "../auth/withAuth";
 
 var cookie = require("cookie");
 var escapeHtml = require("escape-html");
@@ -17,24 +19,24 @@ var url = require("url");
 const Signin = () => {
   const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   async function handleSignin(data: CustomerSignInRequest) {
-    const token = await fetch("http://localhost:3002/api/signin", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const datass = await token.json();
-    console.log("999999999999999999999999999999", datass);
-    dispatch(storeUserToken(datass?.data?.token));
-    // localStorage.setItem("token", datass?.data?.token);
-    setCookie("access_token", datass?.data?.token);
-    // axios.defaults.headers.post['Authorization'] = `Bearer ${datass?.data?.token}`;
-    // console.log('headers ======>', axios.defaults.headers.common['Authorization']);
+    try {
+      const token = await fetch("http://localhost:3002/api/signin", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const datass = await token.json();
+      dispatch(storeUserToken(datass?.data?.token));
+      router.push("/");
+    } catch (err) {
+      alert("Invalid User");
+    }
 
-    window.location.href = "/home";
     // userAPI.signIn(data).then((response: any) => {
     //   if (response?.code != 200) {
     //     alert(response.response.data.error);
@@ -75,16 +77,24 @@ const Signin = () => {
           <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                phone: "",
                 email: "",
+                phone: "",
+                username: "",
                 password: "",
               }}
               onSubmit={(values, actions) => {
-                const data = {
-                  phone: "01717584939",
-                  email: values.email,
-                  password: values.password,
-                };
+                let data = {};
+                let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+                const isEmail = regex.test(values.username);
+                isEmail
+                  ? (data = {
+                      email: values.username,
+                      password: values.password,
+                    })
+                  : (data = {
+                      phone: values.username,
+                      password: values.password,
+                    });
                 handleSignin(data);
                 actions.setSubmitting(false);
               }}
@@ -110,9 +120,10 @@ const Signin = () => {
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
+                        id="username"
+                        name="username"
+                        placeholder="Enter email or phone number"
+                        required
                       />
                       {/* <div className="errMsg text-red-600 outline-0">
                         <ErrorMessage name="username" />
@@ -126,6 +137,7 @@ const Signin = () => {
                         id="password"
                         name="password"
                         placeholder="Password"
+                        required
                       />
                       {/* <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />

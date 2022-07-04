@@ -2,15 +2,88 @@ import { Formik, Form } from "formik";
 import { productSchema } from "./schema/productSchema";
 
 import ProductInfoForm from "./forms/productInfoForm";
-import InventoryForm from "./forms/categoryForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
+import { useEffect, useState } from "react";
+import CategoryForm from "./forms/categoryForm";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const EditProduct = (props: any) => {
   const { product } = props;
+  const router = useRouter();
 
+  const [categogiesData, setCategoryData] = useState([
+    {
+      id: 1,
+      value: "Category 1",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 2,
+      value: "Category 2",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 1,
+    },
+    {
+      id: 3,
+      value: "Category 3",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 3,
+    },
+    {
+      id: 4,
+      value: "Category 4",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 5,
+    },
+    {
+      id: 5,
+      value: "Category 5",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 6,
+      value: "Category 6",
+      isSelected: false,
+      isFeatured: true,
+      displayOrder: 0,
+    },
+    {
+      id: 7,
+      value: "Category 7",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+    {
+      id: 8,
+      value: "Category 8",
+      isSelected: false,
+      isFeatured: false,
+      displayOrder: 0,
+    },
+  ]);
   const handleSubmit = async (data: any) => {
+    const categories: any = [];
+
+    categogiesData?.map((category: any, index: any) => {
+      category.isSelected == true
+        ? categories.push({
+            id: `${category.id}`,
+            isFeatured: category.isFeatured,
+            displayOrder: +category.displayOrder,
+          })
+        : "";
+    });
     const newData = {
       info: {
         name: data.productName,
@@ -34,29 +107,42 @@ const EditProduct = (props: any) => {
         friendlyPageName: data.metaFriendlyPageName,
       },
       tags: data.tags,
-      photos: {
-        url: data.photosUrl,
-        id: product.id,
-        title: data.photosTitle,
-        alt: "image",
-        displayOrder: 0,
-      },
-      brands: data.brands,
-      categories: [
+      photos: [
         {
+          url: data.photosUrl,
           id: product.id,
-          isFeatured: true,
+          title: data.photosTitle,
+          alt: "image",
           displayOrder: 0,
         },
       ],
+      brands: data.brands,
+      categories: categories,
     };
     const id = product.id;
-    console.log(newData);
-    
-    const response = await userAPI.updateProduct(newData, id);
+    if (categories[0]) {
+      const response = await userAPI.updateProduct(newData, id , router);
+    } else toast.error("You must select a cateory");
   };
-  console.log(product);
-  
+
+  const getCategoryData = () => {
+    categogiesData.map((category: any, index) => {
+      const productCategories = product?.categories?.filter(
+        (productCategory: any) => {
+          return productCategory.id == category.id ? productCategory : null;
+        }
+      );
+      if (productCategories[0]) {
+        category.isFeatured = productCategories[0].isFeatured;
+        category.isSelected = true;
+        category.displayOrder = productCategories[0].displayOrder;
+      }
+    });
+  };
+  useEffect(() => {
+    getCategoryData();
+  }, []);
+
   return (
     <>
       {product ? (
@@ -75,7 +161,6 @@ const EditProduct = (props: any) => {
             published: product?.info?.published,
             displayOrder: product?.info?.displayOrder,
             isFeatured: product?.info?.isFeatured,
-            // publishDate:product?.info?.publishDate ,
             tags: product?.tags,
             brands: product?.brands,
             keywords: product?.meta?.keywords,
@@ -91,39 +176,7 @@ const EditProduct = (props: any) => {
             displayOrderCategory: product?.categories[0]?.displayOrder,
           }}
           onSubmit={(values, actions) => {
-            const data = {
-              productName: values.productName,
-              ShortDescription: values.ShortDescription,
-              FullDescription: values.FullDescription,
-              Sku: values.Sku,
-              OldPrice: values.OldPrice,
-              Price: values.Price,
-              ProductCost: values.ProductCost,
-              showOnHomePage: values.showOnHomePage,
-              includeInTopMenu: values.includeInTopMenu,
-              allowToSelectPageSize: values.allowToSelectPageSize,
-              published: values.published,
-              displayOrder: values.displayOrder,
-              isFeatured: values.isFeatured,
-              // publishDate: values.publishDate,
-              tags: values.tags,
-              brands: values.brands,
-              keywords: values.keywords,
-              metaTitle: values.metaTitle,
-              metaDescription: values.metaDescription,
-              metaFriendlyPageName: values.metaFriendlyPageName,
-              photosUrl: values.photosUrl,
-              photosID: values.photosID,
-              photosTitle: values.photosTitle,
-              displayOrderPhotos: values.displayOrderPhotos,
-              SelectedCategoryIds: values.SelectedCategoryIds,
-              isFeaturedCategory: values.isFeaturedCategory,
-              displayOrderCategory: values.displayOrderCategory,
-            };
-            // console.log(values.keywords);
-            // console.log(data);
-            
-            handleSubmit(data);
+            handleSubmit(values);
             actions.setSubmitting(false);
           }}
           validationSchema={productSchema}
@@ -170,7 +223,11 @@ const EditProduct = (props: any) => {
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <InventoryForm />
+                  <CategoryForm
+                    setCategoryData={setCategoryData}
+                    categoryData={categogiesData}
+                    setFieldValue={formikprops.setFieldValue}
+                  />
                 </div>
               </Form>
             );

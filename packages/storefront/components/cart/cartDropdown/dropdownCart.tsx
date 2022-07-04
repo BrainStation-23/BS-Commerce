@@ -9,6 +9,7 @@ import { deleteCartItem } from "toolkit/cartSlice";
 import { ResponseItem } from "models";
 
 const CartDropdown = () => {
+  let token = document.cookie.split("=")[1]
   const [cartTotal, setCartTotal] = useState(false);
   const componentRef = useRef();
 
@@ -22,11 +23,12 @@ const CartDropdown = () => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
-  const token = useAppSelector(
-    (state) => state.persistedReducer.auth.access_token
-  );
+  // const token = useAppSelector(
+  //   (state) => state.persistedReducer.auth.access_token
+  // );
 
   const handleCartItemDelete = async (product: ResponseItem) => {
+    console.log("============================", product)
     await userAPI.deleteCartItem({
       productId: product.productId,
     });

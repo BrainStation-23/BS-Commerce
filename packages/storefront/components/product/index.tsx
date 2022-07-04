@@ -8,6 +8,7 @@ import ProductImagesSlider from "./product-image-slider";
 import { useRouter } from "next/router";
 
 import { Product } from "models";
+import { userAPI } from "APIs";
 interface SingleProduct {
   product: Product;
 }
@@ -29,8 +30,12 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  const toCart = () => {
-    setCart([...cart, { ...`${product.info.id}`, amount }]);
+  const toCart = async (id: string) => {
+    await userAPI.addToCart({
+      productId: id,
+      quantity: amount,
+    });
+    //setCart([...cart, { ...`${product.info.id}`, amount }]);
   };
 
   const toWishlist = () => {
@@ -213,7 +218,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={toCart}
+                      onClick={() => toCart(product.id)}
                       className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"

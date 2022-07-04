@@ -1,20 +1,24 @@
 import React, { FC, useEffect, useState } from "react";
-import Product from "@/components/global/components/product/product";
 import SwiperGrid from "@/components/global/components/swipergrid";
 import { SwiperSlide } from "swiper/react";
 import Container from "@/components/global/components/container";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import axios from "axios";
+import ProductRow from "./productRow.component";
+import { useAppSelector } from "customHooks/hooks";
 
-const TrendingProducts = ({products}: any) => {
+const TrendingProducts = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");
   let [filteredProduct, setProducts]: any = useState([]);
 
-  // const products = useSelector(
-  //   (state: RootState) => state?.productsStore?.products
-  // );
+  const products = useAppSelector(
+    (state) => state.persistedReducer.product.publicProducts
+  );
 
+  const getMinimumProduct = () => {
+    const w = window.innerWidth;
+    if (w >= 980) return 10;
+    if (w >= 768) return 6;
+    return 4;
+  };
   useEffect(() => {
     const newProduct = products?.filter(
       (product: any) => product.category === "smartphones"
@@ -80,16 +84,39 @@ const TrendingProducts = ({products}: any) => {
             slidesPerViewmobile={2}
             slidesPerView768={3}
             slidesPerView980={5}
-            rows={2}
+            rows={1}
+            loop={products.length > getMinimumProduct() ? true : false}
           >
-            {products?.map((product: any) => (
-              <SwiperSlide key={product.id}>
-                <Product product={product} />
-              </SwiperSlide>
-            ))}
+            {products?.map((product: any, index: any) =>
+              index % 2 === 1 ? (
+                <React.Fragment key={product.id}>
+                  <SwiperSlide className="pl-5">
+                    <ProductRow
+                      products={[products[index - 1], products[index]]}
+                    />
+                  </SwiperSlide>
+                </React.Fragment>
+              ) : index + 1 === products.length ? (
+                <React.Fragment key={product.id}>
+                  <SwiperSlide>
+                    <ProductRow
+                      products={[
+                        products[index],
+                        products.length > getMinimumProduct()
+                          ? products[0]
+                          : "",
+                      ]}
+                    />
+                  </SwiperSlide>
+                </React.Fragment>
+              ) : (
+                ""
+              )
+            )}
           </SwiperGrid>
         )}
       </Container>
+      {/* <ProductRow products={[products[0], products[1]]} /> */}
     </>
   );
 };

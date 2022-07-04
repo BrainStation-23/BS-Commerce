@@ -6,15 +6,15 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "/home",
+        source: "/home",
+        destination: "/",
         permanent: true,
       },
     ];
   },
   images: {
-    domains: ['cdn.shopify.com', 'dummyjson.com'],
-}
+    domains: ["cdn.shopify.com", "dummyjson.com"],
+  },
 };
 
 const withTM = require("next-transpile-modules")(["marketplace"]);
@@ -22,6 +22,6 @@ module.exports = withTM(nextConfig);
 
 module.exports = {
   images: {
-    domains: ['dummyjson.com','cdn.shopify.com'],
+    domains: ["dummyjson.com", "cdn.shopify.com"],
   },
-}
+};
