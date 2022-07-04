@@ -10,7 +10,7 @@ const Payment: React.FC<Props> = (props) => {
   return (
     <>
       <ContactDetails setModal={setModal} />
-      <PaymentDetails  setModal={setModal} />
+      <PaymentDetails />
     </>
   );
 };

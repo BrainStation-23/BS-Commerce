@@ -183,7 +183,6 @@ const PaymentDetails: NextComponentType = () => {
                           className="mb-4 mx-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(false);
-                            console.log(showShippingForm);
                           }}
                         />
                         Same as shipping address
@@ -197,7 +196,6 @@ const PaymentDetails: NextComponentType = () => {
                           className="mt-4 mx-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
-                            console.log(showShippingForm);
                           }}
                         />
                         Use a different billing address
