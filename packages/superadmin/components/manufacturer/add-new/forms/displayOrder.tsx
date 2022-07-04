@@ -55,11 +55,7 @@ const DisplayOrders: FC = () => {
                     id="displayOrder"
                     name="displayOrder"
                     aria-disabled="false"
-                    className="form-control"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
+                    className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                   />
                 </div>
                 <div

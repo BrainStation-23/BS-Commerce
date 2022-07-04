@@ -28,7 +28,6 @@ const EditManufacturer = (props: any) => {
 
     const response = await userAPI.updateManufacturer(newData, id, router);
   };
-  console.log(manufacturer);
 
   return (
     <>

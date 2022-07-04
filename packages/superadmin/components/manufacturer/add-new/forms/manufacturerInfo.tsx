@@ -48,20 +48,16 @@ const CreateNewManufacturer: FC = () => {
                     <label className="col-form-label col px-1" htmlFor="Name">
                       Manufacturer Name
                     </label>
+                    <span className="required text-danger ">*</span>
                   </div>
                 </div>
                 <div className="col-md-9">
                   <div className="input-group input-group-required">
                     <Field
-                      className="form-control text-box single-line"
+                      className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                       id="name"
                       name="name"
                       type="text"
-                      style={{
-                        border: "none",
-                        borderBottom: "2px grey solid",
-                        padding: "2px",
-                      }}
                     />
                     <div
                       className="pt-2"
@@ -90,7 +86,7 @@ const CreateNewManufacturer: FC = () => {
                   <div className="input-group pe-3 ">
                     <Field
                       as="textarea"
-                      className="form-control"
+                      className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                       id="description"
                       name="description"
                     />
@@ -112,14 +108,10 @@ const CreateNewManufacturer: FC = () => {
               <div className="col-md-9">
                 <div className="input-group input-group-required">
                   <Field
-                    className="form-control text-box single-line"
+                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                     id="picture"
                     name="picture"
                     type="text"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
                   />
                   <div
                     className="pt-2"

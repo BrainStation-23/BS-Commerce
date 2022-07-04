@@ -80,14 +80,10 @@ const SEO: FC = () => {
               <div className="col-md-9">
                 <div className="input-group pe-3">
                   <Field
-                    className="form-control text-box single-line"
+                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                     id="metaKeyword"
                     name="metaKeyword"
                     type="text"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
                   />
                   <div
                     className="pt-2"
@@ -116,13 +112,9 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="form-control"
+                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                     id="metaDescription"
                     name="metaDescription"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
                   />
                   <div
                     className="pt-2"
@@ -151,13 +143,9 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="form-control"
+                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                     id="metaTitle"
                     name="metaTitle"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
                   />
                   <div
                     className="pt-2"
@@ -186,13 +174,9 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="form-control"
+                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                     id="seftn"
                     name="seftn"
-                    style={{
-                      border: "none",
-                      borderBottom: "2px grey solid",
-                    }}
                   />
                   <div
                     className="pt-2"

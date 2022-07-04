@@ -35,14 +35,13 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
                         >
                           Manufacturer Name
                         </label>
-                        <Tooltips title="Enter product SKU and click Go." />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="Field-group Field-group-short ">
                         <div className="row">
                           <Field
-                            className="form-control col rounded-start rounded-0 my-3 mt-2 "
+                            className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                             id="GoDirectlyToSku"
                             name="GoDirectlyToSku"
                             type="text"
@@ -58,24 +57,13 @@ const ManufacturerSearchWindow = ({ setProducts, allProducts }: any) => {
                   <div className="form-group row py-2">
                     <div className="col-md-3">
                       <div className="label-wrapper row row-cols-auto float-md-end px-2">
-                        <strong className="fs-6 me-1">Published</strong>
-                        <span>
-                          <i
-                            className="bi bi-question-circle-fill"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="A manufacturer name"
-                            style={{
-                              color: "#3c8dbc",
-                            }}
-                          ></i>
-                        </span>
+                        <span className="fs-6 me-1">Published</span>
                       </div>
                     </div>
                     <div className="col-6">
                       <Field
                         as="select"
-                        className="w-100 p-2"
+                        className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
                         id="published"
                         name="published"
                       >
