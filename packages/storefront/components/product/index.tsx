@@ -1,11 +1,9 @@
 import { NextComponentType } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { products } from "../../allData/product-data.json";
 import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
 import ProductDescription from "./productDescription";
 import ProductImagesSlider from "./product-image-slider";
-import { useRouter } from "next/router";
 
 import { Product } from "models";
 import { userAPI } from "APIs";
@@ -14,11 +12,8 @@ interface SingleProduct {
 }
 
 const ProductDetailsComponent = ({ product }: SingleProduct) => {
-  //const { query } = useRouter();
 
-  //const product = products.find((product) => product.id === Number(query.pid));
   var isAvailable = true;
-  //if (product.stock > 0) isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
   let i = 0;
@@ -35,7 +30,6 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
       productId: id,
       quantity: amount,
     });
-    //setCart([...cart, { ...`${product.info.id}`, amount }]);
   };
 
   const toWishlist = () => {

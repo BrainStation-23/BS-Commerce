@@ -9,7 +9,6 @@ interface SingleProduct {
 }
 
 const ProductDetails: NextPage = ({ product }: SingleProduct) => {
-  // console.log(product);
   return (
     <>
       <ProductDetailsComponent product={product}></ProductDetailsComponent>
@@ -18,10 +17,7 @@ const ProductDetails: NextPage = ({ product }: SingleProduct) => {
 };
 
 export async function getServerSideProps(context: any) {
-  // console.log(context.query.id);
-
   const res = await userAPI.getPublicProductsById(context.query.id);
-  // console.log(res);
   return {
     props: {
       product: res,

@@ -1,6 +1,5 @@
 import type { NextComponentType } from "next";
 import { useState } from "react";
-import { products } from "../../allData/product-data.json";
 import { vendors } from "../../allData/vendor-data.json";
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -12,7 +11,6 @@ interface SingleProduct {
 }
 
 const ProductDescription = ({product}: SingleProduct) => {
-	//const product = products.find((product) => product.id === 1);
 	const vendor = vendors.find((vendor) => vendor.id === 1);
 	const [description, setDescription] = useState("block");
 	const [review, setReview] = useState("hidden");

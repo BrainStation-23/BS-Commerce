@@ -1,8 +1,6 @@
-import PropTypes from "prop-types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 import { useState } from "react";
-import { products } from "../../allData/product-data.json";
 
 import { Product } from "models";
 interface SingleProduct {
@@ -10,11 +8,7 @@ interface SingleProduct {
 }
 
 const ProductImagesSlider = ({ product }: SingleProduct) => {
-  //const product = products.find((product) => product.id === 1);
   var isAvailable = true;
-  //if (product.stock > 0) isAvailable = true;
-  // var productImages = [];
-  // productImages = product.images;
 
   const [activeThumb, setActiveThumb] = useState();
 
