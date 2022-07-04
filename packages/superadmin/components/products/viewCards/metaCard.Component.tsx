@@ -22,10 +22,10 @@ const MetaCard = (props: any) => {
         </div>
         <div className="" id="metaTab">
           <div className="card-body">
-            <SingleView label="Keywords" value={product?.meta?.keywords} toolkitMessage="toolkitMessage"/>
-            <SingleView label="Title" value={product?.meta?.title} toolkitMessage="toolkitMessage"/>
-            <SingleView label="Description" value={product?.meta?.description} toolkitMessage="toolkitMessage"/>
-            <SingleView label="Friendly Page Name" value={product?.meta?.friendlyPageName} toolkitMessage="toolkitMessage"/>
+            <SingleView label="Keywords" value={product?.meta?.keywords} />
+            <SingleView label="Title" value={product?.meta?.title} />
+            <SingleView label="Description" value={product?.meta?.description} />
+            <SingleView label="Friendly Page Name" value={product?.meta?.friendlyPageName} />
             
           </div>
         </div>

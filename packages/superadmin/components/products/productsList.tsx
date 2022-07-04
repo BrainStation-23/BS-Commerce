@@ -7,7 +7,7 @@ import { Product } from "models";
 import { userAPI } from "../../APIs";
 
 interface Props {
-  productsList: Product[] ;
+  productsList: Product[];
   setProducts: any;
 }
 
@@ -37,6 +37,11 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
     setProductID(id);
     setModal({ ...modal, delete: true });
   };
+
+  const onClickForSort = (name: string) => {
+    // console.log(name);
+  };
+
   const [modal, setModal] = useState({
     delete: false,
   });
@@ -47,28 +52,11 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
   }, [currentPage, PageSize, productsList]);
 
   const columns = [
-    // {
-    //   label: (
-    //     <input
-    //       type="checkbox"
-    //       onClick={() => {
-    //         setCheckAll(!checkAll);
-    //       }}
-    //     ></input>
-    //   ),
-    //   path: "select",
-    //   content: (data: any, key: any, index: any) => (
-    //     <td className="text-center">
-    //       {checkAll && <input type="checkbox" value="" checked></input>}
-    //       {!checkAll && <input type="checkbox" value=""></input>}
-    //     </td>
-    //   ),
-    // },
     {
       label: "Picture",
       path: "url",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="text-center align-middle">
           <img
             src={`${data?.photos[0][key]}`}
             height="75px"
@@ -81,32 +69,49 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
     {
       label: "Product name",
       path: "name",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="align-middle">{data?.info[key]}</td>
+      ),
     },
     {
       label: "SKU",
       path: "sku",
-      content: (data: any, key: any, index: any) => <td>{data?.info[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="align-middle">{data?.info[key]}</td>
+      ),
     },
     {
       label: "Price",
       path: "price",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">{data?.info[key]}</td>
+        <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: "Display Order",
       path: "displayOrder",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">{data?.info[key]}</td>
+        <td className="text-center align-middle">{data?.info[key]}</td>
+      ),
+    },
+    {
+      label: "Categories",
+      path: "categories",
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center align-middle">
+          {data?.info[key]}
+          {data?.categories[0] ? data?.categories[0].id : "---"}
+          {data?.categories?.map((category: any, index: any) =>
+            index > 0 ? ` , ${category?.id}` : ""
+          )}
+        </td>
       ),
     },
     {
       label: "Published",
       path: "published",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center m-auto p-auto">
+        <td className="text-center m-auto p-auto align-middle">
           {data?.info[key] ? <i className="bi bi-check-lg"></i> : "-"}
         </td>
       ),
@@ -115,7 +120,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       label: "Edit",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="text-center align-middle">
           <Link
             href={{
               pathname: `/Product/Edit/[id]`,
@@ -123,7 +128,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-default btn-outline-info">
               <span>
                 <i className="bi bi-pencil me-2 align-middle"></i>
               </span>
@@ -137,7 +142,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       label: "View",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="text-center align-middle">
           <Link
             href={{
               pathname: `/Product/View/[id]`,
@@ -145,7 +150,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             }}
             passHref
           >
-            <button className="btn btn-default">
+            <button className="btn btn-default btn-outline-primary">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>
               </span>
@@ -159,12 +164,12 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       label: "Delete",
       path: "id",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
+        <td className="text-center align-middle">
           <button
-            className="btn btn-default"
+            className="btn btn-default btn-outline-danger"
             onClick={() => onClickForDelete(data.id)}
           >
-            <i className="bi bi-pencil align-middle me-2"></i>
+            <i className="bi bi-trash3-fill align-middle me-2"></i>
             Delete
           </button>
         </td>
@@ -182,7 +187,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
               Product
             </a>
           </p>
-          <Table items={currentTableData} columns={columns} />
+          <Table items={currentTableData} columns={columns} onClickForSort={onClickForSort}/>
 
           <div className="">
             {productsList?.length > 1 ? (
