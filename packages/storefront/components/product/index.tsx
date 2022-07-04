@@ -4,12 +4,17 @@ import React, { useState } from "react";
 
 import { Product } from "models";
 import { addToCart } from "toolkit/cartSlice";
+import { useAppDispatch } from "customHooks/hooks";
+
+import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
+import ProductImagesSlider from "@/components/product/product-image-slider";
+import ProductDescription from "@/components/product/productDescription";
 interface SingleProduct {
   product: Product;
 }
 
 const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SingleProduct) => {
-
+  const dispatch = useAppDispatch()
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -196,8 +201,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({ product }: SinglePro
                     <div className="m-1 border-2 border-gray-300 rounded px-auto ">
                       <button
                         onClick={() => setAmount(amount - 1 >= 0 ? amount - 1 : 0)}
-                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
-                        // disabled={disableDecrement}
                         className="m-2"
                       >
                         -

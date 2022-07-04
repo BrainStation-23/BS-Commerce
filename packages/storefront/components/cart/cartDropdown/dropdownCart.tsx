@@ -4,14 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { ResponseItem } from "models";
 import { deleteCartItem } from "toolkit/cartSlice";
 import { useAppDispatch, useAppSelector } from "customHooks/hooks";
+import Buttons from "@/components/global/components/buttons/button";
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
   const dispatch = useAppDispatch();
 
   const [cartTotal, setCartTotal] = useState(false);
-
-  let token = document.cookie.split("=")[1]
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems

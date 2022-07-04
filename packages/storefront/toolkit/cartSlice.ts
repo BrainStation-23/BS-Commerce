@@ -18,7 +18,6 @@ export const cartSlice = createSlice({
       state: AllCartItemsState,
       action: PayloadAction<ResponseItem>
     ) => {
-      console.log(action.payload)
       const existingCartProduct = state.allCartItems.find(item => item.productId === action.payload.productId)
       existingCartProduct ? existingCartProduct.quantity += action.payload.quantity : state.allCartItems.push(action.payload);
     },
@@ -32,9 +31,10 @@ export const cartSlice = createSlice({
       state: AllCartItemsState,
       action: PayloadAction<ResponseItem>
     ) => {
-      state.allCartItems = state.allCartItems.filter(
+      const newCart = state.allCartItems.filter(
         (item) => item.productId !== action.payload.productId
       );
+      state.allCartItems = newCart;
     },
     deleteCart: (
       state: AllCartItemsState,

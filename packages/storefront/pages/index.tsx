@@ -19,11 +19,9 @@ interface Props {
 const Home: NextPage<Props> = ({
   products,
   featuredProducts,
-  cartData,
 }: Props) => {
   const dispatch = useAppDispatch();
 
-  dispatch(storeAllCartItems(cartData.items!));
   dispatch(storeProducts(products));
   dispatch(storeFeaturedProducts(featuredProducts));
 
@@ -34,12 +32,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let token = cookie?.parse(context.req.headers?.cookie);
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
-  const cartData = await userAPI.getCart(token.token);
   return {
     props: {
       products: allProducts,
       featuredProducts: featuredProducts,
-      cartData: cartData || [],
     },
   };
 };
