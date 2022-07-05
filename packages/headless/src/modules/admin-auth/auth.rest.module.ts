@@ -28,4 +28,4 @@ import { authConfig } from 'config/auth';
     JwtStrategy,
   ],
 })
-export class AuthModule { }
+export class AdminAuthModule { }

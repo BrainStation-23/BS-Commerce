@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { WishListService } from '../services';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { User } from 'src/entity/user';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { AuthGuard } from '@nestjs/passport';
+import { Customer } from 'src/entity/customer';
 import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
@@ -43,13 +42,13 @@ export class WishListController {
     type: AddToWishlistErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async addToWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async addToWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
     res.status(code);
     return response;
   }
 
-  @Get('customer/wishlist')
+  @Get('wishlist')
   @ApiResponse({
     description: 'Get User Wishlist Success Response',
     type: getUserWishlistSuccessResponseDto,
@@ -60,7 +59,7 @@ export class WishListController {
     type: getUserWishlistErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async getUserWishlist(@UserInfo() user: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.getUserWishlist(user.id);
     res.status(code);
     return response;
@@ -77,7 +76,7 @@ export class WishListController {
     type: updateWishlistItemErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async updateWishlistItem(@Body() item: updateWishlistItemRequestBodyDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async updateWishlistItem(@Body() item: updateWishlistItemRequestBodyDto, @UserInfo() user: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
     res.status(code);
     return response;
@@ -94,7 +93,7 @@ export class WishListController {
     type: deleteWishlistItemErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async deleteWishlistItem(@Param() params: deleteWishlistItemPramsDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
+  async deleteWishlistItem(@Param() params: deleteWishlistItemPramsDto, @UserInfo() user: Customer, @Res({ passthrough: true }) res: Response,) {
     const { code, ...response } = await this.wishListService.deleteWishlistItem(params.productId, user.id);
     res.status(code);
     return response;
@@ -111,7 +110,7 @@ export class WishListController {
     type: deleteAllWishlistItemsErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async deleteAllWishlistItems(@UserInfo() user: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id);
     res.status(code);
     return response;

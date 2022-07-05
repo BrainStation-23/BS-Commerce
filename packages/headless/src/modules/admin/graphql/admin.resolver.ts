@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Admin } from 'src/entity/admin';
-import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { User as AdminInfo } from 'src/decorators/auth.decorator';
 import { AdminService } from '../services';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';

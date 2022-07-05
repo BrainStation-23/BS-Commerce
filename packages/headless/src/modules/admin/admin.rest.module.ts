@@ -16,4 +16,4 @@ import { AdminService } from "./services";
     },
   ],
 })
-export class UserModule { }
+export class AdminModule { }

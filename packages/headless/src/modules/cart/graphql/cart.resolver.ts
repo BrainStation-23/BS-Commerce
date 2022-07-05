@@ -2,7 +2,7 @@ import { Item } from 'src/entity/cart';
 import { CartService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { User as AdminInfo } from 'src/decorators/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { Admin } from 'src/entity/admin';
 import { AddToCartRequestDto } from '../dto/addToCart.dto';

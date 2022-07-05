@@ -9,7 +9,7 @@ import {
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { Admin } from 'src/entity/admin';
-import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { User as AdminInfo } from 'src/decorators/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { CompareDataDto, CompareResponse } from '../dto/test.dto';
 import { CompareTestService } from '../services/test.service';

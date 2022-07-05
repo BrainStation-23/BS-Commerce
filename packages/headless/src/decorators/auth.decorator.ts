@@ -4,7 +4,7 @@ import { coreConfig } from 'config/core';
 /**
  * @return only the admin from jwt payload
  */
-export const Admin = createParamDecorator(
+export const User = createParamDecorator(
   async (data: unknown, context: ExecutionContext) => {
     return (coreConfig.api === 'GRAPHQL') ?
       await GqlExecutionContext.create(context).getContext().req.user :
