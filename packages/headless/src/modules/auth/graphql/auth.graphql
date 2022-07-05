@@ -10,24 +10,18 @@ input SignInInput {
   password: String!
 }
 
-type User {
-  id: String!
-  firstName: String!
-  lastName: String!
-  displayName: String!
-  username: String!
-  email: String!
-  provider: String
-}
-
 type Token {
   token: String!
+}
+
+type Message {
+  message: String!
 }
 
 type AuthResponse {
   error: String
   code: Int!
-  data: User
+  data: Message
 }
 
 type SignInResponse {
