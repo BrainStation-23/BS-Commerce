@@ -7,7 +7,7 @@ import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { CreateOrderDto } from '../dto/order.create.dto';
-import { OrderResponseDto } from '../dto/order.response.dto';
+import { OrderData, OrderResponseDto } from '../dto/order.response.dto';
 import { OrderCustomerService } from '../services/customer.service';
 
 @ApiTags('Order - Customer API')
@@ -18,8 +18,8 @@ export class OrderCustomerController {
   constructor(private orderCustomerService: OrderCustomerService) {}
 
   @ApiResponse({
-    type: OrderEntity,
-    description: 'Create order',
+    type: OrderData,
+    description: 'Create order response',
   })
   @Post()
   async createOrder(
@@ -37,7 +37,7 @@ export class OrderCustomerController {
 
   @ApiResponse({
     type: OrderResponseDto,
-    description: 'Get order list by user id',
+    description: 'Response of get-order-list-by-user-id',
   })
   @Get()
   async getOrderListByUserId(
