@@ -1,8 +1,11 @@
+import Link from "next/link";
+
+import { useState } from "react";
+import { NextComponentType } from "next";
+import { Field, Form, Formik } from "formik";
+
 import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
 import CreditCard from "@/components/global/icons-for-checkout-page/credit-card";
-import { Field, Form, Formik } from "formik";
-import Link from "next/link";
-import { useState } from "react";
 
 interface FormData {
   cardNumber: string;
@@ -19,8 +22,8 @@ interface FormData {
   postalCode: string;
 }
 
-const PaymentDetails = (props: any) => {
-  const { setModal } = props;
+const PaymentDetails: NextComponentType = () => {
+
   const initialValues = {
     cardNumber: "",
     nameOnCard: "",
@@ -65,7 +68,6 @@ const PaymentDetails = (props: any) => {
             city: values.city,
             postalCode: values.postalCode,
           };
-          //console.log(data)
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -181,7 +183,6 @@ const PaymentDetails = (props: any) => {
                           className="mb-4 mx-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(false);
-                            console.log(showShippingForm);
                           }}
                         />
                         Same as shipping address
@@ -195,7 +196,6 @@ const PaymentDetails = (props: any) => {
                           className="mt-4 mx-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
-                            console.log(showShippingForm);
                           }}
                         />
                         Use a different billing address

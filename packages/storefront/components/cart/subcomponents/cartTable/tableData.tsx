@@ -1,8 +1,5 @@
-import { userAPI } from "APIs";
 import { useAppSelector } from "customHooks/hooks";
-import { GetCustomerProductParams } from "models";
-import Image from "next/image";
-import ShowData from "./showData";
+import ShowData from "@/components/cart/subcomponents/cartTable/showData";
 
 const TableData = () => {
   const cartData = useAppSelector(
@@ -11,8 +8,8 @@ const TableData = () => {
   return (
     <>
       {cartData ? (
-        cartData?.map((data, index) => {
-          return <ShowData key={index} data={data} />;
+        cartData?.map((data) => {
+          return <ShowData key={data.productId} data={data} />;
         })
       ) : (
         <></>

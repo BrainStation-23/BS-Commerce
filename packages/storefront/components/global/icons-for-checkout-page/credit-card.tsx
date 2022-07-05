@@ -1,4 +1,6 @@
-const CreditCard = () => {
+import { NextComponentType } from "next";
+
+const CreditCard: NextComponentType = () => {
   return (
     <>
       <svg

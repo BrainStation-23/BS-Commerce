@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
 
-import Container from "./container";
+import Container from "@/components/global/components/container";
 
 interface Props {
   title: string;
