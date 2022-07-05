@@ -46,26 +46,6 @@ export async function createProductRest(
 }
 
 //  Create Manufacturer Rest API Post
-<<<<<<< HEAD
-=======
-export async function createManufacturerRest(
-  data: CreateManufacturerRequest,
-  router: any
-): Promise<CreateManufacturerRequest | undefined> {
-  try {
-    const response = await axios.post<CreateManufacturerRequest>(
-      `${apiEndPoints.manufacturer}`,
-      data
-    );
-    router.push('/Admin/Manufacturer/list');
-    toast.success('Create Successful');
-    return response.data as CreateManufacturerRequest;
-  } catch (error) {
-    console.log(error);
-    toast.error(error?.response?.data?.error);
-  }
-}
->>>>>>> ef51d1e46a8fa12ee18c361b6c7c400de5681f44
 
 export async function getProductsRest(
   pageSize: number
@@ -233,8 +213,8 @@ export async function createManufacturerRest(
       `${apiEndPoints.manufacturer}`,
       data
     );
-    router.push("/Manufacturer/");
-    toast.success("Create Successful");
+    router.push('/Manufacturer/');
+    toast.success('Create Successful');
     return response.data as CreateManufacturerRequest;
   } catch (error) {
     console.log(error);
@@ -250,8 +230,8 @@ export async function deleteManufacturerRest(
     const { data } = await axios?.delete(
       `${apiEndPoints?.manufacturerList}/${id}`
     );
-    router.push("/Manufacturer/");
-    toast.success("Successfully deleted");
+    router.push('/Manufacturer/');
+    toast.success('Successfully deleted');
     return data?.data as Manufacturer[];
   } catch (error) {
     toast.error(error?.response?.data?.message);
@@ -283,8 +263,8 @@ export async function updateManufacturerRest(
       data
     );
     // alert("Hi");
-    router.push("/Manufacturer/");
-    toast.success("Edit Successful");
+    router.push('/Manufacturer/');
+    toast.success('Edit Successful');
     return response.data as UpdateManufacturerRequest;
   } catch (error) {
     toast.error(error?.response?.data?.message);
