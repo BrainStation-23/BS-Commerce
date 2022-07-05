@@ -1,0 +1,9 @@
+scalar Upload
+
+type FileUploadResponse{
+    url: String!
+}
+
+type Mutation {
+  uploadFile(file: Upload!): FileUploadResponse
+}
