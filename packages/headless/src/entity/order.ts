@@ -23,7 +23,7 @@ export class OrderAddress {
   lastName: string;
   email: string;
   addressLine1: string;
-  addressLine2?: string;
+  addressLine2: string;
   city: string;
   country: string;
   postCode?: string;
@@ -33,13 +33,14 @@ export class OrderAddress {
 export class ProductOrder {
   productId: string;
   name: string;
-  price: string;
+  price: number;
   quantity: number;
   quantityShipped: number;
   sku: string;
 }
 
 export class OrderEntity {
+  orderId: string;
   userId: string;
   billingAddress: OrderAddress;
   shippingAddress: OrderAddress;

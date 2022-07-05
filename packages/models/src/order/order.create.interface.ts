@@ -1,4 +1,4 @@
-export interface OrderAddressDto {
+export interface IOrderAddress {
   firstName: string;
   lastName: string;
   email: string;
@@ -10,7 +10,7 @@ export interface OrderAddressDto {
   phoneNumber: string;
 }
 
-export interface ProductOrderDto {
+export interface IProductOrderData {
   productId: string;
   name: string;
   price: number;
@@ -18,15 +18,16 @@ export interface ProductOrderDto {
   sku: string;
 }
 
-export interface RootObject {
-  shippingCost: number;
-  userId: string;
-  billingAddress: OrderAddressDto;
-  shippingAddress: OrderAddressDto;
+export interface IOrderData {
+  userId?: string;
+  orderId?: string;
+  billingAddress: IOrderAddress;
+  shippingAddress: IOrderAddress;
   shippingMethod: string;
   paymentMethod: string;
   paymetnInfo: any;
   productCost: number;
-  products: ProductOrderDto[];
+  products: IProductOrderData[];
+  shippingCost: number;
   totalCost: number;
 }

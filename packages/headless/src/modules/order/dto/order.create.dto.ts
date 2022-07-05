@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
+import { IOrderAddress, IOrderData, IProductOrderData } from 'models';
 
-export class OrderAddressDto {
+export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
   firstName: string;
   @ApiProperty({ example: 'test' })
@@ -18,12 +19,12 @@ export class OrderAddressDto {
   @ApiProperty({ example: 'test' })
   country: string;
   @ApiProperty()
-  postCode?: number;
+  postCode?: string;
   @ApiProperty({ example: '01314998877' })
   phoneNumber: string;
 }
 
-export class ProductOrderDto {
+export class ProductOrderDto implements IProductOrderData {
   @ApiProperty({ example: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f' })
   productId: string;
   @ApiProperty({ example: 'test' })
@@ -36,7 +37,10 @@ export class ProductOrderDto {
   sku: string;
 }
 
-export class CreateOrderDto {
+export class CreateOrderDto implements IOrderData {
+  userId?: string;
+  orderId?: string;
+
   @ApiProperty({ example: 100 })
   shippingCost: number;
 
@@ -57,7 +61,7 @@ export class CreateOrderDto {
   paymentMethod: string;
 
   @ApiProperty({ example: 'test' })
-  paymetnInfo: any;
+  paymetnInfo?: any;
 
   @ApiProperty({ example: 100 })
   productCost: number;
