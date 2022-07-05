@@ -1,18 +1,15 @@
-import { FC } from "react";
-import productData from "../../../allData/product-data.json";
-import SwiperGrid from "@/components/global/components/swipergrid";
-import { SwiperSlide } from "swiper/react";
-import Container from "@/components/global/components/container";
 import Link from "next/link";
+
+import { SwiperSlide } from "swiper/react";
+import { useAppSelector } from "customHooks/hooks";
+import { NextComponentType } from "next";
+
+import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from "@/components/global/components/container";
 import Picture from "@/components/global/components/product/common/picture";
 import Icon from "@/components/global/components/icon";
-import ProductInfo from "@/components/global/components/product/common/productInfo";
-import { Product } from "models";
-import { useAppSelector } from "customHooks/hooks";
 
-const WeekDeals = () => {
-  //edited type. was const WeekDeals: FC = () => {}
-  // console.log(products);
+const WeekDeals: NextComponentType = () => {
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
@@ -40,7 +37,6 @@ const WeekDeals = () => {
             products.length > 0 &&
             products.map((product: any) => (
               <SwiperSlide key={product.id}>
-                {/* <Product product={product} /> */}
 
                 <Link href={`product/${product.id}`} passHref>
                   <div className="mb-0 overflow-hidden" key={product.id}>
@@ -76,7 +72,6 @@ const WeekDeals = () => {
                           <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
                             <Icon product={product} />
                           </div>
-                          {/* <ProductInfo product={product} /> */}
 
                           <div className="text-center py-4">
                             <Link href={`/product/${product.id}`} passHref>

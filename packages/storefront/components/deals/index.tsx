@@ -1,8 +1,9 @@
 import type { NextComponentType } from "next";
-import DealsFilter from "./filter/main";
-import PageTitle from "../global/components/pageTitle";
-import DealProductSegment from "./dealProducts/main";
-import ProductSort from "./sort/index";
+
+import DealsFilter from "@/components/deals/filter/main";
+import PageTitle from "@/components/global/components/pageTitle";
+import DealProductSegment from "@/components/deals/dealProducts/main";
+import ProductSort from "@/components/deals/sort/index";
 
 const DealsComponent: NextComponentType = () => {
   return (

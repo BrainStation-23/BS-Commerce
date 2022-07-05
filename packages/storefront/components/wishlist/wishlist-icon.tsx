@@ -1,4 +1,6 @@
-const WishlistIcon = () => {
+import { NextComponentType } from "next";
+
+const WishlistIcon: NextComponentType = () => {
   return (
     <>
       <svg

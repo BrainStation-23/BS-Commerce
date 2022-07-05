@@ -1,13 +1,12 @@
 import React, { FC } from "react";
+import Image from "next/image";
+
+import { SwiperSlide } from "swiper/react";
+import { accordionBody, CarouselBody } from "utils/types";
 
 import Accordion from "@/components/global/components/accordion";
 import CarouselSlider from "@/components/global/components/CarouselSlider";
-
-import { accordionBody, CarouselBody } from "utils/types";
-
-import Container from "../../global/components/container";
-import Image from "next/image";
-import { SwiperSlide } from "swiper/react";
+import Container from "@/components/global/components/container";
 
 interface Props {
   CarouselList: CarouselBody[];

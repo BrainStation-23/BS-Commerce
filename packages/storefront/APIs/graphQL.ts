@@ -1,10 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -18,6 +13,11 @@ import {
   CustomerSignInRequest,
   GetCustomerProductParams,
   CustomerSignInResponse,
+  addToCartRequest,
+  AddToCartResponse,
+  deleteCartItemRequest,
+  deleteCartItemResponse,
+  Cart,
 } from 'models';
 
 import { User } from 'utils/types';

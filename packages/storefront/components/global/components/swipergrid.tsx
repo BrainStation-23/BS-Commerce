@@ -1,10 +1,11 @@
+import "swiper/css";
+import "swiper/css/grid";
+import "swiper/css/navigation";
+
 import React, { FC } from "react";
 import { Swiper } from "swiper/react";
 import { Grid, Navigation } from "swiper";
 
-import "swiper/css";
-import "swiper/css/grid";
-import "swiper/css/navigation";
 
 interface Props {
   children: any;

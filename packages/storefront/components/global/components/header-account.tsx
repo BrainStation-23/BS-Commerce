@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import CartDropdown from "../../cart/cartDropdown/dropdownCart";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
-import { useRouter } from "next/router";
-import { storeUserToken } from "toolkit/authSlice";
-import { toast } from "react-toastify";
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { storeUserToken } from 'toolkit/authSlice';
+import { toast } from 'react-toastify';
+import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 
 interface Properties {}
 
-const HeaderAccount: React.FC<Properties> = (props) => {
+const HeaderAccount: React.FC<Properties> = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   const showCartDropDown = () => {
@@ -23,33 +22,31 @@ const HeaderAccount: React.FC<Properties> = (props) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user);
   const handleLogout = () => {
     localStorage.clear();
-    dispatch(storeUserToken(""));
-    toast.success("Logged out successfully!")
+    dispatch(storeUserToken(''));
+    toast.success('Logged out successfully!');
   };
 
   const links = [
-    { name: "Register", link: "/account/sign-up" },
-    { name: "Login", link: "/account/sign-in" },
-    { name: "Wishlist", link: "/wishlist" },
-    { name: "Logout", link: "/account/sign-in" },
-    { name: `${user}`, link: "/home"},
+    { name: 'Register', link: '/account/sign-up' },
+    { name: 'Login', link: '/account/sign-in' },
+    { name: 'Wishlist', link: '/wishlist' },
+    { name: 'Logout', link: '/account/sign-in' },
+    { name: `${user}`, link: '/' },
   ];
   return (
     <div className="flex flex-row items-center gap-x-3">
-      <span className="uppercase my-0">
-        {token !== "" ? (
+      <span className="my-0 uppercase">
+        {token !== '' ? (
           <div className="flex flex-wrap gap-2">
             <Link href={links[4].link}>
-              <a
-                className="hover:text-green-600 normal-case transition-all duration-100 ease-linear cursor-pointer"
-              >
+              <a className="cursor-pointer normal-case transition-all duration-100 ease-linear hover:text-green-600">
                 {links[4].name}
               </a>
             </Link>
             <Link href={links[3].link}>
               <a
                 onClick={() => handleLogout()}
-                className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+                className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
               >
                 {links[3].name}
               </a>
@@ -58,13 +55,13 @@ const HeaderAccount: React.FC<Properties> = (props) => {
         ) : (
           <>
             <Link href={links[0].link}>
-              <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
+              <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
                 {links[0].name}
               </a>
             </Link>
             <span className="mx-1">/</span>
             <Link href={links[1].link}>
-              <a className="hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
+              <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
                 {links[1].name}
               </a>
             </Link>
@@ -74,7 +71,7 @@ const HeaderAccount: React.FC<Properties> = (props) => {
       <Link href="/wishlist" passHref>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+          className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

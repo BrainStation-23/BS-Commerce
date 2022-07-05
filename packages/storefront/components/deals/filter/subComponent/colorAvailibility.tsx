@@ -1,7 +1,9 @@
-import type { NextComponentType } from "next";
 import React, { useState } from "react";
-import CounterElement from "./counterElement";
-import radio from "../../../../styles/radioButton.module.css";
+import type { NextComponentType } from "next";
+
+import CounterElement from "@/components/deals/filter/subComponent/counterElement";
+import radio from "styles/radioButton.module.css";
+
 const ColourTypeOptions: NextComponentType = () => {
   const availableOptions = [
     { id: 32320, meta: { name: "Red" } },
