@@ -75,10 +75,10 @@ const StatWidgets: FC = () => {
                   <p>{widget.name}</p>
                 </div>
                 <div className={card.icon}>{widget.icon}</div>
-                <a className={card.small_box_footer} href={widget.link}>
+                {/* <a className={card.small_box_footer} href={widget.link}>
                   More info
                   <i className="bi bi-arrow-right-circle"></i>
-                </a>
+                </a> */}
               </div>
             </div>
           );

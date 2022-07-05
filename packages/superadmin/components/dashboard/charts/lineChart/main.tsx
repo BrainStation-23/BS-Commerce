@@ -12,13 +12,13 @@ const LineCharts: FC = () => {
       >
         <div
           className="col-6 col-md-12 col-lg-6 col-xl-6"
-          style={{ padding: "20px" }}
+          style={{ padding: "10px" }}
         >
           <OrderTypeChart />
         </div>
         <div
           className="col-6 col-md-12 col-lg-6 col-xl-6"
-          style={{ padding: "20px" }}
+          style={{ padding: "10px" }}
         >
           <UserTypeChart />
         </div>
