@@ -1,11 +1,32 @@
 // Mongodb dependency implementations
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
-import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { dbConfig } from 'config/database';
+import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
+import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
+import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
+import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
+import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
+import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
+import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
+import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
+import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 
-type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'BRAND';
+type CLASS_NAME =
+  | 'WISHLIST'
+  | 'USER'
+  | 'PRODUCT'
+  | 'MANUFACTURER'
+  | 'CATEGORY'
+  | 'CART'
+  | 'CUSTOMER_AUTH'
+  | 'COMPARE'
+  | 'MEDIA'
+  | 'ORDER'
+  | 'BRAND';
+
 const db = dbConfig.db;
 
 export function ResolveDatabaseDependency(className: CLASS_NAME) {
@@ -17,6 +38,22 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return UserDatabaseMongo;
           case 'BRAND':
               return BrandDatabaseMongo;
+          case 'COMPARE':
+            return CompareDatabaseMongo;
+          case 'PRODUCT':
+            return ProductDatabaseMongo;
+          case 'MANUFACTURER':
+            return ManufacturerDatabaseMongo;
+          case 'CATEGORY':
+            return CategoryDatabaseMongo;
+          case 'CUSTOMER_AUTH':
+            return CustomerDatabaseMongo;
+          case 'CART':
+            return CartDatabaseMongo;
+          case 'WISHLIST':
+            return WishListDatabaseMongo;
+          case 'ORDER':
+            return OrderDatabaseMongo;
 
           default:
             break;
@@ -27,6 +64,9 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return UserDatabaseMysql;
           case 'BRAND':
             return BrandDatabaseMysql;
+          case 'MANUFACTURER':
+            return ManufacturerDatabaseMysql;
+
           default:
             break;
         }

@@ -12,30 +12,29 @@ import {
 import UserModel from './user.model';
 
 @Table({
-    tableName: 'Address',
-    version: false,
+    tableName: 'Address'
 })
 export default class AddressModel extends Model {
     @PrimaryKey
     @Unique(true)
     @Default(() => randomUUID())
     @Column
-    id: String;
+    id: string;
 
     @Column
-    addressLine1: String;
+    addressLine1: string;
 
     @Column
-    addressLine2: String;
+    addressLine2: string;
 
     @Column
-    city: String;
+    city: string;
 
     @Column
-    country: String;
+    country: string;
 
     @Column
-    postCode: String;
+    postCode: string;
 
     @ForeignKey(() => UserModel)
     userId: number;
