@@ -1,42 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
+import { IsArray, IsBoolean, IsNumber, IsObject, IsString } from "class-validator";
 import { Ancestor, Category, Meta, Photo } from "models";
-
-
-export class MetaDto implements Meta {
-    @ApiProperty()
-    @IsOptional()
-    @IsArray()
-    keywords?: [string];
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    description?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    title?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    SEFN?: string;
-}
-
-export class PhotoDto implements Photo{
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    url: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    alt: string;
-}
 
 export class AncestorDto implements Ancestor {
     @ApiProperty()
@@ -50,6 +15,34 @@ export class AncestorDto implements Ancestor {
     @ApiProperty()
     @IsNumber()
     level: number;
+}
+
+export class MetaDto implements Meta {
+    @ApiProperty()
+    @IsArray()
+    keywords?: [string];
+
+    @ApiProperty()
+    @IsArray()
+    description: string;
+
+    @ApiProperty()
+    @IsArray()
+    title: string;
+
+    @ApiProperty()
+    @IsArray()
+    SEFN: string;
+}
+
+export class PhotoDto implements Photo {
+    @ApiProperty()
+    @IsArray()
+    url: string;
+
+    @ApiProperty()
+    @IsArray()
+    alt: string;
 }
 
 export class CategoryDto implements Category {
@@ -69,9 +62,7 @@ export class CategoryDto implements Category {
     @IsString()
     description: string;
 
-    @ApiProperty({ type: PhotoDto })
-    @Type(() => PhotoDto)
-    @IsOptional()
+    @ApiProperty()
     @IsObject()
     photo: PhotoDto;
 
@@ -99,8 +90,8 @@ export class CategoryDto implements Category {
     @IsString()
     rootPath: string;
 
-    @ApiProperty({type: [AncestorDto]})
-    @Type(()=>AncestorDto)
+    @ApiProperty({ type: [AncestorDto] })
+    @Type(() => AncestorDto)
     @IsArray()
     ancestors: AncestorDto[];
 

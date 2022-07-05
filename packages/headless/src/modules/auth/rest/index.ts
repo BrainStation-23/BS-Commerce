@@ -15,7 +15,7 @@ import {
 } from '../dto';
 
 @Controller('auth')
-@ApiTags('User Authentication API')
+@ApiTags('Admin Authentication API')
 export class AuthController {
   constructor(private authService: AuthService) { }
 

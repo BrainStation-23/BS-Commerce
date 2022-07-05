@@ -1,9 +1,8 @@
 import { HttpStatus } from '@nestjs/common';
-import { plainToInstance } from 'class-transformer';
 import {
   DescriptiveError,
   IServiceErrorResponse,
-  IServiceSuccessResponse,
+  IServiceSuccessResponse
 } from './service.response.interface';
 
 export function successResponse<T>(
@@ -11,7 +10,7 @@ export function successResponse<T>(
   data: T,
   code: number = HttpStatus.OK,
 ): IServiceSuccessResponse<T> {
-  data = plainToInstance(dataType, data, { excludeExtraneousValues: true });
+  // data = plainToInstance(dataType, data, { excludeExtraneousValues: true });
   return { data, code };
 }
 
