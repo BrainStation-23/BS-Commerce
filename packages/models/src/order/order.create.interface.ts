@@ -29,4 +29,18 @@ export interface IOrderCreateData {
   products: IProductOrderData[];
   shippingCost: number;
   totalCost: number;
+  stripeToken?: string;
+  stripeCustomerId?: string;
+  stripeChargeId?: string;
+  paypalPaymentId?: string;
+  paypalRedirectUrl?: string;
+}
+
+export interface IOrderResponseData extends IOrderCreateData{
+  orderStatus: string;
+  shippingStatus: string;
+  paymentStatus: string; 
+  orderId: string;
+  userId: string;
+  orderedDate: Date;
 }
