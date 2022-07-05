@@ -1,7 +1,7 @@
 import Link from 'next/link';
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import { userAPI } from 'APIs';
@@ -10,7 +10,7 @@ import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 
-const Signup: NextComponentType = () => {
+const Signup = () => {
   const router = useRouter();
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
 
@@ -43,16 +43,16 @@ const Signup: NextComponentType = () => {
       />
       <div className="flex flex-wrap justify-center">
         <div
-          className="flex flex-col my-20 py-7 mx-3"
+          className="my-20 mx-3 flex flex-col py-7"
           style={{ width: ' 35rem ', height: 'auto', background: '#f3f3f3' }}
         >
-          <h2 className="text-3xl mx-3 text-center text-gray-800">
+          <h2 className="mx-3 text-center text-3xl text-gray-800">
             Create Account
           </h2>
-          <p className="text-center mt-2 mb-6 text-gray-500 mx-5">
+          <p className="mx-5 mt-2 mb-6 text-center text-gray-500">
             Please Register using account detail below.
           </p>
-          <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
+          <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
                 phone: '',
@@ -85,12 +85,13 @@ const Signup: NextComponentType = () => {
                         <div className="mb-4">
                           <Field
                             type="text"
-                            className="w-full p-2 outline-0 placeholder-gray-600"
+                            className="w-full p-2 placeholder-gray-600 outline-0"
                             id="phone"
                             name="phone"
                             placeholder="Phone"
+                            required
                           />
-                          <div className="errMsg text-red-600 outline-0">
+                          <div className="errMsg text-red-600">
                             <ErrorMessage name="phone" />
                           </div>
                         </div>
@@ -98,12 +99,13 @@ const Signup: NextComponentType = () => {
                         <div className="mb-4">
                           <Field
                             type="text"
-                            className="w-full p-2 outline-0 placeholder-gray-600"
+                            className="w-full p-2 placeholder-gray-600 outline-0"
                             id="otp"
                             name="otp"
                             placeholder="Otp"
+                            required
                           />
-                          <div className="errMsg text-red-600 outline-0">
+                          <div className="errMsg text-red-600">
                             <ErrorMessage name="otp" />
                           </div>
                         </div>
@@ -114,12 +116,13 @@ const Signup: NextComponentType = () => {
                       <div className="mb-4">
                         <Field
                           type="email"
-                          className="w-full p-2 outline-0 placeholder-gray-600"
+                          className="w-full p-2 placeholder-gray-600 outline-0"
                           id="email"
                           name="email"
                           placeholder="Email"
+                          required
                         />
-                        <div className="errMsg text-red-600 outline-0">
+                        <div className="errMsg text-red-600">
                           <ErrorMessage name="email" />
                         </div>
                       </div>
@@ -128,18 +131,19 @@ const Signup: NextComponentType = () => {
                     <div className="mb-4">
                       <Field
                         type="password"
-                        className="w-full p-2 outline-0 placeholder-gray-600"
+                        className="w-full p-2 placeholder-gray-600 outline-0"
                         id="password"
                         name="password"
                         placeholder="Password"
+                        required
                       />
-                      <div className="errMsg text-red-600 outline-0">
+                       <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
                       </div>
                     </div>
                     <button
                       type="submit"
-                      className="rounded py-2 my-2 w-full bg-green-600/100 hover:bg-black text-white"
+                      className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black"
                     >
                       Sign Up
                     </button>
@@ -149,15 +153,15 @@ const Signup: NextComponentType = () => {
             </Formik>
             <button
               onClick={() => setIsPhoneSignUP(!isPhoneSignUp)}
-              className="rounded py-2 my-2 w-full bg-green-600/100 hover:bg-black text-white"
+              className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black"
             >
               {!isPhoneSignUp
                 ? 'Sign Up With Mobile Number'
                 : 'Sign Up With Email'}
             </button>
-            <div className="my-2 text-decoration-none">
+            <div className="text-decoration-none my-2">
               <Link href="/home">
-                <a className="text-decoration-none text-gray-800 font-weight-light">
+                <a className="text-decoration-none font-weight-light text-gray-800">
                   Return to Store
                 </a>
               </Link>

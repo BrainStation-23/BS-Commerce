@@ -75,8 +75,6 @@ const userSchema = {
 };
 
 export const registerSchema = object().shape({
-  firstname: userSchema.firstname,
-  lastname: userSchema.lastname,
   phone: string().matches(/^[0-9\+]*$/, "This field only contains digits"),
   otp: string().matches(/^[0-9\+]*$/, "This field only contains digits"),
   email: string()
@@ -97,9 +95,6 @@ export const registerSchema = object().shape({
       "Password has one or more invalid character. Click info icon for hints",
       (password) => hasValidCharacters(password)
     ),
-  confirm_password: string()
-    .required("This field must not be empty")
-    .oneOf([ref("password"), null], "Passwords must match"),
 });
 
 export const changePasswordSchema = object().shape({

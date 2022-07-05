@@ -95,7 +95,7 @@ const Signin: NextComponentType = () => {
                         name="username"
                         placeholder="Enter email or phone number"
                       />
-                      <div className="errMsg text-red-600 outline-0">
+                      <div className="errMsg text-red-600">
                         <ErrorMessage name="username" />
                       </div>
                     </div>
