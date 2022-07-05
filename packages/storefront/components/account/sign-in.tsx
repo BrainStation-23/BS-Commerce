@@ -56,11 +56,9 @@ const Signin: NextComponentType = () => {
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
-      setTimeout(() => {
-        setLoader(false);
-        router.push('/');
-        toast.success('Logged in successfully!');
-      }, 1000);
+      setLoader(false);
+      router.push('/');
+      toast.success('Logged in successfully!');
     } catch (err) {
       setLoader(false);
       toast.error('Invalid username or password.');
