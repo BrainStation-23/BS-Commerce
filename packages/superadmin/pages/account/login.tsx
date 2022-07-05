@@ -1,5 +1,5 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Login from "../../components/accounts/login";
+import type { NextPage } from 'next';
+import Login from '@/components/accounts/login';
 
 const LogIn: NextPage = () => {
   return (

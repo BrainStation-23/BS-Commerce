@@ -18,6 +18,10 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
+      "@/toolkit/*": ["toolkit/*"],
+      "@/assets/*": ["assets/*"],
+      "@/APIs": ["APIs/index.ts"],
+      "@/redux-hooks": ["./redux-hooks.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
