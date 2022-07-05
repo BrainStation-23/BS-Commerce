@@ -6,6 +6,7 @@ import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
 // import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
+import { ShipmentDatabase as ShipmentDatabaseMongo } from './mongodb/shipment';
 import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
@@ -24,7 +25,8 @@ type CLASS_NAME =
   | 'CUSTOMER_AUTH'
   | 'COMPARE'
   | 'MEDIA'
-  | 'BRAND';
+  | 'BRAND'
+  | 'SHIPMENT';
 
 const db = dbConfig.db;
 
@@ -49,6 +51,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return CustomerDatabaseMongo;
           case 'CART':
             return CartDatabaseMongo;
+          case 'SHIPMENT':
+            return ShipmentDatabaseMongo;
 
           default:
             break;

@@ -1,3 +1,4 @@
+import { ShipmentModule } from 'src/modules/shipment/shipment.rest.module';
 import { AuthModule } from 'src/modules/auth/auth.rest.module';
 import { CategoryModule } from 'src/modules/category/category.rest.module';
 import { ProductModule } from 'src/modules/product/product.rest.module';
@@ -22,5 +23,6 @@ export const ResolveRestModule = () => {
     CartModule,
     MediaModule,
     CompareModule,
+    ShipmentModule
   ];
 };
