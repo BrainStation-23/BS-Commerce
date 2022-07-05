@@ -32,13 +32,11 @@ const Signup = () => {
             setLoading(false);
           }
         } else {
-          setTimeout(() => {
-            setLoading(false);
-            toast.success(
-              'Account created successfully! Please login to continue.'
-            );
-            router.push('/account/sign-in');
-          }, 1000);
+          setLoading(false);
+          toast.success(
+            'Account created successfully! Please login to continue.'
+          );
+          router.push('/account/sign-in');
         }
       });
     } catch (error) {
