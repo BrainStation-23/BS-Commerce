@@ -71,4 +71,19 @@ export class CreateOrderDto implements IOrderCreateData {
 
   @ApiProperty({ example: 100 })
   totalCost: number;
+
+  @ApiProperty({ example: '' })
+  stripeToken?: string;
+
+  @ApiProperty({ example: '' })
+  stripeCustomerId?: string;
+
+  @ApiProperty({ example: '' })
+  stripeChargeId?: string;
+
+  @ApiProperty({ example: '' })
+  paypalPaymentId?: string;
+
+  @ApiProperty({ example: '' })
+  paypalRedirectUrl?: string;
 }
