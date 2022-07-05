@@ -1,4 +1,4 @@
-import { ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { ExecutionContext, HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
 import { ExecutionContextHost } from "@nestjs/core/helpers/execution-context-host";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { AuthGuard } from "@nestjs/passport";
@@ -22,13 +22,13 @@ export class RolesGuard extends AuthGuard('jwt') {
     }
 
     if (!user) {
-      throw new HttpException('Sorry! You are not a valid user for this action.', HttpStatus.FORBIDDEN);
+      throw new UnauthorizedException('Sorry! You are not a valid user for this action.');
     }
 
     const role = user.role;
     const doesRoleMatch = this.roles.some(r => r === role);
     if (!doesRoleMatch) {
-      throw new HttpException('Sorry! You are not a valid user for this action.', HttpStatus.FORBIDDEN);
+      throw new UnauthorizedException('Sorry! You are not a valid user for this action.');
     }
     return user;
   }
