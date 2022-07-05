@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, ValidateNested } from 'class-validator';
 
 export class OrderAddressDto {
   @ApiProperty({ example: 'test' })
@@ -40,12 +40,12 @@ export class CreateOrderDto {
   @ApiProperty({ example: 100 })
   shippingCost: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: OrderAddressDto })
   @Type(() => OrderAddressDto)
   @ValidateNested({ always: true })
   billingAddress: OrderAddressDto;
 
-  @ApiProperty()
+  @ApiProperty({ type: OrderAddressDto })
   @Type(() => OrderAddressDto)
   @ValidateNested({ always: true })
   shippingAddress: OrderAddressDto;
@@ -63,16 +63,10 @@ export class CreateOrderDto {
   productCost: number;
 
   @ApiProperty({
-    example: [
-      {
-        productId: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f',
-        name: 'test',
-        price: 100,
-        quantity: 2,
-        sku: 'string',
-      },
-    ],
+    type: [ProductOrderDto],
   })
+  @IsNotEmpty()
+  @IsArray()
   @Type(() => ProductOrderDto)
   @ValidateNested({ always: true })
   products: ProductOrderDto[];
