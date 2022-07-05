@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { OrderEntity } from 'src/entity/order';
 import { User } from 'src/entity/user';
@@ -17,6 +17,10 @@ import { OrderCustomerService } from '../services/customer.service';
 export class OrderCustomerController {
   constructor(private orderCustomerService: OrderCustomerService) {}
 
+  @ApiResponse({
+    type: OrderEntity,
+    description: 'Create order',
+  })
   @Post()
   async createOrder(
     @UserInfo() user: User,
@@ -31,6 +35,10 @@ export class OrderCustomerController {
     return response;
   }
 
+  @ApiResponse({
+    type: OrderResponseDto,
+    description: 'Get order list by user id',
+  })
   @Get()
   async getOrderListByUserId(
     @UserInfo() user: User,

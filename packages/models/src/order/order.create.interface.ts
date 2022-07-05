@@ -18,14 +18,13 @@ export interface IProductOrderData {
   sku: string;
 }
 
-export interface IOrderData {
+export interface IOrderCreateData {
   userId?: string;
   orderId?: string;
   billingAddress: IOrderAddress;
   shippingAddress: IOrderAddress;
   shippingMethod: string;
   paymentMethod: string;
-  paymetnInfo: any;
   productCost: number;
   products: IProductOrderData[];
   shippingCost: number;
