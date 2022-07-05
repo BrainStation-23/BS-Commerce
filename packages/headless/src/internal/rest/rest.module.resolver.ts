@@ -8,6 +8,7 @@ import { MediaModule } from 'src/modules/media/media.rest.module';
 import { OrderModule } from 'src/modules/order/order.rest.module';
 import { ProductModule } from 'src/modules/product/product.rest.module';
 import { UserModule } from 'src/modules/user/user.rest.module';
+import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
 
 export const ResolveRestModule = () => {
   return [
@@ -20,6 +21,7 @@ export const ResolveRestModule = () => {
     CartModule,
     MediaModule,
     CompareModule,
+    WishListModule,
     OrderModule,
   ];
 };
