@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
-import CustomSelect from "../CustomSelect.component";
-import FieldTemplate from "./fieldTemplate";
+import CustomSelect from "@/components/products/CustomSelect.component";
+import FieldTemplate from "@/components/products/forms/fieldTemplate";
 
 const ProductInfoForm: FC = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
@@ -70,7 +70,7 @@ const ProductInfoForm: FC = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#prouctInfoTab"
@@ -79,7 +79,7 @@ const ProductInfoForm: FC = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="px-3 fs-5 col text-start">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-info-lg col-1 px-1"
                   style={{ fontSize: "25px" }}
@@ -99,71 +99,48 @@ const ProductInfoForm: FC = () => {
               isRequired={true}
               fieldID="productName"
               fieldType="text"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Short description"
               isRequired={false}
               fieldID="ShortDescription"
-              fieldType=""
               fieldAs="textarea"
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Full description"
               isRequired={false}
               fieldID="FullDescription"
-              fieldType=""
               fieldAs="textarea"
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="SKU"
               isRequired={true}
               fieldID="Sku"
               fieldType="text"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Price"
               isRequired={true}
               fieldID="Price"
               fieldType="number"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Old price"
               isRequired={true}
               fieldID="OldPrice"
               fieldType="number"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Product cost"
               isRequired={true}
               fieldID="ProductCost"
               fieldType="number"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Show on HomePage"
               isRequired={false}
               fieldID="showOnHomePage"
               fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
               fieldClass="check-box mt-2  "
             />
             <FieldTemplate
@@ -171,8 +148,6 @@ const ProductInfoForm: FC = () => {
               isRequired={false}
               fieldID="includeInTopMenu"
               fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
               fieldClass="check-box mt-2  "
             />
             <FieldTemplate
@@ -180,8 +155,6 @@ const ProductInfoForm: FC = () => {
               isRequired={false}
               fieldID="allowToSelectPageSize"
               fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
               fieldClass="check-box mt-2  "
             />
             <FieldTemplate
@@ -189,8 +162,6 @@ const ProductInfoForm: FC = () => {
               isRequired={false}
               fieldID="published"
               fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
               fieldClass="check-box mt-2  "
             />
             <FieldTemplate
@@ -198,17 +169,12 @@ const ProductInfoForm: FC = () => {
               isRequired={true}
               fieldID="displayOrder"
               fieldType="number"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Featured"
               isRequired={false}
               fieldID="isFeatured"
               fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
               fieldClass="check-box mt-2  "
             />
 
@@ -244,26 +210,22 @@ const ProductInfoForm: FC = () => {
               isRequired={true}
               fieldID="tags"
               fieldType="none"
-              fieldAs=""
-              extraClass=""
               fieldClass="custom-select w-100"
               options={tagsOptions}
               component={CustomSelect}
               placeholder="Select brands..."
-              isMulti={true}
+              ismulti={true}
             />
             <FieldTemplate
               label="Brands"
               isRequired={true}
               fieldID="brands"
               fieldType="none"
-              fieldAs=""
-              extraClass=""
               fieldClass="custom-select w-100"
               options={brandOptions}
               component={CustomSelect}
               placeholder="Select brands..."
-              isMulti={true}
+              ismulti={true}
             />
           </div>
         </div>

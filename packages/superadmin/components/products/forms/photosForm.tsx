@@ -1,7 +1,9 @@
 import { useState } from "react";
-import FieldTemplate from "./fieldTemplate";
+import { NextComponentType } from "next";
 
-const PhotosForm = () => {
+import FieldTemplate from "@/components/products/forms/fieldTemplate";
+
+const PhotosForm: NextComponentType = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
@@ -47,8 +49,7 @@ const PhotosForm = () => {
                   className="col-2"
                   src={document.getElementById("photosUrl")?.value}
                   alt="No Image"
-                  maxWidth="130px"
-                  height="160px"
+                  width="130px"
                 />
               ) : (
                 "No preview"

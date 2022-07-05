@@ -1,10 +1,10 @@
-import { FC, useMemo, useState } from "react";
 import Link from "next/link";
+import { FC, useMemo, useState } from "react";
 
-import Table from "../global/table/table";
-import Pagination from "../global/pagination";
+import { userAPI } from "APIs";
 import { Product } from "models";
-import { userAPI } from "../../APIs";
+import Table from "@/components/global/table/table";
+import Pagination from "@/components/global/pagination";
 
 interface Props {
   productsList: Product[];
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
-  // const [checkAll, setCheckAll] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
   const [ProductID, setProductID] = useState("");
@@ -111,7 +110,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       label: "Published",
       path: "published",
       content: (data: any, key: any, index: any) => (
-        <td className="text-center m-auto p-auto align-middle">
+        <td className="p-auto m-auto text-center align-middle">
           {data?.info[key] ? <i className="bi bi-check-lg"></i> : "-"}
         </td>
       ),
@@ -169,7 +168,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             className="btn btn-default btn-outline-danger"
             onClick={() => onClickForDelete(data.id)}
           >
-            <i className="bi bi-trash3-fill align-middle me-2"></i>
+            <i className="bi bi-trash3-fill me-2 align-middle"></i>
             Delete
           </button>
         </td>
@@ -179,7 +178,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
 
   return (
     <>
-      <div className="card rounded border-1 px-2 mt-3">
+      <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
           <p>
             Learn more about
@@ -187,7 +186,11 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
               Product
             </a>
           </p>
-          <Table items={currentTableData} columns={columns} onClickForSort={onClickForSort}/>
+          <Table
+            items={currentTableData}
+            columns={columns}
+            onClickForSort={onClickForSort}
+          />
 
           <div className="">
             {productsList?.length > 1 ? (

@@ -1,4 +1,10 @@
-const SingleView = (props: any) => {
+import { FC } from "react";
+
+interface SingleViewInterface {
+  label: string;
+  value?: string | Array<any> | number;
+}
+const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
   const { label, value } = props;
 
   return (

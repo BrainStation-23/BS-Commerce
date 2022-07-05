@@ -1,17 +1,17 @@
+import { FC } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { userAPI } from "../../APIs";
-// import { searchProductSchema } from "./schema/productSchema";
-import { Product } from "models";
-import { toast } from "react-toastify";
-import { searchProductSchema } from "./schema/productSchema";
 
-const SearchWindow = ({ setProducts ,allProducts }: any) => {
+import { userAPI } from "APIs";
+import { searchProductSchema } from "@/components/products/schema/productSchema/index";
+interface props {
+  setProducts: Function;
+}
+const SearchWindow: FC<props> = ({ setProducts }: props) => {
   const handleSearchSubmit = async (data: string) => {
     if (data == "") {
-        const productsList = await userAPI.getProducts(1000);
-        console.log(productsList);
-    
-        if (productsList) setProducts(productsList);
+      const productsList = await userAPI.getProducts(1000);
+
+      if (productsList) setProducts(productsList);
     } else {
       const searchProduct: any = await userAPI.searchProduct(data);
       if (searchProduct) {
@@ -53,7 +53,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 mt-3">
+              <div className="card border-1 mt-3 rounded">
                 <div className="card-header">
                   <span className="ms-2 fs-4">Search</span>
                 </div>
@@ -73,14 +73,13 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                       <div className="Field-group Field-group-short ">
                         <div className="row">
                           <Field
-                            className="form-control col my-3 mt-0 rounded-start rounded-0 "
+                            className="form-control col rounded-start rounded-0 my-3 mt-0 "
                             id="GoDirectlyToSku"
                             name="GoDirectlyToSku"
                             type="text"
                           />
                         </div>
-
-                        <div className="errMsg text-red-600 text-danger">
+                        <div className="errMsg text-danger text-red-600">
                           <ErrorMessage name="GoDirectlyToSku" />
                         </div>
                       </div>
@@ -91,7 +90,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                           type="submit"
                           id="goToProductBySku"
                           name="goToProductBySku"
-                          className="btn btn-primary btn-flat my-0  rounded-end rounded-0 "
+                          className="btn btn-primary btn-flat rounded-end  rounded-0 my-0 "
                         >
                           Go
                         </button>

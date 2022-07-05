@@ -1,8 +1,10 @@
 import { useState } from "react";
-import CustomSelect from "../CustomSelect.component";
-import FieldTemplate from "./fieldTemplate";
+import { NextComponentType } from "next";
 
-const MetaForm = () => {
+import CustomSelect from "@/components/products/CustomSelect.component";
+import FieldTemplate from "@/components/products/forms/fieldTemplate";
+
+const MetaForm: NextComponentType = () => {
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
@@ -41,7 +43,7 @@ const MetaForm = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#metaTab"
@@ -50,7 +52,7 @@ const MetaForm = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="px-3 fs-5 col text-start">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-meta col-1 px-1"
                   style={{ fontSize: "25px" }}
@@ -70,40 +72,29 @@ const MetaForm = () => {
               isRequired={false}
               fieldID="keywords"
               fieldType="none"
-              fieldAs=""
-              extraClass=""
               fieldClass="custom-select w-100"
               options={keywordOptions}
               component={CustomSelect}
               placeholder="Select brands..."
-              isMulti={true}
+              ismulti={true}
             />
             <FieldTemplate
               label="Title"
               isRequired={false}
               fieldID="metaTitle"
               fieldType="text"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Description"
               isRequired={false}
               fieldID="metaDescription"
               fieldType="text"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
             <FieldTemplate
               label="Friendly Page Name"
               isRequired={true}
               fieldID="metaFriendlyPageName"
               fieldType="text"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
             />
           </div>
         </div>
