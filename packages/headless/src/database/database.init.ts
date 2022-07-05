@@ -1,12 +1,10 @@
 import { connect as connectToMongoDB } from './mongodb/connect';
 import { connect as connectToMySql } from './mysql/connect';
-
 export type DB = 'MONGO' | 'MYSQL';
 
 export async function connectToDatabase(db: DB) {
     try {
         switch (db) {
-            
             case 'MONGO':
                 await connectToMongoDB();
                 break;

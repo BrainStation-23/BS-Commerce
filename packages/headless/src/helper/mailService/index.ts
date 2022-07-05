@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
-import { IMailService, MailOptions, Options } from "./mail.service.interface";
+import { Injectable } from '@nestjs/common';
+import { IMailService, MailOptions, Options } from './mail.service.interface';
 import nodemailer, { Transporter } from 'nodemailer';
 import { nodemailerConfig } from 'config/mail';
 
