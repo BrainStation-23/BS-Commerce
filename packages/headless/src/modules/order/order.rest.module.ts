@@ -12,7 +12,7 @@ import { OrderCustomerService } from './services/customer.service';
     OrderRepository,
     {
       provide: IOrderDatabase,
-      useValue: ResolveDatabaseDependency('ORDER'),
+      useClass: ResolveDatabaseDependency('ORDER'),
     },
   ],
 })

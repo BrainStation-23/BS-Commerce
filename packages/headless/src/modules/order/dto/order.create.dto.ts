@@ -62,7 +62,18 @@ export class CreateOrderDto {
   @ApiProperty({ example: 100 })
   productCost: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: [
+      {
+        productId: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f',
+        name: 'test',
+        price: 100,
+        quantity: 2,
+        sku: 'string',
+      },
+    ],
+  })
+  @Type(() => ProductOrderDto)
   @ValidateNested({ always: true })
   products: ProductOrderDto[];
 

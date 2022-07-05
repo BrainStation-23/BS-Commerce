@@ -1,5 +1,10 @@
 import { model, Schema } from 'mongoose';
-import { OrderEntity } from 'src/entity/order';
+import {
+  OrderEntity,
+  OrderStatusEnum,
+  PaymentStatusEnum,
+  ShippingStatusEnum
+} from 'src/entity/order';
 
 const AddressSchema = {
   firstName: {
@@ -52,36 +57,41 @@ const AddressSchema = {
   },
 };
 
-const ProductSchema = new Schema({
-  productId: {
-    type: String,
-    trim: true,
-    required: true,
+const ProductSchema = new Schema(
+  {
+    productId: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      trim: true,
+      required: true,
+    },
+    quantityShipped: {
+      type: Number,
+      default: 0,
+    },
+    sku: {
+      type: String,
+      trim: true,
+      required: true,
+    },
   },
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+  {
+    _id: false,
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    trim: true,
-    required: true,
-  },
-  quantityShipped: {
-    type: Number,
-    default: 0,
-  },
-  sku: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-});
+);
 
 const OrderSchema = new Schema<OrderEntity>({
   userId: {
@@ -106,12 +116,15 @@ const OrderSchema = new Schema<OrderEntity>({
   },
   orderStatus: {
     type: String,
+    default: OrderStatusEnum.Pending,
   },
   shippingStatus: {
     type: String,
+    default: ShippingStatusEnum.NotYetShipped,
   },
   paymentStatus: {
     type: String,
+    default: PaymentStatusEnum.Pending,
   },
   products: {
     type: [ProductSchema],
