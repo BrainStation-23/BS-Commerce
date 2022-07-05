@@ -5,15 +5,15 @@ import { AdminRepository } from 'src/modules/admin/repositories';
 import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
-import { adminAuthConfig } from 'config/auth';
-import { AdminJwtStrategy } from './guards/jwt-strategy';
+import { JwtStrategy } from 'src/guards/jwt-strategy';
+import { authConfig } from 'config/auth';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: adminAuthConfig.jwt_key!,
+      secret: authConfig.jwt_key!,
       signOptions: {
-        expiresIn: adminAuthConfig.expiration_time!,
+        expiresIn: authConfig.expiration_time!,
       },
     }),
   ],
@@ -25,7 +25,7 @@ import { AdminJwtStrategy } from './guards/jwt-strategy';
       provide: IAdminDatabase,
       useClass: ResolveDatabaseDependency('ADMIN'),
     },
-    AdminJwtStrategy,
+    JwtStrategy,
   ],
 })
 export class AuthModule { }

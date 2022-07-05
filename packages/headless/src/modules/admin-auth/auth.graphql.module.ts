@@ -2,18 +2,18 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { AuthService } from './services';
-import { adminAuthConfig } from 'config/auth';
+import { authConfig } from 'config/auth';
 import { AuthResolver } from './graphql/auth.resolver';
-import { AdminJwtStrategy } from './guards/jwt-strategy';
 import { AdminRepository } from 'src/modules/admin/repositories';
 import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.interface';
+import { JwtStrategy } from 'src/guards/jwt-strategy';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: adminAuthConfig.jwt_key!,
+      secret: authConfig.jwt_key!,
       signOptions: {
-        expiresIn: adminAuthConfig.expiration_time!,
+        expiresIn: authConfig.expiration_time!,
       },
     }),
   ],
@@ -26,7 +26,7 @@ import { IAdminDatabase } from 'src/modules/admin/repositories/admin.database.in
       provide: IAdminDatabase,
       useClass: ResolveDatabaseDependency('ADMIN'),
     },
-    AdminJwtStrategy,
+    JwtStrategy,
   ],
 })
-export class AuthModule { }
+export class AdminAuthModule { }

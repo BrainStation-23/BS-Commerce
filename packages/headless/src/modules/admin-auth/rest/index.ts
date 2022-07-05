@@ -53,7 +53,7 @@ export class AuthController {
     return { code, ...response };
   }
 
-  @Post('forgot')
+  @Post('forgot-password')
   @ApiResponse({
     description: 'Admin Forgot Password Success Response',
     type: ForgotPasswordSuccessResponseDto,

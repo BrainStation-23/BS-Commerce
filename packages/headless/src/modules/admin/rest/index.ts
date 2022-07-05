@@ -1,10 +1,10 @@
 import { Body, Controller, Get, HttpStatus, Patch, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/modules/admin-auth/guards/auth.guard';
 import { AdminService } from '../services';
-import { Admin as AdminInfo } from 'src/modules/admin-auth/decorator/auth.decorator';
+import { User as AdminInfo } from 'src/decorators/auth.decorator';
 import { Admin } from 'src/entity/admin';
 import { Response } from 'express';
+import { RolesGuard } from 'src/guards/auth.guard';
 import {
   ChangePasswordDto,
   UpdatedUserDto,
@@ -16,7 +16,7 @@ import {
 
 @Controller('admin')
 @ApiTags('Admin Profile API')
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['admin']))
 @ApiBearerAuth()
 export class AdminController {
   constructor(private adminService: AdminService) { }
@@ -55,7 +55,7 @@ export class AdminController {
     return { code, ...response };
   }
 
-  @Patch('password')
+  @Patch('change-password')
   @ApiResponse({
     description: 'Admin Change Password Success Response',
     type: ChangePasswordSuccessResponseDto,

@@ -2,7 +2,6 @@ import { ExecutionContext, HttpException, HttpStatus, Injectable, } from '@nestj
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { adminAuthConfig } from 'config/auth';
 import { coreConfig } from 'config/core';
 
 @Injectable()
@@ -15,7 +14,7 @@ export class JwtAuthGuard extends AuthGuard(['customer', 'admin']) {
     handleRequest(err: any, user: any, info: string) {
         if (err || !user) {
             if (!user) {
-                throw new HttpException('Sorry! You are not a valid Admin.', HttpStatus.FORBIDDEN);
+                throw new HttpException('Sorry! You are not a valid User for this action.', HttpStatus.FORBIDDEN);
             }
             throw err;
         }

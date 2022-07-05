@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
 import { AdminRepository } from '../repositories';
-import { adminAuthConfig } from 'config/auth';
+import { authConfig } from 'config/auth';
 import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 import {
     GetUserResponse,
@@ -58,7 +58,7 @@ export class AdminService {
         const doesPasswordMatch = await bcrypt.compare(passwordDetails.currentPassword, user.password);
         if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, null, HttpStatus.BAD_REQUEST,);
 
-        user.password = await bcrypt.hash(passwordDetails.newPassword, adminAuthConfig.salt!);
+        user.password = await bcrypt.hash(passwordDetails.newPassword, authConfig.salt!);
 
         const updatedUser = await this.adminRepo.updateUser(userId, user);
         if (!updatedUser) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD, null, HttpStatus.BAD_REQUEST);

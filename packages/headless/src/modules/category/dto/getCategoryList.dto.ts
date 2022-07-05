@@ -1,13 +1,25 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
 import { getCategoryListAncestor, NestedCategoryList, getCategoryListErrorMessage, getCategoryListErrorResponse, getCategoryListSuccessResponse } from "models";
 
 export class AncestorDto implements getCategoryListAncestor {
     @ApiProperty()
-    @IsNumber()
+    @IsString()
+    id:string;
+
+    @ApiProperty()
+    @IsString()
     name: string;
+
+    @ApiProperty()
+    @IsBoolean()
+    published:boolean;
+
+    @ApiProperty()
+    @IsNumber()
+    displayOrder:number;
 
     @ApiProperty()
     @IsArray()
@@ -21,7 +33,19 @@ export class AncestorDto implements getCategoryListAncestor {
 export class subCategoryListDto {
     @ApiProperty()
     @IsString()
+    id:string;
+
+    @ApiProperty()
+    @IsString()
     name: string;
+
+    @ApiProperty()
+    @IsBoolean()
+    published:boolean;
+
+    @ApiProperty()
+    @IsNumber()
+    displayOrder:number;
     
     @ApiProperty()
     @IsString()
@@ -39,10 +63,21 @@ export class subCategoryListDto {
 }
 
 export class NestedCategoryListDto implements NestedCategoryList {
+    @ApiProperty()
+    @IsString()
+    id:string;
 
     @ApiProperty()
     @IsString()
     name: string;
+
+    @ApiProperty()
+    @IsBoolean()
+    published:boolean;
+
+    @ApiProperty()
+    @IsNumber()
+    displayOrder:number;
 
     @ApiProperty()
     @IsString()
