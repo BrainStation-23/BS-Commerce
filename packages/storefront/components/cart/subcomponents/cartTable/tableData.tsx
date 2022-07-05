@@ -8,8 +8,8 @@ const TableData = () => {
   return (
     <>
       {cartData ? (
-        cartData?.map((data, index) => {
-          return <ShowData key={index} data={data} />;
+        cartData?.map((data) => {
+          return <ShowData key={data.productId} data={data} />;
         })
       ) : (
         <></>

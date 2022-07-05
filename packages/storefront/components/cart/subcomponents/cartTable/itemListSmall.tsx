@@ -18,7 +18,7 @@ const ItemsLists: NextComponentType = () => {
       <div>
         {cartData ? (
           cartData?.map((data, index) => {
-            return <ShowItemSmall key={index} data={data} setTotal={setTotal} total={total} />;
+            return <ShowItemSmall key={data.productId} data={data} setTotal={setTotal} total={total} />;
           })
         ) : (
           <></>
