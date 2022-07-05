@@ -5,8 +5,8 @@ import { UserRepository } from 'src/modules/user/repositories';
 import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
+import { JwtStrategy } from 'src/guards/jwt-strategy';
 import { authConfig } from 'config/auth';
-import { JwtStrategy } from './guards/jwt-strategy';
 
 @Module({
   imports: [

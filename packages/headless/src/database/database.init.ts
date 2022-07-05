@@ -1,8 +1,7 @@
-import { dbConfig } from "config/database";
-import { connect as connectToMongoDB } from "./mongodb/connect";
-import { connect as connectToMySql } from "./mysql/connect";
+import { connect as connectToMongoDB } from './mongodb/connect';
+import { connect as connectToMySql } from './mysql/connect';
+export type DB = 'MONGO' | 'MYSQL';
 
-type DB = 'MONGO' | 'MYSQL';
 export async function connectToDatabase(db: DB) {
     console.log(db);
     console.log('------------------');
@@ -12,15 +11,15 @@ export async function connectToDatabase(db: DB) {
             case 'MONGO':
                 await connectToMongoDB();
                 break;
+
             case 'MYSQL':
                 await connectToMySql();
                 break;
+
             default:
                 throw new Error('No database found to connect');
         }
-    }
-    catch (err) {
-        console.log(err)
+    } catch (err) {
         console.error('Error connecting to database');
     }
 }
