@@ -1,4 +1,6 @@
-const Lock = () => {
+import { NextComponentType } from "next";
+
+const Lock: NextComponentType = () => {
   return (
     <>
       <svg

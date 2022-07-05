@@ -1,17 +1,19 @@
 import type { NextComponentType } from "next";
 import React, { useState } from "react";
-// import counterElement from "../../global/components/counter/counterElement";
-import PriceFilter from "./subComponent/priceFilter";
-import AvaialabilityOptions from "./subComponent/availability";
-import ProductTypeOptions from "./subComponent/productTypes";
-import BrandTypeOptions from "./subComponent/brandTypes";
-import ColourTypeOptions from "./subComponent/colorAvailibility";
+
+import PriceFilter from "@/components/deals/filter/subComponent/priceFilter";
+import AvaialabilityOptions from "@/components/deals/filter/subComponent/availability";
+import ProductTypeOptions from "@/components/deals/filter/subComponent/productTypes";
+import BrandTypeOptions from "@/components/deals/filter/subComponent/brandTypes";
+import ColourTypeOptions from "@/components/deals/filter/subComponent/colorAvailibility";
+
 const DealsFilter: NextComponentType = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
   const [displayStatus2, setDisplayStatus2] = useState(false);
   const [displayStatus3, setDisplayStatus3] = useState(false);
   const [displayStatus4, setDisplayStatus4] = useState(false);
   const [displayStatus5, setDisplayStatus5] = useState(false);
+
   const accorditionStatus1 = () => {
     setDisplayStatus1(!displayStatus1);
   };
@@ -27,6 +29,7 @@ const DealsFilter: NextComponentType = () => {
   const accorditionStatus5 = () => {
     setDisplayStatus5(!displayStatus5);
   };
+
   const upArrow = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +42,7 @@ const DealsFilter: NextComponentType = () => {
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
     </svg>
   );
+
   const downArrow = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -51,6 +55,7 @@ const DealsFilter: NextComponentType = () => {
       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
     </svg>
   );
+
   return (
     <>
       <div className="mt-20">

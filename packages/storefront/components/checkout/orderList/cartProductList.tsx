@@ -1,5 +1,5 @@
 import React from "react";
-import checkoutProducts  from "../../../allData/checkout-products.json"
+import checkoutProducts  from "allData/checkout-products.json"
 
 const CartProductList = () => {
   return (
