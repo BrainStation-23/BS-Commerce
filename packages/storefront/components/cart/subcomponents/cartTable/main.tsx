@@ -1,11 +1,13 @@
-import type { NextComponentType } from "next";
-import React, { useState, useEffect } from "react";
-import Buttons from "../../../global/components/buttons/button";
-import DataTable from "./dataTable";
-import ItemsLists from "./itemListSmall";
-const CartDetails: NextComponentType = () => {
-  const [cartTotal, setCartTotal] = useState(0);
+import React from "react";
 
+import type { NextComponentType } from "next";
+
+import Buttons from "@/components/global/components/buttons/button";
+import DataTable from "@/components/cart/subcomponents/cartTable/dataTable";
+import ItemsLists from "@/components/cart/subcomponents/cartTable/itemListSmall";
+
+const CartDetails: NextComponentType = () => {
+  
   return (
     <>
       <div>

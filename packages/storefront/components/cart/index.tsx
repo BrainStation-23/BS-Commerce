@@ -1,7 +1,9 @@
 import type { NextComponentType } from "next";
-import DeliveryDetails from "./subcomponents/deliveryDetails/main";
-import CartDetails from "./subcomponents/cartTable/main";
-import PageTitle from "../global/components/pageTitle";
+
+import DeliveryDetails from "@/components/cart/subcomponents/deliveryDetails/main";
+import CartDetails from "@/components/cart/subcomponents/cartTable/main";
+import PageTitle from "@/components/global/components/pageTitle";
+
 const CartComponent: NextComponentType = () => {
   return (
     <>

@@ -1,4 +1,6 @@
-const ShoppingCart = () => {
+import { NextComponentType } from "next";
+
+const ShoppingCart: NextComponentType = () => {
   return (
     <>
       <svg

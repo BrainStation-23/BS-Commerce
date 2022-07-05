@@ -7,6 +7,7 @@ interface currency {
 
 const Currency: React.FC = () => {
   const [open, setOpen] = useState(false);
+  
   const currencyList: currency[] = [
     { abbv: "USD", name: "US Dollar" },
     { abbv: "EUR", name: "Euro" },

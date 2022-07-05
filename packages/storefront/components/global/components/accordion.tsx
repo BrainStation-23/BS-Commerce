@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-
 interface Props {
   title: string;
   body: string;

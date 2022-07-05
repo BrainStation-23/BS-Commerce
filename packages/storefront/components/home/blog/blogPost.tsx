@@ -1,6 +1,5 @@
 import type { NextComponentType } from "next";
 
-
 const BlogPost: NextComponentType = () => {
 	return (
 		<>

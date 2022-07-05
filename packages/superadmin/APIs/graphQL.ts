@@ -1,17 +1,17 @@
-import { NextRouter } from "next/router";
-import { GET_PRODUCTS } from "../graphqlSchema/queries/productQueries";
-import { User } from "../utils/types";
-import client from "../graphqlSchema/apollo-client";
+import { NextRouter } from 'next/router';
+import { GET_PRODUCTS } from '../graphqlSchema/queries/productQueries';
+import { User } from '../utils/types';
+import client from '../graphqlSchema/apollo-client';
 import {
   CreateProductRequest,
   GetUserSuccessResponse,
   Product,
   SignInRequest,
   SignInSuccessResponse,
-  Category,
-  getCategoryBySlugRequest,
-  getCategoryBySlugSuccessResponse,
-} from "models";
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  getCategorySuccessResponse,
+} from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
   const { data } = await client.query({
@@ -52,12 +52,14 @@ export async function getUserProfileGraphql(): Promise<
   return;
 }
 
-export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
-  return;
+export async function getCategoryListGraphQL(): Promise<
+  getCategoryListSuccessResponse | undefined
+> {
+  return undefined;
 }
 
-export async function getCategoryBySlugGraphQL(
-  slug: getCategoryBySlugRequest
-): Promise<getCategoryBySlugSuccessResponse | undefined> {
-  return;
+export async function getCategoryGraphQL(
+  id: getCategoryRequest
+): Promise<getCategorySuccessResponse | undefined> {
+  return undefined;
 }

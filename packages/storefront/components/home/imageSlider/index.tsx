@@ -2,10 +2,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import CarouselSlider from "@/components/global/components/CarouselSlider";
+
 import { SwiperSlide } from "swiper/react";
-import { slideDetailsInterface } from "./models";
-import SinglSlide from "./singleSlide.component";
+import { slideDetailsInterface } from "@/components/home/imageSlider/models";
+
+import SinglSlide from "@/components/home/imageSlider/singleSlide.component";
+import CarouselSlider from "@/components/global/components/CarouselSlider";
 
 const ImageSlider = () => {
   const slideDetails: slideDetailsInterface[] = [

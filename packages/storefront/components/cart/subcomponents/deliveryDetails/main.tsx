@@ -1,8 +1,10 @@
+import React from "react";
+
 import type { NextComponentType } from "next";
-import React, { useState } from "react";
-import DeliveryDate from "./date";
-import CartTotal from "./cartTotal";
-import DeilveryInstructions from "./instruction";
+
+import DeliveryDate from "@/components/cart/subcomponents/deliveryDetails/date";
+import CartTotal from "@/components/cart/subcomponents/deliveryDetails/cartTotal";
+import DeilveryInstructions from "@/components/cart/subcomponents/deliveryDetails/instruction";
 
 const DeilveryDetails: NextComponentType = () => {
   return (
