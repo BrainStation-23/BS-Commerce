@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   addToCartRequest,
   AddToCartResponse,
@@ -7,40 +8,33 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   GetCustomerAllProductsResponse,
-  GetCustomerErrorResponse,
   GetCustomerQuery,
   GetCustomerResponse,
+  GetCustomerAllProductsSuccessResponse,
   updateCartItemRequest,
   updateCartItemResponse,
-} from "models";
-import { GetCustomerProductResponse } from "models";
-import { CustomerSignInRequest } from "models";
-import { CreateCustomerResponse } from "models";
-import { CreateCustomerRequest } from "models";
-import { CustomerSignInResponse } from "models";
-import { GetCustomerProductParams } from "models";
-import {
-  CreateUserRequest,
-  CreateUserResponse,
+  GetCustomerProductResponse,
+  CustomerSignInRequest,
+  CreateCustomerResponse,
+  CreateCustomerRequest,
+  CustomerSignInResponse,
+  GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
-} from "models";
-import { apiEndPoints } from "utils/apiEndPoints";
-import { User } from "utils/types";
-import { toast } from "react-toastify";
-var cookie = require("cookie");
+} from 'models';
 
-function getToken() {
-  console.log("Token ====>");
-  console.log(localStorage.getItem("persist:root"));
-  console.log("Hey In GetToken ====>");
-}
+import { apiEndPoints } from 'utils/apiEndPoints';
+import { User } from 'utils/types';
+
+// function getToken() {
+//   console.log("Token ====>");
+//   console.log(localStorage.getItem("persist:root"));
+//   console.log("Hey In GetToken ====>");
+// }
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
-    getToken();
+    // getToken();
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
@@ -49,12 +43,17 @@ export async function getUserRest(): Promise<User[] | undefined> {
 }
 
 export async function getSignedInUserRest(
-  isEmail: boolean, data: GetCustomerQuery
-): Promise< GetCustomerResponse | undefined> {
+  isEmail: boolean,
+  data: GetCustomerQuery
+): Promise<GetCustomerResponse | undefined> {
   try {
-    const res = await axios.get(`${apiEndPoints.getSignedInUser}${ isEmail ? `?email=${data.email}` : `?phone=${data.phone}`}`)
+    const res = await axios.get(
+      `${apiEndPoints.getSignedInUser}${
+        isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
+      }`
+    );
     return res.data;
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
@@ -66,7 +65,7 @@ export async function signinRest(
     const res = await axios.post(`${apiEndPoints.login}`, data);
     return res.data;
   } catch (error: any) {
-    toast.error("Some error happend. Try again.")
+    toast.error('Some error happend. Try again.');
     return error;
   }
 }
@@ -86,25 +85,27 @@ export async function forgotPasswordRest(
   data: ForgotPasswordRequest
 ): Promise<ForgotPasswordResponse | undefined> {
   try {
-    const res = await axios.post("http://localhost:3000/api/auth/forgot", data);
+    const res = await axios.post('http://localhost:3000/api/auth/forgot', data);
     return res.data;
   } catch (error: any) {
     return error;
   }
 }
 
-export async function getPublicProductsRest(
-): Promise<GetCustomerAllProductsResponse | undefined> {
+export async function getPublicProductsRest(): Promise<
+  GetCustomerAllProductsResponse | undefined
+> {
   try {
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
-    return res.data.data;
+    return res.data.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;
   }
 }
 
-export async function getFeaturedProductsRest(
-): Promise<GetCustomerAllProductsResponse | undefined> {
+export async function getFeaturedProductsRest(): Promise<
+  GetCustomerAllProductsResponse | undefined
+> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?isFeatured=true`
@@ -128,15 +129,15 @@ export async function getPublicProductByIdRest(
   }
 }
 
-export async function getCartRest(token: string): Promise<Cart[] | undefined> {
+export async function getCartRest(token: string): Promise<Cart | undefined> {
   try {
-    console.log("token ======>", token);
+    // console.log("token ======>", token);
     const { data } = await axios?.get(`${apiEndPoints?.getCart}`, {
       headers: {
-          Authorization: `Bearer ${token}`,
-      }
-  });
-    return data?.data as Cart[];
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data?.data as Cart;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
@@ -153,7 +154,7 @@ export async function addToCartRest(
 
     return res.data as addToCartSuccessResponse;
   } catch (error: any) {
-    console.log("cart data from ==================", error);
+    // console.log("cart data from ==================", error);
     toast.error(error?.response?.data?.message);
   }
 }
@@ -162,9 +163,10 @@ export async function deleteFromCartRest(
   data: deleteCartItemRequest
 ): Promise<deleteCartItemResponse | undefined> {
   try {
-    console.log("=======================>", data)
+    // console.log("=======================>", data);
     const res = await axios?.delete(
-      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`);
+      `${apiEndPoints?.deleteCartItem}?productId=${data.productId}`
+    );
     return res?.data as deleteCartItemResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

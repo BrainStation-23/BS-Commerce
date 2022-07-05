@@ -1,30 +1,30 @@
-import { userAPI } from "APIs";
-import { Field, Form, Formik } from "formik";
-import Link from "next/link";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import { useCookies } from "react-cookie";
-import { CustomerSignInRequest } from "models";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { storeUserToken } from "toolkit/authSlice";
-import { useRouter } from "next/router";
-import { storeUserDetails } from "toolkit/userSlice";
-import { useState } from "react";
-import Loading from "../global/loader";
+import { userAPI } from 'APIs';
+import { Field, Form, Formik } from 'formik';
+import Link from 'next/link';
+import Breadcrumb from '../global/breadcrumbs/breadcrumb';
+import { useCookies } from 'react-cookie';
+import { CustomerSignInRequest } from 'models';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { storeUserToken } from 'toolkit/authSlice';
+import { useRouter } from 'next/router';
+import { storeUserDetails } from 'toolkit/userSlice';
+import { useState } from 'react';
+import Loading from '../global/loader';
 
-var cookie = require("cookie");
-var escapeHtml = require("escape-html");
-var http = require("http");
-var url = require("url");
+var cookie = require('cookie');
+var escapeHtml = require('escape-html');
+var http = require('http');
+var url = require('url');
 
 const Signin = () => {
-  const [cookies, setCookie] = useCookies(["access_token", "refresh_token"]);
+  const [cookies, setCookie] = useCookies(['access_token', 'refresh_token']);
   const [loader, setLoader] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  let username = "";
+  let username = '';
   let loggedInUsingEmail = false;
 
   function getUser() {
@@ -32,24 +32,28 @@ const Signin = () => {
     loggedInUsingEmail
       ? (data = {
           email: username,
-          phone: "",
+          phone: '',
         })
       : (data = {
-          email: "",
+          email: '',
           phone: username,
         });
-    userAPI
-      .getSignedInUser(loggedInUsingEmail, data)
-      .then((response) => {dispatch(storeUserDetails(loggedInUsingEmail ? response?.data?.email : response?.data?.phone))});
+    userAPI.getSignedInUser(loggedInUsingEmail, data).then((response) => {
+      dispatch(
+        storeUserDetails(
+          loggedInUsingEmail ? response?.data?.email : response?.data?.phone
+        )
+      );
+    });
   }
 
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const token = await fetch("http://localhost:3002/api/signin", {
-        method: "POST", // or 'PUT'
+      const token = await fetch('http://localhost:3002/api/signin', {
+        method: 'POST', // or 'PUT'
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
@@ -58,47 +62,46 @@ const Signin = () => {
       getUser();
       setTimeout(() => {
         setLoader(false);
-        router.push("/home");
-        toast.success("Logged in successfully!")
-      }, 1000)
-    }
-    catch (err) {
+        router.push('/home');
+        toast.success('Logged in successfully!');
+      }, 1000);
+    } catch (err) {
       setLoader(false);
-      toast.error("Invalid username or password.");
+      toast.error('Invalid username or password.');
     }
   }
-  if(loader) return <Loading />
+  if (loader) return <Loading />;
   return (
     <>
       <Breadcrumb
         title="Account"
-        pathArray={["Home", "Account"]}
-        linkArray={["/home", "/account/sign-in"]}
+        pathArray={['Home', 'Account']}
+        linkArray={['/home', '/account/sign-in']}
       />
       <div className="flex flex-wrap justify-center">
         <div
-          className="flex flex-col my-20 py-7 mx-3"
+          className="my-20 mx-3 flex flex-col py-7"
           style={{
-            width: " 35rem ",
-            height: "auto",
-            background: "#f3f3f3",
+            width: ' 35rem ',
+            height: 'auto',
+            background: '#f3f3f3',
           }}
         >
-          <h2 className="text-3xl mx-3 text-center text-gray-800">Login</h2>
-          <p className="text-center mt-2 mb-6 text-gray-500 mx-5">
+          <h2 className="mx-3 text-center text-3xl text-gray-800">Login</h2>
+          <p className="mx-5 mt-2 mb-6 text-center text-gray-500">
             Please login using account detail below.
           </p>
-          <div className="m-5 sm:m-5 my-3 md:mx-10 lg:mx-10 xl:mx-10">
+          <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
               initialValues={{
-                email: "",
-                phone: "",
-                username: "",
-                password: "",
+                email: '',
+                phone: '',
+                username: '',
+                password: '',
               }}
               onSubmit={(values, actions) => {
                 let data = {};
-                let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+                let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
                 const isEmail = regex.test(values.username);
                 username = values.username;
                 isEmail
@@ -121,7 +124,6 @@ const Signin = () => {
               {(formikprops) => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
-
                     <div className="mb-4">
                       <Field
                         type="text"
@@ -152,14 +154,14 @@ const Signin = () => {
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
                         type="submit"
-                        className="rounded py-2 my-2 w-full sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4 bg-green-600/100 hover:bg-black text-white"
+                        className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
                       >
                         Sign In
                       </button>
 
-                      <div className="my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3 text-decoration-none">
+                      <div className="text-decoration-none my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3">
                         <Link href="/account/forgot-password">
-                          <a className="text-decoration-none text-gray-600 hover:text-gray-500 font-weight-light">
+                          <a className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500">
                             Forgot your password?
                           </a>
                         </Link>
@@ -174,19 +176,19 @@ const Signin = () => {
                 <Link data-testid="create-account-link" href="/account/sign-up">
                   <a
                     data-testid="create-account-page"
-                    className="text-decoration-none text-gray-600 hover:text-green-600/100 font-weight-light"
+                    className="text-decoration-none font-weight-light text-gray-600 hover:text-green-600/100"
                   >
                     Create account
                   </a>
                 </Link>
               </div>
               <div className="mt-3">
-                <p className="text-gray-600 ml-1">or sign in with</p>
+                <p className="ml-1 text-gray-600">or sign in with</p>
               </div>
               <div className="flex flex-wrap">
                 <button className="mt-3 flex flex-wrap">
                   <img
-                    className="md:ml-2 lg:ml-2 xl:ml-2 mt-1"
+                    className="mt-1 md:ml-2 lg:ml-2 xl:ml-2"
                     src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg"
                     height={15}
                     width={15}
@@ -194,7 +196,7 @@ const Signin = () => {
                   <p className="ml-2 mt-1 text-xs">Google</p>
                 </button>
                 <div className="mt-3">
-                  <p className="text-gray-600 ml-1">or</p>
+                  <p className="ml-1 text-gray-600">or</p>
                 </div>
                 <button className="mt-3 flex flex-wrap">
                   <img
