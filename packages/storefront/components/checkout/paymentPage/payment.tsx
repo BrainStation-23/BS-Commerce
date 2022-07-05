@@ -1,6 +1,6 @@
 import Path from "@/components/global/components/path";
-import PaymentPage from ".";
-import OrderList from "../orderList";
+import PaymentPage from "@/components/checkout/paymentPage";
+import OrderList from "@/components/checkout/orderList";
 const path = {
   cart: false,
   info: false,
@@ -8,7 +8,11 @@ const path = {
   payment: true,
 };
 
-const CheckoutPaymentComponent = (props: any) => {
+interface Props {
+  setModal: Function
+}
+
+const CheckoutPaymentComponent: React.FC<Props> = (props) => {
   const {setModal} = props;
   return (
     <>

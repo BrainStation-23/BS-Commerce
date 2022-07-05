@@ -1,6 +1,3 @@
-import type { NextComponentType } from "next";
-import React, { useState } from "react";
-
 interface Properties {
   bgColor: string;
   height: number;

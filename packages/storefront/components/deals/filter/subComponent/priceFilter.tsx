@@ -1,5 +1,7 @@
 import type { NextComponentType } from "next";
-import CounterElement from "./counterElement";
+
+import CounterElement from "@/components/deals/filter/subComponent/counterElement";
+
 const PriceFilter: NextComponentType = () => {
   return (
     <>

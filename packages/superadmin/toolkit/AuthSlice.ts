@@ -1,22 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface authState {
   token: string;
 }
 
 const initialState: authState = {
-  token: "",
+  token: '',
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     saveToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
     removeToken: (state) => {
-      state.token = "";
+      state.token = '';
     },
   },
 });

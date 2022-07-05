@@ -1,7 +1,8 @@
-import Icon from "../../../global/components/icon";
-import ProductInfo from "../../../global/components/product/common/productInfo";
-import Picture from "../../../global/components/product/common/picture";
-import Counter from "../../../global/components/product/common/counter";
+import { CustomerProduct } from "models";
+import Icon from "@/components/global/components/icon";
+import ProductInfo from "@/components/global/components/product/common/productInfo";
+import Picture from "@/components/global/components/product/common/picture";
+import Counter from "@/components/global/components/product/common/counter";
 
 const time = {
   day: "00",
@@ -10,8 +11,11 @@ const time = {
   sec: "00",
 };
 
-const DealProductCard = (props: any) => {
-  const { product }: any = props;
+interface Props {
+  product: CustomerProduct;
+}
+
+const DealProductCard: React.FC<Props> = ({product}: Props) => {
 
   return (
     <>
@@ -25,15 +29,15 @@ const DealProductCard = (props: any) => {
                     product={product}
                     height={280}
                     width={280}
-                    src={product.images[0]}
-                    alt={product.category}
+                    src={product?.photos[0]?.url}
+                    alt={product?.tags[0]}
                   ></Picture>{" "}
                 </div>
               </div>
               <div className="md:flex md:flex-wrap lg:flex flex-wrap hover:-translate-y-20 opacity-70 hover:opacity-70 duration-300 absolute inset-0 z-10 sm:justify-center items-center text-black font-semibold">
                 <Counter time={time}></Counter>
                 <div className="md:hover:hover:translate-y-28 hover:translate-y-20 opacity-0 hover:opacity-90 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
-                  <Icon />
+                  <Icon product={product} />
                 </div>
               </div>
               <div className="text-center">

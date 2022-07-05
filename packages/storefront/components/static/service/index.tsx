@@ -1,11 +1,12 @@
 import type { NextComponentType } from "next";
 
+import { storiesBody } from "utils/types";
+
 import PageTitle from "@/components/global/components/pageTitle";
 import ThreeStoriesCard from "@/components/global/components/threeStoriesCard";
 import OurService from "@/components/static/service/ourService";
 import UnlimitedService from "@/components/static/service/unlimitedService";
 
-import { storiesBody } from "../../../utils/types";
 
 const threeStoriesList: storiesBody[] = [
   {

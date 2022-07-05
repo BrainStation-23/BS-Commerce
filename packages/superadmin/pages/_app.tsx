@@ -1,14 +1,15 @@
-import type { AppProps } from "next/app";
-import Layout from "../components/layouts/index";
-import { useEffect } from "react";
-import Axios from "axios";
-import { Provider } from "react-redux";
-import { persistStore } from "redux-persist";
-import { PersistGate } from "redux-persist/integration/react";
-import { config } from "../config";
-import { store } from "../store";
+import type { AppProps } from 'next/app';
+import Axios from 'axios';
+import { Provider } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import "../styles/App.scss";
+import { config } from '../config';
+import { store } from '../store';
+
+import Layout from '@/components/layouts/index';
+
+import '../styles/App.scss';
 
 Axios.defaults.baseURL = config?.restPrefix;
 
