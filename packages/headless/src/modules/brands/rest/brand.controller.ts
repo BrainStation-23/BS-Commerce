@@ -1,4 +1,3 @@
-import { ObjectValidationPipe } from '../validators/NestedObjectValidator.pipe';
 import {
   Body,
   Controller,
@@ -22,6 +21,7 @@ import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'sr
 import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
 import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
 import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
+import { ObjectValidationPipe } from '../validators/NestedObjectValidator.pipe';
 
 @Controller('brands')
 export class BrandController {

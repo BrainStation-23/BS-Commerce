@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
-import { CreateBrandRequest, Info, Meta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
+import { CreateBrandRequest, BrandInfo, BrandMeta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
 
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';

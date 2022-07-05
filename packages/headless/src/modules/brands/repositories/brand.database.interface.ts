@@ -8,7 +8,6 @@ import { GetAllBrandsDto } from 'src/modules/brands/dto/getAllBrandsDto';
 @Injectable()
 export abstract class IBrandDatabase{
     abstract getBrandByName:(brandName: string) => Promise<Brand | null>;
-
     abstract getBrandById:(brandId: string) => Promise<BrandDto | null>;
     abstract addNewBrand:(brand: CreateBrandRequestDto) => Promise<BrandDto | null>;
     abstract getAllBrands:(skip?: number, limit?: number) => Promise<GetAllBrandsDto | null>;
