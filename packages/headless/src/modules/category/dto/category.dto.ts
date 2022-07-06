@@ -9,7 +9,7 @@ export class AncestorDto implements Ancestor {
     name: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     slug: string;
 
     @ApiProperty()
@@ -23,25 +23,25 @@ export class MetaDto implements Meta {
     keywords?: [string];
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     description: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     title: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     SEFN: string;
 }
 
 export class PhotoDto implements Photo {
     @ApiProperty()
-    @IsArray()
+    @IsString()
     url: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     alt: string;
 }
 

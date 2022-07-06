@@ -11,7 +11,7 @@ export class AncestorDto implements getCategoryListAncestor {
     name: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     slug: string;
 
     @ApiProperty()
