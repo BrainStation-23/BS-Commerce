@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { userAPI } from "../../../../APIs";
-import EditManufacturer from "../../../../components/manufacturer/editManufacturer";
+import { userAPI } from "../../../APIs/index";
+import EditManufacturer from "../../../components/manufacturer/Edit/editManufacturer";
 
 const EditManufacturerPage: NextPage = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const EditManufacturerPage: NextPage = () => {
   }, []);
   return (
     <div className="bg-light">
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="bg-light px-5">
         {manufacturer ? (
           <EditManufacturer manufacturer={manufacturer} />
         ) : (

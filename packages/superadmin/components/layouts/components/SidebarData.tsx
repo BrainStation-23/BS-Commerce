@@ -41,7 +41,7 @@ export const SidebarData: ISidebarData[] = [
       },
       {
         name: 'Manufacturers',
-        to: '/Admin/Manufacturer/list',
+        to: '/Manufacturer/',
         icon: SubMenuIcon,
       },
       {
