@@ -52,5 +52,5 @@ type Query {
 }
 
 type Mutation {
-    addCategory(category: CategoryInput!): CategoryResponse!
+    createCategory(category: CategoryInput!): CategoryResponse!
 }
