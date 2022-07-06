@@ -1,0 +1,14 @@
+type Tags {
+  id: String!
+  name: String!
+}
+
+type TagsResponse {
+  error: String
+  code: Int!
+  data: [Tags]
+}
+
+type Query {
+  getTags: TagsResponse!
+}
