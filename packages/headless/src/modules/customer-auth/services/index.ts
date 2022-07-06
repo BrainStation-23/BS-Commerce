@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
-import { customerAuthConfig } from 'config/auth';
+import { authConfig } from 'config/auth';
 import { CustomerRepository } from 'src/modules/customer/repositories';
 import {
   CreateCustomerResponse,
@@ -32,7 +32,7 @@ export class CustomerAuthService {
 
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
-    customer.password = await bcrypt.hash(data.password, customerAuthConfig.salt!);
+    customer.password = await bcrypt.hash(data.password, authConfig.salt!);
 
     const registeredCustomer = await this.customerRepo.createCustomer(customer);
     if (!registeredCustomer) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.CAN_NOT_CREATE_CUSTOMER, null, HttpStatus.BAD_REQUEST);
@@ -60,6 +60,7 @@ export class CustomerAuthService {
       email: customer.email,
       phone: customer.phone,
       logInTime: Date.now(),
+      role: 'customer'
     };
 
     const token = this.jwtService.sign(payload);
