@@ -19,11 +19,6 @@ export class GetTagsErrorResponseDto implements GetTagsErrorResponse {
     errors: string[];
 }
 
-export class GetTagsDto {
-    @ApiProperty()
-    url: string;
-}
-
 export class GetTagsSuccessResponseDto implements GetTagsSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
