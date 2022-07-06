@@ -1,10 +1,10 @@
 import { Formik, Form } from "formik";
-import { manufactureSchema } from "./schema/index";
+import { manufactureSchema } from "../schema/index";
 
-import CreateNewManufacturer from "./add-new/forms/manufacturerInfo";
-import DisplayOrders from "./add-new/forms/displayOrder";
-import SEO from "./add-new/forms/seo";
-import { userAPI } from "../../APIs";
+import CreateNewManufacturer from "../add-new/forms/manufacturerInfo";
+import DisplayOrders from "../add-new/forms/displayOrder";
+import SEO from "../add-new/forms/seo";
+import { userAPI } from "../../../APIs";
 import { useRouter } from "next/router";
 const EditManufacturer = (props: any) => {
   const router = useRouter();
@@ -28,7 +28,6 @@ const EditManufacturer = (props: any) => {
 
     const response = await userAPI.updateManufacturer(newData, id, router);
   };
-  console.log(manufacturer);
 
   return (
     <>
@@ -70,40 +69,38 @@ const EditManufacturer = (props: any) => {
                     Edit Manufacturer details
                     <span className="fs-5 p-3">
                       <a
-                        href="/Admin/Manufacturer/list"
+                        href="/Manufacturer/"
                         className="text-decoration-none "
                       >
                         <i className="bi bi-arrow-left-circle-fill p-2" />
-                        Back to Manufacturer list
+                        <span style={{ fontSize: "14px" }}>
+                          Back to Manufacturer list
+                        </span>
                       </a>
                     </span>
                   </h1>
                   <div className="float-end">
                     <button
+                      type="button"
+                      className="btn btn-info float-left mx-2 my-auto "
+                      id="product-editor-settings"
+                      data-toggle="modal"
+                      data-target="#productsettings-window"
+                    >
+                      <i className="bi bi-gear-fill pt-1" />
+                      <p className="float-end mx-1 my-0">Settings</p>
+                    </button>
+                    <button
                       type="submit"
                       name="save"
                       className="btn btn-primary m-1"
-                      onClick={handleSubmit}
+                      // onClick={handleSubmit}
                     >
                       <i className="bi bi-save" />
                       <p className="float-end mx-1 my-0">Save </p>
                     </button>
                   </div>
                 </div>
-
-                <div className="col-md-12 clearfix">
-                  <button
-                    type="button"
-                    className="btn btn-info float-left mx-2 my-auto "
-                    id="product-editor-settings"
-                    data-toggle="modal"
-                    data-target="#productsettings-window"
-                  >
-                    <i className="bi bi-gear-fill pt-1" />
-                    <p className="float-end mx-1 my-0">Settings</p>
-                  </button>
-                </div>
-
                 <div className="mt-4">
                   <CreateNewManufacturer />
                   <DisplayOrders />
