@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 /**
- * API Path: /product/:productId
+ * API Path: /products/:productId
  * method: DELETE
  * params: productId
  * response: DeleteProductResponse

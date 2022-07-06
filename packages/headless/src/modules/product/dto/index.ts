@@ -11,3 +11,4 @@ export * from './updateProductsForBrand.dto';
 export * from './getCustomerAllProducts.dto';
 export * from './customerProduct.dto';
 export * from './getCustomerProduct.dto';
+export * from './getCustomerHomePageProducts';

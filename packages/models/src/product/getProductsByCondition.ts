@@ -2,7 +2,7 @@
 import { DescriptiveError, ErrorResponse, ProductInfo, ProductPhoto, SuccessResponse } from "src/index";
 
 /**
- * API Path: /product/condition
+ * API Path: /products/condition
  * method: GET
  * query: GetProductsByConditionQuery
  * response: GetProductsByConditionResponse

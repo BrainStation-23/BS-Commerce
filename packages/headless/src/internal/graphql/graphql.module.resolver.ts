@@ -8,6 +8,8 @@ import { CategoryModule } from 'src/modules/category/category.graphql.module';
 import { CustomerAuthModule } from 'src/modules/customer-auth/auth.graphql.module';
 import { CartModule } from 'src/modules/cart/cart.graphql.module';
 import { MediaModule } from 'src/modules/media/media.graphql.module';
+import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
+import { TagsModule } from 'src/modules/tags/tags.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
@@ -21,5 +23,7 @@ export const ResolveGraphqlModule = () => {
     CustomerAuthModule,
     MediaModule,
     CompareModule,
+    WishListModule,
+    TagsModule,
   ];
 };

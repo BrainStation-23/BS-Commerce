@@ -1,22 +1,45 @@
 import {
-  Controller, Get, HttpStatus, Param, Res, UseGuards,
+  Body,
+  Controller, Get, HttpStatus, Param, Post, Res, UseGuards,
 } from '@nestjs/common';
 import { CategoryService } from '../services';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessResponseDto } from '../dto/getCategory.dto';
 import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from '../dto/getCategoryList.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { getCategoryBySlugErrorResponseDto, getCategoryBySlugRequestDto, getCategoryBySlugSuccessResponseDto } from '../dto/getCategoryBySlug.dto';
+import { createCategoryErrorResponseDto, createCategoryRequestDto, createCategorySuccessResponseDto } from '../dto/createCategory.dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('category')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('Category API')
 export class CategoryController {
   constructor(private categoryService: CategoryService) { }
 
+  @Post()
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiResponse({
+      description: 'Create Category Api',
+      type: createCategorySuccessResponseDto,
+      status: HttpStatus.CREATED
+    })
+    @ApiResponse({
+      description: 'Error Response',
+      type: createCategoryErrorResponseDto,
+      status: HttpStatus.BAD_REQUEST
+    })
+  async createCategory(
+      @Body() category: createCategoryRequestDto,
+      @Res({ passthrough: true }) res: Response,
+  ) {
+      const { code, ...response } = await this.categoryService.createCategory(category);
+      res.status(code);
+      return response;
+  }
+
   @Get(':categoryId')
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category Api',
     type: getCategorySuccessResponseDto,
@@ -37,6 +60,7 @@ export class CategoryController {
   }
 
   @Get()
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category List API',
     type: getCategoryListSuccessResponseDto,
@@ -56,6 +80,7 @@ export class CategoryController {
   }
 
   @Get('slug/:slug')
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category By Slug API',
     type: getCategoryBySlugSuccessResponseDto,
