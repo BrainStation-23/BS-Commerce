@@ -12,12 +12,12 @@ import { createCategoryErrorResponseDto, createCategoryRequestDto, createCategor
 import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('category')
-@ApiBearerAuth()
 @ApiTags('Category API')
 export class CategoryController {
   constructor(private categoryService: CategoryService) { }
 
   @Post()
+  @ApiBearerAuth()
   @UseGuards(new RolesGuard(['admin']))
   @ApiResponse({
       description: 'Create Category Api',
@@ -39,7 +39,6 @@ export class CategoryController {
   }
 
   @Get(':categoryId')
-  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category Api',
     type: getCategorySuccessResponseDto,
@@ -60,7 +59,6 @@ export class CategoryController {
   }
 
   @Get()
-  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category List API',
     type: getCategoryListSuccessResponseDto,
@@ -80,7 +78,6 @@ export class CategoryController {
   }
 
   @Get('slug/:slug')
-  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category By Slug API',
     type: getCategoryBySlugSuccessResponseDto,
