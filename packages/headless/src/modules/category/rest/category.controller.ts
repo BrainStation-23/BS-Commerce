@@ -39,7 +39,7 @@ export class CategoryController {
   }
 
   @Get(':categoryId')
-  @UseGuards(new RolesGuard(['admin, customer']))
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category Api',
     type: getCategorySuccessResponseDto,
@@ -60,7 +60,7 @@ export class CategoryController {
   }
 
   @Get()
-  @UseGuards(new RolesGuard(['admin, customer']))
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category List API',
     type: getCategoryListSuccessResponseDto,
@@ -80,7 +80,7 @@ export class CategoryController {
   }
 
   @Get('slug/:slug')
-  @UseGuards(new RolesGuard(['admin, customer']))
+  @UseGuards(new RolesGuard(['admin', 'customer']))
   @ApiResponse({
     description: 'Get Category By Slug API',
     type: getCategoryBySlugSuccessResponseDto,
