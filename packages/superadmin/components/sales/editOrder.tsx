@@ -5,13 +5,18 @@ import Products from "./service/products";
 import Notes from "./service/notes";
 import { useState } from "react";
 import Link from "next/link";
+import { FC } from "react";
 
-const EditOrder = ({singleOrder}: any) => {
-    const [info, setInfo] = useState(false);
-    const [billing, setBilling] = useState(false);
-    const [products, setProducts] = useState(false);
-    const [notes, setNotes] = useState(false);
+// interface SingleOrder {
+//     id: number;
+//     order_status: string;
+//     payment_status: string;
+//     shipping_status: string;
+//     store: string;
+//     view: string;
+// }
 
+const EditOrder = ({singleOrder} : any) => {
     const [modal, setModal] = useState({
         delete: false,
     });
@@ -23,17 +28,28 @@ const EditOrder = ({singleOrder}: any) => {
     return (
         <>
             <main className="px-5">
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div className="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pt-3 pb-2">
                     <div className="d-flex justify-content-between ">
-                        <h1 className="h2">Edit order details{" "}</h1>
-                        <div style={{ marginLeft: "10px", fontSize: "20px" }} className="pt-1 pb-2 mb-2">
-                            <Link  href="/Admin/Order/List" passHref>
-                            <p style={{cursor: "pointer", color: "#3c8dbc"}}><i className="bi bi-arrow-left-circle-fill"></i>{" "}back to order list</p>
+                        <h1 className="h2">Edit order details </h1>
+                        <div
+                            style={{ marginLeft: "10px", fontSize: "20px" }}
+                            className="mb-2 pt-1 pb-2"
+                        >
+                            <Link href="/Admin/Order/List" passHref>
+                                <p
+                                    style={{
+                                        cursor: "pointer",
+                                        color: "#3c8dbc",
+                                    }}
+                                >
+                                    <i className="bi bi-arrow-left-circle-fill"></i>{" "}
+                                    back to order list
+                                </p>
                             </Link>
                         </div>
                     </div>
 
-                    <div className="btn-toolbar mb-2 mb-md-0">
+                    <div className="btn-toolbar mb-md-0 mb-2">
                         <div className="btn-group me-2">
                             <button
                                 type="button"
@@ -131,9 +147,11 @@ const EditOrder = ({singleOrder}: any) => {
                 )}
 
                 <button
-                    onClick={() => setInfo(!info)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={info}
+                    // onClick={() => setInfo(!info)}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
                     style={{
                         width: "100%",
                         border: "1px solid #dddddd",
@@ -141,15 +159,21 @@ const EditOrder = ({singleOrder}: any) => {
                         fontSize: "20px",
                         padding: "20px",
                         marginBottom: "20px",
-                        transition: "all 0.3s ease 0s ",
                     }}
                 >
                     <i className="bi bi-info-lg"></i> Info
                 </button>
-                {info ? <Info singleOrder = {singleOrder}/> : null}
+
+                <div className="collapse" id="collapseExample">
+                    <Info singleOrder={singleOrder} />
+                </div>
 
                 <button
-                    onClick={() => setBilling(!billing)}
+                    // onClick={() => setBilling(!billing)}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse1Example"
+                    aria-expanded="false"
+                    aria-controls="collapse1Example"
                     style={{
                         width: "100%",
                         border: "1px solid #dddddd",
@@ -161,15 +185,19 @@ const EditOrder = ({singleOrder}: any) => {
                 >
                     <i className="bi bi-truck"></i> Billing and shipping
                 </button>
-                {billing ? (
-                    <div>
-                        <Biling />
-                        <Shipping singleOrder={singleOrder}/>
-                    </div>
-                ) : null}
+                {/* {billing ? ( */}
+                <div className="collapse" id="collapse1Example">
+                    <Biling />
+                    <Shipping singleOrder={singleOrder} />
+                </div>
+                {/* ) : null} */}
 
                 <button
-                    onClick={() => setProducts(!products)}
+                    // onClick={() => setProducts(!products)}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse2Example"
+                    aria-expanded="false"
+                    aria-controls="collapse2Example"
                     style={{
                         width: "100%",
                         border: "1px solid #dddddd",
@@ -181,10 +209,16 @@ const EditOrder = ({singleOrder}: any) => {
                 >
                     <i className="bi bi-list-ul"></i> Products
                 </button>
-                {products ? <Products /> : null}
+                <div className="collapse" id="collapse2Example">
+                    <Products />
+                </div>
 
                 <button
-                    onClick={() => setNotes(!notes)}
+                    // onClick={() => setNotes(!notes)}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse3Example"
+                    aria-expanded="false"
+                    aria-controls="collapse3Example"
                     style={{
                         width: "100%",
                         border: "1px solid #dddddd",
@@ -197,7 +231,9 @@ const EditOrder = ({singleOrder}: any) => {
                     <i className="bi bi-sticky"></i> Order notes
                 </button>
 
-                {notes ? <Notes /> : null}
+                <div className="collapse" id="collapse3Example">
+                    <Notes />
+                </div>
             </main>
         </>
     );

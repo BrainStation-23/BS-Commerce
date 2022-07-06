@@ -1,8 +1,26 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Tooltip from "./service/tooltip";
+import getData from "./service/get-product-data.service";
+import Table from "../global/table/table";
+import Pagination from "../global/pagination";
 
-const EditShipment = ({singleShipment}: any) => {
+const EditShipment = ({ singleShipment }: any) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [PageSize, setPageSize] = useState(7);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const data: any = getData();
+        setData(data);
+    }, []);
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return data?.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, PageSize, data]);
+
     const [modal, setModal] = useState({
         editShipped: false,
         editDelivered: false,
@@ -21,20 +39,76 @@ const EditShipment = ({singleShipment}: any) => {
         setModal({ ...modal, editDelivered: true });
     };
 
+    const columns = [
+        {
+            label: "Product",
+            path: "product",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+        {
+            label: "SKU",
+            path: "sku",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+        {
+            label: "Warehouse",
+            path: "warehouse",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+        {
+            label: "Item weight",
+            path: "item_weight",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+        {
+            label: "Item dimensions",
+            path: "item_dimensions",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+        {
+            label: "Qty shipped",
+            path: "quantity",
+            content: (data: any, key: any, index: any) => (
+                <td className="text-center">{data?.[key]}</td>
+            ),
+        },
+    ];
+
     return (
         <>
             <main className="px-5">
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div className="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pt-3 pb-2">
                     <div className="d-flex justify-content-between ">
                         <h1 className="h2">View shipment details</h1>
-                        <div style={{ marginLeft: "10px", fontSize: "20px" }} className="pt-1 pb-2 mb-2">
-                            <Link  href="/Admin/Shipment/List" passHref>
-                            <p style={{cursor: "pointer", color: "#3c8dbc"}}><i className="bi bi-arrow-left-circle-fill"></i>{" "}back to shipment list</p>
+                        <div
+                            style={{ marginLeft: "10px", fontSize: "20px" }}
+                            className="mb-2 pt-1 pb-2"
+                        >
+                            <Link href="/Admin/Shipment/List" passHref>
+                                <p
+                                    style={{
+                                        cursor: "pointer",
+                                        color: "#3c8dbc",
+                                    }}
+                                >
+                                    <i className="bi bi-arrow-left-circle-fill"></i>{" "}
+                                    back to shipment list
+                                </p>
                             </Link>
                         </div>
                     </div>
 
-                    <div className="btn-toolbar mb-2 mb-md-0">
+                    <div className="btn-toolbar mb-md-0 mb-2">
                         <div className="btn-group me-2">
                             <button
                                 type="button"
@@ -299,67 +373,25 @@ const EditShipment = ({singleShipment}: any) => {
                     </div>
                 </div>
 
-                <div style={{ border: "1px solid #dddddd" }}>
-                    <div style={{ margin: "20px", fontSize: "20px" }}>
-                        Products shipped
-                    </div>
-                    <hr />
-                    <div style={{ margin: "20px" }}>
-                        <table
-                            className="table"
-                            style={{
-                                border: "1px solid #dddddd",
-                                textAlign: "left",
-                                margin: "10px",
-                            }}
-                        >
-                            <thead style={{ backgroundColor: "#dddddd" }}>
-                                <tr style={{ fontSize: "20px" }}>
-                                    <th>
-                                        <span>Product</span>
-                                    </th>
-                                    <th>
-                                        <span>SKU</span>
-                                    </th>
-                                    <th>
-                                        <span>Warehouse</span>
-                                    </th>
-                                    <th>
-                                        <span>Item weight</span>
-                                    </th>
-                                    <th>
-                                        <span>Item dimensions</span>
-                                    </th>
-                                    <th>
-                                        <span>Qty shipped</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style={{ fontSize: "20px" }}>
-                                    <td>
-                                        <span>Levi 511 Jeans</span>
-                                    </td>
-                                    <td>
-                                        <span>LV_511_JN</span>
-                                    </td>
-                                    <td>
-                                        <span></span>
-                                    </td>
-                                    <td>
-                                        <span></span>
-                                    </td>
-                                    <td>
-                                        <span>
-                                            2.00 x 2.00 x 2.00 [inch(es)]
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span>1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div className="card border-1 mt-3 rounded px-2">
+                    <div className="card-body">
+                        <p>Products shipped</p>
+
+                        <Table items={currentTableData} columns={columns} />
+
+                        <div className="">
+                            {data?.length > 1 ? (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalCount={data.length}
+                                    pageSize={PageSize}
+                                    setCurrentPage={setCurrentPage}
+                                    setPageSize={setPageSize}
+                                />
+                            ) : (
+                                "No data found"
+                            )}
+                        </div>
                     </div>
                 </div>
             </main>

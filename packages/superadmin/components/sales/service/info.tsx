@@ -3,6 +3,15 @@ import { useState } from "react";
 import Tooltip from "./tooltip";
 import { Field, Form, Formik } from "formik";
 import Modal from "./modal";
+import { FC } from "react";
+interface SingleOrder {
+    id: number;
+    order_status: string;
+    payment_status: string;
+    shipping_status: string;
+    store: string;
+    view: string;
+}
 
 const Info = ({singleOrder}: any) => {
     function handleSearchSubmit(data: any) {

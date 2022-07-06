@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { useRouter } from 'next/router';
 import getData from "@/components/sales/service/get-shipping-data.service";
 
-const Edit: NextPage = () => {
+const Edit:NextPage = () => {
     const router = useRouter();
     const id = "" + `${router.query.id}`;
     const [shipment, setShipment] = useState<any>([]);
@@ -14,10 +14,12 @@ const Edit: NextPage = () => {
         setShipment(data);
     }, []);
 
-    const singleShipment = shipment.filter((data: any) => data.id == id);
+    const filteredShipment = shipment.filter((data: any) => data.id == id);
+    const singleShipment = filteredShipment[0];
+
     return (
         <div>
-            <EditShipment singleShipment={singleShipment[0]}/>
+            { singleShipment ? <EditShipment singleShipment={singleShipment}/> : null}
         </div>
     );
 };

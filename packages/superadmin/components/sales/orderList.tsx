@@ -8,7 +8,6 @@ import Link from "next/link";
 const OrderList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [PageSize, setPageSize] = useState(7);
-    const [search, setSearch] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -112,7 +111,7 @@ const OrderList = () => {
     ];
     return (
         <>
-            <main className="px-4">
+            <main className="px-5">
                 <div className="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pt-3 pb-2">
                     <h1 className="h2">Orders</h1>
                     <div className="btn-toolbar mb-md-0 mb-2">
@@ -143,30 +142,17 @@ const OrderList = () => {
                         </div>
                     </div>
                 </div>
-                <button
-                    onClick={() => setSearch(!search)}
-                    style={{
-                        width: "100%",
-                        border: "1px solid #dddddd",
-                        textAlign: "left",
-                        fontSize: "20px",
-                        padding: "20px",
-                        marginBottom: "20px",
-                        marginLeft: "10px",
-                    }}
-                >
-                    <i className="bi bi-search"></i> Search
-                </button>
 
-                {search ? (
+                <div className="card border-1 mt-3 rounded">
+                    <div className="card-header">
+                        <span className="ms-2 fs-4">Search</span>
+                    </div>
+
                     <div>
                         <form
                             style={{
                                 padding: "5px",
                                 margin: "5px",
-                                transition: "all 0.3s linear",
-                                transform:
-                                    search === true ? "rotate(0deg)" : "",
                             }}
                         >
                             <div
@@ -247,9 +233,22 @@ const OrderList = () => {
                             </div>
                         </form>
                     </div>
-                ) : (
-                    <></>
-                )}
+                </div>
+
+                <div className="card border-1 mt-3 rounded px-2">
+                    <div className="card-body">
+                        <p>
+                            Learn more about
+                            <a
+                                href="#"
+                                style={{
+                                    textDecoration: "none",
+                                    marginLeft: "5px",
+                                }}
+                            >
+                                Order
+                            </a>
+                        </p>
 
                 <Table items={currentTableData} columns={columns} />
 
@@ -262,7 +261,9 @@ const OrderList = () => {
                             setCurrentPage={setCurrentPage}
                             setPageSize={setPageSize}
                         />
-                    ) : null}
+                    ) : "No data found"}
+                </div>
+                </div>
                 </div>
             </main>
         </>

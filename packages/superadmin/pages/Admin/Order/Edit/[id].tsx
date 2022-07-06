@@ -1,24 +1,25 @@
-import EditOrder from '@/components/sales/editOrder';
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import type { NextPage } from "next";
 import { useRouter } from 'next/router';
 import getData from '@/components/sales/service/get-data.service';
+import EditOrder from '@/components/sales/editOrder';
 
 const Edit:NextPage = () => {
     const router = useRouter();
     const id = "" + `${router.query.id}`;
     const [order, setOrder] = useState<any>([]);
-    
+
     useEffect(() => {
         const data = getData();
         setOrder(data);
     }, []);
 
-    const singleOrder = order.filter((data: any) => data.id == id);
-
+    const filteredOrder = order?.filter((data: any) => data.id == id);
+    const singleOrder = filteredOrder[0];
+  
     return (
         <div>
-            <EditOrder singleOrder={singleOrder[0]}/>
+            {singleOrder ? <EditOrder singleOrder={singleOrder}/> : null}
         </div>
     );
 };

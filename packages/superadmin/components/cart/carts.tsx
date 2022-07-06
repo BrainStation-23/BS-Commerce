@@ -2,7 +2,6 @@ import _ from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 import type { NextComponentType } from "next";
 import getData from "../sales/service/get-shopping-data.service";
-import SingleCart from "../sales/singleCart";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 
@@ -10,7 +9,6 @@ const Carts: NextComponentType = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [PageSize, setPageSize] = useState(7);
     const [data, setData] = useState([]);
-    const [search, setSearch] = useState(false);
 
     useEffect(() => {
         const data: any = getData();
@@ -22,18 +20,6 @@ const Carts: NextComponentType = () => {
         const lastPageIndex = firstPageIndex + PageSize;
         return data?.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, PageSize, data]);
-
-    // const paginatedData = () => {
-    //     const start = (activePage - 1) * pageCount;
-    //     const requiredData = data.slice(start, start + pageCount);
-    //     return requiredData;
-    // };
-
-    // const paginateData = paginatedData();
-
-    // const handleClickPage = (activePage: any) => {
-    //     setActivePage(activePage);
-    // };
 
     const columns = [
         {
@@ -59,24 +45,10 @@ const Carts: NextComponentType = () => {
                     <h1 className="h2">Shopping carts</h1>
                 </div>
 
-                <button
-                    onClick={() => setSearch(!search)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={search}
-                    style={{
-                        width: "100%",
-                        border: "1px solid #dddddd",
-                        textAlign: "left",
-                        fontSize: "20px",
-                        padding: "20px",
-                        marginBottom: "20px",
-                        marginLeft: "10px",
-                    }}
-                >
-                    <i className="bi bi-search"></i> Search
-                </button>
-
-                {search ? (
+                <div className="card border-1 mt-3 rounded">
+                    <div className="card-header">
+                        <span className="ms-2 fs-4">Search</span>
+                    </div>
                     <div>
                         <form style={{ padding: "5px", margin: "5px" }}>
                             <div
@@ -157,22 +129,39 @@ const Carts: NextComponentType = () => {
                             </div>
                         </form>
                     </div>
-                ) : (
-                    <></>
-                )}
+                </div>
 
-                <Table items={currentTableData} columns={columns} />
+                <div className="card border-1 mt-3 rounded px-2">
+                    <div className="card-body">
+                        <p>
+                            Learn more about
+                            <a
+                                href="#"
+                                style={{
+                                    textDecoration: "none",
+                                    marginLeft: "5px",
+                                }}
+                            >
+                                Cart
+                            </a>
+                        </p>
 
-                <div className="">
-                    {data?.length > 1 ? (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalCount={data.length}
-                            pageSize={PageSize}
-                            setCurrentPage={setCurrentPage}
-                            setPageSize={setPageSize}
-                        />
-                    ) : "No Data Found"}
+                        <Table items={currentTableData} columns={columns} />
+
+                        <div className="">
+                            {data?.length > 1 ? (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalCount={data.length}
+                                    pageSize={PageSize}
+                                    setCurrentPage={setCurrentPage}
+                                    setPageSize={setPageSize}
+                                />
+                            ) : (
+                                "No Data Found"
+                            )}
+                        </div>
+                    </div>
                 </div>
             </main>
         </>

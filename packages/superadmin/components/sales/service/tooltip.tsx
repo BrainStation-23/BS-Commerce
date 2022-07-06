@@ -26,9 +26,8 @@ const Tooltip: FC<TOOL> = ({ label, data, tooltipText }) => {
                             </span>
                         </p>
                     </div>
-
                     {
-                        <div className="col">
+                        <div className="col" style={{marginLeft: "5px"}}>
                             <p>{data}</p>
                         </div>
                     }

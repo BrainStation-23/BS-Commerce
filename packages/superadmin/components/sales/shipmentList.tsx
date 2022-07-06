@@ -8,7 +8,6 @@ import Link from "next/link";
 const ShipmentList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [PageSize, setPageSize] = useState(7);
-    const [search, setSearch] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -41,7 +40,9 @@ const ShipmentList = () => {
             label: "Pickup from store",
             path: "pickup",
             content: (data: any, key: any, index: any) => (
-                <td className="text-center">{data?.[key]}</td>
+                <td className="p-auto m-auto text-center">
+                    {data?.[key] ? <i className="bi bi-check-lg"></i> : "-"}
+                </td>
             ),
         },
         {
@@ -180,24 +181,11 @@ const ShipmentList = () => {
                     </div>
                 </div>
 
-                <button
-                    onClick={() => setSearch(!search)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={search}
-                    style={{
-                        width: "100%",
-                        border: "1px solid #dddddd",
-                        textAlign: "left",
-                        fontSize: "20px",
-                        padding: "20px",
-                        marginBottom: "20px",
-                        marginLeft: "10px",
-                    }}
-                >
-                    <i className="bi bi-search"></i> Search
-                </button>
+                <div className="card border-1 mt-3 rounded">
+                    <div className="card-header">
+                        <span className="ms-2 fs-4">Search</span>
+                    </div>
 
-                {search ? (
                     <div>
                         <form style={{ padding: "5px", margin: "5px" }}>
                             <div
@@ -278,146 +266,38 @@ const ShipmentList = () => {
                             </div>
                         </form>
                     </div>
-                ) : (
-                    <></>
-                )}
-
-                <Table items={currentTableData} columns={columns} />
-
-                <div className="">
-                    {data?.length > 1 ? (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalCount={data.length}
-                            pageSize={PageSize}
-                            setCurrentPage={setCurrentPage}
-                            setPageSize={setPageSize}
-                        />
-                    ) : null}
                 </div>
 
-                {/* <table
-                    className="table"
-                    style={{
-                        border: "1px solid #dddddd",
-                        textAlign: "left",
-                        margin: "10px",
-                    }}
-                >
-                    <thead style={{ backgroundColor: "#dddddd" }}>
-                        <tr style={{ fontSize: "20px" }}>
-                            <th>
-                                <span>Shipment #</span>
-                            </th>
-                            <th>
-                                <span>Order #</span>
-                            </th>
-                            <th>
-                                <span>Pickup from store</span>
-                            </th>
-                            <th>
-                                <span>Tracking number</span>
-                            </th>
-                            <th>
-                                <span>Total weight</span>
-                            </th>
-                            <th>
-                                <span>Date shipped</span>
-                            </th>
-                            <th>
-                                <span>Date ready for pickup</span>
-                            </th>
-                            <th>
-                                <span>Date delivered</span>
-                            </th>
-                            <th>
-                                <span>View</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginateData.length > 0 &&
-                            paginateData.map((shipment: any) => (
-                                <SingleShipment
-                                    key={shipment.id}
-                                    shipment={shipment}
-                                ></SingleShipment>
-                            ))}
-                    </tbody>
-                </table>
-                <div
-                    className="d-flex justify-content-between"
-                    style={{ fontSize: "18px" }}
-                >
-                    <span>
-                        <Pagination
-                            totalItems={data.length}
-                            pageCount={pageCount}
-                            activePage={activePage}
-                            onClickPage={handleClickPage}
-                        ></Pagination>
-                    </span>
-                    <span>
-                        <span style={{ margin: "10px" }}>Show</span>
-                        <button
-                            className="dropdown"
-                            style={{
-                                padding: "10px",
-                                border: "1px solid gray",
-                            }}
-                        >
+                <div className="card border-1 mt-3 rounded px-2">
+                    <div className="card-body">
+                        <p>
+                            Learn more about
                             <a
                                 href="#"
-                                className="dropdown-toggle"
-                                data-bs-toggle="dropdown"
                                 style={{
                                     textDecoration: "none",
-                                    color: "black",
-                                    padding: "10px",
+                                    marginLeft: "5px",
                                 }}
                             >
-                                {pageCount}
+                                Shipment
                             </a>
-                            <div className="dropdown-menu">
-                                <a
-                                    href="#"
-                                    className="dropdown-item"
-                                    onClick={() => setPageCount(2)}
-                                >
-                                    2
-                                </a>
-                                <a
-                                    href="#"
-                                    className="dropdown-item"
-                                    onClick={() => setPageCount(5)}
-                                >
-                                    5
-                                </a>
-                                <a
-                                    href="#"
-                                    className="dropdown-item"
-                                    onClick={() => setPageCount(10)}
-                                >
-                                    10
-                                </a>
-                            </div>
-                        </button>
-                        <span style={{ margin: "10px" }}>items</span>
-                    </span>
-                    {(activePage - 1) * pageCount + 1}-
-                    {(activePage - 1) * pageCount + pageCount} of {pageCount}{" "}
-                    items
-                    <button
-                        style={{
-                            height: "100%",
-                            padding: "10px",
-                            width: "5%",
-                            border: "1px solid white",
-                        }}
-                    >
-                        <i className="bi bi-arrow-repeat"></i>
-                    </button>
-                </div> */}
+                        </p>
+
+                        <Table items={currentTableData} columns={columns} />
+
+                        <div className="">
+                            {data?.length > 1 ? (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalCount={data.length}
+                                    pageSize={PageSize}
+                                    setCurrentPage={setCurrentPage}
+                                    setPageSize={setPageSize}
+                                />
+                            ) : "No data found"}
+                        </div>
+                    </div>
+                </div>
             </main>
         </>
     );
