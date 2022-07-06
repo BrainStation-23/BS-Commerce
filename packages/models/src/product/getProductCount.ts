@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 /**
- * API Path: /product/count
+ * API Path: /products/count
  * method: GET
  * response: GetProductCountResponse
  */

@@ -1,6 +1,6 @@
 import { diskStorage } from 'multer';
-import { existsSync, mkdirSync } from "fs";
-import { multerConfig } from "config/multer";
+import { existsSync, mkdirSync } from 'fs';
+import { multerConfig } from 'config/multer';
 
 // Multer Options
 export const multerOptions = {
