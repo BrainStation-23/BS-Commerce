@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+import { toast } from 'react-toastify';
+import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { useAppDispatch } from 'customHooks/hooks';
@@ -43,9 +45,18 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     dispatch(addToCart(cartItem));
   };
 
-  const toWishlist = () => {
-    setWishlist([...wishlist, `${product?.info?.id}`]);
-    setClicked(true);
+  const toWishlist = async (id: string, quantity: number) => {
+    const data = {
+      productId: id,
+      quantity,
+    };
+    try {
+      await userAPI.addToWishList(data);
+      toast.success('Item added to wishlist');
+      setClicked(true);
+    } catch (error) {
+      toast.error('Failed to add item to wishlist');
+    }
   };
 
   return (
@@ -249,7 +260,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="text-grey-700 ml-1">
                   <div>
                     <button
-                      onClick={toWishlist}
+                      onClick={() => toWishlist(product?.id, 1)}
                       className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}

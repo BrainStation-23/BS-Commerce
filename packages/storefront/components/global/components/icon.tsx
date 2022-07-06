@@ -1,8 +1,12 @@
 import Link from "next/link";
 import React from "react";
+
 import { useAppDispatch } from "customHooks/hooks";
+import { toast } from "react-toastify";
+
 import { Product } from "models";
 import { addToCart } from "toolkit/cartSlice";
+import { userAPI } from "APIs";
 
 interface SingleProduct {
   product: Product;
@@ -25,6 +29,19 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     };
     dispatch(addToCart(cartItem));
   };
+
+  const handleAddToWishlist = async (productId: string, quantity: number) => {
+    const data = {
+      productId,
+      quantity
+    }
+    try {
+      await userAPI.addToWishList(data);
+      toast.success('Item added to wishlist');
+    } catch (error) {
+      toast.error('Failed to add item to wishlist');
+    }
+  }
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
@@ -85,6 +102,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
+            onClick={() => handleAddToWishlist(product.id, 1)}
           >
             <path
               strokeLinecap="round"

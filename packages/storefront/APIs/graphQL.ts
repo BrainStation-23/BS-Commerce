@@ -18,6 +18,11 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  getUserWishlistResponse,
+  DeleteWishlistItemParams,
+  deleteWishlistItemResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -96,6 +101,24 @@ export async function updateCartGraphql(
 
 export async function deleteAllFromCartGraphql(): Promise<
   deleteCartItemResponse | undefined
+> {
+  return undefined;
+}
+
+export async function addToWishlistGraphql(data: addToWishlistRequest): Promise<
+  AddToWishlistResponse | undefined
+> {
+  return undefined;
+}
+
+export async function getCustomerWishlistGraphql(token: string): Promise<
+  getUserWishlistResponse | undefined
+> {
+  return undefined;
+}
+
+export async function deleteWishlistItemGraphql(data: string): Promise<
+  deleteWishlistItemResponse | undefined
 > {
   return undefined;
 }

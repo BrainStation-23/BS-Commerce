@@ -1,11 +1,5 @@
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
   CustomerSignInResponse,
-  deleteAllCartItemsResponse,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -14,10 +8,13 @@ import {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
   CreateCustomerResponse,
-  updateCartItemResponse,
-  updateCartItemRequest,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  getUserWishlistResponse,
+  DeleteWishlistItemParams,
+  deleteWishlistItemResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -90,6 +87,9 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
+  getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
+  deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
 }
 
 export interface ProductStore {
