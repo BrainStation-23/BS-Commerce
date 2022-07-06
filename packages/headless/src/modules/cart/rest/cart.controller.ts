@@ -25,7 +25,7 @@ import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('cart')
 @ApiBearerAuth()
-@UseGuards(new RolesGuard(['admin']))
+@UseGuards(new RolesGuard(['customer']))
 @ApiTags('Cart API')
 export class CartController {
   constructor(private cartService: CartService) { }
