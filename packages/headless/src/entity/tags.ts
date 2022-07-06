@@ -1,4 +1,4 @@
 export class Tags {
-    id?: string;
+    id: string;
     name: string;
 }
