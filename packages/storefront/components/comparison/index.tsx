@@ -30,7 +30,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
       {showModal ? (
         <>
           <div className="fixed mt-5 inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-auto">
-            <div className="relative my-6 mx-auto overflow-auto">
+            <div className="relative my-auto mx-auto overflow-auto">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
                   <h3 className="mr-3 text-xl font-bold">Compare Product</h3>
