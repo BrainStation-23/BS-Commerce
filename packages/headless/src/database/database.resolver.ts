@@ -1,22 +1,29 @@
 // Mongodb dependency implementations
 import { dbConfig } from 'config/database';
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
-import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
+<<<<<<< HEAD
 // import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { ShipmentDatabase as ShipmentDatabaseMongo } from './mongodb/shipment';
 import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
+=======
+>>>>>>> c056cc9079d687d4d4bdc70fbb6f95a2433d03c4
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
+import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
+import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
+import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
+import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
+import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
 
 // type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'COMPARE' | 'BRAND';
 type CLASS_NAME =
-  'WISHLIST'
+  | 'WISHLIST'
   | 'USER'
   | 'PRODUCT'
   | 'MANUFACTURER'
@@ -26,7 +33,9 @@ type CLASS_NAME =
   | 'COMPARE'
   | 'MEDIA'
   | 'BRAND'
-  | 'SHIPMENT';
+  | 'SHIPMENT'
+  | 'ORDER'
+  | 'TAGS';
 
 const db = dbConfig.db;
 
@@ -53,6 +62,12 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return CartDatabaseMongo;
           case 'SHIPMENT':
             return ShipmentDatabaseMongo;
+          case 'WISHLIST':
+            return WishListDatabaseMongo;
+          case 'ORDER':
+            return OrderDatabaseMongo;
+          case 'TAGS':
+            return TagsDatabaseMongo;
 
           default:
             break;

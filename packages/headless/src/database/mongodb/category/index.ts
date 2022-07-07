@@ -1,11 +1,41 @@
 import { Injectable } from "@nestjs/common";
-import { responseCategory } from "src/entity/category";
-import { Category } from "src/entity/category";
+import { Category, RequestCategory, responseCategory } from "src/entity/category";
 import { ICategoryDatabase } from "src/modules/category/repositories/category.database.interface";
 import { CategoryModel } from "./category.model";
 
 @Injectable()
 export class CategoryDatabase implements ICategoryDatabase {
+
+    getSlug(name: string) {
+        return name.replace(/\s+/g, '-').toLowerCase();
+    };
+
+    async createCategory(requestCategory: RequestCategory): Promise<Category | null> {
+        let newCategory = new CategoryModel(requestCategory);
+        newCategory.slug = this.getSlug(requestCategory.name);
+        
+        if (requestCategory.parentSlug) {
+            const parentCategory = await CategoryModel.findOne({ slug: requestCategory.parentSlug }).lean();
+            const currentRootPath = parentCategory.slug;
+            const currentAncestors = [{
+                name: parentCategory.name,
+                slug: parentCategory.slug,
+                level: parentCategory.ancestors.length + 1,
+            }];
+            const newCurrentRootPath = parentCategory.rootPath;
+            const newCurrentAncestors = [...parentCategory.ancestors];
+            if (newCurrentAncestors.length && currentRootPath.length) {
+                Array.prototype.push.apply(newCurrentAncestors, currentAncestors);
+                newCategory.ancestors = newCurrentAncestors;
+                newCategory.rootPath = newCurrentRootPath + '/' + currentRootPath;
+            } else {
+                newCategory.ancestors = currentAncestors;
+                newCategory.rootPath = currentRootPath;
+            }
+        };
+        newCategory.save();
+        return newCategory;
+    }
 
     async generateCategoryTree(listItems) {
         let rootItems = [];
@@ -37,7 +67,7 @@ export class CategoryDatabase implements ICategoryDatabase {
     }
 
     async getCategoryList(): Promise<responseCategory[] | null> {
-        let categories = await CategoryModel.find({}).select('id name published displayOrder slug ancestors -_id').lean();
+        let categories = await CategoryModel.find({}).select('id name photo published displayOrder slug ancestors -_id').lean();
         let category: any = this.generateCategoryTree(categories);
         return category;
     }
