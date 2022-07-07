@@ -18,6 +18,8 @@ import {
   updateCartItemRequest,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -90,6 +92,8 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
+  deleteFromCompare: (productId: AddCompareItem) => {}
 }
 
 export interface ProductStore {

@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useAppDispatch } from 'customHooks/hooks';
-import { Product } from 'models';
+import { AddCompareItem, Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { toast } from 'react-toastify';
+import { userAPI } from 'APIs';
 
 interface Props {
   product: Product;
@@ -28,6 +30,15 @@ const Icon: React.FC<Props> = (props: Props) => {
     };
     dispatch(addToCart(cartItem));
   };
+
+  const handleAddToCompare = async () => {
+    console.log(product.id)
+    try {
+      await userAPI.addToCompare(product.id);
+    } catch(error) {
+      toast.error("Error happend.")
+    }
+  }
 
   return (
     <>
@@ -113,6 +124,7 @@ const Icon: React.FC<Props> = (props: Props) => {
             stroke="currentColor"
             strokeWidth={1.5}
             onClick = {() => {
+              handleAddToCompare();
               dispatch(setModalState(!modalCmp));
               dispatch(storeProductsToCompare(product));
             }}

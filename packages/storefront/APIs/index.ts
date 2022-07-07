@@ -1,4 +1,6 @@
 import {
+  addToCompareRest,
+  deleteFromCompareRest,
   forgotPasswordRest,
   getFeaturedProductsRest,
   getPublicProductByIdRest,
@@ -9,6 +11,8 @@ import {
   signUpRest,
 } from './restApi';
 import {
+  addToCompareGraphql,
+  deleteFromCompareGraphql,
   forgotPasswordGraphql,
   getFeaturedProductsGraphql,
   getPublicProductByIdGraphql,
@@ -30,6 +34,8 @@ const graphqlApi: apiFunction = {
   getPublicProducts: getPublicProductsGraphql,
   getPublicProductsById: getPublicProductByIdGraphql,
   getFeaturedProducts: getFeaturedProductsGraphql,
+  addToCompare: addToCompareGraphql,
+  deleteFromCompare: deleteFromCompareGraphql,
 };
 
 const restApi: apiFunction = {
@@ -41,6 +47,8 @@ const restApi: apiFunction = {
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
   getFeaturedProducts: getFeaturedProductsRest,
+  addToCompare: addToCompareRest,
+  deleteFromCompare: deleteFromCompareRest
 };
 
 export const userAPI: apiFunction =

@@ -18,6 +18,8 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -98,4 +100,13 @@ export async function deleteAllFromCartGraphql(): Promise<
   deleteCartItemResponse | undefined
 > {
   return undefined;
+}
+
+export async function addToCompareGraphql(productId: AddCompareItem): Promise<
+  CompareResponse | undefined
+> {
+  return undefined;
+}
+
+export async function deleteFromCompareGraphql(productId: AddCompareItem) {
 }

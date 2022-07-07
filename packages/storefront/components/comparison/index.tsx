@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
 import { deleteComparedProduct } from 'toolkit/compareSlice';
+import { userAPI } from 'APIs';
 
 interface Props {
   setModal: Function;
@@ -69,6 +70,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                       >
                                         <button onClick={() => {
                                           dispatch( deleteComparedProduct(product.id) )
+                                          userAPI.deleteFromCompare(product.id);
                                         }}>Remove</button>
                                       </th>
                                     </React.Fragment>

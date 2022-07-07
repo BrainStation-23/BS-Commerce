@@ -23,7 +23,8 @@ export const compareSlice = createSlice({
         state: compareState,
         action: PayloadAction<string>
       ) => {
-        state.productsToCompare = state.productsToCompare.filter(item => item.id != action.payload)
+        const newCompareList = state.productsToCompare.filter(item => item.id != action.payload)
+        state.productsToCompare = newCompareList;
       }
   },
 });
