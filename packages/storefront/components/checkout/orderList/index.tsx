@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { NextComponentType } from "next";
-
 import ChevronDown from "@/components/global/icons-for-checkout-page/chevron-down";
 import ChevronUp from "@/components/global/icons-for-checkout-page/chevron-up";
 import ShoppingCart from "@/components/global/icons-for-checkout-page/shopping-cart";

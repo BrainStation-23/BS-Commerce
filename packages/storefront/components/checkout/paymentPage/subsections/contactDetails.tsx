@@ -16,7 +16,7 @@ const ContactDetails: React.FC<Props> = (props) => {
         <div className="flex flex-wrap lg:items-center xl:items-center justify-between my-3 text-sm">
           <div className="flex flex-wrap flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-0 sm:gap-0 md:gap-6 lg:gap-6 xl:gap-6">
             <p className="text-gray-500">Contact</p>
-            <p>{shippingInfo.contact}</p>
+            <p>{shippingInfo?.contact}</p>
           </div>
           <button
               onClick={() => {

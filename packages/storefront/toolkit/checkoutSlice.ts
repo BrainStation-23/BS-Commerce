@@ -28,10 +28,16 @@ export const checkoutSlice = createSlice({
       action: PayloadAction<{}>
     ) => {
       state.billingInfo = action.payload;
-    }
+    },
+    deleteCheckoutInfo: (
+      state: CheckoutState,
+    ) => {
+      state.shippingInfo = [];
+      state.billingInfo = [];
+    },
   },
 });
 
-export const { addToShippingInfo, addToBillingInfo } = checkoutSlice.actions;
+export const { addToShippingInfo, addToBillingInfo, deleteCheckoutInfo } = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

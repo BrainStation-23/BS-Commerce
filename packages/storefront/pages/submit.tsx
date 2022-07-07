@@ -3,7 +3,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Link from 'next/link';
 
 const Submit = () => {
-    const imageDimensions = { width: 1024, height: 456 };
+    const imageDimensions = { width: 720, height: 456 };
   
   return (
     <>

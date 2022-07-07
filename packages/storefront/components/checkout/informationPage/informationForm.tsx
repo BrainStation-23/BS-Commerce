@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 import { addToShippingInfo } from 'toolkit/checkoutSlice';
 
 interface FormData {
@@ -20,22 +19,22 @@ interface FormData {
 }
 
 const Information = (props: any) => {
-  const checkoutInfo = useAppSelector(
+  const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
   );
 
   const dispatch = useAppDispatch();
   const { setModal } = props;
   const initialValues = {
-    contact: checkoutInfo?.contact,
+    contact: shippingInfo?.contact,
     sendNotificationCheckbox: '',
-    firstName: checkoutInfo?.firstName,
-    lastName: checkoutInfo?.lastName,
-    country: checkoutInfo?.country,
-    address: checkoutInfo?.address,
-    addressOptional: checkoutInfo?.addressOptional,
-    city: checkoutInfo?.city,
-    postalCode: checkoutInfo?.postalCode,
+    firstName: shippingInfo?.firstName,
+    lastName: shippingInfo?.lastName,
+    country: shippingInfo?.country,
+    address: shippingInfo?.address,
+    addressOptional: shippingInfo?.addressOptional,
+    city: shippingInfo?.city,
+    postalCode: shippingInfo?.postalCode,
     saveInformationCheckbox: '',
   };
 

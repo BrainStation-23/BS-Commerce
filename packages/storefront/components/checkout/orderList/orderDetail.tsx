@@ -1,9 +1,6 @@
 import React from "react";
-
-import { useState } from "react";
 import { NextComponentType } from "next";
 import { useAppSelector } from "customHooks/hooks";
-
 import CartProductList from "@/components/checkout/orderList/cartProductList";
 
 const OrderedProducts: NextComponentType = () => {

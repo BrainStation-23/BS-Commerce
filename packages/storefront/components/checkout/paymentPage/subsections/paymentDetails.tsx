@@ -6,8 +6,8 @@ import { Field, Form, Formik } from 'formik';
 
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
-import { useAppDispatch } from 'customHooks/hooks';
-import { addToBillingInfo } from 'toolkit/checkoutSlice';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
 import { useRouter } from 'next/router';
 
 interface FormData {
@@ -26,6 +26,10 @@ interface FormData {
 }
 
 const PaymentDetails: NextComponentType = () => {
+  const shippingInfo = useAppSelector(
+    (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -53,6 +57,7 @@ const PaymentDetails: NextComponentType = () => {
     {
       router.push('/submit');
     }
+    dispatch(deleteCheckoutInfo());
   };
 
   return (
