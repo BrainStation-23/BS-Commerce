@@ -12,7 +12,7 @@ import CategoryForm from './forms/category-form';
 const CreateCategoryComponent: React.FC = () => {
   const [categoryList, setCategoryList] = useState<NestedCategoryList[]>();
   const router = useRouter();
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: createCategoryRequest) => {
     // console.log(data);
 
     console.log(data);
@@ -42,12 +42,12 @@ const CreateCategoryComponent: React.FC = () => {
         allowToSelectPageSize: false,
         published: false,
         displayOrder: 0,
-        // meta: {
-        //   keywords: '',
-        //   description: '',
-        //   title: '',
-        //   SEFN: '',
-        // },
+        meta: {
+          keywords: [],
+          description: '',
+          title: '',
+          SEFN: '',
+        },
       }}
       onSubmit={(values, actions) => {
         //   const  metaKeywords = values.meta.keywords.split(' ');

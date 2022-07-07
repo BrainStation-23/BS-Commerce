@@ -1,15 +1,15 @@
-import { Formik, Form } from "formik";
-import { productSchema } from "./schema/productSchema";
+import { Formik, Form } from 'formik';
+import { productSchema } from './schema/productSchema';
 
-import ProductInfoForm from "./forms/productInfoForm";
-import PhotosForm from "./forms/photosForm";
-import MetaForm from "./forms/metaForm";
-import { userAPI } from "../../APIs";
+import ProductInfoForm from './forms/productInfoForm';
+import PhotosForm from './forms/photosForm';
+import MetaForm from './forms/metaForm';
+import { userAPI } from '../../APIs';
 
-import { useRouter } from "next/router";
-import CategoryForm from "./forms/categoryForm";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useRouter } from 'next/router';
+import CategoryForm from './forms/categoryForm';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CreateProduct = () => {
   const router = useRouter();
@@ -100,7 +100,7 @@ const CreateProduct = () => {
       id: data.photosID,
       title: data.photosTitle,
       displayOrder: +`${data.displayOrderPhotos}`,
-      alt: "image",
+      alt: 'image',
     };
 
     const categories: any = [];
@@ -112,7 +112,7 @@ const CreateProduct = () => {
             isFeatured: category.isFeatured,
             displayOrder: +category.displayOrder,
           })
-        : "";
+        : '';
     });
 
     const newData = {
@@ -125,16 +125,16 @@ const CreateProduct = () => {
     };
     if (categories[0]) {
       userAPI.createProduct(newData, router);
-    } else toast.error("You must select atleast one category");
+    } else toast.error('You must select atleast one category');
   };
 
   useEffect(() => {
     async function loadCategories() {
-      const response = await userAPI.getCategories();
+      const response = await userAPI.getCategoryList();
       // console.log(response);
-      if (response?.length! > 0) {
+      if (response?.data.categories.length! > 0) {
         const categories: any = [];
-        response?.forEach((category, index) => {
+        response?.data.categories.forEach((category, index) => {
           categories.push({
             id: index + 1,
             value: category.name,
@@ -153,10 +153,10 @@ const CreateProduct = () => {
     <>
       <Formik
         initialValues={{
-          productName: "",
-          ShortDescription: "",
-          FullDescription: "",
-          Sku: "",
+          productName: '',
+          ShortDescription: '',
+          FullDescription: '',
+          Sku: '',
           OldPrice: 0,
           Price: 0,
           ProductCost: 0,
@@ -166,21 +166,21 @@ const CreateProduct = () => {
           published: false,
           displayOrder: 1,
           isFeatured: false,
-          publishDate: "",
-          tags: "",
-          brands: "",
-          keywords: "",
-          metaTitle: "",
-          metaDescription: "",
-          metaFriendlyPageName: "",
-          photosUrl: "",
-          photosID: "",
-          photosTitle: "",
-          displayOrderPhotos: "",
+          publishDate: '',
+          tags: '',
+          brands: '',
+          keywords: '',
+          metaTitle: '',
+          metaDescription: '',
+          metaFriendlyPageName: '',
+          photosUrl: '',
+          photosID: '',
+          photosTitle: '',
+          displayOrderPhotos: '',
           SelectedCategoryIds: 0,
           isFeaturedCategory: false,
           displayOrderCategory: 1,
-          categoriesData: "",
+          categoriesData: '',
         }}
         onSubmit={(values, actions) => {
           handleSubmit(values);
