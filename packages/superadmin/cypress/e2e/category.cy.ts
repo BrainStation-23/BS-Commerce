@@ -6,8 +6,8 @@ describe('Login to superadmin & view category', () => {
 
   it('should login', () => {
     // Type correct email & password
-    cy.get('#email').type('nafi@test.com');
-    cy.get('#password').type('123456');
+    cy.get('#email').type('string@gmail.com');
+    cy.get('#password').type('string');
     // cy.get('.btn').click();
 
     // Click login
@@ -32,8 +32,8 @@ describe('Login to superadmin & view category', () => {
 
   it('should show wrong credentials message', () => {
     // Type incorrect email & password
-    cy.get('#email').type('nafi8@test.com');
-    cy.get('#password').type('123456');
+    cy.get('#email').type('string@gmail.com');
+    cy.get('#password').type('string');
 
     // Click login
     cy.contains('button', 'LOG IN').click();
@@ -44,12 +44,13 @@ describe('Login to superadmin & view category', () => {
 
   it('should clear input fields & login', () => {
     // Clear email & password field
+
     cy.get('#email').clear();
     cy.get('#password').clear();
 
     // Type correct email & password
-    cy.get('#email').type('nafi@test.com');
-    cy.get('#password').type('123456');
+    cy.get('#email').type('string@gmail.com');
+    cy.get('#password').type('string');
 
     // Click login
     cy.contains('button', 'LOG IN').click();

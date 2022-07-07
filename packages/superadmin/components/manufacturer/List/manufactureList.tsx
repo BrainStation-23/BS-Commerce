@@ -1,11 +1,11 @@
-import React, { FC, useMemo, useEffect, useState } from "react";
-import Link from "next/link";
-import Table from "../../global/table/table";
-import Pagination from "../../global/pagination";
+import React, { FC, useMemo, useEffect, useState } from 'react';
+import Link from 'next/link';
+import Table from '../../global/table/table';
+import Pagination from '../../global/pagination';
 // import SingleManufacturer from "../SubComponents/singleManufacturer";
 // import Modal from "../../sales/service/modal";
-import { userAPI } from "../../../APIs";
-import { useRouter } from "next/router";
+import { userAPI } from '../../../APIs';
+import { useRouter } from 'next/router';
 interface Props {
   manufactureData: any;
   // getAllManufacturers: any;
@@ -19,7 +19,7 @@ const ManufactureList: FC<Props> = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
-  const [ProductID, setProductID] = useState("");
+  const [ProductID, setProductID] = useState('');
   const router = useRouter();
   // const [modal, setModal] = useState({
   //     delete: false,
@@ -57,30 +57,30 @@ const ManufactureList: FC<Props> = ({
   }, [currentPage, PageSize, manufactureData]);
   const columns = [
     {
-      label: "Picture",
-      path: "url",
+      label: 'Picture',
+      path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           <img
             // src={`${data?.photos[0][key]}`}
             src={data.picture}
             height="75px"
-            width={"75px"}
+            width={'75px'}
             alt="..."
           ></img>
         </td>
       ),
     },
     {
-      label: "Manufacturer name",
-      path: "name",
+      label: 'Manufacturer name',
+      path: 'name',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">{data.name}</td>
       ),
     },
     {
-      label: "Display Order",
-      path: "displayOrder",
+      label: 'Display Order',
+      path: 'displayOrder',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
           {data?.displayOrder}
@@ -88,17 +88,17 @@ const ManufactureList: FC<Props> = ({
       ),
     },
     {
-      label: "Published",
-      path: "published",
+      label: 'Published',
+      path: 'published',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
-          {data?.isPublished ? <i className="bi bi-check-lg"></i> : "-"}
+          {data?.isPublished ? <i className="bi bi-check-lg"></i> : '-'}
         </td>
       ),
     },
     {
-      label: "Edit",
-      path: "id",
+      label: 'Edit',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
           <Link
@@ -119,8 +119,8 @@ const ManufactureList: FC<Props> = ({
       ),
     },
     {
-      label: "View",
-      path: "id",
+      label: 'View',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
           <Link
@@ -141,8 +141,8 @@ const ManufactureList: FC<Props> = ({
       ),
     },
     {
-      label: "Delete",
-      path: "id",
+      label: 'Delete',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
           <button
@@ -162,7 +162,7 @@ const ManufactureList: FC<Props> = ({
         <div className="card-body">
           <p>
             Learn more about
-            <a href="#" style={{ textDecoration: "none", marginLeft: "15px" }}>
+            <a href="#" style={{ textDecoration: 'none', marginLeft: '15px' }}>
               Manufacturers
             </a>
           </p>
@@ -184,12 +184,12 @@ const ManufactureList: FC<Props> = ({
       {modal.delete ? (
         <div
           className="modal"
-          style={{ display: modal.delete ? "block" : "none" }}
+          style={{ display: modal.delete ? 'block' : 'none' }}
         >
           <div
             className="modal-backdrop"
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
             }}
             onClick={() => {
               // close modal when outside of modal is clicked
@@ -203,14 +203,14 @@ const ManufactureList: FC<Props> = ({
                 e.stopPropagation();
               }}
               style={{
-                textAlign: "left",
-                width: "30%",
-                marginLeft: "40%",
-                marginTop: "5%",
-                border: "1px solid gray",
-                boxShadow: "1px 1px 10px gray",
-                borderRadius: "10px",
-                padding: "20px",
+                textAlign: 'left',
+                width: '30%',
+                marginLeft: '40%',
+                marginTop: '5%',
+                border: '1px solid gray',
+                boxShadow: '1px 1px 10px gray',
+                borderRadius: '10px',
+                padding: '20px',
               }}
             >
               <div className="container">
@@ -224,10 +224,10 @@ const ManufactureList: FC<Props> = ({
                     type="button"
                     className="btn btn-light"
                     style={{
-                      border: "1px solid gray",
-                      backgroundColor: "gray",
-                      color: "white",
-                      marginRight: "10px",
+                      border: '1px solid gray',
+                      backgroundColor: 'gray',
+                      color: 'white',
+                      marginRight: '10px',
                     }}
                     onClick={() =>
                       setModal({
@@ -243,7 +243,7 @@ const ManufactureList: FC<Props> = ({
                     className="btn btn-danger"
                     onClick={() => deleteProductFunction()}
                   >
-                    Delete
+                    <span id="deleteModal"> Delete</span>
                   </button>
                 </div>
               </div>
