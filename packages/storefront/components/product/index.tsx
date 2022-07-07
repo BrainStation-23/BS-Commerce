@@ -59,6 +59,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       };
       try {
         await userAPI.addToWishList(data);
+        setClicked(true);
         toast.success('Item added to wishlist');
       } catch (error) {
         toast.error('Failed to add item to wishlist');
