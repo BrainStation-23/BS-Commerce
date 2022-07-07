@@ -60,6 +60,10 @@ const PaymentDetails: NextComponentType = () => {
     dispatch(deleteCheckoutInfo());
   };
 
+  const handleSameAddress = () => {
+    setShowShippingForm(false);
+  };
+
   return (
     <>
       <p className="mt-5 text-lg">Payment</p>
@@ -198,8 +202,9 @@ const PaymentDetails: NextComponentType = () => {
                           value="sameShippingAddress"
                           className="mx-4 mb-4 checked:accent-black"
                           onClick={() => {
-                            setShowShippingForm(false);
+                            handleSameAddress();
                           }}
+                          required
                         />
                         Same as shipping address
                       </label>
