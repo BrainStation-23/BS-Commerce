@@ -98,13 +98,9 @@ export class ProductService {
   async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
     const { skip, limit, slug, orderBy } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
-    let products: Product[], count: number;
-    if (slug) {
-      [products, count] = await Promise.all([await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit), await this.productRepo.getProductCount(query)]);
-    }
-    [products, count] = await Promise.all([await this.productRepo.findAllProducts(query, skip, limit), await this.productRepo.getProductCount(query)]);
-    if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ products, count });
+    const products = slug ? await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit) : await this.productRepo.findAllProducts(query, skip, limit);
+    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ products, count: products.length });
   }
 
   generateSearchQuery(condition: SearchCondition): object {
