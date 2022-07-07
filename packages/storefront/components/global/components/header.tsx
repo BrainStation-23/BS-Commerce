@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import type { NextComponentType, GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 
+import { useAppSelector } from "customHooks/hooks";
+
 import { getCategoryList } from "models";
 import Currency from "@/components/global/components/currency";
 import HeaderAccount from "@/components/global/components/header-account";
@@ -40,18 +42,27 @@ const Header: NextComponentType = () => {
   const [stickyClass, setStickyClass] = useState("relative");
   const customerNumber = "+880 1674314359";
   const { pathname } = useRouter();
+  const categories = useAppSelector(
+    (state) => state.persistedReducer.category.category
+  );
 
-  const allCategories: menuLink[] = [
-    { name: "vegetable", link: "/", hasSubmenu: true },
-    { name: "fruits", link: "/", hasSubmenu: true },
-    { name: "salads", link: "/", hasSubmenu: true },
-    { name: "fish & seafood", link: "/", hasSubmenu: false },
-    { name: "fresh meat", link: "/", hasSubmenu: false },
-    { name: "butter & eggs", link: "/", hasSubmenu: false },
-    { name: "milk", link: "/", hasSubmenu: false },
-    { name: "oil & vinegars", link: "/", hasSubmenu: false },
-    { name: "bread", link: "/", hasSubmenu: false },
-  ];
+  console.log(categories);
+  
+  const allCategories: menuLink[] = [  ];
+  categories.categories.forEach((category)=>{
+    allCategories.push({name: category.name, link: "/", hasSubmenu: false})
+  })
+  // const allCategories: menuLink[] = [
+  //   { name: "vegetable", link: "/", hasSubmenu: true },
+  //   { name: "fruits", link: "/", hasSubmenu: true },
+  //   { name: "salads", link: "/", hasSubmenu: true },
+  //   { name: "fish & seafood", link: "/", hasSubmenu: false },
+  //   { name: "fresh meat", link: "/", hasSubmenu: false },
+  //   { name: "butter & eggs", link: "/", hasSubmenu: false },
+  //   { name: "milk", link: "/", hasSubmenu: false },
+  //   { name: "oil & vinegars", link: "/", hasSubmenu: false },
+  //   { name: "bread", link: "/", hasSubmenu: false },
+  // ];
 
   const menus: menuLink[] = [
     {
