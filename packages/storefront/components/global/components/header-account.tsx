@@ -1,15 +1,18 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
-import { toast } from 'react-toastify';
+
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const [showCartDropdown, setShowCartDropdown] = useState(false);
 
   const showCartDropDown = () => {
@@ -20,10 +23,20 @@ const HeaderAccount: React.FC<Properties> = () => {
   );
 
   const user = useAppSelector((state) => state.persistedReducer.user.user);
+
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
     toast.success('Logged out successfully!');
+  };
+
+  const handleClickWishlist = () => {
+    if (token) {
+      router.push('/wishlist');
+    } else {
+      toast.error('Please login to your account first.');
+      router.push('/account/sign-in');
+    }
   };
 
   const links = [
@@ -68,22 +81,21 @@ const HeaderAccount: React.FC<Properties> = () => {
           </>
         )}
       </span>
-      <Link href="/wishlist" passHref>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-          />
-        </svg>
-      </Link>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+        onClick={handleClickWishlist}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        />
+      </svg>
       <span className="z-50 text-sm" onClick={(e) => showCartDropDown()}>
         <CartDropdown />
       </span>

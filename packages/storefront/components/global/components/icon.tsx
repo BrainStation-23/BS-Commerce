@@ -17,6 +17,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
+  
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
 
   const handleAddToCart = () => {
     const cartProduct = {
@@ -32,9 +36,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     dispatch(addToCart(cartItem));
   };
 
-  const token = useAppSelector(
-    (state) => state.persistedReducer.auth.access_token
-  );
 
   const handleAddToWishlist = async (productId: string, quantity: number) => {
     if (token) {
