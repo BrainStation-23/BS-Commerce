@@ -1,16 +1,15 @@
-import { Item } from 'src/entity/cart';
 import { CartService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { AddToCartRequestDto } from '../dto/addToCart.dto';
 import { deleteCartRequestDto } from '../dto/deleteCart.dto';
 import { updateCartItemRequestDto } from '../dto/updateCartItem.dto';
 import { deleteCartItemRequestDto } from '../dto/deleteCartItem.dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['customer']))
 @Resolver()
 export class CartResolver {
   constructor(private cartService: CartService) { }
