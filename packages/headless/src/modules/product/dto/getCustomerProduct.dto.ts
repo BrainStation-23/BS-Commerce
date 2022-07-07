@@ -7,7 +7,7 @@ import {
     GetCustomerProductErrorResponse,
     GetCustomerProductSuccessResponse,
 } from 'models';
-import { CustomerSingleProductDto } from './customerProduct.dto';
+import { CustomerProductDto } from './customerProduct.dto';
 
 export class GetCustomerProductParamsDto implements GetCustomerProductParams {
     @ApiProperty()
@@ -34,7 +34,7 @@ export class GetCustomerProductSuccessResponseDto implements GetCustomerProductS
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: () => CustomerSingleProductDto })
+    @ApiProperty({ type: () => CustomerProductDto })
     @IsObject()
-    data: CustomerSingleProductDto;
+    data: CustomerProductDto;
 }

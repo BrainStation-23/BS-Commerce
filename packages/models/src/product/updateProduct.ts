@@ -42,8 +42,14 @@ export interface UpdateProductPhoto {
     displayOrder?: number
 }
 
+export interface UpdateProductManufacture {
+    name?: string,
+    id?: string,
+}
+
 export interface UpdateProductCategory {
     id?: string,
+    name?: string,
     isFeatured?: boolean,
     displayOrder?: number
 }
@@ -54,6 +60,7 @@ export interface UpdateProductRequest {
     tags?: string[];
     photos?: UpdateProductPhoto[];
     brands?: string[],
+    manufacture?: UpdateProductManufacture,
     categories?: UpdateProductCategory[];
 }
 
