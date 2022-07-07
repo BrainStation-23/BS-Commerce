@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
+import { deleteComparedProduct } from 'toolkit/compareSlice';
 
 interface Props {
   setModal: Function;
@@ -12,7 +13,8 @@ const Modal: React.FC<Props> = ({ setModal }) => {
   const comparisonProducts = useAppSelector(
     (state) => state.persistedReducer.compare.productsToCompare
   );
-  console.log(comparisonProducts);
+
+  if(comparisonProducts.length === 0) return null;
 
   return (
     <>
@@ -43,7 +45,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                     </span>
                   </button>
                 </div>
-                <div className="relative flex-auto p-6">
+                <div className="flex-auto p-6">
                   <div className="flex flex-col">
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
@@ -64,7 +66,9 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         scope="col"
                                         className="border-r px-6 py-4 text-sm font-medium"
                                       >
-                                        <button>Remove</button>
+                                        <button onClick={() => {
+                                          dispatch( deleteComparedProduct(product.id) )
+                                        }}>Remove</button>
                                       </th>
                                     </React.Fragment>
                                   );
