@@ -67,7 +67,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,
-                        quantity: itemToUpdate.quantity - 1,
+                        quantity: itemToUpdate.quantity - 1 >= 0 ? itemToUpdate.quantity - 1 : 0
                       })
                     );
                     setTotal(total - data?.product?.info?.price!);

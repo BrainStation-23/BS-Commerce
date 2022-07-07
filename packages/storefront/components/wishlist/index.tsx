@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import Picture from '@/components/global/components/product/common/picture';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
-import WishlistProductInfo from './wishlistProduct';
+import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();

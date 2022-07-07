@@ -46,7 +46,7 @@ const ShowData = ({ data }: any) => {
                     });
                     dispatch(updateCartItem({
                       productId: itemToUpdate?.productId,
-                      quantity: itemToUpdate.quantity - 1,
+                      quantity: itemToUpdate.quantity - 1 >= 0 ? itemToUpdate.quantity - 1 : 0,
                     }));
                   }}
                 >
