@@ -18,6 +18,8 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -57,6 +59,12 @@ export async function getPublicProductsGraphql(): Promise<
 export async function getPublicProductByIdGraphql(
   productId: GetCustomerProductParams
 ): Promise<GetCustomerProductResponse | undefined> {
+  return undefined;
+}
+
+export async function getPublicProductByCategoryIDGraphql(
+  CategoryId: GetProductsByConditionQuery
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
   return undefined;
 }
 

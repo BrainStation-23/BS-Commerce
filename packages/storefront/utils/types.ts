@@ -18,6 +18,8 @@ import {
   updateCartItemRequest,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -90,6 +92,9 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  getPublicProductByCategoryId: (
+    CategoryId: GetProductsByConditionQuery, token: string
+  ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
 }
 
 export interface ProductStore {

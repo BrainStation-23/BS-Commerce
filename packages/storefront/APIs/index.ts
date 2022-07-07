@@ -2,6 +2,7 @@ import {
   forgotPasswordRest,
   getFeaturedProductsRest,
   getPublicProductByIdRest,
+  getPublicProductByCategoryIDRest,
   getPublicProductsRest,
   getSignedInUserRest,
   getUserRest,
@@ -15,6 +16,7 @@ import {
   getPublicProductsGraphql,
   getSignedInUserGraphql,
   getUserGraphQl,
+  getPublicProductByCategoryIDGraphql,
   signInGraphql,
   signUpGraphql,
 } from './graphQL';
@@ -29,6 +31,7 @@ const graphqlApi: apiFunction = {
   getUser: getUserGraphQl,
   getPublicProducts: getPublicProductsGraphql,
   getPublicProductsById: getPublicProductByIdGraphql,
+  getPublicProductByCategoryId: getPublicProductByCategoryIDGraphql,
   getFeaturedProducts: getFeaturedProductsGraphql,
 };
 
@@ -40,6 +43,7 @@ const restApi: apiFunction = {
   forgotPassword: forgotPasswordRest,
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
+  getPublicProductByCategoryId: getPublicProductByCategoryIDRest,
   getFeaturedProducts: getFeaturedProductsRest,
 };
 
