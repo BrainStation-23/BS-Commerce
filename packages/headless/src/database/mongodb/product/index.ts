@@ -7,7 +7,7 @@ import { ProductModel } from './product.model';
 export class ProductDatabase implements IProductDatabase {
 
   async findProduct(query: Record<string, any>): Promise<Product | null> {
-    return await ProductModel.findOne(query).lean();
+    return await ProductModel.findOne(query, '-_id').lean();
   }
 
   async createProduct(product: Product): Promise<Product | null> {
@@ -15,7 +15,10 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query).skip(skip).limit(limit).lean();
+    const products = await ProductModel.find(query).skip(skip).limit(limit).lean();
+
+    console.log(products);
+    return products;
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

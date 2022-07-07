@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { ProductCategoryDto, ProductDto, ProductInfoDto, ProductMetaDto, ProductPhotoDto } from './product.dto';
+import { ProductCategoryDto, ProductDto, ProductInfoDto, ProductManufactureDto, ProductMetaDto, ProductPhotoDto } from './product.dto';
 import {
     CreateProductRequest,
     CreateProductErrorResponse,
@@ -39,6 +39,11 @@ export class CreateProductDto implements CreateProductRequest {
     @IsOptional()
     @IsArray()
     brands?: [string];
+
+    @ApiProperty({ type: ProductManufactureDto })
+    @IsObject()
+    @CustomValidator(ProductManufactureDto)
+    manufacture: ProductManufactureDto;
 
     @ApiProperty({ type: [ProductCategoryDto] })
     @IsArray()

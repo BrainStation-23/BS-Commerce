@@ -1,12 +1,12 @@
 import { UseGuards } from "@nestjs/common";
 import { Query, Args, Resolver, Mutation } from "@nestjs/graphql";
-import { JwtAuthGuard } from "src/modules/auth/guards/auth.guard";
+import { RolesGuard } from "src/guards/auth.guard";
 import { createCategoryRequestDto } from "../dto/createCategory.dto";
 import { getCategoryRequestDto } from "../dto/getCategory.dto";
 import { getCategoryBySlugRequestDto } from "../dto/getCategoryBySlug.dto";
 import { CategoryService } from "../services";
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['admin']))
 @Resolver()
 export class CategoryResolver {
   constructor(private categoryService: CategoryService) { }
