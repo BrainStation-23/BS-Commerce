@@ -28,6 +28,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   return (
     <div className="bg-white rounded-full text-center drop-shadow-md p-2">
+      <Link href='/' passHref>
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +46,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           />
         </svg>
 
+
         <div className="absolute flex-col items-center hidden mb-6 peer-hover:flex -left-5 -top-7">
           <span className="z-10 p-2 text-sm leading-none text-white whitespace-no-wrap bg-zinc-900 shadow-lg rounded-md">
             Add to cart
@@ -52,6 +54,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           <div className="w-3 h-3 -mt-2 rotate-45 bg-zinc-900"></div>
         </div>
       </span>
+      </Link>
 
       <span>
         <svg
