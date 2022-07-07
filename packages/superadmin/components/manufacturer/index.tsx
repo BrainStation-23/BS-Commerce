@@ -1,14 +1,15 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { userAPI } from "../../APIs/index";
-import ManufacturerSearchWindow from "./SubComponents/searchWindow";
-import ManufactureList from "./List/manufactureList";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { userAPI } from '../../APIs/index';
+import ManufacturerSearchWindow from './SubComponents/searchWindow';
+import ManufactureList from './List/manufactureList';
+import Link from 'next/link';
 
 const List = () => {
   const [manufactureData, setManufactureData] = useState<any>();
   const getAllManufacturers = async () => {
     const res = await userAPI.getManufacturer(1000);
-    res ? setManufactureData(res) : "";
+    res ? setManufactureData(res) : '';
   };
   useEffect(() => {
     getAllManufacturers();
@@ -18,9 +19,9 @@ const List = () => {
       <main className="px-5">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Manufacturers</div>
-          <a className="btn btn-primary" href="/Manufacturer/add-new">
-            Add new
-          </a>
+          <Link href={'/Manufacturer/add-new'}>
+            <a className="btn btn-primary">Add new</a>
+          </Link>
         </div>
         <div>
           <ManufacturerSearchWindow />
@@ -32,7 +33,7 @@ const List = () => {
               setManufactureData={setManufactureData}
             />
           ) : (
-            "No data found"
+            'No data found'
           )}
         </div>
       </main>
