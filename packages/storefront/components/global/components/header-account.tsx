@@ -18,6 +18,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
   };
+  
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );

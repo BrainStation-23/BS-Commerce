@@ -2,10 +2,11 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
@@ -18,6 +19,11 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   product,
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -46,16 +52,21 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   };
 
   const toWishlist = async (id: string, quantity: number) => {
-    const data = {
-      productId: id,
-      quantity,
-    };
-    try {
-      await userAPI.addToWishList(data);
-      toast.success('Item added to wishlist');
-      setClicked(true);
-    } catch (error) {
-      toast.error('Failed to add item to wishlist');
+   if (token) {
+      const data = {
+        productId: id,
+        quantity,
+      };
+      try {
+        await userAPI.addToWishList(data);
+        toast.success('Item added to wishlist');
+      } catch (error) {
+        toast.error('Failed to add item to wishlist');
+      }
+    }
+    else {
+      toast.error('Please login to your account first.');
+      router.push('/account/sign-in')
     }
   };
 
