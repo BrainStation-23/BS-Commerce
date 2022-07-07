@@ -15,6 +15,10 @@ export class ProductRepository {
         return await this.db.findAllProducts(query, skip, limit);
     }
 
+    async getAllConditionalProducts(slug: string, orderBy: any, skip?: number, limit?: number): Promise<Product[]> {
+        return await this.db.getAllConditionalProducts(slug, orderBy, skip, limit);
+    }
+
     async createProduct(product: Product): Promise<Product | null> {
         product.id = randomUUID();
         return await this.db.createProduct(product);

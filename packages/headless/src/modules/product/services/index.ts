@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { SearchCondition, UpdateProduct } from 'src/entity/product';
+import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
 import { CreateProductDto } from '../dto/createProduct.dto';
 import {
@@ -96,12 +96,13 @@ export class ProductService {
   }
 
   async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
-    const { skip, limit, slug } = condition;
+    const { skip, limit, slug, orderBy } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
+    let products: Product[], count: number;
     if (slug) {
-      //dependent on category module
+      [products, count] = await Promise.all([await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit), await this.productRepo.getProductCount(query)]);
     }
-    const [products, count] = await Promise.all([await this.productRepo.findAllProducts(query, skip, limit), await this.productRepo.getProductCount(query)]);
+    [products, count] = await Promise.all([await this.productRepo.findAllProducts(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ products, count });
   }

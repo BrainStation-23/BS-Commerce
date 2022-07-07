@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Product, UpdateProduct } from 'src/entity/product';
 import { IProductDatabase } from 'src/modules/product/repositories/product.database.interface';
+import { CategoryModel } from '../category/category.model';
 import { ProductModel } from './product.model';
 
 @Injectable()
@@ -16,6 +17,12 @@ export class ProductDatabase implements IProductDatabase {
 
   async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
     return await ProductModel.find(query, '-_id').skip(skip).limit(limit).lean();
+  }
+
+  async getAllConditionalProducts(slug: string, orderBy: any, skip?: number, limit?: number): Promise<Product[] | []> {
+    const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
+    const categoryIdList = categories.map(category => { return category._id; });
+    return await ProductModel.find({ 'categories.id': { '$in': categoryIdList } }, '-_id').sort('info.' + orderBy).skip(skip).limit(limit).lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {
