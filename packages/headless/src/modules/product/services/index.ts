@@ -101,7 +101,7 @@ export class ProductService {
     if (slug) {
       //dependent on category module
     }
-    const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
+    const [products, count] = await Promise.all([await this.productRepo.findAllProducts(query, skip, limit), await this.productRepo.getProductCount(query)]);
     if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ products, count });
   }

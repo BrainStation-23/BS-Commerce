@@ -39,10 +39,6 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find({ id: { '$in': productIds } }).lean();
   }
 
-  async findProductsByCondition(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query).skip(skip).limit(limit).lean();
-  }
-
   async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
     return await ProductModel.find(query).sort(sortCondition).skip(skip).limit(limit).lean();
   }
