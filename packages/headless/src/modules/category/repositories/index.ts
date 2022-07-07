@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Category, responseCategory } from "src/entity/category";
+import { Category, RequestCategory, responseCategory } from "src/entity/category";
 import { ICategoryDatabase } from "./category.database.interface";
 
 @Injectable()
@@ -16,4 +16,7 @@ export class CategoryRepository {
   async getCategoryBySlug(slug: string): Promise<Category | null> {
     return await this.db.getCategoryBySlug(slug);
   }
+  async createCategory(category: RequestCategory): Promise<Category | null> {
+        return await this.db.createCategory(category);
+    }
 }
