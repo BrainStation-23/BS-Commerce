@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
+import { RolesGuard } from 'src/guards/auth.guard';
 import {
   CreateProductDto,
   CreateProductErrorResponseDto,
@@ -100,7 +100,7 @@ export class ProductController {
   }
 
   // Admin
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products')
   @ApiResponse({
@@ -121,7 +121,7 @@ export class ProductController {
   }
 
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/count')
   @ApiResponse({
@@ -140,7 +140,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/sku/:sku')
   @ApiParam({ name: 'sku' })
@@ -160,8 +160,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/condition')
   @ApiResponse({
@@ -183,7 +182,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -220,7 +219,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Delete('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -240,7 +239,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/brand')
   @ApiResponse({
@@ -260,7 +259,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/:productId')
   @ApiParam({ name: 'productId' })

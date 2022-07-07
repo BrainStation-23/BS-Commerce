@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNumber, IsObject, IsString } from "class-validator";
-import { Ancestor, Category, Meta, Photo } from "models";
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { Ancestor, Category, CategoryMeta, Photo } from "models";
 
 export class AncestorDto implements Ancestor {
     @ApiProperty()
@@ -17,22 +17,26 @@ export class AncestorDto implements Ancestor {
     level: number;
 }
 
-export class MetaDto implements Meta {
+export class CategoryMetaDto implements CategoryMeta {
     @ApiProperty()
+    @IsOptional()
     @IsArray()
-    keywords?: [string];
+    keywords?: string[];
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    description: string;
+    description?: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    title: string;
+    title?: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    SEFN: string;
+    SEFN?: string;
 }
 
 export class PhotoDto implements Photo {
@@ -95,8 +99,8 @@ export class CategoryDto implements Category {
     @IsArray()
     ancestors: AncestorDto[];
 
-    @ApiProperty({ type: MetaDto })
-    @Type(()=>MetaDto)
+    @ApiProperty({ type: CategoryMetaDto })
+    @Type(()=>CategoryMetaDto)
     @IsObject()
-    meta: MetaDto;
+    meta: CategoryMetaDto;
 }
