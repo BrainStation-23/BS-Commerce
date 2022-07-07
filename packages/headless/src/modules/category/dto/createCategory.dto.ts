@@ -2,7 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
 import { createCategoryErrorMessage, createCategoryErrorResponse, createCategoryRequest, createCategorySuccessResponse } from "models";
-import { CategoryDto, MetaDto, PhotoDto } from "./category.dto";
+import { CategoryDto, CategoryMetaDto, PhotoDto } from "./category.dto";
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { Type } from "class-transformer";
 export class createCategoryRequestDto implements createCategoryRequest {
@@ -53,12 +53,12 @@ export class createCategoryRequestDto implements createCategoryRequest {
     @IsNumber()
     displayOrder?: number;
 
-    @ApiProperty({ type: MetaDto })
-    @Type(() => MetaDto)
-    @CustomValidator(MetaDto)
+    @ApiProperty({ type: CategoryMetaDto })
+    @Type(() => CategoryMetaDto)
+    @CustomValidator(CategoryMetaDto)
     @IsOptional()
     @IsObject()
-    meta?: MetaDto;
+    meta?: CategoryMetaDto;
 }
 
 export class createCategorySuccessResponseDto implements createCategorySuccessResponse {

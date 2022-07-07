@@ -24,10 +24,11 @@ import {
 import { Response } from 'express';
 import { GetManufacturersErrorResponseDto, GetManufacturersQueryDto, GetManufacturersSuccessResponseDto } from '../dto/getManufacturers.dto';
 import { GetManufacturerErrorResponseDto, GetManufacturerSuccessResponseDto } from '../dto/getManufacturer.dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['admin']))
 export class ManufacturerController {
     constructor(
         private manufacturerService: ManufacturerService
