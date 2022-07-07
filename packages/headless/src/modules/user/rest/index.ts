@@ -18,7 +18,7 @@ import {
 
 @Controller('user')
 @ApiTags('Admin Profile API')
-@UseGuards(AuthGuard('jwt'), new RolesGuard(['admin']))
+@UseGuards(new RolesGuard(['admin']))
 @ApiBearerAuth()
 export class UserController {
   constructor(private userService: UserService) { }
