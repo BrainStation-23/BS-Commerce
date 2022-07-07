@@ -8,9 +8,9 @@ import { IShipmentDatabase } from './shipment.database.interface';
 export class ShipmentRepository {
     constructor( private readonly db: IShipmentDatabase ){}
 
-    async createShipment(shipmentRequest: Shipment): Promise<Shipment | null>{
+    async createShipment(newShipmentRequest: Shipment): Promise<Shipment | null>{
         const shipmentId = crypto.randomUUID();
-        const newShipment = {...shipmentRequest, shipmentId};
+        const newShipment = {...newShipmentRequest, shipmentId};
         return await this.db.createShipment(newShipment);
     }
 

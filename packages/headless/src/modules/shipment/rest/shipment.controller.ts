@@ -24,10 +24,10 @@ export class ShipmentController {
 
     @Post('/create')
     async createShipment(
-        @Body() shipmentRequest: Shipment,
+        @Body() newShipmentRequest: Shipment,
         @Res({ passthrough: true }) res: Response
     ){
-        const { code, ...response } = await this.shipmentService.createShipment(shipmentRequest);
+        const { code, ...response } = await this.shipmentService.createShipment(newShipmentRequest);
 
         res.status(code);
         return response;

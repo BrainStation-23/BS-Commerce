@@ -6,8 +6,8 @@ import { ShipmentModel } from './shipment.model';
 
 @Injectable()
 export class ShipmentDatabase implements IShipmentDatabase {
-    async createShipment(shipmentRequest: Shipment): Promise<Shipment | null>{
-        return await ShipmentModel.create(shipmentRequest);
+    async createShipment(newShipmentRequest: Shipment): Promise<Shipment | null>{
+        return await ShipmentModel.create(newShipmentRequest);
     }
 
 }
