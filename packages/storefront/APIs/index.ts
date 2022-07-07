@@ -1,4 +1,5 @@
 import {
+  checkoutRest,
   forgotPasswordRest,
   getFeaturedProductsRest,
   getPublicProductByIdRest,
@@ -41,6 +42,7 @@ const restApi: apiFunction = {
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
   getFeaturedProducts: getFeaturedProductsRest,
+  checkout: checkoutRest,
 };
 
 export const userAPI: apiFunction =

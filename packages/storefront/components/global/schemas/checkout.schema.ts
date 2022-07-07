@@ -10,7 +10,7 @@ export const informationSchema = object().shape({
   country: string().required('Select a country'),
   address: string().required('Enter an address'),
   addressOptional: string(),
-  city: string().required('Enter a citys'),
+  city: string().required('Enter a city name'),
   postalCode: string().matches(/^[0-9\+]*$/, 'This field only contains digits').required('This field must not be empty'),
 });
 

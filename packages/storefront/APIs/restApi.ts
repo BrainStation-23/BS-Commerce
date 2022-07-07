@@ -15,6 +15,8 @@ import {
   GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  IOrderCreateData,
+  IOrderResponseData,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -119,6 +121,22 @@ export async function getPublicProductByIdRest(
       `${apiEndPoints.getPublicProducts}/${productId}`
     );
     return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function checkoutRest(
+  data: any
+): Promise<IOrderResponseData | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}`, data, 
+    {
+      headers: {
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYwODcxZGVjLTA3MWQtNGE3Ni04ZWQ4LTc4MzgxMTdiODhjOCIsImVtYWlsIjoiYWFiYkBnbWFpbC5jb20iLCJwaG9uZSI6IjAxNzkzMTEwMjY4IiwibG9nSW5UaW1lIjoxNjU3MjIxNDM1NzE3LCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2NTcyMjE0MzUsImV4cCI6MTY1ODA4NTQzNX0.5VKxdRbQECcZOugQN3O1lXINiD_0h0vJMarONlyjysI"
+      }
+    });
+    return res.data;
   } catch (error: any) {
     return error;
   }

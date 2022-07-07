@@ -18,6 +18,7 @@ import {
   updateCartItemRequest,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  IOrderResponseData,
 } from 'models';
 
 export interface accordionBody {
@@ -90,6 +91,7 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  checkout: (data: any) => Promise<IOrderResponseData | undefined>;
 }
 
 export interface ProductStore {

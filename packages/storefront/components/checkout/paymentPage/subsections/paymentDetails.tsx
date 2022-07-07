@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
 import { useRouter } from 'next/router';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+import { userAPI } from 'APIs';
+import { deleteCart } from 'toolkit/cartSlice';
 
 interface FormData {
   cardNumber: string;
@@ -27,6 +29,27 @@ interface FormData {
 }
 
 const PaymentDetails: NextComponentType = () => {
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  let usableCart: any = [];
+
+  cartData.map((cartItem) => {
+    const cart = {
+      productId: cartItem?.productId,
+      name: cartItem?.product?.info?.name,
+      price: cartItem?.product?.info?.price,
+      quantity: cartItem?.quantity,
+      sku: cartItem?.product?.info?.sku,
+    };
+    usableCart.push(cart);
+  });
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price! * data.quantity;
+  }, 0);
+
   const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
   );
@@ -55,14 +78,60 @@ const PaymentDetails: NextComponentType = () => {
     {
       data ? dispatch(addToBillingInfo(data)) : null;
     }
-    {
-      router.push('/submit');
-    }
+    const obj = {
+      shippingCost: 0,
+      billingAddress: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: 'test@mail.com',
+        addressLine1: data.address,
+        addressLine2: data.addressOptional,
+        city: data.city,
+        country: data.country,
+        postCode: data.postalCode,
+        phoneNumber: shippingInfo?.contact,
+      },
+      shippingAddress: {
+        firstName: shippingInfo?.firstName,
+        lastName: shippingInfo?.lastName,
+        email: 'test@mail.com',
+        addressLine1: shippingInfo?.address,
+        addressLine2: shippingInfo?.addressOptional,
+        city: shippingInfo?.city,
+        country: shippingInfo?.country,
+        postCode: shippingInfo?.postalCode,
+        phoneNumber: shippingInfo?.contact,
+      },
+      shippingMethod: 'test',
+      paymentMethod: 'card',
+      productCost: totalCartPrice,
+      products: usableCart,
+      totalCost: totalCartPrice,
+      stripeToken: '',
+      stripeCustomerId: '',
+      stripeChargeId: '',
+      paypalPaymentId: '',
+      paypalRedirectUrl: '',
+    };
+    userAPI.checkout(obj);
+    router.push('/submit');
+    dispatch(deleteCart());
     dispatch(deleteCheckoutInfo());
   };
 
   const handleSameAddress = () => {
     setShowShippingForm(false);
+    dispatch(
+      addToBillingInfo({
+        firstName: shippingInfo?.firstName,
+        lastName: shippingInfo?.lastName,
+        country: shippingInfo?.country,
+        address: shippingInfo?.address,
+        addressOptional: shippingInfo?.addressOptional,
+        city: shippingInfo?.city,
+        postalCode: shippingInfo?.postalCode,
+      })
+    );
   };
 
   return (
@@ -122,7 +191,7 @@ const PaymentDetails: NextComponentType = () => {
                             Card Number
                           </label>
                           <div className="errMsg text-red-600">
-                              <ErrorMessage name="cardNumber" />
+                            <ErrorMessage name="cardNumber" />
                           </div>
                         </div>
                       </div>
@@ -143,7 +212,7 @@ const PaymentDetails: NextComponentType = () => {
                             Name on card
                           </label>
                           <div className="errMsg text-red-600">
-                              <ErrorMessage name="nameOnCard" />
+                            <ErrorMessage name="nameOnCard" />
                           </div>
                         </div>
                       </div>
@@ -166,7 +235,7 @@ const PaymentDetails: NextComponentType = () => {
                             </label>
                             <div className="errMsg text-red-600">
                               <ErrorMessage name="expirationDate" />
-                          </div>
+                            </div>
                           </div>
 
                           <div className="relative">
@@ -185,7 +254,7 @@ const PaymentDetails: NextComponentType = () => {
                             </label>
                             <div className="errMsg text-red-600">
                               <ErrorMessage name="securityCode" />
-                          </div>
+                            </div>
                           </div>
                         </div>
                       </div>
