@@ -2,13 +2,14 @@ import Link from 'next/link';
 
 import { useState } from 'react';
 import { NextComponentType } from 'next';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
 import { useRouter } from 'next/router';
+import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 
 interface FormData {
   cardNumber: string;
@@ -91,6 +92,7 @@ const PaymentDetails: NextComponentType = () => {
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
         }}
+        validationSchema={paymentSchema}
       >
         {(formikprops) => {
           return (
@@ -107,12 +109,11 @@ const PaymentDetails: NextComponentType = () => {
                       <div className="mb-3">
                         <div className="relative">
                           <Field
-                            type="number"
+                            type="text"
                             id="cardNumber"
                             name="cardNumber"
-                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
-                            required
                           />
                           <label
                             htmlFor={`cardNumber`}
@@ -120,6 +121,9 @@ const PaymentDetails: NextComponentType = () => {
                           >
                             Card Number
                           </label>
+                          <div className="errMsg text-red-600">
+                              <ErrorMessage name="cardNumber" />
+                          </div>
                         </div>
                       </div>
 
@@ -129,9 +133,8 @@ const PaymentDetails: NextComponentType = () => {
                             type="text"
                             id="nameOnCard"
                             name="nameOnCard"
-                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
-                            required
                           />
                           <label
                             htmlFor={`nameOnCard`}
@@ -139,6 +142,9 @@ const PaymentDetails: NextComponentType = () => {
                           >
                             Name on card
                           </label>
+                          <div className="errMsg text-red-600">
+                              <ErrorMessage name="nameOnCard" />
+                          </div>
                         </div>
                       </div>
 
@@ -149,9 +155,8 @@ const PaymentDetails: NextComponentType = () => {
                               type="month"
                               id="expirationDate"
                               name="expirationDate"
-                              className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
-                              required
                             />
                             <label
                               htmlFor={`expirationDate`}
@@ -159,6 +164,9 @@ const PaymentDetails: NextComponentType = () => {
                             >
                               Expiration Date (MM / YY)
                             </label>
+                            <div className="errMsg text-red-600">
+                              <ErrorMessage name="expirationDate" />
+                          </div>
                           </div>
 
                           <div className="relative">
@@ -166,9 +174,8 @@ const PaymentDetails: NextComponentType = () => {
                               type="text"
                               id="securityCode"
                               name="securityCode"
-                              className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
-                              required
                             />
                             <label
                               htmlFor={`securityCode`}
@@ -176,6 +183,9 @@ const PaymentDetails: NextComponentType = () => {
                             >
                               Security Code
                             </label>
+                            <div className="errMsg text-red-600">
+                              <ErrorMessage name="securityCode" />
+                          </div>
                           </div>
                         </div>
                       </div>
@@ -231,14 +241,16 @@ const PaymentDetails: NextComponentType = () => {
                               as="select"
                               id="country"
                               name="country"
-                              required
-                              className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                              className=" peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                             >
                               <option>Click here to select your country</option>
                               <option>New Mexico</option>
                               <option>Missouri</option>
                               <option>Texas</option>
                             </Field>
+                            {/* <div className="errMsg text-red-600">
+                              <ErrorMessage name="country" />
+                            </div> */}
                           </div>
 
                           <div className="row">
@@ -248,7 +260,7 @@ const PaymentDetails: NextComponentType = () => {
                                   type="text"
                                   id="firstName"
                                   name="firstName"
-                                  className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                  className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                 />
                                 <label
@@ -257,6 +269,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   First name (optional)
                                 </label>
+                                {/* <div className="errMsg text-red-600">
+                                  <ErrorMessage name="firstName" />
+                                </div> */}
                               </div>
 
                               <div className="relative">
@@ -266,7 +281,6 @@ const PaymentDetails: NextComponentType = () => {
                                   name="lastName"
                                   className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
-                                  required
                                 />
                                 <label
                                   htmlFor={`lastName`}
@@ -274,6 +288,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   Last name
                                 </label>
+                                {/* <div className="errMsg text-red-600">
+                                  <ErrorMessage name="lastName" />
+                                </div> */}
                               </div>
                             </div>
                           </div>
@@ -284,9 +301,8 @@ const PaymentDetails: NextComponentType = () => {
                                 type="text"
                                 id="address"
                                 name="address"
-                                className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
-                                required
                               />
                               <label
                                 htmlFor={`address`}
@@ -294,6 +310,9 @@ const PaymentDetails: NextComponentType = () => {
                               >
                                 Address
                               </label>
+                              {/* <div className="errMsg text-red-600">
+                                <ErrorMessage name="address" />
+                              </div> */}
                             </div>
                           </div>
 
@@ -312,6 +331,9 @@ const PaymentDetails: NextComponentType = () => {
                               >
                                 Apartment, suit, etc. (optional)
                               </label>
+                              {/* <div className="errMsg text-red-600">
+                                  <ErrorMessage name="addressOptional" />
+                              </div> */}
                             </div>
                           </div>
 
@@ -322,9 +344,8 @@ const PaymentDetails: NextComponentType = () => {
                                   type="text"
                                   id="city"
                                   name="city"
-                                  className={`required peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                  className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
-                                  required
                                 />
                                 <label
                                   htmlFor={`city`}
@@ -332,6 +353,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   City
                                 </label>
+                                {/* <div className="errMsg text-red-600">
+                                  <ErrorMessage name="city" />
+                                </div> */}
                               </div>
 
                               <div className="relative">
@@ -339,9 +363,8 @@ const PaymentDetails: NextComponentType = () => {
                                   type="text"
                                   id="postalCode"
                                   name="postalCode"
-                                  className={`required peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                  className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
-                                  required
                                 />
                                 <label
                                   htmlFor={`postalCode`}
@@ -349,6 +372,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   Postal Code
                                 </label>
+                                {/* <div className="errMsg text-red-600">
+                                  <ErrorMessage name="postalCode" />
+                                </div> */}
                               </div>
                             </div>
                           </div>

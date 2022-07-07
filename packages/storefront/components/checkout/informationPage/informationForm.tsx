@@ -1,9 +1,12 @@
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { Field, Form, Formik } from 'formik';
 import Link from 'next/link';
+
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToShippingInfo } from 'toolkit/checkoutSlice';
+import { informationSchema } from '@/components/global/schemas/checkout.schema';
+
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 
 interface FormData {
   contact: string;
@@ -70,6 +73,7 @@ const Information = (props: any) => {
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
+        validationSchema={informationSchema}
       >
         {(formikprops) => {
           return (
@@ -102,6 +106,9 @@ const Information = (props: any) => {
                       >
                         Email or mobile phone number
                       </label>
+                      <div className="errMsg text-red-600">
+                        <ErrorMessage name="contact" />
+                      </div>
                     </div>
                   </div>
 
@@ -140,6 +147,9 @@ const Information = (props: any) => {
                         <option>Missouri</option>
                         <option>Texas</option>
                       </Field>
+                      <div className="errMsg text-red-600">
+                        <ErrorMessage name="country" />
+                      </div>
                     </div>
 
                     <div className="row">
@@ -158,6 +168,9 @@ const Information = (props: any) => {
                           >
                             First name (optional)
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="firstName" />
+                          </div>
                         </div>
 
                         <div className="relative">
@@ -174,6 +187,9 @@ const Information = (props: any) => {
                           >
                             Last name
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="lastName" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -193,6 +209,9 @@ const Information = (props: any) => {
                         >
                           Address
                         </label>
+                        <div className="errMsg text-red-600">
+                          <ErrorMessage name="address" />
+                        </div>
                       </div>
                     </div>
 
@@ -211,6 +230,9 @@ const Information = (props: any) => {
                         >
                           Apartment, suit, etc. (optional)
                         </label>
+                        <div className="errMsg text-red-600">
+                          <ErrorMessage name="addressOptional" />
+                        </div>
                       </div>
                     </div>
 
@@ -230,6 +252,9 @@ const Information = (props: any) => {
                           >
                             City
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="city" />
+                          </div>
                         </div>
 
                         <div className="relative">
@@ -246,6 +271,9 @@ const Information = (props: any) => {
                           >
                             Postal Code
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="postalCode" />
+                          </div>
                         </div>
                       </div>
                     </div>
