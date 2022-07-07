@@ -311,3 +311,15 @@ export async function getCategoryBySlugRest(
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function getTagsRest(): Promise<
+  GetUserResponse | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints.tags}`);
+
+    return response?.data.data.categories as GetUserResponse;
+  } catch (error: any) {
+    console.error(error);
+  }
+}

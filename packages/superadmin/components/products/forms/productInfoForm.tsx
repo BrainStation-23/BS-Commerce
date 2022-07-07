@@ -1,38 +1,40 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import CustomSelect from "@/components/products/CustomSelect.component";
 import FieldTemplate from "@/components/products/forms/fieldTemplate";
+import { userAPI } from "APIs";
 
 const ProductInfoForm: FC = () => {
+  const [tags, setTags] = useState([]);
   const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
     if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
     else setBtnToggler("bi-plus-lg");
   };
-
-  const tagsOptions = [
-    {
-      label: "Tag1",
-      value: "Tag1",
-    },
-    {
-      label: "Tag2",
-      value: "Tag2",
-    },
-    {
-      label: "Tag3",
-      value: "Tag3",
-    },
-    {
-      label: "Tag4",
-      value: "Tag4",
-    },
-    {
-      label: "Tag5",
-      value: "Tag5",
-    },
-  ];
+  const tagsOptions: any = [];
+  // const tagsOptions = [
+  //   {
+  //     label: "Tag1",
+  //     value: "Tag1",
+  //   },
+  //   {
+  //     label: "Tag2",
+  //     value: "Tag2",
+  //   },
+  //   {
+  //     label: "Tag3",
+  //     value: "Tag3",
+  //   },
+  //   {
+  //     label: "Tag4",
+  //     value: "Tag4",
+  //   },
+  //   {
+  //     label: "Tag5",
+  //     value: "Tag5",
+  //   },
+  // ];
 
   const brandOptions = [
     {
@@ -60,6 +62,25 @@ const ProductInfoForm: FC = () => {
       value: "Ajkerdeal",
     },
   ];
+  const getTags = async () => {
+    const res = await userAPI.getTags();
+    console.log("====", res?.data);
+
+    res?.data ? setTags(res.data) : "";
+  };
+  const setTagsOptions = () => {
+    tags?.map((tag) => {
+      tagsOptions.push({
+        label: tag?.name,
+        value: tag?.name,
+      });
+    });
+  };
+
+  useEffect(() => {
+    getTags();
+    setTagsOptions();
+  }, []);
   return (
     <>
       <div

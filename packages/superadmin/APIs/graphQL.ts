@@ -11,6 +11,7 @@ import {
   Category,
   getCategoryBySlugRequest,
   getCategoryBySlugSuccessResponse,
+  GetUserResponse,
 } from "models";
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -59,5 +60,10 @@ export async function getCategoriesGraphQL(): Promise<Category[] | undefined> {
 export async function getCategoryBySlugGraphQL(
   slug: getCategoryBySlugRequest
 ): Promise<getCategoryBySlugSuccessResponse | undefined> {
+  return;
+}
+export async function getTagsGraphQL(): Promise<
+  GetUserResponse | undefined
+> {
   return;
 }

@@ -86,6 +86,7 @@ export interface apiFunction {
   getCategoryBySlug: (
     slug: getCategoryBySlugRequest
   ) => Promise<getCategoryBySlugResponse | undefined>;
+  getTags: () => Promise<GetUserResponse | undefined>;
 }
 
 export interface adminCreate {
