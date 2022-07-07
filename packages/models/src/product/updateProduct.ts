@@ -2,7 +2,7 @@
 import { DescriptiveError, ErrorResponse, Product, SuccessResponse } from "src/index";
 
 /**
- * API Path: /product/:productId
+ * API Path: /products/:productId
  * method: PATCH
  * body: UpdateProductRequest
  * response: UpdateProductResponse

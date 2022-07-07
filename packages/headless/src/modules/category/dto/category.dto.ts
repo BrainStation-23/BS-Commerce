@@ -1,15 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsBoolean, IsNumber, IsObject, IsString } from "class-validator";
-import { Ancestor, Category, Meta } from "models";
+import { Ancestor, Category, Meta, Photo } from "models";
 
 export class AncestorDto implements Ancestor {
     @ApiProperty()
-    @IsString()
+    @IsNumber()
     name: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     slug: string;
 
     @ApiProperty()
@@ -23,16 +23,26 @@ export class MetaDto implements Meta {
     keywords?: [string];
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     description: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     title: string;
 
     @ApiProperty()
-    @IsArray()
+    @IsString()
     SEFN: string;
+}
+
+export class PhotoDto implements Photo {
+    @ApiProperty()
+    @IsString()
+    url: string;
+
+    @ApiProperty()
+    @IsString()
+    alt: string;
 }
 
 export class CategoryDto implements Category {
@@ -53,8 +63,8 @@ export class CategoryDto implements Category {
     description: string;
 
     @ApiProperty()
-    @IsString()
-    imageId: string;
+    @IsObject()
+    photo: PhotoDto;
 
     @ApiProperty()
     @IsBoolean()
@@ -80,12 +90,13 @@ export class CategoryDto implements Category {
     @IsString()
     rootPath: string;
 
-    @ApiProperty({type: [AncestorDto]})
-    @Type(()=>AncestorDto)
+    @ApiProperty({ type: [AncestorDto] })
+    @Type(() => AncestorDto)
     @IsArray()
     ancestors: AncestorDto[];
 
     @ApiProperty({ type: MetaDto })
+    @Type(()=>MetaDto)
     @IsObject()
     meta: MetaDto;
 }

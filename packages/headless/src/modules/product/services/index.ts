@@ -25,6 +25,7 @@ import {
   UpdateProductsForBrandErrorMessages,
   GetCustomerAllProductsResponse,
   GetCustomerProductResponse,
+  GetCustomerAllHomePageProductsResponse,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -133,6 +134,12 @@ export class ProductService {
   async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, ...rest } = condition;
     const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
+    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
+    const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
     if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
