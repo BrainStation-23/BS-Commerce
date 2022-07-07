@@ -1,7 +1,7 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
-import { getCategoryBySlugErrorMessage, getCategoryBySlugErrorResponse, getCategoryBySlugRequest, getCategoryBySlugSuccessResponse, Meta } from "models";
+import { getCategoryBySlugErrorMessage, getCategoryBySlugErrorResponse, getCategoryBySlugRequest, getCategoryBySlugSuccessResponse } from "models";
 import { CategoryDto } from "./category.dto";
 
 export class getCategoryBySlugRequestDto implements getCategoryBySlugRequest {
