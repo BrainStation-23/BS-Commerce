@@ -15,14 +15,11 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    const products = await ProductModel.find(query).skip(skip).limit(limit).lean();
-
-    console.log(products);
-    return products;
+    return await ProductModel.find(query, '-_id').skip(skip).limit(limit).lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {
-    return await ProductModel.find(query).lean().count();
+    return await ProductModel.find(query, '-_id').lean().count();
   }
 
   async deleteProduct(productId: string): Promise<Product | null> {
@@ -43,6 +40,6 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
-    return await ProductModel.find(query).sort(sortCondition).skip(skip).limit(limit).lean();
+    return await ProductModel.find(query, '-_id').sort(sortCondition).skip(skip).limit(limit).lean();
   }
 }
