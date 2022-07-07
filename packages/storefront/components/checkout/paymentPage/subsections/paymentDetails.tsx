@@ -81,15 +81,15 @@ const PaymentDetails: NextComponentType = () => {
     const obj = {
       shippingCost: 0,
       billingAddress: {
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstName: data.firstName || shippingInfo?.firstName,
+        lastName: data.lastName || shippingInfo?.lastName,
         email: 'test@mail.com',
-        addressLine1: data.address,
-        addressLine2: data.addressOptional,
-        city: data.city,
-        country: data.country,
-        postCode: data.postalCode,
-        phoneNumber: shippingInfo?.contact,
+        addressLine1: data.address || shippingInfo?.address,
+        addressLine2: data.addressOptional || shippingInfo?.addressOptional,
+        city: data.city || shippingInfo?.city,
+        country: data.country || shippingInfo?.country,
+        postCode: data.postalCode || shippingInfo?.postalCode,
+        phoneNumber: shippingInfo?.contact || shippingInfo?.contact,
       },
       shippingAddress: {
         firstName: shippingInfo?.firstName,
