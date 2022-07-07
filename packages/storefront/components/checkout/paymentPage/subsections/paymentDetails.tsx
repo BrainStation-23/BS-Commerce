@@ -121,17 +121,6 @@ const PaymentDetails: NextComponentType = () => {
 
   const handleSameAddress = () => {
     setShowShippingForm(false);
-    dispatch(
-      addToBillingInfo({
-        firstName: shippingInfo?.firstName,
-        lastName: shippingInfo?.lastName,
-        country: shippingInfo?.country,
-        address: shippingInfo?.address,
-        addressOptional: shippingInfo?.addressOptional,
-        city: shippingInfo?.city,
-        postalCode: shippingInfo?.postalCode,
-      })
-    );
   };
 
   return (
