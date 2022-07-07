@@ -3,13 +3,9 @@ import { dbConfig } from 'config/database';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-<<<<<<< HEAD
 // import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { ShipmentDatabase as ShipmentDatabaseMongo } from './mongodb/shipment';
 import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
-import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
-=======
->>>>>>> c056cc9079d687d4d4bdc70fbb6f95a2433d03c4
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
