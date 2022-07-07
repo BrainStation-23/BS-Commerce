@@ -1,17 +1,20 @@
 // Mongodb dependency implementations
 import { dbConfig } from 'config/database';
-import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
-import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
+import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
+import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
+import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
+import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
+import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
+import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
 
 type CLASS_NAME =
-  'WISHLIST'
+  | 'WISHLIST'
   | 'USER'
   | 'PRODUCT'
   | 'MANUFACTURER'
@@ -19,7 +22,9 @@ type CLASS_NAME =
   | 'CART'
   | 'CUSTOMER_AUTH'
   | 'COMPARE'
-  | 'MEDIA';
+  | 'MEDIA'
+  | 'ORDER'
+  | 'TAGS';
 
 const db = dbConfig.db;
 
@@ -42,6 +47,12 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return CustomerDatabaseMongo;
           case 'CART':
             return CartDatabaseMongo;
+          case 'WISHLIST':
+            return WishListDatabaseMongo;
+          case 'ORDER':
+            return OrderDatabaseMongo;
+          case 'TAGS':
+            return TagsDatabaseMongo;
 
           default:
             break;
