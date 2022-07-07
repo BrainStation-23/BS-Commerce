@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { setModalState } from 'toolkit/modalSlice';
 
-const Modal = ({setModal}) => {
+interface Props {
+  setModal: Function;
+}
+const Modal: React.FC<Props> = ({ setModal }) => {
   const [showModal, setShowModal] = useState(setModal);
+  const dispatch = useAppDispatch();
+
+  const comparisonProducts = useAppSelector(
+    (state) => state.persistedReducer.compare.productsToCompare
+  );
+  console.log(comparisonProducts);
+
   return (
     <>
       {/* <button
@@ -14,56 +26,122 @@ const Modal = ({setModal}) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-3xl font-bold mr-3">Compare Product</h3>
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-auto">
+            <div className="relative my-6 mx-auto w-auto">
+              <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
+                <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
+                  <h3 className="mr-3 text-xl font-bold">Compare Product</h3>
                   <button
-                    className="bg-transparent border-1 text-black float-right"
-                    onClick={() => setShowModal(false)}
+                    className="border-1 float-right bg-transparent text-black"
+                    onClick={() => {
+                      setShowModal(false);
+                      dispatch(setModalState(false));
+                    }}
                   >
-                    <span className="text-white h-8 w-6 text-xl block bg-black">
+                    <span className="block h-8 w-8 bg-black text-xl text-white">
                       x
                     </span>
                   </button>
                 </div>
-                <div className="relative p-6 flex-auto">
+                <div className="relative flex-auto p-6">
                   <div className="flex flex-col">
-                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                      <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                    <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
+                      <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
                           <table className="min-w-full border text-center">
                             <thead className="border-b">
                               <tr>
                                 <th
                                   scope="col"
-                                  className="text-sm font-medium text-gray-900 px-6 py-4 border-r"
+                                  className="border-r px-6 py-4 text-sm font-medium"
                                 >
                                   Action
                                 </th>
-                                </tr>
+                                {comparisonProducts.map((product) => {
+                                  return (
+                                    <React.Fragment key={product.id}>
+                                      <th
+                                        scope="col"
+                                        className="border-r px-6 py-4 text-sm font-medium"
+                                      >
+                                        <button>Remove</button>
+                                      </th>
+                                    </React.Fragment>
+                                  );
+                                })}
+                              </tr>
                             </thead>
                             <tbody>
                               <tr className="border-b">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
-                                    Product name	
+                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                  Product name
                                 </td>
+                                {comparisonProducts.map((product) => {
+                                  return (
+                                    <React.Fragment key={product.id}>
+                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                        {product?.info?.name!}
+                                      </td>
+                                    </React.Fragment>
+                                  );
+                                })}
                               </tr>
-                              <tr className="bg-white border-b">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
-                                    Product image	
+                              <tr className="border-b bg-white">
+                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                  Product image
                                 </td>
+                                {comparisonProducts.map((product) => {
+                                  return (
+                                    <React.Fragment key={product.id}>
+                                      <td className="border-r p-6 font-medium">
+                                        <img
+                                          src={product?.photos[0]?.url}
+                                          alt={product?.info?.name}
+                                          height={100}
+                                          width={100}
+                                        />
+                                        {product?.info?.oldPrice ? (
+                                          <p className="text-sm font-bold text-red-600">
+                                            On Sale{' '}
+                                            <span className="font-normal">
+                                              ${product.info.price}
+                                            </span>
+                                          </p>
+                                        ) : (
+                                          <span className="text-red-600 font-normal">
+                                            ${product.info.price}
+                                          </span>
+                                        )}
+                                      </td>
+                                    </React.Fragment>
+                                  );
+                                })}
                               </tr>
-                              <tr className="bg-white border-b">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
-                                    Product description	
+                              <tr className="border-b bg-white">
+                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                  Product description
                                 </td>
+                                {comparisonProducts.map((product) => {
+                                  return (
+                                    <React.Fragment key={product.id}>
+                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                        {product?.meta?.description}
+                                      </td>
+                                    </React.Fragment>
+                                  );
+                                })}
                               </tr>
-                              <tr className="bg-white border-b">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
-                                    Availability		
+                              <tr className="border-b bg-white">
+                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                  Availability
                                 </td>
+                                {comparisonProducts.map((product) => {
+                                  return (
+                                    <React.Fragment key={product.id}>
+                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">Available In stock</td>
+                                    </React.Fragment>
+                                  );
+                                })}
                               </tr>
                             </tbody>
                           </table>
