@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean, MaxLength, IsDefined } from 'class-validator';
-import { Info } from 'models';
+import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
+import { BrandInfo } from 'models';
 
 
-export class InfoDto implements Info{
+export class InfoDto implements BrandInfo{
     @ApiProperty()
     @IsNotEmpty()
     @IsString()

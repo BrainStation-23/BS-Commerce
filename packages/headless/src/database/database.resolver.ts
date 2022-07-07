@@ -5,13 +5,13 @@ import { dbConfig } from 'config/database';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
 import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
+import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
 
