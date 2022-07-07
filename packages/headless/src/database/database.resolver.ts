@@ -1,11 +1,11 @@
 // Mongodb dependency implementations
+import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
+import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { dbConfig } from 'config/database';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
-import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';

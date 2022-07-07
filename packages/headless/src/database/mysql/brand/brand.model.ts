@@ -21,6 +21,4 @@ export default class BrandModel extends Model<Brand>{
    
     @HasOne(() => MetaModel)
     meta: MetaModel
-
-
 }
