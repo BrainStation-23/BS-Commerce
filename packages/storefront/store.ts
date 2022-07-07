@@ -6,18 +6,20 @@ import productsReducer from "./toolkit/ProductsSlice";
 import authReducer from "./toolkit/authSlice";
 import cartReducer from "toolkit/cartSlice";
 import userReducer from "toolkit/userSlice";
+import checkoutReducer from "toolkit/checkoutSlice";
 
 const reducers = combineReducers({
   product: productsReducer,
   auth: authReducer,
   cart: cartReducer,
   user: userReducer,
+  checkout: checkoutReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: ["cart", "auth", "user"],
+  whiteList: ["cart", "auth", "user", "checkout"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

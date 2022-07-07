@@ -1,44 +1,53 @@
-import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
-import { Field, Form, Formik } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { Field, Form, Formik } from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { addToShippingInfo } from 'toolkit/checkoutSlice';
 
 interface FormData {
-  contact: string
-    sendNotificationCheckbox: string
-    firstName: string
-    lastName: string
-    country: string
-    address: string
-    addressOptional: string
-    city: string
-    postalCode: string
-    saveInformationCheckbox: string
+  contact: string;
+  sendNotificationCheckbox: string;
+  firstName: string;
+  lastName: string;
+  country: string;
+  address: string;
+  addressOptional: string;
+  city: string;
+  postalCode: string;
+  saveInformationCheckbox: string;
 }
 
 const Information = (props: any) => {
+  const checkoutInfo = useAppSelector(
+    (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
+  const dispatch = useAppDispatch();
   const { setModal } = props;
   const initialValues = {
-    contact: "",
-    sendNotificationCheckbox: "",
-    firstName: "",
-    lastName: "",
-    country: "",
-    address: "",
-    addressOptional: "",
-    city: "",
-    postalCode: "",
-    saveInformationCheckbox: "",
+    contact: checkoutInfo?.contact,
+    sendNotificationCheckbox: '',
+    firstName: checkoutInfo?.firstName,
+    lastName: checkoutInfo?.lastName,
+    country: checkoutInfo?.country,
+    address: checkoutInfo?.address,
+    addressOptional: checkoutInfo?.addressOptional,
+    city: checkoutInfo?.city,
+    postalCode: checkoutInfo?.postalCode,
+    saveInformationCheckbox: '',
   };
 
   const router = useRouter();
 
   const handleCheckoutSubmit = (data: FormData) => {
+    dispatch(addToShippingInfo(data));
     const obj = {
       info: false,
       ship: true,
       pay: false,
-    }
+    };
     setModal(obj);
   };
 
@@ -70,7 +79,7 @@ const Information = (props: any) => {
                 <div className="flex flex-wrap justify-between">
                   <p className="text-lg">Contact Information</p>
 
-                  <div className="flex flex-wrap text-sm gap-1">
+                  <div className="flex flex-wrap gap-1 text-sm">
                     <p className="text-gray-500">Already have an account?</p>
                     <Link href="/account/sign-in" passHref>
                       <a className="text-decoration-none">Log in</a>
@@ -85,12 +94,12 @@ const Information = (props: any) => {
                         type="text"
                         id="contact"
                         name="contact"
-                        className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                        className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                         placeholder=" "
                       />
                       <label
                         htmlFor={`contact`}
-                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                        className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                       >
                         Email or mobile phone number
                       </label>
@@ -103,7 +112,7 @@ const Information = (props: any) => {
                         type="checkbox"
                         id="sendNotificationCheckbox"
                         name="sendNotificationCheckbox"
-                        className={`accent-black  w-4 h-4 border-2 border-black rounded focus:ring-3 focus:ring-blackhover:border-gray-300`}
+                        className={`focus:ring-3  focus:ring-blackhover:border-gray-300 h-4 w-4 rounded border-2 border-black accent-black`}
                         placeholder=" "
                       />
                       <label
@@ -125,7 +134,7 @@ const Information = (props: any) => {
                         as="select"
                         id="country"
                         name="country"
-                        className="required block rounded p-4 w-full text-sm text-gray-500  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer"
+                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                       >
                         <option>Click here to select your country</option>
                         <option>New Mexico</option>
@@ -135,18 +144,18 @@ const Information = (props: any) => {
                     </div>
 
                     <div className="row">
-                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                      <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">
                           <Field
                             type="text"
                             id="firstName"
                             name="firstName"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                           />
                           <label
                             htmlFor={`firstName`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             First name (optional)
                           </label>
@@ -157,12 +166,12 @@ const Information = (props: any) => {
                             type="text"
                             id="lastName"
                             name="lastName"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                           />
                           <label
                             htmlFor={`lastName`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Last name
                           </label>
@@ -176,12 +185,12 @@ const Information = (props: any) => {
                           type="text"
                           id="address"
                           name="address"
-                          className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                          className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                           placeholder=" "
                         />
                         <label
                           htmlFor={`address`}
-                          className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                          className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                         >
                           Address
                         </label>
@@ -194,12 +203,12 @@ const Information = (props: any) => {
                           type="text"
                           id="addressOptional"
                           name="addressOptional"
-                          className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                          className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                           placeholder=" "
                         />
                         <label
                           htmlFor={`addressOptional`}
-                          className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                          className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                         >
                           Apartment, suit, etc. (optional)
                         </label>
@@ -207,18 +216,18 @@ const Information = (props: any) => {
                     </div>
 
                     <div className="row mb-3">
-                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                      <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">
                           <Field
                             type="text"
                             id="city"
                             name="city"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                           />
                           <label
                             htmlFor={`city`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             City
                           </label>
@@ -229,12 +238,12 @@ const Information = (props: any) => {
                             type="text"
                             id="postalCode"
                             name="postalCode"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                           />
                           <label
                             htmlFor={`postalCode`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Postal Code
                           </label>
@@ -250,7 +259,7 @@ const Information = (props: any) => {
                       type="checkbox"
                       id="saveInformationCheckbox"
                       name="saveInformationCheckbox"
-                      className={`accent-black w-4 h-4 border-2 border-black rounded focus:ring-3 focus:ring-blackhover:border-gray-300`}
+                      className={`focus:ring-3 focus:ring-blackhover:border-gray-300 h-4 w-4 rounded border-2 border-black accent-black`}
                       placeholder=" "
                     />
                     <label
@@ -262,22 +271,24 @@ const Information = (props: any) => {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
+                <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   <button
                     type="submit"
-                    className="rounded text-sm p-5 my-2 w-full sm:w-full md:w-44 lg:w-44 xl:w-44 bg-black text-white"
+                    className="my-2 w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-44 lg:w-44 xl:w-44"
                   >
                     Continue to shipping
                   </button>
                   <div className="flex flex-wrap items-center">
-                    <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
-                    <Link href="/cart" passHref>
-                      <a className="text-decoration-none">{<ChevronLeft />}</a>
-                    </Link> 
+                    <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+                      <Link href="/cart" passHref>
+                        <a className="text-decoration-none">
+                          {<ChevronLeft />}
+                        </a>
+                      </Link>
                     </div>
                     <Link href="/cart" passHref>
                       <a className="text-decoration-none">Return to cart</a>
-                    </Link>                   
+                    </Link>
                   </div>
                 </div>
               </Form>

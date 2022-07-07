@@ -1,11 +1,14 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { useState } from "react";
-import { NextComponentType } from "next";
-import { Field, Form, Formik } from "formik";
+import { useState } from 'react';
+import { NextComponentType } from 'next';
+import { Field, Form, Formik } from 'formik';
 
-import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
-import CreditCard from "@/components/global/icons-for-checkout-page/credit-card";
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
+import { useAppDispatch } from 'customHooks/hooks';
+import { addToBillingInfo } from 'toolkit/checkoutSlice';
+import { useRouter } from 'next/router';
 
 interface FormData {
   cardNumber: string;
@@ -23,30 +26,38 @@ interface FormData {
 }
 
 const PaymentDetails: NextComponentType = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const initialValues = {
-    cardNumber: "",
-    nameOnCard: "",
-    expirationDate: "",
-    securityCode: "",
-    shippingAddressPicked: "",
-    firstName: "",
-    lastName: "",
-    country: "",
-    address: "",
-    addressOptional: "",
-    city: "",
-    postalCode: "",
+    cardNumber: '',
+    nameOnCard: '',
+    expirationDate: '',
+    securityCode: '',
+    shippingAddressPicked: '',
+    firstName: '',
+    lastName: '',
+    country: '',
+    address: '',
+    addressOptional: '',
+    city: '',
+    postalCode: '',
   };
 
   const [showShippingForm, setShowShippingForm] = useState(false);
 
   const handlePaymentSubmit = (data: FormData) => {
+    {
+      data ? dispatch(addToBillingInfo(data)) : null;
+    }
+    {
+      router.push('/submit');
+    }
   };
 
   return (
     <>
-      <p className="text-lg mt-5">Payment</p>
+      <p className="mt-5 text-lg">Payment</p>
       <p className="text-sm text-gray-500">
         All transactions are secure and encrypted.
       </p>
@@ -77,8 +88,8 @@ const PaymentDetails: NextComponentType = () => {
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 {/* credit card info div */}
-                <div className="border border-gray-300 rounded mt-5">
-                  <div className="flex flex-wrap justify-between items-center p-4 border-b-1">
+                <div className="mt-5 rounded border border-gray-300">
+                  <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
                     <p className="text-sm font-semibold">Credit card</p>
                     <CreditCard />
                   </div>
@@ -90,13 +101,13 @@ const PaymentDetails: NextComponentType = () => {
                             type="number"
                             id="cardNumber"
                             name="cardNumber"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                             required
                           />
                           <label
                             htmlFor={`cardNumber`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Card Number
                           </label>
@@ -109,13 +120,13 @@ const PaymentDetails: NextComponentType = () => {
                             type="text"
                             id="nameOnCard"
                             name="nameOnCard"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
                             required
                           />
                           <label
                             htmlFor={`nameOnCard`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Name on card
                           </label>
@@ -123,19 +134,19 @@ const PaymentDetails: NextComponentType = () => {
                       </div>
 
                       <div className="row">
-                        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                        <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                           <div className="relative">
                             <Field
                               type="month"
                               id="expirationDate"
                               name="expirationDate"
-                              className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                              className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
                               required
                             />
                             <label
                               htmlFor={`expirationDate`}
-                              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                             >
                               Expiration Date (MM / YY)
                             </label>
@@ -146,13 +157,13 @@ const PaymentDetails: NextComponentType = () => {
                               type="text"
                               id="securityCode"
                               name="securityCode"
-                              className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                              className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
                               required
                             />
                             <label
                               htmlFor={`securityCode`}
-                              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                             >
                               Security Code
                             </label>
@@ -165,22 +176,22 @@ const PaymentDetails: NextComponentType = () => {
 
                 {/* billing div */}
                 <div>
-                  <p className="text-lg mt-5">Billing address</p>
+                  <p className="mt-5 text-lg">Billing address</p>
                   <p className="text-sm text-gray-500">
                     Select the address that matches your card or payment method.
                   </p>
-                  <div className="border border-gray-300 rounded mt-5 py-4">
+                  <div className="mt-5 rounded border border-gray-300 py-4">
                     <div
                       role="group"
                       aria-labelledby="my-radio-group"
-                      className="items-center font-semibold text-sm"
+                      className="items-center text-sm font-semibold"
                     >
                       <label>
                         <Field
                           type="radio"
                           name="shippingAddressPicked"
                           value="sameShippingAddress"
-                          className="mb-4 mx-4 checked:accent-black"
+                          className="mx-4 mb-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(false);
                           }}
@@ -193,7 +204,7 @@ const PaymentDetails: NextComponentType = () => {
                           type="radio"
                           name="shippingAddressPicked"
                           value="differentShippingAddress"
-                          className="mt-4 mx-4 checked:accent-black"
+                          className="mx-4 mt-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
                           }}
@@ -211,7 +222,7 @@ const PaymentDetails: NextComponentType = () => {
                               id="country"
                               name="country"
                               required
-                              className="required block rounded p-4 w-full text-sm text-gray-500  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer"
+                              className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                             >
                               <option>Click here to select your country</option>
                               <option>New Mexico</option>
@@ -221,18 +232,18 @@ const PaymentDetails: NextComponentType = () => {
                           </div>
 
                           <div className="row">
-                            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                            <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                               <div className="relative">
                                 <Field
                                   type="text"
                                   id="firstName"
                                   name="firstName"
-                                  className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                 />
                                 <label
                                   htmlFor={`firstName`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   First name (optional)
                                 </label>
@@ -243,13 +254,13 @@ const PaymentDetails: NextComponentType = () => {
                                   type="text"
                                   id="lastName"
                                   name="lastName"
-                                  className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`lastName`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   Last name
                                 </label>
@@ -263,13 +274,13 @@ const PaymentDetails: NextComponentType = () => {
                                 type="text"
                                 id="address"
                                 name="address"
-                                className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
                                 required
                               />
                               <label
                                 htmlFor={`address`}
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                               >
                                 Address
                               </label>
@@ -282,12 +293,12 @@ const PaymentDetails: NextComponentType = () => {
                                 type="text"
                                 id="addressOptional"
                                 name="addressOptional"
-                                className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
                               />
                               <label
                                 htmlFor={`addressOptional`}
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                               >
                                 Apartment, suit, etc. (optional)
                               </label>
@@ -295,19 +306,19 @@ const PaymentDetails: NextComponentType = () => {
                           </div>
 
                           <div className="row mb-3">
-                            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                            <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                               <div className="relative">
                                 <Field
                                   type="text"
                                   id="city"
                                   name="city"
-                                  className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`required peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`city`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   City
                                 </label>
@@ -318,13 +329,13 @@ const PaymentDetails: NextComponentType = () => {
                                   type="text"
                                   id="postalCode"
                                   name="postalCode"
-                                  className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`required peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`postalCode`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   Postal Code
                                 </label>
@@ -336,15 +347,19 @@ const PaymentDetails: NextComponentType = () => {
                     )}
                   </div>
                 </div>
-                <div className="mt-5 mb-10 flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
+                <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
+                  {/* <Link href="/submit" passHref> */}
                   <button
                     type="submit"
-                    className="rounded text-sm p-5 w-full sm:w-full md:w-24 lg:w-24 xl:w-24 bg-black text-white"
+                    className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
+                    // onClick={() => {router.push('/submit')}}
                   >
                     Pay now
                   </button>
+                  {/* </Link> */}
+
                   <div className="flex flex-wrap items-center">
-                    <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+                    <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       {/* need to change the link */}
                       <Link href="/cart" passHref>
                         <a className="text-decoration-none">
