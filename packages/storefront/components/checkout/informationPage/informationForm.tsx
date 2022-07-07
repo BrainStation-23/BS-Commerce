@@ -280,7 +280,7 @@ const Information = (props: any) => {
                   </div>
                 </div>
 
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <div className="relative">
                     <Field
                       type="checkbox"
@@ -296,7 +296,7 @@ const Information = (props: any) => {
                       Save this information for next time
                     </label>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   <button
