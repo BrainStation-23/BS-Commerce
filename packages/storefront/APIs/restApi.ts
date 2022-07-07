@@ -16,6 +16,8 @@ import {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
   getCategoryListSuccessResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -43,8 +45,7 @@ export async function getSignedInUserRest(
 ): Promise<GetCustomerResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getSignedInUser}${
-        isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
+      `${apiEndPoints.getSignedInUser}${isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
       }`
     );
     return res.data;
@@ -132,6 +133,22 @@ export async function getCategoryListRest(): Promise<getCategoryListSuccessRespo
       `${apiEndPoints.getCatagoryList}`
     );
     return res.data.data as getCategoryListSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getPublicProductByCategoryIDRest(
+  CategoryId: GetProductsByConditionQuery, token: string
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getProducts}/condition?categoryId=${CategoryId}`,
+      {
+        headers: { Authorization: `Bearer ${token?.token}` }
+      }
+    );
+    return res.data.data.products;
   } catch (error: any) {
     return error;
   }

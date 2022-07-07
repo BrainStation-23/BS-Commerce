@@ -1,6 +1,11 @@
-import SingleView from "../singleView";
+import { FC } from "react";
 
-const ProductInfoCard = (props: any) => {
+import { Product } from "models";
+import SingleView from "@/components/products/singleView";
+interface MetaCardInterface {
+  product: Product;
+}
+const ProductInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
   const { product } = props;
 
   return (
@@ -10,68 +15,36 @@ const ProductInfoCard = (props: any) => {
         data-card-name="product-info"
         id="product-info"
       >
-        <div className="card-header with-border d-flex justify-content-between align-items-center"> 
-         <div className="card-title row align-items-center pt-2 ps-2">
-          <i
-            className="bi bi-info-lg align-text-top col-1"
-            style={{ fontSize: "25px" }}
+        <div className="card-header with-border d-flex justify-content-between align-items-center">
+          <div className="card-title row align-items-center ps-2 pt-2">
+            <i
+              className="bi bi-info-lg col-1 align-text-top"
+              style={{ fontSize: "25px" }}
             />
-          <div className="px-3 fs-5 col text-start">Product info</div>
+            <div className="fs-5 col px-3 text-start">Product info</div>
+          </div>
         </div>
-            </div>
         <div className="" id="prouctInfoTab">
           <div className="card-body">
-            <SingleView
-              label="Product name"
-              value={product?.info?.name}
-              toolkitMessage="toolkitMessage"
-            />
+            <SingleView label="Product name" value={product?.info?.name} />
             <SingleView
               label="Short description"
               value={product?.info?.shortDescription}
-              toolkitMessage="toolkitMessage"
             />
             <SingleView
               label="Full description"
               value={product?.info?.fullDescription}
-              toolkitMessage="toolkitMessage"
             />
-            <SingleView
-              label="SKU"
-              value={product?.info?.sku}
-              toolkitMessage="toolkitMessage"
-            />
-            <SingleView
-              label="Price"
-              value={product?.info?.price}
-              toolkitMessage="toolkitMessage"
-            />
-            <SingleView
-              label="Old price"
-              value={product?.info?.oldPrice}
-              toolkitMessage="toolkitMessage"
-            />
+            <SingleView label="SKU" value={product?.info?.sku} />
+            <SingleView label="Price" value={product?.info?.price} />
+            <SingleView label="Old price" value={product?.info?.oldPrice} />
+            <SingleView label="Product cost" value={product?.info?.cost} />
             <SingleView
               label="Publish Date"
-              value={product?.info?.cost}
-              toolkitMessage="toolkitMessage"
-            />
-            <SingleView
-              label="Product cost"
               value={product?.info?.publishDate}
-              toolkitMessage="toolkitMessage"
             />
-
-            <SingleView
-              label="Tags"
-              value={product?.tags}
-              toolkitMessage="toolkitMessage"
-            />
-            <SingleView
-              label="Brands"
-              value={product?.brands}
-              toolkitMessage="toolkitMessage"
-            />
+            <SingleView label="Tags" value={product?.tags} />
+            <SingleView label="Brands" value={product?.brands} />
           </div>
         </div>
       </div>

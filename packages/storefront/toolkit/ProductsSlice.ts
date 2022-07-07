@@ -5,11 +5,13 @@ import { ProductStore } from "../utils/types";
 export interface productsState {
   publicProducts: CustomerProduct[];
   featuredProducts: CustomerProduct[];
+  categorizedProduct: Product[];
 }
 
 const initialState: productsState = {
   publicProducts: [],
   featuredProducts: [],
+  categorizedProduct: []
 };
 
 export const productsSlice = createSlice({
@@ -28,9 +30,15 @@ export const productsSlice = createSlice({
     ) => {
       state.featuredProducts = action.payload;
     },
+    storeCategorizedProduct: (
+      state: productsState,
+      action: PayloadAction<Product[]>
+    ) => {
+      state.categorizedProduct = action.payload;
+    },
   },
 });
 
-export const { storeProducts, storeFeaturedProducts } = productsSlice.actions;
+export const { storeProducts, storeFeaturedProducts, storeCategorizedProduct } = productsSlice.actions;
 
 export default productsSlice.reducer;
