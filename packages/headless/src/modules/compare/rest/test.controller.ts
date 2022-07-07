@@ -15,7 +15,6 @@ import { CompareDataDto, CompareResponse } from '../dto/test.dto';
 import { CompareTestService } from '../services/test.service';
 
 @ApiTags('Test purpose - Comparison API')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('test-purpose/compare')

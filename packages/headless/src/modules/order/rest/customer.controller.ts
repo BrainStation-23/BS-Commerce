@@ -3,15 +3,15 @@ import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { OrderEntity } from 'src/entity/order';
 import { User } from 'src/entity/user';
+import { RolesGuard } from 'src/guards/auth.guard';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { CreateOrderDto } from '../dto/order.create.dto';
 import { OrderData, OrderResponseDto } from '../dto/order.response.dto';
 import { OrderCustomerService } from '../services/customer.service';
 
 @ApiTags('Order - Customer API')
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['customer']))
 @ApiBearerAuth()
 @Controller('auth/order')
 export class OrderCustomerController {
