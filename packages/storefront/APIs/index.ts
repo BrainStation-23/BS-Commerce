@@ -7,6 +7,7 @@ import {
   getUserRest,
   signinRest,
   signUpRest,
+  getCategoryListRest,
 } from './restApi';
 import {
   forgotPasswordGraphql,
@@ -17,6 +18,7 @@ import {
   getUserGraphQl,
   signInGraphql,
   signUpGraphql,
+  getCategoryListGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -30,6 +32,7 @@ const graphqlApi: apiFunction = {
   getPublicProducts: getPublicProductsGraphql,
   getPublicProductsById: getPublicProductByIdGraphql,
   getFeaturedProducts: getFeaturedProductsGraphql,
+  getCategoryList: getCategoryListGraphql,
 };
 
 const restApi: apiFunction = {
@@ -41,6 +44,7 @@ const restApi: apiFunction = {
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
   getFeaturedProducts: getFeaturedProductsRest,
+  getCategoryList: getCategoryListRest,
 };
 
 export const userAPI: apiFunction =

@@ -15,6 +15,7 @@ import {
   GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  getCategoryListResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -117,6 +118,17 @@ export async function getPublicProductByIdRest(
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}/${productId}`
+    );
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryListRest(): Promise<getCategoryListResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCatagoryList}`
     );
     return res.data.data;
   } catch (error: any) {

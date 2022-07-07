@@ -1,14 +1,27 @@
+
 import Link from "next/link";
 
 import { useRouter } from "next/router";
-import type { NextComponentType } from "next";
+import type { NextComponentType, GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 
+import { getCategoryList } from "models";
 import Currency from "@/components/global/components/currency";
 import HeaderAccount from "@/components/global/components/header-account";
 import Language from "@/components/global/components/languages";
 import Search from "@/components/global/components/search";
+import { userAPI } from "APIs";
 
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await userAPI.getCategoryList();
+  console.log(res);
+  return {
+    props: {
+      menuItems: res,
+    },
+  };
+}
 interface menuLink {
   name: string;
   link: string;
