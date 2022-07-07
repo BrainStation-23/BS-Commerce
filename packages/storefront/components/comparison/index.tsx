@@ -26,8 +26,8 @@ const Modal: React.FC<Props> = ({ setModal }) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-auto">
-            <div className="relative my-6 mx-auto w-auto">
+          <div className="fixed mt-5 inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-auto">
+            <div className="relative my-6 mx-auto overflow-auto">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
                   <h3 className="mr-3 text-xl font-bold">Compare Product</h3>
@@ -46,9 +46,9 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                 <div className="relative flex-auto p-6">
                   <div className="flex flex-col">
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
-                      <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                      <div className="inline-block py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
-                          <table className="min-w-full border text-center">
+                          <table className="border text-center">
                             <thead className="border-b">
                               <tr>
                                 <th
@@ -73,13 +73,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                             </thead>
                             <tbody>
                               <tr className="border-b">
-                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                <td className="border-r px-6 py-4 text-sm font-medium">
                                   Product name
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                      <td className="border-r px-6 py-4 text-sm font-medium">
                                         {product?.info?.name!}
                                       </td>
                                     </React.Fragment>
@@ -87,7 +87,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 })}
                               </tr>
                               <tr className="border-b bg-white">
-                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                <td className="border-r px-6 py-4 text-sm font-medium">
                                   Product image
                                 </td>
                                 {comparisonProducts.map((product) => {
@@ -118,13 +118,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 })}
                               </tr>
                               <tr className="border-b bg-white">
-                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                <td className="border-r px-6 py-4 text-sm font-medium">
                                   Product description
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                      <td className="border-r px-6 py-4 text-sm font-medium">
                                         {product?.meta?.description}
                                       </td>
                                     </React.Fragment>
@@ -132,13 +132,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 })}
                               </tr>
                               <tr className="border-b bg-white">
-                                <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">
+                                <td className="border-r px-6 py-4 text-sm font-medium">
                                   Availability
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="whitespace-nowrap border-r px-6 py-4 text-sm font-medium">Available In stock</td>
+                                      <td className="border-r px-6 py-4 text-sm font-medium">Available In stock</td>
                                     </React.Fragment>
                                   );
                                 })}
