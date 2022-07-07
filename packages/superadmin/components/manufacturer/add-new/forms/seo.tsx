@@ -1,15 +1,15 @@
-import { FC } from "react";
-import { ErrorMessage, Field } from "formik";
-import { useState } from "react";
-import Tooltips from "../../../global/tooltip";
-import CustomSelect from "./customSelect";
+import { FC } from 'react';
+import { ErrorMessage, Field } from 'formik';
+import { useState } from 'react';
+import Tooltips from '../../../global/tooltip';
+import CustomSelect from './customSelect';
 const SEO: FC = () => {
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
   const [checkboxToggler, setCheckboxToggler] = useState(false);
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
 
   const isCheckboxChecked = () => {
@@ -18,24 +18,24 @@ const SEO: FC = () => {
   };
   const keywordOptions = [
     {
-      label: "Manufacturer A",
-      value: "Manufacturer A",
+      label: 'Manufacturer A',
+      value: 'Manufacturer A',
     },
     {
-      label: "Manufacturer B",
-      value: "Manufacturer B",
+      label: 'Manufacturer B',
+      value: 'Manufacturer B',
     },
     {
-      label: "Manufacturer C",
-      value: "Manufacturer C",
+      label: 'Manufacturer C',
+      value: 'Manufacturer C',
     },
     {
-      label: "Manufacturer D",
-      value: "Manufacturer D",
+      label: 'Manufacturer D',
+      value: 'Manufacturer D',
     },
     {
-      label: "Manufacturer E",
-      value: "Manufacturer E",
+      label: 'Manufacturer E',
+      value: 'Manufacturer E',
     },
   ];
   return (
@@ -58,7 +58,7 @@ const SEO: FC = () => {
             <div className="card-title row align-items-center visible">
               <i
                 className="bi bi-search fill col-1"
-                style={{ fontSize: "25px" }}
+                style={{ fontSize: '25px' }}
               />
               <div className="fs-5 col px-3 text-start">SEO</div>
               <div className="col-1">
@@ -108,7 +108,7 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                    className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                     id="metaDescription"
                     name="metaDescription"
                   />
@@ -134,7 +134,7 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                    className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                     id="metaTitle"
                     name="metaTitle"
                   />
@@ -160,7 +160,7 @@ const SEO: FC = () => {
                 <div className="input-group pe-3 ">
                   <Field
                     type="text"
-                    className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                    className="border-bottom form-control rounded-0 border-2 border border-0 shadow-none"
                     id="seftn"
                     name="seftn"
                   />

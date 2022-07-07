@@ -1,9 +1,10 @@
-import { FC, useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { userAPI } from "../../../APIs";
-import ManufacturerInfoCard from "./viewCards/manufacturerInfo";
-import DisplayOrderCard from "./viewCards/displayOrder";
-import SeoCard from "./viewCards/seo";
+import { FC, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { userAPI } from '../../../APIs';
+import ManufacturerInfoCard from './viewCards/manufacturerInfo';
+import DisplayOrderCard from './viewCards/displayOrder';
+import SeoCard from './viewCards/seo';
+import Link from 'next/link';
 interface Props {
   manufacturer: any;
 }
@@ -16,10 +17,12 @@ const ViewManufacturerComp: FC<Props> = ({ manufacturer }) => {
             <h1 className="float-start">
               View Manufacturer details
               <span className="fs-5 p-3">
-                <a href="/Manufacturer" className="text-decoration-none ">
-                  <i className="bi bi-arrow-left-circle-fill p-2" />
-                  Back to Manufacturer list
-                </a>
+                <Link href={'/Manufacturer'}>
+                  <a className="text-decoration-none">
+                    <i className="bi bi-arrow-left-circle-fill p-2" />
+                    Back to Manufacturer list
+                  </a>
+                </Link>
               </span>
             </h1>
           </div>
@@ -31,7 +34,7 @@ const ViewManufacturerComp: FC<Props> = ({ manufacturer }) => {
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
   );
