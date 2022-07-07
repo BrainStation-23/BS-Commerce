@@ -14,6 +14,8 @@ import {
   GetProductParams,
   CreateProductRequest,
   UpdatedUserRequest,
+  createCategoryRequest,
+  createCategorySuccessResponse,
 } from 'models';
 
 export interface User {
@@ -58,6 +60,10 @@ export interface apiFunction {
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  createCategory: (
+    data: createCategoryRequest,
+    router: NextRouter
+  ) => Promise<createCategorySuccessResponse | undefined>;
   getCategory: (
     id: getCategoryRequest
   ) => Promise<getCategorySuccessResponse | undefined>;
