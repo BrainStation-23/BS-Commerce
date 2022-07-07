@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNotEmptyObject, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Brand } from 'models';
-
-import { InfoDto, MetaDto } from './createBrandDto';
+import { InfoDto } from './infoDto';
+import { MetaDto } from './metaDto';
 
 export class BrandDto implements Brand{
     @ApiProperty()

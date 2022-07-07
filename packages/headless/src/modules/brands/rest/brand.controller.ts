@@ -13,10 +13,13 @@ import {
 import { Response } from 'express';
 import { ApiResponse } from '@nestjs/swagger';
 
-import { Brand } from '../../../entity/brand';
+import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services/index';
-import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto } from '../dto/createBrandDto';
-import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from '../dto/getAllBrandsDto';
+import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/dto/getBrandByIdDto';
+import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto } from 'src/modules/brands/dto/createBrandDto';
+import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
+import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
 
 @Controller('brands')
 export class BrandController {
@@ -45,6 +48,16 @@ export class BrandController {
   }
 
   @Get('/:id')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Requested brand was fetched successfully',
+    type: GetBrandByIdSuccessResponseDto
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Brand could not be fetched ',
+    type: GetBrandByIdErrorResponseDto
+  })
   async getBrand(
     @Param('id') brandId: string,
     @Res({ passthrough: true }) res: Response,
@@ -79,19 +92,29 @@ export class BrandController {
   @Put('/:id')
   async updateBrand(
     @Param('id') brandId: string,
-    @Body() featuresToUpdate: Brand,
+    @Body() featuresToUpdate: UpdateBrandRequestdto,
     @Res({ passthrough: true })
     res: Response,
   ) {
-    const { code, ...response } = await this.brandService.updateBrandById(
+    const response = await this.brandService.updateBrandById(
       brandId,
       featuresToUpdate,
     );
 
-    res.status(code);
+    res.status(response.code);
     return response;
   }
-
+  
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Brand was deleted successfully',
+    type: DeleteBrandSuccessResponseDto
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Brand could not be deleted ',
+    type: DeleteBrandErrorResponseDto
+  })
   @Delete('/:id')
   async deleteBrandById(
     @Param('id') brandId: string,

@@ -1,29 +1,24 @@
+
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as crypto from 'crypto';
-import { ErrorMessage } from "models";
+import { ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate } from "models";
 
-import { BrandCreateSchema } from './../validators/brand.create.validator';
-import { Helper } from 'src/helper/helper.interface';
-import { ServiceErrorResponse, ServiceSuccessResponse } from 'src/helper/serviceResponse/service.response.interface';
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
-import { CreateBrandRequestDto, CreateBrandResponseDto } from './../dto/createBrandDto';
-import { GetAllBrandsResponseDto } from "../dto/getAllBrandsDto";
+import { CreateBrandRequestDto, CreateBrandResponseDto } from 'src/modules/brands/dto/createBrandDto';
+import { GetAllBrandsResponseDto } from "src/modules/brands/dto/getAllBrandsDto";
+import { UpdateBrandRequestdto, UpdateBrandResponseDto } from "src/modules/brands/dto/updateBrandDto";
+import { BrandDto } from 'src/modules/brands/dto/brandDto';
+import { GetBrandByIdResponseDto } from "src/modules/brands/dto/getBrandByIdDto";
+import { DeleteBrandResponseDto } from "src/modules/brands/dto/deleteBrandDto";
 
 @Injectable()
 
 export class BrandService{
-    constructor( 
-        private brandRepo: BrandRepository,
-        private helper: Helper     
-    ){}
+    constructor( private brandRepo: BrandRepository ){}
 
     async createBrand( brand: CreateBrandRequestDto ): Promise<CreateBrandResponseDto>{
-        
-        // if( brand.info.name == undefined ) return { error: ErrorMessage.NAME_REQUIRED, errors: null, code: HttpStatus.BAD_REQUEST}
-        // if( brand.info.name == "" ) return { error: ErrorMessage.NAME_BE_VALID, errors: null, code: HttpStatus.BAD_REQUEST}
-        // else{
             const doesBrandExist = await this.brandRepo.getBrandByName(brand.info.name);
             if(doesBrandExist) return { error: ErrorMessage.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
             else {
@@ -32,34 +27,33 @@ export class BrandService{
                  
                 return { code: HttpStatus.CREATED, data: newBrand }; 
             }    
-        // }
     }
-   
+    
     async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsResponseDto>{
         const allBrands = await this.brandRepo.getAllBrands(skip, limit);
-        if(!allBrands) return { error: 'Could not get brands due to server error', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
-        
+        if(!allBrands) return { error: 'COULD NOT GET THE BRANDS DUE TO SERVER ERROR', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
+    
         return { data: allBrands, code: HttpStatus.OK };
     } 
 
-    async updateBrandById(brandId: string, brandFeatures: Brand): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+    async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequestdto): Promise<UpdateBrandResponseDto>{
         const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
-        if(!updatedBrand) return this.helper.serviceResponse.errorResponse('Could not update brand', null, HttpStatus.BAD_REQUEST);
-
-        return this.helper.serviceResponse.successResponse(updatedBrand, HttpStatus.OK);
+        if(!updatedBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST};
+        
+        return { code: HttpStatus.OK, data: updatedBrand};
     }
 
-    async getBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+    async getBrandById(brandId: string): Promise<GetBrandByIdResponseDto>{
         const foundBrand = await this.brandRepo.getBrandById(brandId);
-        if(!foundBrand) return this.helper.serviceResponse.errorResponse('Could not get brand', null, HttpStatus.BAD_REQUEST);
+        if(!foundBrand) return {error: ErrorMessageGetBrandById.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
-        return this.helper.serviceResponse.successResponse(foundBrand, HttpStatus.OK);
+        return { data: foundBrand, code: HttpStatus.OK };
     }
 
-    async deleteBrandById(brandId: string): Promise<ServiceErrorResponse | ServiceSuccessResponse>{
+    async deleteBrandById(brandId: string): Promise<DeleteBrandResponseDto>{
         const deletedBrand = await this.brandRepo.deleteBrandById(brandId);
-        if(!deletedBrand) return this.helper.serviceResponse.errorResponse('Could not delete brand', null, HttpStatus.BAD_REQUEST);
+        if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
-        return this.helper.serviceResponse.successResponse(deletedBrand, HttpStatus.OK);
+        return {data: deletedBrand, code: HttpStatus.OK};
     }  
 }

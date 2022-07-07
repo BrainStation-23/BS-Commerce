@@ -1,16 +1,13 @@
-import { IsArray } from 'class-validator';
+import { IsArray, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { GetAllBrands } from 'models';
-import { GetAllBrandsSuccessResponse, GetAllBrandsErrorResponse } from 'models';
-
+import { GetAllBrandsSuccessResponse, GetAllBrandsErrorResponse, GetAllBrands } from 'models';
 import { HttpStatus } from '@nestjs/common';
 
 import { BrandDto } from './brandDto';
-import { InfoDto, MetaDto } from "./createBrandDto";
-
 
 export class GetAllBrandsDto implements GetAllBrands{
     @ApiProperty()
+    @ValidateNested({ each: true })
     @IsArray()
     brands: BrandDto[]
 }

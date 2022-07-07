@@ -38,7 +38,6 @@ export default class InfoModel extends Model{
         allowNull: true,
         set(val: number[]) {
             const value = val.toString();
-            console.log(typeof(value));
             this.setDataValue('pageSizeOptions',value);
          }
     })

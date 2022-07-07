@@ -1,66 +1,21 @@
 import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
 import { CreateBrandRequest, Info, Meta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
 
-export class InfoDto implements Info{
-    @ApiProperty()
-    @IsString()
-    @IsNotEmpty()
-    name: string;
-
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    description?: string;
-    
-    @ApiProperty()
-    @IsOptional()
-    @IsBoolean()
-    allowToSelectPageSize?: boolean;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsBoolean()
-    published?: boolean;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsNumber()
-    displayOrder?: number;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsArray()
-    pageSizeOptions?: number[];
-
-}
-
-export class MetaDto implements Meta{
-    @ApiProperty()
-    @IsOptional()
-    keywords?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    description?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    title?: string;
-
-    @ApiProperty()
-    @IsOptional()
-    SEFN?: string;
-}
+import { InfoDto } from './infoDto';
+import { MetaDto } from './metaDto';
 
 export class CreateBrandRequestDto implements CreateBrandRequest{
     @ApiProperty()
+    @IsOptional()
+    id: string;
+    
+    @ApiProperty()
     @IsNotEmpty()
-    // @Type(() => InfoDto)
-    @ValidateNested({each: true})
+    @ValidateNested()
+    @Type(()=> InfoDto)
     @IsObject()
     info: InfoDto;
 
@@ -89,7 +44,6 @@ export class CreateBrandErrorResponseDto implements CreateBrandErrorResponse{
     @ApiProperty()
     errors: string[];
 }
-
 
 export type CreateBrandResponseDto = CreateBrandErrorResponseDto | CreateBrandSuccessResponseDto;
 
