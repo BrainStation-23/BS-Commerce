@@ -15,3 +15,4 @@ export * from './wishlist/index';
 export * from './order/index';
 export * from './product/index';
 export * from './user/index';
+export * from './tags/index';
