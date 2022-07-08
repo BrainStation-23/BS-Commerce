@@ -17,6 +17,8 @@ export const ResolveGraphqlModule = () => {
     ...GraphqlInitModule(),
     AuthModule,
     BrandModule,
+    UserModule,
+    CompareModule,
     CartModule,
     UserModule,
     ProductModule,
