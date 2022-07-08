@@ -83,7 +83,7 @@ const ProductSchema = new Schema<Product>({
         _id: false
     }],
     brands: [String],
-    manufacture: {
+    manufacturer: {
         id: String,
         name: String,
     },

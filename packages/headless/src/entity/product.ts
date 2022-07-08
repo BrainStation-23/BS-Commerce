@@ -40,9 +40,9 @@ export class Product {
   tags?: string[];
   photos?: Photo[];
   brands?: string[];
-  manufacture?: {
-    id?: string,
-    name?: string,
+  manufacturer?: {
+    id: string,
+    name: string,
   };
   categories: Category[]
 }
