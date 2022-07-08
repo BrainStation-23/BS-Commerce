@@ -24,7 +24,7 @@ export interface CustomerProductPhoto {
     displayOrder?: number
 }
 
-export interface CustomerProductManufacture {
+export interface CustomerProductManufacturer {
     id?: string,
     name?: string,
 }
@@ -42,6 +42,6 @@ export interface CustomerProduct {
     tags?: string[];
     photos?: CustomerProductPhoto[];
     brands?: string[],
-    manufacture?: CustomerProductManufacture,
+    manufacturer?: CustomerProductManufacturer,
     categories: CustomerProductCategory[];
 }

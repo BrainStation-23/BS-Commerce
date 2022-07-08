@@ -1,6 +1,6 @@
 
 import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { Product, ProductCategory, ProductInfo, ProductManufacture, ProductMeta, ProductPhoto } from "./product";
+import { Product, ProductCategory, ProductInfo, ProductManufacturer, ProductMeta, ProductPhoto } from "./product";
 
 /**
  * API Path: /product
@@ -15,7 +15,7 @@ export interface CreateProductRequest {
     tags?: string[];
     photos?: ProductPhoto[];
     brands?: string[],
-    manufacture?: ProductManufacture,
+    manufacturer?: ProductManufacturer,
     categories: ProductCategory[];
 }
 
