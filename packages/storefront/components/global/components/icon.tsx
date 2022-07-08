@@ -106,7 +106,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         </div>
       </span>
 
-      <Link href="/wishlist" passHref>
+      <Link href={token ? `/wishlist` : `/account/sign-in`} passHref>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
