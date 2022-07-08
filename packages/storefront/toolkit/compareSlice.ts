@@ -1,34 +1,42 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomerProduct } from "models";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CustomerProduct } from 'models';
 
 export interface compareState {
-    productsToCompare: CustomerProduct[];
+  productsToCompare: CustomerProduct[];
 }
 
 const initialState: compareState = {
-    productsToCompare: [],
+  productsToCompare: [],
 };
 
 export const compareSlice = createSlice({
-  name: "compare",
+  name: 'compare',
   initialState,
   reducers: {
     storeProductsToCompare: (
-        state: compareState,
-        action: PayloadAction<CustomerProduct>
-      ) => {
-        state.productsToCompare.push(action.payload);
-      },
-      deleteComparedProduct: (
-        state: compareState,
-        action: PayloadAction<string>
-      ) => {
-        const newCompareList = state.productsToCompare.filter(item => item.id != action.payload)
-        state.productsToCompare = newCompareList;
-      }
+      state: compareState,
+      action: PayloadAction<CustomerProduct>
+    ) => {
+      const existingCartProduct = state.productsToCompare.find(
+        (item) => item.id === action.payload.id
+      );
+      existingCartProduct
+        ? state.productsToCompare
+        : state.productsToCompare.push(action.payload);
+    },
+    deleteComparedProduct: (
+      state: compareState,
+      action: PayloadAction<string>
+    ) => {
+      const newCompareList = state.productsToCompare.filter(
+        (item) => item.id != action.payload
+      );
+      state.productsToCompare = newCompareList;
+    },
   },
 });
 
-export const {  storeProductsToCompare, deleteComparedProduct } = compareSlice.actions;
+export const { storeProductsToCompare, deleteComparedProduct } =
+  compareSlice.actions;
 
 export default compareSlice.reducer;

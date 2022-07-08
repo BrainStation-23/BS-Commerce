@@ -8,6 +8,7 @@ import { userAPI } from 'APIs';
 interface Props {
   setModal: Function;
 }
+
 const Modal: React.FC<Props> = ({ setModal }) => {
   const [showModal, setShowModal] = useState(setModal);
   const dispatch = useAppDispatch();
