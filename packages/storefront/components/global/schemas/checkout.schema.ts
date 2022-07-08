@@ -2,8 +2,11 @@ import XRegExp from 'xregexp';
 import { string, object, ref, number } from 'yup';
 
 export const informationSchema = object().shape({
+  email: string().required(
+    'This field must not be empty. Enter an email.'
+  ),
   contact: string().required(
-    'This field must not be empty. Enter an email or phone number.'
+    'This field must not be empty. Enter a phone number.'
   ),
   firstName: string(),
   lastName: string().required('Enter a last name'),

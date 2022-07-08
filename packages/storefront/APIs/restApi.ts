@@ -22,15 +22,8 @@ import {
 import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
 
-// function getToken() {
-//   console.log("Token ====>");
-//   console.log(localStorage.getItem("persist:root"));
-//   console.log("Hey In GetToken ====>");
-// }
-
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
-    // getToken();
     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
     return response.data as User[];
   } catch (error: any) {
