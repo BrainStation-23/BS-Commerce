@@ -1,4 +1,6 @@
 // Mongodb dependency implementations
+import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
+import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { dbConfig } from 'config/database';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
@@ -24,6 +26,7 @@ type CLASS_NAME =
   | 'COMPARE'
   | 'MEDIA'
   | 'ORDER'
+  | 'BRAND'
   | 'TAGS';
 
 const db = dbConfig.db;
@@ -35,6 +38,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMongo;
+          case 'BRAND':
+              return BrandDatabaseMongo;
           case 'COMPARE':
             return CompareDatabaseMongo;
           case 'PRODUCT':
@@ -61,6 +66,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
         switch (className) {
           case 'USER':
             return UserDatabaseMysql;
+          case 'BRAND':
+            return BrandDatabaseMysql;
           case 'MANUFACTURER':
             return ManufacturerDatabaseMysql;
 

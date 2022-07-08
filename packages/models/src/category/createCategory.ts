@@ -1,6 +1,6 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Category, Meta, Photo } from "./category";
+import { Category, CategoryMeta, Photo } from "./category";
 export interface createCategoryRequest {
     name: string,
     parentSlug?:string,
@@ -11,7 +11,7 @@ export interface createCategoryRequest {
     allowToSelectPageSize?: boolean,
     published?: boolean,
     displayOrder?: number,
-    meta?: Meta
+    meta?: CategoryMeta
 }
 export interface createCategorySuccessResponse extends SuccessResponse {
     code: number;
