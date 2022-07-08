@@ -1,6 +1,6 @@
 scalar DateTime
 
-type Info {
+type ProductInfo {
   name: String!
   shortDescription: String
   fullDescription: String
@@ -17,7 +17,7 @@ type Info {
   publishDate: DateTime
 }
 
-input InfoInput {
+input ProductInfoInput {
   name: String!
   shortDescription: String
   fullDescription: String
@@ -34,7 +34,7 @@ input InfoInput {
   publishDate: DateTime
 }
 
-input UpdateInfoInput {
+input UpdateProductInfoInput {
   name: String
   shortDescription: String
   fullDescription: String
@@ -50,28 +50,28 @@ input UpdateInfoInput {
   isFeatured: Boolean
 }
 
-type Meta {
+type ProductMeta {
   keywords: [String]
   title: String
   description: String
   friendlyPageName: String!
 }
 
-input MetaInput {
+input ProductMetaInput {
   keywords: [String]
   title: String
   description: String
   friendlyPageName: String!
 }
 
-input UpdateMetaInput {
+input UpdateProductMetaInput {
   keywords: [String]
   title: String
   description: String
   friendlyPageName: String
 }
 
-type Photo {
+type ProductPhoto {
   url: String
   id: String
   title: String
@@ -79,7 +79,7 @@ type Photo {
   displayOrder: Int
 }
 
-input PhotoInput {
+input ProductPhotoInput {
   url: String
   id: String
   title: String
@@ -87,19 +87,29 @@ input PhotoInput {
   displayOrder: Int
 }
 
-type Categories {
+type ProductCategories {
   id: String!
   isFeatured: Boolean
   displayOrder: Int
 }
 
-input CategoriesInput {
+type ProductManufacture {
+  id: String
+  name: Boolean
+}
+
+input ProductManufactureInput {
+  id: String
+  name: Boolean
+}
+
+input ProductCategoriesInput {
   id: String!
   isFeatured: Boolean
   displayOrder: Int
 }
 
-input UpdateCategoriesInput {
+input UpdateProductCategoriesInput {
   id: String
   isFeatured: Boolean
   displayOrder: Int
@@ -107,36 +117,33 @@ input UpdateCategoriesInput {
 
 type Product {
   id: String!
-  info: Info!
-  meta: Meta!
+  info: ProductInfo!
+  meta: ProductMeta!
   tags: [String]
-  photos: [Photo]
+  photos: [ProductPhoto]
   brands: [String]
-  categories: [Categories!]!
-}
-
-type ConditionalProduct {
-  info: Info!
-  photos: [Photo]
-  brands: [String]
+  manufacture: ProductManufacture
+  categories: [ProductCategories!]!
 }
 
 input ProductInput {
-  info: InfoInput!
-  meta: MetaInput!
+  info: ProductInfoInput!
+  meta: ProductMetaInput!
   tags: [String]
-  photos: [PhotoInput]
+  photos: [ProductPhotoInput]
   brands: [String!]!
-  categories: [CategoriesInput!]!
+  manufacture: ProductManufactureInput
+  categories: [ProductCategoriesInput!]!
 }
 
 input UpdateProductInput {
-  info: UpdateInfoInput
-  meta: UpdateMetaInput
+  info: UpdateProductInfoInput
+  meta: UpdateProductMetaInput
   tags: [String]
-  photos: [PhotoInput]
+  photos: [ProductPhotoInput]
   brands: [String]
-  categories: [UpdateCategoriesInput]
+  manufacture: ProductManufactureInput
+  categories: [UpdateProductCategoriesInput]
 }
 
 
@@ -152,7 +159,7 @@ input SearchCondition {
 }
 
 type ProductArrayWithCount {
-  products: [ConditionalProduct!]!
+  products: [Product!]!
   count: Int!
 }
 
@@ -188,14 +195,14 @@ type ProductResponse {
   data: Product
 }
 
-type Message {
+type ProductSuccessMessage {
   message: String!
 }
 
 type ProductDeletedResponse {
   error: String
   code: Int!
-  data: Message
+  data: ProductSuccessMessage
 }
 
 type ProductArrayResponse {

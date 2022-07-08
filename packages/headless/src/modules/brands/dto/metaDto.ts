@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
-import { Info, Meta } from 'models';
+import { BrandInfo, BrandMeta } from 'models';
 
-export class MetaDto implements Meta{
+export class MetaDto implements BrandMeta{
     @ApiProperty()
     @IsOptional()
     keywords?: string;
