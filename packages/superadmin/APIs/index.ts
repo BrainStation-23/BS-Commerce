@@ -17,6 +17,7 @@ import {
   getCategoryListRest,
   getCategoryRest,
   createCategoryRest,
+  mediaUploadRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -28,6 +29,7 @@ import {
   getCategoryListGraphQL,
   getCategoryGraphQL,
   createCategoryGraphQL,
+  mediaUploadGraphQL,
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
@@ -52,6 +54,7 @@ const graphqlApi: apiFunction = {
   // getManufacturer: getManufacturerGraphQl,
   // deleteManufacturer: deleteManufacturerGraphQl,
   // createManufacturer: createManufacturerGraphQl
+  mediaUpload: mediaUploadGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -73,6 +76,7 @@ const restApi: apiFunction = {
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
   getUserProfile: getUserProfileRest,
+  mediaUpload: mediaUploadRest,
 };
 
 export const userAPI: apiFunction =

@@ -19,6 +19,7 @@ import {
   Product,
   createCategoryRequest,
   createCategorySuccessResponse,
+  UploadFileSuccessResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -322,5 +323,20 @@ export async function getUserProfileRest(
     router.push('/account/login');
     // toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function mediaUploadRest(
+  data: FormData
+): Promise<UploadFileSuccessResponse | undefined> {
+  try {
+    const response = await axios.post(`${apiEndPoints.media}/upload`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data as UploadFileSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response.error);
   }
 }

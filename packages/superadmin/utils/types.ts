@@ -16,6 +16,7 @@ import {
   UpdatedUserRequest,
   createCategoryRequest,
   createCategorySuccessResponse,
+  UploadFileSuccessResponse,
 } from 'models';
 
 export interface User {
@@ -91,6 +92,9 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
+  mediaUpload: (
+    data: FormData
+  ) => Promise<UploadFileSuccessResponse | undefined>;
 }
 
 export interface adminCreate {
