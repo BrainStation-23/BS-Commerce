@@ -1,5 +1,5 @@
-import { useState, FC } from 'react';
-import { vendors } from '../../allData/vendor-data.json';
+import { useState } from "react";
+import { vendors } from "../../allData/vendor-data.json";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
@@ -9,12 +9,12 @@ interface SingleProduct {
   product: Product;
 }
 
-const ProductDescription: FC<SingleProduct> = ({ product }) => {
-  const vendor = vendors.find((vendor) => vendor.id === 1);
-  const [description, setDescription] = useState('block');
-  const [review, setReview] = useState('hidden');
-  const [shipping, setShipping] = useState('hidden');
-  const [size_chart, setSize_chart] = useState('hidden');
+const ProductDescription: React.FC<SingleProduct> = ({product}: SingleProduct) => {
+	const vendor = vendors.find((vendor) => vendor.id === 1);
+	const [description, setDescription] = useState("block");
+	const [review, setReview] = useState("hidden");
+	const [shipping, setShipping] = useState("hidden");
+	const [size_chart, setSize_chart] = useState("hidden");
 
   const handleDescription = () => {
     setDescription('block');

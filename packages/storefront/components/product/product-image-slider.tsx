@@ -7,7 +7,7 @@ interface SingleProduct {
   product: Product;
 }
 
-const ProductImagesSlider: FC<SingleProduct> = ({ product }) => {
+const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct) => {
   var isAvailable = true;
 
   const [activeThumb, setActiveThumb] = useState();
@@ -23,7 +23,7 @@ const ProductImagesSlider: FC<SingleProduct> = ({ product }) => {
         thumbs={{ swiper: activeThumb }}
         className="product-images-slider"
       >
-        {product.photos.map((item: any, index: number) => (
+        {product?.photos?.map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <div className="mb-5">
               <img
@@ -38,15 +38,15 @@ const ProductImagesSlider: FC<SingleProduct> = ({ product }) => {
                 <p>Sale</p>
               </div>
             ) : null}
-            {product.discountPercentage && isAvailable ? (
+            {product?.discountPercentage && isAvailable ? (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
-                <p>{`-${product.discountPercentage}%`}</p>
+                <p>{`-${product?.discountPercentage}%`}</p>
               </div>
             ) : null}
-            {isAvailable && product.info.oldPrice > 0 && (
+            {isAvailable && product?.info.oldPrice > 0 && (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-$${Math.abs(
-                  product.info.oldPrice - product.info.price
+                  product?.info.oldPrice - product?.info.price
                 )}`}</p>
               </div>
             )}
@@ -64,7 +64,7 @@ const ProductImagesSlider: FC<SingleProduct> = ({ product }) => {
           modules={[Navigation, Thumbs]}
           className="product-images-slider-thumbs"
         >
-          {product.photos.map((item: any, index: number) => (
+          {product?.photos?.map((item: any, index: number) => (
             <SwiperSlide key={index}>
               <div className="">
                 <img

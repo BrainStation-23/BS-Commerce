@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 /**
- * API Path: /product/brand
+ * API Path: /products/brand
  * method: PATCH
  * query: UpdateProductsForBrandQuery
  * response: UpdateProductsForBrandResponse

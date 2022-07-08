@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { CartService } from '../services';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -22,10 +21,11 @@ import { deleteCartErrorResponseDto, deleteCartRequestDto, deleteCartSuccessResp
 import { updateCartItemErrorResponseDto, updateCartItemRequestDto, updateCartItemSuccessResponseDto } from '../dto/updateCartItem.dto';
 import { deleteCartItemErrorResponseDto, deleteCartItemRequestDto, deleteCartItemSuccessResponseDto } from '../dto/deleteCartItem.dto';
 import { deleteAllCartItemsErrorResponseDto, deleteAllCartItemsSuccessResponseDto } from '../dto/deleteAllCartItems.dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('cart')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
+@UseGuards(new RolesGuard(['customer']))
 @ApiTags('Cart API')
 export class CartController {
   constructor(private cartService: CartService) { }

@@ -21,9 +21,15 @@ const CategorySchema = new Schema<Category>({
     type: String,
     default: null,
   },
-  imageId: {
-    type: String,
-    default: null,
+  photo: {
+    url:{
+      type:String,
+      default:null,
+    },
+    alt:{
+      type:String,
+      default:""
+    }
   },
   showOnHomePage: {
     type: Boolean,

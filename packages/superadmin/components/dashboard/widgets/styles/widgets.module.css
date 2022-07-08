@@ -1,5 +1,5 @@
 .widget_container {
-  margin-top: 40px;
+  margin-top: 25px;
   padding: 10px;
 }
 .widgets_card {
@@ -29,9 +29,9 @@
 
 .small_box .icon i {
   position: absolute;
-  right: 70px;
+  right: 40px;
   top: 6px;
-  font-size: 70px;
+  font-size: 60px;
   transition: all 0.3s linear;
 }
 

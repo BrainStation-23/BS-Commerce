@@ -1,16 +1,21 @@
 import Link from 'next/link';
-import React, { useState, FC } from 'react';
-import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
-import ProductDescription from './productDescription';
-import ProductImagesSlider from './product-image-slider';
+import React, { useState } from 'react';
 
 import { Product } from 'models';
-import { userAPI } from 'APIs';
+import { addToCart } from 'toolkit/cartSlice';
+import { useAppDispatch } from 'customHooks/hooks';
+
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import ProductImagesSlider from '@/components/product/product-image-slider';
+import ProductDescription from '@/components/product/productDescription';
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
+const ProductDetailsComponent: React.FC<SingleProduct> = ({
+  product,
+}: SingleProduct) => {
+  const dispatch = useAppDispatch();
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -23,27 +28,35 @@ const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
 
-  const toCart = async (id: string) => {
-    await userAPI.addToCart({
-      productId: id,
+  const toCart = async (product: Product) => {
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
       quantity: amount,
-    });
+    };
+    setAmount(0);
+    dispatch(addToCart(cartItem));
   };
 
   const toWishlist = () => {
-    setWishlist([...wishlist, `${product.info.id}`]);
+    setWishlist([...wishlist, `${product?.info?.id}`]);
     setClicked(true);
   };
 
   return (
     <>
       <Breadcrumb
-        title={product.info.name}
-        pathArray={['Home', product.info.name]}
-        linkArray={['/home', '/product' + product.id]}
+        title={product?.info?.name}
+        pathArray={['Home', product.info?.name]}
+        linkArray={['/', '/product' + product.id]}
       />
-      <section className="text-gray-700 body-font overflow-hidden bg-white">
-        <div className="container px-5 py-24 mx-auto">
+      <section className="body-font overflow-hidden bg-white text-gray-700">
+        <div className="container mx-auto px-5 py-24">
           <div>
             <div className="mx-auto flex flex-wrap">
               <div className="md:w-1/2 w-full">
@@ -100,38 +113,38 @@ const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
                   </svg>
                 </div>
 
-                <div className="flex mb-1 mt-2"></div>
-                <div className="text-gray-900 ml-1 mb-1 mt-2">
-                  <span className="text-sm">Vendor: {product.vendor}</span>
-                  <span className="text-sm ml-2 mr-2">|</span>
-                  <span className="text-sm">SKU: {product.info.sku}</span>
+                <div className="mb-1 mt-2 flex"></div>
+                <div className="ml-1 mb-1 mt-2 text-gray-900">
+                  <span className="text-sm">Vendor: {product?.vendor}</span>
+                  <span className="ml-2 mr-2 text-sm">|</span>
+                  <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
                 <div className="flex">
-                  <span className="title-font font-medium text-2xl text-green-600 mt-2 mb-2 ml-1">
-                    ${product.info.price}
+                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-green-600">
+                    ${product?.info?.price}
                   </span>
                 </div>
                 <div className="flex">
-                  <span className="text-gray-900 ml-1 mb-1 mt-2 text-sm">
+                  <span className="ml-1 mb-1 mt-2 text-sm text-gray-900">
                     Availability:
                   </span>
                   {isAvailable ? (
-                    <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
-                      {product.stock} left in stock
+                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
+                      {product?.stock} left in stock
                     </span>
                   ) : (
-                    <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
+                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
                       Out of stock
                     </span>
                   )}
                 </div>
 
-                <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
-                  {product.info.fullDescription}
+                <p className="ml-1 mb-1 mt-2 text-sm text-gray-900">
+                  {product?.info?.fullDescription}
                 </p>
-                {product.info.size && (
-                  <div className="flex mt-2 items-center mb-2">
-                    <div className="flex ml-1 items-center">
+                {product?.info?.size && (
+                  <div className="mt-2 mb-2 flex items-center">
+                    <div className="ml-1 flex items-center">
                       <span className="mr-3">Size:</span>
                       <div className="flex">
                         <button
@@ -163,8 +176,8 @@ const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
                   </div>
                 )}
 
-                {product.info.color && (
-                  <div className="flex mt-2 items-center mb-2">
+                {product?.info?.color && (
+                  <div className="mt-2 mb-2 flex items-center">
                     <div className="flex">
                       <span className="mr-3">Color:</span>
                       <button
@@ -198,9 +211,6 @@ const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
                       <span className="p-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
-                        {...(amount >= product.stock
-                          ? (disableIncrement = true)
-                          : null)}
                         disabled={disableIncrement}
                         className="p-2"
                       >
@@ -236,25 +246,25 @@ const ProductDetailsComponent: FC<SingleProduct> = ({ product }) => {
                     </button>
                   </Link>
                 </div>
-                <div className="ml-1 text-grey-700">
+                <div className="text-grey-700 ml-1">
                   <div>
                     <button
                       onClick={toWishlist}
-                      className="hover:text-green-600 mt-10"
+                      className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
                     </button>
                   </div>
                   <div>
-                    <button className="hover:text-green-600 mt-2">
+                    <button className="mt-2 hover:text-green-600">
                       + Compare
                     </button>
                   </div>
                   <div>
-                    <button className=" flex hover:text-green-600 mt-2">
+                    <button className=" mt-2 flex hover:text-green-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 mr-2"
+                        className="mr-2 h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

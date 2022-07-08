@@ -1,11 +1,10 @@
 import Icon from "@/components/global/components/icon";
-import Picture from "@/components/global/components/product/picture";
 import ProductInfo from "@/components/global/components/product/productInfo";
-import { Product } from "models";
+import { CustomerProduct } from "models";
 import Image from "next/image";
 import Link from "next/link";
 interface SingleProduct {
-  product: Product;
+  product: CustomerProduct;
 }
 
 const Product = ({ product }: SingleProduct) => {

@@ -1,14 +1,15 @@
 import type { GetServerSideProps, NextPage } from "next";
-import ProductDetailsComponent from "@/components/product";
-import axios from "axios";
+
 import { userAPI } from "APIs";
 import { Product } from "models";
+
+import ProductDetailsComponent from "@/components/product";
 
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetails: NextPage = ({ product }: SingleProduct) => {
+const ProductDetails: NextPage<SingleProduct> = ({product}) => {
   return (
     <>
       <ProductDetailsComponent product={product}></ProductDetailsComponent>

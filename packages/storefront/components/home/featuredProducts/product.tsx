@@ -1,9 +1,10 @@
-import Icon from "@/components/global/components/icon";
-import Picture from "@/components/global/components/product/picture";
-import ProductInfo from "@/components/global/components/product/productInfo";
-import { Product } from "models";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Product } from "models";
+
+import Icon from "@/components/global/components/icon";
+import ProductInfo from "@/components/global/components/product/productInfo";
 interface SingleProduct {
   product: Product;
 }
@@ -27,10 +28,10 @@ const Product = ({ product }: SingleProduct) => {
             src={product?.photos[0].url}
             height={120}
             width={120}
-            alt={product.tags[0]}
+            alt={product?.tags[0]}
           />
           <div className="scale-0 group-hover:scale-100 transition-transform origin-left duration-300 absolute bottom-5 left-40 md:left-28 w-36">
-            <Icon />
+            <Icon product={product} />
           </div>
           <ProductInfo product={product} />
         </div>

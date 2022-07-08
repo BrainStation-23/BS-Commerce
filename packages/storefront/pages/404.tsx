@@ -1,10 +1,13 @@
-import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import type { NextPage } from 'next';
+
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 
 const PageNotFOund: NextPage = () => {
   const imageDimensions = { width: 1024, height: 456 };
+  
   return (
     <>
       <Breadcrumb
