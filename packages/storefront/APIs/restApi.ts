@@ -127,7 +127,7 @@ export async function getPublicProductByIdRest(
 }
 
 export async function getCategoryListRest(): Promise<getCategoryListSuccessResponse
-| undefined> {
+  | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getCatagoryList}`
@@ -145,7 +145,7 @@ export async function getPublicProductByCategoryIDRest(
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?categoryId=${CategoryId}`
     );
-    return res.data.data;
+    return res.data.data.products;
   } catch (error: any) {
     return error;
   }
