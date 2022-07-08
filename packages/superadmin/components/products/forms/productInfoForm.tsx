@@ -1,18 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from 'react';
 
-import CustomSelect from "@/components/products/CustomSelect.component";
-import FieldTemplate from "@/components/products/forms/fieldTemplate";
-import { userAPI } from "APIs";
+import CustomSelect from '@/components/products/CustomSelect.component';
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
+import { userAPI } from 'APIs';
 
 const ProductInfoForm: FC = () => {
   const [tags, setTags] = useState([]);
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
+  const [tagsOptions, setTagsOption] = useState([]);
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
-  const tagsOptions: any = [];
   // const tagsOptions = [
   //   {
   //     label: "Tag1",
@@ -38,49 +38,49 @@ const ProductInfoForm: FC = () => {
 
   const brandOptions = [
     {
-      label: "Daraz",
-      value: "Daraz",
+      label: 'Daraz',
+      value: 'Daraz',
     },
     {
-      label: "Pickaboo",
-      value: "Pickaboo",
+      label: 'Pickaboo',
+      value: 'Pickaboo',
     },
     {
-      label: "Chaldal",
-      value: "Chaldal",
+      label: 'Chaldal',
+      value: 'Chaldal',
     },
     {
-      label: "Bagdoom",
-      value: "Bagdoom",
+      label: 'Bagdoom',
+      value: 'Bagdoom',
     },
     {
-      label: "Othoba",
-      value: "Othoba",
+      label: 'Othoba',
+      value: 'Othoba',
     },
     {
-      label: "Ajkerdeal",
-      value: "Ajkerdeal",
+      label: 'Ajkerdeal',
+      value: 'Ajkerdeal',
     },
   ];
   const getTags = async () => {
     const res = await userAPI.getTags();
-    console.log("====", res?.data);
-
-    res?.data ? setTags(res.data) : "";
+    res?.data ? setTags(res.data) : '';
   };
   const setTagsOptions = () => {
+    const temp = [];
     tags?.map((tag) => {
-      tagsOptions.push({
+      temp.push({
         label: tag?.name,
         value: tag?.name,
       });
+      setTagsOption(temp);
     });
   };
 
   useEffect(() => {
-    getTags();
-    setTagsOptions();
-  }, []);
+    tags[0] ? '' : getTags();
+    tagsOptions[0] ? '' : setTagsOptions();
+  }, [tagsOptions, tags]);
   return (
     <>
       <div
@@ -100,10 +100,10 @@ const ProductInfoForm: FC = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-info-lg col-1 px-1"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: '25px' }}
                 />
                 Product info
               </div>
@@ -225,18 +225,22 @@ const ProductInfoForm: FC = () => {
                 </div>
               </div>
             </div> */}
+            {tagsOptions[0] ? (
+              <FieldTemplate
+                label="Tags"
+                isRequired={true}
+                fieldID="tags"
+                fieldType="none"
+                fieldClass="custom-select w-100"
+                options={tagsOptions}
+                component={CustomSelect}
+                placeholder="Select brands..."
+                ismulti={true}
+              />
+            ) : (
+              'tags empty'
+            )}
 
-            <FieldTemplate
-              label="Tags"
-              isRequired={true}
-              fieldID="tags"
-              fieldType="none"
-              fieldClass="custom-select w-100"
-              options={tagsOptions}
-              component={CustomSelect}
-              placeholder="Select brands..."
-              ismulti={true}
-            />
             <FieldTemplate
               label="Brands"
               isRequired={true}

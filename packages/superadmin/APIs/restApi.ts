@@ -19,6 +19,7 @@ import {
   Product,
   createCategoryRequest,
   createCategorySuccessResponse,
+  GetTagsResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -326,12 +327,12 @@ export async function getUserProfileRest(
 }
 
 export async function getTagsRest(): Promise<
-  GetUserResponse | undefined
+  GetTagsResponse | undefined
 > {
   try {
     const response = await axios.get(`${apiEndPoints.tags}`);
 
-    return response?.data.data.categories as GetUserResponse;
+    return response?.data as GetTagsResponse;
   } catch (error: any) {
     console.error(error);
   }
