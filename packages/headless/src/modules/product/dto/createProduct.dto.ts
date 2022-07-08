@@ -43,7 +43,7 @@ export class CreateProductDto implements CreateProductRequest {
     @ApiProperty({ type: ProductManufacturerDto })
     @IsObject()
     @CustomValidator(ProductManufacturerDto)
-    manufacture: ProductManufacturerDto;
+    manufacturer: ProductManufacturerDto;
 
     @ApiProperty({ type: [ProductCategoryDto] })
     @IsArray()
