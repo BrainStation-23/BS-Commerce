@@ -18,6 +18,7 @@ import {
   updateCartItemRequest,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  getCategoryListResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
 } from 'models';
@@ -92,6 +93,7 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  getCategoryList: () => Promise<getCategoryListResponse | undefined>;
   getPublicProductByCategoryId: (
     CategoryId: GetProductsByConditionQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;

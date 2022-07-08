@@ -18,6 +18,7 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  getCategoryListResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
 } from 'models';
@@ -104,6 +105,12 @@ export async function updateCartGraphql(
 
 export async function deleteAllFromCartGraphql(): Promise<
   deleteCartItemResponse | undefined
+> {
+  return undefined;
+}
+
+export async function getCategoryListGraphql(): Promise<
+  getCategoryListResponse | undefined
 > {
   return undefined;
 }

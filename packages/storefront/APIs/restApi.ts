@@ -15,6 +15,7 @@ import {
   GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  getCategoryListSuccessResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
 } from 'models';
@@ -120,6 +121,18 @@ export async function getPublicProductByIdRest(
       `${apiEndPoints.getPublicProducts}/${productId}`
     );
     return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryListRest(): Promise<getCategoryListSuccessResponse
+| undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCatagoryList}`
+    );
+    return res.data.data as getCategoryListSuccessResponse;
   } catch (error: any) {
     return error;
   }
