@@ -13,4 +13,15 @@ export class OrderRepository {
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
     return await this.db.getOrderListByUserId(userId);
   }
+
+  async getOrderById(orderId: string): Promise<any>{
+    return await this.db.getOrderById(orderId);
+  }
+
+  async getOrderStatistics(): Promise<any>{
+    return await this.db.getOrderStatistics();
+  }
+  async getIncompleteStatistics(): Promise<any>{
+    return await this.db.getIncompleteStatistics();
+  }
 }
