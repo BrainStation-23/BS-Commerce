@@ -14,6 +14,7 @@ const WishlistIcon: React.FC<Props> = ({ height, width}) => {
         viewBox="0 0 24 24"
         stroke="green"
         strokeWidth="1"
+        data-tooltip-target="tooltip-right" data-tooltip-placement="right"
       >
         <path
           strokeLinecap="round"
