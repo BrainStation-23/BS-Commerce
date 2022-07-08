@@ -50,10 +50,10 @@ const Header: NextComponentType = () => {
   categories.categories.forEach((category) => {
     allCategories.push({
       name: category.name,
-      link:{
+      link: {
         pathname: `/collections/${category.name}`,
         query: {
-          id: category.id,
+          categoryId: category.id,
           name: category.name,
         },
       },
@@ -75,7 +75,7 @@ const Header: NextComponentType = () => {
   const menus: menuLink[] = [
     {
       name: 'home',
-      link: {pathname: "/"},
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
         { name: 'Home - 1', link: '/' },
@@ -85,7 +85,7 @@ const Header: NextComponentType = () => {
     },
     {
       name: 'shop',
-      link: {pathname: "/"},
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
         { name: 'Cucumber', link: '/' },
@@ -95,7 +95,7 @@ const Header: NextComponentType = () => {
     },
     {
       name: 'product',
-      link: {pathname: "/"},
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
         { name: 'Simple Product', link: '/' },
@@ -103,10 +103,10 @@ const Header: NextComponentType = () => {
         { name: 'Affiliate Product', link: '/' },
       ],
     },
-    { name: 'blog', link: {pathname: "/"}, hasSubmenu: false },
+    { name: 'blog', link: { pathname: '/' }, hasSubmenu: false },
     {
       name: 'pages',
-      link: {pathname: "/"},
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
         { name: 'About Us', link: '/about' },
@@ -114,7 +114,7 @@ const Header: NextComponentType = () => {
         { name: 'FAQ', link: '/faq' },
       ],
     },
-    { name: 'contact', link: {pathname: '/contact'}, hasSubmenu: false },
+    { name: 'contact', link: { pathname: '/contact' }, hasSubmenu: false },
   ];
 
   const toggleOpen = () => {
@@ -244,7 +244,10 @@ const Header: NextComponentType = () => {
                   key={category.name}
                   className="flex flex-row justify-between text-sm"
                 >
-                  <Link href={category.link} as= {`collections/${category.name}`}>
+                  <Link
+                    href={category.link}
+                    as={`collections/${category.name}`}
+                  >
                     <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
                       {category.name}
                     </a>

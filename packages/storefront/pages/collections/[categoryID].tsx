@@ -12,10 +12,17 @@ import CategoryPageComponent from '@/components/cateoryProducts';
 
 interface SingleProduct {
   products: Product[];
+  // name: string;
+  // id: string;
 }
 
-const CategoryProductsPage: NextPage<SingleProduct> = ({ products }) => {
+const CategoryProductsPage: NextPage<SingleProduct> = ({
+  products,
+  // name,
+  // id,
+}) => {
   const dispatch = useAppDispatch();
+
   const handleCartItemDelete = async () => {
     dispatch(storeCategorizedProduct(products));
   };
@@ -24,17 +31,24 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products }) => {
   });
   return (
     <>
-      <CategoryPageComponent />
+      {/* {console.log(products, name, id)} */}
+      <CategoryPageComponent categoryName={'have to pass name'} />
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cID = context?.params?.categoryID!;
+  const cID = context?.params?.categoryId!;
+  const name = context?.params?.name!;
+
+  // console.log('--------------------------', name, cID);
+
   const res = await userAPI.getPublicProductByCategoryId(cID);
   return {
     props: {
       products: res,
+      // name: name ? name : 'no name',
+      // id: cID,
     },
   };
 };
