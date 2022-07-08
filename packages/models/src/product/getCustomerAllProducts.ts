@@ -16,8 +16,6 @@ export interface GetCustomerAllProductsQuery {
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
-    slug?: string;
-    orderBy?: string;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {

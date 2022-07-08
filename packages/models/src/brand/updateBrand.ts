@@ -1,17 +1,17 @@
 import { Brand } from './brand';
 import { ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Info, Meta } from "./createBrand";
+import { BrandInfo, BrandMeta } from "./createBrand";
 
 export interface UpdateBrandRequest{
-    info: Info,
-    meta: Meta
+    info: BrandInfo,
+    meta: BrandMeta
 }
 
 export interface UpdatedBrand{
     id:string,
-    info: Info,
-    meta: Meta
+    info: BrandInfo,
+    meta: BrandMeta
 }
 
 export interface UpdateBrandSuccessResponse extends SuccessResponse {
@@ -25,5 +25,6 @@ export interface UpdateBrandErrorResponse extends ErrorResponse{
 
 export const enum ErrorMessageUpdate{
     INVALID_BRAND_ID = 'NO BRAND WITH SUCH ID',
-    CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND'
+    CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND',
+    BRAND_ALREADY_EXISTS = 'BRAND ALREADY EXISTS'
 }
