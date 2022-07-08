@@ -1,6 +1,6 @@
 import { DescriptiveError, ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
-import { Info, Meta } from "./createBrand";
+import { BrandInfo, BrandMeta } from "./createBrand";
 import { Brand } from "./brand";
 
 export interface GetBrandByIdSuccessResponse extends SuccessResponse {

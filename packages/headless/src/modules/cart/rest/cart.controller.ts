@@ -13,7 +13,7 @@ import {
 import { CartService } from '../services';
 import { Response } from 'express';
 import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddToCartSuccessResponseDto, AddToCartErrorResponseDto, AddToCartRequestDto } from '../dto/addToCart.dto';
 import { getCartErrorResponseDto, getCartSuccessResponseDto } from '../dto/getCart.dto';

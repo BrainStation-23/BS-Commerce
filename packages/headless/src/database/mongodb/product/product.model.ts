@@ -83,8 +83,13 @@ const ProductSchema = new Schema<Product>({
         _id: false
     }],
     brands: [String],
+    manufacturer: {
+        id: String,
+        name: String,
+    },
     categories: [{
         id: String,
+        name: String,
         isFeatured: {
             type: Boolean,
             default: false

@@ -10,6 +10,7 @@ const BrandSchema = new Schema<Brand>({
     info:{
         name: {
             type: String,
+            required: true,
             unique: true
         },
         description: {
