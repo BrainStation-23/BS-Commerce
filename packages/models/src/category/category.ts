@@ -15,7 +15,7 @@ export interface Category {
   displayOrder: number;
   rootPath: string;
   ancestors: Ancestor[];
-  meta: Meta;
+  meta: CategoryMeta;
 }
 
 export interface Ancestor {
@@ -24,9 +24,9 @@ export interface Ancestor {
   level: number;
 }
 
-export interface Meta {
-  keywords?: [string];
-  description: string;
-  title: string;
-  SEFN: string;
+export interface CategoryMeta {
+  keywords?: string[];
+  description?: string;
+  title?: string;
+  SEFN?: string;
 }
