@@ -13,13 +13,13 @@ import CategoryPageComponent from '@/components/cateoryProducts';
 interface SingleProduct {
   products: Product[];
   // name: string;
-  // id: string;
+  id: string;
 }
 
 const CategoryProductsPage: NextPage<SingleProduct> = ({
   products,
   // name,
-  // id,
+  id,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -32,23 +32,23 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   return (
     <>
       {/* {console.log(products, name, id)} */}
-      <CategoryPageComponent categoryName={'have to pass name'} />
+      <CategoryPageComponent categoryName={id} />
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cID = context?.params?.categoryId!;
-  const name = context?.params?.name!;
+  const cID = context?.params?.categoryID;
+  const name = context?.params?.name;
 
-  // console.log('--------------------------', name, cID);
+  console.log('--------------------------', name, cID, context?.params);
 
   const res = await userAPI.getPublicProductByCategoryId(cID);
   return {
     props: {
       products: res,
       // name: name ? name : 'no name',
-      // id: cID,
+      id: context?.params?.categoryID,
     },
   };
 };
