@@ -42,9 +42,7 @@ const Information = (props: any) => {
     postalCode: shippingInfo?.postalCode,
     saveInformationCheckbox: '',
   };
-
-  const router = useRouter();
-
+  
   const handleCheckoutSubmit = (data: FormData) => {
     dispatch(addToShippingInfo(data));
     const obj = {

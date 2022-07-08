@@ -3,7 +3,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Link from 'next/link';
 
 const Submit = () => {
-    const imageDimensions = { width: 720, height: 456 };
+    const imageDimensions = { width: 300, height: 456 };
   
   return (
     <>
@@ -16,7 +16,7 @@ const Submit = () => {
         <div className="flex flex-col items-center border-b py-16">
           <div className="mb-8">
             <img
-              src="https://colombocme.org/wp-content/uploads/2019/03/Paymentsuccessful21.png"
+              src="https://cdn.dribbble.com/users/458522/screenshots/14007167/media/214f6fa81fbd40f3b65b2cb747393226.png?compress=1&resize=400x300&vertical=top"
               alt="Page not found!!"
               width={imageDimensions.width}
               height={imageDimensions.height}

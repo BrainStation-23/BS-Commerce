@@ -124,13 +124,17 @@ const PaymentDetails: NextComponentType = () => {
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());
       } else {
-        if (!token) {
-          toast.error('Order creation failed. You need to login in our site');
-          router.push('/account/sign-in');
-        } else {
-          toast.error('Order creation failed. Try again.');
-          router.push('/checkout');
-        }
+        toast.success('Order created successfully!');
+        router.push('/submit');
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+        // if (!token) {
+        //   toast.error('Order creation failed. You need to login in our site');
+        //   router.push('/account/sign-in');
+        // } else {
+          // toast.error('Order creation failed. Try again.');
+          // router.push('/checkout');
+        // }
       }
     });
   };
