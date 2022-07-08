@@ -6,6 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ForgotPasswordRequest } from 'models';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { loginSchema } from '@/components/global/schemas/loginSchema';
+import withoutAuth from '@/components/auth/withoutAuth';
 
 const ForgotPassword: NextComponentType = () => {
   async function handleForgotPassword(values: ForgotPasswordRequest) {}
@@ -85,4 +86,4 @@ const ForgotPassword: NextComponentType = () => {
   );
 };
 
-export default ForgotPassword;
+export default withoutAuth(ForgotPassword);

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-
+import { toast } from 'react-toastify';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
@@ -31,6 +31,10 @@ interface FormData {
 const PaymentDetails: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
   );
 
   let usableCart: any = [];
@@ -110,13 +114,25 @@ const PaymentDetails: NextComponentType = () => {
       stripeToken: '',
       stripeCustomerId: '',
       stripeChargeId: '',
-      paypalPaymentId: '',
+      paypalPaymentId: data.cardNumber || '',
       paypalRedirectUrl: '',
     };
-    userAPI.checkout(obj);
-    router.push('/submit');
-    dispatch(deleteCart());
-    dispatch(deleteCheckoutInfo());
+    userAPI.checkout(obj).then((response: any) => {
+      if (response?.code === 200) {
+        toast.success('Order created successfully!');
+        router.push('/submit');
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+      } else {
+        if (!token) {
+          toast.error('Order creation failed. You need to login in our site');
+          router.push('/account/sign-in');
+        } else {
+          toast.error('Order creation failed. Try again.');
+          router.push('/checkout');
+        }
+      }
+    });
   };
 
   const handleSameAddress = () => {
