@@ -32,7 +32,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = cookie?.parse(context.req?.headers?.cookie);
-  const cID = context?.params?.categoryID!;
+  const cID = context?.query?.id;
   const res = await userAPI.getPublicProductByCategoryId(cID, token);
   console.log(res);
 
