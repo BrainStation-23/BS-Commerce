@@ -17,6 +17,7 @@ export const ResolveRestModule = () => {
     AuthModule,
     UserModule,
     BrandModule,
+    CompareModule,
     ProductModule,
     ManufacturerModule,
     CategoryModule,

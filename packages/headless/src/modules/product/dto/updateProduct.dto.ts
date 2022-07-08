@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { ProductCategoryDto, ProductDto, ProductInfoDto, ProductMetaDto, ProductPhotoDto } from './product.dto';
+import { ProductDto } from './product.dto';
 import { Type } from 'class-transformer';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import {
@@ -13,6 +13,7 @@ import {
     UpdateProductMeta,
     UpdateProductPhoto,
     UpdateProductCategory,
+    UpdateProductManufacturer,
     UpdateProductParams,
 } from 'models';
 
@@ -138,11 +139,26 @@ export class UpdateProductPhotoDto implements UpdateProductPhoto {
     displayOrder?: number;
 }
 
+export class UpdateProductManufacturerDto implements UpdateProductManufacturer {
+    @ApiProperty({ required: false })
+    @IsString()
+    id?: string;
+
+    @ApiProperty({ required: false })
+    @IsString()
+    name?: string;
+}
+
 export class UpdateProductCategoryDto implements UpdateProductCategory {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     id?: string;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsString()
+    name?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
@@ -184,6 +200,11 @@ export class UpdateProductDto implements UpdateProductRequest {
     @IsOptional()
     @IsArray()
     brands?: [string];
+
+    @ApiProperty({ type: UpdateProductManufacturerDto, required: false })
+    @IsOptional()
+    @CustomValidator(UpdateProductManufacturerDto)
+    manufacture?: UpdateProductManufacturerDto;
 
     @ApiProperty({ type: [UpdateProductCategoryDto], required: false })
     @IsOptional()
