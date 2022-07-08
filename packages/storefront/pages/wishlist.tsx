@@ -24,7 +24,7 @@ const Wishlist: NextPage<Props> = ({  wishlistedproducts }) => {
   );
 };
 
-export default Wishlist;
+export default (Wishlist);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = cookie?.parse(context.req?.headers?.cookie);

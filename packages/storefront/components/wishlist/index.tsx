@@ -12,6 +12,7 @@ import Picture from '@/components/global/components/product/common/picture';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
+import withAuth from '../auth/withAuth';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ const WishlistComponent: NextComponentType = () => {
       />
       <div className="mx-5 mt-10 flex flex-wrap justify-center gap-5 sm:mx-5 md:mx-7 lg:mx-10 xl:mx-10">
         {wishlistData.items?.length === 0 && (
-          <div className="mx-16 mb-10">
+          <div className="mx-16 my-10">
             <div className="mx-16 my-2">
               <WishlistIcon height="h-16" width="w-16" />
             </div>
@@ -49,7 +50,7 @@ const WishlistComponent: NextComponentType = () => {
                 <p>Continue Shopping</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="ml-2 h-6 w-6"
+                  className="ml-1 h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -108,4 +109,4 @@ const WishlistComponent: NextComponentType = () => {
   );
 };
 
-export default WishlistComponent;
+export default withAuth(WishlistComponent);
