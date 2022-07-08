@@ -18,7 +18,7 @@ export interface DescriptiveError {
 
 export interface ServiceErrorResponse {
     /** Descriptive error from a service layer */
-    errors: DescriptiveError | null;
+    errors: DescriptiveError;
     /**Single string as summary of descriptive errors */
     error: any;
     /** Http code, but has no relation or dependency with http requests.

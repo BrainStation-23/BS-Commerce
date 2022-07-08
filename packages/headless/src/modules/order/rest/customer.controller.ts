@@ -13,7 +13,7 @@ import { OrderCustomerService } from '../services/customer.service';
 @ApiTags('Order - Customer API')
 @UseGuards(new RolesGuard(['customer']))
 @ApiBearerAuth()
-@Controller('auth/order')
+@Controller('customer/order')
 export class OrderCustomerController {
   constructor(private orderCustomerService: OrderCustomerService) {}
 

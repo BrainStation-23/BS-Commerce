@@ -9,7 +9,7 @@ export interface DeleteBrandSuccessResponse extends SuccessResponse {
 }
 
 export interface DeleteBrandErrorResponse extends ErrorResponse{
-    error: ErrorMessageDeleteBrand.INVALID_BRAND_ID | ErrorMessageDeleteBrand.CANNOT_DELETE_BRAND;
+    error: ErrorMessageDeleteBrand;
 }
 
 export const enum ErrorMessageDeleteBrand{

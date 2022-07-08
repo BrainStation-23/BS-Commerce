@@ -1,11 +1,11 @@
 // Mongodb dependency implementations
+import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
+import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { dbConfig } from 'config/database';
 import { CartDatabase as CartDatabaseMongo } from './mongodb/cart';
 import { CategoryDatabase as CategoryDatabaseMongo } from './mongodb/category';
 import { CompareDatabase as CompareDatabaseMongo } from './mongodb/compare/index';
-// import { UserDatabase as UserDatabaseMongo } from './mongodb/user/user';
 import { ShipmentDatabase as ShipmentDatabaseMongo } from './mongodb/shipment';
-import { BrandDatabase as BrandDatabaseMongo } from './mongodb/brand';
 import { CustomerDatabase as CustomerDatabaseMongo } from './mongodb/customer';
 import { ManufacturerDatabase as ManufacturerDatabaseMongo } from './mongodb/manufacturer';
 import { OrderDatabase as OrderDatabaseMongo } from './mongodb/order';
@@ -13,11 +13,9 @@ import { ProductDatabase as ProductDatabaseMongo } from './mongodb/product';
 import { UserDatabase as UserDatabaseMongo } from './mongodb/user';
 import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manufacturer/manufacturer';
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
-import { BrandDatabase as BrandDatabaseMysql } from './mysql/brand';
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
 
-// type CLASS_NAME = 'WISHLIST' | 'USER' | 'PRODUCT' | 'COMPARE' | 'BRAND';
 type CLASS_NAME =
   | 'WISHLIST'
   | 'USER'
@@ -31,6 +29,7 @@ type CLASS_NAME =
   | 'BRAND'
   | 'SHIPMENT'
   | 'ORDER'
+  | 'BRAND'
   | 'TAGS';
 
 const db = dbConfig.db;

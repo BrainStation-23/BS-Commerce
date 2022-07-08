@@ -58,7 +58,5 @@ export class BrandService{
         if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return {data: deletedBrand, code: HttpStatus.OK};
-    }
-    
-    
+    } 
 }

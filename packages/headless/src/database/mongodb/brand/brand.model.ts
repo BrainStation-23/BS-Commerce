@@ -31,7 +31,6 @@ const BrandSchema = new Schema<Brand>({
         },
         pageSizeOptions: [ {type: Number} ]
     },
-    
     meta: {
         keywords: {
             type: String,

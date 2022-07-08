@@ -16,7 +16,7 @@ export class Category {
   displayOrder: number;
   rootPath: string;
   ancestors: Ancestor[];
-  meta: Meta;
+  meta: CategoryMeta;
 }
 
 export class Ancestor {
@@ -25,8 +25,8 @@ export class Ancestor {
   level: number;
 }
 
-export class Meta {
-  keywords?: [string];
+export class CategoryMeta {
+  keywords?: string[];
   description?: string;
   title?: string;
   SEFN?: string;
@@ -41,7 +41,7 @@ export class RequestCategory {
   allowToSelectPageSize?: boolean;
   published?: boolean;
   displayOrder?: number;
-  meta?: Meta;
+  meta?: CategoryMeta;
 
 }
 
