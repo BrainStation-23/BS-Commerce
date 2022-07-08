@@ -1,9 +1,9 @@
 
 import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { CustomerSingleProduct } from "./customerProduct";
+import { CustomerProduct } from "./customerProduct";
 
 /**
- * API Path: /product/customer/:productId
+ * API Path: /customer/products/:productId
  * method: GET
  * query: GetCustomerProductQuery
  * response: GetCustomerProductResponse
@@ -15,7 +15,7 @@ export interface GetCustomerProductParams {
 
 export interface GetCustomerProductSuccessResponse extends SuccessResponse {
     code: number;
-    data: CustomerSingleProduct;
+    data: CustomerProduct;
 }
 
 export const enum GetCustomerProductErrorMessages {

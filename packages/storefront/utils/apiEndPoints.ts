@@ -1,5 +1,6 @@
 export const apiEndPoints = {
   getUser: `/todos`,
+  getSignedInUser: `/customer/auth`,
   getPublicProducts: '/customer/products',
   register: '/customer/auth/register',
   login: '/customer/auth/sign-in',

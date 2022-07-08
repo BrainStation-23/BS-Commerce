@@ -1,6 +1,8 @@
-import Link from "next/link";
+interface Props {
+  setModal: Function
+}
 
-const ContactDetails = (props: any) => {
+const ContactDetails: React.FC<Props> = (props) => {
   const { setModal } = props;
   return (
     <>

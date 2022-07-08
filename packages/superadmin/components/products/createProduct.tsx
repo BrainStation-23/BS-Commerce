@@ -1,47 +1,47 @@
-import { Formik, Form } from "formik";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import { NextComponentType } from "next";
-import { useEffect, useState } from "react";
+import { Formik, Form } from 'formik';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
 
-import { userAPI } from "APIs";
-import { productSchema } from "@/components/products/schema/productSchema/index";
-import MetaForm from "@/components/products/forms/metaForm";
-import PhotosForm from "@/components/products/forms/photosForm";
-import CategoryForm from "@/components/products/forms/categoryForm";
-import ProductInfoForm from "@/components/products/forms/productInfoForm";
+import { userAPI } from 'APIs';
+import { productSchema } from '@/components/products/schema/productSchema/index';
+import MetaForm from '@/components/products/forms/metaForm';
+import PhotosForm from '@/components/products/forms/photosForm';
+import CategoryForm from '@/components/products/forms/categoryForm';
+import ProductInfoForm from '@/components/products/forms/productInfoForm';
 
-interface FormDataInterFace{
-  productName: string,
-  ShortDescription: string,
-  FullDescription: string,
-  Sku: string,
-  OldPrice: number,
-  Price: number,
-  ProductCost: number,
-  showOnHomePage: boolean,
-  includeInTopMenu: boolean,
-  allowToSelectPageSize: boolean,
-  published: boolean,
-  displayOrder: number,
-  isFeatured: boolean,
-  publishDate: string,
-  tags: Array<string>,
-  brands: Array<string>,
-  keywords: Array<string>,
-  metaTitle: string,
-  metaDescription: string,
-  metaFriendlyPageName: string,
-  photosUrl: string,
-  photosID: string,
-  photosTitle: string,
-  displayOrderPhotos: string,
-  SelectedCategoryIds: number,
-  isFeaturedCategory: boolean,
-  displayOrderCategory: number,
-  categoriesData: string,
+interface FormDataInterFace {
+  productName: string;
+  ShortDescription: string;
+  FullDescription: string;
+  Sku: string;
+  OldPrice: number;
+  Price: number;
+  ProductCost: number;
+  showOnHomePage: boolean;
+  includeInTopMenu: boolean;
+  allowToSelectPageSize: boolean;
+  published: boolean;
+  displayOrder: number;
+  isFeatured: boolean;
+  publishDate: string;
+  tags: Array<string>;
+  brands: Array<string>;
+  keywords: Array<string>;
+  metaTitle: string;
+  metaDescription: string;
+  metaFriendlyPageName: string;
+  photosUrl: string;
+  photosID: string;
+  photosTitle: string;
+  displayOrderPhotos: string;
+  SelectedCategoryIds: number;
+  isFeaturedCategory: boolean;
+  displayOrderCategory: number;
+  categoriesData: string;
 }
-const CreateProduct:NextComponentType = () => {
+const CreateProduct: NextComponentType = () => {
   const router = useRouter();
   const [categogiesData, setCategoryData] = useState([]);
   // const [categogiesData, setCategoryData] = useState([
@@ -129,7 +129,7 @@ const CreateProduct:NextComponentType = () => {
       id: data.photosID,
       title: data.photosTitle,
       displayOrder: +`${data.displayOrderPhotos}`,
-      alt: "image",
+      alt: 'image',
     };
 
     const categories: any = [];
@@ -141,7 +141,7 @@ const CreateProduct:NextComponentType = () => {
             isFeatured: category.isFeatured,
             displayOrder: +category.displayOrder,
           })
-        : "";
+        : '';
     });
 
     const newData = {
@@ -154,16 +154,16 @@ const CreateProduct:NextComponentType = () => {
     };
     if (categories[0]) {
       userAPI.createProduct(newData, router);
-    } else toast.error("You must select atleast one category");
+    } else toast.error('You must select atleast one category');
   };
 
   useEffect(() => {
     async function loadCategories() {
-      const response = await userAPI.getCategories();
+      const response = await userAPI.getCategoryList();
       // console.log(response);
-      if (response?.length! > 0) {
+      if (response?.data.categories.length! > 0) {
         const categories: any = [];
-        response?.forEach((category, index) => {
+        response?.data.categories.forEach((category, index) => {
           categories.push({
             id: index + 1,
             value: category.name,
@@ -182,10 +182,10 @@ const CreateProduct:NextComponentType = () => {
     <>
       <Formik
         initialValues={{
-          productName: "",
-          ShortDescription: "",
-          FullDescription: "",
-          Sku: "",
+          productName: '',
+          ShortDescription: '',
+          FullDescription: '',
+          Sku: '',
           OldPrice: 0,
           Price: 0,
           ProductCost: 0,
@@ -195,21 +195,21 @@ const CreateProduct:NextComponentType = () => {
           published: false,
           displayOrder: 1,
           isFeatured: false,
-          publishDate: "",
+          publishDate: '',
           tags: [],
           brands: [],
           keywords: [],
-          metaTitle: "",
-          metaDescription: "",
-          metaFriendlyPageName: "",
-          photosUrl: "",
-          photosID: "",
-          photosTitle: "",
-          displayOrderPhotos: "",
+          metaTitle: '',
+          metaDescription: '',
+          metaFriendlyPageName: '',
+          photosUrl: '',
+          photosID: '',
+          photosTitle: '',
+          displayOrderPhotos: '',
           SelectedCategoryIds: 0,
           isFeaturedCategory: false,
           displayOrderCategory: 1,
-          categoriesData: "",
+          categoriesData: '',
         }}
         onSubmit={(values, actions) => {
           handleSubmit(values);

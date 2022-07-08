@@ -3,17 +3,17 @@ import { JwtModule } from '@nestjs/jwt';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { CustomerAuthController } from './rest';
 import { CustomerAuthService } from './services';
-import { customerAuthConfig } from 'config/auth';
-import { CustomerJwtStrategy } from './guards/jwt-strategy';
+import { authConfig } from 'config/auth';
 import { ICustomerDatabase } from '../customer/repositories/customer.database.interface';
 import { CustomerRepository } from '../customer/repositories';
+import { JwtStrategy } from 'src/guards/jwt-strategy';
 
 @Module({
   imports: [
     JwtModule.register({
-      secret: customerAuthConfig.jwt_key!,
+      secret: authConfig.jwt_key!,
       signOptions: {
-        expiresIn: customerAuthConfig.expiration_time!,
+        expiresIn: authConfig.expiration_time!,
       },
     }),
   ],
@@ -25,7 +25,7 @@ import { CustomerRepository } from '../customer/repositories';
       provide: ICustomerDatabase,
       useClass: ResolveDatabaseDependency('CUSTOMER_AUTH'),
     },
-    CustomerJwtStrategy,
+    JwtStrategy,
   ],
 })
 export class CustomerAuthModule { }

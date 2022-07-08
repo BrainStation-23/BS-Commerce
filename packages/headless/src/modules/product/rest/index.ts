@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
+import { RolesGuard } from 'src/guards/auth.guard';
 import {
   CreateProductDto,
   CreateProductErrorResponseDto,
@@ -13,6 +13,8 @@ import {
   GetAllProductsErrorResponseDto,
   GetAllProductsQueryDto,
   GetAllProductsSuccessResponseDto,
+  GetCustomerAllHomePageProductsErrorResponseDto,
+  GetCustomerAllHomePageProductsSuccessResponseDto,
   GetCustomerAllProductsErrorResponseDto,
   GetCustomerAllProductsQueryDto,
   GetCustomerAllProductsSuccessResponseDto,
@@ -56,9 +58,8 @@ export class ProductController {
     type: GetCustomerAllProductsErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getCustomerAllProducts(@Query() query: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
-    const { skip, limit } = query;
-    const { code, ...response } = await this.productService.getCustomerAllProducts({ skip, limit });
+  async getCustomerAllProducts(@Query() condition: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getProductsByCondition(condition);
     res.status(code);
     return { code, ...response };
   }
@@ -80,8 +81,25 @@ export class ProductController {
     return { code, ...response };
   }
 
+  @Get('customer/home-page-products')
+  @ApiResponse({
+    description: 'Get All Home Page Products Success Response',
+    type: GetCustomerAllHomePageProductsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get All Home Page Products Error Response',
+    type: GetCustomerAllHomePageProductsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerHomePageProducts(@Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerAllHomePageProducts();
+    res.status(code);
+    return { code, ...response };
+  }
+
   // Admin
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products')
   @ApiResponse({
@@ -102,7 +120,7 @@ export class ProductController {
   }
 
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/count')
   @ApiResponse({
@@ -121,7 +139,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/sku/:sku')
   @ApiParam({ name: 'sku' })
@@ -141,8 +159,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/condition')
   @ApiResponse({
@@ -164,7 +181,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -201,7 +218,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Delete('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -221,7 +238,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/brand')
   @ApiResponse({
@@ -241,7 +258,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/:productId')
   @ApiParam({ name: 'productId' })

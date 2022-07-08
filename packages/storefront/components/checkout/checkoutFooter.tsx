@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { NextComponentType } from "next";
 
-const CheckoutFooter = () => {
+const CheckoutFooter: NextComponentType = () => {
   return (
     <>
       <div className="flex flex-wrap gap-4">

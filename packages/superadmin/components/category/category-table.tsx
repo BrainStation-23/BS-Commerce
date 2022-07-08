@@ -1,18 +1,13 @@
-import { FC, useState } from "react";
-import type { NextComponentType } from "next";
-import { Category } from "models";
-import { CategoryInterface } from "./catergory-model";
 import Link from "next/link";
+import { NestedCategoryList } from "models";
 
 interface Props {
-  categories: CategoryInterface[];
+  categories: NestedCategoryList[];
 }
 
-const CategoryTable: FC<Props> = ({ categories }) => {
-  // console.log(categories);
-
+const CategoryTable: React.FC<Props> = ({ categories }: Props) => {
   return (
-    <table className="table table-striped border rounded text-center">
+    <table className="table-striped table rounded border text-center">
       <thead>
         <tr>
           <th scope="col">
@@ -26,38 +21,34 @@ const CategoryTable: FC<Props> = ({ categories }) => {
         </tr>
       </thead>
       <tbody>
-        {categories?.length > 0 ? (
-          categories.map((category) => {
-            return (
-              <tr key={category.slug}>
-                <th scope="row">
-                  <input type="checkbox" />
-                </th>
-                <td className="">{category.name}</td>
-                <td>
-                  <i className="bi bi-check-lg" />
-                </td>
-                <td>1</td>
-                <td>
-                  <button className="btn border rounded bg-white disabled">
-                    <i className="bi bi-pencil-fill me-1" />
-                    Edit
-                  </button>
-                </td>
-                <td>
-                  {/* <Link href={`category/view/${category.slug}`} passHref> */}
-                  <button className="btn border rounded bg-white">
+        {categories.map((category) => {
+          return (
+            <tr key={category.id}>
+              <th scope="row">
+                <input type="checkbox" />
+              </th>
+              <td className="">{category.name}</td>
+              <td>
+                <i className="bi bi-check-lg" />
+              </td>
+              <td>1</td>
+              <td>
+                <button className="btn disabled rounded border bg-white">
+                  <i className="bi bi-pencil-fill me-1" />
+                  Edit
+                </button>
+              </td>
+              <td>
+                <Link href={`category/view/${category.id}`} passHref>
+                  <button className="btn rounded border bg-white">
                     <i className="bi bi-eye me-1" />
                     View
                   </button>
-                  {/* </Link> */}
-                </td>
-              </tr>
-            );
-          })
-        ) : (
-          <></>
-        )}
+                </Link>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

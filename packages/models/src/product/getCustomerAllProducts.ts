@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { CustomerProduct } from "./customerProduct";
 
 /**
- * API Path: /product/customer
+ * API Path: /customer/products
  * method: GET
  * query: GetCustomerAllProductsQuery
  * response: GetCustomerAllProductsResponse
@@ -16,8 +16,6 @@ export interface GetCustomerAllProductsQuery {
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
-    slug?: string;
-    orderBy?: string;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {
