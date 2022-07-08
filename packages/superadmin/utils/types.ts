@@ -13,10 +13,9 @@ import {
   UpdateManufacturerRequest,
   GetProductParams,
   CreateProductRequest,
-  UpdatedUserRequest,
   createCategoryRequest,
   createCategorySuccessResponse,
-  GetUserResponse,
+  GetTagsResponse,
 } from 'models';
 
 export interface User {
@@ -92,7 +91,7 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
-  getTags: () => Promise<GetUserResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
 }
 
 export interface adminCreate {
