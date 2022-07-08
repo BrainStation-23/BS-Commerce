@@ -2,7 +2,6 @@ import { DeleteManufacturerSuccessResponseDto, DeleteManufacturerErrorResponseDt
 import { UpdateManufacturerDto, UpdateManufacturerErrorResponseDto, UpdateManufacturerSuccessResponseDto } from './../dto/updateManufacturer.dto';
 import { CreateManufacturerSuccessResponseDto, CreateManufacturerErrorResponseDto } from './../dto/createManufacturer.dto';
 import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';

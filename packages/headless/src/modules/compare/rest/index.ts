@@ -14,8 +14,7 @@ import { ApiBearerAuth, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs
 import { Response } from 'express';
 import { User } from 'src/entity/user';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import {
   AddToCompareDto,
   CompareErrorResponseDto,

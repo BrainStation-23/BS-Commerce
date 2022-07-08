@@ -37,6 +37,9 @@ export class BrandService{
     } 
 
     async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequestdto): Promise<UpdateBrandResponseDto>{
+        const doesBrandExist = await this.brandRepo.getBrandByName(brandFeatures.info.name);
+        if(doesBrandExist) return { error: ErrorMessageUpdate.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
+
         const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
         if(!updatedBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST};
         
@@ -55,5 +58,5 @@ export class BrandService{
         if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return {data: deletedBrand, code: HttpStatus.OK};
-    }  
+    } 
 }

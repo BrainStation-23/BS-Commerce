@@ -1,3 +1,4 @@
+import { ObjectValidationPipe } from '../validators/NestedObjectValidator.pipe';
 import {
   Body,
   Controller,
@@ -20,6 +21,7 @@ import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorR
 import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/dto/getAllBrandsDto';
 import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
 import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
+import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
 
 @Controller('brands')
 export class BrandController {
@@ -80,7 +82,7 @@ export class BrandController {
     type: CreateBrandErrorResponseDto
   })
   async createBrand(
-    @Body() brand: CreateBrandRequestDto,
+    @Body(ObjectValidationPipe) brand: CreateBrandRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.brandService.createBrand(brand);
@@ -90,9 +92,19 @@ export class BrandController {
   }
 
   @Put('/:id')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Brand was updated successfully',
+    type: UpdateBrandSuccessResponseDto
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Error updating existing brand',
+    type: UpdateBrandErrorResponseDto
+  })
   async updateBrand(
     @Param('id') brandId: string,
-    @Body() featuresToUpdate: UpdateBrandRequestdto,
+    @Body(ObjectValidationPipe) featuresToUpdate: UpdateBrandRequestdto,
     @Res({ passthrough: true })
     res: Response,
   ) {
