@@ -43,7 +43,7 @@ const WishlistComponent: NextComponentType = () => {
             <div className="mx-16 my-2">
               <WishlistIcon height="h-16" width="w-16" />
             </div>
-            <p className="text-xl text-green-600/100">Your wishlist is empty</p>
+            <p className="text-xl text-green-600/100">Your wishlist is empty.</p>
             <Link href="/" passHref>
               <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-green-600/100">
                 <p>Continue Shopping</p>
@@ -53,7 +53,7 @@ const WishlistComponent: NextComponentType = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="1"
                 >
                   <path
                     strokeLinecap="round"
@@ -83,7 +83,7 @@ const WishlistComponent: NextComponentType = () => {
                   </div>
                 </Link>
                 <button
-                  className="mb-5 mt-2 items-center text-center"
+                  className="mb-5 mt-2 items-center text-center peer"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
                   title="Remove from wishlist"
@@ -93,6 +93,12 @@ const WishlistComponent: NextComponentType = () => {
                 >
                   <WishlistIcon height="h-6" width="w-6" />
                 </button>
+                {/* <div className="absolute -left-0 -top-0 mb-6 hidden flex-col items-center peer-hover:flex">
+                  <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+                    Add to cart
+                  </span>
+                  <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+                </div> */}
               </div>
             </React.Fragment>
           );
