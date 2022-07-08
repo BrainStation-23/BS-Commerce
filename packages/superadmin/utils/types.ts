@@ -1,23 +1,21 @@
-import { NextRouter } from "next/router";
+import { NextRouter } from 'next/router';
 import {
   Product,
   UpdateProductRequest,
   SignInRequest,
   SignInSuccessResponse,
-  GetUserResponse,
   GetUserSuccessResponse,
-  getCategoryBySlugResponse,
-  getCategoryBySlugRequest,
-} from "models";
-import {
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  getCategorySuccessResponse,
   CreateManufacturerRequest,
   Manufacturer,
   UpdateManufacturerRequest,
-} from "models";
-import { GetProductParams } from "./../../models/src/product/getProduct";
-import { CreateProductRequest } from "./../../models/src/product/createProduct";
-import { UpdatedUserRequest } from "./../../models/src/user/updateUser";
-import { CategoryInterface } from "../components/category/catergory-model";
+  GetProductParams,
+  CreateProductRequest,
+  UpdatedUserRequest,
+  GetTagsResponse,
+} from 'models';
 
 export interface User {
   id?: string;
@@ -60,7 +58,10 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
-  getCategories: () => Promise<CategoryInterface[] | undefined>;
+  getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  getCategory: (
+    id: getCategoryRequest
+  ) => Promise<getCategorySuccessResponse | undefined>;
   deleteProduct: (productId: string) => Promise<boolean | undefined>;
   signin: (
     data: SignInRequest,
@@ -82,11 +83,10 @@ export interface apiFunction {
     data: UpdateManufacturerRequest,
     router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
-  getUserProfile: () => Promise<GetUserSuccessResponse | undefined>;
-  getCategoryBySlug: (
-    slug: getCategoryBySlugRequest
-  ) => Promise<getCategoryBySlugResponse | undefined>;
-  getTags: () => Promise<GetUserResponse | undefined>;
+  getUserProfile: (
+    router: NextRouter
+  ) => Promise<GetUserSuccessResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
 }
 
 export interface adminCreate {

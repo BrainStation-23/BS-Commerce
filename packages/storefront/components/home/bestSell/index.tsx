@@ -1,18 +1,19 @@
-import { NextComponentType } from "next";
-import React from "react";
-import Link from "next/link";
-import { SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import Banner from "./banner";
-import ProductRow from "./productRow.component";
+import React from "react";
+import Link from "next/link";
+import { SwiperSlide } from "swiper/react";
+import { NextComponentType } from "next";
+
+import { useAppSelector } from "customHooks/hooks";
+
+import Banner from "@/components/home/bestSell/banner";
+import ProductRow from "@/components/home/bestSell/productRow.component";
 import SwiperGrid from "@/components/global/components/swipergrid";
 import Container from "@/components/global/components/container";
-import { useAppSelector } from "customHooks/hooks";
 
 const BestSell: NextComponentType = () => {
   const products = useAppSelector(

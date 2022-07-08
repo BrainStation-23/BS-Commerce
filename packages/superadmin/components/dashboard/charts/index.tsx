@@ -4,8 +4,8 @@ import PieChart from "./pieChart/main";
 const StatChart: FC = () => {
   return (
     <>
-      <LineCharts />
-      <div>
+      <div style={{ marginLeft: "10px" }}>
+        <LineCharts />
         <PieChart />
       </div>
     </>

@@ -1,9 +1,10 @@
 import type { NextComponentType } from "next";
 
+import { accordionBody } from "utils/types";
+
 import PageTitle from "@/components/global/components/pageTitle";
 import FaqContentArea from "@/components/static/faq/contentArea";
 
-import { accordionBody } from "../../../utils/types";
 
 const accordionList: accordionBody[] = [
   {

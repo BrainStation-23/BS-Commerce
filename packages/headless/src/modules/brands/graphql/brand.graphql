@@ -1,0 +1,64 @@
+type Info {
+    name: String
+    description: String
+    allowToSelectPageSize: Boolean
+    published: Boolean
+    displayOrder: Int
+    pageSizeOptions: [Int]
+}
+input InfoInput {
+    name: String
+    description: String
+    allowToSelectPageSize: Boolean
+    published: Boolean
+    displayOrder: Int
+    pageSizeOptions: [Int]
+}
+
+type Meta {
+    keywords: String
+    description: String
+    title: String
+    SEFN: String
+}
+input MetaInput {
+    keywords: String
+    description: String
+    title: String
+    SEFN: String
+}
+type Brand {
+    id: String
+    info: Info
+    meta: Meta
+}
+
+input BrandInput {
+    info: InfoInput
+    meta: MetaInput
+}
+
+type SingleBrandResponse{
+    error: String
+    code: Int!
+    data: Brand!
+}
+
+type BrandResponse {
+  error: String
+  code: Int!
+  data: [Brand!]!
+}
+
+type Query {
+    getBrand(brandId: String!): SingleBrandResponse!
+    getAllBrands(skip: Int, limit: Int): BrandResponse!
+}
+
+type Mutation {
+     addNewBrand(brand: BrandInput!): SingleBrandResponse!
+     updateBrandById(brandId: String!, brand: BrandInput!): SingleBrandResponse!
+     deleteBrandById(brandId: String!): SingleBrandResponse!
+}
+
+    

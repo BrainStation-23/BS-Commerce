@@ -1,28 +1,25 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
   GetCustomerAllProductsResponse,
+  GetCustomerQuery,
+  GetCustomerResponse,
   updateCartItemRequest,
   updateCartItemResponse,
-} from 'models';
-import { GetCustomerProductResponse } from 'models';
-import { CustomerSignInResponse } from 'models';
-import { CreateCustomerRequest } from 'models';
-import { CreateCustomerResponse } from 'models';
-import { CustomerSignInRequest } from 'models';
-import { GetCustomerProductParams } from 'models';
-import {
-  CreateUserRequest,
-  CreateUserResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
+  CreateCustomerRequest,
+  GetCustomerProductResponse,
+  CreateCustomerResponse,
+  CustomerSignInRequest,
+  GetCustomerProductParams,
+  CustomerSignInResponse,
+  addToCartRequest,
+  AddToCartResponse,
+  deleteCartItemRequest,
+  deleteCartItemResponse,
+  Cart,
 } from 'models';
+
 import { User } from 'utils/types';
 import client from '../graphqlSchema/apollo-client';
 
@@ -76,6 +73,13 @@ export async function getCartGraphql(): Promise<Cart | undefined> {
 export async function addToCartGraphql(
   productId: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
+  return undefined;
+}
+
+export async function getSignedInUserGraphql(
+  isEmail: boolean,
+  data: GetCustomerQuery
+): Promise<GetCustomerResponse | undefined> {
   return undefined;
 }
 export async function deleteCartItemGraphql(

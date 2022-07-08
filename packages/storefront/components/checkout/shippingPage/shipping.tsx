@@ -5,16 +5,13 @@ import OrderList from "@/components/checkout/orderList";
 import CheckoutFooter from "../checkoutFooter";
 import Link from "next/link";
 
-const path = {
-  cart: false,
-  info: false,
-  shipping: true,
-  payment: false,
-};
+interface Props {
+  setModal: Function
+}
 
-const Shipping = (props: any) => {
+const Shipping: React.FC<Props> = (props: Props) => {
   const { setModal } = props;
-  console.log(setModal);
+
   return (
     <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
       <div className="px-3.5 m-0 md:mx-20 lg:mx-20 xl:mx-20 lg:my-12">

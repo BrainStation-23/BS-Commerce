@@ -1,4 +1,6 @@
-export default function ChevronRight() {
+import { NextComponentType } from "next";
+
+const ChevronRight: NextComponentType =  () => {
   return (
     <>
       <svg
@@ -16,3 +18,5 @@ export default function ChevronRight() {
     </>
   );
 }
+
+export default ChevronRight;

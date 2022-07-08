@@ -1,7 +1,7 @@
 import React from "react";
 import Path from "@/components/global/components/path";
-import OrderList from "../orderList";
-import Shipping from "./shipping";
+import OrderList from "@/components/checkout/orderList";
+import Shipping from "@/components/checkout/shippingPage/shipping";
 
 const path = {
     cart: false,
@@ -10,9 +10,13 @@ const path = {
     payment: false,
 };
 
-const ShippingPage = (props: any) => {
+interface Props {
+    setModal: Function
+}
+
+const ShippingPage: React.FC<Props> = (props: Props) => {
     const {setModal} = props;
-    console.log(setModal);
+
     return (
         <div>
             <div className="row">

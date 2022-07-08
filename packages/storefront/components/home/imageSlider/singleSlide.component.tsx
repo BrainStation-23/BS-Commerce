@@ -1,5 +1,6 @@
 import Image from "next/image";
-import {productInterface} from "./models/index";
+
+import {productInterface} from "@/components/home/imageSlider/models/index";
 
 const SinglSlide = (props: { product: productInterface }) => {
   const { title, description, deatils, image } = props.product;

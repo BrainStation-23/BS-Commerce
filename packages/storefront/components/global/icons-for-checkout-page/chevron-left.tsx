@@ -1,4 +1,6 @@
-const ChevronLeft = () => {
+import { NextComponentType } from "next";
+
+const ChevronLeft: NextComponentType = () => {
   return (
     <>
       <svg

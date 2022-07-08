@@ -1,43 +1,37 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
-import { SignInRequest } from "models";
-import { useAppDispatch } from "../../redux-hooks";
+import { useRouter } from 'next/router';
+import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import { SignInRequest } from 'models';
+import { useAppDispatch } from '@/redux-hooks';
 
-import { userAPI } from "../../APIs";
-import { saveToken } from "../../toolkit/AuthSlice";
-import { loginSchema } from "../../components/global/schemas/loginSchema";
+import { userAPI } from '@/APIs';
+import { saveToken } from '@/toolkit/AuthSlice';
+import { loginSchema } from '@/components/global/schemas/loginSchema';
 
-// interface Values {
-//   email: string;
-//   password: string;
-// }
-
-const Login = () => {
+const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   async function handleLogin(data: SignInRequest) {
     const response = await userAPI.signin(data, router);
-    console.log(response?.data.token);
+    //console.log(response?.data.token);
     if (response?.data.token !== null) {
       dispatch(saveToken(response?.data.token!));
     }
-    console.log(response);
+    // console.log(response);
   }
 
   return (
-    <div className="container d-flex flex-column align-items-center">
-      <span className="w-100 mb-3 pb-3 border-bottom border-1 flex-grow-1 text-center h1">
+    <div className="d-flex flex-column align-items-center container">
+      <span className="w-100 border-bottom border-1 flex-grow-1 h1 mb-3 pb-3 text-center">
         Admin area demo
       </span>
-      <span className="w-100 pb-3 mb-0 border-bottom border-1 flex-grow-1 text-center h5 text-muted">
+      <span className="w-100 border-bottom border-1 flex-grow-1 h5 text-muted mb-0 pb-3 text-center">
         Welcome, please sign in!
       </span>
       {/* input form */}
       <Formik
         initialValues={{
-          username: "",
-          password: "",
+          username: '',
+          password: '',
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -57,12 +51,12 @@ const Login = () => {
             >
               <div
                 className="w-100 d-flex flex-column align-items-center pt-4"
-                style={{ backgroundColor: "#f9f9f9" }}
+                style={{ backgroundColor: '#f9f9f9' }}
               >
                 <div className="form-group row mb-lg-3 w-50">
                   <label
                     htmlFor="email"
-                    className="col-lg-2 col-form-label text-center text-lg-end"
+                    className="col-lg-2 col-form-label text-lg-end text-center"
                   >
                     Email:
                   </label>
@@ -82,7 +76,7 @@ const Login = () => {
                 <div className="form-group row mb-lg-3 w-50">
                   <label
                     htmlFor="password"
-                    className="col-lg-2 col-form-label text-center text-lg-end"
+                    className="col-lg-2 col-form-label text-lg-end text-center"
                   >
                     Password:
                   </label>
@@ -125,7 +119,7 @@ const Login = () => {
         }}
       </Formik>
 
-      <span className="w-100 mb-3 pb-3 border-bottom border-1 flex-grow-1 text-center h2">
+      <span className="w-100 border-bottom border-1 flex-grow-1 h2 mb-3 pb-3 text-center">
         Defaults for admin area
       </span>
       <span className="text-muted">Admin email: </span>

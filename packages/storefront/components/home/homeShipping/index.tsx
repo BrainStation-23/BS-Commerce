@@ -1,8 +1,9 @@
-import { FC } from "react";
-import Container from "../../global/components/container";
-import { ImageCom } from "../../global/components/image";
+import { NextComponentType } from "next";
 
-const HomeShipping: FC = () => {
+import Container from "@/components/global/components/container";
+import { ImageCom } from "@/components/global/components/image";
+
+const HomeShipping: NextComponentType = () => {
   return (
     <>
       <Container className="max-w-6xl">

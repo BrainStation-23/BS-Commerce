@@ -1,14 +1,17 @@
-import { useAppSelector } from "customHooks/hooks";
+import React from "react";
+
 import type { NextComponentType } from "next";
-import React, { useState } from "react";
-import Buttons from "../../../global/components/buttons/button";
+
+import { useAppSelector } from "customHooks/hooks";
+import Buttons from "@/components/global/components/buttons/button";
+
 const CartTotal: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
 
   const totalCartPrice = cartData?.reduce((total, data) => {
-    return total + data?.product?.info?.price * data.quantity;
+    return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
   return (
@@ -49,12 +52,14 @@ const CartTotal: NextComponentType = () => {
             </table>
           </div>
           <div className="flex justify-end py-4 px-2">
-            <Buttons
-              bgColor="black"
-              height={12}
-              width={150}
-              text={"PROCEED TO CHECKOUT"}
-            />
+            <a href="/checkout">
+              <Buttons
+                bgColor="black"
+                height={12}
+                width={150}
+                text={"PROCEED TO CHECKOUT"}
+              />
+            </a>
           </div>
         </div>
       </div>

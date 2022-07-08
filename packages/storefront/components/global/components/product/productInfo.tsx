@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Product } from "models";
+import { CustomerProduct } from "models";
 
 interface SingleProduct {
-  product: Product
+  product: CustomerProduct
 }
 
 const ProductInfo = (props: SingleProduct) => {

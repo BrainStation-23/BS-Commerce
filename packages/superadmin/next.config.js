@@ -6,22 +6,22 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "/home",
+        source: '/home',
+        destination: '/',
         permanent: true,
       },
     ];
   },
   images: {
-    domains: ['admin-demo.nopcommerce.com',],
+    domains: ['admin-demo.nopcommerce.com'],
   },
 };
 
-const withTM = require("next-transpile-modules")(["marketplace"]);
+const withTM = require('next-transpile-modules')(['marketplace']);
 module.exports = withTM(nextConfig);
 
 module.exports = {
   images: {
-    domains: ['admin-demo.nopcommerce.com',],
+    domains: ['admin-demo.nopcommerce.com'],
   },
-}
+};
