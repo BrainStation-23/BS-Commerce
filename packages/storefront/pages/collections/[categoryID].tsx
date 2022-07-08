@@ -26,7 +26,6 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products, name }) => {
   });
   return (
     <>
-      {/* {console.log(products, name, id)} */}
       <CategoryPageComponent categoryName={name} />
     </>
   );

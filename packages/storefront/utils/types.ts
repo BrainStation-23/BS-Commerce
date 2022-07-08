@@ -21,6 +21,7 @@ import {
   getCategoryListResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
+  GetCustomerAllProductsQuery,
 } from 'models';
 
 export interface accordionBody {
@@ -95,7 +96,7 @@ export interface apiFunction {
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListResponse | undefined>;
   getPublicProductByCategoryId: (
-    CategoryId: string | string[]
+    CategoryId: GetCustomerAllProductsQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
 }
 

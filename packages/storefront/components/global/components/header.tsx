@@ -236,7 +236,7 @@ const Header: NextComponentType = () => {
 
             <div
               className={`absolute top-[40px] z-40 flex w-11/12 flex-col gap-y-4 overflow-hidden rounded-b-sm bg-white px-4 py-3 text-base text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
-                isOpen ? 'h-[350px]' : 'h-0 opacity-0'
+                isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
               }`}
             >
               {allCategories.map((category) => (
