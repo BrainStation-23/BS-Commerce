@@ -93,7 +93,7 @@ export interface apiFunction {
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
   getPublicProductByCategoryId: (
-    CategoryId: GetProductsByConditionQuery, token: string
+    CategoryId: GetProductsByConditionQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
 }
 

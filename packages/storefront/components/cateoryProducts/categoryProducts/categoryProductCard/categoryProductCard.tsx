@@ -11,7 +11,6 @@ interface Props {
 const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
   return (
     <>
-      {console.log(product)}
       <Link href={`product/${product?._id}`} passHref>
         <div className="mb-0 overflow-hidden" key={product?.id}>
           <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">

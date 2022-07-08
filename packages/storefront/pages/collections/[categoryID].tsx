@@ -8,7 +8,7 @@ import { Product } from 'models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
 
-var cookie = require('cookie');
+// var cookie = require('cookie');
 
 interface SingleProduct {
   products: Product[];
@@ -24,18 +24,14 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products }) => {
   });
   return (
     <>
-      {console.log(products)}
       <CategoryPageComponent />
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const token = cookie?.parse(context.req?.headers?.cookie);
   const cID = context?.params?.categoryID!;
-  const res = await userAPI.getPublicProductByCategoryId(cID, token);
-  console.log(res);
-
+  const res = await userAPI.getPublicProductByCategoryId(cID);
   return {
     props: {
       products: res,

@@ -126,16 +126,13 @@ export async function getPublicProductByIdRest(
 }
 
 export async function getPublicProductByCategoryIDRest(
-  CategoryId: GetProductsByConditionQuery, token: string
+  CategoryId: GetProductsByConditionQuery
 ): Promise<GetProductsByConditionSuccessResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getProducts}/condition?categoryId=${CategoryId}`,
-      {
-        headers: { Authorization: `Bearer ${token?.token}` }
-      }
+      `${apiEndPoints.getPublicProducts}?categoryId=${CategoryId}`
     );
-    return res.data.data.products;
+    return res.data.data;
   } catch (error: any) {
     return error;
   }
