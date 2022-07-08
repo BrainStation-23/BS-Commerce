@@ -12,15 +12,10 @@ import CategoryPageComponent from '@/components/cateoryProducts';
 
 interface SingleProduct {
   products: Product[];
-  // name: string;
-  id: string;
+  name: string;
 }
 
-const CategoryProductsPage: NextPage<SingleProduct> = ({
-  products,
-  // name,
-  id,
-}) => {
+const CategoryProductsPage: NextPage<SingleProduct> = ({ products, name }) => {
   const dispatch = useAppDispatch();
 
   const handleCartItemDelete = async () => {
@@ -32,23 +27,19 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   return (
     <>
       {/* {console.log(products, name, id)} */}
-      <CategoryPageComponent categoryName={id} />
+      <CategoryPageComponent categoryName={name} />
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cID = context?.params?.categoryID;
-  const name = context?.params?.name;
-
-  console.log('--------------------------', name, cID, context?.params);
-
+  const cID = context?.query?.categoryId;
+  const name = context?.query?.name;
   const res = await userAPI.getPublicProductByCategoryId(cID);
   return {
     props: {
       products: res,
-      // name: name ? name : 'no name',
-      id: context?.params?.categoryID,
+      name: name,
     },
   };
 };
