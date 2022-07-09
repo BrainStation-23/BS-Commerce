@@ -5,7 +5,6 @@ import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { AuthGuard } from '@nestjs/passport';
 import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
@@ -49,7 +48,7 @@ export class WishListController {
     return response;
   }
 
-  @Get('customer/wishlist')
+  @Get('wishlist')
   @ApiResponse({
     description: 'Get User Wishlist Success Response',
     type: getUserWishlistSuccessResponseDto,
