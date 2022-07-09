@@ -24,7 +24,7 @@ export class GetTagsSuccessResponseDto implements GetTagsSuccessResponse {
     @IsNumber()
     code: number;
 
-    @ApiProperty()
+    @ApiProperty({type: [TagsDto]})
     @IsObject()
     data: [TagsDto];
 }
