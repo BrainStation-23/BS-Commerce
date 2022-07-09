@@ -104,10 +104,10 @@ export class ProductService {
   }
 
   generateSearchQuery(condition: SearchCondition): object {
-    const { brandId, categoryId, productName, isFeatured } = condition;
+    const { brand, categoryId, productName, isFeatured } = condition;
     let query: Record<string, any> = {};
-    if (brandId !== undefined && brandId !== '') {
-      query.brands = brandId;
+    if (brand !== undefined && brand !== '') {
+      query.brands = brand;
     }
     if (categoryId !== undefined && categoryId !== '') {
       query['categories.id'] = categoryId;
@@ -116,7 +116,7 @@ export class ProductService {
       query['info.name'] = new RegExp(productName, 'i');
     }
     if (isFeatured !== undefined) {
-      query['info.isFeatured'] = true;
+      query['info.isFeatured'] = isFeatured || true;
     }
     return query;
   }
@@ -139,5 +139,13 @@ export class ProductService {
     const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
     if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
+    const { skip, limit } = condition;
+    const query: Record<string, any> = this.generateSearchQuery(condition);
+    const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ products, count: products.length });
   }
 }
