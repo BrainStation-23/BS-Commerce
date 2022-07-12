@@ -236,7 +236,7 @@ const ProductInfoForm: FC = () => {
                 fieldClass="custom-select w-100"
                 options={tagsOptions}
                 component={CustomSelect}
-                placeholder="Select brands..."
+                placeholder="Select tags..."
                 ismulti={true}
               />
             ) : (
