@@ -28,3 +28,5 @@ export const enum ErrorMessageUpdate{
     CANNOT_UPDATE_BRAND = 'CANNOT UPDATE THE BRAND',
     BRAND_ALREADY_EXISTS = 'BRAND ALREADY EXISTS'
 }
+
+export type UpdateBrandResponse = UpdateBrandErrorResponse | UpdateBrandSuccessResponse;
