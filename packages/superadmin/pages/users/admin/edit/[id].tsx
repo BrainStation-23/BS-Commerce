@@ -34,6 +34,26 @@ const EditCustomer: NextPage = () => {
   useEffect(() => {
     getAdmins();
   }, []);
+  console.log(adminData);
+
+  const saveHandlerAdmin = async (values: adminCreate, isPass: boolean) => {
+    const adminUpdate: any = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+     
+    };
+    await userAPI.updateAdmin(adminUpdate, router);
+  };
+  const saveHandlerPassword = async (values: any, isPass: boolean) => {
+    const adminUpdate: any = {
+      password: values.newPassword,
+      newPassword: values.Password,
+     
+    };
+    ;
+    await userAPI.changePassword(adminUpdate, router);
+  };
+
   return (
     <div className="px-5">
       <SubmitForm

@@ -15,6 +15,8 @@ import {
   GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -92,7 +94,7 @@ export async function getPublicProductsRest(): Promise<
 > {
   try {
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
-    return res.data.data as GetCustomerAllProductsSuccessResponse;
+    return res.data.data.products as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -122,4 +124,25 @@ export async function getPublicProductByIdRest(
   } catch (error: any) {
     return error;
   }
+}
+
+export async function addToCompareRest(
+  productId: AddCompareItem
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.post(
+      `${apiEndPoints.addToCompare}`,
+      { productId },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteFromCompareRest(productId: AddCompareItem) {
+  await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
 }
