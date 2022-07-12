@@ -1,36 +1,36 @@
-import { useState } from "react";
-import { NextComponentType } from "next";
+import { useState } from 'react';
+import { NextComponentType } from 'next';
 
-import CustomSelect from "@/components/products/CustomSelect.component";
-import FieldTemplate from "@/components/products/forms/fieldTemplate";
+import CustomSelect from '@/components/products/CustomSelect.component';
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
 
 const MetaForm: NextComponentType = () => {
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
   const keywordOptions = [
     {
-      label: "mobile",
-      value: "mobile",
+      label: 'mobile',
+      value: 'mobile',
     },
     {
-      label: "car",
-      value: "car",
+      label: 'car',
+      value: 'car',
     },
     {
-      label: "video",
-      value: "video",
+      label: 'video',
+      value: 'video',
     },
     {
-      label: "Fruit",
-      value: "Fruit",
+      label: 'Fruit',
+      value: 'Fruit',
     },
     {
-      label: "color",
-      value: "color",
+      label: 'color',
+      value: 'color',
     },
   ];
   return (
@@ -52,10 +52,10 @@ const MetaForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-meta col-1 px-1"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: '25px' }}
                 />
                 Meta
               </div>

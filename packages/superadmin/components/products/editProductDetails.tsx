@@ -1,55 +1,22 @@
-import { Formik, Form } from "formik";
-import { productSchema } from "./schema/productSchema";
+import { Formik, Form } from 'formik';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { FC, useEffect, useState } from 'react';
 
-import ProductInfoForm from "./forms/productInfoForm";
-import PhotosForm from "./forms/photosForm";
-import MetaForm from "./forms/metaForm";
-import { userAPI } from "../../APIs";
-import { FC, useEffect, useState } from "react";
-import CategoryForm from "./forms/categoryForm";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import { Product, ProductCategory } from "models";
+import { userAPI } from '@/APIs';
+import { ProductCategory } from 'models';
 
-interface FormDataInterFace {
-  productName: string;
-  ShortDescription?: string;
-  FullDescription?: string;
-  Sku: string;
-  OldPrice: number;
-  Price: number;
-  ProductCost: number;
-  showOnHomePage?: boolean;
-  includeInTopMenu?: boolean;
-  allowToSelectPageSize?: boolean;
-  published?: boolean;
-  displayOrder?: number;
-  isFeatured?: boolean;
-  publishDate?: any;
-  tags?: Array<string>;
-  brands?: Array<string>;
-  keywords?: Array<string>;
-  metaTitle?: string;
-  metaDescription?: string;
-  metaFriendlyPageName?: string;
-  photosUrl?: string;
-  photosID?: string;
-  photosTitle?: string;
-  displayOrderPhotos?: string | number;
-  SelectedCategoryIds?: string | number;
-  isFeaturedCategory?: boolean;
-  displayOrderCategory?: number;
-}
-interface CategoryInterface {
-  id: number;
-  value: string;
-  isSelected: boolean;
-  isFeatured: boolean;
-  displayOrder: number;
-}
-interface EditProductInterface {
-  product: Product;
-}
+import MetaForm from '@/components/products/forms/metaForm';
+import PhotosForm from '@/components/products/forms/photosForm';
+import CategoryForm from '@/components/products/forms/categoryForm';
+import ProductInfoForm from '@/components/products/forms/productInfoForm';
+import { productSchema } from '@/components/products/schema/productSchema/index';
+import {
+  CategoryInterface,
+  EditProductInterface,
+  FormDataInterFace,
+} from '@/components/products/models/index';
+
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [product, setProduct] = useState(props.product);
   const router = useRouter();
@@ -57,56 +24,56 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [categogiesData, setCategoryData] = useState([
     {
       id: 1,
-      value: "Category 1",
+      value: 'Category 1',
       isSelected: false,
       isFeatured: false,
       displayOrder: 0,
     },
     {
       id: 2,
-      value: "Category 2",
+      value: 'Category 2',
       isSelected: false,
       isFeatured: true,
       displayOrder: 1,
     },
     {
       id: 3,
-      value: "Category 3",
+      value: 'Category 3',
       isSelected: false,
       isFeatured: false,
       displayOrder: 3,
     },
     {
       id: 4,
-      value: "Category 4",
+      value: 'Category 4',
       isSelected: false,
       isFeatured: true,
       displayOrder: 5,
     },
     {
       id: 5,
-      value: "Category 5",
+      value: 'Category 5',
       isSelected: false,
       isFeatured: false,
       displayOrder: 0,
     },
     {
       id: 6,
-      value: "Category 6",
+      value: 'Category 6',
       isSelected: false,
       isFeatured: true,
       displayOrder: 0,
     },
     {
       id: 7,
-      value: "Category 7",
+      value: 'Category 7',
       isSelected: false,
       isFeatured: false,
       displayOrder: 0,
     },
     {
       id: 8,
-      value: "Category 8",
+      value: 'Category 8',
       isSelected: false,
       isFeatured: false,
       displayOrder: 0,
@@ -120,9 +87,10 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
         ? categories.push({
             id: `${category.id}`,
             isFeatured: category.isFeatured,
-            displayOrder: +category.displayOrder,
+            displayOrder: +category?.displayOrder,
+            name: category.name,
           })
-        : "";
+        : '';
     });
     const newData = {
       info: {
@@ -152,7 +120,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
           url: data.photosUrl,
           id: product.id,
           title: data.photosTitle,
-          alt: "image",
+          alt: 'image',
           displayOrder: 0,
         },
       ],
@@ -162,11 +130,11 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
     const id = product.id;
     if (categories[0]) {
       const response = await userAPI.updateProduct(newData, id, router);
-    } else toast.error("You must select a cateory");
+    } else toast.error('You must select a cateory');
   };
 
   const getCategoryData = () => {
-    categogiesData.map((category: CategoryInterface, index) => {
+    categogiesData.map((category: CategoryInterface) => {
       const productCategories = product?.categories?.filter(
         (productCategory: ProductCategory) => {
           return productCategory.id == `${category.id}`
@@ -276,7 +244,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
           }}
         </Formik>
       ) : (
-        "Something went wrong!"
+        'Something went wrong!'
       )}
     </>
   );

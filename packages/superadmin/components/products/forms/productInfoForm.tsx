@@ -2,12 +2,13 @@ import { FC, useEffect, useState } from 'react';
 
 import CustomSelect from '@/components/products/CustomSelect.component';
 import FieldTemplate from '@/components/products/forms/fieldTemplate';
-import { userAPI } from 'APIs';
+import { userAPI } from '@/APIs';
+import { tagsOption } from '@/components/products/models/index';
 
 const ProductInfoForm: FC = () => {
   const [tags, setTags] = useState([]);
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
-  const [tagsOptions, setTagsOption] = useState([]);
+  const [tagsOptions, setTagsOption] = useState<tagsOption[]>([]);
 
   const toggleButton = () => {
     if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
@@ -64,10 +65,11 @@ const ProductInfoForm: FC = () => {
   ];
   const getTags = async () => {
     const res = await userAPI.getTags();
-    res?.data ? setTags(res.data) : '';
+    const data = res?.data;
+    data ? setTags(data) : '';
   };
   const setTagsOptions = () => {
-    const temp = [];
+    const temp: tagsOption[] = [];
     tags?.map((tag) => {
       temp.push({
         label: tag?.name,

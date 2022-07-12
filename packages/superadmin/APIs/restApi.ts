@@ -332,7 +332,7 @@ export async function getTagsRest(): Promise<
   try {
     const response = await axios.get(`${apiEndPoints.tags}`);
 
-    return response?.data as GetTagsResponse;
+    return response?.data;
   } catch (error: any) {
     console.error(error);
   }

@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import type { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
-import { userAPI } from "APIs";
-import { Product } from "models";
-import ProductsList from "@/components/products/productsList";
-import SearchWindow from "@/components/products/searchWindow";
+import { userAPI } from '@/APIs';
+import { Product } from 'models';
+import ProductsList from '@/components/products/productsList';
+import SearchWindow from '@/components/products/searchWindow';
 
 const Products: NextPage = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -25,11 +25,11 @@ const Products: NextPage = () => {
           </a>
         </div>
         <div>
-          <SearchWindow setProducts={setProducts} allProducts={products} />
+          <SearchWindow setProducts={setProducts} />
           {products ? (
             <ProductsList productsList={products} setProducts={setProducts} />
           ) : (
-            "There is no product"
+            'There is no product'
           )}
         </div>
       </main>

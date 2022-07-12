@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { Product } from "models";
-import SingleView from "@/components/products/singleView";
-interface MetaCardInterface {
+import { Product } from 'models';
+import SingleView from '@/components/products/singleView';
+
+const PhotosCard: FC<{
   product: Product;
-}
-const PhotosCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
+}> = (props: { product: Product }) => {
   const { product } = props;
 
   return (
@@ -19,9 +19,9 @@ const PhotosCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
           <div className="card-title row align-items-center  ps-2 pt-2">
             <i
               className="bi bi-image-fill col-1"
-              style={{ fontSize: "25px" }}
+              style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col px-3 text-start">Photos</div>
+            <div className="fs-5 col text-start px-3">Photos</div>
           </div>
         </div>
         <div className="" id="metaTab">
@@ -35,7 +35,7 @@ const PhotosCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
                   width="130px"
                 />
               ) : (
-                "Not a valid image!!"
+                'Not a valid image!!'
               )}
             </div>
             <SingleView label="URL" value={product?.photos[0]?.url} />

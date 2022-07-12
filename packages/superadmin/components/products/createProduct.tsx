@@ -4,43 +4,14 @@ import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { useEffect, useState } from 'react';
 
-import { userAPI } from 'APIs';
+import { userAPI } from '@/APIs';
 import { productSchema } from '@/components/products/schema/productSchema/index';
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
+import { FormDataInterFace } from '@/components/products/models/index';
 
-interface FormDataInterFace {
-  productName: string;
-  ShortDescription: string;
-  FullDescription: string;
-  Sku: string;
-  OldPrice: number;
-  Price: number;
-  ProductCost: number;
-  showOnHomePage: boolean;
-  includeInTopMenu: boolean;
-  allowToSelectPageSize: boolean;
-  published: boolean;
-  displayOrder: number;
-  isFeatured: boolean;
-  publishDate: string;
-  tags: Array<string>;
-  brands: Array<string>;
-  keywords: Array<string>;
-  metaTitle: string;
-  metaDescription: string;
-  metaFriendlyPageName: string;
-  photosUrl: string;
-  photosID: string;
-  photosTitle: string;
-  displayOrderPhotos: string;
-  SelectedCategoryIds: number;
-  isFeaturedCategory: boolean;
-  displayOrderCategory: number;
-  categoriesData: string;
-}
 const CreateProduct: NextComponentType = () => {
   const router = useRouter();
   const [categogiesData, setCategoryData] = useState([]);

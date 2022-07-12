@@ -16,6 +16,7 @@ import {
   createCategoryRequest,
   createCategorySuccessResponse,
   GetTagsResponse,
+  Tags,
 } from 'models';
 
 export interface User {
