@@ -1,7 +1,7 @@
 import { useAppSelector } from 'customHooks/hooks';
 import React from 'react';
 
-const withAuth = (Component: React.FC) => {
+const WithAuth = (Component: React.FC) => {
   const Auth = (props: any) => {
     // Login data added to props via redux-store (or use react context for example)
     const isLoggedIn = useAppSelector(
@@ -23,4 +23,4 @@ const withAuth = (Component: React.FC) => {
   return Auth;
 };
 
-export default withAuth;
+export default WithAuth;

@@ -14,7 +14,7 @@ import { storeUserToken } from 'toolkit/authSlice';
 import Loading from '@/components/global/loader';
 import { loginSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
-import withoutAuth from '@/components/auth/withoutAuth';
+import WithoutAuth from '@/components/auth/withoutAuth';
 
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -58,7 +58,6 @@ const Signin: NextComponentType = () => {
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
       setLoader(false);
-      //router.push('/');
       router.back();
       toast.success('Logged in successfully!');
     } catch (err) {
@@ -209,4 +208,4 @@ const Signin: NextComponentType = () => {
   );
 };
 
-export default withoutAuth(Signin);
+export default WithoutAuth(Signin);

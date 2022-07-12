@@ -4,7 +4,7 @@ var cookie = require('cookie');
 import { CustomerProduct } from 'models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeFeaturedProducts, storeProducts } from 'toolkit/ProductsSlice';
+import { storeFeaturedProducts, storeProducts } from 'toolkit/productsSlice';
 
 import HomeComponent from '@/components/home';
 

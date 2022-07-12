@@ -3,7 +3,7 @@ import { userAPI } from "APIs";
 
 import { Wishlist } from "models";
 import { useAppDispatch } from "customHooks/hooks";
-import { storeWishlist } from "toolkit/ProductsSlice";
+import { storeWishlist } from "toolkit/productsSlice";
 
 import WishlistComponent from "@/components/wishlist";
 

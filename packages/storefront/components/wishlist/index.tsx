@@ -9,14 +9,14 @@ import { useState } from 'react';
 import {
   deleteFullWishlist,
   deleteItemFromWishlist,
-} from 'toolkit/ProductsSlice';
+} from 'toolkit/productsSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Picture from '@/components/global/components/product/common/picture';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
-import withAuth from '@/components/auth/withAuth';
+import WithAuth from '@/components/auth/withAuth';
 import Modal from '@/components/global/components/modal';
 
 const WishlistComponent: NextComponentType = () => {
@@ -145,4 +145,4 @@ const WishlistComponent: NextComponentType = () => {
   );
 };
 
-export default withAuth(WishlistComponent);
+export default WithAuth(WishlistComponent);

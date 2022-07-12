@@ -2,8 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import productsReducer from "./toolkit/ProductsSlice";
-import authReducer from "./toolkit/authSlice";
+import productsReducer from "toolkit/productsSlice";
+import authReducer from "toolkit/authSlice";
 import cartReducer from "toolkit/cartSlice";
 import userReducer from "toolkit/userSlice";
 
