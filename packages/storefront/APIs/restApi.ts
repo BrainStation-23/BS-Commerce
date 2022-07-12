@@ -20,6 +20,7 @@ import {
   getUserWishlistResponse,
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -162,6 +163,15 @@ export async function deleteWishlistItemRest(
     const res = await axios.delete(`${apiEndPoints.deleteWishlistItem}/${data}`);
 
     return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteFullWishlistRest(): Promise<deleteAllWishlistItemsResponse| undefined> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.deleteFullWishlist}`);
+    return res.data.message;
   } catch (error: any) {
     return error;
   }

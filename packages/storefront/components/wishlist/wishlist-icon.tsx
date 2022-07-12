@@ -10,7 +10,7 @@ const WishlistIcon: React.FC<Props> = ({ height, width}) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className={`${height} ${width}`}
-        fill="none"
+        fill="green"
         viewBox="0 0 24 24"
         stroke="green"
         strokeWidth="1"

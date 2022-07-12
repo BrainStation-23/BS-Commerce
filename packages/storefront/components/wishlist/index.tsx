@@ -5,21 +5,38 @@ import { NextComponentType } from 'next';
 
 import { userAPI } from 'APIs';
 import { toast } from 'react-toastify';
-import { deleteItemFromWishlist } from 'toolkit/ProductsSlice';
+import { useState } from 'react';
+import {
+  deleteFullWishlist,
+  deleteItemFromWishlist,
+} from 'toolkit/ProductsSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Picture from '@/components/global/components/product/common/picture';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
-import withAuth from '../auth/withAuth';
+import withAuth from '@/components/auth/withAuth';
+import Modal from '@/components/global/components/modal';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
 
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
   );
+
+  const handleDeleteAllWishlistItems = async () => {
+    try {
+      await userAPI.deleteFullWishlist();
+      dispatch(deleteFullWishlist());
+      toast.success('Wishlist cleared');
+    } catch (error) {
+      toast.error('Error happened. Please try again.');
+    }
+  };
 
   async function handleClick(data: string) {
     try {
@@ -38,13 +55,32 @@ const WishlistComponent: NextComponentType = () => {
         pathArray={['Home', 'Wishlist']}
         linkArray={['/', '/wishlist']}
       />
+      {modalOn && (
+        wishlistData.items?.length! > 0 && <Modal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          trigger={handleDeleteAllWishlistItems}
+          modalTitle="Delete Wishlist"
+        />
+      )}
+      <div className="mx-5 flex items-center justify-between pt-3 lg:mx-16 xl:mx-16">
+        <p className="text-xl">FAVOURITES</p>
+        <button
+          onClick={() => setModalOn(true)}
+          className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
+        >
+          Clear Wishlist
+        </button>
+      </div>
       <div className="mx-5 mt-10 flex flex-wrap justify-center gap-5 sm:mx-5 md:mx-7 lg:mx-10 xl:mx-10">
         {wishlistData.items?.length === 0 && (
           <div className="mx-16 my-10">
             <div className="mx-16 my-2">
               <WishlistIcon height="h-16" width="w-16" />
             </div>
-            <p className="text-xl text-green-600/100">Your wishlist is empty.</p>
+            <p className="text-xl text-green-600/100">
+              Your wishlist is empty.
+            </p>
             <Link href="/" passHref>
               <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-green-600/100">
                 <p>Continue Shopping</p>
@@ -84,7 +120,7 @@ const WishlistComponent: NextComponentType = () => {
                   </div>
                 </Link>
                 <button
-                  className="mb-5 mt-2 items-center text-center peer"
+                  className="peer mb-5 mt-2 items-center text-center"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
                   title="Remove from wishlist"

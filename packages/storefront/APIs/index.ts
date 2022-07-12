@@ -1,5 +1,6 @@
 import {
   addToWishlistRest,
+  deleteFullWishlistRest,
   deleteWishlistItemRest,
   forgotPasswordRest,
   getCustomerWishlistRest,
@@ -13,6 +14,7 @@ import {
 } from './restApi';
 import {
   addToWishlistGraphql,
+  deleteFullWishlistGraphql,
   deleteWishlistItemGraphql,
   forgotPasswordGraphql,
   getCustomerWishlistGraphql,
@@ -39,6 +41,7 @@ const graphqlApi: apiFunction = {
   addToWishList: addToWishlistGraphql,
   getCustomerWishlist: getCustomerWishlistGraphql,
   deleteWishlistItem: deleteWishlistItemGraphql,
+  deleteFullWishlist: deleteFullWishlistGraphql,
 };
 
 const restApi: apiFunction = {
@@ -52,7 +55,8 @@ const restApi: apiFunction = {
   getFeaturedProducts: getFeaturedProductsRest,
   addToWishList: addToWishlistRest,
   getCustomerWishlist: getCustomerWishlistRest,
-  deleteWishlistItem: deleteWishlistItemRest
+  deleteWishlistItem: deleteWishlistItemRest,
+  deleteFullWishlist: deleteFullWishlistRest,
 };
 
 export const userAPI: apiFunction =

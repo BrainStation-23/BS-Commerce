@@ -26,13 +26,13 @@ export const productsSlice = createSlice({
       state: productsState,
       action: PayloadAction<CustomerProduct[]>
     ) => {
-      state.publicProducts = action.payload;
+      state.publicProducts = action.payload.products;
     },
     storeFeaturedProducts: (
       state: productsState,
       action: PayloadAction<CustomerProduct[]>
     ) => {
-      state.featuredProducts = action.payload;
+      state.featuredProducts = action.payload.products;
     },
     storeWishlist: (
       state: productsState,
@@ -46,11 +46,16 @@ export const productsSlice = createSlice({
     ) => {
       const newList = state.wishlist.items?.filter(item => item.productId != action.payload);
       state.wishlist = {...state.wishlist, items: newList}
-      console.log(state.wishlist);
+    },
+    deleteFullWishlist: (
+      state: productsState
+    ) => {
+      const newList:any = [];
+      state.wishlist = {...state.wishlist, items: newList}
     }
   },
 });
 
-export const { storeProducts, storeFeaturedProducts, storeWishlist, deleteItemFromWishlist } = productsSlice.actions;
+export const { storeProducts, storeFeaturedProducts, storeWishlist, deleteItemFromWishlist, deleteFullWishlist } = productsSlice.actions;
 
 export default productsSlice.reducer;

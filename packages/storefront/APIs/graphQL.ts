@@ -23,6 +23,7 @@ import {
   getUserWishlistResponse,
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -120,5 +121,9 @@ export async function getCustomerWishlistGraphql(token: string): Promise<
 export async function deleteWishlistItemGraphql(data: string): Promise<
   deleteWishlistItemResponse | undefined
 > {
+  return undefined;
+}
+
+export async function deleteFullWishlistGraphql(): Promise<deleteAllWishlistItemsResponse | undefined> {
   return undefined;
 }

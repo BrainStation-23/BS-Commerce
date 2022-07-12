@@ -11,4 +11,5 @@ export const apiEndPoints = {
   addToWishList: `/wishlist`,
   getCustomerWishlist: `/customer/wishlist`,
   deleteWishlistItem: `wishlist/items`,
+  deleteFullWishlist: `/wishlist/allitems`,
 };
