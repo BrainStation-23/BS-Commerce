@@ -5,13 +5,53 @@ import ProductInfoForm from "./forms/productInfoForm";
 import PhotosForm from "./forms/photosForm";
 import MetaForm from "./forms/metaForm";
 import { userAPI } from "../../APIs";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import CategoryForm from "./forms/categoryForm";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { Product, ProductCategory } from "models";
 
-const EditProduct = (props: any) => {
-  const { product } = props;
+interface FormDataInterFace {
+  productName: string;
+  ShortDescription?: string;
+  FullDescription?: string;
+  Sku: string;
+  OldPrice: number;
+  Price: number;
+  ProductCost: number;
+  showOnHomePage?: boolean;
+  includeInTopMenu?: boolean;
+  allowToSelectPageSize?: boolean;
+  published?: boolean;
+  displayOrder?: number;
+  isFeatured?: boolean;
+  publishDate?: any;
+  tags?: Array<string>;
+  brands?: Array<string>;
+  keywords?: Array<string>;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaFriendlyPageName?: string;
+  photosUrl?: string;
+  photosID?: string;
+  photosTitle?: string;
+  displayOrderPhotos?: string | number;
+  SelectedCategoryIds?: string | number;
+  isFeaturedCategory?: boolean;
+  displayOrderCategory?: number;
+}
+interface CategoryInterface {
+  id: number;
+  value: string;
+  isSelected: boolean;
+  isFeatured: boolean;
+  displayOrder: number;
+}
+interface EditProductInterface {
+  product: Product;
+}
+const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
+  const [product, setProduct] = useState(props.product);
   const router = useRouter();
 
   const [categogiesData, setCategoryData] = useState([
@@ -72,10 +112,10 @@ const EditProduct = (props: any) => {
       displayOrder: 0,
     },
   ]);
-  const handleSubmit = async (data: any) => {
-    const categories: any = [];
+  const handleSubmit = async (data: FormDataInterFace) => {
+    const categories: ProductCategory[] = [];
 
-    categogiesData?.map((category: any, index: any) => {
+    categogiesData?.map((category: CategoryInterface) => {
       category.isSelected == true
         ? categories.push({
             id: `${category.id}`,
@@ -121,15 +161,17 @@ const EditProduct = (props: any) => {
     };
     const id = product.id;
     if (categories[0]) {
-      const response = await userAPI.updateProduct(newData, id , router);
+      const response = await userAPI.updateProduct(newData, id, router);
     } else toast.error("You must select a cateory");
   };
 
   const getCategoryData = () => {
-    categogiesData.map((category: any, index) => {
+    categogiesData.map((category: CategoryInterface, index) => {
       const productCategories = product?.categories?.filter(
-        (productCategory: any) => {
-          return productCategory.id == category.id ? productCategory : null;
+        (productCategory: ProductCategory) => {
+          return productCategory.id == `${category.id}`
+            ? productCategory
+            : null;
         }
       );
       if (productCategories[0]) {
@@ -184,7 +226,7 @@ const EditProduct = (props: any) => {
           {(formikprops) => {
             return (
               <Form onSubmit={formikprops.handleSubmit}>
-                <div className="content-header clearfix mt-3">
+                <div className="content-header clearfix pt-4">
                   <h1 className="float-start">
                     Edit product details
                     <span className="fs-5 p-3">
@@ -206,7 +248,7 @@ const EditProduct = (props: any) => {
                   </div>
                 </div>
 
-                <div className="col-md-12 clearfix">
+                {/* <div className="col-md-12 clearfix">
                   <button
                     type="button"
                     className="btn btn-info float-left mx-2 my-auto "
@@ -217,7 +259,7 @@ const EditProduct = (props: any) => {
                     <i className="bi bi-gear-fill pt-1" />
                     <p className="float-end mx-1 my-0">Settings</p>
                   </button>
-                </div>
+                </div> */}
 
                 <div className="mt-4">
                   <ProductInfoForm />
@@ -234,7 +276,7 @@ const EditProduct = (props: any) => {
           }}
         </Formik>
       ) : (
-        ""
+        "Something went wrong!"
       )}
     </>
   );

@@ -20,6 +20,9 @@ import {
   Product,
   GetAllBrandsErrorResponse,
   GetAllBrandsSuccessResponse,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  GetTagsResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -203,7 +206,7 @@ export async function getManufacturerRest(
   try {
     const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`);
     return data?.data as Manufacturer[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -219,8 +222,8 @@ export async function createManufacturerRest(
     router.push('/Manufacturer/');
     toast.success('Create Successful');
     return response.data as CreateManufacturerRequest;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    // console.log(error);
     toast.error(error?.response?.data?.error);
   }
 }
@@ -236,7 +239,7 @@ export async function deleteManufacturerRest(
     router.push('/Manufacturer/');
     toast.success('Successfully deleted');
     return data?.data as Manufacturer[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -250,7 +253,7 @@ export async function getSingleManufacturerRest(
     const res = await axios.get(`manufacturers/${data}`);
 
     return res?.data as Manufacturer;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -269,7 +272,7 @@ export async function updateManufacturerRest(
     router.push('/Manufacturer/');
     toast.success('Edit Successful');
     return response.data as UpdateManufacturerRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -281,8 +284,35 @@ export async function getCategoryListRest(): Promise<
     const response = await axios.get(`${apiEndPoints.category}`);
     return response.data as getCategoryListSuccessResponse;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    toast.error(error.response.message);
     // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function getCategoryRest(
+  id: getCategoryRequest
+): Promise<getCategorySuccessResponse | undefined> {
+  try {
+    const { data } = await axios.get(
+      `${apiEndPoints.category}/${id.categoryId}`
+    );
+    return data as getCategorySuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function createCategoryRest(
+  data: createCategoryRequest,
+  router: NextRouter
+): Promise<createCategorySuccessResponse | undefined> {
+  try {
+    const response = await axios.post(`${apiEndPoints.category}`, data);
+    router.push('/category');
+    toast.success('Create Successful');
+    return response.data as createCategorySuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
   }
 }
 
@@ -299,16 +329,15 @@ export async function getUserProfileRest(
   }
 }
 
-export async function getCategoryRest(
-  id: getCategoryRequest
-): Promise<getCategorySuccessResponse | undefined> {
+export async function getTagsRest(): Promise<
+  GetTagsResponse | undefined
+> {
   try {
-    const { data } = await axios.get(
-      `${apiEndPoints.category}/${id.categoryId}`
-    );
-    return data as getCategorySuccessResponse;
+    const response = await axios.get(`${apiEndPoints.tags}`);
+
+    return response?.data as GetTagsResponse;
   } catch (error: any) {
-    toast.error(error?.response?.data?.message);
+    console.error(error);
   }
 }
 

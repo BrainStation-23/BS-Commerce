@@ -8,4 +8,5 @@ export const apiEndPoints = {
   manufacturerList: '/manufacturers',
   category: '/category',
   brands: '/brands',
+  tags: '/tags',
 };

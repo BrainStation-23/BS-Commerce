@@ -1,6 +1,6 @@
-import { FieldProps } from "formik";
-import React from "react";
+import React, { FC } from "react";
 import Select from "react-select";
+import { FieldProps } from "formik";
 import { OptionsType, ValueType } from "react-select/lib/types";
 
 interface Option {
@@ -15,7 +15,7 @@ interface CustomSelectProps extends FieldProps {
   placeholder?: string;
 }
 
-export const CustomSelect = ({
+export const CustomSelect:FC<CustomSelectProps> = ({
   className,
   placeholder,
   field,
