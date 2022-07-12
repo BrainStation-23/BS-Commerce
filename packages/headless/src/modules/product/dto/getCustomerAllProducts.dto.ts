@@ -26,7 +26,7 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    brandId?: string;
+    brand?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
