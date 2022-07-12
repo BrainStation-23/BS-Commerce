@@ -57,6 +57,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
               <div className="flex justify-between">
                 <button
                   className="mx-4"
+                  disabled={itemToUpdate.quantity <= 0 ? true : false}
                   onClick={() => {
                     let _quantity =
                       itemToUpdate.quantity - 1 > 0
@@ -80,7 +81,6 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                 <div className="px-2">{itemToUpdate.quantity}</div>
                 <button
                   className="mx-4"
-                  disabled={itemToUpdate.quantity <= 0 ? true : false}
                   onClick={() => {
                     let _quantity = itemToUpdate.quantity + 1;
                     setItemToUpdate({
