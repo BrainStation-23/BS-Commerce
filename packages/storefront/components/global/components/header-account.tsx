@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
+import { deleteUserDetails } from 'toolkit/userSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 import Modal from './modal';
@@ -35,6 +36,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
+    dispatch(deleteUserDetails());
     toast.success('Logged out successfully!');
   };
 
@@ -103,7 +105,7 @@ const HeaderAccount: React.FC<Properties> = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-              fill={wishlistItems.items?.length! > 0 ? `green` : `none`}
+              fill={wishlistItems.items?.length! > 0 && token !== '' ? `green` : `none`}
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
@@ -114,7 +116,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <span>{wishlistItems.items?.length}</span>
+            <span>{wishlistItems.items?.length! > 0 && token !== '' ? wishlistItems.items?.length : 0}</span>
           </div>
         </button>
         <span className="z-50 text-sm" onClick={(e) => showCartDropDown()}>
