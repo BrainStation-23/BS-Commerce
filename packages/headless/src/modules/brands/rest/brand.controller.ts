@@ -12,7 +12,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services/index';
@@ -23,6 +23,7 @@ import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
 import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
 import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
 
+@ApiTags('Brand API')
 @Controller('brands')
 export class BrandController {
   constructor(private brandService: BrandService) {}
@@ -38,7 +39,18 @@ export class BrandController {
     description: 'Brands could not be fetched ',
     type: GetAllBrandsErrorResponseDto
   })
-
+  @ApiQuery({
+    name: "skip",
+    type: Number,
+    description: "skip paramter is Optional",
+    required: false
+  })
+  @ApiQuery({
+    name: "limit",
+    type: Number,
+    description: "limit parameter is Optional",
+    required: false
+  })
   async getAllBrands(
     @Query('skip') skip: number,
     @Query('limit') limit: number,
