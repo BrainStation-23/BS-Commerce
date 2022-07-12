@@ -15,6 +15,7 @@ import {
   createCategoryRequest,
   createCategorySuccessResponse,
   GetUserResponse,
+  GetTagsResponse,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -84,6 +85,6 @@ export async function createCategoryGraphQL(
 ): Promise<createCategorySuccessResponse | undefined> {
   return undefined;
 }
-export async function getTagsGraphQL(): Promise<GetUserResponse | undefined> {
+export async function getTagsGraphQL(): Promise<GetTagsResponse | undefined> {
   return;
 }
