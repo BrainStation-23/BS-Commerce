@@ -2,6 +2,7 @@ import {
   checkoutRest,
   forgotPasswordRest,
   getFeaturedProductsRest,
+  getOrderProductsRest,
   getPublicProductByIdRest,
   getPublicProductsRest,
   getSignedInUserRest,
@@ -43,6 +44,7 @@ const restApi: apiFunction = {
   getPublicProductsById: getPublicProductByIdRest,
   getFeaturedProducts: getFeaturedProductsRest,
   checkout: checkoutRest,
+  getOrderProducts: getOrderProductsRest,
 };
 
 export const userAPI: apiFunction =

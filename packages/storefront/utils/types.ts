@@ -92,6 +92,7 @@ export interface apiFunction {
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
   checkout: (data: any) => Promise<IOrderResponseData | undefined>;
+  getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
 }
 
 export interface ProductStore {

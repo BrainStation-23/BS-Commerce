@@ -123,7 +123,7 @@ const Signin: NextComponentType = () => {
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="username"
+                        id="email"
                         name="username"
                         placeholder="Enter email or phone number"
                       />

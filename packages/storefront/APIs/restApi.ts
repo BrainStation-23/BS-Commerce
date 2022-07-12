@@ -129,3 +129,18 @@ export async function checkoutRest(
     return error;
   }
 }
+
+export async function getOrderProductsRest(
+  token: string,
+): Promise<IOrderResponseData | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
