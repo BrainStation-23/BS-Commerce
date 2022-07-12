@@ -139,8 +139,8 @@ export async function getOrderProductsRest(
         Authorization: `Bearer ${token}`
       }
     });
-    return res.data;
+    return res?.data;
   } catch (error: any) {
-    return error;
+    return [];
   }
 }

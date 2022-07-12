@@ -11,7 +11,6 @@ interface Props {
 }
 
 const Order: NextPage<Props> = ({ orderProducts }: Props) => {
-  const imageDimensions = { width: 1024, height: 456 };
   const storedOrderProducts = orderProducts?.data?.orderInfo;
 
   return (
@@ -24,7 +23,7 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
       <section className="container mx-auto px-4">
         <div className="flex flex-col items-center border-b py-16">
           <div className="mb-8">
-            <DataTable storedOrderProducts={storedOrderProducts}/>
+            {storedOrderProducts?.length > 0 ?< DataTable storedOrderProducts={storedOrderProducts}/> : "You have not placed any order yet"}
           </div>
         </div>
       </section>
@@ -35,6 +34,7 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let token = cookie?.parse(context.req.headers?.cookie);
   const orderProducts = await userAPI.getOrderProducts(token?.token);
+
   return {
     props: {
       orderProducts: orderProducts,
