@@ -160,7 +160,7 @@ describe('Initializing... Admin Auth controller testing', () => {
 
                 jwtToken = response.body.data.token;
                 // jwt regex
-                expect(jwtToken).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/)
+                expect(jwtToken).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
             }, 30000)
 
             it('fails to authenticate user with an incorrect password/username', async () => {
