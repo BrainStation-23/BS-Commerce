@@ -1,4 +1,4 @@
-import { CreateUserDto } from 'src/modules/auth/dto';
+import { CreateUserDto, SignInDataDto } from 'src/modules/auth/dto';
 import { UserDto } from 'src/modules/user/dto';
 
 export const admin: UserDto = {
@@ -53,4 +53,22 @@ export const invalidCreateAdminRequestWithLessThanSixCharactersPassword = {
     lastName: 'Hosen',
     email: 'ismail61@gmail.com',
     password: 'isma',
+}
+
+export const signInData: SignInDataDto = {
+    username: 'ismail61@gmail.com',
+    password: 'ismail61'
+};
+
+export const invalidSignInData: SignInDataDto = {
+    username: 'ismail60271@gmail.com',
+    password: 'isma61@',
+}
+
+export const invalidSignInAdminRequestWithoutPassword = {
+    username: 'ismail61@gmail.com',
+}
+
+export const invalidSignInAdminRequestWithoutUsername = {
+    password: 'ismail61'
 }
