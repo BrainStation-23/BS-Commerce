@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import ImageSlider from '@/components/home/imageSlider';
 import HomeShipping from '@/components/home/homeShipping';
@@ -11,13 +12,21 @@ import HomefullBanner from '@/components/global/bannerComponent/homeFullBanner';
 import BestSell from '@/components/home/bestSell';
 import FeaturedProducts from '@/components/home/featuredProducts';
 import Modal from '@/components/comparison';
+import { setModalState } from 'toolkit/modalSlice';
 
 const HomeComponent: NextComponentType = () => {
 
   const modalState = useAppSelector(
     (state) => state.persistedReducer.modal.setModal
   );
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   
+  useState(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
+
   return (
     <>
       {

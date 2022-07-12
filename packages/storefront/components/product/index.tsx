@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
@@ -21,6 +22,8 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   product,
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -65,6 +68,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     setWishlist([...wishlist, `${product?.info?.id}`]);
     setClicked(true);
   };
+
+  useState(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
 
   return (
     <>

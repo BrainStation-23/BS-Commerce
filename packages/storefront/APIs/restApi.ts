@@ -94,7 +94,7 @@ export async function getPublicProductsRest(): Promise<
 > {
   try {
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
-    return res.data.data as GetCustomerAllProductsSuccessResponse;
+    return res.data.data.products as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;
   }
