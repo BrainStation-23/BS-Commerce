@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { customerAuthConfig } from 'config/auth';
+import { authConfig } from 'config/auth';
 
 export interface JwtPayload {
   id: string;
@@ -24,9 +24,9 @@ export const getDemoUserToken = (id: string, username: string): JwtTokenRes => {
     throw new Error('invalid userId or username found in token generation');
   }
   const jwtService = new JwtService({
-    secret: customerAuthConfig.jwt_key!,
+    secret: authConfig.jwt_key!,
     signOptions: {
-      expiresIn: customerAuthConfig.expiration_time!,
+      expiresIn: authConfig.expiration_time!,
     },
   });
   const payload = createPayloadForUserToken(id, username);

@@ -1,3 +1,3 @@
 export * from './predefined.data';
 export * from './test.auth';
-export * from './test.databse';
+export * from './test.database';
