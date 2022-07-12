@@ -14,6 +14,8 @@ import {
   GetProductParams,
   CreateProductRequest,
   UpdatedUserRequest,
+  GetAllBrandsSuccessResponse,
+  GetAllBrandsErrorResponse,
 } from 'models';
 
 export interface User {
@@ -85,6 +87,8 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
+  getBrands: () => Promise<any>;
+  getBrand(brandId:any): Promise<any>;
 }
 
 export interface adminCreate {

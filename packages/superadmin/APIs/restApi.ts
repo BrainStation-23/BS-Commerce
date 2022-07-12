@@ -1,3 +1,4 @@
+import { Brand } from './../../models/src/brand/brand';
 import { NextRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -17,6 +18,8 @@ import {
   GetProductParams,
   Manufacturer,
   Product,
+  GetAllBrandsErrorResponse,
+  GetAllBrandsSuccessResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -304,6 +307,26 @@ export async function getCategoryRest(
       `${apiEndPoints.category}/${id.categoryId}`
     );
     return data as getCategorySuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+
+export async function getBrandsRest(): Promise<any> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
+    return data?.data as GetAllBrandsSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+export async function getBrandRest(brandId:any): Promise<any> {
+  try {
+    console.log(brandId.brandId);
+    const { data } = await axios?.get(`${apiEndPoints?.brands}/${brandId.brandId}`);
+    
+    return data?.data ;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }

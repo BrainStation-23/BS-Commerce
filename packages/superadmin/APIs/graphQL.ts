@@ -11,6 +11,7 @@ import {
   getCategoryListSuccessResponse,
   getCategoryRequest,
   getCategorySuccessResponse,
+  GetAllBrandsSuccessResponse,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -61,5 +62,16 @@ export async function getCategoryListGraphQL(): Promise<
 export async function getCategoryGraphQL(
   id: getCategoryRequest
 ): Promise<getCategorySuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function getBrandsGraphQL(): Promise<
+  GetAllBrandsSuccessResponse | undefined
+> {
+  return undefined;
+}
+export async function getBrandGraphQL(): Promise<
+  any
+> {
   return undefined;
 }
