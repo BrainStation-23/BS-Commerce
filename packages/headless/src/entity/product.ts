@@ -89,7 +89,7 @@ export class UpdateProduct {
 export class SearchCondition {
   skip?: number;
   limit?: number;
-  brandId?: string;
+  brand?: string;
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;

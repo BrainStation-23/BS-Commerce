@@ -59,7 +59,7 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST
   })
   async getCustomerAllProducts(@Query() condition: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.getProductsByCondition(condition);
+    const { code, ...response } = await this.productService.getCustomerProductsByCondition(condition);
     res.status(code);
     return { code, ...response };
   }
