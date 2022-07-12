@@ -202,6 +202,8 @@ export class ProductController {
   }
 
   @Post('product')
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Create Product Success Response',
     type: CreateProductSuccessResponseDto,
