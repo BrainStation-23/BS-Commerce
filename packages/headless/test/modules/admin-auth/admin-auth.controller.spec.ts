@@ -23,7 +23,6 @@ import { ValidationPipe } from 'src/decorators/service.validator';
 describe('Initializing... Admin Auth controller testing', () => {
     let app: INestApplication;
     let adminAuthController: AuthController;
-    let adminId: string;
 
     beforeAll(async () => {
         await connectTestDatabase();
@@ -59,7 +58,6 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.body.data.message).toEqual('USER_CREATED_SUCCESSFUL');
                     expect(res.body.error).toBe(undefined);
                 });
-            adminId = result.body.data.id;
         }, 30000);
     });
 
