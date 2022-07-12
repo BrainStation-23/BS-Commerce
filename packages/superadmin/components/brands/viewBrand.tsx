@@ -1,10 +1,7 @@
-import { userAPI } from '../../APIs';
-import { useEffect, useState } from 'react';
 import BrandInfoCard from './cards/brandInfo';
 import BrandMetaCard from './cards/metaCard';
 const ViewBrand = (props: any) => {
   const { brand } = props;
-
   return (
     <>
       {brand ? (
@@ -13,7 +10,7 @@ const ViewBrand = (props: any) => {
             <h1 className="float-start">
               View brand details
               <span className="fs-5 p-3">
-                <a href="/brand" className="text-decoration-none ">
+                <a href="/Brands" className="text-decoration-none ">
                   <i className="bi bi-arrow-left-circle-fill p-2" />
                   Back to brand list
                 </a>

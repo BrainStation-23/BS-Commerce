@@ -20,7 +20,7 @@ const Brands: NextPage = () => {
       <main className="px-5">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Brands</div>
-          <a className="btn btn-primary" href="/Product/Create">
+          <a className="btn btn-primary" href="/Brands/Create">
             Add new
           </a>
         </div>
