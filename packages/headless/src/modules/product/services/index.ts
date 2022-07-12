@@ -116,7 +116,7 @@ export class ProductService {
       query['info.name'] = new RegExp(productName, 'i');
     }
     if (isFeatured !== undefined) {
-      query['info.isFeatured'] = isFeatured || true;
+      query['info.isFeatured'] = isFeatured;
     }
     return query;
   }
