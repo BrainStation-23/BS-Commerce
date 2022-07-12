@@ -16,3 +16,5 @@ export const enum ErrorMessageDeleteBrand{
     INVALID_BRAND_ID = 'NO BRAND WITH SUCH ID',
     CANNOT_DELETE_BRAND = 'CANNOT DELETE THE BRAND'
 }
+
+export type DeleteBrandResponse = DeleteBrandErrorResponse | DeleteBrandSuccessResponse;

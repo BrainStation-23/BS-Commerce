@@ -8,9 +8,6 @@ import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
 
 export class CreateBrandRequestDto implements CreateBrandRequest{
-    @ApiProperty()
-    @IsOptional()
-    id: string;
     
     @ApiProperty()
     @IsNotEmpty()
