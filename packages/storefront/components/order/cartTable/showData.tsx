@@ -18,7 +18,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
           <span className="flex justify-center"> ${data?.price}</span>
         </td>
         <td className="border border-slate-300 px-6 py-14 ">
-          <span className="flex justify-center"> ${data?.quantity}</span>
+          <span className="flex justify-center"> {data?.quantity}</span>
         </td>
         <td className="border border-slate-300 px-6 py-14 ">
           <span className="flex justify-center"> ${total}</span>
