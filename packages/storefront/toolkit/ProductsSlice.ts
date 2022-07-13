@@ -26,13 +26,13 @@ export const productsSlice = createSlice({
       state: productsState,
       action: PayloadAction<CustomerProduct[]>
     ) => {
-      state.publicProducts = action.payload.products;
+      state.publicProducts = action.payload;
     },
     storeFeaturedProducts: (
       state: productsState,
       action: PayloadAction<CustomerProduct[]>
     ) => {
-      state.featuredProducts = action.payload.products;
+      state.featuredProducts = action.payload;
     },
     storeWishlist: (
       state: productsState,

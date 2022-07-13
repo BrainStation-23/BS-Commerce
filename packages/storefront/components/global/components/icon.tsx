@@ -1,13 +1,16 @@
 import Link from 'next/link';
-import React from 'react';
 
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
-import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { userAPI } from 'APIs';
+
+import React, { useState } from 'react';
+import { AddCompareItem, Product } from 'models';
+import { setModalState } from 'toolkit/modalSlice';
+import { storeProductsToCompare } from 'toolkit/compareSlice';
 
 interface SingleProduct {
   product: Product;
@@ -17,7 +20,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
+
+  const [modalCmp, setModalCmp] = useState(false);
+
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -36,6 +41,13 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     dispatch(addToCart(cartItem));
   };
 
+  const handleAddToCompare = async () => {
+    try {
+      await userAPI.addToCompare(product.id);
+    } catch (error) {
+      toast.error('Error happend.');
+    }
+  };
 
   const handleAddToWishlist = async (productId: string, quantity: number) => {
     if (token) {
@@ -49,10 +61,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       } catch (error) {
         toast.error('Failed to add item to wishlist');
       }
-    }
-    else {
+    } else {
       toast.error('Please login to your account first.');
-      router.push('/account/sign-in')
+      router.push('/account/sign-in');
     }
   };
 
@@ -131,28 +142,35 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           </div>
         </span>
       </Link>
-      <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
-        <div className="absolute left-7 -top-7 mb-6 hidden items-center peer-hover:inline-block">
-          <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-            Add to compare
-            <div className="absolute right-5 -bottom-1 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-          </span>
-        </div>
-      </span>
+      <Link href="/" passHref>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            onClick={() => {
+              handleAddToCompare();
+              dispatch(setModalState(!modalCmp));
+              dispatch(storeProductsToCompare(product));
+            }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+          </svg>
+          <div className="absolute left-7 -top-7 mb-6 hidden items-center peer-hover:inline-block">
+            <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
+              Add to compare
+              <div className="absolute right-5 -bottom-1 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+            </span>
+          </div>
+        </span>
+      </Link>
     </div>
   );
 };

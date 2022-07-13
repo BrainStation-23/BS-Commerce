@@ -26,6 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // let token = cookie?.parse(context.req.headers?.cookie);
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
+
   return {
     props: {
       products: allProducts,

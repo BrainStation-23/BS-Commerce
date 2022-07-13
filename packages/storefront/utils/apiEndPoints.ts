@@ -12,4 +12,6 @@ export const apiEndPoints = {
   getCustomerWishlist: `/wishlist`,
   deleteWishlistItem: `wishlist/items`,
   deleteFullWishlist: `/wishlist/allitems`,
+  addToCompare: `/compare`,
+  deleteFromCompare: `/compare/item`
 };

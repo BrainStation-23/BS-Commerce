@@ -6,12 +6,17 @@ import productsReducer from "toolkit/productsSlice";
 import authReducer from "toolkit/authSlice";
 import cartReducer from "toolkit/cartSlice";
 import userReducer from "toolkit/userSlice";
+import modalReducer from "toolkit/modalSlice";
+import compareReducer from "toolkit/compareSlice";
+
 
 const reducers = combineReducers({
   product: productsReducer,
   auth: authReducer,
   cart: cartReducer,
   user: userReducer,
+  modal: modalReducer,
+  compare: compareReducer,
 });
 
 const persistConfig = {

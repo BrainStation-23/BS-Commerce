@@ -16,6 +16,8 @@ import {
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
   deleteAllWishlistItemsResponse,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -92,6 +94,8 @@ export interface apiFunction {
   getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
   deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>
+  addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
+  deleteFromCompare: (productId: AddCompareItem) => {}
 }
 
 export interface ProductStore {

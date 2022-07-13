@@ -6,11 +6,14 @@ import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
+import { setModalState } from 'toolkit/modalSlice';
+import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
+import Modal from '@/components/comparison';
 interface SingleProduct {
   product: Product;
 }
@@ -35,6 +38,19 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
   const [clicked, setClicked] = useState(false);
+  const [modalCmp, setModalCmp] = useState(false);
+
+  const handleAddToCompare = async () => {
+    try {
+      await userAPI.addToCompare(product.id);
+    } catch (error) {
+      toast.error('Error happend.');
+    }
+  };
+
+  const modalState = useAppSelector(
+    (state) => state.persistedReducer.modal.setModal
+  );
 
   const toCart = async (product: Product) => {
     const cartProduct = {
@@ -71,6 +87,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     }
   };
 
+  useState(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
+
   return (
     <>
       <Breadcrumb
@@ -78,6 +98,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         pathArray={['Home', product.info?.name]}
         linkArray={['/', '/product' + product.id]}
       />
+      {
+        modalState && <Modal setModal={true} />
+      }
       <section className="body-font overflow-hidden bg-white text-gray-700">
         <div className="container mx-auto px-5 py-24">
           <div>
@@ -272,14 +295,21 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="text-grey-700 ml-1">
                   <div>
                     <button
-                      onClick={() => toWishlist(product?.id, 1)}
+                      onClick={() => toWishlist(product?.id!, 1)}
                       className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
                     </button>
                   </div>
                   <div>
-                    <button className="mt-2 hover:text-green-600">
+                    <button
+                      className="mt-2 hover:text-green-600"
+                      onClick={() => {
+                        handleAddToCompare();
+                        dispatch(setModalState(!modalCmp));
+                        dispatch(storeProductsToCompare(product));
+                      }}
+                    >
                       + Compare
                     </button>
                   </div>
