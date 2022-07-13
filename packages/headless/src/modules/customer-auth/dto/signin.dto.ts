@@ -12,13 +12,13 @@ export class CustomerSignInDto implements CustomerSignInRequest {
     @ApiProperty()
     @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
 
     @ApiProperty()
     @IsOptional()
     @IsString()
     @IsEmail()
-    email: string;
+    email?: string;
 
     @ApiProperty()
     @IsNotEmpty()
