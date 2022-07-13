@@ -12,11 +12,11 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   return (
     <div className="text-center py-4">
-      <Link href="/product/1" passHref>
+      {/* <Link href="/product/1" passHref> */}
       <div className="text-inherit text-xl font-medium text-gray-600">
         {product?.info.name}
       </div>
-      </Link>
+      {/* </Link> */}
       <p className="text-lg font-['arial'] text-gray-600 m-1">
         {product?.tags[0]}
       </p>

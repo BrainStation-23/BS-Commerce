@@ -3,7 +3,6 @@ import { Formik, Form } from "formik";
 import Accordion from "../global/accordion";
 import InputField from "../global/inputField";
 import { adminCreate } from "../../utils/types";
-import { adminValidationSchema } from "../../utils/validationSchema";
 
 interface Props {
   initData: adminCreate;
@@ -31,7 +30,6 @@ const EditForm: FC<Props> = ({
       <Formik
         enableReinitialize={true}
         initialValues={initData}
-        //validationSchema={adminValidationSchema}
         onSubmit={(values, { resetForm }) => {
         saveHandlerAdmin(values, isPass);
         }}
@@ -121,7 +119,6 @@ const EditForm: FC<Props> = ({
         <Formik
           enableReinitialize={true}
           initialValues={initData}
-          //validationSchema={adminValidationSchema}
           onSubmit={(values, { resetForm }) => {
           saveHandlerPassword(values, isPass);
           }}
