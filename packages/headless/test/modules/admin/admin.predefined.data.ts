@@ -1,4 +1,4 @@
-import { AddressDto, UpdatedUserDto, UserDto } from 'src/modules/user/dto';
+import { AddressDto, ChangePasswordDto, UpdatedUserDto, UserDto } from 'src/modules/user/dto';
 
 export const AdminId = '21b38a0b-95f8-43bf-90f1-7dfb64ed885b';
 export const Username = 'ismail61@gmail.com';
@@ -56,4 +56,23 @@ export const updateAdminWithNewAddressMissingData = {
     firstName: 'Md Ismail',
     address: invalidAddress,
     status: 'active',
+}
+
+export const IncorrectCurrentChangePasswordRequest: ChangePasswordDto = {
+    currentPassword: "incorrect",
+    newPassword: "ismail61",
+}
+
+export const ChangePasswordRequestWithLessThanSixCharactersNewPassword: ChangePasswordDto = {
+    currentPassword: "ismail61",
+    newPassword: "ism",
+}
+
+export const ChangePasswordRequestWithoutNewPassword = {
+    currentPassword: "ismail61",
+}
+
+export const ValidCurrentChangePasswordRequest: ChangePasswordDto = {
+    currentPassword: "ismail61",
+    newPassword: "ismail61",
 }
