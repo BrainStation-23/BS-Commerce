@@ -38,7 +38,6 @@ describe('Initializing Brand controller testing', () => {
     }
 
     const createBrandRequest: CreateBrandRequestDto = {
-        id: '34343432sdfsdf3sf',
         info: {
             name: "tujhe becheeeeaini",
             description: "This is a motorBike and it belongs to USA based Harley Company",

@@ -13,7 +13,7 @@ import {
   testUsername,
 } from '../../test-utility';
 
-const token = getDemoUserToken(testUserId, testUsername).token;
+const token = getDemoUserToken(testUserId, testUsername, 'customer').token;
 const timeout = testTimeout;
 const userId = testUserId;
 const productId = testProductId;
