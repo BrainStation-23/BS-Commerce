@@ -8,6 +8,10 @@ export const apiEndPoints = {
   deleteCartItem: `/cart/item`,
   deleteAllCartItem: '/cart/allitems',
   updateCartItem: `/cart/item`,
+  addToWishList: `/wishlist`,
+  getCustomerWishlist: `/wishlist`,
+  deleteWishlistItem: `wishlist/items`,
+  deleteFullWishlist: `/wishlist/allitems`,
   addToCompare: `/compare`,
   deleteFromCompare: `/compare/item`
 };

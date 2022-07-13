@@ -14,7 +14,7 @@ import ProductRow from "@/components/home/bestSell/productRow.component";
 
 const FeaturedProducts = () => {
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts
+    (state) => state.persistedReducer.product.publicProducts?.products
   );
   const getMinimumProduct = () => {
     const w = window.innerWidth;

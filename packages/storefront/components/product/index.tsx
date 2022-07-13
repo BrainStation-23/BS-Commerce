@@ -23,7 +23,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -64,9 +67,24 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     dispatch(addToCart(cartItem));
   };
 
-  const toWishlist = () => {
-    setWishlist([...wishlist, `${product?.info?.id}`]);
-    setClicked(true);
+  const toWishlist = async (id: string, quantity: number) => {
+   if (token) {
+      const data = {
+        productId: id,
+        quantity,
+      };
+      try {
+        await userAPI.addToWishList(data);
+        setClicked(true);
+        toast.success('Item added to wishlist');
+      } catch (error) {
+        toast.error('Failed to add item to wishlist');
+      }
+    }
+    else {
+      toast.error('Please login to your account first.');
+      router.push('/account/sign-in')
+    }
   };
 
   useState(() => {
@@ -277,7 +295,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="text-grey-700 ml-1">
                   <div>
                     <button
-                      onClick={toWishlist}
+                      onClick={() => toWishlist(product?.id!, 1)}
                       className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
