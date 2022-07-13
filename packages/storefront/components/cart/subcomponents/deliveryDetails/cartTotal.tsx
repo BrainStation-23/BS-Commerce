@@ -56,7 +56,6 @@ const CartTotal: NextComponentType = () => {
               <Buttons
                 bgColor="black"
                 height={12}
-                width={150}
                 text={"PROCEED TO CHECKOUT"}
               />
             </a>

@@ -85,15 +85,15 @@ const PaymentDetails: NextComponentType = () => {
     const obj = {
       shippingCost: 0,
       billingAddress: {
-        firstName: data.firstName || shippingInfo?.firstName,
-        lastName: data.lastName || shippingInfo?.lastName,
-        email: shippingInfo?.email,
-        addressLine1: data.address || shippingInfo?.address,
-        addressLine2: data.addressOptional || shippingInfo?.addressOptional,
-        city: data.city || shippingInfo?.city,
-        country: data.country || shippingInfo?.country,
-        postCode: data.postalCode || shippingInfo?.postalCode,
-        phoneNumber: shippingInfo?.contact,
+        firstName: data.firstName || shippingInfo?.firstName!,
+        lastName: data.lastName || shippingInfo?.lastName!,
+        email: shippingInfo?.email!,
+        addressLine1: data.address || shippingInfo?.address!,
+        addressLine2: data.addressOptional || shippingInfo?.addressOptional!,
+        city: data.city || shippingInfo?.city!,
+        country: data.country || shippingInfo?.country!,
+        postCode: data.postalCode || shippingInfo?.postalCode!,
+        phoneNumber: shippingInfo?.contact!,
       },
       shippingAddress: {
         firstName: shippingInfo?.firstName,
@@ -128,6 +128,7 @@ const PaymentDetails: NextComponentType = () => {
         router.push('/submit');
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());
+
         // if (!token) {
         //   toast.error('Order creation failed. You need to login in our site');
         //   router.push('/account/sign-in');
@@ -305,13 +306,15 @@ const PaymentDetails: NextComponentType = () => {
                           className="mx-4 mt-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
+
                           }}
+                          required
                         />
                         Use a different billing address
                       </label>
                       {showShippingForm && <hr className="mt-4" />}
                     </div>
-                    {showShippingForm === true && (
+                    {showShippingForm === true ? (
                       <>
                         <div className="bg-gray-100 p-5">
                           <div className="mb-3">
@@ -320,15 +323,16 @@ const PaymentDetails: NextComponentType = () => {
                               id="country"
                               name="country"
                               className=" peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                              required
                             >
                               <option>Click here to select your country</option>
                               <option>New Mexico</option>
                               <option>Missouri</option>
                               <option>Texas</option>
                             </Field>
-                            {/* <div className="errMsg text-red-600">
+                            <div className="errMsg text-red-600">
                               <ErrorMessage name="country" />
-                            </div> */}
+                            </div>
                           </div>
 
                           <div className="row">
@@ -340,6 +344,7 @@ const PaymentDetails: NextComponentType = () => {
                                   name="firstName"
                                   className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`firstName`}
@@ -347,9 +352,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   First name (optional)
                                 </label>
-                                {/* <div className="errMsg text-red-600">
+                                <div className="errMsg text-red-600">
                                   <ErrorMessage name="firstName" />
-                                </div> */}
+                                </div>
                               </div>
 
                               <div className="relative">
@@ -359,6 +364,7 @@ const PaymentDetails: NextComponentType = () => {
                                   name="lastName"
                                   className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`lastName`}
@@ -366,9 +372,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   Last name
                                 </label>
-                                {/* <div className="errMsg text-red-600">
+                                <div className="errMsg text-red-600">
                                   <ErrorMessage name="lastName" />
-                                </div> */}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -381,6 +387,7 @@ const PaymentDetails: NextComponentType = () => {
                                 name="address"
                                 className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
+                                required
                               />
                               <label
                                 htmlFor={`address`}
@@ -388,9 +395,9 @@ const PaymentDetails: NextComponentType = () => {
                               >
                                 Address
                               </label>
-                              {/* <div className="errMsg text-red-600">
+                              <div className="errMsg text-red-600">
                                 <ErrorMessage name="address" />
-                              </div> */}
+                              </div>
                             </div>
                           </div>
 
@@ -402,6 +409,7 @@ const PaymentDetails: NextComponentType = () => {
                                 name="addressOptional"
                                 className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
+                                required
                               />
                               <label
                                 htmlFor={`addressOptional`}
@@ -409,9 +417,9 @@ const PaymentDetails: NextComponentType = () => {
                               >
                                 Apartment, suit, etc. (optional)
                               </label>
-                              {/* <div className="errMsg text-red-600">
+                              <div className="errMsg text-red-600">
                                   <ErrorMessage name="addressOptional" />
-                              </div> */}
+                              </div>
                             </div>
                           </div>
 
@@ -424,6 +432,7 @@ const PaymentDetails: NextComponentType = () => {
                                   name="city"
                                   className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`city`}
@@ -431,9 +440,9 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   City
                                 </label>
-                                {/* <div className="errMsg text-red-600">
+                                <div className="errMsg text-red-600">
                                   <ErrorMessage name="city" />
-                                </div> */}
+                                </div>
                               </div>
 
                               <div className="relative">
@@ -443,6 +452,7 @@ const PaymentDetails: NextComponentType = () => {
                                   name="postalCode"
                                   className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`postalCode`}
@@ -450,15 +460,15 @@ const PaymentDetails: NextComponentType = () => {
                                 >
                                   Postal Code
                                 </label>
-                                {/* <div className="errMsg text-red-600">
+                                <div className="errMsg text-red-600">
                                   <ErrorMessage name="postalCode" />
-                                </div> */}
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">

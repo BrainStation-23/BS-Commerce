@@ -1,15 +1,15 @@
 interface Properties {
   bgColor: string;
   height: number;
-  width: number;
+  // width: number;
   text: string;
 }
 const Buttons: React.FC<Properties> = (props) => {
   const getButtonClass = () => {
-    if (props.bgColor == "black") {
-      return `text-xs bg-black text-white px-5 py-2 w-${props.width} h-${props.height} hover:bg-green-500`;
+    if (props.bgColor == "bg-slate-300") {
+      return `text-sm bg-slate-300 text-black px-5 py-2 w-full h-${props.height} hover:bg-[#40A944] hover:text-white`;
     } else {
-      return `text-xs bg-green-400 text-white px-5 py-2 w-${props.width} h-${props.height} hover:bg-black`;
+      return `text-sm bg-[#40A944] text-black px-5 py-2 w-full h-${props.height} hover:bg-slate-300`;
     }
   };
   return (
