@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import moment from 'moment';
 import Link from 'next/link';
+import { IOrderResponseData } from 'models';
+interface Props {
+  data: IOrderResponseData;
+}
 
-const ShowData = ({ data }: any) => {
+const ShowData: React.FC<Props> = ({ data }: Props) => {
   return (
     <>
       <tr key={data.orderId}>

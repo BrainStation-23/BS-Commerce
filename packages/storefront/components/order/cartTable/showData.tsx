@@ -1,5 +1,11 @@
+import { IProductOrderData } from "models";
 
-const ShowData = ({ data }: any) => {
+interface Props {
+  data: IProductOrderData;
+}
+
+const ShowData: React.FC<Props> = ({ data }: Props) => {
+
   const total = data.quantity* data.price;
 
   return (

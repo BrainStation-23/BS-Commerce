@@ -1,6 +1,10 @@
+import { IOrderResponseData } from "models";
 import ShowData from "./showData";
+interface Props {
+  singleOrder: IOrderResponseData;
+}
 
-const TableData = ({singleOrder}: any) => {
+const TableData: React.FC<Props> = ({singleOrder}: Props) => {
   return (
     <>
     {singleOrder ? (

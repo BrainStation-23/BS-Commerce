@@ -1,15 +1,13 @@
 import React from 'react';
-
-import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
-
-import { deleteCart } from 'toolkit/cartSlice';
-import { useAppDispatch } from 'customHooks/hooks';
 import TableData from './tableData';
 import moment from 'moment';
+import { IOrderResponseData } from 'models';
+interface Props {
+  singleOrder: IOrderResponseData;
+}
 
-const DataTable: NextComponentType = ({ singleOrder }: any) => {
-  console.log("Single order from DataTable", singleOrder);
+const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
 
   return (
     <>

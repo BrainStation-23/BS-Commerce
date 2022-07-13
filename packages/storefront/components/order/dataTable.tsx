@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import type { NextComponentType } from 'next';
 import ShowData from './showData';
 import Link from 'next/link';
+import { IOrderResponseData } from 'models';
 
-const DataTable: NextComponentType = ({ storedOrderProducts }: any) => {
+interface Props {
+  storedOrderProducts: IOrderResponseData[];
+}
+
+const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
 
   return (
     <>
