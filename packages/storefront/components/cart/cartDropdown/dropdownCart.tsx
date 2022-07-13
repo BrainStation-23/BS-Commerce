@@ -121,22 +121,20 @@ const CartDropdown: NextComponentType = () => {
       >
         <div className="relative inline-block text-left">
           <div>
-            <span className="rounded-md shadow-sm">
               <button
                 type="button"
-                className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                className="inline-flex justify-center w-full bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
                 <p className="badge badge-light">{cartData?.length}</p>
               </button>
-            </span>
           </div>
           {cartTotal && (
             <div className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg">
               <div className="rounded-md bg-white shadow-xs">
                 {/* new div starts here */}
-                <div className="py-1 overflow-y-auto h-60">
+                <div className="overflow-y-auto h-60">
                   {dropdownData()}
                 </div>
                 {/* new div ends here */}

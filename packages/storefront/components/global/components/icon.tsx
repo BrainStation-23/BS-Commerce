@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import { AddCompareItem, Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { deleteItemFromWishlist } from 'toolkit/productsSlice';
 
 interface SingleProduct {
   product: Product;
@@ -26,6 +27,23 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
+
+  const wishlistData = useAppSelector(
+    (state) => state.persistedReducer.product.wishlist.items
+  );
+
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const inWishlist = wishlistData?.find((item) => item.productId === product.id)
+    ? true
+    : false;
+
+  const btnClass =
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white';
+  const btnClassFilled =
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
   const handleAddToCart = () => {
     const cartProduct = {
@@ -67,13 +85,23 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     }
   };
 
+  const deleteFromWishlist = async (productId: string) => {
+    try {
+      await userAPI.deleteWishlistItem(productId);
+      toast.success('Item removed from wishlist');
+      dispatch(deleteItemFromWishlist(productId));
+    } catch (error) {
+      toast.error('Failed to remove item from wishlist');
+    }
+  };
+
   return (
     <div className="rounded-full bg-white p-2 text-center drop-shadow-md">
       <Link href="/" passHref>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+            className={btnClass}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -99,7 +127,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+          className={btnClass}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -119,16 +147,20 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         </div>
       </span>
 
-      <Link href={token ? `/wishlist` : `/account/sign-in`} passHref>
+      <Link href={token ? `/` : `/account/sign-in`} passHref>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+            className={inWishlist ? btnClassFilled : btnClass}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={() => handleAddToWishlist(product.id, 1)}
+            onClick={() =>
+              inWishlist
+                ? deleteFromWishlist(product.id)
+                : handleAddToWishlist(product.id, 1)
+            }
           >
             <path
               strokeLinecap="round"
@@ -148,7 +180,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+            className={btnClass}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
