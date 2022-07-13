@@ -86,15 +86,15 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       <section className="body-font overflow-hidden bg-white text-gray-700">
         <div className="container mx-auto px-5 py-24">
           <div>
-            <div className="mx-auto flex flex-wrap lg:w-4/5">
-              <div className="w-full lg:w-1/2">
-                <div className="relative inset-0 z-0 bg-cover bg-center">
+            <div className="mx-auto flex flex-wrap">
+              <div className="md:w-1/2 w-full">
+                <div className="relative inset-0 bg-cover bg-center z-0">
                   <ProductImagesSlider product={product}></ProductImagesSlider>
                 </div>
               </div>
-              <div className="w-full lg:w-1/2 lg:pl-5 ">
-                <h2 className="title-font mb-1 text-xl font-normal text-gray-900">
-                  {product.info?.name}
+              <div className="md:w-1/2 w-full md:pl-5 mt-10 md:mt-0 ">
+                <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
+                  {product.info.name}
                 </h2>
                 <div className="flex">
                   <svg
@@ -177,25 +177,25 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       <div className="flex">
                         <button
                           onClick={() => setSize('s')}
-                          className="m-2 hover:text-green-600"
+                          className="hover:text-green-600 m-2"
                         >
                           s
                         </button>
                         <button
                           onClick={() => setSize('m')}
-                          className="m-2 hover:text-green-600"
+                          className="hover:text-green-600 m-2"
                         >
                           m
                         </button>
                         <button
                           onClick={() => setSize('l')}
-                          className="m-2 hover:text-green-600"
+                          className="hover:text-green-600 m-2"
                         >
                           l
                         </button>
                         <button
                           onClick={() => setSize('xl')}
-                          className="m-2 hover:text-green-600"
+                          className="hover:text-green-600 m-2"
                         >
                           xl
                         </button>
@@ -210,37 +210,37 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       <span className="mr-3">Color:</span>
                       <button
                         onClick={() => setColor('white')}
-                        className="h-6 w-6 border-2 border-gray-300 active:outline"
+                        className="border-2 border-gray-300 w-6 h-6 active:outline"
                       ></button>
                       <button
                         onClick={() => setColor('black')}
-                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-gray-700 active:outline"
+                        className="border-2 border-gray-300 ml-3 bg-gray-700 w-6 h-6 active:outline"
                       ></button>
                       <button
                         onClick={() => setColor('red')}
-                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-red-500 active:outline"
+                        className="border-2 border-gray-300 ml-3 bg-red-500 w-6 h-6 active:outline"
                       ></button>
                     </div>
                   </div>
                 )}
 
-                <div className="flex flex-wrap lg:w-fit">
-                  <div className="title-text ml-1 mr-3 mt-4 flex items-center">
+                <div className="flex text-black">
+                  <div className="flex lg:mx-2 title-text items-center">
                     Quantity
-                    <div className="px-auto m-1 rounded border-2 border-gray-300 ">
+                    <div className="m-1 md:ml-4 border-2 border-gray-200 rounded">
                       <button
-                        onClick={() =>
-                          setAmount(amount - 1 >= 0 ? amount - 1 : 0)
-                        }
-                        className="m-2"
+                        onClick={() => setAmount(amount - 1)}
+                        {...(amount <= 1 ? (disableDecrement = true) : null)}
+                        disabled={disableDecrement}
+                        className="p-2"
                       >
                         -
                       </button>
-                      <span className="m-2">{amount}</span>
+                      <span className="p-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
                         disabled={disableIncrement}
-                        className="m-2"
+                        className="p-2"
                       >
                         +
                       </button>
@@ -248,8 +248,8 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={() => toCart(product)}
-                      className="mt-4 ml-10 rounded bg-green-600 px-10 text-white hover:bg-gray-600 focus:outline-none"
+                      onClick={() => toCart(product.id)}
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -258,19 +258,19 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   ) : (
                     <button
                       disabled={true}
-                      className="mt-4 ml-10 rounded bg-green-600 px-10 text-white hover:bg-gray-600 focus:outline-none"
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                     >
                       Soldout
                     </button>
                   )}
                 </div>
-                <div className="flex flex-wrap lg:w-fit">
+                <div className=" flex flex-wrap">
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="mt-5 ml-1 rounded bg-gray-600 px-20 py-1 text-white transition duration-200 ease-out hover:bg-green-400 hover:ease-in md:px-32 lg:px-48	"
+                      className="rounded mt-5 ml-1 bg-black flex w-full  md:px-32 items-center justify-center py-2 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
                     >
-                      Buy Now
+                      <span className="mx-auto">Buy Now</span>
                     </button>
                   </Link>
                 </div>

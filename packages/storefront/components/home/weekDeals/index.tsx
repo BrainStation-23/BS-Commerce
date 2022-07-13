@@ -38,7 +38,16 @@ const WeekDeals: NextComponentType = () => {
             products.map((product: any) => (
               <SwiperSlide key={product.id}>
 
-                <Link href={`product/${product.id}`} passHref>
+                <Link
+                  href={{
+                    pathname: `product/${product.info.name}`,
+                    query: {
+                      id: product.id,
+                      name: product.info.name,
+                    },
+                  }}
+                  as={`product/${product.info.name}`}
+                >
                   <div className="mb-0 overflow-hidden" key={product.id}>
                     <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer">
                       <div className="rounded overflow-hidden max-w-sm">
@@ -74,7 +83,16 @@ const WeekDeals: NextComponentType = () => {
                           </div>
 
                           <div className="text-center py-4">
-                            <Link href={`/product/${product.id}`} passHref>
+                            <Link
+                              href={{
+                                pathname: `product/${product.info.name}`,
+                                query: {
+                                  id: product.id,
+                                  name: product.info.name,
+                                },
+                              }}
+                              as={`product/${product.info.name}`}
+                            >
                               <div className="text-inherit text-xl font-medium text-gray-600">
                                 {product.info.name}
                               </div>

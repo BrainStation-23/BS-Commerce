@@ -1,10 +1,8 @@
-import PropTypes from "prop-types";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper";
-import { useState } from "react";
-import { products } from "../../allData/product-data.json";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Thumbs } from 'swiper';
+import { useState, FC } from 'react';
 
-import { Product } from "models";
+import { Product } from 'models';
 interface SingleProduct {
   product: Product;
 }
