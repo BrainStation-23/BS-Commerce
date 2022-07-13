@@ -22,12 +22,16 @@ export const multerOptions = {
     storage: diskStorage({
         // Destination path details
         destination: (req: any, file: Express.Multer.File, cb: any) => {
-            const uploadPath = `${multerConfig.dest}/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`;
-            // Create folder if doesn't exist
-            if (!existsSync(uploadPath)) {
-                mkdirSync(uploadPath, { recursive: true });
+            try {
+                const uploadPath = `${multerConfig.dest}/${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDate()}`;
+                // Create folder if doesn't exist
+                if (!existsSync(uploadPath)) {
+                    mkdirSync(uploadPath, { recursive: true });
+                }
+                cb(null, uploadPath);
+            } catch (error) {
+                console.log(error)
             }
-            cb(null, uploadPath);
         },
         // File modification details
         filename: (req: any, file: Express.Multer.File, cb: any) => {

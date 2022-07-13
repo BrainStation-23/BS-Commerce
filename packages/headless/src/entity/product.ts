@@ -40,9 +40,9 @@ export class Product {
   tags?: string[];
   photos?: Photo[];
   brands?: string[];
-  manufacture?: {
-    id?: string,
-    name?: string,
+  manufacturer?: {
+    id: string,
+    name: string,
   };
   categories: Category[]
 }
@@ -89,7 +89,7 @@ export class UpdateProduct {
 export class SearchCondition {
   skip?: number;
   limit?: number;
-  brandId?: string;
+  brand?: string;
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;

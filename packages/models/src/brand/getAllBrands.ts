@@ -12,3 +12,5 @@ export interface GetAllBrandsSuccessResponse extends SuccessResponse{
 }
 
 export interface GetAllBrandsErrorResponse extends ErrorResponse{ }
+
+export type GetAllBrandsResponse = GetAllBrandsErrorResponse | GetAllBrandsSuccessResponse;

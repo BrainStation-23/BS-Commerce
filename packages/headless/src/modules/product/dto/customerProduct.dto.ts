@@ -6,7 +6,7 @@ import {
     CustomerProductPhoto,
     CustomerProductCategory,
     CustomerProduct,
-    CustomerProductManufacture,
+    CustomerProductManufacturer,
 } from 'models';
 
 export class CustomerProductInfoDto implements CustomerProductInfo {
@@ -100,14 +100,12 @@ export class CustomerProductPhotoDto implements CustomerProductPhoto {
     displayOrder?: number;
 }
 
-export class CustomerProductManufactureDto implements CustomerProductManufacture {
+export class CustomerProductManufacturerDto implements CustomerProductManufacturer {
     @ApiProperty({ required: true })
-    @IsNotEmpty()
     @IsString()
     name: string;
 
     @ApiProperty({ required: true })
-    @IsNotEmpty()
     @IsString()
     id: string;
 }
@@ -159,10 +157,10 @@ export class CustomerProductDto implements CustomerProduct {
     @IsArray()
     brands?: string[];
 
-    @ApiProperty({ type: CustomerProductManufactureDto })
-    @IsNotEmptyObject()
+    @ApiProperty({ type: CustomerProductManufacturerDto })
+    @IsOptional()
     @IsObject()
-    manufacture: CustomerProductManufactureDto;
+    manufacturer: CustomerProductManufacturerDto;
 
     @ApiProperty({ type: [CustomerProductCategoryDto] })
     @IsNotEmptyObject()

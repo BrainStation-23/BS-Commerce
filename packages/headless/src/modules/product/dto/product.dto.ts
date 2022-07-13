@@ -5,7 +5,7 @@ import {
     ProductMeta,
     ProductPhoto,
     ProductCategory,
-    ProductManufacture,
+    ProductManufacturer,
     Product,
 } from 'models';
 
@@ -124,14 +124,12 @@ export class ProductPhotoDto implements ProductPhoto {
     displayOrder?: number;
 }
 
-export class ProductManufactureDto implements ProductManufacture {
+export class ProductManufacturerDto implements ProductManufacturer {
     @ApiProperty({ required: false })
-    @IsOptional()
     @IsString()
     id: string;
 
     @ApiProperty({ required: false })
-    @IsOptional()
     @IsString()
     name: string;
 }
@@ -188,10 +186,10 @@ export class ProductDto implements Product {
     @IsArray()
     brands?: string[];
 
-    @ApiProperty({ type: ProductManufactureDto })
+    @ApiProperty({ type: ProductManufacturerDto })
     @IsOptional()
     @IsObject()
-    manufacture?: ProductManufactureDto;
+    manufacturer?: ProductManufacturerDto;
 
     @ApiProperty({ type: [ProductCategoryDto] })
     @IsNotEmptyObject()

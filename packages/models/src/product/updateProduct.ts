@@ -42,7 +42,7 @@ export interface UpdateProductPhoto {
     displayOrder?: number
 }
 
-export interface UpdateProductManufacture {
+export interface UpdateProductManufacturer {
     name?: string,
     id?: string,
 }
@@ -60,7 +60,7 @@ export interface UpdateProductRequest {
     tags?: string[];
     photos?: UpdateProductPhoto[];
     brands?: string[],
-    manufacture?: UpdateProductManufacture,
+    manufacturer?: UpdateProductManufacturer,
     categories?: UpdateProductCategory[];
 }
 

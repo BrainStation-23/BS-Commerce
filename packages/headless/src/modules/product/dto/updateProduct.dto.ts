@@ -13,7 +13,7 @@ import {
     UpdateProductMeta,
     UpdateProductPhoto,
     UpdateProductCategory,
-    UpdateProductManufacture,
+    UpdateProductManufacturer,
     UpdateProductParams,
 } from 'models';
 
@@ -139,14 +139,12 @@ export class UpdateProductPhotoDto implements UpdateProductPhoto {
     displayOrder?: number;
 }
 
-export class UpdateProductManufactureDto implements UpdateProductManufacture {
+export class UpdateProductManufacturerDto implements UpdateProductManufacturer {
     @ApiProperty({ required: false })
-    @IsOptional()
     @IsString()
     id?: string;
 
     @ApiProperty({ required: false })
-    @IsOptional()
     @IsString()
     name?: string;
 }
@@ -203,10 +201,10 @@ export class UpdateProductDto implements UpdateProductRequest {
     @IsArray()
     brands?: [string];
 
-    @ApiProperty({ type: UpdateProductManufactureDto, required: false })
+    @ApiProperty({ type: UpdateProductManufacturerDto, required: false })
     @IsOptional()
-    @CustomValidator(UpdateProductManufactureDto)
-    manufacture?: UpdateProductManufactureDto;
+    @CustomValidator(UpdateProductManufacturerDto)
+    manufacture?: UpdateProductManufacturerDto;
 
     @ApiProperty({ type: [UpdateProductCategoryDto], required: false })
     @IsOptional()
