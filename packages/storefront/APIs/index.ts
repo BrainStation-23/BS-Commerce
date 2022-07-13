@@ -1,4 +1,5 @@
 import {
+  checkoutRest,
   addToWishlistRest,
   deleteFullWishlistRest,
   deleteWishlistItemRest,
@@ -7,6 +8,7 @@ import {
   forgotPasswordRest,
   getCustomerWishlistRest,
   getFeaturedProductsRest,
+  getOrderProductsRest,
   getPublicProductByIdRest,
   getPublicProductsRest,
   getSignedInUserRest,
@@ -59,6 +61,8 @@ const restApi: apiFunction = {
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
   getFeaturedProducts: getFeaturedProductsRest,
+  checkout: checkoutRest,
+  getOrderProducts: getOrderProductsRest,
   addToWishList: addToWishlistRest,
   getCustomerWishlist: getCustomerWishlistRest,
   deleteWishlistItem: deleteWishlistItemRest,

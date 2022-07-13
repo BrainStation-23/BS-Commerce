@@ -1,67 +1,72 @@
-import React from "react";
-import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
-import Path from "@/components/global/components/path";
-import OrderList from "@/components/checkout/orderList";
-import CheckoutFooter from "../checkoutFooter";
-import Link from "next/link";
+import React from 'react';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import Path from '@/components/global/components/path';
+import OrderList from '@/components/checkout/orderList';
+import CheckoutFooter from '../checkoutFooter';
+import Link from 'next/link';
+import { useAppSelector } from 'customHooks/hooks';
 
 interface Props {
-  setModal: Function
+  setModal: Function;
 }
 
 const Shipping: React.FC<Props> = (props: Props) => {
+  const shippingInfo = useAppSelector(
+    (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
   const { setModal } = props;
 
   return (
     <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
-      <div className="px-3.5 m-0 md:mx-20 lg:mx-20 xl:mx-20 lg:my-12">
-        <div className="box-border p-4 border-2 mt-5 divide-y-2 rounded-md text-center mx-auto">
-          <div className="flex justify-between items-center p-4">
+      <div className="m-0 px-3.5 md:mx-20 lg:mx-20 lg:my-12 xl:mx-20">
+        <div className="mx-auto mt-5 box-border divide-y-2 rounded-md border-2 p-4 text-center">
+          <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
               <p className="text-sm text-[#333333]">Contact</p>
-              <p className="text-sm">+880 151-5209334</p>
+              <p className="text-sm">{shippingInfo?.contact}</p>
             </div>
             <button
               onClick={() => {
                 const obj = {
-                    info: true,
-                    ship: false,
-                    pay: false,
-                  }
+                  info: true,
+                  ship: false,
+                  pay: false,
+                };
                 setModal(obj);
               }}
               className="ml-10 text-sm"
-              style={{ border: "none" }}
+              style={{ border: 'none' }}
             >
               Change
             </button>
           </div>
 
-          <div className="flex justify-between items-center p-4">
+          <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
               <p className="text-sm text-[#333333]">Ship to</p>
-              <p className="text-sm">Kalachandpur Gulshan Dhaka-1212</p>
+              <p className="text-sm">{shippingInfo?.address}</p>
             </div>
             <button
               onClick={() => {
                 const obj = {
-                    info: true,
-                    ship: false,
-                    pay: false,
-                  }
+                  info: true,
+                  ship: false,
+                  pay: false,
+                };
                 setModal(obj);
               }}
               className="ml-10 text-sm"
-              style={{ border: "none" }}
+              style={{ border: 'none' }}
             >
               Change
             </button>
           </div>
         </div>
 
-        <p className="pt-7 font-normal text-lg">Shipping method</p>
+        <p className="pt-7 text-lg font-normal">Shipping method</p>
 
-        <div className="my-3 rounded-md flex flex-wrap justify-between box-border p-5 border-2 text-sm text-[#333333] hover:bg-white cursor-pointer">
+        <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-[#333333] hover:bg-white">
           <p>Standard</p>
           <p className="ml-5 font-medium">Free</p>
         </div>
@@ -76,20 +81,38 @@ const Shipping: React.FC<Props> = (props: Props) => {
                   pay: true,
                 });
               }}
-              className="bg-[#000000] text-white py-5 px-6 rounded-md w-full text-sm"
+              className="w-full rounded-md bg-[#000000] py-5 px-6 text-sm text-white"
             >
               Continue to payment
             </button>
           </div>
-          <div className="flex flex-wrap justify-center lg:ml-6 mt-5 mb-5">
-            <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
-              <Link href="/information" passHref>
+          <div className="mt-5 mb-5 flex flex-wrap justify-center lg:ml-6">
+            <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+              <button
+                onClick={() => {
+                  const obj = {
+                    info: true,
+                    ship: false,
+                    pay: false,
+                  };
+                  setModal(obj);
+                }}
+              >
                 <a className="text-decoration-none">{<ChevronLeft />}</a>
-              </Link>
+              </button>
             </div>
-            <Link href="/checkout?step=information" passHref>
+            <button
+              onClick={() => {
+                const obj = {
+                  info: true,
+                  ship: false,
+                  pay: false,
+                };
+                setModal(obj);
+              }}
+            >
               <a className="text-decoration-none">Return to information</a>
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -1,13 +1,10 @@
 import Link from 'next/link';
-
+import React, { useState } from 'react';
+import { addToCart } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-
-import { addToCart } from 'toolkit/cartSlice';
 import { userAPI } from 'APIs';
-
-import React, { useState } from 'react';
 import { AddCompareItem, Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
@@ -18,6 +15,7 @@ interface SingleProduct {
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
+  const [modalOn, setModalOn] = useState(false);
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -57,6 +55,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       quantity: 1,
     };
     dispatch(addToCart(cartItem));
+    setModalOn(true);
   };
 
   const handleAddToCompare = async () => {
@@ -86,12 +85,17 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   };
 
   const deleteFromWishlist = async (productId: string) => {
-    try {
-      await userAPI.deleteWishlistItem(productId);
-      toast.success('Item removed from wishlist');
-      dispatch(deleteItemFromWishlist(productId));
-    } catch (error) {
-      toast.error('Failed to remove item from wishlist');
+    if (token) {
+      try {
+        await userAPI.deleteWishlistItem(productId);
+        toast.success('Item removed from wishlist');
+        dispatch(deleteItemFromWishlist(productId));
+      } catch (error) {
+        toast.error('Failed to remove item from wishlist');
+      }
+    } else {
+      toast.error('Please login to your account first.');
+      router.push('/account/sign-in');
     }
   };
 
