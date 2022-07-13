@@ -106,6 +106,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               fill={wishlistItems?.items?.length! > 0 && token !== '' ? `green` : `none`}
               viewBox="0 0 24 24"
               stroke="currentColor"
+              strokeWidth="1.5"
             >
               <path
                 strokeLinecap="round"
