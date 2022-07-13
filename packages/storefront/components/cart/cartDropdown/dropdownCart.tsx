@@ -31,7 +31,6 @@ const CartDropdown: NextComponentType = () => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      strokeWidth="1.5"
     >
       <path
         strokeLinecap="round"
@@ -123,7 +122,7 @@ const CartDropdown: NextComponentType = () => {
           <div>
               <button
                 type="button"
-                className="inline-flex justify-center w-full bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                className="inline-flex justify-center w-full text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}

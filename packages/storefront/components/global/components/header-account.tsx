@@ -99,14 +99,13 @@ const HeaderAccount: React.FC<Properties> = () => {
           )}
         </span>
         <button onClick={handleClickWishlist}>
-          <div className="flex flex-wrap">
+          <div className="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear text-green-"
               fill={wishlistItems?.items?.length! > 0 && token !== '' ? `green` : `none`}
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth="1.5"
             >
               <path
                 strokeLinecap="round"
@@ -117,7 +116,7 @@ const HeaderAccount: React.FC<Properties> = () => {
             <span>{wishlistItems?.items?.length! > 0 && token !== '' ? wishlistItems?.items?.length : 0}</span>
           </div>
         </button>
-        <span className="z-50 text-sm" onClick={(e) => showCartDropDown()}>
+        <span className="z-50 text-sm mt-2" onClick={(e) => showCartDropDown()}>
           <CartDropdown />
         </span>
       </div>
