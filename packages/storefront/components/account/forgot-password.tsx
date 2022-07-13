@@ -86,4 +86,8 @@ const ForgotPassword: NextComponentType = () => {
   );
 };
 
+<<<<<<< HEAD
+export default withoutAuth(ForgotPassword);
+=======
 export default WithoutAuth(ForgotPassword);
+>>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3

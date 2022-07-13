@@ -29,6 +29,7 @@ const Path: React.FC<Path> = (props: Path) => {
           }}
           style={{ border: "none" }}
           className={info ? "font-bold" : "font-normal"}
+          disabled
         >
           Information
         </button>
@@ -46,6 +47,7 @@ const Path: React.FC<Path> = (props: Path) => {
           }}
           className={shipping ? "font-bold" : "font-normal"}
           style={{ border: "none" }}
+          disabled
         >
           Shipping
         </button>
@@ -63,6 +65,7 @@ const Path: React.FC<Path> = (props: Path) => {
           }}
           style={{ border: "none" }}
           className={payment ? "font-bold" : "font-normal"}
+          disabled
         >
           Payment
         </button>

@@ -58,8 +58,12 @@ const Signin: NextComponentType = () => {
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
       setLoader(false);
+<<<<<<< HEAD
+      router.back();
+=======
       router.push('/');
       //router.back();
+>>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3
       toast.success('Logged in successfully!');
     } catch (err) {
       setLoader(false);
@@ -124,7 +128,7 @@ const Signin: NextComponentType = () => {
                       <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
-                        id="username"
+                        id="email"
                         name="username"
                         placeholder="Enter email or phone number"
                       />
@@ -209,4 +213,8 @@ const Signin: NextComponentType = () => {
   );
 };
 
+<<<<<<< HEAD
+export default withoutAuth(Signin);
+=======
 export default WithoutAuth(Signin);
+>>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3

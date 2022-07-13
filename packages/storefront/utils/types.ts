@@ -10,6 +10,7 @@ import {
   CreateCustomerResponse,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  IOrderResponseData,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -90,6 +91,8 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  checkout: (data: any) => Promise<IOrderResponseData | undefined>;
+  getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
   getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
   deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
