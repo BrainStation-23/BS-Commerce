@@ -69,30 +69,32 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   return (
     <div className="rounded-full bg-white p-2 text-center drop-shadow-md">
-      <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.5}
-          onClick={handleAddToCart}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
+      <Link href="/" passHref>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            onClick={handleAddToCart}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
 
-        <div className="absolute -left-5 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
-          <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-            Add to cart
-          </span>
-          <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-        </div>
-      </span>
+          <div className="absolute -left-5 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
+            <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+              Add to cart
+            </span>
+            <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+          </div>
+        </span>
+      </Link>
 
       <span>
         <svg
