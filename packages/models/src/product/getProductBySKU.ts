@@ -3,7 +3,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 /**
- * API Path: /product/sku/:sku
+ * API Path: /products/sku/:sku
  * method: GET
  * params: sku
  * response: GetProductBySKUResponse

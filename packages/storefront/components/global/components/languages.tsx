@@ -4,7 +4,7 @@ interface language {
   name: string;
 }
 
-const Language: React.FC = (props) => {
+const Language: React.FC = () => {
   const [open, setOpen] = useState(false);
   const languageList: language[] = [
     { name: "English" },

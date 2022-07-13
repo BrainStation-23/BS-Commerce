@@ -1,8 +1,12 @@
 export interface CustomerProductInfo {
     name: string,
+    shortDescription?: string,
+    fullDescription?: string,
+    sku: string,
     price: number,
     oldPrice: number,
     cost: number,
+    publishDate?: Date
 }
 
 export interface CustomerProductMeta {
@@ -14,12 +18,20 @@ export interface CustomerProductMeta {
 
 export interface CustomerProductPhoto {
     url?: string,
+    id?: string,
+    title?: string,
     alt?: string,
     displayOrder?: number
 }
 
+export interface CustomerProductManufacturer {
+    id?: string,
+    name?: string,
+}
+
 export interface CustomerProductCategory {
     id: string,
+    name: string,
     displayOrder?: number
 }
 
@@ -30,46 +42,6 @@ export interface CustomerProduct {
     tags?: string[];
     photos?: CustomerProductPhoto[];
     brands?: string[],
+    manufacturer?: CustomerProductManufacturer,
     categories: CustomerProductCategory[];
-}
-
-export interface CustomerSingleProductInfo {
-    name: string,
-    shortDescription?: string,
-    fullDescription?: string,
-    sku: string,
-    price: number,
-    oldPrice: number,
-    cost: number,
-    publishDate?: Date
-}
-
-export interface CustomerSingleProductMeta {
-    keywords?: string[],
-    title?: string,
-    description?: string,
-    friendlyPageName: string
-}
-
-export interface CustomerSingleProductPhoto {
-    url?: string,
-    id?: string,
-    title?: string,
-    alt?: string,
-    displayOrder?: number
-}
-
-export interface CustomerSingleProductCategory {
-    id: string,
-    displayOrder?: number
-}
-
-export interface CustomerSingleProduct {
-    id: string,
-    info: CustomerSingleProductInfo;
-    meta: CustomerSingleProductMeta;
-    tags?: string[];
-    photos?: CustomerSingleProductPhoto[];
-    brands?: string[],
-    categories: CustomerSingleProductCategory[];
 }

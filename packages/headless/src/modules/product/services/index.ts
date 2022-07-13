@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { SearchCondition, UpdateProduct } from 'src/entity/product';
+import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
 import { CreateProductDto } from '../dto/createProduct.dto';
 import {
@@ -25,6 +25,7 @@ import {
   UpdateProductsForBrandErrorMessages,
   GetCustomerAllProductsResponse,
   GetCustomerProductResponse,
+  GetCustomerAllHomePageProductsResponse,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -95,21 +96,18 @@ export class ProductService {
   }
 
   async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
-    const { skip, limit, slug } = condition;
-    const query: Record<string, any> = this.generateSearchQuery(condition);
-    if (slug) {
-      //dependent on category module
-    }
-    const [products, count] = await Promise.all([await this.productRepo.findProductsByCondition(query, skip, limit), await this.productRepo.getProductCount(query)]);
-    if (products.length <= 0 || !count) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ products, count });
+    const { skip, limit, slug, orderBy } = condition;
+    const query: Record<string, any> = !slug && this.generateSearchQuery(condition);
+    const products = slug ? await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit) : await this.productRepo.findAllProducts(query, skip, limit);
+    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ products, count: products.length });
   }
 
   generateSearchQuery(condition: SearchCondition): object {
-    const { brandId, categoryId, productName, isFeatured } = condition;
+    const { brand, categoryId, productName, isFeatured } = condition;
     let query: Record<string, any> = {};
-    if (brandId !== undefined && brandId !== '') {
-      query.brands = brandId;
+    if (brand !== undefined && brand !== '') {
+      query.brands = brand;
     }
     if (categoryId !== undefined && categoryId !== '') {
       query['categories.id'] = categoryId;
@@ -118,7 +116,7 @@ export class ProductService {
       query['info.name'] = new RegExp(productName, 'i');
     }
     if (isFeatured !== undefined) {
-      query['info.isFeatured'] = true;
+      query['info.isFeatured'] = isFeatured;
     }
     return query;
   }
@@ -135,5 +133,19 @@ export class ProductService {
     const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
     if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
+    const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
+    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
+    const { skip, limit } = condition;
+    const query: Record<string, any> = this.generateSearchQuery(condition);
+    const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ products, count: products.length });
   }
 }

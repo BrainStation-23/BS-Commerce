@@ -1,6 +1,11 @@
+import { CustomerProduct } from "models";
+
 import Product from "@/components/global/components/product/product";
 
-const ProductRow = ({ products }: any) => {
+interface Props {
+  products: CustomerProduct[]
+}
+const ProductRow: React.FC<Props> = ({ products }: Props) => {
   return (
     <>
       <div className="col">

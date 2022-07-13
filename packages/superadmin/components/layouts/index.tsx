@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       : null;
 
     async function getProfile() {
-      const response = await userAPI.getUserProfile();
+      const response = await userAPI.getUserProfile(router);
       setUserData(response?.data);
     }
     if (token && !pathname.includes("/account")) getProfile();

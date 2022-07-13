@@ -8,6 +8,7 @@ export class Photo {
 
 export class Category {
   id: string;
+  name: string;
   isFeatured?: boolean;
   displayOrder?: number
 }
@@ -39,11 +40,16 @@ export class Product {
   tags?: string[];
   photos?: Photo[];
   brands?: string[];
+  manufacturer?: {
+    id: string,
+    name: string,
+  };
   categories: Category[]
 }
 
 export class UpdateCategory {
   id?: string;
+  name?: string;
   isFeatured?: boolean;
   displayOrder?: number
 }
@@ -73,13 +79,17 @@ export class UpdateProduct {
   tags?: string[];
   photos?: Photo[];
   brands?: string[];
+  manufacture?: {
+    id?: string,
+    name?: string,
+  }
   categories?: UpdateCategory[]
 }
 
 export class SearchCondition {
   skip?: number;
   limit?: number;
-  brandId?: string;
+  brand?: string;
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;

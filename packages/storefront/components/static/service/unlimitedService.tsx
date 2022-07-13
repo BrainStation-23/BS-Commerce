@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Image from "next/image";
 
-import Container from "../../global/components/container";
+import Container from "@/components/global/components/container";
 
 const UnlimitedService: FC = () => {
   return (

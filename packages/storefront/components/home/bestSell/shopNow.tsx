@@ -1,4 +1,6 @@
-const ShopNowIcon = () => {
+import { NextComponentType } from "next";
+
+const ShopNowIcon: NextComponentType = () => {
   return (
     <>
       <p className="uppercase flex flex row text-extrabold text-1xl">

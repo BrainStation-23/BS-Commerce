@@ -5,17 +5,24 @@ import storage from "redux-persist/lib/storage";
 import productsReducer from "./toolkit/ProductsSlice";
 import authReducer from "./toolkit/authSlice";
 import cartReducer from "toolkit/cartSlice";
+import userReducer from "toolkit/userSlice";
+import modalReducer from "toolkit/modalSlice";
+import compareReducer from "toolkit/compareSlice";
+
 
 const reducers = combineReducers({
   product: productsReducer,
   auth: authReducer,
   cart: cartReducer,
+  user: userReducer,
+  modal: modalReducer,
+  compare: compareReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: ["cart", "auth"],
+  whiteList: ["cart", "auth", "user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

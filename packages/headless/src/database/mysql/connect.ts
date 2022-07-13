@@ -2,6 +2,7 @@ import { dbConfig } from 'config/database';
 import { Sequelize } from 'sequelize-typescript';
 
 export const connect = async () => {
+    
     const sequelize: Sequelize = new Sequelize({
         ...dbConfig.mysql,
         models: [__dirname + '/**/*.model.js'],
@@ -21,4 +22,5 @@ export const connect = async () => {
             console.log(e.message);
         });
     return sequelize;
+    
 };

@@ -23,10 +23,7 @@ const Accordion: FC<Props> = ({ title, children, id, icon, show = false }) => {
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            <i
-              className={icon}
-              style={{ marginTop: "-10px", marginRight: "18px" }}
-            ></i>{" "}
+            <i className={`${icon} me-2`} />
             {title}
           </button>
         </h2>

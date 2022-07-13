@@ -16,7 +16,7 @@ export class ForgotPasswordDto implements ForgotPasswordRequest {
   username: string;
 }
 
-export class MessageDto implements ForgotMessageResponse {
+export class ChangePasswordMessageDto implements ForgotMessageResponse {
   @ApiProperty()
   @IsString()
   message: string;
@@ -46,5 +46,5 @@ export class ForgotPasswordSuccessResponseDto implements ForgotPasswordSuccessRe
 
   @ApiProperty()
   @IsObject()
-  data: MessageDto;
+  data: ChangePasswordMessageDto;
 }

@@ -1,22 +1,16 @@
-import type { NextComponentType } from "next";
-import React, { useState } from "react";
-import Buttons from "../../../global/components/buttons/button";
-import Image from "next/image";
-// import cartDatas from "../../../../allData/cart-data.json";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
-import { userAPI } from "APIs";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import TableData from "./tableData";
-import { deleteCart } from "toolkit/cartSlice";
+import React from "react";
 
-const DataTable = () => {
-  const router = useRouter();
+import { useRouter } from "next/router";
+import type { NextComponentType } from "next";
+
+import { deleteCart } from "toolkit/cartSlice";
+import { useAppDispatch } from "customHooks/hooks";
+
+import TableData from "@/components/cart/subcomponents/cartTable/tableData";
+
+const DataTable: NextComponentType = () => {
   const dispatch = useAppDispatch();
-  const cartData = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
-  );
-  // console.log("From Data Table", cartData);
+  const router = useRouter();
 
   return (
     <>
@@ -24,7 +18,7 @@ const DataTable = () => {
         <table className="border-collapse border border-slate-400">
           <thead className="">
             <tr>
-              <th className="border-0 border-slate-300 border-b border-green-600 px-16 py-4 md:px-8 text-base bg-slate-200">
+              <th className="border border-slate-300 px-16 py-4 md:px-8 text-base bg-slate-200">
                 Image
               </th>
               <th className="border border-slate-300 md:px-2 xl:px-10 py-4 text-base bg-slate-200">
@@ -51,12 +45,6 @@ const DataTable = () => {
               <th></th>
               <th></th>
               <th className="p-4">
-                {/* <Buttons
-                  bgColor="black"
-                  height={10}
-                  width={120}
-                  text={"UPDATE CART"}
-                /> */}
               </th>
               <th className="p-4">
                 <button
@@ -66,14 +54,9 @@ const DataTable = () => {
                     height: "39px",
                     width: "150px",
                   }}
-                  // bgColor="black"
-                  // height={12}
-                  // width={120}
-                  // text={"CLEAR CART"}
                   className="text-xs"
                   onClick={() => {
-                    location.href = "http://localhost:3002/home";
-                    // router.push('/cart');
+                    router.push('/');
                   }}
                 >
                   CONTINUE SHOPPING
@@ -87,17 +70,10 @@ const DataTable = () => {
                     height: "39px",
                     width: "120px",
                   }}
-                  // bgColor="black"
-                  // height={12}
-                  // width={120}
-                  // text={"CLEAR CART"}
+                  
                   className="text-xs"
                   onClick={() => {
-                    userAPI.deleteAllCartItem();
                     dispatch(deleteCart());
-                    // location.href =
-                    //     "http://localhost:3002/home";
-                    // router.push('/cart');
                   }}
                 >
                   CLEAR CART

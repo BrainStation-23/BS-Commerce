@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
-import SwiperGrid from "@/components/global/components/swipergrid";
+
 import { SwiperSlide } from "swiper/react";
+import { useAppSelector } from "customHooks/hooks";
+
 import Container from "@/components/global/components/container";
 import ProductRow from "./productRow.component";
-import { useAppSelector } from "customHooks/hooks";
+import SwiperGrid from "@/components/global/components/swipergrid";
 
 const TrendingProducts = () => {
   let [filterKey, setFilterKey]: any = useState("smartphones");

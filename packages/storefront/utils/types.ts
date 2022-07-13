@@ -6,22 +6,20 @@ import {
   deleteAllCartItemsResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
-} from 'models';
-import { CreateCustomerResponse } from 'models';
-import { updateCartItemResponse } from 'models';
-import { updateCartItemRequest } from 'models';
-import { CreateCustomerRequest } from 'models';
-import { CustomerSignInRequest } from 'models';
-import {
+  GetCustomerQuery,
+  GetCustomerResponse,
   GetCustomerProductParams,
   GetCustomerProductResponse,
   GetCustomerAllProductsResponse,
-  CreateUserRequest,
-  CreateUserResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
+  CreateCustomerResponse,
+  updateCartItemResponse,
+  updateCartItemRequest,
+  CreateCustomerRequest,
+  CustomerSignInRequest,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -77,6 +75,10 @@ export interface apiFunction {
   signIn: (
     data: CustomerSignInRequest
   ) => Promise<CustomerSignInResponse | undefined>;
+  getSignedInUser: (
+    isEmail: boolean,
+    data: GetCustomerQuery
+  ) => Promise<GetCustomerResponse | undefined>;
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
@@ -90,15 +92,8 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
-  getCart: (token: string) => Promise<Cart | undefined>;
-  addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>;
-  deleteCartItem: (
-    data: deleteCartItemRequest
-  ) => Promise<deleteCartItemResponse | undefined>;
-  deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>;
-  updateCartItem: (
-    data: updateCartItemRequest
-  ) => Promise<updateCartItemResponse | undefined>;
+  addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
+  deleteFromCompare: (productId: AddCompareItem) => {}
 }
 
 export interface ProductStore {
