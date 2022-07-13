@@ -9,7 +9,7 @@ export const apiEndPoints = {
   deleteAllCartItem: '/cart/allitems',
   updateCartItem: `/cart/item`,
   addToWishList: `/wishlist`,
-  getCustomerWishlist: `/customer/wishlist`,
+  getCustomerWishlist: `/wishlist`,
   deleteWishlistItem: `wishlist/items`,
   deleteFullWishlist: `/wishlist/allitems`,
 };

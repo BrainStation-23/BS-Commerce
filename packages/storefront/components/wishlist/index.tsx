@@ -28,6 +28,8 @@ const WishlistComponent: NextComponentType = () => {
     (state) => state.persistedReducer.product.wishlist
   );
 
+  //console.log(wishlistData);
+
   const handleDeleteAllWishlistItems = async () => {
     try {
       await userAPI.deleteFullWishlist();
@@ -73,7 +75,7 @@ const WishlistComponent: NextComponentType = () => {
         </button>
       </div>
       <div className="mx-5 mt-10 flex flex-wrap justify-center gap-5 sm:mx-5 md:mx-7 lg:mx-10 xl:mx-10">
-        {wishlistData.items?.length === 0 && (
+        {wishlistData.items?.length! <= 0 && (
           <div className="mx-16 my-10">
             <div className="mx-16 my-2">
               <WishlistIcon height="h-16" width="w-16" />

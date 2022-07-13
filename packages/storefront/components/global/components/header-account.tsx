@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
-import { deleteUserDetails } from 'toolkit/userSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 import Modal from './modal';
@@ -36,7 +35,6 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    dispatch(deleteUserDetails());
     toast.success('Logged out successfully!');
   };
 

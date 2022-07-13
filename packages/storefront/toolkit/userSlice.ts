@@ -16,12 +16,9 @@ export const userSlice = createSlice({
     storeUserDetails: (state: UserState, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
-    deleteUserDetails: (state: UserState) => {
-      state.user = '';
-    },
   },
 });
 
-export const { storeUserDetails, deleteUserDetails } = userSlice.actions;
+export const { storeUserDetails } = userSlice.actions;
 
 export default userSlice.reducer;

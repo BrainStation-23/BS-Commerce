@@ -58,7 +58,7 @@ const Signin: NextComponentType = () => {
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
       setLoader(false);
-      router.back();
+      router.push('/');
       toast.success('Logged in successfully!');
     } catch (err) {
       setLoader(false);
