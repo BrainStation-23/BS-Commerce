@@ -1,4 +1,5 @@
-import { OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
+import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
+import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { OrderModel } from './order.model';
 
@@ -7,7 +8,7 @@ export class OrderDatabase implements IOrderDatabase {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async getOrderListByUserId(userId: string): Promise<any> {
+  async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
     const orderList = await OrderModel.find({ userId }).lean();
     if (orderList.length > 0) {
       return orderList;
@@ -15,7 +16,7 @@ export class OrderDatabase implements IOrderDatabase {
     return null;
   }
 
-  async getOrderById(orderId: string): Promise<any>{
+  async getOrderById(orderId: string): Promise<OrderEntity>{
     const orderList = await OrderModel.findOne({ orderId }).lean();
     if (orderList) {
       return orderList;
@@ -23,7 +24,7 @@ export class OrderDatabase implements IOrderDatabase {
     return null;
   }
 
-  async getOrderStatistics(): Promise<any>{
+  async getOrderStatistics(): Promise<OrderStatDto>{
     try{
       const today = new Date();
       today.setHours(0,0,0,0);
@@ -47,7 +48,7 @@ export class OrderDatabase implements IOrderDatabase {
       ).exec()
 
       if(orderStat){
-        return orderStat[0];
+        return orderStat[0] as OrderStatDto;
       }
     }catch(err){
       console.log(err)
@@ -55,7 +56,7 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async getIncompleteStatistics(): Promise<any>{
+  async getIncompleteStatistics(): Promise<OrderIncompleteStatDto>{
 
     try { 
       const orderStat = await OrderModel.aggregate(
@@ -72,13 +73,35 @@ export class OrderDatabase implements IOrderDatabase {
                 }
             }
         ]
-      ).exec()
+      ).exec() 
       if(orderStat){
-        return orderStat[0];
+        return orderStat[0] as OrderIncompleteStatDto;
       }
     } catch (error) {
         console.log(error)
         return null
     }
+  }
+
+  async changeStatus(body: ChangeStatusDto):Promise<OrderEntity>{
+    try {
+      const {orderId, statusType, statusValue} = body
+      let update = {}
+      if(statusType === StatusTypeDto.orderStatus){
+        update = {orderStatus: statusValue}
+      }else if(statusType === StatusTypeDto.paymentStatus){
+        update = {paymentStatus: statusValue}
+      }else if(statusType === StatusTypeDto.shippingStatus){
+        update = {shippingStatus: statusValue}
+      }
+
+      return await OrderModel.findOneAndUpdate({orderId},{$set: update},{new: true}).lean()
+       
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+    
+    
   }
 }
