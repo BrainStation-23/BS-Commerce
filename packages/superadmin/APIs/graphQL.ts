@@ -5,6 +5,8 @@ import client from '../graphqlSchema/apollo-client';
 import {
   CreateProductRequest,
   GetUserSuccessResponse,
+  UpdatedUserRequest,
+  ChangePasswordRequest,
   Product,
   SignInRequest,
   SignInSuccessResponse,
@@ -45,6 +47,15 @@ export async function createAdminGraphql(): Promise<User | undefined> {
 }
 
 export async function getAdminsGraphql(): Promise<User[] | undefined> {
+  return;
+}
+
+
+export async function updateAdminGraphql(): Promise<UpdatedUserRequest | undefined> {
+  return;
+}
+
+export async function changePasswordGraphql(): Promise<ChangePasswordRequest | undefined> {
   return;
 }
 

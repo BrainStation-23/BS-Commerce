@@ -13,7 +13,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["cdn.shopify.com", "dummyjson.com"],
+    domains: ["cdn.shopify.com", "dummyjson.com", "colombocme.org"],
   },
 };
 

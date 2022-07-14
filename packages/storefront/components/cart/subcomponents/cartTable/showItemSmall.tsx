@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { ResponseItem } from "models";
-import { useAppDispatch } from "customHooks/hooks";
-import { deleteCartItem, updateCartItem } from "toolkit/cartSlice";
+import { ResponseItem } from 'models';
+import { useAppDispatch } from 'customHooks/hooks';
+import { deleteCartItem, updateCartItem } from 'toolkit/cartSlice';
 
 interface Props {
-  data: ResponseItem,
-  setTotal: Function,
-  total: number
+  data: ResponseItem;
+  setTotal: Function;
+  total: number;
 }
 
 const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
-  
   const dispatch = useAppDispatch();
-  
+
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data?.productId,
     quantity: data?.quantity,
@@ -21,23 +20,25 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
 
   return (
     <div key={data?.productId} className="p-4">
-      <div className="flex flex-col-3 items-center bg-white rounded-lg border">
-        <div className="mr-4 relative">
+      <div className="flex-col-3 flex items-center rounded-lg border bg-white">
+        <div className="relative mr-4">
           <img
-            className="object-cover w-full h-48 rounded-t-lg w-30 rounded-none"
+            className="w-30 h-48 w-full rounded-none rounded-t-lg object-cover"
             src={data?.product?.photos[0]?.url}
             alt="Product Image"
           />
           <span
-            className="absolute -top-2 -right-3 p-0.5 text-center text-xs font-semibold text-white rounded-full"
-            style={{ background: "#808080" }}
+            className="absolute -top-2 -right-3 rounded-full p-0.5 text-center text-xs font-semibold text-white"
+            style={{ background: '#808080' }}
             onClick={() => {
-              setTotal(total - ((itemToUpdate.quantity) * data?.product?.info?.price!))
+              setTotal(
+                total - itemToUpdate.quantity * data?.product?.info?.price!
+              );
               dispatch(deleteCartItem(data));
             }}
           >
             <svg
-              className="w-4 h-0"
+              className="h-0 w-4"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -48,26 +49,28 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           </span>
         </div>
         <div className="col-span-2 justify-between px-4 leading-normal">
-          <h5 className="mb-2 text-lg font-bold text-gray-900 mb-3">
+          <h5 className="mb-2 mb-3 text-lg font-bold text-gray-900">
             {data?.product?.info?.name}
           </h5>
           <div>
-            <div className="box-content w-25 py-2 border-2 mb-2">
+            <div className="w-25 mb-2 box-content border-2 py-2">
               <div className="flex justify-between">
                 <button
                   className="mx-4"
+                  disabled={itemToUpdate.quantity <= 0 ? true : false}
                   onClick={() => {
+                    let _quantity =
+                      itemToUpdate.quantity - 1 > 0
+                        ? itemToUpdate.quantity - 1
+                        : 0;
                     setItemToUpdate({
                       productId: data?.productId,
-                      quantity:
-                        itemToUpdate.quantity - 1 > 0
-                          ? itemToUpdate.quantity - 1
-                          : 0,
+                      quantity: _quantity,
                     });
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,
-                        quantity: itemToUpdate.quantity - 1,
+                        quantity: _quantity
                       })
                     );
                     setTotal(total - data?.product?.info?.price!);
@@ -79,14 +82,15 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                 <button
                   className="mx-4"
                   onClick={() => {
+                    let _quantity = itemToUpdate.quantity + 1;
                     setItemToUpdate({
                       productId: data?.productId,
-                      quantity: itemToUpdate.quantity + 1,
+                      quantity: _quantity,
                     });
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,
-                        quantity: itemToUpdate.quantity + 1,
+                        quantity: _quantity,
                       })
                     );
                     setTotal(total + data?.product?.info?.price!);

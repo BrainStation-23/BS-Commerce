@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString, Min } from 'class-validator';
 import { WishlistDto } from './wishlist.dto';
 import {
     addToWishlistErrorResponse,
@@ -16,6 +16,7 @@ export class AddToWishlistRequestDto implements addToWishlistRequest {
 
     @ApiProperty({ type: () => Number })
     @IsNumber()
+    @Min(1)
     quantity: number;
 }
 

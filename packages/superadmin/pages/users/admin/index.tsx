@@ -68,26 +68,9 @@ const Admin: NextPage = () => {
         >
           {currentTableData?.map((data: any, index: number) => (
             <tr key={index}>
-              {/* <td className="text-center">
-                <input type="checkbox" name="veh" value="bike" />
-              </td> */}
               <td>{data?.displayName}</td>
               <td>{data?.email}</td>
-              {/* <td>{data.roles}</td>
-              <td>{data.cName}</td>
-              <td className="text-center">
-                {data?.active ? (
-                  <i
-                    className="bi bi-check-lg"
-                    style={{ fontSize: "30px", color: "#007fcc" }}
-                  ></i>
-                ) : (
-                  <i
-                    className="bi bi-x-lg"
-                    style={{ fontSize: "25px", color: "red" }}
-                  ></i>
-                )}
-              </td> */}
+
               <td className="text-center">
                 <button
                   className="btn btn-light"
@@ -122,18 +105,5 @@ const Admin: NextPage = () => {
     </div>
   );
 };
-
-// export async function getServerSideProps() {
-//   const adminsList = await userAPI.getAdmins();
-//   let admins: any = [];
-//   if (adminsList) {
-//     admins = [adminsList];
-//   }
-//   return {
-//     props: {
-//       adminsList: admins || [],
-//     },
-//   };
-// }
 
 export default Admin;

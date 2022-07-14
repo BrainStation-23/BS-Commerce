@@ -27,7 +27,7 @@ export class GetProductsByConditionQueryDto implements GetProductsByConditionQue
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    brandId?: string;
+    brand?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()

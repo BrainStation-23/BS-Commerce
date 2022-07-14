@@ -11,7 +11,7 @@ import { DescriptiveError, ErrorResponse, ProductInfo, ProductPhoto, SuccessResp
 export interface GetProductsByConditionQuery {
     skip?: number;
     limit?: number;
-    brandId?: string;
+    brand?: string;
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
