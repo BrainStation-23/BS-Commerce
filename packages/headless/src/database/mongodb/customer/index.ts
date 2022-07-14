@@ -7,7 +7,7 @@ import { CustomerModel } from './customer.model';
 export class CustomerDatabase implements ICustomerDatabase {
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
-    const newCustomer = createdCUstomer?.toJSON();
+    const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;
   }
@@ -24,11 +24,15 @@ export class CustomerDatabase implements ICustomerDatabase {
     return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
   }
 
-  async updateCustomerWithNewAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer, $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
+  async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
   }
 
-  async updateCustomerAndAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': address.id }, { $set: { ...customer, 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
+  async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $set: { 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
+  }
+
+  async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { 'addresses.$.id': addressId } }, { new: true }).lean().select('-password -_id').exec();
   }
 }

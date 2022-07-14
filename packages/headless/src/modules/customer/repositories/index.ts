@@ -20,12 +20,16 @@ export class CustomerRepository {
     return await this.db.updateCustomer(customerId, customer);
   }
 
-  async updateCustomerWithNewAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
-    return await this.db.updateCustomerWithNewAddress(customerId, customer, address);
+  async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
+    return await this.db.addCustomerNewAddress(customerId, address);
   }
 
-  async updateCustomerAndAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
-    return await this.db.updateCustomerAndAddress(customerId, customer, address);
+  async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<Customer | null> {
+    return await this.db.updateCustomerAddress(customerId, addressId, address);
+  }
+
+  async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
+    return await this.db.deleteCustomerAddress(customerId, addressId);
   }
 
   async getCustomerPassword(query: Record<string, any>): Promise<Customer | null> {
