@@ -1,92 +1,68 @@
-describe('Login to superadmin & view category', () => {
-  it('should be redirected to login page', () => {
+describe('Login to superadmin, create & view category', () => {
+  it('should visit add category page', () => {
     // Start from the index page
     cy.visit('/');
-  });
-
-  it('should login', () => {
-    // Type correct email & password
-    cy.get('#email').type('string@gmail.com');
-    cy.get('#password').type('string');
-    // cy.get('.btn').click();
-
-    // Click login
-    cy.contains('button', 'LOG IN').click();
-
-    cy.url().should('eq', Cypress.config().baseUrl + '/');
-
-    // Close success toast
-    cy.get('.Toastify__close-button').click();
-  });
-
-  it('should logout', () => {
-    // Click logout
-    // cy.contains('span', 'Logout').click();
-
-    cy.contains('span', 'Logout')
-      .click()
-      .should(() => {
-        expect(localStorage.getItem('persist:root')).to.be.null;
-      });
-  });
-
-  it('should show wrong credentials message', () => {
-    // Type incorrect email & password
-    cy.get('#email').type('string@gmail.com');
-    cy.get('#password').type('string');
-
-    // Click login
-    cy.contains('button', 'LOG IN').click();
-
-    // Close toast
-    cy.get('.Toastify__close-button').click();
-  });
-
-  it('should clear input fields & login', () => {
-    // Clear email & password field
-
-    cy.get('#email').clear();
-    cy.get('#password').clear();
-
-    // Type correct email & password
-    cy.get('#email').type('string@gmail.com');
-    cy.get('#password').type('string');
-
-    // Click login
-    cy.contains('button', 'LOG IN').click();
-
-    // Close toast
-    cy.get('.Toastify__close-button').click();
-  });
-
-  it('should scroll down & up', () => {
-    cy.scrollTo('bottom');
-    cy.wait(1500);
-    cy.scrollTo('top');
-    cy.wait(1500);
-  });
-
-  it('should expand & collapse sidebar', () => {
-    cy.get('.bi-list').click();
-    cy.wait(2000);
-    cy.get('.bi-list').click();
-  });
-
-  it('should go to categories view page', () => {
+    cy.login('nafi@test.com', '123456');
     cy.get('.bi-list').click();
 
     cy.contains('span', 'Catalog').click();
     cy.wait(1000);
     cy.contains('div', 'Categories').click();
-    cy.wait(2000);
-    cy.contains('button', 'View').click();
-    cy.wait(1500);
-    // cy.contains('div', 'Products').click();
+    cy.wait(1000);
   });
+  // Generating random value to feed input form
+  const uuid = () => Cypress._.random(0, 1e6);
+  const id = uuid();
 
-  // it('should add a new product', () => {
-  //   cy.contains('.btn', 'Add new');
-  // });
+  it('should fill category form & save', () => {
+    cy.get('table').find('tr').its('length').as('initialLength');
+
+    cy.contains('button', 'Add').click();
+    cy.wait(300);
+    cy.get('input[name="name"]')
+      .type(`Test case #${id}`)
+      .should('have.value', `Test case #${id}`);
+    cy.wait(500);
+    cy.get('input[name="description"]')
+      .type(`Description of test case #${id}`)
+      .should('have.value', `Description of test case #${id}`);
+    cy.wait(500);
+    // cy.get('select').select('Electronics').should('have.value', `electronics`);
+    cy.wait(500);
+    cy.get('input[name="published"]').check();
+    cy.wait(500);
+    cy.get('input[name="meta.title"]')
+      .type(`Meta title #${id}`)
+      .should('have.value', `Meta title #${id}`);
+    cy.wait(500);
+    cy.get('input[name="meta.description"]')
+      .type(`Meta description #${id}`)
+      .should('have.value', `Meta description #${id}`);
+    cy.wait(500);
+    cy.get('input[name="meta.keywords"]')
+      .type('best keywords tech')
+      .should('have.value', `best keywords tech`);
+    cy.wait(500);
+    cy.get('input[name="meta.SEFN"]')
+      .type(`Meta SEFN #${id}`)
+      .should('have.value', `Meta SEFN #${id}`);
+
+    cy.intercept({ method: 'POST', url: '**/category' }).as('createResponse');
+
+    cy.contains('button', 'Save').click();
+    cy.wait('@createResponse').then(({ request, response }) => {
+      expect(response?.statusCode === 200);
+      // cy.log('REQUEST BODY === ', request.body);
+      // cy.log('RESPONSE BODY === ', response?.body);
+    });
+    cy.get('table').contains('td', `Test case #${id}`).should('be.visible');
+
+    cy.get('@initialLength').then((initialLength) => {
+      cy.get('table')
+        .find('tr')
+        .should('have.length', <number>(<unknown>initialLength) + 1);
+    });
+  });
 });
 
 export {};

@@ -7,6 +7,7 @@ import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { setModalState } from 'toolkit/modalSlice';
+import { addToWishlist, storeWishlist } from 'toolkit/productsSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
@@ -23,6 +24,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const wishlistData = useAppSelector(state => state.persistedReducer.product.wishlist);
+  const findWishlistProduct = wishlistData?.items?.find(item => item.productId === product.id);
+
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -31,14 +36,18 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   var disableDecrement = false;
   var disableIncrement = false;
   let i = 0;
+  let clicked = false;
 
   const [size, setSize] = useState('s');
   const [color, setColor] = useState('white');
   const [amount, setAmount] = useState(1);
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
-  const [clicked, setClicked] = useState(false);
   const [modalCmp, setModalCmp] = useState(false);
+
+  if(findWishlistProduct) {
+    clicked = true;
+  }
 
   const handleAddToCompare = async () => {
     try {
@@ -73,11 +82,24 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         productId: id,
         quantity,
       };
+      const reduxData = {
+        product: {
+          id: id,
+          info: product.info,
+          photos: product.photos
+        },
+        productId: id,
+        quantity: quantity
+      }
       try {
         await userAPI.addToWishList(data);
-        setClicked(true);
+        const newList = await userAPI.getCustomerWishlist(token);
+        console.log(newList);
+        dispatch(storeWishlist(newList));
+        clicked = true;
         toast.success('Item added to wishlist');
       } catch (error) {
+        console.log(error);
         toast.error('Failed to add item to wishlist');
       }
     }
@@ -296,6 +318,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <div>
                     <button
                       onClick={() => toWishlist(product?.id!, 1)}
+                      disabled = {clicked ? true : false}
                       className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}

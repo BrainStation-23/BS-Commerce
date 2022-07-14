@@ -108,7 +108,17 @@ const WishlistComponent: NextComponentType = () => {
           return (
             <React.Fragment key={index}>
               <div className="flex flex-col flex-wrap items-center">
-                <Link href={`/product/${data?.productId}`} passHref>
+              <Link
+                  href={{
+                    pathname: `product/${data?.product?.info.name}`,
+                    query: {
+                      id: data?.product?.id,
+                      name: data?.product?.info.name,
+                    },
+                  }}
+                  //as={`product/${data?.product?.info.name}`}
+                  passHref
+                >
                   <div className="flex w-28 cursor-pointer flex-col items-center justify-center sm:w-28 md:w-44 lg:w-56 xl:w-56">
                     <Picture
                       src={data.product?.photos[0]?.url!}

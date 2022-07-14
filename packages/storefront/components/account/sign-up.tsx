@@ -188,8 +188,4 @@ const Signup = () => {
   );
 };
 
-<<<<<<< HEAD
-export default withoutAuth(Signup);
-=======
 export default WithoutAuth(Signup);
->>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3
