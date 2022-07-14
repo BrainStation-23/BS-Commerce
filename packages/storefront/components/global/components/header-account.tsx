@@ -79,13 +79,16 @@ const HeaderAccount: React.FC<Properties> = () => {
                         My Profile
                       </li>
                     </Link>
-
-                    <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                      Orders
-                    </li>
-                    <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                      Manage Addresses
-                    </li>
+                    <Link href="/order" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Orders
+                      </li>
+                    </Link>
+                    <Link href="/myAccount/addresses" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Manage Addresses
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
