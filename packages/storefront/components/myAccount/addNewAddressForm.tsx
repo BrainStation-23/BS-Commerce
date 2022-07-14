@@ -152,13 +152,32 @@ const AddNewAddressForm: NextComponentType = ({user}: any) => {
                       </label>
                     </div>
                   </div>
+
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="setAddressTypeCheckbox"
+                        name="setAddressTypeCheckbox"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="others"
+                      />
+                      <label
+                        htmlFor="setAddressTypeCheckbox"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Others
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
                   className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-32 lg:w-32 xl:w-32"
                 >
-                  Add Address
+                  { user?.firstName ? "Edit " : "Add "} Address
                 </button>
               </Form>
             );

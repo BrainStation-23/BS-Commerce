@@ -8,14 +8,17 @@ import AddNewAddressForm from './addNewAddressForm';
 const AccountDetails: NextComponentType = () => {
   const [showAddAddress, setShowAddAddress] = useState('hidden');
   const [showEditAddress, setShowEditAddress] = useState('hidden');
+
   const addButtonOnClick = () => {
     showAddAddress === '' ? setShowAddAddress('hidden') : setShowAddAddress('');
   };
+
   const editButtonOnClick = () => {
     showEditAddress === ''
       ? setShowEditAddress('hidden')
       : setShowEditAddress('');
   };
+
   return (
     <>
       <Breadcrumb
@@ -73,6 +76,7 @@ const AccountDetails: NextComponentType = () => {
             </div>
             <div className={`${showEditAddress}`}>
               <hr className="my-2" />
+              <p className='font-bold my-5'>Edit Address</p>
               <AddNewAddressForm /> <hr className="my-2" />
             </div>
           </div>
