@@ -52,7 +52,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     { name: 'Login', link: '/account/sign-in' },
     { name: 'Wishlist', link: '/wishlist' },
     { name: 'Logout', link: '/account/sign-in' },
-    { name: `${user}`, link: '/account' },
+    { name: `${user}`, link: '/myAccount' },
   ];
   return (
     <>

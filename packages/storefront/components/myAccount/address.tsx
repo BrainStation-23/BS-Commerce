@@ -9,12 +9,12 @@ const AccountDetails: NextComponentType = () => {
       <Breadcrumb
         title="Addresses"
         pathArray={['Home', 'Addresses']}
-        linkArray={['/', '/account/addresses']}
+        linkArray={['/', '/myAccount/addresses']}
       />
       <div className="container mx-auto my-24 px-5 text-gray-800">
         <div className="border-b-2">
           <span className="text-3xl font-bold">My Account</span>
-          <Link href="/" passHref>
+          <Link href="/myAccount/form" passHref>
             <span className="float-right text-xl font-bold">
               <button
                 className="lg:px-auto rounded bg-green-600 py-1 text-white hover:bg-black focus:outline-none sm:px-12"
@@ -27,7 +27,7 @@ const AccountDetails: NextComponentType = () => {
         </div>
         <div className="mx-auto mt-3 flex flex-wrap">
           <div className="w-full md:w-1/3">
-            <Link href="/account">
+            <Link href="/myAccount">
               <span className="cursor-pointer hover:text-blue-600">
                 Return to Account Details
               </span>

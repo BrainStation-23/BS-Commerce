@@ -22,7 +22,7 @@ const AccountDetails: NextComponentType = () => {
      <Breadcrumb
         title='Account'
         pathArray={['Home', 'Account']}
-        linkArray={['/', '/account']}
+        linkArray={['/', '/myAccount']}
       />
     <div className="container mx-auto my-24 px-5 text-gray-800">
       <div className="border-b-2">
@@ -47,7 +47,7 @@ const AccountDetails: NextComponentType = () => {
             <span className="text-2xl font-semibold">Account Details</span>
             <div className="mt-2 text-xl font-semibold">Customer Name</div>
             <div className="mt-32"> Bangladesh </div>
-            <Link href="/account/addresses">
+            <Link href="/myAccount/addresses">
               <span className="cursor-pointer hover:text-green-600">
                 View Addresses (1)
               </span>
