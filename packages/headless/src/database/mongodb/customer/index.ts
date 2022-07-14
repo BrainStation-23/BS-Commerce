@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from 'src/entity/customer';
+import { Customer, CustomerAddress } from 'src/entity/customer';
 import { ICustomerDatabase } from 'src/modules/customer/repositories/customer.database.interface';
 import { CustomerModel } from './customer.model';
 
@@ -18,5 +18,17 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async getCustomerPassword(query: Record<string, string>): Promise<Customer | null> {
     return await CustomerModel.findOne(query).lean();
+  }
+
+  async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
+  }
+
+  async updateCustomerWithNewAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer, $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
+  }
+
+  async updateCustomerAndAddress(customerId: string, customer: Customer, address: CustomerAddress): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': address.id }, { $set: { ...customer, 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
   }
 }
