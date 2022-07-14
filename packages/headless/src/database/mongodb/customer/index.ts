@@ -33,6 +33,6 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { 'addresses.$.id': addressId } }, { new: true }).lean().select('-password -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -_id').exec();
   }
 }

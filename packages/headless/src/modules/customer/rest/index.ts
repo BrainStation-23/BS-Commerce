@@ -5,6 +5,7 @@ import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Customer } from 'src/entity/customer';
+import { AddCustomerNewAddressErrorResponseDto, AddCustomerNewAddressSuccessResponseDto, CustomerAddressDto, DeleteCustomerAddressErrorResponseDto, DeleteCustomerAddressParamsDto, DeleteCustomerAddressSuccessResponseDto, GetCustomerInformationErrorResponseDto, GetCustomerInformationSuccessResponseDto, UpdateCustomerAddressErrorResponseDto, UpdateCustomerAddressParamsDto, UpdateCustomerAddressSuccessResponseDto } from '../dto';
 
 @Controller('customer')
 @ApiTags('Customer Profile API')
@@ -14,6 +15,16 @@ export class CustomerController {
   constructor(private customerService: CustomerService) { }
 
   @Get()
+  @ApiResponse({
+    description: 'Get Customer Success Response',
+    type: GetCustomerInformationSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Customer Error Response',
+    type: GetCustomerInformationErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
   async getCustomer(@UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.customerService.getCustomer(customer.id);
     res.status(code);
@@ -27,23 +38,53 @@ export class CustomerController {
     return { code, ...response };
   }
 
-  @Patch('/address')
-  async addCustomerNewAddress(@Body() data: any, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.customerService.addCustomerNewAddress(customer.id, data);
+  @Patch('/add-address')
+  @ApiResponse({
+    description: 'Add Customer New Address Success Response',
+    type: AddCustomerNewAddressSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Add Customer New Address Error Response',
+    type: AddCustomerNewAddressErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async addCustomerNewAddress(@Body() address: CustomerAddressDto, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.customerService.addCustomerNewAddress(customer.id, address);
     res.status(code);
     return { code, ...response };
   }
 
-  @Patch('/address/:addressId')
-  async updateCustomerAddress(@Param() params: any, @Body() data: any, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.customerService.updateCustomerAddress(customer.id, params.addressId, data);
+  @Patch('/update-address/:addressId')
+  @ApiResponse({
+    description: 'Update Customer Address Success Response',
+    type: UpdateCustomerAddressSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Update Customer Address Error Response',
+    type: UpdateCustomerAddressErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async updateCustomerAddress(@Param() params: UpdateCustomerAddressParamsDto, @Body() address: CustomerAddressDto, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.customerService.updateCustomerAddress(customer.id, params.addressId, address);
     res.status(code);
     return { code, ...response };
   }
 
   @Patch('/delete-address/:addressId')
-  async deleteCustomerAddress(@Param() params: any, @Body() data: any, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.customerService.deleteCustomerAddress(customer.id, params.addressId, data);
+  @ApiResponse({
+    description: 'Delete Customer Address Success Response',
+    type: DeleteCustomerAddressSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Delete Customer Address Error Response',
+    type: DeleteCustomerAddressErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async deleteCustomerAddress(@Param() params: DeleteCustomerAddressParamsDto, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.customerService.deleteCustomerAddress(customer.id, params.addressId);
     res.status(code);
     return { code, ...response };
   }
