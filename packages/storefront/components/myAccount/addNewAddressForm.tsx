@@ -10,15 +10,11 @@ const AddNewAddressForm: NextComponentType = () => {
           initialValues={{
             firstName: '',
             lastName: '',
-            company: '',
             address1: '',
-            address2: '',
             city: '',
-            country: '',
-            province: '',
             postalCode: '',
             phone: '',
-            setAsDefaultAddressCheckbox: false,
+            setAddressTypeCheckbox: '',
           }}
           onSubmit={(values, actions) => {
             console.log(values);
@@ -59,21 +55,6 @@ const AddNewAddressForm: NextComponentType = () => {
 
                 <div className="mb-3">
                   <div className="grid-cols-1">
-                    <label htmlFor="company" className="text-sm">
-                      Company
-                    </label>
-                    <br />
-                    <Field
-                      type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="company"
-                      name="company"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-3">
-                  <div className="grid-cols-1">
                     <label htmlFor="address1" className="text-sm">
                       Address 1
                     </label>
@@ -88,116 +69,86 @@ const AddNewAddressForm: NextComponentType = () => {
                 </div>
 
                 <div className="mb-3">
-                  <div className="grid-cols-1">
-                    <label htmlFor="address2" className="text-sm">
-                      Address 2
-                    </label>
-                    <br />
-                    <Field
-                      type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="address2"
-                      name="address2"
-                    />
-                  </div>
+                  <label htmlFor="city" className="text-sm">
+                    City
+                  </label>
+                  <br />
+                  <Field
+                    type="text"
+                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                    id="city"
+                    name="city"
+                  />
                 </div>
 
                 <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                  <div className='mb-3'>
-                    <label htmlFor="city" className="text-sm">
-                      City
+                  <div className="mb-3">
+                    <label htmlFor="postalCode" className="text-sm">
+                      Postal/Zip Code
                     </label>
                     <br />
                     <Field
                       type="text"
                       className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="city"
-                      name="city"
+                      id="postalCode"
+                      name="postalCode"
                     />
                   </div>
-                  <div className='mb-3'>
-                    <label htmlFor="country" className="text-sm">
-                      Country
+                  <div className="mb-3">
+                    <label htmlFor="phone" className="text-sm">
+                      Phone
                     </label>
                     <br />
                     <Field
-                      as="select"
-                      className="border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="country"
-                      name="country"
-                    >
-                      <option>Click here to select country</option>
-                      <option>New Mexico</option>
-                      <option>Missouri</option>
-                      <option>Texas</option>
-                    </Field>
+                      type="text"
+                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                      id="phone"
+                      name="phone"
+                    />
                   </div>
                 </div>
 
-                <div className="mb-3">
-                  <div className="grid-cols-1">
-                    <label htmlFor="province" className="text-sm">
-                      Province
-                    </label>
-                    <br />
-                    <Field
-                      as="select"
-                      className="w-full border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="province"
-                      name="province"
-                    >
-                      <option>Click here to select</option>
-                      <option>Florida</option>
-                      <option>Hawaii</option>
-                      <option>Colorado</option>
-                    </Field>
-                  </div>
-                </div>
+                <p className="mb-2">Select a label for effective delivery:</p>
 
-                  <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                    <div className='mb-3'>
-                      <label htmlFor="postalCode" className="text-sm">
-                        Postal/Zip Code
-                      </label>
-                      <br />
-                      <Field
-                        type="text"
-                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                        id="postalCode"
-                        name="postalCode"
-                      />
-                    </div>
-                    <div className='mb-3'> 
-                      <label htmlFor="phone" className="text-sm">
-                        Phone
-                      </label>
-                      <br />
-                      <Field
-                        type="text"
-                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                        id="phone"
-                        name="phone"
-                      />
+                <div className="flex flex-wrap items-center gap-x-3">
+                  <div className="mb-3">
+                    <div className="relative">
+                        <Field
+                          type="radio"
+                          id="setAddressTypeCheckbox"
+                          name="setAddressTypeCheckbox"
+                          className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                          placeholder=" "
+                          value="home"
+                        />
+                        <label
+                          htmlFor="setAddressTypeCheckbox"
+                          className="ml-2 text-sm hover:cursor-pointer"
+                        >
+                          Home
+                        </label>
                     </div>
                   </div>
 
-                <div className="mb-3">
+                  <div className="mb-3">
                     <div className="relative">
                       <Field
-                        type="checkbox"
-                        id="setAsDefaultAddressCheckbox"
-                        name="setAsDefaultAddressCheckbox"
-                        className={`focus:ring-3 hover:cursor-pointer focus:ring-black hover:border-gray-300 h-3 w-3 rounded border-2 border-black`}
+                        type="radio"
+                        id="setAddressTypeCheckbox"
+                        name="setAddressTypeCheckbox"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
                         placeholder=" "
+                        value="office"
                       />
                       <label
-                        htmlFor="setAsDefaultAddressCheckbox"
+                        htmlFor="setAddressTypeCheckbox"
                         className="ml-2 text-sm hover:cursor-pointer"
                       >
-                        Set as default address
+                        Office
                       </label>
                     </div>
                   </div>
+                </div>
 
                 <button
                   type="submit"

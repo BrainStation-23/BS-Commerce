@@ -215,7 +215,7 @@ export async function getCustomerWishlistRest(
 
     return res.data.data;
   } catch (error: any) {
-    return error;
+    return [];
   }
 }
 
