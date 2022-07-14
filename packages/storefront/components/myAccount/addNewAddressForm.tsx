@@ -7,7 +7,7 @@ interface props {
 }
 const AddNewAddressForm: FC = ({ user, cancelForm }: any) => {
   const handleAddressSubmit = (data: any) => {
-    console.log(data);
+    // console.log(data);
   };
 
   return (
