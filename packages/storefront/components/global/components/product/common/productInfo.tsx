@@ -1,24 +1,28 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { CustomerProduct } from "models";
+import { CustomerProduct } from 'models';
 
 interface SingleProduct {
-  product: CustomerProduct
+  product: CustomerProduct;
 }
 
 const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
 
   return (
-    <div className="text-center py-4">
-      {/* <Link href="/product/1" passHref> */}
-      <div className="text-inherit text-xl font-medium text-gray-600">
-        {product?.info.name}
-      </div>
-      {/* </Link> */}
-      <p className="text-lg font-['arial'] text-gray-600 m-1">
-        {product?.tags[0]}
+    <div className="py-4 text-center">
+      <Link href="/product/1" passHref>
+        <div className="text-xl font-medium text-inherit text-gray-600">
+          {product?.info.name}
+        </div>
+      </Link>
+      <p className="m-1 font-['arial'] text-lg text-gray-600">
+        {product?.tags
+          ? product?.tags[0]
+          : product?.brands
+          ? product?.brands[0]
+          : ''}
       </p>
       <div className="text-lg font-semibold text-green-600">
         {product?.info?.price}
