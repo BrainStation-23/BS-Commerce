@@ -5,7 +5,7 @@ import Link from 'next/link';
 const AddNewAddressForm: NextComponentType = () => {
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center md:items-start md:justify-start">
         <Formik
           initialValues={{
             firstName: '',
