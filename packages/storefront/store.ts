@@ -2,10 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import productsReducer from "./toolkit/ProductsSlice";
-import authReducer from "./toolkit/authSlice";
+import productsReducer from "toolkit/productsSlice";
+import authReducer from "toolkit/authSlice";
 import cartReducer from "toolkit/cartSlice";
 import userReducer from "toolkit/userSlice";
+import checkoutReducer from "toolkit/checkoutSlice";
 import modalReducer from "toolkit/modalSlice";
 import compareReducer from "toolkit/compareSlice";
 
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   user: userReducer,
+  checkout: checkoutReducer,
   modal: modalReducer,
   compare: compareReducer,
 });
@@ -22,7 +24,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: ["cart", "auth", "user"],
+  whiteList: ["cart", "auth", "user", "checkout"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

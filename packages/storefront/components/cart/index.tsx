@@ -1,5 +1,4 @@
 import type { NextComponentType } from "next";
-
 import DeliveryDetails from "@/components/cart/subcomponents/deliveryDetails/main";
 import CartDetails from "@/components/cart/subcomponents/cartTable/main";
 import PageTitle from "@/components/global/components/pageTitle";
