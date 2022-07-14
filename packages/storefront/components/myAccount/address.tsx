@@ -52,7 +52,8 @@ const AccountDetails: NextComponentType = () => {
           </div>
           <div className="md:col-span-2">
             <div className={`${showAddAddress}`}>
-              <AddNewAddressForm /> <hr className="my-2" />
+              <AddNewAddressForm cancelForm={addButtonOnClick} />
+              <hr className="my-2" />
             </div>
             <div className="text-center md:text-left">
               <span className="text-4xl">Your Addresses</span>
@@ -76,8 +77,20 @@ const AccountDetails: NextComponentType = () => {
             </div>
             <div className={`${showEditAddress}`}>
               <hr className="my-2" />
-              <p className='font-bold my-5'>Edit Address</p>
-              <AddNewAddressForm /> <hr className="my-2" />
+              <p className="my-5 font-bold">Edit Address</p>
+              <AddNewAddressForm
+                user={{
+                  firstName: 'firstName',
+                  lastName: 'lastName',
+                  address: 'address1',
+                  city: 'city',
+                  postalCode: '1200',
+                  phone: '01521427376',
+                  tag: 'eta tag ?',
+                }}
+                cancelForm={editButtonOnClick}
+              />
+              <hr className="my-2" />
             </div>
           </div>
         </div>
