@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomerProduct, DeleteWishlistItemParams, Product, Wishlist } from "models";
+import { CustomerProduct, DeleteWishlistItemParams, Product, Wishlist, WishlistItem } from "models";
 import { ProductStore } from "../utils/types";
 
 export interface productsState {
@@ -52,10 +52,23 @@ export const productsSlice = createSlice({
     ) => {
       const newList:any = [];
       state.wishlist = {...state.wishlist, items: newList}
+    },
+    addToWishlist: (
+      state: productsState,
+      action: PayloadAction<WishlistItem>
+    ) => {
+      const newList = state.wishlist.items;
+      newList?.push(action.payload);
+      state.wishlist = {...state.wishlist, items: newList};
     }
   },
 });
 
-export const { storeProducts, storeFeaturedProducts, storeWishlist, deleteItemFromWishlist, deleteFullWishlist } = productsSlice.actions;
+export const { storeProducts, 
+                storeFeaturedProducts, 
+                storeWishlist, 
+                deleteItemFromWishlist, 
+                deleteFullWishlist, 
+                addToWishlist } = productsSlice.actions;
 
 export default productsSlice.reducer;
