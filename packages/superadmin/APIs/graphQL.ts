@@ -13,6 +13,10 @@ import {
   getCategoryListSuccessResponse,
   getCategoryRequest,
   getCategorySuccessResponse,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  UploadFileSuccessResponse,
+  GetUserResponse,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -48,12 +52,15 @@ export async function getAdminsGraphql(): Promise<User[] | undefined> {
   return;
 }
 
-
-export async function updateAdminGraphql(): Promise<UpdatedUserRequest | undefined> {
+export async function updateAdminGraphql(): Promise<
+  UpdatedUserRequest | undefined
+> {
   return;
 }
 
-export async function changePasswordGraphql(): Promise<ChangePasswordRequest | undefined> {
+export async function changePasswordGraphql(): Promise<
+  ChangePasswordRequest | undefined
+> {
   return;
 }
 
@@ -72,5 +79,22 @@ export async function getCategoryListGraphQL(): Promise<
 export async function getCategoryGraphQL(
   id: getCategoryRequest
 ): Promise<getCategorySuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function createCategoryGraphQL(
+  data: createCategoryRequest,
+  router: NextRouter
+): Promise<createCategorySuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function getTagsGraphQL(): Promise<GetUserResponse | undefined> {
+  return;
+}
+
+export async function mediaUploadGraphQL(
+  data: FormData
+): Promise<UploadFileSuccessResponse | undefined> {
   return undefined;
 }

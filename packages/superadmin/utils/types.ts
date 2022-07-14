@@ -13,6 +13,11 @@ import {
   UpdateManufacturerRequest,
   GetProductParams,
   CreateProductRequest,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  UploadFileSuccessResponse,
+  GetTagsResponse,
+  Tags,
   UpdatedUserRequest,
 } from 'models';
 
@@ -58,6 +63,10 @@ export interface apiFunction {
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  createCategory: (
+    data: createCategoryRequest,
+    router: NextRouter
+  ) => Promise<createCategorySuccessResponse | undefined>;
   getCategory: (
     id: getCategoryRequest
   ) => Promise<getCategorySuccessResponse | undefined>;
@@ -68,12 +77,8 @@ export interface apiFunction {
   ) => Promise<SignInSuccessResponse | undefined>;
   createAdmin: (data: User, cb: any) => Promise<User | undefined>;
   getAdmins: () => Promise<User[] | undefined>;
-  updateAdmin: (
-    data: any
-  ) => Promise<UpdatedUserRequest | undefined>;
-  changePassword: (
-    data: any,
-  ) => Promise<UpdatedUserRequest | undefined>;
+  updateAdmin: (data: any) => Promise<UpdatedUserRequest | undefined>;
+  changePassword: (data: any) => Promise<UpdatedUserRequest | undefined>;
   createManufacturer: (
     data: CreateManufacturerRequest,
     router: any
@@ -91,6 +96,10 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
+  mediaUpload: (
+    data: FormData
+  ) => Promise<UploadFileSuccessResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
 }
 
 export interface adminCreate {

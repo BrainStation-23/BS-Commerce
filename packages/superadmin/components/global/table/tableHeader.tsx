@@ -1,7 +1,7 @@
 import React from "react";
 
 const TableHead = (props: any) => {
-  const { columns } = props;
+  const { columns, onClickForSort } = props;
   return (
     <>
       <thead>
@@ -9,7 +9,14 @@ const TableHead = (props: any) => {
           {columns.map((col: any, index: any) => {
             return (
               <React.Fragment key={index}>
-                <th className="text-center">{col.label}</th>
+                <th
+                  className="text-center"
+                  onClick={() => {
+                    onClickForSort(col.label);
+                  }}
+                >
+                  {col.label}
+                </th>
               </React.Fragment>
             );
           })}

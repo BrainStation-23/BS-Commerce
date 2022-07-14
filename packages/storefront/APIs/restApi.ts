@@ -15,6 +15,9 @@ import {
   GetCustomerProductParams,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
+  getCategoryListSuccessResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
   IOrderCreateData,
   IOrderResponseData,
   addToWishlistRequest,
@@ -45,8 +48,7 @@ export async function getSignedInUserRest(
 ): Promise<GetCustomerResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getSignedInUser}${
-        isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
+      `${apiEndPoints.getSignedInUser}${isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
       }`
     );
     return res.data;
@@ -127,6 +129,17 @@ export async function getPublicProductByIdRest(
   }
 }
 
+export async function getCategoryListRest(): Promise<getCategoryListSuccessResponse
+  | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCatagoryList}`
+    );
+    return res.data.data as getCategoryListSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
 export async function checkoutRest(
   data: any,
 ): Promise<IOrderResponseData | undefined> {
@@ -138,6 +151,18 @@ export async function checkoutRest(
   }
 }
 
+export async function getPublicProductByCategoryIDRest(
+  CategoryId: GetProductsByConditionQuery
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProducts}?categoryId=${CategoryId}`
+    );
+    return res.data.data.products;
+  } catch (error: any) {
+    return error;
+  }
+}
 export async function addToWishlistRest(
   data: addToWishlistRequest
 ): Promise<AddToWishlistResponse | undefined> {
