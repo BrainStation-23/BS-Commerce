@@ -18,7 +18,5 @@ export interface Customer {
     lastName?: string;
     phone?: string;
     email?: string;
-    otp?: string;
-    optVerified?: boolean;
     address?: CustomerAddress[]
 }

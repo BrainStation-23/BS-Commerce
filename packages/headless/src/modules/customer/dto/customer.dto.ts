@@ -68,9 +68,6 @@ export class CustomerInformationDto implements Customer {
     @ApiProperty()
     email: string;
 
-    @ApiProperty()
-    otp: string;
-
     @ApiProperty({
         type: [CustomerAddressDto]
     })
