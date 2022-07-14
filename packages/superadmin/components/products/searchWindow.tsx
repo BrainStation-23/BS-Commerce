@@ -1,18 +1,18 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { userAPI } from "../../APIs";
-import Tooltips from "../global/tooltip";
-// import { searchProductSchema } from "./schema/productSchema";
-import { Product } from "models";
-import { toast } from "react-toastify";
-import { searchProductSchema } from "./schema/productSchema";
+import { FC } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-const SearchWindow = ({ setProducts ,allProducts }: any) => {
+import { userAPI } from '@/APIs';
+import { searchProductSchema } from '@/components/products/schema/productSchema/index';
+import { SearchWindowProps } from '@/components/products/models/index';
+
+const SearchWindow: FC<SearchWindowProps> = ({
+  setProducts,
+}: SearchWindowProps) => {
   const handleSearchSubmit = async (data: string) => {
-    if (data == "") {
-        const productsList = await userAPI.getProducts(1000);
-        console.log(productsList);
-    
-        if (productsList) setProducts(productsList);
+    if (data == '') {
+      const productsList = await userAPI.getProducts(1000);
+
+      if (productsList) setProducts(productsList);
     } else {
       const searchProduct: any = await userAPI.searchProduct(data);
       if (searchProduct) {
@@ -32,7 +32,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
           // SearchWarehouseId: 0,
           // SearchProductTypeId: 0,
           // SearchPublishedId: 0,
-          GoDirectlyToSku: "",
+          GoDirectlyToSku: '',
         }}
         onSubmit={(values, actions) => {
           // const data = {
@@ -54,12 +54,12 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 mt-3">
+              <div className="card border-1 mt-3 rounded">
                 <div className="card-header">
                   <span className="ms-2 fs-4">Search</span>
                 </div>
                 <div className="card-body">
-                  <div className="form-group row py-1">
+                  <div className="form-group row py-2">
                     <div className="col-md-3">
                       <div className="label-wrapper row row-cols-auto float-md-end px-2">
                         <label
@@ -68,21 +68,19 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                         >
                           Go directly to product SKU
                         </label>
-                        <Tooltips title="Enter product SKU and click Go." />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="Field-group Field-group-short ">
                         <div className="row">
                           <Field
-                            className="form-control col my-3 mt-2 rounded-start rounded-0 "
+                            className="form-control col rounded-start rounded-0 my-3 mt-0 "
                             id="GoDirectlyToSku"
                             name="GoDirectlyToSku"
                             type="text"
                           />
                         </div>
-
-                        <div className="errMsg text-red-600 text-danger">
+                        <div className="errMsg text-danger text-red-600">
                           <ErrorMessage name="GoDirectlyToSku" />
                         </div>
                       </div>
@@ -93,7 +91,7 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                           type="submit"
                           id="goToProductBySku"
                           name="goToProductBySku"
-                          className="btn btn-info btn-flat my-2  rounded-end rounded-0 "
+                          className="btn btn-primary btn-flat rounded-end  rounded-0 my-0 "
                         >
                           Go
                         </button>
@@ -125,7 +123,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Product name
                               </label>
-                              <Tooltips title="A product name." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -149,7 +146,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Category
                               </label>
-                              <Tooltips title="Search by a specific category." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -206,7 +202,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Search subcategories
                               </label>
-                              <Tooltips title="Check to search in subcategories." />
                             </div>
                           </div>
                           <div className="col-md-8 my-2">
@@ -230,7 +225,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Manufacturer
                               </label>
-                              <Tooltips title="Search by a specific manufacturer." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -259,7 +253,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Vendor
                               </label>
-                              <Tooltips title="Search by a specific vendor." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -286,7 +279,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Warehouse
                               </label>
-                              <Tooltips title="Search by a specific warehouse." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -316,7 +308,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Product type
                               </label>
-                              <Tooltips title="Search by a product type." />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -346,7 +337,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Published
                               </label>
-                              <Tooltips title='Search by a "Published" property.' />
                             </div>
                           </div>
                           <div className="col-md-8">
@@ -374,7 +364,6 @@ const SearchWindow = ({ setProducts ,allProducts }: any) => {
                               >
                                 Go directly to product SKU
                               </label>
-                              <Tooltips title="Enter product SKU and click Go." />
                             </div>
                           </div>
                           <div className="col-md-8 ps-4 ">
