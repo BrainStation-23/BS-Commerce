@@ -27,20 +27,24 @@ export class CustomerAddressDto implements CustomerAddress {
     addressLine2?: string;
 
     @ApiProperty({ required: false })
+    @IsOptional()
     @IsString()
     company?: string;
 
     @ApiProperty({ required: false })
+    @IsOptional()
     @IsString()
     state?: string;
 
     @ApiProperty({ required: false })
+    @IsOptional()
     @IsString()
     country?: string;
 
-    @ApiProperty({ required: true })
+    @ApiProperty({ required: false })
+    @IsOptional()
     @IsString()
-    postCode: string;
+    postCode?: string;
 
     @ApiProperty({ required: true })
     @IsString()
