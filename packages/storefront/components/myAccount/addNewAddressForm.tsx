@@ -1,23 +1,27 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { NextComponentType } from 'next';
-import Link from 'next/link';
 
-const AddNewAddressForm: NextComponentType = () => {
+const AddNewAddressForm: NextComponentType = ({user}: any) => {
+
+  const handleAddressSubmit = (data: any) => {
+    console.log(data);
+  }
+
   return (
     <>
       <div className="flex flex-wrap items-center justify-center md:items-start md:justify-start">
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            address1: '',
-            city: '',
-            postalCode: '',
-            phone: '',
-            setAddressTypeCheckbox: '',
+            firstName: user ? user.firstName : '',
+            lastName: user ? user.lastName : '',
+            address1: user ? user.address : '',
+            city: user ? user.city : '',
+            postalCode: user ? user.postalCode : '',
+            phone: user ? user.phone : '',
+            setAddressTypeCheckbox: user ? user.addressType : '',
           }}
           onSubmit={(values, actions) => {
-            console.log(values);
+            handleAddressSubmit(values);
             actions.setSubmitting(false);
           }}
         >
