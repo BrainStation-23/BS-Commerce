@@ -7,7 +7,7 @@ interface Props {
   categoryList: NestedCategoryList[];
 }
 
-const CategoryForm: React.FC<Props> = ({ categoryList }: Props) => {
+const CategoryCreateForm: React.FC<Props> = ({ categoryList }: Props) => {
   return (
     <>
       <Accordion id={1} title="Category info" show={true} icon="bi bi-info-lg">
@@ -64,14 +64,14 @@ const CategoryForm: React.FC<Props> = ({ categoryList }: Props) => {
         <CustomInput label="Display order" id="displayOrder" type="number" />
       </Accordion>
 
-      {/* <Accordion id={3} title="SEO" show={true} icon="bi bi-search-heart">
+      <Accordion id={3} title="SEO" show={true} icon="bi bi-search-heart">
         <CustomInput label="Search engine friendly page name" id="meta.SEFN" />
         <CustomInput label="Meta title" id="meta.title" />
         <CustomInput label="Meta keywords" id="meta.keywords" />
         <CustomInput label="Meta description" id="meta.description" />
-      </Accordion> */}
+      </Accordion>
     </>
   );
 };
 
-export default CategoryForm;
+export default CategoryCreateForm;

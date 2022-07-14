@@ -1,16 +1,16 @@
-import type { NextPage } from "next";
-import { useEffect, useMemo, useState } from "react";
-import AddButton from "../../../components/global/AddButton";
-import TableInfo from "../../../components/global/table";
-import { useRouter } from "next/router";
-import SearchForm from "../../../components/admin/searchForm";
-import Search from "../../../components/global/search";
-import { userAPI } from "../../../APIs";
+import type { NextPage } from 'next';
+import { useEffect, useMemo, useState } from 'react';
+import AddButton from '../../../components/global/AddButton';
+import TableInfo from '../../../components/global/table';
+import { useRouter } from 'next/router';
+import SearchForm from '../../../components/admin/searchForm';
+import Search from '../../../components/global/search';
+import { userAPI } from '../../../APIs';
 
-const thead = ["Admin name", "Email", "Password Edit", "Edit"];
+const thead = ['Admin name', 'Email', 'Password Edit', 'Edit'];
 
 const initData = {
-  name: "",
+  name: '',
 };
 
 const Admin: NextPage = () => {
@@ -41,12 +41,12 @@ const Admin: NextPage = () => {
 
   return (
     <div className="px-5">
-      <div className="px-2 py-3 d-flex justify-content-between">
+      <div className="d-flex justify-content-between px-2 py-3">
         <div className="fs-3">Admin</div>
         <div className="">
           <AddButton
             title="Add New"
-            link={"/users/admin/create"}
+            link={'/users/admin/create'}
             icon="bi bi-file-plus"
           />
         </div>
@@ -55,8 +55,8 @@ const Admin: NextPage = () => {
         <SearchForm saveHandler={() => {}} initData={initData} />
       </Search>
       <div className="card mt-2 p-3">
-        <div className="m-2 fs-5" data-testid="customers">
-          Learn more about <span style={{ color: "#007bff" }}>admin</span>
+        <div className="fs-5 m-2" data-testid="customers">
+          Learn more about <span style={{ color: '#007bff' }}>admin</span>
         </div>
         <TableInfo
           tHead={thead}
@@ -68,38 +68,21 @@ const Admin: NextPage = () => {
         >
           {currentTableData?.map((data: any, index: number) => (
             <tr key={index}>
-              {/* <td className="text-center">
-                <input type="checkbox" name="veh" value="bike" />
-              </td> */}
               <td>{data?.displayName}</td>
               <td>{data?.email}</td>
-              {/* <td>{data.roles}</td>
-              <td>{data.cName}</td>
-              <td className="text-center">
-                {data?.active ? (
-                  <i
-                    className="bi bi-check-lg"
-                    style={{ fontSize: "30px", color: "#007fcc" }}
-                  ></i>
-                ) : (
-                  <i
-                    className="bi bi-x-lg"
-                    style={{ fontSize: "25px", color: "red" }}
-                  ></i>
-                )}
-              </td> */}
+
               <td className="text-center">
                 <button
                   className="btn btn-light"
                   onClick={() =>
                     router.push({
                       pathname: `/users/admin/edit/${data.id}`,
-                      query: { name: "pass" },
+                      query: { name: 'pass' },
                     })
                   }
                 >
-                  <i className="bi bi-pen-fill pe-1 align-middle"></i>Password
-                  Edit
+                  <i className="bi bi-pen-fill pe-1 align-middle"></i>
+                  Edit Password
                 </button>
               </td>
               <td className="text-center">
@@ -108,11 +91,12 @@ const Admin: NextPage = () => {
                   onClick={() =>
                     router.push({
                       pathname: `/users/admin/edit/${data.id}`,
-                      query: { name: "edit" },
+                      query: { name: 'edit' },
                     })
                   }
                 >
-                  <i className="bi bi-pen-fill pe-1 align-middle"></i>Edit
+                  <i className="bi bi-pen-fill pe-1 align-middle"></i>
+                  Edit Info
                 </button>
               </td>
             </tr>
@@ -122,18 +106,5 @@ const Admin: NextPage = () => {
     </div>
   );
 };
-
-// export async function getServerSideProps() {
-//   const adminsList = await userAPI.getAdmins();
-//   let admins: any = [];
-//   if (adminsList) {
-//     admins = [adminsList];
-//   }
-//   return {
-//     props: {
-//       adminsList: admins || [],
-//     },
-//   };
-// }
 
 export default Admin;

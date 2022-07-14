@@ -27,8 +27,8 @@ const CategoryComponent: NextComponentType = ({}) => {
         <div className="">
           <Link href="/category/create" passHref>
             <button className="btn btn-info mx-1 text-white">
-              Add
               <i className="bi bi-plus-square me-1 pl-2" />
+              Add
             </button>
           </Link>
           <button className="btn btn-success disabled mx-1">

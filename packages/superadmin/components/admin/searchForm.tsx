@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import { Formik, Form } from "formik";
 import InputField from "../global/inputField";
-// import { searchValue } from "../../utils/typs";
-// import { sleep } from "../../utils/utils";
 
 interface Props {
   saveHandler: (values: any) => void;
@@ -16,7 +14,6 @@ const SearchForm: FC<Props> = ({ saveHandler, initData }) => {
         enableReinitialize={true}
         initialValues={initData}
         onSubmit={async (values, { resetForm }) => {
-          // await sleep(500);
           saveHandler(values);
         }}
       >

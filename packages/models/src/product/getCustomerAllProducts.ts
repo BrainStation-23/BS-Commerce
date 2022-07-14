@@ -12,7 +12,7 @@ import { CustomerProduct } from "./customerProduct";
 export interface GetCustomerAllProductsQuery {
     skip?: number;
     limit?: number;
-    brandId?: string;
+    brand?: string;
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;

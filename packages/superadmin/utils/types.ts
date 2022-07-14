@@ -13,10 +13,12 @@ import {
   UpdateManufacturerRequest,
   GetProductParams,
   CreateProductRequest,
-  UpdatedUserRequest,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
+  GetTagsResponse,
+  Tags,
+  UpdatedUserRequest,
 } from 'models';
 
 export interface User {
@@ -75,6 +77,8 @@ export interface apiFunction {
   ) => Promise<SignInSuccessResponse | undefined>;
   createAdmin: (data: User, cb: any) => Promise<User | undefined>;
   getAdmins: () => Promise<User[] | undefined>;
+  updateAdmin: (data: any) => Promise<UpdatedUserRequest | undefined>;
+  changePassword: (data: any) => Promise<UpdatedUserRequest | undefined>;
   createManufacturer: (
     data: CreateManufacturerRequest,
     router: any
@@ -95,6 +99,7 @@ export interface apiFunction {
   mediaUpload: (
     data: FormData
   ) => Promise<UploadFileSuccessResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
 }
 
 export interface adminCreate {

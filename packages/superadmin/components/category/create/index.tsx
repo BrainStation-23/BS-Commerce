@@ -7,16 +7,13 @@ import { createCategoryRequest, NestedCategoryList } from 'models';
 import { userAPI } from '@/APIs';
 import { CategorySchema } from '@/components/category/schema/category.schema';
 import { useEffect, useState } from 'react';
-import CategoryForm from './forms/category-form';
+import CategoryCreateForm from './forms/category-create-form';
 
 const CreateCategoryComponent: React.FC = () => {
   const [categoryList, setCategoryList] = useState<NestedCategoryList[]>();
   const router = useRouter();
-  const handleSubmit = (data: any) => {
-    // console.log(data);
-
-    console.log(data);
-    // const response = userAPI.createCategory(data, router);
+  const handleSubmit = (data: createCategoryRequest) => {
+    const response = userAPI.createCategory(data, router);
   };
 
   useEffect(() => {
@@ -42,17 +39,21 @@ const CreateCategoryComponent: React.FC = () => {
         allowToSelectPageSize: false,
         published: false,
         displayOrder: 0,
-        // meta: {
-        //   keywords: '',
-        //   description: '',
-        //   title: '',
-        //   SEFN: '',
-        // },
+        meta: {
+          keywords: '',
+          description: '',
+          title: '',
+          SEFN: '',
+        },
       }}
       onSubmit={(values, actions) => {
-        //   const  metaKeywords = values.meta.keywords.split(' ');
-        //   values.meta.keywords = metaKeywords;
-        handleSubmit(values);
+        const metaKeywords = values.meta.keywords.split(' ');
+        const structuredValues = {
+          ...values,
+          meta: { ...values.meta, keywords: metaKeywords },
+        };
+
+        handleSubmit(structuredValues);
         actions.setSubmitting(false);
       }}
       validationSchema={CategorySchema}
@@ -83,7 +84,11 @@ const CreateCategoryComponent: React.FC = () => {
                 </button>
               </div>
             </div>
-            {categoryList ? <CategoryForm categoryList={categoryList!} /> : ''}
+            {categoryList ? (
+              <CategoryCreateForm categoryList={categoryList!} />
+            ) : (
+              ''
+            )}
           </Form>
         );
       }}

@@ -11,6 +11,7 @@ import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
+import WithoutAuth from '@/components/auth/withoutAuth';
 
 const Signup = () => {
   const router = useRouter();
@@ -187,4 +188,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default WithoutAuth(Signup);

@@ -29,7 +29,9 @@ export class InfoDto implements BrandInfo{
     @IsNumber()
     displayOrder?: number;
 
-    @ApiProperty()
+    @ApiProperty({
+        example: [1, 2]
+    })
     @IsOptional()
     @IsArray()
     pageSizeOptions?: number[];

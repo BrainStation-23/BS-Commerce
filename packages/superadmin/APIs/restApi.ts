@@ -20,6 +20,7 @@ import {
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
+  GetTagsResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -323,6 +324,16 @@ export async function getUserProfileRest(
     router.push('/account/login');
     // toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
+  try {
+    const response = await axios.get(`${apiEndPoints.tags}`);
+
+    return response?.data;
+  } catch (error: any) {
+    console.error(error);
   }
 }
 
