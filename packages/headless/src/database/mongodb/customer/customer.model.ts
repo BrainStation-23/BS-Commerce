@@ -31,7 +31,7 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   },
   tag: {
     type: String,
-    enum: ['HOME', 'OFFICE', 'OTHERS']
+    required: true,
   },
 }, {
   _id: false,
@@ -45,6 +45,8 @@ const CustomerSchema = new Schema<Customer>({
     unique: true,
     default: () => randomUUID()
   },
+  firstName: String,
+  lastName: String,
   phone: {
     type: String,
     index: true

@@ -10,6 +10,9 @@ import {
     UpdateCustomerAddressErrorMessages,
     DeleteCustomerAddressResponse,
     DeleteCustomerAddressErrorMessages,
+    UpdateCustomerRequestBody,
+    UpdateCustomerResponse,
+    UpdateCustomerErrorMessages,
 } from 'models';
 import { CustomerAddress } from 'src/entity/customer';
 
@@ -23,15 +26,14 @@ export class CustomerService {
         return this.helper.serviceResponse.successResponse(customer, HttpStatus.OK);
     }
 
-    async updateCustomer(customerId: string, data: any): Promise<any> {
+    async updateCustomer(customerId: string, data: UpdateCustomerRequestBody): Promise<UpdateCustomerResponse> {
         let customer = await this.customerRepo.findCustomer({ id: customerId });
         if (!customer) return this.helper.serviceResponse.errorResponse(GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
 
         customer = Object.assign(customer, data);
-        const { addresses, ...rest } = customer;
 
         const updatedCustomer = await this.customerRepo.updateCustomer(customerId, customer);
-        if (!updatedCustomer) return this.helper.serviceResponse.errorResponse('CAN_NOT_UPDATE_CUSTOMER_INFORMATION', null, HttpStatus.BAD_REQUEST);
+        if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(UpdateCustomerErrorMessages.CAN_NOT_UPDATE_CUSTOMER_INFORMATION, null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedCustomer, HttpStatus.OK);
     }
 

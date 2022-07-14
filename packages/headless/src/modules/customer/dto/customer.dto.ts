@@ -2,12 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 import type { CustomerAddress, Customer } from 'models';
 
-export enum AddressTags {
-    HOME = 'HOME',
-    OFFICE = 'OFFICE',
-    OTHERS = 'OTHERS'
-  }
-
 export class CustomerAddressDto implements CustomerAddress {
     @ApiProperty({ required: true })
     @IsString()
@@ -54,7 +48,6 @@ export class CustomerAddressDto implements CustomerAddress {
         example: 'HOME',
         examples: ['HOME', 'OFFICE', 'OTHERS']
     })
-    @IsEnum(AddressTags)
     @IsString()
     tag: string;
 }
@@ -63,10 +56,16 @@ export class CustomerInformationDto implements Customer {
     @ApiProperty()
     id: string;
 
-    @ApiProperty({ required: false })
+    @ApiProperty()
+    firstName?: string;
+
+    @ApiProperty()
+    lastName: string;
+
+    @ApiProperty()
     phone?: string;
 
-    @ApiProperty({ required: false })
+    @ApiProperty()
     email: string;
 
     @ApiProperty()

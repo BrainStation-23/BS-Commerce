@@ -2,7 +2,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/
 
 /**
  * API Path: /customer/add-address
- * method: PATCH
+ * method: PUT
  * body: CustomerAddress
  * response: AddCustomerNewAddressResponse
  */

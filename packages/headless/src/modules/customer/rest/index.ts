@@ -1,11 +1,11 @@
-import { Body, Controller, Get, HttpStatus, Param, Patch, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Put, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerService } from '../services';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Customer } from 'src/entity/customer';
-import { AddCustomerNewAddressErrorResponseDto, AddCustomerNewAddressSuccessResponseDto, CustomerAddressDto, DeleteCustomerAddressErrorResponseDto, DeleteCustomerAddressParamsDto, DeleteCustomerAddressSuccessResponseDto, GetCustomerInformationErrorResponseDto, GetCustomerInformationSuccessResponseDto, UpdateCustomerAddressErrorResponseDto, UpdateCustomerAddressParamsDto, UpdateCustomerAddressSuccessResponseDto } from '../dto';
+import { AddCustomerNewAddressErrorResponseDto, AddCustomerNewAddressSuccessResponseDto, CustomerAddressDto, DeleteCustomerAddressErrorResponseDto, DeleteCustomerAddressParamsDto, DeleteCustomerAddressSuccessResponseDto, GetCustomerInformationErrorResponseDto, GetCustomerInformationSuccessResponseDto, UpdateCustomerAddressErrorResponseDto, UpdateCustomerAddressParamsDto, UpdateCustomerAddressSuccessResponseDto, UpdateCustomerDto, UpdateCustomerErrorResponseDto, UpdateCustomerSuccessResponseDto } from '../dto';
 
 @Controller('customer')
 @ApiTags('Customer Profile API')
@@ -32,13 +32,23 @@ export class CustomerController {
   }
 
   @Patch()
-  async updateCustomer(@Body() data: any, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+  @ApiResponse({
+    description: 'Update Customer Success Response',
+    type: UpdateCustomerSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Update Customer Error Response',
+    type: UpdateCustomerErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async updateCustomer(@Body() data: UpdateCustomerDto, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.customerService.updateCustomer(customer.id, data);
     res.status(code);
     return { code, ...response };
   }
 
-  @Patch('/add-address')
+  @Put('/add-address')
   @ApiResponse({
     description: 'Add Customer New Address Success Response',
     type: AddCustomerNewAddressSuccessResponseDto,
@@ -72,7 +82,7 @@ export class CustomerController {
     return { code, ...response };
   }
 
-  @Patch('/delete-address/:addressId')
+  @Delete('/delete-address/:addressId')
   @ApiResponse({
     description: 'Delete Customer Address Success Response',
     type: DeleteCustomerAddressSuccessResponseDto,

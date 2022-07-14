@@ -2,7 +2,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/
 
 /**
  * API Path: /customer/delete-address/:addressId
- * method: PATCH
+ * method: DELETE
  * params: addressId
  * response: DeleteCustomerAddressResponse
  */

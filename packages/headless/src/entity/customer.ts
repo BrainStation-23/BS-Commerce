@@ -13,6 +13,8 @@ export class CustomerAddress {
 }
 export class Customer {
     id?: string;
+    firstName?: string;
+    lastName?: string;
     phone?: string;
     email?: string;
     password?: string;
