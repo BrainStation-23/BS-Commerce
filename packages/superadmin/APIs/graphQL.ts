@@ -15,6 +15,7 @@ import {
   getCategorySuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
+  GetUserResponse,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -82,4 +83,7 @@ export async function createCategoryGraphQL(
   router: NextRouter
 ): Promise<createCategorySuccessResponse | undefined> {
   return undefined;
+}
+export async function getTagsGraphQL(): Promise<GetUserResponse | undefined> {
+  return;
 }

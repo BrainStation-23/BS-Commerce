@@ -1,17 +1,18 @@
 import { Formik, Form } from 'formik';
-import { productSchema } from './schema/productSchema';
-
-import ProductInfoForm from './forms/productInfoForm';
-import PhotosForm from './forms/photosForm';
-import MetaForm from './forms/metaForm';
-import { userAPI } from '../../APIs';
-
-import { useRouter } from 'next/router';
-import CategoryForm from './forms/categoryForm';
-import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
 
-const CreateProduct = () => {
+import { userAPI } from '@/APIs';
+import { productSchema } from '@/components/products/schema/productSchema/index';
+import MetaForm from '@/components/products/forms/metaForm';
+import PhotosForm from '@/components/products/forms/photosForm';
+import CategoryForm from '@/components/products/forms/categoryForm';
+import ProductInfoForm from '@/components/products/forms/productInfoForm';
+import { FormDataInterFace } from '@/components/products/models/index';
+
+const CreateProduct: NextComponentType = () => {
   const router = useRouter();
   const [categogiesData, setCategoryData] = useState([]);
   // const [categogiesData, setCategoryData] = useState([
@@ -72,8 +73,7 @@ const CreateProduct = () => {
   //     displayOrder: 0,
   //   },
   // ]);
-
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: FormDataInterFace) => {
     const info = {
       name: data.productName,
       shortDescription: data.ShortDescription,
@@ -167,9 +167,9 @@ const CreateProduct = () => {
           displayOrder: 1,
           isFeatured: false,
           publishDate: '',
-          tags: '',
-          brands: '',
-          keywords: '',
+          tags: [],
+          brands: [],
+          keywords: [],
           metaTitle: '',
           metaDescription: '',
           metaFriendlyPageName: '',
@@ -191,7 +191,7 @@ const CreateProduct = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="content-header clearfix">
+              <div className="content-header clearfix pt-4">
                 <h1 className="float-start">
                   Add a new product
                   <span className="fs-5 p-3">
@@ -210,32 +210,8 @@ const CreateProduct = () => {
                     <i className="bi bi-save" />
                     <p className="float-end mx-1 my-0">Save</p>
                   </button>
-                  {/* <button
-                    type="submit"
-                    name="save-continue"
-                    className="btn btn-primary m-1"
-                  >
-                    <i className="bi bi-save" />
-                    <p className="float-end mx-1 my-0">
-                      Save and Continue Edit
-                    </p>
-                  </button> */}
                 </div>
               </div>
-
-              <div className="col-md-12 clearfix">
-                <button
-                  type="button"
-                  className="btn btn-info float-left mx-2 my-auto "
-                  id="product-editor-settings"
-                  data-toggle="modal"
-                  data-target="#productsettings-window"
-                >
-                  <i className="bi bi-gear-fill pt-1" />
-                  <p className="float-end mx-1 my-0">Settings</p>
-                </button>
-              </div>
-
               <div className="mt-4">
                 <ProductInfoForm />
                 <MetaForm />

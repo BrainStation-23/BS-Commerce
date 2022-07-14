@@ -57,3 +57,7 @@
   font-size: 30px !important;
   color: #777;
 }
+
+.swiper-pagination-bullet-active {
+  background-color: #16A34A !important;
+}
