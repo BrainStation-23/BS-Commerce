@@ -1,6 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomerProduct, DeleteWishlistItemParams, Product, Wishlist } from "models";
-import { ProductStore } from "../utils/types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  CustomerProduct,
+  DeleteWishlistItemParams,
+  Product,
+  Wishlist,
+  WishlistItem,
+} from 'models';
+import { ProductStore } from '../utils/types';
 
 export interface productsState {
   publicProducts: CustomerProduct[];
@@ -16,12 +22,12 @@ const initialState: productsState = {
   wishlist: {
     userId: '',
     id: '',
-    items: []
-  }
+    items: [],
+  },
 };
 
 export const productsSlice = createSlice({
-  name: "productsSlice",
+  name: 'productsSlice',
   initialState,
   reducers: {
     storeProducts: (
@@ -36,24 +42,21 @@ export const productsSlice = createSlice({
     ) => {
       state.featuredProducts = action.payload;
     },
-    storeWishlist: (
-      state: productsState,
-      action: PayloadAction<Wishlist>
-    ) => {
-      state.wishlist = action.payload
+    storeWishlist: (state: productsState, action: PayloadAction<Wishlist>) => {
+      state.wishlist = action.payload;
     },
     deleteItemFromWishlist: (
       state: productsState,
       action: PayloadAction<string>
     ) => {
-      const newList = state.wishlist.items?.filter(item => item.productId != action.payload);
-      state.wishlist = { ...state.wishlist, items: newList }
+      const newList = state.wishlist.items?.filter(
+        (item) => item.productId != action.payload
+      );
+      state.wishlist = { ...state.wishlist, items: newList };
     },
-    deleteFullWishlist: (
-      state: productsState
-    ) => {
+    deleteFullWishlist: (state: productsState) => {
       const newList: any = [];
-      state.wishlist = { ...state.wishlist, items: newList }
+      state.wishlist = { ...state.wishlist, items: newList };
     },
     storeCategorizedProduct: (
       state: productsState,
@@ -61,9 +64,25 @@ export const productsSlice = createSlice({
     ) => {
       state.categorizedProduct = action.payload;
     },
+    addToWishlist: (
+      state: productsState,
+      action: PayloadAction<WishlistItem>
+    ) => {
+      const newList = state.wishlist.items;
+      newList?.push(action.payload);
+      state.wishlist = { ...state.wishlist, items: newList };
+    },
   },
 });
 
-export const { storeProducts, storeFeaturedProducts, storeWishlist, deleteItemFromWishlist, deleteFullWishlist, storeCategorizedProduct } = productsSlice.actions;
+export const {
+  storeProducts,
+  storeFeaturedProducts,
+  storeWishlist,
+  deleteItemFromWishlist,
+  deleteFullWishlist,
+  storeCategorizedProduct,
+  addToWishlist,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

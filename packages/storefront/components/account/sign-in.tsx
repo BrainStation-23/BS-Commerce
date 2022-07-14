@@ -58,12 +58,8 @@ const Signin: NextComponentType = () => {
       dispatch(storeUserToken(datass?.data?.token));
       getUser();
       setLoader(false);
-<<<<<<< HEAD
-      router.back();
-=======
       router.push('/');
       //router.back();
->>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3
       toast.success('Logged in successfully!');
     } catch (err) {
       setLoader(false);
@@ -213,8 +209,4 @@ const Signin: NextComponentType = () => {
   );
 };
 
-<<<<<<< HEAD
-export default withoutAuth(Signin);
-=======
 export default WithoutAuth(Signin);
->>>>>>> c75f0f21a236b02d585ee38a7e7948bca1efaec3
