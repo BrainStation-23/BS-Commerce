@@ -2,7 +2,7 @@ import TableBody from "./tableBody";
 import TableHead from "./tableHeader";
 
 const Table = (props: any) => {
-  const { items, columns } = props;
+  const { items, columns, onClickForSort } = props;
 
   return (
     <>
@@ -11,7 +11,7 @@ const Table = (props: any) => {
         style={{ overflow: "auto" }}
       >
         <table className="table table-bordered table-striped">
-            <TableHead columns={columns} />
+            <TableHead columns={columns} onClickForSort={onClickForSort}/>
             <TableBody items={items} columns={columns} />
         </table>
       </div>
