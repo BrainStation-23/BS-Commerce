@@ -12,13 +12,13 @@ const AddNewAddressForm: NextComponentType = ({user}: any) => {
       <div className="flex flex-wrap items-center justify-center md:items-start md:justify-start">
         <Formik
           initialValues={{
-            firstName: user ? user.firstName : '',
-            lastName: user ? user.lastName : '',
-            address1: user ? user.address : '',
-            city: user ? user.city : '',
-            postalCode: user ? user.postalCode : '',
-            phone: user ? user.phone : '',
-            setAddressTypeCheckbox: user ? user.addressType : '',
+            firstName: user?.firstName ? user.firstName : '',
+            lastName: user?.lastName ? user.lastName : '',
+            address1: user?.address ? user.address : '',
+            city: user?.city ? user.city : '',
+            postalCode: user?.postalCode ? user.postalCode : '',
+            phone: user?.phone ? user.phone : '',
+            setAddressTypeCheckbox: user?.addressType ? user.addressType : '',
           }}
           onSubmit={(values, actions) => {
             handleAddressSubmit(values);
