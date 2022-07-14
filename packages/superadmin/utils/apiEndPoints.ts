@@ -7,5 +7,6 @@ export const apiEndPoints = {
   manufacturer: '/manufacturers/create',
   manufacturerList: '/manufacturers',
   category: '/category',
+  media: '/media',
   tags: '/tags',
 };
