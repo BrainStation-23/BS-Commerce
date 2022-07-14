@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
+import AddNewAddressForm from './addNewAddressForm';
 
 const AccountDetails: NextComponentType = () => {
   const [showAddress, setShowAddress] = useState('hidden');
@@ -40,7 +41,7 @@ const AccountDetails: NextComponentType = () => {
             </Link>
           </div>
           <div className="w-full md:w-1/3">
-            <div className={`${showAddress}`}>here will be the form <hr /></div>
+            <div className={`${showAddress}`}><AddNewAddressForm/> <hr /></div>
             <span className="text-4xl">Your Addresses</span>
             <div className="mt-2 text-3xl">Customer Name (Default)</div>
             <div className="mt-32 mb-5"> Bangladesh </div>
