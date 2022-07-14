@@ -4,9 +4,8 @@ var cookie = require('cookie');
 import { CustomerProduct, Category } from 'models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeFeaturedProducts, storeProducts } from 'toolkit/ProductsSlice';
 import { storeCategory } from 'toolkit/categorySlice';
-
+import { storeFeaturedProducts, storeProducts } from 'toolkit/productsSlice';
 import HomeComponent from '@/components/home';
 
 interface Props {
@@ -31,7 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const featuredProducts = await userAPI.getFeaturedProducts();
   const category = await userAPI.getCategoryList();
   // JSON.parse(JSON.stringify(category));
-  console.log(category);
   return {
     props: {
       products: allProducts,

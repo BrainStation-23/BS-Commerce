@@ -17,7 +17,7 @@ import Container from "@/components/global/components/container";
 
 const BestSell: NextComponentType = () => {
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts
+    (state) => state.persistedReducer.product.publicProducts?.products
   );
   const getMinimumProduct = () => {
     const w = window.innerWidth;

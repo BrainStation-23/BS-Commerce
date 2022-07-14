@@ -1,65 +1,88 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from 'react';
 
-import CustomSelect from "@/components/products/CustomSelect.component";
-import FieldTemplate from "@/components/products/forms/fieldTemplate";
+import CustomSelect from '@/components/products/CustomSelect.component';
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
+import { userAPI } from '@/APIs';
+import { tagsOption } from '@/components/products/models/index';
 
 const ProductInfoForm: FC = () => {
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [tags, setTags] = useState([]);
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
+  const [tagsOptions, setTagsOption] = useState<tagsOption[]>([]);
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
-
-  const tagsOptions = [
-    {
-      label: "Tag1",
-      value: "Tag1",
-    },
-    {
-      label: "Tag2",
-      value: "Tag2",
-    },
-    {
-      label: "Tag3",
-      value: "Tag3",
-    },
-    {
-      label: "Tag4",
-      value: "Tag4",
-    },
-    {
-      label: "Tag5",
-      value: "Tag5",
-    },
-  ];
+  // const tagsOptions = [
+  //   {
+  //     label: "Tag1",
+  //     value: "Tag1",
+  //   },
+  //   {
+  //     label: "Tag2",
+  //     value: "Tag2",
+  //   },
+  //   {
+  //     label: "Tag3",
+  //     value: "Tag3",
+  //   },
+  //   {
+  //     label: "Tag4",
+  //     value: "Tag4",
+  //   },
+  //   {
+  //     label: "Tag5",
+  //     value: "Tag5",
+  //   },
+  // ];
 
   const brandOptions = [
     {
-      label: "Daraz",
-      value: "Daraz",
+      label: 'Daraz',
+      value: 'Daraz',
     },
     {
-      label: "Pickaboo",
-      value: "Pickaboo",
+      label: 'Pickaboo',
+      value: 'Pickaboo',
     },
     {
-      label: "Chaldal",
-      value: "Chaldal",
+      label: 'Chaldal',
+      value: 'Chaldal',
     },
     {
-      label: "Bagdoom",
-      value: "Bagdoom",
+      label: 'Bagdoom',
+      value: 'Bagdoom',
     },
     {
-      label: "Othoba",
-      value: "Othoba",
+      label: 'Othoba',
+      value: 'Othoba',
     },
     {
-      label: "Ajkerdeal",
-      value: "Ajkerdeal",
+      label: 'Ajkerdeal',
+      value: 'Ajkerdeal',
     },
   ];
+  const getTags = async () => {
+    const res = await userAPI.getTags();
+    const data = res?.data;
+    data ? setTags(data) : '';
+  };
+  const setTagsOptions = () => {
+    const temp: tagsOption[] = [];
+    tags?.map((tag) => {
+      temp.push({
+        label: tag?.name,
+        value: tag?.name,
+      });
+      setTagsOption(temp);
+    });
+  };
+
+  useEffect(() => {
+    tags[0] ? '' : getTags();
+    tagsOptions[0] ? '' : setTagsOptions();
+  }, [tagsOptions, tags]);
   return (
     <>
       <div
@@ -79,10 +102,10 @@ const ProductInfoForm: FC = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-info-lg col-1 px-1"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: '25px' }}
                 />
                 Product info
               </div>
@@ -204,18 +227,22 @@ const ProductInfoForm: FC = () => {
                 </div>
               </div>
             </div> */}
+            {tagsOptions[0] ? (
+              <FieldTemplate
+                label="Tags"
+                isRequired={true}
+                fieldID="tags"
+                fieldType="none"
+                fieldClass="custom-select w-100"
+                options={tagsOptions}
+                component={CustomSelect}
+                placeholder="Select tags..."
+                ismulti={true}
+              />
+            ) : (
+              'tags empty'
+            )}
 
-            <FieldTemplate
-              label="Tags"
-              isRequired={true}
-              fieldID="tags"
-              fieldType="none"
-              fieldClass="custom-select w-100"
-              options={tagsOptions}
-              component={CustomSelect}
-              placeholder="Select brands..."
-              ismulti={true}
-            />
             <FieldTemplate
               label="Brands"
               isRequired={true}

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { NextComponentType } from "next";
+import { useState } from 'react';
+import { NextComponentType } from 'next';
 
-import FieldTemplate from "@/components/products/forms/fieldTemplate";
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
 
 const PhotosForm: NextComponentType = () => {
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
   return (
     <>
@@ -19,7 +19,7 @@ const PhotosForm: NextComponentType = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#photosTab"
@@ -28,10 +28,10 @@ const PhotosForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="px-3 fs-5 col text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-image-fill col-1  px-1"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: '25px' }}
                 />
                 Photos
               </div>
@@ -44,15 +44,15 @@ const PhotosForm: NextComponentType = () => {
         <div className="collapse " id="photosTab">
           <div className="card-body">
             <div className="row justify-content-center">
-              {document.getElementById("photosUrl")?.value ? (
+              {document.getElementById('photosUrl')?.value ? (
                 <img
                   className="col-2"
-                  src={document.getElementById("photosUrl")?.value}
+                  src={document.getElementById('photosUrl')?.value}
                   alt="No Image"
                   width="130px"
                 />
               ) : (
-                "No preview"
+                'No preview'
               )}
             </div>
             <FieldTemplate

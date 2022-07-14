@@ -1,14 +1,15 @@
-import { FC } from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { FC } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-import { userAPI } from "APIs";
-import { searchProductSchema } from "@/components/products/schema/productSchema/index";
-interface props {
-  setProducts: Function;
-}
-const SearchWindow: FC<props> = ({ setProducts }: props) => {
+import { userAPI } from '@/APIs';
+import { searchProductSchema } from '@/components/products/schema/productSchema/index';
+import { SearchWindowProps } from '@/components/products/models/index';
+
+const SearchWindow: FC<SearchWindowProps> = ({
+  setProducts,
+}: SearchWindowProps) => {
   const handleSearchSubmit = async (data: string) => {
-    if (data == "") {
+    if (data == '') {
       const productsList = await userAPI.getProducts(1000);
 
       if (productsList) setProducts(productsList);
@@ -31,7 +32,7 @@ const SearchWindow: FC<props> = ({ setProducts }: props) => {
           // SearchWarehouseId: 0,
           // SearchProductTypeId: 0,
           // SearchPublishedId: 0,
-          GoDirectlyToSku: "",
+          GoDirectlyToSku: '',
         }}
         onSubmit={(values, actions) => {
           // const data = {

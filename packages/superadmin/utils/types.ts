@@ -13,7 +13,10 @@ import {
   UpdateManufacturerRequest,
   GetProductParams,
   CreateProductRequest,
-  UpdatedUserRequest,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  GetTagsResponse,
+  Tags,
 } from 'models';
 
 export interface User {
@@ -58,6 +61,10 @@ export interface apiFunction {
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  createCategory: (
+    data: createCategoryRequest,
+    router: NextRouter
+  ) => Promise<createCategorySuccessResponse | undefined>;
   getCategory: (
     id: getCategoryRequest
   ) => Promise<getCategorySuccessResponse | undefined>;
@@ -91,6 +98,7 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
 }
 
 export interface adminCreate {

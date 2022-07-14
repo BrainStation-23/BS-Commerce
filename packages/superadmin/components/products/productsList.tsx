@@ -1,20 +1,15 @@
-import Link from "next/link";
-import { FC, useMemo, useState } from "react";
+import Link from 'next/link';
+import { FC, useMemo, useState } from 'react';
 
-import { userAPI } from "APIs";
-import { Product } from "models";
-import Table from "@/components/global/table/table";
-import Pagination from "@/components/global/pagination";
+import { userAPI } from '@/APIs';
+import Table from '@/components/global/table/table';
+import Pagination from '@/components/global/pagination';
+import { ProductListProps } from '@/components/products/models/index';
 
-interface Props {
-  productsList: Product[];
-  setProducts: any;
-}
-
-const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
+const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
-  const [ProductID, setProductID] = useState("");
+  const [ProductID, setProductID] = useState('');
 
   const onChangeForList = async (pageSize: number) => {
     const productsList = await userAPI.getProducts(pageSize);
@@ -52,72 +47,72 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
 
   const columns = [
     {
-      label: "Picture",
-      path: "url",
+      label: 'Picture',
+      path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           <img
             src={`${data?.photos[0][key]}`}
             height="75px"
-            width={"75px"}
+            width={'75px'}
             alt="..."
           ></img>
         </td>
       ),
     },
     {
-      label: "Product name",
-      path: "name",
+      label: 'Product name',
+      path: 'name',
       content: (data: any, key: any, index: any) => (
         <td className="align-middle">{data?.info[key]}</td>
       ),
     },
     {
-      label: "SKU",
-      path: "sku",
+      label: 'SKU',
+      path: 'sku',
       content: (data: any, key: any, index: any) => (
         <td className="align-middle">{data?.info[key]}</td>
       ),
     },
     {
-      label: "Price",
-      path: "price",
+      label: 'Price',
+      path: 'price',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
-      label: "Display Order",
-      path: "displayOrder",
+      label: 'Display Order',
+      path: 'displayOrder',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
-      label: "Categories",
-      path: "categories",
+      label: 'Categories',
+      path: 'categories',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           {data?.info[key]}
-          {data?.categories[0] ? data?.categories[0].id : "---"}
+          {data?.categories[0] ? data?.categories[0].id : '---'}
           {data?.categories?.map((category: any, index: any) =>
-            index > 0 ? ` , ${category?.id}` : ""
+            index > 0 ? ` , ${category?.id}` : ''
           )}
         </td>
       ),
     },
     {
-      label: "Published",
-      path: "published",
+      label: 'Published',
+      path: 'published',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : "-"}
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
         </td>
       ),
     },
     {
-      label: "Edit",
-      path: "id",
+      label: 'Edit',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           <Link
@@ -138,8 +133,8 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       ),
     },
     {
-      label: "View",
-      path: "id",
+      label: 'View',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           <Link
@@ -160,8 +155,8 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       ),
     },
     {
-      label: "Delete",
-      path: "id",
+      label: 'Delete',
+      path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           <button
@@ -182,7 +177,7 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
         <div className="card-body">
           <p>
             Learn more about
-            <a href="#" style={{ textDecoration: "none", marginLeft: "5px" }}>
+            <a href="#" style={{ textDecoration: 'none', marginLeft: '5px' }}>
               Product
             </a>
           </p>
@@ -191,7 +186,6 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
             columns={columns}
             onClickForSort={onClickForSort}
           />
-
           <div className="">
             {productsList?.length > 1 ? (
               <Pagination
@@ -208,12 +202,12 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
       {modal.delete ? (
         <div
           className="modal"
-          style={{ display: modal.delete ? "block" : "none" }}
+          style={{ display: modal.delete ? 'block' : 'none' }}
         >
           <div
             className="modal-backdrop"
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
             }}
             onClick={() => {
               // close modal when outside of modal is clicked
@@ -227,14 +221,14 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
                 e.stopPropagation();
               }}
               style={{
-                textAlign: "left",
-                width: "30%",
-                marginLeft: "40%",
-                marginTop: "5%",
-                border: "1px solid gray",
-                boxShadow: "1px 1px 10px gray",
-                borderRadius: "10px",
-                padding: "20px",
+                textAlign: 'left',
+                width: '30%',
+                marginLeft: '40%',
+                marginTop: '5%',
+                border: '1px solid gray',
+                boxShadow: '1px 1px 10px gray',
+                borderRadius: '10px',
+                padding: '20px',
               }}
             >
               <div className="container">
@@ -248,10 +242,10 @@ const ProductsList: FC<Props> = ({ productsList, setProducts }) => {
                     type="button"
                     className="btn btn-light"
                     style={{
-                      border: "1px solid gray",
-                      backgroundColor: "gray",
-                      color: "white",
-                      marginRight: "10px",
+                      border: '1px solid gray',
+                      backgroundColor: 'gray',
+                      color: 'white',
+                      marginRight: '10px',
                     }}
                     onClick={() =>
                       setModal({
