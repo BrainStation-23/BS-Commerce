@@ -23,6 +23,7 @@ import {
   createCategoryRest,
   mediaUploadRest,
   getTagsRest,
+  createBrandRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -40,6 +41,7 @@ import {
   createCategoryGraphQL,
   mediaUploadGraphQL,
   getTagsGraphQL,
+  createBrandGraphQL,
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
@@ -70,6 +72,7 @@ const graphqlApi: apiFunction = {
   getBrand: getBrandGraphQL,
   mediaUpload: mediaUploadGraphQL,
   getTags: getTagsGraphQL,
+  createBrand: createBrandGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -97,6 +100,7 @@ const restApi: apiFunction = {
   getBrand: getBrandRest,
   mediaUpload: mediaUploadRest,
   getTags: getTagsRest,
+  createBrand: createBrandRest,
 };
 
 export const userAPI: apiFunction =

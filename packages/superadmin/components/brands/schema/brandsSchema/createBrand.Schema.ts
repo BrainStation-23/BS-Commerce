@@ -8,7 +8,7 @@ export const brandSchema = object().shape({
   published: Yup.boolean(),
   displayOrder: number(),
   pageSizeOptions: Yup.array(),
-  keywords: Yup.array(),
+  keywords: string(),
   metaTitle: string(),
   metaDescription: string(),
   SEFN: string(),

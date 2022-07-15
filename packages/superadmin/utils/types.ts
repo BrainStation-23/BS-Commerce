@@ -14,14 +14,13 @@ import {
   GetProductParams,
   CreateProductRequest,
   UpdatedUserRequest,
-  GetAllBrandsSuccessResponse,
-  GetAllBrandsErrorResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
   GetTagsResponse,
   Tags,
   UpdatedUserRequest,
+  CreateBrandRequest,
 } from 'models';
 
 export interface User {
@@ -100,11 +99,12 @@ export interface apiFunction {
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
   getBrands: () => Promise<any>;
-  getBrand(brandId:any): Promise<any>;
+  getBrand(brandId: any): Promise<any>;
   mediaUpload: (
     data: FormData
   ) => Promise<UploadFileSuccessResponse | undefined>;
   getTags: () => Promise<GetTagsResponse | undefined>;
+  createBrand(data: CreateBrandRequest, router: NextRouter): Promise<any>;
 }
 
 export interface adminCreate {

@@ -1,4 +1,3 @@
-import { Brand } from './../../models/src/brand/brand';
 import { NextRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -18,12 +17,12 @@ import {
   GetProductParams,
   Manufacturer,
   Product,
-  GetAllBrandsErrorResponse,
   GetAllBrandsSuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
   GetTagsResponse,
+  CreateBrandRequest,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -336,7 +335,7 @@ export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
 
     return response?.data;
   } catch (error: any) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
@@ -348,13 +347,25 @@ export async function getBrandsRest(): Promise<any> {
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function createBrandRest(
+  data: CreateBrandRequest,
+  router: NextRouter
+): Promise<any> {
+  try {
+    const response = await axios?.post(`${apiEndPoints?.brands}/create`, data);
+    router.push('/Brands');
+    toast.success('Create Successful');
+    return response?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
 export async function getBrandRest(brandId: any): Promise<any> {
   try {
-    console.log(brandId.brandId);
     const { data } = await axios?.get(
       `${apiEndPoints?.brands}/${brandId.brandId}`
     );
-
     return data?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

@@ -1,61 +1,20 @@
 import { Formik, Form } from 'formik';
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
-import { useEffect, useState } from 'react';
 
-import { userAPI } from 'APIs';
-import { productSchema } from '@/components/products/schema/productSchema/index';
-import MetaForm from '@/components/products/forms/metaForm';
-import PhotosForm from '@/components/products/forms/photosForm';
-import CategoryForm from '@/components/products/forms/categoryForm';
-import ProductInfoForm from '@/components/products/forms/productInfoForm';
-import BrandInfoForm from './forms/brandInfoForm';
-import BrandMetaForm from './forms/brandMetaForm';
-import { brandSchema } from './schema/brandsSchema';
+import { CreateBrandRequest } from 'models';
 
-interface FormDataInterFace {
-  productName: string;
-  ShortDescription: string;
-  FullDescription: string;
-  Sku: string;
-  OldPrice: number;
-  Price: number;
-  ProductCost: number;
-  showOnHomePage: boolean;
-  includeInTopMenu: boolean;
-  allowToSelectPageSize: boolean;
-  published: boolean;
-  displayOrder: number;
-  isFeatured: boolean;
-  publishDate: string;
-  tags: Array<string>;
-  brands: Array<string>;
-  keywords: Array<string>;
-  metaTitle: string;
-  metaDescription: string;
-  metaFriendlyPageName: string;
-  photosUrl: string;
-  photosID: string;
-  photosTitle: string;
-  displayOrderPhotos: string;
-  SelectedCategoryIds: number;
-  isFeaturedCategory: boolean;
-  displayOrderCategory: number;
-  categoriesData: string;
-}
+import { userAPI } from '@/APIs';
+import BrandInfoForm from '@/components/brands/forms/brandInfoForm';
+import BrandMetaForm from '@/components/brands/forms/brandMetaForm';
+import { brandSchema } from '@/components/brands/schema/brandsSchema';
+
 const CreateBrand: NextComponentType = () => {
   const router = useRouter();
-  const [categogiesData, setCategoryData] = useState([]);
 
-  const handleSubmit = (data: FormDataInterFace) => {
-    console.log(data);
-
-    // userAPI.createProduct(newData, router);
+  const handleSubmit = (data: CreateBrandRequest) => {
+    userAPI.createBrand(data, router);
   };
-
-  useEffect(() => {}, []);
-
   return (
     <>
       <Formik
@@ -66,7 +25,7 @@ const CreateBrand: NextComponentType = () => {
           published: false,
           displayOrder: 1,
           pageSizeOptions: [],
-          keywords: [],
+          keywords: '',
           metaTitle: '',
           metaDescription: '',
           SEFN: '',
@@ -90,8 +49,6 @@ const CreateBrand: NextComponentType = () => {
             info: info,
             meta: meta,
           };
-          // console.log(newData);
-
           handleSubmit(newData);
           actions.setSubmitting(false);
         }}
@@ -102,11 +59,11 @@ const CreateBrand: NextComponentType = () => {
             <Form onSubmit={formikprops.handleSubmit}>
               <div className="content-header clearfix pt-4">
                 <h1 className="float-start">
-                  Add a new product
+                  Add a new brand
                   <span className="fs-5 p-3">
-                    <a href="/Product" className="text-decoration-none">
+                    <a href="/Brands" className="text-decoration-none">
                       <i className="bi bi-arrow-left-circle-fill p-2" />
-                      back to product list
+                      back to brands list
                     </a>
                   </span>
                 </h1>
