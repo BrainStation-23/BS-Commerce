@@ -94,9 +94,9 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
           {data?.info[key]}
-          {data?.categories[0] ? data?.categories[0].id : '---'}
+          {data?.categories[0] ? data?.categories[0].name : '---'}
           {data?.categories?.map((category: any, index: any) =>
-            index > 0 ? ` , ${category?.id}` : ''
+            index > 0 ? ` , ${category?.name}` : ''
           )}
         </td>
       ),
