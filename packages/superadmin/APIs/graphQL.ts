@@ -17,8 +17,8 @@ import {
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
-  GetUserResponse,
   GetTagsResponse,
+  CreateBrandRequest,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -89,9 +89,13 @@ export async function getBrandsGraphQL(): Promise<
 > {
   return undefined;
 }
-export async function getBrandGraphQL(): Promise<
-  any
-> {
+export async function getBrandGraphQL(): Promise<any> {
+  return undefined;
+}
+export async function createBrandGraphQL(
+  data: CreateBrandRequest,
+  router: NextRouter
+): Promise<any> {
   return undefined;
 }
 export async function createCategoryGraphQL(
