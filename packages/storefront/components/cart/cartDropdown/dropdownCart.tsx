@@ -72,40 +72,46 @@ const CartDropdown: NextComponentType = () => {
     return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>
-          <div className="group flex w-full h-auto items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
-            <div className="flex-col-4 flex items-center bg-white">
-              <div className="col-span-2 ">
-                <a href="#" className="">
-                  <img
-                    className="w-30 h-36 w-full rounded-none rounded-t-lg object-cover"
-                    src={cartData?.product?.photos[0]?.url}
-                    alt="Product Image"
-                  />
-                </a>
-              </div>
-              <div className="col-span-2 justify-between px-4 leading-normal">
-                <div>
-                  <a href="#" className="mr-2 text-sm font-bold text-gray-900">
-                    {cartData?.product?.info?.name}
+          <div className='flex items-center justify-between mr-4'>
+            <div className="group flex h-auto w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
+              <div className="flex-col-4 flex items-center bg-white">
+                <div className="col-span-2">
+                  <a href="#" className="">
+                    <img
+                      src={cartData?.product?.photos[0]?.url}
+                      alt="Product Image"
+                      height={100}
+                      width={100}
+                    />
                   </a>
                 </div>
-                <div>
-                  <div className="py-2">
-                    <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                      {cartData?.quantity} &nbsp;
-                    </span>
-                    X &nbsp;
-                    <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      $ {cartData?.product?.info?.price}
-                    </p>
+                <div className="col-span-2 justify-between px-4 leading-normal">
+                  <div>
+                    <a
+                      href="#"
+                      className="mr-2 text-sm font-bold text-gray-900"
+                    >
+                      {cartData?.product?.info?.name}
+                    </a>
+                  </div>
+                  <div>
+                    <div className="py-2">
+                      <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
+                        {cartData?.quantity} &nbsp;
+                      </span>
+                      X &nbsp;
+                      <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
+                        $ {cartData?.product?.info?.price}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="ml-16 mb-16">
-                <button onClick={() => handleCartItemDelete(cartData)}>
-                  {cross}
-                </button>
-              </div>
+            </div>
+            <div className="ml-16 mb-16">
+              <button onClick={() => handleCartItemDelete(cartData)}>
+                {cross}
+              </button>
             </div>
           </div>
           <div className="border-t border-gray-100"></div>
@@ -120,21 +126,21 @@ const CartDropdown: NextComponentType = () => {
         className="flex items-center justify-center"
       >
         <div className="relative inline-block text-left">
-          <div className='hover:text-green-600'>
-              <button
-                type="button"
-                className="hover:text-green-600 inline-flex justify-center w-full text-sm leading-5 font-medium text-gray-700 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
-                onClick={(e) => setCartTotal(!cartTotal)}
-              >
-                {cartIcon}
-                <p className="badge badge-light ">{cartData?.length}</p>
-              </button>
+          <div className="hover:text-green-600">
+            <button
+              type="button"
+              className="focus:shadow-outline-blue inline-flex w-full justify-center text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-green-600 focus:border-blue-300 focus:outline-none active:bg-gray-50 active:text-gray-800"
+              onClick={(e) => setCartTotal(!cartTotal)}
+            >
+              {cartIcon}
+              <p className="badge badge-light ">{cartData?.length}</p>
+            </button>
           </div>
           {cartTotal && (
-            <div className="absolute right-0 mt-2 w-96 h-auto origin-top-right rounded-md ">
+            <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
               <div className=" rounded-md bg-white">
                 {/* new div starts here */}
-                <div className="overflow-y-scroll h-60 py-1">
+                <div className="h-60 overflow-y-scroll py-1">
                   {cartData.length > 0 ? (
                     dropdownData()
                   ) : (
