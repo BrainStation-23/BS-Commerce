@@ -31,7 +31,6 @@ const Information = (props: any) => {
   const initialValues = {
     email: shippingInfo?.email,
     contact: shippingInfo?.contact,
-    sendNotificationCheckbox: '',
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
     country: shippingInfo?.country,
@@ -60,7 +59,6 @@ const Information = (props: any) => {
           const data = {
             email: values.email,
             contact: values.contact,
-            sendNotificationCheckbox: values.sendNotificationCheckbox,
             country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
@@ -132,47 +130,12 @@ const Information = (props: any) => {
                       </div>
                     </div>
                   </div>
-
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="checkbox"
-                        id="sendNotificationCheckbox"
-                        name="sendNotificationCheckbox"
-                        className={`focus:ring-3  focus:ring-blackhover:border-gray-300 h-4 w-4 rounded border-2 border-black accent-black`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="sendNotificationCheckbox"
-                        className="ml-2 text-sm text-gray-500"
-                      >
-                        Email me with news and offers
-                      </label>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="mt-8">
                   <p className="text-lg">Shipping Address</p>
 
                   <div className="mt-5">
-                    <div className="mb-3">
-                      <Field
-                        as="select"
-                        id="country"
-                        name="country"
-                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                      >
-                        <option>Click here to select your country</option>
-                        <option>New Mexico</option>
-                        <option>Missouri</option>
-                        <option>Texas</option>
-                      </Field>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="country" />
-                      </div>
-                    </div>
-
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">

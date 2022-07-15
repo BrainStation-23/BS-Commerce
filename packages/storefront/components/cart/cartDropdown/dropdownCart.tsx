@@ -31,6 +31,7 @@ const CartDropdown: NextComponentType = () => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      strokeWidth={2}
     >
       <path
         strokeLinecap="round"
@@ -122,11 +123,11 @@ const CartDropdown: NextComponentType = () => {
           <div className='hover:text-green-600'>
               <button
                 type="button"
-                className="inline-flex justify-center w-full text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                className="hover:text-green-600 inline-flex justify-center w-full text-sm leading-5 font-medium text-gray-700 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
-                <p className="badge badge-light">{cartData?.length}</p>
+                <p className="badge badge-light ">{cartData?.length}</p>
               </button>
           </div>
           {cartTotal && (

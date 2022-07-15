@@ -14,7 +14,7 @@ const DataTable: NextComponentType = () => {
 
   return (
     <>
-      <div className="md:px-2 lg:px-20 xl:px-30 2xl:40 py-20">
+      <div className="md:px-2 lg:px-20 xl:px-30 2xl:px-40 py-20">
         <table className="border-collapse border border-slate-400">
           <thead className="">
             <tr>

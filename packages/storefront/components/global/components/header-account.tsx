@@ -134,6 +134,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                   ? `none`
                   : `currentColor`
               }
+              strokeWidth={2}
             >
               <path
                 strokeLinecap="round"
