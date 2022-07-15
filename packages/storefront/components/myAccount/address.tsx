@@ -82,7 +82,8 @@ const AccountDetails: NextComponentType = () => {
                 user={{
                   firstName: 'firstName',
                   lastName: 'lastName',
-                  address: 'address1',
+                  address1: 'address1',
+                  address2: 'address2',
                   city: 'city',
                   postalCode: '1200',
                   phone: '01521427376',

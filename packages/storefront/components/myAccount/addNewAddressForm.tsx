@@ -18,7 +18,8 @@ const AddNewAddressForm: FC = ({ user, cancelForm }: any) => {
             initialValues={{
               firstName: user?.firstName ? user.firstName : '',
               lastName: user?.lastName ? user.lastName : '',
-              address1: user?.address ? user.address : '',
+              address1: user?.address1 ? user.address1 : '',
+              address2: user?.address2 ? user.address2 : '',
               city: user?.city ? user.city : '',
               postalCode: user?.postalCode ? user.postalCode : '',
               phone: user?.phone ? user.phone : '',
@@ -72,6 +73,21 @@ const AddNewAddressForm: FC = ({ user, cancelForm }: any) => {
                         className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
                         id="address1"
                         name="address1"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <div className="grid-cols-1">
+                      <label htmlFor="address2" className="text-sm">
+                        Address 2
+                      </label>
+                      <br />
+                      <Field
+                        type="text"
+                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                        id="address2"
+                        name="address2"
                       />
                     </div>
                   </div>
