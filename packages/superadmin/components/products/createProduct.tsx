@@ -10,11 +10,14 @@ import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
+import ProductManufacturers from '@/components/products/forms/manufacturerForm';
+
 import { FormDataInterFace } from '@/components/products/models/index';
 
 const CreateProduct: NextComponentType = () => {
   const router = useRouter();
   const [categogiesData, setCategoryData] = useState([]);
+  const [manufacturerData, setManufacturerData] = useState([]);
   // const [categogiesData, setCategoryData] = useState([
   //   {
   //     id: 1,
@@ -73,6 +76,7 @@ const CreateProduct: NextComponentType = () => {
   //     displayOrder: 0,
   //   },
   // ]);
+
   const handleSubmit = (data: FormDataInterFace) => {
     const info = {
       name: data.productName,
@@ -103,8 +107,16 @@ const CreateProduct: NextComponentType = () => {
       alt: 'image',
     };
 
+    const manufacturer = {
+      id: '',
+      name: data.manufacturerName,
+    };
+    manufacturerData.map((manufacturerr) => {
+      if (data.manufacturerName == manufacturerr.name) {
+        return (manufacturer.id = manufacturerr.id);
+      }
+    });
     const categories: any = [];
-
     categogiesData?.map((category: any, index: any) => {
       category.isSelected == true
         ? categories.push({
@@ -121,6 +133,7 @@ const CreateProduct: NextComponentType = () => {
       tags: data.tags,
       photos: [photos],
       brands: data.brands,
+      manufacturer: manufacturer,
       categories: categories,
     };
     if (categories[0]) {
@@ -128,6 +141,21 @@ const CreateProduct: NextComponentType = () => {
     } else toast.error('You must select atleast one category');
   };
 
+  async function loadAllManufacturers() {
+    const response = await userAPI.getAllManufacturers();
+    // console.log('manures', response);
+    const allManufacturers: any = [];
+
+    if (response.data.manufacturers.length! > 0) {
+      response.data.manufacturers.forEach((manufacturer: any) => {
+        allManufacturers.push({
+          id: manufacturer.id,
+          name: manufacturer.name,
+        });
+      });
+      setManufacturerData(allManufacturers);
+    }
+  }
   useEffect(() => {
     async function loadCategories() {
       const response = await userAPI.getCategoryList();
@@ -147,6 +175,7 @@ const CreateProduct: NextComponentType = () => {
       }
     }
     loadCategories();
+    loadAllManufacturers();
   }, []);
 
   return (
@@ -181,6 +210,8 @@ const CreateProduct: NextComponentType = () => {
           isFeaturedCategory: false,
           displayOrderCategory: 1,
           categoriesData: '',
+          manufacturerId: '',
+          manufacturerName: '',
         }}
         onSubmit={(values, actions) => {
           handleSubmit(values);
@@ -216,6 +247,7 @@ const CreateProduct: NextComponentType = () => {
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
+                <ProductManufacturers manufacturerData={manufacturerData} />
                 <CategoryForm
                   setCategoryData={setCategoryData}
                   categoryData={categogiesData}

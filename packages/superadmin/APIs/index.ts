@@ -21,6 +21,7 @@ import {
   createCategoryRest,
   mediaUploadRest,
   getTagsRest,
+  getAllManufacturersRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -89,6 +90,7 @@ const restApi: apiFunction = {
   getUserProfile: getUserProfileRest,
   mediaUpload: mediaUploadRest,
   getTags: getTagsRest,
+  getAllManufacturers: getAllManufacturersRest,
 };
 
 export const userAPI: apiFunction =
