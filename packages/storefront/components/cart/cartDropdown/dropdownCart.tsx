@@ -146,7 +146,7 @@ const CartDropdown: NextComponentType = () => {
                 {/* new div ends here */}
                 {cartData.length > 0 ? (
                   <>
-                    <div className="flex justify-between p-4">
+                    <div className="flex justify-between p-6">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
                         ${totalCartPrice}
