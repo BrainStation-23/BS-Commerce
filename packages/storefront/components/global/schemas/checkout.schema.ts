@@ -10,7 +10,6 @@ export const informationSchema = object().shape({
   ),
   firstName: string().required('Enter a first name'),
   lastName: string().required('Enter a last name'),
-  country: string().required('Select a country'),
   address: string().required('Enter an address'),
   addressOptional: string().required('Enter an address'),
   city: string().required('Enter a city name'),

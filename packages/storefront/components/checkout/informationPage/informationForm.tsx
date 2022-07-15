@@ -40,7 +40,7 @@ const Information = (props: any) => {
     postalCode: shippingInfo?.postalCode,
     saveInformationCheckbox: '',
   };
-  
+
   const handleCheckoutSubmit = (data: FormData) => {
     dispatch(addToShippingInfo(data));
     const obj = {
@@ -102,7 +102,7 @@ const Information = (props: any) => {
                         htmlFor={`email`}
                         className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                       >
-                        Email 
+                        Email
                       </label>
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="email" />
@@ -266,64 +266,65 @@ const Information = (props: any) => {
 
                 <p className="mb-2">Select a label for effective delivery:</p>
 
-<div className="flex flex-wrap items-center gap-x-3">
-  <div className="mb-3">
-    <div className="relative">
-      <Field
-        type="radio"
-        id="tag"
-        name="tag"
-        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-        placeholder=" "
-        value="home"
-      />
-      <label
-        htmlFor="tag"
-        className="ml-2 text-sm hover:cursor-pointer"
-      >
-        Home
-      </label>
-    </div>
-  </div>
+                <div className="flex flex-wrap items-center gap-x-3">
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="home"
+                        required
+                      />
+                      <label
+                        htmlFor="tag"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Home
+                      </label>
+                    </div>
+                  </div>
 
-  <div className="mb-3">
-    <div className="relative">
-      <Field
-        type="radio"
-        id="tag"
-        name="tag"
-        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-        placeholder=" "
-        value="office"
-      />
-      <label
-        htmlFor="tag"
-        className="ml-2 text-sm hover:cursor-pointer"
-      >
-        Office
-      </label>
-    </div>
-  </div>
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="office"
+                      />
+                      <label
+                        htmlFor="tag"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Office
+                      </label>
+                    </div>
+                  </div>
 
-  <div className="mb-3">
-    <div className="relative">
-      <Field
-        type="radio"
-        id="tag"
-        name="tag"
-        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-        placeholder=" "
-        value="others"
-      />
-      <label
-        htmlFor="tag"
-        className="ml-2 text-sm hover:cursor-pointer"
-      >
-        Others
-      </label>
-    </div>
-  </div>
-</div>
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="others"
+                      />
+                      <label
+                        htmlFor="tag"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Others
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   <button
