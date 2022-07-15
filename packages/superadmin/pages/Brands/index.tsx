@@ -8,8 +8,6 @@ const Brands: NextPage = () => {
   const [brands, setBrands] = useState<Brand[] | undefined>();
   const getAllBrands = async () => {
     const brandsList = await userAPI.getBrands();
-    console.log(brandsList);
-
     if (brandsList) setBrands(brandsList);
   };
   useEffect(() => {

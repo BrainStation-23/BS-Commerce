@@ -34,8 +34,6 @@ const ProductInfoForm: FC = () => {
 
   const getBrands = async () => {
     const data = await userAPI.getBrands();
-    console.log(data);
-
     data ? setBrands(data) : '';
   };
   const setBrandsOptions = () => {

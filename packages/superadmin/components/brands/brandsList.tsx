@@ -146,7 +146,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
           <p>
             Learn more about
             <a href="#" style={{ textDecoration: 'none', marginLeft: '5px' }}>
-              Product
+              Brands
             </a>
           </p>
           <Table items={currentTableData} columns={columns} />

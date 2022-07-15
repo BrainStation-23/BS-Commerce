@@ -52,6 +52,7 @@ export interface Address {
 }
 
 export interface apiFunction {
+  getAllManufacturers();
   updateProduct: (
     data: any,
     id: any,
