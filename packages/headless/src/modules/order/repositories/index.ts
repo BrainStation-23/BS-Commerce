@@ -7,9 +7,12 @@ import { IOrderDatabase } from './order.db.interface';
 @Injectable()
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
+  async createOrder(userId: string, body: any, products: any): Promise<OrderEntity> {
+    return await this.db.createOrder(userId, body, products);
+  }
 
-  async createOrder(userId: string, body: any): Promise<OrderEntity> {
-    return await this.db.createOrder(userId, body);
+  async addPhotoDetails( userId: string, body: any, products: any): Promise<any>{
+    return await this.db.addPhotoDetails(userId, body, products);
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {

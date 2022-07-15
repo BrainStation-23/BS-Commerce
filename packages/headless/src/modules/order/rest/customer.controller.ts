@@ -9,6 +9,7 @@ import { IServiceResponse } from 'src/utils/response/service.response.interface'
 import { CreateOrderDto } from '../dto/order.create.dto';
 import { OrderData, OrderResponseDto } from '../dto/order.response.dto';
 import { OrderCustomerService } from '../services/customer.service';
+// import { UserOrderListDto } from '../dto/getOrderByUserId.dto';
 
 @ApiTags('Order - Customer API')
 @UseGuards(new RolesGuard(['customer']))
@@ -30,8 +31,10 @@ export class OrderCustomerController {
     const { code, ...response } = await this.orderCustomerService.createOrder(
       user.id,
       body,
+      body.products
     );
     res.status(code);
+    
     return response;
   }
 

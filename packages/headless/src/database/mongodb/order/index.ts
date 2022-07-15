@@ -1,11 +1,23 @@
+import { Console } from 'console';
 import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
+import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: any): Promise<any> {
+  async createOrder(userId: string, body: any, products: any): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
+  }
+
+  async addPhotoDetails(userId: string, body: any, products: any): Promise<any>{
+    let newProductList = [];
+    newProductList = await Promise.all(products.map( async (product) => {
+        const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
+        return {...product, photos: photoDetails.photos};
+      })
+    );
+      return newProductList;
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {

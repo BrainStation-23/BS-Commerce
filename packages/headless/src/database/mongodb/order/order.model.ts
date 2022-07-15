@@ -88,10 +88,31 @@ const ProductSchema = new Schema(
       trim: true,
       required: true,
     },
-  },
-  {
-    _id: false,
-  },
+    photos: [{
+      url: String,
+      id: {
+          type: String,
+          index: true,
+          default: () => randomUUID()
+      },
+      title: {
+          type: String,
+          default: ''
+      },
+      alt: {
+          type: String,
+          default: ''
+      },
+      displayOrder: {
+          type: Number,
+          default: 1
+      },
+      _id: false
+    }]
+    },
+    {
+      _id: false,
+    },
 );
 
 const OrderSchema = new Schema<OrderEntity>({

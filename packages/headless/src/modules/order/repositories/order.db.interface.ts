@@ -4,7 +4,8 @@ import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/ad
 
 @Injectable()
 export abstract class IOrderDatabase {
-  abstract createOrder: (userId: string, body: any) => Promise<OrderEntity>;
+  abstract createOrder: (userId: string, body: any, products: any) => Promise<OrderEntity>;
+  abstract addPhotoDetails: (userId: string, body: any, products: any) => Promise<any>;
   abstract getOrderListByUserId: (userId: string) => Promise<OrderEntity[]>;
   abstract getOrderById: (orderId: string) => Promise<OrderEntity>;
   abstract getOrderStatistics:() => Promise<OrderStatDto>
