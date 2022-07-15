@@ -31,7 +31,7 @@ const ShowData = ({ data }: any) => {
             ${data?.product?.info?.price}
           </span>
         </td>
-        <td className="border-slate-150 border py-4 md:px-2 lg:px-12">
+        <td className="border-slate-150 border py-4 md:px-2 lg:px-10">
           <div className="flex justify-center">
             <div className="box-content w-12 border-2 p-2">
               <div className="flex justify-between">
