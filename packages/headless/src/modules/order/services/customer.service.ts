@@ -3,7 +3,7 @@ import { OrderEntity } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { CreateOrderDto, ProductOrderDto } from '../dto/order.create.dto';
-import { OrderResponseDto } from '../dto/order.response.dto';
+import { OrderData, OrderResponseDto } from '../dto/order.response.dto';
 import { OrderRepository } from '../repositories';
 
 @Injectable()
@@ -46,5 +46,15 @@ export class OrderCustomerService {
       return successResponse(OrderResponseDto, response);
     }
     return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
+  }
+
+  async getOrderByOrderId( orderId: string ): Promise<IServiceResponse<OrderData>> {
+    const orderInfo = await this.orderRepository.getOrderById(orderId);
+
+    if (orderInfo) {
+      const response: OrderData = orderInfo ;
+      return successResponse(OrderData, response);
+    }
+   return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
   }
 }

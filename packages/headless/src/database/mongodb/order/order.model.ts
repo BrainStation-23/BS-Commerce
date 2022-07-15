@@ -45,7 +45,7 @@ const AddressSchema = {
   country: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
   },
   postCode: {
     type: String,

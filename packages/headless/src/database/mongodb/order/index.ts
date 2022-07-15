@@ -1,6 +1,7 @@
 import { Console } from 'console';
 import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
+import { OrderData } from 'src/modules/order/dto/order.response.dto';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
@@ -28,9 +29,10 @@ export class OrderDatabase implements IOrderDatabase {
     return null;
   }
 
-  async getOrderById(orderId: string): Promise<OrderEntity>{
+  async getOrderById(orderId: string): Promise<OrderData>{
     const orderList = await OrderModel.findOne({ orderId }).lean();
     if (orderList) {
+      delete orderList.userId;
       return orderList;
     }
     return null;
