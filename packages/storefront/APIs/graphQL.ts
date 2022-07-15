@@ -18,6 +18,9 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  getCategoryListResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -68,6 +71,12 @@ export async function getPublicProductByIdGraphql(
   return undefined;
 }
 
+export async function getPublicProductByCategoryIDGraphql(
+  CategoryId: GetProductsByConditionQuery
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  return undefined;
+}
+
 export async function getFeaturedProductsGraphql(): Promise<
   GetCustomerAllProductsResponse | undefined
 > {
@@ -108,6 +117,11 @@ export async function deleteAllFromCartGraphql(): Promise<
   return undefined;
 }
 
+export async function getCategoryListGraphql(): Promise<
+  getCategoryListResponse | undefined
+> {
+  return undefined;
+}
 export async function addToWishlistGraphql(data: addToWishlistRequest): Promise<
   AddToWishlistResponse | undefined
   > {

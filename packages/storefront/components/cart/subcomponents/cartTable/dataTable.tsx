@@ -49,12 +49,11 @@ const DataTable: NextComponentType = () => {
               <th className="p-4">
                 <button
                   style={{
-                    background: "black",
                     color: "white",
                     height: "39px",
                     width: "150px",
                   }}
-                  className="text-xs"
+                  className="text-xs bg-black hover:bg-green-600"
                   onClick={() => {
                     router.push('/');
                   }}
@@ -65,7 +64,6 @@ const DataTable: NextComponentType = () => {
               <th className="p-4">
                 <button
                   style={{
-                    // background: "black",
                     color: "white",
                     height: "39px",
                     width: "120px",

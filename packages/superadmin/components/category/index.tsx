@@ -1,11 +1,12 @@
-import type { NextComponentType } from "next";
-import { useEffect, useState } from "react";
-import { NestedCategoryList } from "models";
+import type { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
+import { NestedCategoryList } from 'models';
 
-import { userAPI } from "@/APIs";
+import { userAPI } from '@/APIs';
 
-import CategoryTable from "@/components/category/category-table";
-import Accordion from "@/components/global/accordion";
+import CategoryTable from '@/components/category/category-table';
+import Accordion from '@/components/global/accordion';
+import Link from 'next/link';
 
 const CategoryComponent: NextComponentType = ({}) => {
   const [categoryList, setCategoryList] = useState<NestedCategoryList[]>();
@@ -24,10 +25,12 @@ const CategoryComponent: NextComponentType = ({}) => {
       <div className="d-flex justify-content-between align-items-center flex-row">
         <h1>Categories</h1>
         <div className="">
-          <button className="btn btn-info disabled mx-1 text-white">
-            <i className="bi bi-plus-square me-1 pl-2" />
-            Add
-          </button>
+          <Link href="/category/create" passHref>
+            <button className="btn btn-info mx-1 text-white">
+              <i className="bi bi-plus-square me-1 pl-2" />
+              Add
+            </button>
+          </Link>
           <button className="btn btn-success disabled mx-1">
             <i className="bi bi-download me-1" />
             Export
@@ -72,7 +75,7 @@ const CategoryComponent: NextComponentType = ({}) => {
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  defaultValue={"1"}
+                  defaultValue={'1'}
                 >
                   <option value="1">All</option>
                   <option value="2">Published only</option>

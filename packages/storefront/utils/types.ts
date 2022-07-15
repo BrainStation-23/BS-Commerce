@@ -10,6 +10,10 @@ import {
   CreateCustomerResponse,
   CreateCustomerRequest,
   CustomerSignInRequest,
+  getCategoryListResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
+  GetCustomerAllProductsQuery,
   IOrderResponseData,
   addToWishlistRequest,
   AddToWishlistResponse,
@@ -91,6 +95,10 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
+  getCategoryList: () => Promise<getCategoryListResponse | undefined>;
+  getPublicProductByCategoryId: (
+    CategoryId: GetCustomerAllProductsQuery
+  ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
   checkout: (data: any) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
