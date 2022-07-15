@@ -8,6 +8,8 @@ import {
   signinRest,
   createAdminRest,
   getAdminsRest,
+  updateAdminRest,
+  changePasswordRest,
   createManufacturerRest,
   getManufacturerRest,
   deleteManufacturerRest,
@@ -19,6 +21,7 @@ import {
   getBrandsRest,
   getBrandRest,
   createCategoryRest,
+  mediaUploadRest,
   getTagsRest,
 } from './restApi';
 import {
@@ -27,12 +30,15 @@ import {
   signinGraphQL,
   createAdminGraphql,
   getAdminsGraphql,
+  updateAdminGraphql,
+  changePasswordGraphql,
   getUserProfileGraphql,
   getCategoryListGraphQL,
   getCategoryGraphQL,
   getBrandsGraphQL,
   getBrandGraphQL,
   createCategoryGraphQL,
+  mediaUploadGraphQL,
   getTagsGraphQL,
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
@@ -54,12 +60,15 @@ const graphqlApi: apiFunction = {
   signin: signinGraphQL,
   createAdmin: createAdminGraphql,
   getAdmins: getAdminsGraphql,
+  updateAdmin: updateAdminGraphql,
+  changePassword: changePasswordGraphql,
   getUserProfile: getUserProfileGraphql,
   // getManufacturer: getManufacturerGraphQl,
   // deleteManufacturer: deleteManufacturerGraphQl,
   // createManufacturer: createManufacturerGraphQl
   getBrands: getBrandsGraphQL,
   getBrand: getBrandGraphQL,
+  mediaUpload: mediaUploadGraphQL,
   getTags: getTagsGraphQL,
 };
 
@@ -76,6 +85,8 @@ const restApi: apiFunction = {
   signin: signinRest,
   createAdmin: createAdminRest,
   getAdmins: getAdminsRest,
+  updateAdmin: updateAdminRest,
+  changePassword: changePasswordRest,
   createManufacturer: createManufacturerRest,
   getManufacturer: getManufacturerRest,
   deleteManufacturer: deleteManufacturerRest,
@@ -84,6 +95,7 @@ const restApi: apiFunction = {
   getUserProfile: getUserProfileRest,
   getBrands: getBrandsRest,
   getBrand: getBrandRest,
+  mediaUpload: mediaUploadRest,
   getTags: getTagsRest,
 };
 

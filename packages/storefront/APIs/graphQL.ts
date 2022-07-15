@@ -18,6 +18,17 @@ import {
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
+  getCategoryListResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  getUserWishlistResponse,
+  DeleteWishlistItemParams,
+  deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
+  AddCompareItem,
+  CompareResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -60,6 +71,12 @@ export async function getPublicProductByIdGraphql(
   return undefined;
 }
 
+export async function getPublicProductByCategoryIDGraphql(
+  CategoryId: GetProductsByConditionQuery
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  return undefined;
+}
+
 export async function getFeaturedProductsGraphql(): Promise<
   GetCustomerAllProductsResponse | undefined
 > {
@@ -98,4 +115,39 @@ export async function deleteAllFromCartGraphql(): Promise<
   deleteCartItemResponse | undefined
 > {
   return undefined;
+}
+
+export async function getCategoryListGraphql(): Promise<
+  getCategoryListResponse | undefined
+> {
+  return undefined;
+}
+export async function addToWishlistGraphql(data: addToWishlistRequest): Promise<
+  AddToWishlistResponse | undefined
+  > {
+    return undefined;
+  }
+
+export async function addToCompareGraphql(productId: AddCompareItem): Promise<
+  CompareResponse | undefined
+> {
+  return undefined;
+}
+
+export async function getCustomerWishlistGraphql(token: string): Promise<
+  getUserWishlistResponse | undefined
+> {
+  return undefined;
+}
+
+export async function deleteWishlistItemGraphql(data: string): Promise<
+  deleteWishlistItemResponse | undefined
+> {
+  return undefined;
+}
+
+export async function deleteFullWishlistGraphql(): Promise<deleteAllWishlistItemsResponse | undefined> {
+  return undefined;
+}
+export async function deleteFromCompareGraphql(productId: AddCompareItem) {
 }

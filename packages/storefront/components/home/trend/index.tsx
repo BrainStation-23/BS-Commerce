@@ -1,18 +1,18 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from 'react';
 
-import { SwiperSlide } from "swiper/react";
-import { useAppSelector } from "customHooks/hooks";
+import { SwiperSlide } from 'swiper/react';
+import { useAppSelector } from 'customHooks/hooks';
 
-import Container from "@/components/global/components/container";
-import ProductRow from "./productRow.component";
-import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from '@/components/global/components/container';
+import ProductRow from './productRow.component';
+import SwiperGrid from '@/components/global/components/swipergrid';
 
 const TrendingProducts = () => {
-  let [filterKey, setFilterKey]: any = useState("smartphones");
+  let [filterKey, setFilterKey]: any = useState('smartphones');
   let [filteredProduct, setProducts]: any = useState([]);
 
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts
+    (state) => state.persistedReducer.product.publicProducts?.products
   );
 
   const getMinimumProduct = () => {
@@ -23,7 +23,7 @@ const TrendingProducts = () => {
   };
   useEffect(() => {
     const newProduct = products?.filter(
-      (product: any) => product.category === "smartphones"
+      (product: any) => product.category === 'smartphones'
     );
     setProducts(newProduct);
   }, [products]);
@@ -39,18 +39,18 @@ const TrendingProducts = () => {
   return (
     <>
       <Container className="max-w-6xl">
-        <div className="text-center mb-6">
-          <p className="text-lg font-serif italic">Recently added our store</p>
-          <h1 className="text-4xl text-bold ">Trending Products</h1>
+        <div className="mb-6 text-center">
+          <p className="font-serif text-lg italic">Recently added our store</p>
+          <h1 className="text-bold text-4xl ">Trending Products</h1>
         </div>
-        <ul className="flex justify-center text-base m-5 font-semibold ">
+        <ul className="m-5 flex justify-center text-base font-semibold ">
           <li className="mr-1 md:mr-3">
             <button
-              onClick={() => handleClick("smartphones")}
+              onClick={() => handleClick('smartphones')}
               className={
-                filterKey === "smartphones"
-                  ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
+                filterKey === 'smartphones'
+                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >
               SMARTPHONES
@@ -58,11 +58,11 @@ const TrendingProducts = () => {
           </li>
           <li className="mr-1 md:mr-3">
             <button
-              onClick={() => handleClick("laptops")}
+              onClick={() => handleClick('laptops')}
               className={
-                filterKey === "laptops"
-                  ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
+                filterKey === 'laptops'
+                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >
               LAPTOPS
@@ -70,11 +70,11 @@ const TrendingProducts = () => {
           </li>
           <li className="mr-1 md:mr-3">
             <button
-              onClick={() => handleClick("fragrances")}
+              onClick={() => handleClick('fragrances')}
               className={
-                filterKey === "fragrances"
-                  ? "border border-[#40A944] inline-block rounded-full bg-white text-[#40A944] px-4 py-1"
-                  : "inline-block rounded-full bg-white text-black px-2 md:px-4 py-1"
+                filterKey === 'fragrances'
+                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >
               FRAGRANCES
@@ -106,13 +106,13 @@ const TrendingProducts = () => {
                         products[index],
                         products.length > getMinimumProduct()
                           ? products[0]
-                          : "",
+                          : '',
                       ]}
                     />
                   </SwiperSlide>
                 </React.Fragment>
               ) : (
-                ""
+                ''
               )
             )}
           </SwiperGrid>

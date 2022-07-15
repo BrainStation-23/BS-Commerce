@@ -1,18 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from 'react';
 
-import { Product } from "models";
-
-interface CategoryInterface {
-  id: number;
-  value: string;
-  isSelected: boolean;
-  isFeatured: boolean;
-  displayOrder: number;
-}
-interface CategoryCardInterface {
-  categoryData: CategoryInterface[];
-  product: Product;
-}
+import {
+  CategoryCardInterface,
+  CategoryInterface,
+} from '@/components/products/models/index';
 
 const CaegoryCard: FC<CategoryCardInterface> = (
   props: CategoryCardInterface
@@ -46,9 +37,9 @@ const CaegoryCard: FC<CategoryCardInterface> = (
             <div className="card-title row align-items-center  ps-2 pt-2">
               <i
                 className="bi bi-diagram-3-fill col-1"
-                style={{ fontSize: "25px" }}
+                style={{ fontSize: '25px' }}
               />
-              <div className="fs-5 col px-3 text-start">Caegories</div>
+              <div className="fs-5 col text-start px-3">Caegories</div>
             </div>
           </div>
           <div className="" id="metaTab">
@@ -64,7 +55,7 @@ const CaegoryCard: FC<CategoryCardInterface> = (
                   </thead>
                   <tbody>
                     {categoryData?.map(
-                      (data: CategoryInterface, index: any) => {
+                      (data: CategoryInterface, index: number) => {
                         if (data.isSelected)
                           return (
                             <React.Fragment key={index}>
@@ -74,7 +65,7 @@ const CaegoryCard: FC<CategoryCardInterface> = (
                                   {data.isFeatured ? (
                                     <i className="bi bi-check-lg"></i>
                                   ) : (
-                                    "X"
+                                    'X'
                                   )}
                                 </td>
                                 <td className="text-center">
@@ -92,7 +83,7 @@ const CaegoryCard: FC<CategoryCardInterface> = (
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
   );

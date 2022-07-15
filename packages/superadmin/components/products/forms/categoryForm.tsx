@@ -1,77 +1,68 @@
-import React, { FC } from "react";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { ErrorMessage, Field } from "formik";
+import React, { FC } from 'react';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { ErrorMessage, Field } from 'formik';
 
-import FieldTemplate from "@/components/products/forms/fieldTemplate";
-
-interface CategoryInterface{
-  id: number;
-  value: string;
-  isSelected: boolean;
-  isFeatured: boolean;
-  displayOrder: number;
-}
-interface CategoryFormInterface {
-  setCategoryData: Function;
-  categoryData: CategoryInterface[];
-  setFieldValue: Function;
-}
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
+import {
+  CategoryFormInterface,
+  CategoryInterface,
+} from '@/components/products/models/index';
 
 const CategoryForm: FC<CategoryFormInterface> = (
   props: CategoryFormInterface
 ) => {
   const { setCategoryData, categoryData, setFieldValue } = props;
   const [showTable, setShowTable] = useState(false);
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
   const [reload, setReload] = useState(false);
 
   const checkTable = () => {
-    const totalSelectedCategory = categoryData.filter((data: CategoryInterface) =>
-      data.isSelected ? data : null
+    const totalSelectedCategory = categoryData.filter(
+      (data: CategoryInterface) => (data.isSelected ? data : null)
     );
     const isSelectedZero = totalSelectedCategory[0] ? true : false;
-    isSelectedZero == showTable ? "" : setShowTable(isSelectedZero);
+    isSelectedZero == showTable ? '' : setShowTable(isSelectedZero);
   };
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
   };
-  const handleRemoveCategory = (id: any) => {
+  const handleRemoveCategory = (id: string | number | undefined) => {
     categoryData.map((data: CategoryInterface) => {
-      data.id == id ? <>{(data.isSelected = false)}</> : "";
+      data.id == id ? <>{(data.isSelected = false)}</> : '';
     });
     setCategoryData(categoryData);
     setReload(!reload);
   };
 
   const handleAddCategory = () => {
-    const categoryID = document.getElementById("SelectedCategoryIds")?.value;
+    const categoryID = document.getElementById('SelectedCategoryIds')?.value;
     if (categoryID == 0) {
-      toast.error("Please Select a Category");
+      toast.error('Please Select a Category');
       return;
     }
-    const isFeatured = document.getElementById("isFeaturedCategory")?.value;
-    const displayOrder = document.getElementById("displayOrderCategory")?.value;
-    categoryData.map((data: CategoryInterface, index: any) => {
+    const isFeatured = document.getElementById('isFeaturedCategory')?.value;
+    const displayOrder = document.getElementById('displayOrderCategory')?.value;
+    categoryData.map((data: CategoryInterface, index: number) => {
       data.id == categoryID ? (
         <>
           {(data.isSelected = true)}
           {
             (data.isFeatured =
-              isFeatured == "false" || isFeatured == false ? false : true)
+              isFeatured == 'false' || isFeatured == false ? false : true)
           }
           {(data.displayOrder = displayOrder)}
         </>
       ) : (
-        ""
+        ''
       );
     });
     setCategoryData(categoryData);
-    setFieldValue("isFeaturedCategory", false);
-    setFieldValue("displayOrderCategory", 1);
-    setFieldValue("SelectedCategoryIds", 0);
+    setFieldValue('isFeaturedCategory', false);
+    setFieldValue('displayOrderCategory', 1);
+    setFieldValue('SelectedCategoryIds', 0);
     setReload(!reload);
   };
   return (
@@ -93,10 +84,10 @@ const CategoryForm: FC<CategoryFormInterface> = (
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-diagram-3-fill col-1 px-1"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: '25px' }}
                 />
                 Category
               </div>
@@ -133,17 +124,19 @@ const CategoryForm: FC<CategoryFormInterface> = (
                     <option defaultValue={0} value={0} disabled={true}>
                       --Select--
                     </option>
-                    {categoryData?.map((data: CategoryInterface, index: any) => {
-                      return (
-                        <option
-                          key={index}
-                          value={data.id}
-                          disabled={data.isSelected}
-                        >
-                          {data.value}
-                        </option>
-                      );
-                    })}
+                    {categoryData?.map(
+                      (data: CategoryInterface, index: number) => {
+                        return (
+                          <option
+                            key={index}
+                            value={data.id}
+                            disabled={data.isSelected}
+                          >
+                            {data.value}
+                          </option>
+                        );
+                      }
+                    )}
                   </Field>
                 </div>
                 <div className="errMsg text-danger text-red-600">
@@ -192,40 +185,44 @@ const CategoryForm: FC<CategoryFormInterface> = (
                     </tr>
                   </thead>
                   <tbody>
-                    {categoryData?.map((data: CategoryInterface, index: any) => {
-                      if (data.isSelected)
-                        return (
-                          <React.Fragment key={index}>
-                            <tr>
-                              <td className="text-center">{data.value}</td>
-                              <td className="text-center">
-                                {data.isFeatured ? (
-                                  <i className="bi bi-check-lg"></i>
-                                ) : (
-                                  "X"
-                                )}
-                              </td>
-                              <td className="text-center">
-                                {data.displayOrder}
-                              </td>
-                              <td className="text-center">
-                                <button
-                                  className="btn btn-danger mx-auto"
-                                  type="button"
-                                  onClick={() => handleRemoveCategory(data.id)}
-                                >
-                                  Remove
-                                </button>
-                              </td>
-                            </tr>
-                          </React.Fragment>
-                        );
-                    })}
+                    {categoryData?.map(
+                      (data: CategoryInterface, index: number) => {
+                        if (data.isSelected)
+                          return (
+                            <React.Fragment key={index}>
+                              <tr>
+                                <td className="text-center">{data.value}</td>
+                                <td className="text-center">
+                                  {data.isFeatured ? (
+                                    <i className="bi bi-check-lg"></i>
+                                  ) : (
+                                    'X'
+                                  )}
+                                </td>
+                                <td className="text-center">
+                                  {data.displayOrder}
+                                </td>
+                                <td className="text-center">
+                                  <button
+                                    className="btn btn-danger mx-auto"
+                                    type="button"
+                                    onClick={() =>
+                                      handleRemoveCategory(data?.id)
+                                    }
+                                  >
+                                    Remove
+                                  </button>
+                                </td>
+                              </tr>
+                            </React.Fragment>
+                          );
+                      }
+                    )}
                   </tbody>
                 </table>
               </div>
             ) : (
-              ""
+              ''
             )}
           </div>
         </div>

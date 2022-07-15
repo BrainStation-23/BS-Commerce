@@ -22,6 +22,7 @@ import {
   GetAllBrandsSuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
+  UploadFileSuccessResponse,
   GetTagsResponse,
 } from 'models';
 
@@ -329,18 +330,15 @@ export async function getUserProfileRest(
   }
 }
 
-export async function getTagsRest(): Promise<
-  GetTagsResponse | undefined
-> {
+export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
   try {
     const response = await axios.get(`${apiEndPoints.tags}`);
 
-    return response?.data as GetTagsResponse;
+    return response?.data;
   } catch (error: any) {
     console.error(error);
   }
 }
-
 
 export async function getBrandsRest(): Promise<any> {
   try {
@@ -350,13 +348,29 @@ export async function getBrandsRest(): Promise<any> {
     toast.error(error?.response?.data?.message);
   }
 }
-export async function getBrandRest(brandId:any): Promise<any> {
+export async function getBrandRest(brandId: any): Promise<any> {
   try {
     console.log(brandId.brandId);
-    const { data } = await axios?.get(`${apiEndPoints?.brands}/${brandId.brandId}`);
-    
-    return data?.data ;
+    const { data } = await axios?.get(
+      `${apiEndPoints?.brands}/${brandId.brandId}`
+    );
+
+    return data?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
+  }
+}
+export async function mediaUploadRest(
+  data: FormData
+): Promise<UploadFileSuccessResponse | undefined> {
+  try {
+    const response = await axios.post(`${apiEndPoints.media}/upload`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data as UploadFileSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response.error);
   }
 }

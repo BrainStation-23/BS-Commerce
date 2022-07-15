@@ -1,10 +1,10 @@
-import type { NextComponentType } from "next";
-import React, { useState, useRef, useEffect } from "react";
+import type { NextComponentType } from 'next';
+import React, { useState, useRef, useEffect } from 'react';
 
-import { ResponseItem } from "models";
-import { deleteCartItem } from "toolkit/cartSlice";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
-import Buttons from "@/components/global/components/buttons/button";
+import { ResponseItem } from 'models';
+import { deleteCartItem } from 'toolkit/cartSlice';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import Buttons from '@/components/global/components/buttons/button';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -15,7 +15,7 @@ const CartDropdown: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
-  
+
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
@@ -31,7 +31,6 @@ const CartDropdown: NextComponentType = () => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      strokeWidth="2"
     >
       <path
         strokeLinecap="round"
@@ -57,8 +56,8 @@ const CartDropdown: NextComponentType = () => {
     </svg>
   );
   useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
     function handleClick(e: any) {
       if (componentRef && componentRef.current) {
         const ref: any = componentRef.current;
@@ -72,12 +71,12 @@ const CartDropdown: NextComponentType = () => {
     return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>
-          <div className="group w-full flex items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-900">
-            <div className="flex flex-col-4 items-center bg-white">
+          <div className="group flex w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
+            <div className="flex-col-4 flex items-center bg-white">
               <div className="col-span-2 ">
                 <a href="#" className="">
                   <img
-                    className="object-cover w-full h-36 rounded-t-lg w-30 rounded-none"
+                    className="w-30 h-36 w-full rounded-none rounded-t-lg object-cover"
                     src={cartData?.product?.photos[0]?.url}
                     alt="Product Image"
                   />
@@ -85,7 +84,7 @@ const CartDropdown: NextComponentType = () => {
               </div>
               <div className="col-span-2 justify-between px-4 leading-normal">
                 <div>
-                  <a href="#" className="text-sm font-bold text-gray-900 mr-2">
+                  <a href="#" className="mr-2 text-sm font-bold text-gray-900">
                     {cartData?.product?.info?.name}
                   </a>
                 </div>
@@ -101,7 +100,7 @@ const CartDropdown: NextComponentType = () => {
                   </div>
                 </div>
               </div>
-              <div className="ml-2">
+              <div className="ml-16 mb-16">
                 <button onClick={() => handleCartItemDelete(cartData)}>
                   {cross}
                 </button>
@@ -121,51 +120,57 @@ const CartDropdown: NextComponentType = () => {
       >
         <div className="relative inline-block text-left">
           <div>
-            <span className="rounded-md shadow-sm">
               <button
                 type="button"
-                className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+                className="inline-flex justify-center w-full text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
                 onClick={(e) => setCartTotal(!cartTotal)}
               >
                 {cartIcon}
                 <p className="badge badge-light">{cartData?.length}</p>
               </button>
-            </span>
           </div>
           {cartTotal && (
-            <div className="origin-top-right absolute right-0 mt-2 w-96 rounded-md shadow-lg">
-              <div className="rounded-md bg-white shadow-xs">
+            <div className="absolute right-0 mt-2 w-96 origin-top-right rounded-md shadow-lg">
+              <div className="shadow-xs rounded-md bg-white">
                 {/* new div starts here */}
-                <div className="py-1 overflow-y-auto h-60">
-                  {dropdownData()}
+                <div className="overflow-y-auto py-1">
+                  {cartData.length > 0 ? (
+                    dropdownData()
+                  ) : (
+                    <div className="p-5 text-lg">
+                      Your cart is currently empty
+                    </div>
+                  )}
                 </div>
                 {/* new div ends here */}
-                <div className="flex justify-between p-4">
-                  <span className="text-base font-semibold">Total</span>
-                  <span className="text-base font-semibold">
-                    ${totalCartPrice}
-                  </span>
-                </div>
-                <div className="px-6 py-2 flex justify-center">
-                  <a href="/cart">
-                    <Buttons
-                      bgColor="black"
-                      height={10}
-                      width={68}
-                      text={"VIEW CART"}
-                    />
-                  </a>
-                </div>
-                <div className="px-6 mb-4 flex justify-center">
-                  <a href="/checkout">
-                    <Buttons
-                      bgColor="black"
-                      height={10}
-                      width={120}
-                      text={"CHECKOUT"}
-                    />
-                  </a>
-                </div>
+                {cartData.length > 0 ? (
+                  <>
+                    <div className="flex justify-between p-4">
+                      <span className="text-base font-semibold">Total</span>
+                      <span className="text-base font-semibold">
+                        ${totalCartPrice}
+                      </span>
+                    </div>
+                    <div className="px-6 py-2">
+                      <a href="/cart">
+                        <Buttons
+                          bgColor="bg-slate-300"
+                          height={10}
+                          text={'VIEW CART'}
+                        />
+                      </a>
+                    </div>
+                    <div className="mb-4 px-6">
+                      <a href="/checkout">
+                        <Buttons
+                          bgColor="bg-slate-300"
+                          height={10}
+                          text={'CHECKOUT'}
+                        />
+                      </a>
+                    </div>
+                  </>
+                ) : null}
               </div>
             </div>
           )}

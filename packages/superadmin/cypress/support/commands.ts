@@ -12,8 +12,8 @@
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (email: string, password: string) => {
-  cy.get('#email').type('nafi@test.com');
-  cy.get('#password').type('123456');
+  cy.get('#email').type(email);
+  cy.get('#password').type(password);
 
   cy.contains('button', 'LOG IN').click();
 

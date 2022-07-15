@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { Product } from "models";
-import SingleView from "@/components/products/singleView";
-interface MetaCardInterface {
+import { Product } from 'models';
+import SingleView from '@/components/products/singleView';
+
+const ProductInfoCard: FC<{
   product: Product;
-}
-const ProductInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
+}> = (props: { product: Product }) => {
   const { product } = props;
 
   return (
@@ -19,9 +19,9 @@ const ProductInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
           <div className="card-title row align-items-center ps-2 pt-2">
             <i
               className="bi bi-info-lg col-1 align-text-top"
-              style={{ fontSize: "25px" }}
+              style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col px-3 text-start">Product info</div>
+            <div className="fs-5 col text-start px-3">Product info</div>
           </div>
         </div>
         <div className="" id="prouctInfoTab">

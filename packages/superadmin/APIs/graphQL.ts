@@ -5,6 +5,8 @@ import client from '../graphqlSchema/apollo-client';
 import {
   CreateProductRequest,
   GetUserSuccessResponse,
+  UpdatedUserRequest,
+  ChangePasswordRequest,
   Product,
   SignInRequest,
   SignInSuccessResponse,
@@ -14,6 +16,7 @@ import {
   GetAllBrandsSuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
+  UploadFileSuccessResponse,
   GetUserResponse,
   GetTagsResponse,
 } from 'models';
@@ -48,6 +51,18 @@ export async function createAdminGraphql(): Promise<User | undefined> {
 }
 
 export async function getAdminsGraphql(): Promise<User[] | undefined> {
+  return;
+}
+
+export async function updateAdminGraphql(): Promise<
+  UpdatedUserRequest | undefined
+> {
+  return;
+}
+
+export async function changePasswordGraphql(): Promise<
+  ChangePasswordRequest | undefined
+> {
   return;
 }
 
@@ -87,4 +102,10 @@ export async function createCategoryGraphQL(
 }
 export async function getTagsGraphQL(): Promise<GetTagsResponse | undefined> {
   return;
+}
+
+export async function mediaUploadGraphQL(
+  data: FormData
+): Promise<UploadFileSuccessResponse | undefined> {
+  return undefined;
 }

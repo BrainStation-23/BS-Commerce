@@ -1,17 +1,6 @@
-import { ErrorMessage, Field } from "formik";
-interface TemplateInteface {
-  label?: string;
-  isRequired?: boolean;
-  fieldID?: string;
-  fieldType?: string;
-  fieldClass?: string;
-  extraClass?: string;
-  fieldAs?: string;
-  options?: any;
-  component?: any;
-  placeholder?: string;
-  ismulti?: boolean;
-}
+import { ErrorMessage, Field } from 'formik';
+import { TemplateInteface } from '@/components/products/models/index';
+
 const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
   const {
     label,
@@ -45,12 +34,12 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
             {ismulti ? (
               <Field
                 className={`${
-                  fieldType === "checkbox"
-                    ? "mt-3"
-                    : fieldType === "none"
-                    ? "py-2  "
+                  fieldType === 'checkbox'
+                    ? 'mt-3'
+                    : fieldType === 'none'
+                    ? 'py-2  '
                     : `border-bottom rounded-0 border border-0 border-2 p-2 shadow-none ${
-                        fieldType === "number" ? "form-control" : "form-control"
+                        fieldType === 'number' ? 'form-control' : 'form-control'
                       }  `
                 } ${fieldClass}`}
                 id={fieldID}
@@ -65,12 +54,12 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
             ) : (
               <Field
                 className={`${
-                  fieldType === "checkbox"
-                    ? "mt-3"
-                    : fieldType === "none"
-                    ? "py-2  "
+                  fieldType === 'checkbox'
+                    ? 'mt-3'
+                    : fieldType === 'none'
+                    ? 'py-2  '
                     : `border-bottom rounded-0 border border-0 border-2 p-2 shadow-none ${
-                        fieldType === "number" ? "form-control" : "form-control"
+                        fieldType === 'number' ? 'form-control' : 'form-control'
                       }  `
                 } ${fieldClass}`}
                 id={fieldID}
@@ -83,7 +72,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
               />
             )}
 
-            <div className="pt-2" style={{ height: "10px" }}></div>
+            <div className="pt-2" style={{ height: '10px' }}></div>
           </div>
           <div className="errMsg text-danger text-red-600">
             <ErrorMessage name={fieldID} />

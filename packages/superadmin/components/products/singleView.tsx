@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 interface SingleViewInterface {
   label: string;
@@ -21,11 +21,11 @@ const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
           <div className=" row">
             {Array.isArray(value) ? (
               <>
-                {value[0] ? value[0] : "---"}
-                {value.map((data, index) => (index > 0 ? ` , ${data}` : ""))}
+                {value[0] ? value[0] : '---'}
+                {value.map((data, index) => (index > 0 ? ` , ${data}` : ''))}
               </>
-            ) : typeof value === "string" && value.length <= 0 ? (
-              "- - -"
+            ) : typeof value === 'string' && value.length <= 0 ? (
+              '- - -'
             ) : (
               value
             )}
