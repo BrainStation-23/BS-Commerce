@@ -49,24 +49,8 @@ const CreateBrand: NextComponentType = () => {
   const [categogiesData, setCategoryData] = useState([]);
 
   const handleSubmit = (data: FormDataInterFace) => {
-    // const info = {
-    //   name: data?.name,
-    //   description: data?.description,
-    //   allowToSelectPageSize: data?.allowToSelectPageSize,
-    //   published: data?.published,
-    //   displayOrder: data?.displayOrder,
-    //   pageSizeOptions: data?.pageSizeOptions,
-    // };
-    // const meta = {
-    //   keywords: data?.keywords,
-    //   metaTitle: data?.metaTitle,
-    //   metaDescription: data?.metaDescription,
-    //   SEFN: data?.SEFN,
-    // };
-    // const newData = {
-    //   info: info,
-    //   meta: meta,
-    // };
+    console.log(data);
+
     // userAPI.createProduct(newData, router);
   };
 
@@ -106,9 +90,9 @@ const CreateBrand: NextComponentType = () => {
             info: info,
             meta: meta,
           };
-          console.log(newData);
+          // console.log(newData);
 
-          // handleSubmit(newData);
+          handleSubmit(newData);
           actions.setSubmitting(false);
         }}
         validationSchema={brandSchema}
