@@ -1,7 +1,6 @@
 import React from "react";
 
 import type { NextComponentType } from "next";
-
 import Buttons from "@/components/global/components/buttons/button";
 import DataTable from "@/components/cart/subcomponents/cartTable/dataTable";
 import ItemsLists from "@/components/cart/subcomponents/cartTable/itemListSmall";
@@ -21,7 +20,7 @@ const CartDetails: NextComponentType = () => {
           <Buttons
             bgColor="black"
             height={40}
-            width={80}
+            // width={80}
             text={"PROCEED TO CHECKOUT"}
           />
         </div>
@@ -29,7 +28,7 @@ const CartDetails: NextComponentType = () => {
           <Buttons
             bgColor="black"
             height={40}
-            width={80}
+            // width={80}
             text={"UPDATE CART"}
           />
         </div>

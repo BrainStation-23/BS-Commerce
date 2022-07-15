@@ -1,5 +1,4 @@
 import React from "react";
-import type { NextComponentType } from "next";
 import DataTable from "./dataTable";
 import { IOrderResponseData } from "models";
 interface Props {

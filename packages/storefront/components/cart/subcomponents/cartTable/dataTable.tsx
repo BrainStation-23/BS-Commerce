@@ -65,13 +65,13 @@ const DataTable: NextComponentType = () => {
               <th className="p-4">
                 <button
                   style={{
-                    background: "black",
+                    // background: "black",
                     color: "white",
                     height: "39px",
                     width: "120px",
                   }}
                   
-                  className="text-xs"
+                  className="text-xs bg-black hover:bg-green-600"
                   onClick={() => {
                     dispatch(deleteCart());
                   }}

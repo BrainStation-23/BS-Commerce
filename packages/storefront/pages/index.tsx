@@ -1,6 +1,4 @@
 import { GetServerSideProps, NextPage } from 'next';
-var cookie = require('cookie');
-
 import { CustomerProduct } from 'models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';

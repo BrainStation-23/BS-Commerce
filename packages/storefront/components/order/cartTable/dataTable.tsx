@@ -1,5 +1,4 @@
 import React from 'react';
-import type { NextComponentType } from 'next';
 import TableData from './tableData';
 import moment from 'moment';
 import { IOrderResponseData } from 'models';

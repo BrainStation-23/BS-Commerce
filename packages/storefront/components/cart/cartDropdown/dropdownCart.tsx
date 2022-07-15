@@ -72,7 +72,7 @@ const CartDropdown: NextComponentType = () => {
     return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>
-          <div className="group flex w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
+          <div className="group flex w-full h-auto items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
             <div className="flex-col-4 flex items-center bg-white">
               <div className="col-span-2 ">
                 <a href="#" className="">
@@ -133,10 +133,10 @@ const CartDropdown: NextComponentType = () => {
             </span>
           </div>
           {cartTotal && (
-            <div className="absolute right-0 mt-2 w-96 origin-top-right rounded-md shadow-lg">
-              <div className="shadow-xs rounded-md bg-white">
+            <div className="absolute right-0 mt-2 w-96 h-auto origin-top-right rounded-md ">
+              <div className=" rounded-md bg-white">
                 {/* new div starts here */}
-                <div className="overflow-y-auto py-1">
+                <div className="overflow-y-scroll h-60 py-1">
                   {cartData.length > 0 ? (
                     dropdownData()
                   ) : (
@@ -163,7 +163,7 @@ const CartDropdown: NextComponentType = () => {
                         />
                       </a>
                     </div>
-                    <div className="mb-4 px-6">
+                    <div className="mb-4 px-6 pb-5">
                       <a href="/checkout">
                         <Buttons
                           bgColor="bg-slate-300"
