@@ -271,14 +271,14 @@ const Information = (props: any) => {
     <div className="relative">
       <Field
         type="radio"
-        id="tag"
+        id="tag1"
         name="tag"
         className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
         placeholder=" "
         value="home"
       />
       <label
-        htmlFor="tag"
+        htmlFor="tag1"
         className="ml-2 text-sm hover:cursor-pointer"
       >
         Home
@@ -290,14 +290,14 @@ const Information = (props: any) => {
     <div className="relative">
       <Field
         type="radio"
-        id="tag"
+        id="tag2"
         name="tag"
         className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
         placeholder=" "
         value="office"
       />
       <label
-        htmlFor="tag"
+        htmlFor="tag2"
         className="ml-2 text-sm hover:cursor-pointer"
       >
         Office
@@ -309,14 +309,14 @@ const Information = (props: any) => {
     <div className="relative">
       <Field
         type="radio"
-        id="tag"
+        id="tag3"
         name="tag"
         className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
         placeholder=" "
         value="others"
       />
       <label
-        htmlFor="tag"
+        htmlFor="tag3"
         className="ml-2 text-sm hover:cursor-pointer"
       >
         Others
