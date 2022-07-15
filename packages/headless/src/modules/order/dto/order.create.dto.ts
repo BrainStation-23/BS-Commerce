@@ -54,7 +54,8 @@ export class OrderAddressDto implements IOrderAddress {
   @MinLength(2)
   @MaxLength(30)
   @IsString()
-  country: string;
+  @IsOptional()
+  country?: string;
 
   @ApiProperty({ example: '3421' })
   @MinLength(2)

@@ -30,6 +30,3 @@ export class OrderProductDto implements ProductDataWithPhoto{
     @MaxLength(100)
     sku: string;
 }
-// export class UserOrderListDto implements UserOrderList{
-    
-// }
