@@ -1,14 +1,14 @@
 import { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
 
-import Table from '../global/table/table';
-import Pagination from '../global/pagination';
-import { Brand, Product } from 'models';
-import { userAPI } from '../../APIs';
+import Table from '@/components/global/table/table';
+import Pagination from '@/components/global/pagination';
+import { Brand } from 'models';
+import { userAPI } from '@/APIs';
 
 interface Props {
   brandsList: Brand[];
-  setBrands: any;
+  setBrands: Function;
 }
 
 const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
@@ -49,21 +49,21 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'Brand name',
       path: 'name',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: 'Display Order',
       path: 'displayOrder',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: 'Published',
       path: 'published',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="p-auto m-auto text-center">
           {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
         </td>
@@ -72,7 +72,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'Allow To Select Page Size',
       path: 'allowToSelectPageSize',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="p-auto m-auto text-center">
           {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
         </td>
@@ -81,7 +81,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'Edit',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">
           <Link
             href={{
@@ -103,7 +103,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'View',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">
           <Link
             href={{
@@ -125,7 +125,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'Delete',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand) => (
         <td className="text-center align-middle">
           <button
             className="btn btn-default btn-outline-danger"

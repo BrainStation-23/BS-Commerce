@@ -1,5 +1,5 @@
-import BrandInfoCard from './cards/brandInfo';
-import BrandMetaCard from './cards/metaCard';
+import BrandInfoCard from '@/components/brands/cards/brandInfoCard';
+import BrandMetaCard from '@/components/brands/cards/metaCard';
 const ViewBrand = (props: any) => {
   const { brand } = props;
   return (
@@ -17,7 +17,6 @@ const ViewBrand = (props: any) => {
               </span>
             </h1>
           </div>
-
           <div className="mt-4">
             <BrandInfoCard brand={brand} />
             {brand?.meta?.keywords ? <BrandMetaCard brand={brand} /> : ''}
