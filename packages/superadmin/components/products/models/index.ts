@@ -1,4 +1,4 @@
-import { Product } from "models";
+import { Product } from 'models';
 
 export interface CategoryInterface {
   id?: number | string | undefined;
@@ -76,7 +76,6 @@ export interface TemplateInteface {
   ismulti?: boolean;
 }
 export interface tagsOption {
-  label?: string,
-  value?: string,
+  label?: string;
+  value?: string;
 }
-
