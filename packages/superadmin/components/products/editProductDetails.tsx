@@ -8,6 +8,7 @@ import { ProductCategory, UpdateProductRequest } from 'models';
 
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
+import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import { productSchema } from '@/components/products/schema/productSchema/index';
@@ -211,6 +212,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
+                  <ProductManufacturers manufacturerData={manufacturerData} />
                   <CategoryForm
                     setCategoryData={setCategoryData}
                     categoryData={categogiesData}

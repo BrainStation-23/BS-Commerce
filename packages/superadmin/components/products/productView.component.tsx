@@ -4,6 +4,7 @@ import { ProductCategory } from 'models';
 import PhotosCard from '@/components/products/viewCards/photosCard';
 import MetaCard from '@/components/products/viewCards/metaCard.Component';
 import ProductInfoCard from '@/components/products/viewCards/productInfo.card';
+import ManufacturerCard from '@/components/products/viewCards/manufacturerCard.comonent';
 import CaegoryCard from '@/components/products/viewCards/categoryCard.component';
 import {
   CategoryInterface,
@@ -112,6 +113,7 @@ const ViewProduct: FC<ViewProductInterface> = (props: ViewProductInterface) => {
             <ProductInfoCard product={product} />
             <MetaCard product={product} />
             <PhotosCard product={product} />
+            <ManufacturerCard product={product} />
             <CaegoryCard product={product} categoryData={categogiesData} />
           </div>
         </div>
