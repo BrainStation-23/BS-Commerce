@@ -28,35 +28,33 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
 
   return (
     <>
-      {showEditAddress === 'hidden' && (
-        <>
-          <div className="mt-3 text-sm">
-            <p>{singleAddress?.addressLine1!}</p>
-            <p>{singleAddress?.state!}</p>
-            <p>{singleAddress?.postCode!}</p>
-            <p>Bangladesh</p>
-            <p>{singleAddress?.phone!}</p>
-            <p>{singleAddress?.tag!}</p>
-          </div>
-          <div className="mt-5">
-            {/* <Link href="/account/addresses"> */}
-            <span
-              className="cursor-pointer hover:text-blue-600"
-              onClick={() => editButtonOnClick()}
-            >
-              Edit{' '}
-            </span>
-            {/* </Link> */}
-            <span>| </span>
-            <span
-              className="cursor-pointer hover:text-blue-600"
-              onClick={() => handleDeleteAddress(singleAddress?.id!)}
-            >
-              Delete
-            </span>
-          </div>
-        </>
-      )}
+      <>
+        <div className="mt-3 text-sm">
+          <p>{singleAddress?.addressLine1!}</p>
+          <p>{singleAddress?.state!}</p>
+          <p>{singleAddress?.postCode!}</p>
+          <p>Bangladesh</p>
+          <p>{singleAddress?.phone!}</p>
+          <p>{singleAddress?.tag!}</p>
+        </div>
+        <div className="mt-5">
+          {/* <Link href="/account/addresses"> */}
+          <span
+            className="cursor-pointer hover:text-blue-600"
+            onClick={() => editButtonOnClick()}
+          >
+            Edit{' '}
+          </span>
+          {/* </Link> */}
+          <span>| </span>
+          <span
+            className="cursor-pointer hover:text-blue-600"
+            onClick={() => handleDeleteAddress(singleAddress?.id!)}
+          >
+            Delete
+          </span>
+        </div>
+      </>
       {showEditAddress !== 'hidden' && (
         <>
           <div className={`${showEditAddress}`}>

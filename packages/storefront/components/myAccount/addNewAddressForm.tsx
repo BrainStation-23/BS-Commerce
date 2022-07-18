@@ -17,19 +17,23 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
     (state) => state.persistedReducer.auth.access_token
   );
 
-  const handleAddressSubmit = async (data: CustomerAddress, id: string) => {
+  const handleAddressSubmit = async (
+    data: CustomerAddress,
+    id: string,
+    resetForm: Function
+  ) => {
     try {
       if (!id) {
         await userAPI.addCustomerNewAddress(data);
-        cancelForm('');
+        resetForm();
       } else {
         await userAPI.updateCustomerAddress(id, data);
-        cancelForm('');
       }
+      cancelForm('');
       const updatedCustomer = await userAPI.getCustomerProfile(token);
-      dispatch(storeAddresses(updatedCustomer.addresses));
+      dispatch(storeAddresses(updatedCustomer?.addresses!));
     } catch (error) {
-      toast.error('Failed to add New Address');
+      toast.error(`Error occurred!!`);
     }
   };
 
@@ -45,9 +49,9 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
             state: user?.state ? user.state : '',
             postCode: user?.postCode ? user.postCode : '',
             phone: user?.phone ? user.phone : '',
-            tag: user?.tag ? user.tag : '',
+            tag: user?.tag ? user.tag : 'home',
           }}
-          onSubmit={(values, actions) => {
+          onSubmit={(values, { resetForm }) => {
             const data = {
               firstName: values.firstName,
               lastName: values.lastName,
@@ -58,8 +62,8 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
               phone: values.phone,
               tag: values.tag,
             };
-            handleAddressSubmit(data, id);
-            actions.setSubmitting(true);
+            handleAddressSubmit(data, id, resetForm);
+            // actions.setSubmitting(true);
           }}
         >
           {(formikprops) => {
