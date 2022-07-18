@@ -25,6 +25,13 @@ const products = [
             friendlyPageName: "realme 6 pro",
         },
         tags: ["phone", "realme", "smartphone"],
+        photos: [{
+            url: "http://localhost:3000/src/public/assets/2022/6/18/realme.jpg",
+            id: "5f1eca7e-010f-4114-91a0-e63d9553f908",
+            title: "Product Image",
+            alt: "Product Image",
+            displayOrder: 1
+        }],
         brands: ["Realme", "SmartPhone"],
         manufacturer: {
             id: "5f1eca7e-010f-4114-91a0-e63d95533456",
@@ -61,6 +68,13 @@ const products = [
             friendlyPageName: "realme",
         },
         tags: ["phone", "realme", "smartphone"],
+        photos: [{
+            url: "http://localhost:3000/src/public/assets/2022/6/18/realme6.jpg",
+            id: "5f1eca7e-010f-4114-91a0-e63d95531234",
+            title: "Product Image",
+            alt: "Product Image",
+            displayOrder: 1
+        }],
         brands: ["Realme", "SmartPhone"],
         manufacturer: {
             id: "5f1eca7e-010f-4114-91a0-e63d95533456",
@@ -97,6 +111,13 @@ const products = [
             friendlyPageName: "samsung m21",
         },
         tags: ["phone", "samsung", "smartphone"],
+        photos: [{
+            url: "http://localhost:3000/src/public/assets/2022/6/18/samsung.jpg",
+            id: "5f1eca7e-780f-4114-91a0-e63d9553f890",
+            title: "Product Image",
+            alt: "Product Image",
+            displayOrder: 1
+        }],
         brands: ["Samsung", "SmartPhone"],
         manufacturer: {
             id: "5f1eca7e-900f-4114-91a0-e63d9553f5d6",
@@ -133,6 +154,13 @@ const products = [
             friendlyPageName: "oppo a5",
         },
         tags: ["phone", "oppo", "smartphone"],
+        photos: [{
+            url: "http://localhost:3000/src/public/assets/2022/6/18/oppo.jpg",
+            id: "5f1eca7e-010f-4190-91a0-e63d9553f890",
+            title: "Product Image",
+            alt: "Product Image",
+            displayOrder: 1
+        }],
         brands: ["Oppo", "SmartPhone"],
         manufacturer: {
             id: "5f1eca7e-010f-4114-91a0-e63d95533456",
@@ -169,6 +197,13 @@ const products = [
             friendlyPageName: "apple 11 pro",
         },
         tags: ["phone", "apple", "smartphone"],
+        photos: [{
+            url: "http://localhost:3000/src/public/assets/2022/6/18/apple.jpg",
+            id: "5f1eca7e-010f-4190-56a0-e63d9553f890",
+            title: "Product Image",
+            alt: "Product Image",
+            displayOrder: 1
+        }],
         brands: ["Apple", "SmartPhone"],
         manufacturer: {
             id: "5f1eca7e-900f-4114-91a0-e63d9553f5d6",
