@@ -1,11 +1,9 @@
 import { model, Schema } from 'mongoose';
-import { randomUUID } from 'crypto';
-import { Customer, CustomerAddress } from 'src/entity/customer';
+import { Customer, CustomerAddress } from 'models';
 
 const CustomerAddressSchema = new Schema<CustomerAddress>({
   id: {
     type: String,
-    default: () => randomUUID(),
     index: true,
   },
   firstName: {
@@ -27,11 +25,11 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   postCode: String,
   phone: {
     type: String,
-    required: true,
+    required: true
   },
   tag: {
     type: String,
-    required: true,
+    required: true
   },
 }, {
   _id: false,
@@ -39,11 +37,10 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   versionKey: false
 });
 
-const CustomerSchema = new Schema<Customer>({
+const CustomerSchema = new Schema({
   id: {
     type: String,
     unique: true,
-    default: () => randomUUID()
   },
   firstName: String,
   lastName: String,
