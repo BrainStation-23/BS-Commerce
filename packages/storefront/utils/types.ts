@@ -1,7 +1,10 @@
 import { DeleteCustomerAddressResponse } from 'models';
 import { UpdateCustomerAddressResponse } from 'models';
-import { CustomerAddress } from 'models';
-import { GetCustomerInformationResponse } from 'models';
+import {
+  AddCustomerNewAddressResponse,
+  CustomerAddress,
+  GetCustomerInformationResponse,
+} from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -114,6 +117,12 @@ export interface apiFunction {
   getCustomerProfile: (token: string) => Promise<GetCustomerInformationResponse | undefined>
   deleteCustomerAddress: (addressId: string) => Promise<DeleteCustomerAddressResponse | undefined>
   updateCustomerAddress: (addressId: string, data: CustomerAddress) => Promise<UpdateCustomerAddressResponse| undefined>
+  addToWishList: (
+    data: addToWishlistRequest
+  ) => Promise<AddToWishlistResponse | undefined>;
+  addCustomerNewAddress: (
+    customerAddress: CustomerAddress
+  ) => Promise<AddCustomerNewAddressResponse | undefined>;
 }
 
 export interface ProductStore {

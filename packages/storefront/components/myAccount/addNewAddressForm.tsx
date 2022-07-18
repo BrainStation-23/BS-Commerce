@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CustomerAddress } from 'models';
 import { NextComponentType } from 'next';
 import { FC } from 'react';
+import { toast } from 'react-toastify';
 interface props {
   user: any;
   cancelForm: any;
@@ -10,8 +11,12 @@ interface props {
 }
 const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
   const handleAddressSubmit = async (data: CustomerAddress, id: string) => {
-    console.log(data);
-    await userAPI.updateCustomerAddress(id, data);
+    try {
+      if (!id) await userAPI.addCustomerNewAddress(data);
+      else await userAPI.updateCustomerAddress(id, data);
+    } catch (error) {
+      toast.error('Failed to add New Address');
+    }
   };
 
   return (
@@ -22,16 +27,26 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
             initialValues={{
               firstName: user?.firstName ? user.firstName : '',
               lastName: user?.lastName ? user.lastName : '',
-              address1: user?.address1 ? user.address1 : '',
-              address2: user?.address2 ? user.address2 : '',
-              city: user?.city ? user.city : '',
-              postalCode: user?.postalCode ? user.postalCode : '',
+              addressLine1: user?.addressLine1 ? user.addressLine1 : '',
+              addressLine2: user?.addressLine2 ? user.addressLine2 : '',
+              state: user?.state ? user.state : '',
+              postCode: user?.postCode ? user.postCode : '',
               phone: user?.phone ? user.phone : '',
               tag: user?.tag ? user.tag : '',
             }}
             onSubmit={(values, actions) => {
-              handleAddressSubmit(values, id);
-              actions.setSubmitting(false);
+              const data = {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                addressLine1: values.addressLine1,
+                addressLine2: values.addressLine2,
+                state: values.state,
+                postCode: values.postCode,
+                phone: values.phone,
+                tag: values.tag,
+              };
+              handleAddressSubmit(data, id);
+              actions.setSubmitting(true);
             }}
           >
             {(formikprops) => {
@@ -68,58 +83,58 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
 
                   <div className="mb-3">
                     <div className="grid-cols-1">
-                      <label htmlFor="address1" className="text-sm">
+                      <label htmlFor="addressLine1" className="text-sm">
                         Address 1
                       </label>
                       <br />
                       <Field
                         type="text"
                         className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                        id="address1"
-                        name="address1"
+                        id="addressLine1"
+                        name="addressLine1"
                       />
                     </div>
                   </div>
 
                   <div className="mb-3">
                     <div className="grid-cols-1">
-                      <label htmlFor="address2" className="text-sm">
+                      <label htmlFor="addressLine2" className="text-sm">
                         Address 2
                       </label>
                       <br />
                       <Field
                         type="text"
                         className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                        id="address2"
-                        name="address2"
+                        id="addressLine2"
+                        name="addressLine2"
                       />
                     </div>
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="city" className="text-sm">
+                    <label htmlFor="state" className="text-sm">
                       City
                     </label>
                     <br />
                     <Field
                       type="text"
                       className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                      id="city"
-                      name="city"
+                      id="state"
+                      name="state"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div className="mb-3">
-                      <label htmlFor="postalCode" className="text-sm">
+                      <label htmlFor="postCode" className="text-sm">
                         Postal/Zip Code
                       </label>
                       <br />
                       <Field
                         type="text"
                         className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
-                        id="postalCode"
-                        name="postalCode"
+                        id="postCode"
+                        name="postCode"
                       />
                     </div>
                     <div className="mb-3">
