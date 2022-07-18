@@ -38,7 +38,6 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   let usableCart: any = [];
-  console.log('*', cartData);
   cartData.map((cartItem) => {
     const cart = {
       productId: cartItem?.productId,
