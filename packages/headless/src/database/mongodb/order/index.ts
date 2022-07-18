@@ -22,7 +22,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
-    const orderList = await OrderModel.find({ userId }).lean();
+    const orderList = await OrderModel.find({ userId });
     if (orderList.length > 0) {
       return orderList;
     }
