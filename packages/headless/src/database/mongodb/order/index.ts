@@ -1,4 +1,4 @@
-import { Console } from 'console';
+import { ProductOrderDto } from './../../../modules/order/dto/order.create.dto';
 import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
 import { OrderData } from 'src/modules/order/dto/order.response.dto';
@@ -7,11 +7,11 @@ import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: any, products: any): Promise<OrderEntity> {
+  async createOrder(userId: string, body: any): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async addPhotoDetails(userId: string, body: any, products: any): Promise<any>{
+  async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
     let newProductList = [];
     newProductList = await Promise.all(products.map( async (product) => {
         const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
@@ -22,7 +22,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
-    const orderList = await OrderModel.find({ userId }).lean();
+    const orderList = await OrderModel.find({ userId });
     if (orderList.length > 0) {
       return orderList;
     }
