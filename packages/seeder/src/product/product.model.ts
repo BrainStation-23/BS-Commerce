@@ -1,12 +1,10 @@
 import { model, Schema } from 'mongoose';
 import { Product } from 'models';
-import { randomUUID } from 'crypto';
 
 const ProductSchema = new Schema<Product>({
     id: {
         type: String,
         unique: true,
-        default: () => randomUUID()
     },
     info: {
         name: String,
@@ -66,7 +64,7 @@ const ProductSchema = new Schema<Product>({
         id: {
             type: String,
             index: true,
-            default: () => randomUUID()
+
         },
         title: {
             type: String,
