@@ -24,6 +24,8 @@ import {
   AddCompareItem,
   CompareResponse,
   GetCustomerInformationSuccessResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 export interface accordionBody {
@@ -119,6 +121,9 @@ export interface apiFunction {
   getCustomer: (
     token: string
   ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
+  updateCustomer: (
+    data: UpdateCustomerRequestBody
+  ) => Promise<UpdateCustomerSuccessResponse | undefined>;
 }
 
 export interface ProductStore {

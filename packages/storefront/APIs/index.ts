@@ -18,6 +18,7 @@ import {
   signUpRest,
   getCategoryListRest,
   getCustomerRest,
+  updateCustomerRest,
 } from './restApi';
 import {
   addToWishlistGraphql,
@@ -37,6 +38,7 @@ import {
   signUpGraphql,
   getCategoryListGraphql,
   getCustomerGraphQL,
+  updateCustomerGraphQL,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -59,6 +61,7 @@ const graphqlApi: apiFunction = {
   addToCompare: addToCompareGraphql,
   deleteFromCompare: deleteFromCompareGraphql,
   getCustomer: getCustomerGraphQL,
+  updateCustomer: updateCustomerGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -81,6 +84,7 @@ const restApi: apiFunction = {
   addToCompare: addToCompareRest,
   deleteFromCompare: deleteFromCompareRest,
   getCustomer: getCustomerRest,
+  updateCustomer: updateCustomerRest,
 };
 
 export const userAPI: apiFunction =

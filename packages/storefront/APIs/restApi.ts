@@ -29,6 +29,8 @@ import {
   AddCompareItem,
   CompareResponse,
   GetCustomerInformationSuccessResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -256,6 +258,17 @@ export async function getCustomerRest(
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerRest(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  try {
+    const response = await axios.patch(`${apiEndPoints.customer}`, data);
+    return response.data;
   } catch (error: any) {
     return error;
   }

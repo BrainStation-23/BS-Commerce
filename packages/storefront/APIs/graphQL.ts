@@ -30,6 +30,8 @@ import {
   AddCompareItem,
   CompareResponse,
   GetCustomerInformationSuccessResponse,
+  UpdateCustomerRequestBody,
+  UpdateCustomerSuccessResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -157,5 +159,11 @@ export async function deleteFromCompareGraphql(productId: AddCompareItem) {}
 export async function getCustomerGraphQL(
   token: string
 ): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function updateCustomerGraphQL(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
   return undefined;
 }

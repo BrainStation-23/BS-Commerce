@@ -7,7 +7,10 @@ import { storeUserToken } from 'toolkit/authSlice';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import { Customer } from 'models';
+import { Customer, UpdateCustomerRequestBody } from 'models';
+import { CustomerSchema } from './schema/customer.schema';
+import { apiEndPoints } from 'utils/apiEndPoints';
+import { userAPI } from 'APIs';
 
 interface Props {
   customer: Customer;
@@ -33,10 +36,14 @@ const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
     toast.success('Logged out successfully!');
   };
 
-  const handleSubmit = (values: any) => {
-    console.log('clicked on save');
+  const handleSubmit = async (values: UpdateCustomerRequestBody) => {
+    // const firstName = values.firstName === '' ? null : values.firstName;
+    // const lastName = values.lastName === '' ? null : values.lastName;
+    // const phone = values.phone === '' ? null : values.phone;
+    // const email = values.email === '' ? null : values.email;
 
-    console.log(values);
+    const response = await userAPI.updateCustomer(values);
+    setEditable(false);
   };
 
   return (
@@ -68,6 +75,7 @@ const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
             phone: userData.phone,
             email: userData.email,
           }}
+          validationSchema={CustomerSchema}
           onSubmit={(values, actions) => {
             handleSubmit(values);
             actions.setSubmitting(false);
