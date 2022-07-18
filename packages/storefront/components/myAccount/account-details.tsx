@@ -8,6 +8,7 @@ import { storeUserToken } from 'toolkit/authSlice';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
+import WithAuth from '@/components/auth/withAuth';
 
 const AccountDetails: NextComponentType = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -178,4 +179,4 @@ const AccountDetails: NextComponentType = () => {
   );
 };
 
-export default AccountDetails;
+export default WithAuth(AccountDetails);

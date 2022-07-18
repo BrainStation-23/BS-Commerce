@@ -4,9 +4,10 @@ import React from 'react';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
-import AddNewAddressForm from './addNewAddressForm';
+import AddNewAddressForm from '@/components/myAccount/addNewAddressForm';
 import { useAppSelector } from 'customHooks/hooks';
-import SingleAddress from './singleAddress';
+import SingleAddress from '@/components/myAccount/singleAddress';
+import WithAuth from '@/components/auth/withAuth';
 
 const AccountDetails: NextComponentType = () => {
   const [showAddAddress, setShowAddAddress] = useState('hidden');
@@ -91,4 +92,4 @@ const AccountDetails: NextComponentType = () => {
   );
 };
 
-export default AccountDetails;
+export default WithAuth(AccountDetails);
