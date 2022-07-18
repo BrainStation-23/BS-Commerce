@@ -9,7 +9,7 @@ import {
   storeFeaturedProducts,
   storeProducts,
   storeWishlist,
-} from 'toolkit/productsSlice';
+} from 'toolkit/ProductsSlice';
 
 import HomeComponent from '@/components/home';
 

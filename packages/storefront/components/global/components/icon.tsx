@@ -8,7 +8,7 @@ import { userAPI } from 'APIs';
 import { AddCompareItem, Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
-import { deleteItemFromWishlist } from 'toolkit/productsSlice';
+import { deleteItemFromWishlist } from 'toolkit/ProductsSlice';
 
 interface SingleProduct {
   product: Product;
