@@ -1,11 +1,11 @@
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CustomerAddress } from 'models';
 import { NextComponentType } from 'next';
 import { FC } from 'react';
 import { toast } from 'react-toastify';
-import { addAddress } from 'toolkit/customerAddressSlice';
+import { addAddress, storeAddresses } from 'toolkit/customerAddressSlice';
 interface props {
   user: any;
   cancelForm: any;
@@ -13,12 +13,17 @@ interface props {
 }
 const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
   const dispatch = useAppDispatch();
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
   const handleAddressSubmit = async (data: CustomerAddress, id: string) => {
     try {
       if (!id) {
         await userAPI.addCustomerNewAddress(data);
-        dispatch(addAddress(data));
       } else await userAPI.updateCustomerAddress(id, data);
+      const updatedCustomer = await userAPI.getCustomerProfile(token);
+      dispatch(storeAddresses(updatedCustomer.addresses));
     } catch (error) {
       toast.error('Failed to add New Address');
     }

@@ -1,3 +1,5 @@
+import { ProductPhoto } from "src/index";
+
 export interface IOrderAddress {
   firstName: string;
   lastName: string;
@@ -5,7 +7,7 @@ export interface IOrderAddress {
   addressLine1: string;
   addressLine2: string;
   city: string;
-  country: string;
+  country?: string;
   postCode?: string;
   phoneNumber: string;
 }
@@ -14,6 +16,7 @@ export interface IProductOrderData {
   productId: string;
   name: string;
   price: number;
+  photos?: ProductPhoto[],
   quantity: number;
   sku: string;
 }
