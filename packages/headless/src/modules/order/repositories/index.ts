@@ -1,3 +1,5 @@
+import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
+import { ProductOrderDto } from './../dto/order.create.dto';
 import { Injectable } from '@nestjs/common';
 import { OrderEntity } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
@@ -7,12 +9,12 @@ import { IOrderDatabase } from './order.db.interface';
 @Injectable()
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
-  async createOrder(userId: string, body: any, products: any): Promise<OrderEntity> {
-    return await this.db.createOrder(userId, body, products);
+  async createOrder(userId: string, body: any): Promise<OrderEntity> {
+    return await this.db.createOrder(userId, body);
   }
 
-  async addPhotoDetails( userId: string, body: any, products: any): Promise<any>{
-    return await this.db.addPhotoDetails(userId, body, products);
+  async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
+    return await this.db.addPhotoDetails(products);
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {

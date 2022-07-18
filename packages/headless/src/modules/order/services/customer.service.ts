@@ -15,10 +15,10 @@ export class OrderCustomerService {
     body: CreateOrderDto,
     products: ProductOrderDto[]
   ): Promise<IServiceResponse<OrderEntity>> {
-    const productListWithPhoto = await this.orderRepository.addPhotoDetails(userId, body, products);
+    const productListWithPhoto = await this.orderRepository.addPhotoDetails(products);
     const newBody = {...body, products: productListWithPhoto}
   
-    const createOrder = await this.orderRepository.createOrder(userId, newBody, products);
+    const createOrder = await this.orderRepository.createOrder(userId, newBody);
     if (createOrder) {
       return successResponse(OrderEntity, createOrder);
     }
