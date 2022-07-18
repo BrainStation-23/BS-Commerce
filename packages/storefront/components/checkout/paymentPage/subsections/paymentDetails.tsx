@@ -326,7 +326,7 @@ const PaymentDetails: NextComponentType = () => {
                                   htmlFor={`firstName`}
                                   className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
-                                  First name (optional)
+                                  First name
                                 </label>
                                 <div className="errMsg text-red-600">
                                   <ErrorMessage name="firstName" />
