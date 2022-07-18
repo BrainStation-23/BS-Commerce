@@ -10,7 +10,7 @@ interface Props {
 }
 
 const MyAccount: NextPage<Props> = ({ customerInformation }: Props) => {
-  console.log(customerInformation);
+  // console.log(customerInformation);
 
   return <AccountDetails customer={customerInformation.data} />;
 };
