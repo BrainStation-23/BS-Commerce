@@ -44,8 +44,6 @@ const Header: NextComponentType = () => {
     (state) => state.persistedReducer.category.category
   );
 
-  console.log(categories);
-
   const allCategories: menuLink[] = [];
   categories?.categories?.forEach((category) => {
     allCategories.push({

@@ -28,6 +28,7 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  GetCustomerErrorResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -45,7 +46,7 @@ export async function getUserRest(): Promise<User[] | undefined> {
 export async function getSignedInUserRest(
   isEmail: boolean,
   data: GetCustomerQuery
-): Promise<GetCustomerResponse | undefined> {
+): Promise<GetCustomerErrorResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getSignedInUser}${isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
@@ -188,6 +189,23 @@ export async function getOrderProductsRest(
     return [];
   }
 }
+
+export async function getOrderProductRest(
+  token: string,
+  OrderId: string,
+): Promise<IOrderResponseData | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return res?.data;
+  } catch (error: any) {
+    return [];
+  }
+}
+
 export async function addToCompareRest(
   productId: AddCompareItem
 ): Promise<CompareResponse | undefined> {

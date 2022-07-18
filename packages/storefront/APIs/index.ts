@@ -17,6 +17,7 @@ import {
   signinRest,
   signUpRest,
   getCategoryListRest,
+  getOrderProductRest,
 } from './restApi';
 import {
   addToWishlistGraphql,
@@ -71,6 +72,7 @@ const restApi: apiFunction = {
   getCategoryList: getCategoryListRest,
   checkout: checkoutRest,
   getOrderProducts: getOrderProductsRest,
+  getOrderProduct: getOrderProductRest,
   addToWishList: addToWishlistRest,
   getCustomerWishlist: getCustomerWishlistRest,
   deleteWishlistItem: deleteWishlistItemRest,

@@ -23,7 +23,7 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
-} from 'models';
+} from "models";
 
 export interface accordionBody {
   id: string;
@@ -101,6 +101,7 @@ export interface apiFunction {
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
   checkout: (data: any) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
+  getOrderProduct: (token: string, OrderId: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
   getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
   deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
