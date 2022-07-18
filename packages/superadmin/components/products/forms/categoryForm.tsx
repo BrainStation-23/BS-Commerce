@@ -132,7 +132,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                             value={data.id}
                             disabled={data.isSelected}
                           >
-                            {data.value}
+                            {data.name}
                           </option>
                         );
                       }

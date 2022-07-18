@@ -17,10 +17,13 @@ import {
   GetProductParams,
   Manufacturer,
   Product,
+  GetAllBrandsSuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
   GetTagsResponse,
+  GetManufacturersSuccessResponse,
+  CreateBrandRequest,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -241,7 +244,17 @@ export async function deleteManufacturerRest(
     toast.error(error?.response?.data?.message);
   }
 }
-
+export async function getAllManufacturersRest(): Promise<
+  GetManufacturersSuccessResponse | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.manufacturerList}`);
+    return response.data as GetManufacturersSuccessResponse;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
 export async function getSingleManufacturerRest(
   data: any,
   manufacturerId: any
@@ -333,10 +346,42 @@ export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
 
     return response?.data;
   } catch (error: any) {
-    console.error(error);
+    toast.error(error?.response?.data?.message);
   }
 }
 
+export async function getBrandsRest(): Promise<any> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
+    return data?.data as GetAllBrandsSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function createBrandRest(
+  data: CreateBrandRequest,
+  router: NextRouter
+): Promise<any> {
+  try {
+    const response = await axios?.post(`${apiEndPoints?.brands}/create`, data);
+    router.push('/Brands');
+    toast.success('Create Successful');
+    return response?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+export async function getBrandRest(brandId: any): Promise<any> {
+  try {
+    const { data } = await axios?.get(
+      `${apiEndPoints?.brands}/${brandId.brandId}`
+    );
+    return data?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
 export async function mediaUploadRest(
   data: FormData
 ): Promise<UploadFileSuccessResponse | undefined> {

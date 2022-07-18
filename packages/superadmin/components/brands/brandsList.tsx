@@ -1,25 +1,30 @@
-import Link from 'next/link';
 import { FC, useMemo, useState } from 'react';
+import Link from 'next/link';
 
-import { userAPI } from '@/APIs';
 import Table from '@/components/global/table/table';
 import Pagination from '@/components/global/pagination';
-import { ProductListProps } from '@/components/products/models/index';
+import { Brand } from 'models';
+import { userAPI } from '@/APIs';
 
-const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
+interface Props {
+  brandsList: Brand[];
+  setBrands: Function;
+}
+
+const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
   const [ProductID, setProductID] = useState('');
 
-  const onChangeForList = async (pageSize: number) => {
-    const productsList = await userAPI.getProducts(pageSize);
-    setProducts(productsList);
+  const onChangeForList = async () => {
+    const brandsList = await userAPI.getBrands();
+    setBrands(brandsList);
   };
 
   const deleteProductFunction = async () => {
     const res = await userAPI.deleteProduct(ProductID);
     if (res) {
-      onChangeForList(1000);
+      onChangeForList();
     }
     setModal({
       ...modal,
@@ -31,81 +36,44 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
     setProductID(id);
     setModal({ ...modal, delete: true });
   };
-
-  const onClickForSort = (name: string) => {
-    // console.log(name);
-  };
-
   const [modal, setModal] = useState({
     delete: false,
   });
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return productsList?.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, PageSize, productsList]);
+    return brandsList?.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, PageSize, brandsList]);
 
   const columns = [
     {
-      label: 'Picture',
-      path: 'url',
-      content: (data: any, key: any, index: any) => (
-        <td className="text-center align-middle">
-          <img
-            src={`${data?.photos[0][key]}`}
-            height="75px"
-            width={'75px'}
-            alt="..."
-          ></img>
-        </td>
-      ),
-    },
-    {
-      label: 'Product name',
+      label: 'Brand name',
       path: 'name',
-      content: (data: any, key: any, index: any) => (
-        <td className="align-middle">{data?.info[key]}</td>
-      ),
-    },
-    {
-      label: 'SKU',
-      path: 'sku',
-      content: (data: any, key: any, index: any) => (
-        <td className="align-middle">{data?.info[key]}</td>
-      ),
-    },
-    {
-      label: 'Price',
-      path: 'price',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: 'Display Order',
       path: 'displayOrder',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
-      ),
-    },
-    {
-      label: 'Categories',
-      path: 'categories',
-      content: (data: any, key: any, index: any) => (
-        <td className="text-center align-middle">
-          {data?.info[key]}
-          {data?.categories[0] ? data?.categories[0].name : '---'}
-          {data?.categories?.map((category: any, index: any) =>
-            index > 0 ? ` , ${category?.name}` : ''
-          )}
-        </td>
       ),
     },
     {
       label: 'Published',
       path: 'published',
-      content: (data: any, key: any, index: any) => (
-        <td className="p-auto m-auto text-center align-middle">
+      content: (data: Brand, key: any) => (
+        <td className="p-auto m-auto text-center">
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+        </td>
+      ),
+    },
+    {
+      label: 'Allow To Select Page Size',
+      path: 'allowToSelectPageSize',
+      content: (data: Brand, key: any) => (
+        <td className="p-auto m-auto text-center">
           {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
         </td>
       ),
@@ -113,11 +81,11 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
     {
       label: 'Edit',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">
           <Link
             href={{
-              pathname: `/Product/Edit/[id]`,
+              pathname: `/Brands/Edit/[id]`,
               query: { id: data?.[key] },
             }}
             passHref
@@ -135,11 +103,11 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
     {
       label: 'View',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand, key: any) => (
         <td className="text-center align-middle">
           <Link
             href={{
-              pathname: `/Product/View/[id]`,
+              pathname: `/Brands/View/[id]`,
               query: { id: data?.[key] },
             }}
             passHref
@@ -157,7 +125,7 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
     {
       label: 'Delete',
       path: 'id',
-      content: (data: any, key: any, index: any) => (
+      content: (data: Brand) => (
         <td className="text-center align-middle">
           <button
             className="btn btn-default btn-outline-danger"
@@ -178,19 +146,16 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
           <p>
             Learn more about
             <a href="#" style={{ textDecoration: 'none', marginLeft: '5px' }}>
-              Product
+              Brands
             </a>
           </p>
-          <Table
-            items={currentTableData}
-            columns={columns}
-            onClickForSort={onClickForSort}
-          />
+          <Table items={currentTableData} columns={columns} />
+
           <div className="">
-            {productsList?.length > 1 ? (
+            {brandsList?.length > 1 ? (
               <Pagination
                 currentPage={currentPage}
-                totalCount={productsList.length}
+                totalCount={brandsList.length}
                 pageSize={PageSize}
                 setCurrentPage={setCurrentPage}
                 setPageSize={setPageSize}
@@ -275,4 +240,4 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
   );
 };
 
-export default ProductsList;
+export default BrandsList;
