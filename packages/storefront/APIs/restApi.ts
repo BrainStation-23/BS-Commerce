@@ -36,6 +36,8 @@ import {
   DeleteCustomerAddressSuccessResponse,
   UpdateCustomerAddressSuccessResponse,
   UpdateCustomerAddressResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -296,7 +298,7 @@ export async function deleteCustomerAddressRest(
     );
     toast.success('Address deleted successfully');
     return res.data as DeleteCustomerAddressSuccessResponse;
-  } catch (error) {
+  } catch (error: any) {
     return error;
   }
 }
@@ -314,6 +316,30 @@ export async function updateCustomerAddressRest(
     return res.data as UpdateCustomerAddressSuccessResponse;
   } catch (error) {
     toast.error('Address update failed');
+    return error;
+  }
+}
+
+export async function getCustomerRest(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.customer}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerRest(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  try {
+    const response = await axios.patch(`${apiEndPoints.customer}`, data);
+    return response.data;
+  } catch (error: any) {
     return error;
   }
 }

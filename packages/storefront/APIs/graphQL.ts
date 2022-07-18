@@ -36,6 +36,9 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  GetCustomerInformationSuccessResponse,
+  UpdateCustomerRequestBody,
+  UpdateCustomerSuccessResponse,
 } from 'models';
 
 import { User } from 'utils/types';
@@ -171,10 +174,27 @@ export async function addCustomerNewAddressGraphql(
   return undefined;
 }
 
-export async function deleteCustomerAddressGraphql(productId: AddCompareItem): Promise<DeleteCustomerAddressResponse | undefined> {
-  return undefined
+export async function deleteCustomerAddressGraphql(
+  productId: AddCompareItem
+): Promise<DeleteCustomerAddressResponse | undefined> {
+  return undefined;
 }
 
-export async function updateCustomerAddressGraphql(addressId: string, data: any): Promise<UpdateCustomerAddressResponse | undefined> {
-  return undefined
+export async function updateCustomerAddressGraphql(
+  addressId: string,
+  data: any
+): Promise<UpdateCustomerAddressResponse | undefined> {
+  return undefined;
+}
+
+export async function getCustomerGraphQL(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function updateCustomerGraphQL(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  return undefined;
 }

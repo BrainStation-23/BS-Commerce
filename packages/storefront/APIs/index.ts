@@ -21,6 +21,8 @@ import {
   deleteCustomerAddressRest,
   updateCustomerAddressRest,
   addCustomerNewAddressRest,
+  getCustomerRest,
+  updateCustomerRest,
 } from './restApi';
 import {
   addToWishlistGraphql,
@@ -43,6 +45,8 @@ import {
   deleteCustomerAddressGraphql,
   updateCustomerAddressGraphql,
   addCustomerNewAddressGraphql,
+  getCustomerGraphQL,
+  updateCustomerGraphQL,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -68,6 +72,8 @@ const graphqlApi: apiFunction = {
   deleteCustomerAddress: deleteCustomerAddressGraphql,
   updateCustomerAddress: updateCustomerAddressGraphql,
   addCustomerNewAddress: addCustomerNewAddressGraphql,
+  getCustomer: getCustomerGraphQL,
+  updateCustomer: updateCustomerGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -93,6 +99,8 @@ const restApi: apiFunction = {
   deleteCustomerAddress: deleteCustomerAddressRest,
   updateCustomerAddress: updateCustomerAddressRest,
   addCustomerNewAddress: addCustomerNewAddressRest,
+  getCustomer: getCustomerRest,
+  updateCustomer: updateCustomerRest,
 };
 
 export const userAPI: apiFunction =

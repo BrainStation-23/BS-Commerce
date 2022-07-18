@@ -30,6 +30,9 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  GetCustomerInformationSuccessResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 export interface accordionBody {
@@ -108,21 +111,40 @@ export interface apiFunction {
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
   checkout: (data: any) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
-  addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
-  getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
-  deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
-  deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>
-  addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
-  deleteFromCompare: (productId: AddCompareItem) => {}
-  getCustomerProfile: (token: string) => Promise<GetCustomerInformationResponse | undefined>
-  deleteCustomerAddress: (addressId: string) => Promise<DeleteCustomerAddressResponse | undefined>
-  updateCustomerAddress: (addressId: string, data: CustomerAddress) => Promise<UpdateCustomerAddressResponse| undefined>
   addToWishList: (
     data: addToWishlistRequest
   ) => Promise<AddToWishlistResponse | undefined>;
+  getCustomerWishlist: (
+    token: string
+  ) => Promise<getUserWishlistResponse | undefined>;
+  deleteWishlistItem: (
+    data: string
+  ) => Promise<deleteWishlistItemResponse | undefined>;
+  deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
+  addToCompare: (
+    productId: AddCompareItem
+  ) => Promise<CompareResponse | undefined>;
+  deleteFromCompare: (productId: AddCompareItem) => {};
+  getCustomerProfile: (
+    token: string
+  ) => Promise<GetCustomerInformationResponse | undefined>;
+  deleteCustomerAddress: (
+    addressId: string
+  ) => Promise<DeleteCustomerAddressResponse | undefined>;
+  updateCustomerAddress: (
+    addressId: string,
+    data: CustomerAddress
+  ) => Promise<UpdateCustomerAddressResponse | undefined>;
+
   addCustomerNewAddress: (
     customerAddress: CustomerAddress
   ) => Promise<AddCustomerNewAddressResponse | undefined>;
+  getCustomer: (
+    token: string
+  ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
+  updateCustomer: (
+    data: UpdateCustomerRequestBody
+  ) => Promise<UpdateCustomerSuccessResponse | undefined>;
 }
 
 export interface ProductStore {
