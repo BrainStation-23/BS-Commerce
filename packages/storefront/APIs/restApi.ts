@@ -28,6 +28,7 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  GetCustomerInformationSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -48,7 +49,8 @@ export async function getSignedInUserRest(
 ): Promise<GetCustomerResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getSignedInUser}${isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
+      `${apiEndPoints.getSignedInUser}${
+        isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
       }`
     );
     return res.data;
@@ -129,19 +131,18 @@ export async function getPublicProductByIdRest(
   }
 }
 
-export async function getCategoryListRest(): Promise<getCategoryListSuccessResponse
-  | undefined> {
+export async function getCategoryListRest(): Promise<
+  getCategoryListSuccessResponse | undefined
+> {
   try {
-    const res = await axios.get(
-      `${apiEndPoints.getCatagoryList}`
-    );
+    const res = await axios.get(`${apiEndPoints.getCatagoryList}`);
     return res.data.data as getCategoryListSuccessResponse;
   } catch (error: any) {
     return error;
   }
 }
 export async function checkoutRest(
-  data: any,
+  data: any
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
@@ -175,13 +176,13 @@ export async function addToWishlistRest(
 }
 
 export async function getOrderProductsRest(
-  token: string,
+  token: string
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return res?.data;
   } catch (error: any) {
@@ -223,7 +224,9 @@ export async function deleteWishlistItemRest(
   data: string
 ): Promise<deleteWishlistItemResponse | undefined> {
   try {
-    const res = await axios.delete(`${apiEndPoints.deleteWishlistItem}/${data}`);
+    const res = await axios.delete(
+      `${apiEndPoints.deleteWishlistItem}/${data}`
+    );
 
     return res.data.data;
   } catch (error: any) {
@@ -231,7 +234,9 @@ export async function deleteWishlistItemRest(
   }
 }
 
-export async function deleteFullWishlistRest(): Promise<deleteAllWishlistItemsResponse| undefined> {
+export async function deleteFullWishlistRest(): Promise<
+  deleteAllWishlistItemsResponse | undefined
+> {
   try {
     const res = await axios.delete(`${apiEndPoints.deleteFullWishlist}`);
     return res.data.message;
@@ -241,4 +246,17 @@ export async function deleteFullWishlistRest(): Promise<deleteAllWishlistItemsRe
 }
 export async function deleteFromCompareRest(productId: AddCompareItem) {
   await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
+}
+
+export async function getCustomerRest(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.customer}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
 }

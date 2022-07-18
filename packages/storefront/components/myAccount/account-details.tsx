@@ -1,4 +1,3 @@
-import { NextComponentType } from 'next';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 
@@ -8,20 +7,22 @@ import { storeUserToken } from 'toolkit/authSlice';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
+import { Customer } from 'models';
 
-const AccountDetails: NextComponentType = () => {
+interface Props {
+  customer: Customer;
+}
+
+const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  //   const token = useAppSelector(
-  //     (state) => state.persistedReducer.auth.access_token
-  //   );
 
   const userData = {
-    name: 'Test User',
-    email: 'test@user.com',
-    firstName: 'Test',
-    lastName: 'User',
-    phone: '+8801674314359',
+    email: customer.email === undefined ? '' : customer.email,
+    firstName: customer.firstName === undefined ? '' : customer.firstName,
+    lastName: customer.lastName === undefined ? '' : customer.lastName,
+    phone: customer.phone === undefined ? '' : customer.phone,
+
     isPhoneVerified: false,
     isEmailVerified: true,
   };

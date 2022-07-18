@@ -23,6 +23,7 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  GetCustomerInformationSuccessResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -101,12 +102,23 @@ export interface apiFunction {
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
   checkout: (data: any) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
-  addToWishList: (data: addToWishlistRequest) => Promise<AddToWishlistResponse | undefined>;
-  getCustomerWishlist: (token: string) => Promise<getUserWishlistResponse | undefined>;
-  deleteWishlistItem: (data: string) => Promise<deleteWishlistItemResponse | undefined>
-  deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>
-  addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
-  deleteFromCompare: (productId: AddCompareItem) => {}
+  addToWishList: (
+    data: addToWishlistRequest
+  ) => Promise<AddToWishlistResponse | undefined>;
+  getCustomerWishlist: (
+    token: string
+  ) => Promise<getUserWishlistResponse | undefined>;
+  deleteWishlistItem: (
+    data: string
+  ) => Promise<deleteWishlistItemResponse | undefined>;
+  deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
+  addToCompare: (
+    productId: AddCompareItem
+  ) => Promise<CompareResponse | undefined>;
+  deleteFromCompare: (productId: AddCompareItem) => {};
+  getCustomer: (
+    token: string
+  ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
 }
 
 export interface ProductStore {
