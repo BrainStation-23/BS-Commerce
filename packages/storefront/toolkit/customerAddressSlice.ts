@@ -23,12 +23,21 @@ export const customerAddressSlice = createSlice({
       state: CustomerAddressState,
       action: PayloadAction<string>
     ) => {
-      const newAddressList = state.addresses.filter(address => address.id !== action.payload)
+      const newAddressList = state.addresses.filter(
+        (address) => address.id !== action.payload
+      );
       state.addresses = newAddressList;
-    }
+    },
+    addAddress: (
+      state: CustomerAddressState,
+      action: PayloadAction<CustomerAddress>
+    ) => {
+      state.addresses.push(action.payload);
+    },
   },
 });
 
-export const { storeAddresses, deleteAddress } = customerAddressSlice.actions;
+export const { storeAddresses, deleteAddress, addAddress } =
+  customerAddressSlice.actions;
 
 export default customerAddressSlice.reducer;

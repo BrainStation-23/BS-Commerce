@@ -23,7 +23,6 @@ const Addresses: NextPage<Props> = ({ customerProfile }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = cookie?.parse(context.req?.headers?.cookie);
   const customerProfile = await userAPI.getCustomerProfile(token.token);
-
   return {
     props: {
       customerProfile,
