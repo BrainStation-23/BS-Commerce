@@ -27,7 +27,8 @@ type CLASS_NAME =
   | 'MEDIA'
   | 'ORDER'
   | 'BRAND'
-  | 'TAGS';
+  | 'TAGS'
+  | 'CUSTOMER';
 
 const db = dbConfig.db;
 
@@ -39,7 +40,7 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
           case 'USER':
             return UserDatabaseMongo;
           case 'BRAND':
-              return BrandDatabaseMongo;
+            return BrandDatabaseMongo;
           case 'COMPARE':
             return CompareDatabaseMongo;
           case 'PRODUCT':
@@ -49,6 +50,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
           case 'CATEGORY':
             return CategoryDatabaseMongo;
           case 'CUSTOMER_AUTH':
+            return CustomerDatabaseMongo;
+          case 'CUSTOMER':
             return CustomerDatabaseMongo;
           case 'CART':
             return CartDatabaseMongo;
