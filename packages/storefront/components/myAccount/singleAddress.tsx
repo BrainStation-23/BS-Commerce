@@ -66,10 +66,10 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
               user={{
                 firstName: singleAddress?.firstName,
                 lastName: singleAddress?.lastName,
-                address1: singleAddress?.addressLine1,
-                address2: singleAddress?.addressLine2,
-                city: singleAddress?.state,
-                postalCode: singleAddress?.postCode,
+                addressLine1: singleAddress?.addressLine1,
+                addressLine2: singleAddress?.addressLine2,
+                state: singleAddress?.state,
+                postCode: singleAddress?.postCode,
                 phone: singleAddress?.phone,
                 tag: singleAddress?.tag,
               }}
