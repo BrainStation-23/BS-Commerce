@@ -37,7 +37,6 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   let usableCart: any = [];
-
   cartData.map((cartItem) => {
     const cart = {
       productId: cartItem?.productId,
@@ -45,6 +44,7 @@ const PaymentDetails: NextComponentType = () => {
       price: cartItem?.product?.info?.price,
       quantity: cartItem?.quantity,
       sku: cartItem?.product?.info?.sku,
+      photos: cartItem?.product?.photos,
     };
     usableCart.push(cart);
   });
@@ -129,8 +129,8 @@ const PaymentDetails: NextComponentType = () => {
         //   toast.error('Order creation failed. You need to login in our site');
         //   router.push('/account/sign-in');
         // } else {
-          // toast.error('Order creation failed. Try again.');
-          // router.push('/checkout');
+        // toast.error('Order creation failed. Try again.');
+        // router.push('/checkout');
         // }
       }
     });
@@ -301,7 +301,6 @@ const PaymentDetails: NextComponentType = () => {
                           className="mx-4 mt-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
-
                           }}
                           required
                         />
@@ -395,7 +394,7 @@ const PaymentDetails: NextComponentType = () => {
                                 Apartment, suit, etc. (optional)
                               </label>
                               <div className="errMsg text-red-600">
-                                  <ErrorMessage name="addressOptional" />
+                                <ErrorMessage name="addressOptional" />
                               </div>
                             </div>
                           </div>
