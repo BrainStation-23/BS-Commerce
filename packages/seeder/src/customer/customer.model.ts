@@ -25,11 +25,11 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   postCode: String,
   phone: {
     type: String,
-    required: true,
+    required: true
   },
   tag: {
     type: String,
-    required: true,
+    required: true
   },
 }, {
   _id: false,
