@@ -1,3 +1,5 @@
+import { Photo } from "./product";
+
 export enum OrderStatusEnum {
   Pending = 'Pending',
   Processing = 'Processing',
@@ -25,7 +27,7 @@ export class OrderAddress {
   addressLine1: string;
   addressLine2: string;
   city: string;
-  country: string;
+  country?: string;
   postCode?: string;
   phoneNumber: string;
 }
@@ -33,6 +35,7 @@ export class OrderAddress {
 export class ProductOrder {
   productId: string;
   name: string;
+  photos?: Photo[];
   price: number;
   quantity: number;
   quantityShipped: number;
