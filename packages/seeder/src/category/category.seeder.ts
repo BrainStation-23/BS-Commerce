@@ -5,7 +5,7 @@ const categories = [
         name: "Electronics",
         description: "Electronics description",
         photo: {
-            "url": "src/public/assets/electronics.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/electronics.jpg",
             "alt": "Electronics image"
         },
         showOnHomePage: true,
@@ -28,7 +28,7 @@ const categories = [
         name: "Smart Phone",
         description: "Smart Phone description",
         photo: {
-            "url": "src/public/assets/smart_phone.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/smartphone.jpg",
             "alt": "Smart Phone image"
         },
         showOnHomePage: true,
@@ -57,7 +57,7 @@ const categories = [
         name: "Realme",
         description: "Realme description",
         photo: {
-            "url": "src/public/assets/realme.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/realme.jpg",
             "alt": "Realme image"
         },
         showOnHomePage: true,
@@ -91,7 +91,7 @@ const categories = [
         name: "Realme 6",
         description: "Realme 6 description",
         photo: {
-            "url": "src/public/assets/realme6.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/realme6.jpg",
             "alt": "Realme 6 image"
         },
         showOnHomePage: true,
@@ -130,7 +130,7 @@ const categories = [
         name: "Samsung",
         description: "Samsung description",
         photo: {
-            "url": "src/public/assets/samsung.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/samsung.jpg",
             "alt": "Samsung image"
         },
         showOnHomePage: true,
@@ -164,7 +164,7 @@ const categories = [
         name: "Oppo",
         description: "Oppo description",
         photo: {
-            "url": "src/public/assets/oppo.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/oppo.jpg",
             "alt": "Oppo image"
         },
         showOnHomePage: true,
@@ -198,7 +198,7 @@ const categories = [
         name: "Apple",
         description: "Apple description",
         photo: {
-            "url": "src/public/assets/apple.jpg",
+            "url": "http://localhost:3000/src/public/assets/2022/6/18/apple.jpg",
             "alt": "Apple image"
         },
         showOnHomePage: true,
