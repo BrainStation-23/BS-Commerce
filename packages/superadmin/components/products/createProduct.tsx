@@ -1,18 +1,17 @@
+import { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { NextComponentType } from 'next';
-import { useEffect, useState } from 'react';
+import { CreateProductRequest } from 'models';
 
 import { userAPI } from '@/APIs';
-import { CreateProductRequest } from 'models';
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 
-import { FormDataInterFace } from '@/components/products/models/index';
 import { productSchema } from '@/components/products/schema/productSchema/index';
 
 const CreateProduct: NextComponentType = () => {
@@ -28,7 +27,6 @@ const CreateProduct: NextComponentType = () => {
 
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
-    // console.log('manures', response);
     const allManufacturers: any = [];
 
     if (response.data.manufacturers.length! > 0) {

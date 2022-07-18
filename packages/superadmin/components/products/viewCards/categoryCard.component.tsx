@@ -1,33 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import { ProductCategory } from 'models';
 
-import {
-  CategoryCardInterface,
-  CategoryInterface,
-} from '@/components/products/models/index';
+interface Props {
+  categories: ProductCategory[];
+}
 
-const CaegoryCard: FC<CategoryCardInterface> = (
-  props: CategoryCardInterface
-) => {
-  const { product, categoryData } = props;
-  const [showTable, setShowTable] = useState(false);
-
-  const checkTable = () => {
-    const totalSelectedCategory = categoryData.filter(
-      (data: CategoryInterface) => data.isSelected
-    );
-    const isSelectedZero = totalSelectedCategory[0] ? true : false;
-    isSelectedZero
-      ? setShowTable(isSelectedZero)
-      : setShowTable(!isSelectedZero);
-    return !isSelectedZero;
-  };
-
-  useEffect(() => {
-    checkTable();
-  }, [showTable]);
+const CaegoryCard: React.FC<Props> = ({ categories }: Props) => {
   return (
     <>
-      {product?.categories?.length > 0 ? (
+      {categories?.length > 0 ? (
         <div
           className="card card-secondary card-outline my-4"
           data-card-name="meta"
@@ -39,7 +19,7 @@ const CaegoryCard: FC<CategoryCardInterface> = (
                 className="bi bi-diagram-3-fill col-1"
                 style={{ fontSize: '25px' }}
               />
-              <div className="fs-5 col text-start px-3">Caegories</div>
+              <div className="fs-5 col px-3 text-start">Categories</div>
             </div>
           </div>
           <div className="" id="metaTab">
@@ -54,28 +34,21 @@ const CaegoryCard: FC<CategoryCardInterface> = (
                     </tr>
                   </thead>
                   <tbody>
-                    {categoryData?.map(
-                      (data: CategoryInterface, index: number) => {
-                        if (data.isSelected)
-                          return (
-                            <React.Fragment key={index}>
-                              <tr>
-                                <td className="text-center">{data.value}</td>
-                                <td className="text-center">
-                                  {data.isFeatured ? (
-                                    <i className="bi bi-check-lg"></i>
-                                  ) : (
-                                    'X'
-                                  )}
-                                </td>
-                                <td className="text-center">
-                                  {data.displayOrder}
-                                </td>
-                              </tr>
-                            </React.Fragment>
-                          );
-                      }
-                    )}
+                    {categories?.map((data, index) => {
+                      return (
+                        <tr key={index}>
+                          <td className="text-center">{data.name}</td>
+                          <td className="text-center">
+                            {data.isFeatured ? (
+                              <i className="bi bi-check-lg"></i>
+                            ) : (
+                              'X'
+                            )}
+                          </td>
+                          <td className="text-center">{data.displayOrder}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
