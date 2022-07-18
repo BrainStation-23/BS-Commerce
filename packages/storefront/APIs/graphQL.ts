@@ -1,5 +1,6 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import { GetCustomerInformationResponse } from 'models';
+import { DeleteCustomerAddressResponse } from 'models';
 import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -155,4 +156,8 @@ export async function deleteFromCompareGraphql(productId: AddCompareItem) {
 
 export async function getCustomerProfileGraphql(token: string): Promise<GetCustomerInformationResponse | undefined> {
   return undefined;
+}
+
+export async function deleteCustomerAddressGraphql(productId: AddCompareItem): Promise<DeleteCustomerAddressResponse | undefined> {
+  return undefined
 }

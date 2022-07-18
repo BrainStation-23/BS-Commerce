@@ -1,15 +1,19 @@
+import { useAppDispatch } from 'customHooks/hooks';
+import { userAPI } from 'APIs';
 import { CustomerAddress } from 'models';
-import { NextComponentType } from 'next';
 import { useState } from 'react';
-import AddNewAddressForm from './addNewAddressForm';
+import { deleteAddress } from 'toolkit/customerAddressSlice';
+
+import AddNewAddressForm from '@/components/myAccount/addNewAddressForm';
 
 interface Props {
   singleAddress: CustomerAddress;
 }
 
 const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
+  const dispatch = useAppDispatch();
+
   const [showEditAddress, setShowEditAddress] = useState('hidden');
-  const [showAddAddress, setShowAddAddress] = useState('hidden');
 
   const editButtonOnClick = () => {
     showEditAddress === ''
@@ -17,8 +21,9 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
       : setShowEditAddress('');
   };
 
-  const addButtonOnClick = () => {
-    showAddAddress === '' ? setShowAddAddress('hidden') : setShowAddAddress('');
+  const handleDeleteAddress = async (addressId: string) => {
+    await userAPI.deleteCustomerAddress(addressId);
+    dispatch(deleteAddress(addressId));
   };
 
   return (
@@ -27,6 +32,7 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
         <>
           <div className="mt-3 text-sm">
             <p>{singleAddress?.addressLine1!}</p>
+            <p>{singleAddress?.state!}</p>
             <p>{singleAddress?.postCode!}</p>
             <p>Bangladesh</p>
             <p>{singleAddress?.phone!}</p>
@@ -42,7 +48,12 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
             </span>
             {/* </Link> */}
             <span>| </span>
-            <span className="cursor-pointer hover:text-blue-600">Delete</span>
+            <span
+              className="cursor-pointer hover:text-blue-600"
+              onClick={() => handleDeleteAddress(singleAddress?.id!)}
+            >
+              Delete
+            </span>
           </div>
         </>
       )}

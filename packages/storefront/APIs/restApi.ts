@@ -34,6 +34,8 @@ import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
 import { GetCustomerInformationResponse } from 'models';
 import { GetCustomerInformationSuccessResponse } from 'models';
+import { DeleteCustomerAddressResponse } from 'models';
+import { DeleteCustomerAddressSuccessResponse } from 'models';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -257,4 +259,17 @@ export async function getCustomerProfileRest(token: string): Promise<GetCustomer
   } catch(error) {
     return error;
   }
+}
+
+export async function deleteCustomerAddressRest(addressId: string): Promise<DeleteCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.deleteCustomerAddress}/${addressId}`, {addressId});
+    return res.data as DeleteCustomerAddressSuccessResponse
+  } catch(error) {
+    return error;
+  }
+}
+
+export async function updateCustomerAddressRest(addressId: string): Promise<DeleteCustomerAddressResponse | undefined> {
+
 }
