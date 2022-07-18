@@ -18,5 +18,5 @@ export interface Customer {
     lastName?: string;
     phone?: string;
     email?: string;
-    address?: CustomerAddress[]
+    addresses?: CustomerAddress[]
 }
