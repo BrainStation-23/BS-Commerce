@@ -28,7 +28,7 @@ const BrandInfoForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-info-lg col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -71,7 +71,7 @@ const BrandInfoForm: NextComponentType = () => {
             />
             <FieldTemplate
               label="Display Order"
-              isRequired={true}
+              isRequired={false}
               fieldID="displayOrder"
               fieldType="number"
             />

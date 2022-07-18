@@ -28,7 +28,7 @@ const BrandMetaForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-meta col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -45,7 +45,7 @@ const BrandMetaForm: NextComponentType = () => {
           <div className="card-body">
             <FieldTemplate
               label="Keywords"
-              isRequired={true}
+              isRequired={false}
               fieldID="keywords"
               fieldType="text"
             />
