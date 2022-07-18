@@ -49,6 +49,11 @@ export const SidebarData: ISidebarData[] = [
         to: '/category',
         icon: SubMenuIcon,
       },
+      {
+        name: 'Brands',
+        to: '/Brands',
+        icon: SubMenuIcon,
+      },
     ],
   },
   {

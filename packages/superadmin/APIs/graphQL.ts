@@ -13,10 +13,12 @@ import {
   getCategoryListSuccessResponse,
   getCategoryRequest,
   getCategorySuccessResponse,
+  GetAllBrandsSuccessResponse,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
-  GetUserResponse,
+  GetTagsResponse,
+  CreateBrandRequest,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -82,14 +84,27 @@ export async function getCategoryGraphQL(
   return undefined;
 }
 
+export async function getBrandsGraphQL(): Promise<
+  GetAllBrandsSuccessResponse | undefined
+> {
+  return undefined;
+}
+export async function getBrandGraphQL(): Promise<any> {
+  return undefined;
+}
+export async function createBrandGraphQL(
+  data: CreateBrandRequest,
+  router: NextRouter
+): Promise<any> {
+  return undefined;
+}
 export async function createCategoryGraphQL(
   data: createCategoryRequest,
   router: NextRouter
 ): Promise<createCategorySuccessResponse | undefined> {
   return undefined;
 }
-
-export async function getTagsGraphQL(): Promise<GetUserResponse | undefined> {
+export async function getTagsGraphQL(): Promise<GetTagsResponse | undefined> {
   return;
 }
 
