@@ -1,3 +1,5 @@
+import { ProductPhoto } from "src/index";
+
 export interface IOrderAddress {
   firstName: string;
   lastName: string;
@@ -14,6 +16,7 @@ export interface IProductOrderData {
   productId: string;
   name: string;
   price: number;
+  photos?: ProductPhoto[],
   quantity: number;
   sku: string;
 }
