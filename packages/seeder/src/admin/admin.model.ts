@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose';
 import { Address, User } from 'models';
-import { randomUUID } from 'crypto';
 
 const AddressSchema = new Schema<Address>({
   id: {
