@@ -15,7 +15,7 @@ import { userAPI } from 'APIs';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await userAPI.getCategoryList();
-  console.log(res);
+  // console.log(res);
   return {
     props: {
       menuItems: res,
@@ -44,10 +44,10 @@ const Header: NextComponentType = () => {
     (state) => state.persistedReducer.category.category
   );
 
-  console.log(categories);
+  // console.log(categories);
 
   const allCategories: menuLink[] = [];
-  categories.categories.forEach((category) => {
+  categories?.categories?.forEach((category) => {
     allCategories.push({
       name: category.name,
       link: {
@@ -246,7 +246,7 @@ const Header: NextComponentType = () => {
                 >
                   <Link
                     href={category.link}
-                    // as={`collections/${category.name}`}
+                    as={`/collections/${category.name}`}
                   >
                     <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
                       {category.name}

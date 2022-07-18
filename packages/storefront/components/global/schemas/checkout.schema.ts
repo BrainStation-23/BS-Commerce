@@ -8,11 +8,10 @@ export const informationSchema = object().shape({
   contact: string().required(
     'This field must not be empty. Enter a phone number.'
   ),
-  firstName: string(),
+  firstName: string().required('Enter a first name'),
   lastName: string().required('Enter a last name'),
-  country: string().required('Select a country'),
   address: string().required('Enter an address'),
-  addressOptional: string(),
+  addressOptional: string().required('Enter an address'),
   city: string().required('Enter a city name'),
   postalCode: string().matches(/^[0-9\+]*$/, 'This field only contains digits').required('This field must not be empty'),
 });

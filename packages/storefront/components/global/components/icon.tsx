@@ -5,17 +5,16 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { AddCompareItem, Product } from 'models';
+import { Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
-import { deleteItemFromWishlist } from 'toolkit/productsSlice';
+import { deleteItemFromWishlist } from 'toolkit/ProductsSlice';
 
 interface SingleProduct {
   product: Product;
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
-  const [modalOn, setModalOn] = useState(false);
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -43,7 +42,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event: any) => {
     const cartProduct = {
       id: product.id!,
       info: product.info!,
@@ -55,7 +54,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       quantity: 1,
     };
     dispatch(addToCart(cartItem));
-    setModalOn(true);
+    event.preventDefault();
   };
 
   const handleAddToCompare = async () => {

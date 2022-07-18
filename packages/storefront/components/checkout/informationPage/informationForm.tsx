@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToShippingInfo } from 'toolkit/checkoutSlice';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
@@ -32,7 +31,6 @@ const Information = (props: any) => {
   const initialValues = {
     email: shippingInfo?.email,
     contact: shippingInfo?.contact,
-    sendNotificationCheckbox: '',
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
     country: shippingInfo?.country,
@@ -42,7 +40,7 @@ const Information = (props: any) => {
     postalCode: shippingInfo?.postalCode,
     saveInformationCheckbox: '',
   };
-  
+
   const handleCheckoutSubmit = (data: FormData) => {
     dispatch(addToShippingInfo(data));
     const obj = {
@@ -61,7 +59,6 @@ const Information = (props: any) => {
           const data = {
             email: values.email,
             contact: values.contact,
-            sendNotificationCheckbox: values.sendNotificationCheckbox,
             country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
@@ -105,7 +102,7 @@ const Information = (props: any) => {
                         htmlFor={`email`}
                         className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                       >
-                        Email 
+                        Email
                       </label>
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="email" />
@@ -133,47 +130,12 @@ const Information = (props: any) => {
                       </div>
                     </div>
                   </div>
-
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="checkbox"
-                        id="sendNotificationCheckbox"
-                        name="sendNotificationCheckbox"
-                        className={`focus:ring-3  focus:ring-blackhover:border-gray-300 h-4 w-4 rounded border-2 border-black accent-black`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor="sendNotificationCheckbox"
-                        className="ml-2 text-sm text-gray-500"
-                      >
-                        Email me with news and offers
-                      </label>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="mt-8">
                   <p className="text-lg">Shipping Address</p>
 
                   <div className="mt-5">
-                    <div className="mb-3">
-                      <Field
-                        as="select"
-                        id="country"
-                        name="country"
-                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                      >
-                        <option>Click here to select your country</option>
-                        <option>New Mexico</option>
-                        <option>Missouri</option>
-                        <option>Texas</option>
-                      </Field>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="country" />
-                      </div>
-                    </div>
-
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">
@@ -188,7 +150,7 @@ const Information = (props: any) => {
                             htmlFor={`firstName`}
                             className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
-                            First name (optional)
+                            First name
                           </label>
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="firstName" />
@@ -229,7 +191,7 @@ const Information = (props: any) => {
                           htmlFor={`address`}
                           className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                         >
-                          Address
+                          Address 1
                         </label>
                         <div className="errMsg text-red-600">
                           <ErrorMessage name="address" />
@@ -250,7 +212,7 @@ const Information = (props: any) => {
                           htmlFor={`addressOptional`}
                           className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                         >
-                          Apartment, suit, etc. (optional)
+                          Address 2
                         </label>
                         <div className="errMsg text-red-600">
                           <ErrorMessage name="addressOptional" />
@@ -302,23 +264,67 @@ const Information = (props: any) => {
                   </div>
                 </div>
 
-                {/* <div className="mb-3">
-                  <div className="relative">
-                    <Field
-                      type="checkbox"
-                      id="saveInformationCheckbox"
-                      name="saveInformationCheckbox"
-                      className={`focus:ring-3 focus:ring-blackhover:border-gray-300 h-4 w-4 rounded border-2 border-black accent-black`}
-                      placeholder=" "
-                    />
-                    <label
-                      htmlFor="saveInformationCheckbox"
-                      className="ml-2 text-sm text-gray-500"
-                    >
-                      Save this information for next time
-                    </label>
+                <p className="mb-2">Select a label for effective delivery:</p>
+
+                <div className="flex flex-wrap items-center gap-x-3">
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag1"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="home"
+                        required
+                      />
+                      <label
+                        htmlFor="tag1"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Home
+                      </label>
+                    </div>
                   </div>
-                </div> */}
+
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag2"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="office"
+                      />
+                      <label
+                        htmlFor="tag2"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Office
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <div className="relative">
+                      <Field
+                        type="radio"
+                        id="tag3"
+                        name="tag"
+                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                        placeholder=" "
+                        value="others"
+                      />
+                      <label
+                        htmlFor="tag3"
+                        className="ml-2 text-sm hover:cursor-pointer"
+                      >
+                        Others
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   <button

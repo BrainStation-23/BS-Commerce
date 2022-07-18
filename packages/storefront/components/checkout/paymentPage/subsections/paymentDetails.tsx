@@ -21,7 +21,6 @@ interface FormData {
   shippingAddressPicked: string;
   firstName: string;
   lastName: string;
-  country: string;
   address: string;
   addressOptional: string;
   city: string;
@@ -38,7 +37,6 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   let usableCart: any = [];
-
   cartData.map((cartItem) => {
     const cart = {
       productId: cartItem?.productId,
@@ -46,6 +44,7 @@ const PaymentDetails: NextComponentType = () => {
       price: cartItem?.product?.info?.price,
       quantity: cartItem?.quantity,
       sku: cartItem?.product?.info?.sku,
+      photos: cartItem?.product?.photos,
     };
     usableCart.push(cart);
   });
@@ -69,7 +68,6 @@ const PaymentDetails: NextComponentType = () => {
     shippingAddressPicked: '',
     firstName: '',
     lastName: '',
-    country: '',
     address: '',
     addressOptional: '',
     city: '',
@@ -91,7 +89,6 @@ const PaymentDetails: NextComponentType = () => {
         addressLine1: data.address || shippingInfo?.address!,
         addressLine2: data.addressOptional || shippingInfo?.addressOptional!,
         city: data.city || shippingInfo?.city!,
-        country: data.country || shippingInfo?.country!,
         postCode: data.postalCode || shippingInfo?.postalCode!,
         phoneNumber: shippingInfo?.contact!,
       },
@@ -102,7 +99,6 @@ const PaymentDetails: NextComponentType = () => {
         addressLine1: shippingInfo?.address,
         addressLine2: shippingInfo?.addressOptional,
         city: shippingInfo?.city,
-        country: shippingInfo?.country,
         postCode: shippingInfo?.postalCode,
         phoneNumber: shippingInfo?.contact,
       },
@@ -133,8 +129,8 @@ const PaymentDetails: NextComponentType = () => {
         //   toast.error('Order creation failed. You need to login in our site');
         //   router.push('/account/sign-in');
         // } else {
-          // toast.error('Order creation failed. Try again.');
-          // router.push('/checkout');
+        // toast.error('Order creation failed. Try again.');
+        // router.push('/checkout');
         // }
       }
     });
@@ -160,7 +156,6 @@ const PaymentDetails: NextComponentType = () => {
             expirationDate: values.expirationDate,
             securityCode: values.securityCode,
             shippingAddressPicked: values.shippingAddressPicked,
-            country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
             address: values.address,
@@ -306,7 +301,6 @@ const PaymentDetails: NextComponentType = () => {
                           className="mx-4 mt-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
-
                           }}
                           required
                         />
@@ -317,24 +311,6 @@ const PaymentDetails: NextComponentType = () => {
                     {showShippingForm === true ? (
                       <>
                         <div className="bg-gray-100 p-5">
-                          <div className="mb-3">
-                            <Field
-                              as="select"
-                              id="country"
-                              name="country"
-                              className=" peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                              required
-                            >
-                              <option>Click here to select your country</option>
-                              <option>New Mexico</option>
-                              <option>Missouri</option>
-                              <option>Texas</option>
-                            </Field>
-                            <div className="errMsg text-red-600">
-                              <ErrorMessage name="country" />
-                            </div>
-                          </div>
-
                           <div className="row">
                             <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                               <div className="relative">
@@ -350,7 +326,7 @@ const PaymentDetails: NextComponentType = () => {
                                   htmlFor={`firstName`}
                                   className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
-                                  First name (optional)
+                                  First name
                                 </label>
                                 <div className="errMsg text-red-600">
                                   <ErrorMessage name="firstName" />
@@ -418,7 +394,7 @@ const PaymentDetails: NextComponentType = () => {
                                 Apartment, suit, etc. (optional)
                               </label>
                               <div className="errMsg text-red-600">
-                                  <ErrorMessage name="addressOptional" />
+                                <ErrorMessage name="addressOptional" />
                               </div>
                             </div>
                           </div>

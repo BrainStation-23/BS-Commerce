@@ -52,7 +52,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     { name: 'Login', link: '/account/sign-in' },
     { name: 'Wishlist', link: '/wishlist' },
     { name: 'Logout', link: '/account/sign-in' },
-    { name: `${user}`, link: '/' },
+    { name: `${user}`, link: '/myAccount' },
   ];
   return (
     <>
@@ -68,19 +68,53 @@ const HeaderAccount: React.FC<Properties> = () => {
         <span className="my-0 uppercase">
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
-              <Link href={links[4].link}>
-                <a className="cursor-pointer normal-case transition-all duration-100 ease-linear hover:text-green-600">
-                  {links[4].name}
-                </a>
-              </Link>
-              <Link href={links[3].link}>
+              <div className="group relative cursor-pointer normal-case">
+                <p className="hover:text-green-600">{links[4].name}</p>
+                <div
+                  className={`absolute -left-[20px] top-[20px] z-50 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
+                >
+                  <ul>
+                    <Link href="/myAccount" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        My Profile
+                      </li>
+                    </Link>
+                    <Link href="/order" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Orders
+                      </li>
+                    </Link>
+                    <Link href="/myAccount/addresses" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Manage Addresses
+                      </li>
+                    </Link>
+                    <Link href="/wishlist" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Wishlist
+                      </li>
+                    </Link>
+                    <hr className="my-2" />
+                    <Link href={links[3].link} passHref>
+                      <li
+                        onClick={() => setModalOn(true)}
+                        className="transition-all duration-100 ease-linear hover:text-green-600"
+                      >
+                        {links[3].name}
+                      </li>
+                    </Link>
+                  </ul>
+                </div>
+              </div>
+
+              {/* <Link href={links[3].link}>
                 <a
                   onClick={() => setModalOn(true)}
                   className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
                 >
                   {links[3].name}
                 </a>
-              </Link>
+              </Link> */}
             </div>
           ) : (
             <>
@@ -99,13 +133,22 @@ const HeaderAccount: React.FC<Properties> = () => {
           )}
         </span>
         <button onClick={handleClickWishlist}>
-          <div className="flex">
+          <div className="flex hover:text-green-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear text-green-"
-              fill={wishlistItems?.items?.length! > 0 && token !== '' ? `green` : `none`}
+              className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+              fill={
+                wishlistItems?.items?.length! > 0 && token !== ''
+                  ? `green`
+                  : `none`
+              }
               viewBox="0 0 24 24"
-              stroke={wishlistItems?.items?.length! > 0 && token !== '' ? `none` : `currentColor`}
+              stroke={
+                wishlistItems?.items?.length! > 0 && token !== ''
+                  ? `none`
+                  : `currentColor`
+              }
+              strokeWidth={2}
             >
               <path
                 strokeLinecap="round"
@@ -113,28 +156,32 @@ const HeaderAccount: React.FC<Properties> = () => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <span>{wishlistItems?.items?.length! > 0 && token !== '' ? wishlistItems?.items?.length : 0}</span>
+            <span className="">
+              {wishlistItems?.items?.length! > 0 && token !== ''
+                ? wishlistItems?.items?.length
+                : 0}
+            </span>
           </div>
         </button>
-        <span className="z-50 text-sm mt-2" onClick={(e) => showCartDropDown()}>
+        <span className="z-50 mt-2 text-sm" onClick={(e) => showCartDropDown()}>
           <CartDropdown />
         </span>
         <Link href="/order" passHref>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-          />
-        </svg>
-      </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+            />
+          </svg>
+        </Link>
       </div>
     </>
   );

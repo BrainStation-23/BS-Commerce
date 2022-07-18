@@ -28,6 +28,16 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  CustomerAddress,
+  AddCustomerNewAddressResponse,
+  GetCustomerInformationResponse,
+  GetCustomerInformationSuccessResponse,
+  DeleteCustomerAddressResponse,
+  DeleteCustomerAddressSuccessResponse,
+  UpdateCustomerAddressSuccessResponse,
+  UpdateCustomerAddressResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -243,6 +253,93 @@ export async function deleteFullWishlistRest(): Promise<
     return error;
   }
 }
+
 export async function deleteFromCompareRest(productId: AddCompareItem) {
   await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
+}
+
+export async function getCustomerProfileRest(
+  token: string
+): Promise<GetCustomerInformationResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data.data as GetCustomerInformationSuccessResponse;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function addCustomerNewAddressRest(
+  customerAddress: CustomerAddress
+): Promise<AddCustomerNewAddressResponse | undefined> {
+  try {
+    const res = await axios.put(
+      `${apiEndPoints.addCustomerAddress}`,
+      customerAddress
+    );
+    toast.success('New Address added');
+    return res.data.data;
+  } catch (error: any) {
+    toast.error('Failed to add New Address');
+    return error;
+  }
+}
+
+export async function deleteCustomerAddressRest(
+  addressId: string
+): Promise<DeleteCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteCustomerAddress}/${addressId}`
+    );
+    toast.success('Address deleted successfully');
+    return res.data as DeleteCustomerAddressSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerAddressRest(
+  addressId: string,
+  data: CustomerAddress
+): Promise<UpdateCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.patch(
+      `${apiEndPoints.updateCustomerAddress}/${addressId}`,
+      data
+    );
+    toast.success('Address updated successfully');
+    return res.data as UpdateCustomerAddressSuccessResponse;
+  } catch (error) {
+    toast.error('Address update failed');
+    return error;
+  }
+}
+
+export async function getCustomerRest(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.customer}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerRest(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  try {
+    const response = await axios.patch(`${apiEndPoints.customer}`, data);
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
 }

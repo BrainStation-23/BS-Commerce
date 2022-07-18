@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import type { NextComponentType } from "next";
+import type { NextComponentType } from 'next';
 
 const DeilveryInstructions: NextComponentType = () => {
   return (
     <>
       <div>
-        <div className="max-w-xl  overflow-hidden shadow-lg">
-          <div className="bg-black w-full">
-            <div className="text-white px-4 py-2 text-base font-medium">
+        <div className="overflow-hidden shadow-lg">
+          <div className="w-full bg-black">
+            <div className="px-4 py-2 text-base font-medium text-white">
               SPECIAL INSTRUCTIONS FOR SELLER
             </div>
           </div>
@@ -16,7 +16,7 @@ const DeilveryInstructions: NextComponentType = () => {
             <div>
               <span>
                 <input
-                  className="shadow appearance-none border rounded w-full h-36 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="focus:shadow-outline h-36 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
                   type="text"
                 />
               </span>

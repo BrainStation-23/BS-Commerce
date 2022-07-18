@@ -1,9 +1,6 @@
 import React from 'react';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import Path from '@/components/global/components/path';
-import OrderList from '@/components/checkout/orderList';
 import CheckoutFooter from '../checkoutFooter';
-import Link from 'next/link';
 import { useAppSelector } from 'customHooks/hooks';
 
 interface Props {

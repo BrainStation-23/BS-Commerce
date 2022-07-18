@@ -1,5 +1,4 @@
 import React from 'react';
-import type { NextComponentType } from 'next';
 import TableData from './tableData';
 import moment from 'moment';
 import { IOrderResponseData } from 'models';
@@ -8,10 +7,9 @@ interface Props {
 }
 
 const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
-
   return (
     <>
-      <div className="xl:px-30 2xl:40 py-20 md:px-2 lg:px-20">
+      <div>
         <div
           style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px' }}
         >
@@ -22,7 +20,7 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             #{singleOrder.orderId}
           </div>
         </div>
-        <div >
+        <div>
           <div
             style={{
               border: '1px solid LightGray',
@@ -34,18 +32,22 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
           >
             <b>Order Summery</b>
             <div className="d-flex justify-content-between">
-              <div>Order Created : {moment(singleOrder.orderedDate).format('ll')}</div>
+              <div>
+                Order Created : {moment(singleOrder.orderedDate).format('ll')}
+              </div>
             </div>
 
             <div className="d-flex justify-content-between">
-              <div>Order Time : {moment(singleOrder.orderedDate).format('LT')}</div>
+              <div>
+                Order Time : {moment(singleOrder.orderedDate).format('LT')}
+              </div>
             </div>
 
-            <div className="d-flex justify-content-between">
+            <div>
               <div>Subtotal : ${singleOrder.totalCost}</div>
             </div>
 
-            <div className="d-flex justify-content-between">
+            <div>
               <div>Delivery Fee : $00</div>
             </div>
           </div>
@@ -62,11 +64,15 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             <b>Delivery Address</b>
 
             <div className="d-flex justify-content-between">
-              <div>Address line: {singleOrder.shippingAddress.addressLine1}</div>
+              <div>
+                Address line: {singleOrder.shippingAddress.addressLine1}
+              </div>
             </div>
 
             <div className="d-flex justify-content-between">
-              <div>Flat/Building Name: {singleOrder.shippingAddress.addressLine2}</div>
+              <div>
+                Flat/Building Name: {singleOrder.shippingAddress.addressLine2}
+              </div>
             </div>
             <div className="d-flex justify-content-between">
               <div>Postcode: {singleOrder.shippingAddress.postCode}</div>
@@ -85,7 +91,10 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             <b>Customer Details</b>
 
             <div className="d-flex justify-content-between">
-              <div>Customer Name: {singleOrder.shippingAddress.firstName} {singleOrder.shippingAddress.lastName}</div>
+              <div>
+                Customer Name: {singleOrder.shippingAddress.firstName}{' '}
+                {singleOrder.shippingAddress.lastName}
+              </div>
             </div>
 
             <div className="d-flex justify-content-between">
@@ -101,6 +110,9 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
         <table className="border-collapse border border-slate-400">
           <thead className="">
             <tr>
+              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
+                Image
+              </th>
               <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
                 Product
               </th>
