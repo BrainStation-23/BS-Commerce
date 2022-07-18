@@ -28,6 +28,8 @@ import {
   deleteAllWishlistItemsResponse,
   AddCompareItem,
   CompareResponse,
+  CustomerAddress,
+  AddCustomerNewAddressResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -250,15 +252,32 @@ export async function deleteFromCompareRest(productId: AddCompareItem) {
   await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
 }
 
-export async function getCustomerProfileRest(token: string): Promise<GetCustomerInformationResponse | undefined> {
+export async function getCustomerProfileRest(
+  token: string
+): Promise<GetCustomerInformationResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
-    return res.data.data as GetCustomerInformationSuccessResponse
-  } catch(error) {
+    return res.data.data as GetCustomerInformationSuccessResponse;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function addCustomerNewAddressRest(
+  customerAddress: CustomerAddress
+): Promise<AddCustomerNewAddressResponse | undefined> {
+  try {
+    const res = await axios.put(
+      `${apiEndPoints.addCustomerAddress}`,
+      customerAddress
+    );
+    toast.success('New Address added');
+    return res.data.data;
+  } catch (error: any) {
     return error;
   }
 }

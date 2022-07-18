@@ -65,7 +65,7 @@ const AccountDetails: NextComponentType = () => {
             <div className="text-center md:text-left">
               <span className="text-4xl">Your Addresses</span>
 
-              {customerAddresses.length > 0 && (
+              {customerAddresses?.length > 0 && (
                 <>
                   {customerAddresses?.map((customerAddress, index) => {
                     return (
