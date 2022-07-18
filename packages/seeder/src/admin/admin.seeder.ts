@@ -5,7 +5,7 @@ const admins = [
         id: "33d9cad4-b68d-4fc9-ac61-e0f7e5ba2727",
         firstName: "John",
         lastName: "Doe",
-        email: "jorndoe@gmail.com",
+        email: "johndoe@gmail.com",
         password: "$2b$10$y8wsnqy4F9T5jjjRDdsjSehgdKWPk/zioqIObTm/xJBlfRKyG30FW", // plain password is "admin@123"
     }
 ];
