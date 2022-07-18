@@ -10,7 +10,7 @@ import categoryReducer from "toolkit/categorySlice"
 import checkoutReducer from "toolkit/checkoutSlice";
 import modalReducer from "toolkit/modalSlice";
 import compareReducer from "toolkit/compareSlice";
-
+import CustomerAddressReducer from "toolkit/customerAddressSlice";
 
 const reducers = combineReducers({
   product: productsReducer,
@@ -21,6 +21,7 @@ const reducers = combineReducers({
   checkout: checkoutReducer,
   modal: modalReducer,
   compare: compareReducer,
+  customerAddress: CustomerAddressReducer,
 });
 
 const persistConfig = {

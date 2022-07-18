@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { GetCustomerInformationResponse } from 'models';
 import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -150,4 +151,8 @@ export async function deleteFullWishlistGraphql(): Promise<deleteAllWishlistItem
   return undefined;
 }
 export async function deleteFromCompareGraphql(productId: AddCompareItem) {
+}
+
+export async function getCustomerProfileGraphql(token: string): Promise<GetCustomerInformationResponse | undefined> {
+  return undefined;
 }

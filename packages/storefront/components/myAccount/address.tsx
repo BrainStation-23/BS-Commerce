@@ -1,23 +1,30 @@
 import { NextComponentType } from 'next';
 import Link from 'next/link';
+import React from 'react';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
 import AddNewAddressForm from './addNewAddressForm';
+import { useAppSelector } from 'customHooks/hooks';
+import SingleAddress from './singleAddress';
 
 const AccountDetails: NextComponentType = () => {
   const [showAddAddress, setShowAddAddress] = useState('hidden');
-  const [showEditAddress, setShowEditAddress] = useState('hidden');
+  // const [showEditAddress, setShowEditAddress] = useState('hidden');
+
+  const customerAddresses = useAppSelector(
+    (state) => state.persistedReducer.customerAddress.addresses
+  );
 
   const addButtonOnClick = () => {
     showAddAddress === '' ? setShowAddAddress('hidden') : setShowAddAddress('');
   };
 
-  const editButtonOnClick = () => {
-    showEditAddress === ''
-      ? setShowEditAddress('hidden')
-      : setShowEditAddress('');
-  };
+  // const editButtonOnClick = () => {
+  //   showEditAddress === ''
+  //     ? setShowEditAddress('hidden')
+  //     : setShowEditAddress('');
+  // };
 
   return (
     <>
@@ -57,41 +64,25 @@ const AccountDetails: NextComponentType = () => {
             </div>
             <div className="text-center md:text-left">
               <span className="text-4xl">Your Addresses</span>
-              <div className="mt-2 text-3xl">Customer Name (Default)</div>
-              <div className="mt-32 mb-5"> Bangladesh </div>
 
-              <div>
-                {/* <Link href="/account/addresses"> */}
-                <span
-                  className="cursor-pointer hover:text-blue-600"
-                  onClick={() => editButtonOnClick()}
-                >
-                  Edit{' '}
-                </span>
-                {/* </Link> */}
-                <span>| </span>
-                <span className="cursor-pointer hover:text-blue-600">
-                  Delete
-                </span>
-              </div>
-            </div>
-            <div className={`${showEditAddress}`}>
-              <hr className="my-2" />
-              <p className="my-5 font-bold">Edit Address</p>
-              <AddNewAddressForm
-                user={{
-                  firstName: 'firstName',
-                  lastName: 'lastName',
-                  address1: 'address1',
-                  address2: 'address2',
-                  city: 'city',
-                  postalCode: '1200',
-                  phone: '01521427376',
-                  tag: 'eta tag ?',
-                }}
-                cancelForm={editButtonOnClick}
-              />
-              <hr className="my-2" />
+              {customerAddresses.length > 0 && (
+                <>
+                  {customerAddresses?.map((customerAddress, index) => {
+                    return (
+                      <React.Fragment key={customerAddress?.id!}>
+                        {index === 0 && (
+                          <div className="flex flex-wrap gap-x-2 text-4xl">
+                            <p>{customerAddress?.firstName!}</p>
+                            <p>{customerAddress?.lastName!}</p>
+                            <p>(Default)</p>
+                          </div>
+                        )}
+                        <SingleAddress singleAddress={customerAddress} />
+                      </React.Fragment>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </div>
         </div>

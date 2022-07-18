@@ -32,6 +32,8 @@ import {
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
+import { GetCustomerInformationResponse } from 'models';
+import { GetCustomerInformationSuccessResponse } from 'models';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -239,6 +241,20 @@ export async function deleteFullWishlistRest(): Promise<deleteAllWishlistItemsRe
     return error;
   }
 }
+
 export async function deleteFromCompareRest(productId: AddCompareItem) {
   await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
+}
+
+export async function getCustomerProfileRest(token: string): Promise<GetCustomerInformationResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return res.data.data as GetCustomerInformationSuccessResponse
+  } catch(error) {
+    return error;
+  }
 }
