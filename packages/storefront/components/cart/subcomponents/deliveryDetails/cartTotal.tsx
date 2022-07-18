@@ -27,12 +27,12 @@ const CartTotal: NextComponentType = () => {
             <table className="border-collapse border border-slate-400">
               <tbody>
                 <tr>
-                  <td className="ml-20 border border-slate-300 px-4 py-5 md:px-6 xl:px-8">
+                  <td className="ml-20 border border-slate-300 px-8 py-5 md:px-8 lg:px-8 xl:px-8">
                     <span className="mr-8 font-semibold md:mr-24 xl:mr-24">
                       Subtotal
                     </span>
                   </td>
-                  <td className="ml-20 border border-slate-300 px-4 py-5 md:px-6 xl:px-8">
+                  <td className="mx-5 ml-20 border border-slate-300 px-5 py-5 md:px-8 lg:px-8 xl:px-8">
                     <span className="mr-12 font-semibold md:mr-24 xl:mr-24">
                       ${totalCartPrice}
                     </span>
