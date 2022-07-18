@@ -10,7 +10,7 @@ async function run() {
 
         for (const file of seederfiles) {
             const fileName = file.replace('.ts', '');
-            const { seed } = await import(`./${fileName}`);
+            const { seed } = await import(`./${fileName}`) as { seed: () => Promise<void> };
             await seed();
         }
     }
@@ -20,8 +20,8 @@ async function run() {
     }
 }
 
-const getListOfFiles = (rootDir) => {
-    const seederFiles = [];
+const getListOfFiles = (rootDir: string): string[] => {
+    const seederFiles: string[] = [];
     const rootFilesAndDirectories = fs.readdirSync(rootDir);
 
     rootFilesAndDirectories.forEach(fileOrDirectory => {
