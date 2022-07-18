@@ -7,62 +7,15 @@ import { tagsOption } from '@/components/products/models/index';
 
 const ProductInfoForm: FC = () => {
   const [tags, setTags] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
   const [tagsOptions, setTagsOption] = useState<tagsOption[]>([]);
+  const [brandsOptions, setBrandsOption] = useState<tagsOption[]>([]);
 
   const toggleButton = () => {
     if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
     else setBtnToggler('bi-plus-lg');
   };
-  // const tagsOptions = [
-  //   {
-  //     label: "Tag1",
-  //     value: "Tag1",
-  //   },
-  //   {
-  //     label: "Tag2",
-  //     value: "Tag2",
-  //   },
-  //   {
-  //     label: "Tag3",
-  //     value: "Tag3",
-  //   },
-  //   {
-  //     label: "Tag4",
-  //     value: "Tag4",
-  //   },
-  //   {
-  //     label: "Tag5",
-  //     value: "Tag5",
-  //   },
-  // ];
-
-  const brandOptions = [
-    {
-      label: 'Daraz',
-      value: 'Daraz',
-    },
-    {
-      label: 'Pickaboo',
-      value: 'Pickaboo',
-    },
-    {
-      label: 'Chaldal',
-      value: 'Chaldal',
-    },
-    {
-      label: 'Bagdoom',
-      value: 'Bagdoom',
-    },
-    {
-      label: 'Othoba',
-      value: 'Othoba',
-    },
-    {
-      label: 'Ajkerdeal',
-      value: 'Ajkerdeal',
-    },
-  ];
   const getTags = async () => {
     const res = await userAPI.getTags();
     const data = res?.data;
@@ -79,10 +32,28 @@ const ProductInfoForm: FC = () => {
     });
   };
 
+  const getBrands = async () => {
+    const data = await userAPI.getBrands();
+    data ? setBrands(data) : '';
+  };
+  const setBrandsOptions = () => {
+    const temp: tagsOption[] = [];
+    brands?.map((brnad) => {
+      temp.push({
+        label: brnad?.info?.name,
+        value: brnad?.info?.name,
+      });
+      setBrandsOption(temp);
+    });
+  };
   useEffect(() => {
     tags[0] ? '' : getTags();
     tagsOptions[0] ? '' : setTagsOptions();
   }, [tagsOptions, tags]);
+  useEffect(() => {
+    brands[0] ? '' : getBrands();
+    brandsOptions[0] ? '' : setBrandsOptions();
+  }, [brandsOptions, brands]);
   return (
     <>
       <div
@@ -249,7 +220,7 @@ const ProductInfoForm: FC = () => {
               fieldID="brands"
               fieldType="none"
               fieldClass="custom-select w-100"
-              options={brandOptions}
+              options={brandsOptions}
               component={CustomSelect}
               placeholder="Select brands..."
               ismulti={true}

@@ -84,7 +84,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-diagram-3-fill col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -118,7 +118,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                     id="SelectedCategoryIds"
                     name="SelectedCategoryIds"
                     data-role="multiselect"
-                    className="form-control single-line border-bottom rounded-0 border border-0 border-2 shadow-none"
+                    className="form-control single-line border-bottom rounded-0 border-2 shadow-none"
                     aria-disabled="false"
                   >
                     <option defaultValue={0} value={0} disabled={true}>
@@ -132,7 +132,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                             value={data.id}
                             disabled={data.isSelected}
                           >
-                            {data.value}
+                            {data.name}
                           </option>
                         );
                       }
