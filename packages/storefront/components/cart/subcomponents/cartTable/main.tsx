@@ -20,23 +20,43 @@ const CartDetails: NextComponentType = () => {
     <>
       <div>
         <div className="flex hidden justify-center md:flex">
-          <DataTable />
+          {cartData.length > 0 ? (
+            <DataTable />
+          ) : (
+            <>
+              <div className="container mx-5 mt-5 w-full flex-col justify-start gap-y-2">
+                <p className="text-3xl">Shopping Cart</p>
+                <p className="text-2xl">Your cart is currently empty.</p>
+                <p className="text-sm">
+                  Continue browsing{' '}
+                  <span className=" hover:text-green-600">
+                    <Link href="/" passHref>
+                      here
+                    </Link>
+                  </span>
+                </p>
+                <hr className="mt-14 mb-10" />
+              </div>
+            </>
+          )}
         </div>
         {cartData.length > 0 ? (
           <div className="md:hidden">
             <ItemsLists />
           </div>
         ) : (
-          <div className="my-5 mx-5 flex-col justify-center text-xl md:hidden">
-            <p>Your cart is currently empty.</p>
-            <p>
+          <div className=" mx-5 mt-5 flex-col justify-center gap-y-2 md:hidden">
+            <p className="text-2xl">Shopping Cart</p>
+            <p className="text-xl">Your cart is currently empty.</p>
+            <p className="text-xs">
               Continue browsing{' '}
-              <span className="hover:text-green-600">
+              <span className=" hover:text-green-600">
                 <Link href="/" passHref>
                   here
                 </Link>
               </span>
             </p>
+            <hr className="mt-14 mb-10" />
           </div>
         )}
         <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
