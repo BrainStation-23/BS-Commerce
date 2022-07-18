@@ -5,12 +5,14 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
   ValidateNested
 } from 'class-validator';
 import { IOrderAddress, IOrderCreateData, IProductOrderData } from 'models';
+import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
@@ -52,7 +54,8 @@ export class OrderAddressDto implements IOrderAddress {
   @MinLength(2)
   @MaxLength(30)
   @IsString()
-  country: string;
+  @IsOptional()
+  country?: string;
 
   @ApiProperty({ example: '3421' })
   @MinLength(2)
@@ -81,6 +84,12 @@ export class ProductOrderDto implements IProductOrderData {
   @IsNumber()
   price: number;
 
+  //photo added for response
+  @ApiProperty({ type: [ProductPhotoDto] })
+  @IsOptional()
+  @IsArray()
+  photos?: ProductPhotoDto[];
+  
   @ApiProperty({ example: 2 })
   @IsNumber()
   quantity: number;

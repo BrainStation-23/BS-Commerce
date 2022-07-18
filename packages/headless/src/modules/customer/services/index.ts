@@ -30,6 +30,12 @@ export class CustomerService {
         let customer = await this.customerRepo.findCustomer({ id: customerId });
         if (!customer) return this.helper.serviceResponse.errorResponse(GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
 
+        const emailMatch = customer?.email && await this.customerRepo.findCustomer({ email: customer.email, id: { $ne: customerId } });
+        if (emailMatch) return this.helper.serviceResponse.errorResponse(UpdateCustomerAddressErrorMessages.CUSTOMER_EMAIL_MATCH, null, HttpStatus.BAD_REQUEST);
+
+        const phoneMatch = customer?.phone && await this.customerRepo.findCustomer({ phone: customer.phone, id: { $ne: customerId } });
+        if (phoneMatch) return this.helper.serviceResponse.errorResponse(UpdateCustomerAddressErrorMessages.CUSTOMER_PHONE_MATCH, null, HttpStatus.BAD_REQUEST);
+
         customer = Object.assign(customer, data);
 
         const updatedCustomer = await this.customerRepo.updateCustomer(customerId, customer);

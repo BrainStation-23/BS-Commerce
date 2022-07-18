@@ -30,17 +30,16 @@ import {
   CompareResponse,
   CustomerAddress,
   AddCustomerNewAddressResponse,
+  GetCustomerInformationResponse,
+  GetCustomerInformationSuccessResponse,
+  DeleteCustomerAddressResponse,
+  DeleteCustomerAddressSuccessResponse,
+  UpdateCustomerAddressSuccessResponse,
+  UpdateCustomerAddressResponse
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
-import { GetCustomerInformationResponse } from 'models';
-import { GetCustomerInformationSuccessResponse } from 'models';
-import { DeleteCustomerAddressResponse } from 'models';
-import { DeleteCustomerAddressSuccessResponse } from 'models';
-import { UpdateCustomerAddressSuccessResponse } from 'models';
-import { CustomerAddress } from 'models';
-import { UpdateCustomerAddressResponse } from 'models';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -290,6 +289,7 @@ export async function addCustomerNewAddressRest(
 export async function deleteCustomerAddressRest(addressId: string): Promise<DeleteCustomerAddressResponse | undefined> {
   try {
     const res = await axios.delete(`${apiEndPoints.deleteCustomerAddress}/${addressId}`);
+    toast.success('Address deleted successfully');
     return res.data as DeleteCustomerAddressSuccessResponse
   } catch(error) {
     return error;
@@ -299,6 +299,7 @@ export async function deleteCustomerAddressRest(addressId: string): Promise<Dele
 export async function updateCustomerAddressRest(addressId: string, data: CustomerAddress): Promise<UpdateCustomerAddressResponse | undefined> {
   try {
     const res = await axios.patch(`${apiEndPoints.updateCustomerAddress}/${addressId}`, data);
+    toast.success('Address updated successfully');
     return res.data as UpdateCustomerAddressSuccessResponse
   } catch(error) {
     return error;
