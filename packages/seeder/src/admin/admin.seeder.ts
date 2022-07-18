@@ -1,4 +1,5 @@
 import { UserModel } from "./admin.model";
+import * as bcrypt from 'bcrypt';
 
 const admins = [
     {
@@ -6,12 +7,15 @@ const admins = [
         firstName: "John",
         lastName: "Doe",
         email: "johndoe@gmail.com",
-        password: "$2b$10$y8wsnqy4F9T5jjjRDdsjSehgdKWPk/zioqIObTm/xJBlfRKyG30FW", // plain password is "admin@123"
+        password: "admin@123"
     }
 ];
 
 const seed = async () => {
     await UserModel.collection.drop();
+    admins.forEach(async admin => {
+        admin.password = await bcrypt.hash(admin.password, 10);
+    })
     await UserModel.insertMany(admins);
     console.log('Completed Admin Data seeding');
 };
