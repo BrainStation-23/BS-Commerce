@@ -27,7 +27,7 @@ const Signup = () => {
             toast.warning('User with this email already exists');
             setLoading(false);
           } else if (
-            response.response.data.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
+            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
           ) {
             toast.warning('User with this phone number already exists');
             setLoading(false);
