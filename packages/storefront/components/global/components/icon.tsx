@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { AddCompareItem, Product } from 'models';
+import {  Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist } from 'toolkit/productsSlice';
@@ -15,7 +15,6 @@ interface SingleProduct {
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
-  const [modalOn, setModalOn] = useState(false);
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -55,7 +54,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       quantity: 1,
     };
     dispatch(addToCart(cartItem));
-    setModalOn(true);
   };
 
   const handleAddToCompare = async () => {

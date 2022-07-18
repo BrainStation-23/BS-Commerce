@@ -1,3 +1,4 @@
+import { GetCustomerInformationResponse } from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -107,6 +108,7 @@ export interface apiFunction {
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>
   addToCompare: (productId: AddCompareItem) => Promise<CompareResponse | undefined>
   deleteFromCompare: (productId: AddCompareItem) => {}
+  getCustomerProfile: (token: string) => Promise<GetCustomerInformationResponse | undefined>
 }
 
 export interface ProductStore {

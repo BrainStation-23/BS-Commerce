@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import type { NextComponentType } from 'next';
+import React from 'react';
 import ShowData from './showData';
 import Link from 'next/link';
 import { IOrderResponseData } from 'models';
@@ -13,7 +12,7 @@ const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
   return (
     <>
       <div className="xl:px-30 2xl:40 py-20 md:px-2 lg:px-20">
-        <table className="border-collapse border border-slate-400">
+        <table className="border-collapse border border-slate-400  ">
           <thead className="">
             <tr>
               <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base md:px-8">
@@ -44,11 +43,6 @@ const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
               : "You haven't placed any order yet"}
           </tbody>
         </table>
-        <div className="mt-8" style={{ textAlign: 'center' }}>
-          <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
-            <Link href="/">Go to home page</Link>
-          </button>
-        </div>
       </div>
     </>
   );

@@ -47,7 +47,7 @@ const Header: NextComponentType = () => {
   console.log(categories);
 
   const allCategories: menuLink[] = [];
-  categories.categories.forEach((category) => {
+  categories?.categories?.forEach((category) => {
     allCategories.push({
       name: category.name,
       link: {

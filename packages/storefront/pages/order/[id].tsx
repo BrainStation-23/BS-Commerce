@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 var cookie = require('cookie');

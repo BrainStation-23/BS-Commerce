@@ -1,8 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { createMock } from '@golevelup/ts-jest';
 import * as request from 'supertest';
-
 import { connectTestDatabase } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
