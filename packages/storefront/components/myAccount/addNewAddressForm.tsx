@@ -1,13 +1,17 @@
+import { userAPI } from 'APIs';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { CustomerAddress } from 'models';
 import { NextComponentType } from 'next';
 import { FC } from 'react';
 interface props {
   user: any;
   cancelForm: any;
+  id: string;
 }
-const AddNewAddressForm: FC = ({ user, cancelForm }: any) => {
-  const handleAddressSubmit = (data: any) => {
+const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
+  const handleAddressSubmit = async (data: CustomerAddress, id: string) => {
     console.log(data);
+    await userAPI.updateCustomerAddress(id, data);
   };
 
   return (
@@ -26,7 +30,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm }: any) => {
               tag: user?.tag ? user.tag : '',
             }}
             onSubmit={(values, actions) => {
-              handleAddressSubmit(values);
+              handleAddressSubmit(values, id);
               actions.setSubmitting(false);
             }}
           >

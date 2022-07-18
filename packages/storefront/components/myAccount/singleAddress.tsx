@@ -73,6 +73,7 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
                 phone: singleAddress?.phone,
                 tag: singleAddress?.tag,
               }}
+              id={singleAddress?.id}
               cancelForm={editButtonOnClick}
             />
             <hr className="my-2" />

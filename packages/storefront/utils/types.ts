@@ -1,4 +1,6 @@
 import { DeleteCustomerAddressResponse } from 'models';
+import { UpdateCustomerAddressResponse } from 'models';
+import { CustomerAddress } from 'models';
 import { GetCustomerInformationResponse } from 'models';
 import {
   CustomerSignInResponse,
@@ -111,6 +113,7 @@ export interface apiFunction {
   deleteFromCompare: (productId: AddCompareItem) => {}
   getCustomerProfile: (token: string) => Promise<GetCustomerInformationResponse | undefined>
   deleteCustomerAddress: (addressId: string) => Promise<DeleteCustomerAddressResponse | undefined>
+  updateCustomerAddress: (addressId: string, data: CustomerAddress) => Promise<UpdateCustomerAddressResponse| undefined>
 }
 
 export interface ProductStore {
