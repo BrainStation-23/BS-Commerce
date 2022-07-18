@@ -19,6 +19,8 @@ export interface UpdateCustomerAddressSuccessResponse extends SuccessResponse {
 
 export const enum UpdateCustomerAddressErrorMessages {
     CAN_NOT_UPDATE_CUSTOMER_ADDRESS = 'CAN_NOT_UPDATE_CUSTOMER_ADDRESS',
+    CUSTOMER_EMAIL_MATCH = 'CUSTOMER_EMAIL_MATCH',
+    CUSTOMER_PHONE_MATCH = 'CUSTOMER_PHONE_MATCH',
 }
 
 export interface UpdateCustomerAddressErrorResponse extends ErrorResponse {
