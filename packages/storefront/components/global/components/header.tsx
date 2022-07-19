@@ -12,6 +12,7 @@ import HeaderAccount from '@/components/global/components/header-account';
 import Language from '@/components/global/components/languages';
 import Search from '@/components/global/components/search';
 import { userAPI } from 'APIs';
+import { HeaderCategory } from './headerCategory';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await userAPI.getCategoryList();
@@ -43,34 +44,6 @@ const Header: NextComponentType = () => {
   const categories = useAppSelector(
     (state) => state.persistedReducer.category.category
   );
-
-  // console.log(categories);
-
-  const allCategories: menuLink[] = [];
-  categories?.categories?.forEach((category) => {
-    allCategories.push({
-      name: category.name,
-      link: {
-        pathname: `/collections/${category.name}`,
-        query: {
-          categoryId: category.id,
-          name: category.name,
-        },
-      },
-      hasSubmenu: false,
-    });
-  });
-  // const allCategories: menuLink[] = [
-  //   { name: "vegetable", link: "/", hasSubmenu: true },
-  //   { name: "fruits", link: "/", hasSubmenu: true },
-  //   { name: "salads", link: "/", hasSubmenu: true },
-  //   { name: "fish & seafood", link: "/", hasSubmenu: false },
-  //   { name: "fresh meat", link: "/", hasSubmenu: false },
-  //   { name: "butter & eggs", link: "/", hasSubmenu: false },
-  //   { name: "milk", link: "/", hasSubmenu: false },
-  //   { name: "oil & vinegars", link: "/", hasSubmenu: false },
-  //   { name: "bread", link: "/", hasSubmenu: false },
-  // ];
 
   const menus: menuLink[] = [
     {
@@ -135,6 +108,8 @@ const Header: NextComponentType = () => {
         : setStickyClass('relative');
     }
   };
+
+  useEffect(() => {});
 
   useEffect(() => {
     window.addEventListener('scroll', setStickyNavbar);
@@ -233,44 +208,21 @@ const Header: NextComponentType = () => {
                 />
               </svg>
             </div>
+            {categories ? (
+              <div
+                className={`absolute top-[40px] z-40 flex w-11/12 flex-col gap-y-4 rounded-b-sm bg-white px-4 py-3 text-base text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
+                  isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
+                }`}
+              >
+                {console.log(categories)}
 
-            <div
-              className={`absolute top-[40px] z-40 flex w-11/12 flex-col gap-y-4 overflow-hidden rounded-b-sm bg-white px-4 py-3 text-base text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
-                isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
-              }`}
-            >
-              {allCategories.map((category) => (
-                <div
-                  key={category.name}
-                  className="flex flex-row justify-between text-sm"
-                >
-                  <Link
-                    href={category.link}
-                    as={`/collections/${category.name}`}
-                  >
-                    <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
-                      {category.name}
-                    </a>
-                  </Link>
-                  <div className="md:hidden">
-                    {category.hasSubmenu && (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3 w-3"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                {categories?.categories?.map((category) => (
+                  <HeaderCategory category={category} />
+                ))}
+              </div>
+            ) : (
+              ''
+            )}
             {/* Menu */}
             <div
               className={`fixed top-0 z-40 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
