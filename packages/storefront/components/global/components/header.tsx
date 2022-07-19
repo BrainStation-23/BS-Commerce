@@ -130,7 +130,7 @@ const Header: NextComponentType = () => {
       let windowHeight = window.scrollY;
       windowHeight >= 140
         ? setStickyClass(
-            'lg:fixed lg:top-0 lg:left-0 lg:z-50 lg:bg-white/95 lg:w-full lg:shadow-lg'
+            'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 lg:w-full lg:shadow-lg'
           )
         : setStickyClass('relative');
     }

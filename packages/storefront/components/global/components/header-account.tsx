@@ -30,7 +30,15 @@ const HeaderAccount: React.FC<Properties> = () => {
     (state) => state.persistedReducer.product.wishlist
   );
 
-  const user = useAppSelector((state) => state.persistedReducer.user.user);
+  const customer = useAppSelector(
+    (state) => state.persistedReducer.user.customerDetails
+  );
+
+  const user = customer?.firstName
+    ? customer?.firstName + ' ' + customer?.lastName
+    : customer?.email
+    ? customer?.email
+    : customer?.phone;
 
   const handleLogout = () => {
     localStorage.clear();
