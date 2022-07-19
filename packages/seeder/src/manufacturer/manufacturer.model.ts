@@ -1,6 +1,6 @@
 // import { Manufacturer } from 'models';
 import { model, Schema } from 'mongoose';
-import { Manufacturer } from '../../../headless/src/entity/manufacturer';
+import { Manufacturer } from 'models';
 
 const ManufacturerSchema = new Schema<Manufacturer>(
     {
