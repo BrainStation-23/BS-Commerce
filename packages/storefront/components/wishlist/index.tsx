@@ -17,7 +17,9 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 import WithAuth from '@/components/auth/withAuth';
-import Modal from '@/components/global/components/modal';
+import Modal from '@/components/global/components/modal/modal';
+import Icon from '@/components/global/components/icon';
+import ModalCompare from '@/components/comparison';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +30,9 @@ const WishlistComponent: NextComponentType = () => {
     (state) => state.persistedReducer.product.wishlist
   );
 
+  const modalState = useAppSelector(
+    (state) => state.persistedReducer.modal.setModal
+  );
   //console.log(wishlistData);
 
   const handleDeleteAllWishlistItems = async () => {
@@ -40,15 +45,15 @@ const WishlistComponent: NextComponentType = () => {
     }
   };
 
-  async function handleClick(data: string) {
-    try {
-      await userAPI.deleteWishlistItem(data);
-      toast.success('Item removed from wishlist');
-      dispatch(deleteItemFromWishlist(data));
-    } catch (error) {
-      toast.error('Failed to remove item from wishlist');
-    }
-  }
+  // async function handleClick(data: string) {
+  //   try {
+  //     await userAPI.deleteWishlistItem(data);
+  //     toast.success('Item removed from wishlist');
+  //     dispatch(deleteItemFromWishlist(data));
+  //   } catch (error) {
+  //     toast.error('Failed to remove item from wishlist');
+  //   }
+  // }
 
   return (
     <>
@@ -57,12 +62,14 @@ const WishlistComponent: NextComponentType = () => {
         pathArray={['Home', 'Wishlist']}
         linkArray={['/', '/wishlist']}
       />
-      {modalOn && (
-        wishlistData.items?.length! > 0 && <Modal
+      {modalState && <ModalCompare setModal={true} />}
+      {modalOn && wishlistData.items?.length! > 0 && (
+        <Modal
           setModalOn={setModalOn}
           setChoice={setChoice}
           trigger={handleDeleteAllWishlistItems}
           modalTitle="Delete Wishlist"
+          bodyText="Are you sure?"
         />
       )}
       <div className="mx-5 flex items-center justify-between pt-3 lg:mx-16 xl:mx-16">
@@ -108,7 +115,7 @@ const WishlistComponent: NextComponentType = () => {
           return (
             <React.Fragment key={index}>
               <div className="flex flex-col flex-wrap items-center">
-              <Link
+                <Link
                   href={{
                     pathname: `product/${data?.product?.info.name}`,
                     query: {
@@ -119,19 +126,24 @@ const WishlistComponent: NextComponentType = () => {
                   //as={`product/${data?.product?.info.name}`}
                   passHref
                 >
-                  <div className="flex w-28 cursor-pointer flex-col items-center justify-center sm:w-28 md:w-44 lg:w-56 xl:w-56">
+                  <div className="relative flex w-56 cursor-pointer flex-col items-center justify-center">
                     <Picture
                       src={data.product?.photos[0]?.url!}
                       alt={data.product?.info.shortDescription}
                       width={200}
                       height={200}
                     />
+
+                    <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
+                      <Icon product={data?.product} />
+                    </div>
+
                     <div className="text-center">
                       <WishlistProductInfo product={data?.product!} />
                     </div>
                   </div>
                 </Link>
-                <button
+                {/* <button
                   className="peer mb-5 mt-2 items-center text-center"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
@@ -141,13 +153,7 @@ const WishlistComponent: NextComponentType = () => {
                   }}
                 >
                   <WishlistIcon height="h-6" width="w-6" />
-                </button>
-                {/* <div className="absolute -left-0 -top-0 mb-6 hidden flex-col items-center peer-hover:flex">
-                  <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-                    Add to cart
-                  </span>
-                  <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-                </div> */}
+                </button> */}
               </div>
             </React.Fragment>
           );

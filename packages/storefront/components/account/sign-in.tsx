@@ -8,7 +8,7 @@ import { CustomerSignInRequest } from 'models';
 
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeUserDetails } from 'toolkit/userSlice';
+import { storeCustomerDetails, storeUserDetails } from 'toolkit/userSlice';
 import { storeUserToken } from 'toolkit/authSlice';
 
 import Loading from '@/components/global/loader';
@@ -56,7 +56,9 @@ const Signin: NextComponentType = () => {
       });
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
-      getUser();
+      userAPI.getCustomer(datass?.data?.token).then((response) => {
+        dispatch(storeCustomerDetails(response?.data));
+      });
       setLoader(false);
       router.push('/');
       //router.back();

@@ -8,7 +8,9 @@ export interface UserState {
 
 const initialState: UserState = {
   user: '',
-  customerDetails: {}
+  customerDetails: {
+    id: ''
+  }
 };
 
 export const userSlice = createSlice({
