@@ -12,6 +12,7 @@ import HeaderAccount from '@/components/global/components/header-account';
 import Language from '@/components/global/components/languages';
 import Search from '@/components/global/components/search';
 import { userAPI } from 'APIs';
+import { HeaderCategory } from './headerCategory';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await userAPI.getCategoryList();
@@ -240,35 +241,7 @@ const Header: NextComponentType = () => {
               }`}
             >
               {allCategories.map((category) => (
-                <div
-                  key={category.name}
-                  className="flex flex-row justify-between text-sm"
-                >
-                  <Link
-                    href={category.link}
-                    as={`/collections/${category.name}`}
-                  >
-                    <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
-                      {category.name}
-                    </a>
-                  </Link>
-                  <div className="md:hidden">
-                    {category.hasSubmenu && (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-3 w-3"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                </div>
+                <HeaderCategory category={category} />
               ))}
             </div>
             {/* Menu */}
