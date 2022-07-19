@@ -6,6 +6,7 @@ export const apiEndPoints = {
   user: '/user',
   manufacturer: '/manufacturers/create',
   manufacturerList: '/manufacturers',
+  orderEnum: '/admin/order/enums',
   category: '/category',
   brands: '/brands',
   media: '/media',

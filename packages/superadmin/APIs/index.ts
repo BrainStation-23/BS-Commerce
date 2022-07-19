@@ -25,6 +25,7 @@ import {
   getTagsRest,
   getAllManufacturersRest,
   createBrandRest,
+  getOrderEnumRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -96,6 +97,7 @@ const restApi: apiFunction = {
   deleteManufacturer: deleteManufacturerRest,
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
+  getOrderEnum: getOrderEnumRest,
   getUserProfile: getUserProfileRest,
   getBrands: getBrandsRest,
   getBrand: getBrandRest,

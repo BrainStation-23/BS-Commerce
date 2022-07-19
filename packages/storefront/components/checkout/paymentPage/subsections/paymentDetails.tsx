@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import { useState } from 'react';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
@@ -114,25 +113,10 @@ const PaymentDetails: NextComponentType = () => {
       paypalRedirectUrl: '',
     };
     userAPI.checkout(obj).then((response: any) => {
-      if (response?.code === 200) {
-        toast.success('Order created successfully!');
-        router.push('/submit');
-        dispatch(deleteCart());
-        dispatch(deleteCheckoutInfo());
-      } else {
-        toast.success('Order created successfully!');
-        router.push('/submit');
-        dispatch(deleteCart());
-        dispatch(deleteCheckoutInfo());
-
-        // if (!token) {
-        //   toast.error('Order creation failed. You need to login in our site');
-        //   router.push('/account/sign-in');
-        // } else {
-        // toast.error('Order creation failed. Try again.');
-        // router.push('/checkout');
-        // }
-      }
+      toast.success('Order created successfully!');
+      router.push('/submit');
+      dispatch(deleteCart());
+      dispatch(deleteCheckoutInfo());
     });
   };
 

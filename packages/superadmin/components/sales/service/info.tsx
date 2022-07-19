@@ -1,9 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tooltip from "./tooltip";
 import { Field, Form, Formik } from "formik";
 import Modal from "./modal";
 import { FC } from "react";
+import { userAPI } from "@/APIs";
 interface SingleOrder {
     id: number;
     order_status: string;
@@ -14,6 +15,17 @@ interface SingleOrder {
 }
 
 const Info = ({singleOrder}: any) => {
+    const [orderEnum, setOrderEnum] = useState<any>();
+    const getAllOrderEnum = async () => {
+      const res = await userAPI.getOrderEnum();
+      res ? setOrderEnum(res?.data?.orderStatusEnums) : '';
+    };
+    useEffect(() => {
+        getAllOrderEnum();
+    }, []);
+
+    console.log("Order Enum ==========", orderEnum)
+
     function handleSearchSubmit(data: any) {
         console.log(data);
     }
@@ -137,7 +149,7 @@ const Info = ({singleOrder}: any) => {
                                             padding: "10px",
                                         }}
                                     >
-                                        Pending
+                                        {orderEnum.Pending}
                                     </a>
                                     <div className="dropdown-menu">
                                         <a href="#" className="dropdown-item">

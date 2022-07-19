@@ -288,6 +288,18 @@ export async function updateManufacturerRest(
   }
 }
 
+export async function getOrderEnumRest(): Promise<
+  any | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.orderEnum}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
 export async function getCategoryListRest(): Promise<
   getCategoryListSuccessResponse | undefined
 > {

@@ -52,6 +52,7 @@ export interface Address {
 }
 
 export interface apiFunction {
+  getOrderEnum: () => Promise<any | undefined>;
   getAllManufacturers();
   updateProduct: (
     data: any,

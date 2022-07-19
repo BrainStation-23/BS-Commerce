@@ -140,7 +140,7 @@ const CartDropdown: NextComponentType = () => {
             <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
               <div className=" rounded-md bg-white">
                 {/* new div starts here */}
-                <div className="h-48 overflow-y-scroll py-1">
+                <div className={cartData.length ? "h-48 overflow-y-scroll py-1": "h-20"}>
                   {cartData.length > 0 ? (
                     dropdownData()
                   ) : (
