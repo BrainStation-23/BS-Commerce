@@ -21,13 +21,13 @@ const Signup = () => {
   async function handleSignUp(data: CreateCustomerRequest) {
     try {
       setLoading(true);
-      userAPI.signUp(data).then((response: any) => {
+      await userAPI.signUp(data).then((response: any) => {
         if (response?.code !== 201) {
           if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
             toast.warning('User with this email already exists');
             setLoading(false);
           } else if (
-            response.response.data.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
+            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
           ) {
             toast.warning('User with this phone number already exists');
             setLoading(false);

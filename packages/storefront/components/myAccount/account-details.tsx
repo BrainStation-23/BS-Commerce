@@ -1,27 +1,30 @@
-import { NextComponentType } from 'next';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
+import { Customer, UpdateCustomerRequestBody } from 'models';
+import { CustomerSchema } from './schema/customer.schema';
+import { userAPI } from 'APIs';
 
-const AccountDetails: NextComponentType = () => {
+interface Props {
+  customer: Customer;
+}
+
+const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  //   const token = useAppSelector(
-  //     (state) => state.persistedReducer.auth.access_token
-  //   );
 
   const userData = {
-    name: 'Test User',
-    email: 'test@user.com',
-    firstName: 'Test',
-    lastName: 'User',
-    phone: '+8801674314359',
+    email: customer.email === undefined ? '' : customer.email,
+    firstName: customer.firstName === undefined ? '' : customer.firstName,
+    lastName: customer.lastName === undefined ? '' : customer.lastName,
+    phone: customer.phone === undefined ? '' : customer.phone,
+
     isPhoneVerified: false,
     isEmailVerified: true,
   };
@@ -32,10 +35,14 @@ const AccountDetails: NextComponentType = () => {
     toast.success('Logged out successfully!');
   };
 
-  const handleSubmit = (values: any) => {
-    console.log('clicked on save');
+  const handleSubmit = async (values: UpdateCustomerRequestBody) => {
+    // const firstName = values.firstName === '' ? null : values.firstName;
+    // const lastName = values.lastName === '' ? null : values.lastName;
+    // const phone = values.phone === '' ? null : values.phone;
+    // const email = values.email === '' ? null : values.email;
 
-    console.log(values);
+    const response = await userAPI.updateCustomer(values);
+    setEditable(false);
   };
 
   return (
@@ -67,6 +74,7 @@ const AccountDetails: NextComponentType = () => {
             phone: userData.phone,
             email: userData.email,
           }}
+          validationSchema={CustomerSchema}
           onSubmit={(values, actions) => {
             handleSubmit(values);
             actions.setSubmitting(false);

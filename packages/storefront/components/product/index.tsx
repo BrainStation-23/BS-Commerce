@@ -25,8 +25,12 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const wishlistData = useAppSelector(state => state.persistedReducer.product.wishlist);
-  const findWishlistProduct = wishlistData?.items?.find(item => item.productId === product.id);
+  const wishlistData = useAppSelector(
+    (state) => state.persistedReducer.product.wishlist
+  );
+  const findWishlistProduct = wishlistData?.items?.find(
+    (item) => item.productId === product.id
+  );
 
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -45,7 +49,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
 
-  if(findWishlistProduct) {
+  if (findWishlistProduct) {
     clicked = true;
   }
 
@@ -61,7 +65,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.modal.setModal
   );
 
-  const toCart = async (product: Product) => {
+  const toCart = async () => {
     const cartProduct = {
       id: product.id!,
       info: product.info!,
@@ -72,12 +76,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       productId: product.id!,
       quantity: amount,
     };
+    console.log(cartItem);
     setAmount(0);
     dispatch(addToCart(cartItem));
   };
 
   const toWishlist = async (id: string, quantity: number) => {
-   if (token) {
+    if (token) {
       const data = {
         productId: id,
         quantity,
@@ -86,11 +91,11 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         product: {
           id: id,
           info: product.info,
-          photos: product.photos
+          photos: product.photos,
         },
         productId: id,
-        quantity: quantity
-      }
+        quantity: quantity,
+      };
       try {
         await userAPI.addToWishList(data);
         const newList = await userAPI.getCustomerWishlist(token);
@@ -102,10 +107,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         console.log(error);
         toast.error('Failed to add item to wishlist');
       }
-    }
-    else {
+    } else {
       toast.error('Please login to your account first.');
-      router.push('/account/sign-in')
+      router.push('/account/sign-in');
     }
   };
 
@@ -120,20 +124,18 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         pathArray={['Home', product.info?.name]}
         linkArray={['/', '/product' + product.id]}
       />
-      {
-        modalState && <Modal setModal={true} />
-      }
+      {modalState && <Modal setModal={true} />}
       <section className="body-font overflow-hidden bg-white text-gray-700">
         <div className="container mx-auto px-5 py-24">
           <div>
             <div className="mx-auto flex flex-wrap">
-              <div className="md:w-1/2 w-full">
-                <div className="relative inset-0 bg-cover bg-center z-0">
+              <div className="w-full md:w-1/2">
+                <div className="relative inset-0 z-0 bg-cover bg-center">
                   <ProductImagesSlider product={product}></ProductImagesSlider>
                 </div>
               </div>
-              <div className="md:w-1/2 w-full md:pl-5 mt-10 md:mt-0 ">
-                <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
+              <div className="mt-10 w-full md:mt-0 md:w-1/2 md:pl-5 ">
+                <h2 className="title-font mb-1 text-xl font-normal text-gray-900">
                   {product.info.name}
                 </h2>
                 <div className="flex">
@@ -217,25 +219,25 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       <div className="flex">
                         <button
                           onClick={() => setSize('s')}
-                          className="hover:text-green-600 m-2"
+                          className="m-2 hover:text-green-600"
                         >
                           s
                         </button>
                         <button
                           onClick={() => setSize('m')}
-                          className="hover:text-green-600 m-2"
+                          className="m-2 hover:text-green-600"
                         >
                           m
                         </button>
                         <button
                           onClick={() => setSize('l')}
-                          className="hover:text-green-600 m-2"
+                          className="m-2 hover:text-green-600"
                         >
                           l
                         </button>
                         <button
                           onClick={() => setSize('xl')}
-                          className="hover:text-green-600 m-2"
+                          className="m-2 hover:text-green-600"
                         >
                           xl
                         </button>
@@ -250,24 +252,24 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       <span className="mr-3">Color:</span>
                       <button
                         onClick={() => setColor('white')}
-                        className="border-2 border-gray-300 w-6 h-6 active:outline"
+                        className="h-6 w-6 border-2 border-gray-300 active:outline"
                       ></button>
                       <button
                         onClick={() => setColor('black')}
-                        className="border-2 border-gray-300 ml-3 bg-gray-700 w-6 h-6 active:outline"
+                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-gray-700 active:outline"
                       ></button>
                       <button
                         onClick={() => setColor('red')}
-                        className="border-2 border-gray-300 ml-3 bg-red-500 w-6 h-6 active:outline"
+                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-red-500 active:outline"
                       ></button>
                     </div>
                   </div>
                 )}
 
                 <div className="flex text-black">
-                  <div className="flex lg:mx-2 title-text items-center">
+                  <div className="title-text flex items-center lg:mx-2">
                     Quantity
-                    <div className="m-1 md:ml-4 border-2 border-gray-200 rounded">
+                    <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
                       <button
                         onClick={() => setAmount(amount - 1)}
                         {...(amount <= 1 ? (disableDecrement = true) : null)}
@@ -288,8 +290,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </div>
                   {isAvailable ? (
                     <button
-                      onClick={() => toCart(product.id)}
-                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
+                      onClick={() => {
+                        toCart();
+                      }}
+                      className="my-1 ml-2 rounded bg-green-600 px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -298,7 +302,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   ) : (
                     <button
                       disabled={true}
-                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
+                      className="my-1 ml-2 rounded bg-green-600 px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
                     >
                       Soldout
                     </button>
@@ -308,7 +312,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="rounded mt-5 ml-1 bg-black flex w-full  md:px-32 items-center justify-center py-2 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
+                      className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-green-400 hover:ease-in md:px-32	"
                     >
                       <span className="mx-auto">Buy Now</span>
                     </button>
@@ -318,7 +322,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <div>
                     <button
                       onClick={() => toWishlist(product?.id!, 1)}
-                      disabled = {clicked ? true : false}
+                      disabled={clicked ? true : false}
                       className="mt-10 hover:text-green-600"
                     >
                       {clicked ? 'Added to wishlist' : '+ Add to wishlist'}

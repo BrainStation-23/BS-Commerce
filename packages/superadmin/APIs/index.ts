@@ -18,9 +18,13 @@ import {
   getUserProfileRest,
   getCategoryListRest,
   getCategoryRest,
+  getBrandsRest,
+  getBrandRest,
   createCategoryRest,
   mediaUploadRest,
   getTagsRest,
+  getAllManufacturersRest,
+  createBrandRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -33,9 +37,12 @@ import {
   getUserProfileGraphql,
   getCategoryListGraphQL,
   getCategoryGraphQL,
+  getBrandsGraphQL,
+  getBrandGraphQL,
   createCategoryGraphQL,
   mediaUploadGraphQL,
   getTagsGraphQL,
+  createBrandGraphQL,
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
@@ -62,8 +69,11 @@ const graphqlApi: apiFunction = {
   // getManufacturer: getManufacturerGraphQl,
   // deleteManufacturer: deleteManufacturerGraphQl,
   // createManufacturer: createManufacturerGraphQl
+  getBrands: getBrandsGraphQL,
+  getBrand: getBrandGraphQL,
   mediaUpload: mediaUploadGraphQL,
   getTags: getTagsGraphQL,
+  createBrand: createBrandGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -87,8 +97,12 @@ const restApi: apiFunction = {
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
   getUserProfile: getUserProfileRest,
+  getBrands: getBrandsRest,
+  getBrand: getBrandRest,
   mediaUpload: mediaUploadRest,
   getTags: getTagsRest,
+  getAllManufacturers: getAllManufacturersRest,
+  createBrand: createBrandRest,
 };
 
 export const userAPI: apiFunction =

@@ -6,6 +6,9 @@ import { addToShippingInfo } from 'toolkit/checkoutSlice';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { storeUserToken } from 'toolkit/authSlice';
 
 interface FormData {
   email: string;
@@ -18,18 +21,22 @@ interface FormData {
   addressOptional: string;
   city: string;
   postalCode: string;
-  saveInformationCheckbox: string;
 }
 
 const Information = (props: any) => {
+  const user = useAppSelector((state) => state.persistedReducer.user.user);
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(storeUserToken(''));
+    toast.success('Logged out successfully!');
+  };
+  
   const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
   );
 
-  const dispatch = useAppDispatch();
-  const { setModal } = props;
-  const initialValues = {
-    email: shippingInfo?.email,
+  let initialValues = {
+    email: user,
     contact: shippingInfo?.contact,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
@@ -38,7 +45,45 @@ const Information = (props: any) => {
     addressOptional: shippingInfo?.addressOptional,
     city: shippingInfo?.city,
     postalCode: shippingInfo?.postalCode,
-    saveInformationCheckbox: '',
+  };
+
+  const [update, setUpdate] = useState(initialValues);
+  const customerAddresses = useAppSelector(
+    (state) => state.persistedReducer.customerAddress.addresses
+  );
+
+  const dispatch = useAppDispatch();
+  const { setModal } = props;
+
+  const handlePreviousAddress = (event: any) => {
+    const detail = event.target.value;
+    let newArr = detail.split(' ');
+    if (newArr[0] === 'Use') {
+      setUpdate({
+        email: user,
+        contact: '',
+        firstName: '',
+        lastName: '',
+        country: '',
+        address: '',
+        addressOptional: '',
+        city: '',
+        postalCode: '',
+      });
+    } else {
+      initialValues = {
+        email: user,
+        firstName: newArr[0],
+        lastName: newArr[1],
+        country: '',
+        address: newArr[2],
+        addressOptional: newArr[3],
+        city: newArr[4],
+        postalCode: newArr[5],
+        contact: newArr[6],
+      };
+      setUpdate(initialValues);
+    }
   };
 
   const handleCheckoutSubmit = (data: FormData) => {
@@ -54,10 +99,11 @@ const Information = (props: any) => {
   return (
     <div className="">
       <Formik
-        initialValues={initialValues}
+        enableReinitialize={true}
+        initialValues={update}
         onSubmit={(values, actions) => {
           const data = {
-            email: values.email,
+            email: user,
             contact: values.contact,
             country: values.country,
             firstName: values.firstName,
@@ -66,7 +112,6 @@ const Information = (props: any) => {
             addressOptional: values.addressOptional,
             city: values.city,
             postalCode: values.postalCode,
-            saveInformationCheckbox: values.saveInformationCheckbox,
           };
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
@@ -82,52 +127,30 @@ const Information = (props: any) => {
 
                   <div className="flex flex-wrap gap-1 text-sm">
                     <p className="text-gray-500">Already have an account?</p>
-                    <Link href="/account/sign-in" passHref>
-                      <a className="text-decoration-none">Log in</a>
+                    <Link href="/" passHref>
+                      <a  onClick={() => handleLogout()} className="text-decoration-none">Logout</a>
                     </Link>
                   </div>
                 </div>
 
                 <div className="mt-5">
                   <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="text"
-                        id="email"
-                        name="email"
-                        className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor={`email`}
-                        className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                    <div className="flex flex-wrap gap-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
                       >
-                        Email
-                      </label>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="email" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="text"
-                        id="contact"
-                        name="contact"
-                        className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor={`contact`}
-                        className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                      >
-                        Mobile phone number
-                      </label>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="contact" />
-                      </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      {user}
                     </div>
                   </div>
                 </div>
@@ -142,11 +165,21 @@ const Information = (props: any) => {
                         id="country"
                         name="country"
                         className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                        onClick={handlePreviousAddress}
                       >
                         <option>Use a new address</option>
-                        <option>New Mexico</option>
-                        <option>Missouri</option>
-                        <option>Texas</option>
+                        {customerAddresses?.length ? (
+                          customerAddresses?.map((customerAddress) => {
+                            return (
+                              <>
+                                {console.log(customerAddress)}
+                                <option>{`${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`}</option>
+                              </>
+                            );
+                          })
+                        ) : (
+                          <option></option>
+                        )}
                       </Field>
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="country" />
@@ -273,6 +306,27 @@ const Information = (props: any) => {
                           </label>
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="postalCode" />
+                          </div>
+                        </div>
+
+                        <div className="mb-3">
+                          <div className="relative">
+                            <Field
+                              type="text"
+                              id="contact"
+                              name="contact"
+                              className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                              placeholder=" "
+                            />
+                            <label
+                              htmlFor={`contact`}
+                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                            >
+                              Mobile phone number
+                            </label>
+                            <div className="errMsg text-red-600">
+                              <ErrorMessage name="contact" />
+                            </div>
                           </div>
                         </div>
                       </div>

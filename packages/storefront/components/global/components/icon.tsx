@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import {  Product } from 'models';
+import { Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
-import { deleteItemFromWishlist } from 'toolkit/productsSlice';
+import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 
 interface SingleProduct {
   product: Product;
@@ -37,12 +37,16 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     ? true
     : false;
 
+  const productInCart = cartData.find((item) => item.productId === product.id)
+    ? true
+    : false;
+
   const btnClass =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white';
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event: any) => {
     const cartProduct = {
       id: product.id!,
       info: product.info!,
@@ -53,12 +57,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
+    toast.success('+1 Item added to cart');
     dispatch(addToCart(cartItem));
+    event.preventDefault();
   };
 
   const handleAddToCompare = async () => {
     try {
-      await userAPI.addToCompare(product.id);
+      await userAPI.addToCompare(product?.id!);
     } catch (error) {
       toast.error('Error happend.');
     }
@@ -72,6 +78,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       };
       try {
         await userAPI.addToWishList(data);
+        try {
+          const newWishlist = await userAPI.getCustomerWishlist(token);
+          dispatch(storeWishlist(newWishlist!));
+        } catch (error) {}
         toast.success('Item added to wishlist');
       } catch (error) {
         toast.error('Failed to add item to wishlist');
@@ -99,32 +109,32 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   return (
     <div className="rounded-full bg-white p-2 text-center drop-shadow-md">
-      <Link href="/" passHref>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={btnClass}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            onClick={handleAddToCart}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
+      {/* <Link href="/" passHref> */}
+      <span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={productInCart ? btnClassFilled : btnClass}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          onClick={handleAddToCart}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          />
+        </svg>
 
-          <div className="absolute -left-5 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
-            <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-              Add to cart
-            </span>
-            <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-          </div>
-        </span>
-      </Link>
+        <div className="absolute -left-5 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
+          <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+            Add to cart
+          </span>
+          <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+        </div>
+      </span>
+      {/* </Link> */}
 
       <span>
         <svg
@@ -158,11 +168,12 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={() =>
+            onClick={(event) => {
               inWishlist
-                ? deleteFromWishlist(product.id)
-                : handleAddToWishlist(product.id, 1)
-            }
+                ? deleteFromWishlist(product.id!)
+                : handleAddToWishlist(product.id!, 1);
+              event.preventDefault();
+            }}
           >
             <path
               strokeLinecap="round"
@@ -187,10 +198,11 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={() => {
+            onClick={(event) => {
               handleAddToCompare();
               dispatch(setModalState(!modalCmp));
               dispatch(storeProductsToCompare(product));
+              event.preventDefault();
             }}
           >
             <path

@@ -35,6 +35,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
+    router.push('/account/sign-in');
     toast.success('Logged out successfully!');
   };
 
@@ -69,7 +70,7 @@ const HeaderAccount: React.FC<Properties> = () => {
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
               <div className="group relative cursor-pointer normal-case">
-                <p className='hover:text-green-600'>{links[4].name}</p>
+                <p className="hover:text-green-600">{links[4].name}</p>
                 <div
                   className={`absolute -left-[20px] top-[20px] z-50 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
@@ -89,18 +90,32 @@ const HeaderAccount: React.FC<Properties> = () => {
                         Manage Addresses
                       </li>
                     </Link>
+                    <Link href="/wishlist" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Wishlist
+                      </li>
+                    </Link>
+                    <hr className="my-2" />
+                    <Link href={links[3].link} passHref>
+                      <li
+                        onClick={() => setModalOn(true)}
+                        className="transition-all duration-100 ease-linear hover:text-green-600"
+                      >
+                        {links[3].name}
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
 
-              <Link href={links[3].link}>
+              {/* <Link href={links[3].link}>
                 <a
                   onClick={() => setModalOn(true)}
                   className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
                 >
                   {links[3].name}
                 </a>
-              </Link>
+              </Link> */}
             </div>
           ) : (
             <>
@@ -142,7 +157,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <span className=''>
+            <span className="">
               {wishlistItems?.items?.length! > 0 && token !== ''
                 ? wishlistItems?.items?.length
                 : 0}

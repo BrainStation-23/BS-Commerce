@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeCategorizedProduct } from 'toolkit/ProductsSlice';
+import { storeCategorizedProduct } from 'toolkit/productsSlice';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { userAPI } from 'APIs';
