@@ -17,10 +17,6 @@ You need to install MongoDB on your local computer before you can connect to it.
 
 - For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-macos/)
 
-
-After installing the MongoDB, Then also you can use the MongoDB compass for showing MongoDB all collections.
-For Installing MongoDB Compass -> [Compass](https://www.mongodb.com/docs/compass/current/install/)
-
 MongoDB default settings -> the Hostname would be the localhost, and the port is 27017.
 
 
