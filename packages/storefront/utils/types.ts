@@ -1,4 +1,4 @@
-import { DeleteCustomerAddressResponse } from 'models';
+import { DeleteCustomerAddressResponse, Wishlist } from 'models';
 import { UpdateCustomerAddressResponse } from 'models';
 import {
   AddCustomerNewAddressResponse,
@@ -28,7 +28,6 @@ import {
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
   deleteAllWishlistItemsResponse,
-  AddCompareItem,
   CompareResponse,
   GetCustomerInformationSuccessResponse,
   UpdateCustomerSuccessResponse,
@@ -116,15 +115,15 @@ export interface apiFunction {
   ) => Promise<AddToWishlistResponse | undefined>;
   getCustomerWishlist: (
     token: string
-  ) => Promise<getUserWishlistResponse | undefined>;
+  ) => Promise<Wishlist | undefined>;
   deleteWishlistItem: (
     data: string
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
   addToCompare: (
-    productId: AddCompareItem
+    productId: string
   ) => Promise<CompareResponse | undefined>;
-  deleteFromCompare: (productId: AddCompareItem) => {};
+  deleteFromCompare: (productId: string) => {};
   getCustomerProfile: (
     token: string
   ) => Promise<GetCustomerInformationResponse | undefined>;

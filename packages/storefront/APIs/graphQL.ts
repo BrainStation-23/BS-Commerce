@@ -1,5 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { UpdateCustomerAddressResponse } from 'models';
+import { UpdateCustomerAddressResponse, Wishlist } from 'models';
 import { DeleteCustomerAddressResponse } from 'models';
 import {
   AddCustomerNewAddressResponse,
@@ -34,7 +34,6 @@ import {
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
   deleteAllWishlistItemsResponse,
-  AddCompareItem,
   CompareResponse,
   GetCustomerInformationSuccessResponse,
   UpdateCustomerRequestBody,
@@ -139,14 +138,14 @@ export async function addToWishlistGraphql(
 }
 
 export async function addToCompareGraphql(
-  productId: AddCompareItem
+  productId: string
 ): Promise<CompareResponse | undefined> {
   return undefined;
 }
 
 export async function getCustomerWishlistGraphql(
   token: string
-): Promise<getUserWishlistResponse | undefined> {
+): Promise<Wishlist | undefined> {
   return undefined;
 }
 
@@ -161,7 +160,7 @@ export async function deleteFullWishlistGraphql(): Promise<
 > {
   return undefined;
 }
-export async function deleteFromCompareGraphql(productId: AddCompareItem) {}
+export async function deleteFromCompareGraphql(productId: string) {}
 
 export async function getCustomerProfileGraphql(
   token: string
@@ -175,7 +174,7 @@ export async function addCustomerNewAddressGraphql(
 }
 
 export async function deleteCustomerAddressGraphql(
-  productId: AddCompareItem
+  productId: string
 ): Promise<DeleteCustomerAddressResponse | undefined> {
   return undefined;
 }
