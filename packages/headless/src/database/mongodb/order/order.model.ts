@@ -118,7 +118,6 @@ const ProductSchema = new Schema(
 const OrderSchema = new Schema<OrderEntity>({
   orderId: {
     type: String,
-    default: () => randomUUID(),
   },
   userId: {
     type: String,

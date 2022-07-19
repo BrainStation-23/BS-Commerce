@@ -1,6 +1,8 @@
-import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
-import { ProductOrderDto } from './../dto/order.create.dto';
 import { Injectable } from '@nestjs/common';
+import { randomInt } from 'crypto';
+
+import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
+import { ProductOrderDto, CreateOrderDto } from './../dto/order.create.dto';
 import { OrderEntity } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
 import { OrderData } from '../dto/order.response.dto';
@@ -9,8 +11,12 @@ import { IOrderDatabase } from './order.db.interface';
 @Injectable()
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
-  async createOrder(userId: string, body: any): Promise<OrderEntity> {
-    return await this.db.createOrder(userId, body);
+  async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
+    let orderId = randomInt(0,100000000000000).toString();
+    const len = orderId.length;
+    if(len<15) orderId = orderId.padStart(len, '0')
+    const newBody = { ...body, orderId};
+    return await this.db.createOrder(userId, newBody);
   }
 
   async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
