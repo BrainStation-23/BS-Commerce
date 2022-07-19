@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { CreateProductRequest } from 'models';
+import { CreateProductRequest, subCategoryList } from 'models';
 
 import { userAPI } from '@/APIs';
 import MetaForm from '@/components/products/forms/metaForm';
@@ -13,6 +13,7 @@ import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 
 import { productSchema } from '@/components/products/schema/productSchema/index';
+import Category from 'pages/category';
 
 const CreateProduct: NextComponentType = () => {
   const router = useRouter();
@@ -39,24 +40,50 @@ const CreateProduct: NextComponentType = () => {
       setManufacturerData(allManufacturers);
     }
   }
-  useEffect(() => {
-    async function loadCategories() {
-      const response = await userAPI.getCategoryList();
-      if (response?.data.categories.length! > 0) {
-        const categories: any = [];
-        response?.data.categories.forEach((category, index) => {
-          categories.push({
-            id: category.id,
-            name: category.name,
-            value: category.name,
-            isSelected: false,
-            isFeatured: false,
-            displayOrder: 0,
-          });
-        });
-        setCategoryData(categories);
+
+  const addSubCategories = (subCategories: subCategoryList[]) => {
+    const categoryList: any = [];
+    subCategories.forEach((category) => {
+      categoryList.push({
+        id: category.id,
+        name: category.name,
+        value: category.name,
+        isSelected: false,
+        isFeatured: false,
+        displayOrder: category.displayOrder,
+      });
+      if (category.subCategories && category.subCategories.length > 0) {
+        const subCategoryList = addSubCategories(category.subCategories);
+        categoryList.push(...subCategoryList);
       }
+    });
+
+    return categoryList;
+  };
+
+  async function loadCategories() {
+    const response = await userAPI.getCategoryList();
+    if (response?.data.categories.length! > 0) {
+      const categories: any = [];
+      response?.data.categories.forEach((category, index) => {
+        categories.push({
+          id: category.id,
+          name: category.name,
+          value: category.name,
+          isSelected: false,
+          isFeatured: false,
+          displayOrder: category.displayOrder,
+        });
+        if (category.subCategories && category.subCategories.length > 0) {
+          const subCategoryList = addSubCategories(category.subCategories);
+          categories.push(...subCategoryList);
+        }
+      });
+      setCategoryData(categories);
     }
+  }
+
+  useEffect(() => {
     loadCategories();
     loadAllManufacturers();
   }, []);
@@ -81,7 +108,7 @@ const CreateProduct: NextComponentType = () => {
           publishDate: '',
           tags: [],
           brands: [],
-          keywords: [],
+          keywords: '',
           metaTitle: '',
           metaDescription: '',
           metaFriendlyPageName: '',
@@ -113,7 +140,7 @@ const CreateProduct: NextComponentType = () => {
             isFeatured: values?.isFeatured,
           };
           const meta = {
-            keywords: values?.keywords,
+            keywords: values?.keywords?.split(' '),
             title: values?.metaTitle,
             description: values?.metaDescription,
             friendlyPageName: values?.metaFriendlyPageName,
@@ -154,6 +181,7 @@ const CreateProduct: NextComponentType = () => {
             manufacturer: manufacturer,
             categories: categories,
           };
+          // console.log(newData);
           handleSubmit(newData);
           actions.setSubmitting(false);
         }}
