@@ -12,15 +12,24 @@ import { IOrderDatabase } from './order.db.interface';
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
   async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
-    let orderId = randomInt(0,100000000000000).toString();
-    const len = orderId.length;
-    if(len<15) orderId = orderId.padStart(15, '0')
-    const newBody = { ...body, orderId};
+    const orderId = await this.generateUniqueId();
+  
+    const newBody = {...body, orderId};
     return await this.db.createOrder(userId, newBody);
   }
 
   async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
     return await this.db.addPhotoDetails(products);
+  }
+
+  async generateUniqueId(){
+    let orderId = randomInt(281474976710655).toString();//generate id
+    let len = orderId.length;
+    if(len<15) orderId = orderId.padStart(15, '0');//check if the id is of 15 digits
+    let idExists = await this.db.getOrderById(orderId);//unique validation
+
+    if(!idExists) return orderId;
+    else this.generateUniqueId();
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
