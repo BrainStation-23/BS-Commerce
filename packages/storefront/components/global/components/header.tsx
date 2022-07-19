@@ -47,31 +47,35 @@ const Header: NextComponentType = () => {
 
   // console.log(categories);
 
-  const allCategories: menuLink[] = [];
-  categories?.categories?.forEach((category) => {
-    allCategories.push({
-      name: category.name,
-      link: {
-        pathname: `/collections/${category.name}`,
-        query: {
-          categoryId: category.id,
-          name: category.name,
-        },
-      },
-      hasSubmenu: false,
-    });
-  });
-  // const allCategories: menuLink[] = [
-  //   { name: "vegetable", link: "/", hasSubmenu: true },
-  //   { name: "fruits", link: "/", hasSubmenu: true },
-  //   { name: "salads", link: "/", hasSubmenu: true },
-  //   { name: "fish & seafood", link: "/", hasSubmenu: false },
-  //   { name: "fresh meat", link: "/", hasSubmenu: false },
-  //   { name: "butter & eggs", link: "/", hasSubmenu: false },
-  //   { name: "milk", link: "/", hasSubmenu: false },
-  //   { name: "oil & vinegars", link: "/", hasSubmenu: false },
-  //   { name: "bread", link: "/", hasSubmenu: false },
-  // ];
+  // const allCategories: menuLink[] = [];
+  // categories?.categories?.forEach((category) => {
+  //   allCategories.push({
+  //     name: category.name,
+  //     link: {
+  //       pathname: `/collections/${category.name}`,
+  //       query: {
+  //         categoryId: category.id,
+  //         name: category.name,
+  //       },
+  //     },
+  //     hasSubmenu: false,
+  //   });
+  // });
+  const allCategories: menuLink[] = [
+    { name: "vegetable", link: "/", hasSubmenu: true, submenu: [
+      { name: 'Home - 1', link: '/' },
+      { name: 'Home - 2', link: '/' },
+      { name: 'Home - 3', link: '/' },
+    ], },
+    { name: "fruits", link: "/", hasSubmenu: true },
+    { name: "salads", link: "/", hasSubmenu: true },
+    { name: "fish & seafood", link: "/", hasSubmenu: false },
+    { name: "fresh meat", link: "/", hasSubmenu: false },
+    { name: "butter & eggs", link: "/", hasSubmenu: false },
+    { name: "milk", link: "/", hasSubmenu: false },
+    { name: "oil & vinegars", link: "/", hasSubmenu: false },
+    { name: "bread", link: "/", hasSubmenu: false },
+  ];
 
   const menus: menuLink[] = [
     {
