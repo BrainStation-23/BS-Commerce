@@ -8,7 +8,7 @@ import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
-import { deleteItemFromWishlist } from 'toolkit/productsSlice';
+import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 
 interface SingleProduct {
   product: Product;
@@ -64,7 +64,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   const handleAddToCompare = async () => {
     try {
-      await userAPI.addToCompare(product.id);
+      await userAPI.addToCompare(product?.id!);
     } catch (error) {
       toast.error('Error happend.');
     }
@@ -78,6 +78,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       };
       try {
         await userAPI.addToWishList(data);
+        try {
+          const newWishlist = await userAPI.getCustomerWishlist(token);
+          dispatch(storeWishlist(newWishlist!));
+        } catch (error) {}
         toast.success('Item added to wishlist');
       } catch (error) {
         toast.error('Failed to add item to wishlist');
@@ -164,11 +168,12 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={() =>
+            onClick={(event) => {
               inWishlist
                 ? deleteFromWishlist(product.id!)
-                : handleAddToWishlist(product.id!, 1)
-            }
+                : handleAddToWishlist(product.id!, 1);
+              event.preventDefault();
+            }}
           >
             <path
               strokeLinecap="round"
@@ -193,10 +198,11 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={() => {
+            onClick={(event) => {
               handleAddToCompare();
               dispatch(setModalState(!modalCmp));
               dispatch(storeProductsToCompare(product));
+              event.preventDefault();
             }}
           >
             <path

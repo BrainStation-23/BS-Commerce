@@ -26,7 +26,6 @@ import {
   DeleteWishlistItemParams,
   deleteWishlistItemResponse,
   deleteAllWishlistItemsResponse,
-  AddCompareItem,
   CompareResponse,
   CustomerAddress,
   AddCustomerNewAddressResponse,
@@ -38,6 +37,7 @@ import {
   UpdateCustomerAddressResponse,
   UpdateCustomerSuccessResponse,
   UpdateCustomerRequestBody,
+  Wishlist,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -199,7 +199,7 @@ export async function getOrderProductsRest(
   }
 }
 export async function addToCompareRest(
-  productId: AddCompareItem
+  productId: string
 ): Promise<CompareResponse | undefined> {
   try {
     const res = await axios.post(
@@ -217,13 +217,13 @@ export async function addToCompareRest(
 
 export async function getCustomerWishlistRest(
   token: string
-): Promise<getUserWishlistResponse | undefined> {
+): Promise<Wishlist | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.getCustomerWishlist}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return res.data.data;
+    return res.data.data as Wishlist;
   } catch (error: any) {
     return [];
   }
@@ -254,7 +254,7 @@ export async function deleteFullWishlistRest(): Promise<
   }
 }
 
-export async function deleteFromCompareRest(productId: AddCompareItem) {
+export async function deleteFromCompareRest(productId: string) {
   await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
 }
 
