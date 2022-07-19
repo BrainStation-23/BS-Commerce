@@ -136,6 +136,22 @@ const Information = (props: any) => {
                   <p className="text-lg">Shipping Address</p>
 
                   <div className="mt-5">
+                    <div className="mb-3">
+                      <Field
+                        as="select"
+                        id="country"
+                        name="country"
+                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                      >
+                        <option>Use a new address</option>
+                        <option>New Mexico</option>
+                        <option>Missouri</option>
+                        <option>Texas</option>
+                      </Field>
+                      <div className="errMsg text-red-600">
+                        <ErrorMessage name="country" />
+                      </div>
+                    </div>
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">
