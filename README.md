@@ -11,18 +11,18 @@ Techstack included:
 
 You need to install MongoDB on your local computer before you can connect to it. You can install MongoDB by following these instructions.
 
+- For the Installation process in Windows -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-windows/)
+
+- For the Installation process in Ubuntu -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-and-configure-mongodb-in-ubuntu/)
+
 - For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-macos/)
 
-- For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-windows/)
-
-- For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-and-configure-mongodb-in-ubuntu/)
 
 After installing the MongoDB, Then also you can use the MongoDB compass for showing MongoDB all collections.
 For Installing MongoDB Compass -> [Compass](https://www.mongodb.com/docs/compass/current/install/)
 
-Compass will greet you with a welcome screen: ![Compass Image](https://www.mongodb.com/docs/compass/current/images/compass/new-connection.png)
-Then you just click the `Connect` button.
 MongoDB default settings -> the Hostname would be the localhost, and the port is 27017.
+
 
 ### Build packages/models
 
