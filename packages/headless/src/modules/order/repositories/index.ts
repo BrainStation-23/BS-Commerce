@@ -14,7 +14,7 @@ export class OrderRepository {
   async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
     let orderId = randomInt(0,100000000000000).toString();
     const len = orderId.length;
-    if(len<15) orderId = orderId.padStart(len, '0')
+    if(len<15) orderId = orderId.padStart(15, '0')
     const newBody = { ...body, orderId};
     return await this.db.createOrder(userId, newBody);
   }
