@@ -1,17 +1,17 @@
-import Container from "../components/container";
-import Banner from "./banner";
-import BannerBodyText from "./bannerBodyText";
+import Container from '@/components/global/components/container';
+import Banner from '@/components/global/bannerComponent/banner';
+import BannerBodyText from '@/components/global/bannerComponent/bannerBodyText';
 
 const BannerPage = () => {
   return (
     <Container>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5 sm:gap-5 md:gap-7 lg:gap-12 xl:gap-12">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-5 md:grid-cols-2 md:gap-7 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2 xl:gap-12">
         <Banner
           position="relative"
           width="w-full"
           height="h-48 sm:h-48 md:h-48 lg:h-56 xl:h-56"
           buttonText="Shop Now"
-          linkhref="/home" //need to modify href later
+          linkhref="/" //need to modify href later
           bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
           buttonPosition="absolute bottom-4 sm:bottom-4 md:bottom-7 lg:bottom-16 xl:bottom-16 left-0 sm:left-0 lg:left-10 xl:left-10"
           buttonEdge="rounded-lg"
@@ -37,7 +37,7 @@ const BannerPage = () => {
           width="w-full"
           height="h-48 sm:h-48 md:h-48 lg:h-56 xl:h-56"
           buttonText="Shop Now"
-          linkhref="/home" //need to modify href later
+          linkhref="/" //need to modify href later
           bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
           buttonPosition="absolute bottom-4 sm:bottom-4 md:bottom-7 lg:bottom-16 xl:bottom-16 left-0 sm:left-0 lg:left-10 xl:left-10"
           buttonEdge="rounded-lg"

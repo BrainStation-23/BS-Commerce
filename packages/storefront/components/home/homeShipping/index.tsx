@@ -1,8 +1,9 @@
-import { FC } from "react";
-import Container from "../../global/components/container";
-import { ImageCom } from "../../global/components/image";
+import { NextComponentType } from "next";
 
-const HomeShipping: FC = () => {
+import Container from "@/components/global/components/container";
+import { ImageCom } from "@/components/global/components/image";
+
+const HomeShipping: NextComponentType = () => {
   return (
     <>
       <Container className="max-w-6xl">
@@ -13,8 +14,8 @@ const HomeShipping: FC = () => {
                 className="lazyload"
                 alt=""
                 src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/shipping1_50x50.jpg?v=1588047521"
-                height={40}
-                width={40}
+                height={55}
+                width={55}
               />
             </div>
             <div className="">
@@ -28,8 +29,8 @@ const HomeShipping: FC = () => {
                 className="lazyload"
                 alt=""
                 src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/shipping2_50x50.jpg?v=1588047579"
-                height={40}
-                width={40}
+                height={55}
+                width={55}
               />
             </div>
             <div className="">
@@ -43,8 +44,8 @@ const HomeShipping: FC = () => {
                 className="lazyload"
                 alt=""
                 src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/shipping3_50x50.jpg?v=1588047617"
-                height={40}
-                width={40}
+                height={55}
+                width={55}
               />
             </div>
             <div className="">
@@ -58,8 +59,8 @@ const HomeShipping: FC = () => {
                 className="lazyload"
                 alt=""
                 src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/shipping4_50x50.jpg?v=1588047895"
-                height={40}
-                width={40}
+                height={55}
+                width={55}
               />
             </div>
             <div className="">

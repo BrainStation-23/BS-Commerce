@@ -1,23 +1,27 @@
-import { NextRouter } from "next/router";
+import { NextRouter } from 'next/router';
 import {
   Product,
   UpdateProductRequest,
   SignInRequest,
   SignInSuccessResponse,
-  GetUserResponse,
   GetUserSuccessResponse,
-  getCategoryBySlugResponse,
-  getCategoryBySlugRequest,
-} from "models";
-import {
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  getCategorySuccessResponse,
   CreateManufacturerRequest,
   Manufacturer,
   UpdateManufacturerRequest,
-} from "models";
-import { GetProductParams } from "./../../models/src/product/getProduct";
-import { CreateProductRequest } from "./../../models/src/product/createProduct";
-import { UpdatedUserRequest } from "./../../models/src/user/updateUser";
-import { CategoryInterface } from "../components/category/catergory-model";
+  GetProductParams,
+  CreateProductRequest,
+  UpdatedUserRequest,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  UploadFileSuccessResponse,
+  GetTagsResponse,
+  Tags,
+  UpdatedUserRequest,
+  CreateBrandRequest,
+} from 'models';
 
 export interface User {
   id?: string;
@@ -48,6 +52,7 @@ export interface Address {
 }
 
 export interface apiFunction {
+  getAllManufacturers();
   updateProduct: (
     data: any,
     id: any,
@@ -60,7 +65,14 @@ export interface apiFunction {
   getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
-  getCategories: () => Promise<CategoryInterface[] | undefined>;
+  getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
+  createCategory: (
+    data: createCategoryRequest,
+    router: NextRouter
+  ) => Promise<createCategorySuccessResponse | undefined>;
+  getCategory: (
+    id: getCategoryRequest
+  ) => Promise<getCategorySuccessResponse | undefined>;
   deleteProduct: (productId: string) => Promise<boolean | undefined>;
   signin: (
     data: SignInRequest,
@@ -68,6 +80,8 @@ export interface apiFunction {
   ) => Promise<SignInSuccessResponse | undefined>;
   createAdmin: (data: User, cb: any) => Promise<User | undefined>;
   getAdmins: () => Promise<User[] | undefined>;
+  updateAdmin: (data: any) => Promise<UpdatedUserRequest | undefined>;
+  changePassword: (data: any) => Promise<UpdatedUserRequest | undefined>;
   createManufacturer: (
     data: CreateManufacturerRequest,
     router: any
@@ -82,10 +96,16 @@ export interface apiFunction {
     data: UpdateManufacturerRequest,
     router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
-  getUserProfile: () => Promise<GetUserSuccessResponse | undefined>;
-  getCategoryBySlug: (
-    slug: getCategoryBySlugRequest
-  ) => Promise<getCategoryBySlugResponse | undefined>;
+  getUserProfile: (
+    router: NextRouter
+  ) => Promise<GetUserSuccessResponse | undefined>;
+  getBrands: () => Promise<any>;
+  getBrand(brandId: any): Promise<any>;
+  mediaUpload: (
+    data: FormData
+  ) => Promise<UploadFileSuccessResponse | undefined>;
+  getTags: () => Promise<GetTagsResponse | undefined>;
+  createBrand(data: CreateBrandRequest, router: NextRouter): Promise<any>;
 }
 
 export interface adminCreate {

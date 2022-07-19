@@ -1,5 +1,6 @@
 import type { NextComponentType } from "next";
-import BlogPost from "./blogPost";
+
+import BlogPost from "@/components/home/blog/blogPost";
 
 
 const Blog: NextComponentType = () => {

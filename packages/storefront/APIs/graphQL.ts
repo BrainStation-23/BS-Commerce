@@ -1,28 +1,46 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { UpdateCustomerAddressResponse } from 'models';
+import { DeleteCustomerAddressResponse } from 'models';
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
+  AddCustomerNewAddressResponse,
+  CustomerAddress,
+  GetCustomerInformationResponse,
+} from 'models';
+import {
   GetCustomerAllProductsResponse,
+  GetCustomerQuery,
+  GetCustomerResponse,
   updateCartItemRequest,
   updateCartItemResponse,
-} from 'models';
-import { GetCustomerProductResponse } from 'models';
-import { CustomerSignInResponse } from 'models';
-import { CreateCustomerRequest } from 'models';
-import { CreateCustomerResponse } from 'models';
-import { CustomerSignInRequest } from 'models';
-import { GetCustomerProductParams } from 'models';
-import {
-  CreateUserRequest,
-  CreateUserResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
+  CreateCustomerRequest,
+  GetCustomerProductResponse,
+  CreateCustomerResponse,
+  CustomerSignInRequest,
+  GetCustomerProductParams,
+  CustomerSignInResponse,
+  addToCartRequest,
+  AddToCartResponse,
+  deleteCartItemRequest,
+  deleteCartItemResponse,
+  Cart,
+  getCategoryListResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  getUserWishlistResponse,
+  DeleteWishlistItemParams,
+  deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
+  AddCompareItem,
+  CompareResponse,
+  GetCustomerInformationSuccessResponse,
+  UpdateCustomerRequestBody,
+  UpdateCustomerSuccessResponse,
 } from 'models';
+
 import { User } from 'utils/types';
 import client from '../graphqlSchema/apollo-client';
 
@@ -63,6 +81,12 @@ export async function getPublicProductByIdGraphql(
   return undefined;
 }
 
+export async function getPublicProductByCategoryIDGraphql(
+  CategoryId: GetProductsByConditionQuery
+): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  return undefined;
+}
+
 export async function getFeaturedProductsGraphql(): Promise<
   GetCustomerAllProductsResponse | undefined
 > {
@@ -76,6 +100,13 @@ export async function getCartGraphql(): Promise<Cart | undefined> {
 export async function addToCartGraphql(
   productId: addToCartRequest
 ): Promise<AddToCartResponse | undefined> {
+  return undefined;
+}
+
+export async function getSignedInUserGraphql(
+  isEmail: boolean,
+  data: GetCustomerQuery
+): Promise<GetCustomerResponse | undefined> {
   return undefined;
 }
 export async function deleteCartItemGraphql(
@@ -93,5 +124,77 @@ export async function updateCartGraphql(
 export async function deleteAllFromCartGraphql(): Promise<
   deleteCartItemResponse | undefined
 > {
+  return undefined;
+}
+
+export async function getCategoryListGraphql(): Promise<
+  getCategoryListResponse | undefined
+> {
+  return undefined;
+}
+export async function addToWishlistGraphql(
+  data: addToWishlistRequest
+): Promise<AddToWishlistResponse | undefined> {
+  return undefined;
+}
+
+export async function addToCompareGraphql(
+  productId: AddCompareItem
+): Promise<CompareResponse | undefined> {
+  return undefined;
+}
+
+export async function getCustomerWishlistGraphql(
+  token: string
+): Promise<getUserWishlistResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteWishlistItemGraphql(
+  data: string
+): Promise<deleteWishlistItemResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteFullWishlistGraphql(): Promise<
+  deleteAllWishlistItemsResponse | undefined
+> {
+  return undefined;
+}
+export async function deleteFromCompareGraphql(productId: AddCompareItem) {}
+
+export async function getCustomerProfileGraphql(
+  token: string
+): Promise<GetCustomerInformationResponse | undefined> {
+  return undefined;
+}
+export async function addCustomerNewAddressGraphql(
+  customerAddress: CustomerAddress
+): Promise<AddCustomerNewAddressResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteCustomerAddressGraphql(
+  productId: AddCompareItem
+): Promise<DeleteCustomerAddressResponse | undefined> {
+  return undefined;
+}
+
+export async function updateCustomerAddressGraphql(
+  addressId: string,
+  data: any
+): Promise<UpdateCustomerAddressResponse | undefined> {
+  return undefined;
+}
+
+export async function getCustomerGraphQL(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function updateCustomerGraphQL(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
   return undefined;
 }

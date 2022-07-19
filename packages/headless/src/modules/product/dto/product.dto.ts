@@ -5,6 +5,7 @@ import {
     ProductMeta,
     ProductPhoto,
     ProductCategory,
+    ProductManufacturer,
     Product,
 } from 'models';
 
@@ -96,7 +97,6 @@ export class ProductMetaDto implements ProductMeta {
     @IsString()
     friendlyPageName: string;
 }
-
 export class ProductPhotoDto implements ProductPhoto {
     @ApiProperty({ required: false })
     @IsOptional()
@@ -124,7 +124,22 @@ export class ProductPhotoDto implements ProductPhoto {
     displayOrder?: number;
 }
 
+export class ProductManufacturerDto implements ProductManufacturer {
+    @ApiProperty({ required: false })
+    @IsString()
+    id: string;
+
+    @ApiProperty({ required: false })
+    @IsString()
+    name: string;
+}
+
 export class ProductCategoryDto implements ProductCategory {
+    @ApiProperty({ required: true })
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+
     @ApiProperty({ required: true })
     @IsNotEmpty()
     @IsString()
@@ -170,6 +185,11 @@ export class ProductDto implements Product {
     @IsOptional()
     @IsArray()
     brands?: string[];
+
+    @ApiProperty({ type: ProductManufacturerDto })
+    @IsOptional()
+    @IsObject()
+    manufacturer?: ProductManufacturerDto;
 
     @ApiProperty({ type: [ProductCategoryDto] })
     @IsNotEmptyObject()

@@ -23,7 +23,6 @@ const CreateManufacturer: FC = () => {
         SEFN: data.seftn,
       },
     };
-    console.log(data);
     userAPI.createManufacturer(newData, router);
   };
   return (
@@ -67,15 +66,27 @@ const CreateManufacturer: FC = () => {
                 <h3 className="float-start">
                   Add a Manufacturer
                   <span className="fs-5 p-3">
-                    <Link href="/Admin/Manufacturer/list">
+                    <Link href="/Manufacturer/">
                       <a href="/Product" className="text-decoration-none">
                         <i className="bi bi-arrow-left-circle-fill p-2" />
-                        back to Manufacturer list
+                        <span style={{ fontSize: "14px" }}>
+                          Back to Manufacturer list
+                        </span>
                       </a>
                     </Link>
                   </span>
                 </h3>
                 <div className="float-end">
+                  <button
+                    type="button"
+                    className="btn btn-info float-left mx-2 my-auto "
+                    id="product-editor-settings"
+                    data-toggle="modal"
+                    data-target="#productsettings-window"
+                  >
+                    <i className="bi bi-gear-fill pt-1" />
+                    <p className="float-end mx-1 my-0">Settings</p>
+                  </button>
                   <button
                     type="submit"
                     name="save"
@@ -96,20 +107,6 @@ const CreateManufacturer: FC = () => {
                   </button>
                 </div>
               </div>
-
-              <div className="col-md-12 clearfix">
-                <button
-                  type="button"
-                  className="btn btn-info float-left mx-2 my-auto "
-                  id="product-editor-settings"
-                  data-toggle="modal"
-                  data-target="#productsettings-window"
-                >
-                  <i className="bi bi-gear-fill pt-1" />
-                  <p className="float-end mx-1 my-0">Settings</p>
-                </button>
-              </div>
-
               <div className="mt-4">
                 <CreateNewManufacturer />
                 <DisplayOrders />

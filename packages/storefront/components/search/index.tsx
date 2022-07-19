@@ -1,34 +1,35 @@
-import type { NextComponentType } from "next";
-import Breadcrumb from "../global/breadcrumbs/breadcrumb";
-import SearchItem from "./searchItem";
+import type { NextComponentType } from 'next';
+
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import SearchItem from '@/components/search/searchItem';
 
 const SearchComponent: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
         title="Search: 4 results foun..."
-        pathArray={["Home", "Search: 4 results foun..."]}
-        linkArray={["/home", "/search"]}
+        pathArray={['Home', 'Search: 4 results foun...']}
+        linkArray={['/', '/search']}
       />
-      <div className="container w-fit px-15 m-auto tracking-wider items-center justify-center">
-        <div className="flex flex-wrap mx-15">
-          <div className="lg:mx-1/5 md:w-full pr-4 pl-4">
-            <h4 className="text-gray-900 text-sm title-font font-normal text-center  mt-16 mb-1">
-              Your search for <strong className="highlight">Demo</strong>{" "}
+      <div className="px-15 container m-auto w-fit items-center justify-center tracking-wider">
+        <div className="mx-15 flex flex-wrap">
+          <div className="lg:mx-1/5 pr-4 pl-4 md:w-full">
+            <h4 className="title-font mt-16 mb-1 text-center text-sm  font-normal text-gray-900">
+              Your search for <strong className="highlight">Demo</strong>{' '}
               revealed the following:
             </h4>
 
-            <div className="flex justify-center mt-5">
+            <div className="mt-5 flex justify-center">
               <div className="mb-3 w-full sm:w-full md:w-full lg:w-2/4 xl:w-2/4">
-                <div className="w-full input-group relative flex flex-wrap items-stretch mb-4">
+                <div className="input-group relative mb-4 flex w-full flex-wrap items-stretch">
                   <input
                     type="search"
-                    className="w-full form-control relative flex-auto min-w-0 block px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-3xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    className="form-control relative m-0 block w-full min-w-0 flex-auto rounded-3xl border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                     placeholder="Search"
                   ></input>
                   <button
                     type="submit"
-                    className="text-white absolute right-0 py-1.5 pb-2 text-base bg-green-600 hover:bg-black rounded-lg px-4"
+                    className="absolute right-0 rounded-lg bg-green-600 py-1.5 px-4 pb-2 text-base text-white hover:bg-black"
                   >
                     Search
                   </button>

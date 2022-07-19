@@ -1,16 +1,25 @@
 import Icon from "@/components/global/components/icon";
-import Picture from "@/components/global/components/product/picture";
 import ProductInfo from "@/components/global/components/product/productInfo";
-import { Product } from "models";
+import { CustomerProduct } from "models";
 import Image from "next/image";
 import Link from "next/link";
 interface SingleProduct {
-  product: Product;
+  product: CustomerProduct;
 }
 
 const Product = ({ product }: SingleProduct) => {
   return (
-    <Link href={`/product/${product.id}`} passHref>
+    <Link
+      href={{
+        pathname: `product/${product.info.name}`,
+        query: {
+          id: product.id,
+          name: product.info.name,
+        },
+      }}
+      as={`product/${product.info.name}`}
+      passHref
+    >
       <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer grid justify-items-center">
         <div className="group flex relative pl-10 md:pl-0 lg:pl-0">
           <Image

@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { NextComponentType } from "next";
+
 import CheckoutInformationComponent from "@/components/checkout/informationPage/information";
 import CheckoutPaymentComponent from "@/components/checkout/paymentPage/payment";
 import ShippingPage from "@/components/checkout/shippingPage";
+import withAuth from "@/components/auth/withAuth";
 
-const CheckoutComponent = () => {
-  const router = useRouter();
+const CheckoutComponent: NextComponentType = () => {
   const [modal, setModal] = useState({
     info: true,
     ship: false,
@@ -17,11 +18,8 @@ const CheckoutComponent = () => {
       {modal.info ? <CheckoutInformationComponent setModal={setModal} /> : ""}
       {modal.ship ? <ShippingPage setModal={setModal} /> : ""}
       {modal.pay ? <CheckoutPaymentComponent setModal={setModal} /> : ""}
-      {/* {router.query.step === "information" && <CheckoutInformationComponent />}
-      {router.query.step === "shipping" && <ShippingPage />}
-      {router.query.step === "payment" && <CheckoutPaymentComponent />} */}
     </>
   );
 };
 
-export default CheckoutComponent;
+export default withAuth(CheckoutComponent);

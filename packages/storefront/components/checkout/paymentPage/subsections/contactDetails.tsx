@@ -1,6 +1,14 @@
-import Link from "next/link";
+import { useAppSelector } from "customHooks/hooks";
 
-const ContactDetails = (props: any) => {
+interface Props {
+  setModal: Function
+}
+
+const ContactDetails: React.FC<Props> = (props) => {
+  const shippingInfo = useAppSelector(
+    (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
   const { setModal } = props;
   return (
     <>
@@ -8,7 +16,7 @@ const ContactDetails = (props: any) => {
         <div className="flex flex-wrap lg:items-center xl:items-center justify-between my-3 text-sm">
           <div className="flex flex-wrap flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-0 sm:gap-0 md:gap-6 lg:gap-6 xl:gap-6">
             <p className="text-gray-500">Contact</p>
-            <p>shatabdi@gmail.com</p>
+            <p>{shippingInfo?.contact}</p>
           </div>
           <button
               onClick={() => {
@@ -29,7 +37,7 @@ const ContactDetails = (props: any) => {
         <div className="flex flex-wrap lg:items-center xl:items-center justify-between my-3 text-sm">
           <div className="flex flex-wrap flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-0 sm:gap-0 md:gap-6 lg:gap-6 xl:gap-6">
             <p className="text-gray-500">Ship to</p>
-            <p>Dhaka, Bangladesh</p>
+            <p>{shippingInfo?.address}</p>
           </div>
           <button
               onClick={() => {

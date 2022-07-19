@@ -1,5 +1,4 @@
 import {
-  getUserRest,
   getProductsRest,
   getProductSearchRest,
   createProductRest,
@@ -9,36 +8,54 @@ import {
   signinRest,
   createAdminRest,
   getAdminsRest,
+  updateAdminRest,
+  changePasswordRest,
   createManufacturerRest,
   getManufacturerRest,
   deleteManufacturerRest,
   getSingleManufacturerRest,
   updateManufacturerRest,
   getUserProfileRest,
-  getCategoriesRest,
-  getCategoryBySlugRest,
-} from "./restApi";
+  getCategoryListRest,
+  getCategoryRest,
+  getBrandsRest,
+  getBrandRest,
+  createCategoryRest,
+  mediaUploadRest,
+  getTagsRest,
+  getAllManufacturersRest,
+  createBrandRest,
+} from './restApi';
 import {
   getProductsGraphQL,
   getProductSearchGraphQL,
-  getCategoriesGraphQL,
-  createProductGraphQl,
   signinGraphQL,
   createAdminGraphql,
   getAdminsGraphql,
+  updateAdminGraphql,
+  changePasswordGraphql,
   getUserProfileGraphql,
-  getCategoryBySlugGraphQL,
+  getCategoryListGraphQL,
+  getCategoryGraphQL,
+  getBrandsGraphQL,
+  getBrandGraphQL,
+  createCategoryGraphQL,
+  mediaUploadGraphQL,
+  getTagsGraphQL,
+  createBrandGraphQL,
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
-} from "./graphQL";
-import { config } from "../config/index";
-import { apiFunction } from "../utils/types";
+} from './graphQL';
+import { config } from '../config/index';
+import { apiFunction } from '../utils/types';
 
 const graphqlApi: apiFunction = {
   getProducts: getProductsGraphQL,
   searchProduct: getProductSearchGraphQL,
-  getCategories: getCategoriesGraphQL,
+  getCategoryList: getCategoryListGraphQL,
+  getCategory: getCategoryGraphQL,
+  createCategory: createCategoryGraphQL,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
@@ -46,17 +63,25 @@ const graphqlApi: apiFunction = {
   signin: signinGraphQL,
   createAdmin: createAdminGraphql,
   getAdmins: getAdminsGraphql,
+  updateAdmin: updateAdminGraphql,
+  changePassword: changePasswordGraphql,
   getUserProfile: getUserProfileGraphql,
-  getCategoryBySlug: getCategoryBySlugGraphQL,
   // getManufacturer: getManufacturerGraphQl,
   // deleteManufacturer: deleteManufacturerGraphQl,
   // createManufacturer: createManufacturerGraphQl
+  getBrands: getBrandsGraphQL,
+  getBrand: getBrandGraphQL,
+  mediaUpload: mediaUploadGraphQL,
+  getTags: getTagsGraphQL,
+  createBrand: createBrandGraphQL,
 };
 
 const restApi: apiFunction = {
   getProducts: getProductsRest,
   searchProduct: getProductSearchRest,
-  getCategories: getCategoriesRest,
+  getCategoryList: getCategoryListRest,
+  getCategory: getCategoryRest,
+  createCategory: createCategoryRest,
   createProduct: createProductRest,
   updateProduct: updateProductRest,
   getProduct: getProductRest,
@@ -64,14 +89,21 @@ const restApi: apiFunction = {
   signin: signinRest,
   createAdmin: createAdminRest,
   getAdmins: getAdminsRest,
+  updateAdmin: updateAdminRest,
+  changePassword: changePasswordRest,
   createManufacturer: createManufacturerRest,
   getManufacturer: getManufacturerRest,
   deleteManufacturer: deleteManufacturerRest,
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
   getUserProfile: getUserProfileRest,
-  getCategoryBySlug: getCategoryBySlugRest,
+  getBrands: getBrandsRest,
+  getBrand: getBrandRest,
+  mediaUpload: mediaUploadRest,
+  getTags: getTagsRest,
+  getAllManufacturers: getAllManufacturersRest,
+  createBrand: createBrandRest,
 };
 
 export const userAPI: apiFunction =
-  config?.apiService === "GRAPHQL" ? graphqlApi : restApi;
+  config?.apiService === 'GRAPHQL' ? graphqlApi : restApi;

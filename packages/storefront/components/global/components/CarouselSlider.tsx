@@ -1,12 +1,9 @@
-import React, { Children, FC } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
-import Image from "next/image";
-
-import { CarouselBody } from "utils/types";
-
 import "swiper/css";
 import "swiper/css/autoplay";
+
+import React, { FC } from "react";
+import { Swiper } from "swiper/react";
+import { Autoplay, Pagination } from "swiper";
 
 interface Props {
   children: any;

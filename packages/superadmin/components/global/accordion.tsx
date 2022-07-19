@@ -1,5 +1,5 @@
-import React, { FC, ReactChild, ReactChildren } from "react";
-import styles from "../../styles/Input.module.css";
+import React, { FC, ReactChild, ReactChildren } from 'react';
+import styles from '../../styles/Input.module.css';
 
 interface Props {
   title: string;
@@ -12,7 +12,7 @@ interface Props {
 //Need to pass the Accordion object props to the Accordion component
 const Accordion: FC<Props> = ({ title, children, id, icon, show = false }) => {
   return (
-    <div className="accordion" id="accordionExample">
+    <div className="accordion mb-2" id="accordionExample">
       <div className="accordion-item">
         <h2 className="accordion-header" id={`heading${id}`}>
           <button
@@ -23,16 +23,13 @@ const Accordion: FC<Props> = ({ title, children, id, icon, show = false }) => {
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            <i
-              className={icon}
-              style={{ marginTop: "-10px", marginRight: "18px" }}
-            ></i>{" "}
+            <i className={`${icon} me-2`} />
             {title}
           </button>
         </h2>
         <div
           id={`collapse${id}`}
-          className={`accordion-collapse collapse ${show ? "show" : ""}`}
+          className={`accordion-collapse collapse ${show ? 'show' : ''}`}
           aria-labelledby={`heading${id}`}
           data-bs-parent="#accordionExample"
         >

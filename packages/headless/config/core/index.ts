@@ -6,6 +6,6 @@ export const coreConfig = {
     env: ENV || 'DEVELOPMENT',
     host: HOST || 'localhost',
     restApiPrefix: REST_API_PREFIX || 'api',
-    baseUrl: String(BASE_URL) || 'http://localhost:3000',
+    baseUrl: BASE_URL || 'http://localhost:3000',
     graphqlPathPrefix: GRAPHQL_PATH_PREFIX || 'graphql',
 }

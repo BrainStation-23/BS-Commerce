@@ -1,5 +1,7 @@
 import type { NextComponentType } from "next";
-import DealProducts from "./dealProducts";
+
+import DealProducts from "@/components/deals/dealProducts/dealProducts";
+
 const DealProductSegment: NextComponentType = () => {
   return (
     <>

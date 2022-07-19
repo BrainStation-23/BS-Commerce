@@ -1,31 +1,15 @@
-import withAuth from "@/components/auth/withAuth";
-import { userAPI } from "APIs";
-import { useAppDispatch, useAppSelector } from "customHooks/hooks";
-import type { NextPage } from "next";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import type { NextPage } from 'next';
 
-import CartComponent from "../components/cart/index";
+import CartComponent from '@/components/cart/index';
 
 const Cart: NextPage = () => {
-    return (
-
-        <>
-            <div className="">
-                <CartComponent />
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div>
+        <CartComponent />
+      </div>
+    </>
+  );
 };
-
-// export async function getServerSideProps(context: any) {
-//     const res = await userAPI.getCart();
-
-//     return {
-//         props: {
-//             cartData: res,
-//         },
-//     };
-// }
 
 export default Cart;

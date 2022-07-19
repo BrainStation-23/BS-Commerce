@@ -1,45 +1,59 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import { Cart, CustomerProduct } from 'models';
+import { CustomerProduct, Category, Wishlist } from 'models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeAllCartItems } from 'toolkit/cartSlice';
-import { storeFeaturedProducts, storeProducts } from 'toolkit/ProductsSlice';
+import { storeCategory } from 'toolkit/categorySlice';
+import {
+  storeFeaturedProducts,
+  storeProducts,
+  storeWishlist,
+} from 'toolkit/productsSlice';
 
 import HomeComponent from '@/components/home';
-import { renderToStringWithData } from '@apollo/client/react/ssr';
 
 interface Props {
   products: CustomerProduct[];
   featuredProducts: CustomerProduct[];
-  cartData: Cart;
+  category: Category[];
+  wishlistedProducts: Wishlist;
 }
 
 const Home: NextPage<Props> = ({
   products,
   featuredProducts,
-  cartData,
+  category,
+  wishlistedProducts,
 }: Props) => {
   const dispatch = useAppDispatch();
 
-  dispatch(storeAllCartItems(cartData.items!));
+  dispatch(storeCategory(category));
   dispatch(storeProducts(products));
   dispatch(storeFeaturedProducts(featuredProducts));
+  dispatch(storeWishlist(wishlistedProducts));
 
   return <HomeComponent />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let token = cookie?.parse(context.req.headers?.cookie);
+  const reqCookie = context.req.headers.cookie;
+  const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
-  const cartData = await userAPI.getCart(token.token);
+  const category = await userAPI.getCategoryList();
+  // JSON.parse(JSON.stringify(category));
+  let wishlistedProducts;
+  if (reqCookie) {
+    wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
+  }
+
   return {
     props: {
       products: allProducts,
       featuredProducts: featuredProducts,
-      cartData: cartData || [],
+      category: category,
+      wishlistedProducts: wishlistedProducts || [],
     },
   };
 };

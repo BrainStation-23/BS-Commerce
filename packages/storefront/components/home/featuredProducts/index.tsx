@@ -1,23 +1,20 @@
-import { SwiperSlide } from "swiper/react";
-
-import ProductShow from "./product";
-import productData from "../../../allData/product-data.json";
-import SwiperGrid from "@/components/global/components/swipergrid";
-import Container from "@/components/global/components/container";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import { productInterface } from "./models";
-import { Product } from "models";
 import React from "react";
-import ProductRow from "../bestSell/productRow.component";
+import { SwiperSlide } from "swiper/react";
+
 import { useAppSelector } from "customHooks/hooks";
+
+import SwiperGrid from "@/components/global/components/swipergrid";
+import Container from "@/components/global/components/container";
+import ProductRow from "@/components/home/bestSell/productRow.component";
 
 const FeaturedProducts = () => {
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts
+    (state) => state.persistedReducer.product.publicProducts?.products
   );
   const getMinimumProduct = () => {
     const w = window.innerWidth;

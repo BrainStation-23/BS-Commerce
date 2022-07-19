@@ -1,5 +1,6 @@
-import type { NextComponentType } from "next";
 import React, { useState } from "react";
+
+import type { NextComponentType } from "next";
 
 const Date: NextComponentType = () => {
   return (

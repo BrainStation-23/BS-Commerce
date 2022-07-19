@@ -1,16 +1,30 @@
-import { useState, useEffect } from "react";
-import type { NextComponentType } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link';
 
-import Currency from "./currency";
-import HeaderAccount from "./header-account";
-import Language from "./languages";
-import Search from "./search";
+import { useRouter } from 'next/router';
+import type { NextComponentType, GetServerSideProps } from 'next';
+import { useState, useEffect } from 'react';
 
+import { useAppSelector } from 'customHooks/hooks';
+
+import { getCategoryList } from 'models';
+import Currency from '@/components/global/components/currency';
+import HeaderAccount from '@/components/global/components/header-account';
+import Language from '@/components/global/components/languages';
+import Search from '@/components/global/components/search';
+import { userAPI } from 'APIs';
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await userAPI.getCategoryList();
+  // console.log(res);
+  return {
+    props: {
+      menuItems: res,
+    },
+  };
+};
 interface menuLink {
   name: string;
-  link: string;
+  link: object;
   hasSubmenu: boolean;
   submenu?: subLink[];
 }
@@ -23,65 +37,84 @@ interface subLink {
 const Header: NextComponentType = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
-  const [stickyClass, setStickyClass] = useState("relative");
-  const customerNumber = "+880 1674314359";
+  const [stickyClass, setStickyClass] = useState('relative');
+  const customerNumber = '+880 1674314359';
   const { pathname } = useRouter();
+  const categories = useAppSelector(
+    (state) => state.persistedReducer.category.category
+  );
 
-  const allCategories: menuLink[] = [
-    { name: "vegetable", link: "/", hasSubmenu: true },
-    { name: "fruits", link: "/", hasSubmenu: true },
-    { name: "salads", link: "/", hasSubmenu: true },
-    { name: "fish & seafood", link: "/", hasSubmenu: false },
-    { name: "fresh meat", link: "/", hasSubmenu: false },
-    { name: "butter & eggs", link: "/", hasSubmenu: false },
-    { name: "milk", link: "/", hasSubmenu: false },
-    { name: "oil & vinegars", link: "/", hasSubmenu: false },
-    { name: "bread", link: "/", hasSubmenu: false },
-  ];
+  // console.log(categories);
+
+  const allCategories: menuLink[] = [];
+  categories?.categories?.forEach((category) => {
+    allCategories.push({
+      name: category.name,
+      link: {
+        pathname: `/collections/${category.name}`,
+        query: {
+          categoryId: category.id,
+          name: category.name,
+        },
+      },
+      hasSubmenu: false,
+    });
+  });
+  // const allCategories: menuLink[] = [
+  //   { name: "vegetable", link: "/", hasSubmenu: true },
+  //   { name: "fruits", link: "/", hasSubmenu: true },
+  //   { name: "salads", link: "/", hasSubmenu: true },
+  //   { name: "fish & seafood", link: "/", hasSubmenu: false },
+  //   { name: "fresh meat", link: "/", hasSubmenu: false },
+  //   { name: "butter & eggs", link: "/", hasSubmenu: false },
+  //   { name: "milk", link: "/", hasSubmenu: false },
+  //   { name: "oil & vinegars", link: "/", hasSubmenu: false },
+  //   { name: "bread", link: "/", hasSubmenu: false },
+  // ];
 
   const menus: menuLink[] = [
     {
-      name: "home",
-      link: "/",
+      name: 'home',
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
-        { name: "Home - 1", link: "/" },
-        { name: "Home - 2", link: "/" },
-        { name: "Home - 3", link: "/" },
+        { name: 'Home - 1', link: '/' },
+        { name: 'Home - 2', link: '/' },
+        { name: 'Home - 3', link: '/' },
       ],
     },
     {
-      name: "shop",
-      link: "/",
+      name: 'shop',
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
-        { name: "Cucumber", link: "/" },
-        { name: "Papaya", link: "/" },
-        { name: "Mango", link: "/" },
+        { name: 'Cucumber', link: '/' },
+        { name: 'Papaya', link: '/' },
+        { name: 'Mango', link: '/' },
       ],
     },
     {
-      name: "product",
-      link: "/",
+      name: 'product',
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
-        { name: "Simple Product", link: "/" },
-        { name: "Variable Product", link: "/" },
-        { name: "Affiliate Product", link: "/" },
+        { name: 'Simple Product', link: '/' },
+        { name: 'Variable Product', link: '/' },
+        { name: 'Affiliate Product', link: '/' },
       ],
     },
-    { name: "blog", link: "/", hasSubmenu: false },
+    { name: 'blog', link: { pathname: '/' }, hasSubmenu: false },
     {
-      name: "pages",
-      link: "/",
+      name: 'pages',
+      link: { pathname: '/' },
       hasSubmenu: true,
       submenu: [
-        { name: "About Us", link: "/about" },
-        { name: "Service", link: "/service" },
-        { name: "FAQ", link: "/faq" },
+        { name: 'About Us', link: '/about' },
+        { name: 'Service', link: '/service' },
+        { name: 'FAQ', link: '/faq' },
       ],
     },
-    { name: "contact", link: "/contact", hasSubmenu: false },
+    { name: 'contact', link: { pathname: '/contact' }, hasSubmenu: false },
   ];
 
   const toggleOpen = () => {
@@ -97,31 +130,31 @@ const Header: NextComponentType = () => {
       let windowHeight = window.scrollY;
       windowHeight >= 140
         ? setStickyClass(
-            "lg:fixed lg:top-0 lg:left-0 lg:z-50 lg:bg-white/95 lg:w-full lg:shadow-lg"
+            'lg:fixed lg:top-0 lg:left-0 lg:z-50 lg:bg-white/95 lg:w-full lg:shadow-lg'
           )
-        : setStickyClass("relative");
+        : setStickyClass('relative');
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", setStickyNavbar);
+    window.addEventListener('scroll', setStickyNavbar);
 
     return () => {
-      window.removeEventListener("scroll", setStickyNavbar);
+      window.removeEventListener('scroll', setStickyNavbar);
     };
   }, []);
 
   // put the pathname in 'includes' where header needs to be hidden
 
-  if (pathname.includes("/checkout")) {
+  if (pathname.includes('/checkout')) {
     return null;
   }
 
   return (
     <>
       {/* Top portion */}
-      <header className="hidden lg:flex justify-center py-2 border-b border-slate-200">
-        <div className="flex justify-between container text-sm px-4">
+      <header className="hidden justify-center border-b border-slate-200 py-2 lg:flex">
+        <div className="container flex justify-between px-4 text-sm">
           <div className="space-x-2">
             <Language />
             <span>|</span>
@@ -131,14 +164,14 @@ const Header: NextComponentType = () => {
         </div>
       </header>
       {/* Middle portion */}
-      <div className="flex justify-center py-4 mb-2 lg:pt-8 lg:pb-6">
-        <div className="flex justify-between items-center container px-4">
+      <div className="mb-2 flex justify-center py-4 lg:pt-8 lg:pb-6">
+        <div className="container flex items-center justify-between px-4">
           <span className="text-3xl font-bold">
             <Link href="/">
               <a>BS Commerce</a>
             </Link>
           </span>
-          <span className="hidden lg:inline-block w-2/5 lg:w-[479px]">
+          <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
             <Search placeholder="Search our store" />
           </span>
           <span className="hidden lg:inline-block">
@@ -146,7 +179,7 @@ const Header: NextComponentType = () => {
           </span>
 
           <span
-            className="lg:hidden border border-gray-700 p-1"
+            className="border border-gray-700 p-1 lg:hidden"
             onClick={() => setMenu(!menu)}
           >
             <svg
@@ -169,7 +202,7 @@ const Header: NextComponentType = () => {
         <div className="container px-4">
           <div className="flex flex-row items-center">
             <div
-              className="flex flex-row items-center relative rounded-lg mb-3 lg:mb-0 lg:rounded-t-xl lg:rounded-b-none bg-green-600 text-white px-4 py-2 lg:py-3 font-medium w-full lg:w-56 cursor-pointer mr-0 lg:mr-2"
+              className="relative mb-3 mr-0 flex w-full cursor-pointer flex-row items-center rounded-lg bg-green-600 px-4 py-2 font-medium text-white lg:mb-0 lg:mr-2 lg:w-56 lg:rounded-t-xl lg:rounded-b-none lg:py-3"
               onClick={toggleOpen}
             >
               <svg
@@ -202,8 +235,8 @@ const Header: NextComponentType = () => {
             </div>
 
             <div
-              className={`z-50 flex flex-col gap-y-4 absolute overflow-hidden bg-white text-black text-base w-[calc(464px-2rem)] w-dnd md:w-[96%] lg:w-56 px-4 py-3 top-[40px] lg:top-[48px] rounded-b-sm shadow-md transition-all duration-500 ease-in ${
-                isOpen ? "h-[350px]" : "h-0 opacity-0"
+              className={`absolute top-[40px] z-40 flex w-11/12 flex-col gap-y-4 overflow-hidden rounded-b-sm bg-white px-4 py-3 text-base text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
+                isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
               }`}
             >
               {allCategories.map((category) => (
@@ -211,9 +244,14 @@ const Header: NextComponentType = () => {
                   key={category.name}
                   className="flex flex-row justify-between text-sm"
                 >
-                  <a className="capitalize hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer">
-                    {category.name}
-                  </a>
+                  <Link
+                    href={category.link}
+                    as={`/collections/${category.name}`}
+                  >
+                    <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
+                      {category.name}
+                    </a>
+                  </Link>
                   <div className="md:hidden">
                     {category.hasSubmenu && (
                       <svg
@@ -235,13 +273,13 @@ const Header: NextComponentType = () => {
             </div>
             {/* Menu */}
             <div
-              className={`fixed flex flex-col gap-y-8 items-center bg-slate-50 lg:static lg:bg-slate-50/0 h-full lg:h-fit w-72 top-0 z-50 lg:shadow-none px-4 lg:px-8 py-2 lg:p-0 transition-[left] duration-300 ease-linear ${
-                menu ? "left-0 dnd-shadow" : "-left-72"
+              className={`fixed top-0 z-40 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
+                menu ? 'left-0' : '-left-72'
               }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-10 ml-auto lg:hidden mb-2"
+                className="ml-auto mb-2 h-10 w-10 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -254,16 +292,16 @@ const Header: NextComponentType = () => {
                   d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <div className="lg:hidden w-full">
+              <div className="w-full lg:hidden">
                 <Search placeholder="Search our store" />
               </div>
               <div className="lg:hidden" onClick={closeMenu}>
                 <HeaderAccount />
               </div>
-              <div className="lg:hidden flex flex-row text-sm items-center text-gray-900 text-right">
+              <div className="flex flex-row items-center text-right text-sm text-gray-900 lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 mr-2"
+                  className="mr-2 h-7 w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -282,12 +320,12 @@ const Header: NextComponentType = () => {
                   </span>
                 </div>
               </div>
-              <ul className="w-full list-none flex lg:flex-row flex-col lg:gap-x-6 my-0">
+              <ul className="my-0 flex w-full list-none flex-col lg:flex-row lg:gap-x-6">
                 {menus.map((menu) => (
                   <li key={menu.name} className="group">
                     <Link href={menu.link}>
                       <a
-                        className="relative lg:font-medium flex flex-row capitalize justify-between items-center border-b border-slate-200 py-4 lg:border-none lg:py-0 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer"
+                        className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-green-600 lg:border-none lg:py-0 lg:font-medium"
                         onClick={closeMenu}
                       >
                         {menu.name}
@@ -310,13 +348,13 @@ const Header: NextComponentType = () => {
 
                     {menu.hasSubmenu && (
                       <div
-                        className={`hidden overflow-hidden absolute lg:group-hover:inline-block transition-all duration-300 ease-in bg-white shadow-lg px-6 py-6`}
+                        className={`absolute hidden overflow-hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in lg:group-hover:inline-block`}
                       >
                         <ul className="">
                           {menu.submenu?.map((menu) => (
                             <li
                               key={menu.name}
-                              className="py-2 hover:text-green-600 transition-all duration-100 ease-linear cursor-pointer text-sm"
+                              className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
                             >
                               <Link href={menu.link}>
                                 <a>{menu.name}</a>
@@ -331,7 +369,7 @@ const Header: NextComponentType = () => {
               </ul>
             </div>
 
-            <div className="hidden ml-auto lg:flex flex-row text-sm text-gray-900 text-right items-center gap-x-2">
+            <div className="ml-auto hidden flex-row items-center gap-x-2 text-right text-sm text-gray-900 lg:flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-7 w-7"

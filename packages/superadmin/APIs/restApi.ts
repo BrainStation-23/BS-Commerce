@@ -1,28 +1,33 @@
-import { GetProductParams } from "./../../models/src/product/getProduct";
-import axios from "axios";
-import { apiEndPoints } from "../utils/apiEndPoints";
-import {
-  CreateProductRequest,
-  UpdateProductRequest,
-} from "../../models/src/product";
+import { NextRouter } from 'next/router';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   SignInRequest,
   SignInSuccessResponse,
   CreateManufacturerRequest,
   UpdateManufacturerRequest,
-  GetUserResponse,
   GetUserSuccessResponse,
   UpdatedUserRequest,
   ChangePasswordRequest,
-  getCategoryBySlugRequest,
-  getCategoryBySlugSuccessResponse,
-} from "models";
+  getCategorySuccessResponse,
+  getCategoryListSuccessResponse,
+  getCategoryRequest,
+  CreateProductRequest,
+  UpdateProductRequest,
+  GetProductParams,
+  Manufacturer,
+  Product,
+  GetAllBrandsSuccessResponse,
+  createCategoryRequest,
+  createCategorySuccessResponse,
+  UploadFileSuccessResponse,
+  GetTagsResponse,
+  GetManufacturersSuccessResponse,
+  CreateBrandRequest,
+} from 'models';
 
-import { User } from "../utils/types";
-import { GetManufacturerSuccessResponse, Manufacturer, Product } from "models";
-import { toast } from "react-toastify";
-import { CategoryInterface } from "../components/category/catergory-model";
-import { NextRouter } from "next/router";
+import { User } from '../utils/types';
+import { apiEndPoints } from '../utils/apiEndPoints';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -38,8 +43,8 @@ export async function createProductRest(
 ): Promise<CreateProductRequest | undefined> {
   try {
     const response = await axios.post<CreateProductRequest>(`/product`, data);
-    router.push("/Product");
-    toast.success("Create Successful");
+    router.push('/Product');
+    toast.success('Create Successful');
     return response.data as CreateProductRequest;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
@@ -48,23 +53,6 @@ export async function createProductRest(
 }
 
 //  Create Manufacturer Rest API Post
-export async function createManufacturerRest(
-  data: CreateManufacturerRequest,
-  router: any
-): Promise<CreateManufacturerRequest | undefined> {
-  try {
-    const response = await axios.post<CreateManufacturerRequest>(
-      `${apiEndPoints.manufacturer}`,
-      data
-    );
-    router.push("/Admin/Manufacturer/list");
-    toast.success("Create Successful");
-    return response.data as CreateManufacturerRequest;
-  } catch (error) {
-    console.log(error);
-    toast.error(error?.response?.data?.error);
-  }
-}
 
 export async function getProductsRest(
   pageSize: number
@@ -113,8 +101,8 @@ export async function updateProductRest(
       `${apiEndPoints.product}/${id}`,
       data
     );
-    router.push("/Product");
-    toast.success("Edit Successful");
+    router.push('/Product');
+    toast.success('Edit Successful');
     return response.data as UpdateProductRequest;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
@@ -127,7 +115,7 @@ export async function deleteProductRest(
 ): Promise<boolean | undefined> {
   try {
     await axios.delete(`${apiEndPoints.product}/${productId}`);
-    toast.success("Delete Successful");
+    toast.success('Delete Successful');
     return true;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -140,7 +128,7 @@ export async function createAdminRest(
 ): Promise<User | undefined> {
   try {
     await axios.post(`${apiEndPoints.auth}/signup`, data);
-    toast.success("Create Successful");
+    toast.success('Create Successful');
     cb();
     return;
   } catch (error: any) {
@@ -158,8 +146,8 @@ export async function signinRest(
       `${apiEndPoints.signin}`,
       data
     );
-    router.push("/");
-    toast.success("Successfully signed in!");
+    router.push('/');
+    toast.success('Successfully signed in!');
     return response.data as SignInSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
@@ -178,17 +166,17 @@ export async function getAdminsRest(): Promise<User[] | undefined> {
 export async function updateAdminRest(
   data: UpdatedUserRequest,
   //id: string
-  router
+  router: NextRouter
 ): Promise<UpdatedUserRequest | undefined> {
   try {
     const response = await axios.patch<UpdatedUserRequest>(
       `${apiEndPoints.user}`,
       data
     );
-    router.push("/users/admin");
-    toast.success("Edit Successful");
+    router.push('/users/admin');
+    toast.success('Edit Successful');
     return response.data as UpdatedUserRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -197,17 +185,17 @@ export async function updateAdminRest(
 export async function changePasswordRest(
   data: ChangePasswordRequest,
   //id: string
-  router
+  router: NextRouter
 ): Promise<ChangePasswordRequest | undefined> {
   try {
     const response = await axios.patch<ChangePasswordRequest>(
       `${apiEndPoints.user}`,
       data
     );
-    router.push("/users/admin");
-    toast.success("Edit Successful");
+    router.push('/users/admin');
+    toast.success('Edit Successful');
     return response.data as ChangePasswordRequest;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
@@ -219,8 +207,25 @@ export async function getManufacturerRest(
   try {
     const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`);
     return data?.data as Manufacturer[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
+  }
+}
+export async function createManufacturerRest(
+  data: CreateManufacturerRequest,
+  router: any
+): Promise<CreateManufacturerRequest | undefined> {
+  try {
+    const response = await axios.post<CreateManufacturerRequest>(
+      `${apiEndPoints.manufacturer}`,
+      data
+    );
+    router.push('/Manufacturer/');
+    toast.success('Create Successful');
+    return response.data as CreateManufacturerRequest;
+  } catch (error: any) {
+    // console.log(error);
+    toast.error(error?.response?.data?.error);
   }
 }
 
@@ -232,26 +237,34 @@ export async function deleteManufacturerRest(
     const { data } = await axios?.delete(
       `${apiEndPoints?.manufacturerList}/${id}`
     );
-    router.push("/Admin/Manufacturer/list");
-    toast.success("Successfully deleted");
+    router.push('/Manufacturer/');
+    toast.success('Successfully deleted');
     return data?.data as Manufacturer[];
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
-
+export async function getAllManufacturersRest(): Promise<
+  GetManufacturersSuccessResponse | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.manufacturerList}`);
+    return response.data as GetManufacturersSuccessResponse;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
 export async function getSingleManufacturerRest(
   data: any,
   manufacturerId: any
 ): Promise<any | undefined> {
   try {
-    console.log("*", data);
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
     const res = await axios.get(`manufacturers/${data}`);
-    console.log(res.data);
 
     return res?.data as Manufacturer;
-  } catch (error) {
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
@@ -259,55 +272,127 @@ export async function getSingleManufacturerRest(
 export async function updateManufacturerRest(
   data: UpdateManufacturerRequest,
   id: string,
-  router
+  router: any
 ): Promise<UpdateManufacturerRequest | undefined> {
   try {
     const response = await axios.patch<UpdateManufacturerRequest>(
       `manufacturers/${id}`,
       data
     );
-    router.push("/Admin/Manufacturer/list");
-    toast.success("Edit Successful");
+    // alert("Hi");
+    router.push('/Manufacturer/');
+    toast.success('Edit Successful');
     return response.data as UpdateManufacturerRequest;
-  } catch (error) {
-    toast.error(error?.response?.data?.error);
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
 }
 
-export async function getCategoriesRest(): Promise<
-  CategoryInterface[] | undefined
+export async function getCategoryListRest(): Promise<
+  getCategoryListSuccessResponse | undefined
 > {
   try {
     const response = await axios.get(`${apiEndPoints.category}`);
-
-    return response?.data.data.categories as CategoryInterface[];
+    return response.data as getCategoryListSuccessResponse;
   } catch (error: any) {
-    console.error(error);
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
   }
 }
 
-export async function getUserProfileRest(): Promise<
-  GetUserSuccessResponse | undefined
-> {
+export async function getCategoryRest(
+  id: getCategoryRequest
+): Promise<getCategorySuccessResponse | undefined> {
+  try {
+    const { data } = await axios.get(
+      `${apiEndPoints.category}/${id.categoryId}`
+    );
+    return data as getCategorySuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function createCategoryRest(
+  data: createCategoryRequest,
+  router: NextRouter
+): Promise<createCategorySuccessResponse | undefined> {
+  try {
+    const response = await axios.post(`${apiEndPoints.category}`, data);
+    router.push('/category');
+    toast.success('Create Successful');
+    return response.data as createCategorySuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getUserProfileRest(
+  router: NextRouter
+): Promise<GetUserSuccessResponse | undefined> {
   try {
     const { data } = await axios.get(`${apiEndPoints.user}`);
     return data as GetUserSuccessResponse;
   } catch (error: any) {
-    toast.error(error?.response?.data?.error);
+    router.push('/account/login');
+    // toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
   }
 }
 
-export async function getCategoryBySlugRest(
-  slug: getCategoryBySlugRequest
-): Promise<getCategoryBySlugSuccessResponse | undefined> {
+export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
   try {
-    const { data } = await axios.get(
-      `${apiEndPoints.category}/slug/${slug.slug}`
-    );
-    return data as getCategoryBySlugSuccessResponse;
+    const response = await axios.get(`${apiEndPoints.tags}`);
+
+    return response?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getBrandsRest(): Promise<any> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
+    return data?.data as GetAllBrandsSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function createBrandRest(
+  data: CreateBrandRequest,
+  router: NextRouter
+): Promise<any> {
+  try {
+    const response = await axios?.post(`${apiEndPoints?.brands}/create`, data);
+    router.push('/Brands');
+    toast.success('Create Successful');
+    return response?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+export async function getBrandRest(brandId: any): Promise<any> {
+  try {
+    const { data } = await axios?.get(
+      `${apiEndPoints?.brands}/${brandId.brandId}`
+    );
+    return data?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+export async function mediaUploadRest(
+  data: FormData
+): Promise<UploadFileSuccessResponse | undefined> {
+  try {
+    const response = await axios.post(`${apiEndPoints.media}/upload`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data as UploadFileSuccessResponse;
+  } catch (error: any) {
+    toast.error(error?.response.error);
   }
 }

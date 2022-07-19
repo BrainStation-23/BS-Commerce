@@ -1,66 +1,59 @@
-import { FC, useState } from "react";
-import { Field, ErrorMessage } from "formik";
+import { FC, useEffect, useState } from 'react';
 
-import Tooltips from "../../global/tooltip";
-import CustomSelect from "../CustomSelect.component";
+import CustomSelect from '@/components/products/CustomSelect.component';
+import FieldTemplate from '@/components/products/forms/fieldTemplate';
+import { userAPI } from '@/APIs';
+import { tagsOption } from '@/components/products/models/index';
 
 const ProductInfoForm: FC = () => {
-  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
+  const [tags, setTags] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
+  const [tagsOptions, setTagsOption] = useState<tagsOption[]>([]);
+  const [brandsOptions, setBrandsOption] = useState<tagsOption[]>([]);
 
   const toggleButton = () => {
-    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
-    else setBtnToggler("bi-plus-lg");
+    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
+    else setBtnToggler('bi-plus-lg');
+  };
+  const getTags = async () => {
+    const res = await userAPI.getTags();
+    const data = res?.data;
+    data ? setTags(data) : '';
+  };
+  const setTagsOptions = () => {
+    const temp: tagsOption[] = [];
+    tags?.map((tag) => {
+      temp.push({
+        label: tag?.name,
+        value: tag?.name,
+      });
+      setTagsOption(temp);
+    });
   };
 
-  const tagsOptions = [
-    {
-      label: "Tag1",
-      value: "Tag1",
-    },
-    {
-      label: "Tag2",
-      value: "Tag2",
-    },
-    {
-      label: "Tag3",
-      value: "Tag3",
-    },
-    {
-      label: "Tag4",
-      value: "Tag4",
-    },
-    {
-      label: "Tag5",
-      value: "Tag5",
-    },
-  ];
-
-  const brandOptions = [
-    {
-      label: "Daraz",
-      value: "Daraz",
-    },
-    {
-      label: "Pickaboo",
-      value: "Pickaboo",
-    },
-    {
-      label: "Chaldal",
-      value: "Chaldal",
-    },
-    {
-      label: "Bagdoom",
-      value: "Bagdoom",
-    },
-    {
-      label: "Othoba",
-      value: "Othoba",
-    },
-    {
-      label: "Ajkerdeal",
-      value: "Ajkerdeal",
-    },
-  ];
+  const getBrands = async () => {
+    const data = await userAPI.getBrands();
+    data ? setBrands(data) : '';
+  };
+  const setBrandsOptions = () => {
+    const temp: tagsOption[] = [];
+    brands?.map((brnad) => {
+      temp.push({
+        label: brnad?.info?.name,
+        value: brnad?.info?.name,
+      });
+      setBrandsOption(temp);
+    });
+  };
+  useEffect(() => {
+    tags[0] ? '' : getTags();
+    tagsOptions[0] ? '' : setTagsOptions();
+  }, [tagsOptions, tags]);
+  useEffect(() => {
+    brands[0] ? '' : getBrands();
+    brandsOptions[0] ? '' : setBrandsOptions();
+  }, [brandsOptions, brands]);
   return (
     <>
       <div
@@ -71,7 +64,7 @@ const ProductInfoForm: FC = () => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <button
-            className="btn invisible w-100 h-auto text-top m-0 p-0"
+            className="btn w-100 text-top invisible m-0 h-auto p-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#prouctInfoTab"
@@ -80,11 +73,13 @@ const ProductInfoForm: FC = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <i
-                className="bi bi-info-lg col-1 "
-                style={{ fontSize: "25px"}}
-              />
-              <div className="px-3 fs-5 col text-start">Product info</div>
+              <div className="fs-5 col text-start px-3">
+                <i
+                  className="bi bi-info-lg col-1 px-1"
+                  style={{ fontSize: '25px' }}
+                />
+                Product info
+              </div>
               <div className="col-1">
                 <i className={`bi ${btnToggler}`} />
               </div>
@@ -93,352 +88,89 @@ const ProductInfoForm: FC = () => {
         </div>
         <div className="collapse " id="prouctInfoTab">
           <div className="card-body">
-            <div id="product-details-area">
-              <div className="form-group row my-2">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end">
-                    <label className="col-form-label col px-1" htmlFor="Name">
-                      Product name
-                    </label>
-                    <Tooltips title="The name of the product." />
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <div className="input-group input-group-required">
-                    <Field
-                      className="form-control text-box single-line"
-                      id="productName"
-                      name="productName"
-                      type="text"
-                    />
-                    <div className="pt-2" style={{ height: "10px" }}>
-                      <h2 className="required text-danger ">*</h2>
-                    </div>
-                  </div>
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="productName" />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group row my-2">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="ShortDescription"
-                    >
-                      Short description
-                    </label>
-                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <div className="input-group pe-3 ">
-                    <Field
-                      as="textarea"
-                      className="form-control"
-                      id="ShortDescription"
-                      name="ShortDescription"
-                    />
-                  </div>
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="ShortDescription" />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group row my-2">
-                <div className="col-md-3">
-                  <div className="label-wrapper row row-cols-auto float-md-end">
-                    <label
-                      className="col-form-label col px-1"
-                      htmlFor="FullDescription"
-                    >
-                      Full description
-                    </label>
-                    <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <div className="input-group pe-3 ">
-                    <Field
-                      as="textarea"
-                      className="form-control"
-                      id="FullDescription"
-                      name="FullDescription"
-                    />
-                  </div>
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="FullDescription" />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group row my-2">
-                <div className="col-md-3">
-                  <div className="label-wrapper text-start text-md-end row">
-                    <label className="col-form-label col px-1" htmlFor="Sku">
-                      SKU
-                    </label>
-                    <Tooltips title="Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product." />
-                  </div>
-                </div>
-                <div className="col-md-9">
-                  <div className="input-group ">
-                    <Field
-                      className="form-control text-box single-line"
-                      id="Sku"
-                      name="Sku"
-                      type="text"
-                    />
-
-                    <div className="pt-2" style={{ height: "10px" }}>
-                      <h2 className="required text-danger ">*</h2>
-                    </div>
-                  </div>
-                  <div className="errMsg text-red-600 text-danger">
-                    <ErrorMessage name="Sku" />
-                  </div>
-                  <span className="field-validation-custom" />
-                </div>
-              </div>
-            </div>
-            <div className="form-group row" id="product-price-area">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label className="col-form-label col px-1" htmlFor="Price">
-                    Price
-                  </label>
-                  <Tooltips title="The price of the product. You can manage currency by selecting Configuration > Currencies." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <div className="input-group ">
-                  <Field
-                    type="number"
-                    id="Price"
-                    name="Price"
-                    className="form-control"
-                  />
-
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="OldPrice" />
-                </div>
-              </div>
-            </div>
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label className="col-form-label col px-1" htmlFor="OldPrice">
-                    Old price
-                  </label>
-                  <Tooltips title="The old price of the product. If you set an old price, this will display alongside the current price on the product page to show the difference in price." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <div className="input-group ">
-                  <Field
-                    type="number"
-                    id="OldPrice"
-                    name="OldPrice"
-                    aria-disabled="false"
-                    className="form-control"
-                  />
-
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="OldPrice" />
-                </div>
-              </div>
-            </div>
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="ProductCost"
-                  >
-                    Product cost
-                  </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <div className="input-group ">
-                  <Field
-                    type="number"
-                    id="ProductCost"
-                    name="ProductCost"
-                    aria-disabled="false"
-                    className="form-control"
-                  />
-
-                  <div className="" style={{ height: "10px" }}>
-                    <h2 className="required text-danger ">*</h2>
-                  </div>
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="ProductCost" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="showOnHomePage"
-                  >
-                    Show on HomePage
-                  </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="showOnHomePage"
-                  name="showOnHomePage"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="showOnHomePage" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="includeInTopMenu"
-                  >
-                    Include on top menu
-                  </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="includeInTopMenu"
-                  name="includeInTopMenu"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="includeInTopMenu" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="allowToSelectPageSize"
-                  >
-                    Allow to select page size
-                  </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="allowToSelectPageSize"
-                  name="allowToSelectPageSize"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="allowToSelectPageSize" />
-                </div>
-              </div>
-            </div>
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="published"
-                  >
-                    Published
-                  </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="published"
-                  name="published"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="published" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end p-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="displayOrder"
-                  >
-                    Display Order
-                  </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <div className="input-group ">
-                  <Field
-                    type="number"
-                    id="displayOrder"
-                    name="displayOrder"
-                    aria-disabled="false"
-                    className="form-control"
-                  />
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="displayOrder" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end py-2">
-                  <label
-                    className="col-form-label col px-1"
-                    htmlFor="isFeatured"
-                  >
-                    Featured
-                  </label>
-                  <Tooltips title="Determines whether this product is tax exempt (tax will not be applied to this product at checkout)." />
-                </div>
-              </div>
-              <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
-                <Field
-                  className="check-box mt-2"
-                  id="isFeatured"
-                  name="isFeatured"
-                  type="checkbox"
-                />
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="isFeatured" />
-                </div>
-              </div>
-            </div>
+            <FieldTemplate
+              label="Product name"
+              isRequired={true}
+              fieldID="productName"
+              fieldType="text"
+            />
+            <FieldTemplate
+              label="Short description"
+              isRequired={false}
+              fieldID="ShortDescription"
+              fieldAs="textarea"
+            />
+            <FieldTemplate
+              label="Full description"
+              isRequired={false}
+              fieldID="FullDescription"
+              fieldAs="textarea"
+            />
+            <FieldTemplate
+              label="SKU"
+              isRequired={true}
+              fieldID="Sku"
+              fieldType="text"
+            />
+            <FieldTemplate
+              label="Price"
+              isRequired={true}
+              fieldID="Price"
+              fieldType="number"
+            />
+            <FieldTemplate
+              label="Old price"
+              isRequired={true}
+              fieldID="OldPrice"
+              fieldType="number"
+            />
+            <FieldTemplate
+              label="Product cost"
+              isRequired={true}
+              fieldID="ProductCost"
+              fieldType="number"
+            />
+            <FieldTemplate
+              label="Show on HomePage"
+              isRequired={false}
+              fieldID="showOnHomePage"
+              fieldType="checkbox"
+              fieldClass="check-box mt-2  "
+            />
+            <FieldTemplate
+              label="Include on top menu"
+              isRequired={false}
+              fieldID="includeInTopMenu"
+              fieldType="checkbox"
+              fieldClass="check-box mt-2  "
+            />
+            <FieldTemplate
+              label="Allow to select page size"
+              isRequired={false}
+              fieldID="allowToSelectPageSize"
+              fieldType="checkbox"
+              fieldClass="check-box mt-2  "
+            />
+            <FieldTemplate
+              label="Published"
+              isRequired={false}
+              fieldID="published"
+              fieldType="checkbox"
+              fieldClass="check-box mt-2  "
+            />
+            <FieldTemplate
+              label="Display Order"
+              isRequired={true}
+              fieldID="displayOrder"
+              fieldType="number"
+            />
+            <FieldTemplate
+              label="Featured"
+              isRequired={false}
+              fieldID="isFeatured"
+              fieldType="checkbox"
+              fieldClass="check-box mt-2  "
+            />
 
             {/* <div className="form-group row">
               <div className="col-md-3">
@@ -449,7 +181,6 @@ const ProductInfoForm: FC = () => {
                   >
                     Publlish Date
                   </label>
-                  <Tooltips title="Product cost is a prime product cost. This field is only for internal use, not visible for customers." />
                 </div>
               </div>
               <div className="col-md-9 mt-md-3 mx-2 mx-md-0">
@@ -467,66 +198,33 @@ const ProductInfoForm: FC = () => {
                 </div>
               </div>
             </div> */}
+            {tagsOptions[0] ? (
+              <FieldTemplate
+                label="Tags"
+                isRequired={true}
+                fieldID="tags"
+                fieldType="none"
+                fieldClass="custom-select w-100"
+                options={tagsOptions}
+                component={CustomSelect}
+                placeholder="Select tags..."
+                ismulti={true}
+              />
+            ) : (
+              'tags empty'
+            )}
 
-            <div className="form-group row my-2">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end">
-                  <label className="col-form-label col px-1" htmlFor="tags">
-                    Tags
-                  </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-                </div>
-              </div>
-              <div className="col-md-9">
-                <div className="input-group ">
-                  {/* <Field
-                    type="text"
-                    className="form-control"
-                    id="tags"
-                    name="tags"
-                  /> */}
-                  <Field
-                    className="custom-select w-100"
-                    id="tags"
-                    name="tags"
-                    options={tagsOptions}
-                    component={CustomSelect}
-                    placeholder="Select tags..."
-                    isMulti={true}
-                  />
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="tags" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group row my-2">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end">
-                  <label className="col-form-label col px-1" htmlFor="brands">
-                    Brands
-                  </label>
-                  <Tooltips title="Short description is the text that is displayed in product list i.e. category / manufacturer pages." />
-                </div>
-              </div>
-              <div className="col-md-9">
-                <div className="input-group ">
-                  <Field
-                    className="custom-select w-100"
-                    id="brands"
-                    name="brands"
-                    options={brandOptions}
-                    component={CustomSelect}
-                    placeholder="Select brands..."
-                    isMulti={true}
-                  />
-                </div>
-                <div className="errMsg text-red-600 text-danger">
-                  <ErrorMessage name="brands" />
-                </div>
-              </div>
-            </div>
+            <FieldTemplate
+              label="Brands"
+              isRequired={true}
+              fieldID="brands"
+              fieldType="none"
+              fieldClass="custom-select w-100"
+              options={brandsOptions}
+              component={CustomSelect}
+              placeholder="Select brands..."
+              ismulti={true}
+            />
           </div>
         </div>
       </div>

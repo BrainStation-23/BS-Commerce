@@ -26,7 +26,7 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    brandId?: string;
+    brand?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
@@ -43,16 +43,6 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @IsBoolean()
     @Type(() => Boolean)
     isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsString()
-    slug?: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsString()
-    orderBy?: string;
 }
 
 export class GetCustomerAllProductsErrorResponseDto implements GetCustomerAllProductsErrorResponse {

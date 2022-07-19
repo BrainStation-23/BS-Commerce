@@ -1,8 +1,17 @@
-import ChevronLeft from "@/components/global/icons-for-checkout-page/chevron-left";
-import CreditCard from "@/components/global/icons-for-checkout-page/credit-card";
-import { Field, Form, Formik } from "formik";
-import Link from "next/link";
-import { useState } from "react";
+import Link from 'next/link';
+
+import { useState } from 'react';
+import { NextComponentType } from 'next';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { toast } from 'react-toastify';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
+import { useRouter } from 'next/router';
+import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+import { userAPI } from 'APIs';
+import { deleteCart } from 'toolkit/cartSlice';
 
 interface FormData {
   cardNumber: string;
@@ -12,38 +21,128 @@ interface FormData {
   shippingAddressPicked: string;
   firstName: string;
   lastName: string;
-  country: string;
   address: string;
   addressOptional: string;
   city: string;
   postalCode: string;
 }
 
-const PaymentDetails = (props: any) => {
-  const { setModal } = props;
+const PaymentDetails: NextComponentType = () => {
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
+  let usableCart: any = [];
+  cartData.map((cartItem) => {
+    const cart = {
+      productId: cartItem?.productId,
+      name: cartItem?.product?.info?.name,
+      price: cartItem?.product?.info?.price,
+      quantity: cartItem?.quantity,
+      sku: cartItem?.product?.info?.sku,
+      photos: cartItem?.product?.photos,
+    };
+    usableCart.push(cart);
+  });
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price! * data.quantity;
+  }, 0);
+
+  const shippingInfo = useAppSelector(
+    (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const initialValues = {
-    cardNumber: "",
-    nameOnCard: "",
-    expirationDate: "",
-    securityCode: "",
-    shippingAddressPicked: "",
-    firstName: "",
-    lastName: "",
-    country: "",
-    address: "",
-    addressOptional: "",
-    city: "",
-    postalCode: "",
+    cardNumber: '',
+    nameOnCard: '',
+    expirationDate: '',
+    securityCode: '',
+    shippingAddressPicked: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    addressOptional: '',
+    city: '',
+    postalCode: '',
   };
 
   const [showShippingForm, setShowShippingForm] = useState(false);
 
   const handlePaymentSubmit = (data: FormData) => {
+    {
+      data ? dispatch(addToBillingInfo(data)) : null;
+    }
+    const obj = {
+      shippingCost: 0,
+      billingAddress: {
+        firstName: data.firstName || shippingInfo?.firstName!,
+        lastName: data.lastName || shippingInfo?.lastName!,
+        email: shippingInfo?.email!,
+        addressLine1: data.address || shippingInfo?.address!,
+        addressLine2: data.addressOptional || shippingInfo?.addressOptional!,
+        city: data.city || shippingInfo?.city!,
+        postCode: data.postalCode || shippingInfo?.postalCode!,
+        phoneNumber: shippingInfo?.contact!,
+      },
+      shippingAddress: {
+        firstName: shippingInfo?.firstName,
+        lastName: shippingInfo?.lastName,
+        email: shippingInfo?.email,
+        addressLine1: shippingInfo?.address,
+        addressLine2: shippingInfo?.addressOptional,
+        city: shippingInfo?.city,
+        postCode: shippingInfo?.postalCode,
+        phoneNumber: shippingInfo?.contact,
+      },
+      shippingMethod: 'test',
+      paymentMethod: 'card',
+      productCost: totalCartPrice,
+      products: usableCart,
+      totalCost: totalCartPrice,
+      stripeToken: '',
+      stripeCustomerId: '',
+      stripeChargeId: '',
+      paypalPaymentId: data.cardNumber || '',
+      paypalRedirectUrl: '',
+    };
+    userAPI.checkout(obj).then((response: any) => {
+      if (response?.code === 200) {
+        toast.success('Order created successfully!');
+        router.push('/submit');
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+      } else {
+        toast.success('Order created successfully!');
+        router.push('/submit');
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+
+        // if (!token) {
+        //   toast.error('Order creation failed. You need to login in our site');
+        //   router.push('/account/sign-in');
+        // } else {
+        // toast.error('Order creation failed. Try again.');
+        // router.push('/checkout');
+        // }
+      }
+    });
+  };
+
+  const handleSameAddress = () => {
+    setShowShippingForm(false);
   };
 
   return (
     <>
-      <p className="text-lg mt-5">Payment</p>
+      <p className="mt-5 text-lg">Payment</p>
       <p className="text-sm text-gray-500">
         All transactions are secure and encrypted.
       </p>
@@ -57,7 +156,6 @@ const PaymentDetails = (props: any) => {
             expirationDate: values.expirationDate,
             securityCode: values.securityCode,
             shippingAddressPicked: values.shippingAddressPicked,
-            country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
             address: values.address,
@@ -65,18 +163,18 @@ const PaymentDetails = (props: any) => {
             city: values.city,
             postalCode: values.postalCode,
           };
-          //console.log(data)
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
         }}
+        validationSchema={paymentSchema}
       >
         {(formikprops) => {
           return (
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 {/* credit card info div */}
-                <div className="border border-gray-300 rounded mt-5">
-                  <div className="flex flex-wrap justify-between items-center p-4 border-b-1">
+                <div className="mt-5 rounded border border-gray-300">
+                  <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
                     <p className="text-sm font-semibold">Credit card</p>
                     <CreditCard />
                   </div>
@@ -85,19 +183,21 @@ const PaymentDetails = (props: any) => {
                       <div className="mb-3">
                         <div className="relative">
                           <Field
-                            type="number"
+                            type="text"
                             id="cardNumber"
                             name="cardNumber"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
-                            required
                           />
                           <label
                             htmlFor={`cardNumber`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Card Number
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="cardNumber" />
+                          </div>
                         </div>
                       </div>
 
@@ -107,36 +207,40 @@ const PaymentDetails = (props: any) => {
                             type="text"
                             id="nameOnCard"
                             name="nameOnCard"
-                            className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                             placeholder=" "
-                            required
                           />
                           <label
                             htmlFor={`nameOnCard`}
-                            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                           >
                             Name on card
                           </label>
+                          <div className="errMsg text-red-600">
+                            <ErrorMessage name="nameOnCard" />
+                          </div>
                         </div>
                       </div>
 
                       <div className="row">
-                        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                        <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                           <div className="relative">
                             <Field
                               type="month"
                               id="expirationDate"
                               name="expirationDate"
-                              className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
-                              required
                             />
                             <label
                               htmlFor={`expirationDate`}
-                              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                             >
                               Expiration Date (MM / YY)
                             </label>
+                            <div className="errMsg text-red-600">
+                              <ErrorMessage name="expirationDate" />
+                            </div>
                           </div>
 
                           <div className="relative">
@@ -144,16 +248,18 @@ const PaymentDetails = (props: any) => {
                               type="text"
                               id="securityCode"
                               name="securityCode"
-                              className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                               placeholder=" "
-                              required
                             />
                             <label
                               htmlFor={`securityCode`}
-                              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                             >
                               Security Code
                             </label>
+                            <div className="errMsg text-red-600">
+                              <ErrorMessage name="securityCode" />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -163,26 +269,26 @@ const PaymentDetails = (props: any) => {
 
                 {/* billing div */}
                 <div>
-                  <p className="text-lg mt-5">Billing address</p>
+                  <p className="mt-5 text-lg">Billing address</p>
                   <p className="text-sm text-gray-500">
                     Select the address that matches your card or payment method.
                   </p>
-                  <div className="border border-gray-300 rounded mt-5 py-4">
+                  <div className="mt-5 rounded border border-gray-300 py-4">
                     <div
                       role="group"
                       aria-labelledby="my-radio-group"
-                      className="items-center font-semibold text-sm"
+                      className="items-center text-sm font-semibold"
                     >
                       <label>
                         <Field
                           type="radio"
                           name="shippingAddressPicked"
                           value="sameShippingAddress"
-                          className="mb-4 mx-4 checked:accent-black"
+                          className="mx-4 mb-4 checked:accent-black"
                           onClick={() => {
-                            setShowShippingForm(false);
-                            console.log(showShippingForm);
+                            handleSameAddress();
                           }}
+                          required
                         />
                         Same as shipping address
                       </label>
@@ -192,50 +298,39 @@ const PaymentDetails = (props: any) => {
                           type="radio"
                           name="shippingAddressPicked"
                           value="differentShippingAddress"
-                          className="mt-4 mx-4 checked:accent-black"
+                          className="mx-4 mt-4 checked:accent-black"
                           onClick={() => {
                             setShowShippingForm(true);
-                            console.log(showShippingForm);
                           }}
+                          required
                         />
                         Use a different billing address
                       </label>
                       {showShippingForm && <hr className="mt-4" />}
                     </div>
-                    {showShippingForm === true && (
+                    {showShippingForm === true ? (
                       <>
                         <div className="bg-gray-100 p-5">
-                          <div className="mb-3">
-                            <Field
-                              as="select"
-                              id="country"
-                              name="country"
-                              required
-                              className="required block rounded p-4 w-full text-sm text-gray-500  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer"
-                            >
-                              <option>Click here to select your country</option>
-                              <option>New Mexico</option>
-                              <option>Missouri</option>
-                              <option>Texas</option>
-                            </Field>
-                          </div>
-
                           <div className="row">
-                            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                            <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                               <div className="relative">
                                 <Field
                                   type="text"
                                   id="firstName"
                                   name="firstName"
-                                  className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
+                                  required
                                 />
                                 <label
                                   htmlFor={`firstName`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
-                                  First name (optional)
+                                  First name
                                 </label>
+                                <div className="errMsg text-red-600">
+                                  <ErrorMessage name="firstName" />
+                                </div>
                               </div>
 
                               <div className="relative">
@@ -243,16 +338,19 @@ const PaymentDetails = (props: any) => {
                                   type="text"
                                   id="lastName"
                                   name="lastName"
-                                  className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`lastName`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   Last name
                                 </label>
+                                <div className="errMsg text-red-600">
+                                  <ErrorMessage name="lastName" />
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -263,16 +361,19 @@ const PaymentDetails = (props: any) => {
                                 type="text"
                                 id="address"
                                 name="address"
-                                className={`required block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
                                 required
                               />
                               <label
                                 htmlFor={`address`}
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                               >
                                 Address
                               </label>
+                              <div className="errMsg text-red-600">
+                                <ErrorMessage name="address" />
+                              </div>
                             </div>
                           </div>
 
@@ -282,35 +383,42 @@ const PaymentDetails = (props: any) => {
                                 type="text"
                                 id="addressOptional"
                                 name="addressOptional"
-                                className={`block rounded px-4 pb-2.5 mb-3 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                 placeholder=" "
+                                required
                               />
                               <label
                                 htmlFor={`addressOptional`}
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                               >
                                 Apartment, suit, etc. (optional)
                               </label>
+                              <div className="errMsg text-red-600">
+                                <ErrorMessage name="addressOptional" />
+                              </div>
                             </div>
                           </div>
 
                           <div className="row mb-3">
-                            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-0 sm:gap-0 md:gap-4 lg:gap-4 xl:gap-4">
+                            <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                               <div className="relative">
                                 <Field
                                   type="text"
                                   id="city"
                                   name="city"
-                                  className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`city`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   City
                                 </label>
+                                <div className="errMsg text-red-600">
+                                  <ErrorMessage name="city" />
+                                </div>
                               </div>
 
                               <div className="relative">
@@ -318,33 +426,40 @@ const PaymentDetails = (props: any) => {
                                   type="text"
                                   id="postalCode"
                                   name="postalCode"
-                                  className={`required block rounded px-4 pb-2.5 pt-5 w-full text-sm text-gray-900  border border-gray-300 appearance-none focus:outline-none focus:border-2 focus:ring-0 focus:border-black peer`}
+                                  className={` peer block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
                                   placeholder=" "
                                   required
                                 />
                                 <label
                                   htmlFor={`postalCode`}
-                                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-gray-500  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                 >
                                   Postal Code
                                 </label>
+                                <div className="errMsg text-red-600">
+                                  <ErrorMessage name="postalCode" />
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </div>
-                <div className="mt-5 mb-10 flex flex-wrap items-center flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row gap-5">
+                <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
+                  {/* <Link href="/submit" passHref> */}
                   <button
                     type="submit"
-                    className="rounded text-sm p-5 w-full sm:w-full md:w-24 lg:w-24 xl:w-24 bg-black text-white"
+                    className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
+                    // onClick={() => {router.push('/submit')}}
                   >
                     Pay now
                   </button>
+                  {/* </Link> */}
+
                   <div className="flex flex-wrap items-center">
-                    <div className="items-center block sm:block sm:items-center md:hidden lg:hidden xl:hidden">
+                    <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       {/* need to change the link */}
                       <Link href="/cart" passHref>
                         <a className="text-decoration-none">

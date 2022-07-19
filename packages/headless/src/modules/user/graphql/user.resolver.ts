@@ -1,12 +1,12 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ChangePasswordDto, UpdatedUserDto } from '../dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['admin']))
 @Resolver()
 export class UserResolver {
   constructor(private userService: UserService) { }

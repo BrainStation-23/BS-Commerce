@@ -1,65 +1,138 @@
-import { NextComponentType } from "next";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { products } from "../../allData/product-data.json";
-import Breadcrumb from "@/components/global/breadcrumbs/breadcrumb";
-import ProductDescription from "./productDescription";
-import ProductImagesSlider from "./product-image-slider";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import React, { useState } from 'react';
 
-import { Product } from "models";
-import { userAPI } from "APIs";
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { userAPI } from 'APIs';
+import { Product } from 'models';
+import { addToCart } from 'toolkit/cartSlice';
+import { setModalState } from 'toolkit/modalSlice';
+import { addToWishlist, storeWishlist } from 'toolkit/productsSlice';
+import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+
+import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import ProductImagesSlider from '@/components/product/product-image-slider';
+import ProductDescription from '@/components/product/productDescription';
+import Modal from '@/components/comparison';
 interface SingleProduct {
   product: Product;
 }
 
-const ProductDetailsComponent = ({ product }: SingleProduct) => {
-  //const { query } = useRouter();
+const ProductDetailsComponent: React.FC<SingleProduct> = ({
+  product,
+}: SingleProduct) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  //const product = products.find((product) => product.id === Number(query.pid));
+  const wishlistData = useAppSelector(state => state.persistedReducer.product.wishlist);
+  const findWishlistProduct = wishlistData?.items?.find(item => item.productId === product.id);
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
   var isAvailable = true;
-  //if (product.stock > 0) isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
   let i = 0;
+  let clicked = false;
 
-  const [size, setSize] = useState("s");
-  const [color, setColor] = useState("white");
+  const [size, setSize] = useState('s');
+  const [color, setColor] = useState('white');
   const [amount, setAmount] = useState(1);
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
-  const [clicked, setClicked] = useState(false);
+  const [modalCmp, setModalCmp] = useState(false);
 
-  const toCart = async (id: string) => {
-    await userAPI.addToCart({
-      productId: id,
+  if(findWishlistProduct) {
+    clicked = true;
+  }
+
+  const handleAddToCompare = async () => {
+    try {
+      await userAPI.addToCompare(product.id);
+    } catch (error) {
+      toast.error('Error happend.');
+    }
+  };
+
+  const modalState = useAppSelector(
+    (state) => state.persistedReducer.modal.setModal
+  );
+
+  const toCart = async (product: Product) => {
+    const cartProduct = {
+      id: product.id!,
+      info: product.info!,
+      photos: product.photos!,
+    };
+    const cartItem = {
+      product: cartProduct!,
+      productId: product.id!,
       quantity: amount,
-    });
-    //setCart([...cart, { ...`${product.info.id}`, amount }]);
+    };
+    setAmount(0);
+    dispatch(addToCart(cartItem));
   };
 
-  const toWishlist = () => {
-    setWishlist([...wishlist, `${product.info.id}`]);
-    setClicked(true);
+  const toWishlist = async (id: string, quantity: number) => {
+   if (token) {
+      const data = {
+        productId: id,
+        quantity,
+      };
+      const reduxData = {
+        product: {
+          id: id,
+          info: product.info,
+          photos: product.photos
+        },
+        productId: id,
+        quantity: quantity
+      }
+      try {
+        await userAPI.addToWishList(data);
+        const newList = await userAPI.getCustomerWishlist(token);
+        console.log(newList);
+        dispatch(storeWishlist(newList));
+        clicked = true;
+        toast.success('Item added to wishlist');
+      } catch (error) {
+        console.log(error);
+        toast.error('Failed to add item to wishlist');
+      }
+    }
+    else {
+      toast.error('Please login to your account first.');
+      router.push('/account/sign-in')
+    }
   };
+
+  useState(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
 
   return (
     <>
       <Breadcrumb
-        title={product.info.name}
-        pathArray={["Home", product.info.name]}
-        linkArray={["/home", "/product" + product.id]}
+        title={product?.info?.name}
+        pathArray={['Home', product.info?.name]}
+        linkArray={['/', '/product' + product.id]}
       />
-      <section className="text-gray-700 body-font overflow-hidden bg-white">
-        <div className="container px-5 py-24 mx-auto">
+      {
+        modalState && <Modal setModal={true} />
+      }
+      <section className="body-font overflow-hidden bg-white text-gray-700">
+        <div className="container mx-auto px-5 py-24">
           <div>
-            <div className="lg:w-4/5 mx-auto flex flex-wrap">
-              <div className="lg:w-1/2 w-full">
+            <div className="mx-auto flex flex-wrap">
+              <div className="md:w-1/2 w-full">
                 <div className="relative inset-0 bg-cover bg-center z-0">
                   <ProductImagesSlider product={product}></ProductImagesSlider>
                 </div>
               </div>
-              <div className="lg:w-1/2 w-full lg:pl-5 ">
+              <div className="md:w-1/2 w-full md:pl-5 mt-10 md:mt-0 ">
                 <h2 className="text-gray-900 text-xl title-font font-normal mb-1">
                   {product.info.name}
                 </h2>
@@ -108,60 +181,60 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </svg>
                 </div>
 
-                <div className="flex mb-1 mt-2"></div>
-                <div className="text-gray-900 ml-1 mb-1 mt-2">
-                  <span className="text-sm">Vendor: {product.vendor}</span>
-                  <span className="text-sm ml-2 mr-2">|</span>
-                  <span className="text-sm">SKU: {product.info.sku}</span>
+                <div className="mb-1 mt-2 flex"></div>
+                <div className="ml-1 mb-1 mt-2 text-gray-900">
+                  <span className="text-sm">Vendor: {product?.vendor}</span>
+                  <span className="ml-2 mr-2 text-sm">|</span>
+                  <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
                 <div className="flex">
-                  <span className="title-font font-medium text-2xl text-green-600 mt-2 mb-2 ml-1">
-                    ${product.info.price}
+                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-green-600">
+                    ${product?.info?.price}
                   </span>
                 </div>
                 <div className="flex">
-                  <span className="text-gray-900 ml-1 mb-1 mt-2 text-sm">
+                  <span className="ml-1 mb-1 mt-2 text-sm text-gray-900">
                     Availability:
                   </span>
                   {isAvailable ? (
-                    <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
-                      {product.stock} left in stock
+                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
+                      {product?.stock} left in stock
                     </span>
                   ) : (
-                    <span className="text-green-600 ml-2 mb-1 mt-2 text-sm">
+                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
                       Out of stock
                     </span>
                   )}
                 </div>
 
-                <p className="text-gray-900 text-sm ml-1 mb-1 mt-2">
-                  {product.info.fullDescription}
+                <p className="ml-1 mb-1 mt-2 text-sm text-gray-900">
+                  {product?.info?.fullDescription}
                 </p>
-                {product.info.size && (
-                  <div className="flex mt-2 items-center mb-2">
-                    <div className="flex ml-1 items-center">
+                {product?.info?.size && (
+                  <div className="mt-2 mb-2 flex items-center">
+                    <div className="ml-1 flex items-center">
                       <span className="mr-3">Size:</span>
                       <div className="flex">
                         <button
-                          onClick={() => setSize("s")}
+                          onClick={() => setSize('s')}
                           className="hover:text-green-600 m-2"
                         >
                           s
                         </button>
                         <button
-                          onClick={() => setSize("m")}
+                          onClick={() => setSize('m')}
                           className="hover:text-green-600 m-2"
                         >
                           m
                         </button>
                         <button
-                          onClick={() => setSize("l")}
+                          onClick={() => setSize('l')}
                           className="hover:text-green-600 m-2"
                         >
                           l
                         </button>
                         <button
-                          onClick={() => setSize("xl")}
+                          onClick={() => setSize('xl')}
                           className="hover:text-green-600 m-2"
                         >
                           xl
@@ -171,46 +244,43 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   </div>
                 )}
 
-                {product.info.color && (
-                  <div className="flex mt-2 items-center mb-2">
+                {product?.info?.color && (
+                  <div className="mt-2 mb-2 flex items-center">
                     <div className="flex">
                       <span className="mr-3">Color:</span>
                       <button
-                        onClick={() => setColor("white")}
+                        onClick={() => setColor('white')}
                         className="border-2 border-gray-300 w-6 h-6 active:outline"
                       ></button>
                       <button
-                        onClick={() => setColor("black")}
+                        onClick={() => setColor('black')}
                         className="border-2 border-gray-300 ml-3 bg-gray-700 w-6 h-6 active:outline"
                       ></button>
                       <button
-                        onClick={() => setColor("red")}
+                        onClick={() => setColor('red')}
                         className="border-2 border-gray-300 ml-3 bg-red-500 w-6 h-6 active:outline"
                       ></button>
                     </div>
                   </div>
                 )}
 
-                <div className="lg:w-fit flex flex-wrap">
-                  <div className="flex ml-1 mr-3 mt-4 title-text items-center">
+                <div className="flex text-black">
+                  <div className="flex lg:mx-2 title-text items-center">
                     Quantity
-                    <div className="m-1 border-2 border-gray-300 rounded px-auto ">
+                    <div className="m-1 md:ml-4 border-2 border-gray-200 rounded">
                       <button
                         onClick={() => setAmount(amount - 1)}
                         {...(amount <= 1 ? (disableDecrement = true) : null)}
                         disabled={disableDecrement}
-                        className="m-2"
+                        className="p-2"
                       >
                         -
                       </button>
-                      <span className="m-2">{amount}</span>
+                      <span className="p-2">{amount}</span>
                       <button
                         onClick={() => setAmount(amount + 1)}
-                        {...(amount >= product.stock
-                          ? (disableIncrement = true)
-                          : null)}
                         disabled={disableIncrement}
-                        className="m-2"
+                        className="p-2"
                       >
                         +
                       </button>
@@ -219,7 +289,7 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   {isAvailable ? (
                     <button
                       onClick={() => toCart(product.id)}
-                      className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -228,41 +298,49 @@ const ProductDetailsComponent = ({ product }: SingleProduct) => {
                   ) : (
                     <button
                       disabled={true}
-                      className="mt-4 ml-10 text-white bg-green-600 px-10 rounded focus:outline-none hover:bg-gray-600"
+                      className="my-1 ml-2 text-white bg-green-600 px-2 lg:px-16 sm:px-12 rounded focus:outline-none hover:bg-gray-600"
                     >
                       Soldout
                     </button>
                   )}
                 </div>
-                <div className="lg:w-fit flex flex-wrap">
+                <div className=" flex flex-wrap">
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="rounded mt-5 ml-1 bg-gray-600 lg:px-48 md:px-32 px-20 py-1 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
+                      className="rounded mt-5 ml-1 bg-black flex w-full  md:px-32 items-center justify-center py-2 text-white hover:bg-green-400 transition duration-200 ease-out hover:ease-in	"
                     >
-                      Buy Now
+                      <span className="mx-auto">Buy Now</span>
                     </button>
                   </Link>
                 </div>
-                <div className="ml-1 text-grey-700">
+                <div className="text-grey-700 ml-1">
                   <div>
                     <button
-                      onClick={toWishlist}
-                      className="hover:text-green-600 mt-10"
+                      onClick={() => toWishlist(product?.id!, 1)}
+                      disabled = {clicked ? true : false}
+                      className="mt-10 hover:text-green-600"
                     >
-                      {clicked ? "Added to wishlist" : "+ Add to wishlist"}
+                      {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
                     </button>
                   </div>
                   <div>
-                    <button className="hover:text-green-600 mt-2">
+                    <button
+                      className="mt-2 hover:text-green-600"
+                      onClick={() => {
+                        handleAddToCompare();
+                        dispatch(setModalState(!modalCmp));
+                        dispatch(storeProductsToCompare(product));
+                      }}
+                    >
                       + Compare
                     </button>
                   </div>
                   <div>
-                    <button className=" flex hover:text-green-600 mt-2">
+                    <button className=" mt-2 flex hover:text-green-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 mr-2"
+                        className="mr-2 h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

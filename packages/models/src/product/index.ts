@@ -11,3 +11,4 @@ export * from './updateProductsForBrand';
 export * from './getCustomerAllProducts';
 export * from './customerProduct';
 export * from './getCustomerProduct';
+export * from './getCustomerHomePageProducts';

@@ -9,8 +9,7 @@ interface Path {
   setModal: Function;
 }
 
-// const Path: React.FC<Path> = ({cart, info, shipping, payment}) => {
-const Path = (props: Path) => {
+const Path: React.FC<Path> = (props: Path) => {
   const { cart, info, shipping, payment, setModal } = props;
   return (
     <div className="flex flex-wrap text-xs gap-2">
@@ -30,6 +29,7 @@ const Path = (props: Path) => {
           }}
           style={{ border: "none" }}
           className={info ? "font-bold" : "font-normal"}
+          disabled
         >
           Information
         </button>
@@ -47,6 +47,7 @@ const Path = (props: Path) => {
           }}
           className={shipping ? "font-bold" : "font-normal"}
           style={{ border: "none" }}
+          disabled
         >
           Shipping
         </button>
@@ -64,6 +65,7 @@ const Path = (props: Path) => {
           }}
           style={{ border: "none" }}
           className={payment ? "font-bold" : "font-normal"}
+          disabled
         >
           Payment
         </button>

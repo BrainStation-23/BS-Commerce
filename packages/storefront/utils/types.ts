@@ -1,27 +1,38 @@
+import { DeleteCustomerAddressResponse } from 'models';
+import { UpdateCustomerAddressResponse } from 'models';
 import {
-  addToCartRequest,
-  AddToCartResponse,
-  Cart,
-  CustomerSignInResponse,
-  deleteAllCartItemsResponse,
-  deleteCartItemRequest,
-  deleteCartItemResponse,
+  AddCustomerNewAddressResponse,
+  CustomerAddress,
+  GetCustomerInformationResponse,
 } from 'models';
-import { CreateCustomerResponse } from 'models';
-import { updateCartItemResponse } from 'models';
-import { updateCartItemRequest } from 'models';
-import { CreateCustomerRequest } from 'models';
-import { CustomerSignInRequest } from 'models';
 import {
+  CustomerSignInResponse,
+  GetCustomerQuery,
+  GetCustomerResponse,
   GetCustomerProductParams,
   GetCustomerProductResponse,
   GetCustomerAllProductsResponse,
-  CreateUserRequest,
-  CreateUserResponse,
   ForgotPasswordRequest,
   ForgotPasswordResponse,
-  SignInRequest,
-  SignInResponse,
+  CreateCustomerResponse,
+  CreateCustomerRequest,
+  CustomerSignInRequest,
+  getCategoryListResponse,
+  GetProductsByConditionQuery,
+  GetProductsByConditionSuccessResponse,
+  GetCustomerAllProductsQuery,
+  IOrderResponseData,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  getUserWishlistResponse,
+  DeleteWishlistItemParams,
+  deleteWishlistItemResponse,
+  deleteAllWishlistItemsResponse,
+  AddCompareItem,
+  CompareResponse,
+  GetCustomerInformationSuccessResponse,
+  UpdateCustomerSuccessResponse,
+  UpdateCustomerRequestBody,
 } from 'models';
 
 export interface accordionBody {
@@ -77,6 +88,10 @@ export interface apiFunction {
   signIn: (
     data: CustomerSignInRequest
   ) => Promise<CustomerSignInResponse | undefined>;
+  getSignedInUser: (
+    isEmail: boolean,
+    data: GetCustomerQuery
+  ) => Promise<GetCustomerResponse | undefined>;
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
@@ -90,15 +105,46 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
-  getCart: (token: string) => Promise<Cart | undefined>;
-  addToCart: (data: addToCartRequest) => Promise<AddToCartResponse | undefined>;
-  deleteCartItem: (
-    data: deleteCartItemRequest
-  ) => Promise<deleteCartItemResponse | undefined>;
-  deleteAllCartItem: () => Promise<deleteAllCartItemsResponse | undefined>;
-  updateCartItem: (
-    data: updateCartItemRequest
-  ) => Promise<updateCartItemResponse | undefined>;
+  getCategoryList: () => Promise<getCategoryListResponse | undefined>;
+  getPublicProductByCategoryId: (
+    CategoryId: GetCustomerAllProductsQuery
+  ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
+  checkout: (data: any) => Promise<IOrderResponseData | undefined>;
+  getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
+  addToWishList: (
+    data: addToWishlistRequest
+  ) => Promise<AddToWishlistResponse | undefined>;
+  getCustomerWishlist: (
+    token: string
+  ) => Promise<getUserWishlistResponse | undefined>;
+  deleteWishlistItem: (
+    data: string
+  ) => Promise<deleteWishlistItemResponse | undefined>;
+  deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
+  addToCompare: (
+    productId: AddCompareItem
+  ) => Promise<CompareResponse | undefined>;
+  deleteFromCompare: (productId: AddCompareItem) => {};
+  getCustomerProfile: (
+    token: string
+  ) => Promise<GetCustomerInformationResponse | undefined>;
+  deleteCustomerAddress: (
+    addressId: string
+  ) => Promise<DeleteCustomerAddressResponse | undefined>;
+  updateCustomerAddress: (
+    addressId: string,
+    data: CustomerAddress
+  ) => Promise<UpdateCustomerAddressResponse | undefined>;
+
+  addCustomerNewAddress: (
+    customerAddress: CustomerAddress
+  ) => Promise<AddCustomerNewAddressResponse | undefined>;
+  getCustomer: (
+    token: string
+  ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
+  updateCustomer: (
+    data: UpdateCustomerRequestBody
+  ) => Promise<UpdateCustomerSuccessResponse | undefined>;
 }
 
 export interface ProductStore {

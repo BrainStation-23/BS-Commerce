@@ -1,142 +1,53 @@
-import { Formik, Form } from "formik";
-import { productSchema } from "./schema/productSchema";
+import { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
+import { Formik, Form } from 'formik';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { CreateProductRequest } from 'models';
 
-import ProductInfoForm from "./forms/productInfoForm";
-import PhotosForm from "./forms/photosForm";
-import MetaForm from "./forms/metaForm";
-import { userAPI } from "../../APIs";
+import { userAPI } from '@/APIs';
+import MetaForm from '@/components/products/forms/metaForm';
+import PhotosForm from '@/components/products/forms/photosForm';
+import CategoryForm from '@/components/products/forms/categoryForm';
+import ProductInfoForm from '@/components/products/forms/productInfoForm';
+import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 
-import { useRouter } from "next/router";
-import CategoryForm from "./forms/categoryForm";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { productSchema } from '@/components/products/schema/productSchema/index';
 
-const CreateProduct = () => {
+const CreateProduct: NextComponentType = () => {
   const router = useRouter();
   const [categogiesData, setCategoryData] = useState([]);
-  // const [categogiesData, setCategoryData] = useState([
-  //   {
-  //     id: 1,
-  //     value: "Category 1",
-  //     isSelected: false,
-  //     isFeatured: false,
-  //     displayOrder: 0,
-  //   },
-  //   {
-  //     id: 2,
-  //     value: "Category 2",
-  //     isSelected: false,
-  //     isFeatured: true,
-  //     displayOrder: 1,
-  //   },
-  //   {
-  //     id: 3,
-  //     value: "Category 3",
-  //     isSelected: false,
-  //     isFeatured: false,
-  //     displayOrder: 3,
-  //   },
-  //   {
-  //     id: 4,
-  //     value: "Category 4",
-  //     isSelected: false,
-  //     isFeatured: true,
-  //     displayOrder: 5,
-  //   },
-  //   {
-  //     id: 5,
-  //     value: "Category 5",
-  //     isSelected: false,
-  //     isFeatured: false,
-  //     displayOrder: 0,
-  //   },
-  //   {
-  //     id: 6,
-  //     value: "Category 6",
-  //     isSelected: false,
-  //     isFeatured: true,
-  //     displayOrder: 0,
-  //   },
-  //   {
-  //     id: 7,
-  //     value: "Category 7",
-  //     isSelected: false,
-  //     isFeatured: false,
-  //     displayOrder: 0,
-  //   },
-  //   {
-  //     id: 8,
-  //     value: "Category 8",
-  //     isSelected: false,
-  //     isFeatured: false,
-  //     displayOrder: 0,
-  //   },
-  // ]);
+  const [manufacturerData, setManufacturerData] = useState([]);
 
-  const handleSubmit = (data: any) => {
-    const info = {
-      name: data.productName,
-      shortDescription: data.ShortDescription,
-      fullDescription: data.FullDescription,
-      sku: data.Sku,
-      price: data.Price,
-      oldPrice: data.OldPrice,
-      cost: data.ProductCost,
-      showOnHomePage: data.showOnHomePage,
-      includeInTopMenu: data.includeInTopMenu,
-      allowToSelectPageSize: data.allowToSelectPageSize,
-      published: data.published,
-      displayOrder: +data.displayOrder,
-      isFeatured: data.isFeatured,
-    };
-    const meta = {
-      keywords: data.keywords,
-      title: data.metaTitle,
-      description: data.metaDescription,
-      friendlyPageName: data.metaFriendlyPageName,
-    };
-    const photos = {
-      url: data.photosUrl,
-      id: data.photosID,
-      title: data.photosTitle,
-      displayOrder: +`${data.displayOrderPhotos}`,
-      alt: "image",
-    };
-
-    const categories: any = [];
-
-    categogiesData?.map((category: any, index: any) => {
-      category.isSelected == true
-        ? categories.push({
-            id: `${category.id}`,
-            isFeatured: category.isFeatured,
-            displayOrder: +category.displayOrder,
-          })
-        : "";
-    });
-
-    const newData = {
-      info: info,
-      meta: meta,
-      tags: data.tags,
-      photos: [photos],
-      brands: data.brands,
-      categories: categories,
-    };
-    if (categories[0]) {
-      userAPI.createProduct(newData, router);
-    } else toast.error("You must select atleast one category");
+  const handleSubmit = (data: CreateProductRequest) => {
+    if (data?.categories[0]) {
+      userAPI.createProduct(data, router);
+    } else toast.error('You must select atleast one category');
   };
 
+  async function loadAllManufacturers() {
+    const response = await userAPI.getAllManufacturers();
+    const allManufacturers: any = [];
+
+    if (response.data.manufacturers.length! > 0) {
+      response.data.manufacturers.forEach((manufacturer: any) => {
+        allManufacturers.push({
+          id: manufacturer.id,
+          name: manufacturer.name,
+        });
+      });
+      setManufacturerData(allManufacturers);
+    }
+  }
   useEffect(() => {
     async function loadCategories() {
-      const response = await userAPI.getCategories();
-      // console.log(response);
-      if (response?.length! > 0) {
+      const response = await userAPI.getCategoryList();
+      if (response?.data.categories.length! > 0) {
         const categories: any = [];
-        response?.forEach((category, index) => {
+        response?.data.categories.forEach((category, index) => {
           categories.push({
-            id: index + 1,
+            id: category.id,
+            name: category.name,
             value: category.name,
             isSelected: false,
             isFeatured: false,
@@ -147,16 +58,17 @@ const CreateProduct = () => {
       }
     }
     loadCategories();
+    loadAllManufacturers();
   }, []);
 
   return (
     <>
       <Formik
         initialValues={{
-          productName: "",
-          ShortDescription: "",
-          FullDescription: "",
-          Sku: "",
+          productName: '',
+          ShortDescription: '',
+          FullDescription: '',
+          Sku: '',
           OldPrice: 0,
           Price: 0,
           ProductCost: 0,
@@ -166,24 +78,83 @@ const CreateProduct = () => {
           published: false,
           displayOrder: 1,
           isFeatured: false,
-          publishDate: "",
-          tags: "",
-          brands: "",
-          keywords: "",
-          metaTitle: "",
-          metaDescription: "",
-          metaFriendlyPageName: "",
-          photosUrl: "",
-          photosID: "",
-          photosTitle: "",
-          displayOrderPhotos: "",
+          publishDate: '',
+          tags: [],
+          brands: [],
+          keywords: [],
+          metaTitle: '',
+          metaDescription: '',
+          metaFriendlyPageName: '',
+          photosUrl: '',
+          photosID: '',
+          photosTitle: '',
+          displayOrderPhotos: '',
           SelectedCategoryIds: 0,
           isFeaturedCategory: false,
           displayOrderCategory: 1,
-          categoriesData: "",
+          categoriesData: '',
+          manufacturerId: '',
+          manufacturerName: '',
         }}
         onSubmit={(values, actions) => {
-          handleSubmit(values);
+          const info = {
+            name: values?.productName,
+            shortDescription: values?.ShortDescription,
+            fullDescription: values?.FullDescription,
+            sku: values?.Sku,
+            price: values?.Price,
+            oldPrice: values?.OldPrice,
+            cost: values?.ProductCost,
+            showOnHomePage: values?.showOnHomePage,
+            includeInTopMenu: values?.includeInTopMenu,
+            allowToSelectPageSize: values?.allowToSelectPageSize,
+            published: values?.published,
+            displayOrder: +values?.displayOrder,
+            isFeatured: values?.isFeatured,
+          };
+          const meta = {
+            keywords: values?.keywords,
+            title: values?.metaTitle,
+            description: values?.metaDescription,
+            friendlyPageName: values?.metaFriendlyPageName,
+          };
+          const photos = {
+            url: values?.photosUrl,
+            id: values?.photosID,
+            title: values?.photosTitle,
+            displayOrder: +`${values?.displayOrderPhotos}`,
+            alt: 'image',
+          };
+          const categories: any = [];
+          categogiesData?.map((category: any, index: any) => {
+            category.isSelected == true
+              ? categories.push({
+                  id: `${category.id}`,
+                  name: category.name,
+                  isFeatured: category.isFeatured,
+                  displayOrder: +category.displayOrder,
+                })
+              : '';
+          });
+          const manufacturer = {
+            id: '',
+            name: values.manufacturerName,
+          };
+          manufacturerData.map((manufacturerr) => {
+            if (values.manufacturerName == manufacturerr.name) {
+              return (manufacturer.id = manufacturerr.id);
+            }
+          });
+          const newData = {
+            info: info,
+            meta: meta,
+            tags: values.tags,
+            photos: [photos],
+            brands: values.brands,
+            manufacturer: manufacturer,
+            categories: categories,
+          };
+          handleSubmit(newData);
           actions.setSubmitting(false);
         }}
         validationSchema={productSchema}
@@ -191,7 +162,7 @@ const CreateProduct = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="content-header clearfix">
+              <div className="content-header clearfix pt-4">
                 <h1 className="float-start">
                   Add a new product
                   <span className="fs-5 p-3">
@@ -210,36 +181,13 @@ const CreateProduct = () => {
                     <i className="bi bi-save" />
                     <p className="float-end mx-1 my-0">Save</p>
                   </button>
-                  {/* <button
-                    type="submit"
-                    name="save-continue"
-                    className="btn btn-primary m-1"
-                  >
-                    <i className="bi bi-save" />
-                    <p className="float-end mx-1 my-0">
-                      Save and Continue Edit
-                    </p>
-                  </button> */}
                 </div>
               </div>
-
-              <div className="col-md-12 clearfix">
-                <button
-                  type="button"
-                  className="btn btn-info float-left mx-2 my-auto "
-                  id="product-editor-settings"
-                  data-toggle="modal"
-                  data-target="#productsettings-window"
-                >
-                  <i className="bi bi-gear-fill pt-1" />
-                  <p className="float-end mx-1 my-0">Settings</p>
-                </button>
-              </div>
-
               <div className="mt-4">
                 <ProductInfoForm />
                 <MetaForm />
                 <PhotosForm />
+                <ProductManufacturers manufacturerData={manufacturerData} />
                 <CategoryForm
                   setCategoryData={setCategoryData}
                   categoryData={categogiesData}
