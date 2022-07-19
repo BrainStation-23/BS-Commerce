@@ -99,7 +99,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
             photosID: product?.photos[0]?.id,
             photosTitle: product?.photos[0]?.title,
             displayOrderPhotos: product?.photos[0]?.displayOrder,
-            SelectedCategoryIds: product?.categories[0]?.id,
+            SelectedCategoryIds: 0,
             isFeaturedCategory: product?.categories[0]?.isFeatured,
             displayOrderCategory: product?.categories[0]?.displayOrder,
           }}
