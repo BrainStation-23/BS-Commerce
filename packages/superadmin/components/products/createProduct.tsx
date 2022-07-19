@@ -81,7 +81,7 @@ const CreateProduct: NextComponentType = () => {
           publishDate: '',
           tags: [],
           brands: [],
-          keywords: [],
+          keywords: '',
           metaTitle: '',
           metaDescription: '',
           metaFriendlyPageName: '',
@@ -113,7 +113,7 @@ const CreateProduct: NextComponentType = () => {
             isFeatured: values?.isFeatured,
           };
           const meta = {
-            keywords: values?.keywords,
+            keywords: values?.keywords?.split(' '),
             title: values?.metaTitle,
             description: values?.metaDescription,
             friendlyPageName: values?.metaFriendlyPageName,
@@ -154,6 +154,7 @@ const CreateProduct: NextComponentType = () => {
             manufacturer: manufacturer,
             categories: categories,
           };
+          // console.log(newData);
           handleSubmit(newData);
           actions.setSubmitting(false);
         }}

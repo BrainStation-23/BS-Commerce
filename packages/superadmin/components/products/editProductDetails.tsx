@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
-import { ProductCategory, UpdateProductRequest } from 'models';
+import { UpdateProductRequest } from 'models';
 
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
@@ -12,11 +12,7 @@ import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import { productSchema } from '@/components/products/schema/productSchema/index';
-import {
-  CategoryInterface,
-  EditProductInterface,
-  FormDataInterFace,
-} from '@/components/products/models/index';
+import { EditProductInterface } from '@/components/products/models/index';
 
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [product, setProduct] = useState(props.product);
@@ -33,9 +29,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   };
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
-    // console.log('manures', response);
     const allManufacturers: any = [];
-
     if (response.data.manufacturers.length! > 0) {
       response.data.manufacturers.forEach((manufacturer: any) => {
         allManufacturers.push({
@@ -77,6 +71,8 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
 
   return (
     <>
+      {console.log(product)}
+
       {product ? (
         <Formik
           initialValues={{
@@ -95,7 +91,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
             isFeatured: product?.info?.isFeatured,
             tags: product?.tags,
             brands: product?.brands,
-            keywords: product?.meta?.keywords,
+            keywords: product?.meta?.keywords?.join(' '),
             metaTitle: product?.meta?.title,
             metaDescription: product?.meta?.description,
             metaFriendlyPageName: product?.meta?.friendlyPageName,
@@ -124,7 +120,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
               isFeatured: values?.isFeatured,
             };
             const meta = {
-              keywords: values?.keywords,
+              keywords: values?.keywords?.split(' '),
               title: values?.metaTitle,
               description: values?.metaDescription,
               friendlyPageName: values?.metaFriendlyPageName,
