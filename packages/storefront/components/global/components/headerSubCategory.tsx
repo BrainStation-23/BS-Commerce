@@ -53,22 +53,6 @@ export const HeaderSubCategory: React.FC<any> = (props: any) => {
               <ul className="">
                 {category.subCategories?.map((subCategory) => (
                   <HeaderSubCategory category={subCategory} />
-                  // <li
-                  //   key={subCategory.name}
-                  //   className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
-                  // >
-                  //   <Link
-                  //     href={{
-                  //       pathname: `/collections/${subCategory.name}`,
-                  //       query: {
-                  //         categoryId: subCategory.id,
-                  //         name: subCategory.name,
-                  //       },
-                  //     }}
-                  //   >
-                  //     <a>{subCategory.name}</a>
-                  //   </Link>
-                  // </li>
                 ))}
               </ul>
             </div>
