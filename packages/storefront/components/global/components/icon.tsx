@@ -33,7 +33,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
-  const inWishlist = wishlistData?.find((item) => item.productId === product.id)
+  let inWishlist = wishlistData?.find((item) => item.productId === product.id)
     ? true
     : false;
 
@@ -83,6 +83,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
         toast.success('Item added to wishlist');
+        inWishlist = true;
       } catch (error) {
         toast.error('Failed to add item to wishlist');
       }
@@ -98,6 +99,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         await userAPI.deleteWishlistItem(productId);
         toast.success('Item removed from wishlist');
         dispatch(deleteItemFromWishlist(productId));
+        inWishlist = false;
       } catch (error) {
         toast.error('Failed to remove item from wishlist');
       }
@@ -169,7 +171,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             stroke="currentColor"
             strokeWidth={1.5}
             onClick={(event) => {
-              inWishlist
+              inWishlist === true
                 ? deleteFromWishlist(product.id!)
                 : handleAddToWishlist(product.id!, 1);
               event.preventDefault();
