@@ -1,16 +1,15 @@
 import Link from 'next/link';
 import React from 'react';
-import { HeaderSubCategory } from './headerSubCategory';
 
-export const HeaderCategory: React.FC<any> = (props: any) => {
+export const HeaderSubCategory: React.FC<any> = (props: any) => {
   const category = props.category;
   return (
     <>
       {category ? (
         <div className="group">
-          <div
+          <li
             key={category.name}
-            className="flex flex-row justify-between text-sm"
+            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
           >
             <Link
               href={{
@@ -48,12 +47,28 @@ export const HeaderCategory: React.FC<any> = (props: any) => {
                 ''
               )}
             </div>
-          </div>
+          </li>
           {category.subCategories ? (
-            <div className=" absolute -right-[130px] top-[0] z-50 hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in hover:block lg:group-hover:block">
+            <div className=" absolute -right-[120px] top-[4px] z-50 hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in hover:block lg:group-hover:block">
               <ul className="">
                 {category.subCategories?.map((subCategory) => (
                   <HeaderSubCategory category={subCategory} />
+                  // <li
+                  //   key={subCategory.name}
+                  //   className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
+                  // >
+                  //   <Link
+                  //     href={{
+                  //       pathname: `/collections/${subCategory.name}`,
+                  //       query: {
+                  //         categoryId: subCategory.id,
+                  //         name: subCategory.name,
+                  //       },
+                  //     }}
+                  //   >
+                  //     <a>{subCategory.name}</a>
+                  //   </Link>
+                  // </li>
                 ))}
               </ul>
             </div>
