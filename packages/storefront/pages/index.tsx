@@ -9,7 +9,7 @@ import {
   storeFeaturedProducts,
   storeProducts,
   storeWishlist,
-} from 'toolkit/ProductsSlice';
+} from 'toolkit/productsSlice';
 
 import HomeComponent from '@/components/home';
 
@@ -37,19 +37,23 @@ const Home: NextPage<Props> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const token = cookie?.parse(context.req?.headers?.cookie);
+  const reqCookie = context.req.headers.cookie;
+  const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
   const allProducts = await userAPI.getPublicProducts();
   const featuredProducts = await userAPI.getFeaturedProducts();
   const category = await userAPI.getCategoryList();
   // JSON.parse(JSON.stringify(category));
-  const wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
+  let wishlistedProducts;
+  if (reqCookie) {
+    wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
+  }
 
   return {
     props: {
       products: allProducts,
       featuredProducts: featuredProducts,
       category: category,
-      wishlistedProducts: wishlistedProducts,
+      wishlistedProducts: wishlistedProducts || [],
     },
   };
 };
