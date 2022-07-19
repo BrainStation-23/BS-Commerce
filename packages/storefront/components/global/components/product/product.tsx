@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { CustomerProduct } from "models";
+import { CustomerProduct } from 'models';
 
-import ProductInfo from "@/components/global/components/product/common/productInfo";
-import Picture from "@/components/global/components/product/common/picture";
-import Icon from "@/components/global/components/icon";
+import ProductInfo from '@/components/global/components/product/common/productInfo';
+import Picture from '@/components/global/components/product/common/picture';
+import Icon from '@/components/global/components/icon';
 
 interface SingleProduct {
   product: CustomerProduct;
@@ -26,11 +26,11 @@ const Product = (props: SingleProduct) => {
         as={`product/${product.info.name}`}
       >
         <div className="mb-0 overflow-hidden" key={product?.info?.name}>
-          <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer">
-            <div className="rounded overflow-hidden max-w-sm">
-              <div className="relative flex items-center justify-center flex-col">
-                <div className="relative text-white overflow-hidden transition-all duration-700">
-                  <div className="relative inset-0 bg-cover bg-center z-0">
+          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
+            <div className="max-w-sm overflow-hidden rounded">
+              <div className="relative flex flex-col items-center justify-center">
+                <div className="relative overflow-hidden text-white transition-all duration-700">
+                  <div className="relative inset-0 z-0 bg-cover bg-center">
                     <Picture
                       product={product}
                       height={212}
@@ -40,18 +40,18 @@ const Product = (props: SingleProduct) => {
                     />
 
                     {product?.info?.oldPrice !== 0 ? (
-                      <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+                      <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>Sale</p>
                       </div>
                     ) : null}
 
                     {product?.discountPercentage && product?.stock > 0 ? (
-                      <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
+                      <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>{`-${product?.discountPercentage}%`}</p>
                       </div>
                     ) : null}
                     {product?.info?.oldPrice !== 0 ? (
-                      <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
+                      <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>{`-$${Math.abs(
                           product?.info?.oldPrice - product?.info?.price
                         )}`}</p>
@@ -59,7 +59,7 @@ const Product = (props: SingleProduct) => {
                     ) : null}
                   </div>
                 </div>
-                <div className="hover:-translate-y-3 opacity-0 hover:opacity-70 duration-300 absolute inset-0 z-10 flex justify-center items-center text-black font-semibold">
+                <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
                   <Icon product={product} />
                 </div>
                 <ProductInfo product={product} />

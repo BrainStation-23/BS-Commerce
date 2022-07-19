@@ -17,7 +17,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
     (state) => state.persistedReducer.compare.productsToCompare
   );
 
-  if(comparisonProducts.length === 0) return null;
+  if (comparisonProducts.length === 0) return null;
 
   return (
     <>
@@ -31,7 +31,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="fixed mt-5 inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-auto">
+          <div className="fixed inset-0 z-50 flex justify-center bg-zinc-200 bg-opacity-80">
             <div className="relative my-auto mx-auto overflow-auto">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
@@ -55,7 +55,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                         <div className="overflow-hidden">
                           <table className="border text-center">
                             <thead className="border-b">
-                              <tr >
+                              <tr>
                                 <th
                                   scope="col"
                                   className="border-r px-6 py-4 text-sm font-normal"
@@ -69,10 +69,18 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         scope="col"
                                         className="border-r px-6 py-4 text-sm font-normal"
                                       >
-                                        <button onClick={() => {
-                                          dispatch( deleteComparedProduct(product.id) )
-                                          userAPI.deleteFromCompare(product.id);
-                                        }}>Remove</button>
+                                        <button
+                                          onClick={() => {
+                                            dispatch(
+                                              deleteComparedProduct(product.id)
+                                            );
+                                            userAPI.deleteFromCompare(
+                                              product.id
+                                            );
+                                          }}
+                                        >
+                                          Remove
+                                        </button>
                                       </th>
                                     </React.Fragment>
                                   );
@@ -116,13 +124,18 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                             </span>
                                           </p>
                                         ) : (
-                                          <span className="text-red-600 font-normal">
+                                          <span className="font-normal text-red-600">
                                             ${product.info.price}
                                           </span>
                                         )}
-                                        <br/>
-                                        <Link href={`/product/${product.id}`} passHref>
-                                          <a className='text-xs text-gray-500/100 hover:text-red-600'>VIEW PRODUCT</a>
+                                        <br />
+                                        <Link
+                                          href={`/product/${product.id}`}
+                                          passHref
+                                        >
+                                          <a className="text-xs text-gray-500/100 hover:text-red-600">
+                                            VIEW PRODUCT
+                                          </a>
                                         </Link>
                                       </td>
                                     </React.Fragment>
@@ -150,7 +163,9 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="border-r px-6 py-4 text-sm font-normal">Available In stock</td>
+                                      <td className="border-r px-6 py-4 text-sm font-normal">
+                                        Available In stock
+                                      </td>
                                     </React.Fragment>
                                   );
                                 })}

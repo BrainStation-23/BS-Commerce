@@ -1,19 +1,29 @@
 import type { NextComponentType } from 'next';
+import { useRouter } from 'next/router';
 import React, { useState, useRef, useEffect } from 'react';
 
 import { ResponseItem } from 'models';
 import { deleteCartItem } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+
 import Buttons from '@/components/global/components/buttons/button';
+import Modal from '@/components/global/components/modal/modal';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [cartTotal, setCartTotal] = useState(false);
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
   );
 
   const totalCartPrice = cartData?.reduce((total, data) => {
@@ -22,6 +32,13 @@ const CartDropdown: NextComponentType = () => {
 
   const handleCartItemDelete = async (product: ResponseItem) => {
     dispatch(deleteCartItem(product));
+  };
+
+  const handleClickProceed = () => {
+    if (!token) setModalOn(true);
+    else {
+      router.push('/checkout');
+    }
   };
 
   const cartIcon = (
@@ -72,7 +89,7 @@ const CartDropdown: NextComponentType = () => {
     return cartData?.map((cartData, index) => {
       return (
         <div key={cartData.productId}>
-          <div className='flex items-center justify-between mr-4'>
+          <div className="mr-4 flex items-center justify-between">
             <div className="group flex h-auto w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
               <div className="flex-col-4 flex items-center bg-white">
                 <div className="col-span-2">
@@ -121,6 +138,14 @@ const CartDropdown: NextComponentType = () => {
   };
   return (
     <>
+      {modalOn && (
+        <Modal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
       <div
         ref={componentRef as any}
         className="flex items-center justify-center"
@@ -168,13 +193,12 @@ const CartDropdown: NextComponentType = () => {
                       </a>
                     </div>
                     <div className="mb-4 px-6 pb-5">
-                      <a href="/checkout">
-                        <Buttons
-                          bgColor="bg-slate-300"
-                          height={10}
-                          text={'CHECKOUT'}
-                        />
-                      </a>
+                      <button
+                        className="h-10 w-full bg-slate-300 hover:bg-[#40A944]"
+                        onClick={handleClickProceed}
+                      >
+                        CHECKOUT
+                      </button>
                     </div>
                   </>
                 ) : null}

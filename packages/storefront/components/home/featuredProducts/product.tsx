@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { Product } from "models";
+import { Product } from 'models';
 
-import Icon from "@/components/global/components/icon";
-import ProductInfo from "@/components/global/components/product/productInfo";
+import Icon from '@/components/global/components/icon';
+import ProductInfo from '@/components/global/components/product/productInfo';
 interface SingleProduct {
   product: Product;
 }
@@ -21,8 +21,8 @@ const Product = ({ product }: SingleProduct) => {
       }}
       as={`product/${product.info.name}`}
     >
-      <div className="transition duration-0 hover:duration-700 group hover:bg-white cursor-pointer grid justify-items-center">
-        <div className="group flex relative pl-10 md:pl-0 lg:pl-0 m-auto">
+      <div className="duration-0 group grid cursor-pointer justify-items-center transition hover:bg-white hover:duration-700">
+        <div className="group relative m-auto flex pl-10 md:pl-0 lg:pl-0">
           <Image
             product={product}
             src={product?.photos[0].url}
@@ -30,7 +30,7 @@ const Product = ({ product }: SingleProduct) => {
             width={120}
             alt={product?.tags[0]}
           />
-          <div className="scale-0 group-hover:scale-100 transition-transform origin-left duration-300 absolute bottom-5 left-40 md:left-28 w-36">
+          <div className="absolute bottom-5 left-40 w-36 origin-left scale-0 transition-transform duration-300 group-hover:scale-100 md:left-28">
             <Icon product={product} />
           </div>
           <ProductInfo product={product} />

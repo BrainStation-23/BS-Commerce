@@ -1,21 +1,47 @@
 import React from 'react';
 
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'customHooks/hooks';
-import Buttons from '@/components/global/components/buttons/button';
+import Modal from '@/components/global/components/modal/modal';
 
 const CartTotal: NextComponentType = () => {
+  const router = useRouter();
+
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
+
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
   );
 
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
+  const handleClickProceed = () => {
+    if (!token) setModalOn(true);
+    else {
+      router.push('/checkout');
+    }
+  };
+
   return (
     <>
+      {modalOn && (
+        <Modal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
       <div className="grid lg:row-span-2 xl:row-span-2">
         <div className="overflow-hidden shadow-lg">
           <div className="w-full bg-black">
@@ -52,18 +78,17 @@ const CartTotal: NextComponentType = () => {
             </table>
           </div>
           <div className="flex justify-end py-4 px-2">
-            <a href="/checkout">
-              <button
-                style={{
-                  color: 'white',
-                  height: '39px',
-                  width: '200px',
-                }}
-                className="bg-black text-xs hover:bg-green-600"
-              >
-                PROCEED TO CHECKOUT
-              </button>
-            </a>
+            <button
+              onClick={handleClickProceed}
+              style={{
+                color: 'white',
+                height: '39px',
+                width: '200px',
+              }}
+              className="bg-black text-xs hover:bg-green-600"
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
       </div>

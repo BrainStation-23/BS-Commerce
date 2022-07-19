@@ -12,6 +12,7 @@ import {
 } from 'toolkit/productsSlice';
 
 import HomeComponent from '@/components/home';
+import { deleteCart } from 'toolkit/cartSlice';
 
 interface Props {
   products: CustomerProduct[];
