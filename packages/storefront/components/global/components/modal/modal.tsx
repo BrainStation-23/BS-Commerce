@@ -10,11 +10,13 @@ const Modal = ({
   const router = useRouter();
   const handleOKClick = () => {
     setChoice(true);
-    if (trigger) trigger();
-    else {
+    if (trigger) {
+      setModalOn(false);
+      trigger();
+    } else {
+      setModalOn(false);
       router.push('/account/sign-in');
     }
-    setModalOn(false);
   };
   const handleCancelClick = () => {
     setChoice(false);

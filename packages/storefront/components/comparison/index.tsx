@@ -6,7 +6,7 @@ import { deleteComparedProduct } from 'toolkit/compareSlice';
 import { userAPI } from 'APIs';
 
 interface Props {
-  setModal: Function;
+  setModal: boolean;
 }
 
 const Modal: React.FC<Props> = ({ setModal }) => {
