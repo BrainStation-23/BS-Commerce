@@ -11,4 +11,6 @@ export const apiEndPoints = {
   brands: '/brands',
   media: '/media',
   tags: '/tags',
+  ordersList: '/admin/order/orderList',
+  singleOrder: '/admin/order',
 };

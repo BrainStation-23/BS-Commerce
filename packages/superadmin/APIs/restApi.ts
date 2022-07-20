@@ -24,6 +24,7 @@ import {
   GetTagsResponse,
   GetManufacturersSuccessResponse,
   CreateBrandRequest,
+  IOrderResponseData,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -288,9 +289,7 @@ export async function updateManufacturerRest(
   }
 }
 
-export async function getOrderEnumRest(): Promise<
-  any | undefined
-> {
+export async function getOrderEnumRest(): Promise<any | undefined> {
   try {
     const response = await axios.get(`${apiEndPoints?.orderEnum}`);
     return response.data as any;
@@ -406,5 +405,30 @@ export async function mediaUploadRest(
     return response.data as UploadFileSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response.error);
+  }
+}
+
+export async function getAllOrderListRest(): Promise<
+  IOrderResponseData[] | undefined
+> {
+  try {
+    const { data } = await axios?.get(apiEndPoints?.ordersList);
+    return data?.data as IOrderResponseData[];
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
+  }
+}
+
+export async function getSingleOrderByIdRest(
+  id: string
+): Promise<IOrderResponseData[] | undefined> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.singleOrder}/${id}`);
+    // router.push('/Manufacturer/');
+    toast.success('Order Data Loaded Successfully');
+    return data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
   }
 }
