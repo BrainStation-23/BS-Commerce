@@ -1,12 +1,19 @@
+import { useRouter } from 'next/router';
+
 const Modal = ({
   setModalOn,
   setChoice,
   trigger,
-  modalTitle
+  modalTitle,
+  bodyText,
 }: any) => {
+  const router = useRouter();
   const handleOKClick = () => {
     setChoice(true);
-    trigger();
+    if (trigger) trigger();
+    else {
+      router.push('/account/sign-in');
+    }
     setModalOn(false);
   };
   const handleCancelClick = () => {
@@ -15,15 +22,13 @@ const Modal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-200 opacity-90">
+    <div className="fixed inset-0 z-50 bg-zinc-200 bg-opacity-90">
       <div className="flex h-screen items-center justify-center ">
-        <div className="rounded-xl border-2 border-green-600/100 bg-white pt-5 px-5">
+        <div className="rounded-xl border-2 border-green-600/100 bg-white px-5 pt-5">
           <p>{modalTitle}</p>
-          <hr className="mt-3"/>
-          <div className="flex-col pt-5 pb-12 px-24">
-            <div className="mb-2 text-lg">
-              Are you sure ?
-            </div>
+          <hr className="mt-3" />
+          <div className="flex-col px-24 pt-5 pb-12">
+            <div className="mb-2 text-lg">{bodyText}</div>
             <div className="flex">
               <button
                 onClick={handleOKClick}
@@ -35,7 +40,7 @@ const Modal = ({
                 onClick={handleCancelClick}
                 className="ml-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-black "
               >
-                No
+                Cancel
               </button>
             </div>
           </div>

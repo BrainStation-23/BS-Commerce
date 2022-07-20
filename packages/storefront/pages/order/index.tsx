@@ -22,8 +22,8 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
       />
       <section className="container mx-auto px-4 ">
         <div className="flex flex-col items-center border-b py-16">
-          <div className="mb-2 overflow-x-scroll w-full">
-            {storedOrderProducts?.length > 0 ?< DataTable storedOrderProducts={storedOrderProducts}/> : "You have not placed any order yet"}
+          <div className={storedOrderProducts?.length ? "mb-2 overflow-x-scroll w-full" : "mb-10"}>
+            {storedOrderProducts?.length ?< DataTable storedOrderProducts={storedOrderProducts}/> : "You have not placed any order yet"}
           </div>
           <div className="mt-1" style={{ textAlign: 'center' }}>
           <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">

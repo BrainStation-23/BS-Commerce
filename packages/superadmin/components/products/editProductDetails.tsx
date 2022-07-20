@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
-import { ProductCategory, UpdateProductRequest } from 'models';
+import { subCategoryList, UpdateProductRequest } from 'models';
 
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
@@ -12,11 +12,7 @@ import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import { productSchema } from '@/components/products/schema/productSchema/index';
-import {
-  CategoryInterface,
-  EditProductInterface,
-  FormDataInterFace,
-} from '@/components/products/models/index';
+import { EditProductInterface } from '@/components/products/models/index';
 
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [product, setProduct] = useState(props.product);
@@ -27,15 +23,13 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const handleSubmit = async (data: UpdateProductRequest) => {
     const id = product.id;
 
-    if (data?.categories[0]) {
+    if (data?.categories![0]) {
       const response = await userAPI.updateProduct(data, id, router);
     } else toast.error('You must select atleast one category');
   };
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
-    // console.log('manures', response);
     const allManufacturers: any = [];
-
     if (response.data.manufacturers.length! > 0) {
       response.data.manufacturers.forEach((manufacturer: any) => {
         allManufacturers.push({
@@ -46,37 +40,67 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
       setManufacturerData(allManufacturers);
     }
   }
-  useEffect(() => {
-    async function loadCategories() {
-      const response = await userAPI.getCategoryList();
-      if (response?.data.categories.length! > 0) {
-        const categories: any = [];
-        response?.data.categories.forEach((category, index) => {
-          categories.push({
-            id: category.id,
-            name: category.name,
-            value: category.name,
-            isSelected: false,
-            isFeatured: false,
-            displayOrder: 0,
-          });
-        });
-        categories.map((category) => {
-          product?.categories?.map((productCategory) => {
-            category.id === productCategory.id
-              ? (category.isSelected = true)
-              : '';
-          });
-        });
-        setCategoryData(categories);
+
+  const addSubCategories = (subCategories: subCategoryList[]) => {
+    const categoryList: any = [];
+    subCategories.forEach((category) => {
+      categoryList.push({
+        id: category.id,
+        name: category.name,
+        value: category.name,
+        isSelected: false,
+        isFeatured: false,
+        displayOrder: category.displayOrder,
+      });
+      if (category.subCategories && category.subCategories.length > 0) {
+        const subCategoryList = addSubCategories(category.subCategories);
+        categoryList.push(...subCategoryList);
       }
+    });
+
+    return categoryList;
+  };
+
+  async function loadCategories() {
+    const response = await userAPI.getCategoryList();
+    if (response?.data.categories.length! > 0) {
+      const categories: any = [];
+      response?.data.categories.forEach((category, index) => {
+        categories.push({
+          id: category.id,
+          name: category.name,
+          value: category.name,
+          isSelected: false,
+          isFeatured: false,
+          displayOrder: category.displayOrder,
+        });
+        if (category.subCategories && category.subCategories.length > 0) {
+          const subCategoryList = addSubCategories(category.subCategories);
+          categories.push(...subCategoryList);
+        }
+      });
+
+      categories.map((category: any) => {
+        product?.categories?.map((productCategory) => {
+          category.id === productCategory.id
+            ? (category.isSelected = true)
+            : '';
+        });
+      });
+
+      setCategoryData(categories);
     }
+  }
+
+  useEffect(() => {
     loadCategories();
     loadAllManufacturers();
   }, []);
 
   return (
     <>
+      {/* {console.log(product)} */}
+
       {product ? (
         <Formik
           initialValues={{
@@ -95,7 +119,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
             isFeatured: product?.info?.isFeatured,
             tags: product?.tags,
             brands: product?.brands,
-            keywords: product?.meta?.keywords,
+            keywords: product?.meta?.keywords?.join(' '),
             metaTitle: product?.meta?.title,
             metaDescription: product?.meta?.description,
             metaFriendlyPageName: product?.meta?.friendlyPageName,
@@ -103,7 +127,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
             photosID: product?.photos[0]?.id,
             photosTitle: product?.photos[0]?.title,
             displayOrderPhotos: product?.photos[0]?.displayOrder,
-            SelectedCategoryIds: product?.categories[0]?.id,
+            SelectedCategoryIds: 0,
             isFeaturedCategory: product?.categories[0]?.isFeatured,
             displayOrderCategory: product?.categories[0]?.displayOrder,
           }}
@@ -120,11 +144,11 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
               includeInTopMenu: values?.includeInTopMenu,
               allowToSelectPageSize: values?.allowToSelectPageSize,
               published: values?.published,
-              displayOrder: +values?.displayOrder,
+              displayOrder: +values?.displayOrder!,
               isFeatured: values?.isFeatured,
             };
             const meta = {
-              keywords: values?.keywords,
+              keywords: values?.keywords?.split(' '),
               title: values?.metaTitle,
               description: values?.metaDescription,
               friendlyPageName: values?.metaFriendlyPageName,

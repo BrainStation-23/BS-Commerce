@@ -114,9 +114,9 @@ const PaymentDetails: NextComponentType = () => {
     };
     userAPI.checkout(obj).then((response: any) => {
       toast.success('Order created successfully!');
-      router.push('/submit');
-      dispatch(deleteCart());
-      dispatch(deleteCheckoutInfo());
+        router.push('/submit');
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
     });
   };
 
