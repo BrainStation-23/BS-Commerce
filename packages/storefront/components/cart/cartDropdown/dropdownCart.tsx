@@ -198,7 +198,7 @@ const CartDropdown: NextComponentType = () => {
                         />
                       </a>
                     </div>
-                    <div className="mb-4 px-6 pb-5">
+                    <div className="mb-4 px-6 pb-5 border-x-2 border-b-2">
                       <button
                         className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                         onClick={handleClickProceed}
