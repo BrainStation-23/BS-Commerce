@@ -14,6 +14,7 @@ import BestSell from '@/components/home/bestSell';
 import FeaturedProducts from '@/components/home/featuredProducts';
 import Modal from '@/components/comparison';
 import ModalWishlist from '@/components/global/components//modal/modal';
+import { useEffect } from 'react';
 
 const HomeComponent: NextComponentType = () => {
   const modalState = useAppSelector(
@@ -30,7 +31,7 @@ const HomeComponent: NextComponentType = () => {
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
 
-  useState(() => {
+  useEffect(() => {
     dispatch(setModalState(false));
     dispatch(setWishlistModalState(false));
   }, [router.asPath]);

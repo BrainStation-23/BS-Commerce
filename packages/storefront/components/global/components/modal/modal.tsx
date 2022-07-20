@@ -1,4 +1,6 @@
+import { useAppDispatch } from 'customHooks/hooks';
 import { useRouter } from 'next/router';
+import { setWishlistModalState } from 'toolkit/modalSlice';
 
 const Modal = ({
   setModalOn,
@@ -8,6 +10,7 @@ const Modal = ({
   bodyText,
 }: any) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const handleOKClick = () => {
     setChoice(true);
     if (trigger) {
@@ -20,6 +23,7 @@ const Modal = ({
   };
   const handleCancelClick = () => {
     setChoice(false);
+    dispatch(setWishlistModalState(false));
     setModalOn(false);
   };
 
