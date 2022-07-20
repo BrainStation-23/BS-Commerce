@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ModalState {
   setModal: boolean;
+  setModalWishlist: boolean
 }
 
 const initialState: ModalState = {
   setModal: false,
+  setModalWishlist: false
 };
 
 export const modalSlice = createSlice({
@@ -15,9 +17,12 @@ export const modalSlice = createSlice({
     setModalState: (state: ModalState, action: PayloadAction<boolean>) => {
       state.setModal = action.payload;
     },
+    setWishlistModalState: (state: ModalState, action: PayloadAction<boolean>) => {
+      state.setModalWishlist = action.payload;
+    },
   },
 });
 
-export const { setModalState } = modalSlice.actions;
+export const { setModalState, setWishlistModalState } = modalSlice.actions;
 
 export default modalSlice.reducer;

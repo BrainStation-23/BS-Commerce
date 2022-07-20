@@ -16,6 +16,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const router = useRouter();
   const [showCartDropdown, setShowCartDropdown] = useState(false);
   const [modalOn, setModalOn] = useState(false);
+  const [modalOnWishlist, setModalOnWishlist] = useState(false);
   const [choice, setChoice] = useState(false);
 
   const showCartDropDown = () => {
@@ -51,8 +52,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     if (token) {
       router.push('/wishlist');
     } else {
-      toast.error('Please login to your account first.');
-      router.push('/account/sign-in');
+      setModalOnWishlist(true);
     }
   };
 
@@ -74,6 +74,16 @@ const HeaderAccount: React.FC<Properties> = () => {
           bodyText="Are you sure?"
         />
       )}
+
+      {modalOnWishlist && (
+        <Modal
+          setModalOn={setModalOnWishlist}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
+
       <div className="flex flex-row items-center gap-x-3">
         <span className="my-0 uppercase">
           {token !== '' ? (
@@ -84,14 +94,14 @@ const HeaderAccount: React.FC<Properties> = () => {
                   className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
-                    <Link href="/myAccount" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Profile
-                      </li>
-                    </Link>
                     <Link href="/wishlist" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
                         Wishlist
+                      </li>
+                    </Link>
+                    <Link href="/myAccount" passHref>
+                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                        Profile
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>

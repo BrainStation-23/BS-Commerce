@@ -1,4 +1,6 @@
+import { useAppDispatch } from 'customHooks/hooks';
 import { useRouter } from 'next/router';
+import { setWishlistModalState } from 'toolkit/modalSlice';
 
 const Modal = ({
   setModalOn,
@@ -8,16 +10,20 @@ const Modal = ({
   bodyText,
 }: any) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const handleOKClick = () => {
     setChoice(true);
-    if (trigger) trigger();
-    else {
+    if (trigger) {
+      setModalOn(false);
+      trigger();
+    } else {
+      setModalOn(false);
       router.push('/account/sign-in');
     }
-    setModalOn(false);
   };
   const handleCancelClick = () => {
     setChoice(false);
+    dispatch(setWishlistModalState(false));
     setModalOn(false);
   };
 
