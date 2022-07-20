@@ -49,4 +49,8 @@ export class OrderRepository {
   async changeStatus(body: ChangeStatusDto): Promise<any>{
     return await this.db.changeStatus(body);
   }
+
+  async getOrderList(): Promise<OrderEntity[]>{
+    return await this.db.getOrderList();
+  }
 }

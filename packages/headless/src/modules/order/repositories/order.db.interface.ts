@@ -14,4 +14,5 @@ export abstract class IOrderDatabase {
   abstract getOrderStatistics:() => Promise<OrderStatDto>
   abstract getIncompleteStatistics:() => Promise<OrderIncompleteStatDto>
   abstract changeStatus:(body: ChangeStatusDto) => Promise<any>
+  abstract getOrderList: () => Promise<OrderEntity[]>
 }
