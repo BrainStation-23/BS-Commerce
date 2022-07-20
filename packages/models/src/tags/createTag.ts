@@ -1,5 +1,5 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
-import { Tags } from './tags';
+import { Tag } from './tags';
 
 /**
  * API Path: /tags
@@ -14,7 +14,7 @@ export interface CreateTagRequestBody {
 
 export interface CreateTagSuccessResponse extends SuccessResponse {
     code: number;
-    data: Tags;
+    data: Tag;
 }
 
 export const enum CreateTagErrorMessages {

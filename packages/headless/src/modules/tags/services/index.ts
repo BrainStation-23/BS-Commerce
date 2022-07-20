@@ -15,7 +15,7 @@ export class TagsService {
 
   async getTags(query: Record<string, any>): Promise<GetTagsResponse> {
     const tags = await this.tagsRepo.getTags({});
-    if (!tags?.length) return this.helper.serviceResponse.errorResponse(GetTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
+    if (!tags) return this.helper.serviceResponse.errorResponse(GetTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
   }
 

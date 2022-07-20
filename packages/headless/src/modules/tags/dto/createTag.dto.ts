@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, } from 'class-validator';
 import { HttpStatus } from '@nestjs/common';
-import { TagsDto } from './tags.dto';
+import { TagDto } from './tags.dto';
 import {
     CreateTagRequestBody,
     CreateTagErrorResponse,
@@ -35,6 +35,6 @@ export class CreateTagSuccessResponseDto implements CreateTagSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     code: number;
 
-    @ApiProperty({ type: TagsDto })
-    data: TagsDto;
+    @ApiProperty({ type: TagDto })
+    data: TagDto;
 }
