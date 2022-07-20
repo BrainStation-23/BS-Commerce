@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { storeUserToken } from 'toolkit/authSlice';
 import { userAPI } from 'APIs';
+import { storeAddresses } from 'toolkit/customerAddressSlice';
 
 interface FormData {
   email: string;
@@ -27,7 +28,9 @@ interface FormData {
 const Information = (props: any) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [showLabel, setShowLabel] = useState(false);
-  const user = useAppSelector((state) => state.persistedReducer.user.user);
+  const user = useAppSelector(
+    (state) => state.persistedReducer.user.customerDetails.email
+  );
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
@@ -36,6 +39,10 @@ const Information = (props: any) => {
 
   const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
   );
 
   let initialValues = {
@@ -129,6 +136,12 @@ const Information = (props: any) => {
             postCode: values.postalCode,
             tag: values.tag,
           };
+          if (values?.tag!) {
+            userAPI.addCustomerNewAddress(addressData);
+            userAPI.getCustomer(token).then((response) => {
+              dispatch(storeAddresses(response?.data?.addresses));
+            });
+          }
           values.tag ? userAPI.addCustomerNewAddress(addressData) : null;
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
