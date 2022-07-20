@@ -29,7 +29,7 @@ export class OrderRepository {
     let idExists = await this.db.getOrderById(orderId);//unique validation
 
     if(!idExists) return orderId;
-    else this.generateUniqueId();
+    else return this.generateUniqueId();
   }
 
   async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
