@@ -30,10 +30,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderById(orderId: string): Promise<OrderData>{
-    const orderList = await OrderModel.findOne({ orderId }).lean();
-    if (orderList) return orderList;
-    
-    return null;
+    return await OrderModel.findOne({ orderId }).lean();
   }
 
   async getOrderStatistics(): Promise<OrderStatDto>{
@@ -118,10 +115,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderList(): Promise<OrderEntity[]>{
-    const orderList = await OrderModel.find({});
-    if (orderList) return orderList;
-    
-    return null;
+    return await OrderModel.find({});
   }
 
 }
