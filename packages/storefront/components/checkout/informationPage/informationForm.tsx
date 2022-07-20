@@ -6,6 +6,10 @@ import { addToShippingInfo } from 'toolkit/checkoutSlice';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { storeUserToken } from 'toolkit/authSlice';
+import { userAPI } from 'APIs';
 
 interface FormData {
   email: string;
@@ -18,18 +22,24 @@ interface FormData {
   addressOptional: string;
   city: string;
   postalCode: string;
-  saveInformationCheckbox: string;
 }
 
 const Information = (props: any) => {
+  const [dropdownText, setDropdownText] = useState('Use a new address');
+  const [showLabel, setShowLabel] = useState(false);
+  const user = useAppSelector((state) => state.persistedReducer.user.user);
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(storeUserToken(''));
+    toast.success('Logged out successfully!');
+  };
+
   const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
   );
 
-  const dispatch = useAppDispatch();
-  const { setModal } = props;
-  const initialValues = {
-    email: shippingInfo?.email,
+  let initialValues = {
+    email: user,
     contact: shippingInfo?.contact,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
@@ -38,7 +48,48 @@ const Information = (props: any) => {
     addressOptional: shippingInfo?.addressOptional,
     city: shippingInfo?.city,
     postalCode: shippingInfo?.postalCode,
-    saveInformationCheckbox: '',
+  };
+
+  const [update, setUpdate] = useState(initialValues);
+  const customerAddresses = useAppSelector(
+    (state) => state.persistedReducer.customerAddress.addresses
+  );
+
+  const dispatch = useAppDispatch();
+  const { setModal } = props;
+
+  const handlePreviousAddress = (event: any) => {
+    setDropdownText(event.target.value);
+    const detail = event.target.value;
+    let newArr = detail.split(' ');
+    if (detail === 'Use a new address') {
+      setShowLabel(true);
+      setUpdate({
+        email: user,
+        contact: '',
+        firstName: '',
+        lastName: '',
+        country: '',
+        address: '',
+        addressOptional: '',
+        city: '',
+        postalCode: '',
+      });
+    } else {
+      setShowLabel(false);
+      initialValues = {
+        email: user,
+        firstName: newArr[0],
+        lastName: newArr[1],
+        country: '',
+        address: newArr[2],
+        addressOptional: newArr[3],
+        city: newArr[4],
+        postalCode: newArr[5],
+        contact: newArr[6],
+      };
+      setUpdate(initialValues);
+    }
   };
 
   const handleCheckoutSubmit = (data: FormData) => {
@@ -54,10 +105,11 @@ const Information = (props: any) => {
   return (
     <div className="">
       <Formik
-        initialValues={initialValues}
+        enableReinitialize={true}
+        initialValues={update}
         onSubmit={(values, actions) => {
           const data = {
-            email: values.email,
+            email: user,
             contact: values.contact,
             country: values.country,
             firstName: values.firstName,
@@ -66,8 +118,18 @@ const Information = (props: any) => {
             addressOptional: values.addressOptional,
             city: values.city,
             postalCode: values.postalCode,
-            saveInformationCheckbox: values.saveInformationCheckbox,
           };
+          const addressData = {
+            phone: values.contact,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            addressLine1: values.address,
+            addressLine2: values.addressOptional,
+            state: values.city,
+            postCode: values.postalCode,
+            tag: values.tag,
+          };
+          values.tag ? userAPI.addCustomerNewAddress(addressData) : null;
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -79,54 +141,38 @@ const Information = (props: any) => {
               <Form onSubmit={formikprops.handleSubmit}>
                 <div className="flex flex-wrap justify-between">
                   <p className="text-lg">Contact Information</p>
-
-                  <div className="flex flex-wrap gap-1 text-sm">
-                    <p className="text-gray-500">Already have an account?</p>
-                    <Link href="/account/sign-in" passHref>
-                      <a className="text-decoration-none">Log in</a>
-                    </Link>
-                  </div>
                 </div>
 
                 <div className="mt-5">
                   <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="text"
-                        id="email"
-                        name="email"
-                        className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor={`email`}
-                        className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                    <div className="flex flex-wrap gap-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-14 w-14"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
                       >
-                        Email
-                      </label>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="email" />
-                      </div>
-                    </div>
-                  </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <div className="ml-2">
+                        <span className="text-lg text-slate-500">{user}</span>
 
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="text"
-                        id="contact"
-                        name="contact"
-                        className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                        placeholder=" "
-                      />
-                      <label
-                        htmlFor={`contact`}
-                        className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                      >
-                        Mobile phone number
-                      </label>
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="contact" />
+                        <div className="text-base">
+                          <Link href="/" passHref>
+                            <a
+                              onClick={() => handleLogout()}
+                              className="text-decoration-none"
+                            >
+                              Logout
+                            </a>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -136,6 +182,32 @@ const Information = (props: any) => {
                   <p className="text-lg">Shipping Address</p>
 
                   <div className="mt-5">
+                    <div className="mb-3">
+                      <Field
+                        as="select"
+                        id="country"
+                        name="country"
+                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                        onClick={handlePreviousAddress}
+                      >
+                        <option>{dropdownText}</option>
+                        {customerAddresses?.length ? (
+                          customerAddresses?.map((customerAddress) => {
+                            return (
+                              <>
+                                <option>{`${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`}</option>
+                              </>
+                            );
+                          })
+                        ) : (
+                          <option></option>
+                        )}
+                        <option>Use a new address</option>
+                      </Field>
+                      <div className="errMsg text-red-600">
+                        <ErrorMessage name="country" />
+                      </div>
+                    </div>
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <div className="relative">
@@ -174,6 +246,27 @@ const Information = (props: any) => {
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="lastName" />
                           </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mb-3">
+                      <div className="relative">
+                        <Field
+                          type="text"
+                          id="contact"
+                          name="contact"
+                          className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                          placeholder=" "
+                        />
+                        <label
+                          htmlFor={`contact`}
+                          className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                        >
+                          Mobile phone number
+                        </label>
+                        <div className="errMsg text-red-600">
+                          <ErrorMessage name="contact" />
                         </div>
                       </div>
                     </div>
@@ -264,67 +357,75 @@ const Information = (props: any) => {
                   </div>
                 </div>
 
-                <p className="mb-2">Select a label for effective delivery:</p>
+                {showLabel ? (
+                  <div>
+                    <p className="mb-2">
+                      Select a label for effective delivery:
+                    </p>
 
-                <div className="flex flex-wrap items-center gap-x-3">
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="radio"
-                        id="tag1"
-                        name="tag"
-                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                        placeholder=" "
-                        value="home"
-                        required
-                      />
-                      <label
-                        htmlFor="tag1"
-                        className="ml-2 text-sm hover:cursor-pointer"
-                      >
-                        Home
-                      </label>
+                    <div className="flex flex-wrap items-center gap-x-3">
+                      <div className="mb-3">
+                        <div className="relative">
+                          <Field
+                            type="radio"
+                            id="tag1"
+                            name="tag"
+                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                            placeholder=" "
+                            value="home"
+                            required
+                          />
+                          <label
+                            htmlFor="tag1"
+                            className="ml-2 text-sm hover:cursor-pointer"
+                          >
+                            Home
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="mb-3">
+                        <div className="relative">
+                          <Field
+                            type="radio"
+                            id="tag2"
+                            name="tag"
+                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                            placeholder=" "
+                            value="office"
+                          />
+                          <label
+                            htmlFor="tag2"
+                            className="ml-2 text-sm hover:cursor-pointer"
+                          >
+                            Office
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="mb-3">
+                        <div className="relative">
+                          <Field
+                            type="radio"
+                            id="tag3"
+                            name="tag"
+                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
+                            placeholder=" "
+                            value="others"
+                          />
+                          <label
+                            htmlFor="tag3"
+                            className="ml-2 text-sm hover:cursor-pointer"
+                          >
+                            Others
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="radio"
-                        id="tag2"
-                        name="tag"
-                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                        placeholder=" "
-                        value="office"
-                      />
-                      <label
-                        htmlFor="tag2"
-                        className="ml-2 text-sm hover:cursor-pointer"
-                      >
-                        Office
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <div className="relative">
-                      <Field
-                        type="radio"
-                        id="tag3"
-                        name="tag"
-                        className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                        placeholder=" "
-                        value="others"
-                      />
-                      <label
-                        htmlFor="tag3"
-                        className="ml-2 text-sm hover:cursor-pointer"
-                      >
-                        Others
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                ) : (
+                  <></>
+                )}
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   <button

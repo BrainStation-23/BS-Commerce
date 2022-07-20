@@ -65,17 +65,17 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
 
             <div className="d-flex justify-content-between">
               <div>
-                Address line: {singleOrder.shippingAddress.addressLine1}
+                Address line: {singleOrder?.shippingAddress?.addressLine1}
               </div>
             </div>
 
             <div className="d-flex justify-content-between">
               <div>
-                Flat/Building Name: {singleOrder.shippingAddress.addressLine2}
+                Flat/Building Name: {singleOrder?.shippingAddress?.addressLine2}
               </div>
             </div>
             <div className="d-flex justify-content-between">
-              <div>Postcode: {singleOrder.shippingAddress.postCode}</div>
+              <div>Postcode: {singleOrder?.shippingAddress?.postCode}</div>
             </div>
           </div>
 
@@ -92,16 +92,16 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
 
             <div className="d-flex justify-content-between">
               <div>
-                Customer Name: {singleOrder.shippingAddress.firstName}{' '}
-                {singleOrder.shippingAddress.lastName}
+                Customer Name: {singleOrder?.shippingAddress?.firstName}{' '}
+                {singleOrder?.shippingAddress?.lastName}
               </div>
             </div>
 
             <div className="d-flex justify-content-between">
-              <div>Phone Number: {singleOrder.shippingAddress.phoneNumber}</div>
+              <div>Phone Number: {singleOrder?.shippingAddress?.phoneNumber}</div>
             </div>
             <div className="d-flex justify-content-between">
-              <div>Email: {singleOrder.shippingAddress.email}</div>
+              <div>Email: {singleOrder?.shippingAddress?.email}</div>
             </div>
           </div>
         </div>

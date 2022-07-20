@@ -165,7 +165,7 @@ const CartDropdown: NextComponentType = () => {
             <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
               <div className=" rounded-md bg-white">
                 {/* new div starts here */}
-                <div className="h-48 overflow-y-scroll py-1">
+                <div className={cartData.length ? "h-48 overflow-y-scroll py-1 border-x-2": "h-20 border"}>
                   {cartData.length > 0 ? (
                     dropdownData()
                   ) : (
@@ -177,13 +177,13 @@ const CartDropdown: NextComponentType = () => {
                 {/* new div ends here */}
                 {cartData.length > 0 ? (
                   <>
-                    <div className="flex justify-between p-6">
+                    <div className="flex justify-between p-6 border-x-2">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
                         ${totalCartPrice}
                       </span>
                     </div>
-                    <div className="px-6 py-2">
+                    <div className="px-6 py-2 border-x-2">
                       <a href="/cart">
                         <Buttons
                           bgColor="bg-slate-300"
