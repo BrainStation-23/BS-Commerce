@@ -96,11 +96,11 @@ export class OrderDatabase implements IOrderDatabase {
     try {
       const {orderId, statusType, statusValue} = body
       let update = {}
-      if(statusType === StatusTypeDto.orderStatus){
+      if(statusType === StatusTypeDto.orderStatusEnums){
         update = {orderStatus: statusValue}
-      }else if(statusType === StatusTypeDto.paymentStatus){
+      }else if(statusType === StatusTypeDto.paymentStatusEnums){
         update = {paymentStatus: statusValue}
-      }else if(statusType === StatusTypeDto.shippingStatus){
+      }else if(statusType === StatusTypeDto.shippingStatusEnums){
         update = {shippingStatus: statusValue}
       }
 

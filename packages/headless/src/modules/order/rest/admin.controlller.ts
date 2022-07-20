@@ -1,5 +1,5 @@
 import { AllOrderResponseDto } from './../dto/allOrderList.dto';
-import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
@@ -57,7 +57,7 @@ export class OrderAdminController {
     }
 
     @ApiBody({type: ChangeStatusDto}) 
-    @Post('change-status')
+    @Patch('change-status')
     async changeStatus(@Body() body: ChangeStatusDto, @Res({ passthrough: true }) res: Response): Promise<any>{
         const {code, ...response} = await this.orderAdminService.changeStatus( body);
         res.status(code);
