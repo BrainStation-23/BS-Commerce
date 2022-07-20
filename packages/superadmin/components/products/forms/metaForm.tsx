@@ -52,7 +52,7 @@ const MetaForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-meta col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -71,12 +71,7 @@ const MetaForm: NextComponentType = () => {
               label="Keywords"
               isRequired={false}
               fieldID="keywords"
-              fieldType="none"
-              fieldClass="custom-select w-100"
-              options={keywordOptions}
-              component={CustomSelect}
-              placeholder="Select brands..."
-              ismulti={true}
+              fieldType="text"
             />
             <FieldTemplate
               label="Title"

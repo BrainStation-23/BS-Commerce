@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
-import Modal from './modal';
+import Modal from './modal/modal';
 
 interface Properties {}
 
@@ -30,7 +30,15 @@ const HeaderAccount: React.FC<Properties> = () => {
     (state) => state.persistedReducer.product.wishlist
   );
 
-  const user = useAppSelector((state) => state.persistedReducer.user.user);
+  const customer = useAppSelector(
+    (state) => state.persistedReducer.user.customerDetails
+  );
+
+  const user = customer?.firstName
+    ? customer?.firstName + ' ' + customer?.lastName
+    : customer?.email
+    ? customer?.email
+    : customer?.phone;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -63,6 +71,7 @@ const HeaderAccount: React.FC<Properties> = () => {
           setChoice={setChoice}
           trigger={handleLogout}
           modalTitle="Logout"
+          bodyText="Are you sure?"
         />
       )}
       <div className="flex flex-row items-center gap-x-3">
@@ -72,17 +81,17 @@ const HeaderAccount: React.FC<Properties> = () => {
               <div className="group relative cursor-pointer normal-case">
                 <p className="hover:text-green-600">{links[4].name}</p>
                 <div
-                  className={`absolute -left-[20px] top-[20px] z-50 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
+                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
                     <Link href="/myAccount" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        My Profile
+                        Profile
                       </li>
                     </Link>
-                    <Link href="/order" passHref>
+                    <Link href="/wishlist" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Orders
+                        Wishlist
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>
@@ -90,9 +99,9 @@ const HeaderAccount: React.FC<Properties> = () => {
                         Manage Addresses
                       </li>
                     </Link>
-                    <Link href="/wishlist" passHref>
+                    <Link href="/order" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Wishlist
+                        Orders
                       </li>
                     </Link>
                     <hr className="my-2" />
@@ -164,7 +173,7 @@ const HeaderAccount: React.FC<Properties> = () => {
             </span>
           </div>
         </button>
-        <span className="z-50 mt-2 text-sm" onClick={(e) => showCartDropDown()}>
+        <span className="z-40 mt-2 text-sm" onClick={(e) => showCartDropDown()}>
           <CartDropdown />
         </span>
         <Link href="/order" passHref>
