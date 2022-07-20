@@ -20,9 +20,15 @@ You need to install MongoDB on your local computer before you can connect to it.
 MongoDB default settings -> the Hostname would be the localhost, and the port is 27017.
 
 
-### Build packages/models
+### Seed MongoDB Data
 
-### How to start
+## `seeder`
+
+> To seed data to the packages
+
+First you need to `build packages/models`.
+
+#### How to build packages/models
 
 ```bash
 cd packages/models
@@ -30,22 +36,25 @@ yarn install
 yarn build
 ```
 
-### Seed MongoDB Data
-
-## `seeder`
-
-> To seed data to the packages
-
-### How to start
+Then you need to go back to the packages path of this project.
 
 ```bash
-cd packages/seeder
+cd ../
+```
+
+Lastly, you also need to `build packages/seeder`
+#### How to start
+
+```bash
+cd seeder
 yarn install
 yarn build
 yarn seed
 ```
 
 ## Getting Started
+
+To start this project, you need to ensure that you are in the root path of this project.
 
 First, make sure you install `Yarn`:
 
