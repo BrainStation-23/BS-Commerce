@@ -34,4 +34,6 @@ const getListOfFiles = (rootDir) => {
     return seederFiles;
 }
 
-run();
+run().finally(() => {
+    process.exit(0)
+})
