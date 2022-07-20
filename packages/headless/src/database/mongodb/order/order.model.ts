@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 import { model, Schema } from 'mongoose';
 import {
   OrderEntity,
@@ -118,7 +118,7 @@ const ProductSchema = new Schema(
 const OrderSchema = new Schema<OrderEntity>({
   orderId: {
     type: String,
-    default: () => randomUUID(),
+    unique: true
   },
   userId: {
     type: String,
