@@ -115,7 +115,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderList(): Promise<OrderEntity[]>{
-    return await OrderModel.find({});
+    return await OrderModel.find({}).lean();
   }
 
 }
