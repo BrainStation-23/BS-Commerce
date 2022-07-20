@@ -142,7 +142,6 @@ const Information = (props: any) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
-          values.tag ? userAPI.addCustomerNewAddress(addressData) : null;
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -204,18 +203,21 @@ const Information = (props: any) => {
                         onClick={handlePreviousAddress}
                       >
                         <option>{dropdownText}</option>
-                        {customerAddresses?.length ? (
-                          customerAddresses?.map((customerAddress) => {
-                            return (
-                              <>
-                                <option>{`${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`}</option>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <option></option>
-                        )}
-                        <option>Use a new address</option>
+                        {customerAddresses?.length
+                          ? customerAddresses?.map((customerAddress) => {
+                              const address = `${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`;
+                              return (
+                                <>
+                                  {address !== dropdownText ? (
+                                    <option>{`${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`}</option>
+                                  ) : null}
+                                </>
+                              );
+                            })
+                          : null}
+                        {dropdownText !== 'Use a new address' ? (
+                          <option>Use a new address</option>
+                        ) : null}
                       </Field>
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="country" />
