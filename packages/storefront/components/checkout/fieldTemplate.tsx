@@ -15,7 +15,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
   return (
     <div className={extraClass}>
       <div className="relative">
-        {isRequired ? (
+        {isRequired === true ? (
           <Field
             type={fieldType}
             id={fieldID}
@@ -29,7 +29,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
             type={fieldType}
             id={fieldID}
             name={fieldID}
-            className="required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+            className="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
             placeholder={placeholder}
           />
         )}
