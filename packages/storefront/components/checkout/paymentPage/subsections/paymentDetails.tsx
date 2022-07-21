@@ -375,6 +375,7 @@ const PaymentDetails: NextComponentType = () => {
                                   fieldID="firstName"
                                   fieldType="text"
                                   placeholder=" "
+                                  isRequired={true}
                                 />
 
                                 <FieldTemplate
@@ -382,6 +383,7 @@ const PaymentDetails: NextComponentType = () => {
                                   fieldID="lastName"
                                   fieldType="text"
                                   placeholder=" "
+                                  isRequired={true}
                                 />
                               </div>
                             </div>
@@ -391,6 +393,7 @@ const PaymentDetails: NextComponentType = () => {
                               fieldID="contact"
                               fieldType="text"
                               placeholder=" "
+                              isRequired={true}
                               extraClass="mb-3"
                             />
 
@@ -399,6 +402,7 @@ const PaymentDetails: NextComponentType = () => {
                               fieldID="address"
                               fieldType="text"
                               placeholder=" "
+                              isRequired={true}
                               extraClass="mb-3"
                             />
 
@@ -407,6 +411,7 @@ const PaymentDetails: NextComponentType = () => {
                               fieldID="addressOptional"
                               fieldType="text"
                               placeholder=" "
+                              isRequired={true}
                               extraClass="mb-3"
                             />
 
@@ -417,6 +422,7 @@ const PaymentDetails: NextComponentType = () => {
                                   fieldID="city"
                                   fieldType="text"
                                   placeholder=" "
+                                  isRequired={true}
                                 />
 
                                 <FieldTemplate
@@ -424,6 +430,7 @@ const PaymentDetails: NextComponentType = () => {
                                   fieldID="postalCode"
                                   fieldType="text"
                                   placeholder=" "
+                                  isRequired={true}
                                 />
                               </div>
                             </div>
