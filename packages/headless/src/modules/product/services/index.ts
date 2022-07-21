@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import { SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
 import {
   CreateProductResponse,
@@ -25,12 +25,13 @@ import {
   GetCustomerAllProductsResponse,
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
+  CreateProductRequest,
 } from 'models';
 @Injectable()
 export class ProductService {
   constructor(private productRepo: ProductRepository, private helper: Helper) { }
 
-  async createProduct(product: Product): Promise<CreateProductResponse> {
+  async createProduct(product: CreateProductRequest): Promise<CreateProductResponse> {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
