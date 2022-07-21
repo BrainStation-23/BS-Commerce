@@ -1,23 +1,12 @@
 import { ErrorMessage, Field } from 'formik';
-import { TemplateInteface } from '@/components/products/models/index';
+import { TemplateInteface } from '@/components/checkout/fieldInterface';
 
 const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
-  const {
-    label,
-    isRequired,
-    fieldID,
-    fieldType,
-    fieldClass,
-    extraClass,
-    fieldAs,
-    options,
-    component,
-    placeholder,
-    ismulti,
-  } = props;
+  const { label, fieldID, fieldType, fieldClass, extraClass, placeholder } =
+    props;
 
   return (
-    <div className="mb-3">
+    <div className={extraClass}>
       <div className="relative">
         <Field
           type={fieldType}

@@ -14,6 +14,7 @@ import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
 import React from 'react';
 import FieldTemplate from '../../fieldTemplate';
+import { storeAddresses } from 'toolkit/customerAddressSlice';
 
 interface FormData {
   cardNumber: string;
@@ -23,6 +24,7 @@ interface FormData {
   shippingAddressPicked: string;
   firstName: string;
   lastName: string;
+  contact: string;
   address: string;
   addressOptional: string;
   city: string;
@@ -30,6 +32,12 @@ interface FormData {
 }
 
 const PaymentDetails: NextComponentType = () => {
+  const [showLabel, setShowLabel] = useState(false);
+  const [showShippingForm, setShowShippingForm] = useState(false);
+  const [dropdownText, setDropdownText] = useState('Use a new address');
+  const [update, setUpdate] = useState(initialValues);
+  const [tags, setTags] = useState<string[]>([]);
+
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
@@ -50,7 +58,6 @@ const PaymentDetails: NextComponentType = () => {
     };
     usableCart.push(cart);
   });
-  const [showLabel, setShowLabel] = useState(false);
 
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
@@ -71,16 +78,12 @@ const PaymentDetails: NextComponentType = () => {
     shippingAddressPicked: '',
     firstName: '',
     lastName: '',
+    contact: '',
     address: '',
     addressOptional: '',
     city: '',
     postalCode: '',
   };
-
-  const [showShippingForm, setShowShippingForm] = useState(false);
-  const [dropdownText, setDropdownText] = useState('Use a new address');
-  const [update, setUpdate] = useState(initialValues);
-  const [tags, setTags] = useState<string[]>([]);
 
   const customerAddresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
@@ -199,6 +202,27 @@ const PaymentDetails: NextComponentType = () => {
             city: values.city,
             postalCode: values.postalCode,
           };
+
+          const addressData = {
+            phone: values.contact,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            addressLine1: values.address,
+            addressLine2: values.addressOptional,
+            state: values.city,
+            postCode: values.postalCode,
+            tag: values.tag,
+          };
+
+          console.log(addressData);
+
+          if (values?.tag!) {
+            userAPI.addCustomerNewAddress(addressData);
+            userAPI.getCustomer(token).then((response) => {
+              dispatch(storeAddresses(response?.data?.addresses));
+            });
+          }
+
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -221,13 +245,16 @@ const PaymentDetails: NextComponentType = () => {
                         fieldID="cardNumber"
                         fieldType="text"
                         placeholder=" "
+                        extraClass="mb-3"
                       />
                       <FieldTemplate
                         label="Name on card"
                         fieldID="nameOnCard"
                         fieldType="text"
                         placeholder=" "
+                        extraClass="mb-3"
                       />
+
                       <div className="row">
                         <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                           <div className="relative">
@@ -254,6 +281,7 @@ const PaymentDetails: NextComponentType = () => {
                             fieldID="securityCode"
                             fieldType="text"
                             placeholder=" "
+                            extraClass="mb-3"
                           />
                         </div>
                       </div>
@@ -342,150 +370,87 @@ const PaymentDetails: NextComponentType = () => {
                             </div>
                             <div className="row">
                               <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
-                                <div className="relative">
-                                  <Field
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                    placeholder=" "
-                                  />
-                                  <label
-                                    htmlFor={`firstName`}
-                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                  >
-                                    First name
-                                  </label>
-                                  <div className="errMsg text-red-600">
-                                    <ErrorMessage name="firstName" />
-                                  </div>
-                                </div>
-
-                                <div className="relative">
-                                  <Field
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                    placeholder=" "
-                                  />
-                                  <label
-                                    htmlFor={`lastName`}
-                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                  >
-                                    Last name
-                                  </label>
-                                  <div className="errMsg text-red-600">
-                                    <ErrorMessage name="lastName" />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mb-3">
-                              <div className="relative">
-                                <Field
-                                  type="text"
-                                  id="contact"
-                                  name="contact"
-                                  className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                <FieldTemplate
+                                  label="First Name"
+                                  fieldID="firstName"
+                                  fieldType="text"
                                   placeholder=" "
                                 />
-                                <label
-                                  htmlFor={`contact`}
-                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                >
-                                  Mobile phone number
-                                </label>
-                                <div className="errMsg text-red-600">
-                                  <ErrorMessage name="contact" />
-                                </div>
+
+                                <FieldTemplate
+                                  label="Last Name"
+                                  fieldID="lastName"
+                                  fieldType="text"
+                                  placeholder=" "
+                                />
                               </div>
                             </div>
 
-                            <div className="mb-3">
-                              <div className="relative">
-                                <Field
-                                  type="text"
-                                  id="address"
-                                  name="address"
-                                  className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                  placeholder=" "
-                                />
-                                <label
-                                  htmlFor={`address`}
-                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                >
-                                  Address 1
-                                </label>
-                                <div className="errMsg text-red-600">
-                                  <ErrorMessage name="address" />
-                                </div>
-                              </div>
-                            </div>
+                            <FieldTemplate
+                              label="Mobile phone number"
+                              fieldID="contact"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                            />
 
-                            <div className="mb-3">
-                              <div className="relative">
-                                <Field
-                                  type="text"
-                                  id="addressOptional"
-                                  name="addressOptional"
-                                  className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                  placeholder=" "
-                                />
-                                <label
-                                  htmlFor={`addressOptional`}
-                                  className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                >
-                                  Address 2
-                                </label>
-                                <div className="errMsg text-red-600">
-                                  <ErrorMessage name="addressOptional" />
-                                </div>
-                              </div>
-                            </div>
+                            <FieldTemplate
+                              label="Address 1"
+                              fieldID="address"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                            />
+
+                            <FieldTemplate
+                              label="Address 2"
+                              fieldID="addressOptional"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                            />
 
                             <div className="row mb-3">
                               <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
-                                <div className="relative">
-                                  <Field
-                                    type="text"
-                                    id="city"
-                                    name="city"
-                                    className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                    placeholder=" "
-                                  />
-                                  <label
-                                    htmlFor={`city`}
-                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                  >
-                                    City
-                                  </label>
-                                  <div className="errMsg text-red-600">
-                                    <ErrorMessage name="city" />
-                                  </div>
-                                </div>
+                                <FieldTemplate
+                                  label="City"
+                                  fieldID="city"
+                                  fieldType="text"
+                                  placeholder=" "
+                                />
 
-                                <div className="relative">
-                                  <Field
-                                    type="text"
-                                    id="postalCode"
-                                    name="postalCode"
-                                    className={`required peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                    placeholder=" "
-                                  />
-                                  <label
-                                    htmlFor={`postalCode`}
-                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                                  >
-                                    Postal Code
-                                  </label>
-                                  <div className="errMsg text-red-600">
-                                    <ErrorMessage name="postalCode" />
+                                <FieldTemplate
+                                  label="Postal Code"
+                                  fieldID="postalCode"
+                                  fieldType="text"
+                                  placeholder=" "
+                                />
+                              </div>
+                            </div>
+
+                            {showLabel ? (
+                              <div>
+                                <div className="">
+                                  <div className="mb-3">
+                                    <label
+                                      htmlFor="tag"
+                                      className="pb-8 text-sm"
+                                    >
+                                      Enter a label for effective delivery:
+                                    </label>
+                                    <div className="mt-2">
+                                      <FieldTemplate
+                                        fieldID="tag"
+                                        fieldType="text"
+                                        placeholder="E.g. Home, Office, Others etc."
+                                      />
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
                           </div>
                         </div>
                       </>
