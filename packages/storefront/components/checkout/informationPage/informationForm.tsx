@@ -74,7 +74,7 @@ const Information = (props: any) => {
     });
     const nArray: Array<string> = [];
     ntags.forEach((tag: any) => nArray.push(tag));
-    setTags(nArray);
+    nArray.length === tags.length ? '' : setTags(nArray);
   };
   const dispatch = useAppDispatch();
   const { setModal } = props;
@@ -125,8 +125,8 @@ const Information = (props: any) => {
     setModal(obj);
   };
   useEffect(() => {
-    tags[0] ? '' : setTagsOptions();
-  });
+    setTagsOptions();
+  }, [tags]);
 
   return (
     <div className="">
@@ -394,67 +394,19 @@ const Information = (props: any) => {
 
                 {showLabel ? (
                   <div>
-                    <p className="mb-2">
-                      Select a label for effective delivery:
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-x-3">
+                    <div className="">
                       <div className="mb-3">
-                        <div className="relative">
-                          <Field
-                            type="radio"
-                            id="tag1"
-                            name="tag"
-                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                            placeholder=" "
-                            value="home"
-                            required
-                          />
-                          <label
-                            htmlFor="tag1"
-                            className="ml-2 text-sm hover:cursor-pointer"
-                          >
-                            Home
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="mb-3">
-                        <div className="relative">
-                          <Field
-                            type="radio"
-                            id="tag2"
-                            name="tag"
-                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                            placeholder=" "
-                            value="office"
-                          />
-                          <label
-                            htmlFor="tag2"
-                            className="ml-2 text-sm hover:cursor-pointer"
-                          >
-                            Office
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="mb-3">
-                        <div className="relative">
-                          <Field
-                            type="radio"
-                            id="tag3"
-                            name="tag"
-                            className={`focus:ring-3 h-3 w-3 rounded border-2 border-black hover:cursor-pointer hover:border-gray-300 focus:ring-black`}
-                            placeholder=" "
-                            value="others"
-                          />
-                          <label
-                            htmlFor="tag3"
-                            className="ml-2 text-sm hover:cursor-pointer"
-                          >
-                            Others
-                          </label>
-                        </div>
+                        <label htmlFor="tag" className="text-sm">
+                          Enter a label for effective delivery:
+                        </label>
+                        <br />
+                        <Field
+                          type="text"
+                          className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                          id="tag"
+                          name="tag"
+                          placeholder="E.g. Home, Office, Others etc."
+                        />
                       </div>
                     </div>
                   </div>
