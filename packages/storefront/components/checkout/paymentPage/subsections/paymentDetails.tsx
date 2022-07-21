@@ -223,21 +223,22 @@ const PaymentDetails: NextComponentType = () => {
                     <CreditCard />
                   </div>
                   <div className="bg-gray-100">
-                    <FieldTemplate
-                      label="Card Number"
-                      isRequired={true}
-                      fieldID="cardNumber"
-                      fieldType="text"
-                      fieldClass="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                    />
                     <div className="p-4">
+                      <FieldTemplate
+                        label="Card Number"
+                        isRequired={true}
+                        fieldID="cardNumber"
+                        fieldType="text"
+                        placeholder=" "
+                        fieldClass="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                      />
                       <div className="mb-3">
                         <div className="relative">
                           <Field
                             type="text"
                             id="cardNumber"
                             name="cardNumber"
-                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                            className=" peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                             placeholder=" "
                           />
                           <label
