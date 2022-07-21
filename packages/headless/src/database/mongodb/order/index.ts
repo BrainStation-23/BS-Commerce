@@ -5,6 +5,8 @@ import { OrderData } from 'src/modules/order/dto/order.response.dto';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
+import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
+import moment from 'moment';
 
 export class OrderDatabase implements IOrderDatabase {
   async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
@@ -114,8 +116,24 @@ export class OrderDatabase implements IOrderDatabase {
     
   }
 
-  async getOrderList(): Promise<OrderEntity[]>{
-    return await OrderModel.find({}).lean();
+  async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
+    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate, startTime, endTime} = query;
+
+    let queryParams = {
+      ...(shippingStatus && { shippingStatus }),
+      ...(orderStatus && { orderStatus }),
+      ...(paymentStatus && { paymentStatus }),
+    }
+    
+    if(startDate || endDate) {
+        queryParams['orderedDate'] = {
+            ...(startDate && {$gte: new Date(startDate)}),
+            ...(endDate && {$lte: new Date(endDate)})
+        }
+    }
+      return await OrderModel.find(queryParams).skip(skip).limit(limit).lean();
   }
 
 }
+
+

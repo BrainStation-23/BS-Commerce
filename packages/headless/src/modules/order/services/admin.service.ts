@@ -1,4 +1,4 @@
-import { AllOrderListDto, AllOrderResponseDto } from './../dto/allOrderList.dto';
+import { AllOrderListDto, AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.dto';
 import { OrderResponseDto } from './../dto/order.response.dto';
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { OrderEntity, OrderStatusEnum, PaymentStatusEnum, ShippingStatusEnum } from "src/entity/order";
@@ -62,8 +62,8 @@ export class OrderAdminService{
         )
     }
 
-    async getOrderList(): Promise<IServiceResponse<AllOrderResponseDto>> {
-        const orderList = await this.orderRepository.getOrderList();
+    async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<IServiceResponse<AllOrderResponseDto>> {
+        const orderList = await this.orderRepository.getOrderList(query, skip, limit);
         const response: AllOrderResponseDto = {
             orders: orderList
         }
