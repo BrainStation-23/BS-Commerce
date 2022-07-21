@@ -50,6 +50,11 @@ const Header: NextComponentType = () => {
       name: 'home',
       link: { pathname: '/' },
       hasSubmenu: false,
+      // submenu: [
+      //   { name: 'Home - 1', link: '/' },
+      //   { name: 'Home - 2', link: '/' },
+      //   { name: 'Home - 3', link: '/' },
+      // ],
     },
     {
       name: 'shop',

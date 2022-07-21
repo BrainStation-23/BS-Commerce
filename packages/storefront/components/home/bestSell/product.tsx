@@ -17,7 +17,7 @@ const Product = ({ product }: SingleProduct) => {
           name: product.info.name,
         },
       }}
-      as={`product/${product.info.name}`}
+      // as={`product/${product.info.name}`}
       passHref
     >
       <div className="duration-0 group grid cursor-pointer justify-items-center transition hover:bg-white hover:duration-700">

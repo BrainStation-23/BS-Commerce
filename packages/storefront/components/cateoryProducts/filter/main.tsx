@@ -1,11 +1,11 @@
-import type { NextComponentType } from "next";
-import React, { useState } from "react";
+import type { NextComponentType } from 'next';
+import React, { useState } from 'react';
 
-import PriceFilter from "@/components/cateoryProducts/filter/subComponent/priceFilter";
-import AvaialabilityOptions from "@/components/cateoryProducts/filter/subComponent/availability";
-import ProductTypeOptions from "@/components/cateoryProducts/filter/subComponent/productTypes";
-import BrandTypeOptions from "@/components/cateoryProducts/filter/subComponent/brandTypes";
-import ColourTypeOptions from "@/components/cateoryProducts/filter/subComponent/colorAvailibility";
+import PriceFilter from '@/components/cateoryProducts/filter/subComponent/priceFilter';
+import AvaialabilityOptions from '@/components/cateoryProducts/filter/subComponent/availability';
+import ProductTypeOptions from '@/components/cateoryProducts/filter/subComponent/productTypes';
+import BrandTypeOptions from '@/components/cateoryProducts/filter/subComponent/brandTypes';
+import ColourTypeOptions from '@/components/cateoryProducts/filter/subComponent/colorAvailibility';
 
 const CategoryFilter: NextComponentType = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
@@ -58,7 +58,7 @@ const CategoryFilter: NextComponentType = () => {
 
   return (
     <>
-      <div className="mt-20">
+      <div className="mt-16 w-full">
         <div className="accordion" id="accordionExample5">
           {/* Price Filter Section */}
           <div className="accordion-item bg-white">
@@ -68,17 +68,17 @@ const CategoryFilter: NextComponentType = () => {
                 accordion-button
                 relative
                 flex
-                items-center
+                flex
                 w-full
-                py-4
-                px-5
-                text-base text-gray-800 text-left
-                bg-white
-                border-0
-                rounded-none
-                transition
-                focus:outline-none
-                flex justify-between
+                items-center
+                justify-between
+                rounded-none border-0 bg-white
+                px-0
+                pb-2
+                text-left
+                text-sm
+                text-gray-800
+                transition focus:outline-none
               "
                 type="button"
                 data-bs-toggle="collapse"
@@ -87,7 +87,7 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseOne5"
                 onClick={accorditionStatus1}
               >
-                <span className="text-base font-semibold"> PRICE</span>
+                <span className="text-[15px] font-semibold tracking-wide"> PRICE</span>
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -96,8 +96,8 @@ const CategoryFilter: NextComponentType = () => {
               id="collapseOne5"
               className={
                 displayStatus1
-                  ? "accordion-collapse collapse"
-                  : "accordion-collapse collapse hidden"
+                  ? 'accordion-collapse collapse'
+                  : 'accordion-collapse collapse hidden'
               }
               aria-labelledby="headingOne5"
             >
@@ -113,17 +113,18 @@ const CategoryFilter: NextComponentType = () => {
                    collapsed
                    relative
                    flex
-                   items-center
+                   flex
                    w-full
-                   py-4
-                   px-5
-                   text-base text-gray-800 text-left
-                   bg-white
-                   border-0
+                   items-center
+                   justify-between
                    rounded-none
-                   transition
-                   focus:outline-none
-                   flex justify-between
+                   border-0 bg-white px-0
+                   pt-8
+                   pb-2
+                   text-left
+                   text-sm
+                   text-gray-800
+                   transition focus:outline-none
                "
                 type="button"
                 data-bs-toggle="collapse"
@@ -132,7 +133,7 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus2}
               >
-                <span className="text-base font-semibold"> AVAILABILITY</span>
+                <span className="text-[15px] font-semibold tracking-wide"> AVAILABILITY</span>
                 <span>{displayStatus2 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -142,11 +143,11 @@ const CategoryFilter: NextComponentType = () => {
               aria-labelledby="headingTwo5"
               className={
                 displayStatus2
-                  ? "accordion-collapse collapse"
-                  : "accordion-collapse collapse hidden"
+                  ? 'accordion-collapse collapse'
+                  : 'accordion-collapse collapse hidden'
               }
             >
-              <div className="accordion-body py-4 px-5">
+              <div className="accordion-body py-4 transition duration-200">
                 <AvaialabilityOptions />
               </div>
             </div>
@@ -160,17 +161,18 @@ const CategoryFilter: NextComponentType = () => {
                    collapsed
                    relative
                    flex
-                   items-center
+                   flex
                    w-full
-                   py-4
-                   px-5
-                   text-base text-gray-800 text-left
-                   bg-white
-                   border-0
+                   items-center
+                   justify-between
                    rounded-none
-                   transition
-                   focus:outline-none
-                   flex justify-between
+                   border-0 bg-white px-0
+                   pt-8
+                   pb-2
+                   text-left
+                   text-base
+                   text-gray-800
+                   transition focus:outline-none
                "
                 type="button"
                 data-bs-toggle="collapse"
@@ -179,8 +181,8 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus3}
               >
-                <span className="text-base font-semibold"> PRODUCT TYPE</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
+                <span className="text-[15px] font-semibold tracking-wide"> PRODUCT TYPE</span>
+                <span>{displayStatus3 ? upArrow : downArrow}</span>
               </button>
             </h2>
             <div className="border-t border-gray-300"></div>
@@ -189,11 +191,11 @@ const CategoryFilter: NextComponentType = () => {
               aria-labelledby="headingTwo5"
               className={
                 displayStatus3
-                  ? "accordion-collapse collapse"
-                  : "accordion-collapse collapse hidden"
+                  ? 'accordion-collapse collapse'
+                  : 'accordion-collapse collapse hidden'
               }
             >
-              <div className="accordion-body py-4 px-5">
+              <div className="accordion-body py-4">
                 <ProductTypeOptions />
               </div>
             </div>
@@ -206,17 +208,18 @@ const CategoryFilter: NextComponentType = () => {
                    collapsed
                    relative
                    flex
-                   items-center
+                   flex
                    w-full
-                   py-4
-                   px-5
-                   text-base text-gray-800 text-left
-                   bg-white
-                   border-0
+                   items-center
+                   justify-between
                    rounded-none
-                   transition
-                   focus:outline-none
-                   flex justify-between
+                   border-0 bg-white px-0
+                   pt-8
+                   pb-2
+                   text-left
+                   text-base
+                   text-gray-800
+                   transition focus:outline-none
                "
                 type="button"
                 data-bs-toggle="collapse"
@@ -225,8 +228,8 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus4}
               >
-                <span className="text-base font-semibold"> BRAND</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
+                <span className="text-[15px] font-semibold tracking-wide"> BRAND</span>
+                <span>{displayStatus4 ? upArrow : downArrow}</span>
               </button>
             </h2>
             <div className="border-t border-gray-300"></div>
@@ -235,11 +238,11 @@ const CategoryFilter: NextComponentType = () => {
               aria-labelledby="headingTwo5"
               className={
                 displayStatus4
-                  ? "accordion-collapse collapse"
-                  : "accordion-collapse collapse hidden"
+                  ? 'accordion-collapse collapse'
+                  : 'accordion-collapse collapse hidden'
               }
             >
-              <div className="accordion-body py-4 px-5">
+              <div className="accordion-body py-4">
                 <BrandTypeOptions />
               </div>
             </div>
@@ -253,17 +256,18 @@ const CategoryFilter: NextComponentType = () => {
                    collapsed
                    relative
                    flex
-                   items-center
+                   flex
                    w-full
-                   py-4
-                   px-5
-                   text-base text-gray-800 text-left
-                   bg-white
-                   border-0
-                   rounded-none
-                   transition
-                   focus:outline-none
-                   flex justify-between
+                   items-center
+                   justify-between
+                                      rounded-none
+                   border-0 bg-white px-0
+                   pt-8
+                   pb-2
+                   text-left
+                   text-base
+                   text-gray-800
+                   transition focus:outline-none
                "
                 type="button"
                 data-bs-toggle="collapse"
@@ -272,8 +276,8 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus5}
               >
-                <span className="text-base font-semibold"> COLOR</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
+                <span className="text-[15px] font-semibold tracking-wide"> COLOR</span>
+                <span>{displayStatus5 ? upArrow : downArrow}</span>
               </button>
             </h2>
             <div className="border-t border-gray-300"></div>
@@ -282,18 +286,18 @@ const CategoryFilter: NextComponentType = () => {
               aria-labelledby="headingTwo5"
               className={
                 displayStatus5
-                  ? "accordion-collapse collapse"
-                  : "accordion-collapse collapse hidden"
+                  ? 'accordion-collapse collapse'
+                  : 'accordion-collapse collapse hidden'
               }
             >
-              <div className="accordion-body py-4 px-5">
+              <div className="accordion-body py-4 transition duration-200">
                 <ColourTypeOptions />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid colspan-4"></div>
+      <div className="colspan-4 grid"></div>
     </>
   );
 };

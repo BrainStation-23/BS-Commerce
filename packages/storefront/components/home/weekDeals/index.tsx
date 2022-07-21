@@ -45,7 +45,7 @@ const WeekDeals: NextComponentType = () => {
                       name: product.info.name,
                     },
                   }}
-                  as={`product/${product.info.name}`}
+                  // as={`product/${product.info.name}`}
                 >
                   <div className="mb-0 overflow-hidden" key={product.id}>
                     <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
@@ -90,7 +90,7 @@ const WeekDeals: NextComponentType = () => {
                                   name: product.info.name,
                                 },
                               }}
-                              as={`product/${product.info.name}`}
+                              // as={`product/${product.info.name}`}
                             >
                               <div className="text-xl font-medium text-inherit text-gray-600">
                                 {product.info.name}

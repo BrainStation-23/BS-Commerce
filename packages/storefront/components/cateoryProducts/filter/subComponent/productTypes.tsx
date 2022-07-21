@@ -22,14 +22,14 @@ const ProductTypeOptions: NextComponentType = () => {
     useState("");
   return (
     <>
-      <div className="py-2">
+      <div className="py-4">
         <CounterElement />
       </div>
       <div className={radiott.custom}>
         {availableProductTypeOptions.map((availableOption) => {
           return (
             <div key={availableOption.id}>
-              <div className="flex justify-between py-4">
+              <div className="flex justify-between py-1">
                 <input
                   id={availableOption.id + ""}
                   type="radio"

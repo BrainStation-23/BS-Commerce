@@ -37,7 +37,7 @@ const ProductSort: NextComponentType = () => {
   return (
     <>
       <div>
-        <div className="box-border h-18 w-full p-4 border-2 ">
+        <div className="box-border h-auto w-full px-4 border text-sm">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 flex flex-row">
             <div className="flex grid content-center justify-center sm:justify-center lg:justify-start md:justify-start xl:justify-start">
               {gridIcon}
@@ -48,7 +48,7 @@ const ProductSort: NextComponentType = () => {
               </label>
               <select
                 name="cars"
-                className="p-2 h-12 w-1/2 box-border border-2 bg-white text-sm"
+                className="py-2 px-1 h-auto w-3/5 -ml-3 box-border border bg-white text-sm"
               >
                 {dropdownSortOptions}
               </select>
