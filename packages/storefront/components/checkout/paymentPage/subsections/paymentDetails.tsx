@@ -13,6 +13,7 @@ import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
 import React from 'react';
+import FieldTemplate from '../../fieldTemplate';
 
 interface FormData {
   cardNumber: string;
@@ -80,9 +81,11 @@ const PaymentDetails: NextComponentType = () => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [update, setUpdate] = useState(initialValues);
   const [tags, setTags] = useState<string[]>([]);
+
   const customerAddresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
   );
+
   const setTagsOptions = () => {
     const ntags = new Set();
     customerAddresses?.map((addressn) => {
@@ -92,9 +95,11 @@ const PaymentDetails: NextComponentType = () => {
     ntags.forEach((tag: any) => nArray.push(tag));
     nArray.length === tags.length ? '' : setTags(nArray);
   };
+
   const addresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
   );
+
   const handlePaymentSubmit = (data: FormData) => {
     {
       data ? dispatch(addToBillingInfo(data)) : null;
@@ -139,6 +144,7 @@ const PaymentDetails: NextComponentType = () => {
       dispatch(deleteCheckoutInfo());
     });
   };
+
   const handlePreviousAddress = (event: any) => {
     setDropdownText(event.target.value);
     const detail = event.target.value;
@@ -217,6 +223,13 @@ const PaymentDetails: NextComponentType = () => {
                     <CreditCard />
                   </div>
                   <div className="bg-gray-100">
+                    <FieldTemplate
+                      label="Card Number"
+                      isRequired={true}
+                      fieldID="cardNumber"
+                      fieldType="text"
+                      fieldClass="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                    />
                     <div className="p-4">
                       <div className="mb-3">
                         <div className="relative">
