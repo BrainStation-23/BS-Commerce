@@ -5,4 +5,5 @@ export interface TemplateInteface {
     fieldClass?: string;
     extraClass?: string;
     placeholder?: string;
+    isRequired?: boolean;
   }
