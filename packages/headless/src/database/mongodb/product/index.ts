@@ -6,7 +6,6 @@ import { ProductModel } from './product.model';
 
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
-
   async findProduct(query: Record<string, any>): Promise<Product | null> {
     return await ProductModel.findOne(query, '-_id').lean();
   }
@@ -15,14 +14,40 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.create(product);
   }
 
-  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').skip(skip).limit(limit).lean();
+  async findAllProducts(
+    query: Record<string, any>,
+    skip?: number,
+    limit?: number,
+  ): Promise<Product[] | []> {
+    return await ProductModel.find(query, '-_id')
+      .skip(skip)
+      .limit(limit)
+      .lean();
   }
 
-  async getAllConditionalProducts(slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[] | []> {
-    const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
-    const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
-    return await ProductModel.find({ 'categories.id': { '$in': categoryIdList } }, '-_id').sort('info.' + orderBy).skip(skip).limit(limit).lean();
+  async getAllConditionalProducts(
+    slug: string,
+    orderBy: string,
+    skip?: number,
+    limit?: number,
+  ): Promise<Product[] | []> {
+    const categories = await CategoryModel.find({
+      $or: [{ slug: slug }, { 'ancestors.slug': slug }],
+    }).lean();
+    const categoryIdList =
+      categories &&
+      categories.length &&
+      categories.map((category) => {
+        return category.id;
+      });
+    return await ProductModel.find(
+      { 'categories.id': { $in: categoryIdList } },
+      '-_id',
+    )
+      .sort('info.' + orderBy)
+      .skip(skip)
+      .limit(limit)
+      .lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {
@@ -33,20 +58,41 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.findOneAndRemove({ id: productId }).lean();
   }
 
-  async updateProduct(product: UpdateProduct, productId: string): Promise<Product | null> {
-    return await ProductModel.findOneAndUpdate({ id: productId }, { $set: product }, { new: true }).lean().exec();
+  async updateProduct(
+    product: UpdateProduct,
+    productId: string,
+  ): Promise<Product | null> {
+    return await ProductModel.findOneAndUpdate(
+      { id: productId },
+      { $set: product },
+      { new: true },
+    )
+      .lean()
+      .exec();
   }
 
-  async updateProductsForBrand(productIds: string[], brandId: string): Promise<Product[] | []> {
+  async updateProductsForBrand(
+    productIds: string[],
+    brandId: string,
+  ): Promise<Product[] | []> {
     await ProductModel.updateMany(
-      { id: { '$in': productIds } },
+      { id: { $in: productIds } },
       { $addToSet: { brands: brandId } },
-      { multi: true }
+      { multi: true },
     ).exec();
-    return await ProductModel.find({ id: { '$in': productIds } }).lean();
+    return await ProductModel.find({ id: { $in: productIds } }).lean();
   }
 
-  async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').sort(sortCondition).skip(skip).limit(limit).lean();
+  async getProductsList(
+    skip: number,
+    limit: number,
+    query?: Record<string, any>,
+    sortCondition?: string,
+  ): Promise<Product[] | []> {
+    return await ProductModel.find(query, '-_id')
+      .sort(sortCondition)
+      .skip(skip)
+      .limit(limit)
+      .lean();
   }
 }

@@ -9,19 +9,19 @@ import {
   GetProductParamsDto,
   GetProductsByConditionQueryDto,
   UpdateProductParamsDto,
-  updateProductsForBrandRequestDto
-} from '../dto';
-import { CreateProductDto } from '../dto/createProduct.dto';
+  updateProductsForBrandRequestDto,
+} from '../rest/dto';
+import { CreateProductDto } from '../rest/dto/createProduct.dto';
 import { ProductService } from '../services';
 
 @Resolver()
 export class ProductResolver {
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {}
 
   // Customer
   @Query()
   async getCustomerProduct(@Args('params') params: GetProductParamsDto) {
-    return await this.productService.getCustomerProduct(params.productId)
+    return await this.productService.getCustomerProduct(params.productId);
   }
 
   @Query()
@@ -33,7 +33,7 @@ export class ProductResolver {
   @UseGuards(new RolesGuard(['admin']))
   @Query()
   async getProduct(@Args('params') params: GetProductParamsDto) {
-    return await this.productService.getProduct(params.productId)
+    return await this.productService.getProduct(params.productId);
   }
 
   @Query()
@@ -51,12 +51,14 @@ export class ProductResolver {
   @Query()
   @UseGuards(new RolesGuard(['admin']))
   async getProductBySKU(@Args('params') params: GetProductBySKUParamsDto) {
-    return await this.productService.getProductBySKU(params.sku)
+    return await this.productService.getProductBySKU(params.sku);
   }
 
   @Query()
   @UseGuards(new RolesGuard(['admin']))
-  async getProductsByCondition(@Args('condition') condition: GetProductsByConditionQueryDto) {
+  async getProductsByCondition(
+    @Args('condition') condition: GetProductsByConditionQueryDto,
+  ) {
     return await this.productService.getProductsByCondition(condition);
   }
 
@@ -74,13 +76,21 @@ export class ProductResolver {
 
   @Mutation()
   @UseGuards(new RolesGuard(['admin']))
-  async updateProduct(@Args('product') product: Product, @Args('params') params: UpdateProductParamsDto) {
+  async updateProduct(
+    @Args('product') product: Product,
+    @Args('params') params: UpdateProductParamsDto,
+  ) {
     return await this.productService.updateProduct(product, params.productId);
   }
 
   @Mutation()
   @UseGuards(new RolesGuard(['admin']))
-  async updateProductsForBrand(@Args('data') data: updateProductsForBrandRequestDto) {
-    return await this.productService.updateProductsForBrand(data.productIds, data.brandId);
+  async updateProductsForBrand(
+    @Args('data') data: updateProductsForBrandRequestDto,
+  ) {
+    return await this.productService.updateProductsForBrand(
+      data.productIds,
+      data.brandId,
+    );
   }
 }
