@@ -2,12 +2,11 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
-import { AdminJwtPayload } from 'src/entity/auth';
+import { AdminJwtPayload, SignInData } from 'src/entity/auth';
 import { UserRepository } from 'src/modules/user/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');
-import { CreateUserDto, SignInDataDto } from '../dto';
 import {
   CreateUserResponse,
   ForgotPasswordResponse,
@@ -18,12 +17,13 @@ import {
   SignUpSuccessMessages
 } from 'models';
 import { authConfig } from 'config/auth';
+import { User } from 'src/entity/user';
 
 @Injectable()
 export class AuthService {
   constructor(private userRepo: UserRepository, private helper: Helper, private jwtService: JwtService) { }
 
-  async signUp(data: CreateUserDto): Promise<CreateUserResponse> {
+  async signUp(data: Partial<User>): Promise<CreateUserResponse> {
     const doesUserExist = await this.userRepo.findUser({ email: data.email });
     if (doesUserExist) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.USER_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
@@ -39,7 +39,7 @@ export class AuthService {
     return this.helper.serviceResponse.successResponse({ message: SignUpSuccessMessages.USER_CREATED_SUCCESSFUL }, HttpStatus.CREATED);
   }
 
-  async signIn(data: SignInDataDto): Promise<SignInResponse> {
+  async signIn(data: SignInData): Promise<SignInResponse> {
     const user = await this.userRepo.getUserPassword({ username: data.username });
     if (!user) return this.helper.serviceResponse.errorResponse(SignInErrorMessages.INVALID_CREDENTIALS, null, HttpStatus.BAD_REQUEST,);
 
