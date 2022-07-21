@@ -1,3 +1,4 @@
+import { AllOrderResponseDto } from './../dto/allOrderList.dto';
 import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
@@ -38,6 +39,14 @@ export class OrderAdminController {
         return response;
     }
 
+    @ApiResponse({type: AllOrderResponseDto, description:"All Orders"})
+    @Get('orderList')
+    async getOrderList(@Res({ passthrough: true }) res: Response){
+        const {code, ...response} = await this.orderAdminService.getOrderList();
+        res.status(code);
+        return response;
+    }
+
     @ApiResponse({type: OrderData, description:"Order details by order id"})
     @ApiParam({name: 'orderId', example:'84dab8b9-8461-4f2f-9863-b6934ed9cc27'})
     @Get(':orderId')
@@ -55,4 +64,5 @@ export class OrderAdminController {
         return response;
     }
   
+   
 }
