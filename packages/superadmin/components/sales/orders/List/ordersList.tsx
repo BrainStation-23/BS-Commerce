@@ -11,7 +11,6 @@ interface Props {
 }
 const OrderList: FC<Props> = ({ orderListData }) => {
   const route = useRouter();
-  // console.log("========??????????", orderListData)
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
   const [data, setData] = useState([]);
@@ -148,7 +147,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
             <Table items={currentTableData} columns={columns} />
 
             <div>
-              {orderListData.orders?.length > 1 ? (
+              {orderListData.orders?.length ? (
                 <Pagination
                   currentPage={currentPage}
                   totalCount={orderListData.orders?.length}
