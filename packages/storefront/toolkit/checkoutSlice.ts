@@ -1,43 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateCartItemRequest } from "models";
-import { Cart, CartProduct, IOrderAddress } from "models";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface CheckoutState {
   shippingInfo: {};
-  billingInfo: {}
-
+  billingInfo: {};
 }
 
 const initialState: CheckoutState = {
   shippingInfo: {},
-  billingInfo: {}
+  billingInfo: {},
 };
 
 export const checkoutSlice = createSlice({
-  name: "checkout",
+  name: 'checkout',
   initialState,
   reducers: {
-    addToShippingInfo: (
-      state: CheckoutState,
-      action: PayloadAction<{}>
-    ) => {
-        state.shippingInfo = action.payload;
+    addToShippingInfo: (state: CheckoutState, action: PayloadAction<{}>) => {
+      state.shippingInfo = action.payload;
     },
-    addToBillingInfo: (
-      state: CheckoutState,
-      action: PayloadAction<{}>
-    ) => {
+    addToBillingInfo: (state: CheckoutState, action: PayloadAction<{}>) => {
       state.billingInfo = action.payload;
     },
-    deleteCheckoutInfo: (
-      state: CheckoutState,
-    ) => {
+    deleteCheckoutInfo: (state: CheckoutState) => {
       state.shippingInfo = [];
       state.billingInfo = [];
     },
   },
 });
 
-export const { addToShippingInfo, addToBillingInfo, deleteCheckoutInfo } = checkoutSlice.actions;
+export const { addToShippingInfo, addToBillingInfo, deleteCheckoutInfo } =
+  checkoutSlice.actions;
 
 export default checkoutSlice.reducer;
