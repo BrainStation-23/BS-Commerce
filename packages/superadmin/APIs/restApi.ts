@@ -299,6 +299,78 @@ export async function getOrderEnumRest(): Promise<any | undefined> {
   }
 }
 
+export async function getOrderListRest(): Promise<
+  any | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.orderList}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function getOrderRest(
+  id: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.get(`${apiEndPoints?.order}/${id}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updateOrderStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updatePaymentStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updateShippingStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
 export async function getCategoryListRest(): Promise<
   getCategoryListSuccessResponse | undefined
 > {

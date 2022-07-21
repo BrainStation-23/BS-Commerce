@@ -4,7 +4,7 @@ interface STATUS {
   state: string;
 }
 
-const Modal = ({ state, handleStatus }: any) => {
+const Modal = ({ state, handleStatus, handlePositive}: any) => {
   return (
     <div
       className="modal"
@@ -60,7 +60,7 @@ const Modal = ({ state, handleStatus }: any) => {
               <button
                 type="button"
                 className="btn btn-secondary"
-                // onClick={deleteProfileList}
+                onClick={() => handlePositive()}
               >
                 Yes
               </button>

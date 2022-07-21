@@ -1,20 +1,54 @@
+import { userAPI } from '@/APIs';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState, FC } from 'react';
-import Pagination from '../../pagination';
-import getData from '../service/get-shipping-data.service';
+import Modal from '../../service/modal';
 import Tooltip from './Ui Helpers/tooltip';
 interface Props {
   singleOrderInfo: any;
 }
 const Shipping: FC<Props> = ({ singleOrderInfo }) => {
-  const [editMethod, setEditMethod] = useState(false);
-  const [saveMethod, setSaveMethod] = useState(false);
+  const router = useRouter();
+  const [modal, setModal] = useState({
+    change_shipping_status: false,
+    change_shipping_status_save: false,
+  });
+  const [shippingState, setShippingState] = useState('Delivered');
 
-  const handleEditShippingMethod = () => {
-    setEditMethod(true);
+  const handleShippingStatus = (event: any) => {
+    setShippingState(event.target.id);
   };
 
-  const handleSaveShippingMethod = () => {
-    setSaveMethod(true);
+  const [shippingEnum, setShippingEnum] = useState<any>();
+
+  const getAllShippingEnum = async () => {
+    const res = await userAPI.getOrderEnum();
+    res ? setShippingEnum(res?.data?.shippingStatusEnum) : '';
+  };
+  useEffect(() => {
+    getAllShippingEnum();
+  }, []);
+
+  const handleShippingSaveStatus = () => {
+    setModal({ ...modal, change_shipping_status_save: true });
+  };
+
+  const handleShippingSaveStatusOff = () => {
+    setModal({ ...modal, change_shipping_status_save: false });
+  };
+
+  const handleShippingPositive = () => {
+    setModal({ ...modal, change_shipping_status_save: false });
+    const obj = {
+      orderId: singleOrderInfo?.orderId,
+      statusType: 'shippingStatus',
+      statusValue: shippingState,
+    };
+    userAPI.updateShippingStatus(obj);
+    router.push('/Sales/Order/List');
+  };
+
+  const handlePaymentChange = () => {
+    setModal({ ...modal, change_shipping_status: true });
   };
 
   return (
@@ -32,10 +66,118 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
           label={'Shipping method'}
           data={singleOrderInfo?.shippingMethod}
         />
-        <Tooltip
-          label={'Shipping status'}
-          data={singleOrderInfo.shippingStatus}
-        />
+        <div className="row">
+          <div className="col" style={{ marginLeft: '15%' }}>
+            <Tooltip
+              label={'Shipping status'}
+              data={singleOrderInfo?.shippingStatus}
+            />
+          </div>
+          <div className="col" style={{}}>
+            {modal.change_shipping_status ? (
+              <div>
+                <button
+                  className="dropdown"
+                  style={{
+                    marginTop: '10px',
+                    width: '30%',
+                    padding: '10px',
+                    border: '1px solid gray',
+                    textAlign: 'left',
+                  }}
+                  onClick={handleShippingStatus}
+                >
+                  <a
+                    className="dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                      padding: '10px',
+                    }}
+                  >
+                    {shippingState}
+                  </a>
+                  <div className="dropdown-menu">
+                    <a id={shippingEnum.NotYetShipped} className="dropdown-item">
+                      {shippingEnum.NotYetShipped}
+                    </a>
+                    <a id={shippingEnum.PartiallyShipped} className="dropdown-item">
+                      {shippingEnum.PartiallyShipped}
+                    </a>
+                    <a id={shippingEnum.Shipped} className="dropdown-item">
+                      {shippingEnum.Shipped}
+                    </a>
+                    <a id={shippingEnum.Delivered} className="dropdown-item">
+                      {shippingEnum.Delivered}
+                    </a>
+                  </div>
+                </button>
+                <div
+                  style={{
+                    textAlign: 'left',
+                    marginTop: '10px',
+                    width: '25%',
+                    marginLeft: '35%',
+                  }}
+                >
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    style={{
+                      marginRight: '10px',
+                      backgroundColor: '#3c8dbc',
+                      border: '1px solid #3c8dbc',
+                    }}
+                    onClick={() => handleShippingSaveStatus()}
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() =>
+                      setModal({
+                        ...modal,
+                        change_shipping_status: false,
+                      })
+                    }
+                  >
+                    Cancel
+                  </button>
+                  <p>
+                    This option is only for advanced users (not recommended to
+                    change manually). All appropriate actions (such as inventory
+                    adjustment, sending notification emails, reward points, gift
+                    card activation/deactivation, etc) should be done manually
+                    in this case.
+                  </p>
+                  {modal.change_shipping_status_save ? (
+                    <Modal
+                      state={'change_shipping_status_save'}
+                      handleStatus={handleShippingSaveStatusOff}
+                      handlePositive={handleShippingPositive}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-danger"
+                style={{
+                  backgroundColor: '#3c8dbc',
+                  border: '1px solid #3c8dbc',
+                }}
+                onClick={() => handlePaymentChange()}
+              >
+                Change status
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

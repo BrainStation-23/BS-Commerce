@@ -9,7 +9,6 @@ const OrderListMain = () => {
     const res = await userAPI.getAllOrderList();
     // console.log('orderList**', res);
     res ? setOrderListData(res) : '';
-    console.log('**', orderListData);
   };
   useEffect(() => {
     getAllOrderList();

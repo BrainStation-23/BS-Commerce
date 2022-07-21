@@ -172,7 +172,7 @@ const Billing: FC<Props> = ({ singleOrderInfo }) => {
                     padding: '20px',
                   }}
                 >
-                  {singleOrderInfo.billingAddress.country}
+                  Bangladesh
                 </td>
               </tr>
               <tr>
@@ -364,7 +364,7 @@ const Billing: FC<Props> = ({ singleOrderInfo }) => {
                     padding: '20px',
                   }}
                 >
-                  {singleOrderInfo.shippingAddress.country}
+                  Bangladesh
                 </td>
               </tr>
               <tr>

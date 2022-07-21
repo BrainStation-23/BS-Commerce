@@ -28,6 +28,11 @@ import {
   getOrderEnumRest,
   getAllOrderListRest,
   getSingleOrderByIdRest,
+  getOrderListRest,
+  getOrderRest,
+  updateOrderStatusRest,
+  updatePaymentStatusRest,
+  updateShippingStatusRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -102,6 +107,9 @@ const restApi: apiFunction = {
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
   getOrderEnum: getOrderEnumRest,
+  updateOrderStatus: updateOrderStatusRest,
+  updatePaymentStatus: updatePaymentStatusRest,
+  updateShippingStatus: updateShippingStatusRest,
   getUserProfile: getUserProfileRest,
   getBrands: getBrandsRest,
   getBrand: getBrandRest,

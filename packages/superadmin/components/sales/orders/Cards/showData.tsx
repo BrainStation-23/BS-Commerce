@@ -1,6 +1,5 @@
 const ShowData = ({ data }: any) => {
   const total = data.quantity * data.price;
-  console.log(data);
   return (
     <>
       <tr key={data?.productId}>

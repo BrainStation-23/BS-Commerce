@@ -22,7 +22,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return orderListData.orders?.slice(firstPageIndex, lastPageIndex);
+    return orderListData?.orders?.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, PageSize, data]);
 
   const columns = [
@@ -74,8 +74,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       path: 'customer',
       content: (data: any, key: any, index: any) => (
         <td className="p-4 text-center">
-          {data?.billingAddress.firstName}
-          {data?.billingAddress.lastName}
+          {`${data?.billingAddress.firstName} ${data?.billingAddress.lastName}`}
         </td>
       ),
     },
@@ -124,21 +123,6 @@ const OrderList: FC<Props> = ({ orderListData }) => {
         </td>
       ),
     },
-    // {
-    //   label: 'Delete',
-    //   path: 'id',
-    //   content: (data: any, key: any, index: any) => (
-    //     <td className="text-center">
-    //       <button
-    //         className="btn btn-default"
-    //         // onClick={() => onClickForDelete(data.id)}
-    //       >
-    //         <i className="bi bi-trash me-2 align-middle"></i>
-    //         Delete
-    //       </button>
-    //     </td>
-    //   ),
-    // },
   ];
   return (
     <>
@@ -166,11 +150,11 @@ const OrderList: FC<Props> = ({ orderListData }) => {
 
             <Table items={currentTableData} columns={columns} />
 
-            <div className="">
+            <div>
               {orderListData.orders?.length > 1 ? (
                 <Pagination
                   currentPage={currentPage}
-                  totalCount={data.length}
+                  totalCount={orderListData.orders?.length}
                   pageSize={PageSize}
                   setCurrentPage={setCurrentPage}
                   setPageSize={setPageSize}

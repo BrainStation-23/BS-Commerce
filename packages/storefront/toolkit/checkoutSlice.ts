@@ -5,7 +5,6 @@ import { Cart, CartProduct, IOrderAddress } from "models";
 export interface CheckoutState {
   shippingInfo: {};
   billingInfo: {}
-
 }
 
 const initialState: CheckoutState = {
