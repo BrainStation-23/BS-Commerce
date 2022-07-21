@@ -12,7 +12,7 @@ import {
   ForgotPasswordSuccessResponseDto,
   SignInSuccessResponseDto,
   SignInErrorResponseDto
-} from '../dto';
+} from './dto';
 
 @Controller('auth')
 @ApiTags('Admin Authentication API')
