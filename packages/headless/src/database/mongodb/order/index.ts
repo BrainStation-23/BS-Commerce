@@ -30,10 +30,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderById(orderId: string): Promise<OrderData>{
-    const orderList = await OrderModel.findOne({ orderId }).lean();
-    if (orderList) return orderList;
-    
-    return null;
+    return await OrderModel.findOne({ orderId }).lean();
   }
 
   async getOrderStatistics(): Promise<OrderStatDto>{
@@ -99,11 +96,11 @@ export class OrderDatabase implements IOrderDatabase {
     try {
       const {orderId, statusType, statusValue} = body
       let update = {}
-      if(statusType === StatusTypeDto.orderStatus){
+      if(statusType === StatusTypeDto.orderStatusEnums){
         update = {orderStatus: statusValue}
-      }else if(statusType === StatusTypeDto.paymentStatus){
+      }else if(statusType === StatusTypeDto.paymentStatusEnums){
         update = {paymentStatus: statusValue}
-      }else if(statusType === StatusTypeDto.shippingStatus){
+      }else if(statusType === StatusTypeDto.shippingStatusEnums){
         update = {shippingStatus: statusValue}
       }
 
@@ -118,10 +115,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderList(): Promise<OrderEntity[]>{
-    const orderList = await OrderModel.find({}).lean();
-    if (orderList) return orderList;
-    
-    return null;
+    return await OrderModel.find({}).lean();
   }
 
 }
