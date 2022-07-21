@@ -29,7 +29,7 @@ const Information = (props: any) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [showLabel, setShowLabel] = useState(false);
   const user = useAppSelector(
-    (state) => state.persistedReducer.user.customerDetails.email
+    (state) => state.persistedReducer.user.customerDetails
   );
   const handleLogout = () => {
     localStorage.clear();
@@ -46,7 +46,7 @@ const Information = (props: any) => {
   );
 
   let initialValues = {
-    email: user,
+    email: user?.email,
     contact: shippingInfo?.contact,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
@@ -72,7 +72,7 @@ const Information = (props: any) => {
     if (detail === 'Use a new address') {
       setShowLabel(true);
       setUpdate({
-        email: user,
+        email: user?.email,
         contact: '',
         firstName: '',
         lastName: '',
@@ -85,7 +85,7 @@ const Information = (props: any) => {
     } else {
       setShowLabel(false);
       initialValues = {
-        email: user,
+        email: user?.email,
         firstName: newArr[0],
         lastName: newArr[1],
         country: '',
@@ -116,7 +116,7 @@ const Information = (props: any) => {
         initialValues={update}
         onSubmit={(values, actions) => {
           const data = {
-            email: user,
+            email: user?.email,
             contact: values.contact,
             country: values.country,
             firstName: values.firstName,
@@ -151,11 +151,11 @@ const Information = (props: any) => {
           return (
             <>
               <Form onSubmit={formikprops.handleSubmit}>
-                <div className="flex flex-wrap justify-between">
+                {/* <div className="flex flex-wrap justify-between">
                   <p className="text-lg">Contact Information</p>
-                </div>
+                </div> */}
 
-                <div className="mt-5">
+                {/* <div className="mt-5">
                   <div className="mb-3">
                     <div className="flex flex-wrap gap-1">
                       <svg
@@ -173,7 +173,9 @@ const Information = (props: any) => {
                         />
                       </svg>
                       <div className="ml-2">
-                        <span className="text-lg text-slate-500">{user}</span>
+                        <span className="text-lg text-slate-500">
+                          {user?.email}
+                        </span>
 
                         <div className="text-base">
                           <Link href="/" passHref>
@@ -188,7 +190,7 @@ const Information = (props: any) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="mt-8">
                   <p className="text-lg">Shipping Address</p>
