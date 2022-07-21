@@ -3,7 +3,6 @@ import Link from 'next/link';
 import _ from 'lodash';
 import moment from 'moment';
 import Pagination from '../../../global/pagination';
-// import getData from '../../service/get-data.service';
 import Table from '../../../global/table/table';
 import { userAPI } from '../../../../APIs';
 interface Props {

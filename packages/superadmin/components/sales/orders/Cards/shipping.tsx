@@ -1,6 +1,7 @@
 import { userAPI } from '@/APIs';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState, FC } from 'react';
+import { toast } from 'react-toastify';
 import Modal from '../../service/modal';
 import Tooltip from './Ui Helpers/tooltip';
 interface Props {
@@ -145,13 +146,6 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
                   >
                     Cancel
                   </button>
-                  <p>
-                    This option is only for advanced users (not recommended to
-                    change manually). All appropriate actions (such as inventory
-                    adjustment, sending notification emails, reward points, gift
-                    card activation/deactivation, etc) should be done manually
-                    in this case.
-                  </p>
                   {modal.change_shipping_status_save ? (
                     <Modal
                       state={'change_shipping_status_save'}

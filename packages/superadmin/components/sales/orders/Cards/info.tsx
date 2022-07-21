@@ -5,6 +5,7 @@ import { Field, Form, Formik } from 'formik';
 import Modal from '../../service/modal';
 import { userAPI } from '@/APIs';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 interface Props {
   singleOrderInfo: any;
 }
@@ -195,13 +196,6 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                   >
                     Cancel
                   </button>
-                  <p>
-                    This option is only for advanced users (not recommended to
-                    change manually). All appropriate actions (such as inventory
-                    adjustment, sending notification emails, reward points, gift
-                    card activation/deactivation, etc) should be done manually
-                    in this case.
-                  </p>
                   {modal.change_status_save ? (
                     <Modal
                       state={'change_status_save'}
@@ -329,13 +323,6 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                   >
                     Cancel
                   </button>
-                  <p>
-                    This option is only for advanced users (not recommended to
-                    change manually). All appropriate actions (such as inventory
-                    adjustment, sending notification emails, reward points, gift
-                    card activation/deactivation, etc) should be done manually
-                    in this case.
-                  </p>
                   {modal.change_payment_status_save ? (
                     <Modal
                       state={'change_status_save'}
