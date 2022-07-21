@@ -79,39 +79,28 @@ const Information = (props: any) => {
   const dispatch = useAppDispatch();
   const { setModal } = props;
 
-  const handlePreviousAddress = (event: any) => {
-    setDropdownText(event.target.value);
-    const detail = event.target.value;
+  const handlePreviousAddress = (detail: any, setFieldValue: any) => {
     if (detail === 'Use a new address') {
       setShowLabel(true);
-      setUpdate({
-        email: user?.email,
-        contact: '',
-        firstName: '',
-        lastName: '',
-        country: '',
-        address: '',
-        addressOptional: '',
-        city: '',
-        postalCode: '',
-      });
+      setFieldValue('firstName', '');
+      setFieldValue('lastName', '');
+      setFieldValue('address', '');
+      setFieldValue('addressOptional', '');
+      setFieldValue('city', '');
+      setFieldValue('postalCode', '');
+      setFieldValue('contact', '');
     } else {
       setShowLabel(false);
       const selectedAddress = addresses.find((address) => {
         return address.tag === detail;
       });
-      initialValues = {
-        email: user?.email,
-        firstName: selectedAddress?.firstName,
-        lastName: selectedAddress?.lastName,
-        country: '',
-        address: selectedAddress?.addressLine1,
-        addressOptional: selectedAddress?.addressLine2,
-        city: selectedAddress?.state,
-        postalCode: selectedAddress?.postCode,
-        contact: selectedAddress?.phone,
-      };
-      setUpdate(initialValues);
+      setFieldValue('firstName', selectedAddress?.firstName);
+      setFieldValue('lastName', selectedAddress?.lastName);
+      setFieldValue('address', selectedAddress?.addressLine1);
+      setFieldValue('addressOptional', selectedAddress?.addressLine2);
+      setFieldValue('city', selectedAddress?.state);
+      setFieldValue('postalCode', selectedAddress?.postCode);
+      setFieldValue('contact', selectedAddress?.phone);
     }
   };
 
@@ -161,6 +150,7 @@ const Information = (props: any) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
+          console.log(data);
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -170,47 +160,6 @@ const Information = (props: any) => {
           return (
             <>
               <Form onSubmit={formikprops.handleSubmit}>
-                {/* <div className="flex flex-wrap justify-between">
-                  <p className="text-lg">Contact Information</p>
-                </div> */}
-
-                {/* <div className="mt-5">
-                  <div className="mb-3">
-                    <div className="flex flex-wrap gap-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-14 w-14"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <div className="ml-2">
-                        <span className="text-lg text-slate-500">
-                          {user?.email}
-                        </span>
-
-                        <div className="text-base">
-                          <Link href="/" passHref>
-                            <a
-                              onClick={() => handleLogout()}
-                              className="text-decoration-none"
-                            >
-                              Logout
-                            </a>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-
                 <div className="mt-8">
                   <p className="text-lg">Shipping Address</p>
 
@@ -221,7 +170,13 @@ const Information = (props: any) => {
                         id="country"
                         name="country"
                         className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                        onClick={handlePreviousAddress}
+                        onClick={(event: any) => {
+                          setDropdownText(event.target.value);
+                          handlePreviousAddress(
+                            event.target.value,
+                            formikprops.setFieldValue
+                          );
+                        }}
                       >
                         <option>{dropdownText}</option>
                         {tags
@@ -402,7 +357,7 @@ const Information = (props: any) => {
                         <br />
                         <Field
                           type="text"
-                          className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                          className="w-full appearance-none border py-3 px-3 text-sm leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
                           id="tag"
                           name="tag"
                           placeholder="E.g. Home, Office, Others etc."
