@@ -14,16 +14,16 @@ import {
   SignInErrorMessages,
   SignUpErrorMessages,
   ForgotPasswordErrorMessages,
-  SignUpSuccessMessages
+  SignUpSuccessMessages,
+  CreateUserRequest,
 } from 'models';
 import { authConfig } from 'config/auth';
-import { User } from 'src/entity/user';
 
 @Injectable()
 export class AuthService {
   constructor(private userRepo: UserRepository, private helper: Helper, private jwtService: JwtService) { }
 
-  async signUp(data: Partial<User>): Promise<CreateUserResponse> {
+  async signUp(data: CreateUserRequest): Promise<CreateUserResponse> {
     const doesUserExist = await this.userRepo.findUser({ email: data.email });
     if (doesUserExist) return this.helper.serviceResponse.errorResponse(SignUpErrorMessages.USER_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
