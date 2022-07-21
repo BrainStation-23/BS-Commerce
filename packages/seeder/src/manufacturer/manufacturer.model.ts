@@ -3,8 +3,7 @@ import { Manufacturer } from 'models';
 
 interface ManufacturerWithID extends Manufacturer {
     id: {
-        type: String,
-        unique: true
+        type: String
     }
 }
 
