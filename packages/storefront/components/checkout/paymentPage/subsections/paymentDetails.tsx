@@ -145,37 +145,29 @@ const PaymentDetails: NextComponentType = () => {
     });
   };
 
-  const handlePreviousAddress = (event: any) => {
-    setDropdownText(event.target.value);
-    const detail = event.target.value;
+  const handlePreviousAddress = (detail: any, setFieldValue: any) => {
+    //setDropdownText(event.target.value);
     if (detail === 'Use a new address') {
       setShowLabel(true);
-      setUpdate({
-        contact: '',
-        firstName: '',
-        lastName: '',
-        country: '',
-        address: '',
-        addressOptional: '',
-        city: '',
-        postalCode: '',
-      });
+      setFieldValue('firstName', '');
+      setFieldValue('lastName', '');
+      setFieldValue('address', '');
+      setFieldValue('addressOptional', '');
+      setFieldValue('city', '');
+      setFieldValue('postalCode', '');
+      setFieldValue('contact', '');
     } else {
       setShowLabel(false);
       const selectedAddress = addresses.find((address) => {
         return address.tag === detail;
       });
-      initialValues = {
-        firstName: selectedAddress?.firstName,
-        lastName: selectedAddress?.lastName,
-        country: '',
-        address: selectedAddress?.addressLine1,
-        addressOptional: selectedAddress?.addressLine2,
-        city: selectedAddress?.state,
-        postalCode: selectedAddress?.postCode,
-        contact: selectedAddress?.phone,
-      };
-      setUpdate(initialValues);
+      setFieldValue('firstName', selectedAddress?.firstName);
+      setFieldValue('lastName', selectedAddress?.lastName);
+      setFieldValue('address', selectedAddress?.addressLine1);
+      setFieldValue('addressOptional', selectedAddress?.addressLine2);
+      setFieldValue('city', selectedAddress?.state);
+      setFieldValue('postalCode', selectedAddress?.postCode);
+      setFieldValue('contact', selectedAddress?.phone);
     }
   };
   const handleSameAddress = () => {
@@ -223,13 +215,6 @@ const PaymentDetails: NextComponentType = () => {
                     <CreditCard />
                   </div>
                   <div className="bg-gray-100">
-                    <FieldTemplate
-                      label="Card Number"
-                      isRequired={true}
-                      fieldID="cardNumber"
-                      fieldType="text"
-                      fieldClass="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                    />
                     <div className="p-4">
                       <div className="mb-3">
                         <div className="relative">
@@ -369,7 +354,13 @@ const PaymentDetails: NextComponentType = () => {
                                 id="country"
                                 name="country"
                                 className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                                onClick={handlePreviousAddress}
+                                onClick={(event: any) => {
+                                  setDropdownText(event.target.value);
+                                  handlePreviousAddress(
+                                    event.target.value,
+                                    formikprops.setFieldValue
+                                  );
+                                }}
                               >
                                 <option>{dropdownText}</option>
                                 {tags
