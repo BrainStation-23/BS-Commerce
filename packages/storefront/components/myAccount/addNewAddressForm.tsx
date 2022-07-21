@@ -1,17 +1,18 @@
-import { userAPI } from 'APIs';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { CustomerAddress } from 'models';
-import { NextComponentType } from 'next';
 import { FC } from 'react';
 import { toast } from 'react-toastify';
+import { Field, Form, Formik } from 'formik';
+
+import { userAPI } from 'APIs';
+import { CustomerAddress } from 'models';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { storeCustomerDetails } from 'toolkit/userSlice';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
 interface props {
   user: any;
-  cancelForm: any;
+  cancelForm: Function;
   id: string;
 }
-const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
+const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -32,6 +33,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
       cancelForm('');
       const updatedCustomer = await userAPI.getCustomerProfile(token);
       dispatch(storeAddresses(updatedCustomer?.addresses!));
+      dispatch(storeCustomerDetails(updatedCustomer!));
     } catch (error) {
       toast.error(`Error occurred!!`);
     }

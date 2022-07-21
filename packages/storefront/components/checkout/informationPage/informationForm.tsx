@@ -1,16 +1,16 @@
+import React from 'react';
 import Link from 'next/link';
-
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { addToShippingInfo } from 'toolkit/checkoutSlice';
-import { informationSchema } from '@/components/global/schemas/checkout.schema';
-
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { storeUserToken } from 'toolkit/authSlice';
+import { useEffect, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+
 import { userAPI } from 'APIs';
+import { storeUserToken } from 'toolkit/authSlice';
+import { addToShippingInfo } from 'toolkit/checkoutSlice';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { informationSchema } from '@/components/global/schemas/checkout.schema';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 
 interface FormData {
   email: string;
@@ -41,6 +41,10 @@ const Information = (props: any) => {
     (state) => state.persistedReducer.checkout.shippingInfo
   );
 
+  const addresses = useAppSelector(
+    (state) => state.persistedReducer.customerAddress.addresses
+  );
+
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -58,17 +62,26 @@ const Information = (props: any) => {
   };
 
   const [update, setUpdate] = useState(initialValues);
+  const [tags, setTags] = useState<string[]>([]);
   const customerAddresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
   );
 
+  const setTagsOptions = () => {
+    const ntags = new Set();
+    customerAddresses?.map((addressn) => {
+      ntags.add(addressn?.tag);
+    });
+    const nArray: Array<string> = [];
+    ntags.forEach((tag: any) => nArray.push(tag));
+    setTags(nArray);
+  };
   const dispatch = useAppDispatch();
   const { setModal } = props;
 
   const handlePreviousAddress = (event: any) => {
     setDropdownText(event.target.value);
     const detail = event.target.value;
-    let newArr = detail.split(' ');
     if (detail === 'Use a new address') {
       setShowLabel(true);
       setUpdate({
@@ -84,16 +97,19 @@ const Information = (props: any) => {
       });
     } else {
       setShowLabel(false);
+      const selectedAddress = addresses.find((address) => {
+        return address.tag === detail;
+      });
       initialValues = {
         email: user?.email,
-        firstName: newArr[0],
-        lastName: newArr[1],
+        firstName: selectedAddress?.firstName,
+        lastName: selectedAddress?.lastName,
         country: '',
-        address: newArr[2],
-        addressOptional: newArr[3],
-        city: newArr[4],
-        postalCode: newArr[5],
-        contact: newArr[6],
+        address: selectedAddress?.addressLine1,
+        addressOptional: selectedAddress?.addressLine2,
+        city: selectedAddress?.state,
+        postalCode: selectedAddress?.postCode,
+        contact: selectedAddress?.phone,
       };
       setUpdate(initialValues);
     }
@@ -108,6 +124,9 @@ const Information = (props: any) => {
     };
     setModal(obj);
   };
+  useEffect(() => {
+    tags[0] ? '' : setTagsOptions();
+  });
 
   return (
     <div className="">
@@ -205,15 +224,14 @@ const Information = (props: any) => {
                         onClick={handlePreviousAddress}
                       >
                         <option>{dropdownText}</option>
-                        {customerAddresses?.length
-                          ? customerAddresses?.map((customerAddress) => {
-                              const address = `${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`;
+                        {tags
+                          ? tags?.map((tag: string) => {
                               return (
-                                <>
-                                  {address !== dropdownText ? (
-                                    <option>{`${customerAddress.firstName} ${customerAddress.lastName} ${customerAddress.addressLine1} ${customerAddress.addressLine2} ${customerAddress.state} ${customerAddress.postCode} ${customerAddress.phone}`}</option>
+                                <React.Fragment key={tag}>
+                                  {tag !== dropdownText ? (
+                                    <option>{`${tag}`}</option>
                                   ) : null}
-                                </>
+                                </React.Fragment>
                               );
                             })
                           : null}
