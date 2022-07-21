@@ -28,7 +28,7 @@ interface FormData {
 
 const Information = (props: any) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
-  const [showLabel, setShowLabel] = useState(false);
+  const [showLabel, setShowLabel] = useState(true);
   const user = useAppSelector(
     (state) => state.persistedReducer.user.customerDetails
   );
@@ -151,7 +151,7 @@ const Information = (props: any) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
-
+          console.log(data);
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -217,12 +217,12 @@ const Information = (props: any) => {
                     </div>
 
                     <FieldTemplate
-                      label="Mobile phone number"
+                      label="Mobile number"
                       fieldID="contact"
                       fieldType="text"
                       placeholder=" "
-                      extraClass="mb-3"
                     />
+
                     <FieldTemplate
                       label="Address 1"
                       fieldID="address"
@@ -238,13 +238,26 @@ const Information = (props: any) => {
                       placeholder=" "
                       extraClass="mb-3"
                     />
-                    <FieldTemplate
-                      label="City"
-                      fieldID="city"
-                      fieldType="text"
-                      placeholder=" "
-                      extraClass="mb-3"
-                    />
+
+                    <div className="row mb-3">
+                      <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
+                        <FieldTemplate
+                          label="City"
+                          fieldID="city"
+                          fieldType="text"
+                          placeholder=" "
+                          extraClass="mb-3"
+                        />
+
+                        <FieldTemplate
+                          label="Postal Code"
+                          fieldID="postalCode"
+                          fieldType="text"
+                          placeholder=" "
+                          extraClass="mb-3"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -255,11 +268,13 @@ const Information = (props: any) => {
                         <label htmlFor="tag" className="pb-8 text-sm">
                           Enter a label for effective delivery:
                         </label>
+
                         <div className="mt-2">
                           <FieldTemplate
                             fieldID="tag"
                             fieldType="text"
                             placeholder="E.g. Home, Office, Others etc."
+                            isRequired={true}
                           />
                         </div>
                       </div>
