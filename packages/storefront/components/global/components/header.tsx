@@ -214,7 +214,7 @@ const Header: NextComponentType = () => {
                   isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
                 }`}
               >
-                {console.log(categories)}
+                {/* {console.log(categories)} */}
 
                 {categories?.categories?.map((category) => (
                   <HeaderCategory category={category} />

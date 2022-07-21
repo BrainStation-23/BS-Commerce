@@ -77,15 +77,20 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             <div className="d-flex justify-content-between">
               <div>Postcode: {singleOrder?.shippingAddress?.postCode}</div>
             </div>
+            <div className="d-flex justify-content-between">
+              <div>
+                Phone Number: {singleOrder?.shippingAddress?.phoneNumber}
+              </div>
+            </div>
           </div>
 
-          <div
+          {/* <div
             style={{
-              border: '1px solid LightGray',
-              borderRadius: '10px',
-              boxShadow: '0 0 2px',
-              marginBottom: '20px',
-              padding: '10px',
+              // border: '1px solid LightGray',
+              // borderRadius: '10px',
+              // boxShadow: '0 0 2px',
+              // marginBottom: '20px',
+              // padding: '10px',
             }}
           >
             <b>Customer Details</b>
@@ -98,12 +103,14 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             </div>
 
             <div className="d-flex justify-content-between">
-              <div>Phone Number: {singleOrder?.shippingAddress?.phoneNumber}</div>
+              <div>
+                Phone Number: {singleOrder?.shippingAddress?.phoneNumber}
+              </div>
             </div>
             <div className="d-flex justify-content-between">
               <div>Email: {singleOrder?.shippingAddress?.email}</div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* {singleOrder.billingAddress.firstName} */}
