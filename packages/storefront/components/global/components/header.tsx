@@ -49,12 +49,7 @@ const Header: NextComponentType = () => {
     {
       name: 'home',
       link: { pathname: '/' },
-      hasSubmenu: true,
-      submenu: [
-        { name: 'Home - 1', link: '/' },
-        { name: 'Home - 2', link: '/' },
-        { name: 'Home - 3', link: '/' },
-      ],
+      hasSubmenu: false,
     },
     {
       name: 'shop',
@@ -214,7 +209,7 @@ const Header: NextComponentType = () => {
                   isOpen ? 'h-auto' : 'h-0 opacity-0' //h-[350px]
                 }`}
               >
-                {console.log(categories)}
+                {/* {console.log(categories)} */}
 
                 {categories?.categories?.map((category) => (
                   <HeaderCategory category={category} />
