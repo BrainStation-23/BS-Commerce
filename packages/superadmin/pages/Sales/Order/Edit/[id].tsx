@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import getData from '@/components/sales/service/get-data.service';
-import EditOrder from '@/components/sales/editOrder';
+import EditOrder from '@/components/sales/orders/Edit/editOrder';
 import { userAPI } from '../../../../APIs/index';
 const Edit: NextPage = () => {
   const router = useRouter();
@@ -11,7 +10,6 @@ const Edit: NextPage = () => {
   const getSingleOrderData = async () => {
     const res = await userAPI.getSingleOrderById(id);
     res ? setSingleOrderInfo(res.data) : '';
-    console.log(res);
   };
   useEffect(() => {
     getSingleOrderData();

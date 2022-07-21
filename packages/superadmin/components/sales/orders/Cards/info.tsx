@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useState, useEffect } from 'react';
-import Tooltip from './tooltip';
+import Tooltip from './Ui Helpers/tooltip';
 import { Field, Form, Formik } from 'formik';
-import Modal from './modal';
+import Modal from '../../service/modal';
 import { userAPI } from '@/APIs';
 interface Props {
   singleOrderInfo: any;
@@ -17,8 +17,6 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
   useEffect(() => {
     getAllOrderEnum();
   }, []);
-
-  console.log('Order Enum ==========', orderEnum);
 
   function handleSearchSubmit(data: any) {
     console.log(data);
@@ -96,18 +94,6 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
             />
           </div>
           <div className="col" style={{}}>
-            <button
-              type="button"
-              className="btn btn-danger"
-              style={{
-                backgroundColor: '#dd4b39',
-                marginRight: '10px',
-              }}
-              onClick={() => handleCancel()}
-            >
-              Cancel order
-            </button>
-
             {modal.change_status ? (
               <div>
                 <button

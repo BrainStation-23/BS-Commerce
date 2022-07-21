@@ -109,7 +109,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
         <td className="text-center">
           <Link
             href={{
-              pathname: `/Admin/Order/Edit/[id]`,
+              pathname: `/Sales/Order/Edit/[id]`,
               query: { id: data?.orderId },
             }}
             passHref
