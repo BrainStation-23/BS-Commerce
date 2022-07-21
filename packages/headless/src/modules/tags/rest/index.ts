@@ -8,7 +8,7 @@ import {
   CreateTagSuccessResponseDto,
   GetTagsErrorResponseDto,
   GetTagsSuccessResponseDto
-} from '../dto';
+} from './dto';
 
 @Controller('tags')
 @ApiTags('Tags API')

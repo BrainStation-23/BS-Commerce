@@ -7,7 +7,6 @@ import {
   CreateTagResponse,
   CreateTagErrorMessages,
 } from 'models';
-import { CreateTagRequestBodyDto } from '../dto';
 
 @Injectable()
 export class TagsService {
@@ -19,7 +18,7 @@ export class TagsService {
     return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
   }
 
-  async createTag(data: CreateTagRequestBodyDto): Promise<CreateTagResponse> {
+  async createTag(data: { name: string }): Promise<CreateTagResponse> {
     const doesNameMatch = await this.tagsRepo.getTag({ name: data.name });
     if (doesNameMatch) return this.helper.serviceResponse.errorResponse(CreateTagErrorMessages.TAG_NAME_EXISTS, null, HttpStatus.BAD_REQUEST);
 
