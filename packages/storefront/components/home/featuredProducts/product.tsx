@@ -19,7 +19,7 @@ const Product = ({ product }: SingleProduct) => {
           name: product.info.name,
         },
       }}
-      as={`product/${product.info.name}`}
+      // as={`product/${product.info.name}`}
     >
       <div className="duration-0 group grid cursor-pointer justify-items-center transition hover:bg-white hover:duration-700">
         <div className="group relative m-auto flex pl-10 md:pl-0 lg:pl-0">

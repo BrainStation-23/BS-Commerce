@@ -12,14 +12,14 @@ const AvaialabilityOptions: NextComponentType = () => {
   const [availibityOptionVal, setavailibityOptionVal] = useState("");
   return (
     <>
-      <div className="py-2">
+      <div className="py-4">
         <CounterElement />
       </div>
       <div className={radiot.custom}>
         {availableOptions.map((option) => {
           return (
             <div key={option.id}>
-              <div className="flex justify-between py-4">
+              <div className="flex justify-between py-1">
                 <input
                   id={option.id + ""}
                   type="radio"

@@ -21,14 +21,14 @@ const CategoryPageComponent: FC<props> = (props: props) => {
     <div className="mt-20">
       <PageTitle title={categoryName} />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 ">
         <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">
           <div>
             <CategoryFilter />
           </div>
 
           <div className="col-span-4 grid">
-            <div className="py-14 px-4 md:px-12 lg:px-12 xl:px-14">
+            <div className="mt-16 mb-8 px-4 md:px-12 lg:px-12 xl:px-14">
               <ProductSort />
             </div>
 
