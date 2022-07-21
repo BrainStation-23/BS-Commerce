@@ -1,8 +1,14 @@
-// import { Manufacturer } from 'models';
 import { model, Schema } from 'mongoose';
 import { Manufacturer } from 'models';
 
-const ManufacturerSchema = new Schema<Manufacturer>(
+interface ManufacturerWithID extends Manufacturer {
+    id: {
+        type: String,
+        unique: true
+    }
+}
+
+const ManufacturerSchema = new Schema<ManufacturerWithID>(
     {
         id: {
             type: String,
