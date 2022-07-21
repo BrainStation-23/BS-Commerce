@@ -151,7 +151,7 @@ const Information = (props: any) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
-          console.log(data);
+
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -221,12 +221,14 @@ const Information = (props: any) => {
                       fieldID="contact"
                       fieldType="text"
                       placeholder=" "
+                      extraClass="mb-3"
                     />
                     <FieldTemplate
                       label="Address 1"
                       fieldID="address"
                       fieldType="text"
                       placeholder=" "
+                      extraClass="mb-3"
                     />
 
                     <FieldTemplate
@@ -234,12 +236,14 @@ const Information = (props: any) => {
                       fieldID="addressOptional"
                       fieldType="text"
                       placeholder=" "
+                      extraClass="mb-3"
                     />
                     <FieldTemplate
                       label="City"
                       fieldID="city"
                       fieldType="text"
                       placeholder=" "
+                      extraClass="mb-3"
                     />
                   </div>
                 </div>
