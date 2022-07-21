@@ -5,7 +5,7 @@ import { CustomerAddress } from 'models';
 import { NextComponentType } from 'next';
 import { FC } from 'react';
 import { toast } from 'react-toastify';
-import { addAddress, storeAddresses } from 'toolkit/customerAddressSlice';
+import { storeAddresses } from 'toolkit/customerAddressSlice';
 interface props {
   user: any;
   cancelForm: any;
@@ -49,7 +49,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
             state: user?.state ? user.state : '',
             postCode: user?.postCode ? user.postCode : '',
             phone: user?.phone ? user.phone : '',
-            tag: user?.tag ? user.tag : 'home',
+            tag: user?.tag ? user.tag : '',
           }}
           onSubmit={(values, { resetForm }) => {
             const data = {
@@ -167,9 +167,21 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
                     />
                   </div>
                 </div>
+                <div className="mb-3">
+                  <label htmlFor="tag" className="text-sm">
+                    Enter a label for effective delivery:
+                  </label>
+                  <br />
+                  <Field
+                    type="text"
+                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                    id="tag"
+                    name="tag"
+                    placeholder="E.g. Home, Office, Others etc."
+                  />
+                </div>
 
-                <p className="mb-2">Select a label for effective delivery:</p>
-
+                {/* <p className="mb-2">Select a label for effective delivery:</p>
                 <div className="flex flex-wrap items-center gap-x-3">
                   <div className="mb-3">
                     <div className="relative">
@@ -227,7 +239,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <button
                   type="submit"
