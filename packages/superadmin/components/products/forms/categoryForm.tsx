@@ -62,7 +62,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
     setCategoryData(categoryData);
     setFieldValue('isFeaturedCategory', false);
     setFieldValue('displayOrderCategory', 1);
-    setFieldValue('SelectedCategoryIds', 0);
+    setFieldValue('SelectedCategoryIds', 0);  
     setReload(!reload);
   };
   return (
