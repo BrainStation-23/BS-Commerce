@@ -5,18 +5,16 @@ import moment from 'moment';
 import Pagination from '../../../global/pagination';
 import Table from '../../../global/table/table';
 import { userAPI } from '../../../../APIs';
+import { useRouter } from 'next/router';
 interface Props {
   orderListData: any;
 }
 const OrderList: FC<Props> = ({ orderListData }) => {
+  const route = useRouter();
+  // console.log("========??????????", orderListData)
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
   const [data, setData] = useState([]);
-
-  //   useEffect(() => {
-  //     const data: any = getData();
-  //     setData(data);
-  //   }, []);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;

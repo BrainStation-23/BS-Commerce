@@ -11,10 +11,10 @@ interface Props {
 }
 
 const Info: FC<Props> = ({ singleOrderInfo }) => {
-  const router = useRouter();
+  const [orderStatusValue, setOrderStatusValue] = useState(singleOrderInfo.orderStatus);
+  const [paymentStatusValue, setPaymentStatusValue] = useState(singleOrderInfo.paymentStatus);
   const [orderState, setOrderState] = useState('Pending');
   const [paymentState, setPaymentState] = useState('Pending');
-  const [shippingState, setShippingState] = useState('Delivered');
   const handleOrderStatus = (event: any) => {
     setOrderState(event.target.id);
   };
@@ -87,8 +87,9 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
       statusType: 'orderStatus',
       statusValue: orderState,
     };
+    setOrderStatusValue(orderState);
     userAPI.updateOrderStatus(obj);
-    router.push('/Sales/Order/List');
+    // router.push('/Sales/Order/List');
   };
 
   const handlePaymentPositive = () => {
@@ -98,8 +99,9 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
       statusType: 'paymentStatus',
       statusValue: paymentState,
     };
+    setPaymentStatusValue(paymentState);
     userAPI.updatePaymentStatus(obj);
-    router.push('/Sales/Order/List');
+    // router.push('/Sales/Order/List');
   };
 
   return (
@@ -121,7 +123,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
           <div className="col" style={{ marginLeft: '15%' }}>
             <Tooltip
               label={'Order status'}
-              data={singleOrderInfo.orderStatus}
+              data={orderStatusValue}
             />
           </div>
           <div className="col" style={{}}>
@@ -251,7 +253,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
           <div className="col" style={{ marginLeft: '15%' }}>
             <Tooltip
               label={'Payment status'}
-              data={singleOrderInfo.paymentStatus}
+              data={paymentStatusValue}
             />
           </div>
           <div className="col" style={{}}>

@@ -1,14 +1,12 @@
 import { userAPI } from '@/APIs';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState, FC } from 'react';
-import { toast } from 'react-toastify';
 import Modal from '../../service/modal';
 import Tooltip from './Ui Helpers/tooltip';
 interface Props {
   singleOrderInfo: any;
 }
 const Shipping: FC<Props> = ({ singleOrderInfo }) => {
-  const router = useRouter();
+  const [shippingStatusValue, setShippingStatusValue] = useState(singleOrderInfo.shippingStatus);
   const [modal, setModal] = useState({
     change_shipping_status: false,
     change_shipping_status_save: false,
@@ -44,8 +42,8 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
       statusType: 'shippingStatus',
       statusValue: shippingState,
     };
+    setShippingStatusValue(shippingState);
     userAPI.updateShippingStatus(obj);
-    router.push('/Sales/Order/List');
   };
 
   const handlePaymentChange = () => {
@@ -71,7 +69,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
           <div className="col" style={{ marginLeft: '15%' }}>
             <Tooltip
               label={'Shipping status'}
-              data={singleOrderInfo?.shippingStatus}
+              data={shippingStatusValue}
             />
           </div>
           <div className="col" style={{}}>
