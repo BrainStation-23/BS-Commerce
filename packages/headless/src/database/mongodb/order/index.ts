@@ -1,4 +1,4 @@
-import { ProductOrderDto, CreateOrderDto } from './../../../modules/order/dto/order.create.dto';
+import { ProductOrderDto, CreateOrderDto } from 'src/modules/order/dto/order.create.dto';
 import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
 import { OrderData } from 'src/modules/order/dto/order.response.dto';
@@ -6,7 +6,6 @@ import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interfac
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
-import moment from 'moment';
 
 export class OrderDatabase implements IOrderDatabase {
   async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {

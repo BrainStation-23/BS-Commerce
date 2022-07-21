@@ -1,9 +1,9 @@
-import { GetAllOrderQueryDto } from './../dto/allOrderList.dto';
+import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
 import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
-import { ProductOrderDto, CreateOrderDto } from './../dto/order.create.dto';
+import { ProductOrderDto, CreateOrderDto } from 'src/modules/order/dto/order.create.dto';
 import { OrderEntity } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
 import { OrderData } from '../dto/order.response.dto';
