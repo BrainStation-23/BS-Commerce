@@ -226,54 +226,16 @@ const PaymentDetails: NextComponentType = () => {
                     <div className="p-4">
                       <FieldTemplate
                         label="Card Number"
-                        isRequired={true}
                         fieldID="cardNumber"
                         fieldType="text"
                         placeholder=" "
-                        fieldClass="peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                       />
-                      <div className="mb-3">
-                        <div className="relative">
-                          <Field
-                            type="text"
-                            id="cardNumber"
-                            name="cardNumber"
-                            className=" peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                            placeholder=" "
-                          />
-                          <label
-                            htmlFor={`cardNumber`}
-                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                          >
-                            Card Number
-                          </label>
-                          <div className="errMsg text-red-600">
-                            <ErrorMessage name="cardNumber" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mb-3">
-                        <div className="relative">
-                          <Field
-                            type="text"
-                            id="nameOnCard"
-                            name="nameOnCard"
-                            className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                            placeholder=" "
-                          />
-                          <label
-                            htmlFor={`nameOnCard`}
-                            className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                          >
-                            Name on card
-                          </label>
-                          <div className="errMsg text-red-600">
-                            <ErrorMessage name="nameOnCard" />
-                          </div>
-                        </div>
-                      </div>
-
+                      <FieldTemplate
+                        label="Name on card"
+                        fieldID="nameOnCard"
+                        fieldType="text"
+                        placeholder=" "
+                      />
                       <div className="row">
                         <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                           <div className="relative">
@@ -295,24 +257,12 @@ const PaymentDetails: NextComponentType = () => {
                             </div>
                           </div>
 
-                          <div className="relative">
-                            <Field
-                              type="text"
-                              id="securityCode"
-                              name="securityCode"
-                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                              placeholder=" "
-                            />
-                            <label
-                              htmlFor={`securityCode`}
-                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                            >
-                              Security Code
-                            </label>
-                            <div className="errMsg text-red-600">
-                              <ErrorMessage name="securityCode" />
-                            </div>
-                          </div>
+                          <FieldTemplate
+                            label="Security Code"
+                            fieldID="securityCode"
+                            fieldType="text"
+                            placeholder=" "
+                          />
                         </div>
                       </div>
                     </div>
