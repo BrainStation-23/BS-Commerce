@@ -117,7 +117,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
-    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate, startTime, endTime} = query;
+    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate} = query;
 
     let queryParams = {
       ...(shippingStatus && { shippingStatus }),

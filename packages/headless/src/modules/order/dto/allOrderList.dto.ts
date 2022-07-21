@@ -25,14 +25,6 @@ export class GetAllOrderQueryDto implements GetAllOrderQuery{
     @IsOptional()
     endDate?: Date;
 
-    @ApiProperty({ required: false, type: String })
-    @IsOptional()
-    startTime?: string;
-
-    @ApiProperty({ required: false, type: String })
-    @IsOptional()
-    endTime?: string;
-
     @ApiProperty({ required: false, type: Number })
     @IsOptional()   
     skip?: number
