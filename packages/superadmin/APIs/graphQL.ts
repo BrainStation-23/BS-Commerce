@@ -113,3 +113,7 @@ export async function mediaUploadGraphQL(
 ): Promise<UploadFileSuccessResponse | undefined> {
   return undefined;
 }
+
+export async function getAllOrderListGraphQL() {
+  return undefined;
+}
