@@ -42,16 +42,6 @@ import {
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
-import { User } from 'utils/types';
-
-export async function getUserRest(): Promise<User[] | undefined> {
-  try {
-    const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
-    return response.data as User[];
-  } catch (error: any) {
-    return error;
-  }
-}
 
 export async function getSignedInUserRest(
   isEmail: boolean,
@@ -202,13 +192,13 @@ export async function getOrderProductsRest(
 
 export async function getOrderProductRest(
   token: string,
-  OrderId: string,
+  OrderId: string
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return res?.data;
   } catch (error: any) {

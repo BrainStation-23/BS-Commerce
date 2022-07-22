@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
+import Image from 'next/image';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -94,8 +95,8 @@ const CartDropdown: NextComponentType = () => {
               <div className="flex-col-4 flex items-center bg-white">
                 <div className="col-span-2">
                   <a href="#" className="">
-                    <img
-                      src={cartData?.product?.photos[0]?.url}
+                    <Image
+                      src={cartData?.product?.photos![0]?.url!}
                       alt="Product Image"
                       height={100}
                       width={100}
@@ -198,7 +199,7 @@ const CartDropdown: NextComponentType = () => {
                         />
                       </a>
                     </div>
-                    <div className="mb-4 px-6 pb-5 border-x-2 border-b-2">
+                    <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">
                       <button
                         className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                         onClick={handleClickProceed}

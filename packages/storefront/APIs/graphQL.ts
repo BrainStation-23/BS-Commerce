@@ -1,5 +1,9 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { UpdateCustomerAddressResponse, Wishlist } from 'models';
+import {
+  IOrderResponseData,
+  UpdateCustomerAddressResponse,
+  Wishlist,
+} from 'models';
 import { DeleteCustomerAddressResponse } from 'models';
 import {
   AddCustomerNewAddressResponse,
@@ -40,15 +44,7 @@ import {
   UpdateCustomerSuccessResponse,
 } from 'models';
 
-import { User } from 'utils/types';
 import client from '../graphqlSchema/apollo-client';
-
-export async function getUserGraphQl(): Promise<User[] | undefined> {
-  const { data } = await client.query({
-    query: GET_PRODUCTS,
-  });
-  return data as User[];
-}
 
 export async function signInGraphql(
   data: CustomerSignInRequest
@@ -186,14 +182,33 @@ export async function updateCustomerAddressGraphql(
   return undefined;
 }
 
-export async function getCustomerGraphQL(
+export async function getCustomerGraphql(
   token: string
 ): Promise<GetCustomerInformationSuccessResponse | undefined> {
   return undefined;
 }
 
-export async function updateCustomerGraphQL(
+export async function updateCustomerGraphql(
   data: UpdateCustomerRequestBody
 ): Promise<UpdateCustomerSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function checkoutGraphql(
+  data: any
+): Promise<IOrderResponseData | undefined> {
+  return undefined;
+}
+
+export async function getOrderProductsGraphql(
+  token: string
+): Promise<IOrderResponseData | undefined> {
+  return undefined;
+}
+
+export async function getOrderProductGraphql(
+  token: string,
+  OrderId: string
+): Promise<IOrderResponseData | undefined> {
   return undefined;
 }

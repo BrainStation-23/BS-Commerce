@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { NextComponentType } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,6 +17,9 @@ import { loginSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 
+import FacebookLogo from '../../public/facebook.svg';
+import GoogleLogo from '../../public/google.svg';
+
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(false);
@@ -23,26 +27,6 @@ const Signin: NextComponentType = () => {
 
   let username = '';
   let loggedInUsingEmail = false;
-
-  function getUser() {
-    let data = {};
-    loggedInUsingEmail
-      ? (data = {
-          email: username,
-          phone: '',
-        })
-      : (data = {
-          email: '',
-          phone: username,
-        });
-    userAPI.getSignedInUser(loggedInUsingEmail, data).then((response) => {
-      dispatch(
-        storeUserDetails(
-          loggedInUsingEmail ? response?.data?.email : response?.data?.phone
-        )
-      );
-    });
-  }
 
   async function handleSignin(data: CustomerSignInRequest) {
     try {
@@ -183,9 +167,10 @@ const Signin: NextComponentType = () => {
               </div>
               <div className="flex flex-wrap">
                 <button className="mt-3 flex flex-wrap">
-                  <img
+                  <Image
                     className="mt-1 md:ml-2 lg:ml-2 xl:ml-2"
-                    src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg"
+                    src={GoogleLogo}
+                    alt="google-logo"
                     height={15}
                     width={15}
                   />
@@ -195,8 +180,9 @@ const Signin: NextComponentType = () => {
                   <p className="ml-1 text-gray-600">or</p>
                 </div>
                 <button className="mt-3 flex flex-wrap">
-                  <img
-                    src="https://cdn.cdnlogo.com/logos/f/9/facebook.svg"
+                  <Image
+                    src={FacebookLogo}
+                    alt="facebook-logo"
                     height={38}
                     width={35}
                   />
