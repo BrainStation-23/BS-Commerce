@@ -53,7 +53,7 @@ export interface Address {
 
 export interface apiFunction {
   getOrderEnum: () => Promise<any | undefined>;
-  getAllOrderList: () => Promise<any | undefined>;
+  getAllOrderList: (orderStatus: any, paymentStatus: any, shippingStatus: any) => Promise<any | undefined>;
   getSingleOrderById: (id: string) => Promise<any | undefined>;
   updateOrderStatus: (data: any) => Promise<any | undefined>;
   updatePaymentStatus: (data: any) => Promise<any | undefined>;

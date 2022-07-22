@@ -13,13 +13,12 @@ const OrderList: FC<Props> = ({ orderListData }) => {
   const route = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
-  const [data, setData] = useState([]);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return orderListData?.orders?.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, PageSize, data]);
+  }, [currentPage, PageSize, orderListData]);
 
   const columns = [
     {

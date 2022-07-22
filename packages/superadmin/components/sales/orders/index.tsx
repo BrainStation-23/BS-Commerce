@@ -1,34 +1,52 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { render } from 'react-dom';
 import OrderList from './List/ordersList';
 import OrderSearchWindow from './subComponent/searchWindow';
 import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
+
 const OrderListMain = () => {
-  const route = useRouter();
-  const [singleOrder, setSingleOrder] = useState({});
+  const [startDate, setStartDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [orderStatus, setOrderStatus] = useState('');
+  const [paymentStatus, setPaymentStatus] = useState('');
+  const [shippingStatus, setShippingStatus] = useState('');
   const [id, setId] = useState('');
-  const [search, setSearch] = useState(false);
   const [orderListData, setOrderListData] = useState<any>();
+
   const getAllOrderList = async () => {
-    const res = await userAPI.getAllOrderList();
-    // console.log('orderList**', res);
+    const res = await userAPI.getAllOrderList(
+      orderStatus,
+      paymentStatus,
+      shippingStatus
+    );
     res ? setOrderListData(res) : '';
   };
+
   useEffect(() => {
     getAllOrderList();
   }, []);
 
   const handleSearch = (event: any) => {
     event.preventDefault();
-    const singleOrderList = orderListData?.orders?.filter(
-      (order: any) => order.orderId === id
-    );
-    const order = {
-      orders: singleOrderList,
-    };
-    setSingleOrder(order);
-    setSearch(true);
+
+    if (id) {
+      const singleOrderList = orderListData?.orders?.filter(
+        (order: any) => order.orderId === id
+      );
+      const order = {
+        orders: singleOrderList,
+      };
+      setOrderListData(order);
+    } else {
+      const time1 = `${startDate} ${startTime}`;
+      const time2 = `${endDate} ${endTime}`;
+      console.log("Time=============", time1) 
+      getAllOrderList();
+    }
   };
 
   return (
@@ -74,6 +92,9 @@ const OrderListMain = () => {
                       type="date"
                       className="form-control"
                       placeholder=""
+                      onChange={(e) => {
+                        setStartDate(e.target.value);
+                      }}
                     />
                   </div>
                   <div
@@ -89,6 +110,9 @@ const OrderListMain = () => {
                       type="time"
                       className="form-control"
                       placeholder=""
+                      onChange={(e) => {
+                        setStartTime(e.target.value);
+                      }}
                     />
                   </div>
                   <div
@@ -104,6 +128,9 @@ const OrderListMain = () => {
                       type="date"
                       className="form-control"
                       placeholder=""
+                      onChange={(e) => {
+                        setEndDate(e.target.value);
+                      }}
                     />
                   </div>
                   <div
@@ -119,6 +146,9 @@ const OrderListMain = () => {
                       type="time"
                       className="form-control"
                       placeholder=""
+                      onChange={(e) => {
+                        setEndTime(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
@@ -142,12 +172,15 @@ const OrderListMain = () => {
                     <select
                       className="form-select"
                       aria-label="Default select example"
+                      onChange={(e) => {
+                        setOrderStatus(e.target.value);
+                      }}
                     >
                       <option selected> </option>
-                      <option value="1">Pending</option>
-                      <option value="2">Processing</option>
-                      <option value="3">Completed</option>
-                      <option value="4">Cancelled</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancelled">Cancelled</option>
                     </select>
                   </div>
                   <div
@@ -161,11 +194,14 @@ const OrderListMain = () => {
                     <select
                       className="form-select"
                       aria-label="Default select example"
+                      onChange={(e) => {
+                        setPaymentStatus(e.target.value);
+                      }}
                     >
                       <option selected> </option>
-                      <option value="1">Pending</option>
-                      <option value="2">Paid</option>
-                      <option value="3">Cancelled</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Cancelled">Cancelled</option>
                     </select>
                   </div>
                   <div
@@ -179,12 +215,15 @@ const OrderListMain = () => {
                     <select
                       className="form-select"
                       aria-label="Default select example"
+                      onChange={(e) => {
+                        setShippingStatus(e.target.value);
+                      }}
                     >
                       <option selected> </option>
-                      <option value="1">NotYetShipped</option>
-                      <option value="2">PartiallyShipped</option>
-                      <option value="3">Shipped</option>
-                      <option value="4">Delivered</option>
+                      <option value="NotYetShipped">NotYetShipped</option>
+                      <option value="PartiallyShipped">PartiallyShipped</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
                     </select>
                   </div>
                   <div
@@ -244,8 +283,66 @@ const OrderListMain = () => {
               </div>
             </div>
 
-            {search ? (
+            {/* {console.log(
+              'Order list data from 264==================',
+              orderListData
+            )} */}
+
+            {/* {search === true ? (
               <div>
+                {console.log('First Console Log-------------', search)}
+                {console.log(
+                  'Order list data from 275==================',
+                  orderListData
+                )}
+
+                {orderListData ? (
+                  <OrderList orderListData={orderListData} />
+                ) : (
+                  'No Order Data Found'
+                )}
+              </div>
+            ) : (
+              // <div>{console.log("From 280===================")}</div>
+              <div>
+                {console.log('Console Log-------------', search)}
+                {console.log(
+                  'Order list data from 290==================',
+                  orderListData
+                )}
+                {orderListData ? (
+                  <OrderList orderListData={orderListData} />
+                ) : (
+                  'No Order Data Found'
+                )}
+              </div>
+            )} */}
+
+            {/* {(!search) ? (
+              <div>
+                {orderListData?.length ? (
+                  <OrderList orderListData={orderListData} />
+                ) : (
+                  'No Order Data Found'
+                )}
+              </div>
+            ) : (
+              <div></div>
+            )} */}
+
+            {orderListData ? (
+              <OrderList orderListData={orderListData} />
+            ) : (
+              'No Order Data Found'
+            )}
+
+            {/* {search ? (
+              <div>
+                {orderListData ? (
+                  <OrderList orderListData={orderListData} />
+                ) : (
+                  'No Order Data Found'
+                )}
                 {singleOrder ? (
                   <>
                     <OrderList orderListData={singleOrder} />
@@ -257,7 +354,7 @@ const OrderListMain = () => {
             ) : (
               <div></div>
             )}
-            {(!search) ? (
+            {!search ? (
               <div>
                 {orderListData ? (
                   <OrderList orderListData={orderListData} />
@@ -265,7 +362,9 @@ const OrderListMain = () => {
                   'No Order Data Found'
                 )}
               </div>
-            ) : null}
+            ) : (
+              <div></div>
+            )} */}
           </div>
         </div>
       </main>

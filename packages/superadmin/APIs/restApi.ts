@@ -483,11 +483,15 @@ export async function mediaUploadRest(
   }
 }
 
-export async function getAllOrderListRest(): Promise<
+export async function getAllOrderListRest(
+  orderStatus: any, 
+  paymentStatus: any, 
+  shippingStaus: any
+): Promise<
   IOrderResponseData[] | undefined
 > {
   try {
-    const { data } = await axios?.get(apiEndPoints?.ordersList);
+    const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}`);
     return data?.data as IOrderResponseData[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
