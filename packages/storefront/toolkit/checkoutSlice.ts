@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IOrderAddress } from 'models';
 
 export interface ShippingInfo {
   firstName: string;
@@ -12,8 +13,8 @@ export interface ShippingInfo {
 }
 
 export interface CheckoutState {
-  shippingInfo: ShippingInfo;
-  billingInfo: ShippingInfo;
+  shippingInfo: IOrderAddress;
+  billingInfo: IOrderAddress;
 }
 
 const initialState: CheckoutState = {
@@ -23,7 +24,7 @@ const initialState: CheckoutState = {
     email: '',
     addressLine1: '',
     addressLine2: '',
-    state: '',
+    city: '',
     postCode: '',
     phoneNumber: '',
   },
@@ -33,7 +34,7 @@ const initialState: CheckoutState = {
     email: '',
     addressLine1: '',
     addressLine2: '',
-    state: '',
+    city: '',
     postCode: '',
     phoneNumber: '',
   },
@@ -45,13 +46,13 @@ export const checkoutSlice = createSlice({
   reducers: {
     addToShippingInfo: (
       state: CheckoutState,
-      action: PayloadAction<ShippingInfo>
+      action: PayloadAction<IOrderAddress>
     ) => {
       state.shippingInfo = action.payload;
     },
     addToBillingInfo: (
       state: CheckoutState,
-      action: PayloadAction<ShippingInfo>
+      action: PayloadAction<IOrderAddress>
     ) => {
       state.billingInfo = action.payload;
     },
@@ -62,7 +63,7 @@ export const checkoutSlice = createSlice({
         email: '',
         addressLine1: '',
         addressLine2: '',
-        state: '',
+        city: '',
         postCode: '',
         phoneNumber: '',
       };
@@ -72,7 +73,7 @@ export const checkoutSlice = createSlice({
         email: '',
         addressLine1: '',
         addressLine2: '',
-        state: '',
+        city: '',
         postCode: '',
         phoneNumber: '',
       };

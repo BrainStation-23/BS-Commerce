@@ -24,6 +24,7 @@ interface FormData {
   addressOptional: string;
   city: string;
   postalCode: string;
+  tag?: string;
 }
 
 const Information = (props: any) => {
@@ -57,8 +58,9 @@ const Information = (props: any) => {
     lastName: shippingInfo?.lastName,
     address: shippingInfo?.addressLine1,
     addressOptional: shippingInfo?.addressLine2,
-    city: shippingInfo?.state,
+    city: shippingInfo?.city,
     postalCode: shippingInfo?.postCode,
+    tag: '',
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -111,7 +113,7 @@ const Information = (props: any) => {
       email: user?.email!,
       addressLine1: data.address,
       addressLine2: data.addressOptional,
-      state: data.city,
+      city: data.city,
       postCode: data.postalCode,
       phoneNumber: data.contact,
     };
@@ -153,13 +155,12 @@ const Information = (props: any) => {
             postCode: values.postalCode,
             tag: values.tag,
           };
-          if (values?.tag!) {
+          if (values?.tag) {
             userAPI.addCustomerNewAddress(addressData);
             userAPI.getCustomer(token).then((response) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
-          console.log(data);
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}

@@ -111,15 +111,15 @@ const PaymentDetails: NextComponentType = () => {
       email: shippingInfo.email,
       addressLine1: data.address,
       addressLine2: data.addressOptional,
-      state: data.city,
+      city: data.city,
       postCode: data.postalCode,
-      phoneNumber: data.contact,
+      phoneNumber: shippingInfo.phoneNumber,
     };
     {
       data ? dispatch(addToBillingInfo(shippingData)) : null;
     }
-    console.log('Data=======', data);
-    console.log('Shipping=======', shippingInfo);
+    // console.log('Data=======', data);
+    // console.log('Shipping=======', shippingInfo);
 
     const obj = {
       shippingCost: 0,
@@ -129,7 +129,7 @@ const PaymentDetails: NextComponentType = () => {
         email: shippingInfo?.email,
         addressLine1: data.address || shippingInfo?.addressLine1,
         addressLine2: data.addressOptional || shippingInfo?.addressLine2,
-        city: data.city || shippingInfo?.state,
+        city: data.city || shippingInfo?.city,
         postCode: data.postalCode || shippingInfo?.postCode,
         phoneNumber: shippingInfo?.phoneNumber,
       },
@@ -139,7 +139,7 @@ const PaymentDetails: NextComponentType = () => {
         email: shippingInfo?.email,
         addressLine1: shippingInfo?.addressLine1,
         addressLine2: shippingInfo?.addressLine2,
-        city: shippingInfo?.state,
+        city: shippingInfo?.city,
         postCode: shippingInfo?.postCode,
         phoneNumber: shippingInfo?.phoneNumber,
       },
@@ -215,6 +215,7 @@ const PaymentDetails: NextComponentType = () => {
             addressOptional: values.addressOptional,
             city: values.city,
             postalCode: values.postalCode,
+            contact: shippingInfo.phoneNumber,
           };
 
           const addressData = {
@@ -223,7 +224,7 @@ const PaymentDetails: NextComponentType = () => {
             lastName: values.lastName,
             addressLine1: values.address,
             addressLine2: values.addressOptional,
-            state: values.city,
+            city: values.city,
             postCode: values.postalCode,
             //tag: values.tag,
           };
