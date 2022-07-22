@@ -208,8 +208,8 @@ const OrderListMain = () => {
                   <button
                     type="submit"
                     style={{
-                      height: '50px',
-                      width: '200px',
+                      height: '40px',
+                      width: '120px',
                       margin: '15px',
                     }}
                     className="btn btn-primary"
