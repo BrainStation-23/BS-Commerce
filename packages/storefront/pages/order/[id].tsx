@@ -7,7 +7,11 @@ import { userAPI } from 'APIs';
 import Detail from '@/components/order/detail';
 
 interface Props {
-  orderProducts: IOrderResponseData[];
+  orderProducts: {
+    data: {
+      orderInfo: IOrderResponseData[];
+    };
+  };
 }
 
 const Details: NextPage<Props> = ({ orderProducts }: Props) => {
