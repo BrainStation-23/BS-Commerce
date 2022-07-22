@@ -36,7 +36,7 @@ const ShowData = ({ data }: any) => {
             <div className="box-content w-12 border-2 p-2">
               <div className="flex justify-between">
                 <button
-                  disabled={itemToUpdate.quantity <= 0 ? true : false}
+                  disabled={itemToUpdate.quantity <= 1 ? true : false}
                   onClick={() => {
                     let _quantity =
                       itemToUpdate.quantity - 1 >= 0

@@ -39,10 +39,12 @@ import {
   UpdateCustomerSuccessResponse,
   UpdateCustomerRequestBody,
   Wishlist,
+  Customer,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
+import { NextRouter } from 'next/router';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -146,18 +148,22 @@ export async function getCategoryListRest(): Promise<
 > {
   try {
     const res = await axios.get(`${apiEndPoints.getCatagoryList}`);
-    return res.data.data as getCategoryListSuccessResponse;
+    return res.data as getCategoryListSuccessResponse;
   } catch (error: any) {
     return error;
   }
 }
 export async function checkoutRest(
-  data: any
+  data: any,
+  router: NextRouter
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
+    toast.success('Order created successfully!');
+    router.push('/submit');
     return res.data;
   } catch (error: any) {
+    toast.error('Order creation failed!');
     return error;
   }
 }
@@ -202,13 +208,13 @@ export async function getOrderProductsRest(
 
 export async function getOrderProductRest(
   token: string,
-  OrderId: string,
+  OrderId: string
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return res?.data;
   } catch (error: any) {
@@ -278,14 +284,14 @@ export async function deleteFromCompareRest(productId: string) {
 
 export async function getCustomerProfileRest(
   token: string
-): Promise<GetCustomerInformationResponse | undefined> {
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data.data as GetCustomerInformationSuccessResponse;
+    return res.data as GetCustomerInformationSuccessResponse;
   } catch (error) {
     return [];
   }

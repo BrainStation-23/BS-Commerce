@@ -1,42 +1,87 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateCartItemRequest } from "models";
-import { Cart, CartProduct, IOrderAddress } from "models";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IOrderAddress } from 'models';
+
+export interface ShippingInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  addressLine1: string;
+  addressLine2?: string;
+  state: string;
+  postCode: string;
+  phoneNumber: string;
+}
 
 export interface CheckoutState {
-  shippingInfo: {};
-  billingInfo: {}
+  shippingInfo: IOrderAddress;
+  billingInfo: IOrderAddress;
 }
 
 const initialState: CheckoutState = {
-  shippingInfo: {},
-  billingInfo: {}
+  shippingInfo: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    postCode: '',
+    phoneNumber: '',
+  },
+  billingInfo: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    postCode: '',
+    phoneNumber: '',
+  },
 };
 
 export const checkoutSlice = createSlice({
-  name: "checkout",
+  name: 'checkout',
   initialState,
   reducers: {
     addToShippingInfo: (
       state: CheckoutState,
-      action: PayloadAction<{}>
+      action: PayloadAction<IOrderAddress>
     ) => {
-        state.shippingInfo = action.payload;
+      state.shippingInfo = action.payload;
     },
     addToBillingInfo: (
       state: CheckoutState,
-      action: PayloadAction<{}>
+      action: PayloadAction<IOrderAddress>
     ) => {
       state.billingInfo = action.payload;
     },
-    deleteCheckoutInfo: (
-      state: CheckoutState,
-    ) => {
-      state.shippingInfo = [];
-      state.billingInfo = [];
+    deleteCheckoutInfo: (state: CheckoutState) => {
+      state.shippingInfo = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        postCode: '',
+        phoneNumber: '',
+      };
+      state.billingInfo = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        postCode: '',
+        phoneNumber: '',
+      };
     },
   },
 });
 
-export const { addToShippingInfo, addToBillingInfo, deleteCheckoutInfo } = checkoutSlice.actions;
+export const { addToShippingInfo, addToBillingInfo, deleteCheckoutInfo } =
+  checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

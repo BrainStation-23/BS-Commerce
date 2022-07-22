@@ -13,11 +13,11 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
   return (
     <div className="py-4 text-center">
       <Link href="/product/1" passHref>
-        <div className="text-xl font-medium text-inherit text-gray-600">
+        <div className="text-base text-inherit text-gray-600">
           {product?.info.name}
         </div>
       </Link>
-      <p className="m-1 font-['arial'] text-lg text-gray-600">
+      <p className="m-1 font-['arial'] text-sm text-gray-600">
         {product?.tags
           ? product?.tags[0]
           : product?.brands

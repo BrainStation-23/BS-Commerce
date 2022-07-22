@@ -1,17 +1,18 @@
-import { userAPI } from 'APIs';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { CustomerAddress } from 'models';
-import { NextComponentType } from 'next';
 import { FC } from 'react';
 import { toast } from 'react-toastify';
-import { addAddress, storeAddresses } from 'toolkit/customerAddressSlice';
+import { Field, Form, Formik } from 'formik';
+
+import { userAPI } from 'APIs';
+import { Customer, CustomerAddress } from 'models';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { storeCustomerDetails } from 'toolkit/userSlice';
+import { storeAddresses } from 'toolkit/customerAddressSlice';
 interface props {
-  user: any;
-  cancelForm: any;
-  id: string;
+  user?: CustomerAddress;
+  cancelForm: Function;
+  id?: string;
 }
-const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
+const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -31,7 +32,8 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
       }
       cancelForm('');
       const updatedCustomer = await userAPI.getCustomerProfile(token);
-      dispatch(storeAddresses(updatedCustomer?.addresses!));
+      dispatch(storeAddresses(updatedCustomer?.data.addresses!));
+      dispatch(storeCustomerDetails(updatedCustomer?.data));
     } catch (error) {
       toast.error(`Error occurred!!`);
     }
@@ -49,7 +51,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
             state: user?.state ? user.state : '',
             postCode: user?.postCode ? user.postCode : '',
             phone: user?.phone ? user.phone : '',
-            tag: user?.tag ? user.tag : 'home',
+            tag: user?.tag ? user.tag : '',
           }}
           onSubmit={(values, { resetForm }) => {
             const data = {
@@ -62,7 +64,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
               phone: values.phone,
               tag: values.tag,
             };
-            handleAddressSubmit(data, id, resetForm);
+            handleAddressSubmit(data, id!, resetForm);
             // actions.setSubmitting(true);
           }}
         >
@@ -167,9 +169,21 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
                     />
                   </div>
                 </div>
+                <div className="mb-3">
+                  <label htmlFor="tag" className="text-sm">
+                    Enter a label for effective delivery:
+                  </label>
+                  <br />
+                  <Field
+                    type="text"
+                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                    id="tag"
+                    name="tag"
+                    placeholder="E.g. Home, Office, Others etc."
+                  />
+                </div>
 
-                <p className="mb-2">Select a label for effective delivery:</p>
-
+                {/* <p className="mb-2">Select a label for effective delivery:</p>
                 <div className="flex flex-wrap items-center gap-x-3">
                   <div className="mb-3">
                     <div className="relative">
@@ -227,7 +241,7 @@ const AddNewAddressForm: FC = ({ user, cancelForm, id }: any) => {
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <button
                   type="submit"

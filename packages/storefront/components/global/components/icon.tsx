@@ -5,13 +5,13 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { Product } from 'models';
+import { CustomerProduct, Product, WishlistProduct } from 'models';
 import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 
 interface SingleProduct {
-  product: Product;
+  product: Product | WishlistProduct | CustomerProduct;
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
@@ -204,7 +204,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product));
+                dispatch(storeProductsToCompare(product as Product));
                 event.preventDefault();
               }}
             >

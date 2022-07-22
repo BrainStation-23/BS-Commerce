@@ -1,6 +1,5 @@
 import { useAppSelector } from 'customHooks/hooks';
 import React from 'react';
-import Loading from '../global/loader';
 
 const WithAuth = (Component: React.FC) => {
   const Auth = (props: any) => {

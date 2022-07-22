@@ -70,7 +70,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
 
         <div className="m-5 flex ">
           <div className={description}>{product.info.shortDescription}</div>
-          <p className={review}>{product.review ? product.review : ''}</p>
+          <p className={review}>{/*product.review ? product.review : ''*/} Review</p>
           <p className={shipping}>{shipping_policy}</p>
           <div className={size_chart}>
             <h4 className="font-semibold">Size Chart</h4>

@@ -6,8 +6,12 @@ import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
-import { setModalState } from 'toolkit/modalSlice';
-import { addToWishlist, storeWishlist } from 'toolkit/productsSlice';
+import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import {
+  addToWishlist,
+  deleteItemFromWishlist,
+  storeWishlist,
+} from 'toolkit/productsSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
@@ -15,6 +19,9 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
 import Modal from '@/components/comparison';
+import CartModal from '@/components/global/components/modal/cartModal';
+import { useEffect } from 'react';
+
 interface SingleProduct {
   product: Product;
 }
@@ -48,6 +55,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
 
   if (findWishlistProduct) {
     clicked = true;
@@ -55,7 +63,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   const handleAddToCompare = async () => {
     try {
-      await userAPI.addToCompare(product.id);
+      await userAPI.addToCompare(product.id!);
     } catch (error) {
       toast.error('Error happend.');
     }
@@ -76,8 +84,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       productId: product.id!,
       quantity: amount,
     };
-    console.log(cartItem);
-    setAmount(0);
+    // console.log(cartItem);
+    setShowCartModal(true);
+    setAmount(1);
     dispatch(addToCart(cartItem));
   };
 
@@ -99,12 +108,12 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       try {
         await userAPI.addToWishList(data);
         const newList = await userAPI.getCustomerWishlist(token);
-        console.log(newList);
-        dispatch(storeWishlist(newList));
+        // console.log(newList);
+        dispatch(storeWishlist(newList!));
         clicked = true;
         toast.success('Item added to wishlist');
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error('Failed to add item to wishlist');
       }
     } else {
@@ -113,7 +122,23 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     }
   };
 
-  useState(() => {
+  const deleteFromWishlist = async (productId: string) => {
+    if (token) {
+      try {
+        await userAPI.deleteWishlistItem(productId);
+        toast.success('Item removed from wishlist');
+        dispatch(deleteItemFromWishlist(productId));
+      } catch (error) {
+        toast.error('Failed to remove item from wishlist');
+      }
+    }
+  };
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+  };
+
+  useEffect(() => {
     dispatch(setModalState(false));
   }, [router.asPath]);
 
@@ -125,6 +150,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         linkArray={['/', '/product' + product.id]}
       />
       {modalState && <Modal setModal={true} />}
+
+      <CartModal
+        open={showCartModal}
+        onClose={closeCartModal}
+        product={product}
+      />
+
       <section className="body-font overflow-hidden bg-white text-gray-700">
         <div className="container mx-auto px-5 py-24">
           <div>
@@ -185,7 +217,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
-                  <span className="text-sm">Vendor: {product?.vendor}</span>
+                  <span className="text-sm">
+                    Vendor: Vendor {/*product?.vendor*/}
+                  </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
                   <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
@@ -200,7 +234,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </span>
                   {isAvailable ? (
                     <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
-                      {product?.stock} left in stock
+                      {/*product?.stock*/} Available
                     </span>
                   ) : (
                     <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
@@ -212,7 +246,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <p className="ml-1 mb-1 mt-2 text-sm text-gray-900">
                   {product?.info?.fullDescription}
                 </p>
-                {product?.info?.size && (
+                {/* {product?.info?.size && (
                   <div className="mt-2 mb-2 flex items-center">
                     <div className="ml-1 flex items-center">
                       <span className="mr-3">Size:</span>
@@ -244,9 +278,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
 
-                {product?.info?.color && (
+                {/* {product?.info?.color && (
                   <div className="mt-2 mb-2 flex items-center">
                     <div className="flex">
                       <span className="mr-3">Color:</span>
@@ -264,7 +298,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       ></button>
                     </div>
                   </div>
-                )}
+                )} */}
 
                 <div className="flex text-black">
                   <div className="title-text flex items-center lg:mx-2">
@@ -272,7 +306,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
                       <button
                         onClick={() => setAmount(amount - 1)}
-                        {...(amount <= 1 ? (disableDecrement = true) : null)}
+                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
                         disabled={disableDecrement}
                         className="p-2"
                       >
@@ -319,13 +353,23 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </Link>
                 </div>
                 <div className="text-grey-700 ml-1">
-                  <div>
+                  <div className="flex flex-row items-start gap-x-2">
                     <button
-                      onClick={() => toWishlist(product?.id!, 1)}
-                      disabled={clicked ? true : false}
+                      onClick={() =>
+                        clicked
+                          ? deleteFromWishlist(product?.id!)
+                          : toWishlist(product?.id!, 1)
+                      }
+                      // disabled={clicked ? true : false}
                       className="mt-10 hover:text-green-600"
                     >
-                      {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
+                      {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
+                    </button>
+                    <button
+                      className="mt-10 underline hover:text-green-600"
+                      hidden={!clicked}
+                    >
+                      <Link href="/wishlist">Go to wishlist</Link>
                     </button>
                   </div>
                   <div>
@@ -340,7 +384,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       + Compare
                     </button>
                   </div>
-                  <div>
+                  {/* <div>
                     <button className=" mt-2 flex hover:text-green-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -358,7 +402,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       </svg>
                       Ask about this product
                     </button>
-                  </div>
+                  </div> */}
                 </div>
                 <div></div>
               </div>
