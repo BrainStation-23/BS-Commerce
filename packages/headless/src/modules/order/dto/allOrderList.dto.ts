@@ -61,7 +61,8 @@ export class AllOrderListDto implements IOrderCreateData{
     shippingCost: number;
   
     @ApiProperty()
-    totalCost: number;
+    @IsOptional()
+    totalCost?: number;
   
     @ApiProperty()
     stripeToken?: string;

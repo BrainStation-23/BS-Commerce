@@ -94,6 +94,12 @@ export class ProductOrderDto implements IProductOrderData {
   @IsNumber()
   quantity: number;
 
+  @ApiProperty({ example: 2 })
+  @IsNumber()
+  @IsOptional()
+  totalPrice?: number;
+
+
   @ApiProperty({ example: 'string' })
   @IsString()
   @MaxLength(100)
@@ -140,7 +146,8 @@ export class CreateOrderDto implements IOrderCreateData {
 
   @ApiProperty({ example: 100 })
   @IsNumber()
-  totalCost: number;
+  @IsOptional()
+  totalCost?: number;
 
   @ApiProperty({ example: '' })
   @IsString()
