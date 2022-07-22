@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { ChevronRightIcon } from './headerIcons';
 
 export const HeaderSubCategory: React.FC<any> = (props: any) => {
   const category = props.category;
@@ -7,17 +8,33 @@ export const HeaderSubCategory: React.FC<any> = (props: any) => {
   const showSubCategory1 = props.showSubCategory;
   const [showSubCategory, setShowSubCategory] = useState(subOff);
 
+  // const toggleShowSubCategory = (show: boolean) => {
+  //   if (show === false) {
+  //     // console.log('toggling1');
+  //     let timeOutFunction = setTimeout(function () {
+  //       setShowSubCategory(false);
+  //       console.log('toggling');
+  //     }, 500);
+  //   } else {
+  //     window.clearTimeout();
+  //     setShowSubCategory(show);
+  //   }
+  // };
+
   return (
     <>
       {category ? (
-        <div className="group relative">
+        <div
+          className="group "
+          // style={{ outline: '1px solid red' }}
+        >
           <li
             key={category.name}
-            className="w-full cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
+            className="w-full cursor-pointer text-sm transition-all duration-100 ease-linear hover:text-green-600"
             onMouseEnter={() => setShowSubCategory(true)}
             onMouseLeave={() => setShowSubCategory(false)}
           >
-            <div className="flex flex-row justify-between">
+            <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 transition-all duration-100 ease-linear hover:text-green-600">
               <Link
                 href={{
                   pathname: `/collections/${category.name}`,
@@ -28,36 +45,17 @@ export const HeaderSubCategory: React.FC<any> = (props: any) => {
                 }}
                 as={`/collections/${category.name}`}
               >
-                <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
-                  {category.name}
-                </a>
+                <a className="">{category.name}</a>
               </Link>
               {/* {console.log(category)} */}
 
-              {category.subCategories ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              ) : (
-                ''
-              )}
+              {category.subCategories ? <ChevronRightIcon /> : ''}
             </div>
           </li>
 
           {category.subCategories ? (
             <div
-              className={` absolute -right-[160px] top-[4px] z-50 bg-white  px-10 py-6 shadow-lg transition-all duration-300 ease-in hover:block ${
+              className={`absolute top-0 left-56 z-50 h-60 w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block ${
                 showSubCategory ? '' : 'hidden'
               }`}
             >

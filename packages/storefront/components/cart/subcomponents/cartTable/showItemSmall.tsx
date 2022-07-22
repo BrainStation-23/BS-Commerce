@@ -58,7 +58,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
               <div className="flex justify-between">
                 <button
                   className="mx-4"
-                  disabled={itemToUpdate.quantity <= 0 ? true : false}
+                  disabled={itemToUpdate.quantity <= 1 ? true : false}
                   onClick={() => {
                     let _quantity =
                       itemToUpdate.quantity - 1 > 0
@@ -71,7 +71,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                     dispatch(
                       updateCartItem({
                         productId: itemToUpdate?.productId,
-                        quantity: _quantity
+                        quantity: _quantity,
                       })
                     );
                     setTotal(total - data?.product?.info?.price!);

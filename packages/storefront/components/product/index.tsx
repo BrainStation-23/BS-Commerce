@@ -6,8 +6,12 @@ import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
-import { setModalState } from 'toolkit/modalSlice';
-import { addToWishlist, storeWishlist } from 'toolkit/productsSlice';
+import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import {
+  addToWishlist,
+  deleteItemFromWishlist,
+  storeWishlist,
+} from 'toolkit/productsSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
@@ -15,6 +19,8 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
 import Modal from '@/components/comparison';
+import CartModal from '@/components/global/components/modal/cartModal';
+
 interface SingleProduct {
   product: Product;
 }
@@ -48,6 +54,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
 
   if (findWishlistProduct) {
     clicked = true;
@@ -76,8 +83,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       productId: product.id!,
       quantity: amount,
     };
-    console.log(cartItem);
-    setAmount(0);
+    // console.log(cartItem);
+    setShowCartModal(true);
+    setAmount(1);
     dispatch(addToCart(cartItem));
   };
 
@@ -113,6 +121,22 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     }
   };
 
+  const deleteFromWishlist = async (productId: string) => {
+    if (token) {
+      try {
+        await userAPI.deleteWishlistItem(productId);
+        toast.success('Item removed from wishlist');
+        dispatch(deleteItemFromWishlist(productId));
+      } catch (error) {
+        toast.error('Failed to remove item from wishlist');
+      }
+    }
+  };
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+  };
+
   useState(() => {
     dispatch(setModalState(false));
   }, [router.asPath]);
@@ -125,6 +149,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         linkArray={['/', '/product' + product.id]}
       />
       {modalState && <Modal setModal={true} />}
+
+      <CartModal
+        open={showCartModal}
+        onClose={closeCartModal}
+        product={product}
+      />
+
       <section className="body-font overflow-hidden bg-white text-gray-700">
         <div className="container mx-auto px-5 py-24">
           <div>
@@ -319,13 +350,23 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </Link>
                 </div>
                 <div className="text-grey-700 ml-1">
-                  <div>
+                  <div className="flex flex-row items-start gap-x-2">
                     <button
-                      onClick={() => toWishlist(product?.id!, 1)}
-                      disabled={clicked ? true : false}
+                      onClick={() =>
+                        clicked
+                          ? deleteFromWishlist(product?.id!)
+                          : toWishlist(product?.id!, 1)
+                      }
+                      // disabled={clicked ? true : false}
                       className="mt-10 hover:text-green-600"
                     >
-                      {clicked ? 'Added to wishlist' : '+ Add to wishlist'}
+                      {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
+                    </button>
+                    <button
+                      className="mt-10 underline hover:text-green-600"
+                      hidden={!clicked}
+                    >
+                      <Link href="/wishlist">Go to wishlist</Link>
                     </button>
                   </div>
                   <div>
@@ -340,7 +381,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       + Compare
                     </button>
                   </div>
-                  <div>
+                  {/* <div>
                     <button className=" mt-2 flex hover:text-green-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -358,7 +399,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       </svg>
                       Ask about this product
                     </button>
-                  </div>
+                  </div> */}
                 </div>
                 <div></div>
               </div>
