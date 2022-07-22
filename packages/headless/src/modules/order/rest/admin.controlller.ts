@@ -7,7 +7,7 @@ import { IServiceResponse } from 'src/utils/response/service.response.interface'
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from '../dto/admin.response.dto';
 import { OrderData } from '../dto/order.response.dto';
 import { OrderAdminService } from '../services/admin.service';
-import { AllOrderResponseDto, GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
+import { AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.dto';
 
 @ApiTags('Order - Admin API')
 @UseGuards(new RolesGuard(['admin']))
