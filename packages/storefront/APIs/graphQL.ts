@@ -1,17 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
-  getCategoryListSuccessResponse,
-  IOrderResponseData,
-  UpdateCustomerAddressResponse,
-  Wishlist,
-} from 'models';
-import { DeleteCustomerAddressResponse } from 'models';
-import {
-  AddCustomerNewAddressResponse,
-  CustomerAddress,
-  GetCustomerInformationResponse,
-} from 'models';
-import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -43,7 +31,16 @@ import {
   GetCustomerInformationSuccessResponse,
   UpdateCustomerRequestBody,
   UpdateCustomerSuccessResponse,
+  AddCustomerNewAddressResponse,
+  CustomerAddress,
+  GetCustomerInformationResponse,
+  DeleteCustomerAddressResponse,
+  IOrderResponseData,
+  UpdateCustomerAddressResponse,
+  Wishlist,
+  getCategoryListSuccessResponse,
 } from 'models';
+import { NextRouter } from 'next/router';
 
 // GraphQL example
 // import client from '../graphqlSchema/apollo-client';
@@ -203,7 +200,8 @@ export async function updateCustomerGraphql(
 }
 
 export async function checkoutGraphql(
-  data: any
+  data: any,
+  router: NextRouter
 ): Promise<IOrderResponseData | undefined> {
   return undefined;
 }

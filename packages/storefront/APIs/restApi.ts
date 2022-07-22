@@ -42,6 +42,17 @@ import {
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
+import { User } from 'utils/types';
+import { NextRouter } from 'next/router';
+
+export async function getUserRest(): Promise<User[] | undefined> {
+  try {
+    const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
+    return response.data as User[];
+  } catch (error: any) {
+    return error;
+  }
+}
 
 export async function getSignedInUserRest(
   isEmail: boolean,
@@ -142,12 +153,16 @@ export async function getCategoryListRest(): Promise<
   }
 }
 export async function checkoutRest(
-  data: any
+  data: any,
+  router: NextRouter
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
+    toast.success('Order created successfully!');
+    router.push('/submit');
     return res.data;
   } catch (error: any) {
+    toast.error('Order creation failed!');
     return error;
   }
 }

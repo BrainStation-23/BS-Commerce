@@ -45,9 +45,9 @@ import {
   deleteCustomerAddressGraphql,
   updateCustomerAddressGraphql,
   addCustomerNewAddressGraphql,
-  updateCustomerGraphql,
-  getCustomerGraphql,
   checkoutGraphql,
+  getCustomerGraphql,
+  updateCustomerGraphql,
   getOrderProductsGraphql,
   getOrderProductGraphql,
 } from './graphQL';

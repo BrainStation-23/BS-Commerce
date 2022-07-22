@@ -13,7 +13,7 @@ import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
 import React from 'react';
-import FieldTemplate from '../../fieldTemplate';
+import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
 
 interface FormData {
@@ -24,18 +24,17 @@ interface FormData {
   shippingAddressPicked: string;
   firstName: string;
   lastName: string;
-  contact: string;
-  address: string;
-  addressOptional: string;
+  phoneNumber: string;
+  addressLine1: string;
+  addressLine2: string;
   city: string;
-  postalCode: string;
+  postCode: string;
 }
 
 const PaymentDetails: NextComponentType = () => {
   const [showLabel, setShowLabel] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
   const [dropdownText, setDropdownText] = useState('Use a new address');
-  const [update, setUpdate] = useState(initialValues);
   const [tags, setTags] = useState<string[]>([]);
 
   const cartData = useAppSelector(
@@ -78,12 +77,14 @@ const PaymentDetails: NextComponentType = () => {
     shippingAddressPicked: '',
     firstName: '',
     lastName: '',
-    contact: '',
-    address: '',
-    addressOptional: '',
+    phoneNumber: '',
+    addressLine1: '',
+    addressLine2: '',
     city: '',
-    postalCode: '',
+    postCode: '',
   };
+
+  const [update, setUpdate] = useState(initialValues);
 
   const customerAddresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
@@ -104,30 +105,43 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   const handlePaymentSubmit = (data: FormData) => {
+    const shippingData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: shippingInfo.email,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
+      city: data.city,
+      postCode: data.postCode,
+      phoneNumber: shippingInfo.phoneNumber,
+    };
     {
-      data ? dispatch(addToBillingInfo(data)) : null;
+      data ? dispatch(addToBillingInfo(shippingData)) : null;
     }
+    // console.log('Data=======', data);
+    // console.log('Shipping=======', shippingInfo);
+
     const obj = {
       shippingCost: 0,
       billingAddress: {
-        firstName: data.firstName || shippingInfo?.firstName!,
-        lastName: data.lastName || shippingInfo?.lastName!,
-        email: shippingInfo?.email!,
-        addressLine1: data.address || shippingInfo?.address!,
-        addressLine2: data.addressOptional || shippingInfo?.addressOptional!,
-        city: data.city || shippingInfo?.city!,
-        postCode: data.postalCode || shippingInfo?.postalCode!,
-        phoneNumber: shippingInfo?.contact!,
+        firstName: data.firstName || shippingInfo?.firstName,
+        lastName: data.lastName || shippingInfo?.lastName,
+        email: shippingInfo?.email,
+        addressLine1: data.addressLine1 || shippingInfo?.addressLine1,
+        addressLine2: data.addressLine2 || shippingInfo?.addressLine2,
+        city: data.city || shippingInfo?.city,
+        postCode: data.postCode || shippingInfo?.postCode,
+        phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingAddress: {
         firstName: shippingInfo?.firstName,
         lastName: shippingInfo?.lastName,
         email: shippingInfo?.email,
-        addressLine1: shippingInfo?.address,
-        addressLine2: shippingInfo?.addressOptional,
+        addressLine1: shippingInfo?.addressLine1,
+        addressLine2: shippingInfo?.addressLine2,
         city: shippingInfo?.city,
-        postCode: shippingInfo?.postalCode,
-        phoneNumber: shippingInfo?.contact,
+        postCode: shippingInfo?.postCode,
+        phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingMethod: 'test',
       paymentMethod: 'card',
@@ -140,11 +154,12 @@ const PaymentDetails: NextComponentType = () => {
       paypalPaymentId: data.cardNumber || '',
       paypalRedirectUrl: '',
     };
-    userAPI.checkout(obj).then((response: any) => {
-      toast.success('Order created successfully!');
-      router.push('/submit');
-      dispatch(deleteCart());
-      dispatch(deleteCheckoutInfo());
+    const res = userAPI.checkout(obj, router).then((response: any) => {
+      console.log(response?.data?.orderId);
+      if (response?.data?.orderId) {
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+      }
     });
   };
 
@@ -154,11 +169,11 @@ const PaymentDetails: NextComponentType = () => {
       setShowLabel(true);
       setFieldValue('firstName', '');
       setFieldValue('lastName', '');
-      setFieldValue('address', '');
-      setFieldValue('addressOptional', '');
+      setFieldValue('addressLine1', '');
+      setFieldValue('addressLine2', '');
       setFieldValue('city', '');
-      setFieldValue('postalCode', '');
-      setFieldValue('contact', '');
+      setFieldValue('postCode', '');
+      setFieldValue('phoneNumber', '');
     } else {
       setShowLabel(false);
       const selectedAddress = addresses.find((address) => {
@@ -166,19 +181,19 @@ const PaymentDetails: NextComponentType = () => {
       });
       setFieldValue('firstName', selectedAddress?.firstName);
       setFieldValue('lastName', selectedAddress?.lastName);
-      setFieldValue('address', selectedAddress?.addressLine1);
-      setFieldValue('addressOptional', selectedAddress?.addressLine2);
+      setFieldValue('addressLine1', selectedAddress?.addressLine1);
+      setFieldValue('addressLine2', selectedAddress?.addressLine2);
       setFieldValue('city', selectedAddress?.state);
-      setFieldValue('postalCode', selectedAddress?.postCode);
-      setFieldValue('contact', selectedAddress?.phone);
+      setFieldValue('postCode', selectedAddress?.postCode);
+      setFieldValue('phoneNumber', selectedAddress?.phone);
     }
   };
   const handleSameAddress = () => {
     setShowShippingForm(false);
   };
-  useEffect(() => {
-    setTagsOptions();
-  }, [tags]);
+  // useEffect(() => {
+  //   setTagsOptions();
+  // }, [tags]);
   return (
     <>
       <p className="mt-5 text-lg">Payment</p>
@@ -197,31 +212,30 @@ const PaymentDetails: NextComponentType = () => {
             shippingAddressPicked: values.shippingAddressPicked,
             firstName: values.firstName,
             lastName: values.lastName,
-            address: values.address,
-            addressOptional: values.addressOptional,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2,
             city: values.city,
-            postalCode: values.postalCode,
+            postCode: values.postCode,
+            phoneNumber: shippingInfo.phoneNumber,
           };
 
           const addressData = {
-            phone: values.contact,
+            phone: values.phoneNumber,
             firstName: values.firstName,
             lastName: values.lastName,
-            addressLine1: values.address,
-            addressLine2: values.addressOptional,
-            state: values.city,
-            postCode: values.postalCode,
-            tag: values.tag,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2,
+            city: values.city,
+            postCode: values.postCode,
+            //tag: values.tag,
           };
 
-          console.log(addressData);
-
-          if (values?.tag!) {
-            userAPI.addCustomerNewAddress(addressData);
-            userAPI.getCustomer(token).then((response) => {
-              dispatch(storeAddresses(response?.data?.addresses));
-            });
-          }
+          // if (values?.tag!) {
+          //   userAPI.addCustomerNewAddress(addressData);
+          //   userAPI.getCustomer(token).then((response) => {
+          //     dispatch(storeAddresses(response?.data?.addresses));
+          //   });
+          // }
 
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
@@ -290,7 +304,7 @@ const PaymentDetails: NextComponentType = () => {
                 </div>
 
                 {/* billing div */}
-                <div>
+                {/* <div>
                   <p className="mt-5 text-lg">Billing address</p>
                   <p className="text-sm text-gray-500">
                     Select the address that matches your card or payment method.
@@ -390,7 +404,7 @@ const PaymentDetails: NextComponentType = () => {
 
                             <FieldTemplate
                               label="Mobile phone number"
-                              fieldID="contact"
+                              fieldID="phoneNumber"
                               fieldType="text"
                               placeholder=" "
                               isRequired={true}
@@ -399,7 +413,7 @@ const PaymentDetails: NextComponentType = () => {
 
                             <FieldTemplate
                               label="Address 1"
-                              fieldID="address"
+                              fieldID="addressLine1"
                               fieldType="text"
                               placeholder=" "
                               isRequired={true}
@@ -408,7 +422,7 @@ const PaymentDetails: NextComponentType = () => {
 
                             <FieldTemplate
                               label="Address 2"
-                              fieldID="addressOptional"
+                              fieldID="addressLine2"
                               fieldType="text"
                               placeholder=" "
                               isRequired={true}
@@ -427,7 +441,7 @@ const PaymentDetails: NextComponentType = () => {
 
                                 <FieldTemplate
                                   label="Postal Code"
-                                  fieldID="postalCode"
+                                  fieldID="postCode"
                                   fieldType="text"
                                   placeholder=" "
                                   isRequired={true}
@@ -463,7 +477,7 @@ const PaymentDetails: NextComponentType = () => {
                       </>
                     ) : null}
                   </div>
-                </div>
+                </div> */}
                 <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   {/* <Link href="/submit" passHref> */}
                   <button

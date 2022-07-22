@@ -1,4 +1,4 @@
-import { CustomerProduct, Product } from 'models';
+import { Product } from 'models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
@@ -22,7 +22,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                       product={product}
                       height={212}
                       width={250}
-                      src={product?.photos[0]?.url}
+                      src={product?.photos![0]?.url}
                       alt={product?.info?.name}
                     />
 
@@ -32,11 +32,6 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                       </div>
                     ) : null}
 
-                    {product?.discountPercentage && product?.stock > 0 ? (
-                      <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
-                        <p>{`-${product?.discountPercentage}%`}</p>
-                      </div>
-                    ) : null}
                     {product?.info?.oldPrice !== 0 ? (
                       <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>{`-$${Math.abs(

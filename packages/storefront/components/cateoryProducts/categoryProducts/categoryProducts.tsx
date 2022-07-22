@@ -1,7 +1,7 @@
 import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'customHooks/hooks';
-import CategoryProductCard from '@/components/cateoryProducts/categoryProducts/categoryProductCard/categoryProductCard';
+import CategoryProductCard from '@/components/cateoryProducts/categoryProducts/categoryProductCard';
 
 const CategoryProductSegment: NextComponentType = () => {
   const products = useAppSelector(
