@@ -21,7 +21,7 @@ export const HeaderCategory: React.FC<any> = (props: any) => {
                   name: category.name,
                 },
               }}
-              as={`/collections/${category.name}`}
+              //as={`/collections/${category.name}`}
             >
               <a className="cursor-pointer capitalize transition-all duration-100 ease-linear hover:text-green-600">
                 {category.name}
