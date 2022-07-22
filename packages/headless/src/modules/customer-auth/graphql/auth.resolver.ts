@@ -1,6 +1,6 @@
 import { CustomerAuthService } from '../services';
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
-import { CreateCustomerDto, CustomerSignInDto, GetCustomerQueryDto } from '../dto';
+import { CreateCustomerDto, CustomerSignInDto, GetCustomerQueryDto } from '../rest/dto';
 
 @Resolver()
 export class CustomerAuthResolver {

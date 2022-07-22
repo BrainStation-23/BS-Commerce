@@ -1,12 +1,10 @@
 import { model, Schema } from 'mongoose';
-import { randomUUID } from 'crypto';
-import { Tags } from 'src/entity/tags';
+import { Tags } from 'models';
 
 const TagsSchema = new Schema<Tags>({
   id: {
     type: String,
     unique: true,
-    default: () => randomUUID()
   },
   name: String,
 }, {

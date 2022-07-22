@@ -10,8 +10,8 @@ import {
   GetProductsByConditionQueryDto,
   UpdateProductParamsDto,
   updateProductsForBrandRequestDto
-} from '../dto';
-import { CreateProductDto } from '../dto/createProduct.dto';
+} from '../rest/dto';
+import { CreateProductDto } from '../rest/dto/createProduct.dto';
 import { ProductService } from '../services';
 
 @Resolver()

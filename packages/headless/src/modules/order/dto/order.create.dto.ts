@@ -12,7 +12,7 @@ import {
   ValidateNested
 } from 'class-validator';
 import { IOrderAddress, IOrderCreateData, IProductOrderData } from 'models';
-import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
+import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
