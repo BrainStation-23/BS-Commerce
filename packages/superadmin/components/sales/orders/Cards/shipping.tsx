@@ -39,7 +39,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
     setModal({ ...modal, change_shipping_status_save: false });
     const obj = {
       orderId: singleOrderInfo?.orderId,
-      statusType: 'shippingStatus',
+      statusType: 'shippingStatusEnums',
       statusValue: shippingState,
     };
     setShippingStatusValue(shippingState);

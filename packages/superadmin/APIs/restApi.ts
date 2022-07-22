@@ -333,7 +333,7 @@ export async function updateOrderStatusRest(
 > {
   try {
 
-    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
     toast.success("Status updated successfully");
     return response.data as any;
   } catch (error: any) {
@@ -349,7 +349,7 @@ export async function updatePaymentStatusRest(
 > {
   try {
 
-    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
     toast.success("Status updated successfully");
     return response.data as any;
   } catch (error: any) {
@@ -365,7 +365,7 @@ export async function updateShippingStatusRest(
 > {
   try {
 
-    const response = await axios.post(`${apiEndPoints?.updateOrderStatus}`, data);
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
     toast.success("Status updated successfully");
     return response.data as any;
   } catch (error: any) {

@@ -84,7 +84,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
     setModal({ ...modal, change_status_save: false });
     const obj = {
       orderId: singleOrderInfo?.orderId,
-      statusType: 'orderStatus',
+      statusType: 'orderStatusEnums',
       statusValue: orderState,
     };
     setOrderStatusValue(orderState);
@@ -96,7 +96,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
     setModal({ ...modal, change_payment_status_save: false });
     const obj = {
       orderId: singleOrderInfo?.orderId,
-      statusType: 'paymentStatus',
+      statusType: 'paymentStatusEnums',
       statusValue: paymentState,
     };
     setPaymentStatusValue(paymentState);
