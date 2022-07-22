@@ -2,10 +2,15 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { ChevronRightIcon } from './headerIcons';
 
-export const HeaderSubCategory: React.FC<any> = (props: any) => {
-  const category = props.category;
-  const subOff = props.subOff;
-  const showSubCategory1 = props.showSubCategory;
+interface Props {
+  category: any;
+  subOff?: boolean;
+}
+
+export const HeaderSubCategory: React.FC<Props> = ({
+  category,
+  subOff,
+}: Props) => {
   const [showSubCategory, setShowSubCategory] = useState(subOff);
 
   // const toggleShowSubCategory = (show: boolean) => {
@@ -60,11 +65,13 @@ export const HeaderSubCategory: React.FC<any> = (props: any) => {
               }`}
             >
               <ul className="">
-                {category.subCategories?.map((subCategory) => (
-                  <HeaderSubCategory
-                    category={subCategory}
-                    showSubCategory1={showSubCategory}
-                  />
+                {category.subCategories?.map((category: any) => (
+                  <li key={category.name}>
+                    <HeaderSubCategory
+                      category={category}
+                      // showSubCategory1={showSubCategory}
+                    />
+                  </li>
                 ))}
               </ul>
             </div>

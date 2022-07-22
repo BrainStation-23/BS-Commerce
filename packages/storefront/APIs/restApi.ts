@@ -136,7 +136,7 @@ export async function getCategoryListRest(): Promise<
 > {
   try {
     const res = await axios.get(`${apiEndPoints.getCatagoryList}`);
-    return res.data.data as getCategoryListSuccessResponse;
+    return res.data as getCategoryListSuccessResponse;
   } catch (error: any) {
     return error;
   }

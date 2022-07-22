@@ -1,10 +1,14 @@
+import { NestedCategoryList } from 'models';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { ChevronRightIcon, PlusSolidIcon } from './headerIcons';
 import { HeaderSubCategory } from './headerSubCategory';
 
-export const HeaderCategory: React.FC<any> = (props: any) => {
-  const category = props.category;
+interface Props {
+  category: NestedCategoryList;
+}
+
+export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
   const [subOff, settt] = useState(false);
 
   return (
@@ -36,7 +40,7 @@ export const HeaderCategory: React.FC<any> = (props: any) => {
       {category.subCategories ? (
         <div className="absolute top-0 left-56 z-50 hidden h-60 w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:group-hover:block">
           <ul className="">
-            {category.subCategories?.map((subCategory) => (
+            {category.subCategories?.map((subCategory: any) => (
               <>
                 <HeaderSubCategory category={subCategory} subOff={subOff} />
               </>

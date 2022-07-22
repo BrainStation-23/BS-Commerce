@@ -1,5 +1,6 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
+  getCategoryListSuccessResponse,
   IOrderResponseData,
   UpdateCustomerAddressResponse,
   Wishlist,
@@ -44,7 +45,14 @@ import {
   UpdateCustomerSuccessResponse,
 } from 'models';
 
-import client from '../graphqlSchema/apollo-client';
+// GraphQL example
+// import client from '../graphqlSchema/apollo-client';
+// export async function getUserGraphQl(): Promise<User[] | undefined> {
+//   const { data } = await client.query({
+//     query: GET_PRODUCTS,
+//   });
+//   return data as User[];
+//}
 
 export async function signInGraphql(
   data: CustomerSignInRequest
@@ -123,7 +131,7 @@ export async function deleteAllFromCartGraphql(): Promise<
 }
 
 export async function getCategoryListGraphql(): Promise<
-  getCategoryListResponse | undefined
+  getCategoryListSuccessResponse | undefined
 > {
   return undefined;
 }

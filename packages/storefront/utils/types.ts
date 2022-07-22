@@ -31,6 +31,7 @@ import {
   UpdateCustomerAddressResponse,
   DeleteCustomerAddressResponse,
   Wishlist,
+  getCategoryListSuccessResponse,
 } from 'models';
 
 export interface accordionBody {
@@ -74,7 +75,7 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
-  getCategoryList: () => Promise<getCategoryListResponse | undefined>;
+  getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
     CategoryId: GetCustomerAllProductsQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;

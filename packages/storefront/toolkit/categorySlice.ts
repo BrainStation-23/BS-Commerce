@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NestedCategoryList } from 'models';
 
 export interface categoryState {
-  category: NestedCategoryList[];
+  categoryList: NestedCategoryList[];
 }
 
 const initialState: categoryState = {
-  category: [],
+  categoryList: [],
 };
 
 export const categorySlice = createSlice({
@@ -17,7 +17,7 @@ export const categorySlice = createSlice({
       state: categoryState,
       action: PayloadAction<NestedCategoryList[]>
     ) => {
-      state.category = action.payload;
+      state.categoryList = action.payload;
     },
   },
 });

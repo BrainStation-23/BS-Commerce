@@ -27,8 +27,8 @@ const Header: NextComponentType = () => {
   const customerNumber = '+880 1674314359';
   const { pathname } = useRouter();
 
-  const categories = useAppSelector(
-    (state) => state.persistedReducer.category.category.categories
+  const categoryList = useAppSelector(
+    (state) => state.persistedReducer.category.categoryList
   );
 
   // console.log(categories);
@@ -118,15 +118,19 @@ const Header: NextComponentType = () => {
               <MenuIcon size={6} />
               <span className="ml-4 mr-auto font-medium">All Categories</span>
               <ChevronDownIcon />
-              {categories ? (
+              {categoryList ? (
                 <div
                   className={`absolute top-[40px] left-0 z-40 flex w-11/12 flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
                     isOpen ? `h-60` : 'h-0 opacity-0' //h-[350px]
                   }`}
                 >
-                  {categories?.map((category) => (
-                    <HeaderCategory category={category} />
-                  ))}
+                  <ul>
+                    {categoryList?.map((category) => (
+                      <li key={category.id}>
+                        <HeaderCategory category={category} />
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ) : (
                 ''
