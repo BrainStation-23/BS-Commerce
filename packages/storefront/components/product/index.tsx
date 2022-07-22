@@ -20,6 +20,7 @@ import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
 import Modal from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
+import { useEffect } from 'react';
 
 interface SingleProduct {
   product: Product;
@@ -107,12 +108,12 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       try {
         await userAPI.addToWishList(data);
         const newList = await userAPI.getCustomerWishlist(token);
-        console.log(newList);
+        // console.log(newList);
         dispatch(storeWishlist(newList!));
         clicked = true;
         toast.success('Item added to wishlist');
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error('Failed to add item to wishlist');
       }
     } else {
@@ -137,7 +138,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     setShowCartModal(false);
   };
 
-  useState(() => {
+  useEffect(() => {
     dispatch(setModalState(false));
   }, [router.asPath]);
 
@@ -216,7 +217,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
-                  <span className="text-sm">Vendor: Vendor {/*product?.vendor*/}</span>
+                  <span className="text-sm">
+                    Vendor: Vendor {/*product?.vendor*/}
+                  </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
                   <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
