@@ -38,11 +38,11 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct
                 <p>Sale</p>
               </div>
             ) : null}
-            {product?.discountPercentage && isAvailable ? (
+            {/* {product?.discountPercentage && isAvailable ? (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-${product?.discountPercentage}%`}</p>
               </div>
-            ) : null}
+            ) : null} */}
             {isAvailable && product?.info.oldPrice > 0 && (
               <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-$${Math.abs(
@@ -56,7 +56,8 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct
 
       <div className="ml-8 md:ml-16 w-4/5">
         <Swiper
-          onSwiper={setActiveThumb}
+          onSwiper={setActiveThumb}  //onSwiper={()=>setActiveThumb}
+
           loop={true}
           navigation={true}
           spaceBetween={10}

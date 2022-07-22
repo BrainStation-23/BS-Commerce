@@ -62,7 +62,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   const handleAddToCompare = async () => {
     try {
-      await userAPI.addToCompare(product.id);
+      await userAPI.addToCompare(product.id!);
     } catch (error) {
       toast.error('Error happend.');
     }
@@ -108,7 +108,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         await userAPI.addToWishList(data);
         const newList = await userAPI.getCustomerWishlist(token);
         console.log(newList);
-        dispatch(storeWishlist(newList));
+        dispatch(storeWishlist(newList!));
         clicked = true;
         toast.success('Item added to wishlist');
       } catch (error) {
@@ -216,7 +216,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
-                  <span className="text-sm">Vendor: {product?.vendor}</span>
+                  <span className="text-sm">Vendor: Vendor {/*product?.vendor*/}</span>
                   <span className="ml-2 mr-2 text-sm">|</span>
                   <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
@@ -231,7 +231,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </span>
                   {isAvailable ? (
                     <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
-                      {product?.stock} left in stock
+                      {/*product?.stock*/} Available
                     </span>
                   ) : (
                     <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
@@ -243,7 +243,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <p className="ml-1 mb-1 mt-2 text-sm text-gray-900">
                   {product?.info?.fullDescription}
                 </p>
-                {product?.info?.size && (
+                {/* {product?.info?.size && (
                   <div className="mt-2 mb-2 flex items-center">
                     <div className="ml-1 flex items-center">
                       <span className="mr-3">Size:</span>
@@ -275,9 +275,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
 
-                {product?.info?.color && (
+                {/* {product?.info?.color && (
                   <div className="mt-2 mb-2 flex items-center">
                     <div className="flex">
                       <span className="mr-3">Color:</span>
@@ -295,7 +295,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       ></button>
                     </div>
                   </div>
-                )}
+                )} */}
 
                 <div className="flex text-black">
                   <div className="title-text flex items-center lg:mx-2">
@@ -303,7 +303,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
                       <button
                         onClick={() => setAmount(amount - 1)}
-                        {...(amount <= 1 ? (disableDecrement = true) : null)}
+                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
                         disabled={disableDecrement}
                         className="p-2"
                       >
