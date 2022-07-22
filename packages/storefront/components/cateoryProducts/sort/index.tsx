@@ -1,13 +1,13 @@
-import type { NextComponentType } from "next";
+import type { NextComponentType } from 'next';
 
 const ProductSort: NextComponentType = () => {
   const sortOptions = [
-    { id: Math.random() * 100, meta: { name: "Alphabetically" } },
-    { id: Math.random() * 100, meta: { name: "Featured" } },
-    { id: Math.random() * 100, meta: { name: "Best Selling" } },
-    { id: Math.random() * 100, meta: { name: "Price Low" } },
-    { id: Math.random() * 100, meta: { name: "Date New to Old" } },
-    { id: Math.random() * 100, meta: { name: "Date Old to new" } },
+    { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
+    { id: Math.random() * 100, meta: { name: 'Featured' } },
+    { id: Math.random() * 100, meta: { name: 'Best Selling' } },
+    { id: Math.random() * 100, meta: { name: 'Price Low' } },
+    { id: Math.random() * 100, meta: { name: 'Date New to Old' } },
+    { id: Math.random() * 100, meta: { name: 'Date Old to new' } },
   ];
   const gridIcon = (
     <svg
@@ -37,23 +37,23 @@ const ProductSort: NextComponentType = () => {
   return (
     <>
       <div>
-        <div className="box-border h-18 w-full p-4 border-2 ">
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 flex flex-row">
-            <div className="flex grid content-center justify-center sm:justify-center lg:justify-start md:justify-start xl:justify-start">
+        <div className="box-border h-auto w-full border px-4 text-sm">
+          <div className="flex grid grid-cols-1 flex-row sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+            <div className="flex grid content-center justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start">
               {gridIcon}
             </div>
-            <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start py-2">
-              <label className="px-2 sm:mx-2 flex grid content-center">
+            <div className="flex justify-center py-2 sm:justify-center md:justify-start lg:justify-start xl:justify-start">
+              <label className="flex grid content-center px-2 sm:mx-2">
                 Sort By:
               </label>
               <select
                 name="cars"
-                className="p-2 h-12 w-1/2 box-border border-2 bg-white text-sm"
+                className="-ml-3 box-border h-auto w-3/5 border bg-white py-2 px-1 text-sm"
               >
                 {dropdownSortOptions}
               </select>
             </div>
-            <div className="sm:ml-4 flex grid content-center justify-center sm:justify-center lg:justify-end md:justify-end xl:justify-end">
+            <div className="flex grid content-center justify-center sm:ml-4 sm:justify-center md:justify-end lg:justify-end xl:justify-end">
               Showing 1-3 of 3 result
             </div>
           </div>

@@ -1,24 +1,23 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NestedCategoryList } from "models";
-import { ProductStore } from "../utils/types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NestedCategoryList } from 'models';
 
 export interface categoryState {
-  category: NestedCategoryList[];
+  categoryList: NestedCategoryList[];
 }
 
 const initialState: categoryState = {
-  category: [],
+  categoryList: [],
 };
 
 export const categorySlice = createSlice({
-  name: "categorySlice",
+  name: 'categorySlice',
   initialState,
   reducers: {
     storeCategory: (
       state: categoryState,
       action: PayloadAction<NestedCategoryList[]>
     ) => {
-      state.category = action.payload;
+      state.categoryList = action.payload;
     },
   },
 });

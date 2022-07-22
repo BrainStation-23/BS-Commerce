@@ -21,7 +21,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
               <p className="text-sm text-[#333333]">Contact</p>
-              <p className="text-sm">{shippingInfo?.contact}</p>
+              <p className="text-sm">{shippingInfo?.phoneNumber}</p>
             </div>
             <button
               onClick={() => {
@@ -42,7 +42,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
               <p className="text-sm text-[#333333]">Ship to</p>
-              <p className="text-sm">{shippingInfo?.address}</p>
+              <p className="text-sm">{shippingInfo?.addressLine1}</p>
             </div>
             <button
               onClick={() => {

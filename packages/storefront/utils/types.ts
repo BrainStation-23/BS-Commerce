@@ -1,10 +1,3 @@
-import { DeleteCustomerAddressResponse, Wishlist } from 'models';
-import { UpdateCustomerAddressResponse } from 'models';
-import {
-  AddCustomerNewAddressResponse,
-  CustomerAddress,
-  GetCustomerInformationResponse,
-} from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -32,7 +25,15 @@ import {
   GetCustomerInformationSuccessResponse,
   UpdateCustomerSuccessResponse,
   UpdateCustomerRequestBody,
+  AddCustomerNewAddressResponse,
+  CustomerAddress,
+  GetCustomerInformationResponse,
+  UpdateCustomerAddressResponse,
+  DeleteCustomerAddressResponse,
+  Wishlist,
+  getCategoryListSuccessResponse,
 } from 'models';
+import { NextRouter } from 'next/router';
 
 export interface accordionBody {
   id: string;
@@ -54,36 +55,7 @@ export interface CarouselBody {
   image: string;
 }
 
-export interface User {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  displayName?: string;
-  phone?: string;
-  username: string;
-  email: string;
-  password?: string;
-  provider?: string;
-  providerData?: object;
-  additionalProviderData?: object;
-  resetPasswordToken?: string;
-  resetPasswordExpires?: number;
-  gender?: string;
-  addresses?: Address[];
-  status: string;
-}
-
-export interface Address {
-  id?: string;
-  addressLine1: string;
-  addressLine2?: string;
-  city: string;
-  country: string;
-  postCode: string;
-}
-
 export interface apiFunction {
-  getUser: () => Promise<User[] | undefined>;
   signIn: (
     data: CustomerSignInRequest
   ) => Promise<CustomerSignInResponse | undefined>;
@@ -104,29 +76,25 @@ export interface apiFunction {
   getPublicProductsById: (
     productId: GetCustomerProductParams
   ) => Promise<GetCustomerProductResponse | undefined>;
-  getCategoryList: () => Promise<getCategoryListResponse | undefined>;
+  getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
     CategoryId: GetCustomerAllProductsQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
-  checkout: (data: any) => Promise<IOrderResponseData | undefined>;
+  checkout: (data: any,router: NextRouter) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest
   ) => Promise<AddToWishlistResponse | undefined>;
-  getCustomerWishlist: (
-    token: string
-  ) => Promise<Wishlist | undefined>;
+  getCustomerWishlist: (token: string) => Promise<Wishlist | undefined>;
   deleteWishlistItem: (
     data: string
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
-  addToCompare: (
-    productId: string
-  ) => Promise<CompareResponse | undefined>;
+  addToCompare: (productId: string) => Promise<CompareResponse | undefined>;
   deleteFromCompare: (productId: string) => {};
   getCustomerProfile: (
     token: string
-  ) => Promise<GetCustomerInformationResponse | undefined>;
+  ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
   deleteCustomerAddress: (
     addressId: string
   ) => Promise<DeleteCustomerAddressResponse | undefined>;
@@ -144,22 +112,4 @@ export interface apiFunction {
   updateCustomer: (
     data: UpdateCustomerRequestBody
   ) => Promise<UpdateCustomerSuccessResponse | undefined>;
-}
-
-export interface ProductStore {
-  id?: number;
-  title?: string;
-  description?: string;
-  price?: number;
-  discountPercentage?: number;
-  rating?: number;
-  review?: string | undefined;
-  stock?: number;
-  vendor?: number;
-  sku?: number;
-  brand?: string;
-  category?: string;
-  thumbnail?: string;
-  images?: string[];
-  color?: undefined | string;
 }

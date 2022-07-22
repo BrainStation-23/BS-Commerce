@@ -13,7 +13,6 @@ import {
   UpdateManufacturerRequest,
   GetProductParams,
   CreateProductRequest,
-  UpdatedUserRequest,
   createCategoryRequest,
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
@@ -84,17 +83,17 @@ export interface apiFunction {
   changePassword: (data: any) => Promise<UpdatedUserRequest | undefined>;
   createManufacturer: (
     data: CreateManufacturerRequest,
-    router: any
+    router: NextRouter
   ) => Promise<CreateManufacturerRequest | undefined>;
   getManufacturer: () => Promise<Manufacturer[] | undefined>;
   deleteManufacturer: (
     id: any,
-    router: any
+    router: NextRouter
   ) => Promise<Manufacturer[] | undefined>;
   getSingleManufacturer: (data: any) => Promise<any | undefined>;
   updateManufacturer: (
     data: UpdateManufacturerRequest,
-    router: any
+    router: NextRouter
   ) => Promise<UpdateManufacturerRequest | undefined>;
   getUserProfile: (
     router: NextRouter

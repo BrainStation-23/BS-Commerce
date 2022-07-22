@@ -52,7 +52,7 @@ const AccountDetails: NextComponentType = () => {
         <hr />
         <div className="mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
-            <Link href="/myAccount">
+            <Link href="/myAccount" passHref>
               <span className="cursor-pointer hover:text-blue-600">
                 Return to Account Details
               </span>

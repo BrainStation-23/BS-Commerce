@@ -17,17 +17,16 @@ const Product = ({ product }: SingleProduct) => {
           name: product.info.name,
         },
       }}
-      as={`product/${product.info.name}`}
+      // as={`product/${product.info.name}`}
       passHref
     >
       <div className="duration-0 group grid cursor-pointer justify-items-center transition hover:bg-white hover:duration-700">
         <div className="group relative flex pl-10 md:pl-0 lg:pl-0">
           <Image
-            product={product}
+            src={product.photos![0].url!}
+            alt={product.photos![0].alt}
             height={120}
             width={120}
-            src={product.photos[0].url}
-            alt={product.tags[0]}
           />
           <div className="absolute bottom-5 left-40 w-36 origin-left scale-0 transition-transform duration-300 group-hover:scale-100 md:left-28">
             <Icon product={product} />

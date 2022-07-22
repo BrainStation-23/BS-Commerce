@@ -1,5 +1,7 @@
-import { useAppDispatch } from 'customHooks/hooks';
+import React from 'react';
+
 import { useRouter } from 'next/router';
+import { useAppDispatch } from 'customHooks/hooks';
 import { setWishlistModalState } from 'toolkit/modalSlice';
 
 const Modal = ({
@@ -28,31 +30,33 @@ const Modal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-200 bg-opacity-90">
-      <div className="flex h-screen items-center justify-center ">
-        <div className="rounded-xl border-2 border-green-600/100 bg-white px-5 pt-5">
-          <p>{modalTitle}</p>
-          <hr className="mt-3" />
-          <div className="flex-col px-24 pt-5 pb-12">
-            <div className="mb-2 text-lg">{bodyText}</div>
-            <div className="flex">
-              <button
-                onClick={handleOKClick}
-                className=" rounded bg-green-600/100 px-4 py-2 text-white  hover:bg-black "
-              >
-                Yes
-              </button>
-              <button
-                onClick={handleCancelClick}
-                className="ml-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-black "
-              >
-                Cancel
-              </button>
+    <>
+      <div className="fixed inset-0 z-50 bg-[#808080] bg-opacity-50">
+        <div className="flex h-screen items-center justify-center ">
+          <div className=" bg-white px-5 pt-5">
+            <p>{modalTitle}</p>
+            <hr className="mt-3" />
+            <div className="flex-col px-24 pt-5 pb-12">
+              <div className="mb-2">{bodyText}</div>
+              <div className="flex gap-x-5 text-sm">
+                <button
+                  onClick={handleOKClick}
+                  className="rounded bg-[#eef0f1] px-10 py-2 text-black  hover:bg-[#40a944] hover:text-white"
+                >
+                  YES
+                </button>
+                <button
+                  onClick={handleCancelClick}
+                  className="rounded bg-[#eef0f1] px-8 py-2 text-black hover:bg-[#40a944] hover:text-white"
+                >
+                  CANCEL
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
