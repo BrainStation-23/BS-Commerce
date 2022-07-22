@@ -35,7 +35,6 @@ const PaymentDetails: NextComponentType = () => {
   const [showLabel, setShowLabel] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
   const [dropdownText, setDropdownText] = useState('Use a new address');
-  const [update, setUpdate] = useState(initialValues);
   const [tags, setTags] = useState<string[]>([]);
 
   const cartData = useAppSelector(
@@ -85,6 +84,8 @@ const PaymentDetails: NextComponentType = () => {
     postalCode: '',
   };
 
+  const [update, setUpdate] = useState(initialValues);
+
   const customerAddresses = useAppSelector(
     (state) => state.persistedReducer.customerAddress.addresses
   );
@@ -104,30 +105,43 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   const handlePaymentSubmit = (data: FormData) => {
+    const shippingData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: shippingInfo.email,
+      addressLine1: data.address,
+      addressLine2: data.addressOptional,
+      state: data.city,
+      postCode: data.postalCode,
+      phoneNumber: data.contact,
+    };
     {
-      data ? dispatch(addToBillingInfo(data)) : null;
+      data ? dispatch(addToBillingInfo(shippingData)) : null;
     }
+    console.log('Data=======', data);
+    console.log('Shipping=======', shippingInfo);
+
     const obj = {
       shippingCost: 0,
       billingAddress: {
-        firstName: data.firstName || shippingInfo?.firstName!,
-        lastName: data.lastName || shippingInfo?.lastName!,
-        email: shippingInfo?.email!,
-        addressLine1: data.address || shippingInfo?.address!,
-        addressLine2: data.addressOptional || shippingInfo?.addressOptional!,
-        city: data.city || shippingInfo?.city!,
-        postCode: data.postalCode || shippingInfo?.postalCode!,
-        phoneNumber: shippingInfo?.contact!,
+        firstName: data.firstName || shippingInfo?.firstName,
+        lastName: data.lastName || shippingInfo?.lastName,
+        email: shippingInfo?.email,
+        addressLine1: data.address || shippingInfo?.addressLine1,
+        addressLine2: data.addressOptional || shippingInfo?.addressLine2,
+        city: data.city || shippingInfo?.state,
+        postCode: data.postalCode || shippingInfo?.postCode,
+        phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingAddress: {
         firstName: shippingInfo?.firstName,
         lastName: shippingInfo?.lastName,
         email: shippingInfo?.email,
-        addressLine1: shippingInfo?.address,
-        addressLine2: shippingInfo?.addressOptional,
-        city: shippingInfo?.city,
-        postCode: shippingInfo?.postalCode,
-        phoneNumber: shippingInfo?.contact,
+        addressLine1: shippingInfo?.addressLine1,
+        addressLine2: shippingInfo?.addressLine2,
+        city: shippingInfo?.state,
+        postCode: shippingInfo?.postCode,
+        phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingMethod: 'test',
       paymentMethod: 'card',
@@ -142,7 +156,7 @@ const PaymentDetails: NextComponentType = () => {
     };
     userAPI.checkout(obj).then((response: any) => {
       toast.success('Order created successfully!');
-      router.push('/submit');
+      //router.push('/submit');
       dispatch(deleteCart());
       dispatch(deleteCheckoutInfo());
     });
@@ -211,17 +225,15 @@ const PaymentDetails: NextComponentType = () => {
             addressLine2: values.addressOptional,
             state: values.city,
             postCode: values.postalCode,
-            tag: values.tag,
+            //tag: values.tag,
           };
 
-          console.log(addressData);
-
-          if (values?.tag!) {
-            userAPI.addCustomerNewAddress(addressData);
-            userAPI.getCustomer(token).then((response) => {
-              dispatch(storeAddresses(response?.data?.addresses));
-            });
-          }
+          // if (values?.tag!) {
+          //   userAPI.addCustomerNewAddress(addressData);
+          //   userAPI.getCustomer(token).then((response) => {
+          //     dispatch(storeAddresses(response?.data?.addresses));
+          //   });
+          // }
 
           handlePaymentSubmit(data);
           actions.setSubmitting(false);
@@ -290,7 +302,7 @@ const PaymentDetails: NextComponentType = () => {
                 </div>
 
                 {/* billing div */}
-                <div>
+                {/* <div>
                   <p className="mt-5 text-lg">Billing address</p>
                   <p className="text-sm text-gray-500">
                     Select the address that matches your card or payment method.
@@ -463,7 +475,7 @@ const PaymentDetails: NextComponentType = () => {
                       </>
                     ) : null}
                   </div>
-                </div>
+                </div> */}
                 <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   {/* <Link href="/submit" passHref> */}
                   <button

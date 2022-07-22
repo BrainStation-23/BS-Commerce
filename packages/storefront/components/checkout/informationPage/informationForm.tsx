@@ -16,10 +16,10 @@ import FieldTemplate from '../fieldTemplate';
 interface FormData {
   email: string;
   contact: string;
-  sendNotificationCheckbox: string;
+  sendNotificationCheckbox?: string;
   firstName: string;
   lastName: string;
-  country: string;
+  country?: string;
   address: string;
   addressOptional: string;
   city: string;
@@ -52,14 +52,13 @@ const Information = (props: any) => {
 
   let initialValues = {
     email: user?.email,
-    contact: shippingInfo?.contact,
+    contact: shippingInfo?.phoneNumber,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
-    country: shippingInfo?.country,
-    address: shippingInfo?.address,
-    addressOptional: shippingInfo?.addressOptional,
-    city: shippingInfo?.city,
-    postalCode: shippingInfo?.postalCode,
+    address: shippingInfo?.addressLine1,
+    addressOptional: shippingInfo?.addressLine2,
+    city: shippingInfo?.state,
+    postalCode: shippingInfo?.postCode,
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -106,7 +105,17 @@ const Information = (props: any) => {
   };
 
   const handleCheckoutSubmit = (data: FormData) => {
-    dispatch(addToShippingInfo(data));
+    const shippingData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: user?.email!,
+      addressLine1: data.address,
+      addressLine2: data.addressOptional,
+      state: data.city,
+      postCode: data.postalCode,
+      phoneNumber: data.contact,
+    };
+    dispatch(addToShippingInfo(shippingData));
     const obj = {
       info: false,
       ship: true,
@@ -127,7 +136,6 @@ const Information = (props: any) => {
           const data = {
             email: user?.email,
             contact: values.contact,
-            country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
             address: values.address,
