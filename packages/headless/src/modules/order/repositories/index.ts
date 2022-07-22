@@ -23,6 +23,18 @@ export class OrderRepository {
     return await this.db.addPhotoDetails(products);
   }
 
+  addCosts(newOrder: any): OrderEntity{
+    let newProductList = [];
+    let totalProductsCost = 0;
+    newProductList = newOrder.products.map(product => {
+      let productCost = product.price * product.quantity;//individual product quantity * price
+      totalProductsCost = totalProductsCost + productCost; // total cost of all the products
+      return {...product, totalPrice: productCost};
+    });
+    
+    return {...newOrder, products: newProductList, productCost: totalProductsCost, totalCost: newOrder.shippingCost + totalProductsCost};
+  }
+
   async generateUniqueId(){
     let orderId = randomInt(281474976710655).toString();//generate id
     let len = orderId.length;

@@ -24,6 +24,7 @@ export interface IProductOrderData {
   price: number;
   photos?: IOrderProductPhoto[],
   quantity: number;
+  totalPrice?: number;
   sku: string;
 }
 
@@ -37,7 +38,7 @@ export interface IOrderCreateData {
   productCost: number;
   products: IProductOrderData[];
   shippingCost: number;
-  totalCost: number;
+  totalCost?: number;
   stripeToken?: string;
   stripeCustomerId?: string;
   stripeChargeId?: string;
