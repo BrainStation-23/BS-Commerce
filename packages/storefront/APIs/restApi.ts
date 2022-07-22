@@ -39,6 +39,7 @@ import {
   UpdateCustomerSuccessResponse,
   UpdateCustomerRequestBody,
   Wishlist,
+  Customer,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -283,14 +284,14 @@ export async function deleteFromCompareRest(productId: string) {
 
 export async function getCustomerProfileRest(
   token: string
-): Promise<GetCustomerInformationResponse | undefined> {
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data.data as GetCustomerInformationSuccessResponse;
+    return res.data as GetCustomerInformationSuccessResponse;
   } catch (error) {
     return [];
   }

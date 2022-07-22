@@ -128,14 +128,14 @@ const WishlistComponent: NextComponentType = () => {
                 >
                   <div className="relative flex w-56 cursor-pointer flex-col items-center justify-center">
                     <Picture
-                      src={data.product?.photos[0]?.url!}
+                      src={data.product?.photos![0].url!}
                       alt={data.product?.info.shortDescription}
                       width={200}
                       height={200}
                     />
 
                     <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
-                      <Icon product={data?.product} />
+                      <Icon product={data?.product!} />
                     </div>
 
                     <div className="text-center">
