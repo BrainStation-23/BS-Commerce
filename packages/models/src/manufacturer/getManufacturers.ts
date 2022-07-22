@@ -7,7 +7,7 @@ export const enum GetManufacturersErrorMessages {
 
 export const enum GetManufacturersSuccessMessages {
     MANUFACTURERS_LOADED_SUCCESSFULLY = 'MANUFACTURERS_LOADED_SUCCESSFULLY',
-    MANUFACTURER_IS_EMPTY = 'MANUFACTER_IS_EMPTY'
+    MANUFACTURER_IS_EMPTY = 'MANUFACTURER_IS_EMPTY'
 }
 
 /**
