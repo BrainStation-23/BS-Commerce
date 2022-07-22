@@ -493,8 +493,8 @@ export async function getAllOrderListRest(
   IOrderResponseData[] | undefined
 > {
   try {
-    const splitedStartDate = startDate.replace(/:/g, "%3A");
-    const splitedEndDate = endDate.replace(/:/g, "%3A");
+    const splitedStartDate = startDate ? startDate.replace(/:/g, "%3A") : '';
+    const splitedEndDate = endDate ? endDate.replace(/:/g, "%3A") : '';
     const sDate = startDate ? splitedStartDate: '';
     const eDate = endDate ? splitedEndDate: '';
     const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`);

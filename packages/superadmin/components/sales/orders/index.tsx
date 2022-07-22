@@ -1,10 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { render } from 'react-dom';
+import React, { useEffect, useState } from 'react';
 import OrderList from './List/ordersList';
-import OrderSearchWindow from './subComponent/searchWindow';
 import { userAPI } from '../../../APIs';
-import { useRouter } from 'next/router';
 import moment from 'moment';
 
 const OrderListMain = () => {
@@ -251,7 +247,7 @@ const OrderListMain = () => {
             ) : (
               'No Order Data Found'
             )}
-            
+
           </div>
         </div>
       </main>

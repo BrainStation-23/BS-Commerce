@@ -4,7 +4,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import Pagination from '../../../global/pagination';
 import Table from '../../../global/table/table';
-import { userAPI } from '../../../../APIs';
 import { useRouter } from 'next/router';
 interface Props {
   orderListData: any;
