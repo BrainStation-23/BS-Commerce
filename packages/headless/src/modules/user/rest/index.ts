@@ -12,7 +12,7 @@ import {
   GetUserSuccessResponseDto,
   ChangePasswordSuccessResponseDto,
   ChangePasswordErrorResponseDto
-} from '../dto';
+} from './dto';
 
 @Controller('user')
 @ApiTags('Admin Profile API')

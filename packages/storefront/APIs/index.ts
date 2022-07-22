@@ -13,7 +13,6 @@ import {
   getPublicProductByCategoryIDRest,
   getPublicProductsRest,
   getSignedInUserRest,
-  getUserRest,
   signinRest,
   signUpRest,
   getCategoryListRest,
@@ -25,6 +24,7 @@ import {
   getCustomerRest,
   updateCustomerRest,
 } from './restApi';
+
 import {
   addToWishlistGraphql,
   deleteFullWishlistGraphql,
@@ -37,7 +37,6 @@ import {
   getPublicProductByIdGraphql,
   getPublicProductsGraphql,
   getSignedInUserGraphql,
-  getUserGraphQl,
   getPublicProductByCategoryIDGraphql,
   signInGraphql,
   signUpGraphql,
@@ -46,8 +45,11 @@ import {
   deleteCustomerAddressGraphql,
   updateCustomerAddressGraphql,
   addCustomerNewAddressGraphql,
-  getCustomerGraphQL,
-  updateCustomerGraphQL,
+  checkoutGraphql,
+  getCustomerGraphql,
+  updateCustomerGraphql,
+  getOrderProductsGraphql,
+  getOrderProductGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -57,12 +59,14 @@ const graphqlApi: apiFunction = {
   signUp: signUpGraphql,
   getSignedInUser: getSignedInUserGraphql,
   forgotPassword: forgotPasswordGraphql,
-  getUser: getUserGraphQl,
   getPublicProducts: getPublicProductsGraphql,
   getPublicProductsById: getPublicProductByIdGraphql,
   getPublicProductByCategoryId: getPublicProductByCategoryIDGraphql,
   getFeaturedProducts: getFeaturedProductsGraphql,
   getCategoryList: getCategoryListGraphql,
+  checkout: checkoutGraphql,
+  getOrderProducts: getOrderProductsGraphql,
+  getOrderProduct: getOrderProductGraphql,
   addToWishList: addToWishlistGraphql,
   getCustomerWishlist: getCustomerWishlistGraphql,
   deleteWishlistItem: deleteWishlistItemGraphql,
@@ -73,15 +77,14 @@ const graphqlApi: apiFunction = {
   deleteCustomerAddress: deleteCustomerAddressGraphql,
   updateCustomerAddress: updateCustomerAddressGraphql,
   addCustomerNewAddress: addCustomerNewAddressGraphql,
-  getCustomer: getCustomerGraphQL,
-  updateCustomer: updateCustomerGraphQL,
+  getCustomer: getCustomerGraphql,
+  updateCustomer: updateCustomerGraphql,
 };
 
 const restApi: apiFunction = {
   signUp: signUpRest,
   signIn: signinRest,
   getSignedInUser: getSignedInUserRest,
-  getUser: getUserRest,
   forgotPassword: forgotPasswordRest,
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,

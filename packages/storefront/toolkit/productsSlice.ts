@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  CustomerProduct,
-  DeleteWishlistItemParams,
-  Product,
-  Wishlist,
-  WishlistItem,
-} from 'models';
-import { ProductStore } from '../utils/types';
+import { CustomerProduct, Product, Wishlist, WishlistItem } from 'models';
 
 export interface productsState {
   publicProducts: CustomerProduct[];

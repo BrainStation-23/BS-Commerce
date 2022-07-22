@@ -87,7 +87,10 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseOne5"
                 onClick={accorditionStatus1}
               >
-                <span className="text-[15px] font-semibold tracking-wide"> PRICE</span>
+                <span className="text-[15px] font-semibold tracking-wide">
+                  {' '}
+                  PRICE
+                </span>
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -133,7 +136,10 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus2}
               >
-                <span className="text-[15px] font-semibold tracking-wide"> AVAILABILITY</span>
+                <span className="text-[15px] font-semibold tracking-wide">
+                  {' '}
+                  AVAILABILITY
+                </span>
                 <span>{displayStatus2 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -181,7 +187,10 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus3}
               >
-                <span className="text-[15px] font-semibold tracking-wide"> PRODUCT TYPE</span>
+                <span className="text-[15px] font-semibold tracking-wide">
+                  {' '}
+                  PRODUCT TYPE
+                </span>
                 <span>{displayStatus3 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -228,7 +237,10 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus4}
               >
-                <span className="text-[15px] font-semibold tracking-wide"> BRAND</span>
+                <span className="text-[15px] font-semibold tracking-wide">
+                  {' '}
+                  BRAND
+                </span>
                 <span>{displayStatus4 ? upArrow : downArrow}</span>
               </button>
             </h2>
@@ -260,7 +272,7 @@ const CategoryFilter: NextComponentType = () => {
                    w-full
                    items-center
                    justify-between
-                                      rounded-none
+                   rounded-none
                    border-0 bg-white px-0
                    pt-8
                    pb-2
@@ -276,7 +288,10 @@ const CategoryFilter: NextComponentType = () => {
                 aria-controls="collapseTwo5"
                 onClick={accorditionStatus5}
               >
-                <span className="text-[15px] font-semibold tracking-wide"> COLOR</span>
+                <span className="text-[15px] font-semibold tracking-wide">
+                  {' '}
+                  COLOR
+                </span>
                 <span>{displayStatus5 ? upArrow : downArrow}</span>
               </button>
             </h2>

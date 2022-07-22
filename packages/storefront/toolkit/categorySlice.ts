@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NestedCategoryList } from "models";
-import { ProductStore } from "../utils/types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NestedCategoryList } from 'models';
 
 export interface categoryState {
   category: NestedCategoryList[];
@@ -11,7 +10,7 @@ const initialState: categoryState = {
 };
 
 export const categorySlice = createSlice({
-  name: "categorySlice",
+  name: 'categorySlice',
   initialState,
   reducers: {
     storeCategory: (

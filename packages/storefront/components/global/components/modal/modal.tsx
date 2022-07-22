@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useAppDispatch } from 'customHooks/hooks';
 import { setWishlistModalState } from 'toolkit/modalSlice';
 
-const Modal: React.FC = ({
+const Modal = ({
   setModalOn,
   setChoice,
   trigger,

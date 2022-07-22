@@ -16,14 +16,15 @@ import FieldTemplate from '../fieldTemplate';
 interface FormData {
   email: string;
   contact: string;
-  sendNotificationCheckbox: string;
+  sendNotificationCheckbox?: string;
   firstName: string;
   lastName: string;
-  country: string;
-  address: string;
-  addressOptional: string;
+  country?: string;
+  addressLine1: string;
+  addressLine2: string;
   city: string;
-  postalCode: string;
+  postCode: string;
+  tag?: string;
 }
 
 const Information = (props: any) => {
@@ -52,14 +53,14 @@ const Information = (props: any) => {
 
   let initialValues = {
     email: user?.email,
-    contact: shippingInfo?.contact,
+    contact: shippingInfo?.phoneNumber,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
-    country: shippingInfo?.country,
-    address: shippingInfo?.address,
-    addressOptional: shippingInfo?.addressOptional,
+    addressLine1: shippingInfo?.addressLine1,
+    addressLine2: shippingInfo?.addressLine2,
     city: shippingInfo?.city,
-    postalCode: shippingInfo?.postalCode,
+    postCode: shippingInfo?.postCode,
+    tag: '',
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -85,10 +86,10 @@ const Information = (props: any) => {
       setShowLabel(true);
       setFieldValue('firstName', '');
       setFieldValue('lastName', '');
-      setFieldValue('address', '');
-      setFieldValue('addressOptional', '');
+      setFieldValue('addressLine1', '');
+      setFieldValue('addressLine2', '');
       setFieldValue('city', '');
-      setFieldValue('postalCode', '');
+      setFieldValue('postCode', '');
       setFieldValue('contact', '');
     } else {
       setShowLabel(false);
@@ -97,16 +98,26 @@ const Information = (props: any) => {
       });
       setFieldValue('firstName', selectedAddress?.firstName);
       setFieldValue('lastName', selectedAddress?.lastName);
-      setFieldValue('address', selectedAddress?.addressLine1);
-      setFieldValue('addressOptional', selectedAddress?.addressLine2);
+      setFieldValue('addressLine1', selectedAddress?.addressLine1);
+      setFieldValue('addressLine2', selectedAddress?.addressLine2);
       setFieldValue('city', selectedAddress?.state);
-      setFieldValue('postalCode', selectedAddress?.postCode);
+      setFieldValue('postCode', selectedAddress?.postCode);
       setFieldValue('contact', selectedAddress?.phone);
     }
   };
 
   const handleCheckoutSubmit = (data: FormData) => {
-    dispatch(addToShippingInfo(data));
+    const shippingData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: user?.email!,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
+      city: data.city,
+      postCode: data.postCode,
+      phoneNumber: data.contact,
+    };
+    dispatch(addToShippingInfo(shippingData));
     const obj = {
       info: false,
       ship: true,
@@ -125,33 +136,31 @@ const Information = (props: any) => {
         initialValues={update}
         onSubmit={(values, actions) => {
           const data = {
-            email: user?.email,
+            email: user?.email!,
             contact: values.contact,
-            country: values.country,
             firstName: values.firstName,
             lastName: values.lastName,
-            address: values.address,
-            addressOptional: values.addressOptional,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2!,
             city: values.city,
-            postalCode: values.postalCode,
+            postCode: values.postCode!,
           };
           const addressData = {
             phone: values.contact,
             firstName: values.firstName,
             lastName: values.lastName,
-            addressLine1: values.address,
-            addressLine2: values.addressOptional,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2,
             state: values.city,
-            postCode: values.postalCode,
+            postCode: values.postCode,
             tag: values.tag,
           };
-          if (values?.tag!) {
+          if (values?.tag) {
             userAPI.addCustomerNewAddress(addressData);
             userAPI.getCustomer(token).then((response) => {
               dispatch(storeAddresses(response?.data?.addresses));
             });
           }
-          console.log(data);
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
         }}
@@ -225,7 +234,7 @@ const Information = (props: any) => {
 
                     <FieldTemplate
                       label="Address 1"
-                      fieldID="address"
+                      fieldID="addressLine1"
                       fieldType="text"
                       placeholder=" "
                       extraClass="mb-3"
@@ -233,7 +242,7 @@ const Information = (props: any) => {
 
                     <FieldTemplate
                       label="Address 2"
-                      fieldID="addressOptional"
+                      fieldID="addressLine2"
                       fieldType="text"
                       placeholder=" "
                       extraClass="mb-3"
@@ -251,7 +260,7 @@ const Information = (props: any) => {
 
                         <FieldTemplate
                           label="Postal Code"
-                          fieldID="postalCode"
+                          fieldID="postCode"
                           fieldType="text"
                           placeholder=" "
                           extraClass="mb-3"
