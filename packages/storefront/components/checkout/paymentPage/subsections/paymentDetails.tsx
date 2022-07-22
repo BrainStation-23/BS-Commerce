@@ -154,11 +154,12 @@ const PaymentDetails: NextComponentType = () => {
       paypalPaymentId: data.cardNumber || '',
       paypalRedirectUrl: '',
     };
-    userAPI.checkout(obj).then((response: any) => {
-      toast.success('Order created successfully!');
-      router.push('/submit');
-      dispatch(deleteCart());
-      dispatch(deleteCheckoutInfo());
+    const res = userAPI.checkout(obj, router).then((response: any) => {
+      console.log(response?.data?.orderId);
+      if (response?.data?.orderId) {
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+      }
     });
   };
 

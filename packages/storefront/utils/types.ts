@@ -33,6 +33,7 @@ import {
   UpdateCustomerSuccessResponse,
   UpdateCustomerRequestBody,
 } from 'models';
+import { NextRouter } from 'next/router';
 
 export interface accordionBody {
   id: string;
@@ -108,7 +109,7 @@ export interface apiFunction {
   getPublicProductByCategoryId: (
     CategoryId: GetCustomerAllProductsQuery
   ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
-  checkout: (data: any) => Promise<IOrderResponseData | undefined>;
+  checkout: (data: any,router: NextRouter) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest

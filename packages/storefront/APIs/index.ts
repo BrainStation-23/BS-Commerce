@@ -48,6 +48,7 @@ import {
   addCustomerNewAddressGraphql,
   getCustomerGraphQL,
   updateCustomerGraphQL,
+  checkoutGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -63,6 +64,7 @@ const graphqlApi: apiFunction = {
   getPublicProductByCategoryId: getPublicProductByCategoryIDGraphql,
   getFeaturedProducts: getFeaturedProductsGraphql,
   getCategoryList: getCategoryListGraphql,
+  checkout: checkoutGraphql,
   addToWishList: addToWishlistGraphql,
   getCustomerWishlist: getCustomerWishlistGraphql,
   deleteWishlistItem: deleteWishlistItemGraphql,

@@ -43,6 +43,7 @@ import {
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 import { User } from 'utils/types';
+import { NextRouter } from 'next/router';
 
 export async function getUserRest(): Promise<User[] | undefined> {
   try {
@@ -152,12 +153,16 @@ export async function getCategoryListRest(): Promise<
   }
 }
 export async function checkoutRest(
-  data: any
+  data: any,
+  router: NextRouter
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
+    toast.success('Order created successfully!');
+    router.push('/submit');
     return res.data;
   } catch (error: any) {
+    toast.error('Order creation failed!');
     return error;
   }
 }
@@ -202,13 +207,13 @@ export async function getOrderProductsRest(
 
 export async function getOrderProductRest(
   token: string,
-  OrderId: string,
+  OrderId: string
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return res?.data;
   } catch (error: any) {
