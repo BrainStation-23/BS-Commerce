@@ -11,8 +11,8 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
       <tr key={data?.productId}>
         <td className="border border-slate-300 py-4 md:px-2 xl:px-2">
           <img
-            src={data?.photos[0]?.url}
-            alt={data?.photos[0]?.alt}
+            src={data?.photos![0]?.url}
+            alt={data?.photos![0]?.alt}
             style={{ height: '100px', width: '100px' }}
           />
         </td>

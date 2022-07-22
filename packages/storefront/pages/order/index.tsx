@@ -7,7 +7,11 @@ import DataTable from '@/components/order/dataTable';
 import Link from 'next/link';
 
 interface Props {
-  orderProducts: IOrderResponseData[];
+  orderProducts: {
+    data: {
+      orderInfo: IOrderResponseData[];
+    };
+  };
 }
 
 const Order: NextPage<Props> = ({ orderProducts }: Props) => {
@@ -22,14 +26,24 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
       />
       <section className="container mx-auto px-4 ">
         <div className="flex flex-col items-center border-b py-16">
-          <div className={storedOrderProducts?.length ? "mb-2 overflow-x-scroll w-full" : "mb-10"}>
-            {storedOrderProducts?.length ?< DataTable storedOrderProducts={storedOrderProducts}/> : "You have not placed any order yet"}
+          <div
+            className={
+              storedOrderProducts?.length
+                ? 'mb-2 w-full overflow-x-scroll'
+                : 'mb-10'
+            }
+          >
+            {storedOrderProducts?.length ? (
+              <DataTable storedOrderProducts={storedOrderProducts} />
+            ) : (
+              'You have not placed any order yet'
+            )}
           </div>
           <div className="mt-1" style={{ textAlign: 'center' }}>
-          <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
-            <Link href="/">Go to home page</Link>
-          </button>
-        </div>
+            <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
+              <Link href="/">Go to home page</Link>
+            </button>
+          </div>
         </div>
       </section>
     </>
