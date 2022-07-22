@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsString, MaxLength } from 'class-validator';
 import { UserOrderList, ProductDataWithPhoto } from 'models';
-import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
+import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
 
 export class OrderProductDto implements ProductDataWithPhoto{
     @ApiProperty({ example: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f' })

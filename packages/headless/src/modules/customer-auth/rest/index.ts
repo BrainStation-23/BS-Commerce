@@ -12,7 +12,7 @@ import {
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
