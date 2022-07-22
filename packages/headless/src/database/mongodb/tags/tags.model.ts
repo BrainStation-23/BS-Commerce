@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { Tags } from 'src/entity/tags';
+import { Tag } from 'src/entity/tags';
 
-const TagsSchema = new Schema<Tags>({
+const TagsSchema = new Schema<Tag>({
   id: {
     type: String,
     unique: true,
@@ -14,5 +14,5 @@ const TagsSchema = new Schema<Tags>({
   versionKey: false
 });
 
-const TagsModel = model<Tags>('tags', TagsSchema);
+const TagsModel = model<Tag>('tags', TagsSchema);
 export { TagsModel };

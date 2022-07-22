@@ -1,7 +1,8 @@
+import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
-import { ProductPhotoDto } from 'src/modules/product/dto/product.dto';
+import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
 import { ProductOrderDto, CreateOrderDto } from './../dto/order.create.dto';
 import { OrderEntity } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
@@ -50,7 +51,7 @@ export class OrderRepository {
     return await this.db.changeStatus(body);
   }
 
-  async getOrderList(): Promise<OrderEntity[]>{
-    return await this.db.getOrderList();
+  async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
+    return await this.db.getOrderList(query, skip, limit);
   }
 }

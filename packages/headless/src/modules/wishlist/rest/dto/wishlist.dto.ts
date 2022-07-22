@@ -1,13 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsBoolean, IsDate, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { 
+import {
     Wishlist,
     WishlistItem,
     WishlistProduct,
-     WishlistProductInfo, 
-     WishlistProductPhoto 
-    } from "models";
+    WishlistProductInfo,
+    WishlistProductPhoto
+} from "models";
 
 export class WishlistProductInfoDto implements WishlistProductInfo {
     @ApiProperty()
@@ -128,5 +128,5 @@ export class WishlistDto implements Wishlist {
     @Type(() => WishlistItemDto)
     @IsOptional()
     @IsArray()
-    items?:WishlistItemDto[];
+    items?: WishlistItemDto[];
 }
