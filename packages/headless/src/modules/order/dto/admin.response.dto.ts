@@ -30,13 +30,13 @@ export class OrderStatDto implements OrderStat{
 }
 
 export enum StatusTypeDto {
-    orderStatus ='orderStatus',
-    paymentStatus = 'paymentStatus',
-    shippingStatus= 'shippingStatus'
+    orderStatusEnums ='orderStatusEnums',
+    paymentStatusEnums = 'paymentStatusEnums',
+    shippingStatusEnums = 'shippingStatusEnums'
 }
 
 export class ChangeStatusDto { 
-    @ApiProperty({example:"84dab8b9-8461-4f2f-9863-b6934ed9cc27"})
+    @ApiProperty({example:"124645320179451"})
     orderId: string
     @ApiProperty({enum: StatusTypeDto})
     statusType: StatusTypeDto

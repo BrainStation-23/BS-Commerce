@@ -39,7 +39,7 @@ import {
   updateProductsForBrandRequestDto,
   UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @ApiTags('Product API')
 @Controller()

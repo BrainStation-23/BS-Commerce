@@ -22,7 +22,7 @@ import {
   updateWishlistItemErrorResponseDto,
   updateWishlistItemRequestBodyDto,
   updateWishlistItemSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @Controller()
 @UseGuards(new RolesGuard(['customer']))
