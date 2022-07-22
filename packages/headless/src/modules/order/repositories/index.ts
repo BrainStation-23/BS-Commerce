@@ -1,3 +1,4 @@
+import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
@@ -50,7 +51,7 @@ export class OrderRepository {
     return await this.db.changeStatus(body);
   }
 
-  async getOrderList(): Promise<OrderEntity[]>{
-    return await this.db.getOrderList();
+  async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
+    return await this.db.getOrderList(query, skip, limit);
   }
 }

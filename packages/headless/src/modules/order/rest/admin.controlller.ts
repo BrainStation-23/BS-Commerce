@@ -1,12 +1,13 @@
-import { AllOrderResponseDto } from './../dto/allOrderList.dto';
-import { Body, Controller, Get, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+
 import { RolesGuard } from 'src/guards/auth.guard';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from '../dto/admin.response.dto';
 import { OrderData } from '../dto/order.response.dto';
 import { OrderAdminService } from '../services/admin.service';
+import { AllOrderResponseDto, GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
 
 @ApiTags('Order - Admin API')
 @UseGuards(new RolesGuard(['admin']))
@@ -41,11 +42,13 @@ export class OrderAdminController {
 
     @ApiResponse({type: AllOrderResponseDto, description:"All Orders"})
     @Get('orderList')
-    async getOrderList(@Res({ passthrough: true }) res: Response){
-        const {code, ...response} = await this.orderAdminService.getOrderList();
+    async getOrderList(@Query() query: GetAllOrderQueryDto, @Res({ passthrough: true }) res: Response){
+        const {skip, limit } = query;
+        const {code, ...response} = await this.orderAdminService.getOrderList(query, skip, limit);
         res.status(code);
         return response;
     }
+
 
     @ApiResponse({type: OrderData, description:"Order details by order id"})
     @ApiParam({name: 'orderId', example:'84dab8b9-8461-4f2f-9863-b6934ed9cc27'})
