@@ -20,10 +20,10 @@ interface FormData {
   firstName: string;
   lastName: string;
   country?: string;
-  address: string;
-  addressOptional: string;
+  addressLine1: string;
+  addressLine2: string;
   city: string;
-  postalCode: string;
+  postCode: string;
   tag?: string;
 }
 
@@ -56,10 +56,10 @@ const Information = (props: any) => {
     contact: shippingInfo?.phoneNumber,
     firstName: shippingInfo?.firstName,
     lastName: shippingInfo?.lastName,
-    address: shippingInfo?.addressLine1,
-    addressOptional: shippingInfo?.addressLine2,
+    addressLine1: shippingInfo?.addressLine1,
+    addressLine2: shippingInfo?.addressLine2,
     city: shippingInfo?.city,
-    postalCode: shippingInfo?.postCode,
+    postCode: shippingInfo?.postCode,
     tag: '',
   };
 
@@ -86,10 +86,10 @@ const Information = (props: any) => {
       setShowLabel(true);
       setFieldValue('firstName', '');
       setFieldValue('lastName', '');
-      setFieldValue('address', '');
-      setFieldValue('addressOptional', '');
+      setFieldValue('addressLine1', '');
+      setFieldValue('addressLine2', '');
       setFieldValue('city', '');
-      setFieldValue('postalCode', '');
+      setFieldValue('postCode', '');
       setFieldValue('contact', '');
     } else {
       setShowLabel(false);
@@ -98,10 +98,10 @@ const Information = (props: any) => {
       });
       setFieldValue('firstName', selectedAddress?.firstName);
       setFieldValue('lastName', selectedAddress?.lastName);
-      setFieldValue('address', selectedAddress?.addressLine1);
-      setFieldValue('addressOptional', selectedAddress?.addressLine2);
+      setFieldValue('addressLine1', selectedAddress?.addressLine1);
+      setFieldValue('addressLine2', selectedAddress?.addressLine2);
       setFieldValue('city', selectedAddress?.state);
-      setFieldValue('postalCode', selectedAddress?.postCode);
+      setFieldValue('postCode', selectedAddress?.postCode);
       setFieldValue('contact', selectedAddress?.phone);
     }
   };
@@ -111,10 +111,10 @@ const Information = (props: any) => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: user?.email!,
-      addressLine1: data.address,
-      addressLine2: data.addressOptional,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
       city: data.city,
-      postCode: data.postalCode,
+      postCode: data.postCode,
       phoneNumber: data.contact,
     };
     dispatch(addToShippingInfo(shippingData));
@@ -140,19 +140,19 @@ const Information = (props: any) => {
             contact: values.contact,
             firstName: values.firstName,
             lastName: values.lastName,
-            address: values.address,
-            addressOptional: values.addressOptional!,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2!,
             city: values.city,
-            postalCode: values.postalCode!,
+            postCode: values.postCode!,
           };
           const addressData = {
             phone: values.contact,
             firstName: values.firstName,
             lastName: values.lastName,
-            addressLine1: values.address,
-            addressLine2: values.addressOptional,
+            addressLine1: values.addressLine1,
+            addressLine2: values.addressLine2,
             state: values.city,
-            postCode: values.postalCode,
+            postCode: values.postCode,
             tag: values.tag,
           };
           if (values?.tag) {
@@ -234,7 +234,7 @@ const Information = (props: any) => {
 
                     <FieldTemplate
                       label="Address 1"
-                      fieldID="address"
+                      fieldID="addressLine1"
                       fieldType="text"
                       placeholder=" "
                       extraClass="mb-3"
@@ -242,7 +242,7 @@ const Information = (props: any) => {
 
                     <FieldTemplate
                       label="Address 2"
-                      fieldID="addressOptional"
+                      fieldID="addressLine2"
                       fieldType="text"
                       placeholder=" "
                       extraClass="mb-3"
@@ -260,7 +260,7 @@ const Information = (props: any) => {
 
                         <FieldTemplate
                           label="Postal Code"
-                          fieldID="postalCode"
+                          fieldID="postCode"
                           fieldType="text"
                           placeholder=" "
                           extraClass="mb-3"

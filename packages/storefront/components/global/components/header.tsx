@@ -173,7 +173,7 @@ const Header: NextComponentType = () => {
         </div>
       </div>
       {/* Navbar */}
-      <nav className={`flex justify-center ${stickyClass}`}>
+      <nav className={`flex justify-center ${stickyClass} z-50`}>
         <div className="container px-4">
           <div className="flex flex-row items-center">
             <div
