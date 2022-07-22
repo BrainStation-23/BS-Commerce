@@ -13,7 +13,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
     <>
       <Link href={`/product/${product?.id}`} passHref>
         <div className="mb-0 overflow-hidden" key={product?.id}>
-          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
+          <div className="duration-0 group cursor-pointer tracking-wide transition hover:bg-white hover:duration-700">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative flex flex-col items-center justify-center">
                 <div className="relative overflow-hidden text-white transition-all duration-700">
@@ -21,7 +21,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                     <Picture
                       product={product}
                       height={212}
-                      width={212}
+                      width={250}
                       src={product?.photos[0]?.url}
                       alt={product?.info?.name}
                     />
@@ -46,7 +46,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                     ) : null}
                   </div>
                 </div>
-                <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
+                <div className="absolute inset-0 z-10 flex items-center justify-center text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
                   <Icon product={product} />
                 </div>
                 <ProductInfo product={product} />

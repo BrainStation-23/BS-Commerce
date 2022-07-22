@@ -43,7 +43,7 @@ export const HeaderSubCategory: React.FC<any> = (props: any) => {
                     name: category.name,
                   },
                 }}
-                as={`/collections/${category.name}`}
+                //as={`/collections/${category.name}`}
               >
                 <a className="">{category.name}</a>
               </Link>

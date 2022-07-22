@@ -14,7 +14,7 @@ export const MenuData: menuLink[] = [
   {
     name: 'home',
     link: { pathname: '/' },
-    hasSubmenu: true,
+    hasSubmenu: false,
     submenu: [
       { name: 'Home - 1', link: '/' },
       { name: 'Home - 2', link: '/' },
