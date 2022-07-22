@@ -51,6 +51,12 @@ export interface Address {
 }
 
 export interface apiFunction {
+  getOrderEnum: () => Promise<any | undefined>;
+  getAllOrderList: (orderStatus: string, paymentStatus: string, shippingStatus: string, startDate: string, endDate: string ) => Promise<any | undefined>;
+  getSingleOrderById: (id: string) => Promise<any | undefined>;
+  updateOrderStatus: (data: any) => Promise<any | undefined>;
+  updatePaymentStatus: (data: any) => Promise<any | undefined>;
+  updateShippingStatus: (data: any) => Promise<any | undefined>;
   getAllManufacturers();
   updateProduct: (
     data: any,

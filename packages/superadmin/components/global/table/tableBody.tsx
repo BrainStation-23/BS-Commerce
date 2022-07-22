@@ -5,7 +5,7 @@ const TableBody = (props: any) => {
   return (
     <>
       <tbody>
-        {items.map((row: any, index: any) => {
+        {items?.map((row: any, index: any) => {
           return (
             <React.Fragment key={index}>
               <tr>

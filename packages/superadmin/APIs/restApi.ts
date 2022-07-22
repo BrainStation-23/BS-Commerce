@@ -24,6 +24,7 @@ import {
   GetTagsResponse,
   GetManufacturersSuccessResponse,
   CreateBrandRequest,
+  IOrderResponseData,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -288,6 +289,91 @@ export async function updateManufacturerRest(
   }
 }
 
+export async function getOrderEnumRest(): Promise<any | undefined> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.orderEnum}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function getOrderListRest(): Promise<
+  any | undefined
+> {
+  try {
+    const response = await axios.get(`${apiEndPoints?.orderList}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function getOrderRest(
+  id: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.get(`${apiEndPoints?.order}/${id}`);
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updateOrderStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
+    toast.success("Status updated successfully");
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updatePaymentStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
+    toast.success("Status updated successfully");
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
+export async function updateShippingStatusRest(
+  data: string
+): Promise<
+  any | undefined
+> {
+  try {
+
+    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
+    toast.success("Status updated successfully");
+    return response.data as any;
+  } catch (error: any) {
+    toast.error(error.response.message);
+    // return error.response as getCategoryListErrorResponse;
+  }
+}
+
 export async function getCategoryListRest(): Promise<
   getCategoryListSuccessResponse | undefined
 > {
@@ -394,5 +480,40 @@ export async function mediaUploadRest(
     return response.data as UploadFileSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response.error);
+  }
+}
+
+export async function getAllOrderListRest(
+  orderStatus: string, 
+  paymentStatus: string, 
+  shippingStaus: string,
+  startDate: string, 
+  endDate: string
+): Promise<
+  IOrderResponseData[] | undefined
+> {
+  try {
+    const splitedStartDate = startDate ? startDate.replace(/:/g, "%3A") : '';
+    const splitedEndDate = endDate ? endDate.replace(/:/g, "%3A") : '';
+    const sDate = startDate ? splitedStartDate: '';
+    const eDate = endDate ? splitedEndDate: '';
+    const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`);
+    return data?.data as IOrderResponseData[];
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
+  }
+}
+
+export async function getSingleOrderByIdRest(
+  id: string
+): Promise<IOrderResponseData[] | undefined> {
+  try {
+    const { data } = await axios?.get(`${apiEndPoints?.singleOrder}/${id}`);
+    // router.push('/Manufacturer/');
+    toast.success('Order Data Loaded Successfully');
+    return data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
   }
 }

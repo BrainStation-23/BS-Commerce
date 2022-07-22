@@ -1,0 +1,95 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "product": "Product 1",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 2,
+        "product": "Product 2",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 3,
+        "product": "Product 3",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 4,
+        "product": "Product 4",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 5,
+        "product": "Product 5",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 6,
+        "product": "Product 6",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 7,
+        "product": "Product 7",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 8,
+        "product": "Product 8",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 9,
+        "product": "Product 9",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      },
+      {
+        "id": 10,
+        "product": "Product 10",
+        "sku": "123",
+        "warehouse": "Banani",
+        "item_weight": "10",
+        "item_dimensions": "2.00 x 2.00 x 2.00 [inch(es)]",
+        "quantity": "1"
+      }
+    ]
+  }
+  

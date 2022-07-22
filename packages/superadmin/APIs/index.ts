@@ -25,6 +25,14 @@ import {
   getTagsRest,
   getAllManufacturersRest,
   createBrandRest,
+  getOrderEnumRest,
+  getAllOrderListRest,
+  getSingleOrderByIdRest,
+  getOrderListRest,
+  getOrderRest,
+  updateOrderStatusRest,
+  updatePaymentStatusRest,
+  updateShippingStatusRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -46,6 +54,7 @@ import {
   // getManufacturerGraphQl,
   // deleteManufacturerGraphQl,
   // createManufacturerGraphQl,
+  getAllOrderListGraphQL,
 } from './graphQL';
 import { config } from '../config/index';
 import { apiFunction } from '../utils/types';
@@ -74,6 +83,7 @@ const graphqlApi: apiFunction = {
   mediaUpload: mediaUploadGraphQL,
   getTags: getTagsGraphQL,
   createBrand: createBrandGraphQL,
+  getAllOrderList: getAllOrderListGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -96,6 +106,10 @@ const restApi: apiFunction = {
   deleteManufacturer: deleteManufacturerRest,
   getSingleManufacturer: getSingleManufacturerRest,
   updateManufacturer: updateManufacturerRest,
+  getOrderEnum: getOrderEnumRest,
+  updateOrderStatus: updateOrderStatusRest,
+  updatePaymentStatus: updatePaymentStatusRest,
+  updateShippingStatus: updateShippingStatusRest,
   getUserProfile: getUserProfileRest,
   getBrands: getBrandsRest,
   getBrand: getBrandRest,
@@ -103,6 +117,8 @@ const restApi: apiFunction = {
   getTags: getTagsRest,
   getAllManufacturers: getAllManufacturersRest,
   createBrand: createBrandRest,
+  getAllOrderList: getAllOrderListRest,
+  getSingleOrderById: getSingleOrderByIdRest,
 };
 
 export const userAPI: apiFunction =

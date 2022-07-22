@@ -5,7 +5,7 @@ const PromotionIcon = <i className="bi bi-tags" />;
 const UsersIcon = <i className="bi bi-people-fill" />;
 const SystemIcon = <i className="bi bi-box" />;
 const ReportsIcon = <i className="bi bi-graph-up-arrow" />;
-
+const SalesIcon = <i className="bi bi-cash" />;
 export interface ISidebarSubmenu {
   name: string;
   to: string;
@@ -58,6 +58,19 @@ export const SidebarData: ISidebarData[] = [
   },
   {
     id: 2,
+    name: 'Sales',
+    to: '',
+    icon: SalesIcon,
+    subMenus: [
+      {
+        name: 'Orders',
+        to: '/Sales/Order/List',
+        icon: SubMenuIcon,
+      },
+    ],
+  },
+  {
+    id: 3,
     name: 'Promotion',
     to: '',
     icon: PromotionIcon,
@@ -75,7 +88,7 @@ export const SidebarData: ISidebarData[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     name: 'Users',
     to: '',
     icon: UsersIcon,
@@ -88,7 +101,7 @@ export const SidebarData: ISidebarData[] = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: 'System',
     to: '',
     icon: SystemIcon,
@@ -106,7 +119,7 @@ export const SidebarData: ISidebarData[] = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: 'Reports',
     to: '',
     icon: ReportsIcon,
