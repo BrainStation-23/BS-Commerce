@@ -1,6 +1,6 @@
-import type { NextComponentType } from "next";
+import type { NextComponentType } from 'next';
 
-import CategoryProducts from "@/components/cateoryProducts/categoryProducts/categoryProducts";
+import CategoryProducts from '@/components/cateoryProducts/categoryProducts/categoryProducts';
 
 const CategoryProductSegment: NextComponentType = () => {
   return (

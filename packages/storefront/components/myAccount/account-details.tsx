@@ -1,23 +1,25 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { Field, Form, Formik } from 'formik';
 
-import { useAppDispatch } from 'customHooks/hooks';
+import { UpdateCustomerRequestBody } from 'models';
+
+import { userAPI } from 'APIs';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
+import { storeCustomerDetails } from 'toolkit/userSlice';
+
+import { CustomerSchema } from './schema/customer.schema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
-import { Field, Form, Formik } from 'formik';
-import { useState } from 'react';
-import { Customer, UpdateCustomerRequestBody } from 'models';
-import { CustomerSchema } from './schema/customer.schema';
-import { userAPI } from 'APIs';
 
-interface Props {
-  customer: Customer;
-}
-
-const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
+const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const customer = useAppSelector(
+    (state) => state.persistedReducer.user.customerDetails
+  );
 
   const userData = {
     email: customer.email === undefined ? '' : customer.email,
@@ -42,6 +44,7 @@ const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
     // const email = values.email === '' ? null : values.email;
 
     const response = await userAPI.updateCustomer(values);
+    dispatch(storeCustomerDetails(response!.data));
     setEditable(false);
   };
 
@@ -175,12 +178,6 @@ const AccountDetails: React.FC<Props> = ({ customer }: Props) => {
             );
           }}
         </Formik>
-        {/* <div className="mt-32"> Bangladesh </div>
-            <Link href="/myAccount/addresses">
-              <span className="cursor-pointer hover:text-green-600">
-                View Addresses (1)
-              </span>
-            </Link> */}
       </div>
     </>
   );
