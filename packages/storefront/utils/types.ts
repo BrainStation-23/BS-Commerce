@@ -94,7 +94,7 @@ export interface apiFunction {
   deleteFromCompare: (productId: string) => {};
   getCustomerProfile: (
     token: string
-  ) => Promise<GetCustomerInformationResponse | undefined>;
+  ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
   deleteCustomerAddress: (
     addressId: string
   ) => Promise<DeleteCustomerAddressResponse | undefined>;

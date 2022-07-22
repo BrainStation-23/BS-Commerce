@@ -3,14 +3,14 @@ import { toast } from 'react-toastify';
 import { Field, Form, Formik } from 'formik';
 
 import { userAPI } from 'APIs';
-import { CustomerAddress } from 'models';
+import { Customer, CustomerAddress } from 'models';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeCustomerDetails } from 'toolkit/userSlice';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
 interface props {
-  user: any;
+  user?: CustomerAddress;
   cancelForm: Function;
-  id: string;
+  id?: string;
 }
 const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   const dispatch = useAppDispatch();
@@ -32,8 +32,8 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
       }
       cancelForm('');
       const updatedCustomer = await userAPI.getCustomerProfile(token);
-      dispatch(storeAddresses(updatedCustomer?.addresses!));
-      dispatch(storeCustomerDetails(updatedCustomer!));
+      dispatch(storeAddresses(updatedCustomer?.data.addresses!));
+      dispatch(storeCustomerDetails(updatedCustomer?.data));
     } catch (error) {
       toast.error(`Error occurred!!`);
     }
@@ -64,7 +64,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
               phone: values.phone,
               tag: values.tag,
             };
-            handleAddressSubmit(data, id, resetForm);
+            handleAddressSubmit(data, id!, resetForm);
             // actions.setSubmitting(true);
           }}
         >
