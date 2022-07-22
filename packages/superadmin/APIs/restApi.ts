@@ -484,14 +484,20 @@ export async function mediaUploadRest(
 }
 
 export async function getAllOrderListRest(
-  orderStatus: any, 
-  paymentStatus: any, 
-  shippingStaus: any
+  orderStatus: string, 
+  paymentStatus: string, 
+  shippingStaus: string,
+  startDate: string, 
+  endDate: string
 ): Promise<
   IOrderResponseData[] | undefined
 > {
   try {
-    const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}`);
+    const splitedStartDate = startDate.replace(/:/g, "%3A");
+    const splitedEndDate = endDate.replace(/:/g, "%3A");
+    const sDate = startDate ? splitedStartDate: '';
+    const eDate = endDate ? splitedEndDate: '';
+    const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`);
     return data?.data as IOrderResponseData[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

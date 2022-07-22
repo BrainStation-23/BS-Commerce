@@ -5,12 +5,11 @@ import OrderList from './List/ordersList';
 import OrderSearchWindow from './subComponent/searchWindow';
 import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
 const OrderListMain = () => {
   const [startDate, setStartDate] = useState('');
-  const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [endTime, setEndTime] = useState('');
   const [orderStatus, setOrderStatus] = useState('');
   const [paymentStatus, setPaymentStatus] = useState('');
   const [shippingStatus, setShippingStatus] = useState('');
@@ -21,7 +20,9 @@ const OrderListMain = () => {
     const res = await userAPI.getAllOrderList(
       orderStatus,
       paymentStatus,
-      shippingStatus
+      shippingStatus,
+      startDate,
+      endDate
     );
     res ? setOrderListData(res) : '';
   };
@@ -42,13 +43,11 @@ const OrderListMain = () => {
       };
       setOrderListData(order);
     } else {
-      const time1 = `${startDate} ${startTime}`;
-      const time2 = `${endDate} ${endTime}`;
-      console.log("Time=============", time1) 
+      setStartDate(moment(startDate).toJSON())
+      setEndDate(moment(endDate).toJSON())
       getAllOrderList();
     }
   };
-
   return (
     <>
       <main className="px-5">
@@ -89,7 +88,7 @@ const OrderListMain = () => {
                   >
                     Start Date
                     <input
-                      type="date"
+                      type="datetime-local"
                       className="form-control"
                       placeholder=""
                       onChange={(e) => {
@@ -105,49 +104,13 @@ const OrderListMain = () => {
                     }}
                     className="col"
                   >
-                    Start Time
-                    <input
-                      type="time"
-                      className="form-control"
-                      placeholder=""
-                      onChange={(e) => {
-                        setStartTime(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      padding: '5px',
-                      marginRight: '100px',
-                      marginBottom: '5px',
-                    }}
-                    className="col"
-                  >
                     End Date
                     <input
-                      type="date"
+                      type="datetime-local"
                       className="form-control"
                       placeholder=""
                       onChange={(e) => {
                         setEndDate(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      padding: '5px',
-                      marginRight: '100px',
-                      marginBottom: '5px',
-                    }}
-                    className="col"
-                  >
-                    End Time
-                    <input
-                      type="time"
-                      className="form-control"
-                      placeholder=""
-                      onChange={(e) => {
-                        setEndTime(e.target.value);
                       }}
                     />
                   </div>
@@ -283,88 +246,12 @@ const OrderListMain = () => {
               </div>
             </div>
 
-            {/* {console.log(
-              'Order list data from 264==================',
-              orderListData
-            )} */}
-
-            {/* {search === true ? (
-              <div>
-                {console.log('First Console Log-------------', search)}
-                {console.log(
-                  'Order list data from 275==================',
-                  orderListData
-                )}
-
-                {orderListData ? (
-                  <OrderList orderListData={orderListData} />
-                ) : (
-                  'No Order Data Found'
-                )}
-              </div>
-            ) : (
-              // <div>{console.log("From 280===================")}</div>
-              <div>
-                {console.log('Console Log-------------', search)}
-                {console.log(
-                  'Order list data from 290==================',
-                  orderListData
-                )}
-                {orderListData ? (
-                  <OrderList orderListData={orderListData} />
-                ) : (
-                  'No Order Data Found'
-                )}
-              </div>
-            )} */}
-
-            {/* {(!search) ? (
-              <div>
-                {orderListData?.length ? (
-                  <OrderList orderListData={orderListData} />
-                ) : (
-                  'No Order Data Found'
-                )}
-              </div>
-            ) : (
-              <div></div>
-            )} */}
-
             {orderListData ? (
               <OrderList orderListData={orderListData} />
             ) : (
               'No Order Data Found'
             )}
-
-            {/* {search ? (
-              <div>
-                {orderListData ? (
-                  <OrderList orderListData={orderListData} />
-                ) : (
-                  'No Order Data Found'
-                )}
-                {singleOrder ? (
-                  <>
-                    <OrderList orderListData={singleOrder} />
-                  </>
-                ) : (
-                  'No Order Found'
-                )}
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {!search ? (
-              <div>
-                {orderListData ? (
-                  <OrderList orderListData={orderListData} />
-                ) : (
-                  'No Order Data Found'
-                )}
-              </div>
-            ) : (
-              <div></div>
-            )} */}
+            
           </div>
         </div>
       </main>
