@@ -134,14 +134,14 @@ const Information = (props: any) => {
         initialValues={update}
         onSubmit={(values, actions) => {
           const data = {
-            email: user?.email,
+            email: user?.email!,
             contact: values.contact,
             firstName: values.firstName,
             lastName: values.lastName,
             address: values.address,
-            addressOptional: values.addressOptional,
+            addressOptional: values.addressOptional!,
             city: values.city,
-            postalCode: values.postalCode,
+            postalCode: values.postalCode!,
           };
           const addressData = {
             phone: values.contact,

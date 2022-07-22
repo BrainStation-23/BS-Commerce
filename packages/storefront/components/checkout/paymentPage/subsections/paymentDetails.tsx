@@ -156,7 +156,7 @@ const PaymentDetails: NextComponentType = () => {
     };
     userAPI.checkout(obj).then((response: any) => {
       toast.success('Order created successfully!');
-      //router.push('/submit');
+      router.push('/submit');
       dispatch(deleteCart());
       dispatch(deleteCheckoutInfo());
     });
