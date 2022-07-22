@@ -244,7 +244,7 @@ const OrderListMain = () => {
               </div>
             </div>
 
-            {search === true ? (
+            {search ? (
               <div>
                 {singleOrder ? (
                   <>
@@ -257,7 +257,7 @@ const OrderListMain = () => {
             ) : (
               <div></div>
             )}
-            {search === false ? (
+            {(!search) ? (
               <div>
                 {orderListData ? (
                   <OrderList orderListData={orderListData} />
