@@ -3,7 +3,7 @@ import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
-import { ChangePasswordDto, UpdatedUserDto } from '../dto';
+import { ChangePasswordDto, UpdatedUserDto } from '../rest/dto';
 import { RolesGuard } from 'src/guards/auth.guard';
 
 @UseGuards(new RolesGuard(['admin']))
