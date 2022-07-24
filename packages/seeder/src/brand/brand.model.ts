@@ -57,3 +57,4 @@ const BrandSchema = new Schema({
 const BrandModel = model('brand', BrandSchema);
 
 export { BrandModel };
+export default BrandModel;
