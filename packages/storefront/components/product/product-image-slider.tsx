@@ -10,7 +10,7 @@ interface SingleProduct {
 const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct) => {
   var isAvailable = true;
 
-  const [activeThumb, setActiveThumb] = useState<Swiper | null>(null);
+  const [activeThumb, setActiveThumb] = useState<any>(null);
 
   return (
     <>
