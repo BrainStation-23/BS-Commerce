@@ -120,7 +120,7 @@ const Header: NextComponentType = () => {
               <ChevronDownIcon />
               {categoryList ? (
                 <div
-                  className={`absolute top-[40px] left-0 z-40 flex w-11/12 flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
+                  className={`absolute top-[40px] left-0 z-40 flex w-full flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in lg:top-[48px] lg:w-56 ${
                     showAllCategory ? `h-auto lg:h-60` : 'h-0 opacity-0' //h-[350px]
                   }`}
                   // onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
