@@ -22,13 +22,13 @@ const CategorySchema = new Schema<Category>({
     default: null,
   },
   photo: {
-    url:{
-      type:String,
-      default:null,
+    url: {
+      type: String,
+      default: null,
     },
-    alt:{
-      type:String,
-      default:""
+    alt: {
+      type: String,
+      default: ""
     }
   },
   showOnHomePage: {
@@ -51,8 +51,8 @@ const CategorySchema = new Schema<Category>({
     type: Number,
     default: 0,
   },
-  rootPath:{
-    type:String,
+  rootPath: {
+    type: String,
     default: '',
   },
   ancestors: [
@@ -65,13 +65,13 @@ const CategorySchema = new Schema<Category>({
         type: String,
         required: true,
       },
-      level:{
-        type:Number,
-        required:true,
-        default:0,
+      level: {
+        type: Number,
+        required: true,
+        default: 0,
 
       },
-      _id:false
+      _id: false
     },
   ],
   meta: {
@@ -93,10 +93,12 @@ const CategorySchema = new Schema<Category>({
     },
   },
 },
-{
-  versionKey: false,
-},
+  {
+    versionKey: false,
+    timestamps: true
+  },
 );
 
 const CategoryModel = model<Category>('Category', CategorySchema);
 export { CategoryModel };
+export default CategoryModel;
