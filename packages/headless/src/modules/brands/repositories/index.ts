@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
-import { CreateBrandRequest } from 'models';
+import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
 
 import { IBrandDatabase } from './brand.database.interface';
 import { Brand } from 'src/entity/brand';
@@ -18,11 +18,11 @@ export class BrandRepository {
     }
     
     
-    async getBrandById(brandId: string): Promise<BrandDto | null> {
+    async getBrandById(brandId: string): Promise<Brand | null> {
         return await this.db.getBrandById(brandId);   
      }
 
-    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsDto> {
+    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrands> {
         return await this.db.getAllBrands(skip, limit);
     }
     
@@ -32,11 +32,11 @@ export class BrandRepository {
         return await this.db.addNewBrand(newBrand);  
     }
 
-    async updateBrandById(brandId: string, brandUpdates: UpdateBrandRequestdto): Promise<BrandDto | null>{
+    async updateBrandById(brandId: string, brandUpdates: UpdateBrandRequest): Promise<Brand | null>{
         return await this.db.updateBrandById(brandId, brandUpdates);
     }
 
-    async deleteBrandById(brandId: string): Promise<BrandDto | null>{
+    async deleteBrandById(brandId: string): Promise<Brand | null>{
         return await this.db.deleteBrandById(brandId);
     }
 }

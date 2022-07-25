@@ -2,7 +2,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as crypto from 'crypto';
-import { CreateBrandRequest, CreateBrandResponse, ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate } from "models";
+import { CreateBrandRequest, CreateBrandResponse, DeleteBrandResponse, ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate, GetAllBrandsResponse, GetBrandByIdResponse, UpdateBrandRequest, UpdateBrandResponse } from "models";
 
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
@@ -29,14 +29,14 @@ export class BrandService{
             }    
     }
     
-    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsResponseDto>{
+    async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrandsResponse>{
         const allBrands = await this.brandRepo.getAllBrands(skip, limit);
         if(!allBrands) return { error: 'COULD NOT GET THE BRANDS DUE TO SERVER ERROR', errors: null, code: HttpStatus.INTERNAL_SERVER_ERROR };
     
         return { data: allBrands, code: HttpStatus.OK };
     } 
 
-    async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequestdto): Promise<UpdateBrandResponseDto>{
+    async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequest): Promise<UpdateBrandResponse>{
         const doesBrandExist = await this.brandRepo.getBrandByName(brandFeatures.info.name);
         if(doesBrandExist) return { error: ErrorMessageUpdate.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
 
@@ -46,14 +46,14 @@ export class BrandService{
         return { code: HttpStatus.OK, data: updatedBrand};
     }
 
-    async getBrandById(brandId: string): Promise<GetBrandByIdResponseDto>{
+    async getBrandById(brandId: string): Promise<GetBrandByIdResponse>{
         const foundBrand = await this.brandRepo.getBrandById(brandId);
         if(!foundBrand) return {error: ErrorMessageGetBrandById.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return { data: foundBrand, code: HttpStatus.OK };
     }
 
-    async deleteBrandById(brandId: string): Promise<DeleteBrandResponseDto>{
+    async deleteBrandById(brandId: string): Promise<DeleteBrandResponse>{
         const deletedBrand = await this.brandRepo.deleteBrandById(brandId);
         if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
