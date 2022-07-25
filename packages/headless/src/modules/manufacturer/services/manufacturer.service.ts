@@ -103,21 +103,30 @@ export class ManufacturerService {
       );
     }
 
-    const manufacturersCount =
-      await this.manufacturerRepo.getManufacturersCount();
-    const allManufacturers = {
-      manufacturers: foundManufacturers,
-      total: manufacturersCount,
+    let allManufacturersResponse = {
+      manufacturers: [],
+      total: 0,
+      message: GetManufacturersSuccessMessages.MANUFACTURER_IS_EMPTY,
     };
 
-    return this.helper.serviceResponse.successResponse(
-      {
-        ...allManufacturers,
+    if (foundManufacturers.length === 0) {
+      return this.helper.serviceResponse.successResponse(
+        allManufacturersResponse,
+        HttpStatus.OK,
+      ) as GetManufacturersSuccessResponse;
+    } else {
+      allManufacturersResponse = {
+        manufacturers: foundManufacturers,
+        total: foundManufacturers.length,
         message:
           GetManufacturersSuccessMessages.MANUFACTURERS_LOADED_SUCCESSFULLY,
-      },
-      HttpStatus.OK,
-    ) as GetManufacturersSuccessResponse;
+      };
+
+      return this.helper.serviceResponse.successResponse(
+        allManufacturersResponse,
+        HttpStatus.OK,
+      ) as GetManufacturersSuccessResponse;
+    }
   }
 
   /**
