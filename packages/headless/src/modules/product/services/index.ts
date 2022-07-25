@@ -146,6 +146,6 @@ export class ProductService {
     const query: Record<string, any> = this.generateSearchQuery(condition);
     const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ products, count: products.length || 0 });
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 }

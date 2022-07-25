@@ -14,3 +14,4 @@ const TagsSchema = new Schema<Tags>({
 
 const TagsModel = model<Tags>('tags', TagsSchema);
 export { TagsModel };
+export default TagsModel;

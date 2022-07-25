@@ -1,8 +1,8 @@
-import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
+import { GetAllOrderQueryDto } from './../dto/allOrderList.dto';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
-import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
+import { ProductPhotoDto } from '../../product/rest/dto/product.dto';
 import { ProductOrderDto, CreateOrderDto } from './../dto/order.create.dto';
 import { OrderEntity } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
@@ -21,6 +21,18 @@ export class OrderRepository {
 
   async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
     return await this.db.addPhotoDetails(products);
+  }
+
+  addCosts(newOrder: any): OrderEntity{
+    let newProductList = [];
+    let totalProductsCost = 0;
+    newProductList = newOrder.products.map(product => {
+      let productCost = product.price * product.quantity;//individual product quantity * price
+      totalProductsCost = totalProductsCost + productCost; // total cost of all the products
+      return {...product, totalPrice: productCost};
+    });
+    
+    return {...newOrder, products: newProductList, productCost: totalProductsCost, totalCost: newOrder.shippingCost + totalProductsCost};
   }
 
   async generateUniqueId(){

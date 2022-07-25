@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ValidateNested } from 'class-validator';
+import { IsOptional, ValidateNested } from 'class-validator';
 import { IOrderResponseData } from 'models';
 import { OrderAddressDto, ProductOrderDto } from './order.create.dto';
 
@@ -28,7 +28,8 @@ export class OrderData implements IOrderResponseData {
   shippingCost: number;
 
   @ApiProperty()
-  totalCost: number;
+  @IsOptional()
+  totalCost?: number;
 
   @ApiProperty()
   stripeToken?: string;
