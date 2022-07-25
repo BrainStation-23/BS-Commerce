@@ -4,10 +4,7 @@ import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
 
 import { IBrandDatabase } from './brand.database.interface';
 import { Brand } from 'src/entity/brand';
-import { BrandDto } from 'src/modules/brands/dto/brandDto';
-import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
-import { GetAllBrandsDto } from 'src/modules/brands/dto/getAllBrandsDto';
-import { UpdateBrandRequestdto, UpdateBrandResponseDto } from 'src/modules/brands/dto/updateBrandDto';
+
 
 @Injectable()
 export class BrandRepository {
@@ -17,10 +14,9 @@ export class BrandRepository {
        return await this.db.getBrandByName(brandName);   
     }
     
-    
     async getBrandById(brandId: string): Promise<Brand | null> {
         return await this.db.getBrandById(brandId);   
-     }
+    }
 
     async getAllBrands(skip?: number, limit?: number): Promise<GetAllBrands> {
         return await this.db.getAllBrands(skip, limit);

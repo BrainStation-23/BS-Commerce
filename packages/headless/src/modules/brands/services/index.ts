@@ -6,13 +6,6 @@ import { CreateBrandRequest, CreateBrandResponse, DeleteBrandResponse, ErrorMess
 
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
-import { CreateBrandRequestDto, CreateBrandResponseDto } from 'src/modules/brands/dto/createBrandDto';
-import { GetAllBrandsResponseDto } from "src/modules/brands/dto/getAllBrandsDto";
-import { UpdateBrandRequestdto, UpdateBrandResponseDto } from "src/modules/brands/dto/updateBrandDto";
-import { BrandDto } from 'src/modules/brands/dto/brandDto';
-import { GetBrandByIdResponseDto } from "src/modules/brands/dto/getBrandByIdDto";
-import { DeleteBrandResponseDto } from "src/modules/brands/dto/deleteBrandDto";
-
 @Injectable()
 
 export class BrandService{

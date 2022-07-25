@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
 
 import { Brand } from 'src/entity/brand';
 import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
 import { BrandModel } from './brand.model';
-import { UpdateBrandResponseDto, UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
-import { GetAllBrandsDto } from 'src/modules/brands/dto/getAllBrandsDto';
-import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
-import { BrandDto } from 'src/modules/brands/dto/brandDto';
-import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
 
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {

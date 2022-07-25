@@ -16,13 +16,13 @@ import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services/index';
-import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/dto/getBrandByIdDto';
-import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto, CreateBrandResponseDto } from 'src/modules/brands/dto/createBrandDto';
-import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/dto/getAllBrandsDto';
-import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
-import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
-import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
-import { BrandDto } from '../dto/brandDto';
+import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/rest/dto/getBrandByIdDto';
+import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto, CreateBrandResponseDto } from 'src/modules/brands/rest/dto/createBrandDto';
+import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/rest/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
+import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/rest/dto/deleteBrandDto';
+import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './dto/updateBrandDto';
+import { BrandDto } from './dto/brandDto';
 
 @ApiTags('Brand API')
 @Controller('brands')
