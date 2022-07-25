@@ -16,8 +16,9 @@ export class OrderCustomerService {
     products: ProductOrderDto[]
   ): Promise<IServiceResponse<OrderEntity>> {
     const productListWithPhoto = await this.orderRepository.addPhotoDetails(products);
-    const newBody = {...body, products: productListWithPhoto}
-  
+    const newOrder = {...body, products: productListWithPhoto};
+    const newBody = this.orderRepository.addCosts(newOrder);
+
     const createOrder = await this.orderRepository.createOrder(userId, newBody);
     if (createOrder) {
       return successResponse(OrderEntity, createOrder);

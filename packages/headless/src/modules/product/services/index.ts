@@ -1,8 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import { SearchCondition, UpdateProduct } from 'src/entity/product';
 import { ProductRepository } from '../repositories';
-import { CreateProductDto } from '../dto/createProduct.dto';
 import {
   CreateProductResponse,
   CreateProductErrorMessages,
@@ -26,12 +25,13 @@ import {
   GetCustomerAllProductsResponse,
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
+  CreateProductRequest,
 } from 'models';
 @Injectable()
 export class ProductService {
   constructor(private productRepo: ProductRepository, private helper: Helper) { }
 
-  async createProduct(product: CreateProductDto): Promise<CreateProductResponse> {
+  async createProduct(product: CreateProductRequest): Promise<CreateProductResponse> {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
@@ -52,7 +52,7 @@ export class ProductService {
   async getAllProducts(condition: SearchCondition): Promise<GetAllProductsResponse> {
     const { skip, limit } = condition;
     const products = await this.productRepo.findAllProducts({}, skip, limit);
-    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
@@ -75,7 +75,7 @@ export class ProductService {
   }
 
   async updateProduct(product: UpdateProduct, productId: string): Promise<UpdateProductResponse> {
-    let getProduct = await this.productRepo.findProduct({ id: productId });
+    const getProduct = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
@@ -91,7 +91,7 @@ export class ProductService {
 
   async updateProductsForBrand(productIds: string[], brandId: string): Promise<UpdateProductsForBrandResponse> {
     const products = await this.productRepo.updateProductsForBrand(productIds, brandId);
-    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(UpdateProductsForBrandErrorMessages.CAN_NOT_UPDATE_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    if (!products) return this.helper.serviceResponse.errorResponse(UpdateProductsForBrandErrorMessages.CAN_NOT_UPDATE_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products);
   }
 
@@ -99,13 +99,13 @@ export class ProductService {
     const { skip, limit, slug, orderBy } = condition;
     const query: Record<string, any> = !slug && this.generateSearchQuery(condition);
     const products = slug ? await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit) : await this.productRepo.findAllProducts(query, skip, limit);
-    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ products, count: products.length });
+    if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ products, count: products.length || 0 });
   }
 
   generateSearchQuery(condition: SearchCondition): object {
     const { brand, categoryId, productName, isFeatured } = condition;
-    let query: Record<string, any> = {};
+    const query: Record<string, any> = {};
     if (brand !== undefined && brand !== '') {
       query.brands = brand;
     }
@@ -131,13 +131,13 @@ export class ProductService {
   async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, ...rest } = condition;
     const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
-    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
   async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
     const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
-    if (!products?.length) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
@@ -145,7 +145,7 @@ export class ProductService {
     const { skip, limit } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
     const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
-    if (products.length <= 0) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ products, count: products.length });
+    if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 }

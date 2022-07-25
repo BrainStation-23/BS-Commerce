@@ -111,3 +111,4 @@ ProductSchema.index({
 const ProductModel = model<Product>('product', ProductSchema);
 
 export { ProductModel };
+export default ProductModel;

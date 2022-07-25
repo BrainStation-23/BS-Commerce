@@ -73,3 +73,4 @@ const CustomerSchema = new Schema({
 
 const CustomerModel = model<Customer>('customer', CustomerSchema);
 export { CustomerModel };
+export default CustomerModel;

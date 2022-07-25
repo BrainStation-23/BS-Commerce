@@ -1,9 +1,39 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray } from "class-validator";
-import { IOrderCreateData } from "models";
+import { IsArray, IsNumber, IsOptional } from "class-validator";
+import { IOrderCreateData, GetAllOrderQuery } from "models";
 import { OrderAddressDto, ProductOrderDto } from "./order.create.dto";
 
+export class GetAllOrderQueryDto implements GetAllOrderQuery{
+    @ApiProperty({ required: false, type: String })
+    @IsOptional()
+    shippingStatus?: string;
+
+    @ApiProperty({ required: false, type: String })
+    @IsOptional()
+    orderStatus?: string;
+
+    @ApiProperty({ required: false, type: String })
+    @IsOptional()
+    paymentStatus?: string;
+
+    @ApiProperty({required: false, type: Date})
+    @IsOptional()
+    startDate?: Date;
+
+    @ApiProperty({required: false, type: Date})
+    @IsOptional()
+    endDate?: Date;
+
+    @ApiProperty({ required: false, type: Number })
+    @IsOptional()   
+    skip?: number
+
+    @ApiProperty({ required: false, type: Number })
+    @IsOptional()   
+    limit?: number
+
+}
 export class AllOrderListDto implements IOrderCreateData{
     @ApiProperty()
     userId?: string;
@@ -31,7 +61,8 @@ export class AllOrderListDto implements IOrderCreateData{
     shippingCost: number;
   
     @ApiProperty()
-    totalCost: number;
+    @IsOptional()
+    totalCost?: number;
   
     @ApiProperty()
     stripeToken?: string;
