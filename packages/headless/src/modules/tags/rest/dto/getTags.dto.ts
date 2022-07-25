@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject } from 'class-validator';
 import { GetTagsErrorMessages, GetTagsErrorResponse, GetTagsSuccessResponse } from 'models';
-import { TagsDto } from './tags.dto';
+import { TagDto } from './tags.dto';
 
 export class GetTagsErrorResponseDto implements GetTagsErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
@@ -24,7 +24,7 @@ export class GetTagsSuccessResponseDto implements GetTagsSuccessResponse {
     @IsNumber()
     code: number;
 
-    @ApiProperty({type: [TagsDto]})
+    @ApiProperty({type: [TagDto]})
     @IsObject()
-    data: [TagsDto];
+    data: [TagDto];
 }

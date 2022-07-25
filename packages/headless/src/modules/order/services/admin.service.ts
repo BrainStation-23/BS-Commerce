@@ -1,5 +1,7 @@
+import { AllOrderListDto, AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.dto';
+import { OrderResponseDto } from './../dto/order.response.dto';
 import { HttpStatus, Injectable } from "@nestjs/common";
-import { OrderStatusEnum, PaymentStatusEnum, ShippingStatusEnum } from "src/entity/order";
+import { OrderEntity, OrderStatusEnum, PaymentStatusEnum, ShippingStatusEnum } from "src/entity/order";
 import { errorResponse, successResponse } from "src/utils/response";
 import { IServiceResponse } from "src/utils/response/service.response.interface";
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from "../dto/admin.response.dto";
@@ -57,6 +59,19 @@ export class OrderAdminService{
         }
         return errorResponse(
             'Error in change status', null, HttpStatus.BAD_REQUEST
+        )
+    }
+
+    async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<IServiceResponse<AllOrderResponseDto>> {
+        const orderList = await this.orderRepository.getOrderList(query, skip, limit);
+        const response: AllOrderResponseDto = {
+            orders: orderList
+        }
+        if(orderList){
+            return successResponse(AllOrderResponseDto, response)
+        }
+        return errorResponse(
+            'Error in getting order list', null, HttpStatus.BAD_REQUEST
         )
     }
 }

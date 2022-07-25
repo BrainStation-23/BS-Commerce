@@ -1,13 +1,14 @@
-import { ProductOrderDto } from './../../../modules/order/dto/order.create.dto';
+import { ProductOrderDto, CreateOrderDto } from 'src/modules/order/dto/order.create.dto';
 import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
 import { OrderData } from 'src/modules/order/dto/order.response.dto';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
+import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: any): Promise<OrderEntity> {
+  async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
@@ -30,12 +31,7 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getOrderById(orderId: string): Promise<OrderData>{
-    const orderList = await OrderModel.findOne({ orderId }).lean();
-    if (orderList) {
-      delete orderList.userId;
-      return orderList;
-    }
-    return null;
+    return await OrderModel.findOne({ orderId }).lean();
   }
 
   async getOrderStatistics(): Promise<OrderStatDto>{
@@ -101,11 +97,11 @@ export class OrderDatabase implements IOrderDatabase {
     try {
       const {orderId, statusType, statusValue} = body
       let update = {}
-      if(statusType === StatusTypeDto.orderStatus){
+      if(statusType === StatusTypeDto.orderStatusEnums){
         update = {orderStatus: statusValue}
-      }else if(statusType === StatusTypeDto.paymentStatus){
+      }else if(statusType === StatusTypeDto.paymentStatusEnums){
         update = {paymentStatus: statusValue}
-      }else if(statusType === StatusTypeDto.shippingStatus){
+      }else if(statusType === StatusTypeDto.shippingStatusEnums){
         update = {shippingStatus: statusValue}
       }
 
@@ -118,4 +114,25 @@ export class OrderDatabase implements IOrderDatabase {
     
     
   }
+
+  async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
+    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate} = query;
+
+    let queryParams = {
+      ...(shippingStatus && { shippingStatus }),
+      ...(orderStatus && { orderStatus }),
+      ...(paymentStatus && { paymentStatus }),
+    }
+    
+    if(startDate || endDate) {
+        queryParams['orderedDate'] = {
+            ...(startDate && {$gte: new Date(startDate)}),
+            ...(endDate && {$lte: new Date(endDate)})
+        }
+    }
+      return await OrderModel.find(queryParams).skip(skip).limit(limit).lean();
+  }
+
 }
+
+
