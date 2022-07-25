@@ -95,34 +95,39 @@ describe('Initializing... Manufactrurer controller testing', () => {
         .get('/manufacturers')
         .set('Authorization', `Bearer ${token}`)
         .expect((res) => {
-          console.log(res.body.data.manufacturers);
-
-          expect(res.statusCode).toBe(200);
-          expect(res.body.data.message).toEqual(
-            'MANUFACTURERS_LOADED_SUCCESSFULLY',
-          );
-          expect(res.body.data.total).toEqual(expect.any(Number));
-          expect(res.body.data.manufacturers).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({
-                _id: expect.any(String),
-                id: expect.any(String),
-                name: expect.any(String),
-                description: expect.any(String),
-                displayOrder: expect.any(Number),
-                isPublished: expect.any(Boolean),
-                picture: expect.any(String),
-                seo: expect.objectContaining({
-                  SEFN: expect.any(String),
-                  metaDescription: expect.any(String),
-                  metaKeyword: expect.any(String),
-                  metaTitle: expect.any(String),
+          if (res.body.data.manufacturers.length === 0) {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.manufacturers.length).toEqual(0);
+            expect(res.body.data.message).toEqual('MANUFACTURER_IS_EMPTY');
+            expect(res.body.data.total).toEqual(0);
+          } else {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURERS_LOADED_SUCCESSFULLY',
+            );
+            expect(res.body.data.total).toEqual(expect.any(Number));
+            expect(res.body.data.manufacturers).toEqual(
+              expect.arrayContaining([
+                expect.objectContaining({
+                  _id: expect.any(String),
+                  id: expect.any(String),
+                  name: expect.any(String),
+                  description: expect.any(String),
+                  displayOrder: expect.any(Number),
+                  isPublished: expect.any(Boolean),
+                  picture: expect.any(String),
+                  seo: expect.objectContaining({
+                    SEFN: expect.any(String),
+                    metaDescription: expect.any(String),
+                    metaKeyword: expect.any(String),
+                    metaTitle: expect.any(String),
+                  }),
+                  createdAt: expect.any(String),
+                  updatedAt: expect.any(String),
                 }),
-                createdAt: expect.any(String),
-                updatedAt: expect.any(String),
-              }),
-            ]),
-          );
+              ]),
+            );
+          }
         });
     }, 30000);
   });
