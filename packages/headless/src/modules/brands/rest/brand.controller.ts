@@ -17,11 +17,12 @@ import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services/index';
 import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/dto/getBrandByIdDto';
-import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto } from 'src/modules/brands/dto/createBrandDto';
+import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto, CreateBrandResponseDto } from 'src/modules/brands/dto/createBrandDto';
 import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/dto/getAllBrandsDto';
 import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
 import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
 import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
+import { BrandDto } from '../dto/brandDto';
 
 @ApiTags('Brand API')
 @Controller('brands')
@@ -96,7 +97,7 @@ export class BrandController {
   async createBrand(
     @Body(ObjectValidationPipe) brand: CreateBrandRequestDto,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ){
     const { code, ...response } = await this.brandService.createBrand(brand);
 
     res.status(code);

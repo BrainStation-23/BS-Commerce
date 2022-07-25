@@ -7,6 +7,7 @@ import { UpdateBrandResponseDto, UpdateBrandRequestdto } from 'src/modules/brand
 import { GetAllBrandsDto } from 'src/modules/brands/dto/getAllBrandsDto';
 import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
 import { BrandDto } from 'src/modules/brands/dto/brandDto';
+import { CreateBrandRequest } from 'models';
 
 @Injectable()
 export class BrandDatabase implements IBrandDatabase {
@@ -23,7 +24,7 @@ export class BrandDatabase implements IBrandDatabase {
         return await BrandModel.findOne({ id: brandId }).lean();
     }
 
-    async addNewBrand(brand: CreateBrandRequestDto): Promise<BrandDto | null> {
+    async addNewBrand(brand: CreateBrandRequest): Promise<Brand | null> {
         return await BrandModel.create(brand);
     }
     

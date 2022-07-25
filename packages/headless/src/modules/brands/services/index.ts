@@ -2,7 +2,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as crypto from 'crypto';
-import { ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate } from "models";
+import { CreateBrandRequest, CreateBrandResponse, ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate } from "models";
 
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
@@ -18,7 +18,7 @@ import { DeleteBrandResponseDto } from "src/modules/brands/dto/deleteBrandDto";
 export class BrandService{
     constructor( private brandRepo: BrandRepository ){}
 
-    async createBrand( brand: CreateBrandRequestDto ): Promise<CreateBrandResponseDto>{
+    async createBrand( brand: CreateBrandRequest ): Promise<CreateBrandResponse>{
             const doesBrandExist = await this.brandRepo.getBrandByName(brand.info.name);
             if(doesBrandExist) return { error: ErrorMessage.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
             else {
