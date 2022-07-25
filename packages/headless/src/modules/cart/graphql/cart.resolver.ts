@@ -3,11 +3,11 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
-import { AddToCartRequestDto } from '../dto/addToCart.dto';
-import { deleteCartRequestDto } from '../dto/deleteCart.dto';
-import { updateCartItemRequestDto } from '../dto/updateCartItem.dto';
-import { deleteCartItemRequestDto } from '../dto/deleteCartItem.dto';
 import { RolesGuard } from 'src/guards/auth.guard';
+import { AddToCartRequestDto } from '../rest/dto/addToCart.dto';
+import { deleteCartRequestDto } from '../rest/dto/deleteCart.dto';
+import { updateCartItemRequestDto } from '../rest/dto/updateCartItem.dto';
+import { deleteCartItemRequestDto } from '../rest/dto/deleteCartItem.dto';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()
