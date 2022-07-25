@@ -1,0 +1,83 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AdminAddress {
+  id: String
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  country: String!
+  postCode: String!
+}
+
+type Admin {
+  id: String!
+  firstName: String!
+  lastName: String!
+  displayName: String!
+  username: String!
+  email: String!
+  provider: String
+  phone: String
+  gender: String
+  addresses: AdminAddress
+  status: String
+  active: Boolean
+  resetPasswordToken: String
+  resetPasswordExpires: Int
+}
+
+type AdminResponse {
+  error: String!
+  code: Int!
+  data: Admin!
+}
+
+type ChangePasswordResponseMessage {
+  message: String!
+}
+
+type ChangePasswordResponse {
+  error: String!
+  code: Int!
+  data: ChangePasswordResponseMessage!
+}
+
+type Query {
+  """Search and GET a single Item by ID"""
+  getUser: AdminResponse
+}
+
+type Mutation {
+  """Search and GET a single Item by ID"""
+  updateUser(data: UpdateUserInput!): AdminResponse
+
+  """Search and GET a single Item by ID"""
+  changePassword(passwordDetails: ChangePasswordInput!): ChangePasswordResponse
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  provider: String
+  phone: String
+  gender: String
+  address: AddressInput
+  status: String
+  active: Boolean
+}
+
+input AddressInput {
+  id: String
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  country: String!
+  postCode: String!
+}
+
+input ChangePasswordInput {
+  currentPassword: String!
+  newPassword: String!
+}
