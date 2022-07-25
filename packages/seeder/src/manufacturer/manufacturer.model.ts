@@ -58,4 +58,4 @@ const ManufacturerSchema = new Schema<ManufacturerWithID>(
 
 const ManufacturerModel = model<Manufacturer>('manufacturer', ManufacturerSchema);
 
-export { ManufacturerModel };
+export default ManufacturerModel;

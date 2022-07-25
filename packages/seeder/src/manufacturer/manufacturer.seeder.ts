@@ -1,4 +1,4 @@
-import { ManufacturerModel } from "./manufacturer.model";
+import ManufacturerModel from "./manufacturer.model";
 
 const manufacturers = [
     {
