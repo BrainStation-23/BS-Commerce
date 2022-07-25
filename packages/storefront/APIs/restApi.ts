@@ -170,12 +170,12 @@ export async function checkoutRest(
 
 export async function getPublicProductByCategoryIDRest(
   CategoryId: GetProductsByConditionQuery
-): Promise<GetProductsByConditionSuccessResponse | undefined> {
+): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?categoryId=${CategoryId}`
     );
-    return res.data.data.products;
+    return res.data.data;
   } catch (error: any) {
     return error;
   }
