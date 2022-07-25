@@ -20,7 +20,7 @@ You need to install MongoDB on your local computer before you can connect to it.
 - For the Installation process in Ubuntu -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-and-configure-mongodb-in-ubuntu/)
 - For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-macos/)
 
-MongoDB default settings -> the Hostname would be the **localhost**, and the port is **27017**.
+MongoDB default settings -> the Hostname would be the **`localhost`**, and the port is **`27017`**.
 
 **Install all the dependencies and projects packages**
 
