@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { CustomerProduct } from "models";
+import { CustomerProduct } from 'models';
 
 interface SingleProduct {
-  product: CustomerProduct
+  product: CustomerProduct;
 }
 
 const ProductInfo = (props: SingleProduct) => {
@@ -14,19 +14,19 @@ const ProductInfo = (props: SingleProduct) => {
         <div className="text-base font-medium text-gray-600">
           {product?.info?.name}
         </div>
-        <p className="text-xs font-['arial'] text-gray-600 py-2">
-          {product?.tags[0]}
+        <p className="py-2 font-['arial'] text-xs text-gray-600">
+          {product?.tags![0]}
         </p>
         <p className="text-base font-semibold text-green-600">
           {product?.info?.price}
           {product?.info?.oldPrice ? (
-            <span className="text-xs font-semibold text-black ml-2">
+            <span className="ml-2 text-xs font-semibold text-black">
               <s>$</s>
-              {product?.info?.oldPrice ? <s>{product?.info?.oldPrice}</s> : null}
+              {product?.info?.oldPrice ? (
+                <s>{product?.info?.oldPrice}</s>
+              ) : null}
             </span>
-          ) : (
-            null
-          )}
+          ) : null}
         </p>
       </div>
     </div>
