@@ -46,7 +46,7 @@ export const HeaderSubCategory: React.FC<Props> = ({
         >
           <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-green-600">
             <span className="grow">
-              {/* <Link
+              <Link
                 href={{
                   pathname: `/collections/${category.name}`,
                   query: {
@@ -56,8 +56,8 @@ export const HeaderSubCategory: React.FC<Props> = ({
                 }}
                 //as={`/collections/${category.name}`}
               >
-              </Link> */}
-              <a className={`${`ml-` + level} lg:ml-0`}>{category.name}</a>
+                <a className={`${`ml-` + level} lg:ml-0`}>{category.name}</a>
+              </Link>
             </span>
 
             <span className="hidden lg:block">
