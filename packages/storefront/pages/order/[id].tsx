@@ -7,31 +7,24 @@ import { userAPI } from 'APIs';
 import Detail from '@/components/order/detail';
 
 interface Props {
-  orderProducts: {
-    data: {
-      orderInfo: IOrderResponseData[];
-    };
+  orderProduct: {
+    data: IOrderResponseData
   };
 }
 
-const Details: NextPage<Props> = ({ orderProducts }: Props) => {
-  const router = useRouter();
-  const id = '' + `${router.query.id}`;
-  const storedOrderProducts = orderProducts?.data?.orderInfo;
-  const singleOrders = storedOrderProducts?.filter(
-    (order: any) => order.orderId === id
-  );
-  const singleOrder = singleOrders[0];
-
+const Details: NextPage<Props> = ({ orderProduct }: Props) => {
+  
+  const singleOrder = orderProduct?.data;
   return <div>{singleOrder ? <Detail singleOrder={singleOrder} /> : null}</div>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context?.query?.id;
   let token = cookie?.parse(context.req.headers?.cookie);
-  const orderProducts = await userAPI.getOrderProducts(token?.token);
+  const orderProduct = await userAPI.getOrderProduct(token?.token, id);
   return {
     props: {
-      orderProducts: orderProducts,
+      orderProduct: orderProduct,
     },
   };
 };

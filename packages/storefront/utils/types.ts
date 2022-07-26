@@ -85,6 +85,7 @@ export interface apiFunction {
     router: NextRouter
   ) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
+  getOrderProduct: (token: string, id: any) => Promise<IOrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest
   ) => Promise<AddToWishlistResponse | undefined>;
