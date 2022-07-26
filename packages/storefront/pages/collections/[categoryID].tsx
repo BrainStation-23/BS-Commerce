@@ -24,11 +24,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products, name }) => {
   useEffect(() => {
     handleCartItemDelete();
   });
-  return (
-    <>
-      <CategoryPageComponent categoryName={name} />
-    </>
-  );
+  return <CategoryPageComponent categoryName={name} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

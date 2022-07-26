@@ -68,7 +68,6 @@ const CategoryFilter: NextComponentType = () => {
                 accordion-button
                 relative
                 flex
-                flex
                 w-full
                 items-center
                 justify-between
@@ -115,7 +114,6 @@ const CategoryFilter: NextComponentType = () => {
                    accordion-button
                    collapsed
                    relative
-                   flex
                    flex
                    w-full
                    items-center
@@ -167,7 +165,6 @@ const CategoryFilter: NextComponentType = () => {
                    collapsed
                    relative
                    flex
-                   flex
                    w-full
                    items-center
                    justify-between
@@ -216,7 +213,6 @@ const CategoryFilter: NextComponentType = () => {
                    accordion-button
                    collapsed
                    relative
-                   flex
                    flex
                    w-full
                    items-center
@@ -267,7 +263,6 @@ const CategoryFilter: NextComponentType = () => {
                    accordion-button
                    collapsed
                    relative
-                   flex
                    flex
                    w-full
                    items-center
