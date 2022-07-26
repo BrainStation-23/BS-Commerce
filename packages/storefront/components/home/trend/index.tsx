@@ -103,10 +103,9 @@ const TrendingProducts = () => {
                   <SwiperSlide>
                     <ProductRow
                       products={[
-                        products[index],
                         products.length > getMinimumProduct()
                           ? products[0]
-                          : '',
+                          : products[index],
                       ]}
                     />
                   </SwiperSlide>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
@@ -20,7 +21,7 @@ import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
 import Modal from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
-import { useEffect } from 'react';
+import ModalWishlist from '@/components/global/components//modal/modal';
 
 interface SingleProduct {
   product: Product;
@@ -31,6 +32,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
+
+  const modalStateWishlist = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalWishlist
+  );
 
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
@@ -117,8 +125,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         toast.error('Failed to add item to wishlist');
       }
     } else {
-      toast.error('Please login to your account first.');
-      router.push('/account/sign-in');
+      // toast.error('Please login to your account first.');
+      // router.push('/account/sign-in');
+      dispatch(setWishlistModalState(!modalOn));
     }
   };
 
@@ -131,6 +140,16 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       } catch (error) {
         toast.error('Failed to remove item from wishlist');
       }
+    } else {
+      dispatch(setWishlistModalState(!modalOn));
+    }
+  };
+
+  const handleClickToWishlist = () => {
+    if (token) {
+      router.push('/wishlist');
+    } else {
+      dispatch(setWishlistModalState(!modalOn));
     }
   };
 
@@ -144,6 +163,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   return (
     <>
+      {modalStateWishlist && (
+        <ModalWishlist
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
       <Breadcrumb
         title={product?.info?.name}
         pathArray={['Home', product.info?.name]}
@@ -369,7 +396,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       className="mt-10 underline hover:text-green-600"
                       hidden={!clicked}
                     >
-                      <Link href="/wishlist">Go to wishlist</Link>
+                      <button onClick={handleClickToWishlist}>
+                        Go to wishlist
+                      </button>
                     </button>
                   </div>
                   <div>

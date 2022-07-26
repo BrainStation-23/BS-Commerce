@@ -38,21 +38,25 @@ const CategoryForm: FC<CategoryFormInterface> = (
   };
 
   const handleAddCategory = () => {
-    const categoryID = document.getElementById('SelectedCategoryIds')?.value;
-    if (categoryID == 0) {
+    const categoryID = (
+      document.getElementById('SelectedCategoryIds') as HTMLInputElement
+    )?.value;
+    if (categoryID == '0') {
       toast.error('Please Select a Category');
       return;
     }
-    const isFeatured = document.getElementById('isFeaturedCategory')?.value;
-    const displayOrder = document.getElementById('displayOrderCategory')?.value;
+    const isFeatured = (
+      document.getElementById('isFeaturedCategory') as HTMLInputElement
+    )?.value;
+    const displayOrder = parseInt(
+      (document.getElementById('displayOrderCategory') as HTMLInputElement)
+        ?.value
+    );
     categoryData.map((data: CategoryInterface, index: number) => {
       data.id == categoryID ? (
         <>
           {(data.isSelected = true)}
-          {
-            (data.isFeatured =
-              isFeatured == 'false' || isFeatured == false ? false : true)
-          }
+          {(data.isFeatured = isFeatured == 'false' ? false : true)}
           {(data.displayOrder = displayOrder)}
         </>
       ) : (
@@ -62,7 +66,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
     setCategoryData(categoryData);
     setFieldValue('isFeaturedCategory', false);
     setFieldValue('displayOrderCategory', 1);
-    setFieldValue('SelectedCategoryIds', 0);  
+    setFieldValue('SelectedCategoryIds', 0);
     setReload(!reload);
   };
   return (
@@ -99,131 +103,133 @@ const CategoryForm: FC<CategoryFormInterface> = (
         </div>
         <div className="collapse " id="categoryTab">
           <div className="card-body">
-            <div className="form-group row my-2 mb-3">
-              <div className="col-md-3">
-                <div className="label-wrapper row row-cols-auto float-md-end pe-3">
-                  <label
-                    className="col-form-label col fs-5 px-1  "
-                    htmlFor="SelectedCategoryIds"
-                    id="SelectedCategoryIds_label"
-                  >
-                    Categories<span className="required text-danger ">*</span>
-                  </label>
+            <>
+              <div className="form-group row my-2 mb-3">
+                <div className="col-md-3">
+                  <div className="label-wrapper row row-cols-auto float-md-end pe-3">
+                    <label
+                      className="col-form-label col fs-5 px-1  "
+                      htmlFor="SelectedCategoryIds"
+                      id="SelectedCategoryIds_label"
+                    >
+                      Categories<span className="required text-danger ">*</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div className="col-md-9">
-                <div className="input-group">
-                  <Field
-                    as="select"
-                    id="SelectedCategoryIds"
-                    name="SelectedCategoryIds"
-                    data-role="multiselect"
-                    className="form-control single-line border-bottom rounded-0 border-2 shadow-none"
-                    aria-disabled="false"
-                  >
-                    <option defaultValue={0} value={0} disabled={true}>
-                      --Select--
-                    </option>
-                    {categoryData?.map(
-                      (data: CategoryInterface, index: number) => {
-                        return (
-                          <option
-                            key={index}
-                            value={data.id}
-                            disabled={data.isSelected}
-                          >
-                            {data.name}
-                          </option>
-                        );
-                      }
-                    )}
-                  </Field>
-                </div>
-                <div className="errMsg text-danger text-red-600">
-                  <ErrorMessage name="SelectedCategoryIds" />
-                </div>
-              </div>
-            </div>
-
-            <FieldTemplate
-              label="Featured"
-              isRequired={false}
-              fieldID="isFeaturedCategory"
-              fieldType="checkbox"
-              fieldAs=""
-              extraClass=""
-              fieldClass="check-box mt-2  "
-            />
-            <FieldTemplate
-              label="Display Order"
-              isRequired={false}
-              fieldID="displayOrderCategory"
-              fieldType="number"
-              fieldAs=""
-              extraClass=""
-              fieldClass=""
-            />
-            <div className="mt-4 text-center">
-              <button
-                className="btn btn-primary mx-auto"
-                type="button"
-                onClick={() => handleAddCategory()}
-              >
-                Add
-              </button>
-            </div>
-            {checkTable()}
-            {showTable ? (
-              <div className="my-3 py-3">
-                <table className="table-bordered table ">
-                  <thead>
-                    <tr>
-                      <th className="py-3 text-center">Category</th>
-                      <th className="py-3 text-center">Feaured</th>
-                      <th className="py-3 text-center">Display order</th>
-                      <th className="py-3 text-center">Remove</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {categoryData?.map(
-                      (data: CategoryInterface, index: number) => {
-                        if (data.isSelected)
+                <div className="col-md-9">
+                  <div className="input-group">
+                    <Field
+                      as="select"
+                      id="SelectedCategoryIds"
+                      name="SelectedCategoryIds"
+                      data-role="multiselect"
+                      className="form-control single-line border-bottom rounded-0 border-2 shadow-none"
+                      aria-disabled="false"
+                    >
+                      <option defaultValue={0} value={'0'} disabled={true}>
+                        --Select--
+                      </option>
+                      {categoryData?.map(
+                        (data: CategoryInterface, index: number) => {
                           return (
-                            <React.Fragment key={index}>
-                              <tr>
-                                <td className="text-center">{data.value}</td>
-                                <td className="text-center">
-                                  {data.isFeatured ? (
-                                    <i className="bi bi-check-lg"></i>
-                                  ) : (
-                                    'X'
-                                  )}
-                                </td>
-                                <td className="text-center">
-                                  {data.displayOrder}
-                                </td>
-                                <td className="text-center">
-                                  <button
-                                    className="btn btn-danger mx-auto"
-                                    type="button"
-                                    onClick={() =>
-                                      handleRemoveCategory(data?.id)
-                                    }
-                                  >
-                                    Remove
-                                  </button>
-                                </td>
-                              </tr>
-                            </React.Fragment>
+                            <option
+                              key={index}
+                              value={data.id}
+                              disabled={data.isSelected}
+                            >
+                              {data.name}
+                            </option>
                           );
-                      }
-                    )}
-                  </tbody>
-                </table>
+                        }
+                      )}
+                    </Field>
+                  </div>
+                  <div className="errMsg text-danger text-red-600">
+                    <ErrorMessage name="SelectedCategoryIds" />
+                  </div>
+                </div>
               </div>
-            ) : (
-              ''
-            )}
+
+              <FieldTemplate
+                label="Featured"
+                isRequired={false}
+                fieldID="isFeaturedCategory"
+                fieldType="checkbox"
+                fieldAs=""
+                extraClass=""
+                fieldClass="check-box mt-2  "
+              />
+              <FieldTemplate
+                label="Display Order"
+                isRequired={false}
+                fieldID="displayOrderCategory"
+                fieldType="number"
+                fieldAs=""
+                extraClass=""
+                fieldClass=""
+              />
+              <div className="mt-4 text-center">
+                <button
+                  className="btn btn-primary mx-auto"
+                  type="button"
+                  onClick={() => handleAddCategory()}
+                >
+                  Add
+                </button>
+              </div>
+              {checkTable()}
+              {showTable ? (
+                <div className="my-3 py-3">
+                  <table className="table-bordered table ">
+                    <thead>
+                      <tr>
+                        <th className="py-3 text-center">Category</th>
+                        <th className="py-3 text-center">Feaured</th>
+                        <th className="py-3 text-center">Display order</th>
+                        <th className="py-3 text-center">Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {categoryData?.map(
+                        (data: CategoryInterface, index: number) => {
+                          if (data.isSelected)
+                            return (
+                              <React.Fragment key={index}>
+                                <tr>
+                                  <td className="text-center">{data.value}</td>
+                                  <td className="text-center">
+                                    {data.isFeatured ? (
+                                      <i className="bi bi-check-lg"></i>
+                                    ) : (
+                                      'X'
+                                    )}
+                                  </td>
+                                  <td className="text-center">
+                                    {data.displayOrder}
+                                  </td>
+                                  <td className="text-center">
+                                    <button
+                                      className="btn btn-danger mx-auto"
+                                      type="button"
+                                      onClick={() =>
+                                        handleRemoveCategory(data?.id)
+                                      }
+                                    >
+                                      Remove
+                                    </button>
+                                  </td>
+                                </tr>
+                              </React.Fragment>
+                            );
+                        }
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                ''
+              )}
+            </>
           </div>
         </div>
       </div>

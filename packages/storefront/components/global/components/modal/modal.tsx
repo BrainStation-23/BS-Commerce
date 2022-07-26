@@ -17,9 +17,11 @@ const Modal = ({
     setChoice(true);
     if (trigger) {
       setModalOn(false);
+      dispatch(setWishlistModalState(false));
       trigger();
     } else {
       setModalOn(false);
+      dispatch(setWishlistModalState(false));
       router.push('/account/sign-in');
     }
   };

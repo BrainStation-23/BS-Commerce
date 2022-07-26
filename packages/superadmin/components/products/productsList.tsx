@@ -5,6 +5,7 @@ import { userAPI } from '@/APIs';
 import Table from '@/components/global/table/table';
 import Pagination from '@/components/global/pagination';
 import { ProductListProps } from '@/components/products/models/index';
+import Image from 'next/image';
 
 const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,12 +52,12 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
-          <img
+          <Image
             src={`${data?.photos[0][key]}`}
             height="75px"
             width={'75px'}
             alt="..."
-          ></img>
+          />
         </td>
       ),
     },
@@ -82,10 +83,14 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       ),
     },
     {
-      label: 'Display Order',
-      path: 'displayOrder',
+      label: 'Manufacturer',
+      path: 'name',
       content: (data: any, key: any, index: any) => (
-        <td className="text-center align-middle">{data?.info[key]}</td>
+        <td className="text-center align-middle">
+          {data?.manufacturer && data?.manufacturer[key]
+            ? data?.manufacturer[key]
+            : '---'}
+        </td>
       ),
     },
     {
@@ -106,7 +111,7 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       path: 'published',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : 'X'}
         </td>
       ),
     },

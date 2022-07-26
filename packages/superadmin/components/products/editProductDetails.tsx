@@ -123,10 +123,12 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
             metaTitle: product?.meta?.title,
             metaDescription: product?.meta?.description,
             metaFriendlyPageName: product?.meta?.friendlyPageName,
-            photosUrl: product?.photos[0]?.url,
-            photosID: product?.photos[0]?.id,
-            photosTitle: product?.photos[0]?.title,
-            displayOrderPhotos: product?.photos[0]?.displayOrder,
+            photosUrl: product?.photos ? product?.photos[0]?.url : '',
+            photosID: product?.photos ? product?.photos[0]?.id : '',
+            photosTitle: product?.photos ? product?.photos[0]?.title : '',
+            displayOrderPhotos: product?.photos
+              ? product?.photos[0]?.displayOrder
+              : '',
             SelectedCategoryIds: 0,
             isFeaturedCategory: product?.categories[0]?.isFeatured,
             displayOrderCategory: product?.categories[0]?.displayOrder,
