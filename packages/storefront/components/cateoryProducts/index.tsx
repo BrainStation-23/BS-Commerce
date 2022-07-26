@@ -18,7 +18,7 @@ const CategoryPageComponent: FC<props> = (props: props) => {
   const { categoryName } = props;
 
   return (
-    <div className="mt-20">
+    <div className="">
       <PageTitle title={categoryName} />
 
       <div className="container mx-auto px-4 ">

@@ -61,7 +61,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
               <div>
                 <Link href="/cart" passHref>
                   <button
-                    className="bg-gray-200/70 py-2 px-4 uppercase"
+                    className="rounded-md bg-gray-200/70 py-2 px-4 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white"
                     onClick={onClose}
                   >
                     View Cart
@@ -69,7 +69,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                 </Link>
                 <Link href="/checkout" passHref>
                   <button
-                    className="ml-3 bg-gray-200/70 py-2 px-4 uppercase"
+                    className="ml-3 rounded-md bg-gray-200/70 py-2 px-4 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white"
                     onClick={onClose}
                   >
                     Checkout

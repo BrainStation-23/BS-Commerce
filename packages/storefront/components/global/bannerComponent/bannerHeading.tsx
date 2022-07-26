@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 interface Props {
   largeHeading: string;
@@ -12,7 +12,7 @@ interface Props {
   mediumHeadingColor?: string;
 }
 
-const BannerHeading: FC<Props> = (props: any) => {
+const BannerHeading: FC<Props> = (props) => {
   const {
     largeHeading,
     largeHeadingText,
@@ -25,24 +25,24 @@ const BannerHeading: FC<Props> = (props: any) => {
     mediumHeadingColor,
   } = props;
   return (
-    <div className="absolute m-5 left-0 top-5 sm:top-5 md:top-5 lg:top-5 md:left-4 lg:left-12 xl:left-30 2xl:left-96">
+    <div className="xl:left-30 absolute left-0 top-5 m-5 sm:top-5 md:top-5 md:left-4 lg:top-5 lg:left-12 2xl:left-96">
       {smallHeading && (
         <p
-          className={`${smallHeadingColor} text-normal sm:text-normal md:text-normal lg:text-lg xl:text-lg font-normal mb-2`}
+          className={`${smallHeadingColor} text-normal sm:text-normal md:text-normal mb-2 font-normal lg:text-lg xl:text-lg`}
         >
           {smallHeadingText}
         </p>
       )}
       {largeHeading && (
         <p
-          className={`${largeHeadingColor} text-3xl sm:text-3xl md:text-3xl lg:text-5xl xl:text-5xl font-normal lg:mb-2`}
+          className={`${largeHeadingColor} text-3xl font-normal sm:text-3xl md:text-3xl lg:mb-2 lg:text-5xl xl:text-5xl`}
         >
           {largeHeadingText}
         </p>
       )}
       {mediumHeading && (
         <p
-          className={`${mediumHeadingColor} text-normal sm:text-normal md:text-normal lg:text-3xl xl:text-3xl font-normal`}
+          className={`${mediumHeadingColor} text-normal sm:text-normal md:text-normal font-normal lg:text-3xl xl:text-3xl`}
         >
           {mediumHeadingText}
         </p>
