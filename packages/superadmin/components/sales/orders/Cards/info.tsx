@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
 import { useState, useEffect } from 'react';
 import Tooltip from './Ui Helpers/tooltip';
-import { Field, Form, Formik } from 'formik';
 import Modal from '../../service/modal';
 import { userAPI } from '@/APIs';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 interface Props {
   singleOrderInfo: any;
 }
 
 const Info: FC<Props> = ({ singleOrderInfo }) => {
-  const [orderStatusValue, setOrderStatusValue] = useState(singleOrderInfo.orderStatus);
-  const [paymentStatusValue, setPaymentStatusValue] = useState(singleOrderInfo.paymentStatus);
+  const [orderStatusValue, setOrderStatusValue] = useState(
+    singleOrderInfo.orderStatus
+  );
+  const [paymentStatusValue, setPaymentStatusValue] = useState(
+    singleOrderInfo.paymentStatus
+  );
   const [orderState, setOrderState] = useState('Pending');
   const [paymentState, setPaymentState] = useState('Pending');
   const handleOrderStatus = (event: any) => {
@@ -39,10 +40,6 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
     getAllOrderEnum();
     getAllPaymentEnum();
   }, []);
-
-  function handleSearchSubmit(data: any) {
-    console.log(data);
-  }
 
   const [modal, setModal] = useState({
     cancel_order: false,
@@ -121,13 +118,10 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
 
         <div className="row">
           <div className="col" style={{ marginLeft: '15%' }}>
-            <Tooltip
-              label={'Order status'}
-              data={orderStatusValue}
-            />
+            <Tooltip label={'Order status'} data={orderStatusValue} />
           </div>
-          <div className="col" style={{}}>
-          {modal.change_status ? (
+          <div className="col">
+            {modal.change_status ? (
               <div>
                 <button
                   className="dropdown"
@@ -136,6 +130,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                     width: '30%',
                     padding: '10px',
                     border: '1px solid gray',
+                    borderRadius: '5px',
                     textAlign: 'left',
                   }}
                   onClick={handleOrderStatus}
@@ -166,12 +161,12 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                     </a>
                   </div>
                 </button>
-                <div
+                <span
                   style={{
                     textAlign: 'left',
                     marginTop: '10px',
                     width: '25%',
-                    marginLeft: '35%',
+                    marginLeft: '5%',
                   }}
                 >
                   <button
@@ -207,7 +202,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                   ) : (
                     <></>
                   )}
-                </div>
+                </span>
               </div>
             ) : (
               <button
@@ -251,10 +246,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
         />
         <div className="row">
           <div className="col" style={{ marginLeft: '15%' }}>
-            <Tooltip
-              label={'Payment status'}
-              data={paymentStatusValue}
-            />
+            <Tooltip label={'Payment status'} data={paymentStatusValue} />
           </div>
           <div className="col" style={{}}>
             {modal.change_payment_status ? (
@@ -266,6 +258,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                     width: '30%',
                     padding: '10px',
                     border: '1px solid gray',
+                    borderRadius: '5px',
                     textAlign: 'left',
                   }}
                   onClick={handlePaymentStatus}
@@ -293,12 +286,12 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                     </a>
                   </div>
                 </button>
-                <div
+                <span
                   style={{
                     textAlign: 'left',
                     marginTop: '10px',
                     width: '25%',
-                    marginLeft: '35%',
+                    marginLeft: '5%',
                   }}
                 >
                   <button
@@ -334,7 +327,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
                   ) : (
                     <></>
                   )}
-                </div>
+                </span>
               </div>
             ) : (
               <button

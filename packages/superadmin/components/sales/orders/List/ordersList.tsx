@@ -4,12 +4,10 @@ import _ from 'lodash';
 import moment from 'moment';
 import Pagination from '../../../global/pagination';
 import Table from '../../../global/table/table';
-import { useRouter } from 'next/router';
 interface Props {
   orderListData: any;
 }
 const OrderList: FC<Props> = ({ orderListData }) => {
-  const route = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
 
@@ -31,59 +29,52 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       label: 'Order status',
       path: 'order_status',
       content: (data: any, key: any, index: any) => (
-        <div className="p-4">
+        <td className="text-center">
           <button
             className={
               data?.orderStatus === 'Completed'
-                ? 'bg-success mb-2 rounded border-0 px-3 py-2 text-white'
+                ? 'btn-sm bg-success rounded border-0 px-2 mt-1 text-white'
                 : data?.orderStatus === 'Processing'
-                ? 'bg-info mb-2 rounded border-0 px-3 py-2 text-white'
+                ? 'btn-sm bg-info rounded border-0 px-2 mt-1 text-white'
                 : data?.orderStatus === 'Cancelled'
-                ? 'bg-danger mb-2 rounded border-0 px-3 py-2 text-white'
-                : 'bg-warning mb-2 rounded border-0 px-3 py-2 text-white'
+                ? 'btn-sm bg-danger mbrounded border-0 px-2 mt-1 text-white'
+                : 'btn-sm bg-warning rounded border-0 px-2 mt-1 text-white'
             }
             disabled
           >
             <td className="text-center">{data?.orderStatus}</td>
           </button>
-        </div>
+        </td>
       ),
     },
     {
       label: 'Payment status',
       path: 'payment_status',
       content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">{data?.paymentStatus}</td>
+        <td className="text-center">{data?.paymentStatus}</td>
       ),
     },
     {
       label: 'Shipping status',
       path: 'shipping_status',
       content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">{data?.shippingStatus}</td>
+        <td className="text-center">{data?.shippingStatus}</td>
       ),
     },
     {
       label: 'Customer Name',
       path: 'customer',
       content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">
+        <td className="text-center">
           {`${data?.billingAddress.firstName} ${data?.billingAddress.lastName}`}
         </td>
-      ),
-    },
-    {
-      label: 'Customer Email',
-      path: 'customer_email',
-      content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">{data?.billingAddress.email}</td>
       ),
     },
     {
       label: 'Created on',
       path: 'created',
       content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">
+        <td className="text-center">
           {moment(data?.orderedDate).format('lll')}
         </td>
       ),
@@ -92,7 +83,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       label: 'Order total',
       path: 'order_total',
       content: (data: any, key: any, index: any) => (
-        <td className="p-4 text-center">{data?.totalCost}</td>
+        <td className="text-center">{data?.totalCost}</td>
       ),
     },
     {
@@ -120,7 +111,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
   ];
   return (
     <>
-      <main className="px-5">
+      <main className="px-1">
         <div
           className="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pt-3 pb-2"
           style={{ paddingLeft: '10px' }}

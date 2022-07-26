@@ -56,7 +56,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
         style={{
           border: '1px solid #dddddd',
           textAlign: 'left',
-          fontSize: '20px',
+          fontSize: '16px',
           padding: '20px',
           marginBottom: '20px',
         }}
@@ -82,6 +82,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
                     width: '30%',
                     padding: '10px',
                     border: '1px solid gray',
+                    borderRadius: '5px',
                     textAlign: 'left',
                   }}
                   onClick={handleShippingStatus}
@@ -112,12 +113,12 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
                     </a>
                   </div>
                 </button>
-                <div
+                <span
                   style={{
                     textAlign: 'left',
                     marginTop: '10px',
                     width: '25%',
-                    marginLeft: '35%',
+                    marginLeft: '5%',
                   }}
                 >
                   <button
@@ -153,7 +154,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
                   ) : (
                     <></>
                   )}
-                </div>
+                </span>
               </div>
             ) : (
               <button
