@@ -13,7 +13,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['admin-demo.nopcommerce.com'],
+    domains: ['admin-demo.nopcommerce.com', "cdn.shopify.com"],
   },
 };
 
@@ -22,6 +22,6 @@ module.exports = withTM(nextConfig);
 
 module.exports = {
   images: {
-    domains: ['admin-demo.nopcommerce.com'],
+    domains: ['admin-demo.nopcommerce.com', "cdn.shopify.com"],
   },
 };

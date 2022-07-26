@@ -5,6 +5,7 @@ import { userAPI } from '@/APIs';
 import Table from '@/components/global/table/table';
 import Pagination from '@/components/global/pagination';
 import { ProductListProps } from '@/components/products/models/index';
+import Image from 'next/image';
 
 const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,12 +52,12 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
-          <img
+          <Image
             src={`${data?.photos[0][key]}`}
             height="75px"
             width={'75px'}
             alt="..."
-          ></img>
+          />
         </td>
       ),
     },
