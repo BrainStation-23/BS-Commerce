@@ -12,7 +12,7 @@ const TrendingProducts = () => {
   let [filteredProduct, setProducts]: any = useState([]);
 
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts?.products
+    (state) => state.persistedReducer.product.publicProducts
   );
 
   const getMinimumProduct = () => {

@@ -11,7 +11,7 @@ import Icon from '@/components/global/components/icon';
 
 const WeekDeals: NextComponentType = () => {
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts?.products
+    (state) => state.persistedReducer.product.publicProducts
   );
   const getMinimumProduct = () => {
     const w = window.innerWidth;
