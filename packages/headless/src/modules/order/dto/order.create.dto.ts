@@ -12,7 +12,7 @@ import {
   ValidateNested
 } from 'class-validator';
 import { IOrderAddress, IOrderCreateData, IProductOrderData } from 'models';
-import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
+import { OrderProductPhotoDto } from './OrderProductPhoto.dto';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
@@ -85,14 +85,20 @@ export class ProductOrderDto implements IProductOrderData {
   price: number;
 
   //photo added for response
-  @ApiProperty({ type: [ProductPhotoDto] })
+  @ApiProperty({ type: [OrderProductPhotoDto] })
   @IsOptional()
   @IsArray()
-  photos?: ProductPhotoDto[];
+  photos?: OrderProductPhotoDto[];
   
   @ApiProperty({ example: 2 })
   @IsNumber()
   quantity: number;
+
+  @ApiProperty({ example: 2 })
+  @IsNumber()
+  @IsOptional()
+  totalPrice?: number;
+
 
   @ApiProperty({ example: 'string' })
   @IsString()
@@ -140,7 +146,8 @@ export class CreateOrderDto implements IOrderCreateData {
 
   @ApiProperty({ example: 100 })
   @IsNumber()
-  totalCost: number;
+  @IsOptional()
+  totalCost?: number;
 
   @ApiProperty({ example: '' })
   @IsString()
