@@ -52,7 +52,13 @@ export interface Address {
 
 export interface apiFunction {
   getOrderEnum: () => Promise<any | undefined>;
-  getAllOrderList: (orderStatus: string, paymentStatus: string, shippingStatus: string, startDate: string, endDate: string ) => Promise<any | undefined>;
+  getAllOrderList: (
+    orderStatus: string,
+    paymentStatus: string,
+    shippingStatus: string,
+    startDate: string,
+    endDate: string
+  ) => Promise<any | undefined>;
   getSingleOrderById: (id: string) => Promise<any | undefined>;
   updateOrderStatus: (data: any) => Promise<any | undefined>;
   updatePaymentStatus: (data: any) => Promise<any | undefined>;
@@ -91,7 +97,7 @@ export interface apiFunction {
     data: CreateManufacturerRequest,
     router: NextRouter
   ) => Promise<CreateManufacturerRequest | undefined>;
-  getManufacturer: () => Promise<Manufacturer[] | undefined>;
+  getManufacturer: (data: any) => Promise<Manufacturer[] | undefined>;
   deleteManufacturer: (
     id: any,
     router: NextRouter
