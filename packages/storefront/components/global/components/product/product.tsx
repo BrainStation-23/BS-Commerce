@@ -35,7 +35,7 @@ const Product = (props: SingleProduct) => {
                       product={product}
                       height={212}
                       width={212}
-                      src={product?.photos[0]?.url}
+                      src={product?.photos![0]?.url}
                       alt={product?.info?.name}
                     />
 
@@ -45,11 +45,11 @@ const Product = (props: SingleProduct) => {
                       </div>
                     ) : null}
 
-                    {product?.discountPercentage && product?.stock > 0 ? (
+                    {/* {product?.discountPercentage && product?.stock > 0 ? (
                       <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>{`-${product?.discountPercentage}%`}</p>
                       </div>
-                    ) : null}
+                    ) : null} */}
                     {product?.info?.oldPrice !== 0 ? (
                       <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
                         <p>{`-$${Math.abs(
