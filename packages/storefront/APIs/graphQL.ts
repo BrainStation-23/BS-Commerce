@@ -82,8 +82,8 @@ export async function getPublicProductByIdGraphql(
 }
 
 export async function getPublicProductByCategoryIDGraphql(
-  CategoryId: GetProductsByConditionQuery
-): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  categoryId: string
+): Promise<GetCustomerAllProductsResponse | undefined> {
   return undefined;
 }
 
