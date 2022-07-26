@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Details: NextPage<Props> = ({ orderProduct }: Props) => {
-  
+
   const singleOrder = orderProduct?.data;
   return <div>{singleOrder ? <Detail singleOrder={singleOrder} /> : null}</div>;
 };
@@ -21,7 +21,7 @@ const Details: NextPage<Props> = ({ orderProduct }: Props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context?.query?.id;
   let token = cookie?.parse(context.req.headers?.cookie);
-  const orderProduct = await userAPI.getOrderProduct(token?.token, id);
+  const orderProduct = await userAPI.getOrderProduct(token?.token, id as string);
   return {
     props: {
       orderProduct: orderProduct,
