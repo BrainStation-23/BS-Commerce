@@ -87,7 +87,9 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       path: 'name',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
-          {data?.manufacturer[key] ? data?.manufacturer[key] : '---'}
+          {data?.manufacturer && data?.manufacturer[key]
+            ? data?.manufacturer[key]
+            : '---'}
         </td>
       ),
     },
