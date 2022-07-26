@@ -1,20 +1,19 @@
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/grid';
+import 'swiper/css/pagination';
+import React from 'react';
+import { SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/grid";
-import "swiper/css/pagination";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
+import { useAppSelector } from 'customHooks/hooks';
 
-import { useAppSelector } from "customHooks/hooks";
-
-import SwiperGrid from "@/components/global/components/swipergrid";
-import Container from "@/components/global/components/container";
-import ProductRow from "@/components/home/bestSell/productRow.component";
+import SwiperGrid from '@/components/global/components/swipergrid';
+import Container from '@/components/global/components/container';
+import ProductRow from '@/components/home/bestSell/productRow.component';
 
 const FeaturedProducts = () => {
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts?.products
+    (state) => state.persistedReducer.product.publicProducts
   );
   const getMinimumProduct = () => {
     const w = window.innerWidth;
@@ -23,9 +22,9 @@ const FeaturedProducts = () => {
   };
   return (
     <Container className="max-w-6xl">
-      <div className="text-center mb-6">
-        <p className="text-lg font-serif italic">Recently added our store</p>
-        <h1 className="text-4xl text-bold ">Featured Products</h1>
+      <div className="mb-6 text-center">
+        <p className="font-serif text-lg italic">Recently added our store</p>
+        <h1 className="text-bold text-4xl ">Featured Products</h1>
       </div>
       <SwiperGrid
         slidesPerViewmobile={1}
