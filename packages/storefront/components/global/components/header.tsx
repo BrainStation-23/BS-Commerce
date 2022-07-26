@@ -21,7 +21,7 @@ import {
 import { MenuData } from './headerData';
 
 const Header: NextComponentType = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showAllCategory, setShowAllCategory] = useState<boolean>(false);
   const [menu, setMenu] = useState(false);
   const [stickyClass, setStickyClass] = useState('relative');
   const customerNumber = '+880 1674314359';
@@ -31,12 +31,12 @@ const Header: NextComponentType = () => {
     (state) => state.persistedReducer.category.categoryList
   );
 
-  // console.log(categories);
-  // const minNavbarHeight = `h-[` + (categories.length * 30 + 100) + `px`;
+  // console.log(categoryList);
+  // const minNavbarHeight = `h-[` + (categoryList.length * 30 + 100) + `px]`; // e.g., h-[5*30 + 100px] => h[250px]
   // console.log(minNavbarHeight);
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    setShowAllCategory(!showAllCategory);
   };
 
   const closeMenu = () => {
@@ -50,7 +50,7 @@ const Header: NextComponentType = () => {
         setStickyClass(
           'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 lg:w-full lg:shadow-lg'
         );
-        setIsOpen(false);
+        setShowAllCategory(false);
       } else {
         setStickyClass('relative');
       }
@@ -120,9 +120,12 @@ const Header: NextComponentType = () => {
               <ChevronDownIcon />
               {categoryList ? (
                 <div
-                  className={`absolute top-[40px] left-0 z-40 flex w-11/12 flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in md:w-[96%] lg:top-[48px] lg:w-56 ${
-                    isOpen ? `h-60` : 'h-0 opacity-0' //h-[350px]
+                  className={`absolute top-[40px] left-0 z-40 flex w-full flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in lg:top-[48px] lg:w-56 ${
+                    showAllCategory ? `h-auto lg:h-60` : 'h-0 opacity-0' //h-[350px]
                   }`}
+                  // onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+                  //   e.stopPropagation()
+                  // }
                 >
                   <ul>
                     {categoryList?.map((category) => (
@@ -139,7 +142,7 @@ const Header: NextComponentType = () => {
 
             {/* Menu */}
             <div
-              className={`fixed top-0 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear sm:z-40 lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
+              className={`fixed top-0 z-40 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
                 menu ? 'left-0' : '-left-72'
               }`}
             >

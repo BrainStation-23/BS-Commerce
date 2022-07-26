@@ -32,9 +32,9 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({ products, name }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cID = context?.query?.categoryId;
+  const categoryId = context.query.categoryId;
   const name = context?.query?.name;
-  const res = await userAPI.getPublicProductByCategoryId(cID);
+  const res = await userAPI.getPublicProductByCategoryId(categoryId as string);
   var products = [];
   res[0] ? (products = res) : (products = []);
   return {
