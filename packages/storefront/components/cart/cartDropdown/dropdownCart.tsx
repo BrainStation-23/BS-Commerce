@@ -127,7 +127,12 @@ const CartDropdown: NextComponentType = () => {
               </div>
             </div>
             <div className="ml-16 mb-16">
-              <button onClick={() => handleCartItemDelete(cartData)}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCartItemDelete(cartData);
+                }}
+              >
                 {cross}
               </button>
             </div>
