@@ -53,14 +53,12 @@ const FeaturedProducts = () => {
                 <SwiperSlide>
                   <ProductRow
                     products={[
-                      products[index],
                       index % 3 === 1 && products.length > getMinimumProduct()
                         ? products[0]
-                        : null,
-                      (index % 3 === 0 || index % 3 === 1) &&
-                      products.length > getMinimumProduct()
+                        : (index % 3 === 0 || index % 3 === 1) &&
+                          products.length > getMinimumProduct()
                         ? products[1]
-                        : null,
+                        : products[index],
                     ]}
                   />
                 </SwiperSlide>
