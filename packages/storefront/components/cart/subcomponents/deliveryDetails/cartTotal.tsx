@@ -59,7 +59,6 @@ const CartTotal: NextComponentType = () => {
                     </span>
                   </td>
                   <td className="mx-5 ml-20 border border-slate-300 px-10 py-5 md:px-8 lg:px-8 xl:px-8 text-center">
-
                      <p className="sm:mx-10">${totalCartPrice}</p> 
                   </td>
                 </tr>
@@ -69,7 +68,7 @@ const CartTotal: NextComponentType = () => {
                       Total
                     </span>
                   </td>
-                  <td className="border border-slate-300 px-8 py-5">
+                  <td className="border border-slate-300 px-8 py-5 text-center">
                   <p className="sm:mx-10">${totalCartPrice}</p>
                   </td>
                 </tr>

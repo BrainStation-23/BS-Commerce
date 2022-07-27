@@ -178,7 +178,7 @@ const HeaderAccount: React.FC<Properties> = () => {
             </div>
           </button>
           <span
-            className="z-20 mt-2 text-sm"
+            className="z-40 mt-2 text-sm"
             onClick={(e) => {
               if (screen.width >= 1024) showCartDropDown();
               else {
