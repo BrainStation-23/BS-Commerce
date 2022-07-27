@@ -227,11 +227,11 @@ const Header: NextComponentType = () => {
             behavior: 'smooth',
           })
         }
-        className="fixed  right-0 float-right mr-10 py-2 px-10 font-bold text-white bottom-10 border-0 "
+        className={`fixed right-0  bottom-10 z-50 float-right mr-10 border-0 py-2 px-10 font-bold text-white `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 bg-white rounded-full "
+          className="h-12 w-12 rounded-full bg-white "
           viewBox="0 0 20 20"
           fill="#40a944 "
         >
