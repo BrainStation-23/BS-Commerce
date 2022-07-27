@@ -58,7 +58,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                               <tr>
                                 <th
                                   scope="col"
-                                  className="border-r px-6 py-4 text-sm font-normal"
+                                  className={`${
+                                    comparisonProducts.length === 3
+                                      ? 'w-1/4'
+                                      : comparisonProducts.length === 2
+                                      ? 'w-1/3'
+                                      : 'w-1/2'
+                                  } border-r px-6 py-4 text-sm font-normal`}
                                 >
                                   Action
                                 </th>
@@ -67,7 +73,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                     <React.Fragment key={product.id}>
                                       <th
                                         scope="col"
-                                        className="border-r px-6 py-4 text-sm font-normal"
+                                        className={`${
+                                          comparisonProducts.length === 3
+                                            ? 'w-1/4'
+                                            : comparisonProducts.length === 2
+                                            ? 'w-1/3'
+                                            : 'w-1/2'
+                                        } border-r px-6 py-4 text-sm font-normal`}
                                       >
                                         <button
                                           onClick={() => {
@@ -111,7 +123,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="border-r p-6 font-normal">
+                                      <td className="border-r p-6 font-normal align-top">
                                         <img
                                           src={product?.photos![0]?.url}
                                           alt={product?.info?.name}
@@ -120,12 +132,12 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                           className="m-auto"
                                         />
                                         {product?.info?.oldPrice ? (
-                                          <p className="text-sm font-bold text-red-600">
+                                          <span className="text-sm font-bold text-red-600">
                                             On Sale{' '}
                                             <span className="font-normal">
                                               ${product.info.price}
                                             </span>
-                                          </p>
+                                          </span>
                                         ) : (
                                           <span className="font-normal text-red-600">
                                             ${product.info.price}
