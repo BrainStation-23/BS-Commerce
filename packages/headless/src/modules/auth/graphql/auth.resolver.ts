@@ -1,5 +1,5 @@
 import { AuthService } from '../services';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import {
   AdminSignUpResponse,
   AdminSignInInput,
@@ -13,7 +13,6 @@ export class AuthResolver {
 
   @Mutation(returns => AdminSignUpResponse)
   async signUp(@Args('admin') admin: AdminSignUpInput) {
-    console.log(admin)
     return await this.authService.signUp(admin);
   }
 

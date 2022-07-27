@@ -4,6 +4,7 @@ import {
   SignInRequest,
   Token,
 } from 'models';
+import { EmailCheckScalar } from 'src/internal/graphql/scalar/email.scalar';
 
 @InputType()
 export class AdminSignUpInput implements CreateUserRequest {
@@ -13,7 +14,7 @@ export class AdminSignUpInput implements CreateUserRequest {
   @Field()
   lastName: string;
 
-  @Field()
+  @Field(()=> EmailCheckScalar)
   email: string;
 
   @Field()

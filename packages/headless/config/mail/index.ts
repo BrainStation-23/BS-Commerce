@@ -1,4 +1,4 @@
-const { NODEMAILER_HOST, NODEMAILER_USER, NODEMAILER_PASS, NODEMAILER_PORT, NODEMAILER_SERVICE, NODEMAILER_SECURE } = process.env;
+const { NODEMAILER_HOST, NODEMAILER_USER, NODEMAILER_PASS, NODEMAILER_PORT, NODEMAILER_SERVICE, NODEMAILER_SECURE, EMAIL_REGEX } = process.env;
 
 export const nodemailerConfig = {
     user: NODEMAILER_USER!,
@@ -12,4 +12,8 @@ export const nodemailerConfig = {
             pass: NODEMAILER_PASS!
         }
     }
+}
+
+export const emailRegex = {
+    regex: EMAIL_REGEX || /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
