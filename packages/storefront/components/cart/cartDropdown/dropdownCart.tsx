@@ -167,7 +167,7 @@ const CartDropdown: NextComponentType = () => {
               <p className="badge badge-light ">{cartData?.length}</p>
             </button>
           </div>
-          {cartTotal && (
+          {cartTotal && document.body.clientWidth >= 1024 ? (
             <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
               <div className=" rounded-md bg-white">
                 {/* new div starts here */}
@@ -216,6 +216,8 @@ const CartDropdown: NextComponentType = () => {
                 ) : null}
               </div>
             </div>
+          ) : (
+            ''
           )}
         </div>
       </div>
