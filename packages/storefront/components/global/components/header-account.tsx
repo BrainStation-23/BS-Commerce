@@ -180,7 +180,7 @@ const HeaderAccount: React.FC<Properties> = () => {
           <span
             className="z-30 mt-2 text-sm"
             onClick={(e) => {
-              if (screen.width >= 1024) showCartDropDown();
+              if (document.body.clientWidth >= 1024) showCartDropDown();
               else {
                 router.push('/cart');
               }
