@@ -91,9 +91,11 @@ const ProductDescription: React.FC<SingleProduct> = ({
           <div className={description}>{product.info.fullDescription}</div>
           {/* <p className={review}>Review</p> */}
           {/* <p className={shipping}>{shipping_policy}</p> */}
-          <div className={size_chart}>
-            <h4 className="font-semibold">Size Chart</h4>
-            <img alt="size" className="" src={size} />
+          <div className={`${size_chart} w-full`}>
+            <h4 className="font-semibold ">Size Chart</h4>
+            <div className="flex justify-center">
+              <img alt="size" className="" src={size} />
+            </div>
           </div>
         </div>
       </div>
