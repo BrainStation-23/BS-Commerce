@@ -108,7 +108,7 @@ const Header: NextComponentType = () => {
       </div>
 
       {/* Navbar */}
-      <nav className={`flex justify-center ${stickyClass} z-30`}>
+      <nav className={`flex justify-center ${stickyClass} z-20`}>
         <div className="container px-4">
           <div className="flex flex-row items-center">
             <div
@@ -156,7 +156,7 @@ const Header: NextComponentType = () => {
               <div className="w-full lg:hidden">
                 <Search placeholder="Search our store" />
               </div>
-              <div className="lg:hidden" onClick={closeMenu}>
+              <div className="lg:hidden" >
                 <HeaderAccount />
               </div>
               <div className="flex flex-row items-center text-right text-sm text-gray-900 lg:hidden">
