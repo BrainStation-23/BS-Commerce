@@ -14,7 +14,7 @@ export const GraphqlInitModule = () => {
       cors: { origin: '*', credentials: true, },
       formatError: (error: any) => {
         return {
-          message: error.extensions?.exception?.response?.message || error?.message,
+          message: error.extensions?.exception?.response?.error || error?.message,
           code: error.extensions?.code || "SERVER_ERROR",
         };
       },

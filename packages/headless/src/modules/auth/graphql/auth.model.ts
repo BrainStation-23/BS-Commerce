@@ -1,10 +1,11 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { IsEmail, MinLength } from 'class-validator';
 import {
   CreateUserRequest,
   SignInRequest,
   Token,
+  SignInErrorMessages,
 } from 'models';
-import { EmailCheckScalar } from 'src/internal/graphql/scalar/email.scalar';
 
 @InputType()
 export class AdminSignUpInput implements CreateUserRequest {
@@ -14,10 +15,14 @@ export class AdminSignUpInput implements CreateUserRequest {
   @Field()
   lastName: string;
 
-  @Field(()=> EmailCheckScalar)
+  @Field()
+  @IsEmail()
   email: string;
 
   @Field()
+  @MinLength(6, {
+    message: 'Password is too short. Minimal length is $constraint1 characters',
+  })
   password: string;
 }
 
@@ -27,6 +32,9 @@ export class AdminSignInInput implements SignInRequest {
   username: string;
 
   @Field()
+  @MinLength(6, {
+    message: SignInErrorMessages.INVALID_CREDENTIALS,
+  })
   password: string;
 }
 

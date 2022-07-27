@@ -34,12 +34,9 @@ type Mutation {
 input AdminSignUpInput {
   firstName: String!
   lastName: String!
-  email: EmailAddress!
+  email: String!
   password: String!
 }
-
-"""A Valid Email Address"""
-scalar EmailAddress
 
 input AdminSignInInput {
   username: String!
