@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { useAppDispatch } from 'customHooks/hooks';
@@ -22,8 +23,21 @@ const ShowData = ({ data }: any) => {
             height={90}
           />
         </td>
-        <td className="border border-slate-300 md:px-2 lg:px-20">
-          {data?.product?.info?.name}
+        <td className="border border-slate-300 text-center md:px-2 lg:px-20">
+          <Link
+            href={{
+              pathname: `/product/${data?.product?.info.name}`,
+              query: {
+                id: data?.product?.id,
+                name: data?.product?.info.name,
+              },
+            }}
+            passHref
+          >
+            <p className="hover:cursor-pointer hover:text-[#40a944]">
+              {data?.product?.info?.name}
+            </p>
+          </Link>
         </td>
         <td className="border border-slate-300 px-10 py-14">
           <span className="flex justify-center">
@@ -86,6 +100,7 @@ const ShowData = ({ data }: any) => {
         <td className="border border-slate-300 py-14 md:px-2 lg:px-10 ">
           <div className="flex justify-center">
             <button
+              className="font-bold text-[#40a944]"
               onClick={() => {
                 dispatch(deleteCartItem(data));
               }}

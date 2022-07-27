@@ -18,7 +18,7 @@ const DeilveryDetails: NextComponentType = () => {
         {/* <div className="px-4">
           <DeilveryInstructions />
         </div> */}
-        <div className="float-right px-4">
+        <div className="px-4 md:float-right">
           <CartTotal />
         </div>
       </div>

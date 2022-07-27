@@ -44,12 +44,12 @@ const CartTotal: NextComponentType = () => {
       )}
       <div className="grid lg:row-span-2 xl:row-span-2">
         <div className="overflow-hidden shadow-lg">
-          <div className="w-full bg-black">
-            <div className="px-4 py-1 text-base font-medium text-white">
+          <div className="w-full bg-[#40a944]">
+            <div className="px-6 py-1 text-base font-medium text-white">
               CART TOTALS
             </div>
           </div>
-          <div className="flex justify-center p-6">
+          <div className="flex justify-center px-6 py-5">
             <table className="border-collapse border border-slate-400">
               <tbody>
                 <tr>
@@ -77,7 +77,7 @@ const CartTotal: NextComponentType = () => {
               </tbody>
             </table>
           </div>
-          <div className="flex justify-end py-4 px-2">
+          <div className="flex justify-end px-2 pb-4">
             <button
               onClick={handleClickProceed}
               style={{
@@ -85,7 +85,7 @@ const CartTotal: NextComponentType = () => {
                 height: '39px',
                 width: '200px',
               }}
-              className="bg-black text-xs hover:bg-green-600"
+              className="bg-black text-xs hover:bg-[#40a944]"
             >
               PROCEED TO CHECKOUT
             </button>
