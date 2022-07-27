@@ -9,6 +9,7 @@ import { persistor, store } from "../store";
 import { config } from "config";
 
 import Layout from "@/components/layout";
+import BackToTopButton from "./BackToTopButton";
 
 Axios.defaults.baseURL = config?.restPrefix;
 
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PersistGate loading={null} persistor={persistor}>
         <Layout>
           <Component {...pageProps} />
+          <BackToTopButton/>
         </Layout>
       </PersistGate>
     </Provider>
