@@ -11,11 +11,6 @@ import {
 export class AuthResolver {
   constructor(private authService: AuthService) { }
 
-  @Query(() => String)
-  sayHello(): string {
-    return 'Hello World!';
-  }
-
   @Mutation(returns => AdminSignUpResponse)
   async signUp(@Args('admin') admin: AdminSignUpInput) {
     return await this.authService.signUp(admin);
