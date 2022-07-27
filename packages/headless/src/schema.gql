@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @email on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+type AdminSignInResponseToken {
+  token: String!
+}
+
+type AdminSignUpResponseMessage {
+  message: String!
+}
+
+type AdminSignUpResponse {
+  error: String
+  code: Int!
+  data: AdminSignUpResponseMessage
+}
+
+type AdminSignInResponse {
+  error: String
+  code: Int!
+  data: AdminSignInResponseToken
+}
+
+type Query {
+  sayHello: String!
+}
+
+type Mutation {
+  signUp(admin: AdminSignUpInput!): AdminSignUpResponse!
+  signIn(data: AdminSignInInput!): AdminSignInResponse!
+}
+
+input AdminSignUpInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input AdminSignInInput {
+  username: String!
+  password: String!
+}

@@ -1,18 +1,29 @@
 import { AuthService } from '../services';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { CreateUserDto, SignInDataDto } from '../rest/dto';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  AdminSignUpResponse,
+  AdminSignInInput,
+  AdminSignInResponse,
+  AdminSignUpInput
+} from './auth.model';
 
 @Resolver()
 export class AuthResolver {
   constructor(private authService: AuthService) { }
 
-  @Mutation()
-  async signUp(@Args('user') user: CreateUserDto) {
-    return await this.authService.signUp(user);
+  @Query(() => String)
+  sayHello(): string {
+    return 'Hello World!';
   }
 
-  @Mutation()
-  async signIn(@Args('data') data: SignInDataDto) {
+  @Mutation(returns => AdminSignUpResponse)
+  async signUp(@Args('admin') admin: AdminSignUpInput) {
+    console.log(admin)
+    return await this.authService.signUp(admin);
+  }
+
+  @Mutation(returns => AdminSignInResponse)
+  async signIn(@Args('data') data: AdminSignInInput) {
     return await this.authService.signIn(data);
   }
 }
