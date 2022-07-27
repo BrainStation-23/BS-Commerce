@@ -32,7 +32,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
       {showModal ? (
         <>
           <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity">
-            <div className="relative my-auto mx-auto overflow-auto">
+            <div className="relative my-auto mx-auto overflow-x-auto overflow-y-auto md:w-3/4 md:overflow-x-hidden">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
                   <h3 className="mr-3 text-xl font-bold">Compare Product</h3>
@@ -53,7 +53,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
-                          <table className="border text-center">
+                          <table className="w-full border text-center md:table-fixed">
                             <thead className="border-b">
                               <tr>
                                 <th
@@ -117,6 +117,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                           alt={product?.info?.name}
                                           height={100}
                                           width={100}
+                                          className="m-auto"
                                         />
                                         {product?.info?.oldPrice ? (
                                           <p className="text-sm font-bold text-red-600">
@@ -152,7 +153,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                   return (
                                     <React.Fragment key={product.id}>
                                       <td className="border-r px-6 py-4 text-sm font-normal">
-                                        {product?.meta?.description}
+                                        {product?.info.shortDescription}
                                       </td>
                                     </React.Fragment>
                                   );
