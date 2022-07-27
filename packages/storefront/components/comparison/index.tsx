@@ -49,7 +49,15 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                   </button>
                 </div>
                 <div className="flex-auto p-6">
-                  <div className="grid">
+                  <div
+                    className={`${
+                      comparisonProducts.length === 3
+                        ? 'grid-col-4'
+                        : comparisonProducts.length === 2
+                        ? 'grid-col-3'
+                        : 'grid-col-2'
+                    } grid`}
+                  >
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -58,7 +66,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                               <tr>
                                 <th
                                   scope="col"
-                                  className={`col border-r px-6 py-4 text-sm font-normal`}
+                                  className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                 >
                                   Action
                                 </th>
@@ -67,7 +75,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                     <React.Fragment key={product.id}>
                                       <th
                                         scope="col"
-                                        className={`col border-r px-6 py-4 text-sm font-normal`}
+                                        className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                       >
                                         <button
                                           onClick={() => {
@@ -111,35 +119,37 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="border-r p-6 align-top font-normal">
-                                        <img
-                                          src={product?.photos![0]?.url}
-                                          alt={product?.info?.name}
-                                          height={100}
-                                          width={100}
-                                          className="m-auto"
-                                        />
-                                        {product?.info?.oldPrice ? (
-                                          <span className="text-sm font-bold text-red-600">
-                                            On Sale{' '}
-                                            <span className="font-normal">
+                                      <td className="px-auto border-r align-top  font-normal">
+                                        <div>
+                                          <img
+                                            src={product?.photos![0]?.url}
+                                            alt={product?.info?.name}
+                                            height={100}
+                                            width={100}
+                                            className="m-auto"
+                                          />
+                                          {product?.info?.oldPrice ? (
+                                            <>
+                                              <span className="text-sm text-red-600">
+                                                On Sale <br /> $
+                                                {product.info.price}
+                                              </span>
+                                            </>
+                                          ) : (
+                                            <span className="font-normal text-red-600">
                                               ${product.info.price}
                                             </span>
-                                          </span>
-                                        ) : (
-                                          <span className="font-normal text-red-600">
-                                            ${product.info.price}
-                                          </span>
-                                        )}
-                                        <br />
-                                        <Link
-                                          href={`/product/${product.id}`}
-                                          passHref
-                                        >
-                                          <a className="text-xs text-gray-500/100 hover:text-red-600">
-                                            VIEW PRODUCT
-                                          </a>
-                                        </Link>
+                                          )}
+                                          <br />
+                                          <Link
+                                            href={`/product/${product.id}`}
+                                            passHref
+                                          >
+                                            <a className="text-xs text-gray-500/100 hover:text-red-600">
+                                              VIEW PRODUCT
+                                            </a>
+                                          </Link>
+                                        </div>
                                       </td>
                                     </React.Fragment>
                                   );
