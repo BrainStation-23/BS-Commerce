@@ -24,12 +24,59 @@ const List = () => {
           </Link>
         </div>
         <div>
-          <ManufacturerSearchWindow />
+          <div>
+            <div className="card border-1 mt-3 rounded">
+              <div className="card-header">
+                <span className="ms-2 fs-4">Search</span>
+              </div>
+              <div className="card-body">
+                <div className="form-group row py-2">
+                  <div className="col-md-3">
+                    <div className="label-wrapper row row-cols-auto float-md-end px-2">
+                      <label
+                        className="col-form-label"
+                        htmlFor="GoDirectlyToSku"
+                      >
+                        Manufacturer Name
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="Field-group Field-group-short ">
+                      <div className="row">
+                        <input
+                          className="border-bottom form-control rounded-0 border-3 border border-0 shadow-none"
+                          id="GoDirectlyToSku"
+                          name="GoDirectlyToSku"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex justify-content-center flex-wrap">
+                <button
+                  type="submit"
+                  className="btn btn-primary px-5"
+                  style={{
+                    background: '#3c8dbc',
+                    border: 'none',
+                    marginBottom: '20px',
+                  }}
+                >
+                  <span>
+                    <i className="bi bi-search me-2"></i>
+                  </span>
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
 
           {manufactureData ? (
             <ManufactureList
               manufactureData={manufactureData}
-              // getAllManufacturers={getAllManufacturers}
               setManufactureData={setManufactureData}
             />
           ) : (

@@ -207,6 +207,7 @@ export async function getManufacturerRest(
 ): Promise<Manufacturer[] | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`);
+    toast.success(data.data.message);
     return data?.data as Manufacturer[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -299,9 +300,7 @@ export async function getOrderEnumRest(): Promise<any | undefined> {
   }
 }
 
-export async function getOrderListRest(): Promise<
-  any | undefined
-> {
+export async function getOrderListRest(): Promise<any | undefined> {
   try {
     const response = await axios.get(`${apiEndPoints?.orderList}`);
     return response.data as any;
@@ -311,13 +310,8 @@ export async function getOrderListRest(): Promise<
   }
 }
 
-export async function getOrderRest(
-  id: string
-): Promise<
-  any | undefined
-> {
+export async function getOrderRest(id: string): Promise<any | undefined> {
   try {
-
     const response = await axios.get(`${apiEndPoints?.order}/${id}`);
     return response.data as any;
   } catch (error: any) {
@@ -328,13 +322,13 @@ export async function getOrderRest(
 
 export async function updateOrderStatusRest(
   data: string
-): Promise<
-  any | undefined
-> {
+): Promise<any | undefined> {
   try {
-
-    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
-    toast.success("Status updated successfully");
+    const response = await axios.patch(
+      `${apiEndPoints?.updateOrderStatus}`,
+      data
+    );
+    toast.success('Status updated successfully');
     return response.data as any;
   } catch (error: any) {
     toast.error(error.response.message);
@@ -344,13 +338,13 @@ export async function updateOrderStatusRest(
 
 export async function updatePaymentStatusRest(
   data: string
-): Promise<
-  any | undefined
-> {
+): Promise<any | undefined> {
   try {
-
-    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
-    toast.success("Status updated successfully");
+    const response = await axios.patch(
+      `${apiEndPoints?.updateOrderStatus}`,
+      data
+    );
+    toast.success('Status updated successfully');
     return response.data as any;
   } catch (error: any) {
     toast.error(error.response.message);
@@ -360,13 +354,13 @@ export async function updatePaymentStatusRest(
 
 export async function updateShippingStatusRest(
   data: string
-): Promise<
-  any | undefined
-> {
+): Promise<any | undefined> {
   try {
-
-    const response = await axios.patch(`${apiEndPoints?.updateOrderStatus}`, data);
-    toast.success("Status updated successfully");
+    const response = await axios.patch(
+      `${apiEndPoints?.updateOrderStatus}`,
+      data
+    );
+    toast.success('Status updated successfully');
     return response.data as any;
   } catch (error: any) {
     toast.error(error.response.message);
@@ -484,20 +478,20 @@ export async function mediaUploadRest(
 }
 
 export async function getAllOrderListRest(
-  orderStatus: string, 
-  paymentStatus: string, 
+  orderStatus: string,
+  paymentStatus: string,
   shippingStaus: string,
-  startDate: string, 
+  startDate: string,
   endDate: string
-): Promise<
-  IOrderResponseData[] | undefined
-> {
+): Promise<IOrderResponseData[] | undefined> {
   try {
-    const splitedStartDate = startDate ? startDate.replace(/:/g, "%3A") : '';
-    const splitedEndDate = endDate ? endDate.replace(/:/g, "%3A") : '';
-    const sDate = startDate ? splitedStartDate: '';
-    const eDate = endDate ? splitedEndDate: '';
-    const { data } = await axios?.get(`${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`);
+    const splitedStartDate = startDate ? startDate.replace(/:/g, '%3A') : '';
+    const splitedEndDate = endDate ? endDate.replace(/:/g, '%3A') : '';
+    const sDate = startDate ? splitedStartDate : '';
+    const eDate = endDate ? splitedEndDate : '';
+    const { data } = await axios?.get(
+      `${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`
+    );
     return data?.data as IOrderResponseData[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
