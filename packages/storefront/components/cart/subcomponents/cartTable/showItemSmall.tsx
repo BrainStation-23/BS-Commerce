@@ -53,9 +53,14 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           <h5 className="mb-2 mb-3 text-lg font-bold text-gray-900">
             {data?.product?.info?.name}
           </h5>
-          <div>
-            <div className="w-25 mb-2 box-content border-2 py-2">
-              <div className="flex justify-between">
+          <div className="mb-4 flex gap-x-3">
+            <div className="py-2">
+              <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
+                ${data?.product?.info?.price}
+              </p>
+            </div>
+            <div className="w-25 mb-1 box-content border-2 py-2">
+              <div className="flex justify-between text-center">
                 <button
                   className="mx-4"
                   disabled={itemToUpdate.quantity <= 1 ? true : false}
@@ -101,11 +106,6 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                 </button>
               </div>
               <span></span>
-            </div>
-            <div className="py-2">
-              <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                ${data?.product?.info?.price}
-              </p>
             </div>
           </div>
         </div>
