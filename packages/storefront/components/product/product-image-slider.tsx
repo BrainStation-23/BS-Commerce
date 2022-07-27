@@ -7,7 +7,9 @@ interface SingleProduct {
   product: Product;
 }
 
-const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct) => {
+const ProductImagesSlider: React.FC<SingleProduct> = ({
+  product,
+}: SingleProduct) => {
   var isAvailable = true;
 
   const [activeThumb, setActiveThumb] = useState<any>(null);
@@ -34,7 +36,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct
               />
             </div>
             {product?.info?.oldPrice > 0 ? (
-              <div className="border text-xs border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 left-3 px-1 py-1 text-white">
+              <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-3 py-1 text-base text-white">
                 <p>Sale</p>
               </div>
             ) : null}
@@ -44,7 +46,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct
               </div>
             ) : null} */}
             {isAvailable && product?.info.oldPrice > 0 && (
-              <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
+              <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-3 py-1 text-base text-white">
                 <p>{`-$${Math.abs(
                   product?.info.oldPrice - product?.info.price
                 )}`}</p>
@@ -54,10 +56,9 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({ product }: SingleProduct
         ))}
       </Swiper>
 
-      <div className="ml-8 md:ml-16 w-4/5">
+      <div className="ml-8 w-4/5 md:ml-16">
         <Swiper
-          onSwiper={setActiveThumb}  //onSwiper={()=>setActiveThumb}
-
+          onSwiper={setActiveThumb} //onSwiper={()=>setActiveThumb}
           loop={true}
           navigation={true}
           spaceBetween={10}

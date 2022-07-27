@@ -56,12 +56,12 @@ const ProductDescription: React.FC<SingleProduct> = ({
             <button onClick={handleDescription} className="mx-5 font-semibold">
               Description
             </button>
-            <button onClick={handleReview} className="mx-5 font-semibold">
+            {/* <button onClick={handleReview} className="mx-5 font-semibold">
               Review
-            </button>
-            <button onClick={handleShipping} className="mx-5 font-semibold">
+            </button> */}
+            {/* <button onClick={handleShipping} className="mx-5 font-semibold">
               Shipping Policy
-            </button>
+            </button> */}
             <button onClick={handleSize} className="mx-5 font-semibold ">
               Size Chart
             </button>
@@ -69,9 +69,9 @@ const ProductDescription: React.FC<SingleProduct> = ({
         </div>
 
         <div className="m-5 flex ">
-          <div className={description}>{product.info.shortDescription}</div>
-          <p className={review}>{/*product.review ? product.review : ''*/} Review</p>
-          <p className={shipping}>{shipping_policy}</p>
+          <div className={description}>{product.info.fullDescription}</div>
+          {/* <p className={review}>Review</p> */}
+          {/* <p className={shipping}>{shipping_policy}</p> */}
           <div className={size_chart}>
             <h4 className="font-semibold">Size Chart</h4>
             <img alt="size" className="" src={size} />
