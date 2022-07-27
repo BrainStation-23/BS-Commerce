@@ -33,7 +33,7 @@ const Modal = ({
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-[#808080] bg-opacity-50">
+      <div className="fixed inset-0 z-50 bg-neutral-900/40 bg-opacity-75 transition-opacity">
         <div className="flex h-screen items-center justify-center ">
           <div className=" bg-white px-5 pt-5">
             <p>{modalTitle}</p>

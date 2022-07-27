@@ -20,9 +20,15 @@ export const compareSlice = createSlice({
       const existingCartProduct = state.productsToCompare.find(
         (item) => item.id === action.payload.id
       );
-      existingCartProduct
-        ? state.productsToCompare
-        : state.productsToCompare.push(action.payload);
+      if(existingCartProduct) {
+        state.productsToCompare
+      }
+      else {
+        if(state.productsToCompare.length >= 3) {
+          state.productsToCompare.shift();
+        }
+        state.productsToCompare.push(action.payload);
+      }
     },
     deleteComparedProduct: (
       state: compareState,

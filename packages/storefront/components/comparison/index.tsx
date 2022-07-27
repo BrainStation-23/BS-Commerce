@@ -31,7 +31,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-50 flex justify-center bg-zinc-200 bg-opacity-80">
+          <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity">
             <div className="relative my-auto mx-auto overflow-auto">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
@@ -72,10 +72,12 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         <button
                                           onClick={() => {
                                             dispatch(
-                                              deleteComparedProduct(product.id)
+                                              deleteComparedProduct(
+                                                product?.id!
+                                              )
                                             );
                                             userAPI.deleteFromCompare(
-                                              product.id
+                                              product?.id!
                                             );
                                           }}
                                         >
@@ -111,7 +113,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                     <React.Fragment key={product.id}>
                                       <td className="border-r p-6 font-normal">
                                         <img
-                                          src={product?.photos[0]?.url}
+                                          src={product?.photos![0]?.url}
                                           alt={product?.info?.name}
                                           height={100}
                                           width={100}

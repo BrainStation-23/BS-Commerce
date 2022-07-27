@@ -142,7 +142,7 @@ const Header: NextComponentType = () => {
 
             {/* Menu */}
             <div
-              className={`fixed top-0 z-40 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
+              className={`fixed top-0 z-40 flex h-full w-72 flex-col gap-y-5 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
                 menu ? 'left-0' : '-left-72'
               }`}
             >
