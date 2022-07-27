@@ -9,11 +9,10 @@ import Container from '@/components/global/components/container';
 import Picture from '@/components/global/components/product/common/picture';
 import Icon from '@/components/global/components/icon';
 
-const WeekDeals: NextComponentType = () => {
+const SimilarProducts: NextComponentType = () => {
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
-  console.log(products);
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -24,8 +23,7 @@ const WeekDeals: NextComponentType = () => {
     <>
       <Container className="max-w-7xl">
         <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">Recently added our store</p>
-          <h1 className="text-bold text-4xl ">Deals Of The Weeks</h1>
+          <h1 className="text-bold text-4xl ">Similar Products</h1>
         </div>
         <SwiperGrid
           slidesPerViewmobile={2}
@@ -40,7 +38,7 @@ const WeekDeals: NextComponentType = () => {
               <SwiperSlide key={product.id}>
                 <Link
                   href={{
-                    pathname: `product/${product.info.name}`,
+                    pathname: `/product/${product.info.name}`,
                     query: {
                       id: product.id,
                       name: product.info.name,
@@ -117,4 +115,4 @@ const WeekDeals: NextComponentType = () => {
   );
 };
 
-export default WeekDeals;
+export default SimilarProducts;
