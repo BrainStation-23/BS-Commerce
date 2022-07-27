@@ -32,14 +32,14 @@ const BestSell: NextComponentType = () => {
           <h1 className="text-bold text-4xl ">Best Sell</h1>
         </div>
         <div className="flex w-full flex-wrap">
-          <div className="w-full px-3 md:w-2/6 lg:px-0">
+          <div className="w-full px-3 md:w-5/12 lg:w-2/6 lg:px-0">
             <Link href="/">
               <a>
                 <Banner />
               </a>
             </Link>
           </div>
-          <div className="w-full pl-3 md:w-4/6">
+          <div className="w-full md:w-7/12 md:pl-3 lg:w-4/6">
             <SwiperGrid
               slidesPerViewmobile={1}
               slidesPerView768={1}
