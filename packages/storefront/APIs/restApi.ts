@@ -43,17 +43,17 @@ import {
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
-import { User } from 'utils/types';
+// import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
 
-export async function getUserRest(): Promise<User[] | undefined> {
-  try {
-    const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
-    return response.data as User[];
-  } catch (error: any) {
-    return error;
-  }
-}
+// export async function getUserRest(): Promise<User[] | undefined> {
+//   try {
+//     const response = await axios.get<User[]>(`${apiEndPoints.getUser}`);
+//     return response.data as User[];
+//   } catch (error: any) {
+//     return error;
+//   }
+// }
 
 export async function getSignedInUserRest(
   isEmail: boolean,
@@ -169,13 +169,13 @@ export async function checkoutRest(
 }
 
 export async function getPublicProductByCategoryIDRest(
-  CategoryId: GetProductsByConditionQuery
-): Promise<GetProductsByConditionSuccessResponse | undefined> {
+  categoryId: string
+): Promise<GetCustomerAllProductsResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}?categoryId=${CategoryId}`
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}`
     );
-    return res.data.data.products;
+    return res.data.data as GetCustomerAllProductsResponse;
   } catch (error: any) {
     return error;
   }

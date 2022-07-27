@@ -12,7 +12,7 @@ const TrendingProducts = () => {
   let [filteredProduct, setProducts]: any = useState([]);
 
   const products = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts?.products
+    (state) => state.persistedReducer.product.publicProducts
   );
 
   const getMinimumProduct = () => {
@@ -103,10 +103,9 @@ const TrendingProducts = () => {
                   <SwiperSlide>
                     <ProductRow
                       products={[
-                        products[index],
                         products.length > getMinimumProduct()
                           ? products[0]
-                          : '',
+                          : products[index],
                       ]}
                     />
                   </SwiperSlide>

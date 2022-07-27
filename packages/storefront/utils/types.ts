@@ -78,9 +78,12 @@ export interface apiFunction {
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
-    CategoryId: GetCustomerAllProductsQuery
-  ) => Promise<GetProductsByConditionSuccessResponse | undefined>;
-  checkout: (data: any,router: NextRouter) => Promise<IOrderResponseData | undefined>;
+    categoryId: string
+  ) => Promise<GetCustomerAllProductsResponse | undefined>;
+  checkout: (
+    data: any,
+    router: NextRouter
+  ) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest

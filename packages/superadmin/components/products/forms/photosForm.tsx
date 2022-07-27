@@ -28,7 +28,7 @@ const PhotosForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-image-fill col-1  px-1"
                   style={{ fontSize: '25px' }}
@@ -44,10 +44,14 @@ const PhotosForm: NextComponentType = () => {
         <div className="collapse " id="photosTab">
           <div className="card-body">
             <div className="row justify-content-center">
-              {document.getElementById('photosUrl')?.value ? (
+              {(document.getElementById('photosUrl') as HTMLInputElement)
+                ?.value ? (
                 <img
                   className="col-2"
-                  src={document.getElementById('photosUrl')?.value}
+                  src={
+                    (document.getElementById('photosUrl') as HTMLInputElement)
+                      ?.value
+                  }
                   alt="No Image"
                   width="130px"
                 />
