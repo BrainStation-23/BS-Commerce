@@ -61,12 +61,6 @@ const CartDetails: NextComponentType = () => {
         )}
         <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
           {cartData.length > 0 && (
-            <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
-              UPDATE CART
-            </button>
-          )}
-
-          {cartData.length > 0 && (
             <Link href="/" passHref>
               <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
                 CONTINUE SHOPPING
