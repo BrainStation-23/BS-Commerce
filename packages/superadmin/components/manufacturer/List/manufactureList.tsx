@@ -2,8 +2,6 @@ import React, { FC, useMemo, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Table from '../../global/table/table';
 import Pagination from '../../global/pagination';
-// import SingleManufacturer from "../SubComponents/singleManufacturer";
-// import Modal from "../../sales/service/modal";
 import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
 interface Props {
@@ -21,10 +19,6 @@ const ManufactureList: FC<Props> = ({
   const [PageSize, setPageSize] = useState(7);
   const [ProductID, setProductID] = useState('');
   const router = useRouter();
-  // const [modal, setModal] = useState({
-  //     delete: false,
-  //   });
-
   const onChangeForList = async (pageSize: number) => {
     const manufactureData = await userAPI.getManufacturer(pageSize);
     // setProducts(productsList);
@@ -35,7 +29,6 @@ const ManufactureList: FC<Props> = ({
     const res = await userAPI.deleteManufacturer(ProductID, router);
     if (res) {
       onChangeForList(1000);
-      // alert("successfull");
     }
     setModal({
       ...modal,
@@ -61,13 +54,7 @@ const ManufactureList: FC<Props> = ({
       path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
-          <img
-            // src={`${data?.photos[0][key]}`}
-            src={data.picture}
-            height="75px"
-            width={'75px'}
-            alt="..."
-          ></img>
+          <img src={data.picture} height="75px" width={'75px'} alt="..."></img>
         </td>
       ),
     },
@@ -169,7 +156,7 @@ const ManufactureList: FC<Props> = ({
           <Table items={currentTableData} columns={columns} />
 
           <div className="">
-            {manufactureData?.manufacturers?.length > 1 ? (
+            {manufactureData?.manufacturers?.length > 0 ? (
               <Pagination
                 currentPage={currentPage}
                 totalCount={manufactureData.manufacturers.length}
@@ -177,7 +164,9 @@ const ManufactureList: FC<Props> = ({
                 setCurrentPage={setCurrentPage}
                 setPageSize={setPageSize}
               />
-            ) : null}
+            ) : (
+              'No Data Found'
+            )}
           </div>
         </div>
       </div>
@@ -192,14 +181,12 @@ const ManufactureList: FC<Props> = ({
               backgroundColor: 'rgba(0, 0, 0, 0.1)',
             }}
             onClick={() => {
-              // close modal when outside of modal is clicked
               setModal({ ...modal, delete: false });
             }}
           >
             <div
               className="modal-content"
               onClick={(e) => {
-                // do not close modal if anything inside modal content is clicked
                 e.stopPropagation();
               }}
               style={{
