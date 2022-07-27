@@ -49,7 +49,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                   </button>
                 </div>
                 <div className="flex-auto p-6">
-                  <div className="flex flex-col">
+                  <div className="grid">
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -58,13 +58,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                               <tr>
                                 <th
                                   scope="col"
-                                  className={`${
-                                    comparisonProducts.length === 3
-                                      ? 'w-1/4'
-                                      : comparisonProducts.length === 2
-                                      ? 'w-1/3'
-                                      : 'w-1/2'
-                                  } border-r px-6 py-4 text-sm font-normal`}
+                                  className={`col border-r px-6 py-4 text-sm font-normal`}
                                 >
                                   Action
                                 </th>
@@ -73,13 +67,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                     <React.Fragment key={product.id}>
                                       <th
                                         scope="col"
-                                        className={`${
-                                          comparisonProducts.length === 3
-                                            ? 'w-1/4'
-                                            : comparisonProducts.length === 2
-                                            ? 'w-1/3'
-                                            : 'w-1/2'
-                                        } border-r px-6 py-4 text-sm font-normal`}
+                                        className={`col border-r px-6 py-4 text-sm font-normal`}
                                       >
                                         <button
                                           onClick={() => {
@@ -123,7 +111,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="border-r p-6 font-normal align-top">
+                                      <td className="border-r p-6 align-top font-normal">
                                         <img
                                           src={product?.photos![0]?.url}
                                           alt={product?.info?.name}
