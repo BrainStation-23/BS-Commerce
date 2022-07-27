@@ -1,4 +1,4 @@
-import { Directive, Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   CreateUserRequest,
   SignInRequest,
@@ -6,7 +6,6 @@ import {
 } from 'models';
 
 @InputType()
-@ObjectType()
 export class AdminSignUpInput implements CreateUserRequest {
   @Field()
   firstName: string;
@@ -15,7 +14,6 @@ export class AdminSignUpInput implements CreateUserRequest {
   lastName: string;
 
   @Field()
-  @Directive('@email')
   email: string;
 
   @Field()
@@ -34,7 +32,6 @@ export class AdminSignInInput implements SignInRequest {
 @ObjectType()
 export class AdminSignInResponseToken implements Token {
   @Field()
-  @Directive('@email')
   token: string;
 }
 

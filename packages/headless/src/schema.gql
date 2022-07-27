@@ -2,8 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-directive @email on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
-
 type AdminSignInResponseToken {
   token: String!
 }
