@@ -7,13 +7,14 @@ export interface ShippingInfo {
   email: string;
   addressLine1: string;
   addressLine2?: string;
-  state: string;
+  city: string;
   postCode: string;
   phoneNumber: string;
+  tag: string;
 }
 
 export interface CheckoutState {
-  shippingInfo: IOrderAddress;
+  shippingInfo: ShippingInfo;
   billingInfo: IOrderAddress;
 }
 
@@ -27,6 +28,7 @@ const initialState: CheckoutState = {
     city: '',
     postCode: '',
     phoneNumber: '',
+    tag: '',
   },
   billingInfo: {
     firstName: '',
@@ -46,7 +48,7 @@ export const checkoutSlice = createSlice({
   reducers: {
     addToShippingInfo: (
       state: CheckoutState,
-      action: PayloadAction<IOrderAddress>
+      action: PayloadAction<ShippingInfo>
     ) => {
       state.shippingInfo = action.payload;
     },
@@ -66,6 +68,7 @@ export const checkoutSlice = createSlice({
         city: '',
         postCode: '',
         phoneNumber: '',
+        tag: '',
       };
       state.billingInfo = {
         firstName: '',
