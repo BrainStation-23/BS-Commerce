@@ -32,11 +32,11 @@ const HomeComponent: NextComponentType = () => {
   );
 
   const modalStateCart = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalCart.showModal
+    (state) => state.persistedReducer.modal?.setModalCart?.showModal
   );
 
   const modalProduct = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalCart.product
+    (state) => state.persistedReducer.modal?.setModalCart?.product
   );
 
   const router = useRouter();
