@@ -24,7 +24,7 @@ interface FormData {
   addressLine2: string;
   city: string;
   postCode: string;
-  tag?: string;
+  tag: string;
 }
 
 const Information = (props: any) => {
@@ -158,13 +158,13 @@ const Information = (props: any) => {
     };
     setModal(obj);
   };
-  useEffect(() => {    
+  useEffect(() => {
     shippingInfo?.tag
       ? setDropdownText(shippingInfo.tag)
       : setDropdownText('Use a new address');
     addresses?.length > 0 ? setShowLabel(false) : setShowLabel(true);
     setTagsOptions();
-  }, [tags , shippingInfo]);
+  }, [tags, shippingInfo]);
 
   useEffect(() => {
     setTagsOptions();
@@ -190,8 +190,8 @@ const Information = (props: any) => {
             firstName: values.firstName,
             lastName: values.lastName,
             addressLine1: values.addressLine1,
-            addressLine2: values.addressLine2!,
-            city: values.city,
+            addressLine2: values.addressLine2 ? values.addressLine2 : '',
+            city: values.city ? values.city : '',
             postCode: values.postCode!,
             tag: values.tag,
           };
@@ -204,7 +204,7 @@ const Information = (props: any) => {
             state: values.city,
             postCode: values.postCode,
             tag: values.tag,
-          };          
+          };
           if (values?.tag) {
             setAddCustomerNewAddress(addressData);
           }
