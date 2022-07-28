@@ -1,9 +1,9 @@
 import { UseGuards } from "@nestjs/common";
 import { Query, Args, Resolver, Mutation } from "@nestjs/graphql";
 import { RolesGuard } from "src/guards/auth.guard";
-import { createCategoryRequestDto } from "../dto/createCategory.dto";
-import { getCategoryRequestDto } from "../dto/getCategory.dto";
-import { getCategoryBySlugRequestDto } from "../dto/getCategoryBySlug.dto";
+import { createCategoryRequestDto } from "../rest/dto/createCategory.dto";
+import { getCategoryRequestDto } from "../rest/dto/getCategory.dto";
+import { getCategoryBySlugRequestDto } from "../rest/dto/getCategoryBySlug.dto";
 import { CategoryService } from "../services";
 
 @UseGuards(new RolesGuard(['admin']))

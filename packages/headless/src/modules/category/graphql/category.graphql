@@ -12,7 +12,7 @@ type Category{
     displayOrder: Int
     rootPath:String
     ancestors: [Ancestor]
-    meta: Meta
+    meta: CategoryMeta
 }
 
 type Ancestor {
@@ -21,7 +21,7 @@ type Ancestor {
     level:Int
 }
 
-type Meta {
+type CategoryMeta {
     keywords: [String]
     description: String
     title: String
