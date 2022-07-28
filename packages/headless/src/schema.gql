@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CartProductInfoSchema {
+  name: String!
+  shortDescription: String!
+  fullDescription: String!
+  sku: String!
+  price: Float!
+  oldPrice: Float!
+  cost: Float!
+  showOnHomePage: Boolean!
+  includeInTopMenu: Boolean!
+  allowToSelectPageSize: Boolean!
+  published: Boolean!
+  displayOrder: Float!
+  isFeatured: Boolean!
+  publishDate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CartProductPhotoSchema {
+  url: String!
+  title: String!
+  alt: String!
+  displayOrder: Float!
+}
+
+type CartProductSchema {
+  id: String!
+  info: CartProductInfoSchema!
+  photos: [CartProductPhotoSchema!]!
+}
+
+type CartItem {
+  product: CartProductSchema!
+  productId: String!
+  quantity: Float!
+}
+
+type Cart {
+  id: String!
+  userId: String!
+  items: [CartItem!]!
+}
+
+type CartResponse {
+  error: String!
+  code: Float!
+  data: Cart!
+}
+
+type Query {
+  """Search and GET Cart by User ID"""
+  getCart: CartResponse
+}
+
+type Mutation {
+  """Add Item to the Cart"""
+  addToCart(item: ItemInput!): CartResponse
+
+  """Delete Cart by Cart ID"""
+  deleteCart(data: deleteCartRequestSchema!): CartResponse
+
+  """Update item Quantity by Product ID"""
+  updateCartItem(item: updateCartItemRequestSchema!): CartResponse
+
+  """Delete Cart Item by product ID"""
+  deleteCartItem(data: deleteCartItemRequestSchema!): CartResponse
+
+  """Delete All Cart Items by User ID"""
+  deleteAllCartItems: CartResponse
+}
+
+input ItemInput {
+  productId: String!
+  quantity: Float!
+}
+
+input deleteCartRequestSchema {
+  cartId: String!
+}
+
+input updateCartItemRequestSchema {
+  productId: String!
+  quantity: Float!
+}
+
+input deleteCartItemRequestSchema {
+  productId: String!
+}

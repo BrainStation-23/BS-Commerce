@@ -3,52 +3,49 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
 import { User } from 'src/entity/user';
+import { CartResponse, deleteCartItemRequestSchema, deleteCartRequestSchema, ItemInput, updateCartItemRequestSchema } from './cart.model';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { AddToCartRequestDto } from '../rest/dto/addToCart.dto';
-import { deleteCartRequestDto } from '../rest/dto/deleteCart.dto';
-import { updateCartItemRequestDto } from '../rest/dto/updateCartItem.dto';
-import { deleteCartItemRequestDto } from '../rest/dto/deleteCartItem.dto';
-
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()
 export class CartResolver {
   constructor(private cartService: CartService) { }
 
-  @Query()
+  @Query(returns => CartResponse, { nullable: true, description: "Search and GET Cart by User ID" })
   async getCart(@UserInfo() user: User) {
     return await this.cartService.getCart(user.id);
   }
 
-  @Mutation()
+  @Mutation(returns => CartResponse, { nullable: true, description: "Add Item to the Cart" })
   async addToCart(
-    @Args('item') item: AddToCartRequestDto,
+    @Args('item') item: ItemInput,
     @UserInfo() user: User,
   ) {
     return await this.cartService.addToCart(item, user.id);
   }
 
-  @Mutation()
-  async deleteCart(@Args() data: deleteCartRequestDto) {
+
+  @Mutation(type => CartResponse, { nullable: true, description: "Delete Cart by Cart ID" })
+  async deleteCart(@Args('data') data: deleteCartRequestSchema) {
     return await this.cartService.deleteCart(data.cartId);
   }
 
-  @Mutation()
+  @Mutation(returns => CartResponse, { nullable: true, description: "Update item Quantity by Product ID" })
   async updateCartItem(
     @UserInfo() user: User,
-    @Args('item') item: updateCartItemRequestDto,
+    @Args('item') item: updateCartItemRequestSchema,
   ) {
     return await this.cartService.updateCartItem(user.id, item);
   }
 
-  @Mutation()
+  @Mutation(returns => CartResponse, { nullable: true, description: "Delete Cart Item by product ID" })
   async deleteCartItem(
     @UserInfo() user: User,
-    @Args() data: deleteCartItemRequestDto,
+    @Args('data') data: deleteCartItemRequestSchema,
   ) {
     return await this.cartService.deleteCartItem(user.id, data.productId);
   }
 
-  @Mutation()
+  @Mutation(returns => CartResponse, { nullable: true, description: "Delete All Cart Items by User ID" })
   async deleteAllCartItems(@UserInfo() user: User) {
     return await this.cartService.deleteAllCartItems(user.id);
   }
