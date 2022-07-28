@@ -20,20 +20,35 @@ import WithAuth from '@/components/auth/withAuth';
 import Modal from '@/components/global/components/modal/modal';
 import Icon from '@/components/global/components/icon';
 import ModalCompare from '@/components/comparison';
+import CartModal from '../global/components/modal/cartModal';
+import { setCartModalState } from 'toolkit/modalSlice';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
 
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
+  );
+
+  const modalProduct = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalCart.product
+  );
+
+  const modalStateCart = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalCart.showModal
   );
 
   const modalState = useAppSelector(
     (state) => state.persistedReducer.modal.setModal
   );
   //console.log(wishlistData);
+  const closeCartModal = () => {
+    setShowCartModal(false);
+    dispatch(setCartModalState({ showModal: false }));
+  };
 
   const handleDeleteAllWishlistItems = async () => {
     try {
@@ -63,6 +78,14 @@ const WishlistComponent: NextComponentType = () => {
         linkArray={['/', '/wishlist']}
       />
       {modalState && <ModalCompare setModal={true} />}
+      {modalStateCart && (
+        <CartModal
+          open={modalStateCart}
+          onClose={closeCartModal}
+          product={modalProduct!}
+        />
+      )}
+
       {modalOn && wishlistData.items?.length! > 0 && (
         <Modal
           setModalOn={setModalOn}

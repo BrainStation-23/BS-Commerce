@@ -1,28 +1,37 @@
-import { useState } from "react";
-import { NextComponentType } from "next";
-import ChevronDown from "@/components/global/icons-for-checkout-page/chevron-down";
-import ChevronUp from "@/components/global/icons-for-checkout-page/chevron-up";
-import ShoppingCart from "@/components/global/icons-for-checkout-page/shopping-cart";
-import OrderedProducts from "@/components/checkout/orderList/orderDetail";
+import { useState } from 'react';
+import { NextComponentType } from 'next';
+import { useAppSelector } from 'customHooks/hooks';
+
+import ChevronDown from '@/components/global/icons-for-checkout-page/chevron-down';
+import ChevronUp from '@/components/global/icons-for-checkout-page/chevron-up';
+import ShoppingCart from '@/components/global/icons-for-checkout-page/shopping-cart';
+import OrderedProducts from '@/components/checkout/orderList/orderDetail';
 
 const OrderList: NextComponentType = () => {
   const [dropdown, setDropdown] = useState(false);
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price! * data.quantity;
+  }, 0);
   return (
     <>
       <div
-        className="flex-initial lg:w-2/5 hidden sm:hidden md:hidden lg:block xl:block"
-        style={{ background: "#fafafa" }}
+        className="hidden flex-initial sm:hidden md:hidden lg:block lg:w-2/5 xl:block"
+        style={{ background: '#fafafa' }}
       >
         <OrderedProducts />
       </div>
 
       <div
-        className=" border-gray-500 flex flex-wrap justify-between sm:block md:block lg:hidden xl:hidden my-7 py-5 px-3 sm:px-10 md:px-10 lg:px-5 xl:px-5 text-xs"
-        style={{ background: "#fafafa" }}
+        className="my-7 flex flex-wrap justify-between border-gray-500 py-5 px-3 text-xs sm:block sm:px-10 md:block md:px-10 lg:hidden lg:px-5 xl:hidden xl:px-5"
+        style={{ background: '#fafafa' }}
       >
         <div
-          className="w-full sm:px-4 md:px-16 flex flex-wrap justify-between"
-          style={{ background: "#fafafa" }}
+          className="flex w-full flex-wrap justify-between sm:px-4 md:px-16"
+          style={{ background: '#fafafa' }}
         >
           <div className="flex flex-wrap">
             <ShoppingCart />
@@ -47,11 +56,11 @@ const OrderList: NextComponentType = () => {
               </div>
             </button>
           </div>
-          <p className="text-xl font-semibold">$13.72</p>
+          <p className="text-xl font-semibold">${totalCartPrice}</p>
         </div>
 
         {dropdown && (
-          <div className="w-full md:px-14" style={{ background: "#fafafa" }}>
+          <div className="w-full md:px-14" style={{ background: '#fafafa' }}>
             <OrderedProducts />
           </div>
         )}

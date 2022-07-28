@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import {
+  setCartModalState,
+  setModalState,
+  setWishlistModalState,
+} from 'toolkit/modalSlice';
 
 import ImageSlider from '@/components/home/imageSlider';
 import HomeShipping from '@/components/home/homeShipping';
@@ -16,6 +20,7 @@ import Modal from '@/components/comparison';
 import ModalWishlist from '@/components/global/components//modal/modal';
 import { useEffect } from 'react';
 import BackToTopButton from 'pages/BackToTopButton';
+import CartModal from '../global/components/modal/cartModal';
 
 const HomeComponent: NextComponentType = () => {
   const modalState = useAppSelector(
@@ -26,21 +31,37 @@ const HomeComponent: NextComponentType = () => {
     (state) => state.persistedReducer.modal.setModalWishlist
   );
 
+  const modalStateCart = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalCart.showModal
+  );
+
+  const modalProduct = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalCart.product
+  );
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+    dispatch(setCartModalState({ showModal: false }));
+  };
 
   useEffect(() => {
     dispatch(setModalState(false));
     dispatch(setWishlistModalState(false));
+    dispatch(setCartModalState({ showModal: false }));
   }, [router.asPath]);
 
   return (
     <>
       <div className="scroll-smooth hover:scroll-auto">
         {modalState && <Modal setModal={true} />}
+
         {modalStateWishlist && (
           <ModalWishlist
             setModalOn={setModalOn}
@@ -49,6 +70,15 @@ const HomeComponent: NextComponentType = () => {
             bodyText="Proceed to login?"
           />
         )}
+
+        {modalStateCart && (
+          <CartModal
+            open={modalStateCart}
+            onClose={closeCartModal}
+            product={modalProduct!}
+          />
+        )}
+
         <ImageSlider />
         <HomeShipping />
         <div className="mb-4 md:mb-10">

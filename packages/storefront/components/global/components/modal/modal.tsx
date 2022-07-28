@@ -33,9 +33,20 @@ const Modal = ({
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-neutral-900/40 bg-opacity-75 transition-opacity">
+      <div
+        className="fixed inset-0 z-50 bg-neutral-900/40 bg-opacity-75 transition-opacity"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+        onClick={handleCancelClick}
+      >
         <div className="flex h-screen items-center justify-center">
-          <div className="w-2/3 sm:w-auto bg-white px-5 pt-5">
+          <div
+            className="w-2/3 bg-white px-5 pt-5 sm:w-auto"
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+              e.stopPropagation()
+            }
+          >
             <p>{modalTitle}</p>
             <hr className="mt-3" />
             <div className="flex-col items-center pt-5 pb-12 sm:px-24">

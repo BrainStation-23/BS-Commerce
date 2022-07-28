@@ -6,7 +6,11 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { CustomerProduct, Product, WishlistProduct } from 'models';
-import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import {
+  setCartModalState,
+  setModalState,
+  setWishlistModalState,
+} from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 
@@ -21,6 +25,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   const [modalCmp, setModalCmp] = useState(false);
   const [modalOn, setModalOn] = useState(false);
+  const [cartModalOn, setCartModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
 
   const token = useAppSelector(
@@ -61,6 +66,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     };
     toast.success('+1 Item added to cart');
     dispatch(addToCart(cartItem));
+    dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     event.preventDefault();
   };
 
