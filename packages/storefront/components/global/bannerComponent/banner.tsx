@@ -46,12 +46,13 @@ const Banner: React.FC<BannerProps> = (props) => {
     buttonTextColor,
   } = props;
   return (
-    <div className={`${position} ${bg} ${width} ${height}`}>
+    <div className={`${position} ${bg} ${width} ${height} mx-auto container`}>
       {hasBodyText && <>{bodyText}</>}
       {hasHeading && <>{heading}</>}
 
       {hasButton && (
-        <Link href={linkhref} passHref>
+        <div className="mx-auto container px-4">
+          <Link href={linkhref} passHref>
           <a>
             <Button
               position={buttonPosition}
@@ -65,6 +66,7 @@ const Banner: React.FC<BannerProps> = (props) => {
             />
           </a>
         </Link>
+        </div>      
       )}
     </div>
   );

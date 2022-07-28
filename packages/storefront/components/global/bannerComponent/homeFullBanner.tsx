@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
-import Banner from "@/components/global/bannerComponent/banner";
-import BannerHeading from "@/components/global/bannerComponent/bannerHeading";
+import Banner from '@/components/global/bannerComponent/banner';
+import BannerHeading from '@/components/global/bannerComponent/bannerHeading';
 
 const HomefullBanner: FC = () => {
   return (
-    <div className="">
+    <div className="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-center bg-no-repeat">
       <Banner
         position="relative"
         width="w-full"
@@ -13,11 +13,10 @@ const HomefullBanner: FC = () => {
         hasButton={true}
         buttonText="Discover Now"
         linkhref="/deals" //need to modify href later
-        bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
-        buttonPosition="absolute bottom-3 sm:bottom-3 md:bottom-3 lg:bottom-16 xl:bottom-12 left-0 md:left-4 lg:left-12 xl:left-30 2xl:left-96"
+        buttonPosition=" "
         buttonEdge="rounded-lg"
         buttonPadding="px-3 sm:px-3 md:px-9 lg:px-9 xl:px-9 py-2 sm:py-2 lg:py-2.5 xl:py-2.5"
-        buttonMargin="m-5"
+        buttonMargin="my-5"
         buttonBg="bg-green-600/100"
         onHover="bg-black"
         buttonTextColor="text-white"
