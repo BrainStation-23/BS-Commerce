@@ -53,13 +53,13 @@ const Information = (props: any) => {
 
   let initialValues = {
     email: user?.email,
-    contact: shippingInfo?.phoneNumber,
-    firstName: shippingInfo?.firstName,
-    lastName: shippingInfo?.lastName,
-    addressLine1: shippingInfo?.addressLine1,
-    addressLine2: shippingInfo?.addressLine2,
-    city: shippingInfo?.city,
-    postCode: shippingInfo?.postCode,
+    contact: shippingInfo?.phoneNumber || addresses?.length > 0 ? addresses[0]?.phone : null,
+    firstName: shippingInfo?.firstName || addresses?.length > 0 ? addresses[0]?.firstName : null,
+    lastName: shippingInfo?.lastName || addresses?.length > 0 ? addresses[0]?.lastName : null,
+    addressLine1: shippingInfo?.addressLine1 || addresses?.length > 0 ? addresses[0]?.addressLine1 : null,
+    addressLine2: shippingInfo?.addressLine2 || addresses?.length > 0 ? addresses[0]?.addressLine2 : null,
+    city: shippingInfo?.city || addresses?.length > 0 ? addresses[0]?.state : null,
+    postCode: shippingInfo?.postCode || addresses?.length > 0 ? addresses[0]?.postCode : null,
     tag: '',
   };
 
@@ -126,8 +126,22 @@ const Information = (props: any) => {
     setModal(obj);
   };
   useEffect(() => {
+    addresses.length > 0 ? setDropdownText(addresses[0].tag) : setDropdownText('Use a new address');
+    addresses.length > 0 ? setShowLabel(false) : setShowLabel(true);
     setTagsOptions();
   }, [tags]);
+
+  useEffect(() => {
+    setTagsOptions();
+  });
+
+  const setAddCustomerNewAddress = async(data: any) => {
+    await  userAPI.addCustomerNewAddress(data);
+    await userAPI.getCustomer(token).then((response) => {
+       dispatch(storeAddresses(response?.data?.addresses));
+    });
+    setTagsOptions();
+  }
 
   return (
     <div className="">
@@ -156,10 +170,7 @@ const Information = (props: any) => {
             tag: values.tag,
           };
           if (values?.tag) {
-            userAPI.addCustomerNewAddress(addressData);
-            userAPI.getCustomer(token).then((response) => {
-              dispatch(storeAddresses(response?.data?.addresses));
-            });
+            setAddCustomerNewAddress(addressData);
           }
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
