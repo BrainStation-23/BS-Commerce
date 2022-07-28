@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       products: allProducts,
       featuredProducts: featuredProducts,
-      categories: responseCategory?.data.categories,
+      categories: responseCategory?.data?.categories,
       wishlistedProducts: wishlistedProducts || [],
     },
   };
