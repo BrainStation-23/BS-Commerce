@@ -44,12 +44,12 @@ const CartTotal: NextComponentType = () => {
       )}
       <div className="grid lg:row-span-2 xl:row-span-2">
         <div className="overflow-hidden shadow-lg">
-          <div className="w-full bg-black">
-            <div className="px-4 py-1 text-base font-medium text-white">
+          <div className="w-full bg-[#40a944]">
+            <div className="px-6 py-1 text-base font-medium text-white">
               CART TOTALS
             </div>
           </div>
-          <div className="flex justify-center p-6">
+          <div className="flex justify-center px-6 py-5">
             <table className="border-collapse border border-slate-400">
               <tbody>
                 <tr>
@@ -58,10 +58,8 @@ const CartTotal: NextComponentType = () => {
                       Subtotal
                     </span>
                   </td>
-                  <td className="mx-5 ml-20 border border-slate-300 px-5 py-5 md:px-8 lg:px-8 xl:px-8">
-                    <span className="mr-12 font-semibold md:mr-24 xl:mr-24">
-                      ${totalCartPrice}
-                    </span>
+                  <td className="mx-5 ml-20 border border-slate-300 px-10 py-5 md:px-8 lg:px-8 xl:px-8 text-center">
+                     <p className="sm:mx-10">${totalCartPrice}</p> 
                   </td>
                 </tr>
                 <tr>
@@ -70,14 +68,14 @@ const CartTotal: NextComponentType = () => {
                       Total
                     </span>
                   </td>
-                  <td className="border border-slate-300 px-8 py-5">
-                    <span className="md:mr-24 xl:mr-24">${totalCartPrice}</span>
+                  <td className="border border-slate-300 px-8 py-5 text-center">
+                  <p className="sm:mx-10">${totalCartPrice}</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div className="flex justify-end py-4 px-2">
+          <div className="flex justify-end px-2 pb-4">
             <button
               onClick={handleClickProceed}
               style={{
@@ -85,7 +83,7 @@ const CartTotal: NextComponentType = () => {
                 height: '39px',
                 width: '200px',
               }}
-              className="bg-black text-xs hover:bg-green-600"
+              className="bg-black text-xs hover:bg-[#40a944]"
             >
               PROCEED TO CHECKOUT
             </button>

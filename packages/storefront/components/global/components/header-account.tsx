@@ -84,12 +84,14 @@ const HeaderAccount: React.FC<Properties> = () => {
         />
       )}
 
-      <div className="flex flex-row items-center gap-x-3">
+      <div className="flex flex-col gap-x-3 lg:flex-row lg:items-center">
         <span className="my-0 uppercase">
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
               <div className="group relative cursor-pointer normal-case">
-                <p className="hover:text-green-600">{links[4].name}</p>
+                <p className="w-40 truncate hover:text-green-600">
+                  {links[4].name}
+                </p>
                 <div
                   className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
@@ -126,15 +128,6 @@ const HeaderAccount: React.FC<Properties> = () => {
                   </ul>
                 </div>
               </div>
-
-              {/* <Link href={links[3].link}>
-                <a
-                  onClick={() => setModalOn(true)}
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-                >
-                  {links[3].name}
-                </a>
-              </Link> */}
             </div>
           ) : (
             <>
@@ -152,56 +145,50 @@ const HeaderAccount: React.FC<Properties> = () => {
             </>
           )}
         </span>
-        <button onClick={handleClickWishlist}>
-          <div className="flex hover:text-green-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-              fill={
-                wishlistItems?.items?.length! > 0 && token !== ''
-                  ? `green`
-                  : `none`
+        <div className="flex flex-row items-center gap-x-3">
+          <button onClick={handleClickWishlist}>
+            <div className="flex hover:text-green-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                fill={
+                  wishlistItems?.items?.length! > 0 && token !== ''
+                    ? `green`
+                    : `none`
+                }
+                viewBox="0 0 24 24"
+                stroke={
+                  wishlistItems?.items?.length! > 0 && token !== ''
+                    ? `none`
+                    : `currentColor`
+                }
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              <span className="">
+                {wishlistItems?.items?.length! > 0 && token !== ''
+                  ? wishlistItems?.items?.length
+                  : 0}
+              </span>
+            </div>
+          </button>
+          <span
+            className="z-30 mt-2 text-sm"
+            onClick={(e) => {
+              if (document.body.clientWidth >= 1024) showCartDropDown();
+              else {
+                router.push('/cart');
               }
-              viewBox="0 0 24 24"
-              stroke={
-                wishlistItems?.items?.length! > 0 && token !== ''
-                  ? `none`
-                  : `currentColor`
-              }
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-            <span className="">
-              {wishlistItems?.items?.length! > 0 && token !== ''
-                ? wishlistItems?.items?.length
-                : 0}
-            </span>
-          </div>
-        </button>
-        <span className="z-40 mt-2 text-sm" onClick={(e) => showCartDropDown()}>
-          <CartDropdown />
-        </span>
-        <Link href="/order" passHref>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-            />
-          </svg>
-        </Link>
+            <CartDropdown />
+          </span>
+        </div>
       </div>
     </>
   );

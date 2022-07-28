@@ -33,23 +33,23 @@ const Modal = ({
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-[#808080] bg-opacity-50">
-        <div className="flex h-screen items-center justify-center ">
-          <div className=" bg-white px-5 pt-5">
+      <div className="fixed inset-0 z-50 bg-neutral-900/40 bg-opacity-75 transition-opacity">
+        <div className="flex h-screen items-center justify-center">
+          <div className="w-2/3 sm:w-auto bg-white px-5 pt-5">
             <p>{modalTitle}</p>
             <hr className="mt-3" />
-            <div className="flex-col px-24 pt-5 pb-12">
+            <div className="flex-col items-center pt-5 pb-12 sm:px-24">
               <div className="mb-2">{bodyText}</div>
-              <div className="flex gap-x-5 text-sm">
+              <div className="flex flex-wrap gap-x-5 text-sm">
                 <button
                   onClick={handleOKClick}
-                  className="rounded bg-[#eef0f1] px-10 py-2 text-black  hover:bg-[#40a944] hover:text-white"
+                  className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-[#40a944]  hover:text-white sm:px-10"
                 >
                   YES
                 </button>
                 <button
                   onClick={handleCancelClick}
-                  className="rounded bg-[#eef0f1] px-8 py-2 text-black hover:bg-[#40a944] hover:text-white"
+                  className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-[#40a944] hover:text-white sm:px-8"
                 >
                   CANCEL
                 </button>

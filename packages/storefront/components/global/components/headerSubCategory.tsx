@@ -89,7 +89,7 @@ export const HeaderSubCategory: React.FC<Props> = ({
                   showSubCategory ? '' : 'hidden'
                 }`}
               >
-                <ul className="">
+                <ul className="pl-2">
                   {category.subCategories?.map((category: any) => (
                     <li key={category.name}>
                       <HeaderSubCategory
@@ -108,7 +108,7 @@ export const HeaderSubCategory: React.FC<Props> = ({
           {/* render on sm screen */}
           <div className={`lg:hidden`}>
             {category.subCategories && expand ? (
-              <ul>
+              <ul className="pl-2">
                 {category.subCategories.map((category: any) => (
                   <li key={category.name}>
                     <HeaderSubCategory category={category} level={level + 1} />

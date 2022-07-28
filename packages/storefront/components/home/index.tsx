@@ -15,6 +15,7 @@ import FeaturedProducts from '@/components/home/featuredProducts';
 import Modal from '@/components/comparison';
 import ModalWishlist from '@/components/global/components//modal/modal';
 import { useEffect } from 'react';
+import BackToTopButton from 'pages/BackToTopButton';
 
 const HomeComponent: NextComponentType = () => {
   const modalState = useAppSelector(
@@ -38,37 +39,39 @@ const HomeComponent: NextComponentType = () => {
 
   return (
     <>
-      {modalState && <Modal setModal={true} />}
-      {modalStateWishlist && (
-        <ModalWishlist
-          setModalOn={setModalOn}
-          setChoice={setChoice}
-          modalTitle="You need to login first."
-          bodyText="Proceed to login?"
-        />
-      )}
-      <ImageSlider />
-      <HomeShipping />
-      <div className="mb-4 md:mb-10">
-        <TrendingProducts />
-      </div>
-      <div className="mb-4 md:mb-10">
-        <BannerPage />
-      </div>
-      <div className="mb-4 md:mb-10">
-        <WeekDeals />
-      </div>
-      <div className="mb-4 md:mb-10">
-        <HomefullBanner />
-      </div>
-      <div className="mb-4 md:mb-10">
-        <BestSell />
-      </div>
-      {/* <div className="mb-5 md:mb-10">
+      <div className="scroll-smooth hover:scroll-auto">
+        {modalState && <Modal setModal={true} />}
+        {modalStateWishlist && (
+          <ModalWishlist
+            setModalOn={setModalOn}
+            setChoice={setChoice}
+            modalTitle="You need to login first."
+            bodyText="Proceed to login?"
+          />
+        )}
+        <ImageSlider />
+        <HomeShipping />
+        <div className="mb-4 md:mb-10">
+          <TrendingProducts />
+        </div>
+        <div className="mb-4 md:mb-10">
+          <BannerPage />
+        </div>
+        <div className="mb-4 md:mb-10">
+          <WeekDeals />
+        </div>
+        <div className="mb-4 md:mb-10">
+          <HomefullBanner />
+        </div>
+        <div className="mb-4 md:mb-10">
+          <BestSell />
+        </div>
+        {/* <div className="mb-5 md:mb-10">
         <Blog />
       </div> */}
-      <div className="mb-4 md:mb-10">
-        <FeaturedProducts />
+        <div className="mb-4 md:mb-10">
+          <FeaturedProducts />
+        </div>
       </div>
     </>
   );

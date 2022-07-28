@@ -18,7 +18,7 @@ const DataTable: NextComponentType = () => {
         <div className="">
           <table className="w-full border-collapse border border-slate-400">
             <thead className="">
-              <tr>
+              <tr className="text-center">
                 <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base md:px-8">
                   Image
                 </th>
@@ -53,7 +53,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '150px',
                     }}
-                    className="bg-black text-xs hover:bg-green-600"
+                    className="bg-black text-xs hover:bg-[#40a944]"
                     onClick={() => {
                       router.push('/');
                     }}
@@ -68,7 +68,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '120px',
                     }}
-                    className="bg-black text-xs hover:bg-green-600"
+                    className="bg-black text-xs hover:bg-[#40a944]"
                     onClick={() => {
                       dispatch(deleteCart());
                     }}

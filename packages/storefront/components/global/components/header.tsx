@@ -108,7 +108,7 @@ const Header: NextComponentType = () => {
       </div>
 
       {/* Navbar */}
-      <nav className={`flex justify-center ${stickyClass} z-30`}>
+      <nav className={`flex justify-center ${stickyClass} z-20`}>
         <div className="container px-4">
           <div className="flex flex-row items-center">
             <div
@@ -142,7 +142,7 @@ const Header: NextComponentType = () => {
 
             {/* Menu */}
             <div
-              className={`fixed top-0 z-40 flex h-full w-72 flex-col items-center gap-y-8 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
+              className={`fixed top-0 z-40 flex h-full w-72 flex-col gap-y-5 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
                 menu ? 'left-0' : '-left-72'
               }`}
             >
@@ -156,7 +156,7 @@ const Header: NextComponentType = () => {
               <div className="w-full lg:hidden">
                 <Search placeholder="Search our store" />
               </div>
-              <div className="lg:hidden" onClick={closeMenu}>
+              <div className="lg:hidden" >
                 <HeaderAccount />
               </div>
               <div className="flex flex-row items-center text-right text-sm text-gray-900 lg:hidden">
