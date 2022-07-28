@@ -33,6 +33,8 @@ export interface ServiceErrorResponse {
  */
 export abstract class IServiceResponse {
     abstract successResponse: (data: object, code?: number) => ServiceSuccessResponse;
-    
+
     abstract errorResponse: (error: string, errors: DescriptiveError | null, code?: number) => ServiceErrorResponse;
+
+    abstract graphqlResponse: (res: object) => object;
 }

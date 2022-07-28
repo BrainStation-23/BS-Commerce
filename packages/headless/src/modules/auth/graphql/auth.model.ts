@@ -52,9 +52,6 @@ export class AdminSignUpResponseMessage {
 
 @ObjectType()
 export class AdminSignUpResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number
 

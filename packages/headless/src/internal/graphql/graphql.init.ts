@@ -15,7 +15,7 @@ export const GraphqlInitModule = () => {
       formatError: (error: any) => {
         return {
           message: error.extensions?.exception?.response?.error || error?.message,
-          code: error.extensions?.code || "SERVER_ERROR",
+          code: error.extensions?.exception?.status || 500,
         };
       },
     }),

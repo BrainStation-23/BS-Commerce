@@ -6,14 +6,22 @@ import {
   AdminSignInResponse,
   AdminSignUpInput
 } from './auth.model';
+import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private helper: Helper) { }
+
+  @Query(() => String)
+  sayHello(): string {
+    return 'Hello World!';
+  }
 
   @Mutation(returns => AdminSignUpResponse)
   async signUp(@Args('admin') admin: AdminSignUpInput) {
-    return await this.authService.signUp(admin);
+    // return await this.authService.signUp(admin);
+    const res = await this.authService.signUp(admin);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(returns => AdminSignInResponse)
