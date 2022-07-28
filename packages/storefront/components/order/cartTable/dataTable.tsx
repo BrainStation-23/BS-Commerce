@@ -125,7 +125,7 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
                 <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
                   Product
                 </th>
-                <th className="border border-slate-300 bg-slate-200 px-6 py-4 text-base">
+                <th className="border border-slate-300 bg-slate-200 xl:px-6 py-4 text-base">
                   Price
                 </th>
                 <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-4">

@@ -93,6 +93,7 @@ const Information = (props: any) => {
       : addresses?.length > 0
       ? addresses[0]?.tag
       : '',
+    tag2: '' 
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -193,7 +194,7 @@ const Information = (props: any) => {
             addressLine2: values.addressLine2 ? values.addressLine2 : '',
             city: values.city ? values.city : '',
             postCode: values.postCode!,
-            tag: values.tag,
+            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
           const addressData = {
             phone: values.contact,
@@ -203,7 +204,7 @@ const Information = (props: any) => {
             addressLine2: values.addressLine2,
             state: values.city,
             postCode: values.postCode,
-            tag: values.tag,
+            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
           if (values?.tag) {
             setAddCustomerNewAddress(addressData);
@@ -321,13 +322,13 @@ const Information = (props: any) => {
                   <div>
                     <div className="">
                       <div className="mb-3">
-                        <label htmlFor="tag" className="pb-8 text-sm">
+                        <label htmlFor="tag2" className="pb-8 text-sm">
                           Enter a label for effective delivery:
                         </label>
 
                         <div className="mt-2">
                           <FieldTemplate
-                            fieldID="tag"
+                            fieldID="tag2"
                             fieldType="text"
                             placeholder="E.g. Home, Office, Others etc."
                             isRequired={true}
