@@ -11,16 +11,17 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
     <>
       <div>
         <div
-          style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '20px' }}
+          className="flex justify-center py-4"
+          style={{ fontSize: '23px', fontWeight: 'bold', marginBottom: '20px' }}
         >
           Order Number{' '}
           <div
-            style={{ fontSize: '20px', fontWeight: 'bold', color: '#16A34A' }}
+            style={{ fontSize: '23px', fontWeight: 'bold', color: '#16A34A' }}
           >
             #{singleOrder.orderId}
           </div>
         </div>
-        <div>
+        <div className="px-4">
           <div
             style={{
               border: '1px solid LightGray',
@@ -114,30 +115,32 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
         </div>
 
         {/* {singleOrder.billingAddress.firstName} */}
-        <table className="border-collapse border border-slate-400">
-          <thead className="">
-            <tr>
-              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
-                Image
-              </th>
-              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
-                Product
-              </th>
-              <th className="border border-slate-300 bg-slate-200 px-10 py-4 text-base">
-                Price
-              </th>
-              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
-                Quantity
-              </th>
-              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-6">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <TableData singleOrder={singleOrder} />
-          </tbody>
-        </table>
+        <div className="px-4">
+          <table className="border-collapse border border-slate-400">
+            <thead className="">
+              <tr>
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
+                  Image
+                </th>
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
+                  Product
+                </th>
+                <th className="border border-slate-300 bg-slate-200 px-6 py-4 text-base">
+                  Price
+                </th>
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-4">
+                  Quantity
+                </th>
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-6">
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <TableData singleOrder={singleOrder} />
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

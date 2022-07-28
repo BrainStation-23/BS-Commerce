@@ -25,11 +25,11 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
         linkArray={['/', '/']}
       />
       <section className="container mx-auto px-4 ">
-        <div className="flex flex-col items-center border-b py-16">
+        <div className="flex flex-col items-center border-b py-6">
           <div
             className={
               storedOrderProducts?.length
-                ? 'mb-2 w-full overflow-x-scroll'
+                ? 'mb-2 w-full overflow-x-scroll xl:overflow-x-hidden'
                 : 'mb-10'
             }
           >
@@ -40,7 +40,7 @@ const Order: NextPage<Props> = ({ orderProducts }: Props) => {
             )}
           </div>
           <div className="mt-1" style={{ textAlign: 'center' }}>
-            <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
+            <button className="rounded-md bg-green-600 py-4 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
               <Link href="/">Go to home page</Link>
             </button>
           </div>

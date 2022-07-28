@@ -16,13 +16,13 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
             style={{ height: '100px', width: '100px' }}
           />
         </td>
-        <td className="border border-slate-300 py-10 md:px-2 xl:px-10">
-          {data?.name}
+        <td className=" border border-slate-300 py-10 md:px-2 xl:px-10">
+          <span className="flex justify-center px-2">{data?.name}</span>
         </td>
-        <td className="border border-slate-300 px-6 py-14 ">
+        <td className="border border-slate-300 px-4 py-14 ">
           <span className="flex justify-center"> ${data?.price}</span>
         </td>
-        <td className="border border-slate-300 px-6 py-14 ">
+        <td className="border border-slate-300 px-4 py-14 ">
           <span className="flex justify-center"> {data?.quantity}</span>
         </td>
         <td className="border border-slate-300 px-6 py-14 ">

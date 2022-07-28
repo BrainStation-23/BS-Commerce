@@ -20,7 +20,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
             {moment(data?.orderedDate).format('lll')}
           </span>
         </td>
-        <td className="border border-slate-300 px-6 py-14 ">
+        <td className="border border-slate-300 px-4 py-14 ">
           <span className="flex justify-center">{data?.paymentMethod}</span>
         </td>
         <td className="border border-slate-300 px-6 py-14 ">
@@ -34,8 +34,8 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
             }}
             passHref
           >
-            <button>
-              <span className="flex justify-center">Details</span>
+            <button className="flex justify-center">
+              <span className="px-2">Details</span>
             </button>
           </Link>
         </td>
