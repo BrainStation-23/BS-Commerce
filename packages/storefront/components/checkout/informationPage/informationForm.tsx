@@ -206,7 +206,7 @@ const Information = (props: any) => {
             postCode: values.postCode,
             tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
-          if (values?.tag) {
+          if (values?.tag2) {
             setAddCustomerNewAddress(addressData);
           }
           handleCheckoutSubmit(data);
