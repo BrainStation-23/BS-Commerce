@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
@@ -50,13 +52,13 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                 </div>
                 <div className="flex-auto p-6">
                   <div
-                    className={`${
-                      comparisonProducts.length === 3
-                        ? 'grid-col-4'
-                        : comparisonProducts.length === 2
-                        ? 'grid-col-3'
-                        : 'grid-col-2'
-                    } grid`}
+                  // className={`${
+                  //   comparisonProducts.length === 3
+                  //     ? 'grid-col-4'
+                  //     : comparisonProducts.length === 2
+                  //     ? 'grid-col-3'
+                  //     : 'grid-col-2'
+                  // } grid`}
                   >
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
@@ -119,20 +121,21 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts.map((product) => {
                                   return (
                                     <React.Fragment key={product.id}>
-                                      <td className="px-auto border-r align-top  font-normal">
+                                      <td className="border-r p-5  align-top font-normal">
                                         <div>
-                                          <img
-                                            src={product?.photos![0]?.url}
+                                          <Image
+                                            src={product?.photos![0]?.url!}
                                             alt={product?.info?.name}
                                             height={100}
                                             width={100}
-                                            className="m-auto"
+                                            // className="m-auto"
+                                            layout="fixed"
                                           />
+                                          <br />
                                           {product?.info?.oldPrice ? (
                                             <>
                                               <span className="text-sm text-red-600">
-                                                On Sale <br /> $
-                                                {product.info.price}
+                                                On Sale ${product.info.price}
                                               </span>
                                             </>
                                           ) : (
