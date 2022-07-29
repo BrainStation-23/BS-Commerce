@@ -1,0 +1,87 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Manufacturer SEO data type"""
+type ManufacturerSEO {
+  metaKeyword: String!
+  metaDescription: String!
+  metaTitle: String!
+  SEFN: String!
+}
+
+"""Manufacturer data type following Manufacturer model"""
+type ManufacturerSchemaGql {
+  id: String!
+  name: String!
+  description: String!
+  picture: String!
+  isPublished: Boolean!
+  displayOrder: Int!
+  seo: ManufacturerSEO!
+}
+
+type ManufacturerWithMessage {
+  manufacturer: ManufacturerSchemaGql!
+  message: String!
+}
+
+"""Single manufacturer response with message"""
+type ManufacturerResponse {
+  error: String
+  code: Int!
+  data: ManufacturerWithMessage
+}
+
+type ManufacturerArrayResponse {
+  manufacturers: [ManufacturerSchemaGql]!
+  total: Int!
+  message: String!
+}
+
+"""Get all manufacturers response"""
+type AllManufacturersResponse {
+  error: String
+  code: Int!
+  data: ManufacturerArrayResponse
+}
+
+type Query {
+  """Get all manufacturers passing with optional query as skip and limit"""
+  getAllManufacturers(query: ManufacturersQuery): AllManufacturersResponse!
+
+  """Get single manufacturer by id"""
+  getManufacturer(manufacturerId: String!): ManufacturerResponse!
+}
+
+input ManufacturersQuery {
+  skip: Int
+  limit: Int
+}
+
+type Mutation {
+  """Create a new manufacturer within the ManufacturerInput"""
+  addManufacturer(manufacturer: ManufacturerInput!): ManufacturerResponse!
+
+  """Update a manufacturer by its id"""
+  updateManufacturer(manufacturerId: String!, manufacturer: ManufacturerInput!): ManufacturerResponse!
+
+  """Delete a manufacturer by its id"""
+  deleteManufacturer(manufacturerId: String!): ManufacturerResponse!
+}
+
+input ManufacturerInput {
+  name: String!
+  description: String
+  picture: String
+  isPublished: Boolean
+  displayOrder: Int
+  seo: ManufacturerSEOInput
+}
+
+input ManufacturerSEOInput {
+  metaKeyword: String
+  metaDescription: String
+  metaTitle: String
+  SEFN: String
+}

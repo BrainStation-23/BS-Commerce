@@ -1,12 +1,14 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { coreConfig } from 'config/core';
+import { join } from 'path';
 
 export const GraphqlInitModule = () => {
   return [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      typePaths: ['src/**/*.graphql'],
+      // typePaths: ['src/**/*.graphql'],
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       path: `/${coreConfig.graphqlPathPrefix}`,
       playground: (coreConfig.env === 'DEVELOPMENT') ? true : false,
       cors: { origin: '*', credentials: true, },
