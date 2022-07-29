@@ -100,12 +100,14 @@ const WishlistComponent: NextComponentType = () => {
       <div className="container mx-auto">
         <div className="mx-5 flex items-center justify-between pt-3">
           <p className="text-xl">FAVOURITES</p>
-          <button
-            onClick={() => setModalOn(true)}
-            className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
-          >
-            Clear Wishlist
-          </button>
+          {wishlistData?.items?.length! > 0 && (
+            <button
+              onClick={() => setModalOn(true)}
+              className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
+            >
+              Clear Wishlist
+            </button>
+          )}
         </div>
         <div className="mt-10 grid grid-cols-2 place-items-center gap-y-5 md:hidden">
           <WishlistBody productImageHeight={150} productImageWidth={150} />
