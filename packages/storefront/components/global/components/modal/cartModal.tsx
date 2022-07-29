@@ -42,7 +42,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                 onClose();
               }}
             >
-              <XCircleIcon size={8} />
+              <XCircleIcon size={10} />
             </button>
             <Image
               src={product?.photos![0].url!}

@@ -21,6 +21,7 @@ import {
 import { MenuData } from './headerData';
 
 const Header: NextComponentType = () => {
+  const [showUser, setShowUser] = useState<boolean>(false);
   const [showAllCategory, setShowAllCategory] = useState<boolean>(false);
   const [menu, setMenu] = useState(false);
   const [stickyClass, setStickyClass] = useState('relative');
@@ -50,9 +51,11 @@ const Header: NextComponentType = () => {
         setStickyClass(
           'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 lg:w-full lg:shadow-lg'
         );
+        setShowUser(true);
         setShowAllCategory(false);
       } else {
         setStickyClass('relative');
+        setShowUser(false);
       }
     }
   };
@@ -156,7 +159,7 @@ const Header: NextComponentType = () => {
               <div className="w-full lg:hidden">
                 <Search placeholder="Search our store" />
               </div>
-              <div className="lg:hidden" >
+              <div className="lg:hidden">
                 <HeaderAccount />
               </div>
               <div className="flex flex-row items-center text-right text-sm text-gray-900 lg:hidden">
@@ -208,13 +211,21 @@ const Header: NextComponentType = () => {
             </div>
 
             <div className="ml-auto hidden flex-row items-center gap-x-2 text-right text-sm text-gray-900 lg:flex">
-              <PhoneIcon />
-              <div className="flex flex-col">
-                <span>{customerNumber}</span>
-                <span className="flex flex-row items-center gap-x-1">
-                  Customer Support
-                </span>
-              </div>
+              {showUser ? (
+                <div>
+                  <HeaderAccount />
+                </div>
+              ) : (
+                <>
+                  <PhoneIcon />
+                  <div className="flex flex-col">
+                    <span>{customerNumber}</span>
+                    <span className="flex flex-row items-center gap-x-1">
+                      Customer Support
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
