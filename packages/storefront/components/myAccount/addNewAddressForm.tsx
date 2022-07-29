@@ -34,6 +34,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
       const updatedCustomer = await userAPI.getCustomerProfile(token);
       dispatch(storeAddresses(updatedCustomer?.data.addresses!));
       dispatch(storeCustomerDetails(updatedCustomer?.data));
+      console.log(updatedCustomer);
     } catch (error) {
       toast.error(`Error occurred!!`);
     }

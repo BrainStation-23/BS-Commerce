@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const customerProfile = await userAPI.getCustomerProfile(token.token);
   return {
     props: {
-      customerProfile: customerProfile?.data,
+      customerProfile: customerProfile,
     },
   };
 };

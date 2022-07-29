@@ -289,14 +289,14 @@ export async function deleteFromCompareRest(productId: string) {
 
 export async function getCustomerProfileRest(
   token: string
-): Promise<GetCustomerInformationSuccessResponse | undefined> {
+): Promise<GetCustomerInformationResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data as GetCustomerInformationSuccessResponse;
+    return res.data.data;
   } catch (error) {
     return [] as any;
   }

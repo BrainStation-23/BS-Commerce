@@ -1,21 +1,21 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
-import { Input } from "@/components/global/components/input";
-import { Textarea } from "@/components/global/components/textarea";
-import Container from "@/components/global/components/container";
+import { Input } from '@/components/global/components/input';
+import { Textarea } from '@/components/global/components/textarea';
+import Container from '@/components/global/components/container';
 
 const ContactArea: FC = () => {
   return (
     <Container>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-2/4 pr-5">
-          <h3 className="text-xl capitalize font-semibold mb-5">Contact Us</h3>
-          <p className="text-sm mb-5">Your content here</p>
-          <ul className="list-none m-0 p-0">
-            <li className="py-3 border-t border-inherit border-solid flex items-center">
+        <div className="w-full pr-5 md:w-2/4">
+          <h3 className="mb-5 text-xl font-semibold capitalize">Contact Us</h3>
+          <p className="mb-5 text-sm">Your content here</p>
+          <ul className="m-0 list-none p-0">
+            <li className="flex items-center border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -29,10 +29,10 @@ const ContactArea: FC = () => {
               </svg>
               Address : No 40 Baria Sreet 133/2 NewYork City
             </li>
-            <li className="py-3 border-t border-inherit border-solid">
+            <li className="border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -46,10 +46,10 @@ const ContactArea: FC = () => {
               </svg>
               E-mail: info@yourdomain.com
             </li>
-            <li className="py-3 border-t border-inherit border-solid">
+            <li className="border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -66,7 +66,7 @@ const ContactArea: FC = () => {
           </ul>
         </div>
         <div className="w-full md:w-2/4">
-          <h3 className="text-xl capitalize font-semibold my-5 md:mt-0">
+          <h3 className="my-5 text-xl font-semibold capitalize md:mt-0">
             Tell Us Your Project
           </h3>
           <form method="post" action="/">
@@ -98,7 +98,7 @@ const ContactArea: FC = () => {
               onChangeHandler={() => {}}
             />
             <button
-              className="font-normal h-10 px-10 p capitalize bg-black text-white rounded"
+              className="p h-10 rounded bg-black px-10 font-normal capitalize text-white"
               type="submit"
             >
               Send
