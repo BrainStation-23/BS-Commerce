@@ -249,7 +249,12 @@ export async function getCustomerWishlistRest(
 
     return res.data.data as Wishlist;
   } catch (error: any) {
-    return [];
+    const errorData = {
+      userId: '',
+      id: '',
+      items: [],
+    }
+    return errorData as any;
   }
 }
 
