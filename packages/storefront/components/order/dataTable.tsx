@@ -8,11 +8,10 @@ interface Props {
 }
 
 const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
-
   return (
     <>
-      <div className="xl:px-30 2xl:40 py-20 md:px-2 lg:px-20">
-        <table className="border-collapse border border-slate-400  ">
+      <div className="pt-10 pb-6">
+        <table className="border-collapse border border-slate-400 w-full ">
           <thead className="">
             <tr>
               <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base md:px-8">
@@ -24,7 +23,7 @@ const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
               <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
                 Order Date
               </th>
-              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
+              <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-6">
                 Payment Method
               </th>
               <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">

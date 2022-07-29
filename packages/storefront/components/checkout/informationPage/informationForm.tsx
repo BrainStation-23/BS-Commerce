@@ -24,7 +24,7 @@ interface FormData {
   addressLine2: string;
   city: string;
   postCode: string;
-  tag?: string;
+  tag: string;
 }
 
 const Information = (props: any) => {
@@ -53,14 +53,47 @@ const Information = (props: any) => {
 
   let initialValues = {
     email: user?.email,
-    contact: shippingInfo?.phoneNumber,
-    firstName: shippingInfo?.firstName,
-    lastName: shippingInfo?.lastName,
-    addressLine1: shippingInfo?.addressLine1,
-    addressLine2: shippingInfo?.addressLine2,
-    city: shippingInfo?.city,
-    postCode: shippingInfo?.postCode,
-    tag: '',
+    contact: shippingInfo?.phoneNumber
+      ? shippingInfo?.phoneNumber
+      : addresses?.length > 0
+      ? addresses[0]?.phone
+      : '',
+    firstName: shippingInfo?.firstName
+      ? shippingInfo?.firstName
+      : addresses?.length > 0
+      ? addresses[0]?.firstName
+      : '',
+    lastName: shippingInfo?.lastName
+      ? shippingInfo?.lastName
+      : addresses?.length > 0
+      ? addresses[0]?.lastName
+      : '',
+    addressLine1: shippingInfo?.addressLine1
+      ? shippingInfo?.addressLine1
+      : addresses?.length > 0
+      ? addresses[0]?.addressLine1
+      : '',
+    addressLine2: shippingInfo?.addressLine2
+      ? shippingInfo?.addressLine2
+      : addresses?.length > 0
+      ? addresses[0]?.addressLine2
+      : '',
+    city: shippingInfo?.city
+      ? shippingInfo?.city
+      : addresses?.length > 0
+      ? addresses[0]?.state
+      : '',
+    postCode: shippingInfo?.postCode
+      ? shippingInfo?.postCode
+      : addresses?.length > 0
+      ? addresses[0]?.postCode
+      : '',
+    tag: shippingInfo?.tag
+      ? shippingInfo?.tag
+      : addresses?.length > 0
+      ? addresses[0]?.tag
+      : '',
+    tag2: '' 
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -116,6 +149,7 @@ const Information = (props: any) => {
       city: data.city,
       postCode: data.postCode,
       phoneNumber: data.contact,
+      tag: data.tag,
     };
     dispatch(addToShippingInfo(shippingData));
     const obj = {
@@ -126,8 +160,24 @@ const Information = (props: any) => {
     setModal(obj);
   };
   useEffect(() => {
+    shippingInfo?.tag
+      ? setDropdownText(shippingInfo.tag)
+      : setDropdownText('Use a new address');
+    addresses?.length > 0 ? setShowLabel(false) : setShowLabel(true);
     setTagsOptions();
-  }, [tags]);
+  }, [tags, shippingInfo]);
+
+  useEffect(() => {
+    setTagsOptions();
+  });
+
+  const setAddCustomerNewAddress = async (data: any) => {
+    await userAPI.addCustomerNewAddress(data);
+    await userAPI.getCustomer(token).then((response) => {
+      dispatch(storeAddresses(response?.data?.addresses));
+    });
+    setTagsOptions();
+  };
 
   return (
     <div className="">
@@ -141,9 +191,10 @@ const Information = (props: any) => {
             firstName: values.firstName,
             lastName: values.lastName,
             addressLine1: values.addressLine1,
-            addressLine2: values.addressLine2!,
-            city: values.city,
+            addressLine2: values.addressLine2 ? values.addressLine2 : '',
+            city: values.city ? values.city : '',
             postCode: values.postCode!,
+            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
           const addressData = {
             phone: values.contact,
@@ -153,13 +204,10 @@ const Information = (props: any) => {
             addressLine2: values.addressLine2,
             state: values.city,
             postCode: values.postCode,
-            tag: values.tag,
+            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
-          if (values?.tag) {
-            userAPI.addCustomerNewAddress(addressData);
-            userAPI.getCustomer(token).then((response) => {
-              dispatch(storeAddresses(response?.data?.addresses));
-            });
+          if (values?.tag2) {
+            setAddCustomerNewAddress(addressData);
           }
           handleCheckoutSubmit(data);
           actions.setSubmitting(false);
@@ -177,8 +225,8 @@ const Information = (props: any) => {
                     <div className="mb-3">
                       <Field
                         as="select"
-                        id="country"
-                        name="country"
+                        id="tag"
+                        name="tag"
                         className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                         onClick={(event: any) => {
                           setDropdownText(event.target.value);
@@ -205,7 +253,7 @@ const Information = (props: any) => {
                         ) : null}
                       </Field>
                       <div className="errMsg text-red-600">
-                        <ErrorMessage name="country" />
+                        <ErrorMessage name="tag" />
                       </div>
                     </div>
                     <div className="row">
@@ -274,13 +322,13 @@ const Information = (props: any) => {
                   <div>
                     <div className="">
                       <div className="mb-3">
-                        <label htmlFor="tag" className="pb-8 text-sm">
+                        <label htmlFor="tag2" className="pb-8 text-sm">
                           Enter a label for effective delivery:
                         </label>
 
                         <div className="mt-2">
                           <FieldTemplate
-                            fieldID="tag"
+                            fieldID="tag2"
                             fieldType="text"
                             placeholder="E.g. Home, Office, Others etc."
                             isRequired={true}

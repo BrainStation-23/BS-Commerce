@@ -33,7 +33,6 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
           <p>{singleAddress?.addressLine1!}</p>
           <p>{singleAddress?.state!}</p>
           <p>{singleAddress?.postCode!}</p>
-          <p>Bangladesh</p>
           <p>{singleAddress?.phone!}</p>
           <p>{singleAddress?.tag!}</p>
         </div>

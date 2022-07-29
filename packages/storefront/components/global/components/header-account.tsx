@@ -44,7 +44,6 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    router.push('/account/sign-in');
     toast.success('Logged out successfully!');
   };
 
