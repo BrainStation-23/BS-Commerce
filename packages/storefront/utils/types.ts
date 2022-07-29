@@ -74,7 +74,7 @@ export interface apiFunction {
     GetCustomerAllProductsResponse | undefined
   >;
   getPublicProductsById: (
-    productId: GetCustomerProductParams
+    productId: string
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (

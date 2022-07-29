@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { Product } from 'models';
+import { Product, WishlistItem } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import {
@@ -44,7 +44,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.product.wishlist
   );
   const findWishlistProduct = wishlistData?.items?.find(
-    (item) => item.productId === product.id
+    (item: WishlistItem) => item.productId === product.id
   );
 
   const token = useAppSelector(
@@ -245,7 +245,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
                   <span className="text-sm">
-                    Manufacturer: {product?.manufacturer?.name ? product?.manufacturer?.name : '---'}
+                    Manufacturer:{' '}
+                    {product?.manufacturer?.name
+                      ? product?.manufacturer?.name
+                      : '---'}
                   </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
                   <span className="text-sm">SKU: {product?.info?.sku}</span>

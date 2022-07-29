@@ -76,7 +76,7 @@ export async function getPublicProductsGraphql(): Promise<
 }
 
 export async function getPublicProductByIdGraphql(
-  productId: GetCustomerProductParams
+  productId: string
 ): Promise<GetCustomerProductResponse | undefined> {
   return undefined;
 }

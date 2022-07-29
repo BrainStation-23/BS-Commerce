@@ -22,6 +22,7 @@ import Icon from '@/components/global/components/icon';
 import ModalCompare from '@/components/comparison';
 import CartModal from '../global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
+import { WishlistItem } from 'models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -134,9 +135,9 @@ const WishlistComponent: NextComponentType = () => {
             </Link>
           </div>
         )}
-        {wishlistData?.items?.map((data, index) => {
+        {wishlistData?.items?.map((data: WishlistItem) => {
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={data.productId}>
               <div className="flex flex-col flex-wrap items-center">
                 <Link
                   href={{
