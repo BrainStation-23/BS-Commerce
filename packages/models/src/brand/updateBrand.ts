@@ -5,7 +5,7 @@ import { DescriptiveError } from 'src/index';
 
 export interface UpdateBrandRequest{
     info: BrandInfo,
-    meta: BrandMeta
+    meta?: BrandMeta
 }
 
 export interface UpdatedBrand{

@@ -1,0 +1,75 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""The Brand Info model"""
+type BrandInfoModel {
+  name: String!
+  description: String
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  pageSizeOptions: [Int!]
+}
+
+"""The Brand Meta model"""
+type BrandMetaModel {
+  keywords: String
+  description: String
+  title: String
+  SEFN: String
+}
+
+"""Brand Model"""
+type BrandModel {
+  id: String!
+  info: BrandInfoModel!
+  meta: BrandMetaModel!
+}
+
+type SingleBrandResponse {
+  error: String!
+  code: Int!
+  data: BrandModel!
+}
+
+type BrandResponse {
+  error: String!
+  code: Int!
+  data: [BrandModel!]!
+}
+
+type Query {
+  getBrand(brandId: String!): SingleBrandResponse!
+  getAllBrands(skip: Int, limit: Int): BrandResponse!
+}
+
+type Mutation {
+  addNewBrand(brand: BrandInput!): SingleBrandResponse!
+  deleteBrandById(brandId: String!): SingleBrandResponse!
+  updateBrandById(brandId: String!, brand: BrandInput!): SingleBrandResponse!
+}
+
+"""Input for Brand"""
+input BrandInput {
+  info: BrandInfoInput!
+  meta: BrandMetaInput
+}
+
+"""Input for Brand Info"""
+input BrandInfoInput {
+  name: String!
+  description: String
+  allowToSelectPageSize: Boolean
+  published: Boolean
+  displayOrder: Int
+  pageSizeOptions: [Int!]
+}
+
+"""Input for Brand Meta"""
+input BrandMetaInput {
+  keywords: String
+  description: String
+  title: String
+  SEFN: String
+}
