@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NextComponentType } from 'next';
 
@@ -151,11 +152,12 @@ const WishlistComponent: NextComponentType = () => {
                   passHref
                 >
                   <div className="relative flex w-56 cursor-pointer flex-col items-center justify-center">
-                    <Picture
+                    <Image
                       src={data.product?.photos![0].url!}
                       alt={data.product?.info.shortDescription}
                       width={200}
                       height={200}
+                      layout="fixed"
                     />
 
                     <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">

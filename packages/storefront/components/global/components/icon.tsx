@@ -46,12 +46,12 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   );
 
   let inWishlist = wishlistData?.find(
-    (item: WishlistItem) => item.productId === product.id
+    (item: WishlistItem) => item.productId === product?.id
   )
     ? true
     : false;
 
-  const productInCart = cartData.find((item) => item.productId === product.id)
+  const productInCart = cartData.find((item) => item.productId === product?.id)
     ? true
     : false;
 
