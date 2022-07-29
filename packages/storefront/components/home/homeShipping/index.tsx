@@ -14,6 +14,7 @@ const HomeShipping: NextComponentType = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="red"
                 stroke="#40a944"
+                strokeWidth="1"
                 viewBox="0 0 32 32"
                 className="h-10 w-10"
               >
@@ -33,7 +34,7 @@ const HomeShipping: NextComponentType = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="#40a944"
-                strokeWidth="2"
+                strokeWidth="1"
               >
                 <path
                   strokeLinecap="round"
@@ -55,7 +56,7 @@ const HomeShipping: NextComponentType = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="#40a944"
-                strokeWidth="2"
+                strokeWidth="1"
               >
                 <path
                   strokeLinecap="round"
@@ -84,7 +85,7 @@ const HomeShipping: NextComponentType = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="#40a944"
-                strokeWidth="2"
+                strokeWidth="1"
               >
                 <path
                   strokeLinecap="round"
