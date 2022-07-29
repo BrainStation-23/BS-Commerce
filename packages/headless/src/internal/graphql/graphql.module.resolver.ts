@@ -15,7 +15,7 @@ import { TagsModule } from 'src/modules/tags/tags.graphql.module';
 export const ResolveGraphqlModule = () => {
   return [
     ...GraphqlInitModule(),
-    // AuthModule,
+    AuthModule,
     // BrandModule,
     UserModule,
     // CompareModule,

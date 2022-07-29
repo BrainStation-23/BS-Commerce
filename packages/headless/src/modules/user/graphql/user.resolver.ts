@@ -16,17 +16,17 @@ import {
 export class UserResolver {
   constructor(private userService: UserService) { }
 
-  @Query(returns => AdminResponse,  { nullable: true, description: "Search and GET a single Item by ID" })
+  @Query(returns => AdminResponse)
   async getUser(@UserInfo() admin: Admin) {
     return await this.userService.getUser(admin.id);
   }
 
-  @Mutation(returns => AdminResponse,  { nullable: true, description: "Search and GET a single Item by ID" })
+  @Mutation(returns => AdminResponse)
   async updateUser(@Args('data') data: UpdateUserInput, @UserInfo() admin: Admin) {
     return await this.userService.updateUser(admin.id, data);
   }
 
-  @Mutation(returns => ChangePasswordResponse,  { nullable: true, description: "Search and GET a single Item by ID" })
+  @Mutation(returns => ChangePasswordResponse)
   async changePassword(@Args('passwordDetails') passwordDetails: ChangePasswordInput, @UserInfo() admin: Admin) {
     return await this.userService.changePassword(admin.id, passwordDetails);
   }
