@@ -41,7 +41,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
           {label}
         </label>
         <div className="errMsg text-red-600">
-          <ErrorMessage name={fieldID} />
+          <ErrorMessage name={fieldID!} />
         </div>
       </div>
     </div>
