@@ -107,6 +107,35 @@ const WishlistComponent: NextComponentType = () => {
             Clear Wishlist
           </button>
         </div>
+        {wishlistData.items?.length! <= 0 && (
+          <div className="my-10 flex flex-col items-center">
+            <div className="my-2">
+              <WishlistIcon height="h-16" width="w-16" />
+            </div>
+            <p className="text-xl text-green-600/100">
+              Your wishlist is empty.
+            </p>
+            <Link href="/" passHref>
+              <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-green-600/100">
+                <p>Continue Shopping</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="ml-1 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </Link>
+          </div>
+        )}
         <div className="mt-10 grid grid-cols-2 place-items-center gap-y-5 md:hidden">
           <WishlistBody productImageHeight={150} productImageWidth={150} />
         </div>
