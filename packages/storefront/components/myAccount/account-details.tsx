@@ -13,6 +13,8 @@ import { storeCustomerDetails } from 'toolkit/userSlice';
 import { CustomerSchema } from './schema/customer.schema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import AccountDetailsForm from '@/components/myAccount/account-detailForm';
+import SingleDetail from '@/components/myAccount/singleDetail';
 
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -88,92 +90,68 @@ const AccountDetails: React.FC = () => {
               <Form onSubmit={formikProps.handleSubmit} className="">
                 <fieldset disabled={!editable}>
                   <div className="mx-auto mt-3 flex flex-wrap">
-                    <div className="w-full md:w-1/3">
-                      <span className="">
-                        <span className="text-2xl font-semibold">
-                          Account Details
-                        </span>
-                        <span
-                          className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
-                          hidden={editable}
-                          onClick={() => setEditable(true)}
-                        >
-                          Edit
-                        </span>
-                        <button
-                          hidden={!editable}
-                          type="submit"
-                          className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
-                        >
-                          Save
-                        </button>
-                        <span
-                          hidden={!editable}
-                          className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
-                          onClick={() => setEditable(false)}
-                        >
-                          Cancel
-                        </span>
-                      </span>
+                    <div className="w-full md:w-1/2">
+                      <div className="mt-2 flex items-center">
+                        <div className="w-1/3 my-auto">
+                          <span className="text-2xl font-semibold">
+                            Account Details
+                          </span>
+                        </div>
+                        <div className="w-2/3">
+                          <span
+                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            hidden={editable}
+                            onClick={() => setEditable(true)}
+                          >
+                            Edit
+                          </span>
+                          <button
+                            hidden={!editable}
+                            type="submit"
+                            className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                          >
+                            Save
+                          </button>
+                          <span
+                            hidden={!editable}
+                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            onClick={() => setEditable(false)}
+                          >
+                            Cancel
+                          </span>
+                        </div>
+                      </div>
                       {/* Account Form */}
                       <div className="mt-2 flex flex-col gap-y-2">
-                        <div className="flex flex-row">
-                          <span className="mr-2 font-semibold">
-                            First name:{' '}
-                          </span>
-                          <Field
-                            className=""
-                            id="firstName"
-                            name="firstName"
-                            type="text"
-                          />
-                        </div>
-                        <div className="flex flex-row">
-                          <span className="mr-2 font-semibold">
-                            Last name:{' '}
-                          </span>
-                          <Field
-                            className=""
-                            id="lastName"
-                            name="lastName"
-                            type="text"
-                          />
-                        </div>
-                        <div className="flex flex-row">
-                          <span className="mr-2 font-semibold">Phone: </span>
-                          <Field
-                            className=""
-                            id="phone"
-                            name="phone"
-                            type="text"
-                            disabled={userData.isPhoneVerified}
-                            //
-                          />
-                          {editable
-                            ? ''
-                            : userData.isPhoneVerified
-                            ? ''
-                            : '(unverified)'}
-                        </div>
-                        <div className="flex flex-row">
-                          <span className="mr-2 font-semibold">Email: </span>
-                          <Field
-                            className=""
-                            id="email"
-                            name="email"
-                            type="email"
-                            disabled={userData.isEmailVerified}
-                          />
-                          {editable
-                            ? ''
-                            : userData.isEmailVerified
-                            ? ''
-                            : '(unverified)'}
-                        </div>
+                        <SingleDetail
+                          value={userData.firstName}
+                          label="First name"
+                        />
+                        <SingleDetail
+                          value={userData.lastName}
+                          label="Last name"
+                        />
+                        <SingleDetail
+                          value={userData.phone}
+                          label="Phone"
+                          verified={userData.isPhoneVerified}
+                        />
+                        <SingleDetail
+                          value={userData.email}
+                          label="Email"
+                          verified={userData.isEmailVerified}
+                        />
                       </div>
                     </div>
                   </div>
                 </fieldset>
+                <div className={`${editable ? '' : 'hidden'}`}>
+                  <hr className="m-5" />
+                  <AccountDetailsForm
+                    isPhoneVerified={false}
+                    isEmailVerified={true}
+                  />
+                </div>
               </Form>
             );
           }}
