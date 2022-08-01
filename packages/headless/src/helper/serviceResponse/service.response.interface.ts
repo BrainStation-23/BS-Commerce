@@ -1,3 +1,4 @@
+import { HttpException } from '@nestjs/common';
 
 export interface ServiceSuccessResponse {
     /** Response object from service layer */
@@ -36,5 +37,5 @@ export abstract class IServiceResponse {
 
     abstract errorResponse: (error: string, errors: DescriptiveError | null, code?: number) => ServiceErrorResponse;
 
-    abstract graphqlResponse: (res: object) => object;
+    abstract graphqlResponse: (res: ServiceSuccessResponse | ServiceErrorResponse) => ServiceSuccessResponse | ServiceErrorResponse | HttpException;
 }
