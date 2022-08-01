@@ -19,13 +19,13 @@ export class AuthResolver {
 
   @Mutation(returns => AdminSignUpResponse)
   async signUp(@Args('admin') admin: AdminSignUpInput) {
-    // return await this.authService.signUp(admin);
     const res = await this.authService.signUp(admin);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(returns => AdminSignInResponse)
   async signIn(@Args('data') data: AdminSignInInput) {
-    return await this.authService.signIn(data);
+    const res = await this.authService.signIn(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
