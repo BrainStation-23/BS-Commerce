@@ -9,11 +9,15 @@ import {
   ManufacturerSchemaGql,
   ManufacturersQuery,
 } from './manufacturer.model';
+import { Helper } from 'src/helper/helper.interface';
 
 @UseGuards(new RolesGuard(['admin']))
 @Resolver((of) => ManufacturerSchemaGql)
 export class ManufacturerResolver {
-  constructor(private manufacturerService: ManufacturerService) {}
+  constructor(
+    private manufacturerService: ManufacturerService,
+    private helper: Helper,
+  ) {}
 
   @Query(() => AllManufacturersResponse, {
     name: 'getAllManufacturers',
@@ -28,7 +32,8 @@ export class ManufacturerResolver {
     })
     query?: ManufacturersQuery,
   ) {
-    return await this.manufacturerService.getAllManufacturers(query);
+    const res = await this.manufacturerService.getAllManufacturers(query);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Query(() => ManufacturerResponse, {
@@ -39,7 +44,8 @@ export class ManufacturerResolver {
     @Args({ name: 'manufacturerId', type: () => String })
     manufacturerId: string,
   ) {
-    return await this.manufacturerService.getManufacturer(manufacturerId);
+    const res = await this.manufacturerService.getManufacturer(manufacturerId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ManufacturerResponse, {
@@ -50,7 +56,8 @@ export class ManufacturerResolver {
     @Args({ name: 'manufacturer', type: () => ManufacturerInput })
     manufacturer: ManufacturerInput,
   ) {
-    return await this.manufacturerService.addManufacturer(manufacturer);
+    const res = await this.manufacturerService.addManufacturer(manufacturer);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ManufacturerResponse, {
@@ -63,10 +70,11 @@ export class ManufacturerResolver {
     @Args({ name: 'manufacturer', type: () => ManufacturerInput })
     manufacturer: ManufacturerInput,
   ) {
-    return await this.manufacturerService.updateManufacturer(
+    const res = await this.manufacturerService.updateManufacturer(
       manufacturerId,
       manufacturer,
     );
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ManufacturerResponse, {
@@ -77,6 +85,9 @@ export class ManufacturerResolver {
     @Args({ name: 'manufacturerId', type: () => String })
     manufacturerId: string,
   ) {
-    return await this.manufacturerService.deleteManufacturer(manufacturerId);
+    const res = await this.manufacturerService.deleteManufacturer(
+      manufacturerId,
+    );
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
