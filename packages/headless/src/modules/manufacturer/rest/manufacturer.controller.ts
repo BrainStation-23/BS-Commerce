@@ -56,6 +56,31 @@ export class ManufacturerController {
 
   /**
    * @GET
+   * Get all manufacturers count number in total
+   * @returns {Object} Object of {data: { count: number, message: string}} | Object of {errors, error}
+   */
+  @Get('count')
+  @ApiResponse({
+    description: 'Get Manufacturers Count Success Response',
+    // type: GetManufacturersSuccessResponseDto,
+    status: HttpStatus.OK,
+  })
+  @ApiResponse({
+    description: 'Get Manufacturers Count Error Response',
+    // type: GetManufacturersErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  async manufacturersCount(
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } =
+      await this.manufacturerService.manufacturersCount();
+    res.status(code);
+    return response;
+  }
+
+  /**
+   * @GET
    * The getAllManufacturers function executes when manufacturers/ api is called
    * for getting all manufacturers
    * @param skip Optional

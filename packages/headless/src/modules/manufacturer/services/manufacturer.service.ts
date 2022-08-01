@@ -15,6 +15,9 @@ import {
   GetManufacturerSuccessMessages,
   GetManufacturerSuccessResponse,
   GetManufacturerErrorMessages,
+  GetManufacturersCountErrorMessages,
+  ManufacturersCountResponse,
+  GetManufacturersCountSuccessMessages,
 } from 'models';
 import {
   CreateManufacturerResponse,
@@ -246,5 +249,33 @@ export class ManufacturerService {
         HttpStatus.OK,
       ) as DeleteManufacturerResponse;
     }
+  }
+
+  /**
+   * The deleteManufacturer function checks firstly if it already exists or not
+   * then calls the deleteManufacturerById() from manufacturerRepo
+   * @param manufacturerId
+   * @returns { Promise<Object> } Object of Success or Error
+   */
+   async manufacturersCount(
+  ): Promise<ManufacturersCountResponse> {
+    const count = await this.manufacturerRepo.getManufacturersCount();
+
+    if (!count) {
+      return this.helper.serviceResponse.errorResponse(
+        GetManufacturersCountErrorMessages.MANUFACTURERS_NOT_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    } 
+    
+    return this.helper.serviceResponse.successResponse(
+      {
+        count,
+        message:
+          GetManufacturersCountSuccessMessages.MANUFACTURERS_COUNT_LOADED_SUCCESSFULLY
+      },
+      HttpStatus.OK,
+    ) as ManufacturersCountResponse;
   }
 }
