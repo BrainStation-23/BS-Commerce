@@ -1,7 +1,7 @@
-import { useState } from "react";
-import scheduledTaskData from "../../../data/scheduledTask.json";
-import Pagination from "../../global/pagination";
-import Table from "./table";
+import { useEffect, useState } from 'react';
+import scheduledTaskData from '../../../data/scheduledTask.json';
+import Pagination from '../../global/pagination';
+import Table from './table';
 
 const TaskTable = () => {
   const [activePage, setActivePage] = useState(1);
@@ -17,28 +17,25 @@ const TaskTable = () => {
     setActivePage(activePage);
   };
 
-  const paginatedData = paginateData(scheduledTaskData["scheduledTask"]);
+  const paginatedData = paginateData(scheduledTaskData['scheduledTask']);
+
+  useEffect(() => {
+    paginateData(scheduledTaskData['scheduledTask']);
+  }, [pageCount]);
 
   return (
     <>
       <Table items={paginatedData} />
 
-      <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
-        <Pagination
-          totalItems={6}
-          pageCount={pageCount}
-          activePage={activePage}
-          onClickPage={handleClickPage}
-        />
-
-        <div className="d-flex flex-wrap justify-content-center">
+      <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+        <div className="d-flex justify-content-center flex-wrap">
           <span>
-            <span style={{ margin: "10px" }}>Show</span>
+            <span style={{ margin: '10px' }}>Show</span>
             <button
               className="dropdown"
               style={{
-                padding: "10px",
-                border: "1px solid gray",
+                padding: '10px',
+                border: '1px solid gray',
               }}
             >
               <a
@@ -46,9 +43,9 @@ const TaskTable = () => {
                 className="dropdown-toggle"
                 data-bs-toggle="dropdown"
                 style={{
-                  textDecoration: "none",
-                  color: "black",
-                  padding: "10px",
+                  textDecoration: 'none',
+                  color: 'black',
+                  padding: '10px',
                 }}
               >
                 {pageCount}
@@ -91,7 +88,7 @@ const TaskTable = () => {
                 </a>
               </div>
             </button>
-            <span style={{ margin: "10px" }}>items</span>
+            <span style={{ margin: '10px' }}>items</span>
           </span>
         </div>
 
@@ -100,7 +97,7 @@ const TaskTable = () => {
             (activePage - 1) * pageCount + pageCount
           } of 6 items`}
           <span className="ms-2">
-            <button style={{ border: "none" }}>
+            <button style={{ border: 'none' }}>
               <i className="bi bi-arrow-clockwise align-items-center"></i>
             </button>
           </span>

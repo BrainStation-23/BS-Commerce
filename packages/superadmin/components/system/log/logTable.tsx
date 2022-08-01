@@ -1,9 +1,10 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-import Table from "../../global/table/table";
-import logData from "../../../data/log.json";
-import Pagination from "../../global/pagination";
+import Table from '../../global/table/table';
+import logData from '../../../data/log.json';
+import Pagination from '../../global/pagination';
+import { data } from 'cypress/types/jquery';
 
 const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
@@ -20,7 +21,7 @@ const LogIndex = () => {
           }}
         ></input>
       ),
-      path: "select",
+      path: 'select',
       content: (data: any, key: any, index: any) => (
         <td>
           {checkAll && <input type="checkbox" value="" checked></input>}
@@ -29,27 +30,27 @@ const LogIndex = () => {
       ),
     },
     {
-      label: "Log level",
-      path: "logLevel",
+      label: 'Log level',
+      path: 'logLevel',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Short message",
-      path: "shortMsg",
+      label: 'Short message',
+      path: 'shortMsg',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Created On",
-      path: "createdOn",
+      label: 'Created On',
+      path: 'createdOn',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "view",
-      path: "view",
+      label: 'view',
+      path: 'view',
       content: (data: any, key: any, index: any) => (
         <td>
-          <Link href={`/system/${data["id"]}`} passHref>
-            <button style={{ border: "none" }}>
+          <Link href={`/system/${data['id']}`} passHref>
+            <button style={{ border: 'none' }}>
               <span>
                 <i className="bi bi-eye"></i>
               </span>
@@ -71,37 +72,34 @@ const LogIndex = () => {
     setActivePage(activePage);
   };
 
-  const paginatedData = paginateData(logData["logData"]);
+  const paginatedData = paginateData(logData['logData']);
+
+  useEffect(() => {
+    paginateData(logData['logData']);
+  }, [pageCount]);
 
   return (
     <>
-      <div className="card rounded border-1 px-2 mt-3">
+      <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
           <p>
-            Learn more about{" "}
-            <a href="#" style={{ textDecoration: "none" }}>
-              {" "}
+            Learn more about{' '}
+            <a href="#" style={{ textDecoration: 'none' }}>
+              {' '}
               log
             </a>
           </p>
           <Table items={paginatedData} columns={columns} />
 
-          <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
-            <Pagination
-              totalItems={40}
-              pageCount={pageCount}
-              activePage={activePage}
-              onClickPage={handleClickPage}
-            />
-
-            <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+            <div className="d-flex justify-content-center flex-wrap">
               <span>
-                <span style={{ margin: "10px" }}>Show</span>
+                <span style={{ margin: '10px' }}>Show</span>
                 <button
                   className="dropdown"
                   style={{
-                    padding: "10px",
-                    border: "1px solid gray",
+                    padding: '10px',
+                    border: '1px solid gray',
                   }}
                 >
                   <a
@@ -109,9 +107,9 @@ const LogIndex = () => {
                     className="dropdown-toggle"
                     data-bs-toggle="dropdown"
                     style={{
-                      textDecoration: "none",
-                      color: "black",
-                      padding: "10px",
+                      textDecoration: 'none',
+                      color: 'black',
+                      padding: '10px',
                     }}
                   >
                     {pageCount}
@@ -154,7 +152,7 @@ const LogIndex = () => {
                     </a>
                   </div>
                 </button>
-                <span style={{ margin: "10px" }}>items</span>
+                <span style={{ margin: '10px' }}>items</span>
               </span>
             </div>
 
@@ -163,7 +161,7 @@ const LogIndex = () => {
                 (activePage - 1) * pageCount + pageCount
               } of 41 items`}
               <span className="ms-2">
-                <button style={{ border: "none" }}>
+                <button style={{ border: 'none' }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
                 </button>
               </span>

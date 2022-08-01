@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
-import Table from "../../global/table/table";
-import salesSummaryData from "../../../data/sales-summary.json";
-import Pagination from "../../global/pagination";
+import Table from '../../global/table/table';
+import salesSummaryData from '../../../data/sales-summary.json';
+import Pagination from '../../global/pagination';
 
 const SalesTable = () => {
   const [activePage, setActivePage] = useState(1);
@@ -10,33 +10,33 @@ const SalesTable = () => {
 
   const columns = [
     {
-      label: "Summary",
-      path: "summary",
+      label: 'Summary',
+      path: 'summary',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Number Of Orders",
-      path: "noOfOrders",
+      label: 'Number Of Orders',
+      path: 'noOfOrders',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Profit",
-      path: "profit",
+      label: 'Profit',
+      path: 'profit',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Shipping",
-      path: "shipping",
+      label: 'Shipping',
+      path: 'shipping',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Tax",
-      path: "tax",
+      label: 'Tax',
+      path: 'tax',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Order Total",
-      path: "orderTotal",
+      label: 'Order Total',
+      path: 'orderTotal',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
   ];
@@ -51,37 +51,34 @@ const SalesTable = () => {
     setActivePage(activePage);
   };
 
-  const paginatedData = paginateData(salesSummaryData["salesSummary"]);
+  const paginatedData = paginateData(salesSummaryData['salesSummary']);
+
+  useEffect(() => {
+    paginateData(salesSummaryData['salesSummary']);
+  }, [pageCount]);
 
   return (
     <>
-      <div className="card rounded border-1 px-2 mt-3">
+      <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
           <p>
-            Learn more about{" "}
-            <a href="#" style={{ textDecoration: "none" }}>
-              {" "}
+            Learn more about{' '}
+            <a href="#" style={{ textDecoration: 'none' }}>
+              {' '}
               reports
             </a>
           </p>
           <Table items={paginatedData} columns={columns} />
 
-          <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
-            <Pagination
-              totalItems={paginateData.length}
-              pageCount={pageCount}
-              activePage={activePage}
-              onClickPage={handleClickPage}
-            />
-
-            <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+            <div className="d-flex justify-content-center flex-wrap">
               <span>
-                <span style={{ margin: "10px" }}>Show</span>
+                <span style={{ margin: '10px' }}>Show</span>
                 <button
                   className="dropdown"
                   style={{
-                    padding: "10px",
-                    border: "1px solid gray",
+                    padding: '10px',
+                    border: '1px solid gray',
                   }}
                 >
                   <a
@@ -89,9 +86,9 @@ const SalesTable = () => {
                     className="dropdown-toggle"
                     data-bs-toggle="dropdown"
                     style={{
-                      textDecoration: "none",
-                      color: "black",
-                      padding: "10px",
+                      textDecoration: 'none',
+                      color: 'black',
+                      padding: '10px',
                     }}
                   >
                     {pageCount}
@@ -134,7 +131,7 @@ const SalesTable = () => {
                     </a>
                   </div>
                 </button>
-                <span style={{ margin: "10px" }}>items</span>
+                <span style={{ margin: '10px' }}>items</span>
               </span>
             </div>
 
@@ -143,7 +140,7 @@ const SalesTable = () => {
                 (activePage - 1) * pageCount + pageCount
               } of ${paginateData.length} items`}
               <span className="ms-2">
-                <button style={{ border: "none" }}>
+                <button style={{ border: 'none' }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
                 </button>
               </span>
