@@ -34,8 +34,8 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
      * @param searchQuery Optional
      * @returns {Promise<Number>} number | null
      */
-    async findManufacturersCount(searchQuery?: string): Promise<Number | null> {
-        return await ManufacturerModel.find({ searchQuery }).count().lean();
+    async findManufacturersCount(): Promise<Number | null> {
+        return await ManufacturerModel.find().countDocuments().lean();
     }
 
     /**

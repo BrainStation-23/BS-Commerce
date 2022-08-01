@@ -19,8 +19,8 @@ export class ManufacturerRepository {
         return await this.db.getAllManufacturers(skip, limit);
     }
 
-    async getManufacturersCount(searchQuery?: string): Promise<Number | null> {
-        return await this.db.findManufacturersCount(searchQuery);
+    async getManufacturersCount(): Promise<Number | null> {
+        return await this.db.findManufacturersCount();
     }
 
     async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {

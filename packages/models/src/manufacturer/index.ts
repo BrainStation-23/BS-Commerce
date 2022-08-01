@@ -5,3 +5,4 @@ export * from './deleteManufacturer';
 export * from './getManufacturer';
 export * from './manufacturer';
 export * from './manufacturerSeo';
+export * from './manufacturersCount';
