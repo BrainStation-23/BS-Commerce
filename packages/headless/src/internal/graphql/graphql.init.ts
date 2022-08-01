@@ -12,7 +12,6 @@ export const GraphqlInitModule = () => {
       playground: (coreConfig.env === 'DEVELOPMENT') ? true : false,
       cors: { origin: '*', credentials: true, },
       formatError: (error: any) => {
-        console.log(error)
         return {
           message: error.extensions?.exception?.response?.error || error?.message,
           code: error.extensions?.response?.statusCode || error.extensions?.exception?.status || 500,
