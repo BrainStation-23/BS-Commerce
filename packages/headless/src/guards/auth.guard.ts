@@ -1,8 +1,8 @@
-import { ExecutionContext, HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
-import { ExecutionContextHost } from "@nestjs/core/helpers/execution-context-host";
-import { GqlExecutionContext } from "@nestjs/graphql";
-import { AuthGuard } from "@nestjs/passport";
-import { coreConfig } from "config/core";
+import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import { AuthGuard } from '@nestjs/passport';
+import { coreConfig } from 'config/core';
 
 @Injectable()
 export class RolesGuard extends AuthGuard('jwt') {
