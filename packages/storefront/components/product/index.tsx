@@ -245,7 +245,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
                   <span className="text-sm">
-                    Manufacturer: {product?.manufacturer?.name ? product?.manufacturer?.name : '---'}
+                    Manufacturer:{' '}
+                    {product?.manufacturer?.name
+                      ? product?.manufacturer?.name
+                      : '---'}
                   </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
                   <span className="text-sm">SKU: {product?.info?.sku}</span>
@@ -356,7 +359,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       onClick={() => {
                         toCart();
                       }}
-                      className="my-1 ml-2 rounded bg-green-600 px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
+                      className="my-1 ml-2 rounded bg-[#40a944] px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -375,7 +378,8 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <Link href="/cart" passHref>
                     <button
                       disabled={!isAvailable}
-                      className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-green-400 hover:ease-in md:px-32	"
+                      className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
+                      onClick={toCart}
                     >
                       <span className="mx-auto">Buy Now</span>
                     </button>
