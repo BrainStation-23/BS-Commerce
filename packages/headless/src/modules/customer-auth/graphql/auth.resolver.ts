@@ -8,24 +8,27 @@ import {
   RegistrationAuthResponse,
   SignInAuthResponse,
 } from './auth.model';
+import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 export class CustomerAuthResolver {
-  constructor(private authService: CustomerAuthService) { }
+  constructor(private authService: CustomerAuthService, private helper: Helper) { }
 
   @Query(() => GetCustomerAuthResponse)
-  async getCustomer(@Args('query') query: GetAuthCustomerQuery) {
-    console.log(query)
-    return await this.authService.getCustomer(query);
+  async getCustomer(@Args('query', {nullable: true}) query?: GetAuthCustomerQuery) {
+    const res = await this.authService.getCustomer(query);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => RegistrationAuthResponse)
   async register(@Args('customer') customer: CreateCustomerInput) {
-    return await this.authService.register(customer);
+    const res = await this.authService.register(customer);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => SignInAuthResponse)
   async customerSignIn(@Args('data') data: CustomerSignInDataInput) {
-    return await this.authService.signIn(data);
+    const res = await this.authService.signIn(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }

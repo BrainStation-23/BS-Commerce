@@ -66,9 +66,6 @@ export class CustomerSignUpResponseMessage {
 
 @ObjectType()
 export class RegistrationAuthResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number
 
@@ -84,9 +81,6 @@ export class CustomerSignInResponseToken {
 
 @ObjectType()
 export class SignInAuthResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number
 
@@ -107,9 +101,6 @@ export class GetAuthCustomerQuery implements GetCustomerQuery {
 
 @ObjectType()
 export class GetCustomerAuthResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number
 
