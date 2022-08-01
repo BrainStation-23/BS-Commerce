@@ -64,7 +64,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    toast.success('+1 Item added to cart');
     dispatch(addToCart(cartItem));
     dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     event.preventDefault();
