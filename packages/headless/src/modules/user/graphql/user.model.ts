@@ -110,9 +110,6 @@ export class ChangePasswordInput {
 
 @ObjectType()
 export class AdminResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number;
 
@@ -128,9 +125,6 @@ export class ChangePasswordResponseMessage {
 
 @ObjectType()
 export class ChangePasswordResponse {
-  @Field({ nullable: true })
-  error?: string;
-
   @Field(type => Int)
   code: number;
 

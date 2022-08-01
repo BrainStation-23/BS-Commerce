@@ -24,7 +24,7 @@ export const ResolveGraphqlModule = () => {
     // ProductModule,
     // ManufacturerModule,
     // CategoryModule,
-    // CustomerAuthModule,
+    CustomerAuthModule,
     // MediaModule,
     // CompareModule,
     // WishListModule,
