@@ -165,7 +165,7 @@ export async function deleteFromCompareGraphql(productId: string) {}
 
 export async function getCustomerProfileGraphql(
   token: string
-): Promise<GetCustomerInformationResponse | undefined> {
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
   return undefined;
 }
 export async function addCustomerNewAddressGraphql(
