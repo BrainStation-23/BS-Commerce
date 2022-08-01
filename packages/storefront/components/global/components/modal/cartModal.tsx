@@ -44,15 +44,29 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
             >
               <XCircleIcon size={10} />
             </button>
-            <Image
-              src={product?.photos![0].url!}
-              alt={product?.photos![0].alt || 'product image'}
-              width={141}
-              height={141}
-            />
-            <div className="flex w-80 flex-col px-4">
-              <span className="mb-4">{product?.info.name}</span>
-              <div className="mb-8 flex flex-row text-green-600">
+            <div className="hidden md:block">
+              <Image
+                src={product?.photos![0].url!}
+                alt={product?.photos![0].alt || 'product image'}
+                width={141}
+                height={141}
+                layout="fixed"
+              />
+            </div>
+            <div className="block md:hidden">
+              <Image
+                src={product?.photos![0].url!}
+                alt={product?.photos![0].alt || 'product image'}
+                width={80}
+                height={80}
+                layout="fixed"
+              />
+            </div>
+            <div className="flex w-36 flex-col px-4 md:w-80">
+              <span className="mb-2 text-sm md:mb-4 md:text-base">
+                {product?.info.name}
+              </span>
+              <div className="mb-3 flex flex-row text-sm text-green-600 md:mb-6 md:text-base">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="mr-1 h-6 w-6"
@@ -73,7 +87,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
               <div>
                 <Link href="/cart" passHref>
                   <button
-                    className="rounded-md bg-gray-200/70 py-2 px-4 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white"
+                    className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white md:px-4 md:text-base"
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
@@ -84,7 +98,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                 </Link>
                 <Link href="/checkout" passHref>
                   <button
-                    className="ml-3 rounded-md bg-gray-200/70 py-2 px-4 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white"
+                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white md:mt-0 md:ml-3 md:px-4 md:text-base"
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
