@@ -1,7 +1,6 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { coreConfig } from 'config/core';
-import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { join } from 'path';
 
 export const GraphqlInitModule = () => {
