@@ -28,7 +28,7 @@ const Product = ({ product }: SingleProduct) => {
             height={120}
             width={120}
           />
-          <div className="absolute bottom-5 left-40 w-36 origin-left scale-0 transition-transform duration-300 group-hover:scale-100 md:left-28">
+          <div className="absolute bottom-5 left-40 w-36 origin-left transition-transform duration-300 group-hover:scale-100 md:left-28 md:scale-0">
             <Icon product={product} />
           </div>
           <ProductInfo product={product} />
