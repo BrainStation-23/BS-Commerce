@@ -5,23 +5,29 @@ var cookie = require('cookie');
 import { IOrderResponseData } from 'models';
 import { userAPI } from 'APIs';
 import Detail from '@/components/order/detail';
-
+import SingleOrderDetails from '@/components/order/singleOrder';
 interface Props {
   orderProduct: {
-    data: IOrderResponseData
+    data: IOrderResponseData;
   };
 }
 
 const Details: NextPage<Props> = ({ orderProduct }: Props) => {
-
   const singleOrder = orderProduct?.data;
-  return <div>{singleOrder ? <Detail singleOrder={singleOrder} /> : null}</div>;
+  return (
+    <>
+      <SingleOrderDetails orderProduct={orderProduct} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context?.query?.id;
   let token = cookie?.parse(context.req.headers?.cookie);
-  const orderProduct = await userAPI.getOrderProduct(token?.token, id as string);
+  const orderProduct = await userAPI.getOrderProduct(
+    token?.token,
+    id as string
+  );
   return {
     props: {
       orderProduct: orderProduct,
