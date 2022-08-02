@@ -1,4 +1,3 @@
-import { CreateManufacturerDto } from 'src/modules/manufacturer/dto/createManufacturer.dto';
 import { IManufacturerDatabase } from 'src/modules/manufacturer/repositories/manufacturer.database.interface';
 import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerModel } from './manufacturer.model';
@@ -14,7 +13,7 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
      * @param manufacturer 
      * @returns {Promise<Object>} manufacturer | null
      */
-    async createManufacturer(manufacturer: CreateManufacturerDto): Promise<Manufacturer | null> {
+    async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
         return await ManufacturerModel.create(manufacturer);
     }
 

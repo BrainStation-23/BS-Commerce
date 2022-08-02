@@ -1,17 +1,17 @@
 import {
   DeleteManufacturerSuccessResponseDto,
   DeleteManufacturerErrorResponseDto,
-} from './../dto/deleteManufacturer.dto';
+} from './dto/deleteManufacturer.dto';
 import {
   UpdateManufacturerDto,
   UpdateManufacturerErrorResponseDto,
   UpdateManufacturerSuccessResponseDto,
-} from './../dto/updateManufacturer.dto';
+} from './dto/updateManufacturer.dto';
 import {
   CreateManufacturerSuccessResponseDto,
   CreateManufacturerErrorResponseDto,
-} from './../dto/createManufacturer.dto';
-import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
+} from './dto/createManufacturer.dto';
+import { CreateManufacturerDto } from './dto/createManufacturer.dto';
 import { ManufacturerService } from './../services/manufacturer.service';
 import {
   ApiBearerAuth,
@@ -41,11 +41,11 @@ import {
   GetManufacturersErrorResponseDto,
   GetManufacturersQueryDto,
   GetManufacturersSuccessResponseDto,
-} from '../dto/getManufacturers.dto';
+} from './dto/getManufacturers.dto';
 import {
   GetManufacturerErrorResponseDto,
   GetManufacturerSuccessResponseDto,
-} from '../dto/getManufacturer.dto';
+} from './dto/getManufacturer.dto';
 import { RolesGuard } from 'src/guards/auth.guard';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')

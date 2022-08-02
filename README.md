@@ -9,33 +9,53 @@ Techstack included:
 
 ## Getting Started
 
-First, make sure you install `Yarn`:
+**To start this project, you need to ensure that you are in the root path of this project.**
+First, make sure you install `Yarn`: [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)
 
-Install all the dependencies and projects packages
+### Connect to MongoDB
+
+You need to install MongoDB on your local computer before you can connect to it. You can install MongoDB by following these instructions.
+
+- For the Installation process in Windows -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-windows/)
+- For the Installation process in Ubuntu -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-and-configure-mongodb-in-ubuntu/)
+- For the Installation process in Mac OS -> [MongoDB](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/) or you can try [Geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-mongodb-on-macos/)
+
+MongoDB default settings -> the Hostname would be the **`localhost`**, and the port is **`27017`**.
+
+**Install all the dependencies and projects packages**
 
 ```bash
 yarn bootstrap
 ```
 
-Run all the projects [backend server and frontend server]
-
-```bash
-yarn dev
-```
-
-Build all the projects [backend server and frontend server]
+**Build all the projects [backend server and frontend server]**
 
 ```bash
 yarn build
 ```
 
+**Run all the projects [backend server and frontend server]**
+
+```bash
+yarn dev
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see api live.
-
 Open [http://localhost:3001](http://localhost:3001) with your browser to see SuperAdmin web panel.
-
 Open [http://localhost:3002](http://localhost:3002) with your browser to see StoreFront.
-
 Open [http://localhost:3003](http://localhost:3003) with your browser to see StoreAdmin.
+
+### Seed MongoDB Data
+
+### `seeder`
+
+> To seed data to the packages
+#### How to start
+
+```bash
+yarn seeder:build
+yarn seeder:run
+```
 
 ## Learn More
 
