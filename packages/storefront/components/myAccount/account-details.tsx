@@ -15,6 +15,9 @@ import { CustomerSchema } from './schema/customer.schema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
+import WithAuth from '@/components/auth/withAuth';
+
+var cookie = require('cookie');
 
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -49,6 +52,9 @@ const AccountDetails: React.FC = () => {
     dispatch(storeCustomerDetails(response!.data));
     setEditable(false);
   };
+  
+
+
 
   return (
     <>
@@ -161,4 +167,4 @@ const AccountDetails: React.FC = () => {
   );
 };
 
-export default AccountDetails;
+export default WithAuth(AccountDetails);
