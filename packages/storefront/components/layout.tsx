@@ -30,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main>{children}</main>
       <Footer />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer position="bottom-right" theme="colored"/>
     </>
   );
 };
