@@ -51,6 +51,5 @@ export interface IOrderResponseData extends IOrderCreateData{
   shippingStatus: string;
   paymentStatus: string; 
   orderId: string;
-  userId: string;
   orderedDate: Date;
 }

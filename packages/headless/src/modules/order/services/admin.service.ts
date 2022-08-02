@@ -1,21 +1,31 @@
-import { AllOrderListDto, AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.dto';
-import { OrderResponseDto } from './../dto/order.response.dto';
+import { IOrderResponseData, OrderIncompleteStat } from 'models';
 import { HttpStatus, Injectable } from "@nestjs/common";
-import { OrderEntity, OrderStatusEnum, PaymentStatusEnum, ShippingStatusEnum } from "src/entity/order";
+
+import { 
+    OrderEntity, 
+    OrderStatusEnum, 
+    OrderStatusEnumType, 
+    PaymentStatusEnum, 
+    ShippingStatusEnum, 
+    OrderStatEntity, 
+    OrderIncompleteStatEntity, 
+    GetAllOrderQueryEntity, 
+    AllOrdersEntity, 
+    ChangeStatusEntity, 
+    OrderResponseEntity 
+} from "src/entity/order";
 import { errorResponse, successResponse } from "src/utils/response";
 import { IServiceResponse } from "src/utils/response/service.response.interface";
-import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from "../dto/admin.response.dto";
-import { OrderData } from "../dto/order.response.dto";
 import { OrderRepository } from "../repositories";
 
 @Injectable()
 export class OrderAdminService{
     constructor(private orderRepository: OrderRepository) {}
 
-    async getOrderById(orderId: string):Promise<IServiceResponse<OrderData>>{
-        const orderData = await this.orderRepository.getOrderById(orderId)
+    async getOrderById(orderId: string):Promise<IServiceResponse<OrderResponseEntity>>{
+        const orderData = await this.orderRepository.getOrderById(orderId);
         if (orderData) {
-            return successResponse(OrderData, orderData);
+            return successResponse(OrderResponseEntity, orderData);
           }
         return errorResponse(
         'Error in order creation.',
@@ -24,7 +34,7 @@ export class OrderAdminService{
         );
     }
 
-    async getOrderEnums():Promise<IServiceResponse<OrderStatusEnumDto>>{
+    async getOrderEnums():Promise<IServiceResponse<OrderStatusEnumType>>{
         const enums = {
             orderStatusEnums: OrderStatusEnum,
             paymentStatusEnums: PaymentStatusEnum,
@@ -33,42 +43,43 @@ export class OrderAdminService{
         return successResponse( null , enums)
     }
 
-    async getOrderStatistics():Promise<IServiceResponse<OrderStatDto>>{
+    async getOrderStatistics():Promise<IServiceResponse<OrderStatEntity>>{
         const orderStat = await this.orderRepository.getOrderStatistics()
         if(orderStat){
-            return successResponse(OrderStatDto, orderStat)
+            return successResponse(OrderStatEntity, orderStat)
         }
         return errorResponse(
             'Error in order statistics', null, HttpStatus.BAD_REQUEST
         )
     }
-    async getIncompleteStatistics():Promise<IServiceResponse<OrderIncompleteStatDto>>{
+
+    async getIncompleteStatistics():Promise<IServiceResponse<OrderIncompleteStatEntity>>{
         const orderStat = await this.orderRepository.getIncompleteStatistics()
         if(orderStat){
-            return successResponse(OrderIncompleteStatDto, orderStat)
+            return successResponse(OrderIncompleteStatEntity, orderStat)
         }
         return errorResponse(
             'Error in order incomplete statistics', null, HttpStatus.BAD_REQUEST
         )
     }
 
-    async changeStatus(body: ChangeStatusDto): Promise<any>{
-        const orderStat = await this.orderRepository.changeStatus(body)
+    async changeStatus(body: ChangeStatusEntity): Promise<IServiceResponse<OrderResponseEntity>>{
+        const orderStat = await this.orderRepository.changeStatus(body);
         if(orderStat){
-            return successResponse(OrderIncompleteStatDto, orderStat)
+            return successResponse(OrderEntity, orderStat)
         }
         return errorResponse(
             'Error in change status', null, HttpStatus.BAD_REQUEST
         )
     }
 
-    async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<IServiceResponse<AllOrderResponseDto>> {
+    async getOrderList(query?: GetAllOrderQueryEntity, skip?: number, limit?: number): Promise<IServiceResponse<AllOrdersEntity>> {
         const orderList = await this.orderRepository.getOrderList(query, skip, limit);
-        const response: AllOrderResponseDto = {
+        const response: AllOrdersEntity = {
             orders: orderList
         }
         if(orderList){
-            return successResponse(AllOrderResponseDto, response)
+            return successResponse(AllOrdersEntity, response)
         }
         return errorResponse(
             'Error in getting order list', null, HttpStatus.BAD_REQUEST
