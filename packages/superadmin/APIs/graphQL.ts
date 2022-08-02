@@ -117,3 +117,9 @@ export async function mediaUploadGraphQL(
 export async function getAllOrderListGraphQL() {
   return undefined;
 }
+
+export async function deleteBrandGraphQL(
+  productId: string
+): Promise<boolean | undefined> {
+  return ;
+}

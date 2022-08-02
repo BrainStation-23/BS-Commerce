@@ -117,6 +117,7 @@ export interface apiFunction {
   ) => Promise<UploadFileSuccessResponse | undefined>;
   getTags: () => Promise<GetTagsResponse | undefined>;
   createBrand(data: CreateBrandRequest, router: NextRouter): Promise<any>;
+  deleteBrand(productId: string): Promise<boolean | undefined>;
 }
 
 export interface adminCreate {

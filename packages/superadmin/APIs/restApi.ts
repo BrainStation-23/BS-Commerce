@@ -511,3 +511,15 @@ export async function getSingleOrderByIdRest(
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function deleteBrandRest(
+  brandId: string
+): Promise<boolean | undefined> {
+  try {
+    await axios.delete(`${apiEndPoints.brands}/${brandId}`);
+    toast.success('Delete Successful');
+    return true;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}

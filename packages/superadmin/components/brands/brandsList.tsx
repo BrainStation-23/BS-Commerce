@@ -14,7 +14,7 @@ interface Props {
 const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
-  const [ProductID, setProductID] = useState('');
+  const [BrandID, setBrandID] = useState('');
 
   const onChangeForList = async () => {
     const brandsList = await userAPI.getBrands();
@@ -22,7 +22,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   };
 
   const deleteProductFunction = async () => {
-    const res = await userAPI.deleteProduct(ProductID);
+    const res = await userAPI.deleteBrand(BrandID);
     if (res) {
       onChangeForList();
     }
@@ -33,7 +33,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   };
 
   const onClickForDelete = (id: string) => {
-    setProductID(id);
+    setBrandID(id);
     setModal({ ...modal, delete: true });
   };
   const [modal, setModal] = useState({
