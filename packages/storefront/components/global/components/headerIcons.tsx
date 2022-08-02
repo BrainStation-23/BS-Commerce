@@ -71,9 +71,9 @@ export const XCircleIcon: React.FC<IXCircleIcon> = ({ size }: IXCircleIcon) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className={size ? `h-${size} w-${size}` : 'h-10 w-10'}
-      fill="none"
+      fill="#40A944"
       viewBox="0 0 24 24"
-      stroke="currentColor"
+      stroke="white"
       strokeWidth={1}
     >
       <path

@@ -76,7 +76,7 @@ export async function getPublicProductsGraphql(): Promise<
 }
 
 export async function getPublicProductByIdGraphql(
-  productId: GetCustomerProductParams
+  productId: string
 ): Promise<GetCustomerProductResponse | undefined> {
   return undefined;
 }
@@ -165,7 +165,7 @@ export async function deleteFromCompareGraphql(productId: string) {}
 
 export async function getCustomerProfileGraphql(
   token: string
-): Promise<GetCustomerInformationResponse | undefined> {
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
   return undefined;
 }
 export async function addCustomerNewAddressGraphql(

@@ -13,6 +13,10 @@ const Path: React.FC<Path> = (props: Path) => {
   const { cart, info, shipping, payment, setModal } = props;
   return (
     <div className="flex flex-wrap text-xs gap-2">
+      <div>
+        <Link href="/">Home</Link>
+      </div>
+      {" > "}
       <div className={cart ? "font-bold" : "font-normal"}>
         <Link href="/cart">Cart</Link>
       </div>

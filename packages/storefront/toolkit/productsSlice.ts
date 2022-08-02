@@ -43,7 +43,7 @@ export const productsSlice = createSlice({
       action: PayloadAction<string>
     ) => {
       const newList = state.wishlist.items?.filter(
-        (item) => item.productId != action.payload
+        (item: WishlistItem) => item.productId != action.payload
       );
       state.wishlist = { ...state.wishlist, items: newList };
     },
