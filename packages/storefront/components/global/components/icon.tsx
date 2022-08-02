@@ -13,6 +13,7 @@ import {
 } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
+import CartToast from '@/components/global/components/cartToast';
 
 interface SingleProduct {
   product: Product | WishlistProduct | CustomerProduct;
@@ -64,9 +65,11 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    toast.success('+1 Item added to cart');
+    // toast.success('+1 Item added to cart');
+    toast(<CartToast product={product} />);
+
     dispatch(addToCart(cartItem));
-    dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+    // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     event.preventDefault();
   };
 
