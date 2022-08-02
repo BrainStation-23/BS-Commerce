@@ -74,7 +74,7 @@ export interface apiFunction {
     GetCustomerAllProductsResponse | undefined
   >;
   getPublicProductsById: (
-    productId: GetCustomerProductParams
+    productId: string
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
@@ -85,7 +85,10 @@ export interface apiFunction {
     router: NextRouter
   ) => Promise<IOrderResponseData | undefined>;
   getOrderProducts: (token: string) => Promise<IOrderResponseData | undefined>;
-  getOrderProduct: (token: string, OrderId: string) => Promise<IOrderResponseData | undefined>;
+  getOrderProduct: (
+    token: string,
+    OrderId: string
+  ) => Promise<IOrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest
   ) => Promise<AddToWishlistResponse | undefined>;
