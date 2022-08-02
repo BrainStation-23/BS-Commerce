@@ -25,8 +25,7 @@ export class ManufacturerResolver {
       'Get all manufacturers passing with optional query as skip and limit',
   })
   async getAllManufacturers(
-    @Args({
-      name: 'query',
+    @Args('query', {
       type: () => ManufacturersQuery,
       nullable: true,
     })
@@ -41,7 +40,7 @@ export class ManufacturerResolver {
     description: 'Get single manufacturer by id',
   })
   async getManufacturer(
-    @Args({ name: 'manufacturerId', type: () => String })
+    @Args('manufacturerId', { type: () => String })
     manufacturerId: string,
   ) {
     const res = await this.manufacturerService.getManufacturer(manufacturerId);

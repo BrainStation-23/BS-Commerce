@@ -131,17 +131,3 @@ export class AllManufacturersResponse {
   @Field(type => ManufacturerArrayResponse, { nullable: true })
   data?: ManufacturerArrayResponse;
 }
-
-// type Query {
-  // getAllManufacturers(skip: Int, limit: Int): !AllManufacturersResponse;
-  // getManufacturer(manufacturerId: !String): !ManufacturerResponse;
-// }
-
-// type Mutation {
-//   addManufacturer(manufacturer: !ManufacturerInput): !ManufacturerResponse;
-//   updateManufacturer(
-//     manufacturerId: !String,
-//     manufacturer: !ManufacturerInput,
-//   ): !ManufacturerResponse;
-//   deleteManufacturer(manufacturerId: !String): !ManufacturerResponse;
-// }
