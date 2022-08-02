@@ -246,8 +246,7 @@ export async function getCustomerWishlistRest(
     const res = await axios.get(`${apiEndPoints.getCustomerWishlist}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    return res.data.data as Wishlist;
+    return res?.data?.data as Wishlist;
   } catch (error: any) {
     const errorData = {
       userId: '',
