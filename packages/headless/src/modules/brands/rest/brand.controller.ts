@@ -11,6 +11,7 @@ import {
   Res,
   HttpStatus,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -25,6 +26,7 @@ import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/
 import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './dto/updateBrandDto';
 import { BrandDto } from './dto/brandDto';
 import { RolesGuard } from 'src/guards/auth.guard';
+import { UpdateValidationPipe } from '../validators/UpdateValidationPipe';
 
 @ApiTags('Brand API')
 @Controller('brands')
@@ -108,7 +110,7 @@ export class BrandController {
     return response;
   }
 
-  @Put('/:id')
+  @Patch('/:id')
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @ApiResponse({
@@ -123,7 +125,7 @@ export class BrandController {
   })
   async updateBrand(
     @Param('id') brandId: string,
-    @Body(ObjectValidationPipe) featuresToUpdate: UpdateBrandRequestdto,
+    @Body(UpdateValidationPipe) featuresToUpdate: UpdateBrandRequestdto,
     @Res({ passthrough: true })
     res: Response,
   ) {
@@ -160,4 +162,6 @@ export class BrandController {
     res.status(code);
     return response;
   }
+
+  // @Get('/:id')
 }

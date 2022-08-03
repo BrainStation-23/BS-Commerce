@@ -30,11 +30,23 @@ export class BrandService{
     } 
 
     async updateBrandById(brandId: string, brandFeatures: UpdateBrandRequest): Promise<UpdateBrandResponse>{
-        const doesBrandExist = await this.brandRepo.getBrandByName(brandFeatures.info.name);
-        if(doesBrandExist) return { error: ErrorMessageUpdate.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
+        const oldBrand = await this.brandRepo.getBrandById(brandId);
+        if(!oldBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
-        const updatedBrand = await this.brandRepo.updateBrandById(brandId, brandFeatures);
-        if(!updatedBrand) return {error: ErrorMessageUpdate.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST};
+        for(let key in brandFeatures){
+            if(oldBrand[key] && key !== 'id'){
+                if(typeof brandFeatures[key] === 'object'){
+                    for( let k in brandFeatures[key]){
+                        if(oldBrand[key].hasOwnProperty(k) && k !== 'id'){
+                            oldBrand[key][k] = brandFeatures[key][k];
+                        }
+                    }      
+                }
+            }
+        }
+
+        const updatedBrand = await this.brandRepo.updateBrandById(brandId, oldBrand);
+        if(!updatedBrand) return {error: ErrorMessageUpdate.CANNOT_UPDATE_BRAND, errors: null, code: HttpStatus.BAD_REQUEST};
         
         return { code: HttpStatus.OK, data: updatedBrand};
     }
