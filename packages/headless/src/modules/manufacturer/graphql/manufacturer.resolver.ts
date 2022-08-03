@@ -12,7 +12,7 @@ import {
 } from './manufacturer.model';
 import { Helper } from 'src/helper/helper.interface';
 
-// @UseGuards(new RolesGuard(['admin']))
+@UseGuards(new RolesGuard(['admin']))
 @Resolver((of) => ManufacturerSchemaGql)
 export class ManufacturerResolver {
   constructor(
@@ -55,18 +55,6 @@ export class ManufacturerResolver {
     manufacturerId: string,
   ) {
     const res = await this.manufacturerService.getManufacturer(manufacturerId);
-    return this.helper.serviceResponse.graphqlResponse(res);
-  }
-
-  @Mutation(() => ManufacturerResponse, {
-    name: 'addManufacturer',
-    description: 'Create a new manufacturer within the ManufacturerInput',
-  })
-  async addManufacturer(
-    @Args({ name: 'manufacturer', type: () => ManufacturerInput })
-    manufacturer: ManufacturerInput,
-  ) {
-    const res = await this.manufacturerService.addManufacturer(manufacturer);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 

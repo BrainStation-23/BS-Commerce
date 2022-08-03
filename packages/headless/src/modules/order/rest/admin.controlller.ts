@@ -1,13 +1,14 @@
+import { OrderEntity } from './../../../entity/order';
 import { Body, Controller, Get, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
 import { RolesGuard } from 'src/guards/auth.guard';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
-import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from '../dto/admin.response.dto';
-import { OrderData } from '../dto/order.response.dto';
+import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from './dto/admin.response.dto';
+import { OrderData } from './dto/order.response.dto';
 import { OrderAdminService } from '../services/admin.service';
-import { AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.dto';
+import { AllOrderResponseDto, GetAllOrderQueryDto } from './dto/allOrderList.dto';
 
 @ApiTags('Order - Admin API')
 @UseGuards(new RolesGuard(['admin']))
@@ -15,11 +16,10 @@ import { AllOrderResponseDto, GetAllOrderQueryDto } from './../dto/allOrderList.
 @Controller('admin/order')
 export class OrderAdminController {
   constructor(private orderAdminService: OrderAdminService) {}
-
     @ApiResponse({type: OrderStatusEnumDto, description: "Order status, payment, shipment status enums"})
     @Get('enums')
     async getOrderEnums(@Res({ passthrough: true }) res: Response):Promise<IServiceResponse<OrderStatusEnumDto>>{
-        const {code, ...response} =  await this.orderAdminService.getOrderEnums()
+        const {code, ...response} =  await this.orderAdminService.getOrderEnums();
         res.status(code);
         return response;
     }
@@ -27,7 +27,7 @@ export class OrderAdminController {
     @ApiResponse({type: OrderStatDto, description: "Order statistics"})
     @Get('statistics')
     async getOrderStatistics(@Res({ passthrough: true }) res: Response):Promise<IServiceResponse<OrderStatDto>>{
-        const {code, ...response} =  await this.orderAdminService.getOrderStatistics()
+        const {code, ...response} =  await this.orderAdminService.getOrderStatistics();
         res.status(code);
         return response;
     }
@@ -49,19 +49,20 @@ export class OrderAdminController {
         return response;
     }
 
-
     @ApiResponse({type: OrderData, description:"Order details by order id"})
     @ApiParam({name: 'orderId', example:'84dab8b9-8461-4f2f-9863-b6934ed9cc27'})
     @Get(':orderId')
     async getOrderById(@Param('orderId') orderId: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderData>>{
+        
         const {code, ...response} = await this.orderAdminService.getOrderById(orderId);
+
         res.status(code);
         return response;
     }
 
     @ApiBody({type: ChangeStatusDto}) 
     @Patch('change-status')
-    async changeStatus(@Body() body: ChangeStatusDto, @Res({ passthrough: true }) res: Response): Promise<any>{
+    async changeStatus(@Body() body: ChangeStatusDto, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderData>>{
         const {code, ...response} = await this.orderAdminService.changeStatus( body);
         res.status(code);
         return response;

@@ -1,18 +1,24 @@
-import { ProductOrderDto, CreateOrderDto } from 'src/modules/order/dto/order.create.dto';
-import { OrderEntity, OrderStatusEnum, ShippingStatusEnum } from 'src/entity/order';
-import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, StatusTypeDto } from 'src/modules/order/dto/admin.response.dto';
-import { OrderData } from 'src/modules/order/dto/order.response.dto';
+import { 
+  ChangeStatusEntity, 
+  GetAllOrderQueryEntity, 
+  OrderEntity, 
+  OrderIncompleteStatEntity, 
+  OrderStatEntity, 
+  OrderStatusEnum, 
+  ShippingStatusEnum, 
+  StatusTypeDto 
+} from 'src/entity/order';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { GetAllOrderQueryDto } from 'src/modules/order/dto/allOrderList.dto';
+import { IOrderCreateData, IProductOrderData } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: CreateOrderDto): Promise<OrderEntity> {
+  async createOrder(userId: string, body: IOrderCreateData): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async addPhotoDetails(products: ProductOrderDto[]): Promise<ProductOrderDto[]>{
+  async addPhotoDetails(products: IProductOrderData[]): Promise<IProductOrderData[]>{
     let newProductList = [];
     newProductList = await Promise.all(products.map( async (product) => {
         const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
@@ -30,11 +36,11 @@ export class OrderDatabase implements IOrderDatabase {
     return null;
   }
 
-  async getOrderById(orderId: string): Promise<OrderData>{
+  async getOrderById(orderId: string): Promise<OrderEntity>{
     return await OrderModel.findOne({ orderId }).lean();
   }
-
-  async getOrderStatistics(): Promise<OrderStatDto>{
+  
+  async getOrderStatistics(): Promise<OrderStatEntity>{
     try{
       const today = new Date();
       today.setHours(0,0,0,0);
@@ -58,7 +64,7 @@ export class OrderDatabase implements IOrderDatabase {
       ).exec()
 
       if(orderStat){
-        return orderStat[0] as OrderStatDto;
+        return orderStat[0] as OrderStatEntity;
       }
     }catch(err){
       console.log(err)
@@ -66,7 +72,7 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async getIncompleteStatistics(): Promise<OrderIncompleteStatDto>{
+  async getIncompleteStatistics(): Promise<OrderIncompleteStatEntity>{
 
     try { 
       const orderStat = await OrderModel.aggregate(
@@ -85,7 +91,7 @@ export class OrderDatabase implements IOrderDatabase {
         ]
       ).exec() 
       if(orderStat){
-        return orderStat[0] as OrderIncompleteStatDto;
+        return orderStat[0] as OrderIncompleteStatEntity;
       }
     } catch (error) {
         console.log(error)
@@ -93,7 +99,7 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async changeStatus(body: ChangeStatusDto):Promise<OrderEntity>{
+  async changeStatus(body: ChangeStatusEntity):Promise<OrderEntity>{
     try {
       const {orderId, statusType, statusValue} = body
       let update = {}
@@ -115,7 +121,7 @@ export class OrderDatabase implements IOrderDatabase {
     
   }
 
-  async getOrderList(query?: GetAllOrderQueryDto, skip?: number, limit?: number): Promise<OrderEntity[]>{
+  async getOrderList(query?: GetAllOrderQueryEntity, skip?: number, limit?: number): Promise<OrderEntity[]>{
     let { shippingStatus, orderStatus, paymentStatus, startDate, endDate} = query;
 
     let queryParams = {
