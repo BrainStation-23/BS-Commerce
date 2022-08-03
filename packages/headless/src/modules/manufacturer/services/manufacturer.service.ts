@@ -172,9 +172,19 @@ export class ManufacturerService {
       id: manufacturerId,
     });
 
+    const isManufacturerExist = await this.manufacturerRepo.getManufacturer({
+      name: manufacturer.name,
+    });
+
     if (!foundManufacturer) {
       return this.helper.serviceResponse.errorResponse(
         UpdateManufacturerErrorMessages.MANUFACTURER_NOT_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    } else if (isManufacturerExist) {
+      return this.helper.serviceResponse.errorResponse(
+        UpdateManufacturerErrorMessages.THE_SAME_NAME_MANUFACTURER_ALREADY_EXISTS,
         null,
         HttpStatus.BAD_REQUEST,
       );

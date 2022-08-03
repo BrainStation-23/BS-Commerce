@@ -36,6 +36,9 @@ export class GetAllOrderQueryDto implements GetAllOrderQuery{
 }
 export class AllOrderListDto implements IOrderCreateData{
     @ApiProperty()
+    orderId: string;
+
+    @ApiProperty()
     userId?: string;
 
     @ApiProperty({ type: OrderAddressDto })
@@ -49,13 +52,25 @@ export class AllOrderListDto implements IOrderCreateData{
   
     @ApiProperty()
     paymentMethod: string;
+
+    @ApiProperty()
+    orderedDate: Date;
+
+    @ApiProperty()
+    orderStatus: string;
   
     @ApiProperty()
-    productCost: number;
+    shippingStatus: string;
+  
+    @ApiProperty()
+    paymentStatus: string;
   
     @ApiProperty({ type: [ProductOrderDto] })
     @Type(() => ProductOrderDto)
     products: ProductOrderDto[];
+
+    @ApiProperty()
+    productCost: number;
   
     @ApiProperty()
     shippingCost: number;
@@ -79,20 +94,9 @@ export class AllOrderListDto implements IOrderCreateData{
     @ApiProperty()
     paypalRedirectUrl?: string;
   
-    @ApiProperty()
-    orderStatus: string;
+    
   
-    @ApiProperty()
-    shippingStatus: string;
   
-    @ApiProperty()
-    paymentStatus: string;
-  
-    @ApiProperty()
-    orderId: string;
-  
-    @ApiProperty()
-    orderedDate: Date;
 
 }
 
