@@ -141,6 +141,36 @@ describe('Initializing... Manufactrurer controller testing', () => {
     }, 30000);
   });
 
+  describe('GET /manufacturersCount with valid token', () => {
+    it('should return 200', async () => {
+      return await request(app.getHttpServer())
+        .get('/manufacturers/count')
+        .set('Authorization', `Bearer ${token}`)
+        .expect((res) => {
+          if (res.body.data.count === 0) {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.count).toEqual(0);
+            expect(res.body.data.message).toEqual('MANUFACTURER_IS_EMPTY');
+          } else if (res.body.data.count > 0) {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURERS_COUNT_LOADED_SUCCESSFULLY',
+            );
+            expect(res.body.data.count).toEqual(expect.any(Number));
+            expect(res.body.data.manufacturers).toEqual(
+                expect.objectContaining({
+                  count: expect.any(Number),
+                  message: expect.any(String)
+                }),
+            );
+          } else {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.data.message).toEqual('MANUFACTURERS_NOT_FOUND');
+          }
+        });
+    }, 30000);
+  });
+
   describe('POST /manufacturers/create [passing invalid req body]', () => {
     it('should not save and return error message with 400 bad request', async () => {
       return await request(app.getHttpServer())
