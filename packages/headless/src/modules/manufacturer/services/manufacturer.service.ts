@@ -255,25 +255,32 @@ export class ManufacturerService {
    * @param manufacturerId
    * @returns { Promise<Object> } Object of Success or Error
    */
-   async manufacturersCount(
-  ): Promise<ManufacturersCountResponse> {
+  async manufacturersCount(): Promise<ManufacturersCountResponse> {
     const count = await this.manufacturerRepo.getManufacturersCount();
 
-    if (!count) {
+    if (count === 0) {
+      return this.helper.serviceResponse.successResponse(
+        {
+          count: 0,
+          message: GetManufacturersCountSuccessMessages.MANUFACTURER_IS_EMPTY,
+        },
+        HttpStatus.OK,
+      ) as ManufacturersCountResponse;
+    } else if (count > 0) {
+      return this.helper.serviceResponse.successResponse(
+        {
+          count,
+          message:
+            GetManufacturersCountSuccessMessages.MANUFACTURERS_COUNT_LOADED_SUCCESSFULLY,
+        },
+        HttpStatus.OK,
+      ) as ManufacturersCountResponse;
+    } else {
       return this.helper.serviceResponse.errorResponse(
         GetManufacturersCountErrorMessages.MANUFACTURERS_NOT_FOUND,
         null,
         HttpStatus.BAD_REQUEST,
       );
-    } 
-    
-    return this.helper.serviceResponse.successResponse(
-      {
-        count,
-        message:
-          GetManufacturersCountSuccessMessages.MANUFACTURERS_COUNT_LOADED_SUCCESSFULLY
-      },
-      HttpStatus.OK,
-    ) as ManufacturersCountResponse;
+    }
   }
 }
