@@ -13,14 +13,7 @@ import {
 } from './dto/createManufacturer.dto';
 import { CreateManufacturerDto } from './dto/createManufacturer.dto';
 import { ManufacturerService } from './../services/manufacturer.service';
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -29,9 +22,7 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Query,
-  Req,
   Res,
   UseGuards,
   HttpStatus,
@@ -47,6 +38,10 @@ import {
   GetManufacturerSuccessResponseDto,
 } from './dto/getManufacturer.dto';
 import { RolesGuard } from 'src/guards/auth.guard';
+import {
+  ManufacturersCountErrorResponseDto,
+  ManufacturersCountSuccessResponseDto,
+} from './dto';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
 @ApiBearerAuth()
@@ -62,17 +57,15 @@ export class ManufacturerController {
   @Get('count')
   @ApiResponse({
     description: 'Get Manufacturers Count Success Response',
-    // type: GetManufacturersSuccessResponseDto,
+    type: ManufacturersCountSuccessResponseDto,
     status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Get Manufacturers Count Error Response',
-    // type: GetManufacturersErrorResponseDto,
+    type: ManufacturersCountErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
-  async manufacturersCount(
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async manufacturersCount(@Res({ passthrough: true }) res: Response) {
     const { code, ...response } =
       await this.manufacturerService.manufacturersCount();
     res.status(code);
