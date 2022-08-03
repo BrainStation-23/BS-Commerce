@@ -10,7 +10,6 @@ import { BrandRepository } from './../repositories/index';
 
 export class BrandService{
     constructor( private brandRepo: BrandRepository ){}
-
     async createBrand( brand: CreateBrandRequest ): Promise<CreateBrandResponse>{
             const doesBrandExist = await this.brandRepo.getBrandByName(brand.info.name);
             if(doesBrandExist) return { error: ErrorMessage.BRAND_ALREADY_EXISTS, errors: null, code: HttpStatus.BAD_REQUEST};
@@ -58,10 +57,17 @@ export class BrandService{
         return { data: foundBrand, code: HttpStatus.OK };
     }
 
+    async getBrandByName(name: string): Promise<GetBrandByIdResponse>{
+        const foundBrand = await this.brandRepo.getBrandByName(name);
+        if(!foundBrand) return {error: ErrorMessageGetBrandById.BRAND_NAME_NOT_FOUND, errors: null, code: HttpStatus.BAD_REQUEST };
+
+        return { data: foundBrand, code: HttpStatus.OK };
+    }
+
     async deleteBrandById(brandId: string): Promise<DeleteBrandResponse>{
         const deletedBrand = await this.brandRepo.deleteBrandById(brandId);
         if(!deletedBrand) return  {error: ErrorMessageDeleteBrand.INVALID_BRAND_ID, errors: null, code: HttpStatus.BAD_REQUEST };
 
         return {data: deletedBrand, code: HttpStatus.OK};
-    } 
+    }
 }

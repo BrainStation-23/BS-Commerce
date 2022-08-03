@@ -66,6 +66,28 @@ export class BrandController {
     return response;
   }
 
+
+  @Get('brandName/:name')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Requested brand was fetched successfully',
+    type: GetBrandByIdSuccessResponseDto
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid Brand Name ',
+    type: GetBrandByIdErrorResponseDto
+  })
+  async getBrandByName(
+    @Param('name') name: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.brandService.getBrandByName(name);
+
+    res.status(code);
+    return response;
+  }
+
   @Get('/:id')
   @ApiResponse({
     status: HttpStatus.OK,
@@ -163,5 +185,4 @@ export class BrandController {
     return response;
   }
 
-  // @Get('/:id')
 }
