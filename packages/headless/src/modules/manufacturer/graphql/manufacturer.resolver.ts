@@ -59,6 +59,18 @@ export class ManufacturerResolver {
   }
 
   @Mutation(() => ManufacturerResponse, {
+    name: 'addManufacturer',
+    description: 'Create a new manufacturer within the ManufacturerInput',
+  })
+  async addManufacturer(
+    @Args({ name: 'manufacturer', type: () => ManufacturerInput })
+    manufacturer: ManufacturerInput,
+  ) {
+    const res = await this.manufacturerService.addManufacturer(manufacturer);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => ManufacturerResponse, {
     name: 'updateManufacturer',
     description: 'Update a manufacturer by its id',
   })

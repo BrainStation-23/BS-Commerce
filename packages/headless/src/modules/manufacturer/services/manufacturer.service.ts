@@ -260,9 +260,8 @@ export class ManufacturerService {
   }
 
   /**
-   * The deleteManufacturer function checks firstly if it already exists or not
-   * then calls the deleteManufacturerById() from manufacturerRepo
-   * @param manufacturerId
+   * The ManufacturesCount function returns the number of Manufactures
+   * If the number of Manufactures is equal to zero then returns the empty message
    * @returns { Promise<Object> } Object of Success or Error
    */
   async manufacturersCount(): Promise<ManufacturersCountResponse> {
