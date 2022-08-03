@@ -4,3 +4,4 @@ export * from './addCustomerNewAddress';
 export * from './updateCustomerAddress';
 export * from './deleteCustomerAddress';
 export * from './updateCustomer';
+export * from './changePassword';

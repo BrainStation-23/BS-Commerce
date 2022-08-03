@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
+import * as bcrypt from 'bcrypt';
 import { CustomerRepository } from '../repositories';
 import {
     GetCustomerInformationErrorMessages,
@@ -13,8 +14,13 @@ import {
     UpdateCustomerRequestBody,
     UpdateCustomerResponse,
     UpdateCustomerErrorMessages,
+    CustomerChangePasswordResponse,
+    CustomerChangePasswordErrorMessages,
+    CustomerChangePasswordSuccessMessage,
 } from 'models';
 import { CustomerAddress } from 'src/entity/customer';
+import { ChangePassword } from 'src/entity/user';
+import { authConfig } from 'config/auth';
 
 @Injectable()
 export class CustomerService {
@@ -68,5 +74,19 @@ export class CustomerService {
         const updatedCustomer = await this.customerRepo.deleteCustomerAddress(customerId, addressId);
         if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(DeleteCustomerAddressErrorMessages.CAN_NOT_DELETE_CUSTOMER_ADDRESS, null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse(updatedCustomer, HttpStatus.OK);
+    }
+
+    async changePassword(customerId: string, passwordDetails: ChangePassword): Promise<CustomerChangePasswordResponse> {
+        const customer = await this.customerRepo.getCustomerPassword({ id: customerId });
+        if (!customer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST);
+
+        const doesPasswordMatch = await bcrypt.compare(passwordDetails.currentPassword, customer.password);
+        if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, null, HttpStatus.BAD_REQUEST,);
+
+        customer.password = await bcrypt.hash(passwordDetails.newPassword, authConfig.salt!);
+
+        const updatedCustomer = await this.customerRepo.updateCustomer(customerId, customer);
+        if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD, null, HttpStatus.BAD_REQUEST);
+        return this.helper.serviceResponse.successResponse({ message: CustomerChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL }, HttpStatus.OK);
     }
 }
