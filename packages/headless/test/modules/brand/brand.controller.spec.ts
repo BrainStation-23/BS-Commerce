@@ -3,12 +3,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { connectTestDatabase } from '../../test-utility';
 import { AppModule } from 'src/app.module';
-import { CreateBrandRequestDto } from 'src/modules/brands/dto/createBrandDto';
-import { GetAllBrandsDto } from './../../../src/modules/brands/dto/getAllBrandsDto';
-import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
+import { CreateBrandRequestDto } from 'src/modules/brands/rest/dto/createBrandDto';
+import { GetAllBrandsDto } from '../../../src/modules/brands/rest/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
 import { BrandController } from 'src/modules/brands/rest/brand.controller';
 import { Brand } from 'src/entity/brand';
-import { BrandDto } from 'src/modules/brands/dto/brandDto';
+import { BrandDto } from 'src/modules/brands/rest/dto/brandDto';
 
 
 describe('Initializing Brand controller testing', () => {

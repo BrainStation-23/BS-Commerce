@@ -10,18 +10,21 @@ import {
   Query,
   Res,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Brand } from 'src/entity/brand';
 import { BrandService } from '../services/index';
-import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/dto/getBrandByIdDto';
-import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto } from 'src/modules/brands/dto/createBrandDto';
-import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/dto/getAllBrandsDto';
-import { UpdateBrandRequestdto } from 'src/modules/brands/dto/updateBrandDto';
-import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/dto/deleteBrandDto';
-import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './../dto/updateBrandDto';
+import { GetBrandByIdSuccessResponseDto, GetBrandByIdErrorResponseDto } from 'src/modules/brands/rest/dto/getBrandByIdDto';
+import { CreateBrandRequestDto, CreateBrandSuccessResponseDto, CreateBrandErrorResponseDto, CreateBrandResponseDto } from 'src/modules/brands/rest/dto/createBrandDto';
+import { GetAllBrandsErrorResponseDto, GetAllBrandsSuccessResponseDto } from 'src/modules/brands/rest/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
+import { DeleteBrandErrorResponseDto, DeleteBrandSuccessResponseDto } from 'src/modules/brands/rest/dto/deleteBrandDto';
+import { UpdateBrandErrorResponseDto, UpdateBrandSuccessResponseDto } from './dto/updateBrandDto';
+import { BrandDto } from './dto/brandDto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
 @ApiTags('Brand API')
 @Controller('brands')
@@ -56,7 +59,7 @@ export class BrandController {
     @Query('limit') limit: number,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.brandService.getAllBrands();
+    const { code, ...response } = await this.brandService.getAllBrands(skip,limit);
     res.status(code);
     return response;
   }
@@ -83,6 +86,8 @@ export class BrandController {
   }
 
   @Post('/create')
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Brand was created successfully',
@@ -96,7 +101,7 @@ export class BrandController {
   async createBrand(
     @Body(ObjectValidationPipe) brand: CreateBrandRequestDto,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ){
     const { code, ...response } = await this.brandService.createBrand(brand);
 
     res.status(code);
@@ -104,6 +109,8 @@ export class BrandController {
   }
 
   @Put('/:id')
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Brand was updated successfully',
@@ -129,6 +136,9 @@ export class BrandController {
     return response;
   }
   
+  @Delete('/:id')
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Brand was deleted successfully',
@@ -139,7 +149,6 @@ export class BrandController {
     description: 'Brand could not be deleted ',
     type: DeleteBrandErrorResponseDto
   })
-  @Delete('/:id')
   async deleteBrandById(
     @Param('id') brandId: string,
     @Res({ passthrough: true }) res: Response,

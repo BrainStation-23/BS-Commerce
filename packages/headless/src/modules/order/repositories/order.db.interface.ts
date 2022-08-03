@@ -1,19 +1,23 @@
-import { CreateOrderDto } from './../dto/order.create.dto';
 import { Injectable } from '@nestjs/common';
-import { OrderEntity } from 'src/entity/order';
-import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto } from '../dto/admin.response.dto';
-import { ProductOrderDto } from '../dto/order.create.dto';
-import { OrderData } from '../dto/order.response.dto';
-import { GetAllOrderQueryDto } from '../dto/allOrderList.dto';
+import { IOrderCreateData, IProductOrderData } from 'models';
+
+import { 
+  ChangeStatusEntity, 
+  GetAllOrderQueryEntity, 
+  OrderEntity, 
+  OrderIncompleteStatEntity, 
+  OrderResponseEntity, 
+  OrderStatEntity 
+} from 'src/entity/order';
 
 @Injectable()
 export abstract class IOrderDatabase {
-  abstract createOrder: (userId: string, body: CreateOrderDto) => Promise<OrderEntity>;
-  abstract addPhotoDetails: (products: ProductOrderDto[]) => Promise<ProductOrderDto[]>;
+  abstract createOrder: (userId: string, body: IOrderCreateData) => Promise<OrderEntity>;
+  abstract addPhotoDetails: (products: IProductOrderData[]) => Promise<IProductOrderData[]>;
   abstract getOrderListByUserId: (userId: string) => Promise<OrderEntity[]>;
-  abstract getOrderById: (orderId: string) => Promise<OrderData>;
-  abstract getOrderStatistics:() => Promise<OrderStatDto>
-  abstract getIncompleteStatistics:() => Promise<OrderIncompleteStatDto>
-  abstract changeStatus:(body: ChangeStatusDto) => Promise<any>
-  abstract getOrderList: (query?: GetAllOrderQueryDto, skip?: number, limit?: number) => Promise<OrderEntity[]>
+  abstract getOrderById: (orderId: string) => Promise<OrderResponseEntity>;
+  abstract getOrderStatistics:() => Promise<OrderStatEntity>
+  abstract getIncompleteStatistics:() => Promise<OrderIncompleteStatEntity>
+  abstract changeStatus:(body: ChangeStatusEntity) => Promise<OrderEntity>
+  abstract getOrderList: (query?: GetAllOrderQueryEntity, skip?: number, limit?: number) => Promise<OrderEntity[]>
 }

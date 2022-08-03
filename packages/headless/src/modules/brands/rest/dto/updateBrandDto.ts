@@ -17,9 +17,9 @@ export class UpdateBrandRequestdto implements UpdateBrandRequest{
     info: InfoDto;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsOptional()
     @IsObject()
-    meta: MetaDto;
+    meta?: MetaDto;
 
 }
 
