@@ -1,19 +1,26 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
-import { IOrderResponseData } from 'models';
 import DataTable from '@/components/order/ordersList/dataTable';
 import Link from 'next/link';
+import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
-interface Props {
-  orderProducts: {
-    data: {
-      orderInfo: IOrderResponseData[];
-    };
-  };
-}
+import { useAppSelector } from 'customHooks/hooks';
+import { IOrderResponseData } from 'models';
 
-const OrderMain: FC<Props> = ({ orderProducts }: Props) => {
-  const storedOrderProducts = orderProducts?.data?.orderInfo;
+const OrderMain: FC = () => {
+  // const storedOrderProducts = orderProducts?.data?.orderInfo;
+  const [allOrderList, setAllOrderList] = useState([]);
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+  const getAllOrdes = async () => {
+    const orderListRes = await userAPI
+      .getOrderProducts(token)
+      .then((res: any) => setAllOrderList(res?.data?.orderInfo));
+  };
+  useEffect(() => {
+    getAllOrdes();
+  }, []);
 
   return (
     <>
@@ -26,13 +33,13 @@ const OrderMain: FC<Props> = ({ orderProducts }: Props) => {
         <div className="flex flex-col items-center border-b py-6">
           <div
             className={
-              storedOrderProducts?.length
+              allOrderList?.length
                 ? 'mb-2 w-full overflow-x-scroll xl:overflow-x-hidden'
                 : 'mb-10'
             }
           >
-            {storedOrderProducts?.length ? (
-              <DataTable storedOrderProducts={storedOrderProducts} />
+            {allOrderList?.length ? (
+              <DataTable storedOrderProducts={allOrderList} />
             ) : (
               'You have not placed any order yet'
             )}
