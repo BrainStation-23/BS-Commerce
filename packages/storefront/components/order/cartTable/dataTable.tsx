@@ -51,6 +51,17 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
             <div>
               <div>Delivery Fee : $00</div>
             </div>
+
+            <div>
+              <div>Payment Method : {singleOrder.paymentMethod}</div>
+            </div>
+            {singleOrder.paymentMethod !== 'Cash on Delivery' ? (
+              <div>
+                <div>Card no : {singleOrder.paypalPaymentId}</div>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
 
           <div
@@ -125,7 +136,7 @@ const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
                 <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-10">
                   Product
                 </th>
-                <th className="border border-slate-300 bg-slate-200 xl:px-6 py-4 text-base">
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base xl:px-6">
                   Price
                 </th>
                 <th className="border border-slate-300 bg-slate-200 py-4 text-base md:px-2 xl:px-4">
