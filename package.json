@@ -18,6 +18,8 @@
     "package:storefront": "lerna run --scope storefront --stream dev",
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
     "dev": "run-p --print-label package:*",
-    "build": "lerna run --parallel build"
+    "build": "lerna run --parallel build",
+    "seeder:build": "lerna run --scope seeder --stream build --include-dependencies",
+    "seeder:run": "lerna run --scope seeder --stream seed"
   }
 }

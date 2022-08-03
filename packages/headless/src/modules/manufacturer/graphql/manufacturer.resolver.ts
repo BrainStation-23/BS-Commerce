@@ -1,7 +1,4 @@
-import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
-import { GetManufacturersQueryDto } from './../dto/getManufacturers.dto';
-import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
-import { Manufacturer } from 'src/entity/manufacturer';
+import { Manufacturer, ManufacturersQuery } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
@@ -20,7 +17,7 @@ export class ManufacturerResolver {
    * @returns {Object} Object { error code data}
    */
   @Query()
-  async getAllManufacturers(@Args() query: GetManufacturersQueryDto) {
+  async getAllManufacturers(@Args() query: ManufacturersQuery) {
     return await this.manufacturerService.getAllManufacturers(query);
   }
 
@@ -42,7 +39,7 @@ export class ManufacturerResolver {
    * @returns {Object} Object { error code data}
    */
   @Mutation()
-  async addManufacturer(@Args('manufacturer') manufacturer: CreateManufacturerDto) {
+  async addManufacturer(@Args('manufacturer') manufacturer: Manufacturer) {
     return await this.manufacturerService.addManufacturer(manufacturer);
   }
 
@@ -54,7 +51,7 @@ export class ManufacturerResolver {
    * @returns {Object} Object { error code data}
    */
   @Mutation()
-  async updateManufacturer(@Args('manufacturerId') manufacturerId: string, @Args('manufacturer') manufacturer: UpdateManufacturerDto) {
+  async updateManufacturer(@Args('manufacturerId') manufacturerId: string, @Args('manufacturer') manufacturer: Manufacturer) {
     return await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer)
   }
 
