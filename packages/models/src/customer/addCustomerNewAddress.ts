@@ -14,6 +14,7 @@ export interface AddCustomerNewAddressSuccessResponse extends SuccessResponse {
 
 export const enum AddCustomerNewAddressErrorMessages {
     CAN_NOT_ADD_CUSTOMER_NEW_ADDRESS = 'CAN_NOT_ADD_CUSTOMER_NEW_ADDRESS',
+    ALREADY_DEFAULT_ADDRESS_EXISTS = 'ALREADY_DEFAULT_ADDRESS_EXISTS',
 }
 
 export interface AddCustomerNewAddressErrorResponse extends ErrorResponse {
