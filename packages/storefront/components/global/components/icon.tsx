@@ -5,7 +5,12 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { CustomerProduct, Product, WishlistProduct } from 'models';
+import {
+  CustomerProduct,
+  Product,
+  WishlistItem,
+  WishlistProduct,
+} from 'models';
 import {
   setCartModalState,
   setModalState,
@@ -40,11 +45,13 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
-  let inWishlist = wishlistData?.find((item) => item.productId === product.id)
+  let inWishlist = wishlistData?.find(
+    (item: WishlistItem) => item.productId === product?.id
+  )
     ? true
     : false;
 
-  const productInCart = cartData.find((item) => item.productId === product.id)
+  const productInCart = cartData.find((item) => item.productId === product?.id)
     ? true
     : false;
 

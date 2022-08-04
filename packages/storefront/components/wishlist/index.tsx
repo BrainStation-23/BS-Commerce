@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NextComponentType } from 'next';
 
@@ -22,8 +23,8 @@ import Icon from '@/components/global/components/icon';
 import ModalCompare from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
-import Image from 'next/image';
 import WishlistBody from './wishlistBody';
+import { WishlistItem } from 'models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();

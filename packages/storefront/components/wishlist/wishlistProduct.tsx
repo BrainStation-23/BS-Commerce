@@ -23,7 +23,9 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
           {product.info?.oldPrice ? (
             <span className="ml-2 text-xs font-semibold text-black">
               <s>$</s>
-              {product.info?.oldPrice ? <s>{product.info?.oldPrice}</s> : null}
+              {product?.info?.oldPrice ? (
+                <s>{product?.info?.oldPrice}</s>
+              ) : null}
             </span>
           ) : null}
         </p>

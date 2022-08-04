@@ -20,7 +20,7 @@ const SearchItem: NextComponentType = () => {
                   <img
                     alt="ecommerce"
                     className="h-auto w-auto hover:cursor-pointer"
-                    src={product?.photos[0]?.url}
+                    src={product?.photos![0]?.url}
                   />
                 </Link>
               </div>

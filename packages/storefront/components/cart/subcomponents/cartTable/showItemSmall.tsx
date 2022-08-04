@@ -23,7 +23,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
       <div className="flex-col-3 flex items-center rounded-lg border bg-white">
         <div className="relative mr-4">
           <img
-            src={data?.product?.photos[0]?.url}
+            src={data?.product?.photos![0]?.url}
             alt="Product Image"
             height={110}
             width={110}
