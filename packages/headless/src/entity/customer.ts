@@ -21,4 +21,6 @@ export class Customer {
     otp: string;
     otpVerified?: boolean;
     addresses?: CustomerAddress[];
+    resetPasswordToken?: string;
+    resetPasswordExpires?: number;
 }

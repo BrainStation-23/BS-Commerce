@@ -1,11 +1,14 @@
-import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
+import { Response, Request } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
 import {
   CreateCustomerDto,
   CreateCustomerErrorResponseDto,
   CreateCustomerSuccessResponseDto,
+  CustomerForgotPasswordDto,
+  CustomerForgotPasswordErrorResponseDto,
+  CustomerForgotPasswordSuccessResponseDto,
   CustomerSignInDto,
   CustomerSignInErrorResponseDto,
   CustomerSignInSuccessResponseDto,
@@ -66,6 +69,24 @@ export class CustomerAuthController {
   })
   async getCustomer(@Query() query: GetCustomerQueryDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.getCustomer(query);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('forgot')
+  @ApiResponse({
+    description: 'Forgot Password Success Response',
+    type: CustomerForgotPasswordSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Forgot Password Error Response',
+    type: CustomerForgotPasswordErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async forgotPassword(@Body() data: CustomerForgotPasswordDto, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
+    const url = req.protocol + '://' + req.headers.host;
+    const { code, ...response } = await this.authService.forgotPassword(data, url);
     res.status(code);
     return { code, ...response };
   }

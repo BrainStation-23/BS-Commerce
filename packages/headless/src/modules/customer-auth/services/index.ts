@@ -1,8 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import { Helper } from 'src/helper/helper.interface';
 import { authConfig } from 'config/auth';
 import { CustomerRepository } from 'src/modules/customer/repositories';
+const token = crypto.randomBytes(20).toString('hex');
+const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
 import {
   CreateCustomerResponse,
   CreateCustomerErrorMessages,
@@ -14,6 +17,9 @@ import {
   CustomerSignInResponse,
   CustomerSignInRequest,
   SignInErrorMessages,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordResponse,
+  CustomerForgotPasswordErrorMessages,
 } from 'models';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
@@ -65,5 +71,29 @@ export class CustomerAuthService {
 
     const token = this.jwtService.sign(payload);
     return this.helper.serviceResponse.successResponse({ token }, HttpStatus.OK,);
+  }
+
+  async forgotPassword(data: CustomerForgotPasswordRequest, baseUrl: string): Promise<CustomerForgotPasswordResponse> {
+
+    const doesCustomerEmailExist = data.email && await this.customerRepo.getCustomerPassword({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone });
+    if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+
+    const customer = doesCustomerEmailExist || doesCustomerPhoneExist;
+
+    customer.resetPasswordToken = token;
+    customer.resetPasswordExpires = Date.now() + ONE_HOUR;
+
+    const updatedCustomer = await this.customerRepo.updateCustomer(customer.id, customer);
+    if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_UPDATE_CUSTOMER_PASSWORD, null, HttpStatus.BAD_REQUEST);
+
+    const resetUrl = baseUrl + process.env.AUTH_RESET_ORIGINAL_URL || 'customer/auth/reset/' + token;
+
+    if (customer.email) {
+      await this.helper.mailService.sendMail(customer.email, 'Password Reset Link', resetUrl);
+      return this.helper.serviceResponse.successResponse({ message: 'An email has been sent to ' + customer.email + ' with further instructions.' }, HttpStatus.OK,);
+    }
+
+    // Send Password Reset Url using Mobile SMS
   }
 }
