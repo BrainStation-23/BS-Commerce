@@ -103,7 +103,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     setAmount(amount);
     // setShowCartModal(true);
     toast(<CartToast product={product} />, {
-      containerId: 'bottom-right',
+      containerId: 'bottom-left',
     });
     dispatch(addToCart(cartItem));
   };

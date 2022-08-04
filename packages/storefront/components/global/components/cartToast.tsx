@@ -9,8 +9,8 @@ interface Props {
 const CartToast: React.FC<Props> = ({ product }: Props) => {
   return (
     <>
-      <div className="flex flex-row ">
-        <div className="col-span-2">
+      <div className="flex flex-row">
+        <div className="">
           <Image
             src={product?.photos![0].url!}
             alt={product?.photos![0].alt || 'product image'}
@@ -18,7 +18,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
             height={140}
           />
         </div>
-        <div className="flex w-80 flex-col px-4">
+        <div className="flex flex-col px-4">
           <span className="mb-3">{product?.info.name}</span>
           <div className="mb-5 flex flex-row text-green-600">
             <svg
@@ -38,8 +38,8 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
             Added to cart successfully
           </div>
 
-          <div className="ml-1">
-            <div className="items-canter mx-auto mb-2">
+          <div className="ml-1 flex flex-col  text-sm sm:flex-row sm:text-base">
+            <div className="mb-2 pr-2">
               <Link href="/cart" passHref>
                 <button className="rounded-md bg-gray-200/70 py-1 px-2 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white">
                   View Cart
