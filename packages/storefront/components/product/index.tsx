@@ -173,7 +173,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         return item;
       }
     });
-    console.log(itemAmountInCart);
 
     if (!itemAmountInCart) {
       const cartProduct = {
