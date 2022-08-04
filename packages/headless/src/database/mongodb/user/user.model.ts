@@ -6,7 +6,7 @@ const AddressSchema = new Schema<Address>({
   id: {
     type: String,
     default: () => randomUUID(),
-    Index: true,
+    index: true,
   },
   addressLine1: String,
   addressLine2: String,

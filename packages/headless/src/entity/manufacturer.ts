@@ -14,3 +14,8 @@ export class SEO {
     metaTitle?: string;
     SEFN?: string;
 }
+
+export class ManufacturersQuery {
+    skip?: number;
+    limit?: number;
+}

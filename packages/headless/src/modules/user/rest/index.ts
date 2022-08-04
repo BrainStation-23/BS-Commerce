@@ -1,11 +1,9 @@
 import { Body, Controller, Get, HttpStatus, Patch, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../services';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
 import { Response } from 'express';
-import { Roles } from 'src/decorators/roles.decorator';
-import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/auth.guard';
 import {
   ChangePasswordDto,
@@ -14,11 +12,11 @@ import {
   GetUserSuccessResponseDto,
   ChangePasswordSuccessResponseDto,
   ChangePasswordErrorResponseDto
-} from '../dto';
+} from './dto';
 
 @Controller('user')
 @ApiTags('Admin Profile API')
-@UseGuards(AuthGuard('jwt'), new RolesGuard(['admin']))
+@UseGuards(new RolesGuard(['admin']))
 @ApiBearerAuth()
 export class UserController {
   constructor(private userService: UserService) { }

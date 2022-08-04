@@ -3,7 +3,7 @@ import { Response, Request } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MediaService } from '../services';
 import { ApiFile } from '../decorators/file.decorator';
-import { UploadFileErrorResponseDto, UploadFileSuccessResponseDto } from '../dto';
+import { UploadFileErrorResponseDto, UploadFileSuccessResponseDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from '../multer/storage.config';
 

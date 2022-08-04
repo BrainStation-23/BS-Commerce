@@ -1,7 +1,7 @@
 import { CartService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
 import { CartResponse, deleteCartItemRequestSchema, deleteCartRequestSchema, ItemInput, updateCartItemRequestSchema } from './cart.model';
 import { RolesGuard } from 'src/guards/auth.guard';

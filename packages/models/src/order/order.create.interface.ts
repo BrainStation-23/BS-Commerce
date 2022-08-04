@@ -1,3 +1,11 @@
+export interface IOrderProductPhoto {
+    url?: string,
+    id?: string,
+    title?: string,
+    alt?: string,
+    displayOrder?: number
+
+}
 export interface IOrderAddress {
   firstName: string;
   lastName: string;
@@ -5,7 +13,7 @@ export interface IOrderAddress {
   addressLine1: string;
   addressLine2: string;
   city: string;
-  country: string;
+  country?: string;
   postCode?: string;
   phoneNumber: string;
 }
@@ -14,7 +22,9 @@ export interface IProductOrderData {
   productId: string;
   name: string;
   price: number;
+  photos?: IOrderProductPhoto[],
   quantity: number;
+  totalPrice?: number;
   sku: string;
 }
 
@@ -28,7 +38,7 @@ export interface IOrderCreateData {
   productCost: number;
   products: IProductOrderData[];
   shippingCost: number;
-  totalCost: number;
+  totalCost?: number;
   stripeToken?: string;
   stripeCustomerId?: string;
   stripeChargeId?: string;
@@ -41,6 +51,5 @@ export interface IOrderResponseData extends IOrderCreateData{
   shippingStatus: string;
   paymentStatus: string; 
   orderId: string;
-  userId: string;
   orderedDate: Date;
 }

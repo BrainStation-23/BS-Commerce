@@ -1,6 +1,6 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
 import {
   CreateCustomerDto,
@@ -12,7 +12,7 @@ import {
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')

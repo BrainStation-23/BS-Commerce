@@ -1,71 +1,92 @@
-import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
-import { GetManufacturersQueryDto } from './../dto/getManufacturers.dto';
-import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
-import { Manufacturer } from 'src/entity/manufacturer';
 import { ManufacturerService } from './../services/manufacturer.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { RolesGuard } from 'src/guards/auth.guard';
+import {
+  AllManufacturersResponse,
+  ManufacturerInput,
+  ManufacturerResponse,
+  ManufacturerSchemaGql,
+  ManufacturersQuery,
+} from './manufacturer.model';
+import { Helper } from 'src/helper/helper.interface';
 
-@UseGuards(JwtAuthGuard)
-@Resolver()
+@UseGuards(new RolesGuard(['admin']))
+@Resolver((of) => ManufacturerSchemaGql)
 export class ManufacturerResolver {
-  constructor(private manufacturerService: ManufacturerService) { }
+  constructor(
+    private manufacturerService: ManufacturerService,
+    private helper: Helper,
+  ) {}
 
-  /**
-   * @Graphql
-   * Query getAllManufacturers calls form manufacturer.graphql file
-   * @param skip Optional
-   * @param limit Optional
-   * @returns {Object} Object { error code data}
-   */
-  @Query()
-  async getAllManufacturers(@Args() query: GetManufacturersQueryDto) {
-    return await this.manufacturerService.getAllManufacturers(query);
+  @Query(() => AllManufacturersResponse, {
+    name: 'getAllManufacturers',
+    description:
+      'Get all manufacturers passing with optional query as skip and limit',
+  })
+  async getAllManufacturers(
+    @Args('query', {
+      type: () => ManufacturersQuery,
+      nullable: true,
+    })
+    query?: ManufacturersQuery,
+  ) {
+    const res = await this.manufacturerService.getAllManufacturers(query);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  /**
-   * @Graphql
-   * Query getManufacturer calls form manufacturer.graphql file
-   * @param manufacturerId 
-   * @returns {Object} Object { error code data}
-   */
-  @Query()
-  async getManufacturer(@Args('manufacturerId') manufacturerId: string) {
-    return await this.manufacturerService.getManufacturer(manufacturerId);
+  @Query(() => ManufacturerResponse, {
+    name: 'getManufacturer',
+    description: 'Get single manufacturer by id',
+  })
+  async getManufacturer(
+    @Args('manufacturerId', { type: () => String })
+    manufacturerId: string,
+  ) {
+    const res = await this.manufacturerService.getManufacturer(manufacturerId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  /**
-   * @Graphql
-   * Mutation addManufacturer calls form manufacturer.graphql file
-   * @param manufacturer 
-   * @returns {Object} Object { error code data}
-   */
-  @Mutation()
-  async addManufacturer(@Args('manufacturer') manufacturer: CreateManufacturerDto) {
-    return await this.manufacturerService.addManufacturer(manufacturer);
+  @Mutation(() => ManufacturerResponse, {
+    name: 'addManufacturer',
+    description: 'Create a new manufacturer within the ManufacturerInput',
+  })
+  async addManufacturer(
+    @Args({ name: 'manufacturer', type: () => ManufacturerInput })
+    manufacturer: ManufacturerInput,
+  ) {
+    const res = await this.manufacturerService.addManufacturer(manufacturer);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  /**
-   * @Graphql
-   * Mutation updateManufacturer calls form manufacturer.graphql file
-   * @param manufacturerId 
-   * @param manufacturer 
-   * @returns {Object} Object { error code data}
-   */
-  @Mutation()
-  async updateManufacturer(@Args('manufacturerId') manufacturerId: string, @Args('manufacturer') manufacturer: UpdateManufacturerDto) {
-    return await this.manufacturerService.updateManufacturer(manufacturerId, manufacturer)
+  @Mutation(() => ManufacturerResponse, {
+    name: 'updateManufacturer',
+    description: 'Update a manufacturer by its id',
+  })
+  async updateManufacturer(
+    @Args({ name: 'manufacturerId', type: () => String })
+    manufacturerId: string,
+    @Args({ name: 'manufacturer', type: () => ManufacturerInput })
+    manufacturer: ManufacturerInput,
+  ) {
+    const res = await this.manufacturerService.updateManufacturer(
+      manufacturerId,
+      manufacturer,
+    );
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  /**
-   * @Graphql
-   * Mutation updateManufacturer calls form manufacturer.graphql file
-   * @param manufacturerId 
-   * @returns {Object} Object { error code data}
-   */
-  @Mutation()
-  async deleteManufacturer(@Args('manufacturerId') manufacturerId: string) {
-    return await this.manufacturerService.deleteManufacturer(manufacturerId)
+  @Mutation(() => ManufacturerResponse, {
+    name: 'deleteManufacturer',
+    description: 'Delete a manufacturer by its id',
+  })
+  async deleteManufacturer(
+    @Args({ name: 'manufacturerId', type: () => String })
+    manufacturerId: string,
+  ) {
+    const res = await this.manufacturerService.deleteManufacturer(
+      manufacturerId,
+    );
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }

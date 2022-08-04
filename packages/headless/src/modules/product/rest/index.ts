@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { ProductService } from '../services';
+import { RolesGuard } from 'src/guards/auth.guard';
 import {
   CreateProductDto,
   CreateProductErrorResponseDto,
@@ -39,7 +39,7 @@ import {
   updateProductsForBrandRequestDto,
   UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @ApiTags('Product API')
 @Controller()
@@ -58,9 +58,8 @@ export class ProductController {
     type: GetCustomerAllProductsErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async getCustomerAllProducts(@Query() query: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
-    const { skip, limit } = query;
-    const { code, ...response } = await this.productService.getCustomerAllProducts({ skip, limit });
+  async getCustomerAllProducts(@Query() condition: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerProductsByCondition(condition);
     res.status(code);
     return { code, ...response };
   }
@@ -100,7 +99,7 @@ export class ProductController {
   }
 
   // Admin
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products')
   @ApiResponse({
@@ -121,7 +120,7 @@ export class ProductController {
   }
 
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/count')
   @ApiResponse({
@@ -140,7 +139,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/sku/:sku')
   @ApiParam({ name: 'sku' })
@@ -160,8 +159,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/condition')
   @ApiResponse({
@@ -183,7 +181,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Get('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -204,6 +202,8 @@ export class ProductController {
   }
 
   @Post('product')
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Create Product Success Response',
     type: CreateProductSuccessResponseDto,
@@ -220,7 +220,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Delete('products/:productId')
   @ApiParam({ name: 'productId' })
@@ -240,7 +240,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/brand')
   @ApiResponse({
@@ -260,7 +260,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
   @Patch('products/:productId')
   @ApiParam({ name: 'productId' })

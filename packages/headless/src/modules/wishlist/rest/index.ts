@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { WishListService } from '../services';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { AuthGuard } from '@nestjs/passport';
 import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,
@@ -23,7 +22,7 @@ import {
   updateWishlistItemErrorResponseDto,
   updateWishlistItemRequestBodyDto,
   updateWishlistItemSuccessResponseDto,
-} from '../dto';
+} from './dto';
 
 @Controller()
 @UseGuards(new RolesGuard(['customer']))
@@ -49,7 +48,7 @@ export class WishListController {
     return response;
   }
 
-  @Get('customer/wishlist')
+  @Get('wishlist')
   @ApiResponse({
     description: 'Get User Wishlist Success Response',
     type: getUserWishlistSuccessResponseDto,

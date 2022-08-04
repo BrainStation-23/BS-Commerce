@@ -9,13 +9,11 @@ import {
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { CompareDataDto, CompareResponse } from '../dto/test.dto';
 import { CompareTestService } from '../services/test.service';
 
 @ApiTags('Test purpose - Comparison API')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('test-purpose/compare')

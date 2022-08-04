@@ -1,19 +1,20 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { OrderEntity } from 'src/entity/order';
 import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/modules/auth/decorator/auth.decorator';
-import { JwtAuthGuard } from 'src/modules/auth/guards/auth.guard';
+import { RolesGuard } from 'src/guards/auth.guard';
+import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
-import { CreateOrderDto } from '../dto/order.create.dto';
-import { OrderData, OrderResponseDto } from '../dto/order.response.dto';
+import { CreateOrderDto } from './dto/order.create.dto';
+import { OrderData, OrderResponseDto } from './dto/order.response.dto';
 import { OrderCustomerService } from '../services/customer.service';
 
+
 @ApiTags('Order - Customer API')
-@UseGuards(JwtAuthGuard)
+@UseGuards(new RolesGuard(['customer']))
 @ApiBearerAuth()
-@Controller('auth/order')
+@Controller('customer/order')
 export class OrderCustomerController {
   constructor(private orderCustomerService: OrderCustomerService) {}
 
@@ -30,8 +31,10 @@ export class OrderCustomerController {
     const { code, ...response } = await this.orderCustomerService.createOrder(
       user.id,
       body,
+      body.products
     );
     res.status(code);
+    
     return response;
   }
 
@@ -50,4 +53,22 @@ export class OrderCustomerController {
     res.status(code);
     return response;
   }
+
+  @ApiResponse({
+    type: OrderData,
+    description: 'Response of get-order-by-order-id',
+  })
+  @Get('/:orderId')
+  async getOrderByOrderId(
+    @Param('orderId') orderId: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<IServiceResponse<OrderData>> {
+    const { code, ...response } = await this.orderCustomerService.getOrderByOrderId(orderId);
+
+    res.status(code);
+    return response;
+  }
+  
 }
+
+

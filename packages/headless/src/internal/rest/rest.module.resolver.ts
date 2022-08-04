@@ -9,12 +9,16 @@ import { OrderModule } from 'src/modules/order/order.rest.module';
 import { ProductModule } from 'src/modules/product/product.rest.module';
 import { TagsModule } from 'src/modules/tags/tags.rest.module';
 import { UserModule } from 'src/modules/user/user.rest.module';
+import { BrandModule } from 'src/modules/brands/brand.rest.module';
 import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
+import { CustomerModule } from 'src/modules/customer/customer.rest.module';
 
 export const ResolveRestModule = () => {
   return [
     AuthModule,
     UserModule,
+    BrandModule,
+    CompareModule,
     ProductModule,
     ManufacturerModule,
     CategoryModule,
@@ -25,5 +29,6 @@ export const ResolveRestModule = () => {
     WishListModule,
     OrderModule,
     TagsModule,
+    CustomerModule,
   ];
 };
