@@ -173,6 +173,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         return item;
       }
     });
+    console.log(itemAmountInCart);
 
     if (!itemAmountInCart) {
       const cartProduct = {
@@ -180,14 +181,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         info: product.info!,
         photos: product.photos!,
       };
-      const itemAmountInCart = {
+      itemAmountInCart = {
         product: cartProduct!,
         productId: product.id!,
-        quantity: 0,
+        quantity: 1,
       };
     }
-    console.log(itemAmountInCart.quantity);
-    setAmount(itemAmountInCart.quantity);
+    setAmount(itemAmountInCart?.quantity);
   }, []);
 
   return (
