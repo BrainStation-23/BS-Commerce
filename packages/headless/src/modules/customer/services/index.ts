@@ -44,8 +44,8 @@ export class CustomerService {
     }
 
     async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<AddCustomerNewAddressResponse> {
-        let customer = await this.customerRepo.findCustomer({ id: customerId });
-        if (!customer) return this.helper.serviceResponse.errorResponse(GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+        const doesDefaultAddressExists = address.isDefault && await this.customerRepo.findCustomer({ id: customerId, 'addresses.isDefault': true });
+        if (doesDefaultAddressExists) return this.helper.serviceResponse.errorResponse(AddCustomerNewAddressErrorMessages.ALREADY_DEFAULT_ADDRESS_EXISTS, null, HttpStatus.BAD_REQUEST);
 
         const updatedCustomer = await this.customerRepo.addCustomerNewAddress(customerId, address);
         if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(AddCustomerNewAddressErrorMessages.CAN_NOT_ADD_CUSTOMER_NEW_ADDRESS, null, HttpStatus.BAD_REQUEST);
@@ -55,6 +55,17 @@ export class CustomerService {
     async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<UpdateCustomerAddressResponse> {
         let customer = await this.customerRepo.findCustomer({ id: customerId });
         if (!customer) return this.helper.serviceResponse.errorResponse(GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+
+        const doesDefaultAddressExists = address.isDefault && await this.customerRepo.findCustomer({
+            id: customerId,
+            addresses: {
+                $elemMatch: {
+                    "isDefault": true,
+                    "id": { $ne: addressId }
+                }
+            }
+        });
+        if (doesDefaultAddressExists) return this.helper.serviceResponse.errorResponse(AddCustomerNewAddressErrorMessages.ALREADY_DEFAULT_ADDRESS_EXISTS, null, HttpStatus.BAD_REQUEST);
 
         const updatedCustomer = await this.customerRepo.updateCustomerAddress(customerId, addressId, address);
         if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(UpdateCustomerAddressErrorMessages.CAN_NOT_UPDATE_CUSTOMER_ADDRESS, null, HttpStatus.BAD_REQUEST);

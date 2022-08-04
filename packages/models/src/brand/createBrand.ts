@@ -27,7 +27,9 @@ export interface CreateBrandSuccessResponse extends SuccessResponse {
 }
 
 export interface CreateBrandErrorResponse extends ErrorResponse{
+    code?: number;
     error: ErrorMessage;
+    errors: DescriptiveError;
 }
 
 export const enum ErrorMessage{

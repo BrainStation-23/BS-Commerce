@@ -10,6 +10,8 @@ export interface GetBrandByIdSuccessResponse extends SuccessResponse {
 
 export interface GetBrandByIdErrorResponse extends ErrorResponse{
     error: ErrorMessageGetBrandById;
+    code?: number;
+    errors: DescriptiveError;
 }
 
 export const enum ErrorMessageGetBrandById{
