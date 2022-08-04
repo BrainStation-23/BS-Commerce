@@ -141,7 +141,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.success('Item removed from wishlist');
+        toast.error('Item removed from wishlist');
         dispatch(deleteItemFromWishlist(productId));
       } catch (error) {
         toast.error('Failed to remove item from wishlist');

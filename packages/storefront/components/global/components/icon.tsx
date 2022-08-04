@@ -115,7 +115,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.success('Item removed from wishlist');
+        toast.error('Item removed from wishlist');
         dispatch(deleteItemFromWishlist(productId));
         inWishlist = false;
       } catch (error) {
