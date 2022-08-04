@@ -17,8 +17,6 @@ import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import WithAuth from '@/components/auth/withAuth';
 
-var cookie = require('cookie');
-
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -52,9 +50,6 @@ const AccountDetails: React.FC = () => {
     dispatch(storeCustomerDetails(response!.data));
     setEditable(false);
   };
-  
-
-
 
   return (
     <>
@@ -98,7 +93,7 @@ const AccountDetails: React.FC = () => {
                   <div className="mx-auto mt-3 flex flex-wrap">
                     <div className="w-full md:w-1/2">
                       <div className="mt-2 flex items-center">
-                        <div className="w-1/3 my-auto">
+                        <div className="my-auto w-1/3">
                           <span className="text-2xl font-semibold">
                             Account Details
                           </span>
