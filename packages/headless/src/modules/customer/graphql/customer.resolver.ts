@@ -6,6 +6,8 @@ import { CustomerService } from '../services';
 import { Customer } from 'src/entity/customer';
 import {
   CustomerAddressInput,
+  CustomerChangePasswordInput,
+  CustomerChangePasswordResponse,
   CustomerResponse,
   UpdateCustomerInput
 } from './customer.model';
@@ -46,8 +48,9 @@ export class CustomerResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  /*  @Mutation()
-   async changePassword(@Args('passwordDetails') passwordDetails: CustomerChangePasswordInput, @CustomerInfo()  customer: Customer) {
+   @Mutation(()=>CustomerChangePasswordResponse)
+   async customerChangePassword(@Args('passwordDetails') passwordDetails: CustomerChangePasswordInput, @CustomerInfo()  customer: Customer) {
      const res = await this.customerService.changePassword(customer.id, passwordDetails);
-   } */
+     return this.helper.serviceResponse.graphqlResponse(res);
+   }
 }
