@@ -8,10 +8,15 @@ import { XCircleIcon } from '../headerIcons';
 interface Props {
   open: boolean;
   onClose: () => void;
+  onCheckOutReorder: () => void;
   //   product?: Product | CustomerProduct | WishlistProduct;
 }
 
-const ReorderModal: React.FC<Props> = ({ open, onClose }: Props) => {
+const ReorderModal: React.FC<Props> = ({
+  open,
+  onClose,
+  onCheckOutReorder,
+}: Props) => {
   const dispatch = useAppDispatch();
   if (!open) return null;
   return (
@@ -77,6 +82,7 @@ const ReorderModal: React.FC<Props> = ({ open, onClose }: Props) => {
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
+                      onCheckOutReorder();
                     }}
                   >
                     Yes
