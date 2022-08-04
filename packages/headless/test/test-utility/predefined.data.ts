@@ -1,33 +1,12 @@
-// setup user testing data
-export const testUserId = '3abd43bd-a85e-4e9f-96be-0fc56530e3a8';
-export const testUsername = 'test1@mail.com';
+export const TestTimeout = 30 * 1000;
 
-// setup admin testing data
-export const AdminId = '21b38a0b-95f8-43bf-90f1-7dfb64ed885b';
-export const Username = 'ismail61@gmail.com';
+// admin testing data
+export const TestAdminId = '33d9cad4-b68d-4fc9-ac61-e0f7e5ba2727';
+export const TestAdminUsername = 'johndoe@gmail.com';
 
-//
-export const testTimeout = 30 * 1000;
-export const testProductId = '76e9c15f-6816-439c-9a4f-e2fc902ffbf5';
+// customer testing data
+export const TestCustomerId = '574c0c31-e4cd-470b-a652-f964fb437b49';
+export const TestCustomerEmail = 'james@gmail.com';
 
-// create user data
-export const testFirstName = 'fname';
-export const testLastName = 'lname';
-export const testEmail = 'test1@mail.com';
-export const testPassword = '12345678';
-
-export const signUpDemoUser = () => {
-  return {
-    firstName: testFirstName,
-    lastName: testLastName,
-    email: testEmail,
-    password: testPassword,
-  };
-};
-
-export const signInDemoUser = () => {
-  return {
-    username: testEmail,
-    password: testPassword,
-  };
-};
+// customer testing data
+export const TestProductId = '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e';
