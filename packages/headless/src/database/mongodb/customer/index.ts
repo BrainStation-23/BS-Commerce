@@ -21,18 +21,18 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -otp -otpVerified -_id -resetPasswordToken -resetPasswordExpires').exec();
   }
 
   async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $push: { addresses: address } }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $push: { addresses: address } }, { new: true }).lean().select('-password -otp -otpVerified -_id -resetPasswordToken -resetPasswordExpires').exec();
   }
 
   async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $set: { 'addresses.$': address } }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $set: { 'addresses.$': address } }, { new: true }).lean().select('-password -otp -otpVerified -_id -resetPasswordToken -resetPasswordExpires').exec();
   }
 
   async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -otp -otpVerified -_id -resetPasswordToken -resetPasswordExpires').exec();
   }
 }
