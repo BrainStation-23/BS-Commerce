@@ -31,15 +31,17 @@ export class OrderDatabase implements IOrderDatabase {
 
   async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {
     const { sortField, sortType} = sortObj;
+
     const orderList = await OrderModel.find({ userId });
-    if(sortType === 'ascending'){
-      return orderList.sort((a,b) => a[sortField] - b[sortField]);
-    }else{
-      return orderList.sort((a,b) => b[sortField] - a[sortField]);
-    }
-    
-    if (orderList.length > 0) {
-      return orderList;
+    if (orderList.length > 0){
+      if(sortType === 'ascending'){
+        return orderList.sort((a,b) => a[sortField] - b[sortField]);
+      }else if(sortType === 'descending'){
+        return orderList.sort((a,b) => b[sortField] - a[sortField]);
+      }else{
+        const sortField: string = "orderedDate";
+        return orderList.sort((a,b) => b[sortField] - a[sortField]);
+      }
     }
     return null;
   }
