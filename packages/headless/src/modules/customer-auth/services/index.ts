@@ -6,6 +6,9 @@ import { authConfig } from 'config/auth';
 import { CustomerRepository } from 'src/modules/customer/repositories';
 const token = crypto.randomBytes(20).toString('hex');
 const ONE_HOUR = 3600000 // 1 hour = 3600000 milliseconds
+import { JwtService } from '@nestjs/jwt';
+import { CustomerJwtPayload } from 'src/entity/customer-auth';
+import { Customer } from 'src/entity/customer';
 import {
   CreateCustomerResponse,
   CreateCustomerErrorMessages,
@@ -21,9 +24,6 @@ import {
   CustomerForgotPasswordResponse,
   CustomerForgotPasswordErrorMessages,
 } from 'models';
-import { JwtService } from '@nestjs/jwt';
-import { CustomerJwtPayload } from 'src/entity/customer-auth';
-import { Customer } from 'src/entity/customer';
 
 @Injectable()
 export class CustomerAuthService {
