@@ -40,6 +40,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.modal.setModalWishlist
   );
 
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
   );
@@ -94,7 +98,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     };
     // console.log(cartItem);
     setShowCartModal(true);
-    setAmount(1);
+    setAmount(amount);
     dispatch(addToCart(cartItem));
   };
 
@@ -160,6 +164,29 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   useEffect(() => {
     dispatch(setModalState(false));
   }, [router.asPath]);
+
+  useEffect(() => {
+    let itemAmountInCart: any = cartData.find((item) => {
+      if (item.productId === product.id) {
+        return item;
+      }
+    });
+
+    if (!itemAmountInCart) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        photos: product.photos!,
+      };
+      const itemAmountInCart = {
+        product: cartProduct!,
+        productId: product.id!,
+        quantity: 0,
+      };
+    }
+    console.log(itemAmountInCart.quantity);
+    setAmount(itemAmountInCart.quantity);
+  }, []);
 
   return (
     <>
