@@ -47,19 +47,19 @@ describe('Initializing... Compare controller testing', () => {
   });
 
   describe('GET /compare - without token', () => {
-    it('should return 403', async () => {
+    it('should return 401', async () => {
       return await request(app.getHttpServer())
         .get('/compare')
-        .expect(403);
+        .expect(401);
     }, timeout);
   });
 
   describe('GET /compare with wrong token', () => {
-    it('should return 403', async () => {
+    it('should return 401', async () => {
       return await request(app.getHttpServer())
         .get('/compare')
         .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
-        .expect(403);
+        .expect(401);
     }, timeout);
   });
 
