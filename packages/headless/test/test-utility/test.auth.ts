@@ -4,32 +4,24 @@ import { authConfig } from 'config/auth';
 export interface JwtPayload {
   id: string;
   username: string;
-  role: string;
   logInTime: number;
+  role: string;
 }
 
 export interface JwtTokenRes {
   token: string;
 }
 
-const createPayloadForUserToken = (
-  id: string,
-  username: string,
-  role: string,
-): JwtPayload => {
+const createPayloadForUserToken = (id: string, username: string, role: string): JwtPayload => {
   return {
     id,
     username,
-    role,
     logInTime: Date.now(),
+    role
   };
 };
 
-export const getDemoUserToken = (
-  id: string,
-  username: string,
-  role: string,
-): JwtTokenRes => {
+export const getDemoUserToken = (id: string, username: string, role: string): JwtTokenRes => {
   if (!id.trim() || !username.trim()) {
     throw new Error('invalid userId or username found in token generation');
   }
