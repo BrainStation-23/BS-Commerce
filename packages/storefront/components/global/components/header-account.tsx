@@ -44,6 +44,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
+    router.push('/account/sign-in');
     toast.success('Logged out successfully!');
   };
 
@@ -92,7 +93,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                   {links[4].name}
                 </p>
                 <div
-                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block text-left`}
+                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
                     <Link href="/wishlist" passHref>
@@ -116,7 +117,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                       </li>
                     </Link>
                     <hr className="my-2" />
-                    <Link href={links[3].link} passHref>
+                    <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
                         className="transition-all duration-100 ease-linear hover:text-green-600"
