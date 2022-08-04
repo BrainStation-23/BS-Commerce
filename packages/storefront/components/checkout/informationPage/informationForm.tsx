@@ -36,7 +36,7 @@ const Information = (props: any) => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.success('Logged out successfully!');
+    toast.warning('Logged out successfully!');
   };
 
   const shippingInfo = useAppSelector(

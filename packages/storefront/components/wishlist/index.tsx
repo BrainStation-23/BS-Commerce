@@ -56,7 +56,7 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.success('Wishlist cleared');
+      toast.warning('Wishlist cleared');
     } catch (error) {
       toast.error('Error happened. Please try again.');
     }
