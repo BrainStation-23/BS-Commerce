@@ -28,6 +28,7 @@ interface FormData {
   addressLine2: string;
   city: string;
   postCode: string;
+  paymentMethod: string;
 }
 
 const PaymentDetails: NextComponentType = () => {
@@ -69,6 +70,7 @@ const PaymentDetails: NextComponentType = () => {
   const router = useRouter();
 
   const initialValues = {
+    paymentMethod: 'Cash on Delivery',
     cardNumber: '',
     nameOnCard: '',
     expirationDate: '',
@@ -143,18 +145,18 @@ const PaymentDetails: NextComponentType = () => {
         phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingMethod: 'test',
-      paymentMethod: 'card',
+      paymentMethod: data.paymentMethod,
       productCost: totalCartPrice,
       products: usableCart,
       totalCost: totalCartPrice,
       stripeToken: '',
       stripeCustomerId: '',
       stripeChargeId: '',
-      paypalPaymentId: data.cardNumber || '',
+      paypalPaymentId:
+        data.paymentMethod === 'Credit card' ? data.cardNumber : '',
       paypalRedirectUrl: '',
     };
     const res = userAPI.checkout(obj, router).then((response: any) => {
-      console.log(response?.data?.orderId);
       if (response?.data?.orderId) {
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());
@@ -204,6 +206,7 @@ const PaymentDetails: NextComponentType = () => {
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           const data = {
+            paymentMethod: values.paymentMethod,
             cardNumber: values.cardNumber,
             nameOnCard: values.nameOnCard,
             expirationDate: values.expirationDate,
@@ -246,61 +249,78 @@ const PaymentDetails: NextComponentType = () => {
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 {/* credit card info div */}
-                <div className="mt-5 rounded border border-gray-300">
-                  <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
-                    <p className="text-sm font-semibold">Credit card</p>
-                    <CreditCard />
-                  </div>
-                  <div className="bg-gray-100">
-                    <div className="p-4">
-                      <FieldTemplate
-                        label="Card Number"
-                        fieldID="cardNumber"
-                        fieldType="text"
-                        placeholder=" "
-                        extraClass="mb-3"
-                      />
-                      <FieldTemplate
-                        label="Name on card"
-                        fieldID="nameOnCard"
-                        fieldType="text"
-                        placeholder=" "
-                        extraClass="mb-3"
-                      />
+                <div className="input-group">
+                  <Field
+                    as="select"
+                    id="paymentMethod"
+                    name="paymentMethod"
+                    className="single-line w-full rounded-lg border-0 border-2 py-2 pl-2 outline-0"
+                    aria-disabled="false"
+                  >
+                    <option value={'Cash on Delivery'}>Cash on Delivery</option>
+                    <option value={'Credit card'}>Credit card</option>
+                  </Field>
+                </div>
+                {(document.getElementById('paymentMethod') as HTMLInputElement)
+                  ?.value === 'Credit card' ? (
+                  <div className="mt-5 rounded border border-gray-300">
+                    <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
+                      <p className="text-sm font-semibold">Credit card</p>
+                      <CreditCard />
+                    </div>
+                    <div className="bg-gray-100">
+                      <div className="p-4">
+                        <FieldTemplate
+                          label="Card Number"
+                          fieldID="cardNumber"
+                          fieldType="text"
+                          placeholder=" "
+                          extraClass="mb-3"
+                        />
+                        <FieldTemplate
+                          label="Name on card"
+                          fieldID="nameOnCard"
+                          fieldType="text"
+                          placeholder=" "
+                          extraClass="mb-3"
+                        />
 
-                      <div className="row">
-                        <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
-                          <div className="relative">
-                            <Field
-                              type="month"
-                              id="expirationDate"
-                              name="expirationDate"
-                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                              placeholder=" "
-                            />
-                            <label
-                              htmlFor={`expirationDate`}
-                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                            >
-                              Expiration Date (MM / YY)
-                            </label>
-                            <div className="errMsg text-red-600">
-                              <ErrorMessage name="expirationDate" />
+                        <div className="row">
+                          <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
+                            <div className="relative">
+                              <Field
+                                type="month"
+                                id="expirationDate"
+                                name="expirationDate"
+                                className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                placeholder=" "
+                              />
+                              <label
+                                htmlFor={`expirationDate`}
+                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                              >
+                                Expiration Date (MM / YY)
+                              </label>
+                              <div className="errMsg text-red-600">
+                                <ErrorMessage name="expirationDate" />
+                              </div>
                             </div>
-                          </div>
 
-                          <FieldTemplate
-                            label="Security Code"
-                            fieldID="securityCode"
-                            fieldType="text"
-                            placeholder=" "
-                            extraClass="mb-3"
-                          />
+                            <FieldTemplate
+                              label="Security Code"
+                              fieldID="securityCode"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  ''
+                )}
 
                 {/* billing div */}
                 {/* <div>

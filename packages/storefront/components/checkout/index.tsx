@@ -22,4 +22,4 @@ const CheckoutComponent: NextComponentType = () => {
   );
 };
 
-export default CheckoutComponent;
+export default withAuth(CheckoutComponent);

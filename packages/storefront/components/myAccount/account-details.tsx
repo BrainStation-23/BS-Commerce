@@ -15,8 +15,7 @@ import { CustomerSchema } from './schema/customer.schema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
-import WithAuth from '@/components/auth/withAuth';
-
+import withAuth from '@/components/auth/withAuth';
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -162,4 +161,4 @@ const AccountDetails: React.FC = () => {
   );
 };
 
-export default WithAuth(AccountDetails);
+export default withAuth(AccountDetails);

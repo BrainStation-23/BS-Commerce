@@ -11,7 +11,7 @@ const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
   return (
     <>
       <div className="pt-10 pb-6">
-        <table className="border-collapse border border-slate-400 w-full ">
+        <table className="w-full border-collapse border border-slate-400 ">
           <thead className="">
             <tr>
               <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base md:px-8">
