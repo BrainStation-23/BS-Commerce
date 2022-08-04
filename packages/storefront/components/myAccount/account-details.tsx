@@ -39,7 +39,7 @@ const AccountDetails: React.FC = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.warning('Logged out successfully!');
+    toast.error('Logged out successfully!');
   };
 
   const handleSubmit = async (values: UpdateCustomerRequestBody) => {
