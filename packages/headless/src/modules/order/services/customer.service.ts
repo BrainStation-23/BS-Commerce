@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { IOrderCreateData, IProductOrderData } from 'models';
 
+import { OrderSortQuery } from './../../../entity/order';
 import { OrderEntity, OrderListResponseEntity, OrderResponseEntity } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
@@ -32,8 +33,9 @@ export class OrderCustomerService {
 
   async getOrderListByUserId(
     userId: string,
+    sortObj: OrderSortQuery
   ): Promise<IServiceResponse<OrderListResponseEntity>> {
-    const orderList = await this.orderRepository.getOrderListByUserId(userId);
+    const orderList = await this.orderRepository.getOrderListByUserId(userId,sortObj);
 
     if (orderList) {
       const orderInfo = orderList.map((e) => {

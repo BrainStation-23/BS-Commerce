@@ -3,6 +3,7 @@ import {
   GetAllOrderQueryEntity, 
   OrderEntity, 
   OrderIncompleteStatEntity, 
+  OrderSortQuery, 
   OrderStatEntity, 
   OrderStatusEnum, 
   ShippingStatusEnum, 
@@ -28,8 +29,15 @@ export class OrderDatabase implements IOrderDatabase {
       return newProductList;
   }
 
-  async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
+  async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {
+    const { sortField, sortType} = sortObj;
     const orderList = await OrderModel.find({ userId });
+    if(sortType === 'ascending'){
+      return orderList.sort((a,b) => a[sortField] - b[sortField]);
+    }else{
+      return orderList.sort((a,b) => b[sortField] - a[sortField]);
+    }
+    
     if (orderList.length > 0) {
       return orderList;
     }

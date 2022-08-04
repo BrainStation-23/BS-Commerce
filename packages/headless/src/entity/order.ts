@@ -163,9 +163,16 @@ export class OrderResponseEntity {
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
 }
-// export class OrderListWithoutUserId {
 
-// }
+//sorting query entity
+export enum SortTypesDto {
+  ascending = 'ascending',
+  descending = 'descending'
+}
+export class OrderSortQuery {
+  sortField?: string;
+  sortType?: string;
+}
 export class OrderListResponseEntity {
   userId: string;
   orderInfo: OrderEntity[];

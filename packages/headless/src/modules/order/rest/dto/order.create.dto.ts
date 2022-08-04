@@ -71,7 +71,7 @@ export class OrderAddressDto implements IOrderAddress {
 }
 
 export class ProductOrderDto implements IProductOrderData {
-  @ApiProperty({ example: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f' })
+  @ApiProperty({ example: '052eeb8f-6a08-438d-8799-2fb0bb8d7d98' })
   @IsString()
   productId: string;
 
