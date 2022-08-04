@@ -35,7 +35,9 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
       dispatch(storeAddresses(updatedCustomer?.data?.addresses!));
       dispatch(storeCustomerDetails(updatedCustomer?.data!));
     } catch (error) {
-      toast.error(`Error occurred!!`);
+      toast.error(`Error occurred!!`, {
+        containerId: 'bottom-right',
+      });
     }
   };
 

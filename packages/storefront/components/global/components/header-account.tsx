@@ -44,7 +44,9 @@ const HeaderAccount: React.FC<Properties> = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.error('Logged out successfully!');
+    toast.error('Logged out successfully!', {
+      containerId: 'bottom-right',
+    });
   };
 
   const handleClickWishlist = () => {

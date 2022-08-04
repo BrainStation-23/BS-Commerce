@@ -72,9 +72,11 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    // toast.success('+1 Item added to cart');
+    //  toast.success('+1 Item added to cart', { containerId: 'bottom-right', });
     if (!productInCart) {
-      toast(<CartToast product={product} />);
+      toast(<CartToast product={product} />, {
+        containerId: 'bottom-right',
+      });
       dispatch(addToCart(cartItem));
       // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     }
@@ -85,7 +87,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     try {
       await userAPI.addToCompare(product?.id!);
     } catch (error) {
-      toast.error('Error happend.');
+      toast.error('Error happend.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
@@ -101,10 +105,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           const newWishlist = await userAPI.getCustomerWishlist(token);
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
-        toast.success('Item added to wishlist');
+        toast.success('Item added to wishlist', {
+          containerId: 'bottom-right',
+        });
         inWishlist = true;
       } catch (error) {
-        toast.error('Failed to add item to wishlist');
+        toast.error('Failed to add item to wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));
@@ -115,11 +123,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist');
+        toast.error('Item removed from wishlist', {
+          containerId: 'bottom-right',
+        });
         dispatch(deleteItemFromWishlist(productId));
         inWishlist = false;
       } catch (error) {
-        toast.error('Failed to remove item from wishlist');
+        toast.error('Failed to remove item from wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));

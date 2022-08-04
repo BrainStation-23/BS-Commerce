@@ -24,25 +24,34 @@ const Signup = () => {
       await userAPI.signUp(data).then((response: any) => {
         if (response?.code !== 201) {
           if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
-            toast.warning('User with this email already exists');
+            toast.warning('User with this email already exists', {
+              containerId: 'bottom-right',
+            });
             setLoading(false);
           } else if (
             response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
           ) {
-            toast.warning('User with this phone number already exists');
+            toast.warning('User with this phone number already exists', {
+              containerId: 'bottom-right',
+            });
             setLoading(false);
           }
         } else {
           setLoading(false);
           toast.success(
-            'Account created successfully! Please login to continue.'
+            'Account created successfully! Please login to continue.',
+            {
+              containerId: 'bottom-right',
+            }
           );
           router.push('/account/sign-in');
         }
       });
     } catch (error) {
       setLoading(false);
-      toast.error('User creation failed. Try again.');
+      toast.error('User creation failed. Try again.', {
+        containerId: 'bottom-right',
+      });
     }
   }
 

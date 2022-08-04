@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
-  
+
   useEffect(() => {
     Axios.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
@@ -30,7 +30,14 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main>{children}</main>
       <Footer />
-      <ToastContainer position="bottom-right" theme="colored"/>
+      {/* <ToastContainer position="bottom-right" theme="colored" />{' '} */}
+      <ToastContainer position="bottom-left" theme="colored" />
+      <ToastContainer
+        enableMultiContainer
+        theme="colored"
+        containerId={'bottom-right'}
+        position="bottom-right"
+      />
     </>
   );
 };

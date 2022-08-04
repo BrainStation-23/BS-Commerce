@@ -46,10 +46,14 @@ const Signin: NextComponentType = () => {
       setLoader(false);
       router.push('/');
       //router.back();
-      toast.success('Logged in successfully!');
+      toast.success('Logged in successfully!', {
+        containerId: 'bottom-right',
+      });
     } catch (err) {
       setLoader(false);
-      toast.error('Invalid username or password.');
+      toast.error('Invalid username or password.', {
+        containerId: 'bottom-right',
+      });
     }
   }
   if (loader) return <Loading />;
