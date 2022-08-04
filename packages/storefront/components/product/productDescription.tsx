@@ -15,7 +15,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
   const [review, setReview] = useState('hidden');
   const [shipping, setShipping] = useState('hidden');
   const [size_chart, setSize_chart] = useState('hidden');
-  const [descriptionChartFocused, setDescriptionChartFocused] = useState(false);
+  const [descriptionChartFocused, setDescriptionChartFocused] = useState(true);
   const [sizeChartFocused, setSizeChartFocused] = useState(false);
   const shipping_policy =
     'Lorem ipsum dolor sit On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will amet consectetuer adipiscing elit hdjkdsdf fksdbfg sdfff ksfhf gmnsgbksf eafksbdfg ,saefkbs fs fsdkgbjsgf sdf m,sdf skdgjn sgksugb wrgwsg lf ogs sg slkjg solg sgs gosg sg sl gsgj jsgalflanfpwig sl j so se vs dgjsdgjlb gslg esl efjgsjg ls g ls dgj sl jgs gsl gskg skg s gksg,n sfobe fpeasgff bpa gerogal vag eg';

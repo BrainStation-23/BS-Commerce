@@ -131,7 +131,7 @@ export async function getFeaturedProductsRest(): Promise<
 }
 
 export async function getPublicProductByIdRest(
-  productId: GetCustomerProductParams
+  productId: string
 ): Promise<GetCustomerProductResponse | undefined> {
   try {
     const res = await axios.get(
@@ -177,7 +177,7 @@ export async function getPublicProductByCategoryIDRest(
     );
     return res.data.data as GetCustomerAllProductsResponse;
   } catch (error: any) {
-    return error;
+    return [] as any;
   }
 }
 export async function addToWishlistRest(
@@ -202,7 +202,7 @@ export async function getOrderProductsRest(
     });
     return res?.data;
   } catch (error: any) {
-    return [];
+    return [] as any;
   }
 }
 
@@ -218,7 +218,7 @@ export async function getOrderProductRest(
     });
     return res?.data;
   } catch (error: any) {
-    return [];
+    return [] as any;
   }
 }
 
@@ -252,7 +252,7 @@ export async function getCustomerWishlistRest(
       userId: '',
       id: '',
       items: [],
-    }
+    };
     return errorData as any;
   }
 }
@@ -283,7 +283,7 @@ export async function deleteFullWishlistRest(): Promise<
 }
 
 export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(`${apiEndPoints.deleteFromCompare}`, productId);
+  await axios.delete(`${apiEndPoints.deleteFromCompare}`, { data: productId });
 }
 
 export async function getCustomerProfileRest(
@@ -295,9 +295,9 @@ export async function getCustomerProfileRest(
         Authorization: `Bearer ${token}`,
       },
     });
-    return res.data as GetCustomerInformationSuccessResponse;
+    return res.data;
   } catch (error) {
-    return [];
+    return {} as any;
   }
 }
 
@@ -342,7 +342,7 @@ export async function updateCustomerAddressRest(
     );
     toast.success('Address updated successfully');
     return res.data as UpdateCustomerAddressSuccessResponse;
-  } catch (error) {
+  } catch (error: any) {
     toast.error('Address update failed');
     return error;
   }
