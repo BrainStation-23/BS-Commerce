@@ -68,9 +68,7 @@ const CustomerSchema = new Schema<Customer>({
     type: Boolean,
     default: false
   },
-  addresses: [CustomerAddressSchema],
-  resetPasswordToken: String,
-  resetPasswordExpires: Number,
+  addresses: [CustomerAddressSchema]
 }, {
   timestamps: true,
   versionKey: false
