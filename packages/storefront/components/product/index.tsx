@@ -23,6 +23,7 @@ import Modal from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import ModalWishlist from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
+import CartToast from '../global/components/cartToast';
 interface SingleProduct {
   product: Product;
 }
@@ -93,7 +94,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       quantity: amount,
     };
     // console.log(cartItem);
-    setShowCartModal(true);
+    // setShowCartModal(true);
+    toast(<CartToast product={product} />);
+
     setAmount(1);
     dispatch(addToCart(cartItem));
   };

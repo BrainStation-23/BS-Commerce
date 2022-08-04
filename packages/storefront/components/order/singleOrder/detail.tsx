@@ -1,6 +1,6 @@
 import { IOrderResponseData } from 'models';
 import React from 'react';
-import CartDetails from './cartTable/main';
+import CartDetails from '../cartTable/main';
 interface Props {
   singleOrder: IOrderResponseData;
 }

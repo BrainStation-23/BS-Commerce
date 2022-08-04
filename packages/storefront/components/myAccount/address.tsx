@@ -71,13 +71,6 @@ const AccountDetails: NextComponentType = () => {
                   {customerAddresses?.map((customerAddress, index) => {
                     return (
                       <React.Fragment key={customerAddress?.id!}>
-                        {index === 0 && (
-                          <div className="flex flex-wrap gap-x-2 text-4xl">
-                            <p>{customerAddress?.firstName!}</p>
-                            <p>{customerAddress?.lastName!}</p>
-                            <p>(Default)</p>
-                          </div>
-                        )}
                         <SingleAddress singleAddress={customerAddress} />
                       </React.Fragment>
                     );
