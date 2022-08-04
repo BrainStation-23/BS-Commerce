@@ -4,10 +4,8 @@ import * as request from 'supertest';
 import { connectTestDatabase } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { CreateBrandRequestDto } from 'src/modules/brands/rest/dto/createBrandDto';
-import { GetAllBrandsDto } from '../../../src/modules/brands/rest/dto/getAllBrandsDto';
 import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
 import { BrandController } from 'src/modules/brands/rest/brand.controller';
-import { Brand } from 'src/entity/brand';
 import { BrandDto } from 'src/modules/brands/rest/dto/brandDto';
 
 
@@ -37,7 +35,6 @@ describe('Initializing Brand controller testing', () => {
     }
 
     const createBrandRequest: CreateBrandRequestDto = {
-        id: '34343432sdfsdf3sf',
         info: {
             name: "tujhe becheeeeaini",
             description: "This is a motorBike and it belongs to USA based Harley Company",
@@ -137,11 +134,6 @@ describe('Initializing Brand controller testing', () => {
         await connectTestDatabase();
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
-            
-            // providers: [{ 
-            //     provide: BrandController, 
-            //     useValue: createMock<BrandController>()
-            // }],
         })
         .compile();
 
@@ -151,7 +143,7 @@ describe('Initializing Brand controller testing', () => {
     });
 
     afterAll(async () => {
-        // remove test databse collection if required
+        // remove test database collection if required
         // await removeTestCollection('compares');
         await app.close();
     });
