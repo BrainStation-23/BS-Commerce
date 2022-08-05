@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 import { useAppDispatch } from 'customHooks/hooks';
@@ -16,7 +17,7 @@ const ShowData = ({ data }: any) => {
     <>
       <tr key={data.productId}>
         <td className="border border-slate-300 px-8 py-2 md:px-4">
-          <img
+          <Image
             src={data?.product?.photos[0]?.url}
             alt="product Image"
             width={100}
