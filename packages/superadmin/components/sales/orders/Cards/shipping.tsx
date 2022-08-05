@@ -6,7 +6,9 @@ interface Props {
   singleOrderInfo: any;
 }
 const Shipping: FC<Props> = ({ singleOrderInfo }) => {
-  const [shippingStatusValue, setShippingStatusValue] = useState(singleOrderInfo.shippingStatus);
+  const [shippingStatusValue, setShippingStatusValue] = useState(
+    singleOrderInfo.shippingStatus
+  );
   const [modal, setModal] = useState({
     change_shipping_status: false,
     change_shipping_status_save: false,
@@ -36,7 +38,11 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
   };
 
   const handleShippingPositive = () => {
-    setModal({ ...modal, change_shipping_status_save: false });
+    setModal({
+      ...modal,
+      change_shipping_status_save: false,
+      change_shipping_status: false,
+    });
     const obj = {
       orderId: singleOrderInfo?.orderId,
       statusType: 'shippingStatusEnums',
@@ -67,10 +73,7 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
         />
         <div className="row">
           <div className="col" style={{ marginLeft: '15%' }}>
-            <Tooltip
-              label={'Shipping status'}
-              data={shippingStatusValue}
-            />
+            <Tooltip label={'Shipping status'} data={shippingStatusValue} />
           </div>
           <div className="col" style={{}}>
             {modal.change_shipping_status ? (
@@ -99,10 +102,16 @@ const Shipping: FC<Props> = ({ singleOrderInfo }) => {
                     {shippingState}
                   </a>
                   <div className="dropdown-menu">
-                    <a id={shippingEnum.NotYetShipped} className="dropdown-item">
+                    <a
+                      id={shippingEnum.NotYetShipped}
+                      className="dropdown-item"
+                    >
                       {shippingEnum.NotYetShipped}
                     </a>
-                    <a id={shippingEnum.PartiallyShipped} className="dropdown-item">
+                    <a
+                      id={shippingEnum.PartiallyShipped}
+                      className="dropdown-item"
+                    >
                       {shippingEnum.PartiallyShipped}
                     </a>
                     <a id={shippingEnum.Shipped} className="dropdown-item">

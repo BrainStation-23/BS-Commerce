@@ -53,7 +53,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // JSON.parse(JSON.stringify(category));
   let wishlistedProducts;
   if (reqCookie) {
-    wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
+    wishlistedProducts = await userAPI.getCustomerWishlist(token?.token);
+  } else {
+    wishlistedProducts = [];
   }
 
   return {

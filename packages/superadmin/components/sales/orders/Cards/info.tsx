@@ -78,7 +78,7 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
   };
 
   const handlePositive = () => {
-    setModal({ ...modal, change_status_save: false });
+    setModal({ ...modal, change_status_save: false, change_status: false });
     const obj = {
       orderId: singleOrderInfo?.orderId,
       statusType: 'orderStatusEnums',
@@ -86,11 +86,14 @@ const Info: FC<Props> = ({ singleOrderInfo }) => {
     };
     setOrderStatusValue(orderState);
     userAPI.updateOrderStatus(obj);
-    // router.push('/Sales/Order/List');
   };
 
   const handlePaymentPositive = () => {
-    setModal({ ...modal, change_payment_status_save: false });
+    setModal({
+      ...modal,
+      change_payment_status_save: false,
+      change_payment_status: false,
+    });
     const obj = {
       orderId: singleOrderInfo?.orderId,
       statusType: 'paymentStatusEnums',
