@@ -10,8 +10,6 @@ const UpdateBrandPage: NextPage = () => {
   const [brand, setBrand] = useState<any>();
   const getBrand = async () => {
     const res = await userAPI.getBrand({ brandId: `${id}` });
-    console.log(res);
-
     res ? setBrand(res) : '';
   };
   useEffect(() => {
@@ -19,7 +17,6 @@ const UpdateBrandPage: NextPage = () => {
   }, []);
   return (
     <>
-      {console.log(brand)}
       <div className="mt-2 px-5">
         <UpdateBrand brand={brand} />
       </div>

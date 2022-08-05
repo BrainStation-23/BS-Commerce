@@ -463,7 +463,7 @@ export async function updateBrandRest(
   router: NextRouter
 ): Promise<UpdateBrandResponse | undefined> {
   try {
-    const response = await axios?.put(
+    const response = await axios?.patch(
       `${apiEndPoints?.brands}/${brandID}`,
       data
     );
@@ -471,7 +471,7 @@ export async function updateBrandRest(
     toast.success('Successfully updated');
     return response.data;
   } catch (error: any) {
-    toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
   }
 }
 

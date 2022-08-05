@@ -12,10 +12,9 @@ import { FC } from 'react';
 
 const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
   const router = useRouter();
-  console.log(brand);
 
   const handleSubmit = (data: UpdateBrandRequest) => {
-     userAPI.updateBrand(data, router , brandID);
+    userAPI.updateBrand(brand.id, data, router);
   };
   return (
     <>
