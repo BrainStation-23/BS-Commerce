@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
       action: PayloadAction<ResponseItem>
     ) => {
       const existingCartProduct = state.allCartItems.find(item => item.productId === action.payload.productId)
-      existingCartProduct ? existingCartProduct.quantity += action.payload.quantity : state.allCartItems.push(action.payload);
+      existingCartProduct ? existingCartProduct.quantity = action.payload.quantity : state.allCartItems.push(action.payload);
     },
     storeAllCartItems: (
       state: AllCartItemsState,

@@ -78,7 +78,9 @@ export async function signinRest(
     const res = await axios.post(`${apiEndPoints.login}`, data);
     return res.data;
   } catch (error: any) {
-    toast.error('Some error happend. Try again.');
+    toast.error('Some error happend. Try again.', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }
@@ -159,11 +161,15 @@ export async function checkoutRest(
 ): Promise<IOrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
-    toast.success('Order created successfully!');
+    toast.success('Order created successfully!', {
+      containerId: 'bottom-right',
+    });
     router.push('/submit');
     return res.data;
   } catch (error: any) {
-    toast.error('Order creation failed!');
+    toast.error('Order creation failed!', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }
@@ -246,8 +252,7 @@ export async function getCustomerWishlistRest(
     const res = await axios.get(`${apiEndPoints.getCustomerWishlist}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    return res.data.data as Wishlist;
+    return res?.data?.data as Wishlist;
   } catch (error: any) {
     const errorData = {
       userId: '',
@@ -310,10 +315,14 @@ export async function addCustomerNewAddressRest(
       `${apiEndPoints.addCustomerAddress}`,
       customerAddress
     );
-    toast.success('New Address added');
+    toast.success('New Address added', {
+      containerId: 'bottom-right',
+    });
     return res.data.data;
   } catch (error: any) {
-    toast.error('Failed to add New Address');
+    toast.error('Failed to add New Address', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }
@@ -325,7 +334,9 @@ export async function deleteCustomerAddressRest(
     const res = await axios.delete(
       `${apiEndPoints.deleteCustomerAddress}/${addressId}`
     );
-    toast.success('Address deleted successfully');
+    toast.success('Address deleted successfully', {
+      containerId: 'bottom-right',
+    });
     return res.data as DeleteCustomerAddressSuccessResponse;
   } catch (error: any) {
     return error;
@@ -341,10 +352,14 @@ export async function updateCustomerAddressRest(
       `${apiEndPoints.updateCustomerAddress}/${addressId}`,
       data
     );
-    toast.success('Address updated successfully');
+    toast.success('Address updated successfully', {
+      containerId: 'bottom-right',
+    });
     return res.data as UpdateCustomerAddressSuccessResponse;
   } catch (error: any) {
-    toast.error('Address update failed');
+    toast.error('Address update failed', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }

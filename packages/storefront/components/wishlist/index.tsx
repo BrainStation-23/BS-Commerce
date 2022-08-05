@@ -57,19 +57,27 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.success('Wishlist cleared');
+      toast.error('Wishlist cleared', {
+        containerId: 'bottom-right',
+      });
     } catch (error) {
-      toast.error('Error happened. Please try again.');
+      toast.error('Error happened. Please try again.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
   // async function handleClick(data: string) {
   //   try {
   //     await userAPI.deleteWishlistItem(data);
-  //     toast.success('Item removed from wishlist');
+  //  toast.success('Item removed from wishlist', {
+  //     containerId: 'bottom-right',
+  //   });
   //     dispatch(deleteItemFromWishlist(data));
   //   } catch (error) {
-  //     toast.error('Failed to remove item from wishlist');
+  //  toast.error('Failed to remove item from wishlist', {
+  //     containerId: 'bottom-right',
+  //   });
   //   }
   // }
 
@@ -110,7 +118,7 @@ const WishlistComponent: NextComponentType = () => {
             </button>
           )}
         </div>
-        {wishlistData.items?.length! <= 0 && (
+        {wishlistData?.items?.length! <= 0 && (
           <div className="my-10 flex flex-col items-center">
             <div className="my-2">
               <WishlistIcon height="h-16" width="w-16" />
