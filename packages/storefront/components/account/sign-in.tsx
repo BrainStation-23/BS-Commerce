@@ -19,6 +19,7 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 
 import FacebookLogo from '../../public/facebook.svg';
 import GoogleLogo from '../../public/google.svg';
+import { storeWishlist } from 'toolkit/productsSlice';
 
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,16 @@ const Signin: NextComponentType = () => {
 
   let username = '';
   let loggedInUsingEmail = false;
+
+  const fetchWislist = async (token: string) => {
+    const wishlistedProducts = await userAPI.getCustomerWishlist(token);
+    dispatch(storeWishlist(wishlistedProducts!));
+  };
+
+  // const fetchCustomerDetails = async (token: string) => {
+  //   const customerInformation = await userAPI.getCustomer(token);
+  //   dispatch(storeCustomerDetails(customerInformation?.data));
+  // };
 
   async function handleSignin(data: CustomerSignInRequest) {
     try {
@@ -43,9 +54,13 @@ const Signin: NextComponentType = () => {
       userAPI.getCustomer(datass?.data?.token).then((response) => {
         dispatch(storeCustomerDetails(response?.data));
       });
+
+      // fetchCustomerDetails(datass?.data?.token);
+      fetchWislist(datass?.data?.token);
+
       setLoader(false);
+
       router.push('/');
-      //router.back();
       toast.success('Logged in successfully!');
     } catch (err) {
       setLoader(false);

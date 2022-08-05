@@ -51,6 +51,9 @@ export const productsSlice = createSlice({
       const newList: any = [];
       state.wishlist = { ...state.wishlist, items: newList };
     },
+    resetWishilist: (state: productsState) => {
+      state.wishlist = initialState.wishlist;
+    },
     storeCategorizedProduct: (
       state: productsState,
       action: PayloadAction<Product[]>
@@ -76,6 +79,7 @@ export const {
   deleteFullWishlist,
   storeCategorizedProduct,
   addToWishlist,
+  resetWishilist,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
