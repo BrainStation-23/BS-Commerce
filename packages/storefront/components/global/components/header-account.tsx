@@ -46,9 +46,6 @@ const HeaderAccount: React.FC<Properties> = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-
-    // TODO: clear wishlist
-    // TODO: clear userdetails
     dispatch(resetAddress());
     dispatch(resetUserDetails());
     dispatch(resetWishilist());

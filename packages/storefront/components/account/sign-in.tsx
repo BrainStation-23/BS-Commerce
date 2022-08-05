@@ -34,16 +34,11 @@ const Signin: NextComponentType = () => {
     dispatch(storeWishlist(wishlistedProducts!));
   };
 
-  // const fetchCustomerDetails = async (token: string) => {
-  //   const customerInformation = await userAPI.getCustomer(token);
-  //   dispatch(storeCustomerDetails(customerInformation?.data));
-  // };
-
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
       const token = await fetch('http://localhost:3002/api/signin', {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -51,15 +46,13 @@ const Signin: NextComponentType = () => {
       });
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
+
       userAPI.getCustomer(datass?.data?.token).then((response) => {
         dispatch(storeCustomerDetails(response?.data));
       });
 
-      // fetchCustomerDetails(datass?.data?.token);
       fetchWislist(datass?.data?.token);
-
       setLoader(false);
-
       router.push('/');
       toast.success('Logged in successfully!');
     } catch (err) {
