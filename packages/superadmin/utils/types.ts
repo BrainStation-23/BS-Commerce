@@ -20,6 +20,8 @@ import {
   Tags,
   UpdatedUserRequest,
   CreateBrandRequest,
+  UpdateBrandResponse,
+  UpdateBrandRequest,
 } from 'models';
 
 export interface User {
@@ -118,6 +120,11 @@ export interface apiFunction {
   getTags: () => Promise<GetTagsResponse | undefined>;
   createBrand(data: CreateBrandRequest, router: NextRouter): Promise<any>;
   deleteBrand(productId: string): Promise<boolean | undefined>;
+  updateBrand(
+    brandID: string,
+    data: UpdateBrandRequest,
+    router: NextRouter
+  ): Promise<UpdateBrandResponse | undefined>;
 }
 
 export interface adminCreate {

@@ -34,6 +34,7 @@ import {
   updatePaymentStatusRest,
   updateShippingStatusRest,
   deleteBrandRest,
+  updateBrandRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -57,6 +58,7 @@ import {
   // createManufacturerGraphQl,
   getAllOrderListGraphQL,
   deleteBrandGraphQL,
+  updateBrandGraphQL,
 } from './graphQL';
 import { config } from '../config/index';
 import { apiFunction } from '../utils/types';
@@ -87,6 +89,7 @@ const graphqlApi: apiFunction = {
   createBrand: createBrandGraphQL,
   getAllOrderList: getAllOrderListGraphQL,
   deleteBrand: deleteBrandGraphQL,
+  updateBrand: updateBrandGraphQL,
 };
 
 const restApi: apiFunction = {
@@ -123,6 +126,7 @@ const restApi: apiFunction = {
   getAllOrderList: getAllOrderListRest,
   getSingleOrderById: getSingleOrderByIdRest,
   deleteBrand: deleteBrandRest,
+  updateBrand: updateBrandRest,
 };
 
 export const userAPI: apiFunction =

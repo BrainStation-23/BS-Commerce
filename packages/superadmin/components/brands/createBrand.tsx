@@ -10,7 +10,7 @@ import BrandMetaForm from '@/components/brands/forms/brandMetaForm';
 import { brandSchema } from '@/components/brands/schema/brandsSchema';
 import { FC } from 'react';
 
-const CreateBrand: FC<{brand? : Brand}> = ({brand}) => {
+const CreateBrand: FC = () => {
   const router = useRouter();
 
   const handleSubmit = (data: CreateBrandRequest) => {
@@ -42,8 +42,8 @@ const CreateBrand: FC<{brand? : Brand}> = ({brand}) => {
           };
           const meta = {
             keywords: values?.keywords,
-            metaTitle: values?.metaTitle,
-            metaDescription: values?.metaDescription,
+            title: values?.metaTitle,
+            description: values?.metaDescription,
             SEFN: values?.SEFN,
           };
           const newData = {

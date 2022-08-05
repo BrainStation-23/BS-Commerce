@@ -19,6 +19,8 @@ import {
   UploadFileSuccessResponse,
   GetTagsResponse,
   CreateBrandRequest,
+  UpdateBrandResponse,
+  UpdateBrandRequest,
 } from 'models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -121,5 +123,13 @@ export async function getAllOrderListGraphQL() {
 export async function deleteBrandGraphQL(
   productId: string
 ): Promise<boolean | undefined> {
-  return ;
+  return;
+}
+
+export async function updateBrandGraphQL(
+  brandID: string,
+  data: UpdateBrandRequest,
+  router: NextRouter
+): Promise<UpdateBrandResponse | undefined> {
+  return;
 }

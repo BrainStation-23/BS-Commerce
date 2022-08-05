@@ -1,3 +1,4 @@
+import { Brand } from './../../models/src/brand/brand';
 import { NextRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -25,6 +26,9 @@ import {
   GetManufacturersSuccessResponse,
   CreateBrandRequest,
   IOrderResponseData,
+  GetBrandByIdResponse,
+  UpdateBrandResponse,
+  UpdateBrandRequest,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -452,6 +456,25 @@ export async function createBrandRest(
     toast.error(error?.response?.data?.message);
   }
 }
+
+export async function updateBrandRest(
+  brandID: string,
+  data: UpdateBrandRequest,
+  router: NextRouter
+): Promise<UpdateBrandResponse | undefined> {
+  try {
+    const response = await axios?.put(
+      `${apiEndPoints?.brands}/${brandID}`,
+      data
+    );
+    router.push('/Brands');
+    toast.success('Successfully updated');
+    return response.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
 export async function getBrandRest(brandId: any): Promise<any> {
   try {
     const { data } = await axios?.get(

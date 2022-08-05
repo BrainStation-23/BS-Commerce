@@ -85,7 +85,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
         <td className="text-center align-middle">
           <Link
             href={{
-              pathname: `/Brands/Create/[id]`,
+              pathname: `/Brands/Edit/[id]`,
               query: { id: data?.[key] },
             }}
             passHref
