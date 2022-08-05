@@ -278,10 +278,6 @@ const PaymentDetails: NextComponentType = () => {
                     </div>
                     {formikprops.values.paymentMethod === 'Credit card' ? (
                       <div className="mt-5 rounded border border-gray-300">
-                        {/* <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
-                          <p className="text-sm font-semibold">Credit card</p>
-                          <CreditCard />
-                        </div> */}
                         <div className="bg-gray-100">
                           <div className="p-4">
                             <FieldTemplate
