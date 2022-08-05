@@ -16,6 +16,8 @@ describe('Initializing Brand controller testing', () => {
     let controller: BrandController;
     
     let brandId: string = "ed1b4494-875b-40c3-853c-dfc0776ccd62";
+    let brandName: string = 'Samsung';
+    const invalidBrandName: string = '45454';
     const invalidBrandId: string = '343434sfsdfsd';
     const token = getDemoUserToken(testUserId, testUsername, 'admin').token;
 
@@ -176,7 +178,6 @@ describe('Initializing Brand controller testing', () => {
         .set('Authorization', `Bearer ${token}`)
         .send(createBrandRequest)
         .expect((res)=> {
-            console.log(res.body);
             expect(res.statusCode).toBe(201);
             expect(res.body.data).toMatchObject({
                 id: expect.any(String),
@@ -198,6 +199,7 @@ describe('Initializing Brand controller testing', () => {
         });
 
         brandId = result.body.data.id;
+        brandName = result.body.data.info.name;
     });
 
     it('/POST CREATE NEW BRAND [INVALID DATA TYPES INVALID]',async () => {
@@ -255,6 +257,37 @@ describe('Initializing Brand controller testing', () => {
                 }
             })
         })
+    });
+
+    it('/GET BRAND WITH NAME [VALID NAME]', async () => {
+        return await request(app.getHttpServer())
+        .get(`/brands/brandName/${brandName}`)
+        .expect(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body.data).toMatchObject({
+                id: expect.any(String),
+                info: {
+                    name: expect.any(String),
+                    description: expect.any(String),
+                    allowToSelectPageSize: expect.any(Boolean),
+                    published: expect.any(Boolean),
+                    displayOrder: expect.any(Number),
+                    pageSizeOptions: expect.any(Array)
+                },
+                meta: {
+                        keywords: expect.any(String),
+                        description: expect.any(String),
+                        title: expect.any(String),
+                        SEFN: expect.any(String)
+                }
+            })
+        })
+    });
+
+    it('/GET BRAND WITH NAME [INVALID NAME]', async () => {
+        return await request(app.getHttpServer())
+        .get(`/brands/brandName/${invalidBrandName}`)
+        .expect(400)
     });
 
     it('/GET BRAND WITH ID [INVALID ID]', async () => {
