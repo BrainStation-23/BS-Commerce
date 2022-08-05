@@ -1,6 +1,7 @@
-import { useAppSelector } from 'customHooks/hooks';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppSelector } from 'customHooks/hooks';
+import Loading from '@/components/global/loader';
 
 const WithAuth = (Component: React.FC) => {
   const Auth = (props: any) => {
@@ -17,18 +18,22 @@ const WithAuth = (Component: React.FC) => {
       // );
       window.location.href = '/account/sign-in';
     }
+    const pushRouter = () => {
+      router.push('/account/sign-in');
+    };
+    useEffect(() => {
+      if (!isLoggedIn) {
+        // return (
+        //   <SignIn />
+        // );
+        window.location.href = '/account/sign-in';
+        router.push('/account/sign-in');
+      }
+    }, []);
 
     // If user is logged in, return original component
-    return (
-      <>
-        {isLoggedIn ? (
-          <Component {...props} />
-        ) : (
-          router.push('/account/sign-in')
-        )}
-        ;
-      </>
-    );
+    if (!isLoggedIn) return <Loading />;
+    else return <Component {...props} />;
   };
 
   return Auth;
