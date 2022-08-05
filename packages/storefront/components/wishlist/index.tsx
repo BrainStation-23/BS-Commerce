@@ -67,20 +67,6 @@ const WishlistComponent: NextComponentType = () => {
     }
   };
 
-  // async function handleClick(data: string) {
-  //   try {
-  //     await userAPI.deleteWishlistItem(data);
-  //  toast.success('Item removed from wishlist', {
-  //     containerId: 'bottom-right',
-  //   });
-  //     dispatch(deleteItemFromWishlist(data));
-  //   } catch (error) {
-  //  toast.error('Failed to remove item from wishlist', {
-  //     containerId: 'bottom-right',
-  //   });
-  //   }
-  // }
-
   return (
     <div className="mb-7">
       <Breadcrumb

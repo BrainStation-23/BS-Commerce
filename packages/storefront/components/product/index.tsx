@@ -139,7 +139,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         });
       }
     } else {
-      //  toast.error('Please login to your account first.', {  containerId: 'bottom-right', });
       // router.push('/account/sign-in');
       dispatch(setWishlistModalState(!modalOn));
     }

@@ -1,21 +1,18 @@
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { addToCart } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
+
 import {
   CustomerProduct,
   Product,
   WishlistItem,
   WishlistProduct,
 } from 'models';
-import {
-  setCartModalState,
-  setModalState,
-  setWishlistModalState,
-} from 'toolkit/modalSlice';
+import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
@@ -72,7 +69,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    //  toast.success('+1 Item added to cart', { containerId: 'bottom-right', });
     if (!productInCart) {
       toast(<CartToast product={product} />, {
         containerId: 'bottom-left',

@@ -1,19 +1,16 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { toast } from 'react-toastify';
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
-import { useRouter } from 'next/router';
-import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+
 import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
-import React from 'react';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 
 interface FormData {
   cardNumber: string;
@@ -512,7 +509,6 @@ const PaymentDetails: NextComponentType = () => {
                   <button
                     type="submit"
                     className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
-                    // onClick={() => {router.push('/submit')}}
                   >
                     Pay now
                   </button>
