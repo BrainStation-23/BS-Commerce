@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase } from '../../test-utility';
+import { connectTestDatabase, getDemoUserToken, testUserId, testUsername } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { CreateBrandRequestDto } from 'src/modules/brands/rest/dto/createBrandDto';
 import { GetAllBrandsDto } from '../../../src/modules/brands/rest/dto/getAllBrandsDto';
@@ -15,8 +15,9 @@ describe('Initializing Brand controller testing', () => {
     let app: INestApplication;
     let controller: BrandController;
     
-    let brandId: string;
+    let brandId: string = "ed1b4494-875b-40c3-853c-dfc0776ccd62";
     const invalidBrandId: string = '343434sfsdfsd';
+    const token = getDemoUserToken(testUserId, testUsername, 'admin').token;
 
     const brand: BrandDto = {
         id: "37456834756345",
@@ -135,43 +136,50 @@ describe('Initializing Brand controller testing', () => {
         await app.close();
     });
 
-  
     it(`/GET All BRANDS`, async () => {
         return await request(app.getHttpServer())
         .get('/brands')
         .expect(res => {
             expect(res.statusCode).toBe(200);
-            expect(res.body.data).toEqual(
-                expect.arrayContaining([
-                    expect.objectContaining({
-                        id: expect.any(String),
-                        info: {
-                            name: expect.any(String),
-                            description: expect.any(String),
-                            allowToSelectPageSize: expect.any(Boolean),
-                            published: expect.any(Boolean),
-                            displayOrder: expect.any(Number),
-                            pageSizeOptions: expect.any(Array)
-                        },
-                        meta: {
-                            keywords: expect.any(String),
-                            description: expect.any(String),
-                            title: expect.any(String),
-                            SEFN: expect.any(String)
-                        }
-                    })
-                ])
-            );
+            try{
+                expect(res.body.data).toEqual(
+                    expect.arrayContaining([
+                        expect.objectContaining({
+                            id: expect.any(String),
+                            info: {
+                                name: expect.any(String),
+                                description: expect.any(String),
+                                allowToSelectPageSize: expect.any(Boolean),
+                                published: expect.any(Boolean),
+                                displayOrder: expect.any(Number),
+                                pageSizeOptions: expect.any(Array)
+                            },
+                            meta: {
+                                keywords: expect.any(String),
+                                description: expect.any(String),
+                                title: expect.any(String),
+                                SEFN: expect.any(String)
+                            }
+                        })
+                    ])
+                );
+            }catch{
+                expect(res.body.data).toEqual([])
+            }
+           
         })
     });
 
     it('/POST CREATE NEW BRAND [VALID DATA]', async () => {
         const result = await request(app.getHttpServer())
         .post('/brands/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(createBrandRequest)
         .expect((res)=> {
-            expect(res.statusCode).toBe(201)
+            console.log(res.body);
+            expect(res.statusCode).toBe(201);
             expect(res.body.data).toMatchObject({
+                id: expect.any(String),
                 info: {
                     name: expect.any(String),
                     description: expect.any(String),
@@ -195,14 +203,15 @@ describe('Initializing Brand controller testing', () => {
     it('/POST CREATE NEW BRAND [INVALID DATA TYPES INVALID]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(invalidCreateBrandRequestTypes)
-        .expect(400)
+        .expect(500)
     });
 
-    //** */
     it('/POST CREATE NEW BRAND [INVALID DATA INFO OBJ MISSING]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(invalidCreateBrandRequestWithoutInfoObj)
         .expect(500)
     });
@@ -210,6 +219,7 @@ describe('Initializing Brand controller testing', () => {
     it('/POST CREATE NEW BRAND [INVALID DATA, NAME MISSING]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(invalidCreateBrandRequestWithoutName)
         .expect(400)
     });
@@ -217,6 +227,7 @@ describe('Initializing Brand controller testing', () => {
     it('/POST CREATE NEW BRAND [INVALID DATA, NAME ALREADY EXISTS]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
+        .set('Authorization', `Bearer ${token}`)
         .send(createBrandRequestInvalidName)
         .expect(400)
     });
@@ -253,55 +264,60 @@ describe('Initializing Brand controller testing', () => {
     });
     
     it('/PATCH UPDATE BRAND WITH ID [VALID ID]', async () => {
-            return await request(app.getHttpServer())
-            .patch(`/brands/${brandId}`)
-            .send(updateBrandRequest)
-            .expect(res => {
-                expect(res.statusCode).toBe(200)
-                expect(res.body.data).toMatchObject({
-                    id: expect.any(String),
-                    info: {
-                        name: expect.any(String),
-                        description: expect.any(String),
-                        allowToSelectPageSize: expect.any(Boolean),
-                        published: expect.any(Boolean),
-                        displayOrder: expect.any(Number),
-                        pageSizeOptions: expect.any(Array)
-                    },
-                    meta: {
-                            keywords: expect.any(String),
-                            description: expect.any(String),
-                            title: expect.any(String),
-                            SEFN: expect.any(String)
-                    }
-                })
-             })
-    });
-
-    it('/PUT UPDATE BRAND [INVALID ID]', async () => {
-            return await request(app.getHttpServer())
-            .put(`/brands/${invalidBrandId}`)
-            .send(updateBrandRequest)
-            .expect(400)
-    });
-
-     it('/PUT UPDATE BRAND [BAD REQUEST, NAME CANNOT BE UPDATED]', async () => {
-            return await request(app.getHttpServer())
-            .put(`/brands/${brandId}`)
-            .send(invalidUpdateBrandRequestWithName)
-            .expect(400)
-    });
-
-    it('/PUT UPDATE BRAND [INVALID DATA, OBJ MISSING]', async () => {
         return await request(app.getHttpServer())
-        .put(`/brands/${brandId}`)
+        .patch(`/brands/${brandId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(updateBrandRequest)
+        .expect(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body.data).toMatchObject({
+                id: expect.any(String),
+                info: {
+                    name: expect.any(String),
+                    description: expect.any(String),
+                    allowToSelectPageSize: expect.any(Boolean),
+                    published: expect.any(Boolean),
+                    displayOrder: expect.any(Number),
+                    pageSizeOptions: expect.any(Array)
+                },
+                meta: {
+                        keywords: expect.any(String),
+                        description: expect.any(String),
+                        title: expect.any(String),
+                        SEFN: expect.any(String)
+                }
+            })
+            })
+    });
+
+    it('/patch UPDATE BRAND [INVALID ID]', async () => {
+        return await request(app.getHttpServer())
+        .patch(`/brands/${invalidBrandId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(updateBrandRequest)
+        .expect(400)
+    });
+
+     it('/patch UPDATE BRAND [BAD REQUEST, NAME CANNOT BE UPDATED]', async () => {
+        return await request(app.getHttpServer())
+        .patch(`/brands/${brandId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send(invalidUpdateBrandRequestWithName)
+        .expect(400)
+    });
+
+    it('/patch UPDATE BRAND [INVALID DATA, OBJ MISSING]', async () => {
+        return await request(app.getHttpServer())
+        .patch(`/brands/${brandId}`)
+        .set('Authorization', `Bearer ${token}`)
         .send(invalidUpdateBrandRequestWithoutObject)
-        .expect(500)
+        .expect(400)
     });
 
 	it('/DELETE BRAND WITH ID [VALID ID]', async () => {
         return await request(app.getHttpServer())
         .delete(`/brands/${brandId}`)
+        .set('Authorization', `Bearer ${token}`)
         .expect(res => {
             expect(res.statusCode).toBe(200)
             expect(res.body.data).toMatchObject({
@@ -325,9 +341,10 @@ describe('Initializing Brand controller testing', () => {
     });
 
     it('DELETE BRAND [INVALID ID]', async () => {
-            return await request(app.getHttpServer())
-            .delete(`/brands/${invalidBrandId}`)
-            .expect(400)
+        return await request(app.getHttpServer())
+        .delete(`/brands/${invalidBrandId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(400)
     });
 
 });
