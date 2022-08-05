@@ -57,7 +57,7 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.success('Wishlist cleared');
+      toast.error('Wishlist cleared');
     } catch (error) {
       toast.error('Error happened. Please try again.');
     }
@@ -110,7 +110,7 @@ const WishlistComponent: NextComponentType = () => {
             </button>
           )}
         </div>
-        {wishlistData.items?.length! <= 0 && (
+        {wishlistData?.items?.length! <= 0 && (
           <div className="my-10 flex flex-col items-center">
             <div className="my-2">
               <WishlistIcon height="h-16" width="w-16" />

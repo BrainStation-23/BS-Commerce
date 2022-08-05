@@ -53,7 +53,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
     dispatch(storeUserToken(''));
-    toast.success('Logged out successfully!');
+    toast.error('Logged out successfully!');
   };
 
   const getUsername = (name: string): string => {

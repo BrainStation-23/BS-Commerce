@@ -141,7 +141,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.success('Item removed from wishlist');
+        toast.error('Item removed from wishlist');
         dispatch(deleteItemFromWishlist(productId));
       } catch (error) {
         toast.error('Failed to remove item from wishlist');
@@ -180,14 +180,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         info: product.info!,
         photos: product.photos!,
       };
-      const itemAmountInCart = {
+      itemAmountInCart = {
         product: cartProduct!,
         productId: product.id!,
-        quantity: 0,
+        quantity: 1,
       };
     }
-    console.log(itemAmountInCart.quantity);
-    setAmount(itemAmountInCart.quantity);
+    setAmount(itemAmountInCart?.quantity);
   }, []);
 
   return (
