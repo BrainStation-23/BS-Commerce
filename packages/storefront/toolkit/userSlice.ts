@@ -3,14 +3,14 @@ import { Customer } from 'models';
 
 export interface UserState {
   user: string;
-  customerDetails: Customer
+  customerDetails: Customer;
 }
 
 const initialState: UserState = {
   user: '',
   customerDetails: {
-    id: ''
-  }
+    id: '',
+  },
 };
 
 export const userSlice = createSlice({
@@ -20,12 +20,20 @@ export const userSlice = createSlice({
     storeUserDetails: (state: UserState, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
-    storeCustomerDetails: (state: UserState, action: PayloadAction<Customer>) => {
-      state.customerDetails = action.payload
-    }
+    storeCustomerDetails: (
+      state: UserState,
+      action: PayloadAction<Customer>
+    ) => {
+      state.customerDetails = action.payload;
+    },
+    resetUserDetails: (state: UserState) => {
+      state.user = initialState.user;
+      state.customerDetails = initialState.customerDetails;
+    },
   },
 });
 
-export const { storeUserDetails, storeCustomerDetails } = userSlice.actions;
+export const { storeUserDetails, storeCustomerDetails, resetUserDetails } =
+  userSlice.actions;
 
 export default userSlice.reducer;

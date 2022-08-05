@@ -30,8 +30,6 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main>{children}</main>
       <Footer />
-      {/* <ToastContainer position="bottom-right" theme="colored" />{' '} */}
-      {/* <ToastContainer position="bottom-left" theme="colored" /> */}
       <ToastContainer
         enableMultiContainer
         theme="colored"
@@ -44,10 +42,10 @@ const Layout = ({ children }: LayoutProps) => {
         toastClassName="sm:w-max border-2 border-green-500"
         style={
           document.body.clientWidth < 484
-            ? document.body.clientWidth > 422
+            ? document.body.clientWidth > 445
               ? { width: '350px', bottom: '30px', left: '10px' }
-              : document.body.clientWidth > 320
-              ? { width: '300px', bottom: '30px', left: '10px' }
+              : document.body.clientWidth > 400
+              ? { width: '270px', bottom: '30px', left: '10px' }
               : { width: '245px', bottom: '30px', left: '10px' }
             : {}
         }

@@ -8,6 +8,9 @@ import { storeUserToken } from 'toolkit/authSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 import Modal from './modal/modal';
+import { resetAddress } from 'toolkit/customerAddressSlice';
+import { resetUserDetails } from 'toolkit/userSlice';
+import { resetWishilist } from 'toolkit/productsSlice';
 
 interface Properties {}
 
@@ -43,10 +46,25 @@ const HeaderAccount: React.FC<Properties> = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    dispatch(resetAddress());
+    dispatch(resetUserDetails());
+    dispatch(resetWishilist());
     dispatch(storeUserToken(''));
+    router.push('/account/sign-in');
     toast.error('Logged out successfully!', {
       containerId: 'bottom-right',
     });
+  };
+
+  const getUsername = (name: string): string => {
+    let computedName = '';
+    const length = name.length;
+    if (length > 20) {
+      computedName = name.slice(0, 19);
+      computedName += '...';
+    } else computedName = name;
+
+    return computedName;
   };
 
   const handleClickWishlist = () => {
@@ -90,11 +108,11 @@ const HeaderAccount: React.FC<Properties> = () => {
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
               <div className="group relative cursor-pointer normal-case">
-                <p className="w-40 truncate hover:text-green-600">
-                  {links[4].name}
+                <p className=" hover:text-green-600">
+                  {getUsername(links[4].name)}
                 </p>
                 <div
-                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in group-hover:inline-block text-left`}
+                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
                     <Link href="/wishlist" passHref>
@@ -118,7 +136,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                       </li>
                     </Link>
                     <hr className="my-2" />
-                    <Link href={links[3].link} passHref>
+                    <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
                         className="transition-all duration-100 ease-linear hover:text-green-600"

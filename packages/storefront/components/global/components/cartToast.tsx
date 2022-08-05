@@ -10,14 +10,14 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
   return (
     <>
       <div className="flex flex-row">
-        <div className="">
+        <span>
           <Image
             src={product?.photos![0].url!}
             alt={product?.photos![0].alt || 'product image'}
             width={140}
             height={140}
           />
-        </div>
+        </span>
         <div className="flex flex-col px-4">
           <span className="mb-3">{product?.info.name}</span>
           <div className="mb-5 flex flex-row text-green-600">
@@ -34,7 +34,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
                 strokeLinejoin="round"
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
-            </svg>{' '}
+            </svg>
             Added to cart successfully
           </div>
 
