@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Pagination from '../../../global/pagination';
 import Table from '../../../global/table/table';
 import customerByOrderTotalData from '../../../../data/customer-by-order-total-report.json';
@@ -7,6 +7,8 @@ import customerByOrderTotalData from '../../../../data/customer-by-order-total-r
 const CustomerByOrderTotalTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const columns = [
     {
@@ -42,6 +44,19 @@ const CustomerByOrderTotalTable = () => {
     },
   ];
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return customerByOrderTotalData['customerByOrderTotalReport']?.slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [
+    currentPage,
+    PageSize,
+    customerByOrderTotalData['customerByOrderTotalReport'],
+  ]);
+
   const paginateData = (data: any) => {
     const start = (activePage - 1) * pageCount;
     const paginatedData = data.slice(start, start + pageCount);
@@ -71,9 +86,24 @@ const CustomerByOrderTotalTable = () => {
               reports
             </a>
           </p>
-          <Table items={paginatedData} columns={columns} />
+          <Table items={currentTableData} columns={columns} />
 
-          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+          <div className="">
+            {customerByOrderTotalData['customerByOrderTotalReport']?.length >
+            1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={
+                  customerByOrderTotalData['customerByOrderTotalReport'].length
+                }
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
+              />
+            ) : null}
+          </div>
+
+          {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
             <div className="d-flex justify-content-center flex-wrap">
               <span>
                 <span style={{ margin: '10px' }}>Show</span>
@@ -148,7 +178,7 @@ const CustomerByOrderTotalTable = () => {
                 </button>
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

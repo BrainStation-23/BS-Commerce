@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Pagination from '../../../global/pagination';
 import Table from '../../../global/table/table';
 import registeredCustomerReportData from '../../../../data/registered-customer-report.json';
@@ -6,6 +6,8 @@ import registeredCustomerReportData from '../../../../data/registered-customer-r
 const RegisteredCustomer = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const columns = [
     {
@@ -30,6 +32,19 @@ const RegisteredCustomer = () => {
     setActivePage(activePage);
   };
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return registeredCustomerReportData['registeredCustomerReport']?.slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [
+    currentPage,
+    PageSize,
+    registeredCustomerReportData['registeredCustomerReport'],
+  ]);
+
   const paginatedData = paginateData(
     registeredCustomerReportData['registeredCustomerReport']
   );
@@ -51,7 +66,23 @@ const RegisteredCustomer = () => {
           </p>
           <Table items={paginatedData} columns={columns} />
 
-          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+          <div className="">
+            {registeredCustomerReportData['registeredCustomerReport']?.length >
+            1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={
+                  registeredCustomerReportData['registeredCustomerReport']
+                    .length
+                }
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
+              />
+            ) : null}
+          </div>
+
+          {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
             <div className="d-flex justify-content-center flex-wrap">
               <span>
                 <span style={{ margin: '10px' }}>Show</span>
@@ -126,7 +157,7 @@ const RegisteredCustomer = () => {
                 </button>
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

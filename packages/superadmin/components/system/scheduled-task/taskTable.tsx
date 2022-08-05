@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import scheduledTaskData from '../../../data/scheduledTask.json';
 import Pagination from '../../global/pagination';
 import Table from './table';
@@ -6,6 +6,8 @@ import Table from './table';
 const TaskTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const paginateData = (data: any) => {
     const start = (activePage - 1) * pageCount;
@@ -17,6 +19,15 @@ const TaskTable = () => {
     setActivePage(activePage);
   };
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return scheduledTaskData['scheduledTask']?.slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [currentPage, PageSize, scheduledTaskData['scheduledTask']]);
+
   const paginatedData = paginateData(scheduledTaskData['scheduledTask']);
 
   useEffect(() => {
@@ -25,9 +36,20 @@ const TaskTable = () => {
 
   return (
     <>
-      <Table items={paginatedData} />
+      <Table items={currentTableData} />
+      <div className="">
+        {scheduledTaskData['scheduledTask']?.length > 1 ? (
+          <Pagination
+            currentPage={currentPage}
+            totalCount={scheduledTaskData['scheduledTask'].length}
+            pageSize={PageSize}
+            setCurrentPage={setCurrentPage}
+            setPageSize={setPageSize}
+          />
+        ) : null}
+      </div>
 
-      <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+      {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
         <div className="d-flex justify-content-center flex-wrap">
           <span>
             <span style={{ margin: '10px' }}>Show</span>
@@ -102,7 +124,7 @@ const TaskTable = () => {
             </button>
           </span>
         </p>
-      </div>
+      </div> */}
     </>
   );
 };

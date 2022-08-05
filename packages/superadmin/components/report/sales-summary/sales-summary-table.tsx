@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Table from '../../global/table/table';
 import salesSummaryData from '../../../data/sales-summary.json';
@@ -7,6 +7,8 @@ import Pagination from '../../global/pagination';
 const SalesTable = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const columns = [
     {
@@ -47,6 +49,15 @@ const SalesTable = () => {
     return paginatedData;
   };
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return salesSummaryData['salesSummary']?.slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [currentPage, PageSize, salesSummaryData['salesSummary']]);
+
   const handleClickPage = (activePage: any) => {
     setActivePage(activePage);
   };
@@ -68,9 +79,21 @@ const SalesTable = () => {
               reports
             </a>
           </p>
-          <Table items={paginatedData} columns={columns} />
+          <Table items={currentTableData} columns={columns} />
 
-          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+          <div className="">
+            {salesSummaryData['salesSummary']?.length > 1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={salesSummaryData['salesSummary'].length}
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
+              />
+            ) : null}
+          </div>
+
+          {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
             <div className="d-flex justify-content-center flex-wrap">
               <span>
                 <span style={{ margin: '10px' }}>Show</span>
@@ -145,7 +168,7 @@ const SalesTable = () => {
                 </button>
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

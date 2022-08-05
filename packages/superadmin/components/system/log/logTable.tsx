@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import Table from '../../global/table/table';
@@ -10,6 +10,8 @@ const LogIndex = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
   const [checkAll, setCheckAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const columns = [
     {
@@ -68,6 +70,12 @@ const LogIndex = () => {
     return paginatedData;
   };
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return logData['logData']?.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, PageSize, logData['logData']]);
+
   const handleClickPage = (activePage: any) => {
     setActivePage(activePage);
   };
@@ -89,9 +97,20 @@ const LogIndex = () => {
               log
             </a>
           </p>
-          <Table items={paginatedData} columns={columns} />
+          <Table items={currentTableData} columns={columns} />
+          <div className="">
+            {logData['logData']?.length > 1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={logData['logData'].length}
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
+              />
+            ) : null}
+          </div>
 
-          <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+          {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
             <div className="d-flex justify-content-center flex-wrap">
               <span>
                 <span style={{ margin: '10px' }}>Show</span>
@@ -166,7 +185,7 @@ const LogIndex = () => {
                 </button>
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
