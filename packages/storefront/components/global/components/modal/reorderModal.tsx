@@ -9,6 +9,8 @@ interface Props {
   open: boolean;
   onClose: () => void;
   onCheckOutReorder: () => void;
+  message: String;
+  unavailableProd: any;
   //   product?: Product | CustomerProduct | WishlistProduct;
 }
 
@@ -16,6 +18,8 @@ const ReorderModal: React.FC<Props> = ({
   open,
   onClose,
   onCheckOutReorder,
+  message,
+  unavailableProd,
 }: Props) => {
   const dispatch = useAppDispatch();
   if (!open) return null;
@@ -72,7 +76,7 @@ const ReorderModal: React.FC<Props> = ({
                 {/* {product?.info.name} */}
               </span>
               <div className="mb-3 flex justify-center text-sm text-green-600 sm:mb-6 sm:text-base">
-                Are You Sure to Re-Order?
+                {message}
               </div>
 
               <div className="flex justify-center">

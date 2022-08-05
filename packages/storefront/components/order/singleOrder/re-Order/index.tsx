@@ -13,6 +13,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
   const [unavailableProd, setUnavailableProd] = useState([]);
   const [newProduct, setNewProduct] = useState([]);
+  const [message, setMessage] = useState('');
   let { products } = singleOrder;
   const allProducts = useAppSelector(
     (state) => state.persistedReducer.product.featuredProducts
@@ -63,49 +64,83 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
 
     if (unavailableProd.length > 0) {
       //modal should open
-      // setShowCartModal(true);
-      alert('hi');
+      setMessage(
+        'Some of the Products are Not Available Now, Do You Still Want to Proceed?'
+      );
       setShowCartModal(true);
     } else {
       //products should be added directly to the cart
+      setMessage('Do You Want all of the Products to Re-Order?');
       setShowCartModal(true);
     }
   };
   const toCart = async () => {
-    products.forEach((product) => {
-      const cartProductInfo = {
-        name: product.name,
-        shortDescription: 'short des',
-        fullDescription: 'full des',
-        sku: 'sku',
-        price: 50,
-        oldPrice: 40,
-        cost: 50,
-        showOnHomePage: true,
-        includeInTopMenu: true,
-        allowToSelectPageSize: true,
-        published: true,
-        displayOrder: 5,
-        isFeatured: true,
-        publishDat: '2020-07-10 15:00:00.000',
-      };
-      const cartProduct = {
-        id: product.productId!,
-        info: cartProductInfo!,
-        photos: product.photos!,
-      };
-      const cartItem = {
-        product: cartProduct!,
-        productId: product.productId!,
-        quantity: product.quantity,
-      };
-      dispatch(addToCart(cartItem));
-    });
+    if (newProduct.length > 0) {
+      console.log(newProduct);
+
+      newProduct.forEach((product) => {
+        const cartProductInfo = {
+          name: product.name,
+          shortDescription: 'short des',
+          fullDescription: 'full des',
+          sku: 'sku',
+          price: 50,
+          oldPrice: 40,
+          cost: 50,
+          showOnHomePage: true,
+          includeInTopMenu: true,
+          allowToSelectPageSize: true,
+          published: true,
+          displayOrder: 5,
+          isFeatured: true,
+          publishDat: '2020-07-10 15:00:00.000',
+        };
+        const cartProduct = {
+          id: product.productId!,
+          info: cartProductInfo!,
+          photos: product.photos!,
+        };
+        const cartItem = {
+          product: cartProduct!,
+          productId: product.productId!,
+          quantity: product.quantity,
+        };
+        dispatch(addToCart(cartItem));
+      });
+    } else {
+      products.forEach((product) => {
+        const cartProductInfo = {
+          name: product.name,
+          shortDescription: 'short des',
+          fullDescription: 'full des',
+          sku: 'sku',
+          price: 50,
+          oldPrice: 40,
+          cost: 50,
+          showOnHomePage: true,
+          includeInTopMenu: true,
+          allowToSelectPageSize: true,
+          published: true,
+          displayOrder: 5,
+          isFeatured: true,
+          publishDat: '2020-07-10 15:00:00.000',
+        };
+        const cartProduct = {
+          id: product.productId!,
+          info: cartProductInfo!,
+          photos: product.photos!,
+        };
+        const cartItem = {
+          product: cartProduct!,
+          productId: product.productId!,
+          quantity: product.quantity,
+        };
+        dispatch(addToCart(cartItem));
+      });
+    }
   };
   const handleReorderCheckout = () => {
-    if (unavailableProd.length == 0) {
-      toCart();
-    }
+    toCart();
   };
   return (
     <>
@@ -120,6 +155,8 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       <ReorderModal
         open={showCartModal}
         onClose={closeCartModal}
+        message={message}
+        unavailableProd={unavailableProd}
         onCheckOutReorder={handleReorderCheckout}
       />
     </>
