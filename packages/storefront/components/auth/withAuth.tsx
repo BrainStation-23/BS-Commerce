@@ -12,21 +12,21 @@ const WithAuth = (Component: React.FC) => {
     );
 
     // If user is not logged in, return login component
-    if (!isLoggedIn) {
-      // return (
-      //   <SignIn />
-      // );
-      window.location.href = '/account/sign-in';
-    }
-    const pushRouter = () => {
-      router.push('/account/sign-in');
-    };
+    // if (!isLoggedIn) {
+    //   // return (
+    //   //   <SignIn />
+    //   // );
+    //   window.location.href = '/account/sign-in';
+    // }
+    // const pushRouter = () => {
+    //   router.push('/account/sign-in');
+    // };
     useEffect(() => {
       if (!isLoggedIn) {
         // return (
         //   <SignIn />
         // );
-        window.location.href = '/account/sign-in';
+        // window.location.href = '/account/sign-in';
         router.push('/account/sign-in');
       }
     }, []);
