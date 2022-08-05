@@ -21,7 +21,7 @@ describe('Initializing Brand controller testing', () => {
     const brand: BrandDto = {
         id: "37456834756345",
         info:{
-            name: "Harley Davidson 879dvdvdvgdfvgdffgfdv87",
+            name: "Harley Davidson",
             description: "This is a motorBike and it belongs to USA based Harley Company",
             allowToSelectPageSize: true,
             published: true,
@@ -31,48 +31,41 @@ describe('Initializing Brand controller testing', () => {
         meta: {
             keywords: "Davidson",
             description: "motorbike brand",
-             title: "MotorBike 500cc",
-             SEFN: "500cc"
+            title: "MotorBike 500cc",
+            SEFN: "500cc"
         }
     }
 
     const createBrandRequest: CreateBrandRequestDto = {
-        id: '34343432sdfsdf3sf',
         info: {
-            name: "tujhe becheeeeaini",
-            description: "This is a motorBike and it belongs to USA based Harley Company",
+            name: "Suzuki Gixer Fi Abs",
+            description: "This is a motorBike and it belongs to Suzuki Company",
             allowToSelectPageSize: true,
             published: true,
             displayOrder: 101,
             pageSizeOptions: [1, 2]
         },
         meta: {
-            keywords: "Davidson",
+            keywords: "Gixer",
             description: "motorbike brand",
-            title: "MotorBike 500cc",
-            SEFN: "500cc"
+            title: "MotorBike 165cc",
+            SEFN: "165cc"
         },
     };
 
     const updateBrandRequest: UpdateBrandRequestdto = {
-        info: {
-            name: "matroi update korlam",
-            description: "This is a motorBike and it belongs to USA based Harley Company",
-            allowToSelectPageSize: true,
-            published: true,
-            displayOrder: 101,
-            pageSizeOptions: [1, 2]
-        },
-        meta: {
-            keywords: "Davidson",
-            description: "motorbike brand",
-            title: "MotorBike 500cc",
-            SEFN: "500cc"
-        }
+        meta: { keywords: "Gixer" }
     }
 
-    const invalidBrandRequestWithoutName = {
-        id: '34343432sdfsdf3sf',
+    const invalidUpdateBrandRequestWithName = {
+        info: { name: "Nokia" }
+    }
+
+    const invalidUpdateBrandRequestWithoutObject = {
+       keywords: "keywords"   
+    }
+
+    const invalidCreateBrandRequestWithoutName = {
         info: {
             description: "This is a motorBike and it belongs to USA based Harley Company",
             allowToSelectPageSize: true,
@@ -88,13 +81,12 @@ describe('Initializing Brand controller testing', () => {
         },
     }
 
-    const invalidBrandRequestTypes = {
-        id: '34343432sdfsdf3sf',
+    const invalidCreateBrandRequestTypes = {
         info: {
-            name: "tujhe becheeeeaini",
+            name: "Harley Davidson",
             description: "This is a motorBike and it belongs to USA based Harley Company",
-            allowToSelectPageSize: 343434,
-            published: 3434,
+            allowToSelectPageSize: 343434,//should be boolean
+            published: 3434,//should be boolean
             displayOrder: true,
             pageSizeOptions: [1, 2]
         },
@@ -106,8 +98,8 @@ describe('Initializing Brand controller testing', () => {
         },
     }
 
-    const invalidBrandRequestWithoutInfoObj = {
-        id: '34343432sdfsdf3sf',
+    const invalidCreateBrandRequestWithoutInfoObj = {
+        name: "Harley Davidson",
         meta: {
             keywords: "Davidson",
             description: "motorbike brand",
@@ -116,32 +108,19 @@ describe('Initializing Brand controller testing', () => {
         },
     }
 
-    const brandRequestInvalidName = {
+    const createBrandRequestInvalidName = {
         info: {
-            name: "ut",
-            description: "This is a motorBike and it belongs to USA based Harley Company",
-            allowToSelectPageSize: true,
-            published: true,
-            displayOrder: 101,
-            pageSizeOptions: [1, 2]
+            name: "Suzuki Gixer Fi Abs"
         },
         meta: {
-            keywords: "Davidson",
-            description: "motorbike brand",
-            title: "MotorBike 500cc",
-            SEFN: "500cc"
+            keywords: "Davidson"
         }
     };
 
     beforeAll(async () => {
         await connectTestDatabase();
         const module: TestingModule = await Test.createTestingModule({
-            imports: [AppModule],
-            
-            // providers: [{ 
-            //     provide: BrandController, 
-            //     useValue: createMock<BrandController>()
-            // }],
+            imports: [AppModule]
         })
         .compile();
 
@@ -152,7 +131,7 @@ describe('Initializing Brand controller testing', () => {
 
     afterAll(async () => {
         // remove test databse collection if required
-        // await removeTestCollection('compares');
+        // await removeTestCollection('brands');
         await app.close();
     });
 
@@ -193,7 +172,6 @@ describe('Initializing Brand controller testing', () => {
         .expect((res)=> {
             expect(res.statusCode).toBe(201)
             expect(res.body.data).toMatchObject({
-                id: expect.any(String),
                 info: {
                     name: expect.any(String),
                     description: expect.any(String),
@@ -217,28 +195,29 @@ describe('Initializing Brand controller testing', () => {
     it('/POST CREATE NEW BRAND [INVALID DATA TYPES INVALID]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
-        .send(invalidBrandRequestTypes)
+        .send(invalidCreateBrandRequestTypes)
         .expect(400)
     });
-    
+
+    //** */
     it('/POST CREATE NEW BRAND [INVALID DATA INFO OBJ MISSING]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
-        .send(invalidBrandRequestWithoutInfoObj)
+        .send(invalidCreateBrandRequestWithoutInfoObj)
         .expect(500)
     });
 
     it('/POST CREATE NEW BRAND [INVALID DATA, NAME MISSING]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
-        .send(invalidBrandRequestWithoutName)
+        .send(invalidCreateBrandRequestWithoutName)
         .expect(400)
     });
 
     it('/POST CREATE NEW BRAND [INVALID DATA, NAME ALREADY EXISTS]',async () => {
         return await request(app.getHttpServer())
         .post('/brands/create')
-        .send(brandRequestInvalidName)
+        .send(createBrandRequestInvalidName)
         .expect(400)
     });
 
@@ -259,9 +238,9 @@ describe('Initializing Brand controller testing', () => {
                 },
                 meta: {
                         keywords: expect.any(String),
-                    description: expect.any(String),
-                    title: expect.any(String),
-                    SEFN: expect.any(String)
+                        description: expect.any(String),
+                        title: expect.any(String),
+                        SEFN: expect.any(String)
                 }
             })
         })
@@ -273,9 +252,9 @@ describe('Initializing Brand controller testing', () => {
         .expect(400)
     });
     
-    it('/PUT UPDATE BRAND WITH ID [VALID ID]', async () => {
+    it('/PATCH UPDATE BRAND WITH ID [VALID ID]', async () => {
             return await request(app.getHttpServer())
-            .put(`/brands/${brandId}`)
+            .patch(`/brands/${brandId}`)
             .send(updateBrandRequest)
             .expect(res => {
                 expect(res.statusCode).toBe(200)
@@ -306,27 +285,19 @@ describe('Initializing Brand controller testing', () => {
             .expect(400)
     });
 
-     it('/PUT UPDATE BRAND [INVALID NAME, BRAND NAME ALREADY EXISTS]', async () => {
+     it('/PUT UPDATE BRAND [BAD REQUEST, NAME CANNOT BE UPDATED]', async () => {
             return await request(app.getHttpServer())
             .put(`/brands/${brandId}`)
-            .send(brandRequestInvalidName)
+            .send(invalidUpdateBrandRequestWithName)
             .expect(400)
     });
 
-    it('/PUT UPDATE BRAND [INVALID DATA, INFO OBJ MISSING]', async () => {
+    it('/PUT UPDATE BRAND [INVALID DATA, OBJ MISSING]', async () => {
         return await request(app.getHttpServer())
         .put(`/brands/${brandId}`)
-        .send(invalidBrandRequestWithoutInfoObj)
+        .send(invalidUpdateBrandRequestWithoutObject)
         .expect(500)
     });
-
-    it('/PUT UPDATE BRAND [INVALID DATA, NAME MISSING OR EMPTY]', async () => {
-        return await request(app.getHttpServer())
-        .put(`/brands/${brandId}`)
-        .send(invalidBrandRequestWithoutName)
-        .expect(400)
-    });
-
 
 	it('/DELETE BRAND WITH ID [VALID ID]', async () => {
         return await request(app.getHttpServer())
