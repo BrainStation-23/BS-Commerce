@@ -437,14 +437,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     >
                       {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
                     </button>
-                    <button
+                    <div
                       className="mt-10 underline hover:text-green-600"
                       hidden={!clicked}
                     >
                       <button onClick={handleClickToWishlist}>
                         Go to wishlist
                       </button>
-                    </button>
+                    </div>
                   </div>
                   <div>
                     <button

@@ -78,13 +78,13 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         <div className="absolute top-0 left-56 z-50 hidden h-auto w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 lg:group-hover:block">
           <ul className="pl-2">
             {category.subCategories?.map((subCategory: any) => (
-              <>
+              <li key={subCategory.name}>
                 <HeaderSubCategory
                   category={subCategory}
                   subOff={subOff}
                   level={1}
                 />
-              </>
+              </li>
             ))}
           </ul>
         </div>

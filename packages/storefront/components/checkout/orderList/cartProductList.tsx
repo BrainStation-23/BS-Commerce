@@ -2,6 +2,7 @@ import React from 'react';
 
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
+import Image from 'next/image';
 
 const CartProductList: NextComponentType = () => {
   const cartData = useAppSelector(
@@ -17,8 +18,9 @@ const CartProductList: NextComponentType = () => {
               <div className="flex flex-wrap items-center justify-between">
                 <div className="flex flex-wrap items-center">
                   <div className="relative">
-                    <img
-                      src={data?.product?.photos![0]?.url}
+                    <Image
+                      src={data?.product?.photos![0]?.url!}
+                      alt={data?.product?.photos![0]?.alt!}
                       className="w-20 rounded-lg border"
                     />
                     <span
