@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
