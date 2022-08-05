@@ -19,9 +19,7 @@
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
     "dev": "run-p --print-label package:*",
     "build": "lerna run --parallel build",
-    "check-types": "lerna run --parallel check-types"
-  },
-  "dependencies": {
-    "cookie": "^0.5.0"
+    "seeder:build": "lerna run --scope seeder --stream build --include-dependencies",
+    "seeder:run": "lerna run --scope seeder --stream seed"
   }
 }

@@ -59,14 +59,15 @@ export class OrderData implements IOrderResponseData {
   orderId: string;
 
   @ApiProperty()
-  userId: string;
+  @IsOptional()
+  userId?: string;
 
   @ApiProperty()
   orderedDate: Date;
 }
 export class OrderResponseDto {
   @ApiProperty()
-  userId: string;
+  userId?: string;
 
   @ApiProperty({ type: OrderData })
   @Type(() => OrderData)
