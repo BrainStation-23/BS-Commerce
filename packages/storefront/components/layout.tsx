@@ -8,6 +8,7 @@ import { useAppSelector } from 'customHooks/hooks';
 import Footer from '@/components/global/components/footer';
 import Header from '@/components/global/components/header';
 import Viewport from '@/components/viewport';
+import { XCircleIcon } from './global/components/headerIcons';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -39,14 +40,11 @@ const Layout = ({ children }: LayoutProps) => {
       <ToastContainer
         enableMultiContainer
         theme="colored"
-        toastClassName="sm:w-max border-2 border-green-500"
+        closeButton={<XCircleIcon size={10} extraClass="hover:fill-red-500" />}
+        toastClassName="w-9/12 sm:w-max border-2 border-green-500"
         style={
           document.body.clientWidth < 484
-            ? document.body.clientWidth > 445
-              ? { width: '350px', bottom: '30px', left: '10px' }
-              : document.body.clientWidth > 400
-              ? { width: '270px', bottom: '30px', left: '10px' }
-              : { width: '245px', bottom: '30px', left: '10px' }
+            ? { marginRight: '60px', left: '10px', bottom: '10px' }
             : {}
         }
         containerId={'bottom-left'}
