@@ -14,6 +14,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const [unavailableProd, setUnavailableProd] = useState([]);
   const [newProduct, setNewProduct] = useState([]);
   const [message, setMessage] = useState('');
+  const [cartToken, setCartToken] = useState(false);
   let { products } = singleOrder;
   const allProducts = useAppSelector(
     (state) => state.persistedReducer.product.featuredProducts
@@ -34,41 +35,33 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     const allProductsId = allProducts.map((prod) => {
       return prod.id;
     });
+    let matched = orderedProductId.filter((id) => allProductsId.includes(id));
     let unmatched = orderedProductId.filter(
       (id) => !allProductsId.includes(id)
     );
-    console.log(unmatched);
 
-    const matcheId = '';
     if (unmatched.length > 0) {
       products.forEach((product) => {
         unmatched.forEach((id) => {
           if (product.productId == id) {
             unavailableProd.push(product);
-
-            // const newProducts = products.filter(
-            //   (item) => item.productId !== id
-            // );
           }
         });
       });
-      products.forEach((product) => {
-        unmatched.forEach((id) => {
-          if (product.productId != id) {
-            newProduct.push(product);
-          }
-        });
-      });
-      console.log(newProduct);
-    }
+      let newProdData = [];
 
-    if (unavailableProd.length > 0) {
-      //modal should open
+      matched.forEach((id) => {
+        const np = products.find((product) => product.productId === id);
+        newProdData.push(np);
+      });
+      setNewProduct(newProdData);
+
       setMessage(
         'Some of the Products are Not Available Now, Do You Still Want to Proceed?'
       );
       setShowCartModal(true);
     } else {
+      setCartToken(true);
       //products should be added directly to the cart
       setMessage('Do You Want all of the Products to Re-Order?');
       setShowCartModal(true);
@@ -76,8 +69,6 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   };
   const toCart = async () => {
     if (newProduct.length > 0) {
-      console.log(newProduct);
-
       newProduct.forEach((product) => {
         const cartProductInfo = {
           name: product.name,
@@ -107,7 +98,8 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
         };
         dispatch(addToCart(cartItem));
       });
-    } else {
+    }
+    if (cartToken) {
       products.forEach((product) => {
         const cartProductInfo = {
           name: product.name,
