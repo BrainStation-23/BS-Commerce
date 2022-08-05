@@ -1,21 +1,23 @@
-import { useState } from "react";
-import Pagination from "../../../global/pagination";
-import Table from "../../../global/table/table";
-import registeredCustomerReportData from "../../../../data/registered-customer-report.json"
+import { useEffect, useMemo, useState } from 'react';
+import Pagination from '../../../global/pagination';
+import Table from '../../../global/table/table';
+import registeredCustomerReportData from '../../../../data/registered-customer-report.json';
 
 const RegisteredCustomer = () => {
   const [activePage, setActivePage] = useState(1);
   const [pageCount, setPageCount] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [PageSize, setPageSize] = useState(7);
 
   const columns = [
     {
-      label: "Period",
-      path: "period",
+      label: 'Period',
+      path: 'period',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
     {
-      label: "Count",
-      path: "data",
+      label: 'Count',
+      path: 'data',
       content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
     },
   ];
@@ -30,37 +32,65 @@ const RegisteredCustomer = () => {
     setActivePage(activePage);
   };
 
-  const paginatedData = paginateData(registeredCustomerReportData["registeredCustomerReport"]);
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return registeredCustomerReportData['registeredCustomerReport']?.slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [
+    currentPage,
+    PageSize,
+    registeredCustomerReportData['registeredCustomerReport'],
+  ]);
+
+  const paginatedData = paginateData(
+    registeredCustomerReportData['registeredCustomerReport']
+  );
+
+  useEffect(() => {
+    paginateData(registeredCustomerReportData['registeredCustomerReport']);
+  }, [pageCount]);
 
   return (
     <>
-      <div className="card rounded border-1 px-2 mt-3">
+      <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
           <p>
-            Learn more about{" "}
-            <a href="#" style={{ textDecoration: "none" }}>
-              {" "}
+            Learn more about{' '}
+            <a href="#" style={{ textDecoration: 'none' }}>
+              {' '}
               reports
             </a>
           </p>
           <Table items={paginatedData} columns={columns} />
 
-          <div className="d-flex flex-column flex-wrap align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between">
-            <Pagination
-              totalItems={paginateData.length}
-              pageCount={pageCount}
-              activePage={activePage}
-              onClickPage={handleClickPage}
-            />
+          <div className="">
+            {registeredCustomerReportData['registeredCustomerReport']?.length >
+            1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={
+                  registeredCustomerReportData['registeredCustomerReport']
+                    .length
+                }
+                pageSize={PageSize}
+                setCurrentPage={setCurrentPage}
+                setPageSize={setPageSize}
+              />
+            ) : null}
+          </div>
 
-            <div className="d-flex flex-wrap justify-content-center">
+          {/* <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
+            <div className="d-flex justify-content-center flex-wrap">
               <span>
-                <span style={{ margin: "10px" }}>Show</span>
+                <span style={{ margin: '10px' }}>Show</span>
                 <button
                   className="dropdown"
                   style={{
-                    padding: "10px",
-                    border: "1px solid gray",
+                    padding: '10px',
+                    border: '1px solid gray',
                   }}
                 >
                   <a
@@ -68,9 +98,9 @@ const RegisteredCustomer = () => {
                     className="dropdown-toggle"
                     data-bs-toggle="dropdown"
                     style={{
-                      textDecoration: "none",
-                      color: "black",
-                      padding: "10px",
+                      textDecoration: 'none',
+                      color: 'black',
+                      padding: '10px',
                     }}
                   >
                     {pageCount}
@@ -113,7 +143,7 @@ const RegisteredCustomer = () => {
                     </a>
                   </div>
                 </button>
-                <span style={{ margin: "10px" }}>items</span>
+                <span style={{ margin: '10px' }}>items</span>
               </span>
             </div>
 
@@ -122,12 +152,12 @@ const RegisteredCustomer = () => {
                 (activePage - 1) * pageCount + pageCount
               } of ${paginateData.length} items`}
               <span className="ms-2">
-                <button style={{ border: "none" }}>
+                <button style={{ border: 'none' }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
                 </button>
               </span>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

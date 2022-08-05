@@ -15,7 +15,7 @@ import { CustomerSchema } from './schema/customer.schema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
-
+import withAuth from '@/components/auth/withAuth';
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -36,7 +36,9 @@ const AccountDetails: React.FC = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.success('Logged out successfully!');
+    toast.error('Logged out successfully!', {
+      containerId: 'bottom-right',
+    });
   };
 
   const handleSubmit = async (values: UpdateCustomerRequestBody) => {
@@ -92,7 +94,7 @@ const AccountDetails: React.FC = () => {
                   <div className="mx-auto mt-3 flex flex-wrap">
                     <div className="w-full md:w-1/2">
                       <div className="mt-2 flex items-center">
-                        <div className="w-1/3 my-auto">
+                        <div className="my-auto w-1/3">
                           <span className="text-2xl font-semibold">
                             Account Details
                           </span>
@@ -161,4 +163,4 @@ const AccountDetails: React.FC = () => {
   );
 };
 
-export default AccountDetails;
+export default withAuth(AccountDetails);

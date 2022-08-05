@@ -36,7 +36,9 @@ const Information = (props: any) => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.success('Logged out successfully!');
+    toast.error('Logged out successfully!', {
+      containerId: 'bottom-right',
+    });
   };
 
   const shippingInfo = useAppSelector(
@@ -93,7 +95,7 @@ const Information = (props: any) => {
       : addresses?.length > 0
       ? addresses[0]?.tag
       : '',
-    tag2: '' 
+    tag2: '',
   };
 
   const [update, setUpdate] = useState(initialValues);
@@ -194,7 +196,8 @@ const Information = (props: any) => {
             addressLine2: values.addressLine2 ? values.addressLine2 : '',
             city: values.city ? values.city : '',
             postCode: values.postCode!,
-            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
+            tag:
+              dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
           const addressData = {
             phone: values.contact,
@@ -204,7 +207,8 @@ const Information = (props: any) => {
             addressLine2: values.addressLine2,
             state: values.city,
             postCode: values.postCode,
-            tag: dropdownText === 'Use a new address' ? values.tag2 : values.tag,
+            tag:
+              dropdownText === 'Use a new address' ? values.tag2 : values.tag,
           };
           if (values?.tag2) {
             setAddCustomerNewAddress(addressData);
@@ -227,7 +231,7 @@ const Information = (props: any) => {
                         as="select"
                         id="tag"
                         name="tag"
-                        className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
+                        className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
                         onClick={(event: any) => {
                           setDropdownText(event.target.value);
                           handlePreviousAddress(

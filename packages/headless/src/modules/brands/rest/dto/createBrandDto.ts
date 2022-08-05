@@ -3,6 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
 import { CreateBrandRequest, BrandInfo, BrandMeta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
+import { Brand } from 'src/entity/brand';
+import { BrandDto } from './brandDto';
 
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
@@ -27,7 +29,7 @@ export class CreateBrandSuccessResponseDto implements CreateBrandSuccessResponse
     code: number;
 
     @ApiProperty()
-    data: CreateBrandRequestDto;
+    data: BrandDto;
 }
 
 export class CreateBrandErrorResponseDto implements CreateBrandErrorResponse{

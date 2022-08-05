@@ -1,19 +1,16 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { toast } from 'react-toastify';
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
-import { useRouter } from 'next/router';
-import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+
 import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
-import React from 'react';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 
 interface FormData {
   cardNumber: string;
@@ -28,11 +25,13 @@ interface FormData {
   addressLine2: string;
   city: string;
   postCode: string;
+  paymentMethod: string;
 }
 
 const PaymentDetails: NextComponentType = () => {
   const [showLabel, setShowLabel] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
+  const [showCreditCardForm, setShowCreditCardForm] = useState(false);
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [tags, setTags] = useState<string[]>([]);
 
@@ -69,6 +68,7 @@ const PaymentDetails: NextComponentType = () => {
   const router = useRouter();
 
   const initialValues = {
+    paymentMethod: 'Cash on Delivery',
     cardNumber: '',
     nameOnCard: '',
     expirationDate: '',
@@ -143,18 +143,18 @@ const PaymentDetails: NextComponentType = () => {
         phoneNumber: shippingInfo?.phoneNumber,
       },
       shippingMethod: 'test',
-      paymentMethod: 'card',
+      paymentMethod: data.paymentMethod,
       productCost: totalCartPrice,
       products: usableCart,
       totalCost: totalCartPrice,
       stripeToken: '',
       stripeCustomerId: '',
       stripeChargeId: '',
-      paypalPaymentId: data.cardNumber || '',
+      paypalPaymentId:
+        data.paymentMethod === 'Credit card' ? data.cardNumber : '',
       paypalRedirectUrl: '',
     };
     const res = userAPI.checkout(obj, router).then((response: any) => {
-      console.log(response?.data?.orderId);
       if (response?.data?.orderId) {
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());
@@ -204,6 +204,7 @@ const PaymentDetails: NextComponentType = () => {
         initialValues={initialValues}
         onSubmit={(values, actions) => {
           const data = {
+            paymentMethod: values.paymentMethod,
             cardNumber: values.cardNumber,
             nameOnCard: values.nameOnCard,
             expirationDate: values.expirationDate,
@@ -246,59 +247,90 @@ const PaymentDetails: NextComponentType = () => {
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 {/* credit card info div */}
-                <div className="mt-5 rounded border border-gray-300">
-                  <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
-                    <p className="text-sm font-semibold">Credit card</p>
-                    <CreditCard />
-                  </div>
-                  <div className="bg-gray-100">
-                    <div className="p-4">
-                      <FieldTemplate
-                        label="Card Number"
-                        fieldID="cardNumber"
-                        fieldType="text"
-                        placeholder=" "
-                        extraClass="mb-3"
+                <div className="input-group pt-3">
+                  <div
+                    role="group"
+                    aria-labelledby="my-radio-group"
+                    className="rounded border border-gray-300 "
+                  >
+                    <div className="m-3">
+                      <Field
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethodCash"
+                        value="Cash on Delivery"
                       />
-                      <FieldTemplate
-                        label="Name on card"
-                        fieldID="nameOnCard"
-                        fieldType="text"
-                        placeholder=" "
-                        extraClass="mb-3"
+                      <label htmlFor="paymentMethodCash" className="pl-2">
+                        Cash on Delivery
+                      </label>
+                    </div>
+                    <hr />
+                    <div className="m-3">
+                      <Field
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethodCard"
+                        value="Credit card"
                       />
-
-                      <div className="row">
-                        <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
-                          <div className="relative">
-                            <Field
-                              type="month"
-                              id="expirationDate"
-                              name="expirationDate"
-                              className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                      <label htmlFor="paymentMethodCard" className="pl-2">
+                        Credit card
+                      </label>
+                    </div>
+                    {formikprops.values.paymentMethod === 'Credit card' ? (
+                      <div className="mt-5 rounded border border-gray-300">
+                        <div className="bg-gray-100">
+                          <div className="p-4">
+                            <FieldTemplate
+                              label="Card Number"
+                              fieldID="cardNumber"
+                              fieldType="text"
                               placeholder=" "
+                              extraClass="mb-3"
+                              isRequired={true}
                             />
-                            <label
-                              htmlFor={`expirationDate`}
-                              className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                            >
-                              Expiration Date (MM / YY)
-                            </label>
-                            <div className="errMsg text-red-600">
-                              <ErrorMessage name="expirationDate" />
+                            <FieldTemplate
+                              label="Name on card"
+                              fieldID="nameOnCard"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                            />
+                            <div className="row">
+                              <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
+                                <div className="relative">
+                                  <Field
+                                    type="month"
+                                    id="expirationDate"
+                                    name="expirationDate"
+                                    className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                    placeholder=" "
+                                  />
+                                  <label
+                                    htmlFor={`expirationDate`}
+                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                                  >
+                                    Expiration Date (MM / YY)
+                                  </label>
+                                  <div className="errMsg text-red-600">
+                                    <ErrorMessage name="expirationDate" />
+                                  </div>
+                                </div>
+
+                                <FieldTemplate
+                                  label="Security Code"
+                                  fieldID="securityCode"
+                                  fieldType="text"
+                                  placeholder=" "
+                                  extraClass="mb-3"
+                                />
+                              </div>
                             </div>
                           </div>
-
-                          <FieldTemplate
-                            label="Security Code"
-                            fieldID="securityCode"
-                            fieldType="text"
-                            placeholder=" "
-                            extraClass="mb-3"
-                          />
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
 
@@ -315,16 +347,7 @@ const PaymentDetails: NextComponentType = () => {
                       className="items-center text-sm font-semibold"
                     >
                       <label>
-                        <Field
-                          type="radio"
-                          name="shippingAddressPicked"
-                          value="sameShippingAddress"
-                          className="mx-4 mb-4 checked:accent-black"
-                          onClick={() => {
-                            handleSameAddress();
-                          }}
-                          required
-                        />
+                       w
                         Same as shipping address
                       </label>
                       <hr />
@@ -482,7 +505,6 @@ const PaymentDetails: NextComponentType = () => {
                   <button
                     type="submit"
                     className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
-                    // onClick={() => {router.push('/submit')}}
                   >
                     Pay now
                   </button>

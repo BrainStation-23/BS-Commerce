@@ -1,23 +1,21 @@
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { addToCart } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
+
 import {
   CustomerProduct,
   Product,
   WishlistItem,
   WishlistProduct,
 } from 'models';
-import {
-  setCartModalState,
-  setModalState,
-  setWishlistModalState,
-} from 'toolkit/modalSlice';
+import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
+import CartToast from '@/components/global/components/cartToast';
 
 interface SingleProduct {
   product: Product | WishlistProduct | CustomerProduct;
@@ -71,8 +69,13 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    dispatch(addToCart(cartItem));
-    dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+    if (!productInCart) {
+      toast(<CartToast product={product} />, {
+        containerId: 'bottom-left',
+      });
+      dispatch(addToCart(cartItem));
+      // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+    }
     event.preventDefault();
   };
 
@@ -80,7 +83,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     try {
       await userAPI.addToCompare(product?.id!);
     } catch (error) {
-      toast.error('Error happend.');
+      toast.error('Error happend.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
@@ -96,10 +101,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           const newWishlist = await userAPI.getCustomerWishlist(token);
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
-        toast.success('Item added to wishlist');
+        toast.success('Item added to wishlist', {
+          containerId: 'bottom-right',
+        });
         inWishlist = true;
       } catch (error) {
-        toast.error('Failed to add item to wishlist');
+        toast.error('Failed to add item to wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));
@@ -110,11 +119,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.success('Item removed from wishlist');
+        toast.error('Item removed from wishlist', {
+          containerId: 'bottom-right',
+        });
         dispatch(deleteItemFromWishlist(productId));
         inWishlist = false;
       } catch (error) {
-        toast.error('Failed to remove item from wishlist');
+        toast.error('Failed to remove item from wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));
@@ -125,7 +138,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     <>
       <div className="rounded-full bg-white p-2 text-center drop-shadow-md">
         {/* <Link href="/" passHref> */}
-        <span>
+        <span className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={productInCart ? btnClassFilled : btnClass}
@@ -142,11 +155,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             />
           </svg>
 
-          <div className="absolute -left-5 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
-            <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-              Add to cart
+          <div
+            className={`absolute ${
+              productInCart ? '-left-8' : '-left-5'
+            } -top-7 mb-6 hidden flex-col items-center peer-hover:flex`}
+          >
+            <span className="whitespace-no-wrap z-10 ml-5 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+              {productInCart ? 'Already Added' : 'Add to cart'}
             </span>
-            <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+            <div className="-ml-5 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
           </div>
         </span>
         {/* </Link> */}
@@ -196,9 +213,13 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <div className="absolute left-6 -top-6 mb-6 hidden flex-col items-center peer-hover:flex">
+            <div
+              className={`absolute left-6 ${
+                inWishlist ? '-top-10' : '-top-6'
+              } mb-6 hidden flex-col items-center peer-hover:flex`}
+            >
               <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-                + Add to wishlist
+                {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}
               </span>
               <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
             </div>

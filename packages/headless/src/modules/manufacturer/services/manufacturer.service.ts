@@ -1,4 +1,3 @@
-import { UpdateManufacturerDto } from './../dto/updateManufacturer.dto';
 import {
   GetManufacturersResponse,
   GetManufacturersSuccessMessages,
@@ -24,9 +23,8 @@ import {
 import { CreateManufacturerErrorMessages } from 'models';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
-import { CreateManufacturerDto } from '../dto/createManufacturer.dto';
 import { ManufacturerRepository } from '../repositories';
-import { GetManufacturersQueryDto } from '../dto/getManufacturers.dto';
+import { Manufacturer, ManufacturersQuery } from 'src/entity/manufacturer';
 
 @Injectable()
 export class ManufacturerService {
@@ -44,7 +42,7 @@ export class ManufacturerService {
    *
    */
   async addManufacturer(
-    manufacturer: CreateManufacturerDto,
+    manufacturer: Manufacturer,
   ): Promise<CreateManufacturerResponse> {
     const isManufacturerExist = await this.manufacturerRepo.getManufacturer({
       name: manufacturer.name,
@@ -87,7 +85,7 @@ export class ManufacturerService {
    * @returns { Promise<Object> } Object of Success or Error
    */
   async getAllManufacturers(
-    query: GetManufacturersQueryDto,
+    query: ManufacturersQuery,
   ): Promise<GetManufacturersResponse> {
     const { skip, limit } = query;
     const foundManufacturers = await this.manufacturerRepo.getAllManufacturers(
@@ -168,15 +166,25 @@ export class ManufacturerService {
    */
   async updateManufacturer(
     manufacturerId: string,
-    manufacturer: UpdateManufacturerDto,
+    manufacturer: Manufacturer,
   ): Promise<UpdateManufacturerResponse> {
     const foundManufacturer = await this.manufacturerRepo.getManufacturer({
       id: manufacturerId,
     });
 
+    const isManufacturerExist = await this.manufacturerRepo.getManufacturer({
+      name: manufacturer.name,
+    });
+
     if (!foundManufacturer) {
       return this.helper.serviceResponse.errorResponse(
         UpdateManufacturerErrorMessages.MANUFACTURER_NOT_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    } else if (isManufacturerExist) {
+      return this.helper.serviceResponse.errorResponse(
+        UpdateManufacturerErrorMessages.THE_SAME_NAME_MANUFACTURER_ALREADY_EXISTS,
         null,
         HttpStatus.BAD_REQUEST,
       );
