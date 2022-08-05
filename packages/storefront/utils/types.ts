@@ -32,6 +32,13 @@ import {
   DeleteCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
+  getCartResponse,
+  addToCartRequest,
+  AddToCartResponse,
+  getCartSuccessResponse,
+  addToCartSuccessResponse,
+  deleteCartItemSuccessResponse,
+  deleteAllCartItemsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -119,4 +126,11 @@ export interface apiFunction {
   updateCustomer: (
     data: UpdateCustomerRequestBody
   ) => Promise<UpdateCustomerSuccessResponse | undefined>;
+
+  getCart: (
+    data: string
+  ) => Promise<getCartSuccessResponse | undefined>;
+  addToCart: (data: addToCartRequest) => Promise<addToCartSuccessResponse | undefined>
+  deleteAllCartItem: () => Promise<deleteAllCartItemsSuccessResponse | undefined>
+  deleteSingleCartItem: (productId: string) => Promise<deleteCartItemSuccessResponse | undefined>
 }

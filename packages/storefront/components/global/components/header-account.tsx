@@ -11,6 +11,7 @@ import Modal from './modal/modal';
 import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
+import { resetCart } from 'toolkit/cartSlice';
 
 interface Properties {}
 
@@ -49,6 +50,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     dispatch(resetAddress());
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
+    dispatch(resetCart());
     dispatch(storeUserToken(''));
     toast.error('Logged out successfully!');
   };

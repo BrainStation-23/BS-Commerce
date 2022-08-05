@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
 import Image from 'next/image';
+import { userAPI } from 'APIs';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -32,6 +33,8 @@ const CartDropdown: NextComponentType = () => {
   }, 0);
 
   const handleCartItemDelete = async (product: ResponseItem) => {
+    const productId = product.productId;
+    await userAPI.deleteSingleCartItem(productId);
     dispatch(deleteCartItem(product));
   };
 
@@ -164,7 +167,9 @@ const CartDropdown: NextComponentType = () => {
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}
-              <p className="badge badge-light ">{cartData?.length}</p>
+              <p className="badge badge-light ">
+                {cartData?.length > 0 ? cartData?.length : 0}
+              </p>
             </button>
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (

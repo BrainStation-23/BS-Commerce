@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { addToCart } from 'toolkit/cartSlice';
+import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -52,7 +52,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     ? true
     : false;
 
-  const productInCart = cartData.find((item) => item.productId === product?.id)
+  const productInCart = cartData?.find((item) => item.productId === product?.id)
     ? true
     : false;
 
@@ -61,7 +61,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = (event: any) => {
+  const handleAddToCart = async (event: any) => {
     const cartProduct = {
       id: product.id!,
       info: product.info!,
@@ -75,6 +75,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     // toast.success('+1 Item added to cart');
     if (!productInCart) {
       toast(<CartToast product={product} />);
+      event.preventDefault();
+      const cart = await userAPI.addToCart({
+        productId: cartItem.productId,
+        quantity: 1,
+      });
+      //
+      console.log(cart);
+      dispatch(storeAllCartItems(cart?.data?.items!));
       dispatch(addToCart(cartItem));
       // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     }

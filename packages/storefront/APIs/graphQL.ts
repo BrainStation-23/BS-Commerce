@@ -39,6 +39,11 @@ import {
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
+  getCartResponse,
+  getCartSuccessResponse,
+  addToCartSuccessResponse,
+  deleteCartItemSuccessResponse,
+  deleteAllCartItemsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -90,16 +95,6 @@ export async function getPublicProductByCategoryIDGraphql(
 export async function getFeaturedProductsGraphql(): Promise<
   GetCustomerAllProductsResponse | undefined
 > {
-  return undefined;
-}
-
-export async function getCartGraphql(): Promise<Cart | undefined> {
-  return undefined;
-}
-
-export async function addToCartGraphql(
-  productId: addToCartRequest
-): Promise<AddToCartResponse | undefined> {
   return undefined;
 }
 
@@ -217,4 +212,24 @@ export async function getOrderProductGraphql(
   OrderId: string
 ): Promise<IOrderResponseData | undefined> {
   return undefined;
+}
+
+export async function getCartGraphql(
+  token: string
+): Promise<getCartSuccessResponse | undefined> {
+  return undefined
+}
+
+export async function addToCartGraphql(
+  data: addToCartRequest
+): Promise<addToCartSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteAllCartItemGraphql(): Promise<deleteAllCartItemsSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function deleteSingleCartItemGraphql(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
+ return undefined
 }

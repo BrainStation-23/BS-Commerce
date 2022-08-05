@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import Buttons from '@/components/global/components/buttons/button';
 import DataTable from '@/components/cart/subcomponents/cartTable/dataTable';
 import ItemsLists from '@/components/cart/subcomponents/cartTable/itemListSmall';
+import { userAPI } from 'APIs';
 
 const CartDetails: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +17,16 @@ const CartDetails: NextComponentType = () => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
+  const handleDeleteAllCartItem = async () => {
+    await userAPI.deleteAllCartItem();
+    dispatch(deleteCart());
+  };
+
   return (
     <>
       <div>
         <div className="flex hidden justify-center md:flex">
-          {cartData.length > 0 ? (
+          {cartData?.length > 0 ? (
             <DataTable />
           ) : (
             <>
@@ -40,7 +46,7 @@ const CartDetails: NextComponentType = () => {
             </>
           )}
         </div>
-        {cartData.length > 0 ? (
+        {cartData?.length > 0 ? (
           <div className="md:hidden">
             <ItemsLists />
           </div>
@@ -60,7 +66,7 @@ const CartDetails: NextComponentType = () => {
           </div>
         )}
         <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
-          {cartData.length > 0 && (
+          {cartData?.length > 0 && (
             <Link href="/" passHref>
               <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
                 CONTINUE SHOPPING
@@ -68,12 +74,10 @@ const CartDetails: NextComponentType = () => {
             </Link>
           )}
 
-          {cartData.length > 0 && (
+          {cartData?.length > 0 && (
             <button
               className="w-full bg-black py-2 text-sm text-white hover:bg-green-600"
-              onClick={() => {
-                dispatch(deleteCart());
-              }}
+              onClick={handleDeleteAllCartItem}
             >
               CLEAR CART
             </button>

@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import { useAppDispatch } from 'customHooks/hooks';
 import { deleteCartItem, updateCartItem } from 'toolkit/cartSlice';
+import { ResponseItem } from 'models';
+import { userAPI } from 'APIs';
 
 const ShowData = ({ data }: any) => {
   const dispatch = useAppDispatch();
@@ -11,6 +13,12 @@ const ShowData = ({ data }: any) => {
     productId: data.productId,
     quantity: data.quantity,
   });
+
+  const handleCartItemDelete = async () => {
+    const productId = data.productId;
+    await userAPI.deleteSingleCartItem(productId);
+    dispatch(deleteCartItem(data));
+  };
 
   return (
     <>
@@ -101,9 +109,7 @@ const ShowData = ({ data }: any) => {
           <div className="flex justify-center">
             <button
               className="font-bold text-[#40a944]"
-              onClick={() => {
-                dispatch(deleteCartItem(data));
-              }}
+              onClick={handleCartItemDelete}
             >
               X
             </button>
