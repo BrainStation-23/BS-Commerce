@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { Product } from 'models';
+import { Product, WishlistItem } from 'models';
 import { addToCart } from 'toolkit/cartSlice';
 import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import {
@@ -23,6 +23,7 @@ import Modal from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import ModalWishlist from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
+import CartToast from '../global/components/cartToast';
 interface SingleProduct {
   product: Product;
 }
@@ -40,11 +41,15 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.modal.setModalWishlist
   );
 
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
   );
   const findWishlistProduct = wishlistData?.items?.find(
-    (item) => item.productId === product.id
+    (item: WishlistItem) => item.productId === product.id
   );
 
   const token = useAppSelector(
@@ -93,8 +98,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       quantity: amount,
     };
     // console.log(cartItem);
-    setShowCartModal(true);
-    setAmount(1);
+    setAmount(amount);
+    // setShowCartModal(true);
+    toast(<CartToast product={product} />);
     dispatch(addToCart(cartItem));
   };
 
@@ -135,7 +141,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.success('Item removed from wishlist');
+        toast.error('Item removed from wishlist');
         dispatch(deleteItemFromWishlist(productId));
       } catch (error) {
         toast.error('Failed to remove item from wishlist');
@@ -160,6 +166,28 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   useEffect(() => {
     dispatch(setModalState(false));
   }, [router.asPath]);
+
+  useEffect(() => {
+    let itemAmountInCart: any = cartData.find((item) => {
+      if (item.productId === product.id) {
+        return item;
+      }
+    });
+
+    if (!itemAmountInCart) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        photos: product.photos!,
+      };
+      itemAmountInCart = {
+        product: cartProduct!,
+        productId: product.id!,
+        quantity: 1,
+      };
+    }
+    setAmount(itemAmountInCart?.quantity);
+  }, []);
 
   return (
     <>

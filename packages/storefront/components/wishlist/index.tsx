@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NextComponentType } from 'next';
 
@@ -22,8 +23,8 @@ import Icon from '@/components/global/components/icon';
 import ModalCompare from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
-import Image from 'next/image';
 import WishlistBody from './wishlistBody';
+import { WishlistItem } from 'models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -56,7 +57,7 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.success('Wishlist cleared');
+      toast.error('Wishlist cleared');
     } catch (error) {
       toast.error('Error happened. Please try again.');
     }
@@ -109,7 +110,7 @@ const WishlistComponent: NextComponentType = () => {
             </button>
           )}
         </div>
-        {wishlistData.items?.length! <= 0 && (
+        {wishlistData?.items?.length! <= 0 && (
           <div className="my-10 flex flex-col items-center">
             <div className="my-2">
               <WishlistIcon height="h-16" width="w-16" />

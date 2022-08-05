@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export interface TextareaProps {
   label: string;
@@ -14,21 +14,21 @@ export const Textarea: React.FC<TextareaProps> = ({
   label,
   value,
   name,
-  className = "",
+  className = '',
   id,
   onChangeHandler,
   ...props
 }) => {
   return (
-    <div className="text-sm mb-5">
+    <div className="mb-5 text-sm">
       <label>{label} *</label>
       <textarea
         placeholder={label}
-        className={`${className} ${"h-44 bg-white w-full border border-solid border-slate-200 text-zinc-900 px-5 py-2"}`}
+        className={`${className} ${'h-44 w-full border border-solid border-slate-200 bg-white px-5 py-2 text-zinc-900'}`}
         name={name}
         value={value}
         onChange={onChangeHandler}
-        {...props}
+        //{...props}
       ></textarea>
     </div>
   );

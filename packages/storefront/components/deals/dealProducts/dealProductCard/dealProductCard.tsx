@@ -28,8 +28,8 @@ const DealProductCard: React.FC<Props> = ({ product }: Props) => {
                     product={product}
                     height={280}
                     width={280}
-                    src={product?.photos[0]?.url}
-                    alt={product?.tags[0]}
+                    src={product?.photos![0]?.url}
+                    alt={product?.tags![0]}
                   ></Picture>{' '}
                 </div>
               </div>

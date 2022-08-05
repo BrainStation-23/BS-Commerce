@@ -50,7 +50,8 @@ const Layout: NextComponentType = ({ children }) => {
           {children}
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer theme="colored"/>
+
     </>
   );
 };

@@ -13,7 +13,6 @@ const WeekDeals: NextComponentType = () => {
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
-  console.log(products);
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -78,7 +77,7 @@ const WeekDeals: NextComponentType = () => {
                               ) : null}
                             </div>
                           </div>
-                          <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
+                          <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black duration-300 hover:-translate-y-3 hover:opacity-70 md:opacity-0">
                             <Icon product={product} />
                           </div>
 

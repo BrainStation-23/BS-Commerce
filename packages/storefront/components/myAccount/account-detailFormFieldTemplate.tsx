@@ -22,7 +22,7 @@ const AccountDetailsFormField: React.FC<props> = ({
           </label>
           <Field
             type={fieldType}
-            className="rounded-0 form-comtrol w-full w-2/3 border-0 border-2 border-b border-green-700 p-2 outline-0"
+            className="rounded-0 form-comtrol w-full w-2/3 border-0 border-2 border-b p-2 outline-0"
             id={id}
             name={id}
             disabled={verified ? true : false}
