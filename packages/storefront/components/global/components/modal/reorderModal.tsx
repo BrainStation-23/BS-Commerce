@@ -11,7 +11,6 @@ interface Props {
   onCheckOutReorder: () => void;
   message: String;
   unavailableProd: any;
-  //   product?: Product | CustomerProduct | WishlistProduct;
 }
 
 const ReorderModal: React.FC<Props> = ({

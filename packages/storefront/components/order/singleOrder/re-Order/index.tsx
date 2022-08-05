@@ -4,15 +4,17 @@ import { useAppSelector, useAppDispatch } from 'customHooks/hooks';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
 import { productsState } from 'toolkit/productsSlice';
 import { addToCart } from 'toolkit/cartSlice';
+import { IProductOrderData } from 'models';
 interface Props {
   singleOrder: IOrderResponseData;
 }
-
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const dispatch = useAppDispatch();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
-  const [unavailableProd, setUnavailableProd] = useState([]);
-  const [newProduct, setNewProduct] = useState([]);
+  const [unavailableProd, setUnavailableProd] = useState<IProductOrderData[]>(
+    []
+  );
+  const [newProduct, setNewProduct] = useState<IProductOrderData[]>([]);
   const [message, setMessage] = useState('');
   const [cartToken, setCartToken] = useState(false);
   let { products } = singleOrder;
@@ -41,18 +43,20 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     );
 
     if (unmatched.length > 0) {
-      products.forEach((product) => {
+      products.forEach((product: IProductOrderData) => {
         unmatched.forEach((id) => {
           if (product.productId == id) {
             unavailableProd.push(product);
           }
         });
       });
-      let newProdData = [];
+      let newProdData: IProductOrderData[] = [];
 
       matched.forEach((id) => {
-        const np = products.find((product) => product.productId === id);
-        newProdData.push(np);
+        const np = products.find(
+          (product: IProductOrderData) => product.productId === id
+        );
+        newProdData.push(np!);
       });
       setNewProduct(newProdData);
 
@@ -69,7 +73,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   };
   const toCart = async () => {
     if (newProduct.length > 0) {
-      newProduct.forEach((product) => {
+      newProduct.forEach((product: IProductOrderData) => {
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',
