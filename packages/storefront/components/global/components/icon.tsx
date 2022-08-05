@@ -1,21 +1,18 @@
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { addToCart } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
+
 import {
   CustomerProduct,
   Product,
   WishlistItem,
   WishlistProduct,
 } from 'models';
-import {
-  setCartModalState,
-  setModalState,
-  setWishlistModalState,
-} from 'toolkit/modalSlice';
+import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
@@ -72,9 +69,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       productId: product.id!,
       quantity: 1,
     };
-    // toast.success('+1 Item added to cart');
     if (!productInCart) {
-      toast(<CartToast product={product} />);
+      toast(<CartToast product={product} />, {
+        containerId: 'bottom-left',
+      });
       dispatch(addToCart(cartItem));
       // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
     }
@@ -85,7 +83,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     try {
       await userAPI.addToCompare(product?.id!);
     } catch (error) {
-      toast.error('Error happend.');
+      toast.error('Error happend.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
@@ -101,10 +101,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           const newWishlist = await userAPI.getCustomerWishlist(token);
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
-        toast.success('Item added to wishlist');
+        toast.success('Item added to wishlist', {
+          containerId: 'bottom-right',
+        });
         inWishlist = true;
       } catch (error) {
-        toast.error('Failed to add item to wishlist');
+        toast.error('Failed to add item to wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));
@@ -115,11 +119,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist');
+        toast.error('Item removed from wishlist', {
+          containerId: 'bottom-right',
+        });
         dispatch(deleteItemFromWishlist(productId));
         inWishlist = false;
       } catch (error) {
-        toast.error('Failed to remove item from wishlist');
+        toast.error('Failed to remove item from wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));

@@ -50,7 +50,10 @@ const HeaderAccount: React.FC<Properties> = () => {
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
     dispatch(storeUserToken(''));
-    toast.error('Logged out successfully!');
+    router.push('/account/sign-in');
+    toast.error('Logged out successfully!', {
+      containerId: 'bottom-right',
+    });
   };
 
   const getUsername = (name: string): string => {
@@ -133,7 +136,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                       </li>
                     </Link>
                     <hr className="my-2" />
-                    <Link href={links[3].link} passHref>
+                    <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
                         className="transition-all duration-100 ease-linear hover:text-green-600"
