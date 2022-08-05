@@ -42,7 +42,6 @@ const Layout = ({ children }: LayoutProps) => {
         enableMultiContainer
         theme="colored"
         toastClassName="sm:w-max border-2 border-green-500"
-        autoClose={1000000}
         style={
           document.body.clientWidth < 484
             ? document.body.clientWidth > 422
