@@ -73,7 +73,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
   });
 
   describe('GET /manufacturers - without token', () => {
-    it('should return 403', async () => {
+    it('should return 401 as Unauthorized', async () => {
       return await request(app.getHttpServer())
         .get('/manufacturers')
         .expect(401);
@@ -81,7 +81,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
   });
 
   describe('GET /manufacturers with wrong token', () => {
-    it('should return 403', async () => {
+    it('should return 401 as Unauthorized', async () => {
       return await request(app.getHttpServer())
         .get('/manufacturers')
         .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
@@ -147,7 +147,10 @@ describe('Initializing... Manufactrurer controller testing', () => {
         .get('/manufacturers/count')
         .set('Authorization', `Bearer ${token}`)
         .expect((res) => {
-          if (res.body.data.count === 0) {
+          if (res.body?.error) {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toEqual('MANUFACTURERS_NOT_FOUND');
+          } else if (res.body?.data?.count === 0) {
             expect(res.statusCode).toBe(200);
             expect(res.body.data.count).toEqual(0);
             expect(res.body.data.message).toEqual('MANUFACTURER_IS_EMPTY');
@@ -156,16 +159,16 @@ describe('Initializing... Manufactrurer controller testing', () => {
             expect(res.body.data.message).toEqual(
               'MANUFACTURERS_COUNT_LOADED_SUCCESSFULLY',
             );
-            expect(res.body.data.count).toEqual(expect.any(Number));
-            expect(res.body.data.manufacturers).toEqual(
-                expect.objectContaining({
-                  count: expect.any(Number),
-                  message: expect.any(String)
-                }),
+            expect(res.body?.data?.count).toEqual(expect.any(Number));
+            expect(res.body.data).toEqual(
+              expect.objectContaining({
+                count: expect.any(Number),
+                message: expect.any(String),
+              }),
             );
           } else {
             expect(res.statusCode).toBe(400);
-            expect(res.body.data.message).toEqual('MANUFACTURERS_NOT_FOUND');
+            expect(res.body.error).toEqual('MANUFACTURERS_NOT_FOUND');
           }
         });
     }, 30000);
