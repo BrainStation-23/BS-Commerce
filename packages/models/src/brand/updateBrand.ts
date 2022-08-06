@@ -1,13 +1,20 @@
 import { Brand } from './brand';
-import { ErrorResponse } from "src/common/errorResponse";
 import { SuccessResponse } from "src/common/successResponse";
 import { BrandInfo, BrandMeta } from "./createBrand";
+import { DescriptiveError } from 'src/index';
 
 export interface UpdateBrandRequest{
-    info: BrandInfo,
-    meta: BrandMeta
+    info?: BrandUpdateInfo,
+    meta?: BrandMeta
 }
 
+export interface BrandUpdateInfo{
+    description?: string,
+    allowToSelectPageSize?: boolean,
+    published?: boolean,
+    displayOrder?: number,
+    pageSizeOptions?: number[] 
+}
 export interface UpdatedBrand{
     id:string,
     info: BrandInfo,
@@ -19,8 +26,10 @@ export interface UpdateBrandSuccessResponse extends SuccessResponse {
     data?: Brand
 }
 
-export interface UpdateBrandErrorResponse extends ErrorResponse{
+export interface UpdateBrandErrorResponse{
     error: ErrorMessageUpdate;
+    code?: number;
+    errors: DescriptiveError;
 }
 
 export const enum ErrorMessageUpdate{

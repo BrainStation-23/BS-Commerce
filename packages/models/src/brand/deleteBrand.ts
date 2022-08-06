@@ -10,6 +10,8 @@ export interface DeleteBrandSuccessResponse extends SuccessResponse {
 
 export interface DeleteBrandErrorResponse extends ErrorResponse{
     error: ErrorMessageDeleteBrand;
+    code?: number;
+    errors: DescriptiveError;
 }
 
 export const enum ErrorMessageDeleteBrand{
