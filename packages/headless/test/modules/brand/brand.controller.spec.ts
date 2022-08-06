@@ -142,8 +142,10 @@ describe('Initializing Brand controller testing', () => {
         return await request(app.getHttpServer())
         .get('/brands')
         .expect(res => {
-            expect(res.statusCode).toBe(200);
-            try{
+            if (res.body.data.length === 0) {
+                expect(res.statusCode).toBe(200);
+            }else{
+                expect(res.statusCode).toBe(200);
                 expect(res.body.data).toEqual(
                     expect.arrayContaining([
                         expect.objectContaining({
@@ -165,10 +167,7 @@ describe('Initializing Brand controller testing', () => {
                         })
                     ])
                 );
-            }catch{
-                expect(res.body.data).toEqual([])
-            }
-           
+            } 
         })
     });
 
