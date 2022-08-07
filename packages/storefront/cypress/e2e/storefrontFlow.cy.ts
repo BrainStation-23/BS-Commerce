@@ -1,9 +1,4 @@
 describe('Login to storefront & check flow', () => {
-  // it('should be redirected to login page', () => {
-  //   // Start from the index page
-  //   cy.visit('/account/sign-in');
-  // });
-
   it('should Register', () => {
     //go to homepage
     cy.visit('/account/sign-up');
