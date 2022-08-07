@@ -50,13 +50,13 @@ const BrandMetaForm: NextComponentType = () => {
               fieldType="text"
             />
             <FieldTemplate
-              label="metaTitle"
+              label="Title"
               isRequired={false}
               fieldID="metaTitle"
               fieldAs="textarea"
             />
             <FieldTemplate
-              label="metaDescription"
+              label="Description"
               isRequired={false}
               fieldID="metaDescription"
               fieldType="checkbox"

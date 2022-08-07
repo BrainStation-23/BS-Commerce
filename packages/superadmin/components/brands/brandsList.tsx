@@ -64,8 +64,8 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
       label: 'Published',
       path: 'published',
       content: (data: Brand, key: any) => (
-        <td className="p-auto m-auto text-center">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+        <td className="p-auto m-auto text-center align-middle">
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : 'X'}
         </td>
       ),
     },
@@ -73,8 +73,8 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
       label: 'Allow To Select Page Size',
       path: 'allowToSelectPageSize',
       content: (data: Brand, key: any) => (
-        <td className="p-auto m-auto text-center">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+        <td className="p-auto m-auto text-center align-middle">
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : 'X'}
         </td>
       ),
     },

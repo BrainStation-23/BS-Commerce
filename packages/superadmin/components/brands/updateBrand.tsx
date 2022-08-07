@@ -34,7 +34,7 @@ const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
           }}
           onSubmit={(values, actions) => {
             const info = {
-              name: values?.name,
+              // name: values?.name,
               description: values?.description,
               allowToSelectPageSize: values?.allowToSelectPageSize,
               published: values?.published,
@@ -54,14 +54,14 @@ const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
             handleSubmit(newData);
             actions.setSubmitting(false);
           }}
-          validationSchema={brandSchema}
+          // validationSchema={brandSchema}
         >
           {(formikprops) => {
             return (
               <Form onSubmit={formikprops.handleSubmit}>
                 <div className="content-header clearfix pt-4">
                   <h1 className="float-start">
-                    Add a new brand
+                    Edit brand
                     <span className="fs-5 p-3">
                       <a href="/Brands" className="text-decoration-none">
                         <i className="bi bi-arrow-left-circle-fill p-2" />
@@ -81,7 +81,7 @@ const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <BrandInfoForm />
+                  <BrandInfoForm editMode={brand ? true : false} />
                   <BrandMetaForm />
                 </div>
               </Form>

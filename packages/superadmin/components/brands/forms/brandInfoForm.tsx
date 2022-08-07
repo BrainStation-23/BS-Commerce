@@ -3,7 +3,7 @@ import { NextComponentType } from 'next';
 
 import FieldTemplate from '@/components/products/forms/fieldTemplate';
 
-const BrandInfoForm: NextComponentType = () => {
+const BrandInfoForm: React.FC<{ editMode?: boolean }> = ({ editMode }) => {
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
 
   const toggleButton = () => {
@@ -28,7 +28,7 @@ const BrandInfoForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-info-lg col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -45,9 +45,10 @@ const BrandInfoForm: NextComponentType = () => {
           <div className="card-body">
             <FieldTemplate
               label="Name"
-              isRequired={true}
+              isRequired={!editMode}
               fieldID="name"
               fieldType="text"
+              disabled={editMode}
             />
             <FieldTemplate
               label="Description"

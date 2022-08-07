@@ -14,6 +14,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
     component,
     placeholder,
     ismulti,
+    disabled,
   } = props;
 
   return (
@@ -21,7 +22,10 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
       <div className="form-group row my-2 mb-3">
         <div className="col-md-3">
           <div className="label-wrapper row row-cols-auto float-md-end pe-3">
-            <label className="col-form-label col fs-5 px-1" htmlFor={fieldID}>
+            <label
+              className="col-form-label col fs-5 px-1 text-center"
+              htmlFor={fieldID}
+            >
               {label}
               {isRequired ? (
                 <span className="required text-danger ">*</span>
@@ -69,6 +73,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
                 options={options}
                 component={component}
                 placeholder={placeholder}
+                disabled={disabled}
               />
             )}
 
