@@ -29,14 +29,9 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   });
   const closeCartModal = () => {
     setShowCartModal(false);
+    setUnavailableProd([]);
   };
   const handleReorder = () => {
-    const orderedProductId = products.map((prod) => {
-      return prod.productId;
-    });
-    const allProductsId = allProducts.map((prod) => {
-      return prod.id;
-    });
     let matched = orderedProductId.filter((id) => allProductsId.includes(id));
     let unmatched = orderedProductId.filter(
       (id) => !allProductsId.includes(id)
@@ -152,8 +147,8 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
         open={showCartModal}
         onClose={closeCartModal}
         message={message}
-        unavailableProd={unavailableProd}
         onCheckOutReorder={handleReorderCheckout}
+        unavailableProd={unavailableProd}
       />
     </>
   );

@@ -4,13 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';
 import { XCircleIcon } from '../headerIcons';
-
+import { IProductOrderData } from 'models';
 interface Props {
   open: boolean;
   onClose: () => void;
   onCheckOutReorder: () => void;
   message: String;
-  unavailableProd: any;
+  unavailableProd: IProductOrderData[];
 }
 
 const ReorderModal: React.FC<Props> = ({
@@ -52,34 +52,35 @@ const ReorderModal: React.FC<Props> = ({
             >
               <XCircleIcon size={10} />
             </button>
-            {/* <div className="hidden sm:block">
-              <Image
-                src={product?.photos![0].url!}
-                alt={product?.photos![0].alt || 'product image'}
-                width={141}
-                height={141}
-                layout="fixed"
-              />
-            </div>
-            <div className="block sm:hidden">
-              <Image
-                src={product?.photos![0].url!}
-                alt={product?.photos![0].alt || 'product image'}
-                width={80}
-                height={80}
-                layout="fixed"
-              />
-            </div> */}
             <div className="flex w-36 flex-col px-4 sm:w-80">
-              <span className="mb-2 text-sm sm:mb-4 sm:text-base">
-                {/* {product?.info.name} */}
-              </span>
+              <span className="mb-2 text-sm sm:mb-4 sm:text-base"></span>
               <div className="mb-3 flex justify-center text-sm text-green-600 sm:mb-6 sm:text-base">
                 {message}
               </div>
-
-              <div className="flex justify-center">
-                <Link href="/cart" passHref>
+              {unavailableProd.length > 0 ? (
+                <span>
+                  {unavailableProd.map((prod) => (
+                    <div key={prod.productId}>
+                      <div className="flex py-2">
+                        <Image
+                          src={prod?.photos![0].url!}
+                          alt={prod?.photos![0].alt || 'product image'}
+                          width={80}
+                          height={80}
+                          layout="fixed"
+                        />
+                        <span className="v-screen flex items-center justify-center pl-2">
+                          {prod.name}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </span>
+              ) : (
+                ''
+              )}
+              <div className="flex justify-center py-4">
+                <Link href="/checkout" passHref>
                   <button
                     className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
                     onClick={() => {
