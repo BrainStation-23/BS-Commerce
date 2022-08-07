@@ -36,7 +36,9 @@ const Information = (props: any) => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
-    toast.error('Logged out successfully!');
+    toast.error('Logged out successfully!', {
+      containerId: 'bottom-right',
+    });
   };
 
   const shippingInfo = useAppSelector(
@@ -159,12 +161,14 @@ const Information = (props: any) => {
     };
     setModal(obj);
   };
+
   useEffect(() => {
     shippingInfo?.tag
       ? setDropdownText(shippingInfo.tag)
       : setDropdownText('Use a new address');
     addresses?.length > 0 ? setShowLabel(false) : setShowLabel(true);
     setTagsOptions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags, shippingInfo]);
 
   useEffect(() => {

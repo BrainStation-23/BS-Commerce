@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { OrderIncompleteStat, OrderStat } from "models"
+import { StatusTypeDto } from "src/entity/order"
 
 export class OrderIncompleteStatDto implements OrderIncompleteStat{
     @ApiProperty()
@@ -27,12 +28,6 @@ export class OrderStatDto implements OrderStat{
     yearTotal: number
     @ApiProperty()
     allTimeTotal: number
-}
-
-export enum StatusTypeDto {
-    orderStatusEnums ='orderStatusEnums',
-    paymentStatusEnums = 'paymentStatusEnums',
-    shippingStatusEnums = 'shippingStatusEnums'
 }
 
 export class ChangeStatusDto { 

@@ -19,6 +19,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
             name: product.info.name,
           },
         }}
+        passHref
       >
         <div className="mb-0 overflow-hidden" key={product?.id}>
           <div className="duration-0 group cursor-pointer tracking-wide transition hover:bg-white hover:duration-700">

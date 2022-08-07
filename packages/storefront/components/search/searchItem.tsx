@@ -3,6 +3,7 @@ import React from 'react';
 
 import type { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
+import Image from 'next/image';
 
 const SearchItem: NextComponentType = () => {
   const products = useAppSelector(
@@ -17,10 +18,10 @@ const SearchItem: NextComponentType = () => {
             <div className="mx-auto mb-10 flex flex-wrap text-lg sm:mb-10 md:mb-7 lg:mb-7 lg:w-2/4 xl:mb-7">
               <div className="md:w-1/4">
                 <Link href={`/product/${product.id}`} passHref>
-                  <img
+                  <Image
                     alt="ecommerce"
                     className="h-auto w-auto hover:cursor-pointer"
-                    src={product?.photos![0]?.url}
+                    src={product?.photos![0]?.url!}
                   />
                 </Link>
               </div>

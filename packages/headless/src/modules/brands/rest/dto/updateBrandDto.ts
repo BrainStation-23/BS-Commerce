@@ -4,23 +4,49 @@ import { HttpStatus } from '@nestjs/common';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
-import { UpdateBrandSuccessResponse, UpdateBrandErrorResponse ,UpdateBrandRequest, ErrorMessageUpdate, UpdatedBrand } from 'models';
+import { UpdateBrandSuccessResponse, UpdateBrandErrorResponse ,UpdateBrandRequest, ErrorMessageUpdate, UpdatedBrand, BrandUpdateInfo } from 'models';
 
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
 
+export class UpdateInfoDto implements BrandUpdateInfo{
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    description?: string;
+    
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    allowToSelectPageSize?: boolean;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsBoolean()
+    published?: boolean;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsNumber()
+    displayOrder?: number;
+
+    @ApiProperty({
+        example: [1, 2]
+    })
+    @IsOptional()
+    @IsArray()
+    pageSizeOptions?: number[];
+}
 export class UpdateBrandRequestdto implements UpdateBrandRequest{
+    @ApiProperty()
+    @IsOptional()
+    @IsObject()
+    info?: UpdateInfoDto;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsOptional()
     @IsObject()
-    info: InfoDto;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsObject()
-    meta: MetaDto;
-
+    meta?: MetaDto;
 }
 
 export class UpdateBrandErrorResponseDto implements UpdateBrandErrorResponse{

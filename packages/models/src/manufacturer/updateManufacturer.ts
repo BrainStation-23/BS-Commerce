@@ -4,6 +4,7 @@ import { ManufacturerSeo } from './manufacturerSeo';
 
 export const enum UpdateManufacturerErrorMessages {
     MANUFACTURER_NOT_FOUND = 'MANUFACTURER_NOT_FOUND',
+    THE_SAME_NAME_MANUFACTURER_ALREADY_EXISTS = 'THE_SAME_NAME_MANUFACTURER_ALREADY_EXISTS',
     MANUFACTURER_NOT_UPDATED = 'MANUFACTURER_NOT_UPDATED',
 }
 

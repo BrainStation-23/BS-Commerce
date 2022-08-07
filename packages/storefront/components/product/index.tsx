@@ -78,7 +78,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     try {
       await userAPI.addToCompare(product.id!);
     } catch (error) {
-      toast.error('Error happend.');
+      toast.error('Error happend.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
@@ -100,7 +102,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     // console.log(cartItem);
     setAmount(amount);
     // setShowCartModal(true);
-    toast(<CartToast product={product} />);
+    toast(<CartToast product={product} />, {
+      containerId: 'bottom-left',
+    });
     dispatch(addToCart(cartItem));
   };
 
@@ -125,13 +129,16 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         // console.log(newList);
         dispatch(storeWishlist(newList!));
         clicked = true;
-        toast.success('Item added to wishlist');
+        toast.success('Item added to wishlist', {
+          containerId: 'bottom-right',
+        });
       } catch (error) {
         // console.log(error);
-        toast.error('Failed to add item to wishlist');
+        toast.error('Failed to add item to wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
-      // toast.error('Please login to your account first.');
       // router.push('/account/sign-in');
       dispatch(setWishlistModalState(!modalOn));
     }
@@ -141,10 +148,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist');
+        toast.error('Item removed from wishlist', {
+          containerId: 'bottom-right',
+        });
         dispatch(deleteItemFromWishlist(productId));
       } catch (error) {
-        toast.error('Failed to remove item from wishlist');
+        toast.error('Failed to remove item from wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setWishlistModalState(!modalOn));
@@ -426,14 +437,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     >
                       {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
                     </button>
-                    <button
+                    <div
                       className="mt-10 underline hover:text-green-600"
                       hidden={!clicked}
                     >
                       <button onClick={handleClickToWishlist}>
                         Go to wishlist
                       </button>
-                    </button>
+                    </div>
                   </div>
                   <div>
                     <button
