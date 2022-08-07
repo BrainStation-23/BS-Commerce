@@ -16,7 +16,6 @@ describe('Login to storefront & check flow', () => {
     cy.contains('button', 'Sign Up').click();
 
     cy.wait(1000);
-
   });
 
   it('should Log in', () => {
