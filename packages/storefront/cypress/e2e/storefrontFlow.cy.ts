@@ -4,6 +4,21 @@ describe('Login to storefront & check flow', () => {
   //   cy.visit('/account/sign-in');
   // });
 
+  it('should Register', () => {
+    //go to homepage
+    cy.visit('/account/sign-up');
+
+    //Enter email and password
+    cy.get('#email').type('test@user.com');
+    cy.get('#password').type('123456');
+
+    // Click login
+    cy.contains('button', 'Sign Up').click();
+
+    cy.wait(1000);
+
+  });
+
   it('should Log in', () => {
     //go to homepage
     cy.visit('/');
@@ -17,7 +32,7 @@ describe('Login to storefront & check flow', () => {
     ).click();
 
     //Enter email and password
-    cy.get('#email').type('g@h.com');
+    cy.get('#email').type('test@user.com');
     cy.get('#password').type('123456');
 
     // Click login
