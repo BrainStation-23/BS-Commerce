@@ -1,37 +1,35 @@
 import { UseGuards } from "@nestjs/common";
 import { Query, Args, Resolver, Mutation } from "@nestjs/graphql";
 import { RolesGuard } from "src/guards/auth.guard";
-import { createCategoryRequestDto } from "../dto/createCategory.dto";
-import { getCategoryRequestDto } from "../dto/getCategory.dto";
-import { getCategoryBySlugRequestDto } from "../dto/getCategoryBySlug.dto";
 import { CategoryService } from "../services";
+import { CategoryListResponse, CategoryResponse, createCategoryRequestSchema, getCategoryBySlugRequestSchema, getCategoryRequestSchema } from "./category.model";
 
-@UseGuards(new RolesGuard(['admin']))
 @Resolver()
 export class CategoryResolver {
   constructor(private categoryService: CategoryService) { }
 
-   @Query()
+  @Query(returns => CategoryResponse, {nullable:true})
   async getCategory(
-    @Args() data: getCategoryRequestDto) {
+    @Args('data') data: getCategoryRequestSchema) {
       return await this.categoryService.getCategory(data.categoryId);
   }
 
-  @Query()
+  @Query(returns => CategoryListResponse, {nullable:true})
   async getCategoryList() {
     const item:any = await this.categoryService.getCategoryList();
       return item;
   }
 
-  @Query()
+  @Query(returns => CategoryResponse, {nullable:true})
   async getCategoryBySlug(
-    @Args() data: getCategoryBySlugRequestDto) {
+    @Args('data') data: getCategoryBySlugRequestSchema) {
       return await this.categoryService.getCategoryBySlug(data.slug);
   }
 
-  @Mutation()
+  @UseGuards(new RolesGuard(['admin']))
+  @Mutation(returns => CategoryResponse)
   async createCategory(
-    @Args('category') category: createCategoryRequestDto,
+    @Args('category') category: createCategoryRequestSchema,
   ) {
     return await this.categoryService.createCategory(category);
   }
