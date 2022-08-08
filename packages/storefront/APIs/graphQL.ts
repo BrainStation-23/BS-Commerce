@@ -44,6 +44,7 @@ import {
   addToCartSuccessResponse,
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
+  updateCartItemSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -232,4 +233,8 @@ export async function deleteAllCartItemGraphql(): Promise<deleteAllCartItemsSucc
 
 export async function deleteSingleCartItemGraphql(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
  return undefined
+}
+
+export async function updateCartItemGraphql(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse | undefined> {
+  return undefined; 
 }

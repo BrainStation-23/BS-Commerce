@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { NextComponentType } from 'next';
 import Link from 'next/link';
+
+import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -11,16 +12,16 @@ import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCustomerDetails, storeUserDetails } from 'toolkit/userSlice';
 import { storeUserToken } from 'toolkit/authSlice';
+import { loginSchema } from '@/components/global/schemas/loginSchema';
+import { storeWishlist } from 'toolkit/productsSlice';
+import { storeAllCartItems } from 'toolkit/cartSlice';
 
 import Loading from '@/components/global/loader';
-import { loginSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 
 import FacebookLogo from '../../public/facebook.svg';
 import GoogleLogo from '../../public/google.svg';
-import { storeWishlist } from 'toolkit/productsSlice';
-import { storeAllCartItems } from 'toolkit/cartSlice';
 
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();

@@ -14,7 +14,7 @@ import {
 import {
   setCartModalState,
   setModalState,
-  setWishlistModalState,
+  setLoginModalState,
 } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
@@ -62,29 +62,33 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
   const handleAddToCart = async (event: any) => {
-    const cartProduct = {
-      id: product.id!,
-      info: product.info!,
-      photos: product.photos!,
-    };
-    const cartItem = {
-      product: cartProduct!,
-      productId: product.id!,
-      quantity: 1,
-    };
-    // toast.success('+1 Item added to cart');
-    if (!productInCart) {
-      toast(<CartToast product={product} />);
-      event.preventDefault();
-      const cart = await userAPI.addToCart({
-        productId: cartItem.productId,
+    if (token) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        photos: product.photos!,
+      };
+      const cartItem = {
+        product: cartProduct!,
+        productId: product.id!,
         quantity: 1,
-      });
-      //
-      console.log(cart);
-      dispatch(storeAllCartItems(cart?.data?.items!));
-      dispatch(addToCart(cartItem));
-      // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+      };
+      // toast.success('+1 Item added to cart');
+      if (!productInCart) {
+        toast(<CartToast product={product} />);
+        event.preventDefault();
+        const cart = await userAPI.addToCart({
+          productId: cartItem.productId,
+          quantity: 1,
+        });
+        //
+        console.log(cart);
+        dispatch(storeAllCartItems(cart?.data?.items!));
+        dispatch(addToCart(cartItem));
+        // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
     event.preventDefault();
   };
@@ -115,7 +119,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         toast.error('Failed to add item to wishlist');
       }
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -130,7 +134,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         toast.error('Failed to remove item from wishlist');
       }
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 

@@ -47,6 +47,7 @@ import {
   AddToCartResponse,
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
+  updateCartItemSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -422,6 +423,15 @@ export async function deleteSingleCartItemRest(productId: string): Promise<delet
   try {   
     const res = await axios.delete(`${apiEndPoints.deleteSingleCartItem}?productId=${productId}`);
     return res.data as deleteCartItemSuccessResponse;
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function updateCartItemRest(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse |undefined> {
+  try {   
+    const res = await axios.patch(`${apiEndPoints.updateCartItem}`, cartItem);
+    return res.data as updateCartItemSuccessResponse;
   } catch(error: any) {
     return error;
   }

@@ -27,6 +27,7 @@ import {
   addToCartRest,
   deleteAllCartItemRest,
   deleteSingleCartItemRest,
+  updateCartItemRest,
 } from './restApi';
 
 import {
@@ -58,6 +59,7 @@ import {
   addToCartGraphql,
   deleteAllCartItemGraphql,
   deleteSingleCartItemGraphql,
+  updateCartItemGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -91,6 +93,7 @@ const graphqlApi: apiFunction = {
   addToCart: addToCartGraphql,
   deleteAllCartItem: deleteAllCartItemGraphql,
   deleteSingleCartItem: deleteSingleCartItemGraphql,
+  updateCartItem: updateCartItemGraphql,
 };
 
 const restApi: apiFunction = {
@@ -122,6 +125,7 @@ const restApi: apiFunction = {
   addToCart: addToCartRest,
   deleteAllCartItem: deleteAllCartItemRest,
   deleteSingleCartItem: deleteSingleCartItemRest,
+  updateCartItem: updateCartItemRest,
 };
 
 export const userAPI: apiFunction =

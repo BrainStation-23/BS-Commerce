@@ -39,6 +39,8 @@ import {
   addToCartSuccessResponse,
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
+  updateCartItemSuccessResponse,
+  updateCartItemRequest,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -133,4 +135,5 @@ export interface apiFunction {
   addToCart: (data: addToCartRequest) => Promise<addToCartSuccessResponse | undefined>
   deleteAllCartItem: () => Promise<deleteAllCartItemsSuccessResponse | undefined>
   deleteSingleCartItem: (productId: string) => Promise<deleteCartItemSuccessResponse | undefined>
+  updateCartItem: (cartItem: updateCartItemRequest) => Promise<updateCartItemSuccessResponse | undefined>
 }
