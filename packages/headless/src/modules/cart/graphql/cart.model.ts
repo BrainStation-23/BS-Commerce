@@ -1,15 +1,27 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { addToCartRequest, CartProduct, CartProductInfo, CartProductPhoto, deleteCartItemRequest, deleteCartRequest, ResponseItem, updateCartItemRequest } from "models";
+import {
+  addToCartRequest,
+  CartProduct,
+  CartProductInfo,
+  CartProductPhoto,
+  deleteCartItemRequest,
+  deleteCartRequest,
+  deleteCartSuccessResponse,
+  DeleteMessage,
+  Message,
+  ResponseItem,
+  updateCartItemRequest,
+} from "models";
 
 @ObjectType()
-export class CartProductInfoSchema implements CartProductInfo{
+export class CartProductInfoSchema implements CartProductInfo {
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   shortDescription?: string;
 
-  @Field()
+  @Field({ nullable: true })
   fullDescription?: string;
 
   @Field()
@@ -24,59 +36,59 @@ export class CartProductInfoSchema implements CartProductInfo{
   @Field()
   cost: number;
 
-  @Field()
+  @Field({ nullable: true })
   showOnHomePage?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   includeInTopMenu?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   allowToSelectPageSize?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   published?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   displayOrder?: number;
 
-  @Field()
+  @Field({ nullable: true })
   isFeatured?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   publishDate?: Date;
-  
+
 }
 
 @ObjectType()
-export class CartProductPhotoSchema implements CartProductPhoto{
-  @Field()
+export class CartProductPhotoSchema implements CartProductPhoto {
+  @Field({ nullable: true })
   url?: string;
 
-  @Field()
+  @Field({ nullable: true })
   title?: string;
 
-  @Field()
+  @Field({ nullable: true })
   alt?: string;
 
-  @Field()
+  @Field({ nullable: true })
   displayOrder?: number;
 }
 
 @ObjectType()
-export class CartProductSchema implements CartProduct{
-  @Field()
+export class CartProductSchema implements CartProduct {
+  @Field({ nullable: true })
   id?: string;
 
   @Field(type => CartProductInfoSchema)
   info: CartProductInfoSchema;
 
-  @Field(type => [CartProductPhotoSchema])
+  @Field(type => [CartProductPhotoSchema], { nullable: true })
   photos?: CartProductPhotoSchema[];
 }
 
 @ObjectType()
-export class CartItem implements  ResponseItem{
-  @Field(type => CartProductSchema)
+export class CartItem implements ResponseItem {
+  @Field(type => CartProductSchema, { nullable: true })
   product?: CartProductSchema;
 
   @Field()
@@ -87,7 +99,7 @@ export class CartItem implements  ResponseItem{
 }
 
 @InputType()
-export class ItemInput implements addToCartRequest{
+export class ItemInput implements addToCartRequest {
   @Field()
   productId: string;
 
@@ -96,22 +108,22 @@ export class ItemInput implements addToCartRequest{
 }
 
 @InputType()
-export class deleteCartRequestSchema implements deleteCartRequest{
+export class deleteCartRequestSchema implements deleteCartRequest {
   @Field()
   cartId: string;
-} 
+}
 
 @InputType()
 export class updateCartItemRequestSchema implements updateCartItemRequest {
-  @Field()
+  @Field({ nullable: true })
   productId?: string;
 
-  @Field()
+  @Field({ nullable: true })
   quantity?: number;
 }
 
 @InputType()
-export class deleteCartItemRequestSchema implements deleteCartItemRequest{
+export class deleteCartItemRequestSchema implements deleteCartItemRequest {
   @Field()
   productId: string;
 }
@@ -119,24 +131,36 @@ export class deleteCartItemRequestSchema implements deleteCartItemRequest{
 
 @ObjectType()
 export class Cart {
-  @Field()
+  @Field({ nullable: true })
   id?: string;
 
-  @Field()
+  @Field({ nullable: true })
   userId?: string;
 
-  @Field(type => [CartItem])
+  @Field(type => [CartItem], { nullable: true })
   items?: CartItem[];
 }
 
 @ObjectType()
 export class CartResponse {
   @Field()
-  error?: string;
+  code: number;
 
+  @Field(type => Cart, { nullable: true })
+  data?: Cart
+}
+
+@ObjectType()
+export class DeleteMessageSchema implements DeleteMessage {
+  @Field()
+  message: Message;
+}
+
+@ObjectType()
+export class DeleteCartResponse implements deleteCartSuccessResponse {
   @Field()
   code: number;
 
-  @Field(type => Cart)
-  data?: Cart
+  @Field(type => DeleteMessageSchema, { nullable: true })
+  data: DeleteMessageSchema;
 }
