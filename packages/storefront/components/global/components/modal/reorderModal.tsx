@@ -80,7 +80,7 @@ const ReorderModal: React.FC<Props> = ({
                 ''
               )}
               <div className="flex justify-center py-4">
-                <Link href="/checkout" passHref>
+                <Link href="/cart" passHref>
                   <button
                     className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
                     onClick={() => {
