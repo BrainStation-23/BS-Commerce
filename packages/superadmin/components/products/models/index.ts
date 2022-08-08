@@ -76,6 +76,7 @@ export interface TemplateInteface {
   component?: any;
   placeholder?: string;
   ismulti?: boolean;
+  disabled?: boolean;
 }
 export interface tagsOption {
   label?: string;

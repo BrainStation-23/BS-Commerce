@@ -1,7 +1,8 @@
+import { FC } from 'react';
+import { Brand } from 'models';
 import BrandInfoCard from '@/components/brands/cards/brandInfoCard';
 import BrandMetaCard from '@/components/brands/cards/metaCard';
-const ViewBrand = (props: any) => {
-  const { brand } = props;
+const ViewBrand: FC<{ brand: Brand }> = ({ brand }) => {
   return (
     <>
       {brand ? (
