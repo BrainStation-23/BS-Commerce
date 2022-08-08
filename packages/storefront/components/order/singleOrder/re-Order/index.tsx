@@ -70,7 +70,6 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const toCart = async () => {
     if (newProduct.length > 0) {
       newProduct.forEach((product: any) => {
-        console.log(product);
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',
