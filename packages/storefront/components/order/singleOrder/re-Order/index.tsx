@@ -27,6 +27,8 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const allProductsId = allProducts.map((prod) => {
     return prod.id;
   });
+  console.log(products);
+
   const closeCartModal = () => {
     setShowCartModal(false);
     setUnavailableProd([]);
@@ -68,15 +70,15 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   };
   const toCart = async () => {
     if (newProduct.length > 0) {
-      newProduct.forEach((product: IProductOrderData) => {
+      newProduct.forEach((product: any) => {
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',
           fullDescription: 'full des',
           sku: 'sku',
-          price: 50,
+          price: product.totalPrice,
           oldPrice: 40,
-          cost: 50,
+          cost: 10,
           showOnHomePage: true,
           includeInTopMenu: true,
           allowToSelectPageSize: true,
@@ -99,15 +101,15 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       });
     }
     if (cartToken) {
-      products.forEach((product) => {
+      products.forEach((product: any) => {
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',
           fullDescription: 'full des',
           sku: 'sku',
-          price: 50,
+          price: product.totalPrice,
           oldPrice: 40,
-          cost: 50,
+          cost: product.totalPrice,
           showOnHomePage: true,
           includeInTopMenu: true,
           allowToSelectPageSize: true,
