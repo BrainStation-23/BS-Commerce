@@ -6,7 +6,7 @@ import { User } from 'src/entity/user';
 import { CartResponse, deleteCartItemRequestSchema, deleteCartRequestSchema, DeleteCartResponse, ItemInput, updateCartItemRequestSchema } from './cart.model';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Helper } from 'src/helper/helper.interface';
-@UseGuards(new RolesGuard(['admin']))
+@UseGuards(new RolesGuard(['customer']))
 @Resolver()
 export class CartResolver {
   constructor(private cartService: CartService, private helper: Helper) { }
