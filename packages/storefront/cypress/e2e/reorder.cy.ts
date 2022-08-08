@@ -22,6 +22,7 @@ describe('Login to storefront & view checkout', () => {
     cy.get('.h-10 > path').click();
   });
   it('should go to the Order Page', () => {
+    cy.wait(1500);
     //go to order Page
     cy.get('#menu-icon').click();
     cy.get('#user-name');
@@ -31,7 +32,33 @@ describe('Login to storefront & view checkout', () => {
     cy.get('#sidebar-close').click();
   });
   it('should go to the Order Page', () => {
+    cy.wait(1500);
     cy.contains('span', 'Details').click();
+  });
+  it('should select reorder option', () => {
+    cy.wait(1500);
+    cy.contains('button', 'Reorder').click();
+  });
+  it('should take decisions for reorder and proceed to cart page', () => {
+    cy.wait(1500);
+    cy.contains('button', 'Yes').click();
+  });
+  it('should proceed to checkout', () => {
+    cy.wait(1500);
+    cy.contains('button', 'PROCEED TO CHECKOUT').click();
+  });
+  it('should add a new address', () => {
+    cy.get('#firstName').type('Himel B');
+    cy.get('#lastName').type('ABC');
+    cy.get('#contact').type('0133332212');
+    cy.get('#addressLine1').type('Mirpur');
+    cy.get('#addressLine2').type('Gram');
+    cy.get('#city').type('Dhaka');
+    cy.get('#postCode').type('1234');
+    cy.get('#tag2').type('Other');
+    cy.contains('button', 'Continue to shipping').click();
+    cy.contains('button', 'Continue to payment').click();
+    cy.contains('button', 'Pay now').click();
   });
 });
 

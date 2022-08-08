@@ -18,7 +18,7 @@ const CartProductList: NextComponentType = () => {
               <div className="flex flex-wrap items-center justify-between">
                 <div className="flex flex-wrap items-center">
                   <div className="relative">
-                    <Image
+                    <img
                       src={data?.product?.photos![0]?.url!}
                       alt={data?.product?.photos![0]?.alt!}
                       className="w-20 rounded-lg border"
