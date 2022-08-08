@@ -2,14 +2,15 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 
-import { CreateBrandRequest } from 'models';
+import { Brand, CreateBrandRequest } from 'models';
 
 import { userAPI } from '@/APIs';
 import BrandInfoForm from '@/components/brands/forms/brandInfoForm';
 import BrandMetaForm from '@/components/brands/forms/brandMetaForm';
 import { brandSchema } from '@/components/brands/schema/brandsSchema';
+import { FC } from 'react';
 
-const CreateBrand: NextComponentType = () => {
+const CreateBrand: FC = () => {
   const router = useRouter();
 
   const handleSubmit = (data: CreateBrandRequest) => {
@@ -41,8 +42,8 @@ const CreateBrand: NextComponentType = () => {
           };
           const meta = {
             keywords: values?.keywords,
-            metaTitle: values?.metaTitle,
-            metaDescription: values?.metaDescription,
+            title: values?.metaTitle,
+            description: values?.metaDescription,
             SEFN: values?.SEFN,
           };
           const newData = {
