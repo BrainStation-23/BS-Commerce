@@ -27,7 +27,6 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const allProductsId = allProducts.map((prod) => {
     return prod.id;
   });
-  console.log(products);
 
   const closeCartModal = () => {
     setShowCartModal(false);
