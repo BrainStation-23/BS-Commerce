@@ -166,8 +166,8 @@ export class OrderResponseEntity {
 
 //sorting query entity
 export enum SortTypesDto {
-  ascending = 'ascending',
-  descending = 'descending'
+  asc = 'asc',
+  desc = 'desc'
 }
 export class OrderSortQuery {
   sortField?: string;
