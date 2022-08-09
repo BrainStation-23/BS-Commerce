@@ -1,6 +1,6 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TagsService } from '../services';
 import {
   CreateTagErrorResponseDto,
@@ -9,6 +9,7 @@ import {
   GetTagsErrorResponseDto,
   GetTagsSuccessResponseDto
 } from './dto';
+import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('tags')
 @ApiTags('Tags API')
@@ -32,6 +33,8 @@ export class TagsController {
     return { code, ...response };
   }
 
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
   @Post()
   @ApiResponse({
     description: 'Create Tag Success Response',

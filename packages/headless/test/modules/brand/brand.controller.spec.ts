@@ -1,13 +1,11 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, getDemoUserToken, testUserId, testUsername } from '../../test-utility';
+import { connectTestDatabase, GetDemoUserToken, TestAdminId, TestAdminUsername } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { CreateBrandRequestDto } from 'src/modules/brands/rest/dto/createBrandDto';
-import { GetAllBrandsDto } from '../../../src/modules/brands/rest/dto/getAllBrandsDto';
 import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
 import { BrandController } from 'src/modules/brands/rest/brand.controller';
-import { Brand } from 'src/entity/brand';
 import { BrandDto } from 'src/modules/brands/rest/dto/brandDto';
 
 
@@ -17,7 +15,7 @@ describe('Initializing Brand controller testing', () => {
     
     let brandId: string = "ed1b4494-875b-40c3-853c-dfc0776ccd62";
     const invalidBrandId: string = '343434sfsdfsd';
-    const token = getDemoUserToken(testUserId, testUsername, 'admin').token;
+    const token = GetDemoUserToken(TestAdminId, TestAdminUsername, 'admin').token;
 
     const brand: BrandDto = {
         id: "37456834756345",
@@ -131,8 +129,8 @@ describe('Initializing Brand controller testing', () => {
     });
 
     afterAll(async () => {
-        // remove test databse collection if required
-        // await removeTestCollection('brands');
+        // remove test database collection if required
+        // await removeTestCollection('compares');
         await app.close();
     });
 
