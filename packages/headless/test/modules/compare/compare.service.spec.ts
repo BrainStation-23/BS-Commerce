@@ -1,20 +1,15 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { AddToCompareDto } from 'src/modules/compare/dto/compare.dto';
 import { CompareService } from 'src/modules/compare/services';
 import {
   connectTestDatabase,
-  testProductId,
-  testTimeout,
-  testUserId,
+  TestProductId,
+  TestCustomerId,
 } from '../../test-utility';
 
-// const token = getDemoUserToken(testUserId, testUsername).token;
-const timeout = testTimeout;
-const userId = testUserId;
-const productId = testProductId;
-const compareDto: AddToCompareDto = { productId };
+const userId = TestCustomerId;
+const productId = TestProductId;
 
 describe('Initializing... compare service testing', () => {
   let app: INestApplication;
@@ -32,7 +27,7 @@ describe('Initializing... compare service testing', () => {
   });
 
   afterAll(async () => {
-    // remove test databse collection if required
+    // remove test database collection if required
     // await removeTestCollection('compares');
     await app.close();
   });
@@ -40,7 +35,6 @@ describe('Initializing... compare service testing', () => {
   describe('testing POST /compare', () => {
     it('should return compare object', async () => {
       const response = await service.addItemToCompare(userId, productId);
-      // console.log({ response });
       expect(response.code).toBe(200);
     });
   });
