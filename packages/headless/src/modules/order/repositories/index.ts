@@ -1,4 +1,4 @@
-import { IOrderCreateData, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
@@ -8,7 +8,6 @@ import {
   OrderIncompleteStatEntity, 
   OrderStatEntity, 
   ChangeStatusEntity, 
-  OrderResponseEntity, 
   OrderSortQuery
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
@@ -17,14 +16,14 @@ import { IOrderDatabase } from './order.db.interface';
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
 
-  async createOrder(userId: string, body: IOrderCreateData): Promise<OrderEntity> {
+  async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
     const orderId = await this.generateUniqueId();
   
     const newBody = {...body, orderId};
     return await this.db.createOrder(userId, newBody);
   }
 
-  async addPhotoDetails(products: IProductOrderData[]): Promise<IProductOrderData[]>{
+  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
     return await this.db.addPhotoDetails(products);
   }
 
@@ -54,7 +53,7 @@ export class OrderRepository {
     return await this.db.getOrderListByUserId(userId, sortObj);
   }
 
-  async getOrderById(orderId: string): Promise<OrderResponseEntity>{
+  async getOrderById(orderId: string): Promise<OrderEntity>{
     return await this.db.getOrderById(orderId);
   }
 

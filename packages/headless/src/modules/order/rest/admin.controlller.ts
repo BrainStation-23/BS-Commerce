@@ -6,9 +6,9 @@ import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { ChangeStatusDto, OrderIncompleteStatDto, OrderStatDto, OrderStatusEnumDto } from './dto/admin.response.dto';
-import { OrderData } from './dto/order.response.dto';
 import { OrderAdminService } from '../services/admin.service';
 import { AllOrderResponseDto, GetAllOrderQueryDto } from './dto/allOrderList.dto';
+import { OrderDto } from './dto/order.dto';
 
 @ApiTags('Order - Admin API')
 @UseGuards(new RolesGuard(['admin']))
@@ -49,10 +49,10 @@ export class OrderAdminController {
         return response;
     }
 
-    @ApiResponse({type: OrderData, description:"Order details by order id"})
+    @ApiResponse({type: OrderDto, description:"Order details by order id"})
     @ApiParam({name: 'orderId', example:'84dab8b9-8461-4f2f-9863-b6934ed9cc27'})
     @Get(':orderId')
-    async getOrderById(@Param('orderId') orderId: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderData>>{
+    async getOrderById(@Param('orderId') orderId: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderDto>>{
         
         const {code, ...response} = await this.orderAdminService.getOrderById(orderId);
 
@@ -62,7 +62,7 @@ export class OrderAdminController {
 
     @ApiBody({type: ChangeStatusDto}) 
     @Patch('change-status')
-    async changeStatus(@Body() body: ChangeStatusDto, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderData>>{
+    async changeStatus(@Body() body: ChangeStatusDto, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<OrderDto>>{
         const {code, ...response} = await this.orderAdminService.changeStatus( body);
         res.status(code);
         return response;

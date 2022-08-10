@@ -1,8 +1,9 @@
+import { CreateOrderProduct } from './../rest/dto/order.create.dto';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { IOrderCreateData, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
 
 import { OrderSortQuery } from './../../../entity/order';
-import { OrderEntity, OrderListResponseEntity, OrderResponseEntity } from 'src/entity/order';
+import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { OrderRepository } from '../repositories';
@@ -13,8 +14,8 @@ export class OrderCustomerService {
 
   async createOrder(
     userId: string,
-    body: IOrderCreateData,
-    products: IProductOrderData[]
+    body: CreateOrderRequest,
+    products: CreateProductOrderDetails[]
   ): Promise<IServiceResponse<OrderEntity>> {
     const productListWithPhoto = await this.orderRepository.addPhotoDetails(products);
     const newOrder = {...body, products: productListWithPhoto};
@@ -51,11 +52,11 @@ export class OrderCustomerService {
     return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
   }
 
-  async getOrderByOrderId( orderId: string ): Promise<IServiceResponse<OrderResponseEntity>> {
+  async getOrderByOrderId( orderId: string ): Promise<IServiceResponse<OrderEntity>> {
     const orderInfo = await this.orderRepository.getOrderById(orderId);
 
     if (orderInfo) {
-      const response: OrderResponseEntity = orderInfo ;
+      const response: OrderEntity = orderInfo ;
       return successResponse(OrderEntity, response);
     }
    return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
