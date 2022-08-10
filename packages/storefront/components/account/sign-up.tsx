@@ -23,41 +23,41 @@ const Signup = () => {
   let loggedInUsingEmail = false;
 
   async function handleSignUp(data: CreateCustomerRequest | any) {
-    console.log(data);
-    // try {
-    //   setLoading(true);
-    //   await userAPI.signUp(data).then((response: any) => {
-    //     if (response?.code !== 201) {
-    //       if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
-    //         toast.warning('User with this email already exists', {
-    //           containerId: 'bottom-right',
-    //         });
-    //         setLoading(false);
-    //       } else if (
-    //         response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
-    //       ) {
-    //         toast.warning('User with this phone number already exists', {
-    //           containerId: 'bottom-right',
-    //         });
-    //         setLoading(false);
-    //       }
-    //     } else {
-    //       setLoading(false);
-    //       toast.success(
-    //         'Account created successfully! Please login to continue.',
-    //         {
-    //           containerId: 'bottom-right',
-    //         }
-    //       );
-    //       router.push('/account/sign-in');
-    //     }
-    //   });
-    // } catch (error) {
-    //   setLoading(false);
-    //   toast.error('User creation failed. Try again.', {
-    //     containerId: 'bottom-right',
-    //   });
-    // }
+    //console.log(data);
+    try {
+      setLoading(true);
+      await userAPI.signUp(data).then((response: any) => {
+        if (response?.code !== 201) {
+          if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+            toast.warning('User with this email already exists', {
+              containerId: 'bottom-right',
+            });
+            setLoading(false);
+          } else if (
+            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
+          ) {
+            toast.warning('User with this phone number already exists', {
+              containerId: 'bottom-right',
+            });
+            setLoading(false);
+          }
+        } else {
+          setLoading(false);
+          toast.success(
+            'Account created successfully! Please login to continue.',
+            {
+              containerId: 'bottom-right',
+            }
+          );
+          router.push('/account/sign-in');
+        }
+      });
+    } catch (error) {
+      setLoading(false);
+      toast.error('User creation failed. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
   }
 
   if (loading) {
@@ -144,6 +144,7 @@ const Signup = () => {
                       </div>
                       <div className="flex flex-wrap items-center gap-x-3">
                         <div
+                          id="toggle-btn"
                           className="flex h-6 w-12 cursor-pointer items-center rounded-full bg-green-600/100 p-1"
                           onClick={() => {
                             setToggle(!toggle);

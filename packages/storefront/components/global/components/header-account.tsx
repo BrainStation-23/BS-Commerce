@@ -151,7 +151,10 @@ const HeaderAccount: React.FC<Properties> = () => {
           ) : (
             <>
               <Link href={links[0].link}>
-                <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                <a
+                  id="registerbtn"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                >
                   {links[0].name}
                 </a>
               </Link>
