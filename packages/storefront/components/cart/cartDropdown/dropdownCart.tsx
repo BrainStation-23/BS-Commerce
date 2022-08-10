@@ -198,11 +198,13 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="border-x-2 px-6 py-2">
                       <Link href="/cart" passHref>
-                        <Buttons
-                          bgColor="bg-slate-300"
-                          height={10}
-                          text={'VIEW CART'}
-                        />
+                        <a>
+                          <Buttons
+                            bgColor="bg-slate-300"
+                            height={10}
+                            text={'VIEW CART'}
+                          />
+                        </a>
                       </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">

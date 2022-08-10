@@ -140,6 +140,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
         <button
           onClick={handleReorder}
           className="rounded bg-green-700 py-2 px-8 font-bold text-white hover:bg-black"
+          id="re-order"
         >
           Reorder
         </button>
