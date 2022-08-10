@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import Image from 'next/image';
+import _ from 'lodash';
 
-import { ResponseItem } from 'models';
+import { useEffect, useRef, useState } from 'react';
+
+import { ResponseItem, updateCartItemRequest } from 'models';
 import { useAppDispatch } from 'customHooks/hooks';
-import { deleteCartItem, updateCartItem } from 'toolkit/cartSlice';
+import {
+  deleteCartItem,
+  storeAllCartItems,
+  updateCartItem,
+} from 'toolkit/cartSlice';
+import { userAPI } from 'APIs';
 
 interface Props {
   data: ResponseItem;
@@ -18,12 +26,30 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
     quantity: data?.quantity,
   });
 
+  const handleUpdateCart = async (updatedCartItem: updateCartItemRequest) => {
+    const cart = await userAPI.updateCartItem(updatedCartItem);
+    dispatch(storeAllCartItems(cart?.data?.items!));
+    dispatch(updateCartItem(updatedCartItem));
+  };
+
+  const debouncedUpdateCartItem = useRef(
+    _.debounce(async (updatedCartItem: updateCartItemRequest) => {
+      await handleUpdateCart(updatedCartItem);
+    }, 1000)
+  ).current;
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateCartItem.cancel();
+    };
+  }, [debouncedUpdateCartItem]);
+
   return (
     <div key={data?.productId} className="p-4">
       <div className="flex-col-3 flex items-center rounded-lg border bg-white">
         <div className="relative mr-4">
-          <img
-            src={data?.product?.photos![0]?.url}
+          <Image
+            src={data?.product?.photos![0]?.url!}
             alt="Product Image"
             height={110}
             width={110}
@@ -73,12 +99,10 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                       productId: data?.productId,
                       quantity: _quantity,
                     });
-                    dispatch(
-                      updateCartItem({
-                        productId: itemToUpdate?.productId,
-                        quantity: _quantity,
-                      })
-                    );
+                    debouncedUpdateCartItem({
+                      productId: data?.productId,
+                      quantity: _quantity,
+                    });
                     setTotal(total - data?.product?.info?.price!);
                   }}
                 >
@@ -93,12 +117,10 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                       productId: data?.productId,
                       quantity: _quantity,
                     });
-                    dispatch(
-                      updateCartItem({
-                        productId: itemToUpdate?.productId,
-                        quantity: _quantity,
-                      })
-                    );
+                    debouncedUpdateCartItem({
+                      productId: data?.productId,
+                      quantity: _quantity,
+                    });
                     setTotal(total + data?.product?.info?.price!);
                   }}
                 >

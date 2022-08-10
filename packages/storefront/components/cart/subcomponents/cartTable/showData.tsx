@@ -1,10 +1,17 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import _ from 'lodash';
+import Image from 'next/image';
+
+import { useEffect, useRef, useState } from 'react';
 
 import { useAppDispatch } from 'customHooks/hooks';
-import { deleteCartItem, updateCartItem } from 'toolkit/cartSlice';
-import { ResponseItem } from 'models';
+import {
+  deleteCartItem,
+  storeAllCartItems,
+  updateCartItem,
+} from 'toolkit/cartSlice';
 import { userAPI } from 'APIs';
+import { updateCartItemRequest } from 'models';
 
 const ShowData = ({ data }: any) => {
   const dispatch = useAppDispatch();
@@ -20,15 +27,34 @@ const ShowData = ({ data }: any) => {
     dispatch(deleteCartItem(data));
   };
 
+  const handleUpdateCart = async (updatedCartItem: updateCartItemRequest) => {
+    const cart = await userAPI.updateCartItem(updatedCartItem);
+    dispatch(storeAllCartItems(cart?.data?.items!));
+    dispatch(updateCartItem(updatedCartItem));
+  };
+
+  const debouncedUpdateCartItem = useRef(
+    _.debounce(async (updatedCartItem: updateCartItemRequest) => {
+      await handleUpdateCart(updatedCartItem);
+    }, 1000)
+  ).current;
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateCartItem.cancel();
+    };
+  }, [debouncedUpdateCartItem]);
+
   return (
     <>
       <tr key={data.productId}>
         <td className="border border-slate-300 px-8 py-2 md:px-4">
-          <img
+          <Image
             src={data?.product?.photos[0]?.url}
             alt="product Image"
             width={100}
             height={90}
+            //layout="fixed"
           />
         </td>
         <td className="border border-slate-300 text-center md:px-2 lg:px-20">
@@ -68,12 +94,11 @@ const ShowData = ({ data }: any) => {
                       productId: data?.productId,
                       quantity: _quantity,
                     });
-                    dispatch(
-                      updateCartItem({
-                        productId: itemToUpdate?.productId,
-                        quantity: _quantity,
-                      })
-                    );
+
+                    debouncedUpdateCartItem({
+                      productId: data?.productId,
+                      quantity: _quantity,
+                    });
                   }}
                 >
                   -
@@ -86,12 +111,10 @@ const ShowData = ({ data }: any) => {
                       productId: data?.productId,
                       quantity: _quantity,
                     });
-                    dispatch(
-                      updateCartItem({
-                        productId: itemToUpdate?.productId,
-                        quantity: _quantity,
-                      })
-                    );
+                    debouncedUpdateCartItem({
+                      productId: data?.productId,
+                      quantity: _quantity,
+                    });
                   }}
                 >
                   +
