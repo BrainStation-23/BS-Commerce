@@ -1,5 +1,7 @@
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
 import { ResponseItem } from 'models';
@@ -8,7 +10,6 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
-import Image from 'next/image';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -196,13 +197,15 @@ const CartDropdown: NextComponentType = () => {
                       </span>
                     </div>
                     <div className="border-x-2 px-6 py-2">
-                      <a href="/cart">
-                        <Buttons
-                          bgColor="bg-slate-300"
-                          height={10}
-                          text={'VIEW CART'}
-                        />
-                      </a>
+                      <Link href="/cart" passHref>
+                        <a>
+                          <Buttons
+                            bgColor="bg-slate-300"
+                            height={10}
+                            text={'VIEW CART'}
+                          />
+                        </a>
+                      </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">
                       <button

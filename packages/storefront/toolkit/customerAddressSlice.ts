@@ -28,10 +28,13 @@ export const customerAddressSlice = createSlice({
       );
       state.addresses = newAddressList;
     },
+    resetAddress: (state: CustomerAddressState) => {
+      state.addresses = initialState.addresses;
+    },
   },
 });
 
-export const { storeAddresses, deleteAddress } =
+export const { storeAddresses, deleteAddress, resetAddress } =
   customerAddressSlice.actions;
 
 export default customerAddressSlice.reducer;

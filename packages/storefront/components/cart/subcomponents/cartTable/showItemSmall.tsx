@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { ResponseItem } from 'models';
 import { useAppDispatch } from 'customHooks/hooks';
@@ -22,8 +23,8 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
     <div key={data?.productId} className="p-4">
       <div className="flex-col-3 flex items-center rounded-lg border bg-white">
         <div className="relative mr-4">
-          <img
-            src={data?.product?.photos![0]?.url}
+          <Image
+            src={data.product?.photos![0].url!}
             alt="Product Image"
             height={110}
             width={110}
@@ -50,7 +51,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           </span>
         </div>
         <div className="col-span-2 justify-between px-4 leading-normal">
-          <h5 className="mb-2 mb-3 text-lg font-bold text-gray-900">
+          <h5 className="mb-3 text-lg font-bold text-gray-900">
             {data?.product?.info?.name}
           </h5>
           <div className="mb-4 flex gap-x-3">

@@ -37,12 +37,11 @@ const WishlistBody: React.FC<Props> = (props) => {
                 passHref
               >
                 <div className="w-50 relative flex cursor-pointer flex-col items-center justify-center">
-                  <Image
+                  <img
                     src={data.product?.photos![0].url!}
                     alt={data.product?.info.shortDescription}
                     width={productImageWidth}
                     height={productImageHeight}
-                    layout="fixed"
                   />
 
                   <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">

@@ -1,11 +1,12 @@
-import { userAPI } from '@/APIs';
-import BrandsList from '@/components/brands/brandsList';
-import { Brand } from 'models';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
+import { Brand } from 'models';
+import { userAPI } from '@/APIs';
+import BrandsList from '@/components/brands/brandsList';
+import SearchWindowBrands from '@/components/brands/searchWindowBrands';
 
 const Brands: NextPage = () => {
-  const [brands, setBrands] = useState<Brand[] | undefined>();
+  const [brands, setBrands] = useState<Brand[]>();
   const getAllBrands = async () => {
     const brandsList = await userAPI.getBrands();
     if (brandsList) setBrands(brandsList);
@@ -24,7 +25,7 @@ const Brands: NextPage = () => {
         </div>
 
         <div>
-          {/* <SearchWindow setBrands={setBrands} allbrands={brands} /> */}
+          <SearchWindowBrands setBrands={setBrands} allbrands={brands!} />
           {brands ? (
             <BrandsList brandsList={brands} setBrands={setBrands} />
           ) : (

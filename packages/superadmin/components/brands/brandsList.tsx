@@ -14,7 +14,7 @@ interface Props {
 const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(7);
-  const [ProductID, setProductID] = useState('');
+  const [BrandID, setBrandID] = useState('');
 
   const onChangeForList = async () => {
     const brandsList = await userAPI.getBrands();
@@ -22,7 +22,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   };
 
   const deleteProductFunction = async () => {
-    const res = await userAPI.deleteProduct(ProductID);
+    const res = await userAPI.deleteBrand(BrandID);
     if (res) {
       onChangeForList();
     }
@@ -33,7 +33,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
   };
 
   const onClickForDelete = (id: string) => {
-    setProductID(id);
+    setBrandID(id);
     setModal({ ...modal, delete: true });
   };
   const [modal, setModal] = useState({
@@ -49,44 +49,44 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'Brand name',
       path: 'name',
-      content: (data: Brand, key: any) => (
+      content: (data: Brand, key: keyof typeof data.info) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: 'Display Order',
       path: 'displayOrder',
-      content: (data: Brand, key: any) => (
+      content: (data: Brand, key: keyof typeof data.info) => (
         <td className="text-center align-middle">{data?.info[key]}</td>
       ),
     },
     {
       label: 'Published',
       path: 'published',
-      content: (data: Brand, key: any) => (
-        <td className="p-auto m-auto text-center">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+      content: (data: Brand, key: keyof typeof data.info) => (
+        <td className="p-auto m-auto text-center align-middle">
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : 'X'}
         </td>
       ),
     },
     {
       label: 'Allow To Select Page Size',
       path: 'allowToSelectPageSize',
-      content: (data: Brand, key: any) => (
-        <td className="p-auto m-auto text-center">
-          {data?.info[key] ? <i className="bi bi-check-lg"></i> : '-'}
+      content: (data: Brand, key: keyof typeof data.info) => (
+        <td className="p-auto m-auto text-center align-middle">
+          {data?.info[key] ? <i className="bi bi-check-lg"></i> : 'X'}
         </td>
       ),
     },
     {
       label: 'Edit',
       path: 'id',
-      content: (data: Brand, key: any) => (
+      content: (data: Brand) => (
         <td className="text-center align-middle">
           <Link
             href={{
               pathname: `/Brands/Edit/[id]`,
-              query: { id: data?.[key] },
+              query: { id: data.id },
             }}
             passHref
           >
@@ -103,12 +103,12 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     {
       label: 'View',
       path: 'id',
-      content: (data: Brand, key: any) => (
+      content: (data: Brand) => (
         <td className="text-center align-middle">
           <Link
             href={{
               pathname: `/Brands/View/[id]`,
-              query: { id: data?.[key] },
+              query: { id: data.id },
             }}
             passHref
           >

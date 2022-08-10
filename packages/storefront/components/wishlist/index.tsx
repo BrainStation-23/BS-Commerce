@@ -57,21 +57,15 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.error('Wishlist cleared');
+      toast.error('Wishlist cleared', {
+        containerId: 'bottom-right',
+      });
     } catch (error) {
-      toast.error('Error happened. Please try again.');
+      toast.error('Error happened. Please try again.', {
+        containerId: 'bottom-right',
+      });
     }
   };
-
-  // async function handleClick(data: string) {
-  //   try {
-  //     await userAPI.deleteWishlistItem(data);
-  //     toast.success('Item removed from wishlist');
-  //     dispatch(deleteItemFromWishlist(data));
-  //   } catch (error) {
-  //     toast.error('Failed to remove item from wishlist');
-  //   }
-  // }
 
   return (
     <div className="mb-7">
