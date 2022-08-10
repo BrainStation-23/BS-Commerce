@@ -4,7 +4,7 @@ import { Otp } from 'src/entity/otp';
 import { ICustomerDatabase } from 'src/modules/customer/repositories/customer.database.interface';
 import { OtpModel } from '../otp/otp.model';
 import { CustomerModel } from './customer.model';
-const FIVE_MINUTES = 5 * 60 * 1000;
+const ONE_HOUR = 60 * 60 * 1000;
 
 @Injectable()
 export class CustomerDatabase implements ICustomerDatabase {
@@ -15,7 +15,7 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
     const otp = await OtpModel.findOne(query);
-    if (otp) await this.updateOtp(query, { passwordExpireTime: Date.now() + FIVE_MINUTES });
+    if (otp) await this.updateOtp(query, { passwordExpireTime: Date.now() + ONE_HOUR, isVerified: true });
     return otp;
   }
 

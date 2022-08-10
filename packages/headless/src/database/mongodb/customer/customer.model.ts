@@ -45,8 +45,7 @@ const CustomerSchema = new Schema<Customer>({
     unique: true,
     default: () => randomUUID()
   },
-  firstName: String,
-  lastName: String,
+  name: String,
   phone: {
     type: String,
     index: true
@@ -59,14 +58,6 @@ const CustomerSchema = new Schema<Customer>({
     type: String,
     required: true,
     index: true,
-  },
-  otp: {
-    type: String,
-    index: true
-  },
-  otpVerified: {
-    type: Boolean,
-    default: false
   },
   addresses: [CustomerAddressSchema]
 }, {

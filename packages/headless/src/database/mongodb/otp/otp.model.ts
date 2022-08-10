@@ -8,6 +8,10 @@ const OtpSchema = new Schema<Otp>({
     type: Number,
     unique: true,
   },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
   otpExpireTime: Number,
   passwordExpireTime: Number,
 }, {

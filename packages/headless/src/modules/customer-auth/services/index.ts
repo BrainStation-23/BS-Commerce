@@ -38,6 +38,9 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
+    const otpVerified = await this.customerRepo.findOtp({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { isVerified: true, passwordExpireTime: { $gt: Date.now() } }] });
+    if (!otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
     customer.password = await bcrypt.hash(data.password, authConfig.salt!);
@@ -58,7 +61,7 @@ export class CustomerAuthService {
     const randomOtp = 100000 + Math.floor(Math.random() * 900000);
 
     if (otpExists) {
-      const otpUpdated = (data.email || data.phone) && await this.customerRepo.updateOtp({ $or: [{ email: data.email }, { phone: data.phone }] }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES });
+      const otpUpdated = (data.email || data.phone) && await this.customerRepo.updateOtp({ $or: [{ email: data.email }, { phone: data.phone }] }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false });
       if (!otpUpdated) return this.helper.serviceResponse.errorResponse(SendCreateCustomerOtpErrorMessages.CAN_NOT_UPDATE_OTP, null, HttpStatus.BAD_REQUEST);
       return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
     }
