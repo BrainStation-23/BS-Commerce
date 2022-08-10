@@ -1,5 +1,6 @@
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
 import { ResponseItem } from 'models';
@@ -42,6 +43,13 @@ const CartDropdown: NextComponentType = () => {
     if (!token) setModalOn(true);
     else {
       router.push('/checkout');
+    }
+  };
+
+  const handleClickViewCart = () => {
+    if (!token) setModalOn(true);
+    else {
+      router.push('/cart');
     }
   };
 
@@ -201,13 +209,19 @@ const CartDropdown: NextComponentType = () => {
                       </span>
                     </div>
                     <div className="border-x-2 px-6 py-2">
-                      <a href="/cart">
-                        <Buttons
-                          bgColor="bg-slate-300"
-                          height={10}
-                          text={'VIEW CART'}
-                        />
-                      </a>
+                      <Link href="/cart" passHref>
+                        <a>
+                          <button
+                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                            onClick={() => {
+                              handleClickViewCart;
+                              setCartTotal(!cartTotal);
+                            }}
+                          >
+                            VIEW CART
+                          </button>
+                        </a>
+                      </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">
                       <button

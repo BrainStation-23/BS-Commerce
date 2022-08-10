@@ -26,10 +26,10 @@ const BrandMetaCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
         </div>
         <div className="" id="prouctInfoTab">
           <div className="card-body">
-            <SingleView label="brand cost" value={brand?.meta?.keywords} />
-            <SingleView label="brand cost" value={brand?.meta?.description} />
-            <SingleView label="brand cost" value={brand?.meta?.title} />
-            <SingleView label="brand cost" value={brand?.meta?.SEFN} />
+            <SingleView label="Keywords" value={brand?.meta?.keywords} />
+            <SingleView label="Description" value={brand?.meta?.description} />
+            <SingleView label="Title" value={brand?.meta?.title} />
+            <SingleView label="SEFN" value={brand?.meta?.SEFN} />
           </div>
         </div>
       </div>

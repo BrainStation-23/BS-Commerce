@@ -1,24 +1,24 @@
-import Image from "next/image";
-import React, { FC } from "react";
+import Image from 'next/image';
 
-import Container from "@/components/global/components/container";
+import Container from '@/components/global/components/container';
 
-const ImageWithDescription: FC = () => {
+const ImageWithDescription: React.FC = () => {
   return (
     <Container>
-      <div className="flex items-center justify-center flex-col">
-        <div className="w-full m-auto mb-5">
+      <div className="flex flex-col items-center justify-center">
+        <div className="m-auto mb-5 w-full">
           <Image
             src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about1_71e1f591-e3d4-456e-be12-03e0afed0c73.jpg?v=1588135206"
             width="1504"
             height="580"
+            alt="about"
           />
         </div>
-        <h1 className="text-xl capitalize mb-5">
+        <h1 className="mb-5 text-xl capitalize">
           We Are A Digital Agency Focused On Delivering Content And Utility
           User-Experiences.
         </h1>
-        <p className="text-center text-sm max-w-4xl mx-auto">
+        <p className="mx-auto max-w-4xl text-center text-sm">
           Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus.
           Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend
           feugiat lectus laoreet, vel nunc taciti integer cras. Hac pede dis,
@@ -30,6 +30,7 @@ const ImageWithDescription: FC = () => {
           src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about-us-signature_medium.png?v=1588134272"
           width="228"
           height="129"
+          alt="about"
         />
       </div>
     </Container>

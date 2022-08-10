@@ -1,7 +1,7 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { CreateManufacturerDto } from 'src/modules/manufacturer/dto';
+import { CreateManufacturerDto } from 'src/modules/manufacturer/rest/dto';
 import { ManufacturerController } from 'src/modules/manufacturer/rest/manufacturer.controller';
 
 import * as request from 'supertest';

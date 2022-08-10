@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
+
 import {
   CustomerProduct,
   Product,
@@ -61,7 +62,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = async (event: any) => {
+  const handleAddToCart = async () => {
     if (token) {
       const cartProduct = {
         id: product.id!,
@@ -75,14 +76,13 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       };
       // toast.success('+1 Item added to cart');
       if (!productInCart) {
-        toast(<CartToast product={product} />);
-        event.preventDefault();
+        toast(<CartToast product={product} />, {
+          containerId: 'bottom-left',
+        });
         const cart = await userAPI.addToCart({
           productId: cartItem.productId,
           quantity: 1,
         });
-        //
-        console.log(cart);
         dispatch(storeAllCartItems(cart?.data?.items!));
         dispatch(addToCart(cartItem));
         // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
@@ -90,14 +90,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     } else {
       dispatch(setLoginModalState(!modalOn));
     }
-    event.preventDefault();
   };
 
   const handleAddToCompare = async () => {
     try {
       await userAPI.addToCompare(product?.id!);
     } catch (error) {
-      toast.error('Error happend.');
+      toast.error('Error happend.', {
+        containerId: 'bottom-right',
+      });
     }
   };
 
@@ -113,10 +114,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           const newWishlist = await userAPI.getCustomerWishlist(token);
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
-        toast.success('Item added to wishlist');
+        toast.success('Item added to wishlist', {
+          containerId: 'bottom-right',
+        });
         inWishlist = true;
       } catch (error) {
-        toast.error('Failed to add item to wishlist');
+        toast.error('Failed to add item to wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setLoginModalState(!modalOn));
@@ -127,11 +132,15 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist');
+        toast.error('Item removed from wishlist', {
+          containerId: 'bottom-right',
+        });
         dispatch(deleteItemFromWishlist(productId));
         inWishlist = false;
       } catch (error) {
-        toast.error('Failed to remove item from wishlist');
+        toast.error('Failed to remove item from wishlist', {
+          containerId: 'bottom-right',
+        });
       }
     } else {
       dispatch(setLoginModalState(!modalOn));
@@ -150,7 +159,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={handleAddToCart}
+            onClick={(event: any) => {
+              handleAddToCart();
+              event.preventDefault();
+            }}
           >
             <path
               strokeLinecap="round"

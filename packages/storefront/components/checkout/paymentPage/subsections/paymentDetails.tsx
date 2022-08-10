@@ -1,19 +1,16 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { toast } from 'react-toastify';
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import CreditCard from '@/components/global/icons-for-checkout-page/credit-card';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
-import { useRouter } from 'next/router';
-import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+
 import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
-import React from 'react';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { paymentSchema } from '@/components/global/schemas/checkout.schema';
+import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 
 interface FormData {
   cardNumber: string;
@@ -34,6 +31,7 @@ interface FormData {
 const PaymentDetails: NextComponentType = () => {
   const [showLabel, setShowLabel] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
+  const [showCreditCardForm, setShowCreditCardForm] = useState(false);
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [tags, setTags] = useState<string[]>([]);
 
@@ -249,78 +247,92 @@ const PaymentDetails: NextComponentType = () => {
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 {/* credit card info div */}
-                <div className="input-group">
-                  <Field
-                    as="select"
-                    id="paymentMethod"
-                    name="paymentMethod"
-                    className="single-line w-full rounded-lg border-0 border-2 py-2 pl-2 outline-0"
-                    aria-disabled="false"
+                <div className="input-group pt-3">
+                  <div
+                    role="group"
+                    aria-labelledby="my-radio-group"
+                    className="rounded border border-gray-300 "
                   >
-                    <option value={'Cash on Delivery'}>Cash on Delivery</option>
-                    <option value={'Credit card'}>Credit card</option>
-                  </Field>
-                </div>
-                {(document.getElementById('paymentMethod') as HTMLInputElement)
-                  ?.value === 'Credit card' ? (
-                  <div className="mt-5 rounded border border-gray-300">
-                    <div className="border-b-1 flex flex-wrap items-center justify-between p-4">
-                      <p className="text-sm font-semibold">Credit card</p>
-                      <CreditCard />
+                    <div className="m-3">
+                      <Field
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethodCash"
+                        value="Cash on Delivery"
+                      />
+                      <label htmlFor="paymentMethodCash" className="pl-2">
+                        Cash on Delivery
+                      </label>
                     </div>
-                    <div className="bg-gray-100">
-                      <div className="p-4">
-                        <FieldTemplate
-                          label="Card Number"
-                          fieldID="cardNumber"
-                          fieldType="text"
-                          placeholder=" "
-                          extraClass="mb-3"
-                        />
-                        <FieldTemplate
-                          label="Name on card"
-                          fieldID="nameOnCard"
-                          fieldType="text"
-                          placeholder=" "
-                          extraClass="mb-3"
-                        />
-
-                        <div className="row">
-                          <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
-                            <div className="relative">
-                              <Field
-                                type="month"
-                                id="expirationDate"
-                                name="expirationDate"
-                                className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
-                                placeholder=" "
-                              />
-                              <label
-                                htmlFor={`expirationDate`}
-                                className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
-                              >
-                                Expiration Date (MM / YY)
-                              </label>
-                              <div className="errMsg text-red-600">
-                                <ErrorMessage name="expirationDate" />
-                              </div>
-                            </div>
-
+                    <hr />
+                    <div className="m-3">
+                      <Field
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethodCard"
+                        value="Credit card"
+                      />
+                      <label htmlFor="paymentMethodCard" className="pl-2">
+                        Credit card
+                      </label>
+                    </div>
+                    {formikprops.values.paymentMethod === 'Credit card' ? (
+                      <div className="mt-5 rounded border border-gray-300">
+                        <div className="bg-gray-100">
+                          <div className="p-4">
                             <FieldTemplate
-                              label="Security Code"
-                              fieldID="securityCode"
+                              label="Card Number"
+                              fieldID="cardNumber"
+                              fieldType="text"
+                              placeholder=" "
+                              extraClass="mb-3"
+                              isRequired={true}
+                            />
+                            <FieldTemplate
+                              label="Name on card"
+                              fieldID="nameOnCard"
                               fieldType="text"
                               placeholder=" "
                               extraClass="mb-3"
                             />
+                            <div className="row">
+                              <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
+                                <div className="relative">
+                                  <Field
+                                    type="month"
+                                    id="expirationDate"
+                                    name="expirationDate"
+                                    className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                    placeholder=" "
+                                  />
+                                  <label
+                                    htmlFor={`expirationDate`}
+                                    className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
+                                  >
+                                    Expiration Date (MM / YY)
+                                  </label>
+                                  <div className="errMsg text-red-600">
+                                    <ErrorMessage name="expirationDate" />
+                                  </div>
+                                </div>
+
+                                <FieldTemplate
+                                  label="Security Code"
+                                  fieldID="securityCode"
+                                  fieldType="text"
+                                  placeholder=" "
+                                  extraClass="mb-3"
+                                />
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
-                ) : (
-                  ''
-                )}
+                </div>
 
                 {/* billing div */}
                 {/* <div>
@@ -335,16 +347,7 @@ const PaymentDetails: NextComponentType = () => {
                       className="items-center text-sm font-semibold"
                     >
                       <label>
-                        <Field
-                          type="radio"
-                          name="shippingAddressPicked"
-                          value="sameShippingAddress"
-                          className="mx-4 mb-4 checked:accent-black"
-                          onClick={() => {
-                            handleSameAddress();
-                          }}
-                          required
-                        />
+                       w
                         Same as shipping address
                       </label>
                       <hr />
@@ -502,7 +505,6 @@ const PaymentDetails: NextComponentType = () => {
                   <button
                     type="submit"
                     className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
-                    // onClick={() => {router.push('/submit')}}
                   >
                     Pay now
                   </button>

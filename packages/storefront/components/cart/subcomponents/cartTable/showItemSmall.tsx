@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import _ from 'lodash';
+import Image from 'next/image';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -76,7 +76,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           </span>
         </div>
         <div className="col-span-2 justify-between px-4 leading-normal">
-          <h5 className="mb-2 mb-3 text-lg font-bold text-gray-900">
+          <h5 className="mb-3 text-lg font-bold text-gray-900">
             {data?.product?.info?.name}
           </h5>
           <div className="mb-4 flex gap-x-3">

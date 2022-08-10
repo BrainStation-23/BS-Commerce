@@ -1,18 +1,19 @@
-import Image from "next/image";
-import React, { FC } from "react";
+import Image from 'next/image';
+import React, { FC } from 'react';
 
-import Container from "@/components/global/components/container";
+import Container from '@/components/global/components/container';
 
 const ServiceArea: FC = () => {
   return (
     <Container>
       <div className="flex flex-wrap">
-        <div className="basis-full p-1 md:basis-1/2 lg:basis-1/3 md:p-4 text-center">
+        <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-3 md:mb-4">
             <Image
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon1_50x50.png?v=1588134758"
               width="48"
               height="48"
+              alt="about"
             />
           </div>
           <div className="text-center">
@@ -23,12 +24,13 @@ const ServiceArea: FC = () => {
             </p>
           </div>
         </div>
-        <div className="basis-full p-1 md:p-4 md:basis-1/2 lg:basis-1/3 text-center">
+        <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-3 md:mb-4">
             <Image
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon2_50x50.png?v=1588134840"
               width="48"
               height="48"
+              alt="about"
             />
           </div>
           <div className="chose_content">
@@ -39,12 +41,13 @@ const ServiceArea: FC = () => {
             </p>
           </div>
         </div>
-        <div className="basis-full p-1 md:p-4 md:basis-1/2 lg:basis-1/3 text-center">
+        <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-2 md:mb-4">
             <Image
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon3_50x50.png?v=1588134892"
               width="48"
               height="48"
+              alt="about"
             />
           </div>
           <div className="box_content">

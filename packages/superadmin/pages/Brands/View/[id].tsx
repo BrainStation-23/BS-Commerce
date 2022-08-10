@@ -11,13 +11,11 @@ const ViewBrandPage: NextPage = () => {
 
   const getAllBrands = async () => {
     const res = await userAPI.getBrand({ brandId: `${id}` });
-    console.log(res);
-
     res ? setbrand(res) : '';
   };
   useEffect(() => {
     getAllBrands();
-  }, []);
+  });
   return (
     <div className="bg-light px-5">
       <main>{brand ? <ViewBrand brand={brand} /> : 'Nothing Found'}</main>

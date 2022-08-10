@@ -64,13 +64,19 @@ export const PhoneIcon: React.FC = () => {
 
 interface IXCircleIcon {
   size?: number;
+  extraClass?: string;
 }
 
-export const XCircleIcon: React.FC<IXCircleIcon> = ({ size }: IXCircleIcon) => {
+export const XCircleIcon: React.FC<IXCircleIcon> = ({
+  size,
+  extraClass,
+}: IXCircleIcon) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={size ? `h-${size} w-${size}` : 'h-10 w-10'}
+      className={`${size ? `h-${size} w-${size}` : 'h-10 w-10'} ${
+        extraClass ? extraClass : ''
+      }`}
       fill="#40A944"
       viewBox="0 0 24 24"
       stroke="white"
