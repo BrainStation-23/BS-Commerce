@@ -10,12 +10,12 @@ import {
 } from 'models';
 
 export class SendCreateCustomerOtpDto implements SendCreateCustomerOtpRequest {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     phone: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     @IsEmail()

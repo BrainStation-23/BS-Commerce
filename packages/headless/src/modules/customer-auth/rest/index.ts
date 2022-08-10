@@ -15,6 +15,9 @@ import {
   SendCreateCustomerOtpDto,
   SendCreateCustomerOtpErrorResponseDto,
   SendCreateCustomerOtpSuccessResponseDto,
+  VerifyCreateCustomerOtpDto,
+  VerifyCreateCustomerOtpErrorResponseDto,
+  VerifyCreateCustomerOtpSuccessResponseDto,
 } from './dto';
 
 @Controller('customer/auth')
@@ -35,6 +38,23 @@ export class CustomerAuthController {
   })
   async sendOtp(@Body() data: SendCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.sendOtp(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('verify-otp')
+  @ApiResponse({
+    description: 'Verify Otp For Create Customer Success Response',
+    type: VerifyCreateCustomerOtpSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Verify Otp For Create Customer Error Response',
+    type: VerifyCreateCustomerOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async verifyOtp(@Body() data: VerifyCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.verifyOtp(data);
     res.status(code);
     return { code, ...response };
   }

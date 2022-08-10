@@ -21,6 +21,7 @@ export interface SendCreateCustomerOtpSuccessResponse extends SuccessResponse {
 export declare const enum SendCreateCustomerOtpErrorMessages {
     CUSTOMER_PHONE_ALREADY_EXITS = "CUSTOMER_PHONE_ALREADY_EXITS",
     CUSTOMER_EMAIL_ALREADY_EXITS = "CUSTOMER_EMAIL_ALREADY_EXITS",
+    CAN_NOT_UPDATE_OTP = "CAN_NOT_UPDATE_OTP",
     CAN_NOT_SEND_OTP = "CAN_NOT_SEND_OTP"
 }
 export interface SendCreateCustomerOtpErrorResponse extends ErrorResponse {

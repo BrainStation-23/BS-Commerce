@@ -14,8 +14,19 @@ export class CustomerRepository {
   }
 
   async sendOtp(data: Otp): Promise<Otp | null> {
-    data.id = randomUUID();
     return await this.db.sendOtp(data);
+  }
+
+  async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.verifyOtp(query);
+  }
+
+  async findOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.findOtp(query);
+  }
+
+  async updateOtp(query: Record<string, any>, data: object): Promise<Otp | null> {
+    return await this.db.updateOtp(query, data);
   }
 
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {

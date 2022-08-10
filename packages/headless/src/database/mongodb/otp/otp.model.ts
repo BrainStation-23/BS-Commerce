@@ -2,10 +2,6 @@ import { model, Schema } from 'mongoose';
 import { Otp } from 'src/entity/otp';
 
 const OtpSchema = new Schema<Otp>({
-  id: {
-    type: String,
-    unique: true,
-  },
   phone: String,
   email: String,
   otp: {
