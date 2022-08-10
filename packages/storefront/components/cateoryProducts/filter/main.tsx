@@ -107,7 +107,7 @@ const CategoryFilter: NextComponentType = () => {
             </div>
           </div>
           {/* Availability Filter Section */}
-          <div className="accordion-item bg-white">
+          {/* <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
               <button
                 className="
@@ -155,9 +155,9 @@ const CategoryFilter: NextComponentType = () => {
                 <AvaialabilityOptions />
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="accordion-item bg-white">
+          {/* <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
               <button
                 className="
@@ -205,7 +205,7 @@ const CategoryFilter: NextComponentType = () => {
                 <ProductTypeOptions />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
               <button
@@ -250,13 +250,13 @@ const CategoryFilter: NextComponentType = () => {
                   : 'accordion-collapse collapse hidden'
               }
             >
-              <div className="accordion-body py-4">
+              <div className="accordion-body">
                 <BrandTypeOptions />
               </div>
             </div>
           </div>
 
-          <div className="accordion-item bg-white">
+          {/* <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
               <button
                 className="
@@ -304,7 +304,7 @@ const CategoryFilter: NextComponentType = () => {
                 <ColourTypeOptions />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="colspan-4 grid"></div>
