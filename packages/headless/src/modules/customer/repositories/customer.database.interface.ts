@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Customer, CustomerAddress } from 'src/entity/customer';
+import { Otp } from 'src/entity/otp';
 
 @Injectable()
 export abstract class ICustomerDatabase {
+  abstract sendOtp: (data: Otp) => Promise<Otp | null>;
   abstract createCustomer: (customer: Customer) => Promise<Customer | null>;
   abstract findCustomer: (query: Record<string, any>) => Promise<Customer | null>;
   abstract getCustomerPassword: (query: Record<string, any>) => Promise<Customer | null>;

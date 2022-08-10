@@ -1,10 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Customer, CustomerAddress } from 'src/entity/customer';
+import { Otp } from 'src/entity/otp';
 import { ICustomerDatabase } from 'src/modules/customer/repositories/customer.database.interface';
+import { OtpModel } from '../otp/otp.model';
 import { CustomerModel } from './customer.model';
 
 @Injectable()
 export class CustomerDatabase implements ICustomerDatabase {
+
+  async sendOtp(data: Otp): Promise<Otp | null> {
+    return await OtpModel.create(data);
+  }
+
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
     const newCustomer = createdCUstomer?.toObject();
