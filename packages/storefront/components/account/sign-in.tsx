@@ -1,6 +1,7 @@
-import Image from 'next/image';
-import { NextComponentType } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+
+import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -11,9 +12,9 @@ import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCustomerDetails, storeUserDetails } from 'toolkit/userSlice';
 import { storeUserToken } from 'toolkit/authSlice';
+import { loginSchema } from '@/components/global/schemas/loginSchema';
 
 import Loading from '@/components/global/loader';
-import { loginSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 
