@@ -8,13 +8,13 @@ export interface CartModalState {
 
 export interface ModalState {
   setModal: boolean;
-  setModalWishlist: boolean
+  setModalLogin: boolean
   setModalCart: CartModalState
 }
 
 const initialState: ModalState = {
   setModal: false,
-  setModalWishlist: false,
+  setModalLogin: false,
   setModalCart: {
     showModal: false
   },
@@ -27,8 +27,8 @@ export const modalSlice = createSlice({
     setModalState: (state: ModalState, action: PayloadAction<boolean>) => {
       state.setModal = action.payload;
     },
-    setWishlistModalState: (state: ModalState, action: PayloadAction<boolean>) => {
-      state.setModalWishlist = action.payload;
+    setLoginModalState: (state: ModalState, action: PayloadAction<boolean>) => {
+      state.setModalLogin = action.payload;
     },
     setCartModalState: (state: ModalState, action: PayloadAction<CartModalState>) => {
       const modalObj = {
@@ -40,6 +40,6 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { setModalState, setWishlistModalState, setCartModalState } = modalSlice.actions;
+export const { setModalState, setLoginModalState, setCartModalState } = modalSlice.actions;
 
 export default modalSlice.reducer;

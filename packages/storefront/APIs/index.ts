@@ -23,6 +23,11 @@ import {
   addCustomerNewAddressRest,
   getCustomerRest,
   updateCustomerRest,
+  getCartRest,
+  addToCartRest,
+  deleteAllCartItemRest,
+  deleteSingleCartItemRest,
+  updateCartItemRest,
 } from './restApi';
 
 import {
@@ -50,6 +55,11 @@ import {
   updateCustomerGraphql,
   getOrderProductsGraphql,
   getOrderProductGraphql,
+  getCartGraphql,
+  addToCartGraphql,
+  deleteAllCartItemGraphql,
+  deleteSingleCartItemGraphql,
+  updateCartItemGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -79,6 +89,11 @@ const graphqlApi: apiFunction = {
   addCustomerNewAddress: addCustomerNewAddressGraphql,
   getCustomer: getCustomerGraphql,
   updateCustomer: updateCustomerGraphql,
+  getCart: getCartGraphql,
+  addToCart: addToCartGraphql,
+  deleteAllCartItem: deleteAllCartItemGraphql,
+  deleteSingleCartItem: deleteSingleCartItemGraphql,
+  updateCartItem: updateCartItemGraphql,
 };
 
 const restApi: apiFunction = {
@@ -106,6 +121,11 @@ const restApi: apiFunction = {
   addCustomerNewAddress: addCustomerNewAddressRest,
   getCustomer: getCustomerRest,
   updateCustomer: updateCustomerRest,
+  getCart: getCartRest,
+  addToCart: addToCartRest,
+  deleteAllCartItem: deleteAllCartItemRest,
+  deleteSingleCartItem: deleteSingleCartItemRest,
+  updateCartItem: updateCartItemRest,
 };
 
 export const userAPI: apiFunction =
