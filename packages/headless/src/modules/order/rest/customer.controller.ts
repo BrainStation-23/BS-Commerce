@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Query, Res, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { OrderEntity } from 'src/entity/order';
 import { User } from 'src/entity/user';
@@ -9,6 +9,7 @@ import { IServiceResponse } from 'src/utils/response/service.response.interface'
 import { CreateOrderDto } from './dto/order.create.dto';
 import { OrderData, OrderResponseDto } from './dto/order.response.dto';
 import { OrderCustomerService } from '../services/customer.service';
+import { OrderSortQueryDto } from './dto/sortQuery.dto';
 
 
 @ApiTags('Order - Customer API')
@@ -45,10 +46,10 @@ export class OrderCustomerController {
   @Get()
   async getOrderListByUserId(
     @UserInfo() user: User,
+    @Query() sortObj: OrderSortQueryDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<IServiceResponse<OrderResponseDto>> {
-    const { code, ...response } =
-      await this.orderCustomerService.getOrderListByUserId(user.id);
+    const { code, ...response } = await this.orderCustomerService.getOrderListByUserId(user.id, sortObj);
 
     res.status(code);
     return response;
@@ -64,7 +65,7 @@ export class OrderCustomerController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<IServiceResponse<OrderData>> {
     const { code, ...response } = await this.orderCustomerService.getOrderByOrderId(orderId);
-
+  
     res.status(code);
     return response;
   }

@@ -133,14 +133,15 @@ export class GetAllOrderQueryEntity {
   endDate?: Date;
 }
 
-//Response Entities
-export class AllOrdersEntity {
-  orders: OrderEntity[]
-}
 export class ChangeStatusEntity { 
   orderId: string
   statusType: string;
   statusValue: string
+}
+
+//Response Entities
+export class AllOrdersEntity {
+  orders: OrderEntity[]
 }
 export class OrderResponseEntity {
   orderId: string;
@@ -163,9 +164,20 @@ export class OrderResponseEntity {
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
 }
-// export class OrderListWithoutUserId {
 
-// }
+//sorting query entity
+export enum SortTypesDto {
+  asc = 'asc',
+  desc = 'desc'
+}
+
+export enum SortField{
+  orderedDate = 'orderedDate'
+}
+export class OrderSortQuery {
+  sortField?: SortField;
+  sortType?: string;
+}
 export class OrderListResponseEntity {
   userId: string;
   orderInfo: OrderEntity[];

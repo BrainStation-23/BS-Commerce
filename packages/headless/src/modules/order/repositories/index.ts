@@ -8,7 +8,8 @@ import {
   OrderIncompleteStatEntity, 
   OrderStatEntity, 
   ChangeStatusEntity, 
-  OrderResponseEntity 
+  OrderResponseEntity, 
+  OrderSortQuery
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
@@ -49,8 +50,8 @@ export class OrderRepository {
     else return this.generateUniqueId();
   }
 
-  async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
-    return await this.db.getOrderListByUserId(userId);
+  async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {
+    return await this.db.getOrderListByUserId(userId, sortObj);
   }
 
   async getOrderById(orderId: string): Promise<OrderResponseEntity>{
