@@ -7,10 +7,16 @@ import { deleteCart } from 'toolkit/cartSlice';
 import { useAppDispatch } from 'customHooks/hooks';
 
 import TableData from '@/components/cart/subcomponents/cartTable/tableData';
+import { userAPI } from 'APIs';
 
 const DataTable: NextComponentType = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const handleDeleteAllCartItem = async () => {
+    await userAPI.deleteAllCartItem();
+    dispatch(deleteCart());
+  };
 
   return (
     <>
@@ -69,9 +75,7 @@ const DataTable: NextComponentType = () => {
                       width: '120px',
                     }}
                     className="bg-black text-xs hover:bg-[#40a944]"
-                    onClick={() => {
-                      dispatch(deleteCart());
-                    }}
+                    onClick={handleDeleteAllCartItem}
                   >
                     CLEAR CART
                   </button>

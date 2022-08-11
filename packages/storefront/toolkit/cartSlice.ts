@@ -52,10 +52,13 @@ export const cartSlice = createSlice({
         }
       })
       state.allCartItems = list;
-    }
+    },
+    resetCart: (state: AllCartItemsState) => {
+      state.allCartItems = initialState.allCartItems;
+    },
   },
 });
 
-export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem, addToCart } = cartSlice.actions;
+export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem, addToCart, resetCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

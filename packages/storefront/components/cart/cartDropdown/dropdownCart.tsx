@@ -1,6 +1,5 @@
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -10,6 +9,8 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
+import Image from 'next/image';
+import { userAPI } from 'APIs';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -33,6 +34,8 @@ const CartDropdown: NextComponentType = () => {
   }, 0);
 
   const handleCartItemDelete = async (product: ResponseItem) => {
+    const productId = product.productId;
+    await userAPI.deleteSingleCartItem(productId);
     dispatch(deleteCartItem(product));
   };
 
@@ -40,6 +43,13 @@ const CartDropdown: NextComponentType = () => {
     if (!token) setModalOn(true);
     else {
       router.push('/checkout');
+    }
+  };
+
+  const handleClickViewCart = () => {
+    if (!token) setModalOn(true);
+    else {
+      router.push('/cart');
     }
   };
 
@@ -165,7 +175,9 @@ const CartDropdown: NextComponentType = () => {
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}
-              <p className="badge badge-light ">{cartData?.length}</p>
+              <p className="badge badge-light ">
+                {cartData?.length > 0 ? cartData?.length : 0}
+              </p>
             </button>
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (
@@ -198,11 +210,17 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="border-x-2 px-6 py-2">
                       <Link href="/cart" passHref>
-                        <Buttons
-                          bgColor="bg-slate-300"
-                          height={10}
-                          text={'VIEW CART'}
-                        />
+                        <a>
+                          <button
+                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                            onClick={() => {
+                              handleClickViewCart();
+                              setCartTotal(!cartTotal);
+                            }}
+                          >
+                            VIEW CART
+                          </button>
+                        </a>
                       </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">

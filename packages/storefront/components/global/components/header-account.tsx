@@ -11,6 +11,7 @@ import Modal from './modal/modal';
 import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
+import { resetCart } from 'toolkit/cartSlice';
 
 interface Properties {}
 
@@ -49,6 +50,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     dispatch(resetAddress());
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
+    dispatch(resetCart());
     dispatch(storeUserToken(''));
     router.push('/account/sign-in');
     toast.error('Logged out successfully!', {
@@ -108,7 +110,7 @@ const HeaderAccount: React.FC<Properties> = () => {
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
               <div className="group relative cursor-pointer normal-case">
-                <p className=" hover:text-green-600">
+                <p className=" hover:text-green-600" id="user-name">
                   {getUsername(links[4].name)}
                 </p>
                 <div
