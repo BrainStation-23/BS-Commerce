@@ -172,16 +172,7 @@ export enum SortTypesDto {
 }
 
 export enum SortField{
-  orderId = 'orderId',
-  userId = 'userId',
-  billingAddress = 'billingAddress',
-  orderedDate = 'orderedDate',
-  totalCost = 'totalCost',
-  shippingCost = 'shippingCost',
-  productCost = 'productCost',
-  paymentStatus = 'paymentStatus',
-  shippingStatus = 'shippingStatus',
-  orderStatus = 'orderStatus'
+  orderedDate = 'orderedDate'
 }
 export class OrderSortQuery {
   sortField?: string;

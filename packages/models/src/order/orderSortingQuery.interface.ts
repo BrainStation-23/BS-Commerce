@@ -1,4 +1,8 @@
 export interface OrderSortingQuery{
-    sortField?: string;
+    sortField?: SortField;
     sortType?: string;
+}
+
+export enum SortField{
+    orderedDate = 'orderedDate'
 }
