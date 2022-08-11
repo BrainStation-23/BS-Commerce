@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 import { OrderSortingQuery } from 'models';
-import { SortTypesDto } from 'src/entity/order';
+import { SortField, SortTypesDto } from 'src/entity/order';
 export class OrderSortQueryDto implements OrderSortingQuery{
-    @ApiProperty({ required: false, type: String })
+    @ApiProperty({ required: false, type: String, enum: SortField })
     @IsOptional()
-    sortField?: string;
+    sortField?: SortField;
 
     @ApiProperty({ required: false, type: String, enum: SortTypesDto })
     @IsOptional()

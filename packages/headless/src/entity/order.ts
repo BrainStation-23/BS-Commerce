@@ -133,14 +133,15 @@ export class GetAllOrderQueryEntity {
   endDate?: Date;
 }
 
-//Response Entities
-export class AllOrdersEntity {
-  orders: OrderEntity[]
-}
 export class ChangeStatusEntity { 
   orderId: string
   statusType: string;
   statusValue: string
+}
+
+//Response Entities
+export class AllOrdersEntity {
+  orders: OrderEntity[]
 }
 export class OrderResponseEntity {
   orderId: string;
@@ -168,6 +169,19 @@ export class OrderResponseEntity {
 export enum SortTypesDto {
   asc = 'asc',
   desc = 'desc'
+}
+
+export enum SortField{
+  orderId = 'orderId',
+  userId = 'userId',
+  billingAddress = 'billingAddress',
+  orderedDate = 'orderedDate',
+  totalCost = 'totalCost',
+  shippingCost = 'shippingCost',
+  productCost = 'productCost',
+  paymentStatus = 'paymentStatus',
+  shippingStatus = 'shippingStatus',
+  orderStatus = 'orderStatus'
 }
 export class OrderSortQuery {
   sortField?: string;
