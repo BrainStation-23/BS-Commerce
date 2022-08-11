@@ -40,6 +40,14 @@ import {
   UpdateCustomerRequestBody,
   Wishlist,
   Customer,
+  getCartResponse,
+  getCartSuccessResponse,
+  addToCartRequest,
+  addToCartSuccessResponse,
+  AddToCartResponse,
+  deleteCartItemSuccessResponse,
+  deleteAllCartItemsSuccessResponse,
+  updateCartItemSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -384,6 +392,63 @@ export async function updateCustomerRest(
     const response = await axios.patch(`${apiEndPoints.customer}`, data);
     return response.data;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCartRest(
+  token: string
+): Promise<getCartSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCart}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data as getCartSuccessResponse;
+  } catch (error: any) {
+    const data = {
+      userId: '',
+      id: '',
+      items: [],
+    }
+    const errorData = {
+      data
+    };
+    return errorData as any;
+  }
+}
+
+export async function addToCartRest(data:addToCartRequest): Promise<addToCartSuccessResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.addToCart}`, data);
+    return res.data as addToCartSuccessResponse;
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function deleteAllCartItemRest(): Promise<deleteAllCartItemsSuccessResponse |undefined> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.deleteAllCartItem}`);
+    return res.data as deleteAllCartItemsSuccessResponse;
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function deleteSingleCartItemRest(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
+  try {   
+    const res = await axios.delete(`${apiEndPoints.deleteSingleCartItem}?productId=${productId}`);
+    return res.data as deleteCartItemSuccessResponse;
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function updateCartItemRest(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse |undefined> {
+  try {   
+    const res = await axios.patch(`${apiEndPoints.updateCartItem}`, cartItem);
+    return res.data as updateCartItemSuccessResponse;
+  } catch(error: any) {
     return error;
   }
 }
