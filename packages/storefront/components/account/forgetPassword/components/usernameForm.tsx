@@ -6,10 +6,10 @@ import FieldTemplate from '@/components/account/forgetPassword/components/common
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
 
 interface Props {
-  stateSubmitButtonState: Function;
+  setSubmitButtonState: Function;
 }
 
-const UsernameForm: React.FC<Props> = ({ stateSubmitButtonState }) => {
+const UsernameForm: React.FC<Props> = ({ setSubmitButtonState }) => {
   return (
     <>
       <Formik
@@ -18,7 +18,7 @@ const UsernameForm: React.FC<Props> = ({ stateSubmitButtonState }) => {
         }}
         onSubmit={(values, actions) => {
           console.log(values);
-          stateSubmitButtonState('otp');
+          setSubmitButtonState('otp');
           actions.setSubmitting(false);
         }}
         validationSchema={usernameSchema}

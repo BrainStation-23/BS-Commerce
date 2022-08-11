@@ -6,10 +6,10 @@ import FieldTemplate from '@/components/account/forgetPassword/components/common
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
 
 interface Props {
-  stateSubmitButtonState: Function;
+  setSubmitButtonState: Function;
 }
 
-const OtpForm: React.FC<Props> = ({ stateSubmitButtonState }) => {
+const OtpForm: React.FC<Props> = ({ setSubmitButtonState }) => {
   return (
     <>
       <Formik
@@ -18,7 +18,7 @@ const OtpForm: React.FC<Props> = ({ stateSubmitButtonState }) => {
         }}
         onSubmit={(values, actions) => {
           console.log(values);
-          stateSubmitButtonState('newPassword');
+          setSubmitButtonState('newPassword');
           actions.setSubmitting(false);
         }}
         validationSchema={otpSchema}
@@ -33,11 +33,21 @@ const OtpForm: React.FC<Props> = ({ stateSubmitButtonState }) => {
                   placeholder="OTP"
                 />
               </div>
-
               <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                 <FormSubmitButton />
 
                 <FormCancelButton />
+              </div>
+              <div className="text-gray-500">
+                Did not receive the OTP?{' '}
+                <button
+                  onClick={() => {
+                    setSubmitButtonState('username');
+                  }}
+                  className="hover:text-[#40a944]"
+                >
+                  Try Again.
+                </button>
               </div>
             </Form>
           );
