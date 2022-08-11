@@ -2,15 +2,31 @@ import type { NextComponentType } from 'next';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import SearchItem from '@/components/search/searchItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SearchComponent: NextComponentType = () => {
-  const [searchText, setSearchText] = useState('');
+  const navSearchInput = document.getElementById(
+    'navSearchInput'
+  ) as HTMLInputElement;
+  const navSearchText = navSearchInput?.value;
+  navSearchInput?.value ? (navSearchInput.value = '') : '';
+
+  const [searchText, setSearchText] = useState(
+    navSearchText ? navSearchText : ''
+  );
   const onProductSearch = () => {
     setSearchText(
       (document.getElementById('productSearchInput') as HTMLInputElement).value
     );
   };
+  useEffect(() => {
+    if (navSearchText?.length > 0) {
+      setSearchText(navSearchText);
+      (
+        document.getElementById('productSearchInput') as HTMLInputElement
+      ).value = navSearchText;
+    }
+  }, [searchText, navSearchText]);
   return (
     <>
       <Breadcrumb
@@ -18,7 +34,7 @@ const SearchComponent: NextComponentType = () => {
         pathArray={['Home', 'Search: 4 results found']}
         linkArray={['/', '/search']}
       />
-      <div className="container px-4 mx-auto tracking-wider">
+      <div className="container mx-auto px-4 tracking-wider">
         <h4 className="title-font mt-16 mb-1 text-center text-sm  font-normal text-gray-900">
           Your search for <strong className="highlight">{searchText}</strong>{' '}
           revealed the following:

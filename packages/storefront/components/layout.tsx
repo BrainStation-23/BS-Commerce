@@ -3,19 +3,23 @@ import Axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Footer from '@/components/global/components/footer';
 import Header from '@/components/global/components/header';
 import Viewport from '@/components/viewport';
 import { XCircleIcon } from './global/components/headerIcons';
 import Modal from '@/components/comparison';
+import { useRouter } from 'next/router';
+import { setModalState } from 'toolkit/modalSlice';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -28,6 +32,9 @@ const Layout = ({ children }: LayoutProps) => {
       Authorization: `Bearer ${token}`,
     };
   }, [token]);
+  useEffect(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
 
   return (
     <>
