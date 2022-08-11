@@ -175,7 +175,7 @@ export enum SortField{
   orderedDate = 'orderedDate'
 }
 export class OrderSortQuery {
-  sortField?: string;
+  sortField?: SortField;
   sortType?: string;
 }
 export class OrderListResponseEntity {
