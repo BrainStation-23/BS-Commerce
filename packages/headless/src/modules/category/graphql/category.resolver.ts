@@ -3,27 +3,30 @@ import { Query, Args, Resolver, Mutation } from "@nestjs/graphql";
 import { RolesGuard } from "src/guards/auth.guard";
 import { CategoryService } from "../services";
 import { CategoryListResponse, CategoryResponse, createCategoryRequestSchema, getCategoryBySlugRequestSchema, getCategoryRequestSchema } from "./category.model";
+import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 export class CategoryResolver {
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private helper: Helper) { }
 
-  @Query(returns => CategoryResponse, {nullable:true})
+  @Query(returns => CategoryResponse, { nullable: true })
   async getCategory(
     @Args('data') data: getCategoryRequestSchema) {
-      return await this.categoryService.getCategory(data.categoryId);
+    const res = await this.categoryService.getCategory(data.categoryId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query(returns => CategoryListResponse, {nullable:true})
+  @Query(returns => CategoryListResponse, { nullable: true })
   async getCategoryList() {
-    const item:any = await this.categoryService.getCategoryList();
-      return item;
+    const res: any = await this.categoryService.getCategoryList();
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query(returns => CategoryResponse, {nullable:true})
+  @Query(returns => CategoryResponse, { nullable: true })
   async getCategoryBySlug(
     @Args('data') data: getCategoryBySlugRequestSchema) {
-      return await this.categoryService.getCategoryBySlug(data.slug);
+    const res = await this.categoryService.getCategoryBySlug(data.slug);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @UseGuards(new RolesGuard(['admin']))
@@ -31,6 +34,7 @@ export class CategoryResolver {
   async createCategory(
     @Args('category') category: createCategoryRequestSchema,
   ) {
-    return await this.categoryService.createCategory(category);
+    const res = await this.categoryService.createCategory(category);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
