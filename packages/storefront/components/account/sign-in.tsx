@@ -152,7 +152,10 @@ const Signin: NextComponentType = () => {
                         Sign In
                       </button>
 
-                      <div className="text-decoration-none my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3">
+                      <div
+                        id="forgotPasswordDiv"
+                        className="text-decoration-none my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3"
+                      >
                         <Link href="/account/forgot-password">
                           <a className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500">
                             Forgot your password?
