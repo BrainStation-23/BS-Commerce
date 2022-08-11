@@ -9,6 +9,7 @@ import Footer from '@/components/global/components/footer';
 import Header from '@/components/global/components/header';
 import Viewport from '@/components/viewport';
 import { XCircleIcon } from './global/components/headerIcons';
+import Modal from '@/components/comparison';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,6 +18,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
+  );
+  const modalState = useAppSelector(
+    (state) => state.persistedReducer.modal.setModal
   );
 
   useEffect(() => {
@@ -50,6 +54,7 @@ const Layout = ({ children }: LayoutProps) => {
         containerId={'bottom-left'}
         position="bottom-left"
       />
+      {modalState && <Modal setModal={true} />}
     </>
   );
 };

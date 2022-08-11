@@ -16,16 +16,12 @@ import WeekDeals from '@/components/home/weekDeals';
 import HomefullBanner from '@/components/global/bannerComponent/homeFullBanner';
 import BestSell from '@/components/home/bestSell';
 import FeaturedProducts from '@/components/home/featuredProducts';
-import Modal from '@/components/comparison';
 import ModalWishlist from '@/components/global/components//modal/modal';
 import { useEffect } from 'react';
 import BackToTopButton from 'pages/BackToTopButton';
 import CartModal from '../global/components/modal/cartModal';
 
 const HomeComponent: NextComponentType = () => {
-  const modalState = useAppSelector(
-    (state) => state.persistedReducer.modal.setModal
-  );
 
   const modalStateWishlist = useAppSelector(
     (state) => state.persistedReducer.modal.setModalWishlist
@@ -60,7 +56,6 @@ const HomeComponent: NextComponentType = () => {
   return (
     <>
       <div className="scroll-smooth hover:scroll-auto">
-        {modalState && <Modal setModal={true} />}
 
         {modalStateWishlist && (
           <ModalWishlist
