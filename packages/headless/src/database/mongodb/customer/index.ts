@@ -29,6 +29,8 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
+    customer.email && await OtpModel.findOneAndDelete({ email: customer.email });
+    customer.phone && await OtpModel.findOneAndDelete({ phone: customer.phone });
     const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;

@@ -6,7 +6,11 @@ import {
   GetAuthCustomerQuery,
   GetCustomerAuthResponse,
   RegistrationAuthResponse,
+  SendCreateCustomerOtpInput,
+  SendOtpAuthResponse,
   SignInAuthResponse,
+  VerifyCreateCustomerOtpInput,
+  VerifyOtpAuthResponse,
 } from './auth.model';
 import { Helper } from 'src/helper/helper.interface';
 
@@ -23,6 +27,20 @@ export class CustomerAuthResolver {
   @Mutation(() => RegistrationAuthResponse)
   async register(@Args('customer') customer: CreateCustomerInput) {
     const res = await this.authService.register(customer);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  
+  @Mutation(() => SendOtpAuthResponse)
+  async sendOtp(@Args('data', {nullable: true}) data?: SendCreateCustomerOtpInput) {
+    const res = await this.authService.sendOtp(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+
+  @Mutation(() => VerifyOtpAuthResponse)
+  async verifyOtp(@Args('data', {nullable: true}) data?: VerifyCreateCustomerOtpInput) {
+    const res = await this.authService.verifyOtp(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 

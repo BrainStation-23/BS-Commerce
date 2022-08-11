@@ -5,6 +5,8 @@ import {
   CreateCustomerRequest,
   CustomerSignInRequest,
   GetCustomerQuery,
+  SendCreateCustomerOtpRequest,
+  VerifyCreateCustomerOtpRequest,
 } from 'models';
 
 @ObjectType()
@@ -19,6 +21,27 @@ export class AuthCustomer implements Customer {
   @IsOptional()
   @IsEmail()
   email?: string;
+}
+
+@InputType()
+export class SendCreateCustomerOtpInput implements SendCreateCustomerOtpRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  email?: string;
+}
+
+@InputType()
+export class VerifyCreateCustomerOtpInput implements VerifyCreateCustomerOtpRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field(() => Int)
+  otp: number;
 }
 
 @InputType()
@@ -59,18 +82,36 @@ export class CustomerSignInDataInput implements CustomerSignInRequest {
 }
 
 @ObjectType()
-export class CustomerSignUpResponseMessage {
+export class CustomerAuthResponseMessage {
   @Field()
   message: string
 }
 
 @ObjectType()
 export class RegistrationAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => CustomerSignUpResponseMessage, { nullable: true })
-  data?: CustomerSignUpResponseMessage
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class SendOtpAuthResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class VerifyOtpAuthResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
 }
 
 @ObjectType()
@@ -81,10 +122,10 @@ export class CustomerSignInResponseToken {
 
 @ObjectType()
 export class SignInAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => CustomerSignInResponseToken, { nullable: true })
+  @Field(() => CustomerSignInResponseToken, { nullable: true })
   data?: CustomerSignInResponseToken
 }
 
@@ -101,9 +142,9 @@ export class GetAuthCustomerQuery implements GetCustomerQuery {
 
 @ObjectType()
 export class GetCustomerAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => AuthCustomer, { nullable: true })
+  @Field(() => AuthCustomer, { nullable: true })
   data?: AuthCustomer
 }

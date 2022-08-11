@@ -40,7 +40,7 @@ export class CustomerAuthService {
 
     const otpVerified = await this.customerRepo.findOtp({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { isVerified: true, otpVerifiedAt: { $gt: Date.now() } }] });
     if (!otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
-    
+
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
     customer.password = await bcrypt.hash(data.password, authConfig.salt!);
@@ -57,11 +57,15 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(SendCreateCustomerOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
-    const otpExists = await this.customerRepo.findOtp({ $or: [{ email: data.email }, { phone: data.phone }] });
+    let otpExists = null;
+    otpExists = data.email && await this.customerRepo.findOtp({ email: data.email });
+    otpExists = data.phone && await this.customerRepo.findOtp({ phone: data.phone });
     const randomOtp = 100000 + Math.floor(Math.random() * 900000);
 
-    if (otpExists) {
-      const otpUpdated = (data.email || data.phone) && await this.customerRepo.updateOtp({ $or: [{ email: data.email }, { phone: data.phone }] }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false });
+    if (otpExists && (data.email || data.phone)) {
+      let otpUpdated = null;
+      otpUpdated = data.email && await this.customerRepo.updateOtp({ email: data.email }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false });
+      otpUpdated = data.phone && await this.customerRepo.updateOtp({ phone: data.phone }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false });
       if (!otpUpdated) return this.helper.serviceResponse.errorResponse(SendCreateCustomerOtpErrorMessages.CAN_NOT_UPDATE_OTP, null, HttpStatus.BAD_REQUEST);
       return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
     }
