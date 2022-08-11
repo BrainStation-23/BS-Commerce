@@ -4,16 +4,13 @@ import { Otp } from 'src/entity/otp';
 const OtpSchema = new Schema<Otp>({
   phone: String,
   email: String,
-  otp: {
-    type: Number,
-    unique: true,
-  },
+  otp: Number,
   isVerified: {
     type: Boolean,
     default: false
   },
   otpExpireTime: Number,
-  passwordExpireTime: Number,
+  otpVerifiedAt: Number,
 }, {
   timestamps: true,
   versionKey: false

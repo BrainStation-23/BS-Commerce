@@ -4,5 +4,5 @@ export class Otp {
     otp: number;
     otpExpireTime?: number;
     isVerified?: boolean;
-    passwordExpireTime?: number;
+    otpVerifiedAt?: number;
 }

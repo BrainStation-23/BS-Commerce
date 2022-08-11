@@ -38,7 +38,7 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
-    const otpVerified = await this.customerRepo.findOtp({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { isVerified: true, passwordExpireTime: { $gt: Date.now() } }] });
+    const otpVerified = await this.customerRepo.findOtp({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { isVerified: true, otpVerifiedAt: { $gt: Date.now() } }] });
     if (!otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
     
     let customer: any = { ...data };
