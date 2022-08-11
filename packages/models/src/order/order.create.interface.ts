@@ -18,12 +18,16 @@ export interface IOrderAddress {
   phoneNumber: string;
 }
 
+// export interface CreateProductOrderDetails{
+//   productId: string;
+//   name: string;
+//   price: number;
+//   quantity: number;
+//   sku: string;
+// }
 export interface CreateProductOrderDetails{
   productId: string;
-  name: string;
-  price: number;
   quantity: number;
-  sku: string;
 }
 export interface IProductOrderData extends CreateProductOrderDetails{
   photos?: IOrderProductPhoto[],
