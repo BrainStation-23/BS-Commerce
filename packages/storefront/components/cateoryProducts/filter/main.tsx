@@ -1,13 +1,11 @@
-import type { NextComponentType } from 'next';
-import React, { useState } from 'react';
-
+import React, { FC, useState } from 'react';
 import PriceFilter from '@/components/cateoryProducts/filter/subComponent/priceFilter';
 import AvaialabilityOptions from '@/components/cateoryProducts/filter/subComponent/availability';
 import ProductTypeOptions from '@/components/cateoryProducts/filter/subComponent/productTypes';
 import BrandTypeOptions from '@/components/cateoryProducts/filter/subComponent/brandTypes';
 import ColourTypeOptions from '@/components/cateoryProducts/filter/subComponent/colorAvailibility';
 
-const CategoryFilter: NextComponentType = () => {
+const CategoryFilter: FC = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
   const [displayStatus2, setDisplayStatus2] = useState(false);
   const [displayStatus3, setDisplayStatus3] = useState(false);
@@ -104,6 +102,9 @@ const CategoryFilter: NextComponentType = () => {
               aria-labelledby="headingOne5"
             >
               <PriceFilter />
+              {/* <div className="accordion-body">
+                <PriceFilter />
+              </div> */}
             </div>
           </div>
           {/* Availability Filter Section */}

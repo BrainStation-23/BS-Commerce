@@ -1,13 +1,7 @@
-import type { NextComponentType } from 'next';
-
 import CategoryFilter from '@/components/cateoryProducts/filter/main';
-
 import PageTitle from '@/components/global/components/pageTitle';
-
 import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
-
 import ProductSort from '@/components/cateoryProducts/sort/index';
-
 import { FC } from 'react';
 
 interface props {

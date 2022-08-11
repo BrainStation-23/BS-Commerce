@@ -1,6 +1,6 @@
 import type { NextComponentType } from 'next';
-
-const ProductSort: NextComponentType = () => {
+import { FC } from 'react';
+const ProductSort: FC = () => {
   const sortOptions = [
     { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
     { id: Math.random() * 100, meta: { name: 'Price High to Low' } },
