@@ -12,14 +12,14 @@ import {
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { IOrderCreateData, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: IOrderCreateData): Promise<OrderEntity> {
+  async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async addPhotoDetails(products: IProductOrderData[]): Promise<IProductOrderData[]>{
+  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
     let newProductList = [];
     newProductList = await Promise.all(products.map( async (product) => {
         const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
@@ -123,9 +123,7 @@ export class OrderDatabase implements IOrderDatabase {
     } catch (error) {
       console.log(error)
       return null
-    }
-    
-    
+    } 
   }
 
   async getOrderList(query?: GetAllOrderQueryEntity, skip?: number, limit?: number): Promise<OrderEntity[]>{

@@ -11,7 +11,7 @@ import {
   MinLength,
   ValidateNested
 } from 'class-validator';
-import { IOrderAddress, IOrderCreateData, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress, IProductOrderData } from 'models';
 import { OrderProductPhotoDto } from './OrderProductPhoto.dto';
 
 export class OrderAddressDto implements IOrderAddress {
@@ -96,9 +96,7 @@ export class ProductOrderDto implements IProductOrderData {
 
   @ApiProperty({ example: 2 })
   @IsNumber()
-  @IsOptional()
-  totalPrice?: number;
-
+  totalPrice: number;
 
   @ApiProperty({ example: 'string' })
   @IsString()
@@ -106,7 +104,31 @@ export class ProductOrderDto implements IProductOrderData {
   sku: string;
 }
 
-export class CreateOrderDto implements IOrderCreateData {
+export class CreateOrderProduct implements CreateProductOrderDetails{
+  @ApiProperty({ example: '052eeb8f-6a08-438d-8799-2fb0bb8d7d98' })
+  @IsString()
+  productId: string;
+
+  @ApiProperty({ example: 'test' })
+  @MaxLength(100)
+  @IsString()
+  name: string;
+
+  @ApiProperty({ example: 100 })
+  @IsNumber()
+  price: number;
+  
+  @ApiProperty({ example: 2 })
+  @IsNumber()
+  quantity: number;
+
+  @ApiProperty({ example: 'string' })
+  @IsString()
+  @MaxLength(100)
+  sku: string;
+}
+
+export class CreateOrderDto implements CreateOrderRequest {
   @ApiProperty({ example: 100 })
   @IsNumber()
   shippingCost: number;
@@ -136,18 +158,13 @@ export class CreateOrderDto implements IOrderCreateData {
   productCost: number;
 
   @ApiProperty({
-    type: [ProductOrderDto],
+    type: [CreateOrderProduct],
   })
   @IsNotEmpty()
   @IsArray()
-  @Type(() => ProductOrderDto)
+  @Type(() => CreateOrderProduct)
   @ValidateNested({ always: true })
-  products: ProductOrderDto[];
-
-  @ApiProperty({ example: 100 })
-  @IsNumber()
-  @IsOptional()
-  totalCost?: number;
+  products: CreateOrderProduct[];
 
   @ApiProperty({ example: '' })
   @IsString()
