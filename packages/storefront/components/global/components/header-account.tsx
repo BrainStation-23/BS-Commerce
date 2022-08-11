@@ -110,7 +110,7 @@ const HeaderAccount: React.FC<Properties> = () => {
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
               <div className="group relative cursor-pointer normal-case">
-                <p className=" hover:text-green-600">
+                <p className=" hover:text-green-600" id="user-name">
                   {getUsername(links[4].name)}
                 </p>
                 <div

@@ -10,6 +10,7 @@ export const MenuIcon: React.FC<IMenuIcon> = ({ size }: IMenuIcon) => {
       className={size ? `h-${size} w-${size}` : 'h-7 w-7'}
       viewBox="0 0 20 20"
       fill="currentColor"
+      id="menu-icon"
     >
       <path
         fillRule="evenodd"
@@ -81,6 +82,7 @@ export const XCircleIcon: React.FC<IXCircleIcon> = ({
       viewBox="0 0 24 24"
       stroke="white"
       strokeWidth={1}
+      id="sidebar-close"
     >
       <path
         strokeLinecap="round"

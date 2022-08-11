@@ -214,7 +214,7 @@ const CartDropdown: NextComponentType = () => {
                           <button
                             className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                             onClick={() => {
-                              handleClickViewCart;
+                              handleClickViewCart();
                               setCartTotal(!cartTotal);
                             }}
                           >
