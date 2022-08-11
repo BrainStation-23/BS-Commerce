@@ -137,6 +137,7 @@ export class GetAllOrderQueryEntity {
   endDate?: Date;
 }
 
+//Response Entities
 export class AllOrdersEntity {
   orders: OrderEntity[]
 }
@@ -145,13 +146,38 @@ export class ChangeStatusEntity {
   statusType: string;
   statusValue: string
 }
+export class OrderResponseEntity {
+  orderId: string;
+  userId?: string;
+  billingAddress: OrderAddress;
+  shippingAddress: OrderAddress;
+  shippingMethod: string;
+  paymentMethod: string;
+  orderedDate: Date;
+  orderStatus: string;
+  shippingStatus: string;
+  paymentStatus: string;
+  products: ProductOrder[];
+  productCost: number;
+  shippingCost: number;
+  totalCost?: number;
+  stripeToken?: string;
+  stripeCustomerId?: string;
+  stripeChargeId?: string;
+  paypalPaymentId?: string;
+  paypalRedirectUrl?: string;
+}
 
 export enum SortTypesDto {
   asc = 'asc',
   desc = 'desc'
 }
+
+export enum SortField{
+  orderedDate = 'orderedDate'
+}
 export class OrderSortQuery {
-  sortField?: string;
+  sortField?: SortField;
   sortType?: string;
 }
 export class OrderListResponseEntity {
