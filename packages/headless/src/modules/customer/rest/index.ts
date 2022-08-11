@@ -77,7 +77,7 @@ export class CustomerController {
     status: HttpStatus.BAD_REQUEST
   })
   async updateCustomerAddress(@Param() params: UpdateCustomerAddressParamsDto, @Body() address: CustomerAddressDto, @UserInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.customerService.updateCustomerAddress(customer.id, params.addressId, address);
+    const { code, ...response } = await this.customerService.updateCustomerAddress(customer.id, params.addressId, { ...address, id: params.addressId });
     res.status(code);
     return { code, ...response };
   }

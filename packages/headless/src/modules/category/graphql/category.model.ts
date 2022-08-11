@@ -13,7 +13,7 @@ export class PhotoRequestSchema implements Photo {
 
 @ObjectType()
 export class PhotoSchema implements Photo {
-    @Field()
+    @Field({ nullable: true })
     url: string;
 
     @Field()
@@ -49,16 +49,16 @@ export class CategoryMetaSchema implements CategoryMeta {
 
 @InputType()
 export class CategoryMetaRequestSchema implements CategoryMeta {
-    @Field(type => [String])
+    @Field(type => [String], { nullable: true })
     keywords?: string[];
 
-    @Field()
+    @Field({ nullable: true })
     description?: string;
 
-    @Field()
+    @Field({ nullable: true })
     title?: string;
 
-    @Field()
+    @Field({ nullable: true })
     SEFN?: string;
 }
 
@@ -151,9 +151,6 @@ export class getCategoryBySlugRequestSchema implements getCategoryBySlugRequest 
 
 @ObjectType()
 export class CategoryResponse {
-    @Field({ nullable: true })
-    error: string;
-
     @Field(type => Int)
     code: number;
 
@@ -223,9 +220,6 @@ export class CategoryListSchema {
 
 @ObjectType()
 export class CategoryListResponse {
-    @Field({ nullable: true })
-    error: string;
-
     @Field(type => Int)
     code: number;
 

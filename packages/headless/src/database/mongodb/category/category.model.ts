@@ -19,7 +19,7 @@ const CategorySchema = new Schema<Category>({
   },
   description: {
     type: String,
-    default: null,
+    default: '',
   },
   photo: {
     url:{
