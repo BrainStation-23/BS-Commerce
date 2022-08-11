@@ -33,7 +33,7 @@ const Product = ({ product, imgHeight, imgWeight }: SingleProduct) => {
             width={imgWeight ? imgWeight : 120}
             className="col-span-2"
           />
-          <div className="absolute bottom-12 right-0 w-36 origin-left transition-transform duration-300 group-hover:block md:hidden">
+          <div className="absolute bottom-12 right-0 w-36 origin-left transition-transform duration-300 hover:-translate-y-3 group-hover:scale-100 md:scale-0">
             <Icon product={product} />
           </div>
           <div className="col-span-1">
