@@ -10,6 +10,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 export interface CustomerForgotPasswordRequest {
     phone?: string;
     email?: string;
+    password: string;
 }
 
 export interface CustomerForgotPasswordMessage {
@@ -19,6 +20,10 @@ export interface CustomerForgotPasswordMessage {
 export interface CustomerForgotPasswordSuccessResponse extends SuccessResponse {
     code: number;
     data: CustomerForgotPasswordMessage
+}
+
+export const enum CustomerForgotPasswordSuccessMessages {
+    FORGOT_PASSWORD_SUCCESSFUL = 'FORGOT_PASSWORD_SUCCESSFUL',
 }
 
 export const enum CustomerForgotPasswordErrorMessages {

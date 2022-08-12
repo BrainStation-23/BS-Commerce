@@ -23,8 +23,8 @@ export class VerifyCreateCustomerOtpDto implements VerifyCreateCustomerOtpReques
 
     @ApiProperty({ default: '123456' })
     @IsNumber()
-    @Min(100000)
-    @Max(999999)
+    @Min(100000, { message: "OTP must have 6 digits" })
+    @Max(999999, { message: "OTP must have 6 digits" })
     otp: number;
 }
 

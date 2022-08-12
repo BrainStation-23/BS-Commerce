@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsArray, IsObject, IsOptional, IsEmail } from 'class-validator';
+import { IsString, IsNumber, IsArray, IsObject, IsOptional, IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import {
   CustomerForgotPasswordErrorResponse,
   CustomerForgotPasswordRequest,
@@ -19,6 +19,12 @@ export class CustomerForgotPasswordDto implements CustomerForgotPasswordRequest 
   @IsOptional()
   @IsEmail()
   email?: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
+  password: string;
 }
 
 export class CustomerForgotPasswordSuccessMessage implements CustomerForgotPasswordMessage {
