@@ -34,11 +34,36 @@ function hasValidCharacters(password: any) {
 }
 
 export const usernameSchema = object().shape({
-  username: string().required('This field must not be empty'),
+  username: string()
+    .required('Email/phone number is required')
+    .test('test-name', 'Enter a valid phone/email', function (value) {
+      const emailRegex =
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+      const phoneRegex = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
+      let isValidEmail = emailRegex.test(value!);
+      let isValidPhone = phoneRegex.test(value!);
+      if (!isValidEmail && !isValidPhone) {
+        return false;
+      }
+      return true;
+    }),
 });
 
 export const otpSchema = object().shape({
-  otp: number().required('This field must not be empty'),
+  otp: string()
+    .required('This field must not be empty')
+    .test('test-name', 'This field only accepts number', function (value) {
+      const numberRegex =
+        /^([0-9])+$/;
+
+     
+      let isValidNumber = numberRegex.test(value!);
+      if (!isValidNumber) {
+        return false;
+      }
+      return true;
+    }),
 });
 
 export const passwordSchema = object().shape({
