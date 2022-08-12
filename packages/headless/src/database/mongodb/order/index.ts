@@ -37,7 +37,7 @@ export class OrderDatabase implements IOrderDatabase {
       if(sortType === 'asc') sortIndex = 1;
       sort[sortField] = sortIndex;
     }else{
-      sort['orderedDate'] = sortIndex;
+      sort['orderedDate'] = sortIndex;//by default orders will be sorted by date
     }
  
     return await OrderModel.find({ userId }).sort(sort);
