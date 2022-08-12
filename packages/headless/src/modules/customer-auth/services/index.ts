@@ -90,7 +90,7 @@ export class CustomerAuthService {
 
   async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
     const verifyOtp = (data.email || data.phone) && await this.customerRepo.verifyOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
-    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED, null, HttpStatus.BAD_REQUEST);
+    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ message: VerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL }, HttpStatus.OK);
   }
 

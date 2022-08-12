@@ -14,9 +14,9 @@ export interface CustomerAddress {
 
 export interface Customer {
     id: string;
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     phone?: string;
     email?: string;
+    password?: string;
     addresses?: CustomerAddress[]
 }

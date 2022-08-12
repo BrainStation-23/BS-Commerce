@@ -5,8 +5,8 @@ import {
   CreateCustomerRequest,
   CustomerSignInRequest,
   GetCustomerQuery,
-  SendCreateCustomerOtpRequest,
-  VerifyCreateCustomerOtpRequest,
+  SendOtpRequest,
+  VerifyOtpRequest,
 } from 'models';
 
 @ObjectType()
@@ -24,7 +24,7 @@ export class AuthCustomer implements Customer {
 }
 
 @InputType()
-export class SendCreateCustomerOtpInput implements SendCreateCustomerOtpRequest {
+export class SendOtpInput implements SendOtpRequest {
   @Field({ nullable: true })
   phone?: string;
 
@@ -33,7 +33,7 @@ export class SendCreateCustomerOtpInput implements SendCreateCustomerOtpRequest 
 }
 
 @InputType()
-export class VerifyCreateCustomerOtpInput implements VerifyCreateCustomerOtpRequest {
+export class VerifyOtpInput implements VerifyOtpRequest {
   @Field({ nullable: true })
   phone?: string;
 
@@ -58,9 +58,7 @@ export class CreateCustomerInput implements CreateCustomerRequest {
   name: string;
 
   @Field()
-  @MinLength(6, {
-    message: 'Password is too short. Minimal length is $constraint1 characters',
-  })
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
   password: string;
 }
 
@@ -75,9 +73,7 @@ export class CustomerSignInDataInput implements CustomerSignInRequest {
   email?: string;
 
   @Field()
-  @MinLength(6, {
-    message: 'Password is too short. Minimal length is $constraint1 characters',
-  })
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
   password: string;
 }
 

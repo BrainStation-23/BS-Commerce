@@ -22,7 +22,7 @@ export interface VerifyOtpSuccessResponse extends SuccessResponse {
 export declare const enum VerifyOtpErrorMessages {
     CUSTOMER_PHONE_ALREADY_EXITS = "CUSTOMER_PHONE_ALREADY_EXITS",
     CUSTOMER_EMAIL_ALREADY_EXITS = "CUSTOMER_EMAIL_ALREADY_EXITS",
-    OTP_EXPIRED = "OTP_EXPIRED",
+    OTP_EXPIRED_OR_INVALID_OTP = "OTP_EXPIRED_OR_INVALID_OTP",
 }
 export interface VerifyOtpErrorResponse extends ErrorResponse {
     code?: number;
