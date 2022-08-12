@@ -18,10 +18,17 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     e.stopPropagation();
     setExpand(!expand);
   };
+  const mHover = ()=>{
+    setExpand(true);
+    console.log("innnnnnn");
+    
+  }
 
   return (
     <div
       className="group"
+      onMouseEnter={() => mHover()}
+      onMouseLeave={() => setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >
       <div className="flex cursor-pointer flex-row items-center justify-between py-1 px-3 text-sm transition-all duration-100 ease-linear hover:text-green-600">

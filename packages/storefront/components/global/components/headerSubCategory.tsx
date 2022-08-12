@@ -42,7 +42,10 @@ export const HeaderSubCategory: React.FC<Props> = ({
         <div
           className="group w-full"
           onMouseEnter={() => setShowSubCategory(true)}
-          onMouseLeave={() => setShowSubCategory(false)}
+          onMouseLeave={() => {
+            setTimeout(function () {}, 2000);
+            setShowSubCategory(false);
+          }}
         >
           <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-green-600">
             <span className="grow">
@@ -86,7 +89,7 @@ export const HeaderSubCategory: React.FC<Props> = ({
             {category.subCategories ? (
               <div
                 className={`absolute top-0 left-56 z-50 h-auto w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
-                  showSubCategory ? '' : 'hidden'
+                  showSubCategory ? '' : 'scale-0 delay-300'
                 }`}
               >
                 <ul className="pl-2">
