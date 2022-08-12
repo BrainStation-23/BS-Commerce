@@ -15,12 +15,12 @@ import {
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
-  SendCreateCustomerOtpDto,
-  SendCreateCustomerOtpErrorResponseDto,
-  SendCreateCustomerOtpSuccessResponseDto,
-  VerifyCreateCustomerOtpDto,
-  VerifyCreateCustomerOtpErrorResponseDto,
-  VerifyCreateCustomerOtpSuccessResponseDto,
+  SendOtpDto,
+  SendOtpErrorResponseDto,
+  SendOtpSuccessResponseDto,
+  VerifyOtpDto,
+  VerifyOtpErrorResponseDto,
+  VerifyOtpSuccessResponseDto,
 } from './dto';
 
 @Controller('customer/auth')
@@ -32,15 +32,15 @@ export class CustomerAuthController {
   @ApiResponse({
     description: 'Send Otp For Create Customer Success Response',
     type: SendCreateCustomerOtpSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.CREATED
   })
   @ApiResponse({
     description: 'Send Otp For Create Customer Error Response',
-    type: SendCreateCustomerOtpErrorResponseDto,
+    type: SendOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
   async sendOtp(@Body() data: SendCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.registerSendOTP(data);
+    const { code, ...response } = await this.authService.sendOtp(data);
     res.status(code);
     return { code, ...response };
   }
@@ -49,15 +49,15 @@ export class CustomerAuthController {
   @ApiResponse({
     description: 'Verify Otp For Create Customer Success Response',
     type: VerifyCreateCustomerOtpSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.CREATED
   })
   @ApiResponse({
     description: 'Verify Otp For Create Customer Error Response',
-    type: VerifyCreateCustomerOtpErrorResponseDto,
+    type: VerifyOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
   async verifyOtp(@Body() data: VerifyCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.registerVerifyOTP(data);
+    const { code, ...response } = await this.authService.verifyOtp(data);
     res.status(code);
     return { code, ...response };
   }

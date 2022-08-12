@@ -1,15 +1,15 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEmail, IsNumber, IsObject, IsOptional, IsString, Length, Max, Min } from 'class-validator';
+import { IsArray, IsEmail, IsNumber, IsObject, IsOptional, IsString, Max, Min } from 'class-validator';
 import {
-    VerifyCreateCustomerOtpErrorResponse,
-    VerifyCreateCustomerOtpRequest,
-    VerifyCreateCustomerOtpSuccessResponse,
-    VerifyCreateCustomerOtpErrorMessages,
-    VerifyCreateCustomerOtpSuccessMessages,
+    VerifyOtpErrorResponse,
+    VerifyOtpRequest,
+    VerifyOtpSuccessResponse,
+    VerifyOtpErrorMessages,
+    VerifyOtpSuccessMessages,
 } from 'models';
 
-export class VerifyCreateCustomerOtpDto implements VerifyCreateCustomerOtpRequest {
+export class VerifyOtpDto implements VerifyOtpRequest {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
@@ -28,34 +28,34 @@ export class VerifyCreateCustomerOtpDto implements VerifyCreateCustomerOtpReques
     otp: number;
 }
 
-export class VerifyCreateCustomerOtpErrorResponseDto implements VerifyCreateCustomerOtpErrorResponse {
+export class VerifyOtpErrorResponseDto implements VerifyOtpErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
     code: number;
 
     @ApiProperty({
-        example: VerifyCreateCustomerOtpErrorMessages.OTP_EXPIRED,
-        examples: [VerifyCreateCustomerOtpErrorMessages.OTP_EXPIRED, VerifyCreateCustomerOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, VerifyCreateCustomerOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS]
+        example: VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP,
+        examples: [VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, VerifyOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, VerifyOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS]
     })
-    error: VerifyCreateCustomerOtpErrorMessages;
+    error: VerifyOtpErrorMessages;
 
     @ApiProperty()
     @IsArray()
     errors: string[];
 }
 
-export class VerifyCreateCustomerOtpMessage {
-    @ApiProperty({ example: VerifyCreateCustomerOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL })
+export class VerifyOtpMessage {
+    @ApiProperty({ example: VerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL })
     @IsString()
-    message: VerifyCreateCustomerOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL;
+    message: VerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL;
 }
 
-export class VerifyCreateCustomerOtpSuccessResponseDto implements VerifyCreateCustomerOtpSuccessResponse {
+export class VerifyOtpSuccessResponseDto implements VerifyOtpSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
     @ApiProperty()
     @IsObject()
-    data: VerifyCreateCustomerOtpMessage;
+    data: VerifyOtpMessage;
 }
