@@ -83,21 +83,53 @@ export class OrderAddress {
   phoneNumber: string;
 }
 export class OrderProductPhoto{
-  url: string;
-  id?: string;
+  url?: string;
   title?: string;
   alt?: string;
   displayOrder?: number
 }
 
-export class ProductOrder {
+export class OrderProductInfo {
+    name: string;
+    shortDescription?: string;
+    fullDescription?: string;
+    sku: string;
+    oldPrice: number;
+    price: number;
+    quantity: number;
+    cost: number;
+    showOnHomePage?: boolean;
+    includeInTopMenu?: boolean;
+    allowToSelectPageSize?: boolean;
+    published?: boolean;
+    displayOrder?: number;
+    isFeatured?: boolean;
+    publishDate?: Date;
+}
+export class CreateOrderProduct {
   productId: string;
-  name: string;
-  photos?: OrderProductPhoto[];
-  price: number;
   quantity: number;
-  totalPrice: number;
-  sku: string;
+}
+
+export class CreateOrderRequest{
+  billingAddress: OrderAddress;
+  shippingAddress: OrderAddress;
+  shippingMethod: string;
+  paymentMethod: string;
+  productCost: number;
+  products: CreateOrderProduct[];
+  shippingCost: number;
+  stripeToken?: string;
+  stripeCustomerId?: string;
+  stripeChargeId?: string;
+  paypalPaymentId?: string;
+  paypalRedirectUrl?: string;
+}
+
+export class OrderProductData {
+  id: string;
+  info: OrderProductInfo;
+  photos?: OrderProductPhoto[];
 }
 export class BaseOrderEntity{
   billingAddress: OrderAddress;
@@ -108,7 +140,7 @@ export class BaseOrderEntity{
   orderStatus: OrderStatusEnum;
   shippingStatus: ShippingStatusEnum;
   paymentStatus: PaymentStatusEnum;
-  products: [ProductOrder];
+  products: [OrderProductData];
   productCost: number;
   shippingCost: number;
   totalCost: number;
@@ -145,27 +177,6 @@ export class ChangeStatusEntity {
   orderId: string
   statusType: string;
   statusValue: string
-}
-export class OrderResponseEntity {
-  orderId: string;
-  userId?: string;
-  billingAddress: OrderAddress;
-  shippingAddress: OrderAddress;
-  shippingMethod: string;
-  paymentMethod: string;
-  orderedDate: Date;
-  orderStatus: string;
-  shippingStatus: string;
-  paymentStatus: string;
-  products: ProductOrder[];
-  productCost: number;
-  shippingCost: number;
-  totalCost?: number;
-  stripeToken?: string;
-  stripeCustomerId?: string;
-  stripeChargeId?: string;
-  paypalPaymentId?: string;
-  paypalRedirectUrl?: string;
 }
 
 export enum SortTypesDto {

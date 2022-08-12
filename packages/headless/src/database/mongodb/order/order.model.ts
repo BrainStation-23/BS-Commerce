@@ -60,44 +60,81 @@ const AddressSchema = {
 
 const ProductSchema = new Schema(
   {
-    productId: {
+    id: {
       type: String,
       trim: true,
       required: true,
     },
-    name: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    totalPrice: {
-      type: Number,
-      required: false,
-    },
-    quantity: {
-      type: Number,
-      trim: true,
-      required: true,
-    },
-    quantityShipped: {
-      type: Number,
-      default: 0,
-    },
-    sku: {
-      type: String,
-      trim: true,
-      required: true,
+    info:{
+      name: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      shortDescription: {
+        type: String,
+        trim: true,
+        required: false,
+      },
+      fullDescription: {
+        type: String,
+        trim: true,
+        required: false,
+      },      
+      sku: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      oldPrice: {
+        type: Number,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      cost: {
+        type: Number,
+        required: true,
+      },
+      showOnHomePage: {
+        type: Boolean,
+        required: false,
+      },
+      includeInTopMenu: {
+        type: Boolean,
+        required: false,
+      },
+      allowToSelectPageSize: {
+        type: Boolean,
+        required: false,
+      },
+      published: {
+        type: Boolean,
+        required: false,
+      },
+      displayOrder: {
+        type: Number,
+        required: false,
+      },
+      isFeatured: {
+        type: Boolean,
+        required: false,
+      },
+      publishDate: {
+        type: Date,
+        required: false
+      }
     },
     photos: [{
-      url: String,
-      id: {
-          type: String,
-          index: true,
-          default: () => randomUUID()
+      url: {
+        type: String,
+        required: false
       },
       title: {
           type: String,

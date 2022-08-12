@@ -1,9 +1,5 @@
-import { CreateOrderProduct } from './../rest/dto/order.create.dto';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
-
-import { OrderSortQuery } from './../../../entity/order';
-import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
+import { OrderEntity, OrderListResponseEntity, CreateOrderRequest, OrderSortQuery, CreateOrderProduct } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { OrderRepository } from '../repositories';
@@ -15,10 +11,10 @@ export class OrderCustomerService {
   async createOrder(
     userId: string,
     body: CreateOrderRequest,
-    products: CreateProductOrderDetails[]
+    products: CreateOrderProduct[]
   ): Promise<IServiceResponse<OrderEntity>> {
-    const productListWithPhoto = await this.orderRepository.addPhotoDetails(products);
-    const newOrder = {...body, products: productListWithPhoto};
+    const productList = await this.orderRepository.addProductDetails(products);
+    const newOrder = {...body, products: productList};
     const newBody = this.orderRepository.addCosts(newOrder);
 
     const createOrder = await this.orderRepository.createOrder(userId, newBody);

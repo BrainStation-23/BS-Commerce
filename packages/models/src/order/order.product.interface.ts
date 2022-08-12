@@ -1,10 +1,11 @@
-export interface ProductInfo {
+export interface OrderProductInfo {
     name: string,
     shortDescription?: string,
     fullDescription?: string,
     sku: string,
-    price: number,
     oldPrice: number,
+    price: number,
+    quantity: number,
     cost: number,
     showOnHomePage?: boolean,
     includeInTopMenu?: boolean,
@@ -14,41 +15,14 @@ export interface ProductInfo {
     isFeatured?: boolean,
     publishDate?: Date
 }
-
-export interface ProductMeta {
-    keywords?: string[],
-    title?: string,
-    description?: string,
-    friendlyPageName: string
-}
-
-export interface ProductPhoto {
+export interface OrderProductPhoto {
     url?: string,
-    id?: string,
     title?: string,
     alt?: string,
     displayOrder?: number
 }
-
-export interface ProductCategory {
+export interface OrderProductData {
     id: string,
-    name: string,
-    isFeatured?: boolean,
-    displayOrder?: number
-}
-
-export interface ProductManufacturer {
-    id: string,
-    name: string,
-}
-
-export interface IProductOrderData {
-    id?: string,
-    info: ProductInfo;
-    meta: ProductMeta;
-    tags?: string[];
-    photos?: ProductPhoto[];
-    brands?: string[],
-    manufacturer?: ProductManufacturer,
-    categories: ProductCategory[];
+    info: OrderProductInfo,
+    photos?: OrderProductPhoto[]
 }

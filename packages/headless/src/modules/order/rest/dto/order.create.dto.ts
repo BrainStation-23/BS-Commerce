@@ -11,8 +11,8 @@ import {
   MinLength,
   ValidateNested
 } from 'class-validator';
-import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress, IProductOrderData } from 'models';
-import { OrderProductPhotoDto } from './OrderProductPhoto.dto';
+import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress, OrderProductData } from 'models';
+import { OrderProductPhotoDto } from './orderProductPhoto.dto';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
@@ -70,64 +70,15 @@ export class OrderAddressDto implements IOrderAddress {
   phoneNumber: string;
 }
 
-export class ProductOrderDto implements IProductOrderData {
-  @ApiProperty({ example: '052eeb8f-6a08-438d-8799-2fb0bb8d7d98' })
-  @IsString()
+export class CreateOrderProductDto implements CreateProductOrderDetails{
+  @ApiProperty({ example: "6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e" })
+  @IsNumber()
   productId: string;
 
-  @ApiProperty({ example: 'test' })
-  @MaxLength(100)
-  @IsString()
-  name: string;
-
-  @ApiProperty({ example: 100 })
-  @IsNumber()
-  price: number;
-
-  //photo added for response
-  @ApiProperty({ type: [OrderProductPhotoDto] })
-  @IsOptional()
-  @IsArray()
-  photos?: OrderProductPhotoDto[];
-  
   @ApiProperty({ example: 2 })
   @IsNumber()
   quantity: number;
-
-  @ApiProperty({ example: 2 })
-  @IsNumber()
-  totalPrice: number;
-
-  @ApiProperty({ example: 'string' })
-  @IsString()
-  @MaxLength(100)
-  sku: string;
 }
-
-export class CreateOrderProduct implements CreateProductOrderDetails{
-  @ApiProperty({ example: '052eeb8f-6a08-438d-8799-2fb0bb8d7d98' })
-  @IsString()
-  productId: string;
-
-  @ApiProperty({ example: 'test' })
-  @MaxLength(100)
-  @IsString()
-  name: string;
-
-  @ApiProperty({ example: 100 })
-  @IsNumber()
-  price: number;
-  
-  @ApiProperty({ example: 2 })
-  @IsNumber()
-  quantity: number;
-
-  @ApiProperty({ example: 'string' })
-  @IsString()
-  @MaxLength(100)
-  sku: string;
-}
-
 export class CreateOrderDto implements CreateOrderRequest {
   @ApiProperty({ example: 100 })
   @IsNumber()
@@ -158,13 +109,13 @@ export class CreateOrderDto implements CreateOrderRequest {
   productCost: number;
 
   @ApiProperty({
-    type: [CreateOrderProduct],
+    type: [CreateOrderProductDto],
   })
   @IsNotEmpty()
   @IsArray()
-  @Type(() => CreateOrderProduct)
+  @Type(() => CreateOrderProductDto)
   @ValidateNested({ always: true })
-  products: CreateOrderProduct[];
+  products: CreateOrderProductDto[];
 
   @ApiProperty({ example: '' })
   @IsString()
