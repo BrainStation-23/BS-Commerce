@@ -15,12 +15,52 @@ import {
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
+  SendCreateCustomerOtpDto,
+  SendCreateCustomerOtpErrorResponseDto,
+  SendCreateCustomerOtpSuccessResponseDto,
+  VerifyCreateCustomerOtpDto,
+  VerifyCreateCustomerOtpErrorResponseDto,
+  VerifyCreateCustomerOtpSuccessResponseDto,
 } from './dto';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
 export class CustomerAuthController {
   constructor(private authService: CustomerAuthService) { }
+
+  @Post('send-otp')
+  @ApiResponse({
+    description: 'Send Otp For Create Customer Success Response',
+    type: SendCreateCustomerOtpSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Send Otp For Create Customer Error Response',
+    type: SendCreateCustomerOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async sendOtp(@Body() data: SendCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.sendOtp(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('verify-otp')
+  @ApiResponse({
+    description: 'Verify Otp For Create Customer Success Response',
+    type: VerifyCreateCustomerOtpSuccessResponseDto,
+    status: HttpStatus.CREATED
+  })
+  @ApiResponse({
+    description: 'Verify Otp For Create Customer Error Response',
+    type: VerifyCreateCustomerOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async verifyOtp(@Body() data: VerifyCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.verifyOtp(data);
+    res.status(code);
+    return { code, ...response };
+  }
 
   @Post('register')
   @ApiResponse({

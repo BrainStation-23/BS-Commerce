@@ -13,13 +13,10 @@ export class CustomerAddress {
 }
 export class Customer {
     id?: string;
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     phone?: string;
     email?: string;
     password?: string;
-    otp: string;
-    otpVerified?: boolean;
     addresses?: CustomerAddress[];
     resetPasswordToken?: string;
     resetPasswordExpires?: number;
