@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { addToCart } from 'toolkit/cartSlice';
+import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { userAPI } from 'APIs';
 
@@ -12,7 +12,11 @@ import {
   WishlistItem,
   WishlistProduct,
 } from 'models';
-import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import {
+  setCartModalState,
+  setModalState,
+  setLoginModalState,
+} from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
@@ -49,7 +53,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     ? true
     : false;
 
-  const productInCart = cartData.find((item) => item.productId === product?.id)
+  const productInCart = cartData?.find((item) => item.productId === product?.id)
     ? true
     : false;
 
@@ -58,25 +62,34 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = (event: any) => {
-    const cartProduct = {
-      id: product.id!,
-      info: product.info!,
-      photos: product.photos!,
-    };
-    const cartItem = {
-      product: cartProduct!,
-      productId: product.id!,
-      quantity: 1,
-    };
-    if (!productInCart) {
-      toast(<CartToast product={product} />, {
-        containerId: 'bottom-left',
-      });
-      dispatch(addToCart(cartItem));
-      // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+  const handleAddToCart = async () => {
+    if (token) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        photos: product.photos!,
+      };
+      const cartItem = {
+        product: cartProduct!,
+        productId: product.id!,
+        quantity: 1,
+      };
+      // toast.success('+1 Item added to cart');
+      if (!productInCart) {
+        toast(<CartToast product={product} />, {
+          containerId: 'bottom-left',
+        });
+        const cart = await userAPI.addToCart({
+          productId: cartItem.productId,
+          quantity: 1,
+        });
+        dispatch(storeAllCartItems(cart?.data?.items!));
+        dispatch(addToCart(cartItem));
+        // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
-    event.preventDefault();
   };
 
   const handleAddToCompare = async () => {
@@ -111,7 +124,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         });
       }
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -130,7 +143,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         });
       }
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -146,7 +159,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={handleAddToCart}
+            onClick={(event: any) => {
+              handleAddToCart();
+              event.preventDefault();
+            }}
           >
             <path
               strokeLinecap="round"
