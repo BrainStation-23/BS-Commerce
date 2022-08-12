@@ -2,14 +2,14 @@ import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEmail, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import {
-    SendCreateCustomerOtpErrorResponse,
-    SendCreateCustomerOtpRequest,
-    SendCreateCustomerOtpSuccessResponse,
-    SendCreateCustomerOtpErrorMessages,
-    SendCreateCustomerOtpSuccessMessages,
+    SendOtpErrorResponse,
+    SendOtpRequest,
+    SendOtpSuccessResponse,
+    SendOtpErrorMessages,
+    SendOtpSuccessMessages,
 } from 'models';
 
-export class SendCreateCustomerOtpDto implements SendCreateCustomerOtpRequest {
+export class SendOtpDto implements SendOtpRequest {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
@@ -22,34 +22,34 @@ export class SendCreateCustomerOtpDto implements SendCreateCustomerOtpRequest {
     email: string;
 }
 
-export class SendCreateCustomerOtpErrorResponseDto implements SendCreateCustomerOtpErrorResponse {
+export class SendOtpErrorResponseDto implements SendOtpErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
     code: number;
 
     @ApiProperty({
-        example: SendCreateCustomerOtpErrorMessages.CAN_NOT_SEND_OTP,
-        examples: [SendCreateCustomerOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, SendCreateCustomerOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, , SendCreateCustomerOtpErrorMessages.CAN_NOT_SEND_OTP]
+        example: SendOtpErrorMessages.CAN_NOT_SEND_OTP,
+        examples: [SendOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, SendOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, , SendOtpErrorMessages.CAN_NOT_SEND_OTP]
     })
-    error: SendCreateCustomerOtpErrorMessages;
+    error: SendOtpErrorMessages;
 
     @ApiProperty()
     @IsArray()
     errors: string[];
 }
 
-export class SendCreateCustomerOtpMessage {
-    @ApiProperty({ example: SendCreateCustomerOtpSuccessMessages.OTP_SEND_SUCCESSFUL })
+export class SendOtpMessage {
+    @ApiProperty({ example: SendOtpSuccessMessages.OTP_SEND_SUCCESSFUL })
     @IsString()
-    message: SendCreateCustomerOtpSuccessMessages.OTP_SEND_SUCCESSFUL;
+    message: SendOtpSuccessMessages.OTP_SEND_SUCCESSFUL;
 }
 
-export class SendCreateCustomerOtpSuccessResponseDto implements SendCreateCustomerOtpSuccessResponse {
+export class SendOtpSuccessResponseDto implements SendOtpSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
     @ApiProperty()
     @IsObject()
-    data: SendCreateCustomerOtpMessage;
+    data: SendOtpMessage;
 }
