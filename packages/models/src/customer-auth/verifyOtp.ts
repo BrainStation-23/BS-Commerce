@@ -1,32 +1,32 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 /**
- * API Path: /customer/auth/verify-otp
+ * API Path: /customer/auth/register/verify-otp
  * method: POST
- * body: VerifyCreateCustomerOtpRequest
- * response: VerifyCreateCustomerOtpResponse
+ * body: VerifyOtpRequest
+ * response: VerifyOtpResponse
  */
-export interface VerifyCreateCustomerOtpRequest {
+export interface VerifyOtpRequest {
     phone?: string;
     email?: string;
     otp: number;
 }
-export declare const enum VerifyCreateCustomerOtpSuccessMessages {
+export declare const enum VerifyOtpSuccessMessages {
     OTP_VERIFIED_SUCCESSFUL = "OTP_VERIFIED_SUCCESSFUL"
 }
-export interface VerifyCreateCustomerOtpSuccessResponse extends SuccessResponse {
+export interface VerifyOtpSuccessResponse extends SuccessResponse {
     code: number;
     data: {
-        message?: VerifyCreateCustomerOtpSuccessMessages;
+        message?: VerifyOtpSuccessMessages;
     };
 }
-export declare const enum VerifyCreateCustomerOtpErrorMessages {
+export declare const enum VerifyOtpErrorMessages {
     CUSTOMER_PHONE_ALREADY_EXITS = "CUSTOMER_PHONE_ALREADY_EXITS",
     CUSTOMER_EMAIL_ALREADY_EXITS = "CUSTOMER_EMAIL_ALREADY_EXITS",
     OTP_EXPIRED = "OTP_EXPIRED",
 }
-export interface VerifyCreateCustomerOtpErrorResponse extends ErrorResponse {
+export interface VerifyOtpErrorResponse extends ErrorResponse {
     code?: number;
-    error: VerifyCreateCustomerOtpErrorMessages;
+    error: VerifyOtpErrorMessages;
     errors: DescriptiveError;
 }
-export declare type VerifyCreateCustomerOtpResponse = VerifyCreateCustomerOtpSuccessResponse | VerifyCreateCustomerOtpErrorResponse;
+export declare type VerifyOtpResponse = VerifyOtpSuccessResponse | VerifyOtpErrorResponse;
