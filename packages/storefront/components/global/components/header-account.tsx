@@ -12,6 +12,8 @@ import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
+import { useSelector } from 'react-redux';
+import { setModalState } from 'toolkit/modalSlice';
 
 interface Properties {}
 
@@ -22,6 +24,11 @@ const HeaderAccount: React.FC<Properties> = () => {
   const [modalOn, setModalOn] = useState(false);
   const [modalOnWishlist, setModalOnWishlist] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [modalCmp, setModalCmp] = useState(false);
+
+  const comparisonProducts = useAppSelector(
+    (state) => state.persistedReducer.compare.productsToCompare
+  );
 
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
@@ -122,6 +129,18 @@ const HeaderAccount: React.FC<Properties> = () => {
                         Wishlist
                       </li>
                     </Link>
+                    <li
+                      className="transition-all duration-100 ease-linear hover:text-green-600"
+                      onClick={() => {
+                        comparisonProducts[0]
+                          ? dispatch(setModalState(!modalCmp))
+                          : toast.warning('Comparision list is empty.', {
+                              containerId: 'bottom-right',
+                            });
+                      }}
+                    >
+                      Comparision
+                    </li>
                     <Link href="/myAccount" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
                         Profile
