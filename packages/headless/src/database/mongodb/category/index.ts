@@ -72,11 +72,7 @@ export class CategoryDatabase implements ICategoryDatabase {
         return category;
     }
 
-    async getCategory(categoryId: string): Promise<Category | null> {
-        return await CategoryModel.findOne({id: categoryId }).select('-_id').lean();
-    }
-
-    async getCategoryBySlug(slug: string): Promise<Category | null> {
-        return await CategoryModel.findOne({ slug }).select('-_id').lean();
+    async getCategory(query: Record<string, any>): Promise<Category | null> {
+        return await CategoryModel.findOne(query).select('-_id').lean();
     }
 }

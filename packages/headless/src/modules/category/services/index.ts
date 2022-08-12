@@ -9,7 +9,8 @@ export class CategoryService {
   constructor(private categoryRepo: CategoryRepository, private helper: Helper) { }
 
   async createCategory(category: RequestCategory): Promise<createCategoryResponse> {
-    const newCategory = await this.categoryRepo.createCategory(category);
+    const findCategory = await this.categoryRepo.getCategory({'name' : category.name});
+    const newCategory = !findCategory && await this.categoryRepo.createCategory(category);
     if (!newCategory) {
       return this.helper.serviceResponse.errorResponse(
         createCategoryErrorMessage.CAN_NOT_CREATE_CATEGORY,
@@ -21,7 +22,7 @@ export class CategoryService {
   }
 
   async getCategory(categoryId: string): Promise<getCategoryResponse> {
-    const category = await this.categoryRepo.getCategory(categoryId);
+    const category = await this.categoryRepo.getCategory({id:categoryId});
     if (!category) {
       return this.helper.serviceResponse.errorResponse(
         getCategoryErrorMessage.CAN_NOT_GET_CATEGORY_BY_ID,
@@ -45,8 +46,7 @@ export class CategoryService {
   }
 
   async getCategoryBySlug(slug: string): Promise<getCategoryBySlugResponse> {
-    const category = await this.categoryRepo.getCategoryBySlug(slug);
-
+    const category = await this.categoryRepo.getCategory({slug});
     if (!category) {
       return this.helper.serviceResponse.errorResponse(
         getCategoryBySlugErrorMessage.CAN_NOT_GET_CATEGORY_BY_SLUG,
