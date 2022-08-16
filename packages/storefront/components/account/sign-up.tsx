@@ -6,7 +6,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
 import { userAPI } from 'APIs';
-import { CreateCustomerRequest, SendOtpRequest } from 'models';
+import { CreateCustomerRequest } from 'models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
