@@ -41,6 +41,8 @@ export class BrandService{
                         }
                     }      
                 }
+            }else{
+                return { error: ErrorMessageUpdate.INFO_OR_META_OBJECT_MISSING, errors: null, code: HttpStatus.BAD_REQUEST };
             }
         }
 

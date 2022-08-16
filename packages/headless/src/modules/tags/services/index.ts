@@ -24,6 +24,6 @@ export class TagsService {
 
     const tag = await this.tagsRepo.createTag(data);
     if (!tag) return this.helper.serviceResponse.errorResponse(CreateTagErrorMessages.CAN_NOT_CREATE_TAG, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(tag, HttpStatus.OK);
+    return this.helper.serviceResponse.successResponse(tag, HttpStatus.CREATED);
   }
 }

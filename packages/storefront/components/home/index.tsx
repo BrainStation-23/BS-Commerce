@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import {
   setCartModalState,
   setModalState,
-  setWishlistModalState,
+  setLoginModalState,
 } from 'toolkit/modalSlice';
 
 import ImageSlider from '@/components/home/imageSlider';
@@ -16,15 +16,16 @@ import WeekDeals from '@/components/home/weekDeals';
 import HomefullBanner from '@/components/global/bannerComponent/homeFullBanner';
 import BestSell from '@/components/home/bestSell';
 import FeaturedProducts from '@/components/home/featuredProducts';
-import ModalWishlist from '@/components/global/components//modal/modal';
+import Modal from '@/components/comparison';
+import ModalLogin from '@/components/global/components//modal/modal';
 import { useEffect } from 'react';
 import BackToTopButton from 'pages/BackToTopButton';
 import CartModal from '../global/components/modal/cartModal';
 
 const HomeComponent: NextComponentType = () => {
 
-  const modalStateWishlist = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalWishlist
+  const modalStateLogin = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalLogin
   );
 
   const modalStateCart = useAppSelector(
@@ -49,7 +50,7 @@ const HomeComponent: NextComponentType = () => {
 
   useEffect(() => {
     dispatch(setModalState(false));
-    dispatch(setWishlistModalState(false));
+    dispatch(setLoginModalState(false));
     dispatch(setCartModalState({ showModal: false }));
   }, [router.asPath]);
 
@@ -57,8 +58,8 @@ const HomeComponent: NextComponentType = () => {
     <>
       <div className="scroll-smooth hover:scroll-auto">
 
-        {modalStateWishlist && (
-          <ModalWishlist
+        {modalStateLogin && (
+          <ModalLogin
             setModalOn={setModalOn}
             setChoice={setChoice}
             modalTitle="You need to login first."

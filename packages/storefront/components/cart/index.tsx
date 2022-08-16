@@ -16,7 +16,7 @@ const CartComponent: NextComponentType = () => {
       <div>
         <CartDetails />
       </div>
-      {cartData.length > 0 && (
+      {cartData?.length > 0 && (
         <div className="flex justify-center sm:overflow-hidden sm:px-8 lg:px-8">
           <DeliveryDetails />
         </div>

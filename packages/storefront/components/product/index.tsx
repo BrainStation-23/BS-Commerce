@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import { Product, WishlistItem } from 'models';
-import { addToCart } from 'toolkit/cartSlice';
-import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
+import { setModalState, setLoginModalState } from 'toolkit/modalSlice';
 import {
   addToWishlist,
   deleteItemFromWishlist,
@@ -20,7 +20,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
 import CartModal from '@/components/global/components/modal/cartModal';
-import ModalWishlist from '@/components/global/components//modal/modal';
+import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
 import CartToast from '../global/components/cartToast';
 interface SingleProduct {
@@ -36,8 +36,8 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
 
-  const modalStateWishlist = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalWishlist
+  const modalStateLogin = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalLogin
   );
 
   const cartData = useAppSelector(
@@ -68,6 +68,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
+  const [alreadyInCart, setAlreadyInCart] = useState<boolean>(false);
 
   if (findWishlistProduct) {
     clicked = true;
@@ -88,23 +89,40 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   );
 
   const toCart = async () => {
-    const cartProduct = {
-      id: product.id!,
-      info: product.info!,
-      photos: product.photos!,
-    };
-    const cartItem = {
-      product: cartProduct!,
-      productId: product.id!,
-      quantity: amount,
-    };
-    // console.log(cartItem);
-    setAmount(amount);
-    // setShowCartModal(true);
-    toast(<CartToast product={product} />, {
-      containerId: 'bottom-left',
-    });
-    dispatch(addToCart(cartItem));
+    if (token) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        photos: product.photos!,
+      };
+      const cartItem = {
+        product: cartProduct!,
+        productId: product.id!,
+        quantity: amount,
+      };
+      // console.log(cartItem);
+      setAmount(amount);
+      if (alreadyInCart) {
+        const cart = await userAPI.updateCartItem({
+          productId: cartItem.productId,
+          quantity: amount,
+        });
+        dispatch(storeAllCartItems(cart?.data?.items!));
+      } else {
+        const cart = await userAPI.addToCart({
+          productId: cartItem.productId,
+          quantity: amount,
+        });
+        dispatch(storeAllCartItems(cart?.data?.items!));
+      }
+      // setShowCartModal(true);
+      toast(<CartToast product={product} />, {
+        containerId: 'bottom-left',
+      });
+      dispatch(addToCart(cartItem));
+    } else {
+      dispatch(setLoginModalState(!modalOn));
+    }
   };
 
   const toWishlist = async (id: string, quantity: number) => {
@@ -139,7 +157,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       }
     } else {
       // router.push('/account/sign-in');
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -157,7 +175,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         });
       }
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -165,7 +183,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       router.push('/wishlist');
     } else {
-      dispatch(setWishlistModalState(!modalOn));
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -195,14 +213,17 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         productId: product.id!,
         quantity: 1,
       };
+      setAlreadyInCart(false);
+    } else {
+      setAlreadyInCart(true);
     }
     setAmount(itemAmountInCart?.quantity);
   }, []);
 
   return (
     <>
-      {modalStateWishlist && (
-        <ModalWishlist
+      {modalStateLogin && (
+        <ModalLogin
           setModalOn={setModalOn}
           setChoice={setChoice}
           modalTitle="You need to login first."
@@ -412,7 +433,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   )}
                 </div>
                 <div className=" flex flex-wrap">
-                  <Link href="/cart" passHref>
+                  <Link href={token ? '/cart' : '#'} passHref>
                     <button
                       disabled={!isAvailable}
                       className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
