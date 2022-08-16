@@ -3,6 +3,7 @@ import {
   GetAllOrderQueryEntity,
   OrderEntity,
   OrderIncompleteStatEntity,
+  OrderSortQuery,
   OrderStatEntity,
   OrderStatusEnum,
   ShippingStatusEnum,
@@ -11,18 +12,22 @@ import {
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { IOrderCreateData, IProductOrderData } from 'models';
+import {
+  CreateOrderRequest,
+  CreateProductOrderDetails,
+  IProductOrderData,
+} from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
   async createOrder(
     userId: string,
-    body: IOrderCreateData,
+    body: CreateOrderRequest,
   ): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
   async addPhotoDetails(
-    products: IProductOrderData[],
+    products: CreateProductOrderDetails[],
   ): Promise<IProductOrderData[]> {
     let newProductList = [];
     newProductList = await Promise.all(
@@ -36,12 +41,21 @@ export class OrderDatabase implements IOrderDatabase {
     return newProductList;
   }
 
-  async getOrderListByUserId(userId: string): Promise<OrderEntity[]> {
-    const orderList = await OrderModel.find({ userId });
-    if (orderList.length > 0) {
-      return orderList;
+  async getOrderListByUserId(
+    userId: string,
+    sortObj: OrderSortQuery,
+  ): Promise<OrderEntity[]> {
+    const { sortField, sortType } = sortObj;
+    let sortIndex = -1;
+    const sort = {};
+    if (sortField && sortType) {
+      if (sortType === 'asc') sortIndex = 1;
+      sort[sortField] = sortIndex;
+    } else {
+      sort['orderedDate'] = sortIndex; //by default orders will be sorted by date
     }
-    return null;
+
+    return await OrderModel.find({ userId }).sort(sort);
   }
 
   async getOrderById(orderId: string): Promise<OrderEntity> {

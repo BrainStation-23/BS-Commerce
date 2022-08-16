@@ -70,7 +70,7 @@ export class OrderIncompleteStatEntity {
   shippingPendingCount: number;
 }
 
-//Order Details Entities
+//Order Entities
 export class OrderAddress {
   firstName: string;
   lastName: string;
@@ -83,7 +83,7 @@ export class OrderAddress {
   phoneNumber: string;
 }
 export class OrderProductPhoto{
-  url?: string;
+  url: string;
   id?: string;
   title?: string;
   alt?: string;
@@ -96,13 +96,10 @@ export class ProductOrder {
   photos?: OrderProductPhoto[];
   price: number;
   quantity: number;
-  totalPrice?: number;
+  totalPrice: number;
   sku: string;
 }
-
-export class OrderEntity {
-  orderId: string;
-  userId?: string;
+export class BaseOrderEntity{
   billingAddress: OrderAddress;
   shippingAddress: OrderAddress;
   shippingMethod: string;
@@ -121,8 +118,15 @@ export class OrderEntity {
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
 }
+export class OrderEntity extends BaseOrderEntity{
+  orderId: string;
+  userId: string;
+}
 
-//Request Entities
+export class OrderDetails extends BaseOrderEntity {
+  orderId: string;
+}
+
 export class GetAllOrderQueryEntity {
   shippingStatus?: string;
   orderStatus?: string;
@@ -163,10 +167,20 @@ export class OrderResponseEntity {
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
 }
-// export class OrderListWithoutUserId {
 
-// }
+export enum SortTypesDto {
+  asc = 'asc',
+  desc = 'desc'
+}
+
+export enum SortField{
+  orderedDate = 'orderedDate'
+}
+export class OrderSortQuery {
+  sortField?: SortField;
+  sortType?: string;
+}
 export class OrderListResponseEntity {
   userId: string;
-  orderInfo: OrderEntity[];
+  orderInfo: OrderDetails[];
 }
