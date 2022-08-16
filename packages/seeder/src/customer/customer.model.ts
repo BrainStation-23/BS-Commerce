@@ -25,11 +25,11 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   postCode: String,
   phone: {
     type: String,
-    required: true
+    required: true,
   },
   tag: {
     type: String,
-    required: true
+    required: true,
   },
 }, {
   _id: false,
@@ -37,13 +37,12 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
   versionKey: false
 });
 
-const CustomerSchema = new Schema({
+const CustomerSchema = new Schema<Customer>({
   id: {
     type: String,
     unique: true,
   },
-  firstName: String,
-  lastName: String,
+  name: String,
   phone: {
     type: String,
     index: true
@@ -56,14 +55,6 @@ const CustomerSchema = new Schema({
     type: String,
     required: true,
     index: true,
-  },
-  otp: {
-    type: String,
-    index: true
-  },
-  otpVerified: {
-    type: Boolean,
-    default: false
   },
   addresses: [CustomerAddressSchema]
 }, {
