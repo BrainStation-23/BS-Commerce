@@ -58,13 +58,13 @@ export class CustomerAuthResolver {
   }
 
   @Mutation(() => VerifyOtpAuthResponse)
-  async verifyOtpForForgotPassword(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
+  async verifyOtpForForgotPassword(@Args('data') data?: VerifyOtpInput) {
     const res = await this.authService.forgotPasswordVerifyOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ForgotPasswordResponse)
-  async forgotPassword(@Args('data', { nullable: true }) data: CustomerForgotPasswordDataInput) {
+  async forgotPassword(@Args('data') data: CustomerForgotPasswordDataInput) {
     const res = await this.authService.forgotPassword(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
