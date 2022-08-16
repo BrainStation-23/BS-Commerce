@@ -22,6 +22,9 @@ export class GraphqlCustomerAddress implements CustomerAddress {
     @Field({ nullable: true })
     addressLine2?: string;
 
+    @Field(() => Boolean, { nullable: true })
+    isDefault?: boolean;
+
     @Field({ nullable: true })
     company?: string;
 
@@ -52,8 +55,11 @@ export class CustomerAddressInput {
     @Field()
     addressLine1: string;
 
-    @Field()
+    @Field({ nullable: true })
     addressLine2?: string;
+
+    @Field(() => Boolean, { nullable: true })
+    isDefault?: boolean;
 
     @Field({ nullable: true })
     company?: string;
