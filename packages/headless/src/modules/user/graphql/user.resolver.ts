@@ -1,28 +1,37 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
-import { ChangePasswordDto, UpdatedUserDto } from '../rest/dto';
 import { RolesGuard } from 'src/guards/auth.guard';
+import {
+  Admin,
+  AdminResponse,
+  ChangePasswordInput,
+  ChangePasswordResponse,
+  UpdateUserInput
+} from './user.model';
+import { Helper } from 'src/helper/helper.interface';
 
 @UseGuards(new RolesGuard(['admin']))
 @Resolver()
 export class UserResolver {
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private helper: Helper) { }
 
-  @Query()
-  async getUser(@UserInfo() user: User) {
-    return await this.userService.getUser(user.id);
+  @Query(() => AdminResponse)
+  async getUser(@UserInfo() admin: Admin) {
+    const res = await this.userService.getUser(admin.id);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
-  async updateUser(@Args('data') data: UpdatedUserDto, @UserInfo() user: User) {
-    return await this.userService.updateUser(user.id, data);
+  @Mutation(() => AdminResponse)
+  async updateUser(@Args('data') data: UpdateUserInput, @UserInfo() admin: Admin) {
+    const res = await this.userService.updateUser(admin.id, data);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
-  async changePassword(@Args('passwordDetails') passwordDetails: ChangePasswordDto, @UserInfo() user: User) {
-    return await this.userService.changePassword(user.id, passwordDetails);
+  @Mutation(() => ChangePasswordResponse)
+  async changePassword(@Args('passwordDetails') passwordDetails: ChangePasswordInput, @UserInfo() admin: Admin) {
+    const res = await this.userService.changePassword(admin.id, passwordDetails);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }

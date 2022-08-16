@@ -11,6 +11,8 @@ import {
   SignInAuthResponse,
   VerifyOtpInput,
   VerifyOtpAuthResponse,
+  ForgotPasswordResponse,
+  CustomerForgotPasswordDataInput,
 } from './auth.model';
 import { Helper } from 'src/helper/helper.interface';
 
@@ -37,7 +39,6 @@ export class CustomerAuthResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-
   @Mutation(() => VerifyOtpAuthResponse)
   async verifyOtpForRegistration(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
     const res = await this.authService.registerVerifyOTP(data);
@@ -47,6 +48,24 @@ export class CustomerAuthResolver {
   @Mutation(() => SignInAuthResponse)
   async customerSignIn(@Args('data') data: CustomerSignInDataInput) {
     const res = await this.authService.signIn(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => SendOtpAuthResponse)
+  async sendOtpForForgotPassword(@Args('data', { nullable: true }) data?: SendOtpInput) {
+    const res = await this.authService.forgotPasswordSendOTP(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => VerifyOtpAuthResponse)
+  async verifyOtpForForgotPassword(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
+    const res = await this.authService.forgotPasswordVerifyOTP(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => ForgotPasswordResponse)
+  async forgotPassword(@Args('data') data: CustomerForgotPasswordDataInput) {
+    const res = await this.authService.forgotPassword(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
