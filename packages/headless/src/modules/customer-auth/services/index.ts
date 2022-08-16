@@ -151,15 +151,15 @@ export class CustomerAuthService {
   }
 
   async forgotPasswordSendOTP(data: SendOtpRequest): Promise<SendOtpResponse> {
-    const doesCustomerEmailExist = data.email && await this.customerRepo.getCustomerPassword({ email: data.email });
-    const doesCustomerPhoneExist = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone });
+    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
     return this.sendOtp(data);
   }
 
   async forgotPasswordVerifyOTP(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
-    const doesCustomerEmailExist = data.email && await this.customerRepo.getCustomerPassword({ email: data.email });
-    const doesCustomerPhoneExist = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone });
+    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
     return this.verifyOtp(data);
   }
