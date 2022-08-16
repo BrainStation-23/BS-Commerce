@@ -20,6 +20,10 @@ const CustomerAddressSchema = new Schema<CustomerAddress>({
     type: String,
     required: true,
   },
+  isDefault: {
+    type: Boolean,
+    default: false,
+  },
   addressLine2: String,
   company: String,
   state: String,

@@ -4,6 +4,7 @@ export class CustomerAddress {
     lastName: string;
     addressLine1: string;
     addressLine2?: string;
+    isDefault?: boolean;
     company?: string;
     state?: string;
     country?: string;
