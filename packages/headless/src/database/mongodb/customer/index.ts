@@ -14,7 +14,6 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
     const otp = await OtpModel.findOne(query);
-    console.log(Date.now())
     if (otp) await this.updateOtp(query, { otpVerifiedAt: Date.now(), isVerified: true });
     return otp;
   }
