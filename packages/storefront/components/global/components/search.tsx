@@ -24,6 +24,7 @@ const Search: React.FC<Properties> = (props) => {
       <div className="flex h-full w-14 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
         <button
           type="submit"
+          id='navSearchSubmit'
           className=""
           onClick={() => {
             homeSearchOnClick();

@@ -23,22 +23,44 @@ describe('Login to storefront & view checkout', () => {
     cy.get('.h-10 > path').click();
   });
 
-  it('should go to the Search Page', () => {
+  it('should go to the Search Page from nav search', () => {
     cy.wait(1500);
-    //Go to Login page
-    cy.visit('/search');
-    //Check for Login page
+    //Go to Search page
+    cy.get('#menuToggler  ').click();
+    cy.wait(1500);
+    cy.get('#navSearchSubmit').click({ force: true });
+    cy.get('#menuToggler  ').click();
+    cy.wait(1500);
+    //Check for Search page
     cy.url().should('eq', Cypress.config().baseUrl + '/search');
+    cy.wait(1500);
   });
 
-  it('sould be able to search', () => {
+  it('should be able to Search Page from nav search', () => {
+    cy.wait(1500);
+    cy.get('#menuToggler  ').click();
+    cy.wait(1500);
+    cy.get('#navSearchInput').type('cab', { force: true });
+    cy.wait(1500);
+    cy.get('#navSearchSubmit').click({ force: true });
+    cy.get('#menuToggler  ').click();
+    //Check for Search page
+    cy.url().should('eq', Cypress.config().baseUrl + '/search');
+    //check for "Cabbage"
+    cy.get('#searchProductName').should('have.text', 'Cabbage');
+    cy.wait(1500);
+    //Clear Search
+    cy.get('#productSearchInput').clear();
+    cy.wait(1500);
+  });
+
+  it('sould be able to search in searchPage', () => {
     cy.wait(1500);
 
     //Search for "cab"
     cy.get('#productSearchInput').type('cab');
     //check for "Cabbage"
     cy.get('#searchProductName').should('have.text', 'Cabbage');
-
     cy.wait(1500);
 
     //Clear Search
@@ -54,14 +76,9 @@ describe('Login to storefront & view checkout', () => {
     //Clear Search
     cy.get('#productSearchInput').clear({ force: true });
     cy.wait(1500);
-
     // cy.get('#searchProductName').click({ force: true });
   });
   it('Product should be functional', () => {
-
-    
-
-
     //Click on product to go to product page
     cy.get('#searchProductName').click({ force: true });
     cy.wait(2000);
