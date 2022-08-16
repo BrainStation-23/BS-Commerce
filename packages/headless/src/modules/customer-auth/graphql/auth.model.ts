@@ -32,7 +32,7 @@ export class CreateCustomerInput implements CreateCustomerRequest {
   email?: string;
 
   @Field()
-  otp: string;
+  name: string;
 
   @Field()
   @MinLength(6, {
