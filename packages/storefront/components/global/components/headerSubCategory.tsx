@@ -88,12 +88,14 @@ export const HeaderSubCategory: React.FC<Props> = ({
           <div className="hidden lg:block">
             {category.subCategories ? (
               <div
-                className={`absolute top-0 left-56 z-50 h-auto w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
-                  showSubCategory ? '' : 'scale-0 delay-300'
+                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+                  showSubCategory
+                    ? 'scale-x-100'
+                    : 'scale-x-0'
                 }`}
               >
                 <ul className="pl-2">
-                  {category.subCategories?.map((category: any) => (
+                  {showSubCategory && category.subCategories?.map((category: any) => (
                     <li key={category.name}>
                       <HeaderSubCategory
                         category={category}

@@ -128,19 +128,19 @@ const Header: NextComponentType = () => {
               <ChevronDownIcon />
               {categoryList ? (
                 <div
-                  className={`translate-y absolute top-[40px] left-0 z-40 flex w-full flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in lg:top-[48px] lg:w-56 ${
+                  className={`translate-y absolute origin-top top-[40px] left-0 z-40 flex w-full flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 lg:top-[48px] lg:w-56  ${
                     showAllCategory
-                      ? `h-auto lg:h-60 `
-                      : 'h-0 scale-0 opacity-0' //h-[350px]
+                      ? `h-auto lg:h-60 scale-y-100`
+                      : 'h-0 scale-y-0' //h-[350px]
                   }`}
                   // onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
                   //   e.stopPropagation()
                   // }
                 >
                   <ul>
-                    {categoryList?.map((category) => (
+                    {showAllCategory && categoryList?.map((category) => (
                       <li key={category.id}>
-                        <HeaderCategory category={category} />
+                        <HeaderCategory category={category}/>
                       </li>
                     ))}
                   </ul>
