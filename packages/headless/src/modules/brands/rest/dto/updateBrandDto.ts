@@ -54,7 +54,7 @@ export class UpdateBrandErrorResponseDto implements UpdateBrandErrorResponse{
     code?: number;
 
     @ApiProperty()
-    error: ErrorMessageUpdate.INVALID_BRAND_ID | ErrorMessageUpdate.CANNOT_UPDATE_BRAND | ErrorMessageUpdate.BRAND_ALREADY_EXISTS;
+    error: ErrorMessageUpdate.INVALID_BRAND_ID | ErrorMessageUpdate.CANNOT_UPDATE_BRAND | ErrorMessageUpdate.BRAND_ALREADY_EXISTS | ErrorMessageUpdate.INFO_OR_META_OBJECT_MISSING;
 
     @ApiProperty()
     errors: string[];

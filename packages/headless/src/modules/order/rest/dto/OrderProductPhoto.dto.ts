@@ -4,9 +4,8 @@ import { IOrderProductPhoto } from "models";
 
 export class OrderProductPhotoDto implements IOrderProductPhoto {
     @ApiProperty({ required: false })
-    @IsOptional()
     @IsString()
-    url?: string;
+    url: string;
 
     @ApiProperty({ required: false })
     @IsOptional()

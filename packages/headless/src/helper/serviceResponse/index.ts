@@ -12,8 +12,8 @@ export class ServiceResponse implements IServiceResponse {
     }
 
     graphqlResponse(res: ServiceSuccessResponse | ServiceErrorResponse): ServiceSuccessResponse | ServiceErrorResponse | HttpException {
-        const errObj = (res as ServiceErrorResponse).error;
-        if (errObj) { return new HttpException(errObj, res?.code); }
+        const err = (res as ServiceErrorResponse).error;
+        if (err) { return new HttpException(err, res?.code); }
         return res;
     }
 }
