@@ -58,7 +58,7 @@ export class CustomerAuthResolver {
   }
 
   @Mutation(() => VerifyOtpAuthResponse)
-  async verifyOtpForForgotPassword(@Args('data') data?: VerifyOtpInput) {
+  async verifyOtpForForgotPassword(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
     const res = await this.authService.forgotPasswordVerifyOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
