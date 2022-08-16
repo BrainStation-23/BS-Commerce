@@ -64,7 +64,7 @@ export class CustomerAuthResolver {
   }
 
   @Mutation(() => ForgotPasswordResponse)
-  async forgotPassword(@Args('data', { nullable: true }) data: CustomerForgotPasswordDataInput) {
+  async forgotPassword(@Args('data') data: CustomerForgotPasswordDataInput) {
     const res = await this.authService.forgotPassword(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }

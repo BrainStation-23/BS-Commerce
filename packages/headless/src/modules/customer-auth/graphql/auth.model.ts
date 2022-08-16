@@ -121,7 +121,6 @@ export class ForgotPasswordResponse {
   data?: CustomerAuthResponseMessage
 }
 
-
 @ObjectType()
 export class SendOtpAuthResponse {
   @Field(() => Int)
