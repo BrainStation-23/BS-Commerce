@@ -31,16 +31,16 @@ export class CustomerAuthController {
   @Post('register/send-otp')
   @ApiResponse({
     description: 'Send Otp For Create Customer Success Response',
-    type: SendCreateCustomerOtpSuccessResponseDto,
-    status: HttpStatus.CREATED
+    type: SendOtpSuccessResponseDto,
+    status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Send Otp For Create Customer Error Response',
     type: SendOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async sendOtp(@Body() data: SendCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.sendOtp(data);
+  async sendOtp(@Body() data: SendOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.registerSendOTP(data);
     res.status(code);
     return { code, ...response };
   }
@@ -48,16 +48,16 @@ export class CustomerAuthController {
   @Post('register/verify-otp')
   @ApiResponse({
     description: 'Verify Otp For Create Customer Success Response',
-    type: VerifyCreateCustomerOtpSuccessResponseDto,
-    status: HttpStatus.CREATED
+    type: VerifyOtpSuccessResponseDto,
+    status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Verify Otp For Create Customer Error Response',
     type: VerifyOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async verifyOtp(@Body() data: VerifyCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.verifyOtp(data);
+  async verifyOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.registerVerifyOTP(data);
     res.status(code);
     return { code, ...response };
   }
@@ -116,15 +116,15 @@ export class CustomerAuthController {
   @Post('forgot-password/send-otp')
   @ApiResponse({
     description: 'Send Otp For Forgot Password Success Response',
-    type: SendCreateCustomerOtpSuccessResponseDto,
+    type: SendOtpSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Send Otp For Forgot Password Error Response',
-    type: SendCreateCustomerOtpErrorResponseDto,
+    type: SendOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async forgotPasswordSendOTP(@Body() data: SendCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
+  async forgotPasswordSendOTP(@Body() data: SendOtpDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.forgotPasswordSendOTP(data);
     res.status(code);
     return { code, ...response };
@@ -133,15 +133,15 @@ export class CustomerAuthController {
   @Post('forgot-password/verify-otp')
   @ApiResponse({
     description: 'Verify Otp For Forgot Password Success Response',
-    type: VerifyCreateCustomerOtpSuccessResponseDto,
+    type: VerifyOtpSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Verify Otp For Forgot Password Error Response',
-    type: VerifyCreateCustomerOtpErrorResponseDto,
+    type: VerifyOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async forgotPasswordOtp(@Body() data: VerifyCreateCustomerOtpDto, @Res({ passthrough: true }) res: Response) {
+  async forgotPasswordOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.forgotPasswordVerifyOTP(data);
     res.status(code);
     return { code, ...response };
