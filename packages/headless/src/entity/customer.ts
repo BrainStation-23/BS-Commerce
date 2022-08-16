@@ -19,6 +19,4 @@ export class Customer {
     email?: string;
     password?: string;
     addresses?: CustomerAddress[];
-    resetPasswordToken?: string;
-    resetPasswordExpires?: number;
 }

@@ -134,14 +134,19 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone });
     if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
 
-    const otpVerified = await this.customerRepo.findOtp({ $and: [{ $or: [{ email: data.email }, { phone: data.phone }] }, { isVerified: true, otpVerifiedAt: { $gt: Date.now() } }] });
-    if (!otpVerified) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    let otpVerified = null;
+    otpVerified = data.phone && await this.customerRepo.findOtp({ isVerified: true, phone: data.phone });
+    otpVerified = (!otpVerified && data.email) ? await this.customerRepo.findOtp({ isVerified: true, email: data.email }) : otpVerified;
+    if (!otpVerified || (otpVerified.otpVerifiedAt + FIVE_MINUTES) < Date.now()) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
 
     const customer = doesCustomerEmailExist || doesCustomerPhoneExist;
     customer.password = await bcrypt.hash(data.password, authConfig.salt!);
 
     const updatedPassword = await this.customerRepo.updateCustomer(customer.id, customer);
     if (!updatedPassword) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_UPDATE_CUSTOMER_PASSWORD, null, HttpStatus.BAD_REQUEST);
+
+    customer.email && await this.customerRepo.deleteOtp({ email: customer.email });
+    customer.phone && await this.customerRepo.deleteOtp({ phone: customer.phone });
     return this.helper.serviceResponse.successResponse({ message: CustomerForgotPasswordSuccessMessages.FORGOT_PASSWORD_SUCCESSFUL }, HttpStatus.OK);
   }
 

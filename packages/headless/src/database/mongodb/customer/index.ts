@@ -26,10 +26,14 @@ export class CustomerDatabase implements ICustomerDatabase {
     return await OtpModel.findOneAndUpdate(query, { $set: data });
   }
 
+  async deleteOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await OtpModel.findOneAndDelete(query);
+  }
+
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
-    createdCUstomer && customer.email && await OtpModel.findOneAndDelete({ email: customer.email });
-    createdCUstomer && customer.phone && await OtpModel.findOneAndDelete({ phone: customer.phone });
+    createdCUstomer && customer.email && await this.deleteOtp({ email: customer.email });
+    createdCUstomer && customer.phone && await this.deleteOtp({ phone: customer.phone });
     const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;
@@ -44,7 +48,7 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
   }
 
   async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
@@ -56,6 +60,6 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -otp -otpVerified -_id').exec();
+    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -_id').exec();
   }
 }

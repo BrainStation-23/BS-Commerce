@@ -25,6 +25,10 @@ export class CustomerRepository {
     return await this.db.findOtp(query);
   }
 
+  async deleteOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.deleteOtp(query);
+  }
+
   async updateOtp(query: Record<string, any>, data: object): Promise<Otp | null> {
     return await this.db.updateOtp(query, data);
   }

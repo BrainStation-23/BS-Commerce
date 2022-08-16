@@ -141,7 +141,7 @@ export class CustomerAuthController {
     type: VerifyOtpErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async forgotPasswordOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
+  async forgotPasswordVerifyOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.forgotPasswordVerifyOTP(data);
     res.status(code);
     return { code, ...response };
