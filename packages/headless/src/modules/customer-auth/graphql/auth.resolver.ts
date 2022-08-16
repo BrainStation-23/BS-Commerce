@@ -6,7 +6,11 @@ import {
   GetAuthCustomerQuery,
   GetCustomerAuthResponse,
   RegistrationAuthResponse,
+  SendOtpInput,
+  SendOtpAuthResponse,
   SignInAuthResponse,
+  VerifyOtpInput,
+  VerifyOtpAuthResponse,
 } from './auth.model';
 import { Helper } from 'src/helper/helper.interface';
 
@@ -15,7 +19,7 @@ export class CustomerAuthResolver {
   constructor(private authService: CustomerAuthService, private helper: Helper) { }
 
   @Query(() => GetCustomerAuthResponse)
-  async getCustomer(@Args('query', {nullable: true}) query?: GetAuthCustomerQuery) {
+  async getCustomer(@Args('query', { nullable: true }) query?: GetAuthCustomerQuery) {
     const res = await this.authService.getCustomer(query);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -23,6 +27,20 @@ export class CustomerAuthResolver {
   @Mutation(() => RegistrationAuthResponse)
   async register(@Args('customer') customer: CreateCustomerInput) {
     const res = await this.authService.register(customer);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+
+  @Mutation(() => SendOtpAuthResponse)
+  async sendOtpForRegistration(@Args('data', { nullable: true }) data?: SendOtpInput) {
+    const res = await this.authService.registerSendOTP(data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+
+  @Mutation(() => VerifyOtpAuthResponse)
+  async verifyOtpForRegistration(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
+    const res = await this.authService.registerVerifyOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
