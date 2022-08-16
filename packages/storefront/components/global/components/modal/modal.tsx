@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 import { useAppDispatch } from 'customHooks/hooks';
-import { setWishlistModalState } from 'toolkit/modalSlice';
+import { setLoginModalState } from 'toolkit/modalSlice';
 
 const Modal = ({
   setModalOn,
@@ -17,17 +17,17 @@ const Modal = ({
     setChoice(true);
     if (trigger) {
       setModalOn(false);
-      dispatch(setWishlistModalState(false));
+      dispatch(setLoginModalState(false));
       trigger();
     } else {
       setModalOn(false);
-      dispatch(setWishlistModalState(false));
+      dispatch(setLoginModalState(false));
       router.push('/account/sign-in');
     }
   };
   const handleCancelClick = () => {
     setChoice(false);
-    dispatch(setWishlistModalState(false));
+    dispatch(setLoginModalState(false));
     setModalOn(false);
   };
 

@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { Tags } from 'models';
+import { Tag } from 'models';
 
-const TagsSchema = new Schema<Tags>({
+const TagsSchema = new Schema<Tag>({
   id: {
     type: String,
     unique: true,
@@ -12,6 +12,6 @@ const TagsSchema = new Schema<Tags>({
   versionKey: false
 });
 
-const TagsModel = model<Tags>('tags', TagsSchema);
+const TagsModel = model<Tag>('tags', TagsSchema);
 export { TagsModel };
 export default TagsModel;

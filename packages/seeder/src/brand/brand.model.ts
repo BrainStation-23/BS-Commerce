@@ -4,7 +4,6 @@ import Crypto from 'crypto';
 const BrandSchema = new Schema({
     id: {
         type: String,
-        // default: Crypto.randomUUID(),
         unique: true
     },
     info: {
