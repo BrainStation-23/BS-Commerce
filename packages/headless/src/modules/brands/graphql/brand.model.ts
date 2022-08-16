@@ -76,7 +76,6 @@ export class BrandMetaInput implements BrandMeta{
 
 @ObjectType({ description: 'Brand Model'})
 export class BrandModel implements Brand{
-
     @Field()
     id: string;
 
@@ -85,8 +84,6 @@ export class BrandModel implements Brand{
 
     @Field(type => BrandMetaModel, { nullable: false })
     meta: BrandMetaModel;
-
-
 }
 
 @InputType({ description: 'Input for Brand' })
@@ -104,11 +101,9 @@ export class SingleBrandResponse{
     error?: string;
     
     @Field(type=> Int, { nullable: false })
-    // @IsNotEmpty()
     code: number;
 
     @Field(type=> BrandModel, { nullable: false })
-    // @IsNotEmpty()
     data: Brand;
 }
 
@@ -118,11 +113,9 @@ export class BrandResponse{
     error?: string;
     
     @Field(type=> Int, { nullable: false })
-    // @IsNotEmpty()
     code: number;
 
     @Field(type=> [BrandModel], { nullable: false })
-    // @IsNotEmpty()
     data: Brand[];
 } 
 

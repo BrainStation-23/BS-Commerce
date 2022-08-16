@@ -1,86 +1,106 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Product } from 'src/entity/product';
 import { RolesGuard } from 'src/guards/auth.guard';
-import {
-  DeleteProductParamsDto,
-  GetAllProductsQueryDto,
-  GetProductBySKUParamsDto,
-  GetProductParamsDto,
-  GetProductsByConditionQueryDto,
-  UpdateProductParamsDto,
-  updateProductsForBrandRequestDto
-} from '../rest/dto';
-import { CreateProductDto } from '../rest/dto/createProduct.dto';
+import { Helper } from 'src/helper/helper.interface';
 import { ProductService } from '../services';
+import {
+  GetAllProductsQueryInput,
+  GetCustomerAllProductsQueryInput,
+  GraphqlProductInput,
+  ProductArrayResponse,
+  ProductArrayWithCountResponse,
+  ProductCount,
+  ProductDeletedResponse,
+  ProductResponse,
+  SearchConditionInput,
+  UpdateProductInput,
+  UpdateProductsForBrandBody,
+} from './product.model';
 
 @Resolver()
 export class ProductResolver {
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private helper: Helper) { }
 
   // Customer
-  @Query()
-  async getCustomerProduct(@Args('params') params: GetProductParamsDto) {
-    return await this.productService.getCustomerProduct(params.productId)
+  @Query(() => ProductResponse)
+  async getCustomerProduct(@Args('productId') productId: string) {
+    const res = await this.productService.getCustomerProduct(productId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query()
-  async getCustomerAllProducts(@Args('query') query: GetAllProductsQueryDto) {
-    return await this.productService.getCustomerAllProducts(query);
+  @Query(() => ProductArrayResponse)
+  async getCustomerAllProducts(@Args('condition') condition: GetCustomerAllProductsQueryInput) {
+    const res = await this.productService.getCustomerProductsByCondition(condition);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Query(() => ProductArrayResponse)
+  async getCustomerHomePageProducts() {
+    const res = await this.productService.getCustomerAllHomePageProducts();
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   // Admin
+  @Query(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  @Query()
-  async getProduct(@Args('params') params: GetProductParamsDto) {
-    return await this.productService.getProduct(params.productId)
+  async getProduct(@Args('productId') productId: string) {
+    const res = await this.productService.getProduct(productId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query()
+  @Query(() => ProductArrayResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getAllProducts(@Args('query') query: GetAllProductsQueryDto) {
-    return await this.productService.getAllProducts(query);
+  async getAllProducts(@Args('query') query: GetAllProductsQueryInput) {
+    const res = await this.productService.getAllProducts(query);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query()
+  @Query(() => ProductCount)
   @UseGuards(new RolesGuard(['admin']))
   async getProductCount() {
-    return await this.productService.getProductCount();
+    const res = await this.productService.getProductCount();
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query()
+  @Query(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getProductBySKU(@Args('params') params: GetProductBySKUParamsDto) {
-    return await this.productService.getProductBySKU(params.sku)
+  async getProductBySKU(@Args('sku') sku: string) {
+    const res = await this.productService.getProductBySKU(sku);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query()
+  @Query(() => ProductArrayWithCountResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getProductsByCondition(@Args('condition') condition: GetProductsByConditionQueryDto) {
-    return await this.productService.getProductsByCondition(condition);
+  async getProductsByCondition(@Args('condition') condition: SearchConditionInput) {
+    const res = await this.productService.getProductsByCondition(condition);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
+  @Mutation(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async addProduct(@Args('product') product: CreateProductDto) {
-    return await this.productService.createProduct(product);
+  async createProduct(@Args('product') product: GraphqlProductInput) {
+    const res = await this.productService.createProduct(product);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
+  @Mutation(() => ProductDeletedResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async deleteProduct(@Args('params') params: DeleteProductParamsDto) {
-    return await this.productService.deleteProduct(params.productId);
+  async deleteProduct(@Args('productId') productId: string) {
+    const res = await this.productService.deleteProduct(productId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
+  @Mutation(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async updateProduct(@Args('product') product: Product, @Args('params') params: UpdateProductParamsDto) {
-    return await this.productService.updateProduct(product, params.productId);
+  async updateProduct(@Args('product') product: UpdateProductInput, @Args('productId') productId: string,) {
+    const res = await this.productService.updateProduct(product, productId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation()
+  @Mutation(() => ProductArrayResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async updateProductsForBrand(@Args('data') data: updateProductsForBrandRequestDto) {
-    return await this.productService.updateProductsForBrand(data.productIds, data.brandId);
+  async updateProductsForBrand(@Args('data') data: UpdateProductsForBrandBody) {
+    const res = await this.productService.updateProductsForBrand(data.productIds, data.brandId);
+    return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
