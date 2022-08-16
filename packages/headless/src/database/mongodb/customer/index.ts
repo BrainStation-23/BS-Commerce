@@ -4,7 +4,6 @@ import { Otp } from 'src/entity/otp';
 import { ICustomerDatabase } from 'src/modules/customer/repositories/customer.database.interface';
 import { OtpModel } from '../otp/otp.model';
 import { CustomerModel } from './customer.model';
-const ONE_HOUR = 60 * 60 * 1000;
 
 @Injectable()
 export class CustomerDatabase implements ICustomerDatabase {
@@ -15,7 +14,8 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
     const otp = await OtpModel.findOne(query);
-    if (otp) await this.updateOtp(query, { otpVerifiedAt: Date.now() + ONE_HOUR, isVerified: true });
+    console.log(Date.now())
+    if (otp) await this.updateOtp(query, { otpVerifiedAt: Date.now(), isVerified: true });
     return otp;
   }
 
@@ -29,8 +29,8 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
-    customer.email && await OtpModel.findOneAndDelete({ email: customer.email });
-    customer.phone && await OtpModel.findOneAndDelete({ phone: customer.phone });
+    createdCUstomer && customer.email && await OtpModel.findOneAndDelete({ email: customer.email });
+    createdCUstomer && customer.phone && await OtpModel.findOneAndDelete({ phone: customer.phone });
     const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;
