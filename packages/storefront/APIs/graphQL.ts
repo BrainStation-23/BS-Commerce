@@ -45,6 +45,7 @@ import {
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
+  SendOtpSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -60,6 +61,10 @@ import { NextRouter } from 'next/router';
 export async function signInGraphql(
   data: CustomerSignInRequest
 ): Promise<CustomerSignInResponse | undefined> {
+  return undefined;
+}
+
+export async function sendOTPGraphql(data: string): Promise<SendOtpSuccessResponse | undefined> {
   return undefined;
 }
 

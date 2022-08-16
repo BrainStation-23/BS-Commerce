@@ -41,6 +41,8 @@ import {
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
   updateCartItemRequest,
+  SendOtpRequest,
+  SendOtpSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -72,6 +74,7 @@ export interface apiFunction {
     isEmail: boolean,
     data: GetCustomerQuery
   ) => Promise<GetCustomerResponse | undefined>;
+  sendOTP: (data: string) => Promise<SendOtpSuccessResponse | undefined>
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;

@@ -28,6 +28,7 @@ import {
   deleteAllCartItemRest,
   deleteSingleCartItemRest,
   updateCartItemRest,
+  sendOTPRest,
 } from './restApi';
 
 import {
@@ -60,12 +61,14 @@ import {
   deleteAllCartItemGraphql,
   deleteSingleCartItemGraphql,
   updateCartItemGraphql,
+  sendOTPGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
+  sendOTP: sendOTPGraphql,
   signUp: signUpGraphql,
   getSignedInUser: getSignedInUserGraphql,
   forgotPassword: forgotPasswordGraphql,
@@ -98,6 +101,7 @@ const graphqlApi: apiFunction = {
 
 const restApi: apiFunction = {
   signUp: signUpRest,
+  sendOTP: sendOTPRest,
   signIn: signinRest,
   getSignedInUser: getSignedInUserRest,
   forgotPassword: forgotPasswordRest,

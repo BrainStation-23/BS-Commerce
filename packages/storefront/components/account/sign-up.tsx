@@ -6,18 +6,23 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
 import { userAPI } from 'APIs';
-import { CreateCustomerRequest } from 'models';
+import { CreateCustomerRequest, SendOtpRequest } from 'models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
+import OtpModal from '../global/components/modal/otpModal';
 
 const Signup = () => {
   const router = useRouter();
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
+  const [otp, setOtp] = useState('');
+
   const toggleClass = 'transform translate-x-5';
   let username = '';
   let loggedInUsingEmail = false;
@@ -60,11 +65,49 @@ const Signup = () => {
     }
   }
 
+  async function handleOTPRequest(data: string, setFieldValue: any) {
+    try {
+      const res = await userAPI.sendOTP(data).then((response: any) => {
+        if (response?.code !== 200) {
+          if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+            toast.warning('User with this email already exists', {
+              containerId: 'bottom-right',
+            });
+          } else if (
+            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
+          ) {
+            toast.warning('User with this phone number already exists', {
+              containerId: 'bottom-right',
+            });
+          }
+        } else {
+          const responseMessage = response?.data?.message!.split(' ');
+          const otpValue = responseMessage![responseMessage?.length! - 1];
+          setFieldValue('otp', otpValue);
+          setOtp(otpValue);
+          setToggle(!toggle);
+        }
+      });
+    } catch (error) {
+      toast.error('Failed to send OTP. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
+  }
+
   if (loading) {
     return <Loading />;
   }
   return (
     <>
+      {/* {modalOn && (
+        <OtpModal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="Send OTP"
+          bodyText={otp}
+        />
+      )} */}
       <Breadcrumb
         title="Create Account"
         pathArray={['Home', 'Create Account']}
@@ -143,11 +186,15 @@ const Signup = () => {
                         <ErrorMessage name="otp" />
                       </div>
                       <div className="flex flex-wrap items-center gap-x-3">
-                        <div
+                        <button
+                          disabled={toggle ? true : false}
                           id="toggle-btn"
                           className="flex h-6 w-12 cursor-pointer items-center rounded-full bg-green-600/100 p-1"
                           onClick={() => {
-                            setToggle(!toggle);
+                            handleOTPRequest(
+                              formikprops?.values?.username!,
+                              formikprops.setFieldValue
+                            );
                           }}
                         >
                           {/* Switch */}
@@ -157,7 +204,7 @@ const Signup = () => {
                               (!toggle ? null : toggleClass)
                             }
                           ></div>
-                        </div>
+                        </button>
                         <p>Verify</p>
                       </div>
                     </div>
