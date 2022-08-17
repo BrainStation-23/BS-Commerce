@@ -9,16 +9,16 @@ import {
 } from 'models';
 
 export class CustomerSignInDto implements CustomerSignInRequest {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     @IsEmail()
-    email: string;
+    email?: string;
 
     @ApiProperty()
     @IsNotEmpty()
