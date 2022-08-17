@@ -59,8 +59,8 @@ export class CreateCustomerInput implements CreateCustomerRequest {
   @IsEmail()
   email?: string;
 
-  @Field()
-  otp: string;
+  @Field(() => Int)
+  otp: number;
 
   @Field()
   name: string;

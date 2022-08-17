@@ -18,6 +18,9 @@ import {
   SendOtpDto,
   SendOtpErrorResponseDto,
   SendOtpSuccessResponseDto,
+  VerifyOtpDto,
+  VerifyOtpErrorResponseDto,
+  VerifyOtpSuccessResponseDto,
 } from './dto';
 
 @Controller('customer/auth')

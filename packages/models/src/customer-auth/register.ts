@@ -10,7 +10,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 export interface CreateCustomerRequest {
     phone?: string;
     email?: string;
-    otp: string;
+    otp: number;
     name: string;
     password: string;
 }

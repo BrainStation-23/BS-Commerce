@@ -28,8 +28,8 @@ export class CreateCustomerDto implements CreateCustomerRequest {
 
     @ApiProperty({ example: 123456 })
     @IsNotEmpty()
-    @IsString()
-    otp: string;
+    @IsNumber()
+    otp: number;
 
     @ApiProperty()
     @IsNotEmpty()

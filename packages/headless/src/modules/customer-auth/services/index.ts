@@ -21,7 +21,10 @@ import {
   CustomerForgotPasswordResponse,
   CustomerForgotPasswordErrorMessages,
   CustomerForgotPasswordSuccessMessages,
-
+  VerifyOtpRequest,
+  VerifyOtpResponse,
+  VerifyOtpErrorMessages,
+  VerifyOtpSuccessMessages,
 } from 'models';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
@@ -77,6 +80,12 @@ export class CustomerAuthService {
     const otpSend = (data.email || data.phone) && await this.customerRepo.sendOtp({ ...data, otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES });
     if (!otpSend) return this.helper.serviceResponse.errorResponse(SendOtpErrorMessages.CAN_NOT_SEND_OTP, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
+  }
+
+  async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
+    const verifyOtp = (data.email || data.phone) && await this.customerRepo.verifyOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
+    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse({ message: VerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL }, HttpStatus.OK);
   }
 
   async getCustomer(data: GetCustomerQuery): Promise<GetCustomerResponse> {
