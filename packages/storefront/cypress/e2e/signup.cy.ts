@@ -17,14 +17,7 @@ function makeid(length: number) {
 
   it('should show "user already exits" toast using existing user email', () => {
     cy.get('#username').type('test@gmail.com');
-    cy.get('#otp').type('123');
     cy.get('#toggle-btn').click();
-    cy.get('#name').type('shatabdi biswas swarna');
-    cy.get('#password').type('123456');
-
-    cy.contains('button', 'Sign Up').click();
-    cy.wait(1500);
-
     cy.url().should('eq', Cypress.config().baseUrl + '/account/sign-up');
 
     //cy.get('.Toastify__close-button').click();
@@ -40,7 +33,7 @@ describe('Sign up a new user', () => {
 
   it('should create e new user and redirect to sign-in page', () => {
     cy.get('#username').type(makeid(6) + "@gmail.com");
-    cy.get('#otp').type('123');
+    // cy.get('#otp').type('123');
     cy.get('#toggle-btn').click();
     cy.get('#name').type('New User');
     cy.get('#password').type('123456');
