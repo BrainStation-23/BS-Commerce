@@ -6,6 +6,7 @@ import {
   OrderSortQuery,
   OrderStatEntity,
   OrderStatusEnum,
+  ProductOrder,
   ShippingStatusEnum,
   StatusTypeDto,
 } from 'src/entity/order';
@@ -14,8 +15,7 @@ import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 import {
   CreateOrderRequest,
-  CreateProductOrderDetails,
-  IProductOrderData,
+  CreateProductOrderDetails
 } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
@@ -28,7 +28,7 @@ export class OrderDatabase implements IOrderDatabase {
 
   async addPhotoDetails(
     products: CreateProductOrderDetails[],
-  ): Promise<IProductOrderData[]> {
+  ): Promise<ProductOrder[]> {
     let newProductList = [];
     newProductList = await Promise.all(
       products.map(async (product) => {

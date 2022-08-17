@@ -1,4 +1,4 @@
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
@@ -8,7 +8,8 @@ import {
   OrderIncompleteStatEntity, 
   OrderStatEntity, 
   ChangeStatusEntity, 
-  OrderSortQuery
+  OrderSortQuery,
+  ProductOrder
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
@@ -23,7 +24,7 @@ export class OrderRepository {
     return await this.db.createOrder(userId, newBody);
   }
 
-  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
+  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<ProductOrder[]>{
     return await this.db.addPhotoDetails(products);
   }
 

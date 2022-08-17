@@ -1,6 +1,5 @@
-import { CreateOrderProduct } from './../rest/dto/order.create.dto';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails} from 'models';
 
 import { OrderSortQuery } from './../../../entity/order';
 import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';

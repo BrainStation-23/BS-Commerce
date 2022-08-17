@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderRequest, IProductOrderData, CreateProductOrderDetails } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
 
 import { 
   ChangeStatusEntity, 
@@ -7,13 +7,14 @@ import {
   OrderEntity, 
   OrderIncompleteStatEntity,  
   OrderSortQuery, 
-  OrderStatEntity 
+  OrderStatEntity, 
+  ProductOrder
 } from 'src/entity/order';
 
 @Injectable()
 export abstract class IOrderDatabase {
   abstract createOrder: (userId: string, body: CreateOrderRequest) => Promise<OrderEntity>;
-  abstract addPhotoDetails: (products: CreateProductOrderDetails[]) => Promise<IProductOrderData[]>;
+  abstract addPhotoDetails: (products: CreateProductOrderDetails[]) => Promise<ProductOrder[]>;
   abstract getOrderListByUserId: (userId: string, sortObj: OrderSortQuery) => Promise<OrderEntity[]>;
   abstract getOrderById: (orderId: string) => Promise<OrderEntity>;
   abstract getOrderStatistics:() => Promise<OrderStatEntity>
