@@ -86,10 +86,7 @@ export class GraphqlCustomer implements Customer {
     id: string;
 
     @Field({ nullable: true })
-    firstName?: string;
-
-    @Field({ nullable: true })
-    lastName?: string;
+    name?: string;
 
     @Field({ nullable: true })
     phone?: string;
@@ -104,10 +101,7 @@ export class GraphqlCustomer implements Customer {
 @InputType()
 export class UpdateCustomerInput implements UpdateCustomerRequestBody {
     @Field({ nullable: true })
-    firstName?: string;
-
-    @Field({ nullable: true })
-    lastName?: string;
+    name?: string;
 
     @Field({ nullable: true })
     phone?: string;
