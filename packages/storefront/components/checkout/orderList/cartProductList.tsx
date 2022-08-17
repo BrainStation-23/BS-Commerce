@@ -9,6 +9,16 @@ const CartProductList: NextComponentType = () => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
+  const trimDescription = (description: string) => {
+    if (description.length <= 30) {
+      return description;
+    } else {
+      let trimmedDescription = description.substring(0, 30);
+      trimmedDescription = trimmedDescription + '...';
+      return trimmedDescription;
+    }
+  };
+
   return (
     <>
       {cartData.map((data) => {
@@ -46,7 +56,7 @@ const CartProductList: NextComponentType = () => {
                     </p>
                     {data?.product?.info?.shortDescription && (
                       <div className="text-xs text-gray-500">
-                        {data?.product?.info?.shortDescription}
+                        {trimDescription(data?.product?.info?.shortDescription)}
                       </div>
                     )}
                   </div>
