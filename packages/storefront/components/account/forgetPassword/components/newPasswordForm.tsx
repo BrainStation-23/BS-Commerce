@@ -4,8 +4,17 @@ import { passwordSchema } from '@/components/global/schemas/forgot-password.sche
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
+import { useAppSelector } from 'customHooks/hooks';
 
-const NewPasswordForm = () => {
+interface Props {
+  handleNewPasswordFormSubmit: Function;
+}
+
+const NewPasswordForm: React.FC<Props> = ({ handleNewPasswordFormSubmit }) => {
+  const otpDetail = useAppSelector(
+    (state) => state.persistedReducer.forgetPassword
+  );
+
   return (
     <>
       <Formik
@@ -14,7 +23,19 @@ const NewPasswordForm = () => {
           confirmPassword: '',
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
+          let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+          const isEmail = regex.test(otpDetail.username);
+          let data;
+          isEmail
+            ? (data = {
+                email: otpDetail.username,
+                password: values.newPassword,
+              })
+            : (data = {
+                phone: otpDetail.username,
+                password: values.newPassword,
+              });
+          handleNewPasswordFormSubmit(data);
           actions.setSubmitting(false);
         }}
         validationSchema={passwordSchema}

@@ -4,12 +4,13 @@ import { usernameSchema } from '@/components/global/schemas/forgot-password.sche
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
+import { userAPI } from 'APIs';
 
 interface Props {
-  setSubmitButtonState: Function;
+  handleUsernameFormSubmit: Function;
 }
 
-const UsernameForm: React.FC<Props> = ({ setSubmitButtonState }) => {
+const UsernameForm: React.FC<Props> = ({ handleUsernameFormSubmit }) => {
   return (
     <>
       <Formik
@@ -17,8 +18,7 @@ const UsernameForm: React.FC<Props> = ({ setSubmitButtonState }) => {
           username: '',
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
-          setSubmitButtonState('otp');
+          handleUsernameFormSubmit(values.username);
           actions.setSubmitting(false);
         }}
         validationSchema={usernameSchema}

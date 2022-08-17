@@ -4,21 +4,41 @@ import { otpSchema } from '@/components/global/schemas/forgot-password.schema';
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
+import { useAppSelector } from 'customHooks/hooks';
 
 interface Props {
   setSubmitButtonState: Function;
+  handleOtpFormSubmit: Function;
 }
 
-const OtpForm: React.FC<Props> = ({ setSubmitButtonState }) => {
+const OtpForm: React.FC<Props> = ({
+  setSubmitButtonState,
+  handleOtpFormSubmit,
+}) => {
+  const otpDetail = useAppSelector(
+    (state) => state.persistedReducer.forgetPassword
+  );
+
   return (
     <>
       <Formik
         initialValues={{
-          otp: '',
+          otp: otpDetail.otp,
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
-          setSubmitButtonState('newPassword');
+          let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+          const isEmail = regex.test(otpDetail.username);
+          let data;
+          isEmail
+            ? (data = {
+                email: otpDetail.username,
+                otp: values.otp,
+              })
+            : (data = {
+                phone: otpDetail.username,
+                otp: values.otp,
+              });
+          handleOtpFormSubmit(data);
           actions.setSubmitting(false);
         }}
         validationSchema={otpSchema}
@@ -28,7 +48,7 @@ const OtpForm: React.FC<Props> = ({ setSubmitButtonState }) => {
             <Form onSubmit={formikprops.handleSubmit}>
               <div className="mb-4">
                 <FieldTemplate
-                  fieldType="text"
+                  fieldType="number"
                   fieldID="otp"
                   placeholder="OTP"
                 />

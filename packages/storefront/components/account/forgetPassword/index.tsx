@@ -1,5 +1,9 @@
 import { NextComponentType } from 'next';
-import { ForgotPasswordRequest } from 'models';
+import {
+  CustomerForgotPasswordRequest,
+  ForgotPasswordRequest,
+  VerifyOtpRequest,
+} from 'models';
 import { useEffect, useState } from 'react';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -7,10 +11,60 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 import UsernameForm from '@/components/account/forgetPassword/components/usernameForm';
 import OtpForm from '@/components/account/forgetPassword/components/otpForm';
 import NewPasswordForm from '@/components/account/forgetPassword/components/newPasswordForm';
+import { userAPI } from 'APIs';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { storeOtp, storeUsername } from 'toolkit/forgetPasswordSlice';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const ForgotPassword: NextComponentType = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const [submitButtonState, setSubmitButtonState] =
     useState<string>('username');
+
+  const handleUsernameFormSubmit = async (username: string) => {
+    try {
+      const res = await userAPI.forgetPasswordSendOtp(username);
+      if (res?.code === 200) {
+        const resStringArray = res?.data?.message?.split(' ');
+        const otp = parseInt(resStringArray![resStringArray?.length! - 1]);
+
+        dispatch(storeUsername(username));
+        dispatch(storeOtp(otp));
+
+        setSubmitButtonState('otp');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOtpFormSubmit = async (data: VerifyOtpRequest) => {
+    try {
+      const res = await userAPI.forgetPasswordVerifyOtp(data);
+      if (res?.code === 200) {
+        setSubmitButtonState('newPassword');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleNewPasswordFormSubmit = async (
+    data: CustomerForgotPasswordRequest
+  ) => {
+    console.log(data);
+    try {
+      const res = await userAPI.resetPassword(data);
+      if (res?.code !== 200) {
+        setSubmitButtonState('username');
+      } else {
+        router.push('/account/sign-in');
+      }
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -38,14 +92,23 @@ const ForgotPassword: NextComponentType = () => {
           </p>
           <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             {submitButtonState === 'username' && (
-              <UsernameForm setSubmitButtonState={setSubmitButtonState} />
+              <UsernameForm
+                handleUsernameFormSubmit={handleUsernameFormSubmit}
+              />
             )}
 
             {submitButtonState === 'otp' && (
-              <OtpForm setSubmitButtonState={setSubmitButtonState} />
+              <OtpForm
+                setSubmitButtonState={setSubmitButtonState}
+                handleOtpFormSubmit={handleOtpFormSubmit}
+              />
             )}
 
-            {submitButtonState === 'newPassword' && <NewPasswordForm />}
+            {submitButtonState === 'newPassword' && (
+              <NewPasswordForm
+                handleNewPasswordFormSubmit={handleNewPasswordFormSubmit}
+              />
+            )}
           </div>
         </div>
       </div>
