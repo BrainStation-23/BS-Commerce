@@ -26,10 +26,14 @@ export class CustomerDatabase implements ICustomerDatabase {
     return await OtpModel.findOneAndUpdate(query, { $set: data });
   }
 
+  async deleteOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await OtpModel.findOneAndDelete(query);
+  }
+
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
-    createdCUstomer && customer.email && await OtpModel.findOneAndDelete({ email: customer.email });
-    createdCUstomer && customer.phone && await OtpModel.findOneAndDelete({ phone: customer.phone });
+    createdCUstomer && customer.email && await this.deleteOtp({ email: customer.email });
+    createdCUstomer && customer.phone && await this.deleteOtp({ phone: customer.phone });
     const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;

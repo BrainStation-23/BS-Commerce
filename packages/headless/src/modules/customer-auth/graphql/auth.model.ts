@@ -5,6 +5,9 @@ import {
   CreateCustomerRequest,
   CustomerSignInRequest,
   GetCustomerQuery,
+  SendOtpRequest,
+  VerifyOtpRequest,
+  CustomerForgotPasswordRequest,
 } from 'models';
 
 @ObjectType()
@@ -19,6 +22,31 @@ export class AuthCustomer implements Customer {
   @IsOptional()
   @IsEmail()
   email?: string;
+}
+
+@InputType()
+export class SendOtpInput implements SendOtpRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+}
+
+@InputType()
+export class VerifyOtpInput implements VerifyOtpRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @Field(() => Int)
+  otp: number;
 }
 
 @InputType()
@@ -38,9 +66,7 @@ export class CreateCustomerInput implements CreateCustomerRequest {
   name: string;
 
   @Field()
-  @MinLength(6, {
-    message: 'Password is too short. Minimal length is $constraint1 characters',
-  })
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
   password: string;
 }
 
@@ -55,25 +81,65 @@ export class CustomerSignInDataInput implements CustomerSignInRequest {
   email?: string;
 
   @Field()
-  @MinLength(6, {
-    message: 'Password is too short. Minimal length is $constraint1 characters',
-  })
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
+  password: string;
+}
+
+@InputType()
+export class CustomerForgotPasswordDataInput implements CustomerForgotPasswordRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @Field()
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
   password: string;
 }
 
 @ObjectType()
-export class CustomerSignUpResponseMessage {
+export class CustomerAuthResponseMessage {
   @Field()
   message: string
 }
 
 @ObjectType()
 export class RegistrationAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => CustomerSignUpResponseMessage, { nullable: true })
-  data?: CustomerSignUpResponseMessage
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class ForgotPasswordResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class SendOtpAuthResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class VerifyOtpAuthResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
 }
 
 @ObjectType()
@@ -84,10 +150,10 @@ export class CustomerSignInResponseToken {
 
 @ObjectType()
 export class SignInAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => CustomerSignInResponseToken, { nullable: true })
+  @Field(() => CustomerSignInResponseToken, { nullable: true })
   data?: CustomerSignInResponseToken
 }
 
@@ -104,9 +170,9 @@ export class GetAuthCustomerQuery implements GetCustomerQuery {
 
 @ObjectType()
 export class GetCustomerAuthResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number
 
-  @Field(type => AuthCustomer, { nullable: true })
+  @Field(() => AuthCustomer, { nullable: true })
   data?: AuthCustomer
 }

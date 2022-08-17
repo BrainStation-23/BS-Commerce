@@ -34,8 +34,8 @@ export class VerifyOtpErrorResponseDto implements VerifyOtpErrorResponse {
     code: number;
 
     @ApiProperty({
-        example: VerifyOtpErrorMessages.OTP_EXPIRED,
-        examples: [VerifyOtpErrorMessages.OTP_EXPIRED, VerifyOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, VerifyOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS]
+        example: VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP,
+        examples: [VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, VerifyOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, VerifyOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS]
     })
     error: VerifyOtpErrorMessages;
 
