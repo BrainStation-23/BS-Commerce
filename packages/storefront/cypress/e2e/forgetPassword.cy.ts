@@ -26,6 +26,28 @@ describe('Forget Password Journey', () => {
       Cypress.config().baseUrl + '/account/sign-in'
     );
   })
+
+  it('should not proceed to new password page when otp mismatches', () => {
+    cy.visit('/account/forgot-password');
+    cy.get('#username').type('sbswarna@gmail.com');
+    cy.contains('button', 'Submit').click();
+    cy.get('#otp').type('1234');
+    cy.contains('button', 'Submit').click();
+    // cy.get('#newPassword').type('123456');
+    // cy.get('#confirmPassword').type('123456');
+    // cy.contains('button', 'Submit').click();
+  });
+
+  it('should not reset password when new password and confirm password mismatches', () => {
+    cy.visit('/account/forgot-password');
+    cy.get('#username').type('sbswarna@gmail.com');
+    cy.contains('button', 'Submit').click();
+    //cy.get('#otp').type('1234');
+    cy.contains('button', 'Submit').click();
+    cy.get('#newPassword').type('123456');
+    cy.get('#confirmPassword').type('1234567');
+    cy.contains('button', 'Submit').click();
+  });
 });
 
 export {};
