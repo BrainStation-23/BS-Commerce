@@ -468,9 +468,15 @@ export async function forgetPasswordSendOtpRest(
     });
     return res?.data;
   } catch (error: any) {
-    toast.error('Failed to send OTP. Try again.', {
-      containerId: 'bottom-right',
-    });
+    if(error.response.data.error === 'CAN_NOT_GET_CUSTOMER') {
+        toast.error('User doesn\'t exists.', {
+          containerId: 'bottom-right',
+        });
+    } else {
+      toast.error('Failed to send OTP. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
     return error;
   }
 }
