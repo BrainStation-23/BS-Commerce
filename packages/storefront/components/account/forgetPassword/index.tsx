@@ -1,21 +1,16 @@
 import { NextComponentType } from 'next';
-import {
-  CustomerForgotPasswordRequest,
-  ForgotPasswordRequest,
-  VerifyOtpRequest,
-} from 'models';
-import { useEffect, useState } from 'react';
+import { CustomerForgotPasswordRequest, VerifyOtpRequest } from 'models';
+import { useState } from 'react';
+import { userAPI } from 'APIs';
+import { useAppDispatch } from 'customHooks/hooks';
+import { storeOtp, storeUsername } from 'toolkit/forgetPasswordSlice';
+import { useRouter } from 'next/router';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 import UsernameForm from '@/components/account/forgetPassword/components/usernameForm';
 import OtpForm from '@/components/account/forgetPassword/components/otpForm';
 import NewPasswordForm from '@/components/account/forgetPassword/components/newPasswordForm';
-import { userAPI } from 'APIs';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeOtp, storeUsername } from 'toolkit/forgetPasswordSlice';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 
 const ForgotPassword: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -36,9 +31,7 @@ const ForgotPassword: NextComponentType = () => {
 
         setSubmitButtonState('otp');
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleOtpFormSubmit = async (data: VerifyOtpRequest) => {
@@ -47,15 +40,12 @@ const ForgotPassword: NextComponentType = () => {
       if (res?.code === 200) {
         setSubmitButtonState('newPassword');
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleNewPasswordFormSubmit = async (
     data: CustomerForgotPasswordRequest
   ) => {
-    console.log(data);
     try {
       const res = await userAPI.resetPassword(data);
       if (res?.code !== 200) {

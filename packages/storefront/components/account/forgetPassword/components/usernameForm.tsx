@@ -1,10 +1,9 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { usernameSchema } from '@/components/global/schemas/forgot-password.schema';
 
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
-import { userAPI } from 'APIs';
 
 interface Props {
   handleUsernameFormSubmit: Function;

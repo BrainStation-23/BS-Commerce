@@ -19,9 +19,11 @@ import { storeAllCartItems } from 'toolkit/cartSlice';
 import Loading from '@/components/global/loader';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
+import FacebookLogo from '@/components/account/icons/facebookLogo';
+import GoogleLogo from '@/components/account/icons/googleLogo';
 
-import FacebookLogo from '../../public/facebook.svg';
-import GoogleLogo from '../../public/google.svg';
+// import FacebookLogo from '../../public/facebook.svg';
+// import GoogleLogo from '../../public/google.svg';
 
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -190,26 +192,28 @@ const Signin: NextComponentType = () => {
                 <p className="ml-1 text-gray-600">or sign in with</p>
               </div>
               <div className="flex flex-wrap">
-                <button className="mt-3 flex flex-wrap">
-                  <Image
+                <button className="mx-1 mt-3 flex flex-wrap">
+                  <GoogleLogo />
+                  {/* <Image
                     className="mt-1 md:ml-2 lg:ml-2 xl:ml-2"
                     src={GoogleLogo}
                     alt="google-logo"
                     height={15}
                     width={15}
-                  />
-                  <p className="ml-2 mt-1 text-xs">Google</p>
+                  /> */}
+                  <p className="ml-1 mt-1 text-xs">Google</p>
                 </button>
                 <div className="mt-3">
                   <p className="ml-1 text-gray-600">or</p>
                 </div>
-                <button className="mt-3 flex flex-wrap">
-                  <Image
+                <button className="mx-1 mt-3 flex flex-wrap">
+                  <FacebookLogo />
+                  {/* <Image
                     src={FacebookLogo}
                     alt="facebook-logo"
                     height={38}
                     width={35}
-                  />
+                  /> */}
                   <p className="mt-1 text-xs">Facebook</p>
                 </button>
               </div>
