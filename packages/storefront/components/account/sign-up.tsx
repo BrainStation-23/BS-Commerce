@@ -27,7 +27,7 @@ const Signup = () => {
   let username = '';
   let loggedInUsingEmail = false;
 
-  async function handleSignUp(data: CreateCustomerRequest | any) {
+  async function handleSignUp(data: CreateCustomerRequest) {
     //console.log(data);
     try {
       setLoading(true);
@@ -143,13 +143,13 @@ const Signup = () => {
                 isEmail
                   ? (data = {
                       email: values.username,
-                      otp: values.otp,
+                      otp: parseInt(values.otp),
                       name: values.name,
                       password: values.password,
                     })
                   : (data = {
                       phone: values.username,
-                      otp: values.otp,
+                      otp: parseInt(values.otp),
                       name: values.name,
                       password: values.password,
                     });
@@ -174,27 +174,29 @@ const Signup = () => {
                       </div>
                     </div>
 
-                    <div className="mb-4 flex flex-wrap justify-between">
-                      <Field
-                        type="otp"
-                        className="w-1/2 p-2 placeholder-gray-600 outline-0 sm:w-2/3"
-                        id="otp"
-                        name="otp"
-                        placeholder="OTP"
-                      />
-                      <div className="errMsg text-red-600">
-                        <ErrorMessage name="otp" />
+                    <div className="mb-2 flex flex-wrap justify-between">
+                      <div className="w-3/5">
+                        <Field
+                          type="otp"
+                          className="w-full p-2 placeholder-gray-600 outline-0"
+                          id="otp"
+                          name="otp"
+                          placeholder="OTP"
+                        />
                       </div>
+
                       <div className="flex flex-wrap items-center gap-x-3">
                         <button
                           disabled={toggle ? true : false}
                           id="toggle-btn"
                           className="flex h-6 w-12 cursor-pointer items-center rounded-full bg-green-600/100 p-1"
                           onClick={() => {
-                            handleOTPRequest(
-                              formikprops?.values?.username!,
-                              formikprops.setFieldValue
-                            );
+                            if (formikprops.values.username !== '') {
+                              handleOTPRequest(
+                                formikprops?.values?.username!,
+                                formikprops.setFieldValue
+                              );
+                            }
                           }}
                         >
                           {/* Switch */}
@@ -207,6 +209,9 @@ const Signup = () => {
                         </button>
                         <p>Verify</p>
                       </div>
+                    </div>
+                    <div className="errMsg mb-4 text-red-600">
+                      <ErrorMessage name="otp" />
                     </div>
 
                     {toggle && (

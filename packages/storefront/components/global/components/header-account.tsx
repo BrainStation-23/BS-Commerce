@@ -39,8 +39,8 @@ const HeaderAccount: React.FC<Properties> = () => {
     (state) => state.persistedReducer.user.customerDetails
   );
 
-  const user = customer?.firstName
-    ? customer?.firstName + ' ' + customer?.lastName
+  const user = customer?.name
+    ? customer?.name
     : customer?.email
     ? customer?.email
     : customer?.phone;
