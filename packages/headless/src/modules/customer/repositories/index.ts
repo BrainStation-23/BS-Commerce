@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { Customer, CustomerAddress } from 'src/entity/customer';
+import { Otp } from 'src/entity/otp';
 import { ICustomerDatabase } from './customer.database.interface';
 
 @Injectable()
@@ -8,8 +9,28 @@ export class CustomerRepository {
   constructor(private readonly db: ICustomerDatabase) { }
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
-    customer.id = randomUUID()
+    customer.id = randomUUID();
     return await this.db.createCustomer(customer);
+  }
+
+  async sendOtp(data: Otp): Promise<Otp | null> {
+    return await this.db.sendOtp(data);
+  }
+
+  async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.verifyOtp(query);
+  }
+
+  async findOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.findOtp(query);
+  }
+
+  async deleteOtp(query: Record<string, any>): Promise<Otp | null> {
+    return await this.db.deleteOtp(query);
+  }
+
+  async updateOtp(query: Record<string, any>, data: object): Promise<Otp | null> {
+    return await this.db.updateOtp(query, data);
   }
 
   async findCustomer(query: Record<string, any>): Promise<Customer | null> {
