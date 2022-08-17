@@ -54,40 +54,6 @@ export class CustomerController {
     return { code, ...response };
   }
 
-  @Post('update-profile/send-otp')
-  @ApiResponse({
-    description: 'Send Otp For Update Profile Success Response',
-    type: SendOtpSuccessResponseDto,
-    status: HttpStatus.OK
-  })
-  @ApiResponse({
-    description: 'Send Otp For Update Profile Error Response',
-    type: SendOtpErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
-  })
-  async forgotPasswordSendOTP(@Body() data: SendOtpDto, @Res({ passthrough: true }) res: Response, @UserInfo() customer: Customer,) {
-    const { code, ...response } = await this.customerService.updateProfileSendOTP(data, customer.id);
-    res.status(code);
-    return { code, ...response };
-  }
-
-  @Post('update-profile/verify-otp')
-  @ApiResponse({
-    description: 'Verify Otp For Update Profile Success Response',
-    type: VerifyOtpSuccessResponseDto,
-    status: HttpStatus.OK
-  })
-  @ApiResponse({
-    description: 'Verify Otp For Update Profile Error Response',
-    type: VerifyOtpErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
-  })
-  async forgotPasswordVerifyOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response, @UserInfo() customer: Customer,) {
-    const { code, ...response } = await this.customerService.updateProfileVerifyOTP(data, customer.id);
-    res.status(code);
-    return { code, ...response };
-  }
-
   @Patch()
   @ApiResponse({
     description: 'Update Customer Success Response',
