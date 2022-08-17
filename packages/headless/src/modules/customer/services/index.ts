@@ -29,11 +29,13 @@ export class CustomerService {
     async updateCustomer(customerId: string, data: UpdateCustomerRequestBody): Promise<UpdateCustomerResponse> {
         let customer = await this.customerRepo.findCustomer({ id: customerId });
         if (!customer) return this.helper.serviceResponse.errorResponse(GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+        if (customer && customer.phone && data.phone) return this.helper.serviceResponse.errorResponse(UpdateCustomerErrorMessages.CAN_NOT_CHANGE_EXISTING_PHONE, null, HttpStatus.BAD_REQUEST);
+        if (customer && customer.email && data.email) return this.helper.serviceResponse.errorResponse(UpdateCustomerErrorMessages.CAN_NOT_CHANGE_EXISTING_EMAIL, null, HttpStatus.BAD_REQUEST);
 
-        const emailMatch = customer?.email && await this.customerRepo.findCustomer({ email: customer.email, id: { $ne: customerId } });
+        const emailMatch = data.email && await this.customerRepo.findCustomer({ email: data.email });
         if (emailMatch) return this.helper.serviceResponse.errorResponse(UpdateCustomerAddressErrorMessages.CUSTOMER_EMAIL_MATCH, null, HttpStatus.BAD_REQUEST);
 
-        const phoneMatch = customer?.phone && await this.customerRepo.findCustomer({ phone: customer.phone, id: { $ne: customerId } });
+        const phoneMatch = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
         if (phoneMatch) return this.helper.serviceResponse.errorResponse(UpdateCustomerAddressErrorMessages.CUSTOMER_PHONE_MATCH, null, HttpStatus.BAD_REQUEST);
 
         customer = Object.assign(customer, data);

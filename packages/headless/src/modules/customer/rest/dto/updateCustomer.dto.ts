@@ -13,12 +13,7 @@ export class UpdateCustomerDto implements UpdateCustomerRequestBody {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    firstName?: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsString()
-    lastName?: string;
+    name?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
