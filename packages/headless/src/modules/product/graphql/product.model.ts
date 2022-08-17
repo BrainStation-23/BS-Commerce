@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsArray, IsOptional } from 'class-validator';
+import { IsArray } from 'class-validator';
 import {
   ProductInfo,
   ProductMeta,
@@ -213,73 +213,73 @@ export class GraphqlProduct implements Product {
   @Field({ nullable: true })
   id?: string;
 
-  @Field(()=> GraphqlProductInfo)
+  @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(()=> GraphqlProductMeta)
+  @Field(() => GraphqlProductMeta)
   meta: GraphqlProductMeta;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> GraphqlProductManufacture, {nullable: true})
+  @Field(() => GraphqlProductManufacture, { nullable: true })
   manufacturer?: GraphqlProductManufacture;
-  
-  @Field(()=> [GraphqlProductCategory])
+
+  @Field(() => [GraphqlProductCategory])
   categories: GraphqlProductCategory[];
 }
 
 @InputType('ProductInput')
 export class GraphqlProductInput implements Product {
-  @Field(()=> GraphqlProductInfo)
+  @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(()=> GraphqlProductMeta)
+  @Field(() => GraphqlProductMeta)
   meta: GraphqlProductMeta;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> GraphqlProductManufacture, {nullable: true})
+  @Field(() => GraphqlProductManufacture, { nullable: true })
   manufacturer?: GraphqlProductManufacture;
 
-  @Field(()=> [GraphqlProductCategory])
+  @Field(() => [GraphqlProductCategory])
   categories: GraphqlProductCategory[];
 }
 
 @InputType()
 export class UpdateProductInput implements UpdateProductRequest {
-  @Field(()=> UpdateProductInfoInput, {nullable: true})
+  @Field(() => UpdateProductInfoInput, { nullable: true })
   info?: UpdateProductInfoInput;
 
-  @Field(()=> UpdateProductMetaInput, {nullable: true})
+  @Field(() => UpdateProductMetaInput, { nullable: true })
   meta?: UpdateProductMetaInput;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> UpdateProductManufacturerInput, {nullable: true})
+  @Field(() => UpdateProductManufacturerInput, { nullable: true })
   manufacturer?: UpdateProductManufacturerInput;
 
-  @Field(()=> [UpdateProductCategoryInput], {nullable: true})
+  @Field(() => [UpdateProductCategoryInput], { nullable: true })
   categories?: UpdateProductCategoryInput[];
 }
 
@@ -306,8 +306,8 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field({ nullable: true })
-  orderBy?: string;
+  @Field(() => Int, { nullable: true })
+  orderBy?: number;
 }
 
 @InputType()

@@ -15,8 +15,8 @@ export class ProductRepository {
         return await this.db.findAllProducts(query, skip, limit);
     }
 
-    async getAllConditionalProducts(slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[]> {
-        return await this.db.getAllConditionalProducts(slug, orderBy, skip, limit);
+    async getAllConditionalProducts(query: Record<string, any>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[]> {
+        return await this.db.getAllConditionalProducts(query, slug, orderBy, skip, limit);
     }
 
     async createProduct(product: Product): Promise<Product | null> {

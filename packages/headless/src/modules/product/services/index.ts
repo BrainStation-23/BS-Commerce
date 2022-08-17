@@ -98,7 +98,7 @@ export class ProductService {
   async getProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
     const { skip, limit, slug, orderBy } = condition;
     const query: Record<string, any> = !slug && this.generateSearchQuery(condition);
-    const products = slug ? await this.productRepo.getAllConditionalProducts(slug, orderBy, skip, limit) : await this.productRepo.findAllProducts(query, skip, limit);
+    const products = slug ? await this.productRepo.getAllConditionalProducts({}, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts(query, skip, limit);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ products, count: products.length || 0 });
   }
@@ -142,9 +142,9 @@ export class ProductService {
   }
 
   async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
-    const { skip, limit } = condition;
-    const query: Record<string, any> = this.generateSearchQuery(condition);
-    const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    const { skip, limit, slug, orderBy } = condition;
+    const query: Record<string, any> = !slug && this.generateSearchQuery(condition);
+    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }

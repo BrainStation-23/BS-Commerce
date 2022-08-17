@@ -43,6 +43,27 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @IsBoolean()
     @Type(() => Boolean)
     isFeatured?: boolean;
+
+
+    @ApiProperty({ required: false, description: "Category Slug" })
+    @IsOptional()
+    @IsString()
+    slug?: string;
+
+    @ApiProperty({ required: false, description: "Price Low to High -> -1 or High to Low -> 1", default: 1 })
+    @IsOptional()
+    @IsNumber()
+    orderBy?: number;
+
+    @ApiProperty({ required: false, default: 0 })
+    @IsOptional()
+    @IsNumber()
+    minPrice?: number;
+
+    @ApiProperty({ required: false, default: 10000 })
+    @IsOptional()
+    @IsNumber()
+    maxPrice?: number;
 }
 
 export class GetCustomerAllProductsErrorResponseDto implements GetCustomerAllProductsErrorResponse {

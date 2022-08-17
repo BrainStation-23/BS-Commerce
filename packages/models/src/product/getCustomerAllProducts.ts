@@ -16,6 +16,10 @@ export interface GetCustomerAllProductsQuery {
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
+    slug?: string;
+    orderBy?: number;
+    minPrice?: number;
+    maxPrice?: number;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {

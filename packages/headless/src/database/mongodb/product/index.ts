@@ -19,10 +19,10 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query, '-_id').skip(skip).limit(limit).lean();
   }
 
-  async getAllConditionalProducts(slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[] | []> {
+  async getAllConditionalProducts(query: Record<string, any>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[] | []> {
     const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
     const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
-    return await ProductModel.find({ 'categories.id': { '$in': categoryIdList } }, '-_id').sort('info.' + orderBy).skip(skip).limit(limit).lean();
+    return await ProductModel.find({ ...query, 'categories.id': { '$in': categoryIdList } }, '-_id').sort('info.' + orderBy).skip(skip).limit(limit).lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

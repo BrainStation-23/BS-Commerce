@@ -94,5 +94,5 @@ export class SearchCondition {
   productName?: string;
   isFeatured?: boolean;
   slug?: string;
-  orderBy?: string;
+  orderBy?: number;
 }
