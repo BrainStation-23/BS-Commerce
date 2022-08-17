@@ -2,42 +2,40 @@
 sidebar_position: 1
 ---
 
-# Create a Page
+# Close Look to Storefront Home Page
 
-Add **Markdown or React** files to `src/pages` to create a **standalone page**:
+Not that the Storefront runs at **3002** and visit **localhost:3002/** route for Visiting Home Page :
 
-- `src/pages/index.js` → `localhost:3000/`
+<!-- - `src/pages/index.js` → `localhost:3000/`
 - `src/pages/foo.md` → `localhost:3000/foo`
-- `src/pages/foo/bar.js` → `localhost:3000/foo/bar`
+- `src/pages/foo/bar.js` → `localhost:3000/foo/bar` -->
 
-## Create your first React Page
+![Docs Version Dropdown](./img/localhost_3002_.png)
 
-Create a file at `src/pages/my-react-page.js`:
+## Adding Product To Cart From Home Page
 
-```jsx title="src/pages/my-react-page.js"
-import React from 'react';
-import Layout from '@theme/Layout';
+In the Home Page There are a list of Products From Where you can add to Cart, just hover over the product card and click the **cart icon** , if the Product is not added to the cart it will automatically be added to the cart
 
-export default function MyReactPage() {
-  return (
-    <Layout>
-      <h1>My React page</h1>
-      <p>This is a React page</p>
-    </Layout>
-  );
-}
-```
+![Docs Version Dropdown](./img/prod_cart_icon.png)
 
-A new page is now available at [http://localhost:3000/my-react-page](http://localhost:3000/my-react-page).
+After the Successful addition of Product , A Success Modal will be shown
 
-## Create your first Markdown Page
+![Docs Version Dropdown](./img/cart_modal.png)
 
-Create a file at `src/pages/my-markdown-page.md`:
+## Visiting Cart Page to View the Product
 
-```mdx title="src/pages/my-markdown-page.md"
-# My Markdown page
+You Can Visit the cart Page both by
 
-This is a Markdown page
-```
+1. Clicking the **View Cart** Button as well as the Product can be Viewed from the Header Cart Dropdown Section
+   ![Docs Version Dropdown](./img/cart_dropdown.png)
 
-A new page is now available at [http://localhost:3000/my-markdown-page](http://localhost:3000/my-markdown-page).
+2. Click the **VIEW CART** Button which would Redirect you to the Cart Page
+
+3. Visiting the Route **localhost:3002/cart**
+
+From the Cart Page you can Increase or Decrease the Product Quantity as well as Remove it
+![Docs Version Dropdown](./img/cart_table.png)
+
+View the Cart total from the Table Below
+
+![Docs Version Dropdown](./img/cart_total.png)
