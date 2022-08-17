@@ -45,9 +45,4 @@ export class CustomerResolver {
     const res = await this.customerService.deleteCustomerAddress(customer.id, addressId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
-
-  /*  @Mutation()
-   async changePassword(@Args('passwordDetails') passwordDetails: CustomerChangePasswordInput, @CustomerInfo()  customer: Customer) {
-     const res = await this.customerService.changePassword(customer.id, passwordDetails);
-   } */
 }
