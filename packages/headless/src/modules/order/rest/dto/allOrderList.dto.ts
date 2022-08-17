@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsNumber, IsOptional } from "class-validator";
 import {  GetAllOrderQuery } from "models";
-import { OrderAddressDto, ProductOrderDto } from "./order.create.dto";
+
 import { OrderDto } from "./order.dto";
 
 export class GetAllOrderQueryDto implements GetAllOrderQuery{
