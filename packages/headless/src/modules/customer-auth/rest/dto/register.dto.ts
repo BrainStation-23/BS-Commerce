@@ -10,21 +10,26 @@ import {
 } from 'models';
 
 export class CreateCustomerDto implements CreateCustomerRequest {
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsString()
+    @IsEmail()
+    email?: string;
 
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
     name: string;
 
-    @ApiProperty()
-    @IsOptional()
+    @ApiProperty({ example: 123456 })
+    @IsNotEmpty()
     @IsString()
-    @IsEmail()
-    email: string;
+    otp: string;
 
     @ApiProperty()
     @IsNotEmpty()

@@ -17,10 +17,6 @@ import {
   SendOtpRequest,
   SendOtpResponse,
   SendOtpErrorMessages,
-  VerifyOtpRequest,
-  VerifyOtpResponse,
-  VerifyOtpErrorMessages,
-  VerifyOtpSuccessMessages,
 } from 'models';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
@@ -38,10 +34,8 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
-    let otpVerified = null;
-    otpVerified = data.phone && await this.customerRepo.findOtp({ isVerified: true, phone: data.phone });
-    otpVerified = (!otpVerified && data.email) ? await this.customerRepo.findOtp({ isVerified: true, email: data.email }) : otpVerified;
-    if (!otpVerified || (otpVerified.otpVerifiedAt + FIVE_MINUTES) < Date.now()) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    const verifyOtp = (data.email || data.phone) && await this.customerRepo.findOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
+    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.OTP_EXPIRED, null, HttpStatus.BAD_REQUEST);
 
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
@@ -78,22 +72,6 @@ export class CustomerAuthService {
     const otpSend = (data.email || data.phone) && await this.customerRepo.sendOtp({ ...data, otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES });
     if (!otpSend) return this.helper.serviceResponse.errorResponse(SendOtpErrorMessages.CAN_NOT_SEND_OTP, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
-  }
-
-  async registerVerifyOTP(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
-    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
-    if (doesCustomerEmailExist) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
-
-    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
-    if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
-
-    return await this.verifyOtp(data);
-  }
-
-  async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
-    const verifyOtp = (data.email || data.phone) && await this.customerRepo.verifyOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
-    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse({ message: VerifyOtpSuccessMessages.OTP_VERIFIED_SUCCESSFUL }, HttpStatus.OK);
   }
 
   async getCustomer(data: GetCustomerQuery): Promise<GetCustomerResponse> {
