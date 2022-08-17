@@ -1,8 +1,12 @@
 import { 
   ChangeStatusEntity, 
+  CreateOrderProduct, 
+  CreateOrderRequest, 
   GetAllOrderQueryEntity, 
+  OrderDetails, 
   OrderEntity, 
   OrderIncompleteStatEntity, 
+  OrderProductData, 
   OrderSortQuery, 
   OrderStatEntity, 
   OrderStatusEnum, 
@@ -12,18 +16,19 @@ import {
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
-  async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
+  async createOrder(userId: string, body: OrderDetails): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
+  async addProductDetails(products: CreateOrderProduct[]): Promise<OrderProductData[]>{
     let newProductList = [];
     newProductList = await Promise.all(products.map( async (product) => {
-        const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
-        return {...product, photos: photoDetails.photos};
+        const productDetails =  await ProductModel.findOne({ id: product.productId}).lean();
+        const { id, info, photos } = productDetails;
+        const newInfo = {...info, quantity: product.quantity};
+        return { id, info: newInfo, photos };
       })
     );
       return newProductList;

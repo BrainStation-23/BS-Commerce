@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsNumber, IsString, MaxLength, ValidateNested } from 'class-validator';
-import { OrderByUserIdResponseData, IProductOrderData } from 'models';
-import { OrderAddressDto, ProductOrderDto } from './order.create.dto';
+import { OrderByUserIdResponseData } from 'models';
+import { OrderAddressDto } from './order.create.dto';
+import { OrderProductDto } from './order.product.dto';
 
 export class OrderDetails implements OrderByUserIdResponseData{
     @ApiProperty({ type: OrderAddressDto })
@@ -20,9 +21,9 @@ export class OrderDetails implements OrderByUserIdResponseData{
     @ApiProperty()
     productCost: number;
   
-    @ApiProperty({ type: [ProductOrderDto] })
-    @Type(() => ProductOrderDto)
-    products: ProductOrderDto[];
+    @ApiProperty({ type: [OrderProductDto] })
+    @Type(() => OrderProductDto)
+    products: OrderProductDto[];
   
     @ApiProperty()
     shippingCost: number;

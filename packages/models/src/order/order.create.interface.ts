@@ -1,11 +1,5 @@
-export interface IOrderProductPhoto {
-    url?: string,
-    id?: string,
-    title?: string,
-    alt?: string,
-    displayOrder?: number
+import { OrderProductData } from './order.product.interface';
 
-}
 export interface IOrderAddress {
   firstName: string;
   lastName: string;
@@ -20,14 +14,7 @@ export interface IOrderAddress {
 
 export interface CreateProductOrderDetails{
   productId: string;
-  name: string;
-  price: number;
   quantity: number;
-  sku: string;
-}
-export interface IProductOrderData extends CreateProductOrderDetails{
-  photos?: IOrderProductPhoto[],
-  totalPrice: number;
 }
 export interface CreateOrderRequest {
   billingAddress: IOrderAddress;
@@ -42,19 +29,4 @@ export interface CreateOrderRequest {
   stripeChargeId?: string;
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
-}
-export interface OrderByUserIdResponseData extends CreateOrderRequest{
-  orderStatus: string;
-  shippingStatus: string;
-  paymentStatus: string; 
-  orderId: string;
-  orderedDate: Date;
-}
-export interface OrderResponseData extends CreateOrderRequest{
-  userId: string,
-  orderId: string;
-  orderStatus: string;
-  shippingStatus: string;
-  paymentStatus: string;
-  orderedDate: Date;
 }

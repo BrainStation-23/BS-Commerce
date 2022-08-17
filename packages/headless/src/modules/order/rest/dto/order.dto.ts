@@ -1,8 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsOptional } from "class-validator";
-import { OrderResponseData } from "models";
-import { OrderAddressDto, ProductOrderDto } from "./order.create.dto";
+import { OrderProductData, OrderResponseData } from "models";
+import { OrderAddressDto } from "./order.create.dto";
+import { OrderProductDto } from "./order.product.dto";
 
 export class OrderDto implements OrderResponseData{
     @ApiProperty()
@@ -35,9 +36,9 @@ export class OrderDto implements OrderResponseData{
     @ApiProperty()
     paymentStatus: string;
   
-    @ApiProperty({ type: [ProductOrderDto] })
-    @Type(() => ProductOrderDto)
-    products: ProductOrderDto[];
+    @ApiProperty({ type: [OrderProductDto] })
+    @Type(() => OrderProductDto)
+    products: OrderProductDto[];
 
     @ApiProperty()
     productCost: number;
@@ -46,8 +47,7 @@ export class OrderDto implements OrderResponseData{
     shippingCost: number;
   
     @ApiProperty()
-    @IsOptional()
-    totalCost?: number;
+    totalCost: number;
   
     @ApiProperty()
     stripeToken?: string;
@@ -63,9 +63,4 @@ export class OrderDto implements OrderResponseData{
   
     @ApiProperty()
     paypalRedirectUrl?: string;
-  
-    
-  
-  
-
 }

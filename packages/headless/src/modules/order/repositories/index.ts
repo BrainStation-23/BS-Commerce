@@ -1,4 +1,4 @@
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
+import { BaseOrderEntity } from './../../../entity/order';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 
@@ -8,7 +8,10 @@ import {
   OrderIncompleteStatEntity, 
   OrderStatEntity, 
   ChangeStatusEntity, 
-  OrderSortQuery
+  OrderSortQuery,
+  CreateOrderProduct,
+  OrderProductData,
+  CreateOrderRequest
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
@@ -16,27 +19,26 @@ import { IOrderDatabase } from './order.db.interface';
 export class OrderRepository {
   constructor(private db: IOrderDatabase) {}
 
-  async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
+  async createOrder(userId: string, body: BaseOrderEntity): Promise<OrderEntity> {
     const orderId = await this.generateUniqueId();
   
     const newBody = {...body, orderId};
     return await this.db.createOrder(userId, newBody);
   }
-
-  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
-    return await this.db.addPhotoDetails(products);
+  async addProductDetails(products: CreateOrderProduct[]): Promise<OrderProductData[]>{
+      return await this.db.addProductDetails(products);
   }
-
+  
   addCosts(newOrder: any): OrderEntity{
     let newProductList = [];
     let totalProductsCost = 0;
-    newProductList = newOrder.products.map(product => {
-      let productCost = product.price * product.quantity;//individual product quantity * price
-      totalProductsCost = totalProductsCost + productCost; // total cost of all the products
-      return {...product, totalPrice: productCost};
+    newOrder.products.map(product => {
+      product.info.cost = product.info.price * product.info.quantity;//individual product quantity * price
+      totalProductsCost = totalProductsCost + product.info.cost; // total cost of all the products
+      return;
     });
-    
-    return {...newOrder, products: newProductList, productCost: totalProductsCost, totalCost: newOrder.shippingCost + totalProductsCost};
+
+    return {...newOrder, productCost: totalProductsCost, totalCost: newOrder.shippingCost + totalProductsCost};
   }
 
   async generateUniqueId(){
