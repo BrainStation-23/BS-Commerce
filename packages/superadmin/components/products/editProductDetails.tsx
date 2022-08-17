@@ -13,6 +13,7 @@ import CategoryForm from '@/components/products/forms/categoryForm';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import { productSchema } from '@/components/products/schema/productSchema/index';
 import { EditProductInterface } from '@/components/products/models/index';
+import CategorySection from './forms/categorySection';
 
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [product, setProduct] = useState(props.product);
@@ -244,6 +245,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                     categoryData={categogiesData}
                     setFieldValue={formikprops.setFieldValue}
                   />
+                  <CategorySection />
                 </div>
               </Form>
             );
