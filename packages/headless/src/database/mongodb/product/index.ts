@@ -16,13 +16,17 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').skip(skip).limit(limit).lean();
+    return await ProductModel.find(query, '-_id').sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
   }
 
   async getAllConditionalProducts(query: Record<string, any>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[] | []> {
     const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
     const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
-    return await ProductModel.find({ ...query, 'categories.id': { '$in': categoryIdList } }, '-_id').sort('info.' + orderBy).skip(skip).limit(limit).lean();
+    const products = await ProductModel.find({
+      ...query,
+      'categories.id': { '$in': categoryIdList }
+    }, '-_id').sort({ 'info.price': orderBy }).skip(skip).limit(limit).lean();
+    return products;
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

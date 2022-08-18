@@ -1,4 +1,4 @@
-export class Photo {
+export class ProductPhoto {
   url?: string;
   id?: string;
   title?: string;
@@ -6,11 +6,9 @@ export class Photo {
   displayOrder?: number
 }
 
-export class Category {
+export class ProductCategory {
   id: string;
   name: string;
-  isFeatured?: boolean;
-  displayOrder?: number
 }
 
 export class Product {
@@ -38,13 +36,13 @@ export class Product {
     friendlyPageName: string
   };
   tags?: string[];
-  photos?: Photo[];
+  photos?: ProductPhoto[];
   brands?: string[];
   manufacturer?: {
     id: string,
     name: string,
   };
-  categories: Category[]
+  categories: ProductCategory[]
 }
 
 export class UpdateCategory {
@@ -77,7 +75,7 @@ export class UpdateProduct {
     friendlyPageName?: string
   };
   tags?: string[];
-  photos?: Photo[];
+  photos?: ProductPhoto[];
   brands?: string[];
   manufacture?: {
     id?: string,

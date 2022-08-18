@@ -90,14 +90,6 @@ const ProductSchema = new Schema<Product>({
     categories: [{
         id: String,
         name: String,
-        isFeatured: {
-            type: Boolean,
-            default: false
-        },
-        displayOrder: {
-            type: Number,
-            default: 0
-        },
         _id: false
     }]
 }, {
