@@ -4,7 +4,12 @@ import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
-import { subCategoryList, UpdateProductRequest } from 'models';
+import {
+  Category,
+  NestedCategoryList,
+  subCategoryList,
+  UpdateProductRequest,
+} from 'models';
 
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
@@ -18,7 +23,10 @@ import CategorySection from './forms/categorySection';
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const [product, setProduct] = useState(props.product);
   const router = useRouter();
-  const [categogiesData, setCategoryData] = useState([]);
+  const [categogiesData, setCategoryData] = useState([]); //
+
+  const [categogiesFullList, setCategoryFullList] =
+    useState<NestedCategoryList[]>(); // what we get from get category api
   const [manufacturerData, setManufacturerData] = useState([]);
 
   const handleSubmit = async (data: UpdateProductRequest) => {
@@ -41,6 +49,18 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
       setManufacturerData(allManufacturers);
     }
   }
+  const checkCat = (cat) => {
+    categogiesData.filter((cat2) => {
+      cat.id === cat2.id && cat2.isSelected
+        ? cat.subCategories?.map((subCat) => checkCat(subCat))
+        : '';
+      cat.id === cat2.id && cat2.isSelected && console.log(cat.name , cat.id);
+    });
+  };
+
+  const printCat = () => {
+    categogiesFullList?.map((cat) => checkCat(cat));
+  };
 
   const addSubCategories = (subCategories: subCategoryList[]) => {
     const categoryList: any = [];
@@ -48,10 +68,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
       categoryList.push({
         id: category.id,
         name: category.name,
-        value: category.name,
         isSelected: false,
-        isFeatured: false,
-        displayOrder: category.displayOrder,
       });
       if (category.subCategories && category.subCategories.length > 0) {
         const subCategoryList = addSubCategories(category.subCategories);
@@ -65,6 +82,9 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   async function loadCategories() {
     const response = await userAPI.getCategoryList();
     if (response?.data.categories.length! > 0) {
+      setCategoryFullList(
+        response?.data?.categories ? response.data.categories : []
+      );
       const categories: any = [];
       response?.data.categories.forEach((category, index) => {
         categories.push({
@@ -93,6 +113,18 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
     }
   }
 
+  const addCat = (catID: any) => {
+    categogiesData.map((category: any) => {
+      category.id == catID ? (category.isSelected = true) : '';
+    });
+    setCategoryData([...categogiesData]);
+  };
+  const removeCat = (catID: any) => {
+    categogiesData.map((category: any) => {
+      category.id == catID ? (category.isSelected = false) : '';
+    });
+    setCategoryData([...categogiesData]);
+  };
   useEffect(() => {
     loadCategories();
     loadAllManufacturers();
@@ -192,7 +224,8 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
               manufacturer: manufacturer,
               categories: categories,
             };
-            handleSubmit(newData);
+            // handleSubmit(newData);
+            printCat();
             actions.setSubmitting(false);
           }}
           validationSchema={productSchema}
@@ -221,31 +254,22 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                     </button>
                   </div>
                 </div>
-
-                {/* <div className="col-md-12 clearfix">
-                  <button
-                    type="button"
-                    className="btn btn-info float-left mx-2 my-auto "
-                    id="product-editor-settings"
-                    data-toggle="modal"
-                    data-target="#productsettings-window"
-                  >
-                    <i className="bi bi-gear-fill pt-1" />
-                    <p className="float-end mx-1 my-0">Settings</p>
-                  </button>
-                </div> */}
-
                 <div className="mt-4">
-                  <ProductInfoForm />
+                  {/* <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <ProductManufacturers manufacturerData={manufacturerData} />
-                  <CategoryForm
+                  <ProductManufacturers manufacturerData={manufacturerData} /> */}
+                  {/* <CategoryForm
                     setCategoryData={setCategoryData}
                     categoryData={categogiesData}
                     setFieldValue={formikprops.setFieldValue}
+                  /> */}
+                  <CategorySection
+                    categoryData={categogiesData}
+                    categogiesFullList={categogiesFullList}
+                    removeCat={removeCat}
+                    addCat={addCat}
                   />
-                  <CategorySection />
                 </div>
               </Form>
             );
@@ -254,6 +278,14 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
       ) : (
         'Something went wrong!'
       )}
+      {categogiesData.map((cat) => {
+        if (cat.isSelected)
+          return (
+            <p key={cat.id}>
+              {cat.name} {`${cat.isSelected}`}{' '}
+            </p>
+          );
+      })}
     </>
   );
 };
