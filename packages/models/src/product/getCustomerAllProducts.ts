@@ -13,9 +13,14 @@ export interface GetCustomerAllProductsQuery {
     skip?: number;
     limit?: number;
     brand?: string;
+    manufacturer?: string;
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
+    slug?: string;
+    orderBy?: number;
+    minPrice?: number;
+    maxPrice?: number;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {
