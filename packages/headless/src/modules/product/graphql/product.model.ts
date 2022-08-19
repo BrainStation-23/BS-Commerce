@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsArray } from 'class-validator';
+import { IsArray, IsIn } from 'class-validator';
 import {
   ProductInfo,
   ProductMeta,
@@ -16,6 +16,7 @@ import {
   GetAllProductsQuery,
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
+  GetCustomerAllProductsResponseType,
 } from 'models';
 
 
@@ -321,7 +322,8 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, description: "Price Low to High -> 1 or High to Low -> -1" })
+  @IsIn([-1, 1])
   orderBy?: number;
 
   @Field(() => Int, { nullable: true })
@@ -381,6 +383,28 @@ export class ProductArrayResponse {
   @Field(() => [GraphqlProduct], { nullable: true })
   data?: GraphqlProduct[];
 }
+
+@ObjectType()
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+  @Field(() => [GraphqlProduct], { nullable: true })
+  products: GraphqlProduct[];
+
+  @Field(() => [String], { nullable: true })
+  manufacturers: string[];
+
+  @Field(() => [String], { nullable: true })
+  brands: string[];
+}
+
+@ObjectType()
+export class ProductArrayWithBrandAndManufacturersResponse {
+  @Field(() => Int)
+  code: number;
+
+  @Field(() => GetCustomerAllProductsResponse, { nullable: true })
+  data?: GetCustomerAllProductsResponse;
+}
+
 
 @ObjectType()
 export class ProductArrayWithCount {
