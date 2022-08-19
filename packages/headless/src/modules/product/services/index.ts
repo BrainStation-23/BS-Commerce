@@ -146,8 +146,8 @@ export class ProductService {
     let manufacturers = new Set();
     let brands = new Set();
     products.length && products.forEach(product => {
-      manufacturers.add(product.manufacturer.name);
-      product.brands.forEach(brand => { brands.add(brand) })
+      product?.manufacturer && manufacturers.add(product?.manufacturer?.name);
+      product.brands?.length && product.brands?.forEach(brand => { brands.add(brand) })
     })
 
     return this.helper.serviceResponse.successResponse({
