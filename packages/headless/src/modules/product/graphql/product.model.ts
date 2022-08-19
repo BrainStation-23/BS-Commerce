@@ -166,12 +166,6 @@ export class GraphqlProductCategory implements ProductCategory {
 
   @Field()
   name: string;
-
-  @Field(() => Boolean, { nullable: true })
-  isFeatured?: boolean;
-
-  @Field(() => Int, { nullable: true })
-  displayOrder?: number;
 }
 
 @InputType('UpdateProductCategoryInput')
@@ -181,12 +175,6 @@ export class UpdateProductCategoryInput implements UpdateProductCategory {
 
   @Field({ nullable: true })
   name?: string;
-
-  @Field(() => Boolean, { nullable: true })
-  isFeatured?: boolean;
-
-  @Field(() => Int, { nullable: true })
-  displayOrder?: number;
 }
 
 @ObjectType('ProductManufacturer')
@@ -329,6 +317,18 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
 
   @Field(() => Boolean, { nullable: true })
   isFeatured?: boolean;
+
+  @Field({ nullable: true })
+  slug?: string;
+
+  @Field(() => Int, { nullable: true })
+  orderBy?: number;
+
+  @Field(() => Int, { nullable: true })
+  minPrice?: number;
+
+  @Field(() => Int, { nullable: true })
+  maxPrice?: number;
 }
 
 @InputType()
