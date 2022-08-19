@@ -40,8 +40,6 @@ const products = [
         categories: [{
             id: "4f336ccd-e172-44b6-b5c1-15b61c3ef000",
             name: "Realme",
-            isFeatured: true,
-            displayOrder: 0
         }],
     },
     {
@@ -83,8 +81,6 @@ const products = [
         categories: [{
             id: "34636ccd-e172-44b6-b5c1-15b61c3ef544",
             name: "Realme 6",
-            isFeatured: true,
-            displayOrder: 0
         }],
     },
     {
@@ -126,8 +122,6 @@ const products = [
         categories: [{
             id: "4f336ccd-e902-44b6-b5c1-15b61c3ef544",
             name: "Samsung",
-            isFeatured: true,
-            displayOrder: 0
         }],
     },
     {
@@ -169,8 +163,6 @@ const products = [
         categories: [{
             id: "4f336ccd-e172-1234-b5c1-15b61c3ef544",
             name: "Oppo",
-            isFeatured: true,
-            displayOrder: 0
         }],
     },
     {
@@ -212,8 +204,6 @@ const products = [
         categories: [{
             id: "4f336ccd-e172-44b6-3456-15b61c3ef544",
             name: "Apple",
-            isFeatured: true,
-            displayOrder: 0
         }],
     }
 ];

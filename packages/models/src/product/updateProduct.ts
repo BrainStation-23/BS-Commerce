@@ -50,8 +50,6 @@ export interface UpdateProductManufacturer {
 export interface UpdateProductCategory {
     id?: string,
     name?: string,
-    isFeatured?: boolean,
-    displayOrder?: number
 }
 
 export interface UpdateProductRequest {
