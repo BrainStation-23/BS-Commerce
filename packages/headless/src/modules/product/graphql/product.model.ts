@@ -16,6 +16,7 @@ import {
   GetAllProductsQuery,
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
+  GetCustomerAllProductsResponseType,
 } from 'models';
 
 
@@ -381,6 +382,28 @@ export class ProductArrayResponse {
   @Field(() => [GraphqlProduct], { nullable: true })
   data?: GraphqlProduct[];
 }
+
+@ObjectType()
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+  @Field(() => [GraphqlProduct], { nullable: true })
+  products: GraphqlProduct[];
+
+  @Field(() => [String], { nullable: true })
+  manufacturers: string[];
+
+  @Field(() => [String], { nullable: true })
+  brands: string[];
+}
+
+@ObjectType()
+export class ProductArrayWithBrandAndManufacturersResponse {
+  @Field(() => Int)
+  code: number;
+
+  @Field(() => GetCustomerAllProductsResponse, { nullable: true })
+  data?: GetCustomerAllProductsResponse;
+}
+
 
 @ObjectType()
 export class ProductArrayWithCount {

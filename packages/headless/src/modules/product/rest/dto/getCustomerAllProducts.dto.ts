@@ -6,6 +6,7 @@ import {
     GetCustomerAllProductsErrorMessages,
     GetCustomerAllProductsErrorResponse,
     GetCustomerAllProductsSuccessResponse,
+    GetCustomerAllProductsResponseType,
 } from 'models';
 import { Type } from 'class-transformer';
 import { CustomerProductDto } from './customerProduct.dto';
@@ -88,12 +89,23 @@ export class GetCustomerAllProductsErrorResponseDto implements GetCustomerAllPro
     errors: string[];
 }
 
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+    @ApiProperty({ type: () => [CustomerProductDto] })
+    products: CustomerProductDto[];
+
+    @ApiProperty({ type: () => [String] })
+    manufacturers: string[];
+
+    @ApiProperty({ type: () => [String] })
+    brands: string[];
+}
+
 export class GetCustomerAllProductsSuccessResponseDto implements GetCustomerAllProductsSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: () => [CustomerProductDto] })
+    @ApiProperty({ type: () => GetCustomerAllProductsResponse })
     @IsObject()
-    data: [CustomerProductDto];
+    data: GetCustomerAllProductsResponse;
 }

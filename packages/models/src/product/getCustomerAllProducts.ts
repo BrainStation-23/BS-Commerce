@@ -23,9 +23,15 @@ export interface GetCustomerAllProductsQuery {
     maxPrice?: number;
 }
 
+export interface GetCustomerAllProductsResponseType {
+    products: CustomerProduct[];
+    manufacturers: string[];
+    brands: string[];
+}
+
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {
     code: number;
-    data: CustomerProduct[];
+    data: GetCustomerAllProductsResponseType;
 }
 
 export const enum GetCustomerAllProductsErrorMessages {
