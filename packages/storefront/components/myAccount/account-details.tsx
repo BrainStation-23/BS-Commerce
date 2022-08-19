@@ -48,6 +48,7 @@ const AccountDetails: React.FC = () => {
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
     dispatch(resetCart());
+    router.push('/account/sign-in');
     toast.error('Logged out successfully!', {
       containerId: 'bottom-right',
     });
