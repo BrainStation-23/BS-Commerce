@@ -144,16 +144,6 @@ export class ProductCategoryDto implements ProductCategory {
     @IsNotEmpty()
     @IsString()
     id: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsBoolean()
-    isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsNumber()
-    displayOrder?: number
 }
 
 export class ProductDto implements Product {
