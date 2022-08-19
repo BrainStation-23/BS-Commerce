@@ -12,18 +12,23 @@ export interface IButton {
    */
   size?: "sm" | "md" | "lg";
   /**
+   * Button type
+   */
+  type?: "button" | "submit" | "reset";
+  /**
    * Button click handler
    */
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 /**
  * Primary UI component for user interaction
  */
-const Button: React.FC<IButton> = ({
+export const Button: React.FC<IButton> = ({
   primary = false,
   label,
   size = "md",
+  type = "button",
   onClick,
 }: IButton) => {
   const style =
@@ -31,13 +36,11 @@ const Button: React.FC<IButton> = ({
   const bgColor = primary ? "bg-blue-600" : "bg-blue-500";
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
-      className={`rounded py-2 px-4 font-bold text-white hover:bg-blue-700 ${bgColor} ${style}`}
+      className={`my-2 rounded bg-green-600/100 py-2 px-4 text-white hover:bg-black  ${style}`}
     >
       {label}
     </button>
   );
 };
-
-export default Button;
