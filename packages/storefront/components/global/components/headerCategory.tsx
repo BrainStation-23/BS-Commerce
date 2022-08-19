@@ -67,7 +67,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             {category.subCategories?.map((subCategory: any) => (
               <li key={subCategory.name}>
                 {/* {subCategory.name} */}
-                <HeaderSubCategory category={subCategory} level={1} />
+                <HeaderSubCategory category={subCategory} level={1} showSub={expand} />
               </li>
             ))}
           </ul>
@@ -76,8 +76,10 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         ''
       )}
       {/* render on lg+ screen */}
-      {category.subCategories ? (
-        <div className="oigin-left absolute top-0 left-56 z-50 h-auto w-56 scale-x-0 bg-white shadow-lg transition-all duration-300 lg:h-60 lg:group-hover:scale-x-100">
+      {document.body.clientWidth > 768 && category.subCategories ? (
+        <div className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+          expand ? 'scale-x-100' : 'scale-x-0'
+        }`}>
           <ul className="pl-2">
             {category.subCategories?.map((subCategory: any) => (
               <li key={subCategory.name}>
