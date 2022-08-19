@@ -1,4 +1,4 @@
-import { IOrderResponseData, OrderIncompleteStat } from 'models';
+import { OrderIncompleteStat } from 'models';
 import { HttpStatus, Injectable } from "@nestjs/common";
 
 import { 
@@ -11,8 +11,7 @@ import {
     OrderIncompleteStatEntity, 
     GetAllOrderQueryEntity, 
     AllOrdersEntity, 
-    ChangeStatusEntity, 
-    OrderResponseEntity 
+    ChangeStatusEntity 
 } from "src/entity/order";
 import { errorResponse, successResponse } from "src/utils/response";
 import { IServiceResponse } from "src/utils/response/service.response.interface";
@@ -22,10 +21,10 @@ import { OrderRepository } from "../repositories";
 export class OrderAdminService{
     constructor(private orderRepository: OrderRepository) {}
 
-    async getOrderById(orderId: string):Promise<IServiceResponse<OrderResponseEntity>>{
+    async getOrderById(orderId: string):Promise<IServiceResponse<OrderEntity>>{
         const orderData = await this.orderRepository.getOrderById(orderId);
         if (orderData) {
-            return successResponse(OrderResponseEntity, orderData);
+            return successResponse(OrderEntity, orderData);
           }
         return errorResponse(
         'Error in order creation.',
@@ -63,7 +62,7 @@ export class OrderAdminService{
         )
     }
 
-    async changeStatus(body: ChangeStatusEntity): Promise<IServiceResponse<OrderResponseEntity>>{
+    async changeStatus(body: ChangeStatusEntity): Promise<IServiceResponse<OrderEntity>>{
         const orderStat = await this.orderRepository.changeStatus(body);
         if(orderStat){
             return successResponse(OrderEntity, orderStat)

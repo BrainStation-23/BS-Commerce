@@ -1,32 +1,71 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsString, MaxLength } from 'class-validator';
-import { UserOrderList, ProductDataWithPhoto } from 'models';
-import { ProductPhotoDto } from 'src/modules/product/rest/dto/product.dto';
+import { Type } from 'class-transformer';
+import { IsArray, IsNumber, IsString, MaxLength, ValidateNested } from 'class-validator';
+import { OrderByUserIdResponseData, IProductOrderData } from 'models';
+import { OrderAddressDto, ProductOrderDto } from './order.create.dto';
 
-export class OrderProductDto implements ProductDataWithPhoto{
-    @ApiProperty({ example: '25aaa4fa-69d0-4bc5-85a0-4f9c6828702f' })
-    @IsString()
-    productId: string;
+export class OrderDetails implements OrderByUserIdResponseData{
+    @ApiProperty({ type: OrderAddressDto })
+    billingAddress: OrderAddressDto;
   
-    @ApiProperty({ example: 'test' })
-    @MaxLength(100)
-    @IsString()
-    name: string;
-    
-    @ApiProperty({ type: [ProductPhotoDto] })
-    @IsArray()
-    photos: ProductPhotoDto[];
-
-    @ApiProperty({ example: 100 })
-    @IsNumber()
-    price: number;
+    @ApiProperty({ type: OrderAddressDto })
+    shippingAddress: OrderAddressDto;
   
-    @ApiProperty({ example: 2 })
-    @IsNumber()
-    quantity: number;
+    @ApiProperty()
+    shippingMethod: string;
   
-    @ApiProperty({ example: 'string' })
-    @IsString()
-    @MaxLength(100)
-    sku: string;
-}
+    @ApiProperty()
+    paymentMethod: string;
+  
+    @ApiProperty()
+    productCost: number;
+  
+    @ApiProperty({ type: [ProductOrderDto] })
+    @Type(() => ProductOrderDto)
+    products: ProductOrderDto[];
+  
+    @ApiProperty()
+    shippingCost: number;
+  
+    @ApiProperty()
+    totalCost: number;
+  
+    @ApiProperty()
+    stripeToken?: string;
+  
+    @ApiProperty()
+    stripeCustomerId?: string;
+  
+    @ApiProperty()
+    stripeChargeId?: string;
+  
+    @ApiProperty()
+    paypalPaymentId?: string;
+  
+    @ApiProperty()
+    paypalRedirectUrl?: string;
+  
+    @ApiProperty()
+    orderStatus: string;
+  
+    @ApiProperty()
+    shippingStatus: string;
+  
+    @ApiProperty()
+    paymentStatus: string;
+  
+    @ApiProperty()
+    orderId: string;
+  
+    @ApiProperty()
+    orderedDate: Date;
+  }
+export class OrderListByUserIdResponseDto {
+    @ApiProperty()
+    userId: string;
+  
+    @ApiProperty({ type: OrderDetails })
+    @Type(() => OrderDetails)
+    @ValidateNested({ always: true })
+    orderInfo: OrderDetails[];
+  }
