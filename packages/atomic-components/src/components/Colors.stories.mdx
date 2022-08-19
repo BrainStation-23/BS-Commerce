@@ -1,0 +1,31 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
+
+<Meta title="Colors" />
+
+<ColorPalette>
+  <ColorItem
+    title="theme.color.greyscale"
+    subtitle="Some of the greys"
+    colors={{ White: "#FFFFFF", Alabaster: "#F8F8F8", Concrete: "#F3F3F3" }}
+  />
+  <ColorItem
+    title="bg-green-600"
+    subtitle="Close to primary color of safira!"
+    colors={{ Green600: "#16A34A" }}
+  />
+  <ColorItem
+    title="theme.color.secondary"
+    subtitle="Ocean"
+    colors={{ DodgerBlue: "#1EA7FD" }}
+  />
+  <ColorItem
+    title="theme.color.positive"
+    subtitle="Green"
+    colors={{
+      Apple: "rgba(102,191,60,1)",
+      Apple80: "rgba(102,191,60,.8)",
+      Apple60: "rgba(102,191,60,.6)",
+      Apple30: "rgba(102,191,60,.3)",
+    }}
+  />
+</ColorPalette>
