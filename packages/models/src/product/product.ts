@@ -33,8 +33,6 @@ export interface ProductPhoto {
 export interface ProductCategory {
     id: string,
     name: string,
-    isFeatured?: boolean,
-    displayOrder?: number
 }
 
 export interface ProductManufacturer {
