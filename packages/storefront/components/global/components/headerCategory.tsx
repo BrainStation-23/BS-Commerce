@@ -1,15 +1,15 @@
-import { NestedCategoryList } from 'models';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { NestedCategoryList } from 'models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
-import { HeaderSubCategory } from './headerSubCategory';
+import HeaderSubCategory from '@/components/global/components/headerSubCategory';
 
 interface Props {
   category: NestedCategoryList;
 }
 
-export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
-  const [subOff, settt] = useState(false);
+const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
+  const [showSubCategory, settt] = useState(false);
   const [expand, setExpand] = useState<boolean>(false);
 
   const handleExpandClick = (
@@ -18,14 +18,11 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     e.stopPropagation();
     setExpand(!expand);
   };
-  const mHover = () => {
-    setExpand(true);
-  };
 
   return (
     <div
       className={`group`}
-      onMouseEnter={() => mHover()}
+      onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >
@@ -80,13 +77,13 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
       )}
       {/* render on lg+ screen */}
       {category.subCategories ? (
-        <div className="oigin-left absolute top-0 left-56 z-50 h-auto w-56 origin-left scale-x-0 bg-white shadow-lg transition-all duration-300 lg:h-60 lg:group-hover:scale-x-100">
+        <div className="oigin-left absolute top-0 left-56 z-50 h-auto w-56 scale-x-0 bg-white shadow-lg transition-all duration-300 lg:h-60 lg:group-hover:scale-x-100">
           <ul className="pl-2">
             {category.subCategories?.map((subCategory: any) => (
               <li key={subCategory.name}>
                 <HeaderSubCategory
                   category={subCategory}
-                  subOff={subOff}
+                  showSub={showSubCategory}
                   level={1}
                 />
               </li>
@@ -99,3 +96,5 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     </div>
   );
 };
+
+export default HeaderCategory;

@@ -4,16 +4,16 @@ import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
 
 interface Props {
   category: any;
-  subOff?: boolean;
+  showSub?: boolean;
   level: number;
 }
 
-export const HeaderSubCategory: React.FC<Props> = ({
+const HeaderSubCategory: React.FC<Props> = ({
   category,
-  subOff,
+  showSub,
   level,
 }: Props) => {
-  const [showSubCategory, setShowSubCategory] = useState(subOff);
+  const [showSubCategory, setShowSubCategory] = useState(showSub);
   const [expand, setExpand] = useState<boolean>(false);
 
   const handleExpandClick = (
@@ -89,21 +89,20 @@ export const HeaderSubCategory: React.FC<Props> = ({
             {category.subCategories ? (
               <div
                 className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
-                  showSubCategory
-                    ? 'scale-x-100'
-                    : 'scale-x-0'
+                  showSubCategory ? 'scale-x-100' : 'scale-x-0'
                 }`}
               >
                 <ul className="pl-2">
-                  {showSubCategory && category.subCategories?.map((category: any) => (
-                    <li key={category.name}>
-                      <HeaderSubCategory
-                        category={category}
-                        level={level + 1}
-                        // showSubCategory1={showSubCategory}
-                      />
-                    </li>
-                  ))}
+                  {showSubCategory &&
+                    category.subCategories?.map((category: any) => (
+                      <li key={category.name}>
+                        <HeaderSubCategory
+                          category={category}
+                          level={level + 1}
+                          // showSubCategory1={showSubCategory}
+                        />
+                      </li>
+                    ))}
                 </ul>
               </div>
             ) : (
@@ -131,3 +130,4 @@ export const HeaderSubCategory: React.FC<Props> = ({
     </>
   );
 };
+export default HeaderSubCategory;
