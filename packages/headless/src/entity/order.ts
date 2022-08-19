@@ -142,7 +142,7 @@ export class AllOrdersEntity {
   orders: OrderEntity[]
 }
 export class ChangeStatusEntity { 
-  orderId: string
+  orderId: string;
   statusType: string;
   statusValue: string
 }
@@ -162,4 +162,10 @@ export class OrderSortQuery {
 export class OrderListResponseEntity {
   userId: string;
   orderInfo: OrderByUserId[];
+}
+
+export class ReOrderQuery{
+  orderId: string;
+  overWriteCart?: boolean;
+  ignoreInvalidItems?: boolean;
 }
