@@ -9,8 +9,8 @@ const ImageWithDescription: React.FC = () => {
         <div className="m-auto mb-5 w-full">
           <Image
             src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about1_71e1f591-e3d4-456e-be12-03e0afed0c73.jpg?v=1588135206"
-            width="1504"
-            height="580"
+            width={1504}
+            height={580}
             alt="about"
           />
         </div>
@@ -28,8 +28,8 @@ const ImageWithDescription: React.FC = () => {
         </p>
         <Image
           src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about-us-signature_medium.png?v=1588134272"
-          width="228"
-          height="129"
+          width={228}
+          height={129}
           alt="about"
         />
       </div>

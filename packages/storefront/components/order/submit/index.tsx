@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Link from 'next/link';
+import Image from 'next/image';
+
 import withAuth from '@/components/auth/withAuth';
 const SubmitComponent: FC = () => {
-  const imageDimensions = { width: 300, height: 456 };
+  const imageDimensions = { width: 456, height: 300 };
 
   return (
     <>
@@ -15,7 +17,7 @@ const SubmitComponent: FC = () => {
       <section className="container mx-auto px-4">
         <div className="flex flex-col items-center border-b py-16">
           <div className="mb-8">
-            <img
+            <Image
               src="https://cdn.dribbble.com/users/458522/screenshots/14007167/media/214f6fa81fbd40f3b65b2cb747393226.png?compress=1&resize=400x300&vertical=top"
               alt="Page not found!!"
               width={imageDimensions.width}

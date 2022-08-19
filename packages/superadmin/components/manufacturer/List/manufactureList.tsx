@@ -4,6 +4,8 @@ import Table from '../../global/table/table';
 import Pagination from '../../global/pagination';
 import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+
 interface Props {
   manufactureData: any;
   // getAllManufacturers: any;
@@ -54,7 +56,7 @@ const ManufactureList: FC<Props> = ({
       path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
-          <img src={data.picture} height="75px" width={'75px'} alt="..."></img>
+          <Image src={data.picture} height={75} width={75} alt="..." />
         </td>
       ),
     },
