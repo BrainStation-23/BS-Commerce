@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsArray } from 'class-validator';
+import { IsArray, IsIn } from 'class-validator';
 import {
   ProductInfo,
   ProductMeta,
@@ -322,7 +322,8 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, description: "Price Low to High -> 1 or High to Low -> -1" })
+  @IsIn([-1, 1])
   orderBy?: number;
 
   @Field(() => Int, { nullable: true })
