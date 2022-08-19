@@ -4,6 +4,7 @@ export interface CustomerAddress {
     lastName: string;
     addressLine1: string;
     addressLine2?: string;
+    isDefault?: boolean;
     company?: string;
     state?: string;
     country?: string;
@@ -14,9 +15,9 @@ export interface CustomerAddress {
 
 export interface Customer {
     id: string;
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     phone?: string;
     email?: string;
+    password?: string;
     addresses?: CustomerAddress[]
 }

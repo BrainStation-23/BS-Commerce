@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsArray, IsBoolean, IsNotEmpty, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsBoolean, IsNotEmpty, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import {
     ProductInfo,
     ProductMeta,
@@ -144,16 +144,6 @@ export class ProductCategoryDto implements ProductCategory {
     @IsNotEmpty()
     @IsString()
     id: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsBoolean()
-    isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsNumber()
-    displayOrder?: number
 }
 
 export class ProductDto implements Product {

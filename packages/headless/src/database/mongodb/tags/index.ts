@@ -15,6 +15,6 @@ export class TagsDatabase implements ITagsDatabase {
 
   async createTag(data: { name: string }): Promise<Tag | null> {
     const tag = await TagsModel.create(data);
-    return tag.toObject();
+    return tag?.toObject();
   }
 }

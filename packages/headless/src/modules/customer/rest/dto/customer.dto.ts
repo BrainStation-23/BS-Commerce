@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import type { CustomerAddress, Customer } from 'models';
 
 export class CustomerAddressDto implements CustomerAddress {
@@ -19,6 +19,11 @@ export class CustomerAddressDto implements CustomerAddress {
     @IsOptional()
     @IsString()
     addressLine2?: string;
+
+    @ApiProperty({ required: false })
+    @IsBoolean()
+    @IsOptional()
+    isDefault?: boolean;
 
     @ApiProperty({ required: false })
     @IsOptional()

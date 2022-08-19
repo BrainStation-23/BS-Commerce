@@ -3,20 +3,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
 import { CreateManufacturerDto } from 'src/modules/manufacturer/rest/dto';
 import { ManufacturerController } from 'src/modules/manufacturer/rest/manufacturer.controller';
-
 import * as request from 'supertest';
 import {
   connectTestDatabase,
-  getDemoUserToken,
-  testTimeout,
-  testUserId,
-  testUsername,
+  GetDemoUserToken,
+  TestTimeout,
+  TestAdminId,
+  TestAdminUsername,
 } from '../../test-utility';
 
-const token = getDemoUserToken(testUserId, testUsername, 'admin').token;
-
-const timeout = testTimeout;
-const userId = testUserId;
+const token = GetDemoUserToken(TestAdminId, TestAdminUsername, 'admin').token;
+const timeout = TestTimeout;
 
 const ManufacturerDto: CreateManufacturerDto = {
   name: 'Manufacturer Test 1',
@@ -68,7 +65,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
   });
 
   afterAll(async () => {
-    // remove test databse collection if required
+    // remove test database collection if required
     await app.close();
   });
 
@@ -86,7 +83,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
         .get('/manufacturers')
         .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
         .expect(401);
-    }, 30000);
+    }, timeout);
   });
 
   describe('GET /manufacturers with valid token', () => {
@@ -129,7 +126,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             );
           }
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe('GET /manufacturers with valid token including queries as skip and limit', () => {
@@ -138,7 +135,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
         .get('/manufacturers?skip=1&limit=3')
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-    }, 30000);
+    }, timeout);
   });
 
   describe('POST /manufacturers/create [passing invalid req body]', () => {
@@ -156,7 +153,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             ]),
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe('POST /manufacturers/create [passing invalid req body]', () => {
@@ -175,7 +172,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             ]),
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe('POST /manufacturers/create [passing invalid req body on nested object]', () => {
@@ -193,7 +190,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             ]),
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe('POST /manufacturers/create [passing invalid data as same name]', () => {
@@ -207,7 +204,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
           expect(res.body.error).toEqual('MANUFACTURER_ALREADY_EXISTS');
           expect(res.body.errors).toBe(null);
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe('POST /manufacturers/create [passing valid data]', () => {
@@ -225,7 +222,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
 
           manufacturerId = res.body.data.manufacturer.id;
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`GET /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
@@ -240,7 +237,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             'MANUFACTURER_LOADED_SUCCESSFULLY',
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`GET /manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c [by wrong manufacturer id]`, () => {
@@ -253,7 +250,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
           expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
           expect(res.body.errors).toBe(null);
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`PATCH /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
@@ -274,7 +271,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             'MANUFACTURER_UPDATED_SUCCESSFULLY',
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`PATCH /manufacturers/${undefined} [by undefined data as manufacturer id]`, () => {
@@ -286,7 +283,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
         .send(toBeUpdated)
         .set('Authorization', `Bearer ${token}`)
         .expect(400);
-    }, 30000);
+    }, timeout);
   });
 
   describe(`DELETE /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
@@ -301,7 +298,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
             'MANUFACTURER_DELETED_SUCCESSFULLY',
           );
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`DELETE /manufacturers/${undefined} [by undefined data as manufacturer id]`, () => {
@@ -314,7 +311,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
           expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
           expect(res.body.errors).toBe(null);
         });
-    }, 30000);
+    }, timeout);
   });
 
   describe(`DELETE /manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c [by wrong manufacturer id]`, () => {
@@ -327,6 +324,6 @@ describe('Initializing... Manufactrurer controller testing', () => {
           expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
           expect(res.body.errors).toBe(null);
         });
-    }, 30000);
+    }, timeout);
   });
 });

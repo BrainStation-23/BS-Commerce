@@ -1,29 +1,11 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Put, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerService } from '../services';
 import { User as CustomerInfo } from 'src/decorators/auth.decorator';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Customer } from 'src/entity/customer';
-import {
-  AddCustomerNewAddressErrorResponseDto,
-  AddCustomerNewAddressSuccessResponseDto,
-  CustomerAddressDto,
-  CustomerChangePasswordDto,
-  CustomerChangePasswordErrorResponseDto,
-  CustomerChangePasswordSuccessResponseDto,
-  DeleteCustomerAddressErrorResponseDto,
-  DeleteCustomerAddressParamsDto,
-  DeleteCustomerAddressSuccessResponseDto,
-  GetCustomerInformationErrorResponseDto,
-  GetCustomerInformationSuccessResponseDto,
-  UpdateCustomerAddressErrorResponseDto,
-  UpdateCustomerAddressParamsDto,
-  UpdateCustomerAddressSuccessResponseDto,
-  UpdateCustomerDto,
-  UpdateCustomerErrorResponseDto,
-  UpdateCustomerSuccessResponseDto
-} from './dto';
+import { AddCustomerNewAddressErrorResponseDto, AddCustomerNewAddressSuccessResponseDto, CustomerAddressDto, DeleteCustomerAddressErrorResponseDto, DeleteCustomerAddressParamsDto, DeleteCustomerAddressSuccessResponseDto, GetCustomerInformationErrorResponseDto, GetCustomerInformationSuccessResponseDto, UpdateCustomerAddressErrorResponseDto, UpdateCustomerAddressParamsDto, UpdateCustomerAddressSuccessResponseDto, UpdateCustomerDto, UpdateCustomerErrorResponseDto, UpdateCustomerSuccessResponseDto } from './dto';
 
 @Controller('customer')
 @ApiTags('Customer Profile API')
