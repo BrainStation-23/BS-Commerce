@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import { Field, Form, Formik } from 'formik';
 
 import { UpdateCustomerRequestBody } from 'models';
@@ -8,7 +9,10 @@ import { UpdateCustomerRequestBody } from 'models';
 import { userAPI } from 'APIs';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
-import { storeCustomerDetails } from 'toolkit/userSlice';
+import { resetUserDetails, storeCustomerDetails } from 'toolkit/userSlice';
+import { resetAddress } from 'toolkit/customerAddressSlice';
+import { resetWishilist } from 'toolkit/productsSlice';
+import { resetCart } from 'toolkit/cartSlice';
 
 import { CustomerSchema } from './schema/customer.schema';
 
@@ -16,17 +20,21 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import withAuth from '@/components/auth/withAuth';
+
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const customer = useAppSelector(
     (state) => state.persistedReducer.user.customerDetails
   );
 
   const userData = {
     email: customer.email === undefined ? '' : customer.email,
-    firstName: customer.firstName === undefined ? '' : customer.firstName,
-    lastName: customer.lastName === undefined ? '' : customer.lastName,
+    name: customer.name === undefined ? '' : customer.name,
+    // firstName: customer.firstName === undefined ? '' : customer.firstName,
+    // lastName: customer.lastName === undefined ? '' : customer.lastName,
     phone: customer.phone === undefined ? '' : customer.phone,
 
     isPhoneVerified: false,
@@ -36,6 +44,10 @@ const AccountDetails: React.FC = () => {
   const handleLogout = () => {
     localStorage.clear();
     dispatch(storeUserToken(''));
+    dispatch(resetAddress());
+    dispatch(resetUserDetails());
+    dispatch(resetWishilist());
+    dispatch(resetCart());
     toast.error('Logged out successfully!', {
       containerId: 'bottom-right',
     });
@@ -47,7 +59,24 @@ const AccountDetails: React.FC = () => {
     // const phone = values.phone === '' ? null : values.phone;
     // const email = values.email === '' ? null : values.email;
 
-    const response = await userAPI.updateCustomer(values);
+    let data;
+    if (userData.email !== '' && userData.phone !== '') {
+      data = {
+        name: values.name,
+      };
+    } else if (userData.email === '') {
+      data = {
+        name: values.name,
+        email: values.email,
+      };
+    } else {
+      data = {
+        name: values.name,
+        phone: values.phone,
+      };
+    }
+
+    const response = await userAPI.updateCustomer(data);
     dispatch(storeCustomerDetails(response!.data));
     setEditable(false);
   };
@@ -76,8 +105,9 @@ const AccountDetails: React.FC = () => {
 
         <Formik
           initialValues={{
-            firstName: userData.firstName,
-            lastName: userData.lastName,
+            name: userData.name,
+            //firstName: userData.firstName,
+            //lastName: userData.lastName,
             phone: userData.phone,
             email: userData.email,
           }}
@@ -125,14 +155,15 @@ const AccountDetails: React.FC = () => {
                       </div>
                       {/* Account Form */}
                       <div className="mt-2 flex flex-col gap-y-2">
-                        <SingleDetail
+                        <SingleDetail value={userData.name} label="Name" />
+                        {/* <SingleDetail
                           value={userData.firstName}
                           label="First name"
                         />
                         <SingleDetail
                           value={userData.lastName}
                           label="Last name"
-                        />
+                        /> */}
                         <SingleDetail
                           value={userData.phone}
                           label="Phone"
