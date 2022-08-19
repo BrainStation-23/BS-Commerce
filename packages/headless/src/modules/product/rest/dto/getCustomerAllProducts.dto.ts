@@ -31,6 +31,11 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
+    manufacturer?: string;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsString()
     categoryId?: string;
 
     @ApiProperty({ required: false })
@@ -45,7 +50,7 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     isFeatured?: boolean;
 
 
-    @ApiProperty({ required: false, description: "Category Slug" })
+    @ApiProperty({ required: false, description: "Category Slug", default: 'realme' })
     @IsOptional()
     @IsString()
     slug?: string;
@@ -62,8 +67,9 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @IsNumber()
     minPrice?: number;
 
-    @ApiProperty({ required: false, default: 10000 })
+    @ApiProperty({ required: false, default: 10000, type: Number })
     @IsOptional()
+    @Type(() => Number)
     @IsNumber()
     maxPrice?: number;
 }

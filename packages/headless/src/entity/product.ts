@@ -88,9 +88,12 @@ export class SearchCondition {
   skip?: number;
   limit?: number;
   brand?: string;
+  manufacturer?: string;
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;
   slug?: string;
   orderBy?: number;
+  minPrice?: number;
+  maxPrice?: number;
 }
