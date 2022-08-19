@@ -50,10 +50,10 @@ export class GetProductsByConditionQueryDto implements GetProductsByConditionQue
     @IsString()
     slug?: string;
 
-    @ApiProperty({ required: false })
+    @ApiProperty({ required: false, default: 1 })
     @IsOptional()
-    @IsString()
-    orderBy?: string;
+    @IsNumber()
+    orderBy?: number;
 }
 
 export class GetProductsByConditionErrorResponseDto implements GetProductsByConditionErrorResponse {
