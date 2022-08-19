@@ -32,7 +32,8 @@ After the Successful addition of Product , A Success Modal will be shown
 ## Adding Product To Cart From Product Details Page
 
 Click on the Product Name from the Product card o to go to the product details Page
-![Docs Version Dropdown](../img/cart-tutorial/prod_details_um.png)
+
+![Docs Version Dropdown](../img/cart-tutorial/prod_card_details.jpg)
 
 Or Hover over the product image , and Click the 'Search Icon' which will also take you to the Product details Page
 
