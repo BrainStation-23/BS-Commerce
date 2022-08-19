@@ -1,11 +1,12 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsIn, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import {
     GetCustomerAllProductsQuery,
     GetCustomerAllProductsErrorMessages,
     GetCustomerAllProductsErrorResponse,
     GetCustomerAllProductsSuccessResponse,
+    GetCustomerAllProductsResponseType,
 } from 'models';
 import { Type } from 'class-transformer';
 import { CustomerProductDto } from './customerProduct.dto';
@@ -58,6 +59,7 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     @ApiProperty({ required: false, description: "Price Low to High -> 1 or High to Low -> -1", default: 1, type: Number, })
     @IsOptional()
     @Type(() => Number)
+    @IsIn([-1, 1])
     @IsNumber()
     orderBy?: number;
 
@@ -88,12 +90,23 @@ export class GetCustomerAllProductsErrorResponseDto implements GetCustomerAllPro
     errors: string[];
 }
 
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+    @ApiProperty({ type: () => [CustomerProductDto] })
+    products: CustomerProductDto[];
+
+    @ApiProperty({ type: () => [String] })
+    manufacturers: string[];
+
+    @ApiProperty({ type: () => [String] })
+    brands: string[];
+}
+
 export class GetCustomerAllProductsSuccessResponseDto implements GetCustomerAllProductsSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: () => [CustomerProductDto] })
+    @ApiProperty({ type: () => GetCustomerAllProductsResponse })
     @IsObject()
-    data: [CustomerProductDto];
+    data: GetCustomerAllProductsResponse;
 }
