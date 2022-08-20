@@ -44,78 +44,30 @@ export class OrderCustomerService {
     const products = order.products;
     
     const unavailableProducts = await this.orderRepository.getAvailableProducts(products);
-    if(unavailableProducts.length === products.length){
-      return errorResponse(
-        'Products are not available right now',
-        null,
-        HttpStatus.BAD_REQUEST,
-      );
-    }else{
-      let unavailableAddToCart;
-      const allAddToCart = products.map(product => { return {productId: product.productId, quantity: product.quantity}});
+    if(unavailableProducts.length === products.length)return errorResponse( 'Products are not available right now',null,HttpStatus.BAD_REQUEST );
+    else {
+        let availableAddToCart;
+        const allAddToCart = products.map(product => { return {productId: product.productId, quantity: product.quantity}});
 
-      if(unavailableProducts.length > 0){
-          const res = products.filter(product => {
-            return !unavailableProducts.find(item => {
-              return item.productId === product.productId;
-            });
-          });
-          unavailableAddToCart = res.map(product => { return {productId: product.productId, quantity: product.quantity}});
-          if(ignoreInvalidItems === false){
-            return errorResponse(
-              'All of the products are not available. Do you wish to continue?',
-              null,
-              HttpStatus.BAD_REQUEST,
-            );
-          }
-      }
-  
-      const cart = await this.orderRepository.getCart(userId);
-      if (!cart) {//if no items in the cart
-          //go to add cart
-          const addCart = unavailableProducts.length > 0 ? await this.orderRepository.addToCart(userId, unavailableAddToCart) : await this.orderRepository.addToCart(userId, allAddToCart); 
-          if(addCart){
-              return successResponse(CartResponse, addCart);
-          }else{
-              return errorResponse(
-                'Could not add items to the cart',
-                null,
-                HttpStatus.BAD_REQUEST,
-              );
-          }
-      }else {
-          //ask for overwrite option
-          if(overWriteCart === true){
-              const deleteCart = await this.orderRepository.deleteCartItems(userId);
-              if(!deleteCart){
-                return errorResponse(
-                  'Could not clear your cart',
-                  null,
-                  HttpStatus.BAD_REQUEST,
-                );
-              }else{
-                
-                const addCart = unavailableProducts.length > 0 ? await this.orderRepository.addToCart(userId, unavailableAddToCart) : await this.orderRepository.addToCart(userId, allAddToCart);
-                
-                if(addCart){
-                  return successResponse(CartResponse, addCart);
-                }else{
-                  return errorResponse(
-                    'Could not add items to the cart',
-                    null,
-                    HttpStatus.BAD_REQUEST,
-                  );
-                }
-              }
-             
-          }else{
-              return errorResponse(
-                'Your cart items will be replaced. Do you wish to continue?',
-                null,
-                HttpStatus.BAD_REQUEST,
-              );
-          }
-      }  
+        if(unavailableProducts.length > 0){
+            if(ignoreInvalidItems === false) return errorResponse( 'All of the products are not available. Do you wish to continue?', null, HttpStatus.BAD_REQUEST );
+            
+            const res = products.filter(product => !unavailableProducts.find(item => item.productId === product.productId ));
+            availableAddToCart = res.map(product => { return { productId: product.productId, quantity: product.quantity }});
+        }
+
+        const cart = await this.orderRepository.getCart(userId);
+        if (cart){
+            if(overWriteCart === true){
+                const deleteCart = await this.orderRepository.deleteCartItems(userId);
+                if(!deleteCart) return errorResponse( 'Could not clear your cart', null, HttpStatus.BAD_REQUEST );
+
+            }else return errorResponse( 'Your cart items will be replaced. Do you wish to continue?', null, HttpStatus.BAD_REQUEST );
+        }
+        const addCart = unavailableProducts.length > 0 ? await this.orderRepository.addToCart(userId, availableAddToCart) : await this.orderRepository.addToCart(userId, allAddToCart); 
+        
+        if(addCart) return successResponse(CartResponse, addCart);
+        else return errorResponse( 'Could not add items to the cart', null, HttpStatus.BAD_REQUEST );  
     }
   } 
 
