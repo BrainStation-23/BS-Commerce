@@ -72,6 +72,6 @@ export class ProductDatabase implements IProductDatabase {
       return item._id
     });
 
-    return await ProductModel.find({ id: { $in: productsIds } });
+    return await ProductModel.find({ id: { $in: productsIds } }).skip(skip).limit(limit).lean();
   }
 }
