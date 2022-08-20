@@ -9,7 +9,9 @@ import {
   OrderStatEntity, 
   ChangeStatusEntity, 
   OrderSortQuery,
-  ProductOrder
+  ProductOrder,
+  ReOrderQuery,
+  CartItem
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
@@ -22,6 +24,21 @@ export class OrderRepository {
   
     const newBody = {...body, orderId};
     return await this.db.createOrder(userId, newBody);
+  }
+
+  async getAvailableProducts(products: ProductOrder[]): Promise<ProductOrder[]> {
+    return await this.db.getAvailableProducts(products);
+  }
+
+  async getCart(userId: string, ): Promise<any> {
+    return await this.db.getCart(userId);
+  }
+
+  async addToCart(userId: string, items: CartItem[]): Promise<any>{
+    return await this.db.addToCart(userId, items);
+  }
+  async deleteCartItems(userId: string): Promise<any> {
+    return await this.db.deleteCartItems(userId);
   }
 
   async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<ProductOrder[]>{

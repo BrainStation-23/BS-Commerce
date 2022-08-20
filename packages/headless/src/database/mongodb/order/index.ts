@@ -1,4 +1,6 @@
 import {
+  CartItem, 
+  ReOrderQuery,
   ChangeStatusEntity,
   GetAllOrderQueryEntity,
   OrderEntity,
@@ -17,12 +19,56 @@ import {
   CreateOrderRequest,
   CreateProductOrderDetails
 } from 'models';
+import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {
+  async addToCart(userId: string, items: CartItem[]) : Promise<any>{
+    let addItems;
+    try{
+     addItems = await Promise.all(items.map(async (item) =>{
+            return await CartModel.findOneAndUpdate(
+              { userId },
+              { $push: { items: item } },
+              { new: true },
+            )
+        } 
+      ));
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+    return addItems;
+  }
+
+  async getCart(userId: string): Promise<any> {
+    return await CartModel.findOne({userId }).select('-_id').lean();
+  }
   async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
+  async getAvailableProducts(products: ProductOrder[]): Promise<ProductOrder[]>{
+    let items = [];
+    await Promise.all(products.map( async (product) => {
+        const available = await ProductModel.findOne({id: product.productId}).lean();
+        if(!available){
+          items.push(product);
+        }
+        return product;
+    }));
+   
+    return items;
+  }
+
+  async deleteCartItems(userId: string): Promise<any> {
+    return CartModel.findOneAndUpdate(
+      { userId },
+      { $set: { items: [] } },
+      { new: true },
+    ).select('-_id')
+      .lean()
+      .exec();
+  }
   async addPhotoDetails(
     products: CreateProductOrderDetails[],
   ): Promise<ProductOrder[]> {
@@ -32,7 +78,8 @@ export class OrderDatabase implements IOrderDatabase {
         return {...product, photos: photoDetails.photos};
       })
     );
-      return newProductList;
+
+    return newProductList;
   }
 
   async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {

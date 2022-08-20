@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional } from "class-validator";
 import { IReOrderQuery } from "models";
 
-export class ReOrderQuery implements IReOrderQuery{
+export class ReOrderDto implements IReOrderQuery{
     @ApiProperty()
     orderId: string
 

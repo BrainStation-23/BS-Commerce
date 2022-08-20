@@ -169,3 +169,13 @@ export class ReOrderQuery{
   overWriteCart?: boolean;
   ignoreInvalidItems?: boolean;
 }
+export class CartItem {
+  productId: string;
+  quantity: number;
+}
+
+export class CartResponse {
+  id?: string;
+  userId: string;
+  items: CartItem[];
+}
