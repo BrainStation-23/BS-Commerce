@@ -43,4 +43,7 @@ export class ProductRepository {
     async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
         return await this.db.getProductsList(skip, limit, query, sortCondition);
     }
+    async GetTopSellingProducts(query: Record<string, any>, skip: number, limit: number): Promise<Product[] | []>{
+        return await this.db.GetTopSellingProducts(query, skip, limit);
+    }
 }

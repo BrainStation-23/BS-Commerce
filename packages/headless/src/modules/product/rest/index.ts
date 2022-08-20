@@ -40,6 +40,7 @@ import {
   UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
 } from './dto';
+import { GetCustomizedProductsErrorResponseDto, GetCustomizedProductsQueryDto, GetCustomizedProductsSuccessResponseDto } from './dto/customizedProduct.dto';
 
 @ApiTags('Product API')
 @Controller()
@@ -276,6 +277,29 @@ export class ProductController {
   })
   async updateProduct(@Body() product: UpdateProductDto, @Param() params: UpdateProductParamsDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.updateProduct(product, params.productId);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @UseGuards(new RolesGuard(['admin']))
+  @ApiBearerAuth()
+  @Get('products/customize/HomePage')
+  @ApiResponse({
+    description: 'Get Customized Products Success Response',
+    type: GetCustomizedProductsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Customized Products Error Response',
+    type: GetCustomizedProductsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+
+  async GetCustomizedProducts(
+    @Query() query: GetCustomizedProductsQueryDto,
+    @Res({ passthrough: true }) res: Response) {
+    const { skip, limit, tags } = query;
+    const { code, ...response } = await this.productService.GetCustomizedProducts({ skip, limit, tags });
     res.status(code);
     return { code, ...response };
   }

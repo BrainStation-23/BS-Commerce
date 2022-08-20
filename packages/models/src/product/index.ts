@@ -12,3 +12,4 @@ export * from './getCustomerAllProducts';
 export * from './customerProduct';
 export * from './getCustomerProduct';
 export * from './getCustomerHomePageProducts';
+export * from './customizedProducts';

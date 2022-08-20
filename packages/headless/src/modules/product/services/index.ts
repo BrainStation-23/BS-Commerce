@@ -26,6 +26,10 @@ import {
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
   CreateProductRequest,
+  GetCustomizedProductsQuery,
+  GetCustomizedProductsTagsEnum,
+  GetCustomizedProductsResponse,
+  GetCustomizedProductsErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -147,5 +151,24 @@ export class ProductService {
     const products = await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async GetCustomizedProducts(query: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
+    const { skip, limit, tags } = query;
+    const products = await this.getProductsByTags({ tags, skip, limit });
+    if (!products) {
+      return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.CAN_NOT_GET_CUSTOMIZED_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    }
+    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  }
+
+  async getProductsByTags(condition) {
+    const { skip, limit, tags } = condition;
+    switch (tags) {
+      case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
+        return await this.productRepo.GetTopSellingProducts({}, skip, limit);
+      default:
+        return await this.productRepo.findAllProducts({}, skip, limit);
+    }
   }
 }
