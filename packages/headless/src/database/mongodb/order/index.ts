@@ -22,17 +22,10 @@ import {
 import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {
-  async addToCart(userId: string, items: CartItem[]) : Promise<any>{
+  async addToCart(userId: string, items: CartItem[]) : Promise<any> {
     let addItems;
     try{
-     addItems = await Promise.all(items.map(async (item) =>{
-            return await CartModel.findOneAndUpdate(
-              { userId },
-              { $push: { items: item } },
-              { new: true },
-            )
-        } 
-      ));
+      addItems = await Promise.all(items.map(async (item) => await CartModel.findOneAndUpdate( { userId },{ $push: { items: item } },{ new: true } )));
     }catch(err){
       console.log(err);
       return null;
