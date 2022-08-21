@@ -39,6 +39,17 @@ Or Hover over the product image , and Click the 'Search Icon' which will also ta
 
 ![Docs Version Dropdown](../img/cart-tutorial/prod_card_search.png)
 
+The Product Details Page will be as follows
+![Docs Version Dropdown](../img/cart-tutorial/prod_details_um.png)
+
+From this segment you can add product by two ways
+
+1.Click the 'Add to Cart' Button marked Below
+![Docs Version Dropdown](../img/cart-tutorial/prod_details.png)
+
+2.click the 'Buy Now' option marked as Below
+![Docs Version Dropdown](../img/cart-tutorial/prod_details_buynow.png)
+
 ## Visiting Cart Page to View the Product
 
 You Can Visit the cart Page both by
