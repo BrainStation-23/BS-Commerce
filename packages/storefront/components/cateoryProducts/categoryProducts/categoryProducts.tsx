@@ -1,9 +1,8 @@
-import type { NextComponentType } from 'next';
-
+import { FC } from 'react';
 import { useAppSelector } from 'customHooks/hooks';
 import CategoryProductCard from '@/components/cateoryProducts/categoryProducts/categoryProductCard';
 
-const CategoryProductSegment: NextComponentType = () => {
+const CategoryProductSegment: FC = () => {
   const products = useAppSelector(
     (state) => state.persistedReducer.product.categorizedProduct
   );

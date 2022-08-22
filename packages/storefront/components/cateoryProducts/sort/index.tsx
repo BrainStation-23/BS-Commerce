@@ -1,13 +1,10 @@
 import type { NextComponentType } from 'next';
-
-const ProductSort: NextComponentType = () => {
+import { FC } from 'react';
+const ProductSort: FC = () => {
   const sortOptions = [
     { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
-    { id: Math.random() * 100, meta: { name: 'Featured' } },
-    { id: Math.random() * 100, meta: { name: 'Best Selling' } },
-    { id: Math.random() * 100, meta: { name: 'Price Low' } },
-    { id: Math.random() * 100, meta: { name: 'Date New to Old' } },
-    { id: Math.random() * 100, meta: { name: 'Date Old to new' } },
+    { id: Math.random() * 100, meta: { name: 'Price High to Low' } },
+    { id: Math.random() * 100, meta: { name: 'Price Low to High' } },
   ];
   const gridIcon = (
     <svg
@@ -38,12 +35,9 @@ const ProductSort: NextComponentType = () => {
     <>
       <div>
         <div className="box-border h-auto w-full border px-4 text-sm">
-          <div className="flex grid grid-cols-1 flex-row sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
-            <div className="flex grid content-center justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start">
-              {gridIcon}
-            </div>
-            <div className="flex justify-center py-2 sm:justify-center md:justify-start lg:justify-start xl:justify-start">
-              <label className="mx-2 flex grid content-center px-2">
+          <div className="flex justify-between">
+            <div className="flex  py-2">
+              <label className="grid content-center justify-center px-4">
                 Sort By:
               </label>
               <select
@@ -53,7 +47,7 @@ const ProductSort: NextComponentType = () => {
                 {dropdownSortOptions}
               </select>
             </div>
-            <div className="flex grid content-center justify-center sm:ml-4 sm:justify-center md:justify-end lg:justify-end xl:justify-end">
+            <div className="grid content-center justify-center pl-4">
               Showing 1-3 of 3 result
             </div>
           </div>

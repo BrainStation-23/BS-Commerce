@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper';
 import { useState, FC } from 'react';
+import Image from 'next/image';
 
 import { Product } from 'models';
 interface SingleProduct {
@@ -28,11 +29,12 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
         {product?.photos?.map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <div className="mb-5">
-              <img
+              <Image
                 src={item.url}
                 alt="product images"
-                width="600"
-                height="600"
+                quality={100}
+                width={600}
+                height={600}
               />
             </div>
             {product?.info?.oldPrice > 0 ? (
@@ -69,11 +71,11 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
           {product?.photos?.map((item: any, index: number) => (
             <SwiperSlide key={index}>
               <div className="">
-                <img
+                <Image
                   src={item.url}
                   alt="product images"
-                  width="600"
-                  height="600"
+                  width={600}
+                  height={600}
                 />
               </div>
             </SwiperSlide>

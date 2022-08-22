@@ -15,7 +15,12 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['cdn.shopify.com', 'dummyjson.com', 'colombocme.org'],
+    domains: [
+      'cdn.shopify.com',
+      'dummyjson.com',
+      'colombocme.org',
+      'cdn.dribbble.com',
+    ],
   },
 };
 
