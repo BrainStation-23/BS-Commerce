@@ -1,74 +1,74 @@
-import { CreateUserDto, SignInDataDto } from 'src/modules/auth/dto';
-import { UserDto } from 'src/modules/user/dto';
+import { CreateUserDto, SignInDataDto } from "src/modules/auth/rest/dto";
+import { UserDto } from "src/modules/user/rest/dto";
 
 export const admin: UserDto = {
     id: '472560d2-5138-466c-8dc4-d705585021bc',
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    displayName: 'Md Ismail Hosen',
-    username: 'ismail61@gmail.com',
-    email: 'ismail61@gmail.com'
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    displayName: 'Robert Tyler',
+    username: 'robert@gmail.com',
+    email: 'robert@gmail.com'
 }
 
 export const createAdminRequest: CreateUserDto = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    email: 'ismail61@gmail.com',
-    password: 'ismail61'
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    email: 'robert@gmail.com',
+    password: 'admin@123'
 };
 
 export const invalidCreateAdminRequestWithoutFirstName = {
-    lastName: 'Hosen',
-    email: 'ismail61@gmail.com',
-    password: 'ismail61'
+    lastName: 'Tyler',
+    email: 'robert@gmail.com',
+    password: 'admin@123'
 }
 
 export const invalidCreateAdminRequestWithoutLastName = {
-    firstName: 'Md Ismail',
-    email: 'ismail61@gmail.com',
-    password: 'ismail61'
+    firstName: 'Robert',
+    email: 'robert@gmail.com',
+    password: 'admin@123'
 }
 
 export const invalidCreateAdminRequestWithoutEmail = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    password: 'ismail61'
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    password: 'admin@123'
 }
 
 export const invalidCreateAdminRequestInvalidEmail = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    password: 'ismail61',
-    email: 'ismail61@gma',
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    email: 'robert@gma',
+    password: 'admin@123'
 }
 
 export const invalidCreateAdminRequestWithoutPassword = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    email: 'ismail61@gmail.com',
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    email: 'robert@gmail.com',
 }
 
 export const invalidCreateAdminRequestWithLessThanSixCharactersPassword = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
-    email: 'ismail61@gmail.com',
-    password: 'isma',
+    firstName: 'Robert',
+    lastName: 'Tyler',
+    email: 'robert@gmail.com',
+    password: 'admin'
 }
 
 export const signInData: SignInDataDto = {
-    username: 'ismail61@gmail.com',
-    password: 'ismail61'
+    username: 'robert@gmail.com',
+    password: 'admin@123'
 };
 
 export const invalidSignInData: SignInDataDto = {
-    username: 'ismail60271@gmail.com',
-    password: 'isma61@',
+    username: 'robert@gmail.com',
+    password: 'admin@'
 }
 
 export const invalidSignInAdminRequestWithoutPassword = {
-    username: 'ismail61@gmail.com',
+    username: 'robert@gmail.com',
 }
 
 export const invalidSignInAdminRequestWithoutUsername = {
-    password: 'ismail61'
+    password: 'admin@123'
 }
