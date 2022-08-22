@@ -1,8 +1,8 @@
 import type { NextComponentType } from 'next';
-
+import { FC } from 'react';
 import CategoryProducts from '@/components/cateoryProducts/categoryProducts/categoryProducts';
 
-const CategoryProductSegment: NextComponentType = () => {
+const CategoryProductSegment: FC = () => {
   return (
     <>
       <div>

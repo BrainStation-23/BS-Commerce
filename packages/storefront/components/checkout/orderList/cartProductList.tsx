@@ -18,13 +18,14 @@ const CartProductList: NextComponentType = () => {
               <div className="flex flex-wrap items-center justify-between">
                 <div className="flex flex-wrap items-center">
                   <div className="relative">
-                    <img
-                      src={data?.product?.photos![0]?.url!}
-                      alt={data?.product?.photos![0]?.alt!}
-                      className="w-20 rounded-lg border"
-                      height={80}
-                      width={80}
-                    />
+                    <div className="w-20 rounded-lg border">
+                      <Image
+                        src={data?.product?.photos![0]?.url!}
+                        alt={data?.product?.photos![0]?.alt!}
+                        width={75}
+                        height={75}
+                      />
+                    </div>
                     <span
                       className="absolute -top-2 -right-3 rounded-full p-0.5 text-center text-xs font-semibold text-white"
                       style={{ background: '#808080' }}

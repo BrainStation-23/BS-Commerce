@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NextComponentType } from 'next';
+import Image from 'next/image';
 
 import FieldTemplate from '@/components/products/forms/fieldTemplate';
 
@@ -46,14 +47,15 @@ const PhotosForm: NextComponentType = () => {
             <div className="row justify-content-center">
               {(document.getElementById('photosUrl') as HTMLInputElement)
                 ?.value ? (
-                <img
+                <Image
                   className="col-2"
                   src={
                     (document.getElementById('photosUrl') as HTMLInputElement)
                       ?.value
                   }
                   alt="No Image"
-                  width="130px"
+                  width={130}
+                  height={130}
                 />
               ) : (
                 'No preview'

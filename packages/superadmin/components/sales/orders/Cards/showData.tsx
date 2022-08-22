@@ -1,13 +1,16 @@
+import Image from 'next/image';
+
 const ShowData = ({ data }: any) => {
   const total = data.quantity * data.price;
   return (
     <>
       <tr key={data?.productId}>
         <td className="border border-slate-300 py-2 md:px-2 xl:px-2">
-          <img
+          <Image
             src={data && data?.photos[0] && data?.photos[0]?.url}
             alt={data?.photos[0]?.alt}
-            style={{ height: '100px', width: '100px' }}
+            height={100}
+            width={100}
           />
         </td>
         <td className="border border-slate-300 py-10 md:px-2 xl:px-10">
