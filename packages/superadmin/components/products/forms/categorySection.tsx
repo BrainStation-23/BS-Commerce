@@ -85,7 +85,7 @@ const CategorySection: FC<any> = ({
         </div>
         <div className="" id="categoryTab">
           {/* <div className="collapse " id="categoryTab"> */}
-          <div className="card-body">
+          <div className="card-body w-50 m-auto" style={{ minWidth: '216px' }}>
             <>
               {categogiesFullList &&
                 categogiesFullList.map((category: any) => {

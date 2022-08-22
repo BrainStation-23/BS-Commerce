@@ -255,10 +255,10 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  {/* <ProductInfoForm />
+                  <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
-                  <ProductManufacturers manufacturerData={manufacturerData} /> */}
+                  <ProductManufacturers manufacturerData={manufacturerData} />
                   {/* <CategoryForm
                     setCategoryData={setCategoryData}
                     categoryData={categogiesData}
