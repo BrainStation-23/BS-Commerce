@@ -11,14 +11,13 @@ import { CartModule } from 'src/modules/cart/cart.graphql.module';
 import { MediaModule } from 'src/modules/media/media.graphql.module';
 import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
 import { TagsModule } from 'src/modules/tags/tags.graphql.module';
+import { CustomerModule } from 'src/modules/customer/customer.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
     ...GraphqlInitModule(),
     AuthModule,
     BrandModule,
-    UserModule,
-    CompareModule,
     CartModule,
     UserModule,
     ProductModule,
@@ -26,8 +25,9 @@ export const ResolveGraphqlModule = () => {
     CategoryModule,
     CustomerAuthModule,
     MediaModule,
-    CompareModule,
+    // CompareModule,
     WishListModule,
     TagsModule,
+    CustomerModule,
   ];
 };

@@ -1,5 +1,5 @@
 import { SuccessResponse } from 'src/common/successResponse';
-import { ErrorResponse } from 'src/common/errorResponse';
+import { DescriptiveError, ErrorResponse } from 'src/common/errorResponse';
 import { Brand } from "./brand"
 
 export interface GetAllBrands{
@@ -11,6 +11,10 @@ export interface GetAllBrandsSuccessResponse extends SuccessResponse{
     data: GetAllBrands
 }
 
-export interface GetAllBrandsErrorResponse extends ErrorResponse{ }
+export interface GetAllBrandsErrorResponse extends ErrorResponse{ 
+    code?: number;
+    errors: DescriptiveError;
+    error: string;
+}
 
 export type GetAllBrandsResponse = GetAllBrandsErrorResponse | GetAllBrandsSuccessResponse;

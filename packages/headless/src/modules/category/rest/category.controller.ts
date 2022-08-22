@@ -4,11 +4,11 @@ import {
 } from '@nestjs/common';
 import { CategoryService } from '../services';
 import { Response } from 'express';
-import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessResponseDto } from '../dto/getCategory.dto';
-import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from '../dto/getCategoryList.dto';
+import { getCategoryErrorResponseDto, getCategoryRequestDto, getCategorySuccessResponseDto } from './dto/getCategory.dto';
+import { getCategoryListErrorResponseDto, getCategoryListSuccessResponseDto } from './dto/getCategoryList.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { getCategoryBySlugErrorResponseDto, getCategoryBySlugRequestDto, getCategoryBySlugSuccessResponseDto } from '../dto/getCategoryBySlug.dto';
-import { createCategoryErrorResponseDto, createCategoryRequestDto, createCategorySuccessResponseDto } from '../dto/createCategory.dto';
+import { getCategoryBySlugErrorResponseDto, getCategoryBySlugRequestDto, getCategoryBySlugSuccessResponseDto } from './dto/getCategoryBySlug.dto';
+import { createCategoryErrorResponseDto, createCategoryRequestDto, createCategorySuccessResponseDto } from './dto/createCategory.dto';
 import { RolesGuard } from 'src/guards/auth.guard';
 
 @Controller('category')

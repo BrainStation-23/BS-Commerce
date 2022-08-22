@@ -1,23 +1,50 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query, Res } from '@nestjs/common';
-import { Response } from 'express';
-import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
+import { Response, Request } from 'express';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
 import {
   CreateCustomerDto,
   CreateCustomerErrorResponseDto,
   CreateCustomerSuccessResponseDto,
+  CustomerForgotPasswordDto,
+  CustomerForgotPasswordErrorResponseDto,
+  CustomerForgotPasswordSuccessResponseDto,
   CustomerSignInDto,
   CustomerSignInErrorResponseDto,
   CustomerSignInSuccessResponseDto,
   GetCustomerErrorResponseDto,
   GetCustomerQueryDto,
   GetCustomerSuccessResponseDto,
-} from '../dto';
+  SendOtpDto,
+  SendOtpErrorResponseDto,
+  SendOtpSuccessResponseDto,
+  VerifyOtpDto,
+  VerifyOtpErrorResponseDto,
+  VerifyOtpSuccessResponseDto,
+} from './dto';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
 export class CustomerAuthController {
   constructor(private authService: CustomerAuthService) { }
+
+  @Post('register/send-otp')
+  @ApiResponse({
+    description: 'Send Otp For Create Customer Success Response',
+    type: SendOtpSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Send Otp For Create Customer Error Response',
+    type: SendOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async sendOtp(@Body() data: SendOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.registerSendOTP(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
 
   @Post('register')
   @ApiResponse({
@@ -66,6 +93,57 @@ export class CustomerAuthController {
   })
   async getCustomer(@Query() query: GetCustomerQueryDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.authService.getCustomer(query);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('forgot-password/send-otp')
+  @ApiResponse({
+    description: 'Send Otp For Forgot Password Success Response',
+    type: SendOtpSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Send Otp For Forgot Password Error Response',
+    type: SendOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async forgotPasswordSendOTP(@Body() data: SendOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.forgotPasswordSendOTP(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('forgot-password/verify-otp')
+  @ApiResponse({
+    description: 'Verify Otp For Forgot Password Success Response',
+    type: VerifyOtpSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Verify Otp For Forgot Password Error Response',
+    type: VerifyOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async forgotPasswordVerifyOtp(@Body() data: VerifyOtpDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.authService.forgotPasswordVerifyOTP(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Post('forgot-password')
+  @ApiResponse({
+    description: 'Forgot Password Success Response',
+    type: CustomerForgotPasswordSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Forgot Password Error Response',
+    type: CustomerForgotPasswordErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async forgotPassword(@Body() data: CustomerForgotPasswordDto, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
+    const { code, ...response } = await this.authService.forgotPassword(data);
     res.status(code);
     return { code, ...response };
   }
