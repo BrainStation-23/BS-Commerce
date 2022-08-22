@@ -66,6 +66,10 @@ After adding to cart, you will see a Success Modal.
 
 ![Added to cart modal](../img/product-details/added_to_cart_modal.png)
 
+For more details about how to add a product to cart, check the article below:
+
+**[How to Add Product to the Cart](http://localhost:3005/docs/tutorial-basics/Tutorial-storefront/add-to-cart)**
+
 ### Add to Wishlist
 
 Click on the **+ Add to Wishlist** to add the product to wishlist.
