@@ -1,12 +1,23 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, getDemoUserToken } from '../../test-utility';
+import { connectTestDatabase, GetDemoUserToken, } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import { UserController } from 'src/modules/user/rest';
-import { AdminId, ChangePasswordRequestWithLessThanSixCharactersNewPassword, ChangePasswordRequestWithoutNewPassword, IncorrectCurrentChangePasswordRequest, updateAdminWithNewAddress, updateAdminWithNewAddressMissingData, updateAdminWithOldAddress, updateAdminWithoutAddress, Username, ValidCurrentChangePasswordRequest } from './admin.predefined.data';
-const token = getDemoUserToken(AdminId, Username, 'admin').token;
+import {
+    AdminId,
+    changePasswordRequestWithLessThanSixCharactersNewPassword,
+    changePasswordRequestWithoutNewPassword,
+    incorrectCurrentChangePasswordRequest,
+    updateAdminWithNewAddress,
+    updateAdminWithNewAddressMissingData,
+    updateAdminWithOldAddress,
+    updateAdminWithoutAddress,
+    Username,
+    validCurrentChangePasswordRequest,
+} from './admin.predefined.data';
+const token = GetDemoUserToken(AdminId, Username, 'admin').token;
 
 describe('Initializing... Admin Auth controller testing', () => {
     let app: INestApplication;
@@ -119,13 +130,12 @@ describe('Initializing... Admin Auth controller testing', () => {
     });
 
     describe('PATCH /user/password [passing with right token & change admin password]', () => {
-
         describe('change admin password with incorrect current password', () => {
             it('should error message with 400 bad request', async () => {
                 return await request(app.getHttpServer())
                     .patch('/user/password')
                     .set('Authorization', `Bearer ${token}`)
-                    .send(IncorrectCurrentChangePasswordRequest)
+                    .send(incorrectCurrentChangePasswordRequest)
                     .expect((res) => {
                         expect(res.statusCode).toBe(400);
                         expect(res.body.error).toEqual('CURRENT_PASSWORD_IS_INCORRECT');
@@ -139,7 +149,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 return await request(app.getHttpServer())
                     .patch('/user/password')
                     .set('Authorization', `Bearer ${token}`)
-                    .send(ChangePasswordRequestWithLessThanSixCharactersNewPassword)
+                    .send(changePasswordRequestWithLessThanSixCharactersNewPassword)
                     .expect((res) => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ newPassword: ["newPassword must be longer than or equal to 6 characters"] });
@@ -152,7 +162,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 return await request(app.getHttpServer())
                     .patch('/user/password')
                     .set('Authorization', `Bearer ${token}`)
-                    .send(ChangePasswordRequestWithoutNewPassword)
+                    .send(changePasswordRequestWithoutNewPassword)
                     .expect((res) => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ newPassword: ["newPassword must be longer than or equal to 6 characters", "newPassword must be a string", "newPassword should not be empty"] });
@@ -165,7 +175,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 return await request(app.getHttpServer())
                     .patch('/user/password')
                     .set('Authorization', `Bearer ${token}`)
-                    .send(ValidCurrentChangePasswordRequest)
+                    .send(validCurrentChangePasswordRequest)
                     .expect((res) => {
                         expect(res.statusCode).toBe(200)
                         expect(res.body.data.message).toEqual('CHANGE_PASSWORD_SUCCESSFUL');

@@ -1,7 +1,7 @@
-import { AddressDto, ChangePasswordDto, UpdatedUserDto, UserDto } from 'src/modules/user/dto';
+import { AddressDto, ChangePasswordDto, UpdatedUserDto } from "src/modules/user/rest/dto";
 
 export const AdminId = '21b38a0b-95f8-43bf-90f1-7dfb64ed885b';
-export const Username = 'ismail61@gmail.com';
+export const Username = 'robert@gmail.com';
 
 const addressWithId: AddressDto = {
     id: 'b41a11a5-b3f8-4e8b-8645-bbad7e9e1327',
@@ -27,8 +27,8 @@ const invalidAddress = {
 }
 
 export const updateAdminWithNewAddress: UpdatedUserDto = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
+    firstName: 'Robert',
+    lastName: 'Tyler',
     phone: '01770964628',
     gender: 'male',
     address: addressWithoutId,
@@ -36,8 +36,8 @@ export const updateAdminWithNewAddress: UpdatedUserDto = {
 }
 
 export const updateAdminWithOldAddress: UpdatedUserDto = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
+    firstName: 'Robert',
+    lastName: 'Tyler',
     phone: '01770964628',
     gender: 'male',
     address: addressWithId,
@@ -45,34 +45,34 @@ export const updateAdminWithOldAddress: UpdatedUserDto = {
 }
 
 export const updateAdminWithoutAddress: UpdatedUserDto = {
-    firstName: 'Md Ismail',
-    lastName: 'Hosen',
+    firstName: 'Robert',
+    lastName: 'Tyler',
     phone: '01770964628',
     gender: 'male',
     status: 'active',
 }
 
 export const updateAdminWithNewAddressMissingData = {
-    firstName: 'Md Ismail',
+    firstName: 'Robert',
     address: invalidAddress,
     status: 'active',
 }
 
-export const IncorrectCurrentChangePasswordRequest: ChangePasswordDto = {
+export const incorrectCurrentChangePasswordRequest: ChangePasswordDto = {
     currentPassword: "incorrect",
-    newPassword: "ismail61",
+    newPassword: "admin@123",
 }
 
-export const ChangePasswordRequestWithLessThanSixCharactersNewPassword: ChangePasswordDto = {
-    currentPassword: "ismail61",
-    newPassword: "ism",
+export const changePasswordRequestWithLessThanSixCharactersNewPassword: ChangePasswordDto = {
+    currentPassword: "admin@123",
+    newPassword: "admin",
 }
 
-export const ChangePasswordRequestWithoutNewPassword = {
-    currentPassword: "ismail61",
+export const changePasswordRequestWithoutNewPassword = {
+    currentPassword: "admin@123",
 }
 
-export const ValidCurrentChangePasswordRequest: ChangePasswordDto = {
-    currentPassword: "ismail61",
-    newPassword: "ismail61",
+export const validCurrentChangePasswordRequest: ChangePasswordDto = {
+    currentPassword: "admin@123",
+    newPassword: "admin@123",
 }
