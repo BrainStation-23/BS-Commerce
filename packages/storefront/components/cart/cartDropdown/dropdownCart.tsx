@@ -29,7 +29,7 @@ const CartDropdown: NextComponentType = () => {
     (state) => state.persistedReducer.auth.access_token
   );
 
-  const totalCartPrice = cartData?.reduce((total, data) => {
+  const totalCartPrice = cartData!.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
   }, 0);
 
