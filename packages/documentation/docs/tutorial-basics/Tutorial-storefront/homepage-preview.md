@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Visiting Homepage
+# Homepage
 
 The Storefront runs at **3002** and visit **localhost:3002/** route for Visiting Home Page
 
