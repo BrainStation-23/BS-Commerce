@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, GetDemoUserToken, } from '../../test-utility';
+import { connectTestDatabase, GetDemoUserToken, TestTimeout, } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import { UserController } from 'src/modules/user/rest';
@@ -61,7 +61,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 .get('/user')
                 .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
                 .expect(401);
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('GET /user [passing with right token]', () => {
@@ -73,7 +73,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(200);
                     expect(res.body.data).not.toBe(null);
                 })
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('PATCH /user [passing with right token & update admin info]', () => {
@@ -87,7 +87,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(200);
                         expect(res.body.data).not.toBe(null);
                     })
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('update admin information & add user new address(all required data)', () => {
@@ -100,7 +100,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(200);
                         expect(res.body.data).not.toBe(null);
                     })
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('update admin information & update user old address(all required data)', () => {
@@ -113,7 +113,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(200);
                         expect(res.body.data).not.toBe(null);
                     })
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('update admin information & add user new address(required data missing)', () => {
@@ -125,7 +125,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     .expect((res) => {
                         expect(res.statusCode).toBe(422);
                     })
-            }, 30000);
+            }, TestTimeout);
         });
     });
 
@@ -141,7 +141,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.body.error).toEqual('CURRENT_PASSWORD_IS_INCORRECT');
                         expect(res.body.errors).toBe(null);
                     });
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('change admin password with valid current password & new password length less than 6 characters', () => {
@@ -154,7 +154,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ newPassword: ["newPassword must be longer than or equal to 6 characters"] });
                     });
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('change admin password with valid current password & empty new password', () => {
@@ -167,7 +167,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ newPassword: ["newPassword must be longer than or equal to 6 characters", "newPassword must be a string", "newPassword should not be empty"] });
                     });
-            }, 30000);
+            }, TestTimeout);
         });
 
         describe('change admin password with valid current password & new password', () => {
@@ -181,7 +181,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.body.data.message).toEqual('CHANGE_PASSWORD_SUCCESSFUL');
                         expect(res.body.error).toBe(undefined);
                     });
-            }, 30000);
+            }, TestTimeout);
         });
     });
 });

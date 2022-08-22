@@ -1,64 +1,60 @@
-import { CreateCustomerDto, CustomerSignInDto } from 'src/modules/customer-auth/rest/dto';
+import {
+    CreateCustomerDto,
+    CustomerSignInDto,
+    SendOtpDto,
+} from 'src/modules/customer-auth/rest/dto';
 import { CustomerDto } from 'src/modules/customer-auth/rest/dto/customer.dto';
 
-export const customer: CustomerDto = {
-    id: '472560d2-5138-466c-8dc4-d705585021bc',
-    phone: '01770964628',
-    otp: '12345',
-    email: 'ismail@gmail.com'
+export const sendOtpRequestWithEmail: SendOtpDto = {
+    email: 'james@gmail.com'
 }
 
-export const createCustomerRequestWithPhone: Partial<CreateCustomerDto> = {
-    phone: '01770964628',
-    otp: '12345',
-    password: 'ismail'
-};
+export const existingCustomerSendOtpRequest: SendOtpDto = {
+    email: 'robert@gmail.com'
+}
+
+export const invalidSendOtpRequestWithEmail: SendOtpDto = {
+    email: 'james@gm'
+}
+
+export const customer: CustomerDto = {
+    id: '574c0c31-e4cd-470b-a652-f964fb437b49',
+    name: 'james Ben',
+    email: 'james@gmail.com'
+}
 
 export const createCustomerRequestWithEmail: Partial<CreateCustomerDto> = {
-    email: 'ismail@gmail.com',
-    otp: '12345',
-    password: 'ismail'
+    email: 'james@gmail.com',
+    name: 'James Ben',
+    password: 'customer@123'
 };
 
-export const invalidCreateCustomerRequestWithoutOtp: Partial<CreateCustomerDto> = {
-    phone: '01770964628',
-    password: 'ismail'
-}
-
 export const invalidCreateCustomerRequestWithoutPassword: Partial<CreateCustomerDto> = {
-    email: 'ismail@gmail.com',
-    otp: '12345',
+    email: 'james@gmail.com',
+    name: 'James Ben',
 }
 
 export const invalidCreateCustomerRequestWithLessThanSixCharactersPassword: Partial<CreateCustomerDto> = {
-    email: 'ismail@gmail.com',
-    password: 'ism',
+    email: 'james@gmail.com',
+    name: 'James Ben',
+    password: 'cus',
 }
 
 export const validCustomerSignInDataWithEmail: CustomerSignInDto = {
-    email: 'ismail@gmail.com',
-    password: 'ismail'
-};
-
-export const validCustomerSignInDataWithPhone: CustomerSignInDto = {
-    phone: '01770964628',
-    password: 'ismail'
+    email: 'james@gmail.com',
+    password: 'customer@123'
 };
 
 export const invalidCustomerSignInDataWithEmail: CustomerSignInDto = {
     email: 'is6526@gmail.com',
-    password: 'ismail'
+    password: 'customer@123'
 };
 
 export const invalidCustomerSignInDataWithPhone: CustomerSignInDto = {
     phone: '01770964627',
-    password: 'ismail'
+    password: 'customer@123'
 };
 
-export const invalidCustomerSignInDataWithoutPassword = {
-    phone: '01770964627',
-}
-
 export const invalidCustomerSignInDataWithoutPhoneAndEmail = {
-    password: 'ismail'
+    password: 'customer@123'
 }
