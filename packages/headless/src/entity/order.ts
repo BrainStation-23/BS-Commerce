@@ -174,6 +174,9 @@ export class CartItem {
   quantity: number;
 }
 
+export class Cart {
+  items: CartItem[];
+}
 export class CartResponse {
   id?: string;
   userId: string;
