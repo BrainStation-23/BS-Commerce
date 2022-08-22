@@ -20,10 +20,7 @@ import { ReOrderDto } from './dto/reOrder.dto';
 @ApiBearerAuth()
 @Controller('customer/order')
 export class OrderCustomerController {
-  constructor(
-      // private cartService: CartService,
-      private orderCustomerService: OrderCustomerService
-    ) {}
+  constructor( private orderCustomerService: OrderCustomerService ) {}
 
   @ApiResponse({
     type: OrderDto,
