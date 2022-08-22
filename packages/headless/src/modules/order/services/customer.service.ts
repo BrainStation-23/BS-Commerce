@@ -1,6 +1,6 @@
 import { ProductRepository } from './../../product/repositories/index';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { CreateOrderRequest, CreateProductOrderDetails} from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, ErrorMessageReOrder} from 'models';
 
 import { CartResponse, OrderSortQuery, ReOrderQuery } from './../../../entity/order';
 import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
@@ -11,11 +11,7 @@ import { CartRepository } from './../../cart/repositories/index';
 
 @Injectable()
 export class OrderCustomerService {
-  constructor(
-      private cartRepository: CartRepository,
-      private orderRepository: OrderRepository,
-      private productRepo: ProductRepository
-    ) {}
+  constructor( private orderRepository: OrderRepository ) {}
 
   async createOrder(
     userId: string,
@@ -37,39 +33,39 @@ export class OrderCustomerService {
     );
   }
 
-  async reOrder(userId: string, body: ReOrderQuery): Promise<any>{
+  async reOrder(userId: string, body: ReOrderQuery): Promise<IServiceResponse<CartResponse>>{
     let { ignoreInvalidItems, overWriteCart, orderId } = body; 
 
-    const order = await this.orderRepository.getOrderById(orderId);
-    const products = order.products;
-    
-    const unavailableProducts = await this.orderRepository.getAvailableProducts(products);
-    if(unavailableProducts.length === products.length)return errorResponse( 'Products are not available right now',null,HttpStatus.BAD_REQUEST );
-    else {
-        let availableAddToCart;
-        const allAddToCart = products.map(product => { return {productId: product.productId, quantity: product.quantity}});
+    const prevOrder = await this.orderRepository.findOrder({orderId, userId});
+    if(!prevOrder) return errorResponse( ErrorMessageReOrder.INVALID_ID,null,HttpStatus.BAD_REQUEST );
 
-        if(unavailableProducts.length > 0){
-            if(ignoreInvalidItems === false) return errorResponse( 'All of the products are not available. Do you wish to continue?', null, HttpStatus.BAD_REQUEST );
-            
-            const res = products.filter(product => !unavailableProducts.find(item => item.productId === product.productId ));
-            availableAddToCart = res.map(product => { return { productId: product.productId, quantity: product.quantity }});
+    const prevProducts = prevOrder.products;
+    const productIds = prevProducts.map( item => item.productId);
+    let order = prevProducts.map(product => { return {productId: product.productId, quantity: product.quantity}});
+
+    const availableProductIds = await this.orderRepository.getAvailableProducts(productIds);
+
+    if(availableProductIds.length === 0)return errorResponse( ErrorMessageReOrder.ALL_ITEMS_INVALID,null,HttpStatus.BAD_REQUEST );//send which products are not available
+    else {
+        //need to find out which products are not available send it error response ------ TODO -----------
+          if(ignoreInvalidItems === false) return errorResponse( ErrorMessageReOrder.INVALID_ITEMS, null, HttpStatus.BAD_REQUEST );
+          order = order.filter(product => availableProductIds.find(item => item.id === product.productId));    
         }
 
         const cart = await this.orderRepository.getCart(userId);
-        if (cart){
+        if (cart.items.length !== 0){
             if(overWriteCart === true){
-                const deleteCart = await this.orderRepository.deleteCartItems(userId);
-                if(!deleteCart) return errorResponse( 'Could not clear your cart', null, HttpStatus.BAD_REQUEST );
+                const deleteCart = await this.orderRepository.clearCart(userId);
+                if(!deleteCart) return errorResponse( ErrorMessageReOrder.CANNOT_CLEAR_CART, null, HttpStatus.BAD_REQUEST );
 
-            }else return errorResponse( 'Your cart items will be replaced. Do you wish to continue?', null, HttpStatus.BAD_REQUEST );
+            }else return errorResponse( ErrorMessageReOrder.OVERWRITE_CART, null, HttpStatus.BAD_REQUEST );
         }
-        const addCart = unavailableProducts.length > 0 ? await this.orderRepository.addToCart(userId, availableAddToCart) : await this.orderRepository.addToCart(userId, allAddToCart); 
+        const addCart = await this.orderRepository.populateItemsInCart(userId, order); 
         
         if(addCart) return successResponse(CartResponse, addCart);
-        else return errorResponse( 'Could not add items to the cart', null, HttpStatus.BAD_REQUEST );  
-    }
-  } 
+        else return errorResponse( ErrorMessageReOrder.CANNOT_ADD_ITEMS, null, HttpStatus.BAD_REQUEST );  
+  }
+   
 
   async getOrderListByUserId(
     userId: string,
@@ -92,7 +88,7 @@ export class OrderCustomerService {
   }
 
   async getOrderByOrderId( orderId: string ): Promise<IServiceResponse<OrderEntity>> {
-    const orderInfo = await this.orderRepository.getOrderById(orderId);
+    const orderInfo = await this.orderRepository.findOrder({orderId});
 
     if (orderInfo) {
       const response: OrderEntity = orderInfo ;
