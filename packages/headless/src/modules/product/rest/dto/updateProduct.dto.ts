@@ -159,16 +159,6 @@ export class UpdateProductCategoryDto implements UpdateProductCategory {
     @IsOptional()
     @IsString()
     name?: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsBoolean()
-    isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsNumber()
-    displayOrder?: number
 }
 
 export class UpdateProductDto implements UpdateProductRequest {

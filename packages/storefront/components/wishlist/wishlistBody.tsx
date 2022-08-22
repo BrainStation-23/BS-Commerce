@@ -37,7 +37,7 @@ const WishlistBody: React.FC<Props> = (props) => {
                 passHref
               >
                 <div className="w-50 relative flex cursor-pointer flex-col items-center justify-center">
-                  <img
+                  <Image
                     src={data.product?.photos![0].url!}
                     alt={data.product?.info.shortDescription}
                     width={productImageWidth}

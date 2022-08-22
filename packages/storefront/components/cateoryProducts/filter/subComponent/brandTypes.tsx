@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import type { NextComponentType } from 'next';
+import React, { useState, FC } from 'react';
 
 import CounterElement from '@/components/deals/filter/subComponent/counterElement';
 import radio from 'styles/radioButton.module.css';
 
-const BrandTypeOptions: NextComponentType = () => {
+const BrandTypeOptions: FC = () => {
   const availableOptions = [
     { id: 4343, meta: { name: 'Boho Decor' } },
     { id: 4534, meta: { name: 'Flying Wooden' } },
