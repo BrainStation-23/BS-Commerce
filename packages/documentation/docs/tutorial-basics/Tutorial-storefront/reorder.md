@@ -28,5 +28,6 @@ Clicking **Yes** will add the product(s) to cart if they are available and take 
 
 ![Docs Version Dropdown](../img/re-order/cart.png)
 
+You can check **How to place order** from here:
 
 
