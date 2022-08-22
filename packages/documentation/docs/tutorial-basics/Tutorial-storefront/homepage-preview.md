@@ -65,6 +65,8 @@ Navbar has the following segments
    OnClicking Over the Cart Icon there will be a dropdown which will make the cart products visible under a dropdown
    ![Header](../img/home-page/cart_dropdown.png)
 
+   Click to [http://localhost:3005/docs/tutorial-basics/Tutorial-storefront/add-to-cart](http://localhost:3005/docs/tutorial-basics/Tutorial-storefront/add-to-cart) to get more detailed update rregarding adding product to the cart
+
 ## Banner
 
 In the whole Home Page there are few banners which is visible throughout the home page , the main purpose of this Banners are to tell the user about the different offers and exclusive deals
