@@ -2,6 +2,7 @@ import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import Image from 'next/image';
 
 import { Product } from 'models';
 interface SingleProduct {
@@ -19,7 +20,8 @@ const ProductDescription: React.FC<SingleProduct> = ({
   const [sizeChartFocused, setSizeChartFocused] = useState(false);
   const shipping_policy =
     'Lorem ipsum dolor sit On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will amet consectetuer adipiscing elit hdjkdsdf fksdbfg sdfff ksfhf gmnsgbksf eafksbdfg ,saefkbs fs fsdkgbjsgf sdf m,sdf skdgjn sgksugb wrgwsg lf ogs sg slkjg solg sgs gosg sg sl gsgj jsgalflanfpwig sl j so se vs dgjsdgjlb gslg esl efjgsjg ls g ls dgj sl jgs gsl gskg skg s gksg,n sfobe fpeasgff bpa gerogal vag eg';
-  const size = 'https://www.annascholz.com/media/wysiwyg/size_guide_table.gif';
+  const size =
+    'https://cdn.shopify.com/s/files/1/0492/7212/7650/files/12_720x720.png?v=1633361194';
 
   const handleDescription = () => {
     setDescription('block');
@@ -94,7 +96,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
           <div className={`${size_chart} w-full`}>
             <h4 className="font-semibold ">Size Chart</h4>
             <div className="flex justify-center">
-              <img alt="size" className="" src={size} />
+              <Image src={size} alt="size" width={400} height={400} />
             </div>
           </div>
         </div>

@@ -1,9 +1,8 @@
-import type { NextComponentType } from "next";
-
-const CounterElement: NextComponentType = () => {
+import React, { FC, useState } from 'react';
+const CounterElement: FC = () => {
   return (
     <>
-      <div className="border border-gray-300  w-24 rounded-xl">
+      <div className="w-24 rounded-xl  border border-gray-300">
         <span className="p-2 text-sm">0 selected</span>
       </div>
     </>
