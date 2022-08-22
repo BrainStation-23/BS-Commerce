@@ -1,9 +1,11 @@
+import { CreateOrderProduct } from './../rest/dto/order.create.dto';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { OrderEntity } from 'src/entity/order';
+import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
+
+import { OrderSortQuery } from './../../../entity/order';
+import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
-import { CreateOrderDto } from '../dto/order.create.dto';
-import { OrderResponseDto } from '../dto/order.response.dto';
 import { OrderRepository } from '../repositories';
 
 @Injectable()
@@ -12,9 +14,14 @@ export class OrderCustomerService {
 
   async createOrder(
     userId: string,
-    body: CreateOrderDto,
+    body: CreateOrderRequest,
+    products: CreateProductOrderDetails[]
   ): Promise<IServiceResponse<OrderEntity>> {
-    const createOrder = await this.orderRepository.createOrder(userId, body);
+    const productListWithPhoto = await this.orderRepository.addPhotoDetails(products);
+    const newOrder = {...body, products: productListWithPhoto};
+    const newBody = this.orderRepository.addCosts(newOrder);
+
+    const createOrder = await this.orderRepository.createOrder(userId, newBody);
     if (createOrder) {
       return successResponse(OrderEntity, createOrder);
     }
@@ -27,20 +34,31 @@ export class OrderCustomerService {
 
   async getOrderListByUserId(
     userId: string,
-  ): Promise<IServiceResponse<OrderResponseDto>> {
-    const orderList = await this.orderRepository.getOrderListByUserId(userId);
+    sortObj: OrderSortQuery
+  ): Promise<IServiceResponse<OrderListResponseEntity>> {
+    const orderList = await this.orderRepository.getOrderListByUserId(userId,sortObj);
 
     if (orderList) {
       const orderInfo = orderList.map((e) => {
         delete e.userId;
         return e;
       });
-      const response: OrderResponseDto = {
+      const response: OrderListResponseEntity = {
         userId,
         orderInfo,
       };
-      return successResponse(OrderResponseDto, response);
+      return successResponse(OrderListResponseEntity, response);
     }
     return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
+  }
+
+  async getOrderByOrderId( orderId: string ): Promise<IServiceResponse<OrderEntity>> {
+    const orderInfo = await this.orderRepository.getOrderById(orderId);
+
+    if (orderInfo) {
+      const response: OrderEntity = orderInfo ;
+      return successResponse(OrderEntity, response);
+    }
+   return errorResponse('No order found', null, HttpStatus.BAD_REQUEST);
   }
 }

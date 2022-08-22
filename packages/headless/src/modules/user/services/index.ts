@@ -3,7 +3,6 @@ import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
 import { UserRepository } from '../repositories';
 import { authConfig } from 'config/auth';
-import { ChangePasswordDto, UpdatedUserDto } from '../dto';
 import {
     GetUserResponse,
     UpdateUserResponse,
@@ -11,8 +10,10 @@ import {
     GetUserErrorMessages,
     UpdateUserErrorMessages,
     ChangePasswordErrorMessages,
-    ChangePasswordSuccessMessage
+    ChangePasswordSuccessMessage,
+    UpdatedUserRequest,
 } from 'models';
+import { ChangePassword } from 'src/entity/user';
 
 @Injectable()
 export class UserService {
@@ -24,7 +25,7 @@ export class UserService {
         return this.helper.serviceResponse.successResponse(user, HttpStatus.OK);
     }
 
-    async updateUser(userId: string, data: UpdatedUserDto): Promise<UpdateUserResponse> {
+    async updateUser(userId: string, data: UpdatedUserRequest): Promise<UpdateUserResponse> {
         let user = await this.userRepo.findUser({ id: userId });
         if (!user) return this.helper.serviceResponse.errorResponse(UpdateUserErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST);
 
@@ -51,7 +52,7 @@ export class UserService {
         return this.helper.serviceResponse.successResponse(updatedUser, HttpStatus.OK);
     }
 
-    async changePassword(userId: string, passwordDetails: ChangePasswordDto): Promise<ChangePasswordResponse> {
+    async changePassword(userId: string, passwordDetails: ChangePassword): Promise<ChangePasswordResponse> {
         const user = await this.userRepo.getUserPassword({ id: userId });
         if (!user) return this.helper.serviceResponse.errorResponse(ChangePasswordErrorMessages.CAN_NOT_GET_USER, null, HttpStatus.BAD_REQUEST);
 

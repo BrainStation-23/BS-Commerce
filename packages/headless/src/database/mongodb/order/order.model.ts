@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 import { model, Schema } from 'mongoose';
 import {
   OrderEntity,
@@ -45,7 +45,7 @@ const AddressSchema = {
   country: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
   },
   postCode: {
     type: String,
@@ -74,6 +74,10 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
+    totalPrice: {
+      type: Number,
+      required: false,
+    },
     quantity: {
       type: Number,
       trim: true,
@@ -88,16 +92,37 @@ const ProductSchema = new Schema(
       trim: true,
       required: true,
     },
-  },
-  {
-    _id: false,
-  },
+    photos: [{
+      url: String,
+      id: {
+          type: String,
+          index: true,
+          default: () => randomUUID()
+      },
+      title: {
+          type: String,
+          default: ''
+      },
+      alt: {
+          type: String,
+          default: ''
+      },
+      displayOrder: {
+          type: Number,
+          default: 1
+      },
+      _id: false
+    }]
+    },
+    {
+      _id: false,
+    },
 );
 
 const OrderSchema = new Schema<OrderEntity>({
   orderId: {
     type: String,
-    default: () => randomUUID(),
+    unique: true
   },
   userId: {
     type: String,
