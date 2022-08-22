@@ -1,5 +1,6 @@
 import {
   CartItem, 
+  Cart,
   ReOrderQuery,
   ChangeStatusEntity,
   GetAllOrderQueryEntity,
@@ -11,6 +12,7 @@ import {
   ProductOrder,
   ShippingStatusEnum,
   StatusTypeDto,
+  CartResponse,
 } from 'src/entity/order';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
@@ -22,38 +24,30 @@ import {
 import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {
-  async addToCart(userId: string, items: CartItem[]) : Promise<any> {
+  async populateItemsInCart(userId: string, products: CartItem[]) : Promise<CartResponse | null> {
     let addItems;
     try{
-      addItems = await Promise.all(items.map(async (item) => await CartModel.findOneAndUpdate( { userId },{ $push: { items: item } },{ new: true } )));
-    }catch(err){
-      console.log(err);
+      addItems = await CartModel.findOneAndUpdate({ userId },{ $set: { items: products } },{ new: true }).lean();
+    }catch(error){
+      console.log(error);
       return null;
     }
+
     return addItems;
   }
 
-  async getCart(userId: string): Promise<any> {
-    return await CartModel.findOne({userId }).select('-_id').lean();
+  async getCart(userId: string): Promise<Cart | null> {
+    return await CartModel.findOne({userId }).select('items -_id').lean();
   }
   async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async getAvailableProducts(products: ProductOrder[]): Promise<ProductOrder[]>{
-    let items = [];
-    await Promise.all(products.map( async (product) => {
-        const available = await ProductModel.findOne({id: product.productId}).lean();
-        if(!available){
-          items.push(product);
-        }
-        return product;
-    }));
-   
-    return items;
+  async getAvailableProducts(productIds: string[]): Promise<any>{
+    return await ProductModel.find({id: {$in: productIds}}).select('id -_id');
   }
 
-  async deleteCartItems(userId: string): Promise<any> {
+  async clearCart(userId: string): Promise<CartResponse | null> {
     return CartModel.findOneAndUpdate(
       { userId },
       { $set: { items: [] } },
@@ -62,6 +56,7 @@ export class OrderDatabase implements IOrderDatabase {
       .lean()
       .exec();
   }
+
   async addPhotoDetails(
     products: CreateProductOrderDetails[],
   ): Promise<ProductOrder[]> {
@@ -89,8 +84,8 @@ export class OrderDatabase implements IOrderDatabase {
     return await OrderModel.find({ userId }).sort(sort);
   }
 
-  async getOrderById(orderId: string): Promise<OrderEntity>{
-    return await OrderModel.findOne({ orderId }).lean();
+  async findOrder(query: Record<string, any>): Promise<OrderEntity>{
+    return await OrderModel.findOne(query).lean();
   }
   
   async getOrderStatistics(): Promise<OrderStatEntity>{
