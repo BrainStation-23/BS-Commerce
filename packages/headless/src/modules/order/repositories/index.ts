@@ -11,7 +11,9 @@ import {
   OrderSortQuery,
   ProductOrder,
   ReOrderQuery,
-  CartItem
+  CartItem,
+  CartResponse,
+  Cart
 } from 'src/entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
@@ -26,19 +28,20 @@ export class OrderRepository {
     return await this.db.createOrder(userId, newBody);
   }
 
-  async getAvailableProducts(products: ProductOrder[]): Promise<ProductOrder[]> {
-    return await this.db.getAvailableProducts(products);
+  async getAvailableProducts(productIds: string[]): Promise<any> {
+    return await this.db.getAvailableProducts(productIds);
   }
 
-  async getCart(userId: string, ): Promise<any> {
+  async getCart(userId: string ): Promise<Cart | null> {
     return await this.db.getCart(userId);
   }
 
-  async addToCart(userId: string, items: CartItem[]): Promise<any>{
-    return await this.db.addToCart(userId, items);
+  async populateItemsInCart(userId: string, items: CartItem[]): Promise<CartResponse | null>{
+    return await this.db.populateItemsInCart(userId, items);
   }
-  async deleteCartItems(userId: string): Promise<any> {
-    return await this.db.deleteCartItems(userId);
+
+  async clearCart(userId: string): Promise<CartResponse | null> {
+    return await this.db.clearCart(userId);
   }
 
   async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<ProductOrder[]>{
@@ -61,7 +64,7 @@ export class OrderRepository {
     let orderId = randomInt(281474976710655).toString();//generate id
     let len = orderId.length;
     if(len<15) orderId = orderId.padStart(15, '0');//check if the id is of 15 digits
-    let idExists = await this.db.getOrderById(orderId);//unique validation
+    let idExists = await this.db.findOrder({orderId});//unique validation
 
     if(!idExists) return orderId;
     else return this.generateUniqueId();
@@ -71,8 +74,8 @@ export class OrderRepository {
     return await this.db.getOrderListByUserId(userId, sortObj);
   }
 
-  async getOrderById(orderId: string): Promise<OrderEntity>{
-    return await this.db.getOrderById(orderId);
+  async findOrder(query: Record<string, any>): Promise<OrderEntity>{
+    return await this.db.findOrder(query);
   }
 
   async getOrderStatistics(): Promise<OrderStatEntity>{

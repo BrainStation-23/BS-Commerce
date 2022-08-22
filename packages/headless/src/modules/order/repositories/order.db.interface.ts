@@ -3,6 +3,8 @@ import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
 
 import { 
   CartItem,
+  Cart,
+  CartResponse,
   ChangeStatusEntity, 
   GetAllOrderQueryEntity, 
   OrderEntity, 
@@ -18,13 +20,13 @@ export abstract class IOrderDatabase {
   abstract createOrder: (userId: string, body: CreateOrderRequest) => Promise<OrderEntity>;
   abstract addPhotoDetails: (products: CreateProductOrderDetails[]) => Promise<ProductOrder[]>;
   abstract getOrderListByUserId: (userId: string, sortObj: OrderSortQuery) => Promise<OrderEntity[]>;
-  abstract getOrderById: (orderId: string) => Promise<OrderEntity>;
+  abstract findOrder: (query: Record<string, any>) => Promise<OrderEntity>;
   abstract getOrderStatistics:() => Promise<OrderStatEntity>;
   abstract getIncompleteStatistics:() => Promise<OrderIncompleteStatEntity>;
   abstract changeStatus:(body: ChangeStatusEntity) => Promise<OrderEntity>;
   abstract getOrderList: (query?: GetAllOrderQueryEntity, skip?: number, limit?: number) => Promise<OrderEntity[]>;
-  abstract getAvailableProducts: (products: ProductOrder[]) => Promise<ProductOrder[]>;
-  abstract getCart: (userId: string) => Promise<any>;
-  abstract addToCart: (userId: string, items: CartItem[])=> Promise<any>;
-  abstract deleteCartItems: (userId: string) => Promise<any>;
+  abstract getAvailableProducts: (productIds: string[]) => Promise<any>;
+  abstract getCart: (userId: string) => Promise<Cart | null>;
+  abstract populateItemsInCart: (userId: string, items: CartItem[])=> Promise<CartResponse | null>;
+  abstract clearCart: (userId: string) => Promise<CartResponse | null>;
 }
