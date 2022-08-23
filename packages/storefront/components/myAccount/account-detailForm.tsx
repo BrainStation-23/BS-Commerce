@@ -9,7 +9,8 @@ const AccountDetailsForm: React.FC<props> = ({
 }) => {
   return (
     <>
-      <AccountDetailsFormField
+      <AccountDetailsFormField id="name" fieldType="text" label="Name" />
+      {/* <AccountDetailsFormField
         id="firstName"
         fieldType="text"
         label="First Name"
@@ -18,7 +19,7 @@ const AccountDetailsForm: React.FC<props> = ({
         id="lastName"
         fieldType="text"
         label="Last Name"
-      />
+      /> */}
       <AccountDetailsFormField
         id="phone"
         fieldType="text"

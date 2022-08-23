@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
@@ -75,6 +75,7 @@ const Signin: NextComponentType = () => {
       });
     }
   }
+
   if (loader) return <Loading />;
   return (
     <>

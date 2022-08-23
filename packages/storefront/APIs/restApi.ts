@@ -98,6 +98,22 @@ export async function signinRest(
   }
 }
 
+export async function sendOTPRest(data: string): Promise<SendOtpSuccessResponse | undefined> {
+  let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+  const isEmail = regex.test(data);
+  const reqData = isEmail ? {"email": data} : {"phone": data};
+  try {
+    const res = await axios.post(`${apiEndPoints.sendOTP}`, reqData);
+    const toastMessage = isEmail ? "An OTP has been sent to your email" : "An OTP has been sent to your mobile number"
+    toast.success(toastMessage, {
+      containerId: "bottom-right"
+    })
+    return res?.data;
+  } catch(error: any) {
+    return error;
+  }
+}
+
 export async function signUpRest(
   data: CreateCustomerRequest
 ): Promise<CreateCustomerResponse | undefined> {

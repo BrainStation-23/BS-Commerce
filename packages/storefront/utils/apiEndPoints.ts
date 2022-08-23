@@ -4,6 +4,8 @@ export const apiEndPoints = {
   getPublicProducts: '/customer/products',
   getProducts: '/products',
   register: '/customer/auth/register',
+  sendOTP: '/customer/auth/register/send-otp',
+  verifyOTP: '/customer/auth/register/verify-otp',
   login: '/customer/auth/sign-in',
   forgetPasswordSendOtp: '/customer/auth/forgot-password/send-otp',
   forgetPasswordVerifyOtp: '/customer/auth/forgot-password/verify-otp',

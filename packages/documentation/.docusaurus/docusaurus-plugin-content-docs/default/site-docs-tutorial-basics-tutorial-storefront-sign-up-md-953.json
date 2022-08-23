@@ -1,0 +1,27 @@
+{
+  "unversionedId": "tutorial-basics/Tutorial-storefront/sign-up",
+  "id": "tutorial-basics/Tutorial-storefront/sign-up",
+  "title": "Sign-up or register",
+  "description": "The Storefront runs at 3002 and visit localhost:3002/ route for Visiting Home Page. You can sign-up by clicking the REGISTER at the upper right corner of the navigation bar.",
+  "source": "@site/docs/tutorial-basics/Tutorial-storefront/sign-up.md",
+  "sourceDirName": "tutorial-basics/Tutorial-storefront",
+  "slug": "/tutorial-basics/Tutorial-storefront/sign-up",
+  "permalink": "/docs/tutorial-basics/Tutorial-storefront/sign-up",
+  "draft": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/tutorial-basics/Tutorial-storefront/sign-up.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Sign-in or login",
+    "permalink": "/docs/tutorial-basics/Tutorial-storefront/sign-in"
+  },
+  "next": {
+    "title": "Tutorial - Extras",
+    "permalink": "/docs/category/tutorial---extras"
+  }
+}

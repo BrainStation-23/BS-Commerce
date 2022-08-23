@@ -46,8 +46,8 @@ const HeaderAccount: React.FC<Properties> = () => {
     (state) => state.persistedReducer.user.customerDetails
   );
 
-  const user = customer?.firstName
-    ? customer?.firstName + ' ' + customer?.lastName
+  const user = customer?.name
+    ? customer?.name
     : customer?.email
     ? customer?.email
     : customer?.phone;
@@ -174,7 +174,10 @@ const HeaderAccount: React.FC<Properties> = () => {
           ) : (
             <>
               <Link href={links[0].link}>
-                <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                <a
+                  id="registerbtn"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                >
                   {links[0].name}
                 </a>
               </Link>

@@ -68,6 +68,10 @@ export async function signInGraphql(
   return undefined;
 }
 
+export async function sendOTPGraphql(data: string): Promise<SendOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
 export async function signUpGraphql(
   data: CreateCustomerRequest
 ): Promise<CreateCustomerResponse | undefined> {

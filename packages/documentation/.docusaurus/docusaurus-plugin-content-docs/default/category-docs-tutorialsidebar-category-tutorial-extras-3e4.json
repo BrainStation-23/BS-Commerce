@@ -1,0 +1,15 @@
+{
+  "title": "Tutorial - Extras",
+  "slug": "/category/tutorial---extras",
+  "permalink": "/docs/category/tutorial---extras",
+  "navigation": {
+    "previous": {
+      "title": "Sign-up or register",
+      "permalink": "/docs/tutorial-basics/Tutorial-storefront/sign-up"
+    },
+    "next": {
+      "title": "Manage Docs Versions",
+      "permalink": "/docs/tutorial-extras/manage-docs-versions"
+    }
+  }
+}
