@@ -12,7 +12,6 @@ import { registerSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
-import OtpModal from '../global/components/modal/otpModal';
 
 const Signup = () => {
   const router = useRouter();
@@ -65,7 +64,7 @@ const Signup = () => {
     }
   }
 
-  async function handleOTPRequest(data: string, setFieldValue: any) {
+  async function handleOTPRequest(data: string, setFieldValue: Function) {
     try {
       const res = await userAPI.sendOTP(data).then((response: any) => {
         if (response?.code !== 200) {
