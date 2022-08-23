@@ -5,8 +5,11 @@
 /build
 
 # Generated files
-.docusaurus
+.docusaurus/
 .cache-loader
+
+#ignoring all 
+.*/
 
 # Misc
 .DS_Store
