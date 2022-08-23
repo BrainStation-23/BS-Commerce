@@ -1,6 +1,6 @@
 import { string, object, ref, number } from 'yup';
 
-function validatePassword(password: any) {
+function validatePassword(password: string) {
   const minLength = 8;
   const maxLength = 50;
   const containsUppercase = new RegExp('^(?=.*[A-Z])').test(password);
@@ -25,7 +25,7 @@ function validatePassword(password: any) {
   return true;
 }
 
-function hasValidCharacters(password: any) {
+function hasValidCharacters(password: string) {
   var validCharacterPattern = new RegExp(
     '^[a-zA-Z0-9!"#$%&\'()*+,-.\\\\/:;<=>?@[\\]^_`{|}~]*$'
   );
