@@ -104,6 +104,7 @@ const Header: NextComponentType = () => {
           <span
             className="border border-gray-700 p-1 lg:hidden"
             onClick={() => setMenu(!menu)}
+            id="menuToggler"
           >
             <MenuIcon />
           </span>
