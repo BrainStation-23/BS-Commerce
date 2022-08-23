@@ -6,15 +6,21 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
 import { userAPI } from 'APIs';
-import { CreateCustomerRequest } from 'models';
+import { CreateCustomerRequest, CustomerSignInRequest } from 'models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
+import { storeUserToken } from 'toolkit/authSlice';
+import { storeCustomerDetails } from 'toolkit/userSlice';
+import { storeWishlist } from 'toolkit/productsSlice';
+import { useAppDispatch } from 'customHooks/hooks';
 
 const Signup = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -25,6 +31,32 @@ const Signup = () => {
   const toggleClass = 'transform translate-x-5';
   let username = '';
   let loggedInUsingEmail = false;
+
+  async function handleSignin(data: CustomerSignInRequest) {
+    try {
+      setLoading(true);
+      const token = await fetch('http://localhost:3002/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const datass = await token.json();
+      dispatch(storeUserToken(datass?.data?.token));
+
+      await userAPI.getCustomer(datass?.data?.token).then((response) => {
+        dispatch(storeCustomerDetails(response?.data));
+      });
+      router.push('/');
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      toast.error('Failed to login', {
+        containerId: 'bottom-right',
+      });
+    }
+  }
 
   async function handleSignUp(data: CreateCustomerRequest) {
     //console.log(data);
@@ -46,14 +78,21 @@ const Signup = () => {
             setLoading(false);
           }
         } else {
+          setLoading(true);
+          const loginData = data.email
+            ? {
+                email: data.email,
+                password: data.password,
+              }
+            : {
+                phone: data.phone,
+                password: data.password,
+              };
+          handleSignin(loginData);
           setLoading(false);
-          toast.success(
-            'Account created successfully! Please login to continue.',
-            {
-              containerId: 'bottom-right',
-            }
-          );
-          router.push('/account/sign-in');
+          toast.success('Account created successfully!', {
+            containerId: 'bottom-right',
+          });
         }
       });
     } catch (error) {
