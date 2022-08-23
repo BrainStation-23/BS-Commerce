@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 
 import { useAppSelector } from 'customHooks/hooks';
 
-import Currency from '@/components/global/components/currency';
-import HeaderAccount from '@/components/global/components/header-account';
-import Language from '@/components/global/components/languages';
 import Search from '@/components/global/components/search';
-import { HeaderCategory } from './headerCategory';
+import Currency from '@/components/global/components/currency';
+import Language from '@/components/global/components/languages';
+import HeaderAccount from '@/components/global/components/header-account';
+import HeaderCategory from '@/components/global/components/headerCategory';
 
 import {
   ChevronDownIcon,
@@ -104,7 +104,7 @@ const Header: NextComponentType = () => {
           <span
             className="border border-gray-700 p-1 lg:hidden"
             onClick={() => setMenu(!menu)}
-            id="menuicon"
+            id="menuToggler"
           >
             <MenuIcon />
           </span>
@@ -118,25 +118,34 @@ const Header: NextComponentType = () => {
             <div
               className="relative mb-3 mr-0 flex w-full cursor-pointer flex-row items-center rounded-lg bg-green-600 px-4 py-2 text-white lg:mb-0 lg:mr-2 lg:w-56 lg:rounded-t-xl lg:rounded-b-none lg:py-3"
               onClick={toggleOpen}
+              onMouseEnter={() =>
+                document.body.clientWidth > 768 && setShowAllCategory(true)
+              }
+              onMouseLeave={() =>
+                document.body.clientWidth > 768 && setShowAllCategory(false)
+              }
             >
               <MenuIcon size={6} />
               <span className="ml-4 mr-auto font-medium">All Categories</span>
               <ChevronDownIcon />
               {categoryList ? (
                 <div
-                  className={`absolute top-[40px] left-0 z-40 flex w-full flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 ease-in lg:top-[48px] lg:w-56 ${
-                    showAllCategory ? `h-auto lg:h-60` : 'h-0 opacity-0' //h-[350px]
+                  className={`translate-y absolute top-[40px] left-0 z-40 flex w-full origin-top flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 lg:top-[48px] lg:w-56  ${
+                    showAllCategory
+                      ? `h-auto scale-y-100 lg:h-60`
+                      : 'h-0 scale-y-0' //h-[350px]
                   }`}
                   // onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
                   //   e.stopPropagation()
                   // }
                 >
                   <ul>
-                    {categoryList?.map((category) => (
-                      <li key={category.id}>
-                        <HeaderCategory category={category} />
-                      </li>
-                    ))}
+                    {showAllCategory &&
+                      categoryList?.map((category) => (
+                        <li key={category.id}>
+                          <HeaderCategory category={category} />
+                        </li>
+                      ))}
                   </ul>
                 </div>
               ) : (

@@ -1,7 +1,7 @@
 describe('Forget Password Journey', () => {
   it('should be redirected to forget password page', () => {
     cy.visit('/');
-    cy.get('#menuicon').click();
+    cy.get('#menuToggler').click();
     cy.get('#login').click({ force: true });
     cy.get('#sidebarClose').click();
     cy.get('#forgotPasswordDiv').click();

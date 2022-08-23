@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
@@ -80,15 +81,24 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                       >
                                         <button
-                                          onClick={() => {
-                                            dispatch(
-                                              deleteComparedProduct(
+                                          onClick={async () => {
+                                            try {
+                                              userAPI.deleteFromCompare(
                                                 product?.id!
-                                              )
-                                            );
-                                            userAPI.deleteFromCompare(
-                                              product?.id!
-                                            );
+                                              );
+                                              dispatch(
+                                                deleteComparedProduct(
+                                                  product?.id!
+                                                )
+                                              );
+                                            } catch (error) {
+                                              toast.error(
+                                                'Some error happend. Try again.',
+                                                {
+                                                  containerId: 'bottom-right',
+                                                }
+                                              );
+                                            }
                                           }}
                                         >
                                           Remove
