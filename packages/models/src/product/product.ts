@@ -43,7 +43,7 @@ export interface ProductManufacturer {
 export interface Product {
     id?: string,
     info: ProductInfo;
-    meta: ProductMeta;
+    meta?: ProductMeta;
     tags?: string[];
     photos?: ProductPhoto[];
     brands?: string[],

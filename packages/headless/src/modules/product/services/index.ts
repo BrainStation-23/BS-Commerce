@@ -35,16 +35,7 @@ export class ProductService {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
-    product.meta.friendlyPageName = product.info.name
-      .toString()
-      .toLowerCase()
-      .trim()    // remove white spaces at the start and end of string
-      .replace(/\s+/g, "-")   // Replace spaces with dash
-      .replace(/&/g, '-and-')      // ampersand to and
-      .replace(/[^\w\-]+/g, "")    // convert any on-alphanumeric character to a dash
-      .replace(/\-\-+/g, "-")   // Replace multiple dash with single dash
-      .replace(/^-+/, "")   // Trim dash from start of text
-      .replace(/-+$/, "");   // Trim dash from end of text
+    product.meta.friendlyPageName = await this.urlGenerate(product.info.name);
 
     const friendlyPageNameMatch = await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
@@ -58,6 +49,18 @@ export class ProductService {
     const product = await this.productRepo.findProduct({ id: productId });
     if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async urlGenerate(productName: string): Promise<string> {
+    return productName
+      .toLowerCase()
+      .trim()     // remove white spaces at the start and end of string
+      .replace(/\s+/g, "-")     // Replace spaces with dash
+      .replace(/&/g, '-and-')     // ampersand to and
+      .replace(/[^\w\-]+/g, "")     // convert any on-alphanumeric character to a dash
+      .replace(/\-\-+/g, "-")     // Replace multiple dash with single dash
+      .replace(/^-+/, "")     // Trim dash from start of text
+      .replace(/-+$/, "");     // Trim dash from end of text
   }
 
   async getAllProducts(condition: SearchCondition): Promise<GetAllProductsResponse> {
@@ -91,6 +94,8 @@ export class ProductService {
 
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
+
+    (product.info && product.info?.name) ? product.meta.friendlyPageName = await this.urlGenerate(product.info.name) : null;
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
