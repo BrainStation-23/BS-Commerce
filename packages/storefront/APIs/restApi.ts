@@ -314,7 +314,7 @@ export async function deleteFullWishlistRest(): Promise<
 }
 
 export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(`${apiEndPoints.deleteFromCompare}`, { data: productId });
+  await axios.delete(`${apiEndPoints.deleteFromCompare}?productId=${productId}`);
 }
 
 export async function getCustomerProfileRest(
