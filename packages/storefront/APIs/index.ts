@@ -5,7 +5,6 @@ import {
   deleteWishlistItemRest,
   addToCompareRest,
   deleteFromCompareRest,
-  forgotPasswordRest,
   getCustomerWishlistRest,
   getFeaturedProductsRest,
   getOrderProductsRest,
@@ -29,6 +28,9 @@ import {
   deleteSingleCartItemRest,
   updateCartItemRest,
   sendOTPRest,
+  forgetPasswordSendOtpRest,
+  forgetPasswordVerifyOtpRest,
+  resetPasswordRest,
 } from './restApi';
 
 import {
@@ -37,7 +39,6 @@ import {
   deleteWishlistItemGraphql,
   addToCompareGraphql,
   deleteFromCompareGraphql,
-  forgotPasswordGraphql,
   getCustomerWishlistGraphql,
   getFeaturedProductsGraphql,
   getPublicProductByIdGraphql,
@@ -61,6 +62,9 @@ import {
   deleteAllCartItemGraphql,
   deleteSingleCartItemGraphql,
   updateCartItemGraphql,
+  forgetPasswordSendOtpGraphql,
+  forgetPasswordVerifyOtpGraphql,
+  resetPasswordGraphql,
   sendOTPGraphql,
 } from './graphQL';
 import { config } from 'config';
@@ -71,7 +75,6 @@ const graphqlApi: apiFunction = {
   sendOTP: sendOTPGraphql,
   signUp: signUpGraphql,
   getSignedInUser: getSignedInUserGraphql,
-  forgotPassword: forgotPasswordGraphql,
   getPublicProducts: getPublicProductsGraphql,
   getPublicProductsById: getPublicProductByIdGraphql,
   getPublicProductByCategoryId: getPublicProductByCategoryIDGraphql,
@@ -97,6 +100,9 @@ const graphqlApi: apiFunction = {
   deleteAllCartItem: deleteAllCartItemGraphql,
   deleteSingleCartItem: deleteSingleCartItemGraphql,
   updateCartItem: updateCartItemGraphql,
+  forgetPasswordSendOtp: forgetPasswordSendOtpGraphql,
+  forgetPasswordVerifyOtp: forgetPasswordVerifyOtpGraphql,
+  resetPassword: resetPasswordGraphql,
 };
 
 const restApi: apiFunction = {
@@ -104,7 +110,6 @@ const restApi: apiFunction = {
   sendOTP: sendOTPRest,
   signIn: signinRest,
   getSignedInUser: getSignedInUserRest,
-  forgotPassword: forgotPasswordRest,
   getPublicProducts: getPublicProductsRest,
   getPublicProductsById: getPublicProductByIdRest,
   getPublicProductByCategoryId: getPublicProductByCategoryIDRest,
@@ -130,6 +135,9 @@ const restApi: apiFunction = {
   deleteAllCartItem: deleteAllCartItemRest,
   deleteSingleCartItem: deleteSingleCartItemRest,
   updateCartItem: updateCartItemRest,
+  forgetPasswordSendOtp: forgetPasswordSendOtpRest,
+  forgetPasswordVerifyOtp: forgetPasswordVerifyOtpRest,
+  resetPassword: resetPasswordRest,
 };
 
 export const userAPI: apiFunction =

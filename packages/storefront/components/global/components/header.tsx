@@ -104,6 +104,7 @@ const Header: NextComponentType = () => {
           <span
             className="border border-gray-700 p-1 lg:hidden"
             onClick={() => setMenu(!menu)}
+            id="menuicon"
           >
             <MenuIcon />
           </span>
@@ -152,6 +153,7 @@ const Header: NextComponentType = () => {
               <span
                 className="ml-auto mb-2 cursor-pointer lg:hidden"
                 onClick={() => setMenu(!menu)}
+                id="sidebarClose"
               >
                 <XCircleIcon />
               </span>
