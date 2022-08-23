@@ -23,14 +23,13 @@ export class ProductDatabase implements IProductDatabase {
     const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
     const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
     const { maxPrice, minPrice } = price;
-    const products = await ProductModel.find({
+    return await ProductModel.find({
       ...query,
       'categories.id': { '$in': categoryIdList },
       'info.price': { $gte: minPrice || 0, $lte: maxPrice || Number.MAX_SAFE_INTEGER }
     }, '-_id').sort({
       'info.price': orderBy
     }).skip(skip).limit(limit).lean();
-    return products;
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

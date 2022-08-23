@@ -131,24 +131,29 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
-  async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
-    const { skip, limit, ...rest } = condition;
-    const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
-    if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
-  }
-
   async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
     const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
     if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
-  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
+  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
     const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+
+    let manufacturers = new Set();
+    let brands = new Set();
+    products.length && products.forEach(product => {
+      product?.manufacturer && manufacturers.add(product?.manufacturer?.name);
+      product.brands?.length && product.brands?.forEach(brand => { brands.add(brand) })
+    })
+
+    return this.helper.serviceResponse.successResponse({
+      products,
+      manufacturers: new Array(...manufacturers),
+      brands: new Array(...brands)
+    }, HttpStatus.OK);
   }
 }
