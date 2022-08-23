@@ -19,7 +19,7 @@ export interface ProductMeta {
     keywords?: string[],
     title?: string,
     description?: string,
-    friendlyPageName: string
+    friendlyPageName?: string
 }
 
 export interface ProductPhoto {

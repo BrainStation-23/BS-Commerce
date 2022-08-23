@@ -35,6 +35,17 @@ export class ProductService {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
+    product.meta.friendlyPageName = product.info.name
+      .toString()
+      .toLowerCase()
+      .trim()    // remove white spaces at the start and end of string
+      .replace(/\s+/g, "-")   // Replace spaces with dash
+      .replace(/&/g, '-and-')      // ampersand to and
+      .replace(/[^\w\-]+/g, "")    // convert any on-alphanumeric character to a dash
+      .replace(/\-\-+/g, "-")   // Replace multiple dash with single dash
+      .replace(/^-+/, "")   // Trim dash from start of text
+      .replace(/-+$/, "");   // Trim dash from end of text
+
     const friendlyPageNameMatch = await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
 
