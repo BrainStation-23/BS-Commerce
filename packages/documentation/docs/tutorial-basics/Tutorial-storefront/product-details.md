@@ -46,13 +46,13 @@ First of all, you can see the images on the left half of the page. You can click
 
 Here you have the Product Name, Manufacturer, Price, Availability, a Short description and other information of the product.
 
-![Information](../img/product-details/information.png)
+![Information](../img/product-details/Information.png)
 
 ### Quantity
 
 You can choose your desired amount of a product from the quantity section.
 
-![Quantity](../img/product-details/quantity.png)
+![Quantity](../img/product-details/Quantity.png)
 
 ### Add to cart/Buy now
 
@@ -86,7 +86,7 @@ Click on the **+ Compare** to compare the product with other products.
 
 Further down the page you can see the full description of the product.
 
-![Full Description](../img/product-details/description.png)
+![Full Description](../img/product-details/Description.png)
 
 ### Similar Products
 
