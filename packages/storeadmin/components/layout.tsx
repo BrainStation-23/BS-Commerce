@@ -2,8 +2,10 @@ import type { NextComponentType } from "next";
 import HeaderBar from "./headerBar";
 import Navbar from "./navbar";
 import Viewport from "./viewport";
-
-const Layout: NextComponentType = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Viewport />
