@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsArray, IsOptional } from 'class-validator';
+import { IsArray, IsIn } from 'class-validator';
 import {
   ProductInfo,
   ProductMeta,
@@ -16,6 +16,7 @@ import {
   GetAllProductsQuery,
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
+  GetCustomerAllProductsResponseType,
 } from 'models';
 
 
@@ -166,12 +167,6 @@ export class GraphqlProductCategory implements ProductCategory {
 
   @Field()
   name: string;
-
-  @Field(() => Boolean, { nullable: true })
-  isFeatured?: boolean;
-
-  @Field(() => Int, { nullable: true })
-  displayOrder?: number;
 }
 
 @InputType('UpdateProductCategoryInput')
@@ -181,12 +176,6 @@ export class UpdateProductCategoryInput implements UpdateProductCategory {
 
   @Field({ nullable: true })
   name?: string;
-
-  @Field(() => Boolean, { nullable: true })
-  isFeatured?: boolean;
-
-  @Field(() => Int, { nullable: true })
-  displayOrder?: number;
 }
 
 @ObjectType('ProductManufacturer')
@@ -213,73 +202,73 @@ export class GraphqlProduct implements Product {
   @Field({ nullable: true })
   id?: string;
 
-  @Field(()=> GraphqlProductInfo)
+  @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(()=> GraphqlProductMeta)
+  @Field(() => GraphqlProductMeta)
   meta: GraphqlProductMeta;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> GraphqlProductManufacture, {nullable: true})
+  @Field(() => GraphqlProductManufacture, { nullable: true })
   manufacturer?: GraphqlProductManufacture;
-  
-  @Field(()=> [GraphqlProductCategory])
+
+  @Field(() => [GraphqlProductCategory])
   categories: GraphqlProductCategory[];
 }
 
 @InputType('ProductInput')
 export class GraphqlProductInput implements Product {
-  @Field(()=> GraphqlProductInfo)
+  @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(()=> GraphqlProductMeta)
+  @Field(() => GraphqlProductMeta)
   meta: GraphqlProductMeta;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> GraphqlProductManufacture, {nullable: true})
+  @Field(() => GraphqlProductManufacture, { nullable: true })
   manufacturer?: GraphqlProductManufacture;
 
-  @Field(()=> [GraphqlProductCategory])
+  @Field(() => [GraphqlProductCategory])
   categories: GraphqlProductCategory[];
 }
 
 @InputType()
 export class UpdateProductInput implements UpdateProductRequest {
-  @Field(()=> UpdateProductInfoInput, {nullable: true})
+  @Field(() => UpdateProductInfoInput, { nullable: true })
   info?: UpdateProductInfoInput;
 
-  @Field(()=> UpdateProductMetaInput, {nullable: true})
+  @Field(() => UpdateProductMetaInput, { nullable: true })
   meta?: UpdateProductMetaInput;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  @Field(()=> [GraphqlProductPhoto], {nullable: true})
+  @Field(() => [GraphqlProductPhoto], { nullable: true })
   photos?: GraphqlProductPhoto[];
 
   @Field(() => [String], { nullable: true })
   brands?: string[];
 
-  @Field(()=> UpdateProductManufacturerInput, {nullable: true})
+  @Field(() => UpdateProductManufacturerInput, { nullable: true })
   manufacturer?: UpdateProductManufacturerInput;
 
-  @Field(()=> [UpdateProductCategoryInput], {nullable: true})
+  @Field(() => [UpdateProductCategoryInput], { nullable: true })
   categories?: UpdateProductCategoryInput[];
 }
 
@@ -306,7 +295,8 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field({ nullable: true })
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
   orderBy?: string;
 }
 
@@ -329,6 +319,19 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
 
   @Field(() => Boolean, { nullable: true })
   isFeatured?: boolean;
+
+  @Field({ nullable: true })
+  slug?: string;
+
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
+
+  @Field(() => Int, { nullable: true })
+  minPrice?: number;
+
+  @Field(() => Int, { nullable: true })
+  maxPrice?: number;
 }
 
 @InputType()
@@ -381,6 +384,28 @@ export class ProductArrayResponse {
   @Field(() => [GraphqlProduct], { nullable: true })
   data?: GraphqlProduct[];
 }
+
+@ObjectType()
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+  @Field(() => [GraphqlProduct], { nullable: true })
+  products: GraphqlProduct[];
+
+  @Field(() => [String], { nullable: true })
+  manufacturers: string[];
+
+  @Field(() => [String], { nullable: true })
+  brands: string[];
+}
+
+@ObjectType()
+export class ProductArrayWithBrandAndManufacturersResponse {
+  @Field(() => Int)
+  code: number;
+
+  @Field(() => GetCustomerAllProductsResponse, { nullable: true })
+  data?: GetCustomerAllProductsResponse;
+}
+
 
 @ObjectType()
 export class ProductArrayWithCount {

@@ -55,8 +55,8 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
           {data?.photos[0][key] && (
             <Image
               src={`${data?.photos[0][key]}`}
-              height="75px"
-              width={'75px'}
+              height={75}
+              width={75}
               alt="..."
             />
           )}

@@ -32,16 +32,9 @@ export class CustomerAuthResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-
   @Mutation(() => SendOtpAuthResponse)
   async sendOtpForRegistration(@Args('data', { nullable: true }) data?: SendOtpInput) {
     const res = await this.authService.registerSendOTP(data);
-    return this.helper.serviceResponse.graphqlResponse(res);
-  }
-
-  @Mutation(() => VerifyOtpAuthResponse)
-  async verifyOtpForRegistration(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
-    const res = await this.authService.registerVerifyOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 

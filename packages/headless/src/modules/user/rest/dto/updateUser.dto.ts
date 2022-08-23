@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { regexConfig } from 'config/phone';
 import { AddressDto, UserDto } from './user.dto';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import {
     UpdatedUserRequest,
     UpdateUserErrorResponse,
@@ -42,9 +43,9 @@ export class UpdatedUserDto implements UpdatedUserRequest {
     @IsPhoneNumber(regexConfig.phone as any, { message: 'Please Enter the Valid Phone Number!' })
     phone?: string;
 
-    @ApiProperty({ required: false })
+    @ApiProperty({ required: false, type: AddressDto })
     @IsOptional()
-    @ValidateNested({ each: true })
+    @CustomValidator(AddressDto)
     @IsObject()
     address?: AddressDto;
 
