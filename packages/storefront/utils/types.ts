@@ -41,6 +41,11 @@ import {
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
   updateCartItemRequest,
+  SendOtpSuccessResponse,
+  VerifyOtpRequest,
+  VerifyOtpSuccessResponse,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -75,9 +80,6 @@ export interface apiFunction {
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
-  forgotPassword: (
-    data: ForgotPasswordRequest
-  ) => Promise<ForgotPasswordResponse | undefined>;
   getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
   getFeaturedProducts: () => Promise<
     GetCustomerAllProductsResponse | undefined
@@ -136,4 +138,7 @@ export interface apiFunction {
   deleteAllCartItem: () => Promise<deleteAllCartItemsSuccessResponse | undefined>
   deleteSingleCartItem: (productId: string) => Promise<deleteCartItemSuccessResponse | undefined>
   updateCartItem: (cartItem: updateCartItemRequest) => Promise<updateCartItemSuccessResponse | undefined>
+  forgetPasswordSendOtp: (data: string) => Promise<SendOtpSuccessResponse | undefined>
+  forgetPasswordVerifyOtp: (data: VerifyOtpRequest) => Promise<VerifyOtpSuccessResponse | undefined> 
+  resetPassword: (data: CustomerForgotPasswordRequest) => Promise<CustomerForgotPasswordSuccessResponse | undefined>
 }

@@ -48,6 +48,11 @@ import {
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
+  SendOtpSuccessResponse,
+  VerifyOtpSuccessResponse,
+  VerifyOtpRequest,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -102,18 +107,6 @@ export async function signUpRest(
   } catch (error: any) {
     return error;
   }
-}
-
-export async function forgotPasswordRest(
-  data: ForgotPasswordRequest
-): Promise<ForgotPasswordResponse | undefined> {
-  // try {
-  //   const res = await axios.post("http://localhost:3000/api/auth/forgot", data);
-  //   return res.data;
-  // } catch (error: any) {
-  //   return error;
-  // }
-  return;
 }
 
 export async function getPublicProductsRest(): Promise<
@@ -409,46 +402,115 @@ export async function getCartRest(
       userId: '',
       id: '',
       items: [],
-    }
+    };
     const errorData = {
-      data
+      data,
     };
     return errorData as any;
   }
 }
 
-export async function addToCartRest(data:addToCartRequest): Promise<addToCartSuccessResponse | undefined> {
+export async function addToCartRest(
+  data: addToCartRequest
+): Promise<addToCartSuccessResponse | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.addToCart}`, data);
     return res.data as addToCartSuccessResponse;
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
 
-export async function deleteAllCartItemRest(): Promise<deleteAllCartItemsSuccessResponse |undefined> {
+export async function deleteAllCartItemRest(): Promise<
+  deleteAllCartItemsSuccessResponse | undefined
+> {
   try {
     const res = await axios.delete(`${apiEndPoints.deleteAllCartItem}`);
     return res.data as deleteAllCartItemsSuccessResponse;
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
 
-export async function deleteSingleCartItemRest(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
-  try {   
-    const res = await axios.delete(`${apiEndPoints.deleteSingleCartItem}?productId=${productId}`);
+export async function deleteSingleCartItemRest(
+  productId: string
+): Promise<deleteCartItemSuccessResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteSingleCartItem}?productId=${productId}`
+    );
     return res.data as deleteCartItemSuccessResponse;
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
 
-export async function updateCartItemRest(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse |undefined> {
-  try {   
+export async function updateCartItemRest(
+  cartItem: updateCartItemRequest
+): Promise<updateCartItemSuccessResponse | undefined> {
+  try {
     const res = await axios.patch(`${apiEndPoints.updateCartItem}`, cartItem);
     return res.data as updateCartItemSuccessResponse;
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
+
+export async function forgetPasswordSendOtpRest(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
+  let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+  const isEmail = regex.test(data);
+  try {
+    const res = await axios.post(`${apiEndPoints.forgetPasswordSendOtp}`, isEmail ? { "email": data } : { "phone": data});
+    toast.success('An OTP has been sent to your email/phone.', {
+      containerId: 'bottom-right',
+    });
+    return res?.data;
+  } catch (error: any) {
+    if(error.response.data.error === 'CAN_NOT_GET_CUSTOMER') {
+        toast.error('User doesn\'t exists.', {
+          containerId: 'bottom-right',
+        });
+    } else {
+      toast.error('Failed to send OTP. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
+    return error;
+  }
+}
+
+export async function forgetPasswordVerifyOtpRest(
+  data: VerifyOtpRequest
+): Promise<VerifyOtpSuccessResponse | undefined> {
+
+  try {
+    const res = await axios.post(`${apiEndPoints.forgetPasswordVerifyOtp}`, data);
+    return res?.data;
+  } catch (error: any) {
+    toast.error('OTP expired or invalid OTP. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function resetPasswordRest(
+  data: CustomerForgotPasswordRequest
+): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+
+  try {
+    const res = await axios.post(`${apiEndPoints.resetPassword}`, data);
+    toast.success('Password updated successfully. Please login with new password', {
+      containerId: 'bottom-right',
+    });
+    return res?.data;
+  } catch (error: any) {
+    toast.error('Password updatation failed. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+

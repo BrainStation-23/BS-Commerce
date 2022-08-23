@@ -180,7 +180,10 @@ const HeaderAccount: React.FC<Properties> = () => {
               </Link>
               <span className="mx-1">/</span>
               <Link href={links[1].link}>
-                <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                <a
+                  id="login"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                >
                   {links[1].name}
                 </a>
               </Link>

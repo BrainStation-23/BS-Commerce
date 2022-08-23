@@ -45,6 +45,11 @@ import {
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
+  SendOtpSuccessResponse,
+  VerifyOtpRequest,
+  VerifyOtpSuccessResponse,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -66,12 +71,6 @@ export async function signInGraphql(
 export async function signUpGraphql(
   data: CreateCustomerRequest
 ): Promise<CreateCustomerResponse | undefined> {
-  return undefined;
-}
-
-export async function forgotPasswordGraphql(
-  data: ForgotPasswordRequest
-): Promise<ForgotPasswordResponse | undefined> {
   return undefined;
 }
 
@@ -218,7 +217,7 @@ export async function getOrderProductGraphql(
 export async function getCartGraphql(
   token: string
 ): Promise<getCartSuccessResponse | undefined> {
-  return undefined
+  return undefined;
 }
 
 export async function addToCartGraphql(
@@ -227,14 +226,38 @@ export async function addToCartGraphql(
   return undefined;
 }
 
-export async function deleteAllCartItemGraphql(): Promise<deleteAllCartItemsSuccessResponse | undefined> {
+export async function deleteAllCartItemGraphql(): Promise<
+  deleteAllCartItemsSuccessResponse | undefined
+> {
   return undefined;
 }
 
-export async function deleteSingleCartItemGraphql(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
- return undefined
+export async function deleteSingleCartItemGraphql(
+  productId: string
+): Promise<deleteCartItemSuccessResponse | undefined> {
+  return undefined;
 }
 
-export async function updateCartItemGraphql(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse | undefined> {
-  return undefined; 
+export async function updateCartItemGraphql(
+  cartItem: updateCartItemRequest
+): Promise<updateCartItemSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function forgetPasswordSendOtpGraphql(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function forgetPasswordVerifyOtpGraphql(
+  data: VerifyOtpRequest
+): Promise<VerifyOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function resetPasswordGraphql(
+  data: CustomerForgotPasswordRequest
+): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  return undefined;
 }
