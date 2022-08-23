@@ -92,9 +92,12 @@ export class ProductService {
     const getProduct = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
+    product.info = {...getProduct.info, ...product.info};
+    product.meta = {...getProduct.meta, ...product.meta};
+
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
-
+    
     (product.info && product.info?.name) ? product.meta.friendlyPageName = await this.urlGenerate(product.info.name) : null;
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
