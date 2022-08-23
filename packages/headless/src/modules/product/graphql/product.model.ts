@@ -295,8 +295,9 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 }
 
 @InputType()
@@ -322,9 +323,9 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true, description: "Price Low to High -> 1 or High to Low -> -1" })
-  @IsIn([-1, 1])
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 
   @Field(() => Int, { nullable: true })
   minPrice?: number;

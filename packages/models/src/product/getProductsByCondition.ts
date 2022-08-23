@@ -16,7 +16,7 @@ export interface GetProductsByConditionQuery {
     productName?: string;
     isFeatured?: boolean;
     slug?: string;
-    orderBy?: number;
+    orderBy?: string;
 }
 
 export interface ConditionalProduct {
