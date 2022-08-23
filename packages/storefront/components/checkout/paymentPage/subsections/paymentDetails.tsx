@@ -154,8 +154,9 @@ const PaymentDetails: NextComponentType = () => {
         data.paymentMethod === 'Credit card' ? data.cardNumber : '',
       paypalRedirectUrl: '',
     };
-    const res = userAPI.checkout(obj, router).then((response: any) => {
+    const res = userAPI.checkout(obj, router).then(async (response: any) => {
       if (response?.data?.orderId) {
+        await userAPI.deleteAllCartItem();
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());
       }

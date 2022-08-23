@@ -162,6 +162,7 @@ const Header: NextComponentType = () => {
               <span
                 className="ml-auto mb-2 cursor-pointer lg:hidden"
                 onClick={() => setMenu(!menu)}
+                id="sidebarClose"
               >
                 <XCircleIcon />
               </span>

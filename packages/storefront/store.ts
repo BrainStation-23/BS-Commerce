@@ -11,6 +11,7 @@ import checkoutReducer from 'toolkit/checkoutSlice';
 import modalReducer from 'toolkit/modalSlice';
 import compareReducer from 'toolkit/compareSlice';
 import CustomerAddressReducer from 'toolkit/customerAddressSlice';
+import forgetPasswordReducer from 'toolkit/forgetPasswordSlice';
 
 const reducers = combineReducers({
   product: productsReducer,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   modal: modalReducer,
   compare: compareReducer,
   customerAddress: CustomerAddressReducer,
+  forgetPassword: forgetPasswordReducer
 });
 
 const persistConfig = {
