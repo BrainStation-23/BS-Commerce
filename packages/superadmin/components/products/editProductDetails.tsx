@@ -232,7 +232,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
         >
           {(formikprops) => {
             return (
-              <Form onSubmit={formikprops.handleSubmit}>
+              <Form onSubmit={formikprops.handleSubmit} className="min-vh-100">
                 <div className="content-header clearfix pt-4">
                   <h1 className="float-start">
                     Edit product details
@@ -254,7 +254,7 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                     </button>
                   </div>
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 pb-5">
                   <ProductInfoForm />
                   <MetaForm />
                   <PhotosForm />
