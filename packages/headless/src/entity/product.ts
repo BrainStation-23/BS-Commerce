@@ -93,7 +93,7 @@ export class SearchCondition {
   productName?: string;
   isFeatured?: boolean;
   slug?: string;
-  orderBy?: number;
+  orderBy?: string;
   minPrice?: number;
   maxPrice?: number;
 }

@@ -19,7 +19,7 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query, '-_id').sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
   }
 
-  async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[] | []> {
+  async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[] | []> {
     const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
     const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
     const { maxPrice, minPrice } = price;
