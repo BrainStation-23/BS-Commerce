@@ -1,12 +1,9 @@
 import { Product } from 'models';
 
 export interface CategoryInterface {
-  id?: number | string | undefined;
-  value?: string | undefined;
+  id?: number | string ;
   name?: string | undefined;
   isSelected: boolean | undefined;
-  isFeatured: boolean | undefined;
-  displayOrder: number | undefined;
 }
 export interface EditProductInterface {
   product: Product;

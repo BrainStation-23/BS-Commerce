@@ -2,61 +2,27 @@ import React, { FC } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import FieldTemplate from '@/components/products/forms/fieldTemplate';
-import {} from '@/components/products/models/index';
+import { CategoryInterface } from '@/components/products/models/index';
 import CategoryCheckbox from './categoryCheckBox';
+import { NestedCategoryList } from 'models';
 
-const CategorySection: FC<any> = ({
-  categogiesFullList,
-  setCategoryData,
-  categoryData,
-  setFieldValue,
-  removeCat,
-  addCat,
-}) => {
-  const [showTable, setShowTable] = useState(false);
+const CategorySection: FC<{
+  categogiesFullList: NestedCategoryList[];
+  categoryData: CategoryInterface[];
+  removeCategory: Function;
+  addCategory: Function;
+}> = ({ categogiesFullList, categoryData, removeCategory, addCategory }) => {
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
-  const [reload, setReload] = useState(false);
-
-  const checkTable = () => {
-    const totalSelectedCategory = categoryData?.filter((data: any) =>
-      data.isSelected ? data : null
-    );
-  };
 
   const toggleButton = () => {
     if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
     else setBtnToggler('bi-plus-lg');
-  };
-  const handleRemoveCategory = (id: string | number | undefined) => {
-    categoryData.map((data: any) => {
-      data.id == id ? <>{(data.isSelected = false)}</> : '';
-    });
-    setCategoryData(categoryData);
-    setReload(!reload);
-  };
-
-  const handleAddCategory = () => {
-    const categoryID = (
-      document.getElementById('SelectedCategoryIds') as HTMLInputElement
-    )?.value;
-    if (categoryID == '0') {
-      toast.error('Please Select a Category');
-      return;
-    }
-
-    setCategoryData(categoryData);
-    setFieldValue('isFeaturedCategory', false);
-    setFieldValue('displayOrderCategory', 1);
-    setFieldValue('SelectedCategoryIds', 0);
-    setReload(!reload);
   };
   return (
     <>
       <div
         className="card card-secondary card-outline my-4"
         data-card-name="category"
-        data-hideattribute="ProductPage.HideInfoBlock"
         id="category"
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
@@ -65,7 +31,7 @@ const CategorySection: FC<any> = ({
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#categoryTab"
-            aria-expanded="false"
+            aria-expanded="true"
             aria-controls="categoryTab"
             onClick={() => toggleButton()}
           >
@@ -83,23 +49,22 @@ const CategorySection: FC<any> = ({
             </div>
           </button>
         </div>
-        <div className="" id="categoryTab">
-          {/* <div className="collapse " id="categoryTab"> */}
+        <div className="collapse " id="categoryTab">
           <div className="card-body w-50 m-auto" style={{ minWidth: '216px' }}>
             <>
               {categogiesFullList &&
-                categogiesFullList.map((category: any) => {
+                categogiesFullList.map((category: NestedCategoryList) => {
                   return (
                     <>
                       <CategoryCheckbox
                         categoryData={categoryData}
                         category={category}
-                        removeCat={removeCat}
-                        addCat={addCat}
+                        removeCategory={removeCategory}
+                        addCategory={addCategory}
                         isSelected={
                           categoryData.filter(
-                            (cat) => cat.id === category.id
-                          )[0]?.isSelected
+                            (cat: CategoryInterface) => cat.id === category.id
+                          )[0]?.isSelected!
                         }
                       />
                     </>

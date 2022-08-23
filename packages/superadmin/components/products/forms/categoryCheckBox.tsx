@@ -1,25 +1,25 @@
-import { Category, NestedCategoryList } from 'models';
 import { FC, useEffect, useState } from 'react';
+import { NestedCategoryList } from 'models';
+import { CategoryInterface } from '@/components/products/models/index';
 
 const CategoryCheckbox: FC<{
   category: NestedCategoryList;
   categoryData: any;
-  removeCat: Function;
-  addCat: Function;
+  removeCategory: Function;
+  addCategory: Function;
   isSelected: boolean;
-}> = ({ category, categoryData, removeCat, addCat, isSelected }) => {
-  const [ttt, setTTT] = useState(isSelected);
+}> = ({ category, categoryData, removeCategory, addCategory, isSelected }) => {
+  const [isChecked, setChecked] = useState(isSelected);
 
   const handleChange = (catID: any) => {
-    ttt === false ? setTTT(true) : setTTT(false);
-    ttt === false ? addCat(catID) : removeCat(catID);
+    isChecked === false ? setChecked(true) : setChecked(false);
+    isChecked === false ? addCategory(catID) : removeCategory(catID);
   };
 
   useEffect(() => {
-    categoryData.forEach((cat) => {
+    categoryData.forEach((cat: CategoryInterface) => {
       if (cat.id === category.id) {
-        setTTT(cat.isSelected);
-        console.log('>>>>>', cat.isSelected);
+        setChecked(cat.isSelected!);
       }
     });
   });
@@ -35,28 +35,23 @@ const CategoryCheckbox: FC<{
           handleChange(category.id);
         }}
       />
-      {console.log(
-        'isSelected  > ',
-        isSelected,
-        'KKKK > ',
-        categoryData.filter((cat) => cat.id === category.id)[0]?.isSelected
-      )}
       <label className="form-check-label" htmlFor="flexCheckChecked">
-        {category.name} {`${ttt}`}
+        {category.name}
       </label>
       {category.subCategories &&
-        ttt &&
-        category.subCategories.map((category: any) => {
+        isChecked &&
+        category.subCategories.map((category: NestedCategoryList) => {
           return (
             <>
               <CategoryCheckbox
                 categoryData={categoryData}
                 category={category}
-                removeCat={removeCat}
-                addCat={addCat}
+                removeCategory={removeCategory}
+                addCategory={addCategory}
                 isSelected={
-                  categoryData.filter(cat => cat.id === category.id)[0]?
-                    .isSelected
+                  categoryData.filter(
+                    (cat: CategoryInterface) => cat.id === category.id
+                  )[0]?.isSelected
                 }
               />
             </>
