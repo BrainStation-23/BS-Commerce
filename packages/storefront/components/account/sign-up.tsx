@@ -6,16 +6,15 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
 import { userAPI } from 'APIs';
+import { storeUserToken } from 'toolkit/authSlice';
+import { storeCustomerDetails } from 'toolkit/userSlice';
+import { useAppDispatch } from 'customHooks/hooks';
 import { CreateCustomerRequest, CustomerSignInRequest } from 'models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
-import { storeUserToken } from 'toolkit/authSlice';
-import { storeCustomerDetails } from 'toolkit/userSlice';
-import { storeWishlist } from 'toolkit/productsSlice';
-import { useAppDispatch } from 'customHooks/hooks';
 
 const Signup = () => {
   const router = useRouter();
@@ -27,6 +26,7 @@ const Signup = () => {
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
   const [otp, setOtp] = useState('');
+  const [userName, setUserName] = useState('');
 
   const toggleClass = 'transform translate-x-5';
   let username = '';
@@ -227,7 +227,12 @@ const Signup = () => {
                         <button
                           disabled={toggle ? true : false}
                           id="toggle-btn"
-                          className="flex h-6 w-12 cursor-pointer items-center rounded-full bg-green-600/100 p-1"
+                          className={`flex h-6 w-12 cursor-pointer items-center rounded-full
+                            ${
+                              formikprops.values.username !== ''
+                                ? 'bg-green-600/100'
+                                : 'bg-gray-400'
+                            }`}
                           onClick={() => {
                             if (formikprops.values.username !== '') {
                               handleOTPRequest(
