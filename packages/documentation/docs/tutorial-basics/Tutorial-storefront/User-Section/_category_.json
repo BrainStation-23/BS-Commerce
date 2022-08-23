@@ -1,0 +1,8 @@
+{
+  "label": "User Section",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "If the User is Logged In he will have an option to go through the Following sections"
+  }
+}
