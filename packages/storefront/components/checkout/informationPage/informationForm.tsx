@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import FieldTemplate from '../fieldTemplate';
+import { CustomerAddress } from 'models';
 
 interface FormData {
   email: string;
@@ -27,7 +28,11 @@ interface FormData {
   tag: string;
 }
 
-const Information = (props: any) => {
+interface Props {
+  setModal: Function;
+}
+
+const Information: React.FC<Props> = ({ setModal }: Props) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [showLabel, setShowLabel] = useState(true);
   const user = useAppSelector(
@@ -114,9 +119,9 @@ const Information = (props: any) => {
     nArray.length === tags.length ? '' : setTags(nArray);
   };
   const dispatch = useAppDispatch();
-  const { setModal } = props;
+  // const { setModal } = props;
 
-  const handlePreviousAddress = (detail: any, setFieldValue: any) => {
+  const handlePreviousAddress = (detail: string, setFieldValue: Function) => {
     if (detail === 'Use a new address') {
       setShowLabel(true);
       setFieldValue('firstName', '');
@@ -175,7 +180,7 @@ const Information = (props: any) => {
     setTagsOptions();
   });
 
-  const setAddCustomerNewAddress = async (data: any) => {
+  const setAddCustomerNewAddress = async (data: CustomerAddress) => {
     await userAPI.addCustomerNewAddress(data);
     await userAPI.getCustomer(token).then((response) => {
       dispatch(storeAddresses(response?.data?.addresses));

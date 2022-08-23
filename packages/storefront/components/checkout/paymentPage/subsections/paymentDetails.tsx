@@ -163,7 +163,7 @@ const PaymentDetails: NextComponentType = () => {
     });
   };
 
-  const handlePreviousAddress = (detail: any, setFieldValue: any) => {
+  const handlePreviousAddress = (detail: string, setFieldValue: Function) => {
     //setDropdownText(event.target.value);
     if (detail === 'Use a new address') {
       setShowLabel(true);

@@ -8,6 +8,7 @@ import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
 import Picture from '@/components/global/components/product/common/picture';
 import Icon from '@/components/global/components/icon';
+import { CustomerProduct } from 'models';
 
 const WeekDeals: NextComponentType = () => {
   const products = useAppSelector(
@@ -35,7 +36,7 @@ const WeekDeals: NextComponentType = () => {
         >
           {products &&
             products.length > 0 &&
-            products.map((product: any) => (
+            products.map((product: CustomerProduct) => (
               <SwiperSlide key={product.id}>
                 <Link
                   href={{
@@ -57,8 +58,8 @@ const WeekDeals: NextComponentType = () => {
                                 product={product}
                                 height={212}
                                 width={212}
-                                src={product.photos[0].url}
-                                alt={product.tags[0]}
+                                src={product.photos![0].url!}
+                                alt={product.tags![0]}
                               />
 
                               {product?.info?.oldPrice !== 0 ? (
@@ -97,7 +98,7 @@ const WeekDeals: NextComponentType = () => {
                               </div>
                             </Link>
                             <p className="m-1 font-['arial'] text-lg text-gray-600">
-                              {product.tags[0]}
+                              {product.tags![0]}
                             </p>
                             <div className="text-lg font-semibold text-green-600">
                               {product.info.price}
