@@ -133,7 +133,7 @@ export class GraphqlProductMeta implements ProductMeta {
   @Field({ nullable: true })
   description?: string;
 
-  @Field()
+  @Field({ nullable: true })
   friendlyPageName?: string;
 }
 

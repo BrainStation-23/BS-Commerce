@@ -120,7 +120,7 @@ export class ProductService {
   }
 
   generateSearchQuery(condition: SearchCondition): object {
-    const { brand, categoryId, productName, isFeatured, manufacturer, maxPrice, minPrice } = condition;
+    const { brand, categoryId, productName, isFeatured, manufacturer } = condition;
     const query: Record<string, any> = {};
     if (brand !== undefined && brand !== '') {
       query.brands = brand;
@@ -143,6 +143,12 @@ export class ProductService {
   //Customer
   async getCustomerProduct(productId: string,): Promise<GetCustomerProductResponse> {
     const product = await this.productRepo.findProduct({ id: productId, 'info.published': true });
+    if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async getCustomerProductByURL(url: string,): Promise<GetCustomerProductResponse> {
+    const product = await this.productRepo.findProduct({ 'meta.friendlyPageName': url, 'info.published': true });
     if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
