@@ -45,10 +45,12 @@ export class OrderCustomerService {
 
     const availableProductIds = await this.orderRepository.getAvailableProducts(productIds);
 
-    if(availableProductIds.length === 0)return errorResponse( ErrorMessageReOrder.ALL_ITEMS_INVALID,null,HttpStatus.BAD_REQUEST );//send which products are not available
+    if(availableProductIds.length === 0)return errorResponse( ErrorMessageReOrder.ALL_ITEMS_INVALID,{products: prevProducts.map(item => item.name)},HttpStatus.BAD_REQUEST );//send which products are not available
     else {
-        //need to find out which products are not available send it error response ------ TODO -----------
-          if(ignoreInvalidItems === false) return errorResponse( ErrorMessageReOrder.INVALID_ITEMS, null, HttpStatus.BAD_REQUEST );
+          const unavailableProducts = prevProducts.filter(product => !availableProductIds.find(item => item.id === product.productId) && product.name);
+       
+          if(ignoreInvalidItems === false) return errorResponse( ErrorMessageReOrder.INVALID_ITEMS, {products: unavailableProducts.map(item => item.name)}, HttpStatus.BAD_REQUEST );
+          
           order = order.filter(product => availableProductIds.find(item => item.id === product.productId));    
         }
 
