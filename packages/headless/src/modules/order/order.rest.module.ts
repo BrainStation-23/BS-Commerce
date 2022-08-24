@@ -1,4 +1,3 @@
-import { ProductService } from './../product/services/index';
 import { Module } from '@nestjs/common';
 import { ResolveDatabaseDependency } from 'src/database/database.resolver';
 import { OrderRepository } from './repositories';
