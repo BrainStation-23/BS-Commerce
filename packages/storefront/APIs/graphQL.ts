@@ -50,6 +50,7 @@ import {
   VerifyOtpSuccessResponse,
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
+  GetCustomerAllProductsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -68,7 +69,9 @@ export async function signInGraphql(
   return undefined;
 }
 
-export async function sendOTPGraphql(data: string): Promise<SendOtpSuccessResponse | undefined> {
+export async function sendOTPGraphql(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
   return undefined;
 }
 
@@ -79,7 +82,7 @@ export async function signUpGraphql(
 }
 
 export async function getPublicProductsGraphql(): Promise<
-  GetCustomerAllProductsResponse | undefined
+  GetCustomerAllProductsSuccessResponse | undefined
 > {
   return undefined;
 }

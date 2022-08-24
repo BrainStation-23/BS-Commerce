@@ -47,6 +47,7 @@ import {
   CustomerForgotPasswordSuccessResponse,
   SendOtpRequest,
   SendOtpSuccessResponse,
+  GetCustomerAllProductsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -78,11 +79,13 @@ export interface apiFunction {
     isEmail: boolean,
     data: GetCustomerQuery
   ) => Promise<GetCustomerResponse | undefined>;
-  sendOTP: (data: string) => Promise<SendOtpSuccessResponse | undefined>
+  sendOTP: (data: string) => Promise<SendOtpSuccessResponse | undefined>;
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
-  getPublicProducts: () => Promise<GetCustomerAllProductsResponse | undefined>;
+  getPublicProducts: () => Promise<
+    GetCustomerAllProductsSuccessResponse | undefined
+  >;
   getFeaturedProducts: () => Promise<
     GetCustomerAllProductsResponse | undefined
   >;
@@ -133,14 +136,26 @@ export interface apiFunction {
     data: UpdateCustomerRequestBody
   ) => Promise<UpdateCustomerSuccessResponse | undefined>;
 
-  getCart: (
+  getCart: (data: string) => Promise<getCartSuccessResponse | undefined>;
+  addToCart: (
+    data: addToCartRequest
+  ) => Promise<addToCartSuccessResponse | undefined>;
+  deleteAllCartItem: () => Promise<
+    deleteAllCartItemsSuccessResponse | undefined
+  >;
+  deleteSingleCartItem: (
+    productId: string
+  ) => Promise<deleteCartItemSuccessResponse | undefined>;
+  updateCartItem: (
+    cartItem: updateCartItemRequest
+  ) => Promise<updateCartItemSuccessResponse | undefined>;
+  forgetPasswordSendOtp: (
     data: string
-  ) => Promise<getCartSuccessResponse | undefined>;
-  addToCart: (data: addToCartRequest) => Promise<addToCartSuccessResponse | undefined>
-  deleteAllCartItem: () => Promise<deleteAllCartItemsSuccessResponse | undefined>
-  deleteSingleCartItem: (productId: string) => Promise<deleteCartItemSuccessResponse | undefined>
-  updateCartItem: (cartItem: updateCartItemRequest) => Promise<updateCartItemSuccessResponse | undefined>
-  forgetPasswordSendOtp: (data: string) => Promise<SendOtpSuccessResponse | undefined>
-  forgetPasswordVerifyOtp: (data: VerifyOtpRequest) => Promise<VerifyOtpSuccessResponse | undefined> 
-  resetPassword: (data: CustomerForgotPasswordRequest) => Promise<CustomerForgotPasswordSuccessResponse | undefined>
+  ) => Promise<SendOtpSuccessResponse | undefined>;
+  forgetPasswordVerifyOtp: (
+    data: VerifyOtpRequest
+  ) => Promise<VerifyOtpSuccessResponse | undefined>;
+  resetPassword: (
+    data: CustomerForgotPasswordRequest
+  ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
 }
