@@ -18,6 +18,9 @@ import {
   GetCustomerAllProductsErrorResponseDto,
   GetCustomerAllProductsQueryDto,
   GetCustomerAllProductsSuccessResponseDto,
+  GetCustomerProductByURLErrorResponseDto,
+  GetCustomerProductByURLParamsDto,
+  GetCustomerProductByURLSuccessResponseDto,
   GetCustomerProductErrorResponseDto,
   GetCustomerProductParamsDto,
   GetCustomerProductSuccessResponseDto,
@@ -60,6 +63,23 @@ export class ProductController {
   })
   async getCustomerAllProducts(@Query() condition: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getCustomerProductsByCondition(condition);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('customer/product/:url')
+  @ApiResponse({
+    description: 'Get Single Product Success Response',
+    type: GetCustomerProductByURLSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Single Product Error Response',
+    type: GetCustomerProductByURLErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerProductByURL(@Param() params: GetCustomerProductByURLParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerProductByURL(params.url);
     res.status(code);
     return { code, ...response };
   }

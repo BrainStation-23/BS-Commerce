@@ -18,7 +18,7 @@ export interface GetCustomerAllProductsQuery {
     productName?: string;
     isFeatured?: boolean;
     slug?: string;
-    orderBy?: number;
+    orderBy?: string;
     minPrice?: number;
     maxPrice?: number;
 }

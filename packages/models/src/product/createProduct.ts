@@ -11,7 +11,7 @@ import { Product, ProductCategory, ProductInfo, ProductManufacturer, ProductMeta
 
 export interface CreateProductRequest {
     info: ProductInfo;
-    meta: ProductMeta;
+    meta?: ProductMeta;
     tags?: string[];
     photos?: ProductPhoto[];
     brands?: string[],
