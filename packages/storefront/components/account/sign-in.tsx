@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { config } from 'config';
 
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
@@ -9,6 +8,7 @@ import { toast } from 'react-toastify';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CustomerSignInRequest } from 'models';
 
+import { config } from 'config';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCustomerDetails, storeUserDetails } from 'toolkit/userSlice';

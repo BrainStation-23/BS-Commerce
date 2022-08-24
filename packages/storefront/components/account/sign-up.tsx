@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
+import { config } from 'config';
 import { userAPI } from 'APIs';
 import { storeUserToken } from 'toolkit/authSlice';
 import { storeCustomerDetails } from 'toolkit/userSlice';
@@ -35,7 +36,7 @@ const Signup = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoading(true);
-      const token = await fetch('http://localhost:3002/api/signin', {
+      const token = await fetch(config?.signIn, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
