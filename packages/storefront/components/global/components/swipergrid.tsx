@@ -1,14 +1,13 @@
-import "swiper/css";
-import "swiper/css/grid";
-import "swiper/css/navigation";
+import 'swiper/css';
+import 'swiper/css/grid';
+import 'swiper/css/navigation';
 
-import React, { FC } from "react";
-import { Swiper } from "swiper/react";
-import { Grid, Navigation } from "swiper";
-
-
+import React, { FC } from 'react';
+import { Swiper } from 'swiper/react';
+import { Grid, Navigation } from 'swiper';
+import { ReactNode } from 'react';
 interface Props {
-  children: any;
+  children: React.ReactNode;
   slidesPerViewmobile: number;
   slidesPerView768: number;
   slidesPerView980: number;
@@ -22,14 +21,14 @@ const SwiperGrid: FC<Props> = ({
   slidesPerView768,
   slidesPerView980,
   rows,
-  loop
+  loop,
 }) => {
   return (
     <Swiper
       slidesPerView={slidesPerViewmobile}
       loop={loop}
       grid={{
-        fill: "row",
+        fill: 'row',
         rows: rows,
       }}
       breakpoints={{
@@ -49,7 +48,7 @@ const SwiperGrid: FC<Props> = ({
       modules={[Grid, Navigation]}
       className="mySwiper"
     >
-      {children}
+      <>{children}</>
     </Swiper>
   );
 };

@@ -239,7 +239,9 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                         id="tag"
                         name="tag"
                         className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                        onClick={(event: any) => {
+                        onClick={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
                           setDropdownText(event.target.value);
                           handlePreviousAddress(
                             event.target.value,
