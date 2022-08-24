@@ -8,8 +8,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/
  */
 
 export interface UpdateCustomerRequestBody {
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     phone?: string;
     email?: string;
 }
@@ -20,7 +19,10 @@ export interface UpdateCustomerSuccessResponse extends SuccessResponse {
 }
 
 export const enum UpdateCustomerErrorMessages {
-    CAN_NOT_UPDATE_CUSTOMER_INFORMATION = 'CAN_NOT_UPDATE_CUSTOMER_INFORMATION'
+    CAN_NOT_UPDATE_CUSTOMER_INFORMATION = 'CAN_NOT_UPDATE_CUSTOMER_INFORMATION',
+    CAN_NOT_CHANGE_EXISTING_EMAIL = 'CAN_NOT_CHANGE_EXISTING_EMAIL',
+    CAN_NOT_CHANGE_EXISTING_PHONE = 'CAN_NOT_CHANGE_EXISTING_PHONE',
+    TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER = 'TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER'
 }
 
 export interface UpdateCustomerErrorResponse extends ErrorResponse {

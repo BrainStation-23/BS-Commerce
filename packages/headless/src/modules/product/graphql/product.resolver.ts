@@ -8,6 +8,7 @@ import {
   GetCustomerAllProductsQueryInput,
   GraphqlProductInput,
   ProductArrayResponse,
+  ProductArrayWithBrandAndManufacturersResponse,
   ProductArrayWithCountResponse,
   ProductCount,
   ProductDeletedResponse,
@@ -28,7 +29,7 @@ export class ProductResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query(() => ProductArrayResponse)
+  @Query(() => ProductArrayWithBrandAndManufacturersResponse)
   async getCustomerAllProducts(@Args('condition') condition: GetCustomerAllProductsQueryInput) {
     const res = await this.productService.getCustomerProductsByCondition(condition);
     return this.helper.serviceResponse.graphqlResponse(res);

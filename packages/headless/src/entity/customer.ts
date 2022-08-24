@@ -4,6 +4,7 @@ export class CustomerAddress {
     lastName: string;
     addressLine1: string;
     addressLine2?: string;
+    isDefault?: boolean;
     company?: string;
     state?: string;
     country?: string;
@@ -13,12 +14,9 @@ export class CustomerAddress {
 }
 export class Customer {
     id?: string;
-    firstName?: string;
-    lastName?: string;
+    name?: string;
     phone?: string;
     email?: string;
     password?: string;
-    otp: string;
-    otpVerified?: boolean;
     addresses?: CustomerAddress[];
 }

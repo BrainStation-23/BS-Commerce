@@ -10,7 +10,8 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 export interface CreateCustomerRequest {
     phone?: string;
     email?: string;
-    otp: string;
+    otp: number;
+    name: string;
     password: string;
 }
 
@@ -28,7 +29,9 @@ export interface CreateCustomerSuccessResponse extends SuccessResponse {
 export const enum CreateCustomerErrorMessages {
     CUSTOMER_PHONE_ALREADY_EXITS = 'CUSTOMER_PHONE_ALREADY_EXITS',
     CUSTOMER_EMAIL_ALREADY_EXITS = 'CUSTOMER_EMAIL_ALREADY_EXITS',
-    CAN_NOT_CREATE_CUSTOMER = 'CAN_NOT_CREATE_CUSTOMER'
+    TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER = 'TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER',
+    CAN_NOT_CREATE_CUSTOMER = 'CAN_NOT_CREATE_CUSTOMER',
+    OTP_EXPIRED = 'OTP_EXPIRED'
 }
 
 export interface CreateCustomerErrorResponse extends ErrorResponse {
