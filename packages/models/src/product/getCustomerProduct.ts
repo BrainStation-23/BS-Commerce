@@ -1,6 +1,6 @@
 
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { CustomerProduct } from "./customerProduct";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { CustomerProduct } from './customerProduct';
 
 /**
  * API Path: /customer/products/:productId
