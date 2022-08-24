@@ -91,11 +91,6 @@ export class ProductMetaDto implements ProductMeta {
     @IsOptional()
     @IsString()
     description?: string;
-
-    @ApiProperty({ required: true })
-    @IsNotEmpty()
-    @IsString()
-    friendlyPageName: string;
 }
 export class ProductPhotoDto implements ProductPhoto {
     @ApiProperty({ required: false })

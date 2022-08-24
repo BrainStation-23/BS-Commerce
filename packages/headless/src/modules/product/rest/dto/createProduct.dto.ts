@@ -1,7 +1,14 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { ProductCategoryDto, ProductDto, ProductInfoDto, ProductManufacturerDto, ProductMetaDto, ProductPhotoDto } from './product.dto';
+import {
+    ProductCategoryDto,
+    ProductDto,
+    ProductInfoDto,
+    ProductManufacturerDto,
+    ProductMetaDto,
+    ProductPhotoDto,
+} from './product.dto';
 import {
     CreateProductRequest,
     CreateProductErrorResponse,

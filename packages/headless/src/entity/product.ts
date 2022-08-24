@@ -29,11 +29,11 @@ export class Product {
     isFeatured?: boolean,
     publishDate?: Date
   };
-  meta: {
+  meta?: {
     keywords?: string[],
     title?: string,
     description?: string,
-    friendlyPageName: string
+    friendlyPageName?: string
   };
   tags?: string[];
   photos?: ProductPhoto[];

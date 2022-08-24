@@ -108,8 +108,20 @@ export class UpdateProductInfoInput implements UpdateProductInfo {
   isFeatured?: boolean;
 }
 
-@ObjectType('ProductMeta')
 @InputType('ProductMetaInput')
+export class GraphqlProductMetaInput implements ProductMeta {
+  @Field(() => [String], { nullable: true })
+  @IsArray()
+  keywords?: string[];
+
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+}
+
+@ObjectType('ProductMeta')
 export class GraphqlProductMeta implements ProductMeta {
   @Field(() => [String], { nullable: true })
   @IsArray()
@@ -121,8 +133,8 @@ export class GraphqlProductMeta implements ProductMeta {
   @Field({ nullable: true })
   description?: string;
 
-  @Field()
-  friendlyPageName: string;
+  @Field({ nullable: true })
+  friendlyPageName?: string;
 }
 
 @InputType()
@@ -229,8 +241,8 @@ export class GraphqlProductInput implements Product {
   @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(() => GraphqlProductMeta)
-  meta: GraphqlProductMeta;
+  @Field(() => GraphqlProductMetaInput, { nullable: true })
+  meta?: GraphqlProductMetaInput;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
