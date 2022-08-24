@@ -1,6 +1,5 @@
-import SingleCart from '@/components/sales/singleCart';
 import { ProductCategory } from 'models';
-import SingleCat from './singlecat';
+import SingleCategory from '@/components/products/viewCards/singleCategory';
 
 interface Props {
   categories: ProductCategory[];
@@ -21,14 +20,14 @@ const CaegoryCard: React.FC<Props> = ({ categories }) => {
                 className="bi bi-diagram-3-fill col-1"
                 style={{ fontSize: '25px' }}
               />
-              <div className="fs-5 col text-start px-3">Categories</div>
+              <div className="fs-5 col px-3 text-start">Categories</div>
             </div>
           </div>
           <div className="" id="categoryCardTab">
             <div className="card-body">
               <div className="w-50 m-auto py-3 " style={{ minWidth: '216px' }}>
                 {categories.map((category) => (
-                  <SingleCat key={category.id} category={category} />
+                  <SingleCategory key={category.id} category={category} />
                 ))}
                 {/* <table className="table-bordered table-striped table  ">
                   <thead>
