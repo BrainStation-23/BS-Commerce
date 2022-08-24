@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { OrderResponseData } from 'models';
 import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -204,20 +205,20 @@ export async function updateCustomerGraphql(
 export async function checkoutGraphql(
   data: any,
   router: NextRouter
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderByUserIdResponseData  | undefined> {
   return undefined;
 }
 
 export async function getOrderProductGraphql(
   token: string,
   OrderId: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 

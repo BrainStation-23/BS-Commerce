@@ -12,6 +12,7 @@ import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import { CartProductPhoto, CreateProductOrderDetails } from 'models';
+import { OrderResponseData } from 'models';
 
 interface FormData {
   cardNumber: string;
@@ -162,13 +163,15 @@ const PaymentDetails: NextComponentType = () => {
         data.paymentMethod === 'Credit card' ? data.cardNumber : '',
       paypalRedirectUrl: '',
     };
-    const res = userAPI.checkout(obj, router).then(async (response: any) => {
-      if (response?.data?.orderId) {
-        await userAPI.deleteAllCartItem();
-        dispatch(deleteCart());
-        dispatch(deleteCheckoutInfo());
-      }
-    });
+    const res = userAPI
+      .checkout(obj, router)
+      .then(async (response: OrderResponseData) => {
+        if (response?.data?.orderId) {
+          await userAPI.deleteAllCartItem();
+          dispatch(deleteCart());
+          dispatch(deleteCheckoutInfo());
+        }
+      });
   };
 
   const handlePreviousAddress = (detail: string, setFieldValue: Function) => {

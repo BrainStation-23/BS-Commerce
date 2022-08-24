@@ -1,3 +1,4 @@
+import { OrderResponseData } from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -99,14 +100,14 @@ export interface apiFunction {
   checkout: (
     data: any,
     router: NextRouter
-  ) => Promise<OrderByUserIdResponseData | undefined>;
+  ) => Promise<OrderResponseData | undefined>;
   getOrderProducts: (
     token: string
   ) => Promise<OrderByUserIdResponseData | undefined>;
   getOrderProduct: (
     token: string,
     OrderId: string
-  ) => Promise<OrderByUserIdResponseData | undefined>;
+  ) => Promise<OrderResponseData | undefined>;
   addToWishList: (
     data: addToWishlistRequest
   ) => Promise<AddToWishlistResponse | undefined>;

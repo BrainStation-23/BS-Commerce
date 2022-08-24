@@ -58,6 +58,7 @@ import {
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
+import { OrderResponseData } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -179,7 +180,7 @@ export async function getCategoryListRest(): Promise<
 export async function checkoutRest(
   data: CreateOrderRequest,
   router: NextRouter
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
     toast.success('Order created successfully!', {
@@ -220,14 +221,14 @@ export async function addToWishlistRest(
 
 export async function getOrderProductsRest(
   token: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderByUserIdResponseData  | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res?.data;
+    return res?.data?.data;
   } catch (error: any) {
     return [] as any;
   }
@@ -236,7 +237,7 @@ export async function getOrderProductsRest(
 export async function getOrderProductRest(
   token: string,
   OrderId: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
