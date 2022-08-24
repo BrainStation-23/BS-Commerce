@@ -11,10 +11,11 @@ const CategoryCheckbox: FC<{
 }> = ({ category, categoryData, removeCategory, addCategory, isSelected }) => {
   const [isChecked, setChecked] = useState(isSelected);
 
-  const handleChange = (catID: any) => {
-    isChecked === false ? setChecked(true) : setChecked(false);
+  const handleChange = (catID: string) => {
     isChecked === false ? addCategory(catID) : removeCategory(catID);
+    setChecked(!isChecked);
   };
+  useEffect(() => {}, [isChecked]);
 
   useEffect(() => {
     categoryData.forEach((cat: CategoryInterface) => {
@@ -29,9 +30,9 @@ const CategoryCheckbox: FC<{
         className="form-check-input"
         type="checkbox"
         value=""
-        defaultChecked={isSelected}
+        defaultChecked={isChecked}
         id={category.id}
-        onChange={() => {
+        onClick={() => {
           handleChange(category.id);
         }}
       />
