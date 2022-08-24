@@ -35,7 +35,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  IOrderResponseData,
+  OrderByUserIdResponseData,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -204,20 +204,20 @@ export async function updateCustomerGraphql(
 export async function checkoutGraphql(
   data: any,
   router: NextRouter
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   return undefined;
 }
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   return undefined;
 }
 
 export async function getOrderProductGraphql(
   token: string,
   OrderId: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   return undefined;
 }
 

@@ -28,10 +28,9 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                 <div className="relative overflow-hidden text-white transition-all duration-700">
                   <div className="relative inset-0 z-0 bg-cover bg-center">
                     <Picture
-                      product={product}
                       height={212}
                       width={250}
-                      src={product?.photos![0]?.url}
+                      src={product?.photos![0]?.url!}
                       alt={product?.info?.name}
                     />
 

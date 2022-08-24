@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { IOrderResponseData } from 'models';
+import { OrderByUserIdResponseData } from 'models';
 import { useRouter } from 'next/router';
 import Detail from '@/components/order/singleOrder/detail';
 import withAuth from '@/components/auth/withAuth';

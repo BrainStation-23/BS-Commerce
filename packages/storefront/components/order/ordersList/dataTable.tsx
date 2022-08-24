@@ -1,10 +1,10 @@
 import React from 'react';
 import ShowData from './showData';
 import Link from 'next/link';
-import { IOrderResponseData } from 'models';
+import { OrderByUserIdResponseData } from 'models';
 
 interface Props {
-  storedOrderProducts: IOrderResponseData[];
+  storedOrderProducts: OrderByUserIdResponseData[];
 }
 
 const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {

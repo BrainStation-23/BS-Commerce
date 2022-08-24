@@ -110,12 +110,12 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
   );
 
   const setTagsOptions = () => {
-    const ntags = new Set();
+    const ntags = new Set<string>();
     customerAddresses?.map((addressn) => {
       ntags.add(addressn?.tag);
     });
     const nArray: Array<string> = [];
-    ntags.forEach((tag: any) => nArray.push(tag));
+    ntags.forEach((tag) => nArray.push(tag));
     nArray.length === tags.length ? '' : setTags(nArray);
   };
   const dispatch = useAppDispatch();

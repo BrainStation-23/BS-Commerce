@@ -11,6 +11,7 @@ import { deleteCart } from 'toolkit/cartSlice';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import { CartProductPhoto, CreateProductOrderDetails } from 'models';
 
 interface FormData {
   cardNumber: string;
@@ -43,15 +44,22 @@ const PaymentDetails: NextComponentType = () => {
     (state) => state.persistedReducer.auth.access_token
   );
 
-  let usableCart: any = [];
+  let usableCart: CreateProductOrderDetails[] = [];
   cartData.map((cartItem) => {
-    const cart = {
+    const cart: {
+      productId: string;
+      name: string;
+      price: number;
+      quantity: number;
+      sku: string;
+      photos: CartProductPhoto[];
+    } = {
       productId: cartItem?.productId,
-      name: cartItem?.product?.info?.name,
-      price: cartItem?.product?.info?.price,
+      name: cartItem?.product?.info?.name!,
+      price: cartItem?.product?.info?.price!,
       quantity: cartItem?.quantity,
-      sku: cartItem?.product?.info?.sku,
-      photos: cartItem?.product?.photos,
+      sku: cartItem?.product?.info?.sku!,
+      photos: cartItem?.product?.photos!,
     };
     usableCart.push(cart);
   });
@@ -90,12 +98,12 @@ const PaymentDetails: NextComponentType = () => {
   );
 
   const setTagsOptions = () => {
-    const ntags = new Set();
+    const ntags = new Set<string>();
     customerAddresses?.map((addressn) => {
       ntags.add(addressn?.tag);
     });
     const nArray: Array<string> = [];
-    ntags.forEach((tag: any) => nArray.push(tag));
+    ntags.forEach((tag) => nArray.push(tag));
     nArray.length === tags.length ? '' : setTags(nArray);
   };
 
@@ -377,7 +385,7 @@ const PaymentDetails: NextComponentType = () => {
                                 id="country"
                                 name="country"
                                 className="required peer block w-full appearance-none rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                                onClick={(event: any) => {
+                                onClick={(event) => {
                                   setDropdownText(event.target.value);
                                   handlePreviousAddress(
                                     event.target.value,

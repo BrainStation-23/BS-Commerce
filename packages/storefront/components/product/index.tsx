@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { Product, WishlistItem } from 'models';
+import { Product, ResponseItem, WishlistItem } from 'models';
 import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { setModalState, setLoginModalState } from 'toolkit/modalSlice';
 import {
@@ -197,7 +197,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }, [router.asPath]);
 
   useEffect(() => {
-    let itemAmountInCart: any = cartData.find((item) => {
+    let itemAmountInCart: ResponseItem | undefined = cartData.find((item) => {
       if (item.productId === product.id) {
         return item;
       }

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';
-import { IOrderResponseData } from 'models';
+import { OrderByUserIdResponseData } from 'models';
 
 const OrderMain: FC = () => {
   // const storedOrderProducts = orderProducts?.data?.orderInfo;

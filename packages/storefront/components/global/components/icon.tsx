@@ -159,7 +159,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={(event: any) => {
+            onClick={(event) => {
               handleAddToCart();
               event.preventDefault();
             }}

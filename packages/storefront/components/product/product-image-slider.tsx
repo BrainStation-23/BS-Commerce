@@ -3,7 +3,7 @@ import { Navigation, Thumbs } from 'swiper';
 import { useState, FC } from 'react';
 import Image from 'next/image';
 
-import { Product } from 'models';
+import { Product, ProductPhoto } from 'models';
 interface SingleProduct {
   product: Product;
 }
@@ -26,11 +26,11 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
         thumbs={{ swiper: activeThumb }}
         className="product-images-slider"
       >
-        {product?.photos?.map((item: any, index: number) => (
+        {product?.photos?.map((item: ProductPhoto, index: number) => (
           <SwiperSlide key={index}>
             <div className="mb-5">
               <Image
-                src={item.url}
+                src={item.url!}
                 alt="product images"
                 quality={100}
                 width={600}
@@ -68,11 +68,11 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
           modules={[Navigation, Thumbs]}
           className="product-images-slider-thumbs"
         >
-          {product?.photos?.map((item: any, index: number) => (
+          {product?.photos?.map((item: ProductPhoto, index: number) => (
             <SwiperSlide key={index}>
               <div className="">
                 <Image
-                  src={item.url}
+                  src={item.url!}
                   alt="product images"
                   width={600}
                   height={600}

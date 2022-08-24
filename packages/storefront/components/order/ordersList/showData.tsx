@@ -1,8 +1,8 @@
 import moment from 'moment';
 import Link from 'next/link';
-import { IOrderResponseData } from 'models';
+import { OrderByUserIdResponseData } from 'models';
 interface Props {
-  data: IOrderResponseData;
+  data: OrderByUserIdResponseData;
 }
 
 const ShowData: React.FC<Props> = ({ data }: Props) => {

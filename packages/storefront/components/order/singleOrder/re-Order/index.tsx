@@ -19,12 +19,12 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const [cartToken, setCartToken] = useState(false);
   let { products } = singleOrder;
   const allProducts = useAppSelector(
-    (state) => state.persistedReducer.product.featuredProducts
+    (state) => state.persistedReducer.product.publicProducts
   );
-  const orderedProductId = products.map((prod) => {
+  const orderedProductId = products.map((prod: any) => {
     return prod.productId;
   });
-  const allProductsId = allProducts.map((prod) => {
+  const allProductsId = allProducts?.map((prod) => {
     return prod.id;
   });
 
@@ -33,14 +33,16 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     setUnavailableProd([]);
   };
   const handleReorder = () => {
-    let matched = orderedProductId.filter((id) => allProductsId.includes(id));
+    let matched = orderedProductId.filter((id: string) =>
+      allProductsId.includes(id)
+    );
     let unmatched = orderedProductId.filter(
-      (id) => !allProductsId.includes(id)
+      (id: string) => !allProductsId.includes(id)
     );
 
     if (unmatched.length > 0) {
       products.forEach((product: IProductOrderData) => {
-        unmatched.forEach((id) => {
+        unmatched.forEach((id: string) => {
           if (product.productId == id) {
             unavailableProd.push(product);
           }
@@ -48,7 +50,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       });
       let newProdData: IProductOrderData[] = [];
 
-      matched.forEach((id) => {
+      matched.forEach((id: string) => {
         const np = products.find(
           (product: IProductOrderData) => product.productId === id
         );

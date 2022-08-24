@@ -18,8 +18,6 @@ import {
   getCategoryListSuccessResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
-  IOrderCreateData,
-  IOrderResponseData,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -53,6 +51,8 @@ import {
   VerifyOtpRequest,
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
+  OrderByUserIdResponseData,
+  CreateOrderRequest,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -177,9 +177,9 @@ export async function getCategoryListRest(): Promise<
   }
 }
 export async function checkoutRest(
-  data: any,
+  data: CreateOrderRequest,
   router: NextRouter
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
     toast.success('Order created successfully!', {
@@ -220,7 +220,7 @@ export async function addToWishlistRest(
 
 export async function getOrderProductsRest(
   token: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {
@@ -236,7 +236,7 @@ export async function getOrderProductsRest(
 export async function getOrderProductRest(
   token: string,
   OrderId: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
