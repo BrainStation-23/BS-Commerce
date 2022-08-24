@@ -1,32 +1,73 @@
-import { 
-  ChangeStatusEntity, 
-  GetAllOrderQueryEntity, 
-  OrderEntity, 
-  OrderIncompleteStatEntity, 
-  OrderSortQuery, 
-  OrderStatEntity, 
-  OrderStatusEnum, 
-  ShippingStatusEnum, 
-  StatusTypeDto 
+import {
+  CartItem, 
+  Cart,
+  ReOrderQuery,
+  ChangeStatusEntity,
+  GetAllOrderQueryEntity,
+  OrderEntity,
+  OrderIncompleteStatEntity,
+  OrderSortQuery,
+  OrderStatEntity,
+  OrderStatusEnum,
+  ProductOrder,
+  ShippingStatusEnum,
+  StatusTypeDto,
+  CartResponse,
 } from 'src/entity/order';
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { CreateOrderRequest, CreateProductOrderDetails, IProductOrderData } from 'models';
+import {
+  CreateOrderRequest,
+  CreateProductOrderDetails
+} from 'models';
+import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {
+  async populateItemsInCart(userId: string, products: CartItem[]) : Promise<CartResponse | null> {
+    let addItems;
+    try{
+      addItems = await CartModel.findOneAndUpdate({ userId },{ $set: { items: products } },{ new: true }).lean();
+    }catch(error){
+      console.log(error);
+      return null;
+    }
+
+    return addItems;
+  }
+
+  async getCart(userId: string): Promise<Cart | null> {
+    return await CartModel.findOne({userId }).select('items -_id').lean();
+  }
   async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async addPhotoDetails(products: CreateProductOrderDetails[]): Promise<IProductOrderData[]>{
+  async getAvailableProducts(productIds: string[]): Promise<any>{
+    return await ProductModel.find({"info.published": {"$eq": true, "$exists": true}}).select('id -_id');
+  }
+
+  async clearCart(userId: string): Promise<CartResponse | null> {
+    return CartModel.findOneAndUpdate(
+      { userId },
+      { $set: { items: [] } },
+      { new: true },
+    ).select('-_id')
+      .lean()
+      .exec();
+  }
+
+  async addPhotoDetails(
+    products: CreateProductOrderDetails[],
+  ): Promise<ProductOrder[]> {
     let newProductList = [];
     newProductList = await Promise.all(products.map( async (product) => {
         const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
         return {...product, photos: photoDetails.photos};
       })
     );
-      return newProductList;
+
+    return newProductList;
   }
 
   async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {
@@ -43,8 +84,8 @@ export class OrderDatabase implements IOrderDatabase {
     return await OrderModel.find({ userId }).sort(sort);
   }
 
-  async getOrderById(orderId: string): Promise<OrderEntity>{
-    return await OrderModel.findOne({ orderId }).lean();
+  async findOrder(query: Record<string, any>): Promise<OrderEntity>{
+    return await OrderModel.findOne(query).lean();
   }
   
   async getOrderStatistics(): Promise<OrderStatEntity>{
