@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { config } from "config";
 
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
@@ -46,7 +47,7 @@ const Signin: NextComponentType = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const token = await fetch('http://localhost:3002/api/signin', {
+      const token = await fetch(config?.signIn, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
