@@ -1,17 +1,18 @@
 import { ProductCategory } from 'models';
+import SingleCategory from '@/components/products/viewCards/singleCategory';
 
 interface Props {
   categories: ProductCategory[];
 }
 
-const CaegoryCard: React.FC<Props> = ({ categories }: Props) => {
+const CaegoryCard: React.FC<Props> = ({ categories }) => {
   return (
     <>
       {categories?.length > 0 ? (
         <div
           className="card card-secondary card-outline my-4"
-          data-card-name="meta"
-          id="meta"
+          data-card-name="categoryCard"
+          id="categoryCard"
         >
           <div className="card-header with-border d-flex justify-content-between align-items-center">
             <div className="card-title row align-items-center  ps-2 pt-2">
@@ -22,10 +23,13 @@ const CaegoryCard: React.FC<Props> = ({ categories }: Props) => {
               <div className="fs-5 col px-3 text-start">Categories</div>
             </div>
           </div>
-          <div className="" id="metaTab">
+          <div className="" id="categoryCardTab">
             <div className="card-body">
-              <div className="py-3">
-                <table className="table-bordered table-striped table  ">
+              <div className="w-50 m-auto py-3 " style={{ minWidth: '216px' }}>
+                {categories.map((category) => (
+                  <SingleCategory key={category.id} category={category} />
+                ))}
+                {/* <table className="table-bordered table-striped table  ">
                   <thead>
                     <tr>
                       <th className="py-3 text-center">Category</th>
@@ -50,7 +54,7 @@ const CaegoryCard: React.FC<Props> = ({ categories }: Props) => {
                       );
                     })}
                   </tbody>
-                </table>
+                </table> */}
               </div>
             </div>
           </div>

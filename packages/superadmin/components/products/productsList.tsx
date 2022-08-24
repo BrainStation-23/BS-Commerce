@@ -52,12 +52,14 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
       path: 'url',
       content: (data: any, key: any, index: any) => (
         <td className="text-center align-middle">
-          <Image
-            src={`${data?.photos[0][key]}`}
-            height={75}
-            width={75}
-            alt="..."
-          />
+          {data?.photos[0][key] && (
+            <Image
+              src={`${data?.photos[0][key]}`}
+              height={75}
+              width={75}
+              alt="..."
+            />
+          )}
         </td>
       ),
     },

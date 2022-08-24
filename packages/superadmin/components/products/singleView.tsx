@@ -18,7 +18,7 @@ const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
           </div>
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">
-          <div className=" row">
+          <div className="">
             {Array.isArray(value) ? (
               <>
                 {value[0] ? value[0] : '---'}
@@ -26,8 +26,10 @@ const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
               </>
             ) : typeof value === 'string' && value.length <= 0 ? (
               '- - -'
-            ) : (
+            ) : value ? (
               value
+            ) : (
+              '---'
             )}
           </div>
         </div>
