@@ -63,38 +63,21 @@ const Signup = () => {
     //console.log(data);
     try {
       setLoading(true);
-      await userAPI.signUp(data).then((response: any) => {
-        if (response?.code !== 201) {
-          if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
-            toast.warning('User with this email already exists', {
-              containerId: 'bottom-right',
-            });
-            setLoading(false);
-          } else if (
-            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
-          ) {
-            toast.warning('User with this phone number already exists', {
-              containerId: 'bottom-right',
-            });
-            setLoading(false);
+      const res = await userAPI.signUp(data);
+      setLoading(true);
+      const loginData = data.email
+        ? {
+            email: data.email,
+            password: data.password,
           }
-        } else {
-          setLoading(true);
-          const loginData = data.email
-            ? {
-                email: data.email,
-                password: data.password,
-              }
-            : {
-                phone: data.phone,
-                password: data.password,
-              };
-          handleSignin(loginData);
-          setLoading(false);
-          toast.success('Account created successfully!', {
-            containerId: 'bottom-right',
-          });
-        }
+        : {
+            phone: data.phone,
+            password: data.password,
+          };
+      handleSignin(loginData);
+      setLoading(false);
+      toast.success('Account created successfully!', {
+        containerId: 'bottom-right',
       });
     } catch (error) {
       setLoading(false);
@@ -106,29 +89,24 @@ const Signup = () => {
 
   async function handleOTPRequest(data: string, setFieldValue: Function) {
     try {
-      const res = await userAPI.sendOTP(data).then((response: any) => {
-        if (response?.code !== 200) {
-          if (response.response.data.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
-            toast.warning('User with this email already exists', {
-              containerId: 'bottom-right',
-            });
-          } else if (
-            response.response?.data?.error === 'CUSTOMER_PHONE_ALREADY_EXITS'
-          ) {
-            toast.warning('User with this phone number already exists', {
-              containerId: 'bottom-right',
-            });
-          }
-        } else {
-          const responseMessage = response?.data?.message!.split(' ');
-          const otpValue = responseMessage![responseMessage?.length! - 1];
-          setFieldValue('otp', otpValue);
-          setOtp(otpValue);
-          setToggle(!toggle);
-        }
-      });
+      const res = await userAPI.sendOTP(data);
+      if (res === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+        toast.warning('User with this email already exists', {
+          containerId: 'bottom-right',
+        });
+      } else if (res === 'CUSTOMER_PHONE_ALREADY_EXITS') {
+        toast.warning('User with this phone number already exists', {
+          containerId: 'bottom-right',
+        });
+      } else {
+        const responseMessage = res?.data?.data?.message!.split(' ');
+        const otpValue = responseMessage![responseMessage?.length! - 1];
+        setFieldValue('otp', otpValue);
+        setOtp(otpValue);
+        setToggle(!toggle);
+      }
     } catch (error) {
-      toast.error('Failed to send OTP. Try again.', {
+      toast.error('Failed to sign-up.', {
         containerId: 'bottom-right',
       });
     }

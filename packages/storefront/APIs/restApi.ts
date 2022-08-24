@@ -59,6 +59,7 @@ import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
 import { OrderResponseData } from 'models';
+import { SendOtpResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -101,7 +102,7 @@ export async function signinRest(
 
 export async function sendOTPRest(
   data: string
-): Promise<SendOtpSuccessResponse | undefined> {
+): Promise<SendOtpResponse | undefined> {
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   const isEmail = regex.test(data);
   const reqData = isEmail ? { email: data } : { phone: data };
@@ -113,9 +114,9 @@ export async function sendOTPRest(
     toast.success(toastMessage, {
       containerId: 'bottom-right',
     });
-    return res?.data;
-  } catch (error: any) {
-    return error;
+    return res;
+  } catch (error: any) {    
+    return error.response.data.error;
   }
 }
 
