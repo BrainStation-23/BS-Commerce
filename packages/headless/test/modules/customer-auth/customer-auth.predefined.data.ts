@@ -26,18 +26,36 @@ export const customer: CustomerDto = {
 export const createCustomerRequestWithEmail: Partial<CreateCustomerDto> = {
     email: 'james@gmail.com',
     name: 'James Ben',
-    password: 'customer@123'
+    password: 'customer@123',
 };
+
+export const invalidCreateCustomerRequestWithoutName: Partial<CreateCustomerDto> = {
+    email: 'james@gmail.com',
+    password: 'customer@123'
+}
+
+export const invalidCreateCustomerRequestWithoutOTP: Partial<CreateCustomerDto> = {
+    email: 'james@gmail.com',
+    password: 'customer@123',
+    name: 'James Ben',
+}
+
+
+export const invalidEmailForCreateCustomerRequest: Partial<CreateCustomerDto> = {
+    name: 'james Ben',
+    email: 'james@gmm',
+    password: 'customer@123'
+}
 
 export const invalidCreateCustomerRequestWithoutPassword: Partial<CreateCustomerDto> = {
     email: 'james@gmail.com',
-    name: 'James Ben',
+    name: 'James Ben'
 }
 
 export const invalidCreateCustomerRequestWithLessThanSixCharactersPassword: Partial<CreateCustomerDto> = {
     email: 'james@gmail.com',
     name: 'James Ben',
-    password: 'cus',
+    password: 'cus'
 }
 
 export const validCustomerSignInDataWithEmail: CustomerSignInDto = {
@@ -50,11 +68,10 @@ export const invalidCustomerSignInDataWithEmail: CustomerSignInDto = {
     password: 'customer@123'
 };
 
-export const invalidCustomerSignInDataWithPhone: CustomerSignInDto = {
-    phone: '01770964627',
-    password: 'customer@123'
-};
-
-export const invalidCustomerSignInDataWithoutPhoneAndEmail = {
+export const invalidCustomerSignInDataWithoutEmail = {
     password: 'customer@123'
 }
+
+export const invalidCustomerSignInDataWithoutPassword = {
+    email: 'is6526@gmail.com'
+};

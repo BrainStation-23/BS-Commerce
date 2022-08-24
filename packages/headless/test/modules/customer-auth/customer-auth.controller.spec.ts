@@ -1,14 +1,24 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, removeTestCollection, TestTimeout } from '../../test-utility';
+import { connectTestDatabase, TestTimeout } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import { CustomerAuthController } from 'src/modules/customer-auth/rest';
 import {
+    createCustomerRequestWithEmail,
     existingCustomerSendOtpRequest,
+    invalidCreateCustomerRequestWithLessThanSixCharactersPassword,
+    invalidCreateCustomerRequestWithoutName,
+    invalidCreateCustomerRequestWithoutOTP,
+    invalidCreateCustomerRequestWithoutPassword,
+    invalidCustomerSignInDataWithEmail,
+    invalidCustomerSignInDataWithoutEmail,
+    invalidCustomerSignInDataWithoutPassword,
+    invalidEmailForCreateCustomerRequest,
     invalidSendOtpRequestWithEmail,
     sendOtpRequestWithEmail,
+    validCustomerSignInDataWithEmail,
 } from './customer-auth.predefined.data';
 
 
@@ -32,7 +42,6 @@ describe('Initializing... Customer Auth controller testing', () => {
     afterAll(async () => {
         await Promise.all([
             app.close(),
-            // removeTestCollection('Otps')
         ])
     })
 
@@ -46,7 +55,7 @@ describe('Initializing... Customer Auth controller testing', () => {
         it('should error message with 400 bad request', async () => {
             return await request(app.getHttpServer())
                 .post('/customer/auth/register/send-otp')
-                .send(invalidSendOtpRequestWithEmail)
+                .send(existingCustomerSendOtpRequest)
                 .expect((res) => {
                     expect(res.statusCode).toBe(400);
                     expect(res.body.error).toEqual('CUSTOMER_EMAIL_ALREADY_EXITS');
@@ -55,11 +64,11 @@ describe('Initializing... Customer Auth controller testing', () => {
         }, TestTimeout);
     });
 
-    describe('POST /customer/auth/register/send-otp [passing valid req body]', () => {
+    describe('POST /customer/auth/register/send-otp [passing invalid email]', () => {
         it('should error message with 422 bad request(Unprocessable Entity)', async () => {
             return await request(app.getHttpServer())
                 .post('/customer/auth/register/send-otp')
-                .send(existingCustomerSendOtpRequest)
+                .send(invalidSendOtpRequestWithEmail)
                 .expect((res) => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ email: ['email must be an email'] });
@@ -79,127 +88,131 @@ describe('Initializing... Customer Auth controller testing', () => {
                     })
                     expect(res.body.error).toBe(undefined);
                 });
-            otp = result.body.data.message.split(" ").pop();
+            otp = Number(result.body.data.message.split(' ').pop());
         }, TestTimeout);
     });
 
-    // describe('POST /auth/signup [passing data without first name]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestWithoutFirstName)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ firstName: ['firstName must be a string', 'firstName should not be empty'] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing data without name]', () => {
+        it('should error message with 422 bad request(Unprocessable Entity)', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send({ ...invalidCreateCustomerRequestWithoutName, otp })
+                .expect((res) => {
+                    expect(res.statusCode).toBe(422);
+                    expect(res.body.errors).toEqual({ name: ['name must be a string', 'name should not be empty'] });
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signup [passing data without last name]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestWithoutLastName)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ lastName: ["lastName must be a string", "lastName should not be empty"] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing data without password]', () => {
+        it('should error message with 422 bad request(Unprocessable Entity)', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send({ ...invalidCreateCustomerRequestWithoutPassword, otp })
+                .expect((res) => {
+                    expect(res.statusCode).toBe(422);
+                    expect(res.body.errors).toEqual({ password: ['Password is too short. Minimal length is 6 characters', 'password must be a string', 'password should not be empty'] });
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signup [passing data without email]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestWithoutEmail)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ email: ["email must be an email", "email must be a string", "email should not be empty"] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing data without otp]', () => {
+        it('should error message with 422 bad request(Unprocessable Entity)', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send(invalidCreateCustomerRequestWithoutOTP)
+                .expect((res) => {
+                    expect(res.statusCode).toBe(422);
+                    expect(res.body.errors).toEqual({ otp: ['otp must be a number conforming to the specified constraints', 'otp should not be empty'] });
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signup [passing invalid email]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestInvalidEmail)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ email: ["email must be an email"] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing invalid email data]', () => {
+        it('should error message with 422 bad request(Unprocessable Entity)', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send({ ...invalidEmailForCreateCustomerRequest, otp })
+                .expect((res) => {
+                    expect(res.statusCode).toBe(422);
+                    expect(res.body.errors).toEqual({ email: ['email must be an email'] });
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signup [passing data without password]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestWithoutPassword)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ password: ["Password is too short. Minimal length is 6 characters", "password must be a string", "password should not be empty"] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing data with password but password length less than 6 characters]', () => {
+        it('should error message with 422 bad request(Unprocessable Entity)', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send({ ...invalidCreateCustomerRequestWithLessThanSixCharactersPassword, otp })
+                .expect((res) => {
+                    expect(res.statusCode).toBe(422);
+                    expect(res.body.errors).toEqual({ password: ['Password is too short. Minimal length is 6 characters'] });
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signup [passing data with password but password length less than 6 characters]', () => {
-    //     it('should error message with 422 bad request(Unprocessable Entity)', async () => {
-    //         return await request(app.getHttpServer())
-    //             .post('/auth/signup')
-    //             .send(invalidCreateAdminRequestWithLessThanSixCharactersPassword)
-    //             .expect((res) => {
-    //                 expect(res.statusCode).toBe(422);
-    //                 expect(res.body.errors).toEqual({ password: ["Password is too short. Minimal length is 6 characters"] });
-    //             });
-    //     }, TestTimeout);
-    // });
+    describe('POST /customer/auth/register [passing valid data]', () => {
+        it('should return 201 and and return response data', async () => {
+            return await request(app.getHttpServer())
+                .post('/customer/auth/register')
+                .send({ ...createCustomerRequestWithEmail, otp })
+                .expect((res) => {
+                    expect(res.statusCode).toBe(201)
+                    expect(res.body.data).toMatchObject({
+                        message: expect.any(String),
+                    })
+                    expect(res.body.error).toBe(undefined);
+                });
+        }, TestTimeout);
+    });
 
-    // describe('POST /auth/signin', () => {
-    //     let jwtToken: string
+    describe('POST /customer/auth/sign-in', () => {
+        let jwtToken: string
 
-    //     describe('authentication', () => {
-    //         it('authenticates user with valid credentials and provides a jwt token', async () => {
-    //             const response = await request(app.getHttpServer())
-    //                 .post('/auth/signin')
-    //                 .send(signInData)
-    //                 .expect(200)
+        describe('Customer Authentication', () => {
+            it('authenticates customer with valid credentials and provides a jwt token', async () => {
+                const response = await request(app.getHttpServer())
+                    .post('/customer/auth/sign-in')
+                    .send(validCustomerSignInDataWithEmail)
+                    .expect(200)
 
-    //             jwtToken = response.body.data.token;
-    //             // jwt regex
-    //             expect(jwtToken).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
-    //         }, TestTimeout)
+                jwtToken = response.body.data.token;
+                // jwt regex
+                expect(jwtToken).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
+            }, TestTimeout)
 
-    //         it('fails to authenticate user with an incorrect password/username', async () => {
-    //             return await request(app.getHttpServer())
-    //                 .post('/auth/signin')
-    //                 .send(invalidSignInData)
-    //                 .expect((res) => {
-    //                     expect(res.statusCode).toBe(400);
-    //                     expect(res.body.error).toEqual('INVALID_CREDENTIALS');
-    //                     expect(res.body.errors).toBe(null);
-    //                 });
-    //         }, TestTimeout)
+            it('fails to authenticate customer with an incorrect password/email', async () => {
+                return await request(app.getHttpServer())
+                    .post('/customer/auth/sign-in')
+                    .send(invalidCustomerSignInDataWithEmail)
+                    .expect((res) => {
+                        expect(res.statusCode).toBe(400);
+                        expect(res.body.error).toEqual('INVALID_CREDENTIALS');
+                        expect(res.body.errors).toBe(null);
+                    });
+            }, TestTimeout)
 
-    //         it('fails to authenticate user without passing username', async () => {
-    //             return await request(app.getHttpServer())
-    //                 .post('/auth/signin')
-    //                 .send(invalidSignInAdminRequestWithoutUsername)
-    //                 .expect((res) => {
-    //                     expect(res.statusCode).toBe(422);
-    //                     expect(res.body.errors).toEqual({ username: ["username must be a string", "username should not be empty"] });
-    //                 });
-    //         }, TestTimeout)
+            it('fails to authenticate customer without passing email', async () => {
+                return await request(app.getHttpServer())
+                    .post('/customer/auth/sign-in')
+                    .send(invalidCustomerSignInDataWithoutEmail)
+                    .expect((res) => {
+                        expect(res.statusCode).toBe(400);
+                        expect(res.body.error).toEqual('INVALID_CREDENTIALS');
+                        expect(res.body.errors).toBe(null);
+                    });
+            }, TestTimeout)
 
-    //         it('fails to authenticate user without passing password', async () => {
-    //             return await request(app.getHttpServer())
-    //                 .post('/auth/signin')
-    //                 .send(invalidSignInAdminRequestWithoutPassword)
-    //                 .expect((res) => {
-    //                     expect(res.statusCode).toBe(422);
-    //                     expect(res.body.errors).toEqual({ password: ["INVALID_CREDENTIALS", "password must be a string"] });
-    //                 });
-    //         }, TestTimeout)
-    //     })
-    // })
+            it('fails to authenticate customer without passing password', async () => {
+                return await request(app.getHttpServer())
+                    .post('/customer/auth/sign-in')
+                    .send(invalidCustomerSignInDataWithoutPassword)
+                    .expect((res) => {
+                        expect(res.statusCode).toBe(422);
+                        expect(res.body.errors).toEqual({ password: ['Password is too short. Minimal length is 6 characters', 'password must be a string', 'password should not be empty'] });
+                    });
+            }, TestTimeout)
+        })
+    })
 });
