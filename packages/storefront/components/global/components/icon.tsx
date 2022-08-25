@@ -253,7 +253,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as Product));
+                dispatch(storeProductsToCompare(product as CustomerProduct));
                 event.preventDefault();
               }}
             >
