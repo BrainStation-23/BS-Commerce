@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper';
+import SwiperClass from "swiper/types/swiper-class";
+
 import { useState, FC } from 'react';
 import Image from 'next/image';
 
@@ -13,7 +15,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
 }: SingleProduct) => {
   var isAvailable = true;
 
-  const [activeThumb, setActiveThumb] = useState<any>(null);
+  const [activeThumb, setActiveThumb] = useState<SwiperClass>();
 
   return (
     <>
