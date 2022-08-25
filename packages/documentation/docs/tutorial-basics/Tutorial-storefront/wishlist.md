@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 7
 ---
 
 # How to Add Product to the Wishlist
@@ -43,19 +43,18 @@ You can visit the Wishlist page by
 
 ![Docs Version Dropdown](../img/wishlist/wishlist_icon.png)
 
-   or
+or
 
 2. Click **Wishlist** from the dropdown menu. Hover over your name or email id to see the profile dropdown menu and select wishlist from there.
-   
-![Docs Version Dropdown](../img/wishlist/hover_wishlist.png)
 
+![Docs Version Dropdown](../img/wishlist/hover_wishlist.png)
 
 ## Remove product from Wishlist
 
-To remove a product from the wishlist simply hover on the product and find the **Wishlist** icon. If the product is already added to wishlist, this will now say *Remove from wishlist*. Click on the icon to remove the product from the wishlist.
+To remove a product from the wishlist simply hover on the product and find the **Wishlist** icon. If the product is already added to wishlist, this will now say _Remove from wishlist_. Click on the icon to remove the product from the wishlist.
 
 ![Docs Version Dropdown](../img/wishlist/remove_icon.png)
 
-You can also remove a product from the wishlist from it's details page. After you add a product to wishlist from the product details page, you will find the *Remove from wishlist* button. Click the button to remove the product from your wishlist.
+You can also remove a product from the wishlist from it's details page. After you add a product to wishlist from the product details page, you will find the _Remove from wishlist_ button. Click the button to remove the product from your wishlist.
 
 ![Docs Version Dropdown](../img/wishlist/remove_wishlist.png)
