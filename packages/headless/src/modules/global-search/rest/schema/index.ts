@@ -1,4 +1,4 @@
-export interface IProductSchema {
+export class IProductSearchSchema {
   infoProductId: string;
   infoName: string;
   infoShortDescription: string;
@@ -15,7 +15,7 @@ export interface IProductSchema {
   categories: any;
 }
 
-export const productSchema = {
+export const productSearchSchema = {
   infoProductId: {
     type: 'text',
   },

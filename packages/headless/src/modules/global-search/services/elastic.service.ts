@@ -2,87 +2,23 @@ import { Injectable } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { searchConfig } from "config/search";
 import { ProductSrarchDatabase } from "src/database/mongodb/search";
-import { productSchema } from "../rest/schema";
+import { Product } from "src/entity/product";
+import { productSearchSchema } from "../rest/schema";
 
 @Injectable()
 export class ElasticService {
   constructor(private readonly esService: ElasticsearchService, private readonly productSearchDB: ProductSrarchDatabase) {}
+
+
   public async createIndex() {
-    const index = searchConfig.index
-    await this.esService.indices.delete({ index });
-    const checkIndex = await this.esService.indices.create({ index });
-    // if (!checkIndex) {
-    //   this.esService.indices.create(
-    //     {
-    //       index,
-    //       // body: {
-    //       //   mappings: {
-    //       //     properties: productSchema
-    //           // properties: {
-    //           //   email: {
-    //           //     type: 'text',
-    //           //     fields: {
-    //           //       keyword: {
-    //           //         type: 'keyword',
-    //           //         ignore_above: 256,
-    //           //       },
-    //           //     },
-    //           //   },
-    //           //   tags: {
-    //           //     properties: {
-    //           //       tag: {
-    //           //         type: 'text',
-    //           //         fields: {
-    //           //           keyword: {
-    //           //             type: 'keyword',
-    //           //             ignore_above: 256,
-    //           //           },
-    //           //         },
-    //           //       },
-    //           //     },
-    //           //   },
-    //           //   text: {
-    //           //     type: 'text',
-    //           //     fields: {
-    //           //       keyword: {
-    //           //         type: 'keyword',
-    //           //         ignore_above: 256,
-    //           //       },
-    //           //     },
-    //           //   },
-    //           //   title: {
-    //           //     type: 'text',
-    //           //     fields: {
-    //           //       keyword: {
-    //           //         type: 'keyword',
-    //           //         ignore_above: 256,
-    //           //       },
-    //           //     },
-    //           //   },
-    //           // },
-    //         // },
-    //         // settings: {
-    //         //   analysis: {
-    //         //     filter: {
-    //         //       autocomplete_filter: {
-    //         //         type: 'edge_ngram',
-    //         //         min_gram: 1,
-    //         //         max_gram: 20,
-    //         //       },
-    //         //     },
-    //         //     analyzer: {
-    //         //       autocomplete: {
-    //         //         type: 'custom',
-    //         //         tokenizer: 'standard',
-    //         //         filter: ['lowercase', 'autocomplete_filter'],
-    //         //       },
-    //         //     },
-    //         //   },
-    //         // },
-    //     //   },
-    //     }
-    //   )
-    // }
+    try {
+      const index = searchConfig.index
+      await this.esService.indices.delete({ index });
+      await this.esService.indices.create({ index });
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   private async createSchema(){
@@ -91,64 +27,99 @@ export class ElasticService {
       type: searchConfig.index,
       include_type_name: true,
       body: { 
-          properties: productSchema
+          properties: productSearchSchema
       }
   });
   }
   
-  
+  private mapSearchData(e: Product): Record<string, any> { 
+      let data: any = {} 
 
-    async bulkInsert(){
-       try {
-        await this.createIndex();
-        await this.createSchema();
+      data.infoProductId = e.id || ''
+      data.infoName = e?.info?.name || ''
+      data.infoShortDescription = e?.info?.shortDescription || ''
+      data.infoFullDescription = e?.info?.fullDescription || ''
+      data.infoSku = e?.info?.sku || ''
+      data.infoPrice = e?.info?.price || 0
 
-        const esAction = {
-            index: {
-              _index: searchConfig.index,
-              _type: searchConfig.index
-            }
-          };
-        
-        const allProduct =  await this.productSearchDB.findAllProducts()
-        let docs = []
-        let data: any = {}
-        const mapped = allProduct.map(e =>{ 
-          console.log(e?.meta?.keywords, e?.brands)
-            data.infoProductId = e.id || ''
-            data.infoName = e?.info?.name || ''
-            data.infoShortDescription = e?.info?.shortDescription || ''
-            data.infoFullDescription = e?.info?.fullDescription || ''
-            data.infoSku = e?.info?.sku || ''
-            data.infoPrice = e?.info?.price || 0
+      data.metaKeywords = e?.meta?.keywords || []
+      data.metaTitle = e?.meta?.title || ''
+      data.metaDescription = e?.meta?.description || ''
 
-            data.metaKeywords = e?.meta?.keywords || []
-            data.metaTitle = e?.meta?.title || ''
-            data.metaDescription = e?.meta?.description || ''
+      data.brands = e?.brands || []
+      data.categories = e?.categories || []
+      data.manufacturer = e?.manufacturer  || {}
+      data.photos = e?.photos.map(p => p.url)  || []
+      data.tags = e?.tags || []
 
-            data.brands = e?.brands || []
-            data.categories = e?.categories || []
-            data.manufacturer = e?.manufacturer  || {}
-            data.photos = e?.photos.map(p => p.url)  || []
-            data.tags = e?.tags || []
-            
-            docs.push(esAction); 
-            docs.push(data); 
-        })
-        
-        const result = await this.esService.bulk({ body: docs }) 
-        return result.statusCode;
-       } catch (error) {
-        console.log(error)
-       }
-    }
+      return data;
+  } 
+
+  async getSingleByElasticId(id: string): Promise<any>{
+    const {body} =  await this.esService.get({index: searchConfig.index, id})
+    return body._source
+  }
+
+  async singleInsert(productData: Product): Promise<number> { 
+    try { 
+      const index = searchConfig.index 
+      // if not exist
+      const body = this.mapSearchData(productData) 
+      const result = await this.esService.index({index,refresh: true, body}) 
+      return result.statusCode;
+    } catch (error) {
+      console.log(error)
+      return 0;
+    } 
+  }
+
+async deleteSingleByElasticId(id: string): Promise<number> { 
+    try { 
+      const index = searchConfig.index
+      const type = searchConfig.index 
+      const result = await this.esService.delete({ index, type,  id }) 
+      return result.statusCode;
+    } catch (error) {
+      console.log(error)
+      return 0;
+    } 
+  }
+
+  async bulkInsert(){
+      try {
+      await this.createIndex();
+      await this.createSchema();
+
+      const allProduct =  await this.productSearchDB.findAllProducts()
+      if(!allProduct || allProduct.length < 1){
+          return 0;
+      }
+      const esAction = {
+        index: {
+          _index: searchConfig.index,
+          _type: searchConfig.index
+        }
+      } 
+      let docs = []  
+      const mapped = allProduct.map(e =>{ 
+          const data = this.mapSearchData(e)  
+          docs.push(esAction); 
+          docs.push(data); 
+      })   
+      const result = await this.esService.bulk({ body: docs }) 
+      await this.esService.indices.refresh({index: searchConfig.index})
+      return result.statusCode; 
+      } catch (error) {
+      console.log(error)
+      }
+  }
 
 
   async search(keyword: string): Promise<any>{
-    return await this.getQuotes(keyword)
+    return await this.getSearchData(keyword)
   }
  
-  private async getQuotes(req) { 
+  private async getSearchData(req) { 
     const query = {
       from: 0,
       size: 4,
@@ -170,17 +141,17 @@ export class ElasticService {
     });  
     console.log("search time = ", Date.now()-start)
   
-    const results = hits.total.value;
+    const resultsCount = hits.total.value;
     const values  = hits.hits.map((hit) => {
       return {
         id:     hit._id,
         data:  hit._source,
-        score:  hit._score
+        score:  hit._score 
       }
     });
   
     return {
-      results,
+      resultsCount,
       values
     }
   }
