@@ -116,7 +116,7 @@ export async function sendOTPRest(
       containerId: 'bottom-right',
     });
     return res.data as SendOtpSuccessResponse;
-  } catch (error: any) {    
+  } catch (error: any) {
     return error.response.data as SendOtpErrorResponse;
   }
 }
@@ -200,12 +200,12 @@ export async function checkoutRest(
 
 export async function getPublicProductByCategoryIDRest(
   categoryId: string
-): Promise<GetCustomerAllProductsResponse | undefined> {
+): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}`
     );
-    return res.data.data as GetCustomerAllProductsResponse;
+    return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return [] as any;
   }
@@ -223,7 +223,7 @@ export async function addToWishlistRest(
 
 export async function getOrderProductsRest(
   token: string
-): Promise<OrderByUserIdResponse  | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {

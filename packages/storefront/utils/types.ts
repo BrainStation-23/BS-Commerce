@@ -96,7 +96,7 @@ export interface apiFunction {
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
     categoryId: string
-  ) => Promise<GetCustomerAllProductsResponse | undefined>;
+  ) => Promise<GetCustomerAllProductsSuccessResponse | undefined>;
   checkout: (
     data: any,
     router: NextRouter
