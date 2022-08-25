@@ -93,16 +93,6 @@ const HeaderAccount: React.FC<Properties> = () => {
   ];
   return (
     <>
-      {modalOn && (
-        <Modal
-          setModalOn={setModalOn}
-          setChoice={setChoice}
-          trigger={handleLogout}
-          modalTitle="Logout"
-          bodyText="Are you sure?"
-        />
-      )}
-
       {modalOnWishlist && (
         <Modal
           setModalOn={setModalOnWishlist}
@@ -116,13 +106,15 @@ const HeaderAccount: React.FC<Properties> = () => {
         <span className="my-0 uppercase">
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
-              <div className="group relative cursor-pointer normal-case"
-              id="NavProfileDiv">
+              <div
+                className="group relative cursor-pointer normal-case"
+                id="NavProfileDiv"
+              >
                 <p className=" hover:text-green-600" id="user-name">
                   {getUsername(links[4].name)}
                 </p>
                 <div
-                id='navProfileDropdown'
+                  id="navProfileDropdown"
                   className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
