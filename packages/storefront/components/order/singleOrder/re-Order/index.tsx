@@ -11,6 +11,8 @@ interface Props {
   singleOrder: OrderByUserId;
 }
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
+  console.log(singleOrder);
+
   const dispatch = useAppDispatch();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
   const [unavailableProd, setUnavailableProd] = useState<IOrderProduct[]>([]);
@@ -38,7 +40,23 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
 
   const toReorder = async (reOrderParams: IReOrderQuery) => {
     try {
-      const res = await userAPI.toreorderProcess(reOrderParams);
+      const info = await userAPI.toreorderProcess(reOrderParams);
+      console.log(info);
+
+      // console.log(res?.response);
+
+      // console.log(res?.response?.data?.error);
+      // if (
+      //   res?.response?.data?.error ==
+      //   'YOUR ITEMS IN THE CART WILL BE REPLACED. DO YOU WANT TO CONTINUE?'
+      // ) {
+      //   const reOrderParams = {
+      //     orderId: singleOrder.orderId,
+      //     overWriteCart: true,
+      //     ignoreInvalidItems: false,
+      //   };
+      //   toReorder(reOrderParams);
+      // }
     } catch (error) {}
   };
 

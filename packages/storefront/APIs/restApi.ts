@@ -55,6 +55,7 @@ import {
   CreateOrderRequest,
   SendOtpErrorResponse,
   IReOrderQuery,
+  ErrorMessageReOrder,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -549,10 +550,9 @@ export async function resetPasswordRest(
 
 export async function toreorderProcessRest(
   data: IReOrderQuery
-): Promise<IReOrderQuery | undefined> {
+): Promise<ErrorMessageReOrder | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.reOrder}`, data);
-    console.log(res);
   } catch (error: any) {
     toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',
