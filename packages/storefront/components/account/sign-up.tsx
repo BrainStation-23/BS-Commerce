@@ -91,11 +91,11 @@ const Signup = () => {
     try {
       const res = await userAPI.sendOTP(data);
       if ('error' in res!) {
-        if (res === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+        if (res.error === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
           toast.warning('User with this email already exists', {
             containerId: 'bottom-right',
           });
-        } else if (res === 'CUSTOMER_PHONE_ALREADY_EXITS') {
+        } else if (res.error === 'CUSTOMER_PHONE_ALREADY_EXITS') {
           toast.warning('User with this phone number already exists', {
             containerId: 'bottom-right',
           });
