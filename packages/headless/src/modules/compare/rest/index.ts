@@ -128,12 +128,12 @@ export class CompareController {
   @Delete('item')
   async deleteItemByProductId(
     @UserInfo() user: User,
-    @Query('productId') productId: string,
+    @Query() query: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.compareService.deleteItemByProductId(
       user.id,
-      productId,
+      query.productId,
     );
     res.status(code);
     return response;
