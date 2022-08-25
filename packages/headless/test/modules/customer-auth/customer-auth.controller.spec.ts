@@ -1,13 +1,12 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, TestTimeout } from '../../test-utility';
+import { connectTestDatabase, insertCustomers, TestCustomerEmail, TestTimeout } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import { CustomerAuthController } from 'src/modules/customer-auth/rest';
 import {
     createCustomerRequestWithEmail,
-    existingCustomerSendOtpRequest,
     invalidCreateCustomerRequestWithLessThanSixCharactersPassword,
     invalidCreateCustomerRequestWithoutName,
     invalidCreateCustomerRequestWithoutOTP,
@@ -29,6 +28,7 @@ describe('Initializing... Customer Auth controller testing', () => {
 
     beforeAll(async () => {
         await connectTestDatabase();
+        await insertCustomers()
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
         }).compile();
@@ -55,7 +55,7 @@ describe('Initializing... Customer Auth controller testing', () => {
         it('should error message with 400 bad request', async () => {
             return await request(app.getHttpServer())
                 .post('/customer/auth/register/send-otp')
-                .send(existingCustomerSendOtpRequest)
+                .send({ email: TestCustomerEmail })
                 .expect((res) => {
                     expect(res.statusCode).toBe(400);
                     expect(res.body.error).toEqual('CUSTOMER_EMAIL_ALREADY_EXITS');
