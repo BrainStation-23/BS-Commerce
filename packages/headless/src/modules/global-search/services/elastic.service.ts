@@ -1,8 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { searchConfig } from "config/search";
 import { ProductSrarchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
+import { errorResponse, successResponse } from "src/utils/response";
+import { IServiceResponse } from "src/utils/response/service.response.interface";
 import { productSearchSchema } from "../rest/schema";
 
 @Injectable()
@@ -115,8 +117,12 @@ async deleteSingleByElasticId(id: string): Promise<number> {
   }
 
 
-  async search(keyword: string): Promise<any>{
-    return await this.getSearchData(keyword)
+  async search(keyword: string): Promise<IServiceResponse<any>>{
+    const result = await this.getSearchData(keyword)
+    if(!result){
+      return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
+    }
+    return successResponse(null, result, HttpStatus.OK)
   }
  
   private async getSearchData(req) { 

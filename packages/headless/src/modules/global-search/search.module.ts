@@ -12,9 +12,4 @@ import { ElasticService } from "./services/elastic.service";
     controllers: [SearchController],
     providers: [ProductSrarchDatabase, ElasticService],
   })
-export class SearchModule implements OnModuleInit  {
-  constructor(private readonly searchService: ElasticService){}
-  public async onModuleInit() {
-    //  await this.searchService.bulkInsert();
-  }
-}
+export class SearchModule {}

@@ -20,16 +20,13 @@ export const productSearchSchema = {
     type: 'text',
   },
   infoName: {
-    type: 'text',
-    weight: 5,
+    type: 'text', 
   },
   infoShortDescription: {
-    type: 'text',
-    weight: 4,
+    type: 'text', 
   },
   infoFullDescription: {
-    type: 'text',
-    weight: 3,
+    type: 'text', 
   },
   infoSku: {
     type: 'text',
@@ -44,8 +41,7 @@ export const productSearchSchema = {
     type: 'text',
   },
   metaDescription: {
-    type: 'text',
-    weight: 3,
+    type: 'text', 
   },
   tags: {
     type: 'text',
