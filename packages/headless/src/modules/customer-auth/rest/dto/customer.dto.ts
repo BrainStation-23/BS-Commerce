@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 import { Customer } from 'models';
 
 export class CustomerDto implements Customer {
@@ -6,11 +6,11 @@ export class CustomerDto implements Customer {
     id: string;
 
     @ApiProperty()
+    name: string;
+
+    @ApiProperty()
     phone?: string;
 
     @ApiProperty()
     email?: string;
-
-    @ApiProperty()
-    otp?: string;
 }

@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase } from '../../test-utility';
+import { connectTestDatabase, TestTimeout } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import {
     createAdminRequest,
@@ -58,7 +58,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.body.data.message).toEqual('USER_CREATED_SUCCESSFUL');
                     expect(res.body.error).toBe(undefined);
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing invalid data as same email]', () => {
@@ -71,7 +71,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.body.error).toEqual('USER_ALREADY_EXITS');
                     expect(res.body.errors).toBe(null);
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing data without first name]', () => {
@@ -83,7 +83,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ firstName: ['firstName must be a string', 'firstName should not be empty'] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing data without last name]', () => {
@@ -95,7 +95,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ lastName: ["lastName must be a string", "lastName should not be empty"] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing data without email]', () => {
@@ -107,7 +107,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ email: ["email must be an email", "email must be a string", "email should not be empty"] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing invalid email]', () => {
@@ -119,7 +119,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ email: ["email must be an email"] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing data without password]', () => {
@@ -131,7 +131,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ password: ["Password is too short. Minimal length is 6 characters", "password must be a string", "password should not be empty"] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signup [passing data with password but password length less than 6 characters]', () => {
@@ -143,7 +143,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                     expect(res.statusCode).toBe(422);
                     expect(res.body.errors).toEqual({ password: ["Password is too short. Minimal length is 6 characters"] });
                 });
-        }, 30000);
+        }, TestTimeout);
     });
 
     describe('POST /auth/signin', () => {
@@ -159,7 +159,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 jwtToken = response.body.data.token;
                 // jwt regex
                 expect(jwtToken).toMatch(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
-            }, 30000)
+            }, TestTimeout)
 
             it('fails to authenticate user with an incorrect password/username', async () => {
                 return await request(app.getHttpServer())
@@ -170,7 +170,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.body.error).toEqual('INVALID_CREDENTIALS');
                         expect(res.body.errors).toBe(null);
                     });
-            }, 30000)
+            }, TestTimeout)
 
             it('fails to authenticate user without passing username', async () => {
                 return await request(app.getHttpServer())
@@ -180,7 +180,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ username: ["username must be a string", "username should not be empty"] });
                     });
-            }, 30000)
+            }, TestTimeout)
 
             it('fails to authenticate user without passing password', async () => {
                 return await request(app.getHttpServer())
@@ -190,7 +190,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(422);
                         expect(res.body.errors).toEqual({ password: ["INVALID_CREDENTIALS", "password must be a string"] });
                     });
-            }, 30000)
+            }, TestTimeout)
         })
     })
 });

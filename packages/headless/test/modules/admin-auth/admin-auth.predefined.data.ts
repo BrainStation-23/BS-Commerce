@@ -1,5 +1,5 @@
-import { CreateUserDto, SignInDataDto } from "src/modules/auth/rest/dto";
-import { UserDto } from "src/modules/user/rest/dto";
+import { CreateUserDto, SignInDataDto } from 'src/modules/auth/rest/dto';
+import { UserDto } from 'src/modules/user/rest/dto';
 
 export const admin: UserDto = {
     id: '472560d2-5138-466c-8dc4-d705585021bc',
