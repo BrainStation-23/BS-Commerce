@@ -17,6 +17,7 @@
     "package:superadmin": "lerna run --scope superadmin --stream dev",
     "package:storefront": "lerna run --scope storefront --stream dev",
     "package:storeadmin": "lerna run --scope storeadmin --stream dev",
+    "package:documentation": "lerna run --scope documentation --stream dev",
     "package:atomic-components": "lerna run --scope atomic-components --stream storybook",
     "dev": "run-p --print-label package:*",
     "build": "lerna run --parallel build",

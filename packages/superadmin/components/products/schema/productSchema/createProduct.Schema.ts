@@ -45,10 +45,4 @@ export const productSchema = object().shape({
   photosID: string(),
   photosTitle: string(),
   displayOrderPhotos: string(),
-
-  SelectedCategoryIds: number()
-    .typeError('You must Select a Category')
-    .required('This field must not be empty'),
-  isFeaturedCategory: Yup.boolean(),
-  displayOrderCategory: number(),
 });

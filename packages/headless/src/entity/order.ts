@@ -104,26 +104,26 @@ export class BaseOrderEntity{
   shippingAddress: OrderAddress;
   shippingMethod: string;
   paymentMethod: string;
-  orderedDate: Date;
-  orderStatus: OrderStatusEnum;
-  shippingStatus: ShippingStatusEnum;
-  paymentStatus: PaymentStatusEnum;
-  products: [ProductOrder];
   productCost: number;
   shippingCost: number;
-  totalCost: number;
   stripeToken?: string;
   stripeCustomerId?: string;
   stripeChargeId?: string;
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
+  orderedDate: Date;
+  orderStatus: OrderStatusEnum;
+  shippingStatus: ShippingStatusEnum;
+  paymentStatus: PaymentStatusEnum;
+  totalCost: number;
+  products: ProductOrder[];
 }
 export class OrderEntity extends BaseOrderEntity{
   orderId: string;
   userId: string;
 }
 
-export class OrderDetails extends BaseOrderEntity {
+export class OrderByUserId extends BaseOrderEntity {
   orderId: string;
 }
 
@@ -142,30 +142,9 @@ export class AllOrdersEntity {
   orders: OrderEntity[]
 }
 export class ChangeStatusEntity { 
-  orderId: string
+  orderId: string;
   statusType: string;
   statusValue: string
-}
-export class OrderResponseEntity {
-  orderId: string;
-  userId?: string;
-  billingAddress: OrderAddress;
-  shippingAddress: OrderAddress;
-  shippingMethod: string;
-  paymentMethod: string;
-  orderedDate: Date;
-  orderStatus: string;
-  shippingStatus: string;
-  paymentStatus: string;
-  products: ProductOrder[];
-  productCost: number;
-  shippingCost: number;
-  totalCost?: number;
-  stripeToken?: string;
-  stripeCustomerId?: string;
-  stripeChargeId?: string;
-  paypalPaymentId?: string;
-  paypalRedirectUrl?: string;
 }
 
 export enum SortTypesDto {
@@ -182,5 +161,24 @@ export class OrderSortQuery {
 }
 export class OrderListResponseEntity {
   userId: string;
-  orderInfo: OrderDetails[];
+  orderInfo: OrderByUserId[];
+}
+
+export class ReOrderQuery{
+  orderId: string;
+  overWriteCart?: boolean;
+  ignoreInvalidItems?: boolean;
+}
+export class CartItem {
+  productId: string;
+  quantity: number;
+}
+
+export class Cart {
+  items: CartItem[];
+}
+export class CartResponse {
+  id?: string;
+  userId: string;
+  items: CartItem[];
 }

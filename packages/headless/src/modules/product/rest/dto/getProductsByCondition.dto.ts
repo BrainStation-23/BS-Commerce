@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString, } from 'class-validator';
+import { IsArray, IsBoolean, IsIn, IsNotEmptyObject, IsNumber, IsObject, IsOptional, IsString, } from 'class-validator';
 import {
     GetProductsByConditionQuery,
     GetProductsByConditionErrorMessages,
@@ -50,10 +50,11 @@ export class GetProductsByConditionQueryDto implements GetProductsByConditionQue
     @IsString()
     slug?: string;
 
-    @ApiProperty({ required: false, default: 1 })
+    @ApiProperty({ required: false, description: 'Price Low to High -> asc or High to Low -> desc', default: 'asc' })
     @IsOptional()
-    @IsNumber()
-    orderBy?: number;
+    @IsIn(['asc', 'desc'])
+    @IsString()
+    orderBy?: string;
 }
 
 export class GetProductsByConditionErrorResponseDto implements GetProductsByConditionErrorResponse {

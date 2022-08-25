@@ -1,25 +1,36 @@
-import { NextComponentType } from 'next';
-import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { CreateProductRequest, subCategoryList } from 'models';
+import { NextComponentType } from 'next';
+import { useEffect, useState } from 'react';
+import {
+  CreateProductRequest,
+  NestedCategoryList,
+  ProductCategory,
+  ProductManufacturer,
+  subCategoryList,
+  UpdateProductCategory,
+} from 'models';
 
 import { userAPI } from '@/APIs';
 import MetaForm from '@/components/products/forms/metaForm';
 import PhotosForm from '@/components/products/forms/photosForm';
-import CategoryForm from '@/components/products/forms/categoryForm';
+import { CategoryInterface } from '@/components/products/models/index';
+import CategorySection from '@/components/products/forms/categorySection';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
-import ProductManufacturers from '@/components/products/forms/manufacturerForm';
-
 import { productSchema } from '@/components/products/schema/productSchema/index';
-import Category from 'pages/category';
+import ProductManufacturers from '@/components/products/forms/manufacturerForm';
 
 const CreateProduct: NextComponentType = () => {
   const router = useRouter();
-  const [categogiesData, setCategoryData] = useState([]);
-  const [manufacturerData, setManufacturerData] = useState([]);
-
+  const [customCategoryData, setCustomCategoryData] = useState<
+    CategoryInterface[]
+  >([]);
+  const [manufacturerData, setManufacturerData] = useState<
+    ProductManufacturer[]
+  >([]);
+  const [categogiesFullList, setCategoryFullList] =
+    useState<NestedCategoryList[]>(); // what we get from get category api
   const handleSubmit = (data: CreateProductRequest) => {
     if (data?.categories[0]) {
       userAPI.createProduct(data, router);
@@ -28,29 +39,28 @@ const CreateProduct: NextComponentType = () => {
 
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
-    const allManufacturers: any = [];
+    const allManufacturers: ProductManufacturer[] = [];
 
     if (response.data.manufacturers.length! > 0) {
-      response.data.manufacturers.forEach((manufacturer: any) => {
-        allManufacturers.push({
-          id: manufacturer.id,
-          name: manufacturer.name,
-        });
-      });
+      response.data.manufacturers.forEach(
+        (manufacturer: ProductManufacturer) => {
+          allManufacturers.push({
+            id: manufacturer.id,
+            name: manufacturer.name,
+          });
+        }
+      );
       setManufacturerData(allManufacturers);
     }
   }
 
   const addSubCategories = (subCategories: subCategoryList[]) => {
-    const categoryList: any = [];
+    const categoryList: CategoryInterface[] = [];
     subCategories.forEach((category) => {
       categoryList.push({
         id: category.id,
         name: category.name,
-        value: category.name,
         isSelected: false,
-        isFeatured: false,
-        displayOrder: category.displayOrder,
       });
       if (category.subCategories && category.subCategories.length > 0) {
         const subCategoryList = addSubCategories(category.subCategories);
@@ -61,32 +71,67 @@ const CreateProduct: NextComponentType = () => {
     return categoryList;
   };
 
+  const addCategory = (catID: string) => {
+    customCategoryData.map((category: CategoryInterface) => {
+      category.id == catID ? (category.isSelected = true) : '';
+    });
+    setCustomCategoryData([...customCategoryData]);
+  };
+  const removeCategory = (catID: string) => {
+    customCategoryData.map((category: CategoryInterface) => {
+      category.id == catID ? (category.isSelected = false) : '';
+    });
+    setCustomCategoryData([...customCategoryData]);
+  };
+
+  const checkCat = (
+    cat: NestedCategoryList,
+    tempCat: UpdateProductCategory[]
+  ) => {
+    customCategoryData.filter((cat2) => {
+      cat.id === cat2.id && cat2.isSelected
+        ? cat.subCategories?.map((subCat: NestedCategoryList) =>
+            checkCat(subCat, tempCat)
+          )
+        : '';
+      cat.id === cat2.id &&
+        cat2.isSelected &&
+        tempCat.push({ id: cat.id, name: cat.name });
+    });
+  };
+
+  const printCat = () => {
+    const tempCat: ProductCategory[] = [];
+    categogiesFullList?.map((cat) => checkCat(cat, tempCat));
+    return tempCat;
+  };
   async function loadCategories() {
     const response = await userAPI.getCategoryList();
     if (response?.data.categories.length! > 0) {
-      const categories: any = [];
+      setCategoryFullList(
+        response?.data?.categories ? response.data.categories : []
+      );
+      const categories: CategoryInterface[] = [];
       response?.data.categories.forEach((category, index) => {
         categories.push({
           id: category.id,
           name: category.name,
-          value: category.name,
           isSelected: false,
-          isFeatured: false,
-          displayOrder: category.displayOrder,
         });
         if (category.subCategories && category.subCategories.length > 0) {
           const subCategoryList = addSubCategories(category.subCategories);
           categories.push(...subCategoryList);
         }
       });
-      setCategoryData(categories);
+
+      setCustomCategoryData(categories);
     }
   }
 
   useEffect(() => {
-    loadCategories();
-    loadAllManufacturers();
-  }, []);
+    if (customCategoryData.length === 0) loadCategories();
+    if (manufacturerData.length === 0) loadAllManufacturers();
+  });
 
   return (
     <>
@@ -116,10 +161,6 @@ const CreateProduct: NextComponentType = () => {
           photosID: '',
           photosTitle: '',
           displayOrderPhotos: '',
-          SelectedCategoryIds: 0,
-          isFeaturedCategory: false,
-          displayOrderCategory: 1,
-          categoriesData: '',
           manufacturerId: '',
           manufacturerName: '',
         }}
@@ -152,17 +193,6 @@ const CreateProduct: NextComponentType = () => {
             displayOrder: +`${values?.displayOrderPhotos}`,
             alt: 'image',
           };
-          const categories: any = [];
-          categogiesData?.map((category: any, index: any) => {
-            category.isSelected == true
-              ? categories.push({
-                  id: `${category.id}`,
-                  name: category.name,
-                  isFeatured: category.isFeatured,
-                  displayOrder: +category.displayOrder,
-                })
-              : '';
-          });
           const manufacturer = {
             id: '',
             name: values.manufacturerName,
@@ -179,9 +209,8 @@ const CreateProduct: NextComponentType = () => {
             photos: [photos],
             brands: values.brands,
             manufacturer: manufacturer,
-            categories: categories,
+            categories: printCat(),
           };
-          // console.log(newData);
           handleSubmit(newData);
           actions.setSubmitting(false);
         }}
@@ -216,10 +245,16 @@ const CreateProduct: NextComponentType = () => {
                 <MetaForm />
                 <PhotosForm />
                 <ProductManufacturers manufacturerData={manufacturerData} />
-                <CategoryForm
-                  setCategoryData={setCategoryData}
-                  categoryData={categogiesData}
+                {/* <CategoryForm
+                  setCustomCategoryData={setCustomCategoryData}
+                  categoryData={customCategoryData}
                   setFieldValue={formikprops.setFieldValue}
+                /> */}
+                <CategorySection
+                  categoryData={customCategoryData}
+                  categogiesFullList={categogiesFullList!}
+                  removeCategory={removeCategory}
+                  addCategory={addCategory}
                 />
               </div>
             </Form>

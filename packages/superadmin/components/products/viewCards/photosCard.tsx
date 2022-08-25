@@ -28,7 +28,7 @@ const PhotosCard: FC<{
         <div className="" id="metaTab">
           <div className="card-body">
             <div className="row justify-content-center">
-              {product?.photos[0]?.url ? (
+              {product?.photos![0]?.url ? (
                 <Image
                   className="col-2"
                   src={product?.photos[0]?.url}
@@ -40,10 +40,10 @@ const PhotosCard: FC<{
                 'Not a valid image!!'
               )}
             </div>
-            <SingleView label="URL" value={product?.photos[0]?.url} />
-            <SingleView label="ID" value={product?.photos[0]?.id} />
-            <SingleView label="Title" value={product?.photos[0]?.title} />
-            <SingleView label="alt" value={product?.photos[0]?.alt} />
+            <SingleView label="URL" value={product?.photos![0]?.url} />
+            <SingleView label="ID" value={product?.photos![0]?.id} />
+            <SingleView label="Title" value={product?.photos![0]?.title} />
+            <SingleView label="alt" value={product?.photos![0]?.alt} />
           </div>
         </div>
       </div>
