@@ -28,25 +28,41 @@ export const removeTestCollection = async (collection: string): Promise<void> =>
 };
 
 export const insertCustomers = async (): Promise<void> => {
-  const CustomerModel = Mongoose.connection.db.collection('customers');
-  const doesCustomerExist = await CustomerModel.findOne({ email: customerData.email });
-  if (!doesCustomerExist) await CustomerModel.insertOne(customerData);
+  try {
+    const CustomerModel = Mongoose.connection.db.collection('customers');
+    const doesCustomerExist = await CustomerModel.findOne({ email: customerData.email });
+    if (!doesCustomerExist) await CustomerModel.insertOne(customerData);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const insertAdmins = async (): Promise<void> => {
-  const AdminModel = Mongoose.connection.db.collection('users');
-  const doesCustomerExist = await AdminModel.findOne({ email: adminData.email });
-  if (!doesCustomerExist) await AdminModel.insertOne(adminData);
+  try {
+    const AdminModel = Mongoose.connection.db.collection('users');
+    const doesCustomerExist = await AdminModel.findOne({ email: adminData.email });
+    if (!doesCustomerExist) await AdminModel.insertOne(adminData);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const insertProducts = async (): Promise<void> => {
-  const ProductModel = Mongoose.connection.db.collection('products');
-  const doesProductExist = await ProductModel.findOne({ 'info.sku': productData.info.sku }) || await ProductModel.findOne({ 'meta.friendlyPageName': productData.meta.friendlyPageName });
-  if (!doesProductExist) await ProductModel.insertOne(productData);
+  try {
+    const ProductModel = Mongoose.connection.db.collection('products');
+    const doesProductExist = await ProductModel.findOne({ 'info.sku': productData.info.sku }) || await ProductModel.findOne({ 'meta.friendlyPageName': productData.meta.friendlyPageName });
+    if (!doesProductExist) await ProductModel.insertOne(productData);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const insertCollections = async (): Promise<void> => {
-  await insertAdmins();
-  await insertCustomers();
-  await insertProducts();
+  try {
+    await insertAdmins();
+    await insertCustomers();
+    await insertProducts();
+  } catch (error) {
+    console.log(error);
+  }
 };
