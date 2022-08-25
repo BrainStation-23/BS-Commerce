@@ -1,14 +1,14 @@
-import { OrderByUserIdResponseData } from 'models';
+import { IOrderProduct, OrderByUserId, OrderByUserIdResponse } from 'models';
 import ShowData from './showData';
 interface Props {
-  singleOrder: OrderByUserIdResponseData;
+  singleOrder: OrderByUserId;
 }
 
 const TableData: React.FC<Props> = ({ singleOrder }: Props) => {
   return (
     <>
       {singleOrder ? (
-        singleOrder?.products?.map((data: any) => {
+        singleOrder?.products?.map((data: IOrderProduct) => {
           return <ShowData key={singleOrder.orderId} data={data} />;
         })
       ) : (

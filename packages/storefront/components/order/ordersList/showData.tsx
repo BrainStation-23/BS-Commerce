@@ -1,14 +1,14 @@
 import moment from 'moment';
 import Link from 'next/link';
-import { OrderByUserIdResponseData } from 'models';
+import { OrderByUserId } from 'models';
 interface Props {
-  data: OrderByUserIdResponseData;
+  data: OrderByUserId;
 }
 
 const ShowData: React.FC<Props> = ({ data }: Props) => {
   return (
     <>
-      <tr key={data.orderId}>
+      <tr>
         <td className="border border-slate-300 px-8 py-4 md:px-4">
           {data.orderId}
         </td>

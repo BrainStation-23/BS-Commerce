@@ -1,10 +1,10 @@
 import React from 'react';
 import ShowData from './showData';
 import Link from 'next/link';
-import { OrderByUserIdResponseData } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from 'models';
 
 interface Props {
-  storedOrderProducts: OrderByUserIdResponseData[];
+  storedOrderProducts: OrderByUserId[];
 }
 
 const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
@@ -36,7 +36,7 @@ const DataTable: React.FC<Props> = ({ storedOrderProducts }: Props) => {
           </thead>
           <tbody>
             {storedOrderProducts?.length > 0
-              ? storedOrderProducts?.map((data: any) => (
+              ? storedOrderProducts?.map((data) => (
                   <ShowData key={data.orderId} data={data} />
                 ))
               : "You haven't placed any order yet"}

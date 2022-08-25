@@ -51,8 +51,9 @@ import {
   VerifyOtpRequest,
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   CreateOrderRequest,
+  SendOtpErrorResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -114,9 +115,9 @@ export async function sendOTPRest(
     toast.success(toastMessage, {
       containerId: 'bottom-right',
     });
-    return res;
+    return res.data as SendOtpSuccessResponse;
   } catch (error: any) {    
-    return error.response.data.error;
+    return error.response.data as SendOtpErrorResponse;
   }
 }
 
@@ -222,7 +223,7 @@ export async function addToWishlistRest(
 
 export async function getOrderProductsRest(
   token: string
-): Promise<OrderByUserIdResponseData  | undefined> {
+): Promise<OrderByUserIdResponse  | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {
@@ -245,7 +246,7 @@ export async function getOrderProductRest(
         Authorization: `Bearer ${token}`,
       },
     });
-    return res?.data;
+    return res?.data?.data;
   } catch (error: any) {
     return [] as any;
   }

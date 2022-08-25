@@ -90,16 +90,18 @@ const Signup = () => {
   async function handleOTPRequest(data: string, setFieldValue: Function) {
     try {
       const res = await userAPI.sendOTP(data);
-      if (res === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
-        toast.warning('User with this email already exists', {
-          containerId: 'bottom-right',
-        });
-      } else if (res === 'CUSTOMER_PHONE_ALREADY_EXITS') {
-        toast.warning('User with this phone number already exists', {
-          containerId: 'bottom-right',
-        });
-      } else {
-        const responseMessage = res?.data?.data?.message!.split(' ');
+      if ('error' in res!) {
+        if (res === 'CUSTOMER_EMAIL_ALREADY_EXITS') {
+          toast.warning('User with this email already exists', {
+            containerId: 'bottom-right',
+          });
+        } else if (res === 'CUSTOMER_PHONE_ALREADY_EXITS') {
+          toast.warning('User with this phone number already exists', {
+            containerId: 'bottom-right',
+          });
+        }
+      } else if ('data' in res!) {
+        const responseMessage = res?.data?.message!.split(' ');
         const otpValue = responseMessage![responseMessage?.length! - 1];
         setFieldValue('otp', otpValue);
         setOtp(otpValue);
