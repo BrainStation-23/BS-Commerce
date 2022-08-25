@@ -36,7 +36,7 @@ export class CompareDatabase implements ICompareDatabase {
         },
         { new: true },
       ).lean();
-      
+
       return compareList ? await this.mappedProductDetails(compareList) : null;
     }
      return null;
@@ -57,16 +57,21 @@ export class CompareDatabase implements ICompareDatabase {
     }).lean();
   }
 
+  async getProduct(productId: string): Promise<Boolean> {
+    const isExist = await CompareModel.findOne({items: {"productId": productId}});
+    if(isExist) return true;
+    else return false
+  }
   async deleteItemByProductId(userId: string, productId: string): Promise<Compare | null> {
-    const compareList = await CompareModel.findOneAndUpdate(
-      {
-        userId: userId,
-      },
-      { $pull: { items: { productId } } },
-      { new: true },
-    ).lean();
+      const compareList = await CompareModel.findOneAndUpdate(
+        {
+          userId: userId,
+        },
+        { $pull: { items: { productId } } },
+        { new: true }
+      ).lean();
 
-    return compareList ? await this.mappedProductDetails(compareList) : null;
+      return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
   async deleteAllItemByUserId(userId: string): Promise<Compare> {
@@ -98,6 +103,7 @@ export class CompareDatabase implements ICompareDatabase {
       };
     });
     compareList.items = mappedItems;
+    
     return compareList;
   }
 }
