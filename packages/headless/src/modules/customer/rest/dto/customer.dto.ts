@@ -62,10 +62,7 @@ export class CustomerInformationDto implements Customer {
     id: string;
 
     @ApiProperty()
-    firstName?: string;
-
-    @ApiProperty()
-    lastName: string;
+    name: string;
 
     @ApiProperty()
     phone?: string;

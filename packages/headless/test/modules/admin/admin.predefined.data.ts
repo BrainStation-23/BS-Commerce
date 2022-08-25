@@ -1,4 +1,4 @@
-import { AddressDto, ChangePasswordDto, UpdatedUserDto } from "src/modules/user/rest/dto";
+import { AddressDto, ChangePasswordDto, UpdatedUserDto } from 'src/modules/user/rest/dto';
 
 export const AdminId = '21b38a0b-95f8-43bf-90f1-7dfb64ed885b';
 export const Username = 'robert@gmail.com';
@@ -59,20 +59,20 @@ export const updateAdminWithNewAddressMissingData = {
 }
 
 export const incorrectCurrentChangePasswordRequest: ChangePasswordDto = {
-    currentPassword: "incorrect",
-    newPassword: "admin@123",
+    currentPassword: 'incorrect',
+    newPassword: 'admin@123',
 }
 
 export const changePasswordRequestWithLessThanSixCharactersNewPassword: ChangePasswordDto = {
-    currentPassword: "admin@123",
-    newPassword: "admin",
+    currentPassword: 'admin@123',
+    newPassword: 'admin',
 }
 
 export const changePasswordRequestWithoutNewPassword = {
-    currentPassword: "admin@123",
+    currentPassword: 'admin@123',
 }
 
 export const validCurrentChangePasswordRequest: ChangePasswordDto = {
-    currentPassword: "admin@123",
-    newPassword: "admin@123",
+    currentPassword: 'admin@123',
+    newPassword: 'admin@123',
 }
