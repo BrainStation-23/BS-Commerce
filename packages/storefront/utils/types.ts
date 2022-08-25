@@ -15,7 +15,7 @@ import {
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
   GetCustomerAllProductsQuery,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -103,7 +103,7 @@ export interface apiFunction {
   ) => Promise<OrderResponseData | undefined>;
   getOrderProducts: (
     token: string
-  ) => Promise<OrderByUserIdResponseData | undefined>;
+  ) => Promise<OrderByUserIdResponse | undefined>;
   getOrderProduct: (
     token: string,
     OrderId: string
