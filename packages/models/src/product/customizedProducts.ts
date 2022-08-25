@@ -1,16 +1,18 @@
-
 import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Product } from "./product";
 
 export interface GetCustomizedProductsQuery {
     skip?: number;
     limit?: number;
-    tags: string;
+}
+
+export interface CustomizedProducts {
+    [GetCustomizedProductsTagsEnum.BRANDS_YOU_ARE_LOOKING_FOR]:Product[];
 }
 
 export interface GetCustomizedProductsSuccessResponse extends SuccessResponse {
     code: number;
-    data: Product[];
+    data: CustomizedProducts;
 }
 
 export const enum GetCustomizedProductsErrorMessages {

@@ -281,9 +281,7 @@ export class ProductController {
     return { code, ...response };
   }
 
-  @UseGuards(new RolesGuard(['admin']))
-  @ApiBearerAuth()
-  @Get('products/customize/HomePage')
+  @Get('customer/customize-home-page-products')
   @ApiResponse({
     description: 'Get Customized Products Success Response',
     type: GetCustomizedProductsSuccessResponseDto,
@@ -295,11 +293,10 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST
   })
 
-  async GetCustomizedProducts(
-    @Query() query: GetCustomizedProductsQueryDto,
+  async getCustomizedProducts(
+    @Query() condition: GetCustomizedProductsQueryDto,
     @Res({ passthrough: true }) res: Response) {
-    const { skip, limit, tags } = query;
-    const { code, ...response } = await this.productService.GetCustomizedProducts({ skip, limit, tags });
+    const { code, ...response } = await this.productService.getCustomizedProducts(condition);
     res.status(code);
     return { code, ...response };
   }

@@ -18,8 +18,6 @@ import {
   CreateTagErrorResponseDto,
   CreateTagRequestBodyDto,
   CreateTagSuccessResponseDto,
-  GetHomePageProductsTagsErrorResponseDto,
-  GetHomePageProductsTagsSuccessResponseDto,
   GetTagsErrorResponseDto,
   GetTagsSuccessResponseDto,
   HomePageProductsTagParamDto,
@@ -51,27 +49,9 @@ export class TagsController {
     return { code, ...response };
   }
 
-  @Get('/HomePageTags')
-  @ApiResponse({
-    description: 'Get All Home Page Products Tags Success Response',
-    type: GetHomePageProductsTagsSuccessResponseDto,
-    status: HttpStatus.OK
-  })
-  @ApiResponse({
-    description: 'Get All Home Page Products Tags Error Response',
-    type: GetHomePageProductsTagsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
-  })
-  async getHomePageProductTags(
-    @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.getHomePageProductTags();
-    res.status(code);
-    return { code, ...response };
-  }
-
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Patch('HomePageTag/:id')
+  @Patch('home-page-tag/:id')
   @ApiParam({ name: 'id' })
   @ApiResponse({
     description: 'Update Home Page Products Tag Success Response',
@@ -113,7 +93,7 @@ export class TagsController {
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Post('HomePageTag')
+  @Post('home-page-tag')
   @ApiResponse({
     description: 'Create Products Home Page Tag Success Response',
     type: CreateHomePageProductsTagsSuccessResponseDto,

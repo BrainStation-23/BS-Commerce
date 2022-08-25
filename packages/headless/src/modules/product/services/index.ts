@@ -29,7 +29,6 @@ import {
   GetCustomizedProductsQuery,
   GetCustomizedProductsTagsEnum,
   GetCustomizedProductsResponse,
-  GetCustomizedProductsErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -161,22 +160,30 @@ export class ProductService {
     }, HttpStatus.OK);
   }
 
-  async GetCustomizedProducts(query: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
-    const { skip, limit, tags } = query;
-    const products = await this.getProductsByTags({ tags, skip, limit });
-    if (!products) {
-      return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.CAN_NOT_GET_CUSTOMIZED_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    }
-    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  async getCustomizedProducts(condition: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
+    const query = { isHomePageProductsTags: true };
+    const Tags = await this.productRepo.getTags(query);
+
+    let tagName = Tags.map((tag) => { return tag.name });
+    let productObject = {};
+    let products = await Promise.all(tagName.map(async (name) => {
+      const product = { [name]: await this.getProductsByTags(name, condition)}
+      productObject = Object.assign(productObject,product);
+      return product;
+    }))
+    if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(productObject, HttpStatus.OK);
   }
 
-  async getProductsByTags(condition) {
-    const { skip, limit, tags } = condition;
-    switch (tags) {
+  async getProductsByTags(name: string, condition: GetCustomizedProductsQuery) {
+    const { skip, limit } = condition;
+    switch (name) {
+      case GetCustomizedProductsTagsEnum.NEW_ARRIVAL:
+        return await this.productRepo.getTopSellingProducts(skip, limit);
       case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
-        return await this.productRepo.GetTopSellingProducts({}, skip, limit);
+        return await this.productRepo.getTopSellingProducts(skip, limit);
       default:
-        return await this.productRepo.findAllProducts({}, skip, limit);
+        return [];
     }
   }
 }

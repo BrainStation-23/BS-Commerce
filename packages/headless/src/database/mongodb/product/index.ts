@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import { Tag } from 'src/entity/tags';
 import { IProductDatabase } from 'src/modules/product/repositories/product.database.interface';
 import { CategoryModel } from '../category/category.model';
 import { OrderModel } from '../order/order.model';
+import { TagsModel } from '../tags/tags.model';
 import { ProductModel } from './product.model';
 
 @Injectable()
@@ -58,10 +60,21 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query, '-_id').sort(sortCondition).skip(skip).limit(limit).lean();
   }
 
-  async GetTopSellingProducts(query: Record<string, any>, skip: number, limit: number): Promise<Product[] | []> {
+  async getTags(query: Record<string, any>): Promise<Tag[]> {
+    return await TagsModel.find(query).select('-_id').lean();
+  }
+
+  async getTopSellingProducts( skip: number, limit: number): Promise<Product[] | []> {
     const orderArray = await OrderModel.aggregate([
       { $unwind: "$products" },
       { $unwind: "$products.info" },
+      {
+        '$match': {
+          'orderedDate': {
+            '$gte': new Date(Date.now()- 300* 60 * 60 * 24 * 1000)
+          }
+        }
+      },
       {
         $group:
         {
@@ -69,6 +82,13 @@ export class ProductDatabase implements IProductDatabase {
           totalOrderQuantity:
           {
             $sum: "$products.info.quantity"
+          }
+        }
+      },
+      {
+        '$match': {
+          totalOrderQuantity: {
+            '$gte':5
           }
         }
       },

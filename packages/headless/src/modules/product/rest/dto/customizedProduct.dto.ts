@@ -9,10 +9,13 @@ import {
     IsString
 } from "class-validator";
 import {
+    CustomizedProducts,
     GetCustomizedProductsErrorMessages,
     GetCustomizedProductsErrorResponse,
     GetCustomizedProductsQuery,
     GetCustomizedProductsSuccessResponse,
+    GetCustomizedProductsTagsEnum,
+    Product,
 } from "models";
 import { ProductDto } from "./product.dto";
 
@@ -29,11 +32,12 @@ export class GetCustomizedProductsQueryDto implements GetCustomizedProductsQuery
     @Type(() => Number)
     @IsNumber()
     limit?: number;
+}
 
-    @ApiProperty()
-    @IsString()
-    tags:string;
-
+export class CustomizedProductsDto implements CustomizedProducts {
+    @ApiProperty({type:[ProductDto] })
+    @Type(() => ProductDto)
+    [GetCustomizedProductsTagsEnum.BRANDS_YOU_ARE_LOOKING_FOR]: ProductDto[];
 }
 
 export class GetCustomizedProductsErrorResponseDto implements GetCustomizedProductsErrorResponse {
@@ -55,7 +59,7 @@ export class GetCustomizedProductsSuccessResponseDto implements GetCustomizedPro
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: [ProductDto] })
+    @ApiProperty({ type: CustomizedProductsDto })
     @IsObject()
-    data: ProductDto[];
+    data: CustomizedProductsDto;
 }

@@ -10,8 +10,6 @@ import {
   CreateHomePageProductsTagsErrorMessages,
   UpdateHomePageProductsTagErrorMessages,
   UpdateHomePageProductsTagResponse,
-  GetHomePageProductsTagsResponse,
-  GetHomePageProductsTagsErrorMessages,
 } from 'models';
 import { HomePageProductsTagsRequest, UpdateHomePageTagsRequest } from 'src/entity/tags';
 
@@ -22,13 +20,6 @@ export class TagsService {
   async getTags(query: Record<string, any>): Promise<GetTagsResponse> {
     const tags = await this.tagsRepo.getTags({});
     if (!tags) return this.helper.serviceResponse.errorResponse(GetTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
-  }
-
-  async getHomePageProductTags(): Promise<GetHomePageProductsTagsResponse> {
-    const query = { isHomePageProductsTags: true };
-    const tags = await this.tagsRepo.getTags(query);
-    if (!tags) return this.helper.serviceResponse.errorResponse(GetHomePageProductsTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
   }
 
