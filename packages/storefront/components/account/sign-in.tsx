@@ -22,6 +22,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
+import { storeAddresses } from 'toolkit/customerAddressSlice';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -57,8 +58,9 @@ const Signin: NextComponentType = () => {
       const datass = await token.json();
       dispatch(storeUserToken(datass?.data?.token));
 
-      userAPI.getCustomer(datass?.data?.token).then((response) => {
+      await userAPI.getCustomer(datass?.data?.token).then((response) => {
         dispatch(storeCustomerDetails(response?.data));
+        dispatch(storeAddresses(response?.data?.addresses!));
       });
 
       fetchCart(datass?.data?.token);

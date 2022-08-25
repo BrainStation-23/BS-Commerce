@@ -83,7 +83,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         <button
                                           onClick={async () => {
                                             try {
-                                              userAPI.deleteFromCompare(
+                                              await userAPI.deleteFromCompare(
                                                 product?.id!
                                               );
                                               dispatch(
