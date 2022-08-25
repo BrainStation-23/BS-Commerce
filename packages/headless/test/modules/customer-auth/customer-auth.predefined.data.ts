@@ -9,10 +9,6 @@ export const sendOtpRequestWithEmail: SendOtpDto = {
     email: 'james@gmail.com'
 }
 
-export const existingCustomerSendOtpRequest: SendOtpDto = {
-    email: 'robert@gmail.com'
-}
-
 export const invalidSendOtpRequestWithEmail: SendOtpDto = {
     email: 'james@gm'
 }

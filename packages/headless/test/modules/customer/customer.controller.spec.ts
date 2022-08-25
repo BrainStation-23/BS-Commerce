@@ -1,12 +1,17 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, GetDemoCustomerToken, TestTimeout, } from '../../test-utility';
+import {
+    connectTestDatabase,
+    GetDemoCustomerToken,
+    insertCustomers,
+    TestCustomerEmail,
+    TestCustomerId,
+    TestTimeout,
+} from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import {
-    CustomerId,
-    CustomerEmail,
     updateCustomerValidData,
     updateCustomerInvalidData,
     validAddress,
@@ -14,7 +19,7 @@ import {
     missingDataAddress,
 } from './customer.predefined.data';
 import { CustomerController } from 'src/modules/customer/rest';
-const token = GetDemoCustomerToken(CustomerId, 'customer', CustomerEmail).token;
+const token = GetDemoCustomerToken(TestCustomerId, 'customer', TestCustomerEmail).token;
 
 describe('Initializing... Customer controller testing', () => {
     let app: INestApplication;
@@ -23,6 +28,7 @@ describe('Initializing... Customer controller testing', () => {
 
     beforeAll(async () => {
         await connectTestDatabase();
+        await insertCustomers();
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
         }).compile();
