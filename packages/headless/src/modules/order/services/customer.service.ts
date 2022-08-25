@@ -45,11 +45,17 @@ export class OrderCustomerService {
 
     const availableProductIds = await this.orderRepository.getAvailableProducts(productIds);
 
-    if(availableProductIds.length === 0)return errorResponse( ErrorMessageReOrder.ALL_ITEMS_INVALID,{products: prevProducts.map(item => item.name)},HttpStatus.BAD_REQUEST );//send which products are not available
+    if(availableProductIds.length === 0){
+      const productNames = prevProducts.map(item => item.name);
+      return errorResponse( ErrorMessageReOrder.ALL_ITEMS_INVALID,{products: productNames},HttpStatus.BAD_REQUEST );
+    }
     else {
           const unavailableProducts = prevProducts.filter(product => !availableProductIds.find(item => item.id === product.productId) && product.name);
-       
-          if(ignoreInvalidItems === false) return errorResponse( ErrorMessageReOrder.INVALID_ITEMS, {products: unavailableProducts.map(item => item.name)}, HttpStatus.BAD_REQUEST );
+          
+          if( availableProductIds.length < productIds.length && ignoreInvalidItems === false){
+            const unavailableProductNames = unavailableProducts.map(item => item.name)
+            return errorResponse( ErrorMessageReOrder.INVALID_ITEMS, {products: unavailableProductNames}, HttpStatus.BAD_REQUEST );
+          }
           
           order = order.filter(product => availableProductIds.find(item => item.id === product.productId));    
         }
