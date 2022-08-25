@@ -15,7 +15,7 @@ import {
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
   GetCustomerAllProductsQuery,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -96,14 +96,14 @@ export interface apiFunction {
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
     categoryId: string
-  ) => Promise<GetCustomerAllProductsResponse | undefined>;
+  ) => Promise<GetCustomerAllProductsSuccessResponse | undefined>;
   checkout: (
     data: any,
     router: NextRouter
   ) => Promise<OrderResponseData | undefined>;
   getOrderProducts: (
     token: string
-  ) => Promise<OrderByUserIdResponseData | undefined>;
+  ) => Promise<OrderByUserIdResponse | undefined>;
   getOrderProduct: (
     token: string,
     OrderId: string
