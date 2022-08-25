@@ -1,7 +1,9 @@
 ---
-sidebar_position: 3
+sidebar_position: 8
 ---
+
 # Compare Products
+
 ## How to Add Product Compare
 
 The Storefront runs at **3002** and visit **localhost:3002/** route for Visiting Home Page , You can add a Product to **Compare**
@@ -21,7 +23,7 @@ The Storefront runs at **3002** and visit **localhost:3002/** route for Visiting
 
 ## Add Products To Compare From Home Page
 
-In the Home Page if you hover over any product, you can see four icons. Click on the **Compare** icon to add a product to the compare list. 
+In the Home Page if you hover over any product, you can see four icons. Click on the **Compare** icon to add a product to the compare list.
 
 ![Compare Icon](../img/compare/compare_icon.png)
 
@@ -29,10 +31,9 @@ After the Successful addition of Product , A Compare Modal will be shown.
 
 ![Compare item](../img/compare/single_product_compare.png)
 
- You can add up to three items to compare. Adding a fourth will automatically discard the first item on the list.
+You can add up to three items to compare. Adding a fourth will automatically discard the first item on the list.
 
 ![Compare items](../img/compare/compare_3_items.png)
-
 
 ## Add a Product To Cart From Product Details Page
 
