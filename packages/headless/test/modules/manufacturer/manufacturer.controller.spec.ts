@@ -10,6 +10,7 @@ import {
   TestTimeout,
   TestAdminId,
   TestAdminUsername,
+  insertAdmins,
 } from '../../test-utility';
 
 const token = GetDemoUserToken(TestAdminId, TestAdminUsername, 'admin').token;
@@ -47,7 +48,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
 
   beforeAll(async () => {
     await connectTestDatabase();
-
+    await insertAdmins();
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
       providers: [
