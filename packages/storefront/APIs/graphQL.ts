@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { OrderResponseData } from 'models';
 import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -35,7 +36,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  IOrderResponseData,
+  OrderByUserIdResponseData,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -50,6 +51,7 @@ import {
   VerifyOtpSuccessResponse,
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
+  GetCustomerAllProductsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -68,7 +70,9 @@ export async function signInGraphql(
   return undefined;
 }
 
-export async function sendOTPGraphql(data: string): Promise<SendOtpSuccessResponse | undefined> {
+export async function sendOTPGraphql(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
   return undefined;
 }
 
@@ -79,7 +83,7 @@ export async function signUpGraphql(
 }
 
 export async function getPublicProductsGraphql(): Promise<
-  GetCustomerAllProductsResponse | undefined
+  GetCustomerAllProductsSuccessResponse | undefined
 > {
   return undefined;
 }
@@ -201,20 +205,20 @@ export async function updateCustomerGraphql(
 export async function checkoutGraphql(
   data: any,
   router: NextRouter
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData  | undefined> {
   return undefined;
 }
 
 export async function getOrderProductGraphql(
   token: string,
   OrderId: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 

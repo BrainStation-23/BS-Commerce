@@ -5,21 +5,27 @@ import Link from 'next/link';
 import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';
-import { IOrderResponseData } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from 'models';
 
 const OrderMain: FC = () => {
   // const storedOrderProducts = orderProducts?.data?.orderInfo;
-  const [allOrderList, setAllOrderList] = useState([]);
+  const [allOrderList, setAllOrderList] = useState<OrderByUserId[]>([]);
+
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
-  const getAllOrdes = async () => {
+
+  const getAllOrders = async () => {
     const orderListRes = await userAPI
       .getOrderProducts(token)
-      .then((res: any) => setAllOrderList(res?.data?.orderInfo));
+      .then((res: OrderByUserIdResponse) => {
+        console.log(res);
+        setAllOrderList(res?.orderInfo);
+      });
   };
+
   useEffect(() => {
-    getAllOrdes();
+    getAllOrders();
   }, []);
 
   return (

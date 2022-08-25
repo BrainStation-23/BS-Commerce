@@ -1,9 +1,10 @@
+import { subCategoryList } from 'models';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
 
 interface Props {
-  category: any;
+  category: subCategoryList;
   showSub?: boolean;
   level: number;
 }
@@ -94,7 +95,7 @@ const HeaderSubCategory: React.FC<Props> = ({
               >
                 <ul className="pl-2">
                   {showSubCategory &&
-                    category.subCategories?.map((category: any) => (
+                    category.subCategories?.map((category: subCategoryList) => (
                       <li key={category.name}>
                         <HeaderSubCategory
                           category={category}
@@ -113,7 +114,7 @@ const HeaderSubCategory: React.FC<Props> = ({
           <div className={`lg:hidden`}>
             {category.subCategories && expand ? (
               <ul className="pl-2">
-                {category.subCategories.map((category: any) => (
+                {category.subCategories.map((category: subCategoryList) => (
                   <li key={category.name}>
                     <HeaderSubCategory category={category} level={level + 1} />
                   </li>

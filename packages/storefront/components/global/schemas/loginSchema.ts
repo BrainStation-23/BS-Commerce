@@ -1,7 +1,7 @@
 import XRegExp from 'xregexp';
 import { string, object, ref, number } from 'yup';
 
-function validatePassword(password: any) {
+function validatePassword(password: string) {
   const minLength = 8;
   const maxLength = 50;
   const containsUppercase = new RegExp('^(?=.*[A-Z])').test(password);
@@ -26,7 +26,7 @@ function validatePassword(password: any) {
   return true;
 }
 
-function hasValidCharacters(password: any) {
+function hasValidCharacters(password: string) {
   var validCharacterPattern = new RegExp(
     '^[a-zA-Z0-9!"#$%&\'()*+,-.\\\\/:;<=>?@[\\]^_`{|}~]*$'
   );
@@ -34,7 +34,7 @@ function hasValidCharacters(password: any) {
   return containsValidCharacter;
 }
 
-function isEmailLengthValid(email: any) {
+function isEmailLengthValid(email: string) {
   if (!email) return false;
   const parts = email.split('@');
   const local = parts[0];
@@ -70,7 +70,7 @@ const userSchema = {
     .test(
       'is-valid-email-length',
       'The part before @ of the email can be maximum 64 characters ',
-      (email) => isEmailLengthValid(email)
+      (email) => isEmailLengthValid(email!)
     ),
 };
 
@@ -91,7 +91,7 @@ export const registerSchema = object().shape({
     .test(
       'is-valid-characters',
       'Password has one or more invalid character. Click info icon for hints',
-      (password) => hasValidCharacters(password)
+      (password) => hasValidCharacters(password!)
     ),
 });
 
@@ -107,12 +107,12 @@ export const changePasswordSchema = object().shape({
     .test(
       'is-valid-password',
       'Password must contain at least an uppercase, a lowercase, a digit and a special character i.e. !”#$%&’()*+,-./:;<=>?@[]^_{|}~',
-      (password) => validatePassword(password)
+      (password) => validatePassword(password!)
     )
     .test(
       'is-valid-characters',
       'Password has one or more invalid character',
-      (password) => hasValidCharacters(password)
+      (password) => hasValidCharacters(password!)
     ),
   confirmPassword: string()
     .required('This field must not be empty')
@@ -127,12 +127,12 @@ export const resetPasswordSchema = object().shape({
     .test(
       'is-valid-password',
       'Password must contain at least an uppercase, a lowercase, a digit and a special character i.e. !”#$%&’()*+,-./:;<=>?@[]^_{|}~',
-      (password) => validatePassword(password)
+      (password) => validatePassword(password!)
     )
     .test(
       'is-valid-characters',
       'Password has one or more invalid character. Click info icon for hints',
-      (password) => hasValidCharacters(password)
+      (password) => hasValidCharacters(password!)
     ),
   confirmPassword: string()
     .required('This field must not be empty')

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { Product, WishlistItem } from 'models';
+import { CustomerProduct, Product, ResponseItem, WishlistItem } from 'models';
 import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { setModalState, setLoginModalState } from 'toolkit/modalSlice';
 import {
@@ -197,7 +197,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }, [router.asPath]);
 
   useEffect(() => {
-    let itemAmountInCart: any = cartData.find((item) => {
+    let itemAmountInCart: ResponseItem | undefined = cartData.find((item) => {
       if (item.productId === product.id) {
         return item;
       }
@@ -235,13 +235,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         title={product?.info?.name}
         pathArray={['Home', product.info?.name]}
         linkArray={['/', '/product' + product.id]}
-      />
-      {modalState && <Modal setModal={true} />}
-
-      <CartModal
-        open={showCartModal}
-        onClose={closeCartModal}
-        product={product}
       />
 
       <section className="body-font overflow-hidden bg-white text-gray-700">
@@ -473,7 +466,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       onClick={() => {
                         handleAddToCompare();
                         dispatch(setModalState(!modalCmp));
-                        dispatch(storeProductsToCompare(product));
+                        dispatch(storeProductsToCompare(product as CustomerProduct));
                       }}
                     >
                       + Compare

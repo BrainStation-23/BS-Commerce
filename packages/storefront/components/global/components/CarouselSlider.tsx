@@ -1,12 +1,12 @@
-import "swiper/css";
-import "swiper/css/autoplay";
+import 'swiper/css';
+import 'swiper/css/autoplay';
 
-import React, { FC } from "react";
-import { Swiper } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+import React, { FC } from 'react';
+import { Swiper } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper';
 
 interface Props {
-  children: any;
+  children: React.ReactNode;
 }
 
 //Need to pass the CarouselList props to the CarouselSlider component
@@ -21,9 +21,9 @@ const CarouselSlider: FC<Props> = ({ children }) => {
         clickable: true,
       }}
       loop={true}
-      modules={[Autoplay,Pagination]}
+      modules={[Autoplay, Pagination]}
     >
-      {children}
+      <>{children}</>
     </Swiper>
   );
 };

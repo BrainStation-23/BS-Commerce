@@ -11,9 +11,13 @@ import {
   updateCartItem,
 } from 'toolkit/cartSlice';
 import { userAPI } from 'APIs';
-import { updateCartItemRequest } from 'models';
+import { ResponseItem, updateCartItemRequest } from 'models';
 
-const ShowData = ({ data }: any) => {
+interface Props {
+  data: ResponseItem;
+}
+
+const ShowData: React.FC<Props> = ({ data }: Props) => {
   const dispatch = useAppDispatch();
 
   const [itemToUpdate, setItemToUpdate] = useState({
@@ -50,7 +54,7 @@ const ShowData = ({ data }: any) => {
       <tr key={data.productId}>
         <td className="border border-slate-300 px-8 py-2 md:px-4">
           <Image
-            src={data?.product?.photos[0]?.url}
+            src={data?.product?.photos![0]?.url!}
             alt="product Image"
             width={100}
             height={90}

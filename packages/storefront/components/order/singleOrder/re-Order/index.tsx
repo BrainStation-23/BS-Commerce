@@ -1,30 +1,28 @@
-import { IOrderResponseData } from 'models';
+import { OrderByUserId } from 'models';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'customHooks/hooks';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
 import { productsState } from 'toolkit/productsSlice';
 import { addToCart } from 'toolkit/cartSlice';
-import { IProductOrderData } from 'models';
+import { IOrderProduct } from 'models';
 interface Props {
-  singleOrder: IOrderResponseData;
+  singleOrder: OrderByUserId;
 }
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const dispatch = useAppDispatch();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
-  const [unavailableProd, setUnavailableProd] = useState<IProductOrderData[]>(
-    []
-  );
-  const [newProduct, setNewProduct] = useState<IProductOrderData[]>([]);
+  const [unavailableProd, setUnavailableProd] = useState<IOrderProduct[]>([]);
+  const [newProduct, setNewProduct] = useState<IOrderProduct[]>([]);
   const [message, setMessage] = useState('');
   const [cartToken, setCartToken] = useState(false);
-  let { products } = singleOrder;
+  let products = singleOrder.products;
   const allProducts = useAppSelector(
-    (state) => state.persistedReducer.product.featuredProducts
+    (state) => state.persistedReducer.product.publicProducts
   );
   const orderedProductId = products.map((prod) => {
     return prod.productId;
   });
-  const allProductsId = allProducts.map((prod) => {
+  const allProductsId = allProducts?.map((prod) => {
     return prod.id;
   });
 
@@ -33,24 +31,26 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     setUnavailableProd([]);
   };
   const handleReorder = () => {
-    let matched = orderedProductId.filter((id) => allProductsId.includes(id));
+    let matched = orderedProductId.filter((id: string) =>
+      allProductsId.includes(id)
+    );
     let unmatched = orderedProductId.filter(
-      (id) => !allProductsId.includes(id)
+      (id: string) => !allProductsId.includes(id)
     );
 
     if (unmatched.length > 0) {
-      products.forEach((product: IProductOrderData) => {
-        unmatched.forEach((id) => {
+      products.forEach((product: IOrderProduct) => {
+        unmatched.forEach((id: string) => {
           if (product.productId == id) {
             unavailableProd.push(product);
           }
         });
       });
-      let newProdData: IProductOrderData[] = [];
+      let newProdData: IOrderProduct[] = [];
 
-      matched.forEach((id) => {
+      matched.forEach((id: string) => {
         const np = products.find(
-          (product: IProductOrderData) => product.productId === id
+          (product: IOrderProduct) => product.productId === id
         );
         newProdData.push(np!);
       });
@@ -69,7 +69,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   };
   const toCart = async () => {
     if (newProduct.length > 0) {
-      newProduct.forEach((product: any) => {
+      newProduct.forEach((product) => {
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',
@@ -100,7 +100,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       });
     }
     if (cartToken) {
-      products.forEach((product: any) => {
+      products.forEach((product) => {
         const cartProductInfo = {
           name: product.name,
           shortDescription: 'short des',

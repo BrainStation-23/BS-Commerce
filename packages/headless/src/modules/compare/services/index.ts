@@ -75,6 +75,13 @@ export class CompareService {
   }
 
   async deleteItemByProductId(userId: string, productId: string): Promise<CompareResponse> {
+    const isExist = await this.compareRepository.getProduct(productId);
+    if(!isExist) return this.helper.serviceResponse.errorResponse(
+      DeleteCompareErrorEnum.INVALID_ID,
+      null,
+      HttpStatus.BAD_REQUEST,
+    );
+
     const data = await this.compareRepository.deleteItemByProductId(userId, productId);
     if (data) {
       return { data, code: HttpStatus.OK };
@@ -93,7 +100,7 @@ export class CompareService {
       return { data, code: HttpStatus.OK };
     } else {
       return this.helper.serviceResponse.errorResponse(
-        'Item can not be deleted.',
+        DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
         null,
         HttpStatus.BAD_REQUEST,
       );

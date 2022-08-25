@@ -1,4 +1,4 @@
-import { Product } from 'models';
+import { CustomerProduct, Product } from 'models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
@@ -28,10 +28,9 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                 <div className="relative overflow-hidden text-white transition-all duration-700">
                   <div className="relative inset-0 z-0 bg-cover bg-center">
                     <Picture
-                      product={product}
                       height={212}
                       width={250}
-                      src={product?.photos![0]?.url}
+                      src={product?.photos![0]?.url!}
                       alt={product?.info?.name}
                     />
 
@@ -53,7 +52,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                 <div className="absolute inset-0 z-10 flex items-center justify-center text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
                   <Icon product={product} />
                 </div>
-                <ProductInfo product={product} />
+                <ProductInfo product={product as CustomerProduct} />
               </div>
             </div>
           </div>

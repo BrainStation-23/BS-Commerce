@@ -23,6 +23,9 @@ export class CompareRepository {
     return await this.db.deleteCompareById(userId, compareId);
   }
 
+  async getProduct(productId: string): Promise<Boolean> {
+    return await this.db.getProduct(productId);
+  }
   async deleteItemByProductId(
     userId: string,
     productId: string,
