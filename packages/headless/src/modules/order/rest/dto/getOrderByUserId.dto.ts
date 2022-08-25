@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsNumber, IsString, MaxLength, ValidateNested } from 'class-validator';
-import { OrderByUserIdResponseData } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from 'models';
 import { OrderAddressDto} from './order.create.dto';
 import { OrderProductDto } from './OrderProduct.dto';
 
-export class OrderDetails implements OrderByUserIdResponseData{
+export class OrderDetails implements OrderByUserId{
     @ApiProperty({ type: OrderAddressDto })
     billingAddress: OrderAddressDto;
   
@@ -60,8 +60,8 @@ export class OrderDetails implements OrderByUserIdResponseData{
   
     @ApiProperty()
     orderedDate: Date;
-  }
-export class OrderListByUserIdResponseDto {
+}
+export class OrderListByUserIdResponseDto implements OrderByUserIdResponse {
     @ApiProperty()
     userId: string;
   
@@ -69,4 +69,4 @@ export class OrderListByUserIdResponseDto {
     @Type(() => OrderDetails)
     @ValidateNested({ always: true })
     orderInfo: OrderDetails[];
-  }
+}
