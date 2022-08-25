@@ -1,4 +1,4 @@
-import { Product } from 'models';
+import { CustomerProduct, Product } from 'models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
@@ -52,7 +52,7 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
                 <div className="absolute inset-0 z-10 flex items-center justify-center text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
                   <Icon product={product} />
                 </div>
-                <ProductInfo product={product} />
+                <ProductInfo product={product as CustomerProduct} />
               </div>
             </div>
           </div>

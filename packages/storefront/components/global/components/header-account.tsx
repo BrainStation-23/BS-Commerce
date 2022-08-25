@@ -93,6 +93,15 @@ const HeaderAccount: React.FC<Properties> = () => {
   ];
   return (
     <>
+      {modalOn && (
+        <Modal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          trigger={handleLogout}
+          modalTitle="Logout"
+          bodyText="Are you sure?"
+        />
+      )}
       {modalOnWishlist && (
         <Modal
           setModalOn={setModalOnWishlist}
