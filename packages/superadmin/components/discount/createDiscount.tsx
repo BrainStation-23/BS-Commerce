@@ -36,7 +36,6 @@ const CreateDiscount = () => {
             nTimes: values.nTimes,
             adminComment: values.adminComment,
           };
-          console.log(data);
           // handleSearchSubmit(data);
           actions.setSubmitting(false);
         }}

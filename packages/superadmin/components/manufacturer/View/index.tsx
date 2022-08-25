@@ -10,9 +10,6 @@ const ViewSingleManufacturer: FC = () => {
   const getManufacturer = async () => {
     const res = await userAPI.getSingleManufacturer(id);
     res?.data ? setManufacturer(res.data.manufacturer) : "";
-    console.log(res);
-
-    console.log(manufacturer);
   };
   useEffect(() => {
     getManufacturer();
