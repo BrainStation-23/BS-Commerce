@@ -28,4 +28,5 @@ export const apiEndPoints = {
   updateCustomerAddress: `/customer/update-address`,
   deleteCustomerAddress: `/customer/delete-address`,
   customer: '/customer',
+  reOrder: '/customer/order/reOrder',
 };

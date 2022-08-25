@@ -1,9 +1,9 @@
-import { OrderByUserIdResponseData } from 'models';
+import { OrderByUserId } from 'models';
 import React from 'react';
 import CartDetails from '../cartTable/main';
 import ReOrder from './re-Order/index';
 interface Props {
-  singleOrder: OrderByUserIdResponseData;
+  singleOrder: OrderByUserId;
 }
 
 const Detail: React.FC<Props> = ({ singleOrder }: Props) => {

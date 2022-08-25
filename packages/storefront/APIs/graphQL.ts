@@ -36,7 +36,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -211,7 +211,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData  | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   return undefined;
 }
 

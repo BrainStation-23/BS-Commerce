@@ -54,6 +54,7 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
+  IReOrderQuery,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -540,6 +541,20 @@ export async function resetPasswordRest(
     return res?.data;
   } catch (error: any) {
     toast.error('Password updatation failed. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function toreorderProcessRest(
+  data: IReOrderQuery
+): Promise<IReOrderQuery | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.reOrder}`, data);
+    console.log(res);
+  } catch (error: any) {
+    toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',
     });
     return error;

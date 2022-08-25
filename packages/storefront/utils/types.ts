@@ -49,6 +49,7 @@ import {
   SendOtpRequest,
   SendOtpSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  IReOrderQuery,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -161,4 +162,7 @@ export interface apiFunction {
   resetPassword: (
     data: CustomerForgotPasswordRequest
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
+  toreorderProcess: (
+    reOrderParams: IReOrderQuery
+  ) => Promise<IReOrderQuery | undefined>;
 }

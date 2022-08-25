@@ -31,6 +31,7 @@ import {
   forgetPasswordSendOtpRest,
   forgetPasswordVerifyOtpRest,
   resetPasswordRest,
+  toreorderProcessRest,
 } from './restApi';
 
 import {
@@ -138,6 +139,7 @@ const restApi: apiFunction = {
   forgetPasswordSendOtp: forgetPasswordSendOtpRest,
   forgetPasswordVerifyOtp: forgetPasswordVerifyOtpRest,
   resetPassword: resetPasswordRest,
+  toreorderProcess: toreorderProcessRest,
 };
 
 export const userAPI: apiFunction =
