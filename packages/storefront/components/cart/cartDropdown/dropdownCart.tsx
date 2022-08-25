@@ -88,7 +88,7 @@ const CartDropdown: NextComponentType = () => {
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-    function handleClick(e: any) {
+    function handleClick(e: MouseEvent) {
       if (componentRef && componentRef.current) {
         const ref: any = componentRef.current;
         if (!ref.contains(e.target)) {

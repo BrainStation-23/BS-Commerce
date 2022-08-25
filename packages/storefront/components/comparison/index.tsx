@@ -12,7 +12,7 @@ interface Props {
   setModal: boolean;
 }
 
-const Modal: React.FC<Props> = ({ setModal }) => {
+const ComparisonModal: React.FC<Props> = ({ setModal }) => {
   const [showModal, setShowModal] = useState(setModal);
   const dispatch = useAppDispatch();
 
@@ -83,7 +83,7 @@ const Modal: React.FC<Props> = ({ setModal }) => {
                                         <button
                                           onClick={async () => {
                                             try {
-                                              userAPI.deleteFromCompare(
+                                              await userAPI.deleteFromCompare(
                                                 product?.id!
                                               );
                                               dispatch(
@@ -218,4 +218,4 @@ const Modal: React.FC<Props> = ({ setModal }) => {
   );
 };
 
-export default Modal;
+export default ComparisonModal;

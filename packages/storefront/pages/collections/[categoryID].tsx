@@ -31,7 +31,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const categoryId = context.query.categoryId;
   const name = context?.query?.name;
   const res = await userAPI.getPublicProductByCategoryId(categoryId as string);
-  var products = res;
+
+  var products = res?.data?.products;
   return {
     props: {
       products,

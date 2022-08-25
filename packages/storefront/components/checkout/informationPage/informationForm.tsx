@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import FieldTemplate from '../fieldTemplate';
+import { CustomerAddress } from 'models';
 
 interface FormData {
   email: string;
@@ -27,7 +28,11 @@ interface FormData {
   tag: string;
 }
 
-const Information = (props: any) => {
+interface Props {
+  setModal: Function;
+}
+
+const Information: React.FC<Props> = ({ setModal }: Props) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [showLabel, setShowLabel] = useState(true);
   const user = useAppSelector(
@@ -105,18 +110,18 @@ const Information = (props: any) => {
   );
 
   const setTagsOptions = () => {
-    const ntags = new Set();
+    const ntags = new Set<string>();
     customerAddresses?.map((addressn) => {
       ntags.add(addressn?.tag);
     });
     const nArray: Array<string> = [];
-    ntags.forEach((tag: any) => nArray.push(tag));
+    ntags.forEach((tag) => nArray.push(tag));
     nArray.length === tags.length ? '' : setTags(nArray);
   };
   const dispatch = useAppDispatch();
-  const { setModal } = props;
+  // const { setModal } = props;
 
-  const handlePreviousAddress = (detail: any, setFieldValue: any) => {
+  const handlePreviousAddress = (detail: string, setFieldValue: Function) => {
     if (detail === 'Use a new address') {
       setShowLabel(true);
       setFieldValue('firstName', '');
@@ -175,7 +180,7 @@ const Information = (props: any) => {
     setTagsOptions();
   });
 
-  const setAddCustomerNewAddress = async (data: any) => {
+  const setAddCustomerNewAddress = async (data: CustomerAddress) => {
     await userAPI.addCustomerNewAddress(data);
     await userAPI.getCustomer(token).then((response) => {
       dispatch(storeAddresses(response?.data?.addresses));
@@ -234,7 +239,9 @@ const Information = (props: any) => {
                         id="tag"
                         name="tag"
                         className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0"
-                        onClick={(event: any) => {
+                        onClick={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
                           setDropdownText(event.target.value);
                           handlePreviousAddress(
                             event.target.value,

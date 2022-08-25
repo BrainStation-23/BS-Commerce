@@ -18,8 +18,6 @@ import {
   getCategoryListSuccessResponse,
   GetProductsByConditionQuery,
   GetProductsByConditionSuccessResponse,
-  IOrderCreateData,
-  IOrderResponseData,
   addToWishlistRequest,
   AddToWishlistResponse,
   getUserWishlistResponse,
@@ -53,11 +51,16 @@ import {
   VerifyOtpRequest,
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
+  OrderByUserIdResponse,
+  CreateOrderRequest,
+  SendOtpErrorResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
+import { OrderResponseData } from 'models';
+import { SendOtpResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -98,19 +101,23 @@ export async function signinRest(
   }
 }
 
-export async function sendOTPRest(data: string): Promise<SendOtpSuccessResponse | undefined> {
+export async function sendOTPRest(
+  data: string
+): Promise<SendOtpResponse | undefined> {
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   const isEmail = regex.test(data);
-  const reqData = isEmail ? {"email": data} : {"phone": data};
+  const reqData = isEmail ? { email: data } : { phone: data };
   try {
     const res = await axios.post(`${apiEndPoints.sendOTP}`, reqData);
-    const toastMessage = isEmail ? "An OTP has been sent to your email" : "An OTP has been sent to your mobile number"
+    const toastMessage = isEmail
+      ? 'An OTP has been sent to your email'
+      : 'An OTP has been sent to your mobile number';
     toast.success(toastMessage, {
-      containerId: "bottom-right"
-    })
-    return res?.data;
-  } catch(error: any) {
-    return error;
+      containerId: 'bottom-right',
+    });
+    return res.data as SendOtpSuccessResponse;
+  } catch (error: any) {
+    return error.response.data as SendOtpErrorResponse;
   }
 }
 
@@ -126,11 +133,11 @@ export async function signUpRest(
 }
 
 export async function getPublicProductsRest(): Promise<
-  GetCustomerAllProductsResponse | undefined
+  GetCustomerAllProductsSuccessResponse | undefined
 > {
   try {
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
-    return res.data.data as GetCustomerAllProductsSuccessResponse;
+    return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -173,9 +180,9 @@ export async function getCategoryListRest(): Promise<
   }
 }
 export async function checkoutRest(
-  data: any,
+  data: CreateOrderRequest,
   router: NextRouter
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.order}`, data);
     toast.success('Order created successfully!', {
@@ -193,12 +200,12 @@ export async function checkoutRest(
 
 export async function getPublicProductByCategoryIDRest(
   categoryId: string
-): Promise<GetCustomerAllProductsResponse | undefined> {
+): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}`
     );
-    return res.data.data as GetCustomerAllProductsResponse;
+    return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return [] as any;
   }
@@ -216,14 +223,14 @@ export async function addToWishlistRest(
 
 export async function getOrderProductsRest(
   token: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res?.data;
+    return res?.data?.data;
   } catch (error: any) {
     return [] as any;
   }
@@ -232,14 +239,14 @@ export async function getOrderProductsRest(
 export async function getOrderProductRest(
   token: string,
   OrderId: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return res?.data;
+    return res?.data?.data;
   } catch (error: any) {
     return [] as any;
   }
@@ -306,7 +313,9 @@ export async function deleteFullWishlistRest(): Promise<
 }
 
 export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(`${apiEndPoints.deleteFromCompare}?productId=${productId}`);
+  await axios.delete(
+    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+  );
 }
 
 export async function getCustomerProfileRest(
@@ -478,16 +487,19 @@ export async function forgetPasswordSendOtpRest(
   let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
   const isEmail = regex.test(data);
   try {
-    const res = await axios.post(`${apiEndPoints.forgetPasswordSendOtp}`, isEmail ? { "email": data } : { "phone": data});
+    const res = await axios.post(
+      `${apiEndPoints.forgetPasswordSendOtp}`,
+      isEmail ? { email: data } : { phone: data }
+    );
     toast.success('An OTP has been sent to your email/phone.', {
       containerId: 'bottom-right',
     });
     return res?.data;
   } catch (error: any) {
-    if(error.response.data.error === 'CAN_NOT_GET_CUSTOMER') {
-        toast.error('User doesn\'t exists.', {
-          containerId: 'bottom-right',
-        });
+    if (error.response.data.error === 'CAN_NOT_GET_CUSTOMER') {
+      toast.error("User doesn't exists.", {
+        containerId: 'bottom-right',
+      });
     } else {
       toast.error('Failed to send OTP. Try again.', {
         containerId: 'bottom-right',
@@ -500,9 +512,11 @@ export async function forgetPasswordSendOtpRest(
 export async function forgetPasswordVerifyOtpRest(
   data: VerifyOtpRequest
 ): Promise<VerifyOtpSuccessResponse | undefined> {
-
   try {
-    const res = await axios.post(`${apiEndPoints.forgetPasswordVerifyOtp}`, data);
+    const res = await axios.post(
+      `${apiEndPoints.forgetPasswordVerifyOtp}`,
+      data
+    );
     return res?.data;
   } catch (error: any) {
     toast.error('OTP expired or invalid OTP. Try again', {
@@ -515,12 +529,14 @@ export async function forgetPasswordVerifyOtpRest(
 export async function resetPasswordRest(
   data: CustomerForgotPasswordRequest
 ): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
-
   try {
     const res = await axios.post(`${apiEndPoints.resetPassword}`, data);
-    toast.success('Password updated successfully. Please login with new password', {
-      containerId: 'bottom-right',
-    });
+    toast.success(
+      'Password updated successfully. Please login with new password',
+      {
+        containerId: 'bottom-right',
+      }
+    );
     return res?.data;
   } catch (error: any) {
     toast.error('Password updatation failed. Try again', {
@@ -529,4 +545,3 @@ export async function resetPasswordRest(
     return error;
   }
 }
-

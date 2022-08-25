@@ -1,18 +1,18 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 export interface ImageProps {
   src: string;
   width: string | number;
   height: string | number;
   alt: string;
-  className?: any;
+  className?: string;
 }
 
 export const ImageCom: React.FC<ImageProps> = ({
   alt,
   src,
-  className = "",
+  className = '',
   height,
   width,
 }) => {

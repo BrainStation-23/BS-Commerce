@@ -1,17 +1,16 @@
-import React from "react";
-import DataTable from "./dataTable";
-import { IOrderResponseData } from "models";
+import React from 'react';
+import DataTable from './dataTable';
+import { OrderByUserIdResponseData } from 'models';
 interface Props {
-  singleOrder: IOrderResponseData;
+  singleOrder: OrderByUserIdResponseData;
 }
 
-const CartDetails: React.FC<Props> = ({singleOrder}: Props) => {
-
+const CartDetails: React.FC<Props> = ({ singleOrder }: Props) => {
   return (
     <>
       <div>
-        <div className="justify-center flex flex-wrap">
-          <DataTable singleOrder={singleOrder}/>
+        <div className="flex flex-wrap justify-center">
+          <DataTable singleOrder={singleOrder} />
         </div>
       </div>
     </>

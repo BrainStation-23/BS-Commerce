@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { NestedCategoryList } from 'models';
+import { NestedCategoryList, subCategoryList } from 'models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
 import HeaderSubCategory from '@/components/global/components/headerSubCategory';
 
@@ -35,7 +35,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
               name: category.name,
             },
           }}
-          as={`/collections/${category.name}`}
+          //as={`/collections/${category.name}`}
         >
           <a className="">{category.name}</a>
         </Link>
@@ -64,7 +64,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
       {category.subCategories && expand ? (
         <div className="lg:hidden">
           <ul className="pl-2">
-            {category.subCategories?.map((subCategory: any) => (
+            {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 {/* {subCategory.name} */}
                 <HeaderSubCategory category={subCategory} level={1} showSub={expand} />
@@ -81,7 +81,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
           expand ? 'scale-x-100' : 'scale-x-0'
         }`}>
           <ul className="pl-2">
-            {category.subCategories?.map((subCategory: any) => (
+            {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 <HeaderSubCategory
                   category={subCategory}

@@ -159,7 +159,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
-            onClick={(event: any) => {
+            onClick={(event) => {
               handleAddToCart();
               event.preventDefault();
             }}
@@ -230,9 +230,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               />
             </svg>
             <div
-              className={`absolute left-6 ${
-                inWishlist ? '-top-10' : '-top-6'
-              } mb-6 hidden flex-col items-center peer-hover:flex`}
+              className={`absolute left-6 -top-10 mb-6 hidden flex-col items-center peer-hover:flex`}
             >
               <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
                 {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}
@@ -253,7 +251,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as Product));
+                dispatch(storeProductsToCompare(product as CustomerProduct));
                 event.preventDefault();
               }}
             >
@@ -263,7 +261,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
               />
             </svg>
-            <div className="absolute left-7 -top-7 mb-6 hidden items-center peer-hover:inline-block">
+            <div className="absolute left-6 -top-7 mb-6 hidden items-center peer-hover:inline-block">
               <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
                 Add to compare
                 <div className="absolute right-5 -bottom-1 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
