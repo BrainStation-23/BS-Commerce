@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { searchConfig } from "config/search";
+import { IProductSearchResponse } from "models";
 import { ProductSrarchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
 import { errorResponse, successResponse } from "src/utils/response";
@@ -117,7 +118,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
   }
 
 
-  async search(keyword: string): Promise<IServiceResponse<any>>{
+  async search(keyword: string): Promise<IServiceResponse<IProductSearchResponse>>{
     const result = await this.getSearchData(keyword)
     if(!result){
       return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
@@ -125,7 +126,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     return successResponse(null, result, HttpStatus.OK)
   }
  
-  private async getSearchData(req) { 
+  private async getSearchData(req): Promise<IProductSearchResponse> { 
     const query = {
       from: 0,
       size: 4,
@@ -147,7 +148,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     });  
     console.log("search time = ", Date.now()-start)
   
-    const resultsCount = hits.total.value;
+    const resultsCount = hits.total.value as number;
     const values  = hits.hits.map((hit) => {
       return {
         id:     hit._id,

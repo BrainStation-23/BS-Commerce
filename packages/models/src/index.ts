@@ -16,3 +16,4 @@ export * from './order/index';
 export * from './product/index';
 export * from './user/index';
 export * from './tags/index';
+export * from './elastic-search/index'

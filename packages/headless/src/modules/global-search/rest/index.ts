@@ -1,6 +1,8 @@
 import { Controller, Get, Query, Res } from "@nestjs/common";
 import { ApiQuery, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
+import { IProductSearchResponse } from "models";
+import { IServiceResponse } from "src/utils/response/service.response.interface";
 import { ElasticService } from "../services/elastic.service";
 
 @ApiTags('Global search')
@@ -10,7 +12,7 @@ export class SearchController{
 
     @ApiQuery({name:'q', description:"search query", example:"apple"})
     @Get()
-    async search(@Query('q') q: string, @Res({ passthrough: true }) res: Response){ 
+    async search(@Query('q') q: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<IProductSearchResponse>>{ 
         const { code, ...response } = await this.elasticService.search(q) 
         res.status(code);
         return { code, ...response };
