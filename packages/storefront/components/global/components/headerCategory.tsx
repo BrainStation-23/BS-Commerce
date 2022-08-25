@@ -35,7 +35,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
               name: category.name,
             },
           }}
-          as={`/collections/${category.name}`}
+          //as={`/collections/${category.name}`}
         >
           <a className="">{category.name}</a>
         </Link>
