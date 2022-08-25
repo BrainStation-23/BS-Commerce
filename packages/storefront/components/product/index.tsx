@@ -76,12 +76,18 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }
 
   const handleAddToCompare = async () => {
-    try {
-      await userAPI.addToCompare(product.id!);
-    } catch (error) {
-      toast.error('Error happend.', {
-        containerId: 'bottom-right',
-      });
+    if (token) {
+      try {
+        await userAPI.addToCompare(product?.id!);
+        dispatch(setModalState(!modalCmp));
+        dispatch(storeProductsToCompare(product as CustomerProduct));
+      } catch (error) {
+        toast.error('Error happend.', {
+          containerId: 'bottom-right',
+        });
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -465,8 +471,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       className="mt-2 hover:text-green-600"
                       onClick={() => {
                         handleAddToCompare();
-                        dispatch(setModalState(!modalCmp));
-                        dispatch(storeProductsToCompare(product as CustomerProduct));
                       }}
                     >
                       + Compare

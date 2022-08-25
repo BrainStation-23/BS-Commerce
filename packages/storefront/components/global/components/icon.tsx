@@ -93,12 +93,18 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   };
 
   const handleAddToCompare = async () => {
-    try {
-      await userAPI.addToCompare(product?.id!);
-    } catch (error) {
-      toast.error('Error happend.', {
-        containerId: 'bottom-right',
-      });
+    if (token) {
+      try {
+        await userAPI.addToCompare(product?.id!);
+        dispatch(setModalState(!modalCmp));
+        dispatch(storeProductsToCompare(product as CustomerProduct));
+      } catch (error) {
+        toast.error('Error happend.', {
+          containerId: 'bottom-right',
+        });
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -250,8 +256,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               strokeWidth={1.5}
               onClick={(event) => {
                 handleAddToCompare();
-                dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as CustomerProduct));
+
                 event.preventDefault();
               }}
             >
