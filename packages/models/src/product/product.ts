@@ -19,7 +19,7 @@ export interface ProductMeta {
     keywords?: string[],
     title?: string,
     description?: string,
-    friendlyPageName: string
+    friendlyPageName?: string
 }
 
 export interface ProductPhoto {
@@ -43,7 +43,7 @@ export interface ProductManufacturer {
 export interface Product {
     id?: string,
     info: ProductInfo;
-    meta: ProductMeta;
+    meta?: ProductMeta;
     tags?: string[];
     photos?: ProductPhoto[];
     brands?: string[],

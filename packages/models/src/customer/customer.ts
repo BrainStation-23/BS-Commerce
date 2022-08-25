@@ -15,7 +15,7 @@ export interface CustomerAddress {
 
 export interface Customer {
     id: string;
-    name?: string;
+    name: string;
     phone?: string;
     email?: string;
     password?: string;
