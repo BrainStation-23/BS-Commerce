@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
-import { deleteComparedProduct } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { userAPI } from 'APIs';
 
 interface Props {
@@ -17,8 +17,21 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
   const dispatch = useAppDispatch();
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.productsToCompare
+    (state) => state.persistedReducer.compare.compareList.items
   );
+
+  const handleDeleteCompareItem = async (productId: string) => {
+    try {
+      const res = await userAPI.deleteFromCompare(productId);
+      if ('data' in res!) {
+        dispatch(storeCompare(res.data));
+      }
+    } catch (error) {
+      toast.error('Some error happend. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
+  };
 
   if (comparisonProducts.length === 0) return null;
 
@@ -75,30 +88,16 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 </th>
                                 {comparisonProducts.map((product) => {
                                   return (
-                                    <React.Fragment key={product.id}>
+                                    <React.Fragment key={product.productId}>
                                       <th
                                         scope="col"
                                         className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                       >
                                         <button
-                                          onClick={async () => {
-                                            try {
-                                              await userAPI.deleteFromCompare(
-                                                product?.id!
-                                              );
-                                              dispatch(
-                                                deleteComparedProduct(
-                                                  product?.id!
-                                                )
-                                              );
-                                            } catch (error) {
-                                              toast.error(
-                                                'Some error happend. Try again.',
-                                                {
-                                                  containerId: 'bottom-right',
-                                                }
-                                              );
-                                            }
+                                          onClick={() => {
+                                            handleDeleteCompareItem(
+                                              product?.productId
+                                            );
                                           }}
                                         >
                                           Remove
@@ -116,9 +115,9 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
-                                    <React.Fragment key={product.id}>
+                                    <React.Fragment key={product.productId}>
                                       <td className="border-r px-6 py-4 text-sm font-normal">
-                                        {product?.info?.name!}
+                                        {product?.productDetails?.info?.name!}
                                       </td>
                                     </React.Fragment>
                                   );
@@ -130,36 +129,49 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
-                                    <React.Fragment key={product.id}>
+                                    <React.Fragment key={product?.productId}>
                                       <td className="border-r p-5  align-top font-normal">
                                         <div>
-                                          <Image
+                                          {/* <Image
                                             src={product?.photos![0]?.url!}
-                                            alt={product?.info?.name}
+                                            alt={
+                                              product?.productDetails?.info
+                                                ?.name!
+                                            }
                                             height={100}
                                             width={100}
                                             // className="m-auto"
                                             layout="fixed"
-                                          />
+                                          /> */}
                                           <br />
-                                          {product?.info?.oldPrice ? (
+                                          {product?.productDetails?.info
+                                            ?.oldPrice ? (
                                             <>
                                               <span className="text-sm text-red-600">
-                                                On Sale ${product.info.price}
+                                                On Sale $
+                                                {
+                                                  product?.productDetails?.info
+                                                    ?.price
+                                                }
                                               </span>
                                             </>
                                           ) : (
                                             <span className="font-normal text-red-600">
-                                              ${product.info.price}
+                                              $
+                                              {
+                                                product?.productDetails?.info
+                                                  ?.price
+                                              }
                                             </span>
                                           )}
                                           <br />
                                           <Link
                                             href={{
-                                              pathname: `/product/${product?.info.name}`,
+                                              pathname: `/product/${product?.productDetails?.info?.name}`,
                                               query: {
-                                                id: product?.id,
-                                                name: product?.info.name,
+                                                id: product?.productId,
+                                                name: product?.productDetails
+                                                  ?.info?.name,
                                               },
                                             }}
                                             passHref
@@ -180,9 +192,12 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
-                                    <React.Fragment key={product.id}>
+                                    <React.Fragment key={product?.productId}>
                                       <td className="border-r px-6 py-4 text-sm font-normal">
-                                        {product?.info.shortDescription}
+                                        {
+                                          product?.productDetails?.info
+                                            ?.shortDescription
+                                        }
                                       </td>
                                     </React.Fragment>
                                   );
@@ -194,7 +209,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 </td>
                                 {comparisonProducts.map((product) => {
                                   return (
-                                    <React.Fragment key={product.id}>
+                                    <React.Fragment key={product?.productId}>
                                       <td className="border-r px-6 py-4 text-sm font-normal">
                                         Available In stock
                                       </td>

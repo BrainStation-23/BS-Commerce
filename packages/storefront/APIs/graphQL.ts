@@ -1,6 +1,6 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { OrderResponseData } from 'models';
 import {
+  OrderResponseData,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -36,7 +36,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -164,7 +164,9 @@ export async function deleteFullWishlistGraphql(): Promise<
 > {
   return undefined;
 }
-export async function deleteFromCompareGraphql(productId: string) {}
+export async function deleteFromCompareGraphql(productId: string): Promise<CompareResponse | undefined> {
+  return undefined;
+}
 
 export async function getCustomerProfileGraphql(
   token: string
@@ -211,7 +213,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData  | undefined> {
+): Promise<OrderByUserIdResponse  | undefined> {
   return undefined;
 }
 

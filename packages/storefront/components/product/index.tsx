@@ -13,7 +13,7 @@ import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'toolkit/productsSlice';
-import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -78,9 +78,11 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const handleAddToCompare = async () => {
     if (token) {
       try {
-        await userAPI.addToCompare(product?.id!);
-        dispatch(setModalState(!modalCmp));
-        dispatch(storeProductsToCompare(product as CustomerProduct));
+        const res = await userAPI.addToCompare(product?.id!);
+        if ('data' in res!) {
+          dispatch(setModalState(!modalCmp));
+          dispatch(storeCompare(res.data));
+        }
       } catch (error) {
         toast.error('Error happend.', {
           containerId: 'bottom-right',

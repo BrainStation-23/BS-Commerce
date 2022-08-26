@@ -17,7 +17,7 @@ import {
   setModalState,
   setLoginModalState,
 } from 'toolkit/modalSlice';
-import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
@@ -47,6 +47,12 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
+  const compareItems = useAppSelector((state) => {
+    state.persistedReducer.compare.compareList.items;
+  });
+
+  console.log(compareItems);
+
   let inWishlist = wishlistData?.find(
     (item: WishlistItem) => item.productId === product?.id
   )
@@ -56,6 +62,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const productInCart = cartData?.find((item) => item.productId === product?.id)
     ? true
     : false;
+
+  // const inCompareList = compareData?.find(
+  //   (item) => item.productId === product?.id
+  // );
 
   const btnClass =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white';
@@ -95,9 +105,11 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const handleAddToCompare = async () => {
     if (token) {
       try {
-        await userAPI.addToCompare(product?.id!);
-        dispatch(setModalState(!modalCmp));
-        dispatch(storeProductsToCompare(product as CustomerProduct));
+        const res = await userAPI.addToCompare(product?.id!);
+        if ('data' in res!) {
+          dispatch(setModalState(!modalCmp));
+          dispatch(storeCompare(res.data));
+        }
       } catch (error) {
         toast.error('Error happend.', {
           containerId: 'bottom-right',
