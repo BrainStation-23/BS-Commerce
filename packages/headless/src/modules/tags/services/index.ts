@@ -6,6 +6,7 @@ import {
   GetTagsErrorMessages,
   CreateTagResponse,
   CreateTagErrorMessages,
+  GetTagResponse,
 } from 'models';
 import { Tag } from 'src/entity/tags';
 
@@ -15,6 +16,12 @@ export class TagsService {
 
   async getTags(): Promise<GetTagsResponse> {
     const tags = await this.tagsRepo.getTags({ isHomePageProductsTag: false });
+    if (!tags) return this.helper.serviceResponse.errorResponse(GetTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
+  }
+
+  async getTag(tagsId: string): Promise<GetTagResponse> {
+    const tags = await this.tagsRepo.getTag({ id: tagsId });
     if (!tags) return this.helper.serviceResponse.errorResponse(GetTagsErrorMessages.NO_TAGS_FOUND, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
   }
