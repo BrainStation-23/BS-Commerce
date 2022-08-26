@@ -1,23 +1,26 @@
 import { connectToDatabase } from "../../mongodb.connect"
 import {ProductModel} from '../../product/product.model'
 import { esclient } from ".."
+import { Product } from "models"
 
-function mapSearchData(e: any): Record<string, any> { 
-    let data: any = {} 
+function mapSearchData(e: Product): Record<string, any> { 
+    let data: any = {}
+    data.info = {}
+    data.meta = {} 
 
-    data.infoProductId = e.id || ''
-    data.infoName = e?.info?.name || ''
-    data.infoShortDescription = e?.info?.shortDescription || ''
-    data.infoFullDescription = e?.info?.fullDescription || ''
-    data.infoSku = e?.info?.sku || ''
-    data.infoPrice = e?.info?.price || 0
+    data.info.productId = e.id || ''
+    data.info.name = e?.info?.name || ''
+    data.info.shortDescription = e?.info?.shortDescription || ''
+    data.info.fullDescription = e?.info?.fullDescription || ''
+    data.info.sku = e?.info?.sku || ''
+    data.info.price = e?.info?.price || 0
 
-    data.metaKeywords = e?.meta?.keywords || []
-    data.metaTitle = e?.meta?.title || ''
-    data.metaDescription = e?.meta?.description || ''
+    data.meta.keywords = e?.meta?.keywords || []
+    data.meta.title = e?.meta?.title || ''
+    data.meta.description = e?.meta?.description || ''
 
     data.brands = e?.brands || []
-    data.categories = e?.categories || []
+    data.categories = e?.categories.map(c => { return {id: c?.id, name: c?.name}}) || []
     data.manufacturer = e?.manufacturer  || {}
     data.photos = e?.photos.map(p => p.url)  || []
     data.tags = e?.tags || []

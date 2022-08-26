@@ -19,6 +19,32 @@ async function run() {
             await esclient.indices.delete({ index }); 
         } 
         await esclient.indices.create({ index });
+        await esclient.indices.close({index});
+        await esclient.indices.putSettings({
+            index,
+            body: {
+                analysis: {
+                    filter: {
+                        autocomplete_filter: {
+                            type: 'edge_ngram',
+                            min_gram: 1,
+                            max_gram: 20
+                        }
+                    },
+                    analyzer: {
+                        autocomplete: {
+                            type: 'custom',
+                            tokenizer: 'standard',
+                            filter: [
+                                'lowercase',
+                                'autocomplete_filter'
+                            ]
+                        }
+                    }
+                }
+            }
+        });
+        await esclient.indices.open({index});
         await esclient.indices.putMapping({ 
             index, 
             type,

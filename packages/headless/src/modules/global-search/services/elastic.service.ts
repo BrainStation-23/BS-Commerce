@@ -126,40 +126,52 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     return successResponse(null, result, HttpStatus.OK)
   }
  
-  private async getSearchData(req): Promise<IProductSearchResponse> { 
+  private async getSearchData(searchKey): Promise<IProductSearchResponse> { 
     const query = {
       from: 0,
       size: 4,
       query: {
-        multi_match:{
-          query: req,
-          fields: ['infoName', 'tags', 'sku', 'metaTitle', 'brands', 'categories.name', 'manufacturer.name'],
+        bool:{
+          should:{
+            multi_match:{
+              query: searchKey,
+              type: "phrase_prefix",
+              fields: ['info.name', 'info.shortDescription', 'info.fullDescription', 'tags', 'sku', 'meta.title', 'brands', 'categories.name', 'manufacturer.name'],
+            }
+          }
         }
       }
     }
   
-    const start = Date.now()
+    let startTime = Date.now()
     const { body: { hits } } = await this.esService.search({
-      from:  req.page  || 0,
-      size:  req.limit || 250,
+      from:  searchKey.page  || 0,
+      size:  searchKey.limit || 250,
       index: searchConfig.index, 
       type:  searchConfig.index,
       body:  query
     });  
-    console.log("search time = ", Date.now()-start)
-  
-    const resultsCount = hits.total.value as number;
+    console.log("search time = ", Date.now()-startTime)
+    
+    startTime = Date.now()
+    const resultsCount = hits.total.value as number; 
+    const tags = hits.hits.flatMap(hit => hit._source.tags)
+    const set = [...new Set(tags)].slice(0,5)
+    const suggestion = hits.hits.map(hit => hit._source.info.name).slice(0,5).concat(set)
     const values  = hits.hits.map((hit) => {
       return {
         id:     hit._id,
         data:  hit._source,
-        score:  hit._score 
+        score:  hit._score
       }
     });
+
+    console.log("search result formation time = ", Date.now()-startTime)
   
     return {
       resultsCount,
-      values
+      values,
+      suggestion
     }
   }
 

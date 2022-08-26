@@ -1,64 +1,59 @@
-export class IProductSearchSchema {
-  infoProductId: string;
-  infoName: string;
-  infoShortDescription: string;
-  infoFullDescription: string;
-  infoSku: string;
-  infoPrice: number;
-  metaKeywords: any;
-  metaTitle: string;
-  metaDescription: string;
-  tags: string[];
-  photos: string[];
-  brands: any;
-  manufacturer: any;
-  categories: any;
-}
-
 export const productSearchSchema = {
-  infoProductId: {
+  'info.productId': {
+    type: 'text', 
+  },
+  'info.name': {
+    type: 'text', 
+    analyzer: 'autocomplete'
+  },
+  'info.shortDescription': {
     type: 'text',
+    analyzer: 'autocomplete' 
   },
-  infoName: {
-    type: 'text', 
-  },
-  infoShortDescription: {
-    type: 'text', 
-  },
-  infoFullDescription: {
-    type: 'text', 
-  },
-  infoSku: {
+  'info.fullDescription': {
     type: 'text',
+    analyzer: 'autocomplete' 
   },
-  infoPrice: {
+  'info.sku': {
+    type: 'text',
+    analyzer: 'autocomplete'
+  },
+  'info.price': {
     type: 'integer',
   },
-  metaKeywords: {
+  'meta.keywords': {
     type: 'text',
+    analyzer: 'autocomplete'
   },
-  metaTitle: {
+  'meta.title': {
     type: 'text',
+    analyzer: 'autocomplete'
   },
-  metaDescription: {
-    type: 'text', 
+  'meta.description': {
+    type: 'text',
+    analyzer: 'autocomplete' 
   },
   tags: {
     type: 'text',
+    analyzer: 'autocomplete'
   },
   photos: {
     type: 'text',
+    analyzer: 'autocomplete'
   },
   brands: {
     type: 'text',
+    analyzer: 'autocomplete'
   },
   manufacturer: {
     properties: {
       id: {
         type: 'text',
+        analyzer: 'autocomplete'
       },
       name: {
         type: 'text',
+        analyzer: 'autocomplete'
       },
     },
   },
