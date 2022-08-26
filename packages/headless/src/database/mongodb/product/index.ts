@@ -15,22 +15,24 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.create(product);
   }
 
-  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
+  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number, price?: Partial<SearchCondition>, orderBy?: string,): Promise<Product[] | []> {
+    const sort: any = { 'info.price': orderBy, createdAt: -1 };
+    return await ProductModel.find({
+      ...query,
+      'info.price': { $gte: price?.minPrice || 0, $lte: price?.maxPrice || Number.MAX_SAFE_INTEGER }
+    }, '-_id').sort(sort).skip(skip).limit(limit).lean();
   }
 
-  async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[] | []> {
+  async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: 'asc' | 'desc', skip?: number, limit?: number): Promise<Product[] | []> {
     const categories = await CategoryModel.find({ '$or': [{ 'slug': slug }, { 'ancestors.slug': slug }] }).lean();
     const categoryIdList = categories && categories.length && categories.map(category => { return category.id });
     const { maxPrice, minPrice } = price;
-    const products = await ProductModel.find({
+    const sort: any = { 'info.price': orderBy };
+    return await ProductModel.find({
       ...query,
       'categories.id': { '$in': categoryIdList },
       'info.price': { $gte: minPrice || 0, $lte: maxPrice || Number.MAX_SAFE_INTEGER }
-    }, '-_id').sort({
-      'info.price': orderBy
-    }).skip(skip).limit(limit).lean();
-    return products;
+    }, '-_id').sort(sort).skip(skip).limit(limit).lean();
   }
 
   async getProductCount(query: Record<string, any>): Promise<number> {

@@ -4,7 +4,7 @@ export interface TextareaProps {
   label: string;
   value: string | number;
   name: string;
-  className?: any;
+  className?: string;
   disabled?: boolean;
   id?: string;
   onChangeHandler?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;

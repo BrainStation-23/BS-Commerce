@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Put, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Put, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerService } from '../services';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
@@ -21,14 +21,6 @@ import {
   UpdateCustomerErrorResponseDto,
   UpdateCustomerSuccessResponseDto
 } from './dto';
-import {
-  SendOtpDto,
-  SendOtpErrorResponseDto,
-  SendOtpSuccessResponseDto,
-  VerifyOtpDto,
-  VerifyOtpErrorResponseDto,
-  VerifyOtpSuccessResponseDto
-} from 'src/modules/customer-auth/rest/dto';
 
 @Controller('customer')
 @ApiTags('Customer Profile API')

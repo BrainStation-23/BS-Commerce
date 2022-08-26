@@ -60,22 +60,12 @@ const HomeComponent: NextComponentType = () => {
   return (
     <>
       <div className="scroll-smooth hover:scroll-auto">
-        {modalState && <Modal setModal={true} />}
-
         {modalStateLogin && (
           <ModalLogin
             setModalOn={setModalOn}
             setChoice={setChoice}
             modalTitle="You need to login first."
             bodyText="Proceed to login?"
-          />
-        )}
-
-        {modalStateCart && (
-          <CartModal
-            open={modalStateCart}
-            onClose={closeCartModal}
-            product={modalProduct!}
           />
         )}
 

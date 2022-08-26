@@ -4,13 +4,21 @@ import { useRouter } from 'next/router';
 import { useAppDispatch } from 'customHooks/hooks';
 import { setLoginModalState } from 'toolkit/modalSlice';
 
-const Modal = ({
+interface Props {
+  setModalOn: Function;
+  setChoice: Function;
+  trigger?: Function;
+  modalTitle?: string;
+  bodyText?: string;
+}
+
+const Modal: React.FC<Props> = ({
   setModalOn,
   setChoice,
   trigger,
   modalTitle,
   bodyText,
-}: any) => {
+}: Props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const handleOKClick = () => {

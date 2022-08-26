@@ -10,6 +10,7 @@ import { useAppSelector } from 'customHooks/hooks';
 import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
 import ProductRow from '@/components/home/bestSell/productRow.component';
+import { CustomerProduct } from 'models';
 
 const FeaturedProducts = () => {
   const products = useAppSelector(
@@ -35,9 +36,9 @@ const FeaturedProducts = () => {
       >
         {products &&
           products.length > 0 &&
-          products.map((product: any, index: any) =>
+          products.map((product: CustomerProduct, index: number) =>
             index % 3 === 2 ? (
-              <React.Fragment key={product?.id + products[index - 1]?.id}>
+              <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide>
                   <ProductRow
                     products={[
@@ -49,7 +50,7 @@ const FeaturedProducts = () => {
                 </SwiperSlide>
               </React.Fragment>
             ) : index + 1 === products.length ? (
-              <React.Fragment key={product?.id + products[index - 1]?.id}>
+              <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide>
                   <ProductRow
                     products={[
@@ -57,8 +58,7 @@ const FeaturedProducts = () => {
                       index % 3 === 0 && products.length > getMinimumProduct()
                         ? products[0]
                         : products[index - 1],
-                      (index % 3 === 0) &&
-                      products.length > getMinimumProduct()
+                      index % 3 === 0 && products.length > getMinimumProduct()
                         ? products[1]
                         : products[0],
                     ]}

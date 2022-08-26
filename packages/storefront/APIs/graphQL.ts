@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { OrderResponseData } from 'models';
 import {
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -35,7 +36,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  IOrderResponseData,
+  OrderByUserIdResponseData,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -45,6 +46,12 @@ import {
   deleteCartItemSuccessResponse,
   deleteAllCartItemsSuccessResponse,
   updateCartItemSuccessResponse,
+  SendOtpSuccessResponse,
+  VerifyOtpRequest,
+  VerifyOtpSuccessResponse,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
+  GetCustomerAllProductsSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -63,20 +70,20 @@ export async function signInGraphql(
   return undefined;
 }
 
+export async function sendOTPGraphql(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
 export async function signUpGraphql(
   data: CreateCustomerRequest
 ): Promise<CreateCustomerResponse | undefined> {
   return undefined;
 }
 
-export async function forgotPasswordGraphql(
-  data: ForgotPasswordRequest
-): Promise<ForgotPasswordResponse | undefined> {
-  return undefined;
-}
-
 export async function getPublicProductsGraphql(): Promise<
-  GetCustomerAllProductsResponse | undefined
+  GetCustomerAllProductsSuccessResponse | undefined
 > {
   return undefined;
 }
@@ -198,27 +205,27 @@ export async function updateCustomerGraphql(
 export async function checkoutGraphql(
   data: any,
   router: NextRouter
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderByUserIdResponseData  | undefined> {
   return undefined;
 }
 
 export async function getOrderProductGraphql(
   token: string,
   OrderId: string
-): Promise<IOrderResponseData | undefined> {
+): Promise<OrderResponseData | undefined> {
   return undefined;
 }
 
 export async function getCartGraphql(
   token: string
 ): Promise<getCartSuccessResponse | undefined> {
-  return undefined
+  return undefined;
 }
 
 export async function addToCartGraphql(
@@ -227,14 +234,38 @@ export async function addToCartGraphql(
   return undefined;
 }
 
-export async function deleteAllCartItemGraphql(): Promise<deleteAllCartItemsSuccessResponse | undefined> {
+export async function deleteAllCartItemGraphql(): Promise<
+  deleteAllCartItemsSuccessResponse | undefined
+> {
   return undefined;
 }
 
-export async function deleteSingleCartItemGraphql(productId: string): Promise<deleteCartItemSuccessResponse |undefined> {
- return undefined
+export async function deleteSingleCartItemGraphql(
+  productId: string
+): Promise<deleteCartItemSuccessResponse | undefined> {
+  return undefined;
 }
 
-export async function updateCartItemGraphql(cartItem: updateCartItemRequest): Promise<updateCartItemSuccessResponse | undefined> {
-  return undefined; 
+export async function updateCartItemGraphql(
+  cartItem: updateCartItemRequest
+): Promise<updateCartItemSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function forgetPasswordSendOtpGraphql(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function forgetPasswordVerifyOtpGraphql(
+  data: VerifyOtpRequest
+): Promise<VerifyOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function resetPasswordGraphql(
+  data: CustomerForgotPasswordRequest
+): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  return undefined;
 }

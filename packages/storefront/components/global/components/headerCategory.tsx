@@ -1,15 +1,15 @@
-import { NestedCategoryList } from 'models';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { NestedCategoryList, subCategoryList } from 'models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
-import { HeaderSubCategory } from './headerSubCategory';
+import HeaderSubCategory from '@/components/global/components/headerSubCategory';
 
 interface Props {
   category: NestedCategoryList;
 }
 
-export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
-  const [subOff, settt] = useState(false);
+const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
+  const [showSubCategory, settt] = useState(false);
   const [expand, setExpand] = useState<boolean>(false);
 
   const handleExpandClick = (
@@ -21,7 +21,9 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
 
   return (
     <div
-      className="group"
+      className={`group`}
+      onMouseEnter={() => setExpand(true)}
+      onMouseLeave={() => setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >
       <div className="flex cursor-pointer flex-row items-center justify-between py-1 px-3 text-sm transition-all duration-100 ease-linear hover:text-green-600">
@@ -33,7 +35,7 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
               name: category.name,
             },
           }}
-          as={`/collections/${category.name}`}
+          //as={`/collections/${category.name}`}
         >
           <a className="">{category.name}</a>
         </Link>
@@ -62,10 +64,10 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
       {category.subCategories && expand ? (
         <div className="lg:hidden">
           <ul className="pl-2">
-            {category.subCategories?.map((subCategory: any) => (
+            {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 {/* {subCategory.name} */}
-                <HeaderSubCategory category={subCategory} level={1} />
+                <HeaderSubCategory category={subCategory} level={1} showSub={expand} />
               </li>
             ))}
           </ul>
@@ -74,14 +76,16 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         ''
       )}
       {/* render on lg+ screen */}
-      {category.subCategories ? (
-        <div className="absolute top-0 left-56 z-50 hidden h-auto w-56 bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 lg:group-hover:block">
+      {document.body.clientWidth > 768 && category.subCategories ? (
+        <div className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+          expand ? 'scale-x-100' : 'scale-x-0'
+        }`}>
           <ul className="pl-2">
-            {category.subCategories?.map((subCategory: any) => (
+            {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 <HeaderSubCategory
                   category={subCategory}
-                  subOff={subOff}
+                  showSub={showSubCategory}
                   level={1}
                 />
               </li>
@@ -94,3 +98,5 @@ export const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     </div>
   );
 };
+
+export default HeaderCategory;

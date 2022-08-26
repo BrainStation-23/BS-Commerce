@@ -35,6 +35,8 @@ export class ProductService {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
 
+    product.meta.friendlyPageName = await this.urlGenerate(product.info.name);
+
     const friendlyPageNameMatch = await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
 
@@ -47,6 +49,18 @@ export class ProductService {
     const product = await this.productRepo.findProduct({ id: productId });
     if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async urlGenerate(productName: string): Promise<string> {
+    return productName
+      .toLowerCase()
+      .trim()     // remove white spaces at the start and end of string
+      .replace(/\s+/g, "-")     // Replace spaces with dash
+      .replace(/&/g, '-and-')     // ampersand to and
+      .replace(/[^\w\-]+/g, "")     // convert any on-alphanumeric character to a dash
+      .replace(/\-\-+/g, "-")     // Replace multiple dash with single dash
+      .replace(/^-+/, "")     // Trim dash from start of text
+      .replace(/-+$/, "");     // Trim dash from end of text
   }
 
   async getAllProducts(condition: SearchCondition): Promise<GetAllProductsResponse> {
@@ -78,8 +92,13 @@ export class ProductService {
     const getProduct = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
+    product.info = { ...getProduct.info, ...product.info };
+    product.meta = { ...getProduct.meta, ...product.meta };
+
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
+
+    (product.info && product.info?.name) ? product.meta.friendlyPageName = await this.urlGenerate(product.info.name) : null;
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
@@ -104,7 +123,7 @@ export class ProductService {
   }
 
   generateSearchQuery(condition: SearchCondition): object {
-    const { brand, categoryId, productName, isFeatured, manufacturer, maxPrice, minPrice } = condition;
+    const { brand, categoryId, productName, isFeatured, manufacturer } = condition;
     const query: Record<string, any> = {};
     if (brand !== undefined && brand !== '') {
       query.brands = brand;
@@ -131,11 +150,10 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
-  async getCustomerAllProducts(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
-    const { skip, limit, ...rest } = condition;
-    const products = await this.productRepo.findAllProducts({ ...rest, 'info.published': true }, skip, limit);
-    if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+  async getCustomerProductByURL(url: string,): Promise<GetCustomerProductResponse> {
+    const product = await this.productRepo.findProduct({ 'meta.friendlyPageName': url, 'info.published': true });
+    if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
   async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
@@ -144,11 +162,23 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
-  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetProductsByConditionResponse> {
+  async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
-    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit, { maxPrice, minPrice }, orderBy);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
+
+    let manufacturers = new Set();
+    let brands = new Set();
+    products.length && products.forEach(product => {
+      product?.manufacturer && manufacturers.add(product?.manufacturer?.name);
+      product.brands?.length && product.brands?.forEach(brand => { brands.add(brand) })
+    })
+
+    return this.helper.serviceResponse.successResponse({
+      products,
+      manufacturers: new Array(...manufacturers),
+      brands: new Array(...brands)
+    }, HttpStatus.OK);
   }
 }

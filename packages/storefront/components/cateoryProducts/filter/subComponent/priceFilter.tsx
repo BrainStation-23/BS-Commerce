@@ -8,7 +8,7 @@ const PriceFilter: FC = () => {
         <div className="">
           <CounterElement />
         </div>
-        <div className="grid w-full scale-95 grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+        <div className="grid w-full scale-95 grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
           <div className="mt-2 flex flex-row text-sm">
             <span className="flex grid content-center justify-center text-sm">
               $
@@ -20,7 +20,7 @@ const PriceFilter: FC = () => {
                 placeholder="0"
               />
             </span>
-            <span className="flex grid content-center justify-center">
+            <span className="mx-2 flex grid content-center justify-center">
               From
             </span>
           </div>
@@ -29,7 +29,7 @@ const PriceFilter: FC = () => {
           </div> */}
           <div>
             <div className="mt-2 flex flex-row text-sm">
-              <span className="mx-4 flex grid content-center justify-center text-sm">
+              <span className="ml-8 mr-2 flex grid content-center justify-center text-sm">
                 $
               </span>
               <span className="mr-2">

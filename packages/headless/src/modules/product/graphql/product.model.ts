@@ -1,5 +1,5 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsArray } from 'class-validator';
+import { IsArray, IsIn } from 'class-validator';
 import {
   ProductInfo,
   ProductMeta,
@@ -16,6 +16,7 @@ import {
   GetAllProductsQuery,
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
+  GetCustomerAllProductsResponseType,
 } from 'models';
 
 
@@ -107,8 +108,20 @@ export class UpdateProductInfoInput implements UpdateProductInfo {
   isFeatured?: boolean;
 }
 
-@ObjectType('ProductMeta')
 @InputType('ProductMetaInput')
+export class GraphqlProductMetaInput implements ProductMeta {
+  @Field(() => [String], { nullable: true })
+  @IsArray()
+  keywords?: string[];
+
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+}
+
+@ObjectType('ProductMeta')
 export class GraphqlProductMeta implements ProductMeta {
   @Field(() => [String], { nullable: true })
   @IsArray()
@@ -120,8 +133,8 @@ export class GraphqlProductMeta implements ProductMeta {
   @Field({ nullable: true })
   description?: string;
 
-  @Field()
-  friendlyPageName: string;
+  @Field({ nullable: true })
+  friendlyPageName?: string;
 }
 
 @InputType()
@@ -228,8 +241,8 @@ export class GraphqlProductInput implements Product {
   @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(() => GraphqlProductMeta)
-  meta: GraphqlProductMeta;
+  @Field(() => GraphqlProductMetaInput, { nullable: true })
+  meta?: GraphqlProductMetaInput;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
@@ -294,8 +307,9 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 }
 
 @InputType()
@@ -321,8 +335,9 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 
   @Field(() => Int, { nullable: true })
   minPrice?: number;
@@ -381,6 +396,28 @@ export class ProductArrayResponse {
   @Field(() => [GraphqlProduct], { nullable: true })
   data?: GraphqlProduct[];
 }
+
+@ObjectType()
+export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+  @Field(() => [GraphqlProduct], { nullable: true })
+  products: GraphqlProduct[];
+
+  @Field(() => [String], { nullable: true })
+  manufacturers: string[];
+
+  @Field(() => [String], { nullable: true })
+  brands: string[];
+}
+
+@ObjectType()
+export class ProductArrayWithBrandAndManufacturersResponse {
+  @Field(() => Int)
+  code: number;
+
+  @Field(() => GetCustomerAllProductsResponse, { nullable: true })
+  data?: GetCustomerAllProductsResponse;
+}
+
 
 @ObjectType()
 export class ProductArrayWithCount {

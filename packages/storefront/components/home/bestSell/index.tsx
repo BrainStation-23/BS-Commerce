@@ -14,6 +14,7 @@ import Banner from '@/components/home/bestSell/banner';
 import ProductRow from '@/components/home/bestSell/productRow.component';
 import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
+import { CustomerProduct } from 'models';
 
 const BestSell: NextComponentType = () => {
   const products = useAppSelector(
@@ -49,9 +50,11 @@ const BestSell: NextComponentType = () => {
             >
               {products &&
                 products.length > 0 &&
-                products.map((product: any, index: number) =>
+                products.map((product: CustomerProduct, index: number) =>
                   index % 3 === 2 ? (
-                    <React.Fragment key={product?.id + products[index - 1]?.id}>
+                    <React.Fragment
+                      key={product?.id! + products[index - 1]?.id}
+                    >
                       <SwiperSlide>
                         <ProductRow
                           products={[
@@ -63,7 +66,9 @@ const BestSell: NextComponentType = () => {
                       </SwiperSlide>
                     </React.Fragment>
                   ) : index + 1 === products.length ? (
-                    <React.Fragment key={product?.id + products[index - 1]?.id}>
+                    <React.Fragment
+                      key={product?.id! + products[index - 1]?.id}
+                    >
                       <SwiperSlide>
                         <ProductRow
                           products={[

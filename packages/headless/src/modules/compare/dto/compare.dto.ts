@@ -71,6 +71,7 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
       GetCompareErrorEnum.COMPARISON_NOT_FOUND,
       DeleteCompareErrorEnum.COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST,
       DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
+      DeleteCompareErrorEnum.INVALID_ID
     ],
   })
   error: AddProductToCompareErrorEnum | GetCompareErrorEnum | DeleteCompareErrorEnum;

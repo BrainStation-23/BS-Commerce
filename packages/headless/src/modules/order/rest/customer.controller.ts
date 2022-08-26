@@ -11,6 +11,7 @@ import { OrderCustomerService } from '../services/customer.service';
 import { OrderSortQueryDto } from './dto/sortQuery.dto';
 import { OrderListByUserIdResponseDto } from './dto/getOrderByUserId.dto';
 import { OrderDto } from './dto/order.dto';
+import { ReOrderDto } from './dto/reOrder.dto';
 
 
 @ApiTags('Order - Customer API')
@@ -18,7 +19,7 @@ import { OrderDto } from './dto/order.dto';
 @ApiBearerAuth()
 @Controller('customer/order')
 export class OrderCustomerController {
-  constructor(private orderCustomerService: OrderCustomerService) {}
+  constructor( private orderCustomerService: OrderCustomerService ) {}
 
   @ApiResponse({
     type: OrderDto,
@@ -37,6 +38,25 @@ export class OrderCustomerController {
     );
     res.status(code);
     
+    return response;
+  }
+
+  @ApiResponse({
+    type: OrderDto,
+    description: 'Re Order Response',
+  })
+  @Post('/reOrder')
+  async reOrder(
+    @UserInfo() user: User,
+    @Body() body: ReOrderDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<any> {
+    const { code, ...response } = await this.orderCustomerService.reOrder(
+      user.id,
+      body
+    );
+    
+    res.status(code);
     return response;
   }
 

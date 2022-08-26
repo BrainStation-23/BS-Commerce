@@ -6,10 +6,11 @@ import { useAppSelector } from 'customHooks/hooks';
 import Container from '@/components/global/components/container';
 import ProductRow from './productRow.component';
 import SwiperGrid from '@/components/global/components/swipergrid';
+import { CustomerProduct } from 'models';
 
 const TrendingProducts = () => {
-  let [filterKey, setFilterKey]: any = useState('smartphones');
-  let [filteredProduct, setProducts]: any = useState([]);
+  let [filterKey, setFilterKey] = useState('smartphones');
+  let [filteredProduct, setProducts] = useState<CustomerProduct[]>([]);
 
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
@@ -23,14 +24,14 @@ const TrendingProducts = () => {
   };
   useEffect(() => {
     const newProduct = products?.filter(
-      (product: any) => product.category === 'smartphones'
+      (product) => true || product.categories[0].name === 'smartphones'
     );
     setProducts(newProduct);
   }, [products]);
 
-  const handleClick = (text: any) => {
+  const handleClick = (text: string) => {
     const newProduct = products?.filter(
-      (product: any) => product.category === text
+      (product) => true || product.categories[0].name === text
     );
     setProducts(newProduct);
     setFilterKey(text);
@@ -89,7 +90,7 @@ const TrendingProducts = () => {
             rows={1}
             loop={products.length > getMinimumProduct() ? true : false}
           >
-            {products?.map((product: any, index: any) =>
+            {products?.map((product: CustomerProduct, index: number) =>
               index % 2 === 1 ? (
                 <React.Fragment key={product.id}>
                   <SwiperSlide className="pl-5">
