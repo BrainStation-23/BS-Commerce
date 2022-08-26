@@ -214,7 +214,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               />
             </svg>
             <div
-              className={`} absolute  left-6
+              className={`absolute  left-6
               -top-10 mb-6 hidden flex-col items-center peer-hover:flex`}
             >
               <span
