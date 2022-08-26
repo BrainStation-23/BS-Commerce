@@ -6,9 +6,13 @@ const TagsSchema = new Schema<Tag>({
   id: {
     type: String,
     unique: true,
-    default: () => randomUUID()
   },
   name: String,
+  isHomePageProductsTag: {
+    type: Boolean,
+    default: false,
+    select: false
+  }
 }, {
   timestamps: true,
   versionKey: false
