@@ -1,4 +1,5 @@
 export class Tag {
-    id: string;
+    id?: string;
     name: string;
+    isHomePageProductsTag?: boolean;
 }
