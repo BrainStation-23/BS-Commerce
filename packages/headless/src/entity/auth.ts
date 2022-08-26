@@ -4,9 +4,9 @@ export class SignInData {
     password: string;
 }
 
-export class JwtPayload {
+export class AdminJwtPayload {
     id: string;
     username: string;
     logInTime: number;
+    role: string;
 }
-
