@@ -13,7 +13,7 @@ export class TagsDatabase implements ITagsDatabase {
     return await TagsModel.findOne(query).select('-_id').lean();
   }
 
-  async createTag(data: { name: string }): Promise<Tag | null> {
+  async createTag(data: Tag): Promise<Tag | null> {
     const tag = await TagsModel.create(data);
     return tag?.toObject();
   }
