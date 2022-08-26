@@ -22,7 +22,7 @@ export class OrderAdminService{
     constructor(private orderRepository: OrderRepository) {}
 
     async getOrderById(orderId: string):Promise<IServiceResponse<OrderEntity>>{
-        const orderData = await this.orderRepository.getOrderById(orderId);
+        const orderData = await this.orderRepository.findOrder({orderId});
         if (orderData) {
             return successResponse(OrderEntity, orderData);
           }

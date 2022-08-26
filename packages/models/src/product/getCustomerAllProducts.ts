@@ -13,14 +13,25 @@ export interface GetCustomerAllProductsQuery {
     skip?: number;
     limit?: number;
     brand?: string;
+    manufacturer?: string;
     categoryId?: string;
     productName?: string;
     isFeatured?: boolean;
+    slug?: string;
+    orderBy?: string;
+    minPrice?: number;
+    maxPrice?: number;
+}
+
+export interface GetCustomerAllProductsResponseType {
+    products: CustomerProduct[];
+    manufacturers: string[];
+    brands: string[];
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {
     code: number;
-    data: CustomerProduct[];
+    data: GetCustomerAllProductsResponseType;
 }
 
 export const enum GetCustomerAllProductsErrorMessages {

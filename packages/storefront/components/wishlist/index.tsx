@@ -73,13 +73,6 @@ const WishlistComponent: NextComponentType = () => {
         pathArray={['Home', 'Wishlist']}
         linkArray={['/', '/wishlist']}
       />
-      {modalStateCart && (
-        <CartModal
-          open={modalStateCart}
-          onClose={closeCartModal}
-          product={modalProduct!}
-        />
-      )}
 
       {modalOn && wishlistData.items?.length! > 0 && (
         <Modal

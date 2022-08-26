@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 
 import { Product } from 'models';
 import SingleView from '@/components/products/singleView';
@@ -21,27 +22,28 @@ const PhotosCard: FC<{
               className="bi bi-image-fill col-1"
               style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col text-start px-3">Photos</div>
+            <div className="fs-5 col px-3 text-start">Photos</div>
           </div>
         </div>
         <div className="" id="metaTab">
           <div className="card-body">
             <div className="row justify-content-center">
-              {product?.photos[0]?.url ? (
-                <img
+              {product?.photos![0]?.url ? (
+                <Image
                   className="col-2"
                   src={product?.photos[0]?.url}
                   alt="No Image"
-                  width="130px"
+                  width={150}
+                  height={150}
                 />
               ) : (
                 'Not a valid image!!'
               )}
             </div>
-            <SingleView label="URL" value={product?.photos[0]?.url} />
-            <SingleView label="ID" value={product?.photos[0]?.id} />
-            <SingleView label="Title" value={product?.photos[0]?.title} />
-            <SingleView label="alt" value={product?.photos[0]?.alt} />
+            <SingleView label="URL" value={product?.photos![0]?.url} />
+            <SingleView label="ID" value={product?.photos![0]?.id} />
+            <SingleView label="Title" value={product?.photos![0]?.title} />
+            <SingleView label="alt" value={product?.photos![0]?.alt} />
           </div>
         </div>
       </div>

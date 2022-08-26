@@ -7,12 +7,16 @@ import {
   GetCustomerQuery,
   SendOtpRequest,
   VerifyOtpRequest,
+  CustomerForgotPasswordRequest,
 } from 'models';
 
 @ObjectType()
 export class AuthCustomer implements Customer {
   @Field({ nullable: true })
   id: string;
+
+  @Field()
+  name: string;
 
   @Field({ nullable: true })
   phone?: string;
@@ -29,6 +33,8 @@ export class SendOtpInput implements SendOtpRequest {
   phone?: string;
 
   @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
   email?: string;
 }
 
@@ -38,6 +44,8 @@ export class VerifyOtpInput implements VerifyOtpRequest {
   phone?: string;
 
   @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
   email?: string;
 
   @Field(() => Int)
@@ -53,6 +61,9 @@ export class CreateCustomerInput implements CreateCustomerRequest {
   @IsOptional()
   @IsEmail()
   email?: string;
+
+  @Field(() => Int)
+  otp: number;
 
   @Field()
   name: string;
@@ -77,6 +88,21 @@ export class CustomerSignInDataInput implements CustomerSignInRequest {
   password: string;
 }
 
+@InputType()
+export class CustomerForgotPasswordDataInput implements CustomerForgotPasswordRequest {
+  @Field({ nullable: true })
+  phone?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @Field()
+  @MinLength(6, { message: 'Password is too short. Minimal length is $constraint1 characters', })
+  password: string;
+}
+
 @ObjectType()
 export class CustomerAuthResponseMessage {
   @Field()
@@ -85,6 +111,15 @@ export class CustomerAuthResponseMessage {
 
 @ObjectType()
 export class RegistrationAuthResponse {
+  @Field(() => Int)
+  code: number
+
+  @Field(() => CustomerAuthResponseMessage, { nullable: true })
+  data?: CustomerAuthResponseMessage
+}
+
+@ObjectType()
+export class ForgotPasswordResponse {
   @Field(() => Int)
   code: number
 

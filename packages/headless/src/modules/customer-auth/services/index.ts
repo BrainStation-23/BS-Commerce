@@ -17,6 +17,10 @@ import {
   SendOtpRequest,
   SendOtpResponse,
   SendOtpErrorMessages,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordResponse,
+  CustomerForgotPasswordErrorMessages,
+  CustomerForgotPasswordSuccessMessages,
   VerifyOtpRequest,
   VerifyOtpResponse,
   VerifyOtpErrorMessages,
@@ -38,10 +42,8 @@ export class CustomerAuthService {
     const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
     if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
 
-    let otpVerified = null;
-    otpVerified = data.phone && await this.customerRepo.findOtp({ isVerified: true, phone: data.phone });
-    otpVerified = (!otpVerified && data.email) ? await this.customerRepo.findOtp({ isVerified: true, email: data.email }) : otpVerified;
-    if (!otpVerified || (otpVerified.otpVerifiedAt + FIVE_MINUTES) < Date.now()) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    const verifyOtp = (data.email || data.phone) && await this.customerRepo.findOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
+    if (!verifyOtp) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.OTP_EXPIRED, null, HttpStatus.BAD_REQUEST);
 
     let customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
@@ -80,16 +82,6 @@ export class CustomerAuthService {
     return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
   }
 
-  async registerVerifyOTP(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
-    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
-    if (doesCustomerEmailExist) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.CUSTOMER_EMAIL_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
-
-    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
-    if (doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.CUSTOMER_PHONE_ALREADY_EXITS, null, HttpStatus.BAD_REQUEST,);
-
-    return await this.verifyOtp(data);
-  }
-
   async verifyOtp(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
     const verifyOtp = (data.email || data.phone) && await this.customerRepo.verifyOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
     if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, null, HttpStatus.BAD_REQUEST);
@@ -122,5 +114,40 @@ export class CustomerAuthService {
 
     const token = this.jwtService.sign(payload);
     return this.helper.serviceResponse.successResponse({ token }, HttpStatus.OK,);
+  }
+
+  async forgotPassword(data: CustomerForgotPasswordRequest): Promise<CustomerForgotPasswordResponse> {
+    const doesCustomerEmailExist = data.email && await this.customerRepo.getCustomerPassword({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone });
+    if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+
+    let otpVerified = null;
+    otpVerified = data.phone && await this.customerRepo.findOtp({ isVerified: true, phone: data.phone });
+    otpVerified = (!otpVerified && data.email) ? await this.customerRepo.findOtp({ isVerified: true, email: data.email }) : otpVerified;
+    if (!otpVerified || (otpVerified.otpVerifiedAt + FIVE_MINUTES) < Date.now()) return this.helper.serviceResponse.errorResponse(CreateCustomerErrorMessages.TIME_LIMIT_EXCEED_OR_UNVERIFIED_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+
+    const customer = doesCustomerEmailExist || doesCustomerPhoneExist;
+    customer.password = await bcrypt.hash(data.password, authConfig.salt!);
+
+    const updatedPassword = await this.customerRepo.updateCustomer(customer.id, customer);
+    if (!updatedPassword) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_UPDATE_CUSTOMER_PASSWORD, null, HttpStatus.BAD_REQUEST);
+
+    customer.email && await this.customerRepo.deleteOtp({ email: customer.email });
+    customer.phone && await this.customerRepo.deleteOtp({ phone: customer.phone });
+    return this.helper.serviceResponse.successResponse({ message: CustomerForgotPasswordSuccessMessages.FORGOT_PASSWORD_SUCCESSFUL }, HttpStatus.OK);
+  }
+
+  async forgotPasswordSendOTP(data: SendOtpRequest): Promise<SendOtpResponse> {
+    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
+    if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    return this.sendOtp(data);
+  }
+
+  async forgotPasswordVerifyOTP(data: VerifyOtpRequest): Promise<VerifyOtpResponse> {
+    const doesCustomerEmailExist = data.email && await this.customerRepo.findCustomer({ email: data.email });
+    const doesCustomerPhoneExist = data.phone && await this.customerRepo.findCustomer({ phone: data.phone });
+    if (!doesCustomerEmailExist && !doesCustomerPhoneExist) return this.helper.serviceResponse.errorResponse(CustomerForgotPasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST,);
+    return this.verifyOtp(data);
   }
 }

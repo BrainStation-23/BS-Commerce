@@ -8,6 +8,7 @@ import {
   GetCustomerAllProductsQueryInput,
   GraphqlProductInput,
   ProductArrayResponse,
+  ProductArrayWithBrandAndManufacturersResponse,
   ProductArrayWithCountResponse,
   ProductCount,
   ProductDeletedResponse,
@@ -28,7 +29,13 @@ export class ProductResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Query(() => ProductArrayResponse)
+  @Query(() => ProductResponse)
+  async getCustomerProductByURL(@Args('url') url: string) {
+    const res = await this.productService.getCustomerProductByURL(url);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Query(() => ProductArrayWithBrandAndManufacturersResponse)
   async getCustomerAllProducts(@Args('condition') condition: GetCustomerAllProductsQueryInput) {
     const res = await this.productService.getCustomerProductsByCondition(condition);
     return this.helper.serviceResponse.graphqlResponse(res);

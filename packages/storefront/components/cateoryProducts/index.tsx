@@ -1,13 +1,7 @@
-import type { NextComponentType } from 'next';
-
 import CategoryFilter from '@/components/cateoryProducts/filter/main';
-
 import PageTitle from '@/components/global/components/pageTitle';
-
 import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
-
 import ProductSort from '@/components/cateoryProducts/sort/index';
-
 import { FC } from 'react';
 
 interface props {
@@ -27,12 +21,13 @@ const CategoryPageComponent: FC<props> = (props: props) => {
             <CategoryFilter />
           </div>
 
-          <div className="col-span-4 grid">
+          <div className="col-span-4 flex-col">
             <div className="mt-16 mb-8 px-4 md:px-12 lg:px-12 xl:px-14">
               <ProductSort />
             </div>
-
-            <CategoryProductSegment />
+            <div>
+              <CategoryProductSegment />
+            </div>
           </div>
         </div>
       </div>

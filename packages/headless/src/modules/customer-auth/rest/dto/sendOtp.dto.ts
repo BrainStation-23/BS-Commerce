@@ -13,13 +13,13 @@ export class SendOtpDto implements SendOtpRequest {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
     @IsString()
     @IsEmail()
-    email: string;
+    email?: string;
 }
 
 export class SendOtpErrorResponseDto implements SendOtpErrorResponse {

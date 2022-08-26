@@ -8,4 +8,5 @@ export const enum GetCompareErrorEnum {
 export const enum DeleteCompareErrorEnum {
     COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST = "COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST.",
     ITEM_CAN_NOT_BE_DELETED = "ITEM_CAN_NOT_BE_DELETED.",
+    INVALID_ID = "INVALID PRODUCT ID"
 }

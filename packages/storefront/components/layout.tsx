@@ -9,9 +9,16 @@ import Footer from '@/components/global/components/footer';
 import Header from '@/components/global/components/header';
 import Viewport from '@/components/viewport';
 import { XCircleIcon } from './global/components/headerIcons';
-import Modal from '@/components/comparison';
 import { useRouter } from 'next/router';
-import { setModalState } from 'toolkit/modalSlice';
+import { useState } from 'react';
+import {
+  setCartModalState,
+  setLoginModalState,
+  setModalState,
+} from 'toolkit/modalSlice';
+import ModalLogin from '@/components/global/components//modal/modal';
+import CartModal from '@/components/global/components/modal/cartModal';
+import ComparisonModal from '@/components/comparison';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,9 +30,37 @@ const Layout = ({ children }: LayoutProps) => {
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
+
   const modalState = useAppSelector(
     (state) => state.persistedReducer.modal.setModal
   );
+
+  const modalStateLogin = useAppSelector(
+    (state) => state.persistedReducer.modal.setModalLogin
+  );
+
+  const modalStateCart = useAppSelector(
+    (state) => state.persistedReducer.modal?.setModalCart?.showModal
+  );
+
+  const modalProduct = useAppSelector(
+    (state) => state.persistedReducer.modal?.setModalCart?.product
+  );
+
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
+  const [showCartModal, setShowCartModal] = useState<boolean>(false);
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+    dispatch(setCartModalState({ showModal: false }));
+  };
+
+  useEffect(() => {
+    dispatch(setModalState(false));
+    dispatch(setLoginModalState(false));
+    dispatch(setCartModalState({ showModal: false }));
+  }, [router.asPath]);
 
   useEffect(() => {
     Axios.defaults.headers.common = {
@@ -38,6 +73,23 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
+      {modalState && <ComparisonModal setModal={true} />}
+      {modalStateLogin && (
+        <ModalLogin
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
+
+      {modalStateCart && (
+        <CartModal
+          open={modalStateCart}
+          onClose={closeCartModal}
+          product={modalProduct!}
+        />
+      )}
       <Viewport />
       <Header />
       <main>{children}</main>
@@ -61,7 +113,6 @@ const Layout = ({ children }: LayoutProps) => {
         containerId={'bottom-left'}
         position="bottom-left"
       />
-      {modalState && <Modal setModal={true} />}
     </>
   );
 };

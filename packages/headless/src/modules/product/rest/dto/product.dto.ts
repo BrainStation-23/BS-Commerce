@@ -91,11 +91,6 @@ export class ProductMetaDto implements ProductMeta {
     @IsOptional()
     @IsString()
     description?: string;
-
-    @ApiProperty({ required: true })
-    @IsNotEmpty()
-    @IsString()
-    friendlyPageName: string;
 }
 export class ProductPhotoDto implements ProductPhoto {
     @ApiProperty({ required: false })
@@ -144,16 +139,6 @@ export class ProductCategoryDto implements ProductCategory {
     @IsNotEmpty()
     @IsString()
     id: string;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsBoolean()
-    isFeatured?: boolean;
-
-    @ApiProperty({ required: false })
-    @IsOptional()
-    @IsNumber()
-    displayOrder?: number
 }
 
 export class ProductDto implements Product {

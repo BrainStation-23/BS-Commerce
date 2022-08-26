@@ -17,8 +17,8 @@ const SearchItem: FC<{ searchText: string }> = ({ searchText }) => {
           <Product
             key={index}
             product={product}
-            imgHeight={150}
-            imgWeight={150}
+            imgHeight={177}
+            imgWeight={177}
           />
         ) : (
           ''

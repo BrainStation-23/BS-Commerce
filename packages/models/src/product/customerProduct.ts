@@ -13,7 +13,7 @@ export interface CustomerProductMeta {
     keywords?: string[],
     title?: string,
     description?: string,
-    friendlyPageName: string
+    friendlyPageName?: string
 }
 
 export interface CustomerProductPhoto {

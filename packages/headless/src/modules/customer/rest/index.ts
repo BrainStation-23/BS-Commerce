@@ -5,7 +5,22 @@ import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Customer } from 'src/entity/customer';
-import { AddCustomerNewAddressErrorResponseDto, AddCustomerNewAddressSuccessResponseDto, CustomerAddressDto, DeleteCustomerAddressErrorResponseDto, DeleteCustomerAddressParamsDto, DeleteCustomerAddressSuccessResponseDto, GetCustomerInformationErrorResponseDto, GetCustomerInformationSuccessResponseDto, UpdateCustomerAddressErrorResponseDto, UpdateCustomerAddressParamsDto, UpdateCustomerAddressSuccessResponseDto, UpdateCustomerDto, UpdateCustomerErrorResponseDto, UpdateCustomerSuccessResponseDto } from './dto';
+import {
+  AddCustomerNewAddressErrorResponseDto,
+  AddCustomerNewAddressSuccessResponseDto,
+  CustomerAddressDto,
+  DeleteCustomerAddressErrorResponseDto,
+  DeleteCustomerAddressParamsDto,
+  DeleteCustomerAddressSuccessResponseDto,
+  GetCustomerInformationErrorResponseDto,
+  GetCustomerInformationSuccessResponseDto,
+  UpdateCustomerAddressErrorResponseDto,
+  UpdateCustomerAddressParamsDto,
+  UpdateCustomerAddressSuccessResponseDto,
+  UpdateCustomerDto,
+  UpdateCustomerErrorResponseDto,
+  UpdateCustomerSuccessResponseDto
+} from './dto';
 
 @Controller('customer')
 @ApiTags('Customer Profile API')

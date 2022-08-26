@@ -1,4 +1,4 @@
-export class Photo {
+export class ProductPhoto {
   url?: string;
   id?: string;
   title?: string;
@@ -6,11 +6,9 @@ export class Photo {
   displayOrder?: number
 }
 
-export class Category {
+export class ProductCategory {
   id: string;
   name: string;
-  isFeatured?: boolean;
-  displayOrder?: number
 }
 
 export class Product {
@@ -31,20 +29,20 @@ export class Product {
     isFeatured?: boolean,
     publishDate?: Date
   };
-  meta: {
+  meta?: {
     keywords?: string[],
     title?: string,
     description?: string,
-    friendlyPageName: string
+    friendlyPageName?: string
   };
   tags?: string[];
-  photos?: Photo[];
+  photos?: ProductPhoto[];
   brands?: string[];
   manufacturer?: {
     id: string,
     name: string,
   };
-  categories: Category[]
+  categories: ProductCategory[]
 }
 
 export class UpdateCategory {
@@ -77,7 +75,7 @@ export class UpdateProduct {
     friendlyPageName?: string
   };
   tags?: string[];
-  photos?: Photo[];
+  photos?: ProductPhoto[];
   brands?: string[];
   manufacture?: {
     id?: string,
@@ -90,9 +88,12 @@ export class SearchCondition {
   skip?: number;
   limit?: number;
   brand?: string;
+  manufacturer?: string;
   categoryId?: string;
   productName?: string;
   isFeatured?: boolean;
   slug?: string;
   orderBy?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }

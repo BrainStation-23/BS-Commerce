@@ -12,6 +12,8 @@ import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
+import { useSelector } from 'react-redux';
+import { setModalState } from 'toolkit/modalSlice';
 
 interface Properties {}
 
@@ -22,6 +24,11 @@ const HeaderAccount: React.FC<Properties> = () => {
   const [modalOn, setModalOn] = useState(false);
   const [modalOnWishlist, setModalOnWishlist] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [modalCmp, setModalCmp] = useState(false);
+
+  const comparisonProducts = useAppSelector(
+    (state) => state.persistedReducer.compare.productsToCompare
+  );
 
   const showCartDropDown = () => {
     setShowCartDropdown(!showCartDropdown);
@@ -39,8 +46,8 @@ const HeaderAccount: React.FC<Properties> = () => {
     (state) => state.persistedReducer.user.customerDetails
   );
 
-  const user = customer?.firstName
-    ? customer?.firstName + ' ' + customer?.lastName
+  const user = customer?.name
+    ? customer?.name
     : customer?.email
     ? customer?.email
     : customer?.phone;
@@ -95,7 +102,6 @@ const HeaderAccount: React.FC<Properties> = () => {
           bodyText="Are you sure?"
         />
       )}
-
       {modalOnWishlist && (
         <Modal
           setModalOn={setModalOnWishlist}
@@ -109,11 +115,15 @@ const HeaderAccount: React.FC<Properties> = () => {
         <span className="my-0 uppercase">
           {token !== '' ? (
             <div className="flex flex-wrap gap-2">
-              <div className="group relative cursor-pointer normal-case">
+              <div
+                className="group relative cursor-pointer normal-case"
+                id="NavProfileDiv"
+              >
                 <p className=" hover:text-green-600" id="user-name">
                   {getUsername(links[4].name)}
                 </p>
                 <div
+                  id="navProfileDropdown"
                   className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
                   <ul>
@@ -122,6 +132,18 @@ const HeaderAccount: React.FC<Properties> = () => {
                         Wishlist
                       </li>
                     </Link>
+                    <li
+                      className="transition-all duration-100 ease-linear hover:text-green-600"
+                      onClick={() => {
+                        comparisonProducts[0]
+                          ? dispatch(setModalState(!modalCmp))
+                          : toast.warning('Comparision list is empty.', {
+                              containerId: 'bottom-right',
+                            });
+                      }}
+                    >
+                      Comparision
+                    </li>
                     <Link href="/myAccount" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
                         Profile
@@ -153,13 +175,19 @@ const HeaderAccount: React.FC<Properties> = () => {
           ) : (
             <>
               <Link href={links[0].link}>
-                <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                <a
+                  id="registerbtn"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                >
                   {links[0].name}
                 </a>
               </Link>
               <span className="mx-1">/</span>
               <Link href={links[1].link}>
-                <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                <a
+                  id="login"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                >
                   {links[1].name}
                 </a>
               </Link>

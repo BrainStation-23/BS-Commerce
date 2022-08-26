@@ -25,4 +25,6 @@ export abstract class ICompareDatabase {
     userId: string,
     productId: CompareItems,
   ) => Promise<Compare | null>;
+
+  abstract getProduct: (productId: string) => Promise<Boolean>;
 }

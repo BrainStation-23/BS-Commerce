@@ -5,7 +5,7 @@ export interface InputProps {
   value: string | number;
   type: string;
   name: string;
-  className?: any;
+  className?: string;
   disabled?: boolean;
   id?: string;
   onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
