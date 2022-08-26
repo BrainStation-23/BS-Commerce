@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, TestTimeout } from '../../test-utility';
+import { connectTestDatabase, insertAdmins, TestAdminUsername, TestTimeout } from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import {
     createAdminRequest,
@@ -26,6 +26,7 @@ describe('Initializing... Admin Auth controller testing', () => {
 
     beforeAll(async () => {
         await connectTestDatabase();
+        await insertAdmins();
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
         }).compile();
@@ -65,7 +66,7 @@ describe('Initializing... Admin Auth controller testing', () => {
         it('should error message with 400 bad request', async () => {
             return await request(app.getHttpServer())
                 .post('/auth/signup')
-                .send({ ...createAdminRequest, email: 'ismail61@gmail.com' })
+                .send({ ...createAdminRequest, email: TestAdminUsername })
                 .expect((res) => {
                     expect(res.statusCode).toBe(400);
                     expect(res.body.error).toEqual('USER_ALREADY_EXITS');
