@@ -94,7 +94,6 @@ describe('Initializing... Wishlist controller testing', () => {
     });
 
     describe('POST /wishlist [add to a wishlist of a product.]', () => {
-
         describe('add to a wishlist of a product [passing without token]', () => {
             it('fails to authenticate customer and should return 401', async () => {
                 return await request(app.getHttpServer())
@@ -139,8 +138,38 @@ describe('Initializing... Wishlist controller testing', () => {
     });
 
     describe('GET /wishlist [get customer wishlist]', () => {
-
         describe('get customer wishlist [passing without token]', () => {
+            it('fails to authenticate customer and should return 401', async () => {
+                return await request(app.getHttpServer())
+                    .get('/wishlist')
+                    .expect(401);
+            }, TestTimeout);
+        });
+
+        describe('get customer wishlist [passing wrong token]', () => {
+            it('fails to authenticate customer and should return 401', async () => {
+                return await request(app.getHttpServer())
+                    .get('/wishlist')
+                    .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
+                    .expect(401);
+            }, TestTimeout);
+        });
+
+        describe('get customer wishlist [passing valid token]', () => {
+            it('should return admin response data and status code 200', async () => {
+                return await request(app.getHttpServer())
+                    .get('/wishlist')
+                    .set('Authorization', `Bearer ${token}`)
+                    .expect((res) => {
+                        expect(res.statusCode).toBe(200);
+                        expect(res.body.data).not.toBe(null);
+                    })
+            }, TestTimeout);
+        });
+    });
+
+    describe('POST /wishlist [add to a wishlist of a product.]', () => {
+        describe('add to a wishlist of a product [passing without token]', () => {
             it('fails to authenticate customer and should return 401', async () => {
                 return await request(app.getHttpServer())
                     .post('/wishlist')
@@ -148,7 +177,7 @@ describe('Initializing... Wishlist controller testing', () => {
             }, TestTimeout);
         });
 
-        describe('get customer wishlist [passing wrong token]', () => {
+        describe('add to a wishlist of a product [passing wrong token]', () => {
             it('fails to authenticate customer and should return 401', async () => {
                 return await request(app.getHttpServer())
                     .post('/wishlist')
