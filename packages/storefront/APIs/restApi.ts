@@ -553,7 +553,10 @@ export async function toreorderProcessRest(
 ): Promise<ErrorMessageReOrder | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.reOrder}`, data);
+    console.log('response-success', res);
   } catch (error: any) {
+    console.log('err', error);
+
     toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',
     });
