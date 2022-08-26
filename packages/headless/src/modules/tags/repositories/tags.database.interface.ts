@@ -5,5 +5,5 @@ import { Tag } from 'src/entity/tags';
 export abstract class ITagsDatabase {
   abstract getTags: (query: Record<string, any>) => Promise<Tag[]>;
   abstract getTag: (query: Record<string, any>) => Promise<Tag | null>;
-  abstract createTag: (data: { name: string }) => Promise<Tag | null>;
+  abstract createTag: (data: Tag) => Promise<Tag | null>;
 }
