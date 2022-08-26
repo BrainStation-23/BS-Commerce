@@ -35,6 +35,7 @@ import {
   updateShippingStatusRest,
   deleteBrandRest,
   updateBrandRest,
+  getAllTagsRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -127,6 +128,7 @@ const restApi: apiFunction = {
   getSingleOrderById: getSingleOrderByIdRest,
   deleteBrand: deleteBrandRest,
   updateBrand: updateBrandRest,
+  getAllTags: getAllTagsRest,
 };
 
 export const userAPI: apiFunction =

@@ -29,6 +29,7 @@ import {
   GetBrandByIdResponse,
   UpdateBrandResponse,
   UpdateBrandRequest,
+  GetTagsSuccessResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -542,6 +543,20 @@ export async function deleteBrandRest(
     await axios.delete(`${apiEndPoints.brands}/${brandId}`);
     toast.success('Delete Successful');
     return true;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getAllTagsRest(): Promise<
+  GetTagsSuccessResponse | undefined
+> {
+  try {
+    const { data } = await axios.get(`${apiEndPoints?.tagLists}`);
+    toast.success('All Tags Loaded Successfully');
+    // return true;
+    // console.log(data?.data);
+    return data?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
