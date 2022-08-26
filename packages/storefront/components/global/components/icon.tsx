@@ -47,11 +47,17 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     (state) => state.persistedReducer.cart.allCartItems
   );
 
-  const compareItems = useAppSelector((state) => {
-    state.persistedReducer.compare.compareList.items;
-  });
+  const compareItems = useAppSelector(
+    (state) => state.persistedReducer.compare.compareList.items
+  );
 
-  console.log(compareItems);
+  const inCompareList = compareItems.find(
+    (item) => item.productId === product?.id
+  )
+    ? true
+    : false;
+
+  console.log(inCompareList);
 
   let inWishlist = wishlistData?.find(
     (item: WishlistItem) => item.productId === product?.id
@@ -62,10 +68,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const productInCart = cartData?.find((item) => item.productId === product?.id)
     ? true
     : false;
-
-  // const inCompareList = compareData?.find(
-  //   (item) => item.productId === product?.id
-  // );
 
   const btnClass =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-[#40A944] hover:text-white';
@@ -261,7 +263,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={btnClass}
+              className={inCompareList ? btnClassFilled : btnClass}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -280,7 +282,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             </svg>
             <div className="absolute left-6 -top-7 mb-6 hidden items-center peer-hover:inline-block">
               <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-                Add to compare
+                {inCompareList ? 'Already Added' : 'Add to compare'}
                 <div className="absolute right-5 -bottom-1 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
               </span>
             </div>
