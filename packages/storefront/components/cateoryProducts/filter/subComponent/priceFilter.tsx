@@ -1,7 +1,31 @@
 import { FC } from 'react';
 import CounterElement from '@/components/deals/filter/subComponent/counterElement';
+import { useRouter } from 'next/router';
 
 const PriceFilter: FC = () => {
+  const router = useRouter();
+  const onClickFilter = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    router.replace({
+      pathname: `/collections/${params.name}`,
+      query: {
+        categoryId: params.categoryId,
+        name: params.name,
+        orderBy: params.orderBy,
+        minPrice: (document.getElementById('lowPrice') as HTMLInputElement)
+          .value,
+        maxPrice: (document.getElementById('highPrice') as HTMLInputElement)
+          .value,
+      },
+    });
+    console.log(
+      (document.getElementById('lowPrice') as HTMLInputElement).value
+    );
+    console.log(
+      (document.getElementById('highPrice') as HTMLInputElement).value
+    );
+  };
   return (
     <>
       <div className="accordion-body py-2">
@@ -17,7 +41,9 @@ const PriceFilter: FC = () => {
               <input
                 type="number"
                 className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 bg-white px-3 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                placeholder="0"
+                defaultValue={0}
+                min="0"
+                id="lowPrice"
               />
             </span>
             <span className="mx-2 flex grid content-center justify-center">
@@ -36,7 +62,9 @@ const PriceFilter: FC = () => {
                 <input
                   type="number"
                   className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                  placeholder="0"
+                  defaultValue={100}
+                  min="0"
+                  id="highPrice"
                 />
               </span>
               {/* <span className="flex grid content-center justify-center">
@@ -47,7 +75,10 @@ const PriceFilter: FC = () => {
         </div>
         <div className="p-2">
           {/* temporaty button here */}
-          <button className="rounded bg-green-600 py-2 px-6 font-semibold text-white hover:bg-black">
+          <button
+            onClick={() => onClickFilter()}
+            className="rounded bg-green-600 py-2 px-6 font-semibold text-white hover:bg-black"
+          >
             Filter
           </button>
         </div>

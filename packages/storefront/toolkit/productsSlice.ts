@@ -1,17 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CustomerProduct, Product, Wishlist, WishlistItem } from 'models';
+import {
+  CustomerProduct,
+  Product,
+  Wishlist,
+  WishlistItem,
+  Brand,
+} from 'models';
 
 export interface productsState {
   publicProducts: CustomerProduct[];
   featuredProducts: CustomerProduct[];
   categorizedProduct: Product[];
   wishlist: Wishlist;
+  brands: Brand[];
 }
 
 const initialState: productsState = {
   publicProducts: [],
   featuredProducts: [],
   categorizedProduct: [],
+  brands: [],
   wishlist: {
     userId: '',
     id: '',
@@ -60,6 +68,9 @@ export const productsSlice = createSlice({
     ) => {
       state.categorizedProduct = action.payload;
     },
+    storeBrands: (state: productsState, action: PayloadAction<Brand[]>) => {
+      state.brands = action.payload;
+    },
     addToWishlist: (
       state: productsState,
       action: PayloadAction<WishlistItem>
@@ -80,6 +91,7 @@ export const {
   storeCategorizedProduct,
   addToWishlist,
   resetWishilist,
+  storeBrands,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
