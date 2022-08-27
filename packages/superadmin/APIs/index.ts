@@ -37,6 +37,7 @@ import {
   updateBrandRest,
   getAllTagsRest,
   createTagsRest,
+  getSingleTagRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -131,6 +132,7 @@ const restApi: apiFunction = {
   updateBrand: updateBrandRest,
   getAllTags: getAllTagsRest,
   createTags: createTagsRest,
+  getSingleTag: getSingleTagRest,
 };
 
 export const userAPI: apiFunction =

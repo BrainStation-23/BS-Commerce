@@ -5,36 +5,15 @@ import Pagination from '../../global/pagination';
 import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import GetTagsSuccessResponse from 'models';
+import { Tag } from 'models';
 interface Props {
-  TagData: any;
+  TagData: Tag[];
 }
 const AllTagLists: FC<Props> = ({ TagData }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [PageSize, setPageSize] = useState(9);
   const [ProductID, setProductID] = useState('');
   const router = useRouter();
-  // const onChangeForList = async (pageSize: number) => {
-  //   const manufactureData = await userAPI.getManufacturer(pageSize);
-  //   // setProducts(productsList);
-  //   // setManufactureData(manufactureData);
-  // };
-
-  // const deleteProductFunction = async () => {
-  //   const res = await userAPI.deleteManufacturer(ProductID, router);
-  //   if (res) {
-  //     onChangeForList(1000);
-  //   }
-  //   setModal({
-  //     ...modal,
-  //     delete: false,
-  //   });
-  // };
-
-  // const onClickForDelete = (id: string) => {
-  //   setProductID(id);
-  //   setModal({ ...modal, delete: true });
-  // };
   const [modal, setModal] = useState({
     delete: false,
   });
@@ -87,7 +66,7 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
         <td className="p-auto m-auto text-center align-middle">
           <Link
             href={{
-              pathname: `/Manufacturer/View/[id]`,
+              pathname: `/tags/view/[id]`,
               query: { id: data?.[key] },
             }}
             passHref

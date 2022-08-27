@@ -31,6 +31,7 @@ import {
   UpdateBrandRequest,
   GetTagsSuccessResponse,
   CreateTagRequestBody,
+  GetTagSuccessResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -570,6 +571,17 @@ export async function createTagsRest(
     router.push('/tags');
     toast.success('Tag Created Successfully');
     return res.data as CreateTagRequestBody;
+  } catch (error: any) {
+    toast.error(error);
+  }
+}
+
+export async function getSingleTagRest(
+  id: string
+): Promise<GetTagSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints?.tag}/${id}`);
+    return res.data as GetTagSuccessResponse;
   } catch (error: any) {
     toast.error(error);
   }

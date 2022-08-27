@@ -23,6 +23,7 @@ import {
   UpdateBrandRequest,
   CreateTagRequestBody,
   GetTagsSuccessResponse,
+  GetTagSuccessResponse,
 } from 'models';
 
 export interface User {
@@ -131,6 +132,7 @@ export interface apiFunction {
     data: CreateTagRequestBody,
     router: NextRouter
   ): Promise<CreateTagRequestBody | undefined>;
+  getSingleTag(id: String): Promise<GetTagSuccessResponse | undefined>;
 }
 
 export interface adminCreate {
