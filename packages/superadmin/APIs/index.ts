@@ -36,6 +36,7 @@ import {
   deleteBrandRest,
   updateBrandRest,
   getAllTagsRest,
+  createTagsRest,
 } from './restApi';
 import {
   getProductsGraphQL,
@@ -129,6 +130,7 @@ const restApi: apiFunction = {
   deleteBrand: deleteBrandRest,
   updateBrand: updateBrandRest,
   getAllTags: getAllTagsRest,
+  createTags: createTagsRest,
 };
 
 export const userAPI: apiFunction =

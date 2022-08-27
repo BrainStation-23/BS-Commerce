@@ -73,14 +73,7 @@ const Tags = () => {
             </div>
           </div>
 
-          {TagData ? (
-            <AllTagLists
-              TagData={TagData}
-              //   setManufactureData={setManufactureData}
-            />
-          ) : (
-            'No Tags data found'
-          )}
+          {TagData ? <AllTagLists TagData={TagData} /> : 'No Tags data found'}
         </div>
       </main>
     </>

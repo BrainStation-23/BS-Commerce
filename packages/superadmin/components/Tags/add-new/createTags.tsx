@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import { userAPI } from '../../../APIs';
 import Link from 'next/link';
+import TagInfo from './forms/tagInfo';
+import { tagSchema } from '../schema/tags.Schema';
+
 const CreateTag: FC = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const handleSubmit = (data: any) => {
-    const newData = {
-      name: data.name,
-    };
-    // userAPI.createManufacturer(newData, router);
+    userAPI.createTags(data, router);
   };
   return (
     <>
@@ -24,7 +24,7 @@ const CreateTag: FC = () => {
           handleSubmit(data);
           actions.setSubmitting(false);
         }}
-        // validationSchema={manufactureSchema}
+        validationSchema={tagSchema}
       >
         {(formikprops) => {
           return (
@@ -56,6 +56,9 @@ const CreateTag: FC = () => {
                     <p className="float-end mx-1 my-0">Save</p>
                   </button>
                 </div>
+              </div>
+              <div className="mt-4">
+                <TagInfo />
               </div>
             </Form>
           );

@@ -17,11 +17,12 @@ import {
   createCategorySuccessResponse,
   UploadFileSuccessResponse,
   GetTagsResponse,
-  Tags,
   UpdatedUserRequest,
   CreateBrandRequest,
   UpdateBrandResponse,
   UpdateBrandRequest,
+  CreateTagRequestBody,
+  GetTagsSuccessResponse,
 } from 'models';
 
 export interface User {
@@ -65,7 +66,7 @@ export interface apiFunction {
   updateOrderStatus: (data: any) => Promise<any | undefined>;
   updatePaymentStatus: (data: any) => Promise<any | undefined>;
   updateShippingStatus: (data: any) => Promise<any | undefined>;
-  getAllManufacturers();
+  getAllManufacturers(pageSize: number): Promise<Manufacturer[] | undefined>;
   updateProduct: (
     data: any,
     id: any,
@@ -125,6 +126,11 @@ export interface apiFunction {
     data: UpdateBrandRequest,
     router: NextRouter
   ): Promise<UpdateBrandResponse | undefined>;
+  getAllTags(): Promise<GetTagsSuccessResponse | undefined>;
+  createTags(
+    data: CreateTagRequestBody,
+    router: NextRouter
+  ): Promise<CreateTagRequestBody | undefined>;
 }
 
 export interface adminCreate {
