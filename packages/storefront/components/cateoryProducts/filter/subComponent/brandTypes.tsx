@@ -16,8 +16,6 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
   const brandsOnClick = (brandName: string) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-
-    console.log(params);
     router.replace({
       pathname: `/collections/${params.name}`,
       query: {
@@ -42,21 +40,20 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
               <div key={index}>
                 <div className="flex justify-between py-1">
                   <input
-                    id={option}
+                    id={option.toString()}
                     type="radio"
                     value={brandTypesOptionVal}
                     onChange={(e) => setBrandTypesOptionVal(e.target.value)}
                     onClick={() => {
-                      brandsOnClick(option);
+                      brandsOnClick(option.toString());
                     }}
                   />
                   <label
                     htmlFor={option + ''}
                     className="flex cursor-pointer items-center"
                   >
-                    {option}
+                    {option.toString()}
                   </label>
-                  <div>(3)</div>
                 </div>
               </div>
             );

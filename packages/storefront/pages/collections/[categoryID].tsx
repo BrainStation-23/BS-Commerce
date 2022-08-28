@@ -8,9 +8,6 @@ import { Product } from 'models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
 import { Brand } from 'models';
-
-// var cookie = require('cookie');
-
 interface SingleProduct {
   products: Product[];
   name: string;
@@ -24,15 +21,11 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   name,
   brands,
 }) => {
-  // const [sortOption, setSortOption] = useState('asc');
   const dispatch = useAppDispatch();
-
   const setCategorizedProduct = async () => {
     dispatch(storeCategorizedProduct(products));
   };
   const setBrands = async () => {
-    console.log(brands);
-
     dispatch(storeBrands(brands));
   };
   useEffect(() => {
@@ -48,11 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const orderBy = context?.query?.orderBy;
   const minPrice = context?.query?.minPrice;
   const maxPrice = context?.query?.maxPrice;
-  const brand = context?.query?.brand;
-  // const sortOption = document.getElementById("selectSortOptions");
-  console.log('XXXXXXXXX', orderBy);
-  console.log('XXXXXXXXX', brand);
-
+  const brand = context?.query?.brand ? context?.query?.brand : '';
   const res = await userAPI.getPublicProductByCategoryId(
     categoryId as string,
     orderBy as string,
@@ -60,19 +49,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     parseFloat(maxPrice as string) as number,
     brand as string
   );
-  // console.log('XXXXXXXXX', res?.data?.products);
-
-  var products = res?.data?.products;
-
-  const res2 = await userAPI.getBrands();
-
+  // console.log('>>>>>>>>>', res?.data?.products);
+  var products = res?.data?.products ? res?.data?.products : [];
   // console.log(res2.data);
-  console.log(res?.data?.brands);
-
+  // console.log(res?.data?.brands);
   return {
     props: {
       products,
-      brands: res?.data?.brands,
+      brands: res?.data?.brands ? res?.data?.brands : [],
       name: name,
     },
   };

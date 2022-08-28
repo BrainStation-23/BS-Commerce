@@ -556,8 +556,6 @@ export async function resetPasswordRest(
 export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
   try {
     const res = await axios.get(`${apiEndPoints.brands}`);
-    console.log(res?.data);
-
     return res?.data;
   } catch (error: any) {
     toast.error('Faild to get brands list', {

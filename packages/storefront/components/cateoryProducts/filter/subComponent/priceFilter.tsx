@@ -17,14 +17,9 @@ const PriceFilter: FC = () => {
           .value,
         maxPrice: (document.getElementById('highPrice') as HTMLInputElement)
           .value,
+        brand: params.brand,
       },
     });
-    console.log(
-      (document.getElementById('lowPrice') as HTMLInputElement).value
-    );
-    console.log(
-      (document.getElementById('highPrice') as HTMLInputElement).value
-    );
   };
   return (
     <>

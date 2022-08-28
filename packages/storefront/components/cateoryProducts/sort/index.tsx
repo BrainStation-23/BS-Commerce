@@ -31,29 +31,23 @@ const ProductSort: FC = () => {
     </svg>
   );
 
-  const getDefV = () => {
+  const getDefaultValue = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    console.log(params.orderBy);
-
     return params.orderBy;
   };
 
   const replaceQuery = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-
-    console.log(params);
-    var e = document.getElementById('selectSortOptions');
-    var value = e.value;
-    console.log(value);
-
     router.replace({
       pathname: `/collections/${params.name}`,
       query: {
         categoryId: params.categoryId,
         name: params.name,
-        orderBy: value,
+        orderBy: (
+          document.getElementById('selectSortOptions') as HTMLInputElement
+        ).value,
         minPrice: params.minPrice,
         maxPrice: params.maxPrice,
         brand: params.brand,
@@ -81,7 +75,7 @@ const ProductSort: FC = () => {
               <select
                 id="selectSortOptions"
                 name="cars"
-                value={getDefV()}
+                value={getDefaultValue()}
                 className="-ml-3 box-border h-auto  border bg-white py-2 px-1 text-sm"
                 onChange={() => {
                   replaceQuery();
@@ -90,9 +84,9 @@ const ProductSort: FC = () => {
                 {dropdownSortOptions}
               </select>
             </div>
-            <div className="grid content-center justify-center pl-4">
+            {/* <div className="grid content-center justify-center pl-4">
               Showing 1-3 of 3 result
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
