@@ -28,6 +28,11 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
       },
     });
   };
+  const getBrandName = (brandName: string) => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries()); 
+    return brandName == params.brand;
+  };
   return (
     <>
       <div className="py-4">
@@ -42,14 +47,16 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
                   <input
                     id={option.toString()}
                     type="radio"
+                    name="brandRadio"
                     value={brandTypesOptionVal}
+                    checked={getBrandName(option.toString())}
                     onChange={(e) => setBrandTypesOptionVal(e.target.value)}
                     onClick={() => {
                       brandsOnClick(option.toString());
                     }}
                   />
                   <label
-                    htmlFor={option + ''}
+                    htmlFor={option.toString()}
                     className="flex cursor-pointer items-center"
                   >
                     {option.toString()}
