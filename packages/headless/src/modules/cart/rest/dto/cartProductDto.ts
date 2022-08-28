@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsBoolean, IsDate, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { CartProduct, CartProductInfo, CartProductPhoto } from "models";
+import { CartProduct, CartProductInfo, CartProductPhoto,CartProductMeta } from "models";
 
 export class CartProductInfoDto implements CartProductInfo{
     @ApiProperty()
@@ -93,6 +93,13 @@ export class CartProductPhotoDto implements CartProductPhoto{
     displayOrder?: number;
     
 }
+
+export class CartProductMetaDto implements CartProductMeta {
+    @ApiProperty()
+    @IsString()
+    friendlyPageName: string;
+}
+
 export class CartProductDto implements CartProduct{
     @ApiProperty()
     @IsString()
@@ -102,6 +109,11 @@ export class CartProductDto implements CartProduct{
     @Type(() => CartProductInfoDto)
     @IsObject()
     info: CartProductInfoDto;
+
+    @ApiProperty({ type: CartProductMetaDto })
+    @Type(() => CartProductMetaDto)
+    @IsObject()
+    meta: CartProductMetaDto;
 
     @ApiProperty({ type: CartProductPhotoDto })
     @Type(() => CartProductPhotoDto)
