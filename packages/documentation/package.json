@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "dev": "docusaurus start -p 3005",
+    "dev": "docusaurus start -p 3005 --no-open",
     "start": "docusaurus start -p 3005",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
