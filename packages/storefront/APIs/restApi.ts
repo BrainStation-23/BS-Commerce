@@ -210,7 +210,7 @@ export async function getPublicProductByCategoryIDRest(
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}&orderBy=${
         orderBy ? orderBy : 'asc'
-      }&brands=${brands}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+      }&brand=${brands}&minPrice=${minPrice}&maxPrice=${maxPrice}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
