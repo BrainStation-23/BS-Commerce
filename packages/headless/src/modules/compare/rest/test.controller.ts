@@ -10,7 +10,7 @@ import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { CompareDataDto, CompareResponse } from '../dto/test.dto';
+import { CompareDataDto, CompareResponse } from './dto/test.dto';
 import { CompareTestService } from '../services/test.service';
 
 @ApiTags('Test purpose - Comparison API')

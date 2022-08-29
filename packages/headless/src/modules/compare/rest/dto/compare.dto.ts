@@ -9,7 +9,9 @@ import type {
   DescriptiveError,
   IProductInfo,
   IProductMeta,
-  IProductDetails
+  IProductDetails,
+  ComparePublicSuccessResponse,
+  ComparePublicErrorResponse
 } from 'models';
 import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
 
@@ -34,7 +36,7 @@ export class ProductInfo implements IProductInfo{
   fullDescription: string;
 }
 
-export class IProductMetaDto implements IProductMeta {
+export class ProductMeta implements IProductMeta {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsArray()
@@ -54,8 +56,8 @@ export class ProductDetails implements IProductDetails{
   @ApiProperty({ type: () => [ProductInfo] })
   info: ProductInfo;
 
-  @ApiProperty({ type: () => [IProductMetaDto] })
-  meta: IProductMeta;
+  @ApiProperty({ type: () => [ProductMeta] })
+  meta: ProductMeta;
 
   @ApiProperty()
   photos: string[];
@@ -85,10 +87,10 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
   data: CompareDataDto;
 }
 
-export class ComparePublicSuccessResponseDto{
+export class ComparePublicSuccessResponseDto implements ComparePublicSuccessResponse{
   @ApiProperty({ default: HttpStatus.OK })
   code: number;
-  @ApiProperty()
+  @ApiProperty({ type: () => [CompareItemsDetails] })
   data: CompareItemsDetails[];
 }
 export class CompareErrorResponseDto implements CompareErrorResponse {
@@ -109,6 +111,15 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
   errors: DescriptiveError;
 }
 
+export class ComparePublicErrorResponseDto implements ComparePublicErrorResponse {
+  @ApiProperty()
+  code?: number;
+  @ApiProperty({ example: AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING })
+  error: AddProductToCompareErrorEnum;
+  @ApiProperty()
+  errors: DescriptiveError;
+}
+
 export type CompareResponse = CompareSuccessResponseDto | CompareErrorResponseDto;
 
-export type ComparePublicResponse = ComparePublicSuccessResponseDto | CompareErrorResponseDto;
+export type ComparePublicResponse = ComparePublicSuccessResponseDto | ComparePublicErrorResponseDto;

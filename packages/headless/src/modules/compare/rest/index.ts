@@ -18,8 +18,10 @@ import { User as UserInfo } from 'src/decorators/auth.decorator';
 import {
   AddToCompareDto,
   CompareErrorResponseDto,
+  ComparePublicErrorResponseDto,
+  ComparePublicSuccessResponseDto,
   CompareSuccessResponseDto,
-} from '../dto/compare.dto';
+} from './dto/compare.dto';
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')
@@ -169,15 +171,15 @@ export class CompareController {
   @Post('/public')
   @ApiResponse({
     description: 'Add product to compare Success Response',
-    type: CompareSuccessResponseDto,
+    type: ComparePublicSuccessResponseDto,
     status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Add product to compare Error Response',
-    type: CompareErrorResponseDto,
+    type: ComparePublicErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
-  async addItemToComaprePublic(
+  async getProduct(
     @Body() body: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
