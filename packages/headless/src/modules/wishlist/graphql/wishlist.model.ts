@@ -1,11 +1,11 @@
 import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
-  Wishlist,
   WishlistItem,
   WishlistProduct,
   WishlistProductInfo,
   WishlistProductPhoto,
-  addToWishlistRequest
+  addToWishlistRequest,
+  WishlistProductMeta
 } from 'models';
 
 @ObjectType()
@@ -66,12 +66,21 @@ export class WishlistProductInfoType implements WishlistProductInfo {
 }
 
 @ObjectType()
+export class WishlistProductMetaType implements WishlistProductMeta {
+  @Field()
+  friendlyPageName: string;
+}
+
+@ObjectType()
 export class WishlistProductType implements WishlistProduct {
   @Field()
   id: string;
 
   @Field(() => WishlistProductInfoType)
   info: WishlistProductInfoType;
+
+  @Field(() => WishlistProductMetaType)
+  meta: WishlistProductMetaType;
 
   @Field(() => [WishlistProductPhotoType], { nullable: true })
   photos?: WishlistProductPhotoType[];
