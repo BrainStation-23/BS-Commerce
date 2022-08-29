@@ -42,12 +42,33 @@ export class CompareDatabase implements ICompareDatabase {
      return null;
   }
 
+  async getProductDetails(productId: string): Promise<CompareItems[] | null> {
+    const productDetails = await ProductModel.find({
+      id: productId
+    }).select('info meta photos id -_id');
+
+    if(!productDetails) return null;
+    const mappedItems = productDetails.map((e) => {
+      const { name, price, shortDescription, fullDescription, oldPrice } = e.info;
+      return {
+        productId: e.id,
+        productDetails: {
+          info: { name, price, shortDescription, fullDescription, oldPrice },
+          meta: e.meta,
+          photos: e.photos.map((e) => e.url),
+        },
+      };
+    });
+
+    return mappedItems;
+  }
+
   async createCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
     const compareList = await CompareModel.create({
       userId: userId,
       items: [productId],
     });
-    
+
     return compareList ? await this.getCompareListByUserId(userId) : null;
   }
 

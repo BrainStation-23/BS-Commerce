@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
 import { Compare } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
-import { CompareResponse } from '../dto/compare.dto';
+import { CompareItemsDetails, ComparePublicResponse, ComparePublicSuccessResponseDto, CompareResponse } from '../dto/compare.dto';
 import { CompareRepository } from '../repositories';
 @Injectable()
 export class CompareService {
@@ -24,6 +24,24 @@ export class CompareService {
     if (saveData) {
       return {
         data: saveData,
+        code: HttpStatus.OK,
+      };
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async getProductDetails(productId: string): Promise<ComparePublicResponse> {
+    let productDetails: CompareItemsDetails[] = null;
+    productDetails = await this.compareRepository.getProductDetails(productId);
+
+    if (productDetails) {
+      return {
+        data: productDetails,
         code: HttpStatus.OK,
       };
     } else {

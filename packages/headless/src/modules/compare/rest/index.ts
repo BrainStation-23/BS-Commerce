@@ -23,12 +23,12 @@ import {
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')
-@UseGuards(new RolesGuard(['customer']))
-@ApiBearerAuth()
 @Controller('compare')
 export class CompareController {
   constructor(private compareService: CompareService) {}
-
+  
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @Post()
   @ApiResponse({
     description: 'Add product to compare Success Response',
@@ -53,6 +53,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -70,6 +72,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -92,6 +96,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -114,6 +120,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -139,6 +147,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -155,4 +165,25 @@ export class CompareController {
     res.status(code);
     return response;
   }
+
+  @Post('/public')
+  @ApiResponse({
+    description: 'Add product to compare Success Response',
+    type: CompareSuccessResponseDto,
+    status: HttpStatus.CREATED,
+  })
+  @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: CompareErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  async addItemToComaprePublic(
+    @Body() body: AddToCompareDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.compareService.getProductDetails( body.productId );
+    res.status(code);
+    return response;
+  }
+
 }

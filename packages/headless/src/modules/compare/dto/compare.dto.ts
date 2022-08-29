@@ -78,7 +78,6 @@ export class CompareDataDto implements CompareData {
   @ApiProperty({ type: () => [CompareItemsDetails] })
   items: CompareItemsDetails[];
 }
-
 export class CompareSuccessResponseDto implements CompareSuccessResponse {
   @ApiProperty({ default: HttpStatus.OK })
   code: number;
@@ -86,6 +85,12 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
   data: CompareDataDto;
 }
 
+export class ComparePublicSuccessResponseDto{
+  @ApiProperty({ default: HttpStatus.OK })
+  code: number;
+  @ApiProperty()
+  data: CompareItemsDetails[];
+}
 export class CompareErrorResponseDto implements CompareErrorResponse {
   @ApiProperty()
   code?: number;
@@ -105,3 +110,5 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
 }
 
 export type CompareResponse = CompareSuccessResponseDto | CompareErrorResponseDto;
+
+export type ComparePublicResponse = ComparePublicSuccessResponseDto | CompareErrorResponseDto;
