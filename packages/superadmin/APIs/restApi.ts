@@ -29,6 +29,9 @@ import {
   GetBrandByIdResponse,
   UpdateBrandResponse,
   UpdateBrandRequest,
+  GetTagsSuccessResponse,
+  CreateTagRequestBody,
+  GetTagSuccessResponse,
 } from 'models';
 
 import { User } from '../utils/types';
@@ -544,5 +547,42 @@ export async function deleteBrandRest(
     return true;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function getAllTagsRest(): Promise<
+  GetTagsSuccessResponse | undefined
+> {
+  try {
+    const { data } = await axios.get(`${apiEndPoints?.tag}`);
+    toast.success('All Tags Loaded Successfully');
+    return data?.data;
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
+export async function createTagsRest(
+  data: CreateTagRequestBody,
+  router: NextRouter
+): Promise<CreateTagRequestBody | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints?.tag}`, data);
+    router.push('/tags');
+    toast.success('Tag Created Successfully');
+    return res.data as CreateTagRequestBody;
+  } catch (error: any) {
+    toast.error(error);
+  }
+}
+
+export async function getSingleTagRest(
+  id: string
+): Promise<GetTagSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints?.tag}/${id}`);
+    return res.data as GetTagSuccessResponse;
+  } catch (error: any) {
+    toast.error(error);
   }
 }

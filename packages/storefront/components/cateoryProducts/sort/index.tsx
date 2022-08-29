@@ -1,11 +1,19 @@
 import type { NextComponentType } from 'next';
+import { Router, useRouter } from 'next/router';
 import { FC } from 'react';
 const ProductSort: FC = () => {
   const sortOptions = [
-    { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
-    { id: Math.random() * 100, meta: { name: 'Price High to Low' } },
-    { id: Math.random() * 100, meta: { name: 'Price Low to High' } },
+    // { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
+    {
+      id: Math.random() * 100,
+      meta: { name: 'Price High to Low', value: 'desc' },
+    },
+    {
+      id: Math.random() * 100,
+      meta: { name: 'Price Low to High', value: 'asc' },
+    },
   ];
+  const router = useRouter();
   const gridIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,11 +30,35 @@ const ProductSort: FC = () => {
       />
     </svg>
   );
+
+  const getDefaultValue = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    return params.orderBy;
+  };
+
+  const replaceQuery = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    router.replace({
+      pathname: `/collections/${params.name}`,
+      query: {
+        categoryId: params.categoryId,
+        name: params.name,
+        orderBy: (
+          document.getElementById('selectSortOptions') as HTMLInputElement
+        ).value,
+        minPrice: params.minPrice,
+        maxPrice: params.maxPrice,
+        brand: params.brand,
+      },
+    });
+  };
   const dropdownSortOptions =
     sortOptions &&
     sortOptions.map((sortOption) => {
       return (
-        <option key={sortOption.id} value={sortOption.meta.name}>
+        <option key={sortOption.id} value={sortOption.meta.value}>
           {sortOption.meta.name}
         </option>
       );
@@ -41,15 +73,20 @@ const ProductSort: FC = () => {
                 Sort By:
               </label>
               <select
+                id="selectSortOptions"
                 name="cars"
-                className="-ml-3 box-border h-auto w-3/5 border bg-white py-2 px-1 text-sm"
+                value={getDefaultValue()}
+                className="-ml-3 box-border h-auto  border bg-white py-2 px-1 text-sm"
+                onChange={() => {
+                  replaceQuery();
+                }}
               >
                 {dropdownSortOptions}
               </select>
             </div>
-            <div className="grid content-center justify-center pl-4">
+            {/* <div className="grid content-center justify-center pl-4">
               Showing 1-3 of 3 result
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
