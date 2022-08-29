@@ -15,7 +15,6 @@ import {
   GetCustomerProductParams,
   CustomerSignInResponse,
   addToCartRequest,
-  AddToCartResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
@@ -52,6 +51,7 @@ import {
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  GetAllBrandsResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -211,7 +211,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData  | undefined> {
+): Promise<OrderByUserIdResponseData | undefined> {
   return undefined;
 }
 
@@ -267,5 +267,9 @@ export async function forgetPasswordVerifyOtpGraphql(
 export async function resetPasswordGraphql(
   data: CustomerForgotPasswordRequest
 ): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function getBrandsGraphql(): Promise<GetAllBrandsResponse | undefined > {
   return undefined;
 }

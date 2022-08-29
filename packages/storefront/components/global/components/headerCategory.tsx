@@ -33,6 +33,9 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             query: {
               categoryId: category.id,
               name: category.name,
+              orderBy: 'asc',
+              minPrice: 0,
+              maxPrice: 1000000,
             },
           }}
           //as={`/collections/${category.name}`}
@@ -67,7 +70,11 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 {/* {subCategory.name} */}
-                <HeaderSubCategory category={subCategory} level={1} showSub={expand} />
+                <HeaderSubCategory
+                  category={subCategory}
+                  level={1}
+                  showSub={expand}
+                />
               </li>
             ))}
           </ul>
@@ -77,9 +84,11 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
       )}
       {/* render on lg+ screen */}
       {document.body.clientWidth > 768 && category.subCategories ? (
-        <div className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
-          expand ? 'scale-x-100' : 'scale-x-0'
-        }`}>
+        <div
+          className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+            expand ? 'scale-x-100' : 'scale-x-0'
+          }`}
+        >
           <ul className="pl-2">
             {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
