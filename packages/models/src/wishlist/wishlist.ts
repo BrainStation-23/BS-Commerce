@@ -15,6 +15,10 @@ export interface WishlistProductInfo {
     publishDate?: Date;
 }
 
+export interface WishlistProductMeta {
+    friendlyPageName: string
+}
+
 export interface WishlistProductPhoto {
     url?: string;
     title?: string;
@@ -24,6 +28,7 @@ export interface WishlistProductPhoto {
 export interface WishlistProduct {
     id: string;
     info: WishlistProductInfo;
+    meta: WishlistProductMeta;
     photos?: WishlistProductPhoto[];
 }
 
