@@ -14,6 +14,7 @@ export interface IProductInfo {
 	price: number;
 	shortDescription: string;
 	fullDescription: string;
+	oldPrice: number;
 }
 export interface IProductDetails {
 	info: IProductInfo;

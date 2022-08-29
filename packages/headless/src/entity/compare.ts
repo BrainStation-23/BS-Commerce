@@ -1,6 +1,7 @@
 export class IProductInfo {
   name: string;
   price: number;
+  oldPrice: number;
   shortDescription: string;
   fullDescription: string;
 }

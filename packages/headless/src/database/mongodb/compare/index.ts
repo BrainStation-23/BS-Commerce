@@ -93,11 +93,11 @@ export class CompareDatabase implements ICompareDatabase {
     }).select('info photos id -_id');
 
     const mappedItems = productDetails.map((e) => {
-      const { name, price, shortDescription, fullDescription } = e.info;
+      const { name, price, shortDescription, fullDescription, oldPrice } = e.info;
       return {
         productId: e.id,
         productDetails: {
-          info: { name, price, shortDescription, fullDescription },
+          info: { name, price, shortDescription, fullDescription, oldPrice },
           photos: e.photos.map((e) => e.url),
         },
       };
