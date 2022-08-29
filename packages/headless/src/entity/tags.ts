@@ -1,15 +1,9 @@
 export class Tag {
-    id: string;
+    id?: string;
     name: string;
-    isHomePageProductsTags?:boolean;
+    isHomePageProductsTag?: boolean;
 }
-
-export class HomePageProductsTagsRequest {
-    name: string;
-    isHomePageProductsTags?:boolean;
-}
-
-export class UpdateHomePageTagsRequest {
+export class updateTagRequest{
     name?: string;
-    isHomePageProductsTags?:boolean;
+    isHomePageProductsTag?: boolean;
 }

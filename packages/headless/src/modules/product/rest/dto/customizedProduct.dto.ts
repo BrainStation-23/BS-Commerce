@@ -32,6 +32,10 @@ export class GetCustomizedProductsQueryDto implements GetCustomizedProductsQuery
     @Type(() => Number)
     @IsNumber()
     limit?: number;
+
+    @ApiProperty({ type: String })
+    @IsString()
+    tag: string;
 }
 
 export class CustomizedProductsDto implements CustomizedProducts {

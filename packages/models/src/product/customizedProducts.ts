@@ -4,6 +4,7 @@ import { Product } from "./product";
 export interface GetCustomizedProductsQuery {
     skip?: number;
     limit?: number;
+    tag: string;
 }
 
 export interface CustomizedProducts {

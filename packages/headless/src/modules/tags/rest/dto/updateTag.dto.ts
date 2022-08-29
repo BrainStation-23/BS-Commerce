@@ -2,9 +2,9 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { UpdateHomePageProductsTag, UpdateHomePageProductsTagErrorMessages, UpdateHomePageProductsTagErrorResponse, UpdateHomePageProductsTagRequest, UpdateHomePageProductsTagSuccessResponse } from "models";
+import { updateTag, updateTagErrorMessages, updateTagErrorResponse, updateTagRequest, updateTagSuccessResponse } from "models";
 
-export class UpdateHomePageProductsTagDto implements UpdateHomePageProductsTag {
+export class updateTagDto implements updateTag {
     @ApiProperty()
     @IsString()
     id: string;
@@ -15,14 +15,14 @@ export class UpdateHomePageProductsTagDto implements UpdateHomePageProductsTag {
     name: string;
 }
 
-export class HomePageProductsTagParamDto {
+export class updateTagParamDto {
     @ApiProperty({ type: String })
     @Type(() => String)
     @IsString()
     id: string;
 }
 
-export class UpdateHomePageProductsTagRequestDto implements UpdateHomePageProductsTagRequest {
+export class updateTagRequestDto implements updateTagRequest {
     @ApiProperty({ required: false, type: String })
     @Type(() => String)
     @IsString()
@@ -33,31 +33,31 @@ export class UpdateHomePageProductsTagRequestDto implements UpdateHomePageProduc
     @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
-    isHomePageProductsTags?: boolean;
+    isHomePageProductsTag?: boolean;
 }
 
-export class UpdateHomePageProductsTagSuccessResponseDto implements UpdateHomePageProductsTagSuccessResponse {
+export class updateTagSuccessResponseDto implements updateTagSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
     @ApiProperty()
-    @Type(() => UpdateHomePageProductsTagDto)
+    @Type(() => updateTagDto)
     @IsObject()
-    data: UpdateHomePageProductsTagDto;
+    data: updateTagDto;
 }
 
-export class UpdateHomePageProductsTagErrorResponseDto implements UpdateHomePageProductsTagErrorResponse {
+export class updateTagErrorResponseDto implements updateTagErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
     code: number;
 
     @ApiProperty({
-        example: UpdateHomePageProductsTagErrorMessages.CAN_NOT_UPDATE_HOME_PAGE_PRODUCTS_TAG,
-        examples: [UpdateHomePageProductsTagErrorMessages.CAN_NOT_UPDATE_HOME_PAGE_PRODUCTS_TAG]
+        example: updateTagErrorMessages.CAN_NOT_UPDATE_TAG,
+        examples: [updateTagErrorMessages.CAN_NOT_UPDATE_TAG]
     })
     @IsString()
-    error: UpdateHomePageProductsTagErrorMessages;
+    error: updateTagErrorMessages;
 
     @ApiProperty()
     @IsArray()

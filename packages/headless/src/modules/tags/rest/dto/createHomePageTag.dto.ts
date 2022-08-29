@@ -10,14 +10,15 @@ import {
     IsString
 } from "class-validator";
 import {
-    CreateHomePageProductsTagsErrorMessages,
-    CreateHomePageProductsTagsErrorResponse,
-    CreateHomePageProductsTagsSuccessResponse,
-    HomePageProductsTags,
-    HomePageProductsTagsRequest
+    createHomePageTag,
+    createHomePageTagErrorMessages,
+    createHomePageTagErrorResponse,
+    createHomePageTagRequest,
+    createHomePageTagSuccessResponse
 } from "models";
 
-export class HomePageProductsTagsDto implements HomePageProductsTags {
+
+export class createHomePageTagDto implements createHomePageTag {
     @ApiProperty()
     @IsString()
     id: string;
@@ -28,7 +29,7 @@ export class HomePageProductsTagsDto implements HomePageProductsTags {
     name: string;
 }
 
-export class HomePageProductsTagsRequestDto implements HomePageProductsTagsRequest {
+export class createHomePageTagRequesttDto implements createHomePageTagRequest {
     @ApiProperty({ required: true })
     @IsString()
     @IsNotEmpty()
@@ -40,27 +41,27 @@ export class HomePageProductsTagsRequestDto implements HomePageProductsTagsReque
     isHomePageProductsTags: boolean;
 }
 
-export class CreateHomePageProductsTagsSuccessResponseDto implements CreateHomePageProductsTagsSuccessResponse {
+export class createHomePageTagSuccessResponseDto implements createHomePageTagSuccessResponse {
     @ApiProperty({ default: HttpStatus.CREATED })
     @IsNumber()
     code: number;
 
     @ApiProperty()
     @IsObject()
-    data: HomePageProductsTagsDto;
+    data: createHomePageTagDto;
 }
 
-export class CreateHomePageProductsTagsErrorResponseDto implements CreateHomePageProductsTagsErrorResponse {
+export class createHomePageTagErrorResponseDto implements createHomePageTagErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
     code: number;
 
     @ApiProperty({
-        example: CreateHomePageProductsTagsErrorMessages.CAN_NOT_CREATE_HOME_PAGE_PRODUCT_TAG,
-        examples: [CreateHomePageProductsTagsErrorMessages.CAN_NOT_CREATE_HOME_PAGE_PRODUCT_TAG, CreateHomePageProductsTagsErrorMessages.TAG_NAME_EXISTS]
+        example: createHomePageTagErrorMessages.CAN_NOT_CREATE_HOME_PAGE_PRODUCT_TAG,
+        examples: [createHomePageTagErrorMessages.CAN_NOT_CREATE_HOME_PAGE_PRODUCT_TAG, createHomePageTagErrorMessages.TAG_NAME_EXISTS]
     })
     @IsString()
-    error: CreateHomePageProductsTagsErrorMessages;
+    error: createHomePageTagErrorMessages;
 
     @ApiProperty()
     @IsArray()

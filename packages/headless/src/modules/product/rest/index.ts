@@ -43,7 +43,11 @@ import {
   UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
 } from './dto';
-import { GetCustomizedProductsErrorResponseDto, GetCustomizedProductsQueryDto, GetCustomizedProductsSuccessResponseDto } from './dto/customizedProduct.dto';
+import {
+  GetCustomizedProductsErrorResponseDto,
+  GetCustomizedProductsQueryDto,
+  GetCustomizedProductsSuccessResponseDto
+} from './dto/customizedProduct.dto';
 
 @ApiTags('Product API')
 @Controller()

@@ -13,18 +13,21 @@ import { Response } from 'express';
 import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TagsService } from '../services';
 import {
-  CreateHomePageProductsTagsErrorResponseDto,
-  CreateHomePageProductsTagsSuccessResponseDto,
+  createHomePageTagErrorResponseDto,
+  createHomePageTagRequesttDto,
+  createHomePageTagSuccessResponseDto,
   CreateTagErrorResponseDto,
   CreateTagRequestBodyDto,
   CreateTagSuccessResponseDto,
+  GetTagErrorResponseDto,
+  GetTagParamsDto,
   GetTagsErrorResponseDto,
   GetTagsSuccessResponseDto,
-  HomePageProductsTagParamDto,
-  HomePageProductsTagsRequestDto,
-  UpdateHomePageProductsTagErrorResponseDto,
-  UpdateHomePageProductsTagRequestDto,
-  UpdateHomePageProductsTagSuccessResponseDto
+  GetTagSuccessResponseDto,
+  updateTagErrorResponseDto,
+  updateTagParamDto,
+  updateTagRequestDto,
+  updateTagSuccessResponseDto
 } from './dto';
 import { RolesGuard } from 'src/guards/auth.guard';
 @Controller('tags')
@@ -44,7 +47,24 @@ export class TagsController {
     status: HttpStatus.BAD_REQUEST
   })
   async getTags(@Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.getTags({});
+    const { code, ...response } = await this.tagsService.getTags();
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('/home-page-products-tags')
+  @ApiResponse({
+    description: 'Get All Home Page Products Tags Success Response',
+    type: GetTagsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get All Home Page Products Tags Error Response',
+    type: GetTagsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getHomePageProductsTags(@Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.tagsService.getHomePageProductsTags();
     res.status(code);
     return { code, ...response };
   }
@@ -55,19 +75,19 @@ export class TagsController {
   @ApiParam({ name: 'id' })
   @ApiResponse({
     description: 'Update Home Page Products Tag Success Response',
-    type: UpdateHomePageProductsTagSuccessResponseDto,
+    type: updateTagSuccessResponseDto,
     status: HttpStatus.OK
   })
   @ApiResponse({
     description: 'Update Home Page Products Tag Error Response',
-    type: UpdateHomePageProductsTagErrorResponseDto,
+    type: updateTagErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async updateHomePageProductsTag(
-    @Param() params: HomePageProductsTagParamDto,
-    @Body() data: UpdateHomePageProductsTagRequestDto,
+  async updateTag(
+    @Param() params: updateTagParamDto,
+    @Body() data: updateTagRequestDto,
     @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.updateHomePageProductsTag(params.id, data);
+    const { code, ...response } = await this.tagsService.updateTag(params.id, data);
     res.status(code);
     return { code, ...response };
   }
@@ -93,19 +113,36 @@ export class TagsController {
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Post('home-page-tag')
+  @Post('/create-home-page-products-tag')
   @ApiResponse({
-    description: 'Create Products Home Page Tag Success Response',
-    type: CreateHomePageProductsTagsSuccessResponseDto,
+    description: 'Create Home Page Products Tag Success Response',
+    type: createHomePageTagSuccessResponseDto,
     status: HttpStatus.CREATED
   })
   @ApiResponse({
-    description: 'Create Products Home Page Tag Error Response',
-    type: CreateHomePageProductsTagsErrorResponseDto,
+    description: 'Create Home Page Products Tag Error Response',
+    type: createHomePageTagErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async createHomePageProductsTags(@Body() data: HomePageProductsTagsRequestDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.createHomePageProductsTags(data);
+  async createHomePageProductsTag(@Body() data: createHomePageTagRequesttDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.tagsService.createHomePageProductsTag(data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('/:tagId')
+  @ApiResponse({
+    description: 'Get Tag Success Response',
+    type: GetTagSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Tag Error Response',
+    type: GetTagErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getTag(@Param() params: GetTagParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.tagsService.getTag(params.tagId);
     res.status(code);
     return { code, ...response };
   }

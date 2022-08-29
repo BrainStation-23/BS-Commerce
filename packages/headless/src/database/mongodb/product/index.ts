@@ -18,8 +18,12 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.create(product);
   }
 
-  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
+  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number, price?: Partial<SearchCondition>, orderBy?: string,): Promise<Product[] | []> {
+    const sort: any = { 'info.price': orderBy, createdAt: -1 };
+    return await ProductModel.find({
+      ...query,
+      'info.price': { $gte: price?.minPrice || 0, $lte: price?.maxPrice || Number.MAX_SAFE_INTEGER }
+    }, '-_id').sort(sort).skip(skip).limit(limit).lean();
   }
 
   async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: 'asc' | 'desc', skip?: number, limit?: number): Promise<Product[] | []> {
@@ -59,8 +63,8 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query, '-_id').sort(sortCondition).skip(skip).limit(limit).lean();
   }
 
-  async getTags(query: Record<string, any>): Promise<Tag[]> {
-    return await TagsModel.find(query).select('-_id').lean();
+  async getTag(query: Record<string, any>): Promise<Tag[]> {
+    return await TagsModel.findOne(query).select('-_id').lean();
   }
 
   async getTopSellingProducts( skip: number, limit: number): Promise<Product[] | []> {
@@ -70,7 +74,7 @@ export class ProductDatabase implements IProductDatabase {
       {
         '$match': {
           'orderedDate': {
-            '$gte': new Date(Date.now()- 300* 60 * 60 * 24 * 1000)
+            '$gte': new Date(Date.now()- 7* 60 * 60 * 24 * 1000)
           }
         }
       },

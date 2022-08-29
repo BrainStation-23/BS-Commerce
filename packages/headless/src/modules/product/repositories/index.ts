@@ -12,8 +12,8 @@ export class ProductRepository {
         return await this.db.findProduct(query);
     }
 
-    async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[]> {
-        return await this.db.findAllProducts(query, skip, limit);
+    async findAllProducts(query: Record<string, any>, skip?: number, limit?: number, price?: Partial<SearchCondition>, orderBy?: string,): Promise<Product[]> {
+        return await this.db.findAllProducts(query, skip, limit, price, orderBy,);
     }
 
     async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[]> {
@@ -48,7 +48,7 @@ export class ProductRepository {
         return await this.db.getTopSellingProducts( skip, limit);
     }
 
-    async getTags(query: Record<string, any>): Promise<Tag[] | []> {
-        return await this.db.getTags(query);
-      }
+    async getTag(query: Record<string, any>): Promise<Tag[] | []> {
+        return await this.db.getTag(query);
+    }
 }

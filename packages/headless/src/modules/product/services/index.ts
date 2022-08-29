@@ -95,12 +95,12 @@ export class ProductService {
     const getProduct = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
-    product.info = {...getProduct.info, ...product.info};
-    product.meta = {...getProduct.meta, ...product.meta};
+    product.info = { ...getProduct.info, ...product.info };
+    product.meta = { ...getProduct.meta, ...product.meta };
 
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
-    
+
     (product.info && product.info?.name) ? product.meta.friendlyPageName = await this.urlGenerate(product.info.name) : null;
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
@@ -168,7 +168,7 @@ export class ProductService {
   async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
-    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit, { maxPrice, minPrice }, orderBy);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
 
     let manufacturers = new Set();
@@ -186,23 +186,15 @@ export class ProductService {
   }
 
   async getCustomizedProducts(condition: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
-    const query = { isHomePageProductsTags: true };
-    const Tags = await this.productRepo.getTags(query);
-
-    let tagName = Tags.map((tag) => { return tag.name });
-    let productObject = {};
-    let products = await Promise.all(tagName.map(async (name) => {
-      const product = { [name]: await this.getProductsByTags(name, condition)}
-      productObject = Object.assign(productObject,product);
-      return product;
-    }))
-    if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(productObject, HttpStatus.OK);
+    const { skip, limit, tag } = condition;
+    const doesTagMatch = await this.productRepo.getTag({ name: tag, isHomePageProductsTag: true });
+    const product = doesTagMatch && { [tag]: await this.getProductByTags(skip, limit, tag)};
+    if (!product) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
-  async getProductsByTags(name: string, condition: GetCustomizedProductsQuery) {
-    const { skip, limit } = condition;
-    switch (name) {
+  async getProductByTags(skip: number, limit:number,  tag:string) {
+    switch (tag) {
       case GetCustomizedProductsTagsEnum.NEW_ARRIVAL:
         return await this.productRepo.getTopSellingProducts(skip, limit);
       case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
