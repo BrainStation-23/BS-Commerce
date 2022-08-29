@@ -11,6 +11,7 @@ import {
   Product,
   WishlistItem,
   WishlistProduct,
+  ICompareItems,
 } from 'models';
 import {
   setCartModalState,
@@ -52,12 +53,10 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   );
 
   const inCompareList = compareItems.find(
-    (item) => item.productId === product?.id
+    (item: ICompareItems) => item.productId === product?.id
   )
     ? true
     : false;
-
-  console.log(inCompareList);
 
   let inWishlist = wishlistData?.find(
     (item: WishlistItem) => item.productId === product?.id
