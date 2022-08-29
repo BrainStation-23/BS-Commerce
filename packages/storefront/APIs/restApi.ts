@@ -61,6 +61,7 @@ import { apiEndPoints } from 'utils/apiEndPoints';
 import { NextRouter } from 'next/router';
 import { OrderResponseData } from 'models';
 import { SendOtpResponse } from 'models';
+import { GetAllBrandsResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -199,11 +200,17 @@ export async function checkoutRest(
 }
 
 export async function getPublicProductByCategoryIDRest(
-  categoryId: string
+  categoryId: string,
+  orderBy: string,
+  minPrice: number,
+  maxPrice: number,
+  brands: string ,
 ): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}`
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}&orderBy=${
+        orderBy ? orderBy : 'asc'
+      }&brand=${brands}&minPrice=${minPrice}&maxPrice=${maxPrice}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
@@ -540,6 +547,18 @@ export async function resetPasswordRest(
     return res?.data;
   } catch (error: any) {
     toast.error('Password updatation failed. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
+  try {
+    const res = await axios.get(`${apiEndPoints.brands}`);
+    return res?.data;
+  } catch (error: any) {
+    toast.error('Faild to get brands list', {
       containerId: 'bottom-right',
     });
     return error;
