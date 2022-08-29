@@ -1,12 +1,15 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsArray, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,
   CompareErrorResponse,
   CompareSuccessResponse,
   DescriptiveError,
+  IProductInfo,
+  IProductMeta,
+  IProductDetails
 } from 'models';
 import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
 
@@ -18,7 +21,7 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class ProductInfo {
+export class ProductInfo implements IProductInfo{
   @ApiProperty()
   name: string;
   @ApiProperty()
@@ -26,11 +29,33 @@ export class ProductInfo {
   @ApiProperty()
   shortDescription: string;
   @ApiProperty()
+  oldPrice: number;
+  @ApiProperty()
   fullDescription: string;
 }
-export class ProductDetails {
+
+export class IProductMetaDto implements IProductMeta {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsArray()
+  keywords?: string[];
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  description?: string;
+}
+export class ProductDetails implements IProductDetails{
   @ApiProperty({ type: () => [ProductInfo] })
   info: ProductInfo;
+
+  @ApiProperty({ type: () => [IProductMetaDto] })
+  meta: IProductMeta;
 
   @ApiProperty()
   photos: string[];

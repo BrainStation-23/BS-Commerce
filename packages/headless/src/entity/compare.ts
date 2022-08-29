@@ -5,8 +5,15 @@ export class IProductInfo {
   shortDescription: string;
   fullDescription: string;
 }
+export class IProductMeta{
+  keywords?: string[];
+  title?: string;
+  description?: string;
+  friendlyPageName?: string;
+}
 export class IProductDetails {
   info: IProductInfo;
+  meta: IProductMeta;
   photos: string[];
 }
 export class CompareItems {

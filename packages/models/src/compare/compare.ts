@@ -16,8 +16,15 @@ export interface IProductInfo {
 	fullDescription: string;
 	oldPrice: number;
 }
+export interface IProductMeta {
+    keywords?: string[];
+    title?: string;
+    description?: string;
+    friendlyPageName?: string;
+}
 export interface IProductDetails {
 	info: IProductInfo;
+	meta: IProductMeta;
 	photos: string[];
 }
 export interface ICompareItems {

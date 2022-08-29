@@ -36,7 +36,7 @@ export class CompareDatabase implements ICompareDatabase {
         },
         { new: true },
       ).lean();
-
+      
       return compareList ? await this.mappedProductDetails(compareList) : null;
     }
      return null;
@@ -47,6 +47,7 @@ export class CompareDatabase implements ICompareDatabase {
       userId: userId,
       items: [productId],
     });
+    
     return compareList ? await this.getCompareListByUserId(userId) : null;
   }
 
@@ -88,22 +89,24 @@ export class CompareDatabase implements ICompareDatabase {
 
   private async mappedProductDetails(compareList: Compare): Promise<Compare> {
     const productIds = compareList.items.map((item) => item.productId);
+    
     const productDetails = await ProductModel.find({
       id: { $in: productIds },
-    }).select('info photos id -_id');
-
+    }).select('info meta photos id -_id');
+   
     const mappedItems = productDetails.map((e) => {
       const { name, price, shortDescription, fullDescription, oldPrice } = e.info;
       return {
         productId: e.id,
         productDetails: {
           info: { name, price, shortDescription, fullDescription, oldPrice },
+          meta: e.meta,
           photos: e.photos.map((e) => e.url),
         },
       };
     });
     compareList.items = mappedItems;
-    
+   
     return compareList;
   }
 }

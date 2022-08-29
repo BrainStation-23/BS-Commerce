@@ -9,7 +9,6 @@ export class CompareService {
   constructor(private compareRepository: CompareRepository, private helper: Helper) {}
 
   async addItemToCompare(userId: string, productId: string): Promise<CompareResponse> {
-    console.log(userId);
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
     if (!isExist) {
