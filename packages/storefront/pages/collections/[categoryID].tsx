@@ -79,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   }
 
-  console.log(categoryNameAndId);
+  //console.log(categoryNameAndId);
 
   return {
     props: {
