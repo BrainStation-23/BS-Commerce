@@ -1,5 +1,3 @@
-import Tooltips from "../../../global/tooltip";
-
 const SingleView = (props: any) => {
   const { label, value, toolkitMessage } = props;
 
@@ -20,11 +18,11 @@ const SingleView = (props: any) => {
           <div className="row">
             {Array.isArray(value) ? (
               <>
-                {value[0] ? value[0] : "---"}
-                {value.map((data, index) => (index > 0 ? ` , ${data}` : ""))}
+                {value[0] ? value[0] : '---'}
+                {value.map((data, index) => (index > 0 ? ` , ${data}` : ''))}
               </>
-            ) : typeof value === "string" && value.length <= 0 ? (
-              "- - -"
+            ) : typeof value === 'string' && value.length <= 0 ? (
+              '- - -'
             ) : (
               value
             )}

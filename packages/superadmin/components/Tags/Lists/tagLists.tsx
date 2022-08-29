@@ -2,9 +2,7 @@ import React, { FC, useMemo, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Table from '../../global/table/table';
 import Pagination from '../../global/pagination';
-import { userAPI } from '../../../APIs';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { Tag } from 'models';
 interface Props {
   TagData: Tag[];

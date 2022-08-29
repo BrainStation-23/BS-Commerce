@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { FC } from 'react';
-import Tooltips from '../../../global/tooltip';
 const TagInfo: FC = () => {
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
 
