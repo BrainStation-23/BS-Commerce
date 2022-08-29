@@ -16,6 +16,7 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
   const brandsOnClick = (brandName: string) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
+    
     router.replace({
       pathname: `/collections/${params.name}`,
       query: {

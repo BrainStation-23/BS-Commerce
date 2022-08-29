@@ -204,13 +204,15 @@ export async function getPublicProductByCategoryIDRest(
   orderBy: string,
   minPrice: number,
   maxPrice: number,
-  brands: string ,
+  brands: string
 ): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}&orderBy=${
-        orderBy ? orderBy : 'asc'
-      }&brand=${brands}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}${
+        orderBy ? `&orderBy=${orderBy}` : ''
+      }${brands ? `&brand=${brands}` : ''}${
+        minPrice ? `&minPrice=${minPrice}` : ''
+      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
