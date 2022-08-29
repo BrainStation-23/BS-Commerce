@@ -24,13 +24,6 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
   }, [currentPage, PageSize, TagData]);
   const columns = [
     {
-      label: 'Tag ID',
-      path: 'name',
-      content: (data: any, key: any, index: any) => (
-        <td className="p-auto m-auto text-center align-middle">{data.id}</td>
-      ),
-    },
-    {
       label: 'Tag Name',
       path: 'displayOrder',
       content: (data: any, key: any, index: any) => (
@@ -42,20 +35,12 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
       path: 'id',
       content: (data: any, key: any, index: any) => (
         <td className="p-auto m-auto text-center align-middle">
-          <Link
-            href={{
-              pathname: `/Manufacturer/Edit/[id]`,
-              query: { id: data?.id },
-            }}
-            passHref
-          >
-            <button className="btn btn-outline-info">
-              <span>
-                <i className="bi bi-pencil me-2 align-middle"></i>
-              </span>
-              Edit
-            </button>
-          </Link>
+          <button className="btn disabled rounded border bg-white">
+            <span>
+              <i className="bi bi-pencil me-2 align-middle"></i>
+            </span>
+            Edit
+          </button>
         </td>
       ),
     },
