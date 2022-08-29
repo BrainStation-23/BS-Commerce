@@ -3,17 +3,31 @@ import PageTitle from '@/components/global/components/pageTitle';
 import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
 import ProductSort from '@/components/cateoryProducts/sort/index';
 import { FC } from 'react';
+import CategoryBreadcrumb from './categoryBreadcrumb';
+
+interface CategoryNameIdProp {
+  name: string;
+  id: string;
+}
 
 interface props {
   categoryName: string;
+  categoryNameAndId: CategoryNameIdProp[];
 }
 
 const CategoryPageComponent: FC<props> = (props: props) => {
-  const { categoryName } = props;
+  const { categoryName, categoryNameAndId } = props;
+
+  //console.log(categoryNameAndId);
 
   return (
     <div className="">
-      <PageTitle title={categoryName} />
+      {/* <PageTitle title={categoryName} /> */}
+
+      <CategoryBreadcrumb
+        title={categoryName}
+        categoryNameAndId={categoryNameAndId}
+      />
 
       <div className="container mx-auto px-4 ">
         <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-5">

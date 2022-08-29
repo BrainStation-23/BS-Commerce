@@ -17,6 +17,7 @@ interface SingleProduct {
   products: Product[];
   name: string;
   brands: Brand[];
+  categoryNameAndId: CategoryNameIdProp[];
 }
 if (typeof window !== 'undefined')
   var sortOption = document.getElementById('selectSortOptions');
@@ -25,6 +26,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   products,
   name,
   brands,
+  categoryNameAndId,
 }) => {
   const dispatch = useAppDispatch();
   const setCategorizedProduct = async () => {
@@ -37,7 +39,12 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
     setCategorizedProduct();
     setBrands();
   });
-  return <CategoryPageComponent categoryName={name} />;
+  return (
+    <CategoryPageComponent
+      categoryName={name}
+      categoryNameAndId={categoryNameAndId}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -66,9 +73,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let categoryNameAndId: CategoryNameIdProp[] = [];
 
   if ('data' in categroyDetailsRes!) {
-    categroyDetailsRes?.data?.ancestors.forEach(async (ancestor) => {
+    for (let i = 0; i < categroyDetailsRes?.data?.ancestors.length; i++) {
       const ancestorDetailsRes = await userAPI.getCategoryDetailsBySlug(
-        ancestor.slug
+        categroyDetailsRes?.data?.ancestors[i].slug
       );
       if ('data' in ancestorDetailsRes!) {
         categoryNameAndId.push({
@@ -76,16 +83,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           id: ancestorDetailsRes?.data?.id,
         });
       }
+    }
+    categoryNameAndId.push({
+      name: name as string,
+      id: '',
     });
   }
-
-  //console.log(categoryNameAndId);
 
   return {
     props: {
       products,
       brands: res?.data?.brands ? res?.data?.brands : [],
       name: name,
+      categoryNameAndId,
     },
   };
 };
