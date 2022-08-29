@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { getCategoryResponse } from 'models';
 import { OrderResponseData } from 'models';
 import {
   GetCustomerAllProductsResponse,
@@ -271,5 +272,9 @@ export async function resetPasswordGraphql(
 }
 
 export async function getBrandsGraphql(): Promise<GetAllBrandsResponse | undefined > {
+  return undefined;
+}
+
+export async function getCategoryDetailsByIdGraphql(categoryId: string): Promise<getCategoryResponse | undefined> {
   return undefined;
 }

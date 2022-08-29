@@ -29,4 +29,6 @@ export const apiEndPoints = {
   deleteCustomerAddress: `/customer/delete-address`,
   customer: '/customer',
   brands: '/brands',
+  getCategoryDetails: '/category',
+  getCategoryBySlug: '/category/slug',
 };

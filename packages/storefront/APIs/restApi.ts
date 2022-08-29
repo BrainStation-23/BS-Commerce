@@ -62,6 +62,8 @@ import { NextRouter } from 'next/router';
 import { OrderResponseData } from 'models';
 import { SendOtpResponse } from 'models';
 import { GetAllBrandsResponse } from 'models';
+import { getCategoryResponse } from 'models';
+import { getCategorySuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -561,6 +563,16 @@ export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
     toast.error('Faild to get brands list', {
       containerId: 'bottom-right',
     });
+    return error;
+  }
+}
+
+export async function getCategoryDetailsByIdRest(categoryId: string): Promise<getCategoryResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCategoryDetails}/${categoryId}`);
+    return res.data as getCategorySuccessResponse;
+
+  } catch(error: any) {
     return error;
   }
 }

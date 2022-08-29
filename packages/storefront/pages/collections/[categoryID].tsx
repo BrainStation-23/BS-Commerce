@@ -49,10 +49,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     parseFloat(maxPrice as string) as number,
     brand as string
   );
-  // console.log('>>>>>>>>>', res?.data?.products);
+
   var products = res?.data?.products ? res?.data?.products : [];
   // console.log(res2.data);
   // console.log(res?.data?.brands);
+
+  const categroyDetailsRes = await userAPI.getCategoryDetailsById(
+    categoryId as string
+  );
+  //console.log(categroyDetailsRes?.data?.ancestors);
+
+  const categoryNameAndId = [];
+
   return {
     props: {
       products,
