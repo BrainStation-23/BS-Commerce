@@ -1,4 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
+import { GetCustomerProductByURLResponse } from 'models';
 import { OrderResponseData } from 'models';
 import {
   GetCustomerAllProductsResponse,
@@ -267,5 +268,11 @@ export async function forgetPasswordVerifyOtpGraphql(
 export async function resetPasswordGraphql(
   data: CustomerForgotPasswordRequest
 ): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function getPublicProductByUniqueNameGraphql(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
   return undefined;
 }

@@ -28,4 +28,5 @@ export const apiEndPoints = {
   updateCustomerAddress: `/customer/update-address`,
   deleteCustomerAddress: `/customer/delete-address`,
   customer: '/customer',
+  getPublicProductByUniqueName: '/customer/product'
 };

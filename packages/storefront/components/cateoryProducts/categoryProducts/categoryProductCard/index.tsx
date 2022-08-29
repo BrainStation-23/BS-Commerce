@@ -13,11 +13,11 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
     <>
       <Link
         href={{
-          pathname: `/product/${product.info.name}`,
-          query: {
-            id: product.id,
-            name: product.info.name,
-          },
+          pathname: `/product/${product?.meta?.friendlyPageName}`,
+          // query: {
+          //   id: product.id,
+          //   name: product.info.name,
+          // },
         }}
         passHref
       >

@@ -61,6 +61,8 @@ import { apiEndPoints } from 'utils/apiEndPoints';
 import { NextRouter } from 'next/router';
 import { OrderResponseData } from 'models';
 import { SendOtpResponse } from 'models';
+import { GetCustomerProductByURLResponse } from 'models';
+import { GetCustomerProductByURLSuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -542,6 +544,19 @@ export async function resetPasswordRest(
     toast.error('Password updatation failed. Try again', {
       containerId: 'bottom-right',
     });
+    return error;
+  }
+}
+
+export async function getPublicProductByUniqueNameRest(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProductByUniqueName}/${productUniqueName}`
+    );
+    return res.data.data as GetCustomerProductByURLSuccessResponse;
+  } catch (error: any) {
     return error;
   }
 }

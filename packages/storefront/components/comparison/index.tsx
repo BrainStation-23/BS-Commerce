@@ -155,13 +155,15 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           )}
                                           <br />
                                           <Link
-                                            href={{
-                                              pathname: `/product/${product?.info.name}`,
-                                              query: {
-                                                id: product?.id,
-                                                name: product?.info.name,
-                                              },
-                                            }}
+                                            href={
+                                              {
+                                                //pathname: `/product/${product.meta.friendlyPageName}`,
+                                                // query: {
+                                                //   id: product?.id,
+                                                //   name: product?.info.name,
+                                                // },
+                                              }
+                                            }
                                             passHref
                                           >
                                             <a className="text-xs text-gray-500/100 hover:text-red-600">
