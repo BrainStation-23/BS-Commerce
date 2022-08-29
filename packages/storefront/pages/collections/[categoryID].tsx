@@ -8,6 +8,11 @@ import { Product } from 'models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
 import { Brand } from 'models';
+
+interface CategoryNameIdProp {
+  name: string;
+  id: string;
+}
 interface SingleProduct {
   products: Product[];
   name: string;
@@ -57,9 +62,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const categroyDetailsRes = await userAPI.getCategoryDetailsById(
     categoryId as string
   );
-  //console.log(categroyDetailsRes?.data?.ancestors);
 
-  const categoryNameAndId = [];
+  let categoryNameAndId: CategoryNameIdProp[] = [];
+
+  if ('data' in categroyDetailsRes!) {
+    categroyDetailsRes?.data?.ancestors.forEach(async (ancestor) => {
+      const ancestorDetailsRes = await userAPI.getCategoryDetailsBySlug(
+        ancestor.slug
+      );
+      if ('data' in ancestorDetailsRes!) {
+        categoryNameAndId.push({
+          name: ancestorDetailsRes?.data?.name,
+          id: ancestorDetailsRes?.data?.id,
+        });
+      }
+    });
+  }
+
+  console.log(categoryNameAndId);
 
   return {
     props: {

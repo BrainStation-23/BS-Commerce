@@ -1,7 +1,8 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { getCategoryResponse } from 'models';
-import { OrderResponseData } from 'models';
 import {
+  getCategoryResponse,
+  OrderResponseData,
+  getCategoryBySlugResponse,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -36,7 +37,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -212,7 +213,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   return undefined;
 }
 
@@ -276,5 +277,9 @@ export async function getBrandsGraphql(): Promise<GetAllBrandsResponse | undefin
 }
 
 export async function getCategoryDetailsByIdGraphql(categoryId: string): Promise<getCategoryResponse | undefined> {
+  return undefined;
+}
+
+export async function getCategoryDetailsBySlugGraphql(categoryIdSlug: string): Promise<getCategoryBySlugResponse | undefined> {
   return undefined;
 }

@@ -51,6 +51,7 @@ import {
   SendOtpRequest,
   SendOtpSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  getCategoryBySlugResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -169,4 +170,5 @@ export interface apiFunction {
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
   getBrands(): Promise<GetAllBrandsResponse>;
   getCategoryDetailsById: (categoryId: string) => Promise< getCategoryResponse | undefined>;
+  getCategoryDetailsBySlug: (categorySlug: string) => Promise< getCategoryBySlugResponse | undefined>
 }

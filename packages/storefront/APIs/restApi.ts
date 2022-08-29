@@ -54,16 +54,18 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
+  OrderResponseData,
+  SendOtpResponse,
+  GetAllBrandsResponse,
+  getCategoryResponse,
+  getCategorySuccessResponse,
+  getCategoryBySlugResponse,
+  getCategoryBySlugSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { OrderResponseData } from 'models';
-import { SendOtpResponse } from 'models';
-import { GetAllBrandsResponse } from 'models';
-import { getCategoryResponse } from 'models';
-import { getCategorySuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -571,6 +573,16 @@ export async function getCategoryDetailsByIdRest(categoryId: string): Promise<ge
   try {
     const res = await axios.get(`${apiEndPoints.getCategoryDetails}/${categoryId}`);
     return res.data as getCategorySuccessResponse;
+
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsBySlugRest(categorySlug: string): Promise<getCategoryBySlugResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCategoryBySlug}/${categorySlug}`);
+    return res.data as getCategoryBySlugSuccessResponse;
 
   } catch(error: any) {
     return error;
