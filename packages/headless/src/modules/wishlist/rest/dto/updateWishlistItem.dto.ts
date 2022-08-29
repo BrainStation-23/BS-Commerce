@@ -10,7 +10,7 @@ import {
 } from 'models';
 
 export class updateWishlistItemRequestBodyDto implements updateWishlistItemRequestBody {
-    @ApiProperty()
+    @ApiProperty({ example: '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e' })
     @IsString()
     productId: string;
 
