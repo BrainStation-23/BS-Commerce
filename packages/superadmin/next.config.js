@@ -1,8 +1,8 @@
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: [],
-  },
+  // images: {
+  //   domains: [],
+  // },
   async redirects() {
     return [
       {
@@ -13,15 +13,15 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['admin-demo.nopcommerce.com', "cdn.shopify.com"],
+    domains: ['admin-demo.nopcommerce.com', 'cdn.shopify.com'],
   },
 };
 
 const withTM = require('next-transpile-modules')(['marketplace']);
 module.exports = withTM(nextConfig);
 
-module.exports = {
-  images: {
-    domains: ['admin-demo.nopcommerce.com', "cdn.shopify.com"],
-  },
-};
+// module.exports = {
+//   images: {
+//     domains: ['admin-demo.nopcommerce.com', 'cdn.shopify.com'],
+//   },
+// };
