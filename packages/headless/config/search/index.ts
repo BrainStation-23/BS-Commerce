@@ -1,5 +1,4 @@
-const {ELASTICSEARCH_NODE, ELASTICSEARCH_INDEX } = process.env
+const { ELASTICSEARCH_NODE } = process.env
 export const searchConfig = {
-    node: ELASTICSEARCH_NODE,
-    index: ELASTICSEARCH_INDEX
+    node: ELASTICSEARCH_NODE || 'http://localhost:9200'
 }

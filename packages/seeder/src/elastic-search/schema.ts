@@ -34,16 +34,14 @@ export const productSearchSchema = {
     analyzer: 'autocomplete' 
   },
   tags: {
-    type: 'text',
-    analyzer: 'autocomplete'
+    type: 'keyword',
   },
   photos: {
     type: 'text',
     analyzer: 'autocomplete'
   },
   brands: {
-    type: 'text',
-    analyzer: 'autocomplete'
+    type: 'keyword',
   },
   manufacturer: {
     properties: {

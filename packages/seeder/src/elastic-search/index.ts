@@ -9,8 +9,8 @@ const {
 export const esclient = new Client({
     node: ELASTICSEARCH_NODE || 'http://localhost:9200'
 });
-export const index      = 'products';
-export const type       = 'products';
+export const index = 'products';
+export const type = 'products';
 
 async function run() { 
     try {

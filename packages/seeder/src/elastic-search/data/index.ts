@@ -31,27 +31,34 @@ function mapSearchData(e: Product): Record<string, any> {
 export async function bulkInsert(){
     try {
         await connectToDatabase();  
-        const allProduct = await ProductModel.find({}).exec()
-        console.log("total product found ", allProduct.length)
-        if(!allProduct || allProduct.length < 1){
-            return 0;
-        }
-        const esAction = {
-        index: {
-            _index: 'products',
-            _type: 'products'
-        }
+        const totalCount = await ProductModel.countDocuments().exec()
+        const limit = 20;
+        let result = 0;
+
+        for(let skip=0; skip<totalCount; skip=skip+limit){ 
+            const allProduct = await ProductModel.find({}).skip(skip).limit(limit).exec()
+            console.log("product count for insertion", allProduct.length)
+            if(!allProduct || allProduct.length < 1){
+                return 0;
+            }
+            const esAction = {
+            index: {
+                _index: 'products',
+                _type: 'products'
+            }
+            } 
+            let docs = []  
+            const mapped = allProduct.map(e =>{ 
+                const data = mapSearchData(e)  
+                docs.push(esAction); 
+                docs.push(data); 
+            })   
+            const { statusCode } = await esclient.bulk({ body: docs })
+            result = statusCode
         } 
-        let docs = []  
-        const mapped = allProduct.map(e =>{ 
-            const data = mapSearchData(e)  
-            docs.push(esAction); 
-            docs.push(data); 
-        })   
-        const result = await esclient.bulk({ body: docs }) 
-        await esclient.indices.refresh({index: 'products'})
-        return result.statusCode; 
+        await esclient.indices.refresh({index: 'products'}) 
+        return result
     } catch (error) {
-    console.log(error)
+        console.log(error)
     }
 }
