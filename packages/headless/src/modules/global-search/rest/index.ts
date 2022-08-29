@@ -4,6 +4,7 @@ import { Response } from "express";
 import { IProductSearchResponse } from "models";
 import { IServiceResponse } from "src/utils/response/service.response.interface";
 import { ElasticService } from "../services/elastic.service";
+import { ISearchProductResponse } from "./dto";
 
 @ApiTags('Global search')
 @Controller('search')
@@ -12,7 +13,7 @@ export class SearchController{
 
     @ApiQuery({name:'q', description:"search query", example:"apple"})
     @Get()
-    async search(@Query('q') q: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<IProductSearchResponse>>{ 
+    async search(@Query('q') q: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<ISearchProductResponse>>{ 
         const { code, ...response } = await this.elasticService.search(q) 
         res.status(code);
         return { code, ...response };

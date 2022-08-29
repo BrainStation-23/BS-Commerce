@@ -5,8 +5,9 @@ import { IProductSearchResponse } from "models";
 import { ProductSrarchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
 import { errorResponse, successResponse } from "src/utils/response";
-import { IServiceResponse } from "src/utils/response/service.response.interface";
-import { productSearchSchema } from "../rest/schema";
+import { IServiceResponse } from "src/utils/response/service.response.interface"; 
+import { ISearchProductResponse } from "../rest/dto";
+import { productSearchSchema } from "./product.schema";
 
 @Injectable()
 export class ElasticService {
@@ -118,7 +119,10 @@ async deleteSingleByElasticId(id: string): Promise<number> {
   }
 
 
-  async search(keyword: string): Promise<IServiceResponse<IProductSearchResponse>>{
+  /**
+   * global product search - public api 
+   */
+  async search(keyword: string): Promise<IServiceResponse<ISearchProductResponse>>{
     const result = await this.getSearchData(keyword)
     if(!result){
       return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
@@ -126,7 +130,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     return successResponse(null, result, HttpStatus.OK)
   }
  
-  private async getSearchData(searchKey): Promise<IProductSearchResponse> { 
+  private async getSearchData(searchKey): Promise<ISearchProductResponse> { 
     const query = {
       from: 0,
       size: 4,
@@ -159,11 +163,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     const set = [...new Set(tags)].slice(0,5)
     const suggestion = hits.hits.map(hit => hit._source.info.name).slice(0,5).concat(set)
     const values  = hits.hits.map((hit) => {
-      return {
-        id:     hit._id,
-        data:  hit._source,
-        score:  hit._score
-      }
+      return hit._source
     });
 
     console.log("search result formation time = ", Date.now()-startTime)
