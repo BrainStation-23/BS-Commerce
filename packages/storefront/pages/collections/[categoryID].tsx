@@ -8,10 +8,16 @@ import { Product } from 'models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
 import { Brand } from 'models';
+
+interface CategoryNameIdProp {
+  name: string;
+  id: string;
+}
 interface SingleProduct {
   products: Product[];
   name: string;
   brands: Brand[];
+  categoryNameAndId: CategoryNameIdProp[];
 }
 if (typeof window !== 'undefined')
   var sortOption = document.getElementById('selectSortOptions');
@@ -20,6 +26,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   products,
   name,
   brands,
+  categoryNameAndId,
 }) => {
   const dispatch = useAppDispatch();
   const setCategorizedProduct = async () => {
@@ -32,7 +39,12 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
     setCategorizedProduct();
     setBrands();
   });
-  return <CategoryPageComponent categoryName={name} />;
+  return (
+    <CategoryPageComponent
+      categoryName={name}
+      categoryNameAndId={categoryNameAndId}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -49,15 +61,41 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     parseFloat(maxPrice as string) as number,
     brand as string
   );
-  // console.log('>>>>>>>>>', res?.data?.products);
+
   var products = res?.data?.products ? res?.data?.products : [];
   // console.log(res2.data);
   // console.log(res?.data?.brands);
+
+  const categroyDetailsRes = await userAPI.getCategoryDetailsById(
+    categoryId as string
+  );
+
+  let categoryNameAndId: CategoryNameIdProp[] = [];
+
+  if ('data' in categroyDetailsRes!) {
+    for (let i = 0; i < categroyDetailsRes?.data?.ancestors.length; i++) {
+      const ancestorDetailsRes = await userAPI.getCategoryDetailsBySlug(
+        categroyDetailsRes?.data?.ancestors[i].slug
+      );
+      if ('data' in ancestorDetailsRes!) {
+        categoryNameAndId.push({
+          name: ancestorDetailsRes?.data?.name,
+          id: ancestorDetailsRes?.data?.id,
+        });
+      }
+    }
+    categoryNameAndId.push({
+      name: name as string,
+      id: '',
+    });
+  }
+
   return {
     props: {
       products,
       brands: res?.data?.brands ? res?.data?.brands : [],
       name: name,
+      categoryNameAndId,
     },
   };
 };

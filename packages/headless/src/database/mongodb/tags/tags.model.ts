@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import { randomUUID } from 'crypto';
 import { Tag } from 'src/entity/tags';
 
 const TagsSchema = new Schema<Tag>({

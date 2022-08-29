@@ -1,7 +1,8 @@
-import { OrderResponseData } from 'models';
-import { GetAllBrandsResponse } from 'models';
 import {
   CustomerSignInResponse,
+  getCategoryResponse,
+  GetAllBrandsResponse,
+  OrderResponseData,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -50,6 +51,7 @@ import {
   SendOtpRequest,
   SendOtpSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  getCategoryBySlugResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -167,4 +169,6 @@ export interface apiFunction {
     data: CustomerForgotPasswordRequest
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
   getBrands(): Promise<GetAllBrandsResponse>;
+  getCategoryDetailsById: (categoryId: string) => Promise< getCategoryResponse | undefined>;
+  getCategoryDetailsBySlug: (categorySlug: string) => Promise< getCategoryBySlugResponse | undefined>
 }
