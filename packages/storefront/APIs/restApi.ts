@@ -54,14 +54,18 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
+  OrderResponseData,
+  SendOtpResponse,
+  GetAllBrandsResponse,
+  getCategoryResponse,
+  getCategorySuccessResponse,
+  getCategoryBySlugResponse,
+  getCategoryBySlugSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { OrderResponseData } from 'models';
-import { SendOtpResponse } from 'models';
-import { GetAllBrandsResponse } from 'models';
 import { GetCustomerProductByURLResponse } from 'models';
 import { GetCustomerProductByURLSuccessResponse } from 'models';
 
@@ -206,17 +210,19 @@ export async function getPublicProductByCategoryIDRest(
   orderBy: string,
   minPrice: number,
   maxPrice: number,
-  brands: string ,
+  brands: string
 ): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}&orderBy=${
-        orderBy ? orderBy : 'asc'
-      }&brand=${brands}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}${
+        orderBy ? `&orderBy=${orderBy}` : ''
+      }${brands ? `&brand=${brands}` : ''}${
+        minPrice ? `&minPrice=${minPrice}` : ''
+      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
-    return [] as any;
+    return error;
   }
 }
 export async function addToWishlistRest(
@@ -555,7 +561,7 @@ export async function resetPasswordRest(
   }
 }
 
-export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
+export async function getBrandsRest(): Promise<GetAllBrandsResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.brands}`);
     return res?.data;
@@ -576,6 +582,26 @@ export async function getPublicProductByUniqueNameRest(
     );
     return res.data.data as GetCustomerProductByURLSuccessResponse;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsByIdRest(categoryId: string): Promise<getCategoryResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCategoryDetails}/${categoryId}`);
+    return res.data as getCategorySuccessResponse;
+
+  } catch(error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsBySlugRest(categorySlug: string): Promise<getCategoryBySlugResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCategoryBySlug}/${categorySlug}`);
+    return res.data as getCategoryBySlugSuccessResponse;
+
+  } catch(error: any) {
     return error;
   }
 }

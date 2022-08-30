@@ -40,18 +40,20 @@ const ProductSort: FC = () => {
   const replaceQuery = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
+    const queryObject: {
+      [key: string]: string | number;
+    } = { categoryId: params.categoryId };
+    params.categoryId ? (queryObject['categoryId'] = params.categoryId) : '';
+    params.name ? (queryObject['name'] = params.name) : '';
+    params.brand ? (queryObject['brand'] = params.brand) : '';
+    params.minPrice ? (queryObject['minPrice'] = params.minPrice) : '';
+    params.maxPrice ? (queryObject['maxPrice'] = params.maxPrice) : '';
+    queryObject['orderBy'] = (
+      document.getElementById('selectSortOptions') as HTMLInputElement
+    ).value;
     router.replace({
       pathname: `/collections/${params.name}`,
-      query: {
-        categoryId: params.categoryId,
-        name: params.name,
-        orderBy: (
-          document.getElementById('selectSortOptions') as HTMLInputElement
-        ).value,
-        minPrice: params.minPrice,
-        maxPrice: params.maxPrice,
-        brand: params.brand,
-      },
+      query: queryObject,
     });
   };
   const dropdownSortOptions =
@@ -66,7 +68,7 @@ const ProductSort: FC = () => {
   return (
     <>
       <div>
-        <div className="box-border h-auto w-full border px-4 text-sm">
+        <div className="box-border h-auto w-full border px-x text-sm">
           <div className="flex justify-between">
             <div className="flex  py-2">
               <label className="grid content-center justify-center px-4">

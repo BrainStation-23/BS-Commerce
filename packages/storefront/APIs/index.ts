@@ -33,6 +33,8 @@ import {
   resetPasswordRest,
   getBrandsRest,
   getPublicProductByUniqueNameRest,
+  getCategoryDetailsByIdRest,
+  getCategoryDetailsBySlugRest,
 } from './restApi';
 
 import {
@@ -70,6 +72,8 @@ import {
   sendOTPGraphql,
   getBrandsGraphql,
   getPublicProductByUniqueNameGraphql,
+  getCategoryDetailsByIdGraphql,
+  getCategoryDetailsBySlugGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -109,6 +113,8 @@ const graphqlApi: apiFunction = {
   resetPassword: resetPasswordGraphql,
   getBrands: getBrandsGraphql,
   getPublicProductByUniqueName: getPublicProductByUniqueNameGraphql,
+  getCategoryDetailsById: getCategoryDetailsByIdGraphql,
+  getCategoryDetailsBySlug: getCategoryDetailsBySlugGraphql,
 };
 
 const restApi: apiFunction = {
@@ -145,6 +151,8 @@ const restApi: apiFunction = {
   forgetPasswordVerifyOtp: forgetPasswordVerifyOtpRest,
   resetPassword: resetPasswordRest,
   getBrands: getBrandsRest,
+  getCategoryDetailsById: getCategoryDetailsByIdRest,
+  getCategoryDetailsBySlug: getCategoryDetailsBySlugRest,
   getPublicProductByUniqueName: getPublicProductByUniqueNameRest,
 };
 

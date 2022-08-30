@@ -1,7 +1,8 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { GetCustomerProductByURLResponse } from 'models';
-import { OrderResponseData } from 'models';
 import {
+  getCategoryResponse,
+  OrderResponseData,
+  getCategoryBySlugResponse,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -36,7 +37,7 @@ import {
   CustomerAddress,
   GetCustomerInformationResponse,
   DeleteCustomerAddressResponse,
-  OrderByUserIdResponseData,
+  OrderByUserIdResponse,
   UpdateCustomerAddressResponse,
   Wishlist,
   getCategoryListSuccessResponse,
@@ -53,6 +54,7 @@ import {
   CustomerForgotPasswordSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
   GetAllBrandsResponse,
+  GetCustomerProductByURLResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -212,7 +214,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponseData | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   return undefined;
 }
 
@@ -272,6 +274,14 @@ export async function resetPasswordGraphql(
 }
 
 export async function getBrandsGraphql(): Promise<GetAllBrandsResponse | undefined > {
+  return undefined;
+}
+
+export async function getCategoryDetailsByIdGraphql(categoryId: string): Promise<getCategoryResponse | undefined> {
+  return undefined;
+}
+
+export async function getCategoryDetailsBySlugGraphql(categoryIdSlug: string): Promise<getCategoryBySlugResponse | undefined> {
   return undefined;
 }
 
