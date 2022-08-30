@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { NestedCategoryList, subCategoryList } from 'models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
-import HeaderSubCategory from '@/components/global/components/headerSubCategory';
+import HeaderSubCategory from '@/components/global/layout/headerSubCategory';
 
 interface Props {
   category: NestedCategoryList;
