@@ -11,7 +11,7 @@ const OrderTable: React.FC<Props> = ({ orderList }) => {
   return (
     <>
       <div className="mt-5">
-        <div className="overflow-x-auto border">
+        <div className="overflow-x-auto rounded-lg border">
           <div className="inline-block min-w-full py-2 sm:px-4">
             <table className="inline-table w-full text-left text-sm">
               <thead className="">

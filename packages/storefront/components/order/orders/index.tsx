@@ -1,3 +1,4 @@
+import WithAuth from '@/components/auth/withAuth';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { userAPI } from 'APIs';
 import { useAppSelector } from 'customHooks/hooks';
@@ -41,4 +42,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default WithAuth(Orders);
