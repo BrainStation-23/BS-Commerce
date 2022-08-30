@@ -21,8 +21,8 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
 
   return (
     <div
-      className={`group`}
-      onMouseEnter={() => setExpand(true)}
+      className={`lg:group`}
+      onMouseEnter={() => document.body.clientWidth > 1023 &&  setExpand(true)}
       onMouseLeave={() => document.body.clientWidth > 1023 && setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >

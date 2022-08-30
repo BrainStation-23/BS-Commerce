@@ -41,11 +41,12 @@ const HeaderSubCategory: React.FC<Props> = ({
     <>
       {category ? (
         <div
-          className="group w-full"
-          onMouseEnter={() => setShowSubCategory(true)}
+          className="w-full"
+          onMouseEnter={() =>
+            document.body.clientWidth > 1023 && setShowSubCategory(true)
+          }
           onMouseLeave={() => {
-            setTimeout(function () {}, 2000);
-            setShowSubCategory(false);
+            document.body.clientWidth > 1023 && setShowSubCategory(false);
           }}
         >
           <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-green-600">
