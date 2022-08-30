@@ -66,6 +66,8 @@ import {
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
+import { GetCustomerProductByURLResponse } from 'models';
+import { GetCustomerProductByURLSuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -559,7 +561,7 @@ export async function resetPasswordRest(
   }
 }
 
-export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
+export async function getBrandsRest(): Promise<GetAllBrandsResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.brands}`);
     return res?.data;
@@ -567,6 +569,19 @@ export async function getBrandsRest(): Promise<GetAllBrandsResponse> {
     toast.error('Faild to get brands list', {
       containerId: 'bottom-right',
     });
+    return error;
+  }
+}
+
+export async function getPublicProductByUniqueNameRest(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProductByUniqueName}/${productUniqueName}`
+    );
+    return res.data.data as GetCustomerProductByURLSuccessResponse;
+  } catch (error: any) {
     return error;
   }
 }

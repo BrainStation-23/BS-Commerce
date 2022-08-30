@@ -54,6 +54,7 @@ import {
   CustomerForgotPasswordSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
   GetAllBrandsResponse,
+  GetCustomerProductByURLResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -281,5 +282,11 @@ export async function getCategoryDetailsByIdGraphql(categoryId: string): Promise
 }
 
 export async function getCategoryDetailsBySlugGraphql(categoryIdSlug: string): Promise<getCategoryBySlugResponse | undefined> {
+  return undefined;
+}
+
+export async function getPublicProductByUniqueNameGraphql(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
   return undefined;
 }
