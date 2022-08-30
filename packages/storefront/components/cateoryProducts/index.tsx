@@ -36,7 +36,7 @@ const CategoryPageComponent: FC<props> = (props: props) => {
           </div>
 
           <div className="col-span-4 flex-col">
-            <div className="mt-16 mb-8 md:px-12 lg:px-12 xl:px-14">
+            <div className="mt-16 mb-8 lg:px-12 xl:px-14">
               <ProductSort />
             </div>
             <div>
