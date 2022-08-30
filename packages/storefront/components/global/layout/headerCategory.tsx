@@ -22,6 +22,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
   return (
     <div
       className={`lg:group`}
+      /** For hover effect only in large screen */
       onMouseEnter={() => document.body.clientWidth > 1023 &&  setExpand(true)}
       onMouseLeave={() => document.body.clientWidth > 1023 && setExpand(false)}
       // style={{ outline: '1px solid red' }}

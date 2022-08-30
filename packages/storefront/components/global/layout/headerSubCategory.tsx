@@ -42,6 +42,7 @@ const HeaderSubCategory: React.FC<Props> = ({
       {category ? (
         <div
           className="w-full"
+          /** For hover effect only in large screen */
           onMouseEnter={() =>
             document.body.clientWidth > 1023 && setShowSubCategory(true)
           }
