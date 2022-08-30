@@ -4,11 +4,7 @@ import CategoryProducts from '@/components/cateoryProducts/categoryProducts/cate
 const CategoryProductSegment: FC = () => {
   return (
     <>
-      <div>
-        <div className="px-6">
-          <CategoryProducts />
-        </div>
-      </div>
+      <CategoryProducts />
     </>
   );
 };
