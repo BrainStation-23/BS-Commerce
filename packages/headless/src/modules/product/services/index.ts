@@ -29,6 +29,7 @@ import {
   GetCustomizedProductsQuery,
   GetCustomizedProductsTagsEnum,
   GetCustomizedProductsResponse,
+  GetCustomizedProductsErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -188,15 +189,15 @@ export class ProductService {
   async getCustomizedProducts(condition: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
     const { skip, limit, tag } = condition;
     const doesTagMatch = await this.productRepo.getTag({ name: tag, isHomePageProductsTag: true });
-    const product = doesTagMatch && { [tag]: await this.getProductByTags(skip, limit, tag)};
-    if (!product) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    if (!doesTagMatch) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.INVALID_TAG_NAME, null, HttpStatus.BAD_REQUEST);
+
+    const product = await this.getProductByTags(skip, limit, tag);
+    if (!product) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.CAN_NOT_GET_CUSTOMIZED_PRODUCTS, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
   async getProductByTags(skip: number, limit:number,  tag:string) {
     switch (tag) {
-      case GetCustomizedProductsTagsEnum.NEW_ARRIVAL:
-        return await this.productRepo.getTopSellingProducts(skip, limit);
       case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
         return await this.productRepo.getTopSellingProducts(skip, limit);
       default:

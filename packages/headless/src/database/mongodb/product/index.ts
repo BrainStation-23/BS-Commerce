@@ -67,14 +67,13 @@ export class ProductDatabase implements IProductDatabase {
     return await TagsModel.findOne(query).select('-_id').lean();
   }
 
-  async getTopSellingProducts( skip: number, limit: number): Promise<Product[] | []> {
+  async getTopSellingProducts(skip: number, limit: number): Promise<Product[] | []> {
     const orderArray = await OrderModel.aggregate([
       { $unwind: "$products" },
-      { $unwind: "$products.info" },
       {
         '$match': {
           'orderedDate': {
-            '$gte': new Date(Date.now()- 7* 60 * 60 * 24 * 1000)
+            '$gte': new Date(Date.now() - 7 * 60 * 60 * 24 * 1000)
           }
         }
       },
@@ -91,7 +90,7 @@ export class ProductDatabase implements IProductDatabase {
       {
         '$match': {
           totalOrderQuantity: {
-            '$gte':5
+            '$gte': 5
           }
         }
       },

@@ -1,23 +1,20 @@
-import { HttpStatus } from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
     IsArray,
     IsNumber,
     IsObject,
     IsOptional,
     IsString
-} from "class-validator";
+} from 'class-validator';
 import {
-    CustomizedProducts,
     GetCustomizedProductsErrorMessages,
     GetCustomizedProductsErrorResponse,
     GetCustomizedProductsQuery,
     GetCustomizedProductsSuccessResponse,
-    GetCustomizedProductsTagsEnum,
-    Product,
-} from "models";
-import { ProductDto } from "./product.dto";
+} from 'models';
+import { ProductDto } from './product.dto';
 
 
 export class GetCustomizedProductsQueryDto implements GetCustomizedProductsQuery {
@@ -37,13 +34,6 @@ export class GetCustomizedProductsQueryDto implements GetCustomizedProductsQuery
     @IsString()
     tag: string;
 }
-
-export class CustomizedProductsDto implements CustomizedProducts {
-    @ApiProperty({type:[ProductDto] })
-    @Type(() => ProductDto)
-    [GetCustomizedProductsTagsEnum.BRANDS_YOU_ARE_LOOKING_FOR]: ProductDto[];
-}
-
 export class GetCustomizedProductsErrorResponseDto implements GetCustomizedProductsErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
@@ -63,7 +53,7 @@ export class GetCustomizedProductsSuccessResponseDto implements GetCustomizedPro
     @IsNumber()
     code: number;
 
-    @ApiProperty({ type: CustomizedProductsDto })
+    @ApiProperty({ type: [ProductDto] })
     @IsObject()
-    data: CustomizedProductsDto;
+    data: ProductDto[];
 }

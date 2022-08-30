@@ -7,17 +7,14 @@ export interface GetCustomizedProductsQuery {
     tag: string;
 }
 
-export interface CustomizedProducts {
-    [GetCustomizedProductsTagsEnum.BRANDS_YOU_ARE_LOOKING_FOR]:Product[];
-}
-
 export interface GetCustomizedProductsSuccessResponse extends SuccessResponse {
     code: number;
-    data: CustomizedProducts;
+    data: Product[];
 }
 
 export const enum GetCustomizedProductsErrorMessages {
     CAN_NOT_GET_CUSTOMIZED_PRODUCTS = 'CAN_NOT_GET_CUSTOMIZED_PRODUCTS',
+    INVALID_TAG_NAME = 'INVALID_TAG_NAME',
 }
 
 export const enum GetCustomizedProductsTagsEnum {
