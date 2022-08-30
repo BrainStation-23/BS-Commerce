@@ -11,7 +11,7 @@ const CategoryProductSegment: FC = () => {
     <>
       <div>
         {products && products[0] ? (
-          <div className="grid grid-cols-1 justify-items-center gap-2 md:grid-cols-2 md:gap-2 lg:ml-8 lg:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">
+          <div className="grid grid-cols-2 justify-items-center gap-2 md:grid-cols-2 md:gap-2 lg:ml-8 lg:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">
             {products.map((product) => (
               <CategoryProductCard key={product.id} product={product} />
             ))}

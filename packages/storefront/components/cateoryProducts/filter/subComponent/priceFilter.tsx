@@ -7,18 +7,23 @@ const PriceFilter: FC = () => {
   const onClickFilter = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
+    const queryObject: {
+      [key: string]: string | number;
+    } = { categoryId: params.categoryId };
+    params.categoryId ? (queryObject['categoryId'] = params.categoryId) : '';
+    params.name ? (queryObject['name'] = params.name) : '';
+    params.orderBy ? (queryObject['orderBy'] = params.orderBy) : '';
+    params.brand ? (queryObject['brand'] = params.brand) : '';
+    params.maxPrice ? (queryObject['maxPrice'] = params.maxPrice) : '';
+    queryObject['minPrice'] = (
+      document.getElementById('lowPrice') as HTMLInputElement
+    ).value;
+    queryObject['maxPrice'] = (
+      document.getElementById('highPrice') as HTMLInputElement
+    ).value;
     router.replace({
       pathname: `/collections/${params.name}`,
-      query: {
-        categoryId: params.categoryId,
-        name: params.name,
-        orderBy: params.orderBy,
-        minPrice: (document.getElementById('lowPrice') as HTMLInputElement)
-          .value,
-        maxPrice: (document.getElementById('highPrice') as HTMLInputElement)
-          .value,
-        brand: params.brand,
-      },
+      query: queryObject,
     });
   };
   return (

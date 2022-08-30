@@ -37,9 +37,6 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                     query: {
                       categoryId: path.id,
                       name: path.name,
-                      orderBy: 'asc',
-                      minPrice: 0,
-                      maxPrice: 1000000,
                     },
                   }}
                   passHref
@@ -59,9 +56,6 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                     query: {
                       categoryId: path.id,
                       name: path.name,
-                      orderBy: 'asc',
-                      minPrice: 0,
-                      maxPrice: 1000000,
                     },
                   }}
                   passHref

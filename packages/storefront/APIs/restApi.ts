@@ -220,7 +220,7 @@ export async function getPublicProductByCategoryIDRest(
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
-    return [] as any;
+    return error;
   }
 }
 export async function addToWishlistRest(

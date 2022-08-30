@@ -16,22 +16,23 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
   const brandsOnClick = (brandName: string) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    
+    const queryObject: {
+      [key: string]: string | number;
+    } = { categoryId: params.categoryId };
+    params.categoryId ? (queryObject['categoryId'] = params.categoryId) : '';
+    params.name ? (queryObject['name'] = params.name) : '';
+    params.orderBy ? (queryObject['orderBy'] = params.orderBy) : '';
+    params.minPrice ? (queryObject['minPrice'] = params.minPrice) : '';
+    params.maxPrice ? (queryObject['maxPrice'] = params.maxPrice) : '';
+    queryObject['brand'] = brandName;
     router.replace({
       pathname: `/collections/${params.name}`,
-      query: {
-        categoryId: params.categoryId,
-        name: params.name,
-        orderBy: params.orderBy,
-        minPrice: params.minPrice,
-        maxPrice: params.maxPrice,
-        brand: brandName,
-      },
+      query: queryObject,
     });
   };
   const getBrandName = (brandName: string) => {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries()); 
+    const params = Object.fromEntries(urlSearchParams.entries());
     return brandName == params.brand;
   };
   return (

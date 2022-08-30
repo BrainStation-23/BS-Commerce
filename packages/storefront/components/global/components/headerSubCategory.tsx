@@ -56,9 +56,6 @@ const HeaderSubCategory: React.FC<Props> = ({
                   query: {
                     categoryId: category.id,
                     name: category.name,
-                    orderBy: 'asc',
-                    minPrice: 0,
-                    maxPrice: 1000000,
                   },
                 }}
                 //as={`/collections/${category.name}`}
