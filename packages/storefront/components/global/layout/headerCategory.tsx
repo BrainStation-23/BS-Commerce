@@ -23,7 +23,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     <div
       className={`group`}
       onMouseEnter={() => setExpand(true)}
-      onMouseLeave={() => setExpand(false)}
+      onMouseLeave={() => document.body.clientWidth > 1023 && setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >
       <div className="flex cursor-pointer flex-row items-center justify-between py-1 px-3 text-sm transition-all duration-100 ease-linear hover:text-green-600">
@@ -32,7 +32,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             pathname: `/collections/${category.name}`,
             query: {
               categoryId: category.id,
-              name: category.name, 
+              name: category.name,
             },
           }}
           //as={`/collections/${category.name}`}
@@ -80,7 +80,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         ''
       )}
       {/* render on lg+ screen */}
-      {document.body.clientWidth > 768 && category.subCategories ? (
+      {document.body.clientWidth > 1023 && category.subCategories ? (
         <div
           className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
             expand ? 'scale-x-100' : 'scale-x-0'
