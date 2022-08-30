@@ -194,20 +194,6 @@ describe('Initializing... Manufactrurer controller testing', () => {
     }, timeout);
   });
 
-  describe('POST /manufacturers/create [passing invalid data as same name]', () => {
-    it('should not save and return error message with 400 bad request', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send({ ...ManufacturerDto, name: 'Same Manufacturer' })
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.error).toEqual('MANUFACTURER_ALREADY_EXISTS');
-          expect(res.body.errors).toBe(null);
-        });
-    }, timeout);
-  });
-
   describe('POST /manufacturers/create [passing valid data]', () => {
     it('should save and return manufacturer response data', async () => {
       return await request(app.getHttpServer())
@@ -222,6 +208,20 @@ describe('Initializing... Manufactrurer controller testing', () => {
           );
 
           manufacturerId = res.body.data.manufacturer.id;
+        });
+    }, timeout);
+  });
+
+  describe('POST /manufacturers/create [passing invalid data as same name]', () => {
+    it('should not save and return error message with 400 bad request', async () => {
+      return await request(app.getHttpServer())
+        .post('/manufacturers/create')
+        .send({ ...ManufacturerDto, name: 'Manufacturer Test 1' })
+        .set('Authorization', `Bearer ${token}`)
+        .expect((res) => {
+          expect(res.statusCode).toBe(400);
+          expect(res.body.error).toEqual('MANUFACTURER_ALREADY_EXISTS');
+          expect(res.body.errors).toBe(null);
         });
     }, timeout);
   });
