@@ -8,7 +8,7 @@ import { WishListModel } from './wishList.model';
 export class WishListDatabase implements IWishListDatabase {
 
   async getWishlistProduct(wishlist: WishList): Promise<WishList | null> {
-    const products: Product[] = await ProductModel.find({ id: { $in: wishlist.items.map(item => item.productId) } }).select('info photos id -_id');
+    const products: Product[] = await ProductModel.find({ id: { $in: wishlist.items.map(item => item.productId) } }).select('info photos meta.friendlyPageName id -_id');
 
     let map = new Map<string, Product>();
     for (let i = 0, len = products.length; i < len; i++) {

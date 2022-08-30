@@ -1,4 +1,5 @@
 import { OrderResponseData } from 'models';
+import { GetAllBrandsResponse } from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -95,7 +96,11 @@ export interface apiFunction {
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
-    categoryId: string
+    categoryId: string,
+    orderBy: string,
+    minPrice: number,
+    maxPrice: number,
+    brands: string
   ) => Promise<GetCustomerAllProductsSuccessResponse | undefined>;
   checkout: (
     data: any,
@@ -161,4 +166,5 @@ export interface apiFunction {
   resetPassword: (
     data: CustomerForgotPasswordRequest
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
+  getBrands(): Promise<GetAllBrandsResponse>;
 }

@@ -62,21 +62,7 @@ const CategoryFilter: FC = () => {
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingOne5">
               <button
-                className="
-                accordion-button
-                relative
-                flex
-                w-full
-                items-center
-                justify-between
-                rounded-none border-0 bg-white
-                px-0
-                pb-2
-                text-left
-                text-sm
-                text-gray-800
-                transition focus:outline-none
-              "
+                className="accordion-button relative flex w-full items-center justify-between rounded-none border-0 bg-white px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseOne5"
@@ -85,7 +71,6 @@ const CategoryFilter: FC = () => {
                 onClick={accorditionStatus1}
               >
                 <span className="text-[15px] font-semibold tracking-wide">
-                  {' '}
                   PRICE
                 </span>
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
