@@ -1,4 +1,3 @@
-import type { NextComponentType } from 'next';
 import { FC } from 'react';
 import CategoryProducts from '@/components/cateoryProducts/categoryProducts/categoryProducts';
 

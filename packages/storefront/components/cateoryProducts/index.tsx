@@ -1,9 +1,9 @@
-import CategoryFilter from '@/components/cateoryProducts/filter/main';
-import PageTitle from '@/components/global/components/pageTitle';
-import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
-import ProductSort from '@/components/cateoryProducts/sort/index';
 import { FC } from 'react';
-import CategoryBreadcrumb from './categoryBreadcrumb';
+import ProductSort from '@/components/cateoryProducts/sort/index';
+import CategoryFilter from '@/components/cateoryProducts/filter/main';
+import CategoryBreadcrumb from '@/components/cateoryProducts/categoryBreadcrumb';
+import { CategoryPagination } from '@/components/cateoryProducts/categoryPagination';
+import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
 
 interface CategoryNameIdProp {
   name: string;
@@ -39,8 +39,9 @@ const CategoryPageComponent: FC<props> = (props: props) => {
             <div className="mt-16 mb-8 lg:px-12 xl:px-14">
               <ProductSort />
             </div>
-            <div>
-              <CategoryProductSegment />
+            <CategoryProductSegment />
+            <div className="mt-16 mb-8 lg:px-12 xl:px-14">
+              <CategoryPagination />
             </div>
           </div>
         </div>
