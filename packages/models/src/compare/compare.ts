@@ -17,9 +17,6 @@ export interface IProductInfo {
 	oldPrice: number;
 }
 export interface IProductMeta {
-    keywords?: string[];
-    title?: string;
-    description?: string;
     friendlyPageName?: string;
 }
 export interface IProductDetails {

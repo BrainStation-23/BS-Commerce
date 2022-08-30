@@ -45,7 +45,7 @@ export class CompareDatabase implements ICompareDatabase {
   async getProductDetails(productId: string): Promise<CompareItems[] | null> {
     const productDetails = await ProductModel.find({
       id: productId
-    }).select('info meta photos id -_id');
+    }).select('info meta.friendlyPageName photos id -_id');
 
     if(!productDetails) return null;
     const mappedItems = productDetails.map((e) => {
@@ -113,7 +113,7 @@ export class CompareDatabase implements ICompareDatabase {
     
     const productDetails = await ProductModel.find({
       id: { $in: productIds },
-    }).select('info meta photos id -_id');
+    }).select('info meta.friendlyPageName photos id -_id');
    
     const mappedItems = productDetails.map((e) => {
       const { name, price, shortDescription, fullDescription, oldPrice } = e.info;

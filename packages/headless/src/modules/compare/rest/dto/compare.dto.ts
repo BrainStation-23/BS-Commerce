@@ -39,18 +39,7 @@ export class ProductInfo implements IProductInfo{
 export class ProductMeta implements IProductMeta {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsArray()
-  keywords?: string[];
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  title?: string;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  description?: string;
+  friendlyPageName?: string;
 }
 export class ProductDetails implements IProductDetails{
   @ApiProperty()

@@ -6,9 +6,6 @@ export class IProductInfo {
   fullDescription: string;
 }
 export class IProductMeta{
-  keywords?: string[];
-  title?: string;
-  description?: string;
   friendlyPageName?: string;
 }
 export class IProductDetails {
