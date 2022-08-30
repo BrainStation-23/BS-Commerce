@@ -8,6 +8,7 @@ import { NextComponentType } from 'next';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 import Icon from '@/components/global/components/icon';
+import { Wishlist, WishlistItem } from 'models';
 
 interface Props {
   productImageHeight: number;
@@ -21,17 +22,17 @@ const WishlistBody: React.FC<Props> = (props) => {
   );
   return (
     <>
-      {wishlistData?.items?.map((data, index) => {
+      {wishlistData?.items?.map((data: WishlistItem, index: number) => {
         return (
-          <React.Fragment key={index}>
+          <React.Fragment key={data.productId}>
             <div className="flex flex-col flex-wrap items-center">
               <Link
                 href={{
-                  pathname: `product/${data?.product?.info.name}`,
-                  query: {
-                    id: data?.product?.id,
-                    name: data?.product?.info.name,
-                  },
+                  pathname: `product/${data?.product?.meta?.friendlyPageName}`,
+                  // query: {
+                  //   id: data?.product?.id,
+                  //   name: data?.product?.info.name,
+                  // },
                 }}
                 //as={`product/${data?.product?.info.name}`}
                 passHref

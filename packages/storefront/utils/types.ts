@@ -1,5 +1,6 @@
 import { OrderResponseData } from 'models';
 import { GetAllBrandsResponse } from 'models';
+import { GetCustomerProductByURLResponse } from 'models';
 import {
   CustomerSignInResponse,
   GetCustomerQuery,
@@ -167,4 +168,7 @@ export interface apiFunction {
     data: CustomerForgotPasswordRequest
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
   getBrands(): Promise<GetAllBrandsResponse>;
+  getPublicProductByUniqueName(
+    productUniqueName: string
+  ): Promise<GetCustomerProductByURLResponse | undefined>;
 }
