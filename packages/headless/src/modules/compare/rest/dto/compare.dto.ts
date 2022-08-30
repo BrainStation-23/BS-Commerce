@@ -53,10 +53,10 @@ export class ProductMeta implements IProductMeta {
   description?: string;
 }
 export class ProductDetails implements IProductDetails{
-  @ApiProperty({ type: () => [ProductInfo] })
+  @ApiProperty()
   info: ProductInfo;
 
-  @ApiProperty({ type: () => [ProductMeta] })
+  @ApiProperty()
   meta: ProductMeta;
 
   @ApiProperty()
