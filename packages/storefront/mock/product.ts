@@ -1,6 +1,6 @@
 import { Product } from 'models';
 
-export const products: Product[] = [
+export const productsData: Product[] = [
   {
     id: '41637de3-3f16-4307-b25f-503952127ec1',
     info: {
@@ -442,7 +442,7 @@ export const products: Product[] = [
   {
     id: '2040b411-0c8b-418e-92f0-f22a9037af15',
     info: {
-      name: 'dwadda wd',
+      name: 'stttttttatic',
       shortDescription: '',
       fullDescription: '',
       sku: 'daw',

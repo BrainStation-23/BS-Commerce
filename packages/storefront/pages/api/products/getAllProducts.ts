@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { products } from '../../../mock/product';
+import { productsData } from '../../../mock/product';
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  const response = products
+  const response = productsData
   res.status(200).json(response);
 };
