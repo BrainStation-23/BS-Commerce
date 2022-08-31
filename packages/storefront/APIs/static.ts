@@ -9,7 +9,9 @@ export async function getPublicProductsStatic(): Promise<
   GetCustomerAllProductsSuccessResponse | undefined
 > {
   try {
-    const res = await axios.get('http://localhost:3002/api/product');
+    console.log(`${apiEndPoints.getPublicProducts}`);
+    
+    const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;

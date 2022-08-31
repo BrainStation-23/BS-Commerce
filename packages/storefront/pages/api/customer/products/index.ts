@@ -1,4 +1,4 @@
-import { productsData } from '../../../mock/product';
+import { productsData } from '../../../../mock/product';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Product } from 'models';
 

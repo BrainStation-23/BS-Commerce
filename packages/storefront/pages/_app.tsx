@@ -11,7 +11,7 @@ import { config } from "config";
 import Layout from "@/components/layout";
 import BackToTopButton from "./BackToTopButton";
 
-Axios.defaults.baseURL = config?.restPrefix;
+Axios.defaults.baseURL = config?.staticPrefix;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

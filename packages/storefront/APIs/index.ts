@@ -162,9 +162,12 @@ const staticApi: apiFunction = {
   getCategoryList: getCategoryListRest,
   getCustomerWishlist: getCustomerWishlistRest,
 };
+console.log(config?.apiService);
+
 export const userAPI: apiFunction =
   config?.apiService === 'GRAPHQL'
     ? graphqlApi
     : config?.apiService === 'REST'
     ? restApi
     : staticApi;
+    console.log(userAPI);
