@@ -125,4 +125,36 @@ export class ElasticHelperService {
         }
       }
 
+
+    async getProductSearchSuggestion(searchKey): Promise<any> { 
+        const query = {
+          query: {
+                  match:{
+                    key:{
+                      query: searchKey,
+                      fuzziness: 'AUTO'
+                    } 
+                  }
+                },
+              }
+        console.log(searchKey)
+       
+        const { body: { hits } } = await this.esService.search({
+          from:  0,
+          size:  20,
+          index: 'suggestion', 
+          type:  'suggestion',
+          body:  query
+        });   
+        const resultsCount = hits.total.value as number;  
+        const values  = hits.hits.map((hit) => { 
+          return hit._source.key
+        });
+      
+        return {
+          resultsCount,
+          values
+        }
+      }
+
 }

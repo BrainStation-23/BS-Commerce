@@ -59,3 +59,10 @@ export const productSearchSchema = {
     type: 'nested',
   },
 };
+
+
+export const suggestionSchema = {
+  key:{
+    type: 'text'
+  }
+}

@@ -20,4 +20,12 @@ export class SearchController{
         res.status(code);
         return { code, ...response };
     }
+
+    @ApiQuery({name:'q', description:"search suggestion", example:"apple"})
+    @Get('suggestion')
+    async searchSuggestion(@Query('q') q: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<ISearchProductResponse>>{
+        const { code, ...response } = await this.elasticService.searchSuggestion(q) 
+        res.status(code);
+        return { code, ...response };
+    }
 }

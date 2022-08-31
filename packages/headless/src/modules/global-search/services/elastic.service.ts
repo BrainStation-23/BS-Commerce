@@ -52,4 +52,13 @@ async deleteSingleByElasticId(id: string): Promise<number> {
     return successResponse(null, result, HttpStatus.OK)
   }
   
+  
+  async searchSuggestion(keyword: string): Promise<IServiceResponse<ISearchProductResponse>>{
+    const result = await this.esHelperService.getProductSearchSuggestion(keyword)
+    if(!result){
+      return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
+    }
+    return successResponse(null, result, HttpStatus.OK)
+  }
+  
 }
