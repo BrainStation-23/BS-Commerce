@@ -166,6 +166,7 @@ export class ProductService {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
     const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit, { maxPrice, minPrice }, orderBy);
+    const productsCount = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, null, null, { maxPrice, minPrice }, orderBy);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
 
     let manufacturers = new Set();
@@ -178,7 +179,8 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse({
       products,
       manufacturers: new Array(...manufacturers),
-      brands: new Array(...brands)
+      brands: new Array(...brands),
+      totalProducts: productsCount.length,
     }, HttpStatus.OK);
   }
 }
