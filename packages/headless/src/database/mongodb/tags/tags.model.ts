@@ -10,7 +10,7 @@ const TagsSchema = new Schema<Tag>({
   isHomePageProductsTag: {
     type: Boolean,
     default: false,
-    select: false
+    // select: false
   }
 }, {
   timestamps: true,

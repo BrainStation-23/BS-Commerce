@@ -3,3 +3,7 @@ export class Tag {
     name: string;
     isHomePageProductsTag?: boolean;
 }
+export class updateTagRequest{
+    name?: string;
+    isHomePageProductsTag?: boolean;
+}
