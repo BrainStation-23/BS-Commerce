@@ -2,6 +2,10 @@ import axios from 'axios';
 import {
   getCategoryListSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  GetCustomerProductByURLResponse,
+  GetCustomerProductByURLSuccessResponse,
+  GetCustomerProductResponse,
+  GetCustomerProductSuccessResponse,
 } from 'models';
 import { apiEndPoints } from 'utils/apiEndPoints';
 
@@ -34,6 +38,19 @@ export async function getCategoryListStatic(): Promise<
   try {
     const res = await axios.get(`${apiEndPoints.getCatagoryList}`);
     return res.data as getCategoryListSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getPublicProductByUniqueNameStatic(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProductByUniqueName}/${productUniqueName}`
+    );
+    return res.data.data as GetCustomerProductByURLSuccessResponse;
   } catch (error: any) {
     return error;
   }
