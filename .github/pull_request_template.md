@@ -5,6 +5,7 @@
 
 (Please delete options that are not relevant.)
 
+- [ ] Link to a **GH Issue** or **Jira** task here for reference.
 - [ ] Bug fix
 - [ ] New feature
 
@@ -14,7 +15,6 @@
 
 - [ ] Tested by myself
 - [ ] Unit test
-
 
 # Developer Checklist:
 

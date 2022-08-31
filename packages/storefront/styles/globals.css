@@ -1,3 +1,59 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+/* Custom container class */
+
+.container {
+  max-width: 1170px;
+}
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 464px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .container {
+    width: 100%;
+  }
+}
+
+/* Dropdown menu component */
+@media only screen and (max-width: 479px) {
+  .w-dnd {
+    width: calc(100% - 2rem) !important;
+  }
+}
+
+/* Full screen shadow for sidebar */
+.dnd-shadow {
+  box-shadow: 0 0 0 500vmax rgb(0 0 0 / 0.5);
+}
+
+/* Swiper components */
+
+.swiper-button-prev {
+  display: none !important;
+}
+
+.swiper-button-next {
+  display: none !important;
+}
+
+.swiper:hover .swiper-button-prev {
+  display: block !important;
+}
+
+.swiper:hover .swiper-button-next {
+  display: block !important;
+}
+
+.swiper-button-prev::after {
+  font-size: 30px !important;
+  color: #777;
+}
+
+.swiper-button-next::after {
+  font-size: 30px !important;
+  color: #777;
+}

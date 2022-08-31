@@ -1,13 +1,13 @@
 import type { NextComponentType } from "next";
-import Footer from "./footer";
-import Navbar from "./navbar";
+import Footer from "./global/components/footer";
+import Header from "./global/components/header";
 import Viewport from "./viewport";
 
 const Layout: NextComponentType = ({ children }) => {
   return (
     <>
       <Viewport />
-      <Navbar />
+      <Header />
       <main>{children}</main>
       <Footer />
     </>
