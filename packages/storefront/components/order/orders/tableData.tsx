@@ -37,7 +37,6 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
             pathname: `/order/[id]`,
             query: { id: singleOrder?.orderId },
           }}
-          passHref
         >
           View
         </Link>
