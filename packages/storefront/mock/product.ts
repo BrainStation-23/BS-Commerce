@@ -4,7 +4,7 @@ export const productsData: Product[] = [
   {
     id: '41637de3-3f16-4307-b25f-503952127ec1',
     info: {
-      name: 'Cabbage',
+      name: 'CabbageSSSS',
       shortDescription: 'Cabbage is a vegetable',
       fullDescription: 'Cabbage is a vegetable and its green',
       sku: 'Cabbage',
@@ -305,9 +305,9 @@ export const productsData: Product[] = [
   {
     id: 'b4fa050a-ddbf-4572-ae7d-5b9129290ed8',
     info: {
-      name: 'pr 10000',
-      shortDescription: 'pr 10000',
-      fullDescription: 'pr 10000',
+      name: 'static 10000',
+      shortDescription: 'static 10000',
+      fullDescription: 'static 10000',
       sku: 'pr10000',
       price: 7,
       oldPrice: 4,
@@ -351,9 +351,9 @@ export const productsData: Product[] = [
   {
     id: '0b9e4b24-6078-40c6-b31a-6e9526dc68e0',
     info: {
-      name: 'pr 1001',
-      shortDescription: 'pr 1001',
-      fullDescription: 'pr 1001',
+      name: 'static 1001',
+      shortDescription: 'static 1001',
+      fullDescription: 'static 1001',
       sku: 'vv',
       price: 3,
       oldPrice: 0,
