@@ -55,3 +55,24 @@ export async function getPublicProductByUniqueNameStatic(
     return error;
   }
 }
+
+export async function getPublicProductByCategoryIDStatic(
+  categoryId: string,
+  orderBy: string,
+  minPrice: number,
+  maxPrice: number,
+  brands: string
+): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}${
+        orderBy ? `&orderBy=${orderBy}` : ''
+      }${brands ? `&brand=${brands}` : ''}${
+        minPrice ? `&minPrice=${minPrice}` : ''
+      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}`
+    );
+    return res.data as GetCustomerAllProductsSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
