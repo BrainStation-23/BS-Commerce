@@ -17,10 +17,15 @@ import {
     CustomerChangePasswordResponse,
     CustomerChangePasswordErrorMessages,
     CustomerChangePasswordSuccessMessage,
+    SendOtpRequest,
+    SendOtpResponse,
+    SendOtpErrorMessages,
+    VerifyOtpErrorMessages,
 } from 'models';
 import { CustomerAddress } from 'src/entity/customer';
 import { ChangePassword } from 'src/entity/user';
 import { authConfig } from 'config/auth';
+const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
 export class CustomerService {
@@ -95,17 +100,50 @@ export class CustomerService {
         return this.helper.serviceResponse.successResponse(updatedCustomer, HttpStatus.OK);
     }
 
-    async changePassword(customerId: string, passwordDetails: ChangePassword): Promise<CustomerChangePasswordResponse> {
-        const customer = await this.customerRepo.getCustomerPassword({ id: customerId });
-        if (!customer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CAN_NOT_GET_CUSTOMER, null, HttpStatus.BAD_REQUEST);
+    async changePassword(customerId: string, data: ChangePassword): Promise<CustomerChangePasswordResponse> {
+        const { currentPassword, newPassword } = data;
+        let customer = null;
+        customer = data.email && await this.customerRepo.getCustomerPassword({ email: data.email, id: customerId });
+        customer = data.phone && await this.customerRepo.getCustomerPassword({ phone: data.phone, id: customerId }) || customer;
+        if (!customer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.INVALID_USER_OR_PASSWORD, null, HttpStatus.BAD_REQUEST);
 
-        const doesPasswordMatch = await bcrypt.compare(passwordDetails.currentPassword, customer.password);
+        const verifyOtp = (data.email || data.phone) && await this.customerRepo.findOtp({ ...data, otpExpireTime: { $gt: Date.now() } });
+        if (!verifyOtp) return this.helper.serviceResponse.errorResponse(VerifyOtpErrorMessages.OTP_EXPIRED_OR_INVALID_OTP, null, HttpStatus.BAD_REQUEST);
+
+        const doesPasswordMatch = await bcrypt.compare(currentPassword, customer.password);
         if (!doesPasswordMatch) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, null, HttpStatus.BAD_REQUEST,);
 
-        customer.password = await bcrypt.hash(passwordDetails.newPassword, authConfig.salt!);
+        customer.password = await bcrypt.hash(newPassword, authConfig.salt!);
 
-        const updatedCustomer = await this.customerRepo.updateCustomer(customerId, customer);
+        const updatedCustomer = await this.customerRepo.updateCustomer(customer.id, customer);
         if (!updatedCustomer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD, null, HttpStatus.BAD_REQUEST);
         return this.helper.serviceResponse.successResponse({ message: CustomerChangePasswordSuccessMessage.CHANGE_PASSWORD_SUCCESSFUL }, HttpStatus.OK);
+    }
+
+    async changePasswordSendOTP(customerId: string, data: SendOtpRequest): Promise<SendOtpResponse> {
+        let customer = null;
+        customer = data.email && await this.customerRepo.findCustomer({ email: data.email, id: customerId });
+        customer = data.phone && await this.customerRepo.findCustomer({ phone: data.phone, id: customerId }) || customer;
+        if (!customer) return this.helper.serviceResponse.errorResponse(CustomerChangePasswordErrorMessages.INVALID_USER_OR_PASSWORD, null, HttpStatus.BAD_REQUEST);
+
+        return await this.sendOtp(data);
+    }
+
+    async sendOtp(data: SendOtpRequest): Promise<SendOtpResponse> {
+        let otpExists = null;
+        otpExists = data.email && await this.customerRepo.findOtp({ email: data.email });
+        otpExists = (!otpExists && data.phone) ? await this.customerRepo.findOtp({ phone: data.phone }) : otpExists;
+        const randomOtp = 100000 + Math.floor(Math.random() * 900000);
+
+        if (otpExists && (data.email || data.phone)) {
+            let otpUpdated = null;
+            otpUpdated = data.phone && await this.customerRepo.updateOtp({ phone: data.phone }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false });
+            otpUpdated = (!otpUpdated && data.email) ? await this.customerRepo.updateOtp({ email: data.email }, { otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES, isVerified: false }) : otpUpdated;
+            if (!otpUpdated) return this.helper.serviceResponse.errorResponse(SendOtpErrorMessages.CAN_NOT_UPDATE_OTP, null, HttpStatus.BAD_REQUEST);
+            return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
+        }
+        const otpSend = (data.email || data.phone) && await this.customerRepo.sendOtp({ ...data, otp: randomOtp, otpExpireTime: Date.now() + FIVE_MINUTES });
+        if (!otpSend) return this.helper.serviceResponse.errorResponse(SendOtpErrorMessages.CAN_NOT_SEND_OTP, null, HttpStatus.BAD_REQUEST);
+        return this.helper.serviceResponse.successResponse({ message: `Your Bs-Commerce OTP is ${randomOtp}` }, HttpStatus.OK);
     }
 }

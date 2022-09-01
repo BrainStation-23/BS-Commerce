@@ -26,6 +26,8 @@ export class User {
 }
 
 export class ChangePassword {
+  email?: string;
+  phone?: string;
   currentPassword: string;
   newPassword: string;
 }

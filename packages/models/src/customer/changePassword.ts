@@ -8,6 +8,9 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/inde
  */
 
 export interface CustomerChangePasswordRequest {
+    email?: string;
+    phone?: string;
+    otp: number;
     currentPassword: string;
     newPassword: string;
 }
@@ -24,7 +27,7 @@ export interface CustomerChangePasswordSuccessResponse extends SuccessResponse {
 }
 
 export const enum CustomerChangePasswordErrorMessages {
-    CAN_NOT_GET_CUSTOMER = 'CAN_NOT_GET_CUSTOMER',
+    INVALID_USER_OR_PASSWORD = 'INVALID_USER_OR_PASSWORD',
     CURRENT_PASSWORD_IS_INCORRECT = 'CURRENT_PASSWORD_IS_INCORRECT',
     CAN_NOT_CHANGE_PASSWORD = 'CAN_NOT_CHANGE_PASSWORD',
 }

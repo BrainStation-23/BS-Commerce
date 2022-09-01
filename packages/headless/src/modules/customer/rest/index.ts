@@ -9,11 +9,17 @@ import {
   AddCustomerNewAddressErrorResponseDto,
   AddCustomerNewAddressSuccessResponseDto,
   CustomerAddressDto,
+  CustomerChangePasswordDto,
+  CustomerChangePasswordErrorResponseDto,
+  CustomerChangePasswordSuccessResponseDto,
   DeleteCustomerAddressErrorResponseDto,
   DeleteCustomerAddressParamsDto,
   DeleteCustomerAddressSuccessResponseDto,
   GetCustomerInformationErrorResponseDto,
   GetCustomerInformationSuccessResponseDto,
+  SendOtpDto,
+  SendOtpErrorResponseDto,
+  SendOtpSuccessResponseDto,
   UpdateCustomerAddressErrorResponseDto,
   UpdateCustomerAddressParamsDto,
   UpdateCustomerAddressSuccessResponseDto,
@@ -114,7 +120,24 @@ export class CustomerController {
     return { code, ...response };
   }
 
-  @Patch('/password')
+  @Patch('/change-password/send-otp')
+  @ApiResponse({
+    description: 'Change Password Send OTP Success Response',
+    type: SendOtpSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Change Password Send OTP Error Response',
+    type: SendOtpErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async changePasswordSendOTP(@Body() data: SendOtpDto, @CustomerInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.customerService.changePasswordSendOTP(customer.id, data);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Patch('/change-password')
   @ApiResponse({
     description: 'Change Password Success Response',
     type: CustomerChangePasswordSuccessResponseDto,
@@ -125,8 +148,8 @@ export class CustomerController {
     type: CustomerChangePasswordErrorResponseDto,
     status: HttpStatus.BAD_REQUEST
   })
-  async changePassword(@Body() passwordDetails: CustomerChangePasswordDto, @CustomerInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.customerService.changePassword(customer.id, passwordDetails);
+  async changePassword(@Body() data: CustomerChangePasswordDto, @CustomerInfo() customer: Customer, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.customerService.changePassword(customer.id, data);
     res.status(code);
     return { code, ...response };
   }

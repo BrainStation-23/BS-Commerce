@@ -48,7 +48,10 @@ export class CustomerDatabase implements ICustomerDatabase {
   }
 
   async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
+    const updatedCustomer = await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
+    updatedCustomer && customer.email && await this.deleteOtp({ email: customer.email });
+    updatedCustomer && customer.phone && await this.deleteOtp({ phone: customer.phone });
+    return updatedCustomer;
   }
 
   async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {

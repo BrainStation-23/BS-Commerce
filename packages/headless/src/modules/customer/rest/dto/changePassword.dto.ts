@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNotEmpty, IsNumber, IsObject, IsString, MinLength } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength } from 'class-validator';
 import {
     CustomerChangePasswordErrorResponse,
     CustomerChangePasswordRequest,
@@ -10,6 +10,21 @@ import {
 } from 'models';
 
 export class CustomerChangePasswordDto implements CustomerChangePasswordRequest {
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsString()
+    phone?: string;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    @IsString()
+    email?: string;
+
+    @ApiProperty({ example: 123456 })
+    @IsNotEmpty()
+    @IsNumber()
+    otp: number;
+
     @ApiProperty()
     @IsNotEmpty()
     @IsString()
@@ -30,7 +45,7 @@ export class CustomerChangePasswordErrorResponseDto implements CustomerChangePas
 
     @ApiProperty({
         example: CustomerChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD,
-        examples: [CustomerChangePasswordErrorMessages.CAN_NOT_GET_CUSTOMER, CustomerChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, CustomerChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD]
+        examples: [CustomerChangePasswordErrorMessages.INVALID_USER_OR_PASSWORD, CustomerChangePasswordErrorMessages.CURRENT_PASSWORD_IS_INCORRECT, CustomerChangePasswordErrorMessages.CAN_NOT_CHANGE_PASSWORD]
     })
     error: CustomerChangePasswordErrorMessages;
 
