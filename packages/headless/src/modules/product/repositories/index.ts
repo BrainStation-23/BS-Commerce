@@ -2,6 +2,7 @@ import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { Tag } from 'src/entity/tags';
 
 @Injectable()
 export class ProductRepository {
@@ -11,11 +12,11 @@ export class ProductRepository {
         return await this.db.findProduct(query);
     }
 
-    async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[]> {
-        return await this.db.findAllProducts(query, skip, limit);
+    async findAllProducts(query: Record<string, any>, skip?: number, limit?: number, price?: Partial<SearchCondition>, orderBy?: string,): Promise<Product[]> {
+        return await this.db.findAllProducts(query, skip, limit, price, orderBy,);
     }
 
-    async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: number, skip?: number, limit?: number): Promise<Product[]> {
+    async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: string, skip?: number, limit?: number): Promise<Product[]> {
         return await this.db.getAllConditionalProducts(query, price, slug, orderBy, skip, limit);
     }
 
@@ -42,5 +43,12 @@ export class ProductRepository {
 
     async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
         return await this.db.getProductsList(skip, limit, query, sortCondition);
+    }
+    async getTopSellingProducts( skip: number, limit: number): Promise<Product[] | []>{
+        return await this.db.getTopSellingProducts( skip, limit);
+    }
+
+    async getTag(query: Record<string, any>): Promise<Tag[] | []> {
+        return await this.db.getTag(query);
     }
 }

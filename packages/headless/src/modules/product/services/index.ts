@@ -26,6 +26,10 @@ import {
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
   CreateProductRequest,
+  GetCustomizedProductsQuery,
+  GetCustomizedProductsTagsEnum,
+  GetCustomizedProductsResponse,
+  GetCustomizedProductsErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -34,6 +38,8 @@ export class ProductService {
   async createProduct(product: CreateProductRequest): Promise<CreateProductResponse> {
     const skuMatch = await this.productRepo.findProduct({ 'info.sku': product.info.sku });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
+
+    product.meta.friendlyPageName = await this.urlGenerate(product.info.name);
 
     const friendlyPageNameMatch = await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(CreateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
@@ -47,6 +53,18 @@ export class ProductService {
     const product = await this.productRepo.findProduct({ id: productId });
     if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async urlGenerate(productName: string): Promise<string> {
+    return productName
+      .toLowerCase()
+      .trim()     // remove white spaces at the start and end of string
+      .replace(/\s+/g, "-")     // Replace spaces with dash
+      .replace(/&/g, '-and-')     // ampersand to and
+      .replace(/[^\w\-]+/g, "")     // convert any on-alphanumeric character to a dash
+      .replace(/\-\-+/g, "-")     // Replace multiple dash with single dash
+      .replace(/^-+/, "")     // Trim dash from start of text
+      .replace(/-+$/, "");     // Trim dash from end of text
   }
 
   async getAllProducts(condition: SearchCondition): Promise<GetAllProductsResponse> {
@@ -78,8 +96,13 @@ export class ProductService {
     const getProduct = await this.productRepo.findProduct({ id: productId });
     if (!getProduct) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
 
+    product.info = { ...getProduct.info, ...product.info };
+    product.meta = { ...getProduct.meta, ...product.meta };
+
     const skuMatch = product.info?.sku && await this.productRepo.findProduct({ 'info.sku': product.info.sku, id: { $ne: productId } });
     if (skuMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_SKU_MATCH, null, HttpStatus.BAD_REQUEST);
+
+    (product.info && product.info?.name) ? product.meta.friendlyPageName = await this.urlGenerate(product.info.name) : null;
 
     const friendlyPageNameMatch = product.meta?.friendlyPageName && await this.productRepo.findProduct({ 'meta.friendlyPageName': product.meta.friendlyPageName, id: { $ne: productId } });
     if (friendlyPageNameMatch) return this.helper.serviceResponse.errorResponse(UpdateProductErrorMessages.PRODUCT_FRIENDLY_PAGE_NAME_MATCH, null, HttpStatus.BAD_REQUEST);
@@ -104,7 +127,7 @@ export class ProductService {
   }
 
   generateSearchQuery(condition: SearchCondition): object {
-    const { brand, categoryId, productName, isFeatured, manufacturer, maxPrice, minPrice } = condition;
+    const { brand, categoryId, productName, isFeatured, manufacturer } = condition;
     const query: Record<string, any> = {};
     if (brand !== undefined && brand !== '') {
       query.brands = brand;
@@ -131,6 +154,12 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
+  async getCustomerProductByURL(url: string,): Promise<GetCustomerProductResponse> {
+    const product = await this.productRepo.findProduct({ 'meta.friendlyPageName': url, 'info.published': true });
+    if (!product) return this.helper.serviceResponse.errorResponse(GetProductErrorMessages.CAN_NOT_GET_PRODUCT, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
   async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
     const products = await this.productRepo.findAllProducts({ 'info.showOnHomePage': true, 'info.published': true },);
     if (!products) return this.helper.serviceResponse.errorResponse(GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, null, HttpStatus.BAD_REQUEST);
@@ -140,7 +169,8 @@ export class ProductService {
   async getCustomerProductsByCondition(condition: SearchCondition): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
-    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit);
+    const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit, { maxPrice, minPrice }, orderBy);
+    const productsCount = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, null, null, { maxPrice, minPrice }, orderBy);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
 
     let manufacturers = new Set();
@@ -153,7 +183,27 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse({
       products,
       manufacturers: new Array(...manufacturers),
-      brands: new Array(...brands)
+      brands: new Array(...brands),
+      totalProducts: productsCount.length,
     }, HttpStatus.OK);
+  }
+
+  async getCustomizedProducts(condition: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
+    const { skip, limit, tag } = condition;
+    const doesTagMatch = await this.productRepo.getTag({ name: tag, isHomePageProductsTag: true });
+    if (!doesTagMatch) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.INVALID_TAG_NAME, null, HttpStatus.BAD_REQUEST);
+
+    const product = await this.getProductByTags(skip, limit, tag);
+    if (!product) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.CAN_NOT_GET_CUSTOMIZED_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async getProductByTags(skip: number, limit:number,  tag:string) {
+    switch (tag) {
+      case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
+        return await this.productRepo.getTopSellingProducts(skip, limit);
+      default:
+        return [];
+    }
   }
 }

@@ -3,6 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Brand } from 'models';
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+
 
 export class BrandDto implements Brand{
     @ApiProperty()
@@ -10,14 +12,16 @@ export class BrandDto implements Brand{
     @IsString()
     id: string;
 
-    @ApiProperty()
+    @ApiProperty({ type: InfoDto })
     @IsNotEmpty()
+    @CustomValidator(InfoDto)
     @IsObject()
     info: InfoDto;
 
-    @ApiProperty()
-    @IsNotEmpty()
+    @ApiProperty({ type: MetaDto })
+    @CustomValidator(MetaDto)
     @IsObject()
     meta: MetaDto;
+
 
 }

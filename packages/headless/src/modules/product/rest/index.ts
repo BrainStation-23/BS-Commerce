@@ -18,6 +18,9 @@ import {
   GetCustomerAllProductsErrorResponseDto,
   GetCustomerAllProductsQueryDto,
   GetCustomerAllProductsSuccessResponseDto,
+  GetCustomerProductByURLErrorResponseDto,
+  GetCustomerProductByURLParamsDto,
+  GetCustomerProductByURLSuccessResponseDto,
   GetCustomerProductErrorResponseDto,
   GetCustomerProductParamsDto,
   GetCustomerProductSuccessResponseDto,
@@ -40,6 +43,11 @@ import {
   UpdateProductsForBrandSuccessResponseDto,
   UpdateProductSuccessResponseDto,
 } from './dto';
+import {
+  GetCustomizedProductsErrorResponseDto,
+  GetCustomizedProductsQueryDto,
+  GetCustomizedProductsSuccessResponseDto
+} from './dto/customizedProduct.dto';
 
 @ApiTags('Product API')
 @Controller()
@@ -60,6 +68,23 @@ export class ProductController {
   })
   async getCustomerAllProducts(@Query() condition: GetCustomerAllProductsQueryDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.getCustomerProductsByCondition(condition);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('customer/product/:url')
+  @ApiResponse({
+    description: 'Get Single Product Success Response',
+    type: GetCustomerProductByURLSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Single Product Error Response',
+    type: GetCustomerProductByURLErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+  async getCustomerProductByURL(@Param() params: GetCustomerProductByURLParamsDto, @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomerProductByURL(params.url);
     res.status(code);
     return { code, ...response };
   }
@@ -276,6 +301,26 @@ export class ProductController {
   })
   async updateProduct(@Body() product: UpdateProductDto, @Param() params: UpdateProductParamsDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.productService.updateProduct(product, params.productId);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('customer/customize-home-page-products')
+  @ApiResponse({
+    description: 'Get Customized Products Success Response',
+    type: GetCustomizedProductsSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  @ApiResponse({
+    description: 'Get Customized Products Error Response',
+    type: GetCustomizedProductsErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST
+  })
+
+  async getCustomizedProducts(
+    @Query() condition: GetCustomizedProductsQueryDto,
+    @Res({ passthrough: true }) res: Response) {
+    const { code, ...response } = await this.productService.getCustomizedProducts(condition);
     res.status(code);
     return { code, ...response };
   }

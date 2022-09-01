@@ -1,6 +1,7 @@
 export interface CartProduct {
     id?: string;
     info: CartProductInfo;
+    meta: CartProductMeta;
     photos?: CartProductPhoto[];
 }
 
@@ -26,4 +27,8 @@ export interface CartProductPhoto {
     title?: string;
     alt?: string;
     displayOrder?: number;
+}
+
+export interface CartProductMeta {
+    friendlyPageName: string
 }

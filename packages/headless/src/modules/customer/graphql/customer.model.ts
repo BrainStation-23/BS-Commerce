@@ -86,7 +86,7 @@ export class GraphqlCustomer implements Customer {
     id: string;
 
     @Field({ nullable: true })
-    name?: string;
+    name: string;
 
     @Field({ nullable: true })
     phone?: string;

@@ -18,7 +18,7 @@ export interface GetCustomerAllProductsQuery {
     productName?: string;
     isFeatured?: boolean;
     slug?: string;
-    orderBy?: number;
+    orderBy?: string;
     minPrice?: number;
     maxPrice?: number;
 }
@@ -27,6 +27,7 @@ export interface GetCustomerAllProductsResponseType {
     products: CustomerProduct[];
     manufacturers: string[];
     brands: string[];
+    totalProducts: number;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {

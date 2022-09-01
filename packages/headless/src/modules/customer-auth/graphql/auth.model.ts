@@ -15,6 +15,9 @@ export class AuthCustomer implements Customer {
   @Field({ nullable: true })
   id: string;
 
+  @Field()
+  name: string;
+
   @Field({ nullable: true })
   phone?: string;
 

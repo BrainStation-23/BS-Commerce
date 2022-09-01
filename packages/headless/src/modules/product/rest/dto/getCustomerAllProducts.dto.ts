@@ -51,17 +51,16 @@ export class GetCustomerAllProductsQueryDto implements GetCustomerAllProductsQue
     isFeatured?: boolean;
 
 
-    @ApiProperty({ required: false, description: "Category Slug", default: 'realme' })
+    @ApiProperty({ required: false, description: 'Category Slug', default: 'realme' })
     @IsOptional()
     @IsString()
     slug?: string;
 
-    @ApiProperty({ required: false, description: "Price Low to High -> 1 or High to Low -> -1", default: 1, type: Number, })
+    @ApiProperty({ required: false, description: 'Price Low to High -> asc or High to Low -> desc', default: 'asc', })
     @IsOptional()
-    @Type(() => Number)
-    @IsIn([-1, 1])
-    @IsNumber()
-    orderBy?: number;
+    @IsIn(['asc', 'desc'])
+    @IsString()
+    orderBy?: string;
 
     @ApiProperty({ required: false, default: 0, type: Number })
     @IsOptional()
@@ -99,6 +98,9 @@ export class GetCustomerAllProductsResponse implements GetCustomerAllProductsRes
 
     @ApiProperty({ type: () => [String] })
     brands: string[];
+
+    @ApiProperty({ type: Number })
+    totalProducts: number;
 }
 
 export class GetCustomerAllProductsSuccessResponseDto implements GetCustomerAllProductsSuccessResponse {

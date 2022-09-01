@@ -108,8 +108,20 @@ export class UpdateProductInfoInput implements UpdateProductInfo {
   isFeatured?: boolean;
 }
 
-@ObjectType('ProductMeta')
 @InputType('ProductMetaInput')
+export class GraphqlProductMetaInput implements ProductMeta {
+  @Field(() => [String], { nullable: true })
+  @IsArray()
+  keywords?: string[];
+
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+}
+
+@ObjectType('ProductMeta')
 export class GraphqlProductMeta implements ProductMeta {
   @Field(() => [String], { nullable: true })
   @IsArray()
@@ -121,8 +133,8 @@ export class GraphqlProductMeta implements ProductMeta {
   @Field({ nullable: true })
   description?: string;
 
-  @Field()
-  friendlyPageName: string;
+  @Field({ nullable: true })
+  friendlyPageName?: string;
 }
 
 @InputType()
@@ -229,8 +241,8 @@ export class GraphqlProductInput implements Product {
   @Field(() => GraphqlProductInfo)
   info: GraphqlProductInfo;
 
-  @Field(() => GraphqlProductMeta)
-  meta: GraphqlProductMeta;
+  @Field(() => GraphqlProductMetaInput, { nullable: true })
+  meta?: GraphqlProductMetaInput;
 
   @Field(() => [String], { nullable: true })
   tags?: string[];
@@ -295,8 +307,9 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true })
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 }
 
 @InputType()
@@ -322,9 +335,9 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field(() => Int, { nullable: true, description: "Price Low to High -> 1 or High to Low -> -1" })
-  @IsIn([-1, 1])
-  orderBy?: number;
+  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @IsIn(['asc', 'desc'])
+  orderBy?: string;
 
   @Field(() => Int, { nullable: true })
   minPrice?: number;
@@ -394,6 +407,9 @@ export class GetCustomerAllProductsResponse implements GetCustomerAllProductsRes
 
   @Field(() => [String], { nullable: true })
   brands: string[];
+
+  @Field(() => Int, { nullable: true })
+  totalProducts: number;
 }
 
 @ObjectType()

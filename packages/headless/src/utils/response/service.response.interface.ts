@@ -12,7 +12,7 @@ export interface DescriptiveError {
   /** Key: value pair, where key is the property name
    * and value is an array of errors of that property
    */
-  [key: string]: [string];
+  [key: string]: string[];
 }
 
 export interface IServiceErrorResponse {

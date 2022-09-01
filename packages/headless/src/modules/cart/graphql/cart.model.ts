@@ -11,6 +11,7 @@ import {
   Message,
   ResponseItem,
   updateCartItemRequest,
+  CartProductMeta
 } from "models";
 
 @ObjectType()
@@ -75,12 +76,21 @@ export class CartProductPhotoSchema implements CartProductPhoto {
 }
 
 @ObjectType()
+export class CartProductMetaType implements CartProductMeta {
+  @Field()
+  friendlyPageName: string;
+}
+
+@ObjectType()
 export class CartProductSchema implements CartProduct {
   @Field({ nullable: true })
   id?: string;
 
   @Field(type => CartProductInfoSchema)
   info: CartProductInfoSchema;
+
+  @Field(() => CartProductMetaType)
+  meta: CartProductMetaType;
 
   @Field(type => [CartProductPhotoSchema], { nullable: true })
   photos?: CartProductPhotoSchema[];
