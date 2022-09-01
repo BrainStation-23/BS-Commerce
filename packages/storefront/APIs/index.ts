@@ -77,7 +77,7 @@ import {
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
-import { getFeaturedProductsStatic, getPublicProductByCategoryIDStatic, getPublicProductByUniqueNameStatic, getPublicProductsStatic } from './static';
+import { getFeaturedProductsStatic, getPublicProductByCategoryIDStatic, getPublicProductByUniqueNameStatic, getPublicProductsStatic, signInStatic,  } from './static';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
@@ -163,6 +163,7 @@ const staticApi: apiFunction = {
   getCustomerWishlist: getCustomerWishlistRest,
   getPublicProductByUniqueName: getPublicProductByUniqueNameStatic,
   getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
+  signIn:signInStatic,
 };
 console.log(config?.apiService);
 

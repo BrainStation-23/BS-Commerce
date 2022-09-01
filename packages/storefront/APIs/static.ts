@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+  CustomerSignInRequest,
+  CustomerSignInResponse,
   getCategoryListSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
   GetCustomerProductByURLResponse,
@@ -7,6 +9,7 @@ import {
   GetCustomerProductResponse,
   GetCustomerProductSuccessResponse,
 } from 'models';
+import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
 
 export async function getPublicProductsStatic(): Promise<
@@ -73,6 +76,20 @@ export async function getPublicProductByCategoryIDStatic(
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function signInStatic(
+  data: CustomerSignInRequest
+): Promise<CustomerSignInResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.login}`, data);
+    return res.data;
+  } catch (error: any) {
+    toast.error('Some error happend. Try again.', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }
