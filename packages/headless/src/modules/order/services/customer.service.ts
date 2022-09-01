@@ -43,7 +43,7 @@ export class OrderCustomerService {
 
     const prevOrder = await this.orderRepository.findOrder({orderId, userId});
     if(!prevOrder) return {error: ErrorMessageReOrder.INVALID_ID,errors: null, code: HttpStatus.BAD_REQUEST};
-
+    
     const prevProducts = prevOrder.products;
     const productIds = prevProducts.map( item => item.productId);
     let order = prevProducts.map(product => { return {productId: product.productId, quantity: product.quantity}});//cart request format
@@ -64,6 +64,7 @@ export class OrderCustomerService {
         }
 
     const cart = await this.orderRepository.getCart(userId);
+    if(!cart) return { error: ErrorMessageReOrder.CART_NOT_FOUND, errors: null, code: HttpStatus.NOT_FOUND}
     if (cart.items.length !== 0){
         if(overWriteCart === true){
             const deleteCart = await this.orderRepository.clearCart(userId);
