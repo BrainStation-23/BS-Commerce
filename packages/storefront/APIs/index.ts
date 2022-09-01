@@ -90,7 +90,8 @@ import {
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
   getPublicProductsStatic,
-  sendOTPStatic, signInStatic,
+  sendOTPStatic,
+  signInStatic,
 } from './static';
 
 const graphqlApi: apiFunction = {
@@ -188,6 +189,8 @@ const staticApi: apiFunction = {
   deleteWishlistItem: deleteWishlistItemStatic,
   deleteFullWishlist: deleteFullWishlistStatic,
 };
+
+console.log(config?.apiService);
 
 export const userAPI: apiFunction =
   config?.apiService === 'GRAPHQL'
