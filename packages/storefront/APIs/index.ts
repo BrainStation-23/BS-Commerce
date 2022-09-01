@@ -80,6 +80,7 @@ import { apiFunction } from 'utils/types';
 import {
   addToCartStatic,
   deleteSingleCartItemStatic,
+  getCartStatic,
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
@@ -172,6 +173,7 @@ const staticApi: apiFunction = {
   getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
   addToCart: addToCartStatic,
   deleteSingleCartItem: deleteSingleCartItemStatic,
+  getCart: getCartStatic,
 };
 
 export const userAPI: apiFunction =
