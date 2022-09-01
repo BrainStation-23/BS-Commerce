@@ -12,6 +12,10 @@ import {
   GetCustomerProductByURLSuccessResponse,
   GetCustomerProductResponse,
   GetCustomerProductSuccessResponse,
+  SendOtpResponse,
+  SendOtpSuccessResponse,
+  SendOtpErrorResponse,
+  GetCustomerInformationSuccessResponse,
 } from 'models';
 import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -135,6 +139,39 @@ export async function signInStatic(
     toast.error('Some error happend. Try again.', {
       containerId: 'bottom-right',
     });
+    return error;
+  }
+}
+
+export async function sendOTPStatic(
+  data: string
+): Promise<SendOtpResponse | undefined> {
+  let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+  const isEmail = regex.test(data);
+  const reqData = isEmail ? { email: data } : { phone: data };
+  try {
+    const res = await axios.post(`${apiEndPoints.sendOTP}`, reqData);
+    const toastMessage = isEmail
+      ? 'An OTP has been sent to your email'
+      : 'An OTP has been sent to your mobile number';
+    toast.success(toastMessage, {
+      containerId: 'bottom-right',
+    });
+    return res.data as SendOtpSuccessResponse;
+  } catch (error: any) {
+    return error.response.data as SendOtpErrorResponse;
+  }
+}
+
+export async function getCustomerStatic(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.customer}`, {
+      headers: { token: `${token}` },
+    });
+    return res.data;
+  } catch (error: any) {
     return error;
   }
 }
