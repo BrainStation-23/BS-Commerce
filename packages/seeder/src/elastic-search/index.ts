@@ -52,12 +52,18 @@ async function setupIndex(index: IINdex){
             body: putSettingsBody()
         });
         await esclient.indices.open(index);
+
+        let schema: any = productSearchSchema;
+        if(index.index === 'suggestion'){
+            schema = suggestionSchema
+        }
+        
         await esclient.indices.putMapping({ 
             index: index.index, 
             type: index.index,
             include_type_name: true,
             body: { 
-                properties: suggestionSchema
+                properties: schema
             }
         });
         return;

@@ -66,32 +66,6 @@ export class ElasticHelperService {
                 }
               }
             }
-          },
-          aggs:{
-            faceted_brands:{
-              terms:{
-                field: 'brands'
-              }
-            },
-            category_nested: {
-              nested: {
-                path: 'categories'
-              },   
-              aggs:{
-                faceted_category_id:{ 
-                  terms:{
-                    field: 'categories.id.keyword',
-                    size: 10
-                  }
-                },
-                faceted_category_name:{
-                  terms:{
-                    field: 'categories.name.keyword',
-                    size: 10
-                  }
-                }
-              }  
-            }
           }
         }
       
@@ -103,25 +77,16 @@ export class ElasticHelperService {
           type:  'products',
           body:  query
         });  
-    
-    
         console.log("search time = ", Date.now()-startTime)
         
-        startTime = Date.now()
-        const resultsCount = hits.total.value as number; 
-        const tags = hits.hits.flatMap(hit => hit._source.tags)
-        const set = [...new Set(tags)].slice(0,5)
-        const suggestion = hits.hits.map(hit => hit._source.info.name).slice(0,5).concat(set)
+        const resultsCount = hits.total.value as number;  
         const values  = hits.hits.map((hit) => { 
           return hit._source
         });
-    
-        console.log("search result formation time = ", Date.now()-startTime)
       
         return {
           resultsCount,
-          values,
-          suggestion
+          values
         }
       }
 
