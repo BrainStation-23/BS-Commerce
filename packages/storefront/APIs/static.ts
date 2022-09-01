@@ -12,6 +12,7 @@ import {
   GetCustomerProductByURLSuccessResponse,
   GetCustomerProductResponse,
   GetCustomerProductSuccessResponse,
+  deleteAllCartItemsSuccessResponse,
   SendOtpResponse,
   SendOtpSuccessResponse,
   SendOtpErrorResponse,
@@ -90,25 +91,13 @@ export async function addToCartStatic(
   data: addToCartRequest
 ): Promise<addToCartSuccessResponse | undefined> {
   try {
-
     const res = await axios.post(`${apiEndPoints.addToCart}`, data);
-
 
     return res.data as addToCartSuccessResponse;
   } catch (error: any) {
     return error;
   }
 }
-export async function deleteSingleCartItemStatic(
-  productId: string
-): Promise<deleteCartItemSuccessResponse | undefined> {
-  try {
-    return { code: 200, data: [] } as deleteCartItemSuccessResponse;
-  } catch (error: any) {
-    return error;
-  }
-}
-
 export async function getCartStatic(
   token: string
 ): Promise<getCartSuccessResponse | undefined> {
@@ -142,7 +131,28 @@ export async function signInStatic(
     return error;
   }
 }
-
+export async function deleteSingleCartItemStatic(
+  productId: string
+): Promise<deleteCartItemSuccessResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteSingleCartItem}?productId=${productId}`
+    );
+    return res.data as deleteCartItemSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+export async function deleteAllCartItemStatic(): Promise<
+  deleteAllCartItemsSuccessResponse | undefined
+> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.deleteAllCartItem}`);
+    return res.data as deleteAllCartItemsSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
 export async function sendOTPStatic(
   data: string
 ): Promise<SendOtpResponse | undefined> {

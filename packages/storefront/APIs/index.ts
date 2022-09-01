@@ -79,12 +79,15 @@ import { config } from 'config';
 import { apiFunction } from 'utils/types';
 import {
   addToCartStatic,
+  deleteAllCartItemStatic,
   deleteSingleCartItemStatic,
+  getCartStatic,
   getCustomerStatic,
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
-  getPublicProductsStatic, sendOTPStatic, signInStatic,
+  getPublicProductsStatic,
+  sendOTPStatic, signInStatic,
 } from './static';
 
 const graphqlApi: apiFunction = {
@@ -173,7 +176,9 @@ const staticApi: apiFunction = {
   getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
   addToCart: addToCartStatic,
   deleteSingleCartItem: deleteSingleCartItemStatic,
-  signIn:signInStatic,
+  signIn: signInStatic,
+  getCart: getCartStatic,
+  deleteAllCartItem: deleteAllCartItemStatic,
   sendOTP: sendOTPStatic,
   getCustomer: getCustomerStatic,
 };

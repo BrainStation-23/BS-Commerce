@@ -83,8 +83,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           productId: cartItem.productId,
           quantity: 1,
         });
-        console.log(cart);
-
         dispatch(storeAllCartItems(cart?.data?.items!));
         dispatch(addToCart(cartItem));
         // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));

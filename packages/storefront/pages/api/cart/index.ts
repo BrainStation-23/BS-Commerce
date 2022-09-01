@@ -2,7 +2,7 @@ import { productsData } from '../../../mock/product';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+const addToCart = (req: NextApiRequest, res: NextApiResponse) => {
   const productID = req.body.productId;
   const quantity = req.body.quantity;
 
@@ -17,7 +17,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         {
           product: response[0] ? response[0] : productsData[0],
           productId: productID,
-          quantity: quantity,
+          quantity: quantity ? quantity : 10,
         },
       ],
     },
@@ -25,4 +25,4 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(res2);
 };
 
-// export default addToCart;
+export default addToCart;
