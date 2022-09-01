@@ -85,11 +85,12 @@ import {
   deleteSingleCartItemStatic,
   deleteWishlistItemStatic,
   getCartStatic,
+  getCustomerStatic,
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
   getPublicProductsStatic,
-  signInStatic,
+  sendOTPStatic, signInStatic,
 } from './static';
 
 const graphqlApi: apiFunction = {
@@ -181,6 +182,8 @@ const staticApi: apiFunction = {
   signIn: signInStatic,
   getCart: getCartStatic,
   deleteAllCartItem: deleteAllCartItemStatic,
+  sendOTP: sendOTPStatic,
+  getCustomer: getCustomerStatic,
   addToWishList: addToWishlistStatic,
   deleteWishlistItem: deleteWishlistItemStatic,
   deleteFullWishlist: deleteFullWishlistStatic,
