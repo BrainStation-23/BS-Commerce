@@ -1,5 +1,9 @@
 import axios from 'axios';
 import {
+  addToCartRequest,
+  addToCartSuccessResponse,
+  deleteCartItemSuccessResponse,
+  getCartSuccessResponse,
   getCategoryListSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
   GetCustomerProductByURLResponse,
@@ -13,8 +17,6 @@ export async function getPublicProductsStatic(): Promise<
   GetCustomerAllProductsSuccessResponse | undefined
 > {
   try {
-    console.log(`${apiEndPoints.getPublicProducts}`);
-    
     const res = await axios.get(`${apiEndPoints.getPublicProducts}`);
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
@@ -74,5 +76,49 @@ export async function getPublicProductByCategoryIDStatic(
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
     return error;
+  }
+}
+
+export async function addToCartStatic(
+  data: addToCartRequest
+): Promise<addToCartSuccessResponse | undefined> {
+  try {
+
+    const res = await axios.post(`${apiEndPoints.addToCart}`, data);
+
+
+    return res.data as addToCartSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+export async function deleteSingleCartItemStatic(
+  productId: string
+): Promise<deleteCartItemSuccessResponse | undefined> {
+  try {
+    return { code: 200, data: [] } as deleteCartItemSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCartStatic(
+  token: string
+): Promise<getCartSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCart}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data as getCartSuccessResponse;
+  } catch (error: any) {
+    const data = {
+      userId: '',
+      id: '',
+      items: [],
+    };
+    const errorData = {
+      data,
+    };
+    return errorData as any;
   }
 }

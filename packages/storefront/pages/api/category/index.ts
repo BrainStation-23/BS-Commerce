@@ -8,8 +8,6 @@ type ResponseError = {
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const response = categoriesData.filter((category) => category.id);
-  console.log(response);
-
   res.status(200).json({ data: { categories: response } });
 };
 
