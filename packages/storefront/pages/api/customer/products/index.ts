@@ -9,16 +9,24 @@ type ResponseError = {
 
 const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
   const query = req.query;
-  const { categoryId, orderBy, minPrice, maxPrice, brand } = query;
+  let { categoryId, orderBy, minPrice, maxPrice, brand } = query;
 
   let response: Product[] = [];
+  let brands = new Set<string>();
 
   if (categoryId) {
+    
     for (let i = 0; i < productsData.length; i++) {
       for (let j = 0; j < productsData[i].categories.length; j++) {
         if (productsData[i].categories[j].id === categoryId) {
           response.push(productsData[i]);
         }
+      }
+    }
+    
+    for(let i = 0; i < response.length; i++) {
+      for(let j = 0; j < response[i].brands?.length! ; j++) {
+        brands.add(response[i].brands![j]);
       }
     }
 
@@ -59,7 +67,7 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
       (product) => product.info.published === true
     );
   }
-  res.status(200).json({ data: { products: response } });
+  res.status(200).json({ data: { products: response, brands: Array.from(brands), quantity: response.length} });
 };
 
 export default getPublicProductsAPI;

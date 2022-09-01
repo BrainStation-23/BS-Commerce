@@ -12,7 +12,7 @@ export interface productsState {
   featuredProducts: CustomerProduct[];
   categorizedProduct: Product[];
   wishlist: Wishlist;
-  brands: Brand[];
+  brands: string[];
 }
 
 const initialState: productsState = {
@@ -68,7 +68,7 @@ export const productsSlice = createSlice({
     ) => {
       state.categorizedProduct = action.payload;
     },
-    storeBrands: (state: productsState, action: PayloadAction<Brand[]>) => {
+    storeBrands: (state: productsState, action: PayloadAction<string[]>) => {
       state.brands = action.payload;
     },
     addToWishlist: (

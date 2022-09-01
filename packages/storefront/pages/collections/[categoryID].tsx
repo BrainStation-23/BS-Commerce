@@ -16,7 +16,7 @@ interface CategoryNameIdProp {
 interface SingleProduct {
   products: Product[];
   name: string;
-  brands: Brand[];
+  brands: string[];
   categoryNameAndId: CategoryNameIdProp[];
 }
 if (typeof window !== 'undefined')
