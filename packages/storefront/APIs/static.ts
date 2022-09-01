@@ -4,6 +4,8 @@ import {
   addToCartSuccessResponse,
   deleteCartItemSuccessResponse,
   getCartSuccessResponse,
+  CustomerSignInRequest,
+  CustomerSignInResponse,
   getCategoryListSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
   GetCustomerProductByURLResponse,
@@ -11,6 +13,7 @@ import {
   GetCustomerProductResponse,
   GetCustomerProductSuccessResponse,
 } from 'models';
+import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
 
 export async function getPublicProductsStatic(): Promise<
@@ -120,5 +123,18 @@ export async function getCartStatic(
       data,
     };
     return errorData as any;
+  }
+}
+export async function signInStatic(
+  data: CustomerSignInRequest
+): Promise<CustomerSignInResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.login}`, data);
+    return res.data;
+  } catch (error: any) {
+    toast.error('Some error happend. Try again.', {
+      containerId: 'bottom-right',
+    });
+    return error;
   }
 }

@@ -84,7 +84,7 @@ import {
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
-  getPublicProductsStatic,
+  getPublicProductsStatic, signInStatic,
 } from './static';
 
 const graphqlApi: apiFunction = {
@@ -173,6 +173,7 @@ const staticApi: apiFunction = {
   getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
   addToCart: addToCartStatic,
   deleteSingleCartItem: deleteSingleCartItemStatic,
+  signIn:signInStatic,
   getCart: getCartStatic,
 };
 
