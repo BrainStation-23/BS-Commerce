@@ -77,7 +77,14 @@ import {
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
-import { getFeaturedProductsStatic, getPublicProductByCategoryIDStatic, getPublicProductByUniqueNameStatic, getPublicProductsStatic, signInStatic,  } from './static';
+import {
+  addToCartStatic,
+  deleteSingleCartItemStatic,
+  getFeaturedProductsStatic,
+  getPublicProductByCategoryIDStatic,
+  getPublicProductByUniqueNameStatic,
+  getPublicProductsStatic, signInStatic,
+} from './static';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
@@ -163,9 +170,10 @@ const staticApi: apiFunction = {
   getCustomerWishlist: getCustomerWishlistRest,
   getPublicProductByUniqueName: getPublicProductByUniqueNameStatic,
   getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
+  addToCart: addToCartStatic,
+  deleteSingleCartItem: deleteSingleCartItemStatic,
   signIn:signInStatic,
 };
-console.log(config?.apiService);
 
 export const userAPI: apiFunction =
   config?.apiService === 'GRAPHQL'
@@ -173,4 +181,3 @@ export const userAPI: apiFunction =
     : config?.apiService === 'REST'
     ? restApi
     : staticApi;
-    console.log(userAPI);
