@@ -38,3 +38,7 @@ export interface IProductSearchResponse {
 	values: IProductSearchSchema[];
 	suggestion: string[];
 }
+export interface IProductSearchSuggestionResponse{
+	resultsCount: number;
+	values: string[];
+}

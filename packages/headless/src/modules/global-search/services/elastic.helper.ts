@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { ProductSearchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
-import { ISearchProductResponse } from "../rest/dto";
+import { ISearchProductResponse, ISuggestedProductResponse } from "../rest/dto";
 import { productSearchSchema } from "./product.schema";
 
 @Injectable()
@@ -126,18 +126,16 @@ export class ElasticHelperService {
       }
 
 
-    async getProductSearchSuggestion(searchKey): Promise<any> { 
+    async getProductSearchSuggestion(searchKey): Promise<ISuggestedProductResponse> { 
         const query = {
           query: {
-                  match:{
+            prefix:{ 
                     key:{
-                      query: searchKey,
-                      fuzziness: 'AUTO'
+                      value: searchKey
                     } 
                   }
                 },
-              }
-        console.log(searchKey)
+          }
        
         const { body: { hits } } = await this.esService.search({
           from:  0,

@@ -30,76 +30,61 @@ function mapSearchData(e: Product): Record<string, any> {
 
 export async function bulkInsert(){
     try {
+        const start = Date.now()
         await connectToDatabase();  
         const totalCount = await ProductModel.countDocuments().exec()
+        console.log("Total mongodb product count = ", totalCount)
         const limit = 20;
         let result = 0;
-
+        let step = 1;
         for(let skip=0; skip<totalCount; skip=skip+limit){ 
+            console.log("Insertion step = ", step++)
             const allProduct = await ProductModel.find({}).skip(skip).limit(limit).exec()
-            console.log("product count for insertion", allProduct.length)
             if(!allProduct || allProduct.length < 1){
                 return 0;
             }
-            const esAction = {
-            index: {
-                _index: 'products',
-                _type: 'products'
+            const esActionProduct = {
+                index: {
+                    _index: 'products',
+                    _type: 'products'
+                }
             }
-            } 
-            let docs = []  
+            const esActionSuggestion = {
+                index: {
+                    _index: 'suggestion',
+                    _type: 'suggestion'
+                }
+            }  
+            let productDocs = []
+            let suggestiontDocs = []
             const mapped = allProduct.map(e =>{ 
+                // prepare product data
                 const data = mapSearchData(e)  
-                docs.push(esAction); 
-                docs.push(data); 
+                productDocs.push(esActionProduct); 
+                productDocs.push(data); 
+
+                // prepare suggestion data with name and tags
+                if (e?.info?.name) {
+                    suggestiontDocs.push(esActionSuggestion); 
+                    suggestiontDocs.push({key: e?.info?.name});
+                }
+                e?.tags.forEach(tag => {
+                    suggestiontDocs.push(esActionSuggestion); 
+                    suggestiontDocs.push({key: tag});
+                });
             })    
-            const { statusCode } = await esclient.bulk({ body: docs })
+            const { statusCode } = await esclient.bulk({ body: productDocs })
+            await esclient.bulk({ body: suggestiontDocs })
             result = statusCode
         } 
         await esclient.indices.refresh({index: 'products'}) 
-        return result
-    } catch (error) {
-        console.log(error)
-    }
-}
+        await esclient.indices.refresh({index: 'suggestion'})
 
-export async function bulkInsertSuggestion(){
-    try {
-        await connectToDatabase();  
-        const totalCount = await ProductModel.countDocuments().exec()
-        const limit = 20;
-        let result = 0;
-
-        for(let skip=0; skip<totalCount; skip=skip+limit){ 
-            const allProduct = await ProductModel.find({}).skip(skip).limit(limit).exec()
-            console.log("product count for insertion", allProduct.length)
-            if(!allProduct || allProduct.length < 1){
-                return 0;
-            }
-            const esAction = {
-            index: {
-                _index: 'suggestion',
-                _type: 'suggestion'
-            }
-            } 
-            let docs = []  
-            allProduct.forEach(e =>{  
-                if (e?.info?.name) {
-                    docs.push(esAction); 
-                    docs.push({key: e?.info?.name});
-                }
-                e?.tags.forEach(tag => {
-                    docs.push(esAction); 
-                    docs.push({key: tag});
-                });
-            })   
-
-            console.log(docs)
-            const { statusCode, body } = await esclient.bulk({ body: docs })
-            console.log(body, statusCode)
-            result = statusCode
-        } 
-        await esclient.indices.refresh({index: 'suggestion'}) 
+        console.log("total insertion time = ", Date.now() - start)
+        let count  = await esclient.count({index:'products'})
+        console.log("total inserted products = ",count.body.count)
+        count = await esclient.count({index:'suggestion'})
+        console.log("total inserted suggestions", count.body.count)
         return result
     } catch (error) {
         console.log(error)
