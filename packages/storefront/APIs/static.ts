@@ -13,6 +13,10 @@ import {
   GetCustomerProductResponse,
   GetCustomerProductSuccessResponse,
   deleteAllCartItemsSuccessResponse,
+  addToWishlistRequest,
+  AddToWishlistResponse,
+  deleteAllWishlistItemsResponse,
+  deleteWishlistItemResponse,
 } from 'models';
 import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -145,6 +149,42 @@ export async function deleteAllCartItemStatic(): Promise<
   try {
     const res = await axios.delete(`${apiEndPoints.deleteAllCartItem}`);
     return res.data as deleteAllCartItemsSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function addToWishlistStatic(
+  data: addToWishlistRequest
+): Promise<AddToWishlistResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.addToWishList}`, data);
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteWishlistItemStatic(
+  data: string
+): Promise<deleteWishlistItemResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteWishlistItem}/${data}`
+    );
+
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteFullWishlistStatic(): Promise<
+  deleteAllWishlistItemsResponse | undefined
+> {
+  try {
+    const res = await axios.delete(`${apiEndPoints.deleteFullWishlist}`);
+    return res.data.message;
   } catch (error: any) {
     return error;
   }

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const deleteSingleCartItem = (req: NextApiRequest, res: NextApiResponse) => {
+const deleteFullWishlist = (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({
     code: 0,
     data: {
@@ -9,4 +9,4 @@ const deleteSingleCartItem = (req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-export default deleteSingleCartItem;
+export default deleteFullWishlist;

@@ -79,8 +79,11 @@ import { config } from 'config';
 import { apiFunction } from 'utils/types';
 import {
   addToCartStatic,
+  addToWishlistStatic,
   deleteAllCartItemStatic,
+  deleteFullWishlistStatic,
   deleteSingleCartItemStatic,
+  deleteWishlistItemStatic,
   getCartStatic,
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
@@ -178,6 +181,9 @@ const staticApi: apiFunction = {
   signIn: signInStatic,
   getCart: getCartStatic,
   deleteAllCartItem: deleteAllCartItemStatic,
+  addToWishList: addToWishlistStatic,
+  deleteWishlistItem: deleteWishlistItemStatic,
+  deleteFullWishlist: deleteFullWishlistStatic,
 };
 
 export const userAPI: apiFunction =
