@@ -1,28 +1,37 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { Tag } from './tags';
 
-export interface updateTag {
-    id: string;
-    name: string;
-}
+/**
+ * API Path: /tags/:tagId
+ * method: PATCH
+ * params: tagId
+ * response: UpdateTagResponse
+ */
 
-export interface updateTagRequest {
-    name?:string;
+
+export interface UpdateTagRequest {
+    name?: string;
     isHomePageProductsTag?: boolean;
 }
 
-export interface updateTagSuccessResponse extends SuccessResponse {
-    code: number;
-    data: updateTag;
+export interface UpdateTagParams {
+    tagId: string
 }
 
-export const enum updateTagErrorMessages {
+export const enum UpdateTagErrorMessages {
+    TAG_NAME_EXISTS = 'TAG_NAME_EXISTS',
     CAN_NOT_UPDATE_TAG = 'CAN_NOT_UPDATE_TAG',
 }
 
-export interface updateTagErrorResponse extends ErrorResponse {
+export interface UpdateTagSuccessResponse extends SuccessResponse {
+    code: number;
+    data: Tag;
+}
+
+export interface UpdateTagErrorResponse extends ErrorResponse {
     code?: number;
-    error: updateTagErrorMessages;
+    error: UpdateTagErrorMessages;
     errors: DescriptiveError;
 }
 
-export type updateTagResponse = updateTagSuccessResponse | updateTagErrorResponse;
+export type UpdateTagResponse = UpdateTagSuccessResponse | UpdateTagErrorResponse;

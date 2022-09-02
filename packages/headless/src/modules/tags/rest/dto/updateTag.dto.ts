@@ -1,63 +1,55 @@
-import { HttpStatus } from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { updateTag, updateTagErrorMessages, updateTagErrorResponse, updateTagRequest, updateTagSuccessResponse } from "models";
+import { HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import {
+    UpdateTagRequest,
+    UpdateTagErrorMessages,
+    UpdateTagErrorResponse,
+    UpdateTagSuccessResponse,
+    UpdateTagParams,
+} from 'models';
+import { TagDto } from './tags.dto';
 
-export class updateTagDto implements updateTag {
+export class UpdateTagParamDto implements UpdateTagParams {
     @ApiProperty()
     @IsString()
-    id: string;
-
-    @ApiProperty({ required: true })
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+    tagId: string;
 }
 
-export class updateTagParamDto {
-    @ApiProperty({ type: String })
-    @Type(() => String)
-    @IsString()
-    id: string;
-}
-
-export class updateTagRequestDto implements updateTagRequest {
-    @ApiProperty({ required: false, type: String })
-    @Type(() => String)
-    @IsString()
+export class UpdateTagRequestDto implements UpdateTagRequest {
+    @ApiProperty({ required: false })
     @IsOptional()
+    @IsString()
     name?: string;
 
-    @ApiProperty({ required: false, type: Boolean })
-    @Type(() => Boolean)
-    @IsBoolean()
+    @ApiProperty({ required: false })
     @IsOptional()
+    @IsBoolean()
     isHomePageProductsTag?: boolean;
 }
 
-export class updateTagSuccessResponseDto implements updateTagSuccessResponse {
+export class UpdateTagSuccessResponseDto implements UpdateTagSuccessResponse {
     @ApiProperty({ default: HttpStatus.OK })
     @IsNumber()
     code: number;
 
-    @ApiProperty()
-    @Type(() => updateTagDto)
+    @ApiProperty({ type: () => TagDto })
     @IsObject()
-    data: updateTagDto;
+    data: TagDto;
 }
 
-export class updateTagErrorResponseDto implements updateTagErrorResponse {
+export class UpdateTagErrorResponseDto implements UpdateTagErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })
     @IsNumber()
     code: number;
 
     @ApiProperty({
-        example: updateTagErrorMessages.CAN_NOT_UPDATE_TAG,
-        examples: [updateTagErrorMessages.CAN_NOT_UPDATE_TAG]
+        example: UpdateTagErrorMessages.CAN_NOT_UPDATE_TAG,
+        examples: [UpdateTagErrorMessages.CAN_NOT_UPDATE_TAG, UpdateTagErrorMessages.TAG_NAME_EXISTS]
     })
     @IsString()
-    error: updateTagErrorMessages;
+    error: UpdateTagErrorMessages;
 
     @ApiProperty()
     @IsArray()
