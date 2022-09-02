@@ -1,6 +1,4 @@
-import { Category } from 'models';
-
-export const categoriesData: Category[] = [
+export const categoriesData = [
   {
     id: '112',
     name: 'Fruits',

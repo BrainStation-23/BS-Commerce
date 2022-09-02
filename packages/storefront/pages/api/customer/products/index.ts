@@ -1,7 +1,7 @@
 import { productsData } from '../../../../mock/product';
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { Product } from 'models';
+import { CustomerProduct } from 'models';
 
 type ResponseError = {
   message: string;
@@ -11,7 +11,7 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
   const query = req.query;
   let { categoryId, orderBy, minPrice, maxPrice, brand } = query;
 
-  let response: Product[] = [];
+  let response: CustomerProduct[] = [];
   let brands = new Set<string>();
 
   if (categoryId) {
@@ -37,7 +37,7 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (minPrice && maxPrice) {
-      const newList: Product[] = [];
+      const newList: CustomerProduct[] = [];
       for (let i = 0; i < response.length; i++) {
         if (
           response[i].info.price >= parseFloat(minPrice as string) &&
@@ -50,7 +50,7 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (brand) {
-      const newList: Product[] = [];
+      const newList: CustomerProduct[] = [];
       for (let i = 0; i < response.length; i++) {
         for (let j = 0; j < response[i].brands!.length; j++) {
           if (response[i]?.brands![j] === brand) {

@@ -37,7 +37,7 @@ const SearchComponent: NextComponentType = () => {
               </div>
             </div>
 
-            <SearchItem />
+            {/* <SearchItem /> */}
           </div>
         </div>
       </div>

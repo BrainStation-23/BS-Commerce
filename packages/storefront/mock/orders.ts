@@ -1,6 +1,4 @@
-import { OrderByUserIdResponse } from 'models';
-
-export const ordersData: OrderByUserIdResponse[] = [
+export const ordersData = [
   {
     userId: '44a9cb36-adfe-42a2-8095-b5998da42525',
     orderInfo: [
