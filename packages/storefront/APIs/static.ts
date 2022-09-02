@@ -23,6 +23,7 @@ import {
   GetCustomerInformationSuccessResponse,
   CreateOrderRequest,
   OrderResponseData,
+  OrderByUserIdResponse,
   UpdateCustomerRequestBody,
   UpdateCustomerSuccessResponse,
   CustomerAddress,
@@ -202,7 +203,6 @@ export async function getCustomerStatic(
   }
 }
 
-
 export async function addToWishlistStatic(
   data: addToWishlistRequest
 ): Promise<AddToWishlistResponse | undefined> {
@@ -360,4 +360,36 @@ export async function deleteFromCompareStatic(productId: string) {
   await axios.delete(
     `${apiEndPoints.deleteFromCompare}?productId=${productId}`
   );
+}
+
+export async function getOrderProductsStatic(
+  token: string
+): Promise<OrderByUserIdResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res?.data?.data[0] as OrderByUserIdResponse;
+  } catch (error: any) {
+    return [] as any;
+  }
+}
+export async function getOrderProductStatic(
+  token: string,
+  OrderId: string
+): Promise<OrderResponseData | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res?.data);
+
+    return res?.data.data[0];
+  } catch (error: any) {
+    return [] as any;
+  }
 }
