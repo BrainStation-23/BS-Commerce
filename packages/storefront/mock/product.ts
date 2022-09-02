@@ -2,7 +2,7 @@ export const productsData = [
   {
     id: '2040b411-0c8b-418e-92f0-f22a9037af15',
     info: {
-      name: 'dwadda wd',
+      name: 'Angur',
       shortDescription: '',
       fullDescription: '',
       sku: 'daw',
@@ -62,7 +62,7 @@ export const productsData = [
   {
     id: '99bbb669-2d31-4bf8-af3e-83b6c3ea42e3',
     info: {
-      name: 'wdd',
+      name: 'Tok Angur',
       shortDescription: '',
       fullDescription: '',
       sku: '324',
@@ -160,7 +160,7 @@ export const productsData = [
   {
     id: '0b9e4b24-6078-40c6-b31a-6e9526dc68e0',
     info: {
-      name: 'pr 1001',
+      name: 'RED Tomato',
       shortDescription: 'pr 1001',
       fullDescription: 'pr 1001',
       sku: 'vv',
@@ -208,7 +208,7 @@ export const productsData = [
   {
     id: 'b4fa050a-ddbf-4572-ae7d-5b9129290ed8',
     info: {
-      name: 'pr 10000',
+      name: 'Tomtom',
       shortDescription: 'pr 10000',
       fullDescription: 'pr 10000',
       sku: 'pr10000',
