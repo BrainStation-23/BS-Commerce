@@ -23,6 +23,15 @@ import {
   GetCustomerInformationSuccessResponse,
   CreateOrderRequest,
   OrderResponseData,
+  UpdateCustomerRequestBody,
+  UpdateCustomerSuccessResponse,
+  CustomerAddress,
+  AddCustomerNewAddressResponse,
+  DeleteCustomerAddressResponse,
+  DeleteCustomerAddressSuccessResponse,
+  UpdateCustomerAddressResponse,
+  UpdateCustomerAddressSuccessResponse,
+  CompareResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -260,4 +269,95 @@ export async function checkoutStatic(
     });
     return error;
   }
+}
+
+export async function updateCustomerStatic(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  try {
+    const response = await axios.patch(`${apiEndPoints.customer}`, data);
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function addCustomerNewAddressStatic(
+  customerAddress: CustomerAddress
+): Promise<AddCustomerNewAddressResponse | undefined> {
+  try {
+    const res = await axios.put(
+      `${apiEndPoints.addCustomerAddress}`,
+      customerAddress
+    );
+    toast.success('New Address added', {
+      containerId: 'bottom-right',
+    });
+    return res.data.data;
+  } catch (error: any) {
+    toast.error('Failed to add New Address', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function deleteCustomerAddressStatic(
+  addressId: string
+): Promise<DeleteCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteCustomerAddress}/${addressId}`
+    );
+    toast.success('Address deleted successfully', {
+      containerId: 'bottom-right',
+    });
+    return res.data as DeleteCustomerAddressSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerAddressStatic(
+  addressId: string,
+  data: CustomerAddress
+): Promise<UpdateCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.patch(
+      `${apiEndPoints.updateCustomerAddress}/${addressId}`,
+      data
+    );
+    toast.success('Address updated successfully', {
+      containerId: 'bottom-right',
+    });
+    return res.data as UpdateCustomerAddressSuccessResponse;
+  } catch (error: any) {
+    toast.error('Address update failed', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function addToCompareStatic(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.post(
+      `${apiEndPoints.addToCompare}`,
+      { productId },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteFromCompareStatic(productId: string) {
+  await axios.delete(
+    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+  );
 }
