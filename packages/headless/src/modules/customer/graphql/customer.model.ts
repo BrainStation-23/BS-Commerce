@@ -1,7 +1,10 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { IsEmail, IsOptional } from 'class-validator';
 import {
     Customer,
     CustomerAddress,
+    CustomerChangePasswordRequest,
+    SendOtpRequest,
     UpdateCustomerRequestBody,
 } from 'models';
 
@@ -107,11 +110,50 @@ export class UpdateCustomerInput implements UpdateCustomerRequestBody {
     phone?: string;
 
     @Field({ nullable: true })
+    @IsOptional()
+    @IsEmail()
+    email?: string;
+}
+
+@ObjectType()
+export class CustomerChangePasswordSendOTPResponseMessage {
+    @Field()
+    message: string;
+}
+
+@ObjectType()
+export class CustomerChangePasswordSendOTPResponse {
+    @Field(() => Int)
+    code: number
+
+    @Field(() => CustomerChangePasswordSendOTPResponseMessage, { nullable: true })
+    data?: CustomerChangePasswordSendOTPResponseMessage
+}
+
+@InputType()
+export class CustomerChangePasswordSendOTPInput implements SendOtpRequest {
+    @Field({ nullable: true })
+    phone?: string;
+
+    @Field({ nullable: true })
+    @IsOptional()
+    @IsEmail()
     email?: string;
 }
 
 @InputType()
-export class CustomerChangePasswordInput {
+export class CustomerChangePasswordInput implements CustomerChangePasswordRequest {
+    @Field({ nullable: true })
+    phone?: string;
+
+    @Field({ nullable: true })
+    @IsOptional()
+    @IsEmail()
+    email?: string;
+
+    @Field(() => Int)
+    otp: number;
+
     @Field()
     currentPassword: string;
 
@@ -127,7 +169,6 @@ export class CustomerResponse {
     @Field(() => GraphqlCustomer, { nullable: true })
     data?: GraphqlCustomer;
 }
-
 
 @ObjectType()
 export class CustomerChangePasswordResponseMessage {

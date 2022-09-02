@@ -6,6 +6,10 @@ import { CustomerService } from '../services';
 import { Customer } from 'src/entity/customer';
 import {
   CustomerAddressInput,
+  CustomerChangePasswordInput,
+  CustomerChangePasswordResponse,
+  CustomerChangePasswordSendOTPInput,
+  CustomerChangePasswordSendOTPResponse,
   CustomerResponse,
   UpdateCustomerInput
 } from './customer.model';
@@ -43,6 +47,18 @@ export class CustomerResolver {
   @Mutation(() => CustomerResponse)
   async deleteCustomerAddress(@Args('addressId') addressId: string, @CustomerInfo() customer: Customer) {
     const res = await this.customerService.deleteCustomerAddress(customer.id, addressId);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => CustomerChangePasswordSendOTPResponse)
+  async customerChangePasswordSendOTP(@Args('data') data: CustomerChangePasswordSendOTPInput, @CustomerInfo() customer: Customer) {
+    const res = await this.customerService.changePasswordSendOTP(customer.id, data);
+    return this.helper.serviceResponse.graphqlResponse(res);
+  }
+
+  @Mutation(() => CustomerChangePasswordResponse)
+  async customerChangePassword(@Args('passwordDetails') passwordDetails: CustomerChangePasswordInput, @CustomerInfo() customer: Customer) {
+    const res = await this.customerService.changePassword(customer.id, passwordDetails);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 }
