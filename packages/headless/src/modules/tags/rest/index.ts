@@ -10,7 +10,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TagsService } from '../services';
 import {
   CreateTagErrorResponseDto,
