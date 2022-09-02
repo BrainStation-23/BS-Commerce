@@ -80,11 +80,13 @@ import { apiFunction } from 'utils/types';
 import {
   addToCartStatic,
   addToWishlistStatic,
+  checkoutStatic,
   deleteAllCartItemStatic,
   deleteFullWishlistStatic,
   deleteSingleCartItemStatic,
   deleteWishlistItemStatic,
   getCartStatic,
+  getCustomerProfileStatic,
   getCustomerStatic,
   getFeaturedProductsStatic,
   getPublicProductByCategoryIDStatic,
@@ -188,13 +190,15 @@ const staticApi: apiFunction = {
   addToWishList: addToWishlistStatic,
   deleteWishlistItem: deleteWishlistItemStatic,
   deleteFullWishlist: deleteFullWishlistStatic,
+  getCustomerProfile: getCustomerProfileStatic,
+  checkout: checkoutStatic,
 };
 
 console.log(config?.apiService);
 
 export const userAPI: apiFunction =
-  config?.apiService === 'GRAPHQL'
-    ? graphqlApi
-    : config?.apiService === 'REST'
+  config!.apiService! === 'REST'
     ? restApi
+    : config!.apiService! === 'GRAPHQL'
+    ? graphqlApi
     : staticApi;

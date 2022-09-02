@@ -67,7 +67,6 @@ const Signin: NextComponentType = () => {
       fetchWislist(datass?.data?.token);
       setLoader(false);
       router.push('/');
-      //router.back();
       toast.success('Logged in successfully!', {
         containerId: 'bottom-right',
       });

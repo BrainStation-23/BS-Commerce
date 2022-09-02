@@ -21,7 +21,10 @@ import {
   SendOtpSuccessResponse,
   SendOtpErrorResponse,
   GetCustomerInformationSuccessResponse,
+  CreateOrderRequest,
+  OrderResponseData,
 } from 'models';
+import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
 
@@ -223,6 +226,38 @@ export async function deleteFullWishlistStatic(): Promise<
     const res = await axios.delete(`${apiEndPoints.deleteFullWishlist}`);
     return res.data.message;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCustomerProfileStatic(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
+      headers: { token: `${token}` },
+    });
+    return res.data;
+  } catch (error) {
+    return {} as any;
+  }
+}
+
+export async function checkoutStatic(
+  data: CreateOrderRequest,
+  router: NextRouter
+): Promise<OrderResponseData | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}`, data);
+    toast.success('Order created successfully!', {
+      containerId: 'bottom-right',
+    });
+    router.push('/submit');
+    return res.data;
+  } catch (error: any) {
+    toast.error('Order creation failed!', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }

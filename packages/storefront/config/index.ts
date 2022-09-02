@@ -1,9 +1,9 @@
 const { NEXT_PUBLIC_REST_API_PREFIX_GRAPHQL, NEXT_PUBLIC_REST_API_PREFIX_REST, NEXT_PUBLIC_API, NEXT_PUBLIC_SIGN_IN_URL ,NEXT_PUBLIC_REST_API_PREFIX_STATIC } = process?.env;
 
 export const config = {
-    apiService: "STATIC",
-    graphqlPrefix: NEXT_PUBLIC_REST_API_PREFIX_GRAPHQL || 'http://localhost:3000/graphql',
-    restPrefix: NEXT_PUBLIC_REST_API_PREFIX_REST || 'http://localhost:3000/api',
-    staticPrefix: NEXT_PUBLIC_REST_API_PREFIX_STATIC || 'http://localhost:3002/api',
-    signIn: NEXT_PUBLIC_SIGN_IN_URL || 'http://localhost:3002/api/signin',
+    apiService: process.env.NEXT_PUBLIC_API,
+    graphqlPrefix: process.env.NEXT_PUBLIC_REST_API_PREFIX_GRAPHQL,
+    restPrefix: process.env.NEXT_PUBLIC_REST_API_PREFIX_REST,
+    staticPrefix: process.env.NEXT_PUBLIC_REST_API_PREFIX_STATIC,
+    signIn: process.env.NEXT_PUBLIC_SIGN_IN_URL,
 }
