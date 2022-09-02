@@ -6,11 +6,14 @@ const TagsSchema = new Schema<Tag>({
     type: String,
     unique: true,
   },
-  name: String,
+  name: {
+    type: String,
+    unique: true,
+  },
   isHomePageProductsTag: {
     type: Boolean,
     default: false,
-    // select: false
+    select: false
   }
 }, {
   timestamps: true,
