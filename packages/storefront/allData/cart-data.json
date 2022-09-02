@@ -1,0 +1,98 @@
+{
+  "data": {
+    "id": "8e5f4d5d-4b96-48a0-b070-975e4253a2a8",
+    "userId": "f081d163-f196-4600-a95c-521f0b4dd838",
+    "items": [
+      {
+        "productId": "c1f3051a-30a7-47b8-b8b9-98099059b7a0",
+        "quantity": 2,
+        "product": {
+          "info": {
+            "name": "Green Grapes",
+            "shortDescription": "asdasd",
+            "sku": "asdasd",
+            "price": 10,
+            "oldPrice": 9,
+            "cost": 7,
+            "showOnHomePage": false,
+            "includeInTopMenu": false,
+            "allowToSelectPageSize": false,
+            "published": false,
+            "displayOrder": 1,
+            "isFeatured": false,
+            "publishDate": "2022-06-16T15:07:12.700Z"
+          },
+          "id": "c1f3051a-30a7-47b8-b8b9-98099059b7a0",
+          "photos": [
+            {
+              "url": "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig14_9d050031-6a02-4a0c-ad56-c2dda1cce5d0_compact.jpg?v=1587984073",
+              "title": "Close Up",
+              "alt": "productImg",
+              "displayOrder": 1
+            }
+          ]
+        }
+      },
+      {
+        "productId": "a1f3051a-30a7-44b8-b8b9-98099059b7a0",
+        "quantity": 2,
+        "product": {
+          "info": {
+            "name": "Gourd",
+            "shortDescription": "asdasd",
+            "sku": "asdasd",
+            "price": 4,
+            "oldPrice": 9,
+            "cost": 7,
+            "showOnHomePage": false,
+            "includeInTopMenu": false,
+            "allowToSelectPageSize": false,
+            "published": false,
+            "displayOrder": 1,
+            "isFeatured": false,
+            "publishDate": "2022-06-16T15:07:12.700Z"
+          },
+          "id": "c1f3051a-30a7-47b8-b8b9-98099059b7a0",
+          "photos": [
+            {
+              "url": "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig9_ef67d26b-f717-4bf3-82ec-5eae9aad5a11_compact.jpg?v=1587984831",
+              "title": "Close Up",
+              "alt": "productImg",
+              "displayOrder": 1
+            }
+          ]
+        }
+      },
+      {
+        "productId": "c89f3051a-30a7-47b8-b8b9-98099059b7a0",
+        "quantity": 2,
+        "product": {
+          "info": {
+            "name": "Spinach",
+            "shortDescription": "asdasd",
+            "sku": "asdasd",
+            "price": 12,
+            "oldPrice": 9,
+            "cost": 7,
+            "showOnHomePage": false,
+            "includeInTopMenu": false,
+            "allowToSelectPageSize": false,
+            "published": false,
+            "displayOrder": 1,
+            "isFeatured": false,
+            "publishDate": "2022-06-16T15:07:12.700Z"
+          },
+          "id": "c1f3051a-30a7-47b8-b8b9-98099059b7a0",
+          "photos": [
+            {
+              "url": "https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig6_1f6dc9c9-08a8-4008-b39a-478d0046362d_compact.jpg?v=1587983036",
+              "title": "Close Up",
+              "alt": "productImg",
+              "displayOrder": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

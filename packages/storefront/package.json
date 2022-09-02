@@ -10,13 +10,27 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
+    "@headlessui/react": "^1.6.4",
     "@popperjs/core": "^2.11.4",
+    "@reduxjs/toolkit": "^1.8.2",
+    "@types/react-redux": "^7.1.24",
+    "axios": "^0.27.2",
+    "font-awesome": "^4.7.0",
+    "formik": "^2.2.9",
+    "graphql": "^16.5.0",
     "marketplace": "^1.0.0",
+    "models": "*",
     "next": "12.1.0",
     "react": "17.0.2",
+    "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
+    "react-redux": "^8.0.2",
+    "react-toastify": "^9.0.5",
+    "redux-persist": "^6.0.0",
     "swiper": "^8.1.5",
-    "models": "*"
+    "xregexp": "^5.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

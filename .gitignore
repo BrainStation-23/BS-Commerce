@@ -25,3 +25,6 @@ logs
 
 # Dependency directory
 node_modules
+
+#lock file
+package-lock.json
