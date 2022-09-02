@@ -33,6 +33,8 @@ import {
   UpdateCustomerAddressResponse,
   UpdateCustomerAddressSuccessResponse,
   CompareResponse,
+  updateCartItemRequest,
+  updateCartItemSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -391,5 +393,16 @@ export async function getOrderProductStatic(
     return res?.data.data[0];
   } catch (error: any) {
     return [] as any;
+  }
+}
+
+export async function updateCartItemStatic(
+  cartItem: updateCartItemRequest
+): Promise<updateCartItemSuccessResponse | undefined> {
+  try {
+    const res = await axios.patch(`${apiEndPoints.updateCartItem}`, cartItem);
+    return res.data as updateCartItemSuccessResponse;
+  } catch (error: any) {
+    return error;
   }
 }

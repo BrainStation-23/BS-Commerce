@@ -163,15 +163,13 @@ const PaymentDetails: NextComponentType = () => {
         data.paymentMethod === 'Credit card' ? data.cardNumber : '',
       paypalRedirectUrl: '',
     };
-    const res = userAPI
-      .checkout(obj, router)
-      .then(async (response: OrderResponseData) => {
-        if (response?.data?.orderId) {
-          await userAPI.deleteAllCartItem();
-          dispatch(deleteCart());
-          dispatch(deleteCheckoutInfo());
-        }
-      });
+    const res = userAPI.checkout(obj, router).then(async (response) => {
+      if (response?.data?.orderId) {
+        await userAPI.deleteAllCartItem();
+        dispatch(deleteCart());
+        dispatch(deleteCheckoutInfo());
+      }
+    });
   };
 
   const handlePreviousAddress = (detail: string, setFieldValue: Function) => {

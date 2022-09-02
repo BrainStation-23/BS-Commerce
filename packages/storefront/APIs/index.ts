@@ -100,6 +100,7 @@ import {
   getPublicProductsStatic,
   sendOTPStatic,
   signInStatic,
+  updateCartItemStatic,
   updateCustomerAddressStatic,
   updateCustomerStatic,
 } from './static';
@@ -208,6 +209,7 @@ const staticApi: apiFunction = {
   updateCustomerAddress: updateCustomerAddressStatic,
   addToCompare: addToCompareStatic,
   deleteFromCompare: deleteFromCompareStatic,
+  updateCartItem: updateCartItemStatic,
 };
 
 console.log(config?.apiService);
