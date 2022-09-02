@@ -89,6 +89,8 @@ import {
   getCustomerProfileStatic,
   getCustomerStatic,
   getFeaturedProductsStatic,
+  getOrderProductsStatic,
+  getOrderProductStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
   getPublicProductsStatic,
@@ -192,6 +194,8 @@ const staticApi: apiFunction = {
   deleteFullWishlist: deleteFullWishlistStatic,
   getCustomerProfile: getCustomerProfileStatic,
   checkout: checkoutStatic,
+  getOrderProducts: getOrderProductsStatic,
+  getOrderProduct: getOrderProductStatic,
 };
 
 console.log(config?.apiService);

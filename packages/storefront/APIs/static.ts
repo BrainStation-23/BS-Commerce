@@ -23,6 +23,7 @@ import {
   GetCustomerInformationSuccessResponse,
   CreateOrderRequest,
   OrderResponseData,
+  OrderByUserIdResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -193,7 +194,6 @@ export async function getCustomerStatic(
   }
 }
 
-
 export async function addToWishlistStatic(
   data: addToWishlistRequest
 ): Promise<AddToWishlistResponse | undefined> {
@@ -259,5 +259,36 @@ export async function checkoutStatic(
       containerId: 'bottom-right',
     });
     return error;
+  }
+}
+export async function getOrderProductsStatic(
+  token: string
+): Promise<OrderByUserIdResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res?.data?.data[0] as OrderByUserIdResponse;
+  } catch (error: any) {
+    return [] as any;
+  }
+}
+export async function getOrderProductStatic(
+  token: string,
+  OrderId: string
+): Promise<OrderResponseData | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res?.data);
+
+    return res?.data.data[0];
+  } catch (error: any) {
+    return [] as any;
   }
 }
