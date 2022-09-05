@@ -98,6 +98,9 @@ export class GetCustomerAllProductsResponse implements GetCustomerAllProductsRes
 
     @ApiProperty({ type: () => [String] })
     brands: string[];
+
+    @ApiProperty({ type: Number })
+    totalProducts: number;
 }
 
 export class GetCustomerAllProductsSuccessResponseDto implements GetCustomerAllProductsSuccessResponse {
