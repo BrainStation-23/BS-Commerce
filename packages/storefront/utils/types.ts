@@ -1,6 +1,8 @@
-import { OrderResponseData } from 'models';
 import {
   CustomerSignInResponse,
+  getCategoryResponse,
+  GetAllBrandsResponse,
+  OrderResponseData,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -49,6 +51,8 @@ import {
   SendOtpRequest,
   SendOtpSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  getCategoryBySlugResponse,
+  GetCustomerProductByURLResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -95,8 +99,12 @@ export interface apiFunction {
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
-    categoryId: string
-  ) => Promise<GetCustomerAllProductsSuccessResponse | undefined>;
+    categoryId: string,
+    orderBy: string,
+    minPrice: number,
+    maxPrice: number,
+    brands: string
+  ) => Promise<GetCustomerAllProductsResponse | undefined>;
   checkout: (
     data: any,
     router: NextRouter
@@ -160,5 +168,15 @@ export interface apiFunction {
   ) => Promise<VerifyOtpSuccessResponse | undefined>;
   resetPassword: (
     data: CustomerForgotPasswordRequest
-  ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
+  ) => Promise<CustomerForgotPasswordSuccessResponse>;
+  getBrands(): Promise<GetAllBrandsResponse | undefined>;
+  getPublicProductByUniqueName(
+    productUniqueName: string
+  ): Promise<GetCustomerProductByURLResponse | undefined>;
+  getCategoryDetailsById: (
+    categoryId: string
+  ) => Promise<getCategoryResponse | undefined>;
+  getCategoryDetailsBySlug: (
+    categorySlug: string
+  ) => Promise<getCategoryBySlugResponse | undefined>;
 }

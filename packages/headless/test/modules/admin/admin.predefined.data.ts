@@ -1,10 +1,6 @@
 import { AddressDto, ChangePasswordDto, UpdatedUserDto } from 'src/modules/user/rest/dto';
 
-export const AdminId = '21b38a0b-95f8-43bf-90f1-7dfb64ed885b';
-export const Username = 'robert@gmail.com';
-
-const addressWithId: AddressDto = {
-    id: 'b41a11a5-b3f8-4e8b-8645-bbad7e9e1327',
+const adminAddress: AddressDto = {
     addressLine1: 'Sector 11, Uttara, Dhaka',
     addressLine2: 'Sector 10, Uttara, Dhaka',
     city: 'Dhaka',
@@ -40,7 +36,7 @@ export const updateAdminWithOldAddress: UpdatedUserDto = {
     lastName: 'Tyler',
     phone: '01770964628',
     gender: 'male',
-    address: addressWithId,
+    address: adminAddress,
     status: 'active',
 }
 

@@ -11,11 +11,11 @@ const Product = ({ product }: SingleProduct) => {
   return (
     <Link
       href={{
-        pathname: `product/${product.info.name}`,
-        query: {
-          id: product.id,
-          name: product.info.name,
-        },
+        pathname: `/product/${product.meta.friendlyPageName}`,
+        // query: {
+        //   id: product.id,
+        //   name: product.info.name,
+        // },
       }}
       // as={`product/${product.info.name}`}
       passHref

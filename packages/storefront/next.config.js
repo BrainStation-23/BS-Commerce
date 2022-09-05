@@ -2,9 +2,6 @@ const path = require('path');
 
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: [],
-  },
   async redirects() {
     return [
       {

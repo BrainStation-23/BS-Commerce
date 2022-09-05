@@ -1,12 +1,18 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { connectTestDatabase, GetDemoUserToken, TestTimeout, } from '../../test-utility';
+import {
+    connectTestDatabase,
+    GetDemoUserToken,
+    insertAdmins,
+    TestAdminId,
+    TestAdminUsername,
+    TestTimeout,
+} from '../../test-utility';
 import { AppModule } from 'src/app.module';
 import { ValidationPipe } from 'src/decorators/service.validator';
 import { UserController } from 'src/modules/user/rest';
 import {
-    AdminId,
     changePasswordRequestWithLessThanSixCharactersNewPassword,
     changePasswordRequestWithoutNewPassword,
     incorrectCurrentChangePasswordRequest,
@@ -14,17 +20,18 @@ import {
     updateAdminWithNewAddressMissingData,
     updateAdminWithOldAddress,
     updateAdminWithoutAddress,
-    Username,
     validCurrentChangePasswordRequest,
 } from './admin.predefined.data';
-const token = GetDemoUserToken(AdminId, Username, 'admin').token;
+const token = GetDemoUserToken(TestAdminId, TestAdminUsername, 'admin').token;
 
 describe('Initializing... Admin Auth controller testing', () => {
     let app: INestApplication;
     let adminController: UserController;
+    let addressId: string;
 
     beforeAll(async () => {
         await connectTestDatabase();
+        await insertAdmins();
         const module: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
         }).compile();
@@ -92,7 +99,7 @@ describe('Initializing... Admin Auth controller testing', () => {
 
         describe('update admin information & add user new address(all required data)', () => {
             it('should return admin response data and status code 200', async () => {
-                return await request(app.getHttpServer())
+                const result: any = await request(app.getHttpServer())
                     .patch('/user')
                     .set('Authorization', `Bearer ${token}`)
                     .send(updateAdminWithNewAddress)
@@ -100,6 +107,9 @@ describe('Initializing... Admin Auth controller testing', () => {
                         expect(res.statusCode).toBe(200);
                         expect(res.body.data).not.toBe(null);
                     })
+                if (result.body.data && result.body.data.addresses && result.body.data.addresses.length) {
+                    addressId = result.body.data.addresses[0].id;
+                }
             }, TestTimeout);
         });
 
@@ -108,7 +118,7 @@ describe('Initializing... Admin Auth controller testing', () => {
                 return await request(app.getHttpServer())
                     .patch('/user')
                     .set('Authorization', `Bearer ${token}`)
-                    .send(updateAdminWithOldAddress)
+                    .send({ ...updateAdminWithOldAddress, 'address.id': addressId })
                     .expect((res) => {
                         expect(res.statusCode).toBe(200);
                         expect(res.body.data).not.toBe(null);

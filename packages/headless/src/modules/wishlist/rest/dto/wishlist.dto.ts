@@ -1,13 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsDate, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsDate, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import {
     Wishlist,
     WishlistItem,
     WishlistProduct,
     WishlistProductInfo,
-    WishlistProductPhoto
-} from "models";
+    WishlistProductPhoto,
+    WishlistProductMeta,
+} from 'models';
 
 export class WishlistProductInfoDto implements WishlistProductInfo {
     @ApiProperty()
@@ -84,6 +85,12 @@ export class WishlistProductPhotoDto implements WishlistProductPhoto {
     alt?: string;
 }
 
+export class WishlistProductMetaDto implements WishlistProductMeta {
+    @ApiProperty()
+    @IsString()
+    friendlyPageName: string;
+}
+
 export class WishlistProductDto implements WishlistProduct {
     @ApiProperty()
     @IsString()
@@ -94,6 +101,11 @@ export class WishlistProductDto implements WishlistProduct {
     @IsObject()
     info: WishlistProductInfoDto;
 
+    @ApiProperty({ type: WishlistProductMetaDto })
+    @Type(() => WishlistProductMetaDto)
+    @IsObject()
+    meta: WishlistProductMetaDto;
+
     @ApiProperty({ type: WishlistProductPhotoDto })
     @Type(() => WishlistProductPhotoDto)
     @IsObject()
@@ -102,7 +114,7 @@ export class WishlistProductDto implements WishlistProduct {
 
 
 export class WishlistItemDto implements WishlistItem {
-    @ApiProperty({ type: WishlistProductDto })
+    @ApiProperty({ type: WishlistProductDto, required: false })
     @Type(() => WishlistProductDto)
     @IsOptional()
     @IsObject()

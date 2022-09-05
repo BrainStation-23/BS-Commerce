@@ -27,6 +27,7 @@ export interface GetCustomerAllProductsResponseType {
     products: CustomerProduct[];
     manufacturers: string[];
     brands: string[];
+    totalProducts: number;
 }
 
 export interface GetCustomerAllProductsSuccessResponse extends SuccessResponse {

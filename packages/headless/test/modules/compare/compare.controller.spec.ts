@@ -1,7 +1,7 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { AddToCompareDto } from 'src/modules/compare/dto/compare.dto';
+import { AddToCompareDto } from 'src/modules/compare/rest/dto/compare.dto';
 import { CompareController } from 'src/modules/compare/rest';
 import * as request from 'supertest';
 import {
@@ -11,6 +11,8 @@ import {
   TestTimeout,
   TestCustomerId,
   TestCustomerEmail,
+  insertCustomers,
+  insertProducts,
 } from '../../test-utility';
 
 const token = GetDemoCustomerToken(TestCustomerId, 'customer', TestCustomerEmail).token;
@@ -28,7 +30,8 @@ describe('Initializing... Compare controller testing', () => {
   let compareId: string;
   beforeAll(async () => {
     await connectTestDatabase();
-
+    await insertCustomers();
+    await insertProducts();
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
       providers: [{ provide: CompareController, useValue: mockController }],
@@ -41,8 +44,6 @@ describe('Initializing... Compare controller testing', () => {
   });
 
   afterAll(async () => {
-    // remove test database collection if required
-    // await removeTestCollection('compares');
     await app.close();
   });
 
