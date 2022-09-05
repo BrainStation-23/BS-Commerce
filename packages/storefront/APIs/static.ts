@@ -21,7 +21,22 @@ import {
   SendOtpSuccessResponse,
   SendOtpErrorResponse,
   GetCustomerInformationSuccessResponse,
+  CreateOrderRequest,
+  OrderResponseData,
+  OrderByUserIdResponse,
+  UpdateCustomerRequestBody,
+  UpdateCustomerSuccessResponse,
+  CustomerAddress,
+  AddCustomerNewAddressResponse,
+  DeleteCustomerAddressResponse,
+  DeleteCustomerAddressSuccessResponse,
+  UpdateCustomerAddressResponse,
+  UpdateCustomerAddressSuccessResponse,
+  CompareResponse,
+  updateCartItemRequest,
+  updateCartItemSuccessResponse,
 } from 'models';
+import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
 
@@ -190,7 +205,6 @@ export async function getCustomerStatic(
   }
 }
 
-
 export async function addToWishlistStatic(
   data: addToWishlistRequest
 ): Promise<AddToWishlistResponse | undefined> {
@@ -222,6 +236,172 @@ export async function deleteFullWishlistStatic(): Promise<
   try {
     const res = await axios.delete(`${apiEndPoints.deleteFullWishlist}`);
     return res.data.message;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCustomerProfileStatic(
+  token: string
+): Promise<GetCustomerInformationSuccessResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.getCustomerProfile}`, {
+      headers: { token: `${token}` },
+    });
+    return res.data;
+  } catch (error) {
+    return {} as any;
+  }
+}
+
+export async function checkoutStatic(
+  data: CreateOrderRequest,
+  router: NextRouter
+): Promise<OrderResponseData | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}`, data);
+    toast.success('Order created successfully!', {
+      containerId: 'bottom-right',
+    });
+    router.push('/submit');
+    return res.data;
+  } catch (error: any) {
+    toast.error('Order creation failed!', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function updateCustomerStatic(
+  data: UpdateCustomerRequestBody
+): Promise<UpdateCustomerSuccessResponse | undefined> {
+  try {
+    const response = await axios.patch(`${apiEndPoints.customer}`, data);
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function addCustomerNewAddressStatic(
+  customerAddress: CustomerAddress
+): Promise<AddCustomerNewAddressResponse | undefined> {
+  try {
+    const res = await axios.put(
+      `${apiEndPoints.addCustomerAddress}`,
+      customerAddress
+    );
+    toast.success('New Address added', {
+      containerId: 'bottom-right',
+    });
+    return res.data.data;
+  } catch (error: any) {
+    toast.error('Failed to add New Address', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function deleteCustomerAddressStatic(
+  addressId: string
+): Promise<DeleteCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteCustomerAddress}/${addressId}`
+    );
+    toast.success('Address deleted successfully', {
+      containerId: 'bottom-right',
+    });
+    return res.data as DeleteCustomerAddressSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function updateCustomerAddressStatic(
+  addressId: string,
+  data: CustomerAddress
+): Promise<UpdateCustomerAddressResponse | undefined> {
+  try {
+    const res = await axios.patch(
+      `${apiEndPoints.updateCustomerAddress}/${addressId}`,
+      data
+    );
+    toast.success('Address updated successfully', {
+      containerId: 'bottom-right',
+    });
+    return res.data as UpdateCustomerAddressSuccessResponse;
+  } catch (error: any) {
+    toast.error('Address update failed', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function addToCompareStatic(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.post(
+      `${apiEndPoints.addToCompare}`,
+      { productId },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    return res.data.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function deleteFromCompareStatic(productId: string) {
+  await axios.delete(
+    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+  );
+}
+
+export async function getOrderProductsStatic(
+  token: string
+): Promise<OrderByUserIdResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res?.data?.data[0] as OrderByUserIdResponse;
+  } catch (error: any) {
+    return [] as any;
+  }
+}
+export async function getOrderProductStatic(
+  token: string,
+  OrderId: string
+): Promise<OrderResponseData | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.order}/${OrderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res?.data);
+
+    return res?.data.data[0];
+  } catch (error: any) {
+    return [] as any;
+  }
+}
+
+export async function updateCartItemStatic(
+  cartItem: updateCartItemRequest
+): Promise<updateCartItemSuccessResponse | undefined> {
+  try {
+    const res = await axios.patch(`${apiEndPoints.updateCartItem}`, cartItem);
+    return res.data as updateCartItemSuccessResponse;
   } catch (error: any) {
     return error;
   }

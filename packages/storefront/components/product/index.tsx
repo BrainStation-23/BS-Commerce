@@ -94,6 +94,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       const cartProduct = {
         id: product.id!,
         info: product.info!,
+        meta: { friendlyPageName: product.meta?.friendlyPageName! },
         photos: product.photos!,
       };
       const cartItem = {
@@ -207,6 +208,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       const cartProduct = {
         id: product.id!,
         info: product.info!,
+        meta: { friendlyPageName: product.meta?.friendlyPageName! },
         photos: product.photos!,
       };
       itemAmountInCart = {
@@ -218,7 +220,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     } else {
       setAlreadyInCart(true);
     }
-    setAmount(itemAmountInCart?.quantity);
+    setAmount(itemAmountInCart?.quantity!);
   }, []);
 
   return (
@@ -466,7 +468,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       onClick={() => {
                         handleAddToCompare();
                         dispatch(setModalState(!modalCmp));
-                        dispatch(storeProductsToCompare(product as CustomerProduct));
+                        dispatch(
+                          storeProductsToCompare(product as CustomerProduct)
+                        );
                       }}
                     >
                       + Compare

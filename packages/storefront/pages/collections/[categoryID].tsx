@@ -61,8 +61,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     parseFloat(maxPrice as string) as number,
     brand as string
   );
-
-  var products = res?.data?.products ? res?.data?.products : [];
+  var products;
+  if ('data' in res!) products = res?.data?.products ? res?.data?.products : [];
   // console.log(res2.data);
   // console.log(res?.data?.brands);
 
@@ -89,11 +89,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //     id: '',
   //   });
   // }
-
+  let brands;
+  if ('data' in res!) brands = res?.data?.brands ? res?.data?.brands : [];
   return {
     props: {
       products,
-      brands: res?.data?.brands ? res?.data?.brands : [],
+      brands: brands,
       name: name,
       categoryNameAndId,
     },

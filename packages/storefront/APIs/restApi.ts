@@ -196,7 +196,7 @@ export async function checkoutRest(
       containerId: 'bottom-right',
     });
     router.push('/submit');
-    return res.data;
+    return res.data.data;
   } catch (error: any) {
     toast.error('Order creation failed!', {
       containerId: 'bottom-right',

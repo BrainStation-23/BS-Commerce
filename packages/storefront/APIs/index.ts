@@ -78,20 +78,31 @@ import {
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
 import {
+  addCustomerNewAddressStatic,
   addToCartStatic,
+  addToCompareStatic,
   addToWishlistStatic,
+  checkoutStatic,
   deleteAllCartItemStatic,
+  deleteCustomerAddressStatic,
+  deleteFromCompareStatic,
   deleteFullWishlistStatic,
   deleteSingleCartItemStatic,
   deleteWishlistItemStatic,
   getCartStatic,
+  getCustomerProfileStatic,
   getCustomerStatic,
   getFeaturedProductsStatic,
+  getOrderProductsStatic,
+  getOrderProductStatic,
   getPublicProductByCategoryIDStatic,
   getPublicProductByUniqueNameStatic,
   getPublicProductsStatic,
   sendOTPStatic,
   signInStatic,
+  updateCartItemStatic,
+  updateCustomerAddressStatic,
+  updateCustomerStatic,
 } from './static';
 
 const graphqlApi: apiFunction = {
@@ -188,13 +199,24 @@ const staticApi: apiFunction = {
   addToWishList: addToWishlistStatic,
   deleteWishlistItem: deleteWishlistItemStatic,
   deleteFullWishlist: deleteFullWishlistStatic,
+  getCustomerProfile: getCustomerProfileStatic,
+  checkout: checkoutStatic,
+  getOrderProducts: getOrderProductsStatic,
+  getOrderProduct: getOrderProductStatic,
+  updateCustomer: updateCustomerStatic,
+  addCustomerNewAddress: addCustomerNewAddressStatic,
+  deleteCustomerAddress: deleteCustomerAddressStatic,
+  updateCustomerAddress: updateCustomerAddressStatic,
+  addToCompare: addToCompareStatic,
+  deleteFromCompare: deleteFromCompareStatic,
+  updateCartItem: updateCartItemStatic,
 };
 
 console.log(config?.apiService);
 
 export const userAPI: apiFunction =
-  config?.apiService === 'GRAPHQL'
-    ? graphqlApi
-    : config?.apiService === 'REST'
+  config!.apiService! === 'REST'
     ? restApi
+    : config!.apiService! === 'GRAPHQL'
+    ? graphqlApi
     : staticApi;
