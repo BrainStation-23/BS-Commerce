@@ -21,7 +21,7 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
               <p className="text-[#7c827f]">Order Created </p>
             </div>
             <div>
-              <p className=" text-black">
+              <p className=" ml-4 text-black lg:ml-0">
                 : {moment(singleOrder?.orderedDate).format('LL')}
               </p>
             </div>
@@ -58,7 +58,7 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
               <p className="text-[#7c827f]">Order Time </p>
             </div>
             <div>
-              <p className=" text-black">
+              <p className="ml-4 text-black lg:ml-0">
                 : {moment(singleOrder?.orderedDate).format('LT')}
               </p>
             </div>
@@ -83,7 +83,7 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
                 </div>
                 <div>
                   <p className="ml-4 text-black">
-                    {/* : {singleOrder?.paymentMethod} */}
+                    : {singleOrder?.paymentMethod}
                   </p>
                 </div>
               </div>
@@ -95,13 +95,13 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
 
         <hr className="mx-5 mb-5" />
 
-        <div className="mx-5 mb-5 grid w-1/2 grid-cols-1">
+        <div className="mx-5 mb-5 grid grid-cols-1 lg:w-1/2">
           <div className="grid w-full grid-cols-2 lg:w-3/5">
             <div>
               <p className="text-[#7c827f]">Delivery Address</p>
             </div>
             <div>
-              <p className=" text-black">
+              <p className=" ml-3 text-black lg:ml-0">
                 :{' '}
                 {`${singleOrder?.shippingAddress?.addressLine1},  ${singleOrder?.shippingAddress?.city}, ${singleOrder?.shippingAddress.postCode}`}
               </p>
