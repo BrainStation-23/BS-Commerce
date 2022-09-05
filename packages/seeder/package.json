@@ -11,12 +11,14 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "seed": "node dist/index.js"
+    "seed": "node dist/index.js",
+    "seed:es":"node dist/elastic-search/index.js"
   },
   "bugs": {
     "url": "https://github.com/BrainStation-23/BS-Commerce/issues"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.13.0",
     "mongoose": "^6.4.4",
     "models": "*"
   },

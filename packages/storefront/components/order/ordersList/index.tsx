@@ -19,7 +19,6 @@ const OrderMain: FC = () => {
     const orderListRes = await userAPI
       .getOrderProducts(token)
       .then((res: OrderByUserIdResponse) => {
-        //console.log(res);
         setAllOrderList(res?.orderInfo);
       });
   };

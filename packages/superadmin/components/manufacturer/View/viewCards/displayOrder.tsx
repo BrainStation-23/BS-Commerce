@@ -1,10 +1,9 @@
-import { FC } from "react";
-import SingleView from "./singleView";
+import { FC } from 'react';
+import SingleView from './singleView';
 interface Props {
   manufacturer: any;
 }
 const DisplayOrderCard: FC<Props> = ({ manufacturer }) => {
-  console.log(manufacturer);
   return (
     <>
       <div
@@ -14,7 +13,7 @@ const DisplayOrderCard: FC<Props> = ({ manufacturer }) => {
       >
         <div className="card-header with-border d-flex justify-content-between align-items-center">
           <div className="card-title row align-items-center  ps-2 pt-2">
-            <i className="bi bi-meta col-1" style={{ fontSize: "25px" }} />
+            <i className="bi bi-meta col-1" style={{ fontSize: '25px' }} />
             <div className="fs-5 col px-3 text-start">Display Orders</div>
           </div>
         </div>

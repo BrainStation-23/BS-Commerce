@@ -14,7 +14,7 @@ export class AddToWishlistRequestDto implements addToWishlistRequest {
     @IsString()
     productId: string;
 
-    @ApiProperty({ type: () => Number })
+    @ApiProperty({ type: () => Number, default: 1 })
     @IsNumber()
     @Min(1)
     quantity: number;

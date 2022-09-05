@@ -167,12 +167,11 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           <br />
                                           <Link
                                             href={{
-                                              pathname: `/product/${product?.productDetails?.info?.name}`,
-                                              query: {
-                                                id: product?.productId,
-                                                name: product?.productDetails
-                                                  ?.info?.name,
-                                              },
+                                              pathname: `/product/${product.meta.friendlyPageName}`,
+                                              // query: {
+                                              //   id: product?.id,
+                                              //   name: product?.info.name,
+                                              // },
                                             }}
                                             passHref
                                           >

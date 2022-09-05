@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { NestedCategoryList, subCategoryList } from 'models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
-import HeaderSubCategory from '@/components/global/components/headerSubCategory';
+import HeaderSubCategory from '@/components/global/layout/headerSubCategory';
 
 interface Props {
   category: NestedCategoryList;
@@ -21,9 +21,10 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
 
   return (
     <div
-      className={`group`}
-      onMouseEnter={() => setExpand(true)}
-      onMouseLeave={() => setExpand(false)}
+      className={`lg:group`}
+      /** For hover effect only in large screen */
+      onMouseEnter={() => document.body.clientWidth > 1023 &&  setExpand(true)}
+      onMouseLeave={() => document.body.clientWidth > 1023 && setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >
       <div className="flex cursor-pointer flex-row items-center justify-between py-1 px-3 text-sm transition-all duration-100 ease-linear hover:text-green-600">
@@ -67,7 +68,11 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>
                 {/* {subCategory.name} */}
-                <HeaderSubCategory category={subCategory} level={1} showSub={expand} />
+                <HeaderSubCategory
+                  category={subCategory}
+                  level={1}
+                  showSub={expand}
+                />
               </li>
             ))}
           </ul>
@@ -76,10 +81,12 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         ''
       )}
       {/* render on lg+ screen */}
-      {document.body.clientWidth > 768 && category.subCategories ? (
-        <div className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
-          expand ? 'scale-x-100' : 'scale-x-0'
-        }`}>
+      {document.body.clientWidth > 1023 && category.subCategories ? (
+        <div
+          className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+            expand ? 'scale-x-100' : 'scale-x-0'
+          }`}
+        >
           <ul className="pl-2">
             {category.subCategories?.map((subCategory: subCategoryList) => (
               <li key={subCategory.name}>

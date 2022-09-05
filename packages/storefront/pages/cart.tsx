@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (reqCookie) {
     response = await userAPI.getCart(token.token);
   }
-  //console.log(response);
   return {
     props: {
       cartProducts: response?.data?.items!,

@@ -17,8 +17,12 @@ const ProductDetails: NextPage<SingleProduct> = ({ product }) => {
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const pID = context.query.id as string;
-  const res = await userAPI.getPublicProductsById(pID);
+  //const pID = context.query.id as string;
+  //const res = await userAPI.getPublicProductsById(pID);
+
+  const pUniqueName = context?.params?.name! as string;
+  const res = await userAPI.getPublicProductByUniqueName(pUniqueName);
+
   return {
     props: {
       product: res,

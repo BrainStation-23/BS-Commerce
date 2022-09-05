@@ -1,9 +1,8 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
+import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, IsBoolean } from 'class-validator';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { CreateBrandRequest, BrandInfo, BrandMeta, CreateBrandSuccessResponse, CreateBrandErrorResponse, ErrorMessage } from 'models';
-import { Brand } from 'src/entity/brand';
 import { BrandDto } from './brandDto';
 
 import { InfoDto } from './infoDto';
@@ -11,14 +10,15 @@ import { MetaDto } from './metaDto';
 
 export class CreateBrandRequestDto implements CreateBrandRequest{
     
-    @ApiProperty()
+    @ApiProperty({ type: InfoDto })
     @IsNotEmpty()
-    @ValidateNested({ each: true })
+    @CustomValidator(InfoDto)
     @IsObject()
     info: InfoDto;
 
-    @ApiProperty()
+    @ApiProperty({ type: MetaDto })
     @IsOptional()
+    @CustomValidator(MetaDto)
     @IsObject()
     meta: MetaDto;
 

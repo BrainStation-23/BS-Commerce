@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Tag } from 'src/entity/tags';
+import { randomUUID } from 'crypto';
+import { Tag, UpdateTagRequest } from 'src/entity/tags';
 import { ITagsDatabase } from './tags.database.interface';
 
 @Injectable()
@@ -14,7 +15,12 @@ export class TagsRepository {
     return await this.db.getTag(query);
   }
 
-  async createTag(data: { name: string }): Promise<Tag | null> {
+  async createTag(data: Tag): Promise<Tag | null> {
+    data.id = randomUUID();
     return await this.db.createTag(data);
+  }
+
+  async updateTag(query: Record<string, any>, data: UpdateTagRequest): Promise<Tag | null> {
+    return await this.db.updateTag(query, data);
   }
 }

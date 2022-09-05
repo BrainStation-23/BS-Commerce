@@ -28,4 +28,8 @@ export const apiEndPoints = {
   updateCustomerAddress: `/customer/update-address`,
   deleteCustomerAddress: `/customer/delete-address`,
   customer: '/customer',
+  brands: '/brands',
+  getPublicProductByUniqueName: '/customer/product',
+  getCategoryDetails: '/category',
+  getCategoryBySlug: '/category/slug',
 };

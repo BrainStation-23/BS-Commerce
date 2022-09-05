@@ -16,4 +16,5 @@ export const apiEndPoints = {
   tags: '/tags',
   ordersList: '/admin/order/orderList',
   singleOrder: '/admin/order',
+  tag: '/tags',
 };
