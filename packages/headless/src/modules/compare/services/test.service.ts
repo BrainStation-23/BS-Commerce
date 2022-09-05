@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { GetCompareErrorEnum } from 'models';
 import { errorResponse, successResponse } from 'src/utils/response';
-import { CompareDataDto, CompareResponse } from '../dto/test.dto';
+import { CompareDataDto, CompareResponse } from '../rest/dto/test.dto';
 import { CompareRepository } from '../repositories';
 @Injectable()
 export class CompareTestService {

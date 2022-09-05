@@ -39,11 +39,11 @@ const SimilarProducts: NextComponentType = () => {
               <SwiperSlide key={product.id}>
                 <Link
                   href={{
-                    pathname: `/product/${product.info.name}`,
-                    query: {
-                      id: product.id,
-                      name: product.info.name,
-                    },
+                    pathname: `/product/${product?.meta?.friendlyPageName}`,
+                    // query: {
+                    //   id: product.id,
+                    //   name: product.info.name,
+                    // },
                   }}
                   // as={`product/${product.info.name}`}
                 >
@@ -83,12 +83,13 @@ const SimilarProducts: NextComponentType = () => {
                           <div className="py-4 text-center">
                             <Link
                               href={{
-                                pathname: `product/${product.info.name}`,
-                                query: {
-                                  id: product.id,
-                                  name: product.info.name,
-                                },
+                                pathname: `/product/${product.meta.friendlyPageName}`,
+                                // query: {
+                                //   id: product.id,
+                                //   name: product.info.name,
+                                // },
                               }}
+                              passHref
                               // as={`product/${product.info.name}`}
                             >
                               <div className="text-xl font-medium text-inherit text-gray-600">

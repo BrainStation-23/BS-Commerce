@@ -64,11 +64,11 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         <td className="border border-slate-300 text-center md:px-2 lg:px-20">
           <Link
             href={{
-              pathname: `/product/${data?.product?.info.name}`,
-              query: {
-                id: data?.product?.id,
-                name: data?.product?.info.name,
-              },
+              pathname: `/product/${data?.product?.meta?.friendlyPageName}`,
+              // query: {
+              //   id: data?.product?.id,
+              //   name: data?.product?.info.name,
+              // },
             }}
             passHref
           >

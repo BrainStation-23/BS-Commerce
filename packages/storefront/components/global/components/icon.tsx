@@ -230,7 +230,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               />
             </svg>
             <div
-              className={`absolute left-6  ${inWishlist ? '-top-10' : '-top-6'} mb-6 hidden flex-col items-center peer-hover:flex`}
+              className={`absolute left-6 ${
+                inWishlist ? '-top-10' : '-top-6'
+              }  mb-6 hidden flex-col items-center peer-hover:flex`}
             >
               <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
                 {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}

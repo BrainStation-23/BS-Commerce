@@ -5,10 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
-import Footer from '@/components/global/components/footer';
-import Header from '@/components/global/components/header';
+import Footer from '@/components/global/layout/footer';
+import Header from '@/components/global/layout/header';
 import Viewport from '@/components/viewport';
-import { XCircleIcon } from './global/components/headerIcons';
+import { XCircleIcon } from './global/layout/headerIcons';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {

@@ -50,6 +50,11 @@ export const SidebarData: ISidebarData[] = [
         icon: SubMenuIcon,
       },
       {
+        name: 'Tags',
+        to: '/tags',
+        icon: SubMenuIcon,
+      },
+      {
         name: 'Brands',
         to: '/Brands',
         icon: SubMenuIcon,

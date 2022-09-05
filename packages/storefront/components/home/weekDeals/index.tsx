@@ -40,11 +40,11 @@ const WeekDeals: NextComponentType = () => {
               <SwiperSlide key={product.id}>
                 <Link
                   href={{
-                    pathname: `product/${product.info.name}`,
-                    query: {
-                      id: product.id,
-                      name: product.info.name,
-                    },
+                    pathname: `/product/${product.meta.friendlyPageName}`,
+                    // query: {
+                    //   id: product.id,
+                    //   name: product.info.name,
+                    // },
                   }}
                   // as={`product/${product.info.name}`}
                 >
@@ -84,11 +84,11 @@ const WeekDeals: NextComponentType = () => {
                           <div className="py-4 text-center">
                             <Link
                               href={{
-                                pathname: `product/${product.info.name}`,
-                                query: {
-                                  id: product.id,
-                                  name: product.info.name,
-                                },
+                                pathname: `/product/${product.meta.friendlyPageName}`,
+                                // query: {
+                                //   id: product.id,
+                                //   name: product.info.name,
+                                // },
                               }}
                               // as={`product/${product.info.name}`}
                             >

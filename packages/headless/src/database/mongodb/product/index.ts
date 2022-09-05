@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import { Tag } from 'src/entity/tags';
 import { IProductDatabase } from 'src/modules/product/repositories/product.database.interface';
 import { CategoryModel } from '../category/category.model';
+import { OrderModel } from '../order/order.model';
+import { TagsModel } from '../tags/tags.model';
 import { ProductModel } from './product.model';
 
 @Injectable()
@@ -15,8 +18,12 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.create(product);
   }
 
-  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id').sort({ createdAt: -1 }).skip(skip).limit(limit).lean();
+  async findAllProducts(query: Record<string, any>, skip?: number, limit?: number, price?: Partial<SearchCondition>, orderBy?: string,): Promise<Product[] | []> {
+    const sort: any = { 'info.price': orderBy, createdAt: -1 };
+    return await ProductModel.find({
+      ...query,
+      'info.price': { $gte: price?.minPrice || 0, $lte: price?.maxPrice || Number.MAX_SAFE_INTEGER }
+    }, '-_id').sort(sort).skip(skip).limit(limit).lean();
   }
 
   async getAllConditionalProducts(query: Record<string, any>, price: Partial<SearchCondition>, slug: string, orderBy: 'asc' | 'desc', skip?: number, limit?: number): Promise<Product[] | []> {
@@ -54,5 +61,46 @@ export class ProductDatabase implements IProductDatabase {
 
   async getProductsList(skip: number, limit: number, query?: Record<string, any>, sortCondition?: string): Promise<Product[] | []> {
     return await ProductModel.find(query, '-_id').sort(sortCondition).skip(skip).limit(limit).lean();
+  }
+
+  async getTag(query: Record<string, any>): Promise<Tag[]> {
+    return await TagsModel.findOne(query).select('-_id').lean();
+  }
+
+  async getTopSellingProducts(skip: number, limit: number): Promise<Product[] | []> {
+    const orderArray = await OrderModel.aggregate([
+      { $unwind: "$products" },
+      {
+        '$match': {
+          'orderedDate': {
+            '$gte': new Date(Date.now() - 7 * 60 * 60 * 24 * 1000)
+          }
+        }
+      },
+      {
+        $group:
+        {
+          _id: "$products.id",
+          totalOrderQuantity:
+          {
+            $sum: "$products.info.quantity"
+          }
+        }
+      },
+      {
+        '$match': {
+          totalOrderQuantity: {
+            '$gte': 5
+          }
+        }
+      },
+      { $sort: { totalOrderQuantity: -1 } }
+    ]);
+
+    let productsIds = orderArray.map(function (item) {
+      return item._id
+    });
+
+    return await ProductModel.find({ id: { $in: productsIds } }).skip(skip).limit(limit).lean();
   }
 }

@@ -27,16 +27,16 @@ const BackToTopButton = () => {
           style={{
             position: 'fixed',
             bottom: '20px',
-            right: '20px',
+            right: '30px',
             height: '50px',
             width: '50px',
-            fontSize: '50px',
+            fontSize: '60px',
           }}
           onClick={scrollUp}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12 rounded-full bg-white "
+            className="bg-green h-9 w-10 rounded-full "
             viewBox="0 0 20 20"
             fill="#40a944"
           >
