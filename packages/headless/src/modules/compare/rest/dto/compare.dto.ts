@@ -1,12 +1,17 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsArray, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,
   CompareErrorResponse,
   CompareSuccessResponse,
   DescriptiveError,
+  IProductInfo,
+  IProductMeta,
+  IProductDetails,
+  ComparePublicSuccessResponse,
+  ComparePublicErrorResponse
 } from 'models';
 import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
 
@@ -18,7 +23,7 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class ProductInfo {
+export class ProductInfo implements IProductInfo{
   @ApiProperty()
   name: string;
   @ApiProperty()
@@ -26,11 +31,22 @@ export class ProductInfo {
   @ApiProperty()
   shortDescription: string;
   @ApiProperty()
+  oldPrice: number;
+  @ApiProperty()
   fullDescription: string;
 }
-export class ProductDetails {
-  @ApiProperty({ type: () => [ProductInfo] })
+
+export class ProductMeta implements IProductMeta {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  friendlyPageName?: string;
+}
+export class ProductDetails implements IProductDetails{
+  @ApiProperty()
   info: ProductInfo;
+
+  @ApiProperty()
+  meta: ProductMeta;
 
   @ApiProperty()
   photos: string[];
@@ -53,7 +69,6 @@ export class CompareDataDto implements CompareData {
   @ApiProperty({ type: () => [CompareItemsDetails] })
   items: CompareItemsDetails[];
 }
-
 export class CompareSuccessResponseDto implements CompareSuccessResponse {
   @ApiProperty({ default: HttpStatus.OK })
   code: number;
@@ -61,6 +76,12 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
   data: CompareDataDto;
 }
 
+export class ComparePublicSuccessResponseDto implements ComparePublicSuccessResponse{
+  @ApiProperty({ default: HttpStatus.OK })
+  code: number;
+  @ApiProperty({ type: () => [CompareItemsDetails] })
+  data: CompareItemsDetails[];
+}
 export class CompareErrorResponseDto implements CompareErrorResponse {
   @ApiProperty()
   code?: number;
@@ -79,4 +100,15 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
   errors: DescriptiveError;
 }
 
+export class ComparePublicErrorResponseDto implements ComparePublicErrorResponse {
+  @ApiProperty()
+  code?: number;
+  @ApiProperty({ example: AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING })
+  error: AddProductToCompareErrorEnum;
+  @ApiProperty()
+  errors: DescriptiveError;
+}
+
 export type CompareResponse = CompareSuccessResponseDto | CompareErrorResponseDto;
+
+export type ComparePublicResponse = ComparePublicSuccessResponseDto | ComparePublicErrorResponseDto;
