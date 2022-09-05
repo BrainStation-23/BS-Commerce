@@ -24,6 +24,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
 import CartToast from '../global/components/cartToast';
+import { ICompareItems } from 'models';
 interface SingleProduct {
   product: Product;
 }
@@ -56,6 +57,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.auth.access_token
   );
 
+  const compareProducts = useAppSelector(
+    (state) => state.persistedReducer.compare.compareList.items
+  );
+
+  const inCompareList = compareProducts.find(
+    (compareProduct: ICompareItems) => compareProduct.productId === product.id
+  );
+
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -77,16 +86,20 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   const handleAddToCompare = async () => {
     if (token) {
-      try {
-        const res = await userAPI.addToCompare(product?.id!);
-        if ('data' in res!) {
-          dispatch(setModalState(!modalCmp));
-          dispatch(storeCompare(res.data));
+      if (inCompareList) {
+        dispatch(setModalState(!modalCmp));
+      } else {
+        try {
+          const res = await userAPI.addToCompare(product?.id!);
+          if ('data' in res!) {
+            dispatch(setModalState(!modalCmp));
+            dispatch(storeCompare(res.data));
+          }
+        } catch (error) {
+          toast.error('Error happend.', {
+            containerId: 'bottom-right',
+          });
         }
-      } catch (error) {
-        toast.error('Error happend.', {
-          containerId: 'bottom-right',
-        });
       }
     } else {
       dispatch(setLoginModalState(!modalOn));
@@ -475,7 +488,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                         handleAddToCompare();
                       }}
                     >
-                      + Compare
+                      {inCompareList ? '+ Show in compare list' : '+ Compare'}
                     </button>
                   </div>
                   {/* <div>
