@@ -76,20 +76,20 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
             </div>
           </div>
           <div>
-            {singleOrder?.paymentMethod.toLowerCase() !== 'cash on delivery' ? (
-              <div className="grid w-full grid-cols-2">
-                <div>
-                  <p className="text-[#7c827f]">Card No.</p>
-                </div>
-                <div>
-                  <p className="ml-4 text-black">
-                    : {singleOrder?.paymentMethod}
-                  </p>
-                </div>
+            <div className="grid w-full grid-cols-2">
+              <div>
+                <p className="text-[#7c827f]">Card No.</p>
               </div>
-            ) : (
-              ''
-            )}
+              <div>
+                <p className="ml-4 text-black">
+                  :{' '}
+                  {singleOrder?.paymentMethod.toLowerCase() !==
+                  'cash on delivery'
+                    ? `${singleOrder?.paymentMethod}` //need to change
+                    : 'N/A'}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
