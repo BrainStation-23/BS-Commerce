@@ -54,7 +54,7 @@ const SingleAddressDetails: NextComponentType = () => {
           <p className="cursor-pointer text-sm">Details</p>
         </div>
 
-        <div className="mt-5 w-1/2 rounded-lg border">
+        <div className="mt-5 rounded-lg border md:w-1/2">
           <SingleAddressDetailsTable
             label="Address Line"
             text={singleAddress?.addressLine1}
