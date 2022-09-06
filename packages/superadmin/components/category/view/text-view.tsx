@@ -5,8 +5,6 @@ interface Props {
 }
 
 const TextView: React.FC<Props> = ({ label, text, value }: Props) => {
-  console.log(value);
-
   return (
     <div className="w-100">
       <div className="row justify-content-center align-items-center">

@@ -54,22 +54,23 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
-  OrderResponseData,
-  SendOtpResponse,
   GetAllBrandsResponse,
   getCategoryResponse,
   getCategorySuccessResponse,
   getCategoryBySlugResponse,
   getCategoryBySlugSuccessResponse,
+  OrderResponseData,
+  SendOtpResponse,
+  CompareSuccessResponse,
   IProductSearchResponse,
   GetCustomerProductSuccessResponse,
+  GetCustomerProductByURLResponse,
+  GetCustomerProductByURLSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { GetCustomerProductByURLResponse } from 'models';
-import { GetCustomerProductByURLSuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -280,7 +281,7 @@ export async function addToCompareRest(
         headers: { 'Content-Type': 'application/json' },
       }
     );
-    return res.data.data;
+    return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -329,10 +330,17 @@ export async function deleteFullWishlistRest(): Promise<
   }
 }
 
-export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(
-    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
-  );
+export async function deleteFromCompareRest(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+   const res = await axios.delete(
+      `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+    );
+    return res.data as CompareSuccessResponse
+  } catch (error: any) {
+    return error;
+  }
 }
 
 export async function getCustomerProfileRest(
