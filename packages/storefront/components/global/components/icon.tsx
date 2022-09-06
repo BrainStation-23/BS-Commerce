@@ -37,22 +37,22 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const [choice, setChoice] = useState(false);
 
   const token = useAppSelector(
-    (state) => state.persistedReducer.auth.access_token
+    (state) => state?.persistedReducer.auth.access_token
   );
 
   const wishlistData = useAppSelector(
-    (state) => state.persistedReducer.product.wishlist.items
+    (state) => state?.persistedReducer.product.wishlist.items
   );
 
   const cartData = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
+    (state) => state?.persistedReducer.cart.allCartItems
   );
 
   const compareItems = useAppSelector(
     (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
-  const inCompareList = compareItems.find(
+  const inCompareList = compareItems?.find(
     (item: ICompareItems) => item.productId === product?.id
   )
     ? true
