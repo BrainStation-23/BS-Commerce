@@ -8,6 +8,7 @@ import { userAPI } from 'APIs';
 
 import {
   CustomerProduct,
+  IProductSearchSchema,
   Product,
   WishlistItem,
   WishlistProduct,
@@ -138,7 +139,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     <>
       <div className="rounded-full bg-white p-2 text-center drop-shadow-md">
         {/* <Link href="/" passHref> */}
-        <span className=""  id='addToCartIconID'>
+        <span className="" id="addToCartIconID">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={productInCart ? btnClassFilled : btnClass}
@@ -239,7 +240,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as Product));
+                dispatch(storeProductsToCompare(product as CustomerProduct));
                 event.preventDefault();
               }}
             >

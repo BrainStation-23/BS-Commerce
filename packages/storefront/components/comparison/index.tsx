@@ -133,14 +133,19 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                     <React.Fragment key={product.id}>
                                       <td className="border-r p-5  align-top font-normal">
                                         <div>
-                                          <Image
-                                            src={product?.photos![0]?.url!}
-                                            alt={product?.info?.name}
-                                            height={100}
-                                            width={100}
-                                            // className="m-auto"
-                                            layout="fixed"
-                                          />
+                                          {product?.photos![0]?.url ? (
+                                            <Image
+                                              src={product?.photos![0]?.url!}
+                                              alt={product?.info?.name}
+                                              height={100}
+                                              width={100}
+                                              // className="m-auto"
+                                              layout="fixed"
+                                            />
+                                          ) : (
+                                            'Problem Rendering Image'
+                                          )}
+
                                           <br />
                                           {product?.info?.oldPrice ? (
                                             <>

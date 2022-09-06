@@ -14,6 +14,7 @@ const SearchComponent: NextComponentType = () => {
   const [searchText, setSearchText] = useState(
     navSearchText ? navSearchText : ''
   );
+  const [totalProducts, setTotalProducts] = useState(0);
   const onProductSearch = () => {
     setSearchText(
       (document.getElementById('productSearchInput') as HTMLInputElement).value
@@ -30,14 +31,32 @@ const SearchComponent: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Search: 4 results found"
-        pathArray={['Home', 'Search: 4 results found']}
+        title={`${
+          searchText.length > 0
+            ? `Search: ${totalProducts} results found`
+            : 'Search'
+        }`}
+        pathArray={[
+          'Home',
+          `${
+            searchText.length > 0
+              ? `Search: ${totalProducts} results found`
+              : 'Search'
+          }`,
+        ]}
         linkArray={['/', '/search']}
       />
       <div className="container mx-auto px-4 tracking-wider">
         <h4 className="title-font mt-16 mb-1 text-center text-sm  font-normal text-gray-900">
-          Your search for <strong className="highlight">{searchText}</strong>{' '}
-          revealed the following:
+          {searchText ? (
+            <>
+              Your search for{' '}
+              <strong className="highlight">{searchText}</strong> revealed the
+              following:
+            </>
+          ) : (
+            'Search for products on our site'
+          )}
         </h4>
 
         <div className="mt-5 flex justify-center">
@@ -47,7 +66,7 @@ const SearchComponent: NextComponentType = () => {
                 type="search"
                 id="productSearchInput"
                 className="form-control relative m-0 block w-full min-w-0 flex-auto rounded-3xl border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
-                placeholder="Search"
+                placeholder="Search our Store"
                 onChange={() => onProductSearch()}
               />
               <button
@@ -61,7 +80,10 @@ const SearchComponent: NextComponentType = () => {
           </div>
         </div>
         <div className="mx-auto">
-          <SearchItem searchText={searchText} />
+          <SearchItem
+            searchText={searchText}
+            setTotalProducts={setTotalProducts}
+          />
         </div>
       </div>
     </>
