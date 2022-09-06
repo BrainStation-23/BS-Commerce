@@ -9,7 +9,6 @@ const SearchComponent: NextComponentType = () => {
     'navSearchInput'
   ) as HTMLInputElement;
   const navSearchText = navSearchInput?.value;
-  navSearchInput?.value ? (navSearchInput.value = '') : '';
 
   const [searchText, setSearchText] = useState(
     navSearchText ? navSearchText : ''
@@ -26,6 +25,7 @@ const SearchComponent: NextComponentType = () => {
       (
         document.getElementById('productSearchInput') as HTMLInputElement
       ).value = navSearchText;
+      navSearchInput?.value ? (navSearchInput.value = '') : '';
     }
   }, [searchText, navSearchText]);
   return (

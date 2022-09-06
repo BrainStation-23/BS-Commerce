@@ -12,10 +12,10 @@ const Search: React.FC<Properties> = (props) => {
   };
   return (
     <div
-      className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
+      className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm overflow-hidden`}
     >
       <input
-        className="ml-4 w-full bg-white focus:outline-none"
+        className="pl-4 w-full bg-white focus:outline-none py-4"
         type="search"
         name="search"
         placeholder={`${props.placeholder}`}
