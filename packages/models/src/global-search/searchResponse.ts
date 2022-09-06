@@ -34,7 +34,12 @@ export interface IProductSearchSchema {
 }
 
 export interface IProductSearchResponse {
+	totalItemsFound?: number,
+	pageNumber?: number,
+	limit?: number,
+	products: IProductSearchSchema[];
+}
+export interface IProductSearchSuggestionResponse{
 	resultsCount: number;
-	values: IProductSearchSchema[];
-	suggestion: string[];
+	values: string[];
 }
