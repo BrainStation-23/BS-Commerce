@@ -12,7 +12,7 @@ import { MediaModule } from 'src/modules/media/media.graphql.module';
 import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
 import { TagsModule } from 'src/modules/tags/tags.graphql.module';
 import { CustomerModule } from 'src/modules/customer/customer.graphql.module';
-import { OrderModule } from 'src/modules/order/order.customer.graphql.module';
+import { OrderModule } from 'src/modules/order/order.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
