@@ -1,5 +1,6 @@
 import {
   CustomerSignInResponse,
+  OrderResponseData,
   getCategoryResponse,
   GetAllBrandsResponse,
   OrderResponseData,
@@ -125,7 +126,7 @@ export interface apiFunction {
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
   addToCompare: (productId: string) => Promise<CompareResponse | undefined>;
-  deleteFromCompare: (productId: string) => {};
+  deleteFromCompare: (productId: string) =>Promise<CompareResponse | undefined>;
   getCustomerProfile: (
     token: string
   ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
