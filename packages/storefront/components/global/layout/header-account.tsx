@@ -26,7 +26,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const [modalCmp, setModalCmp] = useState(false);
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.productsToCompare
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const showCartDropDown = () => {
