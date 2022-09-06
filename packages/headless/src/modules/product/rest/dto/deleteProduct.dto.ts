@@ -7,7 +7,7 @@ import {
     DeleteProductErrorResponse,
     DeleteProductSuccessResponse,
     DeleteProductSuccessMessage,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class DeleteProductParamsDto implements DeleteProductParams {
     @ApiProperty()

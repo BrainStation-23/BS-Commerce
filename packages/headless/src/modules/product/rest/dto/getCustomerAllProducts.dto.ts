@@ -7,7 +7,7 @@ import {
     GetCustomerAllProductsErrorResponse,
     GetCustomerAllProductsSuccessResponse,
     GetCustomerAllProductsResponseType,
-} from 'models';
+} from 'bs-commerce-models';
 import { Type } from 'class-transformer';
 import { CustomerProductDto } from './customerProduct.dto';
 

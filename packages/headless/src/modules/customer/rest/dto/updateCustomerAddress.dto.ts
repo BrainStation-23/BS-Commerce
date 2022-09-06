@@ -6,7 +6,7 @@ import {
     UpdateCustomerAddressSuccessResponse,
     UpdateCustomerAddressErrorMessages,
     UpdateCustomerAddressParams,
-} from 'models';
+} from 'bs-commerce-models';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class UpdateCustomerAddressParamsDto implements UpdateCustomerAddressParams {

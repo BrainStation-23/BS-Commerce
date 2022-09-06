@@ -6,7 +6,7 @@ import {
     GetCustomerQuery,
     GetCustomerSuccessResponse,
     GetCustomerErrorMessages,
-} from 'models';
+} from 'bs-commerce-models';
 import { CustomerDto } from './customer.dto';
 
 export class GetCustomerQueryDto implements GetCustomerQuery {

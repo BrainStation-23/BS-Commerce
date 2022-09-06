@@ -7,7 +7,7 @@ import {
     VerifyOtpSuccessResponse,
     VerifyOtpErrorMessages,
     VerifyOtpSuccessMessages,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class VerifyOtpDto implements VerifyOtpRequest {
     @ApiProperty({ required: false })

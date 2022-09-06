@@ -7,7 +7,7 @@ import {
     ProductCategory,
     ProductManufacturer,
     Product,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class ProductInfoDto implements ProductInfo {
     @ApiProperty({ required: true })

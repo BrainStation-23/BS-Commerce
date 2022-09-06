@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
-import type { CustomerAddress, Customer } from 'models';
+import type { CustomerAddress, Customer } from 'bs-commerce-models';
 
 export class CustomerAddressDto implements CustomerAddress {
     @ApiProperty({ required: true })

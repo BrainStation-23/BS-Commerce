@@ -5,7 +5,7 @@ import {
     GetCustomerInformationErrorResponse,
     GetCustomerInformationSuccessResponse,
     GetCustomerInformationErrorMessages
-} from 'models';
+} from 'bs-commerce-models';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class GetCustomerInformationErrorResponseDto implements GetCustomerInformationErrorResponse {

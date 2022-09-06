@@ -7,7 +7,7 @@ import {
     CreateTagErrorResponse,
     CreateTagErrorMessages,
     CreateTagSuccessResponse,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class CreateTagRequestBodyDto implements CreateTagRequestBody {
     @ApiProperty({ required: true })

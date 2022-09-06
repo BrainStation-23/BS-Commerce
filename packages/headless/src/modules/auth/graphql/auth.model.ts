@@ -5,7 +5,7 @@ import {
   SignInRequest,
   Token,
   SignInErrorMessages,
-} from 'models';
+} from 'bs-commerce-models';
 
 @InputType()
 export class AdminSignUpInput implements CreateUserRequest {

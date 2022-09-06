@@ -14,7 +14,7 @@ import {
     CreateProductErrorResponse,
     CreateProductErrorMessages,
     CreateProductSuccessResponse,
-} from 'models';
+} from 'bs-commerce-models';
 import { Type } from 'class-transformer';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 

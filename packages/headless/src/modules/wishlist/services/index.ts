@@ -17,7 +17,7 @@ import {
   deleteWishlistItemErrorMessage,
   updateWishlistItemErrorMessage,
   updateWishlistItemResponse,
-} from 'models';
+} from 'bs-commerce-models';
 
 @Injectable()
 export class WishListService {

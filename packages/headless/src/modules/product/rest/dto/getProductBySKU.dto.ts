@@ -6,7 +6,7 @@ import {
     GetProductBySKUErrorMessages,
     GetProductBySKUErrorResponse,
     GetProductBySKUSuccessResponse,
-} from 'models';
+} from 'bs-commerce-models';
 import { ProductDto } from '.';
 
 export class GetProductBySKUParamsDto implements GetProductBySKUParams {

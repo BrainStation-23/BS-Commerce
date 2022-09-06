@@ -8,7 +8,7 @@ import {
   SendOtpRequest,
   VerifyOtpRequest,
   CustomerForgotPasswordRequest,
-} from 'models';
+} from 'bs-commerce-models';
 
 @ObjectType()
 export class AuthCustomer implements Customer {

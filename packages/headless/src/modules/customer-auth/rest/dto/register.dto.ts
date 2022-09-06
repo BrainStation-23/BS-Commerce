@@ -7,7 +7,7 @@ import {
     CreateCustomerSuccessResponse,
     CreateCustomerErrorMessages,
     CreateCustomerSuccessMessages,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class CreateCustomerDto implements CreateCustomerRequest {
     @ApiProperty({ required: false })

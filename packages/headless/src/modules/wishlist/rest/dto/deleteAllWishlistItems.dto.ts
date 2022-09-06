@@ -5,7 +5,7 @@ import {
     deleteAllWishlistItemsSuccessResponse,
     deleteAllWishlistItemsErrorMessage,
     deleteAllWishlistItemsSuccessMessage,
-} from 'models';
+} from 'bs-commerce-models';
 
 class DeleteAllWishlistItemsSuccessMessage {
     @ApiProperty({ example: deleteAllWishlistItemsSuccessMessage.WISHLIST_ITEMS_DELETED_SUCCESSFUL })

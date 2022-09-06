@@ -7,7 +7,7 @@ import {
     SignInSuccessResponse,
     Token,
     SignInErrorMessages
-} from 'models';
+} from 'bs-commerce-models';
 
 export class SignInDataDto implements SignInRequest {
     @ApiProperty()

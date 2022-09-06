@@ -25,7 +25,7 @@ import {
   VerifyOtpResponse,
   VerifyOtpErrorMessages,
   VerifyOtpSuccessMessages,
-} from 'models';
+} from 'bs-commerce-models';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
 import { Customer } from 'src/entity/customer';

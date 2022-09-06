@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Address, User } from 'models';
+import { Address, User } from 'bs-commerce-models';
 
 const AddressSchema = new Schema<Address>({
   id: {

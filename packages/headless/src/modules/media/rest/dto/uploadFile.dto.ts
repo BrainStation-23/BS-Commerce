@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject } from 'class-validator';
-import { UploadFileErrorMessages, UploadFileErrorResponse, UploadFileSuccessResponse } from 'models';
+import { UploadFileErrorMessages, UploadFileErrorResponse, UploadFileSuccessResponse } from 'bs-commerce-models';
 
 
 export class UploadFileErrorResponseDto implements UploadFileErrorResponse {

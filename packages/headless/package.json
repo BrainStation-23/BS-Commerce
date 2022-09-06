@@ -41,6 +41,7 @@
     "@types/sequelize": "^4.28.13",
     "apollo-server": "^3.6.7",
     "bcrypt": "^5.0.1",
+    "bs-commerce-models": "^2.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Customer } from 'models';
+import { Customer } from 'bs-commerce-models';
 
 export class CustomerDto implements Customer {
     @ApiProperty()

@@ -6,7 +6,7 @@ import {
     deleteWishlistErrorMessage,
     DeleteWishlistParams,
     deleteWishlistSuccessMessage,
-} from 'models';
+} from 'bs-commerce-models';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class deleteWishlistPramsDto implements DeleteWishlistParams {

@@ -13,7 +13,7 @@ import {
     UpdateCustomerRequestBody,
     UpdateCustomerResponse,
     UpdateCustomerErrorMessages,
-} from 'models';
+} from 'bs-commerce-models';
 import { CustomerAddress } from 'src/entity/customer';
 
 @Injectable()

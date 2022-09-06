@@ -12,7 +12,7 @@ import {
     ChangePasswordErrorMessages,
     ChangePasswordSuccessMessage,
     UpdatedUserRequest,
-} from 'models';
+} from 'bs-commerce-models';
 import { ChangePassword } from 'src/entity/user';
 
 @Injectable()

@@ -9,7 +9,7 @@ import {
     UpdateUserErrorResponse,
     UpdateUserSuccessResponse,
     UpdateUserErrorMessages
-} from 'models';
+} from 'bs-commerce-models';
 
 export class UpdatedUserDto implements UpdatedUserRequest {
     @ApiProperty({ required: false })

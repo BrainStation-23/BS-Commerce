@@ -15,7 +15,7 @@ import {
     UpdateProductCategory,
     UpdateProductManufacturer,
     UpdateProductParams,
-} from 'models';
+} from 'bs-commerce-models';
 
 export class UpdateProductParamsDto implements UpdateProductParams {
     @ApiProperty()

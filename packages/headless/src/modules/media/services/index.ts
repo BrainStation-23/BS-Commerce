@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { coreConfig } from 'config/core';
-import { UploadFileErrorMessages, UploadFileResponse } from 'models';
+import { UploadFileErrorMessages, UploadFileResponse } from 'bs-commerce-models';
 import { Helper } from 'src/helper/helper.interface';
 
 @Injectable()
