@@ -15,29 +15,29 @@ export interface OrderStat{
     allTimeTotal: number
 }
 
-export interface OrderStatusEnumModel {
+export interface OrderStatusTypes {
     Pending: string;
     Processing: string;
     Completed: string;
     Cancelled: string;
 }
 
-export interface PaymentStatusEnumModel {
+export interface PaymentStatusTypes {
     Pending: string;
     Paid: string;
     Cancelled: string;
 }
 
-export interface ShippingStatusEnumModel {
+export interface ShippingStatusTypes {
     NotYetShipped: string;
     PartiallyShipped: string;
     Shipped: string;
     Delivered: string;
 }
 export interface OrderStatusModel {
-    orderStatusEnums: OrderStatusEnumModel;
-    paymentStatusEnums: PaymentStatusEnumModel;
-    shippingStatusEnum: ShippingStatusEnumModel;
+    orderStatusEnums: OrderStatusTypes;
+    paymentStatusEnums: PaymentStatusTypes;
+    shippingStatusEnum: ShippingStatusTypes;
 }
 
 export interface ChangeStatusModel { 

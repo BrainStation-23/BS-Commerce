@@ -6,8 +6,7 @@ import {
     OrderIncompleteStatResponse, 
     OrderListResponse,  
     OrderStatResponse,  
-    StatusEnumModel,
-    StatusEnumResponse
+    StatusTypesResponse
 } from './order.admin.model';
 
 import { User as UserInfo } from 'src/decorators/auth.decorator';
@@ -20,7 +19,7 @@ import { SingleOrderResponse } from './order.customer.model';
 export class AdminOrderResolver {
     constructor(private orderAdminService: OrderAdminService){}
 
-    @Query(returns => StatusEnumResponse)
+    @Query(returns => StatusTypesResponse)
     async getOrderEnums(){
         return await this.orderAdminService.getOrderEnums();
     }

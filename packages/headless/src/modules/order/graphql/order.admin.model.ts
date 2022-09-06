@@ -3,17 +3,17 @@ import {
     GetAllOrderQuery, 
     OrderIncompleteStat, 
     OrderStat, 
-    OrderStatusEnumModel, 
-    PaymentStatusEnumModel, 
-    ShippingStatusEnumModel, 
+    OrderStatusTypes, 
+    PaymentStatusTypes, 
+    ShippingStatusTypes, 
     OrderStatusModel,
     ChangeStatusModel
 } from "models";
 
 import { OrderResponse } from "./order.customer.model";
 
-@ObjectType({description: 'Order Status Enum Model'})
-export class OrderStatusEnum implements OrderStatusEnumModel{
+@ObjectType({description: 'Order Status Types Model'})
+export class OrderStatusTypesModel implements OrderStatusTypes{
     @Field(type => String)
     Pending: string;
 
@@ -26,8 +26,8 @@ export class OrderStatusEnum implements OrderStatusEnumModel{
     @Field(type => String)
     Cancelled: string;
 }
-@ObjectType({description: 'Payment Status Enum Model'})
-export class PaymentStatusEnum implements PaymentStatusEnumModel{
+@ObjectType({description: 'Payment Status Types Model'})
+export class PaymentStatusTypesModel implements PaymentStatusTypes{
     @Field(type => String)
     Pending: string;
 
@@ -38,8 +38,8 @@ export class PaymentStatusEnum implements PaymentStatusEnumModel{
     Cancelled: string;
 }
 
-@ObjectType({description: 'Shipment Status Enum Model'})
-export class ShippingStatusEnum implements ShippingStatusEnumModel{
+@ObjectType({description: 'Shipment Status Types Model'})
+export class ShippingStatusTypesModel implements ShippingStatusTypes{
     @Field(type => String)
     NotYetShipped: string;
 
@@ -53,27 +53,27 @@ export class ShippingStatusEnum implements ShippingStatusEnumModel{
     Delivered: string;
 }
 @ObjectType({description: 'Order Status Criterias Response'})
-export class StatusEnumModel implements OrderStatusModel{
-    @Field(type => OrderStatusEnum)
-    orderStatusEnums: OrderStatusEnum;
+export class StatusTypesModel implements OrderStatusModel{
+    @Field(type => OrderStatusTypesModel)
+    orderStatusEnums: OrderStatusTypesModel;
 
-    @Field(type => PaymentStatusEnum)
-    paymentStatusEnums: PaymentStatusEnum;
+    @Field(type => PaymentStatusTypesModel)
+    paymentStatusEnums: PaymentStatusTypesModel;
 
-    @Field(type => ShippingStatusEnum)
-    shippingStatusEnum: ShippingStatusEnum;
+    @Field(type => ShippingStatusTypesModel)
+    shippingStatusEnum: ShippingStatusTypesModel;
 }
 
 @ObjectType({description: 'All Status Enum Response'})
-export class StatusEnumResponse {
+export class StatusTypesResponse {
     @Field()
     error?: string;
     
     @Field(type=> Int, { nullable: false })
     code: number;
 
-    @Field(type => StatusEnumModel, { nullable: false })
-    data: StatusEnumModel;
+    @Field(type => StatusTypesModel, { nullable: false })
+    data: StatusTypesModel;
 }
 @ObjectType({description: 'Order Status Fields'})
 export class OrderStatModel implements OrderStat {
