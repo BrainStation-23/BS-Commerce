@@ -49,7 +49,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   );
 
   const compareItems = useAppSelector(
-    (state) => state?.persistedReducer?.compare.compareList.items
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const inCompareList = compareItems.find(

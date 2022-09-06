@@ -58,7 +58,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   );
 
   const compareProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.compareList.items
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const inCompareList = compareProducts.find(
