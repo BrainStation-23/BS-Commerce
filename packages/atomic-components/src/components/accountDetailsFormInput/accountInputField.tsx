@@ -1,32 +1,34 @@
 import { Field, Form, Formik } from "formik";
 
-export interface InputFieldProp {
+export interface AccountInputFieldProp {
   type: string;
   id: string;
   label?: string;
   placeholder?: string;
+  verified?: boolean;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const InputField: React.FC<InputFieldProp> = ({
+export const AccountInputField: React.FC<AccountInputFieldProp> = ({
   type,
   id,
   label,
   placeholder,
+  verified,
 }) => {
   return (
     <>
-      <label htmlFor={id} className="text-sm">
+      <label htmlFor={id} className="my-auto w-1/3 font-semibold">
         {label}
       </label>
-      <br />
       <input
         type={type}
-        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+        className="rounded-0 form-control w-2/3 border-0 border-b p-2 outline-0"
         id={id}
         name={id}
+        disabled={verified ? true : false}
         placeholder={placeholder}
       />
     </>
