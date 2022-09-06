@@ -61,7 +61,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
-  const inCompareList = compareProducts.find(
+  const inCompareList = compareProducts?.find(
     (compareProduct: ICompareItems) => compareProduct.productId === product.id
   );
 
