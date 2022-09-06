@@ -13,10 +13,10 @@ export class SearchController{
 
     @ApiQuery({name:'q', description:"search query", example:"apple"})
     @ApiQuery({name:'pageNumber', required: false, example:"1"})
-    @ApiQuery({name:'limit', required:false, example:"10"})
+    @ApiQuery({name:'limit', required:false, example:"20"})
     @Get()
-    async search(@Query('q') q: string, @Query('pageNumber') pageNumber:number, @Query('limit') limit:number, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<ISearchProductResponse>>{
-        const { code, ...response } = await this.elasticService.search(q, pageNumber, limit) 
+    async search(@Query('q') q: string, @Query('pageNumber') pageNumber: string, @Query('limit') limit: string, @Res({ passthrough: true }) res: Response): Promise<IServiceResponse<ISearchProductResponse>>{
+        const { code, ...response } = await this.elasticService.search(q, parseInt(pageNumber, 10), parseInt(limit, 10)) 
         res.status(code);
         return { code, ...response };
     }

@@ -44,7 +44,7 @@ async deleteSingleByElasticId(id: string): Promise<number> {
   /**
    * global product search - public api 
    */
-  async search(keyword: string, pageNumber=1, limit=10): Promise<IServiceResponse<ISearchProductResponse>>{
+  async search(keyword: string, pageNumber=1, limit=20): Promise<IServiceResponse<ISearchProductResponse>>{
     const result = await this.esHelperService.getProductSearchData(keyword, pageNumber, limit )
     if(!result){
       return errorResponse("Error while searching", null, HttpStatus.CONFLICT)

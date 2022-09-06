@@ -55,7 +55,8 @@ export class ElasticHelperService {
         return data;
     } 
 
-    async getProductSearchData(searchKey, pageNumber=1, limit=10): Promise<ISearchProductResponse> { 
+    async getProductSearchData(searchKey, pageNumber=1, limit=20): Promise<ISearchProductResponse> {
+        limit = limit > 30 ? 30 : limit
         const query = {  
           query: {
             bool:{
@@ -69,24 +70,27 @@ export class ElasticHelperService {
           }
         }
       
+        console.log(limit)
         let startTime = Date.now()
         const { body: { hits } } = await this.esService.search({
           from:  (pageNumber-1)*limit  || 0,
-          size:  limit || 30,
+          size:  limit,
           index: 'products', 
           type:  'products',
           body:  query
         });  
         console.log("search time = ", Date.now()-startTime)
         
-        const resultsCount = hits.total.value as number;  
-        const values  = hits.hits.map((hit) => { 
+        const totalItemsFound = hits.total.value as number;  
+        const products  = hits.hits.map((hit) => { 
           return hit._source
         });
       
         return {
-          resultsCount,
-          values
+          totalItemsFound,
+          pageNumber,
+          limit,
+          products
         }
       }
 

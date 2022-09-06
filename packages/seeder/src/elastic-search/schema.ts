@@ -1,5 +1,5 @@
 export const productSearchSchema = {
-  'info.productId': {
+  'id': {
     type: 'text', 
   },
   'info.name': {
@@ -21,6 +21,12 @@ export const productSearchSchema = {
   'info.price': {
     type: 'integer',
   },
+  'info.oldPrice': {
+    type: 'integer',
+  },
+  'info.cost': {
+    type: 'integer',
+  },
   'meta.keywords': {
     type: 'text',
     analyzer: 'autocomplete'
@@ -37,8 +43,7 @@ export const productSearchSchema = {
     type: 'keyword',
   },
   photos: {
-    type: 'text',
-    analyzer: 'autocomplete'
+    type: 'nested',
   },
   brands: {
     type: 'keyword',
