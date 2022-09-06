@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, ParseIntPipe } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { ProductSearchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
@@ -56,6 +56,10 @@ export class ElasticHelperService {
     } 
 
     async getProductSearchData(searchKey, pageNumber=1, limit=20): Promise<ISearchProductResponse> {
+      
+        if(typeof pageNumber === 'string') pageNumber = parseInt(pageNumber)
+        if(typeof limit === 'string') limit = parseInt(limit)
+        
         limit = limit > 30 ? 30 : limit
         const query = {  
           query: {
