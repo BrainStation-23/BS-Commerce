@@ -16,7 +16,7 @@ interface SingleProduct {
 const Product = ({ product, imgHeight, imgWeight }: SingleProduct) => {
   const [customerProduct, setCustomerProduct] = useState<CustomerProduct>();
   const getProduct = async () => {
-    const res = await userAPI.getPublicProductsById(product.info.productId);
+    const res = await userAPI.getPublicProductsById(product.id);
     if ('data' in res!) setCustomerProduct(res.data);
     return res;
   };
@@ -32,16 +32,17 @@ const Product = ({ product, imgHeight, imgWeight }: SingleProduct) => {
         href={{
           pathname: `product/${customerProduct?.meta.friendlyPageName}`,
           // query: {
-          //   id: product.info.productId,
+          //   id: product.id,
           //   name: product.info.name,
           // },
         }}
         passHref
       >
         <div className="group relative grid cursor-pointer grid-cols-2 ">
+          {}
           <Image
-            src={product.photos![0]!}
-            alt={product.photos![0]}
+            src={product.photos![0].url}
+            alt={product.photos![0].alt}
             height={imgHeight ? imgHeight : 120}
             width={imgWeight ? imgWeight : 120}
             className="col-span-2"

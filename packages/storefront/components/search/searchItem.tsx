@@ -1,22 +1,25 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
-import Product from '@/components/search/product';
-import { useEffect } from 'react';
 import { userAPI } from 'APIs';
 import { IProductSearchSchema } from 'models';
+import Product from '@/components/search/product';
 
-const SearchItem: FC<{ searchText: string; setTotalProducts: Function }> = ({
-  searchText,
-  setTotalProducts,
-}) => {
+const SearchItem: FC<{
+  searchText: string;
+  setTotalProducts: Function;
+  currentPage: number;
+  limit: number;
+}> = ({ searchText, setTotalProducts, currentPage, limit }) => {
   const [products, setProducts] = useState<IProductSearchSchema[]>([]);
   const [stext, setStext] = useState('');
+  const [sCurrentPage, setCurrentPage] = useState(1);
+  const [sLimit, setLimit] = useState(limit);
 
   const getSearchedProducts = async () => {
     if (searchText) {
-      const res = await userAPI.searchProducts(searchText, 1, 1);
-      setProducts(res?.values);
-      setTotalProducts(res?.resultsCount);
+      const res = await userAPI.searchProducts(searchText, currentPage, limit);
+      setProducts(res?.products);
+      setTotalProducts(res?.totalItemsFound);
     } else setProducts([]);
   };
 
@@ -26,12 +29,19 @@ const SearchItem: FC<{ searchText: string; setTotalProducts: Function }> = ({
       setStext(searchText);
     }
   }, [searchText]);
+  useEffect(() => {
+    if (sCurrentPage != currentPage) {
+      getSearchedProducts();
+      setCurrentPage(currentPage);
+    }
+  }, [currentPage, limit]);
   return (
     <>
       {searchText.length > 0 &&
-        products.map((product) => (
+        products &&
+        products?.map((product) => (
           <Product
-            key={product.info.productId}
+            key={product.id}
             product={product}
             imgHeight={177}
             imgWeight={177}

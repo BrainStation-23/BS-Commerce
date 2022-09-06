@@ -15,11 +15,19 @@ const SearchComponent: NextComponentType = () => {
     navSearchText ? navSearchText : ''
   );
   const [totalProducts, setTotalProducts] = useState(0);
+  const [limit, setLimit] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const onProductSearch = () => {
-    setSearchText(
+    if (
+      searchText !=
       (document.getElementById('productSearchInput') as HTMLInputElement).value
-    );
+    ) {
+      setSearchText(
+        (document.getElementById('productSearchInput') as HTMLInputElement)
+          .value
+      );
+      setCurrentPage(1);
+    }
   };
   useEffect(() => {
     if (navSearchText?.length > 0) {
@@ -30,6 +38,9 @@ const SearchComponent: NextComponentType = () => {
       navSearchInput?.value ? (navSearchInput.value = '') : '';
     }
   }, [searchText, navSearchText]);
+  useEffect(() => {
+    onProductSearch();
+  }, [currentPage]);
   return (
     <>
       <Breadcrumb
@@ -85,9 +96,19 @@ const SearchComponent: NextComponentType = () => {
           <SearchItem
             searchText={searchText}
             setTotalProducts={setTotalProducts}
+            currentPage={currentPage}
+            limit={limit}
           />
-          <div className="mx-auto w-full sm:w-full md:w-2/3">
-            <SearchPagination totalPages={10} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+          <div
+            className={`${
+              Math.ceil(totalProducts / limit) <= 1 ? 'hidden' : ''
+            } mx-auto w-full sm:w-full md:w-2/3`}
+          >
+            <SearchPagination
+              totalPages={Math.ceil(totalProducts / limit)}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>
