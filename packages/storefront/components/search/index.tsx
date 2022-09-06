@@ -3,6 +3,7 @@ import type { NextComponentType } from 'next';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import SearchItem from '@/components/search/searchItem';
 import { useEffect, useState } from 'react';
+import { SearchPagination } from './searchPagination';
 
 const SearchComponent: NextComponentType = () => {
   const navSearchInput = document.getElementById(
@@ -14,6 +15,7 @@ const SearchComponent: NextComponentType = () => {
     navSearchText ? navSearchText : ''
   );
   const [totalProducts, setTotalProducts] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const onProductSearch = () => {
     setSearchText(
       (document.getElementById('productSearchInput') as HTMLInputElement).value
@@ -60,7 +62,7 @@ const SearchComponent: NextComponentType = () => {
         </h4>
 
         <div className="mt-5 flex justify-center">
-          <div className="mb-3 w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
+          <div className="mb-3 w-full sm:w-full md:w-2/3">
             <div className="input-group relative mb-4 flex w-full flex-wrap items-stretch">
               <input
                 type="search"
@@ -84,6 +86,9 @@ const SearchComponent: NextComponentType = () => {
             searchText={searchText}
             setTotalProducts={setTotalProducts}
           />
+          <div className="mx-auto w-full sm:w-full md:w-2/3">
+            <SearchPagination totalPages={10} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+          </div>
         </div>
       </div>
     </>
