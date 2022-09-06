@@ -34,7 +34,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
     }
   };
 
-  if (comparisonProducts.length === 0) return null;
+  if (comparisonProducts?.length === 0) return null;
 
   return (
     <>
@@ -87,7 +87,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 >
                                   Action
                                 </th>
-                                {comparisonProducts.map(
+                                {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product.productId}>
@@ -116,7 +116,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product name
                                 </td>
-                                {comparisonProducts.map(
+                                {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product.productId}>
@@ -132,7 +132,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product image
                                 </td>
-                                {comparisonProducts.map(
+                                {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product?.productId}>
@@ -140,8 +140,8 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           <div>
                                             <Image
                                               src={
-                                                product.productDetails
-                                                  .photos![0]!
+                                                product?.productDetails
+                                                  ?.photos![0]!
                                               }
                                               alt={
                                                 product?.productDetails?.info
@@ -201,7 +201,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product description
                                 </td>
-                                {comparisonProducts.map(
+                                {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product?.productId}>
@@ -220,7 +220,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Availability
                                 </td>
-                                {comparisonProducts.map(
+                                {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product?.productId}>
