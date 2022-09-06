@@ -13,7 +13,7 @@ import {
   WishlistItem,
   WishlistProduct,
 } from 'models';
-import { setModalState, setWishlistModalState } from 'toolkit/modalSlice';
+import { setModalState } from 'toolkit/modalSlice';
 import { storeProductsToCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
@@ -111,8 +111,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           containerId: 'bottom-right',
         });
       }
-    } else {
-      dispatch(setWishlistModalState(!modalOn));
     }
   };
 
@@ -130,8 +128,6 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           containerId: 'bottom-right',
         });
       }
-    } else {
-      dispatch(setWishlistModalState(!modalOn));
     }
   };
 
