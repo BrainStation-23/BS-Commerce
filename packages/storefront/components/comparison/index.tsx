@@ -18,7 +18,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
   const dispatch = useAppDispatch();
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.compareList.items
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const handleDeleteCompareItem = async (productId: string) => {
