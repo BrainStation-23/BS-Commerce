@@ -7,12 +7,11 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeUserToken } from 'toolkit/authSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
-import Modal from './modal/modal';
+import Modal from '../components/modal/modal';
 import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
-import { useSelector } from 'react-redux';
 import { setModalState } from 'toolkit/modalSlice';
 
 interface Properties {}
@@ -27,7 +26,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const [modalCmp, setModalCmp] = useState(false);
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.productsToCompare
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const showCartDropDown = () => {

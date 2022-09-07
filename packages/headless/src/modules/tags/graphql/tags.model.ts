@@ -1,9 +1,9 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   CreateTagRequestBody,
-  Tag
+  Tag,
+  UpdateTagRequest
 } from 'models';
-
 @ObjectType()
 export class TagType implements Tag {
   @Field()
@@ -12,24 +12,30 @@ export class TagType implements Tag {
   @Field()
   name: string;
 }
-
 @InputType()
 export class CreateTagInput implements CreateTagRequestBody {
   @Field()
   name: string;
 }
 
+@InputType()
+export class UpdateTagInput implements UpdateTagRequest {
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field(() => Boolean, { nullable: true })
+  isHomePageProductsTag?: boolean;
+}
 @ObjectType()
-export class CreateTagResponse {
+export class TagResponse {
   @Field(() => Int)
   code: number;
 
   @Field(() => TagType, { nullable: true })
   data?: TagType
 }
-
 @ObjectType()
-export class TagResponse {
+export class TagsResponse {
   @Field(() => Int)
   code: number;
 

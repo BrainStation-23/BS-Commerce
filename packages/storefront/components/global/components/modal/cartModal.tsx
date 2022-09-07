@@ -3,7 +3,7 @@ import { CustomerProduct, Product, WishlistProduct } from 'models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';
-import { XCircleIcon } from '../headerIcons';
+import { XCircleIcon } from '../../layout/headerIcons';
 
 interface Props {
   open: boolean;

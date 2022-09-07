@@ -407,6 +407,9 @@ export class GetCustomerAllProductsResponse implements GetCustomerAllProductsRes
 
   @Field(() => [String], { nullable: true })
   brands: string[];
+
+  @Field(() => Int, { nullable: true })
+  totalProducts: number;
 }
 
 @ObjectType()

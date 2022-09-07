@@ -1,6 +1,9 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
-import { OrderResponseData } from 'models';
 import {
+  OrderResponseData,
+  getCategoryResponse,
+  OrderResponseData,
+  getCategoryBySlugResponse,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
@@ -15,7 +18,6 @@ import {
   GetCustomerProductParams,
   CustomerSignInResponse,
   addToCartRequest,
-  AddToCartResponse,
   deleteCartItemRequest,
   deleteCartItemResponse,
   Cart,
@@ -52,6 +54,8 @@ import {
   CustomerForgotPasswordRequest,
   CustomerForgotPasswordSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
+  GetAllBrandsResponse,
+  GetCustomerProductByURLResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -164,7 +168,11 @@ export async function deleteFullWishlistGraphql(): Promise<
 > {
   return undefined;
 }
-export async function deleteFromCompareGraphql(productId: string) {}
+export async function deleteFromCompareGraphql(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  return undefined;
+}
 
 export async function getCustomerProfileGraphql(
   token: string
@@ -267,5 +275,29 @@ export async function forgetPasswordVerifyOtpGraphql(
 export async function resetPasswordGraphql(
   data: CustomerForgotPasswordRequest
 ): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function getBrandsGraphql(): Promise<
+  GetAllBrandsResponse | undefined
+> {
+  return undefined;
+}
+
+export async function getCategoryDetailsByIdGraphql(
+  categoryId: string
+): Promise<getCategoryResponse | undefined> {
+  return undefined;
+}
+
+export async function getCategoryDetailsBySlugGraphql(
+  categoryIdSlug: string
+): Promise<getCategoryBySlugResponse | undefined> {
+  return undefined;
+}
+
+export async function getPublicProductByUniqueNameGraphql(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
   return undefined;
 }

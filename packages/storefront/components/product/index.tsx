@@ -13,7 +13,7 @@ import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'toolkit/productsSlice';
-import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -24,6 +24,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
 import CartToast from '../global/components/cartToast';
+import { ICompareItems } from 'models';
 interface SingleProduct {
   product: Product;
 }
@@ -56,6 +57,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     (state) => state.persistedReducer.auth.access_token
   );
 
+  const compareProducts = useAppSelector(
+    (state) => state?.persistedReducer?.compare?.compareList?.items
+  );
+
+  const inCompareList = compareProducts?.find(
+    (compareProduct: ICompareItems) => compareProduct.productId === product.id
+  );
+
   var isAvailable = true;
   var disableDecrement = false;
   var disableIncrement = false;
@@ -76,12 +85,24 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }
 
   const handleAddToCompare = async () => {
-    try {
-      await userAPI.addToCompare(product.id!);
-    } catch (error) {
-      toast.error('Error happend.', {
-        containerId: 'bottom-right',
-      });
+    if (token) {
+      if (inCompareList) {
+        dispatch(setModalState(!modalCmp));
+      } else {
+        try {
+          const res = await userAPI.addToCompare(product?.id!);
+          if ('data' in res!) {
+            dispatch(setModalState(!modalCmp));
+            dispatch(storeCompare(res.data));
+          }
+        } catch (error) {
+          toast.error('Error happend.', {
+            containerId: 'bottom-right',
+          });
+        }
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -465,11 +486,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       className="mt-2 hover:text-green-600"
                       onClick={() => {
                         handleAddToCompare();
-                        dispatch(setModalState(!modalCmp));
-                        dispatch(storeProductsToCompare(product as CustomerProduct));
                       }}
                     >
-                      + Compare
+                      {inCompareList ? '+ Show in compare list' : '+ Compare'}
                     </button>
                   </div>
                   {/* <div>

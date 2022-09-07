@@ -43,6 +43,9 @@ export class CompareRepository {
     return await this.db.addItemToCompare(userId, productId);
   }
 
+  async  getProductDetails( productId: string ): Promise<CompareItems[] | null> {
+    return await this.db. getProductDetails(productId);
+  }
   async createCompare(
     userId: string,
     productId: CompareItems,
