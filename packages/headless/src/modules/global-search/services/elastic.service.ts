@@ -5,7 +5,7 @@ import { ProductSearchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
 import { errorResponse, successResponse } from "src/utils/response";
 import { IServiceResponse } from "src/utils/response/service.response.interface"; 
-import { ISearchProductResponse } from "../rest/dto";
+import { ISearchProductResponse, ISuggestedProductResponse } from "../rest/dto";
 import { ElasticHelperService } from "./elastic.helper";
 
 @Injectable()
@@ -44,8 +44,17 @@ async deleteSingleByElasticId(id: string): Promise<number> {
   /**
    * global product search - public api 
    */
-  async search(keyword: string, pageNumber=1, limit=10): Promise<IServiceResponse<ISearchProductResponse>>{
+  async search(keyword: string, pageNumber=1, limit=20): Promise<IServiceResponse<ISearchProductResponse>>{
     const result = await this.esHelperService.getProductSearchData(keyword, pageNumber, limit )
+    if(!result){
+      return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
+    }
+    return successResponse(null, result, HttpStatus.OK)
+  }
+  
+  
+  async searchSuggestion(keyword: string): Promise<IServiceResponse<ISuggestedProductResponse>>{
+    const result = await this.esHelperService.getProductSearchSuggestion(keyword)
     if(!result){
       return errorResponse("Error while searching", null, HttpStatus.CONFLICT)
     }
