@@ -39,14 +39,18 @@ const Product = ({ product, imgHeight, imgWeight }: SingleProduct) => {
         passHref
       >
         <div className="group relative grid cursor-pointer grid-cols-2 ">
-          {}
-          <Image
-            src={product.photos![0].url}
-            alt={product.photos![0].alt}
-            height={imgHeight ? imgHeight : 120}
-            width={imgWeight ? imgWeight : 120}
-            className="col-span-2"
-          />
+          {product.photos![0].url ? (
+            <Image
+              src={product.photos![0].url!}
+              alt={product.photos![0].alt}
+              height={imgHeight ? imgHeight : 120}
+              width={imgWeight ? imgWeight : 120}
+              className="col-span-2"
+            />
+          ) : (
+            'Problem Loading Image'
+          )}
+
           <div className="absolute bottom-12 right-0 w-36 origin-left transition-transform duration-300 hover:-translate-y-3 group-hover:scale-100 md:scale-0">
             {customerProduct && <Icon product={customerProduct} />}
           </div>

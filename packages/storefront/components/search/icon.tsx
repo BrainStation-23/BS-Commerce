@@ -8,13 +8,12 @@ import { userAPI } from 'APIs';
 
 import {
   CustomerProduct,
-  IProductSearchSchema,
   Product,
   WishlistItem,
   WishlistProduct,
 } from 'models';
 import { setModalState } from 'toolkit/modalSlice';
-import { storeProductsToCompare } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
@@ -236,7 +235,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as CustomerProduct));
+                dispatch(storeCompare(product as CustomerProduct));
                 event.preventDefault();
               }}
             >
