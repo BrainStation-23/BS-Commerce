@@ -14,9 +14,14 @@ export interface IProductInfo {
 	price: number;
 	shortDescription: string;
 	fullDescription: string;
+	oldPrice: number;
+}
+export interface IProductMeta {
+    friendlyPageName?: string;
 }
 export interface IProductDetails {
 	info: IProductInfo;
+	meta: IProductMeta;
 	photos: string[];
 }
 export interface ICompareItems {

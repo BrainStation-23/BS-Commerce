@@ -18,17 +18,19 @@ import { User as UserInfo } from 'src/decorators/auth.decorator';
 import {
   AddToCompareDto,
   CompareErrorResponseDto,
+  ComparePublicErrorResponseDto,
+  ComparePublicSuccessResponseDto,
   CompareSuccessResponseDto,
-} from '../dto/compare.dto';
+} from './dto/compare.dto';
 import { CompareService } from '../services';
 
 @ApiTags('Comparison API')
-@UseGuards(new RolesGuard(['customer']))
-@ApiBearerAuth()
 @Controller('compare')
 export class CompareController {
   constructor(private compareService: CompareService) {}
-
+  
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @Post()
   @ApiResponse({
     description: 'Add product to compare Success Response',
@@ -53,6 +55,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -70,6 +74,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -92,6 +98,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -114,6 +122,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -139,6 +149,8 @@ export class CompareController {
     return response;
   }
 
+  @UseGuards(new RolesGuard(['customer']))
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Add product to compare Error Response',
     type: CompareErrorResponseDto,
@@ -155,4 +167,25 @@ export class CompareController {
     res.status(code);
     return response;
   }
+
+  @Post('/public')
+  @ApiResponse({
+    description: 'Add product to compare Success Response',
+    type: ComparePublicSuccessResponseDto,
+    status: HttpStatus.CREATED,
+  })
+  @ApiResponse({
+    description: 'Add product to compare Error Response',
+    type: ComparePublicErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  async getProduct(
+    @Body() body: AddToCompareDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.compareService.getProductDetails( body.productId );
+    res.status(code);
+    return response;
+  }
+
 }
