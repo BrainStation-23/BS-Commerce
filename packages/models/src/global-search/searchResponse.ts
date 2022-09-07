@@ -23,13 +23,19 @@ export interface ISearchProductManufacturer {
 	name: string;
 }
 
+export interface IProductImage {
+    url?: string,
+    title?: string,
+    alt?: string,
+}
+
 export interface IProductSearchSchema {
 	info: ISearchProductInfo;
 	meta: ISearchProductMeta;
 	brands: string[];
 	categories: ISearchProductCategory[];
 	manufacturer: ISearchProductManufacturer;
-	photos: string[];
+	photos: IProductImage[];
 	tags: string[];
 }
 

@@ -40,11 +40,11 @@ const AccountDetails: NextComponentType = () => {
           {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
             <button
-              className="rounded bg-green-600 py-2 px-4 text-sm text-white hover:bg-black focus:outline-none"
+              className="rounded bg-[#40A944] py-2 px-4 text-sm text-white hover:bg-black focus:outline-none"
               type="button"
               onClick={() => addButtonOnClick()}
             >
-              Add a new address
+              Add +
             </button>
           </div>
           {/* </Link> */}
@@ -63,7 +63,7 @@ const AccountDetails: NextComponentType = () => {
               <AddNewAddressForm cancelForm={addButtonOnClick} />
               <hr className="my-2" />
             </div>
-            <div className="text-center md:text-left">
+            <div className="text-left">
               <span className="text-4xl">Your Addresses</span>
 
               {customerAddresses?.length > 0 && (
