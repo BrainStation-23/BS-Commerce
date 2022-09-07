@@ -4,7 +4,7 @@ services:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
     volumes:
-      - bscom-esdata:/usr/share/elasticsearch/data
+      - es_data:/usr/share/elasticsearch/data
     environment:
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
@@ -16,13 +16,24 @@ services:
       - 9300:9300
       - 9200:9200
 
-  mongodb_container:
+  mongodb:
     image: mongo:latest
     ports:
       - 27018:27017
     volumes:
-      - bscom-mongodb:/usr/share/mongo/data
+      - mongodb_data:/data/db
+
+  # mysql:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: bs-com-dev
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
 
 volumes:
-  bscom-esdata:
-  bscom-mongodb:
+  es_data:
+  mongodb_data:
