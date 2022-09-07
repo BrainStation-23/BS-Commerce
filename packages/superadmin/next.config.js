@@ -10,7 +10,12 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['admin-demo.nopcommerce.com', 'cdn.shopify.com'],
+    domains: [
+      'admin-demo.nopcommerce.com',
+      'cdn.shopify.com',
+      'chaldn.com',
+      'i2.wp.com',
+    ],
   },
 };
 
