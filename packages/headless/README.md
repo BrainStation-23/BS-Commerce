@@ -32,6 +32,20 @@
 $ npm install
 ```
 
+## Docker setup for elastic search and mongodb
+- Install docker
+- Go to "packages/seeder" directory and run command
+
+```bash
+# This will run elastic search and mongodb in docker.
+# To use mongodb in docker, change mongodb port to 27018 in the env file.
+$ docker-compose up -d
+```
+
+
+
+
+
 ## Running the app
 
 ```bash
