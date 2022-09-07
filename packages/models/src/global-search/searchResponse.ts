@@ -1,10 +1,11 @@
 export interface ISearchProductInfo {
-	productId: string;
 	name: string;
 	shortDescription: string;
 	fullDescription: string;
 	sku: string;
 	price: number;
+	oldPrice: number;
+	cost: number;
 }
 
 export interface ISearchProductMeta {
@@ -30,6 +31,7 @@ export interface IProductImage {
 }
 
 export interface IProductSearchSchema {
+	id: string;
 	info: ISearchProductInfo;
 	meta: ISearchProductMeta;
 	brands: string[];
