@@ -1,7 +1,7 @@
 {
   "name": "bs-commerce",
   "description": "This is a Monorepo strategy TypeScript based Full-Stack setup for BS commerce",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Brain station, shaishab",
   "private": true,
   "devDependencies": {

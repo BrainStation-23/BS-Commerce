@@ -1,6 +1,6 @@
 {
   "name": "seeder",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/BrainStation-23/BS-Commerce#readme",
   "license": "ISC",
   "main": "dist/index.js",
