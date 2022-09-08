@@ -48,6 +48,10 @@ export class ProductRepository {
         return await this.db.getTopSellingProducts( skip, limit);
     }
 
+    async getNewArrivalProducts(skip: number, limit: number): Promise<Product[] | []> {
+        return await this.db.getNewArrivalProducts( skip, limit);
+    }
+
     async getTag(query: Record<string, any>): Promise<Tag[] | []> {
         return await this.db.getTag(query);
     }

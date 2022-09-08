@@ -202,6 +202,8 @@ export class ProductService {
     switch (tag) {
       case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
         return await this.productRepo.getTopSellingProducts(skip, limit);
+      case GetCustomizedProductsTagsEnum.NEW_ARRIVAL:
+        return await this.productRepo.getNewArrivalProducts(skip, limit);  
       default:
         return [];
     }

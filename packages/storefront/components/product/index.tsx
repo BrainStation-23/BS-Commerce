@@ -13,7 +13,10 @@ import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'toolkit/productsSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import {
+  storeCompare,
+  storeProductsToComparePublic,
+} from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -101,7 +104,28 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         }
       }
     } else {
-      dispatch(setLoginModalState(!modalOn));
+      const productPhotos = product?.photos!.map((photo) => photo?.url!);
+      const productDetails = {
+        info: {
+          name: product?.info?.name!,
+          price: product?.info?.price!,
+          shortDescription: product?.info?.shortDescription!,
+          fullDescription: product?.info?.shortDescription!,
+          oldPrice: product?.info?.oldPrice!,
+        },
+        meta: {
+          friendlyPageName: product?.meta?.friendlyPageName!,
+        },
+        photos: productPhotos!,
+      };
+      dispatch(
+        storeProductsToComparePublic({
+          productId: product?.id!,
+          productDetails: productDetails!,
+        })
+      );
+      dispatch(setModalState(!modalCmp));
+      //dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -218,7 +242,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }, [router.asPath]);
 
   useEffect(() => {
-    let itemAmountInCart: ResponseItem | undefined = cartData.find((item) => {
+    let itemAmountInCart: ResponseItem | undefined = cartData?.find((item) => {
       if (item.productId === product.id) {
         return item;
       }
@@ -450,15 +474,13 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   )}
                 </div>
                 <div className=" flex flex-wrap">
-                  <Link href={token ? '/cart' : '#'} passHref>
-                    <button
-                      disabled={!isAvailable}
-                      className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
-                      onClick={toCart}
-                    >
-                      <span className="mx-auto">Buy Now</span>
-                    </button>
-                  </Link>
+                  <button
+                    disabled={!isAvailable}
+                    className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
+                    onClick={toCart}
+                  >
+                    <span className="mx-auto">Buy Now</span>
+                  </button>
                 </div>
                 <div className="text-grey-700 ml-1">
                   <div className="flex flex-row items-start gap-x-2">

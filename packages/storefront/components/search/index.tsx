@@ -3,7 +3,7 @@ import type { NextComponentType } from 'next';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import SearchItem from '@/components/search/searchItem';
 import { useEffect, useState } from 'react';
-import { SearchPagination } from './searchPagination';
+import { Pagination } from '../global/components/pagination';
 
 const SearchComponent: NextComponentType = () => {
   const navSearchInput = document.getElementById(
@@ -104,7 +104,7 @@ const SearchComponent: NextComponentType = () => {
               Math.ceil(totalProducts / limit) <= 1 ? 'hidden' : ''
             } mx-auto w-full sm:w-full md:w-2/3`}
           >
-            <SearchPagination
+            <Pagination
               totalPages={Math.ceil(totalProducts / limit)}
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}

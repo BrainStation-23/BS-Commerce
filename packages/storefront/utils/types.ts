@@ -187,4 +187,5 @@ export interface apiFunction {
     pageNumber: number,
     limit: number
   ): Promise<IProductSearchResponse>;
+  getCompare: () => Promise<CompareResponse | undefined>;
 }
