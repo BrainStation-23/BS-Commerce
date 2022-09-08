@@ -105,15 +105,6 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async getNewArrivalProducts(skip: number, limit: number): Promise<Product[] | []> {
-    return await ProductModel.aggregate([
-      {
-        '$match': {
-          'createdAt': {
-            '$gte': new Date(Date.now() - 3 * 60 * 60 * 24 * 1000)
-          }
-        }
-      },
-      { $sort: { createdAt: -1 } }
-    ]);
+    return await ProductModel.find({ createdAt: { '$gte': new Date(Date.now() - 3 * 60 * 60 * 24 * 1000) } }).skip(skip).limit(limit).lean();
   }
 }
