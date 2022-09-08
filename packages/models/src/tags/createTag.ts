@@ -10,6 +10,7 @@ import { Tag } from './tags';
 
 export interface CreateTagRequestBody {
     name: string;
+    isHomePageProductsTag?: boolean;
 }
 
 export interface CreateTagSuccessResponse extends SuccessResponse {
