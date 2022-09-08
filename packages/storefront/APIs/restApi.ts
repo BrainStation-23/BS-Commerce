@@ -613,3 +613,15 @@ export async function getCategoryDetailsBySlugRest(categorySlug: string): Promis
     return error;
   }
 }
+
+export async function getCompareRest(
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.addToCompare}`
+    );
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}

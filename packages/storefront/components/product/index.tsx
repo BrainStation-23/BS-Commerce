@@ -13,7 +13,10 @@ import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'toolkit/productsSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import {
+  storeCompare,
+  storeProductsToComparePublic,
+} from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -102,7 +105,28 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         }
       }
     } else {
-      dispatch(setLoginModalState(!modalOn));
+      const productPhotos = product?.photos!.map((photo) => photo?.url!);
+      const productDetails = {
+        info: {
+          name: product?.info?.name!,
+          price: product?.info?.price!,
+          shortDescription: product?.info?.shortDescription!,
+          fullDescription: product?.info?.shortDescription!,
+          oldPrice: product?.info?.oldPrice!,
+        },
+        meta: {
+          friendlyPageName: product?.meta?.friendlyPageName!,
+        },
+        photos: productPhotos!,
+      };
+      dispatch(
+        storeProductsToComparePublic({
+          productId: product?.id!,
+          productDetails: productDetails!,
+        })
+      );
+      dispatch(setModalState(!modalCmp));
+      //dispatch(setLoginModalState(!modalOn));
     }
   };
 

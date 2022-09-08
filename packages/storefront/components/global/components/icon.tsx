@@ -18,7 +18,10 @@ import {
   setModalState,
   setLoginModalState,
 } from 'toolkit/modalSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import {
+  storeCompare,
+  storeProductsToComparePublic,
+} from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
@@ -78,6 +81,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       const cartProduct = {
         id: product.id!,
         info: product.info!,
+        meta: { friendlyPageName: product.meta?.friendlyPageName! },
         photos: product.photos!,
       };
       const cartItem = {
@@ -117,7 +121,28 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         });
       }
     } else {
-      dispatch(setLoginModalState(!modalOn));
+      const productPhotos = product?.photos!.map((photo) => photo?.url!);
+      const productDetails = {
+        info: {
+          name: product?.info?.name!,
+          price: product?.info?.price!,
+          shortDescription: product?.info?.shortDescription!,
+          fullDescription: product?.info?.shortDescription!,
+          oldPrice: product?.info?.oldPrice!,
+        },
+        meta: {
+          friendlyPageName: product?.meta?.friendlyPageName!,
+        },
+        photos: productPhotos!,
+      };
+      dispatch(
+        storeProductsToComparePublic({
+          productId: product?.id!,
+          productDetails: productDetails!,
+        })
+      );
+      dispatch(setModalState(!modalCmp));
+      //dispatch(setLoginModalState(!modalOn));
     }
   };
 

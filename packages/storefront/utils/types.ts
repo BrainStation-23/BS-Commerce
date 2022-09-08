@@ -180,4 +180,5 @@ export interface apiFunction {
   getCategoryDetailsBySlug: (
     categorySlug: string
   ) => Promise<getCategoryBySlugResponse | undefined>;
+  getCompare: () => Promise<CompareResponse | undefined>;
 }

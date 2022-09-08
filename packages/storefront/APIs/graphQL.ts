@@ -293,3 +293,7 @@ export async function getPublicProductByUniqueNameGraphql(
 ): Promise<GetCustomerProductByURLResponse | undefined> {
   return undefined;
 }
+
+export async function getCompareGraphql(): Promise<CompareResponse | undefined> {
+    return undefined;
+}
