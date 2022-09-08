@@ -13,6 +13,7 @@ export abstract class IProductDatabase {
     abstract updateProduct: (product: UpdateProduct, productId: string) => Promise<Product | null>;
     abstract updateProductsForBrand: (productIds: string[], brandId: string) => Promise<Product[] | null>;
     abstract getProductsList: (skip: number, limit: number, query?: Record<string, any>, sortCondition?: string) => Promise<Product[] | []>;
-    abstract getTopSellingProducts: ( skip: number, limit: number) => Promise<Product[] | []>
+    abstract getTopSellingProducts: (skip: number, limit: number) => Promise<Product[] | []>;
+    abstract getNewArrivalProducts: (skip: number, limit: number) => Promise<Product[] | []>;
     abstract getTag: (query: Record<string, any>) => Promise<Tag[] | []>;
 }
