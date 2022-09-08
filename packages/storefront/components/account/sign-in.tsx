@@ -23,6 +23,7 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -45,6 +46,12 @@ const Signin: NextComponentType = () => {
     dispatch(storeAllCartItems(cartProducts?.data?.items!));
   };
 
+  const fetchCompare = async () => {
+    const compareProducts = await userAPI.getCompare();
+    if ('data' in compareProducts!)
+      dispatch(storeCompare(compareProducts?.data!));
+  };
+
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
@@ -65,6 +72,7 @@ const Signin: NextComponentType = () => {
 
       fetchCart(datass?.data?.token);
       fetchWislist(datass?.data?.token);
+      fetchCompare();
       setLoader(false);
       router.push('/');
       //router.back();

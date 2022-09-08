@@ -10,7 +10,7 @@ const ProductInfo = (props: SingleProduct) => {
   const { product } = props;
   return (
     <div>
-      <div className="px-6">
+      <div className="pl-6">
         <div
           className="text-base font-medium text-gray-600"
           id="searchProductName"

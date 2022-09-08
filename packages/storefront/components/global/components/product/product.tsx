@@ -26,7 +26,7 @@ const Product = (props: SingleProduct) => {
         passHref
         // as={`product/${product.info.name}`}
       >
-        <div className="mb-0 overflow-hidden" key={product?.info?.name}>
+        <div className="mb-0 h-80 overflow-hidden" key={product?.info?.name}>
           <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative flex flex-col items-center justify-center">

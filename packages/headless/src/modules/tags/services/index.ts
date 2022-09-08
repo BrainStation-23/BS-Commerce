@@ -28,15 +28,6 @@ export class TagsService {
     return this.helper.serviceResponse.successResponse(tags, HttpStatus.OK);
   }
 
-  async createHomePageProductsTag(data: Tag): Promise<CreateTagResponse> {
-    const doesNameMatch = await this.tagsRepo.getTag({ name: data.name });
-    if (doesNameMatch) return this.helper.serviceResponse.errorResponse(CreateTagErrorMessages.TAG_NAME_EXISTS, null, HttpStatus.BAD_REQUEST);
-
-    const tag = await this.tagsRepo.createTag({ ...data, isHomePageProductsTag: true });
-    if (!tag) return this.helper.serviceResponse.errorResponse(CreateTagErrorMessages.CAN_NOT_CREATE_TAG, null, HttpStatus.BAD_REQUEST);
-    return this.helper.serviceResponse.successResponse(tag, HttpStatus.CREATED);
-  }
-
   async createTag(data: Tag): Promise<CreateTagResponse> {
     const doesNameMatch = await this.tagsRepo.getTag({ name: data.name });
     if (doesNameMatch) return this.helper.serviceResponse.errorResponse(CreateTagErrorMessages.TAG_NAME_EXISTS, null, HttpStatus.BAD_REQUEST);
