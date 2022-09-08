@@ -13,25 +13,25 @@ interface Props {
 }
 
 const Wishlist: NextPage<Props> = ({ wishlistedProducts }: Props) => {
-  // const dispatch = useAppDispatch();
-  // dispatch(storeWishlist(wishlistedProducts));
+  const dispatch = useAppDispatch();
+  dispatch(storeWishlist(wishlistedProducts));
 
   return <WishlistComponent />;
 };
 
 export default Wishlist;
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const reqCookie = context.req.headers.cookie;
-//   const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
-//   let wishlistedProducts;
-//   if (reqCookie) {
-//     wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
-//   }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const reqCookie = context.req.headers.cookie;
+  const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
+  let wishlistedProducts;
+  if (reqCookie) {
+    wishlistedProducts = await userAPI.getCustomerWishlist(token.token);
+  }
 
-//   return {
-//     props: {
-//       wishlistedProducts: wishlistedProducts || [],
-//     },
-//   };
-// };
+  return {
+    props: {
+      wishlistedProducts: wishlistedProducts || [],
+    },
+  };
+};
