@@ -66,7 +66,7 @@ import {
   GetCustomerProductSuccessResponse,
   GetCustomerProductByURLResponse,
   GetCustomerProductByURLSuccessResponse,
-} from 'models';
+} from '@bs-commerce/models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
@@ -334,10 +334,10 @@ export async function deleteFromCompareRest(
   productId: string
 ): Promise<CompareResponse | undefined> {
   try {
-   const res = await axios.delete(
+    const res = await axios.delete(
       `${apiEndPoints.deleteFromCompare}?productId=${productId}`
     );
-    return res.data as CompareSuccessResponse
+    return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;
   }

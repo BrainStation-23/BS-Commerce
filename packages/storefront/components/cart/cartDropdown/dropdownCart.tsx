@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
-import { ResponseItem } from 'models';
+import { ResponseItem } from '@bs-commerce/models';
 import { deleteCartItem } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 

@@ -10,7 +10,10 @@ import { userAPI } from 'APIs';
 import { storeUserToken } from 'toolkit/authSlice';
 import { storeCustomerDetails } from 'toolkit/userSlice';
 import { useAppDispatch } from 'customHooks/hooks';
-import { CreateCustomerRequest, CustomerSignInRequest } from 'models';
+import {
+  CreateCustomerRequest,
+  CustomerSignInRequest,
+} from '@bs-commerce/models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';

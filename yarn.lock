@@ -1480,6 +1480,13 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@bs-commerce/models@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@bs-commerce/models/-/models-2.2.0.tgz#97cc8ead77bfa4adadb22f9db9e4188020deeb79"
+  integrity sha512-9/VDMRJ/iH/12jUBQdeS2j7XFKxwurLkhxIHB+v90D9xYu/yzclmlVh4rJank1YpQ3UisqOnU0BZ+gI8ETqhoQ==
+  dependencies:
+    typescript "^4.8.2"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -21282,7 +21289,7 @@ typescript@4.7.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
-typescript@^4.3.5, typescript@^4.4.2, typescript@^4.7.2, typescript@^4.7.4:
+typescript@^4.3.5, typescript@^4.4.2, typescript@^4.7.2, typescript@^4.7.4, typescript@^4.8.2:
   version "4.8.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
   integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==

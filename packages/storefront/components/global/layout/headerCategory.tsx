@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { NestedCategoryList, subCategoryList } from 'models';
+import { NestedCategoryList, subCategoryList } from '@bs-commerce/models';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
 import HeaderSubCategory from '@/components/global/layout/headerSubCategory';
 
@@ -23,7 +23,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     <div
       className={`lg:group`}
       /** For hover effect only in large screen */
-      onMouseEnter={() => document.body.clientWidth > 1023 &&  setExpand(true)}
+      onMouseEnter={() => document.body.clientWidth > 1023 && setExpand(true)}
       onMouseLeave={() => document.body.clientWidth > 1023 && setExpand(false)}
       // style={{ outline: '1px solid red' }}
     >

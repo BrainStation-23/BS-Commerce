@@ -1,6 +1,6 @@
 import { useAppDispatch } from 'customHooks/hooks';
 import { userAPI } from 'APIs';
-import { CustomerAddress } from 'models';
+import { CustomerAddress } from '@bs-commerce/models';
 import { useState } from 'react';
 import { deleteAddress } from 'toolkit/customerAddressSlice';
 

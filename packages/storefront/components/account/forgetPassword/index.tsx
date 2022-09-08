@@ -1,5 +1,8 @@
 import { NextComponentType } from 'next';
-import { CustomerForgotPasswordRequest, VerifyOtpRequest } from 'models';
+import {
+  CustomerForgotPasswordRequest,
+  VerifyOtpRequest,
+} from '@bs-commerce/models';
 import { useState } from 'react';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';

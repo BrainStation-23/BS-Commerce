@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeCompare } from 'toolkit/compareSlice';
 import { userAPI } from 'APIs';
-import { ICompareItems } from 'models';
+import { ICompareItems } from '@bs-commerce/models';
 
 interface Props {
   setModal: boolean;

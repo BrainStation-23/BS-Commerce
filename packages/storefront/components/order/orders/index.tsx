@@ -2,7 +2,7 @@ import WithAuth from '@/components/auth/withAuth';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { userAPI } from 'APIs';
 import { useAppSelector } from 'customHooks/hooks';
-import { OrderByUserId, OrderByUserIdResponse } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import OrderTable from './orderTable';

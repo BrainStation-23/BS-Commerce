@@ -57,7 +57,7 @@ import {
   GetAllBrandsResponse,
   GetCustomerProductByURLResponse,
   IProductSearchResponse,
-} from 'models';
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
 // GraphQL example
@@ -169,7 +169,9 @@ export async function deleteFullWishlistGraphql(): Promise<
 > {
   return undefined;
 }
-export async function deleteFromCompareGraphql(productId: string): Promise<CompareResponse | undefined> {
+export async function deleteFromCompareGraphql(
+  productId: string
+): Promise<CompareResponse | undefined> {
   return undefined;
 }
 
@@ -218,7 +220,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponse  | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   return undefined;
 }
 

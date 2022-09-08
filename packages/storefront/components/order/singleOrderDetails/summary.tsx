@@ -1,6 +1,6 @@
 import { userAPI } from 'APIs';
 import { useAppSelector } from 'customHooks/hooks';
-import { OrderByUserId } from 'models';
+import { OrderByUserId } from '@bs-commerce/models';
 import moment from 'moment';
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';

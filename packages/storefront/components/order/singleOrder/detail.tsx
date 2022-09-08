@@ -1,4 +1,4 @@
-import { OrderByUserId } from 'models';
+import { OrderByUserId } from '@bs-commerce/models';
 import React from 'react';
 import CartDetails from '../cartTable/main';
 // import ReOrder from './re-Order/index';

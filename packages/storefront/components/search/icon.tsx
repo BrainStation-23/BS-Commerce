@@ -11,7 +11,7 @@ import {
   Product,
   WishlistItem,
   WishlistProduct,
-} from 'models';
+} from '@bs-commerce/models';
 import { setModalState } from 'toolkit/modalSlice';
 import { storeCompare } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';

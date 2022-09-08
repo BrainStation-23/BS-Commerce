@@ -11,7 +11,7 @@ import {
   updateCartItem,
 } from 'toolkit/cartSlice';
 import { userAPI } from 'APIs';
-import { ResponseItem, updateCartItemRequest } from 'models';
+import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
 
 interface Props {
   data: ResponseItem;

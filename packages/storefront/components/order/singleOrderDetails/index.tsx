@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { OrderByUserId } from 'models';
+import { OrderByUserId } from '@bs-commerce/models';
 import { useRouter } from 'next/router';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';

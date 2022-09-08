@@ -12,7 +12,7 @@ import {
   WishlistItem,
   WishlistProduct,
   ICompareItems,
-} from 'models';
+} from '@bs-commerce/models';
 import {
   setCartModalState,
   setModalState,

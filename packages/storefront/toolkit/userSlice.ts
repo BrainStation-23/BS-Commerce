@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Customer } from 'models';
+import { Customer } from '@bs-commerce/models';
 
 export interface UserState {
   user: string;

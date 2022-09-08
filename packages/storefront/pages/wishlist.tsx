@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import { Wishlist } from 'models';
+import { Wishlist } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeWishlist } from 'toolkit/productsSlice';

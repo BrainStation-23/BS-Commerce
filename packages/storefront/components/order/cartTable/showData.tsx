@@ -1,4 +1,4 @@
-import { IProductOrderData } from 'models';
+import { IProductOrderData } from '@bs-commerce/models';
 import Image from 'next/image';
 
 interface Props {

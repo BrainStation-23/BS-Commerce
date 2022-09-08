@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTable from './dataTable';
-import { OrderByUserIdResponseData } from 'models';
+import { OrderByUserIdResponseData } from '@bs-commerce/models';
 interface Props {
   singleOrder: OrderByUserIdResponseData;
 }
