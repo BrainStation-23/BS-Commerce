@@ -53,13 +53,17 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
     <>
       <tr key={data.productId}>
         <td className="border border-slate-300 px-8 py-2 md:px-4">
-          <Image
-            src={data?.product?.photos![0]?.url!}
-            alt="product Image"
-            width={100}
-            height={90}
-            //layout="fixed"
-          />
+          {data?.product?.photos![0]?.url ? (
+            <Image
+              src={data?.product?.photos![0]?.url!}
+              alt="product Image"
+              width={100}
+              height={90}
+              //layout="fixed"
+            />
+          ) : (
+            'Problem Rendering Image'
+          )}
         </td>
         <td className="border border-slate-300 text-center md:px-2 lg:px-20">
           <Link

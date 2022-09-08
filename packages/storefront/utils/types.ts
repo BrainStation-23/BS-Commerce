@@ -54,6 +54,7 @@ import {
   GetCustomerAllProductsSuccessResponse,
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
+  IProductSearchResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -180,4 +181,9 @@ export interface apiFunction {
   getCategoryDetailsBySlug: (
     categorySlug: string
   ) => Promise<getCategoryBySlugResponse | undefined>;
+  searchProducts(
+    searchText: string,
+    pageNumber: number,
+    limit: number
+  ): Promise<IProductSearchResponse>;
 }
