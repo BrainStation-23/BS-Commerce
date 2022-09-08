@@ -41,13 +41,6 @@ export class TagsResolver {
 
   @Mutation(() => TagResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async createHomePageProductsTag(@Args('data') data: CreateTagInput) {
-    const res = await this.tagsService.createHomePageProductsTag(data);
-    return this.helper.serviceResponse.graphqlResponse(res);
-  }
-
-  @Mutation(() => TagResponse)
-  @UseGuards(new RolesGuard(['admin']))
   async updateTag(@Args('tagId') tagId: string, @Args('data') data: UpdateTagInput) {
     const res = await this.tagsService.updateTag(tagId, data);
     return this.helper.serviceResponse.graphqlResponse(res);
