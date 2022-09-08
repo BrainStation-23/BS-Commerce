@@ -21,7 +21,7 @@ import {
   CreateBrandRequest,
   UpdateBrandResponse,
   UpdateBrandRequest,
-} from 'models';
+} from '@bs-commerce/models'';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
   const { data } = await client.query({

@@ -1,4 +1,4 @@
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models'';
 
 export interface CategoryInterface {
   id?: number | string ;

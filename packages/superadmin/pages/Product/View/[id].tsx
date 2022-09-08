@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
 import ViewProduct from '@/components/products/productView.component';
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models'';
 
 const LogDetailPage: NextPage = () => {
   const router = useRouter();

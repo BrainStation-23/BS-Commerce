@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models'';
 import SingleView from '@/components/brands/singleView';
 interface MetaCardInterface {
   brand: Brand;

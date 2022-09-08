@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
 
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models'';
 import SingleView from '@/components/products/singleView';
 
 const PhotosCard: FC<{
