@@ -94,6 +94,7 @@ import {
   deleteSingleCartItemStatic,
   deleteWishlistItemStatic,
   getCartStatic,
+  getCompareStatic,
   getCustomerProfileStatic,
   getCustomerStatic,
   getFeaturedProductsStatic,
@@ -218,6 +219,7 @@ const staticApi: apiFunction = {
   addToCompare: addToCompareStatic,
   deleteFromCompare: deleteFromCompareStatic,
   updateCartItem: updateCartItemStatic,
+  getCompare: getCompareStatic,
 };
 
 console.log(config?.apiService);

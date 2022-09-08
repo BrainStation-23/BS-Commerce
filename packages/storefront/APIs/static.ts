@@ -35,6 +35,7 @@ import {
   CompareResponse,
   updateCartItemRequest,
   updateCartItemSuccessResponse,
+  CompareSuccessResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -406,3 +407,15 @@ export async function updateCartItemStatic(
     return error;
   }
 }
+
+export async function getCompareStatic(
+  ): Promise<CompareResponse | undefined> {
+    try {
+      const res = await axios.get(
+        `${apiEndPoints.addToCompare}`
+      );
+      return res.data as CompareSuccessResponse;
+    } catch (error: any) {
+      return error;
+    }
+  }
