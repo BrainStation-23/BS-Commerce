@@ -1,12 +1,18 @@
-import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  GraphQLISODateTime,
+  InputType,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
 import {
   WishlistItem,
   WishlistProduct,
   WishlistProductInfo,
   WishlistProductPhoto,
   addToWishlistRequest,
-  WishlistProductMeta
-} from 'models';
+  WishlistProductMeta,
+} from '@bs-commerce/models';
 
 @ObjectType()
 export class WishlistProductPhotoType implements WishlistProductPhoto {
@@ -104,7 +110,7 @@ export class WishlistItemInput implements addToWishlistRequest {
   productId: string;
 
   @Field(() => Int)
-  quantity: number
+  quantity: number;
 }
 
 @ObjectType()
@@ -140,5 +146,5 @@ export class WishListResponseWithMessage {
   code: number;
 
   @Field(() => WishListResponseMessage)
-  data: WishListResponseMessage
+  data: WishListResponseMessage;
 }
