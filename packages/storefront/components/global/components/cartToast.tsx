@@ -11,12 +11,16 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
     <>
       <div className="flex flex-row">
         <span>
-          <Image
-            src={product?.photos![0].url!}
-            alt={product?.photos![0].alt || 'product image'}
-            width={80}
-            height={80}
-          />
+          {product?.photos![0].url ? (
+            <Image
+              src={product?.photos![0].url!}
+              alt={product?.photos![0].alt || 'product image'}
+              width={80}
+              height={80}
+            />
+          ) : (
+            'Problem Rendering Image'
+          )}
         </span>
         <div className="flex flex-col sm:px-4">
           <span className="mb-2">{product?.info.name}</span>
