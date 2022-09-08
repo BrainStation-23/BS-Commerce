@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
-    "@bs-commerce/models": "^2.2.0",
+    "@bs-commerce/models": "^2.2.1",
     "@headlessui/react": "^1.6.4",
     "@popperjs/core": "^2.11.4",
     "@reduxjs/toolkit": "^1.8.2",
