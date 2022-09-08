@@ -27,7 +27,7 @@ const BackToTopButton = () => {
           className="rounded-full bg-[#40a944]"
           style={{
             position: 'fixed',
-            bottom: '20px',
+            bottom: '75px',
             right: '30px',
             height: '40px',
             width: '40px',
