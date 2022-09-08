@@ -12,7 +12,7 @@ import {
   ResponseItem,
   updateCartItemRequest,
   CartProductMeta
-} from "models";
+} from "@bs-commerce/models";
 
 @ObjectType()
 export class CartProductInfoSchema implements CartProductInfo {

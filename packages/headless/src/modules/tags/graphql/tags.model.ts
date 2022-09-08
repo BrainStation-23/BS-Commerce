@@ -2,8 +2,8 @@ import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   CreateTagRequestBody,
   Tag,
-  UpdateTagRequest
-} from 'models';
+  UpdateTagRequest,
+} from '@bs-commerce/models';
 @ObjectType()
 export class TagType implements Tag {
   @Field()
@@ -35,7 +35,7 @@ export class TagResponse {
   code: number;
 
   @Field(() => TagType, { nullable: true })
-  data?: TagType
+  data?: TagType;
 }
 @ObjectType()
 export class TagsResponse {
@@ -43,5 +43,5 @@ export class TagsResponse {
   code: number;
 
   @Field(() => [TagType], { nullable: true })
-  data?: TagType[]
+  data?: TagType[];
 }

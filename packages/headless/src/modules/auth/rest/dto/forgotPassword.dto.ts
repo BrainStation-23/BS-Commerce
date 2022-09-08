@@ -1,13 +1,19 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsNumber, IsArray, IsObject } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  IsArray,
+  IsObject,
+} from 'class-validator';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordRequest,
   ForgotPasswordSuccessResponse,
   ForgotMessageResponse,
   ForgotPasswordErrorMessages,
-} from 'models';
+} from '@bs-commerce/models';
 
 export class ForgotPasswordDto implements ForgotPasswordRequest {
   @ApiProperty()
@@ -22,14 +28,20 @@ export class ChangePasswordMessageDto implements ForgotMessageResponse {
   message: string;
 }
 
-export class ForgotPasswordErrorResponseDto implements ForgotPasswordErrorResponse {
+export class ForgotPasswordErrorResponseDto
+  implements ForgotPasswordErrorResponse
+{
   @ApiProperty({ default: HttpStatus.BAD_REQUEST })
   @IsNumber()
   code: number;
 
   @ApiProperty({
     example: ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD,
-    examples: [ForgotPasswordErrorMessages.CAN_NOT_GET_USER, ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD, ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT]
+    examples: [
+      ForgotPasswordErrorMessages.CAN_NOT_GET_USER,
+      ForgotPasswordErrorMessages.CAN_NOT_UPDATE_USER_PASSWORD,
+      ForgotPasswordErrorMessages.SIGNED_UP_USING_YOUR_LOCAL_ACCOUNT,
+    ],
   })
   @IsString()
   error: ForgotPasswordErrorMessages;
@@ -39,7 +51,9 @@ export class ForgotPasswordErrorResponseDto implements ForgotPasswordErrorRespon
   errors: string[];
 }
 
-export class ForgotPasswordSuccessResponseDto implements ForgotPasswordSuccessResponse {
+export class ForgotPasswordSuccessResponseDto
+  implements ForgotPasswordSuccessResponse
+{
   @ApiProperty({ default: HttpStatus.OK })
   @IsNumber()
   code: number;

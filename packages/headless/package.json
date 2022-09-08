@@ -22,6 +22,7 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
+    "@bs-commerce/models": "^2.2.1",
     "@elastic/elasticsearch": "^7.13.0",
     "@nestjs/apollo": "^10.0.9",
     "@nestjs/common": "^8.4.4",
@@ -48,7 +49,6 @@
     "graphql-upload": "^15.0.1",
     "jest": "^28.1.1",
     "joi": "^17.6.0",
-    "models": "*",
     "mongoose": "^6.2.2",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.5",

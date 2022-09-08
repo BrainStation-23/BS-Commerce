@@ -1,6 +1,12 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsArray,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,
@@ -11,9 +17,13 @@ import type {
   IProductMeta,
   IProductDetails,
   ComparePublicSuccessResponse,
-  ComparePublicErrorResponse
-} from 'models';
-import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
+  ComparePublicErrorResponse,
+} from '@bs-commerce/models';
+import {
+  AddProductToCompareErrorEnum,
+  DeleteCompareErrorEnum,
+  GetCompareErrorEnum,
+} from '@bs-commerce/models';
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })
@@ -23,7 +33,7 @@ export class AddToCompareDto implements AddCompareItem {
   productId: string;
 }
 
-export class ProductInfo implements IProductInfo{
+export class ProductInfo implements IProductInfo {
   @ApiProperty()
   name: string;
   @ApiProperty()
@@ -41,7 +51,7 @@ export class ProductMeta implements IProductMeta {
   @IsOptional()
   friendlyPageName?: string;
 }
-export class ProductDetails implements IProductDetails{
+export class ProductDetails implements IProductDetails {
   @ApiProperty()
   info: ProductInfo;
 
@@ -76,7 +86,9 @@ export class CompareSuccessResponseDto implements CompareSuccessResponse {
   data: CompareDataDto;
 }
 
-export class ComparePublicSuccessResponseDto implements ComparePublicSuccessResponse{
+export class ComparePublicSuccessResponseDto
+  implements ComparePublicSuccessResponse
+{
   @ApiProperty({ default: HttpStatus.OK })
   code: number;
   @ApiProperty({ type: () => [CompareItemsDetails] })
@@ -92,23 +104,34 @@ export class CompareErrorResponseDto implements CompareErrorResponse {
       GetCompareErrorEnum.COMPARISON_NOT_FOUND,
       DeleteCompareErrorEnum.COMPARISON_CAN_NOT_BE_DELETED_OR_NOT_EXIST,
       DeleteCompareErrorEnum.ITEM_CAN_NOT_BE_DELETED,
-      DeleteCompareErrorEnum.INVALID_ID
+      DeleteCompareErrorEnum.INVALID_ID,
     ],
   })
-  error: AddProductToCompareErrorEnum | GetCompareErrorEnum | DeleteCompareErrorEnum;
+  error:
+    | AddProductToCompareErrorEnum
+    | GetCompareErrorEnum
+    | DeleteCompareErrorEnum;
   @ApiProperty()
   errors: DescriptiveError;
 }
 
-export class ComparePublicErrorResponseDto implements ComparePublicErrorResponse {
+export class ComparePublicErrorResponseDto
+  implements ComparePublicErrorResponse
+{
   @ApiProperty()
   code?: number;
-  @ApiProperty({ example: AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING })
+  @ApiProperty({
+    example: AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING,
+  })
   error: AddProductToCompareErrorEnum;
   @ApiProperty()
   errors: DescriptiveError;
 }
 
-export type CompareResponse = CompareSuccessResponseDto | CompareErrorResponseDto;
+export type CompareResponse =
+  | CompareSuccessResponseDto
+  | CompareErrorResponseDto;
 
-export type ComparePublicResponse = ComparePublicSuccessResponseDto | ComparePublicErrorResponseDto;
+export type ComparePublicResponse =
+  | ComparePublicSuccessResponseDto
+  | ComparePublicErrorResponseDto;
