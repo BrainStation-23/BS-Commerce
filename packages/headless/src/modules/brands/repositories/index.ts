@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
-import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
+import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from '@bs-commerce/models';
 
 import { IBrandDatabase } from './brand.database.interface';
 import { Brand } from 'src/entity/brand';

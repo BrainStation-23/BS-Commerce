@@ -1,6 +1,6 @@
 import { IsArray, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { GetAllBrandsSuccessResponse, GetAllBrandsErrorResponse, GetAllBrands } from 'models';
+import { GetAllBrandsSuccessResponse, GetAllBrandsErrorResponse, GetAllBrands } from '@bs-commerce/models';
 import { HttpStatus } from '@nestjs/common';
 
 import { BrandDto } from './brandDto';

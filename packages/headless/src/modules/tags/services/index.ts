@@ -10,7 +10,7 @@ import {
   GetTagResponse,
   UpdateTagResponse,
   UpdateTagErrorMessages,
-} from 'models';
+} from '@bs-commerce/models';
 
 @Injectable()
 export class TagsService {

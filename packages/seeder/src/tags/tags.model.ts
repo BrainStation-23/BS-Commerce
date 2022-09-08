@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Tag } from 'models';
+import { Tag } from '@bs-commerce/models';
 
 const TagsSchema = new Schema<Tag>({
   id: {

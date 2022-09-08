@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const models = require('models');
+const models = require('@bs-commerce/models');
 
 // TODO: DEMONSTRATE API
 ```

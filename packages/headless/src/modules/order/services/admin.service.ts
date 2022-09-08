@@ -1,4 +1,4 @@
-import { OrderIncompleteStat } from 'models';
+import { OrderIncompleteStat } from '@bs-commerce/models';
 import { HttpStatus, Injectable } from "@nestjs/common";
 
 import { 

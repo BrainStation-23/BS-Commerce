@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNotEmptyObject, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models';
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';

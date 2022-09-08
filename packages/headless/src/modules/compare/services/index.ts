@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { AddProductToCompareErrorEnum, ComparePublicResponse, CompareResponse, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
+import { AddProductToCompareErrorEnum, ComparePublicResponse, CompareResponse, DeleteCompareErrorEnum, GetCompareErrorEnum } from '@bs-commerce/models';
 import { Compare, CompareItems } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
 import { CompareRepository } from '../repositories';

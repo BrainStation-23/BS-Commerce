@@ -1,4 +1,4 @@
-import type {IProductSearchResponse, IProductSearchSchema, IProductSearchSuggestionResponse} from 'models' 
+import type {IProductSearchResponse, IProductSearchSchema, IProductSearchSuggestionResponse} from '@bs-commerce/models' 
 
 export class ISearchProductResponse implements IProductSearchResponse{
     totalItemsFound?: number;

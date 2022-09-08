@@ -12,8 +12,8 @@ import type {
   IProductDetails,
   ComparePublicSuccessResponse,
   ComparePublicErrorResponse
-} from 'models';
-import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
+} from '@bs-commerce/models';
+import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from '@bs-commerce/models';
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })

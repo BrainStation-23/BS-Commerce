@@ -5,7 +5,7 @@ import {
   CreateProductOrderDetails, 
   ErrorMessageReOrder, 
   ReOrderResponse
-} from 'models';
+} from '@bs-commerce/models';
 
 import { CartResponse, OrderSortQuery, ReOrderQuery } from './../../../entity/order';
 import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';

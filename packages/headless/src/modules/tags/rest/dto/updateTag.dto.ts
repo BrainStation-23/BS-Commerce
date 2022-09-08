@@ -7,7 +7,7 @@ import {
     UpdateTagErrorResponse,
     UpdateTagSuccessResponse,
     UpdateTagParams,
-} from 'models';
+} from '@bs-commerce/models';
 import { TagDto } from './tags.dto';
 
 export class UpdateTagParamDto implements UpdateTagParams {

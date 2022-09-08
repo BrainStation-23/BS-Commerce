@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Category } from 'models';
+import { Category } from '@bs-commerce/models';
 import { model, Schema } from 'mongoose';
 
 const CategorySchema = new Schema<Category>({

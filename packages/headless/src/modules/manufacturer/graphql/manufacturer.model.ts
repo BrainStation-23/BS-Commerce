@@ -1,6 +1,6 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
-import { Manufacturer } from 'models';
+import { Manufacturer } from '@bs-commerce/models';
 
 @ObjectType({ description: 'Manufacturer SEO data type' })
 class ManufacturerSEO {

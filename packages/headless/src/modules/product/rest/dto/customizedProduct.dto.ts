@@ -13,7 +13,7 @@ import {
     GetCustomizedProductsErrorResponse,
     GetCustomizedProductsQuery,
     GetCustomizedProductsSuccessResponse,
-} from 'models';
+} from '@bs-commerce/models';
 import { ProductDto } from './product.dto';
 
 

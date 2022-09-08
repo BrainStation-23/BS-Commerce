@@ -13,7 +13,7 @@ import {
     OrderByUserId, 
     OrderByUserIdResponse, 
     OrderResponseData 
-} from 'models';
+} from '@bs-commerce/models';
 
 //Queries
 

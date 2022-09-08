@@ -6,7 +6,7 @@ import {
   WishlistProductPhoto,
   addToWishlistRequest,
   WishlistProductMeta
-} from 'models';
+} from '@bs-commerce/models';
 
 @ObjectType()
 export class WishlistProductPhotoType implements WishlistProductPhoto {

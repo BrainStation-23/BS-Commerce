@@ -20,7 +20,7 @@ import { OrderModel } from './order.model';
 import {
   CreateOrderRequest,
   CreateProductOrderDetails
-} from 'models';
+} from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {

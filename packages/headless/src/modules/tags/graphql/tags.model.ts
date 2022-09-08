@@ -3,7 +3,7 @@ import {
   CreateTagRequestBody,
   Tag,
   UpdateTagRequest
-} from 'models';
+} from '@bs-commerce/models';
 @ObjectType()
 export class TagType implements Tag {
   @Field()

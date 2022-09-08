@@ -14,13 +14,13 @@ import {
   GetManufacturerSuccessMessages,
   GetManufacturerSuccessResponse,
   GetManufacturerErrorMessages,
-} from 'models';
+} from '@bs-commerce/models';
 import {
   CreateManufacturerResponse,
   CreateManufacturerSuccessMessages,
   CreateManufacturerSuccessResponse,
-} from 'models';
-import { CreateManufacturerErrorMessages } from 'models';
+} from '@bs-commerce/models';
+import { CreateManufacturerErrorMessages } from '@bs-commerce/models';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { ManufacturerRepository } from '../repositories';

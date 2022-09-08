@@ -1,6 +1,6 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { OrderByUserIdResponse, User } from 'models';
+import { OrderByUserIdResponse, User } from '@bs-commerce/models';
 
 import { OrderCustomerService } from '../services/customer.service';
 import { CreateOrderModel, OrderSortingQueryModel, SingleOrderResponse, SingleUserOrderList, ReOrderResponse, ReOrderRequestModel } from './order.customer.model';

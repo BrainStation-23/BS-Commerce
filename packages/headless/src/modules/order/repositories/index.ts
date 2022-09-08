@@ -1,4 +1,4 @@
-import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails } from '@bs-commerce/models';
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
 

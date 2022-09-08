@@ -1,5 +1,5 @@
-import { GetManufacturersErrorResponse, GetManufacturersSuccessResponse, DescriptiveError, GetManufacturersQuery, } from 'models';
-import { GetManufacturersErrorMessages, GetManufacturersSuccessMessages } from 'models'
+import { GetManufacturersErrorResponse, GetManufacturersSuccessResponse, DescriptiveError, GetManufacturersQuery, } from '@bs-commerce/models';
+import { GetManufacturersErrorMessages, GetManufacturersSuccessMessages } from '@bs-commerce/models'
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsOptional, ValidateNested } from "class-validator";
 import { ManufacturerDto } from './manufacturer.dto';

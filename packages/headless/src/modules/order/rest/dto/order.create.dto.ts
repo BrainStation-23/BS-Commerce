@@ -11,7 +11,7 @@ import {
   MinLength,
   ValidateNested
 } from 'class-validator';
-import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress } from '@bs-commerce/models';
 import { OrderProductPhotoDto } from './OrderProduct.dto';
 
 export class OrderAddressDto implements IOrderAddress {

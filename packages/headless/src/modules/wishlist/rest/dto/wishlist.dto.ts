@@ -8,7 +8,7 @@ import {
     WishlistProductInfo,
     WishlistProductPhoto,
     WishlistProductMeta,
-} from 'models';
+} from '@bs-commerce/models';
 
 export class WishlistProductInfoDto implements WishlistProductInfo {
     @ApiProperty()

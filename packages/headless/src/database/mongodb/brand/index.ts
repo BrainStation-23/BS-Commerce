@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from 'models';
+import { CreateBrandRequest, GetAllBrands, UpdateBrandRequest } from '@bs-commerce/models';
 
 import { Brand } from 'src/entity/brand';
 import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';

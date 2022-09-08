@@ -4,8 +4,8 @@ import {
   CreateManufacturerSuccessResponse,
   DescriptiveError,
   CreateManufacturerSuccessMessages,
-} from 'models';
-import { CreateManufacturerErrorMessages } from 'models';
+} from '@bs-commerce/models';
+import { CreateManufacturerErrorMessages } from '@bs-commerce/models';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,

@@ -2,7 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { Cart, ResponseItem, addToCartErrorResponse, addToCartRequest, addToCartSuccessResponse, addToCartErrorMessage } from 'models';
+import { Cart, ResponseItem, addToCartErrorResponse, addToCartRequest, addToCartSuccessResponse, addToCartErrorMessage } from '@bs-commerce/models';
 import { CartProductDto } from "./cartProductDto";
 
 class ResponseItemDto implements ResponseItem{

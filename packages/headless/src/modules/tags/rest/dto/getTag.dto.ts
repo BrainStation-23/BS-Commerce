@@ -6,7 +6,7 @@ import {
     GetTagErrorMessages,
     GetTagErrorResponse,
     GetTagSuccessResponse,
-} from 'models';
+} from '@bs-commerce/models';
 import { TagDto } from './tags.dto';
 
 export class GetTagParamsDto implements GetTagParams {

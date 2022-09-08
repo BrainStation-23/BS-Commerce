@@ -1,6 +1,6 @@
 import { ObjectType, Field , Int, InputType} from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
-import { Brand, BrandInfo, BrandMeta, CreateBrandRequest } from 'models';
+import { Brand, BrandInfo, BrandMeta, CreateBrandRequest } from '@bs-commerce/models';
 
 @ObjectType({ description: 'The Brand Info model' })
 export class BrandInfoModel implements BrandInfo{

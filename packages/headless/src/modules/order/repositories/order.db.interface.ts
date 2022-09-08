@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
+import { CreateOrderRequest, CreateProductOrderDetails } from '@bs-commerce/models';
 
 import { 
   CartItem,

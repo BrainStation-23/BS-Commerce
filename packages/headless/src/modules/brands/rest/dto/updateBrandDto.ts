@@ -4,7 +4,7 @@ import { HttpStatus } from '@nestjs/common';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, IsObject, IsNumber, IsArray, ValidateNested, IsBoolean } from 'class-validator';
-import { UpdateBrandSuccessResponse, UpdateBrandErrorResponse ,UpdateBrandRequest, ErrorMessageUpdate, UpdatedBrand, BrandUpdateInfo } from 'models';
+import { UpdateBrandSuccessResponse, UpdateBrandErrorResponse ,UpdateBrandRequest, ErrorMessageUpdate, UpdatedBrand, BrandUpdateInfo } from '@bs-commerce/models';
 
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';

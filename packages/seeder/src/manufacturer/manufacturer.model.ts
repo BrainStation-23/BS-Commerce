@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Manufacturer } from 'models';
+import { Manufacturer } from '@bs-commerce/models';
 
 interface ManufacturerWithID extends Manufacturer {
     id: {
