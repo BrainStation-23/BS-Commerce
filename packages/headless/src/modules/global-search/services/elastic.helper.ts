@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, ParseIntPipe } from "@nestjs/common";
 import { ElasticsearchService } from "@nestjs/elasticsearch";
 import { ProductSearchDatabase } from "src/database/mongodb/search";
 import { Product } from "src/entity/product";
-import { ISearchProductResponse } from "../rest/dto";
+import { ISearchProductResponse, ISuggestedProductResponse } from "../rest/dto";
 import { productSearchSchema } from "./product.schema";
 
 @Injectable()
@@ -32,30 +32,45 @@ export class ElasticHelperService {
         } 
     } 
 
-    async mapSearchData(e: Product): Promise<Record<string, any>> { 
-        let data: any = {} 
-  
-        data.infoProductId = e.id || ''
-        data.infoName = e?.info?.name || ''
-        data.infoShortDescription = e?.info?.shortDescription || ''
-        data.infoFullDescription = e?.info?.fullDescription || ''
-        data.infoSku = e?.info?.sku || ''
-        data.infoPrice = e?.info?.price || 0
-  
-        data.metaKeywords = e?.meta?.keywords || []
-        data.metaTitle = e?.meta?.title || ''
-        data.metaDescription = e?.meta?.description || ''
-  
+    mapSearchData(e: Product): Record<string, any> { 
+        let data: any = {}
+        data.info = {}
+        data.meta = {} 
+    
+        data.id = e.id || ''
+        data.info.name = e?.info?.name || ''
+        data.info.shortDescription = e?.info?.shortDescription || ''
+        data.info.fullDescription = e?.info?.fullDescription || ''
+        data.info.sku = e?.info?.sku || ''
+        data.info.price = e?.info?.price || 0
+        data.info.oldPrice = e?.info?.oldPrice || 0
+        data.info.cost = e?.info?.cost || 0
+    
+        data.meta.keywords = e?.meta?.keywords || []
+        data.meta.title = e?.meta?.title || ''
+        data.meta.description = e?.meta?.description || ''
+    
         data.brands = e?.brands || []
-        data.categories = e?.categories || []
+        data.categories = e?.categories.map(c => { return {id: c?.id, name: c?.name}}) || []
         data.manufacturer = e?.manufacturer  || {}
-        data.photos = e?.photos.map(p => p.url)  || []
+        data.photos = e?.photos.map(p => {
+            return {
+                url: p.url,
+                title: p.title,
+                alt: p.alt
+            }
+        })
         data.tags = e?.tags || []
-  
+    
         return data;
     } 
 
-    async getProductSearchData(searchKey, pageNumber=1, limit=10): Promise<ISearchProductResponse> { 
+    async getProductSearchData(searchKey, pageNumber=1, limit=20): Promise<ISearchProductResponse> {
+      
+        if(typeof pageNumber === 'string') pageNumber = parseInt(pageNumber)
+        if(typeof limit === 'string') limit = parseInt(limit)
+        
+        limit = limit > 30 ? 30 : limit
         const query = {  
           query: {
             bool:{
@@ -66,62 +81,60 @@ export class ElasticHelperService {
                 }
               }
             }
-          },
-          aggs:{
-            faceted_brands:{
-              terms:{
-                field: 'brands'
-              }
-            },
-            category_nested: {
-              nested: {
-                path: 'categories'
-              },   
-              aggs:{
-                faceted_category_id:{ 
-                  terms:{
-                    field: 'categories.id.keyword',
-                    size: 10
-                  }
-                },
-                faceted_category_name:{
-                  terms:{
-                    field: 'categories.name.keyword',
-                    size: 10
-                  }
-                }
-              }  
-            }
           }
         }
       
+        console.log(limit)
         let startTime = Date.now()
         const { body: { hits } } = await this.esService.search({
           from:  (pageNumber-1)*limit  || 0,
-          size:  limit || 30,
+          size:  limit,
           index: 'products', 
           type:  'products',
           body:  query
         });  
-    
-    
         console.log("search time = ", Date.now()-startTime)
         
-        startTime = Date.now()
-        const resultsCount = hits.total.value as number; 
-        const tags = hits.hits.flatMap(hit => hit._source.tags)
-        const set = [...new Set(tags)].slice(0,5)
-        const suggestion = hits.hits.map(hit => hit._source.info.name).slice(0,5).concat(set)
-        const values  = hits.hits.map((hit) => { 
+        const totalItemsFound = hits.total.value as number;  
+        const products  = hits.hits.map((hit) => { 
           return hit._source
         });
-    
-        console.log("search result formation time = ", Date.now()-startTime)
+      
+        return {
+          totalItemsFound,
+          pageNumber,
+          limit,
+          products
+        }
+      }
+
+
+    async getProductSearchSuggestion(searchKey): Promise<ISuggestedProductResponse> { 
+        const query = {
+          query: {
+            prefix:{ 
+                    key:{
+                      value: searchKey
+                    } 
+                  }
+                },
+          }
+       
+        const { body: { hits } } = await this.esService.search({
+          from:  0,
+          size:  20,
+          index: 'suggestion', 
+          type:  'suggestion',
+          body:  query
+        });   
+        const resultsCount = hits.total.value as number;  
+        const values  = hits.hits.map((hit) => { 
+          return hit._source.key
+        });
       
         return {
           resultsCount,
-          values,
-          suggestion
+          values
         }
       }
 
