@@ -76,7 +76,7 @@ export class ElasticHelperService {
             bool:{
               should:{
                 multi_match:{
-                  query: searchKey, 
+                  query: searchKey,
                   fields: ['info.name', 'info.shortDescription', 'info.fullDescription', 'sku', 'meta.title', 'tags', 'brands','categories.name', 'manufacturer.name'],
                 }
               }
@@ -135,6 +135,46 @@ export class ElasticHelperService {
         return {
           resultsCount,
           values
+        }
+      }
+
+
+      async singleProductInsertInElasticSearch(productId: string): Promise<number> {
+        try {
+          const index = 'products';
+          const productData = await this.productSearchDB.findProductById(productId);
+          if (!productData) {
+            console.log('Product not found');
+            return 0;
+          }
+          const body = await this.mapSearchData(productData);
+          const result = await this.esService.index({ index, refresh: true, body });
+          return result.statusCode;
+        } catch (error) {
+          console.log(error);
+          return 0;
+        }
+      }
+    
+      async deleteFromElasticSearchByproductId(id: string): Promise<number> {
+        try {
+          const index = 'products';
+          const type = 'products';
+          const body = {
+            query: {
+              bool:{
+                must:{
+                  match: { id: id },
+                }
+              }
+            },
+          };
+          const result = await this.esService.deleteByQuery({ index, type, body });
+          console.log("ESDB product delete count = ",result.body.deleted)
+          return result.statusCode;
+        } catch (error) {
+          console.log(error);
+          return 0;
         }
       }
 
