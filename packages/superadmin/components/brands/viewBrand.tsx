@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models'';
 import BrandInfoCard from '@/components/brands/cards/brandInfoCard';
 import BrandMetaCard from '@/components/brands/cards/metaCard';
 const ViewBrand: FC<{ brand: Brand }> = ({ brand }) => {

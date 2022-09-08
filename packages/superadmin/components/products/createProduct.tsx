@@ -10,7 +10,7 @@ import {
   ProductManufacturer,
   subCategoryList,
   UpdateProductCategory,
-} from 'models';
+} from '@bs-commerce/models'';
 
 import { userAPI } from '@/APIs';
 import MetaForm from '@/components/products/forms/metaForm';

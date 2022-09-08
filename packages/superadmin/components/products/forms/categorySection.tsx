@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { CategoryInterface } from '@/components/products/models/index';
 import CategoryCheckbox from './categoryCheckBox';
-import { NestedCategoryList } from 'models';
+import { NestedCategoryList } from '@bs-commerce/models'';
 
 const CategorySection: FC<{
   categogiesFullList: NestedCategoryList[];

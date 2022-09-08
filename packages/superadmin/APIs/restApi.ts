@@ -32,7 +32,7 @@ import {
   GetTagsSuccessResponse,
   CreateTagRequestBody,
   GetTagSuccessResponse,
-} from 'models';
+} from '@bs-commerce/models'';
 
 import { User } from '../utils/types';
 import { apiEndPoints } from '../utils/apiEndPoints';

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import { userAPI } from '@/APIs';
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models'';
 
 const SearchWindow: FC<{ allbrands: Brand[]; setBrands: Function }> = ({
   allbrands,

@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 
-import { Brand, CreateBrandRequest, UpdateBrandRequest } from 'models';
+import { Brand, CreateBrandRequest, UpdateBrandRequest } from '@bs-commerce/models'';
 
 import { userAPI } from '@/APIs';
 import BrandInfoForm from '@/components/brands/forms/brandInfoForm';
