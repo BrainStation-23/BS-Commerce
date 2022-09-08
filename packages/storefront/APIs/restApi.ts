@@ -61,18 +61,15 @@ import {
   getCategorySuccessResponse,
   getCategoryBySlugResponse,
   getCategoryBySlugSuccessResponse,
-  OrderResponseData,
-  SendOtpResponse,
   CompareSuccessResponse,
   IReOrderQuery,
   ErrorMessageReOrder,
+  ReOrderResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { OrderResponseData } from 'models';
-import { SendOtpResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -628,12 +625,13 @@ export async function getCategoryDetailsBySlugRest(
 
 export async function toreorderProcessRest(
   data: IReOrderQuery
-): Promise<ErrorMessageReOrder | undefined> {
+): Promise<ReOrderResponse | undefined> {
   try {
     const res = await axios.post(`${apiEndPoints.reOrder}`, data);
-    console.log('response-success', res);
+    return res.data as ReOrderResponse;
+    // console.log('response-success', res.data);
   } catch (error: any) {
-    console.log('err', error);
+    // console.log('err', error);
 
     toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',

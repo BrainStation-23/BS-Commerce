@@ -3,7 +3,6 @@ import {
   OrderResponseData,
   getCategoryResponse,
   GetAllBrandsResponse,
-  OrderResponseData,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -55,6 +54,7 @@ import {
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
   IReOrderQuery,
+  ReOrderResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
 
@@ -185,5 +185,5 @@ export interface apiFunction {
   ) => Promise<getCategoryBySlugResponse | undefined>;
   toreorderProcess: (
     reOrderParams: IReOrderQuery
-  ) => Promise<IReOrderQuery | undefined>;
+  ) => Promise<ReOrderResponse | undefined>;
 }

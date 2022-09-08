@@ -3,14 +3,14 @@ import { useAppDispatch } from 'customHooks/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';
-import { XCircleIcon } from '../headerIcons';
-import { IProductOrderData } from 'models';
+import { XCircleIcon } from '../../layout/headerIcons';
+import { IOrderProduct } from 'models';
 interface Props {
   open: boolean;
   onClose: () => void;
   onCheckOutReorder: () => void;
   message: String;
-  unavailableProd: IProductOrderData[];
+  unavailableProd: IOrderProduct[];
 }
 
 const ReorderModal: React.FC<Props> = ({
@@ -80,18 +80,17 @@ const ReorderModal: React.FC<Props> = ({
                 ''
               )}
               <div className="flex justify-center py-4">
-                <Link href="/cart" passHref>
-                  <button
-                    className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
-                    onClick={() => {
-                      dispatch(setCartModalState({ showModal: false }));
-                      onClose();
-                      onCheckOutReorder();
-                    }}
-                  >
-                    Yes
-                  </button>
-                </Link>
+                <button
+                  className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
+                  onClick={() => {
+                    dispatch(setCartModalState({ showModal: false }));
+                    onClose();
+                    onCheckOutReorder();
+                  }}
+                >
+                  Yes
+                </button>
+
                 <button
                   className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
                   onClick={() => {

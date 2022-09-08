@@ -1,17 +1,17 @@
-import { OrderByUserId } from 'models';
+import { OrderByUserId, IReOrderQuery, IOrderProduct } from 'models';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'customHooks/hooks';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
 import { productsState } from 'toolkit/productsSlice';
 import { addToCart } from 'toolkit/cartSlice';
-import { IOrderProduct } from 'models';
-import { IReOrderQuery } from 'models';
 import { userAPI } from 'APIs';
+import { useRouter } from 'next/router';
 interface Props {
   singleOrder: OrderByUserId;
 }
+
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
-  console.log(singleOrder);
+  // console.log(singleOrder);
 
   const dispatch = useAppDispatch();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
@@ -19,7 +19,9 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const [newProduct, setNewProduct] = useState<IOrderProduct[]>([]);
   const [message, setMessage] = useState('');
   const [cartToken, setCartToken] = useState(false);
-  let products = singleOrder.products;
+  const router = useRouter();
+  let products = singleOrder?.products;
+
   const allProducts = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
@@ -28,9 +30,10 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     setShowCartModal(false);
     setUnavailableProd([]);
   };
+
   const handleReorder = () => {
     const pastOrderId = singleOrder.orderId;
-    const reOrderParams = {
+    const reOrderParams: IReOrderQuery = {
       orderId: pastOrderId,
       overWriteCart: false,
       ignoreInvalidItems: false,
@@ -41,7 +44,18 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   const toReorder = async (reOrderParams: IReOrderQuery) => {
     try {
       const info = await userAPI.toreorderProcess(reOrderParams);
-      console.log(info);
+      if ('data' in info!) {
+        if (
+          info.data.message ===
+          'YOUR ITEMS IN THE CART WILL BE REPLACED. DO YOU WANT TO CONTINUE?'
+        ) {
+          console.log(info.data);
+          // reOrderParams.overWriteCart = true;
+          // toReorder(reOrderParams);
+          setMessage(info.data.message);
+          setShowCartModal(true);
+        }
+      }
 
       // console.log(res?.response);
 
@@ -60,8 +74,17 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
     } catch (error) {}
   };
 
-  const handleReorderCheckout = () => {
+  const handleReorderCartOverwrite = async () => {
+    const pastOrderId = singleOrder.orderId;
+    const reOrderParams: IReOrderQuery = {
+      orderId: pastOrderId,
+      overWriteCart: true,
+      ignoreInvalidItems: false,
+    };
     // toCart();
+    const info = await userAPI.toreorderProcess(reOrderParams);
+    console.log(info);
+    router.push('/cart');
   };
   return (
     <>
@@ -78,7 +101,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
         open={showCartModal}
         onClose={closeCartModal}
         message={message}
-        onCheckOutReorder={handleReorderCheckout}
+        onCheckOutReorder={handleReorderCartOverwrite}
         unavailableProd={unavailableProd}
       />
     </>
