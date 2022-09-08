@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import _ from 'lodash';
-import { createCategoryRequest, NestedCategoryList } from '@bs-commerce/models'';
+import { createCategoryRequest, NestedCategoryList } from '@bs-commerce/models';
 
 import { userAPI } from '@/APIs';
 import { CategorySchema } from '@/components/category/schema/category.schema';

@@ -1,6 +1,6 @@
 import type { NextComponentType } from 'next';
 import { useEffect, useState } from 'react';
-import { NestedCategoryList } from '@bs-commerce/models'';
+import { NestedCategoryList } from '@bs-commerce/models';
 
 import { userAPI } from '@/APIs';
 

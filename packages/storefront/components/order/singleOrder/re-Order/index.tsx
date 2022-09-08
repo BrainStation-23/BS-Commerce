@@ -1,10 +1,9 @@
-import { OrderByUserId } from 'models';
+import { OrderByUserId, IOrderProduct } from '@bs-commerce/models';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'customHooks/hooks';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
 import { productsState } from 'toolkit/productsSlice';
 import { addToCart } from 'toolkit/cartSlice';
-import { IOrderProduct } from 'models';
 interface Props {
   singleOrder: OrderByUserId;
 }

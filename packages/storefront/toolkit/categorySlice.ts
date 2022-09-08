@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NestedCategoryList } from 'models';
+import { NestedCategoryList } from '@bs-commerce/models';
 
 export interface categoryState {
   categoryList: NestedCategoryList[];

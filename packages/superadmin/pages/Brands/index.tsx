@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Brand } from '@bs-commerce/models'';
+import { Brand } from '@bs-commerce/models';
 import { userAPI } from '@/APIs';
 import BrandsList from '@/components/brands/brandsList';
 import SearchWindowBrands from '@/components/brands/searchWindowBrands';

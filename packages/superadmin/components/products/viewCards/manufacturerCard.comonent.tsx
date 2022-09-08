@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Product } from '@bs-commerce/models'';
+import { Product } from '@bs-commerce/models';
 import SingleView from '@/components/products/singleView';
 
 const ManufacturerCard: FC<{

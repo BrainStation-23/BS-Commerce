@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';

@@ -1,4 +1,4 @@
-import { ProductCategory } from '@bs-commerce/models'';
+import { ProductCategory } from '@bs-commerce/models';
 
 interface Props {
   category: ProductCategory;

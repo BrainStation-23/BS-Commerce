@@ -24,7 +24,7 @@ import {
   CreateTagRequestBody,
   GetTagsSuccessResponse,
   GetTagSuccessResponse,
-} from '@bs-commerce/models'';
+} from '@bs-commerce/models';
 
 export interface User {
   id?: string;

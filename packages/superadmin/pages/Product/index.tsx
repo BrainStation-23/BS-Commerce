@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
-import { Product } from '@bs-commerce/models'';
+import { Product } from '@bs-commerce/models';
 import ProductsList from '@/components/products/productsList';
 import SearchWindow from '@/components/products/searchWindow';
 

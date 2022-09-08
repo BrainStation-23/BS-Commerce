@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';
-import { OrderByUserId, OrderByUserIdResponse } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 
 const OrderMain: FC = () => {
   // const storedOrderProducts = orderProducts?.data?.orderInfo;

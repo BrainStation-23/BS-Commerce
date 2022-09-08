@@ -1,4 +1,4 @@
-import { ProductCategory } from '@bs-commerce/models'';
+import { ProductCategory } from '@bs-commerce/models';
 import SingleCategory from '@/components/products/viewCards/singleCategory';
 
 interface Props {

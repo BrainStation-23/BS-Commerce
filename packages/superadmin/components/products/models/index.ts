@@ -1,7 +1,7 @@
-import { Product } from '@bs-commerce/models'';
+import { Product } from '@bs-commerce/models';
 
 export interface CategoryInterface {
-  id?: number | string ;
+  id?: number | string;
   name?: string | undefined;
   isSelected: boolean | undefined;
 }

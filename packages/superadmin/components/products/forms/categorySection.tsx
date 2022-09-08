@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { CategoryInterface } from '@/components/products/models/index';
 import CategoryCheckbox from './categoryCheckBox';
-import { NestedCategoryList } from '@bs-commerce/models'';
+import { NestedCategoryList } from '@bs-commerce/models';
 
 const CategorySection: FC<{
   categogiesFullList: NestedCategoryList[];
@@ -36,7 +36,7 @@ const CategorySection: FC<{
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col text-start px-3">
+              <div className="fs-5 col px-3 text-start">
                 <i
                   className="bi bi-diagram-3-fill col-1 px-1"
                   style={{ fontSize: '25px' }}

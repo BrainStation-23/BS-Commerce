@@ -1,10 +1,9 @@
 import { useAppDispatch } from 'customHooks/hooks';
-// import { CustomerProduct, Product, WishlistProduct } from 'models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';
 import { XCircleIcon } from '../headerIcons';
-import { IProductOrderData } from 'models';
+import { IProductOrderData } from '@bs-commerce/models';
 interface Props {
   open: boolean;
   onClose: () => void;

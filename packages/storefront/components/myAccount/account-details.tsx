@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { Field, Form, Formik } from 'formik';
 
-import { UpdateCustomerRequestBody } from 'models';
+import { UpdateCustomerRequestBody } from '@bs-commerce/models';
 
 import { userAPI } from 'APIs';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';

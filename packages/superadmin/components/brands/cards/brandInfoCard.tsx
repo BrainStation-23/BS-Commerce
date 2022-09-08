@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Brand } from '@bs-commerce/models'';
+import { Brand } from '@bs-commerce/models';
 import SingleView from '@/components/brands/singleView';
 interface MetaCardInterface {
   brand: Brand;
@@ -21,7 +21,7 @@ const BrandInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
               className="bi bi-info-lg col-1 align-text-top"
               style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col text-start px-3">Brand info</div>
+            <div className="fs-5 col px-3 text-start">Brand info</div>
           </div>
         </div>
         <div className="" id="prouctInfoTab">
@@ -47,10 +47,12 @@ const BrandInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
             {brand?.meta[0] ? (
               <>
                 <SingleView label="brand cost" value={brand?.meta?.keywords} />
-                <SingleView label="brand cost" value={brand?.meta?.description} />
+                <SingleView
+                  label="brand cost"
+                  value={brand?.meta?.description}
+                />
                 <SingleView label="brand cost" value={brand?.meta?.title} />
                 <SingleView label="brand cost" value={brand?.meta?.SEFN} />
-                
               </>
             ) : (
               ''

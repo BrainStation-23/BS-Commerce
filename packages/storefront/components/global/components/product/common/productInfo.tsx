@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 interface SingleProduct {
   product: CustomerProduct;

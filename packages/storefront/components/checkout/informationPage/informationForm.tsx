@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import FieldTemplate from '../fieldTemplate';
-import { CustomerAddress } from 'models';
+import { CustomerAddress } from '@bs-commerce/models';
 
 interface FormData {
   email: string;

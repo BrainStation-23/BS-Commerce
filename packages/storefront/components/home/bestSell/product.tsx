@@ -1,6 +1,6 @@
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/productInfo';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 import Image from 'next/image';
 import Link from 'next/link';
 interface SingleProduct {

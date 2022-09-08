@@ -1,4 +1,4 @@
-import { IOrderProduct, OrderByUserId } from 'models';
+import { IOrderProduct, OrderByUserId } from '@bs-commerce/models';
 import React from 'react';
 import moment from 'moment';
 import Link from 'next/link';

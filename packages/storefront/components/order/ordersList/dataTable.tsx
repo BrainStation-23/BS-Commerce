@@ -1,7 +1,7 @@
 import React from 'react';
 import ShowData from './showData';
 import Link from 'next/link';
-import { OrderByUserId, OrderByUserIdResponse } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 
 interface Props {
   storedOrderProducts: OrderByUserId[];

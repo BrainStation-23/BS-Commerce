@@ -23,7 +23,7 @@ import Icon from '@/components/global/components/icon';
 import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
 import WishlistBody from './wishlistBody';
-import { WishlistItem } from 'models';
+import { WishlistItem } from '@bs-commerce/models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();

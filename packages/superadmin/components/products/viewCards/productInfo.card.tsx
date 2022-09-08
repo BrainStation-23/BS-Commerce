@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Product } from '@bs-commerce/models'';
+import { Product } from '@bs-commerce/models';
 import SingleView from '@/components/products/singleView';
 
 const ProductInfoCard: FC<{
@@ -21,7 +21,7 @@ const ProductInfoCard: FC<{
               className="bi bi-info-lg col-1 align-text-top"
               style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col text-start px-3">Product info</div>
+            <div className="fs-5 col px-3 text-start">Product info</div>
           </div>
         </div>
         <div className="" id="prouctInfoTab">
