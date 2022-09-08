@@ -312,3 +312,8 @@ export async function searchProductsGraphql(
     return error;
   }
 }
+
+
+export async function getCompareGraphql(): Promise<CompareResponse | undefined> {
+    return undefined;
+}

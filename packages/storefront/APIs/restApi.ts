@@ -640,3 +640,15 @@ export async function searchProductsRest(
     return error;
   }
 }
+
+export async function getCompareRest(
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.addToCompare}`
+    );
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}

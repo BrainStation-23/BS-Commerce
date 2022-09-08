@@ -1,7 +1,7 @@
 import { current } from '@reduxjs/toolkit';
 import { FC, useEffect, useState } from 'react';
 
-export const SearchPagination: FC<{
+export const Pagination: FC<{
   totalPages: number;
   setCurrentPage: Function;
   currentPage: number;
