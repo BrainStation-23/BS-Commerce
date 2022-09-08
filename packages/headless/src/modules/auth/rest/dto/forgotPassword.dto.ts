@@ -7,7 +7,7 @@ import {
   ForgotPasswordSuccessResponse,
   ForgotMessageResponse,
   ForgotPasswordErrorMessages,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class ForgotPasswordDto implements ForgotPasswordRequest {
   @ApiProperty()

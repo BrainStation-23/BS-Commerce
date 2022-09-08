@@ -7,7 +7,7 @@ import {
     ChangePasswordSuccessResponse,
     ChangePasswordErrorMessages,
     ChangePasswordSuccessMessage
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class ChangePasswordDto implements ChangePasswordRequest {
     @ApiProperty()

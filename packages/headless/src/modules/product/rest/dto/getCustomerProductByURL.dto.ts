@@ -6,7 +6,7 @@ import {
     GetCustomerProductByURLErrorMessages,
     GetCustomerProductByURLErrorResponse,
     GetCustomerProductByURLSuccessResponse,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { ProductDto } from '.';
 
 export class GetCustomerProductByURLParamsDto implements GetCustomerProductByURLParams {

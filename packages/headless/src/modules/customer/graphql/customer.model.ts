@@ -3,7 +3,7 @@ import {
     Customer,
     CustomerAddress,
     UpdateCustomerRequestBody,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 @ObjectType('CustomerAddress')
 export class GraphqlCustomerAddress implements CustomerAddress {

@@ -6,7 +6,7 @@ import {
     UpdateCustomerErrorResponse,
     UpdateCustomerSuccessResponse,
     UpdateCustomerErrorMessages
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { CustomerInformationDto } from './customer.dto';
 
 export class UpdateCustomerDto implements UpdateCustomerRequestBody {

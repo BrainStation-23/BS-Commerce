@@ -7,7 +7,7 @@ import {
     SendOtpSuccessResponse,
     SendOtpErrorMessages,
     SendOtpSuccessMessages,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class SendOtpDto implements SendOtpRequest {
     @ApiProperty({ required: false })

@@ -7,7 +7,7 @@ import {
     updateWishlistItemRequestBody,
     updateWishlistItemSuccessResponse,
     updateWishlistItemErrorMessage
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class updateWishlistItemRequestBodyDto implements updateWishlistItemRequestBody {
     @ApiProperty()

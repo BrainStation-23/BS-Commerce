@@ -6,7 +6,7 @@ import {
     DeleteCustomerAddressSuccessResponse,
     DeleteCustomerAddressErrorMessages,
     DeleteCustomerAddressParams,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class DeleteCustomerAddressParamsDto implements DeleteCustomerAddressParams {

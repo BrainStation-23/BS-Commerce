@@ -5,7 +5,7 @@ import {
     GetUserErrorResponse,
     GetUserSuccessResponse,
     GetUserErrorMessages
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 
 export class GetUserErrorResponseDto implements GetUserErrorResponse {

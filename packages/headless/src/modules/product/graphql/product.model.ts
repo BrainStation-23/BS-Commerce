@@ -17,7 +17,7 @@ import {
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
   GetCustomerAllProductsResponseType,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 
 @ObjectType('ProductInfo')

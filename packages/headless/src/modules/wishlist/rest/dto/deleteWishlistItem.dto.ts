@@ -7,7 +7,7 @@ import {
     deleteWishlistItemSuccessResponse,
     deleteWishlistItemErrorMessage,
     DeleteWishlistItemParams,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class deleteWishlistItemPramsDto implements DeleteWishlistItemParams {
     @ApiProperty()

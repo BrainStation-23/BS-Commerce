@@ -6,7 +6,7 @@ import { multerConfig } from 'config/multer';
 import { coreConfig } from 'config/core';
 import { UploadFileResponse } from './media.model';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { UploadFileErrorMessages } from 'bs-commerce-models';
+import { UploadFileErrorMessages } from '@bs-commerce/models';
 
 @Resolver()
 export class MediaResolver {

@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject } from 'class-validator';
-import { GetTagsErrorMessages, GetTagsErrorResponse, GetTagsSuccessResponse } from 'bs-commerce-models';
+import { GetTagsErrorMessages, GetTagsErrorResponse, GetTagsSuccessResponse } from '@bs-commerce/models';
 import { TagDto } from './tags.dto';
 
 export class GetTagsErrorResponseDto implements GetTagsErrorResponse {

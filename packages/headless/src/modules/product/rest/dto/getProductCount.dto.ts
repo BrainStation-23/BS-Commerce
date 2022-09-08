@@ -5,7 +5,7 @@ import {
     GetProductCountErrorMessages,
     GetProductCountErrorResponse,
     GetProductCountSuccessResponse,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class GetProductCountErrorResponseDto implements GetProductCountErrorResponse {
     @ApiProperty({ default: HttpStatus.BAD_REQUEST })

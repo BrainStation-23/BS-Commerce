@@ -7,7 +7,7 @@ import {
     CreateUserSuccessResponse,
     SignUpErrorMessages,
     SignUpSuccessMessages,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class CreateUserDto implements CreateUserRequest {
     @ApiProperty()

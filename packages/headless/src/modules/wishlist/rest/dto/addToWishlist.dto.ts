@@ -7,7 +7,7 @@ import {
     addToWishlistRequest,
     addToWishlistSuccessResponse,
     addToWishlistErrorMessage
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class AddToWishlistRequestDto implements addToWishlistRequest {
     @ApiProperty()

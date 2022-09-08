@@ -5,7 +5,7 @@ import {
     getUserWishlistErrorResponse,
     getUserWishlistSuccessResponse,
     getUserWishlistErrorMessage
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 
 export class getUserWishlistSuccessResponseDto implements getUserWishlistSuccessResponse {

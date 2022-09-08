@@ -7,7 +7,7 @@ import {
     UpdateProductsForBrandErrorMessages,
     UpdateProductsForBrandErrorResponse,
     UpdateProductsForBrandSuccessResponse,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class updateProductsForBrandRequestDto implements UpdateProductsForBrandRequest {
     @ApiProperty({ required: false, type: [String], })

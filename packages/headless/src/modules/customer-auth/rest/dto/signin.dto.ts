@@ -6,7 +6,7 @@ import {
     CustomerSignInRequest,
     CustomerSignInSuccessResponse,
     CustomerSignInErrorMessages,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class CustomerSignInDto implements CustomerSignInRequest {
     @ApiProperty({ required: false })

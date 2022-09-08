@@ -7,7 +7,7 @@ import {
     GetProductsByConditionErrorResponse,
     GetProductsByConditionSuccessResponse,
     ConditionalProduct
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { Type } from 'class-transformer';
 import { ProductInfoDto, ProductPhotoDto } from './product.dto';
 

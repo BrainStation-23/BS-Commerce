@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Product } from 'bs-commerce-models';
+import { Product } from '@bs-commerce/models';
 
 const ProductSchema = new Schema<Product>({
     id: {

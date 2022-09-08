@@ -7,7 +7,7 @@ import {
   CustomerForgotPasswordMessage,
   CustomerForgotPasswordErrorMessages,
   CustomerForgotPasswordSuccessResponse,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 
 export class CustomerForgotPasswordDto implements CustomerForgotPasswordRequest {
   @ApiProperty({ required: false })

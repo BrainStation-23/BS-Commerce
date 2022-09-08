@@ -16,7 +16,7 @@ import {
   ForgotPasswordErrorMessages,
   SignUpSuccessMessages,
   CreateUserRequest,
-} from 'bs-commerce-models';
+} from '@bs-commerce/models';
 import { authConfig } from 'config/auth';
 
 @Injectable()
