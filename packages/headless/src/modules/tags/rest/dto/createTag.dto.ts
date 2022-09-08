@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, } from 'class-validator';
 import { HttpStatus } from '@nestjs/common';
 import { TagDto } from './tags.dto';
 import {
@@ -14,6 +14,11 @@ export class CreateTagRequestBodyDto implements CreateTagRequestBody {
     @IsString()
     @IsNotEmpty()
     name: string;
+
+    @ApiProperty({ required: false, default: false })
+    @IsOptional()
+    @IsBoolean()
+    isHomePageProductsTag?: boolean;
 }
 
 export class CreateTagErrorResponseDto implements CreateTagErrorResponse {

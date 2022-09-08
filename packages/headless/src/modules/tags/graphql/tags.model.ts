@@ -16,6 +16,9 @@ export class TagType implements Tag {
 export class CreateTagInput implements CreateTagRequestBody {
   @Field()
   name: string;
+
+  @Field(() => Boolean, { nullable: true })
+  isHomePageProductsTag?: boolean;
 }
 
 @InputType()
