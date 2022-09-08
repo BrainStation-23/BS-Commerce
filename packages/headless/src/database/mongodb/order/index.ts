@@ -17,7 +17,10 @@ import {
 import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
-import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
+import {
+  CreateOrderRequest,
+  CreateProductOrderDetails,
+} from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {

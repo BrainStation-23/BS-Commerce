@@ -1,7 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import type { AddCompareItem, CompareData, ICompareItems } from 'models';
+import type {
+  AddCompareItem,
+  CompareData,
+  ICompareItems,
+} from '@bs-commerce/models';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 
 export class AddToCompareDto implements AddCompareItem {
