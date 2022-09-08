@@ -22,7 +22,6 @@ import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
 import ProductDescription from '@/components/product/productDescription';
-import Modal from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
