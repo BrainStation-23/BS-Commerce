@@ -16,7 +16,7 @@ const SinglSlide = (props: { product: productInterface }) => {
         <h2 className="font-thin lg:mt-3 text-xl md:text-2xl lg:text-3xl xl:text-4xlh 2xl:text-5xl">
           {description}
         </h2>
-        <div className="font-thin mt-1 lg:mt-4 text-sm md:text-base md:w-2/4 lg:w-11/12">
+        <div className="font-thin mt-1 lg:mt-4 text-sm w-3/4 mx-auto md:ml-0 md:text-base md:w-2/5 lg:w-11/12">
           {deatils}
         </div>
         <div className="mt-3 lg:mt-8">
