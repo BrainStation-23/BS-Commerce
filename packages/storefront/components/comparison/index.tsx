@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
-import { deleteComparedProduct } from 'toolkit/compareSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 import { userAPI } from 'APIs';
+import { ICompareItems } from 'models';
 
 interface Props {
   setModal: boolean;
@@ -17,10 +18,23 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
   const dispatch = useAppDispatch();
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.productsToCompare
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
-  if (comparisonProducts.length === 0) return null;
+  const handleDeleteCompareItem = async (productId: string) => {
+    try {
+      const res = await userAPI.deleteFromCompare(productId);
+      if ('data' in res!) {
+        dispatch(storeCompare(res.data));
+      }
+    } catch (error) {
+      toast.error('Some error happend. Try again.', {
+        containerId: 'bottom-right',
+      });
+    }
+  };
+
+  if (comparisonProducts?.length === 0) return null;
 
   return (
     <>
@@ -73,40 +87,28 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 >
                                   Action
                                 </th>
-                                {comparisonProducts.map((product) => {
-                                  return (
-                                    <React.Fragment key={product.id}>
-                                      <th
-                                        scope="col"
-                                        className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
-                                      >
-                                        <button
-                                          onClick={async () => {
-                                            try {
-                                              await userAPI.deleteFromCompare(
-                                                product?.id!
-                                              );
-                                              dispatch(
-                                                deleteComparedProduct(
-                                                  product?.id!
-                                                )
-                                              );
-                                            } catch (error) {
-                                              toast.error(
-                                                'Some error happend. Try again.',
-                                                {
-                                                  containerId: 'bottom-right',
-                                                }
-                                              );
-                                            }
-                                          }}
+                                {comparisonProducts?.map(
+                                  (product: ICompareItems) => {
+                                    return (
+                                      <React.Fragment key={product?.productId}>
+                                        <th
+                                          scope="col"
+                                          className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                         >
-                                          Remove
-                                        </button>
-                                      </th>
-                                    </React.Fragment>
-                                  );
-                                })}
+                                          <button
+                                            onClick={() => {
+                                              handleDeleteCompareItem(
+                                                product?.productId
+                                              );
+                                            }}
+                                          >
+                                            Remove
+                                          </button>
+                                        </th>
+                                      </React.Fragment>
+                                    );
+                                  }
+                                )}
                               </tr>
                             </thead>
                             <tbody>
@@ -114,93 +116,121 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product name
                                 </td>
-                                {comparisonProducts.map((product) => {
-                                  return (
-                                    <React.Fragment key={product.id}>
-                                      <td className="border-r px-6 py-4 text-sm font-normal">
-                                        {product?.info?.name!}
-                                      </td>
-                                    </React.Fragment>
-                                  );
-                                })}
+                                {comparisonProducts?.map(
+                                  (product: ICompareItems) => {
+                                    return (
+                                      <React.Fragment key={product.productId}>
+                                        <td className="border-r px-6 py-4 text-sm font-normal">
+                                          {product?.productDetails?.info?.name!}
+                                        </td>
+                                      </React.Fragment>
+                                    );
+                                  }
+                                )}
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product image
                                 </td>
-                                {comparisonProducts.map((product) => {
-                                  return (
-                                    <React.Fragment key={product.id}>
-                                      <td className="border-r p-5  align-top font-normal">
-                                        <div>
-                                          <Image
-                                            src={product?.photos![0]?.url!}
-                                            alt={product?.info?.name}
-                                            height={100}
-                                            width={100}
-                                            // className="m-auto"
-                                            layout="fixed"
-                                          />
-                                          <br />
-                                          {product?.info?.oldPrice ? (
-                                            <>
-                                              <span className="text-sm text-red-600">
-                                                On Sale ${product.info.price}
+                                {comparisonProducts?.map(
+                                  (product: ICompareItems) => {
+                                    return (
+                                      <React.Fragment key={product?.productId}>
+                                        <td className="border-r p-5  align-top font-normal">
+                                          <div>
+                                            <Image
+                                              src={
+                                                product.productDetails
+                                                  .photos![0]!
+                                              }
+                                              alt={
+                                                product?.productDetails?.info
+                                                  ?.name!
+                                              }
+                                              height={100}
+                                              width={100}
+                                              // className="m-auto"
+                                              layout="fixed"
+                                            />
+                                            <br />
+                                            {product?.productDetails?.info
+                                              ?.oldPrice ? (
+                                              <>
+                                                <span className="text-sm text-red-600">
+                                                  On Sale $
+                                                  {
+                                                    product?.productDetails
+                                                      ?.info?.price
+                                                  }
+                                                </span>
+                                              </>
+                                            ) : (
+                                              <span className="font-normal text-red-600">
+                                                $
+                                                {
+                                                  product?.productDetails?.info
+                                                    ?.price
+                                                }
                                               </span>
-                                            </>
-                                          ) : (
-                                            <span className="font-normal text-red-600">
-                                              ${product.info.price}
-                                            </span>
-                                          )}
-                                          <br />
-                                          <Link
-                                            href={{
-                                              pathname: `/product/${product.meta.friendlyPageName}`,
-                                              // query: {
-                                              //   id: product?.id,
-                                              //   name: product?.info.name,
-                                              // },
-                                            }}
-                                            passHref
-                                          >
-                                            <a className="text-xs text-gray-500/100 hover:text-red-600">
-                                              VIEW PRODUCT
-                                            </a>
-                                          </Link>
-                                        </div>
-                                      </td>
-                                    </React.Fragment>
-                                  );
-                                })}
+                                            )}
+                                            <br />
+                                            <Link
+                                              href={{
+                                                pathname: `/product/${product
+                                                  ?.productDetails?.meta
+                                                  ?.friendlyPageName!}`,
+                                                // query: {
+                                                //   id: product?.id,
+                                                //   name: product?.info.name,
+                                                // },
+                                              }}
+                                              passHref
+                                            >
+                                              <a className="text-xs text-gray-500/100 hover:text-red-600">
+                                                VIEW PRODUCT
+                                              </a>
+                                            </Link>
+                                          </div>
+                                        </td>
+                                      </React.Fragment>
+                                    );
+                                  }
+                                )}
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Product description
                                 </td>
-                                {comparisonProducts.map((product) => {
-                                  return (
-                                    <React.Fragment key={product.id}>
-                                      <td className="border-r px-6 py-4 text-sm font-normal">
-                                        {product?.info.shortDescription}
-                                      </td>
-                                    </React.Fragment>
-                                  );
-                                })}
+                                {comparisonProducts?.map(
+                                  (product: ICompareItems) => {
+                                    return (
+                                      <React.Fragment key={product?.productId}>
+                                        <td className="border-r px-6 py-4 text-sm font-normal">
+                                          {
+                                            product?.productDetails?.info
+                                              ?.shortDescription
+                                          }
+                                        </td>
+                                      </React.Fragment>
+                                    );
+                                  }
+                                )}
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   Availability
                                 </td>
-                                {comparisonProducts.map((product) => {
-                                  return (
-                                    <React.Fragment key={product.id}>
-                                      <td className="border-r px-6 py-4 text-sm font-normal">
-                                        Available In stock
-                                      </td>
-                                    </React.Fragment>
-                                  );
-                                })}
+                                {comparisonProducts?.map(
+                                  (product: ICompareItems) => {
+                                    return (
+                                      <React.Fragment key={product?.productId}>
+                                        <td className="border-r px-6 py-4 text-sm font-normal">
+                                          Available In stock
+                                        </td>
+                                      </React.Fragment>
+                                    );
+                                  }
+                                )}
                               </tr>
                             </tbody>
                           </table>

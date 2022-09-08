@@ -54,20 +54,23 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
-  OrderResponseData,
-  SendOtpResponse,
   GetAllBrandsResponse,
   getCategoryResponse,
   getCategorySuccessResponse,
   getCategoryBySlugResponse,
   getCategoryBySlugSuccessResponse,
+  OrderResponseData,
+  SendOtpResponse,
+  CompareSuccessResponse,
+  IProductSearchResponse,
+  GetCustomerProductSuccessResponse,
+  GetCustomerProductByURLResponse,
+  GetCustomerProductByURLSuccessResponse,
 } from 'models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { GetCustomerProductByURLResponse } from 'models';
-import { GetCustomerProductByURLSuccessResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -170,7 +173,7 @@ export async function getPublicProductByIdRest(
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}/${productId}`
     );
-    return res.data.data;
+    return res.data as GetCustomerProductSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -278,7 +281,7 @@ export async function addToCompareRest(
         headers: { 'Content-Type': 'application/json' },
       }
     );
-    return res.data.data;
+    return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -327,10 +330,17 @@ export async function deleteFullWishlistRest(): Promise<
   }
 }
 
-export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(
-    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
-  );
+export async function deleteFromCompareRest(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+   const res = await axios.delete(
+      `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+    );
+    return res.data as CompareSuccessResponse
+  } catch (error: any) {
+    return error;
+  }
 }
 
 export async function getCustomerProfileRest(
@@ -561,7 +571,9 @@ export async function resetPasswordRest(
   }
 }
 
-export async function getBrandsRest(): Promise<GetAllBrandsResponse | undefined> {
+export async function getBrandsRest(): Promise<
+  GetAllBrandsResponse | undefined
+> {
   try {
     const res = await axios.get(`${apiEndPoints.brands}`);
     return res?.data;
@@ -586,22 +598,45 @@ export async function getPublicProductByUniqueNameRest(
   }
 }
 
-export async function getCategoryDetailsByIdRest(categoryId: string): Promise<getCategoryResponse | undefined> {
+export async function getCategoryDetailsByIdRest(
+  categoryId: string
+): Promise<getCategoryResponse | undefined> {
   try {
-    const res = await axios.get(`${apiEndPoints.getCategoryDetails}/${categoryId}`);
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryDetails}/${categoryId}`
+    );
     return res.data as getCategorySuccessResponse;
-
-  } catch(error: any) {
+  } catch (error: any) {
     return error;
   }
 }
 
-export async function getCategoryDetailsBySlugRest(categorySlug: string): Promise<getCategoryBySlugResponse | undefined> {
+export async function getCategoryDetailsBySlugRest(
+  categorySlug: string
+): Promise<getCategoryBySlugResponse | undefined> {
   try {
-    const res = await axios.get(`${apiEndPoints.getCategoryBySlug}/${categorySlug}`);
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryBySlug}/${categorySlug}`
+    );
     return res.data as getCategoryBySlugSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
 
-  } catch(error: any) {
+export async function searchProductsRest(
+  searchText: string,
+  pageNumber: number,
+  limit: number
+): Promise<IProductSearchResponse> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.search}/?q=${searchText}${
+        pageNumber ? `&pageNumber=${pageNumber}` : ''
+      }${limit ? `&limit=${limit}` : ''}`
+    );
+    return res.data.data as IProductSearchResponse;
+  } catch (error: any) {
     return error;
   }
 }

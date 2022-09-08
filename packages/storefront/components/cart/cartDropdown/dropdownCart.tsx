@@ -106,12 +106,16 @@ const CartDropdown: NextComponentType = () => {
               <div className="flex-col-4 flex items-center bg-white">
                 <div className="col-span-2">
                   <a href="#" className="">
-                    <Image
-                      src={cartData?.product?.photos![0]?.url!}
-                      alt="Product Image"
-                      height={100}
-                      width={100}
-                    />
+                    {cartData?.product?.photos![0]?.url ? (
+                      <Image
+                        src={cartData?.product?.photos![0]?.url!}
+                        alt="Product Image"
+                        height={100}
+                        width={100}
+                      />
+                    ) : (
+                      'Problem Rendering Image'
+                    )}
                   </a>
                 </div>
                 <div className="col-span-2 justify-between px-4 leading-normal">

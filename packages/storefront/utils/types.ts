@@ -1,5 +1,6 @@
 import {
   CustomerSignInResponse,
+  OrderResponseData,
   getCategoryResponse,
   GetAllBrandsResponse,
   OrderResponseData,
@@ -53,6 +54,7 @@ import {
   GetCustomerAllProductsSuccessResponse,
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
+  IProductSearchResponse,
   SendOtpResponse,
 } from 'models';
 import { NextRouter } from 'next/router';
@@ -126,7 +128,7 @@ export interface apiFunction {
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
   addToCompare: (productId: string) => Promise<CompareResponse | undefined>;
-  deleteFromCompare: (productId: string) => {};
+  deleteFromCompare: (productId: string) =>Promise<CompareResponse | undefined>;
   getCustomerProfile: (
     token: string
   ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
@@ -180,4 +182,9 @@ export interface apiFunction {
   getCategoryDetailsBySlug: (
     categorySlug: string
   ) => Promise<getCategoryBySlugResponse | undefined>;
+  searchProducts(
+    searchText: string,
+    pageNumber: number,
+    limit: number
+  ): Promise<IProductSearchResponse>;
 }

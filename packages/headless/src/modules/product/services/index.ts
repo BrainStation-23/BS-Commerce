@@ -26,6 +26,10 @@ import {
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
   CreateProductRequest,
+  GetCustomizedProductsQuery,
+  GetCustomizedProductsTagsEnum,
+  GetCustomizedProductsResponse,
+  GetCustomizedProductsErrorMessages,
 } from 'models';
 @Injectable()
 export class ProductService {
@@ -166,6 +170,7 @@ export class ProductService {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
     const query: Record<string, any> = this.generateSearchQuery(condition);
     const products = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy, skip, limit) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, skip, limit, { maxPrice, minPrice }, orderBy);
+    const productsCount = slug ? await this.productRepo.getAllConditionalProducts({ ...query, 'info.published': true }, { maxPrice, minPrice }, slug, orderBy) : await this.productRepo.findAllProducts({ ...query, 'info.published': true }, null, null, { maxPrice, minPrice }, orderBy);
     if (!products) return this.helper.serviceResponse.errorResponse(GetProductsByConditionErrorMessages.CAN_NOT_GET_PRODUCTS, null, HttpStatus.BAD_REQUEST);
 
     let manufacturers = new Set();
@@ -178,7 +183,27 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse({
       products,
       manufacturers: new Array(...manufacturers),
-      brands: new Array(...brands)
+      brands: new Array(...brands),
+      totalProducts: productsCount.length,
     }, HttpStatus.OK);
+  }
+
+  async getCustomizedProducts(condition: GetCustomizedProductsQuery): Promise<GetCustomizedProductsResponse> {
+    const { skip, limit, tag } = condition;
+    const doesTagMatch = await this.productRepo.getTag({ name: tag, isHomePageProductsTag: true });
+    if (!doesTagMatch) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.INVALID_TAG_NAME, null, HttpStatus.BAD_REQUEST);
+
+    const product = await this.getProductByTags(skip, limit, tag);
+    if (!product) return this.helper.serviceResponse.errorResponse(GetCustomizedProductsErrorMessages.CAN_NOT_GET_CUSTOMIZED_PRODUCTS, null, HttpStatus.BAD_REQUEST);
+    return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
+  }
+
+  async getProductByTags(skip: number, limit:number,  tag:string) {
+    switch (tag) {
+      case GetCustomizedProductsTagsEnum.TOP_SELLING_PRODUCTS:
+        return await this.productRepo.getTopSellingProducts(skip, limit);
+      default:
+        return [];
+    }
   }
 }

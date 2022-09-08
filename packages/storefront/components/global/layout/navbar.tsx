@@ -74,45 +74,14 @@ const Navbar: React.FC<Props> = ({
           </div>
 
           {/* Menu */}
-          {/* <div
-            className={`fixed top-0 z-40 flex h-full w-72 flex-col gap-y-5 bg-slate-50 px-4 py-2 shadow-2xl transition-all duration-300 ease-linear lg:static lg:z-10 lg:h-fit lg:bg-slate-50/0 lg:p-0 lg:px-8 lg:shadow-none ${
-              drawer ? 'left-0' : '-left-72'
-            }`}
+          <div
+            className={`static z-10 hidden h-fit bg-slate-50 bg-slate-50/0 p-0 px-8 shadow-none lg:flex`}
           >
-            <span
-              className="ml-auto mb-2 cursor-pointer lg:hidden"
-              onClick={() => setDrawer(!drawer)}
-              id="sidebarClose"
-            >
-              <XCircleIcon />
-            </span>
-
-            <div className="w-full lg:hidden">
-              <Search placeholder="Search our store" />
-            </div>
-            <div className="lg:hidden">
-              <HeaderAccount />
-            </div>
-            <div className="flex flex-row items-center text-right text-sm text-gray-900 lg:hidden">
-              <span className="mr-2">
-                <PhoneIcon />
-              </span>
-
-              <div className="flex flex-col">
-                <span>+880 1674314359</span>
-                <span className="flex flex-row items-center gap-x-1">
-                  Customer Support
-                </span>
-              </div>
-            </div>
-            <ul className="my-0 flex w-full list-none flex-col lg:flex-row lg:gap-x-6">
+            <ul className="my-0 flex w-full list-none flex-row gap-x-6">
               {MenuData.map((menu) => (
                 <li key={menu.name} className="group">
                   <Link href={menu.link}>
-                    <a
-                      className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-green-600 lg:border-none lg:py-0 lg:font-medium"
-                      onClick={closeDrawer}
-                    >
+                    <a className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-green-600 lg:border-none lg:py-0 lg:font-medium">
                       {menu.name}
                       {menu.hasSubmenu && <ChevronDownIcon size={4} />}
                     </a>
@@ -139,7 +108,7 @@ const Navbar: React.FC<Props> = ({
                 </li>
               ))}
             </ul>
-          </div> */}
+          </div>
 
           <div className="ml-auto hidden flex-row items-center gap-x-2 text-right text-sm text-gray-900 lg:flex">
             {showUser ? (
