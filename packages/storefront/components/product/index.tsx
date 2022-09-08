@@ -242,7 +242,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   }, [router.asPath]);
 
   useEffect(() => {
-    let itemAmountInCart: ResponseItem | undefined = cartData.find((item) => {
+    let itemAmountInCart: ResponseItem | undefined = cartData?.find((item) => {
       if (item.productId === product.id) {
         return item;
       }

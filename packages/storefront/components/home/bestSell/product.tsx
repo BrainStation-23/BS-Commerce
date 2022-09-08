@@ -28,6 +28,7 @@ const Product = ({ product }: SingleProduct) => {
               alt={product.photos![0].alt}
               height={120}
               width={120}
+              layout="fixed"
             />
           </div>
           <div className="col-span-3">
