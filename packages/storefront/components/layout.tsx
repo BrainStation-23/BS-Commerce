@@ -25,6 +25,8 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -44,9 +46,6 @@ const Layout = ({ children }: LayoutProps) => {
   const modalProduct = useAppSelector(
     (state) => state.persistedReducer.modal?.setModalCart?.product
   );
-
-  const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
@@ -68,6 +67,9 @@ const Layout = ({ children }: LayoutProps) => {
       Authorization: `Bearer ${token}`,
     };
   }, [token]);
+  useEffect(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
 
   return (
     <>

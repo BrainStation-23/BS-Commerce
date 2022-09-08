@@ -32,4 +32,5 @@ export const apiEndPoints = {
   getPublicProductByUniqueName: '/customer/product',
   getCategoryDetails: '/category',
   getCategoryBySlug: '/category/slug',
+  search: '/search',
 };

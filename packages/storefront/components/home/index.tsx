@@ -23,9 +23,6 @@ import BackToTopButton from 'pages/BackToTopButton';
 import CartModal from '../global/components/modal/cartModal';
 
 const HomeComponent: NextComponentType = () => {
-  const modalState = useAppSelector(
-    (state) => state.persistedReducer.modal.setModal
-  );
 
   const modalStateLogin = useAppSelector(
     (state) => state.persistedReducer.modal.setModalLogin

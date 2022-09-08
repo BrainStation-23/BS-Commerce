@@ -11,14 +11,18 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
     <>
       <div className="grid grid-cols-3 w-fit">
         <div className='col-span-1'>
-          <Image
-            src={product?.photos![0].url!}
-            alt={product?.photos![0].alt || 'product image'}
-            width={80}
-            height={80}
-          />
+        {product?.photos![0].url ? (
+            <Image
+              src={product?.photos![0].url!}
+              alt={product?.photos![0].alt || 'product image'}
+              width={80}
+              height={80}
+            />
+          ) : (
+            'Problem Rendering Image'
+          )}
         </div>
-        <div className="   sm:px-4 col-span-2">
+        <div className="sm:px-4 col-span-2">
           <span className="mb-2">{product?.info.name}</span>
           <div className="mb-3 flex flex-row text-green-600">
             <svg

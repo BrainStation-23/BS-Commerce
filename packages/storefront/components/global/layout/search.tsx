@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface Properties {
@@ -5,18 +6,30 @@ interface Properties {
 }
 
 const Search: React.FC<Properties> = (props) => {
+  const router = useRouter();
+  const homeSearchOnClick = () => {
+    router.push('/search');
+  };
   return (
     <div
-      className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
+      className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm overflow-hidden`}
     >
       <input
-        className="ml-4 bg-white focus:outline-none"
+        className="pl-4 w-full bg-white focus:outline-none py-4"
         type="search"
         name="search"
         placeholder={`${props.placeholder}`}
+        id="navSearchInput"
       />
       <div className="flex h-12 w-14 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
-        <button type="submit" className="">
+        <button
+          type="submit"
+          id='navSearchSubmit'
+          className=""
+          onClick={() => {
+            homeSearchOnClick();
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
