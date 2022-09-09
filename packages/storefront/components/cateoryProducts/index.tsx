@@ -3,7 +3,8 @@ import ProductSort from '@/components/cateoryProducts/sort/index';
 import CategoryFilter from '@/components/cateoryProducts/filter/main';
 import CategoryBreadcrumb from '@/components/cateoryProducts/categoryBreadcrumb';
 import { CategoryPagination } from '@/components/cateoryProducts/categoryPagination';
-import CategoryProductSegment from '@/components/cateoryProducts/categoryProducts/main';
+import CategoryProducts from '@/components/cateoryProducts/categoryProducts/categoryProducts';
+import { Product } from '@bs-commerce/models';
 
 interface CategoryNameIdProp {
   name: string;
@@ -13,10 +14,12 @@ interface CategoryNameIdProp {
 interface props {
   categoryName: string;
   categoryNameAndId: CategoryNameIdProp[];
+  products: Product[];
+  totalProducts: number;
 }
 
 const CategoryPageComponent: FC<props> = (props: props) => {
-  const { categoryName, categoryNameAndId } = props;
+  const { categoryName, categoryNameAndId, products, totalProducts } = props;
 
   //console.log(categoryNameAndId);
 
@@ -38,8 +41,11 @@ const CategoryPageComponent: FC<props> = (props: props) => {
           <div className="col-span-4 flex-col">
             <div className="mt-16 mb-8 lg:px-12 xl:px-14">
               <ProductSort />
-              <CategoryProductSegment />
-              <CategoryPagination />
+              <CategoryProducts
+                totalNumberOfProducts={totalProducts}
+                products={products}
+              />
+              {/* <CategoryPagination /> */}
             </div>
           </div>
         </div>

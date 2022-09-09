@@ -213,7 +213,9 @@ export async function getPublicProductByCategoryIDRest(
   orderBy: string,
   minPrice: number,
   maxPrice: number,
-  brands: string
+  brands: string,
+  skip: number,
+  limit: number
 ): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
@@ -221,7 +223,9 @@ export async function getPublicProductByCategoryIDRest(
         orderBy ? `&orderBy=${orderBy}` : ''
       }${brands ? `&brand=${brands}` : ''}${
         minPrice ? `&minPrice=${minPrice}` : ''
-      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}`
+      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}${
+        skip ? `&skip=${skip}` : ''
+      }${limit ? `&limit=${limit}` : ''}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
@@ -641,12 +645,9 @@ export async function searchProductsRest(
   }
 }
 
-export async function getCompareRest(
-): Promise<CompareResponse | undefined> {
+export async function getCompareRest(): Promise<CompareResponse | undefined> {
   try {
-    const res = await axios.get(
-      `${apiEndPoints.addToCompare}`
-    );
+    const res = await axios.get(`${apiEndPoints.addToCompare}`);
     return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;

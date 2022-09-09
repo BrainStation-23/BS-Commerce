@@ -104,7 +104,9 @@ export interface apiFunction {
     orderBy: string,
     minPrice: number,
     maxPrice: number,
-    brands: string
+    brands: string,
+    skip: number,
+    limit: number,
   ) => Promise<GetCustomerAllProductsResponse | undefined>;
   checkout: (
     data: any,
