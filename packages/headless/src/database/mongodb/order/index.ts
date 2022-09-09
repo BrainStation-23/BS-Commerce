@@ -54,9 +54,12 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getAvailableProducts(productIds: string[]): Promise<any> {
-    return await ProductModel.find({
-      'info.published': { $eq: true, $exists: true },
-    }).select('id -_id');
+    return await ProductModel.find(
+      {
+        id: {$in: productIds},
+        'info.published': { $eq: true, $exists: true }
+      }
+      ).select('id -_id');
   }
 
   async clearCart(userId: string): Promise<CartResponse | null> {
