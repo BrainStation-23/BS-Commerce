@@ -85,25 +85,6 @@ export class TagsController {
     return { code, ...response };
   }
 
-  @UseGuards(new RolesGuard(['admin']))
-  @ApiBearerAuth()
-  @Post('/create-home-page-products-tag')
-  @ApiResponse({
-    description: 'Create Home Page Products Tag Success Response',
-    type: CreateTagSuccessResponseDto,
-    status: HttpStatus.CREATED,
-  })
-  @ApiResponse({
-    description: 'Create Home Page Products Tag Error Response',
-    type: CreateTagErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
-  })
-  async createHomePageProductsTag(@Body() data: CreateTagRequestBodyDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.createHomePageProductsTag(data);
-    res.status(code);
-    return { code, ...response };
-  }
-
   @Get('/:tagId')
   @ApiResponse({
     description: 'Get Tag Success Response',

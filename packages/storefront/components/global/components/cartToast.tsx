@@ -1,4 +1,4 @@
-import { CustomerProduct, Product, WishlistProduct } from 'models';
+import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,16 +9,20 @@ interface Props {
 const CartToast: React.FC<Props> = ({ product }: Props) => {
   return (
     <>
-      <div className="flex flex-row">
-        <span>
-          <Image
-            src={product?.photos![0].url!}
-            alt={product?.photos![0].alt || 'product image'}
-            width={80}
-            height={80}
-          />
-        </span>
-        <div className="flex flex-col sm:px-4">
+      <div className="grid grid-cols-3 w-fit">
+        <div className='col-span-1'>
+        {product?.photos![0].url ? (
+            <Image
+              src={product?.photos![0].url!}
+              alt={product?.photos![0].alt || 'product image'}
+              width={80}
+              height={80}
+            />
+          ) : (
+            'Problem Rendering Image'
+          )}
+        </div>
+        <div className="sm:px-4 col-span-2">
           <span className="mb-2">{product?.info.name}</span>
           <div className="mb-3 flex flex-row text-green-600">
             <svg
@@ -38,10 +42,10 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
             Added to cart successfully
           </div>
 
-          <div className="ml-1 flex flex-col text-xs  sm:flex-row sm:text-xs">
-            <div className="pb-2 sm:pr-2 sm:pb-0 ">
+          <div className="ml-1 grid grid-cols-2 w-max text-xs sm:flex-row sm:text-xs">
+            <div className="pb-2 pr-2 sm:pb-0 ">
               <Link href="/cart" passHref>
-                <button className="rounded-md bg-gray-200/70 py-1 px-2 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white">
+                <button className="rounded-md w-max bg-gray-200/70 py-1 px-2 uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white">
                   View Cart
                 </button>
               </Link>

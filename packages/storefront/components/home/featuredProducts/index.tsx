@@ -10,7 +10,7 @@ import { useAppSelector } from 'customHooks/hooks';
 import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
 import ProductRow from '@/components/home/bestSell/productRow.component';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 const FeaturedProducts = () => {
   const products = useAppSelector(

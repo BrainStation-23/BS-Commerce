@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { NestedCategoryList } from 'models';
+import { NestedCategoryList } from '@bs-commerce/models';
 import { CategoryInterface } from '@/components/products/models/index';
 
 const CategoryCheckbox: FC<{

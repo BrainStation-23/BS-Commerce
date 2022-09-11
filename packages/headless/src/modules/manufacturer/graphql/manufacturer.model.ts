@@ -1,15 +1,15 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
-import { Manufacturer } from 'models';
+import { Manufacturer } from '@bs-commerce/models';
 
 @ObjectType({ description: 'Manufacturer SEO data type' })
 class ManufacturerSEO {
   @Field()
   metaKeyword: string;
-  
+
   @Field()
   metaDescription: string;
-  
+
   @Field()
   metaTitle: string;
 
@@ -17,7 +17,9 @@ class ManufacturerSEO {
   SEFN: string;
 }
 
-@ObjectType({ description: 'Manufacturer data type following Manufacturer model' })
+@ObjectType({
+  description: 'Manufacturer data type following Manufacturer model',
+})
 export class ManufacturerSchemaGql implements Manufacturer {
   @Field()
   id: string;
@@ -43,10 +45,10 @@ export class ManufacturerSchemaGql implements Manufacturer {
 
 @InputType()
 export class ManufacturersQuery {
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   skip?: number;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   limit?: number;
 }
 
@@ -77,10 +79,10 @@ export class ManufacturerInput {
   @Field({ nullable: true })
   picture?: string;
 
-  @Field(type => Boolean, { nullable: true })
+  @Field((type) => Boolean, { nullable: true })
   isPublished?: boolean;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   displayOrder?: number;
 
   @Field((type) => ManufacturerSEOInput, { nullable: true })
@@ -110,7 +112,7 @@ export class ManufacturerResponse {
 
 @ObjectType()
 class ManufacturerArrayResponse {
-  @Field(type => [ManufacturerSchemaGql], { nullable: 'items' })
+  @Field((type) => [ManufacturerSchemaGql], { nullable: 'items' })
   manufacturers: [ManufacturerSchemaGql];
 
   @Field(() => Int)
@@ -125,9 +127,9 @@ export class AllManufacturersResponse {
   @Field({ nullable: true })
   error?: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   code: number;
 
-  @Field(type => ManufacturerArrayResponse, { nullable: true })
+  @Field((type) => ManufacturerArrayResponse, { nullable: true })
   data?: ManufacturerArrayResponse;
 }

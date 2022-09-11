@@ -25,6 +25,8 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   let token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -44,9 +46,6 @@ const Layout = ({ children }: LayoutProps) => {
   const modalProduct = useAppSelector(
     (state) => state.persistedReducer.modal?.setModalCart?.product
   );
-
-  const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
@@ -68,6 +67,9 @@ const Layout = ({ children }: LayoutProps) => {
       Authorization: `Bearer ${token}`,
     };
   }, [token]);
+  useEffect(() => {
+    dispatch(setModalState(false));
+  }, [router.asPath]);
 
   return (
     <>
@@ -102,12 +104,12 @@ const Layout = ({ children }: LayoutProps) => {
         enableMultiContainer
         theme="colored"
         closeButton={<XCircleIcon size={10} extraClass="hover:fill-red-500" />}
-        toastClassName="w-9/12 sm:w-max border-2 border-green-500"
-        style={
-          document.body.clientWidth < 484
-            ? { marginRight: '60px', left: '10px', bottom: '10px' }
-            : {}
-        }
+        toastClassName="w-full border-2 border-green-500"
+          style={
+            document.body.clientWidth < 484
+              ? { marginRight: '60px', left: '10px', bottom: '50px' , width:"75%" }
+              : {}
+          }
         containerId={'bottom-left'}
         position="bottom-left"
       />

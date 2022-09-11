@@ -54,18 +54,22 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
-  OrderResponseData,
-  SendOtpResponse,
   GetAllBrandsResponse,
   getCategoryResponse,
   getCategorySuccessResponse,
   getCategoryBySlugResponse,
   getCategoryBySlugSuccessResponse,
+  OrderResponseData,
+  SendOtpResponse,
   CompareSuccessResponse,
+  IProductSearchResponse,
+  GetCustomerProductSuccessResponse,
+  GetCustomerProductByURLResponse,
+  GetCustomerProductByURLSuccessResponse,
   IReOrderQuery,
   ErrorMessageReOrder,
   ReOrderResponse,
-} from 'models';
+} from '@bs-commerce/models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
@@ -172,7 +176,7 @@ export async function getPublicProductByIdRest(
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}/${productId}`
     );
-    return res.data.data;
+    return res.data as GetCustomerProductSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -623,16 +627,39 @@ export async function getCategoryDetailsBySlugRest(
   }
 }
 
-export async function toreorderProcessRest(
+export async function searchProductsRest(
+  searchText: string,
+  pageNumber: number,
+  limit: number
+): Promise<IProductSearchResponse> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.search}/?q=${searchText}${
+        pageNumber ? `&pageNumber=${pageNumber}` : ''
+      }${limit ? `&limit=${limit}` : ''}`
+    );
+    return res.data.data as IProductSearchResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCompareRest(): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.addToCompare}`);
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function reorderRest(
   data: IReOrderQuery
 ): Promise<ReOrderResponse | undefined> {
   try {
-    const res = await axios.post(`${apiEndPoints.reOrder}`, data);
+    const res = await axios.post(`${apiEndPoints.order}/reorder`, data);
     return res.data as ReOrderResponse;
-    // console.log('response-success', res.data);
   } catch (error: any) {
-    // console.log('err', error);
-
     toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',
     });

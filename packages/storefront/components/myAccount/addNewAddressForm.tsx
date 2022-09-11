@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { Field, Form, Formik } from 'formik';
 
 import { userAPI } from 'APIs';
-import { Customer, CustomerAddress } from 'models';
+import { Customer, CustomerAddress } from '@bs-commerce/models';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeCustomerDetails } from 'toolkit/userSlice';
 import { storeAddresses } from 'toolkit/customerAddressSlice';

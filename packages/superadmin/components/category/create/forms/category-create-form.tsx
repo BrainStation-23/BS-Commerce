@@ -1,7 +1,7 @@
 import { Field } from 'formik';
 import Accordion from '@/components/global/accordion';
 import CustomInput from './text-input-field';
-import { NestedCategoryList } from 'models';
+import { NestedCategoryList } from '@bs-commerce/models';
 
 interface Props {
   categoryList: NestedCategoryList[];

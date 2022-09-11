@@ -53,9 +53,10 @@ import {
   GetCustomerAllProductsSuccessResponse,
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
+  IProductSearchResponse,
   IReOrderQuery,
   ReOrderResponse,
-} from 'models';
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
 export interface accordionBody {
@@ -183,7 +184,13 @@ export interface apiFunction {
   getCategoryDetailsBySlug: (
     categorySlug: string
   ) => Promise<getCategoryBySlugResponse | undefined>;
-  toreorderProcess: (
-    reOrderParams: IReOrderQuery
+  searchProducts(
+    searchText: string,
+    pageNumber: number,
+    limit: number
+  ): Promise<IProductSearchResponse>;
+  getCompare: () => Promise<CompareResponse | undefined>;
+  reorder: (
+    reorderParams: IReOrderQuery
   ) => Promise<ReOrderResponse | undefined>;
 }

@@ -14,7 +14,7 @@ import Banner from '@/components/home/bestSell/banner';
 import ProductRow from '@/components/home/bestSell/productRow.component';
 import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 const BestSell: NextComponentType = () => {
   const products = useAppSelector(
