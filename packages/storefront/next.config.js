@@ -30,6 +30,7 @@ const nextConfig = {
       'urbanbazaar.com.np',
       'helios-i.mashable.com',
       'www.hindustantimes.com',
+      'cdn.dribbble.com',
     ],
   },
 };
@@ -58,7 +59,7 @@ module.exports = {
       'urbanbazaar.com.np',
       'helios-i.mashable.com',
       'www.hindustantimes.com',
-      'localhost'
+      'cdn.dribbble.com',
     ],
   },
   webpack: async (baseConfig, arg) => {

@@ -39,10 +39,10 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
     (state) => state.persistedReducer.user.customerDetails
   );
 
-  const user: string = customer.name
-    ? customer.name
-    : customer.email
-    ? customer.email
+  const user: string = customer?.name
+    ? customer?.name
+    : customer?.email
+    ? customer?.email
     : '';
 
   const getUsername = (name: string): string => {

@@ -44,7 +44,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   );
 
   const wishlistData = useAppSelector(
-    (state) => state?.persistedReducer.product.wishlist.items
+    (state) => state?.persistedReducer?.product.wishlist.items
   );
 
   const cartData = useAppSelector(
