@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
@@ -9,6 +9,7 @@ import {
   CustomerForgotPasswordDto,
   CustomerForgotPasswordErrorResponseDto,
   CustomerForgotPasswordSuccessResponseDto,
+  CustomerLogoutSuccessResponseDto,
   CustomerSignInDto,
   CustomerSignInErrorResponseDto,
   CustomerSignInSuccessResponseDto,
@@ -46,7 +47,6 @@ export class CustomerAuthController {
     res.status(code);
     return { code, ...response };
   }
-
 
   @Post('register')
   @ApiResponse({
@@ -88,6 +88,21 @@ export class CustomerAuthController {
         path: '/'
       });
     return { code, ...response };
+  }
+
+  @Delete('logout')
+  @ApiResponse({
+    description: 'Customer Logout Success Response',
+    type: CustomerLogoutSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.status(200).clearCookie('jwt', {
+      path: '/',
+    });
+    return {
+      code: 200, data: { message: 'Logout Successful' }
+    };
   }
 
   @Get()

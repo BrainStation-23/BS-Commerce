@@ -11,7 +11,7 @@ import { dbConfig } from 'config/database';
 import { coreConfig } from 'config/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import * as cookieParser from 'cookie-parser'
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
