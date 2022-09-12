@@ -79,7 +79,7 @@ export class CustomerAuthController {
   async signIn(@Body() data: CustomerSignInDto, @Res({ passthrough: true }) res: Response) {
     const { code, ...response }: any = await this.authService.signIn(data);
     res.status(code);
-    res.cookie('token', response.data.token,
+    res.cookie('jwt', response.data.token,
       {
         httpOnly: true,
         maxAge: authConfig.customerCookiesMaxAge,
