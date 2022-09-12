@@ -82,7 +82,7 @@ export class CustomerAuthController {
     res.cookie('jwt', response.data.token,
       {
         httpOnly: true,
-        maxAge: authConfig.customerCookiesMaxAge,
+        maxAge: authConfig.cookiesMaxAge,
         secure: coreConfig.env === 'production',
         sameSite: 'none',
         path: '/'
