@@ -56,6 +56,7 @@ import {
   IProductSearchResponse,
   IReOrderQuery,
   ReOrderResponse,
+  SendOtpResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
@@ -87,7 +88,7 @@ export interface apiFunction {
     isEmail: boolean,
     data: GetCustomerQuery
   ) => Promise<GetCustomerResponse | undefined>;
-  sendOTP: (data: string) => Promise<SendOtpSuccessResponse | undefined>;
+  sendOTP: (data: string) => Promise<SendOtpResponse | undefined>;
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
@@ -173,7 +174,7 @@ export interface apiFunction {
   ) => Promise<VerifyOtpSuccessResponse | undefined>;
   resetPassword: (
     data: CustomerForgotPasswordRequest
-  ) => Promise<CustomerForgotPasswordSuccessResponse>;
+  ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
   getBrands(): Promise<GetAllBrandsResponse | undefined>;
   getPublicProductByUniqueName(
     productUniqueName: string

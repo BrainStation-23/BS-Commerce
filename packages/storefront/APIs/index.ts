@@ -83,6 +83,34 @@ import {
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
+import {
+  addCustomerNewAddressStatic,
+  addToCartStatic,
+  addToCompareStatic,
+  addToWishlistStatic,
+  checkoutStatic,
+  deleteAllCartItemStatic,
+  deleteCustomerAddressStatic,
+  deleteFromCompareStatic,
+  deleteFullWishlistStatic,
+  deleteSingleCartItemStatic,
+  deleteWishlistItemStatic,
+  getCartStatic,
+  getCompareStatic,
+  getCustomerProfileStatic,
+  getCustomerStatic,
+  getFeaturedProductsStatic,
+  getOrderProductsStatic,
+  getOrderProductStatic,
+  getPublicProductByCategoryIDStatic,
+  getPublicProductByUniqueNameStatic,
+  getPublicProductsStatic,
+  sendOTPStatic,
+  signInStatic,
+  updateCartItemStatic,
+  updateCustomerAddressStatic,
+  updateCustomerStatic,
+} from './static';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
@@ -167,6 +195,42 @@ const restApi: apiFunction = {
   getCompare: getCompareRest,
   reorder: reorderRest,
 };
+const staticApi: apiFunction = {
+  getPublicProducts: getPublicProductsStatic,
+  getFeaturedProducts: getPublicProductsStatic,
+  getCategoryList: getCategoryListRest,
+  getCustomerWishlist: getCustomerWishlistRest,
+  getPublicProductByUniqueName: getPublicProductByUniqueNameStatic,
+  getPublicProductByCategoryId: getPublicProductByCategoryIDStatic,
+  addToCart: addToCartStatic,
+  deleteSingleCartItem: deleteSingleCartItemStatic,
+  signIn: signInStatic,
+  getCart: getCartStatic,
+  deleteAllCartItem: deleteAllCartItemStatic,
+  sendOTP: sendOTPStatic,
+  getCustomer: getCustomerStatic,
+  addToWishList: addToWishlistStatic,
+  deleteWishlistItem: deleteWishlistItemStatic,
+  deleteFullWishlist: deleteFullWishlistStatic,
+  getCustomerProfile: getCustomerProfileStatic,
+  checkout: checkoutStatic,
+  getOrderProducts: getOrderProductsStatic,
+  getOrderProduct: getOrderProductStatic,
+  updateCustomer: updateCustomerStatic,
+  addCustomerNewAddress: addCustomerNewAddressStatic,
+  deleteCustomerAddress: deleteCustomerAddressStatic,
+  updateCustomerAddress: updateCustomerAddressStatic,
+  addToCompare: addToCompareStatic,
+  deleteFromCompare: deleteFromCompareStatic,
+  updateCartItem: updateCartItemStatic,
+  getCompare: getCompareStatic,
+};
+
+console.log(config?.apiService);
 
 export const userAPI: apiFunction =
-  config?.apiService === 'GRAPHQL' ? graphqlApi : restApi;
+  config!.apiService! === 'REST'
+    ? restApi
+    : config!.apiService! === 'GRAPHQL'
+    ? graphqlApi
+    : staticApi;
