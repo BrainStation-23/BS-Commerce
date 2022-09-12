@@ -20,7 +20,8 @@ const CategoryProductSegment: FC<props> = ({
   const [reload, setReload] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const paginate = (page: number, skip: number) => {
+  const paginate = (skip: number) => {
+    // console.log('Skip======================', skip);
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     const queryObject: {
@@ -35,7 +36,7 @@ const CategoryProductSegment: FC<props> = ({
     queryObject['skip'] = skip;
     queryObject['limit'] = limit;
     setReload(!reload);
-    console.log(skip / limit + 1);
+    // console.log('==========> ', skip / limit + 1);
 
     setCurrentPage(Math.ceil(skip / limit) + 1);
     router.replace({
@@ -48,14 +49,14 @@ const CategoryProductSegment: FC<props> = ({
   };
 
   useEffect(() => {
-    console.log(router?.query?.skip);
+    // console.log(router?.query?.skip);
 
     router?.query?.skip ? '' : setCurrentPage(1);
-  }, [reload ]);
+  }, [router?.query?.skip]);
 
   return (
     <>
-      {console.log(currentPage)}
+      {/* {console.log(currentPage)} */}
       <div className="py-5">
         {products && products[0] ? (
           <div className="grid grid-cols-2 justify-items-center gap-2 md:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">
@@ -74,6 +75,7 @@ const CategoryProductSegment: FC<props> = ({
         paginate={paginate}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
+        limit={limit}
       />
     </>
   );

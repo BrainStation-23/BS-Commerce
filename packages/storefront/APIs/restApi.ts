@@ -632,7 +632,7 @@ export async function searchProductsRest(
   searchText: string,
   pageNumber: number,
   limit: number
-): Promise<IProductSearchResponse> {
+): Promise<IProductSearchResponse | undefined> {
   try {
     const res = await axios.get(
       `${apiEndPoints.search}/?q=${searchText}${
