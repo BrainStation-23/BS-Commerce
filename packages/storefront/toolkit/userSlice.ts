@@ -10,6 +10,7 @@ const initialState: UserState = {
   user: '',
   customerDetails: {
     id: '',
+    name: '',
   },
 };
 

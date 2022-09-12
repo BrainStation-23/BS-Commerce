@@ -55,7 +55,7 @@ const Signin: NextComponentType = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const token = await fetch(config?.signIn, {
+      const token = await fetch(config?.signIn!, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,6 @@ const Signin: NextComponentType = () => {
       fetchCompare();
       setLoader(false);
       router.push('/');
-      //router.back();
       toast.success('Logged in successfully!', {
         containerId: 'bottom-right',
       });
