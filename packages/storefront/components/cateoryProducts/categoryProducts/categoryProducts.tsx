@@ -51,7 +51,11 @@ const CategoryProductSegment: FC<props> = ({
   useEffect(() => {
     // console.log(router?.query?.skip);
 
-    router?.query?.skip ? '' : setCurrentPage(1);
+    router?.query?.skip
+      ? setCurrentPage(
+          Math.ceil(parseInt(router?.query?.skip as string) / limit) + 1
+        )
+      : setCurrentPage(1);
   }, [router?.query?.skip]);
 
   return (

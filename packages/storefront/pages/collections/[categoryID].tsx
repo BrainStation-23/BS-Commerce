@@ -19,7 +19,7 @@ interface CategoryNameIdProp {
 interface SingleProduct {
   products: Product[];
   name: string;
-  brands: Brand[];
+  brands: string[];
   categoryNameAndId: CategoryNameIdProp[];
   totalProducts: number;
 }
@@ -83,34 +83,35 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log(res2.data);
   // console.log(res?.data?.brands);
 
-  const categroyDetailsRes = await userAPI.getCategoryDetailsById(
-    categoryId as string
-  );
+  // const categroyDetailsRes = await userAPI.getCategoryDetailsById(
+  //   categoryId as string
+  // );
 
   let categoryNameAndId: CategoryNameIdProp[] = [];
 
-  if ('data' in categroyDetailsRes!) {
-    for (let i = 0; i < categroyDetailsRes?.data?.ancestors.length; i++) {
-      const ancestorDetailsRes = await userAPI.getCategoryDetailsBySlug(
-        categroyDetailsRes?.data?.ancestors[i].slug
-      );
-      if ('data' in ancestorDetailsRes!) {
-        categoryNameAndId.push({
-          name: ancestorDetailsRes?.data?.name,
-          id: ancestorDetailsRes?.data?.id,
-        });
-      }
-    }
-    categoryNameAndId.push({
-      name: name as string,
-      id: '',
-    });
-  }
-
+  // if ('data' in categroyDetailsRes!) {
+  //   for (let i = 0; i < categroyDetailsRes?.data?.ancestors.length; i++) {
+  //     const ancestorDetailsRes = await userAPI.getCategoryDetailsBySlug(
+  //       categroyDetailsRes?.data?.ancestors[i].slug
+  //     );
+  //     if ('data' in ancestorDetailsRes!) {
+  //       categoryNameAndId.push({
+  //         name: ancestorDetailsRes?.data?.name,
+  //         id: ancestorDetailsRes?.data?.id,
+  //       });
+  //     }
+  //   }
+  //   categoryNameAndId.push({
+  //     name: name as string,
+  //     id: '',
+  //   });
+  // }
+  let brands;
+  if ('data' in res!) brands = res?.data?.brands ? res?.data?.brands : [];
   return {
     props: {
       products,
-      brands: res?.data?.brands ? res?.data?.brands : [],
+      brands: brands,
       name: name,
       categoryNameAndId,
       totalProducts,

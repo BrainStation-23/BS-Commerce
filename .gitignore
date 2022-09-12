@@ -22,6 +22,7 @@ logs
 *.swp
 .idea
 .vscode
+.env.local
 
 # Dependency directory
 node_modules

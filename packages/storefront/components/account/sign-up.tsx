@@ -39,7 +39,7 @@ const Signup = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoading(true);
-      const token = await fetch(config?.signIn, {
+      const token = await fetch(config?.signIn!, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

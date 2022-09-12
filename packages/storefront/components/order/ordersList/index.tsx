@@ -16,11 +16,9 @@ const OrderMain: FC = () => {
   );
 
   const getAllOrders = async () => {
-    const orderListRes = await userAPI
-      .getOrderProducts(token)
-      .then((res: OrderByUserIdResponse) => {
-        setAllOrderList(res?.orderInfo);
-      });
+    const orderListRes = await userAPI.getOrderProducts(token).then((res) => {
+      setAllOrderList(res?.orderInfo!);
+    });
   };
 
   useEffect(() => {

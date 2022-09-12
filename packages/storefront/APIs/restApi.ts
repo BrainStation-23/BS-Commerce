@@ -66,6 +66,9 @@ import {
   GetCustomerProductSuccessResponse,
   GetCustomerProductByURLResponse,
   GetCustomerProductByURLSuccessResponse,
+  IReOrderQuery,
+  ErrorMessageReOrder,
+  ReOrderResponse,
 } from '@bs-commerce/models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
@@ -199,7 +202,7 @@ export async function checkoutRest(
       containerId: 'bottom-right',
     });
     router.push('/submit');
-    return res.data;
+    return res.data.data;
   } catch (error: any) {
     toast.error('Order creation failed!', {
       containerId: 'bottom-right',
@@ -650,6 +653,20 @@ export async function getCompareRest(): Promise<CompareResponse | undefined> {
     const res = await axios.get(`${apiEndPoints.addToCompare}`);
     return res.data as CompareSuccessResponse;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function reorderRest(
+  data: IReOrderQuery
+): Promise<ReOrderResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}/reorder`, data);
+    return res.data as ReOrderResponse;
+  } catch (error: any) {
+    toast.error('Something Went wrong on re-order', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }
