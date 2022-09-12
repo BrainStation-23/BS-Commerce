@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
@@ -9,6 +9,7 @@ import {
   CustomerForgotPasswordDto,
   CustomerForgotPasswordErrorResponseDto,
   CustomerForgotPasswordSuccessResponseDto,
+  CustomerLogoutSuccessResponseDto,
   CustomerSignInDto,
   CustomerSignInErrorResponseDto,
   CustomerSignInSuccessResponseDto,
@@ -22,6 +23,8 @@ import {
   VerifyOtpErrorResponseDto,
   VerifyOtpSuccessResponseDto,
 } from './dto';
+import { authConfig } from 'config/auth';
+import { coreConfig } from 'config/core';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
@@ -44,7 +47,6 @@ export class CustomerAuthController {
     res.status(code);
     return { code, ...response };
   }
-
 
   @Post('register')
   @ApiResponse({
@@ -75,9 +77,32 @@ export class CustomerAuthController {
     status: HttpStatus.BAD_REQUEST
   })
   async signIn(@Body() data: CustomerSignInDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.signIn(data);
+    const { code, ...response }: any = await this.authService.signIn(data);
     res.status(code);
+    res.cookie('jwt', response.data.token,
+      {
+        httpOnly: true,
+        maxAge: authConfig.cookiesMaxAge,
+        secure: coreConfig.env === 'production',
+        sameSite: 'none',
+        path: '/'
+      });
     return { code, ...response };
+  }
+
+  @Delete('logout')
+  @ApiResponse({
+    description: 'Customer Logout Success Response',
+    type: CustomerLogoutSuccessResponseDto,
+    status: HttpStatus.OK
+  })
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.status(200).clearCookie('jwt', {
+      path: '/',
+    });
+    return {
+      code: 200, data: { message: 'Logout Successful' }
+    };
   }
 
   @Get()
