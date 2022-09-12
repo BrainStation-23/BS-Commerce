@@ -55,34 +55,31 @@ const Signin: NextComponentType = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const token = await fetch(config?.signIn!, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const datass = await token.json();
-      dispatch(storeUserToken(datass?.data?.token));
-
-      await userAPI.getCustomer(datass?.data?.token).then((response) => {
-        dispatch(storeCustomerDetails(response?.data));
-        dispatch(storeAddresses(response?.data?.addresses!));
-      });
-
-      fetchCart(datass?.data?.token);
-      fetchWislist(datass?.data?.token);
-      fetchCompare();
-      setLoader(false);
-      router.push('/');
-      toast.success('Logged in successfully!', {
-        containerId: 'bottom-right',
-      });
+      const res = await userAPI.signIn(data);
+      if ('code' in res! && res.code === 200 && 'data' in res!) {
+        dispatch(storeUserToken(res.data.token));
+        await userAPI.getCustomer(res?.data?.token).then((response) => {
+          dispatch(storeCustomerDetails(response?.data));
+          dispatch(storeAddresses(response?.data?.addresses!));
+        });
+        fetchCart(res?.data?.token);
+        fetchWislist(res?.data?.token);
+        fetchCompare();
+        router.push('/');
+        toast.success('Logged in successfully!', {
+          containerId: 'bottom-right',
+        });
+      } else {
+        toast.error('Something went wrong', {
+          containerId: 'bottom-right',
+        });
+      }
     } catch (err) {
-      setLoader(false);
       toast.error('Invalid username or password.', {
         containerId: 'bottom-right',
       });
+    } finally {
+      setLoader(false);
     }
   }
 
