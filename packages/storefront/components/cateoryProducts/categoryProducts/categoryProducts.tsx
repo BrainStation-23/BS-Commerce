@@ -17,20 +17,45 @@ const CategoryProductSegment: FC<props> = ({
   const router = useRouter();
 
   const [limit, setLimit] = useState<number>(5);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [reload, setReload] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const paginate = (page: number, skip: number) => {
-    router.push(
-      `/collections/Fruits?categoryId=${router.query.categoryId}&name=${router.query.name}&skip=${skip}&limit=${limit}`
-    );
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const queryObject: {
+      [key: string]: string | number;
+    } = { categoryId: params.categoryId };
+    params.categoryId ? (queryObject['categoryId'] = params.categoryId) : '';
+    params.name ? (queryObject['name'] = params.name) : '';
+    params.brand ? (queryObject['brand'] = params.brand) : '';
+    params.minPrice ? (queryObject['minPrice'] = params.minPrice) : '';
+    params.maxPrice ? (queryObject['maxPrice'] = params.maxPrice) : '';
+    params.orderBy ? (queryObject['orderBy'] = params.orderBy) : '';
+    queryObject['skip'] = skip;
+    queryObject['limit'] = limit;
+    setReload(!reload);
+    console.log(skip / limit + 1);
+
+    setCurrentPage(Math.ceil(skip / limit) + 1);
+    router.replace({
+      pathname: `/collections/${params.name}`,
+      query: queryObject,
+    });
+    // router.push(
+    //   `/collections/Fruits?categoryId=${router.query.categoryId}&name=${router.query.name}&skip=${skip}&limit=${limit}`
+    // );
   };
 
   useEffect(() => {
-    setCurrentPage(parseInt(router.query.skip as string) / limit + 1);
-  }, [router.query.skip]);
+    console.log(router?.query?.skip);
+
+    router?.query?.skip ? '' : setCurrentPage(1);
+  }, [reload ]);
 
   return (
     <>
+      {console.log(currentPage)}
       <div className="py-5">
         {products && products[0] ? (
           <div className="grid grid-cols-2 justify-items-center gap-2 md:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">

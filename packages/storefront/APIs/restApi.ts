@@ -224,8 +224,8 @@ export async function getPublicProductByCategoryIDRest(
       }${brands ? `&brand=${brands}` : ''}${
         minPrice ? `&minPrice=${minPrice}` : ''
       }${maxPrice ? `&maxPrice=${maxPrice}` : ''}${
-        skip ? `&skip=${skip}` : ''
-      }${limit ? `&limit=${limit}` : ''}`
+        skip ? `&skip=${skip}` : `&skip=${0}`
+      }${limit ? `&limit=${limit}` : `&limit=${5}`}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {

@@ -34,8 +34,6 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
             query: {
               categoryId: category.id,
               name: category.name,
-              skip: 0,
-              limit: 5,
             },
           }}
           //as={`/collections/${category.name}`}
