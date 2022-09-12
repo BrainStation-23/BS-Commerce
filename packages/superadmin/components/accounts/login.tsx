@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
-import { SignInRequest } from 'models';
+import { SignInRequest } from '@bs-commerce/models';
 import { useAppDispatch } from '@/redux-hooks';
 
 import { userAPI } from '@/APIs';

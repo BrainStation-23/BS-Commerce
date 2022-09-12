@@ -1,4 +1,8 @@
-import { IOrderProduct, OrderByUserId, OrderByUserIdResponse } from 'models';
+import {
+  IOrderProduct,
+  OrderByUserId,
+  OrderByUserIdResponse,
+} from '@bs-commerce/models';
 import ShowData from './showData';
 interface Props {
   singleOrder: OrderByUserId;

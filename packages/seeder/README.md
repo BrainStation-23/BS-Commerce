@@ -17,7 +17,7 @@ yarn seed
 
 ```
 cd packages/seeder
-docker-compose up
+docker-compose up -d
 yarn install
 yarn build
 yarn seed:es

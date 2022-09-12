@@ -5,7 +5,7 @@ import {
   Wishlist,
   WishlistItem,
   Brand,
-} from 'models';
+} from '@bs-commerce/models';
 
 export interface productsState {
   publicProducts: CustomerProduct[];

@@ -1,4 +1,4 @@
-import { CustomerProduct, Product } from 'models';
+import { CustomerProduct, Product } from '@bs-commerce/models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';

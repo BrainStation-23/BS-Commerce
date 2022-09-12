@@ -11,8 +11,11 @@ import { deleteCart } from 'toolkit/cartSlice';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
-import { CartProductPhoto, CreateProductOrderDetails } from 'models';
-import { OrderResponseData } from 'models';
+import {
+  CartProductPhoto,
+  CreateProductOrderDetails,
+} from '@bs-commerce/models';
+import { OrderResponseData } from '@bs-commerce/models';
 
 interface FormData {
   cardNumber: string;

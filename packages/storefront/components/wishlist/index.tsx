@@ -20,11 +20,10 @@ import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 import WithAuth from '@/components/auth/withAuth';
 import Modal from '@/components/global/components/modal/modal';
 import Icon from '@/components/global/components/icon';
-import ModalCompare from '@/components/comparison';
 import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
 import WishlistBody from './wishlistBody';
-import { WishlistItem } from 'models';
+import { WishlistItem } from '@bs-commerce/models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   CreateTagRequestBody,
-  Tag
-} from 'models';
-
+  Tag,
+  UpdateTagRequest,
+} from '@bs-commerce/models';
 @ObjectType()
 export class TagType implements Tag {
   @Field()
@@ -12,27 +12,36 @@ export class TagType implements Tag {
   @Field()
   name: string;
 }
-
 @InputType()
 export class CreateTagInput implements CreateTagRequestBody {
   @Field()
   name: string;
+
+  @Field(() => Boolean, { nullable: true })
+  isHomePageProductsTag?: boolean;
 }
 
-@ObjectType()
-export class CreateTagResponse {
-  @Field(() => Int)
-  code: number;
+@InputType()
+export class UpdateTagInput implements UpdateTagRequest {
+  @Field({ nullable: true })
+  name?: string;
 
-  @Field(() => TagType, { nullable: true })
-  data?: TagType
+  @Field(() => Boolean, { nullable: true })
+  isHomePageProductsTag?: boolean;
 }
-
 @ObjectType()
 export class TagResponse {
   @Field(() => Int)
   code: number;
 
+  @Field(() => TagType, { nullable: true })
+  data?: TagType;
+}
+@ObjectType()
+export class TagsResponse {
+  @Field(() => Int)
+  code: number;
+
   @Field(() => [TagType], { nullable: true })
-  data?: TagType[]
+  data?: TagType[];
 }

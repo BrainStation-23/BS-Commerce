@@ -5,9 +5,12 @@ import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { setModalState } from 'toolkit/modalSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import {
+  deleteComparedProductPublic,
+  storeCompare,
+} from 'toolkit/compareSlice';
 import { userAPI } from 'APIs';
-import { ICompareItems } from 'models';
+import { ICompareItems } from '@bs-commerce/models';
 
 interface Props {
   setModal: boolean;
@@ -21,16 +24,24 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
     (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
+  const token = useAppSelector(
+    (state) => state?.persistedReducer?.auth?.access_token
+  );
+
   const handleDeleteCompareItem = async (productId: string) => {
-    try {
-      const res = await userAPI.deleteFromCompare(productId);
-      if ('data' in res!) {
-        dispatch(storeCompare(res.data));
+    if (token) {
+      try {
+        const res = await userAPI.deleteFromCompare(productId);
+        if ('data' in res!) {
+          dispatch(storeCompare(res.data));
+        }
+      } catch (error) {
+        toast.error('Some error happend. Try again.', {
+          containerId: 'bottom-right',
+        });
       }
-    } catch (error) {
-      toast.error('Some error happend. Try again.', {
-        containerId: 'bottom-right',
-      });
+    } else {
+      dispatch(deleteComparedProductPublic(productId));
     }
   };
 
@@ -90,7 +101,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
-                                      <React.Fragment key={product.productId}>
+                                      <React.Fragment key={product?.productId}>
                                         <th
                                           scope="col"
                                           className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}

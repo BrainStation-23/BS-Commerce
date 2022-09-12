@@ -8,7 +8,7 @@ import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';
 import Picture from '@/components/global/components/product/common/picture';
 import Icon from '@/components/global/components/icon';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 const SimilarProducts: NextComponentType = () => {
   const products = useAppSelector(

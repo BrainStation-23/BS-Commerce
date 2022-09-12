@@ -8,7 +8,7 @@ import { NextComponentType } from 'next';
 import WishlistIcon from '@/components/wishlist/wishlist-icon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 import Icon from '@/components/global/components/icon';
-import { Wishlist, WishlistItem } from 'models';
+import { Wishlist, WishlistItem } from '@bs-commerce/models';
 
 interface Props {
   productImageHeight: number;

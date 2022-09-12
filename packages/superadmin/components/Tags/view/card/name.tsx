@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import SingleView from './singleView';
 import Link from 'next/link';
-import { Tag } from 'models';
+import { Tag } from '@bs-commerce/models';
 interface Props {
   tags: Tag;
 }

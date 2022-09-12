@@ -13,6 +13,7 @@ import { resetUserDetails } from 'toolkit/userSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
 import { setModalState } from 'toolkit/modalSlice';
+import { resetCompare } from 'toolkit/compareSlice';
 
 interface Properties {}
 
@@ -26,7 +27,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const [modalCmp, setModalCmp] = useState(false);
 
   const comparisonProducts = useAppSelector(
-    (state) => state.persistedReducer.compare.productsToCompare
+    (state) => state?.persistedReducer?.compare?.compareList?.items
   );
 
   const showCartDropDown = () => {
@@ -57,6 +58,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
     dispatch(resetCart());
+    dispatch(resetCompare());
     dispatch(storeUserToken(''));
     router.push('/account/sign-in');
     toast.error('Logged out successfully!', {

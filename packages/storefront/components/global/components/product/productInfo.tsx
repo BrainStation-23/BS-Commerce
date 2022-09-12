@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 interface SingleProduct {
   product: CustomerProduct;
@@ -10,8 +10,11 @@ const ProductInfo = (props: SingleProduct) => {
   const { product } = props;
   return (
     <div>
-      <div className="px-6">
-        <div className="text-base font-medium text-gray-600">
+      <div className="pl-6">
+        <div
+          className="text-base font-medium text-gray-600"
+          id="searchProductName"
+        >
           {product?.info?.name}
         </div>
         <p className="py-2 font-['arial'] text-xs text-gray-600">

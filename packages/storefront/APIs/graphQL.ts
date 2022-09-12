@@ -56,7 +56,8 @@ import {
   GetCustomerAllProductsSuccessResponse,
   GetAllBrandsResponse,
   GetCustomerProductByURLResponse,
-} from 'models';
+  IProductSearchResponse,
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
 // GraphQL example
@@ -168,7 +169,9 @@ export async function deleteFullWishlistGraphql(): Promise<
 > {
   return undefined;
 }
-export async function deleteFromCompareGraphql(productId: string): Promise<CompareResponse | undefined> {
+export async function deleteFromCompareGraphql(
+  productId: string
+): Promise<CompareResponse | undefined> {
   return undefined;
 }
 
@@ -217,7 +220,7 @@ export async function checkoutGraphql(
 
 export async function getOrderProductsGraphql(
   token: string
-): Promise<OrderByUserIdResponse  | undefined> {
+): Promise<OrderByUserIdResponse | undefined> {
   return undefined;
 }
 
@@ -276,15 +279,21 @@ export async function resetPasswordGraphql(
   return undefined;
 }
 
-export async function getBrandsGraphql(): Promise<GetAllBrandsResponse | undefined > {
+export async function getBrandsGraphql(): Promise<
+  GetAllBrandsResponse | undefined
+> {
   return undefined;
 }
 
-export async function getCategoryDetailsByIdGraphql(categoryId: string): Promise<getCategoryResponse | undefined> {
+export async function getCategoryDetailsByIdGraphql(
+  categoryId: string
+): Promise<getCategoryResponse | undefined> {
   return undefined;
 }
 
-export async function getCategoryDetailsBySlugGraphql(categoryIdSlug: string): Promise<getCategoryBySlugResponse | undefined> {
+export async function getCategoryDetailsBySlugGraphql(
+  categoryIdSlug: string
+): Promise<getCategoryBySlugResponse | undefined> {
   return undefined;
 }
 
@@ -292,4 +301,21 @@ export async function getPublicProductByUniqueNameGraphql(
   productUniqueName: string
 ): Promise<GetCustomerProductByURLResponse | undefined> {
   return undefined;
+}
+
+export async function searchProductsGraphql(
+  searchText: string,
+  pageNumber: number,
+  limit: number
+): Promise<GetCustomerProductByURLResponse | undefined> {
+  try {
+    return;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+
+export async function getCompareGraphql(): Promise<CompareResponse | undefined> {
+    return undefined;
 }

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import Link from 'next/link';
-import { OrderByUserId } from 'models';
+import { OrderByUserId } from '@bs-commerce/models';
 interface Props {
   data: OrderByUserId;
 }

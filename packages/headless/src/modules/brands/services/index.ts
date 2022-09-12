@@ -2,7 +2,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { Response } from "express";
 import * as crypto from 'crypto';
-import { CreateBrandRequest, CreateBrandResponse, DeleteBrandResponse, ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate, GetAllBrandsResponse, GetBrandByIdResponse, UpdateBrandRequest, UpdateBrandResponse } from "models";
+import { CreateBrandRequest, CreateBrandResponse, DeleteBrandResponse, ErrorMessage, ErrorMessageDeleteBrand, ErrorMessageGetBrandById, ErrorMessageUpdate, GetAllBrandsResponse, GetBrandByIdResponse, UpdateBrandRequest, UpdateBrandResponse } from "@bs-commerce/models";
 
 import { Brand } from 'src/entity/brand';
 import { BrandRepository } from './../repositories/index';
