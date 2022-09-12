@@ -54,6 +54,8 @@ import {
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
   IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
@@ -188,4 +190,7 @@ export interface apiFunction {
     limit: number
   ): Promise<IProductSearchResponse>;
   getCompare: () => Promise<CompareResponse | undefined>;
+  reorder: (
+    reorderParams: IReOrderQuery
+  ) => Promise<ReOrderResponse | undefined>;
 }
