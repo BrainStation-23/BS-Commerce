@@ -22,6 +22,8 @@ import {
   VerifyOtpErrorResponseDto,
   VerifyOtpSuccessResponseDto,
 } from './dto';
+import { authConfig } from 'config/auth';
+import { coreConfig } from 'config/core';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
@@ -75,8 +77,16 @@ export class CustomerAuthController {
     status: HttpStatus.BAD_REQUEST
   })
   async signIn(@Body() data: CustomerSignInDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.authService.signIn(data);
+    const { code, ...response }: any = await this.authService.signIn(data);
     res.status(code);
+    res.cookie('token', response.data.token,
+      {
+        httpOnly: true,
+        maxAge: authConfig.customerCookiesMaxAge,
+        secure: coreConfig.env === 'production',
+        sameSite: 'none',
+        path: '/'
+      });
     return { code, ...response };
   }
 

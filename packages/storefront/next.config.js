@@ -58,6 +58,7 @@ module.exports = {
       'urbanbazaar.com.np',
       'helios-i.mashable.com',
       'www.hindustantimes.com',
+      'localhost'
     ],
   },
   webpack: async (baseConfig, arg) => {

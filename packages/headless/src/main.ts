@@ -22,7 +22,8 @@ async function bootstrap() {
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.enableCors({
     allowedHeaders: "*",
-    origin: "*"
+    origin: "*",
+    credentials: true
   });
   coreConfig.api === 'GRAPHQL' && app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
   app.useGlobalPipes(new ValidationPipe());
