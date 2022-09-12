@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AccountInputField } from "./accountInputField";
 
 export default {
-  title: "Components/AccountDetails/AccountInputField",
+  title: "Components/inputs/AccountDetails/AccountInputField",
   component: AccountInputField,
   argTypes: {},
 } as ComponentMeta<typeof AccountInputField>;
