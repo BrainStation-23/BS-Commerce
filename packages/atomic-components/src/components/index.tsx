@@ -5,3 +5,4 @@ export * from "./cross/cross";
 export * from "./inputs/addressFormInput/inputField";
 export * from "./inputs/accountDetailsFormInput/accountInputField";
 export * from "./inputs/checkoutFormInput/checkoutInputField";
+export * from "./inputs/loginRegisterInput/loginRegisterInput";

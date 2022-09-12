@@ -19,6 +19,9 @@ export interface IButton {
    * Button click handler
    */
   onClick?: () => void;
+
+  className?: string;
+  disabled?: boolean;
 }
 
 /**
@@ -30,6 +33,8 @@ export const Button: React.FC<IButton> = ({
   size = "md",
   type = "button",
   onClick,
+  className,
+  disabled = false,
 }: IButton) => {
   const style =
     size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg";
@@ -38,7 +43,8 @@ export const Button: React.FC<IButton> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`my-2 rounded bg-green-600/100 py-2 px-4 text-white hover:bg-black  ${style}`}
+      className={className}
+      disabled={disabled}
     >
       {label}
     </button>
