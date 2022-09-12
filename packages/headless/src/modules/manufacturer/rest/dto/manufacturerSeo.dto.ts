@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, MinLength } from 'class-validator';
-import type { ManufacturerSeo } from 'models';
+import type { ManufacturerSeo } from '@bs-commerce/models';
 
 export class ManufacturerSeoDto implements ManufacturerSeo {
   @ApiProperty({ required: false })

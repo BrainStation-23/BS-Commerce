@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { useEffect, useRef, useState } from 'react';
 
-import { ResponseItem, updateCartItemRequest } from 'models';
+import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
 import { useAppDispatch } from 'customHooks/hooks';
 import {
   deleteCartItem,

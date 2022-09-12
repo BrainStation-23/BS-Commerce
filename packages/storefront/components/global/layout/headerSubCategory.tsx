@@ -1,4 +1,4 @@
-import { subCategoryList } from 'models';
+import { subCategoryList } from '@bs-commerce/models';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';

@@ -3,7 +3,7 @@ var cookie = require('cookie');
 
 import Address from '@/components/myAccount/address';
 import { userAPI } from 'APIs';
-import { Customer } from 'models';
+import { Customer } from '@bs-commerce/models';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCustomerDetails } from 'toolkit/userSlice';
 import { storeAddresses } from 'toolkit/customerAddressSlice';

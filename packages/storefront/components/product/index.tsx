@@ -5,7 +5,13 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
-import { CustomerProduct, Product, ResponseItem, WishlistItem } from 'models';
+import {
+  CustomerProduct,
+  Product,
+  ResponseItem,
+  WishlistItem,
+  ICompareItems,
+} from '@bs-commerce/models';
 import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { setModalState, setLoginModalState } from 'toolkit/modalSlice';
 import {
@@ -26,7 +32,6 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
 import CartToast from '../global/components/cartToast';
-import { ICompareItems } from 'models';
 interface SingleProduct {
   product: Product;
 }

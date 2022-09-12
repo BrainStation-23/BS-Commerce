@@ -1,5 +1,5 @@
 import { useAppDispatch } from 'customHooks/hooks';
-import { CustomerProduct, Product, WishlistProduct } from 'models';
+import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';

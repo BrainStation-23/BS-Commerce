@@ -3,32 +3,37 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
 import { CustomerProductDto } from './customerProduct.dto';
 import {
-    GetCustomerAllHomePageProductsErrorMessages,
-    GetCustomerAllHomePageProductsErrorResponse,
-    GetCustomerAllHomePageProductsSuccessResponse,
-} from 'models';
+  GetCustomerAllHomePageProductsErrorMessages,
+  GetCustomerAllHomePageProductsErrorResponse,
+  GetCustomerAllHomePageProductsSuccessResponse,
+} from '@bs-commerce/models';
 
+export class GetCustomerAllHomePageProductsErrorResponseDto
+  implements GetCustomerAllHomePageProductsErrorResponse
+{
+  @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+  @IsNumber()
+  code: number;
 
-export class GetCustomerAllHomePageProductsErrorResponseDto implements GetCustomerAllHomePageProductsErrorResponse {
-    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
-    @IsNumber()
-    code: number;
+  @ApiProperty({
+    example: GetCustomerAllHomePageProductsErrorMessages.NO_PRODUCTS_FOUND,
+  })
+  @IsString()
+  error: GetCustomerAllHomePageProductsErrorMessages;
 
-    @ApiProperty({ example: GetCustomerAllHomePageProductsErrorMessages.NO_PRODUCTS_FOUND, })
-    @IsString()
-    error: GetCustomerAllHomePageProductsErrorMessages;
-
-    @ApiProperty()
-    @IsArray()
-    errors: string[];
+  @ApiProperty()
+  @IsArray()
+  errors: string[];
 }
 
-export class GetCustomerAllHomePageProductsSuccessResponseDto implements GetCustomerAllHomePageProductsSuccessResponse {
-    @ApiProperty({ default: HttpStatus.OK })
-    @IsNumber()
-    code: number;
+export class GetCustomerAllHomePageProductsSuccessResponseDto
+  implements GetCustomerAllHomePageProductsSuccessResponse
+{
+  @ApiProperty({ default: HttpStatus.OK })
+  @IsNumber()
+  code: number;
 
-    @ApiProperty({ type: () => [CustomerProductDto] })
-    @IsObject()
-    data: [CustomerProductDto];
+  @ApiProperty({ type: () => [CustomerProductDto] })
+  @IsObject()
+  data: [CustomerProductDto];
 }

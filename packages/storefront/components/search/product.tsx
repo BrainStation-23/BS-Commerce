@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { CustomerProduct, IProductSearchSchema } from 'models';
+import { CustomerProduct, IProductSearchSchema } from '@bs-commerce/models';
 
 import { userAPI } from 'APIs';
 import Icon from '@/components/search/icon';

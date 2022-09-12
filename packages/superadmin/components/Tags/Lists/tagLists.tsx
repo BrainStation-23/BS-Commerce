@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Table from '../../global/table/table';
 import Pagination from '../../global/pagination';
 import { useRouter } from 'next/router';
-import { Tag } from 'models';
+import { Tag } from '@bs-commerce/models';
 interface Props {
   TagData: Tag[];
 }

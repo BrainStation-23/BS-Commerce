@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetCompareErrorEnum } from 'models';
+import { GetCompareErrorEnum } from '@bs-commerce/models';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { CompareDataDto, CompareResponse } from '../rest/dto/test.dto';
 import { CompareRepository } from '../repositories';
@@ -7,8 +7,12 @@ import { CompareRepository } from '../repositories';
 export class CompareTestService {
   constructor(private compareRepository: CompareRepository) {}
 
-  async getCompareByUserId(userId: string): Promise<CompareResponse<CompareDataDto>> {
-    const data = (await this.compareRepository.getCompareByUserId(userId)) as CompareDataDto;
+  async getCompareByUserId(
+    userId: string,
+  ): Promise<CompareResponse<CompareDataDto>> {
+    const data = (await this.compareRepository.getCompareByUserId(
+      userId,
+    )) as CompareDataDto;
     if (data) {
       const result = successResponse(CompareDataDto, data);
       return result;
@@ -18,7 +22,9 @@ export class CompareTestService {
   }
 
   async getCompare(userId: string): Promise<CompareResponse<boolean>> {
-    const data = (await this.compareRepository.getCompareByUserId(userId)) as CompareDataDto;
+    const data = (await this.compareRepository.getCompareByUserId(
+      userId,
+    )) as CompareDataDto;
     if (data) {
       // const result = successResponse(true);
       // return result;

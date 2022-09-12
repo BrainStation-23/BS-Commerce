@@ -66,7 +66,10 @@ import {
   GetCustomerProductSuccessResponse,
   GetCustomerProductByURLResponse,
   GetCustomerProductByURLSuccessResponse,
-} from 'models';
+  IReOrderQuery,
+  ErrorMessageReOrder,
+  ReOrderResponse,
+} from '@bs-commerce/models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
@@ -334,10 +337,10 @@ export async function deleteFromCompareRest(
   productId: string
 ): Promise<CompareResponse | undefined> {
   try {
-   const res = await axios.delete(
+    const res = await axios.delete(
       `${apiEndPoints.deleteFromCompare}?productId=${productId}`
     );
-    return res.data as CompareSuccessResponse
+    return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -641,14 +644,25 @@ export async function searchProductsRest(
   }
 }
 
-export async function getCompareRest(
-): Promise<CompareResponse | undefined> {
+export async function getCompareRest(): Promise<CompareResponse | undefined> {
   try {
-    const res = await axios.get(
-      `${apiEndPoints.addToCompare}`
-    );
+    const res = await axios.get(`${apiEndPoints.addToCompare}`);
     return res.data as CompareSuccessResponse;
   } catch (error: any) {
+    return error;
+  }
+}
+
+export async function reorderRest(
+  data: IReOrderQuery
+): Promise<ReOrderResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}/reorder`, data);
+    return res.data as ReOrderResponse;
+  } catch (error: any) {
+    toast.error('Something Went wrong on re-order', {
+      containerId: 'bottom-right',
+    });
     return error;
   }
 }

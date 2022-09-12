@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CustomerProduct } from 'models';
+import { Product } from '@bs-commerce/models';
 
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/productInfo';
 interface SingleProduct {
-  product: CustomerProduct;
+  product: Product;
 }
 
 const Product = ({ product }: SingleProduct) => {

@@ -1,11 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper';
-import SwiperClass from "swiper/types/swiper-class";
+import SwiperClass from 'swiper/types/swiper-class';
 
 import { useState, FC } from 'react';
 import Image from 'next/image';
 
-import { Product, ProductPhoto } from 'models';
+import { Product, ProductPhoto } from '@bs-commerce/models';
 interface SingleProduct {
   product: Product;
 }

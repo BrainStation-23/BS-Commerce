@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { OrderByUserId } from 'models';
+import { OrderByUserId } from '@bs-commerce/models';
 import { useRouter } from 'next/router';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';
@@ -10,6 +10,7 @@ import ChevronRight from './icons/chevron-right';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
+import ReOrder from '../singleOrder/re-Order';
 
 const SingleOrder: FC = () => {
   const router = useRouter();
@@ -64,6 +65,7 @@ const SingleOrder: FC = () => {
 
         <OrderSummary singleOrder={singleOrder!} />
         <ProductTable productList={singleOrder?.products!} />
+        <ReOrder singleOrder={singleOrder!} />
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import Image from 'next/image';
 
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models';
 interface SingleProduct {
   product: Product;
 }

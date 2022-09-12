@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 
 import { userAPI } from 'APIs';
-import { IProductSearchSchema } from 'models';
+import { IProductSearchSchema } from '@bs-commerce/models';
 import Product from '@/components/search/product';
 
 const SearchItem: FC<{

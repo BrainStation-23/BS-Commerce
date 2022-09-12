@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { CustomerSignInRequest } from 'models';
+import { CustomerSignInRequest } from '@bs-commerce/models';
 
 import { config } from 'config';
 import { userAPI } from 'APIs';

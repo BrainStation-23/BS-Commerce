@@ -4,10 +4,9 @@ import { storeBrands, storeCategorizedProduct } from 'toolkit/productsSlice';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { userAPI } from 'APIs';
-import { Product } from 'models';
+import { Product, Brand } from '@bs-commerce/models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
-import { Brand } from 'models';
 
 interface CategoryNameIdProp {
   name: string;

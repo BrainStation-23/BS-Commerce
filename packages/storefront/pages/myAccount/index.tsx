@@ -3,10 +3,9 @@ var cookie = require('cookie');
 
 import AccountDetails from '@/components/myAccount/account-details';
 import { userAPI } from 'APIs';
-import { GetCustomerInformationSuccessResponse } from 'models';
+import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { storeCustomerDetails } from 'toolkit/userSlice';
-
 
 interface Props {
   customerInformation: GetCustomerInformationSuccessResponse;
@@ -16,9 +15,8 @@ const MyAccount: NextPage<Props> = ({ customerInformation }: Props) => {
   // console.log(customerInformation);
   const dispatch = useAppDispatch();
   dispatch(storeCustomerDetails(customerInformation.data));
-  
-  return <AccountDetails />;
 
+  return <AccountDetails />;
 };
 export default MyAccount;
 

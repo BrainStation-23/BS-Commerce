@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { CustomerAddress } from 'models';
+import { CustomerAddress } from '@bs-commerce/models';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ChevronLeft from '@/components/myAccount/icons/chevron-left';

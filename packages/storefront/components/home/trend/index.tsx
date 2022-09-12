@@ -6,7 +6,7 @@ import { useAppSelector } from 'customHooks/hooks';
 import Container from '@/components/global/components/container';
 import ProductRow from './productRow.component';
 import SwiperGrid from '@/components/global/components/swipergrid';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 const TrendingProducts = () => {
   let [filterKey, setFilterKey] = useState('smartphones');

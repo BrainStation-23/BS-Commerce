@@ -1,7 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import { CustomerProduct, Wishlist, NestedCategoryList } from 'models';
+import {
+  CustomerProduct,
+  Wishlist,
+  NestedCategoryList,
+} from '@bs-commerce/models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCategory } from 'toolkit/categorySlice';

@@ -3,7 +3,6 @@ import {
   OrderResponseData,
   getCategoryResponse,
   GetAllBrandsResponse,
-  OrderResponseData,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -55,8 +54,10 @@ import {
   getCategoryBySlugResponse,
   GetCustomerProductByURLResponse,
   IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
   SendOtpResponse,
-} from 'models';
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
 export interface accordionBody {
@@ -128,7 +129,9 @@ export interface apiFunction {
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
   addToCompare: (productId: string) => Promise<CompareResponse | undefined>;
-  deleteFromCompare: (productId: string) =>Promise<CompareResponse | undefined>;
+  deleteFromCompare: (
+    productId: string
+  ) => Promise<CompareResponse | undefined>;
   getCustomerProfile: (
     token: string
   ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
@@ -188,4 +191,7 @@ export interface apiFunction {
     limit: number
   ): Promise<IProductSearchResponse>;
   getCompare: () => Promise<CompareResponse | undefined>;
+  reorder: (
+    reorderParams: IReOrderQuery
+  ) => Promise<ReOrderResponse | undefined>;
 }
