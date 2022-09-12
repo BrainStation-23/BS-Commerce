@@ -1,23 +1,72 @@
 export const categoriesData = [
   {
-    id: '112',
-    name: 'Fruits',
-    slug: 'slug123',
-    published: true,
-    displayOrder: 0,
-    ancestors: {
-      name: 'none',
-      slug: 'none',
-      level: 0,
-    },
-  },
-  {
     name: 'Electronics',
+    photo: {
+      url: 'string',
+      alt: 'string',
+    },
     published: true,
-    displayOrder: 0,
-    id: 'a0661daa-fc41-4d31-bc8b-590a413dd891',
+    displayOrder: 1,
+    id: 'a72242de-51ea-4b54-bdb9-7a22c1537692',
     ancestors: [],
     slug: 'electronics',
+    subCategories: [
+      {
+        name: 'phone',
+        photo: {
+          url: 'string',
+          alt: 'string',
+        },
+        published: true,
+        displayOrder: 0,
+        id: '2c620053-3792-4fd4-9ec0-0b7c379dc22a',
+        ancestors: [
+          {
+            name: 'Electronics',
+            slug: 'electronics',
+            level: 1,
+          },
+        ],
+        slug: 'phone',
+        subCategories: [
+          {
+            name: 'Nokia',
+            photo: {
+              url: 'string',
+              alt: 'string',
+            },
+            published: true,
+            displayOrder: 0,
+            id: 'dfb54b13-6985-468b-9df3-1d36a7664eb8',
+            ancestors: [
+              {
+                name: 'Electronics',
+                slug: 'electronics',
+                level: 1,
+              },
+              {
+                name: 'phone',
+                slug: 'phone',
+                level: 2,
+              },
+            ],
+            slug: 'nokia',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Vegetable',
+    photo: {
+      url: 'string',
+      alt: 'string',
+    },
+    published: true,
+    displayOrder: 1,
+    id: '3988ce23-4e6f-4362-a369-ffa4b19c42da',
+    ancestors: [],
+    slug: 'vegetable',
   },
   {
     name: 'Fashon',
@@ -229,27 +278,35 @@ export const categoriesData = [
     ],
   },
   {
-    name: 'CatsM',
+    name: 'Fruits & Vegetables',
     photo: {
       url: '',
       alt: '',
     },
     published: false,
     displayOrder: 0,
-    id: 'a4fd1a04-62e1-41ff-83f0-d965c1a57520',
+    id: 'b6c70c16-1384-4023-98f2-f7e8d1e98bbd',
     ancestors: [],
-    slug: 'cats',
-  },
-  {
-    name: 'newNew',
-    photo: {
-      url: '',
-      alt: '',
-    },
-    published: false,
-    displayOrder: 0,
-    id: 'b0912845-61d5-4423-81d9-833775230fe1',
-    ancestors: [],
-    slug: 'newnew',
+    slug: 'fruits-&-vegetables',
+    subCategories: [
+      {
+        name: 'Fruits',
+        photo: {
+          url: '',
+          alt: '',
+        },
+        published: false,
+        displayOrder: 0,
+        id: 'b73b7a9f-f48f-418b-8224-a99beaf18be5',
+        ancestors: [
+          {
+            name: 'Fruits & Vegetables',
+            slug: 'fruits-&-vegetables',
+            level: 1,
+          },
+        ],
+        slug: 'fruits',
+      },
+    ],
   },
 ];

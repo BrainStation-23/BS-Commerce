@@ -1,6 +1,6 @@
 export const orderData = [
   {
-    orderId: '244313366126133',
+    orderId: '038482500814295',
     userId: '2f6d2a90-c9f0-408a-829b-a2ac75cbadfe',
     billingAddress: {
       firstName: 'New',
@@ -27,15 +27,15 @@ export const orderData = [
     productCost: 390,
     products: [
       {
-        name: 'CabbageSSSS',
-        price: 39,
-        quantity: 10,
-        sku: 'Cabbage',
+        name: 'Dragon Fruit Local (± 50 gm)',
+        price: 479,
+        quantity: 1,
+        sku: 'sku',
         photos: [
           {
-            url: 'https://cdn.shopify.com/s/files/1/0359/6350/2651/products/productbig3_5af53e82-3ca8-451c-a0ad-2284ef2f1d8b_1024x1024.jpg?v=1642307207',
-            id: '41637de3-3f16-4307-b25f-503952127ec1',
-            title: 'Cabbage',
+            url: 'https://chaldn.com/_mpimage/dragon-fruit-local-50-gm-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D93407&q=low&v=1&m=400&webp=1',
+            id: '',
+            title: '',
             alt: 'image',
             displayOrder: 0,
           },
