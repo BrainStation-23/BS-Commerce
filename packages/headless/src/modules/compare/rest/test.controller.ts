@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Res,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -29,7 +28,9 @@ export class CompareTestController {
     @UserInfo() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<CompareResponse<CompareDataDto>> {
-    const { code, ...response } = await this.compareService.getCompareByUserId(user.id);
+    const { code, ...response } = await this.compareService.getCompareByUserId(
+      user.id,
+    );
     res.status(code);
     return response;
   }

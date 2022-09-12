@@ -1,24 +1,13 @@
 import {
   DescriptiveError,
-  UpdateManufacturerRequest,
   DeleteManufacturerErrorResponse,
   DeleteManufacturerErrorMessages,
   DeleteManufacturerSuccessMessages,
   DeleteManufacturerSuccessResponse,
 } from '@bs-commerce/models';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsString,
-  MinLength,
-  ValidateNested,
-} from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { ManufacturerDto } from './manufacturer.dto';
-import { ManufacturerSeoDto } from './manufacturerSeo.dto';
 import { HttpStatus } from '@nestjs/common';
 
 export class DeleteManufacturerErrorResponseDto

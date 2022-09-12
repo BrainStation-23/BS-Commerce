@@ -11,7 +11,10 @@ import { CategoryService } from './services';
     CategoryResolver,
     CategoryService,
     CategoryRepository,
-    { provide: ICategoryDatabase, useClass: ResolveDatabaseDependency('CATEGORY') },
+    {
+      provide: ICategoryDatabase,
+      useClass: ResolveDatabaseDependency('CATEGORY'),
+    },
   ],
 })
 export class CategoryModule {}

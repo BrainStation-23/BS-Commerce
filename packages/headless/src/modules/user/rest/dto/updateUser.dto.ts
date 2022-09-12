@@ -8,7 +8,6 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
-  ValidateNested,
 } from 'class-validator';
 import { regexConfig } from 'config/phone';
 import { AddressDto, UserDto } from './user.dto';

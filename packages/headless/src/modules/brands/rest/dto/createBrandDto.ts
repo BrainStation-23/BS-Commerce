@@ -1,27 +1,14 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsString,
-  IsNotEmpty,
-  IsEmail,
-  MinLength,
-  IsOptional,
-  IsObject,
-  IsNumber,
-  IsArray,
-  IsBoolean,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsObject } from 'class-validator';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import {
   CreateBrandRequest,
-  BrandInfo,
-  BrandMeta,
   CreateBrandSuccessResponse,
   CreateBrandErrorResponse,
   ErrorMessage,
 } from '@bs-commerce/models';
 import { BrandDto } from './brandDto';
-
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
 

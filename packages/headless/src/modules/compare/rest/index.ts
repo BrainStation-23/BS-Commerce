@@ -10,7 +10,13 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Response } from 'express';
 import { User } from 'src/entity/user';
 import { RolesGuard } from 'src/guards/auth.guard';
@@ -28,7 +34,7 @@ import { CompareService } from '../services';
 @Controller('compare')
 export class CompareController {
   constructor(private compareService: CompareService) {}
-  
+
   @UseGuards(new RolesGuard(['customer']))
   @ApiBearerAuth()
   @Post()
@@ -68,8 +74,13 @@ export class CompareController {
     status: HttpStatus.OK,
   })
   @Get()
-  async getCompareByUserId(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.compareService.getCompareByUserId(user.id);
+  async getCompareByUserId(
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.compareService.getCompareByUserId(
+      user.id,
+    );
     res.status(code);
     return response;
   }
@@ -93,7 +104,10 @@ export class CompareController {
     @Param('compareId') compareId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.compareService.getCompareById(user.id, compareId);
+    const { code, ...response } = await this.compareService.getCompareById(
+      user.id,
+      compareId,
+    );
     res.status(code);
     return response;
   }
@@ -117,7 +131,10 @@ export class CompareController {
     @Query('compareId') compareId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.compareService.deleteCompareById(user.id, compareId);
+    const { code, ...response } = await this.compareService.deleteCompareById(
+      user.id,
+      compareId,
+    );
     res.status(code);
     return response;
   }
@@ -141,10 +158,8 @@ export class CompareController {
     @Query() query: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.compareService.deleteItemByProductId(
-      user.id,
-      query.productId,
-    );
+    const { code, ...response } =
+      await this.compareService.deleteItemByProductId(user.id, query.productId);
     res.status(code);
     return response;
   }
@@ -162,8 +177,12 @@ export class CompareController {
     status: HttpStatus.OK,
   })
   @Delete('allitems')
-  async deleteAllItemByUserId(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.compareService.deleteAllItemByUserId(user.id);
+  async deleteAllItemByUserId(
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } =
+      await this.compareService.deleteAllItemByUserId(user.id);
     res.status(code);
     return response;
   }
@@ -183,9 +202,10 @@ export class CompareController {
     @Body() body: AddToCompareDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.compareService.getProductDetails( body.productId );
+    const { code, ...response } = await this.compareService.getProductDetails(
+      body.productId,
+    );
     res.status(code);
     return response;
   }
-
 }

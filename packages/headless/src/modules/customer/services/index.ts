@@ -181,7 +181,7 @@ export class CustomerService {
     customerId: string,
     addressId: string,
   ): Promise<DeleteCustomerAddressResponse> {
-    let customer = await this.customerRepo.findCustomer({ id: customerId });
+    const customer = await this.customerRepo.findCustomer({ id: customerId });
     if (!customer)
       return this.helper.serviceResponse.errorResponse(
         GetCustomerInformationErrorMessages.CUSTOMER_NOT_FOUND,

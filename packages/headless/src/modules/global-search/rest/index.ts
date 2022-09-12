@@ -1,7 +1,6 @@
-import { Controller, Get, ParseIntPipe, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { IProductSearchResponse } from '@bs-commerce/models';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { ElasticService } from '../services/elastic.service';
 import { ISearchProductResponse, ISuggestedProductResponse } from './dto';

@@ -7,14 +7,17 @@ import { CustomerModel } from './customer.model';
 
 @Injectable()
 export class CustomerDatabase implements ICustomerDatabase {
-
   async sendOtp(data: Otp): Promise<Otp | null> {
     return await OtpModel.create(data);
   }
 
   async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
     const otp = await OtpModel.findOne(query);
-    if (otp) await this.updateOtp(query, { otpVerifiedAt: Date.now(), isVerified: true });
+    if (otp)
+      await this.updateOtp(query, {
+        otpVerifiedAt: Date.now(),
+        isVerified: true,
+      });
     return otp;
   }
 
@@ -22,7 +25,10 @@ export class CustomerDatabase implements ICustomerDatabase {
     return await OtpModel.findOne(query);
   }
 
-  async updateOtp(query: Record<string, any>, data: object): Promise<Otp | null> {
+  async updateOtp(
+    query: Record<string, any>,
+    data: object,
+  ): Promise<Otp | null> {
     return await OtpModel.findOneAndUpdate(query, { $set: data });
   }
 
@@ -32,8 +38,12 @@ export class CustomerDatabase implements ICustomerDatabase {
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
     const createdCUstomer = await CustomerModel.create(customer);
-    createdCUstomer && customer.email && await this.deleteOtp({ email: customer.email });
-    createdCUstomer && customer.phone && await this.deleteOtp({ phone: customer.phone });
+    createdCUstomer &&
+      customer.email &&
+      (await this.deleteOtp({ email: customer.email }));
+    createdCUstomer &&
+      customer.phone &&
+      (await this.deleteOtp({ phone: customer.phone }));
     const newCustomer = createdCUstomer?.toObject();
     delete newCustomer?.password;
     return newCustomer;
@@ -43,23 +53,66 @@ export class CustomerDatabase implements ICustomerDatabase {
     return CustomerModel.findOne(query).lean().select('-password -_id');
   }
 
-  async getCustomerPassword(query: Record<string, string>): Promise<Customer | null> {
+  async getCustomerPassword(
+    query: Record<string, string>,
+  ): Promise<Customer | null> {
     return await CustomerModel.findOne(query).lean();
   }
 
-  async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $set: customer }, { new: true }).lean().select('-password -_id').exec();
+  async updateCustomer(
+    customerId: string,
+    customer: Customer,
+  ): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate(
+      { id: customerId },
+      { $set: customer },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 
-  async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId }, { $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
+  async addCustomerNewAddress(
+    customerId: string,
+    address: CustomerAddress,
+  ): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate(
+      { id: customerId },
+      { $push: { addresses: address } },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 
-  async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $set: { 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
+  async updateCustomerAddress(
+    customerId: string,
+    addressId: string,
+    address: CustomerAddress,
+  ): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate(
+      { id: customerId, 'addresses.id': addressId },
+      { $set: { 'addresses.$': address } },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 
-  async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
-    return await CustomerModel.findOneAndUpdate({ id: customerId, 'addresses.id': addressId }, { $pull: { addresses: { id: addressId } } }, { new: true }).lean().select('-password -_id').exec();
+  async deleteCustomerAddress(
+    customerId: string,
+    addressId: string,
+  ): Promise<Customer | null> {
+    return await CustomerModel.findOneAndUpdate(
+      { id: customerId, 'addresses.id': addressId },
+      { $pull: { addresses: { id: addressId } } },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 }

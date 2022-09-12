@@ -16,4 +16,4 @@ import { ManufacturerService } from './services/manufacturer.service';
     },
   ],
 })
-export class ManufacturerModule { }
+export class ManufacturerModule {}

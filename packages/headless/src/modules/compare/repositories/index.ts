@@ -23,7 +23,7 @@ export class CompareRepository {
     return await this.db.deleteCompareById(userId, compareId);
   }
 
-  async getProduct(productId: string): Promise<Boolean> {
+  async getProduct(productId: string): Promise<boolean> {
     return await this.db.getProduct(productId);
   }
   async deleteItemByProductId(
@@ -43,8 +43,8 @@ export class CompareRepository {
     return await this.db.addItemToCompare(userId, productId);
   }
 
-  async  getProductDetails( productId: string ): Promise<CompareItems[] | null> {
-    return await this.db. getProductDetails(productId);
+  async getProductDetails(productId: string): Promise<CompareItems[] | null> {
+    return await this.db.getProductDetails(productId);
   }
   async createCompare(
     userId: string,

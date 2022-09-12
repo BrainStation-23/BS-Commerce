@@ -1,7 +1,6 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { OrderByUserIdResponse, User } from '@bs-commerce/models';
-
+import { User } from '@bs-commerce/models';
 import { OrderCustomerService } from '../services/customer.service';
 import {
   CreateOrderModel,
@@ -19,12 +18,12 @@ import { RolesGuard } from 'src/guards/auth.guard';
 export class CustomerOrderResolver {
   constructor(private customerOrderService: OrderCustomerService) {}
 
-  @Query((returns) => SingleOrderResponse)
+  @Query(() => SingleOrderResponse)
   async getOrderByOrderId(@Args('orderId') orderId: string) {
     return await this.customerOrderService.getOrderByOrderId(orderId);
   }
 
-  @Query((returns) => SingleUserOrderList)
+  @Query(() => SingleUserOrderList)
   async getOrderListByUserId(
     @UserInfo() user: User,
     @Args('sortObj') sortObj: OrderSortingQueryModel,
@@ -35,7 +34,7 @@ export class CustomerOrderResolver {
     );
   }
 
-  @Mutation((returns) => SingleOrderResponse)
+  @Mutation(() => SingleOrderResponse)
   async createOrder(
     @UserInfo() user: User,
     @Args('order') order: CreateOrderModel,
@@ -47,7 +46,7 @@ export class CustomerOrderResolver {
     );
   }
 
-  @Mutation((returns) => ReOrderResponse)
+  @Mutation(() => ReOrderResponse)
   async reOrder(
     @UserInfo() user: User,
     @Args('reOrder') reOrder: ReOrderRequestModel,

@@ -11,9 +11,9 @@ import { authConfig } from 'config/auth';
 @Module({
   imports: [
     JwtModule.register({
-      secret: authConfig.jwt_key!,
+      secret: authConfig.jwt_key,
       signOptions: {
-        expiresIn: authConfig.expiration_time!,
+        expiresIn: authConfig.expiration_time,
       },
     }),
   ],
@@ -28,4 +28,4 @@ import { authConfig } from 'config/auth';
     JwtStrategy,
   ],
 })
-export class AuthModule { }
+export class AuthModule {}

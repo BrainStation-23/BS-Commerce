@@ -15,7 +15,6 @@ import {
   OrderSortQuery,
   OrderStatEntity,
   ProductOrder,
-  ReOrderQuery,
 } from 'src/entity/order';
 
 @Injectable()

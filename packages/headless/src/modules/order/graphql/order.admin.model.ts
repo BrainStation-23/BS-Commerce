@@ -1,10 +1,4 @@
-import {
-  Field,
-  InputType,
-  Int,
-  ObjectType,
-  registerEnumType,
-} from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   GetAllOrderQuery,
   OrderIncompleteStat,
@@ -20,53 +14,53 @@ import { OrderResponse } from './order.customer.model';
 
 @ObjectType({ description: 'Order Status Types Model' })
 export class OrderStatusTypesModel implements OrderStatusTypes {
-  @Field((type) => String)
+  @Field(() => String)
   Pending: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Processing: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Completed: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Cancelled: string;
 }
 @ObjectType({ description: 'Payment Status Types Model' })
 export class PaymentStatusTypesModel implements PaymentStatusTypes {
-  @Field((type) => String)
+  @Field(() => String)
   Pending: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Paid: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Cancelled: string;
 }
 
 @ObjectType({ description: 'Shipment Status Types Model' })
 export class ShippingStatusTypesModel implements ShippingStatusTypes {
-  @Field((type) => String)
+  @Field(() => String)
   NotYetShipped: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   PartiallyShipped: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Shipped: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   Delivered: string;
 }
 @ObjectType({ description: 'Order Status Criterias Response' })
 export class StatusTypesModel implements OrderStatusModel {
-  @Field((type) => OrderStatusTypesModel)
+  @Field(() => OrderStatusTypesModel)
   orderStatusEnums: OrderStatusTypesModel;
 
-  @Field((type) => PaymentStatusTypesModel)
+  @Field(() => PaymentStatusTypesModel)
   paymentStatusEnums: PaymentStatusTypesModel;
 
-  @Field((type) => ShippingStatusTypesModel)
+  @Field(() => ShippingStatusTypesModel)
   shippingStatusEnum: ShippingStatusTypesModel;
 }
 
@@ -75,27 +69,27 @@ export class StatusTypesResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => StatusTypesModel, { nullable: false })
+  @Field(() => StatusTypesModel, { nullable: false })
   data: StatusTypesModel;
 }
 @ObjectType({ description: 'Order Status Fields' })
 export class OrderStatModel implements OrderStat {
-  @Field((type) => Number)
+  @Field(() => Number)
   todayTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   weekTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   monthTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   yearTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   allTimeTotal: number;
 }
 
@@ -104,31 +98,31 @@ export class OrderStatResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => OrderStatModel, { nullable: false })
+  @Field(() => OrderStatModel, { nullable: false })
   data: OrderStatModel;
 }
 
 @ObjectType({ description: 'Incomplete Order Status Fields' })
 export class OrderIncompleteStatModel implements OrderIncompleteStat {
-  @Field((type) => Number)
+  @Field(() => Number)
   orderPendingTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   orderPendingCount: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   paymentPendingTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   paymentPendingCount: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   shippingPendingTotal: number;
 
-  @Field((type) => Number)
+  @Field(() => Number)
   shippingPendingCount: number;
 }
 
@@ -137,52 +131,52 @@ export class OrderIncompleteStatResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => OrderIncompleteStatModel, { nullable: false })
+  @Field(() => OrderIncompleteStatModel, { nullable: false })
   data: OrderIncompleteStatModel;
 }
 
 @InputType({ description: 'Query for Get Order List' })
 export class GetAllOrderQueryModel implements GetAllOrderQuery {
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   shippingStatus?: string;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   orderStatus?: string;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   paymentStatus?: string;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   skip?: number;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   limit?: number;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   startDate?: Date;
 
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   endDate?: Date;
 }
 
 @InputType({ description: 'Change Status Model' })
 export class ChangeStatus implements ChangeStatusModel {
-  @Field((type) => String)
+  @Field(() => String)
   orderId: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   statusType: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   statusValue: string;
 }
 
 @ObjectType({ description: 'All Order List' })
 export class OrderList {
-  @Field((type) => [OrderResponse])
+  @Field(() => [OrderResponse])
   orders: OrderResponse[];
 }
 
@@ -191,9 +185,9 @@ export class OrderListResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => OrderList, { nullable: false })
+  @Field(() => OrderList, { nullable: false })
   data: OrderList;
 }

@@ -11,26 +11,29 @@ import {
   ForgotPasswordErrorResponseDto,
   ForgotPasswordSuccessResponseDto,
   SignInSuccessResponseDto,
-  SignInErrorResponseDto
+  SignInErrorResponseDto,
 } from './dto';
 
 @Controller('auth')
 @ApiTags('Admin Authentication API')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('signup')
   @ApiResponse({
     description: 'Sign Up Success Response',
     type: CreateUserSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Sign Up Error Response',
     type: CreateUserErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async register(@Body() user: CreateUserDto, @Res({ passthrough: true }) res: Response) {
+  async register(
+    @Body() user: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { code, ...response } = await this.authService.signUp(user);
     res.status(code);
     return { code, ...response };
@@ -40,14 +43,17 @@ export class AuthController {
   @ApiResponse({
     description: 'Sign In Success Response',
     type: SignInSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Sign In Error Response',
     type: SignInErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async signin(@Body() data: SignInDataDto, @Res({ passthrough: true }) res: Response,) {
+  async signin(
+    @Body() data: SignInDataDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { code, ...response } = await this.authService.signIn(data);
     res.status(code);
     return { code, ...response };
@@ -57,16 +63,23 @@ export class AuthController {
   @ApiResponse({
     description: 'Forgot Password Success Response',
     type: ForgotPasswordSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Forgot Password Error Response',
     type: ForgotPasswordErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async forgotPassword(@Body() data: ForgotPasswordDto, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
+  async forgotPassword(
+    @Body() data: ForgotPasswordDto,
+    @Res({ passthrough: true }) res: Response,
+    @Req() req: Request,
+  ) {
     const url = req.protocol + '://' + req.headers.host;
-    const { code, ...response } = await this.authService.forgotPassword(data.username, url);
+    const { code, ...response } = await this.authService.forgotPassword(
+      data.username,
+      url,
+    );
     res.status(code);
     return { code, ...response };
   }

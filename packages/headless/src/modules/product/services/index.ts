@@ -368,8 +368,8 @@ export class ProductService {
         HttpStatus.BAD_REQUEST,
       );
 
-    let manufacturers = new Set();
-    let brands = new Set();
+    const manufacturers = new Set();
+    const brands = new Set();
     products.length &&
       products.forEach((product) => {
         product?.manufacturer && manufacturers.add(product?.manufacturer?.name);

@@ -1,22 +1,15 @@
-import { ProductRepository } from './../../product/repositories/index';
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
   ErrorMessageReOrder,
   ReOrderResponse,
 } from '@bs-commerce/models';
-
-import {
-  CartResponse,
-  OrderSortQuery,
-  ReOrderQuery,
-} from './../../../entity/order';
+import { OrderSortQuery, ReOrderQuery } from './../../../entity/order';
 import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { OrderRepository } from '../repositories';
-import { CartRepository } from './../../cart/repositories/index';
 
 @Injectable()
 export class OrderCustomerService {
@@ -45,7 +38,7 @@ export class OrderCustomerService {
   }
 
   async reOrder(userId: string, body: ReOrderQuery): Promise<ReOrderResponse> {
-    let { ignoreInvalidItems, overWriteCart, orderId } = body;
+    const { ignoreInvalidItems, overWriteCart, orderId } = body;
 
     const prevOrder = await this.orderRepository.findOrder({ orderId, userId });
     if (!prevOrder)

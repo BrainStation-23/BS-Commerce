@@ -36,12 +36,12 @@ export class AuthService {
         HttpStatus.BAD_REQUEST,
       );
 
-    let user: any = { ...data };
+    const user: any = { ...data };
     user.provider = 'local';
     user.displayName = data.firstName + ' ' + data.lastName;
     user.email = data.email.toLowerCase();
     user.username = data.email;
-    user.password = await bcrypt.hash(data.password, authConfig.salt!);
+    user.password = await bcrypt.hash(data.password, authConfig.salt);
 
     const registeredUser = await this.userRepo.createUser(user);
     if (!registeredUser)
