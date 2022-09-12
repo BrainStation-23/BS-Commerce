@@ -2,7 +2,6 @@ import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
   OrderResponseData,
   getCategoryResponse,
-  OrderResponseData,
   getCategoryBySlugResponse,
   GetCustomerAllProductsResponse,
   GetCustomerQuery,
@@ -57,6 +56,8 @@ import {
   GetAllBrandsResponse,
   GetCustomerProductByURLResponse,
   IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
@@ -315,7 +316,14 @@ export async function searchProductsGraphql(
   }
 }
 
+export async function getCompareGraphql(): Promise<
+  CompareResponse | undefined
+> {
+  return undefined;
+}
 
-export async function getCompareGraphql(): Promise<CompareResponse | undefined> {
-    return undefined;
+export async function reorderGraphql(
+  data: IReOrderQuery
+): Promise<ReOrderResponse | undefined> {
+  return undefined;
 }

@@ -37,6 +37,7 @@ import {
   getCategoryDetailsBySlugRest,
   searchProductsRest,
   getCompareRest,
+  reorderRest,
 } from './restApi';
 
 import {
@@ -78,6 +79,7 @@ import {
   getCategoryDetailsBySlugGraphql,
   searchProductsGraphql,
   getCompareGraphql,
+  reorderGraphql,
 } from './graphQL';
 import { config } from 'config';
 import { apiFunction } from 'utils/types';
@@ -121,6 +123,7 @@ const graphqlApi: apiFunction = {
   getCategoryDetailsBySlug: getCategoryDetailsBySlugGraphql,
   searchProducts: searchProductsGraphql,
   getCompare: getCompareGraphql,
+  reorder: reorderGraphql,
 };
 
 const restApi: apiFunction = {
@@ -161,7 +164,8 @@ const restApi: apiFunction = {
   getCategoryDetailsBySlug: getCategoryDetailsBySlugRest,
   getPublicProductByUniqueName: getPublicProductByUniqueNameRest,
   searchProducts: searchProductsRest,
-  getCompare: getCompareRest
+  getCompare: getCompareRest,
+  reorder: reorderRest,
 };
 
 export const userAPI: apiFunction =
