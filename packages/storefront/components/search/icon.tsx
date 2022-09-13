@@ -21,7 +21,7 @@ import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
 interface SingleProduct {
-  product: Product | WishlistProduct | CustomerProduct;
+  product: CustomerProduct;
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
