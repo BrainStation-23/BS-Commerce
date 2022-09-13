@@ -18,7 +18,7 @@ import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
 interface SingleProduct {
-  product: Product | WishlistProduct | CustomerProduct;
+  product: CustomerProduct;
 }
 
 const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
@@ -235,7 +235,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               onClick={(event) => {
                 handleAddToCompare();
                 dispatch(setModalState(!modalCmp));
-                dispatch(storeCompare(product as CustomerProduct));
+                dispatch(storeCompare(product));
                 event.preventDefault();
               }}
             >

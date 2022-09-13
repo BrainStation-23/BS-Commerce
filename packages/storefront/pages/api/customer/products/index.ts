@@ -15,7 +15,6 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
   let brands = new Set<string>();
 
   if (categoryId) {
-    
     for (let i = 0; i < productsData.length; i++) {
       for (let j = 0; j < productsData[i].categories.length; j++) {
         if (productsData[i].categories[j].id === categoryId) {
@@ -23,9 +22,9 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
         }
       }
     }
-    
-    for(let i = 0; i < response.length; i++) {
-      for(let j = 0; j < response[i].brands?.length! ; j++) {
+
+    for (let i = 0; i < response.length; i++) {
+      for (let j = 0; j < response[i].brands?.length!; j++) {
         brands.add(response[i].brands![j]);
       }
     }
@@ -63,11 +62,15 @@ const getPublicProductsAPI = (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (!categoryId && !brand && !orderBy && !minPrice && !maxPrice) {
-    response = productsData.filter(
-      (product) => product.info.published === true
-    );
+    response = productsData.filter((product) => true);
   }
-  res.status(200).json({ data: { products: response, brands: Array.from(brands), quantity: response.length} });
+  res.status(200).json({
+    data: {
+      products: response,
+      brands: Array.from(brands),
+      quantity: response.length,
+    },
+  });
 };
 
 export default getPublicProductsAPI;
