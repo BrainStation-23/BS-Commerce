@@ -8,18 +8,11 @@ import { Request } from 'express';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => {
-          let data = request?.cookies['jwt'];
-          if (request?.headers['authorization'] && !data) {
-            data = request?.headers['authorization']?.split(' ')[1];
-          }
-          if (!data) {
-            return null;
-          }
-          return data;
-        },
-      ]),
+      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
+        const data = request?.cookies['jwt']?.split(' ')[1] || request?.headers['authorization']?.split(' ')[1];
+        if (!data) { return null; }
+        return data;
+      }]),
       ignoreExpiration: false,
       secretOrKey: authConfig.jwt_key,
     });
