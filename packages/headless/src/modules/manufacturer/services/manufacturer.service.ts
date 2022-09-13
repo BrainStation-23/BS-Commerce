@@ -17,7 +17,7 @@ import {
   CreateManufacturerResponse,
   CreateManufacturerSuccessMessages,
   CreateManufacturerSuccessResponse,
-  CreateManufacturerErrorMessages
+  CreateManufacturerErrorMessages,
 } from '@bs-commerce/models';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';

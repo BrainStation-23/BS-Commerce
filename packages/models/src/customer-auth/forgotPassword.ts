@@ -8,33 +8,35 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  */
 
 export interface CustomerForgotPasswordRequest {
-    phone?: string;
-    email?: string;
-    password: string;
+  phone?: string;
+  email?: string;
+  password: string;
 }
 
 export interface CustomerForgotPasswordMessage {
-    message?: string;
+  message?: string;
 }
 
 export interface CustomerForgotPasswordSuccessResponse extends SuccessResponse {
-    code: number;
-    data: CustomerForgotPasswordMessage
+  code: number;
+  data: CustomerForgotPasswordMessage;
 }
 
 export const enum CustomerForgotPasswordSuccessMessages {
-    FORGOT_PASSWORD_SUCCESSFUL = 'FORGOT_PASSWORD_SUCCESSFUL',
+  FORGOT_PASSWORD_SUCCESSFUL = 'FORGOT_PASSWORD_SUCCESSFUL',
 }
 
 export const enum CustomerForgotPasswordErrorMessages {
-    CAN_NOT_GET_CUSTOMER = 'CAN_NOT_GET_CUSTOMER',
-    CAN_NOT_UPDATE_CUSTOMER_PASSWORD = 'CAN_NOT_UPDATE_CUSTOMER_PASSWORD'
+  CAN_NOT_GET_CUSTOMER = 'CAN_NOT_GET_CUSTOMER',
+  CAN_NOT_UPDATE_CUSTOMER_PASSWORD = 'CAN_NOT_UPDATE_CUSTOMER_PASSWORD',
 }
 
 export interface CustomerForgotPasswordErrorResponse extends ErrorResponse {
-    code?: number;
-    error: CustomerForgotPasswordErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: CustomerForgotPasswordErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type CustomerForgotPasswordResponse = CustomerForgotPasswordSuccessResponse | CustomerForgotPasswordErrorResponse;
+export type CustomerForgotPasswordResponse =
+  | CustomerForgotPasswordSuccessResponse
+  | CustomerForgotPasswordErrorResponse;

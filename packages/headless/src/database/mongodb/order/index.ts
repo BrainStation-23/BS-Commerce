@@ -1,7 +1,6 @@
 import {
   CartItem,
   Cart,
-  ReOrderQuery,
   ChangeStatusEntity,
   GetAllOrderQueryEntity,
   OrderEntity,
@@ -54,12 +53,10 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getAvailableProducts(productIds: string[]): Promise<any> {
-    return await ProductModel.find(
-      {
-        id: {$in: productIds},
-        'info.published': { $eq: true, $exists: true }
-      }
-      ).select('id -_id');
+    return await ProductModel.find({
+      id: { $in: productIds },
+      'info.published': { $eq: true, $exists: true },
+    }).select('id -_id');
   }
 
   async clearCart(userId: string): Promise<CartResponse | null> {
@@ -264,10 +261,10 @@ export class OrderDatabase implements IOrderDatabase {
     skip?: number,
     limit?: number,
   ): Promise<OrderEntity[]> {
-    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
+    const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
       query;
 
-    let queryParams = {
+    const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
       ...(paymentStatus && { paymentStatus }),

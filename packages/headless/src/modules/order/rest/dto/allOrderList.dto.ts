@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsArray, IsNumber, IsOptional } from 'class-validator';
+import { IsArray, IsOptional } from 'class-validator';
 import { GetAllOrderQuery } from '@bs-commerce/models';
-
 import { OrderDto } from './order.dto';
 
 export class GetAllOrderQueryDto implements GetAllOrderQuery {

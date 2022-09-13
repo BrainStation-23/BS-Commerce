@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
   Res,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -24,24 +24,24 @@ import {
   UpdateTagErrorResponseDto,
   UpdateTagParamDto,
   UpdateTagRequestDto,
-  UpdateTagSuccessResponseDto
+  UpdateTagSuccessResponseDto,
 } from './dto';
 import { RolesGuard } from 'src/guards/auth.guard';
 @Controller('tags')
 @ApiTags('Tags API')
 export class TagsController {
-  constructor(private tagsService: TagsService) { }
+  constructor(private tagsService: TagsService) {}
 
   @Get()
   @ApiResponse({
     description: 'Get All Tags Success Response',
     type: GetTagsSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Get All Tags Error Response',
     type: GetTagsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   async getTags(@Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.tagsService.getTags();
@@ -53,15 +53,16 @@ export class TagsController {
   @ApiResponse({
     description: 'Get All Home Page Products Tags Success Response',
     type: GetTagsSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Get All Home Page Products Tags Error Response',
     type: GetTagsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   async getHomePageProductsTags(@Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.getHomePageProductsTags();
+    const { code, ...response } =
+      await this.tagsService.getHomePageProductsTags();
     res.status(code);
     return { code, ...response };
   }
@@ -79,7 +80,10 @@ export class TagsController {
     type: CreateTagErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
-  async createTag(@Body() data: CreateTagRequestBodyDto, @Res({ passthrough: true }) res: Response) {
+  async createTag(
+    @Body() data: CreateTagRequestBodyDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { code, ...response } = await this.tagsService.createTag(data);
     res.status(code);
     return { code, ...response };
@@ -89,14 +93,17 @@ export class TagsController {
   @ApiResponse({
     description: 'Get Tag Success Response',
     type: GetTagSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Get Tag Error Response',
     type: GetTagErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async getTag(@Param() params: GetTagParamsDto, @Res({ passthrough: true }) res: Response) {
+  async getTag(
+    @Param() params: GetTagParamsDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { code, ...response } = await this.tagsService.getTag(params.tagId);
     res.status(code);
     return { code, ...response };
@@ -115,8 +122,15 @@ export class TagsController {
     type: UpdateTagErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
-  async updateTag(@Param() params: UpdateTagParamDto, @Body() data: UpdateTagRequestDto, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.tagsService.updateTag(params.tagId, data);
+  async updateTag(
+    @Param() params: UpdateTagParamDto,
+    @Body() data: UpdateTagRequestDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.tagsService.updateTag(
+      params.tagId,
+      data,
+    );
     res.status(code);
     return { code, ...response };
   }

@@ -6,7 +6,7 @@ import { ICustomerDatabase } from './customer.database.interface';
 
 @Injectable()
 export class CustomerRepository {
-  constructor(private readonly db: ICustomerDatabase) { }
+  constructor(private readonly db: ICustomerDatabase) {}
 
   async createCustomer(customer: Customer): Promise<Customer | null> {
     customer.id = randomUUID();
@@ -29,7 +29,10 @@ export class CustomerRepository {
     return await this.db.deleteOtp(query);
   }
 
-  async updateOtp(query: Record<string, any>, data: object): Promise<Otp | null> {
+  async updateOtp(
+    query: Record<string, any>,
+    data: object,
+  ): Promise<Otp | null> {
     return await this.db.updateOtp(query, data);
   }
 
@@ -37,23 +40,38 @@ export class CustomerRepository {
     return await this.db.findCustomer(query);
   }
 
-  async updateCustomer(customerId: string, customer: Customer): Promise<Customer | null> {
+  async updateCustomer(
+    customerId: string,
+    customer: Customer,
+  ): Promise<Customer | null> {
     return await this.db.updateCustomer(customerId, customer);
   }
 
-  async addCustomerNewAddress(customerId: string, address: CustomerAddress): Promise<Customer | null> {
+  async addCustomerNewAddress(
+    customerId: string,
+    address: CustomerAddress,
+  ): Promise<Customer | null> {
     return await this.db.addCustomerNewAddress(customerId, address);
   }
 
-  async updateCustomerAddress(customerId: string, addressId: string, address: CustomerAddress): Promise<Customer | null> {
+  async updateCustomerAddress(
+    customerId: string,
+    addressId: string,
+    address: CustomerAddress,
+  ): Promise<Customer | null> {
     return await this.db.updateCustomerAddress(customerId, addressId, address);
   }
 
-  async deleteCustomerAddress(customerId: string, addressId: string): Promise<Customer | null> {
+  async deleteCustomerAddress(
+    customerId: string,
+    addressId: string,
+  ): Promise<Customer | null> {
     return await this.db.deleteCustomerAddress(customerId, addressId);
   }
 
-  async getCustomerPassword(query: Record<string, any>): Promise<Customer | null> {
+  async getCustomerPassword(
+    query: Record<string, any>,
+  ): Promise<Customer | null> {
     return await this.db.getCustomerPassword(query);
   }
 }

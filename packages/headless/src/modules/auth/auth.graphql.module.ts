@@ -11,9 +11,9 @@ import { JwtStrategy } from 'src/guards/jwt-strategy';
 @Module({
   imports: [
     JwtModule.register({
-      secret: authConfig.jwt_key!,
+      secret: authConfig.jwt_key,
       signOptions: {
-        expiresIn: authConfig.expiration_time!,
+        expiresIn: authConfig.expiration_time,
       },
     }),
   ],
@@ -29,4 +29,4 @@ import { JwtStrategy } from 'src/guards/jwt-strategy';
     JwtStrategy,
   ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -1,9 +1,4 @@
-import {
-  IsNotEmpty,
-  IsNotEmptyObject,
-  IsObject,
-  IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Brand } from '@bs-commerce/models';
 import { InfoDto } from './infoDto';

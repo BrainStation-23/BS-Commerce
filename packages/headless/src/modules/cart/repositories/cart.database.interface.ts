@@ -15,10 +15,13 @@ export abstract class ICartDatabase {
     userId: string,
     item: Item,
   ) => Promise<Cart | null>;
-  abstract createCart: (cart:Cart) => Promise<Cart | null>;
+  abstract createCart: (cart: Cart) => Promise<Cart | null>;
   abstract getCart: (userId: string) => Promise<Cart | null>;
   abstract deleteCart: (cartId: string) => Promise<Cart | null>;
-  abstract updateCartItem: (userId: string, item: UpdateItem) => Promise<Cart | null>;
+  abstract updateCartItem: (
+    userId: string,
+    item: UpdateItem,
+  ) => Promise<Cart | null>;
   abstract deleteCartItem: (
     userId: string,
     productId: string,

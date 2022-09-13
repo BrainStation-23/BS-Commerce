@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { Manufacturer } from "@bs-commerce/models";
+import { model, Schema } from 'mongoose';
+import { Manufacturer } from '@bs-commerce/models';
 
 interface ManufacturerWithID extends Manufacturer {
   id: {
@@ -34,19 +34,19 @@ const ManufacturerSchema = new Schema<ManufacturerWithID>(
     seo: {
       metaKeyword: {
         type: String,
-        default: "",
+        default: '',
       },
       metaDescription: {
         type: String,
-        default: "",
+        default: '',
       },
       metaTitle: {
         type: String,
-        default: "",
+        default: '',
       },
       SEFN: {
         type: String,
-        default: "",
+        default: '',
       },
     },
   },
@@ -57,7 +57,7 @@ const ManufacturerSchema = new Schema<ManufacturerWithID>(
 );
 
 const ManufacturerModel = model<Manufacturer>(
-  "manufacturer",
+  'manufacturer',
   ManufacturerSchema
 );
 

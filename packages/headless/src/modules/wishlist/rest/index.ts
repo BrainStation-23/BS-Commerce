@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { WishListService } from '../services';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
@@ -29,21 +40,28 @@ import {
 @ApiBearerAuth()
 @ApiTags('Customer Wishlist API')
 export class WishListController {
-  constructor(private wishListService: WishListService,) { }
+  constructor(private wishListService: WishListService) {}
 
   @Post('wishlist')
   @ApiResponse({
     description: 'Add to Wishlist Success Response',
     type: AddToWishlistSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Add to Wishlist Error Response',
     type: AddToWishlistErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async addToWishList(@Body() item: AddToWishlistRequestDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.addToWishList(user.id, item,);
+  async addToWishList(
+    @Body() item: AddToWishlistRequestDto,
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.wishListService.addToWishList(
+      user.id,
+      item,
+    );
     res.status(code);
     return response;
   }
@@ -52,15 +70,20 @@ export class WishListController {
   @ApiResponse({
     description: 'Get User Wishlist Success Response',
     type: getUserWishlistSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Get User Wishlist Error Response',
     type: getUserWishlistErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async getUserWishlist(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.getUserWishlist(user.id);
+  async getUserWishlist(
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.wishListService.getUserWishlist(
+      user.id,
+    );
     res.status(code);
     return response;
   }
@@ -69,15 +92,22 @@ export class WishListController {
   @ApiResponse({
     description: 'Update Wishlist Item Success Response',
     type: updateWishlistItemSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Update Wishlist Item Error Response',
     type: updateWishlistItemErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async updateWishlistItem(@Body() item: updateWishlistItemRequestBodyDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.updateWishlistItem(item, user.id);
+  async updateWishlistItem(
+    @Body() item: updateWishlistItemRequestBodyDto,
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.wishListService.updateWishlistItem(
+      item,
+      user.id,
+    );
     res.status(code);
     return response;
   }
@@ -86,15 +116,22 @@ export class WishListController {
   @ApiResponse({
     description: 'Delete Wishlist Item Success Response',
     type: deleteWishlistItemSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Delete Wishlist Item Error Response',
     type: deleteWishlistItemErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async deleteWishlistItem(@Param() params: deleteWishlistItemPramsDto, @UserInfo() user: User, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlistItem(params.productId, user.id);
+  async deleteWishlistItem(
+    @Param() params: deleteWishlistItemPramsDto,
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.wishListService.deleteWishlistItem(
+      params.productId,
+      user.id,
+    );
     res.status(code);
     return response;
   }
@@ -103,15 +140,19 @@ export class WishListController {
   @ApiResponse({
     description: 'Delete All Wishlist Items Success Response',
     type: deleteAllWishlistItemsSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Delete All Wishlist Items Error Response',
     type: deleteAllWishlistItemsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async deleteAllWishlistItems(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.wishListService.deleteAllWishlistItems(user.id);
+  async deleteAllWishlistItems(
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } =
+      await this.wishListService.deleteAllWishlistItems(user.id);
     res.status(code);
     return response;
   }
@@ -120,15 +161,20 @@ export class WishListController {
   @ApiResponse({
     description: 'Delete Wishlist Success Response',
     type: deleteWishlistSuccessResponseDto,
-    status: HttpStatus.OK
+    status: HttpStatus.OK,
   })
   @ApiResponse({
     description: 'Delete Wishlist Error Response',
     type: deleteWishlistErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async deleteWishlist(@Param() params: deleteWishlistPramsDto, @Res({ passthrough: true }) res: Response,) {
-    const { code, ...response } = await this.wishListService.deleteWishlist(params.wishlistId);
+  async deleteWishlist(
+    @Param() params: deleteWishlistPramsDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.wishListService.deleteWishlist(
+      params.wishlistId,
+    );
     res.status(code);
     return response;
   }

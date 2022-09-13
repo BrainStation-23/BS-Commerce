@@ -14,7 +14,7 @@ import { CustomerService } from './services';
     {
       provide: ICustomerDatabase,
       useClass: ResolveDatabaseDependency('CUSTOMER'),
-    }
+    },
   ],
 })
-export class CustomerModule { }
+export class CustomerModule {}

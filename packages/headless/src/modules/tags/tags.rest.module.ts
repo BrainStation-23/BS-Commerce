@@ -16,4 +16,4 @@ import { ITagsDatabase } from './repositories/tags.database.interface';
     },
   ],
 })
-export class TagsModule { }
+export class TagsModule {}

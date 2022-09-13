@@ -1,6 +1,5 @@
-
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { Product } from "./product";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
+import { Product } from './product';
 
 /**
  * API Path: /products/brand
@@ -10,23 +9,25 @@ import { Product } from "./product";
  */
 
 export interface UpdateProductsForBrandRequest {
-    productIds: string[];
-    brandId: string;
+  productIds: string[];
+  brandId: string;
 }
 
 export interface UpdateProductsForBrandSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Product[];
+  code: number;
+  data: Product[];
 }
 
 export const enum UpdateProductsForBrandErrorMessages {
-    CAN_NOT_UPDATE_PRODUCTS = 'CAN_NOT_UPDATE_PRODUCTS',
+  CAN_NOT_UPDATE_PRODUCTS = 'CAN_NOT_UPDATE_PRODUCTS',
 }
 
 export interface UpdateProductsForBrandErrorResponse extends ErrorResponse {
-    code?: number;
-    error: UpdateProductsForBrandErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: UpdateProductsForBrandErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type UpdateProductsForBrandResponse = UpdateProductsForBrandSuccessResponse | UpdateProductsForBrandErrorResponse;
+export type UpdateProductsForBrandResponse =
+  | UpdateProductsForBrandSuccessResponse
+  | UpdateProductsForBrandErrorResponse;

@@ -4,13 +4,20 @@ import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { WishlistItemInput, WishListResponse, WishListResponseWithMessage } from './wishlist.model';
+import {
+  WishlistItemInput,
+  WishListResponse,
+  WishListResponseWithMessage,
+} from './wishlist.model';
 import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 @UseGuards(new RolesGuard(['customer']))
 export class WishListResolver {
-  constructor(private wishListService: WishListService, private helper: Helper) { }
+  constructor(
+    private wishListService: WishListService,
+    private helper: Helper,
+  ) {}
 
   @Query(() => WishListResponse)
   async getUserWishlist(@UserInfo() user: User) {
@@ -19,7 +26,10 @@ export class WishListResolver {
   }
 
   @Mutation(() => WishListResponse)
-  async addToWishlist(@Args('item') item: WishlistItemInput, @UserInfo() user: User) {
+  async addToWishlist(
+    @Args('item') item: WishlistItemInput,
+    @UserInfo() user: User,
+  ) {
     const res = await this.wishListService.addToWishList(user.id, item);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -31,14 +41,23 @@ export class WishListResolver {
   }
 
   @Mutation(() => WishListResponse)
-  async updateWishlistItem(@Args('item') item: WishlistItemInput, @UserInfo() user: User) {
+  async updateWishlistItem(
+    @Args('item') item: WishlistItemInput,
+    @UserInfo() user: User,
+  ) {
     const res = await this.wishListService.updateWishlistItem(item, user.id);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => WishListResponse)
-  async deleteWishlistItem(@Args('productId') productId: string, @UserInfo() user: User) {
-    const res = await this.wishListService.deleteWishlistItem(productId, user.id);
+  async deleteWishlistItem(
+    @Args('productId') productId: string,
+    @UserInfo() user: User,
+  ) {
+    const res = await this.wishListService.deleteWishlistItem(
+      productId,
+      user.id,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 

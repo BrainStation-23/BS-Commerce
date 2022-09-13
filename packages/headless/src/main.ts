@@ -22,11 +22,12 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.enableCors({
-    allowedHeaders: "*",
-    origin: "*",
-    credentials: true
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
   });
-  coreConfig.api === 'GRAPHQL' && app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
+  coreConfig.api === 'GRAPHQL' &&
+    app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
   app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
   coreConfig.api === 'REST' && SwaggerConfig(app);

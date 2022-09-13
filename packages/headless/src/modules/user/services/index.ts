@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { Helper } from 'src/helper/helper.interface';
@@ -122,7 +123,7 @@ export class UserService {
 
     user.password = await bcrypt.hash(
       passwordDetails.newPassword,
-      authConfig.salt!,
+      authConfig.salt,
     );
 
     const updatedUser = await this.userRepo.updateUser(userId, user);

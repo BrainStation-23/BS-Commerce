@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { ResolveDatabaseDependency } from "src/database/database.resolver";
-import { CustomerRepository } from "./repositories";
-import { ICustomerDatabase } from "./repositories/customer.database.interface";
-import { CustomerController } from "./rest";
-import { CustomerService } from "./services";
+import { Module } from '@nestjs/common';
+import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { CustomerRepository } from './repositories';
+import { ICustomerDatabase } from './repositories/customer.database.interface';
+import { CustomerController } from './rest';
+import { CustomerService } from './services';
 
 @Module({
   controllers: [CustomerController],
@@ -16,4 +16,4 @@ import { CustomerService } from "./services";
     },
   ],
 })
-export class CustomerModule { }
+export class CustomerModule {}

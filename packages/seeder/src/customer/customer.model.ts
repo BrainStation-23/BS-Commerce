@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { Customer, CustomerAddress } from "@bs-commerce/models";
+import { model, Schema } from 'mongoose';
+import { Customer, CustomerAddress } from '@bs-commerce/models';
 
 const CustomerAddressSchema = new Schema<CustomerAddress>(
   {
@@ -68,6 +68,6 @@ const CustomerSchema = new Schema<Customer>(
   }
 );
 
-const CustomerModel = model<Customer>("customer", CustomerSchema);
+const CustomerModel = model<Customer>('customer', CustomerSchema);
 export { CustomerModel };
 export default CustomerModel;
