@@ -149,20 +149,32 @@ const AccountDetails: React.FC = () => {
                           >
                             Edit
                           </span>
-                          <button
+                          <Button
+                            hidden={!editable}
+                            type="submit"
+                            label="Save"
+                          />
+                          {/* <button
                             hidden={!editable}
                             type="submit"
                             className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                           >
                             Save
-                          </button>
-                          <span
+                          </button> */}
+
+                          <Button
+                            hidden={!editable}
+                            type="submit"
+                            label="Cancel"
+                            onClick={() => setEditable(false)}
+                          />
+                          {/* <span
                             hidden={!editable}
                             className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             onClick={() => setEditable(false)}
                           >
                             Cancel
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                       {/* Account Form */}

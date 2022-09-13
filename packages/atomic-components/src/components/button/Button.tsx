@@ -18,7 +18,7 @@ export interface IButton {
   /**
    * Bold text
    */
-   hidden?: boolean;
+  hidden?: boolean;
   /**
    * Is hidden ?
    */
@@ -35,9 +35,10 @@ export interface IButton {
 export const Button: React.FC<IButton> = ({
   primary = false,
   label,
-  boldFont,
+  boldFont = false,
   size = "md",
   type = "button",
+  hidden = false,
   onClick,
 }: IButton) => {
   let style =
@@ -47,6 +48,7 @@ export const Button: React.FC<IButton> = ({
   return (
     <button
       type={type}
+      hidden={hidden}
       onClick={onClick}
       className={`my-2 rounded bg-green-600/100 py-2 px-4 text-white hover:bg-black  ${style}`}
     >
