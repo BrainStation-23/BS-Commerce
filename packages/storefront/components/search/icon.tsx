@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { addToCart } from 'toolkit/cartSlice';
+import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import { userAPI } from 'APIs';
 
@@ -12,8 +12,11 @@ import {
   WishlistItem,
   WishlistProduct,
 } from '@bs-commerce/models';
-import { setModalState } from 'toolkit/modalSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import { setLoginModalState, setModalState } from 'toolkit/modalSlice';
+import {
+  storeCompare,
+  storeProductsToComparePublic,
+} from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
@@ -58,34 +61,83 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const btnClassFilled =
     'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-[#40A944] text-white';
 
-  const handleAddToCart = (event: any) => {
-    const cartProduct = {
-      id: product.id!,
-      info: product.info!,
-      photos: product.photos!,
-    };
-    const cartItem = {
-      product: cartProduct!,
-      productId: product.id!,
-      quantity: 1,
-    };
-    if (!productInCart) {
-      toast(<CartToast product={product} />, {
-        containerId: 'bottom-left',
-      });
-      dispatch(addToCart(cartItem));
-      // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+  const handleAddToCart = async () => {
+    if (token) {
+      const cartProduct = {
+        id: product.id!,
+        info: product.info!,
+        meta: { friendlyPageName: product.meta?.friendlyPageName! },
+        photos: product.photos!,
+      };
+      const cartItem = {
+        product: cartProduct!,
+        productId: product.id!,
+        quantity: 1,
+      };
+      // toast.success('+1 Item added to cart');
+      if (!productInCart) {
+        toast(<CartToast product={product} />, {
+          containerId: 'bottom-left',
+        });
+        const cart = await userAPI.addToCart({
+          productId: cartItem.productId,
+          quantity: 1,
+        });
+        dispatch(storeAllCartItems(cart?.data?.items!));
+        dispatch(addToCart(cartItem));
+        // dispatch(setCartModalState({ showModal: !cartModalOn, product: product }));
+      }
+    } else {
+      dispatch(setLoginModalState(!modalOn));
     }
-    event.preventDefault();
   };
 
+  // const handleAddToCompare = async () => {
+  //   try {
+  //     await userAPI.addToCompare(product?.id!);
+  //   } catch (error) {
+  //     toast.error('Error happend.', {
+  //       containerId: 'bottom-right',
+  //     });
+  //   }
+  // };
+
   const handleAddToCompare = async () => {
-    try {
-      await userAPI.addToCompare(product?.id!);
-    } catch (error) {
-      toast.error('Error happend.', {
-        containerId: 'bottom-right',
-      });
+    if (token) {
+      try {
+        const res = await userAPI.addToCompare(product?.id!);
+        if ('data' in res!) {
+          dispatch(setModalState(!modalCmp));
+          dispatch(storeCompare(res.data));
+        }
+      } catch (error) {
+        toast.error('Error happend.', {
+          containerId: 'bottom-right',
+        });
+      }
+    } else {
+      const productPhotos = product?.photos!.map((photo) => photo?.url!);
+      const productDetails = {
+        info: {
+          name: product?.info?.name!,
+          price: product?.info?.price!,
+          shortDescription: product?.info?.shortDescription!,
+          fullDescription: product?.info?.shortDescription!,
+          oldPrice: product?.info?.oldPrice!,
+        },
+        meta: {
+          friendlyPageName: product?.meta?.friendlyPageName!,
+        },
+        photos: productPhotos!,
+      };
+      dispatch(
+        storeProductsToComparePublic({
+          productId: product?.id!,
+          productDetails: productDetails!,
+        })
+      );
+      dispatch(setModalState(!modalCmp));
+      //dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -234,8 +286,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               strokeWidth={1.5}
               onClick={(event) => {
                 handleAddToCompare();
-                dispatch(setModalState(!modalCmp));
-                dispatch(storeCompare(product));
+
                 event.preventDefault();
               }}
             >

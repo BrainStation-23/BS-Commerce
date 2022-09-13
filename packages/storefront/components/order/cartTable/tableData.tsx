@@ -1,7 +1,6 @@
 import {
   IOrderProduct,
   OrderByUserId,
-  OrderByUserIdResponse,
 } from '@bs-commerce/models';
 import ShowData from './showData';
 interface Props {
