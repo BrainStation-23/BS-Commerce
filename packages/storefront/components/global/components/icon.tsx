@@ -322,7 +322,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
         </Link>
         <Link href="/" passHref>
           <span>
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className={inCompareList ? btnClassFilled : btnClass}
               fill="none"
@@ -340,7 +340,20 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
                 strokeLinejoin="round"
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
               />
-            </svg>
+            </svg> */}
+
+            <Icons
+              classes={inCompareList ? btnClassFilled : btnClass}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              iconName="circle-arrow"
+              onClick={(event) => {
+                handleAddToCompare();
+
+                event.preventDefault();
+              }}
+            />
             <div className="absolute left-6 -top-7 mb-6 hidden items-center peer-hover:inline-block">
               <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
                 {inCompareList ? 'Already Added' : 'Add to compare'}
