@@ -1,4 +1,9 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/index';
+import {
+  DescriptiveError,
+  ErrorResponse,
+  SuccessResponse,
+  Customer,
+} from 'src/index';
 
 /**
  * API Path: /customer
@@ -7,18 +12,20 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/
  */
 
 export interface GetCustomerInformationSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Customer;
+  code: number;
+  data: Customer;
 }
 
 export const enum GetCustomerInformationErrorMessages {
-    CUSTOMER_NOT_FOUND = 'CUSTOMER_NOT_FOUND',
+  CUSTOMER_NOT_FOUND = 'CUSTOMER_NOT_FOUND',
 }
 
 export interface GetCustomerInformationErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetCustomerInformationErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: GetCustomerInformationErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type GetCustomerInformationResponse = GetCustomerInformationSuccessResponse | GetCustomerInformationErrorResponse;
+export type GetCustomerInformationResponse =
+  | GetCustomerInformationSuccessResponse
+  | GetCustomerInformationErrorResponse;

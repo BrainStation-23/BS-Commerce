@@ -1,12 +1,12 @@
-import { BaseOrderModel } from "./order.response.interface";
+import { BaseOrderModel } from './order.response.interface';
 
-export interface CreateProductOrderDetails{
+export interface CreateProductOrderDetails {
   productId: string;
   name: string;
   price: number;
   quantity: number;
   sku: string;
 }
-export interface CreateOrderRequest extends BaseOrderModel{
+export interface CreateOrderRequest extends BaseOrderModel {
   products: CreateProductOrderDetails[];
 }

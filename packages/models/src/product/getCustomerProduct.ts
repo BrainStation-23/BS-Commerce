@@ -1,4 +1,3 @@
-
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 import { CustomerProduct } from './customerProduct';
 
@@ -10,22 +9,24 @@ import { CustomerProduct } from './customerProduct';
  */
 
 export interface GetCustomerProductParams {
-    productId: string,
+  productId: string;
 }
 
 export interface GetCustomerProductSuccessResponse extends SuccessResponse {
-    code: number;
-    data: CustomerProduct;
+  code: number;
+  data: CustomerProduct;
 }
 
 export const enum GetCustomerProductErrorMessages {
-    CAN_NOT_GET_PRODUCT = 'CAN_NOT_GET_PRODUCT',
+  CAN_NOT_GET_PRODUCT = 'CAN_NOT_GET_PRODUCT',
 }
 
 export interface GetCustomerProductErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetCustomerProductErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: GetCustomerProductErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type GetCustomerProductResponse = GetCustomerProductSuccessResponse | GetCustomerProductErrorResponse;
+export type GetCustomerProductResponse =
+  | GetCustomerProductSuccessResponse
+  | GetCustomerProductErrorResponse;
