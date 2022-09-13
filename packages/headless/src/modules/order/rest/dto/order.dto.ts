@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional } from 'class-validator';
 import { OrderResponseData } from '@bs-commerce/models';
 import { OrderAddressDto } from './order.create.dto';
 import { OrderProductDto } from './OrderProduct.dto';

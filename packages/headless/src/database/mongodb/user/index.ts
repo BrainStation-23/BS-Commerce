@@ -20,14 +20,43 @@ export class UserDatabase implements IUserDatabase {
   }
 
   async updateUser(userId: string, user: User): Promise<User | null> {
-    return await UserModel.findOneAndUpdate({ id: userId }, { $set: user }, { new: true }).lean().select('-password -_id').exec();
+    return await UserModel.findOneAndUpdate(
+      { id: userId },
+      { $set: user },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 
-  async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
-    return await UserModel.findOneAndUpdate({ id: userId }, { $set: user, $push: { addresses: address } }, { new: true }).lean().select('-password -_id').exec();
+  async updateUserWithNewAddress(
+    userId: string,
+    user: User,
+    address: Address,
+  ): Promise<User | null> {
+    return await UserModel.findOneAndUpdate(
+      { id: userId },
+      { $set: user, $push: { addresses: address } },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 
-  async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
-    return await UserModel.findOneAndUpdate({ id: userId, 'addresses.id': address.id }, { $set: { ...user, 'addresses.$': address } }, { new: true }).lean().select('-password -_id').exec();
+  async updateUserAndAddress(
+    userId: string,
+    user: User,
+    address: Address,
+  ): Promise<User | null> {
+    return await UserModel.findOneAndUpdate(
+      { id: userId, 'addresses.id': address.id },
+      { $set: { ...user, 'addresses.$': address } },
+      { new: true },
+    )
+      .lean()
+      .select('-password -_id')
+      .exec();
   }
 }

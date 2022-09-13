@@ -8,24 +8,26 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  */
 
 export interface File {
-    url: string;
+  url: string;
 }
 
 export interface UploadFileSuccessResponse extends SuccessResponse {
-    code: number;
-    data: File;
+  code: number;
+  data: File;
 }
 
 export const enum UploadFileErrorMessages {
-    CAN_NOT_UPLOAD_FILE = 'CAN_NOT_UPLOAD_FILE',
-    PROVIDE_FILE = 'PROVIDE_FILE',
-    UNSUPPORTED_MIMETYPE = 'UNSUPPORTED_MIMETYPE'
+  CAN_NOT_UPLOAD_FILE = 'CAN_NOT_UPLOAD_FILE',
+  PROVIDE_FILE = 'PROVIDE_FILE',
+  UNSUPPORTED_MIMETYPE = 'UNSUPPORTED_MIMETYPE',
 }
 
 export interface UploadFileErrorResponse extends ErrorResponse {
-    code?: number;
-    error: UploadFileErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: UploadFileErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type UploadFileResponse = UploadFileSuccessResponse | UploadFileErrorResponse;
+export type UploadFileResponse =
+  | UploadFileSuccessResponse
+  | UploadFileErrorResponse;

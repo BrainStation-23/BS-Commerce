@@ -8,32 +8,34 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  */
 
 export interface CreateUserRequest {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 export const enum SignUpSuccessMessages {
-    USER_CREATED_SUCCESSFUL = 'USER_CREATED_SUCCESSFUL',
+  USER_CREATED_SUCCESSFUL = 'USER_CREATED_SUCCESSFUL',
 }
 
 export interface CreateUserSuccessResponse extends SuccessResponse {
-    code: number;
-    data: {
-        message?: SignUpSuccessMessages
-    };
+  code: number;
+  data: {
+    message?: SignUpSuccessMessages;
+  };
 }
 
 export const enum SignUpErrorMessages {
-    USER_ALREADY_EXITS = 'USER_ALREADY_EXITS',
-    CAN_NOT_CREATE_USER = 'CAN_NOT_CREATE_USER'
+  USER_ALREADY_EXITS = 'USER_ALREADY_EXITS',
+  CAN_NOT_CREATE_USER = 'CAN_NOT_CREATE_USER',
 }
 
 export interface CreateUserErrorResponse extends ErrorResponse {
-    code?: number;
-    error: SignUpErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: SignUpErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type CreateUserResponse = CreateUserSuccessResponse | CreateUserErrorResponse;
+export type CreateUserResponse =
+  | CreateUserSuccessResponse
+  | CreateUserErrorResponse;

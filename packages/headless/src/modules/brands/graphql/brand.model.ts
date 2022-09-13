@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
 import {
   Brand,
   BrandInfo,
@@ -21,10 +20,10 @@ export class BrandInfoModel implements BrandInfo {
   @Field({ nullable: true })
   published?: boolean;
 
-  @Field((type) => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   displayOrder?: number;
 
-  @Field((type) => [Int], { nullable: true })
+  @Field(() => [Int], { nullable: true })
   pageSizeOptions?: number[];
 }
 
@@ -57,10 +56,10 @@ export class BrandInfoInput implements BrandInfo {
   @Field({ nullable: true })
   published?: boolean;
 
-  @Field((type) => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   displayOrder?: number;
 
-  @Field((type) => [Int], { nullable: true })
+  @Field(() => [Int], { nullable: true })
   pageSizeOptions?: number[];
 }
 
@@ -84,19 +83,19 @@ export class BrandModel implements Brand {
   @Field()
   id: string;
 
-  @Field((type) => BrandInfoModel, { nullable: false })
+  @Field(() => BrandInfoModel, { nullable: false })
   info: BrandInfoModel;
 
-  @Field((type) => BrandMetaModel, { nullable: false })
+  @Field(() => BrandMetaModel, { nullable: false })
   meta: BrandMetaModel;
 }
 
 @InputType({ description: 'Input for Brand' })
 export class BrandInput implements CreateBrandRequest {
-  @Field((type) => BrandInfoInput, { nullable: false })
+  @Field(() => BrandInfoInput, { nullable: false })
   info: BrandInfoInput;
 
-  @Field((type) => BrandMetaInput, { nullable: true })
+  @Field(() => BrandMetaInput, { nullable: true })
   meta?: BrandMetaInput;
 }
 
@@ -105,10 +104,10 @@ export class SingleBrandResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => BrandModel, { nullable: false })
+  @Field(() => BrandModel, { nullable: false })
   data: Brand;
 }
 
@@ -117,9 +116,9 @@ export class BrandResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => [BrandModel], { nullable: false })
+  @Field(() => [BrandModel], { nullable: false })
   data: Brand[];
 }

@@ -1,6 +1,6 @@
-import { randomUUID } from "crypto";
-import { Category } from "@bs-commerce/models";
-import { model, Schema } from "mongoose";
+import { randomUUID } from 'crypto';
+import { Category } from '@bs-commerce/models';
+import { model, Schema } from 'mongoose';
 
 const CategorySchema = new Schema<Category>(
   {
@@ -29,7 +29,7 @@ const CategorySchema = new Schema<Category>(
       },
       alt: {
         type: String,
-        default: "",
+        default: '',
       },
     },
     showOnHomePage: {
@@ -54,7 +54,7 @@ const CategorySchema = new Schema<Category>(
     },
     rootPath: {
       type: String,
-      default: "",
+      default: '',
     },
     ancestors: [
       {
@@ -81,15 +81,15 @@ const CategorySchema = new Schema<Category>(
       },
       description: {
         type: String,
-        default: "",
+        default: '',
       },
       title: {
         type: String,
-        default: "",
+        default: '',
       },
       SEFN: {
         type: String,
-        default: "",
+        default: '',
       },
     },
   },
@@ -99,6 +99,6 @@ const CategorySchema = new Schema<Category>(
   }
 );
 
-const CategoryModel = model<Category>("Category", CategorySchema);
+const CategoryModel = model<Category>('Category', CategorySchema);
 export { CategoryModel };
 export default CategoryModel;

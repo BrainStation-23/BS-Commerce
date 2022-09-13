@@ -12,7 +12,7 @@ import {
 
 @Resolver()
 export class TagsResolver {
-  constructor(private tagsService: TagsService, private helper: Helper) { }
+  constructor(private tagsService: TagsService, private helper: Helper) {}
 
   @Query(() => TagsResponse)
   async getTags() {
@@ -21,7 +21,7 @@ export class TagsResolver {
   }
 
   @Query(() => TagResponse)
-  async getTag(@Args('tagId') tagId: string,) {
+  async getTag(@Args('tagId') tagId: string) {
     const res = await this.tagsService.getTag(tagId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -41,7 +41,10 @@ export class TagsResolver {
 
   @Mutation(() => TagResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async updateTag(@Args('tagId') tagId: string, @Args('data') data: UpdateTagInput) {
+  async updateTag(
+    @Args('tagId') tagId: string,
+    @Args('data') data: UpdateTagInput,
+  ) {
     const res = await this.tagsService.updateTag(tagId, data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }

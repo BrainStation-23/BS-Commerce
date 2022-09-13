@@ -12,7 +12,7 @@ import {
 import { Helper } from 'src/helper/helper.interface';
 
 @UseGuards(new RolesGuard(['admin']))
-@Resolver((of) => ManufacturerSchemaGql)
+@Resolver(() => ManufacturerSchemaGql)
 export class ManufacturerResolver {
   constructor(
     private manufacturerService: ManufacturerService,

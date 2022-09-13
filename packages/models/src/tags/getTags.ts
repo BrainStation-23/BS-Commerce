@@ -8,18 +8,18 @@ import { Tag } from './tags';
  */
 
 export interface GetTagsSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Tag[];
+  code: number;
+  data: Tag[];
 }
 
 export const enum GetTagsErrorMessages {
-    NO_TAGS_FOUND = 'NO_TAGS_FOUND',
+  NO_TAGS_FOUND = 'NO_TAGS_FOUND',
 }
 
 export interface GetTagsErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetTagsErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: GetTagsErrorMessages;
+  errors: DescriptiveError;
 }
 
 export type GetTagsResponse = GetTagsSuccessResponse | GetTagsErrorResponse;

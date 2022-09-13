@@ -9,25 +9,26 @@ import { Tag } from './tags';
  */
 
 export interface CreateTagRequestBody {
-    name: string;
-    isHomePageProductsTag?: boolean;
+  name: string;
+  isHomePageProductsTag?: boolean;
 }
 
 export interface CreateTagSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Tag;
+  code: number;
+  data: Tag;
 }
 
 export const enum CreateTagErrorMessages {
-    TAG_NAME_EXISTS = 'TAG_NAME_EXISTS',
-    CAN_NOT_CREATE_TAG = 'CAN_NOT_CREATE_TAG',
-
+  TAG_NAME_EXISTS = 'TAG_NAME_EXISTS',
+  CAN_NOT_CREATE_TAG = 'CAN_NOT_CREATE_TAG',
 }
 
 export interface CreateTagErrorResponse extends ErrorResponse {
-    code?: number;
-    error: CreateTagErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: CreateTagErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type CreateTagResponse = CreateTagSuccessResponse | CreateTagErrorResponse;
+export type CreateTagResponse =
+  | CreateTagSuccessResponse
+  | CreateTagErrorResponse;

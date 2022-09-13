@@ -1,12 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsArray,
-  IsNumber,
-  IsString,
-  MaxLength,
-  ValidateNested,
-} from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 import { OrderAddressDto } from './order.create.dto';
 import { OrderProductDto } from './OrderProduct.dto';

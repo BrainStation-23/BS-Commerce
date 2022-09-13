@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
-import { BrandInfo, BrandMeta } from '@bs-commerce/models';
+import { BrandMeta } from '@bs-commerce/models';
 
 export class MetaDto implements BrandMeta {
   @ApiProperty()

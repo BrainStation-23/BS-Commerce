@@ -1,12 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsArray,
-  IsOptional,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import type {
   AddCompareItem,
   CompareData,

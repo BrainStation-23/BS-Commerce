@@ -7,7 +7,6 @@ import { OrderCustomerController } from './rest/customer.controller';
 import { OrderAdminService } from './services/admin.service';
 import { OrderCustomerService } from './services/customer.service';
 
-
 @Module({
   controllers: [OrderCustomerController, OrderAdminController],
   providers: [

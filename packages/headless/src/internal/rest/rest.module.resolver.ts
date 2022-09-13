@@ -31,6 +31,6 @@ export const ResolveRestModule = () => {
     OrderModule,
     TagsModule,
     CustomerModule,
-    SearchModule
+    SearchModule,
   ];
 };

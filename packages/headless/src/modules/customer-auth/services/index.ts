@@ -73,9 +73,9 @@ export class CustomerAuthService {
         HttpStatus.BAD_REQUEST,
       );
 
-    let customer: any = { ...data };
+    const customer: any = { ...data };
     customer.email = data.email && data.email.toLowerCase();
-    customer.password = await bcrypt.hash(data.password, authConfig.salt!);
+    customer.password = await bcrypt.hash(data.password, authConfig.salt);
 
     const registeredCustomer = await this.customerRepo.createCustomer(customer);
     if (!registeredCustomer)
@@ -229,7 +229,7 @@ export class CustomerAuthService {
         HttpStatus.BAD_REQUEST,
       );
 
-    let customer: Customer = doesCustomerEmailExist || doesCustomerPhoneExist;
+    const customer: Customer = doesCustomerEmailExist || doesCustomerPhoneExist;
     const doesCustomerPasswordMatch = await bcrypt.compare(
       data.password,
       customer.password,
@@ -294,7 +294,7 @@ export class CustomerAuthService {
       );
 
     const customer = doesCustomerEmailExist || doesCustomerPhoneExist;
-    customer.password = await bcrypt.hash(data.password, authConfig.salt!);
+    customer.password = await bcrypt.hash(data.password, authConfig.salt);
 
     const updatedPassword = await this.customerRepo.updateCustomer(
       customer.id,

@@ -2,13 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
-  IsEmail,
-  MinLength,
   IsOptional,
-  IsObject,
   IsNumber,
   IsArray,
-  ValidateNested,
   IsBoolean,
 } from 'class-validator';
 import { BrandInfo } from '@bs-commerce/models';

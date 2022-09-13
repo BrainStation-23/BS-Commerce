@@ -43,7 +43,7 @@ export class AncestorSchema implements Ancestor {
 
 @ObjectType()
 export class CategoryMetaSchema implements CategoryMeta {
-  @Field((type) => [String])
+  @Field(() => [String])
   keywords: string[];
 
   @Field()
@@ -58,7 +58,7 @@ export class CategoryMetaSchema implements CategoryMeta {
 
 @InputType()
 export class CategoryMetaRequestSchema implements CategoryMeta {
-  @Field((type) => [String], { nullable: true })
+  @Field(() => [String], { nullable: true })
   keywords?: string[];
 
   @Field({ nullable: true })
@@ -85,7 +85,7 @@ export class CategorySchema implements Category {
   @Field()
   description: string;
 
-  @Field((type) => PhotoSchema)
+  @Field(() => PhotoSchema)
   photo: PhotoSchema;
 
   @Field()
@@ -106,10 +106,10 @@ export class CategorySchema implements Category {
   @Field()
   rootPath: string;
 
-  @Field((type) => [AncestorSchema])
+  @Field(() => [AncestorSchema])
   ancestors: AncestorSchema[];
 
-  @Field((type) => CategoryMetaSchema)
+  @Field(() => CategoryMetaSchema)
   meta: CategoryMetaSchema;
 }
 
@@ -121,7 +121,7 @@ export class createCategoryRequestSchema implements createCategoryRequest {
   @Field({ nullable: true })
   parentSlug?: string;
 
-  @Field((type) => PhotoRequestSchema, { nullable: true })
+  @Field(() => PhotoRequestSchema, { nullable: true })
   photo?: PhotoRequestSchema;
 
   @Field({ nullable: true })
@@ -142,7 +142,7 @@ export class createCategoryRequestSchema implements createCategoryRequest {
   @Field({ nullable: true })
   displayOrder?: number;
 
-  @Field((type) => CategoryMetaRequestSchema, { nullable: true })
+  @Field(() => CategoryMetaRequestSchema, { nullable: true })
   meta?: CategoryMetaRequestSchema;
 }
 
@@ -162,10 +162,10 @@ export class getCategoryBySlugRequestSchema
 
 @ObjectType()
 export class CategoryResponse {
-  @Field((type) => Int)
+  @Field(() => Int)
   code: number;
 
-  @Field((type) => CategorySchema, { nullable: true })
+  @Field(() => CategorySchema, { nullable: true })
   data: CategorySchema;
 }
 
@@ -177,7 +177,7 @@ export class subCategoryListSchema {
   @Field()
   name: string;
 
-  @Field((type) => PhotoSchema)
+  @Field(() => PhotoSchema)
   photo: PhotoSchema;
 
   @Field()
@@ -189,10 +189,10 @@ export class subCategoryListSchema {
   @Field()
   slug: string;
 
-  @Field((type) => [AncestorSchema])
+  @Field(() => [AncestorSchema])
   ancestors: AncestorSchema[];
 
-  @Field((type) => ObjectScalarType, { nullable: true })
+  @Field(() => ObjectScalarType, { nullable: true })
   subCategories?: any[];
 }
 
@@ -204,7 +204,7 @@ export class NestedCategoryListSchema implements NestedCategoryList {
   @Field()
   name: string;
 
-  @Field((type) => PhotoSchema)
+  @Field(() => PhotoSchema)
   photo: PhotoSchema;
 
   @Field()
@@ -216,24 +216,24 @@ export class NestedCategoryListSchema implements NestedCategoryList {
   @Field()
   slug: string;
 
-  @Field((type) => [AncestorSchema])
+  @Field(() => [AncestorSchema])
   ancestors: AncestorSchema[];
 
-  @Field((type) => [subCategoryListSchema], { nullable: true })
+  @Field(() => [subCategoryListSchema], { nullable: true })
   subCategories?: subCategoryListSchema[];
 }
 
 @ObjectType()
 export class CategoryListSchema {
-  @Field((type) => [NestedCategoryListSchema])
+  @Field(() => [NestedCategoryListSchema])
   categories: NestedCategoryListSchema[];
 }
 
 @ObjectType()
 export class CategoryListResponse {
-  @Field((type) => Int)
+  @Field(() => Int)
   code: number;
 
-  @Field((type) => CategoryListSchema, { nullable: true })
+  @Field(() => CategoryListSchema, { nullable: true })
   data: CategoryListSchema;
 }

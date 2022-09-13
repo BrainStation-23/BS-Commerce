@@ -7,14 +7,17 @@ import { Customer } from 'src/entity/customer';
 import {
   CustomerAddressInput,
   CustomerResponse,
-  UpdateCustomerInput
+  UpdateCustomerInput,
 } from './customer.model';
 import { Helper } from 'src/helper/helper.interface';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()
 export class CustomerResolver {
-  constructor(private customerService: CustomerService, private helper: Helper) { }
+  constructor(
+    private customerService: CustomerService,
+    private helper: Helper,
+  ) {}
 
   @Query(() => CustomerResponse)
   async getCustomerInfo(@CustomerInfo() customer: Customer) {
@@ -23,26 +26,49 @@ export class CustomerResolver {
   }
 
   @Mutation(() => CustomerResponse)
-  async updateCustomer(@Args('data') data: UpdateCustomerInput, @CustomerInfo() customer: Customer) {
+  async updateCustomer(
+    @Args('data') data: UpdateCustomerInput,
+    @CustomerInfo() customer: Customer,
+  ) {
     const res = await this.customerService.updateCustomer(customer.id, data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => CustomerResponse)
-  async addCustomerNewAddress(@Args('address') address: CustomerAddressInput, @CustomerInfo() customer: Customer) {
-    const res = await this.customerService.addCustomerNewAddress(customer.id, address);
+  async addCustomerNewAddress(
+    @Args('address') address: CustomerAddressInput,
+    @CustomerInfo() customer: Customer,
+  ) {
+    const res = await this.customerService.addCustomerNewAddress(
+      customer.id,
+      address,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => CustomerResponse)
-  async updateCustomerAddress(@Args('address') address: CustomerAddressInput, @Args('addressId') addressId: string, @CustomerInfo() customer: Customer) {
-    const res = await this.customerService.updateCustomerAddress(customer.id, addressId, { ...address, id: addressId });
+  async updateCustomerAddress(
+    @Args('address') address: CustomerAddressInput,
+    @Args('addressId') addressId: string,
+    @CustomerInfo() customer: Customer,
+  ) {
+    const res = await this.customerService.updateCustomerAddress(
+      customer.id,
+      addressId,
+      { ...address, id: addressId },
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => CustomerResponse)
-  async deleteCustomerAddress(@Args('addressId') addressId: string, @CustomerInfo() customer: Customer) {
-    const res = await this.customerService.deleteCustomerAddress(customer.id, addressId);
+  async deleteCustomerAddress(
+    @Args('addressId') addressId: string,
+    @CustomerInfo() customer: Customer,
+  ) {
+    const res = await this.customerService.deleteCustomerAddress(
+      customer.id,
+      addressId,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 }

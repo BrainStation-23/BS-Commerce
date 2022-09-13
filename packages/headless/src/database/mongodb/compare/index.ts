@@ -12,7 +12,10 @@ export class CompareDatabase implements ICompareDatabase {
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
-  async getCompareListById(userId: string, compareId: string): Promise<Compare | null> {
+  async getCompareListById(
+    userId: string,
+    compareId: string,
+  ): Promise<Compare | null> {
     const compareList = await CompareModel.findOne({
       id: compareId,
       userId,
@@ -20,36 +23,40 @@ export class CompareDatabase implements ICompareDatabase {
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
-  async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
-    const isExist = await CompareModel.findOne({items: productId});
-    if(!isExist){
+  async addItemToCompare(
+    userId: string,
+    productId: CompareItems,
+  ): Promise<Compare | null> {
+    const isExist = await CompareModel.findOne({ items: productId });
+    if (!isExist) {
       const compareList = await CompareModel.findOneAndUpdate(
         { userId: userId },
         {
-            $push: {
-              items: {
-                $each: [productId],
-                $sort: { created_at: 1},
-                $slice: -3
-              }
-            }
+          $push: {
+            items: {
+              $each: [productId],
+              $sort: { created_at: 1 },
+              $slice: -3,
+            },
+          },
         },
         { new: true },
       ).lean();
-      
+
       return compareList ? await this.mappedProductDetails(compareList) : null;
     }
-     return null;
+    return null;
   }
 
   async getProductDetails(productId: string): Promise<CompareItems[] | null> {
     const productDetails = await ProductModel.find({
-      id: productId
+      id: productId,
     }).select('info meta.friendlyPageName photos id -_id');
 
-    if(!productDetails) return null;
+    if (!productDetails) return null;
     const mappedItems = productDetails.map((e) => {
-      const { name, price, shortDescription, fullDescription, oldPrice } = e.info;
+      const { name, price, shortDescription, fullDescription, oldPrice } =
+        e.info;
       return {
         productId: e.id,
         productDetails: {
@@ -63,7 +70,10 @@ export class CompareDatabase implements ICompareDatabase {
     return mappedItems;
   }
 
-  async createCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
+  async createCompare(
+    userId: string,
+    productId: CompareItems,
+  ): Promise<Compare | null> {
     const compareList = await CompareModel.create({
       userId: userId,
       items: [productId],
@@ -79,21 +89,26 @@ export class CompareDatabase implements ICompareDatabase {
     }).lean();
   }
 
-  async getProduct(productId: string): Promise<Boolean> {
-    const isExist = await CompareModel.findOne({items: {"productId": productId}});
-    if(isExist) return true;
-    else return false
+  async getProduct(productId: string): Promise<boolean> {
+    const isExist = await CompareModel.findOne({
+      items: { productId: productId },
+    });
+    if (isExist) return true;
+    else return false;
   }
-  async deleteItemByProductId(userId: string, productId: string): Promise<Compare | null> {
-      const compareList = await CompareModel.findOneAndUpdate(
-        {
-          userId: userId,
-        },
-        { $pull: { items: { productId } } },
-        { new: true }
-      ).lean();
+  async deleteItemByProductId(
+    userId: string,
+    productId: string,
+  ): Promise<Compare | null> {
+    const compareList = await CompareModel.findOneAndUpdate(
+      {
+        userId: userId,
+      },
+      { $pull: { items: { productId } } },
+      { new: true },
+    ).lean();
 
-      return compareList ? await this.mappedProductDetails(compareList) : null;
+    return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
   async deleteAllItemByUserId(userId: string): Promise<Compare> {
@@ -110,13 +125,14 @@ export class CompareDatabase implements ICompareDatabase {
 
   private async mappedProductDetails(compareList: Compare): Promise<Compare> {
     const productIds = compareList.items.map((item) => item.productId);
-    
+
     const productDetails = await ProductModel.find({
       id: { $in: productIds },
     }).select('info meta.friendlyPageName photos id -_id');
-   
+
     const mappedItems = productDetails.map((e) => {
-      const { name, price, shortDescription, fullDescription, oldPrice } = e.info;
+      const { name, price, shortDescription, fullDescription, oldPrice } =
+        e.info;
       return {
         productId: e.id,
         productDetails: {
@@ -127,7 +143,7 @@ export class CompareDatabase implements ICompareDatabase {
       };
     });
     compareList.items = mappedItems;
-   
+
     return compareList;
   }
 }
