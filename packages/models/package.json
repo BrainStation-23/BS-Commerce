@@ -17,8 +17,5 @@
   },
   "devDependencies": {
     "typescript": "^4.7.2"
-  },
-  "dependencies": {
-    "twilio": "^3.82.0"
   }
 }
