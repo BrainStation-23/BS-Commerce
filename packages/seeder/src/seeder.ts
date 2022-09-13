@@ -1,9 +1,11 @@
 import * as fs from 'fs'
 import { Model } from 'mongoose'
 import * as path from 'path'
+import UserModel from './admin/admin.model'
 import BrandModel from './brand/brand.model'
 import CategoryModel from './category/category.model'
-import { brands, categories, manufacturers, products, tags } from './data'
+import CustomerModel from './customer/customer.model'
+import { admins, brands, categories, customers, manufacturers, products, tags } from './data'
 import ManufacturerModel from './manufacturer/manufacturer.model'
 import { connectToDatabase } from './mongodb.connect'
 import ProductModel from './product/product.model'
@@ -37,8 +39,14 @@ const getDataFiles = async ()=>{
             case 'tags':
                 await inserData(TagsModel, tags)
                 break;
+            case 'admins':
+                await inserData(UserModel, admins)
+                break;
+            case 'customers':
+                await inserData(CustomerModel, customers)
+                break;
             default:
-                console.log('Data file not matched')
+                console.log(name, 'Data file not matched')
         }
     }
    }) 
