@@ -1,43 +1,43 @@
 export const productSearchSchema = {
-  'id': {
-    type: 'text', 
+  id: {
+    type: 'text',
   },
   'info.name': {
-    type: 'text', 
-    analyzer: 'autocomplete'
+    type: 'text',
+    analyzer: 'autocomplete',
   },
   'info.shortDescription': {
     type: 'text',
-    analyzer: 'autocomplete' 
+    analyzer: 'autocomplete',
   },
   'info.fullDescription': {
     type: 'text',
-    analyzer: 'autocomplete' 
+    analyzer: 'autocomplete',
   },
   'info.sku': {
     type: 'text',
-    analyzer: 'autocomplete'
+    analyzer: 'autocomplete',
   },
   'info.price': {
-    type: 'integer',
+    type: "integer",
   },
-  'info.oldPrice': {
-    type: 'integer',
+  "info.oldPrice": {
+    type: "integer",
   },
   'info.cost': {
     type: 'integer',
   },
   'meta.keywords': {
     type: 'text',
-    analyzer: 'autocomplete'
+    analyzer: 'autocomplete',
   },
   'meta.title': {
     type: 'text',
-    analyzer: 'autocomplete'
+    analyzer: 'autocomplete',
   },
   'meta.description': {
     type: 'text',
-    analyzer: 'autocomplete' 
+    analyzer: 'autocomplete',
   },
   tags: {
     type: 'keyword',
@@ -52,11 +52,11 @@ export const productSearchSchema = {
     properties: {
       id: {
         type: 'text',
-        analyzer: 'autocomplete'
+        analyzer: 'autocomplete',
       },
       name: {
         type: 'text',
-        analyzer: 'autocomplete'
+        analyzer: 'autocomplete',
       },
     },
   },
@@ -65,9 +65,8 @@ export const productSearchSchema = {
   },
 };
 
-
 export const suggestionSchema = {
-  key:{
-    type: 'text'
-  }
-}
+  key: {
+    type: 'text',
+  },
+};
