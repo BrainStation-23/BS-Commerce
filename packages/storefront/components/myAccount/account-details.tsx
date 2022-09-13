@@ -20,6 +20,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import withAuth from '@/components/auth/withAuth';
+import { AtomicButton } from 'atomic-components';
 import { BreadCrumb } from 'atomic-components';
 
 const AccountDetails: React.FC = () => {
@@ -30,7 +31,6 @@ const AccountDetails: React.FC = () => {
   const customer = useAppSelector(
     (state) => state.persistedReducer.user.customerDetails
   );
-
   const userData = {
     email: customer.email === undefined ? '' : customer.email,
     name: customer.name === undefined ? '' : customer.name,
@@ -122,7 +122,7 @@ const AccountDetails: React.FC = () => {
           {(formikProps) => {
             return (
               <Form onSubmit={formikProps.handleSubmit} className="">
-                <fieldset disabled={!editable}>
+                <fieldset>
                   <div className="mx-auto mt-3 flex flex-wrap">
                     <div className="w-full md:w-1/2">
                       <div className="mt-2 flex items-center">
@@ -132,27 +132,43 @@ const AccountDetails: React.FC = () => {
                           </span>
                         </div>
                         <div className="w-2/3">
-                          <span
+                          {/* <span
                             className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
                             Edit
-                          </span>
-                          <button
+                          </span> */}
+                          <AtomicButton
+                            label="Edit"
+                            hidden={editable}
+                            onClick={() => setEditable(true)}
+                          />
+                          <AtomicButton
+                            hidden={!editable}
+                            type="submit"
+                            label="Save"
+                          />
+                          {/* <button
                             hidden={!editable}
                             type="submit"
                             className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                           >
                             Save
-                          </button>
-                          <span
+                          </button> */}{' '}
+                          <AtomicButton
+                            hidden={!editable}
+                            type="submit"
+                            label="Cancel"
+                            onClick={() => setEditable(false)}
+                          />
+                          {/* <span
                             hidden={!editable}
                             className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             onClick={() => setEditable(false)}
                           >
                             Cancel
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                       {/* Account Form */}

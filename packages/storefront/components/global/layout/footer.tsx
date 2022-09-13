@@ -1,3 +1,4 @@
+import { AtomicButton } from 'atomic-components';
 import type { NextComponentType } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -112,6 +113,9 @@ const Footer: NextComponentType = () => {
                 <button type="submit" className="text-white">
                   SUBSCRIBE
                 </button>
+                {/* <div className="h-24 w-24">
+                <AtomicButton type="submit" label="SUBSCRIBE" />
+                </div> */}
               </div>
             </div>
           </div>

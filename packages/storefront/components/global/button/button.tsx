@@ -1,3 +1,4 @@
+import { AtomicButton } from 'atomic-components';
 interface Props {
   buttonText?: string;
   textColor?: string;
@@ -24,12 +25,15 @@ const Button: React.FC<Props> = ({
   position,
 }: Props) => {
   return (
-    <button
-      type={type}
-      className={`${position} ${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
-    >
-      {buttonText}
-    </button>
+    <div className={`${position} ${margin} ${responsiveProps} h-12`}>
+      {/* <button
+        type={type}
+        className={`${position} ${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
+      >
+        {buttonText}
+      </button> */}
+      <AtomicButton label={`${buttonText}`} />
+    </div>
   );
 };
 export default Button;
