@@ -126,7 +126,7 @@ const AccountDetails: React.FC = () => {
           {(formikProps) => {
             return (
               <Form onSubmit={formikProps.handleSubmit} className="">
-                <fieldset disabled={!editable}>
+                <fieldset>
                   <div className="mx-auto mt-3 flex flex-wrap">
                     <div className="w-full md:w-1/2">
                       <div className="mt-2 flex items-center">
@@ -136,19 +136,18 @@ const AccountDetails: React.FC = () => {
                           </span>
                         </div>
                         <div className="w-2/3">
-                          <Button
-                            label="Edit"
-                            type="button"
-                            hidden={editable}
-                            onClick={() => btnOnClick()}
-                          />
-                          <span
+                          {/* <span
                             className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
                             Edit
-                          </span>
+                          </span> */}
+                          <Button
+                            label="Edit"
+                            hidden={editable}
+                            onClick={() => btnOnClick()}
+                          />
                           <Button
                             hidden={!editable}
                             type="submit"
@@ -160,8 +159,7 @@ const AccountDetails: React.FC = () => {
                             className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                           >
                             Save
-                          </button> */}
-
+                          </button> */}{' '}
                           <Button
                             hidden={!editable}
                             type="submit"
