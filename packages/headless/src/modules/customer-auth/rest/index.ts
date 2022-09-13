@@ -97,14 +97,13 @@ export class CustomerAuthController {
   ) {
     const { code, ...response }: any = await this.authService.signIn(data);
     res.status(code);
-    res.cookie('jwt', `Bearer ${response.data.token}`,
-      {
-        httpOnly: true,
-        maxAge: authConfig.cookiesMaxAge,
-        secure: coreConfig.env === 'production',
-        sameSite: 'none',
-        path: '/'
-      });
+    res.cookie('jwt', `Bearer ${response.data.token}`, {
+      httpOnly: true,
+      maxAge: authConfig.cookiesMaxAge,
+      secure: coreConfig.env === 'production',
+      sameSite: 'none',
+      path: '/',
+    });
     return { code, ...response };
   }
 
