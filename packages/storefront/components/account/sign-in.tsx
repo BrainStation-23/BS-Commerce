@@ -24,6 +24,7 @@ import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
 import { storeCompare } from 'toolkit/compareSlice';
+import { BreadCrumb } from 'atomic-components';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -90,7 +91,7 @@ const Signin: NextComponentType = () => {
   if (loader) return <Loading />;
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="Account"
         pathArray={['Home', 'Account']}
         linkArray={['/', '/account/sign-in']}

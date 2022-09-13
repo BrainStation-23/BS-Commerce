@@ -20,6 +20,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import withAuth from '@/components/auth/withAuth';
+import { BreadCrumb } from 'atomic-components';
 
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -84,7 +85,7 @@ const AccountDetails: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="Account"
         pathArray={['Home', 'Account']}
         linkArray={['/', '/myAccount']}

@@ -32,6 +32,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import ModalLogin from '@/components/global/components//modal/modal';
 import SimilarProducts from '@/components/product/similarProducts';
 import CartToast from '../global/components/cartToast';
+import { BreadCrumb } from 'atomic-components';
 interface SingleProduct {
   product: Product;
 }
@@ -282,7 +283,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
           bodyText="Proceed to login?"
         />
       )}
-      <Breadcrumb
+      <BreadCrumb
         title={product?.info?.name}
         pathArray={['Home', product.info?.name]}
         linkArray={['/', '/product' + product.id]}

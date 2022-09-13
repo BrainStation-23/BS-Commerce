@@ -1,10 +1,10 @@
 export interface IconsProp {
   classes: string;
   stroke?: string;
-  strokeWidth?: string;
+  strokeWidth?: string | number;
   fill: string;
   iconName: string;
-  onClick?: Function;
+  onClick?: (params: any) => void;
 }
 
 /**
@@ -28,6 +28,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth="2"
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -45,6 +46,7 @@ export const Icons: React.FC<IconsProp> = ({
           fill={fill}
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             fillRule="evenodd"
@@ -62,6 +64,7 @@ export const Icons: React.FC<IconsProp> = ({
           strokeWidth={strokeWidth}
           stroke={stroke}
           className={classes}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -81,6 +84,7 @@ export const Icons: React.FC<IconsProp> = ({
           strokeWidth={strokeWidth}
           data-tooltip-target="tooltip-right"
           data-tooltip-placement="right"
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -98,6 +102,7 @@ export const Icons: React.FC<IconsProp> = ({
           strokeWidth={strokeWidth}
           stroke={stroke}
           className={classes}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -115,6 +120,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -132,6 +138,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -149,6 +156,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -166,6 +174,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -183,6 +192,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             strokeLinecap="round"
@@ -200,7 +210,7 @@ export const Icons: React.FC<IconsProp> = ({
           viewBox="0 0 24 24"
           stroke={stroke}
           strokeWidth={strokeWidth}
-          onClick={onClick ? onClick() : ""}
+          onClick={onClick!}
         >
           <path
             strokeLinecap="round"
@@ -218,6 +228,7 @@ export const Icons: React.FC<IconsProp> = ({
           fill={fill}
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             fillRule="evenodd"
@@ -235,6 +246,7 @@ export const Icons: React.FC<IconsProp> = ({
           fill={fill}
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             fillRule="evenodd"
@@ -252,6 +264,7 @@ export const Icons: React.FC<IconsProp> = ({
           fill={fill}
           stroke={stroke}
           strokeWidth={strokeWidth}
+          onClick={onClick}
         >
           <path
             fillRule="evenodd"

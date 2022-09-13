@@ -6,6 +6,7 @@ import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import OrderTable from './orderTable';
+import { BreadCrumb } from 'atomic-components';
 
 const Orders = () => {
   const [allOrderList, setAllOrderList] = useState<OrderByUserId[]>([]);
@@ -25,7 +26,7 @@ const Orders = () => {
 
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="My order"
         pathArray={['Home', 'My order']}
         linkArray={['/', '/']}

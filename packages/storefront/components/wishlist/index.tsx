@@ -24,6 +24,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
 import WishlistBody from './wishlistBody';
 import { WishlistItem } from '@bs-commerce/models';
+import { BreadCrumb } from 'atomic-components';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ const WishlistComponent: NextComponentType = () => {
 
   return (
     <div className="mb-7">
-      <Breadcrumb
+      <BreadCrumb
         title="Wishlist"
         pathArray={['Home', 'Wishlist']}
         linkArray={['/', '/wishlist']}

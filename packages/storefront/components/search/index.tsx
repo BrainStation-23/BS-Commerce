@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import SearchItem from '@/components/search/searchItem';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../global/components/pagination';
+import { BreadCrumb } from 'atomic-components';
 
 const SearchComponent: NextComponentType = () => {
   const navSearchInput = document.getElementById(
@@ -43,7 +44,7 @@ const SearchComponent: NextComponentType = () => {
   }, [currentPage]);
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title={`${
           searchText.length > 0
             ? `Search: ${totalProducts} results found`

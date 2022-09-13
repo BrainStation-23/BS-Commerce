@@ -9,6 +9,7 @@ import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
 import { useEffect, useState } from 'react';
 import SingleAddressDetailsTable from '@/components/myAccount/singleAddressDetailsTable';
+import { BreadCrumb } from 'atomic-components';
 
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
@@ -23,12 +24,12 @@ const SingleAddressDetails: NextComponentType = () => {
     const address = customerAddresses.find(
       (customerAddress) => customerAddress.id === addressID
     );
-    setSingleAddress(address);
+    setSingleAddress(address!);
   }, []);
 
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="Order Details"
         pathArray={['Home', 'Details']}
         linkArray={['/', '/']}
@@ -70,12 +71,12 @@ const SingleAddressDetails: NextComponentType = () => {
 
           <SingleAddressDetailsTable
             label="City "
-            text={singleAddress?.state}
+            text={singleAddress?.state!}
           />
 
           <SingleAddressDetailsTable
             label="Post Code "
-            text={singleAddress?.postCode}
+            text={singleAddress?.postCode!}
           />
 
           <SingleAddressDetailsTable

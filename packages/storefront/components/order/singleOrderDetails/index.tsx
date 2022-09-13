@@ -10,6 +10,7 @@ import ChevronRight from './icons/chevron-right';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
+import { BreadCrumb } from 'atomic-components';
 
 const SingleOrder: FC = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const SingleOrder: FC = () => {
 
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="Order Details"
         pathArray={['Home', 'Details']}
         linkArray={['/', '/']}

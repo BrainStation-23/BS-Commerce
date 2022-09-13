@@ -14,6 +14,7 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 import UsernameForm from '@/components/account/forgetPassword/components/usernameForm';
 import OtpForm from '@/components/account/forgetPassword/components/otpForm';
 import NewPasswordForm from '@/components/account/forgetPassword/components/newPasswordForm';
+import { BreadCrumb } from 'atomic-components';
 
 const ForgotPassword: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -61,7 +62,7 @@ const ForgotPassword: NextComponentType = () => {
 
   return (
     <>
-      <Breadcrumb
+      <BreadCrumb
         title="Account"
         pathArray={['Home', 'Forgot Password']}
         linkArray={['/', '/account/forgot-password']}

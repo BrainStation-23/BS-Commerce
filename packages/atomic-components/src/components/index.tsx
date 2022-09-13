@@ -7,3 +7,4 @@ export * from "./inputs/accountDetailsFormInput/accountInputField";
 export * from "./inputs/checkoutFormInput/checkoutInputField";
 export * from "./inputs/loginRegisterInput/loginRegisterInput";
 export * from "./breadcrumb/breadcrumb";
+export * from "./toggle/toggle";

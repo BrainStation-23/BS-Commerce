@@ -19,6 +19,7 @@ import { registerSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
+import { BreadCrumb, Toggle } from 'atomic-components';
 
 const Signup = () => {
   const router = useRouter();
@@ -29,6 +30,7 @@ const Signup = () => {
   const [toggle, setToggle] = useState(false);
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [otp, setOtp] = useState('');
   const [userName, setUserName] = useState('');
 
@@ -109,6 +111,7 @@ const Signup = () => {
         setFieldValue('otp', otpValue);
         setOtp(otpValue);
         setToggle(!toggle);
+        setChecked(!checked);
       }
     } catch (error) {
       toast.error('Failed to sign-up.', {
@@ -122,15 +125,7 @@ const Signup = () => {
   }
   return (
     <>
-      {/* {modalOn && (
-        <OtpModal
-          setModalOn={setModalOn}
-          setChoice={setChoice}
-          modalTitle="Send OTP"
-          bodyText={otp}
-        />
-      )} */}
-      <Breadcrumb
+      <BreadCrumb
         title="Create Account"
         pathArray={['Home', 'Create Account']}
         linkArray={['/', '/account/sign-up']}
@@ -207,8 +202,8 @@ const Signup = () => {
                         />
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-x-3">
-                        <button
+                      <div className="relative flex flex-wrap items-center gap-x-3">
+                        {/* <button
                           disabled={toggle ? true : false}
                           id="toggle-btn"
                           className={`flex h-6 w-12 cursor-pointer items-center rounded-full
@@ -226,7 +221,6 @@ const Signup = () => {
                             }
                           }}
                         >
-                          {/* Switch */}
                           <div
                             className={
                               'h-5 w-5 transform rounded-full bg-white shadow-md duration-300 ease-in-out' +
@@ -234,7 +228,24 @@ const Signup = () => {
                             }
                           ></div>
                         </button>
-                        <p>Verify</p>
+                        <p>Verify</p> */}
+
+                        <Toggle
+                          disabled={toggle ? true : false}
+                          type="checkbox"
+                          value=""
+                          labelClass="absolute right-0 inline-flex cursor-pointer items-center"
+                          labelText="Verify"
+                          checked={checked ? checked : false}
+                          onClick={() => {
+                            if (formikprops.values.username !== '') {
+                              handleOTPRequest(
+                                formikprops?.values?.username!,
+                                formikprops.setFieldValue
+                              );
+                            }
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="errMsg mb-4 text-red-600">
