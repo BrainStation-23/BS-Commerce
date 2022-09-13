@@ -24,6 +24,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
 import WishlistBody from './wishlistBody';
 import { WishlistItem } from '@bs-commerce/models';
+import { Button } from 'atomic-components';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -87,12 +88,16 @@ const WishlistComponent: NextComponentType = () => {
         <div className="mx-5 flex items-center justify-between pt-3">
           <p className="text-xl">FAVOURITES</p>
           {wishlistData?.items?.length! > 0 && (
-            <button
+            // <button
+            //   onClick={() => setModalOn(true)}
+            //   className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
+            // >
+            //   Clear Wishlist
+            // </button>
+            <Button
+              label="Clear Wishlist"
               onClick={() => setModalOn(true)}
-              className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
-            >
-              Clear Wishlist
-            </button>
+            />
           )}
         </div>
         {wishlistData?.items?.length! <= 0 && (
