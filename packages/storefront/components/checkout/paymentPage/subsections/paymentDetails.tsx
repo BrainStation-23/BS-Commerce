@@ -15,7 +15,6 @@ import {
   CartProductPhoto,
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
-import { OrderResponseData } from '@bs-commerce/models';
 
 interface FormData {
   cardNumber: string;
