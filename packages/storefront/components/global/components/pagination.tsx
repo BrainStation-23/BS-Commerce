@@ -11,9 +11,11 @@ export const Pagination: FC<{
   const [pages, setPages] = useState<number[]>([]);
 
   useEffect(() => {
+    let pageArray = [];
     for (let index = 0; index < 100; index++) {
-      pages.push(index + 1);
+      pageArray.push(index + 1);
     }
+    setPages(pageArray);
   });
 
   return (
