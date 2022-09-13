@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
-        let data = request?.cookies['jwt'];
+        const data = request?.cookies['jwt']?.split(' ')[1] || request?.headers['authorization']?.split(' ')[1];
         if (!data) { return null; }
         return data;
       }]),
