@@ -14,6 +14,14 @@ export interface IButton {
   /**
    * Button type
    */
+  boldFont?: boolean;
+  /**
+   * Bold text
+   */
+   hidden?: boolean;
+  /**
+   * Is hidden ?
+   */
   type?: "button" | "submit" | "reset";
   /**
    * Button click handler
@@ -27,12 +35,14 @@ export interface IButton {
 export const Button: React.FC<IButton> = ({
   primary = false,
   label,
+  boldFont,
   size = "md",
   type = "button",
   onClick,
 }: IButton) => {
-  const style =
+  let style =
     size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg";
+  if (boldFont) style += " font-bold";
   const bgColor = primary ? "bg-blue-600" : "bg-blue-500";
   return (
     <button
