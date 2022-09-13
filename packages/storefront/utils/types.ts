@@ -189,7 +189,7 @@ export interface apiFunction {
     searchText: string,
     pageNumber: number,
     limit: number
-  ): Promise<IProductSearchResponse>;
+  ): Promise<IProductSearchResponse | undefined>;
   getCompare: () => Promise<CompareResponse | undefined>;
   reorder: (
     reorderParams: IReOrderQuery

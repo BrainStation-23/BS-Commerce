@@ -167,7 +167,7 @@ const PaymentDetails: NextComponentType = () => {
       paypalRedirectUrl: '',
     };
     const res = userAPI.checkout(obj, router).then(async (response) => {
-      if (response?.data?.orderId) {
+      if (response?.orderId) {
         await userAPI.deleteAllCartItem();
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());

@@ -36,10 +36,26 @@ import {
   updateCartItemRequest,
   updateCartItemSuccessResponse,
   CompareSuccessResponse,
-} from 'models';
+  GetCustomerQuery,
+  GetCustomerErrorResponse,
+  CreateCustomerRequest,
+  CreateCustomerResponse,
+  VerifyOtpRequest,
+  VerifyOtpSuccessResponse,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
+  getCategoryResponse,
+  getCategorySuccessResponse,
+  getCategoryBySlugResponse,
+  getCategoryBySlugSuccessResponse,
+  IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { apiEndPoints } from 'utils/apiEndPoints';
+import { GetAllBrandsResponse } from 'models';
 
 export async function getPublicProductsStatic(): Promise<
   GetCustomerAllProductsSuccessResponse | undefined
@@ -359,10 +375,17 @@ export async function addToCompareStatic(
   }
 }
 
-export async function deleteFromCompareStatic(productId: string) {
-  await axios.delete(
-    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
-  );
+export async function deleteFromCompareStatic(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+    );
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
 }
 
 export async function getOrderProductsStatic(
@@ -408,14 +431,165 @@ export async function updateCartItemStatic(
   }
 }
 
-export async function getCompareStatic(
-  ): Promise<CompareResponse | undefined> {
-    try {
-      const res = await axios.get(
-        `${apiEndPoints.addToCompare}`
-      );
-      return res.data as CompareSuccessResponse;
-    } catch (error: any) {
-      return error;
-    }
+export async function getCompareStatic(): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.addToCompare}`);
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
   }
+}
+
+export async function getSignedInUserStatic(
+  isEmail: boolean,
+  data: GetCustomerQuery
+): Promise<GetCustomerErrorResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getSignedInUser}${
+        isEmail ? `?email=${data.email}` : `?phone=${data.phone}`
+      }`
+    );
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function signUpStatic(
+  data: CreateCustomerRequest
+): Promise<CreateCustomerResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.register}`, data);
+    return res.data;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getPublicProductByIdStatic(
+  productId: string
+): Promise<GetCustomerProductResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProducts}/${productId}`
+    );
+    return res.data as GetCustomerProductSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function forgetPasswordSendOtpStatic(
+  data: string
+): Promise<SendOtpSuccessResponse | undefined> {
+  return undefined;
+}
+
+export async function forgetPasswordVerifyOtpStatic(
+  data: VerifyOtpRequest
+): Promise<VerifyOtpSuccessResponse | undefined> {
+  try {
+    const res = await axios.post(
+      `${apiEndPoints.forgetPasswordVerifyOtp}`,
+      data
+    );
+    return res?.data;
+  } catch (error: any) {
+    toast.error('OTP expired or invalid OTP. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function resetPasswordStatic(
+  data: CustomerForgotPasswordRequest
+): Promise<CustomerForgotPasswordSuccessResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.resetPassword}`, data);
+    toast.success(
+      'Password updated successfully. Please login with new password',
+      {
+        containerId: 'bottom-right',
+      }
+    );
+    return res?.data;
+  } catch (error: any) {
+    toast.error('Password updatation failed. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function getBrandsStatic(): Promise<
+  GetAllBrandsResponse | undefined
+> {
+  try {
+    const res = await axios.get(`${apiEndPoints.brands}`);
+    return res?.data;
+  } catch (error: any) {
+    toast.error('Faild to get brands list', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function getCategoryDetailsByIdStatic(
+  categoryId: string
+): Promise<getCategoryResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryDetails}/${categoryId}`
+    );
+    return res.data as getCategorySuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsBySlugStatic(
+  categorySlug: string
+): Promise<getCategoryBySlugResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryBySlug}/${categorySlug}`
+    );
+    return res.data as getCategoryBySlugSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function searchProductsStatic(
+  searchText: string,
+  pageNumber: number,
+  limit: number
+): Promise<IProductSearchResponse> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.search}/?q=${searchText}${
+        pageNumber ? `&pageNumber=${pageNumber}` : ''
+      }${limit ? `&limit=${limit}` : ''}`
+    );
+    return res.data.data as IProductSearchResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function reorderStatic(
+  data: IReOrderQuery
+): Promise<ReOrderResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}/reorder`, data);
+    return res.data as ReOrderResponse;
+  } catch (error: any) {
+    toast.error('Something Went wrong on re-order', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
