@@ -20,7 +20,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import AccountDetailsForm from '@/components/myAccount/account-detailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import withAuth from '@/components/auth/withAuth';
-import { Button } from 'atomic-components';
+import { AtomicButton } from 'atomic-components';
 
 const AccountDetails: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -30,11 +30,6 @@ const AccountDetails: React.FC = () => {
   const customer = useAppSelector(
     (state) => state.persistedReducer.user.customerDetails
   );
-  const btnOnClick = () => {
-    console.log(editable);
-
-    setEditable(true);
-  };
   const userData = {
     email: customer.email === undefined ? '' : customer.email,
     name: customer.name === undefined ? '' : customer.name,
@@ -143,12 +138,12 @@ const AccountDetails: React.FC = () => {
                           >
                             Edit
                           </span> */}
-                          <Button
+                          <AtomicButton
                             label="Edit"
                             hidden={editable}
-                            onClick={() => btnOnClick()}
+                            onClick={() => setEditable(true)}
                           />
-                          <Button
+                          <AtomicButton
                             hidden={!editable}
                             type="submit"
                             label="Save"
@@ -160,7 +155,7 @@ const AccountDetails: React.FC = () => {
                           >
                             Save
                           </button> */}{' '}
-                          <Button
+                          <AtomicButton
                             hidden={!editable}
                             type="submit"
                             label="Cancel"

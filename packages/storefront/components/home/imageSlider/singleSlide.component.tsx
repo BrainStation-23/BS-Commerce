@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { productInterface } from '@/components/home/imageSlider/models/index';
-import { Button } from 'atomic-components';
+import { AtomicButton } from 'atomic-components';
 
 const SinglSlide = (props: { product: productInterface }) => {
   const { title, description, deatils, image } = props.product;
@@ -24,7 +24,7 @@ const SinglSlide = (props: { product: productInterface }) => {
           {/* <button className="left-0 rounded-lg bg-green-600 py-2 px-4 text-xs font-bold uppercase text-white hover:bg-neutral-700 sm:text-xs md:text-sm xl:text-base">
             Read More
           </button> */}
-          <Button label="READ MORE" boldFont={true} />
+          <AtomicButton label="READ MORE" boldFont={true} />
         </div>
       </div>
     </div>

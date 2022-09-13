@@ -32,7 +32,7 @@ export interface IButton {
 /**
  * Primary UI component for user interaction
  */
-export const Button: React.FC<IButton> = ({
+export const AtomicButton: React.FC<IButton> = ({
   primary = false,
   label,
   boldFont = false,

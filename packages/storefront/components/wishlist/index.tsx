@@ -24,7 +24,7 @@ import CartModal from '@/components/global/components/modal/cartModal';
 import { setCartModalState } from 'toolkit/modalSlice';
 import WishlistBody from './wishlistBody';
 import { WishlistItem } from '@bs-commerce/models';
-import { Button } from 'atomic-components';
+import { AtomicButton } from 'atomic-components';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -94,7 +94,7 @@ const WishlistComponent: NextComponentType = () => {
             // >
             //   Clear Wishlist
             // </button>
-            <Button
+            <AtomicButton
               label="Clear Wishlist"
               onClick={() => setModalOn(true)}
             />
