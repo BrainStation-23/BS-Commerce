@@ -1,9 +1,9 @@
 import React from 'react';
 import TableData from './tableData';
 import moment from 'moment';
-import { OrderByUserIdResponseData } from '@bs-commerce/models';
+import { OrderResponseData } from '@bs-commerce/models';
 interface Props {
-  singleOrder: OrderByUserIdResponseData;
+  singleOrder: OrderResponseData;
 }
 
 const DataTable: React.FC<Props> = ({ singleOrder }: Props) => {
