@@ -308,7 +308,7 @@ export async function searchProductsGraphql(
   searchText: string,
   pageNumber: number,
   limit: number
-): Promise<GetCustomerProductByURLResponse | undefined> {
+): Promise<IProductSearchResponse | undefined> {
   try {
     return;
   } catch (error: any) {
