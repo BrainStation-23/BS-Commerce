@@ -249,8 +249,6 @@ const staticApi: apiFunction = {
   reorder: reorderStatic,
 };
 
-console.log(config?.apiService);
-
 export const userAPI: apiFunction =
   config!.apiService! === 'REST'
     ? restApi
