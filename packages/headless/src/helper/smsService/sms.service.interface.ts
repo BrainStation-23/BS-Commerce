@@ -1,3 +1,3 @@
 export abstract class ISmsService {
-    abstract sendTwilioSms: (from: string, to: string, smsBody: string) => Promise<Boolean | null>;
+    abstract sendTwilioSms: (smsBody: string, smsTo: string, smsFrom: string) => Promise<Boolean | null>;
 }
