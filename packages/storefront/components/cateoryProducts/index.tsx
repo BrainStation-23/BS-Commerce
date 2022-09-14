@@ -29,7 +29,6 @@ const CategoryPageComponent: FC<props> = (props: props) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const paginate = (skip: number) => {
-    // console.log('Skip======================', skip);
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     const queryObject: {
@@ -44,21 +43,15 @@ const CategoryPageComponent: FC<props> = (props: props) => {
     queryObject['skip'] = skip;
     queryObject['limit'] = limit;
     setReload(!reload);
-    // console.log('==========> ', skip / limit + 1);
 
     setCurrentPage(Math.ceil(skip / limit) + 1);
     router.replace({
       pathname: `/collections/${params.name}`,
       query: queryObject,
     });
-    // router.push(
-    //   `/collections/Fruits?categoryId=${router.query.categoryId}&name=${router.query.name}&skip=${skip}&limit=${limit}`
-    // );
   };
 
   useEffect(() => {
-    // console.log(router?.query?.skip);
-
     router?.query?.skip
       ? setCurrentPage(
           Math.ceil(parseInt(router?.query?.skip as string) / limit) + 1
@@ -66,12 +59,8 @@ const CategoryPageComponent: FC<props> = (props: props) => {
       : setCurrentPage(1);
   }, [router?.query]);
 
-  //console.log(categoryNameAndId);
-
   return (
     <div className="">
-      {/* <PageTitle title={categoryName} /> */}
-
       <CategoryBreadcrumb
         title={categoryName}
         categoryNameAndId={categoryNameAndId}
@@ -96,7 +85,6 @@ const CategoryPageComponent: FC<props> = (props: props) => {
                   limit={limit}
                 />
               )}
-              {/* <CategoryPagination /> */}
             </div>
           </div>
         </div>
