@@ -10,7 +10,7 @@ import {
 export interface productsState {
   publicProducts: CustomerProduct[];
   featuredProducts: CustomerProduct[];
-  categorizedProduct: Product[];
+  categorizedProduct: CustomerProduct[];
   wishlist: Wishlist;
   brands: string[];
   totalProducts: number;
@@ -26,7 +26,7 @@ const initialState: productsState = {
     id: '',
     items: [],
   },
-  totalProducts: 0
+  totalProducts: 0,
 };
 
 export const productsSlice = createSlice({
@@ -66,7 +66,7 @@ export const productsSlice = createSlice({
     },
     storeCategorizedProduct: (
       state: productsState,
-      action: PayloadAction<Product[]>
+      action: PayloadAction<CustomerProduct[]>
     ) => {
       state.categorizedProduct = action.payload;
     },
@@ -81,9 +81,12 @@ export const productsSlice = createSlice({
       newList?.push(action.payload);
       state.wishlist = { ...state.wishlist, items: newList };
     },
-    storeTotalNumberOfProducts: (state: productsState, action: PayloadAction<number>) => {
+    storeTotalNumberOfProducts: (
+      state: productsState,
+      action: PayloadAction<number>
+    ) => {
       state.totalProducts = action.payload;
-    }
+    },
   },
 });
 

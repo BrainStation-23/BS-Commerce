@@ -2,9 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import ProductSort from '@/components/cateoryProducts/sort/index';
 import CategoryFilter from '@/components/cateoryProducts/filter/main';
 import CategoryBreadcrumb from '@/components/cateoryProducts/categoryBreadcrumb';
-import { CategoryPagination } from '@/components/cateoryProducts/categoryPagination';
 import CategoryProducts from '@/components/cateoryProducts/categoryProducts/categoryProducts';
-import { Product } from '@bs-commerce/models';
+import { CustomerProduct } from '@bs-commerce/models';
 import { Pagination } from '@/components/global/components/pagination';
 import { useRouter } from 'next/router';
 
@@ -16,7 +15,7 @@ interface CategoryNameIdProp {
 interface props {
   categoryName: string;
   categoryNameAndId: CategoryNameIdProp[];
-  products: Product[];
+  products: CustomerProduct[];
   totalProducts: number;
 }
 

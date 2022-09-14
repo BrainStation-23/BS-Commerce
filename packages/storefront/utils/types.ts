@@ -57,7 +57,6 @@ import {
   IReOrderQuery,
   ReOrderResponse,
   SendOtpResponse,
-  SendOtpResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 

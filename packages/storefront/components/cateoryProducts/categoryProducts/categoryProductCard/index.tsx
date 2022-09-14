@@ -1,11 +1,11 @@
-import { CustomerProduct, Product } from '@bs-commerce/models';
+import { CustomerProduct } from '@bs-commerce/models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
 import Link from 'next/link';
 
 interface Props {
-  product: Product;
+  product: CustomerProduct;
 }
 
 const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
