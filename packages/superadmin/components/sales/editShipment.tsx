@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import getData from "./service/get-product-data.service";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 
@@ -10,7 +9,7 @@ const EditShipment = ({ singleShipment }: any) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const data: any = getData();
+        const data: any = [];
         setData(data);
     }, []);
 
