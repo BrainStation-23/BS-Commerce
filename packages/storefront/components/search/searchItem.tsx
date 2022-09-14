@@ -18,7 +18,7 @@ const SearchItem: FC<{
   const getSearchedProducts = async () => {
     if (searchText) {
       const res = await userAPI.searchProducts(searchText, currentPage, limit);
-      setProducts(res?.products);
+      setProducts(res?.products!);
       setTotalProducts(res?.totalItemsFound);
     } else setProducts([]);
   };

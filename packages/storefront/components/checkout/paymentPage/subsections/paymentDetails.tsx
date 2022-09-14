@@ -15,7 +15,6 @@ import {
   CartProductPhoto,
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
-import { OrderResponseData } from '@bs-commerce/models';
 
 interface FormData {
   cardNumber: string;
@@ -167,7 +166,7 @@ const PaymentDetails: NextComponentType = () => {
       paypalRedirectUrl: '',
     };
     const res = userAPI.checkout(obj, router).then(async (response) => {
-      if (response?.data?.orderId) {
+      if (response?.orderId) {
         await userAPI.deleteAllCartItem();
         dispatch(deleteCart());
         dispatch(deleteCheckoutInfo());

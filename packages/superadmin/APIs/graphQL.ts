@@ -21,6 +21,8 @@ import {
   CreateBrandRequest,
   UpdateBrandResponse,
   UpdateBrandRequest,
+  UpdateUserResponse,
+  ChangePasswordResponse,
 } from '@bs-commerce/models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -56,15 +58,17 @@ export async function getAdminsGraphql(): Promise<User[] | undefined> {
   return;
 }
 
-export async function updateAdminGraphql(): Promise<
-  UpdatedUserRequest | undefined
-> {
+export async function updateAdminGraphql(
+  data: UpdatedUserRequest,
+  router: NextRouter
+): Promise<UpdateUserResponse | undefined> {
   return;
 }
 
-export async function changePasswordGraphql(): Promise<
-  ChangePasswordRequest | undefined
-> {
+export async function changePasswordGraphql(
+  data: ChangePasswordRequest,
+  router: NextRouter
+): Promise<ChangePasswordResponse | undefined> {
   return;
 }
 

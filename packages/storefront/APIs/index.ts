@@ -95,7 +95,12 @@ import {
   deleteFullWishlistStatic,
   deleteSingleCartItemStatic,
   deleteWishlistItemStatic,
+  forgetPasswordSendOtpStatic,
+  forgetPasswordVerifyOtpStatic,
+  getBrandsStatic,
   getCartStatic,
+  getCategoryDetailsByIdStatic,
+  getCategoryDetailsBySlugStatic,
   getCompareStatic,
   getCustomerProfileStatic,
   getCustomerStatic,
@@ -103,14 +108,21 @@ import {
   getOrderProductsStatic,
   getOrderProductStatic,
   getPublicProductByCategoryIDStatic,
+  getPublicProductByIdStatic,
   getPublicProductByUniqueNameStatic,
   getPublicProductsStatic,
+  getSignedInUserStatic,
+  reorderStatic,
+  resetPasswordStatic,
+  searchProductsStatic,
   sendOTPStatic,
   signInStatic,
+  signUpStatic,
   updateCartItemStatic,
   updateCustomerAddressStatic,
   updateCustomerStatic,
 } from './static';
+import { GetCustomerQuery, GetCustomerResponse, CreateCustomerRequest, CreateCustomerResponse, GetCustomerProductResponse, SendOtpSuccessResponse, VerifyOtpRequest, VerifyOtpSuccessResponse, CustomerForgotPasswordRequest, CustomerForgotPasswordSuccessResponse, GetAllBrandsResponse, getCategoryResponse, getCategoryBySlugResponse, IProductSearchResponse, IReOrderQuery, ReOrderResponse } from '@bs-commerce/models';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
@@ -224,6 +236,17 @@ const staticApi: apiFunction = {
   deleteFromCompare: deleteFromCompareStatic,
   updateCartItem: updateCartItemStatic,
   getCompare: getCompareStatic,
+  getSignedInUser: getSignedInUserStatic,
+  signUp: signUpStatic,
+  getPublicProductsById: getPublicProductByIdStatic,
+  forgetPasswordSendOtp: forgetPasswordSendOtpStatic,
+  forgetPasswordVerifyOtp: forgetPasswordVerifyOtpStatic,
+  resetPassword: resetPasswordStatic,
+  getBrands: getBrandsStatic,
+  getCategoryDetailsById:getCategoryDetailsByIdStatic,
+  getCategoryDetailsBySlug: getCategoryDetailsBySlugStatic,
+  searchProducts: searchProductsStatic,
+  reorder: reorderStatic,
 };
 
 console.log(config?.apiService);

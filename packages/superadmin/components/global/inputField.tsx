@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { Field } from "formik";
-import FormikError from "./formikError";
-import styles from "../../styles/Input.module.css";
+import React, { FC } from 'react';
+import { Field } from 'formik';
+import FormikError from './formikError';
+import styles from '../../styles/Input.module.css';
 
 interface Props {
   placeholder: string;
@@ -12,10 +12,12 @@ interface Props {
   touched?: any;
   label: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const InputField: FC<Props> = (props) => {
-  const { placeholder, value, name, type, errors, touched, label } = props;
+  const { placeholder, value, name, type, errors, touched, label, disabled } =
+    props;
   return (
     <>
       <div className="form-group row mb-2">
@@ -43,6 +45,7 @@ const InputField: FC<Props> = (props) => {
             placeholder={placeholder}
             type={type}
             id={name}
+            disabled={disabled}
           />
           {errors && touched && (
             <FormikError errors={errors} touched={touched} name={name} />
