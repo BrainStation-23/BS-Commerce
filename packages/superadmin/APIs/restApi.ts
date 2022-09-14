@@ -271,7 +271,6 @@ export async function getAllManufacturersRest(): Promise<
 }
 export async function getSingleManufacturerRest(
   data: any,
-  manufacturerId: any
 ): Promise<any | undefined> {
   try {
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);

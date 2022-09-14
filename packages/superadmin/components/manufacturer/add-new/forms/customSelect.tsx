@@ -1,7 +1,7 @@
-import { FieldProps } from "formik";
-import React from "react";
-import Select from "react-select";
-import { OptionsType, ValueType } from "react-select/lib/types";
+import { FieldProps } from 'formik';
+import React from 'react';
+import Select from 'react-select';
+import { OptionsType, ValueType } from 'react-select/lib/types';
 
 interface Option {
   label: string;
@@ -38,7 +38,7 @@ export const CustomSelect = ({
         ? options.filter((option) => field.value?.indexOf(option.value) >= 0)
         : options.find((option) => option.value === field.value);
     } else {
-      return isMulti ? [] : ("" as any);
+      return isMulti ? [] : ('' as any);
     }
   };
 

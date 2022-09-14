@@ -46,8 +46,8 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
     const allManufacturers: ProductManufacturer[] = [];
-    if (response.data.manufacturers.length! > 0) {
-      response.data.manufacturers.forEach(
+    if (response?.data.manufacturers.length! > 0) {
+      response?.data.manufacturers.forEach(
         (manufacturer: ProductManufacturer) => {
           allManufacturers.push({
             id: manufacturer.id,

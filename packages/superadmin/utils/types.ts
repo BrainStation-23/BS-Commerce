@@ -111,8 +111,7 @@ export interface apiFunction {
     id: any,
     router: NextRouter
   ) => Promise<Manufacturer[] | undefined>;
-  getSingleManufacturer: ( data: any,
-    manufacturerId: any) => Promise<any | undefined>;
+  getSingleManufacturer: ( data: any) => Promise<any | undefined>;
   updateManufacturer: (
     data: UpdateManufacturerRequest,
     id: string,

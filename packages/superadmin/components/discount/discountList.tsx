@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import Table from '../global/table/table';
 import discountData from '../../data/discounts.json';
+import Pagination from '../global/pagination';
 // import Pagination from "../global/pagination";
 
 const DiscountsList = () => {
@@ -85,7 +86,7 @@ const DiscountsList = () => {
           <Table items={paginatedData} columns={columns} />
 
           <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
-            <Paginatio
+            <Pagination
               totalItems={30}
               pageCount={pageCount}
               activePage={activePage}
