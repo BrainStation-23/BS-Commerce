@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'customHooks/hooks';
-import { storeBrands, storeCategorizedProduct } from 'toolkit/productsSlice';
+import {
+  storeBrands,
+  storeCategorizedProduct,
+  storeTotalNumberOfProducts,
+} from 'toolkit/productsSlice';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { userAPI } from 'APIs';
@@ -17,6 +21,7 @@ interface SingleProduct {
   name: string;
   brands: string[];
   categoryNameAndId: CategoryNameIdProp[];
+  totalProducts: number;
 }
 if (typeof window !== 'undefined')
   var sortOption = document.getElementById('selectSortOptions');
@@ -26,6 +31,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   name,
   brands,
   categoryNameAndId,
+  totalProducts,
 }) => {
   const dispatch = useAppDispatch();
   const setCategorizedProduct = async () => {
@@ -34,14 +40,21 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
   const setBrands = async () => {
     dispatch(storeBrands(brands));
   };
+  const setTotalPoducts = async () => {
+    dispatch(storeTotalNumberOfProducts(totalProducts));
+  };
   useEffect(() => {
     setCategorizedProduct();
     setBrands();
+    setTotalPoducts();
   });
+
   return (
     <CategoryPageComponent
       categoryName={name}
       categoryNameAndId={categoryNameAndId}
+      products={products}
+      totalProducts={totalProducts}
     />
   );
 };
@@ -53,15 +66,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const minPrice = context?.query?.minPrice;
   const maxPrice = context?.query?.maxPrice;
   const brand = context?.query?.brand ? context?.query?.brand : '';
+  const skip = context?.query?.skip ? context?.query?.skip : '';
+  const limit = context?.query?.limit ? context?.query?.limit : '';
   const res = await userAPI.getPublicProductByCategoryId(
     categoryId as string,
     orderBy as string,
     parseFloat(minPrice as string) as number,
     parseFloat(maxPrice as string) as number,
-    brand as string
+    brand as string,
+    parseInt(skip as string) as number,
+    parseInt(limit as string) as number
   );
-  var products;
-  if ('data' in res!) products = res?.data?.products ? res?.data?.products : [];
+
+  var products = res?.data?.products ? res?.data?.products : [];
+  var totalProducts = res?.data?.totalProducts ? res?.data?.totalProducts : 0;
   // console.log(res2.data);
   // console.log(res?.data?.brands);
 
@@ -96,6 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       brands: brands,
       name: name,
       categoryNameAndId,
+      totalProducts,
     },
   };
 };
