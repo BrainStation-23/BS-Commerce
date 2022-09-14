@@ -21,7 +21,7 @@ const BrandInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
               className="bi bi-info-lg col-1 align-text-top"
               style={{ fontSize: '25px' }}
             />
-            <div className="fs-5 col px-3 text-start">Brand info</div>
+            <div className="fs-5 col text-start px-3">Brand info</div>
           </div>
         </div>
         <div className="" id="prouctInfoTab">
@@ -44,7 +44,7 @@ const BrandInfoCard: FC<MetaCardInterface> = (props: MetaCardInterface) => {
               label="Page Size Options"
               value={brand?.info?.pageSizeOptions}
             />
-            {brand?.meta[0] ? (
+            {brand?.meta ? (
               <>
                 <SingleView label="brand cost" value={brand?.meta?.keywords} />
                 <SingleView
