@@ -1,15 +1,19 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useAppSelector } from 'customHooks/hooks';
 import CategoryProductCard from '@/components/cateoryProducts/categoryProducts/categoryProductCard';
+import { Pagination } from '@/components/global/components/pagination';
+import { useRouter } from 'next/router';
+import { Product } from '@bs-commerce/models';
 
-const CategoryProductSegment: FC = () => {
-  const products = useAppSelector(
-    (state) => state.persistedReducer.product.categorizedProduct
-  );
+interface props {
+  products: Product[];
+}
 
+const CategoryProductSegment: FC<props> = ({ products }) => {
   return (
     <>
-      <div className='py-5'>
+      {/* {console.log(currentPage)} */}
+      <div className="py-5">
         {products && products[0] ? (
           <div className="grid grid-cols-2 justify-items-center gap-2 md:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">
             {products.map((product) => (
