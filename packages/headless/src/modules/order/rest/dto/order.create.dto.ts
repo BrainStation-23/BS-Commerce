@@ -16,7 +16,6 @@ import {
   CreateProductOrderDetails,
   IOrderAddress,
 } from '@bs-commerce/models';
-import { OrderProductPhotoDto } from './OrderProduct.dto';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })

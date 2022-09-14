@@ -1,6 +1,6 @@
 export interface ManufacturerSeo {
-    metaKeyword?: string;
-    metaDescription?: string;
-    metaTitle?: string;
-    SEFN?: string;
+  metaKeyword?: string;
+  metaDescription?: string;
+  metaTitle?: string;
+  SEFN?: string;
 }

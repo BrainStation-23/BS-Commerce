@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { Product } from "@bs-commerce/models";
+import { model, Schema } from 'mongoose';
+import { Product } from '@bs-commerce/models';
 
 const ProductSchema = new Schema<Product>(
   {
@@ -51,11 +51,11 @@ const ProductSchema = new Schema<Product>(
       },
       title: {
         type: String,
-        default: "",
+        default: '',
       },
       description: {
         type: String,
-        default: "",
+        default: '',
       },
       friendlyPageName: String,
     },
@@ -69,11 +69,11 @@ const ProductSchema = new Schema<Product>(
         },
         title: {
           type: String,
-          default: "",
+          default: '',
         },
         alt: {
           type: String,
-          default: "",
+          default: '',
         },
         displayOrder: {
           type: Number,
@@ -103,13 +103,13 @@ const ProductSchema = new Schema<Product>(
 
 ProductSchema.index(
   {
-    "info.name": "text",
-    "info.fullDescription": "text",
+    'info.name': 'text',
+    'info.fullDescription': 'text',
   },
-  { name: "search" }
+  { name: 'search' }
 );
 
-const ProductModel = model<Product>("product", ProductSchema);
+const ProductModel = model<Product>('product', ProductSchema);
 
 export { ProductModel };
 export default ProductModel;

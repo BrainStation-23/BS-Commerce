@@ -8,9 +8,11 @@ import {
 import { HttpStatus } from '@nestjs/common';
 
 import { BrandDto } from './brandDto';
+import { Type } from 'class-transformer';
 
 export class GetAllBrandsDto implements GetAllBrands {
-  @ApiProperty()
+  @ApiProperty({ type: () => [BrandDto] })
+  @Type(() => BrandDto)
   @ValidateNested({ each: true })
   @IsArray()
   brands: BrandDto[];

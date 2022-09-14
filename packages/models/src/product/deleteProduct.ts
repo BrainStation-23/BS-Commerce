@@ -1,6 +1,4 @@
-
-import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { Product } from "./product";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 
 /**
  * API Path: /products/:productId
@@ -10,28 +8,30 @@ import { Product } from "./product";
  */
 
 export interface DeleteProductParams {
-    productId: string
+  productId: string;
 }
 
 export const enum DeleteProductSuccessMessage {
-    PRODUCT_DELETED_SUCCESSFUL = 'PRODUCT_DELETED_SUCCESSFUL',
+  PRODUCT_DELETED_SUCCESSFUL = 'PRODUCT_DELETED_SUCCESSFUL',
 }
 
 export interface DeleteProductSuccessResponse extends SuccessResponse {
-    code: number;
-    data: {
-        message?: DeleteProductSuccessMessage
-    };
+  code: number;
+  data: {
+    message?: DeleteProductSuccessMessage;
+  };
 }
 
 export const enum DeleteProductErrorMessages {
-    CAN_NOT_DELETE_PRODUCT = 'CAN_NOT_DELETE_PRODUCT',
+  CAN_NOT_DELETE_PRODUCT = 'CAN_NOT_DELETE_PRODUCT',
 }
 
 export interface DeleteProductErrorResponse extends ErrorResponse {
-    code?: number;
-    error: DeleteProductErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: DeleteProductErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type DeleteProductResponse = DeleteProductSuccessResponse | DeleteProductErrorResponse;
+export type DeleteProductResponse =
+  | DeleteProductSuccessResponse
+  | DeleteProductErrorResponse;

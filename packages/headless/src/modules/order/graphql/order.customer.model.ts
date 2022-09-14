@@ -1,13 +1,4 @@
-import {
-  ObjectType,
-  Field,
-  Int,
-  InputType,
-  PartialType,
-  OmitType,
-  IntersectionType,
-} from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { ObjectType, Field, Int, InputType, OmitType } from '@nestjs/graphql';
 import {
   GetAllOrderQuery,
   IReOrderQuery,
@@ -18,7 +9,6 @@ import {
   IOrderAddress,
   IOrderProduct,
   IOrderProductPhoto,
-  OrderByUserId,
   OrderByUserIdResponse,
   OrderResponseData,
 } from '@bs-commerce/models';
@@ -61,7 +51,7 @@ export class OrderProductModel implements IOrderProduct {
   @Field({ nullable: false })
   sku: string;
 
-  @Field((type) => [OrderProductPhotoModel], { nullable: true })
+  @Field(() => [OrderProductPhotoModel], { nullable: true })
   photos?: OrderProductPhotoModel[];
 
   @Field({ nullable: false })
@@ -106,10 +96,10 @@ export class OrderResponse implements OrderResponseData {
   @Field({ nullable: false })
   userId: string;
 
-  @Field((type) => OrderAddressModel, { nullable: false })
+  @Field(() => OrderAddressModel, { nullable: false })
   billingAddress: OrderAddressModel;
 
-  @Field((type) => OrderAddressModel, { nullable: false })
+  @Field(() => OrderAddressModel, { nullable: false })
   shippingAddress: OrderAddressModel;
 
   @Field({ nullable: false })
@@ -130,7 +120,7 @@ export class OrderResponse implements OrderResponseData {
   @Field({ nullable: false })
   paymentStatus: string;
 
-  @Field((type) => OrderProductModel, { nullable: false })
+  @Field(() => OrderProductModel, { nullable: false })
   products: OrderProductModel[];
 
   @Field({ nullable: false })
@@ -168,7 +158,7 @@ export class OrderListByUserId implements OrderByUserIdResponse {
   @Field({ nullable: false })
   userId: string;
 
-  @Field((type) => OrderResponseSingleUser, { nullable: false })
+  @Field(() => OrderResponseSingleUser, { nullable: false })
   orderInfo: OrderResponseSingleUser[];
 }
 
@@ -181,7 +171,7 @@ export class ReOrderDataModel implements ReOrderData {
   @Field({ nullable: true })
   userId?: string;
 
-  @Field((type) => [OrderProductModel], { nullable: true })
+  @Field(() => [OrderProductModel], { nullable: true })
   products?: OrderProductModel[];
 
   @Field({ nullable: true })
@@ -197,10 +187,10 @@ export class SingleOrderResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => OrderResponse, { nullable: false })
+  @Field(() => OrderResponse, { nullable: false })
   data: OrderResponse;
 }
 
@@ -209,10 +199,10 @@ export class SingleUserOrderList {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => OrderListByUserId, { nullable: false })
+  @Field(() => OrderListByUserId, { nullable: false })
   data: OrderListByUserId;
 }
 
@@ -221,10 +211,10 @@ export class ReOrderResponse {
   @Field()
   error?: string;
 
-  @Field((type) => Int, { nullable: false })
+  @Field(() => Int, { nullable: false })
   code: number;
 
-  @Field((type) => ReOrderDataModel, { nullable: false })
+  @Field(() => ReOrderDataModel, { nullable: false })
   data: ReOrderDataModel;
 }
 
@@ -281,10 +271,10 @@ export class CreateOrderProduct implements CreateProductOrderDetails {
 
 @InputType({ description: 'Create order request' })
 export class CreateOrderModel implements CreateOrderRequest {
-  @Field((type) => OrderAddressInput, { nullable: false })
+  @Field(() => OrderAddressInput, { nullable: false })
   billingAddress: OrderAddressInput;
 
-  @Field((type) => OrderAddressInput, { nullable: false })
+  @Field(() => OrderAddressInput, { nullable: false })
   shippingAddress: OrderAddressInput;
 
   @Field({ nullable: false })
@@ -314,7 +304,7 @@ export class CreateOrderModel implements CreateOrderRequest {
   @Field({ nullable: true })
   paypalRedirectUrl?: string;
 
-  @Field((type) => [CreateOrderProduct], { nullable: false })
+  @Field(() => [CreateOrderProduct], { nullable: false })
   products: CreateOrderProduct[];
 }
 

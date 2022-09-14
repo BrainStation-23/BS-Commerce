@@ -1,5 +1,14 @@
 import { randomUUID } from 'crypto';
-import { Column, Model, Table, Unique, Default, HasOne, Index, PrimaryKey } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  Unique,
+  Default,
+  HasOne,
+  Index,
+  PrimaryKey,
+} from 'sequelize-typescript';
 import { Manufacturer } from 'src/entity/manufacturer';
 import ManufacturerSeoModel from './seo.model';
 

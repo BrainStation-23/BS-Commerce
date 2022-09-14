@@ -1,4 +1,9 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/index';
+import {
+  DescriptiveError,
+  ErrorResponse,
+  SuccessResponse,
+  User,
+} from 'src/index';
 
 /**
  * API Path: /user
@@ -7,18 +12,18 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, User } from 'src/inde
  */
 
 export interface GetUserSuccessResponse extends SuccessResponse {
-    code: number;
-    data: User;
+  code: number;
+  data: User;
 }
 
 export const enum GetUserErrorMessages {
-    CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
+  CAN_NOT_GET_USER = 'CAN_NOT_GET_USER',
 }
 
 export interface GetUserErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetUserErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: GetUserErrorMessages;
+  errors: DescriptiveError;
 }
 
 export type GetUserResponse = GetUserSuccessResponse | GetUserErrorResponse;

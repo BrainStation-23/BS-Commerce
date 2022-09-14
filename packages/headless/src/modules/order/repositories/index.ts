@@ -13,7 +13,6 @@ import {
   ChangeStatusEntity,
   OrderSortQuery,
   ProductOrder,
-  ReOrderQuery,
   CartItem,
   CartResponse,
   Cart,
@@ -63,7 +62,7 @@ export class OrderRepository {
     let newProductList = [];
     let totalProductsCost = 0;
     newProductList = newOrder.products.map((product) => {
-      let productCost = product.price * product.quantity; //individual product quantity * price
+      const productCost = product.price * product.quantity; //individual product quantity * price
       totalProductsCost = totalProductsCost + productCost; // total cost of all the products
       return { ...product, totalPrice: productCost };
     });
@@ -78,9 +77,9 @@ export class OrderRepository {
 
   async generateUniqueId() {
     let orderId = randomInt(281474976710655).toString(); //generate id
-    let len = orderId.length;
+    const len = orderId.length;
     if (len < 15) orderId = orderId.padStart(15, '0'); //check if the id is of 15 digits
-    let idExists = await this.db.findOrder({ orderId }); //unique validation
+    const idExists = await this.db.findOrder({ orderId }); //unique validation
 
     if (!idExists) return orderId;
     else return this.generateUniqueId();

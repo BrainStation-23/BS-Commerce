@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { Tag } from "@bs-commerce/models";
+import { model, Schema } from 'mongoose';
+import { Tag } from '@bs-commerce/models';
 
 const TagsSchema = new Schema<Tag>(
   {
@@ -20,6 +20,6 @@ const TagsSchema = new Schema<Tag>(
   }
 );
 
-const TagsModel = model<Tag>("tags", TagsSchema);
+const TagsModel = model<Tag>('tags', TagsSchema);
 export { TagsModel };
 export default TagsModel;

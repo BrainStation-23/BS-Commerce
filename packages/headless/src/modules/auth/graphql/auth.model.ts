@@ -52,7 +52,7 @@ export class AdminSignUpResponseMessage {
 
 @ObjectType()
 export class AdminSignUpResponse {
-  @Field((type) => Int)
+  @Field(() => Int)
   code: number;
 
   @Field({ nullable: true })
@@ -61,7 +61,7 @@ export class AdminSignUpResponse {
 
 @ObjectType()
 export class AdminSignInResponse {
-  @Field((type) => Int)
+  @Field(() => Int)
   code: number;
 
   @Field({ nullable: true })

@@ -5,7 +5,7 @@ export class IProductInfo {
   shortDescription: string;
   fullDescription: string;
 }
-export class IProductMeta{
+export class IProductMeta {
   friendlyPageName?: string;
 }
 export class IProductDetails {
