@@ -1,4 +1,3 @@
-import { Brand } from './../../models/src/brand/brand';
 import { NextRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
