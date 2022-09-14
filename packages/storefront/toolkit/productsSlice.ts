@@ -13,6 +13,7 @@ export interface productsState {
   categorizedProduct: Product[];
   wishlist: Wishlist;
   brands: string[];
+  totalProducts: number;
 }
 
 const initialState: productsState = {
@@ -25,6 +26,7 @@ const initialState: productsState = {
     id: '',
     items: [],
   },
+  totalProducts: 0
 };
 
 export const productsSlice = createSlice({
@@ -79,6 +81,9 @@ export const productsSlice = createSlice({
       newList?.push(action.payload);
       state.wishlist = { ...state.wishlist, items: newList };
     },
+    storeTotalNumberOfProducts: (state: productsState, action: PayloadAction<number>) => {
+      state.totalProducts = action.payload;
+    }
   },
 });
 
@@ -92,6 +97,7 @@ export const {
   addToWishlist,
   resetWishilist,
   storeBrands,
+  storeTotalNumberOfProducts,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

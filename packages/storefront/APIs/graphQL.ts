@@ -1,6 +1,5 @@
 import { GET_PRODUCTS } from 'graphqlSchema/queries/productQueries';
 import {
-  OrderResponseData,
   getCategoryResponse,
   getCategoryBySlugResponse,
   GetCustomerAllProductsResponse,
@@ -58,6 +57,7 @@ import {
   IProductSearchResponse,
   IReOrderQuery,
   ReOrderResponse,
+  SendOtpResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
@@ -78,7 +78,7 @@ export async function signInGraphql(
 
 export async function sendOTPGraphql(
   data: string
-): Promise<SendOtpSuccessResponse | undefined> {
+): Promise<SendOtpResponse | undefined> {
   return undefined;
 }
 
@@ -308,7 +308,7 @@ export async function searchProductsGraphql(
   searchText: string,
   pageNumber: number,
   limit: number
-): Promise<GetCustomerProductByURLResponse | undefined> {
+): Promise<IProductSearchResponse | undefined> {
   try {
     return;
   } catch (error: any) {
