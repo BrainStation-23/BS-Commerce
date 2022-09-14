@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { NestedCategoryList } from "models";
+import Link from 'next/link';
+import { NestedCategoryList } from '@bs-commerce/models';
 
 interface Props {
   categories: NestedCategoryList[];

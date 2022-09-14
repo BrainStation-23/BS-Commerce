@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Category } from "models";
-import { userAPI } from "@/APIs";
-import Accordion from "@/components/global/accordion";
-import TextView from "./text-view";
-import InputView from "./input-view";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Category } from '@bs-commerce/models';
+import { userAPI } from '@/APIs';
+import Accordion from '@/components/global/accordion';
+import TextView from './text-view';
+import InputView from './input-view';
 
 const ViewCategory: React.FC = () => {
   const [category, setCategory] = useState<Category>();
@@ -27,14 +27,14 @@ const ViewCategory: React.FC = () => {
           title="Category info"
           id={1}
           show={true}
-          icon={"bi bi-info-lg"}
+          icon={'bi bi-info-lg'}
         >
           <div className="d-flex flex-column">
             <TextView label="Name" text={category?.name!} />
             {category?.description ? (
               <TextView label="Description" text={category?.description!} />
             ) : (
-              ""
+              ''
             )}
           </div>
         </Accordion>
