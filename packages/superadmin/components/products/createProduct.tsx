@@ -5,6 +5,7 @@ import { NextComponentType } from 'next';
 import { useEffect, useState } from 'react';
 import {
   CreateProductRequest,
+  Manufacturer,
   NestedCategoryList,
   ProductCategory,
   ProductManufacturer,
@@ -42,14 +43,12 @@ const CreateProduct: NextComponentType = () => {
     const allManufacturers: ProductManufacturer[] = [];
 
     if (response?.data.manufacturers.length! > 0) {
-      response?.data.manufacturers.forEach(
-        (manufacturer: ProductManufacturer) => {
-          allManufacturers.push({
-            id: manufacturer.id,
-            name: manufacturer.name,
-          });
-        }
-      );
+      response?.data.manufacturers.forEach((manufacturer: Manufacturer) => {
+        allManufacturers.push({
+          id: manufacturer.id,
+          name: manufacturer.name,
+        });
+      });
       setManufacturerData(allManufacturers);
     }
   }
