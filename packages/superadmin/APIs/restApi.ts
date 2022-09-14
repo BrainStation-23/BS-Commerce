@@ -25,13 +25,15 @@ import {
   GetTagsResponse,
   GetManufacturersSuccessResponse,
   CreateBrandRequest,
-  IOrderResponseData,
+  OrderResponseData,
   GetBrandByIdResponse,
   UpdateBrandResponse,
   UpdateBrandRequest,
   GetTagsSuccessResponse,
   CreateTagRequestBody,
   GetTagSuccessResponse,
+  UpdateUserResponse,
+  ChangePasswordResponse,
 } from '@bs-commerce/models';
 
 import { User } from '../utils/types';
@@ -175,15 +177,15 @@ export async function updateAdminRest(
   data: UpdatedUserRequest,
   //id: string
   router: NextRouter
-): Promise<UpdatedUserRequest | undefined> {
+): Promise<UpdateUserResponse | undefined> {
   try {
-    const response = await axios.patch<UpdatedUserRequest>(
+    const response = await axios.patch<UpdateUserResponse>(
       `${apiEndPoints.user}`,
       data
     );
     router.push('/users/admin');
     toast.success('Edit Successful');
-    return response.data as UpdatedUserRequest;
+    return response.data as UpdateUserResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
@@ -194,15 +196,15 @@ export async function changePasswordRest(
   data: ChangePasswordRequest,
   //id: string
   router: NextRouter
-): Promise<ChangePasswordRequest | undefined> {
+): Promise<ChangePasswordResponse | undefined> {
   try {
-    const response = await axios.patch<ChangePasswordRequest>(
+    const response = await axios.patch<ChangePasswordResponse>(
       `${apiEndPoints.user}`,
       data
     );
     router.push('/users/admin');
     toast.success('Edit Successful');
-    return response.data as ChangePasswordRequest;
+    return response.data as ChangePasswordResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.error);
     toast.error(error?.response?.data?.message);
@@ -509,7 +511,7 @@ export async function getAllOrderListRest(
   shippingStaus: string,
   startDate: string,
   endDate: string
-): Promise<IOrderResponseData[] | undefined> {
+): Promise<OrderResponseData[] | undefined> {
   try {
     const splitedStartDate = startDate ? startDate.replace(/:/g, '%3A') : '';
     const splitedEndDate = endDate ? endDate.replace(/:/g, '%3A') : '';
@@ -518,7 +520,7 @@ export async function getAllOrderListRest(
     const { data } = await axios?.get(
       `${apiEndPoints?.ordersList}?orderStatus=${orderStatus}&paymentStatus=${paymentStatus}&shippingStatus=${shippingStaus}&startDate=${sDate}&endDate=${eDate}`
     );
-    return data?.data as IOrderResponseData[];
+    return data?.data as OrderResponseData[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
     toast.error(error?.response?.data?.error);
@@ -527,7 +529,7 @@ export async function getAllOrderListRest(
 
 export async function getSingleOrderByIdRest(
   id: string
-): Promise<IOrderResponseData[] | undefined> {
+): Promise<OrderResponseData[] | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.singleOrder}/${id}`);
     // router.push('/Manufacturer/');
