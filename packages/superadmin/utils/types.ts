@@ -29,6 +29,7 @@ import {
   ChangePasswordResponse,
   GetManufacturersSuccessResponse,
   GetProductResponse,
+  GetAllBrandsResponse,
 } from '@bs-commerce/models';
 
 export interface User {
@@ -121,7 +122,7 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
-  getBrands: () => Promise<any>;
+  getBrands: () => Promise<GetAllBrandsResponse>;
   getBrand(brandId: any): Promise<any>;
   mediaUpload: (
     data: FormData

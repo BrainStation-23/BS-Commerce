@@ -23,6 +23,7 @@ import {
   UpdateBrandRequest,
   UpdateUserResponse,
   ChangePasswordResponse,
+  GetAllBrandsResponse,
 } from '@bs-commerce/models';
 
 export async function getUserGraphQl(): Promise<User[] | undefined> {
@@ -91,7 +92,7 @@ export async function getCategoryGraphQL(
 }
 
 export async function getBrandsGraphQL(): Promise<
-  GetAllBrandsSuccessResponse | undefined
+GetAllBrandsResponse | undefined
 > {
   return undefined;
 }

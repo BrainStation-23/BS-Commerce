@@ -35,6 +35,7 @@ import {
   UpdateUserResponse,
   ChangePasswordResponse,
   GetProductResponse,
+  GetAllBrandsResponse,
 } from '@bs-commerce/models';
 
 import { User } from '../utils/types';
@@ -442,10 +443,12 @@ export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
   }
 }
 
-export async function getBrandsRest(): Promise<any> {
+export async function getBrandsRest(): Promise<
+  GetAllBrandsResponse | undefined
+> {
   try {
-    const { data } = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
-    return data?.data as GetAllBrandsSuccessResponse;
+    const res = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
+    return res?.data as GetAllBrandsSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }
