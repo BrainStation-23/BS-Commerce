@@ -10,8 +10,8 @@ const DateTimeFilter: FC = () => {
   const currentTime = `${new Date().getHours}: ${
     new Date().getMinutes
   }: ${'00'}`;
-  const [startDate, setStartDate] = useState(previousDay);
-  const [startTime, setStartTime] = useState(previousTime);
+  const [startDate, setStartDate] = useState(new Date(previousDay));
+  const [startTime, setStartTime] = useState(new Date(previousTime));
   const [endDate, setEndDate] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   return (

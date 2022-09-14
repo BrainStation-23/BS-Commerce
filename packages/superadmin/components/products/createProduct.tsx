@@ -41,8 +41,8 @@ const CreateProduct: NextComponentType = () => {
     const response = await userAPI.getAllManufacturers();
     const allManufacturers: ProductManufacturer[] = [];
 
-    if (response.data.manufacturers.length! > 0) {
-      response.data.manufacturers.forEach(
+    if (response?.data.manufacturers.length! > 0) {
+      response?.data.manufacturers.forEach(
         (manufacturer: ProductManufacturer) => {
           allManufacturers.push({
             id: manufacturer.id,
