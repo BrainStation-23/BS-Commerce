@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import Tooltip from "./service/tooltip";
 import getData from "./service/get-product-data.service";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
@@ -236,31 +235,11 @@ const EditShipment = ({ singleShipment }: any) => {
                         marginBottom: "20px",
                     }}
                 >
-                    <Tooltip
-                        label={"Order #"}
-                        tooltipText={"The unique number of this order"}
-                        data={singleShipment?.order}
-                    />
-                    <Tooltip
-                        label={"Tracking number"}
-                        tooltipText={"The unique number of this order"}
-                        data={singleShipment?.tracking_number}
-                    />
-                    <Tooltip
-                        label={"Admin comment"}
-                        tooltipText={"The unique number of this order"}
-                        data={""}
-                    />
-                    <Tooltip
-                        label={"Total weight"}
-                        tooltipText={"The unique number of this order"}
-                        data={singleShipment?.total_weight}
-                    />
-                    <Tooltip
-                        label={"Date shipped"}
-                        tooltipText={"The unique number of this order"}
-                        data={singleShipment?.date_shipped}
-                    />
+                    
+                    
+                    
+                    
+                    
                     <div style={{ textAlign: "center" }}>
                         <button
                             type="button"
@@ -314,11 +293,7 @@ const EditShipment = ({ singleShipment }: any) => {
                         </>
                     ) : null}
 
-                    <Tooltip
-                        label={"Date delivered"}
-                        tooltipText={"The unique number of this order"}
-                        data={singleShipment?.date_delivered}
-                    />
+                    
                     <div style={{ textAlign: "center" }}>
                         <button
                             type="button"
