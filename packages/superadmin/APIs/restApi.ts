@@ -34,6 +34,7 @@ import {
   GetTagSuccessResponse,
   UpdateUserResponse,
   ChangePasswordResponse,
+  GetProductResponse,
 } from '@bs-commerce/models';
 
 import { User } from '../utils/types';
@@ -92,9 +93,11 @@ export async function getProductSearchRest(
 
 export async function getProductRest(
   data: GetProductParams
-): Promise<GetProductParams | undefined> {
+): Promise<GetProductResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.product}/${data.productId}`);
+    console.log(res?.data);
+
     return res?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

@@ -28,6 +28,7 @@ import {
   ChangePasswordRequest,
   ChangePasswordResponse,
   GetManufacturersSuccessResponse,
+  GetProductResponse,
 } from '@bs-commerce/models';
 
 export interface User {
@@ -81,7 +82,7 @@ export interface apiFunction {
     data: any,
     router: any
   ) => Promise<CreateProductRequest | undefined>;
-  getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
+  getProduct: (data: GetProductParams) => Promise<GetProductResponse | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
