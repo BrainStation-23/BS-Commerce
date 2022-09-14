@@ -26,7 +26,7 @@ export const ResolveGraphqlModule = () => {
     CategoryModule,
     CustomerAuthModule,
     MediaModule,
-    // CompareModule,
+    CompareModule,
     WishListModule,
     TagsModule,
     CustomerModule,
