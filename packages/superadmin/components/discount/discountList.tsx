@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Table from '../global/table/table';
 import discountData from '../../data/discounts.json';
-import Pagination from '../global/pagination';
+import Pagination from '../common/pagination';
 // import Pagination from "../global/pagination";
 
 const DiscountsList = () => {

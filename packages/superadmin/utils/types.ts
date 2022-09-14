@@ -159,4 +159,5 @@ export interface adminCreate {
   addresses?: Address[];
   status?: string;
   password?: string;
+  newPassword?: string;
 }

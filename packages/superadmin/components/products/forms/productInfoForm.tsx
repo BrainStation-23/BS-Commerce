@@ -37,7 +37,7 @@ const ProductInfoForm: FC = () => {
 
   const getBrands = async () => {
     const res = await userAPI.getBrands();
-    if ('data' in res!) setBrands(res?.data);
+    if ('data' in res!) setBrands(res?.data.brands);
   };
   const setBrandsOptions = () => {
     const temp: tagsOption[] = [];

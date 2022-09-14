@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
 import {
+  Manufacturer,
   NestedCategoryList,
   ProductManufacturer,
   subCategoryList,
@@ -47,14 +48,12 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
     const response = await userAPI.getAllManufacturers();
     const allManufacturers: ProductManufacturer[] = [];
     if (response?.data.manufacturers.length! > 0) {
-      response?.data.manufacturers.forEach(
-        (manufacturer: ProductManufacturer) => {
-          allManufacturers.push({
-            id: manufacturer.id,
-            name: manufacturer.name,
-          });
-        }
-      );
+      response?.data.manufacturers.forEach((manufacturer: Manufacturer) => {
+        allManufacturers.push({
+          id: manufacturer.id,
+          name: manufacturer.name,
+        });
+      });
       setManufacturerData(allManufacturers);
     }
   }
