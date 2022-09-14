@@ -55,7 +55,7 @@ const BestSell: NextComponentType = () => {
                     <React.Fragment
                       key={product?.id! + products[index - 1]?.id}
                     >
-                      <SwiperSlide>
+                      <SwiperSlide key={Math.random() * 999999}>
                         <ProductRow
                           products={[
                             products[index - 2],
@@ -69,7 +69,7 @@ const BestSell: NextComponentType = () => {
                     <React.Fragment
                       key={product?.id! + products[index - 1]?.id}
                     >
-                      <SwiperSlide>
+                      <SwiperSlide key={Math.random() * 999999}>
                         <ProductRow
                           products={[
                             products[index],
