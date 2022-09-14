@@ -1,4 +1,4 @@
-import { WishlistProduct, WishlistProductInfo } from 'models';
+import { WishlistProduct, WishlistProductInfo } from '@bs-commerce/models';
 import React from 'react';
 
 interface SingleProductInfo {

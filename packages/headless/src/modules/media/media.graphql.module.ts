@@ -4,13 +4,8 @@ import { MediaResolver } from './graphql/media.resolver';
 import { MediaService } from './services';
 
 @Module({
-  imports:[
-    Upload
-  ],
+  imports: [Upload],
   controllers: [],
-  providers: [
-    MediaResolver,
-    MediaService,
-  ],
+  providers: [MediaResolver, MediaService],
 })
-export class MediaModule { }
+export class MediaModule {}

@@ -1,6 +1,6 @@
-export class Photo{
-  url:string;
-  alt:string;
+export class Photo {
+  url: string;
+  alt: string;
 }
 
 export class Category {
@@ -34,7 +34,7 @@ export class CategoryMeta {
 
 export class RequestCategory {
   name: string;
-  parentSlug?:string;
+  parentSlug?: string;
   description?: string;
   showOnHomePage?: boolean;
   includeInTopMenu?: boolean;
@@ -42,10 +42,9 @@ export class RequestCategory {
   published?: boolean;
   displayOrder?: number;
   meta?: CategoryMeta;
-
 }
 
-export class responseCategory{
+export class responseCategory {
   slug: string;
   ancestors: Ancestor[];
 }

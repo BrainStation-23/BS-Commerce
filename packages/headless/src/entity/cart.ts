@@ -10,12 +10,12 @@ export class Item {
   quantity: number;
 }
 
-export class UpdateItem{
+export class UpdateItem {
   productId?: string;
   quantity?: number;
 }
 
-class CartProduct{
+class CartProduct {
   id: string;
   info: Info;
   photos: Photo[];

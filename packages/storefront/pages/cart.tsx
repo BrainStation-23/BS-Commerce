@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
 import CartComponent from '@/components/cart/index';
-import { Cart, ResponseItem } from 'models';
+import { Cart, ResponseItem } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeAllCartItems } from 'toolkit/cartSlice';
@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (reqCookie) {
     response = await userAPI.getCart(token.token);
   }
-  console.log(response);
   return {
     props: {
       cartProducts: response?.data?.items!,

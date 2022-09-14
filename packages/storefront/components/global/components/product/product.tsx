@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
@@ -17,16 +17,16 @@ const Product = (props: SingleProduct) => {
     <>
       <Link
         href={{
-          pathname: `product/${product.info.name}`,
-          query: {
-            id: product.id,
-            name: product.info.name,
-          },
+          pathname: `/product/${product.meta.friendlyPageName}`,
+          // query: {
+          //   id: product.id,
+          //   name: product.info.name,
+          // },
         }}
         passHref
         // as={`product/${product.info.name}`}
       >
-        <div className="mb-0 overflow-hidden" key={product?.info?.name}>
+        <div className="mb-0 h-80 overflow-hidden" key={product?.info?.name}>
           <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative flex flex-col items-center justify-center">

@@ -1,5 +1,4 @@
 import { AuthModule } from 'src/modules/auth/auth.graphql.module';
-import { CompareModule } from 'src/modules/compare/compare.graphql.module';
 import { ManufacturerModule } from 'src/modules/manufacturer/manufacturer.graphql.module';
 import { ProductModule } from 'src/modules/product/product.graphql.module';
 import { UserModule } from 'src/modules/user/user.graphql.module';
@@ -12,6 +11,7 @@ import { MediaModule } from 'src/modules/media/media.graphql.module';
 import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
 import { TagsModule } from 'src/modules/tags/tags.graphql.module';
 import { CustomerModule } from 'src/modules/customer/customer.graphql.module';
+import { OrderModule } from 'src/modules/order/order.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
@@ -29,5 +29,6 @@ export const ResolveGraphqlModule = () => {
     WishListModule,
     TagsModule,
     CustomerModule,
+    OrderModule,
   ];
 };

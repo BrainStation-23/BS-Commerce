@@ -1,144 +1,79 @@
-import { OrderByUserId } from 'models';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from 'customHooks/hooks';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import {
+  OrderByUserId,
+  IOrderProduct,
+  IReOrderQuery,
+} from '@bs-commerce/models';
+
+import { userAPI } from 'APIs';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
-import { productsState } from 'toolkit/productsSlice';
-import { addToCart } from 'toolkit/cartSlice';
-import { IOrderProduct } from 'models';
 interface Props {
   singleOrder: OrderByUserId;
 }
+
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
-  const dispatch = useAppDispatch();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
-  const [unavailableProd, setUnavailableProd] = useState<IOrderProduct[]>([]);
-  const [newProduct, setNewProduct] = useState<IOrderProduct[]>([]);
-  const [message, setMessage] = useState('');
-  const [cartToken, setCartToken] = useState(false);
-  let products = singleOrder.products;
-  const allProducts = useAppSelector(
-    (state) => state.persistedReducer.product.publicProducts
-  );
-  const orderedProductId = products.map((prod) => {
-    return prod.productId;
-  });
-  const allProductsId = allProducts?.map((prod) => {
-    return prod.id;
-  });
+  const [unavailableProducts, setUnavailableProducts] = useState<
+    IOrderProduct[]
+  >([]);
+  const [message, setMessage] = useState<string>('');
+  const router = useRouter();
 
   const closeCartModal = () => {
     setShowCartModal(false);
-    setUnavailableProd([]);
+    setUnavailableProducts([]);
   };
-  const handleReorder = () => {
-    let matched = orderedProductId.filter((id: string) =>
-      allProductsId.includes(id)
-    );
-    let unmatched = orderedProductId.filter(
-      (id: string) => !allProductsId.includes(id)
-    );
 
-    if (unmatched.length > 0) {
-      products.forEach((product: IOrderProduct) => {
-        unmatched.forEach((id: string) => {
-          if (product.productId == id) {
-            unavailableProd.push(product);
-          }
-        });
-      });
-      let newProdData: IOrderProduct[] = [];
+  const handleReorder = (
+    overWriteCart: boolean,
+    ignoreInvalidItems: boolean
+  ) => {
+    const pastOrderId = singleOrder.orderId;
+    const reorderParameters: IReOrderQuery = {
+      orderId: pastOrderId,
+      overWriteCart,
+      ignoreInvalidItems,
+    };
+    placeReorder(reorderParameters);
+  };
 
-      matched.forEach((id: string) => {
-        const np = products.find(
-          (product: IOrderProduct) => product.productId === id
-        );
-        newProdData.push(np!);
-      });
-      setNewProduct(newProdData);
+  const placeReorder = async (reorderParameters: IReOrderQuery) => {
+    try {
+      const info = await userAPI.reorder(reorderParameters);
 
-      setMessage(
-        'Some of the Products are Not Available Now, Do You Still Want to Proceed?'
-      );
-      setShowCartModal(true);
-    } else {
-      setCartToken(true);
-      //products should be added directly to the cart
-      setMessage('Do You Want all of the Products to Re-Order?');
-      setShowCartModal(true);
-    }
+      if ('data' in info!) {
+        if (info.data.products?.length && info.data.message === undefined) {
+          router.push('/cart');
+        }
+        if (
+          info.data.message ===
+          'YOUR ITEMS IN THE CART WILL BE REPLACED. DO YOU WANT TO CONTINUE?'
+        ) {
+          setMessage(info.data.message);
+          setShowCartModal(true);
+        }
+        if (
+          info.data.message ===
+          'SOME PRODUCTS ARE NOT AVAILABLE. DO YOU WISH TO CONTINUE?'
+        ) {
+          setMessage(info.data.message);
+          setUnavailableProducts(info.data.products!);
+          setShowCartModal(true);
+        }
+        if (info.data.message === 'THESE ITEMS ARE NOT AVAILABLE RIGHT NOW') {
+          setMessage(info.data.message);
+          setShowCartModal(true);
+        }
+      }
+    } catch (error) {}
   };
-  const toCart = async () => {
-    if (newProduct.length > 0) {
-      newProduct.forEach((product) => {
-        const cartProductInfo = {
-          name: product.name,
-          shortDescription: 'short des',
-          fullDescription: 'full des',
-          sku: 'sku',
-          price: product.totalPrice,
-          oldPrice: 40,
-          cost: 10,
-          showOnHomePage: true,
-          includeInTopMenu: true,
-          allowToSelectPageSize: true,
-          published: true,
-          displayOrder: 5,
-          isFeatured: true,
-          publishDat: '2020-07-10 15:00:00.000',
-        };
-        const cartProduct = {
-          id: product.productId!,
-          info: cartProductInfo!,
-          photos: product.photos!,
-        };
-        const cartItem = {
-          product: cartProduct!,
-          productId: product.productId!,
-          quantity: product.quantity,
-        };
-        dispatch(addToCart(cartItem));
-      });
-    }
-    if (cartToken) {
-      products.forEach((product) => {
-        const cartProductInfo = {
-          name: product.name,
-          shortDescription: 'short des',
-          fullDescription: 'full des',
-          sku: 'sku',
-          price: product.totalPrice,
-          oldPrice: 40,
-          cost: product.totalPrice,
-          showOnHomePage: true,
-          includeInTopMenu: true,
-          allowToSelectPageSize: true,
-          published: true,
-          displayOrder: 5,
-          isFeatured: true,
-          publishDat: '2020-07-10 15:00:00.000',
-        };
-        const cartProduct = {
-          id: product.productId!,
-          info: cartProductInfo!,
-          photos: product.photos!,
-        };
-        const cartItem = {
-          product: cartProduct!,
-          productId: product.productId!,
-          quantity: product.quantity,
-        };
-        dispatch(addToCart(cartItem));
-      });
-    }
-  };
-  const handleReorderCheckout = () => {
-    toCart();
-  };
+
   return (
     <>
       <div className="flex justify-center pt-6">
         <button
-          onClick={handleReorder}
+          onClick={() => handleReorder(false, false)}
           className="rounded bg-green-700 py-2 px-8 font-bold text-white hover:bg-black"
           id="re-order"
         >
@@ -149,8 +84,8 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
         open={showCartModal}
         onClose={closeCartModal}
         message={message}
-        onCheckOutReorder={handleReorderCheckout}
-        unavailableProd={unavailableProd}
+        onReorder={handleReorder}
+        unavailableProducts={unavailableProducts}
       />
     </>
   );

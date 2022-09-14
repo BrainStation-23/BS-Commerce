@@ -54,13 +54,26 @@ import {
   OrderByUserIdResponse,
   CreateOrderRequest,
   SendOtpErrorResponse,
-} from 'models';
+  GetAllBrandsResponse,
+  getCategoryResponse,
+  getCategorySuccessResponse,
+  getCategoryBySlugResponse,
+  getCategoryBySlugSuccessResponse,
+  OrderResponseData,
+  SendOtpResponse,
+  CompareSuccessResponse,
+  IProductSearchResponse,
+  GetCustomerProductSuccessResponse,
+  GetCustomerProductByURLResponse,
+  GetCustomerProductByURLSuccessResponse,
+  IReOrderQuery,
+  ErrorMessageReOrder,
+  ReOrderResponse,
+} from '@bs-commerce/models';
 
 import { apiEndPoints } from 'utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
-import { OrderResponseData } from 'models';
-import { SendOtpResponse } from 'models';
 
 // export async function getUserRest(): Promise<User[] | undefined> {
 //   try {
@@ -163,7 +176,7 @@ export async function getPublicProductByIdRest(
     const res = await axios.get(
       `${apiEndPoints.getPublicProducts}/${productId}`
     );
-    return res.data.data;
+    return res.data as GetCustomerProductSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -189,7 +202,7 @@ export async function checkoutRest(
       containerId: 'bottom-right',
     });
     router.push('/submit');
-    return res.data;
+    return res.data.data;
   } catch (error: any) {
     toast.error('Order creation failed!', {
       containerId: 'bottom-right',
@@ -199,15 +212,23 @@ export async function checkoutRest(
 }
 
 export async function getPublicProductByCategoryIDRest(
-  categoryId: string
+  categoryId: string,
+  orderBy: string,
+  minPrice: number,
+  maxPrice: number,
+  brands: string
 ): Promise<GetCustomerAllProductsSuccessResponse | undefined> {
   try {
     const res = await axios.get(
-      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}`
+      `${apiEndPoints.getPublicProducts}?categoryId=${categoryId}${
+        orderBy ? `&orderBy=${orderBy}` : ''
+      }${brands ? `&brand=${brands}` : ''}${
+        minPrice ? `&minPrice=${minPrice}` : ''
+      }${maxPrice ? `&maxPrice=${maxPrice}` : ''}`
     );
     return res.data as GetCustomerAllProductsSuccessResponse;
   } catch (error: any) {
-    return [] as any;
+    return error;
   }
 }
 export async function addToWishlistRest(
@@ -263,7 +284,7 @@ export async function addToCompareRest(
         headers: { 'Content-Type': 'application/json' },
       }
     );
-    return res.data.data;
+    return res.data as CompareSuccessResponse;
   } catch (error: any) {
     return error;
   }
@@ -312,10 +333,17 @@ export async function deleteFullWishlistRest(): Promise<
   }
 }
 
-export async function deleteFromCompareRest(productId: string) {
-  await axios.delete(
-    `${apiEndPoints.deleteFromCompare}?productId=${productId}`
-  );
+export async function deleteFromCompareRest(
+  productId: string
+): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.delete(
+      `${apiEndPoints.deleteFromCompare}?productId=${productId}`
+    );
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
 }
 
 export async function getCustomerProfileRest(
@@ -540,6 +568,99 @@ export async function resetPasswordRest(
     return res?.data;
   } catch (error: any) {
     toast.error('Password updatation failed. Try again', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function getBrandsRest(): Promise<
+  GetAllBrandsResponse | undefined
+> {
+  try {
+    const res = await axios.get(`${apiEndPoints.brands}`);
+    return res?.data;
+  } catch (error: any) {
+    toast.error('Faild to get brands list', {
+      containerId: 'bottom-right',
+    });
+    return error;
+  }
+}
+
+export async function getPublicProductByUniqueNameRest(
+  productUniqueName: string
+): Promise<GetCustomerProductByURLResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getPublicProductByUniqueName}/${productUniqueName}`
+    );
+    return res.data.data as GetCustomerProductByURLSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsByIdRest(
+  categoryId: string
+): Promise<getCategoryResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryDetails}/${categoryId}`
+    );
+    return res.data as getCategorySuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCategoryDetailsBySlugRest(
+  categorySlug: string
+): Promise<getCategoryBySlugResponse | undefined> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.getCategoryBySlug}/${categorySlug}`
+    );
+    return res.data as getCategoryBySlugSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function searchProductsRest(
+  searchText: string,
+  pageNumber: number,
+  limit: number
+): Promise<IProductSearchResponse> {
+  try {
+    const res = await axios.get(
+      `${apiEndPoints.search}/?q=${searchText}${
+        pageNumber ? `&pageNumber=${pageNumber}` : ''
+      }${limit ? `&limit=${limit}` : ''}`
+    );
+    return res.data.data as IProductSearchResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function getCompareRest(): Promise<CompareResponse | undefined> {
+  try {
+    const res = await axios.get(`${apiEndPoints.addToCompare}`);
+    return res.data as CompareSuccessResponse;
+  } catch (error: any) {
+    return error;
+  }
+}
+
+export async function reorderRest(
+  data: IReOrderQuery
+): Promise<ReOrderResponse | undefined> {
+  try {
+    const res = await axios.post(`${apiEndPoints.order}/reorder`, data);
+    return res.data as ReOrderResponse;
+  } catch (error: any) {
+    toast.error('Something Went wrong on re-order', {
       containerId: 'bottom-right',
     });
     return error;

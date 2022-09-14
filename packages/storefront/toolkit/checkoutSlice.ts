@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IOrderAddress } from 'models';
+import { IOrderAddress } from '@bs-commerce/models';
 
 export interface ShippingInfo {
   firstName: string;

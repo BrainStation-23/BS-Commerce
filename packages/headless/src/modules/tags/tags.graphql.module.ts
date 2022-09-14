@@ -17,4 +17,4 @@ import { TagsResolver } from './graphql/tags.resolver';
     },
   ],
 })
-export class TagsModule { }
+export class TagsModule {}

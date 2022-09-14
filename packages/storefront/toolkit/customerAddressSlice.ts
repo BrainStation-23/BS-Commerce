@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CustomerAddress } from 'models';
+import { CustomerAddress } from '@bs-commerce/models';
 
 export interface CustomerAddressState {
   addresses: CustomerAddress[];

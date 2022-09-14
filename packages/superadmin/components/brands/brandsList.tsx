@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Table from '@/components/global/table/table';
 import Pagination from '@/components/global/pagination';
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models';
 import { userAPI } from '@/APIs';
 
 interface Props {

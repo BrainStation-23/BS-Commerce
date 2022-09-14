@@ -1,4 +1,10 @@
-import { Field, GraphQLISODateTime, InputType, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Field,
+  GraphQLISODateTime,
+  InputType,
+  Int,
+  ObjectType,
+} from '@nestjs/graphql';
 import { IsArray, IsIn } from 'class-validator';
 import {
   ProductInfo,
@@ -17,8 +23,7 @@ import {
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
   GetCustomerAllProductsResponseType,
-} from 'models';
-
+} from '@bs-commerce/models';
 
 @ObjectType('ProductInfo')
 @InputType('ProductInfoInput')
@@ -201,7 +206,9 @@ export class GraphqlProductManufacture implements ProductManufacturer {
 }
 
 @InputType()
-export class UpdateProductManufacturerInput implements UpdateProductManufacturer {
+export class UpdateProductManufacturerInput
+  implements UpdateProductManufacturer
+{
   @Field({ nullable: true })
   name?: string;
 
@@ -307,13 +314,18 @@ export class SearchConditionInput implements GetProductsByConditionQuery {
   @Field({ nullable: true })
   slug?: string;
 
-  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @Field({
+    nullable: true,
+    description: 'Price Low to High -> asc or High to Low -> desc',
+  })
   @IsIn(['asc', 'desc'])
   orderBy?: string;
 }
 
 @InputType()
-export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQuery {
+export class GetCustomerAllProductsQueryInput
+  implements GetCustomerAllProductsQuery
+{
   @Field(() => Int, { nullable: true })
   skip?: number;
 
@@ -335,7 +347,10 @@ export class GetCustomerAllProductsQueryInput implements GetCustomerAllProductsQ
   @Field({ nullable: true })
   slug?: string;
 
-  @Field({ nullable: true, description: 'Price Low to High -> asc or High to Low -> desc' })
+  @Field({
+    nullable: true,
+    description: 'Price Low to High -> asc or High to Low -> desc',
+  })
   @IsIn(['asc', 'desc'])
   orderBy?: string;
 
@@ -356,7 +371,9 @@ export class GetAllProductsQueryInput implements GetAllProductsQuery {
 }
 
 @InputType()
-export class UpdateProductsForBrandBody implements UpdateProductsForBrandRequest {
+export class UpdateProductsForBrandBody
+  implements UpdateProductsForBrandRequest
+{
   @Field(() => [String])
   productIds: string[];
 
@@ -398,7 +415,9 @@ export class ProductArrayResponse {
 }
 
 @ObjectType()
-export class GetCustomerAllProductsResponse implements GetCustomerAllProductsResponseType {
+export class GetCustomerAllProductsResponse
+  implements GetCustomerAllProductsResponseType
+{
   @Field(() => [GraphqlProduct], { nullable: true })
   products: GraphqlProduct[];
 
@@ -407,6 +426,9 @@ export class GetCustomerAllProductsResponse implements GetCustomerAllProductsRes
 
   @Field(() => [String], { nullable: true })
   brands: string[];
+
+  @Field(() => Int, { nullable: true })
+  totalProducts: number;
 }
 
 @ObjectType()
@@ -417,7 +439,6 @@ export class ProductArrayWithBrandAndManufacturersResponse {
   @Field(() => GetCustomerAllProductsResponse, { nullable: true })
   data?: GetCustomerAllProductsResponse;
 }
-
 
 @ObjectType()
 export class ProductArrayWithCount {

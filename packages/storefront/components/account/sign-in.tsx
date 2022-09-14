@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { CustomerSignInRequest } from 'models';
+import { CustomerSignInRequest } from '@bs-commerce/models';
 
 import { config } from 'config';
 import { userAPI } from 'APIs';
@@ -23,6 +23,7 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { storeCompare } from 'toolkit/compareSlice';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -45,37 +46,40 @@ const Signin: NextComponentType = () => {
     dispatch(storeAllCartItems(cartProducts?.data?.items!));
   };
 
+  const fetchCompare = async () => {
+    const compareProducts = await userAPI.getCompare();
+    if ('data' in compareProducts!)
+      dispatch(storeCompare(compareProducts?.data!));
+  };
+
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const token = await fetch(config?.signIn, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const datass = await token.json();
-      dispatch(storeUserToken(datass?.data?.token));
-
-      await userAPI.getCustomer(datass?.data?.token).then((response) => {
-        dispatch(storeCustomerDetails(response?.data));
-        dispatch(storeAddresses(response?.data?.addresses!));
-      });
-
-      fetchCart(datass?.data?.token);
-      fetchWislist(datass?.data?.token);
-      setLoader(false);
-      router.push('/');
-      //router.back();
-      toast.success('Logged in successfully!', {
-        containerId: 'bottom-right',
-      });
+      const res = await userAPI.signIn(data);
+      if ('code' in res! && res.code === 200 && 'data' in res!) {
+        dispatch(storeUserToken(res.data.token));
+        await userAPI.getCustomer(res?.data?.token).then((response) => {
+          dispatch(storeCustomerDetails(response?.data));
+          dispatch(storeAddresses(response?.data?.addresses!));
+        });
+        fetchCart(res?.data?.token);
+        fetchWislist(res?.data?.token);
+        fetchCompare();
+        router.push('/');
+        toast.success('Logged in successfully!', {
+          containerId: 'bottom-right',
+        });
+      } else {
+        toast.error('Something went wrong', {
+          containerId: 'bottom-right',
+        });
+      }
     } catch (err) {
-      setLoader(false);
       toast.error('Invalid username or password.', {
         containerId: 'bottom-right',
       });
+    } finally {
+      setLoader(false);
     }
   }
 

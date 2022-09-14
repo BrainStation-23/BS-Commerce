@@ -9,22 +9,24 @@ import { Wishlist } from './wishlist';
  */
 
 export interface DeleteWishlistItemParams {
-    productId: string
+  productId: string;
 }
 
 export interface deleteWishlistItemSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Wishlist;
+  code: number;
+  data: Wishlist;
 }
 
 export interface deleteWishlistItemErrorResponse extends ErrorResponse {
-    code?: number;
-    error: deleteWishlistItemErrorMessage;
-    errors: DescriptiveError;
+  code?: number;
+  error: deleteWishlistItemErrorMessage;
+  errors: DescriptiveError;
 }
 
 export const enum deleteWishlistItemErrorMessage {
-    CAN_NOT_DELETE_WISHLIST_ITEM = 'CAN_NOT_DELETE_WISHLIST_ITEM',
+  CAN_NOT_DELETE_WISHLIST_ITEM = 'CAN_NOT_DELETE_WISHLIST_ITEM',
 }
 
-export type deleteWishlistItemResponse = deleteWishlistItemSuccessResponse | deleteWishlistItemErrorResponse;
+export type deleteWishlistItemResponse =
+  | deleteWishlistItemSuccessResponse
+  | deleteWishlistItemErrorResponse;

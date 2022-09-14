@@ -1,7 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import { CustomerProduct, Wishlist, NestedCategoryList } from 'models';
+import {
+  CustomerProduct,
+  Wishlist,
+  NestedCategoryList,
+} from '@bs-commerce/models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'customHooks/hooks';
 import { storeCategory } from 'toolkit/categorySlice';
@@ -40,8 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const reqCookie = context.req.headers.cookie;
   const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
   const allProducts = await userAPI.getPublicProducts();
-  console.log(allProducts);
-
+  
   const featuredProducts = await userAPI.getFeaturedProducts();
   const responseCategory = await userAPI.getCategoryList();
   // console.log(responseCategory?.data);

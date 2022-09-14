@@ -6,8 +6,8 @@ import { coreConfig } from 'config/core';
  */
 export const User = createParamDecorator(
   async (data: unknown, context: ExecutionContext) => {
-    return (coreConfig.api === 'GRAPHQL') ?
-      await GqlExecutionContext.create(context).getContext().req.user :
-      await context.switchToHttp().getRequest().user;
+    return coreConfig.api === 'GRAPHQL'
+      ? await GqlExecutionContext.create(context).getContext().req.user
+      : await context.switchToHttp().getRequest().user;
   },
 );

@@ -8,26 +8,26 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
  */
 
 export interface SignInRequest {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 export interface Token {
-    token?: string;
+  token?: string;
 }
 
 export interface SignInSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Token;
+  code: number;
+  data: Token;
 }
 
 export const enum SignInErrorMessages {
-    INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'
+  INVALID_CREDENTIALS = 'INVALID_CREDENTIALS',
 }
 export interface SignInErrorResponse extends ErrorResponse {
-    code?: number;
-    error: SignInErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: SignInErrorMessages;
+  errors: DescriptiveError;
 }
 
 export type SignInResponse = SignInSuccessResponse | SignInErrorResponse;

@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Param, Post, Query, Res, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { OrderEntity } from 'src/entity/order';
 import { User } from 'src/entity/user';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
@@ -13,13 +21,12 @@ import { OrderListByUserIdResponseDto } from './dto/getOrderByUserId.dto';
 import { OrderDto } from './dto/order.dto';
 import { ReOrderDto } from './dto/reOrder.dto';
 
-
 @ApiTags('Order - Customer API')
 @UseGuards(new RolesGuard(['customer']))
 @ApiBearerAuth()
 @Controller('customer/order')
 export class OrderCustomerController {
-  constructor( private orderCustomerService: OrderCustomerService ) {}
+  constructor(private orderCustomerService: OrderCustomerService) {}
 
   @ApiResponse({
     type: OrderDto,
@@ -34,10 +41,10 @@ export class OrderCustomerController {
     const { code, ...response } = await this.orderCustomerService.createOrder(
       user.id,
       body,
-      body.products
+      body.products,
     );
     res.status(code);
-    
+
     return response;
   }
 
@@ -53,9 +60,9 @@ export class OrderCustomerController {
   ): Promise<any> {
     const { code, ...response } = await this.orderCustomerService.reOrder(
       user.id,
-      body
+      body,
     );
-    
+
     res.status(code);
     return response;
   }
@@ -70,7 +77,8 @@ export class OrderCustomerController {
     @Query() sortObj: OrderSortQueryDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<IServiceResponse<OrderListByUserIdResponseDto>> {
-    const { code, ...response } = await this.orderCustomerService.getOrderListByUserId(user.id, sortObj);
+    const { code, ...response } =
+      await this.orderCustomerService.getOrderListByUserId(user.id, sortObj);
 
     res.status(code);
     return response;
@@ -85,12 +93,10 @@ export class OrderCustomerController {
     @Param('orderId') orderId: string,
     @Res({ passthrough: true }) res: Response,
   ): Promise<IServiceResponse<OrderDto>> {
-    const { code, ...response } = await this.orderCustomerService.getOrderByOrderId(orderId);
-  
+    const { code, ...response } =
+      await this.orderCustomerService.getOrderByOrderId(orderId);
+
     res.status(code);
     return response;
   }
-  
 }
-
-

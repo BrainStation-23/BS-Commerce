@@ -1,48 +1,68 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CustomerProduct } from 'models';
+import {
+  CompareData,
+  CustomerProduct,
+  ICompareItems,
+} from '@bs-commerce/models';
 
 export interface compareState {
-  productsToCompare: CustomerProduct[];
+  compareList: CompareData;
 }
 
 const initialState: compareState = {
-  productsToCompare: [],
+  compareList: {
+    id: '',
+    userId: '',
+    items: [],
+  },
 };
 
 export const compareSlice = createSlice({
   name: 'compare',
   initialState,
   reducers: {
-    storeProductsToCompare: (
+    storeCompare: (state: compareState, action: PayloadAction<CompareData>) => {
+      state.compareList = action.payload;
+    },
+
+    storeProductsToComparePublic: (
       state: compareState,
-      action: PayloadAction<CustomerProduct>
+      action: PayloadAction<ICompareItems>
     ) => {
-      const existingCartProduct = state.productsToCompare.find(
-        (item) => item.id === action.payload.id
+      const existingCartProduct = state.compareList.items.find(
+        (item) => item.productId === action.payload.productId
       );
-      if(existingCartProduct) {
-        state.productsToCompare
-      }
-      else {
-        if(state.productsToCompare.length >= 3) {
-          state.productsToCompare.shift();
+      if (existingCartProduct) {
+        state.compareList;
+      } else {
+        if (state.compareList.items.length >= 3) {
+          state.compareList.items.shift();
         }
-        state.productsToCompare.push(action.payload);
+        state.compareList.items.push(action.payload);
       }
     },
-    deleteComparedProduct: (
+
+    deleteComparedProductPublic: (
       state: compareState,
       action: PayloadAction<string>
     ) => {
-      const newCompareList = state.productsToCompare.filter(
-        (item) => item.id != action.payload
+      const newCompareList = state.compareList.items.filter(
+        (item) => item.productId != action.payload
       );
-      state.productsToCompare = newCompareList;
+      state.compareList.items = newCompareList;
+    },
+
+    resetCompare: (state: compareState) => {
+      state.compareList = initialState.compareList;
     },
   },
 });
 
-export const { storeProductsToCompare, deleteComparedProduct } =
-  compareSlice.actions;
+export const {
+  storeCompare,
+  storeProductsToComparePublic,
+  deleteComparedProductPublic,
+  resetCompare,
+} = compareSlice.actions;
 
 export default compareSlice.reducer;

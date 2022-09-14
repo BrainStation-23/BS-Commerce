@@ -1,6 +1,8 @@
-import { OrderResponseData } from 'models';
 import {
   CustomerSignInResponse,
+  OrderResponseData,
+  getCategoryResponse,
+  GetAllBrandsResponse,
   GetCustomerQuery,
   GetCustomerResponse,
   GetCustomerProductParams,
@@ -49,7 +51,13 @@ import {
   SendOtpRequest,
   SendOtpSuccessResponse,
   GetCustomerAllProductsSuccessResponse,
-} from 'models';
+  getCategoryBySlugResponse,
+  GetCustomerProductByURLResponse,
+  IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
+  SendOtpResponse,
+} from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
 export interface accordionBody {
@@ -80,7 +88,7 @@ export interface apiFunction {
     isEmail: boolean,
     data: GetCustomerQuery
   ) => Promise<GetCustomerResponse | undefined>;
-  sendOTP: (data: string) => Promise<SendOtpSuccessResponse | undefined>;
+  sendOTP: (data: string) => Promise<SendOtpResponse | undefined>;
   signUp: (
     data: CreateCustomerRequest
   ) => Promise<CreateCustomerResponse | undefined>;
@@ -95,8 +103,12 @@ export interface apiFunction {
   ) => Promise<GetCustomerProductResponse | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
   getPublicProductByCategoryId: (
-    categoryId: string
-  ) => Promise<GetCustomerAllProductsSuccessResponse | undefined>;
+    categoryId: string,
+    orderBy: string,
+    minPrice: number,
+    maxPrice: number,
+    brands: string
+  ) => Promise<GetCustomerAllProductsResponse | undefined>;
   checkout: (
     data: any,
     router: NextRouter
@@ -117,7 +129,9 @@ export interface apiFunction {
   ) => Promise<deleteWishlistItemResponse | undefined>;
   deleteFullWishlist: () => Promise<deleteAllWishlistItemsResponse | undefined>;
   addToCompare: (productId: string) => Promise<CompareResponse | undefined>;
-  deleteFromCompare: (productId: string) => {};
+  deleteFromCompare: (
+    productId: string
+  ) => Promise<CompareResponse | undefined>;
   getCustomerProfile: (
     token: string
   ) => Promise<GetCustomerInformationSuccessResponse | undefined>;
@@ -161,4 +175,23 @@ export interface apiFunction {
   resetPassword: (
     data: CustomerForgotPasswordRequest
   ) => Promise<CustomerForgotPasswordSuccessResponse | undefined>;
+  getBrands(): Promise<GetAllBrandsResponse | undefined>;
+  getPublicProductByUniqueName(
+    productUniqueName: string
+  ): Promise<GetCustomerProductByURLResponse | undefined>;
+  getCategoryDetailsById: (
+    categoryId: string
+  ) => Promise<getCategoryResponse | undefined>;
+  getCategoryDetailsBySlug: (
+    categorySlug: string
+  ) => Promise<getCategoryBySlugResponse | undefined>;
+  searchProducts(
+    searchText: string,
+    pageNumber: number,
+    limit: number
+  ): Promise<IProductSearchResponse>;
+  getCompare: () => Promise<CompareResponse | undefined>;
+  reorder: (
+    reorderParams: IReOrderQuery
+  ) => Promise<ReOrderResponse | undefined>;
 }

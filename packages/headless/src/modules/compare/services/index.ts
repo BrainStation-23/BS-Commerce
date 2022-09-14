@@ -1,14 +1,25 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { AddProductToCompareErrorEnum, DeleteCompareErrorEnum, GetCompareErrorEnum } from 'models';
-import { Compare } from 'src/entity/compare';
+import {
+  AddProductToCompareErrorEnum,
+  ComparePublicResponse,
+  CompareResponse,
+  DeleteCompareErrorEnum,
+  GetCompareErrorEnum,
+} from '@bs-commerce/models';
+import { Compare, CompareItems } from 'src/entity/compare';
 import { Helper } from 'src/helper/helper.interface';
-import { CompareResponse } from '../dto/compare.dto';
 import { CompareRepository } from '../repositories';
 @Injectable()
 export class CompareService {
-  constructor(private compareRepository: CompareRepository, private helper: Helper) {}
+  constructor(
+    private compareRepository: CompareRepository,
+    private helper: Helper,
+  ) {}
 
-  async addItemToCompare(userId: string, productId: string): Promise<CompareResponse> {
+  async addItemToCompare(
+    userId: string,
+    productId: string,
+  ): Promise<CompareResponse> {
     const isExist = await this.compareRepository.getCompareByUserId(userId);
     let saveData: Compare = null;
     if (!isExist) {
@@ -35,6 +46,24 @@ export class CompareService {
     }
   }
 
+  async getProductDetails(productId: string): Promise<ComparePublicResponse> {
+    let productDetails: CompareItems[] = null;
+    productDetails = await this.compareRepository.getProductDetails(productId);
+
+    if (productDetails) {
+      return {
+        data: productDetails,
+        code: HttpStatus.OK,
+      };
+    } else {
+      return this.helper.serviceResponse.errorResponse(
+        AddProductToCompareErrorEnum.CAN_NOT_ADD_ITEM_FOR_COMPARING,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
   async getCompareByUserId(userId: string): Promise<CompareResponse> {
     const data = await this.compareRepository.getCompareByUserId(userId);
     if (data) {
@@ -48,7 +77,10 @@ export class CompareService {
     }
   }
 
-  async getCompareById(userId: string, compareId: string): Promise<CompareResponse> {
+  async getCompareById(
+    userId: string,
+    compareId: string,
+  ): Promise<CompareResponse> {
     const data = await this.compareRepository.getCompareById(userId, compareId);
     if (data) {
       return { data, code: HttpStatus.OK };
@@ -61,8 +93,14 @@ export class CompareService {
     }
   }
 
-  async deleteCompareById(userId: string, compareId: string): Promise<CompareResponse> {
-    const data = await this.compareRepository.deleteCompareById(userId, compareId);
+  async deleteCompareById(
+    userId: string,
+    compareId: string,
+  ): Promise<CompareResponse> {
+    const data = await this.compareRepository.deleteCompareById(
+      userId,
+      compareId,
+    );
     if (data) {
       return { data, code: HttpStatus.OK };
     } else {
@@ -74,15 +112,22 @@ export class CompareService {
     }
   }
 
-  async deleteItemByProductId(userId: string, productId: string): Promise<CompareResponse> {
+  async deleteItemByProductId(
+    userId: string,
+    productId: string,
+  ): Promise<CompareResponse> {
     const isExist = await this.compareRepository.getProduct(productId);
-    if(!isExist) return this.helper.serviceResponse.errorResponse(
-      DeleteCompareErrorEnum.INVALID_ID,
-      null,
-      HttpStatus.BAD_REQUEST,
-    );
+    if (!isExist)
+      return this.helper.serviceResponse.errorResponse(
+        DeleteCompareErrorEnum.INVALID_ID,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
 
-    const data = await this.compareRepository.deleteItemByProductId(userId, productId);
+    const data = await this.compareRepository.deleteItemByProductId(
+      userId,
+      productId,
+    );
     if (data) {
       return { data, code: HttpStatus.OK };
     } else {

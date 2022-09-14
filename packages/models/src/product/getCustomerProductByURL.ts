@@ -7,18 +7,21 @@ import { Product } from './product';
  * response: GetCustomerProductByURLResponse
  */
 export interface GetCustomerProductByURLParams {
-    url: string;
+  url: string;
 }
-export interface GetCustomerProductByURLSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Product;
+export interface GetCustomerProductByURLSuccessResponse
+  extends SuccessResponse {
+  code: number;
+  data: Product;
 }
 export declare const enum GetCustomerProductByURLErrorMessages {
-    CAN_NOT_GET_PRODUCT = 'CAN_NOT_GET_PRODUCT'
+  CAN_NOT_GET_PRODUCT = 'CAN_NOT_GET_PRODUCT',
 }
 export interface GetCustomerProductByURLErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetCustomerProductByURLErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: GetCustomerProductByURLErrorMessages;
+  errors: DescriptiveError;
 }
-export declare type GetCustomerProductByURLResponse = GetCustomerProductByURLSuccessResponse | GetCustomerProductByURLErrorResponse;
+export declare type GetCustomerProductByURLResponse =
+  | GetCustomerProductByURLSuccessResponse
+  | GetCustomerProductByURLErrorResponse;

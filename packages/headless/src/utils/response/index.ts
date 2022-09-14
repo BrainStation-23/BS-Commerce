@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import {
   DescriptiveError,
   IServiceErrorResponse,
-  IServiceSuccessResponse
+  IServiceSuccessResponse,
 } from './service.response.interface';
 
 export function successResponse<T>(

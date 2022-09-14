@@ -1,19 +1,31 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { CartRepository } from '../repositories';
-import { AddToCartResponse, getCartResponse, getCartErrorMessage, deleteCartErrorMessage, updateCartItemErrorMessage, deleteCartItemErrorMessage, deleteAllCartItemsErrorMessage, deleteCartResponse, updateCartItemResponse, deleteCartItemResponse, deleteAllCartItemsResponse, addToCartErrorMessage, Message } from 'models';
+import {
+  AddToCartResponse,
+  getCartResponse,
+  getCartErrorMessage,
+  deleteCartErrorMessage,
+  updateCartItemErrorMessage,
+  deleteCartItemErrorMessage,
+  deleteAllCartItemsErrorMessage,
+  deleteCartResponse,
+  updateCartItemResponse,
+  deleteCartItemResponse,
+  deleteAllCartItemsResponse,
+  addToCartErrorMessage,
+  Message,
+} from '@bs-commerce/models';
 import { Item, UpdateItem } from 'src/entity/cart';
 
 @Injectable()
 export class CartService {
-  constructor(private cartRepo: CartRepository, private helper: Helper) { }
+  constructor(private cartRepo: CartRepository, private helper: Helper) {}
 
-  async addToCart(
-    item: Item,
-    userId: string,
-  ): Promise<AddToCartResponse> {
+  async addToCart(item: Item, userId: string): Promise<AddToCartResponse> {
     const existCart = await this.cartRepo.isCartExist(userId);
-    const createCart = !existCart && await this.cartRepo.createCart({ userId, items: [item] });
+    const createCart =
+      !existCart && (await this.cartRepo.createCart({ userId, items: [item] }));
     if (!createCart && !existCart) {
       return this.helper.serviceResponse.errorResponse(
         addToCartErrorMessage.CAN_NOT_CREATE_CART,
@@ -29,7 +41,8 @@ export class CartService {
     }
 
     const isItemExist = await this.cartRepo.isItemExist(userId, item.productId);
-    const addItemCart = !isItemExist && await this.cartRepo.addItem(userId, item);
+    const addItemCart =
+      !isItemExist && (await this.cartRepo.addItem(userId, item));
     if (!addItemCart && !isItemExist) {
       return this.helper.serviceResponse.errorResponse(
         addToCartErrorMessage.CAN_NOT_ADD_ITEM_TO_THE_CART,
@@ -44,10 +57,7 @@ export class CartService {
       );
     }
 
-    const cart = await this.cartRepo.incrementItemQuantity(
-      userId,
-      item,
-    );
+    const cart = await this.cartRepo.incrementItemQuantity(userId, item);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
         addToCartErrorMessage.CAN_NOT_INCREMENT_CART_ITEM,
@@ -62,9 +72,7 @@ export class CartService {
     }
   }
 
-  async getCart(
-    userId: string,
-  ): Promise<getCartResponse> {
+  async getCart(userId: string): Promise<getCartResponse> {
     const cart = await this.cartRepo.getCart(userId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
@@ -79,9 +87,7 @@ export class CartService {
     );
   }
 
-  async deleteCart(
-    cartId: string,
-  ): Promise<deleteCartResponse> {
+  async deleteCart(cartId: string): Promise<deleteCartResponse> {
     const cart = await this.cartRepo.deleteCart(cartId);
     if (!cart) {
       return this.helper.serviceResponse.errorResponse(
@@ -100,8 +106,11 @@ export class CartService {
     userId: string,
     item: UpdateItem,
   ): Promise<updateCartItemResponse> {
-    const cart = (item.quantity && item.quantity > 0) && await this.cartRepo.updateCartItem(userId, item);
-    if (!cart && (item.quantity && item.quantity > 0)) {
+    const cart =
+      item.quantity &&
+      item.quantity > 0 &&
+      (await this.cartRepo.updateCartItem(userId, item));
+    if (!cart && item.quantity && item.quantity > 0) {
       return this.helper.serviceResponse.errorResponse(
         updateCartItemErrorMessage.CAN_NOT_UPDATE_CART_ITEM,
         null,

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models';
 
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/productInfo';
@@ -13,11 +13,11 @@ const Product = ({ product }: SingleProduct) => {
   return (
     <Link
       href={{
-        pathname: `product/${product.info.name}`,
-        query: {
-          id: product.id,
-          name: product.info.name,
-        },
+        pathname: `/product/${product?.meta?.friendlyPageName}`,
+        // query: {
+        //   id: product.id,
+        //   name: product.info.name,
+        // },
       }}
       passHref
       // as={`product/${product.info.name}`}

@@ -3,7 +3,7 @@ export class ProductPhoto {
   id?: string;
   title?: string;
   alt?: string;
-  displayOrder?: number
+  displayOrder?: number;
 }
 
 export class ProductCategory {
@@ -14,74 +14,74 @@ export class ProductCategory {
 export class Product {
   id?: string;
   info: {
-    name: string,
-    shortDescription?: string,
-    fullDescription?: string,
-    sku: string,
-    price: number,
-    oldPrice: number,
-    cost: number,
-    showOnHomePage?: boolean,
-    includeInTopMenu?: boolean,
-    allowToSelectPageSize?: boolean,
-    published?: boolean,
-    displayOrder?: number,
-    isFeatured?: boolean,
-    publishDate?: Date
+    name: string;
+    shortDescription?: string;
+    fullDescription?: string;
+    sku: string;
+    price: number;
+    oldPrice: number;
+    cost: number;
+    showOnHomePage?: boolean;
+    includeInTopMenu?: boolean;
+    allowToSelectPageSize?: boolean;
+    published?: boolean;
+    displayOrder?: number;
+    isFeatured?: boolean;
+    publishDate?: Date;
   };
   meta?: {
-    keywords?: string[],
-    title?: string,
-    description?: string,
-    friendlyPageName?: string
+    keywords?: string[];
+    title?: string;
+    description?: string;
+    friendlyPageName?: string;
   };
   tags?: string[];
   photos?: ProductPhoto[];
   brands?: string[];
   manufacturer?: {
-    id: string,
-    name: string,
+    id: string;
+    name: string;
   };
-  categories: ProductCategory[]
+  categories: ProductCategory[];
 }
 
 export class UpdateCategory {
   id?: string;
   name?: string;
   isFeatured?: boolean;
-  displayOrder?: number
+  displayOrder?: number;
 }
 
 export class UpdateProduct {
   info?: {
-    name?: string,
-    shortDescription?: string,
-    fullDescription?: string,
-    sku?: string,
-    price?: number,
-    oldPrice?: number,
-    cost?: number,
-    showOnHomePage?: boolean,
-    includeInTopMenu?: boolean,
-    allowToSelectPageSize?: boolean,
-    published?: boolean,
-    displayOrder?: number,
-    isFeatured?: boolean,
+    name?: string;
+    shortDescription?: string;
+    fullDescription?: string;
+    sku?: string;
+    price?: number;
+    oldPrice?: number;
+    cost?: number;
+    showOnHomePage?: boolean;
+    includeInTopMenu?: boolean;
+    allowToSelectPageSize?: boolean;
+    published?: boolean;
+    displayOrder?: number;
+    isFeatured?: boolean;
   };
   meta?: {
-    keywords?: string[],
-    title?: string,
-    description?: string,
-    friendlyPageName?: string
+    keywords?: string[];
+    title?: string;
+    description?: string;
+    friendlyPageName?: string;
   };
   tags?: string[];
   photos?: ProductPhoto[];
   brands?: string[];
   manufacture?: {
-    id?: string,
-    name?: string,
-  }
-  categories?: UpdateCategory[]
+    id?: string;
+    name?: string;
+  };
+  categories?: UpdateCategory[];
 }
 
 export class SearchCondition {

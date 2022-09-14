@@ -21,10 +21,13 @@ export abstract class ICompareDatabase {
     userId: string,
     productId: CompareItems,
   ) => Promise<Compare | null>;
+  abstract getProductDetails: (
+    productId: string,
+  ) => Promise<CompareItems[] | null>;
   abstract createCompare: (
     userId: string,
     productId: CompareItems,
   ) => Promise<Compare | null>;
 
-  abstract getProduct: (productId: string) => Promise<Boolean>;
+  abstract getProduct: (productId: string) => Promise<boolean>;
 }

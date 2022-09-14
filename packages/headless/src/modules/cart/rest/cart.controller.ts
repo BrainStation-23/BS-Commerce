@@ -16,30 +16,52 @@ import { User } from 'src/entity/user';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { AddToCartErrorResponseDto, AddToCartRequestDto, AddToCartSuccessResponseDto } from './dto/addToCart.dto';
-import { getCartErrorResponseDto, getCartSuccessResponseDto } from './dto/getCart.dto';
-import { deleteCartErrorResponseDto, deleteCartRequestDto, deleteCartSuccessResponseDto } from './dto/deleteCart.dto';
-import { updateCartItemErrorResponseDto, updateCartItemRequestDto, updateCartItemSuccessResponseDto } from './dto/updateCartItem.dto';
-import { deleteCartItemErrorResponseDto, deleteCartItemRequestDto, deleteCartItemSuccessResponseDto } from './dto/deleteCartItem.dto';
-import { deleteAllCartItemsErrorResponseDto, deleteAllCartItemsSuccessResponseDto } from './dto/deleteAllCartItems.dto';
+import {
+  AddToCartErrorResponseDto,
+  AddToCartRequestDto,
+  AddToCartSuccessResponseDto,
+} from './dto/addToCart.dto';
+import {
+  getCartErrorResponseDto,
+  getCartSuccessResponseDto,
+} from './dto/getCart.dto';
+import {
+  deleteCartErrorResponseDto,
+  deleteCartRequestDto,
+  deleteCartSuccessResponseDto,
+} from './dto/deleteCart.dto';
+import {
+  updateCartItemErrorResponseDto,
+  updateCartItemRequestDto,
+  updateCartItemSuccessResponseDto,
+} from './dto/updateCartItem.dto';
+import {
+  deleteCartItemErrorResponseDto,
+  deleteCartItemRequestDto,
+  deleteCartItemSuccessResponseDto,
+} from './dto/deleteCartItem.dto';
+import {
+  deleteAllCartItemsErrorResponseDto,
+  deleteAllCartItemsSuccessResponseDto,
+} from './dto/deleteAllCartItems.dto';
 
 @Controller('cart')
 @ApiBearerAuth()
 @UseGuards(new RolesGuard(['customer']))
 @ApiTags('Cart API')
 export class CartController {
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService) {}
 
   @Post()
   @ApiResponse({
     description: 'Add to Cart API',
     type: AddToCartSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: AddToCartErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   async addToCart(
     @Body() item: AddToCartRequestDto,
@@ -58,14 +80,17 @@ export class CartController {
   @ApiResponse({
     description: 'Get cart API',
     type: getCartSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: getCartErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
-  async getCart(@UserInfo() user: User, @Res({ passthrough: true }) res: Response) {
+  async getCart(
+    @UserInfo() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { code, ...response } = await this.cartService.getCart(user.id);
     res.status(code);
     return response;
@@ -74,19 +99,21 @@ export class CartController {
   @ApiResponse({
     description: 'Delete cart API',
     type: deleteCartSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: deleteCartErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   @Delete()
   async deleteCart(
     @Query() data: deleteCartRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.cartService.deleteCart(data.cartId);
+    const { code, ...response } = await this.cartService.deleteCart(
+      data.cartId,
+    );
     res.status(code);
     return response;
   }
@@ -94,12 +121,12 @@ export class CartController {
   @ApiResponse({
     description: 'Update Cart Item Api',
     type: updateCartItemSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: updateCartItemErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   @Patch('item')
   async updateCartItem(
@@ -118,12 +145,12 @@ export class CartController {
   @ApiResponse({
     description: 'Delete Cart Item Api',
     type: deleteCartItemSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: deleteCartItemErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   @Delete('item')
   async deleteCartItem(
@@ -142,12 +169,12 @@ export class CartController {
   @ApiResponse({
     description: 'Delete All Cart Items Api',
     type: deleteAllCartItemsSuccessResponseDto,
-    status: HttpStatus.CREATED
+    status: HttpStatus.CREATED,
   })
   @ApiResponse({
     description: 'Error Response',
     type: deleteAllCartItemsErrorResponseDto,
-    status: HttpStatus.BAD_REQUEST
+    status: HttpStatus.BAD_REQUEST,
   })
   @Delete('allitems')
   async deleteAllCartItems(

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
 import { useAppSelector } from 'customHooks/hooks';
-import { OrderByUserId, OrderByUserIdResponse } from 'models';
+import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 
 const OrderMain: FC = () => {
   // const storedOrderProducts = orderProducts?.data?.orderInfo;
@@ -16,12 +16,9 @@ const OrderMain: FC = () => {
   );
 
   const getAllOrders = async () => {
-    const orderListRes = await userAPI
-      .getOrderProducts(token)
-      .then((res: OrderByUserIdResponse) => {
-        console.log(res);
-        setAllOrderList(res?.orderInfo);
-      });
+    const orderListRes = await userAPI.getOrderProducts(token).then((res) => {
+      setAllOrderList(res?.orderInfo!);
+    });
   };
 
   useEffect(() => {

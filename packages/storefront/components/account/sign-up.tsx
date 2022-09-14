@@ -10,7 +10,10 @@ import { userAPI } from 'APIs';
 import { storeUserToken } from 'toolkit/authSlice';
 import { storeCustomerDetails } from 'toolkit/userSlice';
 import { useAppDispatch } from 'customHooks/hooks';
-import { CreateCustomerRequest, CustomerSignInRequest } from 'models';
+import {
+  CreateCustomerRequest,
+  CustomerSignInRequest,
+} from '@bs-commerce/models';
 import { registerSchema } from '@/components/global/schemas/loginSchema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -36,26 +39,24 @@ const Signup = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoading(true);
-      const token = await fetch(config?.signIn, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      const datass = await token.json();
-      dispatch(storeUserToken(datass?.data?.token));
-
-      await userAPI.getCustomer(datass?.data?.token).then((response) => {
-        dispatch(storeCustomerDetails(response?.data));
-      });
-      router.push('/');
-      setLoading(false);
+      const res = await userAPI.signIn(data);
+      if ('code' in res! && res.code === 200 && 'data' in res!) {
+        dispatch(storeUserToken(res?.data?.token));
+        await userAPI.getCustomer(res?.data?.token).then((response) => {
+          dispatch(storeCustomerDetails(response?.data));
+        });
+        router.push('/');
+      } else {
+        toast.error('Something went wrong', {
+          containerId: 'bottom-right',
+        });
+      }
     } catch (err) {
-      setLoading(false);
       toast.error('Failed to login', {
         containerId: 'bottom-right',
       });
+    } finally {
+      setLoading(false);
     }
   }
 

@@ -1,4 +1,4 @@
-import { CustomerProduct, Product } from 'models';
+import { CustomerProduct, Product } from '@bs-commerce/models';
 import Icon from '@/components/global/components/icon';
 import ProductInfo from '@/components/global/components/product/common/productInfo';
 import Picture from '@/components/global/components/product/common/picture';
@@ -13,23 +13,23 @@ const CategoryProductCard: React.FC<Props> = ({ product }: Props) => {
     <>
       <Link
         href={{
-          pathname: `/product/${product.info.name}`,
-          query: {
-            id: product.id,
-            name: product.info.name,
-          },
+          pathname: `/product/${product?.meta?.friendlyPageName}`,
+          // query: {
+          //   id: product.id,
+          //   name: product.info.name,
+          // },
         }}
         passHref
       >
         <div className="mb-0 overflow-hidden" key={product?.id}>
           <div className="duration-0 group cursor-pointer tracking-wide transition hover:bg-white hover:duration-700">
-            <div className="max-w-sm overflow-hidden rounded">
+            <div className="w-fit max-w-sm overflow-hidden rounded">
               <div className="relative flex flex-col items-center justify-center">
                 <div className="relative overflow-hidden text-white transition-all duration-700">
-                  <div className="relative inset-0 z-0 bg-cover bg-center">
+                  <div className="relative inset-0 z-0 bg-cover bg-center ">
                     <Picture
-                      height={212}
-                      width={250}
+                      height={354}
+                      width={354}
                       src={product?.photos![0]?.url!}
                       alt={product?.info?.name}
                     />

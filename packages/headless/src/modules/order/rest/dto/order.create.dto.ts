@@ -9,10 +9,13 @@ import {
   IsString,
   MaxLength,
   MinLength,
-  ValidateNested
+  ValidateNested,
 } from 'class-validator';
-import { CreateOrderRequest, CreateProductOrderDetails, IOrderAddress } from 'models';
-import { OrderProductPhotoDto } from './OrderProduct.dto';
+import {
+  CreateOrderRequest,
+  CreateProductOrderDetails,
+  IOrderAddress,
+} from '@bs-commerce/models';
 
 export class OrderAddressDto implements IOrderAddress {
   @ApiProperty({ example: 'test' })
@@ -83,7 +86,7 @@ export class CreateOrderProductDto implements CreateProductOrderDetails {
   @ApiProperty({ example: 100 })
   @IsNumber()
   price: number;
-  
+
   @ApiProperty({ example: 2 })
   @IsNumber()
   quantity: number;

@@ -18,10 +18,15 @@ import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 export class CustomerAuthResolver {
-  constructor(private authService: CustomerAuthService, private helper: Helper) { }
+  constructor(
+    private authService: CustomerAuthService,
+    private helper: Helper,
+  ) {}
 
   @Query(() => GetCustomerAuthResponse)
-  async getCustomer(@Args('query', { nullable: true }) query?: GetAuthCustomerQuery) {
+  async getCustomer(
+    @Args('query', { nullable: true }) query?: GetAuthCustomerQuery,
+  ) {
     const res = await this.authService.getCustomer(query);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -33,7 +38,9 @@ export class CustomerAuthResolver {
   }
 
   @Mutation(() => SendOtpAuthResponse)
-  async sendOtpForRegistration(@Args('data', { nullable: true }) data?: SendOtpInput) {
+  async sendOtpForRegistration(
+    @Args('data', { nullable: true }) data?: SendOtpInput,
+  ) {
     const res = await this.authService.registerSendOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -45,13 +52,17 @@ export class CustomerAuthResolver {
   }
 
   @Mutation(() => SendOtpAuthResponse)
-  async sendOtpForForgotPassword(@Args('data', { nullable: true }) data?: SendOtpInput) {
+  async sendOtpForForgotPassword(
+    @Args('data', { nullable: true }) data?: SendOtpInput,
+  ) {
     const res = await this.authService.forgotPasswordSendOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => VerifyOtpAuthResponse)
-  async verifyOtpForForgotPassword(@Args('data', { nullable: true }) data?: VerifyOtpInput) {
+  async verifyOtpForForgotPassword(
+    @Args('data', { nullable: true }) data?: VerifyOtpInput,
+  ) {
     const res = await this.authService.forgotPasswordVerifyOTP(data);
     return this.helper.serviceResponse.graphqlResponse(res);
   }

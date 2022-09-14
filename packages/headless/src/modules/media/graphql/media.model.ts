@@ -11,6 +11,6 @@ export class UploadFileResponse {
   @Field(() => Int)
   code: number;
 
-  @Field(type => UploadFileResponseUrl, { nullable: true })
+  @Field(() => UploadFileResponseUrl, { nullable: true })
   data?: UploadFileResponseUrl;
 }

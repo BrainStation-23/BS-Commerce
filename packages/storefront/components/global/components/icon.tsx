@@ -11,13 +11,17 @@ import {
   Product,
   WishlistItem,
   WishlistProduct,
-} from 'models';
+  ICompareItems,
+} from '@bs-commerce/models';
 import {
   setCartModalState,
   setModalState,
   setLoginModalState,
 } from 'toolkit/modalSlice';
-import { storeProductsToCompare } from 'toolkit/compareSlice';
+import {
+  storeCompare,
+  storeProductsToComparePublic,
+} from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 
@@ -36,16 +40,26 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const [choice, setChoice] = useState(false);
 
   const token = useAppSelector(
-    (state) => state.persistedReducer.auth.access_token
+    (state) => state?.persistedReducer.auth.access_token
   );
 
   const wishlistData = useAppSelector(
-    (state) => state.persistedReducer.product.wishlist.items
+    (state) => state?.persistedReducer?.product.wishlist.items
   );
 
   const cartData = useAppSelector(
-    (state) => state.persistedReducer.cart.allCartItems
+    (state) => state?.persistedReducer.cart.allCartItems
   );
+
+  const compareItems = useAppSelector(
+    (state) => state?.persistedReducer?.compare?.compareList?.items
+  );
+
+  const inCompareList = compareItems?.find(
+    (item: ICompareItems) => item.productId === product?.id
+  )
+    ? true
+    : false;
 
   let inWishlist = wishlistData?.find(
     (item: WishlistItem) => item.productId === product?.id
@@ -67,6 +81,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
       const cartProduct = {
         id: product.id!,
         info: product.info!,
+        meta: { friendlyPageName: product.meta?.friendlyPageName! },
         photos: product.photos!,
       };
       const cartItem = {
@@ -93,12 +108,41 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   };
 
   const handleAddToCompare = async () => {
-    try {
-      await userAPI.addToCompare(product?.id!);
-    } catch (error) {
-      toast.error('Error happend.', {
-        containerId: 'bottom-right',
-      });
+    if (token) {
+      try {
+        const res = await userAPI.addToCompare(product?.id!);
+        if ('data' in res!) {
+          dispatch(setModalState(!modalCmp));
+          dispatch(storeCompare(res.data));
+        }
+      } catch (error) {
+        toast.error('Error happend.', {
+          containerId: 'bottom-right',
+        });
+      }
+    } else {
+      const productPhotos = product?.photos!.map((photo) => photo?.url!);
+      const productDetails = {
+        info: {
+          name: product?.info?.name!,
+          price: product?.info?.price!,
+          shortDescription: product?.info?.shortDescription!,
+          fullDescription: product?.info?.shortDescription!,
+          oldPrice: product?.info?.oldPrice!,
+        },
+        meta: {
+          friendlyPageName: product?.meta?.friendlyPageName!,
+        },
+        photos: productPhotos!,
+      };
+      dispatch(
+        storeProductsToComparePublic({
+          productId: product?.id!,
+          productDetails: productDetails!,
+        })
+      );
+      dispatch(setModalState(!modalCmp));
+      //dispatch(setLoginModalState(!modalOn));
     }
   };
 
@@ -230,7 +274,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
               />
             </svg>
             <div
-              className={`absolute left-6 -top-10 mb-6 hidden flex-col items-center peer-hover:flex`}
+              className={`absolute left-6 ${
+                inWishlist ? '-top-10' : '-top-6'
+              }  mb-6 hidden flex-col items-center peer-hover:flex`}
             >
               <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
                 {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}
@@ -243,15 +289,14 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={btnClass}
+              className={inCompareList ? btnClassFilled : btnClass}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={1.5}
               onClick={(event) => {
                 handleAddToCompare();
-                dispatch(setModalState(!modalCmp));
-                dispatch(storeProductsToCompare(product as CustomerProduct));
+
                 event.preventDefault();
               }}
             >
@@ -263,7 +308,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
             </svg>
             <div className="absolute left-6 -top-7 mb-6 hidden items-center peer-hover:inline-block">
               <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-                Add to compare
+                {inCompareList ? 'Already Added' : 'Add to compare'}
                 <div className="absolute right-5 -bottom-1 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
               </span>
             </div>
