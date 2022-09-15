@@ -209,11 +209,6 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
               id: '',
               name: values.manufacturerName,
             };
-            manufacturerData.map((manufacturerr) => {
-              if (values.manufacturerName == manufacturerr.name) {
-                return (manufacturer.id = manufacturerr.id);
-              }
-            });
             const newData = {
               info: info,
               meta: meta,

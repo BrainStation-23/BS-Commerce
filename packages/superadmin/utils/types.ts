@@ -121,7 +121,7 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
-  getBrands: () => Promise<GetAllBrandsResponse>;
+  getBrands: () => Promise<GetAllBrandsResponse | undefined>;
   getBrand(brandId: any): Promise<any>;
   mediaUpload: (
     data: FormData

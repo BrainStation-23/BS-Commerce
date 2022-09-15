@@ -48,6 +48,8 @@ const ProductSort: FC = () => {
     params.brand ? (queryObject['brand'] = params.brand) : '';
     params.minPrice ? (queryObject['minPrice'] = params.minPrice) : '';
     params.maxPrice ? (queryObject['maxPrice'] = params.maxPrice) : '';
+    params.skip ? (queryObject['skip'] = params.skip) : '';
+    params.limit ? (queryObject['limit'] = params.limit) : '';
     queryObject['orderBy'] = (
       document.getElementById('selectSortOptions') as HTMLInputElement
     ).value;
@@ -68,7 +70,7 @@ const ProductSort: FC = () => {
   return (
     <>
       <div>
-        <div className="box-border h-auto w-full border px-x text-sm">
+        <div className="px-x box-border h-auto w-full border text-sm">
           <div className="flex justify-between">
             <div className="flex  py-2">
               <label className="grid content-center justify-center px-4">

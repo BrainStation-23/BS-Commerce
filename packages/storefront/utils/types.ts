@@ -57,6 +57,7 @@ import {
   IReOrderQuery,
   ReOrderResponse,
   SendOtpResponse,
+  SendOtpResponse,
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 
@@ -107,7 +108,9 @@ export interface apiFunction {
     orderBy: string,
     minPrice: number,
     maxPrice: number,
-    brands: string
+    brands: string,
+    skip: number,
+    limit: number,
   ) => Promise<GetCustomerAllProductsResponse | undefined>;
   checkout: (
     data: any,

@@ -5,13 +5,17 @@ export const Pagination: FC<{
   totalPages: number;
   setCurrentPage: Function;
   currentPage: number;
-}> = ({ totalPages, setCurrentPage, currentPage }) => {
+  paginate?: Function;
+  limit?: number;
+}> = ({ totalPages, setCurrentPage, currentPage, paginate, limit }) => {
   const [pages, setPages] = useState<number[]>([]);
 
   useEffect(() => {
+    let pageArray = [];
     for (let index = 0; index < 100; index++) {
-      pages.push(index + 1);
+      pageArray.push(index + 1);
     }
+    setPages(pageArray);
   });
 
   return (
@@ -24,6 +28,8 @@ export const Pagination: FC<{
             } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-[#40a944] hover:text-white`}
             onClick={() => {
               currentPage > 1 && setCurrentPage(currentPage - 1);
+              if (paginate && currentPage > 1)
+                paginate!((currentPage - 2) * limit!);
             }}
           >
             <svg
@@ -55,6 +61,7 @@ export const Pagination: FC<{
                       } `}
                       onClick={() => {
                         setCurrentPage(index + 1);
+                        if (paginate) paginate!(index * limit!);
                       }}
                     >
                       {index + 1}
@@ -68,6 +75,8 @@ export const Pagination: FC<{
             } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-[#40a944] hover:text-white`}
             onClick={() => {
               currentPage < totalPages && setCurrentPage(currentPage + 1);
+              if (paginate && currentPage < totalPages)
+                paginate!(currentPage * limit!);
             }}
           >
             <svg

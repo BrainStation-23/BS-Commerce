@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 import type { NextComponentType } from "next";
-import getData from "../sales/service/get-shopping-data.service";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 
@@ -11,7 +10,7 @@ const Carts: NextComponentType = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const data: any = getData();
+        const data: any = [];
         setData(data);
     }, []);
 

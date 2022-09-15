@@ -93,6 +93,20 @@ const graphqlApi: apiFunction = {
   getAllOrderList: getAllOrderListGraphQL,
   deleteBrand: deleteBrandGraphQL,
   updateBrand: updateBrandGraphQL,
+  createManufacturer: createManufacturerRest,
+  getManufacturer: getManufacturerRest,
+  deleteManufacturer: deleteManufacturerRest,
+  getSingleManufacturer: getSingleManufacturerRest,
+  updateManufacturer: updateManufacturerRest,
+  getOrderEnum: getOrderEnumRest,
+  updateOrderStatus: updateOrderStatusRest,
+  updatePaymentStatus: updatePaymentStatusRest,
+  updateShippingStatus: updateShippingStatusRest,
+  getAllManufacturers: getAllManufacturersRest,
+  getSingleOrderById: getSingleOrderByIdRest,
+  getAllTags: getAllTagsRest,
+  createTags: createTagsRest,
+  getSingleTag: getSingleTagRest,
 };
 
 const restApi: apiFunction = {
