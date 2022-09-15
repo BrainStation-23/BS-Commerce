@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from 'formik';
 
 const LogSearchForm = () => {
   function handleSearchSubmit(data: any) {
@@ -9,10 +9,10 @@ const LogSearchForm = () => {
     <>
       <Formik
         initialValues={{
-          createdFrom: "",
-          msg: "",
-          createdTo: "",
-          logLevel: "",
+          createdFrom: '',
+          msg: '',
+          createdTo: '',
+          logLevel: '',
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -28,23 +28,23 @@ const LogSearchForm = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between">
+              <div className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between flex-wrap">
                 <div>
                   <label
                     htmlFor="createdForm"
                     className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
-                    Created from{" "}
+                    Created from{' '}
                     <span>
                       <i
                         className="bi bi-question-circle-fill"
-                        style={{ color: "#3c8dbc" }}
+                        style={{ color: '#3c8dbc' }}
                       ></i>
                     </span>
                   </label>
                   <Field
                     type="date"
-                    className="p-2 w-100 mb-2"
+                    className="w-100 mb-2 p-2"
                     id="createdFrom"
                     name="createdFrom"
                   />
@@ -55,34 +55,39 @@ const LogSearchForm = () => {
                     htmlFor="msg"
                     className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
-                    Message{" "}
+                    Message{' '}
                     <span>
                       <i
                         className="bi bi-question-circle-fill"
-                        style={{ color: "#3c8dbc" }}
+                        style={{ color: '#3c8dbc' }}
                       ></i>
                     </span>
                   </label>
-                  <Field type="text" className="p-2 w-100 mb-2" id="msg" name="msg" />
+                  <Field
+                    type="text"
+                    className="w-100 mb-2 p-2"
+                    id="msg"
+                    name="msg"
+                  />
                 </div>
               </div>
-              <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mb-3">
+              <div className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mb-3 flex-wrap">
                 <div>
                   <label
                     htmlFor="createdTo"
                     className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2"
                   >
-                    Created to{" "}
+                    Created to{' '}
                     <span>
                       <i
                         className="bi bi-question-circle-fill"
-                        style={{ color: "#3c8dbc" }}
+                        style={{ color: '#3c8dbc' }}
                       ></i>
                     </span>
                   </label>
                   <Field
                     type="date"
-                    className="p-2 w-100 mb-2"
+                    className="w-100 mb-2 p-2"
                     id="createdTo"
                     name="createdTo"
                   />
@@ -93,18 +98,18 @@ const LogSearchForm = () => {
                     htmlFor="logLevel"
                     className="me-1 me-sm-2 me-md-2 me-xl-2 me-lg-2 mb-2"
                   >
-                    Log Level{" "}
+                    Log Level{' '}
                     <span>
                       <i
                         className="bi bi-question-circle-fill"
-                        style={{ color: "#3c8dbc" }}
+                        style={{ color: '#3c8dbc' }}
                       ></i>
                     </span>
                   </label>
 
                   <Field
                     as="select"
-                    className="p-2 w-100"
+                    className="w-100 p-2"
                     id="logLevel"
                     name="logLevel"
                   >
@@ -117,11 +122,11 @@ const LogSearchForm = () => {
                   </Field>
                 </div>
               </div>
-              <div className="d-flex flex-wrap justify-content-center">
+              <div className="d-flex justify-content-center flex-wrap">
                 <button
                   type="submit"
                   className="btn btn-primary px-5"
-                  style={{ background: "#3c8dbc", border: "none" }}
+                  style={{ background: '#3c8dbc', border: 'none' }}
                 >
                   <span>
                     <i className="bi bi-search me-2"></i>

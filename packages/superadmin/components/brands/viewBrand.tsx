@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Brand } from '@bs-commerce/models';
 import BrandInfoCard from '@/components/brands/cards/brandInfoCard';
 import BrandMetaCard from '@/components/brands/cards/metaCard';
+import Link from 'next/link';
 const ViewBrand: FC<{ brand: Brand }> = ({ brand }) => {
   return (
     <>
@@ -11,10 +12,12 @@ const ViewBrand: FC<{ brand: Brand }> = ({ brand }) => {
             <h1 className="float-start">
               View brand details
               <span className="fs-5 p-3">
-                <a href="/Brands" className="text-decoration-none ">
-                  <i className="bi bi-arrow-left-circle-fill p-2" />
-                  Back to brand list
-                </a>
+                <Link href="/Brands">
+                  <a className="text-decoration-none ">
+                    <i className="bi bi-arrow-left-circle-fill p-2" />
+                    Back to brand list
+                  </a>
+                </Link>
               </span>
             </h1>
           </div>

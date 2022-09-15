@@ -23,6 +23,7 @@ import {
   CategoryInterface,
   EditProductInterface,
 } from '@/components/products/models/index';
+import Link from 'next/link';
 
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const router = useRouter();
@@ -231,10 +232,12 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                   <h1 className="float-start">
                     Edit product details
                     <span className="fs-5 p-3">
-                      <a href="/Product" className="text-decoration-none ">
-                        <i className="bi bi-arrow-left-circle-fill p-2" />
-                        Back to product list
-                      </a>
+                      <Link href="/Product">
+                        <a className="text-decoration-none ">
+                          <i className="bi bi-arrow-left-circle-fill p-2" />
+                          Back to product list
+                        </a>
+                      </Link>
                     </span>
                   </h1>
                   <div className="float-end">
