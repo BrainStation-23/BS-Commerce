@@ -5,7 +5,7 @@ import {
   SignInRequest,
   Token,
   SignInErrorMessages,
-} from 'models';
+} from '@bs-commerce/models';
 
 @InputType()
 export class AdminSignUpInput implements CreateUserRequest {
@@ -52,18 +52,18 @@ export class AdminSignUpResponseMessage {
 
 @ObjectType()
 export class AdminSignUpResponse {
-  @Field(type => Int)
-  code: number
+  @Field(() => Int)
+  code: number;
 
   @Field({ nullable: true })
-  data?: AdminSignUpResponseMessage
+  data?: AdminSignUpResponseMessage;
 }
 
 @ObjectType()
 export class AdminSignInResponse {
-  @Field(type => Int)
-  code: number
+  @Field(() => Int)
+  code: number;
 
   @Field({ nullable: true })
-  data?: AdminSignInResponseToken
+  data?: AdminSignInResponseToken;
 }

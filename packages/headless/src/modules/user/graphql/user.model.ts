@@ -1,7 +1,7 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { IsOptional, IsPhoneNumber } from 'class-validator';
 import { regexConfig } from 'config/phone';
-import { Address, User } from 'models';
+import { Address, User } from '@bs-commerce/models';
 
 @ObjectType('AdminAddress')
 @InputType('AdminAddressInput')
@@ -54,19 +54,19 @@ export class Admin implements User {
   @Field({ nullable: true })
   gender?: string;
 
-  @Field(type => [AdminAddress], { nullable: true })
+  @Field(() => [AdminAddress], { nullable: true })
   addresses?: AdminAddress[];
 
   @Field({ nullable: true })
   status?: string;
 
-  @Field(type => Boolean, { nullable: true })
+  @Field(() => Boolean, { nullable: true })
   active?: boolean;
 
   @Field({ nullable: true })
   resetPasswordToken?: string;
 
-  @Field(type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   resetPasswordExpires?: number;
 }
 
@@ -83,19 +83,21 @@ export class UpdateUserInput {
 
   @Field({ nullable: true })
   @IsOptional()
-  @IsPhoneNumber(regexConfig.phone as any, { message: 'Please Enter the Valid Phone Number!' })
+  @IsPhoneNumber(regexConfig.phone as any, {
+    message: 'Please Enter the Valid Phone Number!',
+  })
   phone: string;
 
   @Field({ nullable: true })
   gender: string;
 
-  @Field(type => AdminAddress, { nullable: true })
+  @Field(() => AdminAddress, { nullable: true })
   address: AdminAddress;
 
   @Field({ nullable: true })
   status: string;
 
-  @Field(type => Boolean, { nullable: true })
+  @Field(() => Boolean, { nullable: true })
   active: boolean;
 }
 
@@ -110,10 +112,10 @@ export class ChangePasswordInput {
 
 @ObjectType()
 export class AdminResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number;
 
-  @Field(type => Admin, { nullable: true })
+  @Field(() => Admin, { nullable: true })
   data?: Admin;
 }
 
@@ -125,9 +127,9 @@ export class ChangePasswordResponseMessage {
 
 @ObjectType()
 export class ChangePasswordResponse {
-  @Field(type => Int)
+  @Field(() => Int)
   code: number;
 
-  @Field(type => ChangePasswordResponseMessage, { nullable: true })
+  @Field(() => ChangePasswordResponseMessage, { nullable: true })
   data?: ChangePasswordResponseMessage;
 }

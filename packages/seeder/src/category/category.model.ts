@@ -1,102 +1,102 @@
 import { randomUUID } from 'crypto';
-import { Category } from 'models';
+import { Category } from '@bs-commerce/models';
 import { model, Schema } from 'mongoose';
 
-const CategorySchema = new Schema<Category>({
-  id: {
-    type: String,
-    unique: true,
-    default: () => randomUUID(),
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  slug: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  description: {
-    type: String,
-    default: null,
-  },
-  photo: {
-    url: {
+const CategorySchema = new Schema<Category>(
+  {
+    id: {
       type: String,
-      default: null,
+      unique: true,
+      default: () => randomUUID(),
     },
-    alt: {
+    name: {
       type: String,
-      default: ""
-    }
-  },
-  showOnHomePage: {
-    type: Boolean,
-    default: false,
-  },
-  includeInTopMenu: {
-    type: Boolean,
-    default: false,
-  },
-  allowToSelectPageSize: {
-    type: Boolean,
-    default: true,
-  },
-  published: {
-    type: Boolean,
-    default: true,
-  },
-  displayOrder: {
-    type: Number,
-    default: 0,
-  },
-  rootPath: {
-    type: String,
-    default: '',
-  },
-  ancestors: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      slug: {
-        type: String,
-        required: true,
-      },
-      level: {
-        type: Number,
-        required: true,
-        default: 0,
-
-      },
-      _id: false
+      required: true,
     },
-  ],
-  meta: {
-    keywords: {
-      type: [String],
-      default: [],
+    slug: {
+      type: String,
+      unique: true,
+      required: true,
     },
     description: {
       type: String,
-      default: '',
+      default: null,
     },
-    title: {
+    photo: {
+      url: {
+        type: String,
+        default: null,
+      },
+      alt: {
+        type: String,
+        default: '',
+      },
+    },
+    showOnHomePage: {
+      type: Boolean,
+      default: false,
+    },
+    includeInTopMenu: {
+      type: Boolean,
+      default: false,
+    },
+    allowToSelectPageSize: {
+      type: Boolean,
+      default: true,
+    },
+    published: {
+      type: Boolean,
+      default: true,
+    },
+    displayOrder: {
+      type: Number,
+      default: 0,
+    },
+    rootPath: {
       type: String,
       default: '',
     },
-    SEFN: {
-      type: String,
-      default: '',
+    ancestors: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        slug: {
+          type: String,
+          required: true,
+        },
+        level: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+        _id: false,
+      },
+    ],
+    meta: {
+      keywords: {
+        type: [String],
+        default: [],
+      },
+      description: {
+        type: String,
+        default: '',
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      SEFN: {
+        type: String,
+        default: '',
+      },
     },
   },
-},
   {
     versionKey: false,
-    timestamps: true
-  },
+    timestamps: true,
+  }
 );
 
 const CategoryModel = model<Category>('Category', CategorySchema);

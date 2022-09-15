@@ -21,8 +21,8 @@ export class UserDatabase implements IUserDatabase {
       include: [AddressModel],
       where: query,
       raw: false,
-      attributes: { exclude: ['password'] }
-    })
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async updateUser(userId: string, user: User): Promise<User | null> {
@@ -30,12 +30,20 @@ export class UserDatabase implements IUserDatabase {
     return await this.findUser({ id: userId });
   }
 
-  async updateUserWithNewAddress(userId: string, user: User, address: Address): Promise<User | null> {
+  async updateUserWithNewAddress(
+    userId: string,
+    user: User,
+    address: Address,
+  ): Promise<User | null> {
     await AddressModel.create({ ...address, userId });
     return await this.updateUser(userId, user);
   }
 
-  async updateUserAndAddress(userId: string, user: User, address: Address): Promise<User | null> {
+  async updateUserAndAddress(
+    userId: string,
+    user: User,
+    address: Address,
+  ): Promise<User | null> {
     await AddressModel.update(address, { where: { id: address.id, userId } });
     return await this.updateUser(userId, user);
   }

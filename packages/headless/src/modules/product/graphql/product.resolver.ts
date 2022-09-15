@@ -20,7 +20,7 @@ import {
 
 @Resolver()
 export class ProductResolver {
-  constructor(private productService: ProductService, private helper: Helper) { }
+  constructor(private productService: ProductService, private helper: Helper) {}
 
   // Customer
   @Query(() => ProductResponse)
@@ -36,8 +36,12 @@ export class ProductResolver {
   }
 
   @Query(() => ProductArrayWithBrandAndManufacturersResponse)
-  async getCustomerAllProducts(@Args('condition') condition: GetCustomerAllProductsQueryInput) {
-    const res = await this.productService.getCustomerProductsByCondition(condition);
+  async getCustomerAllProducts(
+    @Args('condition') condition: GetCustomerAllProductsQueryInput,
+  ) {
+    const res = await this.productService.getCustomerProductsByCondition(
+      condition,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
@@ -78,7 +82,9 @@ export class ProductResolver {
 
   @Query(() => ProductArrayWithCountResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getProductsByCondition(@Args('condition') condition: SearchConditionInput) {
+  async getProductsByCondition(
+    @Args('condition') condition: SearchConditionInput,
+  ) {
     const res = await this.productService.getProductsByCondition(condition);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -99,7 +105,10 @@ export class ProductResolver {
 
   @Mutation(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async updateProduct(@Args('product') product: UpdateProductInput, @Args('productId') productId: string,) {
+  async updateProduct(
+    @Args('product') product: UpdateProductInput,
+    @Args('productId') productId: string,
+  ) {
     const res = await this.productService.updateProduct(product, productId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
@@ -107,7 +116,10 @@ export class ProductResolver {
   @Mutation(() => ProductArrayResponse)
   @UseGuards(new RolesGuard(['admin']))
   async updateProductsForBrand(@Args('data') data: UpdateProductsForBrandBody) {
-    const res = await this.productService.updateProductsForBrand(data.productIds, data.brandId);
+    const res = await this.productService.updateProductsForBrand(
+      data.productIds,
+      data.brandId,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 }

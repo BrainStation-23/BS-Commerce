@@ -1,7 +1,6 @@
 import {
-  CartItem, 
+  CartItem,
   Cart,
-  ReOrderQuery,
   ChangeStatusEntity,
   GetAllOrderQueryEntity,
   OrderEntity,
@@ -19,16 +18,23 @@ import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 import {
   CreateOrderRequest,
-  CreateProductOrderDetails
-} from 'models';
+  CreateProductOrderDetails,
+} from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
 
 export class OrderDatabase implements IOrderDatabase {
-  async populateItemsInCart(userId: string, products: CartItem[]) : Promise<CartResponse | null> {
+  async populateItemsInCart(
+    userId: string,
+    products: CartItem[],
+  ): Promise<CartResponse | null> {
     let addItems;
-    try{
-      addItems = await CartModel.findOneAndUpdate({ userId },{ $set: { items: products } },{ new: true }).lean();
-    }catch(error){
+    try {
+      addItems = await CartModel.findOneAndUpdate(
+        { userId },
+        { $set: { items: products } },
+        { new: true },
+      ).lean();
+    } catch (error) {
       console.log(error);
       return null;
     }
@@ -37,14 +43,20 @@ export class OrderDatabase implements IOrderDatabase {
   }
 
   async getCart(userId: string): Promise<Cart | null> {
-    return await CartModel.findOne({userId }).select('items -_id').lean();
+    return await CartModel.findOne({ userId }).select('items -_id').lean();
   }
-  async createOrder(userId: string, body: CreateOrderRequest): Promise<OrderEntity> {
+  async createOrder(
+    userId: string,
+    body: CreateOrderRequest,
+  ): Promise<OrderEntity> {
     return await OrderModel.create({ userId, ...body });
   }
 
-  async getAvailableProducts(productIds: string[]): Promise<any>{
-    return await ProductModel.find({"info.published": {"$eq": true, "$exists": true}}).select('id -_id');
+  async getAvailableProducts(productIds: string[]): Promise<any> {
+    return await ProductModel.find({
+      id: { $in: productIds },
+      'info.published': { $eq: true, $exists: true },
+    }).select('id -_id');
   }
 
   async clearCart(userId: string): Promise<CartResponse | null> {
@@ -52,7 +64,8 @@ export class OrderDatabase implements IOrderDatabase {
       { userId },
       { $set: { items: [] } },
       { new: true },
-    ).select('-_id')
+    )
+      .select('-_id')
       .lean()
       .exec();
   }
@@ -61,130 +74,208 @@ export class OrderDatabase implements IOrderDatabase {
     products: CreateProductOrderDetails[],
   ): Promise<ProductOrder[]> {
     let newProductList = [];
-    newProductList = await Promise.all(products.map( async (product) => {
-        const photoDetails =  await ProductModel.findOne({ id: product.productId}).lean();
-        return {...product, photos: photoDetails.photos};
-      })
+    newProductList = await Promise.all(
+      products.map(async (product) => {
+        const photoDetails = await ProductModel.findOne({
+          id: product.productId,
+        }).lean();
+        return { ...product, photos: photoDetails.photos };
+      }),
     );
 
     return newProductList;
   }
 
-  async getOrderListByUserId(userId: string, sortObj: OrderSortQuery): Promise<OrderEntity[]> {
-    const { sortField, sortType} = sortObj;
+  async getOrderListByUserId(
+    userId: string,
+    sortObj: OrderSortQuery,
+  ): Promise<OrderEntity[]> {
+    const { sortField, sortType } = sortObj;
     let sortIndex = -1;
     const sort = {};
-    if(sortField && sortType){
-      if(sortType === 'asc') sortIndex = 1;
+    if (sortField && sortType) {
+      if (sortType === 'asc') sortIndex = 1;
       sort[sortField] = sortIndex;
-    }else{
-      sort['orderedDate'] = sortIndex;//by default orders will be sorted by date
+    } else {
+      sort['orderedDate'] = sortIndex; //by default orders will be sorted by date
     }
- 
+
     return await OrderModel.find({ userId }).sort(sort);
   }
 
-  async findOrder(query: Record<string, any>): Promise<OrderEntity>{
+  async findOrder(query: Record<string, any>): Promise<OrderEntity> {
     return await OrderModel.findOne(query).lean();
   }
-  
-  async getOrderStatistics(): Promise<OrderStatEntity>{
-    try{
+
+  async getOrderStatistics(): Promise<OrderStatEntity> {
+    try {
       const today = new Date();
-      today.setHours(0,0,0,0);
-      const thisWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+      today.setHours(0, 0, 0, 0);
+      const thisWeek = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() - today.getDay(),
+      );
       const thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
       const thisYear = new Date(today.getFullYear(), 0, 1);
 
-      const orderStat = await OrderModel.aggregate(
-        [
-            {
-                $group : {
-                    _id : '$orderStatus',
-                    todayTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', today ] }, '$totalCost', 0 ] } },
-                    weekTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisWeek ] }, '$totalCost', 0 ] } },
-                    monthTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisMonth ] }, '$totalCost', 0 ] } },
-                    yearTotal: { $sum: {$cond: [ { $gte: [ '$orderedDate', thisYear ] }, '$totalCost', 0 ] } },
-                    allTimeTotal: { $sum: '$totalCost' }
-                }
-            }
-        ]
-      ).exec()
+      const orderStat = await OrderModel.aggregate([
+        {
+          $group: {
+            _id: '$orderStatus',
+            todayTotal: {
+              $sum: {
+                $cond: [{ $gte: ['$orderedDate', today] }, '$totalCost', 0],
+              },
+            },
+            weekTotal: {
+              $sum: {
+                $cond: [{ $gte: ['$orderedDate', thisWeek] }, '$totalCost', 0],
+              },
+            },
+            monthTotal: {
+              $sum: {
+                $cond: [{ $gte: ['$orderedDate', thisMonth] }, '$totalCost', 0],
+              },
+            },
+            yearTotal: {
+              $sum: {
+                $cond: [{ $gte: ['$orderedDate', thisYear] }, '$totalCost', 0],
+              },
+            },
+            allTimeTotal: { $sum: '$totalCost' },
+          },
+        },
+      ]).exec();
 
-      if(orderStat){
+      if (orderStat) {
         return orderStat[0] as OrderStatEntity;
       }
-    }catch(err){
-      console.log(err)
-      return null
+    } catch (err) {
+      console.log(err);
+      return null;
     }
   }
 
-  async getIncompleteStatistics(): Promise<OrderIncompleteStatEntity>{
-
-    try { 
-      const orderStat = await OrderModel.aggregate(
-        [
-            {
-                $group : {
-                    _id : null,
-                    orderPendingTotal: { $sum: {$cond: [ { $eq: [ '$orderStatus', OrderStatusEnum.Pending ] }, '$totalCost', 0 ] } },
-                    orderPendingCount: { $sum: {$cond: [ { $eq: [ '$orderStatus', OrderStatusEnum.Pending ] }, 1, 0 ] } },
-                    paymentPendingTotal: { $sum: {$cond: [ { $eq: [ '$paymentStatus', OrderStatusEnum.Pending ] }, '$totalCost', 0 ] } },
-                    paymentPendingCount: { $sum: {$cond: [ { $eq: [ '$paymentStatus', OrderStatusEnum.Pending ] }, 1, 0 ] } },
-                    shippingPendingTotal: { $sum: {$cond: [ { $eq: [ '$shippingStatus', ShippingStatusEnum.NotYetShipped ] }, '$totalCost', 0 ] } },
-                    shippingPendingCount: { $sum: {$cond: [ { $eq: [ '$shippingStatus', ShippingStatusEnum.NotYetShipped ] }, 1, 0 ] } }
-                }
-            }
-        ]
-      ).exec() 
-      if(orderStat){
+  async getIncompleteStatistics(): Promise<OrderIncompleteStatEntity> {
+    try {
+      const orderStat = await OrderModel.aggregate([
+        {
+          $group: {
+            _id: null,
+            orderPendingTotal: {
+              $sum: {
+                $cond: [
+                  { $eq: ['$orderStatus', OrderStatusEnum.Pending] },
+                  '$totalCost',
+                  0,
+                ],
+              },
+            },
+            orderPendingCount: {
+              $sum: {
+                $cond: [
+                  { $eq: ['$orderStatus', OrderStatusEnum.Pending] },
+                  1,
+                  0,
+                ],
+              },
+            },
+            paymentPendingTotal: {
+              $sum: {
+                $cond: [
+                  { $eq: ['$paymentStatus', OrderStatusEnum.Pending] },
+                  '$totalCost',
+                  0,
+                ],
+              },
+            },
+            paymentPendingCount: {
+              $sum: {
+                $cond: [
+                  { $eq: ['$paymentStatus', OrderStatusEnum.Pending] },
+                  1,
+                  0,
+                ],
+              },
+            },
+            shippingPendingTotal: {
+              $sum: {
+                $cond: [
+                  {
+                    $eq: ['$shippingStatus', ShippingStatusEnum.NotYetShipped],
+                  },
+                  '$totalCost',
+                  0,
+                ],
+              },
+            },
+            shippingPendingCount: {
+              $sum: {
+                $cond: [
+                  {
+                    $eq: ['$shippingStatus', ShippingStatusEnum.NotYetShipped],
+                  },
+                  1,
+                  0,
+                ],
+              },
+            },
+          },
+        },
+      ]).exec();
+      if (orderStat) {
         return orderStat[0] as OrderIncompleteStatEntity;
       }
     } catch (error) {
-        console.log(error)
-        return null
+      console.log(error);
+      return null;
     }
   }
 
-  async changeStatus(body: ChangeStatusEntity):Promise<OrderEntity>{
+  async changeStatus(body: ChangeStatusEntity): Promise<OrderEntity> {
     try {
-      const {orderId, statusType, statusValue} = body
-      let update = {}
-      if(statusType === StatusTypeDto.orderStatusEnums){
-        update = {orderStatus: statusValue}
-      }else if(statusType === StatusTypeDto.paymentStatusEnums){
-        update = {paymentStatus: statusValue}
-      }else if(statusType === StatusTypeDto.shippingStatusEnums){
-        update = {shippingStatus: statusValue}
+      const { orderId, statusType, statusValue } = body;
+      let update = {};
+      if (statusType === StatusTypeDto.orderStatusEnums) {
+        update = { orderStatus: statusValue };
+      } else if (statusType === StatusTypeDto.paymentStatusEnums) {
+        update = { paymentStatus: statusValue };
+      } else if (statusType === StatusTypeDto.shippingStatusEnums) {
+        update = { shippingStatus: statusValue };
       }
 
-      return await OrderModel.findOneAndUpdate({orderId},{$set: update},{new: true}).lean()
-       
+      return await OrderModel.findOneAndUpdate(
+        { orderId },
+        { $set: update },
+        { new: true },
+      ).lean();
     } catch (error) {
-      console.log(error)
-      return null
-    } 
+      console.log(error);
+      return null;
+    }
   }
 
-  async getOrderList(query?: GetAllOrderQueryEntity, skip?: number, limit?: number): Promise<OrderEntity[]>{
-    let { shippingStatus, orderStatus, paymentStatus, startDate, endDate} = query;
+  async getOrderList(
+    query?: GetAllOrderQueryEntity,
+    skip?: number,
+    limit?: number,
+  ): Promise<OrderEntity[]> {
+    const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
+      query;
 
-    let queryParams = {
+    const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
       ...(paymentStatus && { paymentStatus }),
+    };
+
+    if (startDate || endDate) {
+      queryParams['orderedDate'] = {
+        ...(startDate && { $gte: new Date(startDate) }),
+        ...(endDate && { $lte: new Date(endDate) }),
+      };
     }
-    
-    if(startDate || endDate) {
-        queryParams['orderedDate'] = {
-            ...(startDate && {$gte: new Date(startDate)}),
-            ...(endDate && {$lte: new Date(endDate)})
-        }
-    }
-      return await OrderModel.find(queryParams).skip(skip).limit(limit).lean();
+    return await OrderModel.find(queryParams).skip(skip).limit(limit).lean();
   }
-
 }
-
-

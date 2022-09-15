@@ -14,7 +14,7 @@ import { UserService } from './services';
     {
       provide: IUserDatabase,
       useClass: ResolveDatabaseDependency('USER'),
-    }
+    },
   ],
 })
-export class UserModule { }
+export class UserModule {}

@@ -4,29 +4,41 @@ import { IManufacturerDatabase } from './manufacturer.database.interface';
 
 @Injectable()
 export class ManufacturerRepository {
-    constructor(private readonly db: IManufacturerDatabase) { }
+  constructor(private readonly db: IManufacturerDatabase) {}
 
-    async createManufacturer(manufacturer: Manufacturer): Promise<Manufacturer | null> {
-        return await this.db.createManufacturer(manufacturer);
-    }
+  async createManufacturer(
+    manufacturer: Manufacturer,
+  ): Promise<Manufacturer | null> {
+    return await this.db.createManufacturer(manufacturer);
+  }
 
-    async getManufacturer(query: Record<string,string>): Promise<Manufacturer | null> {
-        return await this.db.getManufacturer(query);
-    }
+  async getManufacturer(
+    query: Record<string, string>,
+  ): Promise<Manufacturer | null> {
+    return await this.db.getManufacturer(query);
+  }
 
-    async getAllManufacturers(skip?: number, limit?: number): Promise<Manufacturer[]> {
-        return await this.db.getAllManufacturers(skip, limit);
-    }
+  async getAllManufacturers(
+    skip?: number,
+    limit?: number,
+  ): Promise<Manufacturer[]> {
+    return await this.db.getAllManufacturers(skip, limit);
+  }
 
-    async getManufacturersCount(searchQuery?: string): Promise<Number | null> {
-        return await this.db.findManufacturersCount(searchQuery);
-    }
+  async getManufacturersCount(searchQuery?: string): Promise<number | null> {
+    return await this.db.findManufacturersCount(searchQuery);
+  }
 
-    async updateManufacturer(manufacturerId: string, manufacturer: Manufacturer): Promise<Manufacturer | null> {
-        return await this.db.updateManufacturer(manufacturerId, manufacturer);
-    }
+  async updateManufacturer(
+    manufacturerId: string,
+    manufacturer: Manufacturer,
+  ): Promise<Manufacturer | null> {
+    return await this.db.updateManufacturer(manufacturerId, manufacturer);
+  }
 
-    async deleteManufacturer(manufacturerId: string): Promise<Manufacturer | null> {
-        return await this.db.deleteManufacturer(manufacturerId);
-    }
+  async deleteManufacturer(
+    manufacturerId: string,
+  ): Promise<Manufacturer | null> {
+    return await this.db.deleteManufacturer(manufacturerId);
+  }
 }

@@ -1,5 +1,14 @@
 import { randomUUID } from 'crypto';
-import { Column, Model, Table, Unique, Default,HasMany, Index, PrimaryKey } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  Unique,
+  Default,
+  HasMany,
+  Index,
+  PrimaryKey,
+} from 'sequelize-typescript';
 import { User } from 'src/entity/user';
 import AddressModel from './address.model';
 
@@ -50,7 +59,7 @@ export default class UserModel extends Model<User> {
   gender: string;
 
   @HasMany(() => AddressModel)
-  addresses: AddressModel[]
+  addresses: AddressModel[];
 
   @Column
   status: string;

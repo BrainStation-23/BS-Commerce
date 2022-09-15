@@ -1,104 +1,113 @@
 import { model, Schema } from 'mongoose';
-import { Product } from 'models';
+import { Product } from '@bs-commerce/models';
 
-const ProductSchema = new Schema<Product>({
+const ProductSchema = new Schema<Product>(
+  {
     id: {
-        type: String,
-        unique: true,
+      type: String,
+      unique: true,
     },
     info: {
-        name: String,
-        shortDescription: String,
-        fullDescription: String,
-        sku: String,
-        price: Number,
-        oldPrice: Number,
-        cost: Number,
-        showOnHomePage: {
-            type: Boolean,
-            default: false
-        },
-        includeInTopMenu: {
-            type: Boolean,
-            default: false
-        },
-        allowToSelectPageSize: {
-            type: Boolean,
-            default: false
-        },
-        published: {
-            type: Boolean,
-            default: false
-        },
-        displayOrder: {
-            type: Number,
-            default: 1
-        },
-        isFeatured: {
-            type: Boolean,
-            default: false
-        },
-        publishDate: {
-            type: Date,
-            default: new Date()
-        }
+      name: String,
+      shortDescription: String,
+      fullDescription: String,
+      sku: String,
+      price: Number,
+      oldPrice: Number,
+      cost: Number,
+      showOnHomePage: {
+        type: Boolean,
+        default: false,
+      },
+      includeInTopMenu: {
+        type: Boolean,
+        default: false,
+      },
+      allowToSelectPageSize: {
+        type: Boolean,
+        default: false,
+      },
+      published: {
+        type: Boolean,
+        default: false,
+      },
+      displayOrder: {
+        type: Number,
+        default: 1,
+      },
+      isFeatured: {
+        type: Boolean,
+        default: false,
+      },
+      publishDate: {
+        type: Date,
+        default: new Date(),
+      },
     },
     meta: {
-        keywords: {
-            type: [String],
-            default: []
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        description: {
-            type: String,
-            default: ''
-        },
-        friendlyPageName: String
+      keywords: {
+        type: [String],
+        default: [],
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      description: {
+        type: String,
+        default: '',
+      },
+      friendlyPageName: String,
     },
     tags: [String],
-    photos: [{
+    photos: [
+      {
         url: String,
         id: {
-            type: String,
-            index: true,
-
+          type: String,
+          index: true,
         },
         title: {
-            type: String,
-            default: ''
+          type: String,
+          default: '',
         },
         alt: {
-            type: String,
-            default: ''
+          type: String,
+          default: '',
         },
         displayOrder: {
-            type: Number,
-            default: 1
+          type: Number,
+          default: 1,
         },
-        _id: false
-    }],
+        _id: false,
+      },
+    ],
     brands: [String],
     manufacturer: {
-        id: String,
-        name: String,
+      id: String,
+      name: String,
     },
-    categories: [{
+    categories: [
+      {
         id: String,
         name: String,
-        _id: false
-    }]
-}, {
+        _id: false,
+      },
+    ],
+  },
+  {
     timestamps: true,
-    versionKey: false
-});
+    versionKey: false,
+  }
+);
 
-ProductSchema.index({
+ProductSchema.index(
+  {
     'info.name': 'text',
-    'info.fullDescription': 'text'
-}, { name: 'search' });
+    'info.fullDescription': 'text',
+  },
+  { name: 'search' }
+);
 
 const ProductModel = model<Product>('product', ProductSchema);
 

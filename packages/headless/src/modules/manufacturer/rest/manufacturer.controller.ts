@@ -13,14 +13,7 @@ import {
 } from './dto/createManufacturer.dto';
 import { CreateManufacturerDto } from './dto/createManufacturer.dto';
 import { ManufacturerService } from './../services/manufacturer.service';
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -29,9 +22,7 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Query,
-  Req,
   Res,
   UseGuards,
   HttpStatus,

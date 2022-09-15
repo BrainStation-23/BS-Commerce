@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Tag } from 'src/entity/tags';
 import { ITagsDatabase } from 'src/modules/tags/repositories/tags.database.interface';
 import { TagsModel } from './tags.model';
+import { Tag, UpdateTagRequest } from 'src/entity/tags';
 
 @Injectable()
 export class TagsDatabase implements ITagsDatabase {
-  async getTags(query: Record<string, any>): Promise<Tag[]> {
+  async getTags(query: Record<string, any>): Promise<Tag[] | []> {
     return await TagsModel.find(query).select('-_id').lean();
   }
 
@@ -16,5 +16,18 @@ export class TagsDatabase implements ITagsDatabase {
   async createTag(data: Tag): Promise<Tag | null> {
     const tag = await TagsModel.create(data);
     return tag?.toObject();
+  }
+
+  async updateTag(
+    query: Record<string, any>,
+    data: UpdateTagRequest,
+  ): Promise<Tag | null> {
+    return await TagsModel.findOneAndUpdate(
+      query,
+      { $set: data },
+      { new: true },
+    )
+      .select('-_id')
+      .lean();
   }
 }

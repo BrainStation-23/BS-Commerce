@@ -3,40 +3,49 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 import { WishlistDto } from './wishlist.dto';
 import {
-    updateWishlistItemErrorResponse,
-    updateWishlistItemRequestBody,
-    updateWishlistItemSuccessResponse,
-    updateWishlistItemErrorMessage
-} from 'models';
+  updateWishlistItemErrorResponse,
+  updateWishlistItemRequestBody,
+  updateWishlistItemSuccessResponse,
+  updateWishlistItemErrorMessage,
+} from '@bs-commerce/models';
 
-export class updateWishlistItemRequestBodyDto implements updateWishlistItemRequestBody {
-    @ApiProperty({ example: '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e' })
-    @IsString()
-    productId: string;
+export class updateWishlistItemRequestBodyDto
+  implements updateWishlistItemRequestBody
+{
+  @ApiProperty({ example: '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e' })
+  @IsString()
+  productId: string;
 
-    @ApiProperty({ type: () => Number })
-    @IsNumber()
-    quantity: number;
+  @ApiProperty({ type: () => Number })
+  @IsNumber()
+  quantity: number;
 }
 
-export class updateWishlistItemSuccessResponseDto implements updateWishlistItemSuccessResponse {
-    @ApiProperty({ default: HttpStatus.OK })
-    code: number;
+export class updateWishlistItemSuccessResponseDto
+  implements updateWishlistItemSuccessResponse
+{
+  @ApiProperty({ default: HttpStatus.OK })
+  code: number;
 
-    @ApiProperty({ type: WishlistDto })
-    data: WishlistDto;
+  @ApiProperty({ type: WishlistDto })
+  data: WishlistDto;
 }
 
-export class updateWishlistItemErrorResponseDto implements updateWishlistItemErrorResponse {
-    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
-    code: number;
+export class updateWishlistItemErrorResponseDto
+  implements updateWishlistItemErrorResponse
+{
+  @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+  code: number;
 
-    @ApiProperty({
-        example: updateWishlistItemErrorMessage.CAN_NOT_UPDATE_WISHLIST_ITEM,
-        examples: [updateWishlistItemErrorMessage.CAN_NOT_DELETE_WISHLIST_ITEM, updateWishlistItemErrorMessage.CAN_NOT_UPDATE_WISHLIST_ITEM],
-    })
-    error: updateWishlistItemErrorMessage;
+  @ApiProperty({
+    example: updateWishlistItemErrorMessage.CAN_NOT_UPDATE_WISHLIST_ITEM,
+    examples: [
+      updateWishlistItemErrorMessage.CAN_NOT_DELETE_WISHLIST_ITEM,
+      updateWishlistItemErrorMessage.CAN_NOT_UPDATE_WISHLIST_ITEM,
+    ],
+  })
+  error: updateWishlistItemErrorMessage;
 
-    @ApiProperty()
-    errors: string[];
+  @ApiProperty()
+  errors: string[];
 }

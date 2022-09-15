@@ -1,15 +1,15 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
-import { Manufacturer } from 'models';
+import { Manufacturer } from '@bs-commerce/models';
 
 @ObjectType({ description: 'Manufacturer SEO data type' })
 class ManufacturerSEO {
   @Field()
   metaKeyword: string;
-  
+
   @Field()
   metaDescription: string;
-  
+
   @Field()
   metaTitle: string;
 
@@ -17,7 +17,9 @@ class ManufacturerSEO {
   SEFN: string;
 }
 
-@ObjectType({ description: 'Manufacturer data type following Manufacturer model' })
+@ObjectType({
+  description: 'Manufacturer data type following Manufacturer model',
+})
 export class ManufacturerSchemaGql implements Manufacturer {
   @Field()
   id: string;
@@ -31,22 +33,22 @@ export class ManufacturerSchemaGql implements Manufacturer {
   @Field()
   picture: string;
 
-  @Field((type) => Boolean)
+  @Field(() => Boolean)
   isPublished: boolean;
 
-  @Field((type) => Int)
+  @Field(() => Int)
   displayOrder: number;
 
-  @Field((type) => ManufacturerSEO)
+  @Field(() => ManufacturerSEO)
   seo: ManufacturerSEO;
 }
 
 @InputType()
 export class ManufacturersQuery {
-  @Field(type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number;
 
-  @Field(type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   limit?: number;
 }
 
@@ -77,19 +79,19 @@ export class ManufacturerInput {
   @Field({ nullable: true })
   picture?: string;
 
-  @Field(type => Boolean, { nullable: true })
+  @Field(() => Boolean, { nullable: true })
   isPublished?: boolean;
 
-  @Field(type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   displayOrder?: number;
 
-  @Field((type) => ManufacturerSEOInput, { nullable: true })
+  @Field(() => ManufacturerSEOInput, { nullable: true })
   seo?: ManufacturerSEOInput;
 }
 
 @ObjectType()
 class ManufacturerWithMessage {
-  @Field((type) => ManufacturerSchemaGql)
+  @Field(() => ManufacturerSchemaGql)
   manufacturer: ManufacturerSchemaGql;
 
   @Field()
@@ -104,13 +106,13 @@ export class ManufacturerResponse {
   @Field(() => Int)
   code: number;
 
-  @Field((type) => ManufacturerWithMessage, { nullable: true })
+  @Field(() => ManufacturerWithMessage, { nullable: true })
   data?: ManufacturerWithMessage;
 }
 
 @ObjectType()
 class ManufacturerArrayResponse {
-  @Field(type => [ManufacturerSchemaGql], { nullable: 'items' })
+  @Field(() => [ManufacturerSchemaGql], { nullable: 'items' })
   manufacturers: [ManufacturerSchemaGql];
 
   @Field(() => Int)
@@ -125,9 +127,9 @@ export class AllManufacturersResponse {
   @Field({ nullable: true })
   error?: string;
 
-  @Field(type => Int)
+  @Field(() => Int)
   code: number;
 
-  @Field(type => ManufacturerArrayResponse, { nullable: true })
+  @Field(() => ManufacturerArrayResponse, { nullable: true })
   data?: ManufacturerArrayResponse;
 }

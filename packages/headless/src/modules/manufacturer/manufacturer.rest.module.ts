@@ -8,12 +8,12 @@ import { ManufacturerController } from './rest/manufacturer.controller';
 @Module({
   controllers: [ManufacturerController],
   providers: [
-    ManufacturerService, 
-    ManufacturerRepository, 
-    { 
-      provide: IManufacturerDatabase, 
-      useClass: ResolveDatabaseDependency('MANUFACTURER')
-    }
-  ]
+    ManufacturerService,
+    ManufacturerRepository,
+    {
+      provide: IManufacturerDatabase,
+      useClass: ResolveDatabaseDependency('MANUFACTURER'),
+    },
+  ],
 })
-export class ManufacturerModule { }
+export class ManufacturerModule {}

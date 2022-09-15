@@ -3,21 +3,20 @@ import { connect as connectToMySql } from './mysql/connect';
 export type DB = 'MONGO' | 'MYSQL';
 
 export async function connectToDatabase(db: DB) {
-    try {
-        switch (db) {
+  try {
+    switch (db) {
+      case 'MONGO':
+        await connectToMongoDB();
+        break;
 
-            case 'MONGO':
-                await connectToMongoDB();
-                break;
+      case 'MYSQL':
+        await connectToMySql();
+        break;
 
-            case 'MYSQL':
-                await connectToMySql();
-                break;
-
-            default:
-                throw new Error('No database found to connect');
-        }
-    } catch (err) {
-        console.error('Error connecting to database');
+      default:
+        throw new Error('No database found to connect');
     }
+  } catch (err) {
+    console.error('Error connecting to database');
+  }
 }

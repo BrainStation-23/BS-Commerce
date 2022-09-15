@@ -1,0 +1,20 @@
+{
+    "registeredCustomerReport": [
+        {
+            "period": "In the last 7 days",
+            "data": 0
+        },
+        {
+            "period": "In the last 14 days",
+            "data": 0
+        },
+        {
+            "period": "In the last month",
+            "data": 0
+        },
+        {
+            "period": "In the last year",
+            "data": 0
+        }
+    ]
+}

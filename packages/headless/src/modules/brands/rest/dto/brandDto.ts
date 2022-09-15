@@ -1,23 +1,24 @@
-import { IsNotEmpty, IsNotEmptyObject, IsObject, IsString } from 'class-validator';
+import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models';
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 
-export class BrandDto implements Brand{
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    id: string;
+export class BrandDto implements Brand {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  id: string;
 
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsObject()
-    info: InfoDto;
+  @ApiProperty({ type: InfoDto })
+  @IsNotEmpty()
+  @CustomValidator(InfoDto)
+  @IsObject()
+  info: InfoDto;
 
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsObject()
-    meta: MetaDto;
-
+  @ApiProperty({ type: MetaDto })
+  @CustomValidator(MetaDto)
+  @IsObject()
+  meta: MetaDto;
 }

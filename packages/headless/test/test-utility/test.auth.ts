@@ -20,33 +20,46 @@ export interface JwtTokenRes {
   token: string;
 }
 
-const CreatePayloadForUserToken = (id: string, username: string, role: string): JwtPayload => {
+const CreatePayloadForUserToken = (
+  id: string,
+  username: string,
+  role: string,
+): JwtPayload => {
   return {
     id,
     username,
     logInTime: Date.now(),
-    role
+    role,
   };
 };
 
-const CreatePayloadForCustomerToken = (id: string, role: string, email?: string, phone?: string): CustomerJwtPayload => {
+const CreatePayloadForCustomerToken = (
+  id: string,
+  role: string,
+  email?: string,
+  phone?: string,
+): CustomerJwtPayload => {
   return {
     id,
     email,
     phone,
     logInTime: Date.now(),
-    role
+    role,
   };
 };
 
-export const GetDemoUserToken = (id: string, username: string, role: string): JwtTokenRes => {
+export const GetDemoUserToken = (
+  id: string,
+  username: string,
+  role: string,
+): JwtTokenRes => {
   if (!id.trim() || !username.trim()) {
     throw new Error('Invalid userId or username found in token generation');
   }
   const jwtService = new JwtService({
-    secret: authConfig.jwt_key!,
+    secret: authConfig.jwt_key,
     signOptions: {
-      expiresIn: authConfig.expiration_time!,
+      expiresIn: authConfig.expiration_time,
     },
   });
   const payload = CreatePayloadForUserToken(id, username, role);
@@ -54,14 +67,19 @@ export const GetDemoUserToken = (id: string, username: string, role: string): Jw
   return { token };
 };
 
-export const GetDemoCustomerToken = (id: string, role: string, email?: string, phone?: string): JwtTokenRes => {
+export const GetDemoCustomerToken = (
+  id: string,
+  role: string,
+  email?: string,
+  phone?: string,
+): JwtTokenRes => {
   if (!id.trim()) {
     throw new Error('Invalid customerId found in token generation');
   }
   const jwtService = new JwtService({
-    secret: authConfig.jwt_key!,
+    secret: authConfig.jwt_key,
     signOptions: {
-      expiresIn: authConfig.expiration_time!,
+      expiresIn: authConfig.expiration_time,
     },
   });
   const payload = CreatePayloadForCustomerToken(id, role, email, phone);
