@@ -12,6 +12,7 @@ import { WishListModule } from 'src/modules/wishlist/wishlist.graphql.module';
 import { TagsModule } from 'src/modules/tags/tags.graphql.module';
 import { CustomerModule } from 'src/modules/customer/customer.graphql.module';
 import { OrderModule } from 'src/modules/order/order.graphql.module';
+import { CompareModule } from 'src/modules/compare/compare.graphql.module';
 
 export const ResolveGraphqlModule = () => {
   return [
