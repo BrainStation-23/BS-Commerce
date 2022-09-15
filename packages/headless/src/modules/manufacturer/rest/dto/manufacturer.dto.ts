@@ -15,6 +15,11 @@ import type { Manufacturer } from '@bs-commerce/models';
 export class ManufacturerDto implements Manufacturer {
   @ApiProperty()
   @IsString()
+  @IsOptional()
+  id?: string;
+
+  @ApiProperty()
+  @IsString()
   @IsNotEmpty()
   @MinLength(3)
   name: string;
