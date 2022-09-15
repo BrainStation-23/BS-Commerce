@@ -27,7 +27,11 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
     skip?: number,
     limit?: number,
   ): Promise<Manufacturer[] | null> {
-    return await ManufacturerModel.find({}).skip(skip).limit(limit).lean();
+    return await ManufacturerModel.find({})
+      .select('-_id')
+      .skip(skip)
+      .limit(limit)
+      .lean();
   }
 
   /**
@@ -37,7 +41,10 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
    * @returns {Promise<Number>} number | null
    */
   async findManufacturersCount(searchQuery?: string): Promise<number | null> {
-    return await ManufacturerModel.find({ searchQuery }).count().lean();
+    return await ManufacturerModel.find({ searchQuery })
+      .select('-_id')
+      .count()
+      .lean();
   }
 
   /**
@@ -49,7 +56,7 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
   async getManufacturer(
     query: Record<string, string>,
   ): Promise<Manufacturer | null> {
-    return await ManufacturerModel.findOne(query).lean();
+    return await ManufacturerModel.findOne(query).select('-_id').lean();
   }
 
   /**
@@ -68,6 +75,7 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
       { $set: manufacturer },
       { new: true },
     )
+      .select('-_id')
       .lean()
       .exec();
   }
@@ -83,6 +91,8 @@ export class ManufacturerDatabase implements IManufacturerDatabase {
   ): Promise<Manufacturer | null> {
     return await ManufacturerModel.findOneAndRemove({
       id: manufacturerId,
-    }).lean();
+    })
+      .select('-_id')
+      .lean();
   }
 }
