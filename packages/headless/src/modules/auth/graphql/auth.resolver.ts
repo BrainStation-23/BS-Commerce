@@ -4,13 +4,13 @@ import {
   AdminSignUpResponse,
   AdminSignInInput,
   AdminSignInResponse,
-  AdminSignUpInput
+  AdminSignUpInput,
 } from './auth.model';
 import { Helper } from 'src/helper/helper.interface';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private authService: AuthService, private helper: Helper) { }
+  constructor(private authService: AuthService, private helper: Helper) {}
 
   @Mutation(() => AdminSignUpResponse)
   async signUp(@Args('admin') admin: AdminSignUpInput) {

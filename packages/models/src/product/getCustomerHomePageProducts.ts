@@ -1,4 +1,3 @@
-
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 import { CustomerProduct } from './customerProduct';
 
@@ -8,19 +7,23 @@ import { CustomerProduct } from './customerProduct';
  * response: GetCustomerAllHomePageProductsResponse
  */
 
-export interface GetCustomerAllHomePageProductsSuccessResponse extends SuccessResponse {
-    code: number;
-    data: CustomerProduct[];
+export interface GetCustomerAllHomePageProductsSuccessResponse
+  extends SuccessResponse {
+  code: number;
+  data: CustomerProduct[];
 }
 
 export const enum GetCustomerAllHomePageProductsErrorMessages {
-    NO_PRODUCTS_FOUND = 'NO_PRODUCTS_FOUND',
+  NO_PRODUCTS_FOUND = 'NO_PRODUCTS_FOUND',
 }
 
-export interface GetCustomerAllHomePageProductsErrorResponse extends ErrorResponse {
-    code?: number;
-    error: GetCustomerAllHomePageProductsErrorMessages;
-    errors: DescriptiveError;
+export interface GetCustomerAllHomePageProductsErrorResponse
+  extends ErrorResponse {
+  code?: number;
+  error: GetCustomerAllHomePageProductsErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type GetCustomerAllHomePageProductsResponse = GetCustomerAllHomePageProductsSuccessResponse | GetCustomerAllHomePageProductsErrorResponse;
+export type GetCustomerAllHomePageProductsResponse =
+  | GetCustomerAllHomePageProductsSuccessResponse
+  | GetCustomerAllHomePageProductsErrorResponse;

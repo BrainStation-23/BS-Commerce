@@ -3,38 +3,41 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { User } from 'src/entity/user';
-import { CartResponse, deleteCartItemRequestSchema, deleteCartRequestSchema, DeleteCartResponse, ItemInput, updateCartItemRequestSchema } from './cart.model';
+import {
+  CartResponse,
+  deleteCartItemRequestSchema,
+  deleteCartRequestSchema,
+  DeleteCartResponse,
+  ItemInput,
+  updateCartItemRequestSchema,
+} from './cart.model';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { Helper } from 'src/helper/helper.interface';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()
 export class CartResolver {
-  constructor(private cartService: CartService, private helper: Helper) { }
+  constructor(private cartService: CartService, private helper: Helper) {}
 
-  @Query(returns => CartResponse, { nullable: true })
+  @Query(() => CartResponse, { nullable: true })
   async getCart(@UserInfo() user: User) {
     const res = await this.cartService.getCart(user.id);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation(returns => CartResponse, { nullable: true })
-  async addToCart(
-    @Args('item') item: ItemInput,
-    @UserInfo() user: User,
-  ) {
-    const res =  await this.cartService.addToCart(item, user.id);
+  @Mutation(() => CartResponse, { nullable: true })
+  async addToCart(@Args('item') item: ItemInput, @UserInfo() user: User) {
+    const res = await this.cartService.addToCart(item, user.id);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-
-  @Mutation(type => DeleteCartResponse, { nullable: true })
+  @Mutation(() => DeleteCartResponse, { nullable: true })
   async deleteCart(@Args('data') data: deleteCartRequestSchema) {
-    const res =  await this.cartService.deleteCart(data.cartId);
+    const res = await this.cartService.deleteCart(data.cartId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation(returns => CartResponse, { nullable: true })
+  @Mutation(() => CartResponse, { nullable: true })
   async updateCartItem(
     @UserInfo() user: User,
     @Args('item') item: updateCartItemRequestSchema,
@@ -43,7 +46,7 @@ export class CartResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation(returns => CartResponse, { nullable: true })
+  @Mutation(() => CartResponse, { nullable: true })
   async deleteCartItem(
     @UserInfo() user: User,
     @Args('data') data: deleteCartItemRequestSchema,
@@ -52,7 +55,7 @@ export class CartResolver {
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
-  @Mutation(returns => CartResponse, { nullable: true })
+  @Mutation(() => CartResponse, { nullable: true })
   async deleteAllCartItems(@UserInfo() user: User) {
     const res = await this.cartService.deleteAllCartItems(user.id);
     return this.helper.serviceResponse.graphqlResponse(res);

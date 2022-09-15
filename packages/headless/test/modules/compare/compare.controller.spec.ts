@@ -1,7 +1,7 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { AddToCompareDto } from 'src/modules/compare/dto/compare.dto';
+import { AddToCompareDto } from 'src/modules/compare/rest/dto/compare.dto';
 import { CompareController } from 'src/modules/compare/rest';
 import * as request from 'supertest';
 import {
@@ -15,7 +15,11 @@ import {
   insertProducts,
 } from '../../test-utility';
 
-const token = GetDemoCustomerToken(TestCustomerId, 'customer', TestCustomerEmail).token;
+const token = GetDemoCustomerToken(
+  TestCustomerId,
+  'customer',
+  TestCustomerEmail,
+).token;
 const timeout = TestTimeout;
 const productId = TestProductId;
 const compareDto: AddToCompareDto = { productId };
@@ -26,7 +30,6 @@ const mockController = {
 
 describe('Initializing... Compare controller testing', () => {
   let app: INestApplication;
-  let controller: CompareController;
   let compareId: string;
   beforeAll(async () => {
     await connectTestDatabase();
@@ -37,7 +40,7 @@ describe('Initializing... Compare controller testing', () => {
       providers: [{ provide: CompareController, useValue: mockController }],
     }).compile();
 
-    controller = module.get<CompareController>(CompareController);
+    module.get<CompareController>(CompareController);
     app = module.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
@@ -48,86 +51,120 @@ describe('Initializing... Compare controller testing', () => {
   });
 
   describe('GET /compare - without token', () => {
-    it('should return 401', async () => {
-      return await request(app.getHttpServer())
-        .get('/compare')
-        .expect(401);
-    }, timeout);
+    it(
+      'should return 401',
+      async () => {
+        return await request(app.getHttpServer()).get('/compare').expect(401);
+      },
+      timeout,
+    );
   });
 
   describe('GET /compare with wrong token', () => {
-    it('should return 401', async () => {
-      return await request(app.getHttpServer())
-        .get('/compare')
-        .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
-        .expect(401);
-    }, timeout);
+    it(
+      'should return 401',
+      async () => {
+        return await request(app.getHttpServer())
+          .get('/compare')
+          .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
+          .expect(401);
+      },
+      timeout,
+    );
   });
 
   describe('POST /compare [passing invalid req body]', () => {
-    it('should not save and return error', async () => {
-      return await request(app.getHttpServer())
-        .post('/compare')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ product: '1dca45d8-b6d1-4767-9edb-6c9578913ca3' })
-        .expect(400);
-    }, timeout);
+    it(
+      'should not save and return error',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/compare')
+          .set('Authorization', `Bearer ${token}`)
+          .send({ product: '1dca45d8-b6d1-4767-9edb-6c9578913ca3' })
+          .expect(400);
+      },
+      timeout,
+    );
   });
 
   describe('POST /compare [passing valid data]', () => {
-    it('should save and return compare object', async () => {
-      return await request(app.getHttpServer())
-        .post('/compare')
-        .send(compareDto)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-    }, timeout);
+    it(
+      'should save and return compare object',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/compare')
+          .send(compareDto)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+      },
+      timeout,
+    );
   });
 
   describe('GET /compare [by user id]', () => {
-    it('should return compare object', async () => {
-      const getResult = await request(app.getHttpServer())
-        .get('/compare')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-      compareId = getResult.body.data.id;
-    }, timeout);
+    it(
+      'should return compare object',
+      async () => {
+        const getResult = await request(app.getHttpServer())
+          .get('/compare')
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+        compareId = getResult.body.data.id;
+      },
+      timeout,
+    );
   });
 
   describe(`GET /compare/${compareId} [by compare id]`, () => {
-    it('should return compare object', async () => {
-      const getResult = await request(app.getHttpServer())
-        .get(`/compare/${compareId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-      compareId = getResult.body.data.id;
-    }, timeout);
+    it(
+      'should return compare object',
+      async () => {
+        const getResult = await request(app.getHttpServer())
+          .get(`/compare/${compareId}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+        compareId = getResult.body.data.id;
+      },
+      timeout,
+    );
   });
 
   describe(`DELETE /compare/item?productId=${productId}`, () => {
-    it('should delete compare item', async () => {
-      return await request(app.getHttpServer())
-        .delete(`/compare/item?productId=${productId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-    }, timeout);
+    it(
+      'should delete compare item',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete(`/compare/item?productId=${productId}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+      },
+      timeout,
+    );
   });
 
   describe('DELETE /compare/allitems ', () => {
-    it('should delete compare item', async () => {
-      return await request(app.getHttpServer())
-        .delete('/compare/allitems')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-    }, timeout);
+    it(
+      'should delete compare item',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete('/compare/allitems')
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+      },
+      timeout,
+    );
   });
 
   describe(`DELETE /compare?compareId=${compareId}`, () => {
-    it('should delete compare item', async () => {
-      return await request(app.getHttpServer())
-        .delete(`/compare?compareId=${compareId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-    }, timeout);
+    it(
+      'should delete compare item',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete(`/compare?compareId=${compareId}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+      },
+      timeout,
+    );
   });
 });

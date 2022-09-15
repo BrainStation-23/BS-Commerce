@@ -11,6 +11,7 @@ import { dbConfig } from 'config/database';
 import { coreConfig } from 'config/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   await connectToDatabase(dbConfig.db as DB);
@@ -21,11 +22,14 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix(coreConfig.restApiPrefix);
   app.enableCors({
-    allowedHeaders: "*",
-    origin: "*"
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
   });
-  coreConfig.api === 'GRAPHQL' && app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
+  coreConfig.api === 'GRAPHQL' &&
+    app.use(graphqlUploadExpress({ maxFileSize: multerConfig.maxFileSize }));
   app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser());
   coreConfig.api === 'REST' && SwaggerConfig(app);
   await app.listen(coreConfig.port);
   console.log(`http://${coreConfig.host}:${coreConfig.port}`);

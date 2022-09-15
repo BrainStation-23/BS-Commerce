@@ -1,5 +1,5 @@
-export interface IReOrderQuery{
-    orderId: string;
-    overWriteCart?: boolean;
-    ignoreInvalidItems?: boolean;
+export interface IReOrderQuery {
+  orderId: string;
+  overWriteCart?: boolean;
+  ignoreInvalidItems?: boolean;
 }

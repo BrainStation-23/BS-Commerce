@@ -26,9 +26,9 @@ export class OrderStatusEnumType {
 }
 
 export enum StatusTypeDto {
-  orderStatusEnums ='orderStatusEnums',
+  orderStatusEnums = 'orderStatusEnums',
   paymentStatusEnums = 'paymentStatusEnums',
-  shippingStatusEnums = 'shippingStatusEnums'
+  shippingStatusEnums = 'shippingStatusEnums',
 }
 
 //enum details
@@ -82,12 +82,12 @@ export class OrderAddress {
   postCode?: string;
   phoneNumber: string;
 }
-export class OrderProductPhoto{
+export class OrderProductPhoto {
   url: string;
   id?: string;
   title?: string;
   alt?: string;
-  displayOrder?: number
+  displayOrder?: number;
 }
 
 export class ProductOrder {
@@ -99,7 +99,7 @@ export class ProductOrder {
   totalPrice: number;
   sku: string;
 }
-export class BaseOrderEntity{
+export class BaseOrderEntity {
   billingAddress: OrderAddress;
   shippingAddress: OrderAddress;
   shippingMethod: string;
@@ -118,7 +118,7 @@ export class BaseOrderEntity{
   totalCost: number;
   products: ProductOrder[];
 }
-export class OrderEntity extends BaseOrderEntity{
+export class OrderEntity extends BaseOrderEntity {
   orderId: string;
   userId: string;
 }
@@ -139,21 +139,21 @@ export class GetAllOrderQueryEntity {
 
 //Response Entities
 export class AllOrdersEntity {
-  orders: OrderEntity[]
+  orders: OrderEntity[];
 }
-export class ChangeStatusEntity { 
+export class ChangeStatusEntity {
   orderId: string;
   statusType: string;
-  statusValue: string
+  statusValue: string;
 }
 
 export enum SortTypesDto {
   asc = 'asc',
-  desc = 'desc'
+  desc = 'desc',
 }
 
-export enum SortField{
-  orderedDate = 'orderedDate'
+export enum SortField {
+  orderedDate = 'orderedDate',
 }
 export class OrderSortQuery {
   sortField?: SortField;
@@ -164,7 +164,7 @@ export class OrderListResponseEntity {
   orderInfo: OrderByUserId[];
 }
 
-export class ReOrderQuery{
+export class ReOrderQuery {
   orderId: string;
   overWriteCart?: boolean;
   ignoreInvalidItems?: boolean;

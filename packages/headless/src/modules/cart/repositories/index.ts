@@ -30,7 +30,7 @@ export class CartRepository {
     return await this.db.incrementItemQuantity(userId, item);
   }
 
-  async createCart(cart:Cart): Promise<Cart | null> {
+  async createCart(cart: Cart): Promise<Cart | null> {
     cart.id = randomUUID();
     return await this.db.createCart(cart);
   }

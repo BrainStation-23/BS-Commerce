@@ -43,7 +43,6 @@ const mockController = {
 
 describe('Initializing... Manufactrurer controller testing', () => {
   let app: INestApplication;
-  let controller: ManufacturerController;
   let manufacturerId: string;
 
   beforeAll(async () => {
@@ -59,7 +58,7 @@ describe('Initializing... Manufactrurer controller testing', () => {
       ],
     }).compile();
 
-    controller = module.get<ManufacturerController>(ManufacturerController);
+    module.get<ManufacturerController>(ManufacturerController);
     app = module.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
@@ -79,252 +78,312 @@ describe('Initializing... Manufactrurer controller testing', () => {
   });
 
   describe('GET /manufacturers with wrong token', () => {
-    it('should return 403', async () => {
-      return await request(app.getHttpServer())
-        .get('/manufacturers')
-        .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
-        .expect(401);
-    }, timeout);
+    it(
+      'should return 403',
+      async () => {
+        return await request(app.getHttpServer())
+          .get('/manufacturers')
+          .set('Authorization', `Bearer ${token.replace('e', 'y')}`)
+          .expect(401);
+      },
+      timeout,
+    );
   });
 
   describe('GET /manufacturers with valid token', () => {
-    it('should return 200', async () => {
-      return await request(app.getHttpServer())
-        .get('/manufacturers')
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          if (res.body.data.manufacturers.length === 0) {
-            expect(res.statusCode).toBe(200);
-            expect(res.body.data.manufacturers.length).toEqual(0);
-            expect(res.body.data.message).toEqual('MANUFACTURER_IS_EMPTY');
-            expect(res.body.data.total).toEqual(0);
-          } else {
-            expect(res.statusCode).toBe(200);
-            expect(res.body.data.message).toEqual(
-              'MANUFACTURERS_LOADED_SUCCESSFULLY',
-            );
-            expect(res.body.data.total).toEqual(expect.any(Number));
-            expect(res.body.data.manufacturers).toEqual(
-              expect.arrayContaining([
-                expect.objectContaining({
-                  _id: expect.any(String),
-                  id: expect.any(String),
-                  name: expect.any(String),
-                  description: expect.any(String),
-                  displayOrder: expect.any(Number),
-                  isPublished: expect.any(Boolean),
-                  picture: expect.any(String),
-                  seo: expect.objectContaining({
-                    SEFN: expect.any(String),
-                    metaDescription: expect.any(String),
-                    metaKeyword: expect.any(String),
-                    metaTitle: expect.any(String),
+    it(
+      'should return 200',
+      async () => {
+        return await request(app.getHttpServer())
+          .get('/manufacturers')
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            if (res.body.data.manufacturers.length === 0) {
+              expect(res.statusCode).toBe(200);
+              expect(res.body.data.manufacturers.length).toEqual(0);
+              expect(res.body.data.message).toEqual('MANUFACTURER_IS_EMPTY');
+              expect(res.body.data.total).toEqual(0);
+            } else {
+              expect(res.statusCode).toBe(200);
+              expect(res.body.data.message).toEqual(
+                'MANUFACTURERS_LOADED_SUCCESSFULLY',
+              );
+              expect(res.body.data.total).toEqual(expect.any(Number));
+              expect(res.body.data.manufacturers).toEqual(
+                expect.arrayContaining([
+                  expect.objectContaining({
+                    _id: expect.any(String),
+                    id: expect.any(String),
+                    name: expect.any(String),
+                    description: expect.any(String),
+                    displayOrder: expect.any(Number),
+                    isPublished: expect.any(Boolean),
+                    picture: expect.any(String),
+                    seo: expect.objectContaining({
+                      SEFN: expect.any(String),
+                      metaDescription: expect.any(String),
+                      metaKeyword: expect.any(String),
+                      metaTitle: expect.any(String),
+                    }),
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
                   }),
-                  createdAt: expect.any(String),
-                  updatedAt: expect.any(String),
-                }),
-              ]),
-            );
-          }
-        });
-    }, timeout);
+                ]),
+              );
+            }
+          });
+      },
+      timeout,
+    );
   });
 
   describe('GET /manufacturers with valid token including queries as skip and limit', () => {
-    it('should return 200', async () => {
-      return await request(app.getHttpServer())
-        .get('/manufacturers?skip=1&limit=3')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-    }, timeout);
+    it(
+      'should return 200',
+      async () => {
+        return await request(app.getHttpServer())
+          .get('/manufacturers?skip=1&limit=3')
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+      },
+      timeout,
+    );
   });
 
   describe('POST /manufacturers/create [passing invalid req body]', () => {
-    it('should not save and return error message with 400 bad request', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send({ name: 123 })
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.message).toEqual(
-            expect.arrayContaining([
-              'name must be longer than or equal to 3 characters',
-              'name must be a string',
-            ]),
-          );
-        });
-    }, timeout);
+    it(
+      'should not save and return error message with 400 bad request',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/manufacturers/create')
+          .send({ name: 123 })
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.message).toEqual(
+              expect.arrayContaining([
+                'name must be longer than or equal to 3 characters',
+                'name must be a string',
+              ]),
+            );
+          });
+      },
+      timeout,
+    );
   });
 
   describe('POST /manufacturers/create [passing invalid req body]', () => {
-    it('should not save and return error message with 400 bad request', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send({ abc: 'abc' })
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.message).toEqual(
-            expect.arrayContaining([
-              'name must be longer than or equal to 3 characters',
-              'name should not be empty',
-              'name must be a string',
-            ]),
-          );
-        });
-    }, timeout);
+    it(
+      'should not save and return error message with 400 bad request',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/manufacturers/create')
+          .send({ abc: 'abc' })
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.message).toEqual(
+              expect.arrayContaining([
+                'name must be longer than or equal to 3 characters',
+                'name should not be empty',
+                'name must be a string',
+              ]),
+            );
+          });
+      },
+      timeout,
+    );
   });
 
   describe('POST /manufacturers/create [passing invalid req body on nested object]', () => {
-    it('should not save and return error message with 400 bad request', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send(invalidReqBodyWithNestedObject)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.message).toEqual(
-            expect.arrayContaining([
-              'seo.metaKeyword must be longer than or equal to 3 characters',
-              'seo.metaKeyword must be a string',
-            ]),
-          );
-        });
-    }, timeout);
+    it(
+      'should not save and return error message with 400 bad request',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/manufacturers/create')
+          .send(invalidReqBodyWithNestedObject)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.message).toEqual(
+              expect.arrayContaining([
+                'seo.metaKeyword must be longer than or equal to 3 characters',
+                'seo.metaKeyword must be a string',
+              ]),
+            );
+          });
+      },
+      timeout,
+    );
   });
 
   describe('POST /manufacturers/create [passing valid data]', () => {
-    it('should save and return manufacturer response data', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send(ManufacturerDto)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(200);
-          expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto);
-          expect(res.body.data.message).toEqual(
-            'MANUFACTURER_CREATED_SUCCESSFULLY',
-          );
+    it(
+      'should save and return manufacturer response data',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/manufacturers/create')
+          .send(ManufacturerDto)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto);
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURER_CREATED_SUCCESSFULLY',
+            );
 
-          manufacturerId = res.body.data.manufacturer.id;
-        });
-    }, timeout);
+            manufacturerId = res.body.data.manufacturer.id;
+          });
+      },
+      timeout,
+    );
   });
 
   describe('POST /manufacturers/create [passing invalid data as same name]', () => {
-    it('should not save and return error message with 400 bad request', async () => {
-      return await request(app.getHttpServer())
-        .post('/manufacturers/create')
-        .send({ ...ManufacturerDto, name: 'Manufacturer Test 1' })
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.error).toEqual('MANUFACTURER_ALREADY_EXISTS');
-          expect(res.body.errors).toBe(null);
-        });
-    }, timeout);
+    it(
+      'should not save and return error message with 400 bad request',
+      async () => {
+        return await request(app.getHttpServer())
+          .post('/manufacturers/create')
+          .send({ ...ManufacturerDto, name: 'Same Manufacturer' })
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toEqual('MANUFACTURER_ALREADY_EXISTS');
+            expect(res.body.errors).toBe(null);
+          });
+      },
+      timeout,
+    );
   });
 
   describe(`GET /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
-    it('should return manufacturer object with 200 status code', async () => {
-      return await request(app.getHttpServer())
-        .get(`/manufacturers/${manufacturerId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(200);
-          expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto);
-          expect(res.body.data.message).toEqual(
-            'MANUFACTURER_LOADED_SUCCESSFULLY',
-          );
-        });
-    }, timeout);
+    it(
+      'should return manufacturer object with 200 status code',
+      async () => {
+        return await request(app.getHttpServer())
+          .get(`/manufacturers/${manufacturerId}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto);
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURER_LOADED_SUCCESSFULLY',
+            );
+          });
+      },
+      timeout,
+    );
   });
 
   describe(`GET /manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c [by wrong manufacturer id]`, () => {
-    it('should return error with 400 status code', async () => {
-      return await request(app.getHttpServer())
-        .get(`/manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
-          expect(res.body.errors).toBe(null);
-        });
-    }, timeout);
+    it(
+      'should return error with 400 status code',
+      async () => {
+        return await request(app.getHttpServer())
+          .get(`/manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
+            expect(res.body.errors).toBe(null);
+          });
+      },
+      timeout,
+    );
   });
 
   describe(`PATCH /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
-    it('should return manufacturer object with 200 status code', async () => {
-      const toBeUpdated = { name: 'updated manufacturer' };
+    it(
+      'should return manufacturer object with 200 status code',
+      async () => {
+        const toBeUpdated = { name: 'updated manufacturer' };
 
-      return await request(app.getHttpServer())
-        .patch(`/manufacturers/${manufacturerId}`)
-        .send(toBeUpdated)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(200);
-          expect(res.body.data.manufacturer).toMatchObject({
-            ...ManufacturerDto,
-            ...toBeUpdated,
+        return await request(app.getHttpServer())
+          .patch(`/manufacturers/${manufacturerId}`)
+          .send(toBeUpdated)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.manufacturer).toMatchObject({
+              ...ManufacturerDto,
+              ...toBeUpdated,
+            });
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURER_UPDATED_SUCCESSFULLY',
+            );
           });
-          expect(res.body.data.message).toEqual(
-            'MANUFACTURER_UPDATED_SUCCESSFULLY',
-          );
-        });
-    }, timeout);
+      },
+      timeout,
+    );
   });
 
   describe(`PATCH /manufacturers/${undefined} [by undefined data as manufacturer id]`, () => {
-    it('should return error with 400 status code', async () => {
-      const toBeUpdated = { name: 'updated manufacturer' };
+    it(
+      'should return error with 400 status code',
+      async () => {
+        const toBeUpdated = { name: 'updated manufacturer' };
 
-      return await request(app.getHttpServer())
-        .patch(`/manufacturers/${undefined}`)
-        .send(toBeUpdated)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(400);
-    }, timeout);
+        return await request(app.getHttpServer())
+          .patch(`/manufacturers/${undefined}`)
+          .send(toBeUpdated)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(400);
+      },
+      timeout,
+    );
   });
 
   describe(`DELETE /manufacturers/${manufacturerId} [by manufacturer id]`, () => {
-    it('should return manufacturer object with 200 status code', async () => {
-      return await request(app.getHttpServer())
-        .delete(`/manufacturers/${manufacturerId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(200);
-          // expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto)
-          expect(res.body.data.message).toEqual(
-            'MANUFACTURER_DELETED_SUCCESSFULLY',
-          );
-        });
-    }, timeout);
+    it(
+      'should return manufacturer object with 200 status code',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete(`/manufacturers/${manufacturerId}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(200);
+            // expect(res.body.data.manufacturer).toMatchObject(ManufacturerDto)
+            expect(res.body.data.message).toEqual(
+              'MANUFACTURER_DELETED_SUCCESSFULLY',
+            );
+          });
+      },
+      timeout,
+    );
   });
 
   describe(`DELETE /manufacturers/${undefined} [by undefined data as manufacturer id]`, () => {
-    it('should return error with 400 status code', async () => {
-      return await request(app.getHttpServer())
-        .delete(`/manufacturers/${undefined}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
-          expect(res.body.errors).toBe(null);
-        });
-    }, timeout);
+    it(
+      'should return error with 400 status code',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete(`/manufacturers/${undefined}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
+            expect(res.body.errors).toBe(null);
+          });
+      },
+      timeout,
+    );
   });
 
   describe(`DELETE /manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c [by wrong manufacturer id]`, () => {
-    it('should return error with 400 status code', async () => {
-      return await request(app.getHttpServer())
-        .delete(`/manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect((res) => {
-          expect(res.statusCode).toBe(400);
-          expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
-          expect(res.body.errors).toBe(null);
-        });
-    }, timeout);
+    it(
+      'should return error with 400 status code',
+      async () => {
+        return await request(app.getHttpServer())
+          .delete(`/manufacturers/0ace6388-bce8-4417-86b1-15240b8a381c`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect((res) => {
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toEqual('MANUFACTURER_NOT_FOUND');
+            expect(res.body.errors).toBe(null);
+          });
+      },
+      timeout,
+    );
   });
 });

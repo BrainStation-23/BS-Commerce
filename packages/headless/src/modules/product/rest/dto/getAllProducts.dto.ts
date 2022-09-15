@@ -1,49 +1,61 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { ProductDto } from '.';
 import {
-    GetAllProductsQuery,
-    GetAllProductsErrorMessages,
-    GetAllProductsErrorResponse,
-    GetAllProductsSuccessResponse,
-} from 'models';
+  GetAllProductsQuery,
+  GetAllProductsErrorMessages,
+  GetAllProductsErrorResponse,
+  GetAllProductsSuccessResponse,
+} from '@bs-commerce/models';
 import { Type } from 'class-transformer';
 
 export class GetAllProductsQueryDto implements GetAllProductsQuery {
-    @ApiProperty({ required: false, type: Number, })
-    @Type(() => Number)
-    @IsOptional()
-    @IsNumber()
-    skip?: number;
+  @ApiProperty({ required: false, type: Number })
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  skip?: number;
 
-    @ApiProperty({ required: false, type: Number })
-    @Type(() => Number)
-    @IsOptional()
-    @IsNumber()
-    limit?: number;
+  @ApiProperty({ required: false, type: Number })
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  limit?: number;
 }
 
-export class GetAllProductsErrorResponseDto implements GetAllProductsErrorResponse {
-    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
-    @IsNumber()
-    code: number;
+export class GetAllProductsErrorResponseDto
+  implements GetAllProductsErrorResponse
+{
+  @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+  @IsNumber()
+  code: number;
 
-    @ApiProperty({ example: GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS, })
-    @IsString()
-    error: GetAllProductsErrorMessages;
+  @ApiProperty({
+    example: GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS,
+  })
+  @IsString()
+  error: GetAllProductsErrorMessages;
 
-    @ApiProperty()
-    @IsArray()
-    errors: string[];
+  @ApiProperty()
+  @IsArray()
+  errors: string[];
 }
 
-export class GetAllProductsSuccessResponseDto implements GetAllProductsSuccessResponse {
-    @ApiProperty({ default: HttpStatus.OK })
-    @IsNumber()
-    code: number;
+export class GetAllProductsSuccessResponseDto
+  implements GetAllProductsSuccessResponse
+{
+  @ApiProperty({ default: HttpStatus.OK })
+  @IsNumber()
+  code: number;
 
-    @ApiProperty({ type: () => [ProductDto] })
-    @IsObject()
-    data: [ProductDto];
+  @ApiProperty({ type: () => [ProductDto] })
+  @IsObject()
+  data: [ProductDto];
 }

@@ -1,32 +1,49 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderRequest, CreateProductOrderDetails } from 'models';
+import {
+  CreateOrderRequest,
+  CreateProductOrderDetails,
+} from '@bs-commerce/models';
 
-import { 
+import {
   CartItem,
   Cart,
   CartResponse,
-  ChangeStatusEntity, 
-  GetAllOrderQueryEntity, 
-  OrderEntity, 
-  OrderIncompleteStatEntity,  
-  OrderSortQuery, 
-  OrderStatEntity, 
+  ChangeStatusEntity,
+  GetAllOrderQueryEntity,
+  OrderEntity,
+  OrderIncompleteStatEntity,
+  OrderSortQuery,
+  OrderStatEntity,
   ProductOrder,
-  ReOrderQuery
 } from 'src/entity/order';
 
 @Injectable()
 export abstract class IOrderDatabase {
-  abstract createOrder: (userId: string, body: CreateOrderRequest) => Promise<OrderEntity>;
-  abstract addPhotoDetails: (products: CreateProductOrderDetails[]) => Promise<ProductOrder[]>;
-  abstract getOrderListByUserId: (userId: string, sortObj: OrderSortQuery) => Promise<OrderEntity[]>;
+  abstract createOrder: (
+    userId: string,
+    body: CreateOrderRequest,
+  ) => Promise<OrderEntity>;
+  abstract addPhotoDetails: (
+    products: CreateProductOrderDetails[],
+  ) => Promise<ProductOrder[]>;
+  abstract getOrderListByUserId: (
+    userId: string,
+    sortObj: OrderSortQuery,
+  ) => Promise<OrderEntity[]>;
   abstract findOrder: (query: Record<string, any>) => Promise<OrderEntity>;
-  abstract getOrderStatistics:() => Promise<OrderStatEntity>;
-  abstract getIncompleteStatistics:() => Promise<OrderIncompleteStatEntity>;
-  abstract changeStatus:(body: ChangeStatusEntity) => Promise<OrderEntity>;
-  abstract getOrderList: (query?: GetAllOrderQueryEntity, skip?: number, limit?: number) => Promise<OrderEntity[]>;
+  abstract getOrderStatistics: () => Promise<OrderStatEntity>;
+  abstract getIncompleteStatistics: () => Promise<OrderIncompleteStatEntity>;
+  abstract changeStatus: (body: ChangeStatusEntity) => Promise<OrderEntity>;
+  abstract getOrderList: (
+    query?: GetAllOrderQueryEntity,
+    skip?: number,
+    limit?: number,
+  ) => Promise<OrderEntity[]>;
   abstract getAvailableProducts: (productIds: string[]) => Promise<any>;
   abstract getCart: (userId: string) => Promise<Cart | null>;
-  abstract populateItemsInCart: (userId: string, items: CartItem[])=> Promise<CartResponse | null>;
+  abstract populateItemsInCart: (
+    userId: string,
+    items: CartItem[],
+  ) => Promise<CartResponse | null>;
   abstract clearCart: (userId: string) => Promise<CartResponse | null>;
 }

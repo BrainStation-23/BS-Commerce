@@ -10,7 +10,10 @@ import { CategoryService } from './services';
   providers: [
     CategoryService,
     CategoryRepository,
-    { provide: ICategoryDatabase, useClass: ResolveDatabaseDependency('CATEGORY') },
+    {
+      provide: ICategoryDatabase,
+      useClass: ResolveDatabaseDependency('CATEGORY'),
+    },
   ],
 })
 export class CategoryModule {}

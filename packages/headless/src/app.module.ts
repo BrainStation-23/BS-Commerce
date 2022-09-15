@@ -6,7 +6,9 @@ import { coreConfig } from 'config/core';
 @Module({
   imports: [
     HelperModule,
-    ...( (coreConfig.api === 'GRAPHQL') ? ResolveGraphqlModule() : ResolveRestModule())
-  ]
+    ...(coreConfig.api === 'GRAPHQL'
+      ? ResolveGraphqlModule()
+      : ResolveRestModule()),
+  ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,72 +1,72 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
-import { Input } from "../../global/components/input";
-import { Textarea } from "../../global/components/textarea";
-import Container from "../../global/components/container";
+import { Input } from '@/components/global/components/input';
+import { Textarea } from '@/components/global/components/textarea';
+import Container from '@/components/global/components/container';
 
 const ContactArea: FC = () => {
   return (
     <Container>
       <div className="flex flex-wrap">
-        <div className="w-full md:w-2/4 pr-5">
-          <h3 className="text-xl capitalize font-semibold mb-5">Contact Us</h3>
-          <p className="text-sm mb-5">Your content here</p>
-          <ul className="list-none m-0 p-0">
-            <li className="py-3 border-t border-inherit border-solid flex items-center">
+        <div className="w-full pr-5 md:w-2/4">
+          <h3 className="mb-5 text-xl font-semibold capitalize">Contact Us</h3>
+          <p className="mb-5 text-sm">Your content here</p>
+          <ul className="m-0 list-none p-0">
+            <li className="flex items-center border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
-              </svg>{" "}
+              </svg>
               Address : No 40 Baria Sreet 133/2 NewYork City
             </li>
-            <li className="py-3 border-t border-inherit border-solid">
+            <li className="border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                 />
               </svg>
               E-mail: info@yourdomain.com
             </li>
-            <li className="py-3 border-t border-inherit border-solid">
+            <li className="border-t border-solid border-inherit py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline mr-1"
+                className="mr-1 inline h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
-              </svg>{" "}
+              </svg>
               +88013245657
             </li>
           </ul>
         </div>
         <div className="w-full md:w-2/4">
-          <h3 className="text-xl capitalize font-semibold my-5 md:mt-0">
+          <h3 className="my-5 text-xl font-semibold capitalize md:mt-0">
             Tell Us Your Project
           </h3>
           <form method="post" action="/">
@@ -98,7 +98,7 @@ const ContactArea: FC = () => {
               onChangeHandler={() => {}}
             />
             <button
-              className="font-normal h-10 px-10 p capitalize bg-black text-white rounded"
+              className="p h-10 rounded bg-black px-10 font-normal capitalize text-white"
               type="submit"
             >
               Send

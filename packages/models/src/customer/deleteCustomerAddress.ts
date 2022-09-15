@@ -1,4 +1,9 @@
-import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/index';
+import {
+  DescriptiveError,
+  ErrorResponse,
+  SuccessResponse,
+  Customer,
+} from 'src/index';
 
 /**
  * API Path: /customer/delete-address/:addressId
@@ -8,22 +13,24 @@ import { DescriptiveError, ErrorResponse, SuccessResponse, Customer } from 'src/
  */
 
 export interface DeleteCustomerAddressParams {
-    addressId: string
+  addressId: string;
 }
 
 export interface DeleteCustomerAddressSuccessResponse extends SuccessResponse {
-    code: number;
-    data: Customer;
+  code: number;
+  data: Customer;
 }
 
 export const enum DeleteCustomerAddressErrorMessages {
-    CAN_NOT_DELETE_CUSTOMER_ADDRESS = 'CAN_NOT_DELETE_CUSTOMER_ADDRESS',
+  CAN_NOT_DELETE_CUSTOMER_ADDRESS = 'CAN_NOT_DELETE_CUSTOMER_ADDRESS',
 }
 
 export interface DeleteCustomerAddressErrorResponse extends ErrorResponse {
-    code?: number;
-    error: DeleteCustomerAddressErrorMessages;
-    errors: DescriptiveError;
+  code?: number;
+  error: DeleteCustomerAddressErrorMessages;
+  errors: DescriptiveError;
 }
 
-export type DeleteCustomerAddressResponse = DeleteCustomerAddressSuccessResponse | DeleteCustomerAddressErrorResponse;
+export type DeleteCustomerAddressResponse =
+  | DeleteCustomerAddressSuccessResponse
+  | DeleteCustomerAddressErrorResponse;
