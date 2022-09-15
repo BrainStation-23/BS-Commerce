@@ -1,7 +1,6 @@
 import { FieldProps } from 'formik';
 import React from 'react';
-import Select from 'react-select';
-import { OptionsType, ValueType } from 'react-select/lib/types';
+import Select, { GroupBase, OptionsOrGroups } from 'react-select';
 
 interface Option {
   label: string;
@@ -9,7 +8,7 @@ interface Option {
 }
 
 interface CustomSelectProps extends FieldProps {
-  options: OptionsType<Option>;
+  options: OptionsOrGroups<any, GroupBase<any>> | undefined;
   isMulti?: boolean;
   className?: string;
   placeholder?: string;
@@ -23,7 +22,7 @@ export const CustomSelect = ({
   options,
   isMulti = false,
 }: CustomSelectProps) => {
-  const onChange = (option: ValueType<Option | Option[]>) => {
+  const onChange = (option: Option | Option[]) => {
     form.setFieldValue(
       field.name,
       isMulti
