@@ -79,7 +79,7 @@ export class BrandController {
       limit,
     );
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('brandName/:name')
@@ -100,7 +100,7 @@ export class BrandController {
     const { code, ...response } = await this.brandService.getBrandByName(name);
 
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Get('/:id')
@@ -121,7 +121,7 @@ export class BrandController {
     const { code, ...response } = await this.brandService.getBrandById(brandId);
 
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Post('/create')
@@ -144,7 +144,7 @@ export class BrandController {
     const { code, ...response } = await this.brandService.createBrand(brand);
 
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 
   @Patch('/:id')
@@ -166,13 +166,13 @@ export class BrandController {
     @Res({ passthrough: true })
     res: Response,
   ) {
-    const response = await this.brandService.updateBrandById(
+    const { code, ...response } = await this.brandService.updateBrandById(
       brandId,
       featuresToUpdate,
     );
 
-    res.status(response.code);
-    return response;
+    res.status(code);
+    return { code, ...response };
   }
 
   @Delete('/:id')
@@ -197,6 +197,6 @@ export class BrandController {
     );
 
     res.status(code);
-    return response;
+    return { code, ...response };
   }
 }

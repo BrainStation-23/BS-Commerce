@@ -1,4 +1,4 @@
-import { IsArray, ValidateNested } from 'class-validator';
+import { IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   GetAllBrandsSuccessResponse,
@@ -22,6 +22,7 @@ export class GetAllBrandsSuccessResponseDto
   implements GetAllBrandsSuccessResponse
 {
   @ApiProperty({ default: HttpStatus.OK })
+  @IsNumber()
   code: number;
 
   @ApiProperty()

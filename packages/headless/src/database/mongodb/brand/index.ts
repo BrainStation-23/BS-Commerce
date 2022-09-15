@@ -15,15 +15,21 @@ export class BrandDatabase implements IBrandDatabase {
     skip?: number,
     limit?: number,
   ): Promise<GetAllBrands | null> {
-    return await BrandModel.find({}).skip(skip).limit(limit).lean();
+    return await BrandModel.find({})
+      .skip(skip)
+      .limit(limit)
+      .select('-_id')
+      .lean();
   }
 
   async getBrandByName(brandName: string): Promise<Brand | null> {
-    return await BrandModel.findOne({ 'info.name': brandName }).lean();
+    return await BrandModel.findOne({ 'info.name': brandName })
+      .select('-_id')
+      .lean();
   }
 
   async getBrandById(brandId: string): Promise<Brand | null> {
-    return await BrandModel.findOne({ id: brandId }).lean();
+    return await BrandModel.findOne({ id: brandId }).select('-_id').lean();
   }
 
   async addNewBrand(brand: CreateBrandRequest): Promise<Brand | null> {
@@ -36,10 +42,12 @@ export class BrandDatabase implements IBrandDatabase {
   ): Promise<Brand | null> {
     return await BrandModel.findOneAndUpdate({ id: brandId }, brand, {
       new: true,
-    });
+    }).select('-_id');
   }
 
   async deleteBrandById(brandId: string): Promise<Brand | null> {
-    return await BrandModel.findOneAndRemove({ id: brandId }).lean();
+    return await BrandModel.findOneAndRemove({ id: brandId })
+      .select('-_id')
+      .lean();
   }
 }
