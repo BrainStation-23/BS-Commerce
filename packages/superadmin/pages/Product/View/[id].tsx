@@ -13,7 +13,7 @@ const LogDetailPage: NextPage = () => {
 
   const getProduct = async () => {
     const res = await userAPI.getProduct({ productId: `${id}` });
-    res?.data ? setProduct(res.data) : '';
+    if ('data' in res!) res?.data ? setProduct(res.data) : '';
   };
   useEffect(() => {
     getProduct();

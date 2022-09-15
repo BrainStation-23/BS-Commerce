@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import filterStyle from "./styles/datePicker.module.css";
+import { FC, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import filterStyle from './styles/datePicker.module.css';
 
 const DateTimeFilter: FC = () => {
   const day = new Date();
@@ -9,14 +9,14 @@ const DateTimeFilter: FC = () => {
   const previousTime = day.setDate(day.getDate() - 0.125);
   const currentTime = `${new Date().getHours}: ${
     new Date().getMinutes
-  }: ${"00"}`;
+  }: ${'00'}`;
   const [startDate, setStartDate] = useState(previousDay);
   const [startTime, setStartTime] = useState(previousTime);
   const [endDate, setEndDate] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   return (
     <>
-      <div style={{ marginLeft: "20px" }}>
+      <div style={{ marginLeft: '20px' }}>
         <div className="row gx-5">
           <div className="col-md-6 col-lg-3 col-xl-3">
             {/* <div style={{ paddingLeft: "20px" }}> */}

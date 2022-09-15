@@ -39,7 +39,7 @@ const FeaturedProducts = () => {
           products.map((product: CustomerProduct, index: number) =>
             index % 3 === 2 ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
-                <SwiperSlide>
+                <SwiperSlide key={Math.random() * 999999}>
                   <ProductRow
                     products={[
                       products[index - 2],
@@ -51,7 +51,7 @@ const FeaturedProducts = () => {
               </React.Fragment>
             ) : index + 1 === products.length ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
-                <SwiperSlide>
+                <SwiperSlide key={Math.random() * 999999}>
                   <ProductRow
                     products={[
                       products[index],

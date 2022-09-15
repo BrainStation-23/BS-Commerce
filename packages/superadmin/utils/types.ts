@@ -24,6 +24,11 @@ import {
   CreateTagRequestBody,
   GetTagsSuccessResponse,
   GetTagSuccessResponse,
+  UpdateUserResponse,
+  ChangePasswordRequest,
+  ChangePasswordResponse,
+  GetManufacturersSuccessResponse,
+  GetProductResponse,
 } from '@bs-commerce/models';
 
 export interface User {
@@ -67,7 +72,7 @@ export interface apiFunction {
   updateOrderStatus: (data: any) => Promise<any | undefined>;
   updatePaymentStatus: (data: any) => Promise<any | undefined>;
   updateShippingStatus: (data: any) => Promise<any | undefined>;
-  getAllManufacturers(pageSize: number): Promise<Manufacturer[] | undefined>;
+  getAllManufacturers(): Promise<GetManufacturersSuccessResponse | undefined>;
   updateProduct: (
     data: any,
     id: any,
@@ -77,7 +82,7 @@ export interface apiFunction {
     data: any,
     router: any
   ) => Promise<CreateProductRequest | undefined>;
-  getProduct: (data: GetProductParams) => Promise<GetProductParams | undefined>;
+  getProduct: (data: GetProductParams) => Promise<GetProductResponse | undefined>;
   getProducts: (pageSize: number) => Promise<Product[] | undefined>;
   searchProduct: (data: string) => Promise<Product | undefined>;
   getCategoryList: () => Promise<getCategoryListSuccessResponse | undefined>;
@@ -95,8 +100,8 @@ export interface apiFunction {
   ) => Promise<SignInSuccessResponse | undefined>;
   createAdmin: (data: User, cb: any) => Promise<User | undefined>;
   getAdmins: () => Promise<User[] | undefined>;
-  updateAdmin: (data: any) => Promise<UpdatedUserRequest | undefined>;
-  changePassword: (data: any) => Promise<UpdatedUserRequest | undefined>;
+  updateAdmin: ( data: UpdatedUserRequest, router: NextRouter) => Promise<UpdateUserResponse | undefined>;
+  changePassword: (data: ChangePasswordRequest, router: NextRouter) => Promise<ChangePasswordResponse | undefined>;
   createManufacturer: (
     data: CreateManufacturerRequest,
     router: NextRouter
@@ -106,10 +111,12 @@ export interface apiFunction {
     id: any,
     router: NextRouter
   ) => Promise<Manufacturer[] | undefined>;
-  getSingleManufacturer: (data: any) => Promise<any | undefined>;
+  getSingleManufacturer: ( data: any,
+    manufacturerId: any) => Promise<any | undefined>;
   updateManufacturer: (
     data: UpdateManufacturerRequest,
-    router: NextRouter
+    id: string,
+    router: any
   ) => Promise<UpdateManufacturerRequest | undefined>;
   getUserProfile: (
     router: NextRouter
