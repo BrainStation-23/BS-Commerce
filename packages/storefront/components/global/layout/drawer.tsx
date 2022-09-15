@@ -96,7 +96,7 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
         </div>
         <div className="font-medium">
           <div className="my-5 border-b border-t py-4">
-            <button
+            <div
               className="mb-3 flex flex-row items-center"
               onClick={() => handleButtonClick('/myAccount')}
             >
@@ -107,7 +107,7 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
                 <span>My Account</span>
                 <span>{getUsername(user)}</span>
               </button>
-            </button>
+            </div>
 
             <button
               className="flex"

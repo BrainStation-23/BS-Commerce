@@ -1,8 +1,8 @@
-import { IProductOrderData } from '@bs-commerce/models';
+import { IOrderProduct } from '@bs-commerce/models';
 import Image from 'next/image';
 
 interface Props {
-  data: IProductOrderData;
+  data: IOrderProduct;
 }
 
 const ShowData: React.FC<Props> = ({ data }: Props) => {

@@ -13,7 +13,20 @@ import SingleAddressDetailsTable from '@/components/myAccount/singleAddressDetai
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
   const addressID = router.query.addressId;
-  const [singleAddress, setSingleAddress] = useState<CustomerAddress>({});
+  const [singleAddress, setSingleAddress] = useState<CustomerAddress>({
+    id: '',
+    firstName: '',
+    lastName: '',
+    addressLine1: '',
+    addressLine2: '',
+    isDefault: false,
+    company: '',
+    state: '',
+    country: '',
+    postCode: '',
+    phone: '',
+    tag: '',
+  });
 
   const customerAddresses = useAppSelector(
     (state) => state?.persistedReducer?.customerAddress.addresses
@@ -23,7 +36,7 @@ const SingleAddressDetails: NextComponentType = () => {
     const address = customerAddresses.find(
       (customerAddress) => customerAddress.id === addressID
     );
-    setSingleAddress(address);
+    setSingleAddress(address!);
   }, []);
 
   return (
@@ -70,12 +83,12 @@ const SingleAddressDetails: NextComponentType = () => {
 
           <SingleAddressDetailsTable
             label="City "
-            text={singleAddress?.state}
+            text={singleAddress?.state!}
           />
 
           <SingleAddressDetailsTable
             label="Post Code "
-            text={singleAddress?.postCode}
+            text={singleAddress?.postCode!}
           />
 
           <SingleAddressDetailsTable

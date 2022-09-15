@@ -1,12 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useAppSelector } from 'customHooks/hooks';
 import CategoryProductCard from '@/components/cateoryProducts/categoryProducts/categoryProductCard';
-import { Pagination } from '@/components/global/components/pagination';
-import { useRouter } from 'next/router';
-import { Product } from '@bs-commerce/models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 interface props {
-  products: Product[];
+  products: CustomerProduct[];
 }
 
 const CategoryProductSegment: FC<props> = ({ products }) => {

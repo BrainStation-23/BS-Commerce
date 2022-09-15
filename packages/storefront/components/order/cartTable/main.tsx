@@ -1,8 +1,8 @@
 import React from 'react';
 import DataTable from './dataTable';
-import { OrderByUserIdResponseData } from '@bs-commerce/models';
+import { OrderByUserId } from '@bs-commerce/models';
 interface Props {
-  singleOrder: OrderByUserIdResponseData;
+  singleOrder: OrderByUserId;
 }
 
 const CartDetails: React.FC<Props> = ({ singleOrder }: Props) => {
