@@ -35,8 +35,10 @@ export const CustomSelect = ({
   const getValue = () => {
     if (options) {
       return isMulti
-        ? options.filter((option) => field.value?.indexOf(option.value) >= 0)
-        : options.find((option) => option.value === field.value);
+        ? options.filter(
+            (option: any) => field.value?.indexOf(option.value) >= 0
+          )
+        : options.find((option: any) => option.value === field.value);
     } else {
       return isMulti ? [] : ('' as any);
     }

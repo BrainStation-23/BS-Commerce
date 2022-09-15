@@ -9,7 +9,8 @@ const Brands: NextPage = () => {
   const [brands, setBrands] = useState<Brand[]>();
   const getAllBrands = async () => {
     const brandsList = await userAPI.getBrands();
-    if (brandsList) setBrands(brandsList);
+    if ('data' in brandsList!)
+      if (brandsList) setBrands(brandsList?.data?.brands!);
   };
   useEffect(() => {
     getAllBrands();
