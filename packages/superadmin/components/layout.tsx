@@ -9,9 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useAppSelector } from '../redux-hooks';
 
-import HeaderBar from './headerBar';
-import Navbar from './navbar';
-import Viewport from './viewport';
+//import HeaderBar from './headerBar';
+//import Navbar from './navbar';
+//import Viewport from './viewport';
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -44,11 +44,11 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <Viewport />
-      <HeaderBar />
+      {/* <Viewport />
+      <HeaderBar /> */}
       <div className="container-fluid">
         <div className="row">
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </div>
       </div>

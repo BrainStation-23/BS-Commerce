@@ -45,7 +45,7 @@ const CreateProduct: NextComponentType = () => {
     if (response?.data.manufacturers.length! > 0) {
       response?.data.manufacturers.forEach((manufacturer: Manufacturer) => {
         allManufacturers.push({
-          id: manufacturer.id,
+          id: manufacturer.id!,
           name: manufacturer.name,
         });
       });

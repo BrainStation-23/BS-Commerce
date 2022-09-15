@@ -1752,6 +1752,13 @@
   dependencies:
     typescript "^4.8.2"
 
+"@bs-commerce/models@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@bs-commerce/models/-/models-2.2.2.tgz#25fc3023152b24ddc2b4719473cd5f0ad4627574"
+  integrity sha512-e2geQQH2niK3+QwUXxrjoAm11STvh9+STGc5DYrKfxi64q1iivMKf6xpvYcRcWzgZx3rHSquOgDu+1N56SfMOQ==
+  dependencies:
+    typescript "^4.8.2"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.4.tgz"
