@@ -8,7 +8,7 @@ import {
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { userAPI } from 'APIs';
-import { Product, Brand } from '@bs-commerce/models';
+import { Product, Brand, CustomerProduct } from '@bs-commerce/models';
 
 import CategoryPageComponent from '@/components/cateoryProducts';
 
@@ -17,7 +17,7 @@ interface CategoryNameIdProp {
   id: string;
 }
 interface SingleProduct {
-  products: Product[];
+  products: CustomerProduct[];
   name: string;
   brands: string[];
   categoryNameAndId: CategoryNameIdProp[];
@@ -77,9 +77,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     parseInt(skip as string) as number,
     parseInt(limit as string) as number
   );
-
-  var products = res?.data?.products ? res?.data?.products : [];
-  var totalProducts = res?.data?.totalProducts ? res?.data?.totalProducts : 0;
+  let totalProducts;
+  let products;
+  if ('data' in res!) {
+    products = res?.data?.products ? res?.data?.products : [];
+    totalProducts = res?.data?.totalProducts ? res?.data?.totalProducts : 0;
+  }
   // console.log(res2.data);
   // console.log(res?.data?.brands);
 
