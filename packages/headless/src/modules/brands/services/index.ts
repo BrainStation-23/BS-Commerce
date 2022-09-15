@@ -14,9 +14,10 @@ import {
 } from '@bs-commerce/models';
 
 import { BrandRepository } from './../repositories/index';
+import { Helper } from 'src/helper/helper.interface';
 @Injectable()
 export class BrandService {
-  constructor(private brandRepo: BrandRepository) {}
+  constructor(private brandRepo: BrandRepository, private helper: Helper) {}
   async createBrand(brand: CreateBrandRequest): Promise<CreateBrandResponse> {
     const doesBrandExist = await this.brandRepo.getBrandByName(brand.info.name);
     if (doesBrandExist)
@@ -34,7 +35,10 @@ export class BrandService {
           code: HttpStatus.INTERNAL_SERVER_ERROR,
         };
 
-      return { code: HttpStatus.CREATED, data: newBrand };
+      return this.helper.serviceResponse.successResponse(
+        newBrand,
+        HttpStatus.CREATED,
+      );
     }
   }
 
@@ -49,8 +53,10 @@ export class BrandService {
         errors: null,
         code: HttpStatus.INTERNAL_SERVER_ERROR,
       };
-
-    return { data: allBrands, code: HttpStatus.OK };
+    return this.helper.serviceResponse.successResponse(
+      { brands: allBrands },
+      HttpStatus.OK,
+    );
   }
 
   async updateBrandById(
@@ -94,7 +100,10 @@ export class BrandService {
         code: HttpStatus.BAD_REQUEST,
       };
 
-    return { code: HttpStatus.OK, data: updatedBrand };
+    return this.helper.serviceResponse.successResponse(
+      updatedBrand,
+      HttpStatus.OK,
+    );
   }
 
   async getBrandById(brandId: string): Promise<GetBrandByIdResponse> {
@@ -106,7 +115,10 @@ export class BrandService {
         code: HttpStatus.BAD_REQUEST,
       };
 
-    return { data: foundBrand, code: HttpStatus.OK };
+    return this.helper.serviceResponse.successResponse(
+      foundBrand,
+      HttpStatus.OK,
+    );
   }
 
   async getBrandByName(name: string): Promise<GetBrandByIdResponse> {
@@ -118,7 +130,10 @@ export class BrandService {
         code: HttpStatus.BAD_REQUEST,
       };
 
-    return { data: foundBrand, code: HttpStatus.OK };
+    return this.helper.serviceResponse.successResponse(
+      foundBrand,
+      HttpStatus.OK,
+    );
   }
 
   async deleteBrandById(brandId: string): Promise<DeleteBrandResponse> {
@@ -130,6 +145,9 @@ export class BrandService {
         code: HttpStatus.BAD_REQUEST,
       };
 
-    return { data: deletedBrand, code: HttpStatus.OK };
+    return this.helper.serviceResponse.successResponse(
+      deletedBrand,
+      HttpStatus.OK,
+    );
   }
 }
