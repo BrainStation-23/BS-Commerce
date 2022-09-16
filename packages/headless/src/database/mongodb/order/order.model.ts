@@ -83,6 +83,10 @@ const ProductSchema = new Schema(
       trim: true,
       required: true,
     },
+    quantityShipped: {
+      type: Number,
+      default: 0,
+    },
     sku: {
       type: String,
       trim: true,
