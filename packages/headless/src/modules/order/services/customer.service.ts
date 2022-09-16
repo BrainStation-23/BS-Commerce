@@ -38,8 +38,10 @@ export class OrderCustomerService {
   }
 
   async reOrder(userId: string, body: ReOrderQuery): Promise<ReOrderResponse> {
-    const { ignoreInvalidItems, overWriteCart, orderId } = body;
-
+    let { ignoreInvalidItems, overWriteCart, orderId } = body;
+    if(!ignoreInvalidItems) ignoreInvalidItems = false//if ignoreInvalidItems is not provided, it is false by default
+    if(!overWriteCart) overWriteCart = false//if overwriteCart is not provided,it is false by default
+    
     const prevOrder = await this.orderRepository.findOrder({ orderId, userId });
     if (!prevOrder)
       return {
