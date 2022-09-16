@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 
 const PageNotFOund: NextPage = () => {
   return (
@@ -11,9 +12,9 @@ const PageNotFOund: NextPage = () => {
               <div className="lead mb-4">
                 The page you are looking for was not found.
               </div>
-              <a href="/" className="btn btn-link">
-                Back to Home
-              </a>
+              <Link href="/">
+                <a className="btn btn-link">Back to Home</a>
+              </Link>
             </div>
           </div>
         </div>

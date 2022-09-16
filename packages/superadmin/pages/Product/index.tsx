@@ -5,6 +5,7 @@ import { userAPI } from '@/APIs';
 import { Product } from '@bs-commerce/models';
 import ProductsList from '@/components/products/productsList';
 import SearchWindow from '@/components/products/searchWindow';
+import Link from 'next/link';
 
 const Products: NextPage = () => {
   const [products, setProducts] = useState<Product[] | undefined>();
@@ -20,9 +21,9 @@ const Products: NextPage = () => {
       <main className="px-5">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Products</div>
-          <a className="btn btn-primary" href="/Product/Create">
-            Add new
-          </a>
+          <Link href="/Product/Create">
+            <a className="btn btn-primary">Add new</a>
+          </Link>
         </div>
         <div>
           <SearchWindow setProducts={setProducts} />

@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { Formik, Form } from "formik";
-import { manufactureSchema } from "../schema/index";
-import CreateNewManufacturer from "./forms/manufacturerInfo";
-import DisplayOrders from "./forms/displayOrder";
-import SEO from "./forms/seo";
-import { userAPI } from "../../../APIs";
-import Link from "next/link";
+import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { Formik, Form } from 'formik';
+import { manufactureSchema } from '../schema/index';
+import CreateNewManufacturer from './forms/manufacturerInfo';
+import DisplayOrders from './forms/displayOrder';
+import SEO from './forms/seo';
+import { userAPI } from '../../../APIs';
+import Link from 'next/link';
 const CreateManufacturer: FC = () => {
   const router = useRouter();
   const handleSubmit = (data: any) => {
@@ -29,15 +29,15 @@ const CreateManufacturer: FC = () => {
     <>
       <Formik
         initialValues={{
-          name: "",
-          description: "",
-          picture: "",
+          name: '',
+          description: '',
+          picture: '',
           isPublished: false,
-          displayOrder: "",
-          metaKeyword: "",
-          metaDescription: "",
-          metaTitle: "",
-          seftn: "",
+          displayOrder: '',
+          metaKeyword: '',
+          metaDescription: '',
+          metaTitle: '',
+          seftn: '',
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -61,15 +61,15 @@ const CreateManufacturer: FC = () => {
             <Form onSubmit={formikprops.handleSubmit}>
               <div
                 className="content-header clearfix"
-                style={{ paddingTop: "10px" }}
+                style={{ paddingTop: '10px' }}
               >
                 <h3 className="float-start">
                   Add a Manufacturer
                   <span className="fs-5 p-3">
                     <Link href="/Manufacturer/">
-                      <a href="/Product" className="text-decoration-none">
+                      <a className="text-decoration-none">
                         <i className="bi bi-arrow-left-circle-fill p-2" />
-                        <span style={{ fontSize: "14px" }}>
+                        <span style={{ fontSize: '14px' }}>
                           Back to Manufacturer list
                         </span>
                       </a>

@@ -182,7 +182,7 @@ const StockPieChart: FC = () => {
                 }}
               >
                 <div style={{ width: "65%", padding: "17px" }}>
-                  <Doughnut data={data} plugins={plugins} options={options} />
+                  {/* <Doughnut data={data} plugins={plugins} options={options} /> */}
                 </div>
               </div>
             </div>

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Pagination from "../pagination";
-import getData from "../service/get-shipping-data.service";
 
 const notes = () => {
 

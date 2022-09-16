@@ -4,6 +4,7 @@ import ProductInfoCard from '@/components/products/viewCards/productInfo.card';
 import ManufacturerCard from '@/components/products/viewCards/manufacturerCard.comonent';
 import CaegoryCard from '@/components/products/viewCards/categoryCard.component';
 import { ViewProductInterface } from '@/components/products/models/index';
+import Link from 'next/link';
 
 const ViewProduct: React.FC<ViewProductInterface> = (
   props: ViewProductInterface
@@ -18,10 +19,12 @@ const ViewProduct: React.FC<ViewProductInterface> = (
             <h1 className="float-start">
               View product details
               <span className="fs-5 p-3">
-                <a href="/Product" className="text-decoration-none ">
-                  <i className="bi bi-arrow-left-circle-fill p-2" />
-                  Back to product list
-                </a>
+                <Link href="/Product">
+                  <a className="text-decoration-none ">
+                    <i className="bi bi-arrow-left-circle-fill p-2" />
+                    Back to product list
+                  </a>
+                </Link>
               </span>
             </h1>
           </div>

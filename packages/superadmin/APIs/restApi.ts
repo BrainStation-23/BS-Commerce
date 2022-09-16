@@ -1,4 +1,3 @@
-import { Brand } from './../../models/src/brand/brand';
 import { NextRouter } from 'next/router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -35,6 +34,7 @@ import {
   UpdateUserResponse,
   ChangePasswordResponse,
   GetProductResponse,
+  GetAllBrandsResponse,
 } from '@bs-commerce/models';
 
 import { User } from '../utils/types';
@@ -271,7 +271,6 @@ export async function getAllManufacturersRest(): Promise<
 }
 export async function getSingleManufacturerRest(
   data: any,
-  manufacturerId: any
 ): Promise<any | undefined> {
   try {
     // const res = await axios.get(`${apiEndPoints.manufacturer}/${data.productId}`);
@@ -442,10 +441,12 @@ export async function getTagsRest(): Promise<GetTagsResponse | undefined> {
   }
 }
 
-export async function getBrandsRest(): Promise<any> {
+export async function getBrandsRest(): Promise<
+  GetAllBrandsResponse | undefined
+> {
   try {
-    const { data } = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
-    return data?.data as GetAllBrandsSuccessResponse;
+    const res = await axios?.get(`${apiEndPoints?.brands}?skip=0&limit=0`);
+    return res?.data as GetAllBrandsSuccessResponse;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   }

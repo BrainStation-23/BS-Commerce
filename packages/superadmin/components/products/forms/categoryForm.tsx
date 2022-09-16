@@ -56,7 +56,6 @@ const CategoryForm: FC<CategoryFormInterface> = (
       data.id == categoryID ? (
         <>
           {(data.isSelected = true)}
-          {(data.isFeatured = isFeatured == 'false' ? false : true)}
           {(data.displayOrder = displayOrder)}
         </>
       ) : (
@@ -88,7 +87,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-diagram-3-fill col-1 px-1"
                   style={{ fontSize: '25px' }}
@@ -177,7 +176,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                   Add
                 </button>
               </div>
-              {checkTable()}
+              {/* {checkTable()}
               {showTable ? (
                 <div className="my-3 py-3">
                   <table className="table-bordered table ">
@@ -196,7 +195,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                             return (
                               <React.Fragment key={index}>
                                 <tr>
-                                  <td className="text-center">{data.value}</td>
+                                  <td className="text-center">{data.name}</td>
                                   <td className="text-center">
                                     {data.isFeatured ? (
                                       <i className="bi bi-check-lg"></i>
@@ -228,7 +227,7 @@ const CategoryForm: FC<CategoryFormInterface> = (
                 </div>
               ) : (
                 ''
-              )}
+              )} */}
             </>
           </div>
         </div>

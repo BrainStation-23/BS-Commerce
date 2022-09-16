@@ -29,6 +29,7 @@ import {
   ChangePasswordResponse,
   GetManufacturersSuccessResponse,
   GetProductResponse,
+  GetAllBrandsResponse,
 } from '@bs-commerce/models';
 
 export interface User {
@@ -111,8 +112,7 @@ export interface apiFunction {
     id: any,
     router: NextRouter
   ) => Promise<Manufacturer[] | undefined>;
-  getSingleManufacturer: ( data: any,
-    manufacturerId: any) => Promise<any | undefined>;
+  getSingleManufacturer: ( data: any) => Promise<any | undefined>;
   updateManufacturer: (
     data: UpdateManufacturerRequest,
     id: string,
@@ -121,7 +121,7 @@ export interface apiFunction {
   getUserProfile: (
     router: NextRouter
   ) => Promise<GetUserSuccessResponse | undefined>;
-  getBrands: () => Promise<any>;
+  getBrands: () => Promise<GetAllBrandsResponse | undefined>;
   getBrand(brandId: any): Promise<any>;
   mediaUpload: (
     data: FormData
@@ -159,4 +159,5 @@ export interface adminCreate {
   addresses?: Address[];
   status?: string;
   password?: string;
+  newPassword?: string;
 }

@@ -80,7 +80,7 @@ const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
             <div className="pt-2" style={{ height: '10px' }}></div>
           </div>
           <div className="errMsg text-danger text-red-600">
-            <ErrorMessage name={fieldID} />
+            <ErrorMessage name={fieldID!} />
           </div>
         </div>
       </div>
