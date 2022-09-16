@@ -1,4 +1,4 @@
-import { CreateOrderRequest } from "@bs-commerce/models";
+import { CreateOrderRequest, IReOrderQuery } from "@bs-commerce/models";
 
 const createOrderRequest: CreateOrderRequest = {
     billingAddress: {
@@ -41,8 +41,22 @@ const createOrderRequest: CreateOrderRequest = {
     stripeChargeId: '',
     paypalPaymentId: '',
     paypalRedirectUrl: '',
-  };
+};
 
-  export {
-    createOrderRequest
-  }
+const reOrderQuery: IReOrderQuery = {
+  orderId: "173137531326110",
+  ignoreInvalidItems: true,
+  overWriteCart: false
+}
+
+const InvalidReOrderQuery: IReOrderQuery = {
+  orderId: "173137531dddd10",
+  ignoreInvalidItems: false,
+  overWriteCart: false
+}
+
+export {
+  createOrderRequest,
+  reOrderQuery,
+  InvalidReOrderQuery
+}
