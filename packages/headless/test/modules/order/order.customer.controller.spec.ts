@@ -8,8 +8,8 @@ import {
   TestCustomerEmail,
   TestCustomerId,
 } from '../../test-utility';
-import { OrderAdminController } from 'src/modules/order/rest/admin.controlller';
 import { createOrderRequest, InvalidReOrderQuery, reOrderQuery } from './test.data';
+import { OrderCustomerController } from 'src/modules/order/rest/customer.controller';
 
 describe('Initializing Order Customer controller testing', () => {
   let app: INestApplication;
@@ -27,7 +27,7 @@ describe('Initializing Order Customer controller testing', () => {
       imports: [AppModule],
     }).compile();
 
-    module.get<OrderAdminController>(OrderAdminController);
+    module.get<OrderCustomerController>(OrderCustomerController);
     app = module.createNestApplication();
     await app.init();
   });
