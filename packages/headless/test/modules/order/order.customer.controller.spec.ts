@@ -9,6 +9,7 @@ import {
   TestCustomerId,
 } from '../../test-utility';
 import { OrderAdminController } from 'src/modules/order/rest/admin.controlller';
+import { createOrderRequest } from './test.data';
 
 describe('Initializing Order Customer controller testing', () => {
   let app: INestApplication;
@@ -18,48 +19,7 @@ describe('Initializing Order Customer controller testing', () => {
     TestCustomerEmail,
     'customer',
   ).token;
-  const createOrderRequest = {
-    shippingCost: 100,
-    billingAddress: {
-      firstName: 'test',
-      lastName: 'test',
-      email: 'test@mail.com',
-      addressLine1: 'test',
-      addressLine2: 'test',
-      city: 'test',
-      country: 'test',
-      postCode: '3421',
-      phoneNumber: '01314998877',
-    },
-    shippingAddress: {
-      firstName: 'test',
-      lastName: 'test',
-      email: 'test@mail.com',
-      addressLine1: 'test',
-      addressLine2: 'test',
-      city: 'test',
-      country: 'test',
-      postCode: '3421',
-      phoneNumber: '01314998877',
-    },
-    shippingMethod: 'test',
-    paymentMethod: 'test',
-    productCost: 100,
-    products: [
-      {
-        productId: 'ae134fdb-ea49-4355-af54-977a97bc6020',
-        name: 'test',
-        price: 100,
-        quantity: 2,
-        sku: 'string',
-      },
-    ],
-    stripeToken: '',
-    stripeCustomerId: '',
-    stripeChargeId: '',
-    paypalPaymentId: '',
-    paypalRedirectUrl: '',
-  };
+  
   beforeAll(async () => {
     await connectTestDatabase();
     const module: TestingModule = await Test.createTestingModule({
@@ -79,13 +39,14 @@ describe('Initializing Order Customer controller testing', () => {
 
   it('/POST CREATE NEW ORDER [VALID DATA]', async () => {
     return await request(app.getHttpServer())
-      .post('customer/order/')
+      .post('/customer/order/')
       .set('Authorization', `Bearer ${token}`)
       .send(createOrderRequest)
       .expect((res) => {
-        expect(res.statusCode).toBe(201);
+        expect(res.statusCode).toBe(200);
         expect(res.body.data).toMatchObject({
-          shippingCost: expect.any(Number),
+          orderId: expect.any(String),
+          userId: expect.any(String),
           billingAddress: {
             firstName: expect.any(String),
             lastName: expect.any(String),
@@ -93,7 +54,7 @@ describe('Initializing Order Customer controller testing', () => {
             addressLine1: expect.any(String),
             addressLine2: expect.any(String),
             city: expect.any(String),
-            country: expect.any(String),
+            country: expect.any(String) ,
             postCode: expect.any(String),
             phoneNumber: expect.any(String),
           },
@@ -104,13 +65,16 @@ describe('Initializing Order Customer controller testing', () => {
             addressLine1: expect.any(String),
             addressLine2: expect.any(String),
             city: expect.any(String),
-            country: expect.any(String),
+            country: expect.any(String) ,
             postCode: expect.any(String),
             phoneNumber: expect.any(String),
           },
           shippingMethod: expect.any(String),
           paymentMethod: expect.any(String),
-          productCost: expect.any(Number),
+          orderedDate: expect.any(String),
+          orderStatus: expect.any(String),
+          shippingStatus: expect.any(String),
+          paymentStatus: expect.any(String),
           products: expect.arrayContaining([
             expect.objectContaining({
               productId: expect.any(String),
@@ -118,8 +82,21 @@ describe('Initializing Order Customer controller testing', () => {
               price: expect.any(Number),
               quantity: expect.any(Number),
               sku: expect.any(String),
+              totalPrice: expect.any(Number),
+              photos: expect.arrayContaining([
+                expect.objectContaining({
+                  url: expect.any(String),
+                  id: expect.any(String),
+                  title: expect.any(String),
+                  alt: expect.any(String),
+                  displayOrder: expect.any(Number) 
+                })
+              ])
             }),
           ]),
+          productCost: expect.any(Number),
+          shippingCost: expect.any(Number),
+          totalCost: expect.any(Number),
           stripeToken: expect.any(String),
           stripeCustomerId: expect.any(String),
           stripeChargeId: expect.any(String),
@@ -127,5 +104,9 @@ describe('Initializing Order Customer controller testing', () => {
           paypalRedirectUrl: expect.any(String),
         });
       });
+  });
+
+  it('/REORDER [VALID DATA]', async () => {
+    
   });
 });
