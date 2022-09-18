@@ -54,9 +54,21 @@ const InvalidReOrderQuery: IReOrderQuery = {
   ignoreInvalidItems: false,
   overWriteCart: false
 }
+const changeStatusBody = {
+  orderId: "173137531326110",
+  statusType: "orderStatusEnums",
+  statusValue: "Processing"
+}
 
+const InvalidChangeStatusBody = {
+  orderId: "173ss531326110",
+  statusType: "orderStatusEnums",
+  statusValue: "Processing"
+}
 export {
   createOrderRequest,
   reOrderQuery,
-  InvalidReOrderQuery
+  InvalidReOrderQuery,
+  changeStatusBody,
+  InvalidChangeStatusBody
 }
