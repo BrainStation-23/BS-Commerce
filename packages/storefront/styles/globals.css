@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Custom container class */
 
@@ -42,10 +42,13 @@
 
 .swiper:hover .swiper-button-prev {
   display: block !important;
+  left: -15px;
 }
 
 .swiper:hover .swiper-button-next {
   display: block !important;
+  right: -30px;
+
 }
 
 .swiper-button-prev::after {
@@ -59,5 +62,19 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #16A34A !important;
+  background-color: #16a34a !important;
+}
+.swiper-wrapper {
+  width: 90% !important;
+  scale: 98%;
+}
+.swiper {
+  /* background-color: red; */
+  overflow: visible !important;
+  scale: 103%;
+}
+.swiper-slide {
+  /* background-color: blue; */
+  /* width: 20% !important; */
+  padding-left: 0px;
 }

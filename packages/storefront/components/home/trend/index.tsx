@@ -39,7 +39,7 @@ const TrendingProducts = () => {
 
   return (
     <>
-      <Container className="max-w-6xl">
+      <Container className="max-w-6xl ">
         <div className="mb-6 text-center">
           <p className="font-serif text-lg italic">Recently added our store</p>
           <h1 className="text-bold text-4xl ">Trending Products</h1>
@@ -82,41 +82,49 @@ const TrendingProducts = () => {
             </button>
           </li>
         </ul>
-        {products?.length > 1 && (
-          <SwiperGrid
-            slidesPerViewmobile={2}
-            slidesPerView768={3}
-            slidesPerView980={5}
-            rows={1}
-            loop={products.length > getMinimumProduct() ? true : false}
-          >
-            {products?.map((product: CustomerProduct, index: number) =>
-              index % 2 === 1 ? (
-                <React.Fragment key={product.id}>
-                  <SwiperSlide key={Math.random() * 999999} className="pl-5">
-                    <ProductRow
-                      products={[products[index - 1], products[index]]}
-                    />
-                  </SwiperSlide>
-                </React.Fragment>
-              ) : index + 1 === products.length ? (
-                <React.Fragment key={product.id}>
-                  <SwiperSlide key={Math.random() * 999999}>
-                    <ProductRow
-                      products={[
-                        products.length > getMinimumProduct()
-                          ? products[0]
-                          : products[index],
-                      ]}
-                    />
-                  </SwiperSlide>
-                </React.Fragment>
-              ) : (
-                ''
-              )
-            )}
-          </SwiperGrid>
-        )}
+        <div
+          className="w-full overflow-hidden px-10 "
+          style={{
+            width: '105%',
+            marginLeft:"-30px"
+          }}
+        >
+          {products?.length > 1 && (
+            <SwiperGrid
+              slidesPerViewmobile={2}
+              slidesPerView768={3}
+              slidesPerView980={5}
+              rows={1}
+              loop={products.length > getMinimumProduct() ? true : false}
+            >
+              {products?.map((product: CustomerProduct, index: number) =>
+                index % 2 === 1 ? (
+                  <React.Fragment key={product.id}>
+                    <SwiperSlide key={Math.random() * 999999} className="pl-5">
+                      <ProductRow
+                        products={[products[index - 1], products[index]]}
+                      />
+                    </SwiperSlide>
+                  </React.Fragment>
+                ) : index + 1 === products.length ? (
+                  <React.Fragment key={product.id}>
+                    <SwiperSlide key={Math.random() * 999999}>
+                      <ProductRow
+                        products={[
+                          products.length > getMinimumProduct()
+                            ? products[0]
+                            : products[index],
+                        ]}
+                      />
+                    </SwiperSlide>
+                  </React.Fragment>
+                ) : (
+                  ''
+                )
+              )}
+            </SwiperGrid>
+          )}
+        </div>
       </Container>
       {/* <ProductRow products={[products[0], products[1]]} /> */}
     </>
