@@ -19563,7 +19563,7 @@ react-popper@^2.2.5:
 
 react-redux@^8.0.2:
   version "8.0.2"
-  resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.0.2.tgz#bc2a304bb21e79c6808e3e47c50fe1caf62f7aad"
   integrity sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==
   dependencies:
     "@babel/runtime" "^7.12.1"
@@ -20016,7 +20016,7 @@ redent@^3.0.0:
 
 redux-hooks@^0.1.5:
   version "0.1.5"
-  resolved "https://registry.npmjs.org/redux-hooks/-/redux-hooks-0.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/redux-hooks/-/redux-hooks-0.1.5.tgz#2ca9a87544eaad281621de4c5c29a850b6623cc3"
   integrity sha512-r3kfcHDgY0TMe+ua7Q8myf2CaZYm5SRyS03pWN2WAntUFh0qOwT0JczRe2DIEGWdlRnHkLOFg2yEV3NAJl3HFQ==
   dependencies:
     react "^16.7.0-alpha.0"
