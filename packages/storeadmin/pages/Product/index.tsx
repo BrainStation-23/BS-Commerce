@@ -18,7 +18,7 @@ const Products: NextPage = () => {
   }, []);
   return (
     <>
-      <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main className="ms-sm-auto  px-md-4">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Products</div>
           <Link href="/Product/Create">
