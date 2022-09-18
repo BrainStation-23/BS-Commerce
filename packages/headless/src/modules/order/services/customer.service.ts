@@ -39,8 +39,6 @@ export class OrderCustomerService {
 
   async reOrder(userId: string, body: ReOrderQuery): Promise<ReOrderResponse> {
     let { ignoreInvalidItems, overWriteCart, orderId } = body;
-    if(!ignoreInvalidItems) ignoreInvalidItems = false//if ignoreInvalidItems is not provided, it is false by default
-    if(!overWriteCart) overWriteCart = false//if overwriteCart is not provided,it is false by default
     
     const prevOrder = await this.orderRepository.findOrder({ orderId, userId });
     if (!prevOrder)
@@ -56,9 +54,7 @@ export class OrderCustomerService {
       return { productId: product.productId, quantity: product.quantity };
     }); //cart request format
 
-    const availableProductIds = await this.orderRepository.getAvailableProducts(
-      productIds,
-    );
+    const availableProductIds = await this.orderRepository.getAvailableProducts(productIds);
 
     if (availableProductIds.length === 0) {
       const response = {
@@ -70,12 +66,12 @@ export class OrderCustomerService {
     } else {
       const unavailableProducts = prevProducts.filter(
         (product) =>
-          !availableProductIds.find((item) => item.id === product.productId),
+          !availableProductIds.find((item) => item.id === product.productId)
       );
 
       if (
         availableProductIds.length < productIds.length &&
-        ignoreInvalidItems === false
+        !ignoreInvalidItems
       ) {
         return {
           code: 200,
@@ -99,19 +95,19 @@ export class OrderCustomerService {
         code: HttpStatus.NOT_FOUND,
       };
     if (cart.items.length !== 0) {
-      if (overWriteCart === true) {
-        const deleteCart = await this.orderRepository.clearCart(userId);
-        if (!deleteCart)
-          return {
-            error: ErrorMessageReOrder.CANNOT_CLEAR_CART,
-            errors: null,
-            code: HttpStatus.INTERNAL_SERVER_ERROR,
-          };
-      } else
+      if (!overWriteCart) 
         return {
           code: 200,
           data: { message: ErrorMessageReOrder.OVERWRITE_CART },
         };
+
+      const deleteCart = await this.orderRepository.clearCart(userId);
+      if (!deleteCart)
+        return {
+          error: ErrorMessageReOrder.CANNOT_CLEAR_CART,
+          errors: null,
+          code: HttpStatus.INTERNAL_SERVER_ERROR,
+        }; 
     }
     const addCart = await this.orderRepository.populateItemsInCart(
       userId,
@@ -122,12 +118,12 @@ export class OrderCustomerService {
     );
 
     if (addCart) return { code: 200, data: { products: responseItems } };
-    else
-      return {
-        error: ErrorMessageReOrder.CANNOT_ADD_ITEMS,
-        errors: null,
-        code: HttpStatus.INTERNAL_SERVER_ERROR,
-      };
+    
+    return {
+      error: ErrorMessageReOrder.CANNOT_ADD_ITEMS,
+      errors: null,
+      code: HttpStatus.INTERNAL_SERVER_ERROR,
+    };
   }
 
   async getOrderListByUserId(
