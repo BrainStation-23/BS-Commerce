@@ -1,23 +1,26 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import Tooltips from "../global/tooltip";
-import { searchDiscountSchema } from "./schema/discountSchema";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Link from 'next/link';
+import Tooltips from '../global/tooltip';
+import { searchDiscountSchema } from './schema/discountSchema';
 
 const SearchDiscount = () => {
   return (
     <>
       <div className="float-end pb-2">
-        <a className="btn btn-primary" href="/promotion/discount/create">
-          <i className="bi bi-plus-square-fill mx-2"></i>
-          Add new
-        </a>
+        <Link href="/promotion/discount/create">
+          <a className="btn btn-primary">
+            <i className="bi bi-plus-square-fill mx-2"></i>
+            Add new
+          </a>
+        </Link>
       </div>
       <Formik
         initialValues={{
-          SearchDiscountName: "",
-          SearchDiscountType: "",
-          goToDiscountByCode: "",
-          SearchDiscountStartDate: "",
-          SearchDiscountEndtDate: "",
+          SearchDiscountName: '',
+          SearchDiscountType: '',
+          goToDiscountByCode: '',
+          SearchDiscountStartDate: '',
+          SearchDiscountEndtDate: '',
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -35,7 +38,7 @@ const SearchDiscount = () => {
         {(formikprops) => {
           return (
             <Form onSubmit={formikprops.handleSubmit}>
-              <div className="card rounded border-1 px-2 mt-5">
+              <div className="card border-1 mt-5 rounded px-2">
                 <div className="card-body">
                   <div className="row search-row opened">
                     <div className="search-text">
@@ -43,7 +46,7 @@ const SearchDiscount = () => {
                         className="bi bi-search float-start mx-2"
                         aria-hidden="true"
                       />
-                      <p className="float mx-2">Search</p>{" "}
+                      <p className="float mx-2">Search</p>{' '}
                     </div>
                   </div>
                   <div className="search-body ">
@@ -90,7 +93,7 @@ const SearchDiscount = () => {
                               id="SearchDiscountEndtDate"
                               name="SearchDiscountEndtDate"
                             />
-                            <div className="errMsg text-red-600 text-danger"></div>
+                            <div className="errMsg text-danger text-red-600"></div>
                           </div>
                         </div>
 
@@ -150,7 +153,7 @@ const SearchDiscount = () => {
                               id="goToDiscountByCode"
                               name="goToDiscountByCode"
                             />
-                            <div className="errMsg text-red-600 text-danger"></div>
+                            <div className="errMsg text-danger text-red-600"></div>
                           </div>
                         </div>
                         <div className="form-group row py-1">
@@ -172,21 +175,21 @@ const SearchDiscount = () => {
                               name="SearchDiscountName"
                               type="text"
                             />
-                            <div className="errMsg text-red-600 text-danger"></div>
+                            <div className="errMsg text-danger text-red-600"></div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="text-center col-12 ">
+                      <div className="col-12 text-center ">
                         <button
                           type="submit"
                           id="search-discounts"
-                          className="btn btn-primary px-4 p my-1"
-                          style={{ borderRadius: "10px" }}
+                          className="btn btn-primary p my-1 px-4"
+                          style={{ borderRadius: '10px' }}
                         >
                           <i className="bi bi-search float-start "></i>
-                          <p className="float-end px-2 m-0 ">Search</p>
+                          <p className="float-end m-0 px-2 ">Search</p>
                         </button>
                       </div>
                     </div>

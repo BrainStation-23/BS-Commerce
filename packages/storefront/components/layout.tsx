@@ -105,11 +105,16 @@ const Layout = ({ children }: LayoutProps) => {
         theme="colored"
         closeButton={<XCircleIcon size={10} extraClass="hover:fill-red-500" />}
         toastClassName="w-full border-2 border-green-500"
-          style={
-            document.body.clientWidth < 484
-              ? { marginRight: '60px', left: '10px', bottom: '50px' , width:"75%" }
-              : {}
-          }
+        style={
+          document.body.clientWidth < 484
+            ? {
+                marginRight: '60px',
+                left: '10px',
+                bottom: '50px',
+                width: '75%',
+              }
+            : {}
+        }
         containerId={'bottom-left'}
         position="bottom-left"
       />

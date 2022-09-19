@@ -4,10 +4,11 @@ import CustomSelect from '@/components/products/CustomSelect.component';
 import FieldTemplate from '@/components/products/forms/fieldTemplate';
 import { userAPI } from '@/APIs';
 import { tagsOption } from '@/components/products/models/index';
+import { Brand, Tag } from '@bs-commerce/models';
 
 const ProductInfoForm: FC = () => {
-  const [tags, setTags] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
   const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
   const [tagsOptions, setTagsOption] = useState<tagsOption[]>([]);
   const [brandsOptions, setBrandsOption] = useState<tagsOption[]>([]);
@@ -18,8 +19,10 @@ const ProductInfoForm: FC = () => {
   };
   const getTags = async () => {
     const res = await userAPI.getTags();
-    const data = res?.data;
-    data ? setTags(data) : '';
+    if ('data' in res!) {
+      const data = res?.data;
+      data ? setTags(data) : '';
+    }
   };
   const setTagsOptions = () => {
     const temp: tagsOption[] = [];
@@ -33,8 +36,8 @@ const ProductInfoForm: FC = () => {
   };
 
   const getBrands = async () => {
-    const data = await userAPI.getBrands();
-    data ? setBrands(data) : '';
+    const res = await userAPI.getBrands();
+    if ('data' in res!) setBrands(res?.data.brands);
   };
   const setBrandsOptions = () => {
     const temp: tagsOption[] = [];

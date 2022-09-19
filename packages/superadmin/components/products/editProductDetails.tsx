@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { userAPI } from '@/APIs';
 import {
+  Manufacturer,
   NestedCategoryList,
   ProductManufacturer,
   subCategoryList,
@@ -22,6 +23,7 @@ import {
   CategoryInterface,
   EditProductInterface,
 } from '@/components/products/models/index';
+import Link from 'next/link';
 
 const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   const router = useRouter();
@@ -46,15 +48,13 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
   async function loadAllManufacturers() {
     const response = await userAPI.getAllManufacturers();
     const allManufacturers: ProductManufacturer[] = [];
-    if (response.data.manufacturers.length! > 0) {
-      response.data.manufacturers.forEach(
-        (manufacturer: ProductManufacturer) => {
-          allManufacturers.push({
-            id: manufacturer.id,
-            name: manufacturer.name,
-          });
-        }
-      );
+    if (response?.data.manufacturers.length! > 0) {
+      response?.data.manufacturers.forEach((manufacturer: Manufacturer) => {
+        allManufacturers.push({
+          id: manufacturer.id!,
+          name: manufacturer.name,
+        });
+      });
       setManufacturerData(allManufacturers);
     }
   }
@@ -210,11 +210,6 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
               id: '',
               name: values.manufacturerName,
             };
-            manufacturerData.map((manufacturerr) => {
-              if (values.manufacturerName == manufacturerr.name) {
-                return (manufacturer.id = manufacturerr.id);
-              }
-            });
             const newData = {
               info: info,
               meta: meta,
@@ -237,10 +232,12 @@ const EditProduct: FC<EditProductInterface> = (props: EditProductInterface) => {
                   <h1 className="float-start">
                     Edit product details
                     <span className="fs-5 p-3">
-                      <a href="/Product" className="text-decoration-none ">
-                        <i className="bi bi-arrow-left-circle-fill p-2" />
-                        Back to product list
-                      </a>
+                      <Link href="/Product">
+                        <a className="text-decoration-none ">
+                          <i className="bi bi-arrow-left-circle-fill p-2" />
+                          Back to product list
+                        </a>
+                      </Link>
                     </span>
                   </h1>
                   <div className="float-end">

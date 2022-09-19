@@ -13,6 +13,7 @@ import BrandInfoForm from '@/components/brands/forms/brandInfoForm';
 import BrandMetaForm from '@/components/brands/forms/brandMetaForm';
 import { brandSchema } from '@/components/brands/schema/brandsSchema';
 import { FC } from 'react';
+import Link from 'next/link';
 
 const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
   const router = useRouter();
@@ -67,10 +68,12 @@ const UpdateBrand: FC<{ brand: Brand }> = ({ brand }) => {
                   <h1 className="float-start">
                     Edit brand
                     <span className="fs-5 p-3">
-                      <a href="/Brands" className="text-decoration-none">
-                        <i className="bi bi-arrow-left-circle-fill p-2" />
-                        back to brands list
-                      </a>
+                      <Link href="/Brands">
+                        <a className="text-decoration-none">
+                          <i className="bi bi-arrow-left-circle-fill p-2" />
+                          back to brands list
+                        </a>
+                      </Link>
                     </span>
                   </h1>
                   <div className="float-end">

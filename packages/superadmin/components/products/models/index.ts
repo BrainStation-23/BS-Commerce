@@ -4,6 +4,7 @@ export interface CategoryInterface {
   id?: number | string;
   name?: string | undefined;
   isSelected: boolean | undefined;
+  displayOrder?: number;
 }
 export interface EditProductInterface {
   product: Product;

@@ -4,12 +4,14 @@ import { Brand } from '@bs-commerce/models';
 import { userAPI } from '@/APIs';
 import BrandsList from '@/components/brands/brandsList';
 import SearchWindowBrands from '@/components/brands/searchWindowBrands';
+import Link from 'next/link';
 
 const Brands: NextPage = () => {
   const [brands, setBrands] = useState<Brand[]>();
   const getAllBrands = async () => {
     const brandsList = await userAPI.getBrands();
-    if (brandsList) setBrands(brandsList);
+    if ('data' in brandsList!)
+      if (brandsList) setBrands(brandsList?.data?.brands!);
   };
   useEffect(() => {
     getAllBrands();
@@ -19,9 +21,9 @@ const Brands: NextPage = () => {
       <main className="px-5">
         <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="fs-2">Brands</div>
-          <a className="btn btn-primary" href="/Brands/Create">
-            Add new
-          </a>
+          <Link href="/Brands/Create">
+            <a className="btn btn-primary">Add new</a>
+          </Link>
         </div>
 
         <div>

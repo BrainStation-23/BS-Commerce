@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 interface SingleViewInterface {
   label: string;
-  value?: string | Array<any> | number;
+  value?: string | Array<any> | number | Date;
 }
 const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
   const { label, value } = props;
@@ -19,7 +19,9 @@ const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">
           <div className="">
-            {Array.isArray(value) ? (
+            {value instanceof Date ? (
+              '---'
+            ) : Array.isArray(value) ? (
               <>
                 {value[0] ? value[0] : '---'}
                 {value.map((data, index) => (index > 0 ? ` , ${data}` : ''))}

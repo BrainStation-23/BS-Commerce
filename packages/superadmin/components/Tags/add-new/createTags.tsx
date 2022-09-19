@@ -37,7 +37,7 @@ const CreateTag: FC = () => {
                   Add a Tag
                   <span className="fs-5 p-3">
                     <Link href="/tags/">
-                      <a href="/Product" className="text-decoration-none">
+                      <a className="text-decoration-none">
                         <i className="bi bi-arrow-left-circle-fill p-2" />
                         <span style={{ fontSize: '14px' }}>
                           Back to Tag list

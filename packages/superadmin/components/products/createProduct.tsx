@@ -5,6 +5,7 @@ import { NextComponentType } from 'next';
 import { useEffect, useState } from 'react';
 import {
   CreateProductRequest,
+  Manufacturer,
   NestedCategoryList,
   ProductCategory,
   ProductManufacturer,
@@ -20,6 +21,7 @@ import CategorySection from '@/components/products/forms/categorySection';
 import ProductInfoForm from '@/components/products/forms/productInfoForm';
 import { productSchema } from '@/components/products/schema/productSchema/index';
 import ProductManufacturers from '@/components/products/forms/manufacturerForm';
+import Link from 'next/link';
 
 const CreateProduct: NextComponentType = () => {
   const router = useRouter();
@@ -41,15 +43,13 @@ const CreateProduct: NextComponentType = () => {
     const response = await userAPI.getAllManufacturers();
     const allManufacturers: ProductManufacturer[] = [];
 
-    if (response.data.manufacturers.length! > 0) {
-      response.data.manufacturers.forEach(
-        (manufacturer: ProductManufacturer) => {
-          allManufacturers.push({
-            id: manufacturer.id,
-            name: manufacturer.name,
-          });
-        }
-      );
+    if (response?.data.manufacturers.length! > 0) {
+      response?.data.manufacturers.forEach((manufacturer: Manufacturer) => {
+        allManufacturers.push({
+          id: manufacturer.id!,
+          name: manufacturer.name,
+        });
+      });
       setManufacturerData(allManufacturers);
     }
   }
@@ -197,11 +197,6 @@ const CreateProduct: NextComponentType = () => {
             id: '',
             name: values.manufacturerName,
           };
-          manufacturerData.map((manufacturerr) => {
-            if (values.manufacturerName == manufacturerr.name) {
-              return (manufacturer.id = manufacturerr.id);
-            }
-          });
           const newData = {
             info: info,
             meta: meta,
@@ -223,10 +218,12 @@ const CreateProduct: NextComponentType = () => {
                 <h1 className="float-start">
                   Add a new product
                   <span className="fs-5 p-3">
-                    <a href="/Product" className="text-decoration-none">
-                      <i className="bi bi-arrow-left-circle-fill p-2" />
-                      back to product list
-                    </a>
+                    <Link href="/Product">
+                      <a className="text-decoration-none">
+                        <i className="bi bi-arrow-left-circle-fill p-2" />
+                        back to product list
+                      </a>
+                    </Link>
                   </span>
                 </h1>
                 <div className="float-end">

@@ -1,11 +1,12 @@
-import { Formik, Form } from "formik";
-import { manufactureSchema } from "../schema/index";
+import { Formik, Form } from 'formik';
+import { manufactureSchema } from '../schema/index';
 
-import CreateNewManufacturer from "../add-new/forms/manufacturerInfo";
-import DisplayOrders from "../add-new/forms/displayOrder";
-import SEO from "../add-new/forms/seo";
-import { userAPI } from "../../../APIs";
-import { useRouter } from "next/router";
+import CreateNewManufacturer from '../add-new/forms/manufacturerInfo';
+import DisplayOrders from '../add-new/forms/displayOrder';
+import SEO from '../add-new/forms/seo';
+import { userAPI } from '../../../APIs';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 const EditManufacturer = (props: any) => {
   const router = useRouter();
   const { manufacturer } = props;
@@ -68,15 +69,14 @@ const EditManufacturer = (props: any) => {
                   <h1 className="float-start">
                     Edit Manufacturer details
                     <span className="fs-5 p-3">
-                      <a
-                        href="/Manufacturer/"
-                        className="text-decoration-none "
-                      >
-                        <i className="bi bi-arrow-left-circle-fill p-2" />
-                        <span style={{ fontSize: "14px" }}>
-                          Back to Manufacturer list
-                        </span>
-                      </a>
+                      <Link href="/Manufacturer/">
+                        <a className="text-decoration-none ">
+                          <i className="bi bi-arrow-left-circle-fill p-2" />
+                          <span style={{ fontSize: '14px' }}>
+                            Back to Manufacturer list
+                          </span>
+                        </a>
+                      </Link>
                     </span>
                   </h1>
                   <div className="float-end">
@@ -111,7 +111,7 @@ const EditManufacturer = (props: any) => {
           }}
         </Formik>
       ) : (
-        ""
+        ''
       )}
     </>
   );

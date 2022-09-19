@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
-import getData from "./service/get-shipping-data.service";
 import Table from "../global/table/table";
 import Pagination from "../global/pagination";
 import Link from "next/link";
@@ -11,7 +10,7 @@ const ShipmentList = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const data: any = getData();
+        const data: any = [];
         setData(data);
     }, []);
 

@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from 'formik';
 
 const SearchForm = () => {
   function handleSearchSubmit(data: any) {
@@ -9,11 +9,11 @@ const SearchForm = () => {
     <>
       <Formik
         initialValues={{
-          startDate: "",
-          endDate: "",
-          orderStatus: "",
-          paymentStatus: "",
-          shippingStatus: "",
+          startDate: '',
+          endDate: '',
+          orderStatus: '',
+          paymentStatus: '',
+          shippingStatus: '',
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -39,11 +39,11 @@ const SearchForm = () => {
                         className="float-lg-end float-xl-end"
                       >
                         <h6>
-                          Start Date{" "}
+                          Start Date{' '}
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
-                              style={{ color: "#3c8dbc" }}
+                              style={{ color: '#3c8dbc' }}
                             ></i>
                           </span>
                         </h6>
@@ -52,7 +52,7 @@ const SearchForm = () => {
                     <div className="col-md-6 col-lg-6 col-xl-6">
                       <Field
                         type="date"
-                        className="p-2 w-100 mb-2"
+                        className="w-100 mb-2 p-2"
                         id="startDate"
                         name="startDate"
                       />
@@ -68,11 +68,11 @@ const SearchForm = () => {
                         className="float-lg-end float-xl-end"
                       >
                         <h6>
-                          Order Status{" "}
+                          Order Status{' '}
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
-                              style={{ color: "#3c8dbc" }}
+                              style={{ color: '#3c8dbc' }}
                             ></i>
                           </span>
                         </h6>
@@ -81,7 +81,7 @@ const SearchForm = () => {
                     <div className="col-md-6 col-lg-6 col-xl-6">
                       <Field
                         as="select"
-                        className="p-2 w-full mb-2"
+                        className="mb-2 w-full p-2"
                         id="orderStatus"
                         name="orderStatus"
                       >
@@ -105,11 +105,11 @@ const SearchForm = () => {
                         className="float-lg-end float-xl-end"
                       >
                         <h6>
-                          End Date{" "}
+                          End Date{' '}
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
-                              style={{ color: "#3c8dbc" }}
+                              style={{ color: '#3c8dbc' }}
                             ></i>
                           </span>
                         </h6>
@@ -118,7 +118,7 @@ const SearchForm = () => {
                     <div className="col-md-6 col-lg-6 col-xl-6">
                       <Field
                         type="date"
-                        className="p-2 w-100 mb-2"
+                        className="w-100 mb-2 p-2"
                         id="endDate"
                         name="endDate"
                       />
@@ -134,11 +134,11 @@ const SearchForm = () => {
                         className="float-lg-end float-xl-end"
                       >
                         <h6>
-                          Payment Status{" "}
+                          Payment Status{' '}
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
-                              style={{ color: "#3c8dbc" }}
+                              style={{ color: '#3c8dbc' }}
                             ></i>
                           </span>
                         </h6>
@@ -147,7 +147,7 @@ const SearchForm = () => {
                     <div className="col-md-6 col-lg-6 col-xl-6">
                       <Field
                         as="select"
-                        className="p-2 w-full mb-2"
+                        className="mb-2 w-full p-2"
                         id="paymentStatus"
                         name="paymentStatus"
                       >
@@ -166,8 +166,7 @@ const SearchForm = () => {
 
               <div className="row mb-3">
                 <div className="col-md-6 col-lg-6 col-xl-6">
-                  <div className="row align-items-center">
-                  </div>
+                  <div className="row align-items-center"></div>
                 </div>
 
                 <div className="col-md-6 col-lg-6 col-xl-6">
@@ -178,11 +177,11 @@ const SearchForm = () => {
                         className="float-lg-end float-xl-end"
                       >
                         <h6>
-                          Shipping Status{" "}
+                          Shipping Status{' '}
                           <span>
                             <i
                               className="bi bi-question-circle-fill"
-                              style={{ color: "#3c8dbc" }}
+                              style={{ color: '#3c8dbc' }}
                             ></i>
                           </span>
                         </h6>
@@ -191,7 +190,7 @@ const SearchForm = () => {
                     <div className="col-md-6 col-lg-6 col-xl-6">
                       <Field
                         as="select"
-                        className="p-2 w-full mb-2"
+                        className="mb-2 w-full p-2"
                         id="shippingStatus"
                         name="shippingStatus"
                       >
@@ -207,11 +206,11 @@ const SearchForm = () => {
                 </div>
               </div>
 
-              <div className="d-flex flex-wrap justify-content-center">
+              <div className="d-flex justify-content-center flex-wrap">
                 <button
                   type="submit"
                   className="btn btn-primary px-3 py-2"
-                  style={{ background: "#3c8dbc", border: "none" }}
+                  style={{ background: '#3c8dbc', border: 'none' }}
                 >
                   <span>
                     <i className="bi bi-graph-up-arrow me-2 mt-1"></i>
