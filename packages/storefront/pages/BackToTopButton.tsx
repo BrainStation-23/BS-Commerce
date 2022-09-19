@@ -24,7 +24,7 @@ const BackToTopButton = () => {
     <div>
       {backToTopButton && (
         <button
-          className="rounded-full bg-[#40a944]"
+          className="rounded-full border-2 border-white bg-[#40a944]"
           style={{
             position: 'fixed',
             bottom: '75px',

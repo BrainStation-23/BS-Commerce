@@ -42,7 +42,7 @@ const Footer: NextComponentType = () => {
   return (
     <>
       <div className="container mx-auto mb-3 flex justify-center px-4 py-4 lg:py-16">
-        <div className="flex flex-col items-center gap-y-10 px-4 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
+        <div className="mb-10 flex flex-col items-center gap-y-10 px-4 md:mb-0 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
           {/* 1st portion */}
           <div className="flex flex-col items-center text-center md:w-full md:items-start md:text-left lg:w-1/3 lg:pr-4">
             <span className="mb-2 text-xl font-black">BS Commerce</span>
