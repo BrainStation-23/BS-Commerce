@@ -44,7 +44,7 @@ const TrendingProducts = () => {
           <p className="font-serif text-lg italic">Recently added our store</p>
           <h1 className="text-bold text-4xl ">Trending Products</h1>
         </div>
-        <ul className="m-5 flex justify-center text-base font-semibold ">
+        {/* <ul className="m-5 flex justify-center text-base font-semibold ">
           <li className="mr-1 md:mr-3">
             <button
               onClick={() => handleClick('smartphones')}
@@ -81,7 +81,7 @@ const TrendingProducts = () => {
               FRAGRANCES
             </button>
           </li>
-        </ul>
+        </ul> */}
         {products?.length > 1 && (
           <SwiperGrid
             slidesPerViewmobile={2}
