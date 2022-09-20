@@ -33,7 +33,7 @@ const Pagination: FC<Props> = ({
   let lastPage = paginationRange?.[paginationRange.length - 1];
 
   return (
-    <div className="d-flex justify-content-between flex-wrap mt-2">
+    <div className="d-flex justify-content-between mt-2 flex-wrap">
       <nav>
         <ul className="pagination">
           <li
@@ -90,13 +90,17 @@ const Pagination: FC<Props> = ({
       <div className="d-flex align-items-center justify-content-center">
         {totalCount && (
           <div className="me-3">
-            1-{totalCount} of {totalCount} items
+            {pageSize * (currentPage - 1) + 1}-
+            {pageSize * currentPage <= totalCount
+              ? pageSize * currentPage
+              : totalCount}{" "}
+            of {totalCount} items
           </div>
         )}
         <div>
-          <button className="btn btn-light">
+          {/* <button className="btn btn-light">
             <i className="bi bi-arrow-clockwise align-middle"></i>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
