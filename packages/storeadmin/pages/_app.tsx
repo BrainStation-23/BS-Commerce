@@ -1,18 +1,29 @@
-import "../styles/App.scss";
-import type { AppProps } from "next/app";
-import Layout from "../components/layout";
-import { useEffect } from "react";
+import type { AppProps } from 'next/app';
+import Axios from 'axios';
+import { Provider } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { config } from '../config';
+import { store } from '../store';
+
+import Layout from '@/components/layouts/index';
+
+import '../styles/App.scss';
+
+Axios.defaults.baseURL = config?.restPrefix;
+
+let persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    typeof document !== undefined
-      ? require("bootstrap/dist/js/bootstrap")
-      : null;
-  }, []);
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </PersistGate>
+    </Provider>
   );
 }
 

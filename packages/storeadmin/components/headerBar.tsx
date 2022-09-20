@@ -1,12 +1,13 @@
 import type { NextComponentType } from "next";
+import Link from "next/link";
 
 const HeaderBar: NextComponentType = () => {
   return (
     <>
       <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/home">
-          StoreAdmin
-        </a>
+        <Link href="/home">
+          <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3">StoreAdmin</a>
+        </Link>
         <button
           className="navbar-toggler position-absolute d-md-none collapsed"
           type="button"
@@ -26,9 +27,9 @@ const HeaderBar: NextComponentType = () => {
         />
         <div className="navbar-nav">
           <div className="nav-item text-nowrap">
-            <a className="nav-link px-3" href="#">
-              Sign out
-            </a>
+            <Link href="#">
+              <a className="nav-link px-3">Sign out</a>
+            </Link>
           </div>
         </div>
       </header>

@@ -69,7 +69,10 @@ const ReorderModal: React.FC<Props> = ({
             </button>
             <div className="flex w-36 flex-col px-4 sm:w-80">
               <span className="mb-2 text-sm sm:mb-4 sm:text-base"></span>
-              <div className="mb-3 flex justify-center text-sm text-green-600 sm:mb-6 sm:text-base">
+              <div
+                id="reorderModalMessage"
+                className="mb-3 flex justify-center text-sm text-green-600 sm:mb-6 sm:text-base"
+              >
                 {message}
               </div>
               {unavailableProducts.length > 0 ? (
