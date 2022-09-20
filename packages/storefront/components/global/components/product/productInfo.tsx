@@ -12,7 +12,7 @@ const ProductInfo = (props: SingleProduct) => {
     <div>
       <div className="pl-6">
         <div
-          className="text-base font-medium text-gray-600"
+          className="text-base text-inherit text-gray-600"
           id="searchProductName"
         >
           {product?.info?.name}
