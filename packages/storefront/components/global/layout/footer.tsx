@@ -11,19 +11,19 @@ const Footer: NextComponentType = () => {
   const { pathname } = useRouter();
   const informationList: footerLink[] = [
     { name: 'About Us', link: '/about' },
-    { name: 'Delivery Information', link: '/' },
-    { name: 'Privacy Policy', link: '/' },
-    { name: 'Terms & Condition', link: '/' },
+    // { name: 'Delivery Information', link: '/' },
+    // { name: 'Privacy Policy', link: '/' },
+    // { name: 'Terms & Condition', link: '/' },
     { name: 'Contact Us', link: '/contact' },
-    { name: 'Site Map', link: '/' },
+    // { name: 'Site Map', link: '/' },
   ];
 
   const extraList: footerLink[] = [
-    { name: 'Brands', link: '/' },
-    { name: 'Gifts Certificates', link: '/' },
-    { name: 'Affiliate', link: '/' },
-    { name: 'Specials', link: '/' },
-    { name: 'Returns', link: '/' },
+    // { name: 'Brands', link: '/' },
+    // { name: 'Gifts Certificates', link: '/' },
+    // { name: 'Affiliate', link: '/' },
+    // { name: 'Specials', link: '/' },
+    // { name: 'Returns', link: '/' },
     { name: 'Order History', link: '/order' },
   ];
 
@@ -42,9 +42,9 @@ const Footer: NextComponentType = () => {
   return (
     <>
       <div className="container mx-auto mb-3 flex justify-center px-4 py-4 lg:py-16">
-        <div className="flex flex-col items-center gap-y-10 px-4 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
+        <div className="md: flex flex-col items-center justify-center gap-y-10 px-4 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
           {/* 1st portion */}
-          <div className="flex flex-col items-center text-center md:w-full md:items-start md:text-left lg:w-1/3 lg:pr-4">
+          <div className="flex flex-col items-center text-center md:w-full md:items-start md:text-left lg:w-3/5 lg:pr-4">
             <span className="mb-2 text-xl font-black">BS Commerce</span>
             <span className="mb-1 text-sm">
               Serving Enterprises and SMEs with Technological Partnership Since
@@ -66,7 +66,7 @@ const Footer: NextComponentType = () => {
             </div>
           </div>
           {/* Information */}
-          <div className="flex flex-col text-center md:flex-1 md:text-left">
+          <div className="flex flex-col text-center md:flex-1 md:text-left lg:w-1/2">
             <span className="mb-3 text-lg font-medium">Information</span>
             <div className="flex flex-col gap-1 text-sm">
               {informationList.map((link) => (
@@ -79,7 +79,7 @@ const Footer: NextComponentType = () => {
             </div>
           </div>
           {/* Extras */}
-          <div className="flex flex-col text-center md:flex-1 md:text-left">
+          <div className="flex flex-col text-center md:text-left">
             <span className="mb-3 text-lg font-medium">Extras</span>
             <div className="flex flex-col gap-1 text-sm">
               {extraList.map((link) => (
@@ -92,7 +92,7 @@ const Footer: NextComponentType = () => {
             </div>
           </div>
           {/* Newsletter */}
-          <div className="flex flex-col text-center md:flex-1 md:grow-[2] md:text-left">
+          {/* <div className="flex flex-col text-center md:flex-1 md:grow-[2] md:text-left">
             <span className="mb-3 text-lg font-medium">
               Signup for newsletter
             </span>
@@ -114,7 +114,7 @@ const Footer: NextComponentType = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <footer className="flex w-full bg-gray-900 py-4 text-center text-sm font-normal text-white md:px-4 md:text-left">

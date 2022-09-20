@@ -15,7 +15,7 @@ const BannerPage = () => {
           bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
           buttonPosition="absolute bottom-4 sm:bottom-4 md:bottom-7 lg:bottom-16 xl:bottom-16 left-0 sm:left-0 lg:left-10 xl:left-10"
           buttonEdge="rounded-lg"
-          hasButton={true}
+          hasButton={false} //previously it was true
           buttonPadding="px-3 sm:px-3 md:px-3 lg:px-5 xl:px-5 py-2"
           buttonMargin="m-5"
           buttonBg="bg-green-600/100"
@@ -41,7 +41,7 @@ const BannerPage = () => {
           bg="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-no-repeat bg-center"
           buttonPosition="absolute bottom-4 sm:bottom-4 md:bottom-7 lg:bottom-16 xl:bottom-16 left-0 sm:left-0 lg:left-10 xl:left-10"
           buttonEdge="rounded-lg"
-          hasButton={true}
+          hasButton={false} //previously it was true
           buttonPadding="px-3 sm:px-3 md:px-3 lg:px-5 xl:px-5 py-2"
           buttonMargin="m-5"
           buttonBg="bg-green-600/100"

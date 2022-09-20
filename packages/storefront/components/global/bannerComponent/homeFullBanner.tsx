@@ -10,7 +10,7 @@ const HomefullBanner: FC = () => {
         position="relative"
         width="w-full"
         height="h-52 sm:h-52 md:h-52 lg:h-80 xl:h-80"
-        hasButton={true}
+        hasButton={false} //previously it was true
         buttonText="Discover Now"
         linkhref="/deals" //need to modify href later
         buttonPosition=" "

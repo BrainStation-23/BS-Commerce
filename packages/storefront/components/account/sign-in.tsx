@@ -196,19 +196,12 @@ const Signin: NextComponentType = () => {
                   </a>
                 </Link>
               </div>
-              <div className="mt-3">
+              {/* <div className="mt-3">
                 <p className="ml-1 text-gray-600">or sign in with</p>
               </div>
               <div className="flex flex-wrap">
                 <button className="mx-1 mt-3 flex flex-wrap">
                   <GoogleLogo />
-                  {/* <Image
-                    className="mt-1 md:ml-2 lg:ml-2 xl:ml-2"
-                    src={GoogleLogo}
-                    alt="google-logo"
-                    height={15}
-                    width={15}
-                  /> */}
                   <p className="ml-1 mt-1 text-xs">Google</p>
                 </button>
                 <div className="mt-3">
@@ -216,15 +209,9 @@ const Signin: NextComponentType = () => {
                 </div>
                 <button className="mx-1 mt-3 flex flex-wrap">
                   <FacebookLogo />
-                  {/* <Image
-                    src={FacebookLogo}
-                    alt="facebook-logo"
-                    height={38}
-                    width={35}
-                  /> */}
                   <p className="mt-1 text-xs">Facebook</p>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -25,7 +25,7 @@ const BannerHeading: FC<Props> = (props) => {
     mediumHeadingColor,
   } = props;
   return (
-    <div className="container px-4 pt-8 mx-auto">
+    <div className="container mx-auto px-4 pt-8">
       {smallHeading && (
         <p
           className={`${smallHeadingColor} text-normal sm:text-normal md:text-normal mb-2 font-normal lg:text-lg xl:text-lg`}
