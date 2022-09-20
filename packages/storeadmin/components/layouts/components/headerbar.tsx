@@ -29,7 +29,7 @@ const Headerbar: FC<Props> = ({
     <div
       className="d-flex justify-content-between align-items-center flex-row p-8"
       style={{
-        padding: "8px",
+        padding: "17.5px",
         backgroundColor: "#343a40",
         transition: "all 0.3s linear",
       }}
@@ -38,7 +38,7 @@ const Headerbar: FC<Props> = ({
         className={`bi bi-list ${layout.link}`}
         onClick={() => toggleSidebar(!showSidebar)}
         style={{
-          padding: "8px 16px",
+          padding: "0px 16px",
         }}
       />
       <div style={{ color: "#656159" }}>
