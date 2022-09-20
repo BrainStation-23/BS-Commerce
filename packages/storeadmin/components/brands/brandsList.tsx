@@ -18,7 +18,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
 
   const onChangeForList = async () => {
     const brandsList = await userAPI.getBrands();
-    setBrands(brandsList);
+    if ("data" in brandsList!) setBrands(brandsList?.data?.brands);
   };
 
   const deleteProductFunction = async () => {
