@@ -27,11 +27,11 @@ const BackToTopButton = () => {
           className="rounded-full border-2 border-white bg-[#40a944]"
           style={{
             position: 'fixed',
-            bottom: '75px',
+            bottom: '65px',
             right: '30px',
             height: '40px',
             width: '40px',
-            fontSize: '60px',
+            // fontSize: '20px',
             zIndex: '50',
           }}
           onClick={scrollUp}
@@ -48,13 +48,14 @@ const BackToTopButton = () => {
               clipRule="evenodd"
             />
           </svg> */}
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="2"
             stroke="white"
-            className="m-2 h-6 w-6"
+            className="ml-[7px] h-6 w-6"
           >
             <path
               strokeLinecap="round"
