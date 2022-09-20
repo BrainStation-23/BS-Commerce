@@ -57,7 +57,7 @@ const LogDetail = (props: any) => {
             </a>
           </Link>
         </div>
-        <button
+        {/* <button
           className="btn btn-danger float-end"
           data-bs-toggle="modal"
           data-bs-target="#myModal"
@@ -67,7 +67,7 @@ const LogDetail = (props: any) => {
           </span>
           Delete
         </button>
-        <Modal />
+        <Modal /> */}
       </div>
       <LogHeading />
       <div className="card border-1 font-lg mt-3 rounded p-3">

@@ -39,8 +39,8 @@ const OrderListMain = () => {
       };
       setOrderListData(order);
     } else {
-      setStartDate(moment(startDate).toJSON())
-      setEndDate(moment(endDate).toJSON())
+      setStartDate(moment(startDate).toJSON());
+      setEndDate(moment(endDate).toJSON());
       getAllOrderList();
     }
   };
@@ -227,7 +227,7 @@ const OrderListMain = () => {
           <div className="card-body">
             <div className="d-flex justify-content-between">
               <div className="d-flex justify-content-start">
-                <p>
+                {/* <p>
                   Learn more about
                   <a
                     href="#"
@@ -238,7 +238,7 @@ const OrderListMain = () => {
                   >
                     Orders
                   </a>
-                </p>
+                </p> */}
               </div>
             </div>
 
@@ -247,7 +247,6 @@ const OrderListMain = () => {
             ) : (
               'No Order Data Found'
             )}
-
           </div>
         </div>
       </main>

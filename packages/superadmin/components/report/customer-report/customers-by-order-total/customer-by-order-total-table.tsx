@@ -79,13 +79,13 @@ const CustomerByOrderTotalTable = () => {
     <>
       <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
-          <p>
+          {/* <p>
             Learn more about{' '}
             <a href="#" style={{ textDecoration: 'none' }}>
               {' '}
               reports
             </a>
-          </p>
+          </p> */}
           <Table items={currentTableData} columns={columns} />
 
           <div className="">

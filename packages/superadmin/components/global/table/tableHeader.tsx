@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const TableHead = (props: any) => {
   const { columns, onClickForSort } = props;
@@ -12,7 +12,7 @@ const TableHead = (props: any) => {
                 <th
                   className="text-center"
                   onClick={() => {
-                    onClickForSort(col.label);
+                    if (onClickForSort) onClickForSort(col.label);
                   }}
                 >
                   {col.label}

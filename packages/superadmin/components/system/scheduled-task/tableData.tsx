@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const TableData = (props: any) => {
   const { data } = props;
@@ -24,7 +24,7 @@ const TableData = (props: any) => {
             </>
           ) : (
             <>
-              {!showUpdate && ""}
+              {!showUpdate && ''}
               {showUpdate && (
                 <input type="checkbox" defaultValue="false"></input>
               )}
@@ -41,7 +41,7 @@ const TableData = (props: any) => {
             </>
           ) : (
             <>
-              {!showUpdate && ""}
+              {!showUpdate && ''}
               {showUpdate && (
                 <input type="checkbox" defaultValue="false"></input>
               )}
@@ -51,10 +51,10 @@ const TableData = (props: any) => {
         <td>{data.startDate}</td>
         <td>{data.endDate}</td>
         <td>{data.successDate}</td>
-        <td>
+        {/* <td>
           <button className="btn btn-success">Run</button>
-        </td>
-        <td>
+        </td> */}
+        {/* <td>
           {!showUpdate && (
             <button
               onClick={() => {
@@ -91,7 +91,7 @@ const TableData = (props: any) => {
               </button>
             </>
           )}
-        </td>
+        </td> */}
       </tr>
     </>
   );

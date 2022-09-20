@@ -97,11 +97,11 @@ const Pagination: FC<Props> = ({
             of {totalCount} items
           </div>
         )}
-        <div>
+        {/* <div>
           <button className="btn btn-light">
             <i className="bi bi-arrow-clockwise align-middle"></i>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

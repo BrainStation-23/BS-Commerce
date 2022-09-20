@@ -33,12 +33,12 @@ const OrderList: FC<Props> = ({ orderListData }) => {
           <button
             className={
               data?.orderStatus === 'Completed'
-                ? 'btn-sm bg-success rounded border-0 px-2 mt-1 text-white'
+                ? 'btn-sm bg-success mt-1 rounded border-0 px-2 text-white'
                 : data?.orderStatus === 'Processing'
-                ? 'btn-sm bg-info rounded border-0 px-2 mt-1 text-white'
+                ? 'btn-sm bg-info mt-1 rounded border-0 px-2 text-white'
                 : data?.orderStatus === 'Cancelled'
-                ? 'btn-sm bg-danger mbrounded border-0 px-2 mt-1 text-white'
-                : 'btn-sm bg-warning rounded border-0 px-2 mt-1 text-white'
+                ? 'btn-sm bg-danger mbrounded mt-1 border-0 px-2 text-white'
+                : 'btn-sm bg-warning mt-1 rounded border-0 px-2 text-white'
             }
             disabled
           >
@@ -120,7 +120,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
         </div>
         <div className="card border-1 mt-3 rounded px-2">
           <div className="card-body">
-            <p>
+            {/* <p>
               Learn more about
               <a
                 href="#"
@@ -131,7 +131,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
               >
                 Orders
               </a>
-            </p>
+            </p> */}
 
             <Table items={currentTableData} columns={columns} />
 

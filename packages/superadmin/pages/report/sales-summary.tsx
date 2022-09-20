@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import SalesSummaryComponent from "../../components/report/sales-summary";
+import { NextPage } from 'next';
+import SalesSummaryComponent from '../../components/report/sales-summary';
 
 const SalesSummary: NextPage = () => {
   return (

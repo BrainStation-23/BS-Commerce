@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import CustomersByOrderTotalComponent from "../../components/report/customer-report/customers-by-order-total";
+import { NextPage } from 'next';
+import CustomersByOrderTotalComponent from '../../components/report/customer-report/customers-by-order-total';
 
 const BestCustomerByOrdeRTotal: NextPage = () => {
   return (

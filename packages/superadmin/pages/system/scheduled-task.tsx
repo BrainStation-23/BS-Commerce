@@ -1,6 +1,6 @@
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
-import ScheduledTask from "../../components/system/scheduled-task";
+import ScheduledTask from '../../components/system/scheduled-task';
 
 const ScheduledTaskPage: NextPage = () => {
   return (

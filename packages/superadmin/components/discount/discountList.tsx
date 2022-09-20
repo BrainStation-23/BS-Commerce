@@ -18,47 +18,57 @@ const DiscountsList = () => {
     {
       label: 'Discount type',
       path: 'type',
-      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data[key]}</td>
+      ),
     },
     {
       label: 'Discount',
       path: 'discountPercentage',
-      content: (data: any, key: any, index: any) => <td>{data[key]}%</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data[key]}%</td>
+      ),
     },
     {
       label: 'Start date',
       path: 'startDate',
-      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data[key]}</td>
+      ),
     },
     {
       label: 'End date',
       path: 'endDate',
-      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
+      content: (data: any, key: any, index: any) => (
+        <td className="text-center">{data[key]}</td>
+      ),
     },
     {
       label: 'Times Used',
       path: 'used',
-      content: (data: any, key: any, index: any) => <td>{data[key]}</td>,
-    },
-    {
-      label: 'Edit',
-      path: 'id',
       content: (data: any, key: any, index: any) => (
-        <td className="text-center">
-          <Link
-            href={{ pathname: `/discount/edit/[id]`, query: { id: data[key] } }}
-            passHref
-          >
-            <button className="btn btn-default">
-              <span>
-                <i className="bi bi-pencil p-1"></i>
-              </span>
-              Edit
-            </button>
-          </Link>
-        </td>
+        <td className="text-center">{data[key]}</td>
       ),
     },
+    // {
+    //   label: 'Edit',
+    //   path: 'id',
+    //   content: (data: any, key: any, index: any) => (
+    //     <td className="text-center">
+    //       <Link
+    //         href={{ pathname: `/discount/edit/[id]`, query: { id: data[key] } }}
+    //         passHref
+    //       >
+    //         <button className="btn btn-default">
+    //           <span>
+    //             <i className="bi bi-pencil p-1"></i>
+    //           </span>
+    //           Edit
+    //         </button>
+    //       </Link>
+    //     </td>
+    //   ),
+    // },
   ];
 
   const paginateData = (data: any) => {
@@ -77,17 +87,17 @@ const DiscountsList = () => {
     <>
       <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
-          <p>
+          {/* <p>
             Learn more about{' '}
             <a href="#" style={{ textDecoration: 'none' }}>
               Discounts
             </a>
-          </p>
+          </p> */}
           <Table items={paginatedData} columns={columns} />
 
           <div className="d-flex flex-column align-items-center flex-xs-column flex-sm-column flex-md-column flex-lg-row flex-xl-row align-items-xs-center align-items-sm-center align-items-md-center justify-content-lg-between justify-content-xl-between flex-wrap">
             <Pagination
-              totalItems={30}
+              totalItems={discountData['discountData'].length}
               pageCount={pageCount}
               activePage={activePage}
               onClickPage={handleClickPage}
@@ -119,35 +129,50 @@ const DiscountsList = () => {
                     <a
                       href="#"
                       className="dropdown-item"
-                      onClick={() => setPageCount(5)}
+                      onClick={() => {
+                        setPageCount(5);
+                        setActivePage(1);
+                      }}
                     >
                       5
                     </a>
                     <a
                       href="#"
                       className="dropdown-item"
-                      onClick={() => setPageCount(15)}
+                      onClick={() => {
+                        setPageCount(15);
+                        setActivePage(1);
+                      }}
                     >
                       15
                     </a>
                     <a
                       href="#"
                       className="dropdown-item"
-                      onClick={() => setPageCount(20)}
+                      onClick={() => {
+                        setPageCount(20);
+                        setActivePage(1);
+                      }}
                     >
                       20
                     </a>
                     <a
                       href="#"
                       className="dropdown-item"
-                      onClick={() => setPageCount(50)}
+                      onClick={() => {
+                        setPageCount(50);
+                        setActivePage(1);
+                      }}
                     >
                       50
                     </a>
                     <a
                       href="#"
                       className="dropdown-item"
-                      onClick={() => setPageCount(100)}
+                      onClick={() => {
+                        setPageCount(100);
+                        setActivePage(1);
+                      }}
                     >
                       100
                     </a>
@@ -159,13 +184,15 @@ const DiscountsList = () => {
 
             <p>
               {` ${(activePage - 1) * pageCount + 1} - ${
-                (activePage - 1) * pageCount + pageCount
-              } of 30 items`}
-              <span className="ms-5">
+                activePage * pageCount <= discountData['discountData'].length
+                  ? activePage * pageCount
+                  : discountData['discountData'].length
+              } of ${discountData['discountData'].length} items`}
+              {/* <span className="ms-5">
                 <button style={{ border: 'none' }}>
                   <i className="bi bi-arrow-clockwise align-items-center"></i>
                 </button>
-              </span>
+              </span> */}
             </p>
           </div>
         </div>
