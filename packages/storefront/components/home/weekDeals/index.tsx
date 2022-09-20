@@ -92,7 +92,7 @@ const WeekDeals: NextComponentType = () => {
                               }}
                               // as={`product/${product.info.name}`}
                             >
-                              <div className="text-xl font-medium text-inherit text-gray-600">
+                              <div className="text-base text-inherit text-gray-600">
                                 {product.info.name}
                               </div>
                             </Link>
