@@ -27,7 +27,7 @@ const Headerbar: FC<Props> = ({
 
   return (
     <div
-      className="d-flex flex-row justify-content-between align-items-center p-8"
+      className="d-flex justify-content-between align-items-center flex-row p-8"
       style={{
         padding: "8px",
         backgroundColor: "#343a40",

@@ -27,7 +27,7 @@ const Brands: NextPage = () => {
         </div>
 
         <div>
-          <SearchWindowBrands setBrands={setBrands} allbrands={brands!} />
+          {/* <SearchWindowBrands setBrands={setBrands} allbrands={brands!} /> */}
           {brands ? (
             <BrandsList brandsList={brands} setBrands={setBrands} />
           ) : (

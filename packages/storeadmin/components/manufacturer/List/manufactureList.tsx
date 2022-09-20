@@ -56,7 +56,7 @@ const ManufactureList: FC<Props> = ({
       path: "url",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
-          {data.picture.length>10 ? (
+          {data.picture.length > 10 ? (
             <Image src={data.picture} height={75} width={75} alt="..." />
           ) : (
             "Image Problem"
@@ -153,12 +153,12 @@ const ManufactureList: FC<Props> = ({
     <>
       <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
-          <p>
+          {/* <p>
             Learn more about
             <a href="#" style={{ textDecoration: "none", marginLeft: "15px" }}>
               Manufacturers
             </a>
-          </p>
+          </p> */}
           <Table items={currentTableData} columns={columns} />
 
           <div className="">
