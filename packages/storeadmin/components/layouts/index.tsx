@@ -1,17 +1,17 @@
-import type { NextComponentType } from 'next';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import Axios from 'axios';
-import { ToastContainer } from 'react-toastify';
-import { User } from '@bs-commerce/models';
+import type { NextComponentType } from "next";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import { ToastContainer } from "react-toastify";
+import { User } from "@bs-commerce/models";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-import { useAppSelector } from '../../redux-hooks';
-import { userAPI } from '../../APIs';
+import { useAppSelector } from "../../redux-hooks";
+import { userAPI } from "../../APIs";
 
-import Headerbar from './components/headerbar';
-import Sidebar from './components/sidebar';
+import Headerbar from "./components/headerbar";
+import Sidebar from "./components/sidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -25,8 +25,8 @@ const Layout: React.FC<Props> = ({ children }) => {
   const router = useRouter();
   const token = useAppSelector((state) => state.persistedReducer.auth.token);
 
-  if (!token && !pathname.includes('/account')) {
-    router.push('/account/login');
+  if (!token && !pathname.includes("/account")) {
+    router.push("/account/login");
   } else {
     Axios.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
@@ -35,21 +35,21 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     typeof document !== undefined
-      ? require('bootstrap/dist/js/bootstrap')
+      ? require("bootstrap/dist/js/bootstrap")
       : null;
 
     async function getProfile() {
       const response = await userAPI.getUserProfile(router);
       setUserData(response?.data);
     }
-    if (token && !pathname.includes('/account')) getProfile();
+    if (token && !pathname.includes("/account")) getProfile();
   }, []);
 
   const toggleSidebar = (sideBarStatus: boolean) => {
     setShowSidebar(sideBarStatus);
   };
 
-  if (pathname.includes('/account')) {
+  if (pathname.includes("/account")) {
     return (
       <>
         <ToastContainer />
@@ -66,12 +66,13 @@ const Layout: React.FC<Props> = ({ children }) => {
         <div
           className="d-flex flex-column"
           style={{
-            width: '100%',
-            marginLeft: showSidebar ? '250px' : '60px',
-            transition: 'all 0.3s linear',
+            width: "100%",
+            marginLeft: showSidebar ? "250px" : "60px",
+            transition: "all 0.3s linear",
+            backgroundColor: "#eeeeee",
           }}
         >
-          <div style={{ height: '56px', width: '100%' }}>
+          <div style={{ height: "56px", width: "100%" }}>
             <Headerbar
               toggleSidebar={toggleSidebar}
               showSidebar={showSidebar}
