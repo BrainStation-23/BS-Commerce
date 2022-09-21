@@ -6,9 +6,11 @@ import {
   HttpStatus,
   Post,
   Query,
+  Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerAuthService } from '../services';
 import {
@@ -34,6 +36,7 @@ import {
 } from './dto';
 import { authConfig } from 'config/auth';
 import { coreConfig } from 'config/core';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('customer/auth')
 @ApiTags('Customer Authentication API')
@@ -77,6 +80,76 @@ export class CustomerAuthController {
   ) {
     const { code, ...response } = await this.authService.register(customer);
     res.status(code);
+    return { code, ...response };
+  }
+
+  @Get('google/login')
+  @UseGuards(AuthGuard('google'))
+  handleLogin() {
+    return { msg: 'Google Authentication' };
+  }
+
+  @Get('google/redirect')
+  @ApiResponse({
+    description: 'Customer Log In With Google Success Response',
+    type: CustomerSignInSuccessResponseDto,
+    status: HttpStatus.OK,
+  })
+  @ApiResponse({
+    description: 'Customer  Log In With Google Error Response',
+    type: CustomerSignInErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @UseGuards(AuthGuard('google'))
+  async googleAuthRedirect(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.authService.socialLogin(req.user);
+    res.status(code);
+    response.data?.token &&
+      res.cookie('jwt', `Bearer ${response.data?.token}`, {
+        httpOnly: true,
+        maxAge: authConfig.cookiesMaxAge,
+        secure: coreConfig.env === 'production',
+        sameSite: 'none',
+        path: '/',
+      });
+    return { code, ...response };
+  }
+
+  @Get('/facebook')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLogin(): Promise<any> {
+    return HttpStatus.OK;
+  }
+
+  @Get('/facebook/redirect')
+  @ApiResponse({
+    description: 'Customer Log In With Facebook Success Response',
+    type: CustomerSignInSuccessResponseDto,
+    status: HttpStatus.OK,
+  })
+  @ApiResponse({
+    description: 'Customer  Log In With Facebook Error Response',
+    type: CustomerSignInErrorResponseDto,
+    status: HttpStatus.BAD_REQUEST,
+  })
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLoginRedirect(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<any> {
+    const { code, ...response } = await this.authService.socialLogin(req.user);
+    res.status(code);
+    response.data?.token &&
+      res.cookie('jwt', `Bearer ${response.data?.token}`, {
+        httpOnly: true,
+        maxAge: authConfig.cookiesMaxAge,
+        secure: coreConfig.env === 'production',
+        sameSite: 'none',
+        path: '/',
+      });
     return { code, ...response };
   }
 

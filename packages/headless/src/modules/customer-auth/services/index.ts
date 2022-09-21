@@ -215,6 +215,47 @@ export class CustomerAuthService {
     );
   }
 
+  async socialLogin(user) {
+    if (!user)
+      return this.helper.serviceResponse.successResponse(
+        { message: 'No user with this social id' },
+        HttpStatus.UNAUTHORIZED,
+      );
+    const customer =
+      user.email &&
+      (await this.customerRepo.findCustomer({ email: user.email }));
+    if (customer) {
+      const payload: any = {
+        id: customer.id,
+        email: customer.email,
+        logInTime: Date.now(),
+        role: 'customer',
+      };
+      const token = this.jwtService.sign(payload);
+      return this.helper.serviceResponse.successResponse(
+        { token },
+        HttpStatus.OK,
+      );
+    }
+
+    const password = user.email + 'password';
+    const hashPassword = await bcrypt.hash(password, 10);
+    user.password = hashPassword;
+    const googleCustomer = await this.customerRepo.createCustomer(user);
+
+    const payload: any = {
+      id: googleCustomer.id,
+      email: googleCustomer.email,
+      logInTime: Date.now(),
+      role: 'customer',
+    };
+    const token = this.jwtService.sign(payload);
+    return this.helper.serviceResponse.successResponse(
+      { token },
+      HttpStatus.OK,
+    );
+  }
+
   async signIn(data: CustomerSignInRequest): Promise<CustomerSignInResponse> {
     const doesCustomerEmailExist =
       data.email &&
