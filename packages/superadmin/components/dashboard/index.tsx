@@ -1,11 +1,11 @@
-import { FC } from "react";
-import DateTimeFilter from "./filter/main";
-import StatWidgets from "./widgets/main";
-import StatChart from "./charts/index";
+import { FC } from 'react';
+import DateTimeFilter from './filter/main';
+import StatWidgets from './widgets/main';
+import StatChart from './charts/index';
 const Dashboard: FC = () => {
   return (
     <>
-      <div style={{ padding: "45px" }}>
+      <div className="container mt-4">
         <DateTimeFilter />
         <StatWidgets />
         <StatChart />

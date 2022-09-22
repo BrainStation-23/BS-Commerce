@@ -16,68 +16,58 @@ const DateTimeFilter: FC = () => {
   const [endTime, setEndTime] = useState(new Date());
   return (
     <>
-      <div style={{ marginLeft: '20px' }}>
-        <div className="row gx-5">
-          <div className="col-md-6 col-lg-3 col-xl-3">
-            {/* <div style={{ paddingLeft: "20px" }}> */}
-            <div>Start Date:</div>
-            <div>
-              <DatePicker
-                className={filterStyle.datePicker}
-                selected={startDate}
-                onChange={(date: Date) => setStartDate(date)}
-                maxDate={new Date()}
-              />
-            </div>
-            {/* </div> */}
+      <div className="d-flex justify-content-evenly ms-4 flex-wrap">
+        <div className="w-25">
+          <div>Start Date:</div>
+          <div>
+            <DatePicker
+              className={filterStyle.datePicker}
+              selected={startDate}
+              onChange={(date: Date) => setStartDate(date)}
+              maxDate={new Date()}
+            />
           </div>
-          <div className="col-md-6 col-lg-3 col-xl-3">
-            {/* <div style={{ paddingLeft: "20px" }}> */}
-            <div>Start Time:</div>
-            <div>
-              <DatePicker
-                className={filterStyle.datePicker}
-                selected={startTime}
-                onChange={(time: any) => setStartTime(time)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-            </div>
-            {/* </div> */}
+        </div>
+        <div className="w-25">
+          <div>Start Time:</div>
+          <div>
+            <DatePicker
+              className={filterStyle.datePicker}
+              selected={startTime}
+              onChange={(time: any) => setStartTime(time)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+            />
           </div>
-          <div className="col-md-6 col-lg-3 col-xl-3">
-            {/* <div style={{ paddingLeft: "20px" }}> */}
-            <div>End Date:</div>
-            <div>
-              <DatePicker
-                className={filterStyle.datePicker}
-                selected={endDate}
-                onChange={(date: Date) => setEndDate(date)}
-                maxDate={new Date()}
-              />
-            </div>
-            {/* </div> */}
+        </div>
+        <div className="w-25">
+          <div>End Date:</div>
+          <div>
+            <DatePicker
+              className={filterStyle.datePicker}
+              selected={endDate}
+              onChange={(date: Date) => setEndDate(date)}
+              maxDate={new Date()}
+            />
           </div>
-          <div className="col-md-6 col-lg-3 col-xl-3">
-            {/* <div style={{ paddingLeft: "20px" }}> */}
-            <span>End Time:</span>
-            <span>
-              <DatePicker
-                className={filterStyle.datePicker}
-                selected={endTime}
-                onChange={(time: any) => setEndTime(time)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-            </span>
-          </div>
-          {/* </div> */}
+        </div>
+        <div className="w-25">
+          <span>End Time:</span>
+          <span>
+            <DatePicker
+              className={filterStyle.datePicker}
+              selected={endTime}
+              onChange={(time: any) => setEndTime(time)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="h:mm aa"
+            />
+          </span>
         </div>
       </div>
     </>

@@ -14,7 +14,12 @@ const OrderList: FC<Props> = ({ orderListData }) => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return orderListData?.orders?.slice(firstPageIndex, lastPageIndex);
+    let sortedOrderList = _.orderBy(
+      orderListData?.orders,
+      ['orderedDate'],
+      ['desc']
+    );
+    return sortedOrderList.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, PageSize, orderListData]);
 
   const columns = [
