@@ -31,7 +31,7 @@ const CategoryComponent: NextComponentType = ({}) => {
               Add
             </button>
           </Link>
-          <button className="btn btn-success disabled mx-1">
+          {/* <button className="btn btn-success disabled mx-1">
             <i className="bi bi-download me-1" />
             Export
           </button>
@@ -42,11 +42,11 @@ const CategoryComponent: NextComponentType = ({}) => {
           <button className="btn btn-danger disabled mx-1">
             <i className="bi bi-trash3 me-1" />
             Delete(selected)
-          </button>
+          </button> */}
         </div>
       </div>
       {/* Search card */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <Accordion title="Search" icon="bi bi-search" id={1} show={true}>
           <div className="d-flex flex-column align-items-center">
             <div className="d-flex align-items-center w-100 justify-content-around mb-5 flex-row">
@@ -89,7 +89,7 @@ const CategoryComponent: NextComponentType = ({}) => {
             </button>
           </div>
         </Accordion>
-      </div>
+      </div> */}
 
       {/* Category table */}
       {categoryList?.length! > 0 ? (

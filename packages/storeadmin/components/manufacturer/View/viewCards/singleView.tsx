@@ -17,7 +17,7 @@ const SingleView = (props: any) => {
           </div>
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">
-          <div className="row">
+          <div className="row text-break">
             {Array.isArray(value) ? (
               <>
                 {value[0] ? value[0] : "---"}

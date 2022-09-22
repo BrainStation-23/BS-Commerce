@@ -18,7 +18,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
 
   const onChangeForList = async () => {
     const brandsList = await userAPI.getBrands();
-    setBrands(brandsList);
+    if ("data" in brandsList!) setBrands(brandsList?.data?.brands);
   };
 
   const deleteProductFunction = async () => {
@@ -143,12 +143,12 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
     <>
       <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
-          <p>
+          {/* <p>
             Learn more about
             <a href="#" style={{ textDecoration: "none", marginLeft: "5px" }}>
               Brands
             </a>
-          </p>
+          </p> */}
           <Table items={currentTableData} columns={columns} />
 
           <div className="">

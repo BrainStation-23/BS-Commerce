@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import _ from 'lodash';
-import moment from 'moment';
-import Pagination from '../../../global/pagination';
-import Table from '../../../global/table/table';
+import React, { FC, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import _ from "lodash";
+import moment from "moment";
+import Pagination from "../../../global/pagination";
+import Table from "../../../global/table/table";
 interface Props {
   orderListData: any;
 }
@@ -14,31 +14,36 @@ const OrderList: FC<Props> = ({ orderListData }) => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return orderListData?.orders?.slice(firstPageIndex, lastPageIndex);
+    let sortedOrderList = _.orderBy(
+      orderListData?.orders,
+      ["orderedDate"],
+      ["desc"]
+    );
+    return sortedOrderList.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, PageSize, orderListData]);
 
   const columns = [
     {
-      label: 'Order Number',
-      path: 'order_number',
+      label: "Order Number",
+      path: "order_number",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">{data.orderId}</td>
       ),
     },
     {
-      label: 'Order status',
-      path: 'order_status',
+      label: "Order status",
+      path: "order_status",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           <button
             className={
-              data?.orderStatus === 'Completed'
-                ? 'btn-sm bg-success rounded border-0 px-2 mt-1 text-white'
-                : data?.orderStatus === 'Processing'
-                ? 'btn-sm bg-info rounded border-0 px-2 mt-1 text-white'
-                : data?.orderStatus === 'Cancelled'
-                ? 'btn-sm bg-danger mbrounded border-0 px-2 mt-1 text-white'
-                : 'btn-sm bg-warning rounded border-0 px-2 mt-1 text-white'
+              data?.orderStatus === "Completed"
+                ? "btn-sm bg-success mt-1 rounded border-0 px-2 text-white"
+                : data?.orderStatus === "Processing"
+                ? "btn-sm bg-info mt-1 rounded border-0 px-2 text-white"
+                : data?.orderStatus === "Cancelled"
+                ? "btn-sm bg-danger mbrounded mt-1 border-0 px-2 text-white"
+                : "btn-sm bg-warning mt-1 rounded border-0 px-2 text-white"
             }
             disabled
           >
@@ -48,22 +53,22 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       ),
     },
     {
-      label: 'Payment status',
-      path: 'payment_status',
+      label: "Payment status",
+      path: "payment_status",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">{data?.paymentStatus}</td>
       ),
     },
     {
-      label: 'Shipping status',
-      path: 'shipping_status',
+      label: "Shipping status",
+      path: "shipping_status",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">{data?.shippingStatus}</td>
       ),
     },
     {
-      label: 'Customer Name',
-      path: 'customer',
+      label: "Customer Name",
+      path: "customer",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           {`${data?.billingAddress.firstName} ${data?.billingAddress.lastName}`}
@@ -71,24 +76,24 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       ),
     },
     {
-      label: 'Created on',
-      path: 'created',
+      label: "Created on",
+      path: "created",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
-          {moment(data?.orderedDate).format('lll')}
+          {moment(data?.orderedDate).format("lll")}
         </td>
       ),
     },
     {
-      label: 'Order total',
-      path: 'order_total',
+      label: "Order total",
+      path: "order_total",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">{data?.totalCost}</td>
       ),
     },
     {
-      label: 'View',
-      path: 'id',
+      label: "View",
+      path: "id",
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           <Link
@@ -114,7 +119,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
       <main className="px-1">
         <div
           className="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pt-3 pb-2"
-          style={{ paddingLeft: '10px' }}
+          style={{ paddingLeft: "10px" }}
         >
           <h1 className="h2">Orders</h1>
         </div>
@@ -125,8 +130,8 @@ const OrderList: FC<Props> = ({ orderListData }) => {
               <a
                 href="#"
                 style={{
-                  textDecoration: 'none',
-                  marginLeft: '5px',
+                  textDecoration: "none",
+                  marginLeft: "5px",
                 }}
               >
                 Orders
@@ -145,7 +150,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
                   setPageSize={setPageSize}
                 />
               ) : (
-                'No data found'
+                "No data found"
               )}
             </div>
           </div>

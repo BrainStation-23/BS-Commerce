@@ -24,7 +24,7 @@ const List = () => {
           </Link>
         </div>
         <div>
-          <div>
+          {/* <div>
             <div className="card border-1 mt-3 rounded">
               <div className="card-header">
                 <span className="ms-2 fs-4">Search</span>
@@ -72,7 +72,7 @@ const List = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {manufactureData ? (
             <ManufactureList

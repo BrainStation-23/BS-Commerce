@@ -1,12 +1,12 @@
-import { Formik, Form } from 'formik';
-import { manufactureSchema } from '../schema/index';
+import { Formik, Form } from "formik";
+import { manufactureSchema } from "../schema/index";
 
-import CreateNewManufacturer from '../add-new/forms/manufacturerInfo';
-import DisplayOrders from '../add-new/forms/displayOrder';
-import SEO from '../add-new/forms/seo';
-import { userAPI } from '../../../APIs';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import CreateNewManufacturer from "../add-new/forms/manufacturerInfo";
+import DisplayOrders from "../add-new/forms/displayOrder";
+import SEO from "../add-new/forms/seo";
+import { userAPI } from "../../../APIs";
+import { useRouter } from "next/router";
+import Link from "next/link";
 const EditManufacturer = (props: any) => {
   const router = useRouter();
   const { manufacturer } = props;
@@ -72,7 +72,7 @@ const EditManufacturer = (props: any) => {
                       <Link href="/Manufacturer/">
                         <a className="text-decoration-none ">
                           <i className="bi bi-arrow-left-circle-fill p-2" />
-                          <span style={{ fontSize: '14px' }}>
+                          <span style={{ fontSize: "14px" }}>
                             Back to Manufacturer list
                           </span>
                         </a>
@@ -80,7 +80,7 @@ const EditManufacturer = (props: any) => {
                     </span>
                   </h1>
                   <div className="float-end">
-                    <button
+                    {/* <button
                       type="button"
                       className="btn btn-info float-left mx-2 my-auto "
                       id="product-editor-settings"
@@ -89,7 +89,7 @@ const EditManufacturer = (props: any) => {
                     >
                       <i className="bi bi-gear-fill pt-1" />
                       <p className="float-end mx-1 my-0">Settings</p>
-                    </button>
+                    </button> */}
                     <button
                       type="submit"
                       name="save"
@@ -111,7 +111,7 @@ const EditManufacturer = (props: any) => {
           }}
         </Formik>
       ) : (
-        ''
+        ""
       )}
     </>
   );

@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { NestedCategoryList } from '@bs-commerce/models';
+import Link from "next/link";
+import { NestedCategoryList } from "@bs-commerce/models";
 
 interface Props {
   categories: NestedCategoryList[];
@@ -16,7 +16,7 @@ const CategoryTable: React.FC<Props> = ({ categories }: Props) => {
           <th scope="col">Name</th>
           <th scope="col">Published</th>
           <th scope="col">Display order</th>
-          <th scope="col">Edit</th>
+          {/* <th scope="col">Edit</th> */}
           <th scope="col">View</th>
         </tr>
       </thead>
@@ -32,12 +32,12 @@ const CategoryTable: React.FC<Props> = ({ categories }: Props) => {
                 <i className="bi bi-check-lg" />
               </td>
               <td>1</td>
-              <td>
+              {/* <td>
                 <button className="btn disabled rounded border bg-white">
                   <i className="bi bi-pencil-fill me-1" />
                   Edit
                 </button>
-              </td>
+              </td> */}
               <td>
                 <Link href={`category/view/${category.id}`} passHref>
                   <button className="btn rounded border bg-white">

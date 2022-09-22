@@ -23,132 +23,132 @@ export interface ISidebarData {
 export const SidebarData: ISidebarData[] = [
   {
     id: 0,
-    name: 'Dashboard',
-    to: '/',
+    name: "Dashboard",
+    to: "/",
     icon: DashboardIcon,
     subMenus: [],
   },
   {
     id: 1,
-    name: 'Catalog',
-    to: '',
+    name: "Catalog",
+    to: "",
     icon: CatalogIcon,
     subMenus: [
       {
-        name: 'Products',
-        to: '/Product',
+        name: "Products",
+        to: "/Product",
         icon: SubMenuIcon,
       },
       {
-        name: 'Manufacturers',
-        to: '/Manufacturer/',
+        name: "Manufacturers",
+        to: "/Manufacturer/",
         icon: SubMenuIcon,
       },
       {
-        name: 'Categories',
-        to: '/category',
+        name: "Categories",
+        to: "/category",
         icon: SubMenuIcon,
       },
       {
-        name: 'Tags',
-        to: '/tags',
+        name: "Tags",
+        to: "/tags",
         icon: SubMenuIcon,
       },
       {
-        name: 'Brands',
-        to: '/Brands',
+        name: "Brands",
+        to: "/Brands",
         icon: SubMenuIcon,
       },
     ],
   },
   {
     id: 2,
-    name: 'Sales',
-    to: '',
+    name: "Sales",
+    to: "",
     icon: SalesIcon,
     subMenus: [
       {
-        name: 'Orders',
-        to: '/Sales/Order/List',
+        name: "Orders",
+        to: "/Sales/Order/List",
         icon: SubMenuIcon,
       },
     ],
   },
-  {
-    id: 3,
-    name: 'Promotion',
-    to: '',
-    icon: PromotionIcon,
-    subMenus: [
-      {
-        name: 'Discount',
-        to: '/promotion/discount',
-        icon: SubMenuIcon,
-      },
-      {
-        name: 'Campaign',
-        to: '/promotion/campaign',
-        icon: SubMenuIcon,
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: 'Users',
-    to: '',
-    icon: UsersIcon,
-    subMenus: [
-      {
-        name: 'Admins',
-        to: '/users/admin',
-        icon: SubMenuIcon,
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: 'System',
-    to: '',
-    icon: SystemIcon,
-    subMenus: [
-      {
-        name: 'Log',
-        to: '/system/log',
-        icon: SubMenuIcon,
-      },
-      {
-        name: 'Scheduled Task',
-        to: '/system/scheduled-task',
-        icon: SubMenuIcon,
-      },
-    ],
-  },
-  {
-    id: 6,
-    name: 'Reports',
-    to: '',
-    icon: ReportsIcon,
-    subMenus: [
-      {
-        name: 'Sales Summary',
-        to: '/report/sales-summary',
-        icon: SubMenuIcon,
-      },
-      {
-        name: 'Registered Customers',
-        to: '/report/registered-customers',
-        icon: SubMenuIcon,
-      },
-      {
-        name: 'Customer by Order Numbers',
-        to: '/report/customers-by-number-of-orders',
-        icon: SubMenuIcon,
-      },
-      {
-        name: 'Best Customers on Total Order',
-        to: '/report/best-customers-by-order-total',
-        icon: SubMenuIcon,
-      },
-    ],
-  },
+  // {
+  //   id: 3,
+  //   name: 'Promotion',
+  //   to: '',
+  //   icon: PromotionIcon,
+  //   subMenus: [
+  //     {
+  //       name: 'Discount',
+  //       to: '/promotion/discount',
+  //       icon: SubMenuIcon,
+  //     },
+  //     {
+  //       name: 'Campaign',
+  //       to: '/promotion/campaign',
+  //       icon: SubMenuIcon,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 4,
+  //   name: "Users",
+  //   to: "",
+  //   icon: UsersIcon,
+  //   subMenus: [
+  //     {
+  //       name: "Admins",
+  //       to: "/users/admin",
+  //       icon: SubMenuIcon,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 5,
+  //   name: "System",
+  //   to: "",
+  //   icon: SystemIcon,
+  //   subMenus: [
+  //     {
+  //       name: "Log",
+  //       to: "/system/log",
+  //       icon: SubMenuIcon,
+  //     },
+  //     {
+  //       name: "Scheduled Task",
+  //       to: "/system/scheduled-task",
+  //       icon: SubMenuIcon,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 6,
+  //   name: "Reports",
+  //   to: "",
+  //   icon: ReportsIcon,
+  //   subMenus: [
+  //     {
+  //       name: "Sales Summary",
+  //       to: "/report/sales-summary",
+  //       icon: SubMenuIcon,
+  //     },
+  //     {
+  //       name: "Registered Customers",
+  //       to: "/report/registered-customers",
+  //       icon: SubMenuIcon,
+  //     },
+  //     {
+  //       name: "Customer by Order Numbers",
+  //       to: "/report/customers-by-number-of-orders",
+  //       icon: SubMenuIcon,
+  //     },
+  //     {
+  //       name: "Best Customers on Total Order",
+  //       to: "/report/best-customers-by-order-total",
+  //       icon: SubMenuIcon,
+  //     },
+  //   ],
+  // },
 ];
