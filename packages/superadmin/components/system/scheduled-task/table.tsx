@@ -1,5 +1,5 @@
-import React from "react";
-import TableData from "./tableData";
+import React from 'react';
+import TableData from './tableData';
 
 const Table = (props: any) => {
   const { items, columns } = props;
@@ -7,10 +7,10 @@ const Table = (props: any) => {
   return (
     <>
       <div
-        className="d-flex flex-wrap justify-content-between"
-        style={{ overflow: "auto" }}
+        className="d-flex justify-content-between flex-wrap"
+        style={{ overflow: 'auto' }}
       >
-        <table className="table table-bordered table-striped">
+        <table className="table-bordered table-striped table">
           <thead>
             <tr>
               <th>Name</th>
@@ -20,15 +20,15 @@ const Table = (props: any) => {
               <th>Last start date</th>
               <th>Last end date</th>
               <th>Last success date</th>
-              <th>Run now</th>
-              <th>Edit</th>
+              {/* <th>Run now</th>
+              <th>Edit</th> */}
             </tr>
           </thead>
           <tbody>
             {items.map((data: any, index: any) => {
               return (
                 <React.Fragment key={index}>
-                 <TableData data={data} />
+                  <TableData data={data} />
                 </React.Fragment>
               );
             })}

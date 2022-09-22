@@ -43,21 +43,21 @@ const Admin: NextPage = () => {
     <div className="px-5">
       <div className="d-flex justify-content-between px-2 py-3">
         <div className="fs-3">Admin</div>
-        <div className="">
+        {/* <div className="">
           <AddButton
             title="Add New"
             link={'/users/admin/create'}
             icon="bi bi-file-plus"
           />
-        </div>
+        </div> */}
       </div>
-      <Search>
+      {/* <Search>
         <SearchForm saveHandler={() => {}} initData={initData} />
-      </Search>
+      </Search> */}
       <div className="card mt-2 p-3">
-        <div className="fs-5 m-2" data-testid="customers">
+        {/* <div className="fs-5 m-2" data-testid="customers">
           Learn more about <span style={{ color: '#007bff' }}>admin</span>
-        </div>
+        </div> */}
         <TableInfo
           tHead={thead}
           currentPage={currentPage}

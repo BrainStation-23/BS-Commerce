@@ -28,20 +28,20 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
         <td className="p-auto m-auto text-center align-middle">{data?.name}</td>
       ),
     },
-    {
-      label: 'Edit',
-      path: 'id',
-      content: (data: any, key: any, index: any) => (
-        <td className="p-auto m-auto text-center align-middle">
-          <button className="btn disabled rounded border bg-white">
-            <span>
-              <i className="bi bi-pencil me-2 align-middle"></i>
-            </span>
-            Edit
-          </button>
-        </td>
-      ),
-    },
+    // {
+    //   label: 'Edit',
+    //   path: 'id',
+    //   content: (data: any, key: any, index: any) => (
+    //     <td className="p-auto m-auto text-center align-middle">
+    //       <button className="btn disabled rounded border bg-white">
+    //         <span>
+    //           <i className="bi bi-pencil me-2 align-middle"></i>
+    //         </span>
+    //         Edit
+    //       </button>
+    //     </td>
+    //   ),
+    // },
     {
       label: 'View',
       path: 'id',
@@ -69,12 +69,12 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
     <>
       <div className="card border-1 mt-3 rounded px-2">
         <div className="card-body">
-          <p>
+          {/* <p>
             Learn more about
             <a href="#" style={{ textDecoration: 'none', marginLeft: '15px' }}>
               Tags
             </a>
-          </p>
+          </p> */}
           <Table items={currentTableData} columns={columns} />
           <div className="">
             {TagData.length > 0 ? (

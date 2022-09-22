@@ -79,8 +79,8 @@ const EditManufacturer = (props: any) => {
                       </Link>
                     </span>
                   </h1>
-                  <div className="float-end">
-                    <button
+                  <div className="float-end mt-1">
+                    {/* <button
                       type="button"
                       className="btn btn-info float-left mx-2 my-auto "
                       id="product-editor-settings"
@@ -89,7 +89,7 @@ const EditManufacturer = (props: any) => {
                     >
                       <i className="bi bi-gear-fill pt-1" />
                       <p className="float-end mx-1 my-0">Settings</p>
-                    </button>
+                    </button> */}
                     <button
                       type="submit"
                       name="save"

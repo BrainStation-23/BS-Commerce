@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { usePagination } from "./usePagination";
+import { FC, useState } from 'react';
+import { usePagination } from './usePagination';
 
 interface Props {
   setCurrentPage: any;
@@ -33,11 +33,11 @@ const Pagination: FC<Props> = ({
   let lastPage = paginationRange?.[paginationRange.length - 1];
 
   return (
-    <div className="d-flex justify-content-between flex-wrap mt-2">
+    <div className="d-flex justify-content-between mt-2 flex-wrap">
       <nav>
         <ul className="pagination">
           <li
-            className={`page-item ${currentPage === 1 ? "disabled" : null} `}
+            className={`page-item ${currentPage === 1 ? 'disabled' : null} `}
             onClick={currentPage === 1 ? () => {} : onPrevious}
           >
             <span className="page-link">
@@ -47,7 +47,7 @@ const Pagination: FC<Props> = ({
           {paginationRange?.map((pageNumber) => (
             <li
               className={`page-item ${
-                currentPage === pageNumber ? "active" : null
+                currentPage === pageNumber ? 'active' : null
               } `}
               key={pageNumber}
               onClick={() => setCurrentPage(pageNumber)}
@@ -59,7 +59,7 @@ const Pagination: FC<Props> = ({
           ))}
           <li
             className={`page-item ${
-              lastPage === currentPage ? "disabled" : null
+              lastPage === currentPage ? 'disabled' : null
             }`}
             onClick={lastPage === currentPage ? () => {} : onNext}
           >
@@ -90,14 +90,18 @@ const Pagination: FC<Props> = ({
       <div className="d-flex align-items-center justify-content-center">
         {totalCount && (
           <div className="me-3">
-            1-{totalCount} of {totalCount} items
+            {pageSize * (currentPage - 1) + 1}-
+            {pageSize * currentPage <= totalCount
+              ? pageSize * currentPage
+              : totalCount}{' '}
+            of {totalCount} items
           </div>
         )}
-        <div>
+        {/* <div>
           <button className="btn btn-light">
             <i className="bi bi-arrow-clockwise align-middle"></i>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

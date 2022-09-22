@@ -77,7 +77,7 @@ const CreateManufacturer: FC = () => {
                   </span>
                 </h3>
                 <div className="float-end">
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-info float-left mx-2 my-auto "
                     id="product-editor-settings"
@@ -86,7 +86,7 @@ const CreateManufacturer: FC = () => {
                   >
                     <i className="bi bi-gear-fill pt-1" />
                     <p className="float-end mx-1 my-0">Settings</p>
-                  </button>
+                  </button> */}
                   <button
                     type="submit"
                     name="save"

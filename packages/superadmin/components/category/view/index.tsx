@@ -5,6 +5,7 @@ import { userAPI } from '@/APIs';
 import Accordion from '@/components/global/accordion';
 import TextView from './text-view';
 import InputView from './input-view';
+import Link from 'next/link';
 
 const ViewCategory: React.FC = () => {
   const [category, setCategory] = useState<Category>();
@@ -21,7 +22,17 @@ const ViewCategory: React.FC = () => {
 
   return (
     <div className="mt-2 px-5">
-      <h2>Category details - {category?.name} </h2>
+      <h2>
+        Category details - {category?.name}{' '}
+        <span className="fs-5 p-3">
+          <Link href={'/category'}>
+            <a className="text-decoration-none">
+              <i className="bi bi-arrow-left-circle-fill p-2" />
+              Back to category list
+            </a>
+          </Link>
+        </span>
+      </h2>
       <div className="mt-4">
         <Accordion
           title="Category info"
