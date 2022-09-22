@@ -1,15 +1,15 @@
-import LogHeading from "./heading-card";
-import LogSearch from "./log-search";
-import LogIndex from "./logTable";
-import Modal from "./modal";
+import LogHeading from './heading-card';
+import LogSearch from './log-search';
+import LogIndex from './logTable';
+import Modal from './modal';
 
 const LogPage = () => {
   return (
     <div>
-      <div className="d-flex flex-wrap flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mt-3">
+      <div className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row justify-content-between mt-3 flex-wrap">
         <h4>Log</h4>
-        <div className="d-flex flex-wrap justify-content-end">
-          <button
+        <div className="d-flex justify-content-end flex-wrap">
+          {/* <button
             type="button"
             className="btn btn-danger me-1"
             data-bs-toggle="modal"
@@ -21,9 +21,9 @@ const LogPage = () => {
             Delete Selected
           </button>
 
-          <Modal />
+          <Modal /> */}
 
-          <button
+          {/* <button
             className="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#myModal"
@@ -32,12 +32,12 @@ const LogPage = () => {
               <i className="bi bi-trash3"></i>
             </span>
             Clear Log
-          </button>
+          </button> */}
         </div>
       </div>
       <div>
         <LogHeading />
-        <LogSearch />
+        {/* <LogSearch /> */}
         <LogIndex />
       </div>
     </div>

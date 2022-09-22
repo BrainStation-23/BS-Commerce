@@ -18,7 +18,7 @@ const SingleView: FC<SingleViewInterface> = (props: SingleViewInterface) => {
           </div>
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">
-          <div className="">
+          <div className="text-break">
             {value instanceof Date ? (
               '---'
             ) : Array.isArray(value) ? (

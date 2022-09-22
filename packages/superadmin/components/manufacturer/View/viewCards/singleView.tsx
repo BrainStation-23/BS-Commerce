@@ -1,4 +1,4 @@
-import Tooltips from "../../../global/tooltip";
+import Tooltips from '../../../global/tooltip';
 
 const SingleView = (props: any) => {
   const { label, value, toolkitMessage } = props;
@@ -17,14 +17,14 @@ const SingleView = (props: any) => {
           </div>
         </div>
         <div className="col-md-8 ps-4 py-auto my-auto">
-          <div className="row">
+          <div className="row text-break">
             {Array.isArray(value) ? (
               <>
-                {value[0] ? value[0] : "---"}
-                {value.map((data, index) => (index > 0 ? ` , ${data}` : ""))}
+                {value[0] ? value[0] : '---'}
+                {value.map((data, index) => (index > 0 ? ` , ${data}` : ''))}
               </>
-            ) : typeof value === "string" && value.length <= 0 ? (
-              "- - -"
+            ) : typeof value === 'string' && value.length <= 0 ? (
+              '- - -'
             ) : (
               value
             )}

@@ -96,8 +96,6 @@ export async function getProductRest(
 ): Promise<GetProductResponse | undefined> {
   try {
     const res = await axios.get(`${apiEndPoints.product}/${data.productId}`);
-    console.log(res?.data);
-
     return res?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -219,7 +217,7 @@ export async function getManufacturerRest(
 ): Promise<Manufacturer[] | undefined> {
   try {
     const { data } = await axios?.get(`${apiEndPoints?.manufacturerList}`);
-    toast.success(data.data.message);
+    //toast.success(data.data.message);
     return data?.data as Manufacturer[];
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -537,7 +535,7 @@ export async function getSingleOrderByIdRest(
   try {
     const { data } = await axios?.get(`${apiEndPoints?.singleOrder}/${id}`);
     // router.push('/Manufacturer/');
-    toast.success('Order Data Loaded Successfully');
+    //toast.success('Order Data Loaded Successfully');
     return data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -561,7 +559,7 @@ export async function getAllTagsRest(): Promise<
 > {
   try {
     const { data } = await axios.get(`${apiEndPoints?.tag}`);
-    toast.success('All Tags Loaded Successfully');
+    //toast.success('All Tags Loaded Successfully');
     return data?.data;
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
