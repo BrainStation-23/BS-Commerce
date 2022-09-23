@@ -64,7 +64,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
               onClick={handleDescription}
               className={
                 descriptionChartFocused
-                  ? 'mx-5 font-semibold text-green-600'
+                  ? 'mx-5 font-semibold text-primary'
                   : 'mx-5 font-semibold '
               }
             >
@@ -80,7 +80,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
               onClick={handleSize}
               className={
                 sizeChartFocused
-                  ? 'mx-5 font-semibold text-green-600'
+                  ? 'mx-5 font-semibold text-primary'
                   : 'mx-5 font-semibold'
               }
             >

@@ -24,6 +24,7 @@ import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
 import { storeAddresses } from 'toolkit/customerAddressSlice';
 import { storeCompare } from 'toolkit/compareSlice';
+import { Input } from 'atomic-components';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -113,6 +114,7 @@ const Signin: NextComponentType = () => {
                 password: '',
               }}
               onSubmit={(values, actions) => {
+                console.log(values);
                 let data;
                 let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
                 const isEmail = regex.test(values.username);
@@ -138,7 +140,7 @@ const Signin: NextComponentType = () => {
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">
-                      <Field
+                      {/* <Field
                         type="text"
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="email"
@@ -147,7 +149,45 @@ const Signin: NextComponentType = () => {
                       />
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="username" />
-                      </div>
+                      </div> */}
+                      <Input
+                        type="text"
+                        icon={
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="h-4 w-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                            />
+                          </svg>
+                        }
+                        iconFocus={
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="purple"
+                            className="h-4 w-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                            />
+                          </svg>
+                        }
+                        id="username"
+                        required={true}
+                        placeholder="Username"
+                      />
                     </div>
 
                     <div className="mb-4">
@@ -165,7 +205,7 @@ const Signin: NextComponentType = () => {
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
                         type="submit"
-                        className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
+                        className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
                       >
                         Sign In
                       </button>
@@ -190,7 +230,7 @@ const Signin: NextComponentType = () => {
                 <Link data-testid="create-account-link" href="/account/sign-up">
                   <a
                     data-testid="create-account-page"
-                    className="text-decoration-none font-weight-light text-gray-600 hover:text-green-600/100"
+                    className="text-decoration-none font-weight-light text-gray-600 hover:text-primary"
                   >
                     Create account
                   </a>

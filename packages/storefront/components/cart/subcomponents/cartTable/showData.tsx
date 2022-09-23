@@ -76,7 +76,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
             }}
             passHref
           >
-            <p className="hover:cursor-pointer hover:text-[#40a944]">
+            <p className="hover:cursor-pointer hover:text-primary">
               {data?.product?.info?.name}
             </p>
           </Link>
@@ -139,7 +139,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         <td className="border border-slate-300 py-14 md:px-2 lg:px-10 ">
           <div className="flex justify-center">
             <button
-              className="font-bold text-[#40a944]"
+              className="font-bold text-primary"
               onClick={handleCartItemDelete}
             >
               X

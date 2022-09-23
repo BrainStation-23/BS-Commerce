@@ -56,7 +56,7 @@ const CartDropdown: NextComponentType = () => {
   const cartIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6 hover:text-green-600"
+      className="h-6 w-6 hover:text-primary"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -172,10 +172,10 @@ const CartDropdown: NextComponentType = () => {
         className="flex items-center justify-center"
       >
         <div className="relative inline-block text-left">
-          <div className="hover:text-green-600">
+          <div className="hover:text-primary">
             <button
               type="button"
-              className="focus:shadow-outline-blue inline-flex w-full justify-center text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-green-600 focus:border-blue-300 focus:outline-none active:bg-gray-50 active:text-gray-800"
+              className="focus:shadow-outline-blue inline-flex w-full justify-center text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-primary focus:border-blue-300 focus:outline-none active:bg-gray-50 active:text-gray-800"
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}
@@ -216,7 +216,7 @@ const CartDropdown: NextComponentType = () => {
                       <Link href="/cart" passHref>
                         <a>
                           <button
-                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                            className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white"
                             onClick={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
@@ -229,7 +229,7 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">
                       <button
-                        className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                        className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white"
                         onClick={handleClickProceed}
                       >
                         CHECKOUT

@@ -96,7 +96,7 @@ const AccountDetails: React.FC = () => {
             <span className="float-right text-xl font-bold">
               <a
                 onClick={() => handleLogout()}
-                className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
               >
                 Logout
               </a>
@@ -132,7 +132,7 @@ const AccountDetails: React.FC = () => {
                         </div>
                         <div className="w-2/3">
                           <span
-                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
@@ -141,13 +141,13 @@ const AccountDetails: React.FC = () => {
                           <button
                             hidden={!editable}
                             type="submit"
-                            className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                           >
                             Save
                           </button>
                           <span
                             hidden={!editable}
-                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             onClick={() => setEditable(false)}
                           >
                             Cancel

@@ -48,7 +48,7 @@ const OrderMain: FC = () => {
             )}
           </div>
           <div className="mt-1" style={{ textAlign: 'center' }}>
-            <button className="rounded-md bg-green-600 py-4 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
+            <button className="rounded-md bg-primary py-4 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
               <Link href="/">Go to home page</Link>
             </button>
           </div>

@@ -31,7 +31,7 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
       </td>
       <td className="px-5 py-4">{singleOrder?.paymentMethod}</td>
       <td className="px-5 py-4">${singleOrder?.productCost}</td>
-      <td className="px-5 py-4 text-[#40a944]">
+      <td className="px-5 py-4 text-primary">
         <Link
           href={{
             pathname: `/order/[id]`,

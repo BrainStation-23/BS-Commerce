@@ -64,7 +64,7 @@ const OtpForm: React.FC<Props> = ({
                   onClick={() => {
                     setSubmitButtonState('username');
                   }}
-                  className="hover:text-[#40a944]"
+                  className="hover:text-primary"
                 >
                   Try Again.
                 </button>

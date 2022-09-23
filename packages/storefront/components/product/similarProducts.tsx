@@ -61,13 +61,13 @@ const SimilarProducts: NextComponentType = () => {
                               />
 
                               {product?.info?.oldPrice !== 0 ? (
-                                <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                                <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                                   <p>Sale</p>
                                 </div>
                               ) : null}
 
                               {product?.info?.oldPrice !== 0 ? (
-                                <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                                <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                                   <p>{`-$${Math.abs(
                                     product?.info?.oldPrice -
                                       product?.info?.price
@@ -99,7 +99,7 @@ const SimilarProducts: NextComponentType = () => {
                             <p className="m-1 font-['arial'] text-lg text-gray-600">
                               {product.tags![0]}
                             </p>
-                            <div className="text-lg font-semibold text-green-600">
+                            <div className="text-lg font-semibold text-primary">
                               {product.info.price}
                             </div>
                           </div>

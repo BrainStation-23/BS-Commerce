@@ -40,7 +40,7 @@ const AccountDetails: NextComponentType = () => {
           {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
             <button
-              className="rounded bg-[#40A944] py-2 px-4 text-sm text-white hover:bg-black focus:outline-none"
+              className="rounded bg-primary py-2 px-4 text-sm text-white hover:bg-black focus:outline-none"
               type="button"
               onClick={() => addButtonOnClick()}
             >

@@ -40,17 +40,17 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
               />
             </div>
             {product?.info?.oldPrice > 0 ? (
-              <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-3 py-1 text-base text-white">
+              <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-3 py-1 text-base text-white">
                 <p>Sale</p>
               </div>
             ) : null}
             {/* {product?.discountPercentage && isAvailable ? (
-              <div className="border border-[#40a944] rounded-lg bg-[#40a944] absolute top-3 right-3 px-1 py-1 text-white text-xs">
+              <div className="border border-primary rounded-lg bg-primary absolute top-3 right-3 px-1 py-1 text-white text-xs">
                 <p>{`-${product?.discountPercentage}%`}</p>
               </div>
             ) : null} */}
             {isAvailable && product?.info.oldPrice > 0 && (
-              <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-3 py-1 text-base font-semibold text-white">
+              <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-3 py-1 text-base font-semibold text-white">
                 <p>{`-$${Math.abs(
                   product?.info.oldPrice - product?.info.price
                 )}`}</p>

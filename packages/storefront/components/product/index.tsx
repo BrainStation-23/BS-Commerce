@@ -358,7 +358,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <span className="text-sm">SKU: {product?.info?.sku}</span>
                 </div>
                 <div className="flex">
-                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-green-600">
+                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-primary">
                     ${product?.info?.price}
                   </span>
                 </div>
@@ -367,11 +367,11 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     Availability:
                   </span>
                   {isAvailable ? (
-                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
+                    <span className="ml-2 mb-1 mt-2 text-sm text-primary">
                       {/*product?.stock*/} Available
                     </span>
                   ) : (
-                    <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
+                    <span className="ml-2 mb-1 mt-2 text-sm text-primary">
                       Out of stock
                     </span>
                   )}
@@ -387,25 +387,25 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       <div className="flex">
                         <button
                           onClick={() => setSize('s')}
-                          className="m-2 hover:text-green-600"
+                          className="m-2 hover:text-primary"
                         >
                           s
                         </button>
                         <button
                           onClick={() => setSize('m')}
-                          className="m-2 hover:text-green-600"
+                          className="m-2 hover:text-primary"
                         >
                           m
                         </button>
                         <button
                           onClick={() => setSize('l')}
-                          className="m-2 hover:text-green-600"
+                          className="m-2 hover:text-primary"
                         >
                           l
                         </button>
                         <button
                           onClick={() => setSize('xl')}
-                          className="m-2 hover:text-green-600"
+                          className="m-2 hover:text-primary"
                         >
                           xl
                         </button>
@@ -463,7 +463,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       onClick={() => {
                         toCart();
                       }}
-                      className="my-1 ml-2 rounded bg-[#40a944] px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
+                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -472,7 +472,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   ) : (
                     <button
                       disabled={true}
-                      className="my-1 ml-2 rounded bg-green-600 px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
+                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
                     >
                       Soldout
                     </button>
@@ -481,7 +481,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className=" flex flex-wrap">
                   <button
                     disabled={!isAvailable}
-                    className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
+                    className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-primary hover:ease-in md:px-32	"
                     onClick={toCart}
                   >
                     <span className="mx-auto">Buy Now</span>
@@ -496,12 +496,12 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                           : toWishlist(product?.id!, 1)
                       }
                       // disabled={clicked ? true : false}
-                      className="mt-10 hover:text-green-600"
+                      className="mt-10 hover:text-primary"
                     >
                       {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
                     </button>
                     <div
-                      className="mt-10 underline hover:text-green-600"
+                      className="mt-10 underline hover:text-primary"
                       hidden={!clicked}
                     >
                       <button onClick={handleClickToWishlist}>
@@ -511,7 +511,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </div>
                   <div>
                     <button
-                      className="mt-2 hover:text-green-600"
+                      className="mt-2 hover:text-primary"
                       onClick={() => {
                         handleAddToCompare();
                       }}
@@ -520,7 +520,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     </button>
                   </div>
                   {/* <div>
-                    <button className=" mt-2 flex hover:text-green-600">
+                    <button className=" mt-2 flex hover:text-primary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mr-2 h-6 w-6"

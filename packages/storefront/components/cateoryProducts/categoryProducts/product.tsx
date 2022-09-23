@@ -29,13 +29,13 @@ const Product = (props: SingleProduct) => {
                     />
 
                     {product?.info?.oldPrice !== 0 ? (
-                      <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                      <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                         <p>Sale</p>
                       </div>
                     ) : null}
 
                     {product?.info?.oldPrice !== 0 ? (
-                      <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                      <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                         <p>{`-$${Math.abs(
                           product?.info?.oldPrice - product?.info?.price
                         )}`}</p>

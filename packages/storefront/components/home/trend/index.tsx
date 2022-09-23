@@ -50,7 +50,7 @@ const TrendingProducts = () => {
               onClick={() => handleClick('smartphones')}
               className={
                 filterKey === 'smartphones'
-                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  ? 'inline-block rounded-full border border-primary bg-white px-4 py-1 text-primary'
                   : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >
@@ -62,7 +62,7 @@ const TrendingProducts = () => {
               onClick={() => handleClick('laptops')}
               className={
                 filterKey === 'laptops'
-                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  ? 'inline-block rounded-full border border-primary bg-white px-4 py-1 text-primary'
                   : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >
@@ -74,7 +74,7 @@ const TrendingProducts = () => {
               onClick={() => handleClick('fragrances')}
               className={
                 filterKey === 'fragrances'
-                  ? 'inline-block rounded-full border border-[#40A944] bg-white px-4 py-1 text-[#40A944]'
+                  ? 'inline-block rounded-full border border-primary bg-white px-4 py-1 text-primary'
                   : 'inline-block rounded-full bg-white px-2 py-1 text-black md:px-4'
               }
             >

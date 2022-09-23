@@ -44,7 +44,7 @@ const CartTotal: NextComponentType = () => {
       )}
       <div className="grid lg:row-span-2 xl:row-span-2">
         <div className="overflow-hidden shadow-lg">
-          <div className="w-full bg-[#40a944]">
+          <div className="w-full bg-primary">
             <div className="px-6 py-1 text-base font-medium text-white">
               CART TOTALS
             </div>
@@ -83,7 +83,7 @@ const CartTotal: NextComponentType = () => {
                 height: '39px',
                 width: '200px',
               }}
-              className="bg-black text-xs hover:bg-[#40a944]"
+              className="hover:bg-[#40a94]4 bg-black text-xs"
             >
               PROCEED TO CHECKOUT
             </button>

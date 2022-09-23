@@ -19,6 +19,9 @@ module.exports = {
     },
     animation: {
         'fade-in-down': 'fade-in-down 0.5s ease-out'
+    },
+    colors: {
+      'primary': '#40a944'
     }
     },
   },

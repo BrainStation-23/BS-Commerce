@@ -62,13 +62,13 @@ const Modal: React.FC<Props> = ({
               <div className="flex flex-wrap gap-x-5 text-sm">
                 <button
                   onClick={handleOKClick}
-                  className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-[#40a944]  hover:text-white sm:px-10"
+                  className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-primary  hover:text-white sm:px-10"
                 >
                   YES
                 </button>
                 <button
                   onClick={handleCancelClick}
-                  className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-[#40a944] hover:text-white sm:px-8"
+                  className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-primary hover:text-white sm:px-8"
                 >
                   CANCEL
                 </button>

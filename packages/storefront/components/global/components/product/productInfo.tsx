@@ -20,7 +20,7 @@ const ProductInfo = (props: SingleProduct) => {
         <p className="py-2 font-['arial'] text-xs text-gray-600">
           {product?.tags![0]}
         </p>
-        <p className="text-base font-semibold text-green-600">
+        <p className="text-base font-semibold text-primary">
           {product?.info?.price}
           {product?.info?.oldPrice ? (
             <span className="ml-2 text-xs font-semibold text-black">

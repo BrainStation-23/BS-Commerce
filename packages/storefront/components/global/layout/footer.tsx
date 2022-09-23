@@ -71,7 +71,7 @@ const Footer: NextComponentType = () => {
             <div className="flex flex-col gap-1 text-sm">
               {informationList.map((link) => (
                 <Link href={link.link} passHref key={link.name}>
-                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary">
                     {link.name}
                   </a>
                 </Link>
@@ -84,7 +84,7 @@ const Footer: NextComponentType = () => {
             <div className="flex flex-col gap-1 text-sm">
               {extraList.map((link) => (
                 <Link key={link.name} passHref href={link.link}>
-                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary">
                     {link.name}
                   </a>
                 </Link>
@@ -108,7 +108,7 @@ const Footer: NextComponentType = () => {
                 name="search"
                 placeholder={`email@example.com`}
               />
-              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
+              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-primary transition-all duration-200 ease-linear hover:bg-stone-900">
                 <button type="submit" className="text-white">
                   SUBSCRIBE
                 </button>

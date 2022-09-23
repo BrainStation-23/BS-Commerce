@@ -24,7 +24,7 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
           ? product?.brands[0]
           : ''}
       </p>
-      <div className="text-lg font-semibold text-green-600">
+      <div className="text-lg font-semibold text-primary">
         {product?.info?.price}
       </div>
     </div>

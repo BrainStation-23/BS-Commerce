@@ -59,7 +59,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '150px',
                     }}
-                    className="bg-black text-xs hover:bg-[#40a944]"
+                    className="bg-black text-xs hover:bg-primary"
                     onClick={() => {
                       router.push('/');
                     }}
@@ -74,7 +74,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '120px',
                     }}
-                    className="bg-black text-xs hover:bg-[#40a944]"
+                    className="bg-black text-xs hover:bg-primary"
                     onClick={handleDeleteAllCartItem}
                   >
                     CLEAR CART

@@ -39,7 +39,7 @@ const Navbar: React.FC<Props> = ({
       <div className="container px-4">
         <div className="flex flex-row items-center">
           <div
-            className="relative mb-3 mr-0 flex w-full cursor-pointer flex-row items-center rounded-lg bg-green-600 px-4 py-2 text-white lg:mb-0 lg:mr-2 lg:w-56 lg:rounded-t-xl lg:rounded-b-none lg:py-3"
+            className="relative mb-3 mr-0 flex w-full cursor-pointer flex-row items-center rounded-lg bg-primary px-4 py-2 text-white lg:mb-0 lg:mr-2 lg:w-56 lg:rounded-t-xl lg:rounded-b-none lg:py-3"
             onClick={toggleOpen}
             onMouseEnter={() =>
               document.body.clientWidth > 768 && setShowAllCategory(true)
@@ -81,7 +81,7 @@ const Navbar: React.FC<Props> = ({
               {MenuData.map((menu) => (
                 <li key={menu.name} className="group">
                   <Link href={menu.link}>
-                    <a className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-green-600 lg:border-none lg:py-0 lg:font-medium">
+                    <a className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary lg:border-none lg:py-0 lg:font-medium">
                       {menu.name}
                       {menu.hasSubmenu && <ChevronDownIcon size={4} />}
                     </a>
@@ -95,7 +95,7 @@ const Navbar: React.FC<Props> = ({
                         {menu.submenu?.map((menu) => (
                           <li
                             key={menu.name}
-                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
+                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary"
                           >
                             <Link href={menu.link}>
                               <a>{menu.name}</a>

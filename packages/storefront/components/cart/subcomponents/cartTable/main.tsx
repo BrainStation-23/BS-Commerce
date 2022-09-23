@@ -35,7 +35,7 @@ const CartDetails: NextComponentType = () => {
                 <p className="text-2xl">Your cart is currently empty.</p>
                 <p className="text-sm">
                   Continue browsing{' '}
-                  <span className=" hover:text-green-600">
+                  <span className=" hover:text-primary">
                     <Link href="/" passHref>
                       here
                     </Link>
@@ -56,7 +56,7 @@ const CartDetails: NextComponentType = () => {
             <p className="text-xl">Your cart is currently empty.</p>
             <p className="text-xs">
               Continue browsing{' '}
-              <span className=" hover:text-green-600">
+              <span className=" hover:text-primary">
                 <Link href="/" passHref>
                   here
                 </Link>
@@ -68,7 +68,7 @@ const CartDetails: NextComponentType = () => {
         <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
           {cartData?.length > 0 && (
             <Link href="/" passHref>
-              <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
+              <button className="w-full bg-black py-2 text-sm text-white hover:bg-primary">
                 CONTINUE SHOPPING
               </button>
             </Link>
@@ -76,7 +76,7 @@ const CartDetails: NextComponentType = () => {
 
           {cartData?.length > 0 && (
             <button
-              className="w-full bg-black py-2 text-sm text-white hover:bg-green-600"
+              className="w-full bg-black py-2 text-sm text-white hover:bg-primary"
               onClick={handleDeleteAllCartItem}
             >
               CLEAR CART

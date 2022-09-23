@@ -15,13 +15,13 @@ const Search: React.FC<Properties> = (props) => {
       className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
     >
       <input
-        className="w-full bg-white py-4 pl-4 focus:outline-none z-[-1]"
+        className="z-[-1] w-full bg-white py-4 pl-4 focus:outline-none"
         type="search"
         name="search"
         placeholder={`${props.placeholder}`}
         id="navSearchInput"
       />
-      <div className="flex h-12 w-14 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
+      <div className="flex h-12 w-14 cursor-pointer justify-center rounded-r-full bg-primary transition-all duration-200 ease-linear hover:bg-stone-900">
         <button
           type="submit"
           id="navSearchSubmit"

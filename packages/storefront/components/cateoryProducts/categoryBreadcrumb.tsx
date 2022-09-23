@@ -25,7 +25,7 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
             <React.Fragment key={path.id}>
               {index === 0 && (
                 <Link href="/" passHref>
-                  <a className="text-decoration-none text-sm text-black hover:text-green-600/100">
+                  <a className="text-decoration-none text-sm text-black hover:text-primary">
                     Home /
                   </a>
                 </Link>
@@ -42,7 +42,7 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                   passHref
                 >
                   <a
-                    className="text-decoration-none text-sm text-gray-500 hover:text-green-600/100"
+                    className="text-decoration-none text-sm text-gray-500 hover:text-primary"
                     style={{ pointerEvents: 'none' }}
                   >
                     {path.name}
@@ -60,7 +60,7 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                   }}
                   passHref
                 >
-                  <a className="text-decoration-none text-sm text-black hover:text-green-600/100">
+                  <a className="text-decoration-none text-sm text-black hover:text-primary">
                     {path.name}
                   </a>
                 </Link>

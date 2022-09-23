@@ -120,7 +120,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 className="group relative cursor-pointer normal-case"
                 id="NavProfileDiv"
               >
-                <p className=" hover:text-green-600" id="user-name">
+                <p className=" hover:text-primary" id="user-name">
                   {getUsername(links[4].name)}
                 </p>
                 <div
@@ -129,12 +129,12 @@ const HeaderAccount: React.FC<Properties> = () => {
                 >
                   <ul>
                     <Link href="/wishlist" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary">
                         Wishlist
                       </li>
                     </Link>
                     <li
-                      className="transition-all duration-100 ease-linear hover:text-green-600"
+                      className="transition-all duration-100 ease-linear hover:text-primary"
                       onClick={() => {
                         comparisonProducts[0]
                           ? dispatch(setModalState(!modalCmp))
@@ -146,17 +146,17 @@ const HeaderAccount: React.FC<Properties> = () => {
                       Comparision
                     </li>
                     <Link href="/myAccount" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary">
                         Profile
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary">
                         Manage Addresses
                       </li>
                     </Link>
                     <Link href="/order" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary">
                         Orders
                       </li>
                     </Link>
@@ -164,7 +164,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                     <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
-                        className="transition-all duration-100 ease-linear hover:text-green-600"
+                        className="transition-all duration-100 ease-linear hover:text-primary"
                       >
                         {links[3].name}
                       </li>
@@ -178,7 +178,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[0].link}>
                 <a
                   id="registerbtn"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
                 >
                   {links[0].name}
                 </a>
@@ -187,7 +187,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[1].link}>
                 <a
                   id="login"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
                 >
                   {links[1].name}
                 </a>
@@ -197,10 +197,10 @@ const HeaderAccount: React.FC<Properties> = () => {
         </span>
         <div className="flex flex-row items-center gap-x-3">
           <button onClick={handleClickWishlist}>
-            <div className="flex hover:text-green-600">
+            <div className="flex hover:text-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
                 fill={
                   wishlistItems?.items?.length! > 0 && token !== ''
                     ? `green`
