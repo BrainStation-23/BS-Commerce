@@ -263,7 +263,9 @@ export class OrderDatabase implements IOrderDatabase {
   ): Promise<OrderEntity[]> {
     const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
       query;
-
+    const sort ={
+      orderedDate: -1
+    }
     const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
@@ -276,6 +278,6 @@ export class OrderDatabase implements IOrderDatabase {
         ...(endDate && { $lte: new Date(endDate) }),
       };
     }
-    return await OrderModel.find(queryParams).skip(skip).limit(limit).lean();
+    return await OrderModel.find(queryParams).skip(skip).limit(limit).sort(sort).lean();
   }
 }
