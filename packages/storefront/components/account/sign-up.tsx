@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
-import { config } from 'config';
 import { userAPI } from 'APIs';
 import { storeUserToken } from 'toolkit/authSlice';
 import { storeCustomerDetails } from 'toolkit/userSlice';
@@ -39,7 +38,14 @@ const Signup = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoading(true);
-      const res = await userAPI.signIn(data);
+      const token = await fetch('/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await token.json();
       if ('code' in res! && res.code === 200 && 'data' in res!) {
         dispatch(storeUserToken(res?.data?.token));
         await userAPI.getCustomer(res?.data?.token).then((response) => {

@@ -55,7 +55,14 @@ const Signin: NextComponentType = () => {
   async function handleSignin(data: CustomerSignInRequest) {
     try {
       setLoader(true);
-      const res = await userAPI.signIn(data);
+      const token = await fetch('/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await token.json();
       if ('code' in res! && res.code === 200 && 'data' in res!) {
         dispatch(storeUserToken(res.data.token));
         await userAPI.getCustomer(res?.data?.token).then((response) => {
