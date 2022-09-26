@@ -1,3 +1,5 @@
+const path = require('path');
+
 const nextConfig = {
   reactStrictMode: true,
   async redirects() {
@@ -30,6 +32,23 @@ const nextConfig = {
       'www.hindustantimes.com',
       'cdn.dribbble.com',
     ],
+  },
+  webpack: async (config, options) => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      include: [path.resolve(__dirname, '../atomic-components')],
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['next/babel'],
+            // plugins: ['react-docgen']
+          },
+        },
+      ],
+    });
+
+    return config;
   },
 };
 
