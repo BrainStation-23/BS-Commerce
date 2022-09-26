@@ -86,7 +86,7 @@ const TrendingProducts = () => {
           className="w-full overflow-hidden px-10 "
           style={{
             width: '105%',
-            marginLeft:"-30px"
+            marginLeft:"-23px"
           }}
         >
           {products?.length > 1 && (

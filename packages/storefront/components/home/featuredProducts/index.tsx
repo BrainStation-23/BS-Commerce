@@ -27,7 +27,14 @@ const FeaturedProducts = () => {
         <p className="font-serif text-lg italic">Recently added our store</p>
         <h1 className="text-bold text-4xl ">Featured Products</h1>
       </div>
-      <SwiperGrid
+      <div
+          className="w-full overflow-hidden px-10 "
+          style={{
+            width: '105%',
+            marginLeft:"-23px"
+          }}
+        >
+            <SwiperGrid
         slidesPerViewmobile={1}
         slidesPerView768={2}
         slidesPerView980={3}
@@ -68,6 +75,8 @@ const FeaturedProducts = () => {
             ) : null
           )}
       </SwiperGrid>
+        </div>
+    
     </Container>
   );
 };

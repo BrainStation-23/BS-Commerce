@@ -42,12 +42,12 @@
 
 .swiper:hover .swiper-button-prev {
   display: block !important;
-  left: -15px;
+  left: -20px;
 }
 
 .swiper:hover .swiper-button-next {
   display: block !important;
-  right: -30px;
+  right: -32px;
 
 }
 
@@ -64,14 +64,17 @@
 .swiper-pagination-bullet-active {
   background-color: #16a34a !important;
 }
-.swiper-wrapper {
+/* .swiper-wrapper {
   width: 90% !important;
   scale: 98%;
-}
+  background-color: aqua;
+} */
 .swiper {
   /* background-color: red; */
   overflow: visible !important;
   scale: 103%;
+  /* background-color: aqua; */
+
 }
 .swiper-slide {
   /* background-color: blue; */

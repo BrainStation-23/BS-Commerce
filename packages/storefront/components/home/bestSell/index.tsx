@@ -41,7 +41,14 @@ const BestSell: NextComponentType = () => {
             </Link>
           </div>
           <div className="w-full md:w-7/12 md:pl-3 lg:w-4/6">
-            <SwiperGrid
+          <div
+          className="w-full overflow-hidden px-10 "
+          style={{
+            width: '105%',
+            marginLeft:"-23px"
+          }}
+        >
+           <SwiperGrid
               slidesPerViewmobile={1}
               slidesPerView768={1}
               slidesPerView980={2}
@@ -88,6 +95,8 @@ const BestSell: NextComponentType = () => {
                   ) : null
                 )}
             </SwiperGrid>
+        </div>
+           
           </div>
         </div>
       </Container>
