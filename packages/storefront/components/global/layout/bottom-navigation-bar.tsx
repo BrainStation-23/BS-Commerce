@@ -18,8 +18,8 @@ interface Props {
 const BottomNavigationBar: React.FC<Props> = ({ openDrawer }: Props) => {
   return (
     <>
-      <div className="fixed bottom-0 z-40 flex w-full flex-row items-center justify-center bg-slate-100 py-3 lg:hidden">
-        <div className="flex w-9/12 flex-row justify-evenly">
+      <div className="fixed bottom-0 z-40 flex w-full flex-row items-center justify-center bg-green-600 py-3 lg:hidden">
+        <div className="flex w-full flex-row justify-evenly md:w-9/12">
           <Link href="/" passHref>
             <button className="flex flex-col items-center">
               <HomeOutlineIcon />
