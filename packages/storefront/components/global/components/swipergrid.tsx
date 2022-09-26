@@ -2,10 +2,9 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
 
-import React, { FC } from 'react';
-import { Swiper } from 'swiper/react';
 import { Grid, Navigation } from 'swiper';
-import { ReactNode } from 'react';
+import { Swiper, useSwiper } from 'swiper/react';
+import React, { FC, useCallback, useState } from 'react';
 interface Props {
   children: React.ReactNode;
   slidesPerViewmobile: number;
@@ -23,33 +22,86 @@ const SwiperGrid: FC<Props> = ({
   rows,
   loop,
 }) => {
+  const [swiperRef, setSwiperRef] = useState(useSwiper());
+
+  const handleLeftClick = useCallback(() => {
+    if (!swiperRef) return;
+    swiperRef.slidePrev();
+  }, [swiperRef]);
+
+  const handleRightClick = useCallback(() => {
+    if (!swiperRef) return;
+    swiperRef.slideNext();
+  }, [swiperRef]);
+
   return (
-    <Swiper
-      slidesPerView={slidesPerViewmobile}
-      loop={loop}
-      grid={{
-        fill: 'row',
-        rows: rows,
-      }}
-      breakpoints={{
-        768: {
-          slidesPerView: slidesPerView768,
-        },
-        980: {
-          slidesPerView: slidesPerView980,
-        },
-      }}
-      navigation={true}
-      spaceBetween={20}
-      centerInsufficientSlides={true}
-      pagination={{
-        clickable: true,
-      }}
-      modules={[Grid, Navigation]}
-      className="mySwiper"
-    >
-      <>{children}</>
-    </Swiper>
+    <div className="group relative">
+      <button
+        onClick={handleLeftClick}
+        className="absolute inset-y-0  left-[-20px] origin-right scale-100 opacity-0 transition-all duration-300 group-hover:left-[-30px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
+      <Swiper
+        onSwiper={setSwiperRef}
+        slidesPerView={slidesPerViewmobile}
+        loop={loop}
+        grid={{
+          fill: 'row',
+          rows: rows,
+        }}
+        breakpoints={{
+          768: {
+            slidesPerView: slidesPerView768,
+          },
+          980: {
+            slidesPerView: slidesPerView980,
+          },
+        }}
+        // navigation={true}
+        spaceBetween={20}
+        centerInsufficientSlides={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Grid, Navigation]}
+        className="mySwiper"
+      >
+        <>{children}</>
+      </Swiper>
+      <button
+        onClick={handleRightClick}
+        className="absolute inset-y-0  right-[-20px] origin-left scale-100 opacity-0 transition-all duration-300 group-hover:right-[-30px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
+    </div>
   );
 };
 
