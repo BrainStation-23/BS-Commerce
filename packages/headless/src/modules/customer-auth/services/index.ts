@@ -216,7 +216,7 @@ export class CustomerAuthService {
     );
   }
 
-  async socialLogin(user) {
+  async socialLogin(user): Promise<CustomerSignInResponse> {
     if (!user)
       return this.helper.serviceResponse.errorResponse(
         SignInErrorMessages.INVALID_CREDENTIALS,
