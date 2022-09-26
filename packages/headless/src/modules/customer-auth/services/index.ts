@@ -29,6 +29,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
 import { Customer } from 'src/entity/customer';
+import { socialLoginConfig } from 'config/social-login';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
@@ -239,7 +240,7 @@ export class CustomerAuthService {
       );
     }
 
-    const password = user.email + 'password';
+    const password = user.email + socialLoginConfig.socialPassword;
     const hashPassword = await bcrypt.hash(password, 10);
     user.password = hashPassword;
     const googleCustomer = await this.customerRepo.createCustomer(user);
