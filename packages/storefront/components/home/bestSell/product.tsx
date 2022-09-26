@@ -15,7 +15,7 @@ const Product = ({ product }: SingleProduct) => {
     <div
       onMouseEnter={() => setShowIcons(true)}
       onMouseLeave={() => setShowIcons(false)}
-      className="duration-0 justify-items-left group grid cursor-pointer transition hover:bg-white hover:duration-700"
+      className="duration-0 justify-items-left group grid w-56 cursor-pointer transition hover:bg-white hover:duration-700"
     >
       <Link
         href={{
@@ -23,8 +23,8 @@ const Product = ({ product }: SingleProduct) => {
         }}
         passHref
       >
-        <div className="group relative grid w-fit grid-cols-5 md:pl-0 lg:pl-0">
-          <div className="col-span-2">
+        <div className="group relative grid w-64 grid-cols-9 md:pl-0 lg:pl-0">
+          <div className="col-span-3">
             <Image
               src={product.photos![0].url!}
               alt={product.photos![0].alt}
@@ -32,14 +32,14 @@ const Product = ({ product }: SingleProduct) => {
               width={120}
             />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-6">
             <ProductInfo product={product} />
           </div>
 
           <div
-            className={`absolute bottom-5 left-32 w-36 origin-left transition-transform duration-300 ${
-              showIcons ? ' scale-100' : 'scale-0'
-            } hover:scale-100 md:left-28`}
+            className={`absolute bottom-5 left-48  w-36 origin-left transition-transform duration-300 ${
+              showIcons ? ' scale-100' : 'md:scale-0'
+            } scale-100 hover:scale-100 md:left-24`}
           >
             <Icon product={product} />
           </div>

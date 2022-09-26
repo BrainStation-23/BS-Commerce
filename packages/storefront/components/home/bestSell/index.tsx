@@ -40,7 +40,7 @@ const BestSell: NextComponentType = () => {
               </a>
             </Link>
           </div>
-          <div className="w-full md:w-7/12 md:pl-3 lg:w-4/6">
+          <div className="w-full md:w-6/12 md:pl-5 lg:w-4/6">
             <SwiperGrid
               slidesPerViewmobile={1}
               slidesPerView768={1}

@@ -38,7 +38,7 @@ const SwiperGrid: FC<Props> = ({
     <div className="group relative">
       <button
         onClick={handleLeftClick}
-        className="absolute inset-y-0  left-[-20px] origin-right scale-100 opacity-0 transition-all duration-300 group-hover:left-[-30px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
+        className="absolute inset-y-0  left-0 origin-right scale-100 opacity-0 transition-all duration-300 group-hover:left-[-14px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ const SwiperGrid: FC<Props> = ({
       </Swiper>
       <button
         onClick={handleRightClick}
-        className="absolute inset-y-0  right-[-20px] origin-left scale-100 opacity-0 transition-all duration-300 group-hover:right-[-30px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
+        className="absolute inset-y-0  right-0 z-10 origin-left scale-100 opacity-0 transition-all duration-300 group-hover:right-[-14px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
