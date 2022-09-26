@@ -1,8 +1,12 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Custom container class */
+
+* {
+  font-family: 'Work Sans', sans-serif;
+}
 
 .container {
   max-width: 1170px;
@@ -59,5 +63,5 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #16A34A !important;
+  background-color: #16a34a !important;
 }
