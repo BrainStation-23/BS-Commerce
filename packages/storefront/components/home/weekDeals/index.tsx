@@ -77,7 +77,7 @@ const WeekDeals: NextComponentType = () => {
                               ) : null}
                             </div>
                           </div>
-                          <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black duration-300 hover:-translate-y-3 hover:opacity-70 md:opacity-0">
+                          <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
                             <Icon product={product} />
                           </div>
 
@@ -92,7 +92,7 @@ const WeekDeals: NextComponentType = () => {
                               }}
                               // as={`product/${product.info.name}`}
                             >
-                              <div className="text-xl font-medium text-inherit text-gray-600">
+                              <div className="text-base text-inherit text-gray-600">
                                 {product.info.name}
                               </div>
                             </Link>

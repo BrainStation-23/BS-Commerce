@@ -8,7 +8,7 @@ const HomeShipping: NextComponentType = () => {
     <>
       <Container className="container">
         <div className="flex flex-wrap py-16">
-          <div className="flex w-full px-1 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
+          <div className="flex w-full px-3 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
             <div className="mr-3 mt-1">
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const HomeShipping: NextComponentType = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1"
                 stroke="#40a944"
-                className="h-10 w-10"
+                className="h-9 w-9"
               >
                 <path
                   strokeLinecap="round"

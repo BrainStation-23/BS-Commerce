@@ -12,7 +12,7 @@ const ProductInfo = (props: SingleProduct) => {
     <div>
       <div className="pl-6">
         <div
-          className="text-base font-medium text-gray-600"
+          className="text-base text-inherit text-gray-600"
           id="searchProductName"
         >
           {product?.info?.name}
@@ -22,12 +22,10 @@ const ProductInfo = (props: SingleProduct) => {
         </p>
         <p className="text-base font-semibold text-green-600">
           {product?.info?.price}
-          {product?.info?.oldPrice ? (
+          {Math.abs(product?.info.oldPrice - product?.info.price) > 0 ? (
             <span className="ml-2 text-xs font-semibold text-black">
               <s>$</s>
-              {product?.info?.oldPrice ? (
-                <s>{product?.info?.oldPrice}</s>
-              ) : null}
+              <s>{product?.info?.oldPrice}</s>
             </span>
           ) : null}
         </p>
