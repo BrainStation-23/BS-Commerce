@@ -217,15 +217,16 @@ export class CustomerAuthService {
 
   async socialLogin(user) {
     if (!user)
-      return this.helper.serviceResponse.successResponse(
-        { message: 'No user with this social id' },
-        HttpStatus.UNAUTHORIZED,
+      return this.helper.serviceResponse.errorResponse(
+        SignInErrorMessages.INVALID_CREDENTIALS,
+        null,
+        HttpStatus.BAD_REQUEST,
       );
-    const customer =
-      user.email &&
-      (await this.customerRepo.findCustomer({ email: user.email }));
+    const customer = await this.customerRepo.findCustomer({
+      email: user.email,
+    });
     if (customer) {
-      const payload: any = {
+      const payload: Partial<CustomerJwtPayload> = {
         id: customer.id,
         email: customer.email,
         logInTime: Date.now(),
@@ -243,7 +244,7 @@ export class CustomerAuthService {
     user.password = hashPassword;
     const googleCustomer = await this.customerRepo.createCustomer(user);
 
-    const payload: any = {
+    const payload: Partial<CustomerJwtPayload> = {
       id: googleCustomer.id,
       email: googleCustomer.email,
       logInTime: Date.now(),

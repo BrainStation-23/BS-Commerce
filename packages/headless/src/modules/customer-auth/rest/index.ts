@@ -105,7 +105,9 @@ export class CustomerAuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.authService.socialLogin(req.user);
+    const { code, ...response }: any = await this.authService.socialLogin(
+      req.user,
+    );
     res.status(code);
     response.data?.token &&
       res.cookie('jwt', `Bearer ${response.data?.token}`, {
@@ -118,7 +120,7 @@ export class CustomerAuthController {
     return { code, ...response };
   }
 
-  @Get('/facebook')
+  @Get('/facebook/login')
   @UseGuards(AuthGuard('facebook'))
   async facebookLogin(): Promise<any> {
     return HttpStatus.OK;
@@ -140,7 +142,9 @@ export class CustomerAuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ): Promise<any> {
-    const { code, ...response } = await this.authService.socialLogin(req.user);
+    const { code, ...response }: any = await this.authService.socialLogin(
+      req.user,
+    );
     res.status(code);
     response.data?.token &&
       res.cookie('jwt', `Bearer ${response.data?.token}`, {
