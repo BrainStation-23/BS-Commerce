@@ -93,7 +93,7 @@ const TrendingProducts = () => {
             {products?.map((product: CustomerProduct, index: number) =>
               index % 2 === 1 ? (
                 <React.Fragment key={product.id}>
-                  <SwiperSlide key={Math.random() * 999999} className="md:pl-5">
+                  <SwiperSlide key={Math.random() * 999999}>
                     <ProductRow
                       products={[products[index - 1], products[index]]}
                     />
