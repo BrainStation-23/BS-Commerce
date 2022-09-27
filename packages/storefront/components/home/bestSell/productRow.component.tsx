@@ -7,24 +7,24 @@ interface Props {
 const ProductRow: React.FC<Props> = ({ products }: Props) => {
   return (
     <>
-      <div className="col md:pl-9">
-        <div className="grid grid-cols-1 content-center ">
+      <div className="col">
+        <div className="grid grid-cols-1 ">
           {products[0] ? (
-            <div className="mx-auto w-2/3 py-1 md:float-left">
+            <div className="py-1 md:float-left">
               <Product product={products[0]} />
             </div>
           ) : (
             ''
           )}
           {products[1] ? (
-            <div className="mx-auto w-2/3 py-1 md:float-left">
+            <div className="py-1 md:float-left">
               <Product product={products[1]} />
             </div>
           ) : (
             ''
           )}
           {products[2] ? (
-            <div className="mx-auto w-2/3 py-1 md:float-left">
+            <div className="py-1 md:float-left">
               <Product product={products[2]} />
             </div>
           ) : (

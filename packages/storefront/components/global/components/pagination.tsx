@@ -16,7 +16,7 @@ export const Pagination: FC<{
       pageArray.push(index + 1);
     }
     setPages(pageArray);
-  });
+  }, []);
 
   return (
     <>

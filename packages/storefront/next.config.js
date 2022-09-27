@@ -32,7 +32,7 @@ const nextConfig = {
       'cdn.dribbble.com',
     ],
   },
-  webpack: async (config, arg) => {
+  webpack: async (config, options) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       include: [path.resolve(__dirname, '../atomic-components')],
@@ -46,8 +46,10 @@ const nextConfig = {
         },
       ],
     });
+
     return config;
   },
 };
+
 const withTM = require('next-transpile-modules')([]);
 module.exports = withTM(nextConfig);
