@@ -38,8 +38,8 @@ const Product = ({ product }: SingleProduct) => {
 
           <div
             className={`absolute bottom-5 left-48  w-36 origin-left transition-transform duration-300 ${
-              showIcons ? ' scale-100' : 'md:scale-0'
-            } scale-100 hover:scale-100 md:left-24`}
+              showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
+            } duration-300 md:left-24`}
           >
             <Icon product={product} />
           </div>

@@ -72,7 +72,7 @@ const SwiperGrid: FC<Props> = ({
           },
         }}
         // navigation={true}
-        spaceBetween={20}
+        spaceBetween={10}
         centerInsufficientSlides={true}
         pagination={{
           clickable: true,
