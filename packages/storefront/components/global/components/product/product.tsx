@@ -18,13 +18,8 @@ const Product = (props: SingleProduct) => {
       <Link
         href={{
           pathname: `/product/${product.meta.friendlyPageName}`,
-          // query: {
-          //   id: product.id,
-          //   name: product.info.name,
-          // },
         }}
         passHref
-        // as={`product/${product.info.name}`}
       >
         <div className="mb-0 h-96 overflow-hidden" key={product?.info?.name}>
           <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
