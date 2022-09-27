@@ -137,6 +137,7 @@ const Signin: NextComponentType = () => {
               validationSchema={loginSchema}
             >
               {(formikprops) => {
+                const { errors, touched } = formikprops;
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">
@@ -151,6 +152,8 @@ const Signin: NextComponentType = () => {
                         <ErrorMessage name="username" />
                       </div> */}
                       <Input
+                        errors={errors.username}
+                        touched={touched.username}
                         type="text"
                         icon={
                           <svg
@@ -198,9 +201,12 @@ const Signin: NextComponentType = () => {
                         name="password"
                         placeholder="Password"
                       />
-                      <div className="errMsg text-red-600">
+                      {/* <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
-                      </div>
+                      </div> */}
+                      {errors.password && touched.password && (
+                        <span className="text-red-600">{errors.password}</span>
+                      )}
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
