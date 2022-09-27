@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage, getIn } from "formik";
+import { ReactNode } from "react";
 export interface IInput {
 	type?: string;
 	required?: boolean;
-	icon?: JSX.Element;
+	icon?: ReactNode;
 	value?: string;
 	id: string;
 	placeholder?: string;
