@@ -4,8 +4,6 @@ export interface IInput {
 	type?: string;
 	required?: boolean;
 	icon?: JSX.Element;
-	iconFocus?: JSX.Element;
-	iconError?: JSX.Element;
 	value?: string;
 	id: string;
 	placeholder?: string;
@@ -22,8 +20,6 @@ export const Input: React.FC<IInput> = ({
 	type,
 	required,
 	icon,
-	iconFocus,
-	iconError,
 	value,
 	id,
 	placeholder,
@@ -50,12 +46,16 @@ export const Input: React.FC<IInput> = ({
 	return (
 		<>
 			<div
-				className="relative flex items-center"
+				className={`relative flex items-center ${
+					focus
+						? "text-primary"
+						: errors && touched
+						? "text-error"
+						: "text-gray-600"
+				}`}
 				onClick={() => setFocus(true)}
 			>
-				<span className="absolute top-3 left-3">
-					{focus ? iconFocus : errors && touched ? iconError : icon}
-				</span>
+				<span className="absolute top-3 left-3">{icon}</span>
 				{as !== "select" ? (
 					<Field
 						as={as}
@@ -68,7 +68,7 @@ export const Input: React.FC<IInput> = ({
 							errors && touched
 								? "border-error"
 								: "border-gray-200"
-						} block w-full rounded-lg border p-2.5 pl-10 text-sm text-gray-900 placeholder-gray-600 outline-none focus:border-blue-500 focus:text-primary focus:shadow-sm focus:ring-blue-500`}
+						} block w-full rounded-lg border p-2.5 pl-10 text-sm placeholder-gray-600 outline-none focus:border-blue-500 focus:shadow-sm focus:ring-blue-500`}
 						placeholder={
 							required ? `${placeholder}*` : `${placeholder}`
 						}
