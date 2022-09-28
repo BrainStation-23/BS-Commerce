@@ -23,32 +23,40 @@ export class CompareDatabase implements ICompareDatabase {
     return compareList ? await this.mappedProductDetails(compareList) : null;
   }
 
-  async addItemToCompare(
-    userId: string,
-    productId: CompareItems,
-  ): Promise<Compare | null> {
-    const isExist = await CompareModel.findOne({ items: productId });
-    if (!isExist) {
-      const compareList = await CompareModel.findOneAndUpdate(
-        { userId: userId },
-        {
-          $push: {
-            items: {
-              $each: [productId],
-              $sort: { created_at: 1 },
-              $slice: -3,
-            },
+  async addItemToCompare(userId: string, productId: CompareItems): Promise<Compare | null> {
+    try{
+      const productExists = await ProductModel.findOne({id: productId.productId});
+      if(!productExists){
+        return null;
+      }
+      const isExist = await CompareModel.findOne({items: productId});
+      
+      if(!isExist){
+        const compareList = await CompareModel.findOneAndUpdate(
+          { userId: userId },
+          {
+              $push: {
+                items: {
+                  $each: [productId],
+                  $sort: { created_at: 1},
+                  $slice: -3
+                }
+              }
           },
-        },
-        { new: true },
-      ).lean();
-
-      return compareList ? await this.mappedProductDetails(compareList) : null;
+          { new: true },
+        ).lean();
+        
+        return compareList ? await this.mappedProductDetails(compareList) : null;
+      }
+    }catch(err){
+      console.log(err);
+      return err;
     }
-    return null;
+     return null;
   }
 
   async getProductDetails(productId: string): Promise<CompareItems[] | null> {
+  
     const productDetails = await ProductModel.find({
       id: productId,
     }).select('info meta.friendlyPageName photos id -_id');

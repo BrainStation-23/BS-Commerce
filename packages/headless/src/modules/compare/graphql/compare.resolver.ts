@@ -5,8 +5,8 @@ import { User } from 'src/entity/user';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { CompareService } from '../services';
-
-@UseGuards(new RolesGuard(['customer']))
+import { AddCompareItemModel, ComparePublicResponseModel, CompareResponseModel } from './compare.model';
+import { AddCompareItem } from '@bs-commerce/models';
 @Resolver()
 export class GqlCompareResolver {
   constructor(private compareService: CompareService) {}
@@ -14,13 +14,14 @@ export class GqlCompareResolver {
   /**
    * Query Start
    */
-
-  @Query()
+  @UseGuards(new RolesGuard(['customer']))
+  @Query(returns => CompareResponseModel)
   async getCompareByUserId(@UserInfo() user: User) {
     return await this.compareService.getCompareByUserId(user.id);
   }
 
-  @Query()
+  @UseGuards(new RolesGuard(['customer']))
+  @Query(returns => CompareResponseModel)
   async getCompareById(
     @Args('compareId') compareId: string,
     @UserInfo() user: User,
@@ -35,16 +36,18 @@ export class GqlCompareResolver {
   /**
    * Mutation Start
    */
-
-  @Mutation()
+  @UseGuards(new RolesGuard(['customer']))
+  @Mutation(returns => CompareResponseModel)
   async addItemToCompare(
     @UserInfo() user: User,
-    @Args('body') body: CompareItems,
+    @Args('body') body: AddCompareItemModel,
   ) {
+    console.log('sds')
     return await this.compareService.addItemToCompare(user.id, body.productId);
   }
 
-  @Mutation()
+  @UseGuards(new RolesGuard(['customer']))
+  @Mutation(returns => CompareResponseModel)
   async deleteCompareById(
     @UserInfo() user: User,
     @Args('compareId') compareId: string,
@@ -52,7 +55,8 @@ export class GqlCompareResolver {
     return await this.compareService.deleteCompareById(user.id, compareId);
   }
 
-  @Mutation()
+  @UseGuards(new RolesGuard(['customer']))
+  @Mutation(returns => CompareResponseModel)
   async deleteItemByProductId(
     @UserInfo() user: User,
     @Args('productId') productId: string,
@@ -60,9 +64,17 @@ export class GqlCompareResolver {
     return await this.compareService.deleteItemByProductId(user.id, productId);
   }
 
-  @Mutation()
+  @UseGuards(new RolesGuard(['customer']))
+  @Mutation(returns => CompareResponseModel)
   async deleteAllItemByUserId(@UserInfo() user: User) {
     return await this.compareService.deleteAllItemByUserId(user.id);
+  }
+
+  @Mutation(returns => ComparePublicResponseModel)
+  async getCompareProduct(
+    @Args('body') body: AddCompareItemModel
+  ) {
+    return await this.compareService.getProductDetails(body.productId);
   }
 
   /**
