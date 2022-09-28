@@ -18,6 +18,11 @@ import { registerSchema } from '@/components/global/schemas/loginSchema';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import Loading from '@/components/global/loader';
 import WithoutAuth from '@/components/auth/withoutAuth';
+import { Input } from 'atomic-components';
+import LockIcon from './icons/lock';
+import UserIcon from './icons/user';
+import EnvelopeIcon from './icons/envelope';
+import UserCircle from './icons/user-circle';
 
 const Signup = () => {
   const router = useRouter();
@@ -185,10 +190,12 @@ const Signup = () => {
               validationSchema={registerSchema}
             >
               {(formikprops) => {
+                const { errors, touched } = formikprops;
+
                 return (
                   <Form onSubmit={formikprops.handleSubmit}>
                     <div className="mb-4">
-                      <Field
+                      {/* <Field
                         type="username"
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="username"
@@ -197,18 +204,50 @@ const Signup = () => {
                       />
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="username" />
-                      </div>
+                      </div> */}
+
+                      <Input
+                        errors={errors.username}
+                        touched={touched.username}
+                        type="text"
+                        icon={<UserIcon />}
+                        id="username"
+                        required={true}
+                        placeholder="Email or phone number"
+                      />
                     </div>
 
                     <div className="mb-2 flex flex-wrap justify-between">
                       <div className="w-3/5">
-                        <Field
+                        {/* <Field
                           type="otp"
                           className="w-full p-2 placeholder-gray-600 outline-0"
                           id="otp"
                           name="otp"
                           placeholder="OTP"
-                        />
+                        /> */}
+                        {otp.length > 0 ? (
+                          <Input
+                            errors={errors.otp}
+                            touched={touched.otp}
+                            type="text"
+                            icon={<EnvelopeIcon />}
+                            id="otp"
+                            required={true}
+                            placeholder="OTP"
+                            value={otp}
+                          />
+                        ) : (
+                          <Input
+                            errors={errors.otp}
+                            touched={touched.otp}
+                            type="text"
+                            icon={<EnvelopeIcon />}
+                            id="otp"
+                            required={true}
+                            placeholder="OTP"
+                          />
+                        )}
                       </div>
 
                       <div className="flex flex-wrap items-center gap-x-3">
@@ -241,14 +280,14 @@ const Signup = () => {
                         <p>Verify</p>
                       </div>
                     </div>
-                    <div className="errMsg mb-4 text-red-600">
+                    {/* <div className="errMsg mb-4 text-red-600">
                       <ErrorMessage name="otp" />
-                    </div>
+                    </div> */}
 
                     {toggle && (
                       <>
                         <div className="mb-4">
-                          <Field
+                          {/* <Field
                             type="name"
                             className="w-full p-2 placeholder-gray-600 outline-0"
                             id="name"
@@ -257,11 +296,21 @@ const Signup = () => {
                           />
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="name" />
-                          </div>
+                          </div> */}
+
+                          <Input
+                            errors={errors.name}
+                            touched={touched.name}
+                            type="text"
+                            icon={<UserCircle />}
+                            id="name"
+                            required={true}
+                            placeholder="Full name"
+                          />
                         </div>
 
                         <div className="mb-4">
-                          <Field
+                          {/* <Field
                             type="password"
                             className="w-full p-2 placeholder-gray-600 outline-0"
                             id="password"
@@ -271,7 +320,16 @@ const Signup = () => {
                           />
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="password" />
-                          </div>
+                          </div> */}
+                          <Input
+                            errors={errors.password}
+                            touched={touched.password}
+                            type="password"
+                            icon={<LockIcon />}
+                            id="password"
+                            required={true}
+                            placeholder="Password"
+                          />
                         </div>
                       </>
                     )}

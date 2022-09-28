@@ -17,18 +17,7 @@ export interface IInput {
 /**
  * Primary UI component for user interaction
  */
-export const Input: React.FC<IInput> = ({
-	type,
-	required,
-	icon,
-	value,
-	id,
-	placeholder,
-	errors,
-	touched,
-	as,
-	options,
-}: IInput) => {
+export const Input: React.FC<IInput> = ({ type, required, icon, value, id, placeholder, errors, touched, as, options }: IInput) => {
 	const [focus, setFocus] = useState(false);
 	const componentRef = useRef();
 	useEffect(() => {
@@ -47,13 +36,7 @@ export const Input: React.FC<IInput> = ({
 	return (
 		<>
 			<div
-				className={`relative flex items-center ${
-					focus
-						? "text-primary"
-						: errors && touched
-						? "text-error"
-						: "text-gray-600"
-				}`}
+				className={`relative flex items-center ${focus ? "text-primary" : errors && touched ? "text-error" : !errors && touched ? "text-primary" : "text-gray-600"}`}
 				onClick={() => setFocus(true)}
 			>
 				<span className="absolute top-3 left-3">{icon}</span>
@@ -66,13 +49,9 @@ export const Input: React.FC<IInput> = ({
 						name={id}
 						value={value}
 						className={`${
-							errors && touched
-								? "border-error"
-								: "border-gray-200"
+							errors && touched ? "border-error" : !errors && touched ? "border-primary" : "border-gray-200"
 						} block w-full rounded-lg border p-2.5 pl-10 text-sm placeholder-gray-600 outline-none focus:border-blue-500 focus:shadow-sm focus:ring-blue-500`}
-						placeholder={
-							required ? `${placeholder}*` : `${placeholder}`
-						}
+						placeholder={required ? `${placeholder}*` : `${placeholder}`}
 					/>
 				) : (
 					<Field
@@ -83,20 +62,14 @@ export const Input: React.FC<IInput> = ({
 						name={id}
 						value={value}
 						className={`${
-							errors && touched
-								? "border-error"
-								: "border-gray-200"
+							errors && touched ? "border-error" : "border-gray-200"
 						} block w-full rounded-lg border p-2.5 pl-10 text-sm text-gray-900 placeholder-gray-600 outline-none focus:border-blue-500 focus:text-[#8330C2] focus:shadow-sm focus:ring-blue-500`}
-						placeholder={
-							required ? `${placeholder}*` : `${placeholder}`
-						}
+						placeholder={required ? `${placeholder}*` : `${placeholder}`}
 					>
 						{options?.map((option) => {
 							return (
 								<React.Fragment>
-									<option value={option.toLowerCase()}>
-										{option}
-									</option>
+									<option value={option.toLowerCase()}>{option}</option>
 								</React.Fragment>
 							);
 						})}
