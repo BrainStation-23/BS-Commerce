@@ -123,7 +123,6 @@ const Signin: NextComponentType = () => {
                 password: '',
               }}
               onSubmit={(values, actions) => {
-                console.log(values);
                 let data;
                 let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
                 const isEmail = regex.test(values.username);

@@ -61,6 +61,7 @@ const OtpForm: React.FC<Props> = ({
                   type="number"
                   icon={<EnvelopeIcon />}
                   id="otp"
+                  value={otpDetail.otp ? otpDetail.otp : ''}
                   required={true}
                   placeholder="otp"
                 />
