@@ -11,7 +11,7 @@ const Accordion: FC<Props> = ({ title, body }) => {
   return (
     <div className="mb-3">
       <div
-        className={`transition-all duration-1000   ${
+        className={`transition-all duration-1000 ${
           isActive ? 'rounded-t-lg bg-green-500 text-white' : ''
         } z-10 flex cursor-pointer justify-between p-3`}
         onClick={() => setIsActive(!isActive)}
@@ -23,8 +23,8 @@ const Accordion: FC<Props> = ({ title, body }) => {
         <div
           className={`animate-fade-in-down overflow-hidden p-4 transition-all delay-300 duration-1000 ${
             isActive
-              ? 'block h-max border border-solid border-slate-300'
-              : 'hidden h-0 delay-1000'
+              ? 'h-max border border-solid border-slate-300'
+              : 'hidden delay-1000'
           }`}
         >
           {body}
