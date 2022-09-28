@@ -226,28 +226,17 @@ const Signup = () => {
                           name="otp"
                           placeholder="OTP"
                         /> */}
-                        {otp.length > 0 ? (
-                          <Input
-                            errors={errors.otp}
-                            touched={touched.otp}
-                            type="text"
-                            icon={<EnvelopeIcon />}
-                            id="otp"
-                            required={true}
-                            placeholder="OTP"
-                            value={otp}
-                          />
-                        ) : (
-                          <Input
-                            errors={errors.otp}
-                            touched={touched.otp}
-                            type="text"
-                            icon={<EnvelopeIcon />}
-                            id="otp"
-                            required={true}
-                            placeholder="OTP"
-                          />
-                        )}
+
+                        <Input
+                          errors={errors.otp}
+                          touched={touched.otp}
+                          type="text"
+                          icon={<EnvelopeIcon />}
+                          id="otp"
+                          required={true}
+                          placeholder="OTP"
+                          value={otp}
+                        />
                       </div>
 
                       <div className="flex flex-wrap items-center gap-x-3">
