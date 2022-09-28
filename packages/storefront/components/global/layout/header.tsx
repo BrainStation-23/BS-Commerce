@@ -12,6 +12,7 @@ import Navbar from './navbar';
 import BottomNavigationBar from './bottom-navigation-bar';
 import Drawer from './drawer';
 import { useAppSelector } from 'customHooks/hooks';
+import useTranslation from 'next-translate/useTranslation';
 
 const Header: NextComponentType = () => {
   const [showUser, setShowUser] = useState<boolean>(false);
@@ -20,6 +21,7 @@ const Header: NextComponentType = () => {
   const [stickyClass, setStickyClass] = useState<string>('relative');
 
   const { pathname } = useRouter();
+  const { t } = useTranslation();
 
   // console.log(categoryList);
   // const minNavbarHeight = `h-[` + (categoryList.length * 30 + 100) + `px]`; // e.g., h-[5*30 + 100px] => h[250px]
@@ -85,7 +87,8 @@ const Header: NextComponentType = () => {
         <div className="container flex items-center justify-between px-4">
           <span className="text-3xl font-bold">
             <Link href="/">
-              <a>BS Commerce</a>
+              {/* <a>BS Commerce</a> */}
+              <a>{t('home:site_name')}</a>
             </Link>
           </span>
           <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
