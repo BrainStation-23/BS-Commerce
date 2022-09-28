@@ -21,10 +21,10 @@ const Accordion: FC<Props> = ({ title, body }) => {
       </div>
       {
         <div
-          className={`animate-fade-in-down overflow-hidden p-4 transition-all delay-300 duration-1000 ${
+          className={`overflow-hidden z-0 origin-top p-4 transition-all duration-700 ${
             isActive
-              ? 'h-max border border-solid border-slate-300'
-              : 'hidden delay-1000'
+              ? 'h-max border border-solid border-slate-300 translate-y'
+              : 'translate-y p-0 h-0 ' 
           }`}
         >
           {body}
