@@ -5,6 +5,8 @@ import FormCancelButton from '@/components/account/forgetPassword/components/com
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
 import { useAppSelector } from 'customHooks/hooks';
+import { Input } from 'atomic-components';
+import LockIcon from '../../icons/lock';
 
 interface Props {
   handleNewPasswordFormSubmit: Function;
@@ -41,11 +43,12 @@ const NewPasswordForm: React.FC<Props> = ({ handleNewPasswordFormSubmit }) => {
         validationSchema={passwordSchema}
       >
         {(formikprops) => {
+          const { errors, touched } = formikprops;
           return (
             <Form onSubmit={formikprops.handleSubmit}>
               <div className="mb-4">
                 <>
-                  <FieldTemplate
+                  {/* <FieldTemplate
                     fieldType="password"
                     fieldID="newPassword"
                     placeholder="New password"
@@ -54,6 +57,25 @@ const NewPasswordForm: React.FC<Props> = ({ handleNewPasswordFormSubmit }) => {
                   <FieldTemplate
                     fieldType="password"
                     fieldID="confirmPassword"
+                    placeholder="Retype new password"
+                  /> */}
+                  <Input
+                    errors={errors.confirmPassword}
+                    touched={touched.confirmPassword}
+                    type="password"
+                    icon={<LockIcon />}
+                    id="confirmPassword"
+                    required={true}
+                    placeholder="confirmPassword"
+                  />
+                  <br />
+                  <Input
+                    errors={errors.confirmPassword}
+                    touched={touched.confirmPassword}
+                    type="password"
+                    icon={<LockIcon />}
+                    id="confirmPassword"
+                    required={true}
                     placeholder="Retype new password"
                   />
                 </>

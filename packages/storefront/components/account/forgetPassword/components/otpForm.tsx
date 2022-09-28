@@ -5,6 +5,8 @@ import FormCancelButton from '@/components/account/forgetPassword/components/com
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
 import { useAppSelector } from 'customHooks/hooks';
+import { Input } from 'atomic-components';
+import EnvelopeIcon from '../../icons/envelope';
 
 interface Props {
   setSubmitButtonState: Function;
@@ -44,13 +46,23 @@ const OtpForm: React.FC<Props> = ({
         validationSchema={otpSchema}
       >
         {(formikprops) => {
+          const { errors, touched } = formikprops;
           return (
             <Form onSubmit={formikprops.handleSubmit}>
               <div className="mb-4">
-                <FieldTemplate
+                {/* <FieldTemplate
                   fieldType="number"
                   fieldID="otp"
                   placeholder="OTP"
+                /> */}
+                <Input
+                  errors={errors.otp}
+                  touched={touched.otp}
+                  type="number"
+                  icon={<EnvelopeIcon />}
+                  id="otp"
+                  required={true}
+                  placeholder="otp"
                 />
               </div>
               <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
