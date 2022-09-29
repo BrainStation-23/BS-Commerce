@@ -6,6 +6,7 @@ import {
 } from '../layout/headerIcons';
 import { MenuData } from '../layout/headerData';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'customHooks/hooks';
 import HeaderCategory from './headerCategory';
 
@@ -28,7 +29,8 @@ const Navbar: React.FC<Props> = ({
   showAllCategory,
   toggleOpen,
 }: Props) => {
-  const customerNumber = '+880 1674314359';
+  const { t } = useTranslation();
+  const customerNumber = `${t('home:contact_number')}`;
 
   const categoryList = useAppSelector(
     (state) => state.persistedReducer.category.categoryList
@@ -121,7 +123,7 @@ const Navbar: React.FC<Props> = ({
                 <div className="flex flex-col">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
-                    Customer Support
+                    {t('home:customer_support')}
                   </span>
                 </div>
               </>
