@@ -1,6 +1,7 @@
 import type { NextComponentType } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 interface footerLink {
   name: string;
@@ -34,6 +35,7 @@ const Footer: NextComponentType = () => {
   };
 
   // put the pathname in 'includes' where footer needs to be hidden
+  const { t } = useTranslation();
 
   if (pathname.includes('/checkout')) {
     return null;
@@ -45,7 +47,7 @@ const Footer: NextComponentType = () => {
         <div className="mb-20 flex flex-col items-center gap-y-10 px-4 md:mb-0 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
           {/* 1st portion */}
           <div className="flex flex-col items-center text-center md:w-full md:items-start md:text-left lg:w-1/3 lg:pr-4">
-            <span className="mb-2 text-xl font-black">BS Commerce</span>
+            <span className="mb-2 text-xl font-black">{t('common:site_name')}</span>
             <span className="mb-1 text-sm">
               Serving Enterprises and SMEs with Technological Partnership Since
               2006.

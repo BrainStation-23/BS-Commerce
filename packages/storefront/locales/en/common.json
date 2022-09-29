@@ -9,5 +9,7 @@
   "wishlist": "Wishlist",
   "orders": "Orders",
   "home": "Home",
-  "shop": "Shop"
+  "shop": "Shop",
+  "faq": "FAQ",
+  "searchPlaceHolder" : "Search our Store"
 }
