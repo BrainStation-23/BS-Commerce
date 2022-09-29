@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import SearchItem from '@/components/search/searchItem';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../global/components/pagination';
+import useTranslation from 'next-translate/useTranslation';
 
 const SearchComponent: NextComponentType = () => {
   const navSearchInput = document.getElementById(
@@ -29,6 +30,8 @@ const SearchComponent: NextComponentType = () => {
       setCurrentPage(1);
     }
   };
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (navSearchText?.length > 0) {
       setSearchText(navSearchText);
@@ -79,7 +82,7 @@ const SearchComponent: NextComponentType = () => {
                 type="search"
                 id="productSearchInput"
                 className="form-control relative m-0 block w-full min-w-0 flex-auto rounded-3xl border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
-                placeholder="Search our Store"
+                placeholder={t('common:searchPlaceHolder')}
                 onChange={() => onProductSearch()}
               />
               <button
