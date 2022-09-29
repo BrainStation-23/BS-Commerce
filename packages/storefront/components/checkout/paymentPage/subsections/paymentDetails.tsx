@@ -512,7 +512,7 @@ const PaymentDetails: NextComponentType = () => {
                     ) : null}
                   </div>
                 </div> */}
-                <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col flex-grw md:flex-row lg:flex-row xl:flex-row">
+                <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
                   {/* <Link href="/submit" passHref> */}
                   <button
                     type="submit"
