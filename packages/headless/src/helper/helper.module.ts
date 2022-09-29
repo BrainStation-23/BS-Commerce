@@ -5,6 +5,8 @@ import { MailService } from './mailService';
 import { IMailService } from './mailService/mail.service.interface';
 import { ServiceResponse } from './serviceResponse';
 import { IServiceResponse } from './serviceResponse/service.response.interface';
+import { SmsService } from './smsService';
+import { ISmsService } from './smsService/sms.service.interface';
 
 @Global()
 @Module({
@@ -20,6 +22,10 @@ import { IServiceResponse } from './serviceResponse/service.response.interface';
     {
       provide: IMailService,
       useClass: MailService,
+    },
+    {
+      provide: ISmsService,
+      useClass: SmsService,
     },
   ],
   exports: [Helper],
