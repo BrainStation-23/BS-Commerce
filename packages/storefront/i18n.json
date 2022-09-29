@@ -6,6 +6,7 @@
     "/about": ["about"],
     "/search": ["search"],
     "/wishlist": ["wishlist"],
+    "/collections": ["collections"],
     "/": ["home"]
   },
   "keySeparator": "."

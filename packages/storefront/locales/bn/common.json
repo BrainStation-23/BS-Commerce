@@ -48,5 +48,12 @@
   "SUBSCRIBE": "সাবস্ক্রাইব",
   "Terms&Condition": "বিধি - নিষেধ এবং শর্তাবলী",
   "wishlist": "উইশলিস্ট",
-  "yes": "হ্যাঁ"
+  "yes": "হ্যাঁ",
+  "sortBy": "ক্রমানুসার",
+  "Price_High_to_Low": "দাম উচ্চ থেকে কম",
+  "Price_Low_to_High": "দাম কম থেকে বেশি",
+  "From": "থেকে",
+  "Filter": "ফিল্টার",
+  "PRICE": "দাম",
+  "BRAND": "ব্র্যান্ড"
 }
