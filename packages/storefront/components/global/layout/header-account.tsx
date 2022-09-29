@@ -209,7 +209,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 viewBox="0 0 24 24"
                 stroke={
                   wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `none`
+                    ? `green`
                     : `currentColor`
                 }
                 strokeWidth={2}
