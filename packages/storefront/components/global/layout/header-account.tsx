@@ -14,12 +14,15 @@ import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
 import { setModalState } from 'toolkit/modalSlice';
 import { resetCompare } from 'toolkit/compareSlice';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Properties {}
 
 const HeaderAccount: React.FC<Properties> = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
+
   const [showCartDropdown, setShowCartDropdown] = useState(false);
   const [modalOn, setModalOn] = useState(false);
   const [modalOnWishlist, setModalOnWishlist] = useState(false);
@@ -86,10 +89,10 @@ const HeaderAccount: React.FC<Properties> = () => {
   };
 
   const links = [
-    { name: 'Register', link: '/account/sign-up' },
-    { name: 'Login', link: '/account/sign-in' },
+    { name: `${t('common:register')}`, link: '/account/sign-up' },
+    { name: `${t('common:login')}`, link: '/account/sign-in' },
     { name: 'Wishlist', link: '/wishlist' },
-    { name: 'Logout', link: '/account/sign-in' },
+    { name: `${t('common:logout')}`, link: '/account/sign-in' },
     { name: `${user}`, link: '/myAccount' },
   ];
   return (
@@ -130,7 +133,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                   <ul>
                     <Link href="/wishlist" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Wishlist
+                        {t('common:wishlist')}
                       </li>
                     </Link>
                     <li

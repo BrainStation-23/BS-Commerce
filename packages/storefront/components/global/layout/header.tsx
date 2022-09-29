@@ -88,7 +88,7 @@ const Header: NextComponentType = () => {
           <span className="text-3xl font-bold">
             <Link href="/">
               {/* <a>BS Commerce</a> */}
-              <a>{t('home:site_name')}</a>
+              <a>{t('common:site_name')}</a>
             </Link>
           </span>
           <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">

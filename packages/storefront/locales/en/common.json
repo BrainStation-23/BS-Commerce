@@ -1,1 +1,7 @@
-{}
+{
+  "login": "Login",
+  "logout": "Logout",
+  "register": "Register",
+  "site_name": "BS Commerce",
+  "wishlist": "Wishlist"
+}
