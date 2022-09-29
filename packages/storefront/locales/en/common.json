@@ -2,12 +2,15 @@
   "about_us": "About Us",
   "address": "Address",
   "Affiliate": "Affiliate",
+  "are_you_sure": "Are you sure?",
   "blog": "Blog",
   "brands": "Brands",
   "call_us": "Call us",
+  "cancel": "Cancel",
   "comparison": "Comparison",
   "contact_us": "Contact us",
   "contact_number": "+8801674314359",
+  "continue_shopping": "Continue Shopping",
   "copyrignt": "Copyright © BS commerce All right reserved",
   "cucumber": "Cucumber",
   "customer_support": "Customer Support",
@@ -44,5 +47,6 @@
   "Specials": "Specials",
   "SUBSCRIBE": "SUBSCRIBE",
   "Terms&Condition": "Terms & Condition",
-  "wishlist": "Wishlist"
+  "wishlist": "Wishlist",
+  "yes": "Yes"
 }

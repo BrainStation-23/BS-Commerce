@@ -5,6 +5,7 @@
     "*": ["common"],
     "/about": ["about"],
     "/search": ["search"],
+    "/wishlist": ["wishlist"],
     "/": ["home"]
   },
   "keySeparator": "."

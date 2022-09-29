@@ -2,12 +2,15 @@
   "about_us": "আমাদের কথা",
   "address": "ঠিকানা",
   "Affiliate": "অধিভুক্ত",
+  "are_you_sure": "আপনি কি সুনিশ্চিত?",
   "blog": "ব্লগ",
   "brands": "ব্র্যান্ডসমূহ",
   "call_us": "কল করুন",
+  "cancel": "ক্যান্সেল",
   "comparison": "তুলনা",
   "contact_us": "যোগাযোগ করুন",
   "contact_number": "+৮৮০১৬৭৪৩১৪৩৫৯",
+  "continue_shopping": "কেনাকাটা চালিয়ে যান",
   "copyrignt": "কপিরাইট © বিএস কমার্স সব অধিকার সংরক্ষিত",
   "cucumber": "শশা",
   "customer_support": "কাস্টোমার সাপোর্ট",
@@ -44,5 +47,6 @@
   "Specials": "বিশেষ সমূহ",
   "SUBSCRIBE": "সাবস্ক্রাইব",
   "Terms&Condition": "বিধি - নিষেধ এবং শর্তাবলী",
-  "wishlist": "উইশলিস্ট"
+  "wishlist": "উইশলিস্ট",
+  "yes": "হ্যাঁ"
 }

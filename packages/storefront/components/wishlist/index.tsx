@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 
 import { NextComponentType } from 'next';
 
@@ -27,6 +28,8 @@ import { WishlistItem } from '@bs-commerce/models';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
@@ -79,19 +82,19 @@ const WishlistComponent: NextComponentType = () => {
           setModalOn={setModalOn}
           setChoice={setChoice}
           trigger={handleDeleteAllWishlistItems}
-          modalTitle="Delete Wishlist"
-          bodyText="Are you sure?"
+          modalTitle={`${t('wishlist:delete_wishlist')}`}
+          bodyText={`${t('common:are_you_sure')}`}
         />
       )}
       <div className="container mx-auto">
         <div className="mx-5 flex items-center justify-between pt-3">
-          <p className="text-xl">FAVOURITES</p>
+          <p className="text-xl">{t('wishlist:favourites')}</p>
           {wishlistData?.items?.length! > 0 && (
             <button
               onClick={() => setModalOn(true)}
               className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
             >
-              Clear Wishlist
+              {t('wishlist:clear_wishlist')}
             </button>
           )}
         </div>
@@ -101,11 +104,11 @@ const WishlistComponent: NextComponentType = () => {
               <WishlistIcon height="h-16" width="w-16" />
             </div>
             <p className="text-xl text-green-600/100">
-              Your wishlist is empty.
+              {t('wishlist:empty_wishlist')}
             </p>
             <Link href="/" passHref>
               <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-green-600/100">
-                <p>Continue Shopping</p>
+                <p>{t('common:continue_shopping')}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="ml-1 h-6 w-6"
