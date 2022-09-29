@@ -17,19 +17,24 @@
     },
     "slide_details" : {
         "vegetable_big_sale": {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "শাকসবজিতে বিশাল মূল্যহ্রাস",
+            "description": "ফার্ম ফ্রেশ পণ্য",
+            "details": "১০% অর্গানিক-সার্টিফাইড ফল এবং সবজির সমাহার। রান্না এবং সরাসরি খাওয়ার জন্য উপযুক্ত"
         },
         "fresh_vegetables" : {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "ফ্রেশ সবজি",
+            "description": "ন্যাচারাল ফার্ম পণ্য",
+            "details": "ফার্ম-ফ্রেশ সবজি, ফল এবং সিজনাল পণ্যের সবচেয়ে বড় সংগ্রহ"
         },
         "tomato": {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "ফ্রেশ টমেটো",
+            "description": "ন্যাচারাল ফার্ম পণ্য",
+            "details": "ন্যাচারাল অর্গানিক টমেটো স্বাস্থ্য ভালো রাখে"
         }
-    }
+    },
+    "recently_added": "আমাদের স্টোরে নতুন সংযোজন",
+    "trending": "ট্রেন্ডিং পণ্যসমূহ",
+    "weekly_deals": "সাপ্তাহিক ডিল",
+    "best_sell": "বেস্ট সেল",
+    "featured_products": "ফিচারড পণ্যসমূহ"
 }

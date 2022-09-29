@@ -19,28 +19,25 @@ const ImageSlider = () => {
       id: 1,
       image:
         'https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider1.jpg?v=1588047077',
-      description: 'Fresh Farm Products',
-      deatils:
-        '10% certifled-organic mix of fruit and veggies. Perfect for weekly cooking and snacking!',
-      title: 'Vegetables Big Sale',
+      description: `${t('home:slide_details.vegetable_big_sale.description')}`,
+      deatils: `${t('home:slide_details.vegetable_big_sale.details')}`,
+      title: `${t('home:slide_details.vegetable_big_sale.title')}`,
     },
     {
       id: 2,
       image:
         'https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider2.jpg?v=1588047180',
-      title: 'Fresh Vegetables',
-      description: 'Natural Farm Products',
-      deatils:
-        'Widest range of farm-fresh Vegetables, Fruits & seasonal produce',
+      title: `${t('home:slide_details.fresh_vegetables.title')}`,
+      description: `${t('home:slide_details.fresh_vegetables.description')}`,
+      deatils: `${t('home:slide_details.fresh_vegetables.details')}`,
     },
     {
       id: 3,
       image:
         'https://cdn.shopify.com/s/files/1/0359/6350/2651/files/slider3.jpg?v=1588047393',
-      title: 'Fresh Tomatoes',
-      description: 'Natural Farm Products',
-      deatils:
-        'Natural organic tomatoes make your health stronger. Put your information here',
+      title: `${t('home:slide_details.tomato.title')}`,
+      description: `${t('home:slide_details.tomato.description')}`,
+      deatils: `${t('home:slide_details.tomato.details')}`,
     },
   ];
   return (

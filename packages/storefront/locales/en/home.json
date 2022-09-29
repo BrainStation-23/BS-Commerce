@@ -17,19 +17,24 @@
     },
     "slide_details" : {
         "vegetable_big_sale": {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "Vegetables Big Sale",
+            "description": "Fresh Farm Products",
+            "details": "10% certifled-organic mix of fruit and veggies. Perfect for weekly cooking and snacking!"
         },
         "fresh_vegetables" : {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "Fresh Vegetables",
+            "description": "Natural Farm Products",
+            "details": "Widest range of farm-fresh Vegetables, Fruits & seasonal product"
         },
         "tomato": {
-            "title": "",
-            "description": "",
-            "details": ""
+            "title": "Fresh Tomatoes",
+            "description": "Natural Farm Products",
+            "details": "Natural organic tomatoes make your health stronger. Put your information here"
         }
-    }
+    },
+    "recently_added": "Recently added our store",
+    "trending": "Trending Products",
+    "weekly_deals": "Deals Of The Weeks",
+    "best_sell": "Best Sell",
+    "featured_products": "Featured Products"
 }
