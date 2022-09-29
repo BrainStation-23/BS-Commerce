@@ -42,7 +42,7 @@ const Navbar: React.FC<Props> = ({
   toggleOpen,
 }: Props) => {
   const { t } = useTranslation();
-  const customerNumber = `${t('home:contact_number')}`;
+  const customerNumber = `${t('common:contact_number')}`;
 
   const MenuData: menuLink[] = [
     {
@@ -184,7 +184,7 @@ const Navbar: React.FC<Props> = ({
                 <div className="flex flex-col">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
-                    {t('home:customer_support')}
+                    {t('common:customer_support')}
                   </span>
                 </div>
               </>
