@@ -49,15 +49,17 @@ const SearchComponent: NextComponentType = () => {
       <Breadcrumb
         title={`${
           searchText.length > 0
-            ? `Search: ${totalProducts} results found`
-            : 'Search'
+            ? `${t('search:pageTitle')}: ${totalProducts} 
+            ${t('search:results_found')}`
+            : t('search:pageTitle')
         }`}
         pathArray={[
-          'Home',
+          t('common:home'),
           `${
             searchText.length > 0
-              ? `Search: ${totalProducts} results found`
-              : 'Search'
+              ? `${t('search:pageTitle')}: ${totalProducts} 
+              ${t('search:results_found')}`
+              : t('search:pageTitle')
           }`,
         ]}
         linkArray={['/', '/search']}
@@ -66,12 +68,12 @@ const SearchComponent: NextComponentType = () => {
         <h4 className="title-font mt-16 mb-1 text-center text-sm  font-normal text-gray-900">
           {searchText ? (
             <>
-              Your search for{' '}
-              <strong className="highlight">{searchText}</strong> revealed the
-              following:
+              {t('search:pre-text')}{' '}
+              <strong className="highlight">{searchText}</strong>
+              {t('search:post-text')}:
             </>
           ) : (
-            'Search for products on our site'
+            <>{t('search:Search_for_products_on_our_site')}</>
           )}
         </h4>
 
@@ -90,7 +92,7 @@ const SearchComponent: NextComponentType = () => {
                 className="absolute right-0 rounded-3xl bg-green-600 py-1.5 px-4 pb-2 text-base text-white hover:bg-black"
                 onClick={() => onProductSearch()}
               >
-                Search
+                {t('search:pageTitle')}
               </button>
             </div>
           </div>

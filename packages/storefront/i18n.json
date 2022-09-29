@@ -4,6 +4,7 @@
   "pages": {
     "*": ["common"],
     "/about": ["about"],
+    "/search": ["search"],
     "/": ["home"]
   },
   "keySeparator": "."
