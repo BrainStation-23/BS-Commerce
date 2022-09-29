@@ -23,16 +23,19 @@ const Product = ({ product }: SingleProduct) => {
         }}
         passHref
       >
-        <div className="group relative grid w-64 grid-cols-9 md:pl-0 lg:pl-0">
-          <div className="col-span-3">
-            <Image
-              src={product.photos![0].url!}
-              alt={product.photos![0].alt}
-              height={120}
-              width={120}
-            />
+        <div className="group relative grid w-80 grid-cols-12 md:pl-0 lg:pl-0">
+          <div className='col-span-3 '>
+            <div className="border-grey-500 rounded border-2 p-1">
+              <Image
+                src={product.photos![0].url!}
+                alt={product.photos![0].alt}
+                height={120}
+                width={120}
+                className="bg-red rounded border-8 border-sky-500 p-1"
+              />
+            </div>
           </div>
-          <div className="col-span-6">
+          <div className="col-span-9">
             <ProductInfo product={product} />
           </div>
 
