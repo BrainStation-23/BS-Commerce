@@ -1,6 +1,35 @@
 {
-    "free_shipping": "FREE SHIPPING",
-    "support": "SUPPORT 24/7",
-    "return": "30 DAYS RETURN",
-    "payment_secure": "100% PAYMENT SECURE"
+    "free_shipping": {
+        "body": "FREE SHIPPING",
+        "title": "Free shipping on all US order or order above $200"
+    },
+    "support": {
+        "title": "SUPPORT 24/7",
+        "body": "Contact us 24 hours a day, 7 days a week"
+    },
+    "return": {
+        "title": "30 DAYS RETURN",
+        "body": "Simply return it within 30 days for an exchange"
+    },
+    "payment_secure": {
+       "title": "100% PAYMENT SECURE",
+       "body": "We ensure secure payment with PEV"
+    },
+    "slide_details" : {
+        "vegetable_big_sale": {
+            "title": "",
+            "description": "",
+            "details": ""
+        },
+        "fresh_vegetables" : {
+            "title": "",
+            "description": "",
+            "details": ""
+        },
+        "tomato": {
+            "title": "",
+            "description": "",
+            "details": ""
+        }
+    }
 }

@@ -2,7 +2,8 @@
   "locales": ["en", "bn"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common", "home"],
+    "*": ["common"],
     "/": ["home"]
-  }
+  },
+  "keySeparator": "."
 }

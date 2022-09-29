@@ -1,6 +1,35 @@
 {
-    "free_shipping": "ফ্রি শিপিং",
-    "support": "সাপোর্ট ২৪/৭",
-    "return": "৩০ দিনে রিটার্ন",
-    "payment_secure": "১০০% পেমেন্ট নিরাপত্তা"
+    "free_shipping": {
+        "title": "ফ্রি শিপিং",
+        "body": "২০০ ডলারের উপরে সকল অর্ডারে থাকছে ফ্রি শিপিং সুবিধা"
+    },
+    "support": {
+        "title": "সাপোর্ট ২৪/৭",
+        "body": "আমাদের সাথে যোগাযোগ করতে পারবেন সপ্তাহে ৭ দিন, ২৪ ঘন্টা"
+    },
+    "return": {
+        "title": "৩০ দিনে রিটার্ন",
+        "body": "৩০ দিনের মধ্যে পণ্য পরিবর্তনের সহজ সুবিধা"
+    },
+    "payment_secure": {
+       "title": "১০০% পেমেন্ট নিরাপত্তা",
+       "body": "নিরাপদ পেমেন্ট নিশ্চিত করা হয়েছে PEV দ্বারা"
+    },
+    "slide_details" : {
+        "vegetable_big_sale": {
+            "title": "",
+            "description": "",
+            "details": ""
+        },
+        "fresh_vegetables" : {
+            "title": "",
+            "description": "",
+            "details": ""
+        },
+        "tomato": {
+            "title": "",
+            "description": "",
+            "details": ""
+        }
+    }
 }

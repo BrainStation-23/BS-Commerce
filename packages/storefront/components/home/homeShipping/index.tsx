@@ -40,9 +40,9 @@ const HomeShipping: NextComponentType = () => {
             </div>
             <div className="">
               <h3 className="mb-1 text-base md:mb-2">
-                {t('home:free_shipping')}
+                {t('home:free_shipping.title')}
               </h3>
-              <p>Free shipping on all US order or order above $200</p>
+              <p>{t('home:free_shipping.body')}</p>
             </div>
           </div>
           <div className="flex w-full px-3 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
@@ -63,8 +63,10 @@ const HomeShipping: NextComponentType = () => {
               </svg>
             </div>
             <div className="">
-              <h3 className="mb-1 text-base md:mb-2">{t('home:support')}</h3>
-              <p>Contact us 24 hours a day, 7 days a week</p>
+              <h3 className="mb-1 text-base md:mb-2">
+                {t('home:support.title')}
+              </h3>
+              <p>{t('home:support.body')}</p>
             </div>
           </div>
           <div className="flex w-full px-3 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
@@ -92,8 +94,10 @@ const HomeShipping: NextComponentType = () => {
               /> */}
             </div>
             <div className="">
-              <h3 className="mb-1 text-base md:mb-2">{t('home:return')}</h3>
-              <p>Simply return it within 30 days for an exchange</p>
+              <h3 className="mb-1 text-base md:mb-2">
+                {t('home:return.title')}
+              </h3>
+              <p>{t('home:return.body')}</p>
             </div>
           </div>
           <div className="flex w-full px-3 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
@@ -115,9 +119,9 @@ const HomeShipping: NextComponentType = () => {
             </div>
             <div className="">
               <h3 className="mb-1 text-base md:mb-2">
-                {t('home:payment_secure')}
+                {t('home:payment_secure.title')}
               </h3>
-              <p>We ensure secure payment with PEV</p>
+              <p>{t('home:payment_secure.body')}</p>
             </div>
           </div>
         </div>
