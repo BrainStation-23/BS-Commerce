@@ -91,7 +91,7 @@ const HeaderAccount: React.FC<Properties> = () => {
   const links = [
     { name: `${t('common:register')}`, link: '/account/sign-up' },
     { name: `${t('common:login')}`, link: '/account/sign-in' },
-    { name: 'Wishlist', link: '/wishlist' },
+    { name: `${t('common:wishlist')}`, link: '/wishlist' },
     { name: `${t('common:logout')}`, link: '/account/sign-in' },
     { name: `${user}`, link: '/myAccount' },
   ];
@@ -146,21 +146,21 @@ const HeaderAccount: React.FC<Properties> = () => {
                             });
                       }}
                     >
-                      Comparision
+                      {t('common:comparison')}
                     </li>
                     <Link href="/myAccount" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Profile
+                        {t('common:profile')}
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Manage Addresses
+                        {t('common:manage_addresses')}
                       </li>
                     </Link>
                     <Link href="/order" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
-                        Orders
+                        {t('common:orders')}
                       </li>
                     </Link>
                     <hr className="my-2" />

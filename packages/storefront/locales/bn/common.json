@@ -1,7 +1,13 @@
 {
+  "comparison": "তুলনা",
   "login": "লগইন",
   "logout": "লগআউট",
+  "manage_addresses": "ঠিকানা ম্যানেজমেন্ট",
+  "profile": "প্রোফাইল",
   "register": "রেজিস্টার",
   "site_name": "বিএস কমার্স",
-  "wishlist": "উইশলিস্ট"
+  "wishlist": "উইশলিস্ট",
+  "orders": "অর্ডারসমূহ",
+  "home": "হোম",
+  "shop": "দোকান"
 }

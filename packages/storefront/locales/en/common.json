@@ -1,7 +1,13 @@
 {
+  "comparison": "Comparison",
   "login": "Login",
   "logout": "Logout",
+  "manage_addresses": "Manage Addresses",
+  "profile": "Profile",
   "register": "Register",
   "site_name": "BS Commerce",
-  "wishlist": "Wishlist"
+  "wishlist": "Wishlist",
+  "orders": "Orders",
+  "home": "Home",
+  "shop": "Shop"
 }
