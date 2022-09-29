@@ -78,12 +78,12 @@ const Shipping: React.FC<Props> = (props: Props) => {
                   pay: true,
                 });
               }}
-              className="w-full rounded-md bg-[#000000] py-5 px-6 text-sm text-white"
+              className="w-full rounded-md bg-[#000000] py-4 px-6 text-sm text-white"
             >
               Continue to payment
             </button>
           </div>
-          <div className="mt-5 mb-5 flex flex-wrap justify-center lg:ml-6">
+          <div className="mt-4 mb-5 flex flex-wrap justify-center lg:ml-6">
             <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
               <button
                 onClick={() => {
