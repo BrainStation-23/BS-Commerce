@@ -56,5 +56,13 @@
   "From": "From",
   "PRICE": "PRICE",
   "Filter": "Filter",
-  "BRAND": "BRAND"
+  "BRAND": "BRAND",
+  "here": "here",
+  "continue_browsing": "Continue Browsing",
+  "total": "Total",
+  "image": "Image",
+  "quantity": "quantity",
+  "remove": "Remove",
+  "or": "or",
+  "account": "Account"
 }

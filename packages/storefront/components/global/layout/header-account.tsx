@@ -102,8 +102,8 @@ const HeaderAccount: React.FC<Properties> = () => {
           setModalOn={setModalOn}
           setChoice={setChoice}
           trigger={handleLogout}
-          modalTitle="Logout"
-          bodyText="Are you sure?"
+          modalTitle={t('common:logout')}
+          bodyText={t('common:are_you_sure')}
         />
       )}
       {modalOnWishlist && (
