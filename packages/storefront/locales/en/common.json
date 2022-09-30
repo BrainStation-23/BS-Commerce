@@ -66,5 +66,8 @@
   "or": "or",
   "account": "Account",
   "ViewCart": "View Cart",
-  "Checkout": "Checkout"
+  "Checkout": "Checkout",
+  "my_account": "My Account",
+  "add": "Add",
+  "default": "defult"
 }
