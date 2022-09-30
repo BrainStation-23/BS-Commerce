@@ -62,7 +62,7 @@ const CategoryProductsPage: NextPage<SingleProduct> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const categoryId = context.query.categoryId;
   const name = context?.query?.name;
-  const orderBy = context?.query?.orderBy;
+  const orderBy = context?.query?.orderBy ? context?.query?.orderBy : 'asc';
   const minPrice = context?.query?.minPrice;
   const maxPrice = context?.query?.maxPrice;
   const brand = context?.query?.brand ? context?.query?.brand : '';

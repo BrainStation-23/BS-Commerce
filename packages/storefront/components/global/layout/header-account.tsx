@@ -196,11 +196,11 @@ const HeaderAccount: React.FC<Properties> = () => {
           )}
         </span>
         <div className="flex flex-row items-center gap-x-3">
-          <button onClick={handleClickWishlist}>
-            <div className="flex hover:text-green-600">
+          <button type="button" onClick={handleClickWishlist}>
+            <div className="flex text-base hover:text-green-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-green- h-6 w-6 cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                className="h-6 w-6 hover:text-green-600"
                 fill={
                   wishlistItems?.items?.length! > 0 && token !== ''
                     ? `green`
@@ -209,7 +209,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 viewBox="0 0 24 24"
                 stroke={
                   wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `none`
+                    ? `green`
                     : `currentColor`
                 }
                 strokeWidth={2}
