@@ -10,6 +10,7 @@
     "/cart": ["cart"],
     "/account/sign-in": ["login"],
     "/account/sign-up": ["register"],
+    "/myAccount/addresses": ["manage-address"],
     "/": ["home"]
   },
   "keySeparator": "."

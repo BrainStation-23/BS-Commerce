@@ -63,5 +63,8 @@
   "quantity": "quantity",
   "remove": "Remove",
   "or": "or",
-  "account": "Account"
+  "account": "Account",
+  "my_account": "My Account",
+  "add": "Add",
+  "default": "defult"
 }
