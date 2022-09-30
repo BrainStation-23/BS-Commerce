@@ -6,6 +6,7 @@
     "/about": ["about"],
     "/search": ["search"],
     "/wishlist": ["wishlist"],
+    "/myAccount": ["myAccount"],
     "rgx:/collections/*": ["collections"],
     "/": ["home"]
   },
