@@ -6,9 +6,11 @@ import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import OrderTable from './orderTable';
+import useTranslation from 'next-translate/useTranslation';
 
 const Orders = () => {
   const [allOrderList, setAllOrderList] = useState<OrderByUserId[]>([]);
+  const { t } = useTranslation();
 
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -26,12 +28,12 @@ const Orders = () => {
   return (
     <>
       <Breadcrumb
-        title="My order"
-        pathArray={['Home', 'My order']}
+        title={t('order:MyOrder')}
+        pathArray={[`${t('common:home')}`, `${t('order:MyOrder')}`]}
         linkArray={['/', '/']}
       />
       <div className="container mx-auto px-4">
-        <p className="mt-5 text-2xl font-semibold">Your Order</p>
+        <p className="mt-5 text-2xl font-semibold">{t('order:YourOrder')}</p>
         {allOrderList?.length ? (
           <OrderTable orderList={allOrderList} />
         ) : (

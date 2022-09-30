@@ -7,6 +7,7 @@
     "/search": ["search"],
     "/wishlist": ["wishlist"],
     "/myAccount": ["myAccount"],
+    "/order": ["order"],
     "rgx:/collections/*": ["collections"],
     "/cart": ["cart"],
     "/account/sign-in": ["login"],

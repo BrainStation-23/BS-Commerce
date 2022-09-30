@@ -1,11 +1,14 @@
 import { OrderByUserId } from '@bs-commerce/models';
 import moment from 'moment';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 
 interface Props {
   singleOrder: OrderByUserId;
 }
 const TableData: React.FC<Props> = ({ singleOrder }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <td className="px-5 py-4">{singleOrder?.orderId}</td>
@@ -38,7 +41,7 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
             query: { id: singleOrder?.orderId },
           }}
         >
-          View
+          {t('order:View')}
         </Link>
       </td>
     </>
