@@ -61,5 +61,7 @@
   "total": "Total",
   "image": "Image",
   "quantity": "quantity",
-  "remove": "Remove"
+  "remove": "Remove",
+  "or": "or",
+  "account": "Account"
 }

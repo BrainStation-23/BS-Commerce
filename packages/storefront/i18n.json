@@ -8,6 +8,8 @@
     "/wishlist": ["wishlist"],
     "rgx:/collections/*": ["collections"],
     "/cart": ["cart"],
+    "/account/sign-in": ["login"],
+    "/account/sign-up": ["register"],
     "/": ["home"]
   },
   "keySeparator": "."
