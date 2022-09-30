@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 import type { NextComponentType } from 'next';
 import { deleteCart } from 'toolkit/cartSlice';
@@ -12,6 +13,7 @@ import { userAPI } from 'APIs';
 
 const CartDetails: NextComponentType = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
@@ -31,13 +33,13 @@ const CartDetails: NextComponentType = () => {
           ) : (
             <>
               <div className="container mx-5 mt-5 w-full flex-col justify-start gap-y-2">
-                <p className="text-3xl">Shopping Cart</p>
-                <p className="text-2xl">Your cart is currently empty.</p>
+                <p className="text-3xl">{t('cart:cart')}</p>
+                <p className="text-2xl">{t('cart:empty_cart')}</p>
                 <p className="text-sm">
-                  Continue browsing{' '}
+                  {t('common:continue_browsing')}{' '}
                   <span className=" hover:text-green-600">
                     <Link href="/" passHref>
-                      here
+                      {t('common:here')}
                     </Link>
                   </span>
                 </p>
@@ -52,13 +54,13 @@ const CartDetails: NextComponentType = () => {
           </div>
         ) : (
           <div className=" mx-5 mt-5 flex-col justify-center gap-y-2 md:hidden">
-            <p className="text-2xl">Shopping Cart</p>
-            <p className="text-xl">Your cart is currently empty.</p>
+            <p className="text-2xl">{t('cart:cart')}</p>
+            <p className="text-xl">{t('cart:empty_cart')}</p>
             <p className="text-xs">
-              Continue browsing{' '}
+              {t('common:continue_browsing')}{' '}
               <span className=" hover:text-green-600">
                 <Link href="/" passHref>
-                  here
+                  {t('common:here')}
                 </Link>
               </span>
             </p>
@@ -69,7 +71,7 @@ const CartDetails: NextComponentType = () => {
           {cartData?.length > 0 && (
             <Link href="/" passHref>
               <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
-                CONTINUE SHOPPING
+                {t('common:continue_shopping').toUpperCase()}
               </button>
             </Link>
           )}
