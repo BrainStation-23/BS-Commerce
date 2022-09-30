@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'toolkit/modalSlice';
 import { XCircleIcon } from '../../layout/headerIcons';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   open: boolean;
@@ -12,8 +13,10 @@ interface Props {
 }
 
 const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   if (!open) return null;
+
   return (
     <div
       className="relative z-50"
@@ -93,7 +96,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                       onClose();
                     }}
                   >
-                    View Cart
+                    {t('common:ViewCart')}
                   </button>
                 </Link>
                 <Link href="/checkout" passHref>
@@ -104,7 +107,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                       onClose();
                     }}
                   >
-                    Checkout
+                   {t('common:Checkout')} 
                   </button>
                 </Link>
               </div>

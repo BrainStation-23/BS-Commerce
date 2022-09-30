@@ -64,5 +64,7 @@
   "quantity": "quantity",
   "remove": "Remove",
   "or": "or",
-  "account": "Account"
+  "account": "Account",
+  "ViewCart": "View Cart",
+  "Checkout": "Checkout"
 }

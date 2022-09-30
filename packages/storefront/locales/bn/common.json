@@ -64,5 +64,7 @@
   "quantity": "পরিমাণ",
   "remove": "বাদ দিন",
   "or": "অথবা",
-  "account": "একাউন্ট"
+  "account": "একাউন্ট",
+  "ViewCart": "কার্ট দেখুন",
+  "Checkout": "চেকআউট"
 }

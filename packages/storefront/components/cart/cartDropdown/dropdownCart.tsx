@@ -11,6 +11,7 @@ import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
 import Image from 'next/image';
 import { userAPI } from 'APIs';
+import useTranslation from 'next-translate/useTranslation';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -20,6 +21,7 @@ const CartDropdown: NextComponentType = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const { t } = useTranslation();
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
@@ -222,7 +224,7 @@ const CartDropdown: NextComponentType = () => {
                               setCartTotal(!cartTotal);
                             }}
                           >
-                            VIEW CART
+                            {t('common:ViewCart')}
                           </button>
                         </a>
                       </Link>
@@ -232,7 +234,7 @@ const CartDropdown: NextComponentType = () => {
                         className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                         onClick={handleClickProceed}
                       >
-                        CHECKOUT
+                        {t('common:Checkout')} 
                       </button>
                     </div>
                   </>
