@@ -173,7 +173,7 @@ const Navbar: React.FC<Props> = ({
             </ul>
           </div>
 
-          <div className="ml-auto hidden flex-row items-center gap-x-2 text-right text-sm text-gray-900 lg:flex">
+          <div className="ml-auto hidden flex-row items-center gap-x-2 text-right text-base text-gray-900 lg:flex">
             {showUser ? (
               <div>
                 <HeaderAccount />
@@ -181,7 +181,7 @@ const Navbar: React.FC<Props> = ({
             ) : (
               <>
                 <PhoneIcon />
-                <div className="flex flex-col">
+                <div className="flex flex-col text-sm">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
                     {t('common:customer_support')}

@@ -175,13 +175,13 @@ const CartDropdown: NextComponentType = () => {
           <div className="hover:text-green-600">
             <button
               type="button"
-              className="focus:shadow-outline-blue inline-flex w-full justify-center text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out hover:text-green-600 focus:border-blue-300 focus:outline-none active:bg-gray-50 active:text-gray-800"
+              className="inline-flex w-full justify-center text-base font-medium  text-gray-700  hover:text-green-600 "
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}
-              <p className="badge badge-light ">
+              <span className="">
                 {cartData?.length > 0 ? cartData?.length : 0}
-              </p>
+              </span>
             </button>
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (
