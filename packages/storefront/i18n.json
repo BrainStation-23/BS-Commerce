@@ -2,7 +2,7 @@
   "locales": ["en", "bn"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"],
+    "*": ["common", "compare"],
     "/about": ["about"],
     "/search": ["search"],
     "/wishlist": ["wishlist"],
