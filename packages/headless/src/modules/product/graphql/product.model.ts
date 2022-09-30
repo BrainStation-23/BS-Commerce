@@ -23,7 +23,7 @@ import {
   UpdateProductsForBrandRequest,
   GetCustomerAllProductsQuery,
   GetCustomerAllProductsResponseType,
-} from '@bs-commerce/models';
+} from 'models';
 
 @ObjectType('ProductInfo')
 @InputType('ProductInfoInput')
@@ -47,7 +47,7 @@ export class GraphqlProductInfo implements ProductInfo {
   oldPrice: number;
 
   @Field(() => Int)
-  cost: number;
+  quantity: number;
 
   @Field(() => Boolean, { nullable: true })
   showOnHomePage?: boolean;

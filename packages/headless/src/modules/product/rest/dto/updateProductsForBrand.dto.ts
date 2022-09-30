@@ -13,7 +13,7 @@ import {
   UpdateProductsForBrandErrorMessages,
   UpdateProductsForBrandErrorResponse,
   UpdateProductsForBrandSuccessResponse,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class updateProductsForBrandRequestDto
   implements UpdateProductsForBrandRequest

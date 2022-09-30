@@ -23,7 +23,7 @@ import {
   UpdateProductCategory,
   UpdateProductManufacturer,
   UpdateProductParams,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class UpdateProductParamsDto implements UpdateProductParams {
   @ApiProperty()
@@ -65,7 +65,7 @@ export class UpdateProductInfoDto implements UpdateProductInfo {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
-  cost?: number;
+  quantity?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()

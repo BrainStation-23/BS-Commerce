@@ -49,7 +49,7 @@ export class ElasticHelperService {
     data.info.sku = e?.info?.sku || '';
     data.info.price = e?.info?.price || 0;
     data.info.oldPrice = e?.info?.oldPrice || 0;
-    data.info.cost = e?.info?.cost || 0;
+    data.info.quantity = e?.info?.quantity || 0;
 
     data.meta.keywords = e?.meta?.keywords || [];
     data.meta.title = e?.meta?.title || '';

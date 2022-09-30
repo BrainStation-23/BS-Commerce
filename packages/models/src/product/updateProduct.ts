@@ -22,7 +22,7 @@ export interface UpdateProductInfo {
   sku?: string;
   price?: number;
   oldPrice?: number;
-  cost?: number;
+  quantity?: number;
   showOnHomePage?: boolean;
   includeInTopMenu?: boolean;
   allowToSelectPageSize?: boolean;

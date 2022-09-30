@@ -5,7 +5,7 @@ export interface CustomerProductInfo {
   sku: string;
   price: number;
   oldPrice: number;
-  cost: number;
+  quantity: number;
   publishDate?: Date;
 }
 

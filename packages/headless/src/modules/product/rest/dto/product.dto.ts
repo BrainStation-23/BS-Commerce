@@ -16,7 +16,7 @@ import {
   ProductCategory,
   ProductManufacturer,
   Product,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class ProductInfoDto implements ProductInfo {
   @ApiProperty({ required: true })
@@ -49,10 +49,10 @@ export class ProductInfoDto implements ProductInfo {
   @IsNumber()
   oldPrice: number;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, default: 10 })
   @IsNotEmpty()
   @IsNumber()
-  cost: number;
+  quantity: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
