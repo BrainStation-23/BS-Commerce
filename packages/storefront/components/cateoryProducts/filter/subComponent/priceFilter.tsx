@@ -50,11 +50,11 @@ const PriceFilter: FC = () => {
               />
             </span>
             <span className="mx-2 flex grid content-center justify-center">
-              {t('common:From')}
+              {t('collections:From')}
             </span>
           </div>
           {/* <div className="text-sm ml-4 text-center flex justify-center grid content-center lg:py-2 xl:px-2">
-            {t('common:From')}
+            {t('collections:From')}
           </div> */}
           <div>
             <div className="mt-2 flex flex-row text-sm">
@@ -82,7 +82,7 @@ const PriceFilter: FC = () => {
             onClick={() => onClickFilter()}
             className="rounded bg-green-600 py-2 px-6 font-semibold text-white hover:bg-black"
           >
-            {t('common:Filter')}
+            {t('collections:Filter')}
           </button>
         </div>
       </div>

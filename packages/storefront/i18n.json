@@ -6,7 +6,7 @@
     "/about": ["about"],
     "/search": ["search"],
     "/wishlist": ["wishlist"],
-    "/collections": ["collections"],
+    "rgx:/collections/*": ["collections"],
     "/": ["home"]
   },
   "keySeparator": "."

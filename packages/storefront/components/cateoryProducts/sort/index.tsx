@@ -10,11 +10,11 @@ const ProductSort: FC = () => {
     // { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
     {
       id: Math.random() * 100,
-      meta: { name: t('common:Price_High_to_Low'), value: 'desc' },
+      meta: { name: t('collections:Price_High_to_Low'), value: 'desc' },
     },
     {
       id: Math.random() * 100,
-      meta: { name: t('common:Price_Low_to_High'), value: 'asc' },
+      meta: { name: t('collections:Price_Low_to_High'), value: 'asc' },
     },
   ];
   const router = useRouter();
@@ -78,7 +78,7 @@ const ProductSort: FC = () => {
           <div className="flex justify-between">
             <div className="flex  py-2">
               <label className="grid content-center justify-center px-4">
-                {t('common:sortBy')}:
+                {t('collections:sortBy')}:
               </label>
               <select
                 id="selectSortOptions"
