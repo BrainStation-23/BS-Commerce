@@ -516,7 +516,7 @@ const PaymentDetails: NextComponentType = () => {
                   {/* <Link href="/submit" passHref> */}
                   <button
                     type="submit"
-                    className="w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-24 lg:w-24 xl:w-24"
+                    className="w-full rounded bg-black p-3 text-sm text-white sm:w-full md:w-24"
                   >
                     Pay now
                   </button>

@@ -309,7 +309,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                       extraClass="mb-3"
                     />
 
-                    <div className="row mb-3">
+                    <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <FieldTemplate
                           label="City"
@@ -354,10 +354,10 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                   <></>
                 )}
 
-                <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
+                <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row">
                   <button
                     type="submit"
-                    className="my-2 w-full rounded bg-black p-5 text-sm text-white sm:w-full md:w-44 lg:w-44 xl:w-44"
+                    className="my-2 w-full rounded bg-black p-3 text-sm text-white sm:w-full md:w-44"
                   >
                     Continue to shipping
                   </button>
