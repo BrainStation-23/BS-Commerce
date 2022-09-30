@@ -79,7 +79,7 @@ const DataTable: NextComponentType = () => {
                     className="bg-black text-xs hover:bg-[#40a944]"
                     onClick={handleDeleteAllCartItem}
                   >
-                    {t('cart:clear_cart')}
+                    {t('cart:clear_cart').toUpperCase()}
                   </button>
                 </th>
               </tr>
