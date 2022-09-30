@@ -6,11 +6,11 @@ const ProductSort: FC = () => {
     // { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
     {
       id: Math.random() * 100,
-      meta: { name: 'Price High to Low', value: 'desc' },
+      meta: { name: 'Price Low to High', value: 'asc' },
     },
     {
       id: Math.random() * 100,
-      meta: { name: 'Price Low to High', value: 'asc' },
+      meta: { name: 'Price High to Low', value: 'desc' },
     },
   ];
   const router = useRouter();
