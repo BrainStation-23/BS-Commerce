@@ -13,6 +13,7 @@
     "/checkout": ["checkout"],
     "/submit": ["submit"],
     "/service": ["service"],
+    "/contact": ["contact"],
     "/account/sign-in": ["login"],
     "/account/sign-up": ["register"],
     "/myAccount/addresses": ["manage-address"],
