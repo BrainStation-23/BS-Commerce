@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import useTranslation from 'next-translate/useTranslation';
 import { usernameSchema } from '@/components/global/schemas/forgot-password.schema';
 
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const UsernameForm: React.FC<Props> = ({ handleUsernameFormSubmit }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Formik
@@ -29,7 +32,7 @@ const UsernameForm: React.FC<Props> = ({ handleUsernameFormSubmit }) => {
                 <FieldTemplate
                   fieldType="text"
                   fieldID="username"
-                  placeholder="Email or phone number"
+                  placeholder={t('forgot-password:username')}
                 />
               </div>
 

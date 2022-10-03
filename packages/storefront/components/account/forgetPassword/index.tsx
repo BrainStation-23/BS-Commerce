@@ -1,4 +1,5 @@
 import { NextComponentType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import {
   CustomerForgotPasswordRequest,
   VerifyOtpRequest,
@@ -18,6 +19,7 @@ import NewPasswordForm from '@/components/account/forgetPassword/components/newP
 const ForgotPassword: NextComponentType = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [submitButtonState, setSubmitButtonState] =
     useState<string>('username');
@@ -62,8 +64,11 @@ const ForgotPassword: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Account"
-        pathArray={['Home', 'Forgot Password']}
+        title={t('common:account')}
+        pathArray={[
+          `${t('common:home')}`,
+          `${t('forgot-password:forgot_password')}`,
+        ]}
         linkArray={['/', '/account/forgot-password']}
       />
       <div className="flex flex-wrap justify-center">
@@ -72,14 +77,12 @@ const ForgotPassword: NextComponentType = () => {
           style={{ width: ' 35rem ', height: 'auto', background: '#f3f3f3' }}
         >
           <h2 className="mx-3 text-center text-3xl text-gray-800">
-            Reset Your Password
+            {t('forgot-password:reset_password')}
           </h2>
           <p className="mx-5 mt-2 mb-6 text-center text-gray-500">
-            {submitButtonState === 'username' &&
-              'We will send you a code to reset your password.'}
+            {submitButtonState === 'username' && t('forgot-password:send_code')}
 
-            {submitButtonState === 'otp' &&
-              'An OTP has been sent to your email/phone.'}
+            {submitButtonState === 'otp' && t('forgot-password:code_sent')}
 
             {submitButtonState === 'newPassword' && 'Submit a new password'}
           </p>

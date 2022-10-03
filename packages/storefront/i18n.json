@@ -13,6 +13,7 @@
     "/account/sign-in": ["login"],
     "/account/sign-up": ["register"],
     "/myAccount/addresses": ["manage-address"],
+    "/account/forgot-password": ["forgot-password", "register"],
     "/": ["home"]
   },
   "keySeparator": "."
