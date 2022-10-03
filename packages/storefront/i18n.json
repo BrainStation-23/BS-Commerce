@@ -16,6 +16,7 @@
     "/account/sign-in": ["login"],
     "/account/sign-up": ["register"],
     "/myAccount/addresses": ["manage-address"],
+    "rgx:/product/*": ["product-details"],
     "/account/forgot-password": ["forgot-password", "register"],
     "/": ["home"]
   },

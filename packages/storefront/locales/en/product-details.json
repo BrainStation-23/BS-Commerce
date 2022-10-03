@@ -1,0 +1,15 @@
+{
+    "manufacturer": "Manufacturer",
+    "sku": "SKU",
+    "availability": "Availability",
+    "quantity": "Quantity",
+    "add_to_cart": "Add to cart",
+    "buy_now": "Buy Now",
+    "add_to_wishlist": "+ Add to wishlist",
+    "remove_from_wishlist": "x Remove from wishlist",
+    "show_in_compare": "+ Show in compare list",
+    "compare": "+ Compare",
+    "description": "Description",
+    "size_chart": "Size Chart",
+    "similar_products": "Similar Products"
+}

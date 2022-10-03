@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 
 import { Product } from '@bs-commerce/models';
 interface SingleProduct {
@@ -12,6 +13,8 @@ interface SingleProduct {
 const ProductDescription: React.FC<SingleProduct> = ({
   product,
 }: SingleProduct) => {
+  const { t } = useTranslation();
+
   const [description, setDescription] = useState('block');
   const [review, setReview] = useState('hidden');
   const [shipping, setShipping] = useState('hidden');
@@ -68,7 +71,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
                   : 'mx-5 font-semibold '
               }
             >
-              Description
+              {t('product-details:description')}
             </button>
             {/* <button onClick={handleReview} className="mx-5 font-semibold">
               Review
@@ -84,7 +87,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
                   : 'mx-5 font-semibold'
               }
             >
-              Size Chart
+              {t('product-details:size_chart')}
             </button>
           </ul>
         </div>
@@ -94,7 +97,9 @@ const ProductDescription: React.FC<SingleProduct> = ({
           {/* <p className={review}>Review</p> */}
           {/* <p className={shipping}>{shipping_policy}</p> */}
           <div className={`${size_chart} w-full`}>
-            <h4 className="font-semibold ">Size Chart</h4>
+            <h4 className="font-semibold ">
+              {t('product-details:size_chart')}
+            </h4>
             <div className="flex justify-center">
               <Image src={size} alt="size" width={400} height={400} />
             </div>
