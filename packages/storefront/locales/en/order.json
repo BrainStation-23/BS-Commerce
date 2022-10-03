@@ -1,11 +1,11 @@
 {
-  "YourOrder": "Your Order",
-  "MyOrder": "My Order",
-  "OrderID": "Order ID",
-  "Date": "Date",
-  "Status": "Status",
-  "PaymentMethod": "Payment Method",
-  "ProductCost": "Product Cost",
-  "View": "View",
-  "Action": "Action"
+  "action": "Action",
+  "date": "Date",
+  "my_order": "My Order",
+  "orderID": "Order ID",
+  "payment_method": "Payment Method",
+  "product_cost": "Product Cost",
+  "status": "Status",
+  "view": "View",
+  "your_order": "Your Order"
 }

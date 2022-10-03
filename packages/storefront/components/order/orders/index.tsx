@@ -28,12 +28,12 @@ const Orders = () => {
   return (
     <>
       <Breadcrumb
-        title={t('order:MyOrder')}
-        pathArray={[`${t('common:home')}`, `${t('order:MyOrder')}`]}
+        title={t('order:my_order')}
+        pathArray={[`${t('common:home')}`, `${t('order:my_order')}`]}
         linkArray={['/', '/']}
       />
       <div className="container mx-auto px-4">
-        <p className="mt-5 text-2xl font-semibold">{t('order:YourOrder')}</p>
+        <p className="mt-5 text-2xl font-semibold">{t('order:your_order')}</p>
         {allOrderList?.length ? (
           <OrderTable orderList={allOrderList} />
         ) : (

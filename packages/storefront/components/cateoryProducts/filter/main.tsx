@@ -73,7 +73,7 @@ const CategoryFilter: FC = () => {
                 onClick={accorditionStatus1}
               >
                 <span className="text-[15px] font-semibold tracking-wide">
-                  {t('collections:PRICE')}
+                  {t('collections:price')}
                 </span>
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
               </button>
@@ -223,7 +223,7 @@ const CategoryFilter: FC = () => {
               >
                 <span className="text-[15px] font-semibold tracking-wide">
                   {' '}
-                  {t('collections:BRAND')}
+                  {t('collections:brand')}
                 </span>
                 <span>{displayStatus4 ? upArrow : downArrow}</span>
               </button>

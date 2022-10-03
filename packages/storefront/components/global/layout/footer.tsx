@@ -15,18 +15,18 @@ const Footer: NextComponentType = () => {
     { name: `${t('common:about_us')}`, link: '/about' },
     { name: `${t('common:delivery_information')}`, link: '/' },
     { name: `${t('common:privacy_policy')}`, link: '/' },
-    { name: `${t('common:Terms&Condition')}`, link: '/' },
+    { name: `${t('common:terms&condition')}`, link: '/' },
     { name: `${t('common:contact_us')}`, link: '/contact' },
-    { name: `${t('common:SiteMap')}`, link: '/' },
+    { name: `${t('common:site_map')}`, link: '/' },
   ];
 
   const extraList: footerLink[] = [
     { name: `${t('common:brands')}`, link: '/' },
-    { name: `${t('common:GiftsCertificates')}`, link: '/' },
-    { name: `${t('common:Affiliate')}`, link: '/' },
-    { name: `${t('common:Specials')}`, link: '/' },
-    { name: `${t('common:Returns')}`, link: '/' },
-    { name: `${t('common:OrderHistory')}`, link: '/order' },
+    { name: `${t('common:gifts_certificates')}`, link: '/' },
+    { name: `${t('common:affiliate')}`, link: '/' },
+    { name: `${t('common:specials')}`, link: '/' },
+    { name: `${t('common:returns')}`, link: '/' },
+    { name: `${t('common:order_history')}`, link: '/order' },
   ];
 
   const address = {
@@ -51,7 +51,7 @@ const Footer: NextComponentType = () => {
               {t('common:site_name')}
             </span>
             <span className="mb-1 text-sm">
-              {t('common:footerDescription')}
+              {t('common:footer_description')}
             </span>
             <div className="text-sm">
               <div className="mb-1">
@@ -86,7 +86,7 @@ const Footer: NextComponentType = () => {
           {/* Extras */}
           <div className="flex flex-col text-center md:flex-1 md:text-left">
             <span className="mb-3 text-lg font-medium">
-              {t('common:Extras')}
+              {t('common:extras')}
             </span>
             <div className="flex flex-col gap-1 text-sm">
               {extraList.map((link) => (
@@ -101,10 +101,10 @@ const Footer: NextComponentType = () => {
           {/* Newsletter */}
           <div className="flex flex-col text-center md:flex-1 md:grow-[2] md:text-left">
             <span className="mb-3 text-lg font-medium">
-              {t('common:Signup_for_newsletter')}
+              {t('common:signup_for_newsletter')}
             </span>
             <span className="mb-4 text-center text-sm md:text-left">
-              {t('common:Get_updates_by_subscribe_our_weekly_newsletter')}
+              {t('common:get_updates_by_subscribe_our_weekly_newsletter')}
             </span>
             <div
               className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
@@ -117,7 +117,7 @@ const Footer: NextComponentType = () => {
               />
               <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
                 <button type="submit" className="text-white">
-                  {t('common:SUBSCRIBE')}
+                  {t('common:subscribe')}
                 </button>
               </div>
             </div>

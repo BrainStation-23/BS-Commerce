@@ -1,9 +1,9 @@
 {
   "sortBy": "ক্রমানুসার",
-  "Price_High_to_Low": "দাম উচ্চ থেকে কম",
-  "Price_Low_to_High": "দাম কম থেকে বেশি",
-  "From": "থেকে",
-  "Filter": "ফিল্টার",
-  "BRAND": "ব্র্যান্ড",
-  "PRICE": "দাম"
+  "price_high_to_low": "দাম উচ্চ থেকে কম",
+  "price_low_to_high": "দাম কম থেকে বেশি",
+  "from": "থেকে",
+  "filter": "ফিল্টার",
+  "brand": "ব্র্যান্ড",
+  "price": "দাম"
 }

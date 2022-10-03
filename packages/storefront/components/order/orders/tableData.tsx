@@ -41,7 +41,7 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
             query: { id: singleOrder?.orderId },
           }}
         >
-          {t('order:View')}
+          {t('order:view')}
         </Link>
       </td>
     </>

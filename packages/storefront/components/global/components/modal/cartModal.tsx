@@ -96,7 +96,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                       onClose();
                     }}
                   >
-                    {t('common:ViewCart')}
+                    {t('common:view_cart')}
                   </button>
                 </Link>
                 <Link href="/checkout" passHref>
@@ -107,7 +107,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                       onClose();
                     }}
                   >
-                   {t('common:Checkout')} 
+                    {t('common:checkout')}
                   </button>
                 </Link>
               </div>

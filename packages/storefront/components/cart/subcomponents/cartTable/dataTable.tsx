@@ -34,7 +34,7 @@ const DataTable: NextComponentType = () => {
                   {t('common:products')}
                 </th>
                 <th className="border border-slate-300 bg-slate-200 px-10 py-4 text-base capitalize">
-                  {t('common:PRICE').toLowerCase()}
+                  {t('common:price').toLowerCase()}
                 </th>
                 <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize md:px-2 xl:px-10">
                   {t('common:quantity').toLowerCase()}

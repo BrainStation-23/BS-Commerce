@@ -23,10 +23,10 @@ const OrderTable: React.FC<Props> = ({ orderList }) => {
                     {t('order:OrderID')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('order:Date')}
+                    {t('order:date')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('order:Status')}
+                    {t('order:status')}
                   </th>
                   <th scope="col" className="px-5 py-4">
                     {t('order:PaymentMethod')}
@@ -35,7 +35,7 @@ const OrderTable: React.FC<Props> = ({ orderList }) => {
                     {t('order:ProductCost')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('order:Action')}
+                    {t('order:action')}
                   </th>
                 </tr>
               </thead>

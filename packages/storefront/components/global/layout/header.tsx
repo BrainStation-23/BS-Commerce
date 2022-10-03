@@ -92,7 +92,7 @@ const Header: NextComponentType = () => {
             </Link>
           </span>
           <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
-            <Search placeholder={t('common:searchPlaceHolder')} />
+            <Search placeholder={t('common:search_placeholder')} />
           </span>
           <span className="hidden lg:inline-block">
             <HeaderAccount />

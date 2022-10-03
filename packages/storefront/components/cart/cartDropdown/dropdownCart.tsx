@@ -224,7 +224,7 @@ const CartDropdown: NextComponentType = () => {
                               setCartTotal(!cartTotal);
                             }}
                           >
-                            {t('common:ViewCart')}
+                            {t('common:view_cart')}
                           </button>
                         </a>
                       </Link>
@@ -234,7 +234,7 @@ const CartDropdown: NextComponentType = () => {
                         className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                         onClick={handleClickProceed}
                       >
-                        {t('common:Checkout')} 
+                        {t('common:checkout')}
                       </button>
                     </div>
                   </>

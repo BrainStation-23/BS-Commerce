@@ -1,11 +1,11 @@
 {
-  "YourOrder": "আপনার অর্ডার",
-  "MyOrder": "আমার অর্ডার",
-  "OrderID": "অর্ডার আইডি",
-  "Date": "তারিখ",
-  "Status": "স্ট্যাটাস",
-  "PaymentMethod": "মূল্যপরিশোধ পদ্ধতি",
-  "ProductCost": "দ্রব্য মূল্য",
-  "View": "দেখুন",
-  "Action": "কর্ম"
+  "action": "কর্ম",
+  "date": "তারিখ",
+  "my_order": "আমার অর্ডার",
+  "orderID": "অর্ডার আইডি",
+  "payment_method": "মূল্যপরিশোধ পদ্ধতি",
+  "product_cost": "দ্রব্য মূল্য",
+  "status": "স্ট্যাটাস",
+  "view": "দেখুন",
+  "your_order": "আপনার অর্ডার"
 }

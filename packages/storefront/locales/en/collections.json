@@ -1,10 +1,10 @@
 {
-  "pageTitle":"Fruits & Vegetables",
-  "sortBy":"Sort By",
-  "Price_High_to_Low":"Price High to Low",
-  "Price_Low_to_High":"Price Low to High",
-  "From":"From",
-  "Filter":"Filter",
-  "BRAND":"BRAND",
-  "PRICE": "PRICE"
+  "pageTitle": "Fruits & Vegetables",
+  "sortBy": "Sort By",
+  "price_high_to_low": "Price High to Low",
+  "price_low_to_high": "Price Low to High",
+  "from": "From",
+  "filter": "Filter",
+  "brand": "BRAND",
+  "price": "Price"
 }
