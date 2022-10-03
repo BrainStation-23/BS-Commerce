@@ -1,10 +1,10 @@
 {
-  "Edit": "Edit",
-  "Name": "Name",
-  "Phone": "Phone",
-  "Email": "Email",
-  "Save": "Save",
-  "Cancel": "Cancel",
-  "AccountDetails": "Account Details",
-  "MyAccount": "My Account"
+  "edit": "Edit",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "save": "Save",
+  "cancel": "Cancel",
+  "account_details": "Account Details",
+  "my_account": "My Account"
 }

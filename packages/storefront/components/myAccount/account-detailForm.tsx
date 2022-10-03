@@ -15,7 +15,7 @@ const AccountDetailsForm: React.FC<props> = ({
       <AccountDetailsFormField
         id="name"
         fieldType="text"
-        label={t('myAccount:Name')}
+        label={t('myAccount:name')}
       />
       {/* <AccountDetailsFormField
         id="firstName"
@@ -30,13 +30,13 @@ const AccountDetailsForm: React.FC<props> = ({
       <AccountDetailsFormField
         id="phone"
         fieldType="text"
-        label={t('myAccount:Phone')}
+        label={t('myAccount:phone')}
         verified={isPhoneVerified}
       />
       <AccountDetailsFormField
         id="email"
         fieldType="text"
-        label={t('myAccount:Email')}
+        label={t('myAccount:email')}
         verified={isEmailVerified}
       />
     </>

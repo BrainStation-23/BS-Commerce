@@ -82,7 +82,7 @@ const AboutComponent: NextComponentType = () => {
   const { t } = useTranslation();
   return (
     <>
-      <PageTitle title={t('about:pageTitle')} />
+      <PageTitle title={t('about:page_title')} />
       <div className="py-12">
         <ImageWithDescription />
       </div>
