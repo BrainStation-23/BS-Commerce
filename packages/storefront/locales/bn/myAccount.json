@@ -4,7 +4,15 @@
   "phone": "ফোন",
   "email": "ইমেইল",
   "save": "সংরক্ষণ",
+  "order_details": "অর্ডার বিস্তারিত",
   "cancel": "বাতিল করুন",
   "account_details": "অ্যাকাউন্টের বিবরণ",
-  "my_account": "আমার অ্যাকাউন্ট"
+  "delivery_address": "সরবরাহের ঠিকানা",
+  "my_account": "আমার অ্যাকাউন্ট",
+  "address_line": "ঠিকানা লাইন",
+  "building_name": "ফ্ল্যাট/বিল্ডিং নাম",
+  "city": "শহর",
+  "details": "বিস্তারিত",
+  "post_code": "পোস্ট কোড",
+  "phone_number": "ফোন নম্বর"
 }
