@@ -15,6 +15,7 @@ import {
   CartProductPhoto,
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
+import useTranslation from 'next-translate/useTranslation';
 
 interface FormData {
   cardNumber: string;
@@ -46,7 +47,7 @@ const PaymentDetails: NextComponentType = () => {
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
-
+  const { t } = useTranslation();
   let usableCart: CreateProductOrderDetails[] = [];
   cartData.map((cartItem) => {
     const cart: {
@@ -273,7 +274,7 @@ const PaymentDetails: NextComponentType = () => {
                         value="Cash on Delivery"
                       />
                       <label htmlFor="paymentMethodCash" className="pl-2">
-                        Cash on Delivery
+                        {t('checkout:cash_on_delivery')}
                       </label>
                     </div>
                     <hr />
@@ -285,7 +286,7 @@ const PaymentDetails: NextComponentType = () => {
                         value="Credit card"
                       />
                       <label htmlFor="paymentMethodCard" className="pl-2">
-                        Credit card
+                        {t('checkout:credit_card')}
                       </label>
                     </div>
                     {formikprops.values.paymentMethod === 'Credit card' ? (
@@ -293,7 +294,7 @@ const PaymentDetails: NextComponentType = () => {
                         <div className="bg-gray-100">
                           <div className="p-4">
                             <FieldTemplate
-                              label="Card Number"
+                              label={t('checkout:card_number')}
                               fieldID="cardNumber"
                               fieldType="text"
                               placeholder=" "
@@ -301,7 +302,7 @@ const PaymentDetails: NextComponentType = () => {
                               isRequired={true}
                             />
                             <FieldTemplate
-                              label="Name on card"
+                              label={t('checkout:name_on_card')}
                               fieldID="nameOnCard"
                               fieldType="text"
                               placeholder=" "
@@ -321,7 +322,7 @@ const PaymentDetails: NextComponentType = () => {
                                     htmlFor={`expirationDate`}
                                     className="absolute top-4 left-4 z-10 origin-[0] -translate-y-4 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0  peer-placeholder-shown:scale-100 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-gray-500"
                                   >
-                                    Expiration Date (MM / YY)
+                                    {t('checkout:expiration_date')} (MM / YY)
                                   </label>
                                   <div className="errMsg text-red-600">
                                     <ErrorMessage name="expirationDate" />
@@ -329,7 +330,7 @@ const PaymentDetails: NextComponentType = () => {
                                 </div>
 
                                 <FieldTemplate
-                                  label="Security Code"
+                                  label={t('checkout:security_code')}
                                   fieldID="securityCode"
                                   fieldType="text"
                                   placeholder=" "
@@ -518,7 +519,7 @@ const PaymentDetails: NextComponentType = () => {
                     type="submit"
                     className="w-full rounded bg-black p-3 text-sm text-white sm:w-full md:w-24"
                   >
-                    Pay now
+                    {t('checkout:pay_now')}
                   </button>
                   {/* </Link> */}
 
@@ -533,7 +534,7 @@ const PaymentDetails: NextComponentType = () => {
                     </div>
                     <Link href="/cart" passHref>
                       <a className="text-decoration-none mb-2">
-                        Return to cart
+                        {t('checkout:return_to_cart')}
                       </a>
                     </Link>
                   </div>

@@ -2,11 +2,13 @@ import React from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
 import CartProductList from '@/components/checkout/orderList/cartProductList';
+import useTranslation from 'next-translate/useTranslation';
 
 const OrderedProducts: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+  const { t } = useTranslation();
 
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
@@ -26,12 +28,12 @@ const OrderedProducts: NextComponentType = () => {
           <div className="mt-5">
             <div className="row text-sm">
               <div className="mt-4 flex flex-wrap justify-between">
-                <p className="text-gray-600/100">Subtotal</p>
+                <p className="text-gray-600/100">{t('checkout:sub_total')}</p>
                 <p className="font-semibold">${totalCartPrice}</p>
               </div>
               <div className="mt-2 flex flex-wrap justify-between">
-                <p className="text-gray-600/100 ">Shipping</p>
-                <p className="font-semibold">Free</p>
+                <p className="text-gray-600/100 ">{t('checkout:shipping')}</p>
+                <p className="font-semibold">{t('checkout:free')}</p>
               </div>
               {/* <div className="flex flex-wrap justify-between mt-2">
                 <p className="text-gray-600/100">Taxes</p>
@@ -42,7 +44,7 @@ const OrderedProducts: NextComponentType = () => {
           <div className="mt-5">
             <div className="row">
               <div className="mt-4 flex flex-wrap justify-between">
-                <p className="text-gray-600/100">Total</p>
+                <p className="text-gray-600/100">{t('checkout:total')}</p>
                 <div className="flex flex-wrap items-center gap-3">
                   <p className="text-xs text-gray-500">USD</p>
                   <p className="text-2xl font-semibold">${totalCartPrice}</p>

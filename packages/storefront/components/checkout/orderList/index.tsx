@@ -6,12 +6,14 @@ import ChevronDown from '@/components/global/icons-for-checkout-page/chevron-dow
 import ChevronUp from '@/components/global/icons-for-checkout-page/chevron-up';
 import ShoppingCart from '@/components/global/icons-for-checkout-page/shopping-cart';
 import OrderedProducts from '@/components/checkout/orderList/orderDetail';
+import useTranslation from 'next-translate/useTranslation';
 
 const OrderList: NextComponentType = () => {
   const [dropdown, setDropdown] = useState(false);
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+  const { t } = useTranslation();
 
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
@@ -44,12 +46,14 @@ const OrderList: NextComponentType = () => {
               <div className="flex flex-wrap justify-between px-2">
                 {dropdown === true ? (
                   <>
-                    <p className="text-sm">Hide Order Summary</p>
+                    <p className="text-sm">{t('checkout:hide_order_summary')}</p>
                     <ChevronUp />
                   </>
                 ) : (
                   <>
-                    <p className="text-sm">Show Order Summary</p>
+                    <p className="text-sm">
+                      {t('checkout:show_order_summary')}
+                    </p>
                     <ChevronDown />
                   </>
                 )}

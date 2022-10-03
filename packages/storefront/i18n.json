@@ -10,6 +10,7 @@
     "/order": ["order"],
     "rgx:/collections/*": ["collections"],
     "/cart": ["cart"],
+    "/checkout": ["checkout"],
     "/account/sign-in": ["login"],
     "/account/sign-up": ["register"],
     "/myAccount/addresses": ["manage-address"],

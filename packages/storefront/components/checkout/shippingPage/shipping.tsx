@@ -2,6 +2,7 @@ import React from 'react';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import CheckoutFooter from '../checkoutFooter';
 import { useAppSelector } from 'customHooks/hooks';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   setModal: Function;
@@ -11,6 +12,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
   const shippingInfo = useAppSelector(
     (state) => state.persistedReducer.checkout.shippingInfo
   );
+  const { t } = useTranslation();
 
   const { setModal } = props;
 
@@ -20,7 +22,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
         <div className="mx-auto mt-5 box-border divide-y-2 rounded-md border-2 p-4 text-center">
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333]">Contact</p>
+              <p className="text-sm text-[#333333]">{t('checkout:contact')}</p>
               <p className="text-sm">{shippingInfo?.phoneNumber}</p>
             </div>
             <button
@@ -35,13 +37,13 @@ const Shipping: React.FC<Props> = (props: Props) => {
               className="ml-10 text-sm"
               style={{ border: 'none' }}
             >
-              Change
+              {t('checkout:change')}
             </button>
           </div>
 
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333]">Ship to</p>
+              <p className="text-sm text-[#333333]">{t('checkout:ship_to')}</p>
               <p className="text-sm">{shippingInfo?.addressLine1}</p>
             </div>
             <button
@@ -56,16 +58,16 @@ const Shipping: React.FC<Props> = (props: Props) => {
               className="ml-10 text-sm"
               style={{ border: 'none' }}
             >
-              Change
+              {t('checkout:change')}
             </button>
           </div>
         </div>
 
-        <p className="pt-7 text-lg font-normal">Shipping method</p>
+        <p className="pt-7 text-lg font-normal">{t('checkout:shipping_method')}</p>
 
         <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-[#333333] hover:bg-white">
-          <p>Standard</p>
-          <p className="ml-5 font-medium">Free</p>
+          <p>{t('checkout:standard')}</p>
+          <p className="ml-5 font-medium">{t('checkout:free')}</p>
         </div>
 
         <div className="mt-5 lg:flex">
@@ -80,7 +82,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
               }}
               className="w-full rounded-md bg-[#000000] py-4 px-6 text-sm text-white"
             >
-              Continue to payment
+              {t('checkout:continue_to_payment')}
             </button>
           </div>
           <div className="mt-4 mb-5 flex flex-wrap justify-center lg:ml-6">
@@ -108,7 +110,9 @@ const Shipping: React.FC<Props> = (props: Props) => {
                 setModal(obj);
               }}
             >
-              <a className="text-decoration-none">Return to information</a>
+              <a className="text-decoration-none">
+                {t('checkout:return_to_information')}
+              </a>
             </button>
           </div>
         </div>
