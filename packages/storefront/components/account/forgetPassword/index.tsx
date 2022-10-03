@@ -84,7 +84,8 @@ const ForgotPassword: NextComponentType = () => {
 
             {submitButtonState === 'otp' && t('forgot-password:code_sent')}
 
-            {submitButtonState === 'newPassword' && 'Submit a new password'}
+            {submitButtonState === 'newPassword' &&
+              t('forgot-password:submit_new_password')}
           </p>
           <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             {submitButtonState === 'username' && (
