@@ -9,6 +9,7 @@ import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
 import { useEffect, useState } from 'react';
 import SingleAddressDetailsTable from '@/components/myAccount/singleAddressDetailsTable';
+import useTranslation from 'next-translate/useTranslation';
 
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const SingleAddressDetails: NextComponentType = () => {
     phone: '',
     tag: '',
   });
-
+  const { t } = useTranslation();
   const customerAddresses = useAppSelector(
     (state) => state?.persistedReducer?.customerAddress.addresses
   );
@@ -42,8 +43,8 @@ const SingleAddressDetails: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Order Details"
-        pathArray={['Home', 'Details']}
+        title={t('order:order_details')}
+        pathArray={[`${t('common:home')}`, `${t('order:order_details')}`]}
         linkArray={['/', '/']}
       />
       <div className="container mx-auto mt-5 px-4">

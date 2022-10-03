@@ -7,5 +7,12 @@
   "product_cost": "Product Cost",
   "status": "Status",
   "view": "View",
+  "order_created": "Order Created",
+  "order_time": "Order Time",
+  "delivery_address": "Delivery Address",
+  "delivery_fee": "Delivery Fee",
+  "order_details": "Order Details",
+  "order_summary": "Order Summary",
+  "card_no": "Card No.",
   "your_order": "Your Order"
 }

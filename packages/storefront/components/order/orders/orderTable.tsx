@@ -29,10 +29,10 @@ const OrderTable: React.FC<Props> = ({ orderList }) => {
                     {t('order:status')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('order:PaymentMethod')}
+                    {t('order:payment_method')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('order:ProductCost')}
+                    {t('order:product_cost')}
                   </th>
                   <th scope="col" className="px-5 py-4">
                     {t('order:action')}

@@ -11,6 +11,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
 import ReOrder from '../singleOrder/re-Order';
+import useTranslation from 'next-translate/useTranslation';
 
 const SingleOrder: FC = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const SingleOrder: FC = () => {
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
-
+  const { t } = useTranslation();
   const getSingleOrder = async () => {
     try {
       const singleOrderDetails = await userAPI.getOrderProduct(
@@ -40,8 +41,8 @@ const SingleOrder: FC = () => {
   return (
     <>
       <Breadcrumb
-        title="Order Details"
-        pathArray={['Home', 'Details']}
+        title={t('order:order_details')}
+        pathArray={[`${t('common:home')}`, `${t('order:order_details')}`]}
         linkArray={['/', '/']}
       />
       <div className="container mx-auto mt-5 px-4">
@@ -53,14 +54,14 @@ const SingleOrder: FC = () => {
           >
             <ChevronLeft />
           </button>
-          <p className="text-2xl font-semibold">Order Summary</p>
+          <p className="text-2xl font-semibold">{t('order:order_summary')}</p>
         </div>
         <div className="mt-5 flex items-center gap-x-2">
           <Link href="/order" passHref>
-            <p className="cursor-pointer text-sm text-[#7c827f]">Order</p>
+            <p className="cursor-pointer text-sm text-[#7c827f]">{t('common:order')}</p>
           </Link>
           <ChevronRight />
-          <p className="text-sm">Order Summary</p>
+          <p className="text-sm">{t('order:order_summary')}</p>
         </div>
 
         <OrderSummary singleOrder={singleOrder!} />
