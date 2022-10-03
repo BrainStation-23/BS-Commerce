@@ -6,6 +6,7 @@ import PageTitle from "@/components/global/components/pageTitle";
 import ThreeStoriesCard from "@/components/global/components/threeStoriesCard";
 import OurService from "@/components/static/service/ourService";
 import UnlimitedService from "@/components/static/service/unlimitedService";
+import useTranslation from "next-translate/useTranslation";
 
 
 const threeStoriesList: storiesBody[] = [
@@ -36,9 +37,10 @@ const threeStoriesList: storiesBody[] = [
 ];
 
 const ServiceComponent: NextComponentType = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <PageTitle title="Service" />
+      <PageTitle title={t('service:service')} />
       <ThreeStoriesCard leftStory={true} threeStoriesList={threeStoriesList} />
       <div className="bg-gray-200 ">
         <OurService />
