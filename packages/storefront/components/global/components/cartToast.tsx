@@ -42,7 +42,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Added to cart successfully
+            {t('common:added_to_cart_successfully')}
           </div>
 
           <div className="ml-1 grid w-max grid-cols-2 text-xs sm:flex-row sm:text-xs">

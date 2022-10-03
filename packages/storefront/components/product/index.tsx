@@ -199,7 +199,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         // console.log(newList);
         dispatch(storeWishlist(newList!));
         clicked = true;
-        toast.success('Item added to wishlist', {
+        toast.success(`${t('common:item_added_to_wishlist')}`, {
           containerId: 'bottom-right',
         });
       } catch (error) {
@@ -218,7 +218,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist', {
+        toast.error(`${t('common:item_removed_from_wishlist')}`, {
           containerId: 'bottom-right',
         });
         dispatch(deleteItemFromWishlist(productId));

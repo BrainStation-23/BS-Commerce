@@ -18,7 +18,12 @@
   "continue_shopping": "Continue Shopping",
   "copyrignt": "Copyright © BS commerce All right reserved",
   "cucumber": "Cucumber",
+  "wishlist_cleared": "Wishlist cleared",
+
+  "item_removed_from_wishlist": "Item removed from wishlist",
+  "item_added_to_wishlist": "Item added to wishlist",
   "customer_support": "Customer Support",
+  "added_to_cart_successfully": "Added to cart successfully",
   "default": "defult",
   "delivery_information": "Delivery Information",
   "email": "email",

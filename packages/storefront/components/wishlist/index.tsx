@@ -59,7 +59,7 @@ const WishlistComponent: NextComponentType = () => {
     try {
       await userAPI.deleteFullWishlist();
       dispatch(deleteFullWishlist());
-      toast.error('Wishlist cleared', {
+      toast.error(`${t('common:wishlist_cleared')}`, {
         containerId: 'bottom-right',
       });
     } catch (error) {
