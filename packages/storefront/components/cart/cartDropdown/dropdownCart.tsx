@@ -26,6 +26,7 @@ const CartDropdown: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -136,7 +137,13 @@ const CartDropdown: NextComponentType = () => {
                       </span>
                       X &nbsp;
                       <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                        $ {cartData?.product?.info?.price}
+                        {Intl.NumberFormat(
+                          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                          {
+                            style: 'currency',
+                            currency: `${currency.currencyName}`,
+                          }
+                        ).format(cartData?.product?.info?.price!)}
                       </p>
                     </div>
                   </div>
@@ -211,7 +218,14 @@ const CartDropdown: NextComponentType = () => {
                     <div className="flex justify-between border-x-2 p-6">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
-                        ${totalCartPrice}
+                        {Intl.NumberFormat(
+                          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                          {
+                            style: 'currency',
+                            currency: `${currency.currencyName}`,
+                          }
+                        ).format(totalCartPrice)}
+                        {/* ${totalCartPrice} */}
                       </span>
                     </div>
                     <div className="border-x-2 px-6 py-2">

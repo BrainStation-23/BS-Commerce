@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useEffect, useRef, useState } from 'react';
 
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import {
   deleteCartItem,
   storeAllCartItems,
@@ -24,6 +24,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
     productId: data.productId,
     quantity: data.quantity,
   });
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const handleCartItemDelete = async () => {
     const productId = data.productId;
@@ -84,7 +85,11 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         <td className="border border-slate-300 px-10 py-14">
           <span className="flex justify-center">
             {' '}
-            ${data?.product?.info?.price}
+            {Intl.NumberFormat(
+              `${currency.currencyLanguage}-${currency.currencyStyle}`,
+              { style: 'currency', currency: `${currency.currencyName}` }
+            ).format(data?.product?.info?.price!)}
+            {/* ${data?.product?.info?.price} */}
           </span>
         </td>
         <td className="border-slate-150 border py-4 md:px-2 lg:px-10">
@@ -111,7 +116,13 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
                 >
                   -
                 </button>
-                <div>{itemToUpdate.quantity}</div>
+                <div>
+                  {' '}
+                  {Intl.NumberFormat(
+                    `${currency.currencyLanguage}-${currency.currencyStyle}`
+                  ).format(itemToUpdate.quantity)}
+                </div>
+                {/* {itemToUpdate.quantity} */}
                 <button
                   onClick={() => {
                     let _quantity = itemToUpdate.quantity + 1;
@@ -133,7 +144,11 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         </td>
         <td className="border border-slate-300 py-14 md:px-2 lg:px-10">
           <div className="flex justify-center">
-            ${data?.product?.info?.price! * itemToUpdate.quantity}
+            {Intl.NumberFormat(
+              `${currency.currencyLanguage}-${currency.currencyStyle}`,
+              { style: 'currency', currency: `${currency.currencyName}` }
+            ).format((data?.product?.info?.price! * itemToUpdate.quantity)!)}
+            {/* ${data?.product?.info?.price! * itemToUpdate.quantity} */}
           </div>
         </td>
         <td className="border border-slate-300 py-14 md:px-2 lg:px-10 ">

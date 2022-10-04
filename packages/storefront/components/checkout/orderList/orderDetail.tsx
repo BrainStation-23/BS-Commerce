@@ -9,6 +9,7 @@ const OrderedProducts: NextComponentType = () => {
     (state) => state.persistedReducer.cart.allCartItems
   );
   const { t } = useTranslation();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const totalCartPrice = cartData?.reduce((total, data) => {
     return total + data?.product?.info?.price! * data.quantity;
@@ -29,7 +30,12 @@ const OrderedProducts: NextComponentType = () => {
             <div className="row text-sm">
               <div className="mt-4 flex flex-wrap justify-between">
                 <p className="text-gray-600/100">{t('checkout:sub_total')}</p>
-                <p className="font-semibold">${totalCartPrice}</p>
+                <p className="font-semibold">
+                  {Intl.NumberFormat(
+                    `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                    { style: 'currency', currency: `${currency.currencyName}` }
+                  ).format(totalCartPrice)}
+                </p>
               </div>
               <div className="mt-2 flex flex-wrap justify-between">
                 <p className="text-gray-600/100 ">{t('checkout:shipping')}</p>
@@ -47,7 +53,15 @@ const OrderedProducts: NextComponentType = () => {
                 <p className="text-gray-600/100">{t('checkout:total')}</p>
                 <div className="flex flex-wrap items-center gap-3">
                   <p className="text-xs text-gray-500">USD</p>
-                  <p className="text-2xl font-semibold">${totalCartPrice}</p>
+                  <p className="text-2xl font-semibold">
+                    {Intl.NumberFormat(
+                      `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                      {
+                        style: 'currency',
+                        currency: `${currency.currencyName}`,
+                      }
+                    ).format(totalCartPrice)}
+                  </p>
                 </div>
               </div>
             </div>

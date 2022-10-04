@@ -1,4 +1,5 @@
 import { OrderByUserId } from '@bs-commerce/models';
+import { useAppSelector } from 'customHooks/hooks';
 import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ interface Props {
 }
 const TableData: React.FC<Props> = ({ singleOrder }) => {
   const { t } = useTranslation();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   return (
     <>
@@ -33,7 +35,10 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
         )}
       </td>
       <td className="px-5 py-4">{singleOrder?.paymentMethod}</td>
-      <td className="px-5 py-4">${singleOrder?.productCost}</td>
+      <td className="px-5 py-4">{Intl.NumberFormat(
+            `${currency.currencyLanguage}-${currency.currencyStyle}`,
+            { style: 'currency', currency: `${currency.currencyName}` }
+          ).format(singleOrder?.productCost)}</td>
       <td className="px-5 py-4 text-[#40a944]">
         <Link
           href={{

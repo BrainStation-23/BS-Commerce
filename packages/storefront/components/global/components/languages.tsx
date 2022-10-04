@@ -1,6 +1,8 @@
+import { useAppDispatch } from 'customHooks/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { setCurrencyLanguage } from 'toolkit/currencySlice';
 
 interface language {
   name: string;
@@ -15,6 +17,10 @@ const Language: React.FC = () => {
     { name: 'German' },
     { name: 'French' },
   ];
+  const dispatch = useAppDispatch();
+  const languageOnclick = async (currencyName: string) => {
+    dispatch(setCurrencyLanguage(currencyName));
+  };
   return (
     <div className="relative inline-block">
       <button
@@ -42,7 +48,11 @@ const Language: React.FC = () => {
         onMouseLeave={() => setOpen(false)}
       >
         {router?.locales?.map((locale) => (
-          <li key={locale} className="py-1">
+          <li
+            key={locale}
+            className="py-1"
+            onClick={() => languageOnclick(locale)}
+          >
             <Link href={router.asPath} locale={locale}>
               <a>{locale}</a>
             </Link>

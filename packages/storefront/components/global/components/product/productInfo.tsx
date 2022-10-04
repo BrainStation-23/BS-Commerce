@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CustomerProduct } from '@bs-commerce/models';
+import { useAppSelector } from 'customHooks/hooks';
 
 interface SingleProduct {
   product: CustomerProduct;
@@ -8,6 +9,8 @@ interface SingleProduct {
 
 const ProductInfo = (props: SingleProduct) => {
   const { product } = props;
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
+
   return (
     <div>
       <div className="pl-4">
@@ -21,11 +24,18 @@ const ProductInfo = (props: SingleProduct) => {
           {product?.tags![0]}
         </p>
         <p className="text-base font-semibold text-green-600">
-          {product?.info?.price}
+          {Intl.NumberFormat(
+            `${currency.currencyLanguage}-${currency.currencyStyle}`,
+            { style: 'currency', currency: `${currency.currencyName}` }
+          ).format(product?.info?.price)}
           {Math.abs(product?.info.oldPrice - product?.info.price) > 0 ? (
             <span className="ml-2 text-xs font-semibold text-black">
-              <s>$</s>
-              <s>{product?.info?.oldPrice}</s>
+              <s>
+                {Intl.NumberFormat(
+                  `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                  { style: 'currency', currency: `${currency.currencyName}` }
+                ).format(product?.info?.oldPrice)}
+              </s>
             </span>
           ) : null}
         </p>
