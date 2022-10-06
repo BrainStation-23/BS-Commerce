@@ -61,9 +61,9 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity">
+          <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity dark:text-white">
             <div className="relative my-auto mx-auto overflow-x-auto overflow-y-auto md:w-3/4 md:overflow-x-hidden">
-              <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
+              <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg dark:bg-slate-800">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
                   <h3 className="mr-3 text-xl font-bold">
                     {t('compare:title')}
@@ -127,7 +127,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                               </tr>
                             </thead>
                             <tbody>
-                              <tr className="border-b hover:bg-gray-100">
+                              <tr className="border-b hover:bg-gray-100 dark:hover:bg-black">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   {t('compare:product_name')}
                                 </td>
@@ -143,7 +143,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                   }
                                 )}
                               </tr>
-                              <tr className="border-b bg-white hover:bg-gray-100">
+                              <tr className="border-b hover:bg-gray-100 dark:hover:bg-black">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   {t('compare:product_image')}
                                 </td>
@@ -201,7 +201,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               }}
                                               passHref
                                             >
-                                              <a className="text-xs text-gray-500/100 hover:text-red-600">
+                                              <a className="text-xs text-gray-500/100 hover:text-red-600 dark:text-white">
                                                 {t(
                                                   'compare:view_product'
                                                 ).toUpperCase()}
@@ -214,7 +214,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                   }
                                 )}
                               </tr>
-                              <tr className="border-b bg-white hover:bg-gray-100">
+                              <tr className="border-b hover:bg-gray-100 dark:hover:bg-black">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   {t('compare:product_description')}
                                 </td>
@@ -233,7 +233,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                   }
                                 )}
                               </tr>
-                              <tr className="border-b bg-white hover:bg-gray-100">
+                              <tr className="border-b hover:bg-gray-100 dark:hover:bg-black">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
                                   {t('compare:availability')}
                                 </td>

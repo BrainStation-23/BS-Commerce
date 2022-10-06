@@ -25,7 +25,7 @@ const SimilarProducts: NextComponentType = () => {
   };
   return (
     <>
-      <Container className="max-w-7xl">
+      <Container className="max-w-7xl dark:text-white">
         <div className="mb-6 text-center">
           <h1 className="text-bold text-4xl ">
             {t('product-details:similar_products')}
@@ -53,7 +53,7 @@ const SimilarProducts: NextComponentType = () => {
                   // as={`product/${product.info.name}`}
                 >
                   <div className="mb-0 overflow-hidden" key={product.id}>
-                    <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700">
+                    <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-black">
                       <div className="max-w-sm overflow-hidden rounded">
                         <div className="relative flex flex-col items-center justify-center">
                           <div className="relative overflow-hidden text-white transition-all duration-700">
@@ -101,7 +101,7 @@ const SimilarProducts: NextComponentType = () => {
                                 {product.info.name}
                               </div>
                             </Link>
-                            <p className="m-1 font-['arial'] text-lg text-gray-600">
+                            <p className="m-1 font-['arial'] text-lg text-gray-600 dark:text-gray-400">
                               {product.tags![0]}
                             </p>
                             <div className="text-lg font-semibold text-green-600">
