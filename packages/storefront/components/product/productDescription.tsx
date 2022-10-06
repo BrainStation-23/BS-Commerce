@@ -99,9 +99,9 @@ const ProductDescription: React.FC<SingleProduct> = ({
 
         <div className="m-5 flex ">
           <div className={description}>{product.info.fullDescription}</div>
-          <p className={`${review} w-full`}>
+          <div className={`${review} w-full`}>
             <ProductReview />
-          </p>
+          </div>
           {/* <p className={shipping}>{shipping_policy}</p> */}
           <div className={`${size_chart} w-full`}>
             <h4 className="font-semibold ">Size Chart</h4>
