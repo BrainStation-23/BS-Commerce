@@ -1,4 +1,4 @@
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 import Product from '@/components/home/bestSell/product';
 
 interface Props {

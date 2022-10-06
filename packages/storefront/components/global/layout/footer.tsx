@@ -107,15 +107,15 @@ const Footer: NextComponentType = () => {
               {t('common:get_updates_by_subscribe_our_weekly_newsletter')}
             </span>
             <div
-              className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
+              className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm dark:bg-white dark:text-black`}
             >
               <input
-                className="ml-4 bg-white focus:outline-none"
+                className="ml-4 w-full bg-white focus:outline-none"
                 type="search"
                 name="search"
                 placeholder={`email@example.com`}
               />
-              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
+              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 p-4 transition-all duration-200 ease-linear hover:bg-stone-900">
                 <button type="submit" className="text-white">
                   {t('common:subscribe')}
                 </button>

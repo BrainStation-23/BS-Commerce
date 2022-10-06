@@ -59,7 +59,7 @@ const CartDropdown: NextComponentType = () => {
   const cartIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6 hover:text-green-600"
+      className="h-6 w-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -184,7 +184,7 @@ const CartDropdown: NextComponentType = () => {
           <div className="hover:text-green-600">
             <button
               type="button"
-              className="inline-flex w-full justify-center text-base font-medium  text-gray-700  hover:text-green-600 "
+              className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-green-600  dark:text-white  dark:hover:text-green-600 "
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}

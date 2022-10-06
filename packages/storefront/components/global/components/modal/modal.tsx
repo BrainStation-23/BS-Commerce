@@ -53,7 +53,7 @@ const Modal: React.FC<Props> = ({
       >
         <div className="flex h-screen items-center justify-center">
           <div
-            className="w-2/3 bg-white px-5 pt-5 sm:w-auto"
+            className="w-2/3 bg-white px-5 pt-5 dark:bg-zinc-700 sm:w-auto"
             onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
               e.stopPropagation()
             }

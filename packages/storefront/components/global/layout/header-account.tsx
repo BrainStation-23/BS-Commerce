@@ -123,14 +123,17 @@ const HeaderAccount: React.FC<Properties> = () => {
                 className="group relative cursor-pointer normal-case"
                 id="NavProfileDiv"
               >
-                <p className=" hover:text-green-600" id="user-name">
+                <p
+                  className="hover:text-green-600 dark:text-white"
+                  id="user-name"
+                >
                   {getUsername(links[4].name)}
                 </p>
                 <div
                   id="navProfileDropdown"
                   className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
                 >
-                  <ul>
+                  <ul className="dark:text-black">
                     <Link href="/wishlist" passHref>
                       <li className="transition-all duration-100 ease-linear hover:text-green-600">
                         {t('common:wishlist')}
@@ -200,7 +203,7 @@ const HeaderAccount: React.FC<Properties> = () => {
         </span>
         <div className="flex flex-row items-center gap-x-3">
           <button type="button" onClick={handleClickWishlist}>
-            <div className="flex text-base hover:text-green-600">
+            <div className="flex text-base hover:text-green-600 dark:text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-green-600"

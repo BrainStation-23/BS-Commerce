@@ -17,7 +17,9 @@ const Currency: React.FC = () => {
     { abbv: 'INR', name: 'Indian Rupee' },
     { abbv: 'BDT', name: 'Bangladesh Taka' },
   ];
-  const currencyName = useAppSelector((state) => state.persistedReducer.currency.currencyName);
+  const currencyName = useAppSelector(
+    (state) => state.persistedReducer.currency.currencyName
+  );
 
   const [selectedCurrency, setSelectedCurrency] = useState(currencyName);
   const dispatch = useAppDispatch();
@@ -54,6 +56,7 @@ const Currency: React.FC = () => {
         className={`absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear ${'left-0'} ${
           open ? 'h-[190px] opacity-100' : 'h-0 opacity-0'
         }`}
+        onMouseLeave={() => setOpen(false)}
       >
         {currencyList.map((currency) => (
           <li

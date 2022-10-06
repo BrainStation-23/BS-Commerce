@@ -158,7 +158,7 @@ const Navbar: React.FC<Props> = ({
                         {menu.submenu?.map((menu) => (
                           <li
                             key={menu.name}
-                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600"
+                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-green-600 dark:text-black dark:hover:text-green-600"
                           >
                             <Link href={menu.link}>
                               <a>{menu.name}</a>
@@ -181,7 +181,7 @@ const Navbar: React.FC<Props> = ({
             ) : (
               <>
                 <PhoneIcon />
-                <div className="flex flex-col text-sm">
+                <div className="flex flex-col text-sm dark:text-white">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
                     {t('common:customer_support')}

@@ -8,7 +8,7 @@ const SinglSlide = (props: { product: productInterface }) => {
 
   const { title, description, deatils, image } = props.product;
   return (
-    <div className="2xl: grid h-72 items-center sm:h-72 md:h-72 lg:h-80 xl:h-96 2xl:h-96">
+    <div className="2xl: grid h-72 items-center dark:text-black sm:h-72 md:h-72 lg:h-80 xl:h-96 2xl:h-96">
       <div className="absolute inset-0 scale-125 md:inset-0 md:scale-125 lg:scale-100 ">
         <Image src={image} alt="..." layout="fill" />
       </div>
@@ -23,8 +23,8 @@ const SinglSlide = (props: { product: productInterface }) => {
           {deatils}
         </div>
         <div className="mt-3 lg:mt-8">
-          <button className="left-0 rounded-lg bg-green-600 py-2 px-4 text-xs font-bold uppercase text-white hover:bg-neutral-700 sm:text-xs md:text-sm xl:text-base">
-            {t('home:read_more')}
+          <button className="left-0 rounded-lg bg-green-600 py-2 px-4 text-xs font-bold text-white hover:bg-neutral-700 sm:text-xs md:text-sm xl:text-base">
+            {t('home:read_more').toUpperCase()}
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@ const HomefullBanner: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-center bg-no-repeat">
+    <div className="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-center bg-no-repeat dark:text-black">
       <Banner
         position="relative"
         width="w-full"

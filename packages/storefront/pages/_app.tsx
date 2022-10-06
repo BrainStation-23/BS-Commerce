@@ -10,6 +10,7 @@ import { config } from 'config';
 
 import Layout from '@/components/layout';
 import BackToTopButton from './BackToTopButton';
+import { ThemeProvider } from 'next-themes';
 
 Axios.defaults.baseURL =
   config?.apiService === 'STATIC'
@@ -20,14 +21,16 @@ Axios.defaults.baseURL =
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Layout>
-          <Component {...pageProps} />
-          <BackToTopButton />
-        </Layout>
-      </PersistGate>
-    </Provider>
+    <ThemeProvider enableSystem={false} attribute="class">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout>
+            <Component {...pageProps} />
+            <BackToTopButton />
+          </Layout>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
   );
 }
 

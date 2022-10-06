@@ -19,7 +19,7 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
           {product?.info.name}
         </div>
       </Link>
-      <p className="m-1 font-['arial'] text-sm text-gray-600">
+      <p className="m-1 font-['arial'] text-sm text-gray-600 dark:text-gray-400">
         {product?.tags
           ? product?.tags[0]
           : product?.brands
