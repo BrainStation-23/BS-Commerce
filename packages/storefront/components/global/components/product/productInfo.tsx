@@ -23,7 +23,7 @@ const ProductInfo = (props: SingleProduct) => {
         <p className="py-2 font-['arial'] text-xs text-gray-600">
           {product?.tags![0]}
         </p>
-        <p className="text-base font-semibold text-green-600">
+        <p className="text-base font-semibold text-primary">
           {Intl.NumberFormat(
             `${currency.currencyLanguage}-${currency.currencyStyle}`,
             { style: 'currency', currency: `${currency.currencyName}` }

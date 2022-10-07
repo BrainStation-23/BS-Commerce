@@ -16,7 +16,7 @@ const PageTitle: FC<Props> = ({ title }) => {
         <h3 className="mb-2 text-center text-4xl font-normal">{title}</h3>
         <div className="flex items-center justify-center">
           <Link href="/">
-            <a className="hover:text-green-600">{t('common:home')} / </a>
+            <a className="hover:text-primary">{t('common:home')} / </a>
           </Link>
           <div>{title}</div>
         </div>

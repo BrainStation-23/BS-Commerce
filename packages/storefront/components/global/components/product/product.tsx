@@ -22,7 +22,7 @@ const Product = (props: SingleProduct) => {
         passHref
       >
         <div className="mb-0 h-96 overflow-hidden" key={product?.info?.name}>
-          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-black">
+          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-slate-900">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative ">
                 <div className="relative inset-0 z-0 rounded bg-gray-200 bg-cover bg-center p-1 pb-0">
@@ -35,19 +35,19 @@ const Product = (props: SingleProduct) => {
 
                   {Math.abs(product?.info.oldPrice - product?.info.price) >
                   0 ? (
-                    <div className="absolute top-3 left-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                    <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                       <p>Sale</p>
                     </div>
                   ) : null}
 
                   {/* {product?.discountPercentage && product?.stock > 0 ? (
-                      <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                      <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                         <p>{`-${product?.discountPercentage}%`}</p>
                       </div>
                     ) : null} */}
                   {Math.abs(product?.info.oldPrice - product?.info.price) >
                   0 ? (
-                    <div className="absolute top-3 right-3 rounded-lg border border-[#40a944] bg-[#40a944] px-1 py-1 text-xs text-white">
+                    <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
                       <p>{`-$${Math.abs(
                         product?.info?.oldPrice - product?.info?.price
                       )}`}</p>

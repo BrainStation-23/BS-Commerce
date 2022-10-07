@@ -117,7 +117,7 @@ const ProductReview: React.FC = () => {
           <div className="flex w-full flex-col">
             <span className="font-semibold">Message</span>
             <textarea
-              className="w-full rounded border border-gray-600/20 p-1 focus:outline-green-600/20"
+              className="w-full rounded border border-gray-600/20 p-1 focus:outline-primary/20"
               rows={4}
               value={message}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -127,7 +127,7 @@ const ProductReview: React.FC = () => {
           </div>
 
           <button
-            className="rounded bg-green-600 py-1 px-2 text-white hover:bg-slate-800 disabled:bg-green-600/50"
+            className="rounded bg-primary py-1 px-2 text-white hover:bg-slate-800 disabled:bg-primary/50"
             disabled={message === ''}
             onClick={handleReviewSubmit}
             type="submit"

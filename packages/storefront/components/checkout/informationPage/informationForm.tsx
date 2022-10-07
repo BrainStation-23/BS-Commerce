@@ -240,7 +240,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                         as="select"
                         id="tag"
                         name="tag"
-                        className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0 dark:text-white"
+                        className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0 dark:text-gray-400"
                         onClick={(
                           event: React.ChangeEvent<HTMLInputElement>
                         ) => {
@@ -359,7 +359,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row">
                   <button
                     type="submit"
-                    className="my-2 w-full rounded bg-black p-3 text-sm text-white dark:bg-green-600 sm:w-full md:w-44"
+                    className="my-2 w-full rounded bg-black p-3 text-sm text-white dark:bg-primary sm:w-full md:w-44"
                   >
                     {t('checkout:continue_to_shipping')}
                   </button>

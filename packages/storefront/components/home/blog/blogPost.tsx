@@ -15,13 +15,13 @@ const BlogPost: NextComponentType = () => {
           28/05/2022 | Demo Admin
         </span>
         <a
-          className="ml-3 mt-2 flex font-semibold hover:text-green-500 "
+          className="ml-3 mt-2 flex font-semibold hover:text-primary "
           href="https://safira-demo.myshopify.com/blogs/news/there-are-many-variations-of-passages-of-lorem-ipsum-available-2"
         >
           There Are Many Variations Of Passages Of Lorem Ipsum Available
         </a>
         <a
-          className="my-5 ml-3 flex text-sm hover:text-green-500	"
+          className="my-5 ml-3 flex text-sm hover:text-primary	"
           href="https://safira-demo.myshopify.com/blogs/news/there-are-many-variations-of-passages-of-lorem-ipsum-available-2"
         >
           SHOW MORE

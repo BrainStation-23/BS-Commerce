@@ -180,10 +180,10 @@ const CartDropdown: NextComponentType = () => {
         className="flex items-center justify-center"
       >
         <div className="relative inline-block text-left">
-          <div className="hover:text-green-600">
+          <div className="hover:text-primary">
             <button
               type="button"
-              className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-green-600  dark:text-white  dark:hover:text-green-600 "
+              className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-primary  dark:text-gray-400  dark:hover:text-primary "
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}
@@ -231,7 +231,7 @@ const CartDropdown: NextComponentType = () => {
                       <Link href="/cart" passHref>
                         <a>
                           <button
-                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white dark:text-black dark:hover:text-white"
+                            className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:text-white"
                             onClick={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
@@ -244,7 +244,7 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
                       <button
-                        className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white dark:text-black dark:hover:text-white"
+                        className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:text-white"
                         onClick={handleClickProceed}
                       >
                         {t('common:checkout')}

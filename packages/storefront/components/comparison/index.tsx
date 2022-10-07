@@ -61,7 +61,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
       </button> */}
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity dark:text-white">
+          <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity dark:text-gray-400">
             <div className="relative my-auto mx-auto overflow-x-auto overflow-y-auto md:w-3/4 md:overflow-x-hidden">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg dark:bg-slate-800">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
@@ -201,7 +201,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               }}
                                               passHref
                                             >
-                                              <a className="text-xs text-gray-500/100 hover:text-red-600 dark:text-white">
+                                              <a className="text-xs text-gray-500/100 hover:text-red-600 dark:text-gray-400">
                                                 {t(
                                                   'compare:view_product'
                                                 ).toUpperCase()}

@@ -92,7 +92,7 @@ const WishlistComponent: NextComponentType = () => {
           {wishlistData?.items?.length! > 0 && (
             <button
               onClick={() => setModalOn(true)}
-              className="mt-5 rounded bg-green-600/100 py-2 px-6 text-white hover:bg-black"
+              className="mt-5 rounded bg-primary py-2 px-6 text-white hover:bg-black"
             >
               {t('wishlist:clear_wishlist')}
             </button>
@@ -103,11 +103,11 @@ const WishlistComponent: NextComponentType = () => {
             <div className="my-2">
               <WishlistIcon height="h-16" width="w-16" />
             </div>
-            <p className="text-xl text-green-600/100">
+            <p className="text-xl text-primary">
               {t('wishlist:empty_wishlist')}
             </p>
             <Link href="/" passHref>
-              <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-green-600/100">
+              <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-primary">
                 <p>{t('common:continue_shopping')}</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

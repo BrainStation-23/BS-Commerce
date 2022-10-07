@@ -80,7 +80,7 @@ const PriceFilter: FC = () => {
           {/* temporaty button here */}
           <button
             onClick={() => onClickFilter()}
-            className="rounded bg-green-600 py-2 px-6 font-semibold text-white hover:bg-black"
+            className="rounded bg-primary py-2 px-6 font-semibold text-white hover:bg-black"
           >
             {t('collections:filter')}
           </button>

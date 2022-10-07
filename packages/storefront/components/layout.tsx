@@ -104,7 +104,7 @@ const Layout = ({ children }: LayoutProps) => {
         enableMultiContainer
         theme="colored"
         closeButton={<XCircleIcon size={10} extraClass="hover:fill-red-500" />}
-        toastClassName="w-full border-2 border-green-500"
+        toastClassName="w-full border-2 border-primary"
         style={
           document.body.clientWidth < 484
             ? {

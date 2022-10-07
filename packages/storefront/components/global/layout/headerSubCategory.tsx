@@ -50,7 +50,7 @@ const HeaderSubCategory: React.FC<Props> = ({
             document.body.clientWidth > 1023 && setShowSubCategory(false);
           }}
         >
-          <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-green-600">
+          <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-primary">
             <span className="grow">
               <Link
                 href={{

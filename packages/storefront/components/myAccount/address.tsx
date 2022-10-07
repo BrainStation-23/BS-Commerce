@@ -37,13 +37,13 @@ const AccountDetails: NextComponentType = () => {
         pathArray={[`${t('common:home')}`, `${t('manage-address:addresses')}`]}
         linkArray={['/', '/myAccount/addresses']}
       />
-      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-white">
+      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-gray-400">
         <div className="mb-3 flex flex-wrap justify-between">
           <div className="text-3xl font-bold">{t('common:my_account')}</div>
           {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
             <button
-              className="rounded bg-[#40A944] py-2 px-4 text-sm text-white hover:bg-black focus:outline-none dark:hover:border"
+              className="rounded bg-primary py-2 px-4 text-sm text-white hover:bg-black focus:outline-none dark:hover:border"
               type="button"
               onClick={() => addButtonOnClick()}
             >
@@ -56,7 +56,7 @@ const AccountDetails: NextComponentType = () => {
         <div className="mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
             <Link href="/myAccount" passHref>
-              <span className="cursor-pointer hover:text-green-600">
+              <span className="cursor-pointer hover:text-primary">
                 {t('manage-address:return_to_account_details')}
               </span>
             </Link>

@@ -23,7 +23,7 @@ const SinglSlide = (props: { product: productInterface }) => {
           {deatils}
         </div>
         <div className="mt-3 lg:mt-8">
-          <button className="left-0 rounded-lg bg-green-600 py-2 px-4 text-xs font-bold text-white hover:bg-neutral-700 sm:text-xs md:text-sm xl:text-base">
+          <button className="left-0 rounded-lg bg-primary py-2 px-4 text-xs font-bold text-white hover:bg-neutral-700 sm:text-xs md:text-sm xl:text-base">
             {t('home:read_more').toUpperCase()}
           </button>
         </div>
