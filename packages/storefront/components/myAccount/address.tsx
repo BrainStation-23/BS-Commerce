@@ -43,7 +43,7 @@ const AccountDetails: NextComponentType = () => {
           {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
             <button
-              className="rounded bg-primary py-2 px-4 text-sm text-white hover:bg-black focus:outline-none dark:hover:border"
+              className="rounded bg-primary py-2 px-4 text-sm text-white hover:bg-black focus:outline-none dark:bg-dark_primary dark:hover:border"
               type="button"
               onClick={() => addButtonOnClick()}
             >
@@ -56,7 +56,7 @@ const AccountDetails: NextComponentType = () => {
         <div className="mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
             <Link href="/myAccount" passHref>
-              <span className="cursor-pointer hover:text-primary">
+              <span className="cursor-pointer hover:text-primary dark:hover:text-dark_primary">
                 {t('manage-address:return_to_account_details')}
               </span>
             </Link>

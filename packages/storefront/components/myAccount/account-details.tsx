@@ -100,7 +100,7 @@ const AccountDetails: React.FC = () => {
             <span className="float-right text-xl font-bold">
               <a
                 onClick={() => handleLogout()}
-                className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
+                className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
               >
                 {t('common:logout')}
               </a>
@@ -136,7 +136,7 @@ const AccountDetails: React.FC = () => {
                         </div>
                         <div className="w-2/3">
                           <span
-                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
+                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
@@ -145,13 +145,13 @@ const AccountDetails: React.FC = () => {
                           <button
                             hidden={!editable}
                             type="submit"
-                            className="ml-2 rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
+                            className="ml-2 rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
                           >
                             {t('myAccount:save')}
                           </button>
                           <span
                             hidden={!editable}
-                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
+                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
                             onClick={() => setEditable(false)}
                           >
                             {t('myAccount:cancel')}

@@ -467,7 +467,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       onClick={() => {
                         toCart();
                       }}
-                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
+                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none dark:bg-dark_primary sm:px-12 lg:px-16"
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
@@ -476,7 +476,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   ) : (
                     <button
                       disabled={true}
-                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none sm:px-12 lg:px-16"
+                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none dark:bg-dark_primary sm:px-12 lg:px-16"
                     >
                       Soldout
                     </button>
@@ -485,7 +485,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className=" flex flex-wrap">
                   <button
                     disabled={!isAvailable}
-                    className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-primary dark:hover:text-white md:px-32	"
+                    className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-dark_primary dark:hover:bg-primary dark:hover:text-white md:px-32	"
                     onClick={toCart}
                   >
                     <span className="mx-auto">
@@ -509,7 +509,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                         : `${t('product-details:add_to_wishlist')}`}
                     </button>
                     <div
-                      className="mt-10 underline hover:text-primary"
+                      className="mt-10 underline hover:text-primary dark:hover:text-dark_primary"
                       hidden={!clicked}
                     >
                       <button onClick={handleClickToWishlist}>
@@ -519,7 +519,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </div>
                   <div>
                     <button
-                      className="mt-2 hover:text-primary"
+                      className="mt-2 hover:text-primary dark:hover:text-dark_primary"
                       onClick={() => {
                         handleAddToCompare();
                       }}

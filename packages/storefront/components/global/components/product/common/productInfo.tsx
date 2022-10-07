@@ -26,7 +26,7 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
           ? product?.brands[0]
           : ''}
       </p>
-      <div className="text-lg font-semibold text-primary">
+      <div className="text-lg font-semibold text-primary dark:text-dark_primary">
         {Intl.NumberFormat(
           `${currency.currencyLanguage}-${currency.currencyStyle}`,
           { style: 'currency', currency: `${currency.currencyName}` }

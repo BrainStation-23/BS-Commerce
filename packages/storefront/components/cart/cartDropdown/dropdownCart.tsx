@@ -231,7 +231,7 @@ const CartDropdown: NextComponentType = () => {
                       <Link href="/cart" passHref>
                         <a>
                           <button
-                            className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:text-white"
+                            className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white"
                             onClick={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
@@ -244,7 +244,7 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
                       <button
-                        className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:text-white"
+                        className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white"
                         onClick={handleClickProceed}
                       >
                         {t('common:checkout')}

@@ -65,13 +65,13 @@ const Modal: React.FC<Props> = ({
               <div className="flex flex-wrap gap-x-5 text-sm">
                 <button
                   onClick={handleOKClick}
-                  className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-primary  hover:text-white sm:px-10"
+                  className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-primary hover:text-white  dark:hover:bg-dark_primary sm:px-10"
                 >
                   {t('common:yes').toUpperCase()}
                 </button>
                 <button
                   onClick={handleCancelClick}
-                  className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-primary hover:text-white sm:px-8"
+                  className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary sm:px-8"
                 >
                   {t('common:cancel').toUpperCase()}
                 </button>

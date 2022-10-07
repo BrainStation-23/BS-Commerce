@@ -87,10 +87,15 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
     >
       <div className="">
         <div className="">
-          <button className="mr-4 text-primary" onClick={() => closeDrawer()}>
+          <button
+            className="mr-4 text-primary dark:text-dark_primary"
+            onClick={() => closeDrawer()}
+          >
             <ChevronLeftIcon />
           </button>
-          <span className="text-3xl font-medium text-primary">BS Commerce</span>
+          <span className="text-3xl font-medium text-primary dark:text-dark_primary">
+            BS Commerce
+          </span>
         </div>
         <div className="font-medium">
           <div className="my-5 border-b border-t py-4">
@@ -131,7 +136,7 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
         </div>
       </div>
       <button
-        className="w-full rounded-full border-2 border-primary py-2 text-primary"
+        className="w-full rounded-full border-2 border-primary py-2 text-primary dark:text-dark_primary"
         onClick={() => handleAuthState()}
       >
         {token ? 'Logout' : 'Login'}

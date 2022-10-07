@@ -25,7 +25,7 @@ export const Pagination: FC<{
           <button
             className={`${
               currentPage > 1 ? '' : 'hover:cursor-not-allowed'
-            } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white`}
+            } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary`}
             onClick={() => {
               currentPage > 1 && setCurrentPage(currentPage - 1);
               if (paginate && currentPage > 1)
@@ -56,8 +56,8 @@ export const Pagination: FC<{
                       key={index}
                       className={`rounded py-2 px-4 font-semibold ${
                         currentPage === index + 1
-                          ? 'bg-primary text-white hover:cursor-not-allowed'
-                          : ' bg-[#f1f1f1] text-black hover:bg-primary hover:text-white'
+                          ? 'bg-primary text-white hover:cursor-not-allowed dark:bg-dark_primary'
+                          : ' dark:hiver:bg-dark_primary bg-[#f1f1f1] text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary'
                       } `}
                       onClick={() => {
                         setCurrentPage(index + 1);
@@ -72,7 +72,7 @@ export const Pagination: FC<{
           <button
             className={`${
               currentPage < totalPages ? '' : 'hover:cursor-not-allowed'
-            } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white`}
+            } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary`}
             onClick={() => {
               currentPage < totalPages && setCurrentPage(currentPage + 1);
               if (paginate && currentPage < totalPages)

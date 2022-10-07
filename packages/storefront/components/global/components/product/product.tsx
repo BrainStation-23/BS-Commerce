@@ -35,7 +35,7 @@ const Product = (props: SingleProduct) => {
 
                   {Math.abs(product?.info.oldPrice - product?.info.price) >
                   0 ? (
-                    <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
+                    <div className="absolute top-3 left-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white dark:bg-dark_primary">
                       <p>Sale</p>
                     </div>
                   ) : null}
@@ -47,7 +47,7 @@ const Product = (props: SingleProduct) => {
                     ) : null} */}
                   {Math.abs(product?.info.oldPrice - product?.info.price) >
                   0 ? (
-                    <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white">
+                    <div className="absolute top-3 right-3 rounded-lg border border-primary bg-primary px-1 py-1 text-xs text-white dark:bg-dark_primary">
                       <p>{`-$${Math.abs(
                         product?.info?.oldPrice - product?.info?.price
                       )}`}</p>

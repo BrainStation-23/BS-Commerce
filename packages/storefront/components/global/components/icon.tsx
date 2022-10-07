@@ -74,9 +74,9 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     : false;
 
   const btnClass =
-    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-primary hover:text-white';
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-primary dark:hover:bg-dark_primary hover:text-white';
   const btnClassFilled =
-    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-primary text-white';
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-primary dark:bg-dark_primary text-white';
 
   const handleAddToCart = async () => {
     if (token) {

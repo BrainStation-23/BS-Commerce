@@ -41,7 +41,7 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
           { style: 'currency', currency: `${currency.currencyName}` }
         ).format(singleOrder?.productCost)}
       </td>
-      <td className="px-5 py-4 text-primary">
+      <td className="px-5 py-4 text-primary dark:text-dark_primary">
         <Link
           href={{
             pathname: `/order/[id]`,

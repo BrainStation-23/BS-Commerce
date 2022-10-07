@@ -21,7 +21,7 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
         {/* <p className="text-xs font-['arial'] text-gray-600 py-2">
           {product.info.shortDescription}
         </p> */}
-        <p className="text-sm font-semibold text-primary">
+        <p className="text-sm font-semibold text-primary dark:text-dark_primary">
           {Intl.NumberFormat(
             `${currency.currencyLanguage}-${currency.currencyStyle}`,
             { style: 'currency', currency: `${currency.currencyName}` }

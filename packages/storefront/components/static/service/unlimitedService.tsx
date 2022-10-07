@@ -29,7 +29,7 @@ const UnlimitedService: FC = () => {
           </p>
           <div className="text-sm">
             <a
-              className="inline-block rounded-2xl border border-solid border-gray-200 py-2 px-5 no-underline hover:bg-primary hover:text-white"
+              className="inline-block rounded-2xl border border-solid border-gray-200 py-2 px-5 no-underline hover:bg-primary hover:text-white dark:hover:bg-dark_primary"
               href="/policies/terms-of-service"
             >
               More Info

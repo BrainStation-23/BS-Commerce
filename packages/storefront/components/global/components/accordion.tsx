@@ -12,7 +12,9 @@ const Accordion: FC<Props> = ({ title, body }) => {
     <div className="mb-3">
       <div
         className={`transition-all duration-1000 ${
-          isActive ? 'rounded-t-lg bg-primary text-white' : ''
+          isActive
+            ? 'rounded-t-lg bg-primary text-white dark:bg-dark_primary'
+            : ''
         } z-10 flex cursor-pointer justify-between p-3`}
         onClick={() => setIsActive(!isActive)}
       >

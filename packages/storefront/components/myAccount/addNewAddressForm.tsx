@@ -250,7 +250,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
 
                 <button
                   type="submit"
-                  className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:hover:border sm:w-full md:w-32 lg:w-32 xl:w-32"
+                  className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:bg-dark_primary dark:hover:border sm:w-full md:w-32 lg:w-32 xl:w-32"
                 >
                   {user?.firstName
                     ? `${t('manage-address:save_address')}`

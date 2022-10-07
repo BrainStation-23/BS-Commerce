@@ -48,14 +48,14 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
           <div className="ml-1 grid w-max grid-cols-2 text-xs sm:flex-row sm:text-xs">
             <div className="pb-2 pr-2 sm:pb-0 ">
               <Link href="/cart" passHref>
-                <button className="w-max rounded-md bg-gray-200/70 py-1 px-2 uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white">
+                <button className="w-max rounded-md bg-gray-200/70 py-1 px-2 uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
                   {t('common:view_cart')}
                 </button>
               </Link>
             </div>
             <div>
               <Link href="/checkout" passHref>
-                <button className="rounded-md bg-gray-200/70 py-1 px-1 uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white">
+                <button className="rounded-md bg-gray-200/70 py-1 px-1 uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
                   {t('common:checkout')}
                 </button>
               </Link>

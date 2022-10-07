@@ -68,7 +68,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
               onClick={handleDescription}
               className={
                 description !== 'hidden'
-                  ? 'mx-5 font-semibold text-primary'
+                  ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold '
               }
             >
@@ -78,7 +78,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
               onClick={handleReview}
               className={
                 review !== 'hidden'
-                  ? 'mx-5 font-semibold text-primary'
+                  ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold '
               }
             >
@@ -91,7 +91,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
               onClick={handleSize}
               className={
                 size_chart !== 'hidden'
-                  ? 'mx-5 font-semibold text-primary'
+                  ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold'
               }
             >

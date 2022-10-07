@@ -124,7 +124,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 id="NavProfileDiv"
               >
                 <p
-                  className="hover:text-primary dark:text-gray-400"
+                  className="hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary"
                   id="user-name"
                 >
                   {getUsername(links[4].name)}
@@ -135,12 +135,12 @@ const HeaderAccount: React.FC<Properties> = () => {
                 >
                   <ul className="dark:text-black">
                     <Link href="/wishlist" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-primary">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:wishlist')}
                       </li>
                     </Link>
                     <li
-                      className="transition-all duration-100 ease-linear hover:text-primary"
+                      className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
                       onClick={() => {
                         comparisonProducts[0]
                           ? dispatch(setModalState(!modalCmp))
@@ -157,12 +157,12 @@ const HeaderAccount: React.FC<Properties> = () => {
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-primary">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:manage_addresses')}
                       </li>
                     </Link>
                     <Link href="/order" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-primary">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:orders')}
                       </li>
                     </Link>
@@ -170,7 +170,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                     <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
-                        className="transition-all duration-100 ease-linear hover:text-primary"
+                        className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
                       >
                         {links[3].name}
                       </li>
@@ -184,7 +184,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[0].link}>
                 <a
                   id="registerbtn"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
                 >
                   {links[0].name}
                 </a>
@@ -203,10 +203,10 @@ const HeaderAccount: React.FC<Properties> = () => {
         </span>
         <div className="flex flex-row items-center gap-x-3">
           <button type="button" onClick={handleClickWishlist}>
-            <div className="flex text-base hover:text-primary dark:text-gray-400">
+            <div className="flex text-base hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 hover:text-primary"
+                className="h-6 w-6 hover:text-primary dark:hover:text-dark_primary"
                 fill={
                   wishlistItems?.items?.length! > 0 && token !== ''
                     ? `green`

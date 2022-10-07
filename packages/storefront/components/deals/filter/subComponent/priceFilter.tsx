@@ -49,7 +49,7 @@ const PriceFilter: NextComponentType = () => {
         </div>
         <div className="p-4">
           {/* temporaty button here */}
-          <button className="rounded bg-primary py-2 px-4 font-bold text-white hover:bg-black">
+          <button className="rounded bg-primary py-2 px-4 font-bold text-white hover:bg-black dark:bg-dark_primary">
             Filter
           </button>
         </div>

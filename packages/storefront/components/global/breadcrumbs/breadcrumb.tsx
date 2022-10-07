@@ -22,7 +22,7 @@ const Breadcrumb: React.FC<Props> = (props) => {
               {index === pathArray.length - 1 && (
                 <Link href={linkArray[index]} passHref>
                   <a
-                    className="text-decoration-none text-sm text-gray-500 hover:text-primary"
+                    className="text-decoration-none text-sm text-gray-500 hover:text-primary dark:hover:text-dark_primary"
                     style={{ pointerEvents: 'none' }}
                   >
                     {path}
@@ -31,7 +31,7 @@ const Breadcrumb: React.FC<Props> = (props) => {
               )}
               {index < pathArray.length - 1 && (
                 <Link href={linkArray[index]} passHref>
-                  <a className="text-decoration-none text-sm text-black hover:text-primary">
+                  <a className="text-decoration-none text-sm text-black hover:text-primary dark:hover:text-dark_primary">
                     {path}
                   </a>
                 </Link>

@@ -89,7 +89,7 @@ const SearchComponent: NextComponentType = () => {
               />
               <button
                 type="submit"
-                className="absolute right-0 rounded-3xl bg-primary py-1.5 px-4 pb-2 text-base text-white hover:bg-black"
+                className="absolute right-0 rounded-3xl bg-primary py-1.5 px-4 pb-2 text-base text-white hover:bg-black dark:bg-dark_primary"
                 onClick={() => onProductSearch()}
               >
                 {t('search:page_title')}

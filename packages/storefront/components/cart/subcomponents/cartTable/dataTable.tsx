@@ -61,7 +61,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '150px',
                     }}
-                    className="bg-black text-xs hover:bg-primary dark:bg-primary dark:hover:border dark:hover:bg-black"
+                    className="bg-black text-xs hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
                     onClick={() => {
                       router.push('/');
                     }}
@@ -76,7 +76,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '120px',
                     }}
-                    className="bg-black text-xs hover:bg-primary dark:bg-primary dark:hover:border dark:hover:bg-black"
+                    className="bg-black text-xs hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
                     onClick={handleDeleteAllCartItem}
                   >
                     {t('cart:clear_cart').toUpperCase()}

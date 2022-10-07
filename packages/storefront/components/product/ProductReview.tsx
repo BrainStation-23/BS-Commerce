@@ -127,7 +127,7 @@ const ProductReview: React.FC = () => {
           </div>
 
           <button
-            className="rounded bg-primary py-1 px-2 text-white hover:bg-slate-800 disabled:bg-primary/50"
+            className="rounded bg-primary py-1 px-2 text-white hover:bg-slate-800 disabled:bg-primary dark:bg-dark_primary dark:disabled:bg-dark_primary"
             disabled={message === ''}
             onClick={handleReviewSubmit}
             type="submit"

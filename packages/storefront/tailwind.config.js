@@ -23,6 +23,7 @@ module.exports = {
       },
       colors: {
         primary: '#40a944',
+        dark_primary: 'teal',
         error: 'red',
       },
     },

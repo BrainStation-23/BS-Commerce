@@ -20,7 +20,7 @@ const HomefullBanner: FC = () => {
         buttonEdge="rounded-lg"
         buttonPadding="px-3 sm:px-3 md:px-9 lg:px-9 xl:px-9 py-2 sm:py-2 lg:py-2.5 xl:py-2.5"
         buttonMargin="my-5"
-        buttonBg="bg-primary"
+        buttonBg="bg-primary dark:bg-dark_primary"
         onHover="bg-black"
         buttonTextColor="text-white"
         hasHeading={true}
@@ -32,7 +32,7 @@ const HomefullBanner: FC = () => {
             mediumHeadingText={t('home:all_vegetables')}
             smallHeading="true"
             smallHeadingText={t('home:black_fridays')}
-            smallHeadingColor="text-primary"
+            smallHeadingColor="text-primary dark:text-dark_primary"
           />
         }
       />

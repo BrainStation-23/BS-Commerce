@@ -359,7 +359,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row">
                   <button
                     type="submit"
-                    className="my-2 w-full rounded bg-black p-3 text-sm text-white dark:bg-primary sm:w-full md:w-44"
+                    className="my-2 w-full rounded bg-black p-3 text-sm text-white dark:bg-dark_primary sm:w-full md:w-44"
                   >
                     {t('checkout:continue_to_shipping')}
                   </button>
