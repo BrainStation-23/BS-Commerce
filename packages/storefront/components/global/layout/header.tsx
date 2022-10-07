@@ -14,6 +14,7 @@ import Drawer from './drawer';
 import { useAppSelector } from 'customHooks/hooks';
 import useTranslation from 'next-translate/useTranslation';
 import Theme from './theme';
+import ThemeChanger from './themeChanger';
 
 const Header: NextComponentType = () => {
   const [showUser, setShowUser] = useState<boolean>(false);
@@ -45,7 +46,7 @@ const Header: NextComponentType = () => {
       let windowHeight = window.scrollY;
       if (windowHeight >= 140) {
         setStickyClass(
-          'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 dark:lg:bg-black lg:w-full lg:shadow-lg'
+          'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 dark:lg:bg-slate-900 lg:w-full lg:shadow-lg'
         );
         setShowUser(true);
         setShowAllCategory(false);
@@ -79,7 +80,7 @@ const Header: NextComponentType = () => {
             <span>|</span>
             <Currency />
             <span>|</span>
-            <Theme />
+            <ThemeChanger />
           </div>
           <div className="space-x-3"></div>
         </div>

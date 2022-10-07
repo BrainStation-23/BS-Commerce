@@ -184,16 +184,16 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[0].link}>
                 <a
                   id="registerbtn"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary"
                 >
                   {links[0].name}
                 </a>
               </Link>
-              <span className="mx-1">/</span>
+              <span className="mx-1 dark:text-gray-400">/</span>
               <Link href={links[1].link}>
                 <a
                   id="login"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-gray-400"
                 >
                   {links[1].name}
                 </a>
