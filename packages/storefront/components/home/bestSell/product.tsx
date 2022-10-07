@@ -15,7 +15,7 @@ const Product = ({ product }: SingleProduct) => {
     <div
       onMouseEnter={() => setShowIcons(true)}
       onMouseLeave={() => setShowIcons(false)}
-      className="duration-0 justify-items-left group grid w-56 cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-slate-900"
+      className="duration-0 justify-items-left group grid w-56 cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-dark_bg"
     >
       <Link
         href={{

@@ -71,7 +71,7 @@ export const PhoneIcon: React.FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-7 w-7 dark:text-gray-400"
+      className="h-7 w-7 dark:text-dark_text"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

@@ -37,7 +37,7 @@ const AccountDetails: NextComponentType = () => {
         pathArray={[`${t('common:home')}`, `${t('manage-address:addresses')}`]}
         linkArray={['/', '/myAccount/addresses']}
       />
-      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-gray-400">
+      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-dark_text">
         <div className="mb-3 flex flex-wrap justify-between">
           <div className="text-3xl font-bold">{t('common:my_account')}</div>
           {/* <Link href="/myAccount/form" passHref> */}

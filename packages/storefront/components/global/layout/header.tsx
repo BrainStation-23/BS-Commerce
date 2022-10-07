@@ -46,7 +46,7 @@ const Header: NextComponentType = () => {
       let windowHeight = window.scrollY;
       if (windowHeight >= 140) {
         setStickyClass(
-          'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 dark:lg:bg-slate-900 lg:w-full lg:shadow-lg'
+          'lg:fixed lg:top-0 lg:left-0 lg:z-40 lg:bg-white/95 dark:lg:bg-dark_bg lg:w-full lg:shadow-lg'
         );
         setShowUser(true);
         setShowAllCategory(false);

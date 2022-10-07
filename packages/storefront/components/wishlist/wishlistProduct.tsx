@@ -15,7 +15,7 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
   return (
     <div>
       <div className="px-6">
-        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+        <div className="text-sm font-medium text-gray-600 dark:text-dark_text">
           {product?.info?.name}
         </div>
         {/* <p className="text-xs font-['arial'] text-gray-600 py-2">
@@ -27,7 +27,7 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
             { style: 'currency', currency: `${currency.currencyName}` }
           ).format(product?.info?.price)}
           {product?.info?.oldPrice ? (
-            <span className="ml-2 text-xs font-semibold text-black dark:text-gray-400">
+            <span className="ml-2 text-xs font-semibold text-black dark:text-dark_text">
               {product?.info?.oldPrice ? (
                 <s>
                   {Intl.NumberFormat(

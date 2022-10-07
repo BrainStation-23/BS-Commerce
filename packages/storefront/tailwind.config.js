@@ -24,6 +24,8 @@ module.exports = {
       colors: {
         primary: '#40a944',
         dark_primary: 'teal',
+        dark_text: '#9ca3af',
+        dark_bg: '#0f172a',
         error: 'red',
       },
     },

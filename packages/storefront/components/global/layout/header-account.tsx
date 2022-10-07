@@ -124,7 +124,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 id="NavProfileDiv"
               >
                 <p
-                  className="hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary"
+                  className="hover:text-primary dark:text-dark_text dark:hover:text-dark_primary"
                   id="user-name"
                 >
                   {getUsername(links[4].name)}
@@ -184,16 +184,16 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[0].link}>
                 <a
                   id="registerbtn"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-dark_text dark:hover:text-dark_primary"
                 >
                   {links[0].name}
                 </a>
               </Link>
-              <span className="mx-1 dark:text-gray-400">/</span>
+              <span className="mx-1 dark:text-dark_text">/</span>
               <Link href={links[1].link}>
                 <a
                   id="login"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-gray-400"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-dark_text"
                 >
                   {links[1].name}
                 </a>
@@ -203,7 +203,7 @@ const HeaderAccount: React.FC<Properties> = () => {
         </span>
         <div className="flex flex-row items-center gap-x-3">
           <button type="button" onClick={handleClickWishlist}>
-            <div className="flex text-base hover:text-primary dark:text-gray-400 dark:hover:text-dark_primary">
+            <div className="flex text-base hover:text-primary dark:text-dark_text dark:hover:text-dark_primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 hover:text-primary dark:hover:text-dark_primary"

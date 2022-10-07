@@ -22,7 +22,7 @@ const Product = (props: SingleProduct) => {
         passHref
       >
         <div className="mb-0 h-96 overflow-hidden" key={product?.info?.name}>
-          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-slate-900">
+          <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-dark_bg">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative ">
                 <div className="relative inset-0 z-0 rounded bg-gray-200 bg-cover bg-center p-1 pb-0">

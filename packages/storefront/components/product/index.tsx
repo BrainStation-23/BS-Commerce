@@ -290,7 +290,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         linkArray={['/', '/product' + product.id]}
       />
 
-      <section className="body-font overflow-hidden bg-white text-gray-700 dark:bg-slate-900">
+      <section className="body-font overflow-hidden bg-white text-gray-700 dark:bg-dark_bg">
         <div className="container mx-auto px-5 pt-24 pb-16">
           <div>
             <div className="mx-auto flex flex-wrap">
@@ -300,10 +300,10 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 </div>
               </div>
               <div className="mt-10 w-full md:mt-0 md:w-1/2 md:pl-5 ">
-                <h2 className="title-font mb-1 text-xl font-normal text-gray-900 dark:text-gray-400">
+                <h2 className="title-font mb-1 text-xl font-normal text-gray-900 dark:text-dark_text">
                   {product.info.name}
                 </h2>
-                <div className="flex dark:text-gray-400">
+                <div className="flex dark:text-dark_text">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -349,7 +349,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 </div>
 
                 <div className="mb-1 mt-2 flex"></div>
-                <div className="ml-1 mb-1 mt-2 text-gray-900 dark:text-gray-400">
+                <div className="ml-1 mb-1 mt-2 text-gray-900 dark:text-dark_text">
                   <span className="text-sm">
                     {t('product-details:manufacturer')}:{' '}
                     {product?.manufacturer?.name
@@ -357,17 +357,17 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       : '---'}
                   </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
-                  <span className="text-sm dark:text-gray-400">
+                  <span className="text-sm dark:text-dark_text">
                     {t('product-details:sku')}: {product?.info?.sku}
                   </span>
                 </div>
                 <div className="flex">
-                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-primary dark:text-gray-400">
+                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-primary dark:text-dark_text">
                     ${product?.info?.price}
                   </span>
                 </div>
                 <div className="flex">
-                  <span className="ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-gray-400">
+                  <span className="ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
                     {t('product-details:availability')}:
                   </span>
                   {isAvailable ? (
@@ -381,7 +381,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   )}
                 </div>
 
-                <p className="py- ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-gray-400">
+                <p className="py- ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
                   {product?.info?.shortDescription}
                 </p>
                 {/* {product?.info?.size && (
@@ -438,7 +438,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </div>
                 )} */}
 
-                <div className="flex text-black dark:text-gray-400">
+                <div className="flex text-black dark:text-dark_text">
                   <div className="title-text flex items-center lg:mx-2">
                     {t('product-details:quantity')}
                     <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
@@ -493,7 +493,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     </span>
                   </button>
                 </div>
-                <div className="text-grey-700 ml-1 dark:text-gray-400">
+                <div className="text-grey-700 ml-1 dark:text-dark_text">
                   <div className="flex flex-row items-start gap-x-2">
                     <button
                       onClick={() =>

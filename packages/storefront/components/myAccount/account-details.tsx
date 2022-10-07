@@ -91,7 +91,7 @@ const AccountDetails: React.FC = () => {
         pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
         linkArray={['/', '/myAccount']}
       />
-      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-gray-400">
+      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-dark_text">
         <div className="border-b-2">
           <span className="text-3xl font-bold">
             {t('myAccount:my_account')}

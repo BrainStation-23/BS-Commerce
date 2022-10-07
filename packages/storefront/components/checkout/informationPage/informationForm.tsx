@@ -240,7 +240,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                         as="select"
                         id="tag"
                         name="tag"
-                        className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0 dark:text-gray-400"
+                        className="input required peer block w-full rounded border  border-gray-300 p-4 text-sm text-gray-500 focus:border-2 focus:border-black focus:outline-none focus:ring-0 dark:text-dark_text"
                         onClick={(
                           event: React.ChangeEvent<HTMLInputElement>
                         ) => {

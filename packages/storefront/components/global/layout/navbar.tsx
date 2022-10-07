@@ -181,7 +181,7 @@ const Navbar: React.FC<Props> = ({
             ) : (
               <>
                 <PhoneIcon />
-                <div className="flex flex-col text-sm dark:text-gray-400">
+                <div className="flex flex-col text-sm dark:text-dark_text">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
                     {t('common:customer_support')}

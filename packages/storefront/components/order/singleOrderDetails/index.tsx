@@ -45,7 +45,7 @@ const SingleOrder: FC = () => {
         pathArray={[`${t('common:home')}`, `${t('order:order_details')}`]}
         linkArray={['/', '/']}
       />
-      <div className="container mx-auto mt-5 px-4 dark:text-gray-400">
+      <div className="container mx-auto mt-5 px-4 dark:text-dark_text">
         <div className="flex gap-x-4">
           <button
             onClick={() => {

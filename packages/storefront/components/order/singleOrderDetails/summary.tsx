@@ -20,12 +20,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
         <div className="grid grid-cols-1 gap-y-2 p-5 lg:grid-cols-3 lg:gap-x-7">
           <div className="grid w-full grid-cols-2">
             <div>
-              <p className="text-[#7c827f] dark:text-gray-400">
+              <p className="text-[#7c827f] dark:text-dark_text">
                 {t('order:order_created')}
               </p>
             </div>
             <div>
-              <p className=" ml-4 text-black dark:text-gray-400 lg:ml-0">
+              <p className=" ml-4 text-black dark:text-dark_text lg:ml-0">
                 : {moment(singleOrder?.orderedDate).format('LL')}
               </p>
             </div>
@@ -33,12 +33,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
           <div>
             <div className="grid w-full grid-cols-2">
               <div>
-                <p className="text-[#7c827f] dark:text-gray-400">
+                <p className="text-[#7c827f] dark:text-dark_text">
                   {t('common:sub_total')}
                 </p>
               </div>
               <div>
-                <p className="ml-4 text-black dark:text-gray-400">
+                <p className="ml-4 text-black dark:text-dark_text">
                   : ${singleOrder?.totalCost}
                 </p>
               </div>
@@ -47,12 +47,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
           <div>
             <div className="grid w-full grid-cols-2">
               <div>
-                <p className="text-[#7c827f] dark:text-gray-400">
+                <p className="text-[#7c827f] dark:text-dark_text">
                   {t('order:payment_method')}
                 </p>
               </div>
               <div>
-                <p className="ml-4 text-black dark:text-gray-400">
+                <p className="ml-4 text-black dark:text-dark_text">
                   : {singleOrder?.paymentMethod}
                 </p>
               </div>
@@ -65,12 +65,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
         <div className="grid grid-cols-1 gap-y-2 px-5 pb-5 lg:grid-cols-3 lg:gap-x-7">
           <div className="grid w-full grid-cols-2">
             <div>
-              <p className="text-[#7c827f] dark:text-gray-400">
+              <p className="text-[#7c827f] dark:text-dark_text">
                 {t('order:order_time')}{' '}
               </p>
             </div>
             <div>
-              <p className="ml-4 text-black dark:text-gray-400 lg:ml-0">
+              <p className="ml-4 text-black dark:text-dark_text lg:ml-0">
                 : {moment(singleOrder?.orderedDate).format('LT')}
               </p>
             </div>
@@ -78,12 +78,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
           <div>
             <div className="grid w-full grid-cols-2">
               <div>
-                <p className="text-[#7c827f] dark:text-gray-400">
+                <p className="text-[#7c827f] dark:text-dark_text">
                   {t('order:delivery_fee')}
                 </p>
               </div>
               <div>
-                <p className="ml-4 text-black dark:text-gray-400">
+                <p className="ml-4 text-black dark:text-dark_text">
                   : ${singleOrder?.shippingCost}
                 </p>
               </div>
@@ -92,12 +92,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
           <div>
             <div className="grid w-full grid-cols-2">
               <div>
-                <p className="text-[#7c827f] dark:text-gray-400">
+                <p className="text-[#7c827f] dark:text-dark_text">
                   {t('order:card_no')}.
                 </p>
               </div>
               <div>
-                <p className="ml-4 text-black dark:text-gray-400">
+                <p className="ml-4 text-black dark:text-dark_text">
                   :{' '}
                   {singleOrder?.paymentMethod.toLowerCase() !==
                   'cash on delivery'
@@ -114,12 +114,12 @@ const OrderSummary: React.FC<Props> = ({ singleOrder }) => {
         <div className="mx-5 mb-5 grid grid-cols-1 lg:w-1/2">
           <div className="grid w-full grid-cols-2 lg:w-3/5">
             <div>
-              <p className="text-[#7c827f] dark:text-gray-400">
+              <p className="text-[#7c827f] dark:text-dark_text">
                 {t('order:delivery_address')}
               </p>
             </div>
             <div>
-              <p className=" ml-3 text-black dark:text-gray-400 lg:ml-0">
+              <p className=" ml-3 text-black dark:text-dark_text lg:ml-0">
                 :{' '}
                 {`${singleOrder?.shippingAddress?.addressLine1},  ${singleOrder?.shippingAddress?.city}, ${singleOrder?.shippingAddress.postCode}`}
               </p>
