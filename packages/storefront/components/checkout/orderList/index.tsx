@@ -20,21 +20,12 @@ const OrderList: NextComponentType = () => {
   }, 0);
   return (
     <>
-      <div
-        className="hidden flex-initial sm:hidden md:hidden lg:block lg:w-2/5 xl:block"
-        style={{ background: '#fafafa' }}
-      >
+      <div className="hidden flex-initial sm:hidden md:hidden lg:block lg:w-2/5 xl:block">
         <OrderedProducts />
       </div>
 
-      <div
-        className="my-7 flex flex-wrap justify-between border-gray-500 py-5 px-3 text-xs sm:block sm:px-10 md:block md:px-10 lg:hidden lg:px-5 xl:hidden xl:px-5"
-        style={{ background: '#fafafa' }}
-      >
-        <div
-          className="flex w-full flex-wrap justify-between sm:px-4 md:px-16"
-          style={{ background: '#fafafa' }}
-        >
+      <div className="my-7 flex flex-wrap justify-between border-gray-500 py-5 px-3 text-xs sm:block sm:px-10 md:block md:px-10 lg:hidden lg:px-5 xl:hidden xl:px-5">
+        <div className="flex w-full flex-wrap justify-between sm:px-4 md:px-16">
           <div className="flex flex-wrap">
             <ShoppingCart />
 
@@ -46,7 +37,9 @@ const OrderList: NextComponentType = () => {
               <div className="flex flex-wrap justify-between px-2">
                 {dropdown === true ? (
                   <>
-                    <p className="text-sm">{t('checkout:hide_order_summary')}</p>
+                    <p className="text-sm">
+                      {t('checkout:hide_order_summary')}
+                    </p>
                     <ChevronUp />
                   </>
                 ) : (
@@ -64,7 +57,7 @@ const OrderList: NextComponentType = () => {
         </div>
 
         {dropdown && (
-          <div className="w-full md:px-14" style={{ background: '#fafafa' }}>
+          <div className="w-full md:px-14">
             <OrderedProducts />
           </div>
         )}

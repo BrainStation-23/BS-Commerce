@@ -105,8 +105,8 @@ const CartDropdown: NextComponentType = () => {
       return (
         <div key={cartData.productId}>
           <div className="mr-4 flex items-center justify-between">
-            <div className="group flex h-auto w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none">
-              <div className="flex-col-4 flex items-center bg-white">
+            <div className="group flex h-auto w-full items-center px-4 py-2 text-sm leading-5 text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:text-black">
+              <div className="flex-col-4 flex items-center bg-white dark:bg-slate-800">
                 <div className="col-span-2">
                   <a href="#" className="">
                     {cartData?.product?.photos![0]?.url ? (
@@ -125,18 +125,17 @@ const CartDropdown: NextComponentType = () => {
                   <div>
                     <a
                       href="#"
-                      className="mr-2 text-sm font-bold text-gray-900"
+                      className="mr-2 text-sm font-bold text-gray-900 dark:text-gray-300"
                     >
                       {cartData?.product?.info?.name}
                     </a>
                   </div>
                   <div>
                     <div className="py-2">
-                      <span className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                        {cartData?.quantity} &nbsp;
+                      <span className="mb-2 font-normal text-gray-700 dark:text-gray-300">
+                        {cartData?.quantity} X &nbsp;
                       </span>
-                      X &nbsp;
-                      <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
+                      <p className="mb-2 font-semibold text-gray-700 dark:text-gray-300">
                         {Intl.NumberFormat(
                           `${currency.currencyLanguage}-${currency.currencyStyle}`,
                           {
@@ -195,13 +194,13 @@ const CartDropdown: NextComponentType = () => {
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (
             <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
-              <div className=" rounded-md bg-white">
+              <div className=" rounded-md bg-white dark:bg-slate-800">
                 {/* new div starts here */}
                 <div
                   className={
                     cartData.length
-                      ? 'h-48 overflow-y-scroll border-x-2 py-1'
-                      : 'h-20 border'
+                      ? 'h-48 overflow-y-scroll border-x-2 py-1 dark:border-none'
+                      : 'h-20 border dark:border-none'
                   }
                 >
                   {cartData.length > 0 ? (
@@ -215,7 +214,7 @@ const CartDropdown: NextComponentType = () => {
                 {/* new div ends here */}
                 {cartData.length > 0 ? (
                   <>
-                    <div className="flex justify-between border-x-2 p-6">
+                    <div className="flex justify-between border-x-2 p-6 dark:border-none dark:text-gray-300">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
                         {Intl.NumberFormat(
@@ -228,11 +227,11 @@ const CartDropdown: NextComponentType = () => {
                         {/* ${totalCartPrice} */}
                       </span>
                     </div>
-                    <div className="border-x-2 px-6 py-2">
+                    <div className="border-x-2 px-6 py-2 dark:border-none">
                       <Link href="/cart" passHref>
                         <a>
                           <button
-                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                            className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white dark:text-black dark:hover:text-white"
                             onClick={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
@@ -243,9 +242,9 @@ const CartDropdown: NextComponentType = () => {
                         </a>
                       </Link>
                     </div>
-                    <div className="mb-4 border-x-2 border-b-2 px-6 pb-5">
+                    <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
                       <button
-                        className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
+                        className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white dark:text-black dark:hover:text-white"
                         onClick={handleClickProceed}
                       >
                         {t('common:checkout')}

@@ -91,7 +91,7 @@ const AccountDetails: React.FC = () => {
         pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
         linkArray={['/', '/myAccount']}
       />
-      <div className="container mx-auto my-24 px-5 text-gray-800">
+      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-white">
         <div className="border-b-2">
           <span className="text-3xl font-bold">
             {t('myAccount:my_account')}
@@ -136,7 +136,7 @@ const AccountDetails: React.FC = () => {
                         </div>
                         <div className="w-2/3">
                           <span
-                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
@@ -145,13 +145,13 @@ const AccountDetails: React.FC = () => {
                           <button
                             hidden={!editable}
                             type="submit"
-                            className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
                           >
                             {t('myAccount:save')}
                           </button>
                           <span
                             hidden={!editable}
-                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
+                            className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:hover:border"
                             onClick={() => setEditable(false)}
                           >
                             {t('myAccount:cancel')}

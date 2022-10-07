@@ -78,7 +78,7 @@ const CartDetails: NextComponentType = () => {
 
           {cartData?.length > 0 && (
             <button
-              className="w-full bg-black py-2 text-sm text-white hover:bg-green-600"
+              className="w-full bg-black py-2 text-sm text-white hover:bg-green-600 dark:bg-[#40a944] dark:hover:border dark:hover:bg-black"
               onClick={handleDeleteAllCartItem}
             >
               CLEAR CART

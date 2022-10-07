@@ -61,17 +61,17 @@ const CartProductList: NextComponentType = () => {
                       {data?.product?.info?.name}
                     </p>
                     {data?.product?.info?.shortDescription && (
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 dark:text-gray-300">
                         {trimDescription(data?.product?.info?.shortDescription)}
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="flex flex-wrap justify-end font-semibold">
-                {Intl.NumberFormat(
-              `${currency.currencyLanguage}-${currency.currencyStyle}`,
-              { style: 'currency', currency: `${currency.currencyName}` }
-            ).format(data?.product?.info?.price!)}
+                  {Intl.NumberFormat(
+                    `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                    { style: 'currency', currency: `${currency.currencyName}` }
+                  ).format(data?.product?.info?.price!)}
                 </div>
               </div>
             </div>

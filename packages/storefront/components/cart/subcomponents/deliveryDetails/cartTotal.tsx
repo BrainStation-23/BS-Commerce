@@ -44,7 +44,7 @@ const CartTotal: NextComponentType = () => {
           bodyText="Proceed to login?"
         />
       )}
-      <div className="grid lg:row-span-2 xl:row-span-2">
+      <div className="grid dark:border lg:row-span-2 xl:row-span-2">
         <div className="overflow-hidden shadow-lg">
           <div className="w-full bg-[#40a944]">
             <div className="px-6 py-1 text-base font-medium text-white">
@@ -85,7 +85,7 @@ const CartTotal: NextComponentType = () => {
                 height: '39px',
                 width: '200px',
               }}
-              className="bg-black text-xs hover:bg-[#40a944]"
+              className="bg-black text-xs hover:bg-[#40a944] dark:bg-[#40a944] dark:hover:border dark:hover:bg-black"
             >
               {t('cart:proceed_to_checkout').toUpperCase()}
             </button>
