@@ -15,7 +15,7 @@ const Currency: React.FC = () => {
     { abbv: 'EUR', name: 'Euro' },
     { abbv: 'GBP', name: 'British Pound' },
     { abbv: 'INR', name: 'Indian Rupee' },
-    { abbv: 'BDT', name: 'Bangladesh Taka' },
+    { abbv: 'BDT', name: 'Bangladeshi Taka' },
   ];
   const currencyName = useAppSelector(
     (state) => state.persistedReducer.currency.currencyName

@@ -11,6 +11,7 @@ import Modal from '@/components/global/components/modal/modal';
 const CartTotal: NextComponentType = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
@@ -61,7 +62,15 @@ const CartTotal: NextComponentType = () => {
                     </span>
                   </td>
                   <td className="mx-5 ml-20 border border-slate-300 px-10 py-5 text-center md:px-8 lg:px-8 xl:px-8">
-                    <p className="sm:mx-10">${totalCartPrice}</p>
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -71,7 +80,15 @@ const CartTotal: NextComponentType = () => {
                     </span>
                   </td>
                   <td className="border border-slate-300 px-8 py-5 text-center">
-                    <p className="sm:mx-10">${totalCartPrice}</p>
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}{' '}
+                    </p>
                   </td>
                 </tr>
               </tbody>

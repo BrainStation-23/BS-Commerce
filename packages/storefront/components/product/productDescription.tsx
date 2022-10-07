@@ -6,6 +6,7 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Product } from '@bs-commerce/models';
+import ProductReview from './ProductReview';
 interface SingleProduct {
   product: Product;
 }
@@ -19,8 +20,8 @@ const ProductDescription: React.FC<SingleProduct> = ({
   const [review, setReview] = useState('hidden');
   const [shipping, setShipping] = useState('hidden');
   const [size_chart, setSize_chart] = useState('hidden');
-  const [descriptionChartFocused, setDescriptionChartFocused] = useState(true);
-  const [sizeChartFocused, setSizeChartFocused] = useState(false);
+  // const [descriptionChartFocused, setDescriptionChartFocused] = useState(true);
+  // const [sizeChartFocused, setSizeChartFocused] = useState(false);
   const shipping_policy =
     'Lorem ipsum dolor sit On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will amet consectetuer adipiscing elit hdjkdsdf fksdbfg sdfff ksfhf gmnsgbksf eafksbdfg ,saefkbs fs fsdkgbjsgf sdf m,sdf skdgjn sgksugb wrgwsg lf ogs sg slkjg solg sgs gosg sg sl gsgj jsgalflanfpwig sl j so se vs dgjsdgjlb gslg esl efjgsjg ls g ls dgj sl jgs gsl gskg skg s gksg,n sfobe fpeasgff bpa gerogal vag eg';
   const size =
@@ -31,16 +32,16 @@ const ProductDescription: React.FC<SingleProduct> = ({
     setReview('hidden');
     setShipping('hidden');
     setSize_chart('hidden');
-    setDescriptionChartFocused(true);
-    setSizeChartFocused(false);
+    // setDescriptionChartFocused(true);
+    // setSizeChartFocused(false);
   };
 
-  // const handleReview = () => {
-  //   setDescription('hidden');
-  //   setReview('block');
-  //   setShipping('hidden');
-  //   setSize_chart('hidden');
-  // };
+  const handleReview = () => {
+    setDescription('hidden');
+    setReview('block');
+    setShipping('hidden');
+    setSize_chart('hidden');
+  };
 
   // const handleShipping = () => {
   //   setDescription('hidden');
@@ -54,8 +55,8 @@ const ProductDescription: React.FC<SingleProduct> = ({
     setReview('hidden');
     setShipping('hidden');
     setSize_chart('block');
-    setDescriptionChartFocused(false);
-    setSizeChartFocused(true);
+    // setDescriptionChartFocused(false);
+    // setSizeChartFocused(true);
   };
 
   return (
@@ -66,23 +67,30 @@ const ProductDescription: React.FC<SingleProduct> = ({
             <button
               onClick={handleDescription}
               className={
-                descriptionChartFocused
+                description !== 'hidden'
                   ? 'mx-5 font-semibold text-green-600'
                   : 'mx-5 font-semibold '
               }
             >
               {t('product-details:description')}
             </button>
-            {/* <button onClick={handleReview} className="mx-5 font-semibold">
+            <button
+              onClick={handleReview}
+              className={
+                review !== 'hidden'
+                  ? 'mx-5 font-semibold text-green-600'
+                  : 'mx-5 font-semibold '
+              }
+            >
               Review
-            </button> */}
+            </button>
             {/* <button onClick={handleShipping} className="mx-5 font-semibold">
               Shipping Policy
             </button> */}
             <button
               onClick={handleSize}
               className={
-                sizeChartFocused
+                size_chart !== 'hidden'
                   ? 'mx-5 font-semibold text-green-600'
                   : 'mx-5 font-semibold'
               }
@@ -94,7 +102,9 @@ const ProductDescription: React.FC<SingleProduct> = ({
 
         <div className="m-5 flex ">
           <div className={description}>{product.info.fullDescription}</div>
-          {/* <p className={review}>Review</p> */}
+          <div className={`${review} w-full`}>
+            <ProductReview />
+          </div>
           {/* <p className={shipping}>{shipping_policy}</p> */}
           <div className={`${size_chart} w-full`}>
             <h4 className="font-semibold ">

@@ -58,7 +58,6 @@ const OrderedProducts: NextComponentType = () => {
                   {t('checkout:total')}
                 </p>
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="text-xs text-gray-500 dark:text-white">USD</p>
                   <p className="text-2xl font-semibold">
                     {Intl.NumberFormat(
                       `${currency.currencyLanguage}-${currency.currencyStyle}`,
