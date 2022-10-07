@@ -13,6 +13,7 @@ import BottomNavigationBar from './bottom-navigation-bar';
 import Drawer from './drawer';
 import { useAppSelector } from 'customHooks/hooks';
 import useTranslation from 'next-translate/useTranslation';
+import ThemeChanger from './themeChanger';
 
 const Header: NextComponentType = () => {
   const [showUser, setShowUser] = useState<boolean>(false);
@@ -79,6 +80,9 @@ const Header: NextComponentType = () => {
             <Currency />
           </div>
           <div className="space-x-3"></div>
+        </div>
+        <div>
+          <ThemeChanger />
         </div>
       </header>
 
