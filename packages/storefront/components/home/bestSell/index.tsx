@@ -5,6 +5,8 @@ import 'swiper/css/pagination';
 
 import React from 'react';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
+
 import { SwiperSlide } from 'swiper/react';
 import { NextComponentType } from 'next';
 
@@ -17,6 +19,8 @@ import Container from '@/components/global/components/container';
 import { CustomerProduct } from '@bs-commerce/models';
 
 const BestSell: NextComponentType = () => {
+  const { t } = useTranslation();
+
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
@@ -29,8 +33,10 @@ const BestSell: NextComponentType = () => {
     <>
       <Container className="">
         <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">Recently added our store</p>
-          <h1 className="text-bold text-4xl ">Best Sell</h1>
+          <p className="font-serif text-lg italic">
+            {t('home:recently_added')}
+          </p>
+          <h1 className="text-bold text-4xl ">{t('home:best_sell')}</h1>
         </div>
         <div className="flex w-full flex-wrap">
           <div className="w-full px-3 md:w-5/12 lg:w-2/6 lg:px-0">

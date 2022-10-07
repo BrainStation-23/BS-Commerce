@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import useTranslation from 'next-translate/useTranslation';
 import { passwordSchema } from '@/components/global/schemas/forgot-password.schema';
 
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const NewPasswordForm: React.FC<Props> = ({ handleNewPasswordFormSubmit }) => {
+  const { t } = useTranslation();
+
   const otpDetail = useAppSelector(
     (state) => state.persistedReducer.forgetPassword
   );
@@ -48,13 +51,13 @@ const NewPasswordForm: React.FC<Props> = ({ handleNewPasswordFormSubmit }) => {
                   <FieldTemplate
                     fieldType="password"
                     fieldID="newPassword"
-                    placeholder="New password"
+                    placeholder={t('forgot-password:new_password')}
                     extraClass="mb-4"
                   />
                   <FieldTemplate
                     fieldType="password"
                     fieldID="confirmPassword"
-                    placeholder="Retype new password"
+                    placeholder={t('forgot-password:retype_new_password')}
                   />
                 </>
               </div>

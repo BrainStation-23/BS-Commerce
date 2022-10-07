@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
 import {
   deleteCartItem,
   storeAllCartItems,
@@ -20,6 +20,7 @@ interface Props {
 
 const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
   const dispatch = useAppDispatch();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const [itemToUpdate, setItemToUpdate] = useState({
     productId: data?.productId,
@@ -87,7 +88,10 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           <div className="mb-4 flex gap-x-3">
             <div className="py-2">
               <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                ${data?.product?.info?.price}
+                {Intl.NumberFormat(
+                  `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                  { style: 'currency', currency: `${currency.currencyName}` }
+                ).format(data?.product?.info?.price!)}
               </p>
             </div>
             <div className="w-25 mb-1 box-content border-2 py-2">

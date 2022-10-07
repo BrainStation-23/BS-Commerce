@@ -8,6 +8,7 @@ const CartProductList: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const trimDescription = (description: string) => {
     if (description.length <= 30) {
@@ -67,7 +68,10 @@ const CartProductList: NextComponentType = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap justify-end font-semibold">
-                  ${data?.product?.info?.price}
+                {Intl.NumberFormat(
+              `${currency.currencyLanguage}-${currency.currencyStyle}`,
+              { style: 'currency', currency: `${currency.currencyName}` }
+            ).format(data?.product?.info?.price!)}
                 </div>
               </div>
             </div>

@@ -1,0 +1,18 @@
+{
+  "action": "কর্ম",
+  "date": "তারিখ",
+  "my_order": "আমার অর্ডার",
+  "orderID": "অর্ডার আইডি",
+  "payment_method": "মূল্যপরিশোধ পদ্ধতি",
+  "product_cost": "দ্রব্য মূল্য",
+  "status": "স্ট্যাটাস",
+  "view": "দেখুন",
+  "order_created": "অর্ডার তৈরি করা হয়েছে",
+  "order_time": "অর্ডার করার সময়",
+  "delivery_address": "সরবরাহের ঠিকানা",
+  "delivery_fee": "ডেলিভারি করার টাকা",
+  "order_details": "অর্ডার বিবরণী",
+  "order_summary": "অর্ডার সারাংশ",
+  "card_no": "কার্ড নাম্বার",
+  "your_order": "আপনার অর্ডার"
+}

@@ -4,12 +4,15 @@ import moment from 'moment';
 import Link from 'next/link';
 import TableData from '@/components/order/singleOrderDetails/productTable/tableData';
 import { NextComponentType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   productList: IOrderProduct[];
 }
 
 const ProductTable: React.FC<Props> = ({ productList }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="mt-5">
@@ -19,19 +22,19 @@ const ProductTable: React.FC<Props> = ({ productList }) => {
               <thead className="">
                 <tr className="border-b">
                   <th scope="col" className="px-5 py-4">
-                    Image
+                    {t('common:image')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Product
+                    {t('common:product')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Price
+                    {t('common:price')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Quantity
+                    {t('common:quantity')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Total
+                    {t('common:total')}
                   </th>
                 </tr>
               </thead>

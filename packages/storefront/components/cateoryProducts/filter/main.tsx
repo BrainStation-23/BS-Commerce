@@ -4,6 +4,7 @@ import AvaialabilityOptions from '@/components/cateoryProducts/filter/subCompone
 import ProductTypeOptions from '@/components/cateoryProducts/filter/subComponent/productTypes';
 import BrandTypeOptions from '@/components/cateoryProducts/filter/subComponent/brandTypes';
 import ColourTypeOptions from '@/components/cateoryProducts/filter/subComponent/colorAvailibility';
+import useTranslation from 'next-translate/useTranslation';
 
 const CategoryFilter: FC = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
@@ -53,6 +54,7 @@ const CategoryFilter: FC = () => {
       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
     </svg>
   );
+  const { t } = useTranslation();
 
   return (
     <>
@@ -71,7 +73,7 @@ const CategoryFilter: FC = () => {
                 onClick={accorditionStatus1}
               >
                 <span className="text-[15px] font-semibold tracking-wide">
-                  PRICE
+                  {t('collections:price')}
                 </span>
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
               </button>
@@ -221,7 +223,7 @@ const CategoryFilter: FC = () => {
               >
                 <span className="text-[15px] font-semibold tracking-wide">
                   {' '}
-                  BRAND
+                  {t('collections:brand')}
                 </span>
                 <span>{displayStatus4 ? upArrow : downArrow}</span>
               </button>

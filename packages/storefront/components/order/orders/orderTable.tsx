@@ -3,11 +3,14 @@ import React from 'react';
 import moment from 'moment';
 import Link from 'next/link';
 import TableData from '@/components/order/orders/tableData';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   orderList: OrderByUserId[];
 }
 const OrderTable: React.FC<Props> = ({ orderList }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="mt-5">
@@ -17,22 +20,22 @@ const OrderTable: React.FC<Props> = ({ orderList }) => {
               <thead className="">
                 <tr className="border-b">
                   <th scope="col" className="px-5 py-4">
-                    Order ID
+                    {t('order:OrderID')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Date
+                    {t('order:date')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Status
+                    {t('order:status')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Payment Method
+                    {t('order:payment_method')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Product Cost
+                    {t('order:product_cost')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    Action
+                    {t('order:action')}
                   </th>
                 </tr>
               </thead>

@@ -1,4 +1,5 @@
 import { WishlistProduct, WishlistProductInfo } from '@bs-commerce/models';
+import { useAppSelector } from 'customHooks/hooks';
 import React from 'react';
 
 interface SingleProductInfo {
@@ -9,6 +10,8 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
   props: SingleProductInfo
 ) => {
   const { product } = props;
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
+
   return (
     <div>
       <div className="px-6">
@@ -19,12 +22,19 @@ const WishlistProductInfo: React.FC<SingleProductInfo> = (
           {product.info.shortDescription}
         </p> */}
         <p className="text-sm font-semibold text-green-600">
-          {product?.info?.price}
+          {Intl.NumberFormat(
+            `${currency.currencyLanguage}-${currency.currencyStyle}`,
+            { style: 'currency', currency: `${currency.currencyName}` }
+          ).format(product?.info?.price)}
           {product?.info?.oldPrice ? (
             <span className="ml-2 text-xs font-semibold text-black">
-              <s>$</s>
               {product?.info?.oldPrice ? (
-                <s>{product?.info?.oldPrice}</s>
+                <s>
+                  {Intl.NumberFormat(
+                    `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                    { style: 'currency', currency: `${currency.currencyName}` }
+                  ).format(product?.info?.oldPrice)}
+                </s>
               ) : null}
             </span>
           ) : null}

@@ -9,6 +9,7 @@ import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
 import { useEffect, useState } from 'react';
 import SingleAddressDetailsTable from '@/components/myAccount/singleAddressDetailsTable';
+import useTranslation from 'next-translate/useTranslation';
 
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const SingleAddressDetails: NextComponentType = () => {
     phone: '',
     tag: '',
   });
-
+  const { t } = useTranslation();
   const customerAddresses = useAppSelector(
     (state) => state?.persistedReducer?.customerAddress.addresses
   );
@@ -42,8 +43,8 @@ const SingleAddressDetails: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Order Details"
-        pathArray={['Home', 'Details']}
+        title={t('myAccount:order_details')}
+        pathArray={[`${t('common:home')}`, `${t('myAccount:order_details')}`]}
         linkArray={['/', '/']}
       />
       <div className="container mx-auto mt-5 px-4">
@@ -55,44 +56,46 @@ const SingleAddressDetails: NextComponentType = () => {
           >
             <ChevronLeft />
           </button>
-          <p className="text-2xl font-semibold">Delivery Address</p>
+          <p className="text-2xl font-semibold">
+            {t('myAccount:delivery_address')}
+          </p>
         </div>
         <div className="mt-5 flex items-center gap-x-2">
           <Link href="/myAccount/addresses" passHref>
             <p className="cursor-pointer text-sm text-[#7c827f]">
-              Delivery Address
+              {t('myAccount:delivery_address')}
             </p>
           </Link>
           <ChevronRight />
-          <p className="cursor-pointer text-sm">Details</p>
+          <p className="cursor-pointer text-sm">{t('myAccount:details')}</p>
         </div>
 
         <div className="mt-5 rounded-lg border md:w-1/2">
           <SingleAddressDetailsTable
-            label="Address Line"
+            label={t('myAccount:address_line')}
             text={singleAddress?.addressLine1}
             extraClass="mt-5"
           />
 
           <SingleAddressDetailsTable
-            label="Flat/Building Name "
+            label={t('myAccount:building_name')}
             text={
               singleAddress?.addressLine2 ? singleAddress?.addressLine2 : 'N/A'
             }
           />
 
           <SingleAddressDetailsTable
-            label="City "
+            label={t('myAccount:city')}
             text={singleAddress?.state!}
           />
 
           <SingleAddressDetailsTable
-            label="Post Code "
+            label={t('myAccount:post_code')}
             text={singleAddress?.postCode!}
           />
 
           <SingleAddressDetailsTable
-            label="Phone Number "
+            label={t('myAccount:phone_number')}
             text={singleAddress?.phone ? singleAddress?.phone : 'N/A'}
           />
         </div>

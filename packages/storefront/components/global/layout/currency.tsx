@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import React, { useState } from 'react';
+import { setCurrencyName } from 'toolkit/currencySlice';
 
 interface currency {
   abbv: string;
@@ -7,21 +9,36 @@ interface currency {
 
 const Currency: React.FC = () => {
   const [open, setOpen] = useState(false);
-  
+
   const currencyList: currency[] = [
-    { abbv: "USD", name: "US Dollar" },
-    { abbv: "EUR", name: "Euro" },
-    { abbv: "GBP", name: "British Pound" },
-    { abbv: "INR", name: "Indian Rupee" },
-    { abbv: "BDT", name: "Bangladesh Taka" },
+    { abbv: 'USD', name: 'US Dollar' },
+    { abbv: 'EUR', name: 'Euro' },
+    { abbv: 'GBP', name: 'British Pound' },
+    { abbv: 'INR', name: 'Indian Rupee' },
+    { abbv: 'BDT', name: 'Bangladeshi Taka' },
   ];
+  const currencyName = useAppSelector(
+    (state) => state.persistedReducer.currency.currencyName
+  );
+
+  const [selectedCurrency, setSelectedCurrency] = useState(currencyName);
+  const dispatch = useAppDispatch();
+  const currencyOnclick = async (currencyName: string) => {
+    dispatch(
+      setCurrencyName({
+        currencyStyle: 'IN',
+        currencyName: `${currencyName}`,
+      })
+    );
+    setSelectedCurrency(currencyName);
+  };
   return (
-    <div className="inline-block relative">
+    <div className="relative inline-block">
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
       >
-        <span className="mr-1">USD</span>
+        <span className="mr-1">{selectedCurrency}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -36,12 +53,17 @@ const Currency: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`overflow-hidden top-7 absolute text-gray-700 whitespace-nowrap bg-white border p-4 z-50 transition-all duration-500 ease-linear ${"left-0"} ${
-          open ? "h-[190px] opacity-100" : "h-0 opacity-0"
+        className={`absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear ${'left-0'} ${
+          open ? 'h-[190px] opacity-100' : 'h-0 opacity-0'
         }`}
+        onMouseLeave={() => setOpen(false)}
       >
         {currencyList.map((currency) => (
-          <li key={currency.abbv} className="py-1">
+          <li
+            key={currency.abbv}
+            className="py-1"
+            onClick={() => currencyOnclick(currency.abbv)}
+          >
             {currency.abbv} - {currency.name}
           </li>
         ))}

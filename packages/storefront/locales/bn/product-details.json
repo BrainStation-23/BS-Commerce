@@ -1,0 +1,15 @@
+{
+    "manufacturer": "প্রস্তুতকারক",
+    "sku": "এসকেইউ",
+    "availability": "প্রাপ্যতা",
+    "quantity": "পরিমাণ",
+    "add_to_cart": "কার্টে যোগ করুন",
+    "buy_now": "এখনই কিনুন",
+    "add_to_wishlist": "+ উইশলিস্টে যোগ করুন",
+    "remove_from_wishlist": "x উইশলিস্ট থেকে বাদ দিন",
+    "show_in_compare": "তূলনা তালিকায় দেখুন",
+    "compare": "+ তূলনা করুন",
+    "description": "বিবরণ",
+    "size_chart": "সাইজ চার্ট",
+    "similar_products": "কাছাকাছি প্রোডাক্টসমূহ"
+}

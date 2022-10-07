@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
 
 import React, { useState } from 'react';
@@ -19,6 +20,7 @@ interface Props {
 const ComparisonModal: React.FC<Props> = ({ setModal }) => {
   const [showModal, setShowModal] = useState(setModal);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const comparisonProducts = useAppSelector(
     (state) => state?.persistedReducer?.compare?.compareList?.items
@@ -63,7 +65,9 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
             <div className="relative my-auto mx-auto overflow-x-auto overflow-y-auto md:w-3/4 md:overflow-x-hidden">
               <div className="relative flex w-full flex-col rounded-lg bg-white shadow-lg">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 ">
-                  <h3 className="mr-3 text-xl font-bold">Compare Product</h3>
+                  <h3 className="mr-3 text-xl font-bold">
+                    {t('compare:title')}
+                  </h3>
                   <button
                     className="border-1 float-right bg-transparent text-black"
                     onClick={() => {
@@ -96,7 +100,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                   scope="col"
                                   className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                 >
-                                  Action
+                                  {t('compare:action')}
                                 </th>
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
@@ -113,7 +117,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               );
                                             }}
                                           >
-                                            Remove
+                                            {t('common:remove')}
                                           </button>
                                         </th>
                                       </React.Fragment>
@@ -125,7 +129,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                             <tbody>
                               <tr className="border-b hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
-                                  Product name
+                                  {t('compare:product_name')}
                                 </td>
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
@@ -141,7 +145,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
-                                  Product image
+                                  {t('compare:product_image')}
                                 </td>
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
@@ -168,7 +172,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               ?.oldPrice ? (
                                               <>
                                                 <span className="text-sm text-red-600">
-                                                  On Sale $
+                                                  {t('compare:on_sale')} $
                                                   {
                                                     product?.productDetails
                                                       ?.info?.price
@@ -198,7 +202,9 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               passHref
                                             >
                                               <a className="text-xs text-gray-500/100 hover:text-red-600">
-                                                VIEW PRODUCT
+                                                {t(
+                                                  'compare:view_product'
+                                                ).toUpperCase()}
                                               </a>
                                             </Link>
                                           </div>
@@ -210,7 +216,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
-                                  Product description
+                                  {t('compare:product_description')}
                                 </td>
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
@@ -229,14 +235,14 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                               </tr>
                               <tr className="border-b bg-white hover:bg-gray-100">
                                 <td className="border-r px-6 py-4 text-sm font-normal">
-                                  Availability
+                                  {t('compare:availability')}
                                 </td>
                                 {comparisonProducts?.map(
                                   (product: ICompareItems) => {
                                     return (
                                       <React.Fragment key={product?.productId}>
                                         <td className="border-r px-6 py-4 text-sm font-normal">
-                                          Available In stock
+                                          {t('compare:available')}
                                         </td>
                                       </React.Fragment>
                                     );

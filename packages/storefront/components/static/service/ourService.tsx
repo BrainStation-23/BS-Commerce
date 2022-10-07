@@ -1,12 +1,14 @@
 import React, { FC } from "react";
 
 import Container from "@/components/global/components/container";
+import useTranslation from "next-translate/useTranslation";
 
 const OurService: FC = () => {
+  const { t } = useTranslation();
   return (
     <Container>
       <div className="py-14 text-center">
-        <h2 className="text-2xl">OUR SERVICES</h2>
+        <h2 className="text-2xl">{t('service:our_services')}</h2>
         <p className="w-3/4 mx-auto">
           Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
           molestie consequat, vel illum dolore eu feugiat nulla facilisis at

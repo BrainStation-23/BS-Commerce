@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import CounterElement from '@/components/deals/filter/subComponent/counterElement';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 const PriceFilter: FC = () => {
   const router = useRouter();
@@ -26,6 +27,8 @@ const PriceFilter: FC = () => {
       query: queryObject,
     });
   };
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="accordion-body py-2">
@@ -47,11 +50,11 @@ const PriceFilter: FC = () => {
               />
             </span>
             <span className="mx-2 flex grid content-center justify-center">
-              From
+              {t('collections:from')}
             </span>
           </div>
           {/* <div className="text-sm ml-4 text-center flex justify-center grid content-center lg:py-2 xl:px-2">
-            From
+            {t('collections:from')}
           </div> */}
           <div>
             <div className="mt-2 flex flex-row text-sm">
@@ -79,7 +82,7 @@ const PriceFilter: FC = () => {
             onClick={() => onClickFilter()}
             className="rounded bg-green-600 py-2 px-6 font-semibold text-white hover:bg-black"
           >
-            Filter
+            {t('collections:filter')}
           </button>
         </div>
       </div>

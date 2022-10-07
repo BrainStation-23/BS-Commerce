@@ -13,6 +13,7 @@ import { informationSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
 import FieldTemplate from '../fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';
+import useTranslation from 'next-translate/useTranslation';
 
 interface FormData {
   email: string;
@@ -175,6 +176,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
     setTagsOptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags, shippingInfo]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setTagsOptions();
@@ -230,7 +232,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
             <>
               <Form onSubmit={formikprops.handleSubmit}>
                 <div className="mt-8">
-                  <p className="text-lg">Shipping Address</p>
+                  <p className="text-lg">{t('checkout:shipping_address')}</p>
 
                   <div className="mt-5">
                     <div className="mb-3">
@@ -272,13 +274,13 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <FieldTemplate
-                          label="First name"
+                          label={t('checkout:first_name')}
                           fieldID="firstName"
                           fieldType="text"
                           placeholder=" "
                         />
                         <FieldTemplate
-                          label="Last name"
+                          label={t('checkout:last_name')}
                           fieldID="lastName"
                           fieldType="text"
                           placeholder=" "
@@ -287,14 +289,14 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     </div>
 
                     <FieldTemplate
-                      label="Mobile number"
+                      label={t('checkout:mobile_number')}
                       fieldID="contact"
                       fieldType="text"
                       placeholder=" "
                     />
 
                     <FieldTemplate
-                      label="Address 1"
+                      label={t('checkout:address_line1')}
                       fieldID="addressLine1"
                       fieldType="text"
                       placeholder=" "
@@ -302,7 +304,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     />
 
                     <FieldTemplate
-                      label="Address 2"
+                      label={t('checkout:address_line2')}
                       fieldID="addressLine2"
                       fieldType="text"
                       placeholder=" "
@@ -312,7 +314,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     <div className="row">
                       <div className="grid grid-cols-1 gap-0 sm:grid-cols-1 sm:gap-0 md:grid-cols-2 md:gap-4 lg:grid-cols-2 lg:gap-4 xl:grid-cols-2 xl:gap-4">
                         <FieldTemplate
-                          label="City"
+                          label={t('checkout:city')}
                           fieldID="city"
                           fieldType="text"
                           placeholder=" "
@@ -320,7 +322,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                         />
 
                         <FieldTemplate
-                          label="Postal Code"
+                          label={t('checkout:postal_code')}
                           fieldID="postCode"
                           fieldType="text"
                           placeholder=" "
@@ -336,7 +338,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     <div className="">
                       <div className="mb-3">
                         <label htmlFor="tag2" className="pb-8 text-sm">
-                          Enter a label for effective delivery:
+                        {t('checkout:tag2_label')}
                         </label>
 
                         <div className="mt-2">
@@ -359,7 +361,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                     type="submit"
                     className="my-2 w-full rounded bg-black p-3 text-sm text-white sm:w-full md:w-44"
                   >
-                    Continue to shipping
+                    {t('checkout:continue_to_shipping')}
                   </button>
                   <div className="flex flex-wrap items-center">
                     <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
@@ -370,7 +372,7 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
                       </Link>
                     </div>
                     <Link href="/cart" passHref>
-                      <a className="text-decoration-none">Return to cart</a>
+                      <a className="text-decoration-none">{t('checkout:return_to_cart')}</a>
                     </Link>
                   </div>
                 </div>
