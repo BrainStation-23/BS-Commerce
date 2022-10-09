@@ -8,8 +8,8 @@ const LocationIcon: NextComponentType = () => {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#40A944"
-        className="h-6 w-6"
+        // stroke="#40A944"
+        className="h-6 w-6 stroke-primary dark:stroke-dark_primary"
       >
         <path
           strokeLinecap="round"

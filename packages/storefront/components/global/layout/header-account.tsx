@@ -206,18 +206,23 @@ const HeaderAccount: React.FC<Properties> = () => {
             <div className="flex text-base hover:text-primary dark:text-dark_text dark:hover:text-dark_primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 hover:text-primary dark:hover:text-dark_primary"
-                fill={
+                className={`h-6 w-6 hover:stroke-primary hover:text-primary dark:hover:stroke-dark_primary dark:hover:text-dark_primary 
+                ${
                   wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `green`
-                    : `none`
-                }
+                    ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
+                    : 'fill-white stroke-dark_bg dark:stroke-dark_text  '
+                }`}
+                // fill={
+                //   wishlistItems?.items?.length! > 0 && token !== ''
+                //     ? `primary`
+                //     : `none`
+                // }
                 viewBox="0 0 24 24"
-                stroke={
-                  wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `green`
-                    : `currentColor`
-                }
+                // stroke={
+                //   wishlistItems?.items?.length! > 0 && token !== ''
+                //     ? `primary`
+                //     : `currentColor`
+                // }
                 strokeWidth={2}
               >
                 <path

@@ -24,7 +24,7 @@ const BackToTopButton = () => {
     <div>
       {backToTopButton && (
         <button
-          className="rounded-full border-2 border-white bg-[#40a944]"
+          className="rounded-full border-2 border-white bg-primary dark:bg-dark_primary"
           style={{
             position: 'fixed',
             bottom: '65px',
@@ -38,9 +38,9 @@ const BackToTopButton = () => {
         >
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="bg-green h-9 w-10 rounded-full"
+            className="bg-green h-9 w-10 rounded-full fill-primary dark:fill-dark_primary"
             viewBox="0 0 20 20"
-            fill="#40a944"
+            // fill="#40a944"
           >
             <path
               fillRule="evenodd"
