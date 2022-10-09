@@ -29,7 +29,7 @@ const ProductInfo = (props: SingleProduct) => {
             { style: 'currency', currency: `${currency.currencyName}` }
           ).format(product?.info?.price)}
           {Math.abs(product?.info.oldPrice - product?.info.price) > 0 ? (
-            <span className="ml-2 text-xs font-semibold text-black">
+            <span className="ml-2 text-xs font-semibold text-dark_bg dark:text-dark_text">
               <s>
                 {Intl.NumberFormat(
                   `${currency.currencyLanguage}-${currency.currencyStyle}`,

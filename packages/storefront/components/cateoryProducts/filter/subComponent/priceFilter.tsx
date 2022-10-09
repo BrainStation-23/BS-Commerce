@@ -43,7 +43,7 @@ const PriceFilter: FC = () => {
             <span className="px-2">
               <input
                 type="number"
-                className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 bg-white px-3 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 px-3 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                 defaultValue={0}
                 min="0"
                 id="lowPrice"
@@ -64,7 +64,7 @@ const PriceFilter: FC = () => {
               <span className="mr-2">
                 <input
                   type="number"
-                  className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 bg-white px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                  className="rounded-xs mt-1 block h-10 w-16 border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                   defaultValue={100}
                   min="0"
                   id="highPrice"
