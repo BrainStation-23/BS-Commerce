@@ -8,11 +8,13 @@ import {
 
 import { userAPI } from 'APIs';
 import ReorderModal from '@/components/global/components/modal/reorderModal';
+import useTranslation from 'next-translate/useTranslation';
 interface Props {
   singleOrder: OrderByUserId;
 }
 
 const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
+  const { t } = useTranslation();
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
   const [unavailableProducts, setUnavailableProducts] = useState<
     IOrderProduct[]
@@ -68,7 +70,6 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       }
     } catch (error) {}
   };
-
   return (
     <>
       <div className="flex justify-center pt-6">
@@ -77,7 +78,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
           className="rounded bg-green-700 py-2 px-8 font-bold text-white hover:bg-black"
           id="re-order"
         >
-          Reorder
+          {t('common:reorder')}
         </button>
       </div>
       <ReorderModal

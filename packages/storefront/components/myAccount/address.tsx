@@ -1,6 +1,7 @@
 import { NextComponentType } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
@@ -10,6 +11,8 @@ import SingleAddress from '@/components/myAccount/singleAddress';
 import WithAuth from '@/components/auth/withAuth';
 
 const AccountDetails: NextComponentType = () => {
+  const { t } = useTranslation();
+
   const [showAddAddress, setShowAddAddress] = useState('hidden');
   // const [showEditAddress, setShowEditAddress] = useState('hidden');
 
@@ -30,13 +33,13 @@ const AccountDetails: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Addresses"
-        pathArray={['Home', 'Addresses']}
+        title={t('manage-address:addresses')}
+        pathArray={[`${t('common:home')}`, `${t('manage-address:addresses')}`]}
         linkArray={['/', '/myAccount/addresses']}
       />
       <div className="container mx-auto my-24 px-5 text-gray-800">
         <div className="mb-3 flex flex-wrap justify-between">
-          <div className="text-3xl font-bold">My Account</div>
+          <div className="text-3xl font-bold">{t('common:my_account')}</div>
           {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
             <button
@@ -44,7 +47,7 @@ const AccountDetails: NextComponentType = () => {
               type="button"
               onClick={() => addButtonOnClick()}
             >
-              Add +
+              {t('common:add')} +
             </button>
           </div>
           {/* </Link> */}
@@ -53,8 +56,8 @@ const AccountDetails: NextComponentType = () => {
         <div className="mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
             <Link href="/myAccount" passHref>
-              <span className="cursor-pointer hover:text-blue-600">
-                Return to Account Details
+              <span className="cursor-pointer hover:text-green-600">
+                {t('manage-address:return_to_account_details')}
               </span>
             </Link>
           </div>
@@ -64,7 +67,9 @@ const AccountDetails: NextComponentType = () => {
               <hr className="my-2" />
             </div>
             <div className="text-left">
-              <span className="text-4xl">Your Addresses</span>
+              <span className="text-4xl">
+                {t('manage-address:your_addresses')}
+              </span>
 
               {customerAddresses?.length > 0 && (
                 <>

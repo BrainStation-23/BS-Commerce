@@ -1,0 +1,11 @@
+{
+    "title": "পণ্যসমূহ তূলনা করুন",
+    "action": "একশন",
+    "product_name": "পণ্যের নাম",
+    "product_image": "পণ্যের ছবি",
+    "product_description": "পণ্যের বিবরণ",
+    "availability": "প্রাপ্যতা",
+    "view_product": "পণ্যটি দেখুন",
+    "on_sale": "মূল্যছাড়ের পর দাম",
+    "available": "স্টক এভেইলেবল"
+}

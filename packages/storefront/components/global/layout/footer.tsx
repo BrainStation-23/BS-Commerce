@@ -1,6 +1,7 @@
 import type { NextComponentType } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 interface footerLink {
   name: string;
@@ -8,23 +9,24 @@ interface footerLink {
 }
 
 const Footer: NextComponentType = () => {
+  const { t } = useTranslation();
   const { pathname } = useRouter();
   const informationList: footerLink[] = [
-    { name: 'About Us', link: '/about' },
-    { name: 'Delivery Information', link: '/' },
-    { name: 'Privacy Policy', link: '/' },
-    { name: 'Terms & Condition', link: '/' },
-    { name: 'Contact Us', link: '/contact' },
-    { name: 'Site Map', link: '/' },
+    { name: `${t('common:about_us')}`, link: '/about' },
+    { name: `${t('common:delivery_information')}`, link: '/' },
+    { name: `${t('common:privacy_policy')}`, link: '/' },
+    { name: `${t('common:terms&condition')}`, link: '/' },
+    { name: `${t('common:contact_us')}`, link: '/contact' },
+    { name: `${t('common:site_map')}`, link: '/' },
   ];
 
   const extraList: footerLink[] = [
-    { name: 'Brands', link: '/' },
-    { name: 'Gifts Certificates', link: '/' },
-    { name: 'Affiliate', link: '/' },
-    { name: 'Specials', link: '/' },
-    { name: 'Returns', link: '/' },
-    { name: 'Order History', link: '/order' },
+    { name: `${t('common:brands')}`, link: '/' },
+    { name: `${t('common:gifts_certificates')}`, link: '/' },
+    { name: `${t('common:affiliate')}`, link: '/' },
+    { name: `${t('common:specials')}`, link: '/' },
+    { name: `${t('common:returns')}`, link: '/' },
+    { name: `${t('common:order_history')}`, link: '/order' },
   ];
 
   const address = {
@@ -45,29 +47,32 @@ const Footer: NextComponentType = () => {
         <div className="mb-20 flex flex-col items-center gap-y-10 px-4 md:mb-0 md:flex-row md:flex-wrap md:items-start lg:w-full lg:px-0">
           {/* 1st portion */}
           <div className="flex flex-col items-center text-center md:w-full md:items-start md:text-left lg:w-1/3 lg:pr-4">
-            <span className="mb-2 text-xl font-black">BS Commerce</span>
+            <span className="mb-2 text-xl font-black">
+              {t('common:site_name')}
+            </span>
             <span className="mb-1 text-sm">
-              Serving Enterprises and SMEs with Technological Partnership Since
-              2006.
+              {t('common:footer_description')}
             </span>
             <div className="text-sm">
               <div className="mb-1">
-                <span className="mr-1 font-medium">Address:</span>
+                <span className="mr-1 font-medium">{t('common:address')}:</span>
                 <span>{address.location}</span>
               </div>
               <div className="mb-1">
-                <span className="mr-1 font-medium">Email:</span>
+                <span className="mr-1 font-medium">{t('common:email')}:</span>
                 <span>{address.email}</span>
               </div>
               <div className="mb-1">
-                <span className="mr-1 font-medium">Call us:</span>
+                <span className="mr-1 font-medium">{t('common:call_us')}:</span>
                 <span>{address.mobile}</span>
               </div>
             </div>
           </div>
           {/* Information */}
           <div className="flex flex-col text-center md:flex-1 md:text-left">
-            <span className="mb-3 text-lg font-medium">Information</span>
+            <span className="mb-3 text-lg font-medium">
+              {t('common:information')}
+            </span>
             <div className="flex flex-col gap-1 text-sm">
               {informationList.map((link) => (
                 <Link href={link.link} passHref key={link.name}>
@@ -80,7 +85,9 @@ const Footer: NextComponentType = () => {
           </div>
           {/* Extras */}
           <div className="flex flex-col text-center md:flex-1 md:text-left">
-            <span className="mb-3 text-lg font-medium">Extras</span>
+            <span className="mb-3 text-lg font-medium">
+              {t('common:extras')}
+            </span>
             <div className="flex flex-col gap-1 text-sm">
               {extraList.map((link) => (
                 <Link key={link.name} passHref href={link.link}>
@@ -94,10 +101,10 @@ const Footer: NextComponentType = () => {
           {/* Newsletter */}
           <div className="flex flex-col text-center md:flex-1 md:grow-[2] md:text-left">
             <span className="mb-3 text-lg font-medium">
-              Signup for newsletter
+              {t('common:signup_for_newsletter')}
             </span>
             <span className="mb-4 text-center text-sm md:text-left">
-              Get updates by subscribe our weekly newsletter
+              {t('common:get_updates_by_subscribe_our_weekly_newsletter')}
             </span>
             <div
               className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
@@ -110,7 +117,7 @@ const Footer: NextComponentType = () => {
               />
               <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
                 <button type="submit" className="text-white">
-                  SUBSCRIBE
+                  {t('common:subscribe')}
                 </button>
               </div>
             </div>
@@ -119,7 +126,7 @@ const Footer: NextComponentType = () => {
       </div>
       <footer className="hidden w-full bg-gray-900 py-4 text-center text-sm font-normal text-white md:px-4 md:text-left lg:flex">
         <div className="container mx-auto">
-          <p className="">Copyright &copy; BS commerce All right reserved</p>
+          <p className=""> {t('common:copyrignt')}</p>
         </div>
       </footer>
     </>

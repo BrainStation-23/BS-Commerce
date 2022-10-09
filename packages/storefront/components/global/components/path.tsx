@@ -1,5 +1,6 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Path {
   cart: boolean;
@@ -11,16 +12,17 @@ interface Path {
 
 const Path: React.FC<Path> = (props: Path) => {
   const { cart, info, shipping, payment, setModal } = props;
+  const { t } = useTranslation();
   return (
-    <div className="flex flex-wrap text-xs gap-2">
+    <div className="flex flex-wrap gap-2 text-xs">
       <div>
-        <Link href="/">Home</Link>
+        <Link href="/">{t('common:home')}</Link>
       </div>
-      {" > "}
-      <div className={cart ? "font-bold" : "font-normal"}>
-        <Link href="/cart">Cart</Link>
+      {' > '}
+      <div className={cart ? 'font-bold' : 'font-normal'}>
+        <Link href="/cart">{t('checkout:cart')}</Link>
       </div>
-      {" > "}
+      {' > '}
       <div>
         <button
           onClick={() => {
@@ -31,16 +33,16 @@ const Path: React.FC<Path> = (props: Path) => {
             };
             setModal(obj);
           }}
-          style={{ border: "none" }}
-          className={info ? "font-bold" : "font-normal"}
+          style={{ border: 'none' }}
+          className={info ? 'font-bold' : 'font-normal'}
           disabled
         >
-          Information
+          {t('checkout:information')}
         </button>
       </div>
-      {" > "}
+      {' > '}
       <div>
-      <button
+        <button
           onClick={() => {
             const obj = {
               info: false,
@@ -49,16 +51,16 @@ const Path: React.FC<Path> = (props: Path) => {
             };
             setModal(obj);
           }}
-          className={shipping ? "font-bold" : "font-normal"}
-          style={{ border: "none" }}
+          className={shipping ? 'font-bold' : 'font-normal'}
+          style={{ border: 'none' }}
           disabled
         >
-          Shipping
+          {t('checkout:shipping')}
         </button>
       </div>
-      {" > "}
+      {' > '}
       <div>
-      <button
+        <button
           onClick={() => {
             const obj = {
               info: false,
@@ -67,11 +69,11 @@ const Path: React.FC<Path> = (props: Path) => {
             };
             setModal(obj);
           }}
-          style={{ border: "none" }}
-          className={payment ? "font-bold" : "font-normal"}
+          style={{ border: 'none' }}
+          className={payment ? 'font-bold' : 'font-normal'}
           disabled
         >
-          Payment
+          {t('checkout:payment')}
         </button>
       </div>
     </div>

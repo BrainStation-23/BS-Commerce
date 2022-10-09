@@ -19,6 +19,7 @@ import {
 } from 'toolkit/compareSlice';
 import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
+import useTranslation from 'next-translate/useTranslation';
 
 interface SingleProduct {
   product: CustomerProduct;
@@ -28,6 +29,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [modalCmp, setModalCmp] = useState(false);
   const [modalOn, setModalOn] = useState(false);
@@ -153,7 +155,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
           const newWishlist = await userAPI.getCustomerWishlist(token);
           dispatch(storeWishlist(newWishlist!));
         } catch (error) {}
-        toast.success('Item added to wishlist', {
+        toast.success(`${t('common:item_added_to_wishlist')}`, {
           containerId: 'bottom-right',
         });
         inWishlist = true;
@@ -169,7 +171,7 @@ const Icon: React.FC<SingleProduct> = (props: SingleProduct) => {
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist', {
+        toast.error(`${t('common:item_removed_from_wishlist')}`, {
           containerId: 'bottom-right',
         });
         dispatch(deleteItemFromWishlist(productId));

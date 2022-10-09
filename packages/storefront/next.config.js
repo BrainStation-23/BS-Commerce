@@ -1,4 +1,5 @@
 const path = require('path');
+const nextTranslate = require('next-translate');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -33,7 +34,7 @@ const nextConfig = {
       'cdn.dribbble.com',
     ],
   },
-  webpack: async (config, options) => {
+  webpack: (config, options) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       include: [path.resolve(__dirname, '../atomic-components')],
@@ -53,4 +54,4 @@ const nextConfig = {
 };
 
 const withTM = require('next-transpile-modules')([]);
-module.exports = withTM(nextConfig);
+module.exports = withTM(nextTranslate(nextConfig));

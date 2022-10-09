@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import { useAppDispatch } from 'customHooks/hooks';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { setCurrencyLanguage } from 'toolkit/currencySlice';
 
 interface language {
   name: string;
@@ -6,18 +10,24 @@ interface language {
 
 const Language: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
   const languageList: language[] = [
-    { name: "English" },
-    { name: "German" },
-    { name: "French" },
+    { name: 'English' },
+    { name: 'German' },
+    { name: 'French' },
   ];
+  const dispatch = useAppDispatch();
+  const languageOnclick = async (currencyName: string) => {
+    dispatch(setCurrencyLanguage(currencyName));
+  };
   return (
-    <div className="inline-block relative">
+    <div className="relative inline-block">
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
       >
-        <span className="mr-1">English</span>
+        <span className="mr-1">{router.locale}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -32,13 +42,20 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top-7 overflow-hidden absolute text-gray-700 whitespace-nowrap bg-white border p-4 z-50 transition-all duration-500 ease-linear top ${
-          open ? "h-[110px] opacity-100" : "h-0 opacity-0"
+        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear ${
+          open ? 'h-[110px] opacity-100' : 'h-0 opacity-0'
         }`}
+        onMouseLeave={() => setOpen(false)}
       >
-        {languageList.map((language) => (
-          <li key={language.name} className="py-1">
-            {language.name}
+        {router?.locales?.map((locale) => (
+          <li
+            key={locale}
+            className="py-1"
+            onClick={() => languageOnclick(locale)}
+          >
+            <Link href={router.asPath} locale={locale}>
+              <a>{locale}</a>
+            </Link>
           </li>
         ))}
       </ul>

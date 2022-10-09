@@ -1,4 +1,5 @@
 import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -9,6 +10,8 @@ import Modal from '@/components/global/components/modal/modal';
 
 const CartTotal: NextComponentType = () => {
   const router = useRouter();
+  const { t } = useTranslation();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
@@ -46,7 +49,7 @@ const CartTotal: NextComponentType = () => {
         <div className="overflow-hidden shadow-lg">
           <div className="w-full bg-[#40a944]">
             <div className="px-6 py-1 text-base font-medium text-white">
-              CART TOTALS
+              {t('cart:cart_total').toUpperCase()}
             </div>
           </div>
           <div className="flex justify-center py-5 px-6">
@@ -55,21 +58,37 @@ const CartTotal: NextComponentType = () => {
                 <tr>
                   <td className="ml-20 border border-slate-300 px-8 py-5 md:px-8 lg:px-8 xl:px-8">
                     <span className="font-semibold sm:mr-8 md:mr-16">
-                      Subtotal
+                      {t('cart:cart_subtotal')}
                     </span>
                   </td>
                   <td className="mx-5 ml-20 border border-slate-300 px-10 py-5 text-center md:px-8 lg:px-8 xl:px-8">
-                    <p className="sm:mx-10">${totalCartPrice}</p>
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}
+                    </p>
                   </td>
                 </tr>
                 <tr>
                   <td className="ml-20 border border-slate-300 px-8 py-5">
                     <span className="font-semibold md:mr-24 xl:mr-24">
-                      Total
+                      {t('common:total')}
                     </span>
                   </td>
                   <td className="border border-slate-300 px-8 py-5 text-center">
-                    <p className="sm:mx-10">${totalCartPrice}</p>
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}{' '}
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -85,7 +104,7 @@ const CartTotal: NextComponentType = () => {
               }}
               className="bg-black text-xs hover:bg-[#40a944]"
             >
-              PROCEED TO CHECKOUT
+              {t('cart:proceed_to_checkout').toUpperCase()}
             </button>
           </div>
         </div>

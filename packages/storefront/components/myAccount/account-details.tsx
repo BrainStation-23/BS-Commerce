@@ -13,6 +13,7 @@ import { resetUserDetails, storeCustomerDetails } from 'toolkit/userSlice';
 import { resetAddress } from 'toolkit/customerAddressSlice';
 import { resetWishilist } from 'toolkit/productsSlice';
 import { resetCart } from 'toolkit/cartSlice';
+import useTranslation from 'next-translate/useTranslation';
 
 import { CustomerSchema } from './schema/customer.schema';
 
@@ -81,24 +82,27 @@ const AccountDetails: React.FC = () => {
     dispatch(storeCustomerDetails(response!.data));
     setEditable(false);
   };
+  const { t } = useTranslation();
 
   return (
     <>
       <Breadcrumb
-        title="Account"
-        pathArray={['Home', 'Account']}
+        title={t('common:account')}
+        pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
         linkArray={['/', '/myAccount']}
       />
       <div className="container mx-auto my-24 px-5 text-gray-800">
         <div className="border-b-2">
-          <span className="text-3xl font-bold">My Account</span>
+          <span className="text-3xl font-bold">
+            {t('myAccount:my_account')}
+          </span>
           <Link href="/" passHref>
             <span className="float-right text-xl font-bold">
               <a
                 onClick={() => handleLogout()}
                 className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
               >
-                Logout
+                {t('common:logout')}
               </a>
             </span>
           </Link>
@@ -127,7 +131,7 @@ const AccountDetails: React.FC = () => {
                       <div className="mt-2 flex items-center">
                         <div className="my-auto w-1/3">
                           <span className="text-2xl font-semibold">
-                            Account Details
+                            {t('myAccount:account_details')}
                           </span>
                         </div>
                         <div className="w-2/3">
@@ -136,27 +140,30 @@ const AccountDetails: React.FC = () => {
                             hidden={editable}
                             onClick={() => setEditable(true)}
                           >
-                            Edit
+                            {t('myAccount:edit')}
                           </span>
                           <button
                             hidden={!editable}
                             type="submit"
                             className="ml-2 rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                           >
-                            Save
+                            {t('myAccount:save')}
                           </button>
                           <span
                             hidden={!editable}
                             className="ml-2 cursor-pointer rounded-md bg-green-600 px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900"
                             onClick={() => setEditable(false)}
                           >
-                            Cancel
+                            {t('myAccount:cancel')}
                           </span>
                         </div>
                       </div>
                       {/* Account Form */}
                       <div className="mt-2 flex flex-col gap-y-2">
-                        <SingleDetail value={userData.name} label="Name" />
+                        <SingleDetail
+                          value={userData.name}
+                          label={t('myAccount:name')}
+                        />
                         {/* <SingleDetail
                           value={userData.firstName}
                           label="First name"
@@ -167,12 +174,12 @@ const AccountDetails: React.FC = () => {
                         /> */}
                         <SingleDetail
                           value={userData.phone}
-                          label="Phone"
+                          label={t('myAccount:phone')}
                           verified={userData.isPhoneVerified}
                         />
                         <SingleDetail
                           value={userData.email}
-                          label="Email"
+                          label={t('myAccount:email')}
                           verified={userData.isEmailVerified}
                         />
                       </div>

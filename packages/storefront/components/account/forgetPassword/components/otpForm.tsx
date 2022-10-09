@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import useTranslation from 'next-translate/useTranslation';
 import { otpSchema } from '@/components/global/schemas/forgot-password.schema';
 
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
@@ -15,6 +16,8 @@ const OtpForm: React.FC<Props> = ({
   setSubmitButtonState,
   handleOtpFormSubmit,
 }) => {
+  const { t } = useTranslation();
+
   const otpDetail = useAppSelector(
     (state) => state.persistedReducer.forgetPassword
   );
@@ -50,7 +53,7 @@ const OtpForm: React.FC<Props> = ({
                 <FieldTemplate
                   fieldType="number"
                   fieldID="otp"
-                  placeholder="OTP"
+                  placeholder={t('register:otp')}
                 />
               </div>
               <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
@@ -59,14 +62,14 @@ const OtpForm: React.FC<Props> = ({
                 <FormCancelButton />
               </div>
               <div className="text-gray-500">
-                Did not receive the OTP?{' '}
+                {t('forgot-password:otp_not_received')}{' '}
                 <button
                   onClick={() => {
                     setSubmitButtonState('username');
                   }}
                   className="hover:text-[#40a944]"
                 >
-                  Try Again.
+                  {t('forgot-password:try_again')}
                 </button>
               </div>
             </Form>

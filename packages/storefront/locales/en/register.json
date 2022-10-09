@@ -1,0 +1,11 @@
+{
+    "page_title": "Create Account",
+    "registration_form_header": "Please register using account detail below.",
+    "username": "Enter email or phone number",
+    "password": "Password",
+    "otp": "OTP",
+    "name": "Full name",
+    "return_to_store": "Return to store",
+    "signup": "Sign Up",
+    "verify": "Verify"
+}

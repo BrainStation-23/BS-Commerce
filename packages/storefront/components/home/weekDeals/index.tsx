@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { NextComponentType } from 'next';
 import { SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'customHooks/hooks';
@@ -8,6 +9,8 @@ import SwiperGrid from '@/components/global/components/swipergrid';
 import Product from '@/components/global/components/product/product';
 
 const WeekDeals: NextComponentType = () => {
+  const { t } = useTranslation();
+
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
@@ -22,8 +25,10 @@ const WeekDeals: NextComponentType = () => {
     <>
       <Container className="max-w-7xl">
         <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">Recently added our store</p>
-          <h1 className="text-bold text-4xl ">Deals Of The Weeks</h1>
+          <p className="font-serif text-lg italic">
+            {t('home:recently_added')}
+          </p>
+          <h1 className="text-bold text-4xl ">{t('home:weekly_deals')}</h1>
         </div>
         <SwiperGrid
           slidesPerViewmobile={2}

@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 
 import Container from '@/components/global/components/container';
 
 const ImageWithDescription: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <div className="flex flex-col items-center justify-center">
@@ -14,10 +17,7 @@ const ImageWithDescription: React.FC = () => {
             alt="about"
           />
         </div>
-        <h1 className="mb-5 text-xl capitalize">
-          We Are A Digital Agency Focused On Delivering Content And Utility
-          User-Experiences.
-        </h1>
+        <h1 className="mb-5 text-xl capitalize">{t('about:title')}</h1>
         <p className="mx-auto max-w-4xl text-center text-sm">
           Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus.
           Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend

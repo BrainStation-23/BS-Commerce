@@ -1,4 +1,5 @@
 import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { useRouter } from 'next/router';
 import { useAppDispatch } from 'customHooks/hooks';
@@ -21,6 +22,8 @@ const Modal: React.FC<Props> = ({
 }: Props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const handleOKClick = () => {
     setChoice(true);
     if (trigger) {
@@ -64,13 +67,13 @@ const Modal: React.FC<Props> = ({
                   onClick={handleOKClick}
                   className="rounded bg-[#eef0f1] px-6 py-2 text-black hover:bg-[#40a944]  hover:text-white sm:px-10"
                 >
-                  YES
+                  {t('common:yes').toUpperCase()}
                 </button>
                 <button
                   onClick={handleCancelClick}
                   className="rounded bg-[#eef0f1] px-4 py-2 text-black hover:bg-[#40a944] hover:text-white sm:px-8"
                 >
-                  CANCEL
+                  {t('common:cancel').toUpperCase()}
                 </button>
               </div>
             </div>
