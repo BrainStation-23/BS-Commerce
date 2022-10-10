@@ -27,14 +27,12 @@ const StoreSchema = new Schema<Store>(
     id: {
       type: String,
       default: () => randomUUID(),
-      index: true,
       unique: true,
     },
     info: {
       shopName: {
         type: String,
         unique: true,
-        index: true,
       },
       legalName: {
         type: String,
@@ -49,10 +47,7 @@ const StoreSchema = new Schema<Store>(
     address: AddressSchema,
     // store adminId
     admin: String,
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
+    isActive: Boolean,
   },
   {
     timestamps: true,

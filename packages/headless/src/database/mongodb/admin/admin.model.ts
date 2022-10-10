@@ -7,26 +7,19 @@ const AdminSchema = new Schema<Admin>(
     id: {
       type: String,
       default: () => randomUUID(),
-      index: true,
       unique: true,
     },
     info: {
-      name: {
-        type: String,
-        index: true,
-      },
+      name: String,
       email: {
         type: String,
-        index: true,
+        unique: true,
       },
       phone: String,
     },
     password: String,
     role: {
-      name: {
-        type: String,
-        default: 'Store Admin',
-      },
+      name: String,
       roleId: String,
       roleType: {
         type: String,
@@ -39,10 +32,7 @@ const AdminSchema = new Schema<Admin>(
       type: String,
       index: true,
     },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
+    isActive: Boolean,
   },
   {
     timestamps: true,
@@ -50,5 +40,6 @@ const AdminSchema = new Schema<Admin>(
   },
 );
 
+AdminSchema.index({ role: 1 });
 const AdminModel = model<Admin>('Admin', AdminSchema);
 export { AdminModel };
