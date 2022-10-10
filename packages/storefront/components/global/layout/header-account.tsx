@@ -152,7 +152,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                       {t('common:comparison')}
                     </li>
                     <Link href="/myAccount" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-primary">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary ">
                         {t('common:profile')}
                       </li>
                     </Link>
