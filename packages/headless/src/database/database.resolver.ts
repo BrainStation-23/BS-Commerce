@@ -14,6 +14,7 @@ import { ManufacturerDatabase as ManufacturerDatabaseMysql } from './mysql/manuf
 import { UserDatabase as UserDatabaseMysql } from './mysql/user/user';
 import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
+import { StoreDatabase as StoreDatabaseMongo } from './mongodb/store';
 
 type CLASS_NAME =
   | 'WISHLIST'
@@ -28,7 +29,8 @@ type CLASS_NAME =
   | 'ORDER'
   | 'BRAND'
   | 'TAGS'
-  | 'CUSTOMER';
+  | 'CUSTOMER'
+  | 'STORE';
 
 const db = dbConfig.db;
 
@@ -61,6 +63,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return OrderDatabaseMongo;
           case 'TAGS':
             return TagsDatabaseMongo;
+          case 'STORE':
+            return StoreDatabaseMongo;
 
           default:
             break;
