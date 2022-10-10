@@ -24,7 +24,6 @@ const AdminSchema = new Schema<Admin>(
       roleType: {
         type: String,
         enum: ['store', 'outlet'],
-        default: 'store',
       },
     },
     // branchId

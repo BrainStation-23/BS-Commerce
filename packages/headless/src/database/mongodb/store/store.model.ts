@@ -7,7 +7,7 @@ const AddressSchema = new Schema<StoreAddress>(
     id: {
       type: String,
       default: () => randomUUID(),
-      index: true,
+      unique: true,
     },
     addressLine1: String,
     addressLine2: String,
