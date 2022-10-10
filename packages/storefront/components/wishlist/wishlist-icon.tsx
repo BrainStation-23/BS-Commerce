@@ -1,20 +1,18 @@
-
 interface Props {
   height: string;
   width: string;
 }
 
-const WishlistIcon: React.FC<Props> = ({ height, width}) => {
+const WishlistIcon: React.FC<Props> = ({ height, width }) => {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={`${height} ${width}`}
-        fill="green"
+        className={`${height} ${width} fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary`}
         viewBox="0 0 24 24"
-        stroke="green"
         strokeWidth="1"
-        data-tooltip-target="tooltip-right" data-tooltip-placement="right"
+        data-tooltip-target="tooltip-right"
+        data-tooltip-placement="right"
       >
         <path
           strokeLinecap="round"

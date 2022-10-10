@@ -291,7 +291,7 @@ const PaymentDetails: NextComponentType = () => {
                     </div>
                     {formikprops.values.paymentMethod === 'Credit card' ? (
                       <div className="mt-5 rounded border border-gray-300">
-                        <div className="bg-gray-100">
+                        <div className="bg-gray-100 dark:bg-dark_bg">
                           <div className="p-4">
                             <FieldTemplate
                               label={t('checkout:card_number')}
@@ -315,7 +315,7 @@ const PaymentDetails: NextComponentType = () => {
                                     type="month"
                                     id="expirationDate"
                                     name="expirationDate"
-                                    className={` peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4  pb-2.5 pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0`}
+                                    className={`peer mb-3 block w-full appearance-none rounded border border-gray-300 px-4 pb-2.5  pt-5 text-sm text-gray-900 focus:border-2 focus:border-black focus:outline-none focus:ring-0 dark:bg-dark_bg`}
                                     placeholder=" "
                                   />
                                   <label
@@ -517,7 +517,7 @@ const PaymentDetails: NextComponentType = () => {
                   {/* <Link href="/submit" passHref> */}
                   <button
                     type="submit"
-                    className="w-full rounded bg-black p-3 text-sm text-white sm:w-full md:w-24"
+                    className="w-full rounded bg-black p-3 text-sm text-white dark:bg-dark_primary sm:w-full md:w-24"
                   >
                     {t('checkout:pay_now')}
                   </button>

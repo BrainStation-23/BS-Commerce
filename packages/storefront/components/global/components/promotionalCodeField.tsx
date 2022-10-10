@@ -21,7 +21,7 @@ const PromotionalCodeField: React.FC<Properties> = (props) => {
         className={`mt-3 flex h-12 w-full flex-row items-center justify-between rounded border border-slate-200 text-sm`}
       >
         <input
-          className="ml-4 w-full bg-white focus:outline-none"
+          className="ml-4 w-full bg-white focus:outline-none dark:bg-dark_bg"
           type="search"
           name="promoCode"
           placeholder={`${props.placeholder}`}

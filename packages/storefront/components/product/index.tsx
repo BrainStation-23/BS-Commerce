@@ -371,7 +371,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     {t('product-details:availability')}:
                   </span>
                   {isAvailable ? (
-                    <span className="ml-2 mb-1 mt-2 text-sm text-primary">
+                    <span className="ml-2 mb-1 mt-2 text-sm text-primary dark:text-dark_primary">
                       {/*product?.stock*/} Available
                     </span>
                   ) : (
@@ -485,7 +485,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className=" flex flex-wrap">
                   <button
                     disabled={!isAvailable}
-                    className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-dark_primary dark:hover:bg-primary dark:hover:text-white md:px-32	"
+                    className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-dark_primary dark:hover:bg-dark_primary dark:hover:text-white md:px-32	"
                     onClick={toCart}
                   >
                     <span className="mx-auto">

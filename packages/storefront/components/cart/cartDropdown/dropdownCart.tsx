@@ -183,7 +183,7 @@ const CartDropdown: NextComponentType = () => {
           <div className="hover:text-primary">
             <button
               type="button"
-              className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-primary  dark:text-dark_text  dark:hover:text-primary "
+              className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-primary  dark:text-dark_text  dark:hover:text-dark_primary "
               onClick={(e) => setCartTotal(!cartTotal)}
             >
               {cartIcon}

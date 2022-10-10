@@ -22,7 +22,9 @@ const Shipping: React.FC<Props> = (props: Props) => {
         <div className="mx-auto mt-5 box-border divide-y-2 rounded-md border-2 p-4 text-center">
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333]">{t('checkout:contact')}</p>
+              <p className="text-sm text-[#333333] dark:text-dark_text">
+                {t('checkout:contact')}
+              </p>
               <p className="text-sm">{shippingInfo?.phoneNumber}</p>
             </div>
             <button
@@ -43,7 +45,9 @@ const Shipping: React.FC<Props> = (props: Props) => {
 
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333]">{t('checkout:ship_to')}</p>
+              <p className="text-sm text-[#333333] dark:text-dark_text">
+                {t('checkout:ship_to')}
+              </p>
               <p className="text-sm">{shippingInfo?.addressLine1}</p>
             </div>
             <button
@@ -63,9 +67,11 @@ const Shipping: React.FC<Props> = (props: Props) => {
           </div>
         </div>
 
-        <p className="pt-7 text-lg font-normal">{t('checkout:shipping_method')}</p>
+        <p className="pt-7 text-lg font-normal">
+          {t('checkout:shipping_method')}
+        </p>
 
-        <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-[#333333] hover:bg-white">
+        <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-[#333333] hover:bg-white dark:text-dark_text dark:hover:text-black">
           <p>{t('checkout:standard')}</p>
           <p className="ml-5 font-medium">{t('checkout:free')}</p>
         </div>
@@ -80,7 +86,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
                   pay: true,
                 });
               }}
-              className="w-full rounded-md bg-[#000000] py-4 px-6 text-sm text-white"
+              className="w-full rounded-md bg-[#000000] py-4 px-6 text-sm text-white dark:bg-dark_primary"
             >
               {t('checkout:continue_to_payment')}
             </button>
