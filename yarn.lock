@@ -16642,7 +16642,7 @@ next-themes@^0.2.1:
 
 next-translate@^1.6.0:
   version "1.6.0"
-  resolved "https://registry.npmjs.org/next-translate/-/next-translate-1.6.0.tgz"
+  resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-1.6.0.tgz#28329d9970030c573c529a1a6d5c6b4e75146164"
   integrity sha512-rmRBYOwPHvokN+5uH3O/SZqfRUVORLkgt/097mSaq3+CWcEtXEjkVrfBZpYwZ8W3og4QVd+uphYX//qegnIbRg==
 
 next-transpile-modules@^9.0.0:
