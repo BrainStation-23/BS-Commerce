@@ -10,7 +10,11 @@ export class Admin {
     cover: string;
   };
   password: string;
-  roles: string[];
+  role: {
+    name: string;
+    roleId: string;
+    roleType: string;
+  };
   // branchId
   branch: string;
   isActive: boolean;

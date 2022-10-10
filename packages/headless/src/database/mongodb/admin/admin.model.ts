@@ -22,7 +22,18 @@ const AdminSchema = new Schema<Admin>(
       phone: String,
     },
     password: String,
-    roles: [String],
+    role: {
+      name: {
+        type: String,
+        default: 'Store Admin',
+      },
+      roleId: String,
+      roleType: {
+        type: String,
+        enum: ['store', 'outlet'],
+        default: 'store',
+      },
+    },
     // branchId
     branch: {
       type: String,
