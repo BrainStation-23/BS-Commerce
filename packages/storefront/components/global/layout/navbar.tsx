@@ -116,7 +116,7 @@ const Navbar: React.FC<Props> = ({
             <ChevronDownIcon />
             {categoryList ? (
               <div
-                className={`translate-y absolute top-[40px] left-0 z-40 flex w-full origin-top flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 lg:top-[48px] lg:w-56  ${
+                className={`translate-y absolute top-[40px] left-0 z-40 flex w-full origin-top flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 dark:bg-dark_bg dark:text-dark_text lg:top-[48px] lg:w-56  ${
                   showAllCategory
                     ? `h-auto scale-y-100 lg:h-60`
                     : 'h-0 scale-y-0' //h-[350px]
@@ -152,13 +152,13 @@ const Navbar: React.FC<Props> = ({
 
                   {menu.hasSubmenu && (
                     <div
-                      className={`absolute hidden overflow-hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in lg:group-hover:inline-block`}
+                      className={`absolute hidden overflow-hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in dark:bg-dark_bg dark:text-dark_text lg:group-hover:inline-block`}
                     >
                       <ul className="">
                         {menu.submenu?.map((menu) => (
                           <li
                             key={menu.name}
-                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary dark:text-black dark:hover:text-primary dark:hover:text-dark_primary"
+                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary dark:hover:text-dark_primary"
                           >
                             <Link href={menu.link}>
                               <a>{menu.name}</a>

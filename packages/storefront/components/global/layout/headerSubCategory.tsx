@@ -91,7 +91,7 @@ const HeaderSubCategory: React.FC<Props> = ({
           <div className="hidden lg:block">
             {category.subCategories ? (
               <div
-                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white dark:bg-dark_bg dark:text-dark_text shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
                   showSubCategory ? 'scale-x-100' : 'scale-x-0'
                 }`}
               >

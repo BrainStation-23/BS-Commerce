@@ -42,7 +42,7 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear ${
+        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white dark:bg-dark_bg dark:text-dark_text p-4 text-gray-700 transition-all duration-500 ease-linear ${
           open ? 'h-[110px] opacity-100' : 'h-0 opacity-0'
         }`}
         onMouseLeave={() => setOpen(false)}
