@@ -210,7 +210,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                 ${
                   wishlistItems?.items?.length! > 0 && token !== ''
                     ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
-                    : 'fill-white stroke-white dark:stroke-white  '
+                    : 'fill-white stroke-dark_bg dark:stroke-white  '
                 }`}
                 // fill={
                 //   wishlistItems?.items?.length! > 0 && token !== ''

@@ -115,7 +115,7 @@ const Footer: NextComponentType = () => {
                 name="search"
                 placeholder={`email@example.com`}
               />
-              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-primary p-4 transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
+              <div className="flex h-12 w-24  mr-[-2px] cursor-pointer justify-center rounded-r-full bg-primary p-4 transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
                 <button type="submit" className="text-white">
                   {t('common:subscribe')}
                 </button>
