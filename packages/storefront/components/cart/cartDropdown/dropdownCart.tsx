@@ -11,6 +11,7 @@ import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';
 import Image from 'next/image';
 import { userAPI } from 'APIs';
+import useTranslation from 'next-translate/useTranslation';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -20,10 +21,12 @@ const CartDropdown: NextComponentType = () => {
   const [cartTotal, setCartTotal] = useState(false);
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
+  const { t } = useTranslation();
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
@@ -134,7 +137,13 @@ const CartDropdown: NextComponentType = () => {
                       </span>
                       X &nbsp;
                       <p className="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                        $ {cartData?.product?.info?.price}
+                        {Intl.NumberFormat(
+                          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                          {
+                            style: 'currency',
+                            currency: `${currency.currencyName}`,
+                          }
+                        ).format(cartData?.product?.info?.price!)}
                       </p>
                     </div>
                   </div>
@@ -209,7 +218,14 @@ const CartDropdown: NextComponentType = () => {
                     <div className="flex justify-between border-x-2 p-6">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
-                        ${totalCartPrice}
+                        {Intl.NumberFormat(
+                          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                          {
+                            style: 'currency',
+                            currency: `${currency.currencyName}`,
+                          }
+                        ).format(totalCartPrice)}
+                        {/* ${totalCartPrice} */}
                       </span>
                     </div>
                     <div className="border-x-2 px-6 py-2">
@@ -222,7 +238,7 @@ const CartDropdown: NextComponentType = () => {
                               setCartTotal(!cartTotal);
                             }}
                           >
-                            VIEW CART
+                            {t('common:view_cart')}
                           </button>
                         </a>
                       </Link>
@@ -232,7 +248,7 @@ const CartDropdown: NextComponentType = () => {
                         className="h-10 w-full bg-slate-300 hover:bg-[#40A944] hover:text-white"
                         onClick={handleClickProceed}
                       >
-                        CHECKOUT
+                        {t('common:checkout')}
                       </button>
                     </div>
                   </>

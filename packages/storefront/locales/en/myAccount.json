@@ -1,0 +1,18 @@
+{
+  "edit": "Edit",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "save": "Save",
+  "cancel": "Cancel",
+  "order_details": "Order Details",
+  "delivery_address": "Delivery Address",
+  "account_details": "Account Details",
+  "my_account": "My Account",
+  "address_line": "Address Line",
+  "building_name": "Flat/Building Name",
+  "city": "City",
+  "post_code": "Post Code",
+  "details": "Details",
+  "phone_number": "Phone Number"
+}

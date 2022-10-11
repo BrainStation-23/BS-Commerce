@@ -1,16 +1,20 @@
 import type { NextComponentType } from 'next';
 import { Router, useRouter } from 'next/router';
 import { FC } from 'react';
+import useTranslation from 'next-translate/useTranslation';
+
 const ProductSort: FC = () => {
+  const { t } = useTranslation();
+
   const sortOptions = [
     // { id: Math.random() * 100, meta: { name: 'Alphabetically' } },
     {
       id: Math.random() * 100,
-      meta: { name: 'Price Low to High', value: 'asc' },
+      meta: { name: t('collections:price_low_to_high'), value: 'asc' },
     },
     {
       id: Math.random() * 100,
-      meta: { name: 'Price High to Low', value: 'desc' },
+      meta: { name: t('collections:price_high_to_low'), value: 'desc' },
     },
   ];
   const router = useRouter();
@@ -74,7 +78,7 @@ const ProductSort: FC = () => {
           <div className="flex justify-between">
             <div className="flex  py-2">
               <label className="grid content-center justify-center px-4">
-                Sort By:
+                {t('collections:sortBy')}:
               </label>
               <select
                 id="selectSortOptions"

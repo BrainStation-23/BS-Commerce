@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import { SwiperSlide } from 'swiper/react';
+import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'customHooks/hooks';
 
 import Container from '@/components/global/components/container';
@@ -11,6 +12,8 @@ import { CustomerProduct } from '@bs-commerce/models';
 const TrendingProducts = () => {
   let [filterKey, setFilterKey] = useState('smartphones');
   let [filteredProduct, setProducts] = useState<CustomerProduct[]>([]);
+
+  const { t } = useTranslation();
 
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
@@ -41,8 +44,10 @@ const TrendingProducts = () => {
     <>
       <Container className="max-w-6xl">
         <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">Recently added our store</p>
-          <h1 className="text-bold text-4xl ">Trending Products</h1>
+          <p className="font-serif text-lg italic">
+            {t('home:recently_added')}
+          </p>
+          <h1 className="text-bold text-4xl ">{t('home:trending')}</h1>
         </div>
         {/* <ul className="m-5 flex justify-center text-base font-semibold ">
           <li className="mr-1 md:mr-3">

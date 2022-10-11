@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { CustomerProduct } from '@bs-commerce/models';
+import { useAppSelector } from 'customHooks/hooks';
 
 interface SingleProduct {
   product: CustomerProduct;
@@ -9,6 +10,7 @@ interface SingleProduct {
 
 const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   return (
     <div className="py-4 text-center">
@@ -25,7 +27,11 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
           : ''}
       </p>
       <div className="text-lg font-semibold text-green-600">
-        {product?.info?.price}
+        {Intl.NumberFormat(
+          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+          { style: 'currency', currency: `${currency.currencyName}` }
+        ).format(product?.info?.price)}
+        {/* {/* {product?.info?.price} */}
       </div>
     </div>
   );

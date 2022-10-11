@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { Field, Form, Formik } from 'formik';
+import useTranslation from 'next-translate/useTranslation';
 
 import { userAPI } from 'APIs';
 import { Customer, CustomerAddress } from '@bs-commerce/models';
@@ -14,6 +15,8 @@ interface props {
 }
 const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
   const token = useAppSelector(
     (state) => state.persistedReducer.auth.access_token
   );
@@ -77,7 +80,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                   <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                     <div>
                       <label htmlFor="firstName" className="text-sm">
-                        First Name
+                        {t('manage-address:firstname')}
                       </label>
                       <br />
                       <Field
@@ -89,7 +92,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     </div>
                     <div>
                       <label htmlFor="lastName" className="text-sm">
-                        Last Name
+                        {t('manage-address:lastname')}
                       </label>
                       <br />
                       <Field
@@ -105,7 +108,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                 <div className="mb-3">
                   <div className="grid-cols-1">
                     <label htmlFor="addressLine1" className="text-sm">
-                      Address 1
+                      {t('manage-address:address1')}
                     </label>
                     <br />
                     <Field
@@ -120,7 +123,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                 <div className="mb-3">
                   <div className="grid-cols-1">
                     <label htmlFor="addressLine2" className="text-sm">
-                      Address 2
+                      {t('manage-address:address2')}
                     </label>
                     <br />
                     <Field
@@ -134,7 +137,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
 
                 <div className="mb-3">
                   <label htmlFor="state" className="text-sm">
-                    City
+                    {t('manage-address:city')}
                   </label>
                   <br />
                   <Field
@@ -148,7 +151,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                 <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                   <div className="mb-3">
                     <label htmlFor="postCode" className="text-sm">
-                      Postal/Zip Code
+                      {t('manage-address:postcode')}
                     </label>
                     <br />
                     <Field
@@ -160,7 +163,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="phone" className="text-sm">
-                      Phone
+                      {t('manage-address:phone')}
                     </label>
                     <br />
                     <Field
@@ -173,7 +176,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="tag" className="text-sm">
-                    Enter a label for effective delivery:
+                    {t('manage-address:tag')}
                   </label>
                   <br />
                   <Field
@@ -181,7 +184,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
                     id="tag"
                     name="tag"
-                    placeholder="E.g. Home, Office, Others etc."
+                    placeholder={t('manage-address:example')}
                   />
                 </div>
 
@@ -249,7 +252,9 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                   type="submit"
                   className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-32 lg:w-32 xl:w-32"
                 >
-                  {user?.firstName ? 'Save ' : 'Add '} Address
+                  {user?.firstName
+                    ? `${t('manage-address:save_address')}`
+                    : `${t('manage-address:add_address')}`}
                 </button>
                 <br />
               </Form>
@@ -258,7 +263,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
         </Formik>
       </div>
       <button type="button" onClick={() => cancelForm('')}>
-        Cancel
+        {t('common:cancel')}
       </button>
     </>
   );

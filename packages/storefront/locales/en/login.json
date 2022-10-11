@@ -1,0 +1,9 @@
+{
+    "login_form_header": "Please login using account detail below.",
+    "username": "Enter email or phone number",
+    "password": "Password",
+    "signin": "Sign In",
+    "forgot_password": "Forgot your password?",
+    "create_account": "Create account",
+    "social_login": "or sign in with"
+}

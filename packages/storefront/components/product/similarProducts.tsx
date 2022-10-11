@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 import { SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'customHooks/hooks';
@@ -11,6 +12,8 @@ import Icon from '@/components/global/components/icon';
 import { CustomerProduct } from '@bs-commerce/models';
 
 const SimilarProducts: NextComponentType = () => {
+  const { t } = useTranslation();
+
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
@@ -24,7 +27,9 @@ const SimilarProducts: NextComponentType = () => {
     <>
       <Container className="max-w-7xl">
         <div className="mb-6 text-center">
-          <h1 className="text-bold text-4xl ">Similar Products</h1>
+          <h1 className="text-bold text-4xl ">
+            {t('product-details:similar_products')}
+          </h1>
         </div>
         <SwiperGrid
           slidesPerViewmobile={2}

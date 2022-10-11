@@ -3,14 +3,18 @@ import React, { FC } from 'react';
 import { Input } from '@/components/global/components/input';
 import { Textarea } from '@/components/global/components/textarea';
 import Container from '@/components/global/components/container';
+import useTranslation from 'next-translate/useTranslation';
 
 const ContactArea: FC = () => {
+  const { t } = useTranslation();
   return (
     <Container>
       <div className="flex flex-wrap">
         <div className="w-full pr-5 md:w-2/4">
-          <h3 className="mb-5 text-xl font-semibold capitalize">Contact Us</h3>
-          <p className="mb-5 text-sm">Your content here</p>
+          <h3 className="mb-5 text-xl font-semibold capitalize">
+            {t('contact:contact_us')}
+          </h3>
+          <p className="mb-5 text-sm">{t('contact:your_content_here')}</p>
           <ul className="m-0 list-none p-0">
             <li className="flex items-center border-t border-solid border-inherit py-3">
               <svg
@@ -27,7 +31,7 @@ const ContactArea: FC = () => {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              Address : No 40 Baria Sreet 133/2 NewYork City
+              {t('contact:address')} : No 40 Baria Sreet 133/2 NewYork City
             </li>
             <li className="border-t border-solid border-inherit py-3">
               <svg
@@ -44,7 +48,7 @@ const ContactArea: FC = () => {
                   d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                 />
               </svg>
-              E-mail: info@yourdomain.com
+              {t('common:email')}: info@yourdomain.com
             </li>
             <li className="border-t border-solid border-inherit py-3">
               <svg
@@ -67,32 +71,32 @@ const ContactArea: FC = () => {
         </div>
         <div className="w-full md:w-2/4">
           <h3 className="my-5 text-xl font-semibold capitalize md:mt-0">
-            Tell Us Your Project
+            {t('contact:tell_Us_your_project')}
           </h3>
           <form method="post" action="/">
             <Input
-              label="Name"
+              label={t('contact:name')}
               value=""
               type="text"
               name="name"
               onChangeHandler={() => {}}
             />
             <Input
-              label="Email"
+              label={t('contact:email')}
               value=""
               type="email"
               name="email"
               onChangeHandler={() => {}}
             />
             <Input
-              label="Subject"
+              label={t('contact:subject')}
               value=""
               type="text"
               name="subject"
               onChangeHandler={() => {}}
             />
             <Textarea
-              label="Message"
+              label={t('contact:message')}
               value=""
               name="message"
               onChangeHandler={() => {}}
@@ -101,7 +105,7 @@ const ContactArea: FC = () => {
               className="p h-10 rounded bg-black px-10 font-normal capitalize text-white"
               type="submit"
             >
-              Send
+              {t('contact:send')}
             </button>
           </form>
         </div>

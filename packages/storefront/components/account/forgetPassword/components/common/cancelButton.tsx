@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 const FormCancelButton = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div
@@ -12,7 +15,7 @@ const FormCancelButton = () => {
             id="cancelForgetPassword"
             className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500"
           >
-            Cancel
+            {t('common:cancel')}
           </a>
         </Link>
       </div>

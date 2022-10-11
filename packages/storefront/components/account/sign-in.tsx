@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
@@ -30,8 +31,10 @@ import { storeCompare } from 'toolkit/compareSlice';
 
 const Signin: NextComponentType = () => {
   const dispatch = useAppDispatch();
-  const [loader, setLoader] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
+
+  const [loader, setLoader] = useState(false);
 
   let username = '';
   let loggedInUsingEmail = false;
@@ -94,8 +97,8 @@ const Signin: NextComponentType = () => {
   return (
     <>
       <Breadcrumb
-        title="Account"
-        pathArray={['Home', 'Account']}
+        title={`${t('common:account')}`}
+        pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
         linkArray={['/', '/account/sign-in']}
       />
       <div className="flex flex-wrap justify-center">
@@ -107,9 +110,11 @@ const Signin: NextComponentType = () => {
             background: '#f3f3f3',
           }}
         >
-          <h2 className="mx-3 text-center text-3xl text-gray-800">Login</h2>
+          <h2 className="mx-3 text-center text-3xl text-gray-800">
+            {t('common:login')}
+          </h2>
           <p className="mx-5 mt-2 mb-6 text-center text-gray-500">
-            Please login using account detail below.
+            {t('login:login_form_header')}
           </p>
           <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
@@ -150,7 +155,7 @@ const Signin: NextComponentType = () => {
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="email"
                         name="username"
-                        placeholder="Enter email or phone number"
+                        placeholder={t('login:username')}
                       />
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="username" />
@@ -163,7 +168,7 @@ const Signin: NextComponentType = () => {
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder={t('login:password')}
                       />
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="password" />
@@ -172,9 +177,9 @@ const Signin: NextComponentType = () => {
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
                         type="submit"
-                        className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
+                        className="my-2 w-full rounded bg-green-600/100 py-2 capitalize text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
                       >
-                        Sign In
+                        {t('login:signin')}
                       </button>
 
                       <div
@@ -183,7 +188,7 @@ const Signin: NextComponentType = () => {
                       >
                         <Link href="/account/forgot-password">
                           <a className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500">
-                            Forgot your password?
+                            {t('login:forgot_password')}
                           </a>
                         </Link>
                       </div>
@@ -199,12 +204,12 @@ const Signin: NextComponentType = () => {
                     data-testid="create-account-page"
                     className="text-decoration-none font-weight-light text-gray-600 hover:text-green-600/100"
                   >
-                    Create account
+                    {t('login:create_account')}
                   </a>
                 </Link>
               </div>
               <div className="mt-3">
-                <p className="ml-1 text-gray-600">or sign in with</p>
+                <p className="ml-1 text-gray-600">{t('login:social_login')}</p>
               </div>
               <div className="flex flex-wrap">
                 <button className="mx-1 mt-3 flex flex-wrap">
@@ -219,7 +224,7 @@ const Signin: NextComponentType = () => {
                   <p className="ml-1 mt-1 text-xs">Google</p>
                 </button>
                 <div className="mt-3">
-                  <p className="ml-1 text-gray-600">or</p>
+                  <p className="ml-1 text-gray-600">{t('common:or')}</p>
                 </div>
                 <button className="mx-1 mt-3 flex flex-wrap">
                   <FacebookLogo />

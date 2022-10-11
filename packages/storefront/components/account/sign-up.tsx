@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -22,6 +23,7 @@ import WithoutAuth from '@/components/auth/withoutAuth';
 const Signup = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -135,8 +137,8 @@ const Signup = () => {
         />
       )} */}
       <Breadcrumb
-        title="Create Account"
-        pathArray={['Home', 'Create Account']}
+        title={t('register:page_title')}
+        pathArray={[`${t('common:home')}`, `${t('register:page_title')}`]}
         linkArray={['/', '/account/sign-up']}
       />
       <div className="flex flex-wrap justify-center">
@@ -145,10 +147,10 @@ const Signup = () => {
           style={{ width: ' 35rem ', height: 'auto', background: '#f3f3f3' }}
         >
           <h2 className="mx-3 text-center text-3xl text-gray-800">
-            Create Account
+            {t('register:page_title')}
           </h2>
           <p className="mx-5 mt-2 mb-6 text-center text-gray-500">
-            Please Register using account detail below.
+            {t('register:registration_form_header')}
           </p>
           <div className="m-5 my-3 sm:m-5 md:mx-10 lg:mx-10 xl:mx-10">
             <Formik
@@ -193,7 +195,7 @@ const Signup = () => {
                         className="w-full p-2 placeholder-gray-600 outline-0"
                         id="username"
                         name="username"
-                        placeholder="Email or phone number"
+                        placeholder={t('register:username')}
                       />
                       <div className="errMsg text-red-600">
                         <ErrorMessage name="username" />
@@ -207,7 +209,7 @@ const Signup = () => {
                           className="w-full p-2 placeholder-gray-600 outline-0"
                           id="otp"
                           name="otp"
-                          placeholder="OTP"
+                          placeholder={t('register:otp')}
                         />
                       </div>
 
@@ -238,7 +240,7 @@ const Signup = () => {
                             }
                           ></div>
                         </button>
-                        <p>Verify</p>
+                        <p>{t('register:verify')}</p>
                       </div>
                     </div>
                     <div className="errMsg mb-4 text-red-600">
@@ -253,7 +255,7 @@ const Signup = () => {
                             className="w-full p-2 placeholder-gray-600 outline-0"
                             id="name"
                             name="name"
-                            placeholder="Full name"
+                            placeholder={t('register:name')}
                           />
                           <div className="errMsg text-red-600">
                             <ErrorMessage name="name" />
@@ -266,7 +268,7 @@ const Signup = () => {
                             className="w-full p-2 placeholder-gray-600 outline-0"
                             id="password"
                             name="password"
-                            placeholder="Password"
+                            placeholder={t('register:password')}
                             required
                           />
                           <div className="errMsg text-red-600">
@@ -290,7 +292,7 @@ const Signup = () => {
                       }}
                       className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black"
                     >
-                      Sign Up
+                      {t('register:signup')}
                     </button>
                   </Form>
                 );
@@ -299,7 +301,7 @@ const Signup = () => {
             <div className="text-decoration-none my-2">
               <Link href="/">
                 <a className="text-decoration-none font-weight-light text-gray-800">
-                  Return to Store
+                  {t('register:return_to_store')}
                 </a>
               </Link>
             </div>

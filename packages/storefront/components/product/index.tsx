@@ -24,6 +24,7 @@ import {
   storeProductsToComparePublic,
 } from 'toolkit/compareSlice';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/components/product/product-image-slider';
@@ -41,6 +42,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 }: SingleProduct) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
@@ -197,7 +199,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         // console.log(newList);
         dispatch(storeWishlist(newList!));
         clicked = true;
-        toast.success('Item added to wishlist', {
+        toast.success(`${t('common:item_added_to_wishlist')}`, {
           containerId: 'bottom-right',
         });
       } catch (error) {
@@ -216,7 +218,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     if (token) {
       try {
         await userAPI.deleteWishlistItem(productId);
-        toast.error('Item removed from wishlist', {
+        toast.error(`${t('common:item_removed_from_wishlist')}`, {
           containerId: 'bottom-right',
         });
         dispatch(deleteItemFromWishlist(productId));
@@ -284,7 +286,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       )}
       <Breadcrumb
         title={product?.info?.name}
-        pathArray={['Home', product.info?.name]}
+        pathArray={[`${t('common:home')}`, product.info?.name]}
         linkArray={['/', '/product' + product.id]}
       />
 
@@ -349,13 +351,15 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <div className="mb-1 mt-2 flex"></div>
                 <div className="ml-1 mb-1 mt-2 text-gray-900">
                   <span className="text-sm">
-                    Manufacturer:{' '}
+                    {t('product-details:manufacturer')}:{' '}
                     {product?.manufacturer?.name
                       ? product?.manufacturer?.name
                       : '---'}
                   </span>
                   <span className="ml-2 mr-2 text-sm">|</span>
-                  <span className="text-sm">SKU: {product?.info?.sku}</span>
+                  <span className="text-sm">
+                    {t('product-details:sku')}: {product?.info?.sku}
+                  </span>
                 </div>
                 <div className="flex">
                   <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-green-600">
@@ -364,7 +368,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 </div>
                 <div className="flex">
                   <span className="ml-1 mb-1 mt-2 text-sm text-gray-900">
-                    Availability:
+                    {t('product-details:availability')}:
                   </span>
                   {isAvailable ? (
                     <span className="ml-2 mb-1 mt-2 text-sm text-green-600">
@@ -436,7 +440,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
                 <div className="flex text-black">
                   <div className="title-text flex items-center lg:mx-2">
-                    Quantity
+                    {t('product-details:quantity')}
                     <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
                       <button
                         onClick={() =>
@@ -467,7 +471,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       type="button"
                       data-modal-toggle="popup-modal"
                     >
-                      Add to cart
+                      {t('product-details:add_to_cart')}
                     </button>
                   ) : (
                     <button
@@ -484,7 +488,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     className="mt-5 ml-1 flex w-full items-center justify-center  rounded bg-black py-2 text-white transition duration-200 ease-out hover:bg-[#40a944] hover:ease-in md:px-32	"
                     onClick={toCart}
                   >
-                    <span className="mx-auto">Buy Now</span>
+                    <span className="mx-auto">
+                      {t('product-details:buy_now')}
+                    </span>
                   </button>
                 </div>
                 <div className="text-grey-700 ml-1">
@@ -498,7 +504,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                       // disabled={clicked ? true : false}
                       className="mt-10 hover:text-green-600"
                     >
-                      {clicked ? 'x Remove from wishlist' : '+ Add to wishlist'}
+                      {clicked
+                        ? `${t('product-details:remove_from_wishlist')}`
+                        : `${t('product-details:add_to_wishlist')}`}
                     </button>
                     <div
                       className="mt-10 underline hover:text-green-600"
@@ -516,7 +524,9 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                         handleAddToCompare();
                       }}
                     >
-                      {inCompareList ? '+ Show in compare list' : '+ Compare'}
+                      {inCompareList
+                        ? `${t('product-details:show_in_compare')}`
+                        : `${t('product-details:compare')}`}
                     </button>
                   </div>
                   {/* <div>

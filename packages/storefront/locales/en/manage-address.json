@@ -1,0 +1,16 @@
+{
+    "addresses": "Addresses",
+    "return_to_account_details": "Return to Account Details",
+    "your_addresses": "Your Addresses",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "address1": "Address 1",
+    "address2": "Address 2",
+    "city": "City",
+    "postcode": "Postal/Zip Code",
+    "phone": "Phone",
+    "tag": "Enter a label for effective delivery",
+    "add_address": "Add Address",
+    "save_address": "Save Address",
+    "example": "E.g. Home, Office, Others etc."
+}

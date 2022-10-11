@@ -1,10 +1,12 @@
-import { NextComponentType } from "next";
+import { NextComponentType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 const ShopNowIcon: NextComponentType = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <p className="uppercase flex flex row text-extrabold text-1xl">
-        Shop now
+      <p className="row text-extrabold text-1xl flex flex uppercase">
+        {t('home:shop_now')}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

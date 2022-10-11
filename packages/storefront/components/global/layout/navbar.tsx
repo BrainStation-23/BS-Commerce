@@ -4,8 +4,9 @@ import {
   PhoneIcon,
   XCircleIcon,
 } from '../layout/headerIcons';
-import { MenuData } from '../layout/headerData';
+// import { MenuData } from '../layout/headerData';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'customHooks/hooks';
 import HeaderCategory from './headerCategory';
 
@@ -21,6 +22,18 @@ interface Props {
   showUser: boolean;
 }
 
+interface menuLink {
+  name: string;
+  link: object;
+  hasSubmenu: boolean;
+  submenu?: subLink[];
+}
+
+interface subLink {
+  name: string;
+  link: string;
+}
+
 const Navbar: React.FC<Props> = ({
   showUser,
   stickyClass,
@@ -28,7 +41,57 @@ const Navbar: React.FC<Props> = ({
   showAllCategory,
   toggleOpen,
 }: Props) => {
-  const customerNumber = '+880 1674314359';
+  const { t } = useTranslation();
+  const customerNumber = `${t('common:contact_number')}`;
+
+  const MenuData: menuLink[] = [
+    {
+      name: `${t('common:home')}`,
+      link: { pathname: '/' },
+      hasSubmenu: false,
+      submenu: [
+        { name: 'Home - 1', link: '/' },
+        { name: 'Home - 2', link: '/' },
+        { name: 'Home - 3', link: '/' },
+      ],
+    },
+    {
+      name: `${t('common:shop')}`,
+      link: { pathname: '/' },
+      hasSubmenu: true,
+      submenu: [
+        { name: `${t('common:cucumber')}`, link: '/' },
+        { name: `${t('common:papaya')}`, link: '/' },
+        { name: `${t('common:mango')}`, link: '/' },
+      ],
+    },
+    {
+      name: `${t('common:products')}`,
+      link: { pathname: '/' },
+      hasSubmenu: true,
+      submenu: [
+        { name: 'Simple Product', link: '/' },
+        { name: 'Variable Product', link: '/' },
+        { name: 'Affiliate Product', link: '/' },
+      ],
+    },
+    { name: `${t('common:blog')}`, link: { pathname: '/' }, hasSubmenu: false },
+    {
+      name: `${t('common:pages')}`,
+      link: { pathname: '/' },
+      hasSubmenu: true,
+      submenu: [
+        { name: `${t('common:about_us')}`, link: '/about' },
+        { name: `${t('common:services')}`, link: '/service' },
+        { name: `${t('common:faq')}`, link: '/faq' },
+      ],
+    },
+    {
+      name: `${t('common:contact_us')}`,
+      link: { pathname: '/contact' },
+      hasSubmenu: false,
+    },
+  ];
 
   const categoryList = useAppSelector(
     (state) => state.persistedReducer.category.categoryList
@@ -121,7 +184,7 @@ const Navbar: React.FC<Props> = ({
                 <div className="flex flex-col text-sm">
                   <span>{customerNumber}</span>
                   <span className="flex flex-row items-center gap-x-1">
-                    Customer Support
+                    {t('common:customer_support')}
                   </span>
                 </div>
               </>
