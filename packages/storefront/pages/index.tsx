@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const reqCookie = context.req.headers.cookie;
   const token = reqCookie === undefined ? undefined : cookie.parse(reqCookie);
   const allProducts = await userAPI.getPublicProducts();
-  
+
   const featuredProducts = await userAPI.getFeaturedProducts();
   const responseCategory = await userAPI.getCategoryList();
   // console.log(responseCategory?.data);

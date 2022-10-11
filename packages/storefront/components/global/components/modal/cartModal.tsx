@@ -69,7 +69,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
               <span className="mb-2 text-sm sm:mb-4 sm:text-base">
                 {product?.info.name}
               </span>
-              <div className="mb-3 flex flex-row text-sm text-green-600 sm:mb-6 sm:text-base">
+              <div className="mb-3 flex flex-row text-sm text-primary sm:mb-6 sm:text-base">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="mr-1 h-6 w-6"
@@ -90,7 +90,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
               <div>
                 <Link href="/cart" passHref>
                   <button
-                    className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
+                    className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white dark:hover:bg-dark_primary sm:px-4 sm:text-base"
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
@@ -101,7 +101,7 @@ const CartModal: React.FC<Props> = ({ open, onClose, product }: Props) => {
                 </Link>
                 <Link href="/checkout" passHref>
                   <button
-                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
+                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white dark:hover:bg-dark_primary sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();

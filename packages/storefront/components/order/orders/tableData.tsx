@@ -35,11 +35,13 @@ const TableData: React.FC<Props> = ({ singleOrder }) => {
         )}
       </td>
       <td className="px-5 py-4">{singleOrder?.paymentMethod}</td>
-      <td className="px-5 py-4">{Intl.NumberFormat(
-            `${currency.currencyLanguage}-${currency.currencyStyle}`,
-            { style: 'currency', currency: `${currency.currencyName}` }
-          ).format(singleOrder?.productCost)}</td>
-      <td className="px-5 py-4 text-[#40a944]">
+      <td className="px-5 py-4">
+        {Intl.NumberFormat(
+          `${currency.currencyLanguage}-${currency.currencyStyle}`,
+          { style: 'currency', currency: `${currency.currencyName}` }
+        ).format(singleOrder?.productCost)}
+      </td>
+      <td className="px-5 py-4 text-primary dark:text-dark_primary">
         <Link
           href={{
             pathname: `/order/[id]`,

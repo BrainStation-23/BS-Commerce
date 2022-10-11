@@ -50,7 +50,7 @@ const HeaderSubCategory: React.FC<Props> = ({
             document.body.clientWidth > 1023 && setShowSubCategory(false);
           }}
         >
-          <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-green-600">
+          <div className="flex cursor-pointer flex-row items-center justify-between px-3 py-1 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
             <span className="grow">
               <Link
                 href={{
@@ -91,7 +91,7 @@ const HeaderSubCategory: React.FC<Props> = ({
           <div className="hidden lg:block">
             {category.subCategories ? (
               <div
-                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white dark:bg-dark_bg dark:text-dark_text shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
                   showSubCategory ? 'scale-x-100' : 'scale-x-0'
                 }`}
               >

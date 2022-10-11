@@ -5,9 +5,9 @@ const ChevronLeft: NextComponentType = () => {
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-9 w-9 cursor-pointer"
+        className="h-9 w-9 cursor-pointer fill-primary dark:fill-dark_primary"
         viewBox="0 0 20 20"
-        fill="#40a944"
+        // fill="#40a944"
       >
         <path
           fillRule="evenodd"

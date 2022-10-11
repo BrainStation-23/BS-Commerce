@@ -87,7 +87,7 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
           </h5>
           <div className="mb-4 flex gap-x-3">
             <div className="py-2">
-              <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
+              <p className="mb-2 font-normal text-gray-700 dark:text-dark_text">
                 {Intl.NumberFormat(
                   `${currency.currencyLanguage}-${currency.currencyStyle}`,
                   { style: 'currency', currency: `${currency.currencyName}` }

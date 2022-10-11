@@ -71,7 +71,7 @@ const ReorderModal: React.FC<Props> = ({
               <span className="mb-2 text-sm sm:mb-4 sm:text-base"></span>
               <div
                 id="reorderModalMessage"
-                className="mb-3 flex justify-center text-sm text-green-600 sm:mb-6 sm:text-base"
+                className="mb-3 flex justify-center text-sm text-primary sm:mb-6 sm:text-base"
               >
                 {message}
               </div>
@@ -100,7 +100,7 @@ const ReorderModal: React.FC<Props> = ({
               <div className="flex justify-center py-4">
                 {message === 'THESE ITEMS ARE NOT AVAILABLE RIGHT NOW' ? (
                   <button
-                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
+                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
                     onClick={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
@@ -111,7 +111,7 @@ const ReorderModal: React.FC<Props> = ({
                 ) : (
                   <>
                     <button
-                      className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:px-4 sm:text-base"
+                      className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:px-4 sm:text-base"
                       onClick={() => {
                         dispatch(setCartModalState({ showModal: false }));
                         onClose();
@@ -122,7 +122,7 @@ const ReorderModal: React.FC<Props> = ({
                     </button>
 
                     <button
-                      className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-green-600 hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
+                      className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
                       onClick={() => {
                         dispatch(setCartModalState({ showModal: false }));
                         onClose();

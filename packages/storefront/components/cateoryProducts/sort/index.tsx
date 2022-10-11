@@ -84,7 +84,7 @@ const ProductSort: FC = () => {
                 id="selectSortOptions"
                 name="cars"
                 value={getDefaultValue()}
-                className="-ml-3 box-border h-auto  border bg-white py-2 px-1 text-sm"
+                className="-ml-3 box-border h-auto border py-2 px-1 text-sm"
                 onChange={() => {
                   replaceQuery();
                 }}

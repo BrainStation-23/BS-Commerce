@@ -220,7 +220,7 @@ const Signup = () => {
                           className={`flex h-6 w-12 cursor-pointer items-center rounded-full
                             ${
                               formikprops.values.username !== ''
-                                ? 'bg-green-600/100'
+                                ? 'bg-primary dark:bg-dark_primary'
                                 : 'bg-gray-400'
                             }`}
                           onClick={() => {
@@ -290,7 +290,7 @@ const Signup = () => {
                           );
                         }
                       }}
-                      className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black"
+                      className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:bg-dark_primary"
                     >
                       {t('register:signup')}
                     </button>

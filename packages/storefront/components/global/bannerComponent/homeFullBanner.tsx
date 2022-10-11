@@ -8,7 +8,7 @@ const HomefullBanner: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-center bg-no-repeat">
+    <div className="bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner3.jpg?v=1588050023')] bg-cover bg-center bg-no-repeat dark:text-black">
       <Banner
         position="relative"
         width="w-full"
@@ -20,7 +20,7 @@ const HomefullBanner: FC = () => {
         buttonEdge="rounded-lg"
         buttonPadding="px-3 sm:px-3 md:px-9 lg:px-9 xl:px-9 py-2 sm:py-2 lg:py-2.5 xl:py-2.5"
         buttonMargin="my-5"
-        buttonBg="bg-green-600/100"
+        buttonBg="bg-primary dark:bg-dark_primary"
         onHover="bg-black"
         buttonTextColor="text-white"
         hasHeading={true}
@@ -32,7 +32,7 @@ const HomefullBanner: FC = () => {
             mediumHeadingText={t('home:all_vegetables')}
             smallHeading="true"
             smallHeadingText={t('home:black_fridays')}
-            smallHeadingColor="text-green-600"
+            smallHeadingColor="text-primary dark:text-dark_primary"
           />
         }
       />

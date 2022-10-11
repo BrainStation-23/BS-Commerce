@@ -5,7 +5,7 @@ export const CategoryPagination: FC = () => {
     <div>
       <div className="px-x box-border h-auto w-full border text-sm">
         <div className="flex justify-center gap-x-2 py-2">
-          <button className="rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-[#40a944] hover:text-white">
+          <button className="rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -21,13 +21,13 @@ export const CategoryPagination: FC = () => {
               />
             </svg>
           </button>
-          <button className="rounded bg-[#f1f1f1] py-2 px-4 font-semibold text-black hover:bg-[#40a944] hover:text-white">
+          <button className="rounded bg-[#f1f1f1] py-2 px-4 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
             1
           </button>
-          <button className="rounded bg-[#f1f1f1] py-2 px-4 font-semibold text-black hover:bg-[#40a944] hover:text-white">
+          <button className="rounded bg-[#f1f1f1] py-2 px-4 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
             2
           </button>
-          <button className="rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-[#40a944] hover:text-white">
+          <button className="rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

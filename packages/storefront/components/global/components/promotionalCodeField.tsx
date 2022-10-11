@@ -21,13 +21,13 @@ const PromotionalCodeField: React.FC<Properties> = (props) => {
         className={`mt-3 flex h-12 w-full flex-row items-center justify-between rounded border border-slate-200 text-sm`}
       >
         <input
-          className="ml-4 w-full bg-white focus:outline-none"
+          className="ml-4 w-full bg-white focus:outline-none dark:bg-dark_bg"
           type="search"
           name="promoCode"
           placeholder={`${props.placeholder}`}
           id="promoCode"
         />
-        <div className="flex h-12 w-20 cursor-pointer justify-center rounded-r bg-[#40a944] text-white transition-all duration-200 ease-linear hover:bg-stone-900">
+        <div className="flex h-12 w-20 cursor-pointer justify-center rounded-r bg-primary text-white transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:bg-dark_primary">
           <button
             type="submit"
             id="submitPromoCode"

@@ -27,22 +27,22 @@ const DataTable: NextComponentType = () => {
           <table className="w-full border-collapse border border-slate-400">
             <thead className="">
               <tr className="text-center">
-                <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base capitalize md:px-8">
+                <th className="border border-slate-300 bg-slate-200 px-16 py-4 text-base capitalize dark:bg-black md:px-8">
                   {t('common:image').toLowerCase()}
                 </th>
-                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize md:px-2 xl:px-10">
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize dark:bg-black md:px-2 xl:px-10">
                   {t('common:products')}
                 </th>
-                <th className="border border-slate-300 bg-slate-200 px-10 py-4 text-base capitalize">
+                <th className="border border-slate-300 bg-slate-200 px-10 py-4 text-base capitalize dark:bg-black">
                   {t('common:price').toLowerCase()}
                 </th>
-                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize md:px-2 xl:px-10">
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize dark:bg-black md:px-2 xl:px-10">
                   {t('common:quantity').toLowerCase()}
                 </th>
-                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize md:px-2 xl:px-6">
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize dark:bg-black md:px-2 xl:px-6">
                   {t('common:total').toLowerCase()}
                 </th>
-                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize md:px-2 xl:px-10">
+                <th className="border border-slate-300 bg-slate-200 py-4 text-base capitalize dark:bg-black md:px-2 xl:px-10">
                   {t('common:remove').toLowerCase()}
                 </th>
               </tr>
@@ -61,7 +61,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '150px',
                     }}
-                    className="bg-black text-xs hover:bg-[#40a944]"
+                    className="bg-black text-xs hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
                     onClick={() => {
                       router.push('/');
                     }}
@@ -76,7 +76,7 @@ const DataTable: NextComponentType = () => {
                       height: '39px',
                       width: '120px',
                     }}
-                    className="bg-black text-xs hover:bg-[#40a944]"
+                    className="bg-black text-xs hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
                     onClick={handleDeleteAllCartItem}
                   >
                     {t('cart:clear_cart').toUpperCase()}

@@ -85,7 +85,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                       <br />
                       <Field
                         type="text"
-                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                         id="firstName"
                         name="firstName"
                       />
@@ -97,7 +97,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                       <br />
                       <Field
                         type="text"
-                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                        className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                         id="lastName"
                         name="lastName"
                       />
@@ -113,7 +113,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     <br />
                     <Field
                       type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                       id="addressLine1"
                       name="addressLine1"
                     />
@@ -128,7 +128,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     <br />
                     <Field
                       type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                       id="addressLine2"
                       name="addressLine2"
                     />
@@ -142,7 +142,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                   <br />
                   <Field
                     type="text"
-                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                     id="state"
                     name="state"
                   />
@@ -156,7 +156,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     <br />
                     <Field
                       type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                       id="postCode"
                       name="postCode"
                     />
@@ -168,7 +168,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     <br />
                     <Field
                       type="text"
-                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                      className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                       id="phone"
                       name="phone"
                     />
@@ -181,7 +181,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                   <br />
                   <Field
                     type="text"
-                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale"
+                    className="w-full appearance-none border py-3 px-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none focus:grayscale dark:text-dark_text dark:focus:bg-gray-700"
                     id="tag"
                     name="tag"
                     placeholder={t('manage-address:example')}
@@ -250,7 +250,7 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
 
                 <button
                   type="submit"
-                  className="my-2 w-full rounded bg-green-600/100 py-2 text-white hover:bg-black sm:w-full md:w-32 lg:w-32 xl:w-32"
+                  className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:bg-dark_primary dark:hover:border sm:w-full md:w-32 lg:w-32 xl:w-32"
                 >
                   {user?.firstName
                     ? `${t('manage-address:save_address')}`

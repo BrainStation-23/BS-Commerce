@@ -11,6 +11,8 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
 import ReOrder from '../singleOrder/re-Order';
+import { CheckCircleOutlineIcon } from '@/components/global/layout/headerIcons';
+import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';
 
 const SingleOrder: FC = () => {
@@ -36,6 +38,7 @@ const SingleOrder: FC = () => {
 
   useEffect(() => {
     getSingleOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -45,7 +48,7 @@ const SingleOrder: FC = () => {
         pathArray={[`${t('common:home')}`, `${t('order:order_details')}`]}
         linkArray={['/', '/']}
       />
-      <div className="container mx-auto mt-5 px-4">
+      <div className="container mx-auto mt-5 px-4 dark:text-dark_text">
         <div className="flex gap-x-4">
           <button
             onClick={() => {
@@ -58,13 +61,16 @@ const SingleOrder: FC = () => {
         </div>
         <div className="mt-5 flex items-center gap-x-2">
           <Link href="/order" passHref>
-            <p className="cursor-pointer text-sm text-[#7c827f]">{t('common:order')}</p>
+            <p className="cursor-pointer text-sm text-[#7c827f]">
+              {t('common:order')}
+            </p>
           </Link>
           <ChevronRight />
           <p className="text-sm">{t('order:order_summary')}</p>
         </div>
 
         <OrderSummary singleOrder={singleOrder!} />
+        <OrderStatus status={singleOrder?.orderStatus!} />
         <ProductTable productList={singleOrder?.products!} />
         <ReOrder singleOrder={singleOrder!} />
       </div>

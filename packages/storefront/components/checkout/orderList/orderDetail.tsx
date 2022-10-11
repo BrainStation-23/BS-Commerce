@@ -29,7 +29,9 @@ const OrderedProducts: NextComponentType = () => {
           <div className="mt-5">
             <div className="row text-sm">
               <div className="mt-4 flex flex-wrap justify-between">
-                <p className="text-gray-600/100">{t('checkout:sub_total')}</p>
+                <p className="text-gray-600/100 dark:text-dark_text">
+                  {t('checkout:sub_total')}
+                </p>
                 <p className="font-semibold">
                   {Intl.NumberFormat(
                     `${currency.currencyLanguage}-${currency.currencyStyle}`,
@@ -38,7 +40,9 @@ const OrderedProducts: NextComponentType = () => {
                 </p>
               </div>
               <div className="mt-2 flex flex-wrap justify-between">
-                <p className="text-gray-600/100 ">{t('checkout:shipping')}</p>
+                <p className="text-gray-600/100 dark:text-dark_text">
+                  {t('checkout:shipping')}
+                </p>
                 <p className="font-semibold">{t('checkout:free')}</p>
               </div>
               {/* <div className="flex flex-wrap justify-between mt-2">
@@ -50,7 +54,9 @@ const OrderedProducts: NextComponentType = () => {
           <div className="mt-5">
             <div className="row">
               <div className="mt-4 flex flex-wrap justify-between">
-                <p className="text-gray-600/100">{t('checkout:total')}</p>
+                <p className="text-gray-600/100 dark:text-dark_text">
+                  {t('checkout:total')}
+                </p>
                 <div className="flex flex-wrap items-center gap-3">
                   <p className="text-2xl font-semibold">
                     {Intl.NumberFormat(

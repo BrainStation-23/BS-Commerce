@@ -32,10 +32,10 @@ const CategoryFilter: FC = () => {
   const upArrow = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
+      className="h-6 w-6 stroke-dark_bg dark:stroke-dark_text"
       fill="none"
       viewBox="0 0 24 24"
-      stroke="currentColor"
+      // stroke="currentColor"
       strokeWidth="2"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
@@ -45,10 +45,10 @@ const CategoryFilter: FC = () => {
   const downArrow = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
+      className="h-6 w-6 stroke-dark_bg dark:stroke-dark_text"
       fill="none"
       viewBox="0 0 24 24"
-      stroke="currentColor"
+      // stroke="currentColor"
       strokeWidth="2"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -58,13 +58,13 @@ const CategoryFilter: FC = () => {
 
   return (
     <>
-      <div className="mt-16 w-full">
+      <div className="mt-16 w-full dark:text-dark_text">
         <div className="accordion" id="accordionExample5">
           {/* Price Filter Section */}
-          <div className="accordion-item bg-white">
+          <div className="accordion-item">
             <h2 className="accordion-header mb-0" id="headingOne5">
               <button
-                className="accordion-button relative flex w-full items-center justify-between rounded-none border-0 bg-white px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none"
+                className="accordion-button relative flex w-full items-center justify-between rounded-none border-0 px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none dark:text-dark_text"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseOne5"
@@ -194,7 +194,7 @@ const CategoryFilter: FC = () => {
               </div>
             </div>
           </div> */}
-          <div className="accordion-item bg-white">
+          <div className="accordion-item">
             <h2 className="accordion-header mb-0" id="headingTwo5">
               <button
                 className="
@@ -206,13 +206,13 @@ const CategoryFilter: FC = () => {
                    items-center
                    justify-between
                    rounded-none
-                   border-0 bg-white px-0
+                   border-0 px-0
                    pt-8
                    pb-2
                    text-left
                    text-base
-                   text-gray-800
-                   transition focus:outline-none
+                   text-gray-800 transition
+                   focus:outline-none dark:text-dark_text
                "
                 type="button"
                 data-bs-toggle="collapse"

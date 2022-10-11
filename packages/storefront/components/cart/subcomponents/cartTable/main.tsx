@@ -37,7 +37,7 @@ const CartDetails: NextComponentType = () => {
                 <p className="text-2xl">{t('cart:empty_cart')}</p>
                 <p className="text-sm">
                   {t('common:continue_browsing')}{' '}
-                  <span className=" hover:text-green-600">
+                  <span className=" hover:text-primary">
                     <Link href="/" passHref>
                       {t('common:here')}
                     </Link>
@@ -58,7 +58,7 @@ const CartDetails: NextComponentType = () => {
             <p className="text-xl">{t('cart:empty_cart')}</p>
             <p className="text-xs">
               {t('common:continue_browsing')}{' '}
-              <span className=" hover:text-green-600">
+              <span className=" hover:text-primary">
                 <Link href="/" passHref>
                   {t('common:here')}
                 </Link>
@@ -70,7 +70,7 @@ const CartDetails: NextComponentType = () => {
         <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
           {cartData?.length > 0 && (
             <Link href="/" passHref>
-              <button className="w-full bg-black py-2 text-sm text-white hover:bg-green-600">
+              <button className="w-full bg-black py-2 text-sm text-white hover:bg-primary dark:hover:bg-dark_primary">
                 {t('common:continue_shopping').toUpperCase()}
               </button>
             </Link>
@@ -78,7 +78,7 @@ const CartDetails: NextComponentType = () => {
 
           {cartData?.length > 0 && (
             <button
-              className="w-full bg-black py-2 text-sm text-white hover:bg-green-600"
+              className="w-full bg-black py-2 text-sm text-white hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
               onClick={handleDeleteAllCartItem}
             >
               CLEAR CART

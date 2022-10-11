@@ -10,6 +10,8 @@ import { config } from 'config';
 
 import Layout from '@/components/layout';
 import BackToTopButton from './BackToTopButton';
+import { ThemeProvider } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 Axios.defaults.baseURL =
   config?.apiService === 'STATIC'
@@ -19,15 +21,21 @@ Axios.defaults.baseURL =
     : config?.graphqlPrefix;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Layout>
-          <Component {...pageProps} />
-          <BackToTopButton />
-        </Layout>
-      </PersistGate>
-    </Provider>
+    <ThemeProvider enableSystem={false} attribute="class">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout>
+            {isMounted && <Component {...pageProps} />}
+            <BackToTopButton />
+          </Layout>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
   );
 }
 

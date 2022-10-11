@@ -76,7 +76,7 @@ const Footer: NextComponentType = () => {
             <div className="flex flex-col gap-1 text-sm">
               {informationList.map((link) => (
                 <Link href={link.link} passHref key={link.name}>
-                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                     {link.name}
                   </a>
                 </Link>
@@ -91,7 +91,7 @@ const Footer: NextComponentType = () => {
             <div className="flex flex-col gap-1 text-sm">
               {extraList.map((link) => (
                 <Link key={link.name} passHref href={link.link}>
-                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600">
+                  <a className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                     {link.name}
                   </a>
                 </Link>
@@ -107,15 +107,15 @@ const Footer: NextComponentType = () => {
               {t('common:get_updates_by_subscribe_our_weekly_newsletter')}
             </span>
             <div
-              className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm`}
+              className={`flex h-12 w-full flex-row items-center justify-between rounded-full border border-slate-200 text-sm dark:bg-white dark:text-black`}
             >
               <input
-                className="ml-4 bg-white focus:outline-none"
+                className="ml-4 w-full bg-white focus:outline-none"
                 type="search"
                 name="search"
                 placeholder={`email@example.com`}
               />
-              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-green-600 transition-all duration-200 ease-linear hover:bg-stone-900">
+              <div className="flex h-12 w-24 cursor-pointer justify-center rounded-r-full bg-primary p-4 transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
                 <button type="submit" className="text-white">
                   {t('common:subscribe')}
                 </button>

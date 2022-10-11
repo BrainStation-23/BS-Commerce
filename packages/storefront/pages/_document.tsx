@@ -15,7 +15,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="d-flex flex-column h-100">
+      <body className="d-flex flex-column h-100 dark:bg-dark_bg dark:text-dark_text">
         <Main />
         <NextScript />
       </body>

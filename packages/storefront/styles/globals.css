@@ -10,6 +10,7 @@
 
 .container {
   max-width: 1170px;
+  /* opacity: 75%; */
 }
 @media only screen and (max-width: 767px) {
   .container {

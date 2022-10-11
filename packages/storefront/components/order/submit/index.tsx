@@ -28,7 +28,7 @@ const SubmitComponent: FC = () => {
             />
           </div>
           <span className="mb-2 font-bold">{t('submit:order_completed')}</span>
-          <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
+          <button className="rounded-md bg-primary py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
             <Link href="/order">{t('submit:goto_order_page')}</Link>
           </button>
         </div>

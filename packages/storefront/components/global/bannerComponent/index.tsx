@@ -22,7 +22,7 @@ const BannerPage = () => {
           hasButton={true}
           buttonPadding="px-3 sm:px-3 md:px-3 lg:px-5 xl:px-5 py-2"
           buttonMargin="m-5"
-          buttonBg="bg-green-600/100"
+          buttonBg="bg-primary dark:bg-dark_primary"
           onHover="bg-black"
           buttonTextColor="text-white"
           hasBodyText={true}
@@ -48,7 +48,7 @@ const BannerPage = () => {
           hasButton={true}
           buttonPadding="px-3 sm:px-3 md:px-3 lg:px-5 xl:px-5 py-2"
           buttonMargin="m-5"
-          buttonBg="bg-green-600/100"
+          buttonBg="bg-primary dark:bg-dark_primary"
           onHover="bg-black"
           buttonTextColor="text-white"
           hasBodyText={true}

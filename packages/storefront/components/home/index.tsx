@@ -16,14 +16,10 @@ import WeekDeals from '@/components/home/weekDeals';
 import HomefullBanner from '@/components/global/bannerComponent/homeFullBanner';
 import BestSell from '@/components/home/bestSell';
 import FeaturedProducts from '@/components/home/featuredProducts';
-import Modal from '@/components/comparison';
 import ModalLogin from '@/components/global/components//modal/modal';
 import { useEffect } from 'react';
-import BackToTopButton from 'pages/BackToTopButton';
-import CartModal from '../global/components/modal/cartModal';
 
 const HomeComponent: NextComponentType = () => {
-
   const modalStateLogin = useAppSelector(
     (state) => state.persistedReducer.modal.setModalLogin
   );

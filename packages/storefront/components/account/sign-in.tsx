@@ -177,7 +177,7 @@ const Signin: NextComponentType = () => {
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
                       <button
                         type="submit"
-                        className="my-2 w-full rounded bg-green-600/100 py-2 capitalize text-white hover:bg-black sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
+                        className="my-2 w-full rounded bg-primary py-2 capitalize text-white hover:bg-black dark:bg-dark_primary sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
                       >
                         {t('login:signin')}
                       </button>
@@ -202,7 +202,7 @@ const Signin: NextComponentType = () => {
                 <Link data-testid="create-account-link" href="/account/sign-up">
                   <a
                     data-testid="create-account-page"
-                    className="text-decoration-none font-weight-light text-gray-600 hover:text-green-600/100"
+                    className="text-decoration-none font-weight-light text-gray-600 hover:text-primary"
                   >
                     {t('login:create_account')}
                   </a>

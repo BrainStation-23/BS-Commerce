@@ -1,33 +1,27 @@
 import { useAppDispatch } from 'customHooks/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTheme } from 'next-themes';
 import React, { useState } from 'react';
-import { setCurrencyLanguage } from 'toolkit/currencySlice';
 
-interface language {
+interface theme {
   name: string;
 }
 
-const Language: React.FC = () => {
+const Theme: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
 
-  const languageList: language[] = [
-    { name: 'English' },
-    { name: 'German' },
-    { name: 'French' },
-  ];
-  const dispatch = useAppDispatch();
-  const languageOnclick = async (currencyName: string) => {
-    dispatch(setCurrencyLanguage(currencyName));
-  };
+  const themeList: theme[] = [{ name: 'dark' }, { name: 'light' }];
+
   return (
     <div className="relative inline-block">
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
       >
-        <span className="mr-1">{router.locale}</span>
+        <span className="mr-1">{theme}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -42,19 +36,19 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white dark:bg-dark_bg dark:text-dark_text p-4 text-gray-700 transition-all duration-500 ease-linear ${
+        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear ${
           open ? 'h-[110px] opacity-100' : 'h-0 opacity-0'
         }`}
         onMouseLeave={() => setOpen(false)}
       >
-        {router?.locales?.map((locale) => (
+        {themeList.map((theme) => (
           <li
-            key={locale}
+            key={theme.name}
             className="py-1"
-            onClick={() => languageOnclick(locale)}
+            onClick={() => setTheme(theme.name)}
           >
-            <Link href={router.asPath} locale={locale}>
-              <a>{locale}</a>
+            <Link href={router.asPath}>
+              <a>{theme.name}</a>
             </Link>
           </li>
         ))}
@@ -63,4 +57,4 @@ const Language: React.FC = () => {
   );
 };
 
-export default Language;
+export default Theme;

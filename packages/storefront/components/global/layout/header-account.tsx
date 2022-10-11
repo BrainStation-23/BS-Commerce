@@ -123,21 +123,24 @@ const HeaderAccount: React.FC<Properties> = () => {
                 className="group relative cursor-pointer normal-case"
                 id="NavProfileDiv"
               >
-                <p className=" hover:text-green-600" id="user-name">
+                <p
+                  className="hover:text-primary dark:text-dark_text dark:hover:text-dark_primary"
+                  id="user-name"
+                >
                   {getUsername(links[4].name)}
                 </p>
                 <div
                   id="navProfileDropdown"
-                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block`}
+                  className={`absolute -left-[20px] top-[20px] z-40 hidden overflow-hidden whitespace-nowrap bg-white  px-6 py-6 text-left shadow-lg transition-all duration-300 ease-in group-hover:inline-block dark:bg-dark_bg dark:text-dark_text`}
                 >
-                  <ul>
+                  <ul className="">
                     <Link href="/wishlist" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:wishlist')}
                       </li>
                     </Link>
                     <li
-                      className="transition-all duration-100 ease-linear hover:text-green-600"
+                      className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
                       onClick={() => {
                         comparisonProducts[0]
                           ? dispatch(setModalState(!modalCmp))
@@ -149,17 +152,17 @@ const HeaderAccount: React.FC<Properties> = () => {
                       {t('common:comparison')}
                     </li>
                     <Link href="/myAccount" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary ">
                         {t('common:profile')}
                       </li>
                     </Link>
                     <Link href="/myAccount/addresses" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:manage_addresses')}
                       </li>
                     </Link>
                     <Link href="/order" passHref>
-                      <li className="transition-all duration-100 ease-linear hover:text-green-600">
+                      <li className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
                         {t('common:orders')}
                       </li>
                     </Link>
@@ -167,7 +170,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                     <Link href="#" passHref>
                       <li
                         onClick={() => setModalOn(true)}
-                        className="transition-all duration-100 ease-linear hover:text-green-600"
+                        className="transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
                       >
                         {links[3].name}
                       </li>
@@ -181,16 +184,16 @@ const HeaderAccount: React.FC<Properties> = () => {
               <Link href={links[0].link}>
                 <a
                   id="registerbtn"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-dark_text dark:hover:text-dark_primary"
                 >
                   {links[0].name}
                 </a>
               </Link>
-              <span className="mx-1">/</span>
+              <span className="mx-1 dark:text-dark_text">/</span>
               <Link href={links[1].link}>
                 <a
                   id="login"
-                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-green-600"
+                  className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:text-dark_text"
                 >
                   {links[1].name}
                 </a>
@@ -200,21 +203,26 @@ const HeaderAccount: React.FC<Properties> = () => {
         </span>
         <div className="flex flex-row items-center gap-x-3">
           <button type="button" onClick={handleClickWishlist}>
-            <div className="flex text-base hover:text-green-600">
+            <div className="flex text-base hover:text-primary dark:text-dark_text dark:hover:text-dark_primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 hover:text-green-600"
-                fill={
+                className={`h-6 w-6 hover:stroke-primary hover:text-primary dark:hover:stroke-dark_primary dark:hover:text-dark_primary 
+                ${
                   wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `green`
-                    : `none`
-                }
+                    ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
+                    : 'fill-white stroke-white dark:stroke-white  '
+                }`}
+                // fill={
+                //   wishlistItems?.items?.length! > 0 && token !== ''
+                //     ? `primary`
+                //     : `none`
+                // }
                 viewBox="0 0 24 24"
-                stroke={
-                  wishlistItems?.items?.length! > 0 && token !== ''
-                    ? `green`
-                    : `currentColor`
-                }
+                // stroke={
+                //   wishlistItems?.items?.length! > 0 && token !== ''
+                //     ? `primary`
+                //     : `currentColor`
+                // }
                 strokeWidth={2}
               >
                 <path

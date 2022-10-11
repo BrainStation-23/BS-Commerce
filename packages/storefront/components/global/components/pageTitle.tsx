@@ -11,12 +11,14 @@ interface Props {
 const PageTitle: FC<Props> = ({ title }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex h-52 items-center bg-[url('//cdn.shopify.com/s/files/1/0359/6350/2651/files/banner18.jpg?v=1588133916')] bg-cover bg-center bg-no-repeat py-12">
+    <div className="flex h-52 items-center bg-[url('//cdn.shopify.com/s/files/1/0359/6350/2651/files/banner18.jpg?v=1588133916')] bg-cover bg-center bg-no-repeat py-12 dark:text-black">
       <Container>
         <h3 className="mb-2 text-center text-4xl font-normal">{title}</h3>
         <div className="flex items-center justify-center">
           <Link href="/">
-            <a className="hover:text-green-600">{t('common:home')} / </a>
+            <a className="hover:text-primary dark:hover:text-dark_primary">
+              {t('common:home')} /{' '}
+            </a>
           </Link>
           <div>{title}</div>
         </div>

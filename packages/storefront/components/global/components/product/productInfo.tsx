@@ -23,13 +23,13 @@ const ProductInfo = (props: SingleProduct) => {
         <p className="py-2 font-['arial'] text-xs text-gray-600">
           {product?.tags![0]}
         </p>
-        <p className="text-base font-semibold text-green-600">
+        <p className="text-base font-semibold text-primary dark:text-dark_primary">
           {Intl.NumberFormat(
             `${currency.currencyLanguage}-${currency.currencyStyle}`,
             { style: 'currency', currency: `${currency.currencyName}` }
           ).format(product?.info?.price)}
           {Math.abs(product?.info.oldPrice - product?.info.price) > 0 ? (
-            <span className="ml-2 text-xs font-semibold text-black">
+            <span className="ml-2 text-xs font-semibold text-dark_bg dark:text-dark_text">
               <s>
                 {Intl.NumberFormat(
                   `${currency.currencyLanguage}-${currency.currencyStyle}`,

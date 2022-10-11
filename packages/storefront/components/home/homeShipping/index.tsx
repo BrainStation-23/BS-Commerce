@@ -16,7 +16,7 @@ const HomeShipping: NextComponentType = () => {
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="red"
-                stroke="#40a944"
+                // stroke="#40a944"
                 strokeWidth="1"
                 viewBox="0 0 32 32"
                 className="h-10 w-10"
@@ -28,8 +28,8 @@ const HomeShipping: NextComponentType = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1"
-                stroke="#40a944"
-                className="h-9 w-9"
+                // stroke="#40a944"
+                className="h-9 w-9 stroke-primary dark:stroke-dark_primary"
               >
                 <path
                   strokeLinecap="round"
@@ -49,10 +49,10 @@ const HomeShipping: NextComponentType = () => {
             <div className="mr-3 mt-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-9 w-9"
+                // stroke="#40a944"
+                className="h-9 w-9 stroke-primary dark:stroke-dark_primary"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="#40a944"
                 strokeWidth="1"
               >
                 <path
@@ -73,10 +73,10 @@ const HomeShipping: NextComponentType = () => {
             <div className="mr-3 mt-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-9 w-9"
+                className="h-9 w-9 stroke-primary dark:stroke-dark_primary"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="#40a944"
+                // stroke="#40a944"
                 strokeWidth="1"
               >
                 <path
@@ -104,10 +104,10 @@ const HomeShipping: NextComponentType = () => {
             <div className="mr-3 mt-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-9 w-9"
+                className="h-9 w-9 stroke-primary dark:stroke-dark_primary"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="#40a944"
+                // stroke="#40a944"
                 strokeWidth="1"
               >
                 <path
