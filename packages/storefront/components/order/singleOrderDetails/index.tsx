@@ -11,6 +11,8 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
 import ReOrder from '../singleOrder/re-Order';
+import { CheckCircleOutlineIcon } from '@/components/global/layout/headerIcons';
+import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';
 
 const SingleOrder: FC = () => {
@@ -36,6 +38,7 @@ const SingleOrder: FC = () => {
 
   useEffect(() => {
     getSingleOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -67,6 +70,7 @@ const SingleOrder: FC = () => {
         </div>
 
         <OrderSummary singleOrder={singleOrder!} />
+        <OrderStatus status={singleOrder?.orderStatus!} />
         <ProductTable productList={singleOrder?.products!} />
         <ReOrder singleOrder={singleOrder!} />
       </div>
