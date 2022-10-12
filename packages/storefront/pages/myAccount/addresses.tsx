@@ -4,7 +4,7 @@ var cookie = require('cookie');
 import Address from '@/components/myAccount/address';
 import { userAPI } from 'APIs';
 import { Customer } from '@bs-commerce/models';
-import { useAppDispatch } from 'store/hooks/index';
+import { useAppDispatch } from 'store/hooks';
 import { storeCustomerDetails } from 'store/slices/userSlice';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 
