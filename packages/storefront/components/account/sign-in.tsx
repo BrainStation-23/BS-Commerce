@@ -11,20 +11,20 @@ import { CustomerSignInRequest } from '@bs-commerce/models';
 
 import { config } from 'config';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeCustomerDetails, storeUserDetails } from 'toolkit/userSlice';
-import { storeUserToken } from 'toolkit/authSlice';
+import { useAppDispatch } from 'store/hooks/index';
+import { storeCustomerDetails, storeUserDetails } from 'store/slices/userSlice';
+import { storeUserToken } from 'store/slices/authSlice';
 import { loginSchema } from '@/components/global/schemas/loginSchema';
-import { storeWishlist } from 'toolkit/productsSlice';
-import { storeAllCartItems } from 'toolkit/cartSlice';
+import { storeWishlist } from 'store/slices/productsSlice';
+import { storeAllCartItems } from 'store/slices/cartSlice';
 
 import Loading from '@/components/global/loader';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/components/auth/withoutAuth';
 import FacebookLogo from '@/components/account/icons/facebookLogo';
 import GoogleLogo from '@/components/account/icons/googleLogo';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
-import { storeCompare } from 'toolkit/compareSlice';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
+import { storeCompare } from 'store/slices/compareSlice';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';

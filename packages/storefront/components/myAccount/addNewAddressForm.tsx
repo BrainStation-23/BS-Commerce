@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { userAPI } from 'APIs';
 import { Customer, CustomerAddress } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { storeCustomerDetails } from 'store/slices/userSlice';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
 interface props {
   user?: CustomerAddress;
   cancelForm: Function;

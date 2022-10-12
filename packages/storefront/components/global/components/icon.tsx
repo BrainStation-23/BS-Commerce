@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { addToCart, storeAllCartItems } from 'store/slices/cartSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 
 import {
@@ -17,12 +17,15 @@ import {
   setCartModalState,
   setModalState,
   setLoginModalState,
-} from 'toolkit/modalSlice';
+} from 'store/slices/modalSlice';
 import {
   storeCompare,
   storeProductsToComparePublic,
-} from 'toolkit/compareSlice';
-import { deleteItemFromWishlist, storeWishlist } from 'toolkit/productsSlice';
+} from 'store/slices/compareSlice';
+import {
+  deleteItemFromWishlist,
+  storeWishlist,
+} from 'store/slices/productsSlice';
 import CartToast from '@/components/global/components/cartToast';
 import useTranslation from 'next-translate/useTranslation';
 

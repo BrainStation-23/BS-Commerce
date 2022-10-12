@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { NextComponentType } from 'next';
 import { SwiperSlide } from 'swiper/react';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 import { CustomerProduct } from '@bs-commerce/models';
 import Container from '@/components/global/components/container';

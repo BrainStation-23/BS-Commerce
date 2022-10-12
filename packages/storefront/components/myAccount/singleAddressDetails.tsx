@@ -6,7 +6,7 @@ import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import ChevronLeft from '@/components/myAccount/icons/chevron-left';
 import ChevronRight from '@/components/myAccount/icons/chevron-right';
 import { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { useEffect, useState } from 'react';
 import SingleAddressDetailsTable from '@/components/myAccount/singleAddressDetailsTable';
 import useTranslation from 'next-translate/useTranslation';

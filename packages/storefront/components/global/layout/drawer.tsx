@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeUserToken } from 'toolkit/authSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { storeUserToken } from 'store/slices/authSlice';
 
 import CartDropdown from '@/components/cart/cartDropdown/dropdownCart';
 import Modal from '../components/modal/modal';
-import { resetAddress } from 'toolkit/customerAddressSlice';
-import { resetUserDetails } from 'toolkit/userSlice';
-import { resetWishilist } from 'toolkit/productsSlice';
-import { resetCart } from 'toolkit/cartSlice';
+import { resetAddress } from 'store/slices/customerAddressSlice';
+import { resetUserDetails } from 'store/slices/userSlice';
+import { resetWishilist } from 'store/slices/productsSlice';
+import { resetCart } from 'store/slices/cartSlice';
 import { useSelector } from 'react-redux';
-import { setModalState } from 'toolkit/modalSlice';
+import { setModalState } from 'store/slices/modalSlice';
 
 import {
   ChevronLeftIcon,

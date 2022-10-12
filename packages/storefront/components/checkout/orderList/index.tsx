@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 import ChevronDown from '@/components/global/iconsforCheckoutPage/chevron-down';
 import ChevronUp from '@/components/global/iconsforCheckoutPage/chevron-up';

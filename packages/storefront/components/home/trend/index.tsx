@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 
 import { SwiperSlide } from 'swiper/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 import Container from '@/components/global/components/container';
 import ProductRow from './productRow.component';

@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { SwiperSlide } from 'swiper/react';
 
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 import SwiperGrid from '@/components/global/components/swipergrid';
 import Container from '@/components/global/components/container';

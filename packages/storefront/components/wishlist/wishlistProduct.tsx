@@ -1,5 +1,5 @@
 import { WishlistProduct, WishlistProductInfo } from '@bs-commerce/models';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import React from 'react';
 
 interface SingleProductInfo {

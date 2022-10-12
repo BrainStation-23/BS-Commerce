@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 import ShowItemSmall from '@/components/cart/subcomponents/cartTable/showItemSmall';
 

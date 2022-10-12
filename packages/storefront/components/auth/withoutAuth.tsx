@@ -1,4 +1,4 @@
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import React from 'react';
 
 const WithoutAuth = (Component: React.FC) => {

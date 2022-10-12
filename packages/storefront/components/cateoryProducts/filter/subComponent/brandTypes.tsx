@@ -4,7 +4,7 @@ import CounterElement from '@/components/deals/filter/subComponent/counterElemen
 import radio from 'styles/radioButton.module.css';
 import { userAPI } from 'APIs';
 import { GetServerSideProps } from 'next/types';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { useRouter } from 'next/router';
 
 const BrandTypeOptions: FC<any> = ({ brands }) => {

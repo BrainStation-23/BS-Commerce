@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { addToBillingInfo, deleteCheckoutInfo } from 'toolkit/checkoutSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import {
+  addToBillingInfo,
+  deleteCheckoutInfo,
+} from 'store/slices/checkoutSlice';
 
 import { userAPI } from 'APIs';
-import { deleteCart } from 'toolkit/cartSlice';
+import { deleteCart } from 'store/slices/cartSlice';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/iconsforCheckoutPage/chevron-left';

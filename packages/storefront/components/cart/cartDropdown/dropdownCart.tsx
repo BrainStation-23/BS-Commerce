@@ -4,8 +4,8 @@ import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
 import { ResponseItem } from '@bs-commerce/models';
-import { deleteCartItem } from 'toolkit/cartSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { deleteCartItem } from 'store/slices/cartSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Buttons from '@/components/global/components/buttons/button';
 import Modal from '@/components/global/components/modal/modal';

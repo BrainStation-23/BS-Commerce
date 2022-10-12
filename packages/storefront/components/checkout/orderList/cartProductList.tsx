@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import Image from 'next/image';
 
 const CartProductList: NextComponentType = () => {

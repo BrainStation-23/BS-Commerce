@@ -2,17 +2,17 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import productsReducer from 'toolkit/productsSlice';
-import authReducer from 'toolkit/authSlice';
-import cartReducer from 'toolkit/cartSlice';
-import userReducer from 'toolkit/userSlice';
-import categoryReducer from 'toolkit/categorySlice';
-import checkoutReducer from 'toolkit/checkoutSlice';
-import modalReducer from 'toolkit/modalSlice';
-import compareReducer from 'toolkit/compareSlice';
-import CustomerAddressReducer from 'toolkit/customerAddressSlice';
-import forgetPasswordReducer from 'toolkit/forgetPasswordSlice';
-import currencyReducer from 'toolkit/currencySlice';
+import productsReducer from 'store/slices/productsSlice';
+import authReducer from 'store/slices/authSlice';
+import cartReducer from 'store/slices/cartSlice';
+import userReducer from 'store/slices/userSlice';
+import categoryReducer from 'store/slices/categorySlice';
+import checkoutReducer from 'store/slices/checkoutSlice';
+import modalReducer from 'store/slices/modalSlice';
+import compareReducer from 'store/slices/compareSlice';
+import CustomerAddressReducer from 'store/slices/customerAddressSlice';
+import forgetPasswordReducer from 'store/slices/forgetPasswordSlice';
+import currencyReducer from 'store/slices/currencySlice';
 
 const reducers = combineReducers({
   product: productsReducer,

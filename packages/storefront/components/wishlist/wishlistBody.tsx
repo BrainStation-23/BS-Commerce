@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { NextComponentType } from 'next';
 
 import WishlistIcon from '@/components/wishlist/wishlistIcon';

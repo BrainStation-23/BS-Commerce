@@ -11,7 +11,7 @@ import HeaderAccount from '@/components/global/layout/headerAccount';
 import Navbar from './navbar';
 import BottomNavigationBar from './bottomNavigationBar';
 import Drawer from './drawer';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks';
 import useTranslation from 'next-translate/useTranslation';
 import Theme from './theme';
 import ThemeChanger from './themeChanger';

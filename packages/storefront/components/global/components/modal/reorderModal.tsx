@@ -1,8 +1,8 @@
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch } from 'store/hooks/index';
 // import { CustomerProduct, Product, WishlistProduct } from 'models';
 import Image from 'next/image';
 import Link from 'next/link';
-import { setCartModalState } from 'toolkit/modalSlice';
+import { setCartModalState } from 'store/slices/modalSlice';
 import { XCircleIcon } from '../../layout/headerIcons';
 import { IOrderProduct } from '@bs-commerce/models';
 interface Props {

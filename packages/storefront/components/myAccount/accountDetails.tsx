@@ -7,12 +7,12 @@ import { Field, Form, Formik } from 'formik';
 import { UpdateCustomerRequestBody } from '@bs-commerce/models';
 
 import { userAPI } from 'APIs';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeUserToken } from 'toolkit/authSlice';
-import { resetUserDetails, storeCustomerDetails } from 'toolkit/userSlice';
-import { resetAddress } from 'toolkit/customerAddressSlice';
-import { resetWishilist } from 'toolkit/productsSlice';
-import { resetCart } from 'toolkit/cartSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { storeUserToken } from 'store/slices/authSlice';
+import { resetUserDetails, storeCustomerDetails } from 'store/slices/userSlice';
+import { resetAddress } from 'store/slices/customerAddressSlice';
+import { resetWishilist } from 'store/slices/productsSlice';
+import { resetCart } from 'store/slices/cartSlice';
 import useTranslation from 'next-translate/useTranslation';
 
 import { CustomerSchema } from './schema/customer.schema';

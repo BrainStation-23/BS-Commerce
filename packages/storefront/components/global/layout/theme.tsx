@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch } from 'store/hooks/index';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';

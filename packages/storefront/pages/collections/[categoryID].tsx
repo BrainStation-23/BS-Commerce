@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch } from 'store/hooks/index';
 import {
   storeBrands,
   storeCategorizedProduct,
   storeTotalNumberOfProducts,
-} from 'toolkit/productsSlice';
+} from 'store/slices/productsSlice';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { userAPI } from 'APIs';

@@ -4,8 +4,8 @@ var cookie = require('cookie');
 import AccountDetails from '@/components/myAccount/accountDetails';
 import { userAPI } from 'APIs';
 import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { storeCustomerDetails } from 'store/slices/userSlice';
 
 interface Props {
   customerInformation: GetCustomerInformationSuccessResponse;

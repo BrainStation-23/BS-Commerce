@@ -4,12 +4,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
 
 import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { setModalState } from 'toolkit/modalSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { setModalState } from 'store/slices/modalSlice';
 import {
   deleteComparedProductPublic,
   storeCompare,
-} from 'toolkit/compareSlice';
+} from 'store/slices/compareSlice';
 import { userAPI } from 'APIs';
 import { ICompareItems } from '@bs-commerce/models';
 

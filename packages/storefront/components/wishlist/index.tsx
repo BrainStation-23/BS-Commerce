@@ -11,8 +11,8 @@ import { useState } from 'react';
 import {
   deleteFullWishlist,
   deleteItemFromWishlist,
-} from 'toolkit/productsSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+} from 'store/slices/productsSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Picture from '@/components/global/components/product/common/picture';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
@@ -22,7 +22,7 @@ import WithAuth from '@/components/auth/withAuth';
 import Modal from '@/components/global/components/modal/modal';
 import Icon from '@/components/global/components/icon';
 import CartModal from '@/components/global/components/modal/cartModal';
-import { setCartModalState } from 'toolkit/modalSlice';
+import { setCartModalState } from 'store/slices/modalSlice';
 import WishlistBody from './wishlistBody';
 import { WishlistItem } from '@bs-commerce/models';
 

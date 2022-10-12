@@ -1,5 +1,5 @@
 import { OrderByUserId } from '@bs-commerce/models';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';

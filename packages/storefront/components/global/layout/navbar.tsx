@@ -7,7 +7,7 @@ import {
 // import { MenuData } from '../layout/headerData';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import HeaderCategory from './headerCategory';
 
 import HeaderAccount from './headerAccount';

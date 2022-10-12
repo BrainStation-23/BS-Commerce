@@ -4,7 +4,7 @@ import DataTable from '@/components/order/ordersList/dataTable';
 import Link from 'next/link';
 import { userAPI } from 'APIs';
 import withAuth from '@/components/auth/withAuth';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 
 const OrderMain: FC = () => {

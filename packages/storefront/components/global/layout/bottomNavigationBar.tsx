@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import {
   UserOutlineIcon,
 } from './headerIcons';
 import { toast } from 'react-toastify';
-import { resetAddress } from 'toolkit/customerAddressSlice';
+import { resetAddress } from 'store/slices/customerAddressSlice';
 
 interface Props {
   openDrawer: () => void;

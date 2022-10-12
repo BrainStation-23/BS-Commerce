@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { CustomerProduct } from '@bs-commerce/models';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 interface SingleProduct {
   product: CustomerProduct;

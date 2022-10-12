@@ -5,7 +5,7 @@ import { otpSchema } from '@/components/global/schemas/forgotPassword.schema';
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';
 import FormSubmitButton from '@/components/account/forgetPassword/components/common/submitButton';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 interface Props {
   setSubmitButtonState: Function;

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
 
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import Modal from '@/components/global/components/modal/modal';
 
 const CartTotal: NextComponentType = () => {

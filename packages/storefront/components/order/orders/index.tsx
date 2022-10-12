@@ -1,7 +1,7 @@
 import WithAuth from '@/components/auth/withAuth';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { userAPI } from 'APIs';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
 import { useEffect } from 'react';
 import { useState } from 'react';

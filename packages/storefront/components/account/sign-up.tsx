@@ -7,9 +7,9 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { toast } from 'react-toastify';
 
 import { userAPI } from 'APIs';
-import { storeUserToken } from 'toolkit/authSlice';
-import { storeCustomerDetails } from 'toolkit/userSlice';
-import { useAppDispatch } from 'customHooks/hooks';
+import { storeUserToken } from 'store/slices/authSlice';
+import { storeCustomerDetails } from 'store/slices/userSlice';
+import { useAppDispatch } from 'store/hooks/index';
 import {
   CreateCustomerRequest,
   CustomerSignInRequest,

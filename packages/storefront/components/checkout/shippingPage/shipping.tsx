@@ -1,7 +1,7 @@
 import React from 'react';
 import ChevronLeft from '@/components/global/iconsforCheckoutPage/chevron-left';
 import CheckoutFooter from '../checkoutFooter';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {

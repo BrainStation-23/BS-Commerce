@@ -3,7 +3,7 @@ import { OrderByUserId } from '@bs-commerce/models';
 import { useRouter } from 'next/router';
 import Detail from '@/components/order/singleOrder/detail';
 import withAuth from '@/components/auth/withAuth';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 
 const SingleOrderDetails: FC = () => {

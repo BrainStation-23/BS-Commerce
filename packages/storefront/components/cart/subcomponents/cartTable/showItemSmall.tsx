@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import {
   deleteCartItem,
   storeAllCartItems,
   updateCartItem,
-} from 'toolkit/cartSlice';
+} from 'store/slices/cartSlice';
 import { userAPI } from 'APIs';
 
 interface Props {

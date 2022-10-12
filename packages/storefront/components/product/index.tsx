@@ -12,18 +12,18 @@ import {
   WishlistItem,
   ICompareItems,
 } from '@bs-commerce/models';
-import { addToCart, storeAllCartItems } from 'toolkit/cartSlice';
-import { setModalState, setLoginModalState } from 'toolkit/modalSlice';
+import { addToCart, storeAllCartItems } from 'store/slices/cartSlice';
+import { setModalState, setLoginModalState } from 'store/slices/modalSlice';
 import {
   addToWishlist,
   deleteItemFromWishlist,
   storeWishlist,
-} from 'toolkit/productsSlice';
+} from 'store/slices/productsSlice';
 import {
   storeCompare,
   storeProductsToComparePublic,
-} from 'toolkit/compareSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+} from 'store/slices/compareSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';

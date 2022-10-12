@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Footer from '@/components/global/layout/footer';
 import Header from '@/components/global/layout/header';
@@ -15,7 +15,7 @@ import {
   setCartModalState,
   setLoginModalState,
   setModalState,
-} from 'toolkit/modalSlice';
+} from 'store/slices/modalSlice';
 import ModalLogin from '@/components/global/components//modal/modal';
 import CartModal from '@/components/global/components/modal/cartModal';
 import ComparisonModal from '@/components/comparison';

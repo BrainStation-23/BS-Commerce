@@ -3,8 +3,8 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import type { NextComponentType } from 'next';
-import { deleteCart } from 'toolkit/cartSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { deleteCart } from 'store/slices/cartSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Buttons from '@/components/global/components/buttons/button';
 import DataTable from '@/components/cart/subcomponents/cartTable/dataTable';

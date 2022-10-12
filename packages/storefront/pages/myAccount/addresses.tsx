@@ -4,9 +4,9 @@ var cookie = require('cookie');
 import Address from '@/components/myAccount/address';
 import { userAPI } from 'APIs';
 import { Customer } from '@bs-commerce/models';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { useAppDispatch } from 'store/hooks/index';
+import { storeCustomerDetails } from 'store/slices/userSlice';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
 
 interface Props {
   customerProfile: Customer;

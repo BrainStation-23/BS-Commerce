@@ -10,7 +10,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { SwiperSlide } from 'swiper/react';
 import { NextComponentType } from 'next';
 
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 
 import Banner from '@/components/home/bestSell/banner';
 import ProductRow from '@/components/home/bestSell/productRow.component';

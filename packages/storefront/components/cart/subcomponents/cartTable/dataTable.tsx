@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
 
-import { deleteCart } from 'toolkit/cartSlice';
-import { useAppDispatch } from 'customHooks/hooks';
+import { deleteCart } from 'store/slices/cartSlice';
+import { useAppDispatch } from 'store/hooks/index';
 
 import TableData from '@/components/cart/subcomponents/cartTable/tableData';
 import { userAPI } from 'APIs';

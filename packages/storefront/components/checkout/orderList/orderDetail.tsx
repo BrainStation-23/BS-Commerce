@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextComponentType } from 'next';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import CartProductList from '@/components/checkout/orderList/cartProductList';
 import useTranslation from 'next-translate/useTranslation';
 

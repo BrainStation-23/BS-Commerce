@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
 import AddNewAddressForm from '@/components/myAccount/addNewAddressForm';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import SingleAddress from '@/components/myAccount/singleAddress';
 import WithAuth from '@/components/auth/withAuth';
 

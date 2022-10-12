@@ -1,8 +1,8 @@
-import { useAppDispatch } from 'customHooks/hooks';
+import { useAppDispatch } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 import { CustomerAddress } from '@bs-commerce/models';
 import { useState } from 'react';
-import { deleteAddress } from 'toolkit/customerAddressSlice';
+import { deleteAddress } from 'store/slices/customerAddressSlice';
 import useTranslation from 'next-translate/useTranslation';
 
 import AddNewAddressForm from '@/components/myAccount/addNewAddressForm';

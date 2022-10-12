@@ -1,6 +1,6 @@
 import type { NextComponentType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import DeliveryDetails from '@/components/cart/subcomponents/deliveryDetails/main';
 import CartDetails from '@/components/cart/subcomponents/cartTable/main';
 import PageTitle from '@/components/global/components/pageTitle';

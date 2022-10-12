@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import React, { useState } from 'react';
-import { setCurrencyName } from 'toolkit/currencySlice';
+import { setCurrencyName } from 'store/slices/currencySlice';
 
 interface currency {
   abbv: string;

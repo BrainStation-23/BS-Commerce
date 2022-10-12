@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { OrderByUserId } from '@bs-commerce/models';
 import { useRouter } from 'next/router';
 import withAuth from '@/components/auth/withAuth';
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 import Link from 'next/link';
 import ChevronLeft from './icons/chevronLeft';

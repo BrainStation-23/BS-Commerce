@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import {
   setCartModalState,
   setModalState,
   setLoginModalState,
-} from 'toolkit/modalSlice';
+} from 'store/slices/modalSlice';
 
 import ImageSlider from '@/components/home/imageSlider';
 import HomeShipping from '@/components/home/homeShipping';

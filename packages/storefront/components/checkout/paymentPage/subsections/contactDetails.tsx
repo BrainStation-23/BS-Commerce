@@ -1,4 +1,4 @@
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
@@ -59,7 +59,9 @@ const ContactDetails: React.FC<Props> = (props) => {
         <hr />
         <div className="my-3 flex flex-col flex-wrap gap-0 text-sm sm:flex-col sm:gap-0 md:flex-row md:gap-6 lg:flex-row lg:gap-6 xl:flex-row xl:gap-6">
           <p className="text-gray-500">{t('checkout:method')}</p>
-          <p>{t('checkout:standard')} . {t('checkout:free')}</p>
+          <p>
+            {t('checkout:standard')} . {t('checkout:free')}
+          </p>
         </div>
       </div>
     </>

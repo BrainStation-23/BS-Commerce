@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 import { userAPI } from 'APIs';
-import { storeUserToken } from 'toolkit/authSlice';
-import { addToShippingInfo } from 'toolkit/checkoutSlice';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
+import { storeUserToken } from 'store/slices/authSlice';
+import { addToShippingInfo } from 'store/slices/checkoutSlice';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { informationSchema } from '@/components/global/schemas/checkout.schema';
 import ChevronLeft from '@/components/global/iconsforCheckoutPage/chevron-left';
 import FieldTemplate from '../fieldTemplate';

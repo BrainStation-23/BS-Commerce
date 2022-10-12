@@ -1,4 +1,4 @@
-import { useAppSelector } from 'customHooks/hooks';
+import { useAppSelector } from 'store/hooks/index';
 import { useState } from 'react';
 import SingleReview from './SingleReview';
 

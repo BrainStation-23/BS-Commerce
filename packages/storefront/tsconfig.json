@@ -19,7 +19,7 @@
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
     }
-  },
+  },store/hooks/*
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

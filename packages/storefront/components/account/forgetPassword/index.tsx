@@ -6,8 +6,8 @@ import {
 } from '@bs-commerce/models';
 import { useState } from 'react';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeOtp, storeUsername } from 'toolkit/forgetPasswordSlice';
+import { useAppDispatch } from 'store/hooks/index';
+import { storeOtp, storeUsername } from 'store/slices/forgetPasswordSlice';
 import { useRouter } from 'next/router';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';

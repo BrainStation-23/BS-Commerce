@@ -2,8 +2,8 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { useRouter } from 'next/router';
-import { useAppDispatch } from 'customHooks/hooks';
-import { setLoginModalState } from 'toolkit/modalSlice';
+import { useAppDispatch } from 'store/hooks/index';
+import { setLoginModalState } from 'store/slices/modalSlice';
 
 interface Props {
   setModalOn: Function;
