@@ -1,5 +1,5 @@
-import type { NextPage } from "next";
-import DealsComponent from "@/components/deals/index";
+import type { NextPage } from 'next';
+import DealsComponent from '@/modules/deals/index';
 
 const Deals: NextPage = () => {
   return (

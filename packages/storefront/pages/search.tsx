@@ -1,5 +1,5 @@
-import type { NextPage } from "next";
-import SearchComponent from "@/components/search";
+import type { NextPage } from 'next';
+import SearchComponent from '@/modules/search';
 
 const Search: NextPage = () => {
   return <SearchComponent />;

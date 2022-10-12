@@ -6,7 +6,7 @@ import { userAPI } from 'APIs';
 import { useAppDispatch } from 'store/hooks';
 import { storeWishlist } from 'store/slices/productsSlice';
 
-import WishlistComponent from '@/components/wishlist';
+import WishlistComponent from '@/modules/wishlist';
 
 interface Props {
   wishlistedProducts: Wishlist;

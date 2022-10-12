@@ -10,7 +10,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { userAPI } from 'APIs';
 import { Product, Brand, CustomerProduct } from '@bs-commerce/models';
 
-import CategoryPageComponent from '@/components/cateoryProducts';
+import CategoryPageComponent from '@/modules/cateoryProducts';
 
 interface CategoryNameIdProp {
   name: string;
