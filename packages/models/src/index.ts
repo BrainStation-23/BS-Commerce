@@ -17,3 +17,4 @@ export * from './product/index';
 export * from './user/index';
 export * from './tags/index';
 export * from './global-search/index';
+export * from './branch/index'
