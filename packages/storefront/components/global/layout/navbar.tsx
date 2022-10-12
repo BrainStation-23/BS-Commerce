@@ -10,7 +10,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'customHooks/hooks';
 import HeaderCategory from './headerCategory';
 
-import HeaderAccount from './header-account';
+import HeaderAccount from './headerAccount';
 import Search from './search';
 
 interface Props {

@@ -10,7 +10,7 @@ import { userAPI } from 'APIs';
 import { deleteCart } from 'toolkit/cartSlice';
 import FieldTemplate from '@/components/checkout/fieldTemplate';
 import { paymentSchema } from '@/components/global/schemas/checkout.schema';
-import ChevronLeft from '@/components/global/icons-for-checkout-page/chevron-left';
+import ChevronLeft from '@/components/global/iconsforCheckoutPage/chevron-left';
 import {
   CartProductPhoto,
   CreateProductOrderDetails,

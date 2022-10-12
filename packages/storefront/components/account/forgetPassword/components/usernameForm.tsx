@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import { usernameSchema } from '@/components/global/schemas/forgot-password.schema';
+import { usernameSchema } from '@/components/global/schemas/forgotPassword.schema';
 
 import FormCancelButton from '@/components/account/forgetPassword/components/common/cancelButton';
 import FieldTemplate from '@/components/account/forgetPassword/components/common/fieldTemplate';

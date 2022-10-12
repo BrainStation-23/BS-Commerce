@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react';
 import Search from '@/components/global/layout/search';
 import Currency from '@/components/global/layout/currency';
 import Language from '@/components/global/components/languages';
-import HeaderAccount from '@/components/global/layout/header-account';
+import HeaderAccount from '@/components/global/layout/headerAccount';
 
 import Navbar from './navbar';
-import BottomNavigationBar from './bottom-navigation-bar';
+import BottomNavigationBar from './bottomNavigationBar';
 import Drawer from './drawer';
 import { useAppSelector } from 'customHooks/hooks';
 import useTranslation from 'next-translate/useTranslation';

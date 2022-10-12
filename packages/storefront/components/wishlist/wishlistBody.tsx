@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useAppSelector } from 'customHooks/hooks';
 import { NextComponentType } from 'next';
 
-import WishlistIcon from '@/components/wishlist/wishlist-icon';
+import WishlistIcon from '@/components/wishlist/wishlistIcon';
 import WishlistProductInfo from '@/components/wishlist/wishlistProduct';
 import Icon from '@/components/global/components/icon';
 import { Wishlist, WishlistItem } from '@bs-commerce/models';

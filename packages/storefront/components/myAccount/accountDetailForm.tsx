@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import AccountDetailsFormField from './account-detailFormFieldTemplate';
+import AccountDetailsFormField from './accountDetailFormFieldTemplate';
 interface props {
   isPhoneVerified: boolean;
   isEmailVerified: boolean;

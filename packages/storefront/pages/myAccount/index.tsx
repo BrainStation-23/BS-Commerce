@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import AccountDetails from '@/components/myAccount/account-details';
+import AccountDetails from '@/components/myAccount/accountDetails';
 import { userAPI } from 'APIs';
 import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
 import { useAppDispatch, useAppSelector } from 'customHooks/hooks';

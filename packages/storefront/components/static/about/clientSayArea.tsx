@@ -5,7 +5,7 @@ import { SwiperSlide } from "swiper/react";
 import { accordionBody, CarouselBody } from "utils/types";
 
 import Accordion from "@/components/global/components/accordion";
-import CarouselSlider from "@/components/global/components/CarouselSlider";
+import CarouselSlider from "@/components/global/components/carouselSlider";
 import Container from "@/components/global/components/container";
 
 interface Props {

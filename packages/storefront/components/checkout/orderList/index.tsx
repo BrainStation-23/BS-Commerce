@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'customHooks/hooks';
 
-import ChevronDown from '@/components/global/icons-for-checkout-page/chevron-down';
-import ChevronUp from '@/components/global/icons-for-checkout-page/chevron-up';
-import ShoppingCart from '@/components/global/icons-for-checkout-page/shopping-cart';
+import ChevronDown from '@/components/global/iconsforCheckoutPage/chevron-down';
+import ChevronUp from '@/components/global/iconsforCheckoutPage/chevron-up';
+import ShoppingCart from '@/components/global/iconsforCheckoutPage/shopping-cart';
 import OrderedProducts from '@/components/checkout/orderList/orderDetail';
 import useTranslation from 'next-translate/useTranslation';
 

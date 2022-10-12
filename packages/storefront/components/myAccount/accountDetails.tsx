@@ -18,7 +18,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { CustomerSchema } from './schema/customer.schema';
 
 import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
-import AccountDetailsForm from '@/components/myAccount/account-detailForm';
+import AccountDetailsForm from '@/components/myAccount/accountDetailForm';
 import SingleDetail from '@/components/myAccount/singleDetail';
 import withAuth from '@/components/auth/withAuth';
 
