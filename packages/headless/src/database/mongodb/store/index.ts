@@ -8,6 +8,15 @@ import { AdminModel } from '../admin/admin.model';
 
 @Injectable()
 export class StoreDatabase implements IStoreDatabase {
+  async findStoreAdmin(query: Record<string, any>): Promise<Admin | null> {
+    try {
+      return await AdminModel.findOne(query).select('-_id').lean();
+    } catch (error: any) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
   async getStore(query: Record<string, any>): Promise<Store | null> {
     try {
       return await StoreModel.findOne(query).select('-_id').lean();
@@ -21,37 +30,6 @@ export class StoreDatabase implements IStoreDatabase {
     store: Store;
     admin: Admin;
   }): Promise<Store | null> {
-    // await session.withTransaction(async () => {
-    //   await AdminModel.create({ ...data.admin }, { session });
-    //   await StoreModel.create(
-    //     {
-    //       ...data.store,
-    //       admin: data.admin.id,
-    //     },
-    //     { session },
-    //   );
-    // });
-    // session.commitTransaction();
-    // session.endSession();
-    // await mongoose
-    //   .startSession()
-    //   .then((_session) => {
-    //     session = _session;
-    //     session.startTransaction();
-    //     AdminModel.create({ ...data.admin }, { session: session });
-    //     StoreModel.create(
-    //       {
-    //         ...data.store,
-    //         id: '05103b3d-32b5-46f0-af83-f75facca91c6',
-    //         admin: data.admin.id,
-    //       },
-    //       { session: session },
-    //     );
-    //   })
-    //   .then(() => session.commitTransaction())
-    //   .then(() => session.abortTransaction())
-    //   .then(() => session.endSession());
-
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
@@ -59,12 +37,13 @@ export class StoreDatabase implements IStoreDatabase {
         session,
       });
 
-      await new StoreModel({
+      const store: Store = await new StoreModel({
         ...data.store,
         admin: admin.id,
       }).save({ session });
 
       await session.commitTransaction();
+      return store;
     } catch (error: any) {
       console.log(error.message);
       await session.abortTransaction();

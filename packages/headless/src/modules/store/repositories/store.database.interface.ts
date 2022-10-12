@@ -5,6 +5,9 @@ import { Store } from 'src/entity/store';
 @Injectable()
 export abstract class IStoreDatabase {
   abstract getStore: (query: Record<string, any>) => Promise<Store | null>;
+  abstract findStoreAdmin: (
+    query: Record<string, any>,
+  ) => Promise<Admin | null>;
   abstract createStore: (data: {
     store: Store;
     admin: Admin;

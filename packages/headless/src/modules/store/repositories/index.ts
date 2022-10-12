@@ -11,6 +11,10 @@ export class StoreRepository {
     return await this.db.getStore(query);
   }
 
+  async findStoreAdmin(query: Record<string, any>): Promise<Admin | null> {
+    return await this.db.findStoreAdmin(query);
+  }
+
   async createStore(data: {
     store: Store;
     admin: Admin;

@@ -17,22 +17,26 @@ export class StoreService {
   async createStore(
     data: CreateStoreRequestBody,
   ): Promise<CreateStoreResponse> {
-    const doesStoreShopNameMatch = await this.storeRepo.getStore({
-      'info.shopName': data.info.shopName,
-    });
-    if (doesStoreShopNameMatch)
+    const doesStoreShopOrLegalNameMatch =
+      (await this.storeRepo.getStore({
+        'info.shopName': data.info.shopName,
+      })) ||
+      (await this.storeRepo.getStore({
+        'info.legalName': data.info.legalName,
+      }));
+    if (doesStoreShopOrLegalNameMatch)
       return this.helper.serviceResponse.errorResponse(
-        CreateStoreErrorMessages.STORE_SHOP_NAME_EXISTS,
+        CreateStoreErrorMessages.STORE_SHOP_OR_LEGAL_NAME_EXISTS,
         null,
         HttpStatus.BAD_REQUEST,
       );
 
-    const doesStoreLegalNameMatch = await this.storeRepo.getStore({
-      'info.legalName': data.info.legalName,
+    const doesStoreAdminEmailMatch = await this.storeRepo.findStoreAdmin({
+      'info.email': data.admin.email,
     });
-    if (doesStoreLegalNameMatch)
+    if (doesStoreAdminEmailMatch)
       return this.helper.serviceResponse.errorResponse(
-        CreateStoreErrorMessages.STORE_LEGAL_NAME_EXISTS,
+        CreateStoreErrorMessages.STORE_ADMIN_EMAIL_EXISTS,
         null,
         HttpStatus.BAD_REQUEST,
       );

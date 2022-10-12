@@ -102,8 +102,9 @@ export class CreateStoreErrorResponseDto implements CreateStoreErrorResponse {
   @ApiProperty({
     example: CreateStoreErrorMessages.CAN_NOT_CREATE_STORE,
     examples: [
-      CreateStoreErrorMessages.STORE_SHOP_NAME_EXISTS,
-      CreateStoreErrorMessages.STORE_LEGAL_NAME_EXISTS,
+      CreateStoreErrorMessages.STORE_SHOP_OR_LEGAL_NAME_EXISTS,
+      CreateStoreErrorMessages.CAN_NOT_CREATE_STORE,
+      CreateStoreErrorMessages.STORE_ADMIN_EMAIL_EXISTS,
     ],
   })
   error: CreateStoreErrorMessages;
