@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import Container from '@/components/global/components/container';
 import Accordion from '@/components/global/components/accordion';
 
-import { accordionBody } from 'utils/types';
+import { accordionBody } from 'APIs/utils/types';
 
 interface Props {
   accordionList: accordionBody[];

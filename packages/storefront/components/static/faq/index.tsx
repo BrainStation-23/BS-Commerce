@@ -1,6 +1,6 @@
 import type { NextComponentType } from 'next';
 
-import { accordionBody } from 'utils/types';
+import { accordionBody } from 'APIs/utils/types';
 
 import PageTitle from '@/components/global/components/pageTitle';
 import FaqContentArea from '@/components/static/faq/contentArea';
