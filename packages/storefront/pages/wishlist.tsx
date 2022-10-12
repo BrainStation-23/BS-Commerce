@@ -3,7 +3,7 @@ var cookie = require('cookie');
 
 import { Wishlist } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'store/hooks/index';
+import { useAppDispatch } from 'store/hooks';
 import { storeWishlist } from 'store/slices/productsSlice';
 
 import WishlistComponent from '@/components/wishlist';

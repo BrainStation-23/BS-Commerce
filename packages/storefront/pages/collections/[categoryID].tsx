@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from 'store/hooks/index';
+import { useAppDispatch } from 'store/hooks';
 import {
   storeBrands,
   storeCategorizedProduct,
