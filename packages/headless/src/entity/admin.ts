@@ -3,19 +3,15 @@ export class Admin {
   info: {
     name: string;
     email: string;
-    phone: string;
-  };
-  image: {
-    logo: string;
-    cover: string;
+    phone?: string;
   };
   password: string;
   role: {
     name: string;
-    roleId: string;
+    roleId?: string;
     roleType: string;
   };
   // branchId
-  branch: string;
+  branch?: string;
   isActive: boolean;
 }

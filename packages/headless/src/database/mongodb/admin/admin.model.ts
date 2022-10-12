@@ -23,7 +23,7 @@ const AdminSchema = new Schema<Admin>(
       roleId: String,
       roleType: {
         type: String,
-        enum: ['store', 'outlet'],
+        enum: ['STORE', 'OUTLET'],
       },
     },
     // branchId
