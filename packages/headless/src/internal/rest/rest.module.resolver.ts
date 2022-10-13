@@ -1,3 +1,4 @@
+import { SSLModule } from './../../plugins/payment-gateway/sslcommerce/ssl.rest.module';
 import { AuthModule } from 'src/modules/auth/auth.rest.module';
 import { CartModule } from 'src/modules/cart/cart.rest.module';
 import { CategoryModule } from 'src/modules/category/category.rest.module';
@@ -32,5 +33,6 @@ export const ResolveRestModule = () => {
     TagsModule,
     CustomerModule,
     SearchModule,
+    SSLModule
   ];
 };
