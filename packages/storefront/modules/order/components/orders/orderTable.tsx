@@ -1,16 +1,14 @@
-import { IOrderProduct, OrderByUserId } from '@bs-commerce/models';
+import { OrderByUserId } from '@bs-commerce/models';
 import React from 'react';
 import moment from 'moment';
 import Link from 'next/link';
-import TableData from '@/modules/order/singleOrderDetails/productTable/tableData';
-import { NextComponentType } from 'next';
+import TableData from '@/modules/order/components/orders/tableData';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
-  productList: IOrderProduct[];
+  orderList: OrderByUserId[];
 }
-
-const ProductTable: React.FC<Props> = ({ productList }) => {
+const OrderTable: React.FC<Props> = ({ orderList }) => {
   const { t } = useTranslation();
 
   return (
@@ -22,34 +20,37 @@ const ProductTable: React.FC<Props> = ({ productList }) => {
               <thead className="">
                 <tr className="border-b">
                   <th scope="col" className="px-5 py-4">
-                    {t('common:image')}
+                    {t('order:OrderID')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('common:product')}
+                    {t('order:date')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('common:price')}
+                    {t('order:status')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('common:quantity')}
+                    {t('order:payment_method')}
                   </th>
                   <th scope="col" className="px-5 py-4">
-                    {t('common:total')}
+                    {t('order:product_cost')}
+                  </th>
+                  <th scope="col" className="px-5 py-4">
+                    {t('order:action')}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {productList?.map((singleProduct, index) => {
+                {orderList?.map((singleOrder, index) => {
                   return (
-                    <React.Fragment key={singleProduct?.productId}>
+                    <React.Fragment key={singleOrder?.orderId}>
                       <tr
                         className={
-                          index === productList?.length - 1
+                          index === orderList?.length - 1
                             ? 'border-none'
                             : 'border-b'
                         }
                       >
-                        <TableData singleProduct={singleProduct} />
+                        <TableData singleOrder={singleOrder} />
                       </tr>
                     </React.Fragment>
                   );
@@ -63,4 +64,4 @@ const ProductTable: React.FC<Props> = ({ productList }) => {
   );
 };
 
-export default ProductTable;
+export default OrderTable;

@@ -10,8 +10,7 @@ import ChevronRight from './icons/chevronRight';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/productTable';
-import ReOrder from '../singleOrder/reOrder';
-import { CheckCircleOutlineIcon } from '@/modules/global/layout/headerIcons';
+import ReOrder from './reOrder';
 import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';
 

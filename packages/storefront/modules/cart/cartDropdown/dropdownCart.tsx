@@ -7,7 +7,6 @@ import { ResponseItem } from '@bs-commerce/models';
 import { deleteCartItem } from 'store/slices/cartSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
-import Buttons from '@/modules/global/components/buttons/button';
 import Modal from '@/modules/global/components/modal/modal';
 import Image from 'next/image';
 import { userAPI } from 'APIs';
