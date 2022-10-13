@@ -16,6 +16,7 @@ import { WishListDatabase as WishListDatabaseMongo } from './mongodb/wishList';
 import { TagsDatabase as TagsDatabaseMongo } from './mongodb/tags';
 import { BranchDatabase as BranchDatabaseMongo } from './mongodb/branch';
 
+import { StoreDatabase as StoreDatabaseMongo } from './mongodb/store';
 
 type CLASS_NAME =
   | 'WISHLIST'
@@ -31,7 +32,8 @@ type CLASS_NAME =
   | 'BRAND'
   | 'TAGS'
   | 'CUSTOMER'
-  | 'BRANCH';
+  | 'BRANCH'
+  | 'STORE';
 
 const db = dbConfig.db;
 
@@ -66,6 +68,8 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return TagsDatabaseMongo;
           case 'BRANCH':
             return BranchDatabaseMongo;
+          case 'STORE':
+            return StoreDatabaseMongo;
 
           default:
             break;
