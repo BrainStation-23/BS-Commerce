@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import AccountDetails from '@/components/myAccount/account-details';
+import AccountDetails from '@/modules/myAccount/accountDetails';
 import { userAPI } from 'APIs';
 import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { storeCustomerDetails } from 'store/slices/userSlice';
 
 interface Props {
   customerInformation: GetCustomerInformationSuccessResponse;

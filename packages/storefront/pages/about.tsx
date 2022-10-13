@@ -1,6 +1,6 @@
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
-import AboutComponent from "@/components/static/about";
+import AboutComponent from '@/modules/static/about';
 
 const About: NextPage = () => {
   return <AboutComponent />;

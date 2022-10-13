@@ -54,7 +54,7 @@ import {
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { apiEndPoints } from 'utils/apiEndPoints';
+import { apiEndPoints } from 'APIs/utils/apiEndPoints';
 import { GetAllBrandsResponse } from 'models';
 
 export async function getPublicProductsStatic(): Promise<

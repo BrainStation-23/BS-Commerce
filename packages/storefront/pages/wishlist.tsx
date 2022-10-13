@@ -3,10 +3,10 @@ var cookie = require('cookie');
 
 import { Wishlist } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeWishlist } from 'toolkit/productsSlice';
+import { useAppDispatch } from 'store/hooks';
+import { storeWishlist } from 'store/slices/productsSlice';
 
-import WishlistComponent from '@/components/wishlist';
+import WishlistComponent from '@/modules/wishlist';
 
 interface Props {
   wishlistedProducts: Wishlist;

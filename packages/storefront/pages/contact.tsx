@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import PageTitle from '@/components/global/components/pageTitle';
-import MapArea from '@/components/static/contact/mapArea';
-import ContactArea from '@/components/static/contact/contactArea';
+import PageTitle from '@/modules/global/components/pageTitle';
+import MapArea from '@/modules/static/contact/mapArea';
+import ContactArea from '@/modules/static/contact/contactArea';
 import useTranslation from 'next-translate/useTranslation';
 
 const Contact: NextPage = () => {

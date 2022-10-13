@@ -7,15 +7,15 @@ import {
   NestedCategoryList,
 } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeCategory } from 'toolkit/categorySlice';
+import { useAppDispatch } from 'store/hooks';
+import { storeCategory } from 'store/slices/categorySlice';
 import {
   storeFeaturedProducts,
   storeProducts,
   storeWishlist,
-} from 'toolkit/productsSlice';
+} from 'store/slices/productsSlice';
 
-import HomeComponent from '@/components/home';
+import HomeComponent from '@/modules/home';
 
 interface Props {
   products: CustomerProduct[];

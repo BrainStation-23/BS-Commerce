@@ -1,10 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
-import CartComponent from '@/components/cart/index';
+import CartComponent from '@/modules/cart/index';
 import { Cart, ResponseItem } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeAllCartItems } from 'toolkit/cartSlice';
+import { useAppDispatch } from 'store/hooks';
+import { storeAllCartItems } from 'store/slices/cartSlice';
 var cookie = require('cookie');
 
 interface Props {

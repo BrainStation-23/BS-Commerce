@@ -71,7 +71,7 @@ import {
   ReOrderResponse,
 } from '@bs-commerce/models';
 
-import { apiEndPoints } from 'utils/apiEndPoints';
+import { apiEndPoints } from 'APIs/utils/apiEndPoints';
 // import { User } from 'utils/types';
 import { NextRouter } from 'next/router';
 
