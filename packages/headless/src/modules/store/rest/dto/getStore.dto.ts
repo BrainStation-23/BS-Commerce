@@ -1,13 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNumber, IsObject, IsString } from 'class-validator';
+import { StoreDto } from './store.dto';
 import {
   GetStoreParams,
   GetStoreErrorMessages,
   GetStoreErrorResponse,
   GetStoreSuccessResponse,
 } from 'models';
-import { StoreDto } from './store.dto';
 
 export class GetStoreParamsDto implements GetStoreParams {
   @ApiProperty()

@@ -94,6 +94,11 @@ export class StoreDto implements Store {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  url: string;
+
+  @ApiProperty({ description: 'Admin ID' })
+  @IsString()
+  @IsNotEmpty()
   admin: string;
 
   @ApiProperty()
