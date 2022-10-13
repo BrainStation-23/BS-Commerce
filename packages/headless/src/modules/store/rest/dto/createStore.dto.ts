@@ -6,6 +6,7 @@ import {
   IsObject,
   IsOptional,
   IsString,
+  MinLength,
 } from 'class-validator';
 import { HttpStatus } from '@nestjs/common';
 import { StoreDto, StoreImage, StoreInfo } from './store.dto';
@@ -42,7 +43,7 @@ export class CreateStoreAddressDto implements CreateStoreAddress {
 }
 
 export class CreateStoreAdminDto {
-  @ApiProperty({ required: false })
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -60,6 +61,9 @@ export class CreateStoreAdminDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(6, {
+    message: 'Password is too short. Minimal length is $constraint1 characters',
+  })
   password: string;
 }
 
@@ -102,9 +106,9 @@ export class CreateStoreErrorResponseDto implements CreateStoreErrorResponse {
   @ApiProperty({
     example: CreateStoreErrorMessages.CAN_NOT_CREATE_STORE,
     examples: [
-      CreateStoreErrorMessages.STORE_SHOP_OR_LEGAL_NAME_EXISTS,
+      CreateStoreErrorMessages.STORE_SHOP_NAME_EXISTS,
       CreateStoreErrorMessages.CAN_NOT_CREATE_STORE,
-      CreateStoreErrorMessages.STORE_ADMIN_EMAIL_EXISTS,
+      CreateStoreErrorMessages.EMAIL_ALREADY_USED,
     ],
   })
   error: CreateStoreErrorMessages;

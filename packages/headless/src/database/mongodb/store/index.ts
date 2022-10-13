@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Admin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/admin';
 import { Store } from 'src/entity/store';
 import { IStoreDatabase } from 'src/modules/store/repositories/store.database.interface';
 import { StoreModel } from './store.model';
@@ -8,7 +8,7 @@ import { AdminModel } from '../admin/admin.model';
 
 @Injectable()
 export class StoreDatabase implements IStoreDatabase {
-  async findStoreAdmin(query: Record<string, any>): Promise<Admin | null> {
+  async findStoreAdmin(query: Record<string, any>): Promise<StoreAdmin | null> {
     try {
       return await AdminModel.findOne(query).select('-_id').lean();
     } catch (error: any) {
@@ -28,12 +28,12 @@ export class StoreDatabase implements IStoreDatabase {
 
   async createStore(data: {
     store: Store;
-    admin: Admin;
+    admin: StoreAdmin;
   }): Promise<Store | null> {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const admin: Admin = await new AdminModel({ ...data.admin }).save({
+      const admin: StoreAdmin = await new AdminModel({ ...data.admin }).save({
         session,
       });
 

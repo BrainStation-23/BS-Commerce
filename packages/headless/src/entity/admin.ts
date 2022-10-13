@@ -1,4 +1,4 @@
-export class Admin {
+export class StoreAdmin {
   id: string;
   info: {
     name: string;
