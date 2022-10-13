@@ -5,6 +5,8 @@ import {
   CreateStoreErrorMessages,
   CreateStoreRequestBody,
   CreateStoreResponse,
+  GetStoreErrorMessages,
+  GetStoreResponse,
 } from 'models';
 import { randomUUID } from 'crypto';
 import * as bcrypt from 'bcrypt';
@@ -76,5 +78,16 @@ export class StoreService {
       store,
       HttpStatus.CREATED,
     );
+  }
+
+  async getStore(storeId: string): Promise<GetStoreResponse> {
+    const store = await this.storeRepo.getStore({ id: storeId });
+    if (!store)
+      return this.helper.serviceResponse.errorResponse(
+        GetStoreErrorMessages.NO_STORE_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    return this.helper.serviceResponse.successResponse(store, HttpStatus.OK);
   }
 }
