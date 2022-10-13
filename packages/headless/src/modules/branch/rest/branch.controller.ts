@@ -19,7 +19,7 @@ import { BranchService } from '../services';
 import { SingleBranchSuccessResponseDto, SingleBranchErrorResponseDto } from './dto/branch.dto';
 
 @ApiTags('Branch API')
-@Controller('branch')
+@Controller('store-branch')
 export class BranchController {
     constructor(private branchService: BranchService) {}
 
@@ -44,7 +44,7 @@ export class BranchController {
         return { code, ...response};
     }
 
-    @Get('/allBranch/:storeId')
+    @Get('/branch-list/:storeId')
     @ApiResponse({
         status: HttpStatus.OK,
         description: 'Branches were fetched successfully',

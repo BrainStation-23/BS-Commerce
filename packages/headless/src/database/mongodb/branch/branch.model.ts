@@ -41,7 +41,7 @@ const BranchSchema = new Schema<Branch>(
         address: BranchAddressSchema,
         isActive: {
             type: Boolean,
-            default: false,
+            default: true,
         },
     },
     {
@@ -50,6 +50,5 @@ const BranchSchema = new Schema<Branch>(
     },
 );
 
-BranchSchema.index({ store: 1 });
 const BranchModel = model<Branch>('Branch', BranchSchema);
 export { BranchModel };
