@@ -18,7 +18,7 @@ interface Props {
   total: number;
 }
 
-const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
+const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
   const dispatch = useAppDispatch();
   const currency = useAppSelector((state) => state.persistedReducer.currency);
 
@@ -145,4 +145,4 @@ const ShowItemSmall: React.FC<Props> = ({ data, setTotal, total }: Props) => {
   );
 };
 
-export default ShowItemSmall;
+export default SingleItem;

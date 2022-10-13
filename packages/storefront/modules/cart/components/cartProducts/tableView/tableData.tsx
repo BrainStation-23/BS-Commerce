@@ -1,5 +1,5 @@
 import { useAppSelector } from 'store/hooks/index';
-import ShowData from '@/modules/cart/subcomponents/cartTable/showData';
+import ShowData from '@/modules/cart/components/cartProducts/tableView/showData';
 
 const TableData = () => {
   const cartData = useAppSelector(

@@ -7,10 +7,10 @@ import type { NextComponentType } from 'next';
 import { deleteCart } from 'store/slices/cartSlice';
 import { useAppDispatch } from 'store/hooks/index';
 
-import TableData from '@/modules/cart/subcomponents/cartTable/tableData';
+import TableData from '@/modules/cart/components/cartProducts/tableView/tableData';
 import { userAPI } from 'APIs';
 
-const DataTable: NextComponentType = () => {
+const Table: NextComponentType = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { t } = useTranslation();
@@ -91,4 +91,4 @@ const DataTable: NextComponentType = () => {
   );
 };
 
-export default DataTable;
+export default Table;

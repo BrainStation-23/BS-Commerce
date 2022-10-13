@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import type { NextComponentType } from 'next';
 
-import DeliveryDate from '@/modules/cart/subcomponents/deliveryDetails/date';
-import CartTotal from '@/modules/cart/subcomponents/deliveryDetails/cartTotal';
-import DeilveryInstructions from '@/modules/cart/subcomponents/deliveryDetails/instruction';
+import DeliveryDate from '@/modules/cart/components/deliveryDetails/date';
+import CartTotal from '@/modules/cart/components/deliveryDetails/cartTotal';
+import DeilveryInstructions from '@/modules/cart/components/deliveryDetails/instruction';
 
 const DeilveryDetails: NextComponentType = () => {
   const [fill, setFill] = useState(false);
