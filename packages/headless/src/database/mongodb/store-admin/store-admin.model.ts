@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { Admin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/store-admin';
 
-const AdminSchema = new Schema<Admin>(
+const StoreAdminSchema = new Schema<StoreAdmin>(
   {
     id: {
       type: String,
@@ -23,7 +23,7 @@ const AdminSchema = new Schema<Admin>(
       roleId: String,
       roleType: {
         type: String,
-        enum: ['store', 'outlet'],
+        enum: ['OWNER', 'BRANCH_MANAGER'],
       },
     },
     // branchId
@@ -39,6 +39,6 @@ const AdminSchema = new Schema<Admin>(
   },
 );
 
-AdminSchema.index({ role: 1 });
-const AdminModel = model<Admin>('Admin', AdminSchema);
-export { AdminModel };
+StoreAdminSchema.index({ role: 1 });
+const StoreAdminModel = model<StoreAdmin>('StoreAdmin', StoreAdminSchema);
+export { StoreAdminModel };

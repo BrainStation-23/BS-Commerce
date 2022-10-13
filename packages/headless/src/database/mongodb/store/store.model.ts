@@ -30,14 +30,8 @@ const StoreSchema = new Schema<Store>(
       unique: true,
     },
     info: {
-      shopName: {
-        type: String,
-        unique: true,
-      },
-      legalName: {
-        type: String,
-        unique: true,
-      },
+      shopName: String,
+      legalName: String,
       description: String,
     },
     image: {
@@ -45,6 +39,10 @@ const StoreSchema = new Schema<Store>(
       cover: String,
     },
     address: AddressSchema,
+    url: {
+      type: String,
+      unique: true,
+    },
     // store adminId
     admin: String,
     isActive: Boolean,

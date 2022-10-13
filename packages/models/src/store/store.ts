@@ -1,5 +1,5 @@
-export class StoreAddress {
-  id?: string;
+export interface StoreAddress {
+  id: string;
   addressLine1: string;
   addressLine2?: string;
   city: string;
@@ -7,20 +7,19 @@ export class StoreAddress {
   postCode: string;
 }
 
-export class Store {
-  id?: string;
+export interface Store {
+  id: string;
   info: {
     shopName: string;
     description?: string;
-    legalName?: string;
+    legalName: string;
   };
   image?: {
     logo?: string;
     cover?: string;
   };
   address: StoreAddress;
-  url: string;
   // store adminId
-  admin?: string;
+  admin: string;
   isActive: boolean;
 }
