@@ -13,12 +13,8 @@ import { BrandModule } from 'src/modules/brands/brand.rest.module';
 import { WishListModule } from 'src/modules/wishlist/wishlist.rest.module';
 import { CustomerModule } from 'src/modules/customer/customer.rest.module';
 import { SearchModule } from 'src/modules/global-search/search.module';
-<<<<<<< HEAD
 import { BranchModule } from 'src/modules/branch/branch.rest.module';
 import { StoreModule } from 'src/modules/store/store.rest.module';
-=======
-import { StoreModule } from 'src/modules/store/store.rest.module';
->>>>>>> multi-vendor-backend
 
 export const ResolveRestModule = () => {
   return [
