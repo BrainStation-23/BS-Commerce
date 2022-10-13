@@ -53,15 +53,15 @@ const CartTotal: NextComponentType = () => {
             </div>
           </div>
           <div className="flex justify-center py-5 px-6">
-            <table className="w-full border-collapse border border-slate-400">
+            <table className="w-full border-collapse border">
               <tbody>
-                <tr>
-                  <td className="ml-20 border border-slate-300 px-8 py-5 md:px-8 lg:px-8 xl:px-8">
+                <tr className='border-b'>
+                  <td className="ml-20  px-8 py-5 md:px-8 lg:px-8 xl:px-8">
                     <span className="font-semibold sm:mr-8 md:mr-16">
                       {t('cart:cart_subtotal')}
                     </span>
                   </td>
-                  <td className="mx-5 ml-20 border border-slate-300 px-10 py-5 text-center md:px-8 lg:px-8 xl:px-8">
+                  <td className="mx-5 ml-20  px-10 py-5 text-center md:px-8 lg:px-8 xl:px-8">
                     <p className="sm:mx-10">
                       {Intl.NumberFormat(
                         `${currency.currencyLanguage}-${currency.currencyStyle}`,
@@ -74,12 +74,12 @@ const CartTotal: NextComponentType = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="ml-20 border border-slate-300 px-8 py-5">
+                  <td className="ml-20  px-8 py-5">
                     <span className="font-semibold md:mr-24 xl:mr-24">
                       {t('common:total')}
                     </span>
                   </td>
-                  <td className="border border-slate-300 px-8 py-5 text-center">
+                  <td className=" px-8 py-5 text-center">
                     <p className="sm:mx-10">
                       {Intl.NumberFormat(
                         `${currency.currencyLanguage}-${currency.currencyStyle}`,
