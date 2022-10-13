@@ -71,27 +71,29 @@ const BestSell: NextComponentType = () => {
                         />
                       </SwiperSlide>
                     </React.Fragment>
-                  ) : index + 1 === products.length ? (
-                    <React.Fragment
-                      key={product?.id! + products[index - 1]?.id}
-                    >
-                      <SwiperSlide key={Math.random() * 999999}>
-                        <ProductRow
-                          products={[
-                            products[index],
-                            index % 3 === 0 &&
-                            products.length > getMinimumProduct()
-                              ? products[0]
-                              : products[index - 1],
-                            index % 3 === 0 &&
-                            products.length > getMinimumProduct()
-                              ? products[1]
-                              : products[0],
-                          ]}
-                        />
-                      </SwiperSlide>
-                    </React.Fragment>
-                  ) : null
+                  ) : (
+                    index + 1 === products.length && (
+                      <React.Fragment
+                        key={product?.id! + products[index - 1]?.id}
+                      >
+                        <SwiperSlide key={Math.random() * 999999}>
+                          <ProductRow
+                            products={[
+                              products[index],
+                              index % 3 === 0 &&
+                              products.length > getMinimumProduct()
+                                ? products[0]
+                                : products[index - 1],
+                              index % 3 === 0 &&
+                              products.length > getMinimumProduct()
+                                ? products[1]
+                                : products[0],
+                            ]}
+                          />
+                        </SwiperSlide>
+                      </React.Fragment>
+                    )
+                  )
                 )}
             </SwiperGrid>
           </div>
