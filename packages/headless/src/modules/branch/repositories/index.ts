@@ -1,6 +1,7 @@
 
 import { Injectable } from "@nestjs/common";
 import { AllBranchByStoreId, Branch, CreateBranchRequest, CreateBranchResponse } from "models";
+import { Store } from "src/entity/store";
 import { IBranchDatabase } from "src/modules/branch/repositories/branch.database.interface";
 
 @Injectable()
@@ -11,7 +12,7 @@ export class BranchRepository {
         return await this.db.createBranch(branch);
     }
 
-    async getStore(storeId: string): Promise<any>{
+    async getStore(storeId: string): Promise<Store | null>{
         return await this.db.getStore(storeId);
     }
 
