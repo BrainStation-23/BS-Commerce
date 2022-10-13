@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { StoreAdmin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/store-admin';
 import { Store } from 'src/entity/store';
 import { IStoreDatabase } from './store.database.interface';
 

@@ -30,10 +30,7 @@ const StoreSchema = new Schema<Store>(
       unique: true,
     },
     info: {
-      shopName: {
-        type: String,
-        unique: true,
-      },
+      shopName: String,
       legalName: String,
       description: String,
     },

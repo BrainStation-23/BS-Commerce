@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { StoreAdmin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/store-admin';
 
 const StoreAdminSchema = new Schema<StoreAdmin>(
   {
@@ -40,5 +40,5 @@ const StoreAdminSchema = new Schema<StoreAdmin>(
 );
 
 StoreAdminSchema.index({ role: 1 });
-const AdminModel = model<StoreAdmin>('StoreAdmin', StoreAdminSchema);
-export { AdminModel };
+const StoreAdminModel = model<StoreAdmin>('StoreAdmin', StoreAdminSchema);
+export { StoreAdminModel };
