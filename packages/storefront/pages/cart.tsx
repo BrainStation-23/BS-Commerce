@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
-import CartComponent from '@/components/cart/index';
+import CartComponent from '@/modules/cart/index';
 import { Cart, ResponseItem } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
 import { useAppDispatch } from 'store/hooks';

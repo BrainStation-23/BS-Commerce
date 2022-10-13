@@ -15,7 +15,7 @@ import {
   storeWishlist,
 } from 'store/slices/productsSlice';
 
-import HomeComponent from '@/components/home';
+import HomeComponent from '@/modules/home';
 
 interface Props {
   products: CustomerProduct[];
