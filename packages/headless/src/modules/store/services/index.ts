@@ -1,14 +1,16 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { StoreRepository } from '../repositories';
+import { randomUUID } from 'crypto';
+import * as bcrypt from 'bcrypt';
+import { authConfig } from 'config/auth';
 import {
   CreateStoreErrorMessages,
   CreateStoreRequestBody,
   CreateStoreResponse,
+  GetStoreErrorMessages,
+  GetStoreResponse,
 } from 'models';
-import { randomUUID } from 'crypto';
-import * as bcrypt from 'bcrypt';
-import { authConfig } from 'config/auth';
 
 @Injectable()
 export class StoreService {
@@ -84,5 +86,16 @@ export class StoreService {
       createdStore,
       HttpStatus.CREATED,
     );
+  }
+
+  async getStore(storeId: string): Promise<GetStoreResponse> {
+    const store = await this.storeRepo.getStore({ id: storeId });
+    if (!store)
+      return this.helper.serviceResponse.errorResponse(
+        GetStoreErrorMessages.NO_STORE_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    return this.helper.serviceResponse.successResponse(store, HttpStatus.OK);
   }
 }

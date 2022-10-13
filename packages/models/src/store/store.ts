@@ -19,6 +19,7 @@ export interface Store {
     cover?: string;
   };
   address: StoreAddress;
+  url: string;
   // store adminId
   admin: string;
   isActive: boolean;
