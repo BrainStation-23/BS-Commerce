@@ -9,7 +9,7 @@ import ChevronLeft from './icons/chevronLeft';
 import ChevronRight from './icons/chevronRight';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
-import ProductTable from './productTable/productTable';
+import ProductTable from './productTable/table';
 import ReOrder from './reOrder';
 import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';

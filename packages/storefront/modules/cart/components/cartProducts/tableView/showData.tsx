@@ -52,116 +52,115 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
 
   return (
     <>
-      <tr key={data.productId}>
-        <td className="border border-slate-300 px-8 py-2 md:px-4">
-          {data?.product?.photos![0]?.url ? (
-            <Image
-              src={data?.product?.photos![0]?.url!}
-              alt="product Image"
-              width={100}
-              height={90}
-              //layout="fixed"
-            />
-          ) : (
-            'Problem Rendering Image'
-          )}
-        </td>
-        <td className="border border-slate-300 text-center md:px-2 lg:px-20">
-          <Link
-            href={{
-              pathname: `/product/${data?.product?.meta?.friendlyPageName}`,
-              // query: {
-              //   id: data?.product?.id,
-              //   name: data?.product?.info.name,
-              // },
-            }}
-            passHref
-          >
-            <p className="hover:cursor-pointer hover:text-primary">
-              {data?.product?.info?.name}
-            </p>
-          </Link>
-        </td>
-        <td className="border border-slate-300 px-10 py-14">
-          <span className="flex justify-center">
-            {' '}
-            {Intl.NumberFormat(
-              `${currency.currencyLanguage}-${currency.currencyStyle}`,
-              { style: 'currency', currency: `${currency.currencyName}` }
-            ).format(data?.product?.info?.price!)}
-            {/* ${data?.product?.info?.price} */}
-          </span>
-        </td>
-        <td className="border-slate-150 border py-4 md:px-2 lg:px-10">
-          <div className="flex justify-center">
-            <div className="box-content w-12 border-2 p-2">
-              <div className="flex justify-between">
-                <button
-                  disabled={itemToUpdate.quantity <= 1 ? true : false}
-                  onClick={() => {
-                    let _quantity =
-                      itemToUpdate.quantity - 1 >= 0
-                        ? itemToUpdate.quantity - 1
-                        : 0;
-                    setItemToUpdate({
-                      productId: data?.productId,
-                      quantity: _quantity,
-                    });
+      <td className="px-5 py-4">
+        {' '}
+        {data?.product?.photos![0]?.url ? (
+          <Image
+            src={data?.product?.photos![0]?.url!}
+            alt="product Image"
+            width={100}
+            height={90}
+          />
+        ) : (
+          'Problem Rendering Image'
+        )}
+      </td>
+      <td className="px-5 py-4">
+        <Link
+          href={{
+            pathname: `/product/${data?.product?.meta?.friendlyPageName}`,
+            // query: {
+            //   id: data?.product?.id,
+            //   name: data?.product?.info.name,
+            // },
+          }}
+          passHref
+        >
+          <p className="hover:cursor-pointer hover:text-primary">
+            {data?.product?.info?.name}
+          </p>
+        </Link>
+      </td>
+      <td className="px-5 py-4">
+        <span className="flex justify-center">
+          {' '}
+          {Intl.NumberFormat(
+            `${currency.currencyLanguage}-${currency.currencyStyle}`,
+            { style: 'currency', currency: `${currency.currencyName}` }
+          ).format(data?.product?.info?.price!)}
+          {/* ${data?.product?.info?.price} */}
+        </span>
+      </td>
+      <td className="px-5 py-4">
+        {' '}
+        <div className="flex justify-center">
+          <div className="box-content w-12 border-2 p-2">
+            <div className="flex justify-between">
+              <button
+                disabled={itemToUpdate.quantity <= 1 ? true : false}
+                onClick={() => {
+                  let _quantity =
+                    itemToUpdate.quantity - 1 >= 0
+                      ? itemToUpdate.quantity - 1
+                      : 0;
+                  setItemToUpdate({
+                    productId: data?.productId,
+                    quantity: _quantity,
+                  });
 
-                    debouncedUpdateCartItem({
-                      productId: data?.productId,
-                      quantity: _quantity,
-                    });
-                  }}
-                >
-                  -
-                </button>
-                <div>
-                  {' '}
-                  {Intl.NumberFormat(
-                    `${currency.currencyLanguage}-${currency.currencyStyle}`
-                  ).format(itemToUpdate.quantity)}
-                </div>
-                {/* {itemToUpdate.quantity} */}
-                <button
-                  onClick={() => {
-                    let _quantity = itemToUpdate.quantity + 1;
-                    setItemToUpdate({
-                      productId: data?.productId,
-                      quantity: _quantity,
-                    });
-                    debouncedUpdateCartItem({
-                      productId: data?.productId,
-                      quantity: _quantity,
-                    });
-                  }}
-                >
-                  +
-                </button>
+                  debouncedUpdateCartItem({
+                    productId: data?.productId,
+                    quantity: _quantity,
+                  });
+                }}
+              >
+                -
+              </button>
+              <div>
+                {' '}
+                {Intl.NumberFormat(
+                  `${currency.currencyLanguage}-${currency.currencyStyle}`
+                ).format(itemToUpdate.quantity)}
               </div>
+              {/* {itemToUpdate.quantity} */}
+              <button
+                onClick={() => {
+                  let _quantity = itemToUpdate.quantity + 1;
+                  setItemToUpdate({
+                    productId: data?.productId,
+                    quantity: _quantity,
+                  });
+                  debouncedUpdateCartItem({
+                    productId: data?.productId,
+                    quantity: _quantity,
+                  });
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
-        </td>
-        <td className="border border-slate-300 py-14 md:px-2 lg:px-10">
-          <div className="flex justify-center">
-            {Intl.NumberFormat(
-              `${currency.currencyLanguage}-${currency.currencyStyle}`,
-              { style: 'currency', currency: `${currency.currencyName}` }
-            ).format((data?.product?.info?.price! * itemToUpdate.quantity)!)}
-            {/* ${data?.product?.info?.price! * itemToUpdate.quantity} */}
-          </div>
-        </td>
-        <td className="border border-slate-300 py-14 md:px-2 lg:px-10 ">
-          <div className="flex justify-center">
-            <button
-              className="font-bold text-primary"
-              onClick={handleCartItemDelete}
-            >
-              X
-            </button>
-          </div>
-        </td>
-      </tr>
+        </div>
+      </td>
+      <td className="px-5 py-4">
+        <div className="flex justify-center">
+          {Intl.NumberFormat(
+            `${currency.currencyLanguage}-${currency.currencyStyle}`,
+            { style: 'currency', currency: `${currency.currencyName}` }
+          ).format((data?.product?.info?.price! * itemToUpdate.quantity)!)}
+          {/* ${data?.product?.info?.price! * itemToUpdate.quantity} */}
+        </div>
+      </td>
+      <td className="px-5 py-4 text-primary dark:text-dark_primary">
+        <div className="flex justify-center">
+          <button
+            className="font-bold text-primary"
+            onClick={handleCartItemDelete}
+          >
+            X
+          </button>
+        </div>
+      </td>
     </>
   );
 };
