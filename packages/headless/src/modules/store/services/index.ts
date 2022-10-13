@@ -19,16 +19,22 @@ export class StoreService {
   async createStore(
     data: CreateStoreRequestBody,
   ): Promise<CreateStoreResponse> {
-    const doesStoreShopOrLegalNameMatch =
-      (await this.storeRepo.getStore({
-        'info.shopName': data.info.shopName,
-      })) ||
-      (await this.storeRepo.getStore({
-        'info.legalName': data.info.legalName,
-      }));
+    // Slug Url Generate
+    const url = data.info.shopName
+      .trim()
+      .toLocaleLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+
+    const doesStoreShopOrLegalNameMatch = await this.storeRepo.getStore({
+      'info.url': url,
+    });
     if (doesStoreShopOrLegalNameMatch)
       return this.helper.serviceResponse.errorResponse(
-        CreateStoreErrorMessages.STORE_SHOP_OR_LEGAL_NAME_EXISTS,
+        CreateStoreErrorMessages.STORE_SHOP_NAME_EXISTS,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -38,7 +44,7 @@ export class StoreService {
     });
     if (doesStoreAdminEmailMatch)
       return this.helper.serviceResponse.errorResponse(
-        CreateStoreErrorMessages.STORE_ADMIN_EMAIL_EXISTS,
+        CreateStoreErrorMessages.EMAIL_ALREADY_USED,
         null,
         HttpStatus.BAD_REQUEST,
       );
@@ -46,36 +52,38 @@ export class StoreService {
     const { admin, ...rest } = data;
     const { name, email, phone, password } = admin;
     const hashPassword = await bcrypt.hash(password, authConfig.salt);
-    const storeObj = {
-      store: {
-        ...rest,
-        id: randomUUID(),
+    const store = {
+      ...rest,
+      url,
+      id: randomUUID(),
+    };
+    const storeOwnerObj = {
+      id: randomUUID(),
+      info: {
+        name,
+        email,
+        phone,
       },
-      admin: {
-        id: randomUUID(),
-        info: {
-          name,
-          email,
-          phone,
-        },
-        password: hashPassword,
-        role: {
-          name: 'Store Admin',
-          roleType: 'STORE',
-        },
-        isActive: true,
+      password: hashPassword,
+      role: {
+        name: 'Store Owner',
+        roleType: 'OWNER',
       },
+      isActive: true,
     };
 
-    const store = await this.storeRepo.createStore(storeObj);
-    if (!store)
+    const createdStore = await this.storeRepo.createStore({
+      store,
+      admin: storeOwnerObj,
+    });
+    if (!createdStore)
       return this.helper.serviceResponse.errorResponse(
         CreateStoreErrorMessages.CAN_NOT_CREATE_STORE,
         null,
         HttpStatus.BAD_REQUEST,
       );
     return this.helper.serviceResponse.successResponse(
-      store,
+      createdStore,
       HttpStatus.CREATED,
     );
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Admin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/store-admin';
 import { Store } from 'src/entity/store';
 
 @Injectable()
@@ -7,9 +7,9 @@ export abstract class IStoreDatabase {
   abstract getStore: (query: Record<string, any>) => Promise<Store | null>;
   abstract findStoreAdmin: (
     query: Record<string, any>,
-  ) => Promise<Admin | null>;
+  ) => Promise<StoreAdmin | null>;
   abstract createStore: (data: {
     store: Store;
-    admin: Admin;
+    admin: StoreAdmin;
   }) => Promise<Store | null>;
 }

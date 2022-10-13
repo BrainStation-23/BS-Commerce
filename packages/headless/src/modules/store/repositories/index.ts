@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Admin } from 'src/entity/admin';
+import { StoreAdmin } from 'src/entity/store-admin';
 import { Store } from 'src/entity/store';
 import { IStoreDatabase } from './store.database.interface';
 
@@ -11,13 +11,13 @@ export class StoreRepository {
     return await this.db.getStore(query);
   }
 
-  async findStoreAdmin(query: Record<string, any>): Promise<Admin | null> {
+  async findStoreAdmin(query: Record<string, any>): Promise<StoreAdmin | null> {
     return await this.db.findStoreAdmin(query);
   }
 
   async createStore(data: {
     store: Store;
-    admin: Admin;
+    admin: StoreAdmin;
   }): Promise<Store | null> {
     return await this.db.createStore(data);
   }

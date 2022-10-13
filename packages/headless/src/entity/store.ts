@@ -12,13 +12,14 @@ export class Store {
   info: {
     shopName: string;
     description?: string;
-    legalName: string;
+    legalName?: string;
   };
   image?: {
     logo?: string;
     cover?: string;
   };
   address: StoreAddress;
+  url: string;
   // store adminId
   admin?: string;
   isActive: boolean;
