@@ -16,6 +16,7 @@ import { Response } from 'express';
 import { ApiBearerAuth, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateBranchSuccessResponseDto, CreateBranchErrorResponseDto, CreateBranchRequestDto } from './dto/create.branch.dto';
 import { BranchService } from '../services';
+import { SingleBranchSuccessResponseDto, SingleBranchErrorResponseDto } from './dto/branch.dto';
 
 @ApiTags('Branch API')
 @Controller('branch')
@@ -68,18 +69,19 @@ export class BranchController {
     @ApiResponse({
         status: HttpStatus.OK,
         description: 'Branch was fetched successfully',
-        // type: GetAllBranchByStoreIdSuccessResponseDto,
+        type: SingleBranchSuccessResponseDto,
     })
     @ApiResponse({
         status: HttpStatus.BAD_REQUEST,
         description: 'Error fetching a branch',
-        // type: GetAllBranchByStoreIdErrorResponseDto,
+        type: SingleBranchErrorResponseDto,
     })
     async getBranch(
         @Param('branchId') branchId: string,
         @Res({ passthrough: true }) res: Response,
     ){
         const {code, ...response } = await this.branchService.getBranch(branchId);
+
         res.status(code);
         return { code, ...response};
     }
