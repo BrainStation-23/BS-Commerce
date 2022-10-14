@@ -26,7 +26,7 @@ const Table: NextComponentType = () => {
         <div className="overflow-x-auto rounded-lg border">
           <div className="inline-block min-w-full">
             <table className="inline-table w-full text-left text-sm">
-              <thead className="text-center bg-gradient-to-b from-gray-300 dark:from-dark_primary dark:text-gray-300">
+              <thead className="text-center">
                 <tr className="border-b">
                   <th scope="col" className="px-5 py-4 capitalize">
                     {t('common:image')}

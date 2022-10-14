@@ -1,5 +1,5 @@
-import CheckoutFooter from '@/modules/checkout/checkoutFooter';
-import Payment from '@/modules/checkout/paymentPage/paymentForm';
+import CheckoutFooter from '@/modules/checkout/components/checkoutFooter';
+import Payment from '@/modules/checkout/components/paymentPage/paymentForm';
 interface Props {
   setModal: Function;
 }

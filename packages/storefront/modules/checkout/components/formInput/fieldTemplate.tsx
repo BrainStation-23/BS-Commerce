@@ -1,5 +1,5 @@
 import { ErrorMessage, Field } from 'formik';
-import { TemplateInteface } from '@/modules/checkout/fieldInterface';
+import { TemplateInteface } from '@/modules/checkout/components/formInput/fieldInterface';
 
 const FieldTemplate: React.FC<TemplateInteface> = (props: TemplateInteface) => {
   const {

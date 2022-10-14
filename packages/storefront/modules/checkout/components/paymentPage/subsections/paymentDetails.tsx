@@ -11,9 +11,9 @@ import {
 
 import { userAPI } from 'APIs';
 import { deleteCart } from 'store/slices/cartSlice';
-import FieldTemplate from '@/modules/checkout/fieldTemplate';
+import FieldTemplate from '@/modules/checkout/components/formInput/fieldTemplate';
 import { paymentSchema } from '@/modules/global/schemas/checkout.schema';
-import ChevronLeft from '@/modules/global/iconsforCheckoutPage/chevron-left';
+import ChevronLeft from '@/modules/checkout/components/icons/chevronLeft';
 import {
   CartProductPhoto,
   CreateProductOrderDetails,
