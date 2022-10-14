@@ -1,6 +1,7 @@
 import Path from '@/modules/global/components/path';
-import InformationPage from './informationPage';
 import OrderList from '../orderList';
+import InformationForm from './informationForm';
+import CheckoutFooter from '../checkoutFooter';
 
 const path = {
   cart: false,
@@ -27,7 +28,13 @@ const CheckoutInformationComponent: React.FC<Props> = ({ setModal }: Props) => {
           />
         </div>
         <div className="flex flex-col-reverse flex-wrap justify-between divide-x-0 lg:flex-row lg:divide-x-2">
-          <InformationPage setModal={setModal} />
+          <div className="flex-initial lg:w-3/5 xl:w-3/5">
+            <div className="mx-4 mt-5 divide-y-2 sm:mx-4 md:mx-28 lg:mx-28 xl:mx-28">
+              <InformationForm setModal={setModal} />
+              <br />
+              <CheckoutFooter />
+            </div>
+          </div>
           <div className="mx-5 block md:mx-28 lg:hidden">
             <Path
               cart={path.cart}
