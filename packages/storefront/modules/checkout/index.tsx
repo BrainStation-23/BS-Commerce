@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NextComponentType } from 'next';
 
-import CheckoutInformationComponent from '@/modules/checkout/components/informationPage/information';
-import CheckoutPaymentComponent from '@/modules/checkout/components/paymentPage/payment';
+import CheckoutInformationComponent from '@/modules/checkout/components/informationPage';
+import CheckoutPaymentComponent from '@/modules/checkout/components/paymentPage';
 import ShippingPage from '@/modules/checkout/components/shippingPage';
 import withAuth from '@/modules/auth/withAuth';
 

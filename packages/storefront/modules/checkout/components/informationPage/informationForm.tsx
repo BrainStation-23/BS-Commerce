@@ -33,7 +33,7 @@ interface Props {
   setModal: Function;
 }
 
-const Information: React.FC<Props> = ({ setModal }: Props) => {
+const InformationForm: React.FC<Props> = ({ setModal }: Props) => {
   const [dropdownText, setDropdownText] = useState('Use a new address');
   const [showLabel, setShowLabel] = useState(true);
   const user = useAppSelector(
@@ -387,4 +387,4 @@ const Information: React.FC<Props> = ({ setModal }: Props) => {
   );
 };
 
-export default Information;
+export default InformationForm;
