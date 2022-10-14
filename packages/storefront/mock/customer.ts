@@ -1,4 +1,4 @@
-import { Customer } from "models";
+import { Customer } from "@bs-commerce/models";
 
 export const customerData: Customer[] = [
   {

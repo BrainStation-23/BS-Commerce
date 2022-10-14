@@ -1,4 +1,4 @@
-import { CompareData } from 'models';
+import { CompareData } from '@bs-commerce/models';
 
 export const compareList: CompareData = {
   id: 'df46813b-6553-4c59-8fee-f20ae1d066c4',
