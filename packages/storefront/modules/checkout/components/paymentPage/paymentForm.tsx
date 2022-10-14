@@ -1,5 +1,5 @@
-import ContactDetails from '@/modules/checkout/paymentPage/subsections/contactDetails';
-import PaymentDetails from '@/modules/checkout/paymentPage/subsections/paymentDetails';
+import ContactDetails from '@/modules/checkout/components/paymentPage/subsections/contactDetails';
+import PaymentDetails from '@/modules/checkout/components/paymentPage/subsections/paymentDetails';
 import PromotionalCodeField from '@/modules/global/components/promotionalCodeField';
 import useTranslation from 'next-translate/useTranslation';
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { NextComponentType } from 'next';
 
-import CheckoutInformationComponent from '@/modules/checkout/informationPage/information';
-import CheckoutPaymentComponent from '@/modules/checkout/paymentPage/payment';
-import ShippingPage from '@/modules/checkout/shippingPage';
+import CheckoutInformationComponent from '@/modules/checkout/components/informationPage/information';
+import CheckoutPaymentComponent from '@/modules/checkout/components/paymentPage/payment';
+import ShippingPage from '@/modules/checkout/components/shippingPage';
 import withAuth from '@/modules/auth/withAuth';
 
 const CheckoutComponent: NextComponentType = () => {

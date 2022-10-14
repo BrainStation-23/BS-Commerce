@@ -1,10 +1,10 @@
 import React from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
-import CartProductList from '@/modules/checkout/orderList/cartProductList';
+import CartProductList from '@/modules/checkout/components/orderList/cartProductList';
 import useTranslation from 'next-translate/useTranslation';
 
-const OrderedProducts: NextComponentType = () => {
+const CartTotal: NextComponentType = () => {
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
   );
@@ -77,4 +77,4 @@ const OrderedProducts: NextComponentType = () => {
   );
 };
 
-export default OrderedProducts;
+export default CartTotal;

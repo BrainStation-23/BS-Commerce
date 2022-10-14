@@ -1,5 +1,5 @@
 import React from 'react';
-import ChevronLeft from '@/modules/global/iconsforCheckoutPage/chevron-left';
+import ChevronLeft from '@/modules/checkout/components/icons/chevronLeft';
 import CheckoutFooter from '../checkoutFooter';
 import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';

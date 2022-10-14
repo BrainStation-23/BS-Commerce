@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
 
-import ChevronDown from '@/modules/global/iconsforCheckoutPage/chevron-down';
-import ChevronUp from '@/modules/global/iconsforCheckoutPage/chevron-up';
-import ShoppingCart from '@/modules/global/iconsforCheckoutPage/shopping-cart';
-import OrderedProducts from '@/modules/checkout/orderList/orderDetail';
+import ChevronDown from '@/modules/checkout/components/icons/chevronDown';
+import ChevronUp from '@/modules/checkout/components/icons/chevronUp';
+import ShoppingCart from '@/modules/checkout/components/icons/shopping-cart';
+import CartTotal from '@/modules/checkout/components/orderList/cartTotal';
 import useTranslation from 'next-translate/useTranslation';
 
 const OrderList: NextComponentType = () => {
@@ -21,7 +21,7 @@ const OrderList: NextComponentType = () => {
   return (
     <>
       <div className="hidden flex-initial sm:hidden md:hidden lg:block lg:w-2/5 xl:block">
-        <OrderedProducts />
+        <CartTotal />
       </div>
 
       <div className="my-7 flex flex-wrap justify-between border-gray-500 py-5 px-3 text-xs sm:block sm:px-10 md:block md:px-10 lg:hidden lg:px-5 xl:hidden xl:px-5">
@@ -58,7 +58,7 @@ const OrderList: NextComponentType = () => {
 
         {dropdown && (
           <div className="w-full md:px-14">
-            <OrderedProducts />
+            <CartTotal />
           </div>
         )}
       </div>
