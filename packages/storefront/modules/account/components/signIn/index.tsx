@@ -21,8 +21,8 @@ import { storeAllCartItems } from 'store/slices/cartSlice';
 import Loading from '@/modules/global/loader';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
-import FacebookLogo from '@/modules/account/components/icons/facebookLogo';
-import GoogleLogo from '@/modules/account/components/icons/googleLogo';
+import FacebookLogo from '@/modules/common/icons/facebookLogo';
+import GoogleLogo from '@/modules/common/icons/googleLogo';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { storeCompare } from 'store/slices/compareSlice';
 

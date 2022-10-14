@@ -10,7 +10,7 @@ import { addToShippingInfo } from 'store/slices/checkoutSlice';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { informationSchema } from '@/modules/checkout/components/schemas/checkout.schema';
-import ChevronLeft from '@/modules/checkout/components/icons/chevronLeft';
+import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import FieldTemplate from '../formInput/fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';

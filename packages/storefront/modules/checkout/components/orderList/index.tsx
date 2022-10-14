@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
 
-import ChevronDown from '@/modules/checkout/components/icons/chevronDown';
-import ChevronUp from '@/modules/checkout/components/icons/chevronUp';
-import ShoppingCart from '@/modules/checkout/components/icons/shopping-cart';
+import ChevronDown from '@/modules/common/icons/chevronDown';
+import ChevronUp from '@/modules/common/icons/chevronUp';
+import ShoppingCart from '@/modules/common/icons/shopping-cart';
 import CartTotal from '@/modules/checkout/components/orderList/cartTotal';
 import useTranslation from 'next-translate/useTranslation';
 
