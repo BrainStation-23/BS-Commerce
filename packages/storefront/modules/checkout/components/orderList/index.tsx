@@ -34,19 +34,15 @@ const OrderList: NextComponentType = () => {
                 setDropdown(!dropdown);
               }}
             >
-              <div className="flex flex-wrap justify-between px-2">
+              <div className="flex flex-wrap justify-between px-2 text-sm">
                 {dropdown === true ? (
                   <>
-                    <p className="text-sm">
-                      {t('checkout:hide_order_summary')}
-                    </p>
+                    <p>{t('checkout:hide_order_summary')}</p>
                     <ChevronUp />
                   </>
                 ) : (
                   <>
-                    <p className="text-sm">
-                      {t('checkout:show_order_summary')}
-                    </p>
+                    <p>{t('checkout:show_order_summary')}</p>
                     <ChevronDown />
                   </>
                 )}
