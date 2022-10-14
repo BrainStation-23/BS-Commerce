@@ -79,9 +79,6 @@ const HomeComponent: NextComponentType = () => {
         <div className="mb-4 md:mb-10">
           <BestSell />
         </div>
-        {/* <div className="mb-5 md:mb-10">
-        <Blog />
-      </div> */}
         <div className="mb-4 md:mb-10">
           <FeaturedProducts />
         </div>

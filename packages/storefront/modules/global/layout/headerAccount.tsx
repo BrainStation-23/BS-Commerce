@@ -15,6 +15,7 @@ import { resetCart } from 'store/slices/cartSlice';
 import { setModalState } from 'store/slices/modalSlice';
 import { resetCompare } from 'store/slices/compareSlice';
 import useTranslation from 'next-translate/useTranslation';
+import HeartIcon from '@/modules/common/icons/heartIcon';
 
 interface Properties {}
 
@@ -201,41 +202,21 @@ const HeaderAccount: React.FC<Properties> = () => {
             </>
           )}
         </span>
-        <div className="flex flex-row items-center gap-x-3">
+        <div className="flex flex-row items-center gap-x-1">
           <button type="button" onClick={handleClickWishlist}>
-            <div className="flex text-base hover:text-primary dark:text-dark_text dark:hover:text-dark_primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 hover:stroke-primary hover:text-primary dark:hover:stroke-dark_primary dark:hover:text-dark_primary 
-                ${
-                  wishlistItems?.items?.length! > 0 && token !== ''
-                    ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
-                    : 'fill-white stroke-dark_bg dark:stroke-white  '
-                }`}
-                // fill={
-                //   wishlistItems?.items?.length! > 0 && token !== ''
-                //     ? `primary`
-                //     : `none`
-                // }
-                viewBox="0 0 24 24"
-                // stroke={
-                //   wishlistItems?.items?.length! > 0 && token !== ''
-                //     ? `primary`
-                //     : `currentColor`
-                // }
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              <span className="">
+            <div
+              className={`${
+                wishlistItems?.items?.length! > 0 && token !== ''
+                  ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
+                  : 'stroke-dark_bg dark:stroke-dark_text  '
+              } flex text-base hover:stroke-primary hover:text-primary dark:text-dark_text dark:hover:stroke-dark_primary dark:hover:text-dark_primary`}
+            >
+              <HeartIcon />
+              <div>
                 {wishlistItems?.items?.length! > 0 && token !== ''
                   ? wishlistItems?.items?.length
                   : 0}
-              </span>
+              </div>
             </div>
           </button>
           <span
