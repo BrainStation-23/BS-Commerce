@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
 import { Branch, BranchAddress } from 'src/entity/branch';
 
-const BranchAddressSchema = new Schema<BranchAddress>(
+export const BranchAddressSchema = new Schema<BranchAddress>(
     {
         id: {
             type: String,
