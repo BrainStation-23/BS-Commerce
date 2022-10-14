@@ -1,13 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { 
-  CreateBranchErrorMessage, 
-  CreateBranchRequest, 
-  CreateBranchResponse, 
-  AllBranchByStoreId, 
-  Branch, 
-  GetAllBranchByStoreIdErrorMessage, 
-  GetAllBranchByStoreIdErrorResponse, 
-  GetAllBranchByStoreIdSuccessResponse, 
+import {
+  CreateBranchErrorMessage,
+  CreateBranchRequest,
+  CreateBranchResponse,
+  AllBranchByStoreId,
+  Branch,
+  GetAllBranchByStoreIdErrorMessage,
+  GetAllBranchByStoreIdErrorResponse,
+  GetAllBranchByStoreIdSuccessResponse,
   GetAllBranchByStoreIdResponse,
   SingleBranchResponse,
   SingleBranchErrorMessage
@@ -28,6 +28,14 @@ export class BranchService{
             errors: null,
             code: HttpStatus.BAD_REQUEST,
           }
+          
+        const urlExists = await this.branchRepo.getURL(branch.url);
+        if (urlExists)
+          return {
+            error: CreateBranchErrorMessage.URL_ALREADY_EXISTS,
+            errors: null,
+            code: HttpStatus.BAD_REQUEST
+          };
 
         const newBranch = await this.branchRepo.createBranch(branch);
         if (!newBranch)
@@ -51,7 +59,7 @@ export class BranchService{
           errors: null,
           code: HttpStatus.BAD_REQUEST,
         };
-      
+
       return this.helper.serviceResponse.successResponse(
         branches,
         HttpStatus.OK,

@@ -6,6 +6,7 @@ import { Store } from "src/entity/store";
 export abstract class IBranchDatabase{
     abstract createBranch: (branch: CreateBranchRequest) => Promise<Branch | null>;
     abstract getStore: (storeId: string) => Promise<Store | null>;
+    abstract getURL: (url: string) => Promise<boolean>;
     abstract getBranchByStoreId: (storeId: string) => Promise<AllBranchByStoreId | null>;
     abstract getBranch: (branchId: string) => Promise<Branch | null>;
 }
