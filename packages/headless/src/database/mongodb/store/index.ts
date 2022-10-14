@@ -26,6 +26,43 @@ export class StoreDatabase implements IStoreDatabase {
     }
   }
 
+  async getAllStores(
+    query: Record<string, any>,
+    skip?: number,
+    limit?: number,
+  ): Promise<Store[] | []> {
+    try {
+      const { email, adminId, ...rest } = query;
+      const admin: StoreAdmin | null =
+        email &&
+        (await StoreAdminModel.findOne({
+          'info.email': email,
+        }).lean());
+
+      if (
+        (email && !admin) ||
+        (email && admin && adminId && adminId !== admin.id)
+      ) {
+        return [];
+      }
+
+      return admin && email
+        ? await StoreModel.find({ ...rest, admin: admin.id })
+            .skip(skip)
+            .limit(limit)
+            .select('-_id')
+            .lean()
+        : await StoreModel.find(rest)
+            .skip(skip)
+            .limit(limit)
+            .select('-_id')
+            .lean();
+    } catch (error: any) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
   async createStore(data: {
     store: Store;
     admin: StoreAdmin;

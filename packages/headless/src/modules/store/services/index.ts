@@ -8,6 +8,7 @@ import {
   CreateStoreErrorMessages,
   CreateStoreRequestBody,
   CreateStoreResponse,
+  GetAllStoresQuery,
   GetStoreErrorMessages,
   GetStoreResponse,
 } from 'models';
@@ -30,7 +31,7 @@ export class StoreService {
       .replace(/-+$/, '');
 
     const doesStoreShopOrLegalNameMatch = await this.storeRepo.getStore({
-      'info.url': url,
+      url,
     });
     if (doesStoreShopOrLegalNameMatch)
       return this.helper.serviceResponse.errorResponse(
@@ -97,5 +98,41 @@ export class StoreService {
         HttpStatus.BAD_REQUEST,
       );
     return this.helper.serviceResponse.successResponse(store, HttpStatus.OK);
+  }
+
+  async getAllStores(condition: GetAllStoresQuery): Promise<GetStoreResponse> {
+    const { adminEmail, skip, limit } = condition;
+    let stores: any = [];
+    const query: Record<string, any> = this.generateSearchQuery(condition);
+    stores = await this.storeRepo.getAllStores(
+      { ...query, email: adminEmail },
+      skip,
+      limit,
+    );
+    if (!stores)
+      return this.helper.serviceResponse.errorResponse(
+        GetStoreErrorMessages.NO_STORE_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    return this.helper.serviceResponse.successResponse(stores, HttpStatus.OK);
+  }
+
+  generateSearchQuery(condition: GetAllStoresQuery): object {
+    const { url, legalName, isActive, adminId } = condition;
+    const query: Record<string, any> = {};
+    if (url !== undefined && url !== '') {
+      query.url = url;
+    }
+    if (adminId !== undefined && adminId !== '') {
+      query.admin = adminId;
+    }
+    if (legalName !== undefined && legalName !== '') {
+      query['info.legalName'] = legalName;
+    }
+    if (isActive !== undefined) {
+      query['isActive'] = isActive;
+    }
+    return query;
   }
 }

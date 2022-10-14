@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsString,
   MinLength,
+  IsEmail,
 } from 'class-validator';
 import { HttpStatus } from '@nestjs/common';
 import { StoreDto, StoreImage, StoreInfo } from './store.dto';
@@ -50,6 +51,7 @@ export class CreateStoreAdminDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEmail()
   @IsString()
   email: string;
 
