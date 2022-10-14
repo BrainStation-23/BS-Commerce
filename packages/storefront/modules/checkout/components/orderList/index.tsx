@@ -4,7 +4,7 @@ import { useAppSelector } from 'store/hooks/index';
 
 import ChevronDown from '@/modules/common/icons/chevronDown';
 import ChevronUp from '@/modules/common/icons/chevronUp';
-import ShoppingCart from '@/modules/common/icons/shopping-cart';
+import ShoppingCart from '@/modules/common/icons/shoppingCart';
 import CartTotal from '@/modules/checkout/components/orderList/cartTotal';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -34,19 +34,15 @@ const OrderList: NextComponentType = () => {
                 setDropdown(!dropdown);
               }}
             >
-              <div className="flex flex-wrap justify-between px-2">
+              <div className="flex flex-wrap justify-between px-2 text-sm">
                 {dropdown === true ? (
                   <>
-                    <p className="text-sm">
-                      {t('checkout:hide_order_summary')}
-                    </p>
+                    <p>{t('checkout:hide_order_summary')}</p>
                     <ChevronUp />
                   </>
                 ) : (
                   <>
-                    <p className="text-sm">
-                      {t('checkout:show_order_summary')}
-                    </p>
+                    <p>{t('checkout:show_order_summary')}</p>
                     <ChevronDown />
                   </>
                 )}
