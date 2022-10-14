@@ -1,10 +1,10 @@
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import { otpSchema } from '@/modules/global/schemas/forgotPassword.schema';
+import { otpSchema } from '@/modules/account/components/forgetPassword/schemas/forgotPassword.schema';
 
-import FormCancelButton from 'modules/account/forgetPassword/components/common/cancelButton';
-import FieldTemplate from 'modules/account/forgetPassword/components/common/fieldTemplate';
-import FormSubmitButton from 'modules/account/forgetPassword/components/common/submitButton';
+import FormCancelButton from '@/modules/account/components/forgetPassword/common/cancelButton';
+import FieldTemplate from '@/modules/account/components/forgetPassword/common/fieldTemplate';
+import FormSubmitButton from '@/modules/account/components/forgetPassword/common/submitButton';
 import { useAppSelector } from 'store/hooks/index';
 
 interface Props {

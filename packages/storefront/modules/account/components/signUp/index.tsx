@@ -14,7 +14,7 @@ import {
   CreateCustomerRequest,
   CustomerSignInRequest,
 } from '@bs-commerce/models';
-import { registerSchema } from '@/modules/global/schemas/loginSchema';
+import { registerSchema } from '@/modules/account/components/signUp/schemas/registerSchema';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import Loading from '@/modules/global/loader';
@@ -25,13 +25,9 @@ const Signup = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const [isPhoneSignUp, setIsPhoneSignUP] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [modalOn, setModalOn] = useState(false);
-  const [choice, setChoice] = useState(false);
   const [otp, setOtp] = useState('');
-  const [userName, setUserName] = useState('');
 
   const toggleClass = 'transform translate-x-5';
   let username = '';

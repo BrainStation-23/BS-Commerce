@@ -9,7 +9,7 @@ import { storeUserToken } from 'store/slices/authSlice';
 import { addToShippingInfo } from 'store/slices/checkoutSlice';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
-import { informationSchema } from '@/modules/global/schemas/checkout.schema';
+import { informationSchema } from '@/modules/checkout/components/schemas/checkout.schema';
 import ChevronLeft from '@/modules/checkout/components/icons/chevronLeft';
 import FieldTemplate from '../formInput/fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';

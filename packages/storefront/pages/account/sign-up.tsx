@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 
-import Signup from 'modules/account/sign-up';
+import Signup from '@/modules/account/components/signUp';
 
-const SignIn: NextPage = () => {
+const SignUpPage: NextPage = () => {
   return (
     <>
       <Signup />
     </>
   );
 };
-export default SignIn;
+export default SignUpPage;

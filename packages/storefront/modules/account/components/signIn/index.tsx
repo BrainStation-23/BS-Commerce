@@ -14,15 +14,15 @@ import { userAPI } from 'APIs';
 import { useAppDispatch } from 'store/hooks/index';
 import { storeCustomerDetails, storeUserDetails } from 'store/slices/userSlice';
 import { storeUserToken } from 'store/slices/authSlice';
-import { loginSchema } from '@/modules/global/schemas/loginSchema';
+import { loginSchema } from '@/modules/account/components/signIn/schemas/loginSchema';
 import { storeWishlist } from 'store/slices/productsSlice';
 import { storeAllCartItems } from 'store/slices/cartSlice';
 
 import Loading from '@/modules/global/loader';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
-import FacebookLogo from 'modules/account/icons/facebookLogo';
-import GoogleLogo from 'modules/account/icons/googleLogo';
+import FacebookLogo from '@/modules/account/components/icons/facebookLogo';
+import GoogleLogo from '@/modules/account/components/icons/googleLogo';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { storeCompare } from 'store/slices/compareSlice';
 
