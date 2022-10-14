@@ -4,7 +4,7 @@ import { useAppSelector } from 'store/hooks/index';
 
 import ChevronDown from '@/modules/common/icons/chevronDown';
 import ChevronUp from '@/modules/common/icons/chevronUp';
-import ShoppingCart from '@/modules/common/icons/shopping-cart';
+import ShoppingCart from '@/modules/common/icons/shoppingCart';
 import CartTotal from '@/modules/checkout/components/orderList/cartTotal';
 import useTranslation from 'next-translate/useTranslation';
 
