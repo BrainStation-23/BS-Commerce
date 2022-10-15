@@ -1,5 +1,5 @@
 import { CustomerProduct } from '@bs-commerce/models';
-import Product from '@/modules/home/bestSell/product';
+import HorizontalProduct from '@/modules/home/bestSell/horizontalProduct';
 
 interface Props {
   products: CustomerProduct[];
@@ -11,7 +11,7 @@ const ProductRow: React.FC<Props> = ({ products }: Props) => {
         {products.map((product) => {
           return (
             <div key={product.id} className="py-1 md:float-left">
-              <Product product={product} />
+              <HorizontalProduct product={product} />
             </div>
           );
         })}

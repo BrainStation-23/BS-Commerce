@@ -8,7 +8,7 @@ interface SingleProduct {
   product: CustomerProduct;
 }
 
-const Product = ({ product }: SingleProduct) => {
+const HorizontalProduct = ({ product }: SingleProduct) => {
   const [showIcons, setShowIcons] = useState(false);
 
   return (
@@ -52,4 +52,4 @@ const Product = ({ product }: SingleProduct) => {
   );
 };
 
-export default Product;
+export default HorizontalProduct;

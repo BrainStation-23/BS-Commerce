@@ -17,6 +17,7 @@ import ProductRow from '@/modules/home/bestSell/productRow.component';
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import Container from '@/modules/global/components/container';
 import { CustomerProduct } from '@bs-commerce/models';
+import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
 const BestSell: NextComponentType = () => {
   const { t } = useTranslation();
@@ -31,13 +32,11 @@ const BestSell: NextComponentType = () => {
   };
   return (
     <>
-      <Container className="">
-        <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">
-            {t('home:recently_added')}
-          </p>
-          <h1 className="text-bold text-4xl ">{t('home:best_sell')}</h1>
-        </div>
+      <Container>
+        <HomeComponentHeader
+          heading1={t('home:recently_added')}
+          heading2={t('home:best_sell')}
+        />
         <div className="flex w-full flex-wrap">
           <div className="w-full px-3 md:w-5/12 lg:w-2/6 lg:px-0">
             <Link href="/">
