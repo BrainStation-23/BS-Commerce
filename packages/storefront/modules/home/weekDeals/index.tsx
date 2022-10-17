@@ -7,6 +7,7 @@ import { CustomerProduct } from '@bs-commerce/models';
 
 import Container from '@/modules/global/components/container';
 import SwiperGrid from '@/modules/global/components/swipergrid';
+import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 import VerticalProduct from '@/modules/global/components/product/verticalProduct';
 
 const WeekDeals: NextComponentType = () => {
@@ -24,12 +25,10 @@ const WeekDeals: NextComponentType = () => {
   return (
     <>
       <Container className="max-w-7xl">
-        <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">
-            {t('home:recently_added')}
-          </p>
-          <h1 className="text-bold text-4xl ">{t('home:weekly_deals')}</h1>
-        </div>
+        <HomeComponentHeader
+          heading1={t('home:recently_added')}
+          heading2={t('home:weekly_deals')}
+        />
         <SwiperGrid
           slidesPerViewmobile={2}
           slidesPerView768={3}

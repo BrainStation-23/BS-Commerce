@@ -12,7 +12,7 @@ import BestSell from '@/modules/home/bestSell';
 import WeekDeals from '@/modules/home/weekDeals';
 import ImageSlider from '@/modules/home/imageSlider';
 import HomeShipping from '@/modules/home/homeShipping';
-import TrendingProducts from '@/modules/home/trend/index';
+import TrendingProducts from '@/modules/home/trendingProducts/index';
 import BannerPage from '@/modules/global/bannerComponent';
 import FeaturedProducts from '@/modules/home/featuredProducts';
 import HomefullBanner from '@/modules/global/bannerComponent/homeFullBanner';

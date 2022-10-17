@@ -7,7 +7,7 @@ import { useAppSelector } from 'store/hooks/index';
 import Container from '@/modules/global/components/container';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
-import ProductRow from './cycleProductGroup';
+import ProductRow from '../common/cycleProductGroup';
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import { CustomerProduct } from '@bs-commerce/models';
 
@@ -16,11 +16,11 @@ const TrendingProducts = () => {
   let [filteredProduct, setProducts] = useState<CustomerProduct[]>([]);
 
   const { t } = useTranslation();
-
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
 
+  // Gets number of products to show
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 10;
@@ -123,7 +123,6 @@ const TrendingProducts = () => {
           </SwiperGrid>
         )}
       </Container>
-      {/* <ProductRow products={[products[0], products[1]]} /> */}
     </>
   );
 };

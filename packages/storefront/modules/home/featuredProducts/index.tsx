@@ -7,21 +7,21 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { SwiperSlide } from 'swiper/react';
 
+import { CustomerProduct } from '@bs-commerce/models';
+
 import { useAppSelector } from 'store/hooks/index';
 
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import Container from '@/modules/global/components/container';
-import ProductRow from '@/modules/home/bestSell/productRow.component';
+import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
-
-import { CustomerProduct } from '@bs-commerce/models';
 
 const FeaturedProducts = () => {
   const { t } = useTranslation();
-
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
+  // Gets number of products to show
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 9;
@@ -46,7 +46,7 @@ const FeaturedProducts = () => {
             index % 3 === 2 ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide key={Math.random() * 999999}>
-                  <ProductRow
+                  <CycleProductGroup
                     products={[
                       products[index - 2],
                       products[index - 1],
@@ -58,7 +58,7 @@ const FeaturedProducts = () => {
             ) : index + 1 === products.length ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide key={Math.random() * 999999}>
-                  <ProductRow
+                  <CycleProductGroup
                     products={[
                       products[index],
                       index % 3 === 0 && products.length > getMinimumProduct()
