@@ -50,7 +50,7 @@ const Language: React.FC = () => {
         {router?.locales?.map((locale) => (
           <li
             key={locale}
-            className="py-1"
+            className={`py-1 ${locale === router.locale ? 'text-primary dark:text-dark_primary' : ''}`}
             onClick={() => languageOnclick(locale)}
           >
             <Link href={router.asPath} locale={locale}>
