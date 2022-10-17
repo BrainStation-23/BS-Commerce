@@ -7,7 +7,7 @@ import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
 import OurService from '@/modules/static/service/components/ourService';
 import UnlimitedService from '@/modules/static/service/components/unlimitedService';
 import useTranslation from 'next-translate/useTranslation';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const threeStoriesList: storiesBody[] = [
   {

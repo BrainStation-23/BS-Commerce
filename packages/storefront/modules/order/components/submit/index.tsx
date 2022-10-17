@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import Link from 'next/link';
 import Image from 'next/image';
 

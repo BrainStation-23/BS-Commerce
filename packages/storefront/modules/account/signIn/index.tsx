@@ -19,7 +19,7 @@ import { storeWishlist } from 'store/slices/productsSlice';
 import { storeAllCartItems } from 'store/slices/cartSlice';
 
 import Loading from '@/modules/global/loader';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
 import FacebookLogo from '@/modules/common/icons/facebookLogo';
 import GoogleLogo from '@/modules/common/icons/googleLogo';

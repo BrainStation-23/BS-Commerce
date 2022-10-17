@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CustomerAddress } from '@bs-commerce/models';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
 import { useEffect, useState } from 'react';

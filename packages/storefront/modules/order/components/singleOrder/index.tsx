@@ -5,7 +5,7 @@ import withAuth from '@/modules/auth/withAuth';
 import { useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 import Link from 'next/link';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/table';
 import ReOrder from './reOrder';

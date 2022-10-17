@@ -51,14 +51,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
 
   return (
     <>
-      {/* <button
-        className="bg-blue-200 text-black active:bg-blue-500 
-      font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Fill Details
-      </button> */}
       {showModal ? (
         <>
           <div className="fixed inset-0 z-50 flex justify-center bg-neutral-900/40 bg-opacity-75 transition-opacity dark:text-dark_text">
@@ -81,15 +73,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                   </button>
                 </div>
                 <div className="flex-auto p-6">
-                  <div
-                  // className={`${
-                  //   comparisonProducts.length === 3
-                  //     ? 'grid-col-4'
-                  //     : comparisonProducts.length === 2
-                  //     ? 'grid-col-3'
-                  //     : 'grid-col-2'
-                  // } grid`}
-                  >
+                  <div>
                     <div className="overflow-x-auto overflow-y-auto sm:-mx-6 lg:-mx-8">
                       <div className="inline-block py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -164,7 +148,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               }
                                               height={100}
                                               width={100}
-                                              // className="m-auto"
                                               layout="fixed"
                                             />
                                             <br />
@@ -194,10 +177,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                                 pathname: `/product/${product
                                                   ?.productDetails?.meta
                                                   ?.friendlyPageName!}`,
-                                                // query: {
-                                                //   id: product?.id,
-                                                //   name: product?.info.name,
-                                                // },
                                               }}
                                               passHref
                                             >

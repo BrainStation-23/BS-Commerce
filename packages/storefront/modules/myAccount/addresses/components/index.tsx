@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { useState } from 'react';
 import AddressForm from '@/modules/myAccount/addresses/components/addressForm';
 import { useAppSelector } from 'store/hooks/index';

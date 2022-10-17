@@ -1,5 +1,5 @@
 import WithAuth from '@/modules/auth/withAuth';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { userAPI } from 'APIs';
 import { useAppSelector } from 'store/hooks/index';
 import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';

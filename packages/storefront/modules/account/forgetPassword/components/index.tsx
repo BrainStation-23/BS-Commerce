@@ -10,7 +10,7 @@ import { useAppDispatch } from 'store/hooks/index';
 import { storeOtp, storeUsername } from 'store/slices/forgetPasswordSlice';
 import { useRouter } from 'next/router';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
 import UsernameForm from '@/modules/account/forgetPassword/components/usernameForm';
 import OtpForm from '@/modules/account/forgetPassword/components/otpForm';

@@ -1,7 +1,7 @@
 import type { NextComponentType } from 'next';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import SearchItems from '@/modules/search/components/searchItem';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../global/components/pagination';
 import useTranslation from 'next-translate/useTranslation';

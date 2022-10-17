@@ -26,7 +26,7 @@ import {
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/modules/product/productImageSlider';
 import ProductDescription from '@/modules/product/productDescription';
 import CartModal from '@/modules/global/components/modal/cartModal';
