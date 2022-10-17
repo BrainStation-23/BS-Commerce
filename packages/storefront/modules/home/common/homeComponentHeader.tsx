@@ -4,7 +4,6 @@ interface Props {
   heading2?: string;
 }
 
-// Gobal container component, used to wrap all components
 const HomeComponentHeader: FC<Props> = ({ heading1, heading2 }) => {
   return (
     <div className="mb-6 text-center">

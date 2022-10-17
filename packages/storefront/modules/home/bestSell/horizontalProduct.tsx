@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
 import Icon from '@/modules/global/components/icon';
 import ProductInfo from '@/modules/global/components/product/productInfo';
-interface SingleProduct {
-  product: CustomerProduct;
-}
 
-const HorizontalProduct = ({ product }: SingleProduct) => {
+const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
   const [showIcons, setShowIcons] = useState(false);
 
   return (
@@ -38,7 +35,6 @@ const HorizontalProduct = ({ product }: SingleProduct) => {
           <div className="col-span-9">
             <ProductInfo product={product} />
           </div>
-
           <div
             className={`absolute bottom-5 left-48  w-36 origin-left transition-transform duration-300 ${
               showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
