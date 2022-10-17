@@ -10,7 +10,10 @@ const BranchAddressSchema = new Schema<BranchAddress>(
             index: true,
         },
         addressLine1: String,
-        addressLine2: String,
+        addressLine2: {
+            type: String,
+            default: ''
+        },
         postCode: String,
         city: String,
         country: String,
@@ -43,6 +46,16 @@ const BranchSchema = new Schema<Branch>(
             type: Boolean,
             default: true,
         },
+        image: {
+            type: String,
+            default: ''
+        },
+        status: String,
+        description:{
+            type: String,
+            default: ''
+        },
+        name: String
     },
     {
         timestamps: true,

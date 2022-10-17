@@ -62,6 +62,27 @@ export class BranchDto implements Branch {
   @IsNotEmpty()
   @CustomValidator(BranchAddressDto)
   address: BranchAddressDto;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  status: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  image: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
 }
 
 export class SingleBranchSuccessResponseDto implements SingleBranchSuccessResponse{

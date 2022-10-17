@@ -13,4 +13,8 @@ export class Branch{
     url: string;
     address: BranchAddress;
     isActive: boolean;
-} 
+    status: string;
+    image?: string;
+    description?: string;
+    name: string;
+}
