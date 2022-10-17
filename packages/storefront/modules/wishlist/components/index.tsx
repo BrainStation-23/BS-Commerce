@@ -12,7 +12,7 @@ import {
 } from 'store/slices/productsSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import HeartIcon from '@/modules/common/icons/heartIcon';
 import WithAuth from '@/modules/auth/withAuth';
 import Modal from '@/modules/global/components/modal/modal';

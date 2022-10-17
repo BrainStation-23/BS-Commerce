@@ -1,6 +1,6 @@
 import type { NextComponentType } from 'next';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import SearchItem from '@/modules/search/searchItem';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../global/components/pagination';

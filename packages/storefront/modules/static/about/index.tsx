@@ -12,7 +12,7 @@ import {
   storiesBody,
   CarouselBody,
 } from '../../../APIs/utils/types';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const accordionList: accordionBody[] = [
   {

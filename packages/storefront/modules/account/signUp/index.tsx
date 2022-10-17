@@ -16,7 +16,7 @@ import {
 } from '@bs-commerce/models';
 import { registerSchema } from '@/modules/account/schemas/registerSchema';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import Loading from '@/modules/global/loader';
 import WithoutAuth from '@/modules/auth/withoutAuth';
 

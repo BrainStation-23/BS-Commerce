@@ -3,7 +3,7 @@ import type { NextComponentType } from 'next';
 import MapArea from '@/modules/static/contact/components/mapArea';
 import ContactArea from '@/modules/static/contact/components/contactArea';
 import useTranslation from 'next-translate/useTranslation';
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const ContactComponent: NextComponentType = () => {
   const { t } = useTranslation();
