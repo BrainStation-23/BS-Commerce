@@ -7,6 +7,8 @@ import { authConfig } from 'config/auth';
 import { ICustomerDatabase } from '../customer/repositories/customer.database.interface';
 import { CustomerRepository } from '../customer/repositories';
 import { JwtStrategy } from 'src/guards/jwt-strategy';
+import { GoogleStrategy } from 'src/guards/google.strategy';
+import { FacebookStrategy } from 'src/guards/facebook.strategy';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { JwtStrategy } from 'src/guards/jwt-strategy';
       useClass: ResolveDatabaseDependency('CUSTOMER_AUTH'),
     },
     JwtStrategy,
+    GoogleStrategy,
+    FacebookStrategy,
   ],
 })
 export class CustomerAuthModule {}

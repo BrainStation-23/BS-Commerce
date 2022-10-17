@@ -29,6 +29,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { CustomerJwtPayload } from 'src/entity/customer-auth';
 import { Customer } from 'src/entity/customer';
+import { socialLoginConfig } from 'config/social-login';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
@@ -211,6 +212,48 @@ export class CustomerAuthService {
       );
     return this.helper.serviceResponse.successResponse(
       doesCustomerEmailExist || doesCustomerPhoneExist,
+      HttpStatus.OK,
+    );
+  }
+
+  async socialLogin(user): Promise<CustomerSignInResponse> {
+    if (!user)
+      return this.helper.serviceResponse.errorResponse(
+        SignInErrorMessages.INVALID_CREDENTIALS,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    const customer = await this.customerRepo.findCustomer({
+      email: user.email,
+    });
+    if (customer) {
+      const payload: Partial<CustomerJwtPayload> = {
+        id: customer.id,
+        email: customer.email,
+        logInTime: Date.now(),
+        role: 'customer',
+      };
+      const token = this.jwtService.sign(payload);
+      return this.helper.serviceResponse.successResponse(
+        { token },
+        HttpStatus.OK,
+      );
+    }
+
+    const password = user.email + socialLoginConfig.socialPassword;
+    const hashPassword = await bcrypt.hash(password, 10);
+    user.password = hashPassword;
+    const googleCustomer = await this.customerRepo.createCustomer(user);
+
+    const payload: Partial<CustomerJwtPayload> = {
+      id: googleCustomer.id,
+      email: googleCustomer.email,
+      logInTime: Date.now(),
+      role: 'customer',
+    };
+    const token = this.jwtService.sign(payload);
+    return this.helper.serviceResponse.successResponse(
+      { token },
       HttpStatus.OK,
     );
   }
