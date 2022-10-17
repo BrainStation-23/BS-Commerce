@@ -5,14 +5,14 @@ import withAuth from '@/modules/auth/withAuth';
 import { useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
 import Link from 'next/link';
-import ChevronLeft from './icons/chevronLeft';
-import ChevronRight from './icons/chevronRight';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import OrderSummary from './summary';
 import ProductTable from './productTable/table';
 import ReOrder from './reOrder';
 import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';
+import ChevronRight from '@/modules/common/icons/chevronRight';
+import ChevronLeft from '@/modules/common/icons/chevronLeft';
 
 const SingleOrder: FC = () => {
   const router = useRouter();
@@ -50,11 +50,12 @@ const SingleOrder: FC = () => {
       <div className="container mx-auto mt-5 px-4 dark:text-dark_text">
         <div className="flex gap-x-4">
           <button
+            className='cursor-pointer fill-primary dark:fill-dark_primary'
             onClick={() => {
               router.push('/order');
             }}
           >
-            <ChevronLeft />
+            <ChevronLeft height='h-9' width='h-9' />
           </button>
           <p className="text-2xl font-semibold">{t('order:order_summary')}</p>
         </div>
@@ -64,7 +65,9 @@ const SingleOrder: FC = () => {
               {t('common:order')}
             </p>
           </Link>
-          <ChevronRight />
+          <div className='fill-dark_text stroke-dark_text'>
+            <ChevronRight height='h-4' width='w-4' />
+          </div>
           <p className="text-sm">{t('order:order_summary')}</p>
         </div>
 

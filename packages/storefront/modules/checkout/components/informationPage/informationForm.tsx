@@ -367,7 +367,7 @@ const InformationForm: React.FC<Props> = ({ setModal }: Props) => {
                     <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       <Link href="/cart" passHref>
                         <a className="text-decoration-none">
-                          {<ChevronLeft />}
+                          {<ChevronLeft height='h-5' width='h-5' />}
                         </a>
                       </Link>
                     </div>

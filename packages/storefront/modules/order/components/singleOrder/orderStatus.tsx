@@ -14,9 +14,8 @@ const OrderStatus: React.FC<Props> = ({ status }: Props) => {
       ? 4
       : 5;
 
-  //   console.log(statusIndex);
-
-  const coloredBorder = 'bg-green-500 border-green-500';
+  const coloredBorder =
+    'bg-primary border-primary dark:bg-dark_primary dark:border-dark_primary';
   const fadedBorder = 'bg-gray-100 border-gray-100';
   const redBorder = 'bg-red-400 border-red-400';
 
@@ -29,13 +28,13 @@ const OrderStatus: React.FC<Props> = ({ status }: Props) => {
             <CheckCircleOutlineIcon
               fill={statusIndex >= 1 ? '#7CD871' : '#E4EAF1'}
             />
-            <hr className="flex-grow border border-green-500 bg-green-500"></hr>
+            <hr className={`flex-grow  border ${coloredBorder}`}></hr>
           </div>
           <span>Ordered</span>
         </div>
         <div className="flex flex-grow flex-col items-center">
           <div className="flex w-full items-center">
-            <hr className="flex-grow border border-green-500 bg-green-500"></hr>
+            <hr className={`flex-grow  border ${coloredBorder}`}></hr>
             <CheckCircleOutlineIcon
               fill={statusIndex >= 2 ? '#7CD871' : '#E4EAF1'}
             />

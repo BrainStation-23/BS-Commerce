@@ -75,7 +75,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       <div className="flex justify-center pt-6">
         <button
           onClick={() => handleReorder(false, false)}
-          className="rounded bg-green-700 py-2 px-8 font-bold text-white hover:bg-black dark:hover:border"
+          className="rounded bg-primary py-2 px-8 font-bold text-white hover:bg-black dark:hover:border dark:hover:bg-dark_bg dark:bg-dark_primary"
           id="re-order"
         >
           {t('common:reorder')}
