@@ -14,7 +14,7 @@ import { userAPI } from 'APIs';
 import { useAppDispatch } from 'store/hooks/index';
 import { storeCustomerDetails, storeUserDetails } from 'store/slices/userSlice';
 import { storeUserToken } from 'store/slices/authSlice';
-import { loginSchema } from '@/modules/account/components/signIn/schemas/loginSchema';
+import { loginSchema } from '@/modules/account/schemas/loginSchema';
 import { storeWishlist } from 'store/slices/productsSlice';
 import { storeAllCartItems } from 'store/slices/cartSlice';
 

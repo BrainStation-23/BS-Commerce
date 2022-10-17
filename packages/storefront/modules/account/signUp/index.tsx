@@ -14,7 +14,7 @@ import {
   CreateCustomerRequest,
   CustomerSignInRequest,
 } from '@bs-commerce/models';
-import { registerSchema } from '@/modules/account/components/signUp/schemas/registerSchema';
+import { registerSchema } from '@/modules/account/schemas/registerSchema';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import Loading from '@/modules/global/loader';

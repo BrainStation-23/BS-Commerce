@@ -1,10 +1,10 @@
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import { usernameSchema } from '@/modules/account/components/forgetPassword/schemas/forgotPassword.schema';
+import { usernameSchema } from '@/modules/account/schemas/forgotPassword.schema';
 
-import FormCancelButton from '@/modules/account/components/forgetPassword/common/cancelButton';
-import FieldTemplate from '@/modules/account/components/forgetPassword/common/fieldTemplate';
-import FormSubmitButton from '@/modules/account/components/forgetPassword/common/submitButton';
+import FormCancelButton from '@/modules/account/forgetPassword/common/cancelButton';
+import FieldTemplate from '@/modules/account/forgetPassword/common/fieldTemplate';
+import FormSubmitButton from '@/modules/account/forgetPassword/common/submitButton';
 
 interface Props {
   handleUsernameFormSubmit: Function;

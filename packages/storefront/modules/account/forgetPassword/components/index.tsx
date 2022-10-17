@@ -12,9 +12,9 @@ import { useRouter } from 'next/router';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
-import UsernameForm from '@/modules/account/components/forgetPassword/usernameForm';
-import OtpForm from '@/modules/account/components/forgetPassword/otpForm';
-import NewPasswordForm from '@/modules/account/components/forgetPassword/newPasswordForm';
+import UsernameForm from '@/modules/account/forgetPassword/components/usernameForm';
+import OtpForm from '@/modules/account/forgetPassword/components/otpForm';
+import NewPasswordForm from '@/modules/account/forgetPassword/components/newPasswordForm';
 
 const ForgotPassword: NextComponentType = () => {
   const dispatch = useAppDispatch();

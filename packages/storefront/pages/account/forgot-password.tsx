@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import ForgotPassword from '@/modules/account/components/forgetPassword';
+import ForgotPassword from '@/modules/account/forgetPassword/components';
 
 const ForgotPasswordPage: NextPage = () => {
   return (
