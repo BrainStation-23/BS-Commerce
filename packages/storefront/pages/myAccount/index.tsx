@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import AccountDetails from '@/modules/myAccount/accountDetails';
+import Profile from '@/modules/myAccount/profile/components';
 import { userAPI } from 'APIs';
 import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -16,7 +16,7 @@ const MyAccount: NextPage<Props> = ({ customerInformation }: Props) => {
   const dispatch = useAppDispatch();
   dispatch(storeCustomerDetails(customerInformation.data));
 
-  return <AccountDetails />;
+  return <Profile />;
 };
 export default MyAccount;
 

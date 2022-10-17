@@ -7,7 +7,7 @@ interface props {
   verified?: boolean;
 }
 
-const AccountDetailsFormField: React.FC<props> = ({
+const ProfileFormField: React.FC<props> = ({
   id,
   fieldType,
   label,
@@ -33,4 +33,4 @@ const AccountDetailsFormField: React.FC<props> = ({
   );
 };
 
-export default AccountDetailsFormField;
+export default ProfileFormField;

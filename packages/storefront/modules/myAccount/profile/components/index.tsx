@@ -15,14 +15,14 @@ import { resetWishilist } from 'store/slices/productsSlice';
 import { resetCart } from 'store/slices/cartSlice';
 import useTranslation from 'next-translate/useTranslation';
 
-import { CustomerSchema } from './schema/customer.schema';
+import { CustomerSchema } from '../../schemas/customer.schema';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
-import AccountDetailsForm from '@/modules/myAccount/accountDetailForm';
-import SingleDetail from '@/modules/myAccount/singleDetail';
+import ProfileForm from '@/modules/myAccount/profile/components/profileForm';
+import SingleDetail from '@/modules/myAccount/profile/components/singleDetail';
 import withAuth from '@/modules/auth/withAuth';
 
-const AccountDetails: React.FC = () => {
+const Profile: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -188,7 +188,7 @@ const AccountDetails: React.FC = () => {
                 </fieldset>
                 <div className={`${editable ? '' : 'hidden'}`}>
                   <hr className="m-5" />
-                  <AccountDetailsForm
+                  <ProfileForm
                     isPhoneVerified={false}
                     isEmailVerified={true}
                   />
@@ -202,4 +202,4 @@ const AccountDetails: React.FC = () => {
   );
 };
 
-export default withAuth(AccountDetails);
+export default withAuth(Profile);

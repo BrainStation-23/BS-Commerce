@@ -208,7 +208,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               className={`${
                 wishlistItems?.items?.length! > 0 && token !== ''
                   ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
-                  : 'stroke-dark_bg dark:stroke-dark_text  '
+                  : 'stroke-dark_bg dark:stroke-dark_text fill-white dark:fill-dark_bg'
               } flex text-base hover:stroke-primary hover:text-primary dark:text-dark_text dark:hover:stroke-dark_primary dark:hover:text-dark_primary`}
             >
               <HeartIcon height="h-6" width="w-6" />

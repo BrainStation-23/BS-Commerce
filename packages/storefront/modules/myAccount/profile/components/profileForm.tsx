@@ -1,10 +1,10 @@
 import useTranslation from 'next-translate/useTranslation';
-import AccountDetailsFormField from './accountDetailFormFieldTemplate';
+import ProfileFormField from './profileFormFieldTemplate';
 interface props {
   isPhoneVerified: boolean;
   isEmailVerified: boolean;
 }
-const AccountDetailsForm: React.FC<props> = ({
+const ProfileForm: React.FC<props> = ({
   isPhoneVerified,
   isEmailVerified,
 }) => {
@@ -12,28 +12,28 @@ const AccountDetailsForm: React.FC<props> = ({
 
   return (
     <>
-      <AccountDetailsFormField
+      <ProfileFormField
         id="name"
         fieldType="text"
         label={t('myAccount:name')}
       />
-      {/* <AccountDetailsFormField
+      {/* <ProfileFormField
         id="firstName"
         fieldType="text"
         label="First Name"
       />
-      <AccountDetailsFormField
+      <ProfileFormField
         id="lastName"
         fieldType="text"
         label="Last Name"
       /> */}
-      <AccountDetailsFormField
+      <ProfileFormField
         id="phone"
         fieldType="text"
         label={t('myAccount:phone')}
         verified={isPhoneVerified}
       />
-      <AccountDetailsFormField
+      <ProfileFormField
         id="email"
         fieldType="text"
         label={t('myAccount:email')}
@@ -43,4 +43,4 @@ const AccountDetailsForm: React.FC<props> = ({
   );
 };
 
-export default AccountDetailsForm;
+export default ProfileForm;

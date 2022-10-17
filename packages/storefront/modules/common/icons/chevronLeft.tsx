@@ -1,13 +1,17 @@
 import { NextComponentType } from "next";
 
-const ChevronLeft: NextComponentType = () => {
+interface Props {
+  height: string;
+  width: string;
+}
+
+const ChevronLeft: React.FC<Props> = ({ height, width }) => {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
+        className={`${height} ${width}`}
         viewBox="0 0 20 20"
-        fill="currentColor"
       >
         <path
           fillRule="evenodd"

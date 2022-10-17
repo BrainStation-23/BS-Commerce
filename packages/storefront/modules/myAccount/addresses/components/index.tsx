@@ -5,12 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 import { useState } from 'react';
-import AddNewAddressForm from '@/modules/myAccount/addNewAddressForm';
+import AddressForm from '@/modules/myAccount/addresses/components/addressForm';
 import { useAppSelector } from 'store/hooks/index';
-import SingleAddress from '@/modules/myAccount/singleAddress';
+import SingleAddress from '@/modules/myAccount/addresses/components/singleAddress';
 import WithAuth from '@/modules/auth/withAuth';
 
-const AccountDetails: NextComponentType = () => {
+const AddressesComponent: NextComponentType = () => {
   const { t } = useTranslation();
 
   const [showAddAddress, setShowAddAddress] = useState('hidden');
@@ -63,7 +63,7 @@ const AccountDetails: NextComponentType = () => {
           </div>
           <div className="md:col-span-2">
             <div className={`${showAddAddress}`}>
-              <AddNewAddressForm cancelForm={addButtonOnClick} />
+              <AddressForm cancelForm={addButtonOnClick} />
               <hr className="my-2" />
             </div>
             <div className="text-left">
@@ -90,4 +90,4 @@ const AccountDetails: NextComponentType = () => {
   );
 };
 
-export default WithAuth(AccountDetails);
+export default WithAuth(AddressesComponent);

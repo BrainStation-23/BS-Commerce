@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { deleteAddress } from 'store/slices/customerAddressSlice';
 import useTranslation from 'next-translate/useTranslation';
 
-import AddNewAddressForm from '@/modules/myAccount/addNewAddressForm';
-import LocationIcon from '@/modules/myAccount/icons/location';
-import PencilIcon from '@/modules/myAccount/icons/pencil';
-import TrashIcon from '@/modules/myAccount/icons/trash';
+import AddressForm from '@/modules/myAccount/addresses/components/addressForm';
+import LocationIcon from '@/modules/common/icons/location';
+import PencilIcon from '@/modules/common/icons/pencil';
+import TrashIcon from '@/modules/common/icons/trash';
 import Link from 'next/link';
 
 interface Props {
@@ -147,7 +147,7 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
           <div className={`${showEditAddress} w-full`}>
             <hr className="mt-5 mb-2" />
             <p className="my-5 font-bold">Edit Address</p>
-            <AddNewAddressForm
+            <AddressForm
               user={{
                 firstName: singleAddress?.firstName,
                 lastName: singleAddress?.lastName,

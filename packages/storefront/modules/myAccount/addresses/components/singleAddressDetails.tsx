@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import { CustomerAddress } from '@bs-commerce/models';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
-import ChevronLeft from '@/modules/myAccount/icons/chevron-left';
-import ChevronRight from '@/modules/myAccount/icons/chevron-right';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
 import { useEffect, useState } from 'react';
-import SingleAddressDetailsTable from '@/modules/myAccount/singleAddressDetailsTable';
+import SingleAddressDetailsTableData from '@/modules/myAccount/addresses/components/singleAddressDetailsTableData';
 import useTranslation from 'next-translate/useTranslation';
+import ChevronLeft from '@/modules/common/icons/chevronLeft';
+import ChevronRight from '@/modules/common/icons/chevronRight';
 
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
@@ -50,11 +50,12 @@ const SingleAddressDetails: NextComponentType = () => {
       <div className="container mx-auto mt-5 px-4">
         <div className="flex gap-x-4">
           <button
+            className='cursor-pointer fill-primary dark:fill-dark_primary'
             onClick={() => {
               router.push('/myAccount/addresses');
             }}
           >
-            <ChevronLeft />
+            <ChevronLeft height='h-9' width='w-9' />
           </button>
           <p className="text-2xl font-semibold">
             {t('myAccount:delivery_address')}
@@ -66,35 +67,37 @@ const SingleAddressDetails: NextComponentType = () => {
               {t('myAccount:delivery_address')}
             </p>
           </Link>
-          <ChevronRight />
+          <div className='stroke-current fill-current'>
+            <ChevronRight height='h-4' width='w-4' />
+          </div>
           <p className="cursor-pointer text-sm">{t('myAccount:details')}</p>
         </div>
 
         <div className="mt-5 rounded-lg border md:w-1/2">
-          <SingleAddressDetailsTable
+          <SingleAddressDetailsTableData
             label={t('myAccount:address_line')}
             text={singleAddress?.addressLine1}
             extraClass="mt-5"
           />
 
-          <SingleAddressDetailsTable
+          <SingleAddressDetailsTableData
             label={t('myAccount:building_name')}
             text={
               singleAddress?.addressLine2 ? singleAddress?.addressLine2 : 'N/A'
             }
           />
 
-          <SingleAddressDetailsTable
+          <SingleAddressDetailsTableData
             label={t('myAccount:city')}
             text={singleAddress?.state!}
           />
 
-          <SingleAddressDetailsTable
+          <SingleAddressDetailsTableData
             label={t('myAccount:post_code')}
             text={singleAddress?.postCode!}
           />
 
-          <SingleAddressDetailsTable
+          <SingleAddressDetailsTableData
             label={t('myAccount:phone_number')}
             text={singleAddress?.phone ? singleAddress?.phone : 'N/A'}
           />

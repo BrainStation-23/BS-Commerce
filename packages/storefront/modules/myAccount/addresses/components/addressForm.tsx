@@ -13,7 +13,7 @@ interface props {
   cancelForm: Function;
   id?: string;
 }
-const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
+const AddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -269,4 +269,4 @@ const AddNewAddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
   );
 };
 
-export default AddNewAddressForm;
+export default AddressForm;

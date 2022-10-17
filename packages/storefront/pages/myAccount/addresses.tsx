@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import Address from '@/modules/myAccount/address';
+import AddressesComponent from '@/modules/myAccount/addresses/components';
 import { userAPI } from 'APIs';
 import { Customer } from '@bs-commerce/models';
 import { useAppDispatch } from 'store/hooks';
@@ -17,7 +17,7 @@ const Addresses: NextPage<Props> = ({ customerProfile }) => {
   dispatch(storeCustomerDetails(customerProfile!));
   dispatch(storeAddresses(customerProfile?.addresses!));
 
-  return <Address />;
+  return <AddressesComponent />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

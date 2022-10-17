@@ -14,10 +14,10 @@ const SingleAddressDetailsTable: React.FC<Props> = ({
       <div className={`grid grid-cols-1 gap-y-2 px-5 pb-5 ${extraClass}`}>
         <div className="grid w-full grid-cols-2">
           <div>
-            <p className="text-[#7c827f]">{label} </p>
+            <p className="text-dark_text">{label} </p>
           </div>
           <div>
-            <p className="ml-4 text-black lg:ml-0">: {text}</p>
+            <p className="ml-4 text-black dark:text-white lg:ml-0">: {text}</p>
           </div>
         </div>
       </div>
