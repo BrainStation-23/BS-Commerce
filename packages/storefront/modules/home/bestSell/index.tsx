@@ -5,25 +5,26 @@ import 'swiper/css/pagination';
 
 import React from 'react';
 import Link from 'next/link';
-import useTranslation from 'next-translate/useTranslation';
-
-import { SwiperSlide } from 'swiper/react';
 import { NextComponentType } from 'next';
+import { SwiperSlide } from 'swiper/react';
+import useTranslation from 'next-translate/useTranslation';
 
 import { useAppSelector } from 'store/hooks/index';
 
-import Banner from '@/modules/home/bestSell/banner';
-import ProductRow from '@/modules/home/bestSell/productRow.component';
-import SwiperGrid from '@/modules/global/components/swipergrid';
-import Container from '@/modules/global/components/container';
 import { CustomerProduct } from '@bs-commerce/models';
+
+import Container from '@/modules/global/components/container';
+import Banner from '@/modules/home/bestSell/components/banner';
+import SwiperGrid from '@/modules/global/components/swipergrid';
+import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
+import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
 const BestSell: NextComponentType = () => {
   const { t } = useTranslation();
-
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
+  
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -31,13 +32,11 @@ const BestSell: NextComponentType = () => {
   };
   return (
     <>
-      <Container className="">
-        <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">
-            {t('home:recently_added')}
-          </p>
-          <h1 className="text-bold text-4xl ">{t('home:best_sell')}</h1>
-        </div>
+      <Container>
+        <HomeComponentHeader
+          heading1={t('home:recently_added')}
+          heading2={t('home:best_sell')}
+        />
         <div className="flex w-full flex-wrap">
           <div className="w-full px-3 md:w-5/12 lg:w-2/6 lg:px-0">
             <Link href="/">
@@ -62,7 +61,7 @@ const BestSell: NextComponentType = () => {
                       key={product?.id! + products[index - 1]?.id}
                     >
                       <SwiperSlide key={Math.random() * 999999}>
-                        <ProductRow
+                        <CycleProductGroup
                           products={[
                             products[index - 2],
                             products[index - 1],
@@ -77,7 +76,7 @@ const BestSell: NextComponentType = () => {
                         key={product?.id! + products[index - 1]?.id}
                       >
                         <SwiperSlide key={Math.random() * 999999}>
-                          <ProductRow
+                          <CycleProductGroup
                             products={[
                               products[index],
                               index % 3 === 0 &&

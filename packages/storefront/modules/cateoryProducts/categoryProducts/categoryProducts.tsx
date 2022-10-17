@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
-import Product from '@/modules/global/components/product/product';
+import VerticalProduct from '@/modules/global/components/product/verticalProduct';
 
-interface props {
-  products: CustomerProduct[];
-}
-
-const CategoryProductSegment: FC<props> = ({ products }) => {
+const CategoryProductSegment: FC<{ products: CustomerProduct[] }> = ({
+  products,
+}) => {
   return (
     <>
       {/* {console.log(currentPage)} */}
@@ -14,7 +12,7 @@ const CategoryProductSegment: FC<props> = ({ products }) => {
         {products && products[0] ? (
           <div className="grid grid-cols-2 justify-items-center gap-2 md:w-fit lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-3 xl:gap-[25px]">
             {products.map((product) => (
-              <Product key={product.id} product={product} />
+              <VerticalProduct key={product.id} product={product} />
             ))}
           </div>
         ) : (

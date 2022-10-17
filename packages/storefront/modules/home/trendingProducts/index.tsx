@@ -5,7 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'store/hooks/index';
 
 import Container from '@/modules/global/components/container';
-import ProductRow from './productRow.component';
+import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
+
+import ProductRow from '../common/cycleProductGroup';
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import { CustomerProduct } from '@bs-commerce/models';
 
@@ -14,11 +16,11 @@ const TrendingProducts = () => {
   let [filteredProduct, setProducts] = useState<CustomerProduct[]>([]);
 
   const { t } = useTranslation();
-
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
 
+  // Gets number of products to show
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 10;
@@ -43,12 +45,10 @@ const TrendingProducts = () => {
   return (
     <>
       <Container className="max-w-6xl">
-        <div className="mb-6 text-center">
-          <p className="font-serif text-lg italic">
-            {t('home:recently_added')}
-          </p>
-          <h1 className="text-bold text-4xl ">{t('home:trending')}</h1>
-        </div>
+        <HomeComponentHeader
+          heading1={t('home:recently_added')}
+          heading2={t('home:trending')}
+        />
         {/* <ul className="m-5 flex justify-center text-base font-semibold ">
           <li className="mr-1 md:mr-3">
             <button
@@ -123,7 +123,6 @@ const TrendingProducts = () => {
           </SwiperGrid>
         )}
       </Container>
-      {/* <ProductRow products={[products[0], products[1]]} /> */}
     </>
   );
 };

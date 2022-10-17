@@ -7,19 +7,21 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { SwiperSlide } from 'swiper/react';
 
+import { CustomerProduct } from '@bs-commerce/models';
+
 import { useAppSelector } from 'store/hooks/index';
 
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import Container from '@/modules/global/components/container';
-import ProductRow from '@/modules/home/bestSell/productRow.component';
-import { CustomerProduct } from '@bs-commerce/models';
+import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
+import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
 const FeaturedProducts = () => {
   const { t } = useTranslation();
-
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
+  // Gets number of products to show
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 9;
@@ -27,10 +29,10 @@ const FeaturedProducts = () => {
   };
   return (
     <Container className="max-w-6xl">
-      <div className="mb-6 text-center">
-        <p className="font-serif text-lg italic">{t('home:recently_added')}</p>
-        <h1 className="text-bold text-4xl ">{t('home:featured_products')}</h1>
-      </div>
+      <HomeComponentHeader
+        heading1={t('home:recently_added')}
+        heading2={t('home:featured_products')}
+      />
       <SwiperGrid
         slidesPerViewmobile={1}
         slidesPerView768={2}
@@ -44,7 +46,7 @@ const FeaturedProducts = () => {
             index % 3 === 2 ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide key={Math.random() * 999999}>
-                  <ProductRow
+                  <CycleProductGroup
                     products={[
                       products[index - 2],
                       products[index - 1],
@@ -56,7 +58,7 @@ const FeaturedProducts = () => {
             ) : index + 1 === products.length ? (
               <React.Fragment key={product?.id! + products[index - 1]?.id}>
                 <SwiperSlide key={Math.random() * 999999}>
-                  <ProductRow
+                  <CycleProductGroup
                     products={[
                       products[index],
                       index % 3 === 0 && products.length > getMinimumProduct()
