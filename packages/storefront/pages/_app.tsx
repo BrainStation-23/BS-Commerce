@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setIsMounted(true);
   }, []);
   return (
-    <ThemeProvider enableSystem={false} attribute="class">
+    <ThemeProvider enableSystem={true} attribute="class">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Layout>

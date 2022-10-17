@@ -43,7 +43,7 @@ const Language: React.FC = () => {
       </button>
       <ul
         className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
-          open ? 'h-[110px] opacity-100' : 'h-0 opacity-0'
+          open ? 'h-[90px] opacity-100' : 'h-0 opacity-0'
         }`}
         onMouseLeave={() => setOpen(false)}
       >

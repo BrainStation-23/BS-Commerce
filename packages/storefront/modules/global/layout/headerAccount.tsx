@@ -57,7 +57,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     : customer?.phone;
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("persist:root");
     dispatch(resetAddress());
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
