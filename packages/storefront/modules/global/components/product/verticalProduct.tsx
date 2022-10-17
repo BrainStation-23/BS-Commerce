@@ -7,7 +7,7 @@ import Picture from '@/modules/global/components/product/common/picture';
 import Icon from '@/modules/global/components/icon';
 import { FC } from 'react';
 
-const Product: FC<{ product: CustomerProduct }> = ({ product }) => {
+const VerticalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
   return (
     <>
       <Link
@@ -62,4 +62,4 @@ const Product: FC<{ product: CustomerProduct }> = ({ product }) => {
   );
 };
 
-export default Product;
+export default VerticalProduct;

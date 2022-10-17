@@ -1,7 +1,7 @@
 import type { NextComponentType } from 'next';
 
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
-import SearchItem from '@/modules/search/searchItem';
+import SearchItems from '@/modules/search/components/searchItem';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../global/components/pagination';
 import useTranslation from 'next-translate/useTranslation';
@@ -98,7 +98,7 @@ const SearchComponent: NextComponentType = () => {
           </div>
         </div>
         <div className="mx-auto">
-          <SearchItem
+          <SearchItems
             searchText={searchText}
             setTotalProducts={setTotalProducts}
             currentPage={currentPage}

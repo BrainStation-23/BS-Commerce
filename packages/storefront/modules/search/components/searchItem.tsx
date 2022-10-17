@@ -2,9 +2,10 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { userAPI } from 'APIs';
 import { IProductSearchSchema } from '@bs-commerce/models';
-import Product from '@/modules/search/product';
+import HorizontalProduct from '@/modules/global/components/product/horizontalProduct';
+import VerticalProduct from '@/modules/global/components/product/verticalProduct';
 
-const SearchItem: FC<{
+const SearchItems: FC<{
   searchText: string;
   setTotalProducts: Function;
   currentPage: number;
@@ -40,15 +41,18 @@ const SearchItem: FC<{
       {searchText.length > 0 &&
         products &&
         products?.map((product) => (
-          <Product
-            key={product.id}
-            product={product}
-            imgHeight={177}
-            imgWeight={177}
-          />
+          <div key={product.id} className="mx-auto w-fit">
+            {/* <VerticalProduct */}
+            <HorizontalProduct
+              key={product.id}
+              product={product}
+              // imgHeight={177}
+              // imgWeight={177}
+            />
+          </div>
         ))}
     </>
   );
 };
 
-export default SearchItem;
+export default SearchItems;
