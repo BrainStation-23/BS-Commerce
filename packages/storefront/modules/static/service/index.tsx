@@ -3,10 +3,11 @@ import type { NextComponentType } from 'next';
 import { storiesBody } from 'APIs/utils/types';
 
 import PageTitle from '@/modules/global/components/pageTitle';
-import ThreeStoriesCard from '@/modules/global/components/threeStoriesCard';
-import OurService from '@/modules/static/service/ourService';
-import UnlimitedService from '@/modules/static/service/unlimitedService';
+import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
+import OurService from '@/modules/static/service/components/ourService';
+import UnlimitedService from '@/modules/static/service/components/unlimitedService';
 import useTranslation from 'next-translate/useTranslation';
+import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
 
 const threeStoriesList: storiesBody[] = [
   {
@@ -39,7 +40,11 @@ const ServiceComponent: NextComponentType = () => {
   const { t } = useTranslation();
   return (
     <>
-      <PageTitle title={t('service:service')} />
+      <Breadcrumb
+        title={t('service:service')}
+        pathArray={[`${t('common:home')}`, `${t('service:service')}`]}
+        linkArray={['/', '/']}
+      />
       <ThreeStoriesCard leftStory={true} threeStoriesList={threeStoriesList} />
       <div className="bg-gray-200 ">
         <OurService />
