@@ -3,12 +3,10 @@ import React from 'react';
 import Image from 'next/image';
 
 import { useAppSelector } from 'store/hooks/index';
-import { NextComponentType } from 'next';
+import { WishlistItem } from '@bs-commerce/models';
 
-import WishlistIcon from '@/modules/wishlist/wishlistIcon';
-import WishlistProductInfo from '@/modules/wishlist/wishlistProduct';
+import SingleProductInfo from '@/modules/wishlist/components/singleProductInfo';
 import Icon from '@/modules/global/components/icon';
-import { Wishlist, WishlistItem } from '@bs-commerce/models';
 
 interface Props {
   productImageHeight: number;
@@ -29,12 +27,7 @@ const WishlistBody: React.FC<Props> = (props) => {
               <Link
                 href={{
                   pathname: `product/${data?.product?.meta?.friendlyPageName}`,
-                  // query: {
-                  //   id: data?.product?.id,
-                  //   name: data?.product?.info.name,
-                  // },
                 }}
-                //as={`product/${data?.product?.info.name}`}
                 passHref
               >
                 <div className="w-50 relative flex cursor-pointer flex-col items-center justify-center">
@@ -50,7 +43,7 @@ const WishlistBody: React.FC<Props> = (props) => {
                   </div>
 
                   <div className="text-center">
-                    <WishlistProductInfo product={data?.product!} />
+                    <SingleProductInfo product={data?.product!} />
                   </div>
                 </div>
               </Link>

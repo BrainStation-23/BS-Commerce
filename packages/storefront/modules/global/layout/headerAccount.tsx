@@ -211,7 +211,7 @@ const HeaderAccount: React.FC<Properties> = () => {
                   : 'stroke-dark_bg dark:stroke-dark_text  '
               } flex text-base hover:stroke-primary hover:text-primary dark:text-dark_text dark:hover:stroke-dark_primary dark:hover:text-dark_primary`}
             >
-              <HeartIcon />
+              <HeartIcon height="h-6" width="w-6" />
               <div>
                 {wishlistItems?.items?.length! > 0 && token !== ''
                   ? wishlistItems?.items?.length

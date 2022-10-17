@@ -1,10 +1,13 @@
-import { NextComponentType } from 'next';
+interface Props {
+  height: string;
+  width: string;
+}
 
-const HeartIcon: NextComponentType = () => {
+const HeartIcon: React.FC<Props> = ({ height, width }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`h-6 w-6`}
+      className={`${height} ${width}`}
       viewBox="0 0 24 24"
       strokeWidth={2}
     >

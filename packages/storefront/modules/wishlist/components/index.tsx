@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { NextComponentType } from 'next';
@@ -10,21 +9,15 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import {
   deleteFullWishlist,
-  deleteItemFromWishlist,
 } from 'store/slices/productsSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
-import Picture from '@/modules/global/components/product/common/picture';
 import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
-import WishlistIcon from '@/modules/wishlist/wishlistIcon';
-import WishlistProductInfo from '@/modules/wishlist/wishlistProduct';
+import HeartIcon from '@/modules/common/icons/heartIcon';
 import WithAuth from '@/modules/auth/withAuth';
 import Modal from '@/modules/global/components/modal/modal';
-import Icon from '@/modules/global/components/icon';
-import CartModal from '@/modules/global/components/modal/cartModal';
-import { setCartModalState } from 'store/slices/modalSlice';
-import WishlistBody from './wishlistBody';
-import { WishlistItem } from '@bs-commerce/models';
+import WishlistBody from '@/modules/wishlist/components/body';
+import CircledRightArrow from '@/modules/common/icons/circledRightArrow';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -32,28 +25,10 @@ const WishlistComponent: NextComponentType = () => {
 
   const [modalOn, setModalOn] = useState(false);
   const [choice, setChoice] = useState(false);
-  const [showCartModal, setShowCartModal] = useState<boolean>(false);
 
   const wishlistData = useAppSelector(
     (state) => state.persistedReducer.product.wishlist
   );
-
-  const modalProduct = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalCart.product
-  );
-
-  const modalStateCart = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalCart.showModal
-  );
-
-  const modalState = useAppSelector(
-    (state) => state.persistedReducer.modal.setModal
-  );
-  //console.log(wishlistData);
-  const closeCartModal = () => {
-    setShowCartModal(false);
-    dispatch(setCartModalState({ showModal: false }));
-  };
 
   const handleDeleteAllWishlistItems = async () => {
     try {
@@ -99,30 +74,17 @@ const WishlistComponent: NextComponentType = () => {
           )}
         </div>
         {wishlistData?.items?.length! <= 0 && (
-          <div className="my-10 flex flex-col items-center">
-            <div className="my-2">
-              <WishlistIcon height="h-16" width="w-16" />
+          <div className="my-10 flex flex-col gap-y-2 items-center">
+            <div className="fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary">
+              <HeartIcon height="h-16" width="w-16" />
             </div>
             <p className="text-xl text-primary dark:text-dark_primary">
               {t('wishlist:empty_wishlist')}
             </p>
             <Link href="/" passHref>
-              <div className="my-2 flex cursor-pointer flex-wrap justify-center hover:text-primary dark:hover:text-dark_primary">
+              <div className="flex cursor-pointer flex-wrap justify-center gap-x-1 hover:text-primary dark:hover:text-dark_primary">
                 <p>{t('common:continue_shopping')}</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="ml-1 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <CircledRightArrow height="h-6" width="h-6" />
               </div>
             </Link>
           </div>
