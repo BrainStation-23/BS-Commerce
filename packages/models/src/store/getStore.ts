@@ -2,7 +2,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 import { Store } from './store';
 
 /**
- * API Path: /store/:storeId
+ * API Path: /stores/:storeId
  * method: GET
  * params: storeId
  * response: GetStoreResponse
