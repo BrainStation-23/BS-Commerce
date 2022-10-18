@@ -1,11 +1,12 @@
 import { model, Schema } from 'mongoose';
 import { Review } from 'src/entity/review';
+import { randomUUID } from 'crypto';
 
 const ReviewSchema = new Schema<Review>(
   {
     id: {
       type: String,
-      required: true,
+      default: () => randomUUID()
     },
     productId: {
       type: String,
@@ -20,7 +21,10 @@ const ReviewSchema = new Schema<Review>(
     },
     comments: [
       {
-        id: String,
+        id: {
+          type: String,
+          default: () => randomUUID()
+        },
         commentedBy:{
             type: String,
             enum : ['customer','store_admin','admin','branch_manager']
