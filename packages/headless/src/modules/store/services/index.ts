@@ -119,13 +119,10 @@ export class StoreService {
   }
 
   generateSearchQuery(condition: GetAllStoresQuery): object {
-    const { url, legalName, isActive, adminId } = condition;
+    const { url, legalName, isActive } = condition;
     const query: Record<string, any> = {};
     if (url !== undefined && url !== '') {
       query.url = url;
-    }
-    if (adminId !== undefined && adminId !== '') {
-      query.admin = adminId;
     }
     if (legalName !== undefined && legalName !== '') {
       query['info.legalName'] = legalName;

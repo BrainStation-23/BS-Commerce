@@ -32,17 +32,14 @@ export class StoreDatabase implements IStoreDatabase {
     limit?: number,
   ): Promise<Store[] | []> {
     try {
-      const { email, adminId, ...rest } = query;
+      const { email, ...rest } = query;
       const admin: StoreAdmin | null =
         email &&
         (await StoreAdminModel.findOne({
           'info.email': email,
         }).lean());
 
-      if (
-        (email && !admin) ||
-        (email && admin && adminId && adminId !== admin.id)
-      ) {
+      if (email && !admin) {
         return [];
       }
 

@@ -9,12 +9,11 @@ import { Store } from './store';
  */
 
  export interface GetAllStoresQuery {
-  skip?: number;
-  limit?: number;
+  skip: number;
+  limit: number;
   isActive?: boolean;
   url?: string;
   legalName?: string;
-  adminId?: string;
   adminEmail?: string;
 }
 

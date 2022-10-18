@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsBoolean,
+  IsEmail,
   IsNumber,
   IsObject,
   IsOptional,
@@ -20,15 +21,13 @@ import { Type } from 'class-transformer';
 export class GetAllStoresQueryDto implements GetAllStoresQuery {
   @ApiProperty({ required: false, type: Number })
   @Type(() => Number)
-  @IsOptional()
   @IsNumber()
-  skip?: number;
+  skip: number;
 
   @ApiProperty({ required: false, type: Number })
-  @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  limit?: number;
+  limit: number;
 
   @ApiProperty({ required: false, description: 'Store URL' })
   @IsOptional()
@@ -50,14 +49,10 @@ export class GetAllStoresQueryDto implements GetAllStoresQuery {
   @Type(() => Boolean)
   isActive?: boolean;
 
-  @ApiProperty({ required: false, description: 'Store Admin ID' })
-  @IsOptional()
-  @IsString()
-  adminId?: string;
-
   @ApiProperty({ required: false, description: 'Store Admin Email Address' })
   @IsOptional()
   @IsString()
+  @IsEmail()
   adminEmail?: string;
 }
 

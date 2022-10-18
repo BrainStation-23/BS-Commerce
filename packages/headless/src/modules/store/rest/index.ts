@@ -50,12 +50,12 @@ export class StoreController {
 
   @Get()
   @ApiResponse({
-    description: 'Get Single Store Success Response',
+    description: 'Get All Stores Success Response',
     type: GetAllStoresSuccessResponseDto,
     status: HttpStatus.OK,
   })
   @ApiResponse({
-    description: 'Get Single Store Error Response',
+    description: 'Get All Stores Error Response',
     type: GetAllStoresErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
