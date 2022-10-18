@@ -12,7 +12,7 @@ import {
   GetProductBySKUErrorMessages,
   GetProductBySKUErrorResponse,
   GetProductBySKUSuccessResponse,
-} from '@bs-commerce/models';
+} from 'models';
 import { ProductDto } from '.';
 
 export class GetProductBySKUParamsDto implements GetProductBySKUParams {

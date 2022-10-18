@@ -12,7 +12,7 @@ import {
   GetCustomerProductByURLErrorMessages,
   GetCustomerProductByURLErrorResponse,
   GetCustomerProductByURLSuccessResponse,
-} from '@bs-commerce/models';
+} from 'models';
 import { ProductDto } from '.';
 
 export class GetCustomerProductByURLParamsDto

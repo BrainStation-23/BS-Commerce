@@ -6,7 +6,7 @@ import {
   GetCustomerAllHomePageProductsErrorMessages,
   GetCustomerAllHomePageProductsErrorResponse,
   GetCustomerAllHomePageProductsSuccessResponse,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class GetCustomerAllHomePageProductsErrorResponseDto
   implements GetCustomerAllHomePageProductsErrorResponse

@@ -20,7 +20,7 @@ export class Product {
     sku: string;
     price: number;
     oldPrice: number;
-    cost: number;
+    quantity: number;
     showOnHomePage?: boolean;
     includeInTopMenu?: boolean;
     allowToSelectPageSize?: boolean;
@@ -60,7 +60,7 @@ export class UpdateProduct {
     sku?: string;
     price?: number;
     oldPrice?: number;
-    cost?: number;
+    quantity?: number;
     showOnHomePage?: boolean;
     includeInTopMenu?: boolean;
     allowToSelectPageSize?: boolean;

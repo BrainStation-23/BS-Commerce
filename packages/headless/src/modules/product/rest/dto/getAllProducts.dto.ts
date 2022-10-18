@@ -13,7 +13,7 @@ import {
   GetAllProductsErrorMessages,
   GetAllProductsErrorResponse,
   GetAllProductsSuccessResponse,
-} from '@bs-commerce/models';
+} from 'models';
 import { Type } from 'class-transformer';
 
 export class GetAllProductsQueryDto implements GetAllProductsQuery {

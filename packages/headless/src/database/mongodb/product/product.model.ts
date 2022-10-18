@@ -16,7 +16,7 @@ const ProductSchema = new Schema<Product>(
       sku: String,
       price: Number,
       oldPrice: Number,
-      cost: Number,
+      quantity: Number,
       showOnHomePage: {
         type: Boolean,
         default: false,

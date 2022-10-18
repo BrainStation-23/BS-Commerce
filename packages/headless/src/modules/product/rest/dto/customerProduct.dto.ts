@@ -16,7 +16,7 @@ import {
   CustomerProductCategory,
   CustomerProduct,
   CustomerProductManufacturer,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class CustomerProductInfoDto implements CustomerProductInfo {
   @ApiProperty({ required: true })
@@ -52,7 +52,7 @@ export class CustomerProductInfoDto implements CustomerProductInfo {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsNumber()
-  cost: number;
+  quantity: number;
 
   @ApiProperty({ required: false })
   @IsOptional()

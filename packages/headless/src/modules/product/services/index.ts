@@ -30,7 +30,7 @@ import {
   GetCustomizedProductsTagsEnum,
   GetCustomizedProductsResponse,
   GetCustomizedProductsErrorMessages,
-} from '@bs-commerce/models';
+} from 'models';
 @Injectable()
 export class ProductService {
   constructor(private productRepo: ProductRepository, private helper: Helper) {}
