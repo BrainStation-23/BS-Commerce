@@ -11,6 +11,14 @@ export class StoreRepository {
     return await this.db.getStore(query);
   }
 
+  async getAllStores(
+    query: Record<string, any>,
+    skip: number,
+    limit: number,
+  ): Promise<Store[] | []> {
+    return await this.db.getAllStores(query, skip, limit);
+  }
+
   async findStoreAdmin(query: Record<string, any>): Promise<StoreAdmin | null> {
     return await this.db.findStoreAdmin(query);
   }
