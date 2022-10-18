@@ -1,7 +1,7 @@
 import { productsData } from '../../../../mock/product';
 import { NextApiRequest, NextApiResponse } from 'next';
 import _ from 'lodash';
-import { CustomerProduct } from 'models';
+import { CustomerProduct } from '@bs-commerce/models';
 
 type ResponseError = {
   message: string;

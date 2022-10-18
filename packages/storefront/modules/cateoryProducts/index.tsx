@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import ProductSort from '@/modules/cateoryProducts/sort/index';
 import CategoryFilter from '@/modules/cateoryProducts/filter/main';
-import CategoryBreadcrumb from '@/modules/cateoryProducts/categoryBreadcrumb';
+import CategoryBreadcrumb from '@/modules/common/breadcrumbs/categoryBreadcrumb';
 import CategoryProducts from '@/modules/cateoryProducts/categoryProducts/categoryProducts';
 import { CustomerProduct } from '@bs-commerce/models';
 import { Pagination } from '@/modules/global/components/pagination';

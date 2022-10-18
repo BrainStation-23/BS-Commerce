@@ -26,7 +26,7 @@ import {
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
-import Breadcrumb from '@/modules/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import ProductImagesSlider from '@/modules/product/productImageSlider';
 import ProductDescription from '@/modules/product/productDescription';
 import CartModal from '@/modules/global/components/modal/cartModal';
@@ -246,6 +246,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   useEffect(() => {
     dispatch(setModalState(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   useEffect(() => {
@@ -272,6 +273,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       setAlreadyInCart(true);
     }
     setAmount(itemAmountInCart?.quantity!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

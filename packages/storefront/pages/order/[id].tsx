@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 // import SingleOrderDetails from '@/modules/order/singleOrder';
-import SingleOrder from '@/modules/order/singleOrderDetails';
+import SingleOrder from '@/modules/order/components/singleOrder';
 import { useRouter } from 'next/router';
 
 const Details: NextPage = () => {

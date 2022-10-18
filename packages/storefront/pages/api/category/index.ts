@@ -1,4 +1,4 @@
-import { Category } from 'models';
+import { Category } from '@bs-commerce/models';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { categoriesData } from 'mock/categories';
 

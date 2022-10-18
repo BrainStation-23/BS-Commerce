@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateCartItemRequest } from "models";
-import { Cart, CartProduct, ResponseItem } from "models";
+import { updateCartItemRequest } from "@bs-commerce/models";
+import { Cart, CartProduct, ResponseItem } from "@bs-commerce/models";
 
 export interface AllCartItemsState {
   allCartItems: ResponseItem[];

@@ -3,8 +3,9 @@ import type { NextComponentType } from 'next';
 import { accordionBody } from 'APIs/utils/types';
 
 import PageTitle from '@/modules/global/components/pageTitle';
-import FaqContentArea from '@/modules/static/faq/contentArea';
+import FaqContentArea from '@/modules/static/faq/components/contentArea';
 import useTranslation from 'next-translate/useTranslation';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const accordionList: accordionBody[] = [
   {
@@ -55,8 +56,11 @@ const FaqComponent: NextComponentType = () => {
   const { t } = useTranslation();
   return (
     <>
-      <PageTitle title={t('common:faq')} />
-      {/* <PageTitle title="FAQ" /> */}
+      <Breadcrumb
+        title={t('common:faq')}
+        pathArray={[`${t('common:home')}`, `${t('common:faq')} `]}
+        linkArray={['/', '/']}
+      />
       <div className="mt-10">
         <FaqContentArea accordionList={accordionList} />
       </div>

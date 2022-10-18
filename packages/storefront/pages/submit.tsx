@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmitComponent from '@/modules/order/submit/index';
+import SubmitComponent from '@/modules/order/components/submit/index';
 const Submit = () => {
   return (
     <>

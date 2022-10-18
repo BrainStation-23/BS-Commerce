@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomerProduct, Product, WishlistProduct } from "models";
+import { CustomerProduct, Product, WishlistProduct } from "@bs-commerce/models";
 
 export interface CartModalState {
   showModal: boolean,

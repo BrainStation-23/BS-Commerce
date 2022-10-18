@@ -61,7 +61,7 @@ const Currency: React.FC = () => {
         {currencyList.map((currency) => (
           <li
             key={currency.abbv}
-            className="py-1"
+            className={`py-1 cursor-pointer ${currency.abbv === currencyName ? 'text-primary dark:text-dark_primary' : ''}`}
             onClick={() => currencyOnclick(currency.abbv)}
           >
             {currency.abbv} - {currency.name}

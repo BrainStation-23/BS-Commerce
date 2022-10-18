@@ -2,16 +2,17 @@ import type { NextComponentType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import PageTitle from '@/modules/global/components/pageTitle';
-import ThreeStoriesCard from '@/modules/global/components/threeStoriesCard';
-import ImageWithDescription from '@/modules/static/about/imageWithDescription';
-import ServiceArea from '@/modules/static/about/serviceArea';
-import ClientSayArea from '@/modules/static/about/clientSayArea';
+import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
+import ImageWithDescription from '@/modules/static/about/components/imageWithDescription';
+import ServiceArea from '@/modules/static/about/components/serviceArea';
+import ClientSayArea from '@/modules/static/about/components/clientSayArea';
 
 import {
   accordionBody,
   storiesBody,
   CarouselBody,
 } from '../../../APIs/utils/types';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const accordionList: accordionBody[] = [
   {
@@ -86,7 +87,11 @@ const AboutComponent: NextComponentType = () => {
   const { t } = useTranslation();
   return (
     <>
-      <PageTitle title={t('about:page_title')} />
+      <Breadcrumb
+        title={t('about:page_title')}
+        pathArray={[`${t('common:home')}`, `${t('about:page_title')}`]}
+        linkArray={['/', '/']}
+      />
       <div className="py-12">
         <ImageWithDescription />
       </div>
