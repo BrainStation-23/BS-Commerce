@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useAppSelector } from 'store/hooks/index';
-import Loading from '@/modules/global/loader';
+import Loading from '@/modules/common/loader';
 
 const WithAuth = (Component: React.FC) => {
   const Auth = (props: any) => {

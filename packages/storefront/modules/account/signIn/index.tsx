@@ -18,7 +18,7 @@ import { loginSchema } from '@/modules/account/schemas/loginSchema';
 import { storeWishlist } from 'store/slices/productsSlice';
 import { storeAllCartItems } from 'store/slices/cartSlice';
 
-import Loading from '@/modules/global/loader';
+import Loading from '@/modules/common/loader';
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import WithoutAuth from '@/modules/auth/withoutAuth';
 import FacebookLogo from '@/modules/common/icons/facebookLogo';
