@@ -28,8 +28,8 @@ export class StoreDatabase implements IStoreDatabase {
 
   async getAllStores(
     query: Record<string, any>,
-    skip?: number,
-    limit?: number,
+    skip: number,
+    limit: number,
   ): Promise<Store[] | []> {
     try {
       const { email, ...rest } = query;

@@ -13,8 +13,8 @@ export class StoreRepository {
 
   async getAllStores(
     query: Record<string, any>,
-    skip?: number,
-    limit?: number,
+    skip: number,
+    limit: number,
   ): Promise<Store[] | []> {
     return await this.db.getAllStores(query, skip, limit);
   }
