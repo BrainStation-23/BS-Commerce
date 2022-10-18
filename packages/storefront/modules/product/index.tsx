@@ -246,6 +246,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   useEffect(() => {
     dispatch(setModalState(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   useEffect(() => {
@@ -272,6 +273,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       setAlreadyInCart(true);
     }
     setAmount(itemAmountInCart?.quantity!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
