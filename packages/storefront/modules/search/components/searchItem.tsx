@@ -46,8 +46,6 @@ const SearchItems: FC<{
             <HorizontalProduct
               key={product.id}
               product={product}
-              // imgHeight={177}
-              // imgWeight={177}
             />
           </div>
         ))}
