@@ -10,8 +10,7 @@ export class BranchDatabase implements IBranchDatabase {
     async createBranch(branch: CreateBranchRequest): Promise<Branch | null>{
       let newBranch;
       try {
-        newBranch = await BranchModel.create(branch);
-        return newBranch;
+        return await BranchModel.create(branch);
       } catch (err) {
         console.log(err)
         return null;
@@ -20,22 +19,11 @@ export class BranchDatabase implements IBranchDatabase {
 
     async getStore (storeId: string): Promise<Store | null>{
         try{
-            const store = await StoreModel.findOne({id: storeId});
-            return store;
+            return await StoreModel.findOne({id: storeId});
         }catch(err){
             return null;
         }
     };
-
-    async getURL(url: string): Promise<boolean> {
-      try {
-        const urlExists = await BranchModel.findOne({ url });
-        if (urlExists) return true;
-        return false;
-      } catch (err){
-        return false;
-      }
-    }
 
     async getBranchByStoreId(storeId: string): Promise<AllBranchByStoreId | null>{
         try{
@@ -47,11 +35,9 @@ export class BranchDatabase implements IBranchDatabase {
 
     }
 
-    async getBranch(branchId: string): Promise<Branch | null>{
+    async getBranch(query): Promise<Branch | null>{
         try{
-            const branch = await BranchModel.findOne({id: branchId});
-            console.log(branch)
-            return branch;
+            return await BranchModel.findOne(query);
         }catch(err){
             return null;
         }

@@ -28,8 +28,8 @@ export class BranchService{
             errors: null,
             code: HttpStatus.BAD_REQUEST,
           }
-          
-        const urlExists = await this.branchRepo.getURL(branch.url);
+
+        const urlExists = await this.branchRepo.getBranch({url: branch.url});
         if (urlExists)
           return {
             error: CreateBranchErrorMessage.URL_ALREADY_EXISTS,
@@ -67,7 +67,7 @@ export class BranchService{
     }
 
     async getBranch(branchId: string): Promise<SingleBranchResponse>{
-      const branch = await this.branchRepo.getBranch(branchId);
+      const branch = await this.branchRepo.getBranch({id: branchId});
       if(!branch)
         return {
           error: SingleBranchErrorMessage.INVALID_BRANCH_ID,

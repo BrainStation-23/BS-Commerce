@@ -16,15 +16,11 @@ export class BranchRepository {
         return await this.db.getStore(storeId);
     }
 
-    async getURL(url: string): Promise<boolean> {
-      return await this.db.getURL(url);
-    }
-
     async getBranchByStoreId(storeId: string): Promise<AllBranchByStoreId | null>{
         return await this.db.getBranchByStoreId(storeId);
     }
 
-    async getBranch(branchId: string): Promise<Branch | null>{
-        return await this.db.getBranch(branchId);
+    async getBranch(query: any): Promise<Branch | null>{
+        return await this.db.getBranch(query);
     }
 }
