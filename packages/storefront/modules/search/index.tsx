@@ -40,9 +40,11 @@ const SearchComponent: NextComponentType = () => {
       ).value = navSearchText;
       navSearchInput?.value ? (navSearchInput.value = '') : '';
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, navSearchText]);
   useEffect(() => {
     onProductSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
   return (
     <>

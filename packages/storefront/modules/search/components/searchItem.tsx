@@ -29,12 +29,14 @@ const SearchItems: FC<{
       getSearchedProducts();
       setStext(searchText);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
   useEffect(() => {
     if (sCurrentPage != currentPage) {
       getSearchedProducts();
       setCurrentPage(currentPage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, limit]);
   return (
     <>
