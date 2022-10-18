@@ -1,7 +1,7 @@
 import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'store/hooks/index';
-import DealProductCard from '@/modules/deals/dealProducts/dealProductCard/dealProductCard';
+import DealProductCard from '@/modules/deals/components/dealProducts/components/dealProductCard';
 
 const DealProductSegment: NextComponentType = () => {
   const products = useAppSelector(

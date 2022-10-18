@@ -1,14 +1,9 @@
 import type { NextComponentType } from 'next';
 
-import CounterElement from '@/modules/deals/filter/subComponent/counterElement';
-
 const PriceFilter: NextComponentType = () => {
   return (
     <>
       <div className="accordion-body py-4 px-5">
-        <div className="py-2">
-          <CounterElement />
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
           <div className="flex flex-row">
             <span className="flex grid content-center justify-center text-sm">

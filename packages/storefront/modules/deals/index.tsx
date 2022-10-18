@@ -1,18 +1,17 @@
 import type { NextComponentType } from 'next';
-
-import DealsFilter from '@/modules/deals/filter/main';
-import PageTitle from '@/modules/global/components/pageTitle';
-import DealProductSegment from '@/modules/deals/dealProducts/main';
-import ProductSort from '@/modules/deals/sort/index';
-import Breadcrumb from '../common/breadcrumbs/breadcrumb';
 import useTranslation from 'next-translate/useTranslation';
+
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
+import DealsFilter from '@/modules/deals/components/dealsFilter';
+import DealProductSegment from '@/modules/deals/components/dealProducts';
+import ProductSort from '@/modules/deals/components/productSort';
 
 const DealsComponent: NextComponentType = () => {
   const { t } = useTranslation();
-  
+
   return (
     <div className="mt-20">
-       <Breadcrumb
+      <Breadcrumb
         title={'Deals'}
         pathArray={[`${t('common:home')}`, `${'Deals'} `]}
         linkArray={['/', '/']}

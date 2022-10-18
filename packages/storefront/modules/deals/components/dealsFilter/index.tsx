@@ -1,11 +1,11 @@
 import type { NextComponentType } from 'next';
 import React, { useState } from 'react';
 
-import PriceFilter from '@/modules/deals/filter/subComponent/priceFilter';
-import AvaialabilityOptions from '@/modules/deals/filter/subComponent/availability';
-import ProductTypeOptions from '@/modules/deals/filter/subComponent/productTypes';
-import BrandTypeOptions from '@/modules/deals/filter/subComponent/brandTypes';
-import ColourTypeOptions from '@/modules/deals/filter/subComponent/colorAvailibility';
+import PriceFilter from '@/modules/deals/components/dealsFilter/components/priceFilter';
+import AvaialabilityOptions from '@/modules/deals/components/dealsFilter/components/availability';
+import ProductTypeOptions from '@/modules/deals/components/dealsFilter/components/productTypes';
+import BrandTypeOptions from '@/modules/deals/components/dealsFilter/components/brandTypes';
+import ColourTypeOptions from '@/modules/deals/components/dealsFilter/components/colorAvailibility';
 
 const DealsFilter: NextComponentType = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
