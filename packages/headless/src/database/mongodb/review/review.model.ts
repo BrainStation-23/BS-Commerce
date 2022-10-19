@@ -28,7 +28,7 @@ const ReviewSchema = new Schema<Review>(
         },
         commentedBy:{
             type: String,
-            enum : ['customer','store_admin','admin','branch_manager']
+            enum : ['CUSTOMER','STORE_ADMIN','BRANCH_MANAGER']
         },
         image: [
           {
