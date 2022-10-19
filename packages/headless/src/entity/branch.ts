@@ -7,14 +7,22 @@ export class BranchAddress{
     country: string;
 }
 
+export class BranchPhoto{
+    url: string;
+}
+
+export enum InActiveReason{
+    BLOCKED_BY_ADMIN = 'BLOCKED_BY_ADMIN',
+    UNDER_MAINTENANCE = 'UNDER_MAINTENANCE'
+}
 export class Branch{
     id: string;
     store: string; //storeId
     url: string;
     address: BranchAddress;
     isActive: boolean;
-    status: string;
-    image?: string;
+    inActiveReason?: InActiveReason;
+    image?: BranchPhoto[];
     description?: string;
     name: string;
 }
