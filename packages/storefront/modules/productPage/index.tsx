@@ -14,7 +14,6 @@ import {
 import { addToCart, storeAllCartItems } from 'store/slices/cartSlice';
 import { setModalState, setLoginModalState } from 'store/slices/modalSlice';
 import {
-  addToWishlist,
   deleteItemFromWishlist,
   storeWishlist,
 } from 'store/slices/productsSlice';
@@ -32,7 +31,9 @@ import SimilarProducts from '@/modules/productPage/components/similarProducts';
 import CartToast from '@/modules/common/toast/cartToast';
 import RatingStars from '@/modules/productPage/components/ratingStars';
 import TextButton from '@/modules/common/buttons/textButton';
-import ButtonType1 from '../common/buttons/buttonType1';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonType2 from '@/modules/common/buttons/buttonType2';
+import BuyProductQuantity from './components/buyProductQuatity';
 interface SingleProduct {
   product: Product;
 }
@@ -46,10 +47,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const [modalOn, setModalOn] = useState(false);
-
-  const modalStateLogin = useAppSelector(
-    (state) => state.persistedReducer.modal.setModalLogin
-  );
 
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
@@ -80,9 +77,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   let i = 0;
   let clicked = false;
   const [amount, setAmount] = useState(1);
-  const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
-  const [showCartModal, setShowCartModal] = useState<boolean>(false);
   const [alreadyInCart, setAlreadyInCart] = useState<boolean>(false);
 
   if (findWishlistProduct) {
@@ -130,13 +125,8 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         })
       );
       dispatch(setModalState(!modalCmp));
-      //dispatch(setLoginModalState(!modalOn));
     }
   };
-
-  const modalState = useAppSelector(
-    (state) => state.persistedReducer.modal.setModal
-  );
 
   const toCart = async () => {
     if (token) {
@@ -166,7 +156,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         });
         dispatch(storeAllCartItems(cart?.data?.items!));
       }
-      // setShowCartModal(true);
       toast(<CartToast product={product} />, {
         containerId: 'bottom-left',
       });
@@ -194,7 +183,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       try {
         await userAPI.addToWishList(data);
         const newList = await userAPI.getCustomerWishlist(token);
-        // console.log(newList);
         dispatch(storeWishlist(newList!));
         clicked = true;
         toast.success(`${t('common:item_added_to_wishlist')}`, {
@@ -236,10 +224,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
     } else {
       dispatch(setLoginModalState(!modalOn));
     }
-  };
-
-  const closeCartModal = () => {
-    setShowCartModal(false);
   };
 
   useEffect(() => {
@@ -325,75 +309,27 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   <span className="ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
                     {t('product-details:availability')}:
                   </span>
-                  {isAvailable ? (
-                    <span className="ml-2 mb-1 mt-2 text-sm text-primary dark:text-dark_primary">
-                      Available
-                    </span>
-                  ) : (
-                    <span className="ml-2 mb-1 mt-2 text-sm text-primary">
-                      Out of stock
-                    </span>
-                  )}
+                  <span className="ml-2 mb-1 mt-2 text-sm text-primary dark:text-dark_primary">
+                    {isAvailable ? 'Available' : 'Out of stock'}
+                  </span>
                 </div>
-
                 <p className="py- ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
                   {product?.info?.shortDescription}
                 </p>
-                <div className="flex text-black dark:text-dark_text">
-                  <div className="title-text flex items-center lg:mx-2">
-                    {t('product-details:quantity')}
-                    <div className="m-1 rounded border-2 border-gray-200 md:ml-4">
-                      <button
-                        onClick={() =>
-                          amount > 1 ? setAmount(amount - 1) : ''
-                        }
-                        // {...(amount <= 1 ? (disableDecrement = true) : null)}
-                        disabled={disableDecrement}
-                        className="p-2"
-                      >
-                        -
-                      </button>
-                      <span className="p-2">{amount}</span>
-                      <button
-                        onClick={() => setAmount(amount + 1)}
-                        disabled={disableIncrement}
-                        className="p-2"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  {isAvailable ? (
-                    <button
-                      onClick={() => {
-                        toCart();
-                      }}
-                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none dark:bg-dark_primary sm:px-12 lg:px-16"
-                      type="button"
-                      data-modal-toggle="popup-modal"
-                    >
-                      {t('product-details:add_to_cart')}
-                    </button>
-                  ) : (
-                    <button
-                      disabled={true}
-                      className="my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none dark:bg-dark_primary sm:px-12 lg:px-16"
-                    >
-                      Soldout
-                    </button>
-                  )}
-                </div>
+                <BuyProductQuantity
+                  amount={amount}
+                  disableDecrement={disableDecrement}
+                  setAmount={setAmount}
+                  disableIncrement={disableIncrement}
+                  isAvailable={isAvailable}
+                  toCart={toCart}
+                />
                 <div className=" flex flex-wrap">
-                  <ButtonType1 disabled={!isAvailable} onClickFunction={toCart} text={t('product-details:buy_now')}/>
-                  {/* <button
+                  <ButtonType1
                     disabled={!isAvailable}
-                    className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-dark_primary dark:hover:bg-dark_primary dark:hover:text-white md:px-32	"
-                    onClick={}
-                  >
-                    <span className="mx-auto">
-                      
-                    </span>
-                  </button> */}
+                    onClickFunction={toCart}
+                    text={t('product-details:buy_now')}
+                  />
                 </div>
                 <div className="text-grey-700 ml-1 dark:text-dark_text">
                   <div className="flex flex-row items-start gap-x-4">
