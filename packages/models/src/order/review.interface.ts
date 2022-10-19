@@ -2,17 +2,10 @@ import { SuccessResponse, ErrorResponse, DescriptiveError } from "src/index";
 
 export interface IComment{
     id: string;
-    commentedBy: ICommenter;
+    commentedBy: string;
     image?: string[];
     text: string;
     createdAt: Date;
-}
-
-const enum ICommenter{
-    customer = 'customer',
-    store_admin = 'store_admin',
-    admin = 'admin',
-    branch_manager = 'branch_manager'
 }
 
 export interface IReview{
@@ -23,12 +16,7 @@ export interface IReview{
     comments: IComment[];
 }
 
-export interface ICreateComment{
-    commentedBy: ICommenter;
-    image?: string[];
-    text: string;
-    createdAt: Date;
-}
+export type ICreateComment = Omit<IComment,'id'>;
 export interface ICreateReview{
     productId: string;
     orderId: string;
