@@ -1,9 +1,11 @@
-import { IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Branch, BranchAddress, SingleBranchErrorMessage, SingleBranchErrorResponse, SingleBranchSuccessResponse } from 'models';
+import { Branch, BranchAddress, IBranchPhoto, SingleBranchErrorMessage, SingleBranchErrorResponse, SingleBranchSuccessResponse } from 'models';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { HttpStatus } from '@nestjs/common';
 import { CreateBranchErrorResponseDto, CreateBranchSuccessResponseDto } from './create.branch.dto';
+import { Type } from 'class-transformer';
+import { InActiveReason } from 'src/entity/branch';
 
 export class BranchAddressDto implements BranchAddress {
   @ApiProperty()
@@ -37,6 +39,17 @@ export class BranchAddressDto implements BranchAddress {
   postCode: string;
 }
 
+export class BranchPhotoDto implements IBranchPhoto{
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  cover?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  logo?: string;
+}
 export class BranchDto implements Branch {
   @ApiProperty()
   @IsNotEmpty()
@@ -60,8 +73,30 @@ export class BranchDto implements Branch {
 
   @ApiProperty({ type: BranchAddressDto })
   @IsNotEmpty()
+  @IsObject()
   @CustomValidator(BranchAddressDto)
   address: BranchAddressDto;
+
+  @ApiProperty({ enum: InActiveReason})
+  @IsOptional()
+  inActiveReason?: InActiveReason;
+
+  @ApiProperty({ type: BranchPhotoDto })
+  @IsOptional()
+  @IsObject()
+  @CustomValidator(BranchPhotoDto)
+  image?: BranchPhotoDto;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
 }
 
 export class SingleBranchSuccessResponseDto implements SingleBranchSuccessResponse{
