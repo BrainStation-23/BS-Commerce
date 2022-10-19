@@ -11,6 +11,7 @@ import Modal from '@/modules/global/components/modal/modal';
 import Image from 'next/image';
 import { userAPI } from 'APIs';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -229,25 +230,21 @@ const CartDropdown: NextComponentType = () => {
                     <div className="border-x-2 px-6 py-2 dark:border-none">
                       <Link href="/cart" passHref>
                         <a>
-                          <button
-                            className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white"
-                            onClick={() => {
+                          <ButtonType1
+                            onClickFunction={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
                             }}
-                          >
-                            {t('common:view_cart')}
-                          </button>
+                            text={t('common:view_cart')}
+                          />
                         </a>
                       </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
-                      <button
-                        className="h-10 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white"
-                        onClick={handleClickProceed}
-                      >
-                        {t('common:checkout')}
-                      </button>
+                      <ButtonType1
+                        onClickFunction={handleClickProceed}
+                        text={t('common:checkout')}
+                      />
                     </div>
                   </>
                 ) : null}

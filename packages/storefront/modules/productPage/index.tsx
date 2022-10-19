@@ -31,6 +31,8 @@ import ProductDescription from '@/modules/productPage/components/productDescript
 import SimilarProducts from '@/modules/productPage/components/similarProducts';
 import CartToast from '@/modules/common/toast/cartToast';
 import RatingStars from '@/modules/productPage/components/ratingStars';
+import TextButton from '@/modules/common/buttons/textButton';
+import ButtonType1 from '../common/buttons/buttonType1';
 interface SingleProduct {
   product: Product;
 }
@@ -382,52 +384,46 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   )}
                 </div>
                 <div className=" flex flex-wrap">
-                  <button
+                  <ButtonType1 disabled={!isAvailable} onClickFunction={toCart} text={t('product-details:buy_now')}/>
+                  {/* <button
                     disabled={!isAvailable}
                     className="mt-5 ml-1 flex w-full items-center justify-center rounded bg-black py-2 text-white  transition duration-200 ease-out hover:bg-primary hover:ease-in dark:bg-white dark:text-black dark:hover:bg-dark_primary dark:hover:bg-dark_primary dark:hover:text-white md:px-32	"
-                    onClick={toCart}
+                    onClick={}
                   >
                     <span className="mx-auto">
-                      {t('product-details:buy_now')}
+                      
                     </span>
-                  </button>
+                  </button> */}
                 </div>
                 <div className="text-grey-700 ml-1 dark:text-dark_text">
-                  <div className="flex flex-row items-start gap-x-2">
-                    <button
-                      onClick={() =>
+                  <div className="flex flex-row items-start gap-x-4">
+                    <TextButton
+                      onClickFunction={() =>
                         clicked
                           ? deleteFromWishlist(product?.id!)
                           : toWishlist(product?.id!, 1)
                       }
-                      // disabled={clicked ? true : false}
-                      className="mt-10 hover:text-primary"
-                    >
-                      {clicked
-                        ? `${t('product-details:remove_from_wishlist')}`
-                        : `${t('product-details:add_to_wishlist')}`}
-                    </button>
-                    <div
-                      className="mt-10 underline hover:text-primary dark:hover:text-dark_primary"
-                      hidden={!clicked}
-                    >
-                      <button onClick={handleClickToWishlist}>
-                        Go to wishlist
-                      </button>
+                      text={
+                        clicked
+                          ? `${t('product-details:remove_from_wishlist')}`
+                          : `${t('product-details:add_to_wishlist')}`
+                      }
+                    />
+                    <div hidden={!clicked}>
+                      <TextButton
+                        onClickFunction={handleClickToWishlist}
+                        text={`Go to wishlist`}
+                      />
                     </div>
                   </div>
-                  <div>
-                    <button
-                      className="mt-2 hover:text-primary dark:hover:text-dark_primary"
-                      onClick={() => {
-                        handleAddToCompare();
-                      }}
-                    >
-                      {inCompareList
+                  <TextButton
+                    onClickFunction={handleAddToCompare}
+                    text={
+                      inCompareList
                         ? `${t('product-details:show_in_compare')}`
-                        : `${t('product-details:compare')}`}
-                    </button>
-                  </div>
+                        : `${t('product-details:compare')}`
+                    }
+                  />
                 </div>
               </div>
             </div>
