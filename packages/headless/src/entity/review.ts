@@ -6,10 +6,14 @@ export class Review{
     comments: Comment[];
 }
 
+export class ReviewPhoto{
+    url: string;
+}
+
 export class Comment{
     id: string;
     commentedBy: Commenters;
-    image?: string[];
+    image?: ReviewPhoto[];
     text: string;
     createdAt: Date;
 }

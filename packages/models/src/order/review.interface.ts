@@ -1,9 +1,12 @@
 import { SuccessResponse, ErrorResponse, DescriptiveError } from "src/index";
 
+export interface IReviewPhoto{
+  url: string;
+}
 export interface IComment{
     id: string;
     commentedBy: string;
-    image?: string[];
+    image?: IReviewPhoto[];
     text: string;
     createdAt: Date;
 }
