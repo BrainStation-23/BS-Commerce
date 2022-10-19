@@ -24,7 +24,7 @@ export class CreateCommentDto implements ICreateComment{
     createdAt: Date;
 }
 
-export class CreateReview implements ICreateReview{
+export class CreateReviewDto implements ICreateReview{
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
@@ -41,9 +41,9 @@ export class CreateReview implements ICreateReview{
 
     @ApiProperty({ type: [CommentDto]})
     @Type(() => CommentDto)
-    @IsNotEmpty()
+    @IsOptional()
     @IsArray()
-    comments: CreateCommentDto[];
+    comments?: CreateCommentDto[];
 
     @ApiProperty()
     @IsNumber()

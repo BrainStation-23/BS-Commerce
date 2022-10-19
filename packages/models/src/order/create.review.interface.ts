@@ -7,7 +7,7 @@ export interface ICreateReview{
     productId: string;
     orderId: string;
     userId?: string;
-    comments: ICreateComment[];
+    comments?: ICreateComment[];
     rating?: number;
 }
 
