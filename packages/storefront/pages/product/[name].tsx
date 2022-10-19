@@ -3,7 +3,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { userAPI } from 'APIs';
 import { Product } from '@bs-commerce/models';
 
-import ProductDetailsComponent from '@/modules/product';
+import ProductDetailsComponent from '@/modules/productPage';
 
 interface SingleProduct {
   product: Product;

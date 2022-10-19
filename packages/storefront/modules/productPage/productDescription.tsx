@@ -6,7 +6,7 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Product } from '@bs-commerce/models';
-import ProductReview from '@/modules/product/ProductReview';
+import ProductReview from '@/modules/productPage/ProductReview';
 interface SingleProduct {
   product: Product;
 }
