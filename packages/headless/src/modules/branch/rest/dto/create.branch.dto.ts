@@ -1,7 +1,7 @@
-import { IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
-import { BranchAddressDto, BranchDto } from './branch.dto';
+import { BranchAddressDto, BranchDto, BranchPhotoDto } from './branch.dto';
 import { HttpStatus } from '@nestjs/common';
 
 import {
@@ -13,6 +13,8 @@ import {
   CreateBranchSuccessResponse,
   ErrorMessage,
 } from 'models';
+import { Type } from 'class-transformer';
+import { InActiveReason } from 'src/entity/branch';
 
 export class CreateBranchRequestDto implements CreateBranchRequest {
   @ApiProperty()
@@ -32,18 +34,19 @@ export class CreateBranchRequestDto implements CreateBranchRequest {
 
   @ApiProperty({ type: BranchAddressDto })
   @IsNotEmpty()
+  @IsObject()
   @CustomValidator(BranchAddressDto)
   address: BranchAddressDto;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  status: string;
-
-  @ApiProperty()
+  @ApiProperty({ enum: InActiveReason})
   @IsOptional()
-  @IsString()
-  image: string;
+  inActiveReason?: InActiveReason;
+
+  @ApiProperty({ type: [BranchPhotoDto] })
+  @IsOptional()
+  @IsArray()
+  @Type(() => BranchPhotoDto)
+  image: BranchPhotoDto[];
 
   @ApiProperty()
   @IsOptional()

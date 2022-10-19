@@ -15,10 +15,14 @@ export interface Branch{
     url: string;
     address: BranchAddress;
     isActive: boolean;
-    status: string;
-    image?: string;
+    inActiveReason?: string;
+    image?: IBranchPhoto[];
     description?: string;
     name: string;
+}
+
+export interface IBranchPhoto{
+  url: string;
 }
 
 export interface SingleBranchSuccessResponse extends SuccessResponse {
