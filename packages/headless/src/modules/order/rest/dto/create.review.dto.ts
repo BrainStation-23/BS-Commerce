@@ -2,7 +2,7 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsString, IsNotEmpty, IsOptional, IsArray } from "class-validator";
-import { CreateReviewErrorResponse, CreateReviewSuccessResponse, ErrorMessageCreateReview, ICreateComment, ICreateReview } from "models";
+import { CreateReviewErrorResponse, CreateReviewSuccessResponse, CreateReviewErrorMessage, ICreateComment, ICreateReview } from "models";
 import { Commenters } from "src/entity/review";
 import { CommentDto, ReviewDto, ReviewPhotoDto } from "./review.dto";
 
@@ -52,23 +52,23 @@ export class CreateReviewSuccessResponseDto implements CreateReviewSuccessRespon
 
     @ApiProperty()
     data: ReviewDto;
-  }
+}
 
-  export class CreateReviewErrorResponseDto implements CreateReviewErrorResponse {
-    @ApiProperty({ default: HttpStatus.BAD_REQUEST })
-    code?: number;
+export class CreateReviewErrorResponseDto implements CreateReviewErrorResponse {
+  @ApiProperty({ default: HttpStatus.BAD_REQUEST })
+  code?: number;
 
-    @ApiProperty()
-    error:
-      | ErrorMessageCreateReview.INVALID_PRODUCT_ID
-      | ErrorMessageCreateReview.INVALID_ORDER_ID
-      | ErrorMessageCreateReview.INVALID_USER_ID
-      | ErrorMessageCreateReview.CANNOT_CREATE_REVIEW
+  @ApiProperty()
+  error:
+    | CreateReviewErrorMessage.INVALID_PRODUCT_ID
+    | CreateReviewErrorMessage.INVALID_ORDER_ID
+    | CreateReviewErrorMessage.INVALID_USER_ID
+    | CreateReviewErrorMessage.CANNOT_CREATE_REVIEW
 
-    @ApiProperty()
-    errors: string[];
-  }
+  @ApiProperty()
+  errors: string[];
+}
 
-  export type CreateReviewResponseDto =
-    | CreateReviewErrorResponseDto
-    | CreateReviewSuccessResponseDto;
+export type CreateReviewResponseDto =
+  | CreateReviewErrorResponseDto
+  | CreateReviewSuccessResponseDto;

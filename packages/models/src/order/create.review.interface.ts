@@ -16,12 +16,12 @@ export interface CreateReviewSuccessResponse extends SuccessResponse {
   }
 
   export interface CreateReviewErrorResponse extends ErrorResponse {
-    error: ErrorMessageCreateReview;
+    error: CreateReviewErrorMessage;
     code?: number;
     errors: DescriptiveError;
   }
 
-  export const enum ErrorMessageCreateReview {
+  export const enum CreateReviewErrorMessage {
     INVALID_PRODUCT_ID = 'NO PRODUCT WITH SUCH ID',
     INVALID_ORDER_ID = 'NO ORDER WITH SUCH ID',
     INVALID_USER_ID = 'NO USER WITH SUCH ID',

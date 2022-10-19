@@ -19,22 +19,24 @@ export interface IReview{
     comments: IComment[];
 }
 
-export interface GetReviewByProductIdSuccessResponse extends SuccessResponse {
+export interface ReviewSuccessResponse extends SuccessResponse {
     code: number;
     data: IReview;
   }
 
-  export interface GetReviewByProductIdErrorResponse extends ErrorResponse {
-    error: ErrorMessageGetReviewByProductId;
+  export interface ReviewErrorResponse extends ErrorResponse {
+    error: ReviewErrorMessage;
     code?: number;
     errors: DescriptiveError;
   }
 
-  export const enum ErrorMessageGetReviewByProductId {
+  export const enum ReviewErrorMessage {
     INVALID_PRODUCT_ID = 'NO PRODUCT WITH SUCH ID',
-    CANNOT_FIND_PRODUCT_REVIEW = 'CANNOT FIND THE PRODUCT REVIEW'
+    CANNOT_FIND_REVIEW = 'CANNOT FIND REVIEW',
+    INVALID_USER_ID = "INVALID USER ID",
+    INVALID_ORDER_ID = "INVALID ORDER ID"
   }
 
-  export type GetReviewByProductIdResponse =
-    | GetReviewByProductIdSuccessResponse
-    | GetReviewByProductIdErrorResponse;
+  export type ReviewResponse =
+    | ReviewSuccessResponse
+    | ReviewErrorResponse;
