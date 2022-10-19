@@ -11,20 +11,18 @@ const ReviewSchema = new Schema<Review>(
     },
     productId: {
       type: String,
-      ref: 'Product',
-      required: true,
-      index: true,
+      index: true
     },
     orderId: {
       type: String,
-      ref: 'Order',
       required: true,
     },
     comments: [
       {
         id: {
           type: String,
-          default: () => randomUUID()
+          default: () => randomUUID(),
+          unique: true
         },
         commentedBy:{
             type: String,
@@ -45,7 +43,6 @@ const ReviewSchema = new Schema<Review>(
     ],
     userId: {
       type: String,
-      ref: 'Customer',
       required: false,
     },
 
