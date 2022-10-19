@@ -7,7 +7,7 @@ export interface ICreateReview{
     productId: string;
     orderId: string;
     userId?: string;
-    comments?: ICreateComment[];
+    comments?: ICreateComment;
     rating?: number;
 }
 
@@ -27,7 +27,8 @@ export interface CreateReviewSuccessResponse extends SuccessResponse {
     INVALID_ORDER_ID = 'NO ORDER WITH SUCH ID',
     INVALID_USER_ID = 'NO USER WITH SUCH ID',
     CANNOT_CREATE_REVIEW = 'CANNOT CREATE REVIEW',
-    RATING_RANGE_ERROR = 'RATING MUST BE BETWEEN 1 TO 5'
+    RATING_RANGE_ERROR = 'RATING MUST BE BETWEEN 1 TO 5',
+    CANNOT_UPLOAD_MORE_THAN_5_PHOTOS = 'CANNOT UPLOAD MORE THAN 5 PHOTOS'
   }
 
   export type CreateReviewResponse =

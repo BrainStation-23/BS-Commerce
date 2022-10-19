@@ -1,10 +1,11 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsObject } from "class-validator";
 import { CreateReviewErrorResponse, CreateReviewSuccessResponse, CreateReviewErrorMessage, ICreateComment, ICreateReview } from "models";
 import { Commenters } from "src/entity/review";
 import { CommentDto, ReviewDto, ReviewPhotoDto } from "./review.dto";
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 
 export class CreateCommentDto implements ICreateComment{
     @ApiProperty({ enum: Commenters})
@@ -39,11 +40,11 @@ export class CreateReviewDto implements ICreateReview{
     @IsOptional()
     userId?: string;
 
-    @ApiProperty({ type: [CommentDto]})
-    @Type(() => CommentDto)
+    @ApiProperty({ type: CommentDto})
     @IsOptional()
-    @IsArray()
-    comments?: CreateCommentDto[];
+    @IsObject()
+    @CustomValidator(CreateCommentDto)
+    comments?: CreateCommentDto;
 
     @ApiProperty()
     @IsNumber()
@@ -69,6 +70,7 @@ export class CreateReviewErrorResponseDto implements CreateReviewErrorResponse {
     | CreateReviewErrorMessage.INVALID_ORDER_ID
     | CreateReviewErrorMessage.INVALID_USER_ID
     | CreateReviewErrorMessage.CANNOT_CREATE_REVIEW
+    | CreateReviewErrorMessage.CANNOT_UPLOAD_MORE_THAN_5_PHOTOS
 
   @ApiProperty()
   errors: string[];
