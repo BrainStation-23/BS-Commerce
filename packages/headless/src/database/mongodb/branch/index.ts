@@ -8,7 +8,6 @@ import { BranchModel } from './branch.model';
 @Injectable()
 export class BranchDatabase implements IBranchDatabase {
     async createBranch(branch: CreateBranchRequest): Promise<Branch | null>{
-      let newBranch;
       try {
         return await BranchModel.create(branch);
       } catch (err) {
@@ -19,7 +18,10 @@ export class BranchDatabase implements IBranchDatabase {
 
     async getStore (storeId: string): Promise<Store | null>{
         try{
-            return await StoreModel.findOne({id: storeId});
+            return await StoreModel.findOne({id: storeId})
+            .select('-_id')
+            .lean()
+            .exec()
         }catch(err){
             return null;
         }
@@ -27,21 +29,25 @@ export class BranchDatabase implements IBranchDatabase {
 
     async getBranchByStoreId(storeId: string): Promise<AllBranchByStoreId | null>{
         try{
-            const branchList = await BranchModel.find({store: storeId});
+            const branchList = await BranchModel.find({store: storeId})
+            .select('-_id')
+            .lean()
+            .exec()
             return {store: storeId, branchList};
         }catch(err){
             return null;
         }
-
     }
 
-    async getBranch(query): Promise<Branch | null>{
+    async getBranch(query: Record<string, any>): Promise<Branch | null>{
         try{
-            return await BranchModel.findOne(query);
+            return await BranchModel.findOne(query)
+            .select('-_id')
+            .lean()
+            .exec()
         }catch(err){
             return null;
         }
-
     }
 
 }

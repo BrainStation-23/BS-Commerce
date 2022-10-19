@@ -20,7 +20,7 @@ export class BranchRepository {
         return await this.db.getBranchByStoreId(storeId);
     }
 
-    async getBranch(query: any): Promise<Branch | null>{
+    async getBranch(query: Record<string, any>): Promise<Branch | null>{
         return await this.db.getBranch(query);
     }
 }

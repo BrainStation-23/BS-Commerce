@@ -1,14 +1,17 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Helper } from 'src/helper/helper.interface';
 import { StoreRepository } from '../repositories';
+import { randomUUID } from 'crypto';
+import * as bcrypt from 'bcrypt';
+import { authConfig } from 'config/auth';
 import {
   CreateStoreErrorMessages,
   CreateStoreRequestBody,
   CreateStoreResponse,
+  GetAllStoresQuery,
+  GetStoreErrorMessages,
+  GetStoreResponse,
 } from 'models';
-import { randomUUID } from 'crypto';
-import * as bcrypt from 'bcrypt';
-import { authConfig } from 'config/auth';
 
 @Injectable()
 export class StoreService {
@@ -28,7 +31,7 @@ export class StoreService {
       .replace(/-+$/, '');
 
     const doesStoreShopOrLegalNameMatch = await this.storeRepo.getStore({
-      'info.url': url,
+      url,
     });
     if (doesStoreShopOrLegalNameMatch)
       return this.helper.serviceResponse.errorResponse(
@@ -84,5 +87,49 @@ export class StoreService {
       createdStore,
       HttpStatus.CREATED,
     );
+  }
+
+  async getStore(storeId: string): Promise<GetStoreResponse> {
+    const store = await this.storeRepo.getStore({ id: storeId });
+    if (!store)
+      return this.helper.serviceResponse.errorResponse(
+        GetStoreErrorMessages.NO_STORE_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    return this.helper.serviceResponse.successResponse(store, HttpStatus.OK);
+  }
+
+  async getAllStores(condition: GetAllStoresQuery): Promise<GetStoreResponse> {
+    const { adminEmail, skip, limit } = condition;
+    let stores: any = [];
+    const query: Record<string, any> = this.generateSearchQuery(condition);
+    stores = await this.storeRepo.getAllStores(
+      { ...query, email: adminEmail },
+      skip,
+      limit,
+    );
+    if (!stores)
+      return this.helper.serviceResponse.errorResponse(
+        GetStoreErrorMessages.NO_STORE_FOUND,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    return this.helper.serviceResponse.successResponse(stores, HttpStatus.OK);
+  }
+
+  generateSearchQuery(condition: GetAllStoresQuery): object {
+    const { url, legalName, isActive } = condition;
+    const query: Record<string, any> = {};
+    if (url !== undefined && url !== '') {
+      query.url = url;
+    }
+    if (legalName !== undefined && legalName !== '') {
+      query['info.legalName'] = legalName;
+    }
+    if (isActive !== undefined) {
+      query['isActive'] = isActive;
+    }
+    return query;
   }
 }

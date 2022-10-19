@@ -8,7 +8,8 @@ export class BranchAddress{
 }
 
 export class BranchPhoto{
-    url: string;
+    cover?: string;
+    logo?: string;
 }
 
 export enum InActiveReason{
@@ -22,7 +23,7 @@ export class Branch{
     address: BranchAddress;
     isActive: boolean;
     inActiveReason?: InActiveReason;
-    image?: BranchPhoto[];
+    image?: BranchPhoto;
     description?: string;
     name: string;
 }

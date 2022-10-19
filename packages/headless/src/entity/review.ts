@@ -19,8 +19,7 @@ export class Comment{
 }
 
 export enum Commenters{
-    customer = 'customer',
-    store_admin = 'store_admin',
-    admin = 'admin',
-    branch_manager = 'branch_manager'
+    CUSTOMER = 'CUSTOMER',
+    STORE_ADMIN = 'STORE_ADMIN',
+    BRANCH_MANAGER = 'BRANCH_MANAGER'
 }

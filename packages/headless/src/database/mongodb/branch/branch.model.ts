@@ -43,15 +43,14 @@ const BranchSchema = new Schema<Branch>(
             type: Boolean,
             default: true,
         },
-        image:[{
-            url: String,
-            _id: false,
-        }],
+        image:{
+            cover: String,
+            logo: String
+        },
         inActiveReason: {
             type: String,
-            enum : ['BLOCKED_BY_ADMIN','UNDER_MAINTENANCE'],
-            default: null,
-            required: false
+            enum : ['BLOCKED_BY_ADMIN','UNDER_MAINTENANCE',null],
+            default: null
         },
         description:{
             type: String,
