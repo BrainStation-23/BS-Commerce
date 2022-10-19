@@ -26,12 +26,12 @@ export class CreateCommentDto implements ICreateComment{
 }
 
 export class CreateReviewDto implements ICreateReview{
-    @ApiProperty()
+    @ApiProperty({ example: '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e'})
     @IsString()
     @IsNotEmpty()
     productId: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: '003889009372785'})
     @IsString()
     orderId: string;
 

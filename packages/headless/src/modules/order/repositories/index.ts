@@ -3,7 +3,7 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import { Injectable } from '@nestjs/common';
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 
 import {
   GetAllOrderQueryEntity,
@@ -112,5 +112,17 @@ export class OrderRepository {
     limit?: number,
   ): Promise<OrderEntity[]> {
     return await this.db.getOrderList(query, skip, limit);
+  }
+
+  async getProduct(query: Record<string, any>): Promise<any>{
+    return await this.db.getProduct(query);
+  }
+
+  async createReview(review: any):Promise<any>{
+    const id = randomUUID();
+    let { comments } = review;
+    comments = {...comments, id};
+    review = {...review, comments};
+    return await this.db.createReview(review);
   }
 }

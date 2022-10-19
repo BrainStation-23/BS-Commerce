@@ -46,4 +46,6 @@ export abstract class IOrderDatabase {
     items: CartItem[],
   ) => Promise<CartResponse | null>;
   abstract clearCart: (userId: string) => Promise<CartResponse | null>;
+  abstract getProduct: (query: Record<string, any>) => Promise<any>;
+  abstract createReview: (review: any) => Promise<any>
 }

@@ -21,7 +21,6 @@ const ReviewSchema = new Schema<Review>(
       {
         id: {
           type: String,
-          default: () => randomUUID(),
           unique: true
         },
         commentedBy:{

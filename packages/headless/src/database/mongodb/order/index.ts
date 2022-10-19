@@ -21,6 +21,7 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
+import { ReviewModel } from '../review/review.model';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -263,9 +264,9 @@ export class OrderDatabase implements IOrderDatabase {
   ): Promise<OrderEntity[]> {
     const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
       query;
-    const sort ={
-      orderedDate: -1
-    }
+    const sort = {
+      orderedDate: -1,
+    };
     const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
@@ -278,6 +279,28 @@ export class OrderDatabase implements IOrderDatabase {
         ...(endDate && { $lte: new Date(endDate) }),
       };
     }
-    return await OrderModel.find(queryParams).skip(skip).limit(limit).sort(sort).lean();
+    return await OrderModel.find(queryParams)
+      .skip(skip)
+      .limit(limit)
+      .sort(sort)
+      .lean();
+  }
+
+  async getProduct(query: Record<string, any>): Promise<any> {
+    try {
+      return await ProductModel.findOne(query).select('-_id').lean().exec();
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async createReview(review: any): Promise<any>{
+    try{
+      return await ReviewModel.create(review);
+    }catch (err) {
+      console.log(err);
+      return null;
+    }
   }
 }
