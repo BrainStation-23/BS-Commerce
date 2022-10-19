@@ -8,6 +8,7 @@ export interface ICreateReview{
     orderId: string;
     userId?: string;
     comments: ICreateComment[];
+    rating?: number;
 }
 
 export interface CreateReviewSuccessResponse extends SuccessResponse {
@@ -25,7 +26,8 @@ export interface CreateReviewSuccessResponse extends SuccessResponse {
     INVALID_PRODUCT_ID = 'NO PRODUCT WITH SUCH ID',
     INVALID_ORDER_ID = 'NO ORDER WITH SUCH ID',
     INVALID_USER_ID = 'NO USER WITH SUCH ID',
-    CANNOT_CREATE_REVIEW = 'CANNOT CREATE REVIEW'
+    CANNOT_CREATE_REVIEW = 'CANNOT CREATE REVIEW',
+    RATING_RANGE_ERROR = 'RATING MUST BE BETWEEN 1 TO 5'
   }
 
   export type CreateReviewResponse =
