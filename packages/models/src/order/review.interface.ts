@@ -19,14 +19,6 @@ export interface IReview{
     comments: IComment[];
 }
 
-export type ICreateComment = Omit<IComment,'id'>;
-export interface ICreateReview{
-    productId: string;
-    orderId: string;
-    userId?: string;
-    comments: ICreateComment[];
-}
-
 export interface GetReviewByProductIdSuccessResponse extends SuccessResponse {
     code: number;
     data: IReview;
