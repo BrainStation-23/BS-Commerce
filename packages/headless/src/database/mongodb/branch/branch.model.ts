@@ -49,7 +49,7 @@ const BranchSchema = new Schema<Branch>(
         },
         inActiveReason: {
             type: String,
-            enum : ['BLOCKED_BY_ADMIN','UNDER_MAINTENANCE'],
+            enum : ['BLOCKED_BY_ADMIN','UNDER_MAINTENANCE',null],
             default: null
         },
         description:{
