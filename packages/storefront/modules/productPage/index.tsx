@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { useEffect } from 'react';
@@ -6,7 +5,6 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { userAPI } from 'APIs';
 import {
-  CustomerProduct,
   Product,
   ResponseItem,
   WishlistItem,
@@ -28,12 +26,11 @@ import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
-import ProductImagesSlider from '@/modules/productPage/productImageSlider';
-import ProductDescription from '@/modules/productPage/productDescription';
-import CartModal from '@/modules/global/components/modal/cartModal';
-import ModalLogin from '@/modules/global/components//modal/modal';
-import SimilarProducts from '@/modules/productPage/similarProducts';
-import CartToast from '../global/components/cartToast';
+import ProductImagesSlider from '@/modules/productPage/components/productImageSlider';
+import ProductDescription from '@/modules/productPage/components/productDescription';
+import SimilarProducts from '@/modules/productPage/components/similarProducts';
+import CartToast from '@/modules/common/toast/cartToast';
+import RatingStars from '@/modules/productPage/components/ratingStars';
 interface SingleProduct {
   product: Product;
 }
@@ -47,7 +44,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   const currency = useAppSelector((state) => state.persistedReducer.currency);
 
   const [modalOn, setModalOn] = useState(false);
-  const [choice, setChoice] = useState(false);
 
   const modalStateLogin = useAppSelector(
     (state) => state.persistedReducer.modal.setModalLogin
@@ -81,11 +77,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
   var disableIncrement = false;
   let i = 0;
   let clicked = false;
-
-  const [size, setSize] = useState('s');
-  const [color, setColor] = useState('white');
   const [amount, setAmount] = useState(1);
-  const [cart, setCart] = useState([{}]);
   const [wishlist, setWishlist] = useState([]);
   const [modalCmp, setModalCmp] = useState(false);
   const [showCartModal, setShowCartModal] = useState<boolean>(false);
@@ -284,14 +276,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
 
   return (
     <>
-      {modalStateLogin && (
-        <ModalLogin
-          setModalOn={setModalOn}
-          setChoice={setChoice}
-          modalTitle="You need to login first."
-          bodyText="Proceed to login?"
-        />
-      )}
       <Breadcrumb
         title={product?.info?.name}
         pathArray={[`${t('common:home')}`, product.info?.name]}
@@ -311,50 +295,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <h2 className="title-font mb-1 text-xl font-normal text-gray-900 dark:text-dark_text">
                   {product.info.name}
                 </h2>
-                <div className="flex dark:text-dark_text">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
+                <RatingStars />
                 <div className="ml-1 mb-1 mt-2 text-gray-900 dark:text-dark_text">
                   <span className="text-sm">
                     {t('product-details:manufacturer')}:{' '}
@@ -384,7 +325,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   </span>
                   {isAvailable ? (
                     <span className="ml-2 mb-1 mt-2 text-sm text-primary dark:text-dark_primary">
-                      {/*product?.stock*/} Available
+                      Available
                     </span>
                   ) : (
                     <span className="ml-2 mb-1 mt-2 text-sm text-primary">
@@ -396,60 +337,6 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                 <p className="py- ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
                   {product?.info?.shortDescription}
                 </p>
-                {/* {product?.info?.size && (
-                  <div className="mt-2 mb-2 flex items-center">
-                    <div className="ml-1 flex items-center">
-                      <span className="mr-3">Size:</span>
-                      <div className="flex">
-                        <button
-                          onClick={() => setSize('s')}
-                          className="m-2 hover:text-primary"
-                        >
-                          s
-                        </button>
-                        <button
-                          onClick={() => setSize('m')}
-                          className="m-2 hover:text-primary"
-                        >
-                          m
-                        </button>
-                        <button
-                          onClick={() => setSize('l')}
-                          className="m-2 hover:text-primary"
-                        >
-                          l
-                        </button>
-                        <button
-                          onClick={() => setSize('xl')}
-                          className="m-2 hover:text-primary"
-                        >
-                          xl
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
-
-                {/* {product?.info?.color && (
-                  <div className="mt-2 mb-2 flex items-center">
-                    <div className="flex">
-                      <span className="mr-3">Color:</span>
-                      <button
-                        onClick={() => setColor('white')}
-                        className="h-6 w-6 border-2 border-gray-300 active:outline"
-                      ></button>
-                      <button
-                        onClick={() => setColor('black')}
-                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-gray-700 active:outline"
-                      ></button>
-                      <button
-                        onClick={() => setColor('red')}
-                        className="ml-3 h-6 w-6 border-2 border-gray-300 bg-red-500 active:outline"
-                      ></button>
-                    </div>
-                  </div>
-                )} */}
-
                 <div className="flex text-black dark:text-dark_text">
                   <div className="title-text flex items-center lg:mx-2">
                     {t('product-details:quantity')}
@@ -541,27 +428,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                         : `${t('product-details:compare')}`}
                     </button>
                   </div>
-                  {/* <div>
-                    <button className=" mt-2 flex hover:text-primary">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                      Ask about this product
-                    </button>
-                  </div> */}
                 </div>
-                <div></div>
               </div>
             </div>
           </div>

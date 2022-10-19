@@ -26,7 +26,7 @@ import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'store/slices/productsSlice';
-import CartToast from '@/modules/global/components/cartToast';
+import CartToast from '@/modules/common/toast/cartToast';
 import useTranslation from 'next-translate/useTranslation';
 
 interface SingleProduct {
