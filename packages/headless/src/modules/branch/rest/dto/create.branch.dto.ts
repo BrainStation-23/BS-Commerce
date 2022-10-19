@@ -42,11 +42,11 @@ export class CreateBranchRequestDto implements CreateBranchRequest {
   @IsOptional()
   inActiveReason?: InActiveReason;
 
-  @ApiProperty({ type: [BranchPhotoDto] })
+  @ApiProperty({ type: BranchPhotoDto })
   @IsOptional()
-  @IsArray()
-  @Type(() => BranchPhotoDto)
-  image: BranchPhotoDto[];
+  @IsObject()
+  @CustomValidator(BranchPhotoDto)
+  image?: BranchPhotoDto;
 
   @ApiProperty()
   @IsOptional()

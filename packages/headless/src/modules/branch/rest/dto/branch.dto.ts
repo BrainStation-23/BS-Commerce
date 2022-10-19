@@ -41,9 +41,14 @@ export class BranchAddressDto implements BranchAddress {
 
 export class BranchPhotoDto implements IBranchPhoto{
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  url: string;
+  cover?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  logo?: string;
 }
 export class BranchDto implements Branch {
   @ApiProperty()
@@ -76,11 +81,11 @@ export class BranchDto implements Branch {
   @IsOptional()
   inActiveReason?: InActiveReason;
 
-  @ApiProperty({ type: [BranchPhotoDto] })
+  @ApiProperty({ type: BranchPhotoDto })
   @IsOptional()
-  @IsArray()
-  @Type(() => BranchPhotoDto)
-  image: BranchPhotoDto[];
+  @IsObject()
+  @CustomValidator(BranchPhotoDto)
+  image?: BranchPhotoDto;
 
   @ApiProperty()
   @IsOptional()

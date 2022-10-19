@@ -6,7 +6,8 @@ const ReviewSchema = new Schema<Review>(
   {
     id: {
       type: String,
-      default: () => randomUUID()
+      default: () => randomUUID(),
+      unique: true
     },
     productId: {
       type: String,

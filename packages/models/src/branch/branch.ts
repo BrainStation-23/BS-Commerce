@@ -16,13 +16,14 @@ export interface Branch{
     address: BranchAddress;
     isActive: boolean;
     inActiveReason?: string;
-    image?: IBranchPhoto[];
+    image?: IBranchPhoto;
     description?: string;
     name: string;
 }
 
 export interface IBranchPhoto{
-  url: string;
+  cover?: string;
+  logo?: string;
 }
 
 export interface SingleBranchSuccessResponse extends SuccessResponse {
