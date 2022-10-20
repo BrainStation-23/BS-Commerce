@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import { IComment, IReview, IReviewPhoto, ReviewErrorMessage, ReviewErrorResponse, ReviewSuccessResponse } from 'models';
 import { Commenters } from 'src/entity/review';
 
@@ -12,17 +12,8 @@ export class ReviewPhotoDto implements IReviewPhoto{
 }
 
 export class CommentDto implements IComment{
-    @ApiProperty()
-    @IsNotEmpty()
-    id: string;
-
     @ApiProperty({ enum: Commenters})
     commentedBy: Commenters;
-
-    @ApiProperty({ type: [ReviewPhotoDto]})
-    @IsOptional()
-    @Type(() => ReviewPhotoDto)
-    image?: ReviewPhotoDto[];
 
     @ApiProperty()
     @IsNotEmpty()
@@ -50,14 +41,26 @@ export class ReviewDto implements IReview{
 
     @ApiProperty()
     @IsString()
+    text: string;
+
+    @ApiProperty({ type: [ReviewPhotoDto]})
+    // @IsOptional()
+    @Type(() => ReviewPhotoDto)
+    image: ReviewPhotoDto[];
+
+    @ApiProperty()
+    @IsString()
     @IsOptional()
     userId?: string;
 
-    @ApiProperty({ type: [CommentDto]})
-    @Type(() => CommentDto)
+    @ApiProperty({ type: CommentDto})
     @IsNotEmpty()
-    @IsArray()
-    comments: CommentDto[];
+    @IsObject()
+    reply: CommentDto;
+
+    @ApiProperty()
+    @IsNumber()
+    rating: number;
 }
 
 export class ReviewSuccessResponseDto implements ReviewSuccessResponse{

@@ -114,15 +114,11 @@ export class OrderRepository {
     return await this.db.getOrderList(query, skip, limit);
   }
 
-  async getProduct(query: Record<string, any>): Promise<any>{
-    return await this.db.getProduct(query);
+  async createReview(review: any):Promise<any>{
+    return await this.db.createReview(review);
   }
 
-  async createReview(review: any):Promise<any>{
-    const id = randomUUID();
-    let { comments } = review;
-    comments = {...comments, id};
-    review = {...review, comments};
-    return await this.db.createReview(review);
+  async findReview(query: Record<string,any>): Promise<any>{
+    return await this.db.findReview(query);
   }
 }

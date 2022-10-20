@@ -2,28 +2,10 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsObject } from "class-validator";
-import { CreateReviewErrorResponse, CreateReviewSuccessResponse, CreateReviewErrorMessage, ICreateComment, ICreateReview } from "models";
+import { CreateReviewErrorResponse, CreateReviewSuccessResponse, CreateReviewErrorMessage, ICreateReview } from "models";
 import { Commenters } from "src/entity/review";
 import { CommentDto, ReviewDto, ReviewPhotoDto } from "./review.dto";
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
-
-export class CreateCommentDto implements ICreateComment{
-    @ApiProperty({ enum: Commenters})
-    commentedBy: Commenters;
-
-    @ApiProperty({ type: [ReviewPhotoDto]})
-    @IsOptional()
-    @Type(() => ReviewPhotoDto)
-    image?: ReviewPhotoDto[];
-
-    @ApiProperty()
-    @IsNotEmpty()
-    text: string;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    createdAt: Date;
-}
 
 export class CreateReviewDto implements ICreateReview{
     @ApiProperty({ example: '6e9fb5dc-a3ad-4d35-81d2-16fc6e2dc54e'})
@@ -36,15 +18,14 @@ export class CreateReviewDto implements ICreateReview{
     orderId: string;
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
-    @IsOptional()
-    userId?: string;
+    text?: string;
 
-    @ApiProperty({ type: CommentDto})
+    @ApiProperty({ type: [ReviewPhotoDto]})
     @IsOptional()
-    @IsObject()
-    @CustomValidator(CreateCommentDto)
-    comments?: CreateCommentDto;
+    @Type(() => ReviewPhotoDto)
+    image?: ReviewPhotoDto[];
 
     @ApiProperty()
     @IsNumber()
@@ -71,6 +52,8 @@ export class CreateReviewErrorResponseDto implements CreateReviewErrorResponse {
     | CreateReviewErrorMessage.INVALID_USER_ID
     | CreateReviewErrorMessage.CANNOT_CREATE_REVIEW
     | CreateReviewErrorMessage.CANNOT_UPLOAD_MORE_THAN_5_PHOTOS
+    | CreateReviewErrorMessage.CANNOT_REPLY
+    | CreateReviewErrorMessage.ALREADY_REVIEWED_ONCE
 
   @ApiProperty()
   errors: string[];

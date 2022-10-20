@@ -4,19 +4,20 @@ export interface IReviewPhoto{
   url: string;
 }
 export interface IComment{
-    id: string;
     commentedBy: string;
-    image?: IReviewPhoto[];
     text: string;
     createdAt: Date;
 }
 
 export interface IReview{
-    id: string;
-    productId: string;
-    orderId: string;
-    userId?: string;
-    comments: IComment[];
+  id: string;
+  productId: string;
+  orderId: string;
+  text: string;
+  image: IReviewPhoto[];
+  userId?: string;
+  reply: IComment;
+  rating: number;
 }
 
 export interface ReviewSuccessResponse extends SuccessResponse {

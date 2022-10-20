@@ -286,18 +286,18 @@ export class OrderDatabase implements IOrderDatabase {
       .lean();
   }
 
-  async getProduct(query: Record<string, any>): Promise<any> {
-    try {
-      return await ProductModel.findOne(query).select('-_id').lean().exec();
-    } catch (err) {
+  async createReview(review: any): Promise<any>{
+    try{
+      return await ReviewModel.create(review);
+    }catch (err) {
       console.log(err);
       return null;
     }
   }
 
-  async createReview(review: any): Promise<any>{
+  async findReview(query: Record<string,any>): Promise<any>{
     try{
-      return await ReviewModel.create(review);
+      return await ReviewModel.findOne(query);
     }catch (err) {
       console.log(err);
       return null;
