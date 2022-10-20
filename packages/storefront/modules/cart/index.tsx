@@ -3,7 +3,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'store/hooks/index';
 import DeliveryDetails from '@/modules/cart/components/deliveryDetails';
 import CartDetails from '@/modules/cart/components/cartProducts';
-import PageTitle from '@/modules/global/components/pageTitle';
 import Breadcrumb from '../common/breadcrumbs/breadcrumb';
 
 const CartComponent: NextComponentType = () => {

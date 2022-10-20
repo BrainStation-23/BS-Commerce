@@ -2,7 +2,6 @@ import type { NextComponentType } from 'next';
 
 import { storiesBody } from 'APIs/utils/types';
 
-import PageTitle from '@/modules/global/components/pageTitle';
 import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
 import OurService from '@/modules/static/service/components/ourService';
 import UnlimitedService from '@/modules/static/service/components/unlimitedService';

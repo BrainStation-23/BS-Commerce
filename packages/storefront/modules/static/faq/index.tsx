@@ -2,7 +2,6 @@ import type { NextComponentType } from 'next';
 
 import { accordionBody } from 'APIs/utils/types';
 
-import PageTitle from '@/modules/global/components/pageTitle';
 import FaqContentArea from '@/modules/static/faq/components/contentArea';
 import useTranslation from 'next-translate/useTranslation';
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';

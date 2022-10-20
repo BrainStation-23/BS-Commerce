@@ -1,7 +1,6 @@
 import type { NextComponentType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import PageTitle from '@/modules/global/components/pageTitle';
 import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
 import ImageWithDescription from '@/modules/static/about/components/imageWithDescription';
 import ServiceArea from '@/modules/static/about/components/serviceArea';
