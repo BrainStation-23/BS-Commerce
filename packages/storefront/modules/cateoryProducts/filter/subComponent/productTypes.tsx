@@ -1,7 +1,7 @@
 import type { NextComponentType } from 'next';
 import React, { useState } from 'react';
 
-// import CounterElement from '@/modules/deals/filter/subComponent/counterElement';
+import CounterElement from '@/modules/cateoryProducts/filter/subComponent/counterElement';
 import radiott from 'styles/radioButton.module.css';
 
 const ProductTypeOptions: NextComponentType = () => {

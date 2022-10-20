@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import ProductSort from '@/modules/cateoryProducts/sort/index';
-import CategoryFilter from '@/modules/cateoryProducts/filter/main';
+import CategoryFilter from '@/modules/cateoryProducts/filter';
 import CategoryBreadcrumb from '@/modules/common/breadcrumbs/categoryBreadcrumb';
-import CategoryProducts from '@/modules/cateoryProducts/categoryProducts/categoryProducts';
+import ProductList from '@/modules/cateoryProducts/productList';
 import { CustomerProduct } from '@bs-commerce/models';
 import { Pagination } from '@/modules/global/components/pagination';
 import { useRouter } from 'next/router';
@@ -56,6 +56,7 @@ const CategoryPageComponent: FC<props> = (props: props) => {
           Math.ceil(parseInt(router?.query?.skip as string) / limit) + 1
         )
       : setCurrentPage(1);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router?.query]);
 
   return (
@@ -74,7 +75,7 @@ const CategoryPageComponent: FC<props> = (props: props) => {
           <div className="col-span-4 flex-col">
             <div className="mt-16 mb-8 lg:px-12 xl:px-14">
               <ProductSort />
-              <CategoryProducts products={products} />
+              <ProductList products={products} />
               {totalProducts > limit && (
                 <Pagination
                   totalPages={Math.ceil(totalProducts / limit)}
