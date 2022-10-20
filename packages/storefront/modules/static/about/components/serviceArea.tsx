@@ -59,7 +59,7 @@ const ServiceArea: FC = () => {
           </div>
         </div>
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

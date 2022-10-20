@@ -57,7 +57,7 @@ const ClientSayArea: FC<Props> = ({ accordionList, CarouselList }) => {
           </div>
         </div>
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

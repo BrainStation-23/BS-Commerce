@@ -219,7 +219,7 @@ const OurService: FC = () => {
           </div>
         </div>
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

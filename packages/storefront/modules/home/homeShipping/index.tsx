@@ -42,7 +42,7 @@ const HomeShipping: NextComponentType = () => {
             body={t('home:payment_secure.body')}
           />
         </div>
-      </Container>
+      </PageContainer>
     </>
   );
 };

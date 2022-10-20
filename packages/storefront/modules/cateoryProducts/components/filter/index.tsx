@@ -59,17 +59,13 @@ const CategoryFilter: FC = () => {
   return (
     <>
       <div className="mt-16 w-full dark:text-dark_text">
-        <div className="accordion" id="accordionExample5">
+        <div id="accordionExample5">
           {/* Price Filter Section */}
-          <div className="accordion-item">
-            <h2 className="accordion-header mb-0" id="headingOne5">
+          <div className="">
+            <h2 className="mb-0" id="headingOne5">
               <button
-                className="accordion-button relative flex w-full items-center justify-between rounded-none border-0 px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none dark:text-dark_text"
+                className="flex w-full items-center justify-between rounded-none border-0 px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none dark:text-dark_text"
                 type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne5"
-                aria-expanded="false"
-                aria-controls="collapseOne5"
                 onClick={accorditionStatus1}
               >
                 <span className="text-[15px] font-semibold tracking-wide">
@@ -78,147 +74,19 @@ const CategoryFilter: FC = () => {
                 <span>{displayStatus1 ? upArrow : downArrow}</span>
               </button>
             </h2>
-            <div className="border-t border-gray-300"></div>
             <div
               id="collapseOne5"
-              className={
-                displayStatus1
-                  ? 'accordion-collapse collapse'
-                  : 'accordion-collapse collapse hidden'
-              }
+              className={displayStatus1 ? '' : 'hidden'}
               aria-labelledby="headingOne5"
             >
               <PriceFilter />
-              {/* <div className="accordion-body">
-                <PriceFilter />
-              </div> */}
             </div>
           </div>
-          {/* Availability Filter Section */}
-          {/* <div className="accordion-item bg-white">
-            <h2 className="accordion-header mb-0" id="headingTwo5">
+          <div>
+            <h2 className="mb-0" id="headingTwo5">
               <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none
-                   border-0 bg-white px-0
-                   pt-8
-                   pb-2
-                   text-left
-                   text-sm
-                   text-gray-800
-                   transition focus:outline-none
-               "
+                className="flex w-full items-center justify-between rounded-none border-0 px-0 pt-8 pb-2 text-left text-base text-gray-800 transition focus:outline-none dark:text-dark_text"
                 type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus2}
-              >
-                <span className="text-[15px] font-semibold tracking-wide">
-                  {' '}
-                  AVAILABILITY
-                </span>
-                <span>{displayStatus2 ? upArrow : downArrow}</span>
-              </button>
-            </h2>
-            <div className="border-t border-gray-300"></div>
-            <div
-              id="collapseTwo5"
-              aria-labelledby="headingTwo5"
-              className={
-                displayStatus2
-                  ? 'accordion-collapse collapse'
-                  : 'accordion-collapse collapse hidden'
-              }
-            >
-              <div className="accordion-body py-4 transition duration-200">
-                <AvaialabilityOptions />
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className="accordion-item bg-white">
-            <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none
-                   border-0 bg-white px-0
-                   pt-8
-                   pb-2
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus3}
-              >
-                <span className="text-[15px] font-semibold tracking-wide">
-                  {' '}
-                  PRODUCT TYPE
-                </span>
-                <span>{displayStatus3 ? upArrow : downArrow}</span>
-              </button>
-            </h2>
-            <div className="border-t border-gray-300"></div>
-            <div
-              id="collapseTwo5"
-              aria-labelledby="headingTwo5"
-              className={
-                displayStatus3
-                  ? 'accordion-collapse collapse'
-                  : 'accordion-collapse collapse hidden'
-              }
-            >
-              <div className="accordion-body py-4">
-                <ProductTypeOptions />
-              </div>
-            </div>
-          </div> */}
-          <div className="accordion-item">
-            <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none
-                   border-0 px-0
-                   pt-8
-                   pb-2
-                   text-left
-                   text-base
-                   text-gray-800 transition
-                   focus:outline-none dark:text-dark_text
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
                 onClick={accorditionStatus4}
               >
                 <span className="text-[15px] font-semibold tracking-wide">
@@ -228,74 +96,12 @@ const CategoryFilter: FC = () => {
                 <span>{displayStatus4 ? upArrow : downArrow}</span>
               </button>
             </h2>
-            <div className="border-t border-gray-300"></div>
-            <div
-              id="collapseTwo5"
-              aria-labelledby="headingTwo5"
-              className={
-                displayStatus4
-                  ? 'accordion-collapse collapse'
-                  : 'accordion-collapse collapse hidden'
-              }
-            >
-              <div className="accordion-body">
-                <BrandTypeOptions />
-              </div>
+            <div className={displayStatus4 ? '' : 'hidden'}>
+              <BrandTypeOptions />
             </div>
           </div>
-
-          {/* <div className="accordion-item bg-white">
-            <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none
-                   border-0 bg-white px-0
-                   pt-8
-                   pb-2
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus5}
-              >
-                <span className="text-[15px] font-semibold tracking-wide">
-                  {' '}
-                  COLOR
-                </span>
-                <span>{displayStatus5 ? upArrow : downArrow}</span>
-              </button>
-            </h2>
-            <div className="border-t border-gray-300"></div>
-            <div
-              id="collapseTwo5"
-              aria-labelledby="headingTwo5"
-              className={
-                displayStatus5
-                  ? 'accordion-collapse collapse'
-                  : 'accordion-collapse collapse hidden'
-              }
-            >
-              <div className="accordion-body py-4 transition duration-200">
-                <ColourTypeOptions />
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
-      <div className="colspan-4 grid"></div>
     </>
   );
 };

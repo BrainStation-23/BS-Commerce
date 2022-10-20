@@ -25,7 +25,7 @@ const FaqContentArea: FC<Props> = ({ accordionList }) => {
           <Accordion title={item.title} body={item.body} key={item.id} />
         ))}
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

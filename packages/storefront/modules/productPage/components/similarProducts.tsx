@@ -45,7 +45,7 @@ const SimilarProducts: NextComponentType = () => {
               </SwiperSlide>
             ))}
         </SwiperGrid>
-      </Container>
+      </PageContainer>
     </>
   );
 };

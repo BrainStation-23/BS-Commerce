@@ -110,7 +110,7 @@ const ContactArea: FC = () => {
           </form>
         </div>
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

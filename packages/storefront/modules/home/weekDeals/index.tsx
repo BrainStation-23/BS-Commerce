@@ -44,7 +44,7 @@ const WeekDeals: NextComponentType = () => {
               </SwiperSlide>
             ))}
         </SwiperGrid>
-      </Container>
+      </PageContainer>
     </>
   );
 };

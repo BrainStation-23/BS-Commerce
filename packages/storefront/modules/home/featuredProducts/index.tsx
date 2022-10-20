@@ -74,7 +74,7 @@ const FeaturedProducts = () => {
             ) : null
           )}
       </SwiperGrid>
-    </Container>
+    </PageContainer>
   );
 };
 

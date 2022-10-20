@@ -16,7 +16,6 @@ import {
   setModalState,
 } from 'store/slices/modalSlice';
 import ModalLogin from '@/modules/global/components//modal/modal';
-import CartModal from '@/modules/global/components/modal/cartModal';
 import ComparisonModal from '@/modules/comparison';
 import XCircleIcon from './common/icons/xCircleIcon';
 
@@ -60,6 +59,7 @@ const Layout = ({ children }: LayoutProps) => {
     dispatch(setModalState(false));
     dispatch(setLoginModalState(false));
     dispatch(setCartModalState({ showModal: false }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   useEffect(() => {
@@ -69,6 +69,7 @@ const Layout = ({ children }: LayoutProps) => {
   }, [token]);
   useEffect(() => {
     dispatch(setModalState(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   return (
@@ -80,14 +81,6 @@ const Layout = ({ children }: LayoutProps) => {
           setChoice={setChoice}
           modalTitle="You need to login first."
           bodyText="Proceed to login?"
-        />
-      )}
-
-      {modalStateCart && (
-        <CartModal
-          open={modalStateCart}
-          onClose={closeCartModal}
-          product={modalProduct!}
         />
       )}
       <Viewport />

@@ -122,7 +122,7 @@ const TrendingProducts = () => {
             )}
           </SwiperGrid>
         )}
-      </Container>
+      </PageContainer>
     </>
   );
 };

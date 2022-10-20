@@ -24,7 +24,7 @@ const BestSell: NextComponentType = () => {
   const products = useAppSelector(
     (state) => state.persistedReducer.product.publicProducts
   );
-  
+
   const getMinimumProduct = () => {
     const w = window.innerWidth;
     if (w >= 980) return 6;
@@ -97,7 +97,7 @@ const BestSell: NextComponentType = () => {
             </SwiperGrid>
           </div>
         </div>
-      </Container>
+      </PageContainer>
     </>
   );
 };

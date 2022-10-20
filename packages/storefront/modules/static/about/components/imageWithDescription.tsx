@@ -33,7 +33,7 @@ const ImageWithDescription: React.FC = () => {
           alt="about"
         />
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

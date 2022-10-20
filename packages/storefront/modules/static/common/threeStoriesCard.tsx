@@ -31,7 +31,7 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
             </div>
           ))}
         </div>
-      </Container>
+      </PageContainer>
     </div>
   );
 };
