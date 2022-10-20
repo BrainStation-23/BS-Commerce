@@ -2,19 +2,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
 import { useState, useEffect } from 'react';
-
-import Search from '@/modules/global/layout/search';
-import Currency from '@/modules/global/layout/currency';
-import Language from '@/modules/global/components/languages';
-import HeaderAccount from '@/modules/global/layout/headerAccount';
-
-import Navbar from './navbar';
-import BottomNavigationBar from './bottomNavigationBar';
-import Drawer from './drawer';
-import { useAppSelector } from 'store/hooks';
 import useTranslation from 'next-translate/useTranslation';
-import Theme from './theme';
-import ThemeChanger from './themeChanger';
+
+import Search from '@/modules/common/layout/header/components/search';
+import Currency from '@/modules/common/layout/header/components/selectCurrency';
+import Language from '@/modules/common/layout/header/components/selectLanguage';
+import HeaderAccount from '@/modules/common/layout/header/components/headerAccount';
+import Navbar from '@/modules/common/layout/header/components//navbar';
+import BottomNavigationBar from '@/modules/common/layout/header/components//bottomNavigationBar';
+import Drawer from '@/modules/common/layout/header/components/drawer';
+import ThemeChanger from '@/modules/common/layout/header/components/themeChanger';
 
 const Header: NextComponentType = () => {
   const [showUser, setShowUser] = useState<boolean>(false);

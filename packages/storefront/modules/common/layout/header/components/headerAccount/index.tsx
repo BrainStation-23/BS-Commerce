@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { storeUserToken } from 'store/slices/authSlice';
 
 import CartDropdown from '@/modules/cart/cartDropdown/dropdownCart';
-import Modal from '../components/modal/modal';
+import Modal from '@/modules/global/components/modal/modal';
 import { resetAddress } from 'store/slices/customerAddressSlice';
 import { resetUserDetails } from 'store/slices/userSlice';
 import { resetWishilist } from 'store/slices/productsSlice';
@@ -57,7 +57,7 @@ const HeaderAccount: React.FC<Properties> = () => {
     : customer?.phone;
 
   const handleLogout = () => {
-    localStorage.removeItem("persist:root");
+    localStorage.removeItem('persist:root');
     dispatch(resetAddress());
     dispatch(resetUserDetails());
     dispatch(resetWishilist());
@@ -208,7 +208,7 @@ const HeaderAccount: React.FC<Properties> = () => {
               className={`${
                 wishlistItems?.items?.length! > 0 && token !== ''
                   ? 'fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary'
-                  : 'stroke-dark_bg dark:stroke-dark_text fill-white dark:fill-dark_bg'
+                  : 'fill-white stroke-dark_bg dark:fill-dark_bg dark:stroke-dark_text'
               } flex text-base hover:stroke-primary hover:text-primary dark:text-dark_text dark:hover:stroke-dark_primary dark:hover:text-dark_primary`}
             >
               <HeartIcon height="h-6" width="w-6" />

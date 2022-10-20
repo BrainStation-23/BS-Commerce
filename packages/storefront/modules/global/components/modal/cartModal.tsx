@@ -3,8 +3,8 @@ import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'store/slices/modalSlice';
-import { XCircleIcon } from '../../layout/headerIcons';
 import useTranslation from 'next-translate/useTranslation';
+import XCircleIcon from '@/modules/common/icons/xCircleIcon';
 
 interface Props {
   open: boolean;

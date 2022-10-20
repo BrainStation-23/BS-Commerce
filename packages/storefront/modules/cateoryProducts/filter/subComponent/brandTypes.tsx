@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 
-import CounterElement from '@/modules/deals/filter/subComponent/counterElement';
+// import CounterElement from '@/modules/deals/filter/subComponent/counterElement';
 import radio from 'styles/radioButton.module.css';
 import { userAPI } from 'APIs';
 import { GetServerSideProps } from 'next/types';
@@ -37,9 +37,7 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
   };
   return (
     <>
-      <div className="py-4">
-        <CounterElement />
-      </div>
+      <div className="py-4">{/* <CounterElement /> */}</div>
       <div className={radio.custom}>
         {availableOptions &&
           availableOptions.map((option, index) => {

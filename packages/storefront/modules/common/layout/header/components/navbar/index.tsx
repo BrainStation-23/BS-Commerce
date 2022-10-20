@@ -1,17 +1,13 @@
-import {
-  ChevronDownIcon,
-  MenuIcon,
-  PhoneIcon,
-  XCircleIcon,
-} from '../layout/headerIcons';
-// import { MenuData } from '../layout/headerData';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'store/hooks/index';
-import HeaderCategory from './headerCategory';
+import HeaderCategory from '@/modules/common/layout/header/components/headerCategory';
 
-import HeaderAccount from './headerAccount';
-import Search from './search';
+import HeaderAccount from '@/modules/common/layout/header/components/headerAccount';
+import Search from '@/modules/common/layout/header/components//search';
+import MenuIcon from '@/modules/common/icons/menuIcon';
+import ChevronDown from '@/modules/common/icons/chevronDown';
+import PhoneIcon from '@/modules/common/icons/phoneIcon';
 
 interface Props {
   stickyClass: string;
@@ -113,7 +109,7 @@ const Navbar: React.FC<Props> = ({
           >
             <MenuIcon size={6} />
             <span className="ml-4 mr-auto font-medium">All Categories</span>
-            <ChevronDownIcon />
+            <ChevronDown />
             {categoryList ? (
               <div
                 className={`translate-y absolute top-[40px] left-0 z-40 flex w-full origin-top flex-col rounded-b-sm bg-white pt-1 text-black shadow-md transition-all duration-500 dark:bg-dark_bg dark:text-dark_text lg:top-[48px] lg:w-56  ${
@@ -146,7 +142,7 @@ const Navbar: React.FC<Props> = ({
                   <Link href={menu.link}>
                     <a className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary lg:border-none lg:py-0 lg:font-medium">
                       {menu.name}
-                      {menu.hasSubmenu && <ChevronDownIcon size={4} />}
+                      {menu.hasSubmenu && <ChevronDown size={4} />}
                     </a>
                   </Link>
 

@@ -1,7 +1,11 @@
-import { subCategoryList } from '@bs-commerce/models';
-import Link from 'next/link';
 import React, { useState } from 'react';
-import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
+import Link from 'next/link';
+
+import { subCategoryList } from '@bs-commerce/models';
+
+import ChevronRight from '@/modules/common/icons/chevronRight';
+import MinusSolidIcon from '@/modules/common/icons/minusIcon';
+import PlusSolidIcon from '@/modules/common/icons/plusIcon';
 
 interface Props {
   category: subCategoryList;
@@ -67,7 +71,7 @@ const HeaderSubCategory: React.FC<Props> = ({
             </span>
 
             <span className="hidden lg:block">
-              {category.subCategories ? <ChevronRightIcon /> : ''}
+              {category.subCategories ? <ChevronRight /> : ''}
             </span>
             <span
               className="block lg:hidden"
@@ -91,7 +95,7 @@ const HeaderSubCategory: React.FC<Props> = ({
           <div className="hidden lg:block">
             {category.subCategories ? (
               <div
-                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white dark:bg-dark_bg dark:text-dark_text shadow-lg transition-all duration-300 ease-in hover:block lg:h-60 ${
+                className={`absolute top-0 left-56 z-50 h-auto w-56 origin-left bg-white shadow-lg transition-all duration-300 ease-in hover:block dark:bg-dark_bg dark:text-dark_text lg:h-60 ${
                   showSubCategory ? 'scale-x-100' : 'scale-x-0'
                 }`}
               >

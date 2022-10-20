@@ -1,8 +1,8 @@
-import { NextComponentType } from "next";
+import { NextComponentType } from 'next';
 
 interface Props {
-  height: string;
-  width: string;
+  height?: string;
+  width?: string;
 }
 
 const ChevronLeft: React.FC<Props> = ({ height, width }) => {
@@ -10,7 +10,7 @@ const ChevronLeft: React.FC<Props> = ({ height, width }) => {
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={`${height} ${width}`}
+        className={height && width ? `${height} ${width}` : 'h-6 w-6'}
         viewBox="0 0 20 20"
       >
         <path

@@ -6,9 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Footer from '@/modules/common/layout/footer';
-import Header from '@/modules/global/layout/header';
+import Header from '@/modules/common/layout/header';
 import Viewport from '@/modules/viewport';
-import { XCircleIcon } from './global/layout/headerIcons';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -19,6 +18,7 @@ import {
 import ModalLogin from '@/modules/global/components//modal/modal';
 import CartModal from '@/modules/global/components/modal/cartModal';
 import ComparisonModal from '@/modules/comparison';
+import XCircleIcon from './common/icons/xCircleIcon';
 
 interface LayoutProps {
   children: React.ReactNode;

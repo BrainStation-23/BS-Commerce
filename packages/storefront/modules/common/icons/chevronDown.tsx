@@ -1,11 +1,13 @@
-import { NextComponentType } from "next";
+interface IChevronDown {
+  size?: number;
+}
 
-const ChevronDown: NextComponentType = () => {
+const ChevronDown: React.FC<IChevronDown> = ({ size }: IChevronDown) => {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
+        className={size ? `h-${size} w-${size}` : 'h-5 w-5'}
         viewBox="0 0 20 20"
         fill="currentColor"
       >

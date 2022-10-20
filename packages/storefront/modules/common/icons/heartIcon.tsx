@@ -1,13 +1,14 @@
 interface Props {
-  height: string;
-  width: string;
+  height?: string;
+  width?: string;
 }
 
 const HeartIcon: React.FC<Props> = ({ height, width }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${height} ${width}`}
+      // className={`${height} ${width}`}
+      className={height && width ? `${height} ${width}` : 'h-6 w-6'}
       viewBox="0 0 24 24"
       strokeWidth={2}
     >

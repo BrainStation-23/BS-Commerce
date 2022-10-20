@@ -3,8 +3,8 @@ import { useAppDispatch } from 'store/hooks/index';
 import Image from 'next/image';
 import Link from 'next/link';
 import { setCartModalState } from 'store/slices/modalSlice';
-import { XCircleIcon } from '../../layout/headerIcons';
 import { IOrderProduct } from '@bs-commerce/models';
+import XCircleIcon from '@/modules/common/icons/xCircleIcon';
 interface Props {
   open: boolean;
   onClose: () => void;
