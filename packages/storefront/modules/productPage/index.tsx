@@ -269,7 +269,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
       />
 
       <section className="overflow-hidden bg-white dark:bg-dark_bg">
-        <div className="container mx-auto px-5 pt-24 pb-16 text-primary dark:text-dark_text">
+        <div className="container mx-auto px-5 pt-24 pb-16 text-dark_bg dark:text-dark_text">
           <div>
             <div className="mx-auto flex flex-wrap">
               <div className="w-full md:w-1/2">
@@ -280,17 +280,12 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   {product.info.name}
                 </h2>
                 <RatingStars />
-                <div className="my-2 ml-1 text-gray-900 dark:text-dark_text">
-                  <span className="text-sm">
-                    {t('product-details:manufacturer')}:{' '}
-                    {product?.manufacturer?.name
-                      ? product?.manufacturer?.name
-                      : '---'}
-                  </span>
-                  <span className="ml-2 mr-2 text-sm">|</span>
-                  <span className="text-sm dark:text-dark_text">
-                    {t('product-details:sku')}: {product?.info?.sku}
-                  </span>
+                <div className="my-2 ml-1 text-sm text-gray-900 dark:text-dark_text">
+                  {t('product-details:manufacturer')}:{' '}
+                  {product?.manufacturer?.name
+                    ? product?.manufacturer?.name
+                    : '---'}{' '}
+                  | {t('product-details:sku')}: {product?.info?.sku}
                 </div>
                 <div className="m-2 ml-1 text-2xl font-medium ">
                   {Intl.NumberFormat(
@@ -301,11 +296,11 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     }
                   ).format(product?.info?.price)}
                 </div>
-                <div className="flex text-sm">
-                  <span className="my-2 ml-1 text-gray-900 dark:text-dark_text">
+                <div className="my-2 flex text-sm ">
+                  <span className="ml-1 text-gray-900 dark:text-dark_text">
                     {t('product-details:availability')}:
                   </span>
-                  <span className="my-2 ml-2 text-primary dark:text-dark_primary">
+                  <span className="ml-2 text-primary dark:text-dark_primary">
                     {isAvailable ? 'Available' : 'Out of stock'}
                   </span>
                 </div>
