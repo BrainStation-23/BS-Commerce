@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Image from 'next/image';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 
 import { storiesBody } from 'APIs/utils/types';
 
@@ -13,7 +13,7 @@ interface Props {
 const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
   return (
     <div className="mb-10">
-      <Container>
+      <PageContainer>
         <div className="flex flex-wrap">
           {threeStoriesList.map((item) => (
             <div

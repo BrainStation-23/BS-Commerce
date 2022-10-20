@@ -12,7 +12,7 @@ import { CustomerProduct } from '@bs-commerce/models';
 import { useAppSelector } from 'store/hooks/index';
 
 import SwiperGrid from '@/modules/global/components/swipergrid';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
@@ -28,7 +28,7 @@ const FeaturedProducts = () => {
     return 6;
   };
   return (
-    <Container className="max-w-6xl">
+    <PageContainer className="max-w-6xl">
       <HomeComponentHeader
         heading1={t('home:recently_added')}
         heading2={t('home:featured_products')}

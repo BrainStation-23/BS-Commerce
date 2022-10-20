@@ -13,7 +13,7 @@ import { useAppSelector } from 'store/hooks/index';
 
 import { CustomerProduct } from '@bs-commerce/models';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import Banner from '@/modules/home/bestSell/components/banner';
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
@@ -32,7 +32,7 @@ const BestSell: NextComponentType = () => {
   };
   return (
     <>
-      <Container>
+      <PageContainer>
         <HomeComponentHeader
           heading1={t('home:recently_added')}
           heading2={t('home:best_sell')}

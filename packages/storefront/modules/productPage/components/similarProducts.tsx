@@ -6,7 +6,7 @@ import { useAppSelector } from 'store/hooks/index';
 import { NextComponentType } from 'next';
 
 import SwiperGrid from '@/modules/global/components/swipergrid';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import VerticalProduct from '@/modules/global/components/product/verticalProduct';
 import { CustomerProduct } from '@bs-commerce/models';
 
@@ -24,7 +24,7 @@ const SimilarProducts: NextComponentType = () => {
   };
   return (
     <>
-      <Container className="max-w-7xl dark:text-dark_text">
+      <PageContainer className="max-w-7xl dark:text-dark_text">
         <div className="mb-6 text-center">
           <h1 className="text-bold text-4xl ">
             {t('product-details:similar_products')}

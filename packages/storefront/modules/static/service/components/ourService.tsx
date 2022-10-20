@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import useTranslation from 'next-translate/useTranslation';
 
 const OurService: FC = () => {
   const { t } = useTranslation();
   return (
-    <Container>
+    <PageContainer>
       <div className="py-14 text-center">
         <h2 className="text-2xl">{t('service:our_services')}</h2>
         <p className="mx-auto w-3/4">

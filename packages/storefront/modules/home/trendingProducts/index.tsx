@@ -4,7 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'store/hooks/index';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
 import ProductRow from '../common/cycleProductGroup';
@@ -44,7 +44,7 @@ const TrendingProducts = () => {
 
   return (
     <>
-      <Container className="max-w-6xl">
+      <PageContainer className="max-w-6xl">
         <HomeComponentHeader
           heading1={t('home:recently_added')}
           heading2={t('home:trending')}

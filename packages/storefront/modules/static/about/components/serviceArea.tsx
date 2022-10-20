@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 
 const ServiceArea: FC = () => {
   return (
-    <Container>
+    <PageContainer>
       <div className="flex flex-wrap">
         <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-3 md:mb-4">

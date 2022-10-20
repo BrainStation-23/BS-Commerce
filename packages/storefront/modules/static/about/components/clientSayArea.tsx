@@ -6,7 +6,7 @@ import { accordionBody, CarouselBody } from 'APIs/utils/types';
 
 import Accordion from '@/modules/common/accordion';
 import CarouselSlider from '@/modules/global/components/carouselSliderComponent';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 
 interface Props {
   CarouselList: CarouselBody[];
@@ -15,7 +15,7 @@ interface Props {
 
 const ClientSayArea: FC<Props> = ({ accordionList, CarouselList }) => {
   return (
-    <Container>
+    <PageContainer>
       <div className="flex flex-wrap">
         <div className="w-full p-1 md:w-2/4 md:p-4">
           <h2 className="mb-5 text-center text-2xl">What Can We Do For You?</h2>

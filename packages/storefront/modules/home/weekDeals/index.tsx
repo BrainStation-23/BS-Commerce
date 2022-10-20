@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { CustomerProduct } from '@bs-commerce/models';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import SwiperGrid from '@/modules/global/components/swipergrid';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 import VerticalProduct from '@/modules/global/components/product/verticalProduct';
@@ -24,7 +24,7 @@ const WeekDeals: NextComponentType = () => {
   };
   return (
     <>
-      <Container className="max-w-7xl">
+      <PageContainer className="max-w-7xl">
         <HomeComponentHeader
           heading1={t('home:recently_added')}
           heading2={t('home:weekly_deals')}

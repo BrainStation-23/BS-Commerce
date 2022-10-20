@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import Accordion from '@/modules/common/accordion';
 
 import { accordionBody } from 'APIs/utils/types';
@@ -15,7 +15,7 @@ const FaqContentArea: FC<Props> = ({ accordionList }) => {
   const details =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id eratsagittis, faucibus metus malesuada, eleifend turpis. Mauris semperaugue id nisl aliquet, a porta lectus mattis. Nulla at tortor augue.In eget enim diam. Donec gravida tortor sem, ac fermentum nibh rutrumsit amet. Nulla convallis mauris vitae congue consequat. Donecinterdum nunc purus, vitae vulputate arcu fringilla quis. Vivamusiaculis euismod dui.';
   return (
-    <Container>
+    <PageContainer>
       <div className="pb-5">
         <h4 className="mb-4 text-lg font-semibold">{heading}</h4>
         <p>{details}</p>

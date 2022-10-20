@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 
 const ImageWithDescription: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
+    <PageContainer>
       <div className="flex flex-col items-center justify-center">
         <div className="m-auto mb-5 w-full">
           <Image

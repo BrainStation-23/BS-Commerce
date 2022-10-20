@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 
 const UnlimitedService: FC = () => {
   return (
-    <Container>
+    <PageContainer>
       <div className="flex flex-wrap items-center">
         <div className="w-full pb-2 pr-2 md:w-1/2">
           <Image

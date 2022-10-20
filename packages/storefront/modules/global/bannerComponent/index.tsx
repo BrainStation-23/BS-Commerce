@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import Banner from '@/modules/global/bannerComponent/banner';
 import BannerBodyText from '@/modules/global/bannerComponent/bannerBodyText';
 
@@ -8,7 +8,7 @@ const BannerPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
+    <PageContainer>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-5 md:grid-cols-2 md:gap-7 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2 xl:gap-12">
         <Banner
           position="relative"
@@ -63,7 +63,7 @@ const BannerPage = () => {
           }
         />
       </div>
-    </Container>
+    </PageContainer>
   );
 };
 

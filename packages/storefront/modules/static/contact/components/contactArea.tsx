@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import { Input } from '@/modules/common/input';
 import Textarea from '@/modules/common/textarea';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import useTranslation from 'next-translate/useTranslation';
 
 const ContactArea: FC = () => {
   const { t } = useTranslation();
   return (
-    <Container>
+    <PageContainer>
       <div className="flex flex-wrap">
         <div className="w-full pr-5 md:w-2/4">
           <h3 className="mb-5 text-xl font-semibold capitalize">

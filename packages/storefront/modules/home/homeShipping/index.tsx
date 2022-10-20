@@ -2,7 +2,7 @@ import { NextComponentType } from 'next';
 
 import TruckIcon from '@/modules/common/icons/truckIcon';
 import useTranslation from 'next-translate/useTranslation';
-import Container from '@/modules/global/components/container';
+import PageContainer from '@/modules/common/layout/pageContainer';
 import LifebuoyIcon from '@/modules/common/icons/lifebuoyIconIcon';
 import ReceiptRefundIcon from '@/modules/common/icons/receiptRefundIcon';
 import SecurePaymentIcon from '@/modules/common/icons/securePaymentIcon';
@@ -13,7 +13,7 @@ const HomeShipping: NextComponentType = () => {
   const { t } = useTranslation();
   return (
     <>
-      <Container className="flex flex-wrap py-16">
+      <PageContainer className="flex flex-wrap py-16">
         <div className="flex px-3 pb-2 md:w-1/2 lg:w-1/4 lg:pb-0">
           <StrokePrimaryDarkPrimary icon={<TruckIcon />} />
           <ShippingDetails
