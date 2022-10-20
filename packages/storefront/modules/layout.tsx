@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
-import Footer from '@/modules/global/layout/footer';
+import Footer from '@/modules/common/layout/footer';
 import Header from '@/modules/global/layout/header';
 import Viewport from '@/modules/viewport';
 import { XCircleIcon } from './global/layout/headerIcons';
