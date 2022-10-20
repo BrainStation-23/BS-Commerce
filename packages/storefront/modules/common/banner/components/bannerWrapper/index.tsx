@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ReactChild } from 'react';
 
-import Button from '@/modules/global/button/button';
+import Button from '@/modules/common/banner/components/bannerButton';
 
 interface BannerProps {
   bg?: string;
@@ -24,7 +24,7 @@ interface BannerProps {
   buttonTextColor?: string;
 }
 
-const Banner: React.FC<BannerProps> = (props) => {
+const BannerWrapper: React.FC<BannerProps> = (props) => {
   const {
     bg,
     width,
@@ -72,4 +72,4 @@ const Banner: React.FC<BannerProps> = (props) => {
   );
 };
 
-export default Banner;
+export default BannerWrapper;

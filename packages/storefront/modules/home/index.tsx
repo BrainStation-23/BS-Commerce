@@ -13,9 +13,9 @@ import WeekDeals from '@/modules/home/weekDeals';
 import ImageSlider from '@/modules/home/imageSlider';
 import HomeShipping from '@/modules/home/homeShipping';
 import TrendingProducts from '@/modules/home/trendingProducts/index';
-import BannerPage from '@/modules/global/bannerComponent';
+import BannerPage from '@/modules/common/banner';
 import FeaturedProducts from '@/modules/home/featuredProducts';
-import HomefullBanner from '@/modules/global/bannerComponent/homeFullBanner';
+import HomefullBanner from '@/modules/common/banner/components/homeFullBanner';
 
 const HomeComponent: NextComponentType = () => {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Banner from '@/modules/global/bannerComponent/banner';
-import BannerHeading from '@/modules/global/bannerComponent/bannerHeading';
+import Banner from '@/modules/common/banner/components/bannerWrapper';
+import BannerHeading from '@/modules/common/banner/components/bannerHeading';
 
 const HomefullBanner: FC = () => {
   const { t } = useTranslation();
