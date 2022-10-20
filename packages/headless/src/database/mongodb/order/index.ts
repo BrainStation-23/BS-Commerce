@@ -296,9 +296,9 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async findReview(query: Record<string,any>): Promise<Review | null>{
+  async findReview(query: Record<string,any>): Promise<Review[] | null>{
     try{
-      return await ReviewModel.findOne(query);
+      return await ReviewModel.find(query);
     }catch (err) {
       console.log(err);
       return null;

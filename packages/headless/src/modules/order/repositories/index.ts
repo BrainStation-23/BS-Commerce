@@ -120,7 +120,7 @@ export class OrderRepository {
     return await this.db.createReview(review);
   }
 
-  async findReview(query: Record<string,any>): Promise<Review | null>{
+  async findReview(query: Record<string,any>): Promise<Review[] | null>{
     return await this.db.findReview(query);
   }
 }

@@ -10,7 +10,7 @@ export class OrderReviewService {
         const { orderId, productId, image, rating } = body;
 
         const reviewExists = await this.orderRepository.findReview({orderId, productId});
-        if(reviewExists)
+        if(reviewExists.length === 0)
             return {
                 error: CreateReviewErrorMessage.ALREADY_REVIEWED_ONCE,
                 errors: null,
