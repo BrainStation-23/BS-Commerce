@@ -23,6 +23,7 @@ import { Response } from 'express';
 import { ProductService } from '../services';
 import { RolesGuard } from 'src/guards/auth.guard';
 import {
+  BranchIdParamsDto,
   CreateProductDto,
   CreateProductErrorResponseDto,
   CreateProductSuccessResponseDto,
@@ -159,7 +160,7 @@ export class ProductController {
   // Admin
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Get('products')
+  @Get('/products/:branchId')
   @ApiResponse({
     description: 'Get All Product Success Response',
     type: GetAllProductsSuccessResponseDto,
@@ -171,21 +172,25 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async getAllProducts(
+    @Param() params: BranchIdParamsDto,
     @Query() query: GetAllProductsQueryDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { skip, limit } = query;
-    const { code, ...response } = await this.productService.getAllProducts({
-      skip,
-      limit,
-    });
+    const { code, ...response } = await this.productService.getAllProducts(
+      params.branchId,
+      {
+        skip,
+        limit,
+      },
+    );
     res.status(code);
     return { code, ...response };
   }
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Get('products/count')
+  @Get('/products/:branchId/count')
   @ApiResponse({
     description: 'Get All Product Count Success Response',
     type: GetProductCountSuccessResponseDto,
@@ -196,15 +201,20 @@ export class ProductController {
     type: GetProductCountErrorResponseDto,
     status: HttpStatus.BAD_REQUEST,
   })
-  async getProductCount(@Res({ passthrough: true }) res: Response) {
-    const { code, ...response } = await this.productService.getProductCount();
+  async getProductCount(
+    @Param() params: BranchIdParamsDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.productService.getProductCount(
+      params.branchId,
+    );
     res.status(code);
     return { code, ...response };
   }
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Get('products/sku/:sku')
+  @Get('/products/:branchId/sku/:sku')
   @ApiParam({ name: 'sku' })
   @ApiResponse({
     description: 'Get Product by SKU Success Response',
@@ -217,10 +227,12 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async getProductBySKU(
+    @Param() branchParams: BranchIdParamsDto,
     @Param() params: GetProductBySKUParamsDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.getProductBySKU(
+      branchParams.branchId,
       params.sku,
     );
     res.status(code);
@@ -229,7 +241,7 @@ export class ProductController {
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Get('products/condition')
+  @Get('/products/:branchId/condition')
   @ApiResponse({
     description: 'Get Products By Condition Success Response',
     type: GetProductsByConditionSuccessResponseDto,
@@ -241,18 +253,22 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async getProductsByCondition(
+    @Param() branchParams: BranchIdParamsDto,
     @Query() condition: GetProductsByConditionQueryDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } =
-      await this.productService.getProductsByCondition(condition);
+      await this.productService.getProductsByCondition(
+        branchParams.branchId,
+        condition,
+      );
     res.status(code);
     return { code, ...response };
   }
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Get('products/:productId')
+  @Get('/products/:branchId/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Get Product Success Response',
@@ -265,10 +281,12 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async getProduct(
+    @Param() branchParams: BranchIdParamsDto,
     @Param() params: GetProductParamsDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.getProduct(
+      branchParams.branchId,
       params.productId,
     );
     res.status(code);
@@ -306,7 +324,7 @@ export class ProductController {
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Delete('products/:productId')
+  @Delete('/products/:branchId/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Delete Product Success Response',
@@ -319,10 +337,12 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async deleteProduct(
+    @Param() branchParams: BranchIdParamsDto,
     @Param() params: DeleteProductParamsDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.deleteProduct(
+      branchParams.branchId,
       params.productId,
     );
     res.status(code);
@@ -331,7 +351,7 @@ export class ProductController {
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Patch('products/brand')
+  @Patch('/products/:branchId/brand')
   @ApiResponse({
     description: 'Update Products For Brand Success Response',
     type: UpdateProductsForBrandSuccessResponseDto,
@@ -343,19 +363,24 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async updateProductsForBrand(
+    @Param() branchParams: BranchIdParamsDto,
     @Body() data: updateProductsForBrandRequestDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { productIds, brandId } = data;
     const { code, ...response } =
-      await this.productService.updateProductsForBrand(productIds, brandId);
+      await this.productService.updateProductsForBrand(
+        branchParams.branchId,
+        productIds,
+        brandId,
+      );
     res.status(code);
     return { code, ...response };
   }
 
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
-  @Patch('products/:productId')
+  @Patch('/products/:branchId/:productId')
   @ApiParam({ name: 'productId' })
   @ApiResponse({
     description: 'Update Product Success Response',
@@ -368,13 +393,15 @@ export class ProductController {
     status: HttpStatus.BAD_REQUEST,
   })
   async updateProduct(
-    @Body() product: UpdateProductDto,
+    @Param() branchParams: BranchIdParamsDto,
     @Param() params: UpdateProductParamsDto,
+    @Body() product: UpdateProductDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.updateProduct(
-      product,
+      branchParams.branchId,
       params.productId,
+      product,
     );
     res.status(code);
     return { code, ...response };

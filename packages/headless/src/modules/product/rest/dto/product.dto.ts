@@ -16,8 +16,14 @@ import {
   ProductCategory,
   ProductManufacturer,
   Product,
+  BranchIdParams,
 } from 'models';
 
+export class BranchIdParamsDto implements BranchIdParams {
+  @ApiProperty()
+  @IsString()
+  branchId: string;
+}
 export class ProductInfoDto implements ProductInfo {
   @ApiProperty({ required: true })
   @IsString()

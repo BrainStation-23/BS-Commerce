@@ -75,22 +75,23 @@ export class ProductRepository {
     return await this.db.getProductCount(query);
   }
 
-  async deleteProduct(productId: string): Promise<Product | null> {
-    return await this.db.deleteProduct(productId);
+  async deleteProduct(query: Record<string, any>): Promise<Product | null> {
+    return await this.db.deleteProduct(query);
   }
 
   async updateProduct(
-    product: UpdateProduct,
+    branchId: string,
     productId: string,
+    product: UpdateProduct,
   ): Promise<Product | null> {
-    return await this.db.updateProduct(product, productId);
+    return await this.db.updateProduct(branchId, productId, product);
   }
 
   async updateProductsForBrand(
-    productIds: string[],
-    brandId: string,
+    branchId: string,
+    query: Record<string, any>,
   ): Promise<Product[] | null> {
-    return await this.db.updateProductsForBrand(productIds, brandId);
+    return await this.db.updateProductsForBrand(branchId, query);
   }
 
   async getProductsList(

@@ -4,6 +4,7 @@ import { RolesGuard } from 'src/guards/auth.guard';
 import { Helper } from 'src/helper/helper.interface';
 import { ProductService } from '../services';
 import {
+  BranchIdParamsInput,
   GetAllProductsQueryInput,
   GetCustomerAllProductsQueryInput,
   GraphqlProductInput,
@@ -54,38 +55,57 @@ export class ProductResolver {
   // Admin
   @Query(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getProduct(@Args('productId') productId: string) {
-    const res = await this.productService.getProduct(productId);
+  async getProduct(
+    @Args() params: BranchIdParamsInput,
+    @Args('productId') productId: string,
+  ) {
+    const res = await this.productService.getProduct(
+      params.branchId,
+      productId,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Query(() => ProductArrayResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getAllProducts(@Args('query') query: GetAllProductsQueryInput) {
-    const res = await this.productService.getAllProducts(query);
+  async getAllProducts(
+    @Args('query') query: GetAllProductsQueryInput,
+    @Args() params: BranchIdParamsInput,
+  ) {
+    const res = await this.productService.getAllProducts(
+      params.branchId,
+      query,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Query(() => ProductCount)
   @UseGuards(new RolesGuard(['admin']))
-  async getProductCount() {
-    const res = await this.productService.getProductCount();
+  async getProductCount(@Args() params: BranchIdParamsInput) {
+    const res = await this.productService.getProductCount(params.branchId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Query(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async getProductBySKU(@Args('sku') sku: string) {
-    const res = await this.productService.getProductBySKU(sku);
+  async getProductBySKU(
+    @Args() params: BranchIdParamsInput,
+    @Args('sku') sku: string,
+  ) {
+    const res = await this.productService.getProductBySKU(params.branchId, sku);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Query(() => ProductArrayWithCountResponse)
   @UseGuards(new RolesGuard(['admin']))
   async getProductsByCondition(
+    @Args() params: BranchIdParamsInput,
     @Args('condition') condition: SearchConditionInput,
   ) {
-    const res = await this.productService.getProductsByCondition(condition);
+    const res = await this.productService.getProductsByCondition(
+      params.branchId,
+      condition,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
@@ -101,25 +121,40 @@ export class ProductResolver {
 
   @Mutation(() => ProductDeletedResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async deleteProduct(@Args('productId') productId: string) {
-    const res = await this.productService.deleteProduct(productId);
+  async deleteProduct(
+    @Args() params: BranchIdParamsInput,
+    @Args('productId') productId: string,
+  ) {
+    const res = await this.productService.deleteProduct(
+      params.branchId,
+      productId,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
   async updateProduct(
-    @Args('product') product: UpdateProductInput,
+    @Args() params: BranchIdParamsInput,
     @Args('productId') productId: string,
+    @Args('product') product: UpdateProductInput,
   ) {
-    const res = await this.productService.updateProduct(product, productId);
+    const res = await this.productService.updateProduct(
+      params.branchId,
+      productId,
+      product,
+    );
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 
   @Mutation(() => ProductArrayResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async updateProductsForBrand(@Args('data') data: UpdateProductsForBrandBody) {
+  async updateProductsForBrand(
+    @Args() params: BranchIdParamsInput,
+    @Args('data') data: UpdateProductsForBrandBody,
+  ) {
     const res = await this.productService.updateProductsForBrand(
+      params.branchId,
       data.productIds,
       data.brandId,
     );

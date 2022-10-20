@@ -39,14 +39,17 @@ export abstract class IProductDatabase {
   abstract getProductCount: (
     query: Record<string, any>,
   ) => Promise<number | null>;
-  abstract deleteProduct: (productId: string) => Promise<Product | null>;
+  abstract deleteProduct: (
+    query: Record<string, any>,
+  ) => Promise<Product | null>;
   abstract updateProduct: (
-    product: UpdateProduct,
+    branchId: string,
     productId: string,
+    product: UpdateProduct,
   ) => Promise<Product | null>;
   abstract updateProductsForBrand: (
-    productIds: string[],
-    brandId: string,
+    branchId: string,
+    query: Record<string, any>,
   ) => Promise<Product[] | null>;
   abstract getProductsList: (
     skip: number,

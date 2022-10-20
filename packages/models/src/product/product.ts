@@ -15,6 +15,10 @@ export interface ProductInfo {
   publishDate?: Date;
 }
 
+export interface BranchIdParams {
+  branchId: string;
+}
+
 export interface ProductMeta {
   keywords?: string[];
   title?: string;
