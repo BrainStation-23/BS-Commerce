@@ -22,6 +22,7 @@ import {
 } from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
+import { Review } from 'src/entity/review';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -286,7 +287,7 @@ export class OrderDatabase implements IOrderDatabase {
       .lean();
   }
 
-  async createReview(review: any): Promise<any>{
+  async createReview(review: any): Promise<Review | null>{
     try{
       return await ReviewModel.create(review);
     }catch (err) {
@@ -295,7 +296,7 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async findReview(query: Record<string,any>): Promise<any>{
+  async findReview(query: Record<string,any>): Promise<Review | null>{
     try{
       return await ReviewModel.findOne(query);
     }catch (err) {
