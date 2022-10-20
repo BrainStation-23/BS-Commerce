@@ -1,5 +1,5 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
-import { Product } from './product';
+import { CustomerProduct } from './customerProduct';
 /**
  * API Path: customer/product/:url
  * method: GET
@@ -12,7 +12,7 @@ export interface GetCustomerProductByURLParams {
 export interface GetCustomerProductByURLSuccessResponse
   extends SuccessResponse {
   code: number;
-  data: Product;
+  data: CustomerProduct;
 }
 export declare const enum GetCustomerProductByURLErrorMessages {
   CAN_NOT_GET_PRODUCT = 'CAN_NOT_GET_PRODUCT',

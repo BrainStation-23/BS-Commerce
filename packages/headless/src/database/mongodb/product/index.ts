@@ -1,5 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import {
+  Product,
+  ProductRequest,
+  SearchCondition,
+  UpdateProduct,
+} from 'src/entity/product';
 import { Tag } from 'src/entity/tags';
 import { IProductDatabase } from 'src/modules/product/repositories/product.database.interface';
 import { CategoryModel } from '../category/category.model';
@@ -10,10 +15,22 @@ import { ProductModel } from './product.model';
 @Injectable()
 export class ProductDatabase implements IProductDatabase {
   async findProduct(query: Record<string, any>): Promise<Product | null> {
-    return await ProductModel.findOne(query, '-_id').lean();
+    return await ProductModel.findOne(
+      query,
+      '-_id -createdAt -updatedAt',
+    ).lean();
   }
 
-  async createProduct(product: Product): Promise<Product | null> {
+  async findCustomerProduct(
+    query: Record<string, any>,
+  ): Promise<Product | null> {
+    return await ProductModel.findOne(
+      query,
+      '-_id -branchId -info.showOnHomePage -info.includeInTopMenu -info.allowToSelectPageSize -info.published -info.displayOrder -info.isFeatured -createdAt -updatedAt',
+    ).lean();
+  }
+
+  async createProduct(product: ProductRequest): Promise<Product | null> {
     return await ProductModel.create(product);
   }
 
@@ -33,7 +50,31 @@ export class ProductDatabase implements IProductDatabase {
           $lte: price?.maxPrice || Number.MAX_SAFE_INTEGER,
         },
       },
-      '-_id',
+      '-_id -createdAt -updatedAt',
+    )
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .lean();
+  }
+
+  async findCustomerAllProducts(
+    query: Record<string, any>,
+    skip?: number,
+    limit?: number,
+    price?: Partial<SearchCondition>,
+    orderBy?: string,
+  ): Promise<Product[] | []> {
+    const sort: any = { 'info.price': orderBy, createdAt: -1 };
+    return await ProductModel.find(
+      {
+        ...query,
+        'info.price': {
+          $gte: price?.minPrice || 0,
+          $lte: price?.maxPrice || Number.MAX_SAFE_INTEGER,
+        },
+      },
+      '-_id -branchId -info.showOnHomePage -info.includeInTopMenu -info.allowToSelectPageSize -info.published -info.displayOrder -info.isFeatured -createdAt -updatedAt',
     )
       .sort(sort)
       .skip(skip)
@@ -69,7 +110,7 @@ export class ProductDatabase implements IProductDatabase {
           $lte: maxPrice || Number.MAX_SAFE_INTEGER,
         },
       },
-      '-_id',
+      '-_id -createdAt -updatedAt',
     )
       .sort(sort)
       .skip(skip)
@@ -94,6 +135,7 @@ export class ProductDatabase implements IProductDatabase {
       { $set: product },
       { new: true },
     )
+      .select('-_id -createdAt -updatedAt')
       .lean()
       .exec();
   }
@@ -107,7 +149,9 @@ export class ProductDatabase implements IProductDatabase {
       { $addToSet: { brands: brandId } },
       { multi: true },
     ).exec();
-    return await ProductModel.find({ id: { $in: productIds } }).lean();
+    return await ProductModel.find({ id: { $in: productIds } })
+      .select('-_id -createdAt -updatedAt')
+      .lean();
   }
 
   async getProductsList(
@@ -116,7 +160,7 @@ export class ProductDatabase implements IProductDatabase {
     query?: Record<string, any>,
     sortCondition?: string,
   ): Promise<Product[] | []> {
-    return await ProductModel.find(query, '-_id')
+    return await ProductModel.find(query, '-_id -createdAt -updatedAt')
       .sort(sortCondition)
       .skip(skip)
       .limit(limit)
@@ -163,6 +207,9 @@ export class ProductDatabase implements IProductDatabase {
     });
 
     return await ProductModel.find({ id: { $in: productsIds } })
+      .select(
+        '-_id -branchId -info.showOnHomePage -info.includeInTopMenu -info.allowToSelectPageSize -info.published -info.displayOrder -info.isFeatured -createdAt -updatedAt',
+      )
       .skip(skip)
       .limit(limit)
       .lean();
@@ -175,6 +222,9 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find({
       createdAt: { $gte: new Date(Date.now() - 3 * 60 * 60 * 24 * 1000) },
     })
+      .select(
+        '-_id -branchId -info.showOnHomePage -info.includeInTopMenu -info.allowToSelectPageSize -info.published -info.displayOrder -info.isFeatured -createdAt -updatedAt',
+      )
       .skip(skip)
       .limit(limit)
       .lean();

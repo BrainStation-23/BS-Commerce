@@ -8,10 +8,17 @@ import {
   Patch,
   Post,
   Query,
+  Headers,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiHeader,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Response } from 'express';
 import { ProductService } from '../services';
 import { RolesGuard } from 'src/guards/auth.guard';
@@ -271,6 +278,9 @@ export class ProductController {
   @Post('product')
   @UseGuards(new RolesGuard(['admin']))
   @ApiBearerAuth()
+  @ApiHeader({
+    name: 'branchId',
+  })
   @ApiResponse({
     description: 'Create Product Success Response',
     type: CreateProductSuccessResponseDto,
@@ -283,10 +293,12 @@ export class ProductController {
   })
   async addProduct(
     @Body() product: CreateProductDto,
+    @Headers('branchId') branchId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.productService.createProduct(
       product,
+      branchId,
     );
     res.status(code);
     return { code, ...response };

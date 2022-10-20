@@ -1,11 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import {
+  Product,
+  ProductRequest,
+  SearchCondition,
+  UpdateProduct,
+} from 'src/entity/product';
 import { Tag } from 'src/entity/tags';
 
 @Injectable()
 export abstract class IProductDatabase {
   abstract findProduct: (query: Record<string, any>) => Promise<Product | null>;
+  abstract findCustomerProduct: (
+    query: Record<string, any>,
+  ) => Promise<Product | null>;
   abstract findAllProducts: (
+    query: Record<string, any>,
+    skip?: number,
+    limit?: number,
+    price?: Partial<SearchCondition>,
+    orderBy?: string,
+  ) => Promise<Product[] | []>;
+  abstract findCustomerAllProducts: (
     query: Record<string, any>,
     skip?: number,
     limit?: number,
@@ -20,7 +35,7 @@ export abstract class IProductDatabase {
     skip?: number,
     limit?: number,
   ) => Promise<Product[] | []>;
-  abstract createProduct: (product: Product) => Promise<Product | null>;
+  abstract createProduct: (product: ProductRequest) => Promise<Product | null>;
   abstract getProductCount: (
     query: Record<string, any>,
   ) => Promise<number | null>;

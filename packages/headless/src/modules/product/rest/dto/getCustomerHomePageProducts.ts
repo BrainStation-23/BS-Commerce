@@ -35,5 +35,5 @@ export class GetCustomerAllHomePageProductsSuccessResponseDto
 
   @ApiProperty({ type: () => [CustomerProductDto] })
   @IsObject()
-  data: [CustomerProductDto];
+  data: CustomerProductDto[];
 }

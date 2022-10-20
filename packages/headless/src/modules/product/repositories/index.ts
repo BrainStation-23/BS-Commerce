@@ -1,4 +1,9 @@
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import {
+  Product,
+  ProductRequest,
+  SearchCondition,
+  UpdateProduct,
+} from 'src/entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
@@ -11,6 +16,11 @@ export class ProductRepository {
   async findProduct(query: Record<string, any>): Promise<Product | null> {
     return await this.db.findProduct(query);
   }
+  async findCustomerProduct(
+    query: Record<string, any>,
+  ): Promise<Product | null> {
+    return await this.db.findCustomerProduct(query);
+  }
 
   async findAllProducts(
     query: Record<string, any>,
@@ -20,6 +30,22 @@ export class ProductRepository {
     orderBy?: string,
   ): Promise<Product[]> {
     return await this.db.findAllProducts(query, skip, limit, price, orderBy);
+  }
+
+  async findCustomerAllProducts(
+    query: Record<string, any>,
+    skip?: number,
+    limit?: number,
+    price?: Partial<SearchCondition>,
+    orderBy?: string,
+  ): Promise<Product[]> {
+    return await this.db.findCustomerAllProducts(
+      query,
+      skip,
+      limit,
+      price,
+      orderBy,
+    );
   }
 
   async getAllConditionalProducts(
@@ -40,7 +66,7 @@ export class ProductRepository {
     );
   }
 
-  async createProduct(product: Product): Promise<Product | null> {
+  async createProduct(product: ProductRequest): Promise<Product | null> {
     product.id = randomUUID();
     return await this.db.createProduct(product);
   }
