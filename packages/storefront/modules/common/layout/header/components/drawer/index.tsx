@@ -1,27 +1,17 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { storeUserToken } from 'store/slices/authSlice';
 
-import CartDropdown from '@/modules/cart/cartDropdown/dropdownCart';
-import Modal from '../components/modal/modal';
 import { resetAddress } from 'store/slices/customerAddressSlice';
 import { resetUserDetails } from 'store/slices/userSlice';
 import { resetWishilist } from 'store/slices/productsSlice';
 import { resetCart } from 'store/slices/cartSlice';
-import { useSelector } from 'react-redux';
-import { setModalState } from 'store/slices/modalSlice';
-
-import {
-  ChevronLeftIcon,
-  GearOutlineIcon,
-  MapPinOutlineIcon,
-  ShoppingBagOutlineIcon,
-  UserOutlineIcon,
-} from './headerIcons';
+import ChevronLeft from '@/modules/common/icons/chevronLeft';
+import UserOutlineIcon from '@/modules/common/icons/userIcon';
+import ShoppingBagOutlineIcon from '@/modules/common/icons/shoppingBagIcon';
+import MapPinOutlineIcon from '@/modules/common/icons/mapPinIcon';
 
 interface Props {
   drawer: boolean;
@@ -91,7 +81,7 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
             className="mr-4 text-primary dark:text-dark_primary"
             onClick={() => closeDrawer()}
           >
-            <ChevronLeftIcon />
+            <ChevronLeft />
           </button>
           <span className="text-3xl font-medium text-primary dark:text-dark_primary">
             BS Commerce

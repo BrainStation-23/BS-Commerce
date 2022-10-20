@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import Container from '@/modules/global/components/container';
-import Accordion from '@/modules/global/components/accordion';
+import Accordion from '@/modules/common/accordion';
 
 import { accordionBody } from 'APIs/utils/types';
 

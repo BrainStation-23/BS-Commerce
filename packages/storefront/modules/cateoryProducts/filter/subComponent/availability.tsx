@@ -12,9 +12,7 @@ const AvaialabilityOptions: NextComponentType = () => {
   const [availibityOptionVal, setavailibityOptionVal] = useState('');
   return (
     <>
-      <div className="py-4">
-        <CounterElement />
-      </div>
+      <div className="py-4">{/* <CounterElement /> */}</div>
       <div className={radiot.custom}>
         {availableOptions.map((option) => {
           return (

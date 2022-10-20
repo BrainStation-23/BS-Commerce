@@ -1,4 +1,4 @@
-import { CheckCircleOutlineIcon } from '@/modules/global/layout/headerIcons';
+import CheckCircleOutlineIcon from '@/modules/common/icons/checkCircleIcon';
 
 interface Props {
   status: string;

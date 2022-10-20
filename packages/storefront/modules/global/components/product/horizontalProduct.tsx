@@ -2,8 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
-import Icon from '@/modules/global/components/icon';
 import ProductInfo from '@/modules/global/components/product/productInfo';
+import ProductHoverActions from '@/modules/common/productHoverActions';
 
 const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
   const [showIcons, setShowIcons] = useState(false);
@@ -20,7 +20,7 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
         }}
         passHref
       >
-        <div className="group relative grid w-80 grid-cols-12 md:pl-0 lg:pl-0 pb-2">
+        <div className="group relative grid w-80 grid-cols-12 pb-2 md:pl-0 lg:pl-0">
           <div className="col-span-3 ">
             <div className="border-grey-500 rounded border-2 p-1">
               <Image
@@ -40,7 +40,7 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
               showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
             } duration-300 md:left-24`}
           >
-            <Icon product={product} />
+            <ProductHoverActions product={product} />
           </div>
         </div>
       </Link>

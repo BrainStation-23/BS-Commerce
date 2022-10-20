@@ -37,9 +37,7 @@ const BrandTypeOptions: FC<any> = ({ brands }) => {
   };
   return (
     <>
-      <div className="py-4">
-        <CounterElement />
-      </div>
+      <div className="py-4">{/* <CounterElement /> */}</div>
       <div className={radio.custom}>
         {availableOptions &&
           availableOptions.map((option, index) => {

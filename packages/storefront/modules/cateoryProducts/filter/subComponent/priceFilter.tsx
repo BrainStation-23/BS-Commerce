@@ -32,9 +32,7 @@ const PriceFilter: FC = () => {
   return (
     <>
       <div className="accordion-body py-2">
-        <div className="">
-          <CounterElement />
-        </div>
+        <div className="">{/* <CounterElement /> */}</div>
         <div className="grid w-full scale-95 grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
           <div className="mt-2 flex flex-row text-sm">
             <span className="flex grid content-center justify-center text-sm">

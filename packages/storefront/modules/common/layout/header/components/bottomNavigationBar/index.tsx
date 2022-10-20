@@ -1,15 +1,9 @@
-import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import {
-  HeartOutlineIcon,
-  HomeOutlineIcon,
-  ShoppingCartOutlineIcon,
-  UserOutlineIcon,
-} from './headerIcons';
-import { toast } from 'react-toastify';
-import { resetAddress } from 'store/slices/customerAddressSlice';
+
+import HomeOutlineIcon from '@/modules/common/icons/homeIcon';
+import HeartIcon from '@/modules/common/icons/heartIcon';
+import ShoppingCartOutlineIcon from '@/modules/common/icons/shoppingCartIcon';
+import UserOutlineIcon from '@/modules/common/icons/userIcon';
 
 interface Props {
   openDrawer: () => void;
@@ -28,7 +22,7 @@ const BottomNavigationBar: React.FC<Props> = ({ openDrawer }: Props) => {
           </Link>
           <Link href="/wishlist" passHref>
             <button className="flex flex-col items-center">
-              <HeartOutlineIcon />
+              <HeartIcon />
               <span>Wishlist</span>
             </button>
           </Link>

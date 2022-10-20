@@ -17,9 +17,7 @@ const ColourTypeOptions: NextComponentType = () => {
   const [availibityColorOptionVal, setavailibityColorOptionVal] = useState('');
   return (
     <>
-      <div className="py-4">
-        <CounterElement />
-      </div>
+      <div className="py-4">{/* <CounterElement /> */}</div>
       <div className={radio.custom}>
         {availableOptions.map((option) => {
           return (

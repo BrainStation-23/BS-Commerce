@@ -21,7 +21,7 @@ const Search: React.FC<Properties> = (props) => {
         placeholder={`${props.placeholder}`}
         id="navSearchInput"
       />
-      <div className="flex h-12 w-14 mr-[-2px] cursor-pointer justify-center rounded-r-full bg-primary dark:bg-dark_primary transition-all duration-200 ease-linear hover:bg-stone-900">
+      <div className="mr-[-2px] flex h-12 w-14 cursor-pointer justify-center rounded-r-full bg-primary transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
         <button
           type="submit"
           id="navSearchSubmit"

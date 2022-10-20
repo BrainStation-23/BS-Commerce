@@ -4,8 +4,8 @@ import { CustomerProduct } from '@bs-commerce/models';
 
 import ProductInfo from '@/modules/global/components/product/common/productInfo';
 import Picture from '@/modules/global/components/product/common/picture';
-import Icon from '@/modules/global/components/icon';
 import { FC } from 'react';
+import ProductHoverActions from '@/modules/common/productHoverActions';
 
 const VerticalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
   return (
@@ -50,7 +50,7 @@ const VerticalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
                   ) : null}
                 </div>
                 <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
-                  <Icon product={product} />
+                  <ProductHoverActions product={product} />
                 </div>
                 <ProductInfo product={product} />
               </div>

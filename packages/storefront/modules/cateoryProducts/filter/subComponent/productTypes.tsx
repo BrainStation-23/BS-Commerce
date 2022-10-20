@@ -22,9 +22,7 @@ const ProductTypeOptions: NextComponentType = () => {
     useState('');
   return (
     <>
-      <div className="py-4">
-        <CounterElement />
-      </div>
+      <div className="py-4">{/* <CounterElement /> */}</div>
       <div className={radiott.custom}>
         {availableProductTypeOptions.map((availableOption) => {
           return (

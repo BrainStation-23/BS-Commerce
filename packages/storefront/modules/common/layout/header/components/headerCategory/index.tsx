@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { NestedCategoryList, subCategoryList } from '@bs-commerce/models';
-import { ChevronRightIcon, MinusSolidIcon, PlusSolidIcon } from './headerIcons';
-import HeaderSubCategory from '@/modules/global/layout/headerSubCategory';
+import HeaderSubCategory from '@/modules/common/layout/header/components/headerSubCategory';
+import ChevronRight from '@/modules/common/icons/chevronRight';
+import MinusSolidIcon from '@/modules/common/icons/minusIcon';
+import PlusSolidIcon from '@/modules/common/icons/plusIcon';
 
 interface Props {
   category: NestedCategoryList;
@@ -42,7 +44,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
         </Link>
 
         <span className="hidden lg:block">
-          {category.subCategories ? <ChevronRightIcon /> : ''}
+          {category.subCategories ? <ChevronRight /> : ''}
         </span>
         <span
           className="block lg:hidden"
