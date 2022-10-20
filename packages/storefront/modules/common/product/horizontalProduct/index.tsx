@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { FC, useState } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
 import ProductInfo from '@/modules/common/product/horizontalProduct/components/horizontalProductInfo';
-import ProductHoverActions from '@/modules/common/productHoverActions';
+import ProductHoverActions from '@/modules/common/product/common/productHoverActions';
 
 const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
   const [showIcons, setShowIcons] = useState(false);

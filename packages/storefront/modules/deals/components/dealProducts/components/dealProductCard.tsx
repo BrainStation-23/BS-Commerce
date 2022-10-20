@@ -2,7 +2,7 @@ import { CustomerProduct } from '@bs-commerce/models';
 import ProductInfo from '@/modules/common/product/verticalProduct/components/verticalProductInfo';
 import Picture from '@/modules/common/product/common/picture';
 import Counter from '@/modules/common/product/common/counter';
-import ProductHoverActions from '@/modules/common/productHoverActions';
+import ProductHoverActions from '@/modules/common/product/common/productHoverActions';
 
 const time = {
   day: '00',

@@ -6,7 +6,7 @@ import { useAppSelector } from 'store/hooks/index';
 import { WishlistItem } from '@bs-commerce/models';
 
 import SingleProductInfo from '@/modules/wishlist/components/singleProductInfo';
-import ProductHoverActions from '@/modules/common/productHoverActions';
+import ProductHoverActions from '@/modules/common/product/common/productHoverActions';
 
 interface Props {
   productImageHeight: number;
