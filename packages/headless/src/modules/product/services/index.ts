@@ -25,18 +25,19 @@ import {
   GetCustomerAllProductsResponse,
   GetCustomerProductResponse,
   GetCustomerAllHomePageProductsResponse,
-  CreateProductRequest,
   GetCustomizedProductsQuery,
   GetCustomizedProductsTagsEnum,
   GetCustomizedProductsResponse,
   GetCustomizedProductsErrorMessages,
-} from '@bs-commerce/models';
+  CreateProductRequest,
+} from 'models';
 @Injectable()
 export class ProductService {
   constructor(private productRepo: ProductRepository, private helper: Helper) {}
 
   async createProduct(
     product: CreateProductRequest,
+    branchId: string,
   ): Promise<CreateProductResponse> {
     const skuMatch = await this.productRepo.findProduct({
       'info.sku': product.info.sku,
@@ -59,8 +60,12 @@ export class ProductService {
         null,
         HttpStatus.BAD_REQUEST,
       );
-
-    const newProduct = await this.productRepo.createProduct(product);
+    const { ...rest } = product;
+    const productBody = {
+      ...rest,
+      branchId,
+    };
+    const newProduct = await this.productRepo.createProduct(productBody);
     if (!newProduct)
       return this.helper.serviceResponse.errorResponse(
         CreateProductErrorMessages.CAN_NOT_CREATE_NEW_PRODUCT,
@@ -283,7 +288,7 @@ export class ProductService {
   async getCustomerProduct(
     productId: string,
   ): Promise<GetCustomerProductResponse> {
-    const product = await this.productRepo.findProduct({
+    const product = await this.productRepo.findCustomerProduct({
       id: productId,
       'info.published': true,
     });
@@ -299,7 +304,7 @@ export class ProductService {
   async getCustomerProductByURL(
     url: string,
   ): Promise<GetCustomerProductResponse> {
-    const product = await this.productRepo.findProduct({
+    const product = await this.productRepo.findCustomerProduct({
       'meta.friendlyPageName': url,
       'info.published': true,
     });
@@ -313,7 +318,7 @@ export class ProductService {
   }
 
   async getCustomerAllHomePageProducts(): Promise<GetCustomerAllHomePageProductsResponse> {
-    const products = await this.productRepo.findAllProducts({
+    const products = await this.productRepo.findCustomerAllProducts({
       'info.showOnHomePage': true,
       'info.published': true,
     });
@@ -340,7 +345,7 @@ export class ProductService {
           skip,
           limit,
         )
-      : await this.productRepo.findAllProducts(
+      : await this.productRepo.findCustomerAllProducts(
           { ...query, 'info.published': true },
           skip,
           limit,
@@ -354,7 +359,7 @@ export class ProductService {
           slug,
           orderBy,
         )
-      : await this.productRepo.findAllProducts(
+      : await this.productRepo.findCustomerAllProducts(
           { ...query, 'info.published': true },
           null,
           null,

@@ -2,7 +2,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
 import { Store } from './store';
 
 /**
- * API Path: /store
+ * API Path: /stores/create-store
  * method: POST
  * body: CreateStoreRequestBody
  * response: CreateStoreResponse

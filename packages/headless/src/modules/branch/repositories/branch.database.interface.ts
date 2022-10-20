@@ -7,5 +7,5 @@ export abstract class IBranchDatabase{
     abstract createBranch: (branch: CreateBranchRequest) => Promise<Branch | null>;
     abstract getStore: (storeId: string) => Promise<Store | null>;
     abstract getBranchByStoreId: (storeId: string) => Promise<AllBranchByStoreId | null>;
-    abstract getBranch: (branchId: string) => Promise<Branch | null>;
+    abstract getBranch: (query: Record<string, any>) => Promise<Branch | null>;
 }

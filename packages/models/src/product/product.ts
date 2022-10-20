@@ -42,6 +42,7 @@ export interface ProductManufacturer {
 
 export interface Product {
   id?: string;
+  branchId: string;
   info: ProductInfo;
   meta?: ProductMeta;
   tags?: string[];

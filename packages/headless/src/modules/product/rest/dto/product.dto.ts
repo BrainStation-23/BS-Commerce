@@ -16,7 +16,7 @@ import {
   ProductCategory,
   ProductManufacturer,
   Product,
-} from '@bs-commerce/models';
+} from 'models';
 
 export class ProductInfoDto implements ProductInfo {
   @ApiProperty({ required: true })
@@ -155,6 +155,11 @@ export class ProductDto implements Product {
   @IsNotEmpty()
   @IsString()
   id: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  branchId: string;
 
   @ApiProperty({ type: ProductInfoDto })
   @IsNotEmptyObject()
