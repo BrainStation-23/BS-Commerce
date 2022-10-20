@@ -78,8 +78,14 @@ export class ProductService {
     );
   }
 
-  async getProduct(productId: string): Promise<GetProductResponse> {
-    const product = await this.productRepo.findProduct({ id: productId });
+  async getProduct(
+    branchId: string,
+    productId: string,
+  ): Promise<GetProductResponse> {
+    const product = await this.productRepo.findProduct({
+      branchId,
+      id: productId,
+    });
     if (!product)
       return this.helper.serviceResponse.errorResponse(
         GetProductErrorMessages.CAN_NOT_GET_PRODUCT,
@@ -102,10 +108,15 @@ export class ProductService {
   }
 
   async getAllProducts(
+    branchId: string,
     condition: SearchCondition,
   ): Promise<GetAllProductsResponse> {
     const { skip, limit } = condition;
-    const products = await this.productRepo.findAllProducts({}, skip, limit);
+    const products = await this.productRepo.findAllProducts(
+      { branchId },
+      skip,
+      limit,
+    );
     if (!products)
       return this.helper.serviceResponse.errorResponse(
         GetAllProductsErrorMessages.CAN_NOT_GET_ALL_PRODUCTS,
@@ -115,8 +126,8 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(products, HttpStatus.OK);
   }
 
-  async getProductCount(): Promise<GetProductCountResponse> {
-    const count = await this.productRepo.getProductCount({});
+  async getProductCount(branchId: string): Promise<GetProductCountResponse> {
+    const count = await this.productRepo.getProductCount({ branchId });
     if (!count)
       return this.helper.serviceResponse.errorResponse(
         GetProductCountErrorMessages.CAN_NOT_GET_PRODUCT_COUNT,
@@ -129,8 +140,14 @@ export class ProductService {
     );
   }
 
-  async getProductBySKU(sku: string): Promise<GetProductBySKUResponse> {
-    const product = await this.productRepo.findProduct({ 'info.sku': sku });
+  async getProductBySKU(
+    branchId: string,
+    sku: string,
+  ): Promise<GetProductBySKUResponse> {
+    const product = await this.productRepo.findProduct({
+      branchId,
+      'info.sku': sku,
+    });
     if (!product)
       return this.helper.serviceResponse.errorResponse(
         GetProductBySKUErrorMessages.CAN_NOT_GET_PRODUCT,
@@ -140,8 +157,14 @@ export class ProductService {
     return this.helper.serviceResponse.successResponse(product, HttpStatus.OK);
   }
 
-  async deleteProduct(productId: string): Promise<DeleteProductResponse> {
-    const product = await this.productRepo.deleteProduct(productId);
+  async deleteProduct(
+    branchId: string,
+    productId: string,
+  ): Promise<DeleteProductResponse> {
+    const product = await this.productRepo.deleteProduct({
+      branchId,
+      id: productId,
+    });
     if (!product)
       return this.helper.serviceResponse.errorResponse(
         DeleteProductErrorMessages.CAN_NOT_DELETE_PRODUCT,
@@ -155,10 +178,14 @@ export class ProductService {
   }
 
   async updateProduct(
-    product: UpdateProduct,
+    branchId: string,
     productId: string,
+    product: UpdateProduct,
   ): Promise<UpdateProductResponse> {
-    const getProduct = await this.productRepo.findProduct({ id: productId });
+    const getProduct = await this.productRepo.findProduct({
+      branchId,
+      id: productId,
+    });
     if (!getProduct)
       return this.helper.serviceResponse.errorResponse(
         GetProductErrorMessages.CAN_NOT_GET_PRODUCT,
@@ -202,8 +229,9 @@ export class ProductService {
       );
 
     const updatedProduct = await this.productRepo.updateProduct(
-      product,
+      branchId,
       productId,
+      product,
     );
     if (!updatedProduct)
       return this.helper.serviceResponse.errorResponse(
@@ -218,13 +246,14 @@ export class ProductService {
   }
 
   async updateProductsForBrand(
+    branchId: string,
     productIds: string[],
     brandId: string,
   ): Promise<UpdateProductsForBrandResponse> {
-    const products = await this.productRepo.updateProductsForBrand(
+    const products = await this.productRepo.updateProductsForBrand(branchId, {
       productIds,
       brandId,
-    );
+    });
     if (!products)
       return this.helper.serviceResponse.errorResponse(
         UpdateProductsForBrandErrorMessages.CAN_NOT_UPDATE_PRODUCTS,
@@ -235,14 +264,15 @@ export class ProductService {
   }
 
   async getProductsByCondition(
+    branchId: string,
     condition: SearchCondition,
   ): Promise<GetProductsByConditionResponse> {
     const { skip, limit, slug, orderBy } = condition;
     const query: Record<string, any> =
-      !slug && this.generateSearchQuery(condition);
+      !slug && this.generateSearchQuery(branchId, condition);
     const products = slug
       ? await this.productRepo.getAllConditionalProducts(
-          {},
+          { branchId },
           {},
           slug,
           orderBy,
@@ -262,7 +292,32 @@ export class ProductService {
     });
   }
 
-  generateSearchQuery(condition: SearchCondition): object {
+  generateSearchQuery(branchId: string, condition: SearchCondition): object {
+    const { brand, categoryId, productName, isFeatured, manufacturer } =
+      condition;
+    const query: Record<string, any> = {};
+    if (branchId !== undefined && branchId !== '') {
+      query.branchId = branchId;
+    }
+    if (brand !== undefined && brand !== '') {
+      query.brands = brand;
+    }
+    if (categoryId !== undefined && categoryId !== '') {
+      query['categories.id'] = categoryId;
+    }
+    if (manufacturer !== undefined && manufacturer !== '') {
+      query['manufacturer.name'] = manufacturer;
+    }
+    if (productName !== undefined && productName !== '') {
+      query['info.name'] = new RegExp(productName, 'i');
+    }
+    if (isFeatured !== undefined) {
+      query['info.isFeatured'] = isFeatured;
+    }
+    return query;
+  }
+
+  generateCustomerSearchQuery(condition: SearchCondition): object {
     const { brand, categoryId, productName, isFeatured, manufacturer } =
       condition;
     const query: Record<string, any> = {};
@@ -335,7 +390,8 @@ export class ProductService {
     condition: SearchCondition,
   ): Promise<GetCustomerAllProductsResponse> {
     const { skip, limit, slug, orderBy, maxPrice, minPrice } = condition;
-    const query: Record<string, any> = this.generateSearchQuery(condition);
+    const query: Record<string, any> =
+      this.generateCustomerSearchQuery(condition);
     const products = slug
       ? await this.productRepo.getAllConditionalProducts(
           { ...query, 'info.published': true },

@@ -24,6 +24,7 @@ import {
   GetCustomerAllProductsQuery,
   GetCustomerAllProductsResponseType,
 } from '@bs-commerce/models';
+import { BranchIdParams } from 'models';
 
 @ObjectType('ProductInfo')
 @InputType('ProductInfoInput')
@@ -368,6 +369,12 @@ export class GetAllProductsQueryInput implements GetAllProductsQuery {
 
   @Field(() => Int, { nullable: true })
   limit?: number;
+}
+
+@InputType()
+export class BranchIdParamsInput implements BranchIdParams {
+  @Field()
+  branchId: string;
 }
 
 @InputType()

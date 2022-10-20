@@ -122,16 +122,17 @@ export class ProductDatabase implements IProductDatabase {
     return await ProductModel.find(query, '-_id').lean().count();
   }
 
-  async deleteProduct(productId: string): Promise<Product | null> {
-    return await ProductModel.findOneAndRemove({ id: productId }).lean();
+  async deleteProduct(query: Record<string, any>): Promise<Product | null> {
+    return await ProductModel.findOneAndRemove(query).lean();
   }
 
   async updateProduct(
-    product: UpdateProduct,
+    branchId: string,
     productId: string,
+    product: UpdateProduct,
   ): Promise<Product | null> {
     return await ProductModel.findOneAndUpdate(
-      { id: productId },
+      { branchId, id: productId },
       { $set: product },
       { new: true },
     )
@@ -141,15 +142,15 @@ export class ProductDatabase implements IProductDatabase {
   }
 
   async updateProductsForBrand(
-    productIds: string[],
-    brandId: string,
+    branchId: string,
+    query: Record<string, any>,
   ): Promise<Product[] | []> {
     await ProductModel.updateMany(
-      { id: { $in: productIds } },
-      { $addToSet: { brands: brandId } },
+      { branchId, id: { $in: query.productIds } },
+      { $addToSet: { brands: query.brandId } },
       { multi: true },
     ).exec();
-    return await ProductModel.find({ id: { $in: productIds } })
+    return await ProductModel.find({ branchId, id: { $in: query.productIds } })
       .select('-_id -createdAt -updatedAt')
       .lean();
   }
