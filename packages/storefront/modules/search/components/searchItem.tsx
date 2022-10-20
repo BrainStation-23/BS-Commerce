@@ -2,8 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { userAPI } from 'APIs';
 import { IProductSearchSchema } from '@bs-commerce/models';
-import HorizontalProduct from '@/modules/global/components/product/horizontalProduct';
-import VerticalProduct from '@/modules/global/components/product/verticalProduct';
+import HorizontalProduct from '@/modules/common/product/horizontalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
 
 const SearchItems: FC<{
   searchText: string;
@@ -45,10 +45,7 @@ const SearchItems: FC<{
         products?.map((product) => (
           <div key={product.id} className="mx-auto w-fit">
             {/* <VerticalProduct */}
-            <HorizontalProduct
-              key={product.id}
-              product={product}
-            />
+            <HorizontalProduct key={product.id} product={product} />
           </div>
         ))}
     </>

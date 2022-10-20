@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
-import VerticalProduct from '@/modules/global/components/product/verticalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
 
 const ProductList: FC<{ products: CustomerProduct[] }> = ({ products }) => {
   return (

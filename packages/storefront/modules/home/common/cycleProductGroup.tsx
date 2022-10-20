@@ -1,18 +1,18 @@
 // Swiper.js doesn't support loop with multiple rows.
 // so to achive loop with multiple rows ,
-// multiple products were grouped here as a single Component. 
+// multiple products were grouped here as a single Component.
 //productQuantity = 3 => HorizontalProduct
 //productQuantity < 3 => VerticalProduct
 import { CustomerProduct } from '@bs-commerce/models';
 
-import VerticalProduct from '@/modules/global/components/product/verticalProduct';
-import HorizontalProduct from '@/modules/global/components/product/horizontalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
+import HorizontalProduct from '@/modules/common/product/horizontalProduct';
 
 const CycleProductGroup: React.FC<{ products: CustomerProduct[] }> = ({
   products,
 }) => {
   const productQuantity = products.length;
- 
+
   return (
     <div
       className={`grid ${

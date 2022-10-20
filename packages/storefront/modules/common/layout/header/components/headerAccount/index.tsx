@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { storeUserToken } from 'store/slices/authSlice';
 
 import CartDropdown from '@/modules/cart/components/cartDropdown';
-import Modal from '@/modules/global/components/modal/modal';
+import Modal from '@/modules/common/modal/modal';
 import { resetAddress } from 'store/slices/customerAddressSlice';
 import { resetUserDetails } from 'store/slices/userSlice';
 import { resetWishilist } from 'store/slices/productsSlice';

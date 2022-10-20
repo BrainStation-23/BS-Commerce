@@ -15,7 +15,7 @@ import {
   setLoginModalState,
   setModalState,
 } from 'store/slices/modalSlice';
-import ModalLogin from '@/modules/global/components//modal/modal';
+import ModalLogin from '@/modules/common/modal/modal';
 import ComparisonModal from '@/modules/comparison';
 import XCircleIcon from './common/icons/xCircleIcon';
 

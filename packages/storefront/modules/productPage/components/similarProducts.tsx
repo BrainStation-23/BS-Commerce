@@ -5,9 +5,9 @@ import { SwiperSlide } from 'swiper/react';
 import { useAppSelector } from 'store/hooks/index';
 import { NextComponentType } from 'next';
 
-import SwiperGrid from '@/modules/global/components/swipergrid';
+import SwiperGrid from '@/modules/common/swiper/swipergrid';
 import PageContainer from '@/modules/common/layout/pageContainer';
-import VerticalProduct from '@/modules/global/components/product/verticalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
 import { CustomerProduct } from '@bs-commerce/models';
 
 const SimilarProducts: NextComponentType = () => {

@@ -8,7 +8,7 @@ import PageContainer from '@/modules/common/layout/pageContainer';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
 import ProductRow from '../common/cycleProductGroup';
-import SwiperGrid from '@/modules/global/components/swipergrid';
+import SwiperGrid from '@/modules/common/swiper/swipergrid';
 import { CustomerProduct } from '@bs-commerce/models';
 
 const TrendingProducts = () => {

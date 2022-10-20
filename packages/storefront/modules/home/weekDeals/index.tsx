@@ -6,9 +6,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { CustomerProduct } from '@bs-commerce/models';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
-import SwiperGrid from '@/modules/global/components/swipergrid';
+import SwiperGrid from '@/modules/common/swiper/swipergrid';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
-import VerticalProduct from '@/modules/global/components/product/verticalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
 
 const WeekDeals: NextComponentType = () => {
   const { t } = useTranslation();

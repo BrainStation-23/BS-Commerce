@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'store/hooks/index';
-import Modal from '@/modules/global/components/modal/modal';
+import Modal from '@/modules/common/modal/modal';
 
 const CartTotal: NextComponentType = () => {
   const router = useRouter();
@@ -55,7 +55,7 @@ const CartTotal: NextComponentType = () => {
           <div className="flex justify-center py-5 px-6">
             <table className="w-full border-collapse border">
               <tbody>
-                <tr className='border-b'>
+                <tr className="border-b">
                   <td className="ml-20  px-8 py-5 md:px-8 lg:px-8 xl:px-8">
                     <span className="font-semibold sm:mr-8 md:mr-16">
                       {t('cart:cart_subtotal')}

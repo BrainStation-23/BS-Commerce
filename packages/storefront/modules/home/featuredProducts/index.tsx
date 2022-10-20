@@ -11,7 +11,7 @@ import { CustomerProduct } from '@bs-commerce/models';
 
 import { useAppSelector } from 'store/hooks/index';
 
-import SwiperGrid from '@/modules/global/components/swipergrid';
+import SwiperGrid from '@/modules/common/swiper/swipergrid';
 import PageContainer from '@/modules/common/layout/pageContainer';
 import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';

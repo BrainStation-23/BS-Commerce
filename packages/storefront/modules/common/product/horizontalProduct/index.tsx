@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
-import ProductInfo from '@/modules/global/components/product/productInfo';
+import ProductInfo from '@/modules/common/product/horizontalProduct/components/horizontalProductInfo';
 import ProductHoverActions from '@/modules/common/productHoverActions';
 
 const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {

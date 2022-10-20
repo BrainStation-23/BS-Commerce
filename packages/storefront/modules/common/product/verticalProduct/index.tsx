@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { CustomerProduct } from '@bs-commerce/models';
 
-import ProductInfo from '@/modules/global/components/product/common/productInfo';
-import Picture from '@/modules/global/components/product/common/picture';
+import ProductInfo from '@/modules/common/product/verticalProduct/components/verticalProductInfo';
+import Picture from '@/modules/common/product/common/picture';
 import { FC } from 'react';
 import ProductHoverActions from '@/modules/common/productHoverActions';
 

@@ -7,15 +7,13 @@ import { NextComponentType } from 'next';
 import { userAPI } from 'APIs';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import {
-  deleteFullWishlist,
-} from 'store/slices/productsSlice';
+import { deleteFullWishlist } from 'store/slices/productsSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import HeartIcon from '@/modules/common/icons/heartIcon';
 import WithAuth from '@/modules/auth/withAuth';
-import Modal from '@/modules/global/components/modal/modal';
+import Modal from '@/modules/common/modal/modal';
 import WishlistBody from '@/modules/wishlist/components/body';
 import CircledRightArrow from '@/modules/common/icons/circledRightArrow';
 
@@ -74,7 +72,7 @@ const WishlistComponent: NextComponentType = () => {
           )}
         </div>
         {wishlistData?.items?.length! <= 0 && (
-          <div className="my-10 flex flex-col gap-y-2 items-center">
+          <div className="my-10 flex flex-col items-center gap-y-2">
             <div className="fill-primary stroke-primary dark:fill-dark_primary dark:stroke-dark_primary">
               <HeartIcon height="h-16" width="w-16" />
             </div>

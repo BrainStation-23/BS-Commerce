@@ -15,7 +15,7 @@ import { CustomerProduct } from '@bs-commerce/models';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
 import Banner from '@/modules/home/bestSell/components/banner';
-import SwiperGrid from '@/modules/global/components/swipergrid';
+import SwiperGrid from '@/modules/common/swiper/swipergrid';
 import CycleProductGroup from '@/modules/home/common/cycleProductGroup';
 import HomeComponentHeader from '@/modules/home/common/homeComponentHeader';
 
