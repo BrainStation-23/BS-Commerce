@@ -9,13 +9,6 @@ export class OrderReviewService {
     async createReview(body: ICreateReview): Promise<CreateReviewResponse>{
         const { orderId, productId, image, rating } = body;
 
-        if(rating < 1 || rating > 5)
-            return {
-                error: CreateReviewErrorMessage.RATING_RANGE_ERROR,
-                errors: null,
-                code: HttpStatus.BAD_REQUEST
-            };
-
         const reviewExists = await this.orderRepository.findReview({orderId, productId});
         if(reviewExists)
             return {

@@ -1,7 +1,7 @@
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsObject } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, IsArray, IsNumber, IsObject, Max, Min } from "class-validator";
 import { CreateReviewErrorResponse, CreateReviewSuccessResponse, CreateReviewErrorMessage, ICreateReview } from "models";
 import { Commenters } from "src/entity/review";
 import { CommentDto, ReviewDto, ReviewPhotoDto } from "./review.dto";
@@ -30,6 +30,8 @@ export class CreateReviewDto implements ICreateReview{
     @ApiProperty()
     @IsNumber()
     @IsOptional()
+    @Min(1)
+    @Max(5)
     rating?: number;
 }
 
