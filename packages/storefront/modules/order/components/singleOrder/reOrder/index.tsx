@@ -7,7 +7,7 @@ import {
 } from '@bs-commerce/models';
 
 import { userAPI } from 'APIs';
-import ReorderModal from '@/modules/global/components/modal/reorderModal';
+import ReorderModal from '@/modules/order/components/singleOrder/reOrder/components/reorderModal';
 import useTranslation from 'next-translate/useTranslation';
 interface Props {
   singleOrder: OrderByUserId;
@@ -75,7 +75,7 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
       <div className="flex justify-center pt-6">
         <button
           onClick={() => handleReorder(false, false)}
-          className="rounded bg-primary py-2 px-8 font-bold text-white hover:bg-black dark:hover:border dark:hover:bg-dark_bg dark:bg-dark_primary"
+          className="rounded bg-primary py-2 px-8 font-bold text-white hover:bg-black dark:bg-dark_primary dark:hover:border dark:hover:bg-dark_bg"
           id="re-order"
         >
           {t('common:reorder')}
