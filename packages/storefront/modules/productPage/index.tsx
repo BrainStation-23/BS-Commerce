@@ -268,21 +268,19 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
         linkArray={['/', '/product' + product.id]}
       />
 
-      <section className="body-font overflow-hidden bg-white text-gray-700 dark:bg-dark_bg">
-        <div className="container mx-auto px-5 pt-24 pb-16">
+      <section className="overflow-hidden bg-white dark:bg-dark_bg">
+        <div className="container mx-auto px-5 pt-24 pb-16 text-primary dark:text-dark_text">
           <div>
             <div className="mx-auto flex flex-wrap">
               <div className="w-full md:w-1/2">
-                <div className="relative inset-0 z-0 bg-cover bg-center">
-                  <ProductImagesSlider product={product}></ProductImagesSlider>
-                </div>
+                <ProductImagesSlider product={product}></ProductImagesSlider>
               </div>
               <div className="mt-10 w-full md:mt-0 md:w-1/2 md:pl-5 ">
-                <h2 className="title-font mb-1 text-xl font-normal text-gray-900 dark:text-dark_text">
+                <h2 className="mb-1 text-xl font-normal text-gray-900 dark:text-dark_text">
                   {product.info.name}
                 </h2>
                 <RatingStars />
-                <div className="ml-1 mb-1 mt-2 text-gray-900 dark:text-dark_text">
+                <div className="my-2 ml-1 text-gray-900 dark:text-dark_text">
                   <span className="text-sm">
                     {t('product-details:manufacturer')}:{' '}
                     {product?.manufacturer?.name
@@ -294,26 +292,24 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                     {t('product-details:sku')}: {product?.info?.sku}
                   </span>
                 </div>
-                <div className="flex">
-                  <span className="title-font mt-2 mb-2 ml-1 text-2xl font-medium text-primary dark:text-dark_text">
-                    {Intl.NumberFormat(
-                      `${currency.currencyLanguage}-${currency.currencyStyle}`,
-                      {
-                        style: 'currency',
-                        currency: `${currency.currencyName}`,
-                      }
-                    ).format(product?.info?.price)}
-                  </span>
+                <div className="m-2 ml-1 text-2xl font-medium ">
+                  {Intl.NumberFormat(
+                    `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                    {
+                      style: 'currency',
+                      currency: `${currency.currencyName}`,
+                    }
+                  ).format(product?.info?.price)}
                 </div>
-                <div className="flex">
-                  <span className="ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
+                <div className="flex text-sm">
+                  <span className="my-2 ml-1 text-gray-900 dark:text-dark_text">
                     {t('product-details:availability')}:
                   </span>
-                  <span className="ml-2 mb-1 mt-2 text-sm text-primary dark:text-dark_primary">
+                  <span className="my-2 ml-2 text-primary dark:text-dark_primary">
                     {isAvailable ? 'Available' : 'Out of stock'}
                   </span>
                 </div>
-                <p className="py- ml-1 mb-1 mt-2 text-sm text-gray-900 dark:text-dark_text">
+                <p className="m-2 ml-1 text-sm text-gray-900 dark:text-dark_text">
                   {product?.info?.shortDescription}
                 </p>
                 <BuyProductQuantity
@@ -324,15 +320,14 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   isAvailable={isAvailable}
                   toCart={toCart}
                 />
-                <div className=" flex flex-wrap">
-                  <ButtonType1
-                    disabled={!isAvailable}
-                    onClickFunction={toCart}
-                    text={t('product-details:buy_now')}
-                  />
-                </div>
+                <ButtonType1
+                  className="mt-2"
+                  disabled={!isAvailable}
+                  onClickFunction={toCart}
+                  text={t('product-details:buy_now')}
+                />
                 <div className="text-grey-700 ml-1 dark:text-dark_text">
-                  <div className="flex flex-row items-start gap-x-4">
+                  <div className="flex gap-x-4">
                     <TextButton
                       onClickFunction={() =>
                         clicked
