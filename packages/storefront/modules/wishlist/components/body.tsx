@@ -6,7 +6,7 @@ import { useAppSelector } from 'store/hooks/index';
 import { WishlistItem } from '@bs-commerce/models';
 
 import SingleProductInfo from '@/modules/wishlist/components/singleProductInfo';
-import Icon from '@/modules/global/components/icon';
+import ProductHoverActions from '@/modules/common/productHoverActions';
 
 interface Props {
   productImageHeight: number;
@@ -39,7 +39,7 @@ const WishlistBody: React.FC<Props> = (props) => {
                   />
 
                   <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:-translate-y-3 hover:opacity-70">
-                    <Icon product={data?.product!} />
+                    <ProductHoverActions product={data?.product!} />
                   </div>
 
                   <div className="text-center">

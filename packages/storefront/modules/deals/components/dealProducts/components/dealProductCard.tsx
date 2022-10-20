@@ -1,8 +1,8 @@
 import { CustomerProduct } from '@bs-commerce/models';
-import Icon from '@/modules/global/components/icon';
 import ProductInfo from '@/modules/global/components/product/common/productInfo';
 import Picture from '@/modules/global/components/product/common/picture';
 import Counter from '@/modules/global/components/product/common/counter';
+import ProductHoverActions from '@/modules/common/productHoverActions';
 
 const time = {
   day: '00',
@@ -35,7 +35,7 @@ const DealProductCard: React.FC<Props> = ({ product }: Props) => {
               <div className="absolute inset-0 z-10 flex-wrap items-center font-semibold text-black opacity-70 duration-300 hover:-translate-y-20 hover:opacity-70 sm:justify-center md:flex md:flex-wrap lg:flex">
                 <Counter time={time}></Counter>
                 <div className="absolute inset-0 z-10 flex items-center justify-center font-semibold text-black opacity-0 duration-300 hover:translate-y-20 hover:opacity-90 md:hover:hover:translate-y-28">
-                  <Icon product={product} />
+                  <ProductHoverActions product={product} />
                 </div>
               </div>
               <div className="text-center">
