@@ -16,7 +16,7 @@ export class ReviewPhoto{
 export class Comment{
     commentedBy: Commenters;
     text: string;
-    image: ReviewPhoto[];
+    image: string[];
     createdAt: Date;
 }
 
