@@ -19,6 +19,11 @@ export class CommentDto implements IComment{
     @IsNotEmpty()
     text: string;
 
+    @ApiProperty({ type: [ReviewPhotoDto]})
+    // @IsOptional()
+    @Type(() => ReviewPhotoDto)
+    image: ReviewPhotoDto[];
+
     @ApiProperty()
     @IsNotEmpty()
     createdAt: Date;

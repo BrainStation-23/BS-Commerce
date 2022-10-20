@@ -30,6 +30,12 @@ const ReviewSchema = new Schema<Review>(
             enum : ['STORE_ADMIN','BRANCH_MANAGER']
         },
         text: String,
+        image: [
+          {
+            url: String,
+            _id: false
+          }
+        ],
         createdAt: Date
     },
     userId: {

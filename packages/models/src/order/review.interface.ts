@@ -6,6 +6,7 @@ export interface IReviewPhoto{
 export interface IComment{
     commentedBy: string;
     text: string;
+    image: IReviewPhoto[];
     createdAt: Date;
 }
 
