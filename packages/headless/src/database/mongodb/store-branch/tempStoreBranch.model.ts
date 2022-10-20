@@ -7,8 +7,8 @@ const TmpStoreBranchSchema = new Schema<StoreBranch>(
   {
     id: {
       type: String,
-      default: () => randomUUID(),
       unique: true,
+      default: () => randomUUID(),
     },
     // storeId
     store: {
@@ -19,20 +19,28 @@ const TmpStoreBranchSchema = new Schema<StoreBranch>(
       type: String,
       unique: true,
     },
-    info: {
-      shopName: {
-        type: String,
-        unique: true,
-      },
-      legalName: String,
+    status: {
+      type: String,
+      enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
     },
-    image: String,
     address: BranchAddressSchema,
-    status: String,
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    image: {
+      cover: String,
+      logo: String,
+    },
+    inActiveReason: {
+      type: String,
+      enum: ['BLOCKED_BY_ADMIN', 'UNDER_MAINTENANCE', null],
+      default: null,
+    },
     description: {
       type: String,
-      default: '',
     },
+    name: String,
   },
   {
     timestamps: true,

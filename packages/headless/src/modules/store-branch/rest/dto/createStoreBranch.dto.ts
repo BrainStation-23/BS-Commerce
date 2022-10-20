@@ -9,6 +9,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import {
   CreateStoreBranchErrorMessages,
   CreateStoreBranchErrorResponse,
@@ -18,7 +19,7 @@ import {
 import {
   StoreBranchAddressDto,
   StoreBranchDto,
-  StoreBranchInfoDto,
+  StoreBranchImageDto,
 } from './storeBranch.dto';
 
 export class CreateStoreBranchRequestDto implements CreateStoreBranchRequest {
@@ -27,22 +28,24 @@ export class CreateStoreBranchRequestDto implements CreateStoreBranchRequest {
   @IsString()
   store: string;
 
-  @ApiProperty({ type: StoreBranchInfoDto })
-  @Type(() => StoreBranchInfoDto)
+  @ApiProperty({ required: true })
   @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @ApiProperty({ type: StoreBranchImageDto, required: false })
+  @Type(() => StoreBranchImageDto)
+  @CustomValidator(StoreBranchImageDto)
+  @IsOptional()
   @IsObject()
-  info: StoreBranchInfoDto;
+  image: StoreBranchImageDto;
 
   @ApiProperty({ type: StoreBranchAddressDto })
   @Type(() => StoreBranchAddressDto)
+  @CustomValidator(StoreBranchAddressDto)
   @IsNotEmpty()
   @IsObject()
   address: StoreBranchAddressDto;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  image: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
@@ -56,7 +59,8 @@ export class CreateStoreBranchSuccessResponseDto
   @IsNumber()
   code: number;
 
-  @ApiProperty({ type: [StoreBranchDto] })
+  @ApiProperty({ type: StoreBranchDto })
+  @Type(() => StoreBranchDto)
   @IsObject()
   data: StoreBranchDto;
 }

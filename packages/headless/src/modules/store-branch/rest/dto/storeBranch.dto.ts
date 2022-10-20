@@ -1,10 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import {
   StoreBranch,
-  StoreBranchAddress,
-  StoreBranchInfo,
   StoreBranchStatus,
+  StoreBranchImage,
+  StoreBranchAddress,
 } from 'models';
 
 export class StoreBranchAddressDto implements StoreBranchAddress {
@@ -34,16 +42,16 @@ export class StoreBranchAddressDto implements StoreBranchAddress {
   country: string;
 }
 
-export class StoreBranchInfoDto implements StoreBranchInfo {
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
+export class StoreBranchImageDto implements StoreBranchImage {
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
-  shopName: string;
+  logo: string;
 
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
-  legalName: string;
+  cover: string;
 }
 
 export class StoreBranchDto implements StoreBranch {
@@ -62,20 +70,34 @@ export class StoreBranchDto implements StoreBranch {
   @IsString()
   url: string;
 
-  @ApiProperty({ type: StoreBranchInfoDto })
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @ApiProperty({ type: StoreBranchImageDto, required: false })
+  @Type(() => StoreBranchImageDto)
+  @CustomValidator(StoreBranchImageDto)
+  @IsOptional()
+  @IsObject()
+  image: StoreBranchImageDto;
+
+  @ApiProperty({ type: StoreBranchAddressDto })
+  @Type(() => StoreBranchAddressDto)
+  @CustomValidator(StoreBranchAddressDto)
   @IsNotEmpty()
   @IsObject()
-  info: StoreBranchInfoDto;
+  address: StoreBranchAddressDto;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsBoolean()
+  isActive: boolean;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  image: string;
-
-  @ApiProperty({ type: StoreBranchAddressDto })
-  @IsNotEmpty()
-  @IsObject()
-  address: StoreBranchAddressDto;
+  inActiveReason: string;
 
   @ApiProperty({
     example: StoreBranchStatus.PENDING,

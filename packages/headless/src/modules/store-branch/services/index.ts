@@ -22,8 +22,10 @@ export class StoreBranchService {
   async createTmpStoreBranch(
     storeBranch: CreateStoreBranchRequest,
   ): Promise<CreateStoreBranchResponse> {
-    const Store: any = await this.storeBranchRepo.getStore(storeBranch.store);
-    const branchUrl = storeBranch.info.shopName
+    const Store: any = await this.storeBranchRepo.getStore({
+      id: storeBranch.store,
+    });
+    const branchUrl = storeBranch.name
       .trim()
       .toLocaleLowerCase()
       .replace(/\s+/g, '-')
@@ -49,6 +51,7 @@ export class StoreBranchService {
     const store = {
       ...rest,
       url,
+      status: 'PENDING',
       id: randomUUID(),
     };
     const branch = await this.storeBranchRepo.createTmpStoreBranch(store);

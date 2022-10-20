@@ -38,6 +38,10 @@ const BranchSchema = new Schema<Branch>(
             type: String,
             unique: true
         },
+        status: {
+            type: String,
+            enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
+    },
         address: BranchAddressSchema,
         isActive: {
             type: Boolean,
@@ -54,7 +58,6 @@ const BranchSchema = new Schema<Branch>(
         },
         description:{
             type: String,
-            default: ''
         },
         name: String
     },

@@ -7,6 +7,11 @@ export class BranchAddress{
     country: string;
 }
 
+export const enum BranchStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+}
 export class BranchPhoto{
     cover?: string;
     logo?: string;
@@ -24,6 +29,7 @@ export class Branch{
     isActive: boolean;
     inActiveReason?: InActiveReason;
     image?: BranchPhoto;
+    status: BranchStatus;
     description?: string;
     name: string;
 }

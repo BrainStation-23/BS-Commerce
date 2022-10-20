@@ -1,34 +1,25 @@
-export class StoreBranchAddress {
-  id?: string;
-  addressLine1: string;
-  addressLine2?: string;
-  city: string;
-  country: string;
-  postCode: string;
-}
+import { BranchAddress } from './branch';
 
 export const enum StoreBranchStatus {
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
   REJECTED = 'REJECTED',
 }
-export class StoreBranchInfo {
-  shopName: string;
-  legalName: string;
-}
 
 export class StoreBranchImage {
-  logo: string;
   cover: string;
+  logo: string;
 }
 
 export class StoreBranch {
   id?: string;
   store: string;
   url: string;
-  info: StoreBranchInfo;
-  image: string;
-  address: StoreBranchAddress;
+  name: string;
+  image?: StoreBranchImage;
+  address: BranchAddress;
+  isActive: boolean;
+  inActiveReason: string;
   status: StoreBranchStatus;
   description: string;
 }

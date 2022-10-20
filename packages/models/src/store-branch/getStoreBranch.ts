@@ -1,6 +1,10 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { StoreBranch } from "./storeBranch";
 
+
+export interface GetStoreBranchRequest {
+    branchId: string;
+}
 export interface GetStoreBranchSuccessResponse extends SuccessResponse {
     code: number;
     data: StoreBranch;

@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStoreBranchRequest } from 'models';
+import { Store } from 'src/entity/store';
 import { StoreBranch } from 'src/entity/store-branch';
 import { BranchModel } from '../branch/branch.model';
 import { StoreModel } from '../store/store.model';
-import { TmpStoreBranchModel } from './tempStoreBranch';
+import { TmpStoreBranchModel } from './tempStoreBranch.model';
 
 @Injectable()
 export class StoreBranchDatabase {
-  async getStore(storeId: string): Promise<string | null> {
-    return await StoreModel.findOne({ storeId }).select('url').lean();
+  async getStore(query: Record<string, any>): Promise<Store | null> {
+    return await StoreModel.findOne(query).select('url').lean();
   }
+
   async createTmpStoreBranch(
     storeBranch: CreateStoreBranchRequest,
   ): Promise<StoreBranch | null> {

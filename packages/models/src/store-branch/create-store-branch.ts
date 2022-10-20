@@ -1,12 +1,12 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
-import { StoreBranch, StoreBranchAddress, StoreBranchInfo } from "./storeBranch";
+import { StoreBranch, StoreBranchAddress, StoreBranchImage } from "./storeBranch";
 
 export interface CreateStoreBranchRequest {
     store: string;
-    info: StoreBranchInfo;
+    name: string;
+    image?: StoreBranchImage
     address: StoreBranchAddress;
     description: string;
-    image?: string;
 }
 
 export interface CreateStoreBranchSuccessResponse extends SuccessResponse {

@@ -21,13 +21,13 @@ export class GetAllStoreBranchQueryDto implements GetAllStoreBranchQuery {
   @Type(() => Number)
   @IsOptional()
   @IsNumber()
-  skip?: number;
+  skip: number;
 
   @ApiProperty({ required: false, type: Number })
   @Type(() => Number)
   @IsOptional()
   @IsNumber()
-  limit?: number;
+  limit: number;
 }
 
 export class GetAllStoreBranchSuccessResponseDto

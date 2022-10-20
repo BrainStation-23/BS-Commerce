@@ -1,5 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsNotEmpty,
@@ -10,11 +11,12 @@ import {
 import {
   GetStoreBranchErrorMessages,
   GetStoreBranchErrorResponse,
+  GetStoreBranchRequest,
   GetStoreBranchSuccessResponse,
 } from 'models';
 import { StoreBranchDto } from './storeBranch.dto';
 
-export class GetStoreBranchRequestDto {
+export class GetStoreBranchRequestDto implements GetStoreBranchRequest {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
@@ -29,6 +31,7 @@ export class GetStoreBranchSuccessResponseDto
   code: number;
 
   @ApiProperty({ type: StoreBranchDto })
+  @Type(() => StoreBranchDto)
   @IsObject()
   data: StoreBranchDto;
 }
