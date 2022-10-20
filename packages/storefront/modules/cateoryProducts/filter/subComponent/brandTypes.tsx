@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 
-import CounterElement from '@/modules/deals/filter/subComponent/counterElement';
+import CounterElement from '@/modules/cateoryProducts/filter/subComponent/counterElement';
 import radio from 'styles/radioButton.module.css';
 import { userAPI } from 'APIs';
 import { GetServerSideProps } from 'next/types';

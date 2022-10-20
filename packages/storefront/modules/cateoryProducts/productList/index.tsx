@@ -2,9 +2,7 @@ import { FC } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
 import VerticalProduct from '@/modules/global/components/product/verticalProduct';
 
-const CategoryProductSegment: FC<{ products: CustomerProduct[] }> = ({
-  products,
-}) => {
+const ProductList: FC<{ products: CustomerProduct[] }> = ({ products }) => {
   return (
     <>
       {/* {console.log(currentPage)} */}
@@ -25,4 +23,4 @@ const CategoryProductSegment: FC<{ products: CustomerProduct[] }> = ({
   );
 };
 
-export default CategoryProductSegment;
+export default ProductList;
