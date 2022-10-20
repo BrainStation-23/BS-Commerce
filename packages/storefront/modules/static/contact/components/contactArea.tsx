@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { Input } from '@/modules/global/components/input';
-import { Textarea } from '@/modules/global/components/textarea';
+import { Input } from '@/modules/common/input';
+import Textarea from '@/modules/common/textarea';
 import Container from '@/modules/global/components/container';
 import useTranslation from 'next-translate/useTranslation';
 

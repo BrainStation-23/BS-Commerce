@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface TextareaProps {
+interface TextareaProps {
   label: string;
   value: string | number;
   name: string;
@@ -10,7 +10,7 @@ export interface TextareaProps {
   onChangeHandler?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export const Textarea: React.FC<TextareaProps> = ({
+const Textarea: React.FC<TextareaProps> = ({
   label,
   value,
   name,
@@ -33,3 +33,5 @@ export const Textarea: React.FC<TextareaProps> = ({
     </div>
   );
 };
+
+export default Textarea;
