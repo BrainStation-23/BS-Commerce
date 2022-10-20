@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import PriceFilter from '@/modules/cateoryProducts/filter/subComponent/priceFilter';
-import AvaialabilityOptions from '@/modules/cateoryProducts/filter/subComponent/availability';
-import ProductTypeOptions from '@/modules/cateoryProducts/filter/subComponent/productTypes';
-import BrandTypeOptions from '@/modules/cateoryProducts/filter/subComponent/brandTypes';
-import ColourTypeOptions from '@/modules/cateoryProducts/filter/subComponent/colorAvailibility';
+import PriceFilter from '@/modules/cateoryProducts/components/filter/component/priceFilter';
+import AvaialabilityOptions from '@/modules/cateoryProducts/components/filter/component/availability';
+import ProductTypeOptions from '@/modules/cateoryProducts/components/filter/component/productTypes';
+import BrandTypeOptions from '@/modules/cateoryProducts/components/filter/component/brandTypes';
+import ColourTypeOptions from '@/modules/cateoryProducts/components/filter/component/colorAvailibility';
 import useTranslation from 'next-translate/useTranslation';
 
 const CategoryFilter: FC = () => {

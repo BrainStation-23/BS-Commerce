@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import ProductSort from '@/modules/cateoryProducts/sort/index';
-import CategoryFilter from '@/modules/cateoryProducts/filter';
+import ProductSort from '@/modules/cateoryProducts/components/sort/index';
+import CategoryFilter from '@/modules/cateoryProducts/components/filter';
 import CategoryBreadcrumb from '@/modules/common/breadcrumbs/categoryBreadcrumb';
-import ProductList from '@/modules/cateoryProducts/productList';
+import ProductList from '@/modules/cateoryProducts/components/productList';
 import { CustomerProduct } from '@bs-commerce/models';
 import { Pagination } from '@/modules/global/components/pagination';
 import { useRouter } from 'next/router';

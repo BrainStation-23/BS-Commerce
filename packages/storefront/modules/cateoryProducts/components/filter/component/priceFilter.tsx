@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import CounterElement from '@/modules/cateoryProducts/filter/subComponent/counterElement';
+import CounterElement from '@/modules/cateoryProducts/components/filter/component/counterElement';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
