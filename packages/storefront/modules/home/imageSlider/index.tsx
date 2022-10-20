@@ -9,7 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { slideDetailsInterface } from '@/modules/home/imageSlider/models';
 
 import SinglSlide from '@/modules/home/imageSlider/singleSlide.component';
-import CarouselSlider from '@/modules/global/components/carouselSliderComponent';
+import CarouselSlider from '@/modules/common/sliders/carouselSliderComponent';
 
 const ImageSlider = () => {
   const { t } = useTranslation();

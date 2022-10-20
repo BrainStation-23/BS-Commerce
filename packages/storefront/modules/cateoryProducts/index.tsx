@@ -4,7 +4,7 @@ import CategoryFilter from '@/modules/cateoryProducts/components/filter';
 import CategoryBreadcrumb from '@/modules/common/breadcrumbs/categoryBreadcrumb';
 import ProductList from '@/modules/cateoryProducts/components/productList';
 import { CustomerProduct } from '@bs-commerce/models';
-import { Pagination } from '@/modules/global/components/pagination';
+import { Pagination } from '@/modules/common/pagination';
 import { useRouter } from 'next/router';
 
 interface CategoryNameIdProp {
@@ -56,7 +56,7 @@ const CategoryPageComponent: FC<props> = (props: props) => {
           Math.ceil(parseInt(router?.query?.skip as string) / limit) + 1
         )
       : setCurrentPage(1);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router?.query]);
 
   return (

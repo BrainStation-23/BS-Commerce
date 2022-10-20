@@ -3,7 +3,7 @@ import type { NextComponentType } from 'next';
 import SearchItems from '@/modules/search/components/searchItem';
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { useEffect, useState } from 'react';
-import { Pagination } from '../global/components/pagination';
+import { Pagination } from '../common/pagination';
 import useTranslation from 'next-translate/useTranslation';
 
 const SearchComponent: NextComponentType = () => {

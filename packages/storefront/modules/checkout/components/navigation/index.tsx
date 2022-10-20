@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-interface Path {
+interface Props {
   cart: boolean;
   info: boolean;
   shipping: boolean;
@@ -10,7 +10,7 @@ interface Path {
   setModal: Function;
 }
 
-const Path: React.FC<Path> = (props: Path) => {
+const CheckoutPageNavigation: React.FC<Props> = (props) => {
   const { cart, info, shipping, payment, setModal } = props;
   const { t } = useTranslation();
   return (
@@ -80,4 +80,4 @@ const Path: React.FC<Path> = (props: Path) => {
   );
 };
 
-export default Path;
+export default CheckoutPageNavigation;

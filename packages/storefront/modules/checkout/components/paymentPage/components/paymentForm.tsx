@@ -1,7 +1,7 @@
 import CheckoutFooter from '@/modules/checkout/components/checkoutFooter';
-import ContactDetails from '@/modules/checkout/components/paymentPage/subsections/contactDetails';
-import PaymentDetails from '@/modules/checkout/components/paymentPage/subsections/paymentDetails';
-import PromotionalCodeField from '@/modules/global/components/promotionalCodeField';
+import ContactDetails from '@/modules/checkout/components/paymentPage/components/contactDetails';
+import PaymentDetails from '@/modules/checkout/components/paymentPage/components/paymentDetails';
+import PromotionalCodeField from '@/modules/checkout/components/paymentPage/components/promotionalCodeField';
 import useTranslation from 'next-translate/useTranslation';
 interface Props {
   setModal: Function;

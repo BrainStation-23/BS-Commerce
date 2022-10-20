@@ -1,4 +1,4 @@
-import Path from '@/modules/global/components/path';
+import CheckoutPageNavigation from '@/modules/checkout/components/navigation';
 import OrderList from '../orderList';
 import InformationForm from './informationForm';
 import CheckoutFooter from '../checkoutFooter';
@@ -19,7 +19,7 @@ const CheckoutInformationComponent: React.FC<Props> = ({ setModal }: Props) => {
     <>
       <div className="row">
         <div className="hidden lg:mx-28 lg:mt-10 lg:block xl:mx-28 xl:mt-10 xl:block">
-          <Path
+          <CheckoutPageNavigation
             cart={path.cart}
             info={path.info}
             shipping={path.shipping}
@@ -36,7 +36,7 @@ const CheckoutInformationComponent: React.FC<Props> = ({ setModal }: Props) => {
             </div>
           </div>
           <div className="mx-5 block md:mx-28 lg:hidden">
-            <Path
+            <CheckoutPageNavigation
               cart={path.cart}
               info={path.info}
               shipping={path.shipping}

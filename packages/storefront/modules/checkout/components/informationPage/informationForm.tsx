@@ -11,7 +11,7 @@ import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { informationSchema } from '@/modules/checkout/components/schemas/checkout.schema';
 import ChevronLeft from '@/modules/common/icons/chevronLeft';
-import FieldTemplate from '../formInput/fieldTemplate';
+import FieldTemplate from '../common/formInput/fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -367,7 +367,7 @@ const InformationForm: React.FC<Props> = ({ setModal }: Props) => {
                     <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       <Link href="/cart" passHref>
                         <a className="text-decoration-none">
-                          {<ChevronLeft height='h-5' width='h-5' />}
+                          {<ChevronLeft height="h-5" width="h-5" />}
                         </a>
                       </Link>
                     </div>

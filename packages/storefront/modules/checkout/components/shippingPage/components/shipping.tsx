@@ -1,6 +1,6 @@
 import React from 'react';
 import ChevronLeft from '@/modules/common/icons/chevronLeft';
-import CheckoutFooter from '../checkoutFooter';
+import CheckoutFooter from '../../checkoutFooter';
 import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
 

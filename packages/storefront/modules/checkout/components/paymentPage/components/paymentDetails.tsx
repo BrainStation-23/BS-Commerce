@@ -11,7 +11,7 @@ import {
 
 import { userAPI } from 'APIs';
 import { deleteCart } from 'store/slices/cartSlice';
-import FieldTemplate from '@/modules/checkout/components/formInput/fieldTemplate';
+import FieldTemplate from '@/modules/checkout/components/common/formInput/fieldTemplate';
 import { paymentSchema } from '@/modules/checkout/components/schemas/checkout.schema';
 import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import {
