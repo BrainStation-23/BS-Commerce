@@ -36,18 +36,22 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
           <div className="ml-1 grid w-max grid-cols-2 text-xs sm:flex-row sm:text-xs">
             <div className="pb-2 pr-2 sm:pb-0 ">
               <Link href="/cart" passHref>
-                <ButtonType1
-                  className="rounded uppercase"
-                  text={t('common:view_cart')}
-                />
+                <a>
+                  <ButtonType1
+                    className="rounded uppercase"
+                    text={t('common:view_cart')}
+                  />
+                </a>
               </Link>
             </div>
             <div>
               <Link href="/checkout" passHref>
-                <ButtonType1
-                  className="rounded uppercase"
-                  text={t('common:checkout')}
-                />
+                <a>
+                  <ButtonType1
+                    className="rounded uppercase"
+                    text={t('common:checkout')}
+                  />
+                </a>
               </Link>
             </div>
           </div>

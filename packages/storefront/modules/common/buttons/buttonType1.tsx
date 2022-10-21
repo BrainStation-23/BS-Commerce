@@ -13,15 +13,26 @@ const ButtonType1: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <button
-      className={`p-2 w-full bg-slate-300 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
-      onClick={() => {
-        onClickFunction && onClickFunction();
-      }}
-      disabled={disabled}
-    >
-      {text}
-    </button>
+    <>
+      {onClickFunction ? (
+        <button
+          className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
+          onClick={() => {
+            onClickFunction && onClickFunction();
+          }}
+          disabled={disabled}
+        >
+          {text}
+        </button>
+      ) : (
+        <button
+          className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
+          disabled={disabled}
+        >
+          {text}
+        </button>
+      )}
+    </>
   );
 };
 
