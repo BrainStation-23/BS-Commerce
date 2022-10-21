@@ -63,7 +63,7 @@ export class OrderReviewService {
     }
 
     async getProductReview(productId: string): Promise<ProductReviewResponseDto>{
-        const reviews = await this.orderRepository.findReview({ productId });
+        const reviews = await this.orderRepository.findReviewByProductId({ productId });
 
         if(!reviews)
             return {
@@ -72,14 +72,9 @@ export class OrderReviewService {
                 code: HttpStatus.INTERNAL_SERVER_ERROR
             };
 
-        const productReview = reviews.map(review => {
-            if(review && review.productId) delete review.productId;
-                return review;
-        });
-
         const response: ProductReviewListEntity = {
             productId,
-            reviews: productReview
+            reviews
         }
 
         return { code: 200, data: response };
