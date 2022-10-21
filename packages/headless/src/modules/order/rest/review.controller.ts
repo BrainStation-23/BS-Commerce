@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { OrderReviewService } from "../services/review.service";
 import { CreateReviewDto } from "./dto/create.review.dto";
@@ -15,6 +15,17 @@ export class OrderReviewController {
         @Res({ passthrough: true }) res: Response,
     ){
         const {code, ...response} = await this.orderReviewService.createReview(body);
+
+        res.status(code);
+        return response;
+    }
+
+    @Get('/:productId')
+    async getProductReview(
+        @Param('productId') productId: string,
+        @Res({ passthrough: true }) res: Response,
+    ){
+        const { code, ...response} = await this.orderReviewService.getProductReview(productId);
 
         res.status(code);
         return response;

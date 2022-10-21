@@ -1,6 +1,8 @@
-import { CreateReviewErrorMessage, CreateReviewResponse, ICreateReview } from 'models';
+import { ProductReviewResponseDto } from './../rest/dto/product.review.dto';
+import { CreateReviewErrorMessage, CreateReviewResponse, ICreateReview, IProductReviewList, ProductReviewErrorMessage } from 'models';
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { OrderRepository } from "../repositories";
+import { ProductReviewListEntity } from 'src/entity/review';
 
 @Injectable()
 export class OrderReviewService {
@@ -58,5 +60,28 @@ export class OrderReviewService {
             };
 
         return { code: 200, data: review };
+    }
+
+    async getProductReview(productId: string): Promise<ProductReviewResponseDto>{
+        const reviews = await this.orderRepository.findReview({ productId });
+
+        if(!reviews)
+            return {
+                error: ProductReviewErrorMessage.CANNOT_FIND_REVIEW,
+                errors: null,
+                code: HttpStatus.INTERNAL_SERVER_ERROR
+            };
+
+        const productReview = reviews.map(review => {
+            if(review && review.productId) delete review.productId;
+                return review;
+        });
+
+        const response: ProductReviewListEntity = {
+            productId,
+            reviews: productReview
+        }
+
+        return { code: 200, data: response };
     }
 }

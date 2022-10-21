@@ -24,3 +24,17 @@ export enum Commenters{
     STORE_ADMIN = 'STORE_ADMIN',
     BRANCH_MANAGER = 'BRANCH_MANAGER'
 }
+
+export class ProductReview{
+    id: string;
+    orderId: string;
+    text: string;
+    image: ReviewPhoto[];
+    userId?: string;
+    reply: Comment;
+    rating: number;
+}
+export class ProductReviewListEntity{
+    productId: string;
+    reviews: ProductReview[];
+}
