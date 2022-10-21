@@ -8,7 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from 'store/store';
 import { config } from 'config';
 
-import Layout from 'modules/layout';
+import Layout from '@/modules/common/layout';
 import BackToTopButton from '@/modules/common/layout/backToTopButton';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';

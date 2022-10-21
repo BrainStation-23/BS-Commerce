@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Footer from '@/modules/common/layout/footer';
 import Header from '@/modules/common/layout/header';
-import Viewport from '@/modules/viewport';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -17,7 +16,8 @@ import {
 } from 'store/slices/modalSlice';
 import ModalLogin from '@/modules/common/modal/modal';
 import ComparisonModal from '@/modules/comparison';
-import XCircleIcon from './common/icons/xCircleIcon';
+import XCircleIcon from '@/modules/common/icons/xCircleIcon';
+import Viewport from '@/modules/common/layout/viewport';
 
 interface LayoutProps {
   children: React.ReactNode;

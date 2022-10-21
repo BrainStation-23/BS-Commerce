@@ -412,8 +412,6 @@ export async function getOrderProductStatic(
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res?.data);
-
     return res?.data.data[0];
   } catch (error: any) {
     return [] as any;
