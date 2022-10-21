@@ -9,7 +9,7 @@ import { persistor, store } from 'store/store';
 import { config } from 'config';
 
 import Layout from 'modules/layout';
-import BackToTopButton from './BackToTopButton';
+import BackToTopButton from '@/modules/common/layout/backToTopButton';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 
