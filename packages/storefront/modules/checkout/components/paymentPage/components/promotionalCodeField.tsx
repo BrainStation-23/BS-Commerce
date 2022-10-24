@@ -1,3 +1,4 @@
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -16,7 +17,6 @@ const PromotionalCodeField: React.FC<Properties> = (props) => {
   return (
     <>
       <p className="mt-5 text-lg">{t('checkout:promotion')}</p>
-      {/* <p className="pb-2 text-sm text-gray-500">Enter promotion code.</p> */}
       <div
         className={`mt-3 flex h-12 w-full flex-row items-center justify-between rounded border border-slate-200 text-sm`}
       >
@@ -28,16 +28,15 @@ const PromotionalCodeField: React.FC<Properties> = (props) => {
           id="promoCode"
         />
         <div className="flex h-12 w-20 cursor-pointer justify-center rounded-r bg-primary text-white transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:bg-dark_primary">
-          <button
+          <ButtonType1
             type="submit"
             id="submitPromoCode"
             className=""
-            onClick={() => {
+            onClickFunction={() => {
               submitPromoCodeOnClick();
             }}
-          >
-            {t('checkout:apply')}
-          </button>
+            text={t('checkout:apply')}
+          />
         </div>
       </div>
     </>

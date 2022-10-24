@@ -9,6 +9,8 @@ import AddressForm from '@/modules/myAccount/addresses/components/addressForm';
 import { useAppSelector } from 'store/hooks/index';
 import SingleAddress from '@/modules/myAccount/addresses/components/singleAddress';
 import WithAuth from '@/modules/auth/withAuth';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonType2 from '@/modules/common/buttons/buttonType2';
 
 const AddressesComponent: NextComponentType = () => {
   const { t } = useTranslation();
@@ -40,17 +42,14 @@ const AddressesComponent: NextComponentType = () => {
       <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-dark_text">
         <div className="mb-3 flex flex-wrap justify-between">
           <div className="text-3xl font-bold">{t('common:my_account')}</div>
-          {/* <Link href="/myAccount/form" passHref> */}
           <div className="mt-2 text-xl md:mt-0">
-            <button
-              className="rounded bg-primary py-2 px-4 text-sm text-white hover:bg-black focus:outline-none dark:bg-dark_primary dark:hover:border"
+            <ButtonType2
               type="button"
-              onClick={() => addButtonOnClick()}
-            >
-              {t('common:add')} +
-            </button>
+              onClickFunction={() => addButtonOnClick()}
+              className="py-2 px-9 text-sm"
+              text={t('common:add') + ' +'}
+            />
           </div>
-          {/* </Link> */}
         </div>
         <hr />
         <div className="mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">

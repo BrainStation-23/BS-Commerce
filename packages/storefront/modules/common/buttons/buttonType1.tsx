@@ -5,6 +5,7 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
+  id?: string;
 }
 
 const ButtonType1: React.FC<Props> = ({
@@ -13,11 +14,13 @@ const ButtonType1: React.FC<Props> = ({
   disabled,
   className,
   type,
+  id,
 }) => {
   return (
     <>
       {onClickFunction ? (
         <button
+          id={id}
           className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
           onClick={() => {
             onClickFunction && onClickFunction();
@@ -29,6 +32,7 @@ const ButtonType1: React.FC<Props> = ({
         </button>
       ) : (
         <button
+          id={id}
           className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
           disabled={disabled}
           type={`${type ? type : 'button'}`}

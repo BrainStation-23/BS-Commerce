@@ -20,18 +20,16 @@ const Shipping: React.FC<Props> = (props: Props) => {
   const { setModal } = props;
 
   return (
-    <div className="w-full sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
+    <div className="w-full text-gray-900 dark:text-dark_text sm:w-full md:w-full lg:w-3/5 xl:w-3/5">
       <div className="m-0 px-3.5 md:mx-20 lg:mx-20 lg:my-12 xl:mx-20">
         <div className="mx-auto mt-5 box-border divide-y-2 rounded-md border-2 p-4 text-center">
           <div className="flex items-center justify-between p-4">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333] dark:text-dark_text">
-                {t('checkout:contact')}
-              </p>
+              <p className="text-sm">{t('checkout:contact')}</p>
               <p className="text-sm">{shippingInfo?.phoneNumber}</p>
             </div>
-            <button
-              onClick={() => {
+            <TextButton
+              onClickFunction={() => {
                 const obj = {
                   info: true,
                   ship: false,
@@ -40,21 +38,17 @@ const Shipping: React.FC<Props> = (props: Props) => {
                 setModal(obj);
               }}
               className="ml-10 text-sm"
-              style={{ border: 'none' }}
-            >
-              {t('checkout:change')}
-            </button>
+              text={t('checkout:change')}
+            />
           </div>
 
-          <div className="flex items-center justify-between p-4">
+          <div className="flex items-center justify-between p-4 ">
             <div className="flex flex-wrap gap-4">
-              <p className="text-sm text-[#333333] dark:text-dark_text">
-                {t('checkout:ship_to')}
-              </p>
+              <p className="text-sm">{t('checkout:ship_to')}</p>
               <p className="text-sm">{shippingInfo?.addressLine1}</p>
             </div>
-            <button
-              onClick={() => {
+            <TextButton
+              onClickFunction={() => {
                 const obj = {
                   info: true,
                   ship: false,
@@ -63,10 +57,8 @@ const Shipping: React.FC<Props> = (props: Props) => {
                 setModal(obj);
               }}
               className="ml-10 text-sm"
-              style={{ border: 'none' }}
-            >
-              {t('checkout:change')}
-            </button>
+              text={t('checkout:change')}
+            />
           </div>
         </div>
 
@@ -74,7 +66,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
           {t('checkout:shipping_method')}
         </p>
 
-        <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-[#333333] hover:bg-white dark:text-dark_text dark:hover:text-black">
+        <div className="my-3 box-border flex cursor-pointer flex-wrap justify-between rounded-md border-2 p-5 text-sm text-gray-900 hover:bg-white hover:bg-white dark:text-dark_text dark:hover:text-black">
           <p>{t('checkout:standard')}</p>
           <p className="ml-5 font-medium">{t('checkout:free')}</p>
         </div>

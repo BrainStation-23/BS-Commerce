@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import TextButton from '@/modules/common/buttons/textButton';
 
 interface Props {
   cart: boolean;
@@ -24,8 +25,8 @@ const CheckoutPageNavigation: React.FC<Props> = (props) => {
       </div>
       {' > '}
       <div>
-        <button
-          onClick={() => {
+        <TextButton
+          onClickFunction={() => {
             const obj = {
               info: true,
               ship: false,
@@ -33,17 +34,15 @@ const CheckoutPageNavigation: React.FC<Props> = (props) => {
             };
             setModal(obj);
           }}
-          style={{ border: 'none' }}
-          className={info ? 'font-bold' : 'font-normal'}
-          disabled
-        >
-          {t('checkout:information')}
-        </button>
+          text={t('checkout:information')}
+          className={`mt-0 ${info ? 'font-bold' : 'font-normal'}`}
+          disabled={true}
+        />
       </div>
       {' > '}
       <div>
-        <button
-          onClick={() => {
+        <TextButton
+          onClickFunction={() => {
             const obj = {
               info: false,
               ship: true,
@@ -51,17 +50,15 @@ const CheckoutPageNavigation: React.FC<Props> = (props) => {
             };
             setModal(obj);
           }}
-          className={shipping ? 'font-bold' : 'font-normal'}
-          style={{ border: 'none' }}
-          disabled
-        >
-          {t('checkout:shipping')}
-        </button>
+          text={t('checkout:shipping')}
+          className={`mt-0 ${shipping ? 'font-bold' : 'font-normal'}`}
+          disabled={true}
+        />
       </div>
       {' > '}
       <div>
-        <button
-          onClick={() => {
+        <TextButton
+          onClickFunction={() => {
             const obj = {
               info: false,
               ship: false,
@@ -69,12 +66,10 @@ const CheckoutPageNavigation: React.FC<Props> = (props) => {
             };
             setModal(obj);
           }}
-          style={{ border: 'none' }}
-          className={payment ? 'font-bold' : 'font-normal'}
-          disabled
-        >
-          {t('checkout:payment')}
-        </button>
+          text={t('checkout:payment')}
+          className={`mt-0 ${payment ? 'font-bold' : 'font-normal'}`}
+          disabled={true}
+        />
       </div>
     </div>
   );
