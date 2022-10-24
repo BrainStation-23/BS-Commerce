@@ -18,7 +18,7 @@ import {
   CartResponse,
   Cart,
 } from 'src/entity/order';
-import { ProductReview, Review } from 'src/entity/review';
+import { Review } from 'src/entity/review';
 import { IOrderDatabase } from './order.db.interface';
 
 @Injectable()
@@ -122,9 +122,5 @@ export class OrderRepository {
 
   async findReview(query: Record<string,any>): Promise<Review[] | null>{
     return await this.db.findReview(query);
-  }
-
-  async findReviewByProductId(query: Record<string,any>): Promise<ProductReview[] | null>{
-    return await this.db.findReviewByProductId(query);
   }
 }
