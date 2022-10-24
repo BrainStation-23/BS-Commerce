@@ -123,4 +123,8 @@ export class OrderRepository {
   async findReview(query: Record<string,any>): Promise<Review[] | null>{
     return await this.db.findReview(query);
   }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean>{
+    return await this.db.addProductRating(productId, rating);
+  }
 }

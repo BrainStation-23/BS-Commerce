@@ -98,36 +98,13 @@ const ProductSchema = new Schema<Product>(
       },
     ],
     rating: {
-      one:{
-        count: Number,
-        average: Number,
-        required: false
-      },
-      two:{
-        count: Number,
-        average: Number,
-        required: false
-      },
-      three:{
-        count: Number,
-        average: Number,
-        required: false
-      },
-      four:{
-        count: Number,
-        average: Number,
-        required: false
-      },
-      five:{
-        count: Number,
-        average: Number,
-        required: false
-      },
-      average: {
-        type: Number,
-        required: false
-      }
-    }
+      1: Number,
+      2: Number,
+      3: Number,
+      4: Number,
+      5: Number,
+    },
+    avgRating: Number
   },
   {
     timestamps: true,

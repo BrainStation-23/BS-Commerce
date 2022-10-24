@@ -12,7 +12,8 @@ export class OrderReviewService {
         const { orderId, productId, image, rating } = request;
 
         const reviewExists = await this.orderRepository.findReview({orderId, productId});
-        if(reviewExists.length === 0)
+
+        if(reviewExists.length !== 0)
             return {
                 error: CreateReviewErrorMessage.ALREADY_REVIEWED_ONCE,
                 errors: null,
@@ -43,6 +44,12 @@ export class OrderReviewService {
         //if rating has then proceed to add it to product
         if(rating){
             const productRating = await this.orderRepository.addProductRating(productId, rating);
+            if(!productRating)
+                return {
+                    error: CreateReviewErrorMessage.CANNOT_ADD_RATING,
+                    errors: null,
+                    code: HttpStatus.BAD_REQUEST
+                };
         }
         //check if images are not more than 5
         //if greater send error

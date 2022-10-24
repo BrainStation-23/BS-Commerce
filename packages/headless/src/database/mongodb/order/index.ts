@@ -287,21 +287,62 @@ export class OrderDatabase implements IOrderDatabase {
       .lean();
   }
 
-  async createReview(review: any): Promise<Review | null>{
-    try{
+  async createReview(review: any): Promise<Review | null> {
+    try {
       return await ReviewModel.create(review);
-    }catch (err) {
+    } catch (err) {
       console.log(err);
       return null;
     }
   }
 
-  async findReview(query: Record<string,any>): Promise<Review[] | null>{
-    try{
+  async findReview(query: Record<string, any>): Promise<Review[] | null> {
+    try {
       return await ReviewModel.find(query).lean().exec();
-    }catch (err) {
+    } catch (err) {
       console.log(err);
       return null;
+    }
+  }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean> {
+    try {
+      const product = await ProductModel.findOne({ id: productId })
+        .lean()
+        .exec();
+      if (!product) return false;
+
+      let ratingObj = product.rating || {};
+      if(Object.keys(ratingObj).length === 0) ratingObj[`${rating}`] = 1;
+      else{
+        for (let i in ratingObj) {
+          if (parseInt(i) === rating) ratingObj[i]++;
+          else ratingObj[`${rating}`] = 1;
+        }
+      }
+
+      let noOfRatings = 0, sum = 0;
+      for (const key in ratingObj) {
+        noOfRatings = noOfRatings + ratingObj[key];
+        sum = sum + (parseInt(key) * ratingObj[key]);
+      }
+
+      const avgRating = Math.round(sum / noOfRatings);
+      const newProduct = { ...product, rating: ratingObj, avgRating };
+
+      const response = await ProductModel.findOneAndUpdate(
+        { id: productId },
+        newProduct,
+        { new: true },
+      )
+        .select('-_id')
+        .lean()
+        .exec();
+
+      return response ? true : false;
+    }catch (err) {
+      console.log(err);
+      return false;
     }
   }
 }

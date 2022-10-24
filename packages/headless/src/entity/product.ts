@@ -16,12 +16,11 @@ export class RatingInfo{
   average: number;
 }
 export class ProductRating{
-  one?: RatingInfo;
-  two?: RatingInfo;
-  three?: RatingInfo;
-  four?: RatingInfo;
-  five?: RatingInfo;
-  average?: number;
+  1?: number;
+  2?: number;
+  3?: number;
+  4?: number;
+  5?: number;
 }
 
 export class Product {
@@ -56,7 +55,8 @@ export class Product {
     name: string;
   };
   categories: ProductCategory[];
-  rating?: ProductRating
+  rating?: ProductRating;
+  avgRating?: number;
 }
 
 export class UpdateCategory {

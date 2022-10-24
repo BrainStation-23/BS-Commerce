@@ -56,6 +56,8 @@ export class CreateReviewErrorResponseDto implements CreateReviewErrorResponse {
     | CreateReviewErrorMessage.CANNOT_UPLOAD_MORE_THAN_5_PHOTOS
     | CreateReviewErrorMessage.CANNOT_REPLY
     | CreateReviewErrorMessage.ALREADY_REVIEWED_ONCE
+    | CreateReviewErrorMessage.RATING_RANGE_ERROR
+    | CreateReviewErrorMessage.CANNOT_ADD_RATING
 
   @ApiProperty()
   errors: string[];
