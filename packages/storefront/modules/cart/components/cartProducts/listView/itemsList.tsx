@@ -6,9 +6,12 @@ import SingleItem from '@/modules/cart/components/cartProducts/listView/singleIt
 import { deleteCart } from 'store/slices/cartSlice';
 import { userAPI } from 'APIs';
 import Link from 'next/link';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import { useRouter } from 'next/router';
 
 const ItemsList: NextComponentType = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { t } = useTranslation();
   const cartData = useAppSelector(
     (state) => state.persistedReducer.cart.allCartItems
@@ -18,7 +21,6 @@ const ItemsList: NextComponentType = () => {
   }, 0);
   const [total, setTotal] = useState(totalCartPrice);
 
-  
   const handleDeleteAllCartItem = async () => {
     await userAPI.deleteAllCartItem();
     dispatch(deleteCart());
@@ -49,23 +51,23 @@ const ItemsList: NextComponentType = () => {
         </div>
       </div>
       <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
-          {cartData?.length > 0 && (
-            <Link href="/" passHref>
-              <button className="w-full bg-black py-2 text-sm text-white hover:bg-primary dark:hover:bg-dark_primary">
-                {t('common:continue_shopping').toUpperCase()}
-              </button>
-            </Link>
-          )}
-
-          {cartData?.length > 0 && (
-            <button
-              className="w-full bg-black py-2 text-sm text-white hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
-              onClick={handleDeleteAllCartItem}
-            >
-             {t('cart:clear_cart').toUpperCase()}
-            </button>
-          )}
-        </div>
+        {cartData?.length > 0 && (
+          <ButtonType1
+            onClickFunction={() => {
+              router.push('/');
+            }}
+            className="text-sm "
+            text={t('common:continue_shopping').toUpperCase()}
+          />
+        )}
+        {cartData?.length > 0 && (
+          <ButtonType1
+            onClickFunction={handleDeleteAllCartItem}
+            className="text-sm"
+            text={t('cart:clear_cart').toUpperCase()}
+          />
+        )}
+      </div>
     </>
   );
 };

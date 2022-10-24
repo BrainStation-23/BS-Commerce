@@ -7,6 +7,7 @@ import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'store/hooks/index';
 import Modal from '@/modules/common/modal/modal';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
 
 const CartTotal: NextComponentType = () => {
   const router = useRouter();
@@ -95,17 +96,11 @@ const CartTotal: NextComponentType = () => {
             </table>
           </div>
           <div className="flex justify-end px-2 pb-4">
-            <button
-              onClick={handleClickProceed}
-              style={{
-                color: 'white',
-                height: '39px',
-                width: '200px',
-              }}
-              className="bg-black text-xs hover:bg-primary dark:bg-dark_primary dark:hover:border dark:hover:bg-black"
-            >
-              {t('cart:proceed_to_checkout').toUpperCase()}
-            </button>
+            <ButtonType1
+              onClickFunction={handleClickProceed}
+              text={t('cart:proceed_to_checkout').toUpperCase()}
+              className='w-[200px] text-xs'
+            />
           </div>
         </div>
       </div>

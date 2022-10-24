@@ -2,6 +2,8 @@ import { FC } from 'react';
 import CounterElement from '@/modules/cateoryProducts/components/filter/component/counterElement';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonType2 from '@/modules/common/buttons/buttonType2';
 
 const PriceFilter: FC = () => {
   const router = useRouter();
@@ -76,12 +78,12 @@ const PriceFilter: FC = () => {
         </div>
         <div className="p-2">
           {/* temporaty button here */}
-          <button
-            onClick={() => onClickFilter()}
-            className="rounded bg-primary py-2 px-6 font-semibold text-white hover:bg-black dark:bg-dark_primary"
-          >
-            {t('collections:filter')}
-          </button>
+
+          <ButtonType2
+            onClickFunction={() => onClickFilter()}
+            className="py-2 px-9 font-semibold"
+            text={t('collections:filter')}
+          />
         </div>
       </div>
     </>

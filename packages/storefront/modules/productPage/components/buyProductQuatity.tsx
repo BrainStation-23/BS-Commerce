@@ -48,9 +48,14 @@ const BuyProductQuantity: React.FC<Props> = ({
         <ButtonType2
           onClickFunction={toCart}
           text={t('product-details:add_to_cart')}
+          className="sm:px-12 lg:px-16"
         />
       ) : (
-        <ButtonType2 disabled={true} text={'Soldout'} />
+        <ButtonType2
+          className="sm:px-12 lg:px-16"
+          disabled={true}
+          text={'Soldout'}
+        />
       )}
     </div>
   );

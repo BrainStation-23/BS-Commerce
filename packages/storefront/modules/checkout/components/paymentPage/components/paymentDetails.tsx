@@ -19,6 +19,7 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
 
 interface FormData {
   cardNumber: string;
@@ -517,15 +518,11 @@ const PaymentDetails: NextComponentType = () => {
                   </div>
                 </div> */}
                 <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
-                  {/* <Link href="/submit" passHref> */}
-                  <button
+                  <ButtonType1
                     type="submit"
-                    className="w-full rounded bg-black p-3 text-sm text-white dark:bg-dark_primary sm:w-full md:w-24"
-                  >
-                    {t('checkout:pay_now')}
-                  </button>
-                  {/* </Link> */}
-
+                    className="rounded sm:w-full md:w-24"
+                    text={t('checkout:pay_now')}
+                  />
                   <div className="flex flex-wrap items-center">
                     <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       {/* need to change the link */}

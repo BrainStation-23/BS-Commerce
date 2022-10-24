@@ -14,6 +14,7 @@ import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import FieldTemplate from '../common/formInput/fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
 
 interface FormData {
   email: string;
@@ -357,12 +358,11 @@ const InformationForm: React.FC<Props> = ({ setModal }: Props) => {
                 )}
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row">
-                  <button
+                  <ButtonType1
                     type="submit"
-                    className="my-2 w-full rounded bg-black p-3 text-sm text-white dark:bg-dark_primary sm:w-full md:w-44"
-                  >
-                    {t('checkout:continue_to_shipping')}
-                  </button>
+                    className="rounded sm:w-full md:w-48"
+                    text={t('checkout:continue_to_shipping')}
+                  />
                   <div className="flex flex-wrap items-center">
                     <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
                       <Link href="/cart" passHref>

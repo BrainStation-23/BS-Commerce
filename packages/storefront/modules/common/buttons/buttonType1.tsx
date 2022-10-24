@@ -2,6 +2,7 @@ import React from 'react';
 interface Props {
   onClickFunction?: Function;
   text?: string;
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
 }
@@ -11,6 +12,7 @@ const ButtonType1: React.FC<Props> = ({
   text,
   disabled,
   className,
+  type,
 }) => {
   return (
     <>
@@ -21,6 +23,7 @@ const ButtonType1: React.FC<Props> = ({
             onClickFunction && onClickFunction();
           }}
           disabled={disabled}
+          type={`${type ? type : 'button'}`}
         >
           {text}
         </button>
@@ -28,6 +31,7 @@ const ButtonType1: React.FC<Props> = ({
         <button
           className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
           disabled={disabled}
+          type={`${type ? type : 'button'}`}
         >
           {text}
         </button>

@@ -1,3 +1,5 @@
+import ButtonType2 from "@/modules/common/buttons/buttonType2";
+
 interface Props {
   buttonText?: string;
   textColor?: string;
@@ -24,12 +26,11 @@ const Button: React.FC<Props> = ({
   position,
 }: Props) => {
   return (
-    <button
+    <ButtonType2
       type={type}
       className={`${position} ${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
-    >
-      {buttonText}
-    </button>
+      text={buttonText}
+    />
   );
 };
 export default Button;

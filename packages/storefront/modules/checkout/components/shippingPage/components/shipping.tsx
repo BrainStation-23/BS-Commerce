@@ -3,6 +3,9 @@ import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import CheckoutFooter from '../../checkoutFooter';
 import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import TextButton from '@/modules/common/buttons/textButton';
+import IconButton from '@/modules/common/buttons/iconButton';
 
 interface Props {
   setModal: Function;
@@ -78,36 +81,22 @@ const Shipping: React.FC<Props> = (props: Props) => {
 
         <div className="mt-5 lg:flex">
           <div>
-            <button
-              onClick={() => {
+            <ButtonType1
+              type="submit"
+              onClickFunction={() => {
                 setModal({
                   info: false,
                   ship: false,
                   pay: true,
                 });
               }}
-              className="w-full rounded-md bg-[#000000] py-4 px-6 text-sm text-white dark:bg-dark_primary"
-            >
-              {t('checkout:continue_to_payment')}
-            </button>
+              className="mt-4 rounded sm:w-full md:w-48"
+              text={t('checkout:continue_to_payment')}
+            />
           </div>
           <div className="mt-4 mb-5 flex flex-wrap justify-center lg:ml-6">
-            <div className="block items-center sm:block sm:items-center md:hidden lg:hidden xl:hidden">
-              <button
-                onClick={() => {
-                  const obj = {
-                    info: true,
-                    ship: false,
-                    pay: false,
-                  };
-                  setModal(obj);
-                }}
-              >
-                <a className="text-decoration-none">{<ChevronLeft />}</a>
-              </button>
-            </div>
-            <button
-              onClick={() => {
+            <IconButton
+              onClickFunction={() => {
                 const obj = {
                   info: true,
                   ship: false,
@@ -115,15 +104,25 @@ const Shipping: React.FC<Props> = (props: Props) => {
                 };
                 setModal(obj);
               }}
-            >
-              <a className="text-decoration-none">
-                {t('checkout:return_to_information')}
-              </a>
-            </button>
+              icon={<ChevronLeft />}
+              className="md:hidden"
+            />
+            <TextButton
+              onClickFunction={() => {
+                const obj = {
+                  info: true,
+                  ship: false,
+                  pay: false,
+                };
+                setModal(obj);
+              }}
+              text={t('checkout:return_to_information')}
+              className="mt-0 md:mt-2"
+            />
           </div>
         </div>
       </div>
-      <div className="mx-6 sm:mx-10 md:mx-10 lg:mx-24">
+      <div className="mx-6 sm:mx-10 lg:mx-24">
         <hr className="mt-2" />
         <CheckoutFooter />
       </div>

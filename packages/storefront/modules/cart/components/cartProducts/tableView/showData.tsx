@@ -12,6 +12,7 @@ import {
 } from 'store/slices/cartSlice';
 import { userAPI } from 'APIs';
 import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
+import TextButton from '@/modules/common/buttons/textButton';
 
 interface Props {
   data: ResponseItem;
@@ -153,12 +154,11 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
       </td>
       <td className="px-5 py-4 text-primary dark:text-dark_primary">
         <div className="flex justify-center">
-          <button
-            className="font-bold text-primary"
-            onClick={handleCartItemDelete}
-          >
-            X
-          </button>
+          <TextButton
+            onClickFunction={handleCartItemDelete}
+            className="mt-0 font-bold"
+            text="X"
+          />
         </div>
       </td>
     </>
