@@ -11,6 +11,19 @@ export class ProductCategory {
   name: string;
 }
 
+export class RatingInfo{
+  count: number;
+  average: number;
+}
+export class ProductRating{
+  oneStar: RatingInfo;
+  twoStar: RatingInfo;
+  threeStar: RatingInfo;
+  fourStar: RatingInfo;
+  fiveStar: RatingInfo;
+  average: number;
+}
+
 export class Product {
   id?: string;
   info: {
@@ -43,6 +56,7 @@ export class Product {
     name: string;
   };
   categories: ProductCategory[];
+  rating?: ProductRating
 }
 
 export class UpdateCategory {

@@ -97,6 +97,29 @@ const ProductSchema = new Schema<Product>(
         _id: false,
       },
     ],
+    rating: {
+      oneStar:{
+        count: Number,
+        average: Number
+      },
+      twoStar:{
+        count: Number,
+        average: Number
+      },
+      threeStar:{
+        count: Number,
+        average: Number
+      },
+      fourStar:{
+        count: Number,
+        average: Number
+      },
+      fiveStar:{
+        count: Number,
+        average: Number
+      },
+      average: Number
+    }
   },
   {
     timestamps: true,
