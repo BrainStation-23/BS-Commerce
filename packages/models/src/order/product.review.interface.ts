@@ -1,11 +1,9 @@
 import { SuccessResponse, ErrorResponse, DescriptiveError } from 'src/index';
 import { IReview } from './review.interface';
 
-export type IProductReview = Omit<IReview, 'productId'>;
-
 export interface IProductReviewList{
     productId: string;
-    reviews: IProductReview[];
+    reviews: IReview[];
 }
 
 export interface ProductReviewSuccessResponse extends SuccessResponse {

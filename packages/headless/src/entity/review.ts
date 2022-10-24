@@ -1,3 +1,5 @@
+import { Exclude } from "class-transformer";
+
 export class Review{
     id: string;
     productId: string;
@@ -25,16 +27,7 @@ export enum Commenters{
     BRANCH_MANAGER = 'BRANCH_MANAGER'
 }
 
-export class ProductReview{
-    id: string;
-    orderId: string;
-    text: string;
-    image: ReviewPhoto[];
-    userId?: string;
-    reply: Comment;
-    rating: number;
-}
 export class ProductReviewListEntity{
     productId: string;
-    reviews: ProductReview[];
+    reviews: Review[];
 }

@@ -22,7 +22,7 @@ import {
 } from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
-import { ProductReview, Review } from 'src/entity/review';
+import { Review } from 'src/entity/review';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -303,18 +303,5 @@ export class OrderDatabase implements IOrderDatabase {
       console.log(err);
       return null;
     }
-  }
-
-  async findReviewByProductId(query: Record<string,any>): Promise<ProductReview[] | null>{
-    try{
-      return await ReviewModel.find(query).select('-productId').lean().exec();
-    }catch (err) {
-      console.log(err);
-      return null;
-    }
-  }
-
-  async addProductRating(productId: string, rating: number){
-    
   }
 }

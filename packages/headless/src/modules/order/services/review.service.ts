@@ -1,5 +1,5 @@
 import { ProductReviewResponseDto } from './../rest/dto/product.review.dto';
-import { CreateReviewErrorMessage, CreateReviewResponse, ICreateReview, IProductReviewList, ProductReviewErrorMessage } from 'models';
+import { CreateReviewErrorMessage, CreateReviewResponse, ICreateReview, IProductReviewList, ProductReviewErrorMessage, ProductReviewResponse } from 'models';
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { OrderRepository } from "../repositories";
 import { ProductReviewListEntity } from 'src/entity/review';
@@ -64,8 +64,8 @@ export class OrderReviewService {
         return { code: 200, data: review };
     }
 
-    async getProductReview(productId: string): Promise<ProductReviewResponseDto>{
-        const reviews = await this.orderRepository.findReviewByProductId({ productId });
+    async getProductReview(productId: string): Promise<ProductReviewResponse>{
+        const reviews = await this.orderRepository.findReview({ productId });
 
         if(!reviews)
             return {
@@ -74,7 +74,7 @@ export class OrderReviewService {
                 code: HttpStatus.INTERNAL_SERVER_ERROR
             };
 
-        const response: ProductReviewListEntity = {
+        const response = {
             productId,
             reviews
         }
