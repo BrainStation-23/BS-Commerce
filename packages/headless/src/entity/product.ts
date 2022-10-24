@@ -16,12 +16,12 @@ export class RatingInfo{
   average: number;
 }
 export class ProductRating{
-  oneStar: RatingInfo;
-  twoStar: RatingInfo;
-  threeStar: RatingInfo;
-  fourStar: RatingInfo;
-  fiveStar: RatingInfo;
-  average: number;
+  one?: RatingInfo;
+  two?: RatingInfo;
+  three?: RatingInfo;
+  four?: RatingInfo;
+  five?: RatingInfo;
+  average?: number;
 }
 
 export class Product {

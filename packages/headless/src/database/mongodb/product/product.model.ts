@@ -98,27 +98,35 @@ const ProductSchema = new Schema<Product>(
       },
     ],
     rating: {
-      oneStar:{
+      one:{
         count: Number,
-        average: Number
+        average: Number,
+        required: false
       },
-      twoStar:{
+      two:{
         count: Number,
-        average: Number
+        average: Number,
+        required: false
       },
-      threeStar:{
+      three:{
         count: Number,
-        average: Number
+        average: Number,
+        required: false
       },
-      fourStar:{
+      four:{
         count: Number,
-        average: Number
+        average: Number,
+        required: false
       },
-      fiveStar:{
+      five:{
         count: Number,
-        average: Number
+        average: Number,
+        required: false
       },
-      average: Number
+      average: {
+        type: Number,
+        required: false
+      }
     }
   },
   {

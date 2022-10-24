@@ -127,4 +127,8 @@ export class OrderRepository {
   async findReviewByProductId(query: Record<string,any>): Promise<ProductReview[] | null>{
     return await this.db.findReviewByProductId(query);
   }
+
+  async addProductRating(productId: string, rating: number): Promise<any>{
+    return await this.db.addProductRating(productId, rating);
+  }
 }

@@ -51,4 +51,5 @@ export abstract class IOrderDatabase {
   abstract createReview: (review: any) => Promise<Review | null>
   abstract findReview: (query: Record<string,any>)=> Promise<Review[] | null>
   abstract findReviewByProductId: (query: Record<string,any>) => Promise<ProductReview[] | null>;
+  abstract addProductRating: (productId: string, rating: number) => Promise<any>;
 }

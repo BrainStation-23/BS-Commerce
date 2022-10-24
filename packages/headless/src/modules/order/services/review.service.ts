@@ -8,8 +8,8 @@ import { ProductReviewListEntity } from 'src/entity/review';
 export class OrderReviewService {
     constructor(private orderRepository: OrderRepository) {}
 
-    async createReview(body: ICreateReview): Promise<CreateReviewResponse>{
-        const { orderId, productId, image, rating } = body;
+    async createReview(request: ICreateReview): Promise<CreateReviewResponse>{
+        const { orderId, productId, image, rating } = request;
 
         const reviewExists = await this.orderRepository.findReview({orderId, productId});
         if(reviewExists.length === 0)
@@ -41,7 +41,9 @@ export class OrderReviewService {
         //commented by should also be handled from guards
 
         //if rating has then proceed to add it to product
-
+        if(rating){
+            const productRating = await this.orderRepository.addProductRating(productId, rating);
+        }
         //check if images are not more than 5
         //if greater send error
         if(image && image.length > 5)
@@ -51,7 +53,7 @@ export class OrderReviewService {
                 code: HttpStatus.BAD_REQUEST
             };
 
-        const review = await this.orderRepository.createReview(body);
+        const review = await this.orderRepository.createReview(request);
         if(!review)
             return {
                 error: CreateReviewErrorMessage.CANNOT_CREATE_REVIEW,

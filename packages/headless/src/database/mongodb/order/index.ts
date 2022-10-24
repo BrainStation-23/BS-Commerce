@@ -313,4 +313,8 @@ export class OrderDatabase implements IOrderDatabase {
       return null;
     }
   }
+
+  async addProductRating(productId: string, rating: number){
+    
+  }
 }
