@@ -1,12 +1,15 @@
 import React, { ReactElement } from 'react';
-import StarIcon from '@/modules/common/icons/starIcon';
 interface Props {
   onClickFunction?: Function;
-  icon: ReactElement;
+  childreen: ReactElement;
   className?: string;
 }
 
-const IconButton: React.FC<Props> = ({ onClickFunction, icon, className }) => {
+const ElementButton: React.FC<Props> = ({
+  onClickFunction,
+  childreen,
+  className,
+}) => {
   return (
     <button
       className={` ${className}`}
@@ -14,9 +17,9 @@ const IconButton: React.FC<Props> = ({ onClickFunction, icon, className }) => {
         onClickFunction && onClickFunction();
       }}
     >
-      {icon}
+      {childreen}
     </button>
   );
 };
 
-export default IconButton;
+export default ElementButton;

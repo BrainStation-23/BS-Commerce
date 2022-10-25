@@ -1,4 +1,4 @@
-import ButtonType2 from "@/modules/common/buttons/buttonType2";
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 
 interface Props {
   buttonText?: string;
@@ -26,7 +26,7 @@ const Button: React.FC<Props> = ({
   position,
 }: Props) => {
   return (
-    <ButtonType2
+    <ButtonSecondary
       type={type}
       className={`${position} ${textColor} ${bg} hover:${onHover} ${padding} ${margin} ${edge} ${responsiveProps}`}
       text={buttonText}

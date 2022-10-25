@@ -3,9 +3,9 @@ import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import CheckoutFooter from '../../checkoutFooter';
 import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 import TextButton from '@/modules/common/buttons/textButton';
-import IconButton from '@/modules/common/buttons/iconButton';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 interface Props {
   setModal: Function;
@@ -73,7 +73,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
 
         <div className="mt-5 lg:flex">
           <div>
-            <ButtonType1
+            <ButtonPrimary
               type="submit"
               onClickFunction={() => {
                 setModal({
@@ -87,7 +87,7 @@ const Shipping: React.FC<Props> = (props: Props) => {
             />
           </div>
           <div className="mt-4 mb-5 flex flex-wrap justify-center lg:ml-6">
-            <IconButton
+            <ElementButton
               onClickFunction={() => {
                 const obj = {
                   info: true,

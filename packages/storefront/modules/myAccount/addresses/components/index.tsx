@@ -9,8 +9,8 @@ import AddressForm from '@/modules/myAccount/addresses/components/addressForm';
 import { useAppSelector } from 'store/hooks/index';
 import SingleAddress from '@/modules/myAccount/addresses/components/singleAddress';
 import WithAuth from '@/modules/auth/withAuth';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
-import ButtonType2 from '@/modules/common/buttons/buttonType2';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 
 const AddressesComponent: NextComponentType = () => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ const AddressesComponent: NextComponentType = () => {
         <div className="mb-3 flex flex-wrap justify-between">
           <div className="text-3xl font-bold">{t('common:my_account')}</div>
           <div className="mt-2 text-xl md:mt-0">
-            <ButtonType2
+            <ButtonSecondary
               type="button"
               onClickFunction={() => addButtonOnClick()}
               className="py-2 px-9 text-sm"

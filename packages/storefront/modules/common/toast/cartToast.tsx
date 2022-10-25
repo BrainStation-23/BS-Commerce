@@ -2,7 +2,7 @@ import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import Link from 'next/link';
-import ButtonType1 from '../buttons/buttonType1';
+import ButtonPrimary from '../buttons/buttonPrimary';
 import CheckIcon from '../icons/checkIcon';
 
 interface Props {
@@ -37,7 +37,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
             <div className="pb-2 pr-2 sm:pb-0 ">
               <Link href="/cart" passHref>
                 <a>
-                  <ButtonType1
+                  <ButtonPrimary
                     className="rounded uppercase"
                     text={t('common:view_cart')}
                   />
@@ -47,7 +47,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
             <div>
               <Link href="/checkout" passHref>
                 <a>
-                  <ButtonType1
+                  <ButtonPrimary
                     className="rounded uppercase"
                     text={t('common:checkout')}
                   />

@@ -1,14 +1,17 @@
 interface Props {
   height?: string;
   width?: string;
+  className?: string;
 }
 
-const ChevronRight: React.FC<Props> = ({ height, width }) => {
+const ChevronRight: React.FC<Props> = ({ height, width, className }) => {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={height && width ? `${height} ${width}` : 'h-4 w-4'}
+        className={`${
+          height && width ? `${height} ${width}` : 'h-6 w-6'
+        } ${className}`}
         viewBox="0 0 20 20"
       >
         <path

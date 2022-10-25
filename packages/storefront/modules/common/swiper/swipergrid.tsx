@@ -5,6 +5,8 @@ import 'swiper/css/navigation';
 import { Grid, Navigation } from 'swiper';
 import { Swiper, useSwiper } from 'swiper/react';
 import React, { FC, useCallback, useState } from 'react';
+import ChevronLeft from '../icons/chevronLeft';
+import ChevronRight from '../icons/chevronRight';
 interface Props {
   children: React.ReactNode;
   slidesPerViewmobile: number;
@@ -40,20 +42,7 @@ const SwiperGrid: FC<Props> = ({
         onClick={handleLeftClick}
         className="absolute inset-y-0  left-0 origin-right scale-100 opacity-0 transition-all duration-300 group-hover:left-[-14px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-          />
-        </svg>
+        <ChevronLeft className="fill-current " />
       </button>
       <Swiper
         onSwiper={setSwiperRef}
@@ -86,20 +75,7 @@ const SwiperGrid: FC<Props> = ({
         onClick={handleRightClick}
         className="absolute inset-y-0  right-0 z-10 origin-left scale-100 opacity-0 transition-all duration-300 group-hover:right-[-14px] group-hover:block group-hover:scale-150 group-hover:opacity-100"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-          />
-        </svg>
+        <ChevronRight className="fill-current " />
       </button>
     </div>
   );

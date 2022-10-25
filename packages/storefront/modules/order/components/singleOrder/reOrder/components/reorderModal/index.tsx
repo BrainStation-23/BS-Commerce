@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { setCartModalState } from 'store/slices/modalSlice';
 import { IOrderProduct } from '@bs-commerce/models';
 import XCircleIcon from '@/modules/common/icons/xCircleIcon';
+import ElementButton from '@/modules/common/buttons/elementButton';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -58,15 +61,14 @@ const ReorderModal: React.FC<Props> = ({
             }
             className="relative flex transform flex-row bg-white p-4 text-left shadow-xl transition-all"
           >
-            <button
-              className="absolute -right-7 -top-5 z-50"
-              onClick={() => {
+            <ElementButton
+              onClickFunction={() => {
                 dispatch(setCartModalState({ showModal: false }));
                 onClose();
               }}
-            >
-              <XCircleIcon size={10} />
-            </button>
+              childreen={<XCircleIcon size={10} />}
+              className="absolute -right-7 -top-5 z-50"
+            />
             <div className="flex w-36 flex-col px-4 sm:w-80">
               <span className="mb-2 text-sm sm:mb-4 sm:text-base"></span>
               <div
@@ -99,37 +101,32 @@ const ReorderModal: React.FC<Props> = ({
               )}
               <div className="flex justify-center py-4">
                 {message === 'THESE ITEMS ARE NOT AVAILABLE RIGHT NOW' ? (
-                  <button
-                    className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
-                    onClick={() => {
+                  <ButtonPrimary
+                    onClickFunction={() => {
                       dispatch(setCartModalState({ showModal: false }));
                       onClose();
                     }}
-                  >
-                    Okay
-                  </button>
+                    text="Okay"
+                    className="mx-2 w-fit rounded-md p-2 uppercase transition-all duration-200 ease-linear"
+                  />
                 ) : (
                   <>
-                    <button
-                      className="rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:px-4 sm:text-base"
-                      onClick={() => {
-                        dispatch(setCartModalState({ showModal: false }));
-                        onClose();
-                        handleYes();
-                      }}
-                    >
-                      Yes
-                    </button>
-
-                    <button
-                      className="mt-2	 rounded-md bg-gray-200/70 px-2 py-2 text-xs uppercase transition-all duration-200 ease-linear hover:bg-primary hover:text-white sm:mt-0 sm:ml-3 sm:px-4 sm:text-base"
-                      onClick={() => {
+                    <ButtonPrimary
+                      onClickFunction={() => {
                         dispatch(setCartModalState({ showModal: false }));
                         onClose();
                       }}
-                    >
-                      No
-                    </button>
+                      text="yes"
+                      className="mx-2 w-fit rounded-md p-2 uppercase transition-all duration-200 ease-linear"
+                    />
+                    <ButtonPrimary
+                      onClickFunction={() => {
+                        dispatch(setCartModalState({ showModal: false }));
+                        onClose();
+                      }}
+                      text="No"
+                      className="mx-2 w-fit rounded-md p-2 uppercase transition-all duration-200 ease-linear"
+                    />
                   </>
                 )}
               </div>

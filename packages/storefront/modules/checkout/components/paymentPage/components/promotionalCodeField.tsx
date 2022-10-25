@@ -1,4 +1,4 @@
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -28,7 +28,7 @@ const PromotionalCodeField: React.FC<Properties> = (props) => {
           id="promoCode"
         />
         <div className="flex h-12 w-20 cursor-pointer justify-center rounded-r bg-primary text-white transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:bg-dark_primary">
-          <ButtonType1
+          <ButtonPrimary
             type="submit"
             id="submitPromoCode"
             className=""

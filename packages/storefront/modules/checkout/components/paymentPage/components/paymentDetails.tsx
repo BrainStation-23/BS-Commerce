@@ -19,7 +19,7 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 
 interface FormData {
   cardNumber: string;
@@ -518,7 +518,7 @@ const PaymentDetails: NextComponentType = () => {
                   </div>
                 </div> */}
                 <div className="mt-5 mb-10 flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row lg:flex-row xl:flex-row">
-                  <ButtonType1
+                  <ButtonPrimary
                     type="submit"
                     className="rounded sm:w-full md:w-24"
                     text={t('checkout:pay_now')}

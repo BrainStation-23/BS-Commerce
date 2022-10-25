@@ -7,6 +7,7 @@ import ChevronUp from '@/modules/common/icons/chevronUp';
 import ShoppingCart from '@/modules/common/icons/shoppingCart';
 import CartTotal from '@/modules/checkout/components/orderList/cartTotal';
 import useTranslation from 'next-translate/useTranslation';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const OrderList: NextComponentType = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -28,26 +29,26 @@ const OrderList: NextComponentType = () => {
         <div className="flex w-full flex-wrap justify-between sm:px-4 md:px-16">
           <div className="flex flex-wrap">
             <ShoppingCart />
-
-            <button
-              onClick={() => {
+            <ElementButton
+              childreen={
+                <div className="flex flex-wrap justify-between px-2 text-sm">
+                  {dropdown === true ? (
+                    <>
+                      <p>{t('checkout:hide_order_summary')}</p>
+                      <ChevronUp />
+                    </>
+                  ) : (
+                    <>
+                      <p>{t('checkout:show_order_summary')}</p>
+                      <ChevronDown />
+                    </>
+                  )}
+                </div>
+              }
+              onClickFunction={() => {
                 setDropdown(!dropdown);
               }}
-            >
-              <div className="flex flex-wrap justify-between px-2 text-sm">
-                {dropdown === true ? (
-                  <>
-                    <p>{t('checkout:hide_order_summary')}</p>
-                    <ChevronUp />
-                  </>
-                ) : (
-                  <>
-                    <p>{t('checkout:show_order_summary')}</p>
-                    <ChevronDown />
-                  </>
-                )}
-              </div>
-            </button>
+            />
           </div>
           <p className="text-xl font-semibold">${totalCartPrice}</p>
         </div>

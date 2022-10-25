@@ -12,6 +12,9 @@ import {
 } from 'store/slices/compareSlice';
 import { userAPI } from 'APIs';
 import { ICompareItems } from '@bs-commerce/models';
+import CrossIcon from '../common/icons/crossIcon';
+import ElementButton from '../common/buttons/elementButton';
+import TextButton from '../common/buttons/textButton';
 
 interface Props {
   setModal: boolean;
@@ -59,15 +62,13 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
               <div className="flex w-full flex-col rounded-lg bg-white shadow-lg dark:bg-slate-800">
                 <div className="flex items-start justify-between rounded-t border-b border-solid border-gray-300 p-5 text-xl ">
                   <h3 className="mr-3 font-bold">{t('compare:title')}</h3>
-                  <button
-                    className="border-1 float-right bg-transparent text-black"
-                    onClick={() => {
+                  <ElementButton
+                    onClickFunction={() => {
                       setShowModal(false);
                       dispatch(setModalState(false));
                     }}
-                  >
-                    <span className="block h-8 w-8 bg-black text-white">x</span>
-                  </button>
+                    childreen={<CrossIcon />}
+                  />
                 </div>
                 <div className="overflow-auto p-6 sm:-mx-6 lg:-mx-8">
                   <div className="inline-block py-2 sm:px-6 lg:px-8">
@@ -89,15 +90,14 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                       scope="col"
                                       className={`col col-span-1 border-r px-6 py-4 text-sm font-normal`}
                                     >
-                                      <button
-                                        onClick={() => {
+                                      <TextButton
+                                        onClickFunction={() => {
                                           handleDeleteCompareItem(
                                             product?.productId
                                           );
                                         }}
-                                      >
-                                        {t('common:remove')}
-                                      </button>
+                                        text={t('common:remove')}
+                                      />
                                     </th>
                                   </React.Fragment>
                                 );

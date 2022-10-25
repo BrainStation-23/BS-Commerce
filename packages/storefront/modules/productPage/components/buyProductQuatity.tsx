@@ -1,4 +1,4 @@
-import ButtonType2 from '@/modules/common/buttons/buttonType2';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -45,13 +45,13 @@ const BuyProductQuantity: React.FC<Props> = ({
         </div>
       </div>
       {isAvailable ? (
-        <ButtonType2
+        <ButtonSecondary
           onClickFunction={toCart}
           text={t('product-details:add_to_cart')}
           className="sm:px-12 lg:px-16"
         />
       ) : (
-        <ButtonType2
+        <ButtonSecondary
           className="sm:px-12 lg:px-16"
           disabled={true}
           text={'Soldout'}

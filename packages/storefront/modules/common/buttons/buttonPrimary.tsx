@@ -8,7 +8,7 @@ interface Props {
   id?: string;
 }
 
-const ButtonType1: React.FC<Props> = ({
+const ButtonPrimary: React.FC<Props> = ({
   onClickFunction,
   text,
   disabled,
@@ -44,4 +44,4 @@ const ButtonType1: React.FC<Props> = ({
   );
 };
 
-export default ButtonType1;
+export default ButtonPrimary;

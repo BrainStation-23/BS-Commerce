@@ -11,9 +11,9 @@ import Modal from '@/modules/common/modal/modal';
 import Image from 'next/image';
 import { userAPI } from 'APIs';
 import useTranslation from 'next-translate/useTranslation';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 import CrossIcon from '../../../common/icons/crossIcon';
-import IconButton from '@/modules/common/buttons/iconButton';
+import ElementButton from '@/modules/common/buttons/elementButton';
 import CartIcon from '@/modules/common/icons/cartIcon';
 
 const CartDropdown: NextComponentType = () => {
@@ -127,7 +127,7 @@ const CartDropdown: NextComponentType = () => {
                 handleCartItemDelete(cartData);
               }}
             >
-              <IconButton icon={<CrossIcon />} />
+              <ElementButton icon={<CrossIcon />} />
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ const CartDropdown: NextComponentType = () => {
                     <div className="border-x-2 px-6 py-2 dark:border-none">
                       <Link href="/cart" passHref>
                         <a>
-                          <ButtonType1
+                          <ButtonPrimary
                             onClickFunction={() => {
                               handleClickViewCart();
                               setCartTotal(!cartTotal);
@@ -210,7 +210,7 @@ const CartDropdown: NextComponentType = () => {
                       </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
-                      <ButtonType1
+                      <ButtonPrimary
                         onClickFunction={handleClickProceed}
                         text={t('common:checkout')}
                       />

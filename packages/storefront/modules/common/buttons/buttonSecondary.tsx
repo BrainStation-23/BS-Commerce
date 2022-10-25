@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const ButtonType2: React.FC<Props> = ({
+const ButtonSecondary: React.FC<Props> = ({
   onClickFunction,
   text,
   disabled,
@@ -29,4 +29,4 @@ const ButtonType2: React.FC<Props> = ({
   );
 };
 
-export default ButtonType2;
+export default ButtonSecondary;

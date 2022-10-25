@@ -31,8 +31,8 @@ import SimilarProducts from '@/modules/productPage/components/similarProducts';
 import CartToast from '@/modules/common/toast/cartToast';
 import RatingStars from '@/modules/productPage/components/ratingStars';
 import TextButton from '@/modules/common/buttons/textButton';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
-import ButtonType2 from '@/modules/common/buttons/buttonType2';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 import BuyProductQuantity from './components/buyProductQuatity';
 interface SingleProduct {
   product: Product;
@@ -315,7 +315,7 @@ const ProductDetailsComponent: React.FC<SingleProduct> = ({
                   isAvailable={isAvailable}
                   toCart={toCart}
                 />
-                <ButtonType1
+                <ButtonPrimary
                   className="mt-2"
                   disabled={!isAvailable}
                   onClickFunction={toCart}

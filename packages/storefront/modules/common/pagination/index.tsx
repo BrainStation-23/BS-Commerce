@@ -1,5 +1,8 @@
 import { current } from '@reduxjs/toolkit';
 import { FC, useEffect, useState } from 'react';
+import ChevronLeft from '../icons/chevronLeft';
+import ChevronRight from '../icons/chevronRight';
+import LeftArrowIcon from '../icons/leftArrowIcon';
 
 export const Pagination: FC<{
   totalPages: number;
@@ -32,20 +35,7 @@ export const Pagination: FC<{
                 paginate!((currentPage - 2) * limit!);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-4 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
+            <ChevronLeft />
           </button>
           <>
             {pages &&
@@ -72,27 +62,14 @@ export const Pagination: FC<{
           <button
             className={`${
               currentPage < totalPages ? '' : 'hover:cursor-not-allowed'
-            } rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary`}
+            }  rounded bg-[#f1f1f1] py-2 px-2 font-semibold text-black hover:bg-primary hover:text-white dark:hover:bg-dark_primary`}
             onClick={() => {
               currentPage < totalPages && setCurrentPage(currentPage + 1);
               if (paginate && currentPage < totalPages)
                 paginate!(currentPage * limit!);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-4 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
+            <ChevronRight />
           </button>
         </div>
       </div>

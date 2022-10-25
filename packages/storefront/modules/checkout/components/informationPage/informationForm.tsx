@@ -14,7 +14,7 @@ import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import FieldTemplate from '../common/formInput/fieldTemplate';
 import { CustomerAddress } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 
 interface FormData {
   email: string;
@@ -358,7 +358,7 @@ const InformationForm: React.FC<Props> = ({ setModal }: Props) => {
                 )}
 
                 <div className="flex flex-col flex-wrap items-center gap-5 sm:flex-col md:flex-row">
-                  <ButtonType1
+                  <ButtonPrimary
                     type="submit"
                     className="rounded sm:w-full md:w-48"
                     text={t('checkout:continue_to_shipping')}

@@ -7,7 +7,7 @@ import type { NextComponentType } from 'next';
 
 import { useAppSelector } from 'store/hooks/index';
 import Modal from '@/modules/common/modal/modal';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 
 const CartTotal: NextComponentType = () => {
   const router = useRouter();
@@ -96,10 +96,10 @@ const CartTotal: NextComponentType = () => {
             </table>
           </div>
           <div className="flex justify-end px-2 pb-4">
-            <ButtonType1
+            <ButtonPrimary
               onClickFunction={handleClickProceed}
               text={t('cart:proceed_to_checkout').toUpperCase()}
-              className='w-[200px] text-xs'
+              className="w-[200px] text-xs"
             />
           </div>
         </div>

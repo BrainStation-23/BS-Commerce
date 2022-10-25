@@ -6,7 +6,7 @@ import SingleItem from '@/modules/cart/components/cartProducts/listView/singleIt
 import { deleteCart } from 'store/slices/cartSlice';
 import { userAPI } from 'APIs';
 import Link from 'next/link';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 import { useRouter } from 'next/router';
 
 const ItemsList: NextComponentType = () => {
@@ -52,7 +52,7 @@ const ItemsList: NextComponentType = () => {
       </div>
       <div className="my-6 flex flex-col justify-center gap-y-5 px-4 md:hidden">
         {cartData?.length > 0 && (
-          <ButtonType1
+          <ButtonPrimary
             onClickFunction={() => {
               router.push('/');
             }}
@@ -61,7 +61,7 @@ const ItemsList: NextComponentType = () => {
           />
         )}
         {cartData?.length > 0 && (
-          <ButtonType1
+          <ButtonPrimary
             onClickFunction={handleDeleteAllCartItem}
             className="text-sm"
             text={t('cart:clear_cart').toUpperCase()}

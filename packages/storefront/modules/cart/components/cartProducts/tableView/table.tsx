@@ -9,7 +9,7 @@ import { useAppDispatch } from 'store/hooks/index';
 
 import TableData from '@/modules/cart/components/cartProducts/tableView/tableData';
 import { userAPI } from 'APIs';
-import ButtonType1 from '@/modules/common/buttons/buttonType1';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 
 const Table: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -54,15 +54,15 @@ const Table: NextComponentType = () => {
                 <TableData />
               </tbody>
             </table>
-            <div className="float-right mt-5 mb-4 flex w-1/2 lg:w-2/5 justify-end gap-x-4 px-4">
-              <ButtonType1
+            <div className="float-right mt-5 mb-4 flex w-1/2 justify-end gap-x-4 px-4 lg:w-2/5">
+              <ButtonPrimary
                 onClickFunction={() => {
                   router.push('/');
                 }}
                 className="text-xs "
                 text={t('common:continue_shopping').toUpperCase()}
               />
-              <ButtonType1
+              <ButtonPrimary
                 onClickFunction={handleDeleteAllCartItem}
                 className="text-xs"
                 text={t('cart:clear_cart').toUpperCase()}
