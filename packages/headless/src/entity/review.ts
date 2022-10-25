@@ -16,15 +16,10 @@ export class ReviewPhoto{
 }
 
 export class Comment{
-    commentedBy: Commenters;
+    id: string;
     text: string;
     image: string[];
     createdAt: Date;
-}
-
-export enum Commenters{
-    STORE_ADMIN = 'STORE_ADMIN',
-    BRANCH_MANAGER = 'BRANCH_MANAGER'
 }
 
 export class ProductReviewListEntity{

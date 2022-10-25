@@ -4,7 +4,7 @@ export interface IReviewPhoto{
   url: string;
 }
 export interface IComment{
-    commentedBy: string;
+    id: string;
     text: string;
     image: string[];
     createdAt: Date;
