@@ -16,6 +16,7 @@ import WithAuth from '@/modules/auth/withAuth';
 import Modal from '@/modules/common/modal/modal';
 import WishlistBody from '@/modules/wishlist/components/body';
 import CircledRightArrow from '@/modules/common/icons/circledRightArrow';
+import ButtonSecondary from '../common/buttons/buttonSecondary';
 
 const WishlistComponent: NextComponentType = () => {
   const dispatch = useAppDispatch();
@@ -63,12 +64,11 @@ const WishlistComponent: NextComponentType = () => {
         <div className="mx-5 flex items-center justify-between pt-3">
           <p className="text-xl">{t('wishlist:favourites')}</p>
           {wishlistData?.items?.length! > 0 && (
-            <button
-              onClick={() => setModalOn(true)}
-              className="mt-5 rounded bg-primary py-2 px-6 text-white hover:bg-black dark:bg-dark_primary"
-            >
-              {t('wishlist:clear_wishlist')}
-            </button>
+            <ButtonSecondary
+              text={t('wishlist:clear_wishlist')}
+              onClickFunction={() => setModalOn(true)}
+              className="mt-5 py-2 px-6"
+            />
           )}
         </div>
         {wishlistData?.items?.length! <= 0 && (
