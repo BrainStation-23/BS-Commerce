@@ -332,7 +332,7 @@ export class OrderDatabase implements IOrderDatabase {
 
       const response = await ProductModel.findOneAndUpdate(
         { id: productId },
-        newProduct,
+        { $set: { rating: ratingObj, avgRating} },
         { new: true },
       )
         .select('-_id')
