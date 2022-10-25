@@ -5,6 +5,7 @@ import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import { useEffect, useState } from 'react';
 import { Pagination } from '../common/pagination';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonPrimary from '../common/buttons/buttonPrimary';
 
 const SearchComponent: NextComponentType = () => {
   const navSearchInput = document.getElementById(
@@ -89,13 +90,12 @@ const SearchComponent: NextComponentType = () => {
                 placeholder={t('common:search_placeholder')}
                 onChange={() => onProductSearch()}
               />
-              <button
+              <ButtonPrimary
                 type="submit"
-                className="absolute right-0 rounded-3xl bg-primary py-1.5 px-4 pb-2 text-base text-white hover:bg-black dark:bg-dark_primary"
-                onClick={() => onProductSearch()}
-              >
-                {t('search:page_title')}
-              </button>
+                className="absolute right-0 rounded-3xl py-1.5 px-4 pb-2 w-fit"
+                onClickFunction={() => onProductSearch()}
+                text={t('search:page_title')}
+              />
             </div>
           </div>
         </div>

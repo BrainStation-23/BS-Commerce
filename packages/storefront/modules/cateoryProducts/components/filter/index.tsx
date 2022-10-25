@@ -5,6 +5,7 @@ import ProductTypeOptions from '@/modules/cateoryProducts/components/filter/comp
 import BrandTypeOptions from '@/modules/cateoryProducts/components/filter/component/brandTypes';
 import ColourTypeOptions from '@/modules/cateoryProducts/components/filter/component/colorAvailibility';
 import useTranslation from 'next-translate/useTranslation';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const CategoryFilter: FC = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
@@ -61,19 +62,19 @@ const CategoryFilter: FC = () => {
       <div className="mt-16 w-full dark:text-dark_text">
         <div id="accordionExample5">
           {/* Price Filter Section */}
-          <div className="">
-            <h2 className="mb-0" id="headingOne5">
-              <button
-                className="flex w-full items-center justify-between rounded-none border-0 px-0 pb-2 text-left text-sm text-gray-800 transition focus:outline-none dark:text-dark_text"
-                type="button"
-                onClick={accorditionStatus1}
-              >
-                <span className="text-[15px] font-semibold tracking-wide">
-                  {t('collections:price')}
-                </span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
-              </button>
-            </h2>
+          <div className="mb-3">
+            <ElementButton
+              onClickFunction={accorditionStatus1}
+              className="w-full"
+              childreen={
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">
+                    {t('collections:price')}
+                  </span>
+                  <span>{displayStatus1 ? upArrow : downArrow}</span>
+                </div>
+              }
+            />
             <div
               id="collapseOne5"
               className={displayStatus1 ? '' : 'hidden'}
@@ -83,19 +84,18 @@ const CategoryFilter: FC = () => {
             </div>
           </div>
           <div>
-            <h2 className="mb-0" id="headingTwo5">
-              <button
-                className="flex w-full items-center justify-between rounded-none border-0 px-0 pt-8 pb-2 text-left text-base text-gray-800 transition focus:outline-none dark:text-dark_text"
-                type="button"
-                onClick={accorditionStatus4}
-              >
-                <span className="text-[15px] font-semibold tracking-wide">
-                  {' '}
-                  {t('collections:brand')}
-                </span>
-                <span>{displayStatus4 ? upArrow : downArrow}</span>
-              </button>
-            </h2>
+            <ElementButton
+              onClickFunction={accorditionStatus4}
+              className="w-full"
+              childreen={
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">
+                    {t('collections:brand')}
+                  </span>
+                  <span>{displayStatus4 ? upArrow : downArrow}</span>
+                </div>
+              }
+            />
             <div className={displayStatus4 ? '' : 'hidden'}>
               <BrandTypeOptions />
             </div>

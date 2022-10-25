@@ -3,8 +3,9 @@ interface Props {
   onClickFunction?: Function;
   text?: string;
   disabled?: boolean;
+  hidden?: boolean;
   type?: 'button' | 'submit' | 'reset';
-
+  id?: string;
   className?: string;
 }
 
@@ -14,6 +15,8 @@ const ButtonSecondary: React.FC<Props> = ({
   disabled,
   className,
   type,
+  id,
+  hidden,
 }) => {
   return (
     <button
@@ -21,6 +24,8 @@ const ButtonSecondary: React.FC<Props> = ({
       onClick={() => {
         onClickFunction && onClickFunction();
       }}
+      hidden={hidden ? hidden : false}
+      id={id}
       type={`${type ? type : 'button'}`}
       disabled={disabled}
     >

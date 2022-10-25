@@ -21,6 +21,7 @@ import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import ProfileForm from '@/modules/myAccount/profile/components/profileForm';
 import SingleDetail from '@/modules/myAccount/profile/components/singleDetail';
 import withAuth from '@/modules/auth/withAuth';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 
 const Profile: React.FC = () => {
   const [editable, setEditable] = useState<boolean>(false);
@@ -125,7 +126,7 @@ const Profile: React.FC = () => {
           {(formikProps) => {
             return (
               <Form onSubmit={formikProps.handleSubmit} className="">
-                <fieldset disabled={!editable}>
+                <fieldset>
                   <div className="mx-auto mt-3 flex flex-wrap">
                     <div className="w-full md:w-1/2">
                       <div className="mt-2 flex items-center">
@@ -135,27 +136,21 @@ const Profile: React.FC = () => {
                           </span>
                         </div>
                         <div className="w-2/3">
-                          <span
-                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
+                          <ButtonSecondary
+                            text={t('myAccount:edit')}
                             hidden={editable}
-                            onClick={() => setEditable(true)}
-                          >
-                            {t('myAccount:edit')}
-                          </span>
-                          <button
+                            onClickFunction={() => setEditable(true)}
+                          />
+                          <ButtonSecondary
+                            text={t('myAccount:save')}
                             hidden={!editable}
                             type="submit"
-                            className="ml-2 rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
-                          >
-                            {t('myAccount:save')}
-                          </button>
-                          <span
+                          />
+                          <ButtonSecondary
+                            text={t('myAccount:cancel')}
                             hidden={!editable}
-                            className="ml-2 cursor-pointer rounded-md bg-primary px-2 py-1 text-white transition-all duration-150 ease-linear hover:bg-stone-900 dark:bg-dark_primary dark:hover:border"
-                            onClick={() => setEditable(false)}
-                          >
-                            {t('myAccount:cancel')}
-                          </span>
+                            onClickFunction={() => setEditable(false)}
+                          />
                         </div>
                       </div>
                       {/* Account Form */}
@@ -188,10 +183,7 @@ const Profile: React.FC = () => {
                 </fieldset>
                 <div className={`${editable ? '' : 'hidden'}`}>
                   <hr className="m-5" />
-                  <ProfileForm
-                    isPhoneVerified={false}
-                    isEmailVerified={true}
-                  />
+                  <ProfileForm isPhoneVerified={false} isEmailVerified={true} />
                 </div>
               </Form>
             );

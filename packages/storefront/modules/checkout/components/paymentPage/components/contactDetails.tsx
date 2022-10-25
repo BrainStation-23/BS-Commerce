@@ -1,5 +1,6 @@
 import { useAppSelector } from 'store/hooks/index';
 import useTranslation from 'next-translate/useTranslation';
+import TextButton from '@/modules/common/buttons/textButton';
 
 interface Props {
   setModal: Function;
@@ -20,8 +21,9 @@ const ContactDetails: React.FC<Props> = (props) => {
             <p className="text-gray-500">{t('checkout:contact')}</p>
             <p>{shippingInfo?.phoneNumber}</p>
           </div>
-          <button
-            onClick={() => {
+          <TextButton
+            text={t('checkout:change')}
+            onClickFunction={() => {
               const obj = {
                 info: true,
                 ship: false,
@@ -30,10 +32,7 @@ const ContactDetails: React.FC<Props> = (props) => {
               setModal(obj);
             }}
             className="ml-10 text-sm"
-            style={{ border: 'none' }}
-          >
-            {t('checkout:change')}
-          </button>
+          />
         </div>
         <hr />
         <div className="my-3 flex flex-wrap justify-between text-sm lg:items-center xl:items-center">
@@ -41,8 +40,9 @@ const ContactDetails: React.FC<Props> = (props) => {
             <p className="text-gray-500">{t('checkout:ship_to')}</p>
             <p>{shippingInfo?.addressLine1}</p>
           </div>
-          <button
-            onClick={() => {
+          <TextButton
+            text={t('checkout:change')}
+            onClickFunction={() => {
               const obj = {
                 info: true,
                 ship: false,
@@ -51,10 +51,7 @@ const ContactDetails: React.FC<Props> = (props) => {
               setModal(obj);
             }}
             className="ml-10 text-sm"
-            style={{ border: 'none' }}
-          >
-            {t('checkout:change')}
-          </button>
+          />
         </div>
         <hr />
         <div className="my-3 flex flex-col flex-wrap gap-0 text-sm sm:flex-col sm:gap-0 md:flex-row md:gap-6 lg:flex-row lg:gap-6 xl:flex-row xl:gap-6">

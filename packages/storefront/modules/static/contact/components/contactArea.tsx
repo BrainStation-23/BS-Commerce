@@ -4,6 +4,7 @@ import { Input } from '@/modules/common/input';
 import Textarea from '@/modules/common/textarea';
 import PageContainer from '@/modules/common/layout/pageContainer';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 
 const ContactArea: FC = () => {
   const { t } = useTranslation();
@@ -101,12 +102,11 @@ const ContactArea: FC = () => {
               name="message"
               onChangeHandler={() => {}}
             />
-            <button
-              className="p h-10 rounded bg-black px-10 font-normal capitalize text-white"
+            <ButtonSecondary
+              className="ml-0 h-10 px-10 font-normal capitalize"
               type="submit"
-            >
-              {t('contact:send')}
-            </button>
+              text={t('contact:send')}
+            />
           </form>
         </div>
       </div>

@@ -9,6 +9,7 @@ import {
 import { userAPI } from 'APIs';
 import ReorderModal from '@/modules/order/components/singleOrder/reOrder/components/reorderModal';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 interface Props {
   singleOrder: OrderByUserId;
 }
@@ -73,13 +74,12 @@ const ReOrder: React.FC<Props> = ({ singleOrder }: Props) => {
   return (
     <>
       <div className="flex justify-center pt-6">
-        <button
-          onClick={() => handleReorder(false, false)}
-          className="rounded bg-primary py-2 px-8 font-bold text-white hover:bg-black dark:bg-dark_primary dark:hover:border dark:hover:bg-dark_bg"
+        <ButtonSecondary
+          onClickFunction={() => handleReorder(false, false)}
           id="re-order"
-        >
-          {t('common:reorder')}
-        </button>
+          text={t('common:reorder')}
+          className=" py-2 px-8 "
+        />
       </div>
       <ReorderModal
         open={showCartModal}

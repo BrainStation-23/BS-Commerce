@@ -12,6 +12,7 @@ import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import UserOutlineIcon from '@/modules/common/icons/userIcon';
 import ShoppingBagOutlineIcon from '@/modules/common/icons/shoppingBagIcon';
 import MapPinOutlineIcon from '@/modules/common/icons/mapPinIcon';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 interface Props {
   drawer: boolean;
@@ -77,12 +78,10 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
     >
       <div className="">
         <div className="">
-          <button
-            className="mr-4 text-primary dark:text-dark_primary"
-            onClick={() => closeDrawer()}
-          >
-            <ChevronLeft />
-          </button>
+          <ElementButton
+            childreen={<ChevronLeft />}
+            onClickFunction={() => closeDrawer()}
+          />
           <span className="text-3xl font-medium text-primary dark:text-dark_primary">
             BS Commerce
           </span>
@@ -96,33 +95,38 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
               <div className="m-2 inline rounded-full border border-gray-700 p-2">
                 <UserOutlineIcon />
               </div>
-              <button className="flex flex-col">
-                <span>My Account</span>
-                <span>{getUsername(user)}</span>
-              </button>
+              <ElementButton
+                className="flex flex-col"
+                childreen={
+                  <>
+                    <span>My Account</span>
+                    <span>{getUsername(user)}</span>
+                  </>
+                }
+              />
             </div>
 
-            <button
+            <ElementButton
               className="flex"
-              onClick={() => handleButtonClick('/order')}
-            >
-              <ShoppingBagOutlineIcon />
-              <span className="ml-2">My Order</span>
-            </button>
+              onClickFunction={() => handleButtonClick('/order')}
+              childreen={
+                <>
+                  <ShoppingBagOutlineIcon />
+                  <span className="ml-2">My Order</span>
+                </>
+              }
+            />
           </div>
-
-          <button
+          <ElementButton
+            childreen={
+              <>
+                <MapPinOutlineIcon />
+                <span className="ml-2">Address</span>
+              </>
+            }
             className="mb-4 flex"
-            onClick={() => handleButtonClick('/myAccount/addresses')}
-          >
-            <MapPinOutlineIcon />
-            <span className="ml-2">Address</span>
-          </button>
-
-          {/* <button className="flex">
-            <GearOutlineIcon />
-            <span className="ml-2">Settings</span>
-          </button> */}
+            onClickFunction={() => handleButtonClick('/myAccount/addresses')}
+          />
         </div>
       </div>
       <button

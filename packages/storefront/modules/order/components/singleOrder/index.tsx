@@ -13,6 +13,7 @@ import OrderStatus from './orderStatus';
 import useTranslation from 'next-translate/useTranslation';
 import ChevronRight from '@/modules/common/icons/chevronRight';
 import ChevronLeft from '@/modules/common/icons/chevronLeft';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const SingleOrder: FC = () => {
   const router = useRouter();
@@ -49,14 +50,12 @@ const SingleOrder: FC = () => {
       />
       <div className="container mx-auto mt-5 px-4 dark:text-dark_text">
         <div className="flex gap-x-4">
-          <button
-            className='cursor-pointer fill-primary dark:fill-dark_primary'
-            onClick={() => {
+          <ElementButton
+            onClickFunction={() => {
               router.push('/order');
             }}
-          >
-            <ChevronLeft height='h-9' width='h-9' />
-          </button>
+            childreen={<ChevronLeft height="h-9" width="w-9" />}
+          />
           <p className="text-2xl font-semibold">{t('order:order_summary')}</p>
         </div>
         <div className="mt-5 flex items-center gap-x-2">
@@ -65,8 +64,8 @@ const SingleOrder: FC = () => {
               {t('common:order')}
             </p>
           </Link>
-          <div className='fill-dark_text stroke-dark_text'>
-            <ChevronRight height='h-4' width='w-4' />
+          <div className="fill-dark_text stroke-dark_text">
+            <ChevronRight height="h-4" width="w-4" />
           </div>
           <p className="text-sm">{t('order:order_summary')}</p>
         </div>

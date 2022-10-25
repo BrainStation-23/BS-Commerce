@@ -42,7 +42,8 @@ const Layout: React.FC<Props> = ({ children }) => {
       const response = await userAPI.getUserProfile(router);
       setUserData(response?.data);
     }
-    if (token && !pathname.includes('/account')) getProfile();
+    if (token && !pathname.includes('/account'))
+     getProfile();
   }, []);
 
   const toggleSidebar = (sideBarStatus: boolean) => {

@@ -19,6 +19,7 @@ import { registerSchema } from '@/modules/account/schemas/registerSchema';
 import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import Loading from '@/modules/common/loader';
 import WithoutAuth from '@/modules/auth/withoutAuth';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 
 const Signup = () => {
   const router = useRouter();
@@ -274,9 +275,9 @@ const Signup = () => {
                       </>
                     )}
 
-                    <button
+                    <ButtonPrimary
                       type="submit"
-                      onClick={() => {
+                      onClickFunction={() => {
                         if (!toggle) {
                           toast.error(
                             'Please verify the email/phone you typed.',
@@ -286,10 +287,8 @@ const Signup = () => {
                           );
                         }
                       }}
-                      className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:bg-dark_primary"
-                    >
-                      {t('register:signup')}
-                    </button>
+                      text={t('register:signup')}
+                    />
                   </Form>
                 );
               }}

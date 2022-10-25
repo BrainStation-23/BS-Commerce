@@ -8,6 +8,9 @@ import { Customer, CustomerAddress } from '@bs-commerce/models';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { storeCustomerDetails } from 'store/slices/userSlice';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
+import TextButton from '@/modules/common/buttons/textButton';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
 interface props {
   user?: CustomerAddress;
   cancelForm: Function;
@@ -247,24 +250,26 @@ const AddressForm: FC<props> = ({ user, cancelForm, id }: props) => {
                     </div>
                   </div>
                 </div> */}
-
-                <button
+                <ButtonSecondary
                   type="submit"
-                  className="my-2 w-full rounded bg-primary py-2 text-white hover:bg-black dark:bg-dark_primary dark:hover:border sm:w-full md:w-32 lg:w-32 xl:w-32"
-                >
-                  {user?.firstName
-                    ? `${t('manage-address:save_address')}`
-                    : `${t('manage-address:add_address')}`}
-                </button>
+                  text={
+                    user?.firstName
+                      ? `${t('manage-address:save_address')}`
+                      : `${t('manage-address:add_address')}`
+                  }
+                  className="my-2 ml-0 py-2"
+                />
                 <br />
               </Form>
             );
           }}
         </Formik>
       </div>
-      <button type="button" onClick={() => cancelForm('')}>
-        {t('common:cancel')}
-      </button>
+      <TextButton
+        text={t('common:cancel')}
+        onClickFunction={() => cancelForm('')}
+        className="capitalize"
+      />
     </>
   );
 };
