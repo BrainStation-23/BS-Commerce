@@ -15,6 +15,7 @@ import { CustomerModule } from 'src/modules/customer/customer.rest.module';
 import { SearchModule } from 'src/modules/global-search/search.module';
 import { BranchModule } from 'src/modules/branch/branch.rest.module';
 import { StoreModule } from 'src/modules/store/store.rest.module';
+import { SuperAdminModule } from 'src/modules/super-admin/super-admin.rest.module';
 
 export const ResolveRestModule = () => {
   return [
@@ -36,5 +37,6 @@ export const ResolveRestModule = () => {
     SearchModule,
     BranchModule,
     StoreModule,
+    SuperAdminModule
   ];
 };
