@@ -10,6 +10,7 @@ import SingleAddressDetailsTableData from '@/modules/myAccount/addresses/compone
 import useTranslation from 'next-translate/useTranslation';
 import ChevronLeft from '@/modules/common/icons/chevronLeft';
 import ChevronRight from '@/modules/common/icons/chevronRight';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const SingleAddressDetails: NextComponentType = () => {
   const router = useRouter();
@@ -49,14 +50,14 @@ const SingleAddressDetails: NextComponentType = () => {
       />
       <div className="container mx-auto mt-5 px-4">
         <div className="flex gap-x-4">
-          <button
-            className='cursor-pointer fill-primary dark:fill-dark_primary'
-            onClick={() => {
+          <ElementButton
+            className="cursor-pointer fill-primary dark:fill-dark_primary"
+            onClickFunction={() => {
               router.push('/myAccount/addresses');
             }}
           >
-            <ChevronLeft height='h-9' width='w-9' />
-          </button>
+            <ChevronLeft height="h-9" width="w-9" />
+          </ElementButton>
           <p className="text-2xl font-semibold">
             {t('myAccount:delivery_address')}
           </p>
@@ -67,8 +68,8 @@ const SingleAddressDetails: NextComponentType = () => {
               {t('myAccount:delivery_address')}
             </p>
           </Link>
-          <div className='stroke-current fill-current'>
-            <ChevronRight height='h-4' width='w-4' />
+          <div className="fill-current stroke-current">
+            <ChevronRight height="h-4" width="w-4" />
           </div>
           <p className="cursor-pointer text-sm">{t('myAccount:details')}</p>
         </div>
