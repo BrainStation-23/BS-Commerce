@@ -1,3 +1,4 @@
+import TextButton from '@/modules/common/buttons/textButton';
 import type { NextComponentType } from 'next';
 
 const PriceFilter: NextComponentType = () => {
@@ -44,9 +45,10 @@ const PriceFilter: NextComponentType = () => {
         </div>
         <div className="p-4">
           {/* temporaty button here */}
-          <button className="rounded bg-primary py-2 px-4 font-bold text-white hover:bg-black dark:bg-dark_primary">
-            Filter
-          </button>
+          <TextButton
+            className="rounded bg-primary py-2 px-4 font-bold text-white hover:bg-black dark:bg-dark_primary"
+            text="Filter"
+          />
         </div>
       </div>
     </>

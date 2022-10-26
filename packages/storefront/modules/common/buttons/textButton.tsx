@@ -1,7 +1,7 @@
 import React from 'react';
 import StarIcon from '@/modules/common/icons/starIcon';
 interface Props {
-  onClickFunction: Function;
+  onClickFunction?: Function;
   text?: string;
   className?: string;
   disabled?: boolean;
@@ -17,7 +17,7 @@ const TextButton: React.FC<Props> = ({
     <button
       className={`mt-2 hover:text-primary dark:hover:text-dark_primary ${className}`}
       onClick={() => {
-        onClickFunction();
+        onClickFunction && onClickFunction();
       }}
       disabled={disabled ? disabled : false}
     >
