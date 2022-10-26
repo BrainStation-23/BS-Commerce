@@ -6,6 +6,7 @@ import AvaialabilityOptions from '@/modules/deals/components/dealsFilter/compone
 import ProductTypeOptions from '@/modules/deals/components/dealsFilter/components/productTypes';
 import BrandTypeOptions from '@/modules/deals/components/dealsFilter/components/brandTypes';
 import ColourTypeOptions from '@/modules/deals/components/dealsFilter/components/colorAvailibility';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const DealsFilter: NextComponentType = () => {
   const [displayStatus1, setDisplayStatus1] = useState(false);
@@ -63,33 +64,15 @@ const DealsFilter: NextComponentType = () => {
           {/* Price Filter Section */}
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingOne5">
-              <button
-                className="
-                accordion-button
-                relative
-                flex
-                flex
-                w-full
-                items-center
-                justify-between
-                rounded-none border-0 bg-white
-                py-4
-                px-5
-                text-left
-                text-base
-                text-gray-800
-                transition focus:outline-none
-              "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne5"
-                aria-expanded="false"
-                aria-controls="collapseOne5"
-                onClick={accorditionStatus1}
+              <ElementButton
+                onClickFunction={accorditionStatus1}
+                className="w-full"
               >
-                <span className="text-base font-semibold"> PRICE</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
-              </button>
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">PRICE</span>
+                  <span>{displayStatus1 ? upArrow : downArrow}</span>
+                </div>
+              </ElementButton>
             </h2>
             <div className="border-t border-gray-300"></div>
             <div
@@ -107,34 +90,17 @@ const DealsFilter: NextComponentType = () => {
           {/* Availability Filter Section */}
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none border-0 bg-white
-                   py-4
-                   px-5
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus2}
+              <ElementButton
+                onClickFunction={accorditionStatus2}
+                className="w-full"
               >
-                <span className="text-base font-semibold"> AVAILABILITY</span>
-                <span>{displayStatus2 ? upArrow : downArrow}</span>
-              </button>
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">
+                    AVAILABILITY
+                  </span>
+                  <span>{displayStatus2 ? upArrow : downArrow}</span>
+                </div>
+              </ElementButton>
             </h2>
             <div className="border-t border-gray-300"></div>
             <div
@@ -154,34 +120,17 @@ const DealsFilter: NextComponentType = () => {
 
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none border-0 bg-white
-                   py-4
-                   px-5
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus3}
+              <ElementButton
+                onClickFunction={accorditionStatus3}
+                className="w-full"
               >
-                <span className="text-base font-semibold"> PRODUCT TYPE</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
-              </button>
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">
+                    PRODUCT TYPE
+                  </span>
+                  <span>{displayStatus3 ? upArrow : downArrow}</span>
+                </div>
+              </ElementButton>
             </h2>
             <div className="border-t border-gray-300"></div>
             <div
@@ -200,34 +149,15 @@ const DealsFilter: NextComponentType = () => {
           </div>
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none border-0 bg-white
-                   py-4
-                   px-5
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus4}
+              <ElementButton
+                onClickFunction={accorditionStatus4}
+                className="w-full"
               >
-                <span className="text-base font-semibold"> BRAND</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
-              </button>
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">BRAND</span>
+                  <span>{displayStatus4 ? upArrow : downArrow}</span>
+                </div>
+              </ElementButton>
             </h2>
             <div className="border-t border-gray-300"></div>
             <div
@@ -247,34 +177,15 @@ const DealsFilter: NextComponentType = () => {
 
           <div className="accordion-item bg-white">
             <h2 className="accordion-header mb-0" id="headingTwo5">
-              <button
-                className="
-                   accordion-button
-                   collapsed
-                   relative
-                   flex
-                   flex
-                   w-full
-                   items-center
-                   justify-between
-                   rounded-none border-0 bg-white
-                   py-4
-                   px-5
-                   text-left
-                   text-base
-                   text-gray-800
-                   transition focus:outline-none
-               "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo5"
-                aria-expanded="false"
-                aria-controls="collapseTwo5"
-                onClick={accorditionStatus5}
+              <ElementButton
+                onClickFunction={accorditionStatus4}
+                className="w-full"
               >
-                <span className="text-base font-semibold"> COLOR</span>
-                <span>{displayStatus1 ? upArrow : downArrow}</span>
-              </button>
+                <div className="flex justify-between" id="headingOne5">
+                  <span className="text-[15px] font-semibold">COLOR</span>
+                  <span>{displayStatus4 ? upArrow : downArrow}</span>
+                </div>
+              </ElementButton>
             </h2>
             <div className="border-t border-gray-300"></div>
             <div
@@ -293,7 +204,6 @@ const DealsFilter: NextComponentType = () => {
           </div>
         </div>
       </div>
-      <div className="colspan-4 grid"></div>
     </>
   );
 };

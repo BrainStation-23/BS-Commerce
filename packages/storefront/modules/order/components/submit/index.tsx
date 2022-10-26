@@ -5,10 +5,13 @@ import Image from 'next/image';
 
 import withAuth from '@/modules/auth/withAuth';
 import useTranslation from 'next-translate/useTranslation';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
+import { useRouter } from 'next/router';
+
 const SubmitComponent: FC = () => {
   const imageDimensions = { width: 456, height: 300 };
   const { t } = useTranslation();
-
+  const router = useRouter();
   return (
     <>
       <Breadcrumb
@@ -28,9 +31,13 @@ const SubmitComponent: FC = () => {
             />
           </div>
           <span className="mb-2 font-bold">{t('submit:order_completed')}</span>
-          <button className="rounded-md bg-primary py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900 dark:bg-dark_primary">
-            <Link href="/order">{t('submit:goto_order_page')}</Link>
-          </button>
+          <ButtonSecondary
+            onClickFunction={() => {
+              router.push('/order');
+            }}
+            className=" py-2 px-9"
+            text={t('submit:goto_order_page')}
+          />
         </div>
       </section>
     </>
