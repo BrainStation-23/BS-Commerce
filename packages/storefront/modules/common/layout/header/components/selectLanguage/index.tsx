@@ -22,7 +22,10 @@ const Language: React.FC = () => {
     dispatch(setCurrencyLanguage(currencyName));
   };
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block"
+    onMouseLeave={() => setOpen(false)}
+    onMouseEnter={() => setOpen(true)}
+    >
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
