@@ -101,3 +101,17 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
+
+
+//style for admin page
+.btn-raised {
+  transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26)
+}
+
+.btn-raised:not([disabled]):active,
+.btn-raised:not([disabled]):focus,
+.btn-raised:not([disabled]):hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .4);
+  transform: translate3d(0, -1px, 0)
+}

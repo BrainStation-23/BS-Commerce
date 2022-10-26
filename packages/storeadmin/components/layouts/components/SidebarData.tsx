@@ -92,19 +92,19 @@ export const SidebarData: ISidebarData[] = [
   //     },
   //   ],
   // },
-  // {
-  //   id: 4,
-  //   name: "Users",
-  //   to: "",
-  //   icon: UsersIcon,
-  //   subMenus: [
-  //     {
-  //       name: "Admins",
-  //       to: "/users/admin",
-  //       icon: SubMenuIcon,
-  //     },
-  //   ],
-  // },
+   {
+    id: 3,
+    name: "Users",
+    to: "",
+    icon: UsersIcon,
+    subMenus: [
+      {
+        name: "Admins",
+        to: "/users/admin/",
+        icon: SubMenuIcon,
+      },
+    ],
+  },
   // {
   //   id: 5,
   //   name: "System",
