@@ -20,6 +20,7 @@ import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import Loading from '@/modules/common/loader';
 import WithoutAuth from '@/modules/auth/withoutAuth';
 import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 const Signup = () => {
   const router = useRouter();
@@ -211,16 +212,16 @@ const Signup = () => {
                       </div>
 
                       <div className="flex flex-wrap items-center gap-x-3">
-                        <button
+                        <ElementButton
                           disabled={toggle ? true : false}
                           id="toggle-btn"
-                          className={`flex h-6 w-12 cursor-pointer items-center rounded-full
+                          className={`flex h-6 w-11 cursor-pointer items-center rounded-full
                             ${
                               formikprops.values.username !== ''
                                 ? 'bg-primary dark:bg-dark_primary'
                                 : 'bg-gray-400'
                             }`}
-                          onClick={() => {
+                          onClickFunction={() => {
                             if (formikprops.values.username !== '') {
                               handleOTPRequest(
                                 formikprops?.values?.username!,
@@ -235,8 +236,8 @@ const Signup = () => {
                               'h-5 w-5 transform rounded-full bg-white shadow-md duration-300 ease-in-out' +
                               (!toggle ? null : toggleClass)
                             }
-                          ></div>
-                        </button>
+                          />
+                        </ElementButton>
                         <p>{t('register:verify')}</p>
                       </div>
                     </div>
