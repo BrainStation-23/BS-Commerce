@@ -1,5 +1,5 @@
 import { DescriptiveError, ErrorResponse, SuccessResponse } from 'src/index';
-import { Product } from './product';
+import { CustomerProduct } from './customerProduct';
 
 export interface GetCustomizedProductsQuery {
   skip?: number;
@@ -9,7 +9,7 @@ export interface GetCustomizedProductsQuery {
 
 export interface GetCustomizedProductsSuccessResponse extends SuccessResponse {
   code: number;
-  data: Product[];
+  data: CustomerProduct[];
 }
 
 export const enum GetCustomizedProductsErrorMessages {

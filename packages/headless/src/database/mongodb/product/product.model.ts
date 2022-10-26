@@ -9,6 +9,7 @@ const ProductSchema = new Schema<Product>(
       unique: true,
       default: () => randomUUID(),
     },
+    branchId: String,
     info: {
       name: String,
       shortDescription: String,

@@ -158,6 +158,11 @@ export class ProductDto implements Product {
   @IsString()
   id: string;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  branchId: string;
+
   @ApiProperty({ type: ProductInfoDto })
   @IsNotEmptyObject()
   @IsObject()

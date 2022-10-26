@@ -13,8 +13,8 @@ import {
   GetCustomizedProductsErrorResponse,
   GetCustomizedProductsQuery,
   GetCustomizedProductsSuccessResponse,
-} from '@bs-commerce/models';
-import { ProductDto } from './product.dto';
+} from 'models';
+import { CustomerProductDto } from './customerProduct.dto';
 
 export class GetCustomizedProductsQueryDto
   implements GetCustomizedProductsQuery
@@ -60,7 +60,7 @@ export class GetCustomizedProductsSuccessResponseDto
   @IsNumber()
   code: number;
 
-  @ApiProperty({ type: [ProductDto] })
+  @ApiProperty({ type: [CustomerProductDto] })
   @IsObject()
-  data: ProductDto[];
+  data: CustomerProductDto[];
 }

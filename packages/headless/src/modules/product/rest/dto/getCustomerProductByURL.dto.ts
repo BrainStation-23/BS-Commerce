@@ -12,8 +12,8 @@ import {
   GetCustomerProductByURLErrorMessages,
   GetCustomerProductByURLErrorResponse,
   GetCustomerProductByURLSuccessResponse,
-} from '@bs-commerce/models';
-import { ProductDto } from '.';
+} from 'models';
+import { CustomerProductDto } from './customerProduct.dto';
 
 export class GetCustomerProductByURLParamsDto
   implements GetCustomerProductByURLParams
@@ -49,7 +49,7 @@ export class GetCustomerProductByURLSuccessResponseDto
   @IsNumber()
   code: number;
 
-  @ApiProperty({ type: () => ProductDto })
+  @ApiProperty({ type: () => CustomerProductDto })
   @IsObject()
-  data: ProductDto;
+  data: CustomerProductDto;
 }

@@ -91,8 +91,11 @@ export class ProductResolver {
 
   @Mutation(() => ProductResponse)
   @UseGuards(new RolesGuard(['admin']))
-  async createProduct(@Args('product') product: GraphqlProductInput) {
-    const res = await this.productService.createProduct(product);
+  async createProduct(
+    @Args('product') product: GraphqlProductInput,
+    @Args('branchId') branchId: string,
+  ) {
+    const res = await this.productService.createProduct(product, branchId);
     return this.helper.serviceResponse.graphqlResponse(res);
   }
 

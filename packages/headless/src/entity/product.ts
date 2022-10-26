@@ -21,6 +21,41 @@ export class ProductRating{
 
 export class Product {
   id?: string;
+  branchId: string;
+  info: {
+    name: string;
+    shortDescription?: string;
+    fullDescription?: string;
+    sku: string;
+    price: number;
+    oldPrice: number;
+    cost: number;
+    showOnHomePage?: boolean;
+    includeInTopMenu?: boolean;
+    allowToSelectPageSize?: boolean;
+    published?: boolean;
+    displayOrder?: number;
+    isFeatured?: boolean;
+    publishDate?: Date;
+  };
+  meta?: {
+    keywords?: string[];
+    title?: string;
+    description?: string;
+    friendlyPageName?: string;
+  };
+  tags?: string[];
+  photos?: ProductPhoto[];
+  brands?: string[];
+  manufacturer?: {
+    id: string;
+    name: string;
+  };
+  categories: ProductCategory[];
+}
+
+export class ProductRequest {
+  id?: string;
   info: {
     name: string;
     shortDescription?: string;
