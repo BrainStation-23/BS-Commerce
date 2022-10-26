@@ -1,3 +1,5 @@
+import { ProductRating } from "./customerProduct";
+
 export interface ProductInfo {
   name: string;
   shortDescription?: string;
@@ -49,4 +51,6 @@ export interface Product {
   brands?: string[];
   manufacturer?: ProductManufacturer;
   categories: ProductCategory[];
+  rating?: ProductRating;
+  avgRating?: number;
 }

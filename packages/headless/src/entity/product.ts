@@ -11,10 +11,6 @@ export class ProductCategory {
   name: string;
 }
 
-export class RatingInfo{
-  count: number;
-  average: number;
-}
 export class ProductRating{
   1?: number;
   2?: number;

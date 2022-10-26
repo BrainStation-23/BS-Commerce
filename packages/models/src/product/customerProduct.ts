@@ -35,6 +35,13 @@ export interface CustomerProductCategory {
   displayOrder?: number;
 }
 
+export interface ProductRating{
+  1?: number;
+  2?: number;
+  3?: number;
+  4?: number;
+  5?: number;
+}
 export interface CustomerProduct {
   id?: string;
   info: CustomerProductInfo;
@@ -44,4 +51,6 @@ export interface CustomerProduct {
   brands?: string[];
   manufacturer?: CustomerProductManufacturer;
   categories: CustomerProductCategory[];
+  rating?: ProductRating;
+  avgRating?: number;
 }

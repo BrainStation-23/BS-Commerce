@@ -15,8 +15,10 @@ import {
   ProductPhoto,
   ProductCategory,
   ProductManufacturer,
-  Product,
+  // Product,
 } from '@bs-commerce/models';
+import { Product } from 'models';
+import { ProductRatingDto } from './customerProduct.dto';
 
 export class ProductInfoDto implements ProductInfo {
   @ApiProperty({ required: true })
@@ -189,4 +191,12 @@ export class ProductDto implements Product {
   @IsNotEmptyObject()
   @IsArray()
   categories: ProductCategoryDto[];
+
+  @ApiProperty()
+  @IsOptional()
+  rating?: ProductRatingDto;
+
+  @ApiProperty()
+  @IsOptional()
+  avgRating?: number;
 }
