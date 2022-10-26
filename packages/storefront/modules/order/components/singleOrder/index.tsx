@@ -54,8 +54,9 @@ const SingleOrder: FC = () => {
             onClickFunction={() => {
               router.push('/order');
             }}
-            childreen={<ChevronLeft height="h-9" width="w-9" />}
-          />
+          >
+            <ChevronLeft height="h-9" width="w-9" />
+          </ElementButton>
           <p className="text-2xl font-semibold">{t('order:order_summary')}</p>
         </div>
         <div className="mt-5 flex items-center gap-x-2">

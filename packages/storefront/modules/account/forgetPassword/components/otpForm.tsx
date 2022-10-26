@@ -6,6 +6,7 @@ import FormCancelButton from '@/modules/account/forgetPassword/common/cancelButt
 import FieldTemplate from '@/modules/account/forgetPassword/common/fieldTemplate';
 import FormSubmitButton from '@/modules/account/forgetPassword/common/submitButton';
 import { useAppSelector } from 'store/hooks/index';
+import TextButton from '@/modules/common/buttons/textButton';
 
 interface Props {
   setSubmitButtonState: Function;
@@ -63,14 +64,12 @@ const OtpForm: React.FC<Props> = ({
               </div>
               <div className="text-gray-500">
                 {t('forgot-password:otp_not_received')}{' '}
-                <button
-                  onClick={() => {
+                <TextButton
+                  onClickFunction={() => {
                     setSubmitButtonState('username');
                   }}
-                  className="hover:text-primary"
-                >
-                  {t('forgot-password:try_again')}
-                </button>
+                  text={t('forgot-password:try_again')}
+                />
               </div>
             </Form>
           );

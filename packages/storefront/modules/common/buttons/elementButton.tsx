@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 interface Props {
   onClickFunction?: Function;
-  childreen: ReactElement;
+  children: ReactElement;
   className?: string;
 }
 
 const ElementButton: React.FC<Props> = ({
   onClickFunction,
-  childreen,
+  children,
   className,
 }) => {
   return (
@@ -17,7 +17,7 @@ const ElementButton: React.FC<Props> = ({
         onClickFunction && onClickFunction();
       }}
     >
-      {childreen}
+      {children}
     </button>
   );
 };

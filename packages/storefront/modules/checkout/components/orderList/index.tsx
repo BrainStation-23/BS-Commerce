@@ -30,25 +30,24 @@ const OrderList: NextComponentType = () => {
           <div className="flex flex-wrap">
             <ShoppingCart />
             <ElementButton
-              childreen={
-                <div className="flex flex-wrap justify-between px-2 text-sm">
-                  {dropdown === true ? (
-                    <>
-                      <p>{t('checkout:hide_order_summary')}</p>
-                      <ChevronUp />
-                    </>
-                  ) : (
-                    <>
-                      <p>{t('checkout:show_order_summary')}</p>
-                      <ChevronDown />
-                    </>
-                  )}
-                </div>
-              }
               onClickFunction={() => {
                 setDropdown(!dropdown);
               }}
-            />
+            >
+              <div className="flex flex-wrap justify-between px-2 text-sm">
+                {dropdown === true ? (
+                  <>
+                    <p>{t('checkout:hide_order_summary')}</p>
+                    <ChevronUp />
+                  </>
+                ) : (
+                  <>
+                    <p>{t('checkout:show_order_summary')}</p>
+                    <ChevronDown />
+                  </>
+                )}
+              </div>
+            </ElementButton>
           </div>
           <p className="text-xl font-semibold">${totalCartPrice}</p>
         </div>

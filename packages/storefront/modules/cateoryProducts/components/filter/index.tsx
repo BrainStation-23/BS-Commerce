@@ -66,15 +66,14 @@ const CategoryFilter: FC = () => {
             <ElementButton
               onClickFunction={accorditionStatus1}
               className="w-full"
-              childreen={
-                <div className="flex justify-between" id="headingOne5">
-                  <span className="text-[15px] font-semibold">
-                    {t('collections:price')}
-                  </span>
-                  <span>{displayStatus1 ? upArrow : downArrow}</span>
-                </div>
-              }
-            />
+            >
+              <div className="flex justify-between" id="headingOne5">
+                <span className="text-[15px] font-semibold">
+                  {t('collections:price')}
+                </span>
+                <span>{displayStatus1 ? upArrow : downArrow}</span>
+              </div>
+            </ElementButton>
             <div
               id="collapseOne5"
               className={displayStatus1 ? '' : 'hidden'}
@@ -87,15 +86,14 @@ const CategoryFilter: FC = () => {
             <ElementButton
               onClickFunction={accorditionStatus4}
               className="w-full"
-              childreen={
-                <div className="flex justify-between" id="headingOne5">
-                  <span className="text-[15px] font-semibold">
-                    {t('collections:brand')}
-                  </span>
-                  <span>{displayStatus4 ? upArrow : downArrow}</span>
-                </div>
-              }
-            />
+            >
+              <div className="flex justify-between" id="headingOne5">
+                <span className="text-[15px] font-semibold">
+                  {t('collections:brand')}
+                </span>
+                <span>{displayStatus4 ? upArrow : downArrow}</span>
+              </div>
+            </ElementButton>
             <div className={displayStatus4 ? '' : 'hidden'}>
               <BrandTypeOptions />
             </div>

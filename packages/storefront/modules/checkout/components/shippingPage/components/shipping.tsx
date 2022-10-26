@@ -96,9 +96,10 @@ const Shipping: React.FC<Props> = (props: Props) => {
                 };
                 setModal(obj);
               }}
-              icon={<ChevronLeft />}
               className="md:hidden"
-            />
+            >
+              <ChevronLeft />
+            </ElementButton>
             <TextButton
               onClickFunction={() => {
                 const obj = {

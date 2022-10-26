@@ -25,6 +25,9 @@ import FacebookLogo from '@/modules/common/icons/facebookLogo';
 import GoogleLogo from '@/modules/common/icons/googleLogo';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
 import { storeCompare } from 'store/slices/compareSlice';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
+import ElementButton from '@/modules/common/buttons/elementButton';
 
 // import FacebookLogo from '../../public/facebook.svg';
 // import GoogleLogo from '../../public/google.svg';
@@ -175,12 +178,11 @@ const Signin: NextComponentType = () => {
                       </div>
                     </div>
                     <div className="flex flex-wrap justify-end sm:justify-end md:justify-between lg:justify-between xl:justify-between">
-                      <button
+                      <ButtonSecondary
                         type="submit"
-                        className="my-2 w-full rounded bg-primary py-2 capitalize text-white hover:bg-black dark:bg-dark_primary sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
-                      >
-                        {t('login:signin')}
-                      </button>
+                        className="my-2 w-full rounded bg-primary py-2 capitalize sm:w-full md:w-1/4 lg:w-1/4 xl:w-1/4"
+                        text={t('login:signin')}
+                      />
 
                       <div
                         id="forgotPasswordDiv"
@@ -212,17 +214,12 @@ const Signin: NextComponentType = () => {
                 <p className="ml-1 text-gray-600">{t('login:social_login')}</p>
               </div>
               <div className="flex flex-wrap">
-                <button className="mx-1 mt-3 flex flex-wrap">
-                  <GoogleLogo />
-                  {/* <Image
-                    className="mt-1 md:ml-2 lg:ml-2 xl:ml-2"
-                    src={GoogleLogo}
-                    alt="google-logo"
-                    height={15}
-                    width={15}
-                  /> */}
-                  <p className="ml-1 mt-1 text-xs">Google</p>
-                </button>
+                <ElementButton className="mx-1 mt-3 flex flex-wrap">
+                  <>
+                    <GoogleLogo />
+                    <p className="ml-1 mt-1 text-xs">Google</p>
+                  </>
+                </ElementButton>
                 <div className="mt-3">
                   <p className="ml-1 text-gray-600">{t('common:or')}</p>
                 </div>

@@ -127,7 +127,9 @@ const CartDropdown: NextComponentType = () => {
                 handleCartItemDelete(cartData);
               }}
             >
-              <ElementButton childreen={<CrossIcon />} />
+              <ElementButton>
+                <CrossIcon />
+              </ElementButton>
             </div>
           </div>
         </div>
@@ -153,15 +155,14 @@ const CartDropdown: NextComponentType = () => {
             <ElementButton
               className="inline-flex w-full justify-center text-base font-medium text-gray-700 hover:text-primary  dark:text-dark_text  dark:hover:text-dark_primary "
               onClickFunction={() => setCartTotal(!cartTotal)}
-              childreen={
-                <>
-                  <CartIcon />
-                  <span className="">
-                    {cartData?.length > 0 ? cartData?.length : 0}
-                  </span>
-                </>
-              }
-            />
+            >
+              <>
+                <CartIcon />
+                <span className="">
+                  {cartData?.length > 0 ? cartData?.length : 0}
+                </span>
+              </>
+            </ElementButton>
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (
             <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">

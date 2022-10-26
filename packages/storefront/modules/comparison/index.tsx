@@ -67,8 +67,9 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                       setShowModal(false);
                       dispatch(setModalState(false));
                     }}
-                    childreen={<CrossIcon />}
-                  />
+                  >
+                    <CrossIcon />
+                  </ElementButton>
                 </div>
                 <div className="overflow-auto p-6 sm:-mx-6 lg:-mx-8">
                   <div className="inline-block py-2 sm:px-6 lg:px-8">

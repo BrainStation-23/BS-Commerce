@@ -66,9 +66,10 @@ const ReorderModal: React.FC<Props> = ({
                 dispatch(setCartModalState({ showModal: false }));
                 onClose();
               }}
-              childreen={<XCircleIcon size={10} />}
               className="absolute -right-7 -top-5 z-50"
-            />
+            >
+              <XCircleIcon size={10} />
+            </ElementButton>
             <div className="flex w-36 flex-col px-4 sm:w-80">
               <span className="mb-2 text-sm sm:mb-4 sm:text-base"></span>
               <div

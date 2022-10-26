@@ -78,10 +78,9 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
     >
       <div className="">
         <div className="">
-          <ElementButton
-            childreen={<ChevronLeft />}
-            onClickFunction={() => closeDrawer()}
-          />
+          <ElementButton onClickFunction={() => closeDrawer()}>
+            <ChevronLeft />
+          </ElementButton>
           <span className="text-3xl font-medium text-primary dark:text-dark_primary">
             BS Commerce
           </span>
@@ -95,38 +94,33 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
               <div className="m-2 inline rounded-full border border-gray-700 p-2">
                 <UserOutlineIcon />
               </div>
-              <ElementButton
-                className="flex flex-col"
-                childreen={
-                  <>
-                    <span>My Account</span>
-                    <span>{getUsername(user)}</span>
-                  </>
-                }
-              />
+              <ElementButton className="flex flex-col">
+                <>
+                  <span>My Account</span>
+                  <span>{getUsername(user)}</span>
+                </>
+              </ElementButton>
             </div>
 
             <ElementButton
               className="flex"
               onClickFunction={() => handleButtonClick('/order')}
-              childreen={
-                <>
-                  <ShoppingBagOutlineIcon />
-                  <span className="ml-2">My Order</span>
-                </>
-              }
-            />
+            >
+              <>
+                <ShoppingBagOutlineIcon />
+                <span className="ml-2">My Order</span>
+              </>
+            </ElementButton>
           </div>
           <ElementButton
-            childreen={
-              <>
-                <MapPinOutlineIcon />
-                <span className="ml-2">Address</span>
-              </>
-            }
             className="mb-4 flex"
             onClickFunction={() => handleButtonClick('/myAccount/addresses')}
-          />
+          >
+            <>
+              <MapPinOutlineIcon />
+              <span className="ml-2">Address</span>
+            </>
+          </ElementButton>
         </div>
       </div>
       <button
