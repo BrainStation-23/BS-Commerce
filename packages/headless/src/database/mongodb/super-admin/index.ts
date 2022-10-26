@@ -9,7 +9,7 @@ import { SuperAdminModel } from "./super-admin.model";
 export class SuperAdminDatabase implements ISuperAdminDatabase{
     async findOne (query: Record<string, string>): Promise<Partial<SuperAdmin> | null> {
         try {
-            return await SuperAdminModel.findOne({...query}, {password:0, _id: 0}).lean()
+            return await SuperAdminModel.findOne({...query}, {_id: 0}).lean()
         } catch (error: any) {
             console.log(error.message);
             return null
