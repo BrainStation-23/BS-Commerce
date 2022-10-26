@@ -2,6 +2,7 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { productInterface } from '@/modules/home/imageSlider/models/index';
+import TextButton from '@/modules/common/buttons/textButton';
 
 const SinglSlide = (props: { product: productInterface }) => {
   const { t } = useTranslation();
@@ -23,9 +24,10 @@ const SinglSlide = (props: { product: productInterface }) => {
           {deatils}
         </div>
         <div className="mt-3 lg:mt-8">
-          <button className="left-0 rounded-lg bg-primary py-2 px-4 text-xs font-bold text-white hover:bg-neutral-700 dark:bg-dark_primary sm:text-xs md:text-sm xl:text-base">
-            {t('home:read_more').toUpperCase()}
-          </button>
+          <TextButton
+            className="left-0 rounded-lg bg-primary py-2 px-4 text-xs font-bold text-white hover:bg-neutral-700 dark:bg-dark_primary sm:text-xs md:text-sm xl:text-base"
+            text={t('home:read_more').toUpperCase()}
+          />
         </div>
       </div>
     </div>

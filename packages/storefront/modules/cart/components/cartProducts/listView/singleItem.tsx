@@ -11,6 +11,7 @@ import {
   updateCartItem,
 } from 'store/slices/cartSlice';
 import { userAPI } from 'APIs';
+import TextButton from '@/modules/common/buttons/textButton';
 
 interface Props {
   data: ResponseItem;
@@ -96,10 +97,10 @@ const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
             </div>
             <div className="w-25 mb-1 box-content border-2 py-2">
               <div className="flex justify-between text-center">
-                <button
-                  className="mx-4"
+                <TextButton
+                  className="mx-4 mt-0"
                   disabled={itemToUpdate.quantity <= 1 ? true : false}
-                  onClick={() => {
+                  onClickFunction={() => {
                     let _quantity =
                       itemToUpdate.quantity - 1 > 0
                         ? itemToUpdate.quantity - 1
@@ -114,13 +115,13 @@ const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                     });
                     setTotal(total - data?.product?.info?.price!);
                   }}
-                >
-                  -
-                </button>
+                  text="-"
+                />
+
                 <div className="px-2">{itemToUpdate.quantity}</div>
-                <button
-                  className="mx-4"
-                  onClick={() => {
+                <TextButton
+                  className="mx-4 mt-0"
+                  onClickFunction={() => {
                     let _quantity = itemToUpdate.quantity + 1;
                     setItemToUpdate({
                       productId: data?.productId,
@@ -132,9 +133,8 @@ const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
                     });
                     setTotal(total + data?.product?.info?.price!);
                   }}
-                >
-                  +
-                </button>
+                  text="+"
+                />
               </div>
               <span></span>
             </div>

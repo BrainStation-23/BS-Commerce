@@ -97,9 +97,10 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         <div className="flex justify-center">
           <div className="box-content w-12 border-2 p-2">
             <div className="flex justify-between">
-              <button
+              <TextButton
+                className="mt-0"
                 disabled={itemToUpdate.quantity <= 1 ? true : false}
-                onClick={() => {
+                onClickFunction={() => {
                   let _quantity =
                     itemToUpdate.quantity - 1 >= 0
                       ? itemToUpdate.quantity - 1
@@ -114,9 +115,8 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
                     quantity: _quantity,
                   });
                 }}
-              >
-                -
-              </button>
+                text="-"
+              />
               <div>
                 {' '}
                 {Intl.NumberFormat(
@@ -124,8 +124,9 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
                 ).format(itemToUpdate.quantity)}
               </div>
               {/* {itemToUpdate.quantity} */}
-              <button
-                onClick={() => {
+              <TextButton
+                className="mt-0"
+                onClickFunction={() => {
                   let _quantity = itemToUpdate.quantity + 1;
                   setItemToUpdate({
                     productId: data?.productId,
@@ -136,9 +137,8 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
                     quantity: _quantity,
                   });
                 }}
-              >
-                +
-              </button>
+                text="+"
+              />
             </div>
           </div>
         </div>
