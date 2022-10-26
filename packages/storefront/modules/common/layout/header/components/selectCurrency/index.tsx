@@ -33,7 +33,11 @@ const Currency: React.FC = () => {
     setSelectedCurrency(currencyName);
   };
   return (
-    <div className="relative inline-block">
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
@@ -56,7 +60,6 @@ const Currency: React.FC = () => {
         className={`absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
           open ? 'h-[190px] opacity-100' : 'h-0 opacity-0'
         }`}
-        onMouseLeave={() => setOpen(false)}
       >
         {currencyList.map((currency) => (
           <li
