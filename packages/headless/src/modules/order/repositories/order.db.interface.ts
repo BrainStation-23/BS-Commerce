@@ -49,6 +49,6 @@ export abstract class IOrderDatabase {
   ) => Promise<CartResponse | null>;
   abstract clearCart: (userId: string) => Promise<CartResponse | null>;
   abstract createReview: (review: any) => Promise<Review | null>;
-  abstract findReview: (query: Record<string,any>)=> Promise<Review[] | null>;
+  abstract findReview: (query: Record<string,any>, skip: number, limit: number)=> Promise<Review[] | null>;
   abstract addProductRating: (productId: string, rating: number)=> Promise<boolean>;
 }

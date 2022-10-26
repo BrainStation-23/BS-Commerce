@@ -2,9 +2,18 @@ import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Type } from "class-transformer";
 import { IsArray, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from "class-validator";
-import { IProductReviewList, ProductReviewErrorMessage, ProductReviewErrorResponse, ProductReviewSuccessResponse } from "models";
+import { GetProductReviewQuery, IProductReviewList, ProductReviewErrorMessage, ProductReviewErrorResponse, ProductReviewSuccessResponse } from "models";
 import { ReviewPhotoDto, CommentDto, ReviewDto } from "./review.dto";
 
+export class GetProductReviewQueryDto implements GetProductReviewQuery{
+  @ApiProperty({ required: false, type: Number })
+  @IsOptional()
+  skip?: number;
+
+  @ApiProperty({ required: false, type: Number })
+  @IsOptional()
+  limit?: number;
+}
 export class ProductReviewListDto implements IProductReviewList{
     @ApiProperty()
     @IsNotEmpty()

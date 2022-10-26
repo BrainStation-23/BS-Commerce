@@ -1,6 +1,10 @@
 import { SuccessResponse, ErrorResponse, DescriptiveError } from 'src/index';
 import { IReview } from './review.interface';
 
+export interface GetProductReviewQuery{
+  skip?: number;
+  limit?: number;
+}
 export interface IProductReviewList{
     productId: string;
     reviews: IReview[];

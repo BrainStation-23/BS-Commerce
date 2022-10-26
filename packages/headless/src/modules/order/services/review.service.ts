@@ -71,8 +71,8 @@ export class OrderReviewService {
         return { code: 200, data: review };
     }
 
-    async getProductReview(productId: string): Promise<ProductReviewResponse>{
-        const reviews = await this.orderRepository.findReview({ productId });
+    async getProductReview(productId: string, skip: number = 0, limit: number = 0): Promise<ProductReviewResponse>{
+        const reviews = await this.orderRepository.findReview({ productId }, skip, limit);
 
         if(!reviews)
             return {
