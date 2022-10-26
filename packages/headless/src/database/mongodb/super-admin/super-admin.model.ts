@@ -17,6 +17,10 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
       type: String,
       trim: true,
     },
+    role: {
+      type: String,
+      trim: true,
+    },
     email: {
       type: String,
       index: true,

@@ -13,7 +13,7 @@ export class SuperAdminLoginDto implements ISuperAdminLoginReq{
     password: string
 }
 
-export class SuperAdminLoginResponse implements ISuperAdminLoginRes{
+export class SuperAdminLoginRes implements ISuperAdminLoginRes{
     @ApiProperty()
     token: string
 }

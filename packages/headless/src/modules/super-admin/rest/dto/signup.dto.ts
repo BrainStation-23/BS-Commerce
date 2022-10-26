@@ -25,6 +25,10 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     @MinLength(2)
     lastName: string
 
+    @ApiProperty({example:'super-admin'})
+    @IsString()
+    role: string
+
     @ApiProperty({example:'sadmin@mail.com'})
     @IsEmail()
     email: string
@@ -48,7 +52,36 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     @IsArray()
     mfaType?: string[]
 
-    @ApiProperty({example: AccountTypeEnum.SECONDARY})
+    @ApiProperty({example: AccountTypeEnum.PRIMARY})
     @IsEnum(AccountTypeEnum)
+    accountType: AccountTypeEnum
+}
+
+export class SuperAdminSignupRes implements ISuperAdminSignupReq{ 
+    @ApiProperty({example:'Adam'})
+    firstName: string
+
+    @ApiProperty({example:'Smit'})
+    lastName: string
+
+    @ApiProperty({example:'super-admin'})
+    role: string
+
+    @ApiProperty({example:'sadmin@mail.com'})
+    email: string
+
+    @ApiProperty({example:'880'})
+    countryCode?: string
+
+    @ApiProperty({example:'1512001122'})
+    phone?: string
+
+    @ApiProperty({example: false})
+    isMfa?: boolean
+
+    @ApiProperty({example: []})
+    mfaType?: string[]
+
+    @ApiProperty({example: AccountTypeEnum.PRIMARY})
     accountType: AccountTypeEnum
 }
