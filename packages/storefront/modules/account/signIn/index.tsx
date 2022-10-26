@@ -223,16 +223,13 @@ const Signin: NextComponentType = () => {
                 <div className="mt-3">
                   <p className="ml-1 text-gray-600">{t('common:or')}</p>
                 </div>
-                <button className="mx-1 mt-3 flex flex-wrap">
-                  <FacebookLogo />
-                  {/* <Image
-                    src={FacebookLogo}
-                    alt="facebook-logo"
-                    height={38}
-                    width={35}
-                  /> */}
-                  <p className="mt-1 text-xs">Facebook</p>
-                </button>
+                <ElementButton className="mx-1 mt-3 flex flex-wrap">
+                  <>
+                    <FacebookLogo />
+
+                    <p className="mt-1 text-xs">Facebook</p>
+                  </>
+                </ElementButton>
               </div>
             </div>
           </div>

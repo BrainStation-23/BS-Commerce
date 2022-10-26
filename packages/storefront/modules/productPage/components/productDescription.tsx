@@ -7,6 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Product } from '@bs-commerce/models';
 import ProductReview from '@/modules/productPage/components/productReview';
+import TextButton from '@/modules/common/buttons/textButton';
+import ElementButton from '@/modules/common/buttons/elementButton';
 interface SingleProduct {
   product: Product;
 }
@@ -64,39 +66,38 @@ const ProductDescription: React.FC<SingleProduct> = ({
       <div className="border-g-300 mx-auto mt-16 border-2 text-slate-600 dark:text-dark_text lg:w-full">
         <div className="block flex flex-wrap border-b-2">
           <ul className="my-3">
-            <button
-              onClick={handleDescription}
+            <TextButton
+              onClickFunction={handleDescription}
               className={
                 description !== 'hidden'
                   ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold '
               }
-            >
-              {t('product-details:description')}
-            </button>
-            <button
-              onClick={handleReview}
+              text={t('product-details:description')}
+            />
+
+            <TextButton
+              onClickFunction={handleReview}
               className={
                 review !== 'hidden'
                   ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold '
               }
-            >
-              Review
-            </button>
+              text="Review"
+            />
+
             {/* <button onClick={handleShipping} className="mx-5 font-semibold">
               Shipping Policy
             </button> */}
-            <button
-              onClick={handleSize}
+            <TextButton
+              onClickFunction={handleSize}
               className={
                 size_chart !== 'hidden'
                   ? 'mx-5 font-semibold text-primary dark:text-dark_primary'
                   : 'mx-5 font-semibold'
               }
-            >
-              {t('product-details:size_chart')}
-            </button>
+              text={t('product-details:size_chart')}
+            />
           </ul>
         </div>
 

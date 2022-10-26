@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import ElementButton from '../../buttons/elementButton';
 import UpArrowIcon from '../../icons/upArrowIcon';
 
 const BackToTopButton = () => {
@@ -24,21 +25,12 @@ const BackToTopButton = () => {
   return (
     <div>
       {backToTopButton && (
-        <button
-          className="rounded-full border-2 border-white bg-primary dark:bg-dark_primary"
-          style={{
-            position: 'fixed',
-            bottom: '65px',
-            right: '30px',
-            height: '40px',
-            width: '40px',
-            // fontSize: '20px',
-            zIndex: '50',
-          }}
-          onClick={scrollUp}
+        <ElementButton
+          className="fixed bottom-[65px] right-[30px] z-50 h-[40px] w-[40px] rounded-full border-2 border-white bg-primary dark:bg-dark_primary"
+          onClickFunction={scrollUp}
         >
           <UpArrowIcon />
-        </button>
+        </ElementButton>
       )}
     </div>
   );
