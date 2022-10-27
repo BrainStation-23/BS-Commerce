@@ -44,7 +44,7 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
 
     @ApiProperty({example: false})
     @IsOptional()
-    isMfa?: boolean
+    isMfaEnabled?: boolean
 
     @ApiProperty({example: []})
     @IsOptional()
