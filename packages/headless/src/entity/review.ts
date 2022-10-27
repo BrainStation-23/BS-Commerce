@@ -17,6 +17,7 @@ export class ReviewPhoto{
 
 export class Comment{
     id: string;
+    repliedBy: string;
     text: string;
     image: string[];
     createdAt: Date;
