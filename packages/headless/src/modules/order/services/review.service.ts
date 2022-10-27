@@ -1,5 +1,5 @@
 import { ProductReviewResponseDto } from './../rest/dto/product.review.dto';
-import { CreateReviewErrorMessage, CreateReviewResponse, ICreateReview, IProductReviewList, ProductReviewErrorMessage, ProductReviewResponse } from 'models';
+import { CreateReplyErrorMessage, CreateReviewErrorMessage, CreateReviewResponse, ICreateReply, ICreateReplyResponse, ICreateReview, IProductReviewList, ProductReviewErrorMessage, ProductReviewResponse } from 'models';
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { OrderRepository } from "../repositories";
 import { ProductReviewListEntity } from 'src/entity/review';
@@ -87,5 +87,27 @@ export class OrderReviewService {
         }
 
         return { code: 200, data: response };
+    }
+
+    async createReply(request: ICreateReply): Promise<ICreateReplyResponse>{
+        const { reviewId } = request;
+        const review = await this.orderRepository.findReview({id: reviewId});
+        if(review.length === 0)
+            return {
+                error: CreateReplyErrorMessage.INVALID_REVIEW_ID,
+                errors: null,
+                code: HttpStatus.INTERNAL_SERVER_ERROR
+            };
+            
+        const reply = await this.orderRepository.createReply(request);
+
+        if(!reply)
+            return {
+                error: CreateReplyErrorMessage.CANNOT_REPLY,
+                errors: null,
+                code: HttpStatus.INTERNAL_SERVER_ERROR
+            };
+
+        return { code: 200, data: reply };
     }
 }

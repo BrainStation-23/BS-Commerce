@@ -10,3 +10,4 @@ export * from './reOrder.interface';
 export * from './review.interface';
 export * from './create.review.interface';
 export * from './product.review.interface';
+export * from './create.reply.interface';

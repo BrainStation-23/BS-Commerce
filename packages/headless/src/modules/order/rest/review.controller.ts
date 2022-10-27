@@ -6,6 +6,7 @@ import { Response } from 'express';
 import { ProductReviewListDto, ProductReviewResponseDto } from "./dto/product.review.dto";
 import { IServiceResponse } from "src/utils/response/service.response.interface";
 import { ReviewDto } from "./dto/review.dto";
+import { CreateReplyDto } from "./dto/create.reply.dto";
 
 @ApiTags('Order - Review API')
 @Controller('order/review')
@@ -43,5 +44,11 @@ export class OrderReviewController {
         return response;
     }
 
-
+    @Post('/reply')
+    async createReply(
+        @Body() body: CreateReplyDto,
+        @Res({ passthrough: true }) res: Response
+    ){
+        const { code, ...response } = await this.orderReviewService.createReply(body);
+    }
 }
