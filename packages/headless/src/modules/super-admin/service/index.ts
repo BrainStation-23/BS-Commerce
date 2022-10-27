@@ -27,8 +27,9 @@ export class SuperAdminService{
         body.password = await bcrypt.hash(body.password, authConfig.salt)
 
         const newSuperAdmin = await this.superAdminRepository.create(body)
-        if(newSuperAdmin)
+        if(newSuperAdmin){
             return successResponse(PartialType(SuperAdmin), newSuperAdmin)
+        }
         return errorResponse('Error in create super admin', null, HttpStatus.CONFLICT)
     }
 

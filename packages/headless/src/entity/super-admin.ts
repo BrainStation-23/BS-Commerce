@@ -7,7 +7,6 @@ export class SuperAdmin{
     countryCode: string
     phone: string
     password: string
-    isMfa: boolean
+    isMfaEnabled: boolean
     mfaType: string[]
-    accountType: string
 }

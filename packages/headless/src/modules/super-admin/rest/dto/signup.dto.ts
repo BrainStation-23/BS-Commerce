@@ -1,44 +1,41 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsArray, IsEmail, IsEnum, IsString, MaxLength, MinLength } from "class-validator"
+import { IsArray, IsEmail, IsEnum, IsOptional, IsString, MaxLength, MinLength } from "class-validator"
+import { string } from "joi"
 import { ISuperAdminSignupReq } from "models"
 
-
-export enum AccountTypeEnum{
-    PRIMARY = 'PRIMARY',
-    SECONDARY = 'SECONDARY'
-}
 export enum MfaType{
     EMAIL='EMAIL',
     PHONE='PHONE',
-    BOTH='BOTH'
 }
 export class SuperAdminSignupReq implements ISuperAdminSignupReq{ 
-    @ApiProperty({example:'Adam'})
+    @ApiProperty({example:'Adam', required: true})
     @IsString()
     @MaxLength(30)
     @MinLength(2)
     firstName: string
 
-    @ApiProperty({example:'Smit'})
+    @ApiProperty({example:'Smit', required: true})
     @IsString()
     @MaxLength(30)
     @MinLength(2)
     lastName: string
 
-    @ApiProperty({example:'super-admin'})
+    @ApiProperty({example:'super-admin', required: true})
     @IsString()
     role: string
 
-    @ApiProperty({example:'sadmin@mail.com'})
+    @ApiProperty({example:'sadmin@mail.com', required: true})
     @IsEmail()
     email: string
 
     @ApiProperty({example:'880'})
     @IsString()
+    @IsOptional()
     countryCode?: string
 
     @ApiProperty({example:'1512001122'})
     @IsString()
+    @IsOptional()
     phone?: string
 
     @ApiProperty({example:'12345678'})
@@ -46,15 +43,13 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     password: string
 
     @ApiProperty({example: false})
+    @IsOptional()
     isMfa?: boolean
 
     @ApiProperty({example: []})
+    @IsOptional()
     @IsArray()
     mfaType?: string[]
-
-    @ApiProperty({example: AccountTypeEnum.PRIMARY})
-    @IsEnum(AccountTypeEnum)
-    accountType: AccountTypeEnum
 }
 
 export class SuperAdminSignupRes implements ISuperAdminSignupReq{ 
@@ -77,11 +72,8 @@ export class SuperAdminSignupRes implements ISuperAdminSignupReq{
     phone?: string
 
     @ApiProperty({example: false})
-    isMfa?: boolean
+    isMfaEnabled?: boolean
 
     @ApiProperty({example: []})
     mfaType?: string[]
-
-    @ApiProperty({example: AccountTypeEnum.PRIMARY})
-    accountType: AccountTypeEnum
 }

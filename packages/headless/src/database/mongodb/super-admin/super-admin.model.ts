@@ -12,19 +12,23 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     firstName: {
       type: String,
       trim: true,
+      required: true
     },
     lastName: {
       type: String,
       trim: true,
+      required: true
     },
     role: {
       type: String,
       trim: true,
+      required: true
     },
     email: {
       type: String,
       index: true,
       unique: true,
+      required: true
     },
     countryCode: {
       type: String,
@@ -36,14 +40,13 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     },
     password: {
       type: String,
+      required: true
     },
-    isMfa: Boolean,
+    isMfaEnabled: Boolean,
     mfaType: {
       type: [String],
-    },
-    accountType: {
-      type: String,
-    },
+      enum: ['EMAIL', 'PHONE']
+    }
   },
   {
     timestamps: true,
