@@ -15,7 +15,7 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
   const { title, categoryNameAndId } = props;
 
   return (
-    <div className=" h-48 bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner18.jpg?v=1588133916')] bg-cover bg-center bg-no-repeat p-9 sm:p-5 md:p-12 lg:p-14 xl:p-14">
+    <div className=" md:h-48 bg-[url('https://cdn.shopify.com/s/files/1/0359/6350/2651/files/banner18.jpg?v=1588133916')] bg-cover bg-center bg-no-repeat p-9 sm:p-5 md:p-12 lg:p-14 xl:p-14">
       <h3 className="text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl">
         {title}
       </h3>
