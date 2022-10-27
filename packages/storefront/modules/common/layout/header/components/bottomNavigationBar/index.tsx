@@ -13,7 +13,7 @@ interface Props {
 const BottomNavigationBar: React.FC<Props> = ({ openDrawer }: Props) => {
   return (
     <>
-      <div className="fixed bottom-0 z-40 flex w-full flex-row items-center justify-center bg-primary py-3 dark:bg-dark_primary lg:hidden">
+      <div className="text-white fixed bottom-0 z-40 flex w-full flex-row items-center justify-center bg-primary py-3 dark:bg-dark_primary lg:hidden">
         <div className="flex w-full flex-row justify-evenly md:w-9/12">
           <Link href="/" passHref>
             <a>
@@ -27,7 +27,7 @@ const BottomNavigationBar: React.FC<Props> = ({ openDrawer }: Props) => {
           </Link>
           <Link href="/wishlist" passHref>
             <a>
-              <ElementButton className="flex flex-col items-center fill-primary stroke-dark_bg dark:fill-dark_primary dark:stroke-dark_text">
+              <ElementButton className="flex flex-col items-center fill-primary stroke-white dark:fill-dark_primary dark:stroke-dark_text">
                 <>
                   <HeartIcon />
                   <span>Wishlist</span>
