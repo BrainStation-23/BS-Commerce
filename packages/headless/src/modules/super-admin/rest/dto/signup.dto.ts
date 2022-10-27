@@ -28,6 +28,11 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     @IsEmail()
     email: string
 
+    @ApiProperty({example:'12345678', required: true})
+    @IsString()
+    @MinLength(8)
+    password: string
+
     @ApiProperty({example:'880'})
     @IsString()
     @IsOptional()
@@ -37,10 +42,6 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     @IsString()
     @IsOptional()
     phone?: string
-
-    @ApiProperty({example:'12345678'})
-    @IsString()
-    password: string
 
     @ApiProperty({example: false})
     @IsOptional()

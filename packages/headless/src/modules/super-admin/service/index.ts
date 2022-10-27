@@ -23,6 +23,9 @@ export class SuperAdminService{
         if(isExist?.phone === body.phone){
             return errorResponse('This phone number is already exist.', null, HttpStatus.BAD_REQUEST)
         }
+        if(!body?.password){
+            return errorResponse('Password required!', null, HttpStatus.BAD_REQUEST)
+        }
         
         body.password = await bcrypt.hash(body.password, authConfig.salt)
 
