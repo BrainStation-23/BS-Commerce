@@ -13,6 +13,7 @@ import UserOutlineIcon from '@/modules/common/icons/userIcon';
 import ShoppingBagOutlineIcon from '@/modules/common/icons/shoppingBagIcon';
 import MapPinOutlineIcon from '@/modules/common/icons/mapPinIcon';
 import ElementButton from '@/modules/common/buttons/elementButton';
+import ThemeChanger from '../themeChanger';
 
 interface Props {
   drawer: boolean;
@@ -84,6 +85,8 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
           <span className="text-3xl font-medium text-primary dark:text-dark_primary">
             BS Commerce
           </span>
+          <ThemeChanger />
+
         </div>
         <div className="font-medium">
           <div className="my-5 border-b border-t py-4">

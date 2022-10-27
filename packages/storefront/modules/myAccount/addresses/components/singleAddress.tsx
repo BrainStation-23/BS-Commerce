@@ -52,7 +52,7 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
           setShowDefault(false);
         }}
       >
-        <div className="mt-3 w-3/4 text-sm lg:w-2/3">
+        <div className="mt-3 text-sm md:w-3/4 lg:w-2/3">
           {/* <div className="md:flex md:flex-row md:justify-between">
                 <p>
                   {singleAddress?.firstName!} {singleAddress?.lastName!}

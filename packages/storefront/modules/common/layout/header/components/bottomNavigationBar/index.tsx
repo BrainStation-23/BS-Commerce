@@ -16,34 +16,34 @@ const BottomNavigationBar: React.FC<Props> = ({ openDrawer }: Props) => {
       <div className="fixed bottom-0 z-40 flex w-full flex-row items-center justify-center bg-primary py-3 dark:bg-dark_primary lg:hidden">
         <div className="flex w-full flex-row justify-evenly md:w-9/12">
           <Link href="/" passHref>
-            <>
+            <a>
               <ElementButton className="flex flex-col items-center">
                 <>
                   <HomeOutlineIcon />
                   <span>Home</span>
                 </>
               </ElementButton>
-            </>
+            </a>
           </Link>
           <Link href="/wishlist" passHref>
-            <>
-              <ElementButton className="flex flex-col items-center">
+            <a>
+              <ElementButton className="flex flex-col items-center fill-primary stroke-dark_bg dark:fill-dark_primary dark:stroke-dark_text">
                 <>
                   <HeartIcon />
                   <span>Wishlist</span>
                 </>
               </ElementButton>
-            </>
+            </a>
           </Link>
           <Link href="/cart" passHref>
-            <>
+            <a>
               <ElementButton className="flex flex-col items-center">
                 <>
                   <ShoppingCartOutlineIcon />
                   <span>Cart</span>
                 </>
               </ElementButton>
-            </>
+            </a>
           </Link>
           <ElementButton
             className="flex flex-col items-center"
