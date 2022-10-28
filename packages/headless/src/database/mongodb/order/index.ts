@@ -296,9 +296,17 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async findReview(query: Record<string, any>): Promise<Review[] | null> {
+  async findReview(
+    query: Record<string, any>,
+    skip: number,
+    limit: number,
+  ): Promise<Review[] | null> {
     try {
-      return await ReviewModel.find(query).lean().exec();
+      return await ReviewModel.find(query)
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .exec();
     } catch (err) {
       console.log(err);
       return null;
@@ -313,18 +321,19 @@ export class OrderDatabase implements IOrderDatabase {
       if (!product) return false;
 
       let ratingObj = product.rating || {};
-      if(Object.keys(ratingObj).length === 0) ratingObj[`${rating}`] = 1;
-      else{
+      if (Object.keys(ratingObj).length === 0) ratingObj[`${rating}`] = 1;
+      else {
         for (let i in ratingObj) {
           if (parseInt(i) === rating) ratingObj[i]++;
           else ratingObj[`${rating}`] = 1;
         }
       }
 
-      let noOfRatings = 0, sum = 0;
+      let noOfRatings = 0,
+        sum = 0;
       for (const key in ratingObj) {
         noOfRatings = noOfRatings + ratingObj[key];
-        sum = sum + (parseInt(key) * ratingObj[key]);
+        sum = sum + parseInt(key) * ratingObj[key];
       }
 
       const avgRating = Math.round(sum / noOfRatings);
@@ -332,7 +341,7 @@ export class OrderDatabase implements IOrderDatabase {
 
       const response = await ProductModel.findOneAndUpdate(
         { id: productId },
-        { $set: { rating: ratingObj, avgRating} },
+        { $set: { rating: ratingObj, avgRating } },
         { new: true },
       )
         .select('-_id')
@@ -340,7 +349,7 @@ export class OrderDatabase implements IOrderDatabase {
         .exec();
 
       return response ? true : false;
-    }catch (err) {
+    } catch (err) {
       console.log(err);
       return false;
     }
