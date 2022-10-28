@@ -21,6 +21,8 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import { CartModel } from '../cart/cart.model';
+import { ReviewModel } from '../review/review.model';
+import { Review } from 'src/entity/review';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -263,9 +265,9 @@ export class OrderDatabase implements IOrderDatabase {
   ): Promise<OrderEntity[]> {
     const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
       query;
-    const sort ={
-      orderedDate: -1
-    }
+    const sort = {
+      orderedDate: -1,
+    };
     const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
@@ -278,6 +280,69 @@ export class OrderDatabase implements IOrderDatabase {
         ...(endDate && { $lte: new Date(endDate) }),
       };
     }
-    return await OrderModel.find(queryParams).skip(skip).limit(limit).sort(sort).lean();
+    return await OrderModel.find(queryParams)
+      .skip(skip)
+      .limit(limit)
+      .sort(sort)
+      .lean();
+  }
+
+  async createReview(review: any): Promise<Review | null> {
+    try {
+      return await ReviewModel.create(review);
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async findReview(query: Record<string, any>): Promise<Review[] | null> {
+    try {
+      return await ReviewModel.find(query).lean().exec();
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean> {
+    try {
+      const product = await ProductModel.findOne({ id: productId })
+        .lean()
+        .exec();
+      if (!product) return false;
+
+      let ratingObj = product.rating || {};
+      if(Object.keys(ratingObj).length === 0) ratingObj[`${rating}`] = 1;
+      else{
+        for (let i in ratingObj) {
+          if (parseInt(i) === rating) ratingObj[i]++;
+          else ratingObj[`${rating}`] = 1;
+        }
+      }
+
+      let noOfRatings = 0, sum = 0;
+      for (const key in ratingObj) {
+        noOfRatings = noOfRatings + ratingObj[key];
+        sum = sum + (parseInt(key) * ratingObj[key]);
+      }
+
+      const avgRating = Math.round(sum / noOfRatings);
+      const newProduct = { ...product, rating: ratingObj, avgRating };
+
+      const response = await ProductModel.findOneAndUpdate(
+        { id: productId },
+        { $set: { rating: ratingObj, avgRating} },
+        { new: true },
+      )
+        .select('-_id')
+        .lean()
+        .exec();
+
+      return response ? true : false;
+    }catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 }
