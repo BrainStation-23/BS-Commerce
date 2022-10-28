@@ -16,6 +16,7 @@ import {
 } from 'store/slices/productsSlice';
 
 import HomeComponent from '@/modules/home';
+import { useEffect } from 'react';
 
 interface Props {
   products: CustomerProduct[];
@@ -32,10 +33,12 @@ const Home: NextPage<Props> = ({
 }: Props) => {
   const dispatch = useAppDispatch();
 
-  dispatch(storeCategory(categories));
-  dispatch(storeProducts(products));
-  dispatch(storeFeaturedProducts(featuredProducts));
-  dispatch(storeWishlist(wishlistedProducts));
+  useEffect(() => {
+    dispatch(storeCategory(categories));
+    dispatch(storeProducts(products));
+    dispatch(storeFeaturedProducts(featuredProducts));
+    dispatch(storeWishlist(wishlistedProducts));
+  }, [dispatch, products, featuredProducts, categories, wishlistedProducts]);
 
   return <HomeComponent />;
 };

@@ -14,7 +14,7 @@ const ThemeChanger = () => {
           value=""
           className="peer sr-only"
           checked={currentTheme === 'light' ? false : true}
-          onClick={() => {
+          onChange={() => {
             currentTheme === 'dark' ? setTheme('light') : setTheme('dark');
           }}
         />
