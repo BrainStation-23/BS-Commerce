@@ -52,5 +52,8 @@ export class OrderReviewController {
         @Res({ passthrough: true }) res: Response
     ){
         const { code, ...response } = await this.orderReviewService.createReply(body);
+
+        res.status(code);
+        return response;
     }
 }

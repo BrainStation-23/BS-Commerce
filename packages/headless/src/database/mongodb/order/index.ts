@@ -356,11 +356,25 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
-  async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
-    const { reviewId } = reply;
+  async createReply(request: ICreateReply): Promise<IReviewReplyResponse | null>{
+    const { reviewId } = request;
+    delete request.reviewId;
+
     try{
-      const review = await ReviewModel.findOne({ id: reviewId});
-      
+      const reply =  await ReviewModel.findOneAndUpdate(
+        { id: reviewId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      return {
+        id: reply.reply.id,
+        reviewId,
+        repliedBy: reply.reply.repliedBy,
+        text: reply.reply.text,
+        image: reply.reply.image,
+        createdAt: reply.reply.createdAt
+      };
     }catch(err){
       console.log(err);
       return null;

@@ -100,7 +100,7 @@ export class OrderReviewService {
             };
 
         //add the user id from the guards
-        const reply = await this.orderRepository.createReply(request);
+        const reply = await this.orderRepository.createReply({...request, repliedBy: 'storeAdmin'});
 
         if(!reply)
             return {

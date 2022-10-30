@@ -129,6 +129,8 @@ export class OrderRepository {
   }
 
   async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
-    return await this.db.createReply(reply);
+    const id = randomUUID();
+    const request = { ...reply, id};
+    return await this.db.createReply(request);
   }
 }
