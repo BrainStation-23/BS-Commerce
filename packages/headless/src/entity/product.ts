@@ -52,6 +52,8 @@ export class Product {
     name: string;
   };
   categories: ProductCategory[];
+  rating?: ProductRating;
+  avgRating?: number;
 }
 
 export class ProductRequest {
@@ -86,8 +88,6 @@ export class ProductRequest {
     name: string;
   };
   categories: ProductCategory[];
-  rating?: ProductRating;
-  avgRating?: number;
 }
 
 export class UpdateCategory {
