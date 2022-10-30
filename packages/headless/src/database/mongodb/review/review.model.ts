@@ -25,11 +25,7 @@ const ReviewSchema = new Schema<Review>(
       }
     ],
     reply:{
-        id: {
-          type: String,
-          default: () => randomUUID(),
-          unique: true
-        },
+        id: String,
         repliedBy: String,
         text: String,
         image: {
