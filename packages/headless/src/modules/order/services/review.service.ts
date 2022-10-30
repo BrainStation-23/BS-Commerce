@@ -98,7 +98,8 @@ export class OrderReviewService {
                 errors: null,
                 code: HttpStatus.INTERNAL_SERVER_ERROR
             };
-            
+
+        //add the user id from the guards
         const reply = await this.orderRepository.createReply(request);
 
         if(!reply)

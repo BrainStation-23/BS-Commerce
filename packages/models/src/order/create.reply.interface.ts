@@ -2,6 +2,7 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 
 export interface ICreateReply {
   reviewId: string;
+  repliedBy?: string;
   text: string;
   image: string[];
   createdAt: Date;

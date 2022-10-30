@@ -23,6 +23,7 @@ import {
 import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
 import { Review } from 'src/entity/review';
+import { ICreateReply, IReviewReplyResponse } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -353,5 +354,17 @@ export class OrderDatabase implements IOrderDatabase {
       console.log(err);
       return false;
     }
+  }
+
+  async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
+    const { reviewId } = reply;
+    try{
+      const review = await ReviewModel.findOne({ id: reviewId});
+      
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+
   }
 }

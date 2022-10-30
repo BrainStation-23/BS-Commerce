@@ -4,7 +4,7 @@ import {
 } from '@bs-commerce/models';
 import { Injectable } from '@nestjs/common';
 import { randomInt, randomUUID } from 'crypto';
-import { CreateReviewResponse } from 'models';
+import { CreateReviewResponse, ICreateReply, IReviewReplyResponse } from 'models';
 
 import {
   GetAllOrderQueryEntity,
@@ -126,5 +126,9 @@ export class OrderRepository {
 
   async addProductRating(productId: string, rating: number): Promise<boolean>{
     return await this.db.addProductRating(productId, rating);
+  }
+
+  async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
+    return await this.db.createReply(reply);
   }
 }

@@ -16,7 +16,7 @@ import {
   OrderStatEntity,
   ProductOrder,
 } from 'src/entity/order';
-import { CreateReviewResponse } from 'models';
+import { CreateReviewResponse, ICreateReply, IReviewReplyResponse } from 'models';
 import { Review } from 'src/entity/review';
 
 @Injectable()
@@ -51,4 +51,5 @@ export abstract class IOrderDatabase {
   abstract createReview: (review: any) => Promise<Review | null>;
   abstract findReview: (query: Record<string,any>, skip: number, limit: number)=> Promise<Review[] | null>;
   abstract addProductRating: (productId: string, rating: number)=> Promise<boolean>;
+  abstract createReply: (reply: ICreateReply) => Promise<IReviewReplyResponse | null>;
 }
