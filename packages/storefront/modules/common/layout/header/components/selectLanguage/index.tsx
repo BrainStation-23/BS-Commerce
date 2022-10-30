@@ -22,7 +22,7 @@ const Language: React.FC = () => {
     dispatch(setCurrencyLanguage(currencyName));
   };
   return (
-    <div className="relative inline-block"
+    <div className="relative inline-block h-8"
     onMouseLeave={() => setOpen(false)}
     onMouseEnter={() => setOpen(true)}
     >
@@ -45,10 +45,9 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top absolute top-6 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
+        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
           open ? 'opacity-100' : 'h-0 opacity-0 hidden'
         }`}
-        onMouseLeave={() => setOpen(false)}
       >
         {router?.locales?.map((locale) => (
           <li

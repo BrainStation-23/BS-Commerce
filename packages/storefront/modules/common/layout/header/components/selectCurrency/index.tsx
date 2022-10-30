@@ -34,7 +34,7 @@ const Currency: React.FC = () => {
   };
   return (
     <div
-      className="relative inline-block"
+      className="relative inline-block h-8"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
@@ -57,7 +57,7 @@ const Currency: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`absolute top-6 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
+        className={`absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
           open ? ' opacity-100' : 'hidden'
         }`}
       >

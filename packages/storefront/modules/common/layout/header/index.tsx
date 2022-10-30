@@ -72,7 +72,7 @@ const Header: NextComponentType = () => {
       {/* Top portion */}
       <header className="hidden justify-center border-b border-slate-200 py-2 lg:flex">
         <div className="container flex justify-between px-4 text-sm">
-          <div className="space-x-2">
+          <div className="space-x-2 h-5">
             <Language />
             <span>|</span>
             <Currency />
