@@ -115,7 +115,7 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
               value=""
               className="peer sr-only"
               checked={checked}
-              onClick={() => {
+              onChange={() => {
                 setChecked(!checked);
               }}
             />

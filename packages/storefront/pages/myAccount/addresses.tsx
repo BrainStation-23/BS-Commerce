@@ -7,6 +7,7 @@ import { Customer } from '@bs-commerce/models';
 import { useAppDispatch } from 'store/hooks';
 import { storeCustomerDetails } from 'store/slices/userSlice';
 import { storeAddresses } from 'store/slices/customerAddressSlice';
+import { useEffect } from 'react';
 
 interface Props {
   customerProfile: Customer;
@@ -14,8 +15,10 @@ interface Props {
 
 const Addresses: NextPage<Props> = ({ customerProfile }) => {
   const dispatch = useAppDispatch();
-  dispatch(storeCustomerDetails(customerProfile!));
-  dispatch(storeAddresses(customerProfile?.addresses!));
+  useEffect(() => {
+    dispatch(storeCustomerDetails(customerProfile!));
+    dispatch(storeAddresses(customerProfile?.addresses!));
+  }, [dispatch, customerProfile]);
 
   return <AddressesComponent />;
 };

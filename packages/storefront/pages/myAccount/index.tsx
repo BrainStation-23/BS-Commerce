@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { useEffect } from 'react';
 var cookie = require('cookie');
 
 import Profile from '@/modules/myAccount/profile/components';
@@ -14,7 +15,9 @@ interface Props {
 const MyAccount: NextPage<Props> = ({ customerInformation }: Props) => {
   // console.log(customerInformation);
   const dispatch = useAppDispatch();
-  dispatch(storeCustomerDetails(customerInformation.data));
+  useEffect(() => {
+    dispatch(storeCustomerDetails(customerInformation.data));
+  }, [dispatch, customerInformation]);
 
   return <Profile />;
 };

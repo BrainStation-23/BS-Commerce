@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
+import { useEffect } from 'react';
 var cookie = require('cookie');
 
 import { Wishlist } from '@bs-commerce/models';
@@ -14,7 +15,9 @@ interface Props {
 
 const Wishlist: NextPage<Props> = ({ wishlistedProducts }: Props) => {
   const dispatch = useAppDispatch();
-  dispatch(storeWishlist(wishlistedProducts));
+  useEffect(() => {
+    dispatch(storeWishlist(wishlistedProducts));
+  }, [dispatch, wishlistedProducts]);
 
   return <WishlistComponent />;
 };
