@@ -3,7 +3,8 @@ import {
   CreateProductOrderDetails,
 } from '@bs-commerce/models';
 import { Injectable } from '@nestjs/common';
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
+import { CreateReviewResponse } from 'models';
 
 import {
   GetAllOrderQueryEntity,
@@ -17,6 +18,7 @@ import {
   CartResponse,
   Cart,
 } from 'src/entity/order';
+import { Review } from 'src/entity/review';
 import { IOrderDatabase } from './order.db.interface';
 
 @Injectable()
@@ -112,5 +114,17 @@ export class OrderRepository {
     limit?: number,
   ): Promise<OrderEntity[]> {
     return await this.db.getOrderList(query, skip, limit);
+  }
+
+  async createReview(review: any):Promise<Review | null>{
+    return await this.db.createReview(review);
+  }
+
+  async findReview(query: Record<string,any>, skip: number = 0, limit: number = 0): Promise<Review[] | null>{
+    return await this.db.findReview(query, skip, limit);
+  }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean>{
+    return await this.db.addProductRating(productId, rating);
   }
 }

@@ -11,6 +11,14 @@ export class ProductCategory {
   name: string;
 }
 
+export class ProductRating{
+  1?: number;
+  2?: number;
+  3?: number;
+  4?: number;
+  5?: number;
+}
+
 export class Product {
   id?: string;
   branchId: string;
@@ -44,6 +52,8 @@ export class Product {
     name: string;
   };
   categories: ProductCategory[];
+  rating?: ProductRating;
+  avgRating?: number;
 }
 
 export class ProductRequest {

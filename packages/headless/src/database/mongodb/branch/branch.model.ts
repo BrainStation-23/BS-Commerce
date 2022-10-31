@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
 import { Branch, BranchAddress } from 'src/entity/branch';
 
-const BranchAddressSchema = new Schema<BranchAddress>(
+export const BranchAddressSchema = new Schema<BranchAddress>(
     {
         id: {
             type: String,
@@ -38,6 +38,10 @@ const BranchSchema = new Schema<Branch>(
             type: String,
             unique: true
         },
+        status: {
+            type: String,
+            enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
+    },
         address: BranchAddressSchema,
         isActive: {
             type: Boolean,
@@ -54,7 +58,6 @@ const BranchSchema = new Schema<Branch>(
         },
         description:{
             type: String,
-            default: ''
         },
         name: String
     },

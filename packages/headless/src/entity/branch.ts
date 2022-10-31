@@ -7,6 +7,11 @@ export class BranchAddress{
     country: string;
 }
 
+export const enum BranchStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+}
 export class BranchPhoto{
     cover?: string;
     logo?: string;
@@ -14,7 +19,8 @@ export class BranchPhoto{
 
 export enum InActiveReason{
     BLOCKED_BY_ADMIN = 'BLOCKED_BY_ADMIN',
-    UNDER_MAINTENANCE = 'UNDER_MAINTENANCE'
+    UNDER_MAINTENANCE = 'UNDER_MAINTENANCE',
+    ADMIN_APPROVAL = 'NEED ADMIN APPROVAL'
 }
 export class Branch{
     id: string;
@@ -24,6 +30,7 @@ export class Branch{
     isActive: boolean;
     inActiveReason?: InActiveReason;
     image?: BranchPhoto;
+    status: BranchStatus;
     description?: string;
     name: string;
 }

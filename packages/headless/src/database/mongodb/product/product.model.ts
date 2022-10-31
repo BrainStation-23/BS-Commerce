@@ -98,6 +98,14 @@ const ProductSchema = new Schema<Product>(
         _id: false,
       },
     ],
+    rating: {
+      1: Number,
+      2: Number,
+      3: Number,
+      4: Number,
+      5: Number,
+    },
+    avgRating: Number
   },
   {
     timestamps: true,
