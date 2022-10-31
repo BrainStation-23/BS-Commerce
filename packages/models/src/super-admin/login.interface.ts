@@ -18,5 +18,5 @@ export interface ISuperAdminSignupReq{
     phone?: string
     password?: string
     isMfaEnabled?: boolean
-    mfaType?: string[]
+    mfaType?: string
 }

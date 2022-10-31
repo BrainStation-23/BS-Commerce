@@ -8,5 +8,5 @@ export class SuperAdmin{
     phone: string
     password: string
     isMfaEnabled: boolean
-    mfaType: string[]
+    mfaType: string
 }
