@@ -23,7 +23,7 @@ import {
 import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
 import { Review } from 'src/entity/review';
-import { ICreateReply, IReviewReplyResponse } from 'models';
+import { ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -361,26 +361,54 @@ export class OrderDatabase implements IOrderDatabase {
     delete request.reviewId;
 
     try{
-      const reply =  await ReviewModel.findOneAndUpdate(
+      const reviewExists = await ReviewModel.findOne({ id: reviewId }).lean().exec();
+      if(reviewExists.reply) return null;
+
+      const review = await ReviewModel.findOneAndUpdate(
         { id: reviewId },
         { reply: request},
         { new: true }
       ).select('-_id').lean().exec();
 
-      if(reply) return null;
-      
-      return {
-        id: reply.reply.id,
-        reviewId,
-        repliedBy: reply.reply.repliedBy,
-        text: reply.reply.text,
-        image: reply.reply.image,
-        createdAt: reply.reply.createdAt
-      };
+      const response = this.mappedReplyDetails(review);
+
+      return response;
     }catch(err){
       console.log(err);
       return null;
     }
-
   }
+
+  async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null> {
+    try{
+      const updatedReview =  await ReviewModel.findOneAndUpdate(
+        { 'reply.id': replyId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      if(!updatedReview) return null;
+      const response = this.mappedReplyDetails(updatedReview);
+
+      return response;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  //private functions
+  private mappedReplyDetails(review: any){
+    const { reply, id } = review;
+
+    return {
+      reviewId: id,
+      id: reply.id,
+      repliedBy: reply.repliedBy,
+      text: reply.text,
+      image: reply.image,
+      createdAt: reply.createdAt
+    };
+  }
+
 }

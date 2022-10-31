@@ -3,8 +3,8 @@ import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 export interface ICreateReply {
   reviewId: string;
   repliedBy?: string;
-  text: string;
-  image: string[];
+  text?: string;
+  image?: string[];
   createdAt: Date;
 }
 
@@ -29,7 +29,8 @@ export interface ICreateReplyErrorResponse extends ErrorResponse {
 
 export const enum CreateReplyErrorMessage{
    INVALID_REVIEW_ID = 'NO REVIEW WITH SUCH ID',
-   CANNOT_REPLY = 'CANNOT REPLY'
+   CANNOT_REPLY = 'CANNOT REPLY',
+   INVALID_REPLY_ID = 'INVALID REPLY ID'
 }
 
 export type ICreateReplyResponse =

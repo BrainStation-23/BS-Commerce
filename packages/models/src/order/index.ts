@@ -11,3 +11,4 @@ export * from './review.interface';
 export * from './create.review.interface';
 export * from './product.review.interface';
 export * from './create.reply.interface';
+export * from './update.reply.interface';

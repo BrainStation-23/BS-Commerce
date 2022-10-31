@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { CreateReplyErrorMessage, ICreateReply, ICreateReplyErrorResponse, ICreateReplySuccessResponse, IReviewReplyResponse } from 'models';
 
 export class CreateReplyDto implements ICreateReply{
@@ -10,12 +10,13 @@ export class CreateReplyDto implements ICreateReply{
     reviewId: string;
 
     @ApiProperty()
-    @IsNotEmpty()
-    text: string;
+    @IsOptional()
+    text?: string;
 
     @ApiProperty({ type: [String]})
     @Type(() => String)
-    image: string[];
+    @IsOptional()
+    image?: string[];
 
     @ApiProperty()
     @IsNotEmpty()
