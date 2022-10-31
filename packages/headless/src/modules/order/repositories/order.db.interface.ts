@@ -53,4 +53,5 @@ export abstract class IOrderDatabase {
   abstract addProductRating: (productId: string, rating: number)=> Promise<boolean>;
   abstract createReply: (reply: ICreateReply) => Promise<IReviewReplyResponse | null>;
   abstract updateReply: (replyId: string, request: IUpdateReplyRequest) => Promise<IReviewReplyResponse | null>
+  abstract findReply: (replyId: string) => Promise<IReviewReplyResponse | null>;
 }

@@ -145,27 +145,23 @@ export class OrderReviewService {
   async updateReply(
     replyId: string,
     request: IUpdateReplyRequest,
-  ): Promise<any> {
-    const review = await this.orderRepository.findReview({
-      'reply.id': replyId,
-    });
+  ): Promise<ICreateReplyResponse> {
+    const reply = await this.orderRepository.findReply(replyId);
 
-    if (review.length === 0)
+    if (!reply)
       return {
         error: CreateReplyErrorMessage.INVALID_REPLY_ID,
         errors: null,
         code: HttpStatus.BAD_REQUEST,
       };
-
-    const oldReply = review[0].reply;
+    //replied by will be added later from the guards
     for (const key in request) {
-      if (oldReply[key] && key !== 'id') {
-        oldReply[key] = request[key];
+      if (reply[key] && key !== 'id') {
+        reply[key] = request[key];
       }
     }
 
-    const updatedReply = await this.orderRepository.updateReply(replyId, oldReply);
-
+    const updatedReply = await this.orderRepository.updateReply(replyId, reply);
     if(!updatedReply)
         return {
             error: CreateReplyErrorMessage.CANNOT_REPLY,

@@ -379,6 +379,17 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
+  async findReply(replyId: string) : Promise<IReviewReplyResponse | null>{
+    try{
+      const review = await ReviewModel.findOne({ 'reply.id' : replyId }).lean().exec();
+
+      return review ? {...review.reply, reviewId: review.id } : null;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
   async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null> {
     try{
       const updatedReview =  await ReviewModel.findOneAndUpdate(

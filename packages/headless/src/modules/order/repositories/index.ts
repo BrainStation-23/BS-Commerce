@@ -138,4 +138,8 @@ export class OrderRepository {
   async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null>{
     return await this.db.updateReply(replyId, request);
   }
+
+  async findReply (replyId: string) : Promise<IReviewReplyResponse | null>{
+    return await this.db.findReply(replyId);
+  }
 }
