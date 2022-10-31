@@ -19,4 +19,5 @@ export * from './tags/index';
 export * from './global-search/index';
 export * from './branch/index'
 export * from './store/index';
+export * from './super-admin/index';
 export * from './store-branch/index';
