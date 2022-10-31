@@ -64,7 +64,7 @@ const ProductDescription: React.FC<SingleProduct> = ({
   return (
     <>
       <div className="border-g-300 mx-auto mt-16 border-2 text-slate-600 dark:text-dark_text lg:w-full">
-        <div className="block flex flex-wrap border-b-2">
+        <div className="flex flex-wrap border-b-2">
           <ul className="my-3">
             <TextButton
               onClickFunction={handleDescription}
