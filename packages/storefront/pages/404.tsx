@@ -3,11 +3,14 @@ import Image from 'next/image';
 
 import type { NextPage } from 'next';
 
-import Breadcrumb from '@/components/global/breadcrumbs/breadcrumb';
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
+import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
+import { useRouter } from 'next/router';
 
 const PageNotFOund: NextPage = () => {
   const imageDimensions = { width: 1024, height: 456 };
-  
+  const router = useRouter();
+
   return (
     <>
       <Breadcrumb
@@ -30,9 +33,13 @@ const PageNotFOund: NextPage = () => {
           <span className="mb-4 text-center font-extralight">
             Sorry, But the page you are looking for doesn&apos;t exist!
           </span>
-          <button className="rounded-md bg-green-600 py-2 px-6 font-light text-white transition-all duration-200 ease-linear hover:bg-stone-900">
-            <Link href="/">Go to home page</Link>
-          </button>
+          <ButtonSecondary
+            className="py-2 px-8"
+            onClickFunction={() => {
+              router.push('/');
+            }}
+            text="Go to home page"
+          />
         </div>
       </section>
     </>

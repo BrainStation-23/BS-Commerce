@@ -1,12 +1,13 @@
 import type { GetServerSideProps, NextPage } from 'next';
 var cookie = require('cookie');
 
-import Address from '@/components/myAccount/address';
+import AddressesComponent from '@/modules/myAccount/addresses/components';
 import { userAPI } from 'APIs';
 import { Customer } from '@bs-commerce/models';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
-import { storeAddresses } from 'toolkit/customerAddressSlice';
+import { useAppDispatch } from 'store/hooks';
+import { storeCustomerDetails } from 'store/slices/userSlice';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
+import { useEffect } from 'react';
 
 interface Props {
   customerProfile: Customer;
@@ -14,10 +15,12 @@ interface Props {
 
 const Addresses: NextPage<Props> = ({ customerProfile }) => {
   const dispatch = useAppDispatch();
-  dispatch(storeCustomerDetails(customerProfile!));
-  dispatch(storeAddresses(customerProfile?.addresses!));
+  useEffect(() => {
+    dispatch(storeCustomerDetails(customerProfile!));
+    dispatch(storeAddresses(customerProfile?.addresses!));
+  }, [dispatch, customerProfile]);
 
-  return <Address />;
+  return <AddressesComponent />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

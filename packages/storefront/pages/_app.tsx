@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { persistor, store } from '../store';
+import { persistor, store } from 'store/store';
 import { config } from 'config';
 
-import Layout from '@/components/layout';
-import BackToTopButton from './BackToTopButton';
+import Layout from '@/modules/common/layout';
+import BackToTopButton from '@/modules/common/layout/backToTopButton';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setIsMounted(true);
   }, []);
   return (
-    <ThemeProvider enableSystem={false} attribute="class">
+    <ThemeProvider enableSystem={true} attribute="class">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Layout>

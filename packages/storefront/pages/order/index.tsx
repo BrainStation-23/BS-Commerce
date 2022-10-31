@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-// import OrderMain from '@/components/order/ordersList/index';
-import Orders from '@/components/order/orders';
+// import OrderMain from '@/modules/order/ordersList/index';
+import Orders from '@/modules/order/components/orders';
 
 const Order: NextPage = () => {
   return (

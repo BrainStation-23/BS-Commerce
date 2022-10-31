@@ -1,5 +1,5 @@
-import ServiceComponent from "@/components/static/service";
-import type { NextPage } from "next";
+import ServiceComponent from '@/modules/static/service';
+import type { NextPage } from 'next';
 
 const Service: NextPage = () => {
   return <ServiceComponent />;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
-// import SingleOrderDetails from '@/components/order/singleOrder';
+// import SingleOrderDetails from '@/modules/order/singleOrder';
 import { useRouter } from 'next/router';
-import SingleAddressDetails from '@/components/myAccount/singleAddressDetails';
+import SingleAddressDetails from '@/modules/myAccount/addresses/components/singleAddressDetails';
 
 const Details: NextPage = () => {
   const [ready, setReady] = useState(false);

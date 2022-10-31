@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 
-import ForgotPasswordComponent from '@/components/account/forgetPassword';
+import ForgotPassword from '@/modules/account/forgetPassword/components';
 
-const ForgotPassword: NextPage = () => {
+const ForgotPasswordPage: NextPage = () => {
   return (
     <>
-      <ForgotPasswordComponent />
+      <ForgotPassword />
     </>
   );
 };
-export default ForgotPassword;
+export default ForgotPasswordPage;

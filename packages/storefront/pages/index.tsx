@@ -7,15 +7,16 @@ import {
   NestedCategoryList,
 } from '@bs-commerce/models';
 import { userAPI } from 'APIs';
-import { useAppDispatch } from 'customHooks/hooks';
-import { storeCategory } from 'toolkit/categorySlice';
+import { useAppDispatch } from 'store/hooks';
+import { storeCategory } from 'store/slices/categorySlice';
 import {
   storeFeaturedProducts,
   storeProducts,
   storeWishlist,
-} from 'toolkit/productsSlice';
+} from 'store/slices/productsSlice';
 
-import HomeComponent from '@/components/home';
+import HomeComponent from '@/modules/home';
+import { useEffect } from 'react';
 
 interface Props {
   products: CustomerProduct[];
@@ -32,10 +33,12 @@ const Home: NextPage<Props> = ({
 }: Props) => {
   const dispatch = useAppDispatch();
 
-  dispatch(storeCategory(categories));
-  dispatch(storeProducts(products));
-  dispatch(storeFeaturedProducts(featuredProducts));
-  dispatch(storeWishlist(wishlistedProducts));
+  useEffect(() => {
+    dispatch(storeCategory(categories));
+    dispatch(storeProducts(products));
+    dispatch(storeFeaturedProducts(featuredProducts));
+    dispatch(storeWishlist(wishlistedProducts));
+  }, [dispatch, products, featuredProducts, categories, wishlistedProducts]);
 
   return <HomeComponent />;
 };

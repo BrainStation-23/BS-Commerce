@@ -1,4 +1,4 @@
-import { Brand } from 'models';
+import { Brand } from '@bs-commerce/models';
 
 export const brandsData: Brand[] = [
   {

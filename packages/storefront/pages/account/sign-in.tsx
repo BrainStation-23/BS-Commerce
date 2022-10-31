@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import Signin from '@/components/account/sign-in';
+import Signin from '@/modules/account/signIn';
 
-const SignIn: NextPage = () => {
+const SignInPage: NextPage = () => {
   return <Signin />;
 };
-export default SignIn;
+export default SignInPage;

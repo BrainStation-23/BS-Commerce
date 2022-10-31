@@ -54,8 +54,8 @@ import {
 } from '@bs-commerce/models';
 import { NextRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { apiEndPoints } from 'utils/apiEndPoints';
-import { GetAllBrandsResponse } from 'models';
+import { apiEndPoints } from 'APIs/utils/apiEndPoints';
+import { GetAllBrandsResponse } from '@bs-commerce/models';
 
 export async function getPublicProductsStatic(): Promise<
   GetCustomerAllProductsSuccessResponse | undefined
@@ -412,8 +412,6 @@ export async function getOrderProductStatic(
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res?.data);
-
     return res?.data.data[0];
   } catch (error: any) {
     return [] as any;

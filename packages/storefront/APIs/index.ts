@@ -82,7 +82,7 @@ import {
   reorderGraphql,
 } from './graphQL';
 import { config } from 'config';
-import { apiFunction } from 'utils/types';
+import { apiFunction } from 'APIs/utils/types';
 import {
   addCustomerNewAddressStatic,
   addToCartStatic,
@@ -122,7 +122,24 @@ import {
   updateCustomerAddressStatic,
   updateCustomerStatic,
 } from './static';
-import { GetCustomerQuery, GetCustomerResponse, CreateCustomerRequest, CreateCustomerResponse, GetCustomerProductResponse, SendOtpSuccessResponse, VerifyOtpRequest, VerifyOtpSuccessResponse, CustomerForgotPasswordRequest, CustomerForgotPasswordSuccessResponse, GetAllBrandsResponse, getCategoryResponse, getCategoryBySlugResponse, IProductSearchResponse, IReOrderQuery, ReOrderResponse } from '@bs-commerce/models';
+import {
+  GetCustomerQuery,
+  GetCustomerResponse,
+  CreateCustomerRequest,
+  CreateCustomerResponse,
+  GetCustomerProductResponse,
+  SendOtpSuccessResponse,
+  VerifyOtpRequest,
+  VerifyOtpSuccessResponse,
+  CustomerForgotPasswordRequest,
+  CustomerForgotPasswordSuccessResponse,
+  GetAllBrandsResponse,
+  getCategoryResponse,
+  getCategoryBySlugResponse,
+  IProductSearchResponse,
+  IReOrderQuery,
+  ReOrderResponse,
+} from '@bs-commerce/models';
 
 const graphqlApi: apiFunction = {
   signIn: signInGraphql,
@@ -243,7 +260,7 @@ const staticApi: apiFunction = {
   forgetPasswordVerifyOtp: forgetPasswordVerifyOtpStatic,
   resetPassword: resetPasswordStatic,
   getBrands: getBrandsStatic,
-  getCategoryDetailsById:getCategoryDetailsByIdStatic,
+  getCategoryDetailsById: getCategoryDetailsByIdStatic,
   getCategoryDetailsBySlug: getCategoryDetailsBySlugStatic,
   searchProducts: searchProductsStatic,
   reorder: reorderStatic,

@@ -1,0 +1,111 @@
+import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
+
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import type { NextComponentType } from 'next';
+
+import { useAppSelector } from 'store/hooks/index';
+import Modal from '@/modules/common/modal/modal';
+import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
+
+const CartTotal: NextComponentType = () => {
+  const router = useRouter();
+  const { t } = useTranslation();
+  const currency = useAppSelector((state) => state.persistedReducer.currency);
+
+  const [modalOn, setModalOn] = useState(false);
+  const [choice, setChoice] = useState(false);
+
+  const cartData = useAppSelector(
+    (state) => state.persistedReducer.cart.allCartItems
+  );
+
+  const token = useAppSelector(
+    (state) => state.persistedReducer.auth.access_token
+  );
+
+  const totalCartPrice = cartData?.reduce((total, data) => {
+    return total + data?.product?.info?.price! * data.quantity;
+  }, 0);
+
+  const handleClickProceed = () => {
+    if (!token) setModalOn(true);
+    else {
+      router.push('/checkout');
+    }
+  };
+
+  return (
+    <>
+      {modalOn && (
+        <Modal
+          setModalOn={setModalOn}
+          setChoice={setChoice}
+          modalTitle="You need to login first."
+          bodyText="Proceed to login?"
+        />
+      )}
+      <div className="grid dark:border lg:row-span-2 xl:row-span-2">
+        <div className="overflow-hidden shadow-lg">
+          <div className="w-full bg-primary dark:bg-dark_primary">
+            <div className="px-6 py-1 text-base font-medium text-white">
+              {t('cart:cart_total').toUpperCase()}
+            </div>
+          </div>
+          <div className="flex justify-center py-5 px-6">
+            <table className="w-full border-collapse border">
+              <tbody>
+                <tr className="border-b">
+                  <td className="ml-20  px-8 py-5 md:px-8 lg:px-8 xl:px-8">
+                    <span className="font-semibold sm:mr-8 md:mr-16">
+                      {t('cart:cart_subtotal')}
+                    </span>
+                  </td>
+                  <td className="mx-5 ml-20  px-10 py-5 text-center md:px-8 lg:px-8 xl:px-8">
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ml-20  px-8 py-5">
+                    <span className="font-semibold md:mr-24 xl:mr-24">
+                      {t('common:total')}
+                    </span>
+                  </td>
+                  <td className=" px-8 py-5 text-center">
+                    <p className="sm:mx-10">
+                      {Intl.NumberFormat(
+                        `${currency.currencyLanguage}-${currency.currencyStyle}`,
+                        {
+                          style: 'currency',
+                          currency: `${currency.currencyName}`,
+                        }
+                      ).format(totalCartPrice)}{' '}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="flex justify-end px-2 pb-4">
+            <ButtonPrimary
+              onClickFunction={handleClickProceed}
+              text={t('cart:proceed_to_checkout').toUpperCase()}
+              className="w-[200px] text-xs"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CartTotal;

@@ -1,11 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { useEffect } from 'react';
 var cookie = require('cookie');
 
-import AccountDetails from '@/components/myAccount/account-details';
+import Profile from '@/modules/myAccount/profile/components';
 import { userAPI } from 'APIs';
 import { GetCustomerInformationSuccessResponse } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'customHooks/hooks';
-import { storeCustomerDetails } from 'toolkit/userSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { storeCustomerDetails } from 'store/slices/userSlice';
 
 interface Props {
   customerInformation: GetCustomerInformationSuccessResponse;
@@ -14,9 +15,11 @@ interface Props {
 const MyAccount: NextPage<Props> = ({ customerInformation }: Props) => {
   // console.log(customerInformation);
   const dispatch = useAppDispatch();
-  dispatch(storeCustomerDetails(customerInformation.data));
+  useEffect(() => {
+    dispatch(storeCustomerDetails(customerInformation.data));
+  }, [dispatch, customerInformation]);
 
-  return <AccountDetails />;
+  return <Profile />;
 };
 export default MyAccount;
 
