@@ -47,10 +47,10 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq{
     @IsOptional()
     isMfaEnabled?: boolean
 
-    @ApiProperty({example: []})
+    @ApiProperty({enum: MfaType,  example: MfaType.EMAIL})
     @IsOptional()
-    @IsArray()
-    mfaType?: string[]
+    @IsEnum(MfaType)
+    mfaType?: string
 }
 
 export class SuperAdminSignupRes implements ISuperAdminSignupReq{ 
@@ -75,6 +75,6 @@ export class SuperAdminSignupRes implements ISuperAdminSignupReq{
     @ApiProperty({example: false})
     isMfaEnabled?: boolean
 
-    @ApiProperty({example: []})
-    mfaType?: string[]
+    @ApiProperty({enum: MfaType,  example: MfaType.EMAIL})
+    mfaType?: string
 }
