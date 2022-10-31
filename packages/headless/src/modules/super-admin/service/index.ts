@@ -16,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AdminJwtPayload } from 'src/entity/auth';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto, MfaVerifyOtpDto } from '../rest/dto/otp.dto';
+import { OtpResponseDto } from '../rest/dto/mfa.dto';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
@@ -135,19 +136,18 @@ export class SuperAdminService {
         query,
         newData,
       );
-      console.log({ updateData });
-
       return updateData ? true : false;
     } else {
       // add new otp
       const createOtp = await this.superAdminRepository.sendOtp(payload);
-      console.log({ createOtp });
-
       return createOtp ? true : false;
     }
   }
 
-  async addMfa(userId: string, body: MfaOtpDto): Promise<any> {
+  async addMfa(
+    userId: string,
+    body: MfaOtpDto,
+  ): Promise<IServiceResponse<OtpResponseDto>> {
     if (!body.email && !body.phone) {
       return errorResponse(
         'Require email or phone',
@@ -181,7 +181,10 @@ export class SuperAdminService {
     }
   }
 
-  async verifiyMfaOtp(userId: string, body: MfaVerifyOtpDto): Promise<any> {
+  async verifiyMfaOtp(
+    userId: string,
+    body: MfaVerifyOtpDto,
+  ): Promise<IServiceResponse<OtpResponseDto>> {
     if (!body.email && !body.phone) {
       return errorResponse(
         'Require email or phone',
@@ -189,20 +192,20 @@ export class SuperAdminService {
         HttpStatus.BAD_REQUEST,
       );
     }
-    let isEmail = false;
-    if ((body.email && !body.phone) || (body.email && body.phone)) {
-      isEmail = true;
-    }
     let query: Record<string, any> = {
       isVerified: false,
       otp: body.otp,
       otpExpireTime: { $gt: Date.now() },
     };
-    if (isEmail) {
+
+    let isEmail = false;
+    if ((body.email && !body.phone) || (body.email && body.phone)) {
+      isEmail = true;
       query.email = body.email;
     } else {
       query.phone = body.phone;
     }
+
     const isVerified = await this.superAdminRepository.verifyOtp(query);
     if (isVerified) {
       let newProfileData: SuperAdminProdileUpdateDto = {
@@ -226,9 +229,18 @@ export class SuperAdminService {
           isVerified: true,
         });
         return successResponse(null, result);
-      }else{
+      } else {
+        isEmail
+          ? await this.superAdminRepository.updateOtp(
+              { email: query.email },
+              { isVerified: false },
+            )
+          : await this.superAdminRepository.updateOtp(
+              { phone: query.phone },
+              { isVerified: false },
+            );
         return errorResponse('Profile not updated', null, HttpStatus.CONFLICT);
-      } 
+      }
     } else {
       return errorResponse('OTP is not verified', null, HttpStatus.CONFLICT);
     }
