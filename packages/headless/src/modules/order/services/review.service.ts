@@ -106,7 +106,7 @@ export class OrderReviewService {
             return {
                 error: CreateReplyErrorMessage.CANNOT_REPLY,
                 errors: null,
-                code: HttpStatus.INTERNAL_SERVER_ERROR
+                code: HttpStatus.BAD_REQUEST
             };
 
         return { code: 200, data: reply };

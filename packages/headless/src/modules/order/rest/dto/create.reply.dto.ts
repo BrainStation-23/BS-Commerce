@@ -5,7 +5,7 @@ import { IsNotEmpty } from 'class-validator';
 import { CreateReplyErrorMessage, ICreateReply, ICreateReplyErrorResponse, ICreateReplySuccessResponse, IReviewReplyResponse } from 'models';
 
 export class CreateReplyDto implements ICreateReply{
-    @ApiProperty()
+    @ApiProperty({ example: "8b87190e-b406-4436-b679-863793213606"})
     @IsNotEmpty()
     reviewId: string;
 

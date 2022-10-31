@@ -367,6 +367,8 @@ export class OrderDatabase implements IOrderDatabase {
         { new: true }
       ).select('-_id').lean().exec();
 
+      if(reply) return null;
+      
       return {
         id: reply.reply.id,
         reviewId,
