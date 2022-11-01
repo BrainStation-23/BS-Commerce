@@ -17,6 +17,10 @@ export class CommentDto implements IComment{
 
     @ApiProperty()
     @IsNotEmpty()
+    repliedBy: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
     text: string;
 
     @ApiProperty({ type: [String]})
