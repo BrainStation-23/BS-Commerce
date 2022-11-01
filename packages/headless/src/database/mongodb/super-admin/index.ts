@@ -41,8 +41,6 @@ export class SuperAdminDatabase implements ISuperAdminDatabase {
     data: SuperAdminProdileUpdateDto,
   ): Promise<Partial<SuperAdmin> | null> {
     try {
-      console.log({query}, {data});
-      
       return await SuperAdminModel.findOneAndUpdate(query, { $set: data });
     } catch (error) {
       console.log(error.message);
