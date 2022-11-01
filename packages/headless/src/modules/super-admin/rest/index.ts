@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { RolesGuard } from 'src/guards/auth.guard';
@@ -44,6 +44,17 @@ export class SuperAdminController {
     return { code, ...response };
   }
 
+  @Post('login/verify-mfa-otp')
+  async loginVerifyMfaOtp(
+    @Body() body: MfaVerifyOtpDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } =
+      await this.superAdminService.verifyMfaLoginOtp(body);
+    res.status(code);
+    return { code, ...response };
+  }
+
   @ApiBearerAuth()
   @UseGuards(new RolesGuard(['super-admin']))
   @Post('add-mfa')
@@ -51,16 +62,18 @@ export class SuperAdminController {
     @Body() body: MfaOtpDto,
     @UserInfo() superAdminInfo: SuperAdminInfo,
     @Res({ passthrough: true }) res: Response,
-  ) {  
-
-    const { code, ...response } = await this.superAdminService.addMfa(superAdminInfo.id, body);
+  ) {
+    const { code, ...response } = await this.superAdminService.sendMfaOtp(
+      superAdminInfo.id,
+      body,
+    );
     res.status(code);
     return { code, ...response };
   }
 
   @ApiBearerAuth()
   @UseGuards(new RolesGuard(['super-admin']))
-  @Post('add-mfa/verity-mfa-otp')
+  @Post('add-mfa/verify-mfa-otp')
   async verifyMfaOtp(
     @Body() body: MfaVerifyOtpDto,
     @UserInfo() superAdminInfo: SuperAdminInfo,
@@ -73,4 +86,20 @@ export class SuperAdminController {
     res.status(code);
     return { code, ...response };
   }
+
+  @ApiBearerAuth()
+  @UseGuards(new RolesGuard(['super-admin']))
+  @Get('profile')
+  async profile(
+    @UserInfo() superAdminInfo: SuperAdminInfo,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.superAdminService.getProfileData(
+      superAdminInfo.id,
+    );
+    res.status(code);
+    return { code, ...response };
+  }
+
+  
 }

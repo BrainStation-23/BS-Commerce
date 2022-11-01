@@ -58,11 +58,10 @@ export class SuperAdminDatabase implements ISuperAdminDatabase {
   async verifyOtp(query: Record<string, any>): Promise<Otp | null> {
     const otp = await OtpModel.findOne(query);
     if (otp) {
-      await this.updateOtp(query, {
+      return await this.updateOtp(query, {
         otpVerifiedAt: Date.now(),
         isVerified: true,
       });
-      return otp;
     }else{
       return null
     }
@@ -76,7 +75,8 @@ export class SuperAdminDatabase implements ISuperAdminDatabase {
     query: Record<string, any>,
     data: object,
   ): Promise<Otp | null> {
-    return await OtpModel.findOneAndUpdate(query, { $set: data });
+    const updatedData =  await OtpModel.findOneAndUpdate(query, { $set: data }).lean();
+    return updatedData
   }
 
   async deleteOtp(query: Record<string, any>): Promise<Otp | null> {

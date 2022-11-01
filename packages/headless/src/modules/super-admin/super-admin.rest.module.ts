@@ -7,6 +7,7 @@ import { SuperAdminRepository } from './repositories';
 import { ISuperAdminDatabase } from './repositories/super-admin.db.interface';
 import { SuperAdminController } from './rest';
 import { SuperAdminService } from './service';
+import { SuperAdminHelperService } from './service/helper.service';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SuperAdminService } from './service';
   controllers: [SuperAdminController],
   providers: [
     SuperAdminService,
+    SuperAdminHelperService,
     SuperAdminRepository,
     {
       provide: ISuperAdminDatabase,

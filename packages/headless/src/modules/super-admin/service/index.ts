@@ -17,15 +17,28 @@ import { AdminJwtPayload } from 'src/entity/auth';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto, MfaVerifyOtpDto } from '../rest/dto/otp.dto';
 import { OtpResponseDto } from '../rest/dto/mfa.dto';
-const FIVE_MINUTES = 5 * 60 * 1000;
+import { SuperAdminHelperService } from './helper.service';
 
 @Injectable()
 export class SuperAdminService {
   constructor(
     private readonly superAdminRepository: SuperAdminRepository,
+    private readonly superAdminHelperService: SuperAdminHelperService,
     private readonly jwtService: JwtService,
   ) {}
 
+  async getProfileData(
+    id: string,
+  ): Promise<IServiceResponse<Partial<SuperAdmin>>> {
+    const profileData = await this.superAdminRepository.findOne({ id });
+    if (profileData) {
+      delete profileData.password;
+      delete profileData.isMfaEnabled;
+      delete profileData.mfaType;
+      return successResponse(SuperAdmin, profileData);
+    }
+    return errorResponse('User not found', null, HttpStatus.NOT_FOUND);
+  }
   async superAdminCreate(
     body: SuperAdminSignupReq,
   ): Promise<IServiceResponse<Partial<SuperAdmin>>> {
@@ -66,9 +79,20 @@ export class SuperAdminService {
     );
   }
 
+  private async handleMfaLogin(
+    userData: Partial<SuperAdmin>,
+  ): Promise<IServiceResponse<OtpResponseDto>> {
+    const isEmail = userData.mfaType === 'EMAIL' ? true : false;
+    const { id, email, phone, password } = userData;
+    const sendOtp = isEmail
+      ? await this.sendMfaOtp(id, { email, password })
+      : await this.sendMfaOtp(id, { phone, password });
+    return sendOtp;
+  }
+
   async superAdminLogin(
     body: SuperAdminLoginDto,
-  ): Promise<IServiceResponse<SuperAdminLoginRes>> {
+  ): Promise<IServiceResponse<SuperAdminLoginRes | OtpResponseDto>> {
     const userData = await this.superAdminRepository.findOne({
       email: body.email,
     });
@@ -93,7 +117,9 @@ export class SuperAdminService {
     }
 
     if (userData.isMfaEnabled) {
-      // handle mfa
+      userData.password = body.password;
+      const res = await this.handleMfaLogin(userData);
+      return res;
     }
 
     const payload: AdminJwtPayload = {
@@ -106,45 +132,54 @@ export class SuperAdminService {
     return successResponse(SuperAdminLoginRes, { token });
   }
 
-  //--- Multi factor auth functionalities---
-
-  private async syncOtp(body: MfaOtpDto, isEmail: boolean): Promise<boolean> {
-    const otp = Math.floor(Math.random() * (9999 - 1000) + 1000);
-    const payload: Otp = {
-      email: '',
-      phone: '',
-      otp: 1234,
-      otpExpireTime: Date.now() + FIVE_MINUTES,
+  async verifyMfaLoginOtp(
+    body: MfaVerifyOtpDto,
+  ): Promise<IServiceResponse<SuperAdminLoginRes>> {
+    if (!body.email && !body.phone) {
+      return errorResponse(
+        'Require email or phone',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    let query: Record<string, any> = {
       isVerified: false,
-      otpVerifiedAt: 0,
+      id: body.id,
+      otp: body.otp,
+      otpExpireTime: { $gt: Date.now() },
     };
 
-    let query: Record<string, any> = { isVerified: false };
-    if (isEmail) {
+    if ((body.email && !body.phone) || (body.email && body.phone)) {
       query.email = body.email;
-      payload.email = body.email;
     } else {
       query.phone = body.phone;
-      payload.phone = body.phone;
     }
 
-    const isOtpDataExist = await this.superAdminRepository.findOtp(query);
-    if (isOtpDataExist) {
-      // update otp
-      const newData = { ...payload, otpExpireTime: Date.now() + FIVE_MINUTES };
-      const updateData = await this.superAdminRepository.updateOtp(
-        query,
-        newData,
-      );
-      return updateData ? true : false;
+    const verifiedData = await this.superAdminRepository.verifyOtp(query);
+    if (verifiedData) {
+      await this.superAdminRepository.deleteOtp({
+        ...query,
+        isVerified: true,
+      });
+      const userData = await this.superAdminRepository.findOne({
+        id: verifiedData.userId,
+      });
+      const payload: AdminJwtPayload = {
+        id: userData.id,
+        username: userData.firstName + ' ' + userData.lastName,
+        logInTime: Date.now(),
+        role: userData.role,
+      };
+      const token = this.jwtService.sign(payload);
+      return successResponse(SuperAdminLoginRes, { token });
     } else {
-      // add new otp
-      const createOtp = await this.superAdminRepository.sendOtp(payload);
-      return createOtp ? true : false;
+      return errorResponse('OTP is not verified', null, HttpStatus.CONFLICT);
     }
   }
 
-  async addMfa(
+  //--- Multi factor auth functionalities---
+
+  async sendMfaOtp(
     userId: string,
     body: MfaOtpDto,
   ): Promise<IServiceResponse<OtpResponseDto>> {
@@ -156,14 +191,26 @@ export class SuperAdminService {
       );
     }
 
+    const isPasswordMatched = await this.superAdminHelperService.checkPassword(
+      body,
+      userId,
+    );
+    if (!isPasswordMatched) {
+      return errorResponse(
+        'Require valid password',
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     let isEmail = false;
     if ((body.email && !body.phone) || (body.email && body.phone)) {
       isEmail = true;
     }
-    const syncOtp = await this.syncOtp(body, isEmail);
-
-    console.log({ syncOtp }, { isEmail });
-
+    const syncOtp = await this.superAdminHelperService.syncOtp(
+      userId,
+      body,
+      isEmail,
+    );
     if (syncOtp) {
       if (isEmail) {
         //sendOtpRequestWithEmail({otp: payload.otp, email: payload.email})
@@ -171,9 +218,8 @@ export class SuperAdminService {
         //sendOtpRequestWithPhone({otp: payload.otp, phone: payload.phone})
       }
       const result = {
-        message: `OTP has been sent to ${
-          body?.email ? body.email : body.phone
-        }`,
+        message: `OTP has been sent to ${isEmail ? body.email : body.phone}`,
+        id: syncOtp.id,
       };
       return successResponse(null, result);
     } else {
@@ -193,21 +239,23 @@ export class SuperAdminService {
       );
     }
     let query: Record<string, any> = {
+      userId,
       isVerified: false,
+      id: body.id,
       otp: body.otp,
       otpExpireTime: { $gt: Date.now() },
     };
 
-    let isEmail = false;
+    // let isEmail = false;
     if ((body.email && !body.phone) || (body.email && body.phone)) {
-      isEmail = true;
+      // isEmail = true;
       query.email = body.email;
     } else {
       query.phone = body.phone;
     }
 
-    const isVerified = await this.superAdminRepository.verifyOtp(query);
-    if (isVerified) {
+    const verifiedData = await this.superAdminRepository.verifyOtp(query);
+    if (verifiedData) {
       let newProfileData: SuperAdminProdileUpdateDto = {
         isMfaEnabled: true,
         mfaType: MfaType.EMAIL,
@@ -230,16 +278,15 @@ export class SuperAdminService {
         });
         return successResponse(null, result);
       } else {
-        isEmail
-          ? await this.superAdminRepository.updateOtp(
-              { email: query.email },
-              { isVerified: false },
-            )
-          : await this.superAdminRepository.updateOtp(
-              { phone: query.phone },
-              { isVerified: false },
-            );
-        return errorResponse('Profile not updated', null, HttpStatus.CONFLICT);
+        await this.superAdminRepository.updateOtp(
+          { ...query, isVerified: true },
+          { isVerified: false },
+        );
+        return errorResponse(
+          'OTP is not verified, something went wrong in update profile',
+          null,
+          HttpStatus.CONFLICT,
+        );
       }
     } else {
       return errorResponse('OTP is not verified', null, HttpStatus.CONFLICT);
