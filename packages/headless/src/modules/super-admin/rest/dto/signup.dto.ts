@@ -59,7 +59,7 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
   mfaType?: MfaType;
 }
 
-export class SuperAdminProdileUpdateDto {
+export class SuperAdminProfileUpdateDto {
   @ApiProperty({ example: '880' })
   @IsString()
   @IsOptional()

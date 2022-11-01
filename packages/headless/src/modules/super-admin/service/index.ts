@@ -7,7 +7,7 @@ import { SuperAdminRepository } from '../repositories';
 import { SuperAdminLoginDto, SuperAdminLoginRes } from '../rest/dto/login.dto';
 import {
   MfaType,
-  SuperAdminProdileUpdateDto,
+  SuperAdminProfileUpdateDto,
   SuperAdminSignupReq,
 } from '../rest/dto/signup.dto';
 import * as bcrypt from 'bcrypt';
@@ -256,7 +256,7 @@ export class SuperAdminService {
 
     const verifiedData = await this.superAdminRepository.verifyOtp(query);
     if (verifiedData) {
-      let newProfileData: SuperAdminProdileUpdateDto = {
+      let newProfileData: SuperAdminProfileUpdateDto = {
         isMfaEnabled: true,
         mfaType: MfaType.EMAIL,
       };

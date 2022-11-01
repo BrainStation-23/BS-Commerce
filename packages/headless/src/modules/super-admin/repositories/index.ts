@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
 import { SuperAdmin } from 'src/entity/super-admin';
-import { SuperAdminProdileUpdateDto, SuperAdminSignupReq } from '../rest/dto/signup.dto';
+import { SuperAdminProfileUpdateDto, SuperAdminSignupReq } from '../rest/dto/signup.dto';
 import { ISuperAdminDatabase } from './super-admin.db.interface';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class SuperAdminRepository {
     return await this.db.create(body);
   }
 
-  async updateProfile(query: Record<string, any>, body: SuperAdminProdileUpdateDto): Promise<Partial<SuperAdmin>> {
+  async updateProfile(query: Record<string, any>, body: SuperAdminProfileUpdateDto): Promise<Partial<SuperAdmin>> {
     return await this.db.updateProfile(query, body);
   }
 

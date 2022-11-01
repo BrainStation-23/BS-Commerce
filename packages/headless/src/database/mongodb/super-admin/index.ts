@@ -4,7 +4,7 @@ import { Otp } from 'src/entity/otp';
 import { SuperAdmin } from 'src/entity/super-admin';
 import { ISuperAdminDatabase } from 'src/modules/super-admin/repositories/super-admin.db.interface';
 import {
-  SuperAdminProdileUpdateDto,
+  SuperAdminProfileUpdateDto,
   SuperAdminSignupReq,
 } from 'src/modules/super-admin/rest/dto/signup.dto';
 import { OtpModel } from '../otp/otp.model';
@@ -38,7 +38,7 @@ export class SuperAdminDatabase implements ISuperAdminDatabase {
 
   async updateProfile(
     query: Record<string, any>,
-    data: SuperAdminProdileUpdateDto,
+    data: SuperAdminProfileUpdateDto,
   ): Promise<Partial<SuperAdmin> | null> {
     try {
       return await SuperAdminModel.findOneAndUpdate(query, { $set: data });
