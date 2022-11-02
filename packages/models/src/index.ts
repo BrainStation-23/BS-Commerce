@@ -21,3 +21,4 @@ export * from './branch/index'
 export * from './store/index';
 export * from './super-admin/index';
 export * from './store-branch/index';
+export * from './permissions/index';
