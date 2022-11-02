@@ -55,12 +55,10 @@ export class SuperAdminHelperService {
     userId = '',
   ): Promise<boolean> {
     let query = userId === '' ? { email: body.email } : { id: userId };
-    console.log({ query });
     const userData = await this.superAdminRepository.findOne(query);
     if (!userData) {
       return false;
     }
-    
     const matchPassword = await bcrypt.compare(
       body.password,
       userData.password,

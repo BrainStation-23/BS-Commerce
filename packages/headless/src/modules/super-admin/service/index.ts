@@ -62,9 +62,6 @@ export class SuperAdminService {
         );
       }
     }
-    if (!body?.password) {
-      return errorResponse('Password required!', null, HttpStatus.BAD_REQUEST);
-    }
 
     body.password = await bcrypt.hash(body.password, authConfig.salt);
 
@@ -149,7 +146,7 @@ export class SuperAdminService {
       otpExpireTime: { $gt: Date.now() },
     };
 
-    if ((body.email && !body.phone) || (body.email && body.phone)) {
+    if (body.email) {
       query.email = body.email;
     } else {
       query.phone = body.phone;
@@ -203,7 +200,7 @@ export class SuperAdminService {
       );
     }
     let isEmail = false;
-    if ((body.email && !body.phone) || (body.email && body.phone)) {
+    if (body.email) {
       isEmail = true;
     }
     const syncOtp = await this.superAdminHelperService.syncOtp(
@@ -246,9 +243,7 @@ export class SuperAdminService {
       otpExpireTime: { $gt: Date.now() },
     };
 
-    // let isEmail = false;
-    if ((body.email && !body.phone) || (body.email && body.phone)) {
-      // isEmail = true;
+    if (body.email) {
       query.email = body.email;
     } else {
       query.phone = body.phone;
