@@ -117,6 +117,7 @@ export class BaseOrderEntity {
   paymentStatus: PaymentStatusEnum;
   totalCost: number;
   products: ProductOrder[];
+  branchId: string;
 }
 export class OrderEntity extends BaseOrderEntity {
   orderId: string;
