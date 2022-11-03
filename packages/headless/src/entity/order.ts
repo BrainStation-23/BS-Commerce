@@ -136,6 +136,7 @@ export class GetAllOrderQueryEntity {
   limit?: number;
   startDate?: Date;
   endDate?: Date;
+  branchId?: string;
 }
 
 //Response Entities
