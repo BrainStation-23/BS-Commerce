@@ -5,6 +5,7 @@ export interface IReviewPhoto{
 }
 export interface IComment{
     id: string;
+    repliedBy: string;
     text: string;
     image: string[];
     createdAt: Date;

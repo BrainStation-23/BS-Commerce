@@ -26,6 +26,7 @@ const ReviewSchema = new Schema<Review>(
     ],
     reply:{
         id: String,
+        repliedBy: String,
         text: String,
         image: {
           type: [String],

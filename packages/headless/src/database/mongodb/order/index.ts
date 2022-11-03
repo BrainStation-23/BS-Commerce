@@ -24,6 +24,7 @@ import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
 import { Review } from 'src/entity/review';
 import { BranchModel } from '../branch/branch.model';
+import { ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -366,4 +367,70 @@ export class OrderDatabase implements IOrderDatabase {
       return false;
     }
   }
+  async createReply(request: ICreateReply): Promise<IReviewReplyResponse | null>{
+    const { reviewId } = request;
+    delete request.reviewId;
+
+    try{
+      const reviewExists = await ReviewModel.findOne({ id: reviewId }).lean().exec();
+      if(reviewExists.reply) return null;
+
+      const review = await ReviewModel.findOneAndUpdate(
+        { id: reviewId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      const response = this.mappedReplyDetails(review);
+
+      return response;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  async findReply(replyId: string) : Promise<IReviewReplyResponse | null>{
+    try{
+      const review = await ReviewModel.findOne({ 'reply.id' : replyId }).lean().exec();
+
+      return review ? {...review.reply, reviewId: review.id } : null;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null> {
+    try{
+      const updatedReview =  await ReviewModel.findOneAndUpdate(
+        { 'reply.id': replyId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      if(!updatedReview) return null;
+      const response = this.mappedReplyDetails(updatedReview);
+
+      return response;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  //private functions
+  private mappedReplyDetails(review: any){
+    const { reply, id } = review;
+
+    return {
+      reviewId: id,
+      id: reply.id,
+      repliedBy: reply.repliedBy,
+      text: reply.text,
+      image: reply.image,
+      createdAt: reply.createdAt
+    };
+  }
+
 }
