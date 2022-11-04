@@ -30,6 +30,13 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
   @IsString()
   role: string;
 
+  @ApiProperty({ example: 'store-id', required: true })
+  @IsString()
+  storeId: string;
+
+  @ApiProperty({ example: ['branch-id'], required: true })
+  branchId: string[];
+
   @ApiProperty({ example: 'sadmin@mail.com', required: true })
   @IsEmail()
   email: string;
@@ -70,6 +77,16 @@ export class SuperAdminProfileUpdateDto {
   @IsOptional()
   phone?: string;
 
+  @ApiProperty({ example: 'store-id' })
+  @IsString()
+  @IsOptional()
+  storeId?: string;
+
+  @ApiProperty({ example: ['branch-id'] })
+  @IsString()
+  @IsOptional()
+  branchId?: string[];
+
   @ApiProperty({ example: false })
   @IsOptional()
   isMfaEnabled?: boolean;
@@ -89,6 +106,14 @@ export class SuperAdminSignupRes implements ISuperAdminSignupReq {
 
   @ApiProperty({ example: 'super-admin' })
   role: string;
+
+  @ApiProperty({ example: 'store-id' })
+  @IsString()
+  storeId: string;
+
+  @ApiProperty({ example: ['branch-id'] })
+  @IsString()
+  branchId: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com' })
   email: string;

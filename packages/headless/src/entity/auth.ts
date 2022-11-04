@@ -8,4 +8,5 @@ export class AdminJwtPayload {
   username: string;
   logInTime: number;
   role: string;
+  storeId?: string
 }

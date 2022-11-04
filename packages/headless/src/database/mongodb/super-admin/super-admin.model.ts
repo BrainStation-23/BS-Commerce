@@ -24,6 +24,16 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
       trim: true,
       required: true
     },
+    storeId: {
+      type: String,
+      trim: true,
+      index: true,
+      required: true
+    },
+    branchId: {
+      type: [String],
+      required: true
+    },
     email: {
       type: String,
       index: true,
@@ -40,6 +50,7 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     },
     password: {
       type: String,
+      index: true,
       required: true
     },
     isMfaEnabled: {
@@ -58,5 +69,5 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
   },
 );
 
-const SuperAdminModel = model<SuperAdmin>('super-admin', SuperAdminSchema)
+const SuperAdminModel = model<SuperAdmin>('admin', SuperAdminSchema)
 export {SuperAdminModel}

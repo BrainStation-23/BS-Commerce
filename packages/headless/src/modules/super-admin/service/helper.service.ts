@@ -4,14 +4,13 @@ import { SuperAdminRepository } from '../repositories';
 import * as bcrypt from 'bcrypt';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto } from '../rest/dto/otp.dto';
+import { AdminJwtPayload } from 'src/entity/auth';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
 export class SuperAdminHelperService {
-  constructor(
-    private readonly superAdminRepository: SuperAdminRepository
-  ) {}
- 
+  constructor(private readonly superAdminRepository: SuperAdminRepository) {}
+
   async syncOtp(
     userId: string,
     body: MfaOtpDto,
@@ -67,5 +66,18 @@ export class SuperAdminHelperService {
       return false;
     }
     return true;
+  }
+
+  async createAdminJwtPayload(
+    userData: Partial<SuperAdmin>,
+  ): Promise<AdminJwtPayload> {
+    const payload: AdminJwtPayload = {
+      id: userData.id,
+      username: userData.firstName + ' ' + userData.lastName,
+      logInTime: Date.now(),
+      role: userData.role,
+      storeId: userData.storeId,
+    };
+    return payload;
   }
 }

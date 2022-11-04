@@ -18,7 +18,7 @@ import { SuperAdminInfo } from 'src/entity/super-admin';
 export class SuperAdminController {
   constructor(private readonly superAdminService: SuperAdminService) {}
 
-  @PermissionRequired(PERMISSIONS.CREATE_ROLE, PERMISSIONS.ASSIGN_ROLE)
+  @PermissionRequired(PERMISSIONS.CREATE_ADMIN)
   @ApiBearerAuth()
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @ApiResponse({
@@ -50,6 +50,7 @@ export class SuperAdminController {
     return { code, ...response };
   }
 
+  
   @Post('login/verify-mfa-otp')
   async loginVerifyMfaOtp(
     @Body() body: MfaVerifyOtpDto,
@@ -61,8 +62,9 @@ export class SuperAdminController {
     return { code, ...response };
   }
 
+  @PermissionRequired(PERMISSIONS.ADD_MFA)
   @ApiBearerAuth()
-  @UseGuards(new RolesGuard(['super-admin']))
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Post('add-mfa')
   async addMfa(
     @Body() body: MfaOtpDto,
@@ -77,8 +79,9 @@ export class SuperAdminController {
     return { code, ...response };
   }
 
+  @PermissionRequired(PERMISSIONS.VERIFY_OTP_AFTER_ADD_MFA)
   @ApiBearerAuth()
-  @UseGuards(new RolesGuard(['super-admin']))
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Post('add-mfa/verify-mfa-otp')
   async verifyMfaOtp(
     @Body() body: MfaVerifyOtpDto,
@@ -93,8 +96,9 @@ export class SuperAdminController {
     return { code, ...response };
   }
 
+  @PermissionRequired(PERMISSIONS.VIEW_OWN_PROFILE)
   @ApiBearerAuth()
-  @UseGuards(new RolesGuard(['super-admin']))
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Get('profile')
   async profile(
     @UserInfo() superAdminInfo: SuperAdminInfo,

@@ -3,22 +3,37 @@ import { Role } from 'src/entity/role';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { RoleRepository } from '../repositories';
-import { CreateRoleDto } from '../rest/dto/role.dto';
+import { CreateRoleDto, UpdateRoleDto } from '../rest/dto/role.dto';
 
 @Injectable()
 export class RoleService {
   constructor(private readonly roleRepository: RoleRepository) {}
 
   async create(body: CreateRoleDto): Promise<IServiceResponse<Role>> {
-    const isExist = await this.roleRepository.findOne({name: body.name})
-    if(isExist){
-      return errorResponse('This role is already exist!', null, HttpStatus.CONFLICT)
+    const isExist = await this.roleRepository.findOne({ name: body.name });
+    if (isExist) {
+      return errorResponse(
+        'This role is already exist!',
+        null,
+        HttpStatus.CONFLICT,
+      );
     }
     const newRole = await this.roleRepository.create(body);
     if (newRole) {
       return successResponse(Role, newRole);
     }
     return errorResponse('Error in create new role', null, HttpStatus.CONFLICT);
+  }
+
+  async updateRole(body: UpdateRoleDto): Promise<IServiceResponse<Role>> {
+    const newRole = await this.roleRepository.findOneAndUpdate(
+      { name: body.name },
+      body,
+    );
+    if (newRole) {
+      return successResponse(Role, newRole);
+    }
+    return errorResponse('Error in updating role', null, HttpStatus.CONFLICT);
   }
 
   async findAll(query = {}): Promise<IServiceResponse<Role[]>> {

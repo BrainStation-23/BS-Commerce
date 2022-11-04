@@ -118,13 +118,8 @@ export class SuperAdminService {
       const res = await this.handleMfaLogin(userData);
       return res;
     }
-
-    const payload: AdminJwtPayload = {
-      id: userData.id,
-      username: userData.firstName + ' ' + userData.lastName,
-      logInTime: Date.now(),
-      role: userData.role,
-    };
+    const payload: AdminJwtPayload =
+      await this.superAdminHelperService.createAdminJwtPayload(userData);
     const token = this.jwtService.sign(payload);
     return successResponse(SuperAdminLoginRes, { token });
   }
@@ -161,12 +156,8 @@ export class SuperAdminService {
       const userData = await this.superAdminRepository.findOne({
         id: verifiedData.userId,
       });
-      const payload: AdminJwtPayload = {
-        id: userData.id,
-        username: userData.firstName + ' ' + userData.lastName,
-        logInTime: Date.now(),
-        role: userData.role,
-      };
+      const payload: AdminJwtPayload =
+        await this.superAdminHelperService.createAdminJwtPayload(userData);
       const token = this.jwtService.sign(payload);
       return successResponse(SuperAdminLoginRes, { token });
     } else {

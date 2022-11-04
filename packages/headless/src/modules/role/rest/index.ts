@@ -1,18 +1,30 @@
-import { Body, Controller, Get, Param, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { PERMISSIONS } from 'models';
+import { AdminInfo } from 'src/decorators/adminInfo.decorator';
 import { PermissionRequired } from 'src/decorators/permission.decorator';
 import { AdminJwtAuthGuard } from 'src/guards/admin-jwt-auth.guard';
 import { AdminRoleGuard } from 'src/guards/admin-role.guard';
 import { RoleService } from '../services';
-import { CreateRoleDto } from './dto/role.dto';
+import { CreateRoleDto, UpdateRoleDto } from './dto/role.dto';
 
 @ApiTags('Role management')
+@ApiBearerAuth()
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
+  @PermissionRequired(PERMISSIONS.CREATE_ROLE)
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Post('create')
   async create(
     @Body() body: CreateRoleDto,
@@ -23,22 +35,37 @@ export class RoleController {
     return { code, ...response };
   }
 
-  @PermissionRequired(PERMISSIONS.ASSIGN_ROLE)
-  @ApiBearerAuth()
+  @PermissionRequired(PERMISSIONS.EDIT_ROLE)
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
+  @Put('update')
+  async updateRole(
+    @Body() body: UpdateRoleDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.roleService.updateRole(body);
+    res.status(code);
+    return { code, ...response };
+  }
+
+  @PermissionRequired(PERMISSIONS.VIEW_ALL_ROLE)
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Get('all')
-  async findAll(@Res({ passthrough: true }) res: Response,){
+  async findAll(@Res({ passthrough: true }) res: Response) {
     const { code, ...response } = await this.roleService.findAll();
     res.status(code);
     return { code, ...response };
   }
 
-  @PermissionRequired(PERMISSIONS.VIEW_ROLE)
-  @ApiBearerAuth()
+  @PermissionRequired(PERMISSIONS.VIEW_OWN_ROLE)
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
-  @Get(':id')
-  async findOne(@Param('id') id:string, @Res({ passthrough: true }) res: Response,){
-    const { code, ...response } = await this.roleService.findOne({id});
+  @Get()
+  async findOne(
+    @AdminInfo() adminInfo: any,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { code, ...response } = await this.roleService.findOne({
+      name: adminInfo.role,
+    });
     res.status(code);
     return { code, ...response };
   }
