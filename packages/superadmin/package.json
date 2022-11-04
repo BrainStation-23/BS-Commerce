@@ -23,6 +23,7 @@
     "formik": "^2.2.9",
     "graphql": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
     "next": "12.1.0",
     "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
@@ -33,6 +34,7 @@
     "react-toastify": "^9.0.5",
     "redux-hooks": "^0.1.5",
     "redux-persist": "^6.0.0",
+    "xregexp": "^5.1.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
