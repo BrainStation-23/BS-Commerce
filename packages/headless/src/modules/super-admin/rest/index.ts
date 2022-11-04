@@ -1,23 +1,24 @@
 import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { PERMISSIONS } from "models";
-import { PermissionRequired } from "src/decorators/permission.decorator";
-import { AdminJwtAuthGuard } from "src/guards/admin-jwt-auth.guard";
-import { AdminRoleGuard } from "src/guards/admin-role.guard";
+import { PERMISSIONS } from 'models';
+import { PermissionRequired } from 'src/decorators/permission.decorator';
+import { AdminJwtAuthGuard } from 'src/guards/admin-jwt-auth.guard';
+import { AdminRoleGuard } from 'src/guards/admin-role.guard';
 import { RolesGuard } from 'src/guards/auth.guard';
 import { SuperAdminService } from '../service';
 import { SuperAdminLoginDto, SuperAdminLoginRes } from './dto/login.dto';
 import { SuperAdminSignupReq, SuperAdminSignupRes } from './dto/signup.dto';
 import { MfaOtpDto, MfaVerifyOtpDto } from './dto/otp.dto';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { SuperAdmin, SuperAdminInfo } from 'src/entity/super-admin';
+import { SuperAdminInfo } from 'src/entity/super-admin';
+
 @ApiTags('Super admin controller')
 @Controller('super-admin')
 export class SuperAdminController {
   constructor(private readonly superAdminService: SuperAdminService) {}
 
-    @PermissionRequired(PERMISSIONS.CREATE_ROLE, PERMISSIONS.ASSIGN_ROLE)
+  @PermissionRequired(PERMISSIONS.CREATE_ROLE, PERMISSIONS.ASSIGN_ROLE)
   @ApiBearerAuth()
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @ApiResponse({
@@ -105,6 +106,4 @@ export class SuperAdminController {
     res.status(code);
     return { code, ...response };
   }
-
-  
 }
