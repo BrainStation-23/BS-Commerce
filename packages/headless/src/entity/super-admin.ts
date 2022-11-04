@@ -10,3 +10,13 @@ export class SuperAdmin{
     isMfaEnabled: boolean
     mfaType: string
 }
+
+export class SuperAdminInfo{
+    id: string
+    firstName: string
+    lastName: string
+    role: string
+    email: string
+    countryCode: string
+    phone: string
+}
