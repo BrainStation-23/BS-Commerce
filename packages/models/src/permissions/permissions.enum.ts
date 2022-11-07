@@ -30,6 +30,14 @@ export const enum PERMISSIONS {
 	DELETE_ROLE = "delete-role",
 	ASSIGN_ROLE = "assign-role",
 
+	// user admin -> manage role
+	CREATE_USER_ADMIN_ROLE = "create-user-admin-role",
+	VIEW_USER_ADMIN_ALL_ROLE = "view-user-admin-all-role",
+	VIEW_USER_ADMIN_SINGLE_ROLE = "view-user-admin-single-role",
+	EDIT_USER_ADMIN_ROLE = "edit-user-admin-role",
+	DELETE_USER_ADMIN_ROLE = "delete-user-admin-role",
+	ASSIGN_USER_ADMIN_ROLE = "assign-user-admin-role",
+
 	// mfa actions
 	ADD_MFA = "add-mfa",
 	VERIFY_OTP_AFTER_ADD_MFA = "verify-otp-after-add-mfa",

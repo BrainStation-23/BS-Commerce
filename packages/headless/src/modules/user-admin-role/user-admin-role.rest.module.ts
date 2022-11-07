@@ -16,4 +16,4 @@ import { RoleService } from './services';
     },
   ],
 })
-export class RoleModule {}
+export class UserAdminRoleModule {}

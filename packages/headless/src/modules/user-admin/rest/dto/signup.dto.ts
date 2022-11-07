@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsEnum,
@@ -7,14 +7,14 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { ISuperAdminRoleInfo, ISuperAdminSignupReq, ISuperAdminSignupRes } from 'models';
-import { SuperAdminRoleInfo } from 'src/entity/super-admin';
+import { IRoleInfo, IUserAdminSignupReq, IUserAdminSignupRes } from 'models';
 
 export enum MfaType {
   EMAIL = 'EMAIL',
   PHONE = 'PHONE',
 }
-export class SuperAdminSignupReq implements ISuperAdminSignupReq {
+
+export class UserAdminSignupReq implements IUserAdminSignupReq {
   @ApiProperty({ example: 'Adam', required: true })
   @IsString()
   @MaxLength(30)
@@ -27,13 +27,9 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
   @MinLength(2)
   lastName: string;
 
-  @ApiProperty({ example: 'super-admin', required: true })
+  @ApiProperty({ example: 'role-id', required: true })
   @IsString()
   roleId: string;
-
-  @ApiProperty({ example: 'store-id', required: true })
-  @IsString()
-  storeId: string;
 
   @ApiProperty({ example: ['branch-id'], required: true })
   branchId: string[];
@@ -56,18 +52,9 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
   @IsString()
   @IsOptional()
   phone?: string;
-
-  @ApiProperty({ example: false })
-  @IsOptional()
-  isMfaEnabled?: boolean;
-
-  @ApiProperty({ enum: MfaType, example: MfaType.EMAIL })
-  @IsOptional()
-  @IsEnum(MfaType)
-  mfaType?: MfaType;
 }
 
-export class SuperAdminProfileUpdateDto {
+export class UserAdminProfileUpdateDto {
   @ApiProperty({ example: '880' })
   @IsString()
   @IsOptional()
@@ -98,7 +85,7 @@ export class SuperAdminProfileUpdateDto {
   mfaType?: MfaType;
 }
 
-export class RoleInfo implements ISuperAdminRoleInfo{
+export class RoleInfo implements IRoleInfo {
   @ApiProperty()
   name: string;
 
@@ -109,14 +96,14 @@ export class RoleInfo implements ISuperAdminRoleInfo{
   roleType: string;
 }
 
-export class SuperAdminSignupRes implements ISuperAdminSignupRes {
+export class UserAdminSignupRes implements IUserAdminSignupRes {
   @ApiProperty({ example: 'Adam' })
   firstName: string;
 
   @ApiProperty({ example: 'Smit' })
   lastName: string;
 
-  @ApiProperty({ example: 'super-admin' })
+  @ApiProperty()
   role: RoleInfo;
 
   @ApiProperty({ example: 'store-id' })

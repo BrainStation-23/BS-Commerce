@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { SuperAdmin } from 'src/entity/super-admin';
-import { SuperAdminRepository } from '../repositories';
+import { UserAdmin } from 'src/entity/user-admin';
+import { UserAdminRepository } from '../repositories';
 import * as bcrypt from 'bcrypt';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto } from '../rest/dto/otp.dto';
@@ -8,8 +8,8 @@ import { AdminJwtPayload } from 'src/entity/auth';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
-export class SuperAdminHelperService {
-  constructor(private readonly superAdminRepository: SuperAdminRepository) {}
+export class UserAdminHelperService {
+  constructor(private readonly userAdminRepository: UserAdminRepository) {}
 
   async syncOtp(
     userId: string,
@@ -37,24 +37,24 @@ export class SuperAdminHelperService {
     }
 
     let otpData: Otp = null;
-    const isOtpDataExist = await this.superAdminRepository.findOtp(query);
+    const isOtpDataExist = await this.userAdminRepository.findOtp(query);
     if (isOtpDataExist) {
       // update otp
       const newData = { ...payload, otpExpireTime: Date.now() + FIVE_MINUTES };
-      otpData = await this.superAdminRepository.updateOtp(query, newData);
+      otpData = await this.userAdminRepository.updateOtp(query, newData);
     } else {
       // add new otp
-      otpData = await this.superAdminRepository.sendOtp(payload);
+      otpData = await this.userAdminRepository.sendOtp(payload);
     }
     return otpData;
   }
 
   async checkPassword(
-    body: Partial<SuperAdmin>,
+    body: Partial<UserAdmin>,
     userId = '',
   ): Promise<boolean> {
     let query = userId === '' ? { email: body.email } : { id: userId };
-    const userData = await this.superAdminRepository.findOne(query);
+    const userData = await this.userAdminRepository.findOne(query);
     if (!userData) {
       return false;
     }
@@ -68,14 +68,15 @@ export class SuperAdminHelperService {
     return true;
   }
 
-  async createAdminJwtPayload(
-    userData: Partial<SuperAdmin>,
+  async createUserAdminJwtPayload(
+    userData: Partial<UserAdmin>,
   ): Promise<AdminJwtPayload> {
     const payload: AdminJwtPayload = {
       id: userData.id,
       username: userData.firstName + ' ' + userData.lastName,
       logInTime: Date.now(),
       role: userData.role,
+      storeId: userData.storeId,
     };
     return payload;
   }

@@ -1,8 +1,9 @@
 import { SuperAdmin } from 'src/entity/super-admin';
 import { Schema, model } from 'mongoose';
 import { randomUUID } from 'crypto';
+import { UserAdmin } from 'src/entity/user-admin';
 
-const SuperAdminSchema = new Schema<SuperAdmin>(
+const UserAdminSchema = new Schema<UserAdmin>(
   {
     id: {
       type: String,
@@ -81,5 +82,5 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
   },
 );
 
-const SuperAdminModel = model<SuperAdmin>('super-admin', SuperAdminSchema);
-export { SuperAdminModel };
+const UserAdminModel = model<UserAdmin>('user-admin', UserAdminSchema);
+export { UserAdminModel };

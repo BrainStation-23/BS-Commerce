@@ -1,13 +1,13 @@
-export class SuperAdminRoleInfo {
+export class RoleInfo {
   name: string;
   roleId: string;
   roleType: string;
 }
-export class SuperAdmin {
+export class UserAdmin {
   id: string;
   firstName: string;
   lastName: string;
-  role: SuperAdminRoleInfo;
+  role: RoleInfo;
   storeId: string;
   branchId: string[];
   email: string;
@@ -18,11 +18,11 @@ export class SuperAdmin {
   mfaType: string;
 }
 
-export class SuperAdminInfo {
+export class UserAdminInfo {
   id: string;
   firstName: string;
   lastName: string;
-  role: string;
+  role: RoleInfo;
   storeId: string;
   branchId: string[];
   email: string;

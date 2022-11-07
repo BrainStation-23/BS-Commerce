@@ -1,9 +1,8 @@
 import { Role } from 'src/entity/role';
 import { Schema, model } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { PERMISSIONS } from 'models';
 
-const RoleSchema = new Schema<Role>(
+const UserAdminRoleSchema = new Schema<Role>(
   {
     id: {
       type: String,
@@ -14,9 +13,16 @@ const RoleSchema = new Schema<Role>(
     name: {
       type: String,
       trim: true,
-      unique: true,
-      index: true,
       required: true,
+    },
+    roleType:{
+      type: String,
+      index: true,
+      default: 'user-admin-type'
+    },
+    storeId:{
+      type: String,
+      default: '',
     },
     permissions: {
       type: [String],
@@ -32,5 +38,5 @@ const RoleSchema = new Schema<Role>(
   },
 );
 
-const RoleModel = model<Role>('role', RoleSchema);
-export { RoleModel };
+const UserAdminRoleModel = model<Role>('user-admin-role', UserAdminRoleSchema);
+export { UserAdminRoleModel };

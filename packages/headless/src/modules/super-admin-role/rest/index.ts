@@ -17,9 +17,9 @@ import { AdminRoleGuard } from 'src/guards/admin-role.guard';
 import { RoleService } from '../services';
 import { CreateRoleDto, UpdateRoleDto } from './dto/role.dto';
 
-@ApiTags('Role management')
+@ApiTags('Super Admin Role management')
 @ApiBearerAuth()
-@Controller('role')
+@Controller('super-admin/role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 

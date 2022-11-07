@@ -17,7 +17,9 @@ import { BranchModule } from 'src/modules/branch/branch.rest.module';
 import { StoreModule } from 'src/modules/store/store.rest.module';
 import { SuperAdminModule } from 'src/modules/super-admin/super-admin.rest.module';
 import { StoreBranchModule } from 'src/modules/store-branch/StoreBranch.rest.module';
-import { RoleModule } from 'src/modules/role/role.rest.module';
+import { SuperAdminRoleModule } from 'src/modules/super-admin-role/super-admin-role.rest.module';
+import { UserAdminModule } from 'src/modules/user-admin/user-admin.rest.module';
+import { UserAdminRoleModule } from 'src/modules/user-admin-role/user-admin-role.rest.module';
 
 export const ResolveRestModule = () => {
   return [
@@ -41,6 +43,8 @@ export const ResolveRestModule = () => {
     StoreModule,
     SuperAdminModule,
     StoreBranchModule,
-    RoleModule
+    SuperAdminRoleModule,
+    UserAdminRoleModule,
+    UserAdminModule,
   ];
 };

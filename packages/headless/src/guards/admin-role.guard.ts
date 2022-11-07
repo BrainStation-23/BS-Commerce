@@ -1,10 +1,9 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { PERMISSIONS } from 'models';
-import { RoleModel } from 'src/database/mongodb/role/role.model';
+import { SuperAdminRoleModel } from 'src/database/mongodb/super-admin-role/super-admin.role.model';
+import { UserAdminRoleModel } from 'src/database/mongodb/user-admin-role/user-admin.role.model';
 import { PERMISSION_KEY } from 'src/decorators/permission.decorator';
-import { Role } from 'src/entity/role';
-import { RoleService } from 'src/modules/role/services';
 
 @Injectable()
 export class AdminRoleGuard implements CanActivate {
@@ -28,12 +27,22 @@ export class AdminRoleGuard implements CanActivate {
     }
 
     const query = {
-      role: user.role,
+      id: user.role.roleId,
+      name: user.role.name,
+      type: user.role.roleType,
       isActive: true,
       permissions: { $elemMatch: { $in: requiredPermissions } },
     };
-    const role = await RoleModel.find(query).countDocuments();
-    if (role) {
+    
+    let isExist = 0
+    if(user.role.roleType === 'super-admin-type'){
+      isExist = await SuperAdminRoleModel.findOne(query).countDocuments()
+    }else if(user.role.roleType === 'user-admin-type'){
+      isExist = await UserAdminRoleModel.findOne(query).countDocuments()
+    }else{
+      return false;
+    }
+    if (isExist) {
       return true;
     }
     return false;

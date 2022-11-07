@@ -1,18 +1,19 @@
-export interface ISuperAdminLoginReq {
+export interface IUserAdminLoginReq {
 	email: string;
 	password: string;
 }
 
-export interface ISuperAdminLoginRes {
+export interface IUserAdminLoginRes {
 	token: string;
 }
 
-export interface ISuperAdminRoleInfo {
+export interface IRoleInfo {
 	name: string;
 	roleId: string;
 	roleType: string;
 }
-export interface ISuperAdminSignupReq {
+
+export interface IUserAdminSignupReq {
 	id?: string;
 	firstName: string;
 	lastName: string;
@@ -24,11 +25,11 @@ export interface ISuperAdminSignupReq {
 	password?: string;
 }
 
-export interface ISuperAdminSignupRes {
+export interface IUserAdminSignupRes {
 	id?: string;
 	firstName: string;
 	lastName: string;
-	role: ISuperAdminRoleInfo;
+	role: IRoleInfo;
 	storeId: string;
 	branchId: string[];
 	email: string;
