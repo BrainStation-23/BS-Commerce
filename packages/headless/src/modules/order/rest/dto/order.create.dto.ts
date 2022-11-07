@@ -98,6 +98,9 @@ export class CreateOrderProductDto implements CreateProductOrderDetails {
 }
 
 export class CreateOrderDto implements CreateOrderRequest {
+  @ApiProperty()
+  branchId: string;
+
   @ApiProperty({ example: 100 })
   @IsNumber()
   shippingCost: number;

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
-} from '@bs-commerce/models';
+} from 'models';
 
 import {
   CartItem,
@@ -51,6 +51,7 @@ export abstract class IOrderDatabase {
   abstract createReview: (review: any) => Promise<Review | null>;
   abstract findReview: (query: Record<string,any>, skip: number, limit: number)=> Promise<Review[] | null>;
   abstract addProductRating: (productId: string, rating: number)=> Promise<boolean>;
+  abstract findBranch: (query: Record<string, any>) => Promise<boolean>;
   abstract createReply: (reply: ICreateReply) => Promise<IReviewReplyResponse | null>;
   abstract updateReply: (replyId: string, request: IUpdateReplyRequest) => Promise<IReviewReplyResponse | null>
   abstract findReply: (replyId: string) => Promise<IReviewReplyResponse | null>;

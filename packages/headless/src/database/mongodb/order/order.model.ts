@@ -131,6 +131,7 @@ const OrderSchema = new Schema<OrderEntity>({
     trim: true,
     required: true,
   },
+  branchId: String,
   billingAddress: AddressSchema,
   shippingAddress: AddressSchema,
   shippingMethod: {

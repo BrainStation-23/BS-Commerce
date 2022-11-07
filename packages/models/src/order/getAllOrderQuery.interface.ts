@@ -6,4 +6,5 @@ export interface GetAllOrderQuery {
   limit?: number;
   startDate?: Date;
   endDate?: Date;
+  branchId?: string;
 }

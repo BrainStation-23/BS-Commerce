@@ -1,12 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsOptional } from 'class-validator';
-import { GetAllOrderQuery } from '@bs-commerce/models';
+import { GetAllOrderQuery } from 'models';
 import { OrderDto } from './order.dto';
 
 export class GetAllOrderQueryDto implements GetAllOrderQuery {
   @ApiProperty({ required: false, type: String })
   @IsOptional()
   shippingStatus?: string;
+
+  @ApiProperty({ required: false, type: String })
+  @IsOptional()
+  branchId?: string;
 
   @ApiProperty({ required: false, type: String })
   @IsOptional()
