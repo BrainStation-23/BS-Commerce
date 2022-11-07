@@ -36,15 +36,20 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     phone: {
       type: String,
       index: true,
+      default: ''
     },
     password: {
       type: String,
       required: true
     },
-    isMfaEnabled: Boolean,
+    isMfaEnabled: {
+      type: Boolean,
+      default: false
+    },
     mfaType: {
       type: String,
-      enum: ['EMAIL', 'PHONE']
+      enum: ['EMAIL', 'PHONE'],
+      default: 'EMAIL'
     }
   },
   {
