@@ -96,6 +96,19 @@ export class RoleInfo implements IRoleInfo {
   roleType: string;
 }
 
+
+export class CreateUserAdminDto {
+  firstName: string;
+  lastName: string;
+  role: RoleInfo;
+  storeId: string;
+  branchId: string[];
+  email: string;
+  countryCode?: string;
+  phone?: string;
+  isMfaEnabled?: boolean;
+  mfaType?: MfaType;
+}
 export class UserAdminSignupRes implements IUserAdminSignupRes {
   @ApiProperty({ example: 'Adam' })
   firstName: string;

@@ -1,11 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PartialType } from '@nestjs/swagger';
-import { UserAdmin } from 'src/entity/user-admin';
+import { RoleInfo, UserAdmin, UserAdminInfo } from 'src/entity/user-admin';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { UserAdminRepository } from '../repositories';
 import { UserAdminLoginDto, UserAdminLoginRes } from '../rest/dto/login.dto';
 import {
+  CreateUserAdminDto,
   MfaType,
   UserAdminProfileUpdateDto,
   UserAdminSignupReq,
@@ -18,6 +19,7 @@ import { Otp } from 'src/entity/otp';
 import { MfaOtpDto, MfaVerifyOtpDto } from '../rest/dto/otp.dto';
 import { OtpResponseDto } from '../rest/dto/mfa.dto';
 import { UserAdminHelperService } from './helper.service';
+import { RoleTypeEnum } from 'models';
 
 @Injectable()
 export class UserAdminService {
@@ -41,9 +43,11 @@ export class UserAdminService {
   }
 
   async userAdminCreate(
+    userAdminInfo: UserAdminInfo,
     body: UserAdminSignupReq,
   ): Promise<IServiceResponse<Partial<UserAdmin>>> {
     let isExist = await this.userAdminRepository.findOne({
+      storeId: userAdminInfo.storeId,
       email: body.email,
     });
     if (isExist?.email === body.email) {
@@ -65,8 +69,32 @@ export class UserAdminService {
     }
 
     body.password = await bcrypt.hash(body.password, authConfig.salt);
-
-    const newUserAdmin = await this.userAdminRepository.create(body);
+    const roleData = await this.userAdminRepository.findOneyRole({id: body.roleId})
+    if(!roleData){
+      return errorResponse(
+        'This role is invalid!',
+        null,
+        HttpStatus.CONFLICT,
+      );
+    }
+    // const isValidBranch: boolean = await checkIsStoreContainsTheBranch({branchIds: body.branchId})
+    // if(!isValidBranch){
+    //   return errorResponse(
+    //     'Invalid branch provided!',
+    //     null,
+    //     HttpStatus.CONFLICT,
+    //   );
+    // }
+    const role: RoleInfo = {
+      name: roleData.name,
+      roleId: roleData.id,
+      roleType: roleData.roleType 
+    }
+    delete body.roleId;
+    const payload: UserAdmin = {
+      ...body, role, storeId: userAdminInfo.storeId
+    }
+    const newUserAdmin = await this.userAdminRepository.create(payload);
     if (newUserAdmin) {
       return successResponse(PartialType(UserAdmin), newUserAdmin);
     }

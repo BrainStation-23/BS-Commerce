@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
+import { Role } from 'src/entity/role';
 import { UserAdmin } from 'src/entity/user-admin';
 import { UserAdminProfileUpdateDto, UserAdminSignupReq } from '../rest/dto/signup.dto';
 import { IUserAdminDatabase } from './user-admin.db.interface';
@@ -8,7 +9,7 @@ import { IUserAdminDatabase } from './user-admin.db.interface';
 export class UserAdminRepository {
   constructor(private db: IUserAdminDatabase) {}
 
-  async create(body: UserAdminSignupReq): Promise<Partial<UserAdmin>> {
+  async create(body: UserAdmin): Promise<Partial<UserAdmin>> {
     return await this.db.create(body);
   }
 
@@ -17,6 +18,10 @@ export class UserAdminRepository {
   }
 
   async findOne(query: Record<string, any>): Promise<Partial<UserAdmin>> {
+    return await this.db.findOne(query);
+  }
+  
+  async findOneyRole(query: Record<string, any>): Promise<Partial<Role>> {
     return await this.db.findOne(query);
   }
 

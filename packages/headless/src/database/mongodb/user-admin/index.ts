@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
+import { Role } from 'src/entity/role';
 import { UserAdmin } from 'src/entity/user-admin';
 import { IUserAdminDatabase } from 'src/modules/user-admin/repositories/user-admin.db.interface';
 import {
@@ -7,6 +8,7 @@ import {
   UserAdminSignupReq,
 } from 'src/modules/user-admin/rest/dto/signup.dto';
 import { OtpModel } from '../otp/otp.model';
+import { UserAdminRoleModel } from '../user-admin-role/user-admin.role.model';
 import { UserAdminModel } from './user-admin.model';
 
 @Injectable()
@@ -22,7 +24,16 @@ export class UserAdminDatabase implements IUserAdminDatabase {
     }
   }
 
-  async create(body: UserAdminSignupReq): Promise<Partial<UserAdmin> | null> {
+  async findOneRole(query: Record<string, any>): Promise<Partial<Role>> {
+    try {
+      return await UserAdminRoleModel.findOne({ ...query }, { _id: 0 }).lean();
+    } catch (error: any) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
+  async create(body: UserAdmin): Promise<Partial<UserAdmin> | null> {
     try {
       const data = await UserAdminModel.create(body);
       if (data?.password) {
@@ -59,8 +70,8 @@ export class UserAdminDatabase implements IUserAdminDatabase {
         otpVerifiedAt: Date.now(),
         isVerified: true,
       });
-    }else{
-      return null
+    } else {
+      return null;
     }
   }
 
@@ -72,8 +83,10 @@ export class UserAdminDatabase implements IUserAdminDatabase {
     query: Record<string, any>,
     data: object,
   ): Promise<Otp | null> {
-    const updatedData =  await OtpModel.findOneAndUpdate(query, { $set: data }).lean();
-    return updatedData
+    const updatedData = await OtpModel.findOneAndUpdate(query, {
+      $set: data,
+    }).lean();
+    return updatedData;
   }
 
   async deleteOtp(query: Record<string, any>): Promise<Otp | null> {

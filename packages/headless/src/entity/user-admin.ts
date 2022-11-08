@@ -4,18 +4,18 @@ export class RoleInfo {
   roleType: string;
 }
 export class UserAdmin {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   role: RoleInfo;
   storeId: string;
   branchId: string[];
   email: string;
-  countryCode: string;
-  phone: string;
+  countryCode?: string;
+  phone?: string;
   password: string;
-  isMfaEnabled: boolean;
-  mfaType: string;
+  isMfaEnabled?: boolean;
+  mfaType?: string;
 }
 
 export class UserAdminInfo {

@@ -38,6 +38,13 @@ export const enum PERMISSIONS {
 	DELETE_USER_ADMIN_ROLE = "delete-user-admin-role",
 	ASSIGN_USER_ADMIN_ROLE = "assign-user-admin-role",
 
+	// super admin -> manage branch admin
+	CREATE_USER_ADMIN = "create-user-admin",
+	EDIT_USER_ADMIN = "edit-user-admin",
+	DELETE_USER_ADMIN = "delete-user-admin",
+	VIEW_ALL_USER_ADMIN = "view-all-user-admin",
+	VIEW_SINGLE_USER_ADMIN = "view-single-user-admin",
+
 	// mfa actions
 	ADD_MFA = "add-mfa",
 	VERIFY_OTP_AFTER_ADD_MFA = "verify-otp-after-add-mfa",
@@ -54,4 +61,9 @@ export const enum PERMISSIONS {
 	// branch
 	VIEW_OWN_BRANCH = "view-own-branch",
 	VIEW_BRANCH_ORDERS = "view-branch-orders",
+}
+
+export enum RoleTypeEnum {
+	SUPER_ADMIN = "super-admin-type",
+	USER_ADMIN = "user-admin-type",
 }

@@ -50,7 +50,6 @@ const UserAdminSchema = new Schema<UserAdmin>(
     email: {
       type: String,
       index: true,
-      unique: true,
       required: true,
     },
     countryCode: {

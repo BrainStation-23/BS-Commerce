@@ -18,7 +18,7 @@ import { UserAdminInfo } from 'src/entity/user-admin';
 export class UserAdminController {
   constructor(private readonly userAdminService: UserAdminService) {}
 
-  @PermissionRequired(PERMISSIONS.CREATE_USER_ADMIN_ROLE)
+  @PermissionRequired(PERMISSIONS.CREATE_USER_ADMIN)
   @ApiBearerAuth()
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @ApiResponse({
@@ -28,9 +28,11 @@ export class UserAdminController {
   @Post('create')
   async userAdminCreate(
     @Body() body: UserAdminSignupReq,
+    @UserInfo() userAdminInfo: UserAdminInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.userAdminService.userAdminCreate(
+      userAdminInfo,
       body,
     );
     res.status(code);
@@ -38,7 +40,10 @@ export class UserAdminController {
   }
 
   @Post('login')
-  @ApiResponse({ description: 'Login - store or branch admin', type: UserAdminLoginRes })
+  @ApiResponse({
+    description: 'Login - store or branch admin',
+    type: UserAdminLoginRes,
+  })
   async userAdminLogin(
     @Body() body: UserAdminLoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -50,14 +55,14 @@ export class UserAdminController {
     return { code, ...response };
   }
 
-  
   @Post('login/verify-mfa-otp')
   async loginVerifyMfaOtp(
     @Body() body: MfaVerifyOtpDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } =
-      await this.userAdminService.verifyMfaLoginOtp(body);
+    const { code, ...response } = await this.userAdminService.verifyMfaLoginOtp(
+      body,
+    );
     res.status(code);
     return { code, ...response };
   }
