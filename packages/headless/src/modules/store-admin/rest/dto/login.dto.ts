@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsEmail, IsString, MinLength } from "class-validator" 
-import { IUserAdminLoginReq, IUserAdminLoginRes } from "models"
+import { IStoreAdminLoginReq, IStoreAdminLoginRes } from "models"
 
-export class UserAdminLoginDto implements IUserAdminLoginReq{
+export class StoreAdminLoginDto implements IStoreAdminLoginReq{
     @ApiProperty({example: 'sadmin@mail.com', required: true})
     @IsEmail()
     email: string
@@ -13,7 +13,7 @@ export class UserAdminLoginDto implements IUserAdminLoginReq{
     password: string
 }
 
-export class UserAdminLoginRes implements IUserAdminLoginRes{
+export class StoreAdminLoginRes implements IStoreAdminLoginRes{
     @ApiProperty()
     token: string
 }

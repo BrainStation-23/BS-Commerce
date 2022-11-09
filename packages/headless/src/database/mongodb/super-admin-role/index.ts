@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { query } from 'express';
+import { RoleTypeEnum } from 'models';
 import { Role } from 'src/entity/role';
 import { IRoleDatabase } from 'src/modules/super-admin-role/repositories/role.database.interface';
 import {
@@ -9,9 +10,9 @@ import {
 import { SuperAdminRoleModel } from './super-admin.role.model';
 
 @Injectable()
-export class RoleDatabase implements IRoleDatabase {
+export class SuperAdminRoleDatabase implements IRoleDatabase {
   async create(body: CreateRoleDto): Promise<Role> {
-    const newRole = await SuperAdminRoleModel.create(body);
+    const newRole = await SuperAdminRoleModel.create({...body, roleType: RoleTypeEnum.SUPER_ADMIN});
     return newRole ? newRole : null;
   }
 

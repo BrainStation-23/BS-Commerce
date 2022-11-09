@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UserAdmin } from 'src/entity/user-admin';
-import { UserAdminRepository } from '../repositories';
+import { StoreAdmin } from 'src/entity/store-admin';
+import { StoreAdminRepository } from '../repositories';
 import * as bcrypt from 'bcrypt';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto } from '../rest/dto/otp.dto';
@@ -8,8 +8,8 @@ import { AdminJwtPayload } from 'src/entity/auth';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
-export class UserAdminHelperService {
-  constructor(private readonly userAdminRepository: UserAdminRepository) {}
+export class StoreAdminHelperService {
+  constructor(private readonly storeAdminRepository: StoreAdminRepository) {}
 
   async syncOtp(
     userId: string,
@@ -37,30 +37,30 @@ export class UserAdminHelperService {
     }
 
     let otpData: Otp = null;
-    const isOtpDataExist = await this.userAdminRepository.findOtp(query);
+    const isOtpDataExist = await this.storeAdminRepository.findOtp(query);
     if (isOtpDataExist) {
       // update otp
       const newData = { ...payload, otpExpireTime: Date.now() + FIVE_MINUTES };
-      otpData = await this.userAdminRepository.updateOtp(query, newData);
+      otpData = await this.storeAdminRepository.updateOtp(query, newData);
     } else {
       // add new otp
-      otpData = await this.userAdminRepository.sendOtp(payload);
+      otpData = await this.storeAdminRepository.sendOtp(payload);
     }
     return otpData;
   }
 
   async checkPassword(
-    body: Partial<UserAdmin>,
-    userId = '',
+    body: Partial<StoreAdmin>,
+    storeId = '',
   ): Promise<boolean> {
-    let query = userId === '' ? { email: body.email } : { id: userId };
-    const userData = await this.userAdminRepository.findOne(query);
-    if (!userData) {
+    let query = storeId === '' ? { email: body.email } : { id: storeId };
+    const storeData = await this.storeAdminRepository.findOne(query);
+    if (!storeData) {
       return false;
     }
     const matchPassword = await bcrypt.compare(
       body.password,
-      userData.password,
+      storeData.password,
     );
     if (!matchPassword) {
       return false;
@@ -68,8 +68,8 @@ export class UserAdminHelperService {
     return true;
   }
 
-  async createUserAdminJwtPayload(
-    userData: Partial<UserAdmin>,
+  async createStoreAdminJwtPayload(
+    userData: Partial<StoreAdmin>,
   ): Promise<AdminJwtPayload> {
     const payload: AdminJwtPayload = {
       id: userData.id,

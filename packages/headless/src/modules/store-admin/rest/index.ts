@@ -6,33 +6,33 @@ import { PermissionRequired } from 'src/decorators/permission.decorator';
 import { AdminJwtAuthGuard } from 'src/guards/admin-jwt-auth.guard';
 import { AdminRoleGuard } from 'src/guards/admin-role.guard';
 import { RolesGuard } from 'src/guards/auth.guard';
-import { UserAdminService } from '../service';
-import { UserAdminLoginDto, UserAdminLoginRes } from './dto/login.dto';
-import { UserAdminSignupReq, UserAdminSignupRes } from './dto/signup.dto';
+import { StoreAdminService } from '../service';
+import { StoreAdminLoginDto, StoreAdminLoginRes } from './dto/login.dto';
+import { StoreAdminSignupReq, StoreAdminSignupRes } from './dto/signup.dto';
 import { MfaOtpDto, MfaVerifyOtpDto } from './dto/otp.dto';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { UserAdminInfo } from 'src/entity/user-admin';
+import { StoreAdminInfo } from 'src/entity/store-admin';
+import { AdminInfo } from 'src/decorators/adminInfo.decorator';
 
-@ApiTags('User admin controller')
-@Controller('user-admin')
-export class UserAdminController {
-  constructor(private readonly userAdminService: UserAdminService) {}
+@ApiTags('Store admin controller')
+@Controller('store-admin')
+export class StoreAdminController {
+  constructor(private readonly storeAdminService: StoreAdminService) {}
 
-  @PermissionRequired(PERMISSIONS.CREATE_USER_ADMIN)
+  @PermissionRequired(PERMISSIONS.CREATE_STORE_ADMIN, PERMISSIONS.CREATE_ADMIN)
   @ApiBearerAuth()
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @ApiResponse({
-    description: 'Create new admin by user admin',
-    type: UserAdminSignupRes,
+    description: 'Create new store or branch admin',
+    type: StoreAdminSignupRes,
   })
   @Post('create')
-  async userAdminCreate(
-    @Body() body: UserAdminSignupReq,
-    @UserInfo() userAdminInfo: UserAdminInfo,
+  async storeAdminCreate(
+    @Body() body: StoreAdminSignupReq,
+    @AdminInfo() storeAdminInfo: StoreAdminInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.userAdminCreate(
-      userAdminInfo,
+    const { code, ...response } = await this.storeAdminService.storeAdminCreate(
+      storeAdminInfo,
       body,
     );
     res.status(code);
@@ -42,13 +42,13 @@ export class UserAdminController {
   @Post('login')
   @ApiResponse({
     description: 'Login - store or branch admin',
-    type: UserAdminLoginRes,
+    type: StoreAdminLoginRes,
   })
-  async userAdminLogin(
-    @Body() body: UserAdminLoginDto,
+  async storeAdminLogin(
+    @Body() body: StoreAdminLoginDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.userAdminLogin(
+    const { code, ...response } = await this.storeAdminService.storeAdminLogin(
       body,
     );
     res.status(code);
@@ -60,7 +60,7 @@ export class UserAdminController {
     @Body() body: MfaVerifyOtpDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.verifyMfaLoginOtp(
+    const { code, ...response } = await this.storeAdminService.verifyMfaLoginOtp(
       body,
     );
     res.status(code);
@@ -73,11 +73,11 @@ export class UserAdminController {
   @Post('add-mfa')
   async addMfa(
     @Body() body: MfaOtpDto,
-    @UserInfo() userAdminInfo: UserAdminInfo,
+    @AdminInfo() storeAdminInfo: StoreAdminInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.sendMfaOtp(
-      userAdminInfo.id,
+    const { code, ...response } = await this.storeAdminService.sendMfaOtp(
+      storeAdminInfo.id,
       body,
     );
     res.status(code);
@@ -90,11 +90,11 @@ export class UserAdminController {
   @Post('add-mfa/verify-mfa-otp')
   async verifyMfaOtp(
     @Body() body: MfaVerifyOtpDto,
-    @UserInfo() userAdminInfo: UserAdminInfo,
+    @AdminInfo() storeAdminInfo: StoreAdminInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.verifiyMfaOtp(
-      userAdminInfo.id,
+    const { code, ...response } = await this.storeAdminService.verifiyMfaOtp(
+      storeAdminInfo.id,
       body,
     );
     res.status(code);
@@ -106,11 +106,11 @@ export class UserAdminController {
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Get('profile')
   async profile(
-    @UserInfo() userAdminInfo: UserAdminInfo,
+    @AdminInfo() storeAdminInfo: StoreAdminInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.userAdminService.getProfileData(
-      userAdminInfo.id,
+    const { code, ...response } = await this.storeAdminService.getProfileData(
+      storeAdminInfo.id,
     );
     res.status(code);
     return { code, ...response };

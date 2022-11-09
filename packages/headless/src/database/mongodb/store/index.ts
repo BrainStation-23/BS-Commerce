@@ -5,6 +5,10 @@ import { IStoreDatabase } from 'src/modules/store/repositories/store.database.in
 import { StoreModel } from './store.model';
 import mongoose from 'mongoose';
 import { StoreAdminModel } from '../store-admin/store-admin.model';
+import { CreateRoleDto } from 'src/modules/store/rest/dto/store-admin-role.dto';
+import { Role } from 'src/entity/role';
+import { StoreAdminRoleModel } from '../store-admin-role/store-admin.role.model';
+import { RoleTypeEnum } from 'models';
 
 @Injectable()
 export class StoreDatabase implements IStoreDatabase {
@@ -62,21 +66,59 @@ export class StoreDatabase implements IStoreDatabase {
 
   async createStore(data: {
     store: Store;
+    role: CreateRoleDto;
     admin: StoreAdmin;
   }): Promise<Store | null> {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const storeAdmin: StoreAdmin = await new StoreAdminModel({
+      /**
+       * step 1: create role with temp store id
+       * step 2: create admin with role and temp store id
+       * step 3: create store admin
+       * step 4: update admin with store id
+       * step 5: update role with store id
+       */
+      let role: Role = await new StoreAdminRoleModel({
+        ...data.role,
+        roleType: RoleTypeEnum.STORE_ADMIN,
+        storeId: 'temp',
+      }).save({ session });
+
+      let storeAdmin: StoreAdmin = await new StoreAdminModel({
         ...data.admin,
+        role: {
+          roleId: role.id,
+          name: role.name,
+          roleType: role.roleType,
+        },
+        storeId: 'temp',
       }).save({
         session,
       });
 
-      const store: Store = await new StoreModel({
+      let store: Store = await new StoreModel({
         ...data.store,
         admin: storeAdmin.id,
       }).save({ session });
+
+      storeAdmin = await StoreAdminModel.findOneAndUpdate(
+        { id: storeAdmin.id },
+        {
+          $set: { storeId: store.id },
+        },
+        { session },
+      );
+
+      role = await StoreAdminRoleModel.findOneAndUpdate(
+        { id: role.id },
+        {
+          $set: { storeId: store.id },
+        },
+        { session },
+      );
+
+      console.log(storeAdmin, role, store);
 
       await session.commitTransaction();
       return store;

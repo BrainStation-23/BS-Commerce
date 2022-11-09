@@ -30,20 +30,20 @@ export const enum PERMISSIONS {
 	DELETE_ROLE = "delete-role",
 	ASSIGN_ROLE = "assign-role",
 
-	// user admin -> manage role
-	CREATE_USER_ADMIN_ROLE = "create-user-admin-role",
-	VIEW_USER_ADMIN_ALL_ROLE = "view-user-admin-all-role",
-	VIEW_USER_ADMIN_SINGLE_ROLE = "view-user-admin-single-role",
-	EDIT_USER_ADMIN_ROLE = "edit-user-admin-role",
-	DELETE_USER_ADMIN_ROLE = "delete-user-admin-role",
-	ASSIGN_USER_ADMIN_ROLE = "assign-user-admin-role",
+	// store admin -> manage role
+	CREATE_STORE_ADMIN_ROLE = "create-store-admin-role",
+	VIEW_STORE_ADMIN_ALL_ROLE = "view-store-admin-all-role",
+	VIEW_STORE_ADMIN_SINGLE_ROLE = "view-store-admin-single-role",
+	EDIT_STORE_ADMIN_ROLE = "edit-store-admin-role",
+	DELETE_STORE_ADMIN_ROLE = "delete-store-admin-role",
+	ASSIGN_STORE_ADMIN_ROLE = "assign-store-admin-role",
 
 	// super admin -> manage branch admin
-	CREATE_USER_ADMIN = "create-user-admin",
-	EDIT_USER_ADMIN = "edit-user-admin",
-	DELETE_USER_ADMIN = "delete-user-admin",
-	VIEW_ALL_USER_ADMIN = "view-all-user-admin",
-	VIEW_SINGLE_USER_ADMIN = "view-single-user-admin",
+	CREATE_STORE_ADMIN = "create-store-admin",
+	EDIT_STORE_ADMIN = "edit-store-admin",
+	DELETE_STORE_ADMIN = "delete-store-admin",
+	VIEW_ALL_STORE_ADMIN = "view-all-store-admin",
+	VIEW_SINGLE_STORE_ADMIN = "view-single-store-admin",
 
 	// mfa actions
 	ADD_MFA = "add-mfa",
@@ -63,7 +63,7 @@ export const enum PERMISSIONS {
 	VIEW_BRANCH_ORDERS = "view-branch-orders",
 }
 
-export enum RoleTypeEnum {
+export const enum RoleTypeEnum {
 	SUPER_ADMIN = "super-admin-type",
-	USER_ADMIN = "user-admin-type",
+	STORE_ADMIN = "store-admin-type",
 }

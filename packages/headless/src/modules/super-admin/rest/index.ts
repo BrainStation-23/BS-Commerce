@@ -12,6 +12,7 @@ import { SuperAdminSignupReq, SuperAdminSignupRes } from './dto/signup.dto';
 import { MfaOtpDto, MfaVerifyOtpDto } from './dto/otp.dto';
 import { User as UserInfo } from 'src/decorators/auth.decorator';
 import { SuperAdminInfo } from 'src/entity/super-admin';
+import { AdminInfo } from 'src/decorators/adminInfo.decorator';
 
 @ApiTags('Super admin controller')
 @Controller('super-admin')
@@ -27,10 +28,12 @@ export class SuperAdminController {
   })
   @Post('create')
   async superAdminCreate(
+    @AdminInfo() adminInfo: SuperAdminInfo,
     @Body() body: SuperAdminSignupReq,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { code, ...response } = await this.superAdminService.superAdminCreate(
+      adminInfo,
       body,
     );
     res.status(code);

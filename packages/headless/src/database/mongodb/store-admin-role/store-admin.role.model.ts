@@ -1,8 +1,9 @@
 import { Role } from 'src/entity/role';
 import { Schema, model } from 'mongoose';
 import { randomUUID } from 'crypto';
+import { RoleTypeEnum } from 'models';
 
-const UserAdminRoleSchema = new Schema<Role>(
+const StoreAdminRoleSchema = new Schema<Role>(
   {
     id: {
       type: String,
@@ -18,7 +19,7 @@ const UserAdminRoleSchema = new Schema<Role>(
     roleType:{
       type: String,
       index: true,
-      default: 'user-admin-type'
+      default: RoleTypeEnum.STORE_ADMIN
     },
     storeId:{
       type: String,
@@ -38,5 +39,5 @@ const UserAdminRoleSchema = new Schema<Role>(
   },
 );
 
-const UserAdminRoleModel = model<Role>('user-admin-role', UserAdminRoleSchema);
-export { UserAdminRoleModel };
+const StoreAdminRoleModel = model<Role>('store-admin-role', StoreAdminRoleSchema);
+export { StoreAdminRoleModel };

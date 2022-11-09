@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { StoreAdmin } from 'src/entity/store-admin';
 import { Store } from 'src/entity/store';
 import { IStoreDatabase } from './store.database.interface';
+import { CreateRoleDto } from '../rest/dto/store-admin-role.dto';
 
 @Injectable()
 export class StoreRepository {
@@ -25,8 +26,9 @@ export class StoreRepository {
 
   async createStore(data: {
     store: Store;
+    role: CreateRoleDto,
     admin: StoreAdmin;
-  }): Promise<Store | null> {
+  }): Promise<Store | null> { 
     return await this.db.createStore(data);
   }
 }

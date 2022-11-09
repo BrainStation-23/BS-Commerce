@@ -16,6 +16,17 @@ export interface CreateStoreAddress {
   postCode: string;
 }
 
+interface IStoreAdminSignupReq {
+	id?: string;
+	firstName: string;
+	lastName: string;
+	roleId?: string;
+	branchId?: string[];
+	email: string;
+	countryCode?: string;
+	phone?: string;
+	password?: string;
+}
 export interface CreateStoreRequestBody {
   info: {
     shopName: string;
@@ -27,12 +38,7 @@ export interface CreateStoreRequestBody {
     cover?: string;
   };
   address: CreateStoreAddress;
-  admin: {
-    name: string;
-    email: string;
-    phone?: string;
-    password: string;
-  };
+  admin: IStoreAdminSignupReq;
   isActive: boolean;
 }
 

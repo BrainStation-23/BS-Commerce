@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { StoreAdmin } from 'src/entity/store-admin';
 import { Store } from 'src/entity/store';
+import { CreateRoleDto } from '../rest/dto/store-admin-role.dto';
 
 @Injectable()
 export abstract class IStoreDatabase {
@@ -15,6 +16,7 @@ export abstract class IStoreDatabase {
   ) => Promise<StoreAdmin | null>;
   abstract createStore: (data: {
     store: Store;
+    role: CreateRoleDto,
     admin: StoreAdmin;
   }) => Promise<Store | null>;
 }

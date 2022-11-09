@@ -20,6 +20,8 @@ import {
   CreateStoreAddress,
 } from 'models';
 import { Type } from 'class-transformer';
+import { StoreAdminCreateReq } from './store-admin.dto';
+import { CreateRoleDto } from './store-admin-role.dto';
 
 export class CreateStoreAddressDto implements CreateStoreAddress {
   @ApiProperty()
@@ -89,11 +91,17 @@ export class CreateStoreRequestBodyDto implements CreateStoreRequestBody {
   @CustomValidator(CreateStoreAddressDto)
   address: CreateStoreAddressDto;
 
-  @ApiProperty({ type: CreateStoreAdminDto })
+  @ApiProperty({ type: StoreAdminCreateReq })
   @IsObject()
-  @Type(() => CreateStoreAdminDto)
-  @CustomValidator(CreateStoreAdminDto)
-  admin: CreateStoreAdminDto;
+  @Type(() => StoreAdminCreateReq)
+  @CustomValidator(StoreAdminCreateReq)
+  admin: StoreAdminCreateReq;
+
+  @ApiProperty({ type: CreateRoleDto })
+  @IsObject()
+  @Type(() => CreateRoleDto)
+  @CustomValidator(CreateRoleDto)
+  role: CreateRoleDto
 
   @ApiProperty({ default: true })
   @IsBoolean()

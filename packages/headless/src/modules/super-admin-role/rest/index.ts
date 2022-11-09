@@ -23,8 +23,8 @@ import { CreateRoleDto, UpdateRoleDto } from './dto/role.dto';
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
-  @PermissionRequired(PERMISSIONS.CREATE_ROLE)
-  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
+  // @PermissionRequired(PERMISSIONS.CREATE_ROLE)
+  // @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
   @Post('create')
   async create(
     @Body() body: CreateRoleDto,

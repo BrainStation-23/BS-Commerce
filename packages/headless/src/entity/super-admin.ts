@@ -4,18 +4,18 @@ export class SuperAdminRoleInfo {
   roleType: string;
 }
 export class SuperAdmin {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
-  role: SuperAdminRoleInfo;
-  storeId: string;
-  branchId: string[];
+  role?: SuperAdminRoleInfo;
+  storeId?: string;
+  branchId?: string[];
   email: string;
-  countryCode: string;
-  phone: string;
-  password: string;
-  isMfaEnabled: boolean;
-  mfaType: string;
+  countryCode?: string;
+  phone?: string;
+  password?: string;
+  isMfaEnabled?: boolean;
+  mfaType?: string;
 }
 
 export class SuperAdminInfo {

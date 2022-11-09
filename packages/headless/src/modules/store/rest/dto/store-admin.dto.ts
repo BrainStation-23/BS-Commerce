@@ -1,20 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
-  IsEnum,
-  IsOptional,
   IsString,
   MaxLength,
   MinLength,
+  IsOptional,
 } from 'class-validator';
-import { IRoleInfo, IUserAdminSignupReq, IUserAdminSignupRes } from 'models';
+import { IRoleInfo } from 'models';
 
 export enum MfaType {
   EMAIL = 'EMAIL',
   PHONE = 'PHONE',
 }
 
-export class UserAdminSignupReq implements IUserAdminSignupReq {
+export class StoreAdminCreateReq {
   @ApiProperty({ example: 'Adam', required: true })
   @IsString()
   @MaxLength(30)
@@ -29,10 +28,12 @@ export class UserAdminSignupReq implements IUserAdminSignupReq {
 
   @ApiProperty({ example: 'role-id', required: true })
   @IsString()
-  roleId: string;
+  @IsOptional()
+  roleId?: string;
 
-  @ApiProperty({ example: ['branch-id'], required: true })
-  branchId: string[];
+  @ApiProperty({ example: '' })
+  @IsOptional()
+  branchId?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com', required: true })
   @IsEmail()
@@ -54,37 +55,6 @@ export class UserAdminSignupReq implements IUserAdminSignupReq {
   phone?: string;
 }
 
-export class UserAdminProfileUpdateDto {
-  @ApiProperty({ example: '880' })
-  @IsString()
-  @IsOptional()
-  countryCode?: string;
-
-  @ApiProperty({ example: '1512001122' })
-  @IsString()
-  @IsOptional()
-  phone?: string;
-
-  @ApiProperty({ example: 'store-id' })
-  @IsString()
-  @IsOptional()
-  storeId?: string;
-
-  @ApiProperty({ example: ['branch-id'] })
-  @IsString()
-  @IsOptional()
-  branchId?: string[];
-
-  @ApiProperty({ example: false })
-  @IsOptional()
-  isMfaEnabled?: boolean;
-
-  @ApiProperty({ enum: MfaType, example: MfaType.EMAIL })
-  @IsOptional()
-  @IsEnum(MfaType)
-  mfaType?: MfaType;
-}
-
 export class RoleInfo implements IRoleInfo {
   @ApiProperty()
   name: string;
@@ -96,20 +66,20 @@ export class RoleInfo implements IRoleInfo {
   roleType: string;
 }
 
-
-export class CreateUserAdminDto {
+export class CreateStoreAdminDto {
   firstName: string;
   lastName: string;
-  role: RoleInfo;
-  storeId: string;
-  branchId: string[];
+  role?: RoleInfo;
+  storeId?: string;
+  branchId?: string[];
   email: string;
   countryCode?: string;
   phone?: string;
   isMfaEnabled?: boolean;
   mfaType?: MfaType;
 }
-export class UserAdminSignupRes implements IUserAdminSignupRes {
+
+export class StoreAdminSignupRes {
   @ApiProperty({ example: 'Adam' })
   firstName: string;
 

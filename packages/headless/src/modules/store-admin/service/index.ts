@@ -1,15 +1,15 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PartialType } from '@nestjs/swagger';
-import { RoleInfo, UserAdmin, UserAdminInfo } from 'src/entity/user-admin';
+import { RoleInfo, StoreAdmin, StoreAdminInfo } from 'src/entity/store-admin';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
-import { UserAdminRepository } from '../repositories';
-import { UserAdminLoginDto, UserAdminLoginRes } from '../rest/dto/login.dto';
+import { StoreAdminRepository } from '../repositories';
+import { StoreAdminLoginDto, StoreAdminLoginRes } from '../rest/dto/login.dto';
 import {
-  CreateUserAdminDto,
+  CreateStoreAdminDto,
   MfaType,
-  UserAdminProfileUpdateDto,
-  UserAdminSignupReq,
+  StoreAdminProfileUpdateDto,
+  StoreAdminSignupReq,
 } from '../rest/dto/signup.dto';
 import * as bcrypt from 'bcrypt';
 import { authConfig } from 'config/auth';
@@ -18,36 +18,36 @@ import { AdminJwtPayload } from 'src/entity/auth';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto, MfaVerifyOtpDto } from '../rest/dto/otp.dto';
 import { OtpResponseDto } from '../rest/dto/mfa.dto';
-import { UserAdminHelperService } from './helper.service';
+import { StoreAdminHelperService } from './helper.service';
 import { RoleTypeEnum } from 'models';
 
 @Injectable()
-export class UserAdminService {
+export class StoreAdminService {
   constructor(
-    private readonly userAdminRepository: UserAdminRepository,
-    private readonly userAdminHelperService: UserAdminHelperService,
+    private readonly storeAdminRepository: StoreAdminRepository,
+    private readonly storeAdminHelperService: StoreAdminHelperService,
     private readonly jwtService: JwtService,
   ) {}
 
   async getProfileData(
     id: string,
-  ): Promise<IServiceResponse<Partial<UserAdmin>>> {
-    const profileData = await this.userAdminRepository.findOne({ id });
+  ): Promise<IServiceResponse<Partial<StoreAdmin>>> {
+    const profileData = await this.storeAdminRepository.findOne({ id });
     if (profileData) {
       delete profileData.password;
       delete profileData.isMfaEnabled;
       delete profileData.mfaType;
-      return successResponse(UserAdmin, profileData);
+      return successResponse(StoreAdmin, profileData);
     }
-    return errorResponse('User not found', null, HttpStatus.NOT_FOUND);
+    return errorResponse('Store not found', null, HttpStatus.NOT_FOUND);
   }
 
-  async userAdminCreate(
-    userAdminInfo: UserAdminInfo,
-    body: UserAdminSignupReq,
-  ): Promise<IServiceResponse<Partial<UserAdmin>>> {
-    let isExist = await this.userAdminRepository.findOne({
-      storeId: userAdminInfo.storeId,
+  async storeAdminCreate(
+    storeAdminInfo: StoreAdminInfo,
+    body: StoreAdminSignupReq,
+  ): Promise<IServiceResponse<Partial<StoreAdmin>>> {
+    let isExist = await this.storeAdminRepository.findOne({
+      storeId: storeAdminInfo.storeId,
       email: body.email,
     });
     if (isExist?.email === body.email) {
@@ -58,7 +58,7 @@ export class UserAdminService {
       );
     }
     if (body?.phone) {
-      isExist = await this.userAdminRepository.findOne({ phone: body.phone });
+      isExist = await this.storeAdminRepository.findOne({ phone: body.phone });
       if (isExist?.phone === body.phone) {
         return errorResponse(
           'This phone number is already exist.',
@@ -69,7 +69,7 @@ export class UserAdminService {
     }
 
     body.password = await bcrypt.hash(body.password, authConfig.salt);
-    const roleData = await this.userAdminRepository.findOneyRole({id: body.roleId})
+    const roleData = await this.storeAdminRepository.findOneyRole({id: body.roleId})
     if(!roleData){
       return errorResponse(
         'This role is invalid!',
@@ -91,12 +91,12 @@ export class UserAdminService {
       roleType: roleData.roleType 
     }
     delete body.roleId;
-    const payload: UserAdmin = {
-      ...body, role, storeId: userAdminInfo.storeId
+    const payload: StoreAdmin = {
+      ...body, role, storeId: storeAdminInfo.storeId
     }
-    const newUserAdmin = await this.userAdminRepository.create(payload);
-    if (newUserAdmin) {
-      return successResponse(PartialType(UserAdmin), newUserAdmin);
+    const newStoreAdmin = await this.storeAdminRepository.create(payload);
+    if (newStoreAdmin) {
+      return successResponse(PartialType(StoreAdmin), newStoreAdmin);
     }
     return errorResponse(
       'Error in create user admin',
@@ -106,7 +106,7 @@ export class UserAdminService {
   }
 
   private async handleMfaLogin(
-    userData: Partial<UserAdmin>,
+    userData: Partial<StoreAdmin>,
   ): Promise<IServiceResponse<OtpResponseDto>> {
     const isEmail = userData.mfaType === 'EMAIL' ? true : false;
     const { id, email, phone, password } = userData;
@@ -116,10 +116,10 @@ export class UserAdminService {
     return sendOtp;
   }
 
-  async userAdminLogin(
-    body: UserAdminLoginDto,
-  ): Promise<IServiceResponse<UserAdminLoginRes | OtpResponseDto>> {
-    const userData = await this.userAdminRepository.findOne({
+  async storeAdminLogin(
+    body: StoreAdminLoginDto,
+  ): Promise<IServiceResponse<StoreAdminLoginRes | OtpResponseDto>> {
+    const userData = await this.storeAdminRepository.findOne({
       email: body.email,
     });
     if (!userData) {
@@ -148,14 +148,14 @@ export class UserAdminService {
       return res;
     }
     const payload: AdminJwtPayload =
-      await this.userAdminHelperService.createUserAdminJwtPayload(userData);
+      await this.storeAdminHelperService.createStoreAdminJwtPayload(userData);
     const token = this.jwtService.sign(payload);
-    return successResponse(UserAdminLoginRes, { token });
+    return successResponse(StoreAdminLoginRes, { token });
   }
 
   async verifyMfaLoginOtp(
     body: MfaVerifyOtpDto,
-  ): Promise<IServiceResponse<UserAdminLoginRes>> {
+  ): Promise<IServiceResponse<StoreAdminLoginRes>> {
     if (!body.email && !body.phone) {
       return errorResponse(
         'Require email or phone',
@@ -176,19 +176,19 @@ export class UserAdminService {
       query.phone = body.phone;
     }
 
-    const verifiedData = await this.userAdminRepository.verifyOtp(query);
+    const verifiedData = await this.storeAdminRepository.verifyOtp(query);
     if (verifiedData) {
-      await this.userAdminRepository.deleteOtp({
+      await this.storeAdminRepository.deleteOtp({
         ...query,
         isVerified: true,
       });
-      const userData = await this.userAdminRepository.findOne({
+      const userData = await this.storeAdminRepository.findOne({
         id: verifiedData.userId,
       });
       const payload: AdminJwtPayload =
-        await this.userAdminHelperService.createUserAdminJwtPayload(userData);
+        await this.storeAdminHelperService.createStoreAdminJwtPayload(userData);
       const token = this.jwtService.sign(payload);
-      return successResponse(UserAdminLoginRes, { token });
+      return successResponse(StoreAdminLoginRes, { token });
     } else {
       return errorResponse('OTP is not verified', null, HttpStatus.CONFLICT);
     }
@@ -208,7 +208,7 @@ export class UserAdminService {
       );
     }
 
-    const isPasswordMatched = await this.userAdminHelperService.checkPassword(
+    const isPasswordMatched = await this.storeAdminHelperService.checkPassword(
       body,
       userId,
     );
@@ -223,7 +223,7 @@ export class UserAdminService {
     if (body.email) {
       isEmail = true;
     }
-    const syncOtp = await this.userAdminHelperService.syncOtp(
+    const syncOtp = await this.storeAdminHelperService.syncOtp(
       userId,
       body,
       isEmail,
@@ -269,9 +269,9 @@ export class UserAdminService {
       query.phone = body.phone;
     }
 
-    const verifiedData = await this.userAdminRepository.verifyOtp(query);
+    const verifiedData = await this.storeAdminRepository.verifyOtp(query);
     if (verifiedData) {
-      let newProfileData: UserAdminProfileUpdateDto = {
+      let newProfileData: StoreAdminProfileUpdateDto = {
         isMfaEnabled: true,
         mfaType: MfaType.EMAIL,
       };
@@ -279,7 +279,7 @@ export class UserAdminService {
         (newProfileData.phone = body.phone),
           (newProfileData.mfaType = MfaType.PHONE);
       }
-      const updateProfile = await this.userAdminRepository.updateProfile(
+      const updateProfile = await this.storeAdminRepository.updateProfile(
         { id: userId },
         newProfileData,
       );
@@ -287,13 +287,13 @@ export class UserAdminService {
         const result = {
           message: `OTP has been verified`,
         };
-        await this.userAdminRepository.deleteOtp({
+        await this.storeAdminRepository.deleteOtp({
           ...query,
           isVerified: true,
         });
         return successResponse(null, result);
       } else {
-        await this.userAdminRepository.updateOtp(
+        await this.storeAdminRepository.updateOtp(
           { ...query, isVerified: true },
           { isVerified: false },
         );

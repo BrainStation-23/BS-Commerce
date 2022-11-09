@@ -22,4 +22,4 @@ export * from "./store/index";
 export * from "./super-admin/index";
 export * from "./store-branch/index";
 export * from "./permissions/index";
-export * from "./user-admin/index";
+export * from "./store-admin/index";

@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
 import { Role } from 'src/entity/role';
-import { UserAdmin } from 'src/entity/user-admin';
-import { UserAdminProfileUpdateDto, UserAdminSignupReq } from '../rest/dto/signup.dto';
-import { IUserAdminDatabase } from './user-admin.db.interface';
+import { StoreAdmin } from 'src/entity/store-admin';
+import { StoreAdminProfileUpdateDto, StoreAdminSignupReq } from '../rest/dto/signup.dto';
+import { IStoreAdminDatabase } from './store-admin.db.interface';
 
 @Injectable()
-export class UserAdminRepository {
-  constructor(private db: IUserAdminDatabase) {}
+export class StoreAdminRepository {
+  constructor(private db: IStoreAdminDatabase) {}
 
-  async create(body: UserAdmin): Promise<Partial<UserAdmin>> {
+  async create(body: StoreAdmin): Promise<Partial<StoreAdmin>> {
     return await this.db.create(body);
   }
 
-  async updateProfile(query: Record<string, any>, body: UserAdminProfileUpdateDto): Promise<Partial<UserAdmin>> {
+  async updateProfile(query: Record<string, any>, body: StoreAdminProfileUpdateDto): Promise<Partial<StoreAdmin>> {
     return await this.db.updateProfile(query, body);
   }
 
-  async findOne(query: Record<string, any>): Promise<Partial<UserAdmin>> {
+  async findOne(query: Record<string, any>): Promise<Partial<StoreAdmin>> {
     return await this.db.findOne(query);
   }
   

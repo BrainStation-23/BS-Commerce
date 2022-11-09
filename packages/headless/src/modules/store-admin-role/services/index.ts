@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PERMISSIONS } from 'models';
 import { Role } from 'src/entity/role';
-import { UserAdminInfo } from 'src/entity/user-admin';
+import { StoreAdminInfo } from 'src/entity/store-admin';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { RoleRepository } from '../repositories';
@@ -12,7 +12,7 @@ export class RoleService {
   constructor(private readonly roleRepository: RoleRepository) {}
 
   async create(
-    adminInfo: UserAdminInfo,
+    adminInfo: StoreAdminInfo,
     body: CreateRoleDto,
   ): Promise<IServiceResponse<Role>> {
     const isExist = await this.roleRepository.findOne({
@@ -34,7 +34,7 @@ export class RoleService {
   }
 
   async updateRole(
-    adminInfo: UserAdminInfo,
+    adminInfo: StoreAdminInfo,
     body: UpdateRoleDto,
   ): Promise<IServiceResponse<Role>> {
     const isExist = await this.roleRepository.findOne({
@@ -67,7 +67,7 @@ export class RoleService {
   }
 
   async findAll(
-    adminInfo: UserAdminInfo,
+    adminInfo: StoreAdminInfo,
     query = {},
   ): Promise<IServiceResponse<Role[]>> {
     const roles = await (
@@ -82,7 +82,7 @@ export class RoleService {
     return errorResponse('No result found!', null, HttpStatus.NOT_FOUND);
   }
 
-  async findOne(adminInfo: UserAdminInfo, id = null): Promise<IServiceResponse<Role>> {
+  async findOne(adminInfo: StoreAdminInfo, id = null): Promise<IServiceResponse<Role>> {
     const role = await this.roleRepository.findOne({
       storeId: adminInfo.storeId,
       id: id ? id : adminInfo.role.roleId,

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
+import { Role } from 'src/entity/role';
 import { SuperAdmin } from 'src/entity/super-admin';
 import { SuperAdminProfileUpdateDto, SuperAdminSignupReq } from '../rest/dto/signup.dto';
 import { ISuperAdminDatabase } from './super-admin.db.interface';
@@ -8,7 +9,7 @@ import { ISuperAdminDatabase } from './super-admin.db.interface';
 export class SuperAdminRepository {
   constructor(private db: ISuperAdminDatabase) {}
 
-  async create(body: SuperAdminSignupReq): Promise<Partial<SuperAdmin>> {
+  async create(body: SuperAdmin): Promise<Partial<SuperAdmin>> {
     return await this.db.create(body);
   }
 
@@ -18,6 +19,10 @@ export class SuperAdminRepository {
 
   async findOne(query: Record<string, any>): Promise<Partial<SuperAdmin>> {
     return await this.db.findOne(query);
+  }
+
+  async findOneRole(query: Record<string, any>): Promise<Partial<Role>> {
+    return await this.db.findOneRole(query);
   }
 
   async sendOtp(data: Otp): Promise<Otp | null> {

@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { Otp } from 'src/entity/otp';
 import { Role } from 'src/entity/role';
-import { UserAdmin } from 'src/entity/user-admin';
-import { IUserAdminDatabase } from 'src/modules/user-admin/repositories/user-admin.db.interface';
+import { StoreAdmin } from 'src/entity/store-admin';
+import { IStoreAdminDatabase } from 'src/modules/store-admin/repositories/store-admin.db.interface';
 import {
-  UserAdminProfileUpdateDto,
-  UserAdminSignupReq,
-} from 'src/modules/user-admin/rest/dto/signup.dto';
+  StoreAdminProfileUpdateDto,
+  StoreAdminSignupReq,
+} from 'src/modules/store-admin/rest/dto/signup.dto';
 import { OtpModel } from '../otp/otp.model';
-import { UserAdminRoleModel } from '../user-admin-role/user-admin.role.model';
-import { UserAdminModel } from './user-admin.model';
+import { StoreAdminRoleModel } from '../store-admin-role/store-admin.role.model';
+import { StoreAdminModel } from './store-admin.model';
 
 @Injectable()
-export class UserAdminDatabase implements IUserAdminDatabase {
+export class StoreAdminDatabase implements IStoreAdminDatabase {
   async findOne(
     query: Record<string, string>,
-  ): Promise<Partial<UserAdmin> | null> {
+  ): Promise<Partial<StoreAdmin> | null> {
     try {
-      return await UserAdminModel.findOne({ ...query }, { _id: 0 }).lean();
+      return await StoreAdminModel.findOne({ ...query }, { _id: 0 }).lean();
     } catch (error: any) {
       console.log(error.message);
       return null;
@@ -26,16 +26,16 @@ export class UserAdminDatabase implements IUserAdminDatabase {
 
   async findOneRole(query: Record<string, any>): Promise<Partial<Role>> {
     try {
-      return await UserAdminRoleModel.findOne({ ...query }, { _id: 0 }).lean();
+      return await StoreAdminRoleModel.findOne({ ...query }, { _id: 0 }).lean();
     } catch (error: any) {
       console.log(error.message);
       return null;
     }
   }
 
-  async create(body: UserAdmin): Promise<Partial<UserAdmin> | null> {
+  async create(body: StoreAdmin): Promise<Partial<StoreAdmin> | null> {
     try {
-      const data = await UserAdminModel.create(body);
+      const data = await StoreAdminModel.create(body);
       if (data?.password) {
         delete data.password;
       }
@@ -48,10 +48,10 @@ export class UserAdminDatabase implements IUserAdminDatabase {
 
   async updateProfile(
     query: Record<string, any>,
-    data: UserAdminProfileUpdateDto,
-  ): Promise<Partial<UserAdmin> | null> {
+    data: StoreAdminProfileUpdateDto,
+  ): Promise<Partial<StoreAdmin> | null> {
     try {
-      return await UserAdminModel.findOneAndUpdate(query, { $set: data });
+      return await StoreAdminModel.findOneAndUpdate(query, { $set: data });
     } catch (error) {
       console.log(error.message);
       return null;

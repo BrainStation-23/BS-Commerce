@@ -1,6 +1,7 @@
 import { Role } from 'src/entity/role';
 import { Schema, model } from 'mongoose';
 import { randomUUID } from 'crypto';
+import { RoleTypeEnum } from 'models';
 
 const SuperAdminRoleSchema = new Schema<Role>(
   {
@@ -20,7 +21,7 @@ const SuperAdminRoleSchema = new Schema<Role>(
     roleType: {
       type: String,
       index: true,
-      default: 'super-admin-type'
+      default: RoleTypeEnum.SUPER_ADMIN
     },
     permissions: {
       type: [String],

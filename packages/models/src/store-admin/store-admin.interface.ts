@@ -1,9 +1,9 @@
-export interface IUserAdminLoginReq {
+export interface IStoreAdminLoginReq {
 	email: string;
 	password: string;
 }
 
-export interface IUserAdminLoginRes {
+export interface IStoreAdminLoginRes {
 	token: string;
 }
 
@@ -13,19 +13,19 @@ export interface IRoleInfo {
 	roleType: string;
 }
 
-export interface IUserAdminSignupReq {
+export interface IStoreAdminSignupReq {
 	id?: string;
 	firstName: string;
 	lastName: string;
-	roleId: string;
-	branchId: string[];
+	roleId?: string;
+	branchId?: string[];
 	email: string;
 	countryCode?: string;
 	phone?: string;
 	password?: string;
 }
 
-export interface IUserAdminSignupRes {
+export interface IStoreAdminSignupRes {
 	id?: string;
 	firstName: string;
 	lastName: string;

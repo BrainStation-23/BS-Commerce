@@ -12,8 +12,8 @@ import { RoleService } from './services';
     RoleRepository,
     {
       provide: IRoleDatabase,
-      useClass: ResolveDatabaseDependency('ROLE'),
+      useClass: ResolveDatabaseDependency('STORE_ADMIN_ROLE'),
     },
   ],
 })
-export class UserAdminRoleModule {}
+export class StoreAdminRoleModule {}

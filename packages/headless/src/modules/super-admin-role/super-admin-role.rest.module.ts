@@ -12,7 +12,7 @@ import { RoleService } from './services';
     RoleRepository,
     {
       provide: IRoleDatabase,
-      useClass: ResolveDatabaseDependency('ROLE'),
+      useClass: ResolveDatabaseDependency('SUPER_ADMIN_ROLE'),
     },
   ],
 })
