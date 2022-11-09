@@ -117,6 +117,7 @@ export class BaseOrderEntity {
   paymentStatus: PaymentStatusEnum;
   totalCost: number;
   products: ProductOrder[];
+  branchId: string;
 }
 export class OrderEntity extends BaseOrderEntity {
   orderId: string;
@@ -135,6 +136,7 @@ export class GetAllOrderQueryEntity {
   limit?: number;
   startDate?: Date;
   endDate?: Date;
+  branchId?: string;
 }
 
 //Response Entities

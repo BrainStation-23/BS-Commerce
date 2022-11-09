@@ -17,35 +17,32 @@ const ReviewSchema = new Schema<Review>(
       type: String,
       required: true,
     },
-    comments: [
+    text: String,
+    image: [
       {
-        id: {
-          type: String,
-          default: () => randomUUID(),
-          unique: true
-        },
-        commentedBy:{
-            type: String,
-            enum : ['CUSTOMER','STORE_ADMIN','BRANCH_MANAGER']
-        },
-        image: [
-          {
-            url: String,
-            _id: false,
-          },
-        ],
-        text: String,
-        createdAt: {
-          type: Date,
-          default: Date.now,
-        },
-      },
+        url: String,
+        _id: false
+      }
     ],
+    reply:{
+        id: String,
+        repliedBy: String,
+        text: String,
+        image: {
+          type: [String],
+          default: undefined,
+        },
+        createdAt: Date
+    },
     userId: {
       type: String,
       required: false,
     },
-
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5
+    }
   },
   {
     timestamps: true,

@@ -9,6 +9,9 @@ export class OrderDto implements OrderResponseData {
   orderId: string;
 
   @ApiProperty()
+  branchId: string;
+
+  @ApiProperty()
   userId: string;
 
   @ApiProperty({ type: OrderAddressDto })
