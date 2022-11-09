@@ -14,9 +14,10 @@ import {
   CustomerProductMeta,
   CustomerProductPhoto,
   CustomerProductCategory,
-  CustomerProduct,
+  // CustomerProduct,
   CustomerProductManufacturer,
 } from '@bs-commerce/models';
+import { CustomerProduct, ProductRating } from 'models';
 
 export class CustomerProductInfoDto implements CustomerProductInfo {
   @ApiProperty({ required: true })
@@ -138,6 +139,27 @@ export class CustomerProductCategoryDto implements CustomerProductCategory {
   displayOrder?: number;
 }
 
+export class ProductRatingDto implements ProductRating{
+  @ApiProperty()
+  @IsOptional()
+  1?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  2?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  3?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  4?: number;
+
+  @ApiProperty()
+  @IsOptional()
+  5?: number;
+}
 export class CustomerProductDto implements CustomerProduct {
   @ApiProperty()
   @IsNotEmpty()
@@ -177,4 +199,12 @@ export class CustomerProductDto implements CustomerProduct {
   @IsNotEmptyObject()
   @IsArray()
   categories: CustomerProductCategoryDto[];
+
+  @ApiProperty()
+  @IsOptional()
+  rating?: ProductRatingDto;
+
+  @ApiProperty()
+  @IsOptional()
+  avgRating?: number;
 }

@@ -19,8 +19,12 @@ import { OrderModel } from './order.model';
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
-} from '@bs-commerce/models';
+} from 'models';
 import { CartModel } from '../cart/cart.model';
+import { ReviewModel } from '../review/review.model';
+import { Review } from 'src/entity/review';
+import { BranchModel } from '../branch/branch.model';
+import { ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
   async populateItemsInCart(
@@ -263,9 +267,9 @@ export class OrderDatabase implements IOrderDatabase {
   ): Promise<OrderEntity[]> {
     const { shippingStatus, orderStatus, paymentStatus, startDate, endDate } =
       query;
-    const sort ={
-      orderedDate: -1
-    }
+    const sort = {
+      orderedDate: -1,
+    };
     const queryParams = {
       ...(shippingStatus && { shippingStatus }),
       ...(orderStatus && { orderStatus }),
@@ -278,6 +282,155 @@ export class OrderDatabase implements IOrderDatabase {
         ...(endDate && { $lte: new Date(endDate) }),
       };
     }
-    return await OrderModel.find(queryParams).skip(skip).limit(limit).sort(sort).lean();
+    return await OrderModel.find(queryParams)
+      .skip(skip)
+      .limit(limit)
+      .sort(sort)
+      .lean();
   }
+
+  async createReview(review: any): Promise<Review | null> {
+    try {
+      return await ReviewModel.create(review);
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async findReview(
+    query: Record<string, any>,
+    skip: number,
+    limit: number,
+  ): Promise<Review[] | null> {
+    try {
+      return await ReviewModel.find(query)
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .exec();
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean> {
+    try {
+      const product = await ProductModel.findOne({ id: productId })
+        .lean()
+        .exec();
+      if (!product) return false;
+
+      let ratingObj = product.rating || {};
+      if (Object.keys(ratingObj).length === 0) ratingObj[`${rating}`] = 1;
+      else {
+        for (let i in ratingObj) {
+          if (parseInt(i) === rating) ratingObj[i]++;
+          else ratingObj[`${rating}`] = 1;
+        }
+      }
+
+      let noOfRatings = 0,
+        sum = 0;
+      for (const key in ratingObj) {
+        noOfRatings = noOfRatings + ratingObj[key];
+        sum = sum + parseInt(key) * ratingObj[key];
+      }
+
+      const avgRating = Math.round(sum / noOfRatings);
+      const newProduct = { ...product, rating: ratingObj, avgRating };
+
+      const response = await ProductModel.findOneAndUpdate(
+        { id: productId },
+        { $set: { rating: ratingObj, avgRating } },
+        { new: true },
+      )
+        .select('-_id')
+        .lean()
+        .exec();
+
+      return response ? true : false;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
+
+  async findBranch (query: Record<string, any>): Promise<boolean>{
+    try{
+      const branch = await BranchModel.findOne(query);
+
+      return branch ? true : false;
+    }catch(err){
+      console.log(err);
+      return false;
+    }
+  }
+  async createReply(request: ICreateReply): Promise<IReviewReplyResponse | null>{
+    const { reviewId } = request;
+    delete request.reviewId;
+
+    try{
+      const reviewExists = await ReviewModel.findOne({ id: reviewId }).lean().exec();
+      if(reviewExists.reply) return null;
+
+      const review = await ReviewModel.findOneAndUpdate(
+        { id: reviewId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      const response = this.mappedReplyDetails(review);
+
+      return response;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  async findReply(replyId: string) : Promise<IReviewReplyResponse | null>{
+    try{
+      const review = await ReviewModel.findOne({ 'reply.id' : replyId }).lean().exec();
+
+      return review ? {...review.reply, reviewId: review.id } : null;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null> {
+    try{
+      const updatedReview =  await ReviewModel.findOneAndUpdate(
+        { 'reply.id': replyId },
+        { reply: request},
+        { new: true }
+      ).select('-_id').lean().exec();
+
+      if(!updatedReview) return null;
+      const response = this.mappedReplyDetails(updatedReview);
+
+      return response;
+    }catch(err){
+      console.log(err);
+      return null;
+    }
+  }
+
+  //private functions
+  private mappedReplyDetails(review: any){
+    const { reply, id } = review;
+
+    return {
+      reviewId: id,
+      id: reply.id,
+      repliedBy: reply.repliedBy,
+      text: reply.text,
+      image: reply.image,
+      createdAt: reply.createdAt
+    };
+  }
+
 }

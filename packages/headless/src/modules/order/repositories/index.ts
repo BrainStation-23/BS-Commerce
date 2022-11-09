@@ -1,9 +1,10 @@
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
-} from '@bs-commerce/models';
+} from 'models';
 import { Injectable } from '@nestjs/common';
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
+import { CreateReviewResponse, ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
 
 import {
   GetAllOrderQueryEntity,
@@ -17,6 +18,7 @@ import {
   CartResponse,
   Cart,
 } from 'src/entity/order';
+import { Review } from 'src/entity/review';
 import { IOrderDatabase } from './order.db.interface';
 
 @Injectable()
@@ -112,5 +114,36 @@ export class OrderRepository {
     limit?: number,
   ): Promise<OrderEntity[]> {
     return await this.db.getOrderList(query, skip, limit);
+  }
+
+  async createReview(review: any):Promise<Review | null>{
+    return await this.db.createReview(review);
+  }
+
+  async findReview(query: Record<string,any>, skip: number = 0, limit: number = 0): Promise<Review[] | null>{
+    return await this.db.findReview(query, skip, limit);
+  }
+
+  async addProductRating(productId: string, rating: number): Promise<boolean>{
+    return await this.db.addProductRating(productId, rating);
+  }
+
+  async findBranch(query: Record<string, any>): Promise<boolean> {
+    return await this.db.findBranch(query);
+  }
+  
+  async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
+    const id = randomUUID();
+    const request = { ...reply, id};
+
+    return await this.db.createReply(request);
+  }
+
+  async updateReply(replyId: string, request: IUpdateReplyRequest): Promise<IReviewReplyResponse | null>{
+    return await this.db.updateReply(replyId, request);
+  }
+
+  async findReply (replyId: string) : Promise<IReviewReplyResponse | null>{
+    return await this.db.findReply(replyId);
   }
 }

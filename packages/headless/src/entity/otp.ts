@@ -1,4 +1,6 @@
 export class Otp {
+  id?: string;
+  userId?: string;
   phone?: string;
   email?: string;
   otp: number;

@@ -11,7 +11,7 @@ import {
   IOrderProductPhoto,
   OrderByUserIdResponse,
   OrderResponseData,
-} from '@bs-commerce/models';
+} from 'models';
 
 //Queries
 
@@ -95,6 +95,9 @@ export class OrderResponse implements OrderResponseData {
 
   @Field({ nullable: false })
   userId: string;
+
+  @Field({ nullable: false })
+  branchId: string;
 
   @Field(() => OrderAddressModel, { nullable: false })
   billingAddress: OrderAddressModel;
@@ -273,6 +276,9 @@ export class CreateOrderProduct implements CreateProductOrderDetails {
 export class CreateOrderModel implements CreateOrderRequest {
   @Field(() => OrderAddressInput, { nullable: false })
   billingAddress: OrderAddressInput;
+
+  @Field({ nullable: false })
+  branchId: string;
 
   @Field(() => OrderAddressInput, { nullable: false })
   shippingAddress: OrderAddressInput;

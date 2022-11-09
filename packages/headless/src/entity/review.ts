@@ -1,21 +1,29 @@
+import { Exclude } from "class-transformer";
+
 export class Review{
     id: string;
     productId: string;
     orderId: string;
+    text: string;
+    image: ReviewPhoto[];
     userId?: string;
-    comments: Comment[];
+    reply: Comment;
+    rating: number;
+}
+
+export class ReviewPhoto{
+    url: string;
 }
 
 export class Comment{
     id: string;
-    commentedBy: Commenters;
-    image?: string[];
+    repliedBy: string;
     text: string;
+    image: string[];
     createdAt: Date;
 }
 
-export enum Commenters{
-    CUSTOMER = 'CUSTOMER',
-    STORE_ADMIN = 'STORE_ADMIN',
-    BRANCH_MANAGER = 'BRANCH_MANAGER'
+export class ProductReviewListEntity{
+    productId: string;
+    reviews: Review[];
 }

@@ -7,4 +7,8 @@ export * from './order.response.interface';
 export * from './orderSortingQuery.interface';
 export * from './reOrder.query.interface';
 export * from './reOrder.interface';
-
+export * from './review.interface';
+export * from './create.review.interface';
+export * from './product.review.interface';
+export * from './create.reply.interface';
+export * from './update.reply.interface';
