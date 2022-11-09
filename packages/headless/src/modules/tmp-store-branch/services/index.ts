@@ -1,5 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { string } from 'joi';
 import {
   CreateStoreBranchErrorMessages,
   CreateStoreBranchRequest,
@@ -10,6 +11,8 @@ import {
   GetStoreBranchErrorMessages,
   GetStoreBranchResponse,
 } from 'models';
+import { UserTypeEnum } from 'src/entity/branch-history';
+import { StoreBranchStatus } from 'src/entity/tmp-store-branch';
 import { Helper } from 'src/helper/helper.interface';
 import { StoreBranchRepository } from '../repositories';
 
@@ -25,6 +28,13 @@ export class StoreBranchService {
     const Store: any = await this.storeBranchRepo.getStore({
       id: storeBranch.store,
     });
+    if (!Store) {
+      return this.helper.serviceResponse.errorResponse(
+        CreateStoreBranchErrorMessages.CAN_NOT_CREATE_STORE_BRANCH_REQUEST,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const branchUrl = storeBranch.name
       .trim()
       .toLocaleLowerCase()
@@ -33,14 +43,14 @@ export class StoreBranchService {
       .replace(/\-\-+/g, '-')
       .replace(/^-+/, '');
     const url = Store.url + '/' + branchUrl;
-    const doesStoreExist =
+    const doesBranchExist =
       (await this.storeBranchRepo.getTmpStoreBranch({
         url: url,
       })) ||
       (await this.storeBranchRepo.getStoreBranch({
         url: url,
       }));
-    if (doesStoreExist) {
+    if (doesBranchExist) {
       return this.helper.serviceResponse.errorResponse(
         CreateStoreBranchErrorMessages.STORE_BRANCH_ALREADY_EXIST,
         null,
@@ -48,19 +58,42 @@ export class StoreBranchService {
       );
     }
     const { ...rest } = storeBranch;
-    const store = {
+    const branchBody = {
       ...rest,
       url,
       status: 'PENDING',
       id: randomUUID(),
     };
-    const branch = await this.storeBranchRepo.createTmpStoreBranch(store);
+    const branch = await this.storeBranchRepo.createTmpStoreBranch(branchBody);
     if (!branch) {
       return this.helper.serviceResponse.errorResponse(
         CreateStoreBranchErrorMessages.CAN_NOT_CREATE_STORE_BRANCH_REQUEST,
         null,
         HttpStatus.BAD_REQUEST,
       );
+    }
+
+    const history = {
+      id: randomUUID(),
+      branchName: storeBranch.name,
+      actions: [
+        {
+          user: {
+            id: '123',
+            email: 'admin@gmail.com',
+            type: UserTypeEnum.MERCHANT,
+          },
+          status: StoreBranchStatus.PENDING,
+          comment: storeBranch.description,
+          updatedTime: new Date(),
+        },
+      ],
+    };
+    const doesExistHistory = await this.storeBranchRepo.getHistory({
+      branchName: storeBranch.name,
+    });
+    if (!doesExistHistory) {
+      await this.storeBranchRepo.createBranchHistory(history);
     }
     return this.helper.serviceResponse.successResponse(
       branch,

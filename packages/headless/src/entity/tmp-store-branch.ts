@@ -2,7 +2,7 @@ import { BranchAddress } from './branch';
 
 export const enum StoreBranchStatus {
   PENDING = 'PENDING',
-  ACCEPTED = 'ACCEPTED',
+  APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
 }
 

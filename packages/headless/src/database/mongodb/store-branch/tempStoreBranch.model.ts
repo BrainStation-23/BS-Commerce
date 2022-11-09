@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { StoreBranch } from 'src/entity/store-branch';
+import { StoreBranch } from 'src/entity/tmp-store-branch';
 import { BranchAddressSchema } from '../branch/branch.model';
 
 const TmpStoreBranchSchema = new Schema<StoreBranch>(
@@ -21,7 +21,7 @@ const TmpStoreBranchSchema = new Schema<StoreBranch>(
     },
     status: {
       type: String,
-      enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
+      enum: ['PENDING', 'APPROVED', 'REJECTED'],
     },
     address: BranchAddressSchema,
     isActive: {
@@ -40,7 +40,10 @@ const TmpStoreBranchSchema = new Schema<StoreBranch>(
     description: {
       type: String,
     },
-    name: String,
+    name: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true,

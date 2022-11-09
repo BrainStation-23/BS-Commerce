@@ -1,8 +1,21 @@
-import { SuccessResponse, ErrorResponse, ErrorMessage, DescriptiveError } from "src/index";
-import { Branch } from "./branch";
+import { SuccessResponse, ErrorResponse, DescriptiveError } from "src/index";
+import { Branch, BranchAddress, IBranchPhoto } from "./branch";
 
 
-export type CreateBranchRequest = Omit<Branch, 'id'>;
+export interface CreateBranchRequest {
+  store: string;
+  name: string;
+  isActive: boolean;
+  inActiveReason?: InActiveReason;
+  image?: IBranchPhoto;
+  address: BranchAddress;
+  description: string;
+}
+
+export const enum InActiveReason{
+  BLOCKED_BY_ADMIN = 'BLOCKED_BY_ADMIN',
+  UNDER_MAINTENANCE = 'UNDER_MAINTENANCE'
+}
 
 export interface CreateBranchSuccessResponse extends SuccessResponse {
   code: number;
