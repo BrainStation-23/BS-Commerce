@@ -30,5 +30,5 @@ const nextConfig = {
   },
 };
 
-const withTM = require("next-transpile-modules")(["marketplace"]);
+const withTM = require("next-transpile-modules")([]);
 module.exports = withTM(nextConfig);

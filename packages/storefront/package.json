@@ -18,17 +18,16 @@
     "@popperjs/core": "^2.11.4",
     "@reduxjs/toolkit": "^1.8.2",
     "@types/react-redux": "^7.1.24",
-    "atomic-components": "^0.1.0",
     "axios": "^0.27.2",
     "font-awesome": "^4.7.0",
     "formik": "^2.2.9",
     "graphql": "^16.5.0",
     "lodash": "^4.17.21",
-    "marketplace": "^1.0.0",
     "moment": "^2.29.4",
     "next": "12.1.0",
     "next-themes": "^0.2.1",
     "next-translate": "^1.6.0",
+    "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
     "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
@@ -48,6 +47,7 @@
     "@types/node": "17.0.22",
     "@types/react": "17.0.41",
     "@types/react-test-renderer": "^18.0.0",
+    "autoprefixer": "^10.4.13",
     "babel-jest": "^28.1.0",
     "cypress": "^10.3.0",
     "eslint": "8.11.0",
@@ -55,6 +55,7 @@
     "form-data": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.0",
+    "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
     "react-copy-to-clipboard": "^5.1.0",
@@ -62,5 +63,9 @@
     "sass": "^1.49.9",
     "tailwindcss": "^3.0.24",
     "typescript": "4.6.2"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }

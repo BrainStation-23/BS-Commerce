@@ -34,23 +34,6 @@ const nextConfig = {
       'cdn.dribbble.com',
     ],
   },
-  webpack: (config, options) => {
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      include: [path.resolve(__dirname, '../atomic-components')],
-      use: [
-        {
-          loader: 'babel-loader',
-          options: {
-            presets: ['next/babel'],
-            // plugins: ['react-docgen']
-          },
-        },
-      ],
-    });
-
-    return config;
-  },
 };
 
 const withTM = require('next-transpile-modules')([]);
