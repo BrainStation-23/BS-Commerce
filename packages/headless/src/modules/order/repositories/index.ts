@@ -1,7 +1,7 @@
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
-} from '@bs-commerce/models';
+} from 'models';
 import { Injectable } from '@nestjs/common';
 import { randomInt, randomUUID } from 'crypto';
 import { CreateReviewResponse, ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
@@ -128,6 +128,10 @@ export class OrderRepository {
     return await this.db.addProductRating(productId, rating);
   }
 
+  async findBranch(query: Record<string, any>): Promise<boolean> {
+    return await this.db.findBranch(query);
+  }
+  
   async createReply(reply: ICreateReply): Promise<IReviewReplyResponse | null>{
     const id = randomUUID();
     const request = { ...reply, id};

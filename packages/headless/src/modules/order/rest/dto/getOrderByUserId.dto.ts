@@ -1,11 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
-import { OrderByUserId, OrderByUserIdResponse } from '@bs-commerce/models';
+import { OrderByUserId, OrderByUserIdResponse } from 'models';
 import { OrderAddressDto } from './order.create.dto';
 import { OrderProductDto } from './OrderProduct.dto';
 
 export class OrderDetails implements OrderByUserId {
+  @ApiProperty()
+  branchId: string;
+
   @ApiProperty({ type: OrderAddressDto })
   billingAddress: OrderAddressDto;
 

@@ -19,10 +19,11 @@ import { OrderModel } from './order.model';
 import {
   CreateOrderRequest,
   CreateProductOrderDetails,
-} from '@bs-commerce/models';
+} from 'models';
 import { CartModel } from '../cart/cart.model';
 import { ReviewModel } from '../review/review.model';
 import { Review } from 'src/entity/review';
+import { BranchModel } from '../branch/branch.model';
 import { ICreateReply, IReviewReplyResponse, IUpdateReplyRequest } from 'models';
 
 export class OrderDatabase implements IOrderDatabase {
@@ -356,6 +357,16 @@ export class OrderDatabase implements IOrderDatabase {
     }
   }
 
+  async findBranch (query: Record<string, any>): Promise<boolean>{
+    try{
+      const branch = await BranchModel.findOne(query);
+
+      return branch ? true : false;
+    }catch(err){
+      console.log(err);
+      return false;
+    }
+  }
   async createReply(request: ICreateReply): Promise<IReviewReplyResponse | null>{
     const { reviewId } = request;
     delete request.reviewId;

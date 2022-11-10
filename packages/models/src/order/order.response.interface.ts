@@ -24,6 +24,7 @@ export interface BaseOrderModel {
   stripeChargeId?: string;
   paypalPaymentId?: string;
   paypalRedirectUrl?: string;
+  branchId: string;
 }
 
 export interface OrderResponseData extends BaseOrderModel {
