@@ -30,17 +30,17 @@ export class AdminRoleGuard implements CanActivate {
     const query = {
       id: user.role.roleId,
       name: user.role.name,
-      type: user.role.roleType,
+      roleType: user.role.roleType,
       isActive: true,
       permissions: { $elemMatch: { $in: requiredPermissions } },
     };
-    
-    let isExist = 0
-    if(user.role.roleType === 'super-admin-type'){
-      isExist = await SuperAdminRoleModel.findOne(query).countDocuments()
-    }else if(user.role.roleType === 'store-admin-type'){
-      isExist = await StoreAdminRoleModel.findOne(query).countDocuments()
-    }else{
+
+    let isExist = 0;
+    if (user.role.roleType === 'super-admin-type') {
+      isExist = await SuperAdminRoleModel.findOne(query).countDocuments();
+    } else if (user.role.roleType === 'store-admin-type') {
+      isExist = await StoreAdminRoleModel.findOne(query).countDocuments();
+    } else {
       return false;
     }
     if (isExist) {

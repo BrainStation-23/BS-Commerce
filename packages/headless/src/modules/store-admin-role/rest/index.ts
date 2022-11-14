@@ -62,7 +62,7 @@ export class RoleController {
 
   @PermissionRequired(PERMISSIONS.VIEW_STORE_ADMIN_SINGLE_ROLE)
   @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
-  @Get(':id')
+  @Get('id/:id')
   async findOne(
     @Param('id') id: string,
     @AdminInfo() adminInfo: StoreAdminInfo,
