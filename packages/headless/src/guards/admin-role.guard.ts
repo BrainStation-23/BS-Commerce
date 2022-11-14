@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { PERMISSIONS } from 'models';
+import { PERMISSIONS, RoleTypeEnum } from 'models';
 import { SuperAdminRoleModel } from 'src/database/mongodb/super-admin-role/super-admin.role.model';
 import { StoreAdminRoleModel } from 'src/database/mongodb/store-admin-role/store-admin.role.model';
 import { PERMISSION_KEY } from 'src/decorators/permission.decorator';
@@ -36,9 +36,12 @@ export class AdminRoleGuard implements CanActivate {
     };
 
     let isExist = 0;
-    if (user.role.roleType === 'super-admin-type') {
+    if (user.role.roleType === RoleTypeEnum.SUPER_ADMIN) {
       isExist = await SuperAdminRoleModel.findOne(query).countDocuments();
-    } else if (user.role.roleType === 'store-admin-type') {
+    } else if (
+      user.role.roleType === RoleTypeEnum.STORE_ADMIN ||
+      user.role.roleType === RoleTypeEnum.BRANCH_ADMIN
+    ) {
       isExist = await StoreAdminRoleModel.findOne(query).countDocuments();
     } else {
       return false;

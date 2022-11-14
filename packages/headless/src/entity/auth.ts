@@ -13,5 +13,15 @@ export class AdminJwtPayload {
   username: string;
   logInTime: number;
   role: RoleData | string;
-  storeId?: string
+  storeId?: string;
+  branchIds?: string | string[];
+}
+
+export class StoreAdminJwtPayload {
+  id: string;
+  username: string;
+  logInTime: number;
+  role: RoleData;
+  storeId?: string;
+  branchIds?: string | string[];
 }

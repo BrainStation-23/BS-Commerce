@@ -74,7 +74,9 @@ export class StoreDatabase implements IStoreDatabase {
     try {
       session.startTransaction();
       let newStoreId = randomUUID();
-
+      if (data?.admin?.countryCode && data?.admin?.phone) {
+        data.admin.phone = data?.admin?.countryCode + data?.admin?.phone || '';
+      }
       // step 1: create role with newStoreId
       let role: Role = await new StoreAdminRoleModel({
         ...data.role,

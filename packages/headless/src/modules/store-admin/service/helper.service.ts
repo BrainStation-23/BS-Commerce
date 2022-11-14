@@ -4,7 +4,7 @@ import { StoreAdminRepository } from '../repositories';
 import * as bcrypt from 'bcrypt';
 import { Otp } from 'src/entity/otp';
 import { MfaOtpDto } from '../rest/dto/otp.dto';
-import { AdminJwtPayload } from 'src/entity/auth';
+import { StoreAdminJwtPayload } from 'src/entity/auth';
 const FIVE_MINUTES = 5 * 60 * 1000;
 
 @Injectable()
@@ -70,13 +70,14 @@ export class StoreAdminHelperService {
 
   async createStoreAdminJwtPayload(
     userData: Partial<StoreAdmin>,
-  ): Promise<AdminJwtPayload> {
-    const payload: AdminJwtPayload = {
+  ): Promise<StoreAdminJwtPayload> {
+    const payload: StoreAdminJwtPayload = {
       id: userData.id,
       username: userData.firstName + ' ' + userData.lastName,
       logInTime: Date.now(),
       role: userData.role,
-      storeId: userData.storeId,
+      storeId: userData?.storeId || '',
+      branchIds: userData?.branchIds || [],
     };
     return payload;
   }
