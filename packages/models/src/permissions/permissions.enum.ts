@@ -66,4 +66,5 @@ export const enum PERMISSIONS {
 export const enum RoleTypeEnum {
 	SUPER_ADMIN = "super-admin-type",
 	STORE_ADMIN = "store-admin-type",
+	BRANCH_ADMIN = "branch-admin-type",
 }

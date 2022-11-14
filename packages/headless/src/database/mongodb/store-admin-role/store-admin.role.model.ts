@@ -19,7 +19,7 @@ const StoreAdminRoleSchema = new Schema<Role>(
     roleType:{
       type: String,
       index: true,
-      default: RoleTypeEnum.STORE_ADMIN
+      default: RoleTypeEnum.BRANCH_ADMIN
     },
     storeId:{
       type: String,

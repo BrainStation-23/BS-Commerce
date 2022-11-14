@@ -11,7 +11,8 @@ import { StoreAdminRoleModel } from './store-admin.role.model';
 @Injectable()
 export class StoreAdminRoleDatabase implements IRoleDatabase {
   async create(body: CreateRoleDto): Promise<Role> {
-    const newRole = await StoreAdminRoleModel.create({...body, roleType: RoleTypeEnum.STORE_ADMIN});
+    const newRole = await StoreAdminRoleModel.create({...body});
+
     return newRole ? newRole : null;
   }
 
