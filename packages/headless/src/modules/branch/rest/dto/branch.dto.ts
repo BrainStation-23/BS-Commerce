@@ -1,6 +1,6 @@
 import { IsArray, IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Branch, BranchAddress, IBranchPhoto, SingleBranchErrorMessage, SingleBranchErrorResponse, SingleBranchSuccessResponse } from 'models';
+import { Branch, BranchAddress, IBranchPhoto, SingleBranchErrorMessage, SingleBranchErrorResponse, SingleBranchSuccessResponse, StoreBranchStatus } from 'models';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { HttpStatus } from '@nestjs/common';
 import { CreateBranchErrorResponseDto, CreateBranchSuccessResponseDto } from './create.branch.dto';
@@ -8,11 +8,6 @@ import { Type } from 'class-transformer';
 import { InActiveReason } from 'src/entity/branch';
 
 export class BranchAddressDto implements BranchAddress {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  id: string;
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -91,6 +86,12 @@ export class BranchDto implements Branch {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiProperty({
+    example: StoreBranchStatus.PENDING,
+  })
+  @IsString()
+  status: StoreBranchStatus;
 
   @ApiProperty()
   @IsNotEmpty()

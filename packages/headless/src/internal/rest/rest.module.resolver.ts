@@ -16,7 +16,7 @@ import { SearchModule } from 'src/modules/global-search/search.module';
 import { BranchModule } from 'src/modules/branch/branch.rest.module';
 import { StoreModule } from 'src/modules/store/store.rest.module';
 import { SuperAdminModule } from 'src/modules/super-admin/super-admin.rest.module';
-import { StoreBranchModule } from 'src/modules/store-branch/StoreBranch.rest.module';
+import { StoreBranchModule } from 'src/modules/tmp-store-branch/StoreBranch.rest.module';
 
 export const ResolveRestModule = () => {
   return [

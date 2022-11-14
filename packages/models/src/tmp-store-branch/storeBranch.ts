@@ -8,7 +8,7 @@ export interface StoreBranchAddress {
 
 export const enum StoreBranchStatus {
     PENDING = 'PENDING',
-    ACCEPTED = 'ACCEPTED',
+    APPROVED = 'APPROVED',
     REJECTED = 'REJECTED',
 }
 

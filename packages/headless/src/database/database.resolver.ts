@@ -18,7 +18,7 @@ import { BranchDatabase as BranchDatabaseMongo } from './mongodb/branch';
 
 import { StoreDatabase as StoreDatabaseMongo } from './mongodb/store';
 import { SuperAdminDatabase as SuperAdminDatabaseMongo } from './mongodb/super-admin';
-import { StoreBranchDatabase as StoreBranchDatabaseMongo } from './mongodb/store-branch';
+import { StoreBranchDatabase as StoreBranchDatabaseMongo } from './mongodb/tmp-store-branch';
 
 type CLASS_NAME =
   | 'WISHLIST'

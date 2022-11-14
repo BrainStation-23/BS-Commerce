@@ -1,20 +1,22 @@
-import { IsArray, IsBoolean, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
 import { BranchAddressDto, BranchDto, BranchPhotoDto } from './branch.dto';
 import { HttpStatus } from '@nestjs/common';
 
 import {
-  Branch,
-  BranchAddress,
   CreateBranchErrorMessage,
   CreateBranchErrorResponse,
   CreateBranchRequest,
   CreateBranchSuccessResponse,
-  ErrorMessage,
+  InActiveReason,
 } from 'models';
-import { Type } from 'class-transformer';
-import { InActiveReason } from 'src/entity/branch';
 
 export class CreateBranchRequestDto implements CreateBranchRequest {
   @ApiProperty()
@@ -22,10 +24,10 @@ export class CreateBranchRequestDto implements CreateBranchRequest {
   @IsString()
   store: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  url: string;
+  name: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -38,7 +40,7 @@ export class CreateBranchRequestDto implements CreateBranchRequest {
   @CustomValidator(BranchAddressDto)
   address: BranchAddressDto;
 
-  @ApiProperty({ enum: InActiveReason})
+  @ApiProperty()
   @IsOptional()
   inActiveReason?: InActiveReason;
 
@@ -49,14 +51,9 @@ export class CreateBranchRequestDto implements CreateBranchRequest {
   image?: BranchPhotoDto;
 
   @ApiProperty()
-  @IsOptional()
-  @IsString()
-  description?: string;
-
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  name: string;
+  description: string;
 }
 
 export class CreateBranchSuccessResponseDto

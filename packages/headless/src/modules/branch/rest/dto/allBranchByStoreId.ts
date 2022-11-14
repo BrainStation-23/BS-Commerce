@@ -44,6 +44,6 @@ export class GetAllBranchByStoreIdErrorResponseDto implements GetAllBranchByStor
   errors: string[];
 }
 
-export type CreateBranchResponseDto =
+export type GetAllBranchByStoreIdDto =
   | GetAllBranchByStoreIdErrorResponseDto
   | GetAllBranchByStoreIdSuccessResponseDto;

@@ -1,7 +1,6 @@
-import { SuccessResponse, ErrorResponse, DescriptiveError } from "src/index";
+import { SuccessResponse, ErrorResponse, DescriptiveError, StoreBranchStatus } from "src/index";
 
 export interface BranchAddress{
-    id: string;
     addressLine1: string;
     addressLine2?: string;
     postCode: string;
@@ -10,7 +9,7 @@ export interface BranchAddress{
 }
 
 export interface Branch{
-    id: string;
+    id?: string;
     store: string; //storeId
     url: string;
     address: BranchAddress;
@@ -19,6 +18,7 @@ export interface Branch{
     image?: IBranchPhoto;
     description?: string;
     name: string;
+    status: StoreBranchStatus;
 }
 
 export interface IBranchPhoto{
