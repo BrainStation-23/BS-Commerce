@@ -24,7 +24,7 @@ export class SuperAdminInfo {
   lastName: string;
   role: string;
   storeId: string;
-  branchId: string[];
+  branchIds?: string[];
   email: string;
   countryCode: string;
   phone: string;

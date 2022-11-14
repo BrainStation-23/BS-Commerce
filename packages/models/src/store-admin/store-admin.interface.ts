@@ -31,7 +31,7 @@ export interface IStoreAdminSignupRes {
 	lastName: string;
 	role: IRoleInfo;
 	storeId: string;
-	branchId: string[];
+	branchIds?: string[];
 	email: string;
 	countryCode?: string;
 	phone?: string;

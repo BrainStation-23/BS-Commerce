@@ -42,7 +42,7 @@ const StoreAdminSchema = new Schema<StoreAdmin>(
       index: true,
       required: true,
     },
-    branchId: {
+    branchIds: {
       type: [String],
       required: true,
     },

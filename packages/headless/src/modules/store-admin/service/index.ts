@@ -58,6 +58,8 @@ export class StoreAdminService {
       );
     }
     if (body?.phone) {
+      body.phone = body.countryCode+body.phone
+      delete body.countryCode
       isExist = await this.storeAdminRepository.findOne({ phone: body.phone });
       if (isExist?.phone === body.phone) {
         return errorResponse(

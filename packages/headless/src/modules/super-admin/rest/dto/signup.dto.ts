@@ -8,7 +8,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { ISuperAdminRoleInfo, ISuperAdminSignupReq, ISuperAdminSignupRes } from 'models';
-import { SuperAdminRoleInfo } from 'src/entity/super-admin';
 
 export enum MfaType {
   EMAIL = 'EMAIL',
@@ -36,7 +35,7 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
   storeId: string;
 
   @ApiProperty({ example: ['branch-id'], required: true })
-  branchId: string[];
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com', required: true })
   @IsEmail()
@@ -125,7 +124,7 @@ export class SuperAdminSignupRes implements ISuperAdminSignupRes {
 
   @ApiProperty({ example: ['branch-id'] })
   @IsString()
-  branchId: string[];
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com' })
   email: string;

@@ -95,7 +95,7 @@ export class StoreAdminSignupRes {
 
   @ApiProperty({ example: ['branch-id'] })
   @IsString()
-  branchId: string[];
+  branchIds: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com' })
   email: string;

@@ -55,6 +55,8 @@ export class SuperAdminService {
       );
     }
     if (body?.phone) {
+      body.phone = body.countryCode+body.phone
+      delete body.countryCode
       isExist = await this.superAdminRepository.findOne({ phone: body.phone });
       if (isExist?.phone === body.phone) {
         return errorResponse(

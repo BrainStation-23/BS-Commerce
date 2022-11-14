@@ -32,7 +32,7 @@ export class StoreAdminSignupReq{
   roleId: string;
 
   @ApiProperty({ example: []})
-  branchId: string[];
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com', required: true })
   @IsEmail()
@@ -102,7 +102,7 @@ export class CreateStoreAdminDto {
   lastName: string;
   role: RoleInfo;
   storeId: string;
-  branchId: string[];
+  branchIds?: string[];
   email: string;
   countryCode?: string;
   phone?: string;
@@ -125,7 +125,7 @@ export class StoreAdminSignupRes{
 
   @ApiProperty({ example: ['branch-id'] })
   @IsString()
-  branchId: string[];
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com' })
   email: string;

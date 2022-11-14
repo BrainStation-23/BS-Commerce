@@ -17,7 +17,7 @@ export interface ISuperAdminSignupReq {
 	firstName: string;
 	lastName: string;
 	roleId: string;
-	branchId: string[];
+	branchIds?: string[];
 	email: string;
 	countryCode?: string;
 	phone?: string;
@@ -30,7 +30,7 @@ export interface ISuperAdminSignupRes {
 	lastName: string;
 	role: ISuperAdminRoleInfo;
 	storeId: string;
-	branchId: string[];
+	branchIds?: string[];
 	email: string;
 	countryCode?: string;
 	phone?: string;

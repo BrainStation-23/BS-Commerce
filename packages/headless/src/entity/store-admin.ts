@@ -9,7 +9,7 @@ export class StoreAdmin {
   lastName: string;
   role?: RoleInfo;
   storeId?: string;
-  branchId?: string[];
+  branchIds?: string[];
   email: string;
   countryCode?: string;
   phone?: string;
@@ -24,7 +24,7 @@ export class StoreAdminInfo {
   lastName: string;
   role: RoleInfo;
   storeId: string;
-  branchId: string[];
+  branchIds: string[];
   email: string;
   countryCode: string;
   phone: string;
