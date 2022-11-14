@@ -9,7 +9,7 @@ export interface BranchAddress{
 }
 
 export interface Branch{
-    id: string;
+    id?: string;
     store: string; //storeId
     url: string;
     address: BranchAddress;
