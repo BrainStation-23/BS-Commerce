@@ -48,7 +48,6 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     },
     email: {
       type: String,
-      index: true,
       unique: true,
       required: true,
     },

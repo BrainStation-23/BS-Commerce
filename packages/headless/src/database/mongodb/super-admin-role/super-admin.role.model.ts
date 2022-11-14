@@ -9,19 +9,17 @@ const SuperAdminRoleSchema = new Schema<Role>(
       type: String,
       default: () => randomUUID(),
       unique: true,
-      indexe: true,
     },
     name: {
       type: String,
       trim: true,
       unique: true,
-      index: true,
       required: true,
     },
     roleType: {
       type: String,
       index: true,
-      default: RoleTypeEnum.SUPER_ADMIN
+      default: RoleTypeEnum.SUPER_ADMIN,
     },
     permissions: {
       type: [String],
@@ -37,5 +35,8 @@ const SuperAdminRoleSchema = new Schema<Role>(
   },
 );
 
-const SuperAdminRoleModel = model<Role>('super-admin-role', SuperAdminRoleSchema);
+const SuperAdminRoleModel = model<Role>(
+  'super-admin-role',
+  SuperAdminRoleSchema,
+);
 export { SuperAdminRoleModel };

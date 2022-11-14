@@ -73,7 +73,7 @@ export class StoreDatabase implements IStoreDatabase {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      let newStoreId = randomUUID()
+      let newStoreId = randomUUID();
 
       // step 1: create role with newStoreId
       let role: Role = await new StoreAdminRoleModel({
