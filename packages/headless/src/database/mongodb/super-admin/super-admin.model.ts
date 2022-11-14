@@ -62,7 +62,6 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     },
     password: {
       type: String,
-      index: true,
       required: true,
     },
     isMfaEnabled: {

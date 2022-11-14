@@ -58,7 +58,6 @@ const StoreAdminSchema = new Schema<StoreAdmin>(
     },
     password: {
       type: String,
-      index: true,
       required: true,
     },
     isMfaEnabled: {
