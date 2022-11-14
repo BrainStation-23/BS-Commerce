@@ -9,6 +9,7 @@ import { CreateRoleDto } from 'src/modules/store/rest/dto/store-admin-role.dto';
 import { Role } from 'src/entity/role';
 import { StoreAdminRoleModel } from '../store-admin-role/store-admin.role.model';
 import { RoleTypeEnum } from 'models';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class StoreDatabase implements IStoreDatabase {
@@ -72,19 +73,16 @@ export class StoreDatabase implements IStoreDatabase {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      /**
-       * step 1: create role with temp store id
-       * step 2: create admin with role and temp store id
-       * step 3: create store admin
-       * step 4: update admin with store id
-       * step 5: update role with store id
-       */
+      let newStoreId = randomUUID()
+
+      // step 1: create role with newStoreId
       let role: Role = await new StoreAdminRoleModel({
         ...data.role,
         roleType: RoleTypeEnum.STORE_ADMIN,
-        storeId: 'temp',
+        storeId: newStoreId,
       }).save({ session });
 
+      // step 2: create store admin with role and newStoreId
       let storeAdmin: StoreAdmin = await new StoreAdminModel({
         ...data.admin,
         role: {
@@ -92,33 +90,17 @@ export class StoreDatabase implements IStoreDatabase {
           name: role.name,
           roleType: role.roleType,
         },
-        storeId: 'temp',
+        storeId: newStoreId,
       }).save({
         session,
       });
 
+      // step 3: create store with newStoreId and admin id
       let store: Store = await new StoreModel({
         ...data.store,
+        id: newStoreId,
         admin: storeAdmin.id,
       }).save({ session });
-
-      storeAdmin = await StoreAdminModel.findOneAndUpdate(
-        { id: storeAdmin.id },
-        {
-          $set: { storeId: store.id },
-        },
-        { session },
-      );
-
-      role = await StoreAdminRoleModel.findOneAndUpdate(
-        { id: role.id },
-        {
-          $set: { storeId: store.id },
-        },
-        { session },
-      );
-
-      console.log(storeAdmin, role, store);
 
       await session.commitTransaction();
       return store;
