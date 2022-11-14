@@ -21,6 +21,7 @@ export class AdminRoleGuard implements CanActivate {
 
     const user = context.switchToHttp().getRequest()?.user;
 
+    // TO DO -> this logic will be removed
     // allow access to super admin
     if (user.role === 'super-admin') {
       return true;
