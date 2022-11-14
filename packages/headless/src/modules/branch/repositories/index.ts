@@ -21,10 +21,10 @@ export class BranchRepository {
   }
 
   async updateBranchHistory(
-    name: string,
+    url: string,
     actions: ActionType,
   ): Promise<BranchHistory | null> {
-    return await this.db.updateBranchHistory(name, actions);
+    return await this.db.updateBranchHistory(url, actions);
   }
 
   async getStore(storeId: string): Promise<Store | null> {
@@ -39,6 +39,10 @@ export class BranchRepository {
 
   async getBranch(query: Record<string, any>): Promise<Branch | null> {
     return await this.db.getBranch(query);
+  }
+
+  async getTmpBranch(query: Record<string, any>): Promise<Branch | null> {
+    return await this.db.getTmpBranch(query);
   }
 
   async updateStatus(branchId: string, status: string): Promise<Branch | null> {

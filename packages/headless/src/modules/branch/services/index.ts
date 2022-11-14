@@ -67,6 +67,7 @@ export class BranchService {
     const history = {
       id: randomUUID(),
       branchName: branch.name,
+      branchURL: branchBody.url,
       actions: [
         {
           user: {
@@ -82,7 +83,7 @@ export class BranchService {
     };
 
     const doesExistHistory = await this.branchRepo.getHistory({
-      branchName: branch.name,
+      branchURL: branchBody.url,
     });
     if (!doesExistHistory) {
       await this.branchRepo.createBranchHistory(history);
@@ -122,6 +123,15 @@ export class BranchService {
     branchId: string,
     status: string,
   ): Promise<UpdateBranchStatusResponse> {
+    const branch = await this.branchRepo.getTmpBranch({ id: branchId });
+    if (!branch) {
+      return this.helper.serviceResponse.errorResponse(
+        SingleBranchErrorMessage.CANNOT_FIND_BRANCH,
+        null,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const updatedBranch = await this.branchRepo.updateStatus(branchId, status);
     if (!updatedBranch) {
       return this.helper.serviceResponse.errorResponse(
@@ -145,7 +155,7 @@ export class BranchService {
         },
       ];
 
-      await this.branchRepo.updateBranchHistory(updatedBranch.name, Actions);
+      await this.branchRepo.updateBranchHistory(updatedBranch.url, Actions);
       return this.helper.serviceResponse.successResponse(
         { message: UpdateBranchStatusSuccessMessage.SUCCESSFULLY_APPROVED },
         HttpStatus.OK,
@@ -164,7 +174,7 @@ export class BranchService {
         },
       ];
 
-      await this.branchRepo.updateBranchHistory(updatedBranch.name, Actions);
+      await this.branchRepo.updateBranchHistory(updatedBranch.url, Actions);
       return this.helper.serviceResponse.successResponse(
         { message: UpdateBranchStatusSuccessMessage.REJECTED_FROM_SUPER_ADMIN },
         HttpStatus.OK,

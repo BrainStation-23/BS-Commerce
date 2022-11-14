@@ -1,6 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { string } from 'joi';
 import {
   CreateStoreBranchErrorMessages,
   CreateStoreBranchRequest,
@@ -76,6 +75,7 @@ export class StoreBranchService {
     const history = {
       id: randomUUID(),
       branchName: storeBranch.name,
+      branchURL: branchBody.url,
       actions: [
         {
           user: {
@@ -89,12 +89,12 @@ export class StoreBranchService {
         },
       ],
     };
-    const doesExistHistory = await this.storeBranchRepo.getHistory({
-      branchName: storeBranch.name,
+    const doesHistoryExist = await this.storeBranchRepo.getHistory({
+      branchURL: branchBody.url,
     });
-    if (!doesExistHistory) {
-      await this.storeBranchRepo.createBranchHistory(history);
-    }
+
+    !doesHistoryExist &&
+      (await this.storeBranchRepo.createBranchHistory(history));
     return this.helper.serviceResponse.successResponse(
       branch,
       HttpStatus.CREATED,

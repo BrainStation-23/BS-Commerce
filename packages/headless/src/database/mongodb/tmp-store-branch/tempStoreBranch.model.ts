@@ -40,10 +40,7 @@ const TmpStoreBranchSchema = new Schema<StoreBranch>(
     description: {
       type: String,
     },
-    name: {
-      type: String,
-      unique: true,
-    },
+    name: String,
   },
   {
     timestamps: true,

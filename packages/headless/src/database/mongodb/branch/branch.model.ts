@@ -59,10 +59,7 @@ const BranchSchema = new Schema<Branch>(
     description: {
       type: String,
     },
-    name: {
-      type: String,
-      unique: true,
-    },
+    name: String,
   },
   {
     timestamps: true,

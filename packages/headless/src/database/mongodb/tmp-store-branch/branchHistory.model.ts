@@ -28,6 +28,10 @@ const branchHistorySchema = new Schema<BranchHistory>(
       default: () => randomUUID(),
     },
     branchName: String,
+    branchURL: {
+      type: String,
+      unique: true,
+    },
     actions: [ActionSchema],
   },
   {

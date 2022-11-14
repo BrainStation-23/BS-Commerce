@@ -3,6 +3,7 @@ import { StoreBranchStatus } from './tmp-store-branch';
 export class BranchHistory {
   id: string;
   branchName: string;
+  branchURL: string;
   actions: ActionType[];
 }
 

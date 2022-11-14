@@ -10,7 +10,7 @@ export abstract class IBranchDatabase {
   ) => Promise<Branch | null>;
   abstract createBranchHistory: (history: BranchHistory) => Promise<null>;
   abstract updateBranchHistory: (
-    name: string,
+    url: string,
     actions: ActionType,
   ) => Promise<null>;
   abstract getHistory: (
@@ -21,6 +21,7 @@ export abstract class IBranchDatabase {
     storeId: string,
   ) => Promise<AllBranchByStoreId | null>;
   abstract getBranch: (query: Record<string, any>) => Promise<Branch | null>;
+  abstract getTmpBranch: (query: Record<string, any>) => Promise<Branch | null>;
   abstract updateStatus: (
     branchId: string,
     status: string,

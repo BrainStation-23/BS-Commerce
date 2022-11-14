@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import { ActionType, BranchHistory } from 'src/entity/branch-history';
 import { Store } from 'src/entity/store';
 import { IBranchDatabase } from 'src/modules/branch/repositories/branch.database.interface';
-import { BranchHistoryModel } from '../store-branch/branchHistory.model';
-import { TmpStoreBranchModel } from '../store-branch/tempStoreBranch.model';
+import { BranchHistoryModel } from '../tmp-store-branch/branchHistory.model';
+import { TmpStoreBranchModel } from '../tmp-store-branch/tempStoreBranch.model';
 import { StoreModel } from '../store/store.model';
 import { BranchModel } from './branch.model';
 
@@ -74,14 +74,26 @@ export class BranchDatabase implements IBranchDatabase {
     }
   }
 
+  async getTmpBranch(query: Record<string, any>): Promise<Branch | null> {
+    try {
+      return await TmpStoreBranchModel.findOne(query)
+        .select('-_id')
+        .lean()
+        .exec();
+    } catch (err) {
+      return null;
+    }
+  }
+
   async updateStatus(branchId: string, status: string): Promise<Branch | null> {
     const session = await mongoose.startSession();
+    await session.startTransaction();
     try {
-      session.startTransaction();
+      const opts = { session, new: true };
       const updatedBranch = await TmpStoreBranchModel.findOneAndUpdate(
         { id: branchId },
         { status },
-        { new: true, session },
+        opts,
       )
         .select('-_id')
         .lean()
@@ -108,11 +120,11 @@ export class BranchDatabase implements IBranchDatabase {
     }
   }
 
-  async updateBranchHistory(name: string, actions: ActionType) {
+  async updateBranchHistory(url: string, actions: ActionType) {
     try {
       await BranchHistoryModel.findOneAndUpdate(
         {
-          branchName: name,
+          branchURL: url,
         },
         { $push: { actions } },
         { new: true },
