@@ -41,27 +41,25 @@ export class RoleService {
       id: body.id,
       storeId: adminInfo.storeId,
     });
-    if (isExist) {
-      if (isExist.name === body?.name) {
-        return errorResponse(
-          'This role is already exist!',
-          null,
-          HttpStatus.CONFLICT,
-        );
-      } else {
-        for (let key in body) {
-          if (key !== 'id' && key !== 'name') {
-            isExist[key] = body[key];
-          }
-        }
-        const newRole = await this.roleRepository.findOneAndUpdate(
-          { id: body.id, storeId: adminInfo.storeId },
-          isExist,
-        );
-        if (newRole) {
-          return successResponse(Role, newRole);
-        }
+
+    if (isExist.name === body?.name) {
+      return errorResponse(
+        'This role is already exist!',
+        null,
+        HttpStatus.CONFLICT,
+      );
+    }
+    for (let key in body) {
+      if (key !== 'id') {
+        isExist[key] = body[key];
       }
+    }
+    const newRole = await this.roleRepository.findOneAndUpdate(
+      { id: body.id, storeId: adminInfo.storeId },
+      isExist,
+    );
+    if (newRole) {
+      return successResponse(Role, newRole);
     }
     return errorResponse('Error in updating role', null, HttpStatus.CONFLICT);
   }
@@ -82,13 +80,16 @@ export class RoleService {
     return errorResponse('No result found!', null, HttpStatus.NOT_FOUND);
   }
 
-  async findOne(adminInfo: StoreAdminInfo, id = null): Promise<IServiceResponse<Role>> {
+  async findOne(
+    adminInfo: StoreAdminInfo,
+    id = null,
+  ): Promise<IServiceResponse<Role>> {
     const role = await this.roleRepository.findOne({
       storeId: adminInfo.storeId,
       id: id ? id : adminInfo.role.roleId,
     });
     if (role) {
-      if(!id){
+      if (!id) {
         delete role.permissions;
       }
       return successResponse(Role, role);
