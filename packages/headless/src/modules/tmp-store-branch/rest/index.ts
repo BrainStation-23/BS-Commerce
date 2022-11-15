@@ -23,7 +23,7 @@ import {
   GetStoreBranchSuccessResponseDto,
 } from './dto';
 
-@ApiTags('Store Branch API')
+@ApiTags('Temporary Store Branch API')
 @Controller('branches')
 export class StoreBranchController {
   constructor(private storeBranchService: StoreBranchService) {}

@@ -9,7 +9,7 @@ export class BranchAddress{
 
 export const enum BranchStatus {
   PENDING = 'PENDING',
-  ACCEPTED = 'ACCEPTED',
+  APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
 }
 export class BranchPhoto{

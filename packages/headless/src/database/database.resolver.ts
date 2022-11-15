@@ -18,7 +18,7 @@ import { BranchDatabase as BranchDatabaseMongo } from './mongodb/branch';
 
 import { StoreDatabase as StoreDatabaseMongo } from './mongodb/store';
 import { SuperAdminDatabase as SuperAdminDatabaseMongo } from './mongodb/super-admin';
-import { StoreBranchDatabase as StoreBranchDatabaseMongo } from './mongodb/store-branch';
+import { StoreBranchDatabase as StoreBranchDatabaseMongo } from './mongodb/tmp-store-branch';
 import { StoreAdminRoleDatabase as StoreAdminRoleDatabaseMongo } from './mongodb/store-admin-role';
 import { SuperAdminRoleDatabase as SuperAdminRoleDatabaseMongo } from './mongodb/super-admin-role';
 import { StoreAdminDatabase as StoreAdminDatabaseMongo } from './mongodb/store-admin';

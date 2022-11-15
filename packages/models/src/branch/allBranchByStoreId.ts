@@ -1,4 +1,4 @@
-import { DescriptiveError, ErrorMessage, ErrorResponse, SuccessResponse } from "src/index";
+import { DescriptiveError, ErrorResponse, SuccessResponse } from "src/index";
 import { Branch } from "./branch";
 
 export interface AllBranchByStoreId{
