@@ -7,8 +7,9 @@ import {
   Post,
   Query,
   Res,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { StoreService } from '../services';
 import {
   CreateStoreErrorResponseDto,
@@ -22,12 +23,24 @@ import {
   GetStoreSuccessResponseDto,
 } from './dto';
 import { Response } from 'express';
+import { AdminJwtAuthGuard } from 'src/guards/admin-jwt-auth.guard';
+import { AdminRoleGuard } from 'src/guards/admin-role.guard';
+import { StoreAdminSignupRes } from './dto/store-admin.dto';
+import { PermissionRequired } from 'src/decorators/permission.decorator';
+import { PERMISSIONS } from 'models';
 
 @Controller('stores')
 @ApiTags('Store API')
 export class StoreController {
   constructor(private storeService: StoreService) {}
 
+  @PermissionRequired(PERMISSIONS.CREATE_STORE, PERMISSIONS.CREATE_ADMIN)
+  @ApiBearerAuth()
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
+  @ApiResponse({
+    description: 'Create new store or branch admin',
+    type: StoreAdminSignupRes,
+  })
   @Post('create-store')
   @ApiResponse({
     description: 'Create Store Success Response',

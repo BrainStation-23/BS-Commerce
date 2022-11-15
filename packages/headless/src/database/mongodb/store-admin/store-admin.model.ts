@@ -9,29 +9,66 @@ const StoreAdminSchema = new Schema<StoreAdmin>(
       default: () => randomUUID(),
       unique: true,
     },
-    info: {
-      name: String,
-      email: {
-        type: String,
-        unique: true,
-      },
-      phone: String,
+    firstName: {
+      type: String,
+      trim: true,
+      required: true,
     },
-    password: String,
+    lastName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     role: {
-      name: String,
-      roleId: String,
+      name: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      roleId: {
+        type: String,
+        trim: true,
+        required: true,
+      },
       roleType: {
         type: String,
-        enum: ['OWNER', 'BRANCH_MANAGER'],
+        trim: true,
+        required: true,
       },
     },
-    // branchId
-    branch: {
+    storeId: {
+      type: String,
+      trim: true,
+      index: true,
+      required: true,
+    },
+    branchIds: {
+      type: [String],
+      required: true,
+    },
+    email: {
       type: String,
       index: true,
+      required: true,
     },
-    isActive: Boolean,
+    phone: {
+      type: String,
+      index: true,
+      default: '',
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    isMfaEnabled: {
+      type: Boolean,
+      default: false,
+    },
+    mfaType: {
+      type: String,
+      enum: ['EMAIL', 'PHONE'],
+      default: 'EMAIL',
+    },
   },
   {
     timestamps: true,
@@ -40,5 +77,5 @@ const StoreAdminSchema = new Schema<StoreAdmin>(
 );
 
 StoreAdminSchema.index({ role: 1 });
-const StoreAdminModel = model<StoreAdmin>('StoreAdmin', StoreAdminSchema);
+const StoreAdminModel = model<StoreAdmin>('store-admin', StoreAdminSchema);
 export { StoreAdminModel };

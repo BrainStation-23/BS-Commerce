@@ -5,6 +5,11 @@ import { IStoreDatabase } from 'src/modules/store/repositories/store.database.in
 import { StoreModel } from './store.model';
 import mongoose from 'mongoose';
 import { StoreAdminModel } from '../store-admin/store-admin.model';
+import { CreateRoleDto } from 'src/modules/store/rest/dto/store-admin-role.dto';
+import { Role } from 'src/entity/role';
+import { StoreAdminRoleModel } from '../store-admin-role/store-admin.role.model';
+import { RoleTypeEnum } from 'models';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class StoreDatabase implements IStoreDatabase {
@@ -62,19 +67,40 @@ export class StoreDatabase implements IStoreDatabase {
 
   async createStore(data: {
     store: Store;
+    role: CreateRoleDto;
     admin: StoreAdmin;
   }): Promise<Store | null> {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const storeAdmin: StoreAdmin = await new StoreAdminModel({
+      let newStoreId = randomUUID();
+      if (data?.admin?.countryCode && data?.admin?.phone) {
+        data.admin.phone = data?.admin?.countryCode + data?.admin?.phone || '';
+      }
+      // step 1: create role with newStoreId
+      let role: Role = await new StoreAdminRoleModel({
+        ...data.role,
+        roleType: RoleTypeEnum.STORE_ADMIN,
+        storeId: newStoreId,
+      }).save({ session });
+
+      // step 2: create store admin with role and newStoreId
+      let storeAdmin: StoreAdmin = await new StoreAdminModel({
         ...data.admin,
+        role: {
+          roleId: role.id,
+          name: role.name,
+          roleType: role.roleType,
+        },
+        storeId: newStoreId,
       }).save({
         session,
       });
 
-      const store: Store = await new StoreModel({
+      // step 3: create store with newStoreId and admin id
+      let store: Store = await new StoreModel({
         ...data.store,
+        id: newStoreId,
         admin: storeAdmin.id,
       }).save({ session });
 

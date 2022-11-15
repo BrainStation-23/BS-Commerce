@@ -19,6 +19,9 @@ import { BranchDatabase as BranchDatabaseMongo } from './mongodb/branch';
 import { StoreDatabase as StoreDatabaseMongo } from './mongodb/store';
 import { SuperAdminDatabase as SuperAdminDatabaseMongo } from './mongodb/super-admin';
 import { StoreBranchDatabase as StoreBranchDatabaseMongo } from './mongodb/tmp-store-branch';
+import { StoreAdminRoleDatabase as StoreAdminRoleDatabaseMongo } from './mongodb/store-admin-role';
+import { SuperAdminRoleDatabase as SuperAdminRoleDatabaseMongo } from './mongodb/super-admin-role';
+import { StoreAdminDatabase as StoreAdminDatabaseMongo } from './mongodb/store-admin';
 
 type CLASS_NAME =
   | 'WISHLIST'
@@ -36,8 +39,12 @@ type CLASS_NAME =
   | 'CUSTOMER'
   | 'BRANCH'
   | 'STORE'
+  | 'STORE_BRANCH'
+  | 'STORE_ADMIN'
   | 'SUPER_ADMIN'
-  | 'STORE_BRANCH';
+  | 'STORE_ADMIN_ROLE'
+  | 'SUPER_ADMIN_ROLE';
+  
 
 const db = dbConfig.db;
 
@@ -78,6 +85,12 @@ export function ResolveDatabaseDependency(className: CLASS_NAME) {
             return SuperAdminDatabaseMongo;
           case 'STORE_BRANCH':
             return StoreBranchDatabaseMongo;
+          case 'STORE_ADMIN_ROLE':
+            return StoreAdminRoleDatabaseMongo;
+          case 'SUPER_ADMIN_ROLE':
+            return SuperAdminRoleDatabaseMongo;
+          case 'STORE_ADMIN':
+            return StoreAdminDatabaseMongo;
 
           default:
             break;

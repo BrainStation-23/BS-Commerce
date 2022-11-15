@@ -7,7 +7,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { ISuperAdminSignupReq } from 'models';
+import { ISuperAdminRoleInfo, ISuperAdminSignupReq, ISuperAdminSignupRes } from 'models';
 
 export enum MfaType {
   EMAIL = 'EMAIL',
@@ -28,7 +28,14 @@ export class SuperAdminSignupReq implements ISuperAdminSignupReq {
 
   @ApiProperty({ example: 'super-admin', required: true })
   @IsString()
-  role: string;
+  roleId: string;
+
+  @ApiProperty({ example: 'store-id', required: true })
+  @IsString()
+  storeId: string;
+
+  @ApiProperty({ example: ['branch-id'], required: true })
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com', required: true })
   @IsEmail()
@@ -70,6 +77,16 @@ export class SuperAdminProfileUpdateDto {
   @IsOptional()
   phone?: string;
 
+  @ApiProperty({ example: 'store-id' })
+  @IsString()
+  @IsOptional()
+  storeId?: string;
+
+  @ApiProperty({ example: ['branch-id'] })
+  @IsString()
+  @IsOptional()
+  branchId?: string[];
+
   @ApiProperty({ example: false })
   @IsOptional()
   isMfaEnabled?: boolean;
@@ -80,7 +97,18 @@ export class SuperAdminProfileUpdateDto {
   mfaType?: MfaType;
 }
 
-export class SuperAdminSignupRes implements ISuperAdminSignupReq {
+export class RoleInfo implements ISuperAdminRoleInfo{
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  roleId: string;
+
+  @ApiProperty()
+  roleType: string;
+}
+
+export class SuperAdminSignupRes implements ISuperAdminSignupRes {
   @ApiProperty({ example: 'Adam' })
   firstName: string;
 
@@ -88,7 +116,15 @@ export class SuperAdminSignupRes implements ISuperAdminSignupReq {
   lastName: string;
 
   @ApiProperty({ example: 'super-admin' })
-  role: string;
+  role: RoleInfo;
+
+  @ApiProperty({ example: 'store-id' })
+  @IsString()
+  storeId: string;
+
+  @ApiProperty({ example: ['branch-id'] })
+  @IsString()
+  branchIds?: string[];
 
   @ApiProperty({ example: 'sadmin@mail.com' })
   email: string;

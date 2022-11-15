@@ -12,13 +12,15 @@ import {
   GetStoreErrorMessages,
   GetStoreResponse,
 } from 'models';
+import { CreateStoreAdminDto } from '../rest/dto/store-admin.dto';
+import { CreateStoreRequestBodyDto } from '../rest/dto';
 
 @Injectable()
 export class StoreService {
   constructor(private storeRepo: StoreRepository, private helper: Helper) {}
 
   async createStore(
-    data: CreateStoreRequestBody,
+    data: CreateStoreRequestBodyDto,
   ): Promise<CreateStoreResponse> {
     // Slug Url Generate
     const url = data.info.shopName
@@ -50,32 +52,20 @@ export class StoreService {
         HttpStatus.BAD_REQUEST,
       );
 
-    const { admin, ...rest } = data;
-    const { name, email, phone, password } = admin;
-    const hashPassword = await bcrypt.hash(password, authConfig.salt);
+    const { admin, role, ...rest } = data;
+    const hashPassword = await bcrypt.hash(admin.password, authConfig.salt);
+    admin.password = hashPassword
+    
     const store = {
       ...rest,
       url,
       id: randomUUID(),
     };
-    const storeOwnerObj = {
-      id: randomUUID(),
-      info: {
-        name,
-        email,
-        phone,
-      },
-      password: hashPassword,
-      role: {
-        name: 'Store Owner',
-        roleType: 'OWNER',
-      },
-      isActive: true,
-    };
 
     const createdStore = await this.storeRepo.createStore({
       store,
-      admin: storeOwnerObj,
+      role,
+      admin
     });
     if (!createdStore)
       return this.helper.serviceResponse.errorResponse(

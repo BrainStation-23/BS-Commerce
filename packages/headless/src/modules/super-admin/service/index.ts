@@ -1,12 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PartialType } from '@nestjs/swagger';
-import { SuperAdmin } from 'src/entity/super-admin';
+import { SuperAdmin, SuperAdminInfo } from 'src/entity/super-admin';
 import { errorResponse, successResponse } from 'src/utils/response';
 import { IServiceResponse } from 'src/utils/response/service.response.interface';
 import { SuperAdminRepository } from '../repositories';
 import { SuperAdminLoginDto, SuperAdminLoginRes } from '../rest/dto/login.dto';
 import {
   MfaType,
+  RoleInfo,
   SuperAdminProfileUpdateDto,
   SuperAdminSignupReq,
 } from '../rest/dto/signup.dto';
@@ -40,8 +41,9 @@ export class SuperAdminService {
     return errorResponse('User not found', null, HttpStatus.NOT_FOUND);
   }
   async superAdminCreate(
+    adminInfo: SuperAdminInfo,
     body: SuperAdminSignupReq,
-  ): Promise<IServiceResponse<Partial<SuperAdmin>>> {
+  ): Promise<IServiceResponse<Partial<SuperAdmin>>> { 
     let isExist = await this.superAdminRepository.findOne({
       email: body.email,
     });
@@ -53,6 +55,8 @@ export class SuperAdminService {
       );
     }
     if (body?.phone) {
+      body.phone = body.countryCode+body.phone
+      delete body.countryCode
       isExist = await this.superAdminRepository.findOne({ phone: body.phone });
       if (isExist?.phone === body.phone) {
         return errorResponse(
@@ -64,8 +68,25 @@ export class SuperAdminService {
     }
 
     body.password = await bcrypt.hash(body.password, authConfig.salt);
-
-    const newSuperAdmin = await this.superAdminRepository.create(body);
+    const roleData = await this.superAdminRepository.findOneRole({id: body.roleId})
+    
+    if(!roleData){
+      return errorResponse(
+        'This role is invalid!',
+        null,
+        HttpStatus.CONFLICT,
+      );
+    }
+    const role: RoleInfo = {
+      name: roleData.name,
+      roleId: roleData.id,
+      roleType: roleData.roleType 
+    }
+    delete body.roleId;
+    const payload: SuperAdmin = {
+      ...body, role, storeId: adminInfo.storeId
+    }
+    const newSuperAdmin = await this.superAdminRepository.create(payload);
     if (newSuperAdmin) {
       return successResponse(PartialType(SuperAdmin), newSuperAdmin);
     }
@@ -118,13 +139,8 @@ export class SuperAdminService {
       const res = await this.handleMfaLogin(userData);
       return res;
     }
-
-    const payload: AdminJwtPayload = {
-      id: userData.id,
-      username: userData.firstName + ' ' + userData.lastName,
-      logInTime: Date.now(),
-      role: userData.role,
-    };
+    const payload: AdminJwtPayload =
+      await this.superAdminHelperService.createAdminJwtPayload(userData);
     const token = this.jwtService.sign(payload);
     return successResponse(SuperAdminLoginRes, { token });
   }
@@ -161,12 +177,8 @@ export class SuperAdminService {
       const userData = await this.superAdminRepository.findOne({
         id: verifiedData.userId,
       });
-      const payload: AdminJwtPayload = {
-        id: userData.id,
-        username: userData.firstName + ' ' + userData.lastName,
-        logInTime: Date.now(),
-        role: userData.role,
-      };
+      const payload: AdminJwtPayload =
+        await this.superAdminHelperService.createAdminJwtPayload(userData);
       const token = this.jwtService.sign(payload);
       return successResponse(SuperAdminLoginRes, { token });
     } else {

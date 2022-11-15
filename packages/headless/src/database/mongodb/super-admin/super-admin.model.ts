@@ -12,23 +12,44 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     firstName: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     lastName: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     role: {
+      name: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      roleId: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      roleType: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+    },
+    storeId: {
       type: String,
       trim: true,
-      required: true
+      index: true,
+      required: true,
+    },
+    branchId: {
+      type: [String],
+      required: true,
     },
     email: {
       type: String,
-      index: true,
       unique: true,
-      required: true
+      required: true,
     },
     countryCode: {
       type: String,
@@ -36,21 +57,21 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
     phone: {
       type: String,
       index: true,
-      default: ''
+      default: '',
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     isMfaEnabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     mfaType: {
       type: String,
       enum: ['EMAIL', 'PHONE'],
-      default: 'EMAIL'
-    }
+      default: 'EMAIL',
+    },
   },
   {
     timestamps: true,
@@ -58,5 +79,5 @@ const SuperAdminSchema = new Schema<SuperAdmin>(
   },
 );
 
-const SuperAdminModel = model<SuperAdmin>('super-admin', SuperAdminSchema)
-export {SuperAdminModel}
+const SuperAdminModel = model<SuperAdmin>('super-admin', SuperAdminSchema);
+export { SuperAdminModel };
