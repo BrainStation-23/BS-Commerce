@@ -4,14 +4,22 @@ import { userAPI } from 'APIs';
 import { Product } from '@bs-commerce/models';
 
 import ProductDetailsComponent from '@/modules/productPage';
+import Head from 'next/head';
 
 interface SingleProduct {
   product: Product;
 }
 
 const ProductDetails: NextPage<SingleProduct> = ({ product }) => {
+  const tags = product.tags?.join(', ');
+
   return (
     <>
+      <Head>
+        <meta name="item" content={product.info.name} />
+        <meta name="tags" content={tags} />
+        <meta name="description" content={product.info.shortDescription} />
+      </Head>
       <ProductDetailsComponent product={product}></ProductDetailsComponent>
     </>
   );
