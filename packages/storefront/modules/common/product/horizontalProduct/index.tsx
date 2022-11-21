@@ -19,7 +19,7 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
           pathname: `/product/${product.meta.friendlyPageName}`,
         }}
         passHref
-      >
+        legacyBehavior>
         <div className="group relative grid w-80 grid-cols-12 pb-2 md:pl-0 lg:pl-0">
           <div className="col-span-3 ">
             <div className="border-grey-500 rounded border-2 p-1">

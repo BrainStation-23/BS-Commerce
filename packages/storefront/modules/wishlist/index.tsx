@@ -79,7 +79,7 @@ const WishlistComponent: NextComponentType = () => {
             <p className="text-xl text-primary dark:text-dark_primary">
               {t('wishlist:empty_wishlist')}
             </p>
-            <Link href="/" passHref>
+            <Link href="/" passHref legacyBehavior>
               <div className="flex cursor-pointer flex-wrap justify-center gap-x-1 hover:text-primary dark:hover:text-dark_primary">
                 <p>{t('common:continue_shopping')}</p>
                 <CircledRightArrow height="h-6" width="h-6" />

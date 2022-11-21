@@ -67,61 +67,59 @@ const Header: NextComponentType = () => {
     return null;
   }
 
-  return (
-    <>
-      {/* Top portion */}
-      <header className="hidden justify-center border-b border-slate-200 py-2 lg:flex">
-        <div className="container flex justify-between px-4 text-sm">
-          <div className="space-x-2 h-5">
-            <Language />
-            <span>|</span>
-            <Currency />
-            <span>|</span>
-            <ThemeChanger />
-          </div>
-          <div className="space-x-3"></div>
+  return <>
+    {/* Top portion */}
+    <header className="hidden justify-center border-b border-slate-200 py-2 lg:flex">
+      <div className="container flex justify-between px-4 text-sm">
+        <div className="space-x-2 h-5">
+          <Language />
+          <span>|</span>
+          <Currency />
+          <span>|</span>
+          <ThemeChanger />
         </div>
-      </header>
-
-      {/* Middle portion */}
-      <div className="mb-2 flex justify-center py-4 lg:pt-8 lg:pb-6">
-        <div className="container flex items-center justify-between px-4">
-          <span className="text-3xl font-bold">
-            <Link href="/">
-              {/* <a>BS Commerce</a> */}
-              <a>{t('common:site_name')}</a>
-            </Link>
-          </span>
-          <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
-            <Search placeholder={t('common:search_placeholder')} />
-          </span>
-          <span className="hidden lg:inline-block">
-            <HeaderAccount />
-          </span>
-          {/* <span
-            className="border border-gray-700 p-1 lg:hidden"
-            onClick={() => setDrawer(!drawer)}
-            id="menuToggler"
-          >
-            <MenuIcon />
-          </span> */}
-        </div>
+        <div className="space-x-3"></div>
       </div>
+    </header>
 
-      {/* Navbar */}
-      <Navbar
-        drawer={drawer}
-        setShowAllCategory={setShowAllCategory}
-        showAllCategory={showAllCategory}
-        showUser={showUser}
-        stickyClass={stickyClass}
-        toggleOpen={toggleOpen}
-      />
+    {/* Middle portion */}
+    <div className="mb-2 flex justify-center py-4 lg:pt-8 lg:pb-6">
+      <div className="container flex items-center justify-between px-4">
+        <span className="text-3xl font-bold">
+          <Link href="/">
+            {/* <a>BS Commerce</a> */}
+            {t('common:site_name')}
+          </Link>
+        </span>
+        <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
+          <Search placeholder={t('common:search_placeholder')} />
+        </span>
+        <span className="hidden lg:inline-block">
+          <HeaderAccount />
+        </span>
+        {/* <span
+          className="border border-gray-700 p-1 lg:hidden"
+          onClick={() => setDrawer(!drawer)}
+          id="menuToggler"
+        >
+          <MenuIcon />
+        </span> */}
+      </div>
+    </div>
 
-      <Drawer drawer={drawer} closeDrawer={closeDrawer} />
-      <BottomNavigationBar openDrawer={openDrawer} />
-    </>
-  );
+    {/* Navbar */}
+    <Navbar
+      drawer={drawer}
+      setShowAllCategory={setShowAllCategory}
+      showAllCategory={showAllCategory}
+      showUser={showUser}
+      stickyClass={stickyClass}
+      toggleOpen={toggleOpen}
+    />
+
+    <Drawer drawer={drawer} closeDrawer={closeDrawer} />
+    <BottomNavigationBar openDrawer={openDrawer} />
+  </>;
 };
 
 export default Header;

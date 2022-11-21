@@ -60,7 +60,7 @@ const Language: React.FC = () => {
             onClick={() => languageOnclick(locale)}
           >
             <Link href={router.asPath} locale={locale}>
-              <a>{locale}</a>
+              {locale}
             </Link>
           </li>
         ))}

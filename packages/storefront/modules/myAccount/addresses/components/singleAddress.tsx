@@ -41,132 +41,133 @@ const SingleAddress: React.FC<Props> = ({ singleAddress }) => {
     ' - ' +
     singleAddress?.postCode;
 
-  return (
-    <>
-      <div
-        className="relative"
-        onMouseEnter={() => {
-          setShowDefault(true);
-        }}
-        onMouseLeave={() => {
-          setShowDefault(false);
-        }}
-      >
-        <div className="mt-3 text-sm md:w-3/4 lg:w-2/3">
-          {/* <div className="md:flex md:flex-row md:justify-between">
-                <p>
-                  {singleAddress?.firstName!} {singleAddress?.lastName!}
-                </p>
-                <label className="absolute top-0 right-0 inline-flex cursor-pointer items-center ">
-                  <input
-                    type="checkbox"
-                    value=""
-                    className="peer sr-only"
-                    checked={checked}
-                    onClick={() => {
-                      setChecked(!checked);
-                    }}
-                  />
-                  <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
-                  <span className="ml-3 hidden text-sm font-medium text-gray-900 dark:text-gray-300 md:block">
-                    Default
-                  </span>
-                </label> 
-              </div>
-              <p>{singleAddress?.addressLine1!}</p>
-              <p>{singleAddress?.state!}</p>
-              <p>{singleAddress?.postCode!}</p>
-              <p>{singleAddress?.phone!}</p>
-              <p>{singleAddress?.tag!}</p> */}
+  return <>
+    <div
+      className="relative"
+      onMouseEnter={() => {
+        setShowDefault(true);
+      }}
+      onMouseLeave={() => {
+        setShowDefault(false);
+      }}
+    >
+      <div className="mt-3 text-sm md:w-3/4 lg:w-2/3">
+        {/* <div className="md:flex md:flex-row md:justify-between">
+              <p>
+                {singleAddress?.firstName!} {singleAddress?.lastName!}
+              </p>
+              <label className="absolute top-0 right-0 inline-flex cursor-pointer items-center ">
+                <input
+                  type="checkbox"
+                  value=""
+                  className="peer sr-only"
+                  checked={checked}
+                  onClick={() => {
+                    setChecked(!checked);
+                  }}
+                />
+                <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+                <span className="ml-3 hidden text-sm font-medium text-gray-900 dark:text-gray-300 md:block">
+                  Default
+                </span>
+              </label> 
+            </div>
+            <p>{singleAddress?.addressLine1!}</p>
+            <p>{singleAddress?.state!}</p>
+            <p>{singleAddress?.postCode!}</p>
+            <p>{singleAddress?.phone!}</p>
+            <p>{singleAddress?.tag!}</p> */}
 
-          <div className="rounded-lg border p-6">
-            <div className="flex flex-wrap items-center justify-between">
-              <Link href={`/myAccount/${singleAddress?.id}`} passHref>
-                <a className="cursor-pointer">
-                  <div className="flex gap-x-3">
-                    <LocationIcon />
-                    <p>{singleAddress?.tag!}</p>
-                  </div>
-                </a>
-              </Link>
+        <div className="rounded-lg border p-6">
+          <div className="flex flex-wrap items-center justify-between">
+            <Link
+              href={`/myAccount/${singleAddress?.id}`}
+              passHref
+              className="cursor-pointer">
+
               <div className="flex gap-x-3">
-                <div
-                  className="cursor-pointer hover:text-blue-600"
-                  onClick={() => editButtonOnClick()}
-                >
-                  <PencilIcon />
-                </div>
-                <div
-                  className="cursor-pointer hover:text-blue-600"
-                  onClick={() => handleDeleteAddress(singleAddress?.id!)}
-                >
-                  <TrashIcon />
-                </div>
+                <LocationIcon />
+                <p>{singleAddress?.tag!}</p>
+              </div>
+
+            </Link>
+            <div className="flex gap-x-3">
+              <div
+                className="cursor-pointer hover:text-blue-600"
+                onClick={() => editButtonOnClick()}
+              >
+                <PencilIcon />
+              </div>
+              <div
+                className="cursor-pointer hover:text-blue-600"
+                onClick={() => handleDeleteAddress(singleAddress?.id!)}
+              >
+                <TrashIcon />
               </div>
             </div>
-            <p className="ml-0 md:ml-9">{address}</p>
           </div>
+          <p className="ml-0 md:ml-9">{address}</p>
         </div>
-
-        {showDefault && (
-          <label className="absolute top-8 right-0 inline-flex cursor-pointer items-center lg:right-32 ">
-            <input
-              type="checkbox"
-              value=""
-              className="peer sr-only"
-              checked={checked}
-              onChange={() => {
-                setChecked(!checked);
-              }}
-            />
-            <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600  dark:bg-gray-700 dark:peer-checked:bg-dark_primary"></div>
-            <span className="ml-3 hidden text-sm font-medium capitalize text-gray-900 dark:text-gray-300 md:block">
-              {t('common:default')}
-            </span>
-          </label>
-        )}
       </div>
 
-      {/* <div className="mt-5">
-            <span
-              className="cursor-pointer hover:text-blue-600"
-              onClick={() => editButtonOnClick()}
-            >
-              Edit{' '}
-            </span>
-            <span>| </span>
-            <span
-              className="cursor-pointer hover:text-blue-600"
-              onClick={() => handleDeleteAddress(singleAddress?.id!)}
-            >
-              Delete
-            </span>
-          </div> */}
-      {showEditAddress !== 'hidden' && (
-        <>
-          <div className={`${showEditAddress} w-full`}>
-            <hr className="mt-5 mb-2" />
-            <p className="my-5 font-bold">Edit Address</p>
-            <AddressForm
-              user={{
-                firstName: singleAddress?.firstName,
-                lastName: singleAddress?.lastName,
-                addressLine1: singleAddress?.addressLine1,
-                addressLine2: singleAddress?.addressLine2,
-                state: singleAddress?.state,
-                postCode: singleAddress?.postCode,
-                phone: singleAddress?.phone,
-                tag: singleAddress?.tag,
-              }}
-              id={singleAddress?.id}
-              cancelForm={editButtonOnClick}
-            />
-            <hr className="my-2" />
-          </div>
-        </>
+      {showDefault && (
+        <label className="absolute top-8 right-0 inline-flex cursor-pointer items-center lg:right-32 ">
+          <input
+            type="checkbox"
+            value=""
+            className="peer sr-only"
+            checked={checked}
+            onChange={() => {
+              setChecked(!checked);
+            }}
+          />
+          <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600  dark:bg-gray-700 dark:peer-checked:bg-dark_primary"></div>
+          <span className="ml-3 hidden text-sm font-medium capitalize text-gray-900 dark:text-gray-300 md:block">
+            {t('common:default')}
+          </span>
+        </label>
       )}
-    </>
-  );
+    </div>
+
+    {/* <div className="mt-5">
+          <span
+            className="cursor-pointer hover:text-blue-600"
+            onClick={() => editButtonOnClick()}
+          >
+            Edit{' '}
+          </span>
+          <span>| </span>
+          <span
+            className="cursor-pointer hover:text-blue-600"
+            onClick={() => handleDeleteAddress(singleAddress?.id!)}
+          >
+            Delete
+          </span>
+        </div> */}
+    {showEditAddress !== 'hidden' && (
+      <>
+        <div className={`${showEditAddress} w-full`}>
+          <hr className="mt-5 mb-2" />
+          <p className="my-5 font-bold">Edit Address</p>
+          <AddressForm
+            user={{
+              firstName: singleAddress?.firstName,
+              lastName: singleAddress?.lastName,
+              addressLine1: singleAddress?.addressLine1,
+              addressLine2: singleAddress?.addressLine2,
+              state: singleAddress?.state,
+              postCode: singleAddress?.postCode,
+              phone: singleAddress?.phone,
+              tag: singleAddress?.tag,
+            }}
+            id={singleAddress?.id}
+            cancelForm={editButtonOnClick}
+          />
+          <hr className="my-2" />
+        </div>
+      </>
+    )}
+  </>;
 };
 
 export default SingleAddress;

@@ -20,21 +20,25 @@ const Breadcrumb: React.FC<Props> = (props) => {
           return (
             <React.Fragment key={index}>
               {index === pathArray.length - 1 && (
-                <Link href={linkArray[index]} passHref>
-                  <a
-                    className="text-decoration-none text-sm text-gray-500 hover:text-primary dark:hover:text-dark_primary"
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    {path}
-                  </a>
-                </Link>
+                (<Link
+                  href={linkArray[index]}
+                  passHref
+                  className="text-decoration-none text-sm text-gray-500 hover:text-primary dark:hover:text-dark_primary"
+                  style={{ pointerEvents: 'none' }}>
+
+                  {path}
+
+                </Link>)
               )}
               {index < pathArray.length - 1 && (
-                <Link href={linkArray[index]} passHref>
-                  <a className="text-decoration-none text-sm text-black hover:text-primary dark:hover:text-dark_primary">
-                    {path}
-                  </a>
-                </Link>
+                (<Link
+                  href={linkArray[index]}
+                  passHref
+                  className="text-decoration-none text-sm text-black hover:text-primary dark:hover:text-dark_primary">
+
+                  {path}
+
+                </Link>)
               )}
               {index !== pathArray.length - 1 && <span>/</span>}
             </React.Fragment>

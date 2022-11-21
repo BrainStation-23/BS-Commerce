@@ -17,11 +17,11 @@ const CheckoutPageNavigation: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-wrap gap-2 text-xs">
       <div>
-        <Link href="/">{t('common:home')}</Link>
+        <Link href="/" legacyBehavior>{t('common:home')}</Link>
       </div>
       {' > '}
       <div className={cart ? 'font-bold' : 'font-normal'}>
-        <Link href="/cart">{t('checkout:cart')}</Link>
+        <Link href="/cart" legacyBehavior>{t('checkout:cart')}</Link>
       </div>
       {' > '}
       <div>
