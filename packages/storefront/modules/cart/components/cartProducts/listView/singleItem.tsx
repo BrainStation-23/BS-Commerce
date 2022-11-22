@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -52,6 +53,7 @@ const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
         <div className="relative mr-4">
           {data?.product?.photos![0]?.url ? (
             <Image
+              loader={myImageLoader}
               src={data?.product?.photos![0]?.url!}
               alt="product Image"
               width={100}

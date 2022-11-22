@@ -13,6 +13,8 @@ const nextConfig = {
     ];
   },
   images: {
+    loader: 'custom',
+    loaderFile: './image/loader.js',
     domains: [
       'cdn.shopify.com',
       'dummyjson.com',

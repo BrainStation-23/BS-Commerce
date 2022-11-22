@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 import type { NextPage } from 'next';
 
@@ -22,6 +23,7 @@ const PageNotFOund: NextPage = () => {
         <div className="flex flex-col items-center border-b py-16">
           <div className="mb-8">
             <Image
+              loader={myImageLoader}
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/CryingChip404_1024x1024.gif?v=1589620716"
               alt="Page not found!!"
               width={imageDimensions.width}

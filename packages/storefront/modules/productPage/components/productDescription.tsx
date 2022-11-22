@@ -2,7 +2,8 @@ import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Product } from '@bs-commerce/models';
@@ -112,7 +113,13 @@ const ProductDescription: React.FC<SingleProduct> = ({
               {t('product-details:size_chart')}
             </h4>
             <div className="flex justify-center">
-              <Image src={size} alt="size" width={400} height={400} />
+              <Image
+                loader={myImageLoader}
+                src={size}
+                alt="size"
+                width={400}
+                height={400}
+              />
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
 
@@ -9,6 +10,7 @@ const UnlimitedService: FC = () => {
       <div className="flex flex-wrap items-center">
         <div className="w-full pb-2 pr-2 md:w-1/2">
           <Image
+            loader={myImageLoader}
             src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/services4.jpg?v=1590916919"
             alt=""
             width={555}
