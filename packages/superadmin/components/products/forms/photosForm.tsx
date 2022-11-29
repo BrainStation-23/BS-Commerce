@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NextComponentType } from 'next';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 import FieldTemplate from '@/components/products/forms/fieldTemplate';
 
@@ -29,7 +30,7 @@ const PhotosForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-image-fill col-1  px-1"
                   style={{ fontSize: '25px' }}
@@ -48,6 +49,7 @@ const PhotosForm: NextComponentType = () => {
               {(document.getElementById('photosUrl') as HTMLInputElement)
                 ?.value ? (
                 <Image
+                  loader={myImageLoader}
                   className="col-2"
                   src={
                     (document.getElementById('photosUrl') as HTMLInputElement)

@@ -89,7 +89,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
               query: { id: data.id },
             }}
             passHref
-          >
+            legacyBehavior>
             <button className="btn btn-default btn-outline-info">
               <span>
                 <i className="bi bi-pencil me-2 align-middle"></i>
@@ -111,7 +111,7 @@ const BrandsList: FC<Props> = ({ brandsList, setBrands }) => {
               query: { id: data.id },
             }}
             passHref
-          >
+            legacyBehavior>
             <button className="btn btn-default btn-outline-primary">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>

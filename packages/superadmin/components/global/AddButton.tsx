@@ -11,8 +11,8 @@ const AddButton: FC<Props> = ({ title, link, icon = "bi bi-file-plus" }) => {
   return (
     <div className="btn btn-primary ">
       <i className={`${icon} me-2 align-middle`}></i>
-      <Link href={link}>
-        <a className="text-white text-decoration-none">{title}</a>
+      <Link href={link} className="text-white text-decoration-none">
+        {title}
       </Link>
     </div>
   );

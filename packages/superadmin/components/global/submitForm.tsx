@@ -67,10 +67,8 @@ const SubmitForm: FC<Props> = ({
           </div>
           <div className="d-flex align-items-center">
             <i className="bi bi-arrow-left-circle-fill"></i>
-            <Link href={link}>
-              <a className="fs-5 ms-1 text-decoration-none">
-                back to {title} list
-              </a>
+            <Link href={link} className="fs-5 ms-1 text-decoration-none">
+              back to{title}list
             </Link>
           </div>
         </div>

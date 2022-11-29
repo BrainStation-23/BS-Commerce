@@ -51,7 +51,7 @@ const LogIndex = () => {
       path: 'view',
       content: (data: any, key: any, index: any) => (
         <td>
-          <Link href={`/system/${data['id']}`} passHref>
+          <Link href={`/system/${data['id']}`} passHref legacyBehavior>
             <button style={{ border: 'none' }}>
               <span>
                 <i className="bi bi-eye"></i>

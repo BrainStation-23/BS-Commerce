@@ -5,7 +5,8 @@ import { userAPI } from '@/APIs';
 import Table from '@/components/global/table/table';
 import Pagination from '@/components/global/pagination';
 import { ProductListProps } from '@/components/products/models/index';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +55,7 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
         <td className="text-center align-middle">
           {data?.photos[0][key] && (
             <Image
+              loader={myImageLoader}
               src={`${data?.photos[0][key]}`}
               height={75}
               width={75}
@@ -128,6 +130,7 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
               query: { id: data?.[key] },
             }}
             passHref
+            legacyBehavior
           >
             <button className="btn btn-default btn-outline-info">
               <span>
@@ -150,6 +153,7 @@ const ProductsList: FC<ProductListProps> = ({ productsList, setProducts }) => {
               query: { id: data?.[key] },
             }}
             passHref
+            legacyBehavior
           >
             <button className="btn btn-default btn-outline-primary">
               <span>

@@ -97,7 +97,7 @@ const OrderList: FC<Props> = ({ orderListData }) => {
               query: { id: data?.orderId },
             }}
             passHref
-          >
+            legacyBehavior>
             <button className="btn btn-default">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>
