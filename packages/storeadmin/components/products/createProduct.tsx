@@ -133,133 +133,129 @@ const CreateProduct: NextComponentType = () => {
     if (manufacturerData.length === 0) loadAllManufacturers();
   });
 
-  return (
-    <>
-      <Formik
-        initialValues={{
-          productName: '',
-          ShortDescription: '',
-          FullDescription: '',
-          Sku: '',
-          OldPrice: 0,
-          Price: 0,
-          ProductCost: 0,
-          showOnHomePage: false,
-          includeInTopMenu: false,
-          allowToSelectPageSize: false,
-          published: false,
-          displayOrder: 1,
-          isFeatured: false,
-          publishDate: '',
-          tags: [],
-          brands: [],
-          keywords: '',
-          metaTitle: '',
-          metaDescription: '',
-          metaFriendlyPageName: '',
-          photosUrl: '',
-          photosID: '',
-          photosTitle: '',
-          displayOrderPhotos: '',
-          manufacturerId: '',
-          manufacturerName: '',
-        }}
-        onSubmit={(values, actions) => {
-          const info = {
-            name: values?.productName,
-            shortDescription: values?.ShortDescription,
-            fullDescription: values?.FullDescription,
-            sku: values?.Sku,
-            price: values?.Price,
-            oldPrice: values?.OldPrice,
-            cost: values?.ProductCost,
-            showOnHomePage: values?.showOnHomePage,
-            includeInTopMenu: values?.includeInTopMenu,
-            allowToSelectPageSize: values?.allowToSelectPageSize,
-            published: values?.published,
-            displayOrder: +values?.displayOrder,
-            isFeatured: values?.isFeatured,
-          };
-          const meta = {
-            keywords: values?.keywords?.split(' '),
-            title: values?.metaTitle,
-            description: values?.metaDescription,
-            friendlyPageName: values?.metaFriendlyPageName,
-          };
-          const photos = {
-            url: values?.photosUrl,
-            id: values?.photosID,
-            title: values?.photosTitle,
-            displayOrder: +`${values?.displayOrderPhotos}`,
-            alt: 'image',
-          };
-          const manufacturer = {
-            id: '',
-            name: values.manufacturerName,
-          };
-          const newData = {
-            info: info,
-            meta: meta,
-            tags: values.tags,
-            photos: [photos],
-            brands: values.brands,
-            manufacturer: manufacturer,
-            categories: printCat(),
-          };
-          handleSubmit(newData);
-          actions.setSubmitting(false);
-        }}
-        validationSchema={productSchema}
-      >
-        {(formikprops) => {
-          return (
-            <Form onSubmit={formikprops.handleSubmit}>
-              <div className="content-header clearfix pt-4">
-                <h1 className="float-start">
-                  Add a new product
-                  <span className="fs-5 p-3">
-                    <Link href="/Product">
-                      <a className="text-decoration-none">
-                        <i className="bi bi-arrow-left-circle-fill p-2" />
-                        back to product list
-                      </a>
-                    </Link>
-                  </span>
-                </h1>
-                <div className="float-end">
-                  <button
-                    type="submit"
-                    name="save"
-                    className="btn btn-primary m-1"
-                  >
-                    <i className="bi bi-save" />
-                    <p className="float-end mx-1 my-0">Save</p>
-                  </button>
-                </div>
+  return <>
+    <Formik
+      initialValues={{
+        productName: '',
+        ShortDescription: '',
+        FullDescription: '',
+        Sku: '',
+        OldPrice: 0,
+        Price: 0,
+        ProductCost: 0,
+        showOnHomePage: false,
+        includeInTopMenu: false,
+        allowToSelectPageSize: false,
+        published: false,
+        displayOrder: 1,
+        isFeatured: false,
+        publishDate: '',
+        tags: [],
+        brands: [],
+        keywords: '',
+        metaTitle: '',
+        metaDescription: '',
+        metaFriendlyPageName: '',
+        photosUrl: '',
+        photosID: '',
+        photosTitle: '',
+        displayOrderPhotos: '',
+        manufacturerId: '',
+        manufacturerName: '',
+      }}
+      onSubmit={(values, actions) => {
+        const info = {
+          name: values?.productName,
+          shortDescription: values?.ShortDescription,
+          fullDescription: values?.FullDescription,
+          sku: values?.Sku,
+          price: values?.Price,
+          oldPrice: values?.OldPrice,
+          cost: values?.ProductCost,
+          showOnHomePage: values?.showOnHomePage,
+          includeInTopMenu: values?.includeInTopMenu,
+          allowToSelectPageSize: values?.allowToSelectPageSize,
+          published: values?.published,
+          displayOrder: +values?.displayOrder,
+          isFeatured: values?.isFeatured,
+        };
+        const meta = {
+          keywords: values?.keywords?.split(' '),
+          title: values?.metaTitle,
+          description: values?.metaDescription,
+          friendlyPageName: values?.metaFriendlyPageName,
+        };
+        const photos = {
+          url: values?.photosUrl,
+          id: values?.photosID,
+          title: values?.photosTitle,
+          displayOrder: +`${values?.displayOrderPhotos}`,
+          alt: 'image',
+        };
+        const manufacturer = {
+          id: '',
+          name: values.manufacturerName,
+        };
+        const newData = {
+          info: info,
+          meta: meta,
+          tags: values.tags,
+          photos: [photos],
+          brands: values.brands,
+          manufacturer: manufacturer,
+          categories: printCat(),
+        };
+        handleSubmit(newData);
+        actions.setSubmitting(false);
+      }}
+      validationSchema={productSchema}
+    >
+      {(formikprops) => {
+        return (
+          <Form onSubmit={formikprops.handleSubmit}>
+            <div className="content-header clearfix pt-4">
+              <h1 className="float-start">
+                Add a new product
+                <span className="fs-5 p-3">
+                  <Link href="/Product" className="text-decoration-none">
+
+                    <i className="bi bi-arrow-left-circle-fill p-2" />back to product list
+                  </Link>
+                </span>
+              </h1>
+              <div className="float-end">
+                <button
+                  type="submit"
+                  name="save"
+                  className="btn btn-primary m-1"
+                >
+                  <i className="bi bi-save" />
+                  <p className="float-end mx-1 my-0">Save</p>
+                </button>
               </div>
-              <div className="mt-4">
-                <ProductInfoForm />
-                <MetaForm />
-                <PhotosForm />
-                <ProductManufacturers manufacturerData={manufacturerData} />
-                {/* <CategoryForm
-                  setCustomCategoryData={setCustomCategoryData}
-                  categoryData={customCategoryData}
-                  setFieldValue={formikprops.setFieldValue}
-                /> */}
-                <CategorySection
-                  categoryData={customCategoryData}
-                  categogiesFullList={categogiesFullList!}
-                  removeCategory={removeCategory}
-                  addCategory={addCategory}
-                />
-              </div>
-            </Form>
-          );
-        }}
-      </Formik>
-    </>
-  );
+            </div>
+            <div className="mt-4">
+              <ProductInfoForm />
+              <MetaForm />
+              <PhotosForm />
+              <ProductManufacturers manufacturerData={manufacturerData} />
+              {/* <CategoryForm
+                setCustomCategoryData={setCustomCategoryData}
+                categoryData={customCategoryData}
+                setFieldValue={formikprops.setFieldValue}
+              /> */}
+              <CategorySection
+                categoryData={customCategoryData}
+                categogiesFullList={categogiesFullList!}
+                removeCategory={removeCategory}
+                addCategory={addCategory}
+              />
+            </div>
+          </Form>
+        );
+      }}
+    </Formik>
+  </>;
 };
 
 export default CreateProduct;

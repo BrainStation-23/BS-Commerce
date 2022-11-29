@@ -30,91 +30,89 @@ const EditManufacturer = (props: any) => {
     const response = await userAPI.updateManufacturer(newData, id, router);
   };
 
-  return (
-    <>
-      {manufacturer ? (
-        <Formik
-          initialValues={{
-            name: manufacturer?.manufacturer?.name,
-            description: manufacturer?.manufacturer?.description,
-            picture: manufacturer?.manufacturer?.picture,
-            isPublished: manufacturer?.manufacturer?.isPublished,
-            displayOrder: manufacturer?.manufacturer?.displayOrder,
-            metaKeyword: manufacturer?.manufacturer?.seo?.metaKeyword,
-            metaDescription: manufacturer?.manufacturer?.seo?.metaDescription,
-            metaTitle: manufacturer?.manufacturer?.seo?.metaTitle,
-            seftn: manufacturer?.manufacturer?.seo?.SEFN,
-          }}
-          onSubmit={(values, actions) => {
-            const data = {
-              name: values.name,
-              description: values.description,
-              picture: values.picture,
-              isPublished: values.isPublished,
-              displayOrder: values.displayOrder,
-              metaKeyword: values.metaKeyword,
-              metaDescription: values.metaDescription,
-              metaTitle: values.metaTitle,
-              seftn: values.seftn,
-            };
-            handleSubmit(data);
-            actions.setSubmitting(false);
-          }}
-          validationSchema={manufactureSchema}
-        >
-          {(formikprops) => {
-            return (
-              <Form onSubmit={formikprops.handleSubmit}>
-                <div className="content-header clearfix mt-3">
-                  <h1 className="float-start">
-                    Edit Manufacturer details
-                    <span className="fs-5 p-3">
-                      <Link href="/Manufacturer/">
-                        <a className="text-decoration-none ">
-                          <i className="bi bi-arrow-left-circle-fill p-2" />
-                          <span style={{ fontSize: "14px" }}>
-                            Back to Manufacturer list
-                          </span>
-                        </a>
-                      </Link>
-                    </span>
-                  </h1>
-                  <div className="float-end">
-                    {/* <button
-                      type="button"
-                      className="btn btn-info float-left mx-2 my-auto "
-                      id="product-editor-settings"
-                      data-toggle="modal"
-                      data-target="#productsettings-window"
-                    >
-                      <i className="bi bi-gear-fill pt-1" />
-                      <p className="float-end mx-1 my-0">Settings</p>
-                    </button> */}
-                    <button
-                      type="submit"
-                      name="save"
-                      className="btn btn-primary m-1"
-                      // onClick={handleSubmit}
-                    >
-                      <i className="bi bi-save" />
-                      <p className="float-end mx-1 my-0">Save </p>
-                    </button>
-                  </div>
+  return <>
+    {manufacturer ? (
+      <Formik
+        initialValues={{
+          name: manufacturer?.manufacturer?.name,
+          description: manufacturer?.manufacturer?.description,
+          picture: manufacturer?.manufacturer?.picture,
+          isPublished: manufacturer?.manufacturer?.isPublished,
+          displayOrder: manufacturer?.manufacturer?.displayOrder,
+          metaKeyword: manufacturer?.manufacturer?.seo?.metaKeyword,
+          metaDescription: manufacturer?.manufacturer?.seo?.metaDescription,
+          metaTitle: manufacturer?.manufacturer?.seo?.metaTitle,
+          seftn: manufacturer?.manufacturer?.seo?.SEFN,
+        }}
+        onSubmit={(values, actions) => {
+          const data = {
+            name: values.name,
+            description: values.description,
+            picture: values.picture,
+            isPublished: values.isPublished,
+            displayOrder: values.displayOrder,
+            metaKeyword: values.metaKeyword,
+            metaDescription: values.metaDescription,
+            metaTitle: values.metaTitle,
+            seftn: values.seftn,
+          };
+          handleSubmit(data);
+          actions.setSubmitting(false);
+        }}
+        validationSchema={manufactureSchema}
+      >
+        {(formikprops) => {
+          return (
+            <Form onSubmit={formikprops.handleSubmit}>
+              <div className="content-header clearfix mt-3">
+                <h1 className="float-start">
+                  Edit Manufacturer details
+                  <span className="fs-5 p-3">
+                    <Link href="/Manufacturer/" className="text-decoration-none ">
+
+                      <i className="bi bi-arrow-left-circle-fill p-2" />
+                      <span style={{ fontSize: "14px" }}>
+                        Back to Manufacturer list
+                      </span>
+
+                    </Link>
+                  </span>
+                </h1>
+                <div className="float-end">
+                  {/* <button
+                    type="button"
+                    className="btn btn-info float-left mx-2 my-auto "
+                    id="product-editor-settings"
+                    data-toggle="modal"
+                    data-target="#productsettings-window"
+                  >
+                    <i className="bi bi-gear-fill pt-1" />
+                    <p className="float-end mx-1 my-0">Settings</p>
+                  </button> */}
+                  <button
+                    type="submit"
+                    name="save"
+                    className="btn btn-primary m-1"
+                    // onClick={handleSubmit}
+                  >
+                    <i className="bi bi-save" />
+                    <p className="float-end mx-1 my-0">Save </p>
+                  </button>
                 </div>
-                <div className="mt-4">
-                  <CreateNewManufacturer />
-                  <DisplayOrders />
-                  <SEO />
-                </div>
-              </Form>
-            );
-          }}
-        </Formik>
-      ) : (
-        ""
-      )}
-    </>
-  );
+              </div>
+              <div className="mt-4">
+                <CreateNewManufacturer />
+                <DisplayOrders />
+                <SEO />
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+    ) : (
+      ""
+    )}
+  </>;
 };
 
 export default EditManufacturer;

@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { NextComponentType } from 'next';
-import Image from 'next/image';
+import { useState } from "react";
+import { NextComponentType } from "next";
+import Image from "next/legacy/image";
+import myImageLoader from "image/loader";
 
-import FieldTemplate from '@/components/products/forms/fieldTemplate';
+import FieldTemplate from "@/components/products/forms/fieldTemplate";
 
 const PhotosForm: NextComponentType = () => {
-  const [btnToggler, setBtnToggler] = useState('bi-plus-lg');
+  const [btnToggler, setBtnToggler] = useState("bi-plus-lg");
 
   const toggleButton = () => {
-    if (btnToggler == 'bi-plus-lg') setBtnToggler('bi-dash');
-    else setBtnToggler('bi-plus-lg');
+    if (btnToggler == "bi-plus-lg") setBtnToggler("bi-dash");
+    else setBtnToggler("bi-plus-lg");
   };
   return (
     <>
@@ -29,10 +30,10 @@ const PhotosForm: NextComponentType = () => {
             onClick={() => toggleButton()}
           >
             <div className="card-title row align-items-center visible">
-              <div className="fs-5 col px-3 text-start">
+              <div className="fs-5 col text-start px-3">
                 <i
                   className="bi bi-image-fill col-1  px-1"
-                  style={{ fontSize: '25px' }}
+                  style={{ fontSize: "25px" }}
                 />
                 Photos
               </div>
@@ -45,12 +46,13 @@ const PhotosForm: NextComponentType = () => {
         <div className="collapse " id="photosTab">
           <div className="card-body">
             <div className="row justify-content-center">
-              {(document.getElementById('photosUrl') as HTMLInputElement)
+              {(document.getElementById("photosUrl") as HTMLInputElement)
                 ?.value ? (
                 <Image
+                  loader={myImageLoader}
                   className="col-2"
                   src={
-                    (document.getElementById('photosUrl') as HTMLInputElement)
+                    (document.getElementById("photosUrl") as HTMLInputElement)
                       ?.value
                   }
                   alt="No Image"
@@ -58,7 +60,7 @@ const PhotosForm: NextComponentType = () => {
                   height={130}
                 />
               ) : (
-                'No preview'
+                "No preview"
               )}
             </div>
             <FieldTemplate

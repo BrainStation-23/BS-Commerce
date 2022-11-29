@@ -20,7 +20,7 @@ const EditAddress = () => {
                         query: { id: id },
                     }}
                     passHref
-                >
+                    legacyBehavior>
                     <p style={{ cursor: "pointer", color: "#3c8dbc" }}>
                         <i className="bi bi-arrow-left-circle-fill"></i> back to
                         order details

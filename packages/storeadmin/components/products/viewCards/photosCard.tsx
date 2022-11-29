@@ -1,8 +1,9 @@
-import { FC } from 'react';
-import Image from 'next/image';
+import { FC } from "react";
+import Image from "next/legacy/image";
+import myImageLoader from "image/loader";
 
-import { Product } from '@bs-commerce/models';
-import SingleView from '@/components/products/singleView';
+import { Product } from "@bs-commerce/models";
+import SingleView from "@/components/products/singleView";
 
 const PhotosCard: FC<{
   product: Product;
@@ -20,9 +21,9 @@ const PhotosCard: FC<{
           <div className="card-title row align-items-center  ps-2 pt-2">
             <i
               className="bi bi-image-fill col-1"
-              style={{ fontSize: '25px' }}
+              style={{ fontSize: "25px" }}
             />
-            <div className="fs-5 col px-3 text-start">Photos</div>
+            <div className="fs-5 col text-start px-3">Photos</div>
           </div>
         </div>
         <div className="" id="metaTab">
@@ -30,6 +31,7 @@ const PhotosCard: FC<{
             <div className="row justify-content-center">
               {product?.photos![0]?.url ? (
                 <Image
+                  loader={myImageLoader}
                   className="col-2"
                   src={product?.photos[0]?.url}
                   alt="No Image"
@@ -37,7 +39,7 @@ const PhotosCard: FC<{
                   height={150}
                 />
               ) : (
-                'Not a valid image!!'
+                "Not a valid image!!"
               )}
             </div>
             <SingleView label="URL" value={product?.photos![0]?.url} />

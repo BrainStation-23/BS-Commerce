@@ -4,7 +4,8 @@ import Table from "../../global/table/table";
 import Pagination from "../../global/pagination";
 import { userAPI } from "../../../APIs";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import myImageLoader from "image/loader";
 
 interface Props {
   manufactureData: any;
@@ -57,7 +58,13 @@ const ManufactureList: FC<Props> = ({
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
           {data.picture.length > 10 ? (
-            <Image src={data.picture} height={75} width={75} alt="..." />
+            <Image
+              loader={myImageLoader}
+              src={data.picture}
+              height={75}
+              width={75}
+              alt="..."
+            />
           ) : (
             "Image Problem"
           )}
@@ -100,6 +107,7 @@ const ManufactureList: FC<Props> = ({
               query: { id: data?.id },
             }}
             passHref
+            legacyBehavior
           >
             <button className="btn btn-outline-info">
               <span>
@@ -122,6 +130,7 @@ const ManufactureList: FC<Props> = ({
               query: { id: data?.[key] },
             }}
             passHref
+            legacyBehavior
           >
             <button className="btn btn-outline-success">
               <span>

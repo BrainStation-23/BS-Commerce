@@ -10,6 +10,8 @@ const nextConfig = {
     ];
   },
   images: {
+    loader: "custom",
+    loaderFile: "./image/loader.js",
     domains: [
       "admin-demo.nopcommerce.com",
       "cdn.shopify.com",
