@@ -20,6 +20,7 @@ import { StoreBranchModule } from 'src/modules/tmp-store-branch/StoreBranch.rest
 import { SuperAdminRoleModule } from 'src/modules/super-admin-role/super-admin-role.rest.module';
 import { StoreAdminModule } from 'src/modules/store-admin/store-admin.rest.module';
 import { StoreAdminRoleModule } from 'src/modules/store-admin-role/store-admin-role.rest.module';
+import { PaymentModule } from 'src/modules/payment/payment.rest.module';
 
 export const ResolveRestModule = () => {
   return [
@@ -46,5 +47,6 @@ export const ResolveRestModule = () => {
     SuperAdminRoleModule,
     StoreAdminRoleModule,
     StoreAdminModule,
+    PaymentModule
   ];
 };
