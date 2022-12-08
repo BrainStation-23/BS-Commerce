@@ -31,6 +31,7 @@ class PluginManager {
 
   private constructor() {
     this.loadPlugins();
+    //this.installPlugin('');
   }
 
   public static getInstance(): PluginManager {
@@ -43,15 +44,17 @@ class PluginManager {
   public async loadPlugins(): Promise<any> {
     let plugins;
     try{
-      plugins = await PluginModel.find({loadable: true}).lean().exec();
+      plugins = await PluginModel.find({isLoadable: true}).lean().exec();
     }catch(err){
       console.log(err);
       return null;
     }
-
+    //console.log(plugins)
     for await (const plugin of plugins) {
       this.loadPlugin(plugin);
     }
+
+    //console.log(this.pluginList)
   }
 
   async loadPlugin(plugin: Plugin) {
@@ -77,6 +80,7 @@ class PluginManager {
     const pluginEnv = {};
     //const plugin = await import(`./extension-plugins/${pluginPath}/index.js`) as (new () => any);
     const { config } = await import(`./extension-plugins/${pluginPath}/config.js`) as { config: PluginConfig };
+    //const { config } = await import(`./extension-plugins/payment/sslcommerz/config.js`) as { config: PluginConfig };
     const { name, env } = config;
     const id = randomUUID();
 
@@ -133,6 +137,7 @@ class PluginManager {
     extensibleFor: PluginExtinsibleFor,
     pluginName: string,
   ) {
+    //console.log(this.pluginList);
     try {
       if (!this.pluginList[extensibleFor][pluginName]) {
         throw new Error(`${extensibleFor}/${pluginName} Plugin not found`);

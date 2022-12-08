@@ -7,7 +7,7 @@ import { pluginManager } from './plugin-system/manager';
 
 @Module({
   imports: [
-    ...pluginManager.getModulePlugins(),
+    //...pluginManager.getModulePlugins(),
     HelperModule,
     ...(coreConfig.api === 'GRAPHQL'
       ? ResolveGraphqlModule()

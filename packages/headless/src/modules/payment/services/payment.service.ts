@@ -14,8 +14,20 @@ export class PaymentService {
         if (!paymentMethod) {
             return 'Payment method not found';
         }
-        const initResult = await paymentMethod.initiatePayment('1', 'abc', 100, 'BD');
-        console.log('Payment init response', JSON.stringify(initResult, null, 2));
+        const customerInfo = {
+            cus_name: "tahsin",
+            cus_email: "safasadaf3@gmail.com",
+            cus_phone: "01742593730",
+            cus_add1: "Dhaka",
+            cus_city: "Dhaka",
+            cus_country: "bangladesh",
+            shipping_method: "NO",
+            product_name: "none",
+            product_category: "none",
+            product_profile: "general",
+        }
+        const initResult = await paymentMethod.initiatePayment('1', customerInfo, 100, 'BDT');
+    
         //save to db initResult.paymentInfo;
         return initResult.gatewayPageUrl;
     }

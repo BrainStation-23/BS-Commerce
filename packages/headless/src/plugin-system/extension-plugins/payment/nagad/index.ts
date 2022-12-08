@@ -3,11 +3,11 @@ import { IPNStatus, PaymentMethod } from "src/plugin-system/types/payment/index.
 type PaymentInfo = {
     initiator: 'BS_COMMERCE_NAGAD_PLUGIN';
     initiatedAt: Date;
-    customerId: string;
+    customerInfo: Record<string, any>;
     orderId: string;
     randomId: number;
     amount: number;
-    currency: 'BD'
+    currency: 'BDT'
 };
 
 class BkashPayment extends PaymentMethod<PaymentInfo> {
@@ -27,7 +27,7 @@ class BkashPayment extends PaymentMethod<PaymentInfo> {
         console.log(this.config);
     }
 
-    async initiatePayment(orderId: string, customerId: string, amount: number, currency: 'BD'): Promise<{ gatewayPageUrl: string; paymentInfo: PaymentInfo }> {
+    async initiatePayment(orderId: string, customerInfo: Record<string, any>, amount: number, currency: 'BDT'): Promise<{ gatewayPageUrl: string; paymentInfo: PaymentInfo }> {
         // call api to initiate payment.
 
         console.log('Nagad payment initiating');
@@ -35,7 +35,7 @@ class BkashPayment extends PaymentMethod<PaymentInfo> {
         const paymentInfo: PaymentInfo = {
             initiator: 'BS_COMMERCE_NAGAD_PLUGIN',
             initiatedAt: new Date(),
-            customerId,
+            customerInfo,
             orderId,
             randomId: Math.random(),
             amount,
@@ -43,7 +43,7 @@ class BkashPayment extends PaymentMethod<PaymentInfo> {
         };
 
         return ({
-            gatewayPageUrl: `https://nagad.payment.init/${orderId}/${customerId}`,
+            gatewayPageUrl: `https://nagad.payment.init/${orderId}/${customerInfo}`,//change the customer info
             paymentInfo
         });
     }
