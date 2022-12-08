@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
+
 import PageContainer from '@/modules/common/layout/pageContainer';
 
 import { storiesBody } from 'APIs/utils/types';
@@ -22,13 +22,7 @@ const ThreeStoriesCard: FC<Props> = ({ leftStory, threeStoriesList }) => {
               key={item.id}
             >
               <div className="w-full text-center">
-                <Image
-                  loader={myImageLoader}
-                  alt=""
-                  src={item.image}
-                  height={227}
-                  width={416}
-                />
+                <Image alt="" src={item.image} height={227} width={416} />
               </div>
               {/* if story description need to show left align then leftStory props must be true */}
               <div className={leftStory ? 'pt-5' : 'pt-5 text-center'}>

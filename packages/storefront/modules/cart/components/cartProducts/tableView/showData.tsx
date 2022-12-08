@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import _ from 'lodash';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -58,7 +57,6 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         {' '}
         {data?.product?.photos![0]?.url ? (
           <Image
-            loader={myImageLoader}
             src={data?.product?.photos![0]?.url!}
             alt="product Image"
             width={100}

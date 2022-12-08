@@ -1,7 +1,7 @@
 import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
+
 import Link from 'next/link';
 import ButtonPrimary from '../buttons/buttonPrimary';
 import CheckIcon from '../icons/checkIcon';
@@ -19,7 +19,6 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
         <div className="col-span-1">
           {product?.photos![0].url ? (
             <Image
-              loader={myImageLoader}
               src={product?.photos![0].url!}
               alt={product?.photos![0].alt || 'product image'}
               width={80}

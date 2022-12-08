@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import { NextComponentType } from 'next';

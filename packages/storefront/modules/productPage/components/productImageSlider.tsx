@@ -3,8 +3,7 @@ import { Navigation, Thumbs } from 'swiper';
 import SwiperClass from 'swiper/types/swiper-class';
 
 import { useState, FC } from 'react';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
 
 import { Product, ProductPhoto } from '@bs-commerce/models';
 interface SingleProduct {
@@ -33,12 +32,11 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
           <SwiperSlide key={index}>
             <div className="mb-5">
               <Image
-                loader={myImageLoader}
                 src={item.url!}
                 alt="product images"
                 quality={100}
-                width={600}
-                height={600}
+                width={400}
+                height={400}
               />
             </div>
             {Math.abs(product?.info.oldPrice - product?.info.price) > 0 ? (
@@ -77,7 +75,6 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
             <SwiperSlide key={index}>
               <div className="">
                 <Image
-                  loader={myImageLoader}
                   src={item.url!}
                   alt="product images"
                   width={600}

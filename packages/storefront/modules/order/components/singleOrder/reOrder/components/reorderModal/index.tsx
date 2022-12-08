@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'store/hooks/index';
 // import { CustomerProduct, Product, WishlistProduct } from 'models';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
+
 import Link from 'next/link';
 import { setCartModalState } from 'store/slices/modalSlice';
 import { IOrderProduct } from '@bs-commerce/models';
@@ -85,7 +85,6 @@ const ReorderModal: React.FC<Props> = ({
                     <div key={product.productId}>
                       <div className="flex py-2">
                         <Image
-                          loader={myImageLoader}
                           src={product?.photos![0].url!}
                           alt={product?.photos![0].alt || 'product image'}
                           width={80}

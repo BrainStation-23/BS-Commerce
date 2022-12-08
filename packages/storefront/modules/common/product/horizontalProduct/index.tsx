@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/legacy/image';
-import myImageLoader from 'image/loader';
+import Image from 'next/image';
+
 import { FC, useState } from 'react';
 import { CustomerProduct } from '@bs-commerce/models';
 import ProductInfo from '@/modules/common/product/horizontalProduct/components/horizontalProductInfo';
@@ -24,14 +24,13 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
       >
         <div className="group relative grid w-80 grid-cols-12 pb-2 md:pl-0 lg:pl-0">
           <div className="col-span-3 ">
-            <div className="border-grey-500 rounded border-2 p-1">
+            <div className="flex justify-center rounded bg-gray-200 p-1">
               <Image
-                loader={myImageLoader}
                 src={product.photos![0].url!}
-                alt={product.photos![0].alt}
-                height={120}
-                width={120}
-                className="bg-red rounded border-8 border-sky-500 p-1"
+                alt={product?.info?.name}
+                height={100}
+                width={100}
+                className="h-16 w-20"
               />
             </div>
           </div>
