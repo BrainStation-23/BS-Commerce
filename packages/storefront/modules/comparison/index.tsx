@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
@@ -135,6 +136,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                     <td className="border-r p-5 align-top font-normal">
                                       <div>
                                         <Image
+                loader={myImageLoader}
                                           src={
                                             product?.productDetails?.photos![0]!
                                           }

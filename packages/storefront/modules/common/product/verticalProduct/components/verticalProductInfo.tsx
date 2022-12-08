@@ -14,7 +14,7 @@ const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
 
   return (
     <div className="py-4 text-center">
-      <Link href="/product/1" passHref legacyBehavior>
+      <Link href="/product/1" passHref>
         <div className="text-base text-inherit text-gray-600">
           {product?.info.name}
         </div>

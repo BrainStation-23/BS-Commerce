@@ -3,6 +3,7 @@ import React from 'react';
 import { NextComponentType } from 'next';
 import { useAppSelector } from 'store/hooks/index';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 const CartProductList: NextComponentType = () => {
   const cartData = useAppSelector(
@@ -32,6 +33,7 @@ const CartProductList: NextComponentType = () => {
                     <div className="w-20 rounded-lg border">
                       {data?.product?.photos![0]?.url ? (
                         <Image
+                loader={myImageLoader}
                           src={data?.product?.photos![0]?.url!}
                           alt={data?.product?.photos![0]?.alt!}
                           width={75}

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,6 +13,7 @@ const ImageWithDescription: React.FC = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="m-auto mb-5 w-full">
           <Image
+                loader={myImageLoader}
             src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about1_71e1f591-e3d4-456e-be12-03e0afed0c73.jpg?v=1588135206"
             width={1504}
             height={580}
@@ -28,6 +30,7 @@ const ImageWithDescription: React.FC = () => {
           consectetuer, sociosqu phasellus risus urna aliquam, ornare.
         </p>
         <Image
+                loader={myImageLoader}
           src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about-us-signature_medium.png?v=1588134272"
           width={228}
           height={129}

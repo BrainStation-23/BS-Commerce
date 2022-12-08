@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,7 +13,8 @@ const SinglSlide = (props: { product: productInterface }) => {
   return (
     <div className="grid h-72 items-center dark:text-black sm:h-72 md:h-72 lg:h-80 xl:h-96 2xl:h-96">
       <div className="absolute inset-0 scale-125 md:inset-0 md:scale-125 lg:scale-100 ">
-        <Image src={image} alt="..." layout="fill" />
+        <Image
+                loader={myImageLoader} src={image} alt="..." layout="fill" />
       </div>
       <div className="container z-10 mx-auto text-center font-[sans-serif] md:pl-8 md:text-left lg:pt-4 xl:pl-4 ">
         <h1 className=" text-2xl font-bold sm:text-2xl md:text-3xl lg:text-left lg:text-4xl xl:text-5xl">

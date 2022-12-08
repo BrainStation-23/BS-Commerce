@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import myImageLoader from 'image/loader';
 
 import React from 'react';
 interface props {
@@ -8,7 +9,15 @@ interface props {
   alt: string;
 }
 const Picture = ({ height, width, src, alt }: props) => {
-  return <Image src={src} alt={alt} width={width} height={height} />;
+  return (
+    <Image
+      loader={myImageLoader}
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+    />
+  );
 };
 
 export default Picture;
