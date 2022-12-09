@@ -4,7 +4,7 @@ import { useState } from 'react';
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(false);
-  const currentTheme = localStorage.getItem('theme');
+  const currentTheme = localStorage.getItem('theme') || 'light';
 
   return (
     <>
