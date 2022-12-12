@@ -91,7 +91,6 @@ const ReorderModal: React.FC<Props> = ({
                           alt={product?.photos![0].alt || 'product image'}
                           width={80}
                           height={80}
-                          layout="fixed"
                         />
                         <span className="v-screen flex items-center justify-center pl-2">
                           {product.name}

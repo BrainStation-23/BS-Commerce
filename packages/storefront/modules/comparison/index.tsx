@@ -145,7 +145,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           }
                                           height={100}
                                           width={100}
-                                          layout="fixed"
                                         />
                                         <br />
                                         {product?.productDetails?.info

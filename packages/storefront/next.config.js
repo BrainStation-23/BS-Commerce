@@ -15,6 +15,7 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './image/loader.js',
+    unoptimized: true,
     // domains: [
     //   'cdn.shopify.com',
     //   'dummyjson.com',

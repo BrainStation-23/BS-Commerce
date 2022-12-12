@@ -58,7 +58,6 @@ const SingleItem: React.FC<Props> = ({ data, setTotal, total }: Props) => {
               alt="product Image"
               width={100}
               height={90}
-              //layout="fixed"
             />
           ) : (
             'Problem Rendering Image'
