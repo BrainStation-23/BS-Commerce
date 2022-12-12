@@ -10,6 +10,14 @@ interface SingleProduct {
 const ProductInfo = (props: SingleProduct) => {
   const { product } = props;
   const currency = useAppSelector((state) => state.persistedReducer.currency);
+  const truncateString = (productName: string) => {
+    let truncatedString = productName;
+    if(productName.length >= 24) {
+      truncatedString = productName.slice(0, 22);
+      truncatedString+="...";
+    }
+    return truncatedString;
+  }
 
   return (
     <div>
@@ -18,7 +26,7 @@ const ProductInfo = (props: SingleProduct) => {
           className="text-base text-inherit text-gray-600"
           id="searchProductName"
         >
-          {product?.info?.name}
+          {truncateString(product?.info?.name)}
         </div>
         <p className="py-2 font-['arial'] text-xs text-gray-600">
           {product?.tags![0]}

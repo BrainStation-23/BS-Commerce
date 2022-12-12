@@ -27,7 +27,7 @@ const Language: React.FC = () => {
     onMouseEnter={() => setOpen(true)}
     >
       <button
-        className="inline-flex items-center "
+        className="inline-flex items-center"
         onClick={() => setOpen(!open)}
       >
         <span className="mr-1">{router.locale}</span>
@@ -45,7 +45,7 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
+        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white px-4 py-1 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
           open ? 'opacity-100' : 'h-0 opacity-0 hidden'
         }`}
       >
@@ -55,7 +55,7 @@ const Language: React.FC = () => {
             className={`py-1 ${
               locale === router.locale
                 ? 'text-primary dark:text-dark_primary'
-                : ''
+                : 'hover:text-primary dark:hover:text-dark_primary'
             }`}
             onClick={() => languageOnclick(locale)}
           >

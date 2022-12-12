@@ -11,12 +11,21 @@ interface SingleProduct {
 const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
   const currency = useAppSelector((state) => state.persistedReducer.currency);
+  
+  const truncateString = (productName: string) => {
+    let truncatedString = productName;
+    if(productName.length >= 24) {
+      truncatedString = productName.slice(0, 22);
+    }
+    truncatedString+="...";
+    return truncatedString;
+  }
 
   return (
     <div className="py-4 text-center">
       <Link href="/product/1" passHref>
         <div className="text-base text-inherit text-gray-600">
-          {product?.info.name}
+          {truncateString(product?.info.name)}
         </div>
       </Link>
       <p className="m-1 font-['arial'] text-sm text-gray-600 dark:text-dark_text">

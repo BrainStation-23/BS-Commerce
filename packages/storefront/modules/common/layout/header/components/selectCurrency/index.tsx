@@ -67,7 +67,7 @@ const Currency: React.FC = () => {
             className={`cursor-pointer py-1 ${
               currency.abbv === currencyName
                 ? 'text-primary dark:text-dark_primary'
-                : ''
+                : 'hover:text-primary dark:hover:text-dark_primary'
             }`}
             onClick={() => currencyOnclick(currency.abbv)}
           >
