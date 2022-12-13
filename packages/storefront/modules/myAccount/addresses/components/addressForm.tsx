@@ -1,16 +1,15 @@
-import { FC } from 'react';
-import { toast } from 'react-toastify';
 import { Field, Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
+import { FC } from 'react';
+import { toast } from 'react-toastify';
 
-import { userAPI } from 'APIs';
-import { Customer, CustomerAddress } from '@bs-commerce/models';
-import { useAppDispatch, useAppSelector } from 'store/hooks/index';
-import { storeCustomerDetails } from 'store/slices/userSlice';
-import { storeAddresses } from 'store/slices/customerAddressSlice';
-import TextButton from '@/modules/common/buttons/textButton';
-import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
 import ButtonSecondary from '@/modules/common/buttons/buttonSecondary';
+import TextButton from '@/modules/common/buttons/textButton';
+import { CustomerAddress } from '@bs-commerce/models';
+import { userAPI } from 'APIs';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { storeAddresses } from 'store/slices/customerAddressSlice';
+import { storeCustomerDetails } from 'store/slices/userSlice';
 interface props {
   user?: CustomerAddress;
   cancelForm: Function;

@@ -20,7 +20,7 @@ const VerticalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
           <div className="duration-0 group cursor-pointer transition hover:bg-white hover:duration-700 dark:hover:bg-dark_bg">
             <div className="max-w-sm overflow-hidden rounded">
               <div className="relative ">
-                <div className="z-0 rounded bg-gray-200 bg-cover bg-center p-1 pb-0">
+                <div className="z-0 mx-1 rounded bg-gray-200 bg-cover bg-center p-1 pb-0">
                   <Picture
                     height={212}
                     width={212}

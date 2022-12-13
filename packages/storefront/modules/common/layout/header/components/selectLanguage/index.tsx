@@ -33,7 +33,7 @@ const Language: React.FC = () => {
         onClick={() => setOpen(!open)}
       >
         <span className="mr-1">
-          {router.locale === 'en' ? 'Englist' : 'Bengali'}
+          {router.locale === 'en' ? 'English' : 'Bengali'}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

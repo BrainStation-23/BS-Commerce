@@ -21,7 +21,7 @@ const ButtonPrimary: React.FC<Props> = ({
       {onClickFunction ? (
         <button
           id={id}
-          className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
+          className={`w-full bg-slate-300 p-2 transition-all duration-500 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
           onClick={() => {
             onClickFunction && onClickFunction();
           }}
@@ -33,7 +33,7 @@ const ButtonPrimary: React.FC<Props> = ({
       ) : (
         <button
           id={id}
-          className={`w-full bg-slate-300 p-2 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
+          className={`w-full bg-slate-300 p-2 transition-all duration-500 hover:bg-primary hover:text-white dark:text-black dark:hover:bg-dark_primary dark:hover:text-white ${className}`}
           disabled={disabled}
           type={`${type ? type : 'button'}`}
         >

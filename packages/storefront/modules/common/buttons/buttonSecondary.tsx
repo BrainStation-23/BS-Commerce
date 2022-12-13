@@ -20,7 +20,7 @@ const ButtonSecondary: React.FC<Props> = ({
 }) => {
   return (
     <button
-      className={`my-1 ml-2 rounded bg-primary px-2 text-white hover:bg-gray-600 focus:outline-none dark:bg-dark_primary dark:hover:bg-slate-300 dark:hover:text-dark_bg ${className}`}
+      className={`my-1 ml-2 rounded bg-primary px-2 text-white transition-all duration-500 hover:bg-gray-600 focus:outline-none dark:bg-dark_primary dark:hover:bg-slate-300 dark:hover:text-dark_bg ${className}`}
       onClick={() => {
         onClickFunction && onClickFunction();
       }}

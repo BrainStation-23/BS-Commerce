@@ -1,22 +1,22 @@
+import myImageLoader from 'image/loader';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
-import Image from 'next/image';
-import myImageLoader from 'image/loader'
 
 import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
 
+import { ICompareItems } from '@bs-commerce/models';
+import { userAPI } from 'APIs';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
-import { setModalState } from 'store/slices/modalSlice';
 import {
   deleteComparedProductPublic,
   storeCompare,
 } from 'store/slices/compareSlice';
-import { userAPI } from 'APIs';
-import { ICompareItems } from '@bs-commerce/models';
-import CrossIcon from '../common/icons/crossIcon';
+import { setModalState } from 'store/slices/modalSlice';
 import ElementButton from '../common/buttons/elementButton';
 import TextButton from '../common/buttons/textButton';
+import CrossIcon from '../common/icons/crossIcon';
 
 interface Props {
   setModal: boolean;
@@ -136,7 +136,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                     <td className="border-r p-5 align-top font-normal">
                                       <div>
                                         <Image
-                loader={myImageLoader}
+                                          loader={myImageLoader}
                                           src={
                                             product?.productDetails?.photos![0]!
                                           }

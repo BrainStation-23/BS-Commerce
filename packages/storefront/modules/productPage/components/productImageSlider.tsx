@@ -25,8 +25,9 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
         spaceBetween={10}
         navigation={true}
         modules={[Navigation, Thumbs]}
-        grabCursor={true}
-        thumbs={{ swiper: activeThumb }}
+        thumbs={{
+          swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
+        }}
         className="product-images-slider"
       >
         {product?.photos?.map((item: ProductPhoto, index: number) => (
@@ -65,7 +66,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
 
       <div className="ml-8 w-4/5 md:ml-16">
         <Swiper
-          onSwiper={() => setActiveThumb}
+          onSwiper={setActiveThumb}
           loop={true}
           navigation={true}
           spaceBetween={10}
