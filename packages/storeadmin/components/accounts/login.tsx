@@ -58,7 +58,7 @@ const Login: React.FC = () => {
                     htmlFor="email"
                     className="col-lg-2 col-form-label text-lg-end text-center"
                   >
-                    Email:
+                    Email: &nbsp;
                   </label>
                   <div className="col-lg-10">
                     <Field
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                     htmlFor="password"
                     className="col-lg-2 col-form-label text-lg-end text-center"
                   >
-                    Password:
+                    Password: &nbsp;
                   </label>
                   <div className="col-lg-10">
                     <Field
