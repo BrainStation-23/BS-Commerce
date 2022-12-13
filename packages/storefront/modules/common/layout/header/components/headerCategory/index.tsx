@@ -31,6 +31,7 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
     >
       <div className="flex cursor-pointer flex-row items-center justify-between py-1 px-3 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary">
         <Link
+          //as={`/collections/${category.name}`}
           href={{
             pathname: `/collections/${category.name}`,
             query: {
@@ -38,9 +39,8 @@ const HeaderCategory: React.FC<Props> = ({ category }: Props) => {
               name: category.name,
             },
           }}
-          //as={`/collections/${category.name}`}
-        >
-          <a className="">{category.name}</a>
+          className="">
+          {category.name}
         </Link>
 
         <span className="hidden lg:block">

@@ -11,37 +11,33 @@ const ViewProduct: React.FC<ViewProductInterface> = (
 ) => {
   const { product } = props;
 
-  return (
-    <>
-      {product ? (
-        <div>
-          <div className="content-header clearfix mt-3">
-            <h1 className="float-start">
-              View product details
-              <span className="fs-5 p-3">
-                <Link href="/Product">
-                  <a className="text-decoration-none ">
-                    <i className="bi bi-arrow-left-circle-fill p-2" />
-                    Back to product list
-                  </a>
-                </Link>
-              </span>
-            </h1>
-          </div>
+  return <>
+    {product ? (
+      <div>
+        <div className="content-header clearfix mt-3">
+          <h1 className="float-start">
+            View product details
+            <span className="fs-5 p-3">
+              <Link href="/Product" className="text-decoration-none ">
 
-          <div className="mt-4">
-            <ProductInfoCard product={product} />
-            <MetaCard product={product} />
-            <PhotosCard product={product} />
-            <ManufacturerCard product={product} />
-            <CaegoryCard categories={product.categories} />
-          </div>
+                <i className="bi bi-arrow-left-circle-fill p-2" />Back to product list
+              </Link>
+            </span>
+          </h1>
         </div>
-      ) : (
-        ''
-      )}
-    </>
-  );
+
+        <div className="mt-4">
+          <ProductInfoCard product={product} />
+          <MetaCard product={product} />
+          <PhotosCard product={product} />
+          <ManufacturerCard product={product} />
+          <CaegoryCard categories={product.categories} />
+        </div>
+      </div>
+    ) : (
+      ''
+    )}
+  </>;
 };
 
 export default ViewProduct;

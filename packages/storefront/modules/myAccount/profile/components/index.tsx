@@ -85,113 +85,111 @@ const Profile: React.FC = () => {
   };
   const { t } = useTranslation();
 
-  return (
-    <>
-      <Breadcrumb
-        title={t('common:account')}
-        pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
-        linkArray={['/', '/myAccount']}
-      />
-      <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-dark_text">
-        <div className="border-b-2">
-          <span className="text-3xl font-bold">
-            {t('myAccount:my_account')}
+  return <>
+    <Breadcrumb
+      title={t('common:account')}
+      pathArray={[`${t('common:home')}`, `${t('common:account')}`]}
+      linkArray={['/', '/myAccount']}
+    />
+    <div className="container mx-auto my-24 px-5 text-gray-800 dark:text-dark_text">
+      <div className="border-b-2">
+        <span className="text-3xl font-bold">
+          {t('myAccount:my_account')}
+        </span>
+        <Link href="/" passHref legacyBehavior>
+          <span className="float-right text-xl font-bold">
+            <a
+              onClick={() => handleLogout()}
+              className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
+            >
+              {t('common:logout')}
+            </a>
           </span>
-          <Link href="/" passHref>
-            <span className="float-right text-xl font-bold">
-              <a
-                onClick={() => handleLogout()}
-                className="cursor-pointer transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary"
-              >
-                {t('common:logout')}
-              </a>
-            </span>
-          </Link>
-        </div>
+        </Link>
+      </div>
 
-        <Formik
-          initialValues={{
-            name: userData.name,
-            //firstName: userData.firstName,
-            //lastName: userData.lastName,
-            phone: userData.phone,
-            email: userData.email,
-          }}
-          validationSchema={CustomerSchema}
-          onSubmit={(values, actions) => {
-            handleSubmit(values);
-            actions.setSubmitting(false);
-          }}
-        >
-          {(formikProps) => {
-            return (
-              <Form onSubmit={formikProps.handleSubmit} className="">
-                <fieldset>
-                  <div className="mx-auto mt-3 flex flex-wrap">
-                    <div className="w-full md:w-1/2">
-                      <div className="mt-2 flex items-center">
-                        <div className="my-auto w-1/3">
-                          <span className="text-2xl font-semibold">
-                            {t('myAccount:account_details')}
-                          </span>
-                        </div>
-                        <div className="w-2/3">
-                          <ButtonSecondary
-                            text={t('myAccount:edit')}
-                            hidden={editable}
-                            onClickFunction={() => setEditable(true)}
-                          />
-                          <ButtonSecondary
-                            text={t('myAccount:save')}
-                            hidden={!editable}
-                            type="submit"
-                          />
-                          <ButtonSecondary
-                            text={t('myAccount:cancel')}
-                            hidden={!editable}
-                            onClickFunction={() => setEditable(false)}
-                          />
-                        </div>
+      <Formik
+        initialValues={{
+          name: userData.name,
+          //firstName: userData.firstName,
+          //lastName: userData.lastName,
+          phone: userData.phone,
+          email: userData.email,
+        }}
+        validationSchema={CustomerSchema}
+        onSubmit={(values, actions) => {
+          handleSubmit(values);
+          actions.setSubmitting(false);
+        }}
+      >
+        {(formikProps) => {
+          return (
+            <Form onSubmit={formikProps.handleSubmit} className="">
+              <fieldset>
+                <div className="mx-auto mt-3 flex flex-wrap">
+                  <div className="w-full md:w-1/2">
+                    <div className="mt-2 flex items-center">
+                      <div className="my-auto w-1/3">
+                        <span className="text-2xl font-semibold">
+                          {t('myAccount:account_details')}
+                        </span>
                       </div>
-                      {/* Account Form */}
-                      <div className="mt-2 flex flex-col gap-y-2">
-                        <SingleDetail
-                          value={userData.name}
-                          label={t('myAccount:name')}
+                      <div className="w-2/3">
+                        <ButtonSecondary
+                          text={t('myAccount:edit')}
+                          hidden={editable}
+                          onClickFunction={() => setEditable(true)}
                         />
-                        {/* <SingleDetail
-                          value={userData.firstName}
-                          label="First name"
+                        <ButtonSecondary
+                          text={t('myAccount:save')}
+                          hidden={!editable}
+                          type="submit"
                         />
-                        <SingleDetail
-                          value={userData.lastName}
-                          label="Last name"
-                        /> */}
-                        <SingleDetail
-                          value={userData.phone}
-                          label={t('myAccount:phone')}
-                          verified={userData.isPhoneVerified}
-                        />
-                        <SingleDetail
-                          value={userData.email}
-                          label={t('myAccount:email')}
-                          verified={userData.isEmailVerified}
+                        <ButtonSecondary
+                          text={t('myAccount:cancel')}
+                          hidden={!editable}
+                          onClickFunction={() => setEditable(false)}
                         />
                       </div>
                     </div>
+                    {/* Account Form */}
+                    <div className="mt-2 flex flex-col gap-y-2">
+                      <SingleDetail
+                        value={userData.name}
+                        label={t('myAccount:name')}
+                      />
+                      {/* <SingleDetail
+                        value={userData.firstName}
+                        label="First name"
+                      />
+                      <SingleDetail
+                        value={userData.lastName}
+                        label="Last name"
+                      /> */}
+                      <SingleDetail
+                        value={userData.phone}
+                        label={t('myAccount:phone')}
+                        verified={userData.isPhoneVerified}
+                      />
+                      <SingleDetail
+                        value={userData.email}
+                        label={t('myAccount:email')}
+                        verified={userData.isEmailVerified}
+                      />
+                    </div>
                   </div>
-                </fieldset>
-                <div className={`${editable ? '' : 'hidden'}`}>
-                  <hr className="m-5" />
-                  <ProfileForm isPhoneVerified={false} isEmailVerified={true} />
                 </div>
-              </Form>
-            );
-          }}
-        </Formik>
-      </div>
-    </>
-  );
+              </fieldset>
+              <div className={`${editable ? '' : 'hidden'}`}>
+                <hr className="m-5" />
+                <ProfileForm isPhoneVerified={false} isEmailVerified={true} />
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
+  </>;
 };
 
 export default withAuth(Profile);

@@ -39,7 +39,7 @@ const CategoryTable: React.FC<Props> = ({ categories }: Props) => {
                 </button>
               </td> */}
               <td>
-                <Link href={`category/view/${category.id}`} passHref>
+                <Link href={`category/view/${category.id}`} passHref legacyBehavior>
                   <button className="btn rounded border bg-white">
                     <i className="bi bi-eye me-1" />
                     View

@@ -24,14 +24,17 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
           return (
             <React.Fragment key={path.id}>
               {index === 0 && (
-                <Link href="/" passHref>
-                  <a className="text-decoration-none text-sm text-black hover:text-primary">
+                <Link
+                  href="/"
+                  passHref
+                  className="text-decoration-none text-sm text-black hover:text-primary">
+                  
                     Home /
-                  </a>
+                  
                 </Link>
               )}
               {index === categoryNameAndId.length - 1 && (
-                <Link
+                (<Link
                   href={{
                     pathname: `/collections/${path.name}`,
                     query: {
@@ -40,17 +43,15 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                     },
                   }}
                   passHref
-                >
-                  <a
-                    className="text-decoration-none text-sm text-gray-500 hover:text-primary"
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    {path.name}
-                  </a>
-                </Link>
+                  className="text-decoration-none text-sm text-gray-500 hover:text-primary"
+                  style={{ pointerEvents: 'none' }}>
+
+                  {path.name}
+
+                </Link>)
               )}
               {index < categoryNameAndId.length - 1 && (
-                <Link
+                (<Link
                   href={{
                     pathname: `/collections/${path.name}`,
                     query: {
@@ -59,11 +60,11 @@ const CategoryBreadcrumb: React.FC<Props> = (props) => {
                     },
                   }}
                   passHref
-                >
-                  <a className="text-decoration-none text-sm text-black hover:text-primary">
-                    {path.name}
-                  </a>
-                </Link>
+                  className="text-decoration-none text-sm text-black hover:text-primary">
+
+                  {path.name}
+
+                </Link>)
               )}
               {index !== categoryNameAndId.length - 1 && <span>/</span>}
             </React.Fragment>

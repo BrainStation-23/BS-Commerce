@@ -1,6 +1,8 @@
 import { CustomerProduct, Product, WishlistProduct } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
+
 import Link from 'next/link';
 import ButtonPrimary from '../buttons/buttonPrimary';
 import CheckIcon from '../icons/checkIcon';
@@ -18,6 +20,7 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
         <div className="col-span-1">
           {product?.photos![0].url ? (
             <Image
+                loader={myImageLoader}
               src={product?.photos![0].url!}
               alt={product?.photos![0].alt || 'product image'}
               width={80}
@@ -36,22 +39,18 @@ const CartToast: React.FC<Props> = ({ product }: Props) => {
           <div className="ml-1 grid w-max grid-cols-2 text-xs sm:flex-row sm:text-xs">
             <div className="pb-2 pr-2 sm:pb-0 ">
               <Link href="/cart" passHref>
-                <a>
-                  <ButtonPrimary
-                    className="rounded uppercase"
-                    text={t('common:view_cart')}
-                  />
-                </a>
+                <ButtonPrimary
+                  className="rounded uppercase"
+                  text={t('common:view_cart')}
+                />
               </Link>
             </div>
             <div>
               <Link href="/checkout" passHref>
-                <a>
-                  <ButtonPrimary
-                    className="rounded uppercase"
-                    text={t('common:checkout')}
-                  />
-                </a>
+                <ButtonPrimary
+                  className="rounded uppercase"
+                  text={t('common:checkout')}
+                />
               </Link>
             </div>
           </div>

@@ -31,7 +31,7 @@ const CustomerByOrderTotalTable = () => {
       path: 'view',
       content: (data: any, key: any, index: any) => (
         <td className="text-center">
-          <Link href="#" passHref>
+          <Link href="#" passHref legacyBehavior>
             <button style={{ border: 'none' }}>
               <span>
                 <i className="bi bi-eye"></i>

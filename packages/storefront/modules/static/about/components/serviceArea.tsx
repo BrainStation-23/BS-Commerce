@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
+
 import React, { FC } from 'react';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
@@ -10,6 +12,7 @@ const ServiceArea: FC = () => {
         <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-3 md:mb-4">
             <Image
+                loader={myImageLoader}
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon1_50x50.png?v=1588134758"
               width={48}
               height={48}
@@ -27,6 +30,7 @@ const ServiceArea: FC = () => {
         <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-3 md:mb-4">
             <Image
+                loader={myImageLoader}
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon2_50x50.png?v=1588134840"
               width={48}
               height={48}
@@ -44,6 +48,7 @@ const ServiceArea: FC = () => {
         <div className="basis-full p-1 text-center md:basis-1/2 md:p-4 lg:basis-1/3">
           <div className="mb-2 md:mb-4">
             <Image
+                loader={myImageLoader}
               src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/About_icon3_50x50.png?v=1588134892"
               width={48}
               height={48}

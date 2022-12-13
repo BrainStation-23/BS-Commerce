@@ -58,7 +58,7 @@ const Currency: React.FC = () => {
       </button>
       <ul
         className={`absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
-          open ? ' opacity-100' : 'hidden'
+          open ? 'transition-all duration-100 opacity-100' : 'h-0 opacity-0'
         }`}
       >
         {currencyList.map((currency) => (
@@ -67,7 +67,7 @@ const Currency: React.FC = () => {
             className={`cursor-pointer py-1 ${
               currency.abbv === currencyName
                 ? 'text-primary dark:text-dark_primary'
-                : ''
+                : 'hover:text-primary dark:hover:text-dark_primary'
             }`}
             onClick={() => currencyOnclick(currency.abbv)}
           >

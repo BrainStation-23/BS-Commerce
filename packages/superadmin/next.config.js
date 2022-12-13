@@ -10,6 +10,8 @@ const nextConfig = {
     ];
   },
   images: {
+    loader: 'custom',
+    loaderFile: './image/loader.js',
     domains: [
       'admin-demo.nopcommerce.com',
       'cdn.shopify.com',
@@ -30,5 +32,5 @@ const nextConfig = {
   },
 };
 
-const withTM = require('next-transpile-modules')(['marketplace']);
+const withTM = require('next-transpile-modules')([]);
 module.exports = withTM(nextConfig);

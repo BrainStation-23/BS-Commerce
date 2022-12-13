@@ -16,25 +16,23 @@ const Products: NextPage = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
-  return (
-    <>
-      <main className="ms-sm-auto  px-md-4">
-        <div className="d-flex justify-content-between align-items-center mt-3">
-          <div className="fs-2">Products</div>
-          <Link href="/Product/Create">
-            <a className="btn btn-primary">Add new</a>
-          </Link>
-        </div>
-        <div>
-          <SearchWindow setProducts={setProducts} />
-          {products ? (
-            <ProductsList productsList={products} setProducts={setProducts} />
-          ) : (
-            "There is no product"
-          )}
-        </div>
-      </main>
-    </>
-  );
+  return <>
+    <main className="ms-sm-auto  px-md-4">
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <div className="fs-2">Products</div>
+        <Link href="/Product/Create" className="btn btn-primary">
+          Add new
+        </Link>
+      </div>
+      <div>
+        <SearchWindow setProducts={setProducts} />
+        {products ? (
+          <ProductsList productsList={products} setProducts={setProducts} />
+        ) : (
+          "There is no product"
+        )}
+      </div>
+    </main>
+  </>;
 };
 export default Products;

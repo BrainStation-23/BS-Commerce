@@ -53,7 +53,7 @@ const AllTagLists: FC<Props> = ({ TagData }) => {
               query: { id: data?.[key] },
             }}
             passHref
-          >
+            legacyBehavior>
             <button className="btn btn-outline-success">
               <span>
                 <i className="bi bi-eye me-2 align-middle"></i>

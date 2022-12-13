@@ -25,7 +25,7 @@ const CategoryComponent: NextComponentType = ({}) => {
       <div className="d-flex justify-content-between align-items-center flex-row">
         <h1>Categories</h1>
         <div className="">
-          <Link href="/category/create" passHref>
+          <Link href="/category/create" passHref legacyBehavior>
             <button className="btn btn-info mx-1 text-white">
               <i className="bi bi-plus-square me-1 pl-2" />
               Add

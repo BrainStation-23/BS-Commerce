@@ -1,5 +1,6 @@
 import type { NextComponentType } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import myImageLoader from "image/loader";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -49,9 +50,17 @@ const Sidebar = ({ toggleSidebar, showSidebar }: Props) => {
         style={{ height: "56px", borderBottom: "1px solid #4b545c" }}
       >
         {showSidebar ? (
-          <Image src={bsFullLogo} alt="Brain Station 23 Logo" />
+          <Image
+            loader={myImageLoader}
+            src={bsFullLogo}
+            alt="Brain Station 23 Logo"
+          />
         ) : (
-          <Image src={bsOnlyLogo} alt="Brain Station 23 Logo" />
+          <Image
+            loader={myImageLoader}
+            src={bsOnlyLogo}
+            alt="Brain Station 23 Logo"
+          />
         )}
       </div>
 
@@ -62,7 +71,7 @@ const Sidebar = ({ toggleSidebar, showSidebar }: Props) => {
           // style={{ color: "#C2C7D0" }}
         >
           {menu.to !== "" ? (
-            <Link href={menu.to} passHref>
+            <Link href={menu.to} passHref legacyBehavior>
               <div onClick={() => setSelectedMenuId(menu.id)}>
                 <SidebarLink
                   menu={menu}

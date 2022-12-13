@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import _ from 'lodash';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -57,6 +58,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
         {' '}
         {data?.product?.photos![0]?.url ? (
           <Image
+                loader={myImageLoader}
             src={data?.product?.photos![0]?.url!}
             alt="product Image"
             width={100}
@@ -76,6 +78,7 @@ const ShowData: React.FC<Props> = ({ data }: Props) => {
             // },
           }}
           passHref
+          legacyBehavior
         >
           <p className="hover:cursor-pointer hover:text-primary">
             {data?.product?.info?.name}

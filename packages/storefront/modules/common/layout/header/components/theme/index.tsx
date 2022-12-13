@@ -48,7 +48,7 @@ const Theme: React.FC = () => {
             onClick={() => setTheme(theme.name)}
           >
             <Link href={router.asPath}>
-              <a>{theme.name}</a>
+              {theme.name}
             </Link>
           </li>
         ))}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
 
 import { useAppSelector } from 'store/hooks/index';
 import { WishlistItem } from '@bs-commerce/models';
@@ -29,11 +30,13 @@ const WishlistBody: React.FC<Props> = (props) => {
                   pathname: `product/${data?.product?.meta?.friendlyPageName}`,
                 }}
                 passHref
+                legacyBehavior
               >
                 <div className="w-50 relative flex cursor-pointer flex-col items-center justify-center">
                   <Image
+                loader={myImageLoader}
                     src={data.product?.photos![0].url!}
-                    alt={data.product?.info.shortDescription}
+                    alt={data.product?.info.shortDescription!}
                     width={productImageWidth}
                     height={productImageHeight}
                   />

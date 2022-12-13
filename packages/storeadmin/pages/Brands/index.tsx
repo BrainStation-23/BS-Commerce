@@ -16,27 +16,25 @@ const Brands: NextPage = () => {
   useEffect(() => {
     getAllBrands();
   }, []);
-  return (
-    <>
-      <main className="ms-sm-auto  px-md-4">
-        <div className="d-flex justify-content-between align-items-center mt-3">
-          <div className="fs-2">Brands</div>
-          <Link href="/Brands/Create">
-            <a className="btn btn-primary">Add new</a>
-          </Link>
-        </div>
+  return <>
+    <main className="ms-sm-auto  px-md-4">
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <div className="fs-2">Brands</div>
+        <Link href="/Brands/Create" className="btn btn-primary">
+          Add new
+        </Link>
+      </div>
 
-        <div>
-          {/* <SearchWindowBrands setBrands={setBrands} allbrands={brands!} /> */}
-          {brands ? (
-            <BrandsList brandsList={brands} setBrands={setBrands} />
-          ) : (
-            "There is no brands"
-          )}
-        </div>
-      </main>
-    </>
-  );
+      <div>
+        {/* <SearchWindowBrands setBrands={setBrands} allbrands={brands!} /> */}
+        {brands ? (
+          <BrandsList brandsList={brands} setBrands={setBrands} />
+        ) : (
+          "There is no brands"
+        )}
+      </div>
+    </main>
+  </>;
 };
 
 export default Brands;

@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
+import myImageLoader from "image/loader";
 
 const ShowData = ({ data }: any) => {
   const total = data.quantity * data.price;
@@ -7,6 +8,7 @@ const ShowData = ({ data }: any) => {
       <tr key={data?.productId}>
         <td className="border border-slate-300 py-2 md:px-2 xl:px-2">
           <Image
+            loader={myImageLoader}
             src={data && data?.photos[0] && data?.photos[0]?.url}
             alt={data?.photos[0]?.alt}
             height={100}

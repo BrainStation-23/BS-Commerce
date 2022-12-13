@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 
 import Modal from '@/modules/common/modal/modal';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
+
 import { userAPI } from 'APIs';
 import useTranslation from 'next-translate/useTranslation';
 import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
@@ -82,6 +84,7 @@ const CartDropdown: NextComponentType = () => {
                   <a href="#" className="">
                     {cartData?.product?.photos![0]?.url ? (
                       <Image
+                loader={myImageLoader}
                         src={cartData?.product?.photos![0]?.url!}
                         alt="Product Image"
                         height={100}
@@ -201,15 +204,13 @@ const CartDropdown: NextComponentType = () => {
                     </div>
                     <div className="border-x-2 px-6 py-2 dark:border-none">
                       <Link href="/cart" passHref>
-                        <a>
-                          <ButtonPrimary
-                            onClickFunction={() => {
-                              handleClickViewCart();
-                              setCartTotal(!cartTotal);
-                            }}
-                            text={t('common:view_cart')}
-                          />
-                        </a>
+                        <ButtonPrimary
+                          onClickFunction={() => {
+                            handleClickViewCart();
+                            setCartTotal(!cartTotal);
+                          }}
+                          text={t('common:view_cart')}
+                        />
                       </Link>
                     </div>
                     <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">

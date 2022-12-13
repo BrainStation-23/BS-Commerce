@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import { NextComponentType } from 'next';
@@ -188,10 +189,11 @@ const Signin: NextComponentType = () => {
                         id="forgotPasswordDiv"
                         className="text-decoration-none my-0 sm:my-0 md:my-3 lg:my-3 xl:my-3"
                       >
-                        <Link href="/account/forgot-password">
-                          <a className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500">
-                            {t('login:forgot_password')}
-                          </a>
+                        <Link
+                          href="/account/forgot-password"
+                          className="text-decoration-none font-weight-light text-gray-600 hover:text-gray-500"
+                        >
+                          {t('login:forgot_password')}
                         </Link>
                       </div>
                     </div>
@@ -201,13 +203,12 @@ const Signin: NextComponentType = () => {
             </Formik>
             <div className="flex flex-wrap">
               <div className="text-decoration-none mt-3">
-                <Link data-testid="create-account-link" href="/account/sign-up">
-                  <a
-                    data-testid="create-account-page"
-                    className="text-decoration-none font-weight-light text-gray-600 hover:text-primary"
-                  >
-                    {t('login:create_account')}
-                  </a>
+                <Link
+                  data-testid="create-account-link"
+                  href="/account/sign-up"
+                  className="text-decoration-none font-weight-light text-gray-600 hover:text-primary"
+                >
+                  {t('login:create_account')}
                 </Link>
               </div>
               <div className="mt-3">

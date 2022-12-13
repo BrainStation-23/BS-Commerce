@@ -25,11 +25,9 @@ const ViewCategory: React.FC = () => {
       <h2>
         Category details - {category?.name}{' '}
         <span className="fs-5 p-3">
-          <Link href={'/category'}>
-            <a className="text-decoration-none">
-              <i className="bi bi-arrow-left-circle-fill p-2" />
-              Back to category list
-            </a>
+          <Link href={'/category'} className="text-decoration-none">
+
+            <i className="bi bi-arrow-left-circle-fill p-2" />Back to category list
           </Link>
         </span>
       </h2>

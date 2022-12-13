@@ -1,6 +1,8 @@
 import { IOrderProduct, OrderByUserId } from '@bs-commerce/models';
 import moment from 'moment';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
+
 import Link from 'next/link';
 
 interface Props {
@@ -11,8 +13,9 @@ const TableData: React.FC<Props> = ({ singleProduct }) => {
     <>
       <td className="px-5 py-4">
         <Image
+                loader={myImageLoader}
           src={singleProduct?.photos![0]?.url!}
-          alt={singleProduct?.photos![0]?.alt}
+          alt={singleProduct?.photos![0]?.alt!}
           width={60}
           height={60}
         />

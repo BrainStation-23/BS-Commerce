@@ -53,18 +53,18 @@ const BannerWrapper: React.FC<BannerProps> = (props) => {
       {hasButton && (
         <div className="container mx-auto px-4">
           <Link href={linkhref} passHref>
-            <a>
-              <Button
-                position={buttonPosition}
-                padding={buttonPadding}
-                margin={buttonMargin}
-                bg={buttonBg}
-                buttonText={buttonText}
-                onHover={onHover}
-                textColor={buttonTextColor}
-                edge={buttonEdge}
-              />
-            </a>
+
+            <Button
+              position={buttonPosition}
+              padding={buttonPadding}
+              margin={buttonMargin}
+              bg={buttonBg}
+              buttonText={buttonText}
+              onHover={onHover}
+              textColor={buttonTextColor}
+              edge={buttonEdge}
+            />
+
           </Link>
         </div>
       )}

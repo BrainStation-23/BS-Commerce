@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import myImageLoader from 'image/loader'
+
 import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
 
@@ -134,6 +136,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                     <td className="border-r p-5 align-top font-normal">
                                       <div>
                                         <Image
+                loader={myImageLoader}
                                           src={
                                             product?.productDetails?.photos![0]!
                                           }
@@ -142,7 +145,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           }
                                           height={100}
                                           width={100}
-                                          layout="fixed"
                                         />
                                         <br />
                                         {product?.productDetails?.info
@@ -182,12 +184,11 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                               ?.friendlyPageName!}`,
                                           }}
                                           passHref
+                                          className="text-xs text-gray-500/100 hover:text-red-600 dark:text-dark_text"
                                         >
-                                          <a className="text-xs text-gray-500/100 hover:text-red-600 dark:text-dark_text">
-                                            {t(
-                                              'compare:view_product'
-                                            ).toUpperCase()}
-                                          </a>
+                                          {t(
+                                            'compare:view_product'
+                                          ).toUpperCase()}
                                         </Link>
                                       </div>
                                     </td>

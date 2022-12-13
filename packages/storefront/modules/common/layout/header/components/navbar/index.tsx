@@ -139,11 +139,13 @@ const Navbar: React.FC<Props> = ({
             <ul className="my-0 flex w-full list-none flex-row gap-x-6">
               {MenuData.map((menu) => (
                 <li key={menu.name} className="group">
-                  <Link href={menu.link}>
-                    <a className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary lg:border-none lg:py-0 lg:font-medium">
-                      {menu.name}
-                      {menu.hasSubmenu && <ChevronDown size={4} />}
-                    </a>
+                  <Link
+                    href={menu.link}
+                    className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary lg:border-none lg:py-0 lg:font-medium">
+
+                    {menu.name}
+                    {menu.hasSubmenu && <ChevronDown size={4} />}
+
                   </Link>
 
                   {menu.hasSubmenu && (
@@ -157,7 +159,7 @@ const Navbar: React.FC<Props> = ({
                             className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary dark:hover:text-dark_primary"
                           >
                             <Link href={menu.link}>
-                              <a>{menu.name}</a>
+                              {menu.name}
                             </Link>
                           </li>
                         ))}
