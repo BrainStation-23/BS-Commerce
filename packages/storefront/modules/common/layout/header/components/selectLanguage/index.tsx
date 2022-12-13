@@ -1,11 +1,12 @@
-import { useAppDispatch } from 'store/hooks/index';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useAppDispatch } from 'store/hooks/index';
 import { setCurrencyLanguage } from 'store/slices/currencySlice';
 
 interface language {
   name: string;
+  locale: string;
 }
 
 const Language: React.FC = () => {
@@ -13,24 +14,27 @@ const Language: React.FC = () => {
   const router = useRouter();
 
   const languageList: language[] = [
-    { name: 'English' },
-    { name: 'German' },
-    { name: 'French' },
+    { name: 'English', locale: 'en' },
+    { name: 'Bengali', locale: 'bn' },
   ];
+
   const dispatch = useAppDispatch();
   const languageOnclick = async (currencyName: string) => {
     dispatch(setCurrencyLanguage(currencyName));
   };
   return (
-    <div className={`relative inline-block h-8`}
-    onMouseLeave={() => setOpen(false)}
-    onMouseEnter={() => setOpen(true)}
+    <div
+      className={`relative inline-block h-8`}
+      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => setOpen(true)}
     >
       <button
         className="inline-flex items-center"
         onClick={() => setOpen(!open)}
       >
-        <span className="mr-1">{router.locale}</span>
+        <span className="mr-1">
+          {router.locale === 'en' ? 'Englist' : 'Bengali'}
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -46,21 +50,21 @@ const Language: React.FC = () => {
       </button>
       <ul
         className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white px-4 py-1 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
-          open ? 'transition-all duration-100 opacity-100' : 'h-0 opacity-0'
+          open ? 'opacity-100 transition-all duration-100' : 'h-0 opacity-0'
         }`}
       >
-        {router?.locales?.map((locale) => (
+        {languageList.map((language, index) => (
           <li
-            key={locale}
+            key={language.name}
             className={`py-1 ${
-              locale === router.locale
+              language.locale === router.locale
                 ? 'text-primary dark:text-dark_primary'
                 : 'hover:text-primary dark:hover:text-dark_primary'
             }`}
-            onClick={() => languageOnclick(locale)}
+            onClick={() => languageOnclick(language.locale)}
           >
-            <Link href={router.asPath} locale={locale}>
-              {locale}
+            <Link href={router.asPath} locale={language.locale}>
+              {language.name}
             </Link>
           </li>
         ))}

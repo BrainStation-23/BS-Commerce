@@ -1,13 +1,12 @@
-import Link from 'next/link';
-import useTranslation from 'next-translate/useTranslation';
-import { useAppSelector } from 'store/hooks/index';
 import HeaderCategory from '@/modules/common/layout/header/components/headerCategory';
+import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
+import { useAppSelector } from 'store/hooks/index';
 
-import HeaderAccount from '@/modules/common/layout/header/components/headerAccount';
-import Search from '@/modules/common/layout/header/components//search';
-import MenuIcon from '@/modules/common/icons/menuIcon';
 import ChevronDown from '@/modules/common/icons/chevronDown';
+import MenuIcon from '@/modules/common/icons/menuIcon';
 import PhoneIcon from '@/modules/common/icons/phoneIcon';
+import HeaderAccount from '@/modules/common/layout/header/components/headerAccount';
 
 interface Props {
   stickyClass: string;
@@ -136,16 +135,15 @@ const Navbar: React.FC<Props> = ({
           <div
             className={`static z-10 hidden h-fit bg-slate-50 bg-slate-50/0 p-0 px-8 shadow-none lg:flex`}
           >
-            <ul className="my-0 flex w-full list-none flex-row gap-x-6">
+            <ul className="my-0 flex w-full list-none flex-row gap-x-8">
               {MenuData.map((menu) => (
                 <li key={menu.name} className="group">
                   <Link
                     href={menu.link}
-                    className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary lg:border-none lg:py-0 lg:font-medium">
-
+                    className="relative flex cursor-pointer flex-row items-center justify-between border-b border-slate-200 py-4 capitalize transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary lg:border-none lg:py-0 lg:font-medium"
+                  >
                     {menu.name}
                     {menu.hasSubmenu && <ChevronDown size={4} />}
-
                   </Link>
 
                   {menu.hasSubmenu && (
@@ -158,9 +156,7 @@ const Navbar: React.FC<Props> = ({
                             key={menu.name}
                             className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary dark:hover:text-dark_primary"
                           >
-                            <Link href={menu.link}>
-                              {menu.name}
-                            </Link>
+                            <Link href={menu.link}>{menu.name}</Link>
                           </li>
                         ))}
                       </ul>
