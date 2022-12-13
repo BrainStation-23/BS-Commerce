@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
-import { SignInRequest } from '@bs-commerce/models';
-import { useAppDispatch } from '@/redux-hooks';
+import { useRouter } from "next/router";
+import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
+import { SignInRequest } from "@bs-commerce/models";
+import { useAppDispatch } from "@/redux-hooks";
 
-import { userAPI } from '@/APIs';
-import { saveToken } from '@/toolkit/AuthSlice';
-import { loginSchema } from '@/components/global/schemas/loginSchema';
+import { userAPI } from "@/APIs";
+import { saveToken } from "@/toolkit/AuthSlice";
+import { loginSchema } from "@/components/global/schemas/loginSchema";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,8 +30,8 @@ const Login: React.FC = () => {
       {/* input form */}
       <Formik
         initialValues={{
-          username: '',
-          password: '',
+          username: "",
+          password: "",
         }}
         onSubmit={(values, actions) => {
           const data = {
@@ -51,7 +51,7 @@ const Login: React.FC = () => {
             >
               <div
                 className="w-100 d-flex flex-column align-items-center pt-4"
-                style={{ backgroundColor: '#f9f9f9' }}
+                style={{ backgroundColor: "#f9f9f9" }}
               >
                 <div className="form-group row mb-lg-3 w-50">
                   <label
@@ -122,8 +122,8 @@ const Login: React.FC = () => {
       <span className="w-100 border-bottom border-1 flex-grow-1 h2 mb-3 pb-3 text-center">
         Defaults for admin area
       </span>
-      <span className="text-muted">Admin email: </span>
-      <span className="text-muted">Admin password: </span>
+      <span className="text-muted">Admin email: admin@gmail.com</span>
+      <span className="text-muted">Admin password: AsdF1234</span>
     </div>
   );
 };

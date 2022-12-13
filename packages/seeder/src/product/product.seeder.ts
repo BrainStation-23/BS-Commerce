@@ -18,11 +18,6 @@ const products = [
       published: true,
       displayOrder: 9,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["banana-sagor"],
@@ -55,11 +50,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662531125912",
-      },
-    },
   },
   {
     id: "725cd6a6-6d1e-405b-a0ae-5a524435dabc",
@@ -78,11 +68,6 @@ const products = [
       published: true,
       displayOrder: 1,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["daab"],
@@ -143,11 +128,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662531344988",
-      },
-    },
   },
   {
     id: "c1527443-ee50-4bc2-85f7-f5f4fc826962",
@@ -166,11 +146,6 @@ const products = [
       published: true,
       displayOrder: 10,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["malta"],
@@ -231,11 +206,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662531704553",
-      },
-    },
   },
   {
     id: "b269f15a-570b-403f-8e12-b84607fe40cd",
@@ -254,11 +224,6 @@ const products = [
       published: true,
       displayOrder: 9,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["Banana-Chompa", ""],
@@ -291,11 +256,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662531865676",
-      },
-    },
   },
   {
     id: "a22c750f-e429-417a-92a0-5208de543306",
@@ -314,11 +274,6 @@ const products = [
       published: true,
       displayOrder: 15,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["guava"],
@@ -351,11 +306,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662531986290",
-      },
-    },
   },
   {
     id: "2b0c9de1-bb6d-42e8-a02a-d74855ec907f",
@@ -374,11 +324,6 @@ const products = [
       published: true,
       displayOrder: 18,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["Banana-Sobri"],
@@ -411,11 +356,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662532134864",
-      },
-    },
   },
   {
     id: "eb20c23c-7307-472d-9622-607a8639380a",
@@ -434,11 +374,6 @@ const products = [
       published: true,
       displayOrder: 9,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["green-apple"],
@@ -471,11 +406,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662532261293",
-      },
-    },
   },
   {
     id: "ec63b153-975a-4f5e-adce-9fd264ce8f96",
@@ -494,11 +424,6 @@ const products = [
       published: true,
       displayOrder: 14,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["pineapple"],
@@ -559,11 +484,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662532381284",
-      },
-    },
   },
   {
     id: "fa6958e2-5bbe-4709-adab-8a7a899b8f1d",
@@ -582,11 +502,6 @@ const products = [
       published: true,
       displayOrder: 18,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["malta-special"],
@@ -619,11 +534,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662532744709",
-      },
-    },
   },
   {
     id: "12aa98e0-7bc7-495e-993c-354e233d0940",
@@ -642,11 +552,6 @@ const products = [
       published: true,
       displayOrder: 12,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["gala-apple"],
@@ -707,11 +612,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662532977136",
-      },
-    },
   },
   {
     id: "82fa4072-9711-4da6-8498-27e38bc6117e",
@@ -730,11 +630,6 @@ const products = [
       published: true,
       displayOrder: 1,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["Pomegranate"],
@@ -767,11 +662,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662533119737",
-      },
-    },
   },
   {
     id: "8aa87900-02e0-4ed4-9071-a26a90fdf19b",
@@ -790,11 +680,6 @@ const products = [
       published: true,
       displayOrder: 1,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["lal-angur"],
@@ -827,11 +712,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662533220205",
-      },
-    },
   },
   {
     id: "9184e49b-83ad-4c9c-97c9-af99d5b7a88c",
@@ -850,11 +730,6 @@ const products = [
       published: true,
       displayOrder: 1,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["paka-pape"],
@@ -887,11 +762,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662533857313",
-      },
-    },
   },
   {
     id: "f8b9d345-962d-4a85-bfaf-bfdf233aff31",
@@ -910,11 +780,6 @@ const products = [
       published: true,
       displayOrder: 1,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["sobuj-angur"],
@@ -947,11 +812,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534152046",
-      },
-    },
   },
   {
     id: "2f8bc9cd-0532-438c-bfc3-08ac84e05c95",
@@ -970,11 +830,6 @@ const products = [
       published: true,
       displayOrder: 134,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["narikel"],
@@ -1007,11 +862,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534271951",
-      },
-    },
   },
   {
     id: "e7f322af-609b-43d6-833d-f5817951d912",
@@ -1030,11 +880,6 @@ const products = [
       published: true,
       displayOrder: 133,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["fuji-apple"],
@@ -1067,11 +912,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534390456",
-      },
-    },
   },
   {
     id: "d1deb24e-9db5-4709-8e27-a7e4040d92a7",
@@ -1090,11 +930,6 @@ const products = [
       published: true,
       displayOrder: 12,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["sada-nashpati"],
@@ -1127,11 +962,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534507853",
-      },
-    },
   },
   {
     id: "077db0a2-8640-415a-b55c-777edc7b2fae",
@@ -1150,11 +980,6 @@ const products = [
       published: true,
       displayOrder: 123,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["amra"],
@@ -1187,11 +1012,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534630208",
-      },
-    },
   },
   {
     id: "a1b7c1f9-b741-44b9-b33b-70b81e26c360",
@@ -1210,11 +1030,6 @@ const products = [
       published: true,
       displayOrder: 12,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["dragon"],
@@ -1247,11 +1062,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534788605",
-      },
-    },
   },
   {
     id: "bbfac651-d8c0-473f-8a6b-36ecbcbdb680",
@@ -1270,11 +1080,6 @@ const products = [
       published: true,
       displayOrder: 12,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["ez-daab"],
@@ -1307,11 +1112,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662534896020",
-      },
-    },
   },
   {
     id: "5fb5336d-335e-4ebf-934b-d817dcc5d9f9",
@@ -1330,11 +1130,6 @@ const products = [
       published: true,
       displayOrder: 13,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662529837307",
-        },
-      },
     },
     meta: {
       keywords: ["orange"],
@@ -1367,11 +1162,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662535000607",
-      },
-    },
   },
   {
     id: "24d5f389-3a4d-4cd6-b503-4e095dc5778d",
@@ -1390,11 +1180,6 @@ const products = [
       published: true,
       displayOrder: 14,
       isFeatured: true,
-      publishDate: {
-        $date: {
-          $numberLong: "1662611624429",
-        },
-      },
     },
     meta: {
       keywords: ["green-pear"],
@@ -1427,11 +1212,6 @@ const products = [
         name: "Fruits & Vegetables",
       },
     ],
-    createdAt: {
-      $date: {
-        $numberLong: "1662611854743",
-      },
-    },
   },
 ];
 

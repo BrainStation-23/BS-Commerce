@@ -2,13 +2,13 @@ import { UserModel } from "./admin.model";
 
 const admins = [
   {
-    id: "8f528776-d063-4183-8d2a-30bc3874ecff",
+    id: "9973674c-b372-449c-ab0d-aa32bb9ceb15",
     firstName: "John",
     lastName: "Smith",
     displayName: "John Smith",
-    username: "test@gmail.com",
-    email: "test@gmail.com",
-    password: "$2b$10$SlE04yHdrYuTeuB9pco9LOCiS7iRpjWJblMD3nCiH7irNltAtXaoO",
+    username: "admin@gmail.com",
+    email: "admin@gmail.com",
+    password: "$2b$10$uG9OKLJt04snK2X3bGrQpudkRfKdklZGyOFNnTHZIvz5H8vs82hSK",
     provider: "local",
     addresses: [],
   },
