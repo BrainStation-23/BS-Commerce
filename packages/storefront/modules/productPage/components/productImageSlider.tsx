@@ -1,10 +1,10 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperClass from 'swiper/types/swiper-class';
 
-import { useState, FC } from 'react';
-import Image from 'next/image';
-import myImageLoader from 'image/loader'
+import myImageLoader from 'image/loader';
+import Image from 'next/legacy/image';
+import { useState } from 'react';
 
 import { Product, ProductPhoto } from '@bs-commerce/models';
 interface SingleProduct {
@@ -23,7 +23,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
       <Swiper
         loop={true}
         spaceBetween={10}
-        navigation={false}
+        navigation={true}
         modules={[Navigation, Thumbs]}
         grabCursor={true}
         thumbs={{ swiper: activeThumb }}
@@ -37,7 +37,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
                 src={item.url!}
                 alt="product images"
                 quality={100}
-                width={400}
+                width={600}
                 height={400}
               />
             </div>
@@ -77,7 +77,7 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
             <SwiperSlide key={index}>
               <div className="">
                 <Image
-                loader={myImageLoader}
+                  loader={myImageLoader}
                   src={item.url!}
                   alt="product images"
                   width={600}
