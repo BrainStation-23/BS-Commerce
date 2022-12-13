@@ -58,7 +58,7 @@ const Login: React.FC = () => {
                     htmlFor="email"
                     className="col-lg-2 col-form-label text-lg-end text-center"
                   >
-                    Email:
+                    Email: &nbsp;
                   </label>
                   <div className="col-lg-10">
                     <Field
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                     htmlFor="password"
                     className="col-lg-2 col-form-label text-lg-end text-center"
                   >
-                    Password:
+                    Password: &nbsp;
                   </label>
                   <div className="col-lg-10">
                     <Field
@@ -122,8 +122,8 @@ const Login: React.FC = () => {
       <span className="w-100 border-bottom border-1 flex-grow-1 h2 mb-3 pb-3 text-center">
         Defaults for admin area
       </span>
-      <span className="text-muted">Admin email: </span>
-      <span className="text-muted">Admin password: </span>
+      <span className="text-muted">Email: admin@gmail.com</span>
+      <span className="text-muted">Password: AsdF1234</span>
     </div>
   );
 };
