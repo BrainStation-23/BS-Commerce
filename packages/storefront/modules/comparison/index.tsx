@@ -1,5 +1,5 @@
 import myImageLoader from 'image/loader';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -134,9 +134,10 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 return (
                                   <React.Fragment key={product?.productId}>
                                     <td className="border-r p-5 align-top font-normal">
-                                      <div>
+                                      <div className="flex flex-col items-center">
                                         <Image
                                           loader={myImageLoader}
+                                          className="h-20 w-28 lg:h-28"
                                           src={
                                             product?.productDetails?.photos![0]!
                                           }
@@ -146,7 +147,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           height={100}
                                           width={100}
                                         />
-                                        <br />
                                         {product?.productDetails?.info
                                           ?.oldPrice ? (
                                           <span className="text-sm text-red-600">
@@ -176,7 +176,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                             )}
                                           </span>
                                         )}
-                                        <br />
+
                                         <Link
                                           href={{
                                             pathname: `/product/${product

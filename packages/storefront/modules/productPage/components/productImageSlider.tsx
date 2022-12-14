@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperClass from 'swiper/types/swiper-class';
 
 import myImageLoader from 'image/loader';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import { useState } from 'react';
 
 import { Product, ProductPhoto } from '@bs-commerce/models';
@@ -28,12 +28,12 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
         thumbs={{
           swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
         }}
-        className="product-images-slider"
       >
         {product?.photos?.map((item: ProductPhoto, index: number) => (
           <SwiperSlide key={index}>
             <div className="mb-5">
               <Image
+                className="h-96 w-full"
                 loader={myImageLoader}
                 src={item.url!}
                 alt="product images"
@@ -72,12 +72,12 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
           spaceBetween={10}
           slidesPerView={4}
           modules={[Navigation, Thumbs]}
-          className="product-images-slider-thumbs"
         >
           {product?.photos?.map((item: ProductPhoto, index: number) => (
             <SwiperSlide key={index}>
-              <div className="">
+              <div className="cursor-pointer hover:border">
                 <Image
+                  className="h-28 w-full"
                   loader={myImageLoader}
                   src={item.url!}
                   alt="product images"

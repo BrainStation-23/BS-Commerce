@@ -66,3 +66,7 @@
 .swiper-pagination-bullet-active {
   background-color: #16a34a !important;
 }
+
+.swiper-slide-thumb-active {
+  border: 1px solid #000000;
+}
