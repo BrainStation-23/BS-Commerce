@@ -22,10 +22,10 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
         passHref
       >
         <div className="group relative grid w-80 grid-cols-12 pb-2 md:pl-0 lg:pl-0">
-          <div className="col-span-3 ">
+          <div className="col-span-4 ">
             <div className="border-grey-500 rounded border-2 p-1">
               <Image
-                className="h-20 w-20"
+                className="h-24 w-24"
                 loader={myImageLoader}
                 src={product.photos![0].url!}
                 alt={product.photos![0].alt!}
@@ -34,11 +34,11 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
               />
             </div>
           </div>
-          <div className="col-span-9">
+          <div className="col-span-8">
             <ProductInfo product={product} />
           </div>
           <div
-            className={`absolute bottom-2 left-24 w-36  origin-left transition-transform duration-300 sm:left-48 ${
+            className={`absolute bottom-2 left-28 w-36  origin-left transition-transform duration-300 sm:left-48 ${
               showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
             } duration-300 md:left-24`}
           >

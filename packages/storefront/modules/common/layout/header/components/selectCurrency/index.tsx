@@ -57,7 +57,7 @@ const Currency: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`absolute top-7 z-50 overflow-y-auto whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
+        className={`absolute top-7 z-50 w-60 overflow-y-auto whitespace-nowrap border bg-white p-4 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${'left-0'} ${
           open
             ? 'h-28 opacity-100 transition-all duration-100'
             : 'h-0 opacity-0'

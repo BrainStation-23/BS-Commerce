@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 import { CustomerProduct } from '@bs-commerce/models';
 import { useAppSelector } from 'store/hooks/index';
@@ -11,15 +11,15 @@ interface SingleProduct {
 const ProductInfo: React.FC<SingleProduct> = (props: SingleProduct) => {
   const { product } = props;
   const currency = useAppSelector((state) => state.persistedReducer.currency);
-  
+
   const truncateString = (productName: string) => {
     let truncatedString = productName;
-    if(productName.length >= 24) {
-      truncatedString = productName.slice(0, 22);
+    if (productName.length >= 20) {
+      truncatedString = productName.slice(0, 18);
     }
-    truncatedString+="...";
+    truncatedString += '...';
     return truncatedString;
-  }
+  };
 
   return (
     <div className="py-4 text-center">

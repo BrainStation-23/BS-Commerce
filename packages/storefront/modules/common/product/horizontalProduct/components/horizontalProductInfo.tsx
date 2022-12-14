@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CustomerProduct } from '@bs-commerce/models';
 import { useAppSelector } from 'store/hooks/index';
 
@@ -12,12 +10,12 @@ const ProductInfo = (props: SingleProduct) => {
   const currency = useAppSelector((state) => state.persistedReducer.currency);
   const truncateString = (productName: string) => {
     let truncatedString = productName;
-    if(productName.length >= 24) {
-      truncatedString = productName.slice(0, 22);
-      truncatedString+="...";
+    if (productName.length >= 20) {
+      truncatedString = productName.slice(0, 18);
+      truncatedString += '...';
     }
     return truncatedString;
-  }
+  };
 
   return (
     <div>
