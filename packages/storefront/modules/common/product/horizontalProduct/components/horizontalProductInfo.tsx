@@ -11,7 +11,7 @@ const ProductInfo = (props: SingleProduct) => {
   const truncateString = (productName: string) => {
     let truncatedString = productName;
     if (productName.length >= 20) {
-      truncatedString = productName.slice(0, 18);
+      truncatedString = productName.slice(0, 16);
       truncatedString += '...';
     }
     return truncatedString;

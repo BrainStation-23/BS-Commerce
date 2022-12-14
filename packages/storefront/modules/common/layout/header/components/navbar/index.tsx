@@ -150,11 +150,11 @@ const Navbar: React.FC<Props> = ({
                     <div
                       className={`absolute hidden overflow-hidden bg-white px-6 py-6 shadow-lg transition-all duration-300 ease-in dark:bg-dark_bg dark:text-dark_text lg:group-hover:inline-block`}
                     >
-                      <ul className="">
+                      <ul className="transition-all duration-100 ease-linear">
                         {menu.submenu?.map((menu) => (
                           <li
                             key={menu.name}
-                            className="cursor-pointer py-2 text-sm transition-all duration-100 ease-linear hover:text-primary dark:hover:text-dark_primary dark:hover:text-dark_primary"
+                            className="cursor-pointer py-2 text-sm hover:text-primary dark:hover:text-dark_primary"
                           >
                             <Link href={menu.link}>{menu.name}</Link>
                           </li>
