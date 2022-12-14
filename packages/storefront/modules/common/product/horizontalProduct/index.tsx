@@ -2,7 +2,7 @@ import ProductHoverActions from '@/modules/common/product/common/productHoverAct
 import ProductInfo from '@/modules/common/product/horizontalProduct/components/horizontalProductInfo';
 import { CustomerProduct } from '@bs-commerce/models';
 import myImageLoader from 'image/loader';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
 
