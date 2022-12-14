@@ -38,9 +38,9 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
             <ProductInfo product={product} />
           </div>
           <div
-            className={`absolute bottom-2 left-28 w-36  origin-left transition-transform duration-300 sm:left-48 ${
+            className={`absolute bottom-2 left-28 w-36  origin-left transition-transform duration-300 sm:left-32 ${
               showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
-            } duration-300 md:left-24`}
+            } duration-300`}
           >
             <ProductHoverActions product={product} />
           </div>
