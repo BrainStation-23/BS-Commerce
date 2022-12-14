@@ -43,7 +43,7 @@ export class StoreService {
       );
 
     const doesStoreAdminEmailMatch = await this.storeRepo.findStoreAdmin({
-      'info.email': data.admin.email,
+      email: data.admin.email,
     });
     if (doesStoreAdminEmailMatch)
       return this.helper.serviceResponse.errorResponse(
@@ -55,7 +55,7 @@ export class StoreService {
     const { admin, role, ...rest } = data;
     const hashPassword = await bcrypt.hash(admin.password, authConfig.salt);
     admin.password = hashPassword
-    
+
     const store = {
       ...rest,
       url,
