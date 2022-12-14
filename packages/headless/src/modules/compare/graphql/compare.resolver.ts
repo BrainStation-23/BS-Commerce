@@ -1,9 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CompareItems } from 'src/entity/compare';
-import { User } from 'src/entity/user';
-import { RolesGuard } from 'src/guards/auth.guard';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
+import { CompareItems } from '../../../entity/compare';
+import { User } from '../../../entity/user';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
 import { CompareService } from '../services';
 
 @UseGuards(new RolesGuard(['customer']))

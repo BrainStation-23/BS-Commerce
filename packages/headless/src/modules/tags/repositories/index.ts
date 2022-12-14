@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { Tag, UpdateTagRequest } from 'src/entity/tags';
+import { Tag, UpdateTagRequest } from '../../../entity/tags';
 import { ITagsDatabase } from './tags.database.interface';
 
 @Injectable()

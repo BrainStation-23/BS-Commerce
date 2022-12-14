@@ -1,8 +1,12 @@
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
+import {
+  Product,
+  SearchCondition,
+  UpdateProduct,
+} from '../../../entity/product';
 import { IProductDatabase } from './product.database.interface';
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { Tag } from 'src/entity/tags';
+import { Tag } from '../../../entity/tags';
 
 @Injectable()
 export class ProductRepository {

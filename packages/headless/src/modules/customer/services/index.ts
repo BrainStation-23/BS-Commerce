@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { CustomerRepository } from '../repositories';
 import {
   GetCustomerInformationErrorMessages,
@@ -14,7 +14,7 @@ import {
   UpdateCustomerResponse,
   UpdateCustomerErrorMessages,
 } from '@bs-commerce/models';
-import { CustomerAddress } from 'src/entity/customer';
+import { CustomerAddress } from '../../../entity/customer';
 
 @Injectable()
 export class CustomerService {

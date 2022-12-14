@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { AdminOrderResolver } from './graphql/order.admin.resolver';
 import { CustomerOrderResolver } from './graphql/order.customer.resolver';
 import { OrderRepository } from './repositories';

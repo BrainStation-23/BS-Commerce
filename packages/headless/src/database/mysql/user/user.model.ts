@@ -9,7 +9,7 @@ import {
   Index,
   PrimaryKey,
 } from 'sequelize-typescript';
-import { User } from 'src/entity/user';
+import { User } from '../../../entity/user';
 import AddressModel from './address.model';
 
 @Table({

@@ -21,7 +21,7 @@ import { ManufacturerDto } from './manufacturer.dto';
 import { ManufacturerSeoDto } from './manufacturerSeo.dto';
 import { HttpStatus } from '@nestjs/common';
 import { Type } from 'class-transformer';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 
 export class CreateManufacturerDto implements CreateManufacturerRequest {
   @ApiProperty({ required: true })

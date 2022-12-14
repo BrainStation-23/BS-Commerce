@@ -1,15 +1,15 @@
 import { WishListService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { User } from 'src/entity/user';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
+import { User } from '../../../entity/user';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   WishlistItemInput,
   WishListResponse,
   WishListResponseWithMessage,
 } from './wishlist.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @Resolver()
 @UseGuards(new RolesGuard(['customer']))

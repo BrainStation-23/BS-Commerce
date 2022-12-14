@@ -7,7 +7,7 @@ import {
 } from '@bs-commerce/models';
 
 import { IBrandDatabase } from './brand.database.interface';
-import { Brand } from 'src/entity/brand';
+import { Brand } from '../../../entity/brand';
 
 @Injectable()
 export class BrandRepository {

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Product } from 'src/entity/product';
+import { Product } from '../../../entity/product';
 import { randomUUID } from 'crypto';
 
 const ProductSchema = new Schema<Product>(

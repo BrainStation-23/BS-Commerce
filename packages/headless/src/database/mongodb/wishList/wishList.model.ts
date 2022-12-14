@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { WishList } from 'src/entity/wishList';
+import { WishList } from '../../../entity/wishList';
 import { randomUUID } from 'crypto';
 
 const WishListSchema = new Schema<WishList>(

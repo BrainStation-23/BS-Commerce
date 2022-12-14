@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Tag, UpdateTagRequest } from 'src/entity/tags';
+import { Tag, UpdateTagRequest } from '../../../entity/tags';
 
 @Injectable()
 export abstract class ITagsDatabase {

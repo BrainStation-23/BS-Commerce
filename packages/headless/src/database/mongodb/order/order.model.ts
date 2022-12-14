@@ -5,7 +5,7 @@ import {
   OrderStatusEnum,
   PaymentStatusEnum,
   ShippingStatusEnum,
-} from 'src/entity/order';
+} from '../../../entity/order';
 
 const AddressSchema = {
   firstName: {

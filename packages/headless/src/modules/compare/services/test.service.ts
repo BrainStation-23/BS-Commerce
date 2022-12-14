@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GetCompareErrorEnum } from '@bs-commerce/models';
-import { errorResponse, successResponse } from 'src/utils/response';
+import { errorResponse, successResponse } from '../../../utils/response';
 import { CompareDataDto, CompareResponse } from '../rest/dto/test.dto';
 import { CompareRepository } from '../repositories';
 @Injectable()

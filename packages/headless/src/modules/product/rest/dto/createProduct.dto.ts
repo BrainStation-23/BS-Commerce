@@ -23,7 +23,7 @@ import {
   CreateProductSuccessResponse,
 } from '@bs-commerce/models';
 import { Type } from 'class-transformer';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 
 export class CreateProductDto implements CreateProductRequest {
   @ApiProperty({ type: ProductInfoDto })

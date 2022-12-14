@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from 'src/entity/product';
-import { WishList, WishlistItem } from 'src/entity/wishList';
-import { IWishListDatabase } from 'src/modules/wishlist/repositories/wishList.database.interface';
+import { Product } from '../../../entity/product';
+import { WishList, WishlistItem } from '../../../entity/wishList';
+import { IWishListDatabase } from '../../../modules/wishlist/repositories/wishList.database.interface';
 import { ProductModel } from '../product/product.model';
 import { WishListModel } from './wishList.model';
 @Injectable()

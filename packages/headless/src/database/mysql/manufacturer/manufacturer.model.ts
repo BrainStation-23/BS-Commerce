@@ -9,7 +9,7 @@ import {
   Index,
   PrimaryKey,
 } from 'sequelize-typescript';
-import { Manufacturer } from 'src/entity/manufacturer';
+import { Manufacturer } from '../../../entity/manufacturer';
 import ManufacturerSeoModel from './seo.model';
 
 @Table({

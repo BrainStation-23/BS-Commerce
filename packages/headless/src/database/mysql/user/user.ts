@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Address, User } from 'src/entity/user';
-import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
+import { Address, User } from '../../../entity/user';
+import { IUserDatabase } from '../../../modules/user/repositories/user.database.interface';
 import AddressModel from './address.model';
 import UserModel from './user.model';
 

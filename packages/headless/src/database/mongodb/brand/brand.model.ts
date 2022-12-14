@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { Brand } from 'src/entity/brand';
+import { Brand } from '../../../entity/brand';
 
 const BrandSchema = new Schema<Brand>({
   id: {

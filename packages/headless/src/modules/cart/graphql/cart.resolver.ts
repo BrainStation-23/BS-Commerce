@@ -1,8 +1,8 @@
 import { CartService } from '../services';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { User } from 'src/entity/user';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
+import { User } from '../../../entity/user';
 import {
   CartResponse,
   deleteCartItemRequestSchema,
@@ -11,8 +11,8 @@ import {
   ItemInput,
   updateCartItemRequestSchema,
 } from './cart.model';
-import { RolesGuard } from 'src/guards/auth.guard';
-import { Helper } from 'src/helper/helper.interface';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { Helper } from '../../../helper/helper.interface';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()

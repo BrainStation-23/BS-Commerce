@@ -9,7 +9,7 @@ import {
   NestedCategoryList,
   Photo,
 } from '@bs-commerce/models';
-import { ObjectScalarType } from 'src/internal/graphql/scalar/categoryList.scalar';
+import { ObjectScalarType } from '../../../internal/graphql/scalar/categoryList.scalar';
 
 @InputType()
 export class PhotoRequestSchema implements Photo {

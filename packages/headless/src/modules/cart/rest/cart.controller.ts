@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { CartService } from '../services';
 import { Response } from 'express';
-import { User } from 'src/entity/user';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
+import { User } from '../../../entity/user';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   AddToCartErrorResponseDto,
   AddToCartRequestDto,

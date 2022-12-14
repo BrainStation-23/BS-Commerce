@@ -12,8 +12,8 @@ import {
   ShippingStatusEnum,
   StatusTypeDto,
   CartResponse,
-} from 'src/entity/order';
-import { IOrderDatabase } from 'src/modules/order/repositories/order.db.interface';
+} from '../../../entity/order';
+import { IOrderDatabase } from '../../../modules/order/repositories/order.db.interface';
 import { ProductModel } from '../product/product.model';
 import { OrderModel } from './order.model';
 import {

@@ -6,8 +6,8 @@ import {
   DeleteCompareErrorEnum,
   GetCompareErrorEnum,
 } from '@bs-commerce/models';
-import { Compare, CompareItems } from 'src/entity/compare';
-import { Helper } from 'src/helper/helper.interface';
+import { Compare, CompareItems } from '../../../entity/compare';
+import { Helper } from '../../../helper/helper.interface';
 import { CompareRepository } from '../repositories';
 @Injectable()
 export class CompareService {

@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerService } from '../services';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
 import { Response } from 'express';
-import { RolesGuard } from 'src/guards/auth.guard';
-import { Customer } from 'src/entity/customer';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { Customer } from '../../../entity/customer';
 import {
   AddCustomerNewAddressErrorResponseDto,
   AddCustomerNewAddressSuccessResponseDto,

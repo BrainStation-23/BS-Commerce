@@ -1,7 +1,7 @@
 import { ManufacturerService } from './../services/manufacturer.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   AllManufacturersResponse,
   ManufacturerInput,
@@ -9,7 +9,7 @@ import {
   ManufacturerSchemaGql,
   ManufacturersQuery,
 } from './manufacturer.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @UseGuards(new RolesGuard(['admin']))
 @Resolver(() => ManufacturerSchemaGql)

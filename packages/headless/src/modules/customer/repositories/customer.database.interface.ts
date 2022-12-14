@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Customer, CustomerAddress } from 'src/entity/customer';
-import { Otp } from 'src/entity/otp';
+import { Customer, CustomerAddress } from '../../../entity/customer';
+import { Otp } from '../../../entity/otp';
 
 @Injectable()
 export abstract class ICustomerDatabase {

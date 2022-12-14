@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { Column, Model, Table, HasOne } from 'sequelize-typescript';
 
-import { Brand } from 'src/entity/brand';
+import { Brand } from '../../../entity/brand';
 import InfoModel from './info.model';
 import MetaModel from './meta.model';
 

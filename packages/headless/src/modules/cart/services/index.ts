@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { CartRepository } from '../repositories';
 import {
   AddToCartResponse,
@@ -16,7 +16,7 @@ import {
   addToCartErrorMessage,
   Message,
 } from '@bs-commerce/models';
-import { Item, UpdateItem } from 'src/entity/cart';
+import { Item, UpdateItem } from '../../../entity/cart';
 
 @Injectable()
 export class CartService {

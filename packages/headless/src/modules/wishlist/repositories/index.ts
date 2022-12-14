@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IWishListDatabase } from './wishList.database.interface';
-import { WishlistItem, WishList } from 'src/entity/wishList';
+import { WishlistItem, WishList } from '../../../entity/wishList';
 import { randomUUID } from 'crypto';
 
 @Injectable()

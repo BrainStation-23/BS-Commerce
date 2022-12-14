@@ -26,7 +26,7 @@ import {
   UpdateTagRequestDto,
   UpdateTagSuccessResponseDto,
 } from './dto';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 @Controller('tags')
 @ApiTags('Tags API')
 export class TagsController {

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { UserRepository } from '../repositories';
 import { authConfig } from 'config/auth';
 import {
@@ -14,7 +14,7 @@ import {
   ChangePasswordSuccessMessage,
   UpdatedUserRequest,
 } from '@bs-commerce/models';
-import { ChangePassword } from 'src/entity/user';
+import { ChangePassword } from '../../../entity/user';
 
 @Injectable()
 export class UserService {

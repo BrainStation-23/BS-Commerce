@@ -3,7 +3,7 @@ import {
   Category,
   RequestCategory,
   responseCategory,
-} from 'src/entity/category';
+} from '../../../entity/category';
 
 @Injectable()
 export abstract class ICategoryDatabase {

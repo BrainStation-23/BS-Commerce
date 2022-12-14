@@ -1,6 +1,6 @@
 import { ICartDatabase } from './cart.database.interface';
 import { Injectable } from '@nestjs/common';
-import { Cart, Item, UpdateItem } from 'src/entity/cart';
+import { Cart, Item, UpdateItem } from '../../../entity/cart';
 import { randomUUID } from 'crypto';
 
 @Injectable()

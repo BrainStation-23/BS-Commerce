@@ -19,26 +19,26 @@ import { BrandService } from '../services/index';
 import {
   GetBrandByIdSuccessResponseDto,
   GetBrandByIdErrorResponseDto,
-} from 'src/modules/brands/rest/dto/getBrandByIdDto';
+} from '../../../modules/brands/rest/dto/getBrandByIdDto';
 import {
   CreateBrandRequestDto,
   CreateBrandSuccessResponseDto,
   CreateBrandErrorResponseDto,
-} from 'src/modules/brands/rest/dto/createBrandDto';
+} from '../../../modules/brands/rest/dto/createBrandDto';
 import {
   GetAllBrandsErrorResponseDto,
   GetAllBrandsSuccessResponseDto,
-} from 'src/modules/brands/rest/dto/getAllBrandsDto';
-import { UpdateBrandRequestdto } from 'src/modules/brands/rest/dto/updateBrandDto';
+} from '../../../modules/brands/rest/dto/getAllBrandsDto';
+import { UpdateBrandRequestdto } from '../../../modules/brands/rest/dto/updateBrandDto';
 import {
   DeleteBrandErrorResponseDto,
   DeleteBrandSuccessResponseDto,
-} from 'src/modules/brands/rest/dto/deleteBrandDto';
+} from '../../../modules/brands/rest/dto/deleteBrandDto';
 import {
   UpdateBrandErrorResponseDto,
   UpdateBrandSuccessResponseDto,
 } from './dto/updateBrandDto';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import { UpdateValidationPipe } from '../validators/UpdateValidationPipe';
 
 @ApiTags('Brand API')

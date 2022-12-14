@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
 import { UserService } from '../services';
 import { UseGuards } from '@nestjs/common';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   Admin,
   AdminResponse,
@@ -10,7 +10,7 @@ import {
   ChangePasswordResponse,
   UpdateUserInput,
 } from './user.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @UseGuards(new RolesGuard(['admin']))
 @Resolver()

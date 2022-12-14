@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { TagsRepository } from '../repositories';
-import { Tag, UpdateTagRequest } from 'src/entity/tags';
+import { Tag, UpdateTagRequest } from '../../../entity/tags';
 import {
   GetTagsResponse,
   GetTagsErrorMessages,

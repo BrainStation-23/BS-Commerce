@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
-import { Tag } from 'src/entity/tags';
+import {
+  Product,
+  SearchCondition,
+  UpdateProduct,
+} from '../../../entity/product';
+import { Tag } from '../../../entity/tags';
 
 @Injectable()
 export abstract class IProductDatabase {

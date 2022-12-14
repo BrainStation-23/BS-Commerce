@@ -10,8 +10,8 @@ import {
   ReOrderResponse,
   ReOrderRequestModel,
 } from './order.customer.model';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
+import { RolesGuard } from '../../../guards/auth.guard';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()

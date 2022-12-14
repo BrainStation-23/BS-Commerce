@@ -37,7 +37,7 @@ import {
   GetManufacturerErrorResponseDto,
   GetManufacturerSuccessResponseDto,
 } from './dto/getManufacturer.dto';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 @Controller('manufacturers')
 @ApiTags('Manufacturer API')
 @ApiBearerAuth()

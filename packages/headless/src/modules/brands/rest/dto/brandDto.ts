@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Brand } from '@bs-commerce/models';
 import { InfoDto } from './infoDto';
 import { MetaDto } from './metaDto';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 
 export class BrandDto implements Brand {
   @ApiProperty()

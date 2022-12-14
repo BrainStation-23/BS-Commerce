@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { CategoryRepository } from './repositories';
 import { ICategoryDatabase } from './repositories/category.database.interface';
 import { CategoryController } from './rest/category.controller';

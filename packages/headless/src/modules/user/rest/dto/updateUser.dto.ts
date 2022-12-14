@@ -11,7 +11,7 @@ import {
 } from 'class-validator';
 import { regexConfig } from 'config/phone';
 import { AddressDto, UserDto } from './user.dto';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 import {
   UpdatedUserRequest,
   UpdateUserErrorResponse,

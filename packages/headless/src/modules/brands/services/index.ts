@@ -14,7 +14,7 @@ import {
 } from '@bs-commerce/models';
 
 import { BrandRepository } from './../repositories/index';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 @Injectable()
 export class BrandService {
   constructor(private brandRepo: BrandRepository, private helper: Helper) {}
