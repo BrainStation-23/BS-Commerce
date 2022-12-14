@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Cart, Item, UpdateItem } from 'src/entity/cart';
+import { Cart, Item, UpdateItem } from '../../../entity/cart';
 
 @Injectable()
 export abstract class ICartDatabase {

@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { randomUUID } from 'crypto';
-import { Customer, CustomerAddress } from 'src/entity/customer';
+import { Customer, CustomerAddress } from '../../../entity/customer';
 
 const CustomerAddressSchema = new Schema<CustomerAddress>(
   {

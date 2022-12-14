@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { CartResolver } from './graphql/cart.resolver';
 import { CartRepository } from './repositories';
 import { ICartDatabase } from './repositories/cart.database.interface';

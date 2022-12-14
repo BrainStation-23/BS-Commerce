@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { CompareRepository } from './repositories';
 import { ICompareDatabase } from './repositories/compare.db.interface';
 import { CompareController } from './rest';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IManufacturerDatabase } from 'src/modules/manufacturer/repositories/manufacturer.database.interface';
-import { Manufacturer } from 'src/entity/manufacturer';
+import { IManufacturerDatabase } from '../../../modules/manufacturer/repositories/manufacturer.database.interface';
+import { Manufacturer } from '../../../entity/manufacturer';
 import { Injectable } from '@nestjs/common';
 import ManufacturerModel from './manufacturer.model';
 

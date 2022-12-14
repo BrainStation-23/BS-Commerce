@@ -3,8 +3,8 @@ import {
   Category,
   RequestCategory,
   responseCategory,
-} from 'src/entity/category';
-import { ICategoryDatabase } from 'src/modules/category/repositories/category.database.interface';
+} from '../../../entity/category';
+import { ICategoryDatabase } from '../../../modules/category/repositories/category.database.interface';
 import { CategoryModel } from './category.model';
 
 @Injectable()

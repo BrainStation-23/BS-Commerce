@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { TagsService } from './services';
 import { TagsRepository } from './repositories';
 import { ITagsDatabase } from './repositories/tags.database.interface';

@@ -1,5 +1,5 @@
-import { Compare, CompareItems } from 'src/entity/compare';
-import { ICompareDatabase } from 'src/modules/compare/repositories/compare.db.interface';
+import { Compare, CompareItems } from '../../../entity/compare';
+import { ICompareDatabase } from '../../../modules/compare/repositories/compare.db.interface';
 import { ProductModel } from '../product/product.model';
 import { CompareModel } from './compare.model';
 

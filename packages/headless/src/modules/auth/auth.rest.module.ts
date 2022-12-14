@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
-import { UserRepository } from 'src/modules/user/repositories';
-import { IUserDatabase } from 'src/modules/user/repositories/user.database.interface';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
+import { UserRepository } from '../../modules/user/repositories';
+import { IUserDatabase } from '../../modules/user/repositories/user.database.interface';
 import { AuthController } from './rest';
 import { AuthService } from './services';
-import { JwtStrategy } from 'src/guards/jwt-strategy';
+import { JwtStrategy } from '../../guards/jwt-strategy';
 import { authConfig } from 'config/auth';
 
 @Module({

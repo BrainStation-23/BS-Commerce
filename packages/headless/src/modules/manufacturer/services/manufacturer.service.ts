@@ -20,9 +20,9 @@ import {
   CreateManufacturerErrorMessages,
 } from '@bs-commerce/models';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { ManufacturerRepository } from '../repositories';
-import { Manufacturer, ManufacturersQuery } from 'src/entity/manufacturer';
+import { Manufacturer, ManufacturersQuery } from '../../../entity/manufacturer';
 
 @Injectable()
 export class ManufacturerService {

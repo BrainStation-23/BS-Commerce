@@ -18,9 +18,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { User } from 'src/entity/user';
-import { RolesGuard } from 'src/guards/auth.guard';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
+import { User } from '../../../entity/user';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
 import {
   AddToCompareDto,
   CompareErrorResponseDto,

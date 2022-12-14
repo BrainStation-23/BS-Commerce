@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsObject } from 'class-validator';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 import {
   CreateBrandRequest,
   CreateBrandSuccessResponse,

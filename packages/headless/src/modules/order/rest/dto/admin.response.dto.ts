@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OrderIncompleteStat, OrderStat } from '@bs-commerce/models';
-import { StatusTypeDto } from 'src/entity/order';
+import { StatusTypeDto } from '../../../../entity/order';
 
 export class OrderIncompleteStatDto implements OrderIncompleteStat {
   @ApiProperty()

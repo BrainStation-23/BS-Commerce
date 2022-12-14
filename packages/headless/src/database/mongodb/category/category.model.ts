@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { model, Schema } from 'mongoose';
-import { Category } from 'src/entity/category';
+import { Category } from '../../../entity/category';
 
 const CategorySchema = new Schema<Category>(
   {

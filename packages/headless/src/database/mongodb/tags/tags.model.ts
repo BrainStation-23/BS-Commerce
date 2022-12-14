@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Tag } from 'src/entity/tags';
+import { Tag } from '../../../entity/tags';
 
 const TagsSchema = new Schema<Tag>(
   {

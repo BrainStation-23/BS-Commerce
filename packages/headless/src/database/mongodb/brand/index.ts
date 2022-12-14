@@ -5,8 +5,8 @@ import {
   UpdateBrandRequest,
 } from '@bs-commerce/models';
 
-import { Brand } from 'src/entity/brand';
-import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
+import { Brand } from '../../../entity/brand';
+import { IBrandDatabase } from '../../../modules/brands/repositories/brand.database.interface';
 import { BrandModel } from './brand.model';
 
 @Injectable()

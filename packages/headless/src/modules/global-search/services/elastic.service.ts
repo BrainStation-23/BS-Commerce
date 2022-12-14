@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { ProductSearchDatabase } from 'src/database/mongodb/search';
-import { errorResponse, successResponse } from 'src/utils/response';
-import { IServiceResponse } from 'src/utils/response/service.response.interface';
+import { ProductSearchDatabase } from '../../../database/mongodb/search';
+import { errorResponse, successResponse } from '../../../utils/response';
+import { IServiceResponse } from '../../../utils/response/service.response.interface';
 import { ISearchProductResponse, ISuggestedProductResponse } from '../rest/dto';
 import { ElasticHelperService } from './elastic.helper';
 

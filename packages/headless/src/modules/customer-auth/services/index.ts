@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 import { authConfig } from 'config/auth';
-import { CustomerRepository } from 'src/modules/customer/repositories';
+import { CustomerRepository } from '../../../modules/customer/repositories';
 import {
   CreateCustomerResponse,
   CreateCustomerErrorMessages,
@@ -27,8 +27,8 @@ import {
   VerifyOtpSuccessMessages,
 } from '@bs-commerce/models';
 import { JwtService } from '@nestjs/jwt';
-import { CustomerJwtPayload } from 'src/entity/customer-auth';
-import { Customer } from 'src/entity/customer';
+import { CustomerJwtPayload } from '../../../entity/customer-auth';
+import { Customer } from '../../../entity/customer';
 import { socialLoginConfig } from 'config/social-login';
 const FIVE_MINUTES = 5 * 60 * 1000;
 

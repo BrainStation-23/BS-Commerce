@@ -6,7 +6,7 @@ import type {
   CompareData,
   ICompareItems,
 } from '@bs-commerce/models';
-import { IServiceResponse } from 'src/utils/response/service.response.interface';
+import { IServiceResponse } from '../../../../utils/response/service.response.interface';
 
 export class AddToCompareDto implements AddCompareItem {
   @ApiProperty({ example: '1dca45d8-b6d1-4767-9edb-6c9578913ca9' })

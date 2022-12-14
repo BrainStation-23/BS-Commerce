@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { RolesGuard } from 'src/guards/auth.guard';
-import { Helper } from 'src/helper/helper.interface';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { Helper } from '../../../helper/helper.interface';
 import { ProductService } from '../services';
 import {
   GetAllProductsQueryInput,

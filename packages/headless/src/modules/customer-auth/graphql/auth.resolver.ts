@@ -14,7 +14,7 @@ import {
   ForgotPasswordResponse,
   CustomerForgotPasswordDataInput,
 } from './auth.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @Resolver()
 export class CustomerAuthResolver {

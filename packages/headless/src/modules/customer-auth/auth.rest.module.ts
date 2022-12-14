@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { CustomerAuthController } from './rest';
 import { CustomerAuthService } from './services';
 import { authConfig } from 'config/auth';
 import { ICustomerDatabase } from '../customer/repositories/customer.database.interface';
 import { CustomerRepository } from '../customer/repositories';
-import { JwtStrategy } from 'src/guards/jwt-strategy';
-import { GoogleStrategy } from 'src/guards/google.strategy';
-import { FacebookStrategy } from 'src/guards/facebook.strategy';
+import { JwtStrategy } from '../../guards/jwt-strategy';
+import { GoogleStrategy } from '../../guards/google.strategy';
+import { FacebookStrategy } from '../../guards/facebook.strategy';
 
 @Module({
   imports: [

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Compare, CompareItems } from 'src/entity/compare';
+import { Compare, CompareItems } from '../../../entity/compare';
 import { ICompareDatabase } from './compare.db.interface';
 
 @Injectable()

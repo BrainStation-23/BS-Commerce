@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Manufacturer } from 'src/entity/manufacturer';
+import { Manufacturer } from '../../../entity/manufacturer';
 import { IManufacturerDatabase } from './manufacturer.database.interface';
 
 @Injectable()

@@ -1,9 +1,9 @@
 import { CartModel } from './cart.model';
 import { Injectable } from '@nestjs/common';
-import { Cart, Item, UpdateItem } from 'src/entity/cart';
-import { ICartDatabase } from 'src/modules/cart/repositories/cart.database.interface';
+import { Cart, Item, UpdateItem } from '../../../entity/cart';
+import { ICartDatabase } from '../../../modules/cart/repositories/cart.database.interface';
 import { ProductModel } from '../product/product.model';
-import { Product } from 'src/entity/product';
+import { Product } from '../../../entity/product';
 @Injectable()
 export class CartDatabase implements ICartDatabase {
   async addItem(userId: string, item: Item): Promise<Cart | null> {

@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Cart } from 'src/entity/cart';
+import { Cart } from '../../../entity/cart';
 
 const CartSchema = new Schema<Cart>(
   {
