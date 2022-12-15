@@ -37,7 +37,7 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
           <div className="col-span-9 lg:col-span-8">
             <ProductInfo product={product} />
           </div>
-          {document.body.clientWidth >= 700 && (
+          {document.body.clientWidth >= 800 && (
             <div
               className={`absolute bottom-2 left-28 w-36  origin-left transition-transform duration-300 sm:left-32 ${
                 showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
