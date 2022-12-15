@@ -94,10 +94,10 @@ export class BranchService {
     );
   }
 
-  async getBranchByStoreId(
+  async getAllBranchByStoreId(
     storeId: string,
   ): Promise<GetAllBranchByStoreIdResponse> {
-    const branches = await this.branchRepo.getBranchByStoreId(storeId);
+    const branches = await this.branchRepo.getAllBranchByStoreId(storeId);
     if (!branches)
       return {
         error: GetAllBranchByStoreIdErrorMessage.INVALID_STORE_ID,

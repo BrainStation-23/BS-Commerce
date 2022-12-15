@@ -88,11 +88,11 @@ export class BranchController {
     description: 'Error fetching branches of a store',
     type: GetAllBranchByStoreIdErrorResponseDto,
   })
-  async getBranchByStoreId(
+  async getAllBranchByStoreId(
     @Param('storeId') storeId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { code, ...response } = await this.branchService.getBranchByStoreId(
+    const { code, ...response } = await this.branchService.getAllBranchByStoreId(
       storeId,
     );
 

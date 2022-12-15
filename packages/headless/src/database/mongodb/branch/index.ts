@@ -52,7 +52,7 @@ export class BranchDatabase implements IBranchDatabase {
     }
   }
 
-  async getBranchByStoreId(
+  async getAllBranchByStoreId(
     storeId: string,
   ): Promise<AllBranchByStoreId | null> {
     try {

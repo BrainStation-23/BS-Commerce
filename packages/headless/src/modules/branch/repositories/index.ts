@@ -31,10 +31,10 @@ export class BranchRepository {
     return await this.db.getStore(storeId);
   }
 
-  async getBranchByStoreId(
+  async getAllBranchByStoreId(
     storeId: string,
   ): Promise<AllBranchByStoreId | null> {
-    return await this.db.getBranchByStoreId(storeId);
+    return await this.db.getAllBranchByStoreId(storeId);
   }
 
   async getBranch(query: Record<string, any>): Promise<Branch | null> {
