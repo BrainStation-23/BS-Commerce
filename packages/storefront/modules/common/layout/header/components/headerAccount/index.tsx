@@ -221,7 +221,7 @@ const HeaderAccount: React.FC<Properties> = () => {
             className="z-30 mt-2 text-sm"
             onClick={(e) => {
               if (document.body.clientWidth >= 1024) {
-                //showCartDropDown();
+                showCartDropDown();
               } else {
                 router.push('/cart');
               }

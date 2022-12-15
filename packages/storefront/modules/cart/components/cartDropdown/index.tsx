@@ -175,7 +175,7 @@ const CartDropdown: NextComponentType = () => {
                 <div
                   className={
                     cartData.length
-                      ? 'h-48 overflow-y-scroll border-x border-t py-1 dark:border-none	'
+                      ? 'h-48 overflow-y-scroll rounded border-x border-t dark:border-none	'
                       : 'h-20 border dark:border-none'
                   }
                 >
@@ -190,7 +190,7 @@ const CartDropdown: NextComponentType = () => {
                 {/* new div ends here */}
                 {cartData.length > 0 ? (
                   <>
-                    <div className="flex justify-between border-x-2 p-6 dark:border-none dark:text-gray-300">
+                    <div className="flex justify-between border-x p-6 dark:border-none dark:text-gray-300">
                       <span className="text-base font-semibold">Total</span>
                       <span className="text-base font-semibold">
                         {Intl.NumberFormat(
@@ -203,7 +203,7 @@ const CartDropdown: NextComponentType = () => {
                         {/* ${totalCartPrice} */}
                       </span>
                     </div>
-                    <div className="border-x-2 px-6 py-2 dark:border-none">
+                    <div className="border-x px-6 py-2 dark:border-none">
                       <Link href="/cart" passHref>
                         <ButtonPrimary
                           onClickFunction={() => {
@@ -214,7 +214,7 @@ const CartDropdown: NextComponentType = () => {
                         />
                       </Link>
                     </div>
-                    <div className="mb-4 border-x-2 border-b-2 px-6 pb-5 dark:border-none">
+                    <div className="mb-4 border-x border-b px-6 pb-5 dark:border-none">
                       <ButtonPrimary
                         onClickFunction={handleClickProceed}
                         text={t('common:checkout')}

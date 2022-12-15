@@ -1,8 +1,9 @@
+import CartDetails from '@/modules/cart/components/cartProducts';
+import DeliveryDetails from '@/modules/cart/components/deliveryDetails';
 import type { NextComponentType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useAppSelector } from 'store/hooks/index';
-import DeliveryDetails from '@/modules/cart/components/deliveryDetails';
-import CartDetails from '@/modules/cart/components/cartProducts';
+import WithAuth from '../auth/withAuth';
 import Breadcrumb from '../common/breadcrumbs/breadcrumb';
 
 const CartComponent: NextComponentType = () => {
@@ -27,4 +28,4 @@ const CartComponent: NextComponentType = () => {
   );
 };
 
-export default CartComponent;
+export default WithAuth(CartComponent);
