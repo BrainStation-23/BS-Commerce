@@ -16,6 +16,20 @@
   }
 }
 
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mr {
+  margin-right: 10px;
+}
+
+.mb {
+  margin-bottom: 20px;
+}
+
 .buttons {
   display: flex;
   align-items: center;

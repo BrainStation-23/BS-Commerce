@@ -69,9 +69,8 @@ const config = {
             position: "left",
             label: "Tutorial",
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/BrainStation-23/BS-Commerce/tree/development",
             label: "GitHub",
             position: "right",
           },
