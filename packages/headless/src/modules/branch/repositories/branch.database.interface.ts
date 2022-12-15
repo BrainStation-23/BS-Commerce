@@ -17,7 +17,7 @@ export abstract class IBranchDatabase {
     query: Record<string, any>,
   ) => Promise<BranchHistory | null>;
   abstract getStore: (storeId: string) => Promise<Store | null>;
-  abstract getBranchByStoreId: (
+  abstract getAllBranchByStoreId: (
     storeId: string,
   ) => Promise<AllBranchByStoreId | null>;
   abstract getBranch: (query: Record<string, any>) => Promise<Branch | null>;

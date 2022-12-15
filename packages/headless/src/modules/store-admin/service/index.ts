@@ -19,7 +19,7 @@ import { Otp } from 'src/entity/otp';
 import { MfaOtpDto, MfaVerifyOtpDto } from '../rest/dto/otp.dto';
 import { OtpResponseDto } from '../rest/dto/mfa.dto';
 import { StoreAdminHelperService } from './helper.service';
-import { RoleTypeEnum } from 'models';
+import { RoleTypeEnum, SingleBranchErrorMessage } from 'models';
 
 @Injectable()
 export class StoreAdminService {
@@ -90,7 +90,7 @@ export class StoreAdminService {
     const role: RoleInfo = {
       name: roleData.name,
       roleId: roleData.id,
-      roleType: roleData.roleType 
+      roleType: roleData.roleType
     }
     delete body.roleId;
     const payload: StoreAdmin = {
@@ -194,6 +194,35 @@ export class StoreAdminService {
     } else {
       return errorResponse('OTP is not verified', null, HttpStatus.CONFLICT);
     }
+  }
+
+  async checkoutToBranch(userId: string, branchId: string): Promise<any> {
+    //get the storeid of the user
+    const store = await this.storeAdminRepository.getStore({id: userId});
+    if(!store)
+      return {
+            error: HttpStatus.INTERNAL_SERVER_ERROR,
+            errors: null,
+            code: HttpStatus.INTERNAL_SERVER_ERROR,
+          };
+
+    //get the store of the branchId
+    const branch = await this.storeAdminRepository.getBranch({ id: branchId });
+
+    if (!branch)
+      return {
+        error: SingleBranchErrorMessage.INVALID_BRANCH_ID,
+        errors: null,
+        code: HttpStatus.BAD_REQUEST,
+      };
+
+    if(store === branch.store) return successResponse(null, true);
+
+    return errorResponse(
+      'You are not authorized to checkout to this branch',
+      null,
+      HttpStatus.BAD_REQUEST,
+    );
   }
 
   //--- Multi factor auth functionalities---

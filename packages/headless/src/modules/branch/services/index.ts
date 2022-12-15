@@ -41,7 +41,7 @@ export class BranchService {
       .replace(/\-\-+/g, '-')
       .replace(/^-+/, '');
     const url = storeExists.url + '/' + branchUrl;
-    const urlExists = await this.branchRepo.getBranch({ url: url });
+    const urlExists = await this.branchRepo.getBranch({ url });
     if (urlExists)
       return {
         error: CreateBranchErrorMessage.URL_ALREADY_EXISTS,
@@ -49,9 +49,8 @@ export class BranchService {
         code: HttpStatus.BAD_REQUEST,
       };
 
-    const { ...rest } = branch;
     const branchBody = {
-      ...rest,
+      ...branch,
       url,
       status: 'APPROVED',
     };
@@ -94,10 +93,10 @@ export class BranchService {
     );
   }
 
-  async getBranchByStoreId(
+  async getAllBranchByStoreId(
     storeId: string,
   ): Promise<GetAllBranchByStoreIdResponse> {
-    const branches = await this.branchRepo.getBranchByStoreId(storeId);
+    const branches = await this.branchRepo.getAllBranchByStoreId(storeId);
     if (!branches)
       return {
         error: GetAllBranchByStoreIdErrorMessage.INVALID_STORE_ID,
@@ -186,4 +185,5 @@ export class BranchService {
       HttpStatus.BAD_REQUEST,
     );
   }
+
 }
