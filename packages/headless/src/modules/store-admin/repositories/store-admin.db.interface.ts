@@ -19,7 +19,12 @@ export abstract class IStoreAdminDatabase {
     query: Record<string, any>,
     data: StoreAdminProfileUpdateDto,
   ) => Promise<Partial<StoreAdmin> | null>;
-
+  abstract getStore: (
+    query: Record<string, any>,
+  ) => Promise<string | null>;
+  abstract getBranch: (
+    query: Record<string, any>,
+  ) => Promise<any>;
   abstract sendOtp: (data: Otp) => Promise<Otp | null>;
   abstract verifyOtp: (query: Record<string, any>) => Promise<Otp | null>;
   abstract findOtp: (query: Record<string, any>) => Promise<Otp | null>;

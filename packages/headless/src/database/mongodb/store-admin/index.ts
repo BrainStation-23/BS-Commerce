@@ -7,6 +7,7 @@ import {
   StoreAdminProfileUpdateDto,
   StoreAdminSignupReq,
 } from 'src/modules/store-admin/rest/dto/signup.dto';
+import { BranchModel } from '../branch/branch.model';
 import { OtpModel } from '../otp/otp.model';
 import { StoreAdminRoleModel } from '../store-admin-role/store-admin.role.model';
 import { StoreAdminModel } from './store-admin.model';
@@ -27,6 +28,26 @@ export class StoreAdminDatabase implements IStoreAdminDatabase {
   async findOneRole(query: Record<string, any>): Promise<Partial<Role>> {
     try {
       return await StoreAdminRoleModel.findOne({ ...query }, { _id: 0 }).lean();
+    } catch (error: any) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
+  async getStore(query: Record<string, any>): Promise<string | null> {
+    try {
+      const storeAdmin = await StoreAdminModel.findOne({ ...query }, { _id: 0 }).lean();
+      const { storeId } = storeAdmin;
+      return storeId;
+    } catch (error: any) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
+  async getBranch(query: Record<string, any>): Promise<string | null> {
+    try {
+       return await BranchModel.findOne({ ...query }, { _id: 0 }).lean();
     } catch (error: any) {
       console.log(error.message);
       return null;

@@ -20,7 +20,15 @@ export class StoreAdminRepository {
   async findOne(query: Record<string, any>): Promise<Partial<StoreAdmin>> {
     return await this.db.findOne(query);
   }
-  
+
+  async getStore(query: Record<string, any>): Promise<string | null> {
+    return await this.db.getStore(query);
+  }
+
+  async getBranch(query: Record<string, any>): Promise<any> {
+    return await this.db.getBranch(query);
+  }
+
   async findOneyRole(query: Record<string, any>): Promise<Partial<Role>> {
     return await this.db.findOne(query);
   }

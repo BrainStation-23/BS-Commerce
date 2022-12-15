@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, UseGuards, Request, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { PERMISSIONS } from 'models';
@@ -114,5 +114,24 @@ export class StoreAdminController {
     );
     res.status(code);
     return { code, ...response };
+  }
+
+  @UseGuards(AdminJwtAuthGuard, AdminRoleGuard)
+  @ApiBearerAuth()
+  @Post('/checkout/:branchId')
+  async checkoutToBranch(
+    @Param('branchId') branchId: string,
+    @Request() req: any,
+    @Res({ passthrough: true }) res: Response
+  ){
+    const { user } = req;
+    const { code, ...response } = await this.storeAdminService.checkoutToBranch(
+      user.id,
+      branchId
+    );
+    
+    res.status(code);
+    return { code, ...response };
+
   }
 }
