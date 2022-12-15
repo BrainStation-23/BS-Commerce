@@ -10,9 +10,9 @@ import {
   GetAllOrderQueryEntity,
   AllOrdersEntity,
   ChangeStatusEntity,
-} from 'src/entity/order';
-import { errorResponse, successResponse } from 'src/utils/response';
-import { IServiceResponse } from 'src/utils/response/service.response.interface';
+} from '../../../entity/order';
+import { errorResponse, successResponse } from '../../../utils/response';
+import { IServiceResponse } from '../../../utils/response/service.response.interface';
 import { OrderRepository } from '../repositories';
 
 @Injectable()

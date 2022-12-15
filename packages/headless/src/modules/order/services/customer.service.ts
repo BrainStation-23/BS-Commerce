@@ -6,9 +6,9 @@ import {
   ReOrderResponse,
 } from '@bs-commerce/models';
 import { OrderSortQuery, ReOrderQuery } from './../../../entity/order';
-import { OrderEntity, OrderListResponseEntity } from 'src/entity/order';
-import { errorResponse, successResponse } from 'src/utils/response';
-import { IServiceResponse } from 'src/utils/response/service.response.interface';
+import { OrderEntity, OrderListResponseEntity } from '../../../entity/order';
+import { errorResponse, successResponse } from '../../../utils/response';
+import { IServiceResponse } from '../../../utils/response/service.response.interface';
 import { OrderRepository } from '../repositories';
 
 @Injectable()
@@ -38,8 +38,8 @@ export class OrderCustomerService {
   }
 
   async reOrder(userId: string, body: ReOrderQuery): Promise<ReOrderResponse> {
-    let { ignoreInvalidItems=false, overWriteCart=false, orderId } = body;
-    
+    let { ignoreInvalidItems = false, overWriteCart = false, orderId } = body;
+
     const prevOrder = await this.orderRepository.findOrder({ orderId, userId });
     if (!prevOrder)
       return {
@@ -54,7 +54,9 @@ export class OrderCustomerService {
       return { productId: product.productId, quantity: product.quantity };
     }); //cart request format
 
-    const availableProductIds = await this.orderRepository.getAvailableProducts(productIds);
+    const availableProductIds = await this.orderRepository.getAvailableProducts(
+      productIds,
+    );
 
     if (availableProductIds.length === 0) {
       const response = {
@@ -66,7 +68,7 @@ export class OrderCustomerService {
     } else {
       const unavailableProducts = prevProducts.filter(
         (product) =>
-          !availableProductIds.find((item) => item.id === product.productId)
+          !availableProductIds.find((item) => item.id === product.productId),
       );
 
       if (
@@ -95,7 +97,7 @@ export class OrderCustomerService {
         code: HttpStatus.NOT_FOUND,
       };
     if (cart.items.length !== 0) {
-      if (!overWriteCart) 
+      if (!overWriteCart)
         return {
           code: 200,
           data: { message: ErrorMessageReOrder.OVERWRITE_CART },
@@ -107,7 +109,7 @@ export class OrderCustomerService {
           error: ErrorMessageReOrder.CANNOT_CLEAR_CART,
           errors: null,
           code: HttpStatus.INTERNAL_SERVER_ERROR,
-        }; 
+        };
     }
     const addCart = await this.orderRepository.populateItemsInCart(
       userId,
@@ -118,7 +120,7 @@ export class OrderCustomerService {
     );
 
     if (addCart) return { code: 200, data: { products: responseItems } };
-    
+
     return {
       error: ErrorMessageReOrder.CANNOT_ADD_ITEMS,
       errors: null,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
-import { IBrandDatabase } from 'src/modules/brands/repositories/brand.database.interface';
-import { Brand } from 'src/entity/brand';
+import { IBrandDatabase } from '../../../modules/brands/repositories/brand.database.interface';
+import { Brand } from '../../../entity/brand';
 import BrandModel from './brand.model';
 import InfoModel from './info.model';
 import MetaModel from './meta.model';

@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Product, SearchCondition, UpdateProduct } from 'src/entity/product';
-import { Tag } from 'src/entity/tags';
-import { IProductDatabase } from 'src/modules/product/repositories/product.database.interface';
+import {
+  Product,
+  SearchCondition,
+  UpdateProduct,
+} from '../../../entity/product';
+import { Tag } from '../../../entity/tags';
+import { IProductDatabase } from '../../../modules/product/repositories/product.database.interface';
 import { CategoryModel } from '../category/category.model';
 import { OrderModel } from '../order/order.model';
 import { TagsModel } from '../tags/tags.model';

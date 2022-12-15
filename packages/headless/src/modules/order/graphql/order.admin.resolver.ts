@@ -8,7 +8,7 @@ import {
   OrderStatResponse,
   StatusTypesResponse,
 } from './order.admin.model';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import { OrderAdminService } from './../services/admin.service';
 import { SingleOrderResponse } from './order.customer.model';
 

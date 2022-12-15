@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Helper } from 'src/helper/helper.interface';
-import { SearchCondition, UpdateProduct } from 'src/entity/product';
+import { Helper } from '../../../helper/helper.interface';
+import { SearchCondition, UpdateProduct } from '../../../entity/product';
 import { ProductRepository } from '../repositories';
 import {
   CreateProductResponse,

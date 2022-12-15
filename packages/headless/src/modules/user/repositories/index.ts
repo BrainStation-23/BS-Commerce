@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { Address, User } from 'src/entity/user';
+import { Address, User } from '../../../entity/user';
 import { IUserDatabase } from './user.database.interface';
 
 @Injectable()

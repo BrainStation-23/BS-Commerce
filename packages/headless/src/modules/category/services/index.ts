@@ -9,8 +9,8 @@ import {
   getCategoryListResponse,
   getCategoryResponse,
 } from '@bs-commerce/models';
-import { RequestCategory } from 'src/entity/category';
-import { Helper } from 'src/helper/helper.interface';
+import { RequestCategory } from '../../../entity/category';
+import { Helper } from '../../../helper/helper.interface';
 import { CategoryRepository } from '../repositories';
 
 @Injectable()

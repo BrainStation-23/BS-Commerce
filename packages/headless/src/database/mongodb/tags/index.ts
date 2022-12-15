@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ITagsDatabase } from 'src/modules/tags/repositories/tags.database.interface';
+import { ITagsDatabase } from '../../../modules/tags/repositories/tags.database.interface';
 import { TagsModel } from './tags.model';
-import { Tag, UpdateTagRequest } from 'src/entity/tags';
+import { Tag, UpdateTagRequest } from '../../../entity/tags';
 
 @Injectable()
 export class TagsDatabase implements ITagsDatabase {

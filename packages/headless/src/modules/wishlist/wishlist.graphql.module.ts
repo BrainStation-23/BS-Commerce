@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { WishListResolver } from './graphql/wishlist.resolver';
 import { WishListRepository } from './repositories';
 import { IWishListDatabase } from './repositories/wishList.database.interface';

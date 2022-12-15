@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { ProductSearchDatabase } from 'src/database/mongodb/search';
-import { Product } from 'src/entity/product';
+import { ProductSearchDatabase } from '../../../database/mongodb/search';
+import { Product } from '../../../entity/product';
 import { ISearchProductResponse, ISuggestedProductResponse } from '../rest/dto';
 import { productSearchSchema } from './product.schema';
 

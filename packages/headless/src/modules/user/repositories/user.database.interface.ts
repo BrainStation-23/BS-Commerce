@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Address, User } from 'src/entity/user';
+import { Address, User } from '../../../entity/user';
 
 @Injectable()
 export abstract class IUserDatabase {

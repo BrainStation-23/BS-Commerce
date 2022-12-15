@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { WishlistItem, WishList } from 'src/entity/wishList';
+import { WishlistItem, WishList } from '../../../entity/wishList';
 
 @Injectable()
 export abstract class IWishListDatabase {

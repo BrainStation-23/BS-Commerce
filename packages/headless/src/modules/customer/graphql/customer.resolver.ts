@@ -1,15 +1,15 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { User as CustomerInfo } from 'src/decorators/auth.decorator';
+import { User as CustomerInfo } from '../../../decorators/auth.decorator';
 import { UseGuards } from '@nestjs/common';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import { CustomerService } from '../services';
-import { Customer } from 'src/entity/customer';
+import { Customer } from '../../../entity/customer';
 import {
   CustomerAddressInput,
   CustomerResponse,
   UpdateCustomerInput,
 } from './customer.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @UseGuards(new RolesGuard(['customer']))
 @Resolver()

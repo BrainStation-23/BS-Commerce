@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Otp } from 'src/entity/otp';
+import { Otp } from '../../../entity/otp';
 
 const OtpSchema = new Schema<Otp>(
   {

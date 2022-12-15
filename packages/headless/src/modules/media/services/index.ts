@@ -4,7 +4,7 @@ import {
   UploadFileErrorMessages,
   UploadFileResponse,
 } from '@bs-commerce/models';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @Injectable()
 export class MediaService {

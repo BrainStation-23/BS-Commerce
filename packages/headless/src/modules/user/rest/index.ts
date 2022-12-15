@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../services';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { User } from 'src/entity/user';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
+import { User } from '../../../entity/user';
 import { Response } from 'express';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   ChangePasswordDto,
   UpdatedUserDto,

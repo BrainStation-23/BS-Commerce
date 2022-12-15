@@ -16,7 +16,7 @@ import {
   CartItem,
   CartResponse,
   Cart,
-} from 'src/entity/order';
+} from '../../../entity/order';
 import { IOrderDatabase } from './order.db.interface';
 
 @Injectable()

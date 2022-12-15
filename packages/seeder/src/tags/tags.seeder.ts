@@ -1,41 +1,32 @@
-import { TagsModel } from './tags.model';
+import { TagsModel } from "./tags.model";
 
 const tags = [
   {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5ba2727',
-    name: 'phone',
+    id: "ac9e4447-4762-457c-8fb3-f6daed54faa2",
+    name: "breakfast",
+    isHomePageProductsTag: false,
   },
   {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5123456',
-    name: 'realme',
+    id: "5e461fe9-2f0e-4520-8126-cd2da215bd5f",
+    name: "lunch",
+    isHomePageProductsTag: false,
   },
   {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5asdf33',
-    name: 'smartphone',
+    id: "d7d7f43c-4ec9-4ca0-a96f-a36310467f9e",
+    name: "evening snacks",
+    isHomePageProductsTag: false,
   },
   {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5cd34rf',
-    name: 'samsung',
-  },
-  {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5xsw23x',
-    name: 'oppo',
-  },
-  {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5zaq12w',
-    name: 'apple',
-  },
-  {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7efg56gt4',
-    name: 'TOP_SELLING_PRODUCTS',
-    isHomePageProductsTag: true,
+    id: "aa61e0f3-d47e-49ec-8b7a-21b2256d43f2",
+    name: "dinner",
+    isHomePageProductsTag: false,
   },
 ];
 
 const seed = async () => {
   await TagsModel.collection.drop();
   await TagsModel.insertMany(tags);
-  console.log('Completed Tags Data seeding');
+  console.log("Completed Tags Data seeding");
 };
 
 export { seed };

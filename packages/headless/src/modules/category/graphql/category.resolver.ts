@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Query, Args, Resolver, Mutation } from '@nestjs/graphql';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import { CategoryService } from '../services';
 import {
   CategoryListResponse,
@@ -9,7 +9,7 @@ import {
   getCategoryBySlugRequestSchema,
   getCategoryRequestSchema,
 } from './category.model';
-import { Helper } from 'src/helper/helper.interface';
+import { Helper } from '../../../helper/helper.interface';
 
 @Resolver()
 export class CategoryResolver {

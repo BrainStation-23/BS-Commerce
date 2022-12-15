@@ -17,8 +17,8 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 
-import { RolesGuard } from 'src/guards/auth.guard';
-import { IServiceResponse } from 'src/utils/response/service.response.interface';
+import { RolesGuard } from '../../../guards/auth.guard';
+import { IServiceResponse } from '../../../utils/response/service.response.interface';
 import {
   ChangeStatusDto,
   OrderIncompleteStatDto,

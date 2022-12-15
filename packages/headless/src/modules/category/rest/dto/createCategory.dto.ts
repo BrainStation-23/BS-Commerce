@@ -15,7 +15,7 @@ import {
   createCategorySuccessResponse,
 } from '@bs-commerce/models';
 import { CategoryDto, CategoryMetaDto, PhotoDto } from './category.dto';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 import { Type } from 'class-transformer';
 export class createCategoryRequestDto implements createCategoryRequest {
   @ApiProperty()

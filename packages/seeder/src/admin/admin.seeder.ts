@@ -1,22 +1,23 @@
-import { UserModel } from './admin.model';
+import { UserModel } from "./admin.model";
 
 const admins = [
   {
-    id: '33d9cad4-b68d-4fc9-ac61-e0f7e5ba2727',
-    firstName: 'John',
-    lastName: 'Doe',
-    displayName: 'John Doe',
-    username: 'johndoe@gmail.com',
-    email: 'johndoe@gmail.com',
-    password: '$2b$10$kkgek0Jew5ooU6le1XsLluvakefv/AS5pRaAGE/oWImWgCG6sUBN6', // Plain Password is 'admin@123'
-    provider: 'local',
+    id: "9973674c-b372-449c-ab0d-aa32bb9ceb15",
+    firstName: "John",
+    lastName: "Smith",
+    displayName: "John Smith",
+    username: "admin@gmail.com",
+    email: "admin@gmail.com",
+    password: "$2b$10$uG9OKLJt04snK2X3bGrQpudkRfKdklZGyOFNnTHZIvz5H8vs82hSK",
+    provider: "local",
+    addresses: [],
   },
 ];
 
 const seed = async () => {
   await UserModel.collection.drop();
   await UserModel.insertMany(admins);
-  console.log('Completed Admin Data seeding');
+  console.log("Completed Admin Data seeding");
 };
 
 export { seed };

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ResolveDatabaseDependency } from 'src/database/database.resolver';
+import { ResolveDatabaseDependency } from '../../database/database.resolver';
 import { UserRepository } from './repositories';
 import { IUserDatabase } from './repositories/user.database.interface';
 import { UserController } from './rest';

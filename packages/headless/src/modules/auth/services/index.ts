@@ -1,9 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { Helper } from 'src/helper/helper.interface';
-import { AdminJwtPayload, SignInData } from 'src/entity/auth';
-import { UserRepository } from 'src/modules/user/repositories';
+import { Helper } from '../../../helper/helper.interface';
+import { AdminJwtPayload, SignInData } from '../../../entity/auth';
+import { UserRepository } from '../../../modules/user/repositories';
 import * as crypto from 'crypto';
 const ONE_HOUR = 3600000; // 1 hour = 3600000 milliseconds
 const token = crypto.randomBytes(20).toString('hex');

@@ -4,7 +4,7 @@ import {
   GetAllBrands,
   UpdateBrandRequest,
 } from '@bs-commerce/models';
-import { Brand } from 'src/entity/brand';
+import { Brand } from '../../../entity/brand';
 
 @Injectable()
 export abstract class IBrandDatabase {

@@ -7,7 +7,7 @@ import {
   getCategoryRequest,
   getCategorySuccessResponse,
 } from '@bs-commerce/models';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 import { CategoryDto } from './category.dto';
 
 export class getCategoryRequestDto implements getCategoryRequest {

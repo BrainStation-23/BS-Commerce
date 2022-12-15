@@ -11,7 +11,7 @@ import {
 } from 'class-validator';
 import { ProductDto } from './product.dto';
 import { Type } from 'class-transformer';
-import { ValidateNested as CustomValidator } from 'src/decorators/service.validator';
+import { ValidateNested as CustomValidator } from '../../../../decorators/service.validator';
 import {
   UpdateProductRequest,
   UpdateProductErrorResponse,

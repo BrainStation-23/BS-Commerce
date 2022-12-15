@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { model, Schema } from 'mongoose';
-import { Compare } from 'src/entity/compare';
+import { Compare } from '../../../entity/compare';
 
 const CompareItems = new Schema(
   {

@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { WishlistItem } from 'src/entity/wishList';
-import { Helper } from 'src/helper/helper.interface';
+import { WishlistItem } from '../../../entity/wishList';
+import { Helper } from '../../../helper/helper.interface';
 import { WishListRepository } from '../repositories';
 import {
   addToWishlistErrorMessage,

@@ -15,7 +15,7 @@ import {
   OrderSortQuery,
   OrderStatEntity,
   ProductOrder,
-} from 'src/entity/order';
+} from '../../../entity/order';
 
 @Injectable()
 export abstract class IOrderDatabase {

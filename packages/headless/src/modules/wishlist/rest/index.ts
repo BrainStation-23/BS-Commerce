@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { WishListService } from '../services';
-import { User as UserInfo } from 'src/decorators/auth.decorator';
-import { User } from 'src/entity/user';
+import { User as UserInfo } from '../../../decorators/auth.decorator';
+import { User } from '../../../entity/user';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RolesGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from '../../../guards/auth.guard';
 import {
   AddToWishlistErrorResponseDto,
   AddToWishlistRequestDto,

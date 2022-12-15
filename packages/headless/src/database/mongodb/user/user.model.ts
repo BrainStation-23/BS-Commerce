@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Address, User } from 'src/entity/user';
+import { Address, User } from '../../../entity/user';
 import { randomUUID } from 'crypto';
 
 const AddressSchema = new Schema<Address>(
