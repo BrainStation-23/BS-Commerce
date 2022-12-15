@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateCartItemRequest } from "@bs-commerce/models";
-import { Cart, CartProduct, ResponseItem } from "@bs-commerce/models";
+import { ResponseItem, updateCartItemRequest } from '@bs-commerce/models';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AllCartItemsState {
   allCartItems: ResponseItem[];
@@ -11,15 +10,19 @@ const initialState: AllCartItemsState = {
 };
 
 export const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (
       state: AllCartItemsState,
       action: PayloadAction<ResponseItem>
     ) => {
-      const existingCartProduct = state.allCartItems?.find(item => item.productId === action.payload.productId)
-      existingCartProduct ? existingCartProduct.quantity = action.payload.quantity : state.allCartItems?.push(action.payload);
+      const existingCartProduct = state.allCartItems?.find(
+        (item) => item.productId === action.payload.productId
+      );
+      existingCartProduct
+        ? (existingCartProduct.quantity = action.payload.quantity)
+        : state.allCartItems?.push(action.payload);
     },
     storeAllCartItems: (
       state: AllCartItemsState,
@@ -36,9 +39,7 @@ export const cartSlice = createSlice({
       );
       state.allCartItems = newCart;
     },
-    deleteCart: (
-      state: AllCartItemsState,
-    ) => {
+    deleteCart: (state: AllCartItemsState) => {
       state.allCartItems = [];
     },
     updateCartItem: (
@@ -46,19 +47,26 @@ export const cartSlice = createSlice({
       action: PayloadAction<updateCartItemRequest>
     ) => {
       const list = state.allCartItems;
-      list.forEach(item => {
-        if(item.productId === action.payload.productId) {
+      list.forEach((item) => {
+        if (item.productId === action.payload.productId) {
           item.quantity = action.payload.quantity!;
         }
-      })
+      });
       state.allCartItems = list;
     },
     resetCart: (state: AllCartItemsState) => {
-      state.allCartItems = initialState.allCartItems;
+      state.allCartItems = [];
     },
   },
 });
 
-export const { storeAllCartItems, deleteCartItem, deleteCart, updateCartItem, addToCart, resetCart } = cartSlice.actions;
+export const {
+  storeAllCartItems,
+  deleteCartItem,
+  deleteCart,
+  updateCartItem,
+  addToCart,
+  resetCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

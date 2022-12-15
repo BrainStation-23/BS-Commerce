@@ -8,7 +8,7 @@ const ThemeChanger = () => {
 
   return (
     <>
-      <label className="absolute top-1.5 right-16 inline-flex cursor-pointer items-center">
+      <label className="absolute right-7 inline-flex cursor-pointer items-center lg:right-16 lg:top-1.5">
         <input
           type="checkbox"
           value=""

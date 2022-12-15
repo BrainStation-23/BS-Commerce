@@ -1,6 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ElementButton from '../../buttons/elementButton';
 import UpArrowIcon from '../../icons/upArrowIcon';
 

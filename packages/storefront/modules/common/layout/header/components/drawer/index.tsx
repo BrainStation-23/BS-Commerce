@@ -1,18 +1,21 @@
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { storeUserToken } from 'store/slices/authSlice';
 
-import { resetAddress } from 'store/slices/customerAddressSlice';
-import { resetUserDetails } from 'store/slices/userSlice';
-import { resetWishilist } from 'store/slices/productsSlice';
-import { resetCart } from 'store/slices/cartSlice';
-import ChevronLeft from '@/modules/common/icons/chevronLeft';
-import UserOutlineIcon from '@/modules/common/icons/userIcon';
-import ShoppingBagOutlineIcon from '@/modules/common/icons/shoppingBagIcon';
-import MapPinOutlineIcon from '@/modules/common/icons/mapPinIcon';
 import ElementButton from '@/modules/common/buttons/elementButton';
+import ChevronLeft from '@/modules/common/icons/chevronLeft';
+import MapPinOutlineIcon from '@/modules/common/icons/mapPinIcon';
+import ShoppingBagOutlineIcon from '@/modules/common/icons/shoppingBagIcon';
+import UserOutlineIcon from '@/modules/common/icons/userIcon';
+import { toast } from 'react-toastify';
+import { resetCart } from 'store/slices/cartSlice';
+import { resetCompare } from 'store/slices/compareSlice';
+import { resetAddress } from 'store/slices/customerAddressSlice';
+import { resetWishilist } from 'store/slices/productsSlice';
+import { resetUserDetails } from 'store/slices/userSlice';
+import Currency from '../selectCurrency';
+import Language from '../selectLanguage';
 import ThemeChanger from '../themeChanger';
 
 interface Props {
@@ -56,19 +59,18 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
   const handleAuthState = () => {
     closeDrawer();
     if (token) {
-      localStorage.clear();
-      dispatch(resetAddress());
-      dispatch(resetUserDetails());
-      dispatch(resetWishilist());
-      dispatch(resetCart());
-      dispatch(storeUserToken(''));
-      router.push('/account/sign-in');
       toast.error('Logged out successfully!', {
         containerId: 'bottom-right',
       });
-    } else {
-      router.push('/account/sign-in');
     }
+    localStorage.removeItem('persist:root');
+    dispatch(resetAddress());
+    dispatch(resetUserDetails());
+    dispatch(resetWishilist());
+    dispatch(resetCart());
+    dispatch(resetCompare());
+    dispatch(storeUserToken(''));
+    router.push('/account/sign-in');
   };
 
   return (
@@ -78,15 +80,20 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
       }`}
     >
       <div className="">
-        <div className="">
+        <div className="h-5 space-x-3 text-xs">
+          <Language />
+          <span>|</span>
+          <Currency />
+          <ThemeChanger />
+        </div>
+        <hr className="my-3" />
+        <div className="flex flex-wrap items-center">
           <ElementButton onClickFunction={() => closeDrawer()}>
             <ChevronLeft />
           </ElementButton>
           <span className="text-3xl font-medium text-primary dark:text-dark_primary">
             BS Commerce
           </span>
-          <ThemeChanger />
-
         </div>
         <div className="font-medium">
           <div className="my-5 border-b border-t py-4">
@@ -94,7 +101,7 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
               className="mb-3 flex flex-row items-center"
               onClick={() => handleButtonClick('/myAccount')}
             >
-              <div className="m-2 inline rounded-full border border-gray-700 p-2">
+              <div className="my-2 mr-2 inline rounded-full border border-gray-700 p-2">
                 <UserOutlineIcon />
               </div>
               <ElementButton className="flex flex-col">
@@ -104,24 +111,23 @@ const Drawer: React.FC<Props> = ({ drawer, closeDrawer }: Props) => {
                 </>
               </ElementButton>
             </div>
-
             <ElementButton
-              className="flex"
+              className="ml-1 mb-1 flex"
               onClickFunction={() => handleButtonClick('/order')}
             >
               <>
                 <ShoppingBagOutlineIcon />
-                <span className="ml-2">My Order</span>
+                <span className="ml-5">My Order</span>
               </>
             </ElementButton>
           </div>
           <ElementButton
-            className="mb-4 flex"
+            className="mb-4 ml-1 flex"
             onClickFunction={() => handleButtonClick('/myAccount/addresses')}
           >
             <>
               <MapPinOutlineIcon />
-              <span className="ml-2">Address</span>
+              <span className="ml-5">Address</span>
             </>
           </ElementButton>
         </div>

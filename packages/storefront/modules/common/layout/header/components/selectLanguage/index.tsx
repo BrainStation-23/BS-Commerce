@@ -49,7 +49,7 @@ const Language: React.FC = () => {
         </svg>
       </button>
       <ul
-        className={`top absolute top-7 z-50 overflow-hidden whitespace-nowrap border bg-white px-4 py-1 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text ${
+        className={`top absolute top-8 z-50 overflow-hidden whitespace-nowrap border bg-white px-4 py-1 text-gray-700 transition-all duration-500 ease-linear dark:bg-dark_bg dark:text-dark_text lg:top-7 ${
           open ? 'opacity-100 transition-all duration-100' : 'h-0 opacity-0'
         }`}
       >

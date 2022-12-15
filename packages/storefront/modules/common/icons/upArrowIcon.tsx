@@ -8,7 +8,7 @@ const UpArrowIcon: NextComponentType = () => {
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="white"
-      className="ml-[7px] h-6 w-6"
+      className="ml-[6.35px] h-6 w-6"
     >
       <path
         strokeLinecap="round"
