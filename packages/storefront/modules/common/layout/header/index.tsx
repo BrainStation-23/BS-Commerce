@@ -91,7 +91,7 @@ const Header: NextComponentType = () => {
               {t('common:site_name')}
             </Link>
           </span>
-          <span className="hidden w-2/5 lg:inline-block lg:w-[479px]">
+          <span className="hidden w-2/5 lg:inline-block lg:w-[500px]">
             <Search placeholder={t('common:search_placeholder')} />
           </span>
           <span className="hidden lg:inline-block">
