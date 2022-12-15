@@ -20,11 +20,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .mr {
   margin-right: 10px;
+}
+
+.mb {
+  margin-bottom: 20px;
 }
 
 .buttons {
