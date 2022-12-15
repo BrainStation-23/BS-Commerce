@@ -1,33 +1,29 @@
-import Link from 'next/link';
-import { toast } from 'react-toastify';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { addToCart, storeAllCartItems } from 'store/slices/cartSlice';
-import { useAppDispatch, useAppSelector } from 'store/hooks/index';
 import { userAPI } from 'APIs';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { addToCart, storeAllCartItems } from 'store/slices/cartSlice';
 
+import CartToast from '@/modules/common/toast/cartToast';
 import {
   CustomerProduct,
+  ICompareItems,
   Product,
   WishlistItem,
   WishlistProduct,
-  ICompareItems,
 } from '@bs-commerce/models';
-import {
-  setCartModalState,
-  setModalState,
-  setLoginModalState,
-} from 'store/slices/modalSlice';
+import useTranslation from 'next-translate/useTranslation';
 import {
   storeCompare,
   storeProductsToComparePublic,
 } from 'store/slices/compareSlice';
+import { setLoginModalState, setModalState } from 'store/slices/modalSlice';
 import {
   deleteItemFromWishlist,
   storeWishlist,
 } from 'store/slices/productsSlice';
-import CartToast from '@/modules/common/toast/cartToast';
-import useTranslation from 'next-translate/useTranslation';
 
 interface SingleProduct {
   product: Product | WishlistProduct | CustomerProduct;
@@ -77,9 +73,9 @@ const ProductHoverActions: React.FC<SingleProduct> = (props: SingleProduct) => {
     : false;
 
   const btnClass =
-    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-300 hover:bg-primary dark:hover:bg-dark_primary hover:text-white';
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl text-black transition-all duration-700 hover:bg-primary dark:hover:bg-dark_primary hover:text-white';
   const btnClassFilled =
-    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-300 bg-primary dark:bg-dark_primary text-white';
+    'peer mr-1 inline-block h-7 w-7 rounded-[50px] p-1 text-5xl transition-all duration-700 bg-primary dark:bg-dark_primary text-white';
 
   const handleAddToCart = async () => {
     if (token) {
@@ -196,130 +192,132 @@ const ProductHoverActions: React.FC<SingleProduct> = (props: SingleProduct) => {
     }
   };
 
-  return <>
-    <div className="rounded-full bg-white p-2 text-center drop-shadow-md dark:bg-gray-300">
-      {/* <Link href="/" passHref> */}
-      <span className="">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className={productInCart ? btnClassFilled : btnClass}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.5}
-          onClick={(event) => {
-            handleAddToCart();
-            event.preventDefault();
-          }}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
-
-        <div
-          className={`absolute ${
-            productInCart ? '-left-8' : '-left-5'
-          } -top-7 mb-6 hidden flex-col items-center peer-hover:flex`}
-        >
-          <span className="whitespace-no-wrap z-10 ml-5 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-            {productInCart ? 'Already Added' : 'Add to cart'}
-          </span>
-          <div className="-ml-5 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-        </div>
-      </span>
-      {/* </Link> */}
-
-      <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className={btnClass}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-        <div className="absolute left-3 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
-          <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
-            Quick View
-          </span>
-          <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
-        </div>
-      </span>
-
-      <Link href={token ? `/` : `/account/sign-in`} passHref legacyBehavior>
-        <span>
+  return (
+    <>
+      <div className="rounded-full bg-white p-2 text-center drop-shadow-md dark:bg-gray-300">
+        {/* <Link href="/" passHref> */}
+        <span className="">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={inWishlist ? btnClassFilled : btnClass}
+            className={productInCart ? btnClassFilled : btnClass}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={1.5}
             onClick={(event) => {
-              inWishlist === true
-                ? deleteFromWishlist(product.id!)
-                : handleAddToWishlist(product.id!, 1);
+              handleAddToCart();
               event.preventDefault();
             }}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
+
           <div
-            className={`absolute left-6 ${
-              inWishlist ? '-top-10' : '-top-9'
-            }  mb-6 hidden flex-col items-center peer-hover:flex`}
+            className={`absolute ${
+              productInCart ? '-left-8' : '-left-5'
+            } -top-7 mb-6 hidden flex-col items-center peer-hover:flex`}
           >
-            <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-              {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}
+            <span className="whitespace-no-wrap z-10 ml-5 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+              {productInCart ? 'Already Added' : 'Add to cart'}
+            </span>
+            <div className="-ml-5 -mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+          </div>
+        </span>
+        {/* </Link> */}
+
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={btnClass}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <div className="absolute left-3 -top-7 mb-6 hidden flex-col items-center peer-hover:flex">
+            <span className="whitespace-no-wrap z-10 rounded-md bg-zinc-900 p-2 text-sm leading-none text-white shadow-lg">
+              Quick View
             </span>
             <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
           </div>
         </span>
-      </Link>
-      <Link href="/" passHref legacyBehavior>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={inCompareList ? btnClassFilled : btnClass}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            onClick={(event) => {
-              handleAddToCompare();
 
-              event.preventDefault();
-            }}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-            />
-          </svg>
-          <div className="absolute left-5 -top-7 mb-6 hidden items-center peer-hover:inline-block">
-            <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
-              {inCompareList ? 'Already Added' : 'Add to compare'}
-              <div className="absolute right-5 -bottom-1 -mt-2 h-2 w-2 rotate-45 bg-zinc-900"></div>
-            </span>
-          </div>
-        </span>
-      </Link>
-    </div>
-  </>;
+        <Link href={token ? `/` : `/account/sign-in`} passHref legacyBehavior>
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={inWishlist ? btnClassFilled : btnClass}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              onClick={(event) => {
+                inWishlist === true
+                  ? deleteFromWishlist(product.id!)
+                  : handleAddToWishlist(product.id!, 1);
+                event.preventDefault();
+              }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            <div
+              className={`absolute left-6 ${
+                inWishlist ? '-top-10' : '-top-9'
+              }  mb-6 hidden flex-col items-center peer-hover:flex`}
+            >
+              <span className="whitespace-no-wrap z-10 w-full rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
+                {inWishlist ? '- Remove from wishlist' : '+ Add to wishlist'}
+              </span>
+              <div className="-mt-2 h-3 w-3 rotate-45 bg-zinc-900"></div>
+            </div>
+          </span>
+        </Link>
+        <Link href="/" passHref legacyBehavior>
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={inCompareList ? btnClassFilled : btnClass}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              onClick={(event) => {
+                handleAddToCompare();
+
+                event.preventDefault();
+              }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            <div className="absolute left-5 -top-7 mb-6 hidden items-center peer-hover:inline-block">
+              <span className="whitespace-no-wrap relative z-10 rounded-md bg-zinc-900 p-[6px] text-sm leading-none text-white shadow-lg">
+                {inCompareList ? 'Already Added' : 'Add to compare'}
+                <div className="absolute right-5 -bottom-1 -mt-2 h-2 w-2 rotate-45 bg-zinc-900"></div>
+              </span>
+            </div>
+          </span>
+        </Link>
+      </div>
+    </>
+  );
 };
 
 export default ProductHoverActions;

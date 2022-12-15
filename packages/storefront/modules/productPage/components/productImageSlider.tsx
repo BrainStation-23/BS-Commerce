@@ -1,10 +1,10 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperClass from 'swiper/types/swiper-class';
 
-import { useState, FC } from 'react';
+import myImageLoader from 'image/loader';
 import Image from 'next/image';
-import myImageLoader from 'image/loader'
+import { useState } from 'react';
 
 import { Product, ProductPhoto } from '@bs-commerce/models';
 interface SingleProduct {
@@ -23,21 +23,22 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
       <Swiper
         loop={true}
         spaceBetween={10}
-        navigation={false}
+        navigation={true}
         modules={[Navigation, Thumbs]}
-        grabCursor={true}
-        thumbs={{ swiper: activeThumb }}
-        className="product-images-slider"
+        thumbs={{
+          swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
+        }}
       >
         {product?.photos?.map((item: ProductPhoto, index: number) => (
           <SwiperSlide key={index}>
             <div className="mb-5">
               <Image
+                className="h-96 w-full"
                 loader={myImageLoader}
                 src={item.url!}
                 alt="product images"
                 quality={100}
-                width={400}
+                width={600}
                 height={400}
               />
             </div>
@@ -65,19 +66,19 @@ const ProductImagesSlider: React.FC<SingleProduct> = ({
 
       <div className="ml-8 w-4/5 md:ml-16">
         <Swiper
-          onSwiper={() => setActiveThumb}
+          onSwiper={setActiveThumb}
           loop={true}
           navigation={true}
           spaceBetween={10}
           slidesPerView={4}
           modules={[Navigation, Thumbs]}
-          className="product-images-slider-thumbs"
         >
           {product?.photos?.map((item: ProductPhoto, index: number) => (
             <SwiperSlide key={index}>
-              <div className="">
+              <div className="cursor-pointer hover:border">
                 <Image
-                loader={myImageLoader}
+                  className="h-28 w-full"
+                  loader={myImageLoader}
                   src={item.url!}
                   alt="product images"
                   width={600}

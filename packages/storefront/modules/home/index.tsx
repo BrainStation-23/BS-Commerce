@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { NextComponentType } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAppDispatch } from 'store/hooks/index';
 import {
   setCartModalState,
-  setModalState,
   setLoginModalState,
+  setModalState,
 } from 'store/slices/modalSlice';
 
-import BestSell from '@/modules/home/bestSell';
-import WeekDeals from '@/modules/home/weekDeals';
-import ImageSlider from '@/modules/home/imageSlider';
-import HomeShipping from '@/modules/home/homeShipping';
-import TrendingProducts from '@/modules/home/trendingProducts/index';
 import BannerPage from '@/modules/common/banner';
-import FeaturedProducts from '@/modules/home/featuredProducts';
 import HomefullBanner from '@/modules/common/banner/components/homeFullBanner';
+import BestSell from '@/modules/home/bestSell';
+import FeaturedProducts from '@/modules/home/featuredProducts';
+import HomeShipping from '@/modules/home/homeShipping';
+import ImageSlider from '@/modules/home/imageSlider';
+import TrendingProducts from '@/modules/home/trendingProducts/index';
+import WeekDeals from '@/modules/home/weekDeals';
 
 const HomeComponent: NextComponentType = () => {
   const router = useRouter();
@@ -35,7 +35,7 @@ const HomeComponent: NextComponentType = () => {
         <div className="mb-4 md:mb-10">
           <TrendingProducts />
         </div>
-        <div className="mb-4 md:mb-10">
+        <div className="mb-4 md:mb-16">
           <BannerPage />
         </div>
         <div className="mb-4 md:mb-10">

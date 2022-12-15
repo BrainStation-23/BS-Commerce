@@ -1,22 +1,22 @@
 import type { NextComponentType } from 'next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 
 import { ResponseItem } from '@bs-commerce/models';
-import { deleteCartItem } from 'store/slices/cartSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
+import { deleteCartItem } from 'store/slices/cartSlice';
 
 import Modal from '@/modules/common/modal/modal';
+import myImageLoader from 'image/loader';
 import Image from 'next/image';
-import myImageLoader from 'image/loader'
 
-import { userAPI } from 'APIs';
-import useTranslation from 'next-translate/useTranslation';
 import ButtonPrimary from '@/modules/common/buttons/buttonPrimary';
-import CrossIcon from '../../../common/icons/crossIcon';
 import ElementButton from '@/modules/common/buttons/elementButton';
 import CartIcon from '@/modules/common/icons/cartIcon';
+import { userAPI } from 'APIs';
+import useTranslation from 'next-translate/useTranslation';
+import CrossIcon from '../../../common/icons/crossIcon';
 
 const CartDropdown: NextComponentType = () => {
   const componentRef = useRef();
@@ -84,7 +84,7 @@ const CartDropdown: NextComponentType = () => {
                   <a href="#" className="">
                     {cartData?.product?.photos![0]?.url ? (
                       <Image
-                loader={myImageLoader}
+                        loader={myImageLoader}
                         src={cartData?.product?.photos![0]?.url!}
                         alt="Product Image"
                         height={100}
@@ -124,7 +124,7 @@ const CartDropdown: NextComponentType = () => {
               </div>
             </div>
             <div
-              className="ml-16 mb-16"
+              className="ml-16 mb-16 hover:text-primary dark:hover:text-dark_primary"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCartItemDelete(cartData);
@@ -135,6 +135,7 @@ const CartDropdown: NextComponentType = () => {
               </ElementButton>
             </div>
           </div>
+          <hr className="ml-4 dark:text-dark_text" />
         </div>
       );
     });
@@ -168,13 +169,13 @@ const CartDropdown: NextComponentType = () => {
             </ElementButton>
           </div>
           {cartTotal && document.body.clientWidth >= 1024 ? (
-            <div className="absolute right-0 mt-2 h-auto w-96 origin-top-right rounded-md ">
+            <div className="absolute right-0 mt-2 h-auto w-[22rem] origin-top-right rounded-md">
               <div className=" rounded-md bg-white dark:bg-slate-800">
                 {/* new div starts here */}
                 <div
                   className={
                     cartData.length
-                      ? 'h-48 overflow-y-scroll border-x-2 py-1 dark:border-none'
+                      ? 'h-48 overflow-y-scroll border-x border-t py-1 dark:border-none	'
                       : 'h-20 border dark:border-none'
                   }
                 >

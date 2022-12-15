@@ -1,16 +1,17 @@
-import Image from 'next/legacy/image';
 import myImageLoader from 'image/loader';
+import Image from 'next/image';
 
-import React from 'react';
 interface props {
   height: number;
   width: number;
   src: string;
   alt: string;
+  classes?: string;
 }
-const Picture = ({ height, width, src, alt }: props) => {
+const Picture = ({ height, width, src, alt, classes }: props) => {
   return (
     <Image
+      className={`${classes}`}
       loader={myImageLoader}
       src={src}
       alt={alt}

@@ -5,8 +5,8 @@
 //productQuantity < 3 => VerticalProduct
 import { CustomerProduct } from '@bs-commerce/models';
 
-import VerticalProduct from '@/modules/common/product/verticalProduct';
 import HorizontalProduct from '@/modules/common/product/horizontalProduct';
+import VerticalProduct from '@/modules/common/product/verticalProduct';
 
 const CycleProductGroup: React.FC<{ products: CustomerProduct[] }> = ({
   products,

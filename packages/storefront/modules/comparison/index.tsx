@@ -1,22 +1,22 @@
-import Link from 'next/link';
+import myImageLoader from 'image/loader';
 import Image from 'next/image';
-import myImageLoader from 'image/loader'
+import Link from 'next/link';
 
 import useTranslation from 'next-translate/useTranslation';
 import { toast } from 'react-toastify';
 
+import { ICompareItems } from '@bs-commerce/models';
+import { userAPI } from 'APIs';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/index';
-import { setModalState } from 'store/slices/modalSlice';
 import {
   deleteComparedProductPublic,
   storeCompare,
 } from 'store/slices/compareSlice';
-import { userAPI } from 'APIs';
-import { ICompareItems } from '@bs-commerce/models';
-import CrossIcon from '../common/icons/crossIcon';
+import { setModalState } from 'store/slices/modalSlice';
 import ElementButton from '../common/buttons/elementButton';
 import TextButton from '../common/buttons/textButton';
+import CrossIcon from '../common/icons/crossIcon';
 
 interface Props {
   setModal: boolean;
@@ -134,9 +134,10 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                 return (
                                   <React.Fragment key={product?.productId}>
                                     <td className="border-r p-5 align-top font-normal">
-                                      <div>
+                                      <div className="flex flex-col items-center">
                                         <Image
-                loader={myImageLoader}
+                                          loader={myImageLoader}
+                                          className="h-20 w-28 lg:h-28"
                                           src={
                                             product?.productDetails?.photos![0]!
                                           }
@@ -146,7 +147,6 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                           height={100}
                                           width={100}
                                         />
-                                        <br />
                                         {product?.productDetails?.info
                                           ?.oldPrice ? (
                                           <span className="text-sm text-red-600">
@@ -176,7 +176,7 @@ const ComparisonModal: React.FC<Props> = ({ setModal }) => {
                                             )}
                                           </span>
                                         )}
-                                        <br />
+
                                         <Link
                                           href={{
                                             pathname: `/product/${product
