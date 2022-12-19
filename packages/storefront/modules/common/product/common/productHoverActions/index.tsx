@@ -256,7 +256,7 @@ const ProductHoverActions: React.FC<SingleProduct> = (props: SingleProduct) => {
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={inWishlist ? btnClassFilled : btnClass}
+              className={inWishlist && token !== '' ? btnClassFilled : btnClass}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
