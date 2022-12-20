@@ -1,17 +1,15 @@
 import type { NextComponentType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import ThreeStoriesCard from '@/modules/static/common/threeStoriesCard';
 import ImageWithDescription from '@/modules/static/about/components/imageWithDescription';
 import ServiceArea from '@/modules/static/about/components/serviceArea';
-import ClientSayArea from '@/modules/static/about/components/clientSayArea';
 
+import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 import {
   accordionBody,
-  storiesBody,
   CarouselBody,
+  storiesBody,
 } from '../../../APIs/utils/types';
-import Breadcrumb from '@/modules/common/breadcrumbs/breadcrumb';
 
 const accordionList: accordionBody[] = [
   {
@@ -97,13 +95,13 @@ const AboutComponent: NextComponentType = () => {
       <div className="mb-16 bg-[url('//cdn.shopify.com/s/files/1/0359/6350/2651/files/about-us-policy-bg.jpg?v=1588134945')] bg-center bg-no-repeat py-16">
         <ServiceArea />
       </div>
-      <ThreeStoriesCard leftStory={false} threeStoriesList={threeStoriesList} />
+      {/* <ThreeStoriesCard leftStory={false} threeStoriesList={threeStoriesList} />
       <div className="pb-16">
         <ClientSayArea
           CarouselList={CarouselList}
           accordionList={accordionList}
         />
-      </div>
+      </div> */}
     </>
   );
 };

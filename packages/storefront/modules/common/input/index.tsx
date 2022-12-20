@@ -23,7 +23,9 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="mb-5 text-sm">
-      <label>{label} *</label>
+      <label>
+        {label.toUpperCase()} <span className="text-red-600">*</span>
+      </label>
       <input
         type={type}
         placeholder={label}

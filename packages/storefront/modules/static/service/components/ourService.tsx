@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,26 +20,7 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
-            </svg>
-          </div>
-          <div className="text-xs">
-            <h3 className="text-base">Free Shipping</h3>
-            <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
-            </p>
-          </div>
-        </div>
-        <div className="mb-7 flex w-full md:w-2/4 lg:w-1/4">
-          <div className="mr-4 text-2xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
+              className="h-8 w-8 text-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -53,10 +34,10 @@ const OurService: FC = () => {
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">WEB DESIGN</h3>
+            <h3 className="text-base">Web App Development</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              Develop robust online applications to suit your business needs and
+              cater to your clients faithfully.
             </p>
           </div>
         </div>
@@ -64,29 +45,24 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
               fill="none"
               viewBox="0 0 24 24"
+              stroke-width="2"
               stroke="currentColor"
-              strokeWidth="2"
+              className="mt-1 h-7 w-7 text-primary"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
               />
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">PHOTOGRAPHY</h3>
+            <h3 className="text-base">Mobile App Development</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              Developing innovative and native mobile apps for Android, iOS,
+              BlackBerry and Windows platforms
             </p>
           </div>
         </div>
@@ -94,7 +70,32 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              className="h-8 w-8 text-primary"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+              />
+            </svg>
+          </div>
+          <div className="text-xs">
+            <h3 className="text-base">AEM Solutions</h3>
+            <p className="text-sm">
+              AEM brings your content management system (CMS) & digital asset
+              management (DAM) in one place
+            </p>
+          </div>
+        </div>
+        <div className="mb-7 flex w-full md:w-2/4 lg:w-1/4">
+          <div className="mr-4 text-2xl">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -113,10 +114,10 @@ const OurService: FC = () => {
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">WEB DEVELOPMENT</h3>
+            <h3 className="text-base">ML & AI</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              Machine Learning and Artificial Intelligence solution for your
+              organization by experts hand
             </p>
           </div>
         </div>
@@ -124,47 +125,24 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <div className="text-xs">
-            <h3 className="text-base">CODING</h3>
-            <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
-            </p>
-          </div>
-        </div>
-        <div className="mb-7 flex w-full md:w-2/4 lg:w-1/4">
-          <div className="mr-4 text-2xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
               fill="none"
               viewBox="0 0 24 24"
+              stroke-width="2.5"
               stroke="currentColor"
-              strokeWidth="2"
+              className="h-8 w-8 text-primary"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"
               />
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">MARKETING</h3>
+            <h3 className="text-base">Cloud Solution</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              We help large companies with enterprise-oriented certified cloud
+              and cyber security solutions
             </p>
           </div>
         </div>
@@ -172,7 +150,32 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+              className="h-8 w-8 text-primary"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+              />
+            </svg>
+          </div>
+          <div className="text-xs">
+            <h3 className="text-base">E-Commerce</h3>
+            <p className="text-sm">
+              We provide ultimate e-commerce solution as well as customizations
+              for your e-commerce business
+            </p>
+          </div>
+        </div>
+        <div className="mb-7 flex w-full md:w-2/4 lg:w-1/4">
+          <div className="mr-4 text-2xl">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -186,10 +189,10 @@ const OurService: FC = () => {
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">SUPPORT</h3>
+            <h3 className="text-base">BI Solution</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              Complete Business Intelligence Solutions to take better decisions
+              for your organization
             </p>
           </div>
         </div>
@@ -197,7 +200,7 @@ const OurService: FC = () => {
           <div className="mr-4 text-2xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 text-emerald-500"
+              className="h-8 w-8 text-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -211,10 +214,10 @@ const OurService: FC = () => {
             </svg>
           </div>
           <div className="text-xs">
-            <h3 className="text-base">GRAPHIC DESIGN</h3>
+            <h3 className="text-base">ERP</h3>
             <p className="text-sm">
-              Typi non habent claritatem insitam; est usus legentis in iis qui
-              facit eorum claritatem.
+              ERP 23 is the all-in-one management software to streamline every
+              process in your organization’s business
             </p>
           </div>
         </div>
