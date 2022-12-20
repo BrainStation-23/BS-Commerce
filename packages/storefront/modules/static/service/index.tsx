@@ -11,11 +11,10 @@ import useTranslation from 'next-translate/useTranslation';
 const threeStoriesList: storiesBody[] = [
   {
     id: '507f1f77bcf86cd799439011',
-    title: 'Our Mission',
+    title: 'Passion & Commitment ',
     image:
       'https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about2_large.jpg?v=1588135255',
-    description:
-      'Your trusted companion for digital leadership by empowering peopleto achieve more with less',
+    description: 'Reliable, dedicated, and smart working',
   },
   {
     id: '507f1f77bcf86cd799439012',
