@@ -30,9 +30,11 @@ const Footer: NextComponentType = () => {
   ];
 
   const address = {
-    location: '8th Floor, 2 Bir Uttam AK Khandakar Road, Dhaka 1212',
+    locations: [
+      '8th Floor, 2 Bir Uttam AK Khandakar Road, Mohakhali C/A, Dhaka 1212, Bangladesh.',
+    ],
     email: 'sales@brainstation-23.com',
-    mobile: '+8801674314359',
+    mobile: ['+8801404055226 (Marketing & Sales)'],
   };
 
   // put the pathname in 'includes' where footer needs to be hidden
@@ -56,7 +58,11 @@ const Footer: NextComponentType = () => {
             <div className="text-sm">
               <div className="mb-1">
                 <span className="mr-1 font-medium">{t('common:address')}:</span>
-                <span>{address.location}</span>
+                {address.locations.map((location) => (
+                  <span key={location}>
+                    {location} <br />
+                  </span>
+                ))}
               </div>
               <div className="mb-1">
                 <span className="mr-1 font-medium">{t('common:email')}:</span>
@@ -64,7 +70,11 @@ const Footer: NextComponentType = () => {
               </div>
               <div className="mb-1">
                 <span className="mr-1 font-medium">{t('common:call_us')}:</span>
-                <span>{address.mobile}</span>
+                {address.mobile.map((numbers) => (
+                  <span key={numbers}>
+                    {numbers} <br />
+                  </span>
+                ))}
               </div>
             </div>
           </div>

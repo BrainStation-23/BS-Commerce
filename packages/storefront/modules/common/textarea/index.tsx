@@ -21,7 +21,9 @@ const Textarea: React.FC<TextareaProps> = ({
 }) => {
   return (
     <div className="mb-5 text-sm">
-      <label>{label} *</label>
+      <label>
+        {label.toUpperCase()} <span className="text-red-600">*</span>
+      </label>
       <textarea
         placeholder={label}
         className={`${className} ${'h-44 w-full border border-solid border-slate-200 bg-white px-5 py-2 text-zinc-900'}`}

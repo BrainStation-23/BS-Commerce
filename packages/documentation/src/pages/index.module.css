@@ -16,8 +16,46 @@
   }
 }
 
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.content {
+  padding: 20px 10px 10px;
+}
+
+.content:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.mr {
+  margin-right: 10px;
+}
+
+.mb {
+  margin-bottom: 20px;
+}
+
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.linkStyle {
+  color: white;
+  text-decoration: none;
+}
+
+.linkStyle:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.zmb {
+  margin-bottom: 0px;
 }

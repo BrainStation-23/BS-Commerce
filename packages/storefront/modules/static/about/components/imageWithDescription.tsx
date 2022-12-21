@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import myImageLoader from 'image/loader'
-
+import myImageLoader from 'image/loader';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 
 import PageContainer from '@/modules/common/layout/pageContainer';
 
@@ -13,8 +12,8 @@ const ImageWithDescription: React.FC = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="m-auto mb-5 w-full">
           <Image
-                loader={myImageLoader}
-            src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about1_71e1f591-e3d4-456e-be12-03e0afed0c73.jpg?v=1588135206"
+            loader={myImageLoader}
+            src="/aboutUSImage.jpg"
             width={1504}
             height={580}
             alt="about"
@@ -22,20 +21,23 @@ const ImageWithDescription: React.FC = () => {
         </div>
         <h1 className="mb-5 text-xl capitalize">{t('about:title')}</h1>
         <p className="mx-auto max-w-4xl text-center text-sm">
-          Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus.
-          Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend
-          feugiat lectus laoreet, vel nunc taciti integer cras. Hac pede dis,
-          praesent nibh ac dui mauris sit. Pellentesque mi, facilisi mauris,
-          elit sociis leo sodales accumsan. Iaculis ac fringilla torquent lorem
-          consectetuer, sociosqu phasellus risus urna aliquam, ornare.
+          It was in 2006, with little capital but a pocketful of belief our CEO,
+          Raisul Kabir started Brain Station 23, a software company, right after
+          graduating from BUET. The new company initially focused on the
+          international market with the local market added in 2010. Since then
+          the company has shown a continuous growth and currently employs over
+          700+ software engineers. Brain Station 23 is now not only an
+          established name in Bangladesh but also in countries like the USA, UK,
+          Netherlands, Denmark, Japan, Norway, Sweden, Germany, Canada,
+          Switzerland, Turkey and the Middle East etc.
         </p>
-        <Image
-                loader={myImageLoader}
+        {/* <Image
+          loader={myImageLoader}
           src="https://cdn.shopify.com/s/files/1/0359/6350/2651/files/about-us-signature_medium.png?v=1588134272"
           width={228}
           height={129}
           alt="about"
-        />
+        /> */}
       </div>
     </PageContainer>
   );

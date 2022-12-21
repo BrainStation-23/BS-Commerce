@@ -39,38 +39,49 @@ const Navbar: React.FC<Props> = ({
   const { t } = useTranslation();
   const customerNumber = `${t('common:contact_number')}`;
 
+  const categoryList = useAppSelector(
+    (state) => state.persistedReducer.category.categoryList
+  );
+
   const MenuData: menuLink[] = [
     {
       name: `${t('common:home')}`,
       link: { pathname: '/' },
       hasSubmenu: false,
-      submenu: [
-        { name: 'Home - 1', link: '/' },
-        { name: 'Home - 2', link: '/' },
-        { name: 'Home - 3', link: '/' },
-      ],
     },
     {
-      name: `${t('common:shop')}`,
-      link: { pathname: '/' },
-      hasSubmenu: true,
-      submenu: [
-        { name: `${t('common:cucumber')}`, link: '/' },
-        { name: `${t('common:papaya')}`, link: '/' },
-        { name: `${t('common:mango')}`, link: '/' },
-      ],
+      name: categoryList[0].name,
+      link: {
+        pathname: `/collections/${categoryList[0].name}`,
+        query: {
+          categoryId: categoryList[0].id,
+          name: categoryList[0].name,
+        },
+      },
+      hasSubmenu: false,
     },
     {
-      name: `${t('common:products')}`,
-      link: { pathname: '/' },
-      hasSubmenu: true,
-      submenu: [
-        { name: 'Simple Product', link: '/' },
-        { name: 'Variable Product', link: '/' },
-        { name: 'Affiliate Product', link: '/' },
-      ],
+      name: categoryList[1].name,
+      link: {
+        pathname: `/collections/${categoryList[1].name}`,
+        query: {
+          categoryId: categoryList[1].id,
+          name: categoryList[1].name,
+        },
+      },
+      hasSubmenu: false,
     },
-    { name: `${t('common:blog')}`, link: { pathname: '/' }, hasSubmenu: false },
+    {
+      name: categoryList[2].name,
+      link: {
+        pathname: `/collections/${categoryList[2].name}`,
+        query: {
+          categoryId: categoryList[2].id,
+          name: categoryList[2].name,
+        },
+      },
+      hasSubmenu: false,
+    },
     {
       name: `${t('common:pages')}`,
       link: { pathname: '/' },
@@ -78,7 +89,6 @@ const Navbar: React.FC<Props> = ({
       submenu: [
         { name: `${t('common:about_us')}`, link: '/about' },
         { name: `${t('common:services')}`, link: '/service' },
-        { name: `${t('common:faq')}`, link: '/faq' },
       ],
     },
     {
@@ -87,10 +97,6 @@ const Navbar: React.FC<Props> = ({
       hasSubmenu: false,
     },
   ];
-
-  const categoryList = useAppSelector(
-    (state) => state.persistedReducer.category.categoryList
-  );
 
   return (
     <nav className={`flex justify-center ${stickyClass} z-20`}>

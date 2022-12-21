@@ -39,7 +39,9 @@ const HorizontalProduct: FC<{ product: CustomerProduct }> = ({ product }) => {
           </div>
           <div
             className={`absolute bottom-2 left-28 w-36  origin-left transition-transform duration-300 sm:left-32 ${
-              showIcons ? ' -translate-y-3 opacity-90' : 'md:opacity-0'
+              showIcons && document.body.clientWidth >= 800
+                ? ' -translate-y-3 opacity-90'
+                : 'hidden'
             } duration-300`}
           >
             <ProductHoverActions product={product} />
