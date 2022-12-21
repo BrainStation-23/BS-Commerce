@@ -14,29 +14,35 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div style={{ display: "flex", "justify-content": "center", gap: "100px" }}>
-          <div style={{ width: "max-content"}}>
-            <img src={require("/static/img/storefront.png").default} height={350} width={450} />
+        <div className={styles.flexContainer}>
+          <div>
+            <img src={require("/static/img/storefront.png").default} height={100} width={200} />
             <br/>
-            <Link className={clsx("button button--secondary button--lg", styles.mr)} to="https://bs-commerce-storefront.vercel.app/">
-              Storefront demo
+            <Link className={styles.linkStyle} to="https://bs-commerce-storefront.vercel.app/">
+              <div>
+                  <p className={clsx("hero__subtitle", styles.zmb)}>Storefront demo</p>
+                  <p>A sample website for E-commerce business</p>
+              </div>
             </Link>
           </div>
 
-          <div style={{ width: "max-content"}}>
-            <img src={require("/static/img/storeadmin.png").default} height={350} width={450} />
+          <div>
+            <img src={require("/static/img/storeadmin.png").default} height={100} width={200} />
             <br/>
-            <Link className="button button--secondary button--lg" to="https://bs-commerce-storeadmin.vercel.app/">
-              Storefront admin
+            <Link className={styles.linkStyle} to="https://bs-commerce-storeadmin.vercel.app/">
+              <div>
+                  <p className={clsx("hero__subtitle", styles.zmb)} >Storefront admin</p>
+                  <p>A sample website for E-commerce admin section</p>
+              </div>
             </Link>
           </div>
         </div>
         <div className={styles.mb}>
-          <Link className="button button--secondary button--lg" to="/docs/intro">
+          <Link className={clsx("hero__subtitle", styles.linkStyle)} to="/docs/intro">
             Static Storefront
           </Link>
         </div>
-        <Link className="button button--secondary button--lg" to="/docs/intro">
+        <Link className={clsx("hero__subtitle", styles.linkStyle)} to="/docs/intro">
           Learn More About BS-Commerce
         </Link>
       </div>

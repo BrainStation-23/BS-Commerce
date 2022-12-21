@@ -20,6 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 50px;
 }
 
 .flexColContainer {
@@ -42,4 +43,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.linkStyle {
+  color: white;
+  text-decoration: none;
+}
+
+.linkStyle:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.zmb {
+  margin-bottom: 0px;
 }
