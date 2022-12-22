@@ -1213,6 +1213,110 @@ const products = [
       },
     ],
   },
+  {
+    id: "0b0b4ec6-f922-4c12-aa6d-fb502dceab4c",
+    info: {
+      name: "Apple MacBook Pro (Late 2021)",
+      shortDescription: "Apple M1 Pro 512GB SSD 14.2 Inch",
+      fullDescription:
+        "Laptop Brand - Apple, Laptop Series - MacBook Pro, Laptop Model - Apple MacBook Pro (Late 2021), Processor Brand - Apple, Processor Type - Apple M1 Chip, Processor Model - Apple M1 Pro, Processor Core - 8, Display Size - 14.2 Inch, Display Technology - Liquid Retina XDR Display, Display Resolution - 3024 x 1964, Display Surface - Glossy with Antireflective Coating, Touch Display - No, Display Refresh Rate - 120Hz, Display Features - Aspect Ratio: 16:10, Finish: Glossy with Anti-Reflective Coating, Maximum Brightness: 500 cd/m2 (Sustained in SDR Mode) 1000 cd/m2 (Sustained in HDR Mode) 1600 cd/m2 (Peak in HDR Mode), Contrast Ratio: 1,000,000:1, Variable Refresh Technology: Apple ProMotion, Secondary Screen Size - N/A, Secondary Screen Technology - N/A, Secondary Screen Resolution - N/A, Memory (RAM) - 16GB, Installed Memory Details - 1 x 16GB Non-Removable, Storage - 512GB SSD, Installed SSD Type - NVMe PCIe, Optical Drive - No-ODD, Multimedia Card Slot - Yes, Supported Multimedia Card - SD/SDHC/SDXC, Graphics Chipset - Apple 14-core GPU, Graphics Memory Accessibility - Integrated, Graphics Memory - Shared, Graphics Memory Type - N/A, LAN - No, WiFi - WiFi 6 (802.11ax), Bluetooth - Bluetooth 5.0, USB 2 Port - No, USB 3 Port - No, USB C / Thunderbolt Port - 3 x Thunderbolt 4, HDMI Port - 1, Micro HDMI Port - No, Mini HDMI Port - No, DP Port - No, Mini DP Port - No, D-SUB / VGA Port - No, Headphone Port - Combo, Microphone Port - Combo, Audio Properties - 6 Speaker and Subwoofer, Built-In Microphones 3, Speaker - Yes, Microphone - Yes, WebCam - FHD Webcam, Keyboard Layout - 78-Key Notebook Keyboard, Keyboard Back-lit - Yes, Pointing Device - Force Touch Trackpad, Finger Print Sensor - Yes, Battery Capacity - 70 Wh, Battery Type - Li-ion Polymer, Battery Backup (Approximate) - Up to 17 hours, Power Adapter - 67W, Adapter Type - 67W with Magsafe, Operating System - macOS, Pre-loaded Application - App Store, Books, Calendar, Contacts, FaceTime, Find My, GarageBand, Home, iMovie, Keynote, Mail, Maps, Messages, Music, News, Notes, Numbers, Pages, Photo Booth, Photos, Podcasts, Preview, QuickTime Player, Reminders, Safari, Shortcuts, Siri, Stocks, Time Machine, TV, Voice Memos, Color - Silver, Dimension (W x D x H) - 313 x 221 x 16mm, Weight - 1.6 Kg, Best For - Create presentations, and enjoy music, books, movies, and more, Gaming Feature - 120Hz Display Refresh Rate, Special Feature - Touch ID, Voice Control, VoiceOver, Zoom, Increase Contrast, Reduce Motion, Siri and Dictation, Switch Control, Closed Captions, Text to Speech, Others - MU-MIMO Support: Yes, Security: Fingerprint Reader, AC Input Power: 100 to 240 VAC, 50 / 60 Hz, Operating Temperature: 50 to 95 degree F / 10 to 35 degree C, Operating Humidity: 0 to 90%, Certifications: ENERGY STAR, as per Manufacturer, Warranty - 1 Year International, Warranty Claim Duration (Approximate) - Estimated Warranty Claim Duration 40 Days. It may take additional time up to 90 days, Part Number - MKGR3LL/A / MKGR3X/A, Country of Origin - USA, Disclaimer - Mentioned Battery Backup information is collected from manufacturer. As per manufacturer the backup time may very for different use case, settings, applications and some other factors.",
+      sku: "macbookPro",
+      price: 227380,
+      oldPrice: 225379,
+      cost: 199,
+      showOnHomePage: true,
+      includeInTopMenu: true,
+      allowToSelectPageSize: true,
+      published: true,
+      displayOrder: 111,
+      isFeatured: false,
+    },
+    meta: {
+      keywords: ["macbookPro"],
+      title: "",
+      description: "",
+      friendlyPageName: "apple-macbook-pro-late-2021",
+    },
+    tags: ["Device"],
+    photos: [
+      {
+        url: "https://www.cloud.ryanscomputers.com/cdn/products/medium/apple-macbook-pro-late-2021-apple-m1-pro-512gb-11637142047.webp",
+        id: "",
+        title: "",
+        alt: "image",
+        displayOrder: 0,
+      },
+    ],
+    brands: ["Apple"],
+    manufacturer: {
+      id: "",
+      name: "",
+    },
+    categories: [
+      {
+        id: "8e6ebd97-79d7-4a00-bf47-3ef95b343bbf",
+        name: "Laptop",
+      },
+      {
+        id: "a72242de-51ea-4b54-bdb9-7a22c1537692",
+        name: "Electronics",
+      },
+    ],
+  },
+  {
+    id: "98fa3872-ea35-47df-a2c3-15abaac60285",
+    info: {
+      name: "Nokia G21",
+      shortDescription: "Nokia G21",
+      fullDescription:
+        "Nokia G21 comes with 6.5 inches HD+ IPS LCD screen. It has a waterdrop-notch front camera design. The back camera is of triple 50+2+2 Megapixel with PDAF, LED flash, depth sensor, macro lens, HDR, f/1.8 aperture etc. and Full HD video recording. The front camera is of 8 MP. Nokia G21 comes with 5050 mAh battery and 18W fast charging. It has 4 GB RAM, up to 1.6 GHz octa-core CPU and Mali-G57 MP1 GPU. It is powered by a Unisoc T606 (12 nm) chipset. The device comes with 64 GB internal storage and dedicated MicroSD slot. There is a side-mounted fingerprint sensor in this phone.",
+      sku: "nokiag21",
+      price: 18999,
+      oldPrice: 19999,
+      cost: 99,
+      showOnHomePage: true,
+      includeInTopMenu: true,
+      allowToSelectPageSize: true,
+      published: true,
+      displayOrder: 14,
+      isFeatured: false,
+    },
+    meta: {
+      keywords: ["nokiag21"],
+      title: "",
+      description: "",
+      friendlyPageName: "nokia-g21",
+    },
+    tags: ["Device"],
+    photos: [
+      {
+        url: "https://www.mobiledokan.com/wp-content/uploads/2021/09/Nokia-3.4-image.jpg",
+        id: "",
+        title: "",
+        alt: "image",
+        displayOrder: 0,
+      },
+    ],
+    brands: ["Nokia"],
+    manufacturer: {
+      id: "",
+      name: "",
+    },
+    categories: [
+      {
+        id: "dfb54b13-6985-468b-9df3-1d36a7664eb8",
+        name: "Nokia",
+      },
+      {
+        id: "2c620053-3792-4fd4-9ec0-0b7c379dc22a",
+        name: "phone",
+      },
+      {
+        id: "a72242de-51ea-4b54-bdb9-7a22c1537692",
+        name: "Electronics",
+      },
+    ],
+  },
 ];
 
 const seed = async () => {

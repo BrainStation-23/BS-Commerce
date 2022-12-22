@@ -104,6 +104,40 @@ const brands = [
       SEFN: "",
     },
   },
+  {
+    id: "b76d2963-7f60-404b-bb0e-75a9e37f5541",
+    info: {
+      name: " Apple",
+      description: "",
+      allowToSelectPageSize: false,
+      published: false,
+      displayOrder: 1,
+      pageSizeOptions: [],
+    },
+    meta: {
+      keywords: "",
+      description: "",
+      title: "",
+      SEFN: "",
+    },
+  },
+  {
+    id: "a6527573-240b-4d1a-a4be-9d28d4b4c8b5",
+    info: {
+      name: "Nokia",
+      description: "",
+      allowToSelectPageSize: false,
+      published: false,
+      displayOrder: 1,
+      pageSizeOptions: [],
+    },
+    meta: {
+      keywords: "",
+      description: "",
+      title: "",
+      SEFN: "",
+    },
+  },
 ];
 
 const seed = async () => {

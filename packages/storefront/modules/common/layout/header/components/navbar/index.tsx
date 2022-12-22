@@ -1,4 +1,5 @@
 import HeaderCategory from '@/modules/common/layout/header/components/headerCategory';
+import { NestedCategoryList } from '@bs-commerce/models';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useAppSelector } from 'store/hooks/index';
@@ -24,9 +25,14 @@ interface menuLink {
   submenu?: subLink[];
 }
 
+interface LinkInterface {
+  pathname: string;
+  query: any;
+}
+
 interface subLink {
   name: string;
-  link: string;
+  link: string | LinkInterface;
 }
 
 const Navbar: React.FC<Props> = ({
@@ -43,6 +49,25 @@ const Navbar: React.FC<Props> = ({
     (state) => state.persistedReducer.category.categoryList
   );
 
+  const makeSubMenu = (category: NestedCategoryList) => {
+    let submenu: subLink[] = [];
+    category.subCategories?.forEach((subCategory) => {
+      const name = subCategory.name;
+      const link = {
+        pathname: `/collections/${name}`,
+        query: {
+          categoryId: subCategory.id,
+          name: name,
+        },
+      };
+      submenu.push({
+        name,
+        link,
+      });
+    });
+    return submenu;
+  };
+
   const MenuData: menuLink[] = [
     {
       name: `${t('common:home')}`,
@@ -58,7 +83,8 @@ const Navbar: React.FC<Props> = ({
           name: categoryList[0].name,
         },
       },
-      hasSubmenu: false,
+      hasSubmenu: categoryList[0].subCategories?.length! > 0 ? true : false,
+      submenu: makeSubMenu(categoryList[0]),
     },
     {
       name: categoryList[1].name,
@@ -69,7 +95,8 @@ const Navbar: React.FC<Props> = ({
           name: categoryList[1].name,
         },
       },
-      hasSubmenu: false,
+      hasSubmenu: categoryList[1].subCategories?.length! > 0 ? true : false,
+      submenu: makeSubMenu(categoryList[1]),
     },
     {
       name: categoryList[2].name,
@@ -80,7 +107,8 @@ const Navbar: React.FC<Props> = ({
           name: categoryList[2].name,
         },
       },
-      hasSubmenu: false,
+      hasSubmenu: categoryList[2].subCategories?.length! > 0 ? true : false,
+      submenu: makeSubMenu(categoryList[2]),
     },
     {
       name: `${t('common:pages')}`,

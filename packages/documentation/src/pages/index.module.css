@@ -41,9 +41,13 @@
 }
 
 .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .linkStyle {
