@@ -21,6 +21,11 @@ const tags = [
     name: "dinner",
     isHomePageProductsTag: false,
   },
+  {
+    id: "40723f05-2ce7-45b6-9db7-11d07e7bf977",
+    name: "Device",
+    isHomePageProductsTag: false,
+  },
 ];
 
 const seed = async () => {

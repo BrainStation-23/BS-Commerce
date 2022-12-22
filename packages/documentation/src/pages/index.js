@@ -30,7 +30,7 @@ function HomepageHeader() {
                 <p className={clsx("hero__subtitle", styles.zmb)}>
                   Storefront demo
                 </p>
-                <p>A sample website for E-commerce business</p>
+                <p>Next.js Storefront using bs-commerce headless api</p>
               </div>
             </div>
           </Link>
@@ -50,25 +50,31 @@ function HomepageHeader() {
                 <p className={clsx("hero__subtitle", styles.zmb)}>
                   Storefront admin
                 </p>
-                <p>A sample website for E-commerce admin section</p>
+                <p>Next.js Storefront admin using bs-commerce headless api</p>
               </div>
             </Link>
           </div>
         </div>
-        <div className={styles.mb}>
-          <Link
-            className={clsx("hero__subtitle", styles.linkStyle)}
-            to="/docs/category/tutorial---basics"
-          >
-            Static Storefront
-          </Link>
+        <div>
+          <button className={styles.buttons}>
+            <Link
+              className={clsx("hero__subtitle", styles.linkStyle)}
+              to="/docs/category/tutorial---storefront"
+            >
+              Static Storefront
+            </Link>
+          </button>
         </div>
-        <Link
-          className={clsx("hero__subtitle", styles.linkStyle)}
-          to="/docs/category/tutorial---basics"
-        >
-          Learn More About BS-Commerce
-        </Link>
+        <div>
+          <button className={styles.buttons}>
+            <Link
+              className={clsx("hero__subtitle", styles.linkStyle)}
+              to="/docs/intro"
+            >
+              Learn More About BS-Commerce
+            </Link>
+          </button>
+        </div>
       </div>
     </header>
   );

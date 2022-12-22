@@ -648,6 +648,35 @@ const categories = [
     ],
     slug: "fruits",
   },
+  {
+    name: "Laptop",
+    description: "",
+    photo: {
+      url: "",
+      alt: "",
+    },
+    showOnHomePage: false,
+    includeInTopMenu: false,
+    allowToSelectPageSize: false,
+    published: false,
+    displayOrder: 0,
+    rootPath: "electronics",
+    meta: {
+      keywords: [""],
+      description: "",
+      title: "",
+      SEFN: "",
+    },
+    id: "8e6ebd97-79d7-4a00-bf47-3ef95b343bbf",
+    ancestors: [
+      {
+        name: "Electronics",
+        slug: "electronics",
+        level: 1,
+      },
+    ],
+    slug: "laptop",
+  },
 ];
 
 const seed = async () => {
