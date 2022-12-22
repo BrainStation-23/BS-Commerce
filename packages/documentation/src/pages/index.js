@@ -15,34 +15,58 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.flexContainer}>
-          <div>
-            <img src={require("/static/img/storefront.png").default} height={100} width={200} />
-            <br/>
-            <Link className={styles.linkStyle} to="https://bs-commerce-storefront.vercel.app/">
+          <Link
+            className={styles.linkStyle}
+            to="https://bs-commerce-storefront.vercel.app/"
+          >
+            <div className={styles.content}>
+              <img
+                src={require("/static/img/storefront.png").default}
+                height={100}
+                width={200}
+              />
+              <br />
               <div>
-                  <p className={clsx("hero__subtitle", styles.zmb)}>Storefront demo</p>
-                  <p>A sample website for E-commerce business</p>
+                <p className={clsx("hero__subtitle", styles.zmb)}>
+                  Storefront demo
+                </p>
+                <p>A sample website for E-commerce business</p>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
 
-          <div>
-            <img src={require("/static/img/storeadmin.png").default} height={100} width={200} />
-            <br/>
-            <Link className={styles.linkStyle} to="https://bs-commerce-storeadmin.vercel.app/">
+          <div className={styles.content}>
+            <Link
+              className={styles.linkStyle}
+              to="https://bs-commerce-storeadmin.vercel.app/"
+            >
+              <img
+                src={require("/static/img/storeadmin.png").default}
+                height={100}
+                width={200}
+              />
+              <br />
               <div>
-                  <p className={clsx("hero__subtitle", styles.zmb)} >Storefront admin</p>
-                  <p>A sample website for E-commerce admin section</p>
+                <p className={clsx("hero__subtitle", styles.zmb)}>
+                  Storefront admin
+                </p>
+                <p>A sample website for E-commerce admin section</p>
               </div>
             </Link>
           </div>
         </div>
         <div className={styles.mb}>
-          <Link className={clsx("hero__subtitle", styles.linkStyle)} to="/docs/intro">
+          <Link
+            className={clsx("hero__subtitle", styles.linkStyle)}
+            to="/docs/category/tutorial---basics"
+          >
             Static Storefront
           </Link>
         </div>
-        <Link className={clsx("hero__subtitle", styles.linkStyle)} to="/docs/intro">
+        <Link
+          className={clsx("hero__subtitle", styles.linkStyle)}
+          to="/docs/category/tutorial---basics"
+        >
           Learn More About BS-Commerce
         </Link>
       </div>
@@ -53,7 +77,10 @@ function HomepageHeader() {
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={`Welcome to ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
+    <Layout
+      title={`Welcome to ${siteConfig.title}`}
+      description="Description will go into a meta tag in <head />"
+    >
       <HomepageHeader />
       <main>
         <HomepageFeatures />

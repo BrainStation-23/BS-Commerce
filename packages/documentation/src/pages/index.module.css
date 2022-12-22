@@ -23,12 +23,13 @@
   gap: 50px;
 }
 
-.flexColContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+.content {
+  padding: 20px 10px 10px;
+}
+
+.content:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .mr {
