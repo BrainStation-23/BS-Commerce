@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EODTickers>
+    <Ticker SecurityCode="IBNSINA" ISIN="BD1234567890" Category="A" AssetClass="IN" Sector="" CompulsorySpot="N" TradeDate="20250410" Close="1927.9" Open="1921.99" High="1936.548" Low="1921.779" Var="0.00000" VarPercent="0.00000"/>
+    <Ticker SecurityCode="TESTNAME" ISIN="BD1234566894" Category="" AssetClass="IN" Sector="" CompulsorySpot="N" TradeDate="20250410" Close="1172.958" Open="1169.69" High="1180.395" Low="1169.69" Var="0.00000" VarPercent="0.00000"/>
+    <Ticker SecurityCode="DSEX" ISIN="DSEX" Category="" AssetClass="IN" Sector="" CompulsorySpot="N" TradeDate="20250410" Close="5205.234" Open="5196.05" High="5233.209" Low="5195.021" Var="0.00000" VarPercent="0.00000"/>
+    <Ticker SecurityCode="HEIDELBCEM" ISIN="BD1238567890" Category="A" AssetClass="MF" Sector="MUTFUND" CompulsorySpot="N" TradeDate="20250425" Close="3.9" Open="4.1" High="4.2" Low="3.8" Var="-0.10000" VarPercent="-2.50000"/>
+    <Ticker SecurityCode="RECKITTBEN" ISIN="BD1234767890" Category="A" AssetClass="MF" Sector="MUTFUND" CompulsorySpot="N" TradeDate="20250410" Close="20.1" Open="20.1" High="20.7" Low="20" Var="0.30000" VarPercent="1.52000"/>
+</EODTickers>

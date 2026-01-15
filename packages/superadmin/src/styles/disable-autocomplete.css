@@ -1,0 +1,34 @@
+/* Disable browser autocomplete suggestions and tooltips */
+
+/* Hide Chrome autofill suggestions */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* Hide autocomplete dropdown */
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+/* Hide browser suggestion tooltips */
+[autocomplete="off"] {
+  background-color: transparent !important;
+  -webkit-background-clip: text !important;
+}
+
+/* Prevent browser form suggestions */
+form[autocomplete="off"] input,
+input[autocomplete="off"],
+input[autocomplete="new-password"] {
+  background-color: transparent !important;
+}

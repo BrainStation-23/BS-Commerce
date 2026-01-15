@@ -1,0 +1,8 @@
+# Run lint-staged
+npx lint-staged
+
+# Run build check
+npm run build:check || {
+  echo "Build check failed. Please fix the errors before committing."
+  exit 1
+}

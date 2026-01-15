@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BS Commerce Back Office
 
-## Getting Started
+-   Node >= 22.12.x
 
-First, run the development server:
+## USING YARN (Recommend)
 
-```bash
-npm run dev
-# or
-yarn dev
+-   yarn install
+-   yarn dev
+
+## USING NPM
+
+-   npm i OR npm i --legacy-peer-deps
+-   npm run dev
+
+## Build
+
+-   yarn build
+
+# Deployment Strategy
+
+The project is hosted on AWS S3 as a static website and distributed through AWS CloudFront(CloudFront for staging and production).
+
+## Development Environment Deployment
+
+GitHub Actions are leveraged for automating the deployment of the staging server. The deployment workflow is triggered by releases. The following semantic versioning pattern is used for staging deployments:
+
+```
+v[0-9]+.[0-9]+.[0-9]+-dev.[0-9]+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For example, `v1.0.2-dev.1`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Staging Environment Deployment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+GitHub Actions are leveraged for automating the deployment of the staging server. The deployment workflow is triggered by releases. The following semantic versioning pattern is used for staging deployments:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+
+```
 
-## Learn More
+For example, `v1.0.2-rc.1`
 
-To learn more about Next.js, take a look at the following resources:
+## Production Environment Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The production deployment process mirrors the staging deployment, with the key difference being the versioning pattern used. The following pattern is employed for production deployments:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+v[0-9]+.[0-9]+.[0-9]+
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For example, `v1.0.2`

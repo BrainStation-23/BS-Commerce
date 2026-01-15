@@ -1,0 +1,138 @@
+name: Deploy Dev Admin Panel
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-dev.[0-9]+'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Install VPN
+      - name: Install openfortivpn
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openfortivpn
+
+      # 3. Connect with VPN
+      - name: Start VPN
+        env:
+          FORTI_VPN_HOST: ${{ vars.FORTI_VPN_HOST }}
+          FORTI_VPN_USERNAME: ${{ vars.FORTI_VPN_USERNAME }}
+          FORTI_VPN_PASSWORD: ${{ secrets.FORTI_VPN_PASSWORD }}
+          FORTI_VPN_TRUSTED_CERT: ${{ secrets.FORTI_VPN_TRUSTED_CERT }}
+        run: |
+          # Create a configuration file for openfortivpn
+          cat <<EOF > fortivpn.conf
+          host = $FORTI_VPN_HOST
+          port = 443
+          username = $FORTI_VPN_USERNAME
+          password = $FORTI_VPN_PASSWORD
+          trusted-cert = $FORTI_VPN_TRUSTED_CERT
+          EOF
+
+          # Start the VPN in the background
+          sudo openfortivpn -c fortivpn.conf --no-routes &
+
+          # Wait a bit to ensure VPN is established
+          sleep 30
+
+      - name: Check VPN Interface
+        run: ip a
+
+      - name: Add Route for VPN
+        run: |
+          # Ensure the ppp0 interface is up
+          sudo ifconfig ppp0 up
+
+          # Add the route if it does not already exist
+          ip route | grep "10.16.49.0/24" || sudo ip route add 10.16.49.0/24 dev ppp0
+
+          # List all routes for verification
+          ip route
+
+      # 4. Test VPN Connection
+      - name: Test VPN Connection
+        run: |
+          ping -c 3 ${{ vars.JUMP_HOST_IP }}
+
+      # 5. Set up Node.js, install dependencies and build app
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22.15.0
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build app
+        run: yarn build
+        env:
+          NODE_ENV: production
+          VITE_WEB_ENVIRONMENT: DEV
+          VITE_PROJECT_NAME: Shanta AML Back Office - Dev
+          VITE_HOST_API: ${{ vars.API_ENDPOINT_DEV }}
+
+      # 5. Zip build folder
+      - name: Zip dist folder
+        run: zip -r dist.zip dist
+
+      # 6. Upload zip to jump host
+      - name: Upload dist.zip to jump host
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.JUMP_HOST_IP }}
+          username: ${{ vars.JUMP_HOST_USER }}
+          key: ${{ secrets.JUMP_HOST_SSH_KEY }}
+          source: 'dist.zip'
+          target: '~/'
+
+      # 7. Deploy from jump host to S3 with temporary credentials
+      - name: Deploy via jump host
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.JUMP_HOST_IP }}
+          username: ${{ vars.JUMP_HOST_USER }}
+          key: ${{ secrets.JUMP_HOST_SSH_KEY }}
+          envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_DEFAULT_REGION,AWS_S3_BUCKET,CLOUDFRONT_DISTRIBUTION_ID
+          # trap cleanup EXIT ensures that the cleanup function is called when the script exits (even if it fails)
+          script: |
+            set -euo pipefail
+
+            cleanup() {
+              unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION || true
+              rm ~/dist.zip || true
+              rm -rf ~/react_build || true
+            }
+            trap cleanup EXIT
+
+            # Unzip into ~/react_build
+            rm -rf ~/react_build || true
+            mkdir -p ~/react_build
+            unzip ~/dist.zip -d ~/react_build
+
+            export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+
+            # Sync to S3
+            aws s3 sync ~/react_build/dist s3://${AWS_S3_BUCKET} --delete --follow-symlinks
+
+            # Invalidate CloudFront
+            if [ -n "${CLOUDFRONT_DISTRIBUTION_ID}" ]; then
+              aws cloudfront create-invalidation \
+                --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} \
+                --paths "/*"
+            fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ vars.AWS_REGION }}
+          AWS_S3_BUCKET: ${{ vars.AWS_S3_BUCKET_DEV }}
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
